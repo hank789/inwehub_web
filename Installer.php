@@ -1,7 +1,7 @@
 <?php
-namespace Zhiyi\PlusComponentWeb;
+namespace Intervapp\PlusComponentWeb;
 
-use Zhiyi\Component\Installer\PlusInstallPlugin\AbstractInstaller;
+use Intervapp\Component\Installer\PlusInstallPlugin\AbstractInstaller;
 
 class Installer extends AbstractInstaller
 {

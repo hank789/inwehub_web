@@ -1,5 +1,5 @@
 <?php
-namespace Zhiyi\PlusComponentWeb;
+namespace Intervapp\PlusComponentWeb;
 
 use function view as plus_view;
 	/**
