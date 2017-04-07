@@ -88,7 +88,7 @@
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
   const login = {
     data: () => ({
-      phone: '', // 手机号码 
+      phone: '', // 手机号码
       password: '', // 密码
       passwordText: '', // 明文密码
       isDisabled: true, // 提交按钮disabled状态
@@ -179,7 +179,7 @@
         let device_code = detecdOS();
         this.isLoading = true;
         this.isDisabled = true;
-        request.post(createAPI('auth'), {
+        request.post(createAPI('auth/login'), {
             phone,
             password,
             device_code
