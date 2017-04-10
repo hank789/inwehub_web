@@ -20,7 +20,15 @@ import 'mint-ui/lib/style.css'
 import loading_img from './statics/images/image-loading.png';
 import { Loadmore } from 'mint-ui';
 
+
 Vue.use(iView);
+
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+import 'muse-ui/dist/theme-teal.css'
+Vue.use(MuseUI)
+
+
 Vue.use(VueWechatTitle);
 Vue.use(VueLazyload, {
   loading: loading_img,

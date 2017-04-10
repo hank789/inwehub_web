@@ -26,9 +26,9 @@
                 <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
               </Col>
               <Col class="text-align-right flexend" span="6">
-                <Button 
-                  type="text" 
-                  @click.native.stop.prevent="getCode" 
+                <Button
+                  type="text"
+                  @click.native.stop.prevent="getCode"
                   htmlType="button"
                   size="large"
                   class="text-button nopadding"
@@ -94,7 +94,7 @@
   const codeReg = /^[0-9]{4}$/;
   const register = {
     data: () => ({
-      phone: '', // 手机号码 
+      phone: '', // 手机号码
       password: '', // 密码
       username: '', // 昵称
       code: '', // 手机验证码
@@ -212,7 +212,7 @@
             cb(user);
             router.push({ path: 'feeds' });
           }));
-          
+
         })
         .catch(({ response: { data = {} } = {} } ) => {
           this.isDisabled = false;
@@ -304,3 +304,9 @@
   export default register;
 
 </script>
+
+<style lang="less" rel="stylesheet/less" scoped>
+  .ivu-form-item{
+    padding-right:10px;
+  }
+</style>

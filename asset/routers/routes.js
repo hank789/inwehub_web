@@ -1,6 +1,7 @@
 /* views */
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import Register2 from '../views/Register2.vue';
 import FindPassword from '../views/FindPassword.vue';
 import Feeds from '../views/Feeds.vue';
 import Home from '../views/Home.vue';
@@ -31,6 +32,16 @@ const routes = [
   {
     path: '/register',
     component: Register,
+    meta: {
+      title: '注册'
+    },
+    beforeEnter: (to, from, next) => {
+      CanNotGetInWhenLogged(to, from, next)
+    }
+  },
+  {
+    path: '/register2',
+    component: Register2,
     meta: {
       title: '注册'
     },
@@ -88,7 +99,11 @@ const routes = [
         }
       }
     ]
-  }
+  },
+  { // 我的
+    path: '/my',
+    component: require('../views/Account/my.vue'),
+  },
 ];
 
 export default routes;

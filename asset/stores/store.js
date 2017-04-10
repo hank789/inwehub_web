@@ -9,15 +9,20 @@ import notice from './module/noticeText';
 import imageSwiper from './module/imageSwiper';
 import showPost from './module/showPost';
 
+import mutations from './mutations'
+import actions from './actions'
+
 const modules = {
   user,
   notice,
   imageSwiper,
-  showPost
+  showPost,
+  mutations
 }
 
 const store = new Vuex.Store({
-  modules
+  modules,
+  actions
 });
 
 export default store;

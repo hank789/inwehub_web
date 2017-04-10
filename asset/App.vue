@@ -1,56 +1,81 @@
 <template>
   <div class="container-fluid" id="app">
     <div v-wechat-title="$route.meta.title + ' - ThinkSNS+'"></div>
-    <router-view></router-view>
-    <NoticeText/>
-    <IviewSwiper/>
-    <PostFeed/>
+
+    <div class='view'>
+      <transition name='fade'>
+        <router-view></router-view>
+      </transition>
+    </div>
+
+    <mu-paper class='bottom_menu' v-show='showBottom'>
+      <mu-bottom-nav :value="bottomNav" @change="handleChange">
+        <mu-bottom-nav-item value="home" title="首页" icon="home"       href='#/index' />
+        <mu-bottom-nav-item value="shop"  title="问答" icon="message"       href='#/message' />
+        <mu-bottom-nav-item value="my"    title="我的" icon="account_circle" href='#/my' />
+      </mu-bottom-nav>
+    </mu-paper>
   </div>
 </template>
-<script>
-  import NoticeText from './components/Notice';
-  // import ImageSwiper from './components/ImageSwiper';
-  import IviewSwiper from './components/IviewSwiper';
-  import { NOTICE } from './stores/types';
-  import { mapState } from 'vuex';
-  import store from './stores/store';
-  import PostFeed from './components/PostFeed';
-  import { SHOWPOST } from './stores/types';
 
-  const App = {
-    components: {
-      NoticeText,
-      IviewSwiper,
-      PostFeed
+<script>
+  import { mapGetters } from 'vuex'
+  export default {
+    data () {
+      return {
+        bottomNav: 'index'
+      }
     },
+    computed: mapGetters([
+      // 监测底部显示状态
+      'showBottom'
+    ]),
     methods: {
-      closePost () {
-        this.$store.dispatch(SHOWPOST, cb => {
-          cb ({
-            show: false
-          });
-        });
+      handleChange (val) {
+        this.bottomNav = val
+      },
+      // 底部状态
+      footerChange(path) {
+        if(path == 'login' || path === 'index/facialBeauty' || path  === 'index/plastic' || path === 'index/health' || path === 'index/medicine' || path === 'account' ) {
+          this.$store.dispatch('hideFooter')
+        } else {
+          this.$store.dispatch('showFooter')
+        }
+      },
+    },
+    created(){
+      // 当created函数时监测路由信息,防止页面刷新tab高亮错误
+      var tmpArr = this.$route.path.split('/')
+      this.handleChange(tmpArr[1])
+      console.log(tmpArr[1])
+      // 防止在index页刷新时底部显示
+      var path = this.$route.path.substring(1)
+      this.footerChange(path)
+    },
+    watch: {
+      $route(to) {
+        // 去掉  '/'
+        var path = to.path.substring(1)
+        this.footerChange(path)
       }
     }
   }
-
-  export default App;
 </script>
-<style lang="less">
-  @import './styles/common.less';
-</style>
-<style lang="css">
-  @import './styles/font.css';
-  @import '~animate.css/animate.min.css';
-  .animated {
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+
+<style lang="less" rel="stylesheet/less" scoped>
+  #app {
+    .view {
+      margin-bottom: 60px;
+    }
   }
 
-  .animated.hinge {
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
+  .bottom_menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    z-index: 11;
   }
 </style>

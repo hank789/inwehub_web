@@ -18,6 +18,14 @@
         <a href="#">to Feeds</a>
       </router-link>
     </p>
-    <router-view></router-view>
+
+    <div class='view'>
+      <transition name='fade'>
+        <router-view></router-view>
+      </transition>
+    </div>
+
+
   </div>
 </template>
+
