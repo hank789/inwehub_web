@@ -23,13 +23,16 @@
         <mu-menu-item title="帮助" leftIcon="help" rightIcon="keyboard_arrow_right"/>
 
         <mu-divider />
-        <mu-menu-item title="退出" leftIcon="exit_to_app" rightIcon="keyboard_arrow_right"/>
+        <mu-menu-item @click="logOut" title="退出" leftIcon="exit_to_app" rightIcon="keyboard_arrow_right"/>
       </mu-menu>
     </mu-paper>
 
   </div>
 </template>
 <script>
+  import localEvent from '../../stores/localStorage';
+  import router from '../../routers/index';
+
   export  default {
     data(){
       return {
@@ -41,6 +44,10 @@
         console.log('my')
         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
         this.im_tokenMsg = im_token;
+      },
+      logOut(){
+        localEvent.clearLocalItem('UserLoginInfo');
+        router.push({ path: 'login' });
       }
     },
     mounted(){
