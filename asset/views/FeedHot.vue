@@ -7,18 +7,18 @@
 <script>
   import FeedList from '../components/FeedList';
 
-  const FeedNew = {
+  const FeedHot = {
     components: {
       FeedList
     },
     data: () => ({
       option: {
-        uri: 'feeds',
+        uri: 'feeds/hots',
         limiter: 'max_id'
       }
     })
   }
-  export default FeedNew;
+  export default FeedHot;
 </script>
 
 <style lang="scss" module>
