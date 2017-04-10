@@ -74,3 +74,9 @@
     }
   }
 </script>
+
+<style lang="less" rel="stylesheet/less" scoped>
+  .ivu-form-item{
+    padding-right:10px;
+  }
+</style>
