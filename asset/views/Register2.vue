@@ -46,7 +46,7 @@
             </Row>
           </Form-item>
           <Form-item>
-            <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large">注册</Button>
+            <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="register">注册</Button>
           </Form-item>
         </Form>
         {{error}}
@@ -88,15 +88,7 @@
       CodeText: '获取验证码', // 获取验证码按钮文字
       time: 0, // 时间倒计时
       formItem: {
-        input: '',
-        select: '',
-        radio: 'male',
-        checkbox: [],
-        switch: true,
-        date: '',
-        time: '',
-        slider: [20, 50],
-        textarea: ''
+        input: ''
       },
       isLoading: false // 登录loading
     }),
@@ -110,7 +102,7 @@
       }
     },
     methods: {
-      // 清理请求错误
+        // 清理请求错误
       cleanErrors () {
         let errors = this.errors;
         let newErrors = deleteObjectItems(errors, [
@@ -155,9 +147,6 @@
         request.post(createAPI('auth/sendPhoneCode'), {
             mobile,
             type
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
           .then(response => {
@@ -166,6 +155,13 @@
               this.cleanErrors();
               this.time = 60;
               this.timer();
+            }
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              this.isCanGetCode = true;
+              this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+              return;
             }
           })
           .catch(({ response: { data = {} } = {} }) => {
@@ -182,16 +178,21 @@
         this.isDisabled = true;
         request.post(createAPI('auth/register'), {
             name: username,
-            phone,
+            mobile:phone,
             code,
             password,
             device_code
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
           .then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+                this.isDisabled = false;
+                this.isLoading = false;
+                this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
+                return;
+            }
+
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
