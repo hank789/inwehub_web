@@ -19,7 +19,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   // devtool: config.build.productionSourceMap ? '#source-map' : false,
-  devtool: '#source-map',
+  devtool: false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].js'),
@@ -29,8 +29,19 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      sourceMap: true
+    }),
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].css')
+    }),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
     }),
     // new OptimizeCSSPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
