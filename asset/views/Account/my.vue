@@ -4,12 +4,12 @@
     <mu-paper class="demo-menu">
 
       <mu-card>
-        <mu-card-header title="Edwin" subTitle="1502222222">
+        <mu-card-header :title="name" :subTitle="phone">
           <mu-avatar src="/static/images/uicon.jpg" slot="avatar"/>
         </mu-card-header>
 
         <mu-card-text>
-            总收入:0元  总收益0元
+            总收入:0元  总收益:0元
         </mu-card-text>
 
       </mu-card>
@@ -33,10 +33,14 @@
   import localEvent from '../../stores/localStorage';
   import router from '../../routers/index';
 
+  const currentUser = localEvent.getLocalItem('user_info');
+  console.log(currentUser);
   export  default {
     data(){
       return {
-        im_tokenMsg: ''
+        im_tokenMsg: '',
+        name:currentUser.name,
+        phone:currentUser.phone
       }
     },
     methods: {

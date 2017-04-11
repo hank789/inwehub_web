@@ -70,15 +70,24 @@ function getAvatar (userInfo, process, cb) {
 };
 
 function getUserInfo (user_id, cb) {
-  addAccessToken().post(createAPI('users'), {
+  addAccessToken().post(createAPI('account/show'), {
       user_ids: [ user_id ]
-    },
-    {
-      validate: status => status === 200
     }
   )
   .then(response => {
-    let user = response.data.data.pop();
+
+    var code = response.data.code;
+    if (code !== 1000) {
+      let message = errorCodes[code]
+      return {
+        status: false,
+        user: null,
+        message: message
+      };
+    }
+
+    let user = response.data.data.user;
+
     let userLocal = {
       user_id: 0,
       name: '',
@@ -88,13 +97,16 @@ function getUserInfo (user_id, cb) {
     };
     userLocal.user_id = user.id;
     userLocal.name = user.name;
-    userLocal.phone = user.phone;
+    userLocal.phone = user.mobile;
+    /*
     user.counts.map(function (count, index) {
       let keyName = count.key;
       let value = count.value;
       userLocal.counts = Object.assign({}, userLocal.counts, { [keyName]:  value });
     });
+    */
     let newData = {};
+    /*
     user.datas.forEach(data => {
       newData[data.profile] = {
         display: data.profile_name,
@@ -104,11 +116,14 @@ function getUserInfo (user_id, cb) {
         updated_at: data.updated_at
       };
     });
+    */
     userLocal.datas = newData;
+    /*
     getAvatar(userLocal, 20, newUserLocal => {
       userLocal = newUserLocal;
     });
-    localEvent.setLocalItem('user_' + user_id, userLocal);
+    */
+    localEvent.setLocalItem('user_info', userLocal);
     cb(userLocal);
   })
   .catch(({ response: { data = {} } = {} } ) => {

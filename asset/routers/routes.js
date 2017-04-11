@@ -1,6 +1,6 @@
 /* views */
-import Login from '../views/Login.vue';
-import Login2 from '../views/Login2.vue';
+//import Login from '../views/Login.vue';
+import Login from '../views/Login2.vue';
 import Register from '../views/Register.vue';
 import Register2 from '../views/Register2.vue';
 import FindPassword from '../views/FindPassword.vue';
@@ -23,16 +23,6 @@ const routes = [
   {
     path: '/login',
     component: Login,
-    meta: {
-      title: '登录'
-    },
-    beforeEnter: (to, from, next) => {
-      CanNotGetInWhenLogged(to, from, next)
-    }
-  },
-  {
-    path: '/login2',
-    component: Login2,
     meta: {
       title: '登录'
     },

@@ -14,7 +14,7 @@ export const createAPI = PATH => `${api}/${PATH}`;
 export const addAccessToken = () => {
   const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
   axios.defaults.headers.common = {
-    'ACCESS-TOKEN': UserLoginInfo.token
+    'Authorization': 'bearer ' + UserLoginInfo.token
   };
   return axios;
 };
