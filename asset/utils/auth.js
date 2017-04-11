@@ -21,7 +21,7 @@ function CanNotGetInWhenLogged (to, from, next) {
   let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
   if(UserLoginInfo.token) {
     next({
-      path: '/feeds/following',
+      path: '/my',
       query: {
         redirect: to.fullPath
       }
@@ -38,7 +38,7 @@ function logout () {
   router.push({ path: '/login' });
 }
 
-export { 
+export {
   requestAuth,
   CanNotGetInWhenLogged,
   logout

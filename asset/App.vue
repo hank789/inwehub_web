@@ -36,11 +36,7 @@
       },
       // 底部状态
       footerChange(path) {
-        if(path == 'login' || path === 'index/facialBeauty' || path  === 'index/plastic' || path === 'index/health' || path === 'index/medicine' || path === 'account' ) {
-          this.$store.dispatch('hideFooter')
-        } else {
           this.$store.dispatch('showFooter')
-        }
       },
     },
     created(){

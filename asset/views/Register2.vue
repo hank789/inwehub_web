@@ -48,8 +48,15 @@
           <Form-item>
             <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="register">注册</Button>
           </Form-item>
+
+          <Form-item>
+            <Row :gutter="16">
+              <Col span="24">
+              <p class="notice error">{{ error }}</p>
+              </Col>
+            </Row>
+          </Form-item>
         </Form>
-        {{error}}
     </div>
 </template>
 
@@ -196,10 +203,11 @@
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              cb(user);
-              router.push({ path: 'feeds' });
+              let currentUser = user;
+              localEvent.setLocalItem('user_info', currentUser);
+              cb(currentUser);
+              router.push({ path: 'my' });
             }));
-
           })
           .catch(({ response: { data = {} } = {} } ) => {
             this.isDisabled = false;
@@ -296,5 +304,8 @@
   .container{
     padding-top:10px;
     padding-right:10px;
+  }
+  .error{
+    color:red;
   }
 </style>

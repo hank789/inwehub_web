@@ -9,7 +9,7 @@
         </mu-card-header>
 
         <mu-card-text>
-            总收入:0元  总收益:0元
+            总收入:0元
         </mu-card-text>
 
       </mu-card>
@@ -17,7 +17,6 @@
       <mu-menu desktop>
 
         <mu-divider />
-        <mu-menu-item title="我的收藏" leftIcon="collections" rightIcon="keyboard_arrow_right"/>
         <mu-menu-item title="联系我们" leftIcon="phone" rightIcon="keyboard_arrow_right"/>
         <mu-menu-item title="设置" leftIcon="settings" rightIcon="keyboard_arrow_right"/>
         <mu-menu-item title="帮助" leftIcon="help" rightIcon="keyboard_arrow_right"/>
@@ -51,6 +50,7 @@
       },
       logOut(){
         localEvent.clearLocalItem('UserLoginInfo');
+        localEvent.clearLocalItem('user_info');
         router.push({ path: 'login' });
       }
     },

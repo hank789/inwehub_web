@@ -1,9 +1,10 @@
 /* views */
 //import Login from '../views/Login.vue';
 import Login from '../views/Login2.vue';
-import Register from '../views/Register.vue';
-import Register2 from '../views/Register2.vue';
-import FindPassword from '../views/FindPassword.vue';
+//import Register from '../views/Register.vue';
+import Register from '../views/Register2.vue';
+//import FindPassword from '../views/FindPassword.vue';
+import FindPassword2 from '../views/FindPassword2.vue';
 import Feeds from '../views/Feeds.vue';
 import Home from '../views/Home.vue';
 import FeedFollowing from '../views/FeedFollowing';
@@ -41,18 +42,8 @@ const routes = [
     }
   },
   {
-    path: '/register2',
-    component: Register2,
-    meta: {
-      title: '注册'
-    },
-    beforeEnter: (to, from, next) => {
-      CanNotGetInWhenLogged(to, from, next)
-    }
-  },
-  {
     path: '/findpassword',
-    component: FindPassword,
+    component: FindPassword2,
     meta: {
       title: '找回密码'
     },
@@ -104,6 +95,16 @@ const routes = [
   { // 我的
     path: '/my',
     component: require('../views/Account/my.vue'),
+    meta: {
+      title: '个人中心'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // test
+    path: '/test',
+    component: require('../views/test.vue'),
   },
 ];
 

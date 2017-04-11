@@ -178,8 +178,7 @@
           localEvent.setLocalItem('UserLoginInfo', response.data.data);
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
             let currentUser = user;
-            console.log(user);
-            localEvent.setLocalItem('user_' + response.data.data.user_id, currentUser);
+            localEvent.setLocalItem('user_info', currentUser);
             cb(currentUser);
             router.push({ path: 'my' });
           }));
@@ -202,6 +201,9 @@
   .container{
     padding-top:10px;
     padding-right:10px;
+  }
+  .error{
+    color:red;
   }
 </style>
 
