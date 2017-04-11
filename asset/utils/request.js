@@ -1,8 +1,8 @@
 import axios from 'axios';
 import localEvent from '../stores/localStorage';
 
-const baseURL = `http://localhost:8080`;
-const api = `http://localhost:8080/api`;
+const baseURL = ``;
+const api = `/api`;
 
 // Export a method to create the requested address.
 export const createRequestURI = PATH => `${baseURL}/${PATH}`;
