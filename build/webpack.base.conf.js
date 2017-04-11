@@ -27,6 +27,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'muse-components': 'muse-ui/src'
     }
   },
   module: {
@@ -62,7 +63,13 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf|svg|woff)(\?.*)?$/,
         loader: 'url-loader'
-      }
+      },
+      {
+        test: /muse-ui.src.*?js$/,
+        loader: 'babel-loader'
+      },
+      { test: /iview.src.*?js$/, loader: 'babel-loader' },
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   }
 }
