@@ -5,7 +5,7 @@
 
       <mu-card>
         <mu-card-header :title="name" :subTitle="phone">
-          <mu-avatar src="/static/images/uicon.jpg" slot="avatar"/>
+          <mu-avatar src="/images/uicon.jpg" slot="avatar"/>
         </mu-card-header>
 
         <mu-card-text>
