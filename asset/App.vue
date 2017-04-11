@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" id="app">
-    <div v-wechat-title="$route.meta.title + ' - ThinkSNS+'"></div>
+    <div v-wechat-title="$route.meta.title"></div>
 
     <div class='view'>
       <transition name='fade'>
