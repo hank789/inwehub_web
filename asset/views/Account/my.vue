@@ -5,7 +5,7 @@
 
       <mu-card>
         <mu-card-header :title="name" :subTitle="phone">
-          <mu-avatar src="/images/uicon.jpg" slot="avatar"/>
+          <mu-avatar :src="avatar" slot="avatar"/>
         </mu-card-header>
 
         <mu-card-text>
@@ -32,25 +32,25 @@
   import localEvent from '../../stores/localStorage';
   import router from '../../routers/index';
 
-  const currentUser = localEvent.getLocalItem('user_info');
-  console.log(currentUser);
   export  default {
     data(){
+      const currentUser = localEvent.getLocalItem('UserInfo');
+
       return {
         im_tokenMsg: '',
         name:currentUser.name,
-        phone:currentUser.phone
+        phone:currentUser.phone,
+        avatar:currentUser.avatar
       }
     },
     methods: {
       getToken(){
-        console.log('my')
         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
         this.im_tokenMsg = im_token;
       },
       logOut(){
         localEvent.clearLocalItem('UserLoginInfo');
-        localEvent.clearLocalItem('user_info');
+        localEvent.clearLocalItem('UserInfo');
         router.push({ path: 'login' });
       }
     },

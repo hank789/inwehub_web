@@ -25,7 +25,6 @@ import { Row, Col } from 'iview/src/components/grid';
 import Input from 'iview/src/components/input';
 import Button from 'iview/src/components/button';
 
-
 Vue.component('Form', Form);
 Vue.component('iForm', Form);
 Vue.component('FormItem', Form.Item);

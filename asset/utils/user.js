@@ -123,7 +123,8 @@ function getUserInfo (user_id, cb) {
       userLocal = newUserLocal;
     });
     */
-    localEvent.setLocalItem('user_info', userLocal);
+    localEvent.setLocalItem('UserInfo', userLocal);
+
     cb(userLocal);
   })
   .catch(({ response: { data = {} } = {} } ) => {

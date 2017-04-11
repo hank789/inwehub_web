@@ -178,7 +178,7 @@
           localEvent.setLocalItem('UserLoginInfo', response.data.data);
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
             let currentUser = user;
-            localEvent.setLocalItem('user_info', currentUser);
+            //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
             router.push({ path: 'my' });
           }));
