@@ -36,7 +36,10 @@ Vue.component('iCol', Col)
 Vue.component('iButton', Button)
 Vue.component('Button', Button)
 
-import 'muse-components/styles/base.less' // 加载基础的样式
+
+//import 'muse-components/styles/themes/light.less' // 加载基础的样式
+//import 'muse-components/styles/base.less' // 加载基础的样式
+
 import bottomNav from 'muse-components/bottomNav/bottomNav'
 import bottomNavItem from 'muse-components/bottomNav/bottomNavItem'
 import paper from 'muse-components/paper/paper'
@@ -47,6 +50,9 @@ import avatar from 'muse-components/avatar/avatar'
 import divider from 'muse-components/divider/divider'
 import menu from 'muse-components/menu/menu'
 import menuItem from 'muse-components/menu/menuItem'
+import { list,listItem } from 'muse-components/list'
+import icon from 'muse-components/icon'
+import { tabs, tab} from 'muse-components/tabs'
 
 // ..
 Vue.component(bottomNav.name, bottomNav)
@@ -59,7 +65,13 @@ Vue.component(avatar.name, avatar)
 Vue.component(divider.name, divider)
 Vue.component(menu.name, menu)
 Vue.component(menuItem.name, menuItem)
+Vue.component(list.name, list)
+Vue.component(listItem.name, listItem)
+Vue.component(icon.name, icon)
+Vue.component(tabs.name, tabs)
+Vue.component(tab.name, tab)
 
+import 'muse-components/styles/themes/light.less' // 加载基础的样式
 
 Vue.use(VueWechatTitle);
 Vue.use(VueLazyload, {

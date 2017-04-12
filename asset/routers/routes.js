@@ -58,9 +58,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // test
-    path: '/test',
-    component: require('../views/test.vue'),
+  { // message
+    path: '/message',
+    component: require('../views/message.vue'),
   },
 ];
 

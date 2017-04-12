@@ -10,8 +10,8 @@
 
     <mu-paper class='bottom_menu' v-show='showBottom'>
       <mu-bottom-nav :value="bottomNav" @change="handleChange">
-        <mu-bottom-nav-item value="home" title="首页" icon="home"       href='#/index' />
-        <mu-bottom-nav-item value="shop"  title="问答" icon="message"       href='#/message' />
+        <mu-bottom-nav-item value="home" title="首页" icon="home"       href='#/' />
+        <mu-bottom-nav-item value="server"  title="服务" icon="message"       href='#/message' />
         <mu-bottom-nav-item value="my"    title="我的" icon="account_circle" href='#/my' />
       </mu-bottom-nav>
     </mu-paper>
@@ -23,7 +23,7 @@
   export default {
     data () {
       return {
-        bottomNav: 'index'
+        bottomNav: 'home'
       }
     },
     computed: mapGetters([
