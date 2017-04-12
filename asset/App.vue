@@ -3,9 +3,7 @@
     <div v-wechat-title="$route.meta.title"></div>
 
     <div class='view'>
-      <transition name='none' mode="out-in">
         <router-view></router-view>
-      </transition>
     </div>
 
     <mu-paper class='bottom_menu' v-show='showBottom'>
