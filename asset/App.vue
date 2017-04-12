@@ -3,7 +3,7 @@
     <div v-wechat-title="$route.meta.title"></div>
 
     <div class='view'>
-      <transition name='fade' mode="out-in">
+      <transition name='none' mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
