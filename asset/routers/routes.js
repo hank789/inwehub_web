@@ -1,10 +1,10 @@
 /* views */
-//import Login from '../views/Login.vue';
-import Login from '../views/Login2.vue';
-//import Register from '../views/Register.vue';
-import Register from '../views/Register2.vue';
-//import FindPassword from '../views/FindPassword.vue';
-import FindPassword2 from '../views/FindPassword2.vue';
+
+import Login from '../views/Login.vue';
+
+import Register from '../views/Register.vue';
+
+import FindPassword from '../views/FindPassword.vue';
 
 import Home from '../views/Home.vue';
 
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: '/findpassword',
-    component: FindPassword2,
+    component: FindPassword,
     meta: {
       title: '找回密码'
     },

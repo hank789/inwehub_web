@@ -1,74 +1,75 @@
 <template>
   <div class="container">
-    <div class="main-content">
-      <form role="form" @submit.prevent="submit">
-        <div class="loginForm">
-          <Row :gutter="16" class="formChildrenRow bottom-border">
-            <Col span="4">
-              <label for="phone" class="loginFormTitle">手机号</label>
+
+      <Form :label-width="80">
+
+        <Form-item label="手机号">
+          <Row class="formChildrenRow bottom-border">
+            <Col span="15">
+              <Input type="text" size="large" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
             </Col>
-            <Col :span="11">
-              <input type="tel" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
-            </Col>
-            <Col span="3" class="flexend">
+            <Col span="1" class="flexend">
               <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
             </Col>
             <Col class="text-align-right" span="6" >
-              <Button 
-                type="text" 
-                @click.native="getCode" 
-                htmlType="button" 
-                :disabled="!isCanGetCode" 
-                size="large"
-                class="text-button nopadding"
-              >
-                {{ getCodeText }}
+            <Button
+              type="text"
+              @click.native="getCode"
+              htmlType="button"
+              :disabled="!isCanGetCode"
+              size="large"
+              class="text-button nopadding"
+            >
+              {{ getCodeText }}
               </Button>
             </Col>
           </Row>
-          <Row :gutter="16" class="formChildrenRow bottom-border">
-            <Col span="4">
-              <label for="code" :class="loginFormTitle">验证码</label>
-            </Col>
-            <Col span="20">
-              <input type="tel" autocomplete="off" placeholder="请输入验证码" v-model.number.trim="code" id="code" name="code" />
-            </Col>
+        </Form-item>
+
+
+        <Form-item label="验证码">
+          <Row>
+          <Col span="10">
+          <Input type="text" autocomplete="off" placeholder="请输入验证码" v-model.number.trim="code" id="code" name="code" />
+          </Col>
           </Row>
-          <Row :gutter="16" class="formChildrenRow">
-            <Col :span="4">
-              <label for="password" :class="loginFormTitle">新密码</label>
-            </Col>
-            <Col span="17">
-              <input type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上登录密码" id="password" name="password" />
-              <input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上登录密码" />
-            </Col>
-            <Col span="3" class="flexend">
-              <i 
-                v-on:click="showPassword" 
-                class="ivu-icon" 
-                :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"
-              >
-              </i>
-            </Col>
+        </Form-item>
+
+        <Form-item label="新密码">
+          <Row>
+          <Col span="15" class="flexend">
+          <Input type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上登录密码" id="password" name="password" />
+          <Input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上登录密码" />
+          </Col>
+          <Col span="3" class="flexend">
+          <i
+            v-on:click="showPassword"
+            class="ivu-icon"
+            :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"
+          >
+          </i>
+          </Col>
           </Row>
-        </div>
-        <div id="notice">
+        </Form-item>
+
+        <Form-item>
           <Row :gutter="16">
             <Col span="24">
-              <p class="notice error">{{ error }}</p>
+            <p class="notice error">{{ error }}</p>
             </Col>
           </Row>
-        </div>
-        <div class="operation">
-         <Row :gutter="16">
+        </Form-item>
+
+        <Form-item>
+          <Row :gutter="16">
             <Col span="24">
-              <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large">确认</Button>
+
+              <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="submit">确认</Button>
             </Col>
           </Row>
-        </div>
-      </form>
+        </Form-item>
+      </Form>
     </div>
-  </div>
 </template>
 
 <script>
@@ -84,7 +85,7 @@
   const codeReg = /^[0-9]{4}$/;
   const findPassword = {
     data: () => ({
-      phone: '', // 手机号码 
+      phone: '', // 手机号码
       password: '', // 密码
       code: '', // 手机验证码
       passwordText: '', // 明文密码
@@ -141,12 +142,9 @@
         let phone = this.phone;
         let type = 'change';
         this.isCanGetCode = false;
-        request.post(createAPI('auth/phone/send-code'), {
-            phone,
+        request.post(createAPI('auth/sendPhoneCode'), {
+            mobile:phone,
             type
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
         .then(response => {
@@ -155,6 +153,13 @@
             this.cleanErrors();
             this.time = 60;
             this.timer();
+          }
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            this.isCanGetCode = true;
+            this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+            return;
           }
         })
         .catch(({ response: { data = {} } = {} }) => {
@@ -167,22 +172,26 @@
         let { phone, code, password } = this;
         this.isLoading = true;
         this.isDisabled = true;
-        request.patch(createAPI('auth/forgot'), {
-            phone,
+        request.post(createAPI('auth/forgot'), {
+            mobile:phone,
             code,
             password
-          },
-          {
-            validateStatus: status => status === 200
           }
         )
         .then(response => {
-          this.$message({
-            message: '密码重置成功',
-            type: 'success',
-            onClose: () => {
-              router.push({ path: 'login' });
-            }
+
+          var code = response.data.code;
+
+
+          if (code !== 1000) {
+            this.isDisabled = false;
+            this.isLoading = false;
+            this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
+            return;
+          }
+
+          this.$Message.info('密码重置成功', 2, () => {
+            router.push({ path: 'login' });
           });
         })
         .catch(({ response: { data = {} } ={} }) => {
@@ -267,3 +276,12 @@
   export default findPassword;
 
 </script>
+<style lang="less" rel="stylesheet/less" scoped>
+  .container{
+    padding-top:10px;
+    padding-right:10px;
+  }
+  .error{
+    color:red;
+  }
+</style>

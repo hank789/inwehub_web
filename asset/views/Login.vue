@@ -1,76 +1,54 @@
 <template>
   <transition name="slide-left">
     <div class="container">
-      <!-- <header class="header">
-        <Row justify="start" type="flex" align="middle">
-          <Col :span="3" class="close back">
-            <i class="el-icon-close"></i>
-          </Col>
-          <Col :span="17"><div class="grid-content bg-purple-light title ">登录</div></Col>
-          <Col :span="4">
-            <div class="grid-content bg-purple-light right-top-button">
-              <router-link to="/register">注册</router-link>
+        <Form :label-width="80">
+
+          <Form-item label="手机号">
+            <Input type="text" size="large" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone" />
+          </Form-item>
+
+          <Form-item label="密码">
+            <Row>
+              <Col span="17">
+              <Input type="password"  size="large" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
+              <Input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
+              </Col>
+              <Col span="3" class="flexend">
+              <i @click="showPassword" class="ivu-icon" :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"></i>
+              </Col>
+            </Row>
+
+          </Form-item>
+
+          <Form-item>
+            <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="submit">登录</Button>
+          </Form-item>
+
+          <Form-item>
+            <div class="otherOperation">
+              <Row :gutter="16" >
+                <Col span="6" >
+                <router-link to="/register">
+                  注册账号
+                </router-link>
+                </Col>
+                <Col span="6">
+                <router-link style="float: right" to="/findpassword">
+                  找回密码
+                </router-link>
+                </Col>
+              </Row>
             </div>
-          </Col>
-        </Row>
-      </header> -->
-      <div class="main-content">
-        <form role="form" @submit.prevent="submit">
-          <div class="loginForm">
-            <Row  class="bottom-border formChildrenRow" :gutter="16">
-              <Col span="4">
-                <label for="phone">手机号</label>
-              </Col>
-              <Col span="17">
-                <input type="tel" size="large" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone" />
-              </Col>
-              <Col span="3" class="flexend">
-                <i @click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
-              </Col>
-            </Row>
-            <Row class="formChildrenRow" :gutter="16" >
-              <Col span="4">
-                <label for="password">密码</label>
-              </Col>
-              <Col span="17">
-                <input type="password"  size="large" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
-                <input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-              </Col>
-              <Col span="3" class="flexend">
-                <i @click="showPassword" class="ivu-icon" :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"></i>
-              </Col>
-            </Row>
-          </div>
-          <div id="notice">
+          </Form-item>
+
+          <Form-item>
             <Row :gutter="16">
               <Col span="24">
-                <p class="notice error">{{ error }}</p>
+              <p class="notice error">{{ error }}</p>
               </Col>
             </Row>
-          </div>
-          <div>
-           <Row :gutter="16" >
-              <Col span="24">
-                <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large">登录</Button>
-              </Col>
-            </Row>
-          </div>
-        </form>
-        <div class="otherOperation">
-          <Row :gutter="16" >
-            <Col span="12" >
-              <router-link to="/register">
-                注册账号
-              </router-link>
-            </Col>
-            <Col span="12">
-              <router-link style="float: right" to="/findpassword">
-                找回密码
-              </router-link>
-            </Col>
-          </Row>
-        </div>
-      </div>
+          </Form-item>
+        </Form>
     </div>
   </transition>
 </template>
@@ -89,7 +67,7 @@
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
   const login = {
     data: () => ({
-      phone: '', // 手机号码 
+      phone: '', // 手机号码
       password: '', // 密码
       passwordText: '', // 明文密码
       isDisabled: true, // 提交按钮disabled状态
@@ -180,25 +158,29 @@
         let device_code = detecdOS();
         this.isLoading = true;
         this.isDisabled = true;
-        request.post(createAPI('auth'), {
-            phone,
+        request.post(createAPI('auth/login'), {
+            mobile:phone,
             password,
             device_code
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
         .then(response => {
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            this.isDisabled = false;
+            this.isLoading = false;
+            this.errors = Object.assign({}, this.errors, { code: errorCodes[code] });
+          }
+
           let errors = {};
           this.errors = Object.assign({}, errors);
           localEvent.setLocalItem('UserLoginInfo', response.data.data);
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
             let currentUser = user;
-            console.log(user);
-            localEvent.setLocalItem('user_' + response.data.data.user_id, currentUser);
+            //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
-            router.push({ path: 'feeds' });
+            router.push({ path: 'my' });
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {
@@ -214,3 +196,14 @@
   export default login;
 
 </script>
+
+<style lang="less" rel="stylesheet/less" scoped>
+  .container{
+    padding-top:10px;
+    padding-right:10px;
+  }
+  .error{
+    color:red;
+  }
+</style>
+

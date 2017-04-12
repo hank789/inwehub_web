@@ -1,81 +1,63 @@
 <template>
-  <transition name="slide-left">
-    <div class="container">
-      <div class="main-content">
-        <form role="form" @submit.prevent="register">
-          <div class="loginForm">
-            <Row :gutter="16" class="formChildrenRow bottom-border">
-              <Col span="4">
-                <label for="username" class="loginFormTitle">用户名</label>
-              </Col>
-              <Col span="17">
-                <input type="text" autocomplete="off" placeholder="不能以数字开头,不能有特殊字符" v-model.trim="username" id="username" name="username" />
-              </Col>
-              <Col span="3" class="flexend">
-                <i v-on:click="cleanUsername" v-show="isShowUserClean" class="ivu-icon ivu-icon-close-circled"></i>
-              </Col>
-            </Row>
-            <Row :gutter="16" class="formChildrenRow bottom-border">
-              <Col span="4">
-                <label for="phone" class="loginFormTitle">手机号</label>
-              </Col>
+  <div class="container">
+        <Form :model="formItem" :label-width="80"  @submit.prevent="register">
+          <Form-item label="用户名">
+            <Input type="text" autocomplete="off" placeholder="不能以数字开头,不能有特殊字符" v-model.trim="username" id="username" name="username"></Input>
+          </Form-item>
+          <Form-item label="手机号">
+            <Row>
               <Col span="11">
-                <input type="tel" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
+                <Input type="text" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
               </Col>
-              <Col span="3" class="flexend">
-                <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
+              <Col span="2" class="flexend">
+              <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
               </Col>
-              <Col class="text-align-right flexend" span="6">
-                <Button
-                  type="text"
-                  @click.native.stop.prevent="getCode"
-                  htmlType="button"
-                  size="large"
-                  class="text-button nopadding"
-                >
-                  {{ getCodeText }}
-                </Button>
-              </Col>
-            </Row>
-            <Row :gutter="16" class="bottom-border formChildrenRow">
-              <Col span="4">
-                <label for="code" class="loginFormTitle">验证码</label>
-              </Col>
-              <Col :span="20">
-                <input type="tel" autocomplete="off" placeholder="输入验证码" v-model.trim.num="code" id="code" name="code" />
+              <Col class="text-align-right flexend" span="11">
+                  <Button
+                    type="text"
+                    @click.native.stop.prevent="getCode"
+                    htmlType="button"
+                    size="large"
+                    class="text-button nopadding"
+                  >
+                    {{ getCodeText }}
+                    </Button>
               </Col>
             </Row>
-            <Row :gutter="16" class="formChildrenRow">
-              <Col span="4">
-                <label for="password" class="loginFormTitle">密码</label>
+          </Form-item>
+
+          <Form-item label="验证码">
+            <Row>
+              <Col :span="11">
+                <Input type="text" autocomplete="off" placeholder="输入验证码" v-model.trim.num="code" id="code" name="code" />
               </Col>
-              <Col span="17">
-                <input type="password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
-                <input type="text" autocomplete="off" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
+            </Row>
+          </Form-item>
+
+          <Form-item label="密码">
+            <Row>
+              <Col span="11">
+                <Input type="password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
+                <Input type="text" autocomplete="off" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
               </Col>
               <Col span="3" class="flexend">
                 <i v-on:click="showPassword" class="ivu-icon" :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"></i>
               </Col>
             </Row>
-          </div>
-          <div id="notice">
+          </Form-item>
+          <Form-item>
+            <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="register">注册</Button>
+          </Form-item>
+
+          <Form-item>
             <Row :gutter="16">
               <Col span="24">
-                <p class="notice error">{{ error }}</p>
+              <p class="notice error">{{ error }}</p>
               </Col>
             </Row>
-          </div>
-          <div class="operation">
-           <Row :gutter="16">
-              <Col span="24">
-                <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large">注册</Button>
-              </Col>
-            </Row>
-          </div>
-        </form>
-      </div>
+          </Form-item>
+        </Form>
     </div>
-  </transition>
 </template>
 
 <script>
@@ -112,6 +94,9 @@
       isValidUsername: false, // 用户名是否合法
       CodeText: '获取验证码', // 获取验证码按钮文字
       time: 0, // 时间倒计时
+      formItem: {
+        input: ''
+      },
       isLoading: false // 登录loading
     }),
     computed: {
@@ -124,7 +109,7 @@
       }
     },
     methods: {
-      // 清理请求错误
+        // 清理请求错误
       cleanErrors () {
         let errors = this.errors;
         let newErrors = deleteObjectItems(errors, [
@@ -133,7 +118,7 @@
         this.errors = Object.assign({}, newErrors);
       },
       checkIsDisabled () {
-         return !(this.isValidPassword && this.isValidPhone && this.isValidCode && this.isValidUsername);
+        return !(this.isValidPassword && this.isValidPhone && this.isValidCode && this.isValidUsername);
       },
       timer () {
         if (this.time > 0) {
@@ -163,30 +148,34 @@
       },
       // 获取验证码
       getCode () {
-        let phone = this.phone;
+        let mobile = this.phone;
         let type = 'register';
         this.isCanGetCode = false;
-        request.post(createAPI('auth/phone/send-code'), {
-            phone,
+        request.post(createAPI('auth/sendPhoneCode'), {
+            mobile,
             type
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
-        .then(response => {
-          if(response.data.code === 0 || response.data.status) {
-            // 删除网络问题
-            this.cleanErrors();
-            this.time = 60;
-            this.timer();
-          }
-        })
-        .catch(({ response: { data = {} } = {} }) => {
-          this.isCanGetCode = true;
-          const { code = 'xxxx' } = data;
-          this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
-        })
+          .then(response => {
+            if(response.data.code === 0 || response.data.status) {
+              // 删除网络问题
+              this.cleanErrors();
+              this.time = 60;
+              this.timer();
+            }
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              this.isCanGetCode = true;
+              this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+              return;
+            }
+          })
+          .catch(({ response: { data = {} } = {} }) => {
+            this.isCanGetCode = true;
+            const { code = 'xxxx' } = data;
+            this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+          })
       },
       // 注册
       register () {
@@ -196,30 +185,36 @@
         this.isDisabled = true;
         request.post(createAPI('auth/register'), {
             name: username,
-            phone,
+            mobile:phone,
             code,
             password,
             device_code
-          },
-          {
-            validateStatus: status => status === 201
           }
         )
-        .then(response => {
-          localEvent.setLocalItem('UserLoginInfo', response.data.data);
-          this.isLoading = false;
-          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-            cb(user);
-            router.push({ path: 'feeds' });
-          }));
+          .then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+                this.isDisabled = false;
+                this.isLoading = false;
+                this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
+                return;
+            }
 
-        })
-        .catch(({ response: { data = {} } = {} } ) => {
-          this.isDisabled = false;
-          const { code = 'xxxx' } = data;
-          this.isLoading = false;
-          this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
-        })
+            localEvent.setLocalItem('UserLoginInfo', response.data.data);
+            this.isLoading = false;
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+              let currentUser = user;
+              //localEvent.setLocalItem('userInfo', currentUser);
+              cb(currentUser);
+              router.push({ path: 'my' });
+            }));
+          })
+          .catch(({ response: { data = {} } = {} } ) => {
+            this.isDisabled = false;
+            const { code = 'xxxx' } = data;
+            this.isLoading = false;
+            this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
+          })
       }
     },
     watch: {
@@ -306,7 +301,11 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .ivu-form-item{
+  .container{
+    padding-top:10px;
     padding-right:10px;
+  }
+  .error{
+    color:red;
   }
 </style>
