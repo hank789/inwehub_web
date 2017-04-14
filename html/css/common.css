@@ -1,0 +1,40 @@
+input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], textarea {
+    display: block;
+    padding-top: 2px;
+    padding-left: 0;
+    height: 34px;
+    color: #111;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+
+.form .form-item{
+    display: flex;
+    height: 50px;
+    padding: 13px 15px;
+    position: relative;
+    font-size: 14px;
+    line-height: 14px;
+    vertical-align: baseline;
+    color: #444;
+    min-height: 50px;
+    -webkit-box-align:center;
+    align-items: center;
+}
+.form .form-item span{
+    display: table;
+    padding: 7px 10px 7px 0;
+    max-width: 200px;
+    line-height: 20px;
+    width: 15%;
+    color: #484746;
+}
+.form .form-item input{
+    width:100%;
+    font-size: 14px;
+}
+.form .border-bottom{
+    border-bottom:1px solid #ddd;
+}
