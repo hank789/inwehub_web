@@ -3994,7 +3994,7 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
   padding: 7px 10px 7px 0;
   max-width: 200px;
   line-height: 20px;
-  width: 15%;
+  width: 60px;
   color: #484746;
 }
 .form .form-item input{
