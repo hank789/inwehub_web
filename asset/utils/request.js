@@ -1,8 +1,8 @@
 import axios from 'axios';
 import localEvent from '../stores/localStorage';
 
-const baseURL = ``;
-const api = `/api`;
+const baseURL = `http://128.199.248.130`;
+const api = `http://128.199.248.130/api`;
 
 // Export a method to create the requested address.
 export const createRequestURI = PATH => `${baseURL}/${PATH}`;
