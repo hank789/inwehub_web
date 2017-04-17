@@ -4218,11 +4218,9 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
   margin-right: 20px;
   padding-top:4px;
 }
-
 .nav-bar {
   width: 100%;
   height: 44px;
-  padding: 5px 0;
   position: relative;
 }
 
@@ -4233,6 +4231,7 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
 .nav-bar .left {
   width: 20%;
   padding: 0 9px;
+  z-index:2;
 }
 
 .nav-bar .left span {
@@ -4240,9 +4239,7 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
 }
 
 .nav-bar .icon {
-  width: 34px;
-  height: 34px;
-  font-size: 32px;
+  font-size: 31px;
 }
 
 .nav-bar .center {
