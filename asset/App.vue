@@ -70,6 +70,12 @@
           case 'login':
             this.showBottom = false;
             break;
+          case 'register':
+            this.showBottom = false;
+            break;
+          case 'findpassword':
+            this.showBottom = false;
+            break;
         }
       }
     },
