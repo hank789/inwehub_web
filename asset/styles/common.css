@@ -4261,4 +4261,8 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
   line-height: 44px;
 }
 
-
+input {
+  outline-offset: 0;
+  outline-style: none;
+  outline-width: 0;
+}
