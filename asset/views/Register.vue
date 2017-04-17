@@ -1,63 +1,53 @@
 <template>
-  <div class="container">
-        <Form :model="formItem" :label-width="80"  @submit.prevent="register">
-          <Form-item label="用户名">
-            <Input type="text" autocomplete="off" placeholder="不能以数字开头,不能有特殊字符" v-model.trim="username" id="username" name="username"></Input>
-          </Form-item>
-          <Form-item label="手机号">
-            <Row>
-              <Col span="11">
-                <Input type="text" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
-              </Col>
-              <Col span="2" class="flexend">
-              <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
-              </Col>
-              <Col class="text-align-right flexend" span="11">
-                  <Button
-                    type="text"
-                    @click.native.stop.prevent="getCode"
-                    htmlType="button"
-                    size="large"
-                    class="text-button nopadding"
-                  >
-                    {{ getCodeText }}
-                    </Button>
-              </Col>
-            </Row>
-          </Form-item>
 
-          <Form-item label="验证码">
-            <Row>
-              <Col :span="11">
-                <Input type="text" autocomplete="off" placeholder="输入验证码" v-model.trim.num="code" id="code" name="code" />
-              </Col>
-            </Row>
-          </Form-item>
+  <div class="page page-white">
+    <div class="page-container">
+      <div class="nav-bar" @click="$router.go(-1)">
+        <div class="left">
+          <span><i class="icon ion-ios-arrow-back"></i></span>
+        </div>
+        <div class="center">
+          <span>注册</span>
+        </div>
+        <div class="right"></div>
+      </div>
+      <div class="form form-login">
+        <form @submit.prevent="register" :model="formItem">
+          <div class="form-item border-bottom">
+            <span>用户名:</span>
+            <input class="input" type="text" autocomplete="off" placeholder="请输入用户名" v-model.trim="username" id="username" name="username"/>
+          </div>
+          <div class="form-item border-bottom">
+            <span>手机号:</span>
+            <input class="input" type="text" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone"/>
 
-          <Form-item label="密码">
-            <Row>
-              <Col span="11">
-                <Input type="password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
-                <Input type="text" autocomplete="off" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-              </Col>
-              <Col span="3" class="flexend">
-                <i v-on:click="showPassword" class="ivu-icon" :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"></i>
-              </Col>
-            </Row>
-          </Form-item>
-          <Form-item>
-            <Button type="primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="register">注册</Button>
-          </Form-item>
+          </div>
+          <div class="form-item border-bottom">
+            <span>验证码:</span>
+            <input class="input" type="text" value="" placeholder="请输入验证码
+" v-model.trim.num="code" id="code" name="code" autocomplete="off"/>
+            <span class="sendCode" @click.stop.prevent="getCode">{{ getCodeText }}</span>
+          </div>
+          <div class="form-item border-bottom">
+            <span>密码:</span>
+            <input class="input" type="password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password"/>
+            <input type="text" autocomplete="off" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
+            <span><i class="icon ion-eye" v-on:click="showPassword" :class="{ 'ion-eye-disabled': isShowPasswordText, 'ion-eye': isShowPassword }"></i></span>
+          </div>
 
-          <Form-item>
-            <Row :gutter="16">
-              <Col span="24">
-              <p class="notice error">{{ error }}</p>
-              </Col>
-            </Row>
-          </Form-item>
-        </Form>
+          <div class="button-wrapper">
+            <button class="button button-positive button-block" :loading="isLoading" htmlType="submit" :disabled="isDisabled" @click.prevent="register">注册</button>
+          </div>
+
+          <div class="button-wrapper">
+            <p class="notice error">{{ error }}</p>
+          </div>
+
+        </form>
+      </div>
     </div>
+  </div>
+
 </template>
 
 <script>

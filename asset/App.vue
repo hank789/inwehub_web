@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" id="app">
+  <div id="app">
     <div v-wechat-title="$route.meta.title"></div>
 
     <div class='view'>
@@ -8,13 +8,32 @@
       </transition>
     </div>
 
-    <mu-paper class='bottom_menu' v-show='showBottom'>
-      <mu-bottom-nav :value="bottomNav" @change="handleChange">
-        <mu-bottom-nav-item value="home" title="首页" icon="home"       href='#/' />
-        <mu-bottom-nav-item value="server"  title="服务" icon="message"       href='#/message' />
-        <mu-bottom-nav-item value="my"    title="我的" icon="account_circle" href='#/my' />
-      </mu-bottom-nav>
-    </mu-paper>
+    <div class="bottom-navigation" v-show='showBottom'>
+        <div class="item"  @click="linkTo('/')" :class="{ active : isHome}">
+          <div class="icon-wrapper">
+            <i class="icon ion-home"></i>
+          </div>
+          <div class="text-wrapper">
+            首页
+          </div>
+        </div>
+        <div class="item"  @click="linkTo('ask')" :class="{ active : isAsk}">
+          <div class="icon-wrapper">
+            <i class="icon ion-plus"></i>
+          </div>
+          <div class="text-wrapper">
+              提问
+          </div>
+        </div>
+        <div class="item"  @click="linkTo('my')" :class="{ active : isMy}">
+          <div class="icon-wrapper">
+            <i class="icon ion-person"></i>
+          </div>
+          <div class="text-wrapper">
+              我的
+          </div>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -23,55 +42,49 @@
   export default {
     data () {
       return {
-        bottomNav: 'home'
+        isHome: false,
+        isAsk: false,
+        isMy:false,
+        showBottom:true,
       }
     },
-    computed: mapGetters([
-      // 监测底部显示状态
-      'showBottom'
-    ]),
     methods: {
-      handleChange (val) {
-        this.bottomNav = val
+      linkTo(dest){
+         this.$router.push(dest);
       },
-      // 底部状态
-      footerChange(path) {
-          this.$store.dispatch('showFooter')
-      },
+      changeNav(path)
+      {
+        var curPath = path == ''?'home':path;
+        this.isHome = this.isAsk = this.isMy = false;
+        this.showBottom = true;
+        switch(curPath) {
+          case 'home':
+            this.isHome = true;
+            break;
+          case 'ask':
+            this.isAsk = true;
+            break;
+          case 'my':
+            this.isMy = true;
+            break;
+          case 'login':
+            this.showBottom = false;
+            break;
+        }
+      }
     },
     created(){
-      // 当created函数时监测路由信息,防止页面刷新tab高亮错误
       var tmpArr = this.$route.path.split('/')
-      this.handleChange(tmpArr[1])
-      console.log(tmpArr[1])
-      // 防止在index页刷新时底部显示
-      var path = this.$route.path.substring(1)
-      this.footerChange(path)
+      var curPath = tmpArr[1] == ''?'home':tmpArr[1];
+      this.changeNav(curPath);
     },
     watch: {
       $route(to) {
-        // 去掉  '/'
-        var path = to.path.substring(1)
-        this.footerChange(path)
+        var tmpArr = to.path.split('/');
+        var curPath = tmpArr[1] == ''?'home':tmpArr[1];
+        this.changeNav(curPath);
       }
     }
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
-  #app {
-    .view {
-      margin-bottom: 60px;
-    }
-  }
-
-  .bottom_menu{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background: #fff;
-    z-index: 11;
-  }
-</style>

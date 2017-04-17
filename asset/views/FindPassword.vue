@@ -1,75 +1,47 @@
 <template>
-  <div class="container">
 
-      <Form :label-width="80">
+  <div class="page page-white">
+    <div class="page-container">
+      <div class="nav-bar" @click="$router.go(-1)">
+        <div class="left">
+          <span><i class="icon ion-ios-arrow-back"></i></span>
+        </div>
+        <div class="center">
+          <span>找回密码</span>
+        </div>
+        <div class="right"></div>
+      </div>
+      <div class="form form-login">
+        <form>
+          <div class="form-item border-bottom">
+            <span>手机号:</span>
+            <input class="input" type="text" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone"/>
 
-        <Form-item label="手机号">
-          <Row class="formChildrenRow bottom-border">
-            <Col span="15">
-              <Input type="text" size="large" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone" />
-            </Col>
-            <Col span="1" class="flexend">
-              <i v-on:click="cleanPhone" v-show="isShowClean" class="ivu-icon ivu-icon-close-circled"></i>
-            </Col>
-            <Col class="text-align-right" span="6" >
-            <Button
-              type="text"
-              @click.native="getCode"
-              htmlType="button"
-              :disabled="!isCanGetCode"
-              size="large"
-              class="text-button nopadding"
-            >
-              {{ getCodeText }}
-              </Button>
-            </Col>
-          </Row>
-        </Form-item>
+          </div>
+          <div class="form-item border-bottom">
+            <span>验证码:</span>
+            <input class="input" autocomplete="off" placeholder="请输入验证码" v-model.number.trim="code" id="code" name="code"/>
+            <span class="sendCode" @click="getCode" htmlType="button" :disabled="!isCanGetCode">{{ getCodeText }}</span>
+          </div>
+          <div class="form-item border-bottom">
+            <span>新密码:</span>
+            <input class="input" type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上登录密码" id="password" name="password"/>
+            <input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上登录密码" />
+            <span><i class="icon ion-eye" v-on:click="showPassword" :class="{ 'ion-eye-disabled': isShowPasswordText, 'ion-eye': isShowPassword }"></i></span>
+          </div>
 
+          <div class="button-wrapper">
+            <button class="button button-positive button-block" :loading="isLoading" :disabled="isDisabled" @click.prevent="submit">确认</button>
+          </div>
 
-        <Form-item label="验证码">
-          <Row>
-          <Col span="10">
-          <Input type="text" autocomplete="off" placeholder="请输入验证码" v-model.number.trim="code" id="code" name="code" />
-          </Col>
-          </Row>
-        </Form-item>
-
-        <Form-item label="新密码">
-          <Row>
-          <Col span="15" class="flexend">
-          <Input type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上登录密码" id="password" name="password" />
-          <Input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上登录密码" />
-          </Col>
-          <Col span="3" class="flexend">
-          <i
-            v-on:click="showPassword"
-            class="ivu-icon"
-            :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"
-          >
-          </i>
-          </Col>
-          </Row>
-        </Form-item>
-
-        <Form-item>
-          <Row :gutter="16">
-            <Col span="24">
+          <div class="button-wrapper">
             <p class="notice error">{{ error }}</p>
-            </Col>
-          </Row>
-        </Form-item>
-
-        <Form-item>
-          <Row :gutter="16">
-            <Col span="24">
-
-              <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="submit">确认</Button>
-            </Col>
-          </Row>
-        </Form-item>
-      </Form>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+
 </template>
 
 <script>

@@ -1,56 +1,45 @@
 <template>
-  <transition name="slide-left">
-    <div class="container">
-        <Form :label-width="80">
+  <div class="page page-white">
+    <div class="page-container">
+      <div class="nav-bar" @click="$router.go(-1)">
+        <div class="left">
+          <span><i class="icon ion-ios-arrow-back"></i></span>
+        </div>
+        <div class="center">
+          <span>登录</span>
+        </div>
+        <div class="right"></div>
+      </div>
+      <div class="form form-login">
+        <form>
+          <div class="form-item border-bottom">
+            <span>手机号:</span>
+            <input class="input" type="text" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone" />
+          </div>
+          <div class="form-item border-bottom">
+            <span>密码:</span>
+            <input class="input" type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
+            <input class="input" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
+            <span><i class="icon ion-eye" @click="showPassword" :class="{ 'ion-eye-disabled': isShowPasswordText, 'ion-eye': isShowPassword }"></i></span>
+          </div>
 
-          <Form-item label="手机号">
-            <Input type="text" size="large" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone" />
-          </Form-item>
+          <div class="button-wrapper">
+            <button class="button button-positive button-block" :loading="isLoading" :disabled="isDisabled"   @click.prevent="submit">登录</button>
+          </div>
 
-          <Form-item label="密码">
-            <Row>
-              <Col span="17">
-              <Input type="password"  size="large" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
-              <Input type="text"  v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-              </Col>
-              <Col span="3" class="flexend">
-              <i @click="showPassword" class="ivu-icon" :class="{ 'ivu-icon-eye-disabled': isShowPasswordText, 'ivu-icon-eye': isShowPassword }"></i>
-              </Col>
-            </Row>
+          <div class="login-nav">
+            <span class="left"><router-link to="/register">手机快速注册</router-link></span>
+            <span class="right"><router-link to="/findpassword">忘记密码</router-link></span>
+          </div>
 
-          </Form-item>
-
-          <Form-item>
-            <Button type="primary" htmlType="submit" :loading="isLoading" :disabled="isDisabled" class="loginButton" size="large" @click.prevent="submit">登录</Button>
-          </Form-item>
-
-          <Form-item>
-            <div class="otherOperation">
-              <Row :gutter="16" >
-                <Col span="6" >
-                <router-link to="/register">
-                  注册账号
-                </router-link>
-                </Col>
-                <Col span="6">
-                <router-link style="float: right" to="/findpassword">
-                  找回密码
-                </router-link>
-                </Col>
-              </Row>
-            </div>
-          </Form-item>
-
-          <Form-item>
-            <Row :gutter="16">
-              <Col span="24">
+          <div class="login-nav">
               <p class="notice error">{{ error }}</p>
-              </Col>
-            </Row>
-          </Form-item>
-        </Form>
+          </div>
+
+        </form>
+      </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -131,6 +120,9 @@
     },
     methods: {
       // 清理服务端错误信息
+      goback () {
+          this.$router.go(-1);
+      },
       cleanErrors () {
         let errors = this.errors;
         let newErrors = deleteObjectItems(errors, [
