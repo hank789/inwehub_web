@@ -4282,10 +4282,11 @@ input {
 .form-ask .category span.active{
   border:1px solid #4a90e2;
 }
+
 .form-ask .category span{
   border:1px solid #b6b6b6;
   border-radius: 5px;
-  width:115px;
+  width:30%;
   display: inline-block;
   height: 32px;
   margin-right: 6px;
@@ -4300,7 +4301,7 @@ input {
   border:none;
   height: 30px;
   margin-top:-4px;
-  width:88px;
+  width:90%;
 }
 .form-ask .options{
   text-align: center;
