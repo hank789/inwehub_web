@@ -4302,6 +4302,7 @@ input {
   height: 90%;
   margin-top:-4px;
   width:90%;
+  text-align: center;
 }
 .form-ask .options{
   text-align: center;
