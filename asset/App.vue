@@ -61,19 +61,13 @@
           case 'home':
             this.isHome = true;
             break;
-          case 'ask':
-            this.isAsk = true;
-            break;
           case 'my':
             this.isMy = true;
             break;
           case 'login':
-            this.showBottom = false;
-            break;
           case 'register':
-            this.showBottom = false;
-            break;
           case 'findpassword':
+          case 'ask':
             this.showBottom = false;
             break;
         }

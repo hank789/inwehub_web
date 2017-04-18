@@ -58,6 +58,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //ask
+    path: '/ask',
+    component: require('../views/Ask.vue'),
+    meta: {
+      title: '提问'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/message',
     component: require('../views/message.vue'),

@@ -4,6 +4,8 @@
     <div class="page-container">
 
       <div class="card-my">
+        <div class="hairline-top"></div>
+        <div class="hairline-bottom"></div>
         <div class="avatar">
           <div class="avatarInner">
             <img src="images/uicon.jpg"/>
