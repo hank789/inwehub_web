@@ -4259,12 +4259,11 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
   line-height: 44px;
 }
 
-input {
+input,button,textarea {
   outline-offset: 0;
   outline-style: none;
   outline-width: 0;
 }
-
 
 .form-ask{
   padding:0 20px;
