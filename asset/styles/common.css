@@ -4299,7 +4299,7 @@ input {
   display: inline-block;
   position: relative;
   border:none;
-  height: 30px;
+  height: 90%;
   margin-top:-4px;
   width:90%;
 }
