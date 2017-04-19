@@ -24,31 +24,30 @@
 
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right">我的档案</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-addpeople"></span> 我的档案</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right">专家管理</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-university"></span> 专家管理</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#general" class="mui-navigate-right">我的钱包</a>
+            <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-prech"></span> 我的钱包</a>
           </li>
         </ul>
 
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right">推荐给朋友</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-share"></span> 推荐给朋友</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right">设置与帮助</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-gear"></span>设置与帮助</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#general" class="mui-navigate-right">意见与反馈</a>
+            <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span> 意见与反馈</a>
           </li>
           <li class="mui-table-view-cell">
-            <span class="mui-navigate-right" @click="logOut">退出</span>
+            <a href="javascript:void(0)" class="mui-navigate-right" @click="logOut"><span class="mui-icon mui-icon-close"></span> 退出</a>
           </li>
         </ul>
-
       </div>
     </div>
   </div>
@@ -121,7 +120,7 @@
     margin-top: 20px;
   }
 
-  .mui-table-view .mui-icon {
+  .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
     color: orange;
     margin-right: 5px;
   }

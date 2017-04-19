@@ -9,15 +9,15 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
-      <a class="mui-tab-item" @click="linkTo('/')" :class="{ active : isHome}">
+      <a class="mui-tab-item" @click="linkTo('/')" :class="{ 'mui-active' : isHome}">
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
       </a>
-      <a class="mui-tab-item" @click="linkTo('ask')" :class="{ active : isAsk}">
+      <a class="mui-tab-item" @click="linkTo('ask')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
         <span class="mui-tab-label">提问</span>
       </a>
-      <a class="mui-tab-item mui-active" @click="linkTo('my')" :class="{ active : isMy}">
+      <a class="mui-tab-item" @click="linkTo('my')" :class="{ 'mui-active':isMy}">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
       </a>
@@ -45,6 +45,9 @@
         var curPath = path == ''?'home':path;
         this.isHome = this.isAsk = this.isMy = false;
         this.showBottom = true;
+        mui.each(mui(".mui-tab-item"), function(index,item){
+          item.className = "mui-tab-item";
+        });
         switch(curPath) {
           case 'home':
             this.isHome = true;

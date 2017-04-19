@@ -93,7 +93,7 @@
     overflow: hidden;
   }
   .mui-content{
-    background-color:#fff;
+    background-color:#fff !important;
   }
 
 </style>

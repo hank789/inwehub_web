@@ -24,6 +24,7 @@ window.mui = mui;
 import loading_img from './statics/images/image-loading.png';
 
 import './styles/mui.css';
+import './styles/icons-extra.css';
 
 mui.init();
 
