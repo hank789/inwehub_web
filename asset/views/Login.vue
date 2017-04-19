@@ -1,42 +1,35 @@
 <template>
   <div class="page page-white">
     <div class="page-container">
-      <div class="nav-bar" @click="$router.go(-1)">
-        <div class="left">
-          <span><i class="icon ion-ios-arrow-back"></i></span>
-        </div>
-        <div class="center">
-          <span>登录</span>
-        </div>
-        <div class="right"></div>
-      </div>
-      <div class="form form-login">
-        <form>
-          <div class="form-item border-bottom">
-            <span>手机号:</span>
-            <input class="input" type="text" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone" />
+
+      <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">登录</h1>
+      </header>
+
+      <div class="mui-content">
+        <form class="mui-input-group">
+          <div class="mui-input-row">
+            <label>手机号</label>
+            <input type="text" class="mui-input-clear" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone">
           </div>
-          <div class="form-item border-bottom">
-            <span>密码:</span>
-            <input class="input" type="password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password" />
+          <div class="mui-input-row">
+            <label>密码</label>
+            <input type="password" class="mui-input-password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password">
             <input class="input" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-            <span><i class="icon ion-eye" @click="showPassword" :class="{ 'ion-eye-disabled': isShowPasswordText, 'ion-eye': isShowPassword }"></i></span>
           </div>
-
-          <div class="button-wrapper">
-            <button class="button button-positive button-block" :loading="isLoading" :disabled="isDisabled"   @click.prevent="submit">登录</button>
-          </div>
-
-          <div class="login-nav">
-            <span class="left"><router-link to="/register">手机快速注册</router-link></span>
-            <span class="right"><router-link to="/findpassword">忘记密码</router-link></span>
-          </div>
-
-          <div class="login-nav">
-              <p class="notice error">{{ error }}</p>
-          </div>
-
         </form>
+
+        <div class="mui-content-padded">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" :disabled="isDisabled"   @click.prevent="submit">登录</button>
+        </div>
+        <div class="login-nav">
+          <span class="left"><router-link to="/register">手机快速注册</router-link></span>
+          <span class="right"><router-link to="/findpassword">忘记密码</router-link></span>
+        </div>
+        <div class="login-nav">
+          <p class="notice error">{{ error }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -190,10 +183,18 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .container{
-    padding-top:10px;
-    padding-right:10px;
+  .mui-input-group {
+    margin-top:20px;
   }
+  .login-nav{
+    padding:15px;
+    position: relative;
+  }
+
+  .login-nav .right{
+    float: right;
+  }
+
   .error{
     color:red;
   }

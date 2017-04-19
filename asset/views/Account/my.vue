@@ -3,81 +3,52 @@
   <div class="page">
     <div class="page-container">
 
-      <div class="card-my">
-        <div class="hairline-top"></div>
-        <div class="hairline-bottom"></div>
-        <div class="avatar">
-          <div class="avatarInner">
-            <img src="images/uicon.jpg"/>
-          </div>
-        </div>
-        <div class="info">
-          <div class="title">{{ name }}</div>
-          <div class="subTitle">{{ phone }}</div>
-        </div>
-      </div>
+      <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon"></a>
+        <h1 class="mui-title">我</h1>
+      </header>
 
-      <div class="list list-classify">
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-person"></i></span>
-          <span class="title">我的档案</span>
+      <div class="mui-content">
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="#account">
+              <img class="mui-media-object mui-pull-left head-img" id="head-img" src="images/uicon.jpg">
+              <div class="mui-media-body">
+                {{ name }}
+                <p class="mui-ellipsis">{{ phone }}</p>
+              </div>
+            </a>
+          </li>
+        </ul>
 
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
 
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-university"></i></span>
-          <span class="title">专家管理</span>
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell">
+            <a href="#privacy" class="mui-navigate-right">我的档案</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="#privacy" class="mui-navigate-right">专家管理</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="#general" class="mui-navigate-right">我的钱包</a>
+          </li>
+        </ul>
 
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell">
+            <a href="#privacy" class="mui-navigate-right">推荐给朋友</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="#privacy" class="mui-navigate-right">设置与帮助</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="#general" class="mui-navigate-right">意见与反馈</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <span class="mui-navigate-right" @click="logOut">退出</span>
+          </li>
+        </ul>
 
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-bag"></i></span>
-          <span class="title">我的钱包</span>
-          <span class="subTitle">2.14元</span>
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
-
-      </div>
-
-      <div class="list list-classify">
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-share"></i></span>
-          <span class="title">推荐给朋友</span>
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
-
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-ios-gear-outline"></i></span>
-          <span class="title">设置与帮助</span>
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
-
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-ios-lightbulb-outline"></i></span>
-          <span class="title">意见与反馈</span>
-          <span class="nav"><i class="icon ion-ios-arrow-right"></i></span>
-        </div>
-
-        <div class="list-item">
-          <div class="hairline-top"></div>
-          <div class="hairline-bottom"></div>
-          <span class="icon-wrapper"><i class="icon ion-android-exit"></i></span>
-          <span class="title" @click="logOut">退出</span>
-        </div>
       </div>
     </div>
   </div>
@@ -143,7 +114,15 @@
   }
 
 </script>
-<style lang="less" rel="stylesheet/less" scoped>
 
+<style scoped>
 
+  .mui-table-view {
+    margin-top: 20px;
+  }
+
+  .mui-table-view .mui-icon {
+    color: orange;
+    margin-right: 5px;
+  }
 </style>

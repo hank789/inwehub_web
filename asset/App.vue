@@ -8,32 +8,20 @@
       </transition>
     </div>
 
-    <div class="bottom-navigation" v-show='showBottom'>
-        <div class="item"  @click="linkTo('/')" :class="{ active : isHome}">
-          <div class="icon-wrapper">
-            <i class="icon ion-home"></i>
-          </div>
-          <div class="text-wrapper">
-            首页
-          </div>
-        </div>
-        <div class="item"  @click="linkTo('ask')" :class="{ active : isAsk}">
-          <div class="icon-wrapper">
-            <i class="icon ion-plus"></i>
-          </div>
-          <div class="text-wrapper">
-              提问
-          </div>
-        </div>
-        <div class="item"  @click="linkTo('my')" :class="{ active : isMy}">
-          <div class="icon-wrapper">
-            <i class="icon ion-person"></i>
-          </div>
-          <div class="text-wrapper">
-              我的
-          </div>
-        </div>
-    </div>
+    <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
+      <a class="mui-tab-item" @click="linkTo('/')" :class="{ active : isHome}">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">首页</span>
+      </a>
+      <a class="mui-tab-item" @click="linkTo('ask')" :class="{ active : isAsk}">
+        <span class="mui-icon mui-icon-plus"></span>
+        <span class="mui-tab-label">提问</span>
+      </a>
+      <a class="mui-tab-item mui-active" @click="linkTo('my')" :class="{ active : isMy}">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的</span>
+      </a>
+    </nav>
   </div>
 </template>
 

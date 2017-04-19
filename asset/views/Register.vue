@@ -2,48 +2,37 @@
 
   <div class="page page-white">
     <div class="page-container">
-      <div class="nav-bar" @click="$router.go(-1)">
-        <div class="left">
-          <span><i class="icon ion-ios-arrow-back"></i></span>
-        </div>
-        <div class="center">
-          <span>注册</span>
-        </div>
-        <div class="right"></div>
-      </div>
-      <div class="form form-login">
-        <form @submit.prevent="register" :model="formItem">
-          <div class="form-item border-bottom">
-            <span>用户名:</span>
-            <input class="input" type="text" autocomplete="off" placeholder="请输入用户名" v-model.trim="username" id="username" name="username"/>
-          </div>
-          <div class="form-item border-bottom">
-            <span>手机号:</span>
-            <input class="input" type="text" autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone"/>
+      <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">注册</h1>
+      </header>
 
+      <div class="mui-content">
+        <form class="mui-input-group" @submit.prevent="register" :model="formItem">
+          <div class="mui-input-row">
+            <label>用户名</label>
+            <input type="text" autocomplete="off" placeholder="请输入用户名" v-model.trim="username" id="username" name="username"/>
           </div>
-          <div class="form-item border-bottom">
-            <span>验证码:</span>
-            <input class="input" type="text" value="" placeholder="请输入验证码
-" v-model.trim.num="code" id="code" name="code" autocomplete="off"/>
+          <div class="mui-input-row">
+            <label>手机号</label>
+            <input type="text"  autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone"/>
+          </div>
+          <div class="mui-input-row">
+            <label>验证码</label>
+            <input type="text" placeholder="请输入验证码" v-model.trim.num="code" id="code" name="code" autocomplete="off">
             <span class="sendCode" @click.stop.prevent="getCode">{{ getCodeText }}</span>
           </div>
-          <div class="form-item border-bottom">
-            <span>密码:</span>
-            <input class="input" type="password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password"/>
-            <input type="text" autocomplete="off" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-            <span><i class="icon ion-eye" v-on:click="showPassword" :class="{ 'ion-eye-disabled': isShowPasswordText, 'ion-eye': isShowPassword }"></i></span>
+          <div class="mui-input-row">
+            <label>密码</label>
+            <input type="password" class="mui-input-password"autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password">
           </div>
-
-          <div class="button-wrapper">
-            <button class="button button-positive button-block" :loading="isLoading" htmlType="submit" :disabled="isDisabled" @click.prevent="register">注册</button>
-          </div>
-
-          <div class="button-wrapper">
-            <p class="notice error">{{ error }}</p>
-          </div>
-
         </form>
+        <div class="mui-content-padded">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" htmlType="submit" :disabled="isDisabled" @click.prevent="register">注册</button>
+        </div>
+        <div class="mui-content-padded">
+          <p class="notice error">{{ error }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -297,5 +286,18 @@
   }
   .error{
     color:red;
+  }
+  .mui-input-group {
+    margin-top:20px;
+  }
+  .sendCode{
+    font-size: 16px;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    height: 38px;
+    text-align: center;
+    color: #999;
   }
 </style>

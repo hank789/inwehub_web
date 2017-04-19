@@ -6,19 +6,26 @@
 // window.$ = window.jQuery = require('jquery');
 // require('bootstrap-sass');
 
+import mui from "./js/mui"
 import Vue from 'vue';
+
 import VueWechatTitle from 'vue-wechat-title';
 import TimeAgo from 'vue-timeago';
 import router from './routers/index';
 
 // import VueLazyloadImg from 'vue-lazyload-img';
 import VueLazyload from 'vue-lazyload';
+
 import store from './stores/store';
 import App from './App';
 
+window.mui = mui;
+
 import loading_img from './statics/images/image-loading.png';
 
-import './styles/common.css';
+import './styles/mui.css';
+
+mui.init();
 
 Vue.use(VueWechatTitle);
 Vue.use(VueLazyload, {
