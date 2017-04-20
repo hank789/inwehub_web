@@ -68,6 +68,26 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //ask-type
+    path: '/ask/type',
+    component: require('../views/AskType.vue'),
+    meta: {
+      title: '选择问题分类'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //task
+    path: '/task',
+    component: require('../views/Task.vue'),
+    meta: {
+      title: '任务'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/message',
     component: require('../views/message.vue'),

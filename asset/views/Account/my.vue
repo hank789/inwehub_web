@@ -3,12 +3,7 @@
   <div class="page">
     <div class="page-container">
 
-      <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon"></a>
-        <h1 class="mui-title">我</h1>
-      </header>
-
-      <div class="mui-content">
+      <div class="mui-content myinfo">
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell mui-media">
             <a class="mui-navigate-right" href="#account">
@@ -24,37 +19,37 @@
 
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-addpeople"></span> 我的档案</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-university"></span> 专家管理</a>
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-vip"></span>专家管理</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-prech"></span> 我的钱包</a>
-          </li>
-        </ul>
-
-        <ul class="mui-table-view mui-table-view-chevron">
-          <li class="mui-table-view-cell">
-            <a href="myAskList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span> 我的提问</a>
-          </li>
-          <li class="mui-table-view-cell">
-            <a href="waitAnswerList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-chat"></span> 我的问答</a>
+            <a href="#general" class="mui-navigate-right"><span class="mui-icon iconfont icon-wallet"></span>我的钱包</a>
           </li>
         </ul>
 
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell">
-            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-share"></span> 推荐给朋友</a>
+            <a href="myAskList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="waitAnswerList.html" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</a>
+          </li>
+        </ul>
+
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell">
+            <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-share"></span>推荐给朋友</a>
           </li>
           <li class="mui-table-view-cell">
             <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-gear"></span>设置与帮助</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span> 意见与反馈</a>
+            <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span>意见与反馈</a>
           </li>
           <li class="mui-table-view-cell">
-            <a href="javascript:void(0)" class="mui-navigate-right" @click="logOut"><span class="mui-icon mui-icon-close"></span> 退出</a>
+            <a href="javascript:void(0)" class="mui-navigate-right" @click="logOut"><span class="mui-icon mui-icon-close"></span>退出登录</a>
           </li>
         </ul>
       </div>
@@ -130,7 +125,16 @@
   }
 
   .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
-    color: orange;
+    color:#999;
+    width:24px;
+    height:24px;
     margin-right: 5px;
+  }
+  .myinfo li{
+    padding: 13px 15px;
+  }
+
+  .myinfo > .mui-table-view:first-child{
+    margin-top:0;
   }
 </style>

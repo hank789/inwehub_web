@@ -1,18 +1,29 @@
+body{
+  font-family: PingFang-SC-Regular, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
 .page{
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  overflow: hidden;
 }
 
 body{
-    color:#3f3f3f;
+  color:#3f3f3f;
 }
 
 a{
-    color:#999;
+  color:#999;
+}
+
+.mt15{
+  margin-top:15px;
 }

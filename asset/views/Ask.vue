@@ -6,12 +6,15 @@
         <h1 class="mui-title">提问</h1>
       </header>
 
-
-      <div class="mui-content">
-        <div class="mui-content-padded">
-          <div class="form form-ask">
+      <div class="mui-content form form-ask">
+        <div class="mui-table-view">
+          <div class="mui-table-view-cell">
             <form>
-              <textarea></textarea>
+              <div class="textarea-wrapper">
+                <textarea></textarea>
+                <span class="counter"><span>80</span><span>/</span><span>80</span></span>
+              </div>
+
               <div class="title">请选择提问金额</div>
               <div class="category">
                 <span class="active">88元</span>
@@ -21,25 +24,46 @@
                 <span>188元</span>
                 <span><input type="text" value=""/> </span>
               </div>
+              <div class="title">请选择分类问题：</div>
+              <div class="select">已选择: <span class="active">A-B</span></div>
               <div class="button-wrapper">
-                <button type="button" class="mui-btn mui-btn-block mui-btn-primary">立即提问</button>
+                <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined" @click="selectType">点击选择分类</button>
               </div>
-              <div class="options">
-                <input type="checkbox" /> 匿名
-                    </div>
             </form>
           </div>
         </div>
+
+
+        <div class="mui-table-view mt15">
+          <div class="mui-table-view-cell">
+            <div class="button-wrapper">
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined" onclick="window.location='myAskDetail.html'">立即提问</button>
+            </div>
+            <div class="options">
+              <input type="checkbox" /> 匿名
+                    </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
 
+<script>
+
+  const Ask = {
+    methods: {
+      selectType () {
+        this.$router.push('ask/type');
+      },
+    }
+  }
+  export default Ask;
+</script>
+
 
 <style scoped>
-  .form-ask{
-    padding:0 20px;
-  }
   .form-ask textarea {
     width:100%;
     height:100px;
@@ -50,11 +74,11 @@
     color:#8b8b8b;
     height:32px;
   }
-  .form-ask .category span.active{
+  .form-ask .category span.active, .form-ask .select span.active{
     border:1px solid #4a90e2;
   }
 
-  .form-ask .category span{
+  .form-ask .category span, .form-ask .select span{
     border:1px solid #b6b6b6;
     border-radius: 5px;
     width:30%;
@@ -82,8 +106,15 @@
     margin-top:15px;
   }
 
-  .mui-content{
-    background-color:#fff !important;
+
+  .textarea-wrapper{
+    position: relative;
+  }
+  .textarea-wrapper .counter{
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+    color:#999;
   }
 
 </style>

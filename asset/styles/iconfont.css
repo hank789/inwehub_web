@@ -6,7 +6,7 @@
 
 .iconfont {
   font-family:"iconfont" !important;
-  font-size:16px;
+  font-size:24px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,13 +14,13 @@
 
 .icon-task:before { content: "\e613"; }
 
-.icon-share:before { content: "\e621"; }
+.icon-share:before { content: "\e64c"; }
+
+.icon-wallet:before { content: "\e621"; }
 
 .icon-success:before { content: "\e8ee"; }
 
-.icon-5:before { content: "\e756"; }
+.icon-answer:before { content: "\e641"; }
 
-.icon-feedback:before { content: "\e60c"; }
-
-.icon-money:before { content: "\e60b"; }
+.icon-vip:before { content: "\e631"; }
 

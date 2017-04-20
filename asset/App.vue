@@ -9,11 +9,11 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
-      <a class="mui-tab-item" @click="linkTo('/')" :class="{ 'mui-active' : isHome}">
+      <a class="mui-tab-item" @click="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
         <span class="mui-icon mui-icon-help"></span>
         <span class="mui-tab-label">提问</span>
       </a>
-      <a class="mui-tab-item" @click="linkTo('ask')" :class="{ 'mui-active' : isAsk}">
+      <a class="mui-tab-item" @click="linkTo('task')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
         <span class="mui-tab-label">任务</span>
       </a>
@@ -54,6 +54,9 @@
             break;
           case 'my':
             this.isMy = true;
+            break;
+          case 'task':
+            this.isAsk = true;
             break;
           case 'login':
           case 'register':
