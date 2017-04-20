@@ -184,10 +184,10 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-input-group {
-    margin-top:20px;
+    margin:20px 0;
   }
   .login-nav{
-    padding:15px;
+    padding:5px 15px;
     position: relative;
   }
 

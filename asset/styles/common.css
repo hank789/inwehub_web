@@ -27,3 +27,7 @@ a{
 .mt15{
   margin-top:15px;
 }
+
+.mui-btn-block{
+  padding: 8px 0;
+}

@@ -251,7 +251,7 @@
     color:red;
   }
   .mui-input-group {
-    margin-top:20px;
+    margin:20px 0;
   }
   .sendCode{
     font-size: 16px;
