@@ -36,7 +36,7 @@
 </template>
 
 
-<style>
+<style scoped>
   .form-ask{
     padding:0 20px;
   }
@@ -81,17 +81,7 @@
   .form-ask .button-wrapper{
     margin-top:15px;
   }
-  .page{
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    overflow: hidden;
-  }
+
   .mui-content{
     background-color:#fff !important;
   }

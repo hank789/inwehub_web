@@ -25,6 +25,8 @@ import loading_img from './statics/images/image-loading.png';
 
 import './styles/mui.css';
 import './styles/icons-extra.css';
+import './styles/iconfont.css';
+import './styles/common.css';
 
 mui.init();
 
