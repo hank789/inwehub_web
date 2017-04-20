@@ -105,7 +105,7 @@
           }
         )
           .then(response => {
-
+              mui.alert('提交成功');
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
