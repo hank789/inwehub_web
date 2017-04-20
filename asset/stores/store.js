@@ -8,6 +8,7 @@ import user from './module/user';
 import notice from './module/noticeText';
 import imageSwiper from './module/imageSwiper';
 import showPost from './module/showPost';
+import askType from './module/askType';
 
 import mutations from './mutations'
 import actions from './actions'
@@ -17,7 +18,8 @@ const modules = {
   notice,
   imageSwiper,
   showPost,
-  mutations
+  mutations,
+  askType
 }
 
 const store = new Vuex.Store({

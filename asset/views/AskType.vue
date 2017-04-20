@@ -10,15 +10,15 @@
       <div class="mui-content mui-row mui-fullscreen">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
-            <a class="mui-control-item mui-active" href="#item1">系统功能</a>
-            <a class="mui-control-item" href="#item2">日常操作</a>
+            <template v-for="(type, index) in types">
+              <a class="mui-control-item " :class="index == 0?'mui-active':''" :href="'#' + type">{{ type }}</a>
+            </template>
           </div>
         </div>
         <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
-          <div id="item1" class="mui-control-content mui-active">
+          <div :id="index" class="mui-control-content mui-active" v-for="(item, index) in subTypes">
             <ul class="mui-table-view">
-              <li class="mui-table-view-cell">SD</li>
-              <li class="mui-table-view-cell">PP</li>
+              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(index, subType)" v-for="(subType, subIndex) in item">{{ subType }}</li>
             </ul>
           </div>
           <div id="item2" class="mui-control-content">
@@ -37,36 +37,53 @@
 </template>
 
 <script>
+  import { NOTICE, ASK_TYPES_SET, ASK_TYPES, ASK_SUB_TYPES, ASK_TYPE_SELECT } from '../stores/types';
   import { createAPI, addAccessToken } from '../utils/request';
+  import localEvent from '../stores/localStorage';
+
 
   const Ask = {
-    data: () => ({
-      types: [],
-      subTypes:[]
-    }),
+    computed: {
+      types () {
+          return this.$store.getters[ASK_TYPES];
+      },
+      subTypes(){
+        return this.$store.getters[ASK_SUB_TYPES];
+      }
+    },
     methods: {
-      selectType () {
-        this.$router.push('ask/type');
+      selectTypeItem (type, subType) {
+        var selectType = type + ':' + subType;
+        this.$store.dispatch(ASK_TYPE_SELECT, selectType);
+        this.$router.go(-1);
       },
     },
     created () {
-      addAccessToken().get(createAPI(`question/request`),{},
-        {
-          validateStatus: status => status === 200
-        }
-      )
-        .then(response => {
-          this.types = response.data.data;
-        })
-        .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
+
+      var askTypes = localEvent.getLocalItem('ask_types');
+
+      if (askTypes.length == 0) {
+        addAccessToken().post(createAPI(`question/request`),{},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+            localEvent.setLocalItem('ask_types', response.data.data.tags);
+            this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
+          })
+          .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
             });
-          });
-        })
+          })
+      } else {
+          this.$store.dispatch(ASK_TYPES_SET, askTypes);
+      }
     }
   }
   export default Ask;
