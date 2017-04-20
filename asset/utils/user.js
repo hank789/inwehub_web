@@ -70,7 +70,7 @@ function getAvatar (userInfo, process, cb) {
 };
 
 function getUserInfo (user_id, cb) {
-  addAccessToken().post(createAPI('account/show'), {
+  addAccessToken().post(createAPI('profile/info'), {
       user_ids: [ user_id ]
     }
   )

@@ -30,6 +30,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         target: 'http://intervapp.hs.app',
+        //target: 'http://proxy.hs.app',
         changeOrigin: true
       }
     },
