@@ -9,15 +9,15 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
-      <div class="mui-tab-item" @click="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
+      <div class="mui-tab-item" @tap.stop.prevent="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
         <span class="mui-icon mui-icon-help"></span>
         <span class="mui-tab-label">提问</span>
       </div>
-      <div class="mui-tab-item" @click="linkTo('task')" :class="{ 'mui-active' : isAsk}">
+      <div class="mui-tab-item" @tap.stop.prevent="linkTo('task')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
         <span class="mui-tab-label">任务</span>
       </div>
-      <div class="mui-tab-item" @click="linkTo('my')" :class="{ 'mui-active':isMy}">
+      <div class="mui-tab-item" @tap.stop.prevent="linkTo('my')" :class="{ 'mui-active':isMy}">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
       </div>
