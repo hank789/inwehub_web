@@ -62,13 +62,20 @@
 
       var askTypes = localEvent.getLocalItem('ask_types');
 
-      if (askTypes.length == 0) {
+      if (askTypes.length == 0 && askTypes != 'undefined') {
         addAccessToken().post(createAPI(`question/request`),{},
           {
             validateStatus: status => status === 200
           }
         )
           .then(response => {
+
+            var code = response.data.code;
+            if (code !== 1000) {
+                mui.alert(response.data.message);
+                this.$router.go(-1);
+            }
+
             localEvent.setLocalItem('ask_types', response.data.data.tags);
             this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
           })
