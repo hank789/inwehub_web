@@ -60,7 +60,7 @@
     },
     created () {
 
-      var askTypes = localEvent.getLocalItem('ask_types');
+      var askTypes = localEvent.getLocalItem('ask_types2');
 
       if (askTypes.length == 0 && askTypes != 'undefined') {
         addAccessToken().post(createAPI(`question/request`),{},
@@ -76,7 +76,7 @@
                 this.$router.go(-1);
             }
 
-            localEvent.setLocalItem('ask_types', response.data.data.tags);
+            localEvent.setLocalItem('ask_types2', response.data.data.tags);
             this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
           })
           .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
