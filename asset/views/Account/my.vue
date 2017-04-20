@@ -36,6 +36,15 @@
 
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell">
+            <a href="myAskList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span> 我的提问</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="waitAnswerList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-chat"></span> 我的问答</a>
+          </li>
+        </ul>
+
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell">
             <a href="#privacy" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-share"></span> 推荐给朋友</a>
           </li>
           <li class="mui-table-view-cell">

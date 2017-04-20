@@ -10,12 +10,12 @@
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
       <a class="mui-tab-item" @click="linkTo('/')" :class="{ 'mui-active' : isHome}">
-        <span class="mui-icon mui-icon-home"></span>
-        <span class="mui-tab-label">首页</span>
+        <span class="mui-icon mui-icon-help"></span>
+        <span class="mui-tab-label">提问</span>
       </a>
       <a class="mui-tab-item" @click="linkTo('ask')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
-        <span class="mui-tab-label">提问</span>
+        <span class="mui-tab-label">任务</span>
       </a>
       <a class="mui-tab-item" @click="linkTo('my')" :class="{ 'mui-active':isMy}">
         <span class="mui-icon mui-icon-contact"></span>
