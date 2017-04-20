@@ -53,7 +53,7 @@
     },
     methods: {
       selectTypeItem (type, subType) {
-        var selectType = type + ':' + subType;
+        var selectType = subType;
         this.$store.dispatch(ASK_TYPE_SELECT, selectType);
         this.$router.go(-1);
       },
