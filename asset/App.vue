@@ -9,18 +9,18 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
-      <a class="mui-tab-item" @click.stop.prevent="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
+      <div class="mui-tab-item" @click="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
         <span class="mui-icon mui-icon-help"></span>
         <span class="mui-tab-label">提问</span>
-      </a>
-      <a class="mui-tab-item" @click.stop.prevent="linkTo('task')" :class="{ 'mui-active' : isAsk}">
+      </div>
+      <div class="mui-tab-item" @click="linkTo('task')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
         <span class="mui-tab-label">任务</span>
-      </a>
-      <a class="mui-tab-item" @click.stop.prevent="linkTo('my')" :class="{ 'mui-active':isMy}">
+      </div>
+      <div class="mui-tab-item" @click="linkTo('my')" :class="{ 'mui-active':isMy}">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
-      </a>
+      </div>
     </nav>
   </div>
 </template>
