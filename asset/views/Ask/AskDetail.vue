@@ -26,6 +26,34 @@
           </div>
         </div>
 
+        <div class="mui-table-view detail-answer" v-show="ask.answers.length > 0">
+          <div class="mui-table-view-cell">
+            <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
+            <div class="mui-media-body">
+              {{ ask.answers[0]?ask.answers[0].user_name:'' }}
+              <p><timeago :since="ask.answers[0]?ask.answers[0].created_at:''"></timeago></p>
+            </div>
+          </div>
+          <div class="mui-table-view-cell question">
+            {{ ask.answers[0]?ask.answers[0].content:'' }}
+        </div>
+        </div>
+
+        <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0">
+          <div class="mui-table-view-cell">
+            <div class="mui-content-padded">
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"   @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mui-table-view detail-comment-result" v-show="ask.feedback.answer_id">
+          <div class="mui-table-view-cell">
+            评价：<span class="mui-icon mui-icon-star"></span>
+            <p>{{ ask.feedback.description }}</p>
+          </div>
+        </div>
+
         <div class="mui-table-view detail-ask-timeline">
           <div class="mui-table-view-cell">
             <div class="timeline timeline-collapsing">
@@ -54,10 +82,11 @@
   const AskDetail = {
         data: () => ({
             ask:{
-                question:{
-                    user_name:null
-                }
+                answers:[],
+                question:{},
+                feedback:{}
             },
+            id:0,
             loading:true,
             loading_gif:loading_gif
         }),
@@ -76,6 +105,7 @@
              return;
            }
 
+         this.id=id;
 
          addAccessToken().post(createAPI(`question/info`),{id:id},
            {
@@ -270,5 +300,19 @@
     font-size:30px;
     color:#007aff;
     margin-right: 20px;
+  }
+
+  .detail-answer{
+    margin-top:15px;
+  }
+
+  .detail-comment{
+    margin-top:15px;
+    text-align: center;
+  }
+
+  .detail-comment-result{
+    margin-top:15px;
+    text-align: left;
   }
 </style>

@@ -158,6 +158,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //ask-comment
+    path: '/askComment/:id',
+    component: require('../views/Ask/Comment.vue'),
+    meta: {
+      title: '应答'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/message',
     component: require('../views/message.vue'),

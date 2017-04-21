@@ -47,7 +47,7 @@
           </template>
 
           <template v-else>
-            <div class="mui-table-view-cell mui-media" onclick="window.location='myAskDetailAnswer.html';">
+            <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
               <div class="title">
                 <div class="mui-row">
                   <div class="mui-col-xs-8">
@@ -68,7 +68,8 @@
                 <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
               </div>
             </div>
-            <div class="mui-table-view-cell mui-media">
+
+            <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
               <a href="javascript:;">
                 <div class="avatar mui-media-object">
                   <div class="avatarInner">
