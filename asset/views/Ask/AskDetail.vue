@@ -39,7 +39,7 @@
         </div>
         </div>
 
-        <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0">
+        <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0 && ask.answers.length > 0">
           <div class="mui-table-view-cell">
             <div class="mui-content-padded">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"   @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价</button>
