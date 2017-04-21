@@ -2280,7 +2280,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
 {
     padding-left: 58px;
 }
-.mui-table-view-cell.mui-active
+.mui-table-view-cell.isList.mui-active
 {
     background-color: #eee;
 }

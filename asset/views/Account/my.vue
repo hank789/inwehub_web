@@ -29,10 +29,10 @@
 
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell">
-              <a href="myAskList.html" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</a>
+              <a href="#" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</a>
             </li>
             <li class="mui-table-view-cell">
-              <a href="waitAnswerList.html" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</a>
+              <a href="#" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</a>
             </li>
           </ul>
 

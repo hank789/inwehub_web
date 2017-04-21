@@ -12,7 +12,7 @@
             <form>
               <div class="textarea-wrapper">
                 <textarea v-model="description"></textarea>
-                <span class="counter"><span>80</span><span>/</span><span>80</span></span>
+                <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
               </div>
 
               <div class="title">请选择提问金额</div>
@@ -29,6 +29,7 @@
               <div class="button-wrapper">
                 <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
                         @tap.stop.prevent="selectType">点击选择分类
+
                 </button>
               </div>
             </form>
@@ -41,10 +42,12 @@
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
                       @tap.stop.prevent="goAsk">立即提问
+
               </button>
             </div>
             <div class="options">
               <input type="checkbox" v-model="hide"/> 匿名
+
 
             </div>
           </div>
@@ -64,20 +67,24 @@
     data: () => ({
       money: 0,
       description: '',
-      hide:0,
+      hide: 0,
+      descMaxLength:500
     }),
     computed: {
       type () {
         return this.$store.state.askType.selected
+      },
+      descLength() {
+        return this.description.length;
       }
     },
     created () {
-        var info = this.$store.state.askType.info;
-        if (info.money) {
-            this.money = info.money;
-            this.description = info.desc;
-            this.hide = info.hide;
-        }
+      var info = this.$store.state.askType.info;
+      if (info.money) {
+        this.money = info.money;
+        this.description = info.desc;
+        this.hide = info.hide;
+      }
     },
     methods: {
       selectMoney(money) {
@@ -85,27 +92,27 @@
       },
       selectType () {
         var info = {
-            money:this.money,
-            desc:this.description,
-            hide:this.hide
+          money: this.money,
+          desc: this.description,
+          hide: this.hide
         };
         this.$store.dispatch(ASK_INFO, info);
         this.$router.push('ask/type');
       },
       goAsk(){
-          var data = {
-              tags:this.type,
-              price:this.money,
-              description:this.description,
-              hide:this.hide
-          };
+        var data = {
+          tags: this.type,
+          price: this.money,
+          description: this.description,
+          hide: this.hide
+        };
         addAccessToken().post(createAPI(`question/store`), data,
           {
             validateStatus: status => status === 200
           }
         )
           .then(response => {
-              mui.alert('提交成功');
+            mui.alert('提交成功');
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
@@ -116,6 +123,13 @@
               });
             });
           })
+      }
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
       }
     }
   }
