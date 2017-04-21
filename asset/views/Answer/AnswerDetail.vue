@@ -15,26 +15,60 @@
     <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="answer.question.user_avatar_url">
+          <img class="mui-media-object mui-pull-left" :src="answer.question?answer.question.user_avatar_url:''">
           <div class="mui-media-body">
-            {{ answer.question.user_name }}
-        </div>
+            {{ answer.question?answer.question.user_name:'' }}
+          </div>
         </div>
         <div class="mui-table-view-cell question">
-          {{ answer.question.description }}
-          <span class="timeAgo"><timeago :since="answer.question.created_at"></timeago></span>
-          <span class="amount">悬赏金额<b>￥{{ answer.question.price }}</b>元</span>
+          {{ answer.question?answer.question.description:'' }}
+          <span class="timeAgo"><timeago :since="answer.question?answer.question.created_at:''"></timeago></span>
+          <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
         </div>
       </div>
 
-      <div class="mui-row buttons">
+      <div class="mui-row buttons" v-show="answer.answers.length==0">
         <div class="mui-col-sm-6 mui-col-xs-6">
-          <button type="button" class="mui-btn  mui-btn-block" onclick="window.location='waitAnswer.html'"><span class="mui-icon mui-icon-compose"></span>确认应答</button>
+          <button type="button" class="mui-btn  mui-btn-block"
+                  @tap.stop.prevent="$router.push('/answerTime/' + answer.question.id)"><span
+            class="mui-icon mui-icon-compose"></span>确认应答
+          </button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
-          <button type="button" class="mui-btn  mui-btn-block" @tap.stop.prevent="$router.push('/answerrefuse/' + answer.question.id)"><span class="mui-icon mui-icon-closeempty"></span> 拒绝应答</button>
+          <button type="button" class="mui-btn  mui-btn-block"
+                  @tap.stop.prevent="$router.push('/answerrefuse/' + answer.question.id)"><span
+            class="mui-icon mui-icon-closeempty"></span> 拒绝应答
+          </button>
         </div>
       </div>
+
+      <div class="mui-table-view detail-answer" v-show="answer.answers.length > 0">
+        <div class="mui-table-view-cell">
+          <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
+          <div class="mui-media-body">
+            {{ answer.answers[0]?answer.answers[0].user_name:'' }}
+            <p><timeago :since="answer.answers[0]?answer.answers[0].created_at:''"></timeago></p>
+          </div>
+        </div>
+        <div class="mui-table-view-cell question">
+          {{ answer.answers[0]?answer.answers[0].content:'' }}
+        </div>
+      </div>
+
+      <div class="mui-table-view detail-comment" v-show="answer.feedback.length == 0">
+        <div class="mui-table-view-cell">
+          暂无评价
+        </div>
+      </div>
+
+
+      <div class="mui-table-view detail-comment-result" v-show="answer.feedback.length > 0">
+        <div class="mui-table-view-cell">
+          评价：<span class="mui-icon mui-icon-star"></span>
+          <p>{{ answer.feedback.description }}</p>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -47,25 +81,21 @@
 
   const AnswerDetail = {
     data: () => ({
-      answer: [],
-      loading:true,
-      loading_gif:loading_gif
+      answer: {
+        answers:[],
+        question:{},
+        feedback:{}
+      },
+      loading: true,
+      loading_gif: loading_gif
     }),
-    computed: {
-      nothing () {
-        if (this.loading) {
-          return -1;
-        }
-        return this.answers.length ? 0 : 1;
-      }
-    },
     mounted(){
 
     },
     created () {
       let id = parseInt(this.$route.params.id);
 
-      if ( !id ) {
+      if (!id) {
         this.$store.dispatch(NOTICE, cb => {
           cb({
             text: '发生一些错误',
@@ -78,7 +108,7 @@
       }
 
 
-      addAccessToken().post(createAPI(`question/info`),{id:id},
+      addAccessToken().post(createAPI(`question/info`), {id: id},
         {
           validateStatus: status => status === 200
         }
@@ -94,7 +124,7 @@
           this.answer = response.data.data;
           this.loading = 0;
         })
-        .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
+        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
           this.$store.dispatch(NOTICE, cb => {
             cb({
               text: data.message,
@@ -119,31 +149,43 @@
     position: absolute;
     bottom: 10px;
     left: 15px;
-    color:#999;
+    color: #999;
   }
 
   .detail-ask .question .amount {
     position: absolute;
     bottom: 10px;
     right: 15px;
-    color:#999;
+    color: #999;
   }
-  .detail-ask .question .amount b{
-    color:#f85f48;
-    font-weight:normal;
+
+  .detail-ask .question .amount b {
+    color: #f85f48;
+    font-weight: normal;
   }
 
   .buttons {
-    margin-left:-1px;
+    margin-left: -1px;
   }
-  .buttons button{
-    margin:-1px;
-    font-size:14px;
-    padding:10px 0;
-    border-right:0px;
-    border-radius:0;
+
+  .buttons button {
+    margin: -1px;
+    font-size: 14px;
+    padding: 10px 0;
+    border-right: 0px;
+    border-radius: 0;
   }
-  .buttons button .mui-icon{
-    font-size:22px;
+
+  .buttons button .mui-icon {
+    font-size: 22px;
+  }
+
+  .detail-answer {
+    margin-top: 15px;
+  }
+
+  .detail-comment {
+    margin-top: 15px;
+    text-align: center;
   }
 </style>

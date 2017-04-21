@@ -7,6 +7,9 @@
 // require('bootstrap-sass');
 
 import mui from "./js/mui"
+
+
+
 import Vue from 'vue';
 
 import VueWechatTitle from 'vue-wechat-title';
@@ -30,6 +33,7 @@ import './styles/mui.css';
 import './styles/icons-extra.css';
 import './styles/iconfont.css';
 import './styles/common.css';
+import './styles/mui.picker.all.css';
 
 mui.init();
 
