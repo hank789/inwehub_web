@@ -11,7 +11,7 @@
           <div class="mui-table-view-cell">
             <form>
               <div class="textarea-wrapper">
-                <textarea v-model="description"></textarea>
+                <textarea v-model.trim="description"></textarea>
                 <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
               </div>
 
@@ -30,6 +30,7 @@
                 <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
                         @tap.stop.prevent="selectType">点击选择分类
 
+
                 </button>
               </div>
             </form>
@@ -43,10 +44,12 @@
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
                       @tap.stop.prevent="goAsk">立即提问
 
+
               </button>
             </div>
             <div class="options">
               <input type="checkbox" v-model="hide"/> 匿名
+
 
 
             </div>
@@ -60,15 +63,15 @@
 
 <script>
 
-  import {NOTICE, ASK_INFO} from '../stores/types';
-  import {createAPI, addAccessToken} from '../utils/request';
+  import {NOTICE, ASK_INFO} from '../../stores/types';
+  import {createAPI, addAccessToken} from '../../utils/request';
 
   const Ask = {
     data: () => ({
       money: 0,
       description: '',
       hide: 0,
-      descMaxLength:500
+      descMaxLength: 500
     }),
     computed: {
       type () {
@@ -100,6 +103,21 @@
         this.$router.push('ask/type');
       },
       goAsk(){
+        if (!this.type) {
+          mui.toast('请选择问题分类');
+          return;
+        }
+
+        if (!this.money) {
+          mui.toast('请选择提问金额');
+          return;
+        }
+
+        if (!this.description) {
+          mui.toast('请填写提问内容');
+          return;
+        }
+
         var data = {
           tags: this.type,
           price: this.money,
@@ -112,7 +130,15 @@
           }
         )
           .then(response => {
-            mui.alert('提交成功');
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+
+            var id = response.data.data.id;
+            this.$router.push('ask/' + id);
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {

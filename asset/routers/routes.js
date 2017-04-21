@@ -60,7 +60,7 @@ const routes = [
   },
   { //ask
     path: '/ask',
-    component: require('../views/Ask.vue'),
+    component: require('../views/Ask/Ask.vue'),
     meta: {
       title: '提问'
     },
@@ -70,7 +70,7 @@ const routes = [
   },
   { //ask-type
     path: '/ask/type',
-    component: require('../views/AskType.vue'),
+    component: require('../views/Ask/AskType.vue'),
     meta: {
       title: '选择问题分类'
     },
@@ -80,9 +80,39 @@ const routes = [
   },
   { //task
     path: '/task',
-    component: require('../views/Task.vue'),
+    component: require('../views/Task/Task.vue'),
     meta: {
       title: '任务'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //ask-detail
+    path: '/ask/:id',
+    component: require('../views/Ask/AskDetail.vue'),
+    meta: {
+      title: '受理成功'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //asks
+    path: '/asks',
+    component: require('../views/Ask/AskList.vue'),
+    meta: {
+      title: '我的提问'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //answer
+    path: '/answers',
+    component: require('../views/Answer/AnswerList.vue'),
+    meta: {
+      title: '我的回答'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -91,7 +121,7 @@ const routes = [
   { // message
     path: '/message',
     component: require('../views/message.vue'),
-  },
+  }
 ];
 
 export default routes;

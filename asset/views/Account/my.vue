@@ -29,10 +29,10 @@
 
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell">
-              <a href="#" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</a>
+              <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</router-link>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</a>
+              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</router-link>
             </li>
           </ul>
 

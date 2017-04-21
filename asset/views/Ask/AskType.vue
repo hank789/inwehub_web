@@ -37,9 +37,9 @@
 </template>
 
 <script>
-  import { NOTICE, ASK_TYPES_SET, ASK_TYPES, ASK_SUB_TYPES, ASK_TYPE_SELECT } from '../stores/types';
-  import { createAPI, addAccessToken } from '../utils/request';
-  import localEvent from '../stores/localStorage';
+  import { NOTICE, ASK_TYPES_SET, ASK_TYPES, ASK_SUB_TYPES, ASK_TYPE_SELECT } from '../../stores/types';
+  import { createAPI, addAccessToken } from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
 
   const Ask = {

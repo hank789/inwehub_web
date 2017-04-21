@@ -35,3 +35,15 @@ a{
 .mb70{
   margin-bottom:70px;
 }
+
+.list-empty {
+  font-size:14px;
+}
+.list-empty .title{
+  text-align: center;
+  color:#999;
+}
+.list-empty .subTitle{
+  margin:15px 0;
+  text-align: center;
+}
