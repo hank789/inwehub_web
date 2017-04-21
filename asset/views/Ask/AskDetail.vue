@@ -1,13 +1,17 @@
 <template>
-  <div class="page">
-    <div class="page-container">
-
+  <div>
       <header class="mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-title">受理成功</h1>
       </header>
 
-      <div class="mui-content">
+      <div class="mui-content loading" v-show="loading">
+        <div class="loading">
+          <img :src="loading_gif"/>
+        </div>
+      </div>
+
+      <div class="mui-content" v-show="!loading">
         <div class="mui-table-view detail-ask">
           <div class="mui-table-view-cell">
             <img class="mui-media-object mui-pull-left" :src="ask.question.user_avatar_url">
@@ -42,7 +46,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -54,7 +57,9 @@
                 question:{
                     user_name:null
                 }
-            }
+            },
+            loading:true,
+            loading_gif:loading_gif
         }),
        created () {
            let id = parseInt(this.$route.params.id);
@@ -86,7 +91,7 @@
              }
 
               this.ask = response.data.data;
-              console.log(this.ask);
+              this.loading = 0;
            })
            .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
              this.$store.dispatch(NOTICE, cb => {

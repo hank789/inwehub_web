@@ -1,6 +1,5 @@
 <template>
-  <div class="page page-white">
-    <div class="page-container">
+<div>
       <header class="mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-title">提问</h1>
@@ -57,8 +56,7 @@
         </div>
       </div>
 
-    </div>
-  </div>
+</div>
 </template>
 
 <script>

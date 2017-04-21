@@ -7,6 +7,12 @@
         <h1 class="mui-title">选择问题分类</h1>
       </header>
 
+      <div class="mui-content loading" v-show="loading">
+        <div class="loading">
+          <img :src="loading_gif"/>
+        </div>
+      </div>
+
       <div class="mui-content mui-row mui-fullscreen">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
@@ -43,6 +49,10 @@
 
 
   const Ask = {
+    data: () => ({
+      loading:true,
+      loading_gif:loading_gif
+    }),
     computed: {
       types () {
           return this.$store.getters[ASK_TYPES];
@@ -78,6 +88,7 @@
 
             localEvent.setLocalItem('ask_types2', response.data.data.tags);
             this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
+            this.loading=0;
           })
           .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
             this.$store.dispatch(NOTICE, cb => {
@@ -90,6 +101,7 @@
           })
       } else {
           this.$store.dispatch(ASK_TYPES_SET, askTypes);
+          this.loading=0;
       }
     }
   }

@@ -6,98 +6,47 @@
       <h1 class="mui-title">我的回答</h1>
     </header>
 
-    <div class="mui-content mb70" v-if="!nothing">
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
+    <div class="mui-content mb70" v-if="nothing == 0">
       <div class="list-answer">
-        <div class="mui-table-view list-answer-item">
-          <div class="mui-table-view-cell mui-media" onclick="window.location='answer.html';">
+
+        <div class="mui-table-view list-answer-item" v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.id)">
+          <div class="mui-table-view-cell mui-media">
             <div class="title">
-              <span>怎样成长为一个合格的SAP顾问?</span>
-              <span class="timeago">21分钟前</span>
+              <div class="mui-row">
+                <div class="mui-col-xs-8">
+                  <div class="text">{{ answer.description }}</div>
+                </div>
+                <div class="mui-col-xs-4">
+                  <div class="timeago"><timeago :since="answer.created_at"></timeago></div>
+                </div>
+              </div>
             </div>
             <div class="person">
               <div class="avatar">
                 <div class="avatarInner">
-                  <img src="images/uicon.jpg" class="avatar"/>
+                  <img :src="answer.user_avatar_url?answer.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
                 </div>
               </div>
-              <span class="username">阿牛</span>
-              <span class="amount">悬赏金额<b>￥188.00</b>元</span>
+              <span class="username">{{ answer.user_name }}</span>
+              <span class="amount">悬赏金额<b>￥{{ answer.price }}</b>元</span>
             </div>
             <div class="site-desc">
-              您的问题来啦，请速速点击前往以确认应答
-              <span class="mui-icon mui-icon-arrowright"></span>
-            </div>
-          </div>
-        </div>
-        <div class="mui-table-view list-answer-item">
-          <div class="mui-table-view-cell mui-media" onclick="window.location='answer-timeend.html';">
-            <div class="title">
-              <span>怎样成长为一个合格的SAP顾问?</span>
-              <span class="timeago">21分钟前</span>
-            </div>
-            <div class="person">
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img src="images/uicon.jpg" class="avatar"/>
-                </div>
-              </div>
-              <span class="username">阿牛</span>
-              <span class="amount">悬赏金额<b>￥188.00</b>元</span>
-            </div>
-            <div class="site-desc">
-              距您承诺时间还有3小时2分钟，点击前往回答
-              <span class="mui-icon mui-icon-arrowright"></span>
-            </div>
-          </div>
-        </div>
-        <div class="mui-table-view list-answer-item">
-          <div class="mui-table-view-cell mui-media" onclick="window.location='answerNoComment.html';">
-            <div class="title">
-              <span>怎样成长为一个合格的SAP顾问?</span>
-              <span class="timeago">21分钟前</span>
-            </div>
-            <div class="person">
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img src="images/uicon.jpg" class="avatar"/>
-                </div>
-              </div>
-              <span class="username">阿牛</span>
-              <span class="amount">悬赏金额<b>￥188.00</b>元</span>
-            </div>
-            <div class="site-desc">
-              您已提交回答，等待对方评价
-              <span class="mui-icon mui-icon-arrowright"></span>
-            </div>
-          </div>
-        </div>
-        <div class="mui-table-view list-answer-item">
-          <div class="mui-table-view-cell mui-media" onclick="window.location='answerComment.html';">
-            <div class="title">
-              <span>怎样成长为一个合格的SAP顾问?</span>
-              <span class="timeago">21分钟前</span>
-            </div>
-            <div class="person">
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img src="images/uicon.jpg" class="avatar"/>
-                </div>
-              </div>
-              <span class="username">阿牛</span>
-              <span class="amount">悬赏金额<b>￥188.00</b>元</span>
-            </div>
-            <div class="site-desc">
-              对方已评价，点击前往查看评价
+              {{ answer.status_description }}
               <span class="mui-icon mui-icon-arrowright"></span>
             </div>
           </div>
         </div>
 
       </div>
-
     </div>
 
-    <div class="mui-content" v-else>
+    <div class="mui-content" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="list-empty">
@@ -118,10 +67,15 @@
 
   const AnswerList = {
     data: () => ({
-      answers: []
+      answers: [],
+      loading:true,
+      loading_gif:loading_gif
     }),
     computed: {
       nothing () {
+        if (this.loading) {
+          return -1;
+        }
         return this.answers.length ? 0 : 1;
       }
     },
@@ -142,7 +96,8 @@
             this.$router.go(-1);
           }
 
-          this.asks = response.data.data;
+          this.answers = response.data.data;
+          this.loading=0;
         })
         .catch(({response: {message = '网络状况堪忧'} = {}}) => {
           this.$store.dispatch(NOTICE, cb => {
@@ -164,6 +119,10 @@
     margin-top:10px;
     position:relative;
     line-height: 40px;
+  }
+
+  .list-answer .list-answer-item .title{
+    line-height:30px;
   }
 
   .list-answer .list-answer-item .timeago{

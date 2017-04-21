@@ -6,7 +6,13 @@
       <h1 class="mui-title">我的提问</h1>
     </header>
 
-    <div class="mui-content" v-if="!nothing">
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
+    <div class="mui-content" v-if="nothing == 0">
 
       <div class="list-ask">
 
@@ -15,8 +21,14 @@
           <template v-if="!ask.answer_user_id">
             <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
               <div class="title">
-                <span>{{ ask.description }}</span>
-                <span class="timeago"><timeago :since="ask.created_at"></timeago></span>
+                <div class="mui-row">
+                  <div class="mui-col-xs-8">
+                    <div class="text">{{ ask.description }}</div>
+                  </div>
+                  <div class="mui-col-xs-4">
+                    <div class="timeago"><timeago :since="ask.created_at"></timeago></div>
+                  </div>
+                </div>
               </div>
               <div class="person">
                 <div class="avatar">
@@ -37,8 +49,14 @@
           <template v-else>
             <div class="mui-table-view-cell mui-media" onclick="window.location='myAskDetailAnswer.html';">
               <div class="title">
-                <span>{{ ask.description }}</span>
-                <span class="timeago"><timeago :since="ask.created_at"></timeago></span>
+                <div class="mui-row">
+                  <div class="mui-col-xs-8">
+                    <div class="text">{{ ask.description }}</div>
+                  </div>
+                  <div class="mui-col-xs-4">
+                    <div class="timeago"><timeago :since="ask.created_at"></timeago></div>
+                  </div>
+                </div>
               </div>
               <div class="person">
                 <div class="avatar">
@@ -74,14 +92,14 @@
       </div>
     </div>
 
-    <div class="mui-content" v-else>
+    <div class="mui-content" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="list-empty">
             <div class="title">暂无提问</div>
             <div class="subTitle">速速前往提问，开始你的英淘之旅！</div>
             <div class="buttons">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary" onclick="window.location='ask.html'">快速提问</button>
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/ask')">快速提问</button>
             </div>
           </div>
         </div>
@@ -98,10 +116,15 @@
 
   const Asks = {
     data: () => ({
-      asks: []
+      asks: [],
+      loading:true,
+      loading_gif:loading_gif
     }),
     computed: {
       nothing () {
+        if (this.loading) {
+            return -1;
+        }
         return this.asks.length ? 0 : 1;
       }
     },
@@ -123,6 +146,7 @@
           }
 
           this.asks = response.data.data;
+          this.loading = 0;
         })
         .catch(({response: {message = '网络状况堪忧'} = {}}) => {
           this.$store.dispatch(NOTICE, cb => {

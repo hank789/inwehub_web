@@ -6,7 +6,13 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
-    <div class="mui-content task-list" v-if="!nothing">
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
+    <div class="mui-content task-list" v-if="nothing == 0">
 
       <div class="mui-table-view">
         <div class="mui-table-view-cell">
@@ -60,7 +66,7 @@
       </div>
     </div>
 
-    <div class="mui-content" v-else>
+    <div class="mui-content" v-if="nothing==1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="list-empty">
@@ -81,10 +87,15 @@
 
   const Task = {
     data: () => ({
-      tasks: []
+      tasks: [],
+      loading:true,
+      loading_gif:loading_gif
     }),
     computed: {
       nothing () {
+        if (this.loading) {
+          return -1;
+        }
         return this.tasks.length ? 0 : 1;
       }
     },
@@ -104,6 +115,7 @@
           }
 
           this.tasks = response.data.data;
+          this.loading = 0;
         })
         .catch(({response: {message = '网络状况堪忧'} = {}}) => {
           this.$store.dispatch(NOTICE, cb => {

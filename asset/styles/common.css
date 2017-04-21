@@ -47,3 +47,8 @@ a{
   margin:15px 0;
   text-align: center;
 }
+
+.loading {
+  text-align: center;
+  padding:20px;
+}

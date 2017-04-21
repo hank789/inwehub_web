@@ -22,6 +22,9 @@ import App from './App';
 window.mui = mui;
 
 import loading_img from './statics/images/image-loading.png';
+import loading_gif from './statics/images/loading.gif';
+
+window.loading_gif = loading_gif;
 
 import './styles/mui.css';
 import './styles/icons-extra.css';

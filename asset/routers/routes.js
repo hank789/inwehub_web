@@ -118,6 +118,26 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //answer-detail
+    path: '/answer/:id',
+    component: require('../views/Answer/AnswerDetail.vue'),
+    meta: {
+      title: '应答'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //answerrefuse
+    path: '/answerrefuse/:id',
+    component: require('../views/Answer/Refuse.vue'),
+    meta: {
+      title: '拒绝应答'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/message',
     component: require('../views/message.vue'),
