@@ -9,7 +9,7 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
-      <div class="mui-tab-item" @tap.stop.prevent="linkTo('/ask')" :class="{ 'mui-active' : isHome}">
+      <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
         <span class="mui-icon mui-icon-help"></span>
         <span class="mui-tab-label">提问</span>
       </div>

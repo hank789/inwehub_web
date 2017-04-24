@@ -26,7 +26,7 @@
               <div class="title">请选择分类问题：</div>
               <div class="select" v-show="type">已选择: <span class="active selected">{{ type }}</span></div>
               <div class="button-wrapper">
-                <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+                <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                         @tap.stop.prevent="selectType">点击选择分类
 
 
@@ -40,7 +40,7 @@
         <div class="mui-table-view mt15">
           <div class="mui-table-view-cell">
             <div class="button-wrapper">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="goAsk">立即提问
 
 

@@ -17,23 +17,15 @@
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
             <template v-for="(type, index) in types">
-              <a class="mui-control-item " :class="index == 0?'mui-active':''" :href="'#' + type">{{ type }}</a>
+              <a class="mui-control-item " :class="index == 0?'mui-active':''" :href="'#' + index">{{ type }}</a>
             </template>
           </div>
         </div>
         <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
-          <div :id="index" class="mui-control-content mui-active" v-for="(item, index) in subTypes">
+          <div :id="index" class="mui-control-content mui-active" v-for="(item, key, index) in subTypes">
             <ul class="mui-table-view">
               <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(index, subType)" v-for="(subType, subIndex) in item">{{ subType }}</li>
             </ul>
-          </div>
-          <div id="item2" class="mui-control-content">
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">FI</li>
-              <li class="mui-table-view-cell">CO</li>
-            </ul>
-          </div>
-          <div id="item3" class="mui-control-content">
           </div>
         </div>
       </div>
