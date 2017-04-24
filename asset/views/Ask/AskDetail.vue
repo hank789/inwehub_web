@@ -34,7 +34,7 @@
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
 
             <p>
-              <timeago :since="ask.answers[0].created_at?timeago(ask.answers[0].created_at):''"></timeago>
+              <timeago :since="ask.answers[0]?timeago(ask.answers[0].created_at):''"></timeago>
             </p>
           </div>
         </div>
