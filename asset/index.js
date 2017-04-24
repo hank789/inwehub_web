@@ -6,9 +6,7 @@
 // window.$ = window.jQuery = require('jquery');
 // require('bootstrap-sass');
 
-import mui from "./js/mui"
-
-
+import "./js/mui"
 
 import Vue from 'vue';
 
@@ -22,8 +20,6 @@ import VueLazyload from 'vue-lazyload';
 import store from './stores/store';
 import App from './App';
 
-window.mui = mui;
-
 import loading_img from './statics/images/image-loading.png';
 import loading_gif from './statics/images/loading.gif';
 
@@ -34,8 +30,6 @@ import './styles/icons-extra.css';
 import './styles/iconfont.css';
 import './styles/common.css';
 import './styles/mui.picker.all.css';
-
-mui.init();
 
 Vue.use(VueWechatTitle);
 Vue.use(VueLazyload, {

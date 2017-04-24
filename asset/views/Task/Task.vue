@@ -23,10 +23,10 @@
           </div>
           <div class="subTitle">
             <span class="questions">{{ task.description }}</span>
-            <span class="time">倒计时1小时2分钟</span>
+            <span class="time"></span>
           </div>
           <div class="link">
-            <a href="waitAnswerList.html">{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
+            <a >{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
           </div>
         </div>
       </div>

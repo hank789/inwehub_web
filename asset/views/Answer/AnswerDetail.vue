@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="mui-row buttons" v-show="answer.answers.length==0">
+      <div class="mui-row buttons" v-show="answer.question.status==2">
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
                   @tap.stop.prevent="$router.push('/answerTime/' + answer.question.id)"><span
@@ -42,7 +42,18 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-answer" v-show="answer.answers.length > 0">
+      <div class="mui-table-view timeEnd" v-show="answer.question.status==4">
+        <div class="mui-table-view-cell">
+
+          <div class="countDown">{{ answer.question.status_description }}</div>
+
+          <div class="mui-content-padded">
+            <button type="button" class="mui-btn mui-btn-primary mui-btn-block" @tap.stop.prevent="$router.push('/realAnswer/' + id)">立即回答</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mui-table-view detail-answer" v-show="answer.question.status==6">
         <div class="mui-table-view-cell">
           <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
@@ -55,14 +66,14 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-comment" v-show="answer.feedback.length == 0">
+      <div class="mui-table-view detail-comment" v-show="answer.question.status==6">
         <div class="mui-table-view-cell">
           暂无评价
         </div>
       </div>
 
 
-      <div class="mui-table-view detail-comment-result" v-show="answer.feedback.length > 0">
+      <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
         <div class="mui-table-view-cell">
           评价：<span class="mui-icon mui-icon-star"></span>
           <p>{{ answer.feedback.description }}</p>
@@ -81,6 +92,7 @@
 
   const AnswerDetail = {
     data: () => ({
+      id:null,
       answer: {
         answers:[],
         question:{},
@@ -114,6 +126,7 @@
         return;
       }
 
+      this.id = id;
 
       addAccessToken().post(createAPI(`question/info`), {id: id},
         {
@@ -194,5 +207,14 @@
   .detail-comment {
     margin-top: 15px;
     text-align: center;
+  }
+
+  .timeEnd{
+    margin-top:25px;
+    margin-bottom:25px;
+  }
+  .timeEnd .countDown{
+    text-align:center;
+    color:orange;
   }
 </style>

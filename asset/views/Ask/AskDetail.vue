@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="mui-table-view-cell question">
-          {{ ask.question.description }}
-            <span class="timeAgo"><timeago :since="timeago(ask.question.created_at)"></timeago></span>
+            {{ ask.question.description }}
+            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
           <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span>
         </div>
       </div>
@@ -69,7 +69,7 @@
               <div class="timeline-icon"></div>
               <div class="timeline-content">
                 {{ item.title }}<br/>
-                <timeago :since="timeago(item.created_at)"></timeago>
+                <timeago :since="getTime(item.created_at)"></timeago>
               </div>
             </div>
           </div>
@@ -91,15 +91,16 @@
     data: () => ({
       ask: {
         answers: [],
-        question: {},
-        feedback: {}
+        question: {created_at:''},
+        feedback: {},
+        timeline:{}
       },
       id: 0,
       loading: true,
       loading_gif: loading_gif
     }),
     methods: {
-      timeago(time) {
+      getTime(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
         return newDate;
