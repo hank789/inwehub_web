@@ -14,56 +14,23 @@
 
     <div class="mui-content task-list" v-if="nothing == 0">
 
-      <div class="mui-table-view">
+      <div class="mui-table-view" v-for="(task, index) in tasks">
         <div class="mui-table-view-cell">
           <div class="title">
             <span class="msg">您有新的任务</span>
-            <span class="type">提问</span>
-            <span class="time">12分钟前</span>
+            <span class="type">{{ task.task_type_description }}</span>
+            <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
           </div>
           <div class="subTitle">
-            <span class="questions">SAP是个好ERP么?</span>
+            <span class="questions">{{ task.description }}</span>
             <span class="time">倒计时1小时2分钟</span>
           </div>
           <div class="link">
-            <a href="waitAnswerList.html">需要前往 确认回答，请点击前往<span class="mui-icon mui-icon-arrowright"></span> </a>
+            <a href="waitAnswerList.html">{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
           </div>
         </div>
       </div>
 
-      <div class="mui-table-view">
-        <div class="mui-table-view-cell">
-          <div class="title">
-            <span class="msg">您有新的任务</span>
-            <span class="type">提问</span>
-            <span class="time">12分钟前</span>
-          </div>
-          <div class="subTitle">
-            <span class="questions">SAP是个好ERP么?</span>
-            <span class="time">倒计时1小时2分钟</span>
-          </div>
-          <div class="link">
-            <a href="waitAnswerList.html">需要前往 确认回答，请点击前往<span class="mui-icon mui-icon-arrowright"></span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mui-table-view">
-        <div class="mui-table-view-cell">
-          <div class="title">
-            <span class="msg">您有新的任务</span>
-            <span class="type">提问</span>
-            <span class="time">12分钟前</span>
-          </div>
-          <div class="subTitle">
-            <span class="questions">SAP是个好ERP么?</span>
-            <span class="time">倒计时1小时2分钟</span>
-          </div>
-          <div class="link">
-            <a href="myAskDetailAnswer.html">需要前往查看回答并进行点评<span class="mui-icon mui-icon-arrowright"></span></a>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mui-content" v-if="nothing==1">
@@ -98,6 +65,13 @@
         }
         return this.tasks.length ? 0 : 1;
       }
+    },
+    methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      },
     },
     created () {
 
