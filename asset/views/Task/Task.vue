@@ -15,7 +15,8 @@
     <div class="mui-content task-list" v-if="nothing == 0">
 
       <div class="mui-table-view" v-for="(task, index) in tasks">
-        <div class="mui-table-view-cell">
+
+        <div class="mui-table-view-cell" v-if="task.task_type == 1" @tap.stop.prevent="$router.push('/answer/' + task.object_id)">
           <div class="title">
             <span class="msg">您有新的任务</span>
             <span class="type">{{ task.task_type_description }}</span>
@@ -29,8 +30,23 @@
             <a >{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
           </div>
         </div>
-      </div>
 
+        <div class="mui-table-view-cell" v-else-if="task.task_type == 2" @tap.stop.prevent="$router.push('/answer/' + task.object_id)">
+          <div class="title">
+            <span class="msg">您有新的任务</span>
+            <span class="type">{{ task.task_type_description }}</span>
+            <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
+          </div>
+          <div class="subTitle">
+            <span class="questions">{{ task.description }}</span>
+            <span class="time"></span>
+          </div>
+          <div class="link">
+            <a >{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="mui-content" v-if="nothing==1">

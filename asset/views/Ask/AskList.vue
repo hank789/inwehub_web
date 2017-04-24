@@ -176,7 +176,7 @@
   .list-ask .list-ask-item .title{
     line-height:30px;
   }
-  
+
   .list-ask .list-ask-item {
     margin-top: 10px;
     position: relative;

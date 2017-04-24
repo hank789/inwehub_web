@@ -27,34 +27,33 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-answer" v-show="ask.answers.length > 0">
+      <div class="mui-table-view detail-answer" v-show="ask.question.status==6||ask.question.status==7">
         <div class="mui-table-view-cell">
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
 
             <p>
-              <timeago :since="ask.answers[0]?timeago(ask.answers[0].created_at):''"></timeago>
+              <timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago>
             </p>
           </div>
         </div>
         <div class="mui-table-view-cell question">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
-
         </div>
       </div>
 
-      <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0 && ask.answers.length > 0">
+      <div class="mui-table-view detail-comment" v-show="ask.question.status==6">
         <div class="mui-table-view-cell">
           <div class="mui-content-padded">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                     @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价
             </button>
           </div>
         </div>
       </div>
 
-      <div class="mui-table-view detail-comment-result" v-show="ask.feedback.answer_id">
+      <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
         <div class="mui-table-view-cell">
           评价：<span class="mui-icon mui-icon-star"></span>
           <p>{{ ask.feedback.description }}</p>
