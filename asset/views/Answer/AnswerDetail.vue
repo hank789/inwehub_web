@@ -22,7 +22,7 @@
         </div>
         <div class="mui-table-view-cell question">
           {{ answer.question?answer.question.description:'' }}
-          <span class="timeAgo"><timeago :since="answer.question?answer.question.created_at:''"></timeago></span>
+          <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
           <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
         </div>
       </div>
@@ -47,7 +47,7 @@
           <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ answer.answers[0]?answer.answers[0].user_name:'' }}
-            <p><timeago :since="answer.answers[0]?answer.answers[0].created_at:''"></timeago></p>
+            <p><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></p>
           </div>
         </div>
         <div class="mui-table-view-cell question">
@@ -91,6 +91,13 @@
     }),
     mounted(){
 
+    },
+    methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      }
     },
     created () {
       let id = parseInt(this.$route.params.id);

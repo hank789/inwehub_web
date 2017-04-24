@@ -1,138 +1,153 @@
 <template>
   <div>
-      <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title">受理成功</h1>
-      </header>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">受理成功</h1>
+    </header>
 
-      <div class="mui-content loading" v-show="loading">
-        <div class="loading">
-          <img :src="loading_gif"/>
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
+    <div class="mui-content" v-show="!loading">
+      <div class="mui-table-view detail-ask">
+        <div class="mui-table-view-cell">
+          <img class="mui-media-object mui-pull-left" :src="ask.question.user_avatar_url">
+          <div class="mui-media-body">
+            {{ ask.question.user_name }}
+
+          </div>
+        </div>
+        <div class="mui-table-view-cell question">
+          {{ ask.question.description }}
+            <span class="timeAgo"><timeago :since="timeago(ask.question.created_at)"></timeago></span>
+          <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span>
         </div>
       </div>
 
-      <div class="mui-content" v-show="!loading">
-        <div class="mui-table-view detail-ask">
-          <div class="mui-table-view-cell">
-            <img class="mui-media-object mui-pull-left" :src="ask.question.user_avatar_url">
-            <div class="mui-media-body">
-              {{ ask.question.user_name }}
-            </div>
-          </div>
-          <div class="mui-table-view-cell question">
-            {{ ask.question.description }}
-            <span class="timeAgo"><timeago :since="ask.question.created_at"></timeago></span>
-            <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span>
+      <div class="mui-table-view detail-answer" v-show="ask.answers.length > 0">
+        <div class="mui-table-view-cell">
+          <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
+          <div class="mui-media-body">
+            {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
+
+            <p>
+              <timeago :since="ask.answers[0].created_at?timeago(ask.answers[0].created_at):''"></timeago>
+            </p>
           </div>
         </div>
+        <div class="mui-table-view-cell question">
+          {{ ask.answers[0] ? ask.answers[0].content : '' }}
 
-        <div class="mui-table-view detail-answer" v-show="ask.answers.length > 0">
-          <div class="mui-table-view-cell">
-            <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
-            <div class="mui-media-body">
-              {{ ask.answers[0]?ask.answers[0].user_name:'' }}
-              <p><timeago :since="ask.answers[0]?ask.answers[0].created_at:''"></timeago></p>
-            </div>
-          </div>
-          <div class="mui-table-view-cell question">
-            {{ ask.answers[0]?ask.answers[0].content:'' }}
         </div>
-        </div>
+      </div>
 
-        <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0 && ask.answers.length > 0">
-          <div class="mui-table-view-cell">
-            <div class="mui-content-padded">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"   @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价</button>
-            </div>
+      <div class="mui-table-view detail-comment" v-show="ask.feedback.length == 0 && ask.answers.length > 0">
+        <div class="mui-table-view-cell">
+          <div class="mui-content-padded">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+                    @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价
+            </button>
           </div>
         </div>
+      </div>
 
-        <div class="mui-table-view detail-comment-result" v-show="ask.feedback.answer_id">
-          <div class="mui-table-view-cell">
-            评价：<span class="mui-icon mui-icon-star"></span>
-            <p>{{ ask.feedback.description }}</p>
-          </div>
+      <div class="mui-table-view detail-comment-result" v-show="ask.feedback.answer_id">
+        <div class="mui-table-view-cell">
+          评价：<span class="mui-icon mui-icon-star"></span>
+          <p>{{ ask.feedback.description }}</p>
         </div>
+      </div>
 
-        <div class="mui-table-view detail-ask-timeline">
-          <div class="mui-table-view-cell">
-            <div class="timeline timeline-collapsing">
+      <div class="mui-table-view detail-ask-timeline">
+        <div class="mui-table-view-cell">
+          <div class="timeline timeline-collapsing">
 
-              <div class="timeline-block"  v-for="(item, index) in ask.timeline">
-                <div class="timeline-icon"></div>
-                <div class="timeline-content">
-                  {{ item.title }}<br/>
-                  <timeago :since="item.created_at"></timeago>
-                </div>
+            <div class="timeline-block" v-for="(item, index) in ask.timeline">
+              <div class="timeline-icon"></div>
+              <div class="timeline-content">
+                {{ item.title }}<br/>
+                <timeago :since="timeago(item.created_at)"></timeago>
               </div>
             </div>
           </div>
         </div>
-        <div class="status mui-clearfix mb70">
-          <i class="mui-icon iconfont icon-success"></i>
-          {{ ask.question.status_description }}
-        </div>
+      </div>
+      <div class="status mui-clearfix mb70">
+        <i class="mui-icon iconfont icon-success"></i>
+        {{ ask.question.status_description }}
+
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-  import { NOTICE } from '../../stores/types';
-  import { createAPI, addAccessToken } from '../../utils/request';
+  import {NOTICE} from '../../stores/types';
+  import {createAPI, addAccessToken} from '../../utils/request';
   const AskDetail = {
-        data: () => ({
-            ask:{
-                answers:[],
-                question:{},
-                feedback:{}
-            },
-            id:0,
-            loading:true,
-            loading_gif:loading_gif
-        }),
-       created () {
-           let id = parseInt(this.$route.params.id);
+    data: () => ({
+      ask: {
+        answers: [],
+        question: {},
+        feedback: {}
+      },
+      id: 0,
+      loading: true,
+      loading_gif: loading_gif
+    }),
+    methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      }
+    },
+    created () {
+      let id = parseInt(this.$route.params.id);
 
-           if ( !id ) {
-             this.$store.dispatch(NOTICE, cb => {
-               cb({
-                 text: '发生一些错误',
-                 time: 1500,
-                 status: false
-               });
-             });
-             this.$router.back();
-             return;
-           }
+      if (!id) {
+        this.$store.dispatch(NOTICE, cb => {
+          cb({
+            text: '发生一些错误',
+            time: 1500,
+            status: false
+          });
+        });
+        this.$router.back();
+        return;
+      }
 
-         this.id=id;
+      this.id = id;
 
-         addAccessToken().post(createAPI(`question/info`),{id:id},
-           {
-             validateStatus: status => status === 200
-           }
-         )
-           .then(response => {
+      addAccessToken().post(createAPI(`question/info`), {id: id},
+        {
+          validateStatus: status => status === 200
+        }
+      )
+        .then(response => {
 
-             var code = response.data.code;
-             if (code !== 1000) {
-               mui.alert(response.data.message);
-               this.$router.go(-1);
-             }
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
 
-              this.ask = response.data.data;
-              this.loading = 0;
-           })
-           .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
-             this.$store.dispatch(NOTICE, cb => {
-               cb({
-                 text: data.message,
-                 time: 2000,
-                 status: false
-               });
-             });
-           })
-       }
+          this.ask = response.data.data;
+          this.loading = 0;
+        })
+        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: data.message,
+              time: 2000,
+              status: false
+            });
+          });
+        })
+    }
   }
   export default AskDetail;
 </script>
@@ -148,23 +163,25 @@
     position: absolute;
     bottom: 5px;
     left: 15px;
-    color:#999;
+    color: #999;
   }
 
   .detail-ask .question .amount {
     position: absolute;
     bottom: 5px;
     right: 15px;
-    color:#999;
+    color: #999;
   }
-  .detail-ask .question .amount b{
-    color:#f85f48;
-    font-weight:normal;
+
+  .detail-ask .question .amount b {
+    color: #f85f48;
+    font-weight: normal;
   }
 
   .detail-ask-timeline {
-    margin-top:15px;
+    margin-top: 15px;
   }
+
   .timeline {
     box-sizing: border-box;
     background: #fff;
@@ -264,7 +281,6 @@
     content: "";
   }
 
-
   .timeline.timeline-collapsing::before {
     left: auto;
     margin-left: 30px;
@@ -290,29 +306,31 @@
     margin-left: -130px;
     text-align: right;
   }
-  .status{
+
+  .status {
     background-color: #fff;
-    margin-top:15px;
-    padding:20px;
+    margin-top: 15px;
+    padding: 20px;
   }
-  .status .mui-icon{
-    float:left;
-    font-size:30px;
-    color:#007aff;
+
+  .status .mui-icon {
+    float: left;
+    font-size: 30px;
+    color: #007aff;
     margin-right: 20px;
   }
 
-  .detail-answer{
-    margin-top:15px;
+  .detail-answer {
+    margin-top: 15px;
   }
 
-  .detail-comment{
-    margin-top:15px;
+  .detail-comment {
+    margin-top: 15px;
     text-align: center;
   }
 
-  .detail-comment-result{
-    margin-top:15px;
+  .detail-comment-result {
+    margin-top: 15px;
     text-align: left;
   }
 </style>

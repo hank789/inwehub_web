@@ -26,7 +26,7 @@
                     <div class="text">{{ ask.description }}</div>
                   </div>
                   <div class="mui-col-xs-4">
-                    <div class="timeago"><timeago :since="ask.created_at"></timeago></div>
+                    <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@
                     <div class="text">{{ ask.description }}</div>
                   </div>
                   <div class="mui-col-xs-4">
-                    <div class="timeago"><timeago :since="ask.created_at"></timeago></div>
+                    <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="mui-media-body answer">
                   <span class="username">{{ ask.answer_username }}</span>
-                  <span class="timeago"><timeago :since="ask.answer_time"></timeago></span>
+                  <span class="timeago"><timeago :since="timeago(ask.answer_time)"></timeago></span>
                   <p class='mui-ellipsis'> {{ ask.status_description }}<span
                     class="mui-icon mui-icon-arrowright"></span></p>
                 </div>
@@ -121,6 +121,13 @@
       loading:true,
       loading_gif:loading_gif
     }),
+    methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      },
+    },
     computed: {
       nothing () {
         if (this.loading) {

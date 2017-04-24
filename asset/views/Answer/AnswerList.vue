@@ -23,7 +23,7 @@
                   <div class="text">{{ answer.description }}</div>
                 </div>
                 <div class="mui-col-xs-4">
-                  <div class="timeago"><timeago :since="answer.created_at"></timeago></div>
+                  <div class="timeago"><timeago :since="timeago(answer.created_at)"></timeago></div>
                 </div>
               </div>
             </div>
@@ -81,6 +81,13 @@
     },
     mounted(){
 
+    },
+    methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      }
     },
     created () {
       addAccessToken().post(createAPI(`answer/myList`), {},
