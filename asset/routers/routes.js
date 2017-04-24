@@ -171,6 +171,10 @@ const routes = [
   { // message
     path: '/message',
     component: require('../views/message.vue'),
+  },
+  { // message
+    path: '/*',
+    component: require('../views/404.vue'),
   }
 ];
 
