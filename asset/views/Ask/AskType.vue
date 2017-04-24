@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div class="mui-content mui-row mui-fullscreen">
+      <div class="mui-content mui-row mui-fullscreen" v-show="!loading">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
             <template v-for="(type, index) in types">
