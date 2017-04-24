@@ -42,6 +42,12 @@
         </div>
       </div>
 
+      <div class="mui-table-view timeEnd" v-show="answer.question.status==5">
+        <div class="mui-table-view-cell">
+            您已拒绝回答该问题
+       </div>
+      </div>
+
       <div class="mui-table-view timeEnd" v-show="answer.question.status==4">
         <div class="mui-table-view-cell">
 

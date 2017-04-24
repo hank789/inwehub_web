@@ -26,7 +26,7 @@
 
             <textarea placeholder="谈谈您的感受！" v-model="description"></textarea>
             <div class="button-wrapper">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="submit">提交
               </button>
             </div>
@@ -72,6 +72,15 @@
       },
       submit(){
 
+        if (!this.description) {
+          mui.toast('请填写拒绝理由！');
+          return;
+        }
+
+        if (!this.tags) {
+          mui.toast('请选择标签！');
+          return;
+        }
 
         var data = {
           tags: this.sTags.join(','),
