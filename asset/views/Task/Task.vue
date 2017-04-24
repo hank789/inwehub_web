@@ -16,7 +16,7 @@
 
       <div class="mui-table-view" v-for="(task, index) in tasks">
 
-        <div class="mui-table-view-cell" v-if="task.task_type == 1" @tap.stop.prevent="$router.push('/answer/' + task.object_id)">
+        <div class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)" v-if="task.task_type == 1">
           <div class="title">
             <span class="msg">您有新的任务</span>
             <span class="type">{{ task.task_type_description }}</span>
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="mui-table-view-cell" v-else-if="task.task_type == 2" @tap.stop.prevent="$router.push('/answer/' + task.object_id)">
+        <div class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)" v-else-if="task.task_type == 2">
           <div class="title">
             <span class="msg">您有新的任务</span>
             <span class="type">{{ task.task_type_description }}</span>
