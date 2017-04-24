@@ -70,7 +70,7 @@
     },
     created () {
 
-      var askTypes = localEvent.getLocalItem('ask_types2');
+      //var askTypes = localEvent.getLocalItem('ask_types2');
 
       //if (askTypes.length == 0 && askTypes != 'undefined') {
         addAccessToken().post(createAPI(`question/request`),{},
