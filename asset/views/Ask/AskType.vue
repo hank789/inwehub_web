@@ -72,7 +72,7 @@
 
       var askTypes = localEvent.getLocalItem('ask_types2');
 
-      if (askTypes.length == 0 && askTypes != 'undefined') {
+      //if (askTypes.length == 0 && askTypes != 'undefined') {
         addAccessToken().post(createAPI(`question/request`),{},
           {
             validateStatus: status => status === 200
@@ -91,6 +91,7 @@
             this.loading=0;
           })
           .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
+            mui.alert(data.message);
             this.$store.dispatch(NOTICE, cb => {
               cb({
                 text: data.message,
@@ -99,10 +100,12 @@
               });
             });
           })
+      /*
       } else {
           this.$store.dispatch(ASK_TYPES_SET, askTypes);
           this.loading=0;
       }
+      */
     }
   }
   export default Ask;
