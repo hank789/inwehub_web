@@ -55,7 +55,7 @@
 
       <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<span class="mui-icon mui-icon-star"></span>
+          评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
           <p>{{ ask.feedback.description }}</p>
         </div>
       </div>
@@ -88,16 +88,25 @@
   import {createAPI, addAccessToken} from '../../utils/request';
   const AskDetail = {
     data: () => ({
+      showRating:false,
+      readOnly:true,
       ask: {
         answers: [],
         question: {created_at:''},
-        feedback: {},
+        feedback: {
+          rate_star:0
+        },
         timeline:{}
       },
       id: 0,
       loading: true,
       loading_gif: loading_gif
     }),
+    computed: {
+      rating() {
+        return this.ask.feedback.rate_star;
+      }
+    },
     methods: {
       getTime(time) {
         let newDate = new Date();
@@ -332,5 +341,8 @@
   .detail-comment-result {
     margin-top: 15px;
     text-align: left;
+  }
+  .star-rating{
+    float:right;
   }
 </style>

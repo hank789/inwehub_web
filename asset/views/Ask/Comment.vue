@@ -18,6 +18,7 @@
               <textarea v-model.trim="description" placeholder="在这里留下你的反馈"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
+            <star-rating @rating-selected ="setRating" :star-size="30" :show-rating="showRating"></star-rating>
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="submit">提交
@@ -39,8 +40,10 @@
 
   const Refuse = {
     data: () => ({
+      showRating:false,
       id: null,
       description: '',
+      rateStar:0,
       descMaxLength: 500
     }),
     computed: {
@@ -58,8 +61,9 @@
         var data = {
           answer_id: this.id,
           description: this.description,
-          rate_star: 1
+          rate_star: this.rateStar
         };
+
         addAccessToken().post(createAPI(`answer/feedback`), data,
           {
             validateStatus: status => status === 200
@@ -84,6 +88,9 @@
               });
             });
           })
+      },
+      setRating: function(rating){
+        this.rateStar= rating;
       }
     },
     watch: {
