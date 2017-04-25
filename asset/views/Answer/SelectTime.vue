@@ -69,7 +69,10 @@
         let picker = new mui.DtPicker(param);
         picker.show((rs) => {
           picker.dispose();
-          var selectTime = rs.value;
+          var selectTime = rs.value.replace(':', '');
+          if (selectTime.length == 3) {
+              selectTime = '0' + selectTime;
+          }
           this.submit(selectTime);
         });
       },
