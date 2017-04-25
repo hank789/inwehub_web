@@ -18,6 +18,7 @@
 
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">发布</button>
+              <div class="desc">注意：发布后将不能更改，请再次检查内容！</div>
             </div>
           </form>
         </div>
@@ -70,7 +71,7 @@
             mui.toast(response.data.message);
 
             var id = response.data.data.id;
-            this.$router.replace('/answer/' + id);
+            this.$router.go(-1);
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
@@ -106,7 +107,7 @@
   }
   .form-realAnswer textarea {
     width:100%;
-    height:300px;
+    height:200px;
     border:1px solid #efefef;
   }
   .form-realAnswer .title{
@@ -132,6 +133,10 @@
     position: absolute;
     right: 10px;
     bottom: 30px;
+    color:#999;
+  }
+  .desc{
+    padding-top:15px;
     color:#999;
   }
 </style>
