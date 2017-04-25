@@ -12,6 +12,9 @@
       </div>
     </div>
 
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+
     <div class="mui-content mb70" v-if="nothing == 0">
       <div class="list-answer">
 
@@ -46,6 +49,9 @@
       </div>
     </div>
 
+    </div>
+    </div>
+
     <div class="mui-content" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
@@ -67,6 +73,8 @@
 
   const AnswerList = {
     data: () => ({
+      topId: 0,
+      bottomId: 0,
       answers: [],
       loading:true,
       loading_gif:loading_gif
@@ -80,41 +88,117 @@
       }
     },
     mounted(){
+      mui.init({
+        pullRefresh: {
+          container: '#pullrefresh',
+          down: {
+            callback: pulldownRefresh
+          },
+          up: {
+            contentrefresh: '正在加载...',
+            callback: pullupRefresh
+          }
+        }
+      });
 
+      var that = this;
+
+      function pulldownRefresh() {
+        that.getPrevList();
+        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+      }
+
+      function pullupRefresh() {
+        that.getNextList();
+        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+      }
+
+      if (mui.os.plus) {
+        mui.plusReady(function () {
+          setTimeout(function () {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          }, 1000);
+
+        });
+      } else {
+        mui.ready(function () {
+          mui('#pullrefresh').pullRefresh().pullupLoading();
+        });
+      }
     },
     methods: {
       timeago(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
         return newDate;
-      }
-    },
-    created () {
-      addAccessToken().post(createAPI(`answer/myList`), {},
-        {
-          validateStatus: status => status === 200
-        }
-      )
-        .then(response => {
-
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            this.$router.go(-1);
+      },
+      getPrevList(){
+        addAccessToken().post(createAPI(`answer/myList`), {top_id: this.topId},
+          {
+            validateStatus: status => status === 200
           }
+        )
+          .then(response => {
 
-          this.answers = response.data.data;
-          this.loading=0;
-        })
-        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              this.$router.go(-1);
+            }
+
+            if (response.data.data.length > 0) {
+              this.answers = response.data.data.concat(this.answers);
+              var firstItem = response.data.data.shift();
+              this.topId = firstItem.id;
+            }
+            this.loading = 0;
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
             });
-          });
-        })
+          })
+      },
+      getNextList() {
+        addAccessToken().post(createAPI(`answer/myList`), {bottom_id: this.bottomId},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              this.$router.go(-1);
+            }
+
+            if (response.data.data.length > 0) {
+              this.answers = this.answers.concat(response.data.data);
+              var lastItem = response.data.data.pop();
+              this.bottomId = lastItem.id;
+
+              if (!this.topId) {
+                var firstItem = response.data.data.shift();
+                this.topId = firstItem.id;
+              }
+            }
+            this.loading = 0;
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
+            });
+          })
+      }
     }
   }
   export default AnswerList;

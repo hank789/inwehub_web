@@ -12,86 +12,91 @@
       </div>
     </div>
 
-    <div class="mui-content" v-if="nothing == 0">
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper" >
+    <div class="mui-scroll">
 
-      <div class="list-ask">
+      <div class="mui-content" v-if="nothing == 0">
 
-        <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
+        <div class="list-ask">
 
-          <template v-if="!ask.answer_user_id">
-            <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-              <div class="title">
-                <div class="mui-row">
-                  <div class="mui-col-xs-8">
-                    <div class="text">{{ ask.description }}</div>
+          <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
+
+            <template v-if="!ask.answer_user_id">
+              <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
+                <div class="title">
+                  <div class="mui-row">
+                    <div class="mui-col-xs-8">
+                      <div class="text">{{ ask.description }}</div>
+                    </div>
+                    <div class="mui-col-xs-4">
+                      <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
+                    </div>
                   </div>
-                  <div class="mui-col-xs-4">
-                    <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
+                </div>
+                <div class="person">
+                  <div class="avatar">
+                    <div class="avatarInner">
+                      <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
+                    </div>
                   </div>
+                  <span class="username">{{ ask.user_name }}</span>
+                  <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
+                </div>
+                <div class="site-desc">
+                  {{ ask.status_description }}
+                    <span class="mui-icon mui-icon-arrowright"></span>
                 </div>
               </div>
-              <div class="person">
-                <div class="avatar">
-                  <div class="avatarInner">
-                    <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
-                  </div>
-                </div>
-                <span class="username">{{ ask.user_name }}</span>
-                <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
-              </div>
-              <div class="site-desc">
-                {{ ask.status_description }}
-                  <span class="mui-icon mui-icon-arrowright"></span>
-              </div>
-            </div>
-          </template>
+            </template>
 
-          <template v-else>
-            <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-              <div class="title">
-                <div class="mui-row">
-                  <div class="mui-col-xs-8">
-                    <div class="text">{{ ask.description }}</div>
+            <template v-else>
+              <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
+                <div class="title">
+                  <div class="mui-row">
+                    <div class="mui-col-xs-8">
+                      <div class="text">{{ ask.description }}</div>
+                    </div>
+                    <div class="mui-col-xs-4">
+                      <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
+                    </div>
                   </div>
-                  <div class="mui-col-xs-4">
-                    <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
+                </div>
+                <div class="person">
+                  <div class="avatar">
+                    <div class="avatarInner">
+                      <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
+                    </div>
                   </div>
+                  <span class="username">{{ ask.user_name }}</span>
+                  <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
                 </div>
               </div>
-              <div class="person">
-                <div class="avatar">
-                  <div class="avatarInner">
-                    <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
+
+              <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
+                <a href="javascript:;">
+                  <div class="avatar mui-media-object">
+                    <div class="avatarInner">
+                      <img :src="ask.answer_user_avatar_url?ask.answer_user_avatar_url:'images/uicon.jpg'"
+                           class="avatar"/>
+                    </div>
                   </div>
-                </div>
-                <span class="username">{{ ask.user_name }}</span>
-                <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
+                  <div class="mui-media-body answer">
+                    <span class="username">{{ ask.answer_username }}</span>
+                    <span class="timeago"><timeago :since="timeago(ask.answer_time)"></timeago></span>
+                    <p class='mui-ellipsis'> {{ ask.status_description }}<span
+                      class="mui-icon mui-icon-arrowright"></span></p>
+                  </div>
+                </a>
               </div>
-            </div>
+            </template>
+          </div>
 
-            <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-              <a href="javascript:;">
-                <div class="avatar mui-media-object">
-                  <div class="avatarInner">
-                    <img :src="ask.answer_user_avatar_url?ask.answer_user_avatar_url:'images/uicon.jpg'"
-                         class="avatar"/>
-                  </div>
-                </div>
-                <div class="mui-media-body answer">
-                  <span class="username">{{ ask.answer_username }}</span>
-                  <span class="timeago"><timeago :since="timeago(ask.answer_time)"></timeago></span>
-                  <p class='mui-ellipsis'> {{ ask.status_description }}<span
-                    class="mui-icon mui-icon-arrowright"></span></p>
-                </div>
-              </a>
-            </div>
-          </template>
-        </div>
-
-        <div class="mb70">
+          <div class="mb70">
+          </div>
         </div>
       </div>
-    </div>
+
+    </div></div>
 
     <div class="mui-content" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
@@ -117,6 +122,8 @@
 
   const Asks = {
     data: () => ({
+      topId: 0,
+      bottomId: 0,
       asks: [],
       loading:true,
       loading_gif:loading_gif
@@ -127,6 +134,73 @@
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
         return newDate;
       },
+      getPrevList(){
+        addAccessToken().post(createAPI(`question/myList`), {top_id: this.topId},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              this.$router.go(-1);
+            }
+
+            if (response.data.data.length > 0) {
+              this.asks = response.data.data.concat(this.asks);
+              var firstItem = response.data.data.shift();
+              this.topId = firstItem.id;
+            }
+            this.loading = 0;
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
+            });
+          })
+      },
+      getNextList() {
+        addAccessToken().post(createAPI(`question/myList`), {bottom_id: this.bottomId},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              this.$router.go(-1);
+            }
+
+            if (response.data.data.length > 0) {
+              this.asks = this.asks.concat(response.data.data);
+              var lastItem = response.data.data.pop();
+              this.bottomId = lastItem.id;
+
+              if (!this.topId) {
+                var firstItem = response.data.data.shift();
+                this.topId = firstItem.id;
+              }
+            }
+            this.loading = 0;
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
+            });
+          })
+      }
     },
     computed: {
       nothing () {
@@ -137,34 +211,43 @@
       }
     },
     mounted(){
-
-    },
-    created () {
-      addAccessToken().post(createAPI(`question/myList`), {},
-        {
-          validateStatus: status => status === 200
-        }
-      )
-        .then(response => {
-
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            this.$router.go(-1);
+      mui.init({
+        pullRefresh: {
+          container: '#pullrefresh',
+          down: {
+            callback: pulldownRefresh
+          },
+          up: {
+            contentrefresh: '正在加载...',
+            callback: pullupRefresh
           }
+        }
+      });
 
-          this.asks = response.data.data;
-          this.loading = 0;
-        })
-        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
-            });
-          });
-        })
+      var that = this;
+
+      function pulldownRefresh() {
+        that.getPrevList();
+        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+      }
+
+      function pullupRefresh() {
+        that.getNextList();
+        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+      }
+
+      if (mui.os.plus) {
+        mui.plusReady(function () {
+          setTimeout(function () {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          }, 1000);
+
+        });
+      } else {
+        mui.ready(function () {
+          mui('#pullrefresh').pullRefresh().pullupLoading();
+        });
+      }
     }
   }
   export default Asks;
