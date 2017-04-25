@@ -98,10 +98,10 @@
 
     </div></div>
 
-    <div class="mui-content" v-if="nothing == 1">
+    <div class="mui-content list-empty" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
-          <div class="list-empty">
+          <div class="">
             <div class="title">暂无提问</div>
             <div class="subTitle">速速前往提问，开始你的英淘之旅！</div>
             <div class="buttons">
@@ -185,8 +185,12 @@
               this.bottomId = lastItem.id;
 
               if (!this.topId) {
-                var firstItem = response.data.data.shift();
-                this.topId = firstItem.id;
+                  if (response.data.data.length > 0) {
+                    var firstItem = response.data.data.shift();
+                    this.topId = firstItem.id;
+                  } else {
+                    this.topId = this.bottomId;
+                  }
               }
             }
             this.loading = 0;
@@ -219,6 +223,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
+            contentnomore:'',
             callback: pullupRefresh
           }
         }

@@ -52,10 +52,10 @@
     </div>
     </div>
 
-    <div class="mui-content" v-if="nothing == 1">
+    <div class="mui-content list-empty" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
-          <div class="list-empty">
+          <div class="">
             <div class="title">暂无任务</div>
             <div class="subTitle">稍安勿躁，是金子总会发光！平台正准备给您一展风采的机会呢！</div>
           </div>
@@ -96,6 +96,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
+            contentnomore:'',
             callback: pullupRefresh
           }
         }
@@ -183,8 +184,12 @@
               this.bottomId = lastItem.id;
 
               if (!this.topId) {
-                var firstItem = response.data.data.shift();
-                this.topId = firstItem.id;
+                if (response.data.data.length > 0) {
+                  var firstItem = response.data.data.shift();
+                  this.topId = firstItem.id;
+                } else {
+                  this.topId = this.bottomId;
+                }
               }
             }
             this.loading = 0;

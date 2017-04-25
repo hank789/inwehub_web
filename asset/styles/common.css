@@ -38,6 +38,8 @@ a{
 
 .list-empty {
   font-size:14px;
+  position:relative;
+  z-index:9;
 }
 .list-empty .title{
   text-align: center;
