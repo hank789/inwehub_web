@@ -81,7 +81,7 @@
 
       <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<span class="mui-icon mui-icon-star"></span>
+          评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
           <p>{{ answer.feedback.description }}</p>
         </div>
       </div>
@@ -98,6 +98,8 @@
 
   const AnswerDetail = {
     data: () => ({
+      showRating:false,
+      readOnly:true,
       id:null,
       answer: {
         answers:[],
@@ -107,6 +109,11 @@
       loading: true,
       loading_gif: loading_gif
     }),
+    computed: {
+      rating() {
+        return this.answer.feedback.rate_star;
+      }
+    },
     mounted(){
 
     },
@@ -222,5 +229,8 @@
   .timeEnd .countDown{
     text-align:center;
     color:orange;
+  }
+  .star-rating{
+    float:right;
   }
 </style>
