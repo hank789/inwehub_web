@@ -223,8 +223,8 @@
   }
 
   .timeEnd{
-    margin-top:25px;
-    margin-bottom:25px;
+    margin-top:15px;
+    margin-bottom:15px;
   }
   .timeEnd .countDown{
     text-align:center;
