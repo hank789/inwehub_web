@@ -79,6 +79,7 @@
         this.hide = info.hide;
         this.selectOther = info.selectOther;
       }
+      this.check();
     },
     methods: {
       selectMoney(money) {
@@ -99,6 +100,40 @@
         };
         this.$store.dispatch(ASK_INFO, info);
         this.$router.push('ask/type');
+      },
+      check(){
+        var t=this;
+        addAccessToken().post(createAPI(`question/request`), {},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+
+            if (code == 3000) {
+
+              mui.alert(response.data.message, null, null, function(){
+                  t.$router.push('/my');
+              });
+              return;
+            }
+
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
+            });
+          })
       },
       goAsk(){
         if (!this.type) {
