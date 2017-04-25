@@ -16,20 +16,16 @@
 
               <div class="title">请选择提问金额</div>
               <div class="category">
-                <span :class="money == 88 ?'active':''" @tap.stop.prevent="selectMoney(88)">88元</span>
-                <span :class="money == 188 ?'active':''" @tap.stop.prevent="selectMoney(188)">188元</span>
-                <!--<span>其他金额</span>-->
-                <!--<span class="active">88元</span>-->
-                <!--<span>188元</span>-->
-                <!--<span><input type="text" value=""/> </span>-->
+                <span :class="money == 88 &&  selectOther == false ?'active':''" @tap.stop.prevent="selectMoney(88)">88元</span>
+                <span :class="money == 188 &&  selectOther == false  ?'active':''" @tap.stop.prevent="selectMoney(188)">188元</span>
+                <span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>
+                <span v-show="selectOther" class="active"><input type="text" value="" placeholder="其他" v-model.number="money" /></span>
               </div>
               <div class="title">请选择分类问题：</div>
               <div class="select" v-show="type">已选择: <span class="active selected">{{ type }}</span></div>
               <div class="button-wrapper">
                 <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                         @tap.stop.prevent="selectType">点击选择分类
-
-
                 </button>
               </div>
             </form>
@@ -42,15 +38,10 @@
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="goAsk">立即提问
-
-
               </button>
             </div>
             <div class="options">
               <input type="checkbox" v-model="hide"/> 匿名
-
-
-
             </div>
           </div>
         </div>
@@ -68,6 +59,7 @@
     data: () => ({
       money: 0,
       description: '',
+      selectOther:false,
       hide: 0,
       descMaxLength: 500
     }),
@@ -85,20 +77,63 @@
         this.money = info.money;
         this.description = info.desc;
         this.hide = info.hide;
+        this.selectOther = info.selectOther;
       }
+      this.check();
     },
     methods: {
       selectMoney(money) {
-        this.money = money
+          if (!money) {
+              this.selectOther = true;
+              this.money = 88;
+          } else {
+            this.selectOther = false;
+            this.money = money
+          }
       },
       selectType () {
         var info = {
           money: this.money,
           desc: this.description,
-          hide: this.hide
+          hide: this.hide,
+          selectOther: this.selectOther
         };
         this.$store.dispatch(ASK_INFO, info);
         this.$router.push('ask/type');
+      },
+      check(){
+        var t=this;
+        addAccessToken().post(createAPI(`question/request`), {},
+          {
+            validateStatus: status => status === 200
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+
+            if (code == 3000) {
+
+              mui.alert(response.data.message, null, null, function(){
+                  t.$router.push('/my');
+              });
+              return;
+            }
+
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+          })
+          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: data.message,
+                time: 2000,
+                status: false
+              });
+            });
+          })
       },
       goAsk(){
         if (!this.type) {
@@ -108,6 +143,11 @@
 
         if (!this.money) {
           mui.toast('请选择提问金额');
+          return;
+        }
+
+        if (this.money < 88) {
+          mui.toast('提问金额不能小于88');
           return;
         }
 

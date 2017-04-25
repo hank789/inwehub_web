@@ -24,9 +24,13 @@
                     @tap.stop.prevent="selectTags(item)">{{ item }}</span>
             </div>
 
-            <textarea placeholder="谈谈您的感受！" v-model="description"></textarea>
+            <div class="textarea-wrapper">
+              <textarea v-model.trim="description"></textarea>
+              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+            </div>
+
             <div class="button-wrapper">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary mui-btn-outlined"
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="submit">提交
               </button>
             </div>
@@ -49,6 +53,7 @@
       tags: [],
       sTags: [],
       id:null,
+      descMaxLength: 500,
       description: '',
       loading: true,
       loading_gif: loading_gif
@@ -59,6 +64,9 @@
           return -1;
         }
         return this.answers.length ? 0 : 1;
+      },
+      descLength() {
+        return this.description.length;
       }
     },
     methods: {
@@ -72,6 +80,15 @@
       },
       submit(){
 
+        if (!this.description) {
+          mui.toast('请填写拒绝理由！');
+          return;
+        }
+
+        if (!this.tags) {
+          mui.toast('请选择标签！');
+          return;
+        }
 
         var data = {
           tags: this.sTags.join(','),
@@ -148,6 +165,13 @@
             });
           });
         })
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      }
     }
   }
   export default Refuse;
@@ -209,5 +233,16 @@
 
   .mui-content {
     background-color: #fff;
+  }
+
+  .textarea-wrapper {
+    position: relative;
+  }
+
+  .textarea-wrapper .counter {
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+    color: #999;
   }
 </style>

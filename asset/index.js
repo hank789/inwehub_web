@@ -21,6 +21,8 @@ import App from './App';
 
 import loading_img from './statics/images/image-loading.png';
 import loading_gif from './statics/images/loading.gif';
+import StarRating from 'vue-star-rating'
+Vue.component('star-rating', StarRating);
 
 window.loading_gif = loading_gif;
 
@@ -29,6 +31,7 @@ import './styles/icons-extra.css';
 import './styles/iconfont.css';
 import './styles/common.css';
 import './styles/mui.picker.all.css';
+
 
 Vue.use(VueWechatTitle);
 Vue.use(VueLazyload, {

@@ -42,6 +42,12 @@
         </div>
       </div>
 
+      <div class="mui-table-view timeEnd" v-show="answer.question.status==5">
+        <div class="mui-table-view-cell">
+            您已拒绝回答该问题
+       </div>
+      </div>
+
       <div class="mui-table-view timeEnd" v-show="answer.question.status==4">
         <div class="mui-table-view-cell">
 
@@ -53,7 +59,7 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-answer" v-show="answer.question.status==6">
+      <div class="mui-table-view detail-answer" v-show="answer.question.status==6 || answer.question.status==7">
         <div class="mui-table-view-cell">
           <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
@@ -75,7 +81,7 @@
 
       <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<span class="mui-icon mui-icon-star"></span>
+          评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
           <p>{{ answer.feedback.description }}</p>
         </div>
       </div>
@@ -92,6 +98,8 @@
 
   const AnswerDetail = {
     data: () => ({
+      showRating:false,
+      readOnly:true,
       id:null,
       answer: {
         answers:[],
@@ -101,6 +109,11 @@
       loading: true,
       loading_gif: loading_gif
     }),
+    computed: {
+      rating() {
+        return this.answer.feedback.rate_star;
+      }
+    },
     mounted(){
 
     },
@@ -210,11 +223,18 @@
   }
 
   .timeEnd{
-    margin-top:25px;
-    margin-bottom:25px;
+    margin-top:15px;
+    margin-bottom:15px;
   }
   .timeEnd .countDown{
     text-align:center;
     color:orange;
+  }
+  .star-rating{
+    float:right;
+  }
+
+  .detail-comment-result{
+    margin-top:15px;
   }
 </style>

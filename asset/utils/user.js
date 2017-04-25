@@ -86,7 +86,7 @@ function getUserInfo (user_id, cb) {
       };
     }
 
-    let user = response.data.data.user;
+    let user = response.data.data.info;
 
     let userLocal = {
       user_id: 0,
