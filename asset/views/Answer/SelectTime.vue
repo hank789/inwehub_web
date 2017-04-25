@@ -28,7 +28,7 @@
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken} from '../../utils/request';
-  import dPickerComponent from '../../components/date-picker/date-picker.vue';
+  import dPickerComponent from '../../components/picker/date-picker.vue';
 
   const SelectTime = {
     data: () => ({
