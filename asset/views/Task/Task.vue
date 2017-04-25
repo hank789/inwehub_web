@@ -8,7 +8,7 @@
 
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
       <div class="mui-scroll">
-        <ul class="mui-table-view mui-table-view-chevron">
+        <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
             <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)"
                  v-if="task.task_type == 1">
