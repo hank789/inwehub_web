@@ -86,6 +86,7 @@
               this.selectOther = true;
               this.money = 88;
           } else {
+            this.selectOther = false;
             this.money = money
           }
       },
