@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-answer" v-show="answer.question.status==6">
+      <div class="mui-table-view detail-answer" v-show="answer.question.status==6 || answer.question.status==7">
         <div class="mui-table-view-cell">
           <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
@@ -232,5 +232,9 @@
   }
   .star-rating{
     float:right;
+  }
+
+  .detail-comment-result{
+    margin-top:15px;
   }
 </style>
