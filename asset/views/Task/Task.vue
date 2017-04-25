@@ -6,12 +6,6 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron">
@@ -89,33 +83,36 @@
       }
     },
     mounted(){
-      mui.init({
-        pullRefresh: {
-          container: '#pullrefresh',
-          down: {
-            callback: this.pulldownRefresh
-          },
-          up: {
-            contentrefresh: '正在加载...',
-            callback: this.pullupRefresh
-          }
-        }
-      });
-
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-          setTimeout(function () {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }, 1000);
-
-        });
-      } else {
-        mui.ready(function () {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-        });
-      }
+        this.initPullRefresh();
     },
     methods: {
+      initPullRefresh(){
+        mui.init({
+          pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+              callback: this.pulldownRefresh
+            },
+            up: {
+              contentrefresh: '正在加载...',
+              callback: this.pullupRefresh
+            }
+          }
+        });
+
+        if (mui.os.plus) {
+          mui.plusReady(function () {
+            setTimeout(function () {
+              mui('#pullrefresh').pullRefresh().pullupLoading();
+            }, 10);
+
+          });
+        } else {
+          mui.ready(function () {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          });
+        }
+      },
       pulldownRefresh() {
         this.getPrevList();
         mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
