@@ -57,6 +57,7 @@
       <!--页面主内容区结束-->
     </div>
     <!--单页面结束-->
+    <!--个人信息页面开始-->
     <div id="account" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
@@ -79,30 +80,131 @@
                 </a>
               </li>
               <li class="mui-table-view-cell">
-                <a>姓名<span class="mui-pull-right" v-text="user.info.name"></span></a>
+                <a href="#account_name" class="mui-navigate-right">姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a id="showUserPicker">性别<span class="mui-pull-right" id="user_gender" v-text="genderName"></span></a>
+                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field" id="user_gender" v-text="genderName"></span></a>
               </li>
             </ul>
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
-                <a>公司<span class="mui-pull-right" v-text="user.info.company"></span></a>
+                <a href="#account_company" class="mui-navigate-right">公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a>职位<span class="mui-pull-right" v-text="user.info.title"></span></a>
+                <a href="#account_title" class="mui-navigate-right">职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a>手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
+                <a class="mui-navigate-right">手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a>邮箱地址<span class="mui-pull-right" v-text="user.info.email"></span></a>
+                <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+    <!--个人信息页面结束-->
+
+    <!--编辑姓名开始-->
+    <div id="account_name" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+          <span class="mui-icon mui-icon-left-nav"></span>个人信息
+        </button>
+        <h1 class="mui-center mui-title">编辑</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>姓名</label>
+                  <input type="text" class="mui-input-clear" v-model="user.info.name">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑姓名结束-->
+
+    <!--编辑公司开始-->
+    <div id="account_company" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+          <span class="mui-icon mui-icon-left-nav"></span>个人信息
+        </button>
+        <h1 class="mui-center mui-title">编辑</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>公司</label>
+                  <input type="text" class="mui-input-clear" v-model="user.info.company">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑公司结束-->
+
+    <!--编辑职位开始-->
+    <div id="account_title" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+          <span class="mui-icon mui-icon-left-nav"></span>个人信息
+        </button>
+        <h1 class="mui-center mui-title">编辑</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>职位</label>
+                  <input type="text" class="mui-input-clear" v-model="user.info.title">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑职位结束-->
+
+    <!--编辑邮箱地址开始-->
+    <div id="account_email" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+          <span class="mui-icon mui-icon-left-nav"></span>个人信息
+        </button>
+        <h1 class="mui-center mui-title">编辑</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>邮箱</label>
+                  <input type="text" class="mui-input-clear" v-model="user.info.email">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑邮箱地址结束-->
   </div>
 
 </template>
@@ -181,6 +283,8 @@
               mui.alert(response.data.message);
               return;
             }
+            mui.toast('保存成功');
+
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
@@ -357,6 +461,7 @@
           //return false;
         });
       }, false);
+      userPicker.pickers[0].setSelectedValue(this.user.info.gender,200);
 
     }
   }
@@ -503,15 +608,8 @@
   .mui-ios .mui-navbar .mui-bar .mui-title {
     position: static;
   }
-  /*问题反馈在setting页面单独的css*/
-  #feedback .mui-popover{
-    position: fixed;
+  .account-setting-field {
+    position: absolute;
+    right: 40px;
   }
-  #feedback .mui-table-view:last-child {
-    margin-bottom: 0px;
-  }
-  #feedback .mui-table-view:first-child {
-    margin-top: 0px;
-  }
-  /*问题反馈在setting页面单独的css==end*/
 </style>
