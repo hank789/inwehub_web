@@ -30,7 +30,7 @@
                   <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="user.info.avatar_url">
                   <div class="mui-media-body">
                     {{ user.info.name }}
-                    <p class='mui-ellipsis' v-show="user.info.title"><b>{{ user.info.title }}</b><b class="mui-badge3">V</b></p>
+                    <p class='mui-ellipsis' v-show="user.info.title"><b>{{ user.info.title }}</b></p>
                   </div>
                 </a>
               </li>
@@ -92,6 +92,9 @@
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_title" class="mui-navigate-right">职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a class="mui-navigate-right">手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
@@ -215,6 +218,7 @@
   import localEvent from '../../stores/localStorage';
   import popPickerComponent from '../../components/picker/poppicker.vue';
   import "../../js/mui.view";
+  import cityData from '../../components/city/city.data';
 
   export default {
     data: () => ({
@@ -231,7 +235,9 @@
         "女"
       ],
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      userPicker: {},
+      cityPicker: {}
     }),
     created () {
       addAccessToken().post(createAPI(`profile/info`), {},
@@ -261,12 +267,24 @@
         })
     },
     components: {
-      popPickerComponent
+      popPickerComponent,
+      cityData
     },
     computed: {
       genderName: function () {
         return this.gender_object[this.user.info.gender];
+      },
+      getUser: function () {
+        return this.user;
       }
+    },
+    updated: function() {
+      this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
+      this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
+      this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
+      let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
+      let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
+      document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
     },
     methods: {
       submitInfo: function () {
@@ -453,7 +471,6 @@
         }
       ]);
       var showUserPickerButton = document.getElementById('showUserPicker');
-      var userResult = document.getElementById('userResult');
       showUserPickerButton.addEventListener('tap', event => {
         userPicker.show(items => {
           this.user.info.gender = items[0].value;
@@ -461,8 +478,33 @@
           //return false;
         });
       }, false);
-      userPicker.pickers[0].setSelectedValue(this.user.info.gender,200);
 
+      //级联示例
+      var cityPicker = new mui.PopPicker({
+        layer: 2
+      });
+      cityPicker.setData(cityData);
+      var showCityPickerButton = document.getElementById('showCityPicker');
+      var cityResult = document.getElementById('user_province_city');
+      showCityPickerButton.addEventListener('tap', event => {
+        cityPicker.show(items => {
+          this.user.info.province = items[0].value;
+          this.user.info.city = items[1].value;
+          cityResult.innerText = items[0].text + " " + items[1].text;
+          console.log(items);
+          //返回 false 可以阻止选择框的关闭
+          //return false;
+        });
+      }, false);
+
+      this.userPicker = userPicker;
+      this.cityPicker = cityPicker;
+
+      if(this.user.info) {
+        this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
+        this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
+        this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
+      }
     }
   }
 </script>
