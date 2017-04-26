@@ -112,15 +112,12 @@
       speech(){
           var options = {};
           options.engine = 'iFly';
-          var text = "";
+          var t = this;
           plus.speech.startRecognize( options, function ( s ) {
-            text += s;
+            t.description += s;
           }, function ( e ) {
             mui.alert( "语音识别失败："+e.message );
           });
-          if (text.length > 0) {
-            this.description = text;
-          }
       },
       selectType () {
         var info = {
@@ -182,6 +179,11 @@
           return;
         }
 
+        if (this.money > 500) {
+          mui.toast('大爷，打赏钱有点多，提问金额的上限为500元');
+          return;
+        }
+
         if (!this.description) {
           mui.toast('请填写提问内容');
           return;
@@ -207,6 +209,9 @@
               return;
             }
 
+            var info = {};
+            this.$store.dispatch(ASK_INFO, info);
+
             var id = response.data.data.id;
             this.$router.push('ask/' + id);
           })
@@ -225,6 +230,12 @@
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
+        }
+      },
+      money:function(newMoney){
+        const askDetail = /^[0-9]+$/;
+        if (!askDetail.test(newMoney) && this.money) {
+            this.money = parseInt(this.money);
         }
       }
     }

@@ -44,7 +44,7 @@
               <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-gear"></span>设置与帮助</a>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#general" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span>意见与反馈</a>
+              <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span>意见与反馈</router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="javascript:void(0)" class="mui-navigate-right" @click="logOut"><span class="mui-icon mui-icon-close"></span>退出登录</a>
