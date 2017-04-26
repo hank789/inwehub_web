@@ -100,7 +100,7 @@ const routes = [
   },
   { //task
     path: '/task',
-    component: require('../views/Task/Task.vue'),
+    component: require('../views/Task/TaskListSub.vue'),
     meta: {
       title: '任务'
     },
@@ -108,6 +108,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  /*
   { //task sub
     path: '/task/list',
     component: require('../views/Task/TaskListSub.vue'),
@@ -118,6 +119,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  */
   { //ask-detail
     path: '/ask/:id',
     component: require('../views/Ask/AskDetail.vue'),
