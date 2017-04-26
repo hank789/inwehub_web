@@ -64,7 +64,7 @@
         <div class="mui-table-view-cell">
           <div class="timeline timeline-collapsing">
 
-            <div class="timeline-block" v-for="(item, index) in ask.timeline">
+            <div class="timeline-block" v-for="(item, index) in timelines">
               <div class="timeline-icon"></div>
               <div class="timeline-content">
                 {{ item.title }}<br/>
@@ -73,11 +73,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="status mui-clearfix mb70">
-        <i class="mui-icon iconfont icon-success"></i>
-        {{ ask.question.status_description }}
-
       </div>
     </div>
   </div>
@@ -105,6 +100,9 @@
     computed: {
       rating() {
         return this.ask.feedback.rate_star;
+      },
+      timelines() {
+          return this.ask.timeline.reverse();
       }
     },
     methods: {
@@ -224,12 +222,12 @@
 
   .timeline .timeline-icon {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 10px;
+    height: 10px;
     left: 50%;
     margin-left: -16px;
-    margin-top: -2px;
-    border: 2px solid #FF6961;
+    margin-top: 25px;
+    border: 2px solid #999;
     border-radius: 100%;
     background-color: white;
     text-align: center;
@@ -264,6 +262,7 @@
     position: relative;
     width: 45%;
     padding: 12px;
+    color:#999;
     background-color: #EEE;
     border: 1px solid #e5e5e5;
     line-height: 20px;
@@ -302,7 +301,7 @@
 
   .timeline.timeline-collapsing .timeline-icon {
     left: auto;
-    margin-left: -49px;
+    margin-left: -46px;
   }
 
   .timeline.timeline-collapsing .timeline-content {
@@ -344,5 +343,13 @@
   }
   .star-rating{
     float:right;
+  }
+
+  .timeline .timeline-block:first-child .timeline-icon{
+    border-color:#FF6961;
+  }
+
+  .timeline .timeline-block:first-child .timeline-content{
+    color:#3f3f3f;
   }
 </style>
