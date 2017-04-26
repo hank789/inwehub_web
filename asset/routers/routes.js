@@ -88,6 +88,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //task sub
+    path: '/task/list',
+    component: require('../views/Task/TaskListSub.vue'),
+    meta: {
+      title: '任务'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //ask-detail
     path: '/ask/:id',
     component: require('../views/Ask/AskDetail.vue'),
