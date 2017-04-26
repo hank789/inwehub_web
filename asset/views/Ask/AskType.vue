@@ -24,7 +24,7 @@
         <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
           <div :id="index" class="mui-control-content mui-active" v-for="(item, key, index) in subTypes">
             <ul class="mui-table-view">
-              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(index, subType)" v-for="(subType, subIndex) in item">{{ subType }}</li>
+              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(types[index], subType)" v-for="(subType, subIndex) in item">{{ subType }}</li>
             </ul>
           </div>
         </div>
@@ -55,7 +55,7 @@
     },
     methods: {
       selectTypeItem (type, subType) {
-        var selectType = subType;
+        var selectType = type + '-' + subType;
         this.$store.dispatch(ASK_TYPE_SELECT, selectType);
         this.$router.go(-1);
       },

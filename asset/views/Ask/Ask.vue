@@ -91,7 +91,7 @@
     },
     created () {
       var info = this.$store.state.askType.info;
-      if (info.money) {
+      if (info.money || info.desc) {
         this.money = info.money;
         this.description = info.desc;
         this.hide = info.hide;
@@ -188,11 +188,12 @@
         }
 
         var data = {
-          tags: this.type,
+          tags: this.type.split('-')[1],
           price: this.money,
           description: this.description,
           hide: this.hide
         };
+
         addAccessToken().post(createAPI(`question/store`), data,
           {
             validateStatus: status => status === 200
@@ -253,7 +254,7 @@
     width: auto;
   }
 
-  .form-ask .category span, .form-ask .select span {
+  .form-ask .category span {
     border: 1px solid #b6b6b6;
     border-radius: 5px;
     width: 30%;
@@ -293,6 +294,19 @@
     right: 10px;
     bottom: 30px;
     color: #999;
+  }
+
+  .form-ask .select span{
+    border:1px solid #b6b6b6;
+    border-radius: 5px;
+    padding:0 10px;
+    display: inline-block;
+    height: 32px;
+    margin-right: 6px;
+    margin-bottom:10px;
+    text-align: center;
+    line-height: 32px;
+    position: relative;
   }
 
 </style>
