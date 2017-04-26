@@ -234,7 +234,7 @@
       },
       money:function(newMoney){
         const askDetail = /^[0-9]+$/;
-        if (!askDetail.test(newMoney)) {
+        if (!askDetail.test(newMoney) && this.money) {
             this.money = parseInt(this.money);
         }
       }
