@@ -93,7 +93,7 @@
         feedback: {
           rate_star:0
         },
-        timeline:{}
+        timeline:[]
       },
       id: 0,
       loading: true,
