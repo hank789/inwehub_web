@@ -112,15 +112,12 @@
       speech(){
           var options = {};
           options.engine = 'iFly';
-          var text = "";
+          var t = this;
           plus.speech.startRecognize( options, function ( s ) {
-            text += s;
+            t.description += s;
           }, function ( e ) {
             mui.alert( "语音识别失败："+e.message );
           });
-          if (text.length > 0) {
-            this.description = text;
-          }
       },
       selectType () {
         var info = {
