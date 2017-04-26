@@ -17,7 +17,7 @@
 
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案</a>
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案</router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-vip"></span>专家管理</a>
