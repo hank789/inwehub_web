@@ -10,9 +10,10 @@
           <div class="mui-table-view-cell">
             <form>
               <div class="textarea-wrapper">
-                <textarea v-model.trim="description"></textarea>
+                <textarea v-model.trim="description" class=".mui-input-speech"></textarea>
                 <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
               </div>
+              <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
 
               <div class="title">请选择提问金额</div>
               <div class="category">
@@ -63,6 +64,23 @@
       hide: 0,
       descMaxLength: 500
     }),
+    mounted(){
+      mui.init();
+
+      mui.plusReady(function() {
+          /*
+        var options = {};
+        options.engine = 'iFly';
+        var text = "";
+        alert( "开始语音识别：" );
+        plus.speech.startRecognize( options, function ( s ) {
+          text += s;
+        }, function ( e ) {
+          alert( "语音识别失败："+e.message );
+        } );
+        */
+      });
+    },
     computed: {
       type () {
         return this.$store.state.askType.selected
@@ -89,6 +107,19 @@
           } else {
             this.selectOther = false;
             this.money = money
+          }
+      },
+      speech(){
+          var options = {};
+          options.engine = 'iFly';
+          var text = "";
+          plus.speech.startRecognize( options, function ( s ) {
+            text += s;
+          }, function ( e ) {
+            mui.alert( "语音识别失败："+e.message );
+          });
+          if (text.length > 0) {
+            this.description = text;
           }
       },
       selectType () {
