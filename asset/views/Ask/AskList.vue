@@ -269,6 +269,7 @@
     margin-top: 10px;
     position: relative;
     line-height: 40px;
+    padding: 0 7px;
   }
 
   .list-ask .list-ask-item .timeago {

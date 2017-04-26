@@ -215,6 +215,7 @@
     margin-top:10px;
     position:relative;
     line-height: 40px;
+    padding: 0 7px;
   }
 
   .list-answer .list-answer-item .title{
