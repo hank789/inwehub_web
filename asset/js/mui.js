@@ -2778,7 +2778,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 				if (container) {
 					var $container = $(container);
 					if ($container.length === 1) {
-						if ($.os.plus && $.os.android) { //android 5+
+						if ($.os.plus && $.os.android && 1==2) { //android 5+
 							$.plusReady(function() {
 								var webview = plus.webview.currentWebview();
 								if (hasPullup) {
@@ -4937,6 +4937,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	if(!($.os.plus && $.os.android)) { //仅在android的5+版本使用
 		return;
 	}
+	return;
 	var CLASS_PLUS_PULLREFRESH = 'mui-plus-pullrefresh';
 	var CLASS_VISIBILITY = 'mui-visibility';
 	var CLASS_HIDDEN = 'mui-hidden';

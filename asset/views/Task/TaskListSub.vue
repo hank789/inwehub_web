@@ -6,6 +6,12 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
@@ -103,10 +109,7 @@
 
         if (mui.os.plus) {
           mui.plusReady(function () {
-            setTimeout(function () {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }, 10);
-
+             mui('#pullrefresh').pullRefresh().pullupLoading();
           });
         } else {
           mui.ready(function () {
