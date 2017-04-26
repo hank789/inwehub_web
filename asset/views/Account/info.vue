@@ -112,7 +112,7 @@
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+        <button type="button" @click="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
           <span class="mui-icon mui-icon-left-nav"></span>个人信息
         </button>
         <h1 class="mui-center mui-title">工作经历</h1>
@@ -151,6 +151,11 @@
                   <textarea v-model.trim="newItem.description" class=".mui-input-speech" placeholder="描述"></textarea>
                   <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
                 </div>
+              </li>
+            </ul>
+            <ul class="mui-table-view" v-show="newItem.id">
+              <li class="mui-table-view-cell" style="text-align: center;">
+                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
               </li>
             </ul>
           </div>
@@ -371,6 +376,14 @@
         }
         this.muiView.go(toUrl);
       },
+      muiViewBack: function () {
+        this.newItem = {
+          'begin_time': '',
+          'end_time': '',
+          'description': ''
+        };
+        this.muiView.back();
+      },
       initDate:function(objType){
         let that=this;
         let param={
@@ -451,7 +464,6 @@
           default:
             break;
         }
-
         addAccessToken().post(createAPI(url), data,
           {
             validateStatus: status => status === 200
@@ -460,11 +472,13 @@
           .then(response => {
 
             var code = response.data.code;
-            var type = response.data.data.type;
             if (code !== 1000) {
               mui.alert(response.data.message);
               return;
             }
+            var type = response.data.data.type;
+            var id = response.data.data.id;
+            this.newItem.id = id;
             let objectItem = this.newItem;
             switch (type) {
               case 'job':
@@ -493,6 +507,99 @@
               });
             });
           })
+      },
+      deleteAccountItem: function (oType) {
+        var btnArray = ['否', '是'];
+        mui.confirm('确认要删除？', '删除', btnArray, e => {
+          if (e.index == 1) {
+            //  确认
+            var url;
+            var data = this.newItem;
+            switch (oType) {
+              case 'job' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_JOB;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_JOB;
+                }
+                break;
+              case 'edu' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_EDU;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_EDU;
+                }
+                break;
+              case 'project' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_PROJECT;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_PROJECT;
+                }
+                break;
+              case 'train' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_TRAIN;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_TRAIN;
+                }
+                break;
+              default:
+                break;
+            }
+            addAccessToken().post(createAPI(url), data,
+              {
+                validateStatus: status => status === 200
+              }
+            )
+              .then(response => {
+
+                var code = response.data.code;
+                if (code !== 1000) {
+                  mui.alert(response.data.message);
+                  return;
+                }
+                var type = response.data.data.type;
+                let objectItem = this.newItem;
+                switch (type) {
+                  case 'job':
+                    this.removeArrByItemId(this.user.jobs,objectItem.id);
+                    break;
+                  case 'edu':
+                    this.removeArrByItemId(this.user.edus,objectItem.id);
+                    break;
+                  case 'train':
+                    this.user.trains.unshift(objectItem);
+                    break;
+                  case 'project':
+                    this.user.projects.unshift(objectItem);
+                    break;
+                }
+                this.newItem = {};
+                mui.toast('删除成功');
+                this.muiView.back();
+              })
+              .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+                this.$store.dispatch(NOTICE, cb => {
+                  cb({
+                    text: data.message,
+                    time: 2000,
+                    status: false
+                  });
+                });
+              })
+          } else {
+
+          }
+        })
+      },
+      removeArrByItemId: function (arr, id) {
+        for(var i=0; i<arr.length; i++) {
+          if(arr[i].id == id) {
+            arr.splice(i, 1);
+            break;
+          }
+        }
       }
     },
     mounted () {
