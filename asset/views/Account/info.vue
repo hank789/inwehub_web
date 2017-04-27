@@ -1,12 +1,17 @@
 <template>
   <div>
     <!--页面主结构开始-->
-    <div id="app_account_info" class="mui-views">
+    <div id="app_account_info" class="mui-views" v-show="!loading">
       <div class="mui-view">
         <div class="mui-navbar">
         </div>
         <div class="mui-pages">
         </div>
+      </div>
+    </div>
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
       </div>
     </div>
     <!--页面主结构结束-->
@@ -35,19 +40,25 @@
                 </a>
               </li>
             </ul>
-            <h5 class="mui-content-padded">工作经历</h5><a href="#account_add_job" class="mui-navigate-right">添加</a>
+            <div class="account_item_title">
+              工作经历<a href="#account_add_job" class="mui-pull-right">添加</a>
+            </div>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="job in user.jobs" class="mui-table-view-cell">
-                <a @click="initNewItem(job,'job')" class="mui-navigate-right">
-                  {{ job.company }} | {{ job.title }}
+                <a @tap.stop.prevent="initNewItem(job,'job')" class="mui-navigate-right">
+                  {{ job.company }}
+                  <p class='mui-ellipsis'>{{ job.title }} | {{ job.begin_time }} ~ {{ job.end_time }}</p>
                 </a>
               </li>
             </ul>
-            <h5 class="mui-content-padded">教育经历</h5>
+            <div class="account_item_title">
+              教育经历<a href="#account_add_edu" class="mui-pull-right">添加</a>
+            </div>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="edu in user.edus" class="mui-table-view-cell">
-                <a :href="'#edu_'+edu.id" class="mui-navigate-right">
-                  {{ edu.school }} | {{ edu.major }}
+                <a @tap.stop.prevent="initNewItem(edu,'edu')" class="mui-navigate-right">
+                  {{ edu.school }}
+                  <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree }}</p>
                 </a>
               </li>
             </ul>
@@ -112,7 +123,7 @@
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" @click="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+        <button type="button" @tap.stop.prevent="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
           <span class="mui-icon mui-icon-left-nav"></span>个人信息
         </button>
         <h1 class="mui-center mui-title">工作经历</h1>
@@ -137,13 +148,13 @@
                 </div>
               </li>
               <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate-right">开始时间</label><label @tap.stop.prevent="initDate(1)" class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
                 </div>
               </li>
               <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate-right">结束时间</label><label @tap.stop.prevent="initDate(2)" class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -163,6 +174,67 @@
       </div>
     </div>
     <!--添加工作经历结束-->
+
+    <!--添加教育经历开始-->
+    <div id="account_add_edu" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" @tap.stop.prevent="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+          <span class="mui-icon mui-icon-left-nav"></span>个人信息
+        </button>
+        <h1 class="mui-center mui-title">教育经历</h1>
+        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('edu')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
+          保存
+        </button>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>学校</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.school" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>专业</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.major" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>学历</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.degree" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="textarea-wrapper">
+                  <textarea v-model.trim="newItem.description" class=".mui-input-speech" placeholder="描述"></textarea>
+                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+                </div>
+              </li>
+            </ul>
+            <ul class="mui-table-view" v-show="newItem.id">
+              <li class="mui-table-view-cell" style="text-align: center;">
+                <a @tap.stop.prevent="deleteAccountItem('edu')">删除</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--添加教育经历结束-->
 
 
     <!--编辑姓名开始-->
@@ -270,7 +342,7 @@
 
 <script>
   import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+  import {apiRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import popPickerComponent from '../../components/picker/poppicker.vue';
   import "../../js/mui.view";
@@ -305,31 +377,14 @@
       descMaxLength: 2000
     }),
     created () {
-      addAccessToken().post(createAPI(`profile/info`), {},
-        {
-          validateStatus: status => status === 200
-        }
-      )
-        .then(response => {
-
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            this.$router.go(-1);
-          }
-
-          this.user = response.data.data;
+      apiRequest(`profile/info`,{}).then(response_data => {
+        if (response_data !== false){
+          this.user = response_data;
           this.loading = 0;
-        })
-        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
-            });
-          });
-        })
+        } else {
+          this.$router.go(-1);
+        }
+      });
     },
     components: {
       popPickerComponent,
@@ -346,13 +401,15 @@
         else return 0;
       }
     },
-    updated: function() {
-      this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
-      this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
-      this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
-      let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
-      let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
-      document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+    watch: {
+      loading: function(val, oldVal) {
+        this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
+        this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
+        this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
+        let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
+        let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
+        document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+      }
     },
     methods: {
       initNewItem: function (newItem, objType) {
@@ -376,12 +433,15 @@
         }
         this.muiView.go(toUrl);
       },
-      muiViewBack: function () {
+      emptyNewItem: function () {
         this.newItem = {
           'begin_time': '',
           'end_time': '',
           'description': ''
         };
+      },
+      muiViewBack: function () {
+        this.emptyNewItem();
         this.muiView.back();
       },
       initDate:function(objType){
@@ -404,30 +464,11 @@
       },
       submitInfo: function () {
         var data = this.user.info;
-        addAccessToken().post(createAPI(`profile/update`), data,
-          {
-            validateStatus: status => status === 200
-          }
-        )
-          .then(response => {
-
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
+        apiRequest(`profile/update`,data).then(res => {
+          if (res !== false) {
             mui.toast('保存成功');
-
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          }
+        });
       },
       addOrUpdateAccountItem: function (oType) {
         var url;
@@ -464,49 +505,46 @@
           default:
             break;
         }
-        addAccessToken().post(createAPI(url), data,
-          {
-            validateStatus: status => status === 200
-          }
-        )
-          .then(response => {
-
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
-            var type = response.data.data.type;
-            var id = response.data.data.id;
-            this.newItem.id = id;
+        apiRequest(url, data).then(res => {
+          if (res !== false) {
+            var isUpdate = data.id ? true : false;
+            this.newItem.id = res.id;
             let objectItem = this.newItem;
-            switch (type) {
+            switch (res.type) {
               case 'job':
+                if (isUpdate) {
+                  this.removeArrByItemId(this.user.jobs,objectItem.id);
+                }
                 this.user.jobs.push(objectItem);
+                this.user.jobs.sort(this.sortArrByBeginTime);
                 break;
               case 'edu':
+                if (isUpdate) {
+                  this.removeArrByItemId(this.user.edus,objectItem.id);
+                }
                 this.user.edus.push(objectItem);
+                this.user.edus.sort(this.sortArrByBeginTime);
                 break;
               case 'train':
+                if (isUpdate) {
+                  this.removeArrByItemId(this.user.trains,objectItem.id);
+                }
                 this.user.trains.push(objectItem);
+                this.user.trains.sort(this.sortArrByBeginTime);
                 break;
               case 'project':
+                if (isUpdate) {
+                  this.removeArrByItemId(this.user.projects,objectItem.id);
+                }
                 this.user.projects.push(objectItem);
+                this.user.projects.sort(this.sortArrByBeginTime);
                 break;
             }
-            this.newItem = {};
             mui.toast('保存成功');
+            this.emptyNewItem();
             this.muiView.back();
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          }
+        })
       },
       deleteAccountItem: function (oType) {
         var btnArray = ['否', '是'];
@@ -547,21 +585,10 @@
               default:
                 break;
             }
-            addAccessToken().post(createAPI(url), data,
-              {
-                validateStatus: status => status === 200
-              }
-            )
-              .then(response => {
-
-                var code = response.data.code;
-                if (code !== 1000) {
-                  mui.alert(response.data.message);
-                  return;
-                }
-                var type = response.data.data.type;
+            apiRequest(url, data).then(res => {
+              if (res !== false){
                 let objectItem = this.newItem;
-                switch (type) {
+                switch (res.type) {
                   case 'job':
                     this.removeArrByItemId(this.user.jobs,objectItem.id);
                     break;
@@ -569,25 +596,17 @@
                     this.removeArrByItemId(this.user.edus,objectItem.id);
                     break;
                   case 'train':
-                    this.user.trains.unshift(objectItem);
+                    this.removeArrByItemId(this.user.trains,objectItem.id);
                     break;
                   case 'project':
-                    this.user.projects.unshift(objectItem);
+                    this.removeArrByItemId(this.user.projects,objectItem.id);
                     break;
                 }
-                this.newItem = {};
                 mui.toast('删除成功');
+                this.emptyNewItem();
                 this.muiView.back();
-              })
-              .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-                this.$store.dispatch(NOTICE, cb => {
-                  cb({
-                    text: data.message,
-                    time: 2000,
-                    status: false
-                  });
-                });
-              })
+              }
+            });
           } else {
 
           }
@@ -600,6 +619,9 @@
             break;
           }
         }
+      },
+      sortArrByBeginTime: function (a, b) {
+        return a.begin_time < b.begin_time;
       }
     },
     mounted () {
@@ -608,9 +630,6 @@
       var viewApi = mui('#app_account_info').view({
         defaultPage: '#setting'
       });
-
-      //初始化单页的区域滚动
-      mui('.mui-scroll-wrapper').scroll();
 
       var view = viewApi.view;
       (function($) {
@@ -779,7 +798,6 @@
           this.user.info.province = items[0].value;
           this.user.info.city = items[1].value;
           cityResult.innerText = items[0].text + " " + items[1].text;
-          console.log(items);
           //返回 false 可以阻止选择框的关闭
           //return false;
         });
@@ -822,6 +840,11 @@
   .mui-page.mui-transitioning {
     -webkit-transition: -webkit-transform 300ms ease;
     transition: transform 300ms ease;
+  }
+  .account_item_title{
+    margin: 20px 15px 7px;
+    color: #6d6d72;
+    font-size: 15px;
   }
   .mui-page-left {
     -webkit-transform: translate3d(0, 0, 0);
@@ -891,9 +914,6 @@
   }
   .mui-page .mui-table-view:last-child {
     margin-bottom: 30px;
-  }
-  .mui-table-view {
-    margin-top: 20px;
   }
 
   .mui-table-view span.mui-pull-right {
