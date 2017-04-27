@@ -68,16 +68,6 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 编辑个人新
-    path: '/my/info/edit',
-    component: require('../views/Account/editinfo.vue'),
-    meta: {
-      title: '个人信息'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
   { //ask
     path: '/ask',
     component: require('../views/Ask/Ask.vue'),
