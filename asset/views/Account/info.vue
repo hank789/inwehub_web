@@ -409,6 +409,7 @@
         let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
         let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
         document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+        this.initAvatarImgPreview();
       }
     },
     methods: {
@@ -622,6 +623,45 @@
       },
       sortArrByBeginTime: function (a, b) {
         return a.begin_time < b.begin_time;
+      },
+      initAvatarImgPreview: function() {
+        var imgs = document.querySelectorAll("img.mui-action-preview");
+        imgs = mui.slice.call(imgs);
+        if (imgs && imgs.length > 0) {
+          var slider = document.createElement("div");
+          slider.setAttribute("id", "__mui-imageview__");
+          slider.classList.add("mui-slider");
+          slider.classList.add("mui-fullscreen");
+          slider.style = "position: fixed;z-index: 20;background-color: #000;display: none";
+          slider.addEventListener("tap", function() {
+            slider.style = "position: fixed;z-index: 20;background-color: #000;display: none";
+          });
+          slider.addEventListener("touchmove", function(event) {
+            event.preventDefault();
+          })
+          var slider_group = document.createElement("div");
+          slider_group.setAttribute("id", "__mui-imageview__group");
+          slider_group.classList.add("mui-slider-group");
+          imgs.forEach((value, index, array) => {
+            //给图片添加点击事件，触发预览显示；
+            value.addEventListener('tap', function() {
+              slider.style = "position: fixed;z-index: 20;background-color: #000;display: block";
+              _slider.refresh();
+              _slider.gotoItem(index, 0);
+            })
+            var item = document.createElement("div");
+            item.classList.add("mui-slider-item");
+            var a = document.createElement("a");
+            var img = document.createElement("img");
+            img.setAttribute("src", this.user.info.avatar_url);
+            a.appendChild(img)
+            item.appendChild(a);
+            slider_group.appendChild(item);
+          });
+          slider.appendChild(slider_group);
+          document.body.appendChild(slider);
+          var _slider = mui(slider).slider();
+        }
       }
     },
     mounted () {
@@ -658,6 +698,7 @@
         });
       })(mui);
       this.muiView = viewApi;
+
       //更换头像
       mui(".mui-table-view-cell").on("tap", "#head", function(e) {
         if(mui.os.plus){
@@ -833,6 +874,11 @@
     top: 46px;
     height: auto;
   }
+  .mui-fullscreen {
+    position: fixed;
+    z-index: 20;
+    background-color: #000;
+  }
   .mui-scroll-wrapper,
   .mui-scroll {
     background-color: #efeff4;
@@ -949,11 +995,6 @@
     color: #999999;
     margin-right: -25px;
     font-size: 15px
-  }
-  .mui-fullscreen {
-    position: fixed;
-    z-index: 20;
-    background-color: #000;
   }
   .mui-ios .mui-navbar .mui-bar .mui-title {
     position: static;
