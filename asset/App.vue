@@ -48,21 +48,17 @@
         mui.each(mui(".mui-tab-item"), function(index,item){
           item.className = "mui-tab-item";
         });
-        switch(curPath) {
-          case 'home':
+
+        switch(fullPath) {
+          case '/':
+          case '/home':
             this.isHome = true;
             break;
-          case 'my':
+          case '/my':
             this.isMy = true;
             break;
-          case 'task':
+          case '/task':
             this.isAsk = true;
-            break;
-          case 'login':
-          case 'register':
-          case 'findpassword':
-          case 'ask':
-            this.showBottom = false;
             break;
           default:
             this.showBottom = false;
