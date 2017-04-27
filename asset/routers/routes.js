@@ -78,6 +78,26 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //ask-pay-success
+    path: '/pay/ask/:id',
+    component: require('../views/Pay/AskSuccess.vue'),
+    meta: {
+      title: '支付成功'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //ask-success
+    path: '/askSuccess/:id',
+    component: require('../views/Ask/AskSuccess.vue'),
+    meta: {
+      title: '提问成功'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //ask-type
     path: '/ask/type',
     component: require('../views/Ask/AskType.vue'),

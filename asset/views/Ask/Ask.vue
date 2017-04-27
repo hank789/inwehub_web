@@ -214,8 +214,10 @@
 
             this.$store.dispatch(ASK_TYPE_SELECT, '');
 
-            var id = response.data.data.id;
-            this.$router.push('ask/' + id);
+            var result = response.data.data;
+            var id = result.id;
+            var timeend = result.waiting_second?result.waiting_second:15;
+            this.$router.push({ path: '/pay/ask/'+id + '?money='+result.price + '&timeend='+timeend});
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
