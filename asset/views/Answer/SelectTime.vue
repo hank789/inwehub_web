@@ -15,7 +15,7 @@
 
             <br/>
             <div class="title">如果答案已经了然于胸了，还可以立刻前往作答：</div>
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"  @tap.stop.prevent="$router.push('/realAnswer/' + id)">立即回答</button>
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"  @tap.stop.prevent="$router.replace('/realAnswer/' + id)">立即回答</button>
           </div>
         </div>
 
