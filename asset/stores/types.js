@@ -26,3 +26,19 @@ export const ASK_TYPES = 'ask_types';
 export const ASK_SUB_TYPES = 'ask_sub_types';
 export const ASK_TYPE_SELECT = 'ask_type_select';
 export const ASK_INFO = 'ask_info';
+
+
+export const TASK_LIST = 'task_list';
+export const TASK_LIST_APPEND = 'task_list_append';
+export const TASK_INFO = 'task_info';
+export const TASK_INFO_APPEND = 'task_info_append';
+
+export const ASKS_LIST = 'asks_list';
+export const ASKS_LIST_APPEND = 'asks_list_append';
+export const ASKS_INFO = 'asks_info';
+export const ASKS_INFO_APPEND = 'asks_info_append';
+
+export const ANSWERS_LIST = 'answers_list';
+export const ANSWERS_LIST_APPEND = 'answers_list_append';
+export const ANSWERS_INFO = 'answers_info';
+export const ANSWERS_INFO_APPEND = 'answers_info_append';

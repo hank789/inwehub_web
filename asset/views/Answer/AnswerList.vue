@@ -67,14 +67,12 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
+  import {NOTICE, ANSWERS_INFO, ANSWERS_LIST, ANSWERS_INFO_APPEND, ANSWERS_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken} from '../../utils/request';
 
 
   const AnswerList = {
     data: () => ({
-      topId: 0,
-      bottomId: 0,
       answers: [],
       loading:true,
       loading_gif:loading_gif
@@ -85,9 +83,42 @@
           return -1;
         }
         return this.answers.length ? 0 : 1;
+      },
+      topId () {
+        if (this.answers.length) {
+          return this.answers[0].id;
+        }
+        return 0;
+      },
+      bottomId () {
+        var length = this.answers.length;
+        if (length) {
+          return this.answers[length-1].id;
+        }
+        return 0;
+      },
+      lastY (){
+        return this.$store.state.answers.info.lastY;
+      }
+    },
+    updated(){
+      this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
+    },
+    created(){
+      var list = this.$store.state.answers.list;
+      if (list.length) {
+        this.answers = list;
+        this.loading = false;
       }
     },
     mounted(){
+
+      var t = this;
+      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+        var lastY = event.detail.lastY;
+        t.$store.dispatch(ANSWERS_INFO_APPEND, {lastY:lastY});
+      });
+
       mui.init({
         pullRefresh: {
           container: '#pullrefresh',
@@ -116,14 +147,21 @@
 
       if (mui.os.plus) {
         mui.plusReady(function () {
-          setTimeout(function () {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }, 1000);
+          
+            if (!that.answers.length) {
+              mui('#pullrefresh').pullRefresh().pullupLoading();
+            }
+            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
+
 
         });
       } else {
         mui.ready(function () {
-          mui('#pullrefresh').pullRefresh().pullupLoading();
+
+          if (!that.answers.length) {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          }
+          mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
         });
       }
     },
@@ -149,8 +187,6 @@
 
             if (response.data.data.length > 0) {
               this.answers = response.data.data.concat(this.answers);
-              var firstItem = response.data.data.shift();
-              this.topId = firstItem.id;
             }
             this.loading = 0;
           })
@@ -180,17 +216,6 @@
 
             if (response.data.data.length > 0) {
               this.answers = this.answers.concat(response.data.data);
-              var lastItem = response.data.data.pop();
-              this.bottomId = lastItem.id;
-
-              if (!this.topId) {
-                if (response.data.data.length > 0) {
-                  var firstItem = response.data.data.shift();
-                  this.topId = firstItem.id;
-                } else {
-                  this.topId = this.bottomId;
-                }
-              }
             }
             this.loading = 0;
           })

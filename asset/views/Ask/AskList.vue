@@ -113,14 +113,12 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
+  import {NOTICE, ASKS_INFO, ASKS_LIST, ASKS_INFO_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken} from '../../utils/request';
 
 
   const Asks = {
     data: () => ({
-      topId: 0,
-      bottomId: 0,
       asks: [],
       loading:true,
       loading_gif:loading_gif
@@ -147,8 +145,6 @@
 
             if (response.data.data.length > 0) {
               this.asks = response.data.data.concat(this.asks);
-              var firstItem = response.data.data.shift();
-              this.topId = firstItem.id;
             }
             this.loading = 0;
           })
@@ -178,17 +174,6 @@
 
             if (response.data.data.length > 0) {
               this.asks = this.asks.concat(response.data.data);
-              var lastItem = response.data.data.pop();
-              this.bottomId = lastItem.id;
-
-              if (!this.topId) {
-                  if (response.data.data.length > 0) {
-                    var firstItem = response.data.data.shift();
-                    this.topId = firstItem.id;
-                  } else {
-                    this.topId = this.bottomId;
-                  }
-              }
             }
             this.loading = 0;
           })
@@ -209,9 +194,42 @@
             return -1;
         }
         return this.asks.length ? 0 : 1;
+      },
+      topId () {
+        if (this.asks.length) {
+          return this.asks[0].id;
+        }
+        return 0;
+      },
+      bottomId () {
+        var length = this.asks.length;
+        if (length) {
+          return this.asks[length-1].id;
+        }
+        return 0;
+      },
+      lastY (){
+        return this.$store.state.asks.info.lastY;
+      }
+    },
+    updated(){
+      this.$store.dispatch(ASKS_LIST_APPEND, this.asks);
+    },
+    created(){
+      var list = this.$store.state.asks.list;
+      if (list.length) {
+        this.asks = list;
+        this.loading = false;
       }
     },
     mounted(){
+
+      var t = this;
+      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+        var lastY = event.detail.lastY;
+        t.$store.dispatch(ASKS_INFO_APPEND, {lastY:lastY});
+      });
+
       mui.init({
         pullRefresh: {
           container: '#pullrefresh',
@@ -240,14 +258,19 @@
 
       if (mui.os.plus) {
         mui.plusReady(function () {
-          setTimeout(function () {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }, 1000);
+
+            if (!that.asks.length) {
+              mui('#pullrefresh').pullRefresh().pullupLoading();
+            }
+            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
 
         });
       } else {
         mui.ready(function () {
-          mui('#pullrefresh').pullRefresh().pullupLoading();
+          if (!that.asks.length) {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          }
+          mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
         });
       }
     }
