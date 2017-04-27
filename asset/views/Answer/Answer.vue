@@ -36,7 +36,7 @@
     data: () => ({
       id: null,
       description: '',
-      descMaxLength: 500
+      descMaxLength: 1000
     }),
     computed: {
       descLength() {
