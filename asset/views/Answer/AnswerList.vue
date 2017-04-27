@@ -147,12 +147,12 @@
 
       if (mui.os.plus) {
         mui.plusReady(function () {
-          setTimeout(function () {
+          
             if (!that.answers.length) {
               mui('#pullrefresh').pullRefresh().pullupLoading();
             }
             mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
-          }, 1000);
+
 
         });
       } else {
