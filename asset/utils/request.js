@@ -20,3 +20,29 @@ export const addAccessToken = () => {
 };
 
 export default axios;
+
+export function apiRequest (url, data) {
+  return addAccessToken().post(createAPI(url), data,
+    {
+      validateStatus: status => status === 200
+    }
+  )
+    .then(response => {
+
+      var code = response.data.code;
+      if (code !== 1000) {
+        mui.toast(response.data.message);
+        return false;
+      }
+      return response.data.data;
+    })
+    .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+      this.$store.dispatch('notice', cb => {
+        cb({
+          text: message,
+          time: 2000,
+          status: false
+        });
+      });
+    })
+}
