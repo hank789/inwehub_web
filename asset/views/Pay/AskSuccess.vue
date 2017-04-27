@@ -14,7 +14,7 @@
         <div class="money">¥{{ info.money }}</div>
         <div class="msg">请等待平台受理您的提问需求，请稍安勿躁！</div>
         <div class="loading"><img :src="loading_gif"/></div>
-        <div class="time">已等待<span>{{ countdown }}秒</span>！</div>
+        <div class="time">已等待<span>{{ countup }}秒</span>！</div>
         <div class="important">如平台受理失败，<br/>支付金额将会退回到您的账户中。</div>
       </div>
 </div>
@@ -28,20 +28,22 @@
         money:0
       },
       loading_gif: loading_gif,
-      timeend: 8
+      timeend: 8,
+      timestart:0
     }),
     computed: {
-      countdown() {
-          var time =  this.timeend;
+      countup() {
+          var time =  this.timestart;
           if (time < 10) {
-             time = '0' + this.timeend.toString();
+             time = '0' + time.toString();
           }
           return time;
       }
     },
     created(){
-        this.info.money = this.$route.query.money?this.$route.query.money:0;
-        this.timeend = this.$route.query.timeend?this.$route.query.timeend:15;
+      this.info.money = this.$route.query.money?this.$route.query.money:0;
+      this.timeend = this.$route.query.timeend?this.$route.query.timeend:15;
+
 
       let id = parseInt(this.$route.params.id);
 
@@ -59,13 +61,13 @@
       this.id  = id;
     },
     mounted(){
-        this.countDown();
+        this.countUp();
     },
     methods: {
-      countDown() {
-          this.timeend--;
-          if (this.timeend > 0) {
-              setTimeout(this.countDown, 1000);
+      countUp() {
+          this.timestart++;
+          if (this.timestart < this.timeend) {
+              setTimeout(this.countUp, 1000);
           } else {
             this.$router.push('/askSuccess/'+this.id);
           }
