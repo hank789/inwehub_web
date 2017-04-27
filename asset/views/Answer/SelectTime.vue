@@ -10,11 +10,11 @@
       <div class="mui-table-view">
         <div class="mui-table-view-cell">
           <div class="form form-ask-refuse">
-            <div class="title">请选择承诺应答反馈周期，我将在以下时间内回答提问者的相应问题，我们会在任务中提醒：</div>
-            <button type="button" data-id="picker"  @tap.stop.prevent="initDate()" data-options='{"type":"time"}' class="mui-btn mui-btn-block mui-btn-primary">选择时间 ...</button>
+            <div class="title">不着急，先好好思考后再作答吧，点击选择最迟反馈时间并设置回答提醒：</div>
+            <button type="button" data-id="picker"  @tap.stop.prevent="initDate()" data-options='{"type":"time"}' class="mui-btn mui-btn-block mui-btn-primary">选择时间</button>
 
             <br/>
-            <div class="title">您也可以选择立即回答：</div>
+            <div class="title">如果答案已经了然于胸了，还可以立刻前往作答：</div>
             <button type="button" class="mui-btn mui-btn-block mui-btn-primary"  @tap.stop.prevent="$router.push('/realAnswer/' + id)">立即回答</button>
           </div>
         </div>
