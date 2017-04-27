@@ -16,7 +16,7 @@
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
-            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)"
+            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task.object_id)"
                  v-if="task.task_type == 1">
               <div class="title">
                 <span class="msg">您有新的任务</span>
@@ -32,7 +32,7 @@
               </div>
             </li>
 
-            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)"
+            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task.object_id)"
                  v-else-if="task.task_type == 2">
               <div class="title">
                 <span class="msg">您有新的任务</span>
@@ -69,13 +69,11 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
+  import {NOTICE, TASK_INFO, TASK_LIST, TASK_INFO_APPEND, TASK_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken} from '../../utils/request';
 
   const Task = {
     data: () => ({
-      topId: 0,
-      bottomId: 0,
       tasks: [],
       loading: true,
       loading_gif: loading_gif
@@ -86,10 +84,41 @@
           return -1;
         }
         return this.tasks.length ? 0 : 1;
+      },
+      topId () {
+          if (this.tasks.length) {
+              return this.tasks[0].id;
+          }
+          return 0;
+      },
+      bottomId () {
+          var length = this.tasks.length;
+        if (length) {
+          return this.tasks[length-1].id;
+        }
+        return 0;
+      },
+      lastY (){
+        return this.$store.state.task.info.lastY;
+      }
+    },
+    created(){
+      var list = this.$store.state.task.list;
+      if (list.length) {
+          this.tasks = list;
+          this.loading = false;
       }
     },
     mounted(){
+        var t = this;
+        mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+            var lastY = event.detail.lastY;
+            t.$store.dispatch(TASK_INFO_APPEND, {lastY:lastY});
+        });
         this.initPullRefresh();
+    },
+    updated(){
+      this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
       initPullRefresh(){
@@ -107,15 +136,29 @@
           }
         });
 
+        var t = this;
+
         if (mui.os.plus) {
-          mui.plusReady(function () {
-             mui('#pullrefresh').pullRefresh().pullupLoading();
-          });
+          if (!this.tasks.length) {
+            mui.plusReady(function () {
+              if (!t.tasks.length) {
+                mui('#pullrefresh').pullRefresh().pullupLoading();
+              }
+              mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
+            });
+          }
         } else {
-          mui.ready(function () {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          });
+            mui.ready(function () {
+              if (!t.tasks.length) {
+                mui('#pullrefresh').pullRefresh().pullupLoading();
+              }
+              mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
+            });
         }
+      },
+      goDetail(id)
+      {
+          this.$router.push('/answer/' + id)
       },
       pulldownRefresh() {
         this.getPrevList();
@@ -147,8 +190,6 @@
 
             if (response.data.data.length > 0) {
               this.tasks = response.data.data.concat(this.tasks);
-              var firstItem = response.data.data.shift();
-              this.topId = firstItem.id;
             }
             this.loading = 0;
           })
@@ -178,18 +219,8 @@
 
             if (response.data.data.length > 0) {
               this.tasks = this.tasks.concat(response.data.data);
-              var lastItem = response.data.data.pop();
-              this.bottomId = lastItem.id;
-
-              if (!this.topId) {
-                if (response.data.data.length > 0) {
-                  var firstItem = response.data.data.shift();
-                  this.topId = firstItem.id;
-                } else {
-                  this.topId = this.bottomId;
-                }
-              }
             }
+
             this.loading = 0;
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
