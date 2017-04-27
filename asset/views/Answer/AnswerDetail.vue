@@ -30,13 +30,13 @@
       <div class="mui-row buttons" v-show="answer.question.status==2">
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="$router.push('/answerTime/' + answer.question.id)"><span
+                  @tap.stop.prevent="$router.replace('/answerTime/' + answer.question.id)"><span
             class="mui-icon mui-icon-compose"></span>确认应答
           </button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="$router.push('/answerrefuse/' + answer.question.id)"><span
+                  @tap.stop.prevent="$router.replace('/answerrefuse/' + answer.question.id)"><span
             class="mui-icon mui-icon-closeempty"></span> 拒绝应答
           </button>
         </div>

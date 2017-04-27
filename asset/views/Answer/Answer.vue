@@ -71,7 +71,7 @@
             mui.toast(response.data.message);
 
             var id = response.data.data.id;
-            this.$router.go(-1);
+            this.$router.replace('/answer/' + this.id);
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
