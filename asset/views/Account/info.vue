@@ -666,6 +666,7 @@
     },
     mounted () {
       mui.init();
+      mui('.mui-scroll-wrapper').scroll();
       //初始化单页view
       var viewApi = mui('#app_account_info').view({
         defaultPage: '#setting'
