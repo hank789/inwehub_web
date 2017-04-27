@@ -15,7 +15,7 @@
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
 
-    <div class="mui-content mb70" v-if="nothing == 0">
+    <div class="mui-content" v-if="nothing == 0">
       <div class="list-answer">
 
         <div class="mui-table-view list-answer-item" v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">

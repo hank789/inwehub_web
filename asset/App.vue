@@ -65,12 +65,7 @@
             this.showBottom = false;
             break;
           default:
-            this.showBottom = true;
-        }
-
-        const askDetail = /^\/ask\/[0-9]+$/;
-        if (askDetail.test(fullPath)) {
-          this.showBottom = true;
+            this.showBottom = false;
         }
       }
     },
