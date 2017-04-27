@@ -69,7 +69,7 @@
           if (this.timestart < this.timeend) {
               setTimeout(this.countUp, 1000);
           } else {
-            this.$router.push('/askSuccess/'+this.id);
+            this.$router.replace('/askSuccess/'+this.id);
           }
       }
     }

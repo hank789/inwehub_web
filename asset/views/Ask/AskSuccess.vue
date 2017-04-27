@@ -32,8 +32,8 @@
             <i class="mui-icon iconfont icon-success"></i>您的提问平台已经受理，我们将会尽快为您找寻合适的专家！
                         <div class="title">您还可以：</div>
             <div class="buttons">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.push('/ask/' + id)">查看问题</button>
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.push('/ask')">再问一条</button>
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.replace('/ask/' + id)">查看问题</button>
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.replace('/ask')">再问一条</button>
             </div>
             <div class="mui-row buttons">
               <div class="mui-col-sm-6 mui-col-xs-6">
@@ -43,9 +43,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-
 </div>
 </template>
 
