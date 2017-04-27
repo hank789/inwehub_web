@@ -53,7 +53,7 @@
 
 <script>
 
-  import {NOTICE, ASK_INFO} from '../../stores/types';
+  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../../stores/types';
   import {createAPI, addAccessToken} from '../../utils/request';
 
   const Ask = {
@@ -211,6 +211,8 @@
 
             var info = {};
             this.$store.dispatch(ASK_INFO, info);
+
+            this.$store.dispatch(ASK_TYPE_SELECT, '');
 
             var id = response.data.data.id;
             this.$router.push('ask/' + id);
