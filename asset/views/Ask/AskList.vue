@@ -130,7 +130,7 @@
         return newDate;
       },
       getPrevList(){
-        addAccessToken().post(createAPI(`question/myList`), {top_id: this.topId},
+        addAccessToken().post(createAPI(`question/myList`), {},
           {
             validateStatus: status => status === 200
           }
@@ -144,7 +144,7 @@
             }
 
             if (response.data.data.length > 0) {
-              this.asks = response.data.data.concat(this.asks);
+              this.asks = response.data.data;
             }
             this.loading = 0;
           })

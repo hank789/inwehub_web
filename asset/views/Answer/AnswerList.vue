@@ -147,7 +147,7 @@
 
       if (mui.os.plus) {
         mui.plusReady(function () {
-          
+
             if (!that.answers.length) {
               mui('#pullrefresh').pullRefresh().pullupLoading();
             }
@@ -172,7 +172,7 @@
         return newDate;
       },
       getPrevList(){
-        addAccessToken().post(createAPI(`answer/myList`), {top_id: this.topId},
+        addAccessToken().post(createAPI(`answer/myList`), {},
           {
             validateStatus: status => status === 200
           }
@@ -186,7 +186,7 @@
             }
 
             if (response.data.data.length > 0) {
-              this.answers = response.data.data.concat(this.answers);
+              this.answers = response.data.data;
             }
             this.loading = 0;
           })
