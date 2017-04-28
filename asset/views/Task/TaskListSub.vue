@@ -139,14 +139,12 @@
         var t = this;
 
         if (mui.os.plus) {
-          if (!this.tasks.length) {
             mui.plusReady(function () {
               if (!t.tasks.length) {
                 mui('#pullrefresh').pullRefresh().pullupLoading();
               }
               mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
             });
-          }
         } else {
             mui.ready(function () {
               if (!t.tasks.length) {
