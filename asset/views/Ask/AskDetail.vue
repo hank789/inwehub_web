@@ -363,4 +363,8 @@
   .timeline .timeline-block:first-child .timeline-content{
     color:#3f3f3f;
   }
+
+  .detail-comment-result p{
+    margin-top:5px;
+  }
 </style>

@@ -251,4 +251,8 @@
   .detail-comment-result{
     margin-top:15px;
   }
+
+  .detail-comment-result p{
+    margin-top:5px;
+  }
 </style>
