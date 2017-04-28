@@ -16,7 +16,7 @@
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
-            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task.object_id)"
+            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)"
                  v-if="task.task_type == 1">
               <div class="title">
                 <span class="msg">您有新的任务</span>
@@ -32,7 +32,7 @@
               </div>
             </li>
 
-            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task.object_id)"
+            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/ask/' + task.object_id)"
                  v-else-if="task.task_type == 2">
               <div class="title">
                 <span class="msg">您有新的任务</span>
