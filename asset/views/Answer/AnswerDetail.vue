@@ -64,11 +64,11 @@
           <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ answer.answers[0]?answer.answers[0].user_name:'' }}
-            <p><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></p>
           </div>
         </div>
         <div class="mui-table-view-cell question">
           {{ answer.answers[0]?answer.answers[0].content:'' }}
+          <span class="timeAgo"><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></span>
         </div>
       </div>
 
@@ -217,6 +217,18 @@
 
   .detail-answer {
     margin-top: 15px;
+  }
+
+  .detail-answer .question {
+    padding-bottom: 50px;
+    position: relative;
+  }
+
+  .detail-answer .question .timeAgo {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    color: #999;
   }
 
   .detail-comment {

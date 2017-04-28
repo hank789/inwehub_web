@@ -32,14 +32,11 @@
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
-
-            <p>
-              <timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago>
-            </p>
           </div>
         </div>
         <div class="mui-table-view-cell question">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
+          <span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
         </div>
       </div>
 
@@ -169,6 +166,18 @@
   }
 
   .detail-ask .question .timeAgo {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    color: #999;
+  }
+
+  .detail-answer .question {
+    padding-bottom: 40px;
+    position: relative;
+  }
+
+  .detail-answer .question .timeAgo {
     position: absolute;
     bottom: 5px;
     left: 15px;
