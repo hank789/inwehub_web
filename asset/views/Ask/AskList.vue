@@ -12,26 +12,20 @@
       </div>
     </div>
 
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper" >
-    <div class="mui-scroll">
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+      <div class="mui-scroll">
 
-      <div class="mui-content" v-if="nothing == 0">
+        <div class="mui-content" v-if="nothing == 0">
 
-        <div class="list-ask">
+          <div class="list-ask">
 
-          <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
-
-            <template v-if="!ask.answer_user_id">
+            <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
               <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-                <div class="title">
-                  <div class="mui-row">
-                    <div class="mui-col-xs-8">
-                      <div class="text">{{ ask.description | textLimit}}</div>
-                    </div>
-                    <div class="mui-col-xs-4">
-                      <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
-                    </div>
-                  </div>
+                <div class="title mui-ellipsis-2">
+                  {{ ask.description | textLimit}}
+
+
+
                 </div>
                 <div class="person">
                   <div class="avatar">
@@ -39,61 +33,25 @@
                       <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
                     </div>
                   </div>
-                  <span class="username">{{ ask.user_name }}</span>
-                  <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
+                  <div class="mui-media-body">
+                    <span class="username">{{ ask.user_name }}</span>
+                    <div>
+                      <span class="time"><timeago :since="timeago(ask.created_at)"></timeago></span>
+                      <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="site-desc">
                   {{ ask.status_description }}
-                    <span class="mui-icon mui-icon-arrowright"></span>
+                <span class="mui-icon mui-icon-arrowright"></span>
                 </div>
               </div>
-            </template>
+            </div>
 
-            <template v-else>
-              <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-                <div class="title">
-                  <div class="mui-row">
-                    <div class="mui-col-xs-8">
-                      <div class="text">{{ ask.description | textLimit}}</div>
-                    </div>
-                    <div class="mui-col-xs-4">
-                      <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="person">
-                  <div class="avatar">
-                    <div class="avatarInner">
-                      <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
-                    </div>
-                  </div>
-                  <span class="username">{{ ask.user_name }}</span>
-                  <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
-                </div>
-              </div>
-
-              <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-                <a href="javascript:;">
-                  <div class="avatar mui-media-object">
-                    <div class="avatarInner">
-                      <img :src="ask.answer_user_avatar_url?ask.answer_user_avatar_url:'images/uicon.jpg'"
-                           class="avatar"/>
-                    </div>
-                  </div>
-                  <div class="mui-media-body answer">
-                    <span class="username">{{ ask.answer_username }}</span>
-                    <span class="timeago"><timeago :since="timeago(ask.answer_time)"></timeago></span>
-                    <p class='mui-ellipsis'> {{ ask.status_description }}<span
-                      class="mui-icon mui-icon-arrowright"></span></p>
-                  </div>
-                </a>
-              </div>
-            </template>
           </div>
         </div>
       </div>
-
-    </div></div>
+    </div>
 
     <div class="mui-content list-empty" v-if="nothing == 1">
       <div class="mui-table-view list-ask-item">
@@ -102,7 +60,11 @@
             <div class="title">暂无提问</div>
             <div class="subTitle">速速前往提问，开始你的英淘之旅！</div>
             <div class="buttons">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/ask')">快速提问</button>
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                      @tap.stop.prevent="$router.push('/ask')">快速提问
+
+
+              </button>
             </div>
           </div>
         </div>
@@ -120,8 +82,8 @@
   const Asks = {
     data: () => ({
       asks: [],
-      loading:true,
-      loading_gif:loading_gif
+      loading: true,
+      loading_gif: loading_gif
     }),
     methods: {
       timeago(time) {
@@ -191,7 +153,7 @@
     computed: {
       nothing () {
         if (this.loading) {
-            return -1;
+          return -1;
         }
         return this.asks.length ? 0 : 1;
       },
@@ -204,7 +166,7 @@
       bottomId () {
         var length = this.asks.length;
         if (length) {
-          return this.asks[length-1].id;
+          return this.asks[length - 1].id;
         }
         return 0;
       },
@@ -225,9 +187,9 @@
     mounted(){
 
       var t = this;
-      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
         var lastY = event.detail.lastY;
-        t.$store.dispatch(ASKS_INFO_APPEND, {lastY:lastY});
+        t.$store.dispatch(ASKS_INFO_APPEND, {lastY: lastY});
       });
 
       mui.init({
@@ -238,7 +200,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore:'',
+            contentnomore: '',
             callback: pullupRefresh
           }
         }
@@ -259,10 +221,10 @@
       if (mui.os.plus) {
         mui.plusReady(function () {
 
-            if (!that.asks.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
+          if (!that.asks.length) {
+            mui('#pullrefresh').pullRefresh().pullupLoading();
+          }
+          mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
 
         });
       } else {
@@ -270,7 +232,7 @@
           if (!that.asks.length) {
             mui('#pullrefresh').pullRefresh().pullupLoading();
           }
-          mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
+          mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
         });
       }
     },
@@ -290,54 +252,62 @@
 
 <style scoped>
 
-  .list-ask .list-ask-item .title{
-    line-height:30px;
-  }
-
-  .list-ask .list-ask-item {
-    margin-top: 10px;
-    position: relative;
+  .list-ask .list-ask-item{
+    margin-top:10px;
+    position:relative;
     line-height: 40px;
-    padding: 0 7px;
   }
 
-  .list-ask .list-ask-item .timeago {
-    float: right;
-    color: #999;
+  .list-ask .list-ask-item .title{
+    line-height:28px;
   }
 
-  .list-ask .username {
-    color: orange;
-    margin-left: 20px;
+  .list-ask .list-ask-item .mui-media-body {
+    padding-left:15px;
+    line-height: 21px;
+  }
+  .list-ask .list-ask-item .time{
+    color:#999;
+    font-size:16px;
   }
 
-  .list-ask .list-ask-item .amount {
+  .list-ask .username{
+    color:orange;
+  }
+
+  .list-ask .list-ask-item .amount{
     position: absolute;
     right: 10px;
-    color: #999;
+    color:#999;
+    font-size:16px;
   }
 
-  .list-ask .list-ask-item .amount b {
-    color: #f85f48;
-    margin: 0 5px;
-    font-weight: normal;
+  .list-ask .list-ask-item .amount b{
+    color:#f85f48;
+    margin:0 5px;
+    font-weight:normal;
   }
 
-  .list-ask .site-desc {
-    margin-top: 10px;
+  .list-ask .person{
+    margin-top:10px;
+  }
+
+
+  .list-ask .site-desc{
+    margin-top:10px;
     line-height: 23px;
-    color: #8f8f94;
-    font-size: 14px;
+    color:#8f8f94;
+    font-size:14px;
   }
 
-  .list-ask .site-desc .mui-icon {
-    font-size: 16px;
+  .list-ask .site-desc .mui-icon{
+    font-size:16px;
   }
 
-  .list-ask .avatar {
+  .list-ask .avatar{
     z-index: 0;
     color: #ffffff;
-    float: left;
+    float:left;
     background-color: #bdbdbd;
     display: inline-block;
     height: 40px;
@@ -349,7 +319,8 @@
     border-radius: 50%;
   }
 
-  .list-ask .avatar .avatarInner {
+
+  .list-ask .avatar .avatarInner{
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -373,19 +344,14 @@
     display: block;
   }
 
-  .list-ask .mui-table-view-cell {
-    padding: 11px 8px;
+  .list-ask .mui-table-view-cell{
+    padding:11px 8px;
   }
 
-  .list-ask .mui-table-view-cell > a:not(.mui-btn) {
+  .list-ask .mui-table-view-cell > a:not(.mui-btn){
     margin: -11px -8px;
   }
-
-  .list-ask p {
-    margin-left: 20px;
-  }
-
-  .list-ask .answer {
-    line-height: 30px;
+  .list-ask p{
+    margin-left:20px;
   }
 </style>

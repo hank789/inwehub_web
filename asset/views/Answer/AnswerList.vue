@@ -18,26 +18,24 @@
     <div class="mui-content" v-if="nothing == 0">
       <div class="list-answer">
 
-        <div class="mui-table-view list-answer-item" v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">
+        <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">
           <div class="mui-table-view-cell mui-media">
-            <div class="title">
-              <div class="mui-row">
-                <div class="mui-col-xs-8">
-                  <div class="text">{{ answer.description | textLimit}}</div>
-                </div>
-                <div class="mui-col-xs-4">
-                  <div class="timeago"><timeago :since="timeago(answer.created_at)"></timeago></div>
-                </div>
-              </div>
-            </div>
+            <div class="title mui-ellipsis-2">
+              {{ answer.description }}
+          </div>
             <div class="person">
               <div class="avatar">
                 <div class="avatarInner">
                   <img :src="answer.user_avatar_url?answer.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
                 </div>
               </div>
-              <span class="username">{{ answer.user_name }}</span>
-              <span class="amount">悬赏金额<b>￥{{ answer.price }}</b>元</span>
+              <div class="mui-media-body">
+                <span class="username">{{ answer.user_name }}</span>
+                <div>
+                  <span class="time"><timeago :since="timeago(answer.created_at)"></timeago></span>
+                  <span class="amount">悬赏金额<b>￥{{ answer.price }}</b>元</span>
+                </div>
+              </div>
             </div>
             <div class="site-desc">
               {{ answer.status_description }}
@@ -45,7 +43,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -249,33 +246,40 @@
     margin-top:10px;
     position:relative;
     line-height: 40px;
-    padding: 0 7px;
   }
 
   .list-answer .list-answer-item .title{
-    line-height:30px;
+    line-height:28px;
   }
 
-  .list-answer .list-answer-item .timeago{
-    float:right;
+  .list-answer .list-answer-item .mui-media-body {
+    padding-left:15px;
+    line-height: 21px;
+  }
+  .list-answer .list-answer-item .time{
     color:#999;
+    font-size:16px;
   }
 
   .list-answer .username{
     color:orange;
-    margin-left:20px;
   }
 
   .list-answer .list-answer-item .amount{
     position: absolute;
     right: 10px;
     color:#999;
+    font-size:16px;
   }
 
   .list-answer .list-answer-item .amount b{
     color:#f85f48;
     margin:0 5px;
     font-weight:normal;
+  }
+
+  .list-answer .person{
+    margin-top:10px;
   }
 
 
@@ -339,8 +343,5 @@
   }
   .list-answer p{
     margin-left:20px;
-  }
-  .list-answer .answer{
-    line-height: 30px;
   }
 </style>
