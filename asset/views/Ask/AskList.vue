@@ -26,7 +26,7 @@
                 <div class="title">
                   <div class="mui-row">
                     <div class="mui-col-xs-8">
-                      <div class="text">{{ ask.description }}</div>
+                      <div class="text">{{ ask.description | textLimit}}</div>
                     </div>
                     <div class="mui-col-xs-4">
                       <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
@@ -54,7 +54,7 @@
                 <div class="title">
                   <div class="mui-row">
                     <div class="mui-col-xs-8">
-                      <div class="text">{{ ask.description }}</div>
+                      <div class="text">{{ ask.description | textLimit}}</div>
                     </div>
                     <div class="mui-col-xs-4">
                       <div class="timeago"><timeago :since="timeago(ask.created_at)"></timeago></div>
@@ -272,6 +272,15 @@
           }
           mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
         });
+      }
+    },
+    filters: {
+      textLimit(text){
+        var limit = 50;
+        if (text.length > limit) {
+          text = text.slice(0, limit) + '...';
+        }
+        return text;
       }
     }
   }

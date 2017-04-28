@@ -20,11 +20,11 @@
                  v-if="task.task_type == 1">
               <div class="title">
                 <span class="msg">您有新的任务</span>
-                <span class="type">{{ task.task_type_description }}</span>
+                <span class="type">{{ task.task_type_description}}</span>
                 <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
               </div>
               <div class="subTitle">
-                <span class="questions">{{ task.description }}</span>
+                <span class="questions">{{ task.description | textLimit}}</span>
                 <span class="time"></span>
               </div>
               <div class="link">
@@ -40,7 +40,7 @@
                 <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
               </div>
               <div class="subTitle">
-                <span class="questions">{{ task.description }}</span>
+                <span class="questions">{{ task.description | textLimit}}</span>
                 <span class="time"></span>
               </div>
               <div class="link">
@@ -232,6 +232,15 @@
               });
             });
           })
+      }
+    },
+    filters: {
+      textLimit(text){
+        var limit = 50;
+        if (text.length > limit) {
+          text = text.slice(0, limit) + '...';
+        }
+        return text;
       }
     }
   }
