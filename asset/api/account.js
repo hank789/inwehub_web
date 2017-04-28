@@ -1,6 +1,7 @@
 const ACCOUNT_API = {
   GET_ACCOUNT_INFO: 'profile/info',
   UPDATE_PROFILE: 'profile/update',
+  UPDATE_AVATAR: 'profile/updateAvatar',
   ADD_ACCOUNT_JOB: 'account/job/store',
   ADD_ACCOUNT_EDU: 'account/edu/store',
   ADD_ACCOUNT_PROJECT: 'account/project/store',
