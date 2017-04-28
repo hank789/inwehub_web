@@ -120,7 +120,7 @@
               return;
             }
 
-            this.$router.replace('/answer/' + this.id);
+            this.$router.replace('/answers/');
           })
           .catch(({response: {message = '网络状况堪忧'} = {}}) => {
             this.$store.dispatch(NOTICE, cb => {
