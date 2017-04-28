@@ -276,7 +276,7 @@
     },
     filters: {
       textLimit(text){
-        var limit = 50;
+        var limit = 70;
         if (text.length > limit) {
           text = text.slice(0, limit) + '...';
         }
