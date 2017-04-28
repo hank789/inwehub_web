@@ -18,6 +18,7 @@
               <textarea v-model.trim="description" placeholder="在这里留下你的反馈"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
+            <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
             <star-rating @rating-selected ="setRating" :star-size="30" :show-rating="showRating"></star-rating>
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
@@ -91,6 +92,16 @@
       },
       setRating: function(rating){
         this.rateStar= rating;
+      },
+      speech(){
+        var options = {};
+        options.engine = 'iFly';
+        var t = this;
+        plus.speech.startRecognize( options, function ( s ) {
+          t.description += s;
+        }, function ( e ) {
+          mui.alert( "语音识别失败："+e.message );
+        });
       }
     },
     watch: {

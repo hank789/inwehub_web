@@ -15,6 +15,7 @@
               <textarea v-model.trim="description" placeholder="请填写回答"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
+            <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
 
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">发布</button>
@@ -82,6 +83,16 @@
               });
             });
           })
+      },
+      speech(){
+        var options = {};
+        options.engine = 'iFly';
+        var t = this;
+        plus.speech.startRecognize( options, function ( s ) {
+          t.description += s;
+        }, function ( e ) {
+          mui.alert( "语音识别失败："+e.message );
+        });
       }
     },
     watch: {
