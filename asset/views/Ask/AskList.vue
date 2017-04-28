@@ -178,7 +178,7 @@
       this.$store.dispatch(ASKS_LIST_APPEND, this.asks);
     },
     created(){
-      var list = this.$store.state.asks.list;
+      var list = []; //this.$store.state.asks.list;
       if (list.length) {
         this.asks = list;
         this.loading = false;

@@ -103,7 +103,7 @@
       }
     },
     created(){
-      var list = this.$store.state.task.list;
+      var list = []; //this.$store.state.task.list;
       if (list.length) {
           this.tasks = list;
           this.loading = false;

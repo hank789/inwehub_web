@@ -102,7 +102,7 @@
       this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
     },
     created(){
-      var list = this.$store.state.answers.list;
+      var list = [];//this.$store.state.answers.list;
       if (list.length) {
         this.answers = list;
         this.loading = false;
