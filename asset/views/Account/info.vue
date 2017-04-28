@@ -403,13 +403,15 @@
     },
     watch: {
       loading: function(val, oldVal) {
-        this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
-        this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
-        this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
-        let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
-        let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
-        document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
-        this.initAvatarImgPreview();
+        if(val === 0){
+          this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
+          this.cityPicker.pickers[0].setSelectedValue(this.user.info.province);
+          this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
+          let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
+          let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
+          document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+          this.initAvatarImgPreview();
+        }
       }
     },
     methods: {
@@ -701,7 +703,7 @@
       this.muiView = viewApi;
 
       //更换头像
-      mui(".mui-table-view-cell").on("tap", "#head", function(e) {
+      mui(".mui-table-view-cell").on("tap", "#head", (e) => {
         if(mui.os.plus){
           var a = [{
             title: "拍照"
@@ -712,7 +714,7 @@
             title: "修改头像",
             cancel: "取消",
             buttons: a
-          }, function(b) {
+          }, (b) => {
             switch (b.index) {
               case 0:
                 break;
@@ -736,8 +738,7 @@
           plus.io.resolveLocalFileSystemURL(e, function(entry) {
             var s = entry.toLocalURL() + "?version=" + new Date().getTime();
             console.log(s);
-            document.getElementById("head-img").src = s;
-            document.getElementById("head-img1").src = s;
+            this.user.info.avatar_url = s;
             //变更大图预览的src
             //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
             document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
@@ -752,24 +753,26 @@
       }
 
       function galleryImg() {
-        plus.gallery.pick(function(a) {
-          plus.io.resolveLocalFileSystemURL(a, function(entry) {
-            plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
-              root.getFile("head.jpg", {}, function(file) {
+        plus.gallery.pick((a) => {
+          plus.io.resolveLocalFileSystemURL(a, (entry) => {
+            plus.io.resolveLocalFileSystemURL("_doc/", (root) => {
+              root.getFile("head.jpg", {}, (file) => {
                 //文件已存在
-                file.remove(function() {
+                file.remove(() => {
                   console.log("file remove success");
-                  entry.copyTo(root, 'head.jpg', function(e) {
-                      var e = e.fullPath + "?version=" + new Date().getTime();
-                      document.getElementById("head-img").src = e;
-                      document.getElementById("head-img1").src = e;
-                      //变更大图预览的src
-                      //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-                      document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
-                    },
-                    function(e) {
-                      console.log('copy image fail:' + e.message);
-                    });
+                  entry.copyTo(root, 'head.jpg', (e) => {
+                    console.log(document.getElementById("head-img1").src);
+                    var e = e.fullPath + "?version=" + new Date().getTime();
+                    document.getElementById("head-img1").src = e;
+                    console.log(e);
+                    console.log(document.getElementById("head-img1").src);
+                    //变更大图预览的src
+                    //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+                    document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
+                  },
+                  function(e) {
+                    console.log('copy image fail:' + e.message);
+                  });
                 }, function() {
                   console.log("delete image fail:" + e.message);
                 });
