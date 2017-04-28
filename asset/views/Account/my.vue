@@ -56,6 +56,7 @@
 </template>
 <script>
   import localEvent from '../../stores/localStorage';
+  import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
   import router from '../../routers/index';
 
   export  default {
@@ -77,6 +78,10 @@
       logOut(){
         localEvent.clearLocalItem('UserLoginInfo');
         localEvent.clearLocalItem('UserInfo');
+        this.$store.dispatch(ASKS_LIST_APPEND, {});
+        this.$store.dispatch(ANSWERS_LIST_APPEND, {});
+        this.$store.dispatch(TASK_LIST_APPEND, {});
+
         router.push({ path: 'login' });
       }
     },
