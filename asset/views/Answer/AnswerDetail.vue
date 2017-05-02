@@ -95,7 +95,7 @@
 
 <script>
   import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
 
   const AnswerDetail = {
@@ -143,31 +143,16 @@
 
       this.id = id;
 
-      addAccessToken().post(createAPI(`question/info`), {id: id},
-        {
-          validateStatus: status => status === 200
+      postRequest(`question/info`, {id: id}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.alert(response.data.message);
+          this.$router.go(-1);
         }
-      )
-        .then(response => {
 
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            this.$router.go(-1);
-          }
-
-          this.answer = response.data.data;
-          this.loading = 0;
-        })
-        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
-            });
-          });
-        })
+        this.answer = response.data.data;
+        this.loading = 0;
+      });
     }
   }
   export default AnswerDetail;

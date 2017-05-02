@@ -65,7 +65,7 @@
 
 <script>
   import {NOTICE, ANSWERS_INFO, ANSWERS_LIST, ANSWERS_INFO_APPEND, ANSWERS_LIST_APPEND} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
 
   const AnswerList = {
@@ -178,62 +178,34 @@
         return newDate;
       },
       getPrevList(){
-        addAccessToken().post(createAPI(`answer/myList`), {},
-          {
-            validateStatus: status => status === 200
+
+        postRequest(`answer/myList`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
           }
-        )
-          .then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              this.$router.go(-1);
-            }
-
-            if (response.data.data.length > 0) {
-              this.answers = response.data.data;
-            }
-            this.loading = 0;
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          if (response.data.data.length > 0) {
+            this.answers = response.data.data;
+          }
+          this.loading = 0;
+        });
       },
       getNextList() {
-        addAccessToken().post(createAPI(`answer/myList`), {bottom_id: this.bottomId},
-          {
-            validateStatus: status => status === 200
+
+        postRequest(`answer/myList`, {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
           }
-        )
-          .then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              this.$router.go(-1);
-            }
-
-            if (response.data.data.length > 0) {
-              this.answers = this.answers.concat(response.data.data);
-            }
-            this.loading = 0;
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          if (response.data.data.length > 0) {
+            this.answers = this.answers.concat(response.data.data);
+          }
+          this.loading = 0;
+        });
       }
     }
   }

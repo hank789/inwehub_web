@@ -48,7 +48,7 @@
 
 <script>
   import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
   const Refuse = {
     data: () => ({
@@ -107,30 +107,16 @@
           description: this.description,
           question_id: this.id
         };
-        addAccessToken().post(createAPI(`question/rejectAnswer`), data,
-          {
-            validateStatus: status => status === 200
+
+        postRequest(`question/rejectAnswer`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
           }
-        )
-          .then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
-
-            this.$router.replace('/answers/');
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          this.$router.replace('/answers/');
+        });
       }
     },
     mounted(){
@@ -152,31 +138,16 @@
       }
       this.id = id;
 
-      addAccessToken().post(createAPI(`tags/load`), {tag_type: 2},
-        {
-          validateStatus: status => status === 200
+      postRequest(`tags/load`, {tag_type: 2}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.alert(response.data.message);
+          this.$router.go(-1);
         }
-      )
-        .then(response => {
 
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            this.$router.go(-1);
-          }
-
-          this.tags = response.data.data;
-          this.loading = 0;
-        })
-        .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: data.message,
-              time: 2000,
-              status: false
-            });
-          });
-        })
+        this.tags = response.data.data;
+        this.loading = 0;
+      });
     },
     watch: {
       description: function (newDescription) {
