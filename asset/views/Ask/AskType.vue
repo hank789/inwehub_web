@@ -36,7 +36,7 @@
 
 <script>
   import { NOTICE, ASK_TYPES_SET, ASK_TYPES, ASK_SUB_TYPES, ASK_TYPE_SELECT } from '../../stores/types';
-  import { createAPI, addAccessToken } from '../../utils/request';
+  import { createAPI, addAccessToken, postRequest } from '../../utils/request';
   import localEvent from '../../stores/localStorage';
 
 
@@ -65,33 +65,17 @@
       //var askTypes = localEvent.getLocalItem('ask_types2');
 
       //if (askTypes.length == 0 && askTypes != 'undefined') {
-        addAccessToken().post(createAPI(`question/request`),{},
-          {
-            validateStatus: status => status === 200
-          }
-        )
-          .then(response => {
+      postRequest(`question/request`, {}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.alert(response.data.message);
+          this.$router.go(-1);
+        }
 
-            var code = response.data.code;
-            if (code !== 1000) {
-                mui.alert(response.data.message);
-                this.$router.go(-1);
-            }
-
-            localEvent.setLocalItem('ask_types2', response.data.data.tags);
-            this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
-            this.loading=0;
-          })
-          .catch(({ response: { message = '网络状况堪忧' } = {} } ) => {
-            mui.alert(data.message);
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+        localEvent.setLocalItem('ask_types2', response.data.data.tags);
+        this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
+        this.loading=0;
+      });
       /*
       } else {
           this.$store.dispatch(ASK_TYPES_SET, askTypes);
