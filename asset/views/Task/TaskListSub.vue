@@ -70,7 +70,7 @@
 
 <script>
   import {NOTICE, TASK_INFO, TASK_LIST, TASK_INFO_APPEND, TASK_LIST_APPEND} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
   const Task = {
     data: () => ({
@@ -173,63 +173,33 @@
         return newDate;
       },
       getPrevList(){
-        addAccessToken().post(createAPI(`task/myList`), {},
-          {
-            validateStatus: status => status === 200
+        postRequest(`task/myList`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
           }
-        )
-          .then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              this.$router.go(-1);
-            }
-
-            if (response.data.data.length > 0) {
-              this.tasks = response.data.data;
-            }
-            this.loading = 0;
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          if (response.data.data.length > 0) {
+            this.tasks = response.data.data;
+          }
+          this.loading = 0;
+        });
       },
       getNextList() {
-        addAccessToken().post(createAPI(`task/myList`), {bottom_id: this.bottomId},
-          {
-            validateStatus: status => status === 200
+        postRequest(`task/myList`, {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
           }
-        )
-          .then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              this.$router.go(-1);
-            }
+          if (response.data.data.length > 0) {
+            this.tasks = this.tasks.concat(response.data.data);
+          }
 
-            if (response.data.data.length > 0) {
-              this.tasks = this.tasks.concat(response.data.data);
-            }
-
-            this.loading = 0;
-          })
-          .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-            this.$store.dispatch(NOTICE, cb => {
-              cb({
-                text: data.message,
-                time: 2000,
-                status: false
-              });
-            });
-          })
+          this.loading = 0;
+        });
       }
     },
     filters: {
