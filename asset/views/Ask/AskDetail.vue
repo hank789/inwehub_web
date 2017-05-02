@@ -96,6 +96,9 @@
       loading: true,
       loading_gif: loading_gif
     }),
+    mounted(){
+      mui.init({swipeBack:true});
+    },
     computed: {
       rating() {
         return this.ask.feedback.rate_star;

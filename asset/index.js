@@ -38,6 +38,9 @@ Vue.use(VueLazyload, {
   loading: loading_img,
   try: 3
 });
+
+mui.init({swipeBack:true});
+
 Vue.use(TimeAgo, {
   name: 'timeago',
   locale: 'zh-CN',
