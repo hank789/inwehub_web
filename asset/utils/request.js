@@ -46,3 +46,24 @@ export function apiRequest (url, data) {
       });
     })
 }
+
+
+export function postRequest (url, data) {
+  return addAccessToken().post(createAPI(url), data,
+    {
+      validateStatus: status => status === 200
+    }
+  )
+    .then(response => {
+      return response;
+    })
+    .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+      this.$store.dispatch('notice', cb => {
+        cb({
+          text: message,
+          time: 2000,
+          status: false
+        });
+      });
+    })
+}
