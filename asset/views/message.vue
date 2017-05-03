@@ -1,47 +1,182 @@
 <template>
   <div>
-    <mu-tabs :value="activeTab" @change="handleTabChange">
-      <mu-tab value="tab1" title="我的问题"/>
-      <mu-tab value="tab2" title="我的回答"/>
-    </mu-tabs>
-    <div v-if="activeTab === 'tab1'">
-      <mu-list>
-        <mu-list-item title="匿名用户" describeText="卖家具有动物繁殖许可证和经营许可证的情况下我买了他家的国家二级保护动物我需不需要也持有饲养许可证。买卖国家二级保护动物不是要买卖双方都持有相关证件的嘛">
-          <mu-avatar icon="account_circle" slot="leftAvatar"/>
-        </mu-list-item>
-        <mu-divider inset/>
-        <mu-list-item title="匿名用户" describeText="本人九八年进入一家企业工作至今，但至2007年该企业才给我买社保，现社保才购买10年，我今年五十九岁了，请问这种情况该怎么维权。谢谢">
-          <mu-avatar icon="account_circle" slot="leftAvatar"/>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">消息</h1>
+    </header>
 
-        </mu-list-item>
-      </mu-list>
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
     </div>
-    <div v-if="activeTab === 'tab2'">
-      <mu-list>
-        <mu-list-item title="匿名用户2" describeText="卖家具有动物繁殖许可证和经营许可证的情况下我买了他家的国家二级保护动物我需不需要也持有饲养许可证。买卖国家二级保护动物不是要买卖双方都持有相关证件的嘛">
-          <mu-avatar icon="account_circle" slot="leftAvatar"/>
-        </mu-list-item>
-        <mu-divider inset/>
-        <mu-list-item title="匿名用户" describeText="本人九八年进入一家企业工作至今，但至2007年该企业才给我买社保，现社保才购买10年，我今年五十九岁了，请问这种情况该怎么维权。谢谢">
-          <mu-avatar icon="account_circle" slot="leftAvatar"/>
 
-        </mu-list-item>
-      </mu-list>
-    </div>
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
+      <div class="mui-scroll">
+        <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
+          <template v-for="(message, index) in messages">
+            <li class="mui-table-view-cell">
+              <div class="mui-slider-right mui-disabled">
+                <a class="mui-btn mui-btn-red" @tap.stop.prevent="deleteItem(message.id)">删除</a>
+              </div>
+              <div class="mui-slider-handle">
+                {{ message.description }}
+            </div>
+            </li>
+          </template>
+         </ul>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
+  import {createAPI, addAccessToken, postRequest} from '../utils/request';
   export default {
-    data () {
-      return {
-        activeTab: 'tab1'
+    data: () => ({
+      messages:[],
+      loading: true,
+      loading_gif: loading_gif
+    }),
+    computed: {
+      nothing () {
+        if (this.loading) {
+          return -1;
+        }
+        return this.messages.length ? 0 : 1;
+      },
+      topId () {
+        if (this.messages.length) {
+          return this.messages[0].id;
+        }
+        return 0;
+      },
+      bottomId () {
+        var length = this.messages.length;
+        if (length) {
+          return this.messages[length-1].id;
+        }
+        return 0;
       }
     },
+    mounted(){
+      this.initPullRefresh();
+    },
     methods: {
-      handleTabChange (val) {
-        this.activeTab = val
+      deleteItem(id){
+          mui.alert('删除暂不支持!');
+      },
+      initPullRefresh(){
+        mui.init({
+          pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+              callback: this.pulldownRefresh
+            },
+            up: {
+              contentrefresh: '正在加载...',
+              contentnomore:'',
+              callback: this.pullupRefresh
+            }
+          }
+        });
+
+        var t = this;
+
+        if (mui.os.plus) {
+          mui.plusReady(function () {
+            if (!t.messages.length) {
+              mui('#pullrefresh').pullRefresh().pullupLoading();
+            }
+          });
+        } else {
+          mui.ready(function () {
+            if (!t.messages.length) {
+              mui('#pullrefresh').pullRefresh().pullupLoading();
+            }
+          });
+        }
+      },
+      pulldownRefresh() {
+        this.getPrevList();
+        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+      },
+
+      pullupRefresh() {
+        this.getNextList();
+        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+      },
+      getPrevList(){
+
+        this.messages = [
+          {
+            "id": "1",//通知id
+            "notification_type": "1",//通知类型,1为提问
+            "description": "这是一条测试数据1",//通知内容
+            "is_read": "1",//是否已读
+            "created_at": "2017-04-20 12:24:25",//创建时间
+          },
+          {
+            "id": "2",//任务id
+            "notification_type": "1",//通知类型,1为提问
+            "description": "这是一条测试数据2",//通知内容
+            "is_read": "1",//是否已读
+            "created_at": "2017-04-20 12:24:25",//创建时间
+          }
+        ];
+        this.loading = 0;
+
+
+          /*
+        postRequest(`notifications/list`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
+
+          if (response.data.data.length > 0) {
+            this.messages = response.data.data;
+          }
+          this.loading = 0;
+        });
+        */
+      },
+      getNextList() {
+        this.messages = [
+          {
+            "id": "1",//通知id
+            "notification_type": "1",//通知类型,1为提问
+            "description": "这是一条测试数据1",//通知内容
+            "is_read": "1",//是否已读
+            "created_at": "2017-04-20 12:24:25",//创建时间
+          },
+          {
+            "id": "2",//任务id
+            "notification_type": "1",//通知类型,1为提问
+            "description": "这是一条测试数据2",//通知内容
+            "is_read": "1",//是否已读
+            "created_at": "2017-04-20 12:24:25",//创建时间
+          }
+        ];
+        this.loading = 0;
+
+        /*
+        postRequest(`notifications/list`, {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
+
+          if (response.data.data.length > 0) {
+            this.messages = this.messages.concat(response.data.data);
+          }
+
+          this.loading = 0;
+        });
+        */
       }
-    }
+    },
   }
 </script>

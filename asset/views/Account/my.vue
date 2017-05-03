@@ -2,6 +2,11 @@
 
   <div>
 
+        <header class="mui-bar mui-bar-nav">
+          <h1 class="mui-title">我的</h1>
+          <a class="mui-icon mui-icon-email mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>
+        </header>
+
         <div class="mui-content myinfo">
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell mui-media">
@@ -93,7 +98,9 @@
 </script>
 
 <style scoped>
-
+  .myinfo{
+    margin-top:20px;
+  }
   .mui-table-view {
     margin-top: 20px;
   }
