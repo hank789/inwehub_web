@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper message-list">
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
           <template v-for="(message, index) in messages">
@@ -180,3 +180,9 @@
     },
   }
 </script>
+
+<style scoped>
+   .message-list{
+     margin-top:15px;
+   }
+</style>

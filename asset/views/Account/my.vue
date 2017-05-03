@@ -99,10 +99,10 @@
 
 <style scoped>
   .myinfo{
-    margin-top:20px;
+    margin-top:15px;
   }
   .mui-table-view {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
