@@ -92,12 +92,14 @@ function getUserInfo (user_id, cb) {
       user_id: 0,
       name: '',
       phone: '',
+      avatar_url:'',
       counts: {},
       datas: {}
     };
     userLocal.user_id = user.id;
     userLocal.name = user.name;
     userLocal.phone = user.mobile;
+    userLocal.avatar_url = user.avatar_url?user.avatar_url:'images/uicon.jpg';
     /*
     user.counts.map(function (count, index) {
       let keyName = count.key;

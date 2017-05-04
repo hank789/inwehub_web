@@ -11,7 +11,7 @@
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell mui-media">
               <a class="mui-navigate-right" href="#account">
-                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="images/uicon.jpg">
+                <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
                 <div class="mui-media-body">
                   {{ name }}
                   <p class="mui-ellipsis">{{ phone }}</p>
@@ -72,7 +72,7 @@
         im_tokenMsg: '',
         name:currentUser.name,
         phone:currentUser.phone,
-        avatar:currentUser.avatar
+        avatar:currentUser.avatar_url
       }
     },
     methods: {
