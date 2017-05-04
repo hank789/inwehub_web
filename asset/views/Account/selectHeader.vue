@@ -72,7 +72,7 @@
             // 上传完成
             if ( status == 200 ) {
               var url = JSON.parse(t.responseText).data.user_avatar_url;
-              that.$router.replace('/my/info');
+              that.$router.go(-1);
             } else {
               alert( "Upload failed: " + status );
             }
