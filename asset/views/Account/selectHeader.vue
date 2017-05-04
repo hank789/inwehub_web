@@ -11,10 +11,13 @@
 <script>
   import '../../styles/cropper.min.css';
   import  '../../js/cropper.min';
+  import localEvent from '../../stores/localStorage';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
   export default {
     data:() => ({
         localUrl:'/images/uicon.jpg',
+        localPath:'',
         cropper:null,
         img:{
           width:0,
@@ -24,22 +27,26 @@
         }
     }),
     created(){
-       this.localUrl = this.$route.query.src;
+
+
     },
     mounted(){
-      var t = this;
-      mui.plusReady(function () {
-        t.clip();
-      });
+      var path = localEvent.getLocalItem('avatar');
+      this.localUrl = path.url;
+      this.localPath = path.path;
+      this.clip(path.url);
     },
     methods: {
-      clip(){
+      clip(path){
         var image = document.getElementById('image');
+        image.src=path;
         var t = this;
-        this.cropper = new Cropper(image, {
+        new Cropper(image, {
           aspectRatio: 1/1,
+          viewMode:1,
           dragMode:'move',
           rotatable:true,
+          checkCrossOrigin:false,
           minCropBoxWidth:200,
           minCropBoxHeight:200,
           minCanvasWidth:200,
@@ -47,34 +54,60 @@
           minContainerWidth:200,
           minContainerHeight:200,
           crop: function(data) {
-            t.img.x = data.detail.x;
-            t.img.y = data.detail.y;
-            t.img.width = data.detail.width;
-            t.img.height = data.detail.height;
+              t.img.x = data.detail.x;
+              t.img.y = data.detail.y;
+              t.img.width = data.detail.width;
+              t.img.height = data.detail.height;
           }
         });
       },
       cancel(){
         this.$router.go(-1);
       },
+      upload(file){
+        var that = this;
+        var task = plus.uploader.createUpload(createAPI('profile/updateAvatar'),
+          { method:"POST",blocksize:204800,priority:100 },
+          function ( t, status ) {
+            // 上传完成
+            if ( status == 200 ) {
+              var url = JSON.parse(t.responseText).data.user_avatar_url;
+              that.$router.replace('/my/info');
+            } else {
+              alert( "Upload failed: " + status );
+            }
+          }
+        );
+        task.addFile(file, {key:"user_avatar"} );
+        const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
+        task.setRequestHeader('Authorization', 'bearer ' + UserLoginInfo.token);
+        task.start();
+      },
       submit(){
+        var options = {
+            top: parseInt(this.img.y).toString() + 'px',
+            left: parseInt(this.img.x).toString() + 'px',
+            width: parseInt(this.img.width).toString() + 'px',
+            height: parseInt(this.img.height).toString() + 'px'
+        };
+        var src = this.localPath;
+
         var t = this;
         plus.zip.compressImage(
           {
-            src: this.localUrl, //src在这里是第一步Url里的src。也就是本地路径
-            dst: '_doc/a.jpg',
+            src: src, //src在这里是第一步Url里的src。也就是本地路径
+            dst: '_doc/user_avatar.jpg',
             overwrite: true,
-            clip: {
-              top: this.img.y + 'px',
-              left: this.img.x + 'px',
-              width: this.img.width + 'px',
-              height: this.img.height + 'px'
-            }
+            clip: options
           },
           function(e) {
-            mui.alert(e.target); //压缩图片
+              t.upload(e.target);
+          },
+          function(error){
+              mui.alert(error.message);
           }
         );
+
       }
     }
   }

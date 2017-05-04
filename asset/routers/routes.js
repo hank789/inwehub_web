@@ -214,6 +214,10 @@ const routes = [
     path: '/message',
     component: require('../views/message.vue'),
   },
+  { // header
+    path: '/header',
+    component: require('../views/Account/selectHeader.vue'),
+  },
   { // feedback
     path: '/feedback',
     component: require('../views/Feedback.vue'),

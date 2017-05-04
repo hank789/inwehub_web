@@ -415,6 +415,25 @@
       }
     },
     methods: {
+      toClip(path) {
+        var t = this;
+        plus.zip.compressImage({
+            src: path,
+            dst: "_doc/c.jpg",
+            overwrite: true,
+            quality: 20
+          },
+          function (event) {
+            var newurl = plus.io.convertLocalFileSystemURL(event.target);
+            plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+              t.localUrl = entry.toRemoteURL();
+              localEvent.setLocalItem('avatar', {url:t.localUrl, path:entry.toLocalURL()});
+              t.$router.push('/header');
+            });
+          }, function (error) {
+            alert("Compress error!" + error.message);
+          });
+      },
       initNewItem: function (newItem, objType) {
         this.newItem = newItem;
         var toUrl;
@@ -735,6 +754,8 @@
       function getImage() {
         var c = plus.camera.getCamera();
         c.captureImage(function(e) {
+          t.toClip(e);
+          /*
           plus.io.resolveLocalFileSystemURL(e, function(entry) {
             var s = entry.toLocalURL() + "?version=" + new Date().getTime();
             console.log(s);
@@ -745,6 +766,8 @@
           }, function(e) {
             console.log("读取拍照文件错误：" + e.message);
           });
+          */
+
         }, function(s) {
           console.log("error" + s);
         }, {
@@ -752,50 +775,11 @@
         })
       }
 
+      var t = this;
       function galleryImg() {
+
         plus.gallery.pick((a) => {
-          plus.io.resolveLocalFileSystemURL(a, (entry) => {
-            plus.io.resolveLocalFileSystemURL("_doc/", (root) => {
-              root.getFile("head.jpg", {}, (file) => {
-                //文件已存在
-                file.remove(() => {
-                  console.log("file remove success");
-                  entry.copyTo(root, 'head.jpg', (e) => {
-                    console.log(document.getElementById("head-img1").src);
-                    var e = e.fullPath + "?version=" + new Date().getTime();
-                    document.getElementById("head-img1").src = e;
-                    console.log(e);
-                    console.log(document.getElementById("head-img1").src);
-                    //变更大图预览的src
-                    //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-                    document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
-                  },
-                  function(e) {
-                    console.log('copy image fail:' + e.message);
-                  });
-                }, function() {
-                  console.log("delete image fail:" + e.message);
-                });
-              }, function() {
-                //文件不存在
-                entry.copyTo(root, 'head.jpg', function(e) {
-                    var path = e.fullPath + "?version=" + new Date().getTime();
-                    document.getElementById("head-img").src = path;
-                    document.getElementById("head-img1").src = path;
-                    //变更大图预览的src
-                    //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-                    document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
-                  },
-                  function(e) {
-                    console.log('copy image fail:' + e.message);
-                  });
-              });
-            }, function(e) {
-              console.log("get _www folder fail");
-            })
-          }, function(e) {
-            console.log("读取拍照文件错误：" + e.message);
-          });
+          t.toClip(a);
         }, function(a) {}, {
           filter: "image"
         })
