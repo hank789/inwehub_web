@@ -19,9 +19,7 @@
     <div id="setting" class="mui-page">
       <!--页面标题栏开始-->
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
         <h1 class="mui-center mui-title">个人信息</h1>
       </div>
       <!--页面标题栏结束-->

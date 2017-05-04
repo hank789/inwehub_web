@@ -71,10 +71,18 @@
           function ( t, status ) {
             // 上传完成
             if ( status == 200 ) {
-              var url = JSON.parse(t.responseText).data.user_avatar_url;
+              var response = JSON.parse(t.responseText);
+              if (response.code == 1000) {
+                var url = JSON.parse(t.responseText).data.user_avatar_url;
+                const UserInfo = localEvent.getLocalItem('UserInfo');
+                UserInfo.avatar_url = url;
+                localEvent.setLocalItem('UserInfo', UserInfo);
+              } else {
+                  mui.alert(response.message);
+              }
               that.$router.go(-1);
             } else {
-              alert( "Upload failed: " + status );
+              mui.alert( "Upload failed: " + status );
             }
           }
         );
