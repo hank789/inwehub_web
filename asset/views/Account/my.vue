@@ -10,13 +10,11 @@
         <div class="mui-content myinfo">
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell mui-media">
-              <a class="mui-navigate-right" href="#account">
-                <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
-                <div class="mui-media-body">
-                  {{ name }}
-                  <p class="mui-ellipsis">{{ phone }}</p>
-                </div>
-              </a>
+              <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
+              <div class="mui-media-body">
+                {{ name }}
+                <p class="mui-ellipsis">{{ phone }}</p>
+              </div>
             </li>
           </ul>
 
