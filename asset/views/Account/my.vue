@@ -10,18 +10,21 @@
         <div class="mui-content myinfo">
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell mui-media">
-              <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
-              <div class="mui-media-body">
-                {{ name }}
-                <p class="mui-ellipsis">{{ phone }}</p>
-              </div>
+              <router-link to="/my/info" class="mui-navigate-right">
+                <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
+                <div class="mui-media-body">
+                  {{ name }}
+                  <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
+                  <p class="mui-ellipsis" v-else>资料未完善</p>
+                </div>
+              </router-link>
+            </li>
+            <li class="mui-table-view-cell">
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案<span class="mui-pull-right">资料完整度</span></router-link>
             </li>
           </ul>
 
           <ul class="mui-table-view mui-table-view-chevron">
-            <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案</router-link>
-            </li>
             <li class="mui-table-view-cell">
               <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-vip"></span>专家管理</a>
             </li>
@@ -73,7 +76,9 @@
         im_tokenMsg: '',
         name:currentUser.name,
         phone:currentUser.phone,
-        avatar:currentUser.avatar_url
+        avatar:currentUser.avatar_url,
+        title: currentUser.title,
+        company: currentUser.company
       }
     },
     methods: {
@@ -123,5 +128,8 @@
 
   .myinfo > .mui-table-view:first-child{
     margin-top:0;
+  }
+  .head-img {
+    border-radius: 42px;
   }
 </style>

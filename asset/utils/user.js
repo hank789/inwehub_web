@@ -69,6 +69,74 @@ function getAvatar (userInfo, process, cb) {
   cb(userInfo);
 };
 
+function updateUserInfoCache(user) {
+  let userLocal = {
+    user_id: 0,
+    name: '',
+    phone: '',
+    email: '',
+    gender: '',
+    birthday: '',
+    province: '',
+    city: '',
+    address_detail: '',
+    title: '',
+    company: '',
+    industry_tags: '',
+    description: '',
+    tags: '',
+    status: '',
+    avatar_url:'',
+    counts: {},
+    datas: {}
+  };
+  userLocal.user_id = user.id;
+  userLocal.name = user.name;
+  userLocal.phone = user.mobile;
+  userLocal.avatar_url = user.avatar_url?user.avatar_url:'images/uicon.jpg';
+  userLocal.email = user.email;
+  userLocal.gender = user.gender;
+  userLocal.birthday = user.birthday;
+  userLocal.province = user.province;
+  userLocal.city = user.city;
+  userLocal.address_detail = user.address_detail;
+  userLocal.title = user.title;
+  userLocal.company = user.company;
+  userLocal.industry_tags = user.industry_tags;
+  userLocal.description = user.description;
+  userLocal.tags = user.tags;
+  userLocal.status = user.status;
+
+  /*
+   user.counts.map(function (count, index) {
+   let keyName = count.key;
+   let value = count.value;
+   userLocal.counts = Object.assign({}, userLocal.counts, { [keyName]:  value });
+   });
+   */
+  let newData = {};
+  /*
+   user.datas.forEach(data => {
+   newData[data.profile] = {
+   display: data.profile_name,
+   value: data.pivot.user_profile_setting_data,
+   type: data.type,
+   options: data.default_options,
+   updated_at: data.updated_at
+   };
+   });
+   */
+  userLocal.datas = newData;
+  /*
+   getAvatar(userLocal, 20, newUserLocal => {
+   userLocal = newUserLocal;
+   });
+   */
+  localEvent.setLocalItem('UserInfo', userLocal);
+  return userLocal;
+}
+
+
 function getUserInfo (user_id, cb) {
   addAccessToken().post(createAPI('profile/info'), {
       user_ids: [ user_id ]
@@ -88,44 +156,7 @@ function getUserInfo (user_id, cb) {
 
     let user = response.data.data.info;
 
-    let userLocal = {
-      user_id: 0,
-      name: '',
-      phone: '',
-      avatar_url:'',
-      counts: {},
-      datas: {}
-    };
-    userLocal.user_id = user.id;
-    userLocal.name = user.name;
-    userLocal.phone = user.mobile;
-    userLocal.avatar_url = user.avatar_url?user.avatar_url:'images/uicon.jpg';
-    /*
-    user.counts.map(function (count, index) {
-      let keyName = count.key;
-      let value = count.value;
-      userLocal.counts = Object.assign({}, userLocal.counts, { [keyName]:  value });
-    });
-    */
-    let newData = {};
-    /*
-    user.datas.forEach(data => {
-      newData[data.profile] = {
-        display: data.profile_name,
-        value: data.pivot.user_profile_setting_data,
-        type: data.type,
-        options: data.default_options,
-        updated_at: data.updated_at
-      };
-    });
-    */
-    userLocal.datas = newData;
-    /*
-    getAvatar(userLocal, 20, newUserLocal => {
-      userLocal = newUserLocal;
-    });
-    */
-    localEvent.setLocalItem('UserInfo', userLocal);
+    var userLocal = updateUserInfoCache(user);
 
     cb(userLocal);
   })
@@ -222,6 +253,7 @@ function getUsersInfo (user_ids, cb) {
 export {
   getUserInfo,
   getUsersInfo,
+  updateUserInfoCache,
   getAvatar,
   unFollowingUser,
   followingUser
