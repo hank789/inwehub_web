@@ -38,11 +38,18 @@
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
+            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
-          <span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
+
+        </div>
+      </div>
+
+      <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
+        <div class="mui-table-view-cell">
+          暂无回答
         </div>
       </div>
 
@@ -60,6 +67,12 @@
         <div class="mui-table-view-cell">
           评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
           <p>{{ ask.feedback.description }}</p>
+        </div>
+      </div>
+
+      <div class="mui-table-view detail-comment-result" v-show="ask.question.status!=7">
+        <div class="mui-table-view-cell">
+             暂无评价
         </div>
       </div>
 
@@ -170,11 +183,9 @@
     position: relative;
   }
 
-  .detail-answer .question .timeAgo {
-    position: absolute;
-    bottom: 5px;
-    left: 15px;
+  .detail-answer .timeAgo {
     color: #999;
+    font-size:14px;
   }
 
   .detail-ask .mui-media-body .amount {
