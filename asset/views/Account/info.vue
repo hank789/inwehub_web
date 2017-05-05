@@ -54,10 +54,19 @@
                 <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a class="mui-navigate-right">手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
+                <a href="#account_address_detail" class="mui-navigate-right">详细地址<span class="mui-pull-right account-setting-field" v-text="user.info.address_detail"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a class="mui-navigate">手机号<span class="mui-pull-right account-setting-field" v-text="user.info.mobile"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a href="#account_description" class="mui-navigate-right">个人签名</a>
+                <div style="padding-top: 10px;">
+                  {{ user.info.description }}
+                </div>
               </li>
             </ul>
             <div class="account_item_title">
@@ -127,7 +136,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" class=".mui-input-speech" placeholder="描述"></textarea>
+                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
                   <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
                 </div>
               </li>
@@ -186,7 +195,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" class=".mui-input-speech" placeholder="描述"></textarea>
+                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
                   <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
                 </div>
               </li>
@@ -294,6 +303,51 @@
       </div>
     </div>
     <!--编辑邮箱地址结束-->
+
+    <!--编辑详细地址开始-->
+    <div id="account_address_detail" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-center mui-title">编辑</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label>详细地址</label>
+                  <input type="text" class="mui-input-clear" v-model="user.info.address_detail">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑详细地址结束-->
+
+    <!--编辑个人签名开始-->
+    <div id="account_description" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-center mui-title">个人签名</h1>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <textarea v-model.trim="user.info.description" rows="5" class="mui-input-clear" placeholder="个人签名"></textarea>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑个人签名结束-->
   </div>
 
 </template>
@@ -647,7 +701,9 @@
       }
     },
     mounted () {
-      mui.init();
+      mui.init({
+        swipeBack: true //启用右滑关闭功能
+      });
       mui('.mui-scroll-wrapper').scroll();
       //初始化单页view
       var viewApi = mui('#app_account_info').view({
@@ -911,7 +967,9 @@
     margin-bottom: 30px;
   }
 
-  .mui-table-view span.mui-pull-right {
+  .mui-table-view-cell .mui-navigate-right,
+  .mui-table-view-cell .mui-navigate
+  {
     color: #999;
   }
   .mui-table-view-divider {
@@ -939,17 +997,16 @@
     width: 40px;
     height: 40px;
   }
-  .update {
-    font-style: normal;
-    color: #999999;
-    margin-right: -25px;
-    font-size: 15px
-  }
+
   .mui-ios .mui-navbar .mui-bar .mui-title {
     position: static;
   }
   .account-setting-field {
     position: absolute;
     right: 40px;
+    color: #3f3f3f;
+  }
+  .mui-input-row textarea {
+    border: none !important;
   }
 </style>
