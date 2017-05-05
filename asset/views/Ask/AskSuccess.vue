@@ -376,4 +376,9 @@
   .ask-success2{
     margin-bottom: 20px;
   }
+
+  .detail-ask-timeline .mui-table-view-cell{
+    padding-right:0;
+    padding-left:0;
+  }
 </style>

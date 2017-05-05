@@ -412,4 +412,9 @@
     height: 100%;
     display: block;
   }
+
+  .detail-ask-timeline .mui-table-view-cell{
+    padding-right:0;
+    padding-left:0;
+  }
 </style>
