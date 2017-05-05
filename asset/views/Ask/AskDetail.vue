@@ -14,16 +14,22 @@
     <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="ask.question.user_avatar_url">
+          <div class="avatar">
+            <div class="avatarInner">
+              <img class="mui-media-object  avatar" :src="ask.question.user_avatar_url">
+            </div>
+          </div>
+
           <div class="mui-media-body">
             {{ ask.question.user_name }}
-
+            <div>
+            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
+            <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question">
             {{ ask.question.description }}
-            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
-          <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span>
+
         </div>
       </div>
 
@@ -32,11 +38,18 @@
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
+            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
-          <span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
+
+        </div>
+      </div>
+
+      <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
+        <div class="mui-table-view-cell">
+          暂无回答
         </div>
       </div>
 
@@ -57,6 +70,12 @@
         </div>
       </div>
 
+      <div class="mui-table-view detail-comment-result" v-show="ask.question.status!=7">
+        <div class="mui-table-view-cell">
+             暂无评价
+        </div>
+      </div>
+
       <div class="mui-table-view detail-ask-timeline">
         <div class="mui-table-view-cell">
           <div class="timeline timeline-collapsing">
@@ -65,7 +84,7 @@
               <div class="timeline-icon"></div>
               <div class="timeline-content">
                 {{ item.title }}<br/>
-                <timeago :since="getTime(item.created_at)"></timeago>
+                <timeago class="timeago" :since="getTime(item.created_at)"></timeago>
               </div>
             </div>
           </div>
@@ -149,43 +168,75 @@
 
 <style scoped>
   .detail-ask .question {
-    padding-bottom: 40px;
     position: relative;
   }
+  .detail-ask .mui-media-body{
+    padding-left:10px;
+  }
 
-  .detail-ask .question .timeAgo {
-    position: absolute;
-    bottom: 5px;
-    left: 15px;
+  .detail-ask .mui-media-body .timeAgo {
     color: #999;
+    font-size:14px;
   }
 
   .detail-answer .question {
-    padding-bottom: 40px;
     position: relative;
   }
 
-  .detail-answer .question .timeAgo {
-    position: absolute;
-    bottom: 5px;
-    left: 15px;
+  .detail-answer .timeAgo {
     color: #999;
+    font-size:14px;
   }
 
-  .detail-ask .question .amount {
+  .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 5px;
+    bottom: 10px;
     right: 15px;
     color: #999;
   }
 
-  .detail-ask .question .amount b {
+  .detail-ask .mui-media-body .amount b {
     color: #f85f48;
     font-weight: normal;
   }
 
   .detail-ask-timeline {
     margin-top: 15px;
+    padding-bottom:10px;
+  }
+
+  .status {
+    background-color: #fff;
+    margin-top: 15px;
+    padding: 20px;
+  }
+
+  .status .mui-icon {
+    float: left;
+    font-size: 30px;
+    color: #007aff;
+    margin-right: 20px;
+  }
+
+  .detail-answer {
+    margin-top: 15px;
+  }
+
+  .detail-comment {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .detail-comment-result {
+    margin-top: 15px;
+    text-align: left;
+  }
+  .star-rating{
+    float:right;
+  }
+
+  .detail-comment-result p{
+    margin-top:5px;
   }
 
   .timeline {
@@ -215,17 +266,13 @@
     overflow-y: hidden;
   }
 
-  .timeline .timeline-block {
-    margin: 40px 0;
-  }
-
   .timeline .timeline-icon {
     position: absolute;
     width: 10px;
     height: 10px;
     left: 50%;
     margin-left: -16px;
-    margin-top: 25px;
+    margin-top: 18px;
     border: 2px solid #999;
     border-radius: 100%;
     background-color: white;
@@ -262,8 +309,6 @@
     width: 45%;
     padding: 12px;
     color:#999;
-    background-color: #EEE;
-    border: 1px solid #e5e5e5;
     line-height: 20px;
     min-height: 64px;
   }
@@ -280,7 +325,7 @@
     position: absolute;
     width: 2px;
     height: 100%;
-    top: 0;
+    top: 26px;
     left: 50%;
     margin-left: -1px;
     /* Half of width */
@@ -294,13 +339,13 @@
   }
 
   .timeline.timeline-collapsing .timeline-block {
-    margin-left: 72px;
+    margin-left: 42px;
     margin-right: 10px;
   }
 
   .timeline.timeline-collapsing .timeline-icon {
     left: auto;
-    margin-left: -46px;
+    margin-left: -16px;
   }
 
   .timeline.timeline-collapsing .timeline-content {
@@ -314,36 +359,6 @@
     text-align: right;
   }
 
-  .status {
-    background-color: #fff;
-    margin-top: 15px;
-    padding: 20px;
-  }
-
-  .status .mui-icon {
-    float: left;
-    font-size: 30px;
-    color: #007aff;
-    margin-right: 20px;
-  }
-
-  .detail-answer {
-    margin-top: 15px;
-  }
-
-  .detail-comment {
-    margin-top: 15px;
-    text-align: center;
-  }
-
-  .detail-comment-result {
-    margin-top: 15px;
-    text-align: left;
-  }
-  .star-rating{
-    float:right;
-  }
-
   .timeline .timeline-block:first-child .timeline-icon{
     border-color:#FF6961;
   }
@@ -352,7 +367,49 @@
     color:#3f3f3f;
   }
 
-  .detail-comment-result p{
-    margin-top:5px;
+  .timeago{
+    display: inline-block;
+    color:#007aff;
+    margin-top:10px;
+  }
+
+  .avatar{
+    z-index: 0;
+    color: #ffffff;
+    float:left;
+    background-color: #bdbdbd;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #bdbdbd;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
