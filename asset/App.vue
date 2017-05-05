@@ -13,10 +13,12 @@
         <span class="mui-icon mui-icon-help"></span>
         <span class="mui-tab-label">提问</span>
       </div>
+
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
         <span class="mui-icon mui-icon-plus"></span>
         <span class="mui-tab-label">任务</span>
       </div>
+
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
@@ -50,7 +52,6 @@
         });
 
         switch(fullPath) {
-          case '/':
           case '/home':
             this.isHome = true;
             break;

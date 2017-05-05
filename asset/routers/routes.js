@@ -10,13 +10,40 @@ import Home from '../views/Home.vue';
 
 import { requestAuth, CanNotGetInWhenLogged } from '../utils/auth';
 
+import localEvent from '../stores/localStorage';
+
 const routes = [
   {
     path: '/',
     component: Home,
     meta: {
       title: '主页'
+    },
+    beforeEnter: (to, from, next) => {
+      if(mui.os.plus){
+        var lauch = localEvent.getLocalItem('lauchFlag');
+        if (!lauch.showGuide) {
+          mui.plusReady(function () {
+            plus.navigator.setFullscreen(true);
+            next({
+              path: '/guide'
+            });
+          });
+        } else {
+          next({
+            path: '/home'
+          });
+        }
+      } else {
+        next({
+          path: '/home'
+        });
+      }
     }
+  },
+  { // message
+    path: '/home',
+    component: require('../views/Home.vue'),
   },
   {
     path: '/login',
@@ -217,6 +244,10 @@ const routes = [
   { // header
     path: '/header',
     component: require('../views/Account/selectHeader.vue'),
+  },
+  { // guide
+    path: '/guide',
+    component: require('../views/Guide.vue'),
   },
   { // feedback
     path: '/feedback',

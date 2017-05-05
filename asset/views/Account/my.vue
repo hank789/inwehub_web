@@ -50,6 +50,9 @@
               <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span>意见与反馈</router-link>
             </li>
             <li class="mui-table-view-cell">
+              <a href="javascript:void(0)" class="mui-navigate-right" @click="clearCache"><span class="mui-icon mui-icon-reload"></span>清除缓存</a>
+            </li>
+            <li class="mui-table-view-cell">
               <a href="javascript:void(0)" class="mui-navigate-right" @click="logOut"><span class="mui-icon mui-icon-close"></span>退出登录</a>
             </li>
           </ul>
@@ -75,8 +78,12 @@
     },
     methods: {
       getToken(){
-        var im_token = JSON.parse(sessionStorage.getItem('im_token'))
-        this.im_tokenMsg = im_token;
+         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
+         this.im_tokenMsg = im_token;
+      },
+      clearCache(){
+        localEvent.setLocalItem('lauchFlag', {showGuide:false});
+        mui.toast('清除成功');
       },
       logOut(){
         localEvent.clearLocalItem('UserLoginInfo');
