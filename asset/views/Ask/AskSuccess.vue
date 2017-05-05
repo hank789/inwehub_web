@@ -14,7 +14,7 @@
 
         <div class="ask-success mui-table-view">
           <div class="mui-table-view-cell">
-            <h4>亲爱的老郭：</h4>
+            <h4>亲爱的{{username}}：</h4>
             <div class="mui-row infos">
               <div class="mui-col-sm-2 mui-col-xs-2">
                 <i class="mui-icon iconfont icon-success"></i>
@@ -80,8 +80,13 @@
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
+
+  const currentUser = localEvent.getLocalItem('UserInfo');
+
   const AskSuccess = {
     data: () => ({
+      username:currentUser.name,
       ask: {
         answers: [],
         question: {created_at:''},
