@@ -11,14 +11,46 @@
       </div>
 
       <div class="mui-content" v-show="!loading">
-        <div class="mui-table-view detail-ask-timeline">
+
+        <div class="ask-success mui-table-view">
+          <div class="mui-table-view-cell">
+            <h4>亲爱的老郭：</h4>
+            <div class="mui-row infos">
+              <div class="mui-col-sm-2 mui-col-xs-2">
+                <i class="mui-icon iconfont icon-success"></i>
+              </div>
+              <div class="mui-col-sm-10 mui-col-xs-10 info">
+                恭喜您！<br/>
+                您提交的问题我们已经成功受理啦！我们正在玩命帮您匹配寻找最合适作答的资深顾问和专家！</div>
+            </div>
+
+            <div class="kefu">
+              <div class="person">
+                <div class="avatar">
+                  <div class="avatarInner">
+                    <img src="images/uicon.jpg" class="avatar"/>
+                  </div>
+                </div>
+                <div class="mui-media-body">
+                  <span class="username">您的专属客服：小哈</span>
+                  <div>
+                    <span class="time">2017-04-01 11:00:34</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mui-table-view detail-ask-timeline mt15">
           <div class="mui-table-view-cell">
             <div class="timeline timeline-collapsing">
               <div class="timeline-block" v-for="(item, index) in timelines">
                 <div class="timeline-icon"></div>
                 <div class="timeline-content">
                   {{ item.title }}<br/>
-                  <timeago :since="getTime(item.created_at)"></timeago>
+                  <timeago class="timeago" :since="getTime(item.created_at)"></timeago>
                 </div>
               </div>
               </div>
@@ -27,9 +59,8 @@
         </div>
 
 
-        <div class="ask-success mui-table-view" v-show="!loading">
+        <div class="ask-success ask-success2 mui-table-view" v-show="!loading">
           <div class="mui-table-view-cell">
-            <i class="mui-icon iconfont icon-success"></i>您的提问平台已经受理，我们将会尽快为您找寻合适的专家！
                         <div class="title">您还可以：</div>
             <div class="buttons">
               <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.replace('/ask/' + id)">查看问题</button>
@@ -136,17 +167,13 @@
     overflow-y: hidden;
   }
 
-  .timeline .timeline-block {
-    margin: 40px 0;
-  }
-
   .timeline .timeline-icon {
     position: absolute;
     width: 10px;
     height: 10px;
     left: 50%;
     margin-left: -16px;
-    margin-top: 25px;
+    margin-top: 18px;
     border: 2px solid #999;
     border-radius: 100%;
     background-color: white;
@@ -181,10 +208,8 @@
   .timeline .timeline-content {
     position: relative;
     width: 45%;
-    padding: 12px;
+    padding: 12px 0 12px 12px;
     color:#999;
-    background-color: #EEE;
-    border: 1px solid #e5e5e5;
     line-height: 20px;
     min-height: 64px;
   }
@@ -197,11 +222,15 @@
     font-size: 80%;
   }
 
+  .detail-ask-timeline{
+    padding-bottom:10px;
+  }
+
   .timeline::before {
     position: absolute;
     width: 2px;
     height: 100%;
-    top: 0;
+    top: 26px;
     left: 50%;
     margin-left: -1px;
     /* Half of width */
@@ -215,13 +244,13 @@
   }
 
   .timeline.timeline-collapsing .timeline-block {
-    margin-left: 72px;
+    margin-left: 42px;
     margin-right: 10px;
   }
 
   .timeline.timeline-collapsing .timeline-icon {
     left: auto;
-    margin-left: -46px;
+    margin-left: -16px;
   }
 
   .timeline.timeline-collapsing .timeline-content {
@@ -237,13 +266,14 @@
 
   .ask-success {
     margin-top: 15px;
-    padding:10px;
+    padding:10px 0;
   }
 
   .ask-success .mui-icon {
     float: left;
     font-size: 30px;
     color: #007aff;
+    margin-top:15px;
     margin-right: 20px;
   }
 
@@ -256,7 +286,7 @@
   }
 
   .ask-success .title{
-    margin:10px 0;
+    margin:0 0 10px 0;
   }
 
   .buttons{
@@ -265,5 +295,80 @@
   .buttons button{
     margin:0 10px;
     padding:6px 20px;
+  }
+
+  .infos{
+    margin-top:10px;
+  }
+  .infos .mui-icon{
+    font-size:60px;
+  }
+
+  .infos .info{
+    padding-left:10px;
+    line-height:23px;
+  }
+
+  h4{
+    font-weight:normal;
+  }
+
+  .person .avatar{
+    z-index: 0;
+    color: #ffffff;
+    float:left;
+    background-color: #bdbdbd;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #bdbdbd;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+
+  .person .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .person .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .timeago{
+    display: inline-block;
+    color:#007aff;
+    margin-top:10px;
+  }
+
+  .kefu{
+    float: right;
+    margin-top:20px;
+    font-size:14px;
+  }
+  .kefu .mui-media-body{
+    padding-left:10px;
+  }
+
+  .ask-success2{
+    margin-bottom: 20px;
   }
 </style>

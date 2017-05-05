@@ -186,6 +186,41 @@
 
   .detail-ask-timeline {
     margin-top: 15px;
+    padding-bottom:10px;
+  }
+
+  .status {
+    background-color: #fff;
+    margin-top: 15px;
+    padding: 20px;
+  }
+
+  .status .mui-icon {
+    float: left;
+    font-size: 30px;
+    color: #007aff;
+    margin-right: 20px;
+  }
+
+  .detail-answer {
+    margin-top: 15px;
+  }
+
+  .detail-comment {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .detail-comment-result {
+    margin-top: 15px;
+    text-align: left;
+  }
+  .star-rating{
+    float:right;
+  }
+
+  .detail-comment-result p{
+    margin-top:5px;
   }
 
   .timeline {
@@ -215,17 +250,13 @@
     overflow-y: hidden;
   }
 
-  .timeline .timeline-block {
-    margin: 40px 0;
-  }
-
   .timeline .timeline-icon {
     position: absolute;
     width: 10px;
     height: 10px;
     left: 50%;
     margin-left: -16px;
-    margin-top: 25px;
+    margin-top: 18px;
     border: 2px solid #999;
     border-radius: 100%;
     background-color: white;
@@ -262,8 +293,6 @@
     width: 45%;
     padding: 12px;
     color:#999;
-    background-color: #EEE;
-    border: 1px solid #e5e5e5;
     line-height: 20px;
     min-height: 64px;
   }
@@ -280,7 +309,7 @@
     position: absolute;
     width: 2px;
     height: 100%;
-    top: 0;
+    top: 26px;
     left: 50%;
     margin-left: -1px;
     /* Half of width */
@@ -294,13 +323,13 @@
   }
 
   .timeline.timeline-collapsing .timeline-block {
-    margin-left: 72px;
+    margin-left: 42px;
     margin-right: 10px;
   }
 
   .timeline.timeline-collapsing .timeline-icon {
     left: auto;
-    margin-left: -46px;
+    margin-left: -16px;
   }
 
   .timeline.timeline-collapsing .timeline-content {
@@ -314,45 +343,11 @@
     text-align: right;
   }
 
-  .status {
-    background-color: #fff;
-    margin-top: 15px;
-    padding: 20px;
-  }
-
-  .status .mui-icon {
-    float: left;
-    font-size: 30px;
-    color: #007aff;
-    margin-right: 20px;
-  }
-
-  .detail-answer {
-    margin-top: 15px;
-  }
-
-  .detail-comment {
-    margin-top: 15px;
-    text-align: center;
-  }
-
-  .detail-comment-result {
-    margin-top: 15px;
-    text-align: left;
-  }
-  .star-rating{
-    float:right;
-  }
-
   .timeline .timeline-block:first-child .timeline-icon{
     border-color:#FF6961;
   }
 
   .timeline .timeline-block:first-child .timeline-content{
     color:#3f3f3f;
-  }
-
-  .detail-comment-result p{
-    margin-top:5px;
   }
 </style>
