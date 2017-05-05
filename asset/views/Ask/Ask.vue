@@ -10,11 +10,11 @@
         <div class="mui-table-view-cell">
           <form>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="description" class=".mui-input-speech" placeholder="提出问题"></textarea>
-              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+              <textarea v-model.trim="description" class="mui-focusin" placeholder="提出问题"></textarea>
+              <span class="counter">(<span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span>)</span>
               <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
             </div>
-            <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
             <div class="title select" v-show="!isShowMoneyDev">请先选择问题分类：<span class="active" @tap.stop.prevent="selectType">{{ type?type:'请选择' }}</span></div>
 
@@ -62,6 +62,9 @@
     }),
     mounted(){
       mui.init();
+
+      var inputElem = document.querySelector('textarea');
+      inputElem.focus();
     },
     computed: {
       type () {
@@ -234,7 +237,7 @@
   }
   .form-ask textarea {
     width:100%;
-    height:250px;
+    height:150px;
     border:none;
     margin:0;
     padding:10px;
@@ -287,6 +290,7 @@
 
   .form-ask .button-wrapper{
     margin-top:15px;
+    padding: 0 50px
   }
 
 

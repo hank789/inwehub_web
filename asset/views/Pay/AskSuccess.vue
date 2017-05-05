@@ -10,12 +10,11 @@
           <br/>
           支付成功
       </div>
-        <div class="title">您已成功支付</div>
-        <div class="money">¥{{ info.money }}</div>
-        <div class="msg">请等待平台受理您的提问需求，请稍安勿躁！</div>
+        <div class="title">您已成功支付{{ info.money }}</div>
         <div class="loading"><img :src="loading_gif"/></div>
-        <div class="time">已等待<span>{{ countup }}秒</span>！</div>
-        <div class="important">如平台受理失败，<br/>支付金额将会退回到您的账户中。</div>
+        <div class="time"><span>已等待{{ countup }}秒！</span></div>
+        <div class="important">请耐心等待几秒，平台会立即反馈受理情况！<br/>如受理失败，支付金额将退回到您账户中！</div>
+
       </div>
 </div>
 </template>
@@ -85,7 +84,7 @@
     padding:15px;
   }
   .pay-success .status{
-    margin-top:30px;
+    margin-top:40px;
     color:#19ac18;
   }
 
@@ -94,29 +93,22 @@
     margin-bottom: 10px;
   }
   .pay-success .title{
-    margin:20px 0;
+    margin:20px 0 40px;
   }
 
-  .pay-success .money{
-    color:#007aff;
-  }
-
-  .pay-success .msg{
-    margin:20px 0;
+  .pay-success .important{
+    margin-top:40px;
+    line-height: 33px;
+    color:#999;
   }
 
   .pay-success .time{
-    margin:20px 0;
+    margin:30px 0;
   }
 
   .pay-success .time span{
     font-size:20px;
     color:orange;
     margin:0 5px;
-  }
-
-  .pay-success .important{
-    color:#999;
-    line-height:30px;
   }
 </style>
