@@ -88,7 +88,7 @@
                 this.clearCache();
                 this.$router.go(-1);
               }
-          });
+          }, 'div');
       },
       showMoney(){
 
