@@ -408,7 +408,7 @@
           let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
           let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
           document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
-          this.initAvatarImgPreview();
+          //this.initAvatarImgPreview();
         }
       }
     },
@@ -651,7 +651,7 @@
           slider.setAttribute("id", "__mui-imageview__");
           slider.classList.add("mui-slider");
           slider.classList.add("mui-fullscreen");
-          slider.style = "position: fixed;z-index: 20;background-color: #000;display: none";
+          slider.style.di = "position: fixed;z-index: 20;background-color: #000;display: none";
           slider.addEventListener("tap", function() {
             slider.style = "position: fixed;z-index: 20;background-color: #000;display: none";
           });
