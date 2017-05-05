@@ -21,6 +21,9 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
         <h1 class="mui-center mui-title">个人信息</h1>
+        <button type="button" @tap.stop.prevent="submitInfo" class="mui-left mui-btn mui-btn-nav mui-pull-right">
+          保存
+        </button>
       </div>
       <!--页面标题栏结束-->
       <!--页面主内容区开始-->
@@ -28,14 +31,33 @@
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
             <ul class="mui-table-view mui-table-view-chevron">
-              <li class="mui-table-view-cell mui-media">
-                <a class="mui-navigate-right" href="#account">
-                  <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="user.info.avatar_url">
-                  <div class="mui-media-body">
-                    {{ user.info.name }}
-                    <p class='mui-ellipsis' v-show="user.info.title"><b>{{ user.info.title }}</b></p>
-                  </div>
+              <li class="mui-table-view-cell">
+                <a id="head" class="mui-navigate-right">头像
+                  <span class="mui-pull-right head">
+									<img class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url"/>
+								</span>
                 </a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a href="#account_name" class="mui-navigate-right">姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field" id="user_gender" v-text="genderName"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a href="#account_company" class="mui-navigate-right">公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a href="#account_title" class="mui-navigate-right">职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
               </li>
             </ul>
             <div class="account_item_title">
@@ -66,64 +88,12 @@
       <!--页面主内容区结束-->
     </div>
     <!--单页面结束-->
-    <!--个人信息页面开始-->
-    <div id="account" class="mui-page">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <button type="button" @tap.stop.prevent="submitInfo" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
-      </div>
-      <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <a id="head" class="mui-navigate-right">头像
-                  <span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url"/>
-								</span>
-                </a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a href="#account_name" class="mui-navigate-right">姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field" id="user_gender" v-text="genderName"></span></a>
-              </li>
-            </ul>
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <a href="#account_company" class="mui-navigate-right">公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a href="#account_title" class="mui-navigate-right">职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a class="mui-navigate-right">手机号<span class="mui-pull-right" v-text="user.info.mobile"></span></a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--个人信息页面结束-->
+
 
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" @tap.stop.prevent="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">工作经历</h1>
         <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('job')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
           保存
@@ -176,9 +146,7 @@
     <!--添加教育经历开始-->
     <div id="account_add_edu" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" @tap.stop.prevent="muiViewBack()" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">教育经历</h1>
         <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('edu')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
           保存
@@ -238,9 +206,7 @@
     <!--编辑姓名开始-->
     <div id="account_name" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
       </div>
       <div class="mui-page-content">
@@ -263,9 +229,7 @@
     <!--编辑公司开始-->
     <div id="account_company" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
       </div>
       <div class="mui-page-content">
@@ -288,9 +252,7 @@
     <!--编辑职位开始-->
     <div id="account_title" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
       </div>
       <div class="mui-page-content">
@@ -313,9 +275,7 @@
     <!--编辑邮箱地址开始-->
     <div id="account_email" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-          <span class="mui-icon mui-icon-left-nav"></span>个人信息
-        </button>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
       </div>
       <div class="mui-page-content">
@@ -347,6 +307,8 @@
   import cityData from '../../components/city/city.data';
   import ACCOUNT_API from '../../api/account';
   import dPickerComponent from '../../components/picker/date-picker.vue';
+  import { updateUserInfoCache } from '../../utils/user';
+
 
   export default {
     data: () => ({
@@ -487,6 +449,7 @@
         apiRequest(`profile/update`,data).then(res => {
           if (res !== false) {
             mui.toast('保存成功');
+            updateUserInfoCache(data);
           }
         });
       },
