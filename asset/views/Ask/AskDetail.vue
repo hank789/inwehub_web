@@ -14,16 +14,22 @@
     <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="ask.question.user_avatar_url">
+          <div class="avatar">
+            <div class="avatarInner">
+              <img class="mui-media-object  avatar" :src="ask.question.user_avatar_url">
+            </div>
+          </div>
+
           <div class="mui-media-body">
             {{ ask.question.user_name }}
-
+            <div>
+            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
+            <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question">
             {{ ask.question.description }}
-            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
-          <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span>
+
         </div>
       </div>
 
@@ -65,7 +71,7 @@
               <div class="timeline-icon"></div>
               <div class="timeline-content">
                 {{ item.title }}<br/>
-                <timeago :since="getTime(item.created_at)"></timeago>
+                <timeago class="timeago" :since="getTime(item.created_at)"></timeago>
               </div>
             </div>
           </div>
@@ -149,19 +155,18 @@
 
 <style scoped>
   .detail-ask .question {
-    padding-bottom: 40px;
     position: relative;
   }
+  .detail-ask .mui-media-body{
+    padding-left:10px;
+  }
 
-  .detail-ask .question .timeAgo {
-    position: absolute;
-    bottom: 5px;
-    left: 15px;
+  .detail-ask .mui-media-body .timeAgo {
     color: #999;
+    font-size:14px;
   }
 
   .detail-answer .question {
-    padding-bottom: 40px;
     position: relative;
   }
 
@@ -172,14 +177,14 @@
     color: #999;
   }
 
-  .detail-ask .question .amount {
+  .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 5px;
+    bottom: 10px;
     right: 15px;
     color: #999;
   }
 
-  .detail-ask .question .amount b {
+  .detail-ask .mui-media-body .amount b {
     color: #f85f48;
     font-weight: normal;
   }
@@ -349,5 +354,51 @@
 
   .timeline .timeline-block:first-child .timeline-content{
     color:#3f3f3f;
+  }
+
+  .timeago{
+    display: inline-block;
+    color:#007aff;
+    margin-top:10px;
+  }
+
+  .avatar{
+    z-index: 0;
+    color: #ffffff;
+    float:left;
+    background-color: #bdbdbd;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #bdbdbd;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
