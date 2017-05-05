@@ -10,9 +10,9 @@
         <div class="mui-table-view-cell">
           <form>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="description" class=".mui-input-speech"></textarea>
+              <textarea v-model.trim="description" class=".mui-input-speech" placeholder="提出问题"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-              <span class="niming"><input type="checkbox" v-model="hide"/> 匿名</span>
+              <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
             </div>
             <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
 
@@ -235,13 +235,15 @@
   .form-ask textarea {
     width:100%;
     height:250px;
-    border:1px solid #efefef;
-    border-radius: 5px;
+    border:none;
+    margin:0;
+    padding:10px;
   }
   .selectMoney{
     background: #fff;
   }
   .form-ask .title{
+    margin:20px 0;
     text-align: center;
     color:#8b8b8b;
     height:32px;
@@ -289,18 +291,22 @@
 
 
   .textarea-wrapper{
+    border:1px solid #efefef;
+    padding-bottom: 20px;
+    border-radius: 5px;
     position: relative;
+    margin-bottom: 10px;
   }
   .textarea-wrapper .counter{
     position: absolute;
     left: 10px;
-    bottom: 25px;
+    bottom: 5px;
     color:#999;
   }
   .textarea-wrapper .niming{
     position: absolute;
     right: 10px;
-    bottom: 25px;
+    bottom: 5px;
     color:#999;
   }
 
