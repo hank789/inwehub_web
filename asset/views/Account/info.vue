@@ -63,10 +63,8 @@
                 <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_description" class="mui-navigate-right">个人签名</a>
-                <div style="padding-top: 10px;">
-                  {{ user.info.description }}
-                </div>
+                <a href="#account_description" class="mui-navigate-right">个人签名<pre style="color: #3f3f3f;" v-text="user.info.description"></pre></a>
+
               </li>
             </ul>
             <div class="account_item_title">
@@ -81,6 +79,17 @@
               </li>
             </ul>
             <div class="account_item_title">
+              项目经历<a href="#account_add_project" class="mui-pull-right">添加</a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="project in user.projects" class="mui-table-view-cell">
+                <a @tap.stop.prevent="initNewItem(project,'project')" class="mui-navigate-right">
+                  {{ project.project_name }}
+                  <p class='mui-ellipsis'>{{ project.begin_time }} ~ {{ project.end_time }} | {{ project.title }}</p>
+                </a>
+              </li>
+            </ul>
+            <div class="account_item_title">
               教育经历<a href="#account_add_edu" class="mui-pull-right">添加</a>
             </div>
             <ul class="mui-table-view mui-table-view-chevron">
@@ -88,6 +97,17 @@
                 <a @tap.stop.prevent="initNewItem(edu,'edu')" class="mui-navigate-right">
                   {{ edu.school }}
                   <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree }}</p>
+                </a>
+              </li>
+            </ul>
+            <div class="account_item_title">
+              培训认证<a href="#account_add_train" class="mui-pull-right">添加</a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="train in user.trains" class="mui-table-view-cell">
+                <a @tap.stop.prevent="initNewItem(train,'train')" class="mui-navigate-right">
+                  {{ train.agency }}
+                  <p class='mui-ellipsis'>{{ train.get_time }} | {{ train.certificate }}</p>
                 </a>
               </li>
             </ul>
@@ -114,13 +134,13 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>公司</label>
+                  <label class="mui-navigate">公司</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>职位</label>
+                  <label class="mui-navigate">职位</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
                 </div>
               </li>
@@ -152,6 +172,59 @@
     </div>
     <!--添加工作经历结束-->
 
+    <!--添加项目经历开始-->
+    <div id="account_add_project" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <h1 class="mui-center mui-title">项目经历</h1>
+        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('project')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
+          保存
+        </button>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">公司</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">职位</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="textarea-wrapper">
+                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+                </div>
+              </li>
+            </ul>
+            <ul class="mui-table-view" v-show="newItem.id">
+              <li class="mui-table-view-cell" style="text-align: center;">
+                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--添加项目经历结束-->
+
     <!--添加教育经历开始-->
     <div id="account_add_edu" class="mui-page">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
@@ -167,19 +240,19 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>学校</label>
+                  <label class="mui-navigate">学校</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.school" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>专业</label>
+                  <label class="mui-navigate">专业</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.major" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>学历</label>
+                  <label class="mui-navigate">学历</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.degree" placeholder="必填">
                 </div>
               </li>
@@ -211,6 +284,58 @@
     </div>
     <!--添加教育经历结束-->
 
+    <!--添加培训经历开始-->
+    <div id="account_add_train" class="mui-page">
+      <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <h1 class="mui-center mui-title">培训经历</h1>
+        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('train')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
+          保存
+        </button>
+      </div>
+      <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">公司</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">职位</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="textarea-wrapper">
+                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+                </div>
+              </li>
+            </ul>
+            <ul class="mui-table-view" v-show="newItem.id">
+              <li class="mui-table-view-cell" style="text-align: center;">
+                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--添加培训经历结束-->
 
     <!--编辑姓名开始-->
     <div id="account_name" class="mui-page">
@@ -224,7 +349,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>姓名</label>
+                  <label class="mui-navigate">姓名</label>
                   <input type="text" class="mui-input-clear" v-model="user.info.name">
                 </div>
               </li>
@@ -247,7 +372,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>公司</label>
+                  <label class="mui-navigate">公司</label>
                   <input type="text" class="mui-input-clear" v-model="user.info.company">
                 </div>
               </li>
@@ -270,7 +395,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>职位</label>
+                  <label class="mui-navigate">职位</label>
                   <input type="text" class="mui-input-clear" v-model="user.info.title">
                 </div>
               </li>
@@ -293,7 +418,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label>邮箱</label>
+                  <label class="mui-navigate">邮箱</label>
                   <input type="text" class="mui-input-clear" v-model="user.info.email">
                 </div>
               </li>
@@ -481,10 +606,12 @@
         this.muiView.back();
       },
       initDate:function(objType){
+        let currentDate = new Date();
         let that=this;
         let param={
           "type":"date",
-          "beginYear": "1990"
+          "beginYear": "1990",
+          "endYear": currentDate.getFullYear()
         };
         let picker = new mui.DtPicker(param);
         picker.show((rs) => {
