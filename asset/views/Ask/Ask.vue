@@ -40,7 +40,7 @@
           <span :class="money == 188 &&  selectOther == false  ?'active':''"
                 @tap.stop.prevent="selectMoney(188)">188元</span>
           <span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>
-          <span v-show="selectOther" class="active"><input type="text" value="" placeholder="其他"
+          <span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"
                                                            v-model.number="money"/></span>
         </div>
         <div class="button-wrapper">
