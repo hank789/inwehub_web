@@ -38,6 +38,7 @@ import './styles/icons-extra.css';
 import './styles/iconfont.css';
 import './styles/common.css';
 import './styles/mui.picker.all.css';
+import './styles/font-awesome.css';
 
 
 Vue.use(VueWechatTitle);

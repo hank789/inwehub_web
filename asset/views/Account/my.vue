@@ -4,7 +4,7 @@
 
         <header class="mui-bar mui-bar-nav">
           <h1 class="mui-title">我的</h1>
-          <a class="mui-icon mui-icon-email mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>
+          <a class="mui-icon fa fa-envelope-o mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>
         </header>
 
         <div class="mui-content myinfo">
@@ -20,37 +20,34 @@
               </router-link>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案<span class="mui-pull-right account-setting-span">资料完整度</span></router-link>
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">资料完整度</span></router-link>
             </li>
           </ul>
 
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-vip"></span>专家管理</a>
+              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#general" class="mui-navigate-right"><span class="mui-icon iconfont icon-wallet"></span>我的钱包</a>
+              <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包</a>
             </li>
           </ul>
 
           <ul class="mui-table-view mui-table-view-chevron">
             <li class="mui-table-view-cell">
-              <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon mui-icon-help"></span>我的提问</router-link>
+              <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon fa fa-question-circle"></span>我的提问</router-link>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon iconfont icon-answer"></span>我的问答</router-link>
+              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon fa fa-file-text"></span>我的问答</router-link>
             </li>
           </ul>
 
           <ul class="mui-table-view mui-table-view-chevron mb70">
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon iconfont icon-share"></span>推荐给朋友</a>
+              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-cog"></span>设置与帮助</a>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon mui-icon-gear"></span>设置与帮助</a>
-            </li>
-            <li class="mui-table-view-cell">
-              <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon-extra mui-icon-extra-lamp"></span>意见与反馈</router-link>
+              <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon-extra fa fa-pencil"></span>意见与反馈</router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="javascript:void(0)" class="mui-navigate-right" @click="clearCache"><span class="mui-icon mui-icon-reload"></span>清除缓存</a>
@@ -117,9 +114,13 @@
 
   .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
     color:#999;
+    font-size:24px;
+    top: 1px;
+    text-align: center;
+    position: relative;
     width:24px;
     height:24px;
-    margin-right: 5px;
+    margin-right: 15px;
   }
   .myinfo li{
     padding-top:13px;

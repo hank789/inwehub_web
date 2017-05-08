@@ -10,17 +10,22 @@
 
     <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
-        <span class="mui-icon mui-icon-help"></span>
+        <span class="mui-icon fa fa-question"></span>
         <span class="mui-tab-label">提问</span>
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-        <span class="mui-icon mui-icon-plus"></span>
+        <span class="mui-icon fa fa-tasks"></span>
         <span class="mui-tab-label">任务</span>
       </div>
 
+      <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
+        <span class="mui-icon fa fa-search"></span>
+        <span class="mui-tab-label">发现</span>
+      </div>
+
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
-        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-icon fa fa-user"></span>
         <span class="mui-tab-label">我的</span>
       </div>
     </nav>
@@ -36,6 +41,8 @@
         isAsk: false,
         isMy:false,
         showBottom:true,
+        div:false,
+        isDiscover:false
       }
     },
     methods: {
@@ -45,7 +52,7 @@
       changeNav(path, fullPath)
       {
         var curPath = path == ''?'home':path;
-        this.isHome = this.isAsk = this.isMy = false;
+        this.isHome = this.isAsk = this.isMy = this.isDiscover = false;
         this.showBottom = true;
         mui.each(mui(".mui-tab-item"), function(index,item){
           item.className = "mui-tab-item";
@@ -60,6 +67,9 @@
             break;
           case '/task':
             this.isAsk = true;
+            break;
+          case '/discover':
+            this.isDiscover = true;
             break;
           default:
             this.showBottom = false;
