@@ -20,7 +20,7 @@
               </router-link>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案<span class="mui-pull-right">资料完整度</span></router-link>
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon mui-icon-person"></span>我的档案<span class="mui-pull-right account-setting-span">资料完整度</span></router-link>
             </li>
           </ul>
 
@@ -131,5 +131,11 @@
   }
   .head-img {
     border-radius: 42px;
+  }
+  .account-setting-span {
+    position: absolute;
+    right: 40px;
+    color: #797979;
+    font-size: .8rem;
   }
 </style>
