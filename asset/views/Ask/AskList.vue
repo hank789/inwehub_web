@@ -250,7 +250,6 @@
   }
 
   .list-ask .person{
-    margin-top:10px;
     position: relative;
     padding-bottom:15px;
   }
