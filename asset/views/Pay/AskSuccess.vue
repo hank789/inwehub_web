@@ -80,20 +80,21 @@
 <style scoped>
   .pay-success{
     text-align: center;
-    background: #fff;
     padding:15px;
   }
   .pay-success .status{
     margin-top:40px;
+    font-size:22px;
     color:#19ac18;
   }
 
   .pay-success .status .mui-icon{
-    font-size:50px;
-    margin-bottom: 10px;
+    font-size:80px;
+    margin-bottom: 20px;
   }
   .pay-success .title{
-    margin:20px 0 40px;
+    font-size: 22px;
+    margin:30px 0 40px;
   }
 
   .pay-success .important{
@@ -107,7 +108,7 @@
   }
 
   .pay-success .time span{
-    font-size:20px;
+    font-size:22px;
     color:orange;
     margin:0 5px;
   }
