@@ -21,12 +21,6 @@
 
             <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
               <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-                <div class="title mui-ellipsis-2">
-                  {{ ask.description | textLimit}}
-
-
-
-                </div>
                 <div class="person">
                   <div class="avatar">
                     <div class="avatarInner">
@@ -41,8 +35,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="site-desc">
-                  {{ ask.status_description }}
+                <div class="site-desc mui-ellipsis-2">
+                  {{ ask.description | textLimit}}
                 <span class="mui-icon mui-icon-arrowright"></span>
                 </div>
               </div>
@@ -234,7 +228,7 @@
 
   .list-ask .list-ask-item .mui-media-body {
     padding-left:15px;
-    line-height: 21px;
+    line-height: 24px;
   }
   .list-ask .list-ask-item .time{
     color:#999;
@@ -242,29 +236,41 @@
   }
 
   .list-ask .username{
-    color:orange;
   }
 
   .list-ask .list-ask-item .amount{
     position: absolute;
     right: 10px;
-    color:#999;
+    color:#ff9800;
     font-size:16px;
   }
 
   .list-ask .list-ask-item .amount b{
-    color:#f85f48;
-    margin:0 5px;
-    font-weight:normal;
+
   }
 
   .list-ask .person{
     margin-top:10px;
+    position: relative;
+    padding-bottom:15px;
+  }
+
+  .list-ask .person:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 10px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
   }
 
 
   .list-ask .site-desc{
     margin-top:10px;
+    padding-left:10px;
     line-height: 23px;
     color:#8f8f94;
     font-size:14px;
@@ -278,13 +284,11 @@
     z-index: 0;
     color: #ffffff;
     float:left;
-    background-color: #bdbdbd;
     display: inline-block;
+    margin-top:3px;
     height: 40px;
     width: 40px;
     font-size: 20px;
-    color: #ffffff;
-    background-color: #bdbdbd;
     text-align: center;
     border-radius: 50%;
   }

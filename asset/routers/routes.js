@@ -245,6 +245,10 @@ const routes = [
     path: '/header',
     component: require('../views/Account/selectHeader.vue'),
   },
+  { // discover
+    path: '/discover',
+    component: require('../views/Discover/Discover.vue'),
+  },
   { // guide
     path: '/guide',
     component: require('../views/Guide.vue'),

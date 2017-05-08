@@ -41,7 +41,8 @@
         isAsk: false,
         isMy:false,
         showBottom:true,
-        div:false
+        div:false,
+        isDiscover:false
       }
     },
     methods: {
@@ -51,7 +52,7 @@
       changeNav(path, fullPath)
       {
         var curPath = path == ''?'home':path;
-        this.isHome = this.isAsk = this.isMy = false;
+        this.isHome = this.isAsk = this.isMy = this.isDiscover = false;
         this.showBottom = true;
         mui.each(mui(".mui-tab-item"), function(index,item){
           item.className = "mui-tab-item";
@@ -66,6 +67,9 @@
             break;
           case '/task':
             this.isAsk = true;
+            break;
+          case '/discover':
+            this.isDiscover = true;
             break;
           default:
             this.showBottom = false;
