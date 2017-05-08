@@ -7,29 +7,26 @@
     </header>
 
     <div class="mui-content form form-ask">
-
-          <form>
             <div class="textarea-wrapper">
               <textarea v-model.trim="description" class="mui-focusin" placeholder="提出问题"></textarea>
             </div>
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
+    </div>
 
-            <div class="fixedDiv">
-              <div class="fixedContainer">
-                <span class="counter">(<span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span>)</span>
-                <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
-              </div>
-              <div class="title select" v-show="!isShowMoneyDev">请先选择问题分类：<span class="active"
-                                                                                @tap.stop.prevent="selectType">{{ type ? type : '请选择'
-                }}</span></div>
+    <div class="fixedDiv">
+      <div class="fixedContainer">
+        <span class="counter">(<span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span>)</span>
+        <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
+      </div>
+      <div class="title select" v-show="!isShowMoneyDev">请先选择问题分类：<span class="active"
+                                                                        @tap.stop.prevent="selectType">{{ type ? type : '请选择'
+        }}</span></div>
 
-              <div class="button-wrapper" v-show="!isShowMoneyDev">
-                <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
-                  提好问题了
-                </button>
-              </div>
-            </div>
-          </form>
+      <div class="button-wrapper" v-show="!isShowMoneyDev">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
+          提好问题了
+        </button>
+      </div>
     </div>
 
     <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
@@ -244,9 +241,20 @@
     margin-top: 0;
   }
 
+  .mui-bar-nav ~ .mui-content{
+    padding-top: 0;
+  }
+  .form-ask{
+    padding-top:0;
+    background: #fff;
+    position: fixed;
+    top: 44px;
+    bottom: 148px;
+    width: 100%;
+  }
   .form-ask textarea {
     width:100%;
-    height:80%;
+    height:100%;
     border:none;
     margin:0;
     padding:10px;
@@ -256,12 +264,7 @@
     background: #fff;
   }
 
-  .form-ask .title {
-    margin: 10px 0;
-    text-align: center;
-    color: #8b8b8b;
-    height: 32px;
-  }
+
 
   .selectMoney .category span.active, .form-ask .select span.active {
     border: 1px solid #4a90e2;
@@ -308,14 +311,8 @@
   }
 
   .textarea-wrapper {
-    border: 1px solid #efefef;
-    padding-bottom: 20px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    height:100%;
     background: #fff;
-    position: absolute;
-    height: 100%;
-    width: 100%;
   }
 
   .textarea-wrapper .counter {
@@ -386,11 +383,40 @@
     float:right;
     color:#999;
   }
+
+  .fixedDiv .title {
+    margin: 10px 0;
+    text-align: center;
+    color: #8b8b8b;
+    height: 32px;
+  }
   .fixedDiv{
     padding-bottom: 10px;
     position: fixed;
     background-color:#f4f4f4;
     bottom:0;
     width:100%;
+  }
+
+  .fixedDiv .select span {
+    border: 1px solid #b6b6b6;
+    border-radius: 5px;
+    padding: 0 10px;
+    display: inline-block;
+    height: 32px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 32px;
+    position: relative;
+  }
+
+  .fixedDiv .select span.active {
+    border: 1px solid #4a90e2;
+  }
+
+  .fixedDiv .button-wrapper {
+    margin-top: 15px;
+    padding: 0 50px
   }
 </style>
