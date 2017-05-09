@@ -48,6 +48,8 @@
       </div>
     </div>
 
+
+
   </div>
 </template>
 
@@ -63,13 +65,29 @@
       selectOther: false,
       hide: 0,
       descMaxLength: 500,
-      isShowMoneyDev: false
+      isShowMoneyDev: false,
+      test:0
     }),
     mounted(){
       mui.init();
 
       var inputElem = document.querySelector('textarea');
       inputElem.focus();
+
+      var fixedDiv = mui('.fixedDiv')[0];
+
+      var initInnerHeight = window.innerHeight;
+
+      window.onscroll = function(e){
+          if (window.innerHeight != initInnerHeight) {
+            fixedDiv.style.position='absolute';
+            fixedDiv.style.top='270px';
+
+          } else {
+            fixedDiv.style.position='fixed';
+            fixedDiv.style.top='auto';
+          }
+      }
     },
     computed: {
       type () {
@@ -106,7 +124,11 @@
         }
 
         if (!this.description) {
+
           mui.toast('请填写提问内容');
+
+          var inputElem = document.querySelector('textarea');
+          inputElem.focus();
           return;
         }
 
@@ -392,7 +414,7 @@
   }
   .fixedDiv{
     padding-bottom: 10px;
-    position: fixed;
+    position: absolute;
     background-color:#f4f4f4;
     bottom:0;
     width:100%;
