@@ -214,6 +214,7 @@
 <style scoped>
   .task-list{
     line-height: 33px;
+    margin-bottom:15px;
   }
   .task-list .mui-table-view-chevron .mui-table-view-cell{
     padding-right:5px;
