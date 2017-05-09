@@ -3,56 +3,53 @@
   <div>
 
         <header class="mui-bar mui-bar-nav">
-          <h1 class="mui-title">我的</h1>
-          <a class="mui-icon fa fa-envelope-o mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>
+          <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+          <h1 class="mui-title">设置与帮助</h1>
         </header>
 
-        <div class="mui-content myinfo">
-          <div class="mui-table-view">
+        <div class="mui-content">
 
-            <div class="mui-table-view-cell my-header">
-              <div class="bg"></div>
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img :src="avatar">
-                </div>
+          <ul class="mui-table-view mui-table-view-chevron">
+
+            <li class="mui-table-view-cell">
+               消息与通知
+               <div class="mui-switch mui-switch-mini mui-active">
+                <div class="mui-switch-handle"></div>
               </div>
-              <div class="text">
-                {{ name }}
-                <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
-              </div>
-              <div class="vip"><span class="mui-icon fa fa-vimeo"></span>认证专家</div>
-            </div>
-
-          </div>
-
-          <ul class="mui-table-view mui-table-view-chevron firstItem">
-            <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：85%</span></router-link>
-            </li>
-            <li class="mui-table-view-cell">
-              <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：188.00</span></a>
-            </li>
-            <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
             </li>
           </ul>
 
           <ul class="mui-table-view mui-table-view-chevron">
+
             <li class="mui-table-view-cell">
-              <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon fa fa-question-circle"></span>我的提问</router-link>
-            </li>
-            <li class="mui-table-view-cell">
-              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon fa fa-file-text"></span>我的问答</router-link>
+              <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
             </li>
           </ul>
 
-          <ul class="mui-table-view mui-table-view-chevron mb70">
+          <ul class="mui-table-view mui-table-view-chevron">
+
             <li class="mui-table-view-cell">
-              <router-link to="/setting" class="mui-navigate-right">
-                <span class="mui-icon fa fa-cog"></span>设置与帮助</router-link>
+              <router-link to="/feedback" class="mui-navigate-right">意见与反馈</router-link>
+            </li>
+            <li class="mui-table-view-cell">
+              <router-link to="/about" class="mui-navigate-right">关于我们</router-link>
+            </li>
+            <li class="mui-table-view-cell">
+              <router-link to="/comment" class="mui-navigate-right">前往评价</router-link>
             </li>
           </ul>
+
+          <div class="mui-table-view">
+            <div class="mui-table-view-cell footer">
+              <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut">
+                退出应用
+              </button>
+              <div class="logo"></div>
+              <div class="copyright">CopyRight By InweHub © V1.0.0</div>
+            </div>
+
+          </div>
+
         </div>
 
 </div>
@@ -76,25 +73,29 @@
       }
     },
     methods: {
-      getToken(){
-         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
-         this.im_tokenMsg = im_token;
+      clearCache(){
+        localEvent.setLocalItem('lauchFlag', {showGuide:false});
+        mui.toast('清除成功');
+      },
+      logOut(){
+        localEvent.clearLocalItem('UserLoginInfo');
+        localEvent.clearLocalItem('UserInfo');
+        this.$store.dispatch(ASKS_LIST_APPEND, {});
+        this.$store.dispatch(ANSWERS_LIST_APPEND, {});
+        this.$store.dispatch(TASK_LIST_APPEND, {});
+
+        router.push({ path: 'login' });
       }
     },
     mounted(){
-      this.getToken()
+      mui('.mui-switch')['switch']();
     }
   }
 
 </script>
 
 <style scoped>
-  .mui-bar{
-    background-color: #c2d5e4;
-  }
-  .myinfo{
 
-  }
   .mui-table-view {
     margin-top: 15px;
   }
@@ -218,5 +219,14 @@
     vertical-align: middle;
     color:#587dd5;
     opacity: 0.5;
+  }
+
+  .footer{
+    padding: 30px 40px;
+    text-align: center;
+  }
+  .footer .copyright{
+    font-size:12px;
+    color:#a6a6a6;
   }
 </style>
