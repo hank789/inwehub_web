@@ -20,9 +20,6 @@
 
         <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">
           <div class="mui-table-view-cell mui-media">
-            <div class="title mui-ellipsis-2">
-              {{ answer.description }}
-          </div>
             <div class="person">
               <div class="avatar">
                 <div class="avatarInner">
@@ -37,9 +34,8 @@
                 </div>
               </div>
             </div>
-            <div class="site-desc">
-              {{ answer.status_description }}
-              <span class="mui-icon mui-icon-arrowright"></span>
+            <div class="site-desc mui-ellipsis-2">
+              {{ answer.description }}
             </div>
           </div>
         </div>
@@ -229,24 +225,23 @@
     line-height: 21px;
   }
   .list-answer .list-answer-item .time{
-    color:#999;
-    font-size:16px;
+    color:#8c8c8c;
+    font-size:12px;
   }
 
   .list-answer .username{
-    color:orange;
+    color:#101010;
   }
 
   .list-answer .list-answer-item .amount{
     position: absolute;
     right: 10px;
-    color:#999;
+    color:#ff9800;
     font-size:16px;
   }
 
   .list-answer .list-answer-item .amount b{
-    color:#f85f48;
-    margin:0 5px;
+
     font-weight:normal;
   }
 
@@ -257,9 +252,10 @@
 
   .list-answer .site-desc{
     margin-top:10px;
-    line-height: 23px;
-    color:#8f8f94;
-    font-size:14px;
+    padding-left: 10px;
+    line-height: 18px;
+    color:#101010;
+    font-size:13px;
   }
 
   .list-answer .site-desc .mui-icon{
@@ -315,5 +311,20 @@
   }
   .list-answer p{
     margin-left:20px;
+  }
+
+  .list-answer .person{
+    position: relative;
+    padding-bottom:15px;
+  }
+
+  .list-answer .person:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 10px;
+    height: 1px;
+    content: '';
+    background-color: #f2f2f2;
   }
 </style>

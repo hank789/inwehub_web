@@ -231,11 +231,12 @@
     line-height: 24px;
   }
   .list-ask .list-ask-item .time{
-    color:#999;
-    font-size:16px;
+    color:#8c8c8c;
+    font-size:12px;
   }
 
   .list-ask .username{
+    color:#101010;
   }
 
   .list-ask .list-ask-item .amount{
@@ -261,18 +262,16 @@
     left: 10px;
     height: 1px;
     content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #c8c7cc;
+    background-color: #f2f2f2;
   }
 
 
   .list-ask .site-desc{
     margin-top:10px;
     padding-left:10px;
-    line-height: 23px;
-    color:#8f8f94;
-    font-size:14px;
+    line-height: 18px;
+    color:#101010;
+    font-size:13px;
   }
 
   .list-ask .site-desc .mui-icon{
