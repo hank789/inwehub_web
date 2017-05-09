@@ -41,7 +41,7 @@
 
 <script>
   import router from '../routers/index';
-  import request, { createAPI } from '../utils/request';
+  import request, { createAPI,apiRequest } from '../utils/request';
   import detecdOS from '../utils/detecdOS';
   import localEvent from '../stores/localStorage';
   import errorCodes from '../stores/errorCodes';
@@ -181,6 +181,20 @@
 
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
+            //存储设备信息
+            if (mui.os.plus) {
+              var device_info = plus.push.getClientInfo();
+              apiRequest(`system/device`,{
+                client_id: device_info.clientid,
+                device_token: device_info.token,
+                appid: device_info.appid,
+                appkey: device_info.appkey,
+                device_type: plus.os.name === 'iOS' ? 2 : 1
+              }).then(res => {
+
+              });
+            }
+
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
