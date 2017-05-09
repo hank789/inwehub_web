@@ -37,7 +37,6 @@
                 </div>
                 <div class="site-desc mui-ellipsis-2">
                   {{ ask.description | textLimit}}
-                <span class="mui-icon mui-icon-arrowright"></span>
                 </div>
               </div>
             </div>
