@@ -16,37 +16,27 @@
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
-            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/answer/' + task.object_id)"
-                 v-if="task.task_type == 1">
-              <div class="title">
-                <span class="msg">您有新的任务</span>
-                <span class="type">{{ task.task_type_description}}</span>
-                <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
+
+            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task)">
+              <div class="person">
+                <div class="avatar">
+                  <div class="avatarInner">
+                    <img :src="task.user_avatar_url" class="avatar"/>
+                  </div>
+                </div>
+                <div class="mui-media-body mui-navigate-right">
+                  <span class="username">{{ task.task_type_description}}</span>
+                  <div>
+                    <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
+                    <span class="mui-badge mui-badge-danger">优先级 高</span>
+                  </div>
+                </div>
               </div>
-              <div class="subTitle">
-                <span class="questions">{{ task.description | textLimit}}</span>
-                <span class="time"></span>
-              </div>
-              <div class="link">
-                <a>{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
+              <div class="site-desc mui-ellipsis-2">
+                {{ task.description | textLimit}}
               </div>
             </li>
 
-            <li class="mui-table-view-cell" @tap.stop.prevent="$router.push('/ask/' + task.object_id)"
-                 v-else-if="task.task_type == 2">
-              <div class="title">
-                <span class="msg">您有新的任务</span>
-                <span class="type">{{ task.task_type_description }}</span>
-                <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
-              </div>
-              <div class="subTitle">
-                <span class="questions">{{ task.description | textLimit}}</span>
-                <span class="time"></span>
-              </div>
-              <div class="link">
-                <a>{{ task.status_description }}<span class="mui-icon mui-icon-arrowright"></span> </a>
-              </div>
-            </li>
           </template>
         </ul>
       </div>
@@ -154,9 +144,14 @@
             });
         }
       },
-      goDetail(id)
+      goDetail(task)
       {
-          this.$router.push('/answer/' + id)
+          var id = task.object_id;
+          if (task.task_type == 1) {
+            this.$router.push('/answer/' + id)
+          } else {
+            this.$router.push('/ask/' + id)
+          }
       },
       pulldownRefresh() {
         this.getPrevList();
@@ -219,14 +214,19 @@
 <style scoped>
   .task-list{
     line-height: 33px;
-    margin-top:15px;
   }
   .task-list .mui-table-view-chevron .mui-table-view-cell{
     padding-right:5px;
   }
   .task-list .time{
-    float: right;
-    color:#999;
+    display: inline-block;
+    width:130px;
+    color:#101010;
+  }
+  .mui-badge{
+    padding:5px 10px;
+    position: relative;
+    bottom: 3px;
   }
   .task-list .link a{
     color: #8f8f94;
@@ -234,5 +234,64 @@
   }
   .task-list .type{
     font-weight:bold;
+  }
+
+  .mui-media-body{
+    padding-left:10px;
+  }
+  .task-list .username{
+    color:#555555;
+  }
+
+
+  .mui-media-body{
+    position:relative;
+  }
+
+  .mui-navigate-right:after{
+    font-size:24px;
+    font-weight:bolder;
+  }
+
+  .avatar{
+    z-index: 0;
+    margin-top: 5px;
+    color: #ffffff;
+    float:left;
+    display: inline-block;
+    height: 55px;
+    width: 55px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .site-desc{
+    color:#666;
+    margin-top:10px;
+    line-height: 23px;
   }
 </style>
