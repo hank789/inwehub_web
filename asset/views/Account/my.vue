@@ -8,28 +8,33 @@
         </header>
 
         <div class="mui-content myinfo">
-          <ul class="mui-table-view mui-table-view-chevron">
-            <li class="mui-table-view-cell mui-media">
-              <router-link to="/my/info" class="mui-navigate-right">
-                <img class="mui-media-object mui-pull-left head-img" id="head-img" :src="avatar">
-                <div class="mui-media-body">
-                  {{ name }}
-                  <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
-                  <p class="mui-ellipsis" v-else>资料未完善</p>
-                </div>
-              </router-link>
-            </li>
-            <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">资料完整度</span></router-link>
-            </li>
-          </ul>
+          <div class="mui-table-view">
 
-          <ul class="mui-table-view mui-table-view-chevron">
+            <div class="mui-table-view-cell my-header">
+              <div class="bg"></div>
+              <div class="avatar">
+                <div class="avatarInner">
+                  <img :src="avatar">
+                </div>
+              </div>
+              <div class="text">
+                {{ name }}
+                <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
+              </div>
+              <div class="vip"><span class="mui-icon fa fa-vimeo"></span>认证专家</div>
+            </div>
+
+          </div>
+
+          <ul class="mui-table-view mui-table-view-chevron firstItem">
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：85%</span></router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
             </li>
           </ul>
 
@@ -105,8 +110,10 @@
 </script>
 
 <style scoped>
+  .mui-bar{
+    background-color: #c2d5e4;
+  }
   .myinfo{
-    margin-top:15px;
   }
   .mui-table-view {
     margin-top: 15px;
@@ -136,7 +143,97 @@
   .account-setting-span {
     position: absolute;
     right: 40px;
-    color: #797979;
+    color: #5a7fd2;
     font-size: .8rem;
+  }
+
+  .my-header{
+    padding:0;
+    height:215px;
+    position: relative;
+    color:#fff;
+    text-align: center;
+  }
+
+  .my-header .text{
+    margin-top:10px;
+    position: relative;
+    font-weight:bold;
+    font-size:16px;
+  }
+
+  .my-header p{
+    margin-top:10px;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+  }
+
+  .my-header .bg{
+    background: url("../../statics/images/thumb_raw_1493885990.jpeg");
+    background-size:100% 100%;
+    opacity: 0.6;
+    height:100%;
+    position:absolute;
+    z-index: 0;
+    width:100%;
+  }
+
+  .my-header .vip{
+    position: absolute;
+    right:10px;
+    top:15px;
+  }
+
+  .my-header .vip .mui-icon{
+    color:#fef035;
+    font-size:16px;
+    margin-right: 0;
+  }
+
+  .avatar{
+    z-index: 9;
+    color: #ffffff;
+    display: inline-block;
+    margin-top:20px;
+    height: 115px;
+    width: 115px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .firstItem{
+    margin-top:0;
+  }
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border:3px solid #d1d1d1;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .mui-table-view .mui-icon{
+    color:#acbfe8;
   }
 </style>

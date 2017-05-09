@@ -36,6 +36,9 @@
 
 
 <style scoped>
+  .mui-bar{
+    background-color: #c2d5e4;
+  }
   .discover{
     position:absolute;
     padding:0 50px;
