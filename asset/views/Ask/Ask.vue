@@ -78,7 +78,8 @@
 
       var initInnerHeight = window.innerHeight;
 
-      window.onscroll = function(e){
+      if (mui.os.ios) {
+        window.onscroll = function(e){
           if (window.innerHeight != initInnerHeight) {
             fixedDiv.style.position='absolute';
             fixedDiv.style.top='270px';
@@ -87,6 +88,7 @@
             fixedDiv.style.position='fixed';
             fixedDiv.style.top='auto';
           }
+        }
       }
     },
     computed: {
@@ -126,9 +128,6 @@
         if (!this.description) {
 
           mui.toast('请填写提问内容');
-
-          var inputElem = document.querySelector('textarea');
-          inputElem.focus();
           return;
         }
 
