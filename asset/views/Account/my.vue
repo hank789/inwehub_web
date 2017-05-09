@@ -31,7 +31,7 @@
               <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：85%</span></router-link>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包</a>
+              <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：188.00</span></a>
             </li>
             <li class="mui-table-view-cell">
               <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
@@ -122,7 +122,7 @@
   .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
     color:#999;
     font-size:24px;
-    top: 1px;
+    top:-2px;
     text-align: center;
     position: relative;
     width:24px;
@@ -196,8 +196,8 @@
     color: #ffffff;
     display: inline-block;
     margin-top:20px;
-    height: 115px;
-    width: 115px;
+    height: 116px;
+    width: 116px;
     font-size: 20px;
     text-align: center;
     border-radius: 50%;
@@ -234,6 +234,7 @@
   }
 
   .mui-table-view .mui-icon{
+    vertical-align: middle;
     color:#acbfe8;
   }
 </style>

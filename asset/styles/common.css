@@ -64,3 +64,9 @@ a{
 input, textarea, select{
   font-size:16px;
 }
+
+.mui-table-view-cell:after{
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color:#f2f2f2;
+}
