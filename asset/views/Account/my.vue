@@ -193,6 +193,10 @@
     margin-right: 0;
   }
 
+  .firstItem{
+    margin-top:0;
+  }
+
   .avatar{
     z-index: 9;
     color: #ffffff;
@@ -204,10 +208,6 @@
     text-align: center;
     border-radius: 50%;
     position: relative;
-  }
-
-  .firstItem{
-    margin-top:0;
   }
 
   .avatar .avatarInner{

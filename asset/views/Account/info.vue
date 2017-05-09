@@ -20,35 +20,45 @@
       <!--页面标题栏开始-->
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
-        <h1 class="mui-center mui-title">个人信息</h1>
-        <button type="button" @tap.stop.prevent="submitInfo" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
+        <h1 class="mui-center mui-title">我的档案</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <!--页面标题栏结束-->
       <!--页面主内容区开始-->
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
+
+            <div class="mui-table-view">
+              <div class="mui-table-view-cell personCard">
+
+              <div class="title">添加职业照片更真实</div>
+              <span class="mui-icon fa fa-hand-o-right"></span>
+              <div class="titleSub">个人信息完善度<span>85%</span></div>
+
+              <div class="avatar">
+                <div class="avatarInner" id="head">
+                  <img  class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url">
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="account_item_title">
+              基本资料
+            </div>
             <ul class="mui-table-view mui-table-view-chevron">
               <li class="mui-table-view-cell">
-                <a id="head" class="mui-navigate-right">头像
-                  <span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url"/>
-								</span>
-                </a>
-              </li>
-              <li class="mui-table-view-cell">
-                <a href="#account_name" class="mui-navigate-right">姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
+                <a href="#account_name" class="mui-navigate-right">用户姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field" id="user_gender" v-text="genderName"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_company" class="mui-navigate-right">公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
+                <a href="#account_company" class="mui-navigate-right">当前公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_title" class="mui-navigate-right">职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
+                <a href="#account_title" class="mui-navigate-right">当前职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
@@ -120,13 +130,11 @@
 
 
     <!--添加工作经历开始-->
-    <div id="account_add_job" class="mui-page">
+    <div id="account_add_job" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">工作经历</h1>
-        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('job')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
+        <a @tap.stop.prevent="addOrUpdateAccountItem('job')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -155,17 +163,20 @@
                 </div>
               </li>
               <li class="mui-table-view-cell">
-                <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
-                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-                </div>
+
+
               </li>
             </ul>
-            <ul class="mui-table-view" v-show="newItem.id">
-              <li class="mui-table-view-cell" style="text-align: center;">
-                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
-              </li>
-            </ul>
+            <div class="account_item_title">
+              工作经历详情描述
+            </div>
+            <div class="textarea-wrapper">
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+            </div>
+            <div class="deleteWrapper" v-show="newItem.id">
+                <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('job')">删除</button>
+            </div>
           </div>
         </div>
       </div>
@@ -173,13 +184,11 @@
     <!--添加工作经历结束-->
 
     <!--添加项目经历开始-->
-    <div id="account_add_project" class="mui-page">
+    <div id="account_add_project" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">项目经历</h1>
-        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('project')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
+        <a @tap.stop.prevent="addOrUpdateAccountItem('project')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -207,18 +216,20 @@
                   <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
                 </div>
               </li>
-              <li class="mui-table-view-cell">
-                <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
-                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-                </div>
-              </li>
+
             </ul>
-            <ul class="mui-table-view" v-show="newItem.id">
-              <li class="mui-table-view-cell" style="text-align: center;">
-                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
-              </li>
-            </ul>
+            <div class="account_item_title">
+              项目经历详情描述
+            </div>
+            <div class="textarea-wrapper">
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+            </div>
+            <div class="deleteWrapper" v-show="newItem.id">
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('job')">删除</button>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -226,13 +237,11 @@
     <!--添加项目经历结束-->
 
     <!--添加教育经历开始-->
-    <div id="account_add_edu" class="mui-page">
+    <div id="account_add_edu" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">教育经历</h1>
-        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('edu')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
+        <a @tap.stop.prevent="addOrUpdateAccountItem('edu')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -251,30 +260,32 @@
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
-                <a id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label class="mui-pull-right account-setting-field" id="edu_degree" v-text="newItem.degree"></label></a>
+                <div id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label class="mui-pull-right account-setting-field" id="edu_degree" v-text="newItem.degree"></label></div>
+              </li>
+
+              <li class="mui-table-view-cell mui-input-row">
+                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
-                <a class="mui-navigate-right" @tap.stop.prevent="initDate(1)">
-                  <label>开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
-                </a>
-              </li>
-              <li class="mui-table-view-cell mui-input-row">
-                <a class="mui-navigate-right" @tap.stop.prevent="initDate(2)">
-                  <label>结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
-                </a>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
-                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
                 </div>
               </li>
             </ul>
-            <ul class="mui-table-view" v-show="newItem.id">
-              <li class="mui-table-view-cell" style="text-align: center;">
-                <a @tap.stop.prevent="deleteAccountItem('edu')">删除</a>
-              </li>
-            </ul>
+
+
+            <div class="account_item_title">
+              教育经历详情描述
+            </div>
+            <div class="textarea-wrapper">
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+            </div>
+            <div class="deleteWrapper" v-show="newItem.id">
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('edu')">删除</button>
+            </div>
           </div>
         </div>
       </div>
@@ -282,13 +293,11 @@
     <!--添加教育经历结束-->
 
     <!--添加培训经历开始-->
-    <div id="account_add_train" class="mui-page">
+    <div id="account_add_train" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">培训经历</h1>
-        <button type="button" @tap.stop.prevent="addOrUpdateAccountItem('train')" class="mui-left mui-btn mui-btn-nav mui-pull-right">
-          保存
-        </button>
+        <a @tap.stop.prevent="addOrUpdateAccountItem('train')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -316,18 +325,17 @@
                   <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
                 </div>
               </li>
-              <li class="mui-table-view-cell">
-                <div class="textarea-wrapper">
-                  <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
-                  <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-                </div>
-              </li>
             </ul>
-            <ul class="mui-table-view" v-show="newItem.id">
-              <li class="mui-table-view-cell" style="text-align: center;">
-                <a @tap.stop.prevent="deleteAccountItem('job')">删除</a>
-              </li>
-            </ul>
+            <div class="account_item_title">
+              培训经历详情描述
+            </div>
+            <div class="textarea-wrapper">
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+            </div>
+            <div class="deleteWrapper" v-show="newItem.id">
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('job')">删除</button>
+            </div>
           </div>
         </div>
       </div>
@@ -335,7 +343,7 @@
     <!--添加培训经历结束-->
 
     <!--编辑姓名开始-->
-    <div id="account_name" class="mui-page">
+    <div id="account_name" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
@@ -358,7 +366,7 @@
     <!--编辑姓名结束-->
 
     <!--编辑公司开始-->
-    <div id="account_company" class="mui-page">
+    <div id="account_company" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
@@ -381,7 +389,7 @@
     <!--编辑公司结束-->
 
     <!--编辑职位开始-->
-    <div id="account_title" class="mui-page">
+    <div id="account_title" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
@@ -404,7 +412,7 @@
     <!--编辑职位结束-->
 
     <!--编辑邮箱地址开始-->
-    <div id="account_email" class="mui-page">
+    <div id="account_email" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
@@ -427,7 +435,7 @@
     <!--编辑邮箱地址结束-->
 
     <!--编辑详细地址开始-->
-    <div id="account_address_detail" class="mui-page">
+    <div id="account_address_detail" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
@@ -450,7 +458,7 @@
     <!--编辑详细地址结束-->
 
     <!--编辑个人签名开始-->
-    <div id="account_description" class="mui-page">
+    <div id="account_description" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">个人签名</h1>
@@ -1053,9 +1061,9 @@
     transition: transform 300ms ease;
   }
   .account_item_title{
-    margin: 20px 15px 7px;
-    color: #6d6d72;
-    font-size: 15px;
+    margin: 5px;
+    color: #a6a6a6;
+    font-size: 12px;
   }
   .mui-page-left {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1127,6 +1135,7 @@
     margin-bottom: 30px;
   }
 
+
   .mui-table-view-cell .mui-navigate-right,
   .mui-table-view-cell .mui-navigate
   {
@@ -1143,20 +1152,6 @@
   .head {
     height: 40px;
   }
-  #head {
-    line-height: 40px;
-  }
-  .head-img {
-    width: 40px;
-    height: 40px;
-  }
-  #head-img1 {
-    position: absolute;
-    bottom: 10px;
-    right: 40px;
-    width: 40px;
-    height: 40px;
-  }
 
   .mui-ios .mui-navbar .mui-bar .mui-title {
     position: static;
@@ -1168,5 +1163,107 @@
   }
   .mui-input-row textarea {
     border: none !important;
+  }
+
+  .avatar{
+    z-index: 9;
+    color: #ffffff;
+    position: absolute;
+    height: 110px;
+    width: 110px;
+    right:30px;
+    top:20px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .personCard{
+    margin-top:15px;
+    position:relative;
+    width:375px;
+    height:154px;
+    background: #fff;
+    font-size:14px;
+    color:#555;
+    font-weight: bold;
+  }
+
+  .personCard .avatar{
+    position: absolute;
+  }
+
+  .personCard .mui-icon{
+    font-size:24px;
+    position: absolute;
+    left:160px;
+    top:30px;
+  }
+  .personCard .title{
+      margin-top:25px;
+  }
+  .personCard .titleSub{
+    margin-top:25px;
+  }
+
+  .personCard .titleSub span{
+    color:#3f51b5;
+    font-size:22px;
+    margin-left:15px;
+  }
+  .mui-pageSub .mui-table-view-cell {
+    padding:0;
+  }
+
+  .textarea-wrapper {
+    padding:2px;
+    height:100%;
+    position: relative;
+  }
+
+  .textarea-wrapper .counter {
+    position: absolute;
+    right: 4px;
+    font-size:12px;
+    bottom: 10px;
+    color: #b0b0b0;
+  }
+
+
+  .textarea-wrapper textarea {
+     border-radius: 5px;
+     margin:0;
+  }
+  .deleteWrapper{
+    text-align: right;
+    padding:10px;
+  }
+
+  .mui-bar .save{
+    font-size:14px;
   }
 </style>
