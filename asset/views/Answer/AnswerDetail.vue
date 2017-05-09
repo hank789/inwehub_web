@@ -3,7 +3,7 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">应答</h1>
+      <h1 class="mui-title">{{ getTitle() }}</h1>
     </header>
 
     <div class="mui-content loading" v-show="loading">
@@ -19,11 +19,11 @@
           <div class="mui-media-body">
             {{ answer.question?answer.question.user_name:'' }}
           </div>
+          <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
+          <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
         </div>
         <div class="mui-table-view-cell question">
           {{ answer.question?answer.question.description:'' }}
-          <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
-          <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
         </div>
       </div>
 
@@ -31,13 +31,13 @@
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
                   @tap.stop.prevent="$router.replace('/answerTime/' + answer.question.id)"><span
-            class="mui-icon mui-icon-compose"></span>确认应答
+            class="mui-icon fa fa-check-square-o"></span>确认应答
           </button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
                   @tap.stop.prevent="$router.replace('/answerrefuse/' + answer.question.id)"><span
-            class="mui-icon mui-icon-closeempty"></span>拒绝应答
+            class="mui-icon fa fa-times"></span>拒绝应答
           </button>
         </div>
       </div>
@@ -104,8 +104,12 @@
       readOnly:true,
       id:null,
       answer: {
-        answers:[],
-        question:{},
+        answers:[{
+          promise_time:null
+        }],
+        question:{
+            status:0,
+        },
         feedback:{}
       },
       loading: true,
@@ -120,7 +124,30 @@
 
     },
     methods: {
+      getTitle()
+      {
+          var status = this.answer.question.status;
+          var title = '';
+          switch(status){
+            case 2:
+                title = '确认应答';
+                break;
+            case 4:
+                if (this.answer.answers.length && this.answer.answers[0].promise_time != null) {
+                    title = '回答问题';
+                } else {
+                    title = '确认时间';
+                }
+                break;
+            default:
+                title = '我的回答';
+          }
+          return title;
+      },
       timeago(time) {
+        if (!time) {
+            return '';
+        }
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
         return newDate;
@@ -161,26 +188,24 @@
 
 <style scoped>
   .detail-ask .question {
-    padding-bottom: 50px;
     position: relative;
+    font-size:13px;
+    line-height:18px;
   }
 
-  .detail-ask .question .timeAgo {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    color: #999;
+  .detail-ask .timeAgo {
+    font-size:12px;
+    color: #8c8c8c;
   }
 
-  .detail-ask .question .amount {
+  .detail-ask .amount {
     position: absolute;
     bottom: 10px;
     right: 15px;
-    color: #999;
+    color: #ff9800;
   }
 
   .detail-ask .question .amount b {
-    color: #f85f48;
     font-weight: normal;
   }
 
@@ -190,14 +215,15 @@
 
   .buttons button {
     margin: -1px;
-    font-size: 14px;
     padding: 10px 0;
     border-right: 0px;
     border-radius: 0;
   }
 
   .buttons button .mui-icon {
-    font-size: 22px;
+    font-size: 24px;
+    vertical-align: bottom;
+    margin-right:10px;
   }
 
   .detail-answer {

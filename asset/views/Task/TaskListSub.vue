@@ -25,7 +25,7 @@
                   </div>
                 </div>
                 <div class="mui-media-body mui-navigate-right">
-                  <span class="username">{{ task.task_type_description}}</span>
+                  <span class="username">{{ getType(task)}}</span>
                   <div>
                     <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
                     <span class="mui-badge mui-badge-danger">优先级 高</span>
@@ -111,6 +111,18 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      getType(task){
+           if (task.task_type == 2) {
+               //专家任务
+               return '专业问答任务-前往查看点评';
+           } else if (task.task_type == 1) {
+               //提问者任务
+               if (task.status == 4) {
+                   return '专业问答任务-前往回答问题';
+               }
+               return '专业问答任务-前往确认回答';
+           }
+      },
       initPullRefresh(){
         mui.init({
           pullRefresh: {
