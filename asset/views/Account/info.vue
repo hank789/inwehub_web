@@ -1061,7 +1061,7 @@
     transition: transform 300ms ease;
   }
   .account_item_title{
-    margin: 5px;
+    padding: 5px;
     color: #a6a6a6;
     font-size: 12px;
   }
