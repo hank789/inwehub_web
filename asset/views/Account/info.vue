@@ -251,7 +251,7 @@
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
-                <a id="showDegreePicker" class="mui-navigate-right"><label>学历</label><span class="mui-pull-right account-setting-field" id="edu_degree" v-text="newItem.degree"></span></a>
+                <a id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label class="mui-pull-right account-setting-field" id="edu_degree" v-text="newItem.degree"></label></a>
               </li>
               <li class="mui-table-view-cell mui-input-row">
                 <a class="mui-navigate-right" @tap.stop.prevent="initDate(1)">
@@ -608,7 +608,7 @@
         let currentDate = new Date();
         let that=this;
         let param={
-          "type":"date",
+          "type":"month",
           "beginYear": "1990",
           "endYear": currentDate.getFullYear()
         };
