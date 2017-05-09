@@ -1205,7 +1205,8 @@
   .personCard{
     margin-top:15px;
     position:relative;
-    width:375px;
+    width:100%;
+    padding-right:0px;
     height:154px;
     background: #fff;
     font-size:14px;
