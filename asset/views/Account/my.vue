@@ -52,7 +52,7 @@
               <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-cog"></span>设置与帮助</a>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon-extra fa fa-pencil"></span>意见与反馈</router-link>
+              <router-link to="/feedback" class="mui-navigate-right"><span class="mui-icon fa fa-pencil"></span>意见与反馈</router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="javascript:void(0)" class="mui-navigate-right" @click="clearCache"><span class="mui-icon mui-icon-reload"></span>清除缓存</a>
@@ -114,6 +114,7 @@
     background-color: #c2d5e4;
   }
   .myinfo{
+
   }
   .mui-table-view {
     margin-top: 15px;
@@ -130,6 +131,7 @@
     margin-right: 15px;
   }
   .myinfo li{
+    color:#101010;
     padding-top:13px;
     padding-bottom:13px;
   }
@@ -143,7 +145,7 @@
   .account-setting-span {
     position: absolute;
     right: 40px;
-    color: #5a7fd2;
+    color: #587dd5;
     font-size: .8rem;
   }
 
@@ -156,14 +158,14 @@
   }
 
   .my-header .text{
-    margin-top:10px;
+    margin-top:5px;
     position: relative;
     font-weight:bold;
     font-size:16px;
   }
 
   .my-header p{
-    margin-top:10px;
+    margin-top:5px;
     color:#fff;
     font-size:16px;
     font-weight:bold;
@@ -195,7 +197,7 @@
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    margin-top:20px;
+    margin-top:24px;
     height: 116px;
     width: 116px;
     font-size: 20px;
@@ -235,6 +237,7 @@
 
   .mui-table-view .mui-icon{
     vertical-align: middle;
-    color:#acbfe8;
+    color:#587dd5;
+    opacity: 0.5;
   }
 </style>
