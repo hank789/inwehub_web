@@ -118,7 +118,6 @@
     },
     computed: {
       nothing () {
-          return 1;
         if (this.loading) {
           return -1;
         }
