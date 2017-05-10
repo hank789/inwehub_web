@@ -27,8 +27,15 @@
                 <div class="mui-media-body mui-navigate-right">
                   <span class="username">{{ getType(task)}}</span>
                   <div>
-                    <span class="time"><timeago :since="timeago(task.created_at)"></timeago></span>
-                    <span class="mui-badge mui-badge-danger">优先级 高</span>
+
+
+                    <span class="time" v-if="task.deadline">倒计时<count-down :start-time="( new Date() ).getTime()"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
+
+                    <span class="time" v-else><timeago :since="timeago(task.created_at)"></timeago></span>
+
+                    <span class="mui-badge mui-badge-danger" v-if="task.priority =='高'">优先级 高</span>
+                    <span class="mui-badge mui-badge-warning" v-if="task.priority =='中'">优先级 中</span>
+                    <span class="mui-badge mui-badge-warning" v-if="task.priority =='低'">优先级 低</span>
                   </div>
                 </div>
               </div>
@@ -61,6 +68,7 @@
 <script>
   import {NOTICE, TASK_INFO, TASK_LIST, TASK_INFO_APPEND, TASK_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import CountDown from 'vue2-countdown'
 
   const Task = {
     data: () => ({
@@ -68,6 +76,9 @@
       loading: true,
       loading_gif: loading_gif
     }),
+    components: {
+      CountDown
+    },
     computed: {
       nothing () {
         if (this.loading) {
@@ -111,17 +122,17 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      getEndTime(task){
+          var deadline = task.deadline;
+          deadline = "2017-05-10 15:20:48";
+          if (deadline) {
+            var date = new Date(deadline);
+            return date.getTime()/1000;
+          }
+          return null;
+      },
       getType(task){
-           if (task.task_type == 2) {
-               //专家任务
-               return '专业问答任务-前往查看点评';
-           } else if (task.task_type == 1) {
-               //提问者任务
-               if (task.status == 4) {
-                   return '专业问答任务-前往回答问题';
-               }
-               return '专业问答任务-前往确认回答';
-           }
+           return task.task_type_description + '任务-' + task.status_description;
       },
       initPullRefresh(){
         mui.init({
@@ -224,6 +235,7 @@
 
 
 <style scoped>
+
   .task-list{
     line-height: 33px;
     margin-bottom:15px;
@@ -235,6 +247,13 @@
     display: inline-block;
     width:130px;
     color:#101010;
+  }
+
+  .task-list .time div{
+    color:#ff9800;
+    margin-left:10px;
+    font-size:16px;
+    font-weight:bold;
   }
   .mui-badge{
     padding:5px 10px;
@@ -307,4 +326,13 @@
     margin-top:10px;
     line-height: 23px;
   }
+
+  .time{
+    font-size:12px;
+  }
+  .time div{
+    display: inline-block;
+  }
+
+
 </style>
