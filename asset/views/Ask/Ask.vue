@@ -77,7 +77,7 @@
 
         mui(".textarea-wrapper").on('focusin','textarea',function(){
           fixedDiv.style.position='absolute';
-          fixedDiv.style.top='270px';
+          fixedDiv.style.top='200px';
         });
 
         mui(".textarea-wrapper").on('focusout','textarea',function(){
