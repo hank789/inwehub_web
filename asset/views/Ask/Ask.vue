@@ -71,25 +71,25 @@
     mounted(){
       mui.init();
 
+      var fixedDiv = mui('.fixedDiv')[0];
+
+      if (mui.os.ios) {
+
+        mui(".textarea-wrapper").on('focusin','textarea',function(){
+          fixedDiv.style.position='absolute';
+          fixedDiv.style.top='270px';
+        });
+
+        mui(".textarea-wrapper").on('focusout','textarea',function(){
+          fixedDiv.style.position='fixed';
+          fixedDiv.style.top='auto';
+        });
+      }
+
       var inputElem = document.querySelector('textarea');
       inputElem.focus();
 
-      var fixedDiv = mui('.fixedDiv')[0];
 
-      var initInnerHeight = window.innerHeight;
-
-      if (mui.os.ios) {
-        window.onscroll = function(e){
-          if (window.innerHeight != initInnerHeight) {
-            fixedDiv.style.position='absolute';
-            fixedDiv.style.top='270px';
-
-          } else {
-            fixedDiv.style.position='fixed';
-            fixedDiv.style.top='auto';
-          }
-        }
-      }
     },
     computed: {
       type () {
