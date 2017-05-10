@@ -4,7 +4,7 @@
 
         <header class="mui-bar mui-bar-nav">
           <h1 class="mui-title">我的</h1>
-          <a class="mui-icon fa fa-envelope-o mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>
+          <!--<a class="mui-icon fa fa-envelope-o mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>-->
         </header>
 
         <div class="mui-content myinfo">
@@ -162,14 +162,17 @@
 
   .my-header .vip{
     position: absolute;
-    right:10px;
+    right:20px;
     top:15px;
+    font-size:12px;
   }
 
   .my-header .vip .mui-icon{
-    color:#fef035;
+    color:#fff200;
+    opacity: 1;
     font-size:16px;
     margin-right: 0;
+    vertical-align: sub;
   }
 
   .firstItem{
