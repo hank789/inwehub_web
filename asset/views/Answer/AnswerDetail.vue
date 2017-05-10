@@ -22,7 +22,7 @@
           <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
           <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
         </div>
-        <div class="mui-table-view-cell question">
+        <div class="mui-table-view-cell question content">
           {{ answer.question?answer.question.description:'' }}
         </div>
       </div>
@@ -65,10 +65,11 @@
           <div class="mui-media-body">
             {{ answer.answers[0]?answer.answers[0].user_name:'' }}
           </div>
-        </div>
-        <div class="mui-table-view-cell question">
-          {{ answer.answers[0]?answer.answers[0].content:'' }}
           <span class="timeAgo"><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></span>
+        </div>
+
+        <div class="mui-table-view-cell question content">
+          {{ answer.answers[0]?answer.answers[0].content:'' }}
         </div>
       </div>
 
@@ -81,8 +82,10 @@
 
       <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
-          <p>{{ answer.feedback.description }}</p>
+          评价：<span class="ratingNum">{{ rating }}.0分</span><star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
+        </div>
+        <div class="mui-table-view-cell content">
+          {{ answer.feedback.description }}
         </div>
       </div>
 
@@ -231,15 +234,13 @@
   }
 
   .detail-answer .question {
-    padding-bottom: 50px;
     position: relative;
   }
 
-  .detail-answer .question .timeAgo {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    color: #999;
+  .detail-answer .timeAgo {
+    font-size:12px;
+    color: #8c8c8c;
+
   }
 
   .detail-comment {
@@ -265,5 +266,16 @@
 
   .detail-comment-result p{
     margin-top:5px;
+  }
+
+  .ratingNum{
+    float:right;
+    margin-left:10px;
+    position:relative;
+    bottom:-1px;
+  }
+
+  .content{
+    font-size:12px;
   }
 </style>

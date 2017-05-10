@@ -27,7 +27,7 @@
             <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
-        <div class="mui-table-view-cell question">
+        <div class="mui-table-view-cell question content">
             {{ ask.question.description }}
 
         </div>
@@ -41,7 +41,7 @@
             <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span></div>
           </div>
         </div>
-        <div class="mui-table-view-cell question">
+        <div class="mui-table-view-cell question content">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
 
         </div>
@@ -65,9 +65,13 @@
 
       <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<star-rating :rating="rating" :star-size="15" :show-rating="showRating" :read-only="readOnly"></star-rating>
-          <p>{{ ask.feedback.description }}</p>
+          评价：<span class="ratingNum">{{ rating }}.0分</span><star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
+
         </div>
+        <div class="mui-table-view-cell content">
+          {{ ask.feedback.description }}
+        </div>
+
       </div>
 
       <div class="mui-table-view detail-comment-result" v-show="ask.question.status!=7">
@@ -192,11 +196,10 @@
     position: absolute;
     bottom: 10px;
     right: 15px;
-    color: #999;
+    color: #ff9800;
   }
 
   .detail-ask .mui-media-body .amount b {
-    color: #f85f48;
     font-weight: normal;
   }
 
@@ -232,6 +235,7 @@
     text-align: left;
   }
   .star-rating{
+    color:#f85f48;
     float:right;
   }
 
@@ -416,5 +420,16 @@
   .detail-ask-timeline .mui-table-view-cell{
     padding-right:0;
     padding-left:0;
+  }
+
+  .ratingNum{
+    float:right;
+    margin-left:10px;
+    position:relative;
+    bottom:-1px;
+  }
+
+  .content{
+    font-size:12px;
   }
 </style>
