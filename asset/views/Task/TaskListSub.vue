@@ -14,10 +14,10 @@
 
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
       <div class="mui-scroll">
-        <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
+        <div v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
-
-            <li class="mui-table-view-cell" @tap.stop.prevent="goDetail(task)">
+            <div class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
+            <div class="mui-table-view-cell" @tap.stop.prevent="goDetail(task)">
               <div class="person">
                 <div class="avatar">
                   <div class="avatarInner">
@@ -42,10 +42,10 @@
               <div class="site-desc mui-ellipsis-2">
                 {{ task.description | textLimit}}
               </div>
-            </li>
-
+            </div>
+            </div>
           </template>
-        </ul>
+        </div>
       </div>
     </div>
 
@@ -235,7 +235,9 @@
 
 
 <style scoped>
-
+  #pullrefresh{
+    margin-top:10px;
+  }
   .task-list{
     line-height: 33px;
     margin-bottom:15px;
@@ -243,6 +245,11 @@
   .task-list .mui-table-view-chevron .mui-table-view-cell{
     padding-right:5px;
   }
+
+  .task-list .mui-table-view-cell{
+    margin-bottom: 10px;
+  }
+
   .task-list .time{
     display: inline-block;
     width:130px;
@@ -291,8 +298,8 @@
     color: #ffffff;
     float:left;
     display: inline-block;
-    height: 55px;
-    width: 55px;
+    height: 50px;
+    width: 50px;
     font-size: 20px;
     text-align: center;
     border-radius: 50%;
@@ -325,6 +332,7 @@
     color:#666;
     margin-top:10px;
     line-height: 23px;
+    font-size: 12px;
   }
 
   .time{
