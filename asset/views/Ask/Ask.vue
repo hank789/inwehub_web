@@ -74,17 +74,20 @@
       mui.init();
 
       var fixedDiv = mui('.fixedDiv')[0];
+      var textareaWrapper = mui('.textarea-wrapper')[0];
 
       if (mui.os.ios) {
 
         mui(".textarea-wrapper").on('focusin', 'textarea', function () {
           fixedDiv.style.position = 'absolute';
           fixedDiv.style.top = '200px';
+          textareaWrapper.style.height='156px';
         });
 
         mui(".textarea-wrapper").on('focusout', 'textarea', function () {
           fixedDiv.style.position = 'fixed';
           fixedDiv.style.top = 'auto';
+          textareaWrapper.style.height='100%';
         });
       }
 
