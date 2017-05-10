@@ -386,8 +386,6 @@
     height: 40px;
     width: 40px;
     font-size: 20px;
-    color: #ffffff;
-    background-color: #bdbdbd;
     text-align: center;
     border-radius: 50%;
   }
@@ -430,6 +428,7 @@
   }
 
   .content{
+    line-height: 18px;
     font-size:12px;
   }
 </style>

@@ -34,7 +34,7 @@
                 <div class="mui-media-body">
                   <span class="username">您的专属客服：小哈</span>
                   <div>
-                    <span class="time">2017-04-01 11:00:34</span>
+                    <span class="time">{{ ask.question.created_at }}</span>
                   </div>
                 </div>
               </div>

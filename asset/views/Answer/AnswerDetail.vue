@@ -15,12 +15,21 @@
     <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="answer.question?answer.question.user_avatar_url:''">
+
+          <div class="avatar">
+            <div class="avatarInner">
+              <img class="mui-media-object  avatar" :src="answer.question?answer.question.user_avatar_url:''">
+            </div>
+          </div>
+
           <div class="mui-media-body">
             {{ answer.question?answer.question.user_name:'' }}
+            <div>
+             <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
+            <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
+            </div>
           </div>
-          <span class="timeAgo"><timeago :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
-          <span class="amount">悬赏金额<b>￥{{ answer.question?answer.question.price:'' }}</b>元</span>
+
         </div>
         <div class="mui-table-view-cell question content">
           {{ answer.question?answer.question.description:'' }}
@@ -61,11 +70,21 @@
 
       <div class="mui-table-view detail-answer" v-show="answer.question.status==6 || answer.question.status==7">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
+
+
+          <div class="avatar">
+            <div class="avatarInner">
+              <img class="mui-media-object  avatar" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
+            </div>
+          </div>
+
           <div class="mui-media-body">
             {{ answer.answers[0]?answer.answers[0].user_name:'' }}
+            <div>
+            <span class="timeAgo"><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></span>
+            </div>
           </div>
-          <span class="timeAgo"><timeago :since="answer.answers[0]?timeago(answer.answers[0].created_at):''"></timeago></span>
+
         </div>
 
         <div class="mui-table-view-cell question content">
@@ -196,6 +215,10 @@
     line-height:18px;
   }
 
+  .mui-media-body{
+    padding-left:10px;
+  }
+
   .detail-ask .timeAgo {
     font-size:12px;
     color: #8c8c8c;
@@ -277,5 +300,45 @@
 
   .content{
     font-size:12px;
+    line-height: 18px;
+  }
+
+  .avatar{
+    z-index: 0;
+    color: #ffffff;
+    float:left;
+    background-color: #bdbdbd;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+
+  .avatar .avatarInner{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
