@@ -130,6 +130,10 @@
         return false;
       },
       cancelAsk(){
+
+        var inputElem = document.querySelector('textarea');
+        inputElem.blur();
+
         mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
           if (e.index == 0) {
             this.clearCache();
@@ -442,7 +446,6 @@
     background-color: #f4f4f4;
     bottom: 0;
     width: 100%;
-    z-index: 999;
   }
 
   .fixedDiv .select span {
