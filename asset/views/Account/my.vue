@@ -111,8 +111,8 @@
   }
   .myinfo li{
     color:#101010;
-    padding-top:13px;
-    padding-bottom:13px;
+    padding-top:12px;
+    padding-bottom:12px;
   }
 
   .myinfo > .mui-table-view:first-child{
