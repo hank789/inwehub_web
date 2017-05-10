@@ -96,7 +96,7 @@
 
   }
   .mui-table-view {
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
