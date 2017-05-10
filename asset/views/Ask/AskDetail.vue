@@ -22,13 +22,15 @@
 
           <div class="mui-media-body">
             {{ ask.question.user_name }}
+
             <div>
-            <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
-            <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
+              <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
+              <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
-            {{ ask.question.description }}
+          {{ ask.question.description }}
+
 
         </div>
       </div>
@@ -38,11 +40,14 @@
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
-            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span></div>
+
+            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
+            </div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
+
 
         </div>
       </div>
@@ -50,33 +55,28 @@
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
         <div class="mui-table-view-cell">
           暂无回答
+
         </div>
       </div>
 
-      <div class="mui-table-view detail-comment" v-show="ask.question.status==6">
-        <div class="mui-table-view-cell">
-          <div class="mui-content-padded">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                    @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">点击评价
-            </button>
-          </div>
-        </div>
+      <div class="buttonWrapper" v-show="ask.question.status==6">
+
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">评价本次回答
+
+        </button>
+
       </div>
 
       <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
         <div class="mui-table-view-cell">
-          评价：<span class="ratingNum">{{ rating }}.0分</span><star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
+          评价：<span class="ratingNum">{{ rating }}.0分</span>
+          <star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
 
         </div>
         <div class="mui-table-view-cell content">
           {{ ask.feedback.description }}
-        </div>
 
-      </div>
-
-      <div class="mui-table-view detail-comment-result" v-show="ask.question.status!=7">
-        <div class="mui-table-view-cell">
-             暂无评价
         </div>
       </div>
 
@@ -105,29 +105,29 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   const AskDetail = {
     data: () => ({
-      showRating:false,
-      readOnly:true,
+      showRating: false,
+      readOnly: true,
       ask: {
         answers: [],
-        question: {created_at:''},
+        question: {created_at: ''},
         feedback: {
-          rate_star:0
+          rate_star: 0
         },
-        timeline:[]
+        timeline: []
       },
       id: 0,
       loading: true,
       loading_gif: loading_gif
     }),
     mounted(){
-      mui.init({swipeBack:true});
+      mui.init({swipeBack: true});
     },
     computed: {
       rating() {
         return this.ask.feedback.rate_star;
       },
       timelines() {
-          return this.ask.timeline.reverse();
+        return this.ask.timeline.reverse();
       }
     },
     methods: {
@@ -174,13 +174,14 @@
   .detail-ask .question {
     position: relative;
   }
-  .detail-ask .mui-media-body{
-    padding-left:10px;
+
+  .detail-ask .mui-media-body {
+    padding-left: 10px;
   }
 
   .detail-ask .mui-media-body .timeAgo {
     color: #999;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .detail-answer .question {
@@ -189,7 +190,7 @@
 
   .detail-answer .timeAgo {
     color: #999;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .detail-ask .mui-media-body .amount {
@@ -205,7 +206,7 @@
 
   .detail-ask-timeline {
     margin-top: 15px;
-    padding-bottom:10px;
+    padding-bottom: 10px;
   }
 
   .status {
@@ -234,13 +235,14 @@
     margin-top: 15px;
     text-align: left;
   }
-  .star-rating{
-    color:#f85f48;
-    float:right;
+
+  .star-rating {
+    color: #f85f48;
+    float: right;
   }
 
-  .detail-comment-result p{
-    margin-top:5px;
+  .detail-comment-result p {
+    margin-top: 5px;
   }
 
   .timeline {
@@ -312,7 +314,7 @@
     position: relative;
     width: 45%;
     padding: 12px;
-    color:#999;
+    color: #999;
     line-height: 20px;
     min-height: 64px;
   }
@@ -363,24 +365,24 @@
     text-align: right;
   }
 
-  .timeline .timeline-block:first-child .timeline-icon{
-    border-color:#FF6961;
+  .timeline .timeline-block:first-child .timeline-icon {
+    border-color: #FF6961;
   }
 
-  .timeline .timeline-block:first-child .timeline-content{
-    color:#3f3f3f;
+  .timeline .timeline-block:first-child .timeline-content {
+    color: #3f3f3f;
   }
 
-  .timeago{
+  .timeago {
     display: inline-block;
-    color:#007aff;
-    margin-top:10px;
+    color: #007aff;
+    margin-top: 10px;
   }
 
-  .avatar{
+  .avatar {
     z-index: 0;
     color: #ffffff;
-    float:left;
+    float: left;
     background-color: #bdbdbd;
     display: inline-block;
     height: 40px;
@@ -390,8 +392,7 @@
     border-radius: 50%;
   }
 
-
-  .avatar .avatarInner{
+  .avatar .avatarInner {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -415,20 +416,24 @@
     display: block;
   }
 
-  .detail-ask-timeline .mui-table-view-cell{
-    padding-right:0;
-    padding-left:0;
+  .detail-ask-timeline .mui-table-view-cell {
+    padding-right: 0;
+    padding-left: 0;
   }
 
-  .ratingNum{
-    float:right;
-    margin-left:10px;
-    position:relative;
-    bottom:-1px;
+  .ratingNum {
+    float: right;
+    margin-left: 10px;
+    position: relative;
+    bottom: -1px;
   }
 
-  .content{
+  .content {
     line-height: 18px;
-    font-size:12px;
+    font-size: 12px;
+  }
+
+  .buttonWrapper {
+    padding: 10px 50px 0;
   }
 </style>

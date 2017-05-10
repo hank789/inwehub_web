@@ -3,10 +3,20 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">确认应答</h1>
+      <h1 class="mui-title">确认时间</h1>
     </header>
 
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
     <div class="mui-content wait-answer">
+
+
+
+
       <div class="mui-table-view">
         <div class="mui-table-view-cell">
           <div class="form form-ask-refuse">
@@ -55,6 +65,81 @@
     },
     methods:{
       initDate:function(){
+
+        //普通示例
+        var Picker = new mui.PopPicker();
+
+        Picker.setData([
+          {
+            value: '0',
+            text: '立刻回答'
+          },
+          {
+            value: '15',
+            text: '一刻钟后'
+          },
+          {
+            value: '30',
+            text: '半小时后'
+          },
+          {
+            value: '60',
+            text: '一小时后'
+          },
+          {
+            value: '120',
+            text: '两小时后'
+          },
+          {
+            value: '180',
+            text: '三小时后'
+          },
+          {
+            value: '240',
+            text: '四小时后'
+          },
+          {
+            value: '360',
+            text: '六小时后'
+          }
+        ]);
+
+        var selectTime = '';
+        Picker.show((rs) => {
+          Picker.dispose();
+          var value = rs[0].value;
+          switch(value){
+            case '0':
+              selectTime = '';
+                break;
+            case '15':
+              selectTime = '0015';
+                break;
+            case '30':
+              selectTime = '0030';
+              break;
+            case '60':
+              selectTime = '0100';
+              break;
+            case '120':
+              selectTime = '0200';
+              break;
+            case '240':
+              selectTime = '0400';
+              break;
+            case '360':
+              selectTime = '0600';
+              break;
+            default:
+              selectTime = '';
+              break;
+          }
+
+          this.submit(selectTime);
+        });
+
+
+        /*
         let that=this;
         let param={
           "type":"time",
@@ -75,6 +160,7 @@
           }
           this.submit(selectTime);
         });
+        */
       },
       submit(time)
       {
