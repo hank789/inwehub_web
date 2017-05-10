@@ -255,7 +255,7 @@
     padding-left: 10px;
     line-height: 18px;
     color:#101010;
-    font-size:13px;
+    font-size:12px;
   }
 
   .list-answer .site-desc .mui-icon{
@@ -268,11 +268,9 @@
     float:left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     font-size: 20px;
-    color: #ffffff;
-    background-color: #bdbdbd;
     text-align: center;
     border-radius: 50%;
   }
