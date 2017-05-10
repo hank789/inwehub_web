@@ -73,13 +73,15 @@
                 <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_description" class="mui-navigate-right">个人签名<pre style="color: #3f3f3f;" v-text="user.info.description"></pre></a>
-
+                <a href="#account_description" class="mui-navigate-right">个人签名<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="user.info.description"></span></a>
               </li>
             </ul>
             <div class="account_item_title">
-              工作经历<a href="#account_add_job" class="mui-pull-right">添加</a>
+              工作经历<a href="#account_add_job" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.jobs.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护工作经历</li>
+            </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="job in user.jobs" class="mui-table-view-cell">
                 <a @tap.stop.prevent="initNewItem(job,'job')" class="mui-navigate-right">
@@ -89,8 +91,11 @@
               </li>
             </ul>
             <div class="account_item_title">
-              项目经历<a href="#account_add_project" class="mui-pull-right">添加</a>
+              项目经历<a href="#account_add_project" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.projects.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护项目经历</li>
+            </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="project in user.projects" class="mui-table-view-cell">
                 <a @tap.stop.prevent="initNewItem(project,'project')" class="mui-navigate-right">
@@ -100,8 +105,11 @@
               </li>
             </ul>
             <div class="account_item_title">
-              教育经历<a href="#account_add_edu" class="mui-pull-right">添加</a>
+              教育经历<a href="#account_add_edu" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.edus.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护教育经历</li>
+            </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="edu in user.edus" class="mui-table-view-cell">
                 <a @tap.stop.prevent="initNewItem(edu,'edu')" class="mui-navigate-right">
@@ -111,8 +119,11 @@
               </li>
             </ul>
             <div class="account_item_title">
-              培训认证<a href="#account_add_train" class="mui-pull-right">添加</a>
+              培训认证<a href="#account_add_train" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.trains.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护培训经历</li>
+            </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="train in user.trains" class="mui-table-view-cell">
                 <a @tap.stop.prevent="initNewItem(train,'train')" class="mui-navigate-right">
@@ -1158,6 +1169,8 @@
   }
   .account-setting-field {
     position: absolute;
+    text-align: right;
+    width: 200px;
     right: 40px;
     color: #3f3f3f;
   }
@@ -1266,5 +1279,15 @@
 
   .mui-bar .save{
     font-size:14px;
+  }
+
+  .no-empty{
+    color:#999;
+  }
+
+  .iplus{
+      color:#007aff;;
+    font-size:16px;
+    margin-right:10px;
   }
 </style>
