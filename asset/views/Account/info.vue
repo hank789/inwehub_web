@@ -1288,6 +1288,7 @@
   .iplus{
       color:#007aff;;
     font-size:16px;
+    vertical-align: text-top;
     margin-right:10px;
   }
 </style>
