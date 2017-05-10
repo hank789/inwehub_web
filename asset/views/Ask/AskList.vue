@@ -51,7 +51,10 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无提问</div>
-            <div class="subTitle">速速前往提问，开始你的英淘之旅！</div>
+            <div class="subTitle">提出正确的问题，往往等于解决了问题的大半。
+            <br/><span class="mui-pull-right">——海森堡</span>
+            <br/><span>快去提出第一个问题吧！</span>
+            </div>
             <div class="buttons">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="$router.push('/ask')">快速提问
@@ -115,6 +118,7 @@
     },
     computed: {
       nothing () {
+          return 1;
         if (this.loading) {
           return -1;
         }
@@ -324,5 +328,10 @@
   }
   .list-ask p{
     margin-left:20px;
+  }
+
+  .buttons{
+    margin-top:10px;
+    padding:0 30px;
   }
 </style>
