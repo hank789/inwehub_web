@@ -2,15 +2,17 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <button type="button" class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="cancelAsk">取消
+
       </button>
       <h1 class="mui-title">提问</h1>
     </header>
 
     <div class="mui-content form form-ask">
-            <div class="textarea-wrapper">
-              <textarea v-model.trim="description" class="mui-focusin" placeholder="提出问题"></textarea>
-            </div>
-            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
+      <div class="textarea-wrapper">
+        <textarea v-model.trim="description" @keydown.stop="enterWords" class="mui-focusin"
+                  placeholder="提出问题"></textarea>
+      </div>
+      <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
     </div>
 
     <div class="fixedDiv">
@@ -25,6 +27,7 @@
       <div class="button-wrapper" v-show="!isShowMoneyDev">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
           提好问题了
+
         </button>
       </div>
     </div>
@@ -49,7 +52,6 @@
     </div>
 
 
-
   </div>
 </template>
 
@@ -66,7 +68,7 @@
       hide: 0,
       descMaxLength: 500,
       isShowMoneyDev: false,
-      test:0
+      test: 0
     }),
     mounted(){
       mui.init();
@@ -75,14 +77,14 @@
 
       if (mui.os.ios) {
 
-        mui(".textarea-wrapper").on('focusin','textarea',function(){
-          fixedDiv.style.position='absolute';
-          fixedDiv.style.top='200px';
+        mui(".textarea-wrapper").on('focusin', 'textarea', function () {
+          fixedDiv.style.position = 'absolute';
+          fixedDiv.style.top = '200px';
         });
 
-        mui(".textarea-wrapper").on('focusout','textarea',function(){
-          fixedDiv.style.position='fixed';
-          fixedDiv.style.top='auto';
+        mui(".textarea-wrapper").on('focusout', 'textarea', function () {
+          fixedDiv.style.position = 'fixed';
+          fixedDiv.style.top = 'auto';
         });
       }
 
@@ -110,6 +112,20 @@
       this.check();
     },
     methods: {
+      enterWords(event){
+        var key = event.key;
+        var code = event.keyCode;
+
+        if (code == 13) {
+          if (window.event) {
+            window.event.returnValue = false;
+          } else {
+            event.preventDefault();//for firefox
+          }
+        }
+
+        return false;
+      },
       cancelAsk(){
         mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
           if (e.index == 0) {
@@ -244,6 +260,8 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
+
+        this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
         const askDetail = /^[0-9]+$/;
@@ -262,30 +280,31 @@
     margin-top: 0;
   }
 
-  .mui-bar-nav ~ .mui-content{
+  .mui-bar-nav ~ .mui-content {
     padding-top: 0;
   }
-  .form-ask{
-    padding-top:0;
+
+  .form-ask {
+    padding-top: 0;
     background: #fff;
     position: fixed;
     top: 44px;
     bottom: 148px;
     width: 100%;
+    z-index: 0;
   }
+
   .form-ask textarea {
-    width:100%;
-    height:100%;
-    border:none;
-    margin:0;
-    padding:10px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 10px;
   }
 
   .selectMoney {
     background: #fff;
   }
-
-
 
   .selectMoney .category span.active, .form-ask .select span.active {
     border: 1px solid #4a90e2;
@@ -332,7 +351,7 @@
   }
 
   .textarea-wrapper {
-    height:100%;
+    height: 100%;
     background: #fff;
   }
 
@@ -392,17 +411,19 @@
     margin-right: 5px;
   }
 
-  .fixedContainer{
+  .fixedContainer {
     position: relative;
     background: #fff;
-    padding:5px 10px;
+    padding: 5px 10px;
   }
-  .fixedContainer .counter{
-    color:#999;
+
+  .fixedContainer .counter {
+    color: #999;
   }
-  .fixedContainer .niming{
-    float:right;
-    color:#999;
+
+  .fixedContainer .niming {
+    float: right;
+    color: #999;
   }
 
   .fixedDiv .title {
@@ -411,12 +432,14 @@
     color: #8b8b8b;
     height: 32px;
   }
-  .fixedDiv{
+
+  .fixedDiv {
     padding-bottom: 10px;
     position: absolute;
-    background-color:#f4f4f4;
-    bottom:0;
-    width:100%;
+    background-color: #f4f4f4;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
   }
 
   .fixedDiv .select span {
