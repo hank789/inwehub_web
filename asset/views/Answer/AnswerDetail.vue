@@ -217,7 +217,11 @@
             return;
           }
 
-          this.getData();
+          if (time != '0000') {
+            this.$router.go(-1);
+          } else {
+            this.getData();
+          }
         });
       },
       initDate: function () {

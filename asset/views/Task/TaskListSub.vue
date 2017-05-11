@@ -57,7 +57,7 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无任务</div>
-            <div class="subTitle">稍安勿躁，是金子总会发光！平台正准备给您一展风采的机会呢！</div>
+            <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
           </div>
         </div>
       </div>

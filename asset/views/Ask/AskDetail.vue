@@ -98,7 +98,7 @@
 
       <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
         <div class="form form-realAnswer">
-          <div class="shutdown" @tap.stop.prevent="comment"><span class="mui-icon fa fa-times"></span></div>
+          <div class="shutdown" @tap.stop.prevent="cancelComment"><span class="mui-icon fa fa-times"></span></div>
 
           <div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>
 
@@ -167,6 +167,12 @@
       }
     },
     methods: {
+      cancelComment(){
+          if (this.commentState) {
+              this.getDetail();
+          }
+          this.comment();
+      },
       submitComment(){
         if (!this.rateStar) {
           mui.toast('别忘了打分');
@@ -190,10 +196,6 @@
             mui.alert(response.data.message);
             return;
           }
-
-          this.comment();
-
-          this.getDetail();
 
           this.commentState = true;
         });
