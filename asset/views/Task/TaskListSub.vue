@@ -31,7 +31,9 @@
 
                     <span class="time" v-if="startCountdown(task)">倒计时<count-down :start-time="currentTime"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
 
-                    <span class="time" v-else><timeago :since="timeago(task.created_at)" :auto-update="60"></timeago></span>
+                    <span class="time" v-else-if="isTimeout(task)"><b>已超时</b><timeago :since="timeago(task.deadline)" :auto-update="60"></timeago></span>
+
+                    <span class="time" v-else><b v-show="isTimeout(task)">已超时</b><timeago :since="timeago(task.created_at)" :auto-update="60"></timeago></span>
 
                     <span class="mui-badge mui-badge-danger" v-if="task.priority =='高'">优先级 高</span>
                     <span class="mui-badge mui-badge-warning" v-if="task.priority =='中'">优先级 中</span>
@@ -123,9 +125,23 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      isTimeout(task){
+        if (!task.deadline) {
+            return false;
+        }
+
+        var endtime = this.getEndTime(task);
+        var currentTime = (new Date()).getTime()/1000;
+        if (endtime < currentTime) {
+          return true;
+        }
+
+        return false;
+      },
       startCountdown(task){
           var endtime = this.getEndTime(task);
-          if (endtime < this.currentTime) {
+          var currentTime = (new Date()).getTime()/1000;
+          if (endtime < currentTime) {
               return false;
           }
           return true;
@@ -260,6 +276,10 @@
     display: inline-block;
     width:130px;
     color:#101010;
+  }
+
+  .task-list .time b{
+    margin-right: 5px;
   }
 
   .task-list .time div{
