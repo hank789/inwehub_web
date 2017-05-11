@@ -29,9 +29,11 @@
                   <div>
 
 
-                    <span class="time" v-if="task.deadline">倒计时<count-down :start-time="( new Date() ).getTime()"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
+                    <span class="time" v-if="startCountdown(task)">倒计时<count-down :start-time="currentTime"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
 
-                    <span class="time" v-else><timeago :since="timeago(task.created_at)"></timeago></span>
+                    <span class="time" v-else-if="isTimeout(task)"><b>已超时</b><timeago :since="timeago(task.deadline)" :auto-update="60"></timeago></span>
+
+                    <span class="time" v-else><b v-show="isTimeout(task)">已超时</b><timeago :since="timeago(task.created_at)" :auto-update="60"></timeago></span>
 
                     <span class="mui-badge mui-badge-danger" v-if="task.priority =='高'">优先级 高</span>
                     <span class="mui-badge mui-badge-warning" v-if="task.priority =='中'">优先级 中</span>
@@ -55,7 +57,7 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无任务</div>
-            <div class="subTitle">稍安勿躁，是金子总会发光！平台正准备给您一展风采的机会呢！</div>
+            <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
           </div>
         </div>
       </div>
@@ -74,7 +76,8 @@
     data: () => ({
       tasks: [],
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      currentTime:(new Date()).getTime(),
     }),
     components: {
       CountDown
@@ -122,12 +125,31 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      isTimeout(task){
+        if (!task.deadline) {
+            return false;
+        }
+
+        var endtime = this.getEndTime(task);
+        var currentTime = (new Date()).getTime()/1000;
+        if (endtime < currentTime) {
+          return true;
+        }
+
+        return false;
+      },
+      startCountdown(task){
+          var endtime = this.getEndTime(task);
+          var currentTime = (new Date()).getTime()/1000;
+          if (endtime < currentTime) {
+              return false;
+          }
+          return true;
+      },
       getEndTime(task){
           var deadline = task.deadline;
-          deadline = "2017-05-10 15:20:48";
           if (deadline) {
-            var date = new Date(deadline);
-            return date.getTime()/1000;
+            return Date.parse(deadline.replace(/-/g, "/"))/1000;
           }
           return null;
       },
@@ -254,6 +276,10 @@
     display: inline-block;
     width:130px;
     color:#101010;
+  }
+
+  .task-list .time b{
+    margin-right: 5px;
   }
 
   .task-list .time div{

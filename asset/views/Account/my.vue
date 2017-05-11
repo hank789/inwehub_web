@@ -28,7 +28,7 @@
 
           <ul class="mui-table-view mui-table-view-chevron firstItem">
             <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：85%</span></router-link>
+              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：{{ account_info_complete_percent }}%</span></router-link>
             </li>
             <li class="mui-table-view-cell">
               <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：188.00</span></a>
@@ -72,7 +72,8 @@
         phone:currentUser.phone,
         avatar:currentUser.avatar_url,
         title: currentUser.title,
-        company: currentUser.company
+        company: currentUser.company,
+        account_info_complete_percent: currentUser.account_info_complete_percent
       }
     },
     methods: {
