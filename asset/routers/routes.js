@@ -95,6 +95,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 行业领域
+    path: '/tags/industry',
+    component: require('../views/Tags/industryTagsIndexedlist.vue'),
+    meta: {
+      title: '行业领域'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 专家管理
     path: '/expert',
     component: require('../views/Expert/index.vue'),
