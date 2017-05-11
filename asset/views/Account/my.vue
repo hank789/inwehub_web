@@ -34,7 +34,7 @@
               <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：188.00</span></a>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#privacy" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</a>
+              <router-link to="/expert" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</router-link>
             </li>
           </ul>
 

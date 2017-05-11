@@ -85,11 +85,31 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 我的
+  { // 个人信息
     path: '/my/info',
     component: require('../views/Account/info.vue'),
     meta: {
       title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 专家管理
+    path: '/expert',
+    component: require('../views/Expert/index.vue'),
+    meta: {
+      title: '专家管理'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 推荐专家
+    path: '/expert/recommend',
+    component: require('../views/Expert/recommend.vue'),
+    meta: {
+      title: '推荐专家'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
