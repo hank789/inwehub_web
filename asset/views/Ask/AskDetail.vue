@@ -99,17 +99,23 @@
       <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
         <div class="form form-realAnswer">
           <div class="shutdown" @tap.stop.prevent="comment"><span class="mui-icon fa fa-times"></span></div>
-          <div class="submit mui-btn-link" @tap.stop.prevent="submitComment">提交</div>
 
-          <star-rating @rating-selected="setRating" :padding="20" :star-size="30" :show-rating="showRating"></star-rating>
+          <div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>
 
-          <div class="title">{{ starDesc }}</div>
+          <star-rating @rating-selected="setRating" :padding="20" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
 
-          <div class="textarea-wrapper">
+          <div class="title" v-show="!commentState">{{ starDesc }}</div>
+
+          <div class="textarea-wrapper" v-show="!commentState">
             <textarea v-model.trim="description" placeholder="在这里留下你的反馈"></textarea>
             <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
           </div>
-          <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+
+          <div class="successWrapper" v-show="commentState">
+              <div class="mui-icon fa fa-check-circle"></div>
+              <div class="sTitle">感谢您的认真评价，我们非常珍惜您的反馈！</div>
+          </div>
+          <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
         </div>
       </div>
@@ -143,7 +149,8 @@
       description: '',
       rateStar: 0,
       starDesc: '评价会让我们做的更好',
-      descMaxLength: 500
+      descMaxLength: 500,
+      commentState:false //是否已评价
     }),
     mounted(){
       mui.init({swipeBack: true});
@@ -187,6 +194,8 @@
           this.comment();
 
           this.getDetail();
+
+          this.commentState = true;
         });
       },
       setRating: function (rating) {
@@ -234,6 +243,11 @@
           case 5:
             this.starDesc = '非常满意';
             break;
+        }
+      },
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
         }
       }
     },
@@ -597,5 +611,17 @@
 
   .form-realAnswer .textarea-wrapper .counter {
     bottom: 22px;
+  }
+
+  .successWrapper{
+    text-align: center;
+    padding:40px 0;
+  }
+  .successWrapper .mui-icon{
+    font-size:40px;
+    color:#ff9800;
+  }
+  .successWrapper .sTitle{
+    margin-top:20px;
   }
 </style>

@@ -185,18 +185,23 @@
           promise_time: ''
         };
 
-        postRequest(`answer/store`, data).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+
+        mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
+          if (e.index == 1) {
+            postRequest(`answer/store`, data).then(response => {
+              var code = response.data.code;
+              if (code !== 1000) {
+                mui.alert(response.data.message);
+                return;
+              }
+
+              mui.toast(response.data.message);
+
+              var id = response.data.data.id;
+              this.getData();
+            });
           }
-
-          mui.toast(response.data.message);
-
-          var id = response.data.data.id;
-          this.getData();
-        });
+        }, 'div');
       },
       submit(time)
       {
@@ -337,6 +342,13 @@
           this.answer = response.data.data;
           this.loading = 0;
         });
+      }
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
       }
     },
     created () {

@@ -34,7 +34,7 @@
 
               <div class="title">添加职业照片更真实</div>
               <span class="mui-icon fa fa-hand-o-right"></span>
-              <div class="titleSub">个人信息完善度<span>85%</span></div>
+              <div class="titleSub">个人信息完善度<span>{{ user.info.account_info_complete_percent }}%</span></div>
 
               <div class="avatar">
                 <div class="avatarInner" id="head">
