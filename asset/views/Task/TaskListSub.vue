@@ -29,9 +29,9 @@
                   <div>
 
 
-                    <span class="time" v-if="task.deadline">倒计时<count-down :start-time="( new Date() ).getTime()"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
+                    <span class="time" v-if="startCountdown(task)">倒计时<count-down :start-time="currentTime"  :end-time="getEndTime(task)" :dayTxt="':'" :hourTxt="':'" :minutesTxt="':'"></count-down></span>
 
-                    <span class="time" v-else><timeago :since="timeago(task.created_at)"></timeago></span>
+                    <span class="time" v-else><timeago :since="timeago(task.created_at)" :auto-update="60"></timeago></span>
 
                     <span class="mui-badge mui-badge-danger" v-if="task.priority =='高'">优先级 高</span>
                     <span class="mui-badge mui-badge-warning" v-if="task.priority =='中'">优先级 中</span>
@@ -74,7 +74,8 @@
     data: () => ({
       tasks: [],
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      currentTime:(new Date()).getTime(),
     }),
     components: {
       CountDown
@@ -122,12 +123,17 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      startCountdown(task){
+          var endtime = this.getEndTime(task);
+          if (endtime < this.currentTime) {
+              return false;
+          }
+          return true;
+      },
       getEndTime(task){
           var deadline = task.deadline;
-          deadline = "2017-05-10 15:20:48";
           if (deadline) {
-            var date = new Date(deadline);
-            return date.getTime()/1000;
+            return Date.parse(deadline.replace(/-/g, "/"))/1000;
           }
           return null;
       },

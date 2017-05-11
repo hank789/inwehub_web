@@ -22,40 +22,50 @@
 
           <div class="mui-media-body">
             {{ ask.question.user_name }}
-          <div>
+
+            <div>
               <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
               <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           {{ ask.question.description }}
+
         </div>
       </div>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status==6||ask.question.status==7">
         <div class="mui-table-view-cell">
-          <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
+          <div class="avatar">
+            <div class="avatarInner">
+              <img class="mui-media-object  avatar" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
+            </div>
+          </div>
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
-          <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
+
+            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
             </div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
+
         </div>
       </div>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
         <div class="mui-table-view-cell">
           暂无回答
+
         </div>
       </div>
 
       <div class="buttonWrapper" v-show="ask.question.status==6">
 
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="comment">评价本次回答</button>
+                @tap.stop.prevent="comment">评价本次回答
+        </button>
 
       </div>
 
@@ -66,6 +76,7 @@
         </div>
         <div class="mui-table-view-cell content">
           {{ ask.feedback.description }}
+
 
         </div>
       </div>
@@ -90,7 +101,7 @@
           <div class="shutdown" @tap.stop.prevent="comment"><span class="mui-icon fa fa-times"></span></div>
           <div class="submit mui-btn-link" @tap.stop.prevent="submitComment">提交</div>
 
-          <star-rating @rating-selected="setRating" :star-size="25" :show-rating="showRating"></star-rating>
+          <star-rating @rating-selected="setRating" :padding="20" :star-size="30" :show-rating="showRating"></star-rating>
 
           <div class="title">{{ starDesc }}</div>
 
@@ -112,6 +123,8 @@
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+
+
   const AskDetail = {
     data: () => ({
       showRating: false,
@@ -129,7 +142,7 @@
       loading_gif: loading_gif,
       description: '',
       rateStar: 0,
-      starDesc:'等待评分',
+      starDesc: '评价会让我们做的更好',
       descMaxLength: 500
     }),
     mounted(){
@@ -148,6 +161,11 @@
     },
     methods: {
       submitComment(){
+        if (!this.rateStar) {
+          mui.toast('别忘了打分');
+          return;
+        }
+
         if (!this.description) {
           mui.toast('请填写反馈内容');
           return;
@@ -197,26 +215,26 @@
     },
     watch: {
       rateStar: function (newRateStar) {
-          switch(newRateStar) {
-            case 0:
-                this.starDesc = '';
-                break;
-            case 1:
-                this.starDesc = '1颗星';
-                break;
-            case 2:
-              this.starDesc = '2颗星';
-              break;
-            case 3:
-                this.starDesc = '一般，还需要改善';
-                break;
-            case 4:
-              this.starDesc = '4';
-              break;
-            case 5:
-              this.starDesc = '5';
-              break;
-          }
+        switch (newRateStar) {
+          case 0:
+            this.starDesc = '评价会让我们做的更好';
+            break;
+          case 1:
+            this.starDesc = '非常不满意';
+            break;
+          case 2:
+            this.starDesc = '不太满意';
+            break;
+          case 3:
+            this.starDesc = '一般，还需要改善';
+            break;
+          case 4:
+            this.starDesc = '比较满意';
+            break;
+          case 5:
+            this.starDesc = '非常满意';
+            break;
+        }
       }
     },
     created () {
@@ -248,6 +266,10 @@
   }
 
   .detail-ask .mui-media-body {
+    padding-left: 10px;
+  }
+
+  .detail-answer .mui-media-body {
     padding-left: 10px;
   }
 
@@ -510,30 +532,35 @@
   }
 
   .form-realAnswer {
-    position:relative;
+    position: relative;
     background: #fff;
-    padding:20px 5px;
+    padding: 20px 5px;
     text-align: center;
   }
 
-  .form-realAnswer .shutdown{
+  .form-realAnswer .shutdown {
     position: absolute;
-    top:10px;
-    left:10px;
+    top: 10px;
+    left: 10px;
+    font-size:24px;
   }
 
-  .form-realAnswer .star-rating{
-      float:none;
-      position: relative;
-    left:50%;
-    margin-top:10px;
-    margin-left:-62.5px;
+  .form-realAnswer .star-rating {
+    float: none;
+    position: relative;
+    left: 50%;
+    margin-top: 10px;
+    margin-left: -115px;
   }
 
-  .form-realAnswer .submit{
+  .starRating span{
+    margin:0 5px;
+  }
+
+  .form-realAnswer .submit {
     position: absolute;
-    right:10px;
-    top:10px;
+    right: 10px;
+    top: 4px;
   }
 
   .form-realAnswer textarea {
@@ -546,8 +573,8 @@
 
   .form-realAnswer .title {
     margin-top: 5px;
-    font-size:12px;
-    color:#ff9800;
+    font-size: 12px;
+    color: #ff9800;
     height: 32px;
   }
 
@@ -563,8 +590,12 @@
   .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
-    font-size:12px;
+    font-size: 12px;
     bottom: 30px;
     color: #999;
+  }
+
+  .form-realAnswer .textarea-wrapper .counter {
+    bottom: 22px;
   }
 </style>

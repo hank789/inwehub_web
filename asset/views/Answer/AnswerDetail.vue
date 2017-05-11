@@ -519,6 +519,7 @@
   }
 
   .textarea-wrapper{
+    padding:0 5px;
     position: relative;
   }
   .textarea-wrapper .counter{
