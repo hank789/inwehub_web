@@ -14,7 +14,7 @@
 
     <div class="mui-content" v-show="!loading">
 
-      <div class="mui-content-padded">
+
         <div class="form form-ask-refuse">
           <form>
 
@@ -33,12 +33,11 @@
 
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                      @tap.stop.prevent="submit">提交
+                      @tap.stop.prevent="submit">提交反馈
               </button>
             </div>
 
           </form>
-        </div>
       </div>
 
     </div>
@@ -55,7 +54,7 @@
       tags: [],
       sTags: [],
       id:null,
-      descMaxLength: 500,
+      descMaxLength: 200,
       description: '',
       loading: true,
       loading_gif: loading_gif
@@ -108,15 +107,20 @@
           question_id: this.id
         };
 
-        postRequest(`question/rejectAnswer`, data).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
 
-          this.$router.replace('/answers/');
-        });
+        mui.confirm("选择确定后您将不能再回答该问题了，您确定拒绝回答么？", null, ['取消', '确定'], e => {
+          if (e.index == 1) {
+            postRequest(`question/rejectAnswer`, data).then(response => {
+              var code = response.data.code;
+              if (code !== 1000) {
+                mui.alert(response.data.message);
+                return;
+              }
+
+              this.$router.replace('/answers/');
+            });
+          }
+        }, 'div');
       }
     },
     mounted(){
@@ -163,20 +167,26 @@
 
 <style scoped>
   .form-ask-refuse {
-    padding: 10px 20px;
+    padding:0 5px;
   }
 
   .form-ask-refuse textarea {
     margin-top: 15px;
     width: 100%;
-    height: 100px;
-    border: 1px solid #efefef;
+    height: 138px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
   }
 
   .form-ask-refuse .title {
     margin-top: 10px;
+    margin-left:10px;
     color: #8b8b8b;
     height: 32px;
+  }
+
+  .form-ask-refuse .category{
+    padding:10px 20px;
   }
 
   .form-ask-refuse .category span.active {
@@ -186,12 +196,14 @@
   .form-ask-refuse .category span {
     border: 1px solid #b6b6b6;
     border-radius: 5px;
-    padding: 0 5px;
+    padding: 0 15px;
     display: inline-block;
     height: 32px;
-    margin-right: 6px;
-    margin-bottom: 10px;
+    background: #fff;
+    font-size:14px;
+    margin: 5px 6px;
     text-align: center;
+    color:#333;
     line-height: 32px;
     position: relative;
   }
@@ -212,10 +224,7 @@
 
   .form-ask-refuse .button-wrapper {
     margin-top: 15px;
-  }
-
-  .mui-content {
-    background-color: #fff;
+    padding:0 50px;
   }
 
   .textarea-wrapper {
@@ -225,7 +234,8 @@
   .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
-    bottom: 30px;
+    font-size:12px;
+    bottom: 25px;
     color: #999;
   }
 </style>

@@ -22,16 +22,13 @@
 
           <div class="mui-media-body">
             {{ ask.question.user_name }}
-
-            <div>
+          <div>
               <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
               <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           {{ ask.question.description }}
-
-
         </div>
       </div>
 
@@ -40,31 +37,25 @@
           <img class="mui-media-object mui-pull-left" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
           <div class="mui-media-body">
             {{ ask.answers[0] ? ask.answers[0].user_name : '' }}
-
-            <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
+          <div><span class="timeAgo"><timeago :since="ask.answers[0]?getTime(ask.answers[0].created_at):''"></timeago></span>
             </div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           {{ ask.answers[0] ? ask.answers[0].content : '' }}
-
-
         </div>
       </div>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
         <div class="mui-table-view-cell">
           暂无回答
-
         </div>
       </div>
 
       <div class="buttonWrapper" v-show="ask.question.status==6">
 
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.push('/askComment/' + ask.answers[0].id)">评价本次回答
-
-        </button>
+                @tap.stop.prevent="comment">评价本次回答</button>
 
       </div>
 
@@ -72,7 +63,6 @@
         <div class="mui-table-view-cell">
           评价：<span class="ratingNum">{{ rating }}.0分</span>
           <star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
-
         </div>
         <div class="mui-table-view-cell content">
           {{ ask.feedback.description }}
@@ -94,6 +84,25 @@
           </div>
         </div>
       </div>
+
+      <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
+        <div class="form form-realAnswer">
+          <div class="shutdown" @tap.stop.prevent="comment"><span class="mui-icon fa fa-times"></span></div>
+          <div class="submit mui-btn-link" @tap.stop.prevent="submitComment">提交</div>
+
+          <star-rating @rating-selected="setRating" :star-size="25" :show-rating="showRating"></star-rating>
+
+          <div class="title">{{ starDesc }}</div>
+
+          <div class="textarea-wrapper">
+            <textarea v-model.trim="description" placeholder="在这里留下你的反馈"></textarea>
+            <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+          </div>
+          <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+
+        </div>
+      </div>
+
       <div class="mui-clearfix mb70">
       </div>
     </div>
@@ -117,7 +126,11 @@
       },
       id: 0,
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      description: '',
+      rateStar: 0,
+      starDesc:'等待评分',
+      descMaxLength: 500
     }),
     mounted(){
       mui.init({swipeBack: true});
@@ -128,13 +141,82 @@
       },
       timelines() {
         return this.ask.timeline.reverse();
+      },
+      descLength() {
+        return this.description.length;
       }
     },
     methods: {
+      submitComment(){
+        if (!this.description) {
+          mui.toast('请填写反馈内容');
+          return;
+        }
+
+        var data = {
+          answer_id: this.ask.answers[0].id,
+          description: this.description,
+          rate_star: this.rateStar
+        };
+
+        postRequest(`answer/feedback`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.comment();
+
+          this.getDetail();
+        });
+      },
+      setRating: function (rating) {
+        this.rateStar = rating;
+      },
+      comment(){
+        mui('#commentWapper').popover('toggle');
+      },
+      getDetail(){
+        postRequest(`question/info`, {id: this.id}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
+
+          this.ask = response.data.data;
+          this.loading = 0;
+        });
+      },
       getTime(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
         return newDate;
+      }
+    },
+    watch: {
+      rateStar: function (newRateStar) {
+          switch(newRateStar) {
+            case 0:
+                this.starDesc = '';
+                break;
+            case 1:
+                this.starDesc = '1颗星';
+                break;
+            case 2:
+              this.starDesc = '2颗星';
+              break;
+            case 3:
+                this.starDesc = '一般，还需要改善';
+                break;
+            case 4:
+              this.starDesc = '4';
+              break;
+            case 5:
+              this.starDesc = '5';
+              break;
+          }
       }
     },
     created () {
@@ -153,17 +235,7 @@
       }
 
       this.id = id;
-
-      postRequest(`question/info`, {id: id}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          this.$router.go(-1);
-        }
-
-        this.ask = response.data.data;
-        this.loading = 0;
-      });
+      this.getDetail();
     }
   }
   export default AskDetail;
@@ -435,5 +507,64 @@
 
   .buttonWrapper {
     padding: 10px 50px 0;
+  }
+
+  .form-realAnswer {
+    position:relative;
+    background: #fff;
+    padding:20px 5px;
+    text-align: center;
+  }
+
+  .form-realAnswer .shutdown{
+    position: absolute;
+    top:10px;
+    left:10px;
+  }
+
+  .form-realAnswer .star-rating{
+      float:none;
+      position: relative;
+    left:50%;
+    margin-top:10px;
+    margin-left:-62.5px;
+  }
+
+  .form-realAnswer .submit{
+    position: absolute;
+    right:10px;
+    top:10px;
+  }
+
+  .form-realAnswer textarea {
+    margin-top: 20px;
+    width: 100%;
+    height: 138px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+  }
+
+  .form-realAnswer .title {
+    margin-top: 5px;
+    font-size:12px;
+    color:#ff9800;
+    height: 32px;
+  }
+
+  .form-realAnswer .button-wrapper {
+    margin-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .textarea-wrapper {
+    position: relative;
+  }
+
+  .textarea-wrapper .counter {
+    position: absolute;
+    right: 10px;
+    font-size:12px;
+    bottom: 30px;
+    color: #999;
   }
 </style>
