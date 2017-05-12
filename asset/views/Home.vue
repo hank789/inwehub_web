@@ -11,6 +11,7 @@
         <div class="topWrapper">
           <div class="left">
             <div class="title">资深专家推荐</div>
+            <img src="../statics/images/WechatIMG1.jpeg"/>
           </div>
           <div class="right">
             <div class="item apply" @tap.stop.prevent="$router.push('/expert')">
@@ -24,7 +25,7 @@
 
             <div class="item recommend" @tap.stop.prevent="$router.push('/expert/recommend')">
               <div class="buttons">
-                <span class="mui-icon fa fa-check"></span><span class="mui-icon fa fa-chevron-right"></span>
+                <span class="mui-icon fa fa-gift"></span><span class="mui-icon fa fa-chevron-right"></span>
               </div>
               推荐专家
 
@@ -32,7 +33,7 @@
             </div>
           </div>
         </div>
-        <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh"></span></div>
+        <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh fa-spin" v-if="loopAsk"></span><span class="mui-icon fa fa-refresh" @tap.stop.prevent="getAsks" v-else></span></div>
         <div class="askList">
           <div class="person">
             <div class="avatar">
@@ -68,7 +69,7 @@
           </div>
         </div>
 
-        <div class="answer"><span class="title">SAP行业专业问答</span><span class="label" style="display: none;">优质提问返现</span>
+        <div class="answer"><span class="title">SAP行业专业问答</span><span class="label">优质提问返现</span>
         </div>
 
 
@@ -98,6 +99,26 @@
   </div>
 </template>
 
+<script>
+
+  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
+  import {createAPI, addAccessToken, postRequest} from '../utils/request';
+
+  const Home = {
+    data: () => ({
+      loopAsk:false
+    }),
+    methods: {
+      getAsks:function(){
+          this.loopAsk = true;
+          setTimeout(() => {
+              this.loopAsk = false;
+          }, 2000)
+      }
+    }
+  };
+  export default Home;
+</script>
 
 <style scoped>
   .homeWrapper{
@@ -109,7 +130,12 @@
     display: flex;
     background: #fff;
   }
-
+  .topWrapper .left img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index: 2;
+  }
   .topWrapper .left {
     position: relative;
     flex-grow: 1;
@@ -122,6 +148,7 @@
     position: absolute;
     left: 10px;
     top: 10px;
+    z-index: 3;
   }
 
   .topWrapper .right {
@@ -141,7 +168,7 @@
     margin-bottom: 5px;
   }
 
-  .topWrapper .fa-check {
+  .topWrapper .fa-check, .topWrapper .fa-gift{
     color: #587dd5;
     font-size: 32px;
     opacity: 0.5;
@@ -170,6 +197,7 @@
     font-size: 24px;
     color: #587dd5;
     position: absolute;
+    opacity: 0.6;
     right: 20px;
     top: 5px;
   }
@@ -244,6 +272,8 @@
     position: absolute;
     right: 0;
     top: 3px;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
   }
 
   .askList .person {
@@ -272,12 +302,15 @@
     font-size: 12px;
     padding: 1px 5px;
     position: absolute;
-    right: 0;
-    top: 3px;
+    line-height: 21px;
+    right: 8px;
+    top: 7px;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
   }
 
   .tabs {
-    margin-top: 20px;
+    margin-top: 15px;
     padding-bottom: 10px;
   }
 
@@ -309,7 +342,7 @@
   }
 
   .askButton {
-    margin-top: 10px;
+    margin-top: 15px;
     padding: 0 50px;
   }
 

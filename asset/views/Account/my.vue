@@ -21,7 +21,7 @@
                 {{ name }}
                 <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
               </div>
-              <div class="vip"><span class="mui-icon fa fa-vimeo"></span>认证专家</div>
+              <div class="vip" v-show="isExpert"><span class="mui-icon fa fa-vimeo"></span>认证专家</div>
             </div>
 
           </div>
@@ -73,7 +73,8 @@
         avatar:currentUser.avatar_url,
         title: currentUser.title,
         company: currentUser.company,
-        account_info_complete_percent: currentUser.account_info_complete_percent
+        account_info_complete_percent: currentUser.account_info_complete_percent,
+        isExpert:currentUser.is_expert,
       }
     },
     methods: {

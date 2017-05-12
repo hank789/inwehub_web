@@ -29,7 +29,7 @@
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
 
-            <div class="mui-table-view">
+            <div class="mui-table-view" id="head">
               <div class="mui-table-view-cell personCard">
 
               <div class="title">添加职业照片更真实</div>
@@ -37,8 +37,8 @@
               <div class="titleSub">个人信息完善度<span>{{ user.info.account_info_complete_percent }}%</span></div>
 
               <div class="avatar">
-                <div class="avatarInner" id="head">
-                  <img  class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url">
+                <div class="avatarInner">
+                  <img  class="head-img mui-action-preview" :src="user.info.avatar_url">
                 </div>
               </div>
               </div>
@@ -532,7 +532,7 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
+  import {NOTICE, USERS_APPEND} from '../../stores/types';
   import {apiRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import popPickerComponent from '../../components/picker/poppicker.vue';
@@ -540,7 +540,7 @@
   import cityData from '../../components/city/city.data';
   import ACCOUNT_API from '../../api/account';
   import dPickerComponent from '../../components/picker/date-picker.vue';
-  import { updateUserInfoCache } from '../../utils/user';
+  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export default {
@@ -580,6 +580,14 @@
       object_type: 'user'
     }),
     created () {
+        
+      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+        cb(user);
+        this.user = user;
+        this.loading = 0;
+      }));
+
+      /*
       apiRequest(`profile/info`,{}).then(response_data => {
         if (response_data !== false){
           this.user = response_data;
@@ -588,6 +596,7 @@
           this.$router.go(-1);
         }
       });
+      */
     },
     components: {
       popPickerComponent,
@@ -974,7 +983,8 @@
       this.muiView = viewApi;
 
       //更换头像
-      mui(".mui-table-view-cell").on("tap", "#head", (e) => {
+      mui(".mui-scroll").on("tap", "#head", (e) => {
+        e.stopPropagation();
         if(mui.os.plus){
           var a = [{
             title: "拍照"
@@ -1036,10 +1046,6 @@
           filter: "image"
         })
       };
-
-      document.getElementById("head-img1").addEventListener('tap', function(e) {
-        e.stopPropagation();
-      });
 
       //普通示例
       var userPicker = new mui.PopPicker();
