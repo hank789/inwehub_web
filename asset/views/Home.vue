@@ -5,8 +5,14 @@
       <h1 class="mui-title">InweHub</h1>
     </header>
 
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
 
-    <div class="mui-content">
+
+    <div class="mui-content" v-show="!loading">
       <div class="homeWrapper">
         <div class="topWrapper">
           <div class="left">
@@ -94,11 +100,12 @@
     data: () => ({
       loopAsk:false,
       expertNumber:'--',
+      loading:true,
       averageAnswerMinute:'--',
       industryNumber:'--',
       headerImageUrl:'',
       recommendQa:[],
-
+      loading_gif:loading_gif
     }),
     created () {
       this.getData();
@@ -112,6 +119,7 @@
           t.industryNumber = response_data.industry_number;
           t.headerImageUrl  = response_data.header_image_url;
           t.recommendQa  = response_data.recommend_qa;
+          t.loading = false;
         });
       },
       getAsks:function(){
@@ -365,5 +373,9 @@
 
   .mui-content {
     background: #fff;
+  }
+
+  .mui-content.loading{
+    background: none;
   }
 </style>
