@@ -145,6 +145,7 @@
     </div>
     <!--单页面结束-->
 
+    <!--行业领域模板开始-->
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
@@ -154,8 +155,21 @@
           </industry-tags-indexed-list>
         </div>
       </div>
-
     </div>
+    <!--行业领域模板结束-->
+
+    <!--产品类型模板开始-->
+    <div id="page_product_tags" class="mui-modal mui-pageSub">
+      <div class="mui-scroll-wrapper">
+        <div class="mui-scroll">
+          <!--这里放置真实显示的DOM内容-->
+          <industry-tags-indexed-list :tag_type="4" :back_id="page_product_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
+
+          </industry-tags-indexed-list>
+        </div>
+      </div>
+    </div>
+    <!--产品类型模板结束-->
 
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page mui-pageSub">
@@ -187,8 +201,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">产品类型</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.product_tags" placeholder="必填">
+                  <a href="#page_product_tags" class="mui-navigate-right">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -258,8 +271,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">产品类型</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.product_tags" placeholder="必填">
+                  <a href="#page_product_tags" class="mui-navigate-right">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -371,7 +383,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(3)">
-                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.get_time"></label>
+                  <label class="mui-navigate-right">获得时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.get_time"></label>
                 </div>
               </li>
             </ul>
@@ -577,10 +589,11 @@
       muiView: {},
       descMaxLength: 2000,
       page_industry_tags_id: 'page_industry_tags',
+      page_product_tags_id: 'page_product_tags',
       object_type: 'user'
     }),
     created () {
-        
+
       this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
         cb(user);
         this.user = user;
@@ -626,6 +639,13 @@
         } else {
           return '';
         }
+      },
+      infoProductTagsNames() {
+        if (this.newItem.product_tags){
+          return this.newItem.product_tags.join();
+        } else {
+          return '';
+        }
       }
     },
     watch: {
@@ -664,7 +684,7 @@
       changeIndustryTagsOwner(owner) {
         this.object_type = owner;
       },
-      selectedIndustryTags(tags,object_type) {
+      selectedIndustryTags(tags, object_type) {
         switch (object_type) {
           case 'user':
             this.user.info.industry_tags = tags;
@@ -673,6 +693,9 @@
             this.newItem.industry_tags = tags;
             break;
         }
+      },
+      selectedProductTags(tags, object_type) {
+        this.newItem.product_tags = tags;
       },
       initNewItem: function (newItem, objType) {
         this.newItem = newItem;
@@ -700,7 +723,14 @@
           'begin_time': '',
           'end_time': '',
           'description': '',
-          'degree': ''
+          'degree': '',
+          'certificate': '',
+          'agency': '',
+          'get_time': '',
+          'project_name': '',
+          'customer_name': '',
+          'industry_tags': '',
+          'product_tags': ''
         };
       },
       muiViewBack: function () {
