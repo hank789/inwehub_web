@@ -11,7 +11,7 @@
         <div class="topWrapper">
           <div class="left">
             <div class="title">资深专家推荐</div>
-            <img src="../statics/images/WechatIMG1.jpeg"/>
+            <img :src="headerImageUrl"/>
           </div>
           <div class="right">
             <div class="item apply" @tap.stop.prevent="$router.push('/expert')">
@@ -35,36 +35,21 @@
         </div>
         <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh fa-spin" v-if="loopAsk"></span><span class="mui-icon fa fa-refresh" @tap.stop.prevent="getAsks" v-else></span></div>
         <div class="askList">
-          <div class="person">
+          <div class="person" v-for="(person, index) in recommendQa" >
             <div class="avatar">
               <div class="avatarInner">
-                <img src="images/uicon.jpg"/>
+                <img :src="person.user_avatar_url"/>
               </div>
             </div>
             <div class="mui-media-body">
-              <span class="username">我是二x哈</span>
+              <span class="username">{{ person.user_name }}</span>
               <span class="status">专家已回答</span>
               <div class="mui-ellipsis-2">
-                SAP HANA S/4中有关财务方面的事务代表，相比较与R3，取消了哪些之前常用的？
+                {{ person.description }}
 
 
               </div>
-              <span class="amount">奖励180元</span>
-            </div>
-          </div>
-          <div class="person">
-            <div class="avatar">
-              <div class="avatarInner">
-                <img src="images/uicon.jpg"/>
-              </div>
-            </div>
-            <div class="mui-media-body">
-              <span class="username">我是二x哈</span>
-              <span class="status">专家已回答</span>
-              <div class="mui-ellipsis-2">
-                SAP HANA S/4中有关财务方面的事务代表，相比较与R3，取消了哪些之前常用的？
-                <span class="amount">奖励180元</span>
-              </div>
+              <span class="amount">奖励{{ person.price }}元</span>
             </div>
           </div>
         </div>
@@ -81,7 +66,7 @@
         <div class="tabs">
           <div class="tabs-item">
             <span class="mui-icon fa fa-user-secret"></span>
-            <span class="text">147名行业专家</span>
+            <span class="text">{{ expertNumber }}名行业专家</span>
           </div>
           <div class="tabs-item">
             <span class="mui-icon fa fa-clock-o"></span>
@@ -89,7 +74,7 @@
           </div>
           <div class="tabs-item">
             <span class="mui-icon fa fa-thumbs-up"></span>
-            <span class="text">跨越67个行业</span>
+            <span class="text">跨越{{ industryNumber }}个行业</span>
           </div>
         </div>
         <div class="mb70"></div>
@@ -103,13 +88,34 @@
 
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
+  import {apiRequest} from '../utils/request';
 
   const Home = {
     data: () => ({
-      loopAsk:false
+      loopAsk:false,
+      expertNumber:'--',
+      averageAnswerMinute:'--',
+      industryNumber:'--',
+      headerImageUrl:'',
+      recommendQa:[],
+
     }),
+    created () {
+      this.getData();
+    },
     methods: {
+      getData:function(){
+        var t = this;
+        apiRequest(`home`,{}).then(response_data => {
+          t.expertNumber = response_data.expert_number;
+          t.averageAnswerMinute = response_data.average_answer_minute;
+          t.industryNumber = response_data.industry_number;
+          t.headerImageUrl  = response_data.header_image_url;
+          t.recommendQa  = response_data.recommend_qa;
+        });
+      },
       getAsks:function(){
+          this.getData();
           this.loopAsk = true;
           setTimeout(() => {
               this.loopAsk = false;
