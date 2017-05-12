@@ -245,6 +245,8 @@
     position: absolute;
     right: 0;
     top: 3px;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
   }
 
   .askList .person {
@@ -274,8 +276,10 @@
     padding: 1px 5px;
     position: absolute;
     line-height: 21px;
-    right: 10px;
+    right: 8px;
     top: 7px;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
   }
 
   .tabs {

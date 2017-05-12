@@ -89,6 +89,7 @@ function updateUserInfoCache(user) {
     avatar_url:'',
     counts: {},
     account_info_complete_percent:'',
+    is_expert:0,
     datas: {}
   };
   userLocal.user_id = user.id;
@@ -108,6 +109,7 @@ function updateUserInfoCache(user) {
   userLocal.tags = user.tags;
   userLocal.status = user.status;
   userLocal.account_info_complete_percent = user.account_info_complete_percent;
+  userLocal.is_expert  = user.is_expert;
 
   /*
    user.counts.map(function (count, index) {
