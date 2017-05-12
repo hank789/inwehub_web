@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-        <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh"></span></div>
+        <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh fa-spin" v-if="loopAsk"></span><span class="mui-icon fa fa-refresh" @tap.stop.prevent="getAsks" v-else></span></div>
         <div class="askList">
           <div class="person">
             <div class="avatar">
@@ -99,6 +99,26 @@
   </div>
 </template>
 
+<script>
+
+  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
+  import {createAPI, addAccessToken, postRequest} from '../utils/request';
+
+  const Home = {
+    data: () => ({
+      loopAsk:false
+    }),
+    methods: {
+      getAsks:function(){
+          this.loopAsk = true;
+          setTimeout(() => {
+              this.loopAsk = false;
+          }, 2000)
+      }
+    }
+  };
+  export default Home;
+</script>
 
 <style scoped>
   .homeWrapper{
@@ -148,7 +168,7 @@
     margin-bottom: 5px;
   }
 
-  .topWrapper .fa-check, .topWrapper .fa-gift {
+  .topWrapper .fa-check, .topWrapper .fa-gift{
     color: #587dd5;
     font-size: 32px;
     opacity: 0.5;
