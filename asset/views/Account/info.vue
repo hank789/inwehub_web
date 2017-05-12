@@ -38,7 +38,7 @@
 
               <div class="avatar">
                 <div class="avatarInner">
-                  <img  class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url">
+                  <img  class="head-img mui-action-preview" :src="user.info.avatar_url">
                 </div>
               </div>
               </div>
@@ -1036,10 +1036,6 @@
           filter: "image"
         })
       };
-
-      document.getElementById("head-img1").addEventListener('tap', function(e) {
-        e.stopPropagation();
-      });
 
       //普通示例
       var userPicker = new mui.PopPicker();
