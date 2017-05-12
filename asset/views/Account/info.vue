@@ -61,6 +61,9 @@
                 <a href="#account_title" class="mui-navigate-right">当前职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
               </li>
               <li class="mui-table-view-cell">
+                <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('user')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="userIndustryTagsNames"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
                 <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -71,6 +74,9 @@
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_email" class="mui-navigate-right">邮箱地址<span class="mui-pull-right account-setting-field" v-text="user.info.email"></span></a>
+              </li>
+              <li class="mui-table-view-cell">
+                <a @tap.stop.prevent="initBirthday" class="mui-navigate-right">出生日期<span class="mui-pull-right account-setting-field" v-text="user.info.birthday"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_description" class="mui-navigate-right">个人签名<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="user.info.description"></span></a>
@@ -139,6 +145,17 @@
     </div>
     <!--单页面结束-->
 
+    <div id="page_industry_tags" class="mui-modal mui-pageSub">
+      <div class="mui-scroll-wrapper">
+        <div class="mui-scroll">
+          <!--这里放置真实显示的DOM内容-->
+          <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedIndustryTags">
+
+          </industry-tags-indexed-list>
+        </div>
+      </div>
+
+    </div>
 
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page mui-pageSub">
@@ -161,6 +178,17 @@
                 <div class="mui-input-row">
                   <label class="mui-navigate">职位</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('job')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="infoIndustryTagsNames"></span></a>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">产品类型</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.product_tags" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -207,14 +235,31 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">公司</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
+                  <label class="mui-navigate">项目名称</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.project_name" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">职位</label>
+                  <label class="mui-navigate">项目角色</label>
                   <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">客户名称</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.customer_name" placeholder="必填">
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('project')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="infoIndustryTagsNames"></span></a>
+                </div>
+              </li>
+              <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                  <label class="mui-navigate">产品类型</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.product_tags" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -237,10 +282,8 @@
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('job')">删除</button>
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('project')">删除</button>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -316,24 +359,19 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">公司</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
+                  <label class="mui-navigate">培训/认证名称</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.certificate" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <label class="mui-navigate">职位</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                  <label class="mui-navigate">培训/认证机构</label>
+                  <input type="text" class="mui-input-clear" v-model="newItem.agency" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
-                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
-                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
-                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                <div class="mui-input-row" @tap.stop.prevent="initDate(3)">
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.get_time"></label>
                 </div>
               </li>
             </ul>
@@ -345,7 +383,7 @@
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('job')">删除</button>
+              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteAccountItem('train')">删除</button>
             </div>
           </div>
         </div>
@@ -503,7 +541,7 @@
   import ACCOUNT_API from '../../api/account';
   import dPickerComponent from '../../components/picker/date-picker.vue';
   import { updateUserInfoCache } from '../../utils/user';
-
+  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export default {
     data: () => ({
@@ -518,7 +556,14 @@
         'begin_time': '',
         'end_time': '',
         'description': '',
-        'degree': ''
+        'degree': '',
+        'certificate': '',
+        'agency': '',
+        'get_time': '',
+        'project_name': '',
+        'customer_name': '',
+        'industry_tags': '',
+        'product_tags': ''
       },
       gender_object: [
         "保密",
@@ -530,7 +575,9 @@
       userPicker: {},
       cityPicker: {},
       muiView: {},
-      descMaxLength: 2000
+      descMaxLength: 2000,
+      page_industry_tags_id: 'page_industry_tags',
+      object_type: 'user'
     }),
     created () {
       apiRequest(`profile/info`,{}).then(response_data => {
@@ -545,7 +592,8 @@
     components: {
       popPickerComponent,
       dPickerComponent,
-      cityData
+      cityData,
+      industryTagsIndexedList
     },
     computed: {
       genderName: function () {
@@ -555,6 +603,20 @@
         if(this.newItem.description)
           return this.newItem.description.length;
         else return 0;
+      },
+      userIndustryTagsNames() {
+        if (this.user.info.industry_tags){
+          return this.user.info.industry_tags.join();
+        } else {
+          return '';
+        }
+      },
+      infoIndustryTagsNames() {
+        if (this.newItem.industry_tags){
+          return this.newItem.industry_tags.join();
+        } else {
+          return '';
+        }
       }
     },
     watch: {
@@ -590,6 +652,19 @@
             alert("Compress error!" + error.message);
           });
       },
+      changeIndustryTagsOwner(owner) {
+        this.object_type = owner;
+      },
+      selectedIndustryTags(tags,object_type) {
+        switch (object_type) {
+          case 'user':
+            this.user.info.industry_tags = tags;
+            break;
+          default:
+            this.newItem.industry_tags = tags;
+            break;
+        }
+      },
       initNewItem: function (newItem, objType) {
         this.newItem = newItem;
         var toUrl;
@@ -623,9 +698,8 @@
         this.emptyNewItem();
         this.muiView.back();
       },
-      initDate:function(objType){
+      initDate: function(objType){
         let currentDate = new Date();
-        let that=this;
         let param={
           "type":"month",
           "beginYear": "1990",
@@ -640,7 +714,22 @@
             case 2:
               this.newItem.end_time = rs.text;
               break;
+            case 3:
+              this.newItem.get_time = rs.text;
+              break;
           }
+        });
+      },
+      initBirthday: function(){
+        let currentDate = new Date();
+        let param={
+          "type":"date",
+          "beginYear": "1900",
+          "endYear": currentDate.getFullYear()
+        };
+        let picker = new mui.DtPicker(param);
+        picker.show((rs) => {
+            this.user.info.birthday = rs.text;
         });
       },
       submitInfo: function () {
@@ -849,6 +938,7 @@
       mui.init({
         swipeBack: true //启用右滑关闭功能
       });
+
       mui('.mui-scroll-wrapper').scroll();
       //初始化单页view
       var viewApi = mui('#app_account_info').view({
@@ -1176,6 +1266,14 @@
   }
   .mui-input-row textarea {
     border: none !important;
+  }
+
+  .mui-input-row a {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    line-height: 1.1;
+    float: left;
+    width: 35%;
+    padding: 11px 15px;
   }
 
   .avatar{
