@@ -162,7 +162,7 @@ function getUserInfo (user_id, cb) {
 
     var userLocal = updateUserInfoCache(user);
 
-    cb(userLocal);
+    cb(response.data.data);
   })
   .catch(({ response: { data = {} } = {} } ) => {
     const { code = 'xxxx' } = data;

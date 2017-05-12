@@ -532,7 +532,7 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
+  import {NOTICE, USERS_APPEND} from '../../stores/types';
   import {apiRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import popPickerComponent from '../../components/picker/poppicker.vue';
@@ -540,7 +540,7 @@
   import cityData from '../../components/city/city.data';
   import ACCOUNT_API from '../../api/account';
   import dPickerComponent from '../../components/picker/date-picker.vue';
-  import { updateUserInfoCache } from '../../utils/user';
+  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export default {
@@ -580,6 +580,14 @@
       object_type: 'user'
     }),
     created () {
+        
+      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+        cb(user);
+        this.user = user;
+        this.loading = 0;
+      }));
+
+      /*
       apiRequest(`profile/info`,{}).then(response_data => {
         if (response_data !== false){
           this.user = response_data;
@@ -588,6 +596,7 @@
           this.$router.go(-1);
         }
       });
+      */
     },
     components: {
       popPickerComponent,
