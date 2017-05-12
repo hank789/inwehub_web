@@ -11,6 +11,7 @@
         <div class="topWrapper">
           <div class="left">
             <div class="title">资深专家推荐</div>
+            <img src="../statics/images/WechatIMG1.jpeg"/>
           </div>
           <div class="right">
             <div class="item apply" @tap.stop.prevent="$router.push('/expert')">
@@ -109,7 +110,12 @@
     display: flex;
     background: #fff;
   }
-
+  .topWrapper .left img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index: 2;
+  }
   .topWrapper .left {
     position: relative;
     flex-grow: 1;
@@ -122,6 +128,7 @@
     position: absolute;
     left: 10px;
     top: 10px;
+    z-index: 3;
   }
 
   .topWrapper .right {
