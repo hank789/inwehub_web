@@ -290,7 +290,7 @@
   }
 
   .tabs {
-    margin-top: 20px;
+    margin-top: 15px;
     padding-bottom: 10px;
   }
 
@@ -322,7 +322,7 @@
   }
 
   .askButton {
-    margin-top: 10px;
+    margin-top: 15px;
     padding: 0 50px;
   }
 
