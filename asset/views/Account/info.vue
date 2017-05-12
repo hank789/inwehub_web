@@ -974,7 +974,8 @@
       this.muiView = viewApi;
 
       //更换头像
-      mui("#app").on("tap", "#head", (e) => {
+      mui(".mui-scroll").on("tap", "#head", (e) => {
+        e.stopPropagation();
         if(mui.os.plus){
           var a = [{
             title: "拍照"
