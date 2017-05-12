@@ -21,7 +21,9 @@
           <span class="mui-icon fa fa-bolt"></span>
           <span class="text">闪电回复</span>
         </div>
-        <div class="tip">个人信息不完整还不能查看本页内容<br/>请先完善个人信息。</div>
+        <div class="tip" v-if="account_info_complete_percent != 100">个人信息不完整还不能查看本页内容<br/>请先完善个人信息。</div>
+        <div class="tip" v-else>活跃度不够还不能查看本页内容。</div>
+
         <div class="buttons">
           <button type="button" @tap.stop.prevent="$router.push('/my/info')">点击前往维护个人档案</button>
         </div>
@@ -31,7 +33,16 @@
 </template>
 
 <script>
-  export default {};
+  import localEvent from '../../stores/localStorage';
+  export  default {
+    data(){
+      const currentUser = localEvent.getLocalItem('UserInfo');
+
+      return {
+        account_info_complete_percent: currentUser.account_info_complete_percent
+      }
+    }
+  };
 </script>
 
 
