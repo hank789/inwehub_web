@@ -29,7 +29,7 @@
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
 
-            <div class="mui-table-view">
+            <div class="mui-table-view" id="head">
               <div class="mui-table-view-cell personCard">
 
               <div class="title">添加职业照片更真实</div>
@@ -37,7 +37,7 @@
               <div class="titleSub">个人信息完善度<span>{{ user.info.account_info_complete_percent }}%</span></div>
 
               <div class="avatar">
-                <div class="avatarInner" id="head">
+                <div class="avatarInner">
                   <img  class="head-img mui-action-preview" id="head-img1" :src="user.info.avatar_url">
                 </div>
               </div>
@@ -974,7 +974,7 @@
       this.muiView = viewApi;
 
       //更换头像
-      mui(".mui-table-view-cell").on("tap", "#head", (e) => {
+      mui("#app").on("tap", "#head", (e) => {
         if(mui.os.plus){
           var a = [{
             title: "拍照"
