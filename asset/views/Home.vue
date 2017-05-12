@@ -114,6 +114,7 @@
     position: relative;
     flex-grow: 1;
     -webkit-flex-grow: 1;
+    border-bottom:1px solid #f2f2f2;
   }
 
   .topWrapper .left .title {
@@ -125,12 +126,12 @@
 
   .topWrapper .right {
     width: 101px;
-    border: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
   }
 
   .topWrapper .right .item {
     height: 82px;
-    border: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
     text-align: center;
     padding-top: 10px;
   }
@@ -255,6 +256,7 @@
     position: relative;
     height: 35px;
     line-height: 35px;
+    border-top: 1px solid #f2f2f2;
 
   }
 
