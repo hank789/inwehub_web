@@ -160,6 +160,8 @@
             });
 
           });
+        } else {
+            mui.alert('该功能仅支持app使用');
         }
       },
       goSubmit(){
