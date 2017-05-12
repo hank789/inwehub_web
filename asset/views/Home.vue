@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <div class="answer"><span class="title">SAP行业专业问答</span><span class="label" style="display: none;">优质提问返现</span>
+        <div class="answer"><span class="title">SAP行业专业问答</span><span class="label">优质提问返现</span>
         </div>
 
 
@@ -170,6 +170,7 @@
     font-size: 24px;
     color: #587dd5;
     position: absolute;
+    opacity: 0.6;
     right: 20px;
     top: 5px;
   }
@@ -272,8 +273,9 @@
     font-size: 12px;
     padding: 1px 5px;
     position: absolute;
-    right: 0;
-    top: 3px;
+    line-height: 21px;
+    right: 10px;
+    top: 7px;
   }
 
   .tabs {
