@@ -25,7 +25,7 @@
 
             <div class="item recommend" @tap.stop.prevent="$router.push('/expert/recommend')">
               <div class="buttons">
-                <span class="mui-icon fa fa-check"></span><span class="mui-icon fa fa-chevron-right"></span>
+                <span class="mui-icon fa fa-gift"></span><span class="mui-icon fa fa-chevron-right"></span>
               </div>
               推荐专家
 
@@ -148,7 +148,7 @@
     margin-bottom: 5px;
   }
 
-  .topWrapper .fa-check {
+  .topWrapper .fa-check, .topWrapper .fa-gift {
     color: #587dd5;
     font-size: 32px;
     opacity: 0.5;
