@@ -1,12 +1,12 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a id="industry_tags_close_button" class="mui-icon mui-icon-close mui-pull-left" :href="'#'+this.back_id"></a>
-      <h1 class="mui-title">行业领域</h1>
-      <a id='done' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue mui-disabled">完成</a>
+      <a v-bind:id="'industry_tags_close_button_'+ back_id" class="mui-icon mui-icon-close mui-pull-left" :href="'#'+this.back_id"></a>
+      <h1 class="mui-title" v-text="genderTagName"></h1>
+      <a v-bind:id="'done_' + back_id" class="mui-btn mui-btn-link mui-pull-right mui-btn-blue mui-disabled">完成</a>
     </header>
     <div class="mui-content">
-      <div id='list' class="mui-indexed-list">
+      <div v-bind:id="'list_' + back_id" class="mui-indexed-list">
         <div class="mui-indexed-list-search mui-input-row mui-search">
           <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">
         </div>
@@ -72,14 +72,28 @@
         }
       });
     },
+    computed: {
+        genderTagName() {
+            var tag_name = '行业领域';
+            switch (this.tag_type){
+              case 3:
+                tag_name = '行业领域';
+                break;
+              case 4:
+                tag_name = '产品类型';
+                break;
+            }
+            return tag_name;
+        }
+    },
     watch: {
       loading: function(val, oldVal) {
         if(val === 0 && oldVal === 1){
           mui.init();
           mui.ready(() => {
             var header = document.querySelector('header.mui-bar');
-            var list = document.getElementById('list');
-            var done = document.getElementById('done');
+            var list = document.getElementById('list_' + this.back_id);
+            var done = document.getElementById('done_' + this.back_id);
             //calc hieght
             //list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
             //create
@@ -95,7 +109,10 @@
               });
               if (checkedValues.length > 0) {
                 this.$emit('selectedIndustryTags',checkedValues, this.object_type);
-                document.querySelector(".mui-modal").classList.remove("mui-active");
+                var modals = document.querySelectorAll(".mui-modal");
+                modals.forEach(function (modal) {
+                  modal.classList.remove("mui-active");
+                })
                 //mui.alert('你选择了: ' + checkedValues);
               } else {
                 //mui.alert('你没选择任何机场');

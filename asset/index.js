@@ -21,7 +21,7 @@ import App from './App';
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 Raven
-  .config('https://9e8e59b7c54143c38b8ec1f152e05268@sentry.io/165153')
+  .config('https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478')
   .addPlugin(RavenVue, Vue)
   .install();
 
