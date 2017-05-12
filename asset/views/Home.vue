@@ -13,7 +13,7 @@
             <div class="title">资深专家推荐</div>
           </div>
           <div class="right">
-            <div class="item apply">
+            <div class="item apply" @tap.stop.prevent="$router.push('/expert')">
               <div class="buttons">
                 <span class="mui-icon fa fa-check"></span><span class="mui-icon fa fa-chevron-right"></span>
               </div>
@@ -22,7 +22,7 @@
 
             </div>
 
-            <div class="item recommend">
+            <div class="item recommend" @tap.stop.prevent="$router.push('/expert/recommend')">
               <div class="buttons">
                 <span class="mui-icon fa fa-check"></span><span class="mui-icon fa fa-chevron-right"></span>
               </div>
