@@ -7,106 +7,376 @@
       <h1 class="mui-title">推荐专家</h1>
     </header>
 
-    <div id="expert_commend" class="mui-content">
+    <div class="mui-content professor">
+      <div class="title">在这里填写推荐专家信息：</div>
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">专家姓名</label>
-            <input id="name" type="text" class="mui-input-clear" v-model="expertItem.name" placeholder="必填">
+            <input id="name" type="text" class="mui-input-clear" v-model="name" placeholder="必填">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">专家性别</label>
-            <input id="gender" type="text" class="mui-input-clear" v-model="expertItem.gender" placeholder="必填">
+            <a href="javascript:void(0)" @tap.stop.prevent="selectGender"
+               class="link mui-navigate-right mui-ellipsis"><span v-show="!gender">请选择</span><span
+              class="mui-input-clear">{{ gender }}</span></a>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">从业时间</label>
-            <input id="work_years" type="text" class="mui-input-clear" v-model="expertItem.work_years" placeholder="必填">
+            <a href="#page_industry_tags" class="link mui-navigate-right mui-ellipsis" @tap.stop.prevent="selectWorkYear"><span
+              v-show="!workYears">请选择</span><span class="mui-input-clear">{{ workYears }}</span></a>
+            <span class="year">年</span>
           </div>
         </li>
         <li class="mui-table-view-cell">
-          <div class="mui-input-row">
+          <div class="mui-input-row mui-navigate-right">
             <label class="mui-navigate">行业领域</label>
-            <input id="industry_tags" type="text" class="mui-input-clear" v-model="expertItem.industry_tags" placeholder="必填">
+            <a href="#page_industry_tags" class="link mui-navigate-right mui-ellipsis"><span
+              v-show="!infoIndustryTagsNames">请选择</span><span class="mui-input-clear">{{ infoIndustryTagsNames }}</span></a>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">联系电话</label>
-            <input id="mobile" type="text" class="mui-input-clear" v-model="expertItem.mobile" placeholder="必填">
+            <input type="text" class="mui-input-clear" v-model="mobile" placeholder="必填">
           </div>
         </li>
-
-        <li class="mui-table-view-cell">
-
-        </li>
       </ul>
-      <div class="account_item_title">
-        在这里补充推荐专家信息：
-      </div>
+      <div class="title">在这里补充推荐专家信息：</div>
       <div class="textarea-wrapper">
-        <textarea id="description" v-model.trim="expertItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+        <textarea v-model.trim="description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
-      <div class="account_item_title">
-        上传专家名片：
+      <div class="title">上传专家名片：</div>
+
+      <div class="image-list">
+
+        <template v-for="(file, index) in files">
+          <div class="image-item">
+            <div class="image-close" @tap.stop.prevent="delFile(index)">X</div>
+            <img class="file" :src="file.url"/>
+          </div>
+        </template>
+
+
+        <div class="image-item space" @tap.stop.prevent="selectImages" v-show="files.length < 2">
+          <div class="image-close">X</div>
+          <span class="mui-icon fa fa-plus"></span>
+        </div>
+
       </div>
-      <div id='image-list' class="row image-list"></div>
+
+
       <div class="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary">提交</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goSubmit">提交</button>
+      </div>
+    </div>
+
+    <div id="page_industry_tags" class="mui-modal mui-pageSub">
+      <div class="mui-scroll-wrapper">
+        <div class="mui-scroll">
+          <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type"
+                                      v-on:selectedIndustryTags="selectedIndustryTags">
+
+          </industry-tags-indexed-list>
+        </div>
       </div>
     </div>
 
   </div>
 </template>
 <script>
-  import {createAPI, apiRequest} from '../../utils/request';
+  import {createAPI, apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export  default {
     data: () => ({
-      descMaxLength: 2000,
-      expertItem: {
-        name: '',
-        gender: '',
-        work_years: '',
-        mobile: '',
-        industry_tags: '',
-        description: '',
-        head_img: ''
-      }
+      name: '',
+      descMaxLength: 500,
+      description: '',
+      gender: '',
+      genderValue: '',
+      workYears: '',
+      industryTags: [],
+      page_industry_tags_id: 'page_industry_tags',
+      object_type: 'user',
+      files: [],
+      mobile: ''
     }),
     created () {
 
     },
     computed: {
       descLength() {
-        if(this.expertItem.description)
-          return this.expertItem.description.length;
+        if (this.description)
+          return this.description.length;
         else return 0;
+      },
+      infoIndustryTagsNames() {
+        if (this.industryTags) {
+          return this.industryTags.join();
+        } else {
+          return '';
+        }
       }
     },
     methods: {
+      delFile(index){
+        this.files.splice(index, 1);
+      },
+      selectImages(){
+        var t = this;
+        if (mui.os.plus) {
+          plus.gallery.pick(function (e) {
+            var name = e.substr(e.lastIndexOf('/') + 1);
 
+            plus.zip.compressImage({
+              src: e,
+              dst: '_doc/' + name,
+              overwrite: true,
+              quality: 50
+            }, function (zip) {
+              if (zip.size > (10 * 1024 * 1024)) {
+                return mui.toast('文件超大,请重新选择~');
+              }
+
+              var newurl = plus.io.convertLocalFileSystemURL(zip.target);
+              plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+                var localUrl = entry.toRemoteURL();
+                t.files.push({
+                  name: name,
+                  path: zip.target,
+                  url: localUrl
+                });
+              });
+
+            }, function (zipe) {
+              mui.toast('压缩失败！')
+            });
+
+          });
+        }
+      },
+      goSubmit(){
+        if (!this.name) {
+          mui.toast('请填写专家姓名');
+          return;
+        }
+        if (!this.gender) {
+          mui.toast('请选择专家性别');
+          return;
+        }
+        if (!this.workYears) {
+          mui.toast('请选择从业时间');
+          return;
+        }
+        if (!this.infoIndustryTagsNames) {
+          mui.toast('请选择行业领域');
+          return;
+        }
+        if (!this.mobile) {
+          mui.toast('请填写联系电话');
+          return;
+        }
+
+        if (this.mobile.length != 11) {
+          mui.toast('请正确填写联系电话');
+          return;
+        }
+
+        if (!this.description) {
+          mui.toast('请填写专家信息');
+          return;
+        }
+
+        if (mui.os.plus) {
+          this.uploadPlus();
+        } else {
+          postRequest(`expert/recommend`, {
+            name: this.name,
+            gender: this.genderValue,
+            work_years: this.workYears,
+            mobile: this.mobile,
+            industry_tags: this.infoIndustryTagsNames,
+            description: this.description,
+            images: []
+          }).then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+
+            mui.alert('提交成功');
+            this.$router.replace('/expert');
+          });
+        }
+
+      },
+      uploadPlus(){
+        var that = this;
+        var task = plus.uploader.createUpload(createAPI('expert/recommend'),
+          {method: "POST", blocksize: 204800, priority: 100},
+          function (t, status) {
+            // 上传完成
+            if (status == 200) {
+              var response = JSON.parse(t.responseText);
+              if (response.code == 1000) {
+                mui.alert('提交成功');
+                that.$router.replace('/expert');
+              } else {
+                mui.alert(t.responseText + response.message);
+              }
+            } else {
+              mui.alert("Upload failed: " + status);
+            }
+          }
+        );
+
+        for (var i in this.files) {
+          var file = this.files[i];
+          task.addFile(file.path, {key: "images_" + i});
+        }
+
+        task.addData("name", this.name);
+        task.addData("gender", this.genderValue);
+        task.addData("work_years", this.workYears);
+        task.addData("mobile", this.mobile);
+        task.addData("industry_tags", this.infoIndustryTagsNames);
+        task.addData("description", this.description);
+
+
+        const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
+        task.setRequestHeader('Authorization', 'bearer ' + UserLoginInfo.token);
+        task.start();
+      },
+      selectedIndustryTags(tags, object_type) {
+        this.industryTags = tags;
+      },
+      selectGender: function () {
+        var Picker = new mui.PopPicker();
+
+        Picker.setData([
+          {
+            value: '1',
+            text: '男'
+          },
+          {
+            value: '2',
+            text: '女'
+          }
+        ]);
+
+        Picker.show(items => {
+          this.gender = items[0].text;
+          this.genderValue = items[0].value;
+        });
+      },
+      selectWorkYear: function () {
+        var Picker = new mui.PopPicker();
+
+        Picker.setData([
+          {
+            value: '1',
+            text: '1'
+          },
+          {
+            value: '2',
+            text: '2'
+          },
+          {
+            value: '3',
+            text: '3'
+          },
+          {
+            value: '4',
+            text: '4'
+          },
+          {
+            value: '5',
+            text: '5'
+          },
+          {
+            value: '6',
+            text: '6'
+          },
+          {
+            value: '7',
+            text: '7'
+          },
+          {
+            value: '8',
+            text: '8'
+          },
+          {
+            value: '9',
+            text: '9'
+          },
+          {
+            value: '10',
+            text: '10'
+          }
+        ]);
+
+        Picker.show(items => {
+          this.workYears = items[0].value;
+        });
+      }
     },
     mounted(){
 
+    },
+    components: {
+      industryTagsIndexedList
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      }
     }
   }
 
 </script>
 
 <style scoped>
-
-  .mui-table-view {
-    margin-top: 15px;
+  .professor .title {
+    height: 40px;
+    margin-left: 10px;
+    line-height: 40px;
   }
 
-  .mui-table-view-cell{
-    padding:0;
+  .professor li {
+    padding: 5px 0;
+  }
+
+  .professor li input {
+    color: #999;
+  }
+
+  .professor .year {
+    position: absolute;
+    right: 35px;
+    top: 10px
+  }
+
+  .professor .link {
+    display: inline-block;
+    float: right;
+    width: 65%;
+    height: 40px;
+    line-height: 37px;
+    padding-right: 30px;
+  }
+
+  .mui-table-view-cell {
+    padding: 0;
   }
 
   .expert-setting-field {
@@ -118,46 +388,47 @@
     color: #3f51b5;
   }
 
-  .mui-table-view-cell .mui-navigate
-  {
-    color: #999;
-  }
-
   .account_item_title {
     padding: 5px;
     color: #a6a6a6;
     font-size: 12px;
   }
+
   .textarea-wrapper {
-    padding:2px;
-    height:100%;
+    padding: 0 5px;
+    height: 100%;
     position: relative;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
-    font-size:12px;
+    right: 10px;
+    font-size: 12px;
     bottom: 10px;
     color: #b0b0b0;
   }
 
   .textarea-wrapper textarea {
     border-radius: 5px;
-    margin:0;
+    margin: 0;
+  }
+
+  .button-wrapper {
+    padding: 0 50px;
   }
 
   .image-list {
     width: 100%;
-    height: 85px;
+    /*height: 85px;*/
     background-size: cover;
-    padding: 10px 10px;
+    padding: 10px;
     overflow: hidden;
   }
+
   .image-item {
     width: 65px;
     height: 65px;
-    /*background-image: url(../images/iconfont-tianjia.png);*/
+    /* background-image: url(../images/iconfont-tianjia.png); */
     background-size: 100% 100%;
     display: inline-block;
     position: relative;
@@ -167,19 +438,25 @@
     border: solid 1px #e8e8e8;
     vertical-align: top;
   }
+
+  .image-item .mui-icon {
+    font-size:50px;
+    position: absolute;
+    top:8px;
+    left:12px;
+    color:#ccc;
+  }
+
   .image-item .file {
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    opacity: 0;
     cursor: pointer;
     z-index: 0;
   }
-  .image-item.space {
-    border: none;
-  }
+
   .image-item .image-close {
     position: absolute;
     display: inline-block;
@@ -197,22 +474,16 @@
     font-weight: 200;
     z-index: 1;
   }
-  .image-item .image-up{
-    height: 65px;
-    width: 65px;
-    border-radius: 10px;
-    line-height: 65px;
-    border: 1px solid #ccc;
-    color: #ccc;
-    display: inline-block;
-    text-align: center;
+
+  .space .image-close {
+    display: none;
   }
-  .image-item .image-up:after{
+
+  .image-item .image-up:after {
     font-family: "微软雅黑";
     content: '+';
     font-size: 60px;
   }
-  .button-wrapper{
-    padding:0 50px;
-  }
+
+
 </style>
