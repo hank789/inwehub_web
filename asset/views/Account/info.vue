@@ -664,6 +664,7 @@
     methods: {
       toClip(path) {
         var t = this;
+        mui.toast('toClip1');
         plus.zip.compressImage({
             src: path,
             dst: "_doc/c.jpg",
@@ -672,6 +673,7 @@
           },
           function (event) {
             var newurl = plus.io.convertLocalFileSystemURL(event.target);
+            mui.toast('toClip2:'+newurl);
             plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
               t.localUrl = entry.toRemoteURL();
               localEvent.setLocalItem('avatar', {url:t.localUrl, path:entry.toLocalURL()});
@@ -1308,7 +1310,7 @@
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
     line-height: 1.1;
     float: left;
-    width: 35%;
+    width: 100%;
     padding: 11px 15px;
   }
 
