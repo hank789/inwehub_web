@@ -8,8 +8,8 @@
 
 
     <div class="mui-content">
-      <div class="mui-content-padded feedback">
-        <p>我们懂得聆听，您的意见与反馈</p>
+      <div class="feedback">
+        <div class="title">我们懂得聆听，您的意见与反馈</div>
 
         <div class="textarea-wrapper">
           <textarea placeholder="这里仅针对产品使用期间的任何问题进行收集，如果您有专业问题，请前往首页发起提问功能" v-model="description"></textarea>
@@ -90,10 +90,14 @@
 
 <style scoped>
   .mui-content{
-    background-color:#fff;
+  }
+  .title{
+    color:#aba9ab;
+    height:40px;
+    line-height:40px;
+    padding-left:10px;
   }
   .feedback{
-    padding:10px;
   }
   .feedback textarea{
     height:200px;
@@ -101,11 +105,25 @@
 
   .textarea-wrapper{
     position: relative;
+    margin:0 5px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    padding-bottom:20px;
+  }
+  .textarea-wrapper textarea{
+    padding-bottom:0;
+    margin-bottom:0;
+    border:none;
   }
   .textarea-wrapper .counter{
     position: absolute;
     right: 10px;
-    bottom: 30px;
+    bottom: 2px;
     color:#999;
+  }
+  .button-wrapper{
+    margin-top:40px;
+    padding:0 50px;
   }
 </style>
