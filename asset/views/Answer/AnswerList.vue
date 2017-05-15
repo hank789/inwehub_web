@@ -50,7 +50,8 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无任务</div>
-            <div class="subTitle">稍安勿躁，是金子总会发光！平台正准备给您一展风采的机会呢！</div>
+            <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
+            <div class="subTitle" v-if="!isExpert">认证成为平台专家，才能回答问题展示您的风采！<br/>现在就前往申请认证吧！</div>
           </div>
         </div>
       </div>
@@ -62,14 +63,20 @@
 <script>
   import {NOTICE, ANSWERS_INFO, ANSWERS_LIST, ANSWERS_INFO_APPEND, ANSWERS_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
 
   const AnswerList = {
-    data: () => ({
-      answers: [],
-      loading:true,
-      loading_gif:loading_gif
-    }),
+    data(){
+      const currentUser = localEvent.getLocalItem('UserInfo');
+
+      return {
+        answers: [],
+        loading:true,
+        loading_gif:loading_gif,
+        isExpert:currentUser.is_expert
+      }
+    },
     computed: {
       nothing () {
         if (this.loading) {

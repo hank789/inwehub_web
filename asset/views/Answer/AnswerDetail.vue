@@ -175,7 +175,7 @@
 
           //信息是否完善
         const currentUser = localEvent.getLocalItem('UserInfo');
-        if (currentUser.hasOwnProperty('account_info_complete_percent')  && parseInt(currentUser.account_info_complete_percent) >= 90) {
+        if (currentUser.hasOwnProperty('account_info_complete_percent')  && parseInt(currentUser.account_info_complete_percent) < 90) {
             mui.alert('您的个人信息还不完善，请先前往我的个人档案中补充完整才能应答。 ', null, null, () => {
               this.$router.replace('/my/info');
             });
