@@ -59,8 +59,9 @@
 </template>
 <script>
   import localEvent from '../../stores/localStorage';
-  import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
+  import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND} from '../../stores/types';
   import router from '../../routers/index';
+  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
 
   export  default {
     data(){
@@ -82,6 +83,14 @@
          var im_token = JSON.parse(sessionStorage.getItem('im_token'))
          this.im_tokenMsg = im_token;
       }
+    },
+    created () {
+
+      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+        cb(user);
+        this.account_info_complete_percent = user.info.account_info_complete_percent;
+        this.isExpert = user.info.is_expert;
+      }));
     },
     mounted(){
       this.getToken()
