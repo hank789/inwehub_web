@@ -29,7 +29,7 @@
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
 
-            <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
