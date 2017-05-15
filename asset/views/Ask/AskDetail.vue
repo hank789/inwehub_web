@@ -583,8 +583,8 @@
     margin-top: 20px;
     width: 100%;
     height: 138px;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border:none;
+    padding:10px 15px 0;
   }
 
   .form-realAnswer .title {
@@ -600,19 +600,26 @@
   }
 
   .textarea-wrapper {
+    padding-bottom:20px;
     position: relative;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+  }
+
+  .textarea-wrapper textarea{
+    margin:0;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
     font-size: 12px;
-    bottom: 30px;
+    bottom: 10px;
     color: #999;
   }
 
   .form-realAnswer .textarea-wrapper .counter {
-    bottom: 22px;
+    bottom: 2px;
   }
 
   .successWrapper{

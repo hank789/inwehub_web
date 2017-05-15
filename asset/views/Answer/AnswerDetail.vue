@@ -65,7 +65,7 @@
             <textarea v-model.trim="description" placeholder="请填写回答"></textarea>
             <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
           </div>
-          <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+          <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
           <div class="button-wrapper">
             <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>
@@ -518,10 +518,10 @@
     padding-top:10px;
   }
   .form-realAnswer textarea {
+    background: none;
     width:100%;
     height:200px;
-    border-radius: 5px;
-    border:1px solid #bbbbbb;
+    border:none;
   }
   .form-realAnswer .title{
     margin-left:10px;
@@ -535,13 +535,23 @@
   }
 
   .textarea-wrapper{
-    padding:0 5px;
+    padding:0 0 20px;
     position: relative;
+    border-radius: 5px;
+    border:1px solid #bbbbbb;
+    background: #fff;
+    margin:0 5px;
+
+  }
+  .textarea-wrapper textarea{
+    margin:0;
+    padding-top:10px;
+    padding-bottom:0;
   }
   .textarea-wrapper .counter{
     position: absolute;
     right: 10px;
-    bottom: 25px;
+    bottom: 2px;
     font-size:12px;
     color:#999;
   }

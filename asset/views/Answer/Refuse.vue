@@ -174,8 +174,7 @@
     margin-top: 15px;
     width: 100%;
     height: 138px;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border:none;
   }
 
   .form-ask-refuse .title {
@@ -229,13 +228,21 @@
 
   .textarea-wrapper {
     position: relative;
+    background: #fff;
+    padding-bottom:20px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+  }
+  .textarea-wrapper textarea{
+    margin:0;
+    padding-bottom:0;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
     font-size:12px;
-    bottom: 25px;
+    bottom: 2px;
     color: #999;
   }
 </style>
