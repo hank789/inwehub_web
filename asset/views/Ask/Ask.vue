@@ -194,7 +194,7 @@
 
           if (code == 3000) {
             mui.alert(response.data.message, null, null, function () {
-              t.$router.push('/my/info');
+              t.$router.replace('/my/info');
             });
             return;
           }
