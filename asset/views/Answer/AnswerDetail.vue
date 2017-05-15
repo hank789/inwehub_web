@@ -137,7 +137,7 @@
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-
+  import localEvent from '../../stores/localStorage';
 
   const AnswerDetail = {
     data: () => ({
@@ -170,6 +170,18 @@
 
     },
     methods: {
+      check(){
+          //检查是否有权限查看当前页面
+
+          //信息是否完善
+        const currentUser = localEvent.getLocalItem('UserInfo');
+        if (currentUser.hasOwnProperty('account_info_complete_percent')  && parseInt(currentUser.account_info_complete_percent) !== 100) {
+            mui.alert('您的个人信息还不完善，请先前往我的个人档案中补充完整才能应答。 ', null, null, () => {
+              this.$router.replace('/my/info');
+            });           
+        }
+
+      },
       selectTime(){
         this.initDate();
       },
@@ -373,6 +385,7 @@
       this.id = id;
 
       this.getData();
+      this.check();
     }
   }
   export default AnswerDetail;
