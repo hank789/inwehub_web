@@ -149,7 +149,7 @@
           this.$router.go(-1);
         }
 
-        this.tags = response.data.data;
+        this.tags = response.data.data.tags;
         this.loading = 0;
       });
     },
