@@ -43,7 +43,7 @@
               <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon fa fa-question-circle"></span>我的提问</router-link>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon fa fa-file-text"></span>我的问答</router-link>
+              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon fa fa-file-text"></span>我的回答</router-link>
             </li>
           </ul>
 
