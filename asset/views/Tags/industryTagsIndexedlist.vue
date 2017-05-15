@@ -110,9 +110,11 @@
               if (checkedValues.length > 0) {
                 this.$emit('selectedIndustryTags',checkedValues, this.object_type);
                 var modals = document.querySelectorAll(".mui-modal");
-                modals.forEach(function (modal) {
-                  modal.classList.remove("mui-active");
-                })
+                if (modals !== 'undefined') {
+                  modals.forEach(function (modal) {
+                    modal.classList.remove("mui-active");
+                  });
+                }
                 //mui.alert('你选择了: ' + checkedValues);
               } else {
                 //mui.alert('你没选择任何机场');
