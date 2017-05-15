@@ -671,11 +671,18 @@
             quality: 20
           },
           function (event) {
+
             var newurl = plus.io.convertLocalFileSystemURL(event.target);
+            if (mui.os.ios) {
+               newurl = 'file://'+newurl;
+            }
+
             plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
               t.localUrl = entry.toRemoteURL();
               localEvent.setLocalItem('avatar', {url:t.localUrl, path:entry.toLocalURL()});
               t.$router.push('/header');
+            }, function (error){
+                alert(error.message);
             });
           }, function (error) {
             alert("Compress error!" + error.message);
