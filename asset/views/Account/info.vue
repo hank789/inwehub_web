@@ -944,7 +944,6 @@
                 break;
             }
             mui.toast('保存成功');
-            this.emptyNewItem();
             this.muiView.back();
           }
         })
