@@ -596,11 +596,7 @@
     }),
     created () {
 
-      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-        cb(user);
-        this.user = user;
-        this.loading = 0;
-      }));
+      this.getUserInfo();
 
       /*
       apiRequest(`profile/info`,{}).then(response_data => {
@@ -664,6 +660,13 @@
       }
     },
     methods: {
+      getUserInfo(){
+        this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+          cb(user);
+          this.user = user;
+          this.loading = 0;
+        }));
+      },
       toClip(path) {
         var t = this;
         plus.zip.compressImage({
@@ -707,7 +710,8 @@
         this.newItem.product_tags = tags;
       },
       initNewItem: function (newItem, objType) {
-        this.newItem = newItem;
+        const varItem = JSON.stringify(newItem);
+        this.newItem = JSON.parse(varItem);
         var toUrl;
         switch (objType) {
           case 'job':
@@ -945,6 +949,7 @@
                 break;
             }
             mui.toast('保存成功');
+            this.getUserInfo();
             this.muiView.back();
           }
         })

@@ -76,9 +76,6 @@
       });
     },
     computed: {
-        getSelected(){
-            console.log(this.selected);
-        },
         genderTagName() {
             var tag_name = '行业领域';
             switch (this.tag_type){
@@ -116,7 +113,6 @@
     },
     watch: {
       selected:function(val, oldVal){
-        console.log('in');
         setTimeout(() => {
           this.updateFinish();
         }, 1000);
