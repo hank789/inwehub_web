@@ -52,7 +52,7 @@
                 <a href="#account_name" class="mui-navigate-right">用户姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field" id="user_gender" v-text="genderName"></span></a>
+                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field"  v-text="genderName"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_company" class="mui-navigate-right">当前公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
@@ -64,7 +64,7 @@
                 <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('user')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="userIndustryTagsNames"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
+                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_address_detail" class="mui-navigate-right">详细地址<span class="mui-pull-right account-setting-field" v-text="user.info.address_detail"></span></a>
@@ -174,7 +174,7 @@
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
         <h1 class="mui-center mui-title">工作经历</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('job')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
@@ -326,7 +326,7 @@
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
-                <div id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label class="mui-pull-right account-setting-field" id="edu_degree" v-text="newItem.degree"></label></div>
+                <div id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label class="mui-pull-right account-setting-field" v-text="newItem.degree"></label></div>
               </li>
 
               <li class="mui-table-view-cell mui-input-row">
@@ -574,8 +574,8 @@
         'get_time': '',
         'project_name': '',
         'customer_name': '',
-        'industry_tags': '',
-        'product_tags': ''
+        'industry_tags': [],
+        'product_tags': []
       },
       gender_object: [
         "保密",
@@ -715,7 +715,9 @@
             toUrl = '#account_add_edu';
             break;
           case 'project':
-            this.newItem.industry_tags = this.newItem.industry_tags.split(',');
+            if (typeof(newItem.industry_tags) === 'string') {
+              this.newItem.industry_tags = newItem.industry_tags.split(',');
+            }
             toUrl = '#account_add_project';
             break;
           case 'train':
@@ -737,12 +739,11 @@
           'get_time': '',
           'project_name': '',
           'customer_name': '',
-          'industry_tags': '',
-          'product_tags': ''
+          'industry_tags': [],
+          'product_tags': []
         };
       },
       muiViewBack: function () {
-        this.emptyNewItem();
         this.muiView.back();
       },
       initDate: function(objType){
@@ -1030,6 +1031,7 @@
       });
 
       var view = viewApi.view;
+      var t = this;
       (function($) {
         //处理view的后退与webview后退
         var oldBack = $.back;
@@ -1052,7 +1054,7 @@
           				//console.log(e.detail.page.id + ' beforeBack');
         });
         view.addEventListener('pageBack', function(e) {
-          				//console.log(e.detail.page.id + ' back');
+            t.emptyNewItem();
         });
       })(mui);
       this.muiView = viewApi;
@@ -1092,18 +1094,6 @@
         var c = plus.camera.getCamera();
         c.captureImage(function(e) {
           t.toClip(e);
-          /*
-          plus.io.resolveLocalFileSystemURL(e, function(entry) {
-            var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-            console.log(s);
-            this.user.info.avatar_url = s;
-            //变更大图预览的src
-            //目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-            document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
-          }, function(e) {
-            console.log("读取拍照文件错误：" + e.message);
-          });
-          */
 
         }, function(s) {
           console.log("error" + s);

@@ -1,3 +1,5 @@
+* { touch-action: none; }
+
 body{
   font-family: PingFang-SC-Regular, sans-serif;
   -webkit-tap-highlight-color: transparent;
