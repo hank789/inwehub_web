@@ -150,7 +150,7 @@
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
           <!--这里放置真实显示的DOM内容-->
-          <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedIndustryTags">
+          <industry-tags-indexed-list :tag_type="3" :selected="newItem.industry_tags" :back_id="page_industry_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedIndustryTags">
 
           </industry-tags-indexed-list>
         </div>
@@ -163,7 +163,7 @@
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
           <!--这里放置真实显示的DOM内容-->
-          <industry-tags-indexed-list :tag_type="4" :back_id="page_product_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
+          <industry-tags-indexed-list :tag_type="4" :selected="newItem.product_tags" :back_id="page_product_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
 
           </industry-tags-indexed-list>
         </div>
@@ -174,7 +174,8 @@
     <!--添加工作经历开始-->
     <div id="account_add_job" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
+
         <h1 class="mui-center mui-title">工作经历</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('job')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
@@ -196,12 +197,12 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('job')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="infoIndustryTagsNames"></span></a>
+                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('job')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoIndustryTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
+                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -223,7 +224,7 @@
               工作经历详情描述
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该工作经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -577,6 +578,7 @@
         'industry_tags': [],
         'product_tags': []
       },
+      newItemChange:0,
       gender_object: [
         "保密",
         "男",
@@ -634,10 +636,10 @@
         }
       },
       infoIndustryTagsNames() {
-        if (this.newItem.industry_tags){
+        if (this.newItem.industry_tags.length){
           return this.newItem.industry_tags.join();
         } else {
-          return '';
+          return '请选择';
         }
       },
       infoProductTagsNames() {
@@ -649,6 +651,10 @@
       }
     },
     watch: {
+      newItem:function(val, oldVal) {
+          console.log('newitem');
+          this.newItemChange = 1;
+      },
       loading: function(val, oldVal) {
         if(val === 0){
           this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
@@ -656,7 +662,7 @@
           this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
           let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
           let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
-          document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+          //document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
           //this.initAvatarImgPreview();
         }
       }
@@ -709,6 +715,9 @@
         var toUrl;
         switch (objType) {
           case 'job':
+            if (typeof(newItem.industry_tags) === 'string') {
+              this.newItem.industry_tags = newItem.industry_tags.split(',');
+            }
             toUrl = '#account_add_job';
             break;
           case 'edu':
@@ -744,7 +753,14 @@
         };
       },
       muiViewBack: function () {
-        this.muiView.back();
+
+        mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
+          if (e.index == 1) {
+            this.muiView.back();
+          } else {
+            return false;
+          }
+        }, 'div');
       },
       initDate: function(objType){
         let currentDate = new Date();
@@ -806,6 +822,37 @@
         var data = this.newItem;
         switch (oType) {
           case 'job' :
+
+            if (!data.company) {
+              mui.toast("公司名称不能为空");
+              return;
+            }
+
+            if (!data.title) {
+              mui.toast("公司职位不能为空");
+              return;
+            }
+
+            if (data.industry_tags.length === 0) {
+              mui.toast("行业领域不能为空");
+              return;
+            }
+
+            if (data.product_tags.length === 0) {
+              mui.toast("产品类型不能为空");
+              return;
+            }
+
+            if (!data.begin_time) {
+              mui.toast("开始时间不能为空");
+              return;
+            }
+
+            if (!data.end_time) {
+              mui.toast("结束时间不能为空");
+              return;
+            }
+
             if (data.id) {
               url = ACCOUNT_API.UPDATE_ACCOUNT_JOB;
             } else {
@@ -1048,10 +1095,11 @@
           				//console.log(e);
         });
         view.addEventListener('pageShow', function(e) {
-          				//console.log(e.detail.page.id + ' show');
+             t.newItemChange = 0;
         });
         view.addEventListener('pageBeforeBack', function(e) {
-          				//console.log(e.detail.page.id + ' beforeBack');
+
+
         });
         view.addEventListener('pageBack', function(e) {
             t.emptyNewItem();
@@ -1255,7 +1303,7 @@
   }
   .mui-navbar .mui-bar {
     position: absolute;
-    background: transparent;
+    background-color: #f7f7f8;
     text-align: center;
   }
   .mui-android .mui-navbar-inner.mui-navbar-left {
@@ -1335,9 +1383,15 @@
     right: 40px;
     height:32px;
     color: #3f3f3f;
+    padding-right: 0;
   }
   .mui-input-row textarea {
     border: none !important;
+  }
+
+  .mui-input-row input{
+    text-align: right;
+    padding-right:40px;
   }
 
   .mui-input-row a {
@@ -1466,4 +1520,5 @@
     vertical-align: text-top;
     margin-right:10px;
   }
+
 </style>

@@ -43,7 +43,10 @@
           <div class="mui-indexed-list-empty-alert">没有数据</div>
           <ul class="mui-table-view">
             <li v-for="(tag, index) in tags" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-              <input type="checkbox" />{{ tag }}  <span v-if="index == counts-1" style="display: none">{{ loading=0 }} </span>
+
+                <input type="checkbox" class="tagSelect" checked="checked" @tap.stop.prevent="checkThis" v-if="typeof(selected) === 'object' && selected.indexOf(tag) > -1"/>
+
+              <input type="checkbox" class="tagSelect"  @tap.stop.prevent="checkThis"   v-else/>{{ tag }}  <span v-if="index == counts-1" style="display: none">{{ loading=0 }} </span>
             </li>
           </ul>
         </div>
@@ -63,7 +66,7 @@
       counts: 0,
       loading: 1
     }),
-    props: ['tag_type','back_id','object_type'],
+    props: ['tag_type','back_id','object_type', 'selected'],
     created () {
       apiRequest(`tags/load`,{tag_type: this.tag_type}).then(response_data => {
         if (response_data !== false){
@@ -73,6 +76,9 @@
       });
     },
     computed: {
+        getSelected(){
+            console.log(this.selected);
+        },
         genderTagName() {
             var tag_name = '行业领域';
             switch (this.tag_type){
@@ -86,7 +92,36 @@
             return tag_name;
         }
     },
+    methods: {
+        checkThis(e){
+            e.target.checked = !e.target.checked?'checked':false;
+            mui.trigger(e.target, 'change');
+        },
+        updateFinish(){
+          var done = document.getElementById('done_' + this.back_id);
+          var list = document.getElementById('list_' + this.back_id);
+          var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+          var value = count ? "完成(" + count + ")" : "完成";
+          done.innerHTML = value;
+          if (count) {
+            if (done.classList.contains("mui-disabled")) {
+              done.classList.remove("mui-disabled");
+            }
+          } else {
+            if (!done.classList.contains("mui-disabled")) {
+              done.classList.add("mui-disabled");
+            }
+          }
+        }
+    },
     watch: {
+      selected:function(val, oldVal){
+        console.log('in');
+        setTimeout(() => {
+          this.updateFinish();
+        }, 1000);
+
+      },
       loading: function(val, oldVal) {
         if(val === 0 && oldVal === 1){
           mui.init();
@@ -120,19 +155,8 @@
                 //mui.alert('你没选择任何机场');
               }
             }, false);
-            mui('.mui-indexed-list-inner').on('change', 'input', function() {
-              var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
-              var value = count ? "完成(" + count + ")" : "完成";
-              done.innerHTML = value;
-              if (count) {
-                if (done.classList.contains("mui-disabled")) {
-                  done.classList.remove("mui-disabled");
-                }
-              } else {
-                if (!done.classList.contains("mui-disabled")) {
-                  done.classList.add("mui-disabled");
-                }
-              }
+            mui('.mui-indexed-list-inner').on('change', 'input', () => {
+                this.updateFinish();
             });
           });
         }
@@ -142,7 +166,6 @@
       muiIndexedList
     },
     mounted() {
-
     }
 
   }
