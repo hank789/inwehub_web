@@ -700,11 +700,15 @@
       },
       changeIndustryTagsOwner(owner) {
         this.object_type = owner;
+        if (owner === 'user') {
+          this.newItem.industry_tags = this.user.info.industry_tags;
+        }
       },
       selectedIndustryTags(tags, object_type) {
         switch (object_type) {
           case 'user':
             this.user.info.industry_tags = tags;
+            this.submitInfo();
             break;
           default:
             this.newItem.industry_tags = tags;
