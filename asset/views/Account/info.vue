@@ -651,10 +651,6 @@
       }
     },
     watch: {
-      newItem:function(val, oldVal) {
-          console.log('newitem');
-          this.newItemChange = 1;
-      },
       loading: function(val, oldVal) {
         if(val === 0){
           this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
@@ -754,13 +750,18 @@
       },
       muiViewBack: function () {
 
-        mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
-          if (e.index == 1) {
-            this.muiView.back();
-          } else {
-            return false;
-          }
-        }, 'div');
+        var newItemChange = JSON.stringify(this.newItem);
+        if (newItemChange !== this.newItemChange) {
+          mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
+            if (e.index == 1) {
+              this.muiView.back();
+            } else {
+              return false;
+            }
+          }, 'div');
+        } else {
+          this.muiView.back();
+        }
       },
       initDate: function(objType){
         let currentDate = new Date();
@@ -1094,7 +1095,7 @@
           				//console.log(e);
         });
         view.addEventListener('pageShow', function(e) {
-             t.newItemChange = 0;
+             t.newItemChange = JSON.stringify(t.newItem);
         });
         view.addEventListener('pageBeforeBack', function(e) {
 
