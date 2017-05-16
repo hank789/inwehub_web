@@ -201,7 +201,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_product_tags" class="mui-navigate-right">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
+                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -271,7 +271,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_product_tags" class="mui-navigate-right">产品类型<span class="mui-pull-right account-setting-field" v-text="infoProductTagsNames"></span></a>
+                  <a href="#page_product_tags" class="mui-navigate-right">产品类型<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"></span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -715,6 +715,7 @@
             toUrl = '#account_add_edu';
             break;
           case 'project':
+            this.newItem.industry_tags = this.newItem.industry_tags.split(',');
             toUrl = '#account_add_project';
             break;
           case 'train':
@@ -818,6 +819,23 @@
             }
             break;
           case 'project' :
+
+            if (!data.project_name) {
+              mui.toast("项目名称不能为空");
+              return;
+            }
+
+            if (!data.title) {
+              mui.toast("项目角色不能为空");
+              return;
+            }
+
+            if (!data.customer_name) {
+                mui.toast("客户名称不能为空");
+                return;
+            }
+
+
             if (data.id) {
               url = ACCOUNT_API.UPDATE_ACCOUNT_PROJECT;
             } else {
@@ -1325,6 +1343,7 @@
     text-align: right;
     width: 200px;
     right: 40px;
+    height:32px;
     color: #3f3f3f;
   }
   .mui-input-row textarea {
