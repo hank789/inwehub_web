@@ -21,7 +21,6 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
         <h1 class="mui-center mui-title">我的档案</h1>
-        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <!--页面标题栏结束-->
       <!--页面主内容区开始-->
@@ -61,10 +60,10 @@
                 <a href="#account_title" class="mui-navigate-right">当前职位<span class="mui-pull-right account-setting-field" v-text="user.info.title"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('user')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field" v-text="userIndustryTagsNames"></span></a>
+                <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('user')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="userIndustryTagsNames"></span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field"></span></a>
+                <a id="showCityPicker" class="mui-navigate-right">所在省市<span class="mui-pull-right account-setting-field" id="user_province_city"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_address_detail" class="mui-navigate-right">详细地址<span class="mui-pull-right account-setting-field" v-text="user.info.address_detail"></span></a>
@@ -409,6 +408,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -432,6 +432,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -455,6 +456,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -478,6 +480,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -501,6 +504,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">编辑</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -524,6 +528,7 @@
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-center mui-title">个人签名</h1>
+        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -654,7 +659,7 @@
           this.cityPicker.pickers[1].setSelectedValue(this.user.info.city);
           let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
           let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
-          //document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
+          document.getElementById('user_province_city').innerText= cityPickerSelectedProvince + " " + cityPickerSelectedCity;
           //this.initAvatarImgPreview();
         }
       }
@@ -811,6 +816,7 @@
         let picker = new mui.DtPicker(param);
         picker.show((rs) => {
             this.user.info.birthday = rs.text;
+            this.submitInfo();
         });
       },
       submitInfo: function () {
@@ -1170,10 +1176,6 @@
 
       userPicker.setData([
         {
-          value: '0',
-          text: '保密'
-        },
-        {
           value: '1',
           text: '男'
         },
@@ -1188,6 +1190,7 @@
           this.user.info.gender = items[0].value;
           //返回 false 可以阻止选择框的关闭
           //return false;
+          this.submitInfo();
         });
       }, false);
 
@@ -1239,6 +1242,7 @@
           cityResult.innerText = items[0].text + " " + items[1].text;
           //返回 false 可以阻止选择框的关闭
           //return false;
+          this.submitInfo();
         });
       }, false);
 
