@@ -197,22 +197,22 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('job')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoIndustryTagsNames"></span></a>
+                  <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('job')" class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis" v-if="infoIndustryTagsNames">{{ infoIndustryTagsNames }}</span><span  class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"></span></a>
+                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames" v-if="infoProductTagsNames"></span><span  class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
-                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time"></label>
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.begin_time" v-if="newItem.begin_time"></label><label class="mui-pull-right account-setting-field emptyFields" v-else>请选择</label>
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
-                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time"></label>
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field" v-text="newItem.end_time" v-if="newItem.end_time"></label><label class="mui-pull-right account-setting-field emptyFields" v-else>请选择</label>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -639,7 +639,7 @@
         if (this.newItem.industry_tags.length){
           return this.newItem.industry_tags.join();
         } else {
-          return '请选择';
+          return '';
         }
       },
       infoProductTagsNames() {
@@ -1519,6 +1519,10 @@
     font-size:16px;
     vertical-align: text-top;
     margin-right:10px;
+  }
+
+  .emptyFields{
+    color:#999;
   }
 
 </style>
