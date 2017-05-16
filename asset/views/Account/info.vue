@@ -746,13 +746,25 @@
       },
       initDate: function(objType){
         let currentDate = new Date();
+
+        var toNow = false;
+
+        if (objType === 2) {
+          toNow = true;
+        }
+
         let param={
           "type":"month",
           "beginYear": "1990",
-          "endYear": currentDate.getFullYear()
+          "endYear": currentDate.getFullYear(),
+          "toNow":toNow
         };
+
         let picker = new mui.DtPicker(param);
         picker.show((rs) => {
+
+          rs.text = rs.text === '至今-至今'?'至今':rs.text;
+
           switch (objType) {
             case 1 :
               this.newItem.begin_time = rs.text;
@@ -822,6 +834,14 @@
           default:
             break;
         }
+
+        if (data.hasOwnProperty('begin_time') && data.hasOwnProperty('end_time')) {
+            if (data.end_time < data.begin_time) {
+                mui.alert("开始时间需早于结束时间");
+                return;
+            }
+        }
+
         apiRequest(url, data).then(res => {
           if (res !== false) {
             var isUpdate = data.id ? true : false;
@@ -1395,23 +1415,28 @@
   }
 
   .textarea-wrapper {
-    padding:2px;
+    margin:0 5px;
     height:100%;
     position: relative;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    background: #fff;
+    padding-bottom:20px;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
     right: 4px;
     font-size:12px;
-    bottom: 10px;
+    bottom: 2px;
     color: #b0b0b0;
   }
 
 
   .textarea-wrapper textarea {
-     border-radius: 5px;
+     border:none;
      margin:0;
+     padding-bottom:0;
   }
   .deleteWrapper{
     text-align: right;

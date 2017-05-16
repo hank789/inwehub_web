@@ -102,8 +102,8 @@
 				}
 			}, false);
 			ui.y.addEventListener('change', function(e) { //目前的change事件容易导致级联触发
-				if (self.options.beginMonth || self.options.endMonth) {
-					self._createMonth();
+				if (self.options.beginMonth || self.options.endMonth || self.options.toNow) {
+					self._createMonth(e);
 				} else {
 					self._createDay();
 				}
@@ -257,6 +257,12 @@
 						value: y
 					});
 				}
+				if (options.toNow) {
+          yArray.push({
+            text: '至今',
+            value: '至今'
+          });
+				}
 			}
 			ui.y.picker.setItems(yArray);
 			//ui.y.picker.setSelectedValue(current);
@@ -265,12 +271,19 @@
 			var self = this;
 			var options = self.options;
 			var ui = self.ui;
-
 			//生成月列表
+
+      var selectText = '';
+      if (current != undefined) {
+         selectText = current.detail.item.text;
+      }
+
 			var mArray = [];
 			if (options.customData.m) {
 				mArray = options.customData.m;
-			} else {
+			} else if (selectText == '至今') {
+        mArray = [{ value: "至今", text: "至今" }];
+      } else {
 				var m = options.beginMonth && self._isBeginYear() ? options.beginMonth : 1;
 				var maxMonth = options.endMonth && self._isEndYear() ? options.endMonth : 12;
 				for (; m <= maxMonth; m++) {
@@ -395,6 +408,7 @@
 			options.buttons = options.buttons || ['取消', '确定'];
 			options.type = options.type || 'datetime';
 			options.customData = options.customData || {};
+			options.toNow  = options.toNow || false;
 			self.options = options;
 			var now = new Date();
 			var beginDate = options.beginDate;
