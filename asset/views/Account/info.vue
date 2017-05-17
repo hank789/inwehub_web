@@ -149,7 +149,7 @@
               class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
             <ul class="mui-table-view mui-table-view-chevron" v-show="user.trains.length == 0">
-              <li class="mui-table-view-cell no-empty">请维护培训经历</li>
+              <li class="mui-table-view-cell no-empty">请维护培训认证经历</li>
             </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="train in user.trains" class="mui-table-view-cell">
@@ -426,7 +426,7 @@
     <div id="account_add_train" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
-        <h1 class="mui-center mui-title">培训经历</h1>
+        <h1 class="mui-center mui-title">培训认证</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('train')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
@@ -447,19 +447,18 @@
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(3)">
-                  <label class="mui-navigate-right">获得时间</label><label class="mui-pull-right account-setting-field"
-                                                                       v-text="newItem.get_time"></label>
+                  <label class="mui-navigate-right">培训/认证时间</label><label class="mui-pull-right account-setting-field">{{newItem.get_time?newItem.get_time:'请选择'}}</label>
                 </div>
               </li>
             </ul>
             <div class="account_item_title">
-              培训经历详情描述
+              培训和认证经历详情描述
 
 
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该项目经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -1182,6 +1181,22 @@
             }
             break;
           case 'train' :
+
+            if (!data.certificate) {
+              mui.toast("培训/认证名称不能为空");
+              return;
+            }
+
+            if (!data.agency) {
+              mui.toast("培训/认证机构不能为空");
+              return;
+            }
+
+            if (!data.get_time) {
+              mui.toast("培训/认证时间不能为空");
+              return;
+            }
+
             if (data.id) {
               url = ACCOUNT_API.UPDATE_ACCOUNT_TRAIN;
             } else {
