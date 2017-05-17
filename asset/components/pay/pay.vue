@@ -23,7 +23,7 @@
         pay(id){
           if(this.pay_waiting){return;}//检查是否请求订单中
           if(id==='appleiap'){
-            mui.toast('应用内支付');
+            mui.toast('暂不支持应用内支付');
             return;
           }
           var amount = this.pay_money;
@@ -66,7 +66,7 @@
                   if (e.code == -100){
                     plus.nativeUI.alert('', null, '支付已取消');
                   }else {
-                    plus.nativeUI.alert(e.message, null, '支付失败');
+                    plus.nativeUI.alert('请联系客服', null, '支付失败');
                   }
                 });
               }
