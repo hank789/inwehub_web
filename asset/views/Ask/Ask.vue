@@ -46,8 +46,10 @@
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goAsk">付费提问</button>
         </div>
-        <div class="payDesc"><span class="dash"></span><span class="mui-icon mui-icon-weixin"></span>微信支付<span
-          class="dash"></span></div>
+        <pay :pay_object_type="pay_object_type" :send_pay_request="send_pay_request" :pay_money="money" v-on:pay_success="goAsk">
+
+        </pay>
+
       </div>
     </div>
 
@@ -59,6 +61,7 @@
 
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import pay from '../../components/pay/pay.vue';
 
   const Ask = {
     data: () => ({
@@ -68,8 +71,13 @@
       hide: 0,
       descMaxLength: 500,
       isShowMoneyDev: false,
-      test: 0
+      test: 0,
+      pay_object_type: 'ask',
+      send_pay_request: 0
     }),
+    components: {
+      pay
+    },
     mounted(){
       mui.init();
 
