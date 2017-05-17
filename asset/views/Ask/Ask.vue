@@ -265,7 +265,7 @@
           var id = result.id;
           var timeend = result.waiting_second ? result.waiting_second : 15;
 
-          this.$router.push({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend});
+          this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend});
         });
       }
     },
