@@ -409,7 +409,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该教育经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -728,14 +728,14 @@
         }
       },
       infoIndustryTagsNames() {
-        if (this.newItem.industry_tags.length) {
+        if (this.newItem.industry_tags && this.newItem.industry_tags.length) {
           return this.newItem.industry_tags.join();
         } else {
           return '';
         }
       },
       infoProductTagsNames() {
-        if (this.newItem.product_tags) {
+        if (this.newItem.product_tags && this.newItem.product_tags.length) {
           return this.newItem.product_tags.join();
         } else {
           return '';
@@ -1077,6 +1077,32 @@
             }
             break;
           case 'edu' :
+
+            if (!data.school) {
+              mui.toast("学校不能为空");
+              return;
+            }
+
+            if (!data.major) {
+              mui.toast("专业不能为空");
+              return;
+            }
+
+            if (!data.degree) {
+              mui.toast("学历不能为空");
+              return;
+            }
+
+            if (!data.begin_time) {
+              mui.toast("开始时间不能为空");
+              return;
+            }
+
+            if (!data.end_time) {
+              mui.toast("结束时间不能为空");
+              return;
+            }
+
             if (data.id) {
               url = ACCOUNT_API.UPDATE_ACCOUNT_EDU;
             } else {
