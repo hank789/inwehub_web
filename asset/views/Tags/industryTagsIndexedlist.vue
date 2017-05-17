@@ -18,10 +18,12 @@
         <div class="mui-indexed-list-inner">
           <div class="mui-indexed-list-empty-alert">没有数据</div>
           <ul class="mui-table-view">
-            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-              <input type="checkbox" v-model="iselected" :value="tag" @tap.stop.prevent="checkThis" class="tagSelect"/>{{ tag }}
+            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left" @tap.stop.prevent="checkThis">
+
+              <span class="tagSelect checked" v-if="typeof(iselected) === 'object' && iselected.indexOf(tag) > -1"/><span class="tagSelect" v-else/>{{ tag }}
             </li>
           </ul>
+
         </div>
       </div>
     </div>
@@ -72,12 +74,31 @@
         document.getElementById(this.back_id).classList.remove('mui-active');
       },
       checkThis(e){
-        e.target.checked = !e.target.checked ? 'checked' : false;
-        mui.trigger(e.target, 'change');
+          var li = null;
+          if (e.target.tagName==='SPAN') {
+             li = e.target.parentNode;
+          } else {
+              li = e.target;
+          }
+        var span = li.childNodes[0];
+        var value = li.innerText;
+        var pos = this.iselected.indexOf(value);
+        if (!span.classList.contains('checked')) {
+          span.classList.add('checked');
+
+          if (pos < 0) {
+              this.iselected.push(value);
+          }
+        } else {
+          span.classList.remove('checked');
+          if (pos >= 0) {
+            this.iselected.splice(pos, 1);
+          }
+        }
       }
     },
     watch: {
-      selected: function (val, oldVal) {
+      selected: function (val) {
         this.iselected = val;
       }
     },

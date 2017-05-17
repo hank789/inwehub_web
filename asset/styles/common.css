@@ -74,3 +74,58 @@ input, textarea, select{
   transform: scaleY(1);
   background-color:#f2f2f2;
 }
+
+.mui-checkbox-2 .tagSelect:before {
+  font-family: Muiicons;
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1;
+  text-decoration: none;
+  color: #aaa;
+  border-radius: 0;
+  background: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mui-checkbox-2.mui-left .tagSelect {
+  left: 20px;
+}
+
+.mui-checkbox-2 .tagSelect:before {
+  content: '\E411';
+}
+
+.mui-table-view-cell.mui-checkbox-2 .tagSelect {
+  top: 8px;
+}
+
+.mui-checkbox-2.mui-left .tagSelect {
+  left: 20px;
+}
+
+.mui-checkbox-2 .tagSelect {
+  position: absolute;
+  top: 4px;
+  right: 20px;
+  display: inline-block;
+  width: 28px;
+  height: 26px;
+  border: 0;
+  outline: 0 !important;
+  background-color: transparent;
+  -webkit-appearance: none;
+  z-index:0;
+}
+.mui-table-view-cell.mui-checkbox-2.mui-left {
+  padding-left: 58px;
+}
+.mui-checkbox-2 {
+  position: relative;
+  z-index:777;
+}
+.mui-checkbox-2 .tagSelect.checked:before {
+  color: #007aff;
+}
+.mui-checkbox-2 .tagSelect.checked:before {
+  content: '\E442';
+}
