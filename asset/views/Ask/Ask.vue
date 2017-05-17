@@ -44,7 +44,7 @@
                                                            v-model.number="money"/></span>
         </div>
         <div class="button-wrapper">
-          <pay :pay_object_type="pay_object_type" :send_pay_request="send_pay_request" :pay_money="money" v-on:pay_success="goAsk">
+          <pay :pay_object_type="pay_object_type" :pay_money="money" v-on:pay_success="goAsk">
 
           </pay>
         </div>
@@ -70,8 +70,7 @@
       descMaxLength: 500,
       isShowMoneyDev: false,
       test: 0,
-      pay_object_type: 'ask',
-      send_pay_request: 0
+      pay_object_type: 'ask'
     }),
     components: {
       pay
