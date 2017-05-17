@@ -18,14 +18,8 @@
         <div class="mui-indexed-list-inner">
           <div class="mui-indexed-list-empty-alert">没有数据</div>
           <ul class="mui-table-view">
-            <li v-for="(tag, index) in tags" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-
-              <input type="checkbox" class="tagSelect" checked="checked" v-model="iselected" :value="tag"
-                     @tap.stop.prevent="checkThis"
-                     v-if="typeof(iselected) === 'object' && iselected.indexOf(tag) > -1"/>
-
-              <input type="checkbox" v-model="iselected" :value="tag" class="tagSelect" @tap.stop.prevent="checkThis"
-                     v-else/>{{ tag }}
+            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+              <input type="checkbox" v-model="iselected" :value="tag" class="tagSelect"/>{{ tag }}
             </li>
           </ul>
         </div>
