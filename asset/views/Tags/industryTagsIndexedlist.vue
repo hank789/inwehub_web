@@ -115,8 +115,7 @@
       selected:function(val, oldVal){
         setTimeout(() => {
           this.updateFinish();
-        }, 1000);
-
+        }, 100);
       },
       loading: function(val, oldVal) {
         if(val === 0 && oldVal === 1){
