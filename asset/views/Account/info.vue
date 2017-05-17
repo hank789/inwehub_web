@@ -74,7 +74,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <a @tap.stop.prevent="selectWorkerCity" class="mui-navigate-right">工作地区<span
-                  class="mui-pull-right account-setting-field">{{ work_city }}</span></a>
+                  class="mui-pull-right account-setting-field">{{ work_city?work_city:'请选择' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_address_detail" class="mui-navigate-right">详细地址<span
@@ -639,7 +639,19 @@
   export default {
     data: () => ({
       user: {
-        info: {},
+        info: {
+            name:'',
+            gender:'',
+          company:'',
+          title:'',
+          province:'',
+          city:'',
+          address_detail:'',
+          email:'',
+          birthday:'',
+          description:'',
+          industry_tags:[],
+        },
         jobs: [],
         edus: [],
         projects: [],
@@ -731,24 +743,6 @@
       }
     },
     watch: {
-      loading: function (val, oldVal) {
-        if (val === 0) {
-          if (!this.user.info.province) {
-            document.getElementById('user_province_city').innerText = '请选择';
-          } else {
-//            this.cityPicker.pickers[0].setSelectedValue(this.user.info.province, 0, () => {
-//              this.cityPicker.pickers[1].setSelectedValue(this.user.info.city, 0, () => {
-//                let cityPickerSelectedProvince = this.cityPicker.pickers[0].getSelectedText();
-//                let cityPickerSelectedCity = this.cityPicker.pickers[1].getSelectedText();
-//                document.getElementById('user_province_city').innerText = cityPickerSelectedProvince + " " + cityPickerSelectedCity;
-//              });
-//            });
-          }
-
-          //this.userPicker.pickers[0].setSelectedValue(this.user.info.gender);
-
-        }
-      }
     },
     methods: {
       selectHomeCity(){
@@ -806,6 +800,7 @@
       ,
       getUserInfo()
       {
+
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
           this.user = user;

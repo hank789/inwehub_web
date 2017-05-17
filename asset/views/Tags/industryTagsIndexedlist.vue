@@ -11,15 +11,15 @@
     </header>
     <div class="mui-content">
       <div class="mui-indexed-list">
-        <div class="mui-indexed-list-search mui-input-row mui-search">
-          <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">
-        </div>
+        <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
+          <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
+        <!--</div>-->
         <div class="mui-indexed-list-alert"></div>
         <div class="mui-indexed-list-inner">
           <div class="mui-indexed-list-empty-alert">没有数据</div>
           <ul class="mui-table-view">
             <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-              <input type="checkbox" v-model="iselected" :value="tag" class="tagSelect"/>{{ tag }}
+              <input type="checkbox" v-model="iselected" :value="tag" @tap.stop.prevent="checkThis" class="tagSelect"/>{{ tag }}
             </li>
           </ul>
         </div>
