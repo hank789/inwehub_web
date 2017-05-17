@@ -73,7 +73,7 @@
                   }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a @tap.stop.prevent="selectWorkerCity" class="mui-navigate-right">工作地区<span
+                <a @tap.stop.prevent="selectWorkerCity(true)" class="mui-navigate-right">工作地区<span
                   class="mui-pull-right account-setting-field">{{ work_city?work_city:'请选择' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -312,13 +312,13 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <a href="#page_industry_tags" @tap="changeIndustryTagsOwner('project')" class="mui-navigate-right">行业领域<span
-                    class="mui-pull-right account-setting-field" v-text="infoIndustryTagsNames"></span></a>
+                    class="mui-pull-right account-setting-field">{{ infoIndustryTagsNames?infoIndustryTagsNames:'可多选' }}</span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <a href="#page_product_tags" class="mui-navigate-right">产品类型<span
-                    class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"></span></a>
+                    class="mui-pull-right account-setting-field mui-ellipsis">{{ infoProductTagsNames?infoProductTagsNames:'请选择'}}</span></a>
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -342,7 +342,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该项目经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -770,7 +770,7 @@
           this.submitInfo();
         });
       },
-      selectWorkerCity(){
+      selectWorkerCity(isShow){
         if (!this.cityPicker) {
           var cityPicker = new mui.PopPicker({
             layer: 2
@@ -790,6 +790,10 @@
           return;
         }
 
+        if (!isShow) {
+            return;
+        }
+
         this.cityPicker.show(items => {
           this.user.info.province = items[0].value;
           this.user.info.city = items[1].value;
@@ -806,7 +810,7 @@
           this.user = user;
           this.loading = 0;
 
-          this.selectWorkerCity();
+          this.selectWorkerCity(false);
 
         }));
       }
@@ -1096,6 +1100,26 @@
               return;
             }
 
+            if (!data.industry_tags.length) {
+              mui.toast("行业领域不能为空");
+              return;
+            }
+
+
+            if (!data.product_tags.length) {
+              mui.toast("产品类型不能为空");
+              return;
+            }
+
+            if (!data.begin_time) {
+              mui.toast("开始时间不能为空");
+              return;
+            }
+
+            if (!data.end_time) {
+              mui.toast("结束时间不能为空");
+              return;
+            }
 
             if (data.id) {
               url = ACCOUNT_API.UPDATE_ACCOUNT_PROJECT;
