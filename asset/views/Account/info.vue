@@ -825,6 +825,7 @@
           this.user.info.province = items[0].value;
           this.user.info.city = items[1].value;
           this.work_city = items[0].text + " " + items[1].text;
+          this.newItemChange = '';
           this.submitInfo();
         });
       }
@@ -1055,7 +1056,6 @@
           if (res !== false) {
             mui.toast('保存成功');
             updateUserInfoCache(data);
-            this.userInfoBmp = '';
             this.muiViewBack();
           }
         });
