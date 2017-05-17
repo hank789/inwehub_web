@@ -1587,6 +1587,10 @@
     padding-right: 0;
   }
 
+  .mui-input-row label{
+    padding-right:0;
+  }
+
   .mui-input-row textarea {
     border: none !important;
   }
