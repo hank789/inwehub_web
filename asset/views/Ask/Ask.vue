@@ -44,12 +44,10 @@
                                                            v-model.number="money"/></span>
         </div>
         <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goAsk">付费提问</button>
+          <pay :pay_object_type="pay_object_type" :send_pay_request="send_pay_request" :pay_money="money" v-on:pay_success="goAsk">
+
+          </pay>
         </div>
-        <pay :pay_object_type="pay_object_type" :send_pay_request="send_pay_request" :pay_money="money" v-on:pay_success="goAsk">
-
-        </pay>
-
       </div>
     </div>
 
@@ -218,7 +216,7 @@
         this.$store.dispatch(ASK_INFO, info);
         this.$store.dispatch(ASK_TYPE_SELECT, '');
       },
-      goAsk(){
+      goAsk(order_id,pay_object_type){
         if (!this.type) {
           mui.toast('请选择问题分类');
           return;
@@ -245,6 +243,7 @@
         }
 
         var data = {
+          order_id: order_id,
           tags: this.type.split('-')[1],
           price: this.money,
           description: this.description,

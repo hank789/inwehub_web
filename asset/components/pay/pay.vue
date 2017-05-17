@@ -1,6 +1,8 @@
 <template>
   <div id="pay_content">
-
+    <div id="wxpay" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('wxpay')">微信支付</div>
+    <div id="alipay" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('alipay')">支付宝支付</div>
+    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('appleiap')">苹果支付</div>
   </div>
 </template>
 
@@ -46,19 +48,28 @@
             this.pay_waiting.close();
             this.pay_waiting=null;
             if (response_data !== false){
-              var order = response_data.order_info;
-              plus.payment.request(this.pays[id],order,(result) => {
-                console.log(JSON.stringify(result));
-                this.$emit('pay_success',result, response_data.order_id, this.pay_object_type);
+              var is_debug = response_data.debug;
+              console.log(response_data.order_id);
+              // 如果是1，则表示绕过支付
+              if(is_debug === 1){
+                this.$emit('pay_success', response_data.order_id, this.pay_object_type);
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
-              },function(e){
+              } else {
+                var order = response_data.order_info;
+                plus.payment.request(this.pays[id],order,(result) => {
+                  // console.log(JSON.stringify(result));
+                  this.$emit('pay_success', response_data.order_id, this.pay_object_type);
+                  plus.nativeUI.alert('支付成功！',function(){
+                  },'支付');
+                },function(e){
                   if (e.code == -100){
                     plus.nativeUI.alert('', null, '支付已取消');
                   }else {
                     plus.nativeUI.alert(e.message, null, '支付失败');
                   }
-              });
+                });
+              }
             }
           });
         }
@@ -66,22 +77,15 @@
     mounted() {
       mui.plusReady( () => {
         if (mui.os.plus) {
-          var content=document.getElementById('pay_content');
           // 获取支付通道
-          plus.payment.getChannels(function(channels){
-
+          plus.payment.getChannels((channels)=>{
             for(var i in channels){
               var channel=channels[i];
               if(channel.id=='qhpay'||channel.id=='qihoo'){	// 过滤掉不支持的支付通道：暂不支持360相关支付
                 continue;
               }
               this.pays[channel.id]=channel;
-              var de=document.createElement('div');
-              de.setAttribute('class', 'mui-btn mui-btn-block mui-btn-primary');
-              de.setAttribute('onclick', 'pay(this.id)');
-              de.id=channel.id;
-              de.innerText=channel.description+'支付';
-              content.appendChild(de);
+              document.getElementById(channel.id).style.display="block";
               checkServices(channel);
             }
           },function(e){
