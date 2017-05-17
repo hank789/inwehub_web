@@ -48,10 +48,10 @@
             </div>
             <ul class="mui-table-view mui-table-view-chevron">
               <li class="mui-table-view-cell">
-                <a href="#account_name" class="mui-navigate-right">用户姓名<span class="mui-pull-right account-setting-field" v-text="user.info.name"></span></a>
+                <a href="#account_name" class="mui-navigate-right">用户姓名<span class="mui-pull-right account-setting-field">{{ user.info.name?user.info.name:'必填' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a id="showUserPicker" class="mui-navigate-right">性别<span class="mui-pull-right account-setting-field"  v-text="genderName"></span></a>
+                <a id="showUserPicker" class="mui-navigate-right">用户性别<span class="mui-pull-right account-setting-field"  v-text="genderName"></span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_company" class="mui-navigate-right">当前公司<span class="mui-pull-right account-setting-field" v-text="user.info.company"></span></a>
@@ -406,9 +406,9 @@
     <!--编辑姓名开始-->
     <div id="account_name" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
         <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
+        <a @tap.stop.prevent="submitInfo('name')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
@@ -417,7 +417,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">姓名</label>
-                  <input type="text" class="mui-input-clear" v-model="user.info.name">
+                  <input type="text" class="mui-input-clear" placeholder="必填" v-model="user.info.name">
                 </div>
               </li>
             </ul>
@@ -583,7 +583,8 @@
         'industry_tags': [],
         'product_tags': []
       },
-      newItemChange:0,
+      userInfoBmp:'',
+      newItemChange:'',
       gender_object: [
         "保密",
         "男",
@@ -762,6 +763,9 @@
         };
       },
       muiViewBack: function () {
+        if (this.userInfoBmp !== '') {
+          this.user.info = JSON.parse(this.userInfoBmp);
+        }
 
         var newItemChange = JSON.stringify(this.newItem);
         if (newItemChange !== this.newItemChange) {
@@ -823,7 +827,17 @@
             this.submitInfo();
         });
       },
-      submitInfo: function () {
+      submitInfo: function (type) {
+
+        switch(type) {
+          case 'name':
+              if (!this.user.info.name) {
+                  mui.toast('请填写姓名');
+                  return false;
+              }
+              break;
+        }
+
         var data = this.user.info;
         apiRequest(`profile/update`,data).then(res => {
           if (res !== false) {
@@ -1111,6 +1125,7 @@
         });
         view.addEventListener('pageShow', function(e) {
              t.newItemChange = JSON.stringify(t.newItem);
+             t.userInfoBmp = JSON.stringify(t.user.info);
         });
         view.addEventListener('pageBeforeBack', function(e) {
 
