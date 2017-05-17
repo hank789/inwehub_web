@@ -379,24 +379,22 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">专业</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.major" placeholder="必填">
+                  <input type="text"  class="mui-input-clear" v-model="newItem.major" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
-                <div id="showDegreePicker" class="mui-navigate-right"><label>学历</label><label
-                  class="mui-pull-right account-setting-field" v-text="newItem.degree"></label></div>
+                <div @tap.stop.prevent="selectMajor" class="mui-navigate-right"><label>学历</label><label
+                  class="mui-pull-right account-setting-field">{{newItem.degree?newItem.degree:'请选择'}}</label></div>
               </li>
 
               <li class="mui-table-view-cell mui-input-row">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
-                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field"
-                                                                       v-text="newItem.begin_time"></label>
+                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field">{{ newItem.begin_time?newItem.begin_time:'请选择'}}</label>
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
                 <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
-                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field"
-                                                                       v-text="newItem.end_time"></label>
+                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field">{{newItem.end_time?newItem.end_time:'请选择'}}</label>
                 </div>
               </li>
             </ul>
@@ -745,6 +743,36 @@
     watch: {
     },
     methods: {
+      selectMajor(){
+        var degreePicker = new mui.PopPicker();
+
+        degreePicker.setData([
+          {
+            value: '大专',
+            text: '大专'
+          },
+          {
+            value: '本科',
+            text: '本科'
+          },
+          {
+            value: '硕士',
+            text: '硕士'
+          },
+          {
+            value: '博士',
+            text: '博士'
+          },
+          {
+            value: '其它',
+            text: '其它'
+          }
+        ]);
+
+        degreePicker.show(items => {
+          this.newItem.degree = items[0].value;
+        });
+      },
       selectHomeCity(){
           mui.alert('此功能暂不可用');
       },
