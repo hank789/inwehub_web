@@ -22,10 +22,11 @@
           <span class="text">闪电回复</span>
         </div>
         <div class="tip" v-if="account_info_complete_percent != 100">个人信息不完整还不能查看本页内容<br/>请先完善个人信息。</div>
-        <div class="tip" v-else>活跃度不够还不能查看本页内容。</div>
+        <div class="tip" v-else>您的活跃度不够还不能查看本页内容</div>
 
         <div class="buttons">
-          <button type="button" @tap.stop.prevent="$router.push('/my/info')">点击前往维护个人档案</button>
+          <button type="button" @tap.stop.prevent="$router.push('/my/info')" v-if="account_info_complete_percent != 100">点击前往维护个人档案</button>
+          <button type="button" @tap.stop.prevent="$router.push('/ask')" v-else>持续提问有效提升活跃度</button>
         </div>
       </div>
     </div>
