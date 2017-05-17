@@ -75,12 +75,7 @@
     methods: {
       done(){
         this.$emit('selectedIndustryTags',this.iselected, this.object_type);
-        var modals = document.querySelectorAll(".mui-modal");
-        if (modals !== 'undefined') {
-          modals.forEach(function (modal) {
-            modal.classList.remove("mui-active");
-          });
-        }
+        document.getElementById(this.back_id).classList.remove('mui-active');
       },
       checkThis(e){
         e.target.checked = !e.target.checked ? 'checked' : false;
