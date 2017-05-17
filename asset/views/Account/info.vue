@@ -282,7 +282,7 @@
     <!--添加项目经历开始-->
     <div id="account_add_project" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
         <h1 class="mui-center mui-title">项目经历</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('project')"
            class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
@@ -361,7 +361,7 @@
     <!--添加教育经历开始-->
     <div id="account_add_edu" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
         <h1 class="mui-center mui-title">教育经历</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('edu')"
            class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
@@ -425,7 +425,7 @@
     <!--添加培训经历开始-->
     <div id="account_add_train" class="mui-page mui-pageSub">
       <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack()"></a>
+        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
         <h1 class="mui-center mui-title">培训认证</h1>
         <a @tap.stop.prevent="addOrUpdateAccountItem('train')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
