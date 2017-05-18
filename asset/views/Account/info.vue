@@ -417,14 +417,6 @@
       genderName: function () {
         return this.gender_object[this.user.info.gender];
       },
-      workCity(){
-        return this.user.info;
-      },
-      descLength() {
-        if (this.newItem.description)
-          return this.newItem.description.length;
-        else return 0;
-      },
       userIndustryTagsNames() {
         if (this.user.info.industry_tags) {
           return this.user.info.industry_tags.join();
@@ -438,48 +430,11 @@
         } else {
           return '';
         }
-      },
-      infoProductTagsNames() {
-        if (this.newItem.product_tags && this.newItem.product_tags.length) {
-          return this.newItem.product_tags.join();
-        } else {
-          return '';
-        }
       }
     },
     watch: {
     },
     methods: {
-      selectMajor(){
-        var degreePicker = new mui.PopPicker();
-
-        degreePicker.setData([
-          {
-            value: '大专',
-            text: '大专'
-          },
-          {
-            value: '本科',
-            text: '本科'
-          },
-          {
-            value: '硕士',
-            text: '硕士'
-          },
-          {
-            value: '博士',
-            text: '博士'
-          },
-          {
-            value: '其它',
-            text: '其它'
-          }
-        ]);
-
-        degreePicker.show(items => {
-          this.newItem.degree = items[0].value;
-        });
-      },
       selectHomeCity(){
           mui.alert('此功能暂不可用');
       },
@@ -642,53 +597,7 @@
       selectedProductTags(tags, object_type)
       {
         this.newItem.product_tags = tags;
-      }
-      ,
-      initNewItem: function (newItem, objType) {
-        const varItem = JSON.stringify(newItem);
-        this.newItem = JSON.parse(varItem);
-        var toUrl;
-        switch (objType) {
-          case 'job':
-            if (typeof(newItem.industry_tags) === 'string') {
-              this.newItem.industry_tags = newItem.industry_tags.split(',');
-            }
-            toUrl = '#account_add_job';
-            break;
-          case 'edu':
-            toUrl = '#account_add_edu';
-            break;
-          case 'project':
-            if (typeof(newItem.industry_tags) === 'string') {
-              this.newItem.industry_tags = newItem.industry_tags.split(',');
-            }
-            toUrl = '#account_add_project';
-            break;
-          case 'train':
-            toUrl = '#account_add_train';
-            break;
-          default:
-            break;
-        }
-        this.muiView.go(toUrl);
-      }
-      ,
-      emptyNewItem: function () {
-        this.newItem = {
-          'begin_time': '',
-          'end_time': '',
-          'description': '',
-          'degree': '',
-          'certificate': '',
-          'agency': '',
-          'get_time': '',
-          'project_name': '',
-          'customer_name': '',
-          'industry_tags': [],
-          'product_tags': []
-        };
-      }
-      ,
+      },
       muiViewBack: function () {
         if (this.userInfoBmp !== '') {
           this.user.info = JSON.parse(this.userInfoBmp);
@@ -795,72 +704,6 @@
             this.muiViewBack();
           }
         });
-      },
-      deleteAccountItem: function (oType) {
-        var btnArray = ['否', '是'];
-        mui.confirm('确认要删除？', '删除', btnArray, e => {
-          if (e.index == 1) {
-            //  确认
-            var url;
-            var data = this.newItem;
-            switch (oType) {
-              case 'job' :
-                if (data.id) {
-                  url = ACCOUNT_API.DELETE_ACCOUNT_JOB;
-                } else {
-                  url = ACCOUNT_API.ADD_ACCOUNT_JOB;
-                }
-                break;
-              case 'edu' :
-                if (data.id) {
-                  url = ACCOUNT_API.DELETE_ACCOUNT_EDU;
-                } else {
-                  url = ACCOUNT_API.ADD_ACCOUNT_EDU;
-                }
-                break;
-              case 'project' :
-                if (data.id) {
-                  url = ACCOUNT_API.DELETE_ACCOUNT_PROJECT;
-                } else {
-                  url = ACCOUNT_API.ADD_ACCOUNT_PROJECT;
-                }
-                break;
-              case 'train' :
-                if (data.id) {
-                  url = ACCOUNT_API.DELETE_ACCOUNT_TRAIN;
-                } else {
-                  url = ACCOUNT_API.ADD_ACCOUNT_TRAIN;
-                }
-                break;
-              default:
-                break;
-            }
-            apiRequest(url, data).then(res => {
-              if (res !== false) {
-                let objectItem = this.newItem;
-                switch (res.type) {
-                  case 'job':
-                    this.removeArrByItemId(this.user.jobs, objectItem.id);
-                    break;
-                  case 'edu':
-                    this.removeArrByItemId(this.user.edus, objectItem.id);
-                    break;
-                  case 'train':
-                    this.removeArrByItemId(this.user.trains, objectItem.id);
-                    break;
-                  case 'project':
-                    this.removeArrByItemId(this.user.projects, objectItem.id);
-                    break;
-                }
-                mui.toast('删除成功');
-                this.emptyNewItem();
-                this.muiView.back();
-              }
-            });
-          } else {
-
-          }
-        })
       }
       ,
       removeArrByItemId: function (arr, id) {
@@ -907,7 +750,6 @@
 
           });
           view.addEventListener('pageBack', function (e) {
-            t.emptyNewItem();
           });
         })(mui);
         this.muiView = viewApi;
@@ -990,9 +832,6 @@
         }
         mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
       }
-
-
-
     }
   }
 </script>
