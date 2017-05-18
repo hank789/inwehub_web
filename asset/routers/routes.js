@@ -106,6 +106,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目经历
+    path: '/my/info/project/:id',
+    component: require('../views/Account/infos/project.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的钱包
     path: '/my/Finance',
     component: require('../views/Finance/info.vue'),

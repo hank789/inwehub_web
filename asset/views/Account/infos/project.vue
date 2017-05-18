@@ -3,84 +3,83 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-      <h1 class="mui-title">工作经历</h1>
+      <h1 class="mui-title">项目经历</h1>
       <a @tap.stop.prevent="submit"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
     </header>
 
     <div class="mui-content">
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">公司</label>
-                  <input type="text"  v-model.trim="job.company" placeholder="必填">
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">职位</label>
-                  <input type="text"  v-model.trim="job.title" placeholder="必填">
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <a href="#page_industry_tags"
-                     class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis"
-                                                          v-if="infoIndustryTagsNames">{{ infoIndustryTagsNames
-                    }}</span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span
-                    class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"
-                    v-if="infoProductTagsNames"></span><span class="mui-pull-right account-setting-field emptyFields"
-                                                             v-else>请选择</span></a>
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
-                  <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field"
-                                                                       v-text="job.begin_time"
-                                                                       v-if="job.begin_time"></label><label
-                  class="mui-pull-right account-setting-field emptyFields" v-else>请选择</label>
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
-                  <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field"
-                                                                       v-text="job.end_time"
-                                                                       v-if="job.end_time"></label><label
-                  class="mui-pull-right account-setting-field emptyFields" v-else>请选择</label>
-                </div>
-              </li>
-              <li class="mui-table-view-cell">
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <label class="mui-navigate">项目名称</label>
+            <input type="text"  v-model.trim="project.project_name" placeholder="必填">
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <label class="mui-navigate">项目角色</label>
+            <input type="text"  v-model.trim="project.title" placeholder="必填">
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <label class="mui-navigate">客户名称</label>
+            <input type="text"  v-model.trim="project.customer_name" placeholder="必填">
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <a href="#page_industry_tags"
+               class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis"
+                                                    v-if="infoIndustryTagsNames">{{ infoIndustryTagsNames
+              }}</span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis">产品类型<span
+              class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"
+              v-if="infoProductTagsNames"></span><span class="mui-pull-right account-setting-field emptyFields"
+                                                       v-else>请选择</span></a>
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
+            <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field"
+                                                                 v-text="project.begin_time"></label>
+          </div>
+        </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
+            <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field"
+                                                                 v-text="project.end_time"></label>
+          </div>
+        </li>
+
+      </ul>
+      <div class="account_item_title">
+        项目经历详情描述
 
 
-              </li>
-            </ul>
-            <div class="account_item_title">
-              工作经历详情描述
 
-
-
-            </div>
-            <div class="textarea-wrapper">
-              <textarea v-model.trim="job.description" rows="5"
-                        placeholder="请详细填写该工作经历的详细信息"></textarea>
-              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-            </div>
-            <div class="deleteWrapper" v-show="id">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem">删除
-              </button>
-            </div>
+      </div>
+      <div class="textarea-wrapper">
+        <textarea v-model.trim="project.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
+        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+      </div>
+      <div class="deleteWrapper" v-show="id">
+        <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem('project')">
+          删除
+        </button>
+      </div>
     </div>
 
 
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
-          <industry-tags-indexed-list :tag_type="3" :selected="job.industry_tags"  :back_id="page_industry_tags_id" :object_type="object_type"
+          <industry-tags-indexed-list :tag_type="3" :selected="project.industry_tags"  :back_id="page_industry_tags_id" :object_type="object_type"
                                       v-on:selectedIndustryTags="selectedIndustryTags">
 
           </industry-tags-indexed-list>
@@ -93,7 +92,7 @@
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
           <!--这里放置真实显示的DOM内容-->
-          <industry-tags-indexed-list :tag_type="4" :selected="job.product_tags" :back_id="page_product_tags_id"  :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
+          <industry-tags-indexed-list :tag_type="4" :selected="project.product_tags" :back_id="page_product_tags_id"  :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
           </industry-tags-indexed-list>
         </div>
       </div>
@@ -115,14 +114,15 @@
       id:null,
       bak:'',
       object_type:'',
-      job:{
-        company:'',
+      project:{
+        project_name:'',
         title:'',
+        customer_name:'',
         begin_time:'',
         end_time:'',
         description:'',
-        industry_tags:'',
-        product_tags:'',
+        industry_tags:[],
+        product_tags:[]
       },
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
@@ -130,7 +130,7 @@
     }),
     methods: {
       muiViewBack: function () {
-        var newItemChange = JSON.stringify(this.job);
+        var newItemChange = JSON.stringify(this.project);
         if (this.bak != '' && newItemChange !== this.bak) {
           mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
             if (e.index == 1) {
@@ -166,55 +166,61 @@
 
           switch (objType) {
             case 1 :
-              this.job.begin_time = rs.text;
+              this.project.begin_time = rs.text;
               break;
             case 2:
-              this.job.end_time = rs.text;
+              this.project.end_time = rs.text;
               break;
             case 3:
-              this.job.get_time = rs.text;
+              this.project.get_time = rs.text;
               break;
           }
         });
       },
       selectedIndustryTags(tags, object_type) {
-        this.job.industry_tags = tags;
+        this.project.industry_tags = tags;
       },
       selectedProductTags(tags, object_type) {
-        this.job.product_tags = tags;
+        this.project.product_tags = tags;
       },
       submit(){
-        if (!this.job.company) {
-          mui.toast("公司名称不能为空");
+        if (!this.project.project_name) {
+          mui.toast("项目名称不能为空");
           return;
         }
 
-        if (!this.job.title) {
-          mui.toast("公司职位不能为空");
+        if (!this.project.title) {
+          mui.toast("项目角色不能为空");
           return;
         }
 
-        if (this.job.industry_tags.length === 0) {
+        if (!this.project.customer_name) {
+          mui.toast("客户名称不能为空");
+          return;
+        }
+
+        if (!this.project.industry_tags.length) {
           mui.toast("行业领域不能为空");
           return;
         }
 
-        if (this.job.product_tags.length === 0) {
+
+        if (!this.project.product_tags.length) {
           mui.toast("产品类型不能为空");
           return;
         }
 
-        if (!this.job.begin_time) {
+        if (!this.project.begin_time) {
           mui.toast("开始时间不能为空");
           return;
         }
 
-        if (!this.job.end_time) {
+        if (!this.project.end_time) {
           mui.toast("结束时间不能为空");
           return;
         }
 
-        if (this.job.end_time < this.job.begin_time) {
+        if (this.project.end_time < this.project.begin_time) {
           mui.alert("开始时间需早于结束时间");
           return;
         }
@@ -222,12 +228,12 @@
 
         var url = '';
         if (this.id) {
-          url = ACCOUNT_API.UPDATE_ACCOUNT_JOB;
+          url = ACCOUNT_API.UPDATE_ACCOUNT_PROJECT;
         } else {
-          url = ACCOUNT_API.ADD_ACCOUNT_JOB;
+          url = ACCOUNT_API.ADD_ACCOUNT_PROJECT;
         }
 
-        var data = this.job;
+        var data = this.project;
 
         if (this.id) {
             data.id = this.id;
@@ -241,15 +247,15 @@
           }
 
           mui.toast('操作成功');
-          this.bak = '';
           this.$router.go(-1);
+          this.bak = '';
         });
       },
       deleteItem(){
         var btnArray = ['否', '是'];
         mui.confirm('确认要删除？', '删除', btnArray, e => {
             if (e.index == 1) {
-                var url = ACCOUNT_API.DELETE_ACCOUNT_JOB;
+                var url = ACCOUNT_API.DELETE_ACCOUNT_PROJECT;
                 postRequest(url, {id:this.id}).then(response => {
                   mui.toast('删除成功');
                   this.$router.go(-1);
@@ -263,20 +269,20 @@
     },
     computed:{
       descLength() {
-        if (this.job.description)
-          return this.job.description.length;
+        if (this.project.description)
+          return this.project.description.length;
         else return 0;
       },
       infoIndustryTagsNames() {
-        if (this.job.industry_tags && this.job.industry_tags.length) {
-          return this.job.industry_tags.join();
+        if (this.project.industry_tags && this.project.industry_tags.length) {
+          return this.project.industry_tags.join();
         } else {
           return '';
         }
       },
       infoProductTagsNames() {
-        if (this.job.product_tags && this.job.product_tags.length) {
-          return this.job.product_tags.join();
+        if (this.project.product_tags && this.project.product_tags.length) {
+          return this.project.product_tags.join();
         } else {
           return '';
         }
@@ -290,9 +296,9 @@
       let id = parseInt(this.$route.params.id);
       this.id = id;
       if (this.id) {
-         var jobs = localEvent.getLocalItem('jobs');
+         var projects = localEvent.getLocalItem('projects');
 
-         if (!jobs || !jobs[id]) {
+         if (!projects || !projects[id]) {
            this.$store.dispatch(NOTICE, cb => {
              cb({
                text: '发生一些错误',
@@ -303,8 +309,8 @@
            this.$router.back();
            return;
          }
-         this.job = jobs[id];
-         this.bak = JSON.stringify(this.job);
+         this.project = projects[id];
+         this.bak = JSON.stringify(this.project);
       }
 
 
