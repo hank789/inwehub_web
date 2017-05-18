@@ -90,6 +90,7 @@ function updateUserInfoCache(user) {
     counts: {},
     account_info_complete_percent:'',
     is_expert:0,
+    total_money: '-',
     datas: {}
   };
   userLocal.user_id = user.id;
@@ -110,6 +111,7 @@ function updateUserInfoCache(user) {
   userLocal.status = user.status;
   userLocal.account_info_complete_percent = user.account_info_complete_percent;
   userLocal.is_expert  = user.is_expert;
+  userLocal.total_money = user.total_money;
 
   /*
    user.counts.map(function (count, index) {

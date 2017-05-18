@@ -95,11 +95,22 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+
   { // 个人信息
     path: '/my/info/job/:id',
     component: require('../views/Account/infos/job.vue'),
     meta: {
       title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的钱包
+    path: '/my/Finance',
+    component: require('../views/Finance/info.vue'),
+    meta: {
+      title: '我的钱包'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

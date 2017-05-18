@@ -31,7 +31,7 @@
               <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：{{ account_info_complete_percent }}%</span></router-link>
             </li>
             <li class="mui-table-view-cell">
-              <a href="#general" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：188.00</span></a>
+              <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：{{ total_money }}</span></router-link>
             </li>
             <li class="mui-table-view-cell">
               <router-link to="/expert" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</router-link>
@@ -76,6 +76,7 @@
         company: currentUser.company,
         account_info_complete_percent: currentUser.account_info_complete_percent,
         isExpert:currentUser.is_expert,
+        total_money: currentUser.total_money
       }
     },
     methods: {
