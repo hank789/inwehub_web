@@ -99,7 +99,9 @@
     },
     watch: {
       selected: function (val) {
-        this.iselected = val;
+        if (typeof(val) === 'object') {
+          this.iselected = val;
+        }
       }
     },
     components: {
