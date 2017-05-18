@@ -630,6 +630,7 @@
         switch (object_type) {
           case 'user':
             this.user.info.industry_tags = tags;
+            this.userInfoBmp = '';
             this.submitInfo();
             break;
           default:
@@ -806,6 +807,73 @@
           }
         });
       },
+      deleteAccountItem: function (oType) {
+        var btnArray = ['否', '是'];
+        mui.confirm('确认要删除？', '删除', btnArray, e => {
+          if (e.index == 1) {
+            //  确认
+            var url;
+            var data = this.newItem;
+            switch (oType) {
+              case 'job' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_JOB;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_JOB;
+                }
+                break;
+              case 'edu' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_EDU;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_EDU;
+                }
+                break;
+              case 'project' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_PROJECT;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_PROJECT;
+                }
+                break;
+              case 'train' :
+                if (data.id) {
+                  url = ACCOUNT_API.DELETE_ACCOUNT_TRAIN;
+                } else {
+                  url = ACCOUNT_API.ADD_ACCOUNT_TRAIN;
+                }
+                break;
+              default:
+                break;
+            }
+            apiRequest(url, data).then(res => {
+              if (res !== false) {
+                let objectItem = this.newItem;
+                switch (res.type) {
+                  case 'job':
+                    this.removeArrByItemId(this.user.jobs, objectItem.id);
+                    break;
+                  case 'edu':
+                    this.removeArrByItemId(this.user.edus, objectItem.id);
+                    break;
+                  case 'train':
+                    this.removeArrByItemId(this.user.trains, objectItem.id);
+                    break;
+                  case 'project':
+                    this.removeArrByItemId(this.user.projects, objectItem.id);
+                    break;
+                }
+                mui.toast('删除成功');
+                this.emptyNewItem();
+                this.muiView.back();
+              }
+            });
+          } else {
+
+          }
+        })
+      }
+      ,
       removeArrByItemId: function (arr, id) {
         for (var i = 0; i < arr.length; i++) {
           if (arr[i].id == id) {
