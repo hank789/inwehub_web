@@ -694,18 +694,7 @@
           this.user.info = JSON.parse(this.userInfoBmp);
         }
 
-        var newItemChange = JSON.stringify(this.newItem);
-        if (this.newItemChange != '' && newItemChange !== this.newItemChange) {
-          mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
-            if (e.index == 1) {
-              this.muiView.back();
-            } else {
-              return false;
-            }
-          }, 'div');
-        } else {
-          this.muiView.back();
-        }
+        this.muiView.back();
       }
       ,
       initDate: function (objType) {
@@ -802,7 +791,7 @@
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
             mui.toast('保存成功');
-            updateUserInfoCache(data);
+            this.userInfoBmp = '';
             this.muiViewBack();
           }
         });
