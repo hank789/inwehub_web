@@ -130,14 +130,14 @@
               </li>
             </ul>
             <div class="account_item_title">
-              教育经历<a href="#account_add_edu" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
+              教育经历<a @tap.stop.prevent="$router.push('/my/info/edu/0')" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
             <ul class="mui-table-view mui-table-view-chevron" v-show="user.edus.length == 0">
               <li class="mui-table-view-cell no-empty">请维护教育经历</li>
             </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="edu in user.edus" class="mui-table-view-cell">
-                <a @tap.stop.prevent="initNewItem(edu,'edu')" class="mui-navigate-right">
+                <a @tap.stop.prevent="$router.push('/my/info/edu/'+edu.id)" class="mui-navigate-right">
                   {{ edu.school }}
                   <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree
                   }}</p>
@@ -852,6 +852,15 @@
             newProjects[id] = info;
           }
           localEvent.setLocalItem('projects', newProjects);
+
+
+          var newEdus = [];
+          for(var i in user.edus) {
+            var info = user.edus[i];
+            var id = info.id;
+            newEdus[id] = info;
+          }
+          localEvent.setLocalItem('edus', newEdus);
 
 
 
