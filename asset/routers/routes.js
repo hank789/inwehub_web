@@ -95,6 +95,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 个人信息
+    path: '/my/info/job/:id',
+    component: require('../views/Account/infos/job.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 行业领域
     path: '/tags/industry',
     component: require('../views/Tags/industryTagsIndexedlist.vue'),

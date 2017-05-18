@@ -25,7 +25,7 @@
       <!--页面标题栏结束-->
       <!--页面主内容区开始-->
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
+        <div class="mui-scroll-wrapper" id="infoWrapper">
           <div class="mui-scroll">
 
             <div class="mui-table-view" id="head" @tap.stop.prevent="changeAvatar">
@@ -102,14 +102,14 @@
               </li>
             </ul>
             <div class="account_item_title">
-              工作经历<a href="#account_add_job" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
+              工作经历<a @tap.stop.prevent="$router.push('/my/info/job/0')" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
             <ul class="mui-table-view mui-table-view-chevron" v-show="user.jobs.length == 0">
               <li class="mui-table-view-cell no-empty">请维护工作经历</li>
             </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="job in user.jobs" class="mui-table-view-cell">
-                <a @tap.stop.prevent="initNewItem(job,'job')" class="mui-navigate-right">
+                <a  @tap.stop.prevent="$router.push('/my/info/job/' + job.id)" class="mui-navigate-right">
                   {{ job.company }}
                   <p class='mui-ellipsis'>{{ job.title }} | {{ job.begin_time }} ~ {{ job.end_time }}</p>
                 </a>
@@ -835,6 +835,17 @@
 
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
+
+          var newJobs = [];
+          for(var i in user.jobs) {
+            var info = user.jobs[i];
+            var id = info.id;
+            newJobs[id] = info;
+          }
+          localEvent.setLocalItem('jobs', newJobs);
+
+
+
           this.user = user;
           this.loading = 0;
 
@@ -1424,6 +1435,29 @@
       mui('.mui-scroll-wrapper').scroll();
 
       this.initViewApi();
+
+      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+        var lastY = event.detail.lastY;
+        localEvent.setLocalItem('infoLast', {lastY:lastY})
+      });
+
+      var infoLast = localEvent.getLocalItem('infoLast');
+      if (mui.os.plus) {
+        mui.plusReady(function () {
+          if (infoLast) {
+             var lastY = infoLast.lastY;
+          }
+          mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
+        });
+      } else {
+        if (infoLast) {
+          var lastY = infoLast.lastY;
+        }
+        mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
+      }
+
+
+
     }
   }
 </script>

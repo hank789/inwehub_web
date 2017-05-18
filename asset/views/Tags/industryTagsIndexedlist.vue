@@ -50,6 +50,8 @@
           this.counts = this.tags.length;
         }
       });
+
+      this.iselected = this.selected?this.selected:[];
     },
     computed: {
       genderTagName() {
