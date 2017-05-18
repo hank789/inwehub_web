@@ -95,6 +95,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 我的钱包
+    path: '/my/Finance',
+    component: require('../views/Finance/info.vue'),
+    meta: {
+      title: '我的钱包'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 行业领域
     path: '/tags/industry',
     component: require('../views/Tags/industryTagsIndexedlist.vue'),
