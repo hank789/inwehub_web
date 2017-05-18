@@ -3,7 +3,7 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-      <h1 class="mui-title">教育经历</h1>
+      <h1 class="mui-title">培训经历</h1>
       <a @tap.stop.prevent="submit"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
     </header>
@@ -12,42 +12,30 @@
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">学校</label>
-            <input type="text"  v-model.trim="edu.school" placeholder="必填">
+            <label class="mui-navigate">培训/认证名称</label>
+            <input type="text"  v-model.trim="train.certificate" placeholder="必填">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">专业</label>
-            <input type="text"   v-model.trim="edu.major" placeholder="必填">
+            <label class="mui-navigate">培训/认证机构</label>
+            <input type="text"  v-model.trim="train.agency" placeholder="必填">
           </div>
         </li>
-        <li class="mui-table-view-cell mui-input-row">
-          <div @tap.stop.prevent="selectMajor" class="mui-navigate-right"><label>学历</label><label
-            class="mui-pull-right account-setting-field">{{edu.degree?edu.degree:'请选择'}}</label></div>
-        </li>
-
-        <li class="mui-table-view-cell mui-input-row">
-          <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
-            <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field">{{ edu.begin_time?edu.begin_time:'请选择'}}</label>
-          </div>
-        </li>
-        <li class="mui-table-view-cell mui-input-row">
-          <div class="mui-input-row" @tap.stop.prevent="initDate(2)">
-            <label class="mui-navigate-right">结束时间</label><label class="mui-pull-right account-setting-field">{{edu.end_time?edu.end_time:'请选择'}}</label>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row" @tap.stop.prevent="initDate(3)">
+            <label class="mui-navigate-right">培训/认证时间</label><label class="mui-pull-right account-setting-field">{{train.get_time?train.get_time:'请选择'}}</label>
           </div>
         </li>
       </ul>
-
-
       <div class="account_item_title">
-        教育经历详情描述
+        培训和认证经历详情描述
 
 
 
       </div>
       <div class="textarea-wrapper">
-        <textarea v-model.trim="edu.description" rows="5"  placeholder="请详细填写该教育经历的详细信息"></textarea>
+        <textarea v-model.trim="train.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
       <div class="deleteWrapper" v-show="id">
@@ -66,56 +54,23 @@
   import localEvent from '../../../stores/localStorage';
   import ACCOUNT_API from '../../../api/account';
   import dPickerComponent from '../../../components/picker/date-picker.vue';
-  import popPickerComponent from '../../../components/picker/poppicker.vue';
 
   export default {
     data: () => ({
       id:null,
       bak:'',
       object_type:'',
-      edu:{
-        school:'',
-        major:'',
-        degree:'',
-        begin_time:'',
-        end_time:'',
-        description:''
+      train:{
+        certificate:'',
+        agency:'',
+        get_time:'',
+        description:'',
       },
       descMaxLength: 2000,
     }),
     methods: {
-      selectMajor(){
-        var degreePicker = new mui.PopPicker();
-
-        degreePicker.setData([
-          {
-            value: '大专',
-            text: '大专'
-          },
-          {
-            value: '本科',
-            text: '本科'
-          },
-          {
-            value: '硕士',
-            text: '硕士'
-          },
-          {
-            value: '博士',
-            text: '博士'
-          },
-          {
-            value: '其它',
-            text: '其它'
-          }
-        ]);
-
-        degreePicker.show(items => {
-          this.edu.degree = items[0].value;
-        });
-      },
       muiViewBack: function () {
-        var newItemChange = JSON.stringify(this.edu);
+        var newItemChange = JSON.stringify(this.train);
         if (this.bak != '' && newItemChange !== this.bak) {
           mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
             if (e.index == 1) {
@@ -151,57 +106,41 @@
 
           switch (objType) {
             case 1 :
-              this.edu.begin_time = rs.text;
+              this.train.begin_time = rs.text;
               break;
             case 2:
-              this.edu.end_time = rs.text;
+              this.train.end_time = rs.text;
               break;
             case 3:
-              this.edu.get_time = rs.text;
+              this.train.get_time = rs.text;
               break;
           }
         });
       },
       submit(){
-        if (!this.edu.school) {
-          mui.toast("学校不能为空");
+        if (!this.train.certificate) {
+          mui.toast("培训/认证名称不能为空");
           return;
         }
 
-        if (!this.edu.major) {
-          mui.toast("专业不能为空");
+        if (!this.train.agency) {
+          mui.toast("培训/认证机构不能为空");
           return;
         }
 
-        if (!this.edu.degree) {
-          mui.toast("学历不能为空");
+        if (!this.train.get_time) {
+          mui.toast("培训/认证时间不能为空");
           return;
         }
-
-        if (!this.edu.begin_time) {
-          mui.toast("开始时间不能为空");
-          return;
-        }
-
-        if (!this.edu.end_time) {
-          mui.toast("结束时间不能为空");
-          return;
-        }
-
-        if (this.edu.end_time < this.edu.begin_time) {
-          mui.alert("开始时间需早于结束时间");
-          return;
-        }
-
 
         var url = '';
         if (this.id) {
-          url = ACCOUNT_API.UPDATE_ACCOUNT_EDU;
+          url = ACCOUNT_API.UPDATE_ACCOUNT_TRAIN;
         } else {
-          url = ACCOUNT_API.ADD_ACCOUNT_EDU;
+          url = ACCOUNT_API.ADD_ACCOUNT_TRAIN;
         }
 
-        var data = this.edu;
+        var data = this.train;
 
         if (this.id) {
             data.id = this.id;
@@ -223,7 +162,7 @@
         var btnArray = ['否', '是'];
         mui.confirm('确认要删除？', '删除', btnArray, e => {
             if (e.index == 1) {
-                var url = ACCOUNT_API.DELETE_ACCOUNT_EDU;
+                var url = ACCOUNT_API.DELETE_ACCOUNT_TRAIN;
                 postRequest(url, {id:this.id}).then(response => {
                   mui.toast('删除成功');
                   this.$router.go(-1);
@@ -237,22 +176,21 @@
     },
     computed:{
       descLength() {
-        if (this.edu.description)
-          return this.edu.description.length;
+        if (this.train.description)
+          return this.train.description.length;
         else return 0;
       }
     },
     components: {
-      popPickerComponent,
       dPickerComponent
     },
     created () {
       let id = parseInt(this.$route.params.id);
       this.id = id;
       if (this.id) {
-         var edus = localEvent.getLocalItem('edus');
+         var trains = localEvent.getLocalItem('trains');
 
-         if (!edus || !edus[id]) {
+         if (!trains || !trains[id]) {
            this.$store.dispatch(NOTICE, cb => {
              cb({
                text: '发生一些错误',
@@ -263,8 +201,8 @@
            this.$router.back();
            return;
          }
-         this.edu = edus[id];
-         this.bak = JSON.stringify(this.edu);
+         this.train = trains[id];
+         this.bak = JSON.stringify(this.train);
       }
 
 

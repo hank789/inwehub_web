@@ -145,7 +145,7 @@
               </li>
             </ul>
             <div class="account_item_title">
-              培训认证<a href="#account_add_train" class="mui-pull-right"><span
+              培训认证<a @tap.stop.prevent="$router.push('/my/info/train/0')" class="mui-pull-right"><span
               class="iplus mui-icon fa  fa-plus"></span></a>
             </div>
             <ul class="mui-table-view mui-table-view-chevron" v-show="user.trains.length == 0">
@@ -153,7 +153,7 @@
             </ul>
             <ul class="mui-table-view mui-table-view-chevron">
               <li v-for="train in user.trains" class="mui-table-view-cell">
-                <a @tap.stop.prevent="initNewItem(train,'train')" class="mui-navigate-right">
+                <a @tap.stop.prevent="$router.push('/my/info/train/'+train.id)" class="mui-navigate-right">
                   {{ train.agency }}
                   <p class='mui-ellipsis'>{{ train.get_time }} | {{ train.certificate }}</p>
                 </a>
@@ -861,6 +861,15 @@
             newEdus[id] = info;
           }
           localEvent.setLocalItem('edus', newEdus);
+
+
+          var newTrains = [];
+          for(var i in user.trains) {
+            var info = user.trains[i];
+            var id = info.id;
+            newTrains[id] = info;
+          }
+          localEvent.setLocalItem('trains', newTrains);
 
 
 
