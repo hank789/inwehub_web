@@ -210,13 +210,13 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">公司</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.company" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.company" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">职位</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.title" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -263,7 +263,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear"
+              <textarea v-model.trim="newItem.description" rows="5"
                         placeholder="请详细填写该工作经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
@@ -294,19 +294,19 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">项目名称</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.project_name" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.project_name" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">项目角色</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.title" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.title" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">客户名称</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.customer_name" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.customer_name" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -342,7 +342,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该项目经历的详细信息"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -373,13 +373,13 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">学校</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.school" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.school" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">专业</label>
-                  <input type="text"  class="mui-input-clear" v-model="newItem.major" placeholder="必填">
+                  <input type="text"   v-model.trim="newItem.major" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell mui-input-row">
@@ -407,7 +407,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该教育经历的详细信息"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5"  placeholder="请详细填写该教育经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -436,13 +436,13 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">培训/认证名称</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.certificate" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.certificate" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">培训/认证机构</label>
-                  <input type="text" class="mui-input-clear" v-model="newItem.agency" placeholder="必填">
+                  <input type="text"  v-model.trim="newItem.agency" placeholder="必填">
                 </div>
               </li>
               <li class="mui-table-view-cell">
@@ -458,7 +458,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="newItem.description" rows="5" class="mui-input-clear" placeholder="请详细填写该项目经历的详细信息"></textarea>
+              <textarea v-model.trim="newItem.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <div class="deleteWrapper" v-show="newItem.id">
@@ -487,7 +487,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">姓名</label>
-                  <input type="text" class="mui-input-clear" placeholder="必填" v-model="user.info.name">
+                  <input type="text"  placeholder="必填" v-model.trim="user.info.name">
                 </div>
               </li>
             </ul>
@@ -511,7 +511,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">公司</label>
-                  <input type="text" class="mui-input-clear" v-model="user.info.company">
+                  <input type="text"  v-model.trim="user.info.company">
                 </div>
               </li>
             </ul>
@@ -535,7 +535,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">当前职位</label>
-                  <input type="text" class="mui-input-clear" v-model="user.info.title">
+                  <input type="text"  v-model.trim="user.info.title">
                 </div>
               </li>
             </ul>
@@ -559,7 +559,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label class="mui-navigate">电子邮箱</label>
-                  <input type="text" class="mui-input-clear" v-model="user.info.email">
+                  <input type="text"  v-model.trim="user.info.email">
                 </div>
               </li>
             </ul>
@@ -584,7 +584,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <label>详细地址</label>
-                  <input type="text" class="mui-input-clear" v-model="user.info.address_detail">
+                  <input type="text"  v-model.trim="user.info.address_detail">
                 </div>
               </li>
             </ul>
@@ -607,7 +607,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
-                  <textarea v-model.trim="user.info.description" rows="5" class="mui-input-clear"
+                  <textarea v-model.trim="user.info.description" rows="5"
                             placeholder="个人签名"></textarea>
                 </div>
               </li>
