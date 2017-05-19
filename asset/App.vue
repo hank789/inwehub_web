@@ -34,7 +34,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import {checkUpdate} from './utils/updateVersion';
+
 
   export default {
     data () {
@@ -126,7 +126,7 @@
           }, false );
 
           //检查版本更新
-          checkUpdate();
+         // checkUpdate();
         }
       });
     }
