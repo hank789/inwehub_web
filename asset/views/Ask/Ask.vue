@@ -39,10 +39,13 @@
                 @tap.stop.prevent="selectMoney(88)">88元</span>
           <span :class="money == 188 &&  selectOther == false  ?'active':''"
                 @tap.stop.prevent="selectMoney(188)">188元</span>
-          <span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>
-          <span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"
-                                                           v-model.number="money"/></span>
+          <span :class="money == 38 &&  selectOther == false  ?'active':''"
+                @tap.stop.prevent="selectMoney(38)">38元</span>
+          <!--<span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>-->
+          <!--<span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"-->
+                                                           <!--v-model.number="money"/></span>-->
         </div>
+        <div class="help">一份投入一份收获，合理的价格会更好的鼓励专家快速反馈！</div>
         <div class="button-wrapper">
           <pay :pay_object_type="pay_object_type" :pay_money="money" v-on:pay_success="goAsk">
 
@@ -226,13 +229,13 @@
           return;
         }
 
-        if (this.money < 88) {
-          mui.toast('提问金额不能小于88');
+        if (this.money < 38) {
+          mui.toast('提问金额不能小于38');
           return;
         }
 
-        if (this.money > 500) {
-          mui.toast('打赏钱有点多，提问金额的上限为500元');
+        if (this.money > 188) {
+          mui.toast('打赏钱有点多，提问金额的上限为188元');
           return;
         }
 
