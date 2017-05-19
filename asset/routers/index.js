@@ -10,7 +10,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  //...
+  // 检查版本更新
   mui.plusReady(function() {
     checkUpdate();
   });

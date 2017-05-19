@@ -19,7 +19,7 @@ function checkUpdate(){
             } else if (mui.os.android) {
               plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
                 plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
-                  mui.alert("360手机助手和应用宝，你一个都没装，暂时无法更新，感谢支持");
+                  mui.alert("未安装360手机助手和应用宝，暂时无法更新");
                 }, "com.qihoo.appstore");
               }, "com.tencent.android.qqdownloader");
             }
@@ -54,24 +54,29 @@ function installWgt(path){
   plus.runtime.install(path,{},function(){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
-    plus.io.resolveLocalFileSystemURL( path, function( entry ) {
-      // 可通过entry对象操作文件
-      entry.remove( function ( entry ) {
-        console.log( "Remove succeeded" );
-      }, function ( e ) {
-        console.log( e.message );
-      } );
-    }, function ( e ) {
-      console.log( "Resolve file URL failed: " + e.message );
-    } );
+    removeFile(path);
     plus.nativeUI.alert("应用资源更新完成！",function(){
       plus.runtime.restart();
     });
   },function(e){
     plus.nativeUI.closeWaiting();
+    removeFile(path);
     console.log("安装wgt文件失败["+e.code+"]："+e.message);
     plus.nativeUI.alert("安装更新文件失败["+e.code+"]："+e.message);
   });
+}
+
+function removeFile(path) {
+  plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+    // 可通过entry对象操作文件
+    entry.remove( function ( entry ) {
+      console.log( "Remove succeeded" );
+    }, function ( e ) {
+      console.log( e.message );
+    } );
+  }, function ( e ) {
+    console.log( "Resolve file URL failed: " + e.message );
+  } );
 }
 
 

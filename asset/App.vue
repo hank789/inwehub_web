@@ -35,7 +35,6 @@
 <script>
   import { mapGetters } from 'vuex'
 
-
   export default {
     data () {
       return {
@@ -124,9 +123,6 @@
 
 
           }, false );
-
-          //检查版本更新
-         // checkUpdate();
         }
       });
     }
