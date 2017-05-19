@@ -1,4 +1,4 @@
-* { touch-action: none; }
+/** { touch-action: none; }*/
 
 body{
   font-family: PingFang-SC-Regular, sans-serif;
