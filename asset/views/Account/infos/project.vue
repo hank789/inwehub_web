@@ -265,7 +265,7 @@
       }
     },
     mounted () {
-
+      mui('.mui-scroll-wrapper').scroll();
     },
     computed:{
       descLength() {
