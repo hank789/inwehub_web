@@ -11,7 +11,7 @@
       <div class="myMoney mui-table-view">
         <div class="mui-table-view-cell">
           <span class="mui-icon fa fa-diamond"></span>
-          <div class="money">188.00</div>
+          <div class="money">--.--</div>
           <div class="unit">余额 （元）</div>
         </div>
       </div>
@@ -21,7 +21,7 @@
           <div class="mui-table-view-cell">
             <div class="first">
               <span class="title">交易记录</span>
-              <span class="m">-3.80元</span>
+              <span class="m">--.--元</span>
             </div>
             <div class="second">
               <span class="status">处理中</span>
@@ -29,19 +29,7 @@
             </div>
           </div>
         </div>
-
-        <div class="item mui-table-view">
-          <div class="mui-table-view-cell">
-            <div class="first">
-              <span class="title">交易记录</span>
-              <span class="m">-3.80元</span>
-            </div>
-            <div class="second">
-              <span class="status">处理中</span>
-              <span class="time">2017-01-01 00:00:21</span>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
 

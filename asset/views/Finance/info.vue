@@ -13,9 +13,9 @@
       <div class="myMoney">
 
         <span class="mui-icon fa fa-diamond"></span>
-        <div class="money">188.00</div>
+        <div class="money">--.--</div>
         <div class="unit">余额 （元）</div>
-        <div class="info">您有 88.00 元正在结算处理中</div>
+        <div class="info">您有 --.-- 元正在结算处理中</div>
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"

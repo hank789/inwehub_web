@@ -13,9 +13,9 @@
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
-          <span class="amount"><input type="text" value="188.88"/></span>
+          <span class="amount"><input type="text" value="--.--"/></span>
         </div>
-        <div class="balance">钱包余额￥188.88，<span>全部提现</span></div>
+        <div class="balance">钱包余额￥--.--，<span>全部提现</span></div>
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @tap.stop.prevent="submit">提现
@@ -30,7 +30,6 @@
 
 <script>
   import {apiRequest} from '../../utils/request';
-  import oauth from '../../components/oauth/oauth.vue';
 
   export default {
     data: () => ({
@@ -40,8 +39,9 @@
 
     },
     components: {
-      oauth
+
     },
+
     methods: {
       check_withdraw() {
 
@@ -77,6 +77,7 @@
   }
   .textArea{
     margin:40px 30px 0 30px;
+    text-align: center;
     padding-left:20px;
     padding-bottom:10px;
     border-bottom:1px solid #bbb;
@@ -88,7 +89,7 @@
   .amount{
     font-size:48px;
     color:#888;
-    width:200px;
+    width: 120px;
     display: inline-block;
   }
   .amount input{
