@@ -146,6 +146,26 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 资金明细
+    path: '/my/Finance/list',
+    component: require('../views/Finance/list.vue'),
+    meta: {
+      title: '资金明细'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 提现
+    path: '/my/Finance/withdraw',
+    component: require('../views/Finance/withdraw.vue'),
+    meta: {
+      title: '提现'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 行业领域
     path: '/tags/industry',
     component: require('../views/Tags/industryTagsIndexedlist.vue'),
