@@ -93,9 +93,9 @@
                 <a @tap.stop.prevent="initBirthday" class="mui-navigate-right">出生日期<span
                   class="mui-pull-right account-setting-field">{{user.info.birthday ? user.info.birthday : '请选择'}}</span></a>
               </li>
-              <li class="mui-table-view-cell">
-                <a class="mui-navigate-right" @tap.stop.prevent="selectHomeCity">家乡地区<span class="mui-pull-right account-setting-field">请选择</span></a>
-              </li>
+              <!--<li class="mui-table-view-cell">-->
+                <!--<a class="mui-navigate-right" @tap.stop.prevent="selectHomeCity">家乡地区<span class="mui-pull-right account-setting-field">请选择</span></a>-->
+              <!--</li>-->
               <li class="mui-table-view-cell">
                 <a href="#account_description" class="mui-navigate-right">个人签名<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{user.info.description ? user.info.description : '请填写'}}</span></a>
