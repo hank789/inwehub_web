@@ -55,9 +55,7 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
-    plus.nativeUI.alert("应用资源更新完成！",function(){
-      plus.runtime.restart();
-    });
+    plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
     removeFile(path);
