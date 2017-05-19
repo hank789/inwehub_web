@@ -146,6 +146,11 @@
               }
 
               var newurl = plus.io.convertLocalFileSystemURL(zip.target);
+
+              if (mui.os.ios) {
+                newurl = 'file://' + newurl;
+              }
+
               plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
                 var localUrl = entry.toRemoteURL();
                 t.files.push({
