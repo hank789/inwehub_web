@@ -90,9 +90,23 @@
       }
     },
     mounted () {
+      var router = this.$router;
+
       //监听推送
       mui.plusReady(function() {
+
         if (mui.os.plus) {
+          var noticeTo = function(payload){
+               switch(payload.object_type) {
+                 case 'question':
+                     router.push('/ask/'+payload.object_id);
+                     break;
+                 case 'answer':
+                     router.push('/answer/'+payload.object_id);
+                     break;
+               }
+          };
+
           // 监听点击消息事件
           plus.push.addEventListener( "click", function( msg ) {
             // 判断是从本地创建还是离线推送的消息
@@ -106,8 +120,8 @@
             }
             // 提示点击的内容
             var payload =  JSON.parse(msg.payload);
-            plus.ui.alert( 'click:payload:type:' + payload.object_type );
-            plus.ui.alert( 'click:payload:id:' + payload.object_id );
+            noticeTo(payload);
+
           }, false );
           // 监听在线消息事件
           plus.push.addEventListener( "receive", function( msg ) {
@@ -117,11 +131,7 @@
               console.log( "接收到在线透传消息：" );
             }
             var payload =  JSON.parse(msg.payload);
-
-            plus.ui.alert( 'receive:payload:type:' + payload.object_type );
-            plus.ui.alert( 'receive:payload:id:' + payload.object_id );
-
-
+            noticeTo(payload);
           }, false );
         }
       });
