@@ -18,7 +18,7 @@
         <div class="balance">钱包余额￥--.--，<span>全部提现</span></div>
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="submit">提现
+                  @tap.stop.prevent="">提现
               </button>
         </div>
         <div class="help">预计5个工作日到账</div>
