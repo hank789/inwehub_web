@@ -142,6 +142,11 @@
         var inputElem = document.querySelector('textarea');
         inputElem.blur();
 
+        if (!this.type && !this.description) {
+          this.$router.go(-1);
+          return;
+        }
+
         mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
           if (e.index == 0) {
             this.clearCache();
