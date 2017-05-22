@@ -15,7 +15,7 @@
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-        <span class="mui-icon fa fa-tasks"></span>
+        <span class="mui-icon fa fa-tasks"><span class="mui-badge" v-if="taskCount">{{ taskCount }}</span></span>
         <span class="mui-tab-label">任务</span>
       </div>
 
@@ -34,6 +34,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import {createAPI, addAccessToken, postRequest} from './utils/request';
 
   export default {
     data () {
@@ -43,10 +44,21 @@
         isMy:false,
         showBottom:true,
         div:false,
-        isDiscover:false
+        isDiscover:false,
+        taskCount:0
       }
     },
     methods: {
+      getCount(){
+        postRequest(`notification/count`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+          this.taskCount = response.data.data.todo_tasks;
+        });
+      },
       linkTo(dest){
          this.$router.push(dest);
       },
@@ -74,6 +86,10 @@
             break;
           default:
             this.showBottom = false;
+        }
+
+        if (this.showBottom) {
+          this.getCount();
         }
       }
     },
