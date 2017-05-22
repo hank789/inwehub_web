@@ -462,35 +462,27 @@
       },
       selectWorkerCity(isShow){
 
-        if (!this.cityPicker) {
-          var cityPicker = new mui.PopPicker({
-            layer: 2
-          });
-          cityPicker.setData(cityData);
-          this.cityPicker = cityPicker;
+        var cityPicker = new mui.PopPicker({
+          layer: 2
+        });
+        cityPicker.setData(cityData);
 
-          if (this.user.info) {
-            cityPicker.pickers[0].setSelectedValue(this.user.info.province, 0, () => {
-              cityPicker.pickers[1].setSelectedValue(this.user.info.city, 0, () => {
-                let cityPickerSelectedProvince = cityPicker.pickers[0].getSelectedText();
-                let cityPickerSelectedCity = cityPicker.pickers[1].getSelectedText();
-                this.work_city = cityPickerSelectedProvince + " " + cityPickerSelectedCity;
-              });
+        if (this.user.info) {
+          cityPicker.pickers[0].setSelectedValue(this.user.info.province.key, 0, () => {
+            cityPicker.pickers[1].setSelectedValue(this.user.info.city.key, 0, () => {
+              let cityPickerSelectedProvince = cityPicker.pickers[0].getSelectedText();
+              let cityPickerSelectedCity = cityPicker.pickers[1].getSelectedText();
             });
-          }
-        }
-
-        if (!isShow) {
-            return;
-        } else {
-          this.cityPicker.show(items => {
-            this.user.info.province = items[0].value;
-            this.user.info.city = items[1].value;
-            this.work_city = items[0].text + " " + items[1].text;
-            this.newItemChange = '';
-            this.submitInfo();
           });
         }
+
+        cityPicker.show(items => {
+          this.user.info.province = items[0].value;
+          this.user.info.city = items[1].value;
+          this.work_city = items[0].text + " " + items[1].text;
+          this.newItemChange = '';
+          this.submitInfo();
+        });
       },
       getUserInfo()
       {
@@ -533,12 +525,10 @@
           }
           localEvent.setLocalItem('trains', newTrains);
 
-
+          this.work_city = user.info.province.name + ' ' + user.info.city.name;
 
           this.user = user;
           this.loading = 0;
-
-          this.selectWorkerCity(false);
 
         }));
       }
@@ -696,6 +686,12 @@
         }
 
         var data = this.user.info;
+        if (typeof(data.city) === 'object') {
+            data.city = data.city.key;
+        }
+        if (typeof(data.province) === 'object') {
+          data.province = data.province.key;
+        }
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
             mui.toast('保存成功');
