@@ -34,6 +34,8 @@
                 <div class="title">添加职业照片更真实</div>
                 <span class="mui-icon fa fa-hand-o-right"></span>
                 <div class="titleSub">个人信息完善度<span>{{ user.info.account_info_complete_percent }}%</span></div>
+                <div class="titleSubSub" v-if="user.info.account_info_complete_percent < 90">您的个人信息还不太完整，<br/>90%以上才算较为完整，请再接再厉！</div>
+                <div class="titleSubSub" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">您的个人信息较为完整，<br/>距离满分只有一步之遥啦，请再接再厉！</div>
 
                 <div class="avatar">
                   <div class="avatarInner">
@@ -1138,4 +1140,8 @@
     color: #999;
   }
 
+  .titleSubSub{
+    font-size:12px;
+    color:#999;
+  }
 </style>
