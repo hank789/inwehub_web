@@ -108,6 +108,12 @@
         let phone = this.phone;
         let type = 'change';
         this.isCanGetCode = false;
+
+        if (phone.length !== 11) {
+            mui.toast("请正确输入手机号");
+            return;
+        }
+
         request.post(createAPI('auth/sendPhoneCode'), {
             mobile:phone,
             type
@@ -124,7 +130,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             this.isCanGetCode = true;
-            this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+            mui.toast(response.data.message);
             return;
           }
         })
@@ -156,9 +162,9 @@
             return;
           }
 
-          this.$Message.info('密码重置成功', 2, () => {
-            router.push({ path: 'login' });
-          });
+          mui.toast('密码重置成功');
+          this.$router.push({ path: 'login' });
+
         })
         .catch(({ response: { data = {} } ={} }) => {
           this.isDisabled = false;
