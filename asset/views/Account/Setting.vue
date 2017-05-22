@@ -58,6 +58,7 @@
   import localEvent from '../../stores/localStorage';
   import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
   import router from '../../routers/index';
+  import {apiRequest} from '../../utils/request';
 
   export  default {
     data(){
@@ -83,6 +84,21 @@
         this.$store.dispatch(ASKS_LIST_APPEND, {});
         this.$store.dispatch(ANSWERS_LIST_APPEND, {});
         this.$store.dispatch(TASK_LIST_APPEND, {});
+
+        mui.plusReady(function(){
+          if (mui.os.plus) {
+            var device_info = plus.push.getClientInfo();
+            apiRequest(`auth/logout`,{
+              client_id: device_info.clientid,
+              device_token: device_info.token,
+              appid: device_info.appid,
+              appkey: device_info.appkey,
+              device_type: plus.os.name === 'iOS' ? 2 : 1
+            }).then(res => {
+
+            });
+          }
+        });
 
         router.push({ path: 'login' });
       }
