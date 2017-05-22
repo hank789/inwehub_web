@@ -336,7 +336,7 @@
       }
     },
     mounted(){
-
+      mui('.mui-scroll-wrapper').scroll();
     },
     components: {
       industryTagsIndexedList
