@@ -191,8 +191,7 @@
         <a @tap.stop.prevent="submitInfo('name')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
+
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -201,8 +200,7 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
+
       </div>
     </div>
     <!--编辑姓名结束-->
@@ -215,8 +213,7 @@
         <a @tap.stop.prevent="submitInfo('company')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
+
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -225,8 +222,7 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
+
       </div>
     </div>
     <!--编辑公司结束-->
@@ -239,8 +235,7 @@
         <a @tap.stop.prevent="submitInfo('title')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
+
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -249,8 +244,7 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
+
       </div>
     </div>
     <!--编辑职位结束-->
@@ -263,8 +257,7 @@
         <a @tap.stop.prevent="submitInfo('email')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
+
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -273,8 +266,6 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
       </div>
     </div>
     <!--编辑邮箱地址结束-->
@@ -288,8 +279,7 @@
            class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
+
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -298,8 +288,6 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
       </div>
     </div>
     <!--编辑详细地址结束-->
@@ -312,8 +300,6 @@
         <a @tap.stop.prevent="submitInfo('description')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
       </div>
       <div class="mui-page-content">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
@@ -322,8 +308,6 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
       </div>
     </div>
     <!--编辑个人签名结束-->
