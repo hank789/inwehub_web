@@ -331,7 +331,7 @@
             if (this.answer.answers.length && this.answer.answers[0].promise_time) {
               title = '回答问题';
             } else {
-              title = '确认时间';
+              title = '回答问题';  //确认时间
             }
             break;
           default:
