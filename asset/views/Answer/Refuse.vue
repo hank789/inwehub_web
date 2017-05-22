@@ -117,7 +117,7 @@
                 return;
               }
 
-              this.$router.replace('/answers/');
+              this.$router.replace('/task');
             });
           }
         }, 'div');
