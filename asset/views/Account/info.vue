@@ -443,6 +443,7 @@
           this.home_city = items[0].text + " " + items[1].text;
           this.newItemChange = '';
           this.submitInfo();
+          cityPicker.dispose();
         });
       },
       selectSex(){
@@ -465,6 +466,7 @@
         userPicker.show(items => {
           this.user.info.gender = items[0].value;
           this.submitInfo();
+          userPicker.dispose();
         });
       },
       selectWorkerCity(isShow){
@@ -489,6 +491,8 @@
           this.work_city = items[0].text + " " + items[1].text;
           this.newItemChange = '';
           this.submitInfo();
+
+          cityPicker.dispose();
         });
       },
       getUserInfo()
@@ -639,16 +643,23 @@
       }
       ,
       initBirthday: function () {
+        var value = '';
+        if (this.user.info.birthday) {
+           value = this.user.info.birthday;
+        }
         let currentDate = new Date();
         let param = {
           "type": "date",
           "beginYear": "1900",
-          "endYear": currentDate.getFullYear()
+          "endYear": currentDate.getFullYear(),
+          "value":value
         };
         let picker = new mui.DtPicker(param);
+
         picker.show((rs) => {
           this.user.info.birthday = rs.text;
           this.submitInfo();
+          picker.dispose();
         });
       }
       ,
