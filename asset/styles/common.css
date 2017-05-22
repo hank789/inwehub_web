@@ -129,7 +129,3 @@ input, textarea, select{
 .mui-checkbox-2 .tagSelect.checked:before {
   content: '\E442';
 }
-
-.mui-popover.mui-popover-action.mui-popover-bottom{
-  position: absolute;
-}
