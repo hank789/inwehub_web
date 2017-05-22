@@ -9,7 +9,7 @@
 
     <div class="mui-content form form-ask">
       <div class="textarea-wrapper">
-        <textarea v-model.trim="description" @keydown.stop="enterWords" class="mui-focusin"
+        <textarea v-model.trim="description" @keydown.stop="enterWords"
                   placeholder="提出问题"></textarea>
       </div>
       <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
