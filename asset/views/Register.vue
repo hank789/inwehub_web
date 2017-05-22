@@ -24,7 +24,11 @@
           </div>
           <div class="mui-input-row">
             <label>密码</label>
-            <input type="password" class="mui-input-password"autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password">
+            <input type="password" class="mui-input-password" autocomplete="off" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password">
+          </div>
+          <div class="mui-input-row">
+            <label>邀请码</label>
+            <input type="text" autocomplete="off" v-model.trim="registrationCode" placeholder="请输入邀请码">
           </div>
         </form>
         <div class="mui-content-padded">
@@ -72,6 +76,7 @@
       isValidPassword: false, // 是否合法密码
       isValidUsername: false, // 用户名是否合法
       CodeText: '获取验证码', // 获取验证码按钮文字
+      registrationCode:"",
       time: 0, // 时间倒计时
       formItem: {
         input: ''
@@ -130,9 +135,21 @@
         let mobile = this.phone;
         let type = 'register';
         this.isCanGetCode = false;
+
+        if (mobile.length !== 11) {
+            mui.toast("请正确填写手机号");
+            return;
+        }
+
+        if (!this.registrationCode) {
+          mui.toast("请输入邀请码");
+          return;
+        }
+
         request.post(createAPI('auth/sendPhoneCode'), {
             mobile,
-            type
+            type,
+            'registration_code':this.registrationCode
           }
         )
           .then(response => {
@@ -146,7 +163,7 @@
             var code = response.data.code;
             if (code !== 1000) {
               this.isCanGetCode = true;
-              this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code]});
+              mui.toast(response.data.message);
               return;
             }
           })
@@ -162,12 +179,19 @@
         let device_code = detecdOS();
         this.isLoading = true;
         this.isDisabled = true;
+
+        if (!this.registrationCode) {
+          mui.toast("请输入邀请码");
+          return;
+        }
+
         request.post(createAPI('auth/register'), {
             name: username,
             mobile:phone,
             code,
             password,
-            device_code
+            device_code,
+           'registration_code':this.registrationCode
           }
         )
           .then(response => {
@@ -175,7 +199,7 @@
             if (code !== 1000) {
                 this.isDisabled = false;
                 this.isLoading = false;
-                this.errors = Object.assign({}, this.errors, { serverError: errorCodes[code] });
+                mui.toast(response.data.message);
                 return;
             }
 
