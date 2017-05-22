@@ -79,13 +79,7 @@
         mui.toast('清除成功');
       },
       logOut(){
-        localEvent.clearLocalItem('UserLoginInfo');
-        localEvent.clearLocalItem('UserInfo');
-        this.$store.dispatch(ASKS_LIST_APPEND, {});
-        this.$store.dispatch(ANSWERS_LIST_APPEND, {});
-        this.$store.dispatch(TASK_LIST_APPEND, {});
-
-        mui.plusReady(function(){
+        mui.plusReady(()=>{
           if (mui.os.plus) {
             var device_info = plus.push.getClientInfo();
             apiRequest(`auth/logout`,{
@@ -95,12 +89,16 @@
               appkey: device_info.appkey,
               device_type: plus.os.name === 'iOS' ? 2 : 1
             }).then(res => {
+              localEvent.clearLocalItem('UserLoginInfo');
+              localEvent.clearLocalItem('UserInfo');
+              this.$store.dispatch(ASKS_LIST_APPEND, {});
+              this.$store.dispatch(ANSWERS_LIST_APPEND, {});
+              this.$store.dispatch(TASK_LIST_APPEND, {});
 
+              router.push({ path: 'login' });
             });
           }
         });
-
-        router.push({ path: 'login' });
       }
     },
     mounted(){

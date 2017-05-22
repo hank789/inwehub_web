@@ -15,7 +15,8 @@ function checkUpdate(){
           if (is_force === 1){
             mui.alert("有新的版本升级");
             if (mui.os.ios) {
-              location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+              //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+              location.href = 'https://www.pgyer.com/Zoy3';
             } else if (mui.os.android) {
               plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
                 plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
