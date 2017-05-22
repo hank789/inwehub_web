@@ -152,11 +152,25 @@
           toNow = true;
         }
 
+        var value = '';
+        switch (objType) {
+          case 1 :
+            value = this.job.begin_time;
+            break;
+          case 2:
+            value = this.job.end_time;
+            break;
+          case 3:
+            value = this.job.get_time;
+            break;
+        }
+
         let param = {
           "type": "month",
           "beginYear": "1990",
           "endYear": currentDate.getFullYear(),
-          "toNow": toNow
+          "toNow": toNow,
+          "value":value
         };
 
         let picker = new mui.DtPicker(param);
