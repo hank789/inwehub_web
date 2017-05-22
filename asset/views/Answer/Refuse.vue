@@ -25,7 +25,7 @@
             </div>
 
             <div class="textarea-wrapper">
-              <textarea v-model.trim="description"></textarea>
+              <textarea v-model.trim="description" placeholder="请详细说明下拒绝的原因"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
 
@@ -90,14 +90,14 @@
         });
       },
       submit(){
-
-        if (!this.description) {
-          mui.toast('请填写拒绝理由！');
+       
+        if (!this.sTags.length) {
+          mui.toast('请选择标签！');
           return;
         }
 
-        if (!this.tags) {
-          mui.toast('请选择标签！');
+        if (!this.description) {
+          mui.toast('请再详细说明下拒绝的原因，非常感谢！');
           return;
         }
 
