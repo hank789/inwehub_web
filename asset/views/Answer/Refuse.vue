@@ -90,7 +90,7 @@
         });
       },
       submit(){
-       
+
         if (!this.sTags.length) {
           mui.toast('请选择标签！');
           return;

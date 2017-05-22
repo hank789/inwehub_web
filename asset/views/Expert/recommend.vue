@@ -201,6 +201,11 @@
           return;
         }
 
+        if (!this.files.length) {
+          mui.toast('请上传专家名片');
+          return;
+        }
+
         if (mui.os.plus) {
           this.uploadPlus();
         } else {
@@ -289,44 +294,20 @@
 
         Picker.setData([
           {
-            value: '1',
-            text: '1'
+            value: '3-5年',
+            text: '3-5年'
           },
           {
-            value: '2',
-            text: '2'
+            value: '5-10年',
+            text: '5-10年'
           },
           {
-            value: '3',
-            text: '3'
+            value: '10-20年',
+            text: '10-20年'
           },
           {
-            value: '4',
-            text: '4'
-          },
-          {
-            value: '5',
-            text: '5'
-          },
-          {
-            value: '6',
-            text: '6'
-          },
-          {
-            value: '7',
-            text: '7'
-          },
-          {
-            value: '8',
-            text: '8'
-          },
-          {
-            value: '9',
-            text: '9'
-          },
-          {
-            value: '10',
-            text: '10'
+            value: '20年以上',
+            text: '20年以上'
           }
         ]);
 
