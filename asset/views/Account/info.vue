@@ -701,6 +701,7 @@
             mui.toast('保存成功');
             this.userInfoBmp = '';
             this.muiViewBack();
+            this.getUserInfo();
           }
         });
       }
