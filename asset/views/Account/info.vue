@@ -76,7 +76,7 @@
               </li>
               <li class="mui-table-view-cell">
                 <a @tap.stop.prevent="selectWorkerCity(true)" class="mui-navigate-right">工作地区<span
-                  class="mui-pull-right account-setting-field">{{ work_city?work_city:'请选择' }}</span></a>
+                  class="mui-pull-right account-setting-field">{{ work_city !== ' '?work_city:'请选择' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
                 <a href="#account_address_detail" class="mui-navigate-right">详细地址<span
@@ -95,9 +95,9 @@
                 <a @tap.stop.prevent="initBirthday" class="mui-navigate-right">出生日期<span
                   class="mui-pull-right account-setting-field">{{user.info.birthday ? user.info.birthday : '请选择'}}</span></a>
               </li>
-              <!--<li class="mui-table-view-cell">-->
-                <!--<a class="mui-navigate-right" @tap.stop.prevent="selectHomeCity">家乡地区<span class="mui-pull-right account-setting-field">请选择</span></a>-->
-              <!--</li>-->
+              <li class="mui-table-view-cell">
+                <a class="mui-navigate-right" @tap.stop.prevent="selectHomeCity">家乡地区<span class="mui-pull-right account-setting-field">{{ home_city !== ' '?home_city:'请选择' }}</span></a>
+              </li>
               <li class="mui-table-view-cell">
                 <a href="#account_description" class="mui-navigate-right">个人签名<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{user.info.description ? user.info.description : '请填写'}}</span></a>
@@ -353,6 +353,8 @@
           title:'',
           province:'',
           city:'',
+          hometown_city:'',
+          hometown_province:'',
           address_detail:'',
           email:'',
           birthday:'',
@@ -392,6 +394,7 @@
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
       work_city:'',
+      home_city:'',
       object_type: 'user'
     }),
     created () {
@@ -438,7 +441,25 @@
     },
     methods: {
       selectHomeCity(){
-          mui.alert('此功能暂不可用');
+        var cityPicker = new mui.PopPicker({
+          layer: 2
+        });
+        cityPicker.setData(cityData);
+
+        if (this.user.info) {
+          cityPicker.pickers[0].setSelectedValue(this.user.info.hometown_province.key, 0, () => {
+            cityPicker.pickers[1].setSelectedValue(this.user.info.hometown_city.key, 0, () => {
+            });
+          });
+        }
+
+        cityPicker.show(items => {
+          this.user.info.hometown_province = items[0].value;
+          this.user.info.hometown_city = items[1].value;
+          this.home_city = items[0].text + " " + items[1].text;
+          this.newItemChange = '';
+          this.submitInfo();
+        });
       },
       selectSex(){
 
@@ -528,6 +549,7 @@
           localEvent.setLocalItem('trains', newTrains);
 
           this.work_city = user.info.province.name + ' ' + user.info.city.name;
+          this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name;
 
           this.user = user;
           this.loading = 0;
@@ -694,6 +716,14 @@
         if (typeof(data.province) === 'object') {
           data.province = data.province.key;
         }
+
+        if (typeof(data.hometown_city) === 'object') {
+          data.hometown_city = data.hometown_city.key;
+        }
+        if (typeof(data.hometown_province) === 'object') {
+          data.hometown_province = data.hometown_province.key;
+        }
+
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
             mui.toast('保存成功');
