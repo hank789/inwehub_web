@@ -294,16 +294,12 @@
 
         Picker.setData([
           {
-            value: '3-5年',
-            text: '3-5年'
+            value: '10-15年',
+            text: '10-15年'
           },
           {
-            value: '5-10年',
-            text: '5-10年'
-          },
-          {
-            value: '10-20年',
-            text: '10-20年'
+            value: '15-20年',
+            text: '15-20年'
           },
           {
             value: '20年以上',
