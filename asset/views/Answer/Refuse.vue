@@ -33,7 +33,7 @@
 
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                      @tap.stop.prevent="submit">提交反馈
+                      @tap.stop.prevent="submit" :disabled="buttonRefuseDisable">提交反馈
               </button>
             </div>
 
@@ -57,7 +57,8 @@
       descMaxLength: 200,
       description: '',
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      buttonRefuseDisable:false
     }),
     computed: {
       nothing () {
@@ -110,7 +111,9 @@
 
         mui.confirm("选择确定后您将不能再回答该问题了，您确定拒绝回答么？", null, ['取消', '确定'], e => {
           if (e.index == 1) {
+            this.buttonRefuseDisable = true;
             postRequest(`question/rejectAnswer`, data).then(response => {
+              this.buttonRefuseDisable = false;
               var code = response.data.code;
               if (code !== 1000) {
                 mui.alert(response.data.message);
