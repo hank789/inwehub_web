@@ -150,6 +150,7 @@
       rateStar: 0,
       starDesc: '评价会让我们做的更好',
       descMaxLength: 500,
+      buttonCommentDisabled:false,
       commentState:false //是否已评价
     }),
     mounted(){
@@ -190,7 +191,13 @@
           rate_star: this.rateStar
         };
 
+
+        if (this.buttonCommentDisabled) {
+            return;
+        }
+        this.buttonCommentDisabled = true;
         postRequest(`answer/feedback`, data).then(response => {
+          this.buttonCommentDisabled = false;
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -198,6 +205,7 @@
           }
 
           this.commentState = true;
+          this.getDetail();
         });
       },
       setRating: function (rating) {
