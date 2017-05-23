@@ -29,7 +29,7 @@
     },
     methods: {
         pay(id){
-          
+
           if (!mui.os.plus) {
               mui.alert('仅支持app');
               return;
@@ -99,7 +99,7 @@
                 continue;
               }
               this.pays[channel.id] = channel;
-              document.getElementById(channel.id).style.display = "block";
+              //document.getElementById(channel.id).style.display = "block";
               checkServices(channel);
             }
           }, function (e) {
