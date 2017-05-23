@@ -6,26 +6,31 @@
       <h1 class="mui-title">账单明细</h1>
     </header>
 
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="myMoney mui-table-view">
         <div class="mui-table-view-cell">
           <span class="mui-icon fa fa-diamond"></span>
-          <div class="money">--.--</div>
+          <div class="money">{{ totalMoney }}</div>
           <div class="unit">余额 （元）</div>
         </div>
       </div>
       <div class="type">交易记录</div>
       <div class="list">
-        <div class="item mui-table-view">
+        <div class="item mui-table-view" v-for="(item, index) in list">
           <div class="mui-table-view-cell">
             <div class="first">
-              <span class="title">交易记录</span>
-              <span class="m">--.--元</span>
+              <span class="title">{{ item.title }}</span>
+              <span class="m">{{ item.change_money*item.io }}元</span>
             </div>
             <div class="second">
-              <span class="status">处理中</span>
-              <span class="time">2017-01-01 00:00:21</span>
+              <span class="status">{{ getStates(item) }}</span>
+              <span class="time">{{ item.created_at }}</span>
             </div>
           </div>
         </div>
@@ -37,22 +42,47 @@
 </template>
 
 <script>
-  import {apiRequest} from '../../utils/request';
   import oauth from '../../components/oauth/oauth.vue';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
   export default {
     data: () => ({
-
+      list:[],
+      totalMoney:localEvent.getLocalItem('wallet').totalMoney,
+      loading: true,
+      loading_gif: loading_gif,
     }),
     computed: {
 
     },
-    components: {
-      oauth
+
+    created () {
+      postRequest(`account/money_log`, {}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.alert(response.data.message);
+          this.$router.go(-1);
+        }
+
+        this.list = response.data.data;
+        this.loading = false;
+      });
     },
     methods: {
-      check_withdraw() {
-
+      getStates(item){
+          switch(item.status) {
+            case 0:
+                return '处理中';
+                break;
+            case 1:
+                return '处理成功';
+                break;
+            case 2:
+                return '处理失败';
+                break;
+          }
+          return '未知';
       }
     },
     watch: {

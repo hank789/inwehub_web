@@ -1,6 +1,8 @@
 <template>
   <div>
 
+
+
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的钱包</h1>
@@ -9,20 +11,26 @@
     </header>
 
 
-    <div class="mui-content">
+    <div class="mui-content loading" v-show="loading">
+      <div class="loading">
+        <img :src="loading_gif"/>
+      </div>
+    </div>
+
+    <div class="mui-content" v-show="!loading">
       <div class="myMoney">
 
         <span class="mui-icon fa fa-diamond"></span>
-        <div class="money">--.--</div>
+        <div class="money">{{ totalMoeny }}</div>
         <div class="unit">余额 （元）</div>
-        <div class="info">您有 --.-- 元正在结算处理中</div>
+        <div class="info"><span v-show="settlementMoney">您有 {{ settlementMoney }} 元正在结算处理中</span></div>
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @tap.stop.prevent="$router.push('/my/finance/withdraw')">提现
               </button>
         </div>
-        <div class="help">每天可申请提现一次，每次最低10元，最高2000元</div>
+        <div class="help">每天可申请提现一次，每次最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元</div>
       </div>
     </div>
 
@@ -32,10 +40,17 @@
 <script>
   import {apiRequest} from '../../utils/request';
   import oauth from '../../components/oauth/oauth.vue';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
   export default {
     data: () => ({
-
+      loading: true,
+      loading_gif: loading_gif,
+      totalMoeny:'--',
+      settlementMoney:'--',  //结算中的资金
+      withdrawMinMoney:'--', //用户单次最低提现金额
+      withdrawMaxMoney:'--', //用户单次最高提现金额
     }),
     computed: {
 
@@ -47,6 +62,23 @@
       check_withdraw() {
 
       }
+    },
+    created () {
+      postRequest(`account/wallet`, {}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.alert(response.data.message);
+          this.$router.go(-1);
+        }
+
+        this.totalMoeny = response.data.data.total_money;
+        this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
+        this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
+        this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
+        this.loading = 0;
+
+        localEvent.setLocalItem('wallet', {totalMoney:this.totalMoeny})
+      });
     },
     watch: {
 
