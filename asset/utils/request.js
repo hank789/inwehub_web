@@ -3,7 +3,6 @@ import localEvent from '../stores/localStorage';
 
 const baseURL = `http://47.92.24.67/`;
 const api = `http://47.92.24.67/api`;
-var isRequesting = false;
 
 // Export a method to create the requested address.
 export const createRequestURI = PATH => `${baseURL}/${PATH}`;
@@ -23,21 +22,13 @@ export const addAccessToken = () => {
 export default axios;
 
 export function apiRequest (url, data) {
-  // if (isRequesting) {
-  //   return new Promise((resolve, reject) => {
-  //       reject()
-  //   }).catch((e) => {
-  //
-  //   })
-  // }
-  isRequesting = true;
+
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
   )
     .then(response => {
-      isRequesting = false;
       var code = response.data.code;
       if (code !== 1000) {
         mui.toast(response.data.message);
@@ -46,44 +37,22 @@ export function apiRequest (url, data) {
       return response.data.data;
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-      isRequesting = false;
-      this.$store.dispatch('notice', cb => {
-        cb({
-          text: message,
-          time: 2000,
-          status: false
-        });
-      });
+      mui.toast(message);
+      return false;
     })
 }
 
 
 export function postRequest (url, data) {
-  // if (isRequesting) {
-  //   return new Promise((resolve, reject) => {
-  //     reject()
-  //   }).catch((e) => {
-  //
-  //   })
-  // }
-  isRequesting = true;
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
   )
     .then(response => {
-      isRequesting = false;
       return response;
     })
-    .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-      isRequesting = false;
-      this.$store.dispatch('notice', cb => {
-        cb({
-          text: message,
-          time: 2000,
-          status: false
-        });
-      });
+    .catch(e => {
+      return {data:{message: '网络状况堪忧', code:0}};
     })
 }
