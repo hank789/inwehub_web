@@ -68,7 +68,7 @@
           <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
           <div class="button-wrapper">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer" :disabled="buttonAnswerDisable">我回答好了</button>
           </div>
         </form>
       </div>
@@ -156,7 +156,8 @@
       description: '',
       descMaxLength: 1000,
       loading: true,
-      loading_gif: loading_gif
+      loading_gif: loading_gif,
+      buttonAnswerDisable:false
     }),
     computed: {
       descLength() {
@@ -200,7 +201,10 @@
 
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
           if (e.index == 1) {
+            this.buttonAnswerDisable = true;
             postRequest(`answer/store`, data).then(response => {
+              this.buttonAnswerDisable = false;
+
               var code = response.data.code;
               if (code !== 1000) {
                 mui.alert(response.data.message);
