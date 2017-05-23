@@ -157,7 +157,8 @@
       descMaxLength: 1000,
       loading: true,
       loading_gif: loading_gif,
-      buttonAnswerDisable:false
+      buttonAnswerDisable:false,
+      buttonSelectTimeDisable:false
     }),
     computed: {
       descLength() {
@@ -201,7 +202,12 @@
 
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
           if (e.index == 1) {
+            if (this.buttonAnswerDisable) {
+                return;
+            }
+
             this.buttonAnswerDisable = true;
+
             postRequest(`answer/store`, data).then(response => {
               this.buttonAnswerDisable = false;
 
@@ -226,7 +232,13 @@
           promise_time:time
         };
 
+        if (this.buttonSelectTimeDisable) {
+            return;
+        }
+
+        this.buttonSelectTimeDisable = true;
         postRequest(`answer/store`, data).then(response => {
+          this.buttonSelectTimeDisable = false;
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);

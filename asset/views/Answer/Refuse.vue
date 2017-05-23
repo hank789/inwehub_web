@@ -111,6 +111,11 @@
 
         mui.confirm("选择确定后您将不能再回答该问题了，您确定拒绝回答么？", null, ['取消', '确定'], e => {
           if (e.index == 1) {
+
+            if (this.buttonRefuseDisable) {
+                return;
+            }
+
             this.buttonRefuseDisable = true;
             postRequest(`question/rejectAnswer`, data).then(response => {
               this.buttonRefuseDisable = false;
