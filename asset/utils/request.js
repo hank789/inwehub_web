@@ -23,13 +23,13 @@ export const addAccessToken = () => {
 export default axios;
 
 export function apiRequest (url, data) {
-  if (isRequesting) {
-    return new Promise((resolve, reject) => {
-        reject()
-    }).catch((e) => {
-
-    })
-  }
+  // if (isRequesting) {
+  //   return new Promise((resolve, reject) => {
+  //       reject()
+  //   }).catch((e) => {
+  //
+  //   })
+  // }
   isRequesting = true;
   return addAccessToken().post(createAPI(url), data,
     {
@@ -59,13 +59,13 @@ export function apiRequest (url, data) {
 
 
 export function postRequest (url, data) {
-  if (isRequesting) {
-    return new Promise((resolve, reject) => {
-      reject()
-    }).catch((e) => {
-
-    })
-  }
+  // if (isRequesting) {
+  //   return new Promise((resolve, reject) => {
+  //     reject()
+  //   }).catch((e) => {
+  //
+  //   })
+  // }
   isRequesting = true;
   return addAccessToken().post(createAPI(url), data,
     {
