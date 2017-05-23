@@ -1,7 +1,7 @@
 <template>
   <div id="pay_content">
-    <div id="wxpay" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('wxpay')">微信支付</div>
-    <div id="alipay" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('alipay')">支付宝支付</div>
+    <div id="wxpay" class="mui-btn mui-btn-block mui-btn-green" v-if="wechatPay" @tap.stop.prevent="pay('wxpay')">微信支付</div>
+    <div id="alipay" class="mui-btn mui-btn-block mui-btn-primary" v-if="aliPay"  @tap.stop.prevent="pay('alipay')">支付宝支付</div>
     <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('appleiap')">苹果支付</div>
   </div>
 </template>
@@ -13,14 +13,28 @@
     data(){
       return{
         pays:{},
-        pay_waiting: null
+        pay_waiting: null,
+        wechatPay:false,
+        aliPay:false
       }
     },
     props: ['pay_object_type','pay_money'],
     components:{
     },
+    created () {
+      apiRequest(`pay/config`,{}).then(response_data => {
+        this.wechatPay = response_data.pay_method_weixin;
+        this.aliPay = response_data.pay_method_ali;
+      });
+    },
     methods: {
         pay(id){
+          
+          if (!mui.os.plus) {
+              mui.alert('仅支持app');
+              return;
+          }
+
           if(this.pay_waiting){return;}//检查是否请求订单中
           if(id==='appleiap'){
             mui.toast('暂不支持应用内支付');
@@ -75,24 +89,24 @@
         }
     },
     mounted() {
-      mui.plusReady( () => {
-        if (mui.os.plus) {
+      if (mui.os.plus) {
+        mui.plusReady(() => {
           // 获取支付通道
-          plus.payment.getChannels((channels)=>{
-            for(var i in channels){
-              var channel=channels[i];
-              if(channel.id=='qhpay'||channel.id=='qihoo'){	// 过滤掉不支持的支付通道：暂不支持360相关支付
+          plus.payment.getChannels((channels) => {
+            for (var i in channels) {
+              var channel = channels[i];
+              if (channel.id == 'qhpay' || channel.id == 'qihoo') {	// 过滤掉不支持的支付通道：暂不支持360相关支付
                 continue;
               }
-              this.pays[channel.id]=channel;
-              document.getElementById(channel.id).style.display="block";
+              this.pays[channel.id] = channel;
+              document.getElementById(channel.id).style.display = "block";
               checkServices(channel);
             }
-          },function(e){
-            mui.toast('获取支付通道失败：'+e.message);
+          }, function (e) {
+            mui.toast('获取支付通道失败：' + e.message);
           });
-        }
-      });
+        });
+      }
 
       // 检测是否安装支付服务
       function checkServices(pc){
