@@ -249,6 +249,20 @@
     mounted () {
 
     },
+    beforeRouteLeave(to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+
+      popDiv = document.querySelector('.mui-poppicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+      next();
+    },
     computed:{
       descLength() {
         if (this.edu.description)

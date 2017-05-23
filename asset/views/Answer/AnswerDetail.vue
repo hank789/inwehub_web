@@ -364,6 +364,20 @@
         });
       }
     },
+    beforeRouteLeave(to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+
+      popDiv = document.querySelector('.mui-poppicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+      next();
+    },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {

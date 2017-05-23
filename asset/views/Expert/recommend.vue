@@ -315,6 +315,20 @@
     mounted(){
       mui('.mui-scroll-wrapper').scroll();
     },
+    beforeRouteLeave(to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+
+      popDiv = document.querySelector('.mui-poppicker');
+      if (popDiv) {
+        document.body.removeChild(popDiv);
+      }
+
+      next();
+    },
     components: {
       industryTagsIndexedList
     },
