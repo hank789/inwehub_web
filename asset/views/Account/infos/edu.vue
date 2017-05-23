@@ -5,7 +5,7 @@
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
       <h1 class="mui-title">教育经历</h1>
       <a @tap.stop.prevent="submit"
-         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
+         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" :disabled="buttonSaveDisabled">保存</a>
     </header>
 
     <div class="mui-content">
@@ -82,6 +82,7 @@
         description:''
       },
       descMaxLength: 2000,
+      buttonSaveDisabled:false
     }),
     methods: {
       selectMajor(){
@@ -221,6 +222,11 @@
             data.id = this.id;
         }
 
+        if (this.buttonSaveDisabled) {
+            return ;
+        }
+
+        this.buttonSaveDisabled = true;
         postRequest(url, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
