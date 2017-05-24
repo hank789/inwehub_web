@@ -254,7 +254,7 @@
     height:37px;
     line-height: 37px;
     text-align: center;
-    margin-left:15px;
+    margin-left:3%;
   }
   .professorDesc{
     color:#4A4A4A;
@@ -312,7 +312,7 @@
 
   .bountyDesc .more{
     display: inline-block;
-    width:70px;
+    width: 63px;
     float:right;
     position: relative;
   }
