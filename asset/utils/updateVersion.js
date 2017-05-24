@@ -18,8 +18,9 @@ function checkUpdate(){
               //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
               location.href = 'https://www.pgyer.com/Zoy3';
             } else if (mui.os.android) {
-              plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
-                plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
+              //market://details?id=io.dcloud.HelloMUI
+              plus.runtime.openURL("https://www.pgyer.com/hfkG", function(e) {
+                plus.runtime.openURL("https://www.pgyer.com/hfkG", function(e) {
                   mui.alert("未安装360手机助手和应用宝，暂时无法更新");
                 }, "com.qihoo.appstore");
               }, "com.tencent.android.qqdownloader");
