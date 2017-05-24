@@ -16,15 +16,15 @@
       <div class="mui-content mui-row mui-fullscreen" v-show="!loading">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
-            <template v-for="(type, index) in types">
-              <a class="mui-control-item " :class="index == 0?'mui-active':''" :href="'#' + index">{{ type }}</a>
+            <template v-for="(item, index) in types">
+              <a class="mui-control-item " :class="index == 0?'mui-active':''" :href="'#' + index">{{ item.text }}</a>
             </template>
           </div>
         </div>
         <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
-          <div :id="index" class="mui-control-content mui-active" v-for="(item, key, index) in subTypes">
+          <div :id="index" class="mui-control-content mui-active" v-for="(item, index) in types">
             <ul class="mui-table-view">
-              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(types[index], subType)" v-for="(subType, subIndex) in item">{{ subType }}</li>
+              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(item.text, itemSub.text, item.value, itemSub.value)" v-for="(itemSub, subIndex) in item.children">{{ itemSub.text }}</li>
             </ul>
           </div>
         </div>
@@ -54,8 +54,8 @@
       }
     },
     methods: {
-      selectTypeItem (type, subType) {
-        var selectType = type + '-' + subType;
+      selectTypeItem (type, subType, typeValue, subTypeValue) {
+        var selectType = type + '-' + subType + ':' + subTypeValue;
         this.$store.dispatch(ASK_TYPE_SELECT, selectType);
         this.$router.go(-1);
       },
@@ -66,6 +66,7 @@
 
       //if (askTypes.length == 0 && askTypes != 'undefined') {
       postRequest(`question/request`, {}).then(response => {
+          
         var code = response.data.code;
         if (code !== 1000) {
           mui.alert(response.data.message);

@@ -41,11 +41,12 @@ const getters = {
 
 
   [ASK_TYPES]: (state) => {
-    var subTypes = [];
-    for(var i in state.types) {
-      subTypes.push(i);
-    }
-    return subTypes;
+    return state.types;
+    // var subTypes = [];
+    // for(var i in state.types) {
+    //   subTypes.push(i);
+    // }
+    // return subTypes;
   }
 };
 
