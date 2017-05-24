@@ -46,7 +46,6 @@
         <div class="text">
           <div class="content mui-ellipsis-3">
             SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
-            AP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
         </div>
           <div class="realname">Mike zhang</div>
           <div class="amount">额外奖励100元</div>
@@ -60,7 +59,6 @@
         <div class="text">
           <div class="content mui-ellipsis-3">
             SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
-            AP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
         </div>
           <div class="realname">Mike zhang</div>
           <div class="amount">额外奖励100元</div>
