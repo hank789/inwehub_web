@@ -117,7 +117,6 @@
 
       //监听推送
       mui.plusReady(function() {
-
         if (mui.os.plus) {
           var noticeTo = function(payload){
             switch(payload.object_type) {
@@ -144,7 +143,11 @@
             // 提示点击的内容
             if ( msg.payload ) {
               //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
-              var payload =  JSON.parse(msg.payload);
+              if (mui.os.ios) {
+                var payload =  msg.payload;
+              } else {
+                var payload =  JSON.parse(msg.payload);
+              }
               noticeTo(payload);
             }
 
@@ -159,7 +162,12 @@
 
             if ( msg.payload ) {
               //plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
-              var payload =  JSON.parse(msg.payload);
+              if (mui.os.ios) {
+                var payload =  msg.payload.payload;
+              } else {
+                var payload =  JSON.parse(msg.payload);
+              }
+
               var btnArray = ['取消', '前往查看'];
               mui.confirm(payload.title, '提示', btnArray, (e) => {
                 if (e.index == 1) {
