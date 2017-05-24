@@ -10,22 +10,22 @@
 
     <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
-        <span class="mui-icon myicon myicon-home"></span><span class="mui-icon myicon myicon-point" v-show="isHome"></span>
+        <span class="mui-icon myicon myicon-home"></span><div><span class="mui-icon myicon myicon-point" v-show="isHome"></span></div>
 
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-        <span class="mui-icon myicon myicon-task"><span class="mui-badge" v-if="taskCount">{{ taskCount }}</span></span><span class="mui-icon myicon myicon-point" v-show="isAsk"></span>
+        <span class="mui-icon myicon myicon-task"><span class="mui-badge" v-if="taskCount">{{ taskCount }}</span></span><div><span class="mui-icon myicon myicon-point" v-show="isAsk"></span></div>
 
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
-        <span class="mui-icon myicon myicon-find"></span><span class="mui-icon myicon myicon-point" v-show="isDiscover"></span>
+        <span class="mui-icon myicon myicon-find"></span><div><span class="mui-icon myicon myicon-point" v-show="isDiscover"></span></div>
 
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
-        <span class="mui-icon myicon myicon-my"></span><span class="mui-icon myicon myicon-point" v-show="isMy"></span>
+        <span class="mui-icon myicon myicon-my"></span><div><span class="mui-icon myicon myicon-point" v-show="isMy"></span></div>
 
       </div>
     </nav>
@@ -196,12 +196,14 @@
     position:relative;
   }
 
-  .footer-bar .mui-active .myicon-point{
+  .footer-bar .mui-active div{
     position: absolute;
+    width:100%;
+    bottom:5px;
+  }
+  .footer-bar .mui-active .myicon-point{
     width: 3px;
     height: 3px;
-    top: 39px;
-    left: 51px;
   }
 </style>
 
