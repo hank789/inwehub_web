@@ -192,11 +192,16 @@
     border-top: 1px solid #D9D9D9;
   }
 
+  .footer-bar .mui-tab-item{
+    position:relative;
+  }
+
   .footer-bar .mui-active .myicon-point{
-    width:3px;
-    height:3px;
-    top:8px;
-    left:-13px;
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    top: 39px;
+    left: 51px;
   }
 </style>
 
