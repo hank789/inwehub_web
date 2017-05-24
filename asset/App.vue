@@ -120,7 +120,7 @@
 
         if (mui.os.plus) {
           var noticeTo = function(payload){
-               switch(payload.object_type) {
+            switch(payload.object_type) {
                  case 'question':
                      router.push('/ask/'+payload.object_id);
                      break;
@@ -131,7 +131,7 @@
           };
 
           // 监听点击消息事件
-          plus.push.addEventListener( "click", function( msg ) {
+          plus.push.addEventListener( "click", ( msg ) => {
             // 判断是从本地创建还是离线推送的消息
             switch( msg.payload ) {
               case "LocalMSG":
@@ -143,18 +143,14 @@
             }
             // 提示点击的内容
             if ( msg.payload ) {
-              if ( typeof(msg.payload)=="string" ) {
-
-              } else {
-                //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
-                var payload =  JSON.parse(msg.payload);
-                noticeTo(payload);
-              }
+              //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
+              var payload =  JSON.parse(msg.payload);
+              noticeTo(payload);
             }
 
           }, false );
           // 监听在线消息事件
-          plus.push.addEventListener( "receive", function( msg ) {
+          plus.push.addEventListener( "receive", ( msg ) => {
             if ( msg.aps ) {  // Apple APNS message
               console.log( "接收到在线APNS消息：" );
             } else {
@@ -162,18 +158,14 @@
             }
 
             if ( msg.payload ) {
-              if ( typeof(msg.payload)=="string" ) {
-
-              } else {
-                //plus.nativeUI.alert( "receive:payload(JSON): "+JSON.stringify(msg.payload) );
-                var payload =  JSON.parse(msg.payload);
-                var btnArray = ['取消', '前往查看'];
-                mui.confirm(payload.title, '提示', btnArray, (e) => {
-                  if (e.index == 1) {
-                    noticeTo(payload);
-                  }
-                })
-              }
+              //plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
+              var payload =  JSON.parse(msg.payload);
+              var btnArray = ['取消', '前往查看'];
+              mui.confirm(payload.title, '提示', btnArray, (e) => {
+                if (e.index == 1) {
+                  noticeTo(payload);
+                }
+              });
             }
 
           }, false );
