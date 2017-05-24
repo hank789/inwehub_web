@@ -8,25 +8,25 @@
       </transition>
     </div>
 
-    <nav class="mui-bar mui-bar-tab" v-show='showBottom'>
+    <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
-        <span class="mui-icon fa fa-question"></span>
-        <span class="mui-tab-label">提问</span>
+        <span class="mui-icon myicon myicon-home"></span><span class="mui-icon myicon myicon-point" v-show="isHome"></span>
+
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-        <span class="mui-icon fa fa-tasks"><span class="mui-badge" v-if="taskCount">{{ taskCount }}</span></span>
-        <span class="mui-tab-label">任务</span>
+        <span class="mui-icon myicon myicon-task"><span class="mui-badge" v-if="taskCount">{{ taskCount }}</span></span><span class="mui-icon myicon myicon-point" v-show="isAsk"></span>
+
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
-        <span class="mui-icon fa fa-search"></span>
-        <span class="mui-tab-label">发现</span>
+        <span class="mui-icon myicon myicon-find"></span><span class="mui-icon myicon myicon-point" v-show="isDiscover"></span>
+
       </div>
 
       <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
-        <span class="mui-icon fa fa-user"></span>
-        <span class="mui-tab-label">我的</span>
+        <span class="mui-icon myicon myicon-my"></span><span class="mui-icon myicon myicon-point" v-show="isMy"></span>
+
       </div>
     </nav>
   </div>
@@ -161,4 +161,21 @@
     }
   }
 </script>
+
+<style scoped>
+  .footer-bar{
+    background-color:#fff;
+    box-shadow: none;
+  }
+  .footer-bar{
+    border-top: 1px solid #D9D9D9;
+  }
+
+  .footer-bar .mui-active .myicon-point{
+    width:3px;
+    height:3px;
+    top:8px;
+    left:-13px;
+  }
+</style>
 

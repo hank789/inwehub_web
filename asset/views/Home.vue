@@ -1,100 +1,88 @@
 <template>
   <div>
+  <header class="mui-bar mui-bar-dark mui-bar-nav">
+    <h1 class="mui-title">InweHub</h1>
+  </header>
 
-    <header class="mui-bar mui-bar-nav">
-      <h1 class="mui-title">InweHub</h1>
-    </header>
+  <div class="mui-content">
+    <div class="professor">
+      <div class="avatar">
+        <div class="avatarInner">
+          <img src="../statics/images/uicon.jpg" class="avatar"/>
+        </div>
+      </div>
+      <div class="text">
+        <div class="realname">郭大红</div>
+        <div class="label"><div class="collect"><span class="mui-icon fa fa-vimeo"></span></div>今日专家</div>
+        <div class="options">
+          <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 向他提问</div>
+          <div class="collect"><span class="mui-icon fa fa-heart-o"></span></div>
+          <div class="collect"><span class="mui-icon fa fa-share"></span></div>
+        </div>
+      </div>
+    </div>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
+    <div class="professorDesc">
+      <div class="title"><span class="icon"></span></div>
+      <div class="detail mui-ellipsis-3">SAP咨询行业15年从业经历，熟悉离散制造行业，专注pp等模块，是一位非常自身的超级顾问。写三行，永远写三行都写三行。都写三行。都写三行。都写三行。都写三行。</div>
+    </div>
+
+
+    <div class="bountyDesc">
+      <div class="title">
+        <span class="icon"></span>奖励问答
+            <span class="titleSub">优质问与答将会获现金奖励</span>
+        <span class="more mui-navigate-right">更多</span>
       </div>
     </div>
 
 
-    <div class="mui-content" v-show="!loading">
-      <div class="homeWrapper">
-        <div class="topWrapper">
-          <div class="left">
-            <div class="title">资深专家推荐</div>
-            <img :src="headerImageUrl"/>
-          </div>
-          <div class="right">
-            <div class="item apply" @tap.stop.prevent="$router.push('/expert')">
-              <div class="buttons">
-                <span class="mui-icon fa fa-check"></span><span class="mui-icon fa fa-chevron-right"></span>
-              </div>
-              申请专家
+    <div class="bountyDescList">
 
-
-            </div>
-
-            <div class="item recommend" @tap.stop.prevent="$router.push('/expert/recommend')">
-              <div class="buttons">
-                <span class="mui-icon fa fa-gift"></span><span class="mui-icon fa fa-chevron-right"></span>
-              </div>
-              推荐专家
-
-
-            </div>
-          </div>
+      <div class="detail">
+        <div class="image">
+          <img src="../statics/images/home-youzhitiwen.png"/>
         </div>
-        <div class="ask"><span class="title">本周优质提问</span><span class="mui-icon fa fa-refresh fa-spin" v-if="loopAsk"></span><span class="mui-icon fa fa-refresh" @tap.stop.prevent="getAsks" v-else></span></div>
-        <div class="askList">
-          <div class="person" v-for="(person, index) in recommendQa" >
-            <div class="avatar">
-              <div class="avatarInner">
-                <img :src="person.user_avatar_url"/>
-              </div>
-            </div>
-            <div class="mui-media-body">
-              <span class="username">{{ person.user_name }}</span>
-              <span class="status">专家已回答</span>
-              <div class="mui-ellipsis-2">
-                {{ person.description }}
-
-
-              </div>
-              <span class="amount">奖励{{ person.price }}元</span>
-            </div>
-          </div>
+        <div class="text">
+          <div class="content mui-ellipsis-3">
+            SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
+            AP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
         </div>
-
-        <div class="answer"><span class="title">SAP行业专业问答</span><span class="label">优质提问返现</span>
+          <div class="realname">Mike zhang</div>
+          <div class="amount">额外奖励100元</div>
         </div>
+      </div>
 
-
-        <div class="tags"><span>专业</span><span>|</span><span>高效</span><span>|</span><span>准确</span></div>
-        <div class="askButton">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/ask')">
-            立即提问<br/><span>平台服务保障</span></button>
+      <div class="detail">
+        <div class="image">
+          <img src="../statics/images/home-youzhitiwen.png"/>
         </div>
-        <div class="tabs">
-          <div class="tabs-item">
-            <span class="mui-icon fa fa-user-secret"></span>
-            <span class="text">{{ expertNumber }}名行业专家</span>
-          </div>
-          <div class="tabs-item">
-            <span class="mui-icon fa fa-clock-o"></span>
-            <span class="text">平均2小时应答</span>
-          </div>
-          <div class="tabs-item">
-            <span class="mui-icon fa fa-thumbs-up"></span>
-            <span class="text">跨越{{ industryNumber }}个行业</span>
-          </div>
+        <div class="text">
+          <div class="content mui-ellipsis-3">
+            SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
+            AP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
         </div>
-        <div class="mb70"></div>
+          <div class="realname">Mike zhang</div>
+          <div class="amount">额外奖励100元</div>
+        </div>
       </div>
     </div>
 
+    <div class="askDetail">
+      <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 付费提问</div>
+    </div>
+
+    <div class="mb70"></div>
+  </div>
   </div>
 </template>
-
 <script>
 
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import {apiRequest} from '../utils/request';
+  import homeJiangli from '../statics/images/home-jiangli.png';
+  import homeJinpai from '../statics/images/home-jinpai.png';
 
   const Home = {
     data: () => ({
@@ -105,7 +93,9 @@
       industryNumber:'--',
       headerImageUrl:'',
       recommendQa:[],
-      loading_gif:loading_gif
+      loading_gif:loading_gif,
+      homeJiangli:homeJiangli,
+      homeJinpai:homeJinpai
     }),
     created () {
       this.getData();
@@ -135,106 +125,65 @@
 </script>
 
 <style scoped>
-  .homeWrapper{
-    border-bottom:1px solid #f2f2f2;
-  }
-  .topWrapper {
-    height: 164px;
-    display: -webkit-flex;
-    display: flex;
-    background: #fff;
-  }
-  .topWrapper .left img{
-    position:absolute;
-    width:100%;
-    height:100%;
-    z-index: 2;
-  }
-  .topWrapper .left {
-    position: relative;
-    flex-grow: 1;
-    -webkit-flex-grow: 1;
-    border-bottom:1px solid #f2f2f2;
-  }
-
-  .topWrapper .left .title {
-    font-weight: bold;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    z-index: 3;
-  }
-
-  .topWrapper .right {
-    width: 101px;
-    border-left: 1px solid #f2f2f2;
-  }
-
-  .topWrapper .right .item {
-    height: 82px;
-    border-bottom: 1px solid #f2f2f2;
+  .professor{
+    background-color:#161616;
     text-align: center;
-    padding-top: 10px;
+    position:relative;
+    height:136px;
   }
 
-  .topWrapper .buttons {
-    position: relative;
-    margin-bottom: 5px;
-  }
-
-  .topWrapper .fa-check, .topWrapper .fa-gift{
-    color: #587dd5;
-    font-size: 32px;
-    opacity: 0.5;
-  }
-
-  .topWrapper .fa-chevron-right {
-    color: #bbb;
-    position: relative;
-    top: -7px;
-    right: -7px;
-    font-size: 18px;
-  }
-
-  .ask {
-    height: 35px;
-    line-height: 35px;
-    position: relative;
-  }
-
-  .ask .title {
-    padding-left: 10px;
-    font-weight: bold;
-  }
-
-  .ask .mui-icon {
-    font-size: 24px;
-    color: #587dd5;
-    position: absolute;
-    opacity: 0.6;
-    right: 20px;
-    top: 5px;
-  }
-
-  .askList {
-    background: #fff;
-  }
-
-  .askList .avatar {
-    z-index: 0;
-    color: #ffffff;
-    float: left;
+  .professor .text{
+    width: 65%;
+    height: 100%;
+    padding-top:20px;
+    padding-left:0px;
     display: inline-block;
-    margin-top: 3px;
-    margin-right: 10px;
-    height: 32px;
-    width: 32px;
+    color:#fff;
+    text-align: left;
+
+  }
+
+  .professor .label{
+    position: absolute;
+    right:10px;
+    top:10px;
+  }
+
+
+  .professor .text .realname{
+    font-size:20px;
+    font-weight:bolder;
+    margin-left:20px;
+  }
+
+  .mui-bar-dark{
+    background-color:#161616;
+  }
+
+
+  .mui-title{
+    color:#fff;
+    font-size:18px;
+  }
+
+  .mui-bar-nav{
+    box-shadow:none;
+  }
+
+  .avatar{
+    z-index: 9;
+    color: #ffffff;
+    display: inline-block;
+    margin-top:10px;
+    height: 100px;
+    width: 100px;
     font-size: 20px;
     text-align: center;
     border-radius: 50%;
+    vertical-align: top;
   }
 
-  .askList .avatarInner {
+  .avatar .avatarInner{
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -251,131 +200,214 @@
     justify-content: center;
   }
 
-  .askList .avatar img {
+  .avatar img {
     border-radius: 50%;
     width: 100%;
     height: 100%;
     display: block;
   }
 
-  .askList .username, .askList .status {
-    color: #a8a8a8;
-    font-size: 12px;
-  }
-
-  .askList .mui-media-body {
+  .professor .options{
     position: relative;
-    padding-left: 10px;
+    margin-top:30px;
+    margin-left:10px;
   }
 
-  .askList .mui-media-body div {
-    color: #555;
-    font-size: 12px;
-  }
-
-  .askList .mui-ellipsis-2 {
-    margin-top: 5px;
-  }
-
-  .askList .amount {
-    background: #e26153;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 1px 5px;
-    position: absolute;
-    right: 0;
-    top: 3px;
-    -webkit-transform: scale(.8);
-    transform: scale(.8);
-  }
-
-  .askList .person {
-    margin: 0px 10px;
-    padding: 10px 0;
-    border-top: 1px solid #f2f2f2;
-  }
-
-  .answer {
+  .professor .buttonAsk{
     position: relative;
-    height: 35px;
-    line-height: 35px;
-    border-top: 1px solid #f2f2f2;
-
-  }
-
-  .answer .title {
-    font-weight: bold;
-    margin-left: 10px;
-  }
-
-  .answer .label {
-    background: #e26153;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 1px 5px;
-    position: absolute;
-    line-height: 21px;
-    right: 8px;
-    top: 7px;
-    -webkit-transform: scale(.8);
-    transform: scale(.8);
-  }
-
-  .tabs {
-    margin-top: 15px;
-    padding-bottom: 10px;
-  }
-
-  .tabs .tabs-item {
     display: inline-block;
+    width:48%;
+    height:37px;
+    font-size:14px;
+    line-height: 37px;
     text-align: center;
-    width: 32%;
+    border:1px solid #fff;
+    border-radius: 50px;
+    padding-left:20px;
+  }
+  .professor .buttonAsk span{
+    position: absolute;
+    font-size: 30px;
+    left: 10px;
+    top: -4px;
   }
 
-  .tabs .tabs-item .mui-icon {
-    display: block;
-    color: #587dd5;
-    font-size: 32px;
-    margin-bottom: 10px;
+  .professor .label .collect{
+    display: inline-block;
+
+    border:1px solid #86C9EF;
+    border-radius:50%;
+    width:16px;
+    height:16px;
+    line-height: 16px;
+    color:#161616;
+    text-align: center;
+    font-size:12px;
+    margin-right:3px;
+    background: #86C9EF;
+    opacity: 1;
   }
 
-  .tabs .tabs-item .text {
-    font-size: 14px;
-
+  .professor .options .collect{
+    display: inline-block;
+    border:1px solid #fff;
+    border-radius:50%;
+    width:37px;
+    height:37px;
+    line-height: 37px;
+    text-align: center;
+    margin-left:15px;
+  }
+  .professorDesc{
+    color:#4A4A4A;
+    font-size:20px;
+    background: #fff;
+    padding:10px 20px 10px;
+  }
+  .professorDesc .title{
+    margin-bottom: 5px;
+  }
+  .professorDesc .title .icon{
+    width:16px;
+    display: inline-block;
+    background: url("../statics/images/home-jinpai.png") no-repeat;
+    height:16px;
+    background-size:cover;
+  }
+  .professorDesc .detail{
+    font-size:12px;
+    line-height: 24px;
   }
 
-  .tags {
-    padding-left: 15px;
+  .bountyDesc{
+    background: #fff;
+    margin-top:5px;
+    padding:15px 0 0 20px;
   }
 
-  .tags span {
-    font-size: 14px;
-    margin: 0 5px;
+  .bountyDesc .title .icon{
+    width:13px;
+    display: inline-block;
+    background: url("../statics/images/home-jiangli.png") no-repeat;
+    height:16px;
+    background-size:cover;
+    position: relative;
+    top:2px;
+    margin-right:5px;
   }
 
-  .askButton {
-    margin-top: 15px;
-    padding: 0 50px;
+  .bountyDesc .title{
+    line-height: 20px;
+    font-size:16px;
+    color:#4A4A4A;
+    border-bottom:1px solid #D9D9D9;
+    padding-bottom:10px;
   }
 
-  .askButton button {
-    padding: 5px 0;
-    border-radius: 8px;
-    line-height: 22px;
-    font-size: 22px;
+  .bountyDesc .titleSub{
+    display: inline-block;
+    font-size:12px;
+    color:#9B9B9B;
+    position: relative;
+    bottom:1px;
   }
 
-  .askButton button span {
-    font-size: 14px;
+  .bountyDesc .more{
+    display: inline-block;
+    width:70px;
+    float:right;
+    position: relative;
   }
 
-  .mui-content {
+  .bountyDescList{
     background: #fff;
   }
-
-  .mui-content.loading{
-    background: none;
+  .bountyDescList .detail{
+    position: relative;
+    padding: 20px 10px 0 20px;
   }
+  .bountyDescList .detail .image{
+    position: absolute;
+    display: inline-block;
+    width:60px;
+  }
+
+  .bountyDescList .detail .image img{
+    width:60px;
+    height:60px;
+  }
+
+  .bountyDescList .detail .text{
+    margin-left:70px;
+    border-bottom:1px solid #D9D9D9;
+    padding-bottom:45px;
+    position: relative;
+
+  }
+
+  .bountyDescList .detail:last-child .text{
+    border-bottom: none;
+  }
+
+  .bountyDescList .detail .text .content{
+    font-size:12px;
+    padding-right:10px;
+  }
+  .bountyDescList .detail .realname{
+    color:#4990E2;
+    position: absolute;
+    left:0;
+    bottom:15px;
+  }
+  .bountyDescList .detail .amount{
+    color:#F6A623;
+    font-size:16px;
+    position: absolute;
+    right:10px;
+    bottom:5px;
+  }
+
+  .askDetail{
+    height:67px;
+    line-height: 67px;
+    text-align: center;
+    background: #fff;
+    margin-top:5px;
+  }
+  .askDetail .buttonAsk{
+    position: relative;
+    background: #4990E2;
+    display: inline-block;
+    width:125px;
+    height:37px;
+    font-size:14px;
+    line-height: 37px;
+    text-align: center;
+    border-radius: 50px;
+    padding-left:20px;
+
+    color:#fff;
+  }
+  .askDetail .buttonAsk span{
+    position: absolute;
+    font-size: 30px;
+    left: 20px;
+    top: -4px;
+  }
+
+  .footer-bar{
+    background-color:#fff;
+    box-shadow: none;
+  }
+  .footer-bar{
+    border-top: 1px solid #D9D9D9;
+  }
+
+  .footer-bar .mui-active .myicon-point{
+    width:3px;
+    height:3px;
+    top:8px;
+    left:-13px;
+  }
+
 </style>

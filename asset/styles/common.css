@@ -129,3 +129,45 @@ input, textarea, select{
 .mui-checkbox-2 .tagSelect.checked:before {
   content: '\E442';
 }
+
+
+
+.mui-ellipsis-3
+{
+  display: -webkit-box;
+  overflow: hidden;
+
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+
+.myicon-home{
+  background: url("../statics/images/icon_home.png");
+}
+
+.myicon-task{
+  background: url("../statics/images/icon_task.png");
+}
+
+.myicon-find{
+  background: url("../statics/images/icon_find.png");
+}
+
+.myicon-my{
+  background: url("../statics/images/icon_my.png");
+}
+
+.myicon-point{
+  background: url("../statics/images/icon_point.png");
+}
+
+.myicon{
+  background-size: contain;
+  background-repeat: no-repeat;
+}
