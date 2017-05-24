@@ -248,7 +248,8 @@
           url = ACCOUNT_API.ADD_ACCOUNT_PROJECT;
         }
 
-        var data = this.project;
+        var json = JSON.stringify(this.project);
+        var data = JSON.parse(json);
 
         if (this.id) {
             data.id = this.id;
@@ -256,6 +257,10 @@
 
         if (this.buttonSaveDisabled) return;
         this.buttonSaveDisabled  = true;
+
+        data.industry_tags = this.infoIndustryTagsCodes;
+        data.product_tags = this.infoProductTagsCodes;
+
         postRequest(url, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -305,19 +310,49 @@
         else return 0;
       },
       infoIndustryTagsNames() {
-        if (this.project.industry_tags && this.project.industry_tags.length) {
-          return this.project.industry_tags.join();
+        if (this.project.industry_tags) {
+          var newValue = [];
+          for (var i in this.project.industry_tags) {
+            newValue.push(this.project.industry_tags[i].text);
+          }
+          return newValue.join();
         } else {
           return '';
         }
       },
+      infoIndustryTagsCodes(){
+        var newValue = [];
+        for (var i in this.project.industry_tags) {
+          if (typeof(this.project.industry_tags[i]) === 'object') {
+            newValue.push(this.project.industry_tags[i].value);
+          } else {
+            newValue.push(this.project.industry_tags[i]);
+          }
+        }
+        return newValue;
+      },
       infoProductTagsNames() {
-        if (this.project.product_tags && this.project.product_tags.length) {
-          return this.project.product_tags.join();
+        if (this.project.product_tags) {
+          var newValue = [];
+          for (var i in this.project.product_tags) {
+            newValue.push(this.project.product_tags[i].text);
+          }
+          return newValue.join();
         } else {
           return '';
         }
-      }
+      },
+      infoProductTagsCodes(){
+        var newValue = [];
+        for (var i in this.project.product_tags) {
+          if (typeof(this.project.product_tags[i]) === 'object') {
+            newValue.push(this.project.product_tags[i].value);
+          } else {
+            newValue.push(this.project.product_tags[i]);
+          }
+        }
+        return newValue;
+      },
     },
     components: {
       industryTagsIndexedList,

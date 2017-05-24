@@ -408,10 +408,25 @@
       },
       userIndustryTagsNames() {
         if (this.user.info.industry_tags) {
-          return this.user.info.industry_tags.join();
+          var newValue = [];
+          for (var i in this.user.info.industry_tags) {
+            newValue.push(this.user.info.industry_tags[i].text);
+          }
+          return newValue.join();
         } else {
           return '';
         }
+      },
+      userIndustryTagsCodes(){
+        var newValue = [];
+        for (var i in this.user.info.industry_tags) {
+          if (typeof(this.user.info.industry_tags[i]) === 'object') {
+            newValue.push(this.user.info.industry_tags[i].value);
+          } else {
+            newValue.push(this.user.info.industry_tags[i]);
+          }
+        }
+        return newValue;
       },
       infoIndustryTagsNames() {
         if (this.newItem.industry_tags && this.newItem.industry_tags.length) {
@@ -704,7 +719,8 @@
             break;
         }
 
-        var data = this.user.info;
+        var json = JSON.stringify(this.user.info);
+        var data = JSON.parse(json);
         if (typeof(data.city) === 'object') {
             data.city = data.city.key;
         }
@@ -718,6 +734,9 @@
         if (typeof(data.hometown_province) === 'object') {
           data.hometown_province = data.hometown_province.key;
         }
+
+        data.industry_tags = this.userIndustryTagsCodes;
+
 
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {

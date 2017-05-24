@@ -18,9 +18,9 @@
         <div class="mui-indexed-list-inner">
           <div class="mui-indexed-list-empty-alert">没有数据</div>
           <ul class="mui-table-view">
-            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left" @tap.stop.prevent="checkThis">
+            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left" @tap.stop.prevent="checkThis" :value="tag.value">
 
-              <span class="tagSelect checked" v-if="typeof(iselected) === 'object' && iselected.indexOf(tag) > -1"/><span class="tagSelect" v-else/>{{ tag }}
+              <span class="tagSelect checked" v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1"/><span class="tagSelect" v-else/>{{ tag.text }}
             </li>
           </ul>
 
@@ -68,6 +68,13 @@
       },
       getSelected(){
         return this.selected;
+      },
+      getSelectedCodes(){
+        var newValue = [];
+        for (var i in this.selected) {
+          newValue.push(this.selected[i].value);
+        }
+        return newValue;
       }
     },
     methods: {
@@ -80,11 +87,14 @@
           if (e.target.tagName==='SPAN') {
              li = e.target.parentNode;
           } else {
-              li = e.target;
+             li = e.target;
           }
         var span = li.childNodes[0];
-        var value = li.innerText;
-        var pos = this.iselected.indexOf(value);
+        var value = {
+            text:li.innerText,
+            value:parseInt(li.getAttribute('value'))
+        };
+        var pos = this.getSelectedCodes.indexOf(value.value);
         if (!span.classList.contains('checked')) {
           span.classList.add('checked');
 

@@ -144,6 +144,7 @@
           this.$router.go(-1);
         }
       },
+
       initDate: function (objType) {
         let currentDate = new Date();
 
@@ -243,7 +244,8 @@
           url = ACCOUNT_API.ADD_ACCOUNT_JOB;
         }
 
-        var data = this.job;
+        var json = JSON.stringify(this.job);
+        var data = JSON.parse(json);
 
         if (this.id) {
             data.id = this.id;
@@ -251,6 +253,10 @@
 
         if (this.buttonSaveDisabled) return;
         this.buttonSaveDisabled = true;
+
+        data.industry_tags = this.userIndustryTagsCodes;
+
+
         postRequest(url, data).then(response => {
 
           var code = response.data.code;
@@ -301,11 +307,26 @@
         else return 0;
       },
       infoIndustryTagsNames() {
-        if (this.job.industry_tags && this.job.industry_tags.length) {
-          return this.job.industry_tags.join();
+        if (this.job.industry_tags) {
+          var newValue = [];
+          for (var i in this.job.industry_tags) {
+            newValue.push(this.job.industry_tags[i].text);
+          }
+          return newValue.join();
         } else {
           return '';
         }
+      },
+      userIndustryTagsCodes(){
+        var newValue = [];
+        for (var i in this.job.industry_tags) {
+          if (typeof(this.job.industry_tags[i]) === 'object') {
+            newValue.push(this.job.industry_tags[i].value);
+          } else {
+            newValue.push(this.job.industry_tags[i]);
+          }
+        }
+        return newValue;
       },
       infoProductTagsNames() {
         if (this.job.product_tags && this.job.product_tags.length) {

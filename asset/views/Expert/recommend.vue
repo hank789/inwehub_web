@@ -119,10 +119,25 @@
       },
       infoIndustryTagsNames() {
         if (this.industryTags) {
-          return this.industryTags.join();
+          var newValue = [];
+          for (var i in this.industryTags) {
+            newValue.push(this.industryTags[i].text);
+          }
+          return newValue.join();
         } else {
           return '';
         }
+      },
+      infoIndustryTagsCodes(){
+        var newValue = [];
+        for (var i in this.industryTags) {
+          if (typeof(this.industryTags[i]) === 'object') {
+            newValue.push(this.industryTags[i].value);
+          } else {
+            newValue.push(this.industryTags[i]);
+          }
+        }
+        return newValue;
       }
     },
     methods: {
@@ -209,12 +224,15 @@
         if (mui.os.plus) {
           this.uploadPlus();
         } else {
+
+
+
           postRequest(`expert/recommend`, {
             name: this.name,
             gender: this.genderValue,
             work_years: this.workYears,
             mobile: this.mobile,
-            industry_tags: this.infoIndustryTagsNames,
+            industry_tags: this.infoIndustryTagsCodes,
             description: this.description,
             images: []
           }).then(response => {
@@ -259,7 +277,7 @@
         task.addData("gender", this.genderValue);
         task.addData("work_years", this.workYears);
         task.addData("mobile", this.mobile);
-        task.addData("industry_tags", this.infoIndustryTagsNames);
+        task.addData("industry_tags", this.infoIndustryTagsCodes);
         task.addData("description", this.description);
 
 
