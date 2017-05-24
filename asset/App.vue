@@ -142,8 +142,15 @@
                 break;
             }
             // 提示点击的内容
-            var payload =  JSON.parse(msg.payload);
-            noticeTo(payload);
+            if ( msg.payload ) {
+              if ( typeof(msg.payload)=="string" ) {
+
+              } else {
+                //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
+                var payload =  JSON.parse(msg.payload);
+                noticeTo(payload);
+              }
+            }
 
           }, false );
           // 监听在线消息事件
@@ -153,8 +160,22 @@
             } else {
               console.log( "接收到在线透传消息：" );
             }
-            var payload =  JSON.parse(msg.payload);
-            noticeTo(payload);
+
+            if ( msg.payload ) {
+              if ( typeof(msg.payload)=="string" ) {
+
+              } else {
+                //plus.nativeUI.alert( "receive:payload(JSON): "+JSON.stringify(msg.payload) );
+                var payload =  JSON.parse(msg.payload);
+                var btnArray = ['取消', '前往查看'];
+                mui.confirm(payload.title, '提示', btnArray, (e) => {
+                  if (e.index == 1) {
+                    noticeTo(payload);
+                  }
+                })
+              }
+            }
+
           }, false );
         }
       });
