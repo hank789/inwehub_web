@@ -65,6 +65,7 @@
             </li>
           </ul>
 
+          <div class="mb70"></div>
         </div>
 
 </div>
@@ -197,7 +198,7 @@
   .professor .buttonAsk{
     position: relative;
     display: inline-block;
-    width:48%;
+    width: 60%;
     height:37px;
     font-size:14px;
     line-height: 37px;
@@ -264,7 +265,7 @@
 
   .part2 .item{
     display: inline-block;
-    width:24%;
+    width:23%;
     text-align: center;
     color:#777;
   }
