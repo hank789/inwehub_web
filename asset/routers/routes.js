@@ -362,6 +362,10 @@ const routes = [
     path: '/feedback',
     component: require('../views/Feedback.vue'),
   },
+  { // about
+    path: '/about',
+    component: require('../views/About.vue'),
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),
