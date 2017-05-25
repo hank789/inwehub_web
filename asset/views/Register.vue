@@ -10,8 +10,8 @@
       <div class="mui-content">
         <form class="mui-input-group" @submit.prevent="register" :model="formItem">
           <div class="mui-input-row">
-            <label>用户名</label>
-            <input type="text" autocomplete="off" placeholder="请输入用户名" v-model.trim="username" id="username" name="username"/>
+            <label>姓名</label>
+            <input type="text" autocomplete="off" placeholder="请输入真实姓名" v-model.trim="username" id="username" name="username"/>
           </div>
           <div class="mui-input-row">
             <label>手机号</label>
@@ -242,8 +242,8 @@
         if(!usernameReg.test(newUsername)) {
           this.errors = Object.assign({}, errors, { username: '用户名不能包含特殊符号以及空格'});
           this.isValidUsername = false;
-        } else if( newUsername.length > 12 || newUsername.length < 3) {
-          this.errors = Object.assign({}, errors, { username: '请输入3-12位用户名'});
+        } else if( newUsername.length > 12 || newUsername.length <= 1) {
+          this.errors = Object.assign({}, errors, { username: '请输入2-12位姓名'});
           this.isValidUsername = false;
         } else {
           delete errors['username'];
