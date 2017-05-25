@@ -225,12 +225,20 @@ input, textarea, select{
 }
 
 
-.mui-bar-dark{
+.mui-bar-dark, .mui-bar-nav{
   background-color:#161616;
   box-shadow:none;
 }
 
-.mui-bar-dark .mui-title{
+.mui-bar-dark .mui-title, .mui-bar-nav .mui-title{
   color:#fff;
   font-size:18px;
+}
+
+.mui-bar-dark .mui-icon, .mui-bar-nav .mui-icon{
+  color:#fff;
+}
+
+.mui-bar-dark  .mui-btn-link, .mui-bar-nav .mui-btn-link{
+  color:#fff;
 }
