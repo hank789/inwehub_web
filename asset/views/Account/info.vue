@@ -633,9 +633,10 @@
 
         let param = {
           "type": "month",
-          "beginYear": "1990",
+          "beginYear": "1970",
           "endYear": currentDate.getFullYear(),
-          "toNow": toNow
+          "toNow": toNow,
+          "value": "1990-07-01"
         };
 
         let picker = new mui.DtPicker(param);
@@ -658,14 +659,14 @@
       }
       ,
       initBirthday: function () {
-        var value = '';
+        var value = '1990-07-01';
         if (this.user.info.birthday) {
            value = this.user.info.birthday;
         }
         let currentDate = new Date();
         let param = {
           "type": "date",
-          "beginYear": "1900",
+          "beginYear": "1950",
           "endYear": currentDate.getFullYear(),
           "value":value
         };
@@ -708,6 +709,11 @@
           case 'email':
             if (!this.user.info.email) {
               mui.toast('请填写电子邮箱');
+              return false;
+            }
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(!re.test(this.user.info.email)){
+              mui.toast('电子邮箱格式错误');
               return false;
             }
             break;

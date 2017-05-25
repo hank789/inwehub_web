@@ -93,7 +93,7 @@
           toNow = true;
         }
 
-        var value = '';
+        var value = '1990-07-01';
         switch (objType) {
           case 1 :
             value = this.train.begin_time;
