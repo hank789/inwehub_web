@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="text">
-          <div class="realname">郭大红</div>
+          <div class="realname">{{ name }}</div>
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>高级专家</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
