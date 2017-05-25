@@ -109,7 +109,7 @@
       },
       starApp() {
         if (mui.os.ios) {
-          location.href = 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=682211190&pageNumber=0&sortOrdering=2&type=&mt=8';
+          location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
         } else if (mui.os.android) {
           plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
             plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
