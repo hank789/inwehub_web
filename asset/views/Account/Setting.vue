@@ -36,7 +36,7 @@
           <router-link to="/about" class="mui-navigate-right">关于我们</router-link>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/comment" class="mui-navigate-right">前往评价</router-link>
+          <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>
         </li>
       </ul>
 
@@ -105,6 +105,17 @@
           });
         } else {
           this.clearUserCache();
+        }
+      },
+      starApp() {
+        if (mui.os.ios) {
+          location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+        } else if (mui.os.android) {
+          plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
+            plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
+              mui.alert("360手机助手和应用宝，你一个都没装，暂时无法评分，感谢支持");
+            }, "com.qihoo.appstore");
+          }, "com.tencent.android.qqdownloader");
         }
       }
     },
