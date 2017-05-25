@@ -54,7 +54,7 @@
 
       <div class="detail">
         <div class="image">
-          <img src="../statics/images/home-youzhitiwen.png"/>
+          <img src="../statics/images/home_youzhihuida.png"/>
         </div>
         <div class="text">
           <div class="content mui-ellipsis-3">
