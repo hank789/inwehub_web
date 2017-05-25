@@ -15,12 +15,14 @@ function checkUpdate(){
           if (is_force === 1){
             mui.alert("有新的版本升级");
             if (mui.os.ios) {
+              var ios_force_update_url = response_data.ios_force_update_url;
               //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-              location.href = 'https://www.pgyer.com/Zoy3';
+              location.href = ios_force_update_url;
             } else if (mui.os.android) {
+              var android_force_update_url = response_data.android_force_update_url;
               //market://details?id=io.dcloud.HelloMUI
-              plus.runtime.openURL("https://www.pgyer.com/hfkG", function(e) {
-                plus.runtime.openURL("https://www.pgyer.com/hfkG", function(e) {
+              plus.runtime.openURL(android_force_update_url, (e) => {
+                plus.runtime.openURL(android_force_update_url, (e) => {
                   mui.alert("未安装360手机助手和应用宝，暂时无法更新");
                 }, "com.qihoo.appstore");
               }, "com.tencent.android.qqdownloader");
