@@ -2,57 +2,69 @@
 
   <div>
 
-        <header class="mui-bar mui-bar-nav">
+        <header class="mui-bar mui-bar-dark mui-bar-nav">
           <h1 class="mui-title">我的</h1>
-          <!--<a class="mui-icon fa fa-envelope-o mui-pull-right" @tap.stop.prevent="$router.push('/message')"></a>-->
+          <a class="mui-icon myicon myicon-setup mui-pull-right"></a>
         </header>
 
-        <div class="mui-content myinfo">
-          <div class="mui-table-view">
+        <div class="mui-content">
 
-            <div class="mui-table-view-cell my-header">
-              <div class="bg"></div>
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img :src="avatar">
-                </div>
+
+          <div class="professor">
+            <div class="avatar">
+              <div class="avatarInner">
+                <img :src="avatar" class="avatar"/>
               </div>
-              <div class="text">
-                {{ name }}
-                <p class="mui-ellipsis" v-if="company && title">{{ title }} | {{ company }}</p>
-              </div>
-              <div class="vip" v-show="isExpert"><span class="mui-icon fa fa-vimeo"></span>认证专家</div>
             </div>
+            <div class="text">
+              <div class="realname">郭大红</div>
+              <div class="label"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>高级专家</div>
+              <div class="options">
+                <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>75%</span> 编辑名片</div>
+                <div class="collect"><span class="mui-icon fa fa-share"></span></div>
+              </div>
+            </div>
+          </div>
 
+          <div class="counter">
+            <span class="level">LV5</span>
+            <span class="grow">成长值：1560</span>
+            <span class="integral">哈币：567</span>
+          </div>
+
+          <div class="part2">
+            <a class="item">
+              <span class="number">24</span><span>我的提问</span>
+            </a>
+            <a class="item">
+              <span class="number">12</span><span>我的回答</span>
+            </a>
+            <a class="item">
+              <span class="number">2</span><span>我的任务</span>
+            </a>
+            <a class="item">
+              <span class="number">2</span><span>我的项目</span>
+            </a>
           </div>
 
           <ul class="mui-table-view mui-table-view-chevron firstItem">
             <li class="mui-table-view-cell">
-              <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon fa fa-archive"></span>我的档案<span class="mui-pull-right account-setting-span">完整度：{{ account_info_complete_percent }}%</span></router-link>
+              <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon myicon myicon-wallet"></span>我的钱包</router-link>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon fa fa-money"></span>我的钱包<span class="mui-pull-right account-setting-span">余额：{{ total_money }}</span></router-link>
+              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>优惠卷</a>
             </li>
             <li class="mui-table-view-cell">
-              <router-link to="/expert" class="mui-navigate-right"><span class="mui-icon fa fa-user-secret"></span>专家管理</router-link>
+              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <router-link to="/setting" class="mui-navigate-right"><span class="mui-icon myicon myicon-help"></span>帮助与反馈</router-link>
             </li>
           </ul>
 
-          <ul class="mui-table-view mui-table-view-chevron">
-            <li class="mui-table-view-cell">
-              <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon fa fa-question-circle"></span>我的提问</router-link>
-            </li>
-            <li class="mui-table-view-cell">
-              <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon fa fa-file-text"></span>我的回答</router-link>
-            </li>
-          </ul>
-
-          <ul class="mui-table-view mui-table-view-chevron mb70">
-            <li class="mui-table-view-cell">
-              <router-link to="/setting" class="mui-navigate-right">
-                <span class="mui-icon fa fa-cog"></span>设置与帮助</router-link>
-            </li>
-          </ul>
         </div>
 
 </div>
@@ -101,107 +113,55 @@
 </script>
 
 <style scoped>
-  .mui-bar{
-    background-color: #c2d5e4;
-  }
-  .myinfo{
-
-  }
-  .mui-table-view {
-    margin-top: 10px;
-  }
-
-  .mui-table-view .mui-icon, .mui-table-view .mui-icon-extra {
-    color:#999;
-    font-size:24px;
-    top:-2px;
-    text-align: center;
-    position: relative;
+  .mui-bar .myicon{
     width:24px;
     height:24px;
-    margin-right: 15px;
+    right: 8px;
+    top: 8px;
   }
-  .myinfo li{
-    color:#101010;
-    padding-top:12px;
-    padding-bottom:12px;
-  }
-
-  .myinfo > .mui-table-view:first-child{
-    margin-top:0;
-  }
-  .head-img {
-    border-radius: 42px;
-  }
-  .account-setting-span {
-    position: absolute;
-    right: 40px;
-    color: #587dd5;
-    font-size: .8rem;
-  }
-
-  .my-header{
-    padding:0;
-    height:215px;
-    position: relative;
-    color:#fff;
+  .professor{
+    background-color:#161616;
     text-align: center;
+    position:relative;
+    height:136px;
   }
 
-  .my-header .text{
-    margin-top:5px;
-    position: relative;
-    font-weight:bold;
-    font-size:16px;
-  }
-
-  .my-header p{
-    margin-top:5px;
+  .professor .text{
+    width: 65%;
+    height: 100%;
+    padding-top:20px;
+    padding-left:0px;
+    display: inline-block;
     color:#fff;
-    font-size:16px;
-    font-weight:bold;
+    text-align: left;
+
   }
 
-  .my-header .bg{
-    background: url("../../statics/images/thumb_raw_1493885990.jpeg");
-    background-size:100% 100%;
-    opacity: 0.6;
-    height:100%;
-    position:absolute;
-    z-index: 0;
-    width:100%;
-  }
-
-  .my-header .vip{
+  .professor .label{
     position: absolute;
-    right:20px;
-    top:15px;
-    font-size:12px;
+    right:10px;
+    top:10px;
+    font-size:14px;
   }
 
-  .my-header .vip .mui-icon{
-    color:#fff200;
-    opacity: 1;
-    font-size:16px;
-    margin-right: 0;
-    vertical-align: sub;
-  }
 
-  .firstItem{
-    margin-top:0;
+  .professor .text .realname{
+    font-size:20px;
+    font-weight:bolder;
+    margin-left:20px;
   }
 
   .avatar{
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    margin-top:24px;
-    height: 116px;
-    width: 116px;
+    margin-top:10px;
+    height: 100px;
+    width: 100px;
     font-size: 20px;
     text-align: center;
     border-radius: 50%;
-    position: relative;
+    vertical-align: top;
   }
 
   .avatar .avatarInner{
@@ -222,16 +182,114 @@
   }
 
   .avatar img {
-    border:3px solid #d1d1d1;
     border-radius: 50%;
     width: 100%;
     height: 100%;
     display: block;
   }
 
-  .mui-table-view .mui-icon{
+  .professor .options{
+    position: relative;
+    margin-top:30px;
+    margin-left:10px;
+  }
+
+  .professor .buttonAsk{
+    position: relative;
+    display: inline-block;
+    width:48%;
+    height:37px;
+    font-size:14px;
+    line-height: 37px;
+    text-align: center;
+    border:1px solid #fff;
+    border-radius: 50px;
+    padding-left:45px;
+  }
+  .professor .buttonAsk span{
+    position: absolute;
+    font-size: 20px;
+    left: 10px;
+    color:#F6A623;
+  }
+
+  .professor .label .myicon{
+    display: inline-block;
+    width:16px;
+    height:16px;
     vertical-align: middle;
-    color:#587dd5;
-    opacity: 0.5;
+    margin-right:5px;
+
+  }
+
+  .professor .options .collect{
+    display: inline-block;
+    float:right;
+    border:1px solid #fff;
+    border-radius:50%;
+    width:37px;
+    height:37px;
+    line-height: 37px;
+    text-align: center;
+    margin-left:15px;
+  }
+
+  .counter{
+    height:40px;
+    line-height:40px;
+    border-bottom:1px solid #9B9B9B;
+    background: #fff;
+    text-align: center;
+    color:#4A4A4A;
+  }
+
+  .counter .level{
+    line-height:14px;
+    display: inline-block;
+    color:#fff;
+    padding:3px 10px;
+    background: #000;
+    border-radius: 5px;
+  }
+
+  .counter .grow{
+    margin:0 20px;
+  }
+
+  .part2{
+    height:60px;
+    background: #fff;
+    border-bottom:1px solid rgba(217,217,217, 100);
+  }
+
+  .part2 .item{
+    display: inline-block;
+    width:24%;
+    text-align: center;
+    color:#777;
+  }
+  .part2 .item .number{
+    padding-top:10px;
+    color:#161616;
+    display: block;
+    font-size:20px;
+  }
+
+  .mui-table-view-cell .mui-icon{
+    margin-right:10px;
+    width: 20px;
+    vertical-align: bottom;
+    height: 20px;
+    position: relative;
+    background-position:center;
+  }
+
+  .mui-navigate-right:after, .mui-push-right:after{
+    color:#4a4a4a;
+  }
+  .mui-table-view-cell{
+    color: #4A4A4A;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 </style>

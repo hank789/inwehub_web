@@ -191,6 +191,34 @@ input, textarea, select{
   background: url("../statics/images/icon_shop.png");
 }
 
+.myicon-gaojizhuanjia{
+  background: url("../statics/images/home-jinpai.png");
+}
+
+.myicon-setup{
+  background: url("../statics/images/icon-setup.png");
+}
+
+.myicon-wallet{
+  background: url("../statics/images/icon_wallet.png");
+}
+
+.myicon-coupon{
+  background: url("../statics/images/icon-coupon.png");
+}
+
+.myicon-huiyuan{
+  background: url("../statics/images/icon-huiyuan.png");
+}
+
+.myicon-heart{
+  background: url("../statics/images/icon-heart.png");
+}
+
+.myicon-help{
+  background: url("../statics/images/icon-help.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
@@ -199,6 +227,7 @@ input, textarea, select{
 
 .mui-bar-dark{
   background-color:#161616;
+  box-shadow:none;
 }
 
 .mui-bar-dark .mui-title{

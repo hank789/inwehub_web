@@ -162,10 +162,6 @@
     margin-left:20px;
   }
 
-  .mui-bar-nav{
-    box-shadow:none;
-  }
-
   .avatar{
     z-index: 9;
     color: #ffffff;
