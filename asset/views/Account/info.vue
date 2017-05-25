@@ -961,7 +961,6 @@
 
   .mui-navbar .mui-bar {
     position: absolute;
-    background-color: #f7f7f8;
     text-align: center;
   }
 

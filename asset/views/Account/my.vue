@@ -2,79 +2,81 @@
 
   <div>
 
-        <header class="mui-bar mui-bar-dark mui-bar-nav">
-          <h1 class="mui-title">我的</h1>
-          <a class="mui-icon myicon myicon-setup mui-pull-right"></a>
-        </header>
+    <header class="mui-bar mui-bar-dark mui-bar-nav">
+      <h1 class="mui-title">我的</h1>
+      <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.push('/setting')"></a>
+    </header>
 
-        <div class="mui-content">
+    <div class="mui-content">
 
 
-          <div class="professor">
-            <div class="avatar">
-              <div class="avatarInner">
-                <img :src="avatar" class="avatar"/>
-              </div>
-            </div>
-            <div class="text">
-              <div class="realname">郭大红</div>
-              <div class="label"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>高级专家</div>
-              <div class="options">
-                <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>75%</span> 编辑名片</div>
-                <div class="collect"><span class="mui-icon fa fa-share"></span></div>
-              </div>
-            </div>
+      <div class="professor">
+        <div class="avatar">
+          <div class="avatarInner">
+            <img :src="avatar" class="avatar"/>
           </div>
-
-          <div class="counter">
-            <span class="level">LV5</span>
-            <span class="grow">成长值：1560</span>
-            <span class="integral">哈币：567</span>
-          </div>
-
-          <div class="part2">
-            <a class="item">
-              <span class="number">24</span><span>我的提问</span>
-            </a>
-            <a class="item">
-              <span class="number">12</span><span>我的回答</span>
-            </a>
-            <a class="item">
-              <span class="number">2</span><span>我的任务</span>
-            </a>
-            <a class="item">
-              <span class="number">2</span><span>我的项目</span>
-            </a>
-          </div>
-
-          <ul class="mui-table-view mui-table-view-chevron firstItem">
-            <li class="mui-table-view-cell">
-              <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon myicon myicon-wallet"></span>我的钱包</router-link>
-            </li>
-            <li class="mui-table-view-cell">
-              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>优惠卷</a>
-            </li>
-            <li class="mui-table-view-cell">
-              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
-            </li>
-            <li class="mui-table-view-cell">
-              <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
-            </li>
-            <li class="mui-table-view-cell">
-              <router-link to="/setting" class="mui-navigate-right"><span class="mui-icon myicon myicon-help"></span>帮助与反馈</router-link>
-            </li>
-          </ul>
-
-          <div class="mb70"></div>
         </div>
+        <div class="text">
+          <div class="realname">{{ name }}</div>
+          <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>高级专家</div>
+          <div class="options">
+            <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
+            <div class="collect"><span class="mui-icon fa fa-share"></span></div>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <div class="counter">
+        <span class="level">LV5</span>
+        <span class="grow">成长值：1560</span>
+        <span class="integral">哈币：567</span>
+      </div>
+
+      <div class="part2">
+        <router-link to="/asks" class="item">
+          <span class="number">--</span><span>我的提问</span>
+        </router-link>
+        <router-link to="/answers" class="item">
+          <span class="number">--</span><span>我的回答</span>
+        </router-link>
+        <router-link to="/task" class="item">
+          <span class="number">--</span><span>我的任务</span>
+        </router-link>
+        <router-link to="/project" class="item">
+          <span class="number">--</span><span>我的项目</span>
+        </router-link>
+      </div>
+
+      <ul class="mui-table-view mui-table-view-chevron firstItem">
+        <li class="mui-table-view-cell">
+          <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
+          </router-link>
+        </li>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>优惠卷</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <router-link to="/setting" class="mui-navigate-right"><span class="mui-icon myicon myicon-help"></span>帮助与反馈
+          </router-link>
+        </li>
+      </ul>
+
+      <div class="mb70"></div>
+    </div>
+
+  </div>
 </template>
 <script>
   import localEvent from '../../stores/localStorage';
   import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND} from '../../stores/types';
   import router from '../../routers/index';
-  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
+  import {updateUserInfoCache, getUserInfo} from '../../utils/user';
 
   export  default {
     data(){
@@ -82,20 +84,20 @@
 
       return {
         im_tokenMsg: '',
-        name:currentUser.name,
-        phone:currentUser.phone,
-        avatar:currentUser.avatar_url,
+        name: currentUser.name,
+        phone: currentUser.phone,
+        avatar: currentUser.avatar_url,
         title: currentUser.title,
         company: currentUser.company,
         account_info_complete_percent: currentUser.account_info_complete_percent,
-        isExpert:currentUser.is_expert,
+        isExpert: currentUser.is_expert,
         total_money: currentUser.total_money
       }
     },
     methods: {
       getToken(){
-         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
-         this.im_tokenMsg = im_token;
+        var im_token = JSON.parse(sessionStorage.getItem('im_token'))
+        this.im_tokenMsg = im_token;
       }
     },
     created () {
@@ -114,49 +116,49 @@
 </script>
 
 <style scoped>
-  .mui-bar .myicon{
-    width:24px;
-    height:24px;
+  .mui-bar .myicon {
+    width: 24px;
+    height: 24px;
     right: 8px;
     top: 8px;
   }
-  .professor{
-    background-color:#161616;
+
+  .professor {
+    background-color: #161616;
     text-align: center;
-    position:relative;
-    height:136px;
+    position: relative;
+    height: 136px;
   }
 
-  .professor .text{
+  .professor .text {
     width: 65%;
     height: 100%;
-    padding-top:20px;
-    padding-left:0px;
+    padding-top: 20px;
+    padding-left: 0px;
     display: inline-block;
-    color:#fff;
+    color: #fff;
     text-align: left;
 
   }
 
-  .professor .label{
+  .professor .label {
     position: absolute;
-    right:10px;
-    top:10px;
-    font-size:14px;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
   }
 
-
-  .professor .text .realname{
-    font-size:20px;
-    font-weight:bolder;
-    margin-left:20px;
+  .professor .text .realname {
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: 20px;
   }
 
-  .avatar{
+  .avatar {
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    margin-top:10px;
+    margin-top: 10px;
     height: 100px;
     width: 100px;
     font-size: 20px;
@@ -165,7 +167,7 @@
     vertical-align: top;
   }
 
-  .avatar .avatarInner{
+  .avatar .avatarInner {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -189,108 +191,126 @@
     display: block;
   }
 
-  .professor .options{
+  .professor .options {
     position: relative;
-    margin-top:30px;
-    margin-left:10px;
+    margin-top: 30px;
+    margin-left: 10px;
   }
 
-  .professor .buttonAsk{
+  .professor .buttonAsk {
     position: relative;
     display: inline-block;
     width: 60%;
-    height:37px;
-    font-size:14px;
+    height: 37px;
+    font-size: 14px;
     line-height: 37px;
     text-align: center;
-    border:1px solid #fff;
+    border: 1px solid #fff;
     border-radius: 50px;
-    padding-left:45px;
+    padding-left: 45px;
   }
-  .professor .buttonAsk span{
+
+  .professor .buttonAsk span {
     position: absolute;
     font-size: 20px;
     left: 10px;
-    color:#F6A623;
+    color: #F6A623;
   }
 
-  .professor .label .myicon{
+  .professor .label .myicon {
     display: inline-block;
-    width:16px;
-    height:16px;
+    width: 16px;
+    height: 16px;
     vertical-align: middle;
-    margin-right:5px;
+    margin-right: 5px;
 
   }
 
-  .professor .options .collect{
+  .professor .options .collect {
     display: inline-block;
-    float:right;
-    border:1px solid #fff;
-    border-radius:50%;
-    width:37px;
-    height:37px;
+    float: right;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 37px;
+    height: 37px;
     line-height: 37px;
     text-align: center;
-    margin-left:15px;
+    margin-left: 15px;
   }
 
-  .counter{
-    height:40px;
-    line-height:40px;
-    border-bottom:1px solid #9B9B9B;
+  .counter {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
     background: #fff;
     text-align: center;
-    color:#4A4A4A;
+    color: #4A4A4A;
   }
 
-  .counter .level{
-    line-height:14px;
+  .counter:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #D9D9D9;
+  }
+
+  .counter .level {
+    line-height: 14px;
     display: inline-block;
-    color:#fff;
-    padding:3px 10px;
+    color: #fff;
+    padding: 3px 10px;
     background: #000;
     border-radius: 5px;
   }
 
-  .counter .grow{
-    margin:0 20px;
+  .counter .grow {
+    margin: 0 20px;
   }
 
-  .part2{
-    height:60px;
-    background: #fff;
-    border-bottom:1px solid rgba(217,217,217, 100);
-  }
-
-  .part2 .item{
-    display: inline-block;
-    width:23%;
+  .part2 {
+    height: 60px;
     text-align: center;
-    color:#777;
-  }
-  .part2 .item .number{
-    padding-top:10px;
-    color:#161616;
-    display: block;
-    font-size:20px;
+    background: #fff;
   }
 
-  .mui-table-view-cell .mui-icon{
-    margin-right:10px;
+  .part2 .item {
+    display: inline-block;
+    width: 23%;
+    text-align: center;
+    color: #777;
+  }
+
+  .part2 .item .number {
+    padding-top: 10px;
+    color: #161616;
+    display: block;
+    font-size: 20px;
+  }
+
+  .mui-table-view-cell .mui-icon {
+    margin-right: 10px;
     width: 20px;
     vertical-align: bottom;
     height: 20px;
     position: relative;
-    background-position:center;
+    background-position: center;
   }
 
-  .mui-navigate-right:after, .mui-push-right:after{
-    color:#4a4a4a;
+  .mui-navigate-right:after, .mui-push-right:after {
+    color: #4a4a4a;
   }
-  .mui-table-view-cell{
+
+  .mui-table-view-cell {
     color: #4A4A4A;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+
   }
+
+
 </style>

@@ -126,6 +126,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 教育经历
+    path: '/my/info/edus',
+    component: require('../views/Account/infos/edus.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 培训经历
     path: '/my/info/train/:id',
     component: require('../views/Account/infos/train.vue'),
