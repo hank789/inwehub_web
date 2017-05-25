@@ -101,6 +101,10 @@
     mounted (){
         document.body.style.backgroundColor = '#fff';
     },
+    beforeRouteLeave(to, from, next) {
+        document.body.style.backgroundColor = '#efeff4';
+        next();
+    },
     methods: {
       getData:function(){
         var t = this;
@@ -156,16 +160,6 @@
     font-size:20px;
     font-weight:bolder;
     margin-left:20px;
-  }
-
-  .mui-bar-dark{
-    background-color:#161616;
-  }
-
-
-  .mui-title{
-    color:#fff;
-    font-size:18px;
   }
 
   .mui-bar-nav{

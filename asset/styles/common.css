@@ -167,10 +167,41 @@ input, textarea, select{
   background: url("../statics/images/icon_point.png");
 }
 
+.myicon-xiangzi{
+  background: url("../statics/images/icon_xiangzi.png");
+}
+
+.myicon-project{
+  background: url("../statics/images/icon_project.png");
+}
+
+.myicon-fangdajing{
+  background: url("../statics/images/icon_fangdajing.png");
+}
+
+.myicon-money{
+  background: url("../statics/images/icon_money.png");
+}
+
+.myicon-xiaoha{
+  background: url("../statics/images/icon_xiaoha.png");
+}
+
+.myicon-shop{
+  background: url("../statics/images/icon_shop.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 
+.mui-bar-dark{
+  background-color:#161616;
+}
 
+.mui-bar-dark .mui-title{
+  color:#fff;
+  font-size:18px;
+}
