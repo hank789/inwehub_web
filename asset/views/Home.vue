@@ -23,7 +23,7 @@
     </div>
 
     <div class="professorDesc">
-      <div class="title"><span class="icon"></span></div>
+      <div class="title"><span class="icon"></span>专家介绍</div>
       <div class="detail mui-ellipsis-3">SAP咨询行业15年从业经历，熟悉离散制造行业，专注pp等模块，是一位非常自身的超级顾问。写三行，永远写三行都写三行。都写三行。都写三行。都写三行。都写三行。</div>
     </div>
 
@@ -145,6 +145,7 @@
     position: absolute;
     right:10px;
     top:10px;
+    font-size:14px;
   }
 
 
@@ -264,9 +265,13 @@
   }
   .professorDesc .title{
     margin-bottom: 5px;
+    font-size:16px;
   }
   .professorDesc .title .icon{
+    position: relative;
+    top:3px;
     width:16px;
+    margin-right:2px;
     display: inline-block;
     background: url("../statics/images/home-jinpai.png") no-repeat;
     height:16px;
@@ -322,7 +327,7 @@
   }
   .bountyDescList .detail{
     position: relative;
-    padding: 20px 10px 0 20px;
+    padding: 20px 0 0 20px;
   }
   .bountyDescList .detail .image{
     position: absolute;
@@ -337,10 +342,21 @@
 
   .bountyDescList .detail .text{
     margin-left:70px;
-    border-bottom:1px solid #D9D9D9;
-    padding-bottom:45px;
+    padding-bottom:40px;
+    padding-right:10px;
     position: relative;
+  }
 
+  .bountyDescList .detail .text:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #D9D9D9;
   }
 
   .bountyDescList .detail:last-child .text{
@@ -355,14 +371,15 @@
     color:#4990E2;
     position: absolute;
     left:0;
-    bottom:15px;
+    bottom:10px;
+    font-size:14px;
   }
   .bountyDescList .detail .amount{
     color:#F6A623;
-    font-size:16px;
+    font-size:14px;
     position: absolute;
-    right:10px;
-    bottom:5px;
+    right:20px;
+    bottom:10px;
   }
 
   .askDetail{
@@ -406,6 +423,19 @@
     height:3px;
     top:8px;
     left:-13px;
+  }
+
+  @media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+    .professor .options .collect{
+      margin-left: 7% !important;
+    }
+  }
+
+
+  @media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){
+    .professor .options .collect{
+      margin-left: 9% !important;
+    }
   }
 
 </style>
