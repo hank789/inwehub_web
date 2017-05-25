@@ -98,6 +98,9 @@
     created () {
       this.getData();
     },
+    mounted (){
+        document.body.style.backgroundColor = '#fff';
+    },
     methods: {
       getData:function(){
         var t = this;
@@ -437,5 +440,4 @@
       margin-left: 9% !important;
     }
   }
-
 </style>
