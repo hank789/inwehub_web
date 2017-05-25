@@ -9,26 +9,26 @@
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <router-link to="/my/info" class="mui-navigate-right"><span class="mui-icon myicon myicon-xiangzi"></span>顾问圈</router-link>
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-xiangzi"></span>顾问圈</a>
         </li>
       </ul>
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <router-link to="/asks" class="mui-navigate-right"><span class="mui-icon myicon myicon-project"></span>项目协作</router-link>
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-project"></span>项目协作</a>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon myicon myicon-fangdajing"></span>附近企业</router-link>
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-fangdajing"></span>附近企业</a>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/answers" class="mui-navigate-right"><span class="mui-icon  myicon myicon-money"></span>新的机会</router-link>
+          <a class="mui-navigate-right"><span class="mui-icon  myicon myicon-money"></span>新的机会</a>
         </li>
       </ul>
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <router-link to="/setting" class="mui-navigate-right">
-            <span class="mui-icon myicon myicon-xiaoha"></span>智能小哈</router-link>
+          <a class="mui-navigate-right">
+            <span class="mui-icon myicon myicon-xiaoha"></span>智能小哈</a>
         </li>
       </ul>
 
