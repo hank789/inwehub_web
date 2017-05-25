@@ -307,8 +307,8 @@
 
   .mui-table-view-cell {
     color: #4A4A4A;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
 
   }
 
