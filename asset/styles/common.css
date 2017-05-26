@@ -7,6 +7,10 @@ body{
   font-size: 16px;
 }
 
+#app{
+  height:100%;
+}
+
 p{
   color:inherit;
 }
@@ -219,6 +223,14 @@ input, textarea, select{
   background: url("../statics/images/icon-help.png");
 }
 
+.myicon-expert{
+  background: url("../statics/images/icon_expert.png");
+}
+
+.myicon-qian{
+  background: url("../statics/images/icon_qian.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
@@ -241,4 +253,9 @@ input, textarea, select{
 
 .mui-bar-dark  .mui-btn-link, .mui-bar-nav .mui-btn-link{
   color:#fff;
+}
+
+
+.mySideMenu{
+  background: #f7f7f7;
 }
