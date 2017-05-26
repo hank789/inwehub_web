@@ -66,7 +66,7 @@
 
   const Ask = {
     data: () => ({
-      money: 0,
+      money: 88,
       description: '',
       selectOther: false,
       hide: 0,
@@ -421,6 +421,7 @@
 
   .selectMoney .button-wrapper {
     margin: 10px 0 20px;
+    padding: 0 30px;
   }
 
   .selectMoney .payDesc .dash {
