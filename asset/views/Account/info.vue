@@ -32,9 +32,9 @@
       </div>
 
       <div class="part2">
-        资料完整度
+        资料完整度  {{ user.info.account_info_complete_percent }}%
         <div class="progressBar">
-          <div class="progress"><span>{{ user.info.account_info_complete_percent }}%</span></div>
+          <div class="progress" :style="'width:'+ user.info.account_info_complete_percent +'%'"><span></span></div>
         </div>
         <div class="tip">还差{{ 100-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
       </div>
@@ -364,8 +364,8 @@
     width: 160px;
     text-align: right;
     overflow: hidden;
-    top: 7px;
-    left: 15%;
+    top: 4px;
+    left: 10%;
     height: 20px;
   }
 
