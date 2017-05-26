@@ -33,24 +33,24 @@
       </div>
 
       <div class="part2">
-        <router-link to="/asks" class="item">
+        <a class="item" @tap.stop.prevent="$router.push('/asks')">
           <span class="number">--</span><span>我的提问</span>
-        </router-link>
-        <router-link to="/answers" class="item">
+        </a>
+        <a class="item" @tap.stop.prevent="$router.push('/answers')">
           <span class="number">--</span><span>我的回答</span>
-        </router-link>
-        <router-link to="/task" class="item">
+        </a>
+        <a class="item" @tap.stop.prevent="$router.push('/task')">
           <span class="number">--</span><span>我的任务</span>
-        </router-link>
-        <router-link to="/project" class="item">
+        </a>
+        <a  class="item"  @tap.stop.prevent="$router.push('/project')">
           <span class="number">--</span><span>我的项目</span>
-        </router-link>
+        </a>
       </div>
 
       <ul class="mui-table-view mui-table-view-chevron firstItem">
         <li class="mui-table-view-cell">
-          <router-link to="/my/finance" class="mui-navigate-right"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
-          </router-link>
+          <a  class="mui-navigate-right" @tap.stop.prevent="$router.push('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
+          </a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>优惠卷</a>
@@ -62,8 +62,8 @@
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/setting" class="mui-navigate-right"><span class="mui-icon myicon myicon-help"></span>帮助与反馈
-          </router-link>
+          <a to="/setting" class="mui-navigate-right" @tap.stop.prevent="$router.push('/setting')"><span class="mui-icon myicon myicon-help"></span>帮助与反馈
+          </a>
         </li>
       </ul>
 
