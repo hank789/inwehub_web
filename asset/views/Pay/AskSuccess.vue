@@ -8,9 +8,9 @@
         <div class="status">
           <i class="mui-icon iconfont icon-success"></i>
           <br/>
-          支付成功
+          <span>支付成功</span>
       </div>
-        <div class="title">您已成功支付{{ info.money }}</div>
+        <div class="title">您已成功支付{{ info.money }}元</div>
         <div class="loading"><img :src="loading_gif"/></div>
         <div class="time"><span>已等待{{ countup }}秒！</span></div>
         <div class="important">请耐心等待几秒，平台会立即反馈受理情况！<br/>如受理失败，支付金额将退回到您账户中！</div>
@@ -68,7 +68,7 @@
           if (this.timestart < this.timeend) {
               setTimeout(this.countUp, 1000);
           } else {
-            this.$router.replace('/askSuccess/'+this.id);
+            //this.$router.replace('/askSuccess/'+this.id);
           }
       }
     }
@@ -83,13 +83,17 @@
     padding:15px;
   }
   .pay-success .status{
-    margin-top:40px;
-    font-size:22px;
+    margin-top:100px;
+    font-size:20px;
     color:#19ac18;
   }
 
+  .pay-success .status span{
+    color:#417505;
+  }
+
   .pay-success .status .mui-icon{
-    font-size:80px;
+    font-size:100px;
     margin-bottom: 20px;
   }
   .pay-success .title{
@@ -99,8 +103,8 @@
 
   .pay-success .important{
     margin-top:40px;
-    line-height: 33px;
-    color:#999;
+    color: #4a4a4a;
+    font-size: 14px;
   }
 
   .pay-success .time{
