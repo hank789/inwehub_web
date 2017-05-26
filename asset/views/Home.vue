@@ -158,15 +158,15 @@
 
 <style scoped>
   .mui-bar .myicon-qian {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     left: 10px;
     top: 12px;
   }
 
   .mui-bar .myicon-expert {
-    width: 28px;
-    height: 28px;
+    width: 27px;
+    height: 27px;
     right: 10px;
     top: 12px;
   }
