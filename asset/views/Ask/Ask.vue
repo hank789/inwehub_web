@@ -345,7 +345,7 @@
   }
 
   .selectMoney .help{
-      margin-top:20px;
+      margin:30px 0;
   }
   .form-ask .select span {
     border: 1px solid #b6b6b6;
@@ -404,7 +404,7 @@
 
   .selectMoney {
     text-align: center;
-    padding: 20px 30px 10px;
+    padding: 40px 30px 20px;
   }
 
   .selectMoney .payDesc {

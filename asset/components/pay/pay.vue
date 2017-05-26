@@ -1,6 +1,6 @@
 <template>
   <div id="pay_content">
-    <div id="wxpay" class="mui-btn mui-btn-block mui-btn-green" v-if="wechatPay === '1'" @tap.stop.prevent="pay('wxpay')">微信支付</div>
+    <div id="wxpay" class="mui-btn mui-btn-block mui-btn-primary" v-if="wechatPay === '1'" @tap.stop.prevent="pay('wxpay')">微信支付</div>
     <div id="alipay" class="mui-btn mui-btn-block mui-btn-primary" v-if="aliPay === '1'"  @tap.stop.prevent="pay('alipay')">支付宝支付</div>
     <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('appleiap')">苹果支付</div>
   </div>
