@@ -1,40 +1,34 @@
 <template>
+  <div>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">关于我们</h1>
+    </header>
+    <div class="mui-content">
+      <div class="mui-content-padded" v-html="aboutus">
 
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
   import {apiRequest} from '../utils/request';
-  import {browser} from '../utils/browser';
 
   export default {
     data: () => ({
-      about_us_url: ''
+      aboutus: ''
     }),
     created () {
-      apiRequest(`system/getH5Url`,{}).then(response_data => {
-        this.about_us_url = response_data.about_us_url;
+      apiRequest(`system/service_about`,{}).then(response_data => {
+        this.aboutus = response_data.html;
       });
     },
     methods: {
+
     },
-    mounted(){
-      new browser({// 支持字符串，函数
-        url: function() {
-          return this.about_us_url;
-        },
-        bounce: true, // 设置回弹
-        style: { // 浏览器样式
-          top: '44px',
-          bottom: '0px'
-        },
-        title: false,
-        loading: function () {
-          plus.nativeUI.showWaiting();
-        },
-        loaded: function () {
-          plus.nativeUI.closeWaiting();
-        }
-      })
+    watch: {
+
     }
   }
 
@@ -42,41 +36,5 @@
 
 
 <style scoped>
-  .mui-content{
-  }
-  .title{
-    color:#aba9ab;
-    height:40px;
-    line-height:40px;
-    padding-left:10px;
-  }
-  .feedback{
-  }
-  .feedback textarea{
-    height:200px;
-  }
 
-  .textarea-wrapper{
-    position: relative;
-    margin:0 5px;
-    background: #fff;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
-    padding-bottom:20px;
-  }
-  .textarea-wrapper textarea{
-    padding-bottom:0;
-    margin-bottom:0;
-    border:none;
-  }
-  .textarea-wrapper .counter{
-    position: absolute;
-    right: 10px;
-    bottom: 2px;
-    color:#999;
-  }
-  .button-wrapper{
-    margin-top:40px;
-    padding:0 50px;
-  }
 </style>
