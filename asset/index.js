@@ -18,6 +18,12 @@ import VueLazyload from 'vue-lazyload';
 
 import store from './stores/store';
 import App from './App';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+Raven
+  .config('https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478')
+  .addPlugin(RavenVue, Vue)
+  .install();
 
 
 import loading_img from './statics/images/image-loading.png';

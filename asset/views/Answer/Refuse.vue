@@ -20,8 +20,8 @@
 
             <div class="title">您怎么就拒绝回答啦？</div>
             <div class="category">
-              <span v-for="(item, index) in tags" :class="sTags.indexOf(item) >= 0 ?'active':''"
-                    @tap.stop.prevent="selectTags(item)">{{ item }}</span>
+              <span v-for="(item, index) in tags" :class="sTags.indexOf(item.value) >= 0 ?'active':''"
+                    @tap.stop.prevent="selectTags(item)">{{ item.text }}</span>
             </div>
 
             <div class="textarea-wrapper">
@@ -73,11 +73,11 @@
     },
     methods: {
       selectTags (tag) {
-        var pos = this.sTags.indexOf(tag);
+        var pos = this.sTags.indexOf(tag.value);
         if (pos >= 0) {
           this.sTags.splice(pos, 1);
         } else {
-          this.sTags.push(tag);
+          this.sTags.push(tag.value);
         }
       },
       speech(){
@@ -198,6 +198,7 @@
 
   .form-ask-refuse .category span.active {
     border: 1px solid #4a90e2;
+    color:#4a90e2;
   }
 
   .form-ask-refuse .category span {
