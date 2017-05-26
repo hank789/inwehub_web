@@ -45,7 +45,7 @@
           <!--<span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"-->
                                                            <!--v-model.number="money"/></span>-->
         </div>
-        <div class="help">一份投入一份收获，合理的价格会更好的鼓励专家快速反馈！</div>
+        <div class="help">你若问的用心，我将答的精彩</div>
         <div class="button-wrapper">
           <pay :pay_object_type="pay_object_type" :pay_money="money" v-on:pay_success="goAsk">
 
@@ -328,7 +328,8 @@
   }
 
   .selectMoney .category span.active, .form-ask .select span.active {
-    border: 1px solid #4a90e2;
+    border: 1px solid #4990E2;
+    color:#4990E2;
   }
 
   .selectMoney .category span {
@@ -343,6 +344,9 @@
     position: relative;
   }
 
+  .selectMoney .help{
+      margin-top:20px;
+  }
   .form-ask .select span {
     border: 1px solid #b6b6b6;
     border-radius: 5px;
@@ -368,7 +372,7 @@
 
   .form-ask .button-wrapper {
     margin-top: 15px;
-    padding: 0 50px
+    padding: 0 80px
   }
 
   .textarea-wrapper {
@@ -481,6 +485,6 @@
 
   .fixedDiv .button-wrapper {
     margin-top: 15px;
-    padding: 0 50px
+    padding: 0 90px
   }
 </style>

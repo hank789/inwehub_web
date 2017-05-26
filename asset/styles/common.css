@@ -259,3 +259,12 @@ input, textarea, select{
 .mySideMenu{
   background: #f7f7f7;
 }
+
+input[type='button'], input[type='submit'], input[type='reset'], button, .mui-btn{
+  border-radius:20px;
+}
+
+input[type='submit'], .mui-btn-primary, .mui-btn-blue{
+  border:1px solid #4990E2;
+  background-color: #4990E2;
+}
