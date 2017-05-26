@@ -272,3 +272,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .mui-btn-outlined {
   background-color: transparent;
 }
+
+.mui-btn-link {
+  background-color: transparent;
+}
