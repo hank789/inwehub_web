@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="mui-table-view-cell question content">
-          {{ ask.question.description }}
+          提问：{{ ask.question.description }}
 
         </div>
       </div>
@@ -503,8 +503,8 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     font-size: 20px;
     text-align: center;
     border-radius: 50%;

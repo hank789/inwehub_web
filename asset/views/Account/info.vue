@@ -43,7 +43,7 @@
         <ul class="mui-table-view mui-table-view-chevron firstItem">
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/my/info/basic')"><span class="mui-icon myicon myicon-wallet"></span>基本资料
-                <span class="desc important">请添加出生日期、行业领域等字段</span>
+                <span class="desc important">{{ user.infos }}</span>
             </a>
 
           </li>
