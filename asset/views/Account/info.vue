@@ -272,7 +272,7 @@
   }
 
   .professor .text {
-    width: 60%;
+    width: 65%;
     height: 100%;
     padding-top: 20px;
     padding-left: 20px;
