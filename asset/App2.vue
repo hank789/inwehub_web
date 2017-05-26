@@ -1,10 +1,26 @@
 <template>
   <div id="app">
 
+    <div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+
+      <!-- 菜单容器 -->
+      <aside class="mui-off-canvas-left mySideMenu">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <!-- 菜单具体展示内容 -->
+            ...
 
 
 
+          </div>
+        </div>
 
+      </aside>
+
+
+
+      <!-- 主页面容器 -->
+      <div class="mui-inner-wrap">
 
 
         <div v-wechat-title="$route.meta.title"></div>
@@ -41,6 +57,28 @@
 
           </div>
         </nav>
+
+        <div id="backdrop" class="mui-off-canvas-backdrop"></div>
+
+
+      </div>
+    </div>
+
+    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="goRecommand">推荐专家</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="goExpert">专家管理</a>
+        </li>
+      </ul>
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="expertNav"><b>取消</b></a>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>

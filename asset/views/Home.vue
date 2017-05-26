@@ -91,6 +91,22 @@
     </div>
 
 
+    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="goRecommand">推荐专家</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="goExpert">专家管理</a>
+        </li>
+      </ul>
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="expertNav"><b>取消</b></a>
+        </li>
+      </ul>
+    </div>
+
 
   </div>
 
@@ -132,6 +148,14 @@
       next();
     },
     methods: {
+      goRecommand: function () {
+        this.expertNav();
+        this.$router.push('/expert/recommend')
+      },
+      goExpert: function () {
+        this.expertNav();
+        this.$router.push('/expert')
+      },
       toggleMenu(){
         mui('.mui-off-canvas-wrap').offCanvas('toggle');
       },
