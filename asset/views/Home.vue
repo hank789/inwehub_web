@@ -121,6 +121,11 @@
     },
     mounted(){
       document.body.style.backgroundColor = '#fff';
+
+      var offCanvasInner = document.querySelector('.mui-inner-wrap');
+      offCanvasInner.addEventListener('drag', function(event) {
+        event.stopPropagation();
+      });
     },
     beforeRouteLeave(to, from, next) {
       document.body.style.backgroundColor = '#efeff4';
