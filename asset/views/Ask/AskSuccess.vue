@@ -131,8 +131,7 @@
 
   .buttons button{
       margin:0 15px;
-     padding-left:20px;
-    padding-right:20px;
+     padding:8px 30px;
   }
 
 
