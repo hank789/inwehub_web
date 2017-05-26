@@ -27,6 +27,30 @@
       <div class="mui-page-content">
         <div class="mui-scroll-wrapper" id="infoWrapper">
           <div class="mui-scroll">
+
+            <div class="mui-table-view" id="head" @tap.stop.prevent="changeAvatar">
+              <div class="mui-table-view-cell personCard">
+
+                <div class="title">添加职业照片更真实</div>
+                <span class="mui-icon fa fa-hand-o-right"></span>
+                <div class="titleSub">个人信息完善度<span>{{ user.info.account_info_complete_percent }}%</span></div>
+                <div class="titleSubSub" v-if="user.info.account_info_complete_percent < 90">您的个人信息还不太完整，<br/>90%以上才算较为完整，请再接再厉！</div>
+                <div class="titleSubSub" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">您的个人信息较为完整，<br/>距离满分只有一步之遥啦，请再接再厉！</div>
+
+                <div class="avatar">
+                  <div class="avatarInner">
+                    <img class="head-img mui-action-preview" :src="user.info.avatar_url">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="account_item_title">
+              基本资料
+
+
+
+            </div>
             <ul class="mui-table-view mui-table-view-chevron">
               <li class="mui-table-view-cell">
                 <a href="#account_name" class="mui-navigate-right">用户姓名<span
@@ -77,6 +101,64 @@
               <li class="mui-table-view-cell">
                 <a href="#account_description" class="mui-navigate-right">个人签名<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{user.info.description ? user.info.description : '请填写'}}</span></a>
+              </li>
+            </ul>
+            <div class="account_item_title">
+              工作经历<a @tap.stop.prevent="$router.push('/my/info/job/0')" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.jobs.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护工作经历</li>
+            </ul>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="job in user.jobs" class="mui-table-view-cell">
+                <a  @tap.stop.prevent="$router.push('/my/info/job/' + job.id)" class="mui-navigate-right">
+                  {{ job.company }}
+                  <p class='mui-ellipsis'>{{ job.title }} | {{ job.begin_time }} ~ {{ job.end_time }}</p>
+                </a>
+              </li>
+            </ul>
+            <div class="account_item_title">
+              项目经历<a @tap.stop.prevent="$router.push('/my/info/project/0')" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.projects.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护项目经历</li>
+            </ul>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="project in user.projects" class="mui-table-view-cell">
+                <a @tap.stop.prevent="$router.push('/my/info/project/'+project.id)" class="mui-navigate-right">
+                  {{ project.project_name }}
+                  <p class='mui-ellipsis'>{{ project.begin_time }} ~ {{ project.end_time }} | {{ project.title }}</p>
+                </a>
+              </li>
+            </ul>
+            <div class="account_item_title">
+              教育经历<a @tap.stop.prevent="$router.push('/my/info/edu/0')" class="mui-pull-right"><span class="iplus mui-icon fa  fa-plus"></span></a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.edus.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护教育经历</li>
+            </ul>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="edu in user.edus" class="mui-table-view-cell">
+                <a @tap.stop.prevent="$router.push('/my/info/edu/'+edu.id)" class="mui-navigate-right">
+                  {{ edu.school }}
+                  <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree
+                  }}</p>
+                </a>
+              </li>
+            </ul>
+            <div class="account_item_title">
+              培训认证<a @tap.stop.prevent="$router.push('/my/info/train/0')" class="mui-pull-right"><span
+              class="iplus mui-icon fa  fa-plus"></span></a>
+            </div>
+            <ul class="mui-table-view mui-table-view-chevron" v-show="user.trains.length == 0">
+              <li class="mui-table-view-cell no-empty">请维护培训认证经历</li>
+            </ul>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li v-for="train in user.trains" class="mui-table-view-cell">
+                <a @tap.stop.prevent="$router.push('/my/info/train/'+train.id)" class="mui-navigate-right">
+                  {{ train.agency }}
+                  <p class='mui-ellipsis'>{{ train.get_time }} | {{ train.certificate }}</p>
+                </a>
               </li>
             </ul>
           </div>
@@ -234,16 +316,16 @@
 </template>
 
 <script>
-  import {NOTICE, USERS_APPEND} from '../../../stores/types';
-  import {apiRequest} from '../../../utils/request';
-  import localEvent from '../../../stores/localStorage';
-  import popPickerComponent from '../../../components/picker/poppicker.vue';
-  import "../../../js/mui.view";
-  import cityData from '../../../components/city/city.data';
-  import ACCOUNT_API from '../../../api/account';
-  import dPickerComponent from '../../../components/picker/date-picker.vue';
-  import {updateUserInfoCache, getUserInfo} from '../../../utils/user';
-  import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue';
+  import {NOTICE, USERS_APPEND} from '../../stores/types';
+  import {apiRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
+  import popPickerComponent from '../../components/picker/poppicker.vue';
+  import "../../js/mui.view";
+  import cityData from '../../components/city/city.data';
+  import ACCOUNT_API from '../../api/account';
+  import dPickerComponent from '../../components/picker/date-picker.vue';
+  import {updateUserInfoCache, getUserInfo} from '../../utils/user';
+  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export default {
     data: () => ({
@@ -934,7 +1016,7 @@
   }
 
   .mui-page .mui-table-view:first-child {
-    margin-top: 0;
+    margin-top: 15px;
   }
 
   .mui-page .mui-table-view:last-child {

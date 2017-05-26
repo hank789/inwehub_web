@@ -3,8 +3,8 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">教育经历</h1>
-      <a @tap.stop.prevent="$router.push('/my/info/edu/0')"
+      <h1 class="mui-title">项目经历</h1>
+      <a @tap.stop.prevent="$router.push('/my/info/project/0')"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
@@ -15,16 +15,15 @@
     </div>
 
     <div class="mui-content" v-show="!loading">
-      <ul class="mui-table-view mui-table-view-chevron" v-show="edus.length == 0">
-        <li class="mui-table-view-cell no-empty">请维护教育经历</li>
+      <ul class="mui-table-view mui-table-view-chevron" v-show="projects.length == 0">
+        <li class="mui-table-view-cell no-empty">请维护项目经历</li>
       </ul>
 
       <ul class="mui-table-view mui-table-view-chevron">
-        <li v-for="edu in edus" class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/edu/'+edu.id)" class="mui-navigate-right">
-            {{ edu.school }}
-                  <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree
-            }}</p>
+        <li v-for="project in projects" class="mui-table-view-cell">
+          <a @tap.stop.prevent="$router.push('/my/info/project/'+project.id)" class="mui-navigate-right">
+            {{ project.project_name }}
+                  <p class='mui-ellipsis'>{{ project.begin_time }} ~ {{ project.end_time }} | {{ project.title }}</p>
           </a>
         </li>
       </ul>
@@ -42,7 +41,7 @@
 
   export default {
     data: () => ({
-      edus:[],
+      projects:[],
       loading: true,
       loading_gif: loading_gif
     }),
@@ -58,7 +57,7 @@
     },
 
     created () {
-      postRequest(`account/edu/list`, {}).then(response => {
+      postRequest(`account/project/list`, {}).then(response => {
 
         var code = response.data.code;
         if (code !== 1000) {
@@ -66,18 +65,18 @@
           return;
         }
 
-        this.edus = response.data.data;
+        this.projects = response.data.data;
         this.loading = false;
 
-        var newEdus = [];
-        for(var i in this.edus) {
-          var info = this.edus[i];
+        var newProjects = [];
+        for(var i in this.projects) {
+          var info = this.projects[i];
           var id = info.id;
-          newEdus[id] = info;
+          newProjects[id] = info;
         }
-        localEvent.setLocalItem('edus', newEdus);
-
+        localEvent.setLocalItem('projects', newProjects);
       });
+
     }
   }
 </script>

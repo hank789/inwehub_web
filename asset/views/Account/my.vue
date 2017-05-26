@@ -27,23 +27,23 @@
       </div>
 
       <div class="counter">
-        <span class="level">LV5</span>
-        <span class="grow">成长值：1560</span>
-        <span class="integral">哈币：567</span>
+        <span class="level">LV{{ user_level }}</span>
+        <span class="grow">成长值：{{ user_credits }}</span>
+        <span class="integral">哈币：{{ user_coins }}</span>
       </div>
 
       <div class="part2">
         <a class="item" @tap.stop.prevent="$router.push('/asks')">
-          <span class="number">--</span><span>我的提问</span>
+          <span class="number">{{ questions }}</span><span>我的提问</span>
         </a>
         <a class="item" @tap.stop.prevent="$router.push('/answers')">
-          <span class="number">--</span><span>我的回答</span>
+          <span class="number">{{ answers }}</span><span>我的回答</span>
         </a>
         <a class="item" @tap.stop.prevent="$router.push('/task')">
-          <span class="number">--</span><span>我的任务</span>
+          <span class="number">{{ tasks }}</span><span>我的任务</span>
         </a>
         <a  class="item"  @tap.stop.prevent="$router.push('/project')">
-          <span class="number">--</span><span>我的项目</span>
+          <span class="number">{{ projects }}</span><span>我的项目</span>
         </a>
       </div>
 
@@ -91,7 +91,14 @@
         company: currentUser.company,
         account_info_complete_percent: currentUser.account_info_complete_percent,
         isExpert: currentUser.is_expert,
-        total_money: currentUser.total_money
+        total_money: currentUser.total_money,
+        user_level:currentUser.user_level,
+        user_credits:currentUser.user_credits,
+        user_coins:currentUser.user_coins,
+        questions:currentUser.questions,
+        answers:currentUser.answers,
+        tasks:currentUser.tasks,
+        projects:currentUser.projects,
       }
     },
     methods: {
@@ -106,6 +113,13 @@
         cb(user);
         this.account_info_complete_percent = user.info.account_info_complete_percent;
         this.isExpert = user.info.is_expert;
+        this.user_level = user.info.user_level;
+        this.user_credits = user.info.user_credits;
+        this.user_coins = user.info.user_coins;
+        this.questions = user.info.questions;
+        this.answers = user.info.answers;
+        this.tasks = user.info.tasks;
+        this.projects = user.info.projects;
       }));
     },
     mounted(){

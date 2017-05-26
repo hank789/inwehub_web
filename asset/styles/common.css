@@ -231,6 +231,26 @@ input, textarea, select{
   background: url("../statics/images/icon_qian.png");
 }
 
+.myicon-plus{
+  background: url("../statics/images/icon-jia.png");
+}
+
+.myicon-phone{
+  background: url("../statics/images/icon-phone.png");
+}
+
+.myicon-email{
+  background: url("../statics/images/icon-email.png");
+}
+
+.myicon-position{
+  background: url("../statics/images/icon-position.png");
+}
+
+.myicon-paizhao{
+  background: url("../statics/images/icon-paizhao.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;

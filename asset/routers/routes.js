@@ -136,6 +136,36 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 工作经历
+    path: '/my/info/jobs',
+    component: require('../views/Account/infos/jobs.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 项目经历
+    path: '/my/info/projects',
+    component: require('../views/Account/infos/projects.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 培训经历
+    path: '/my/info/trains',
+    component: require('../views/Account/infos/trains.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 基本信息
     path: '/my/info/basic',
     component: require('../views/Account/infos/basic.vue'),

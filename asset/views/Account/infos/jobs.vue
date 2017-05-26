@@ -3,8 +3,8 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">教育经历</h1>
-      <a @tap.stop.prevent="$router.push('/my/info/edu/0')"
+      <h1 class="mui-title">工作经历</h1>
+      <a @tap.stop.prevent="$router.push('/my/info/job/0')"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
@@ -15,16 +15,15 @@
     </div>
 
     <div class="mui-content" v-show="!loading">
-      <ul class="mui-table-view mui-table-view-chevron" v-show="edus.length == 0">
-        <li class="mui-table-view-cell no-empty">请维护教育经历</li>
+      <ul class="mui-table-view mui-table-view-chevron" v-show="jobs.length == 0">
+        <li class="mui-table-view-cell no-empty">请维护工作经历</li>
       </ul>
 
       <ul class="mui-table-view mui-table-view-chevron">
-        <li v-for="edu in edus" class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/edu/'+edu.id)" class="mui-navigate-right">
-            {{ edu.school }}
-                  <p class='mui-ellipsis'>{{ edu.begin_time }} ~ {{ edu.end_time }} | {{ edu.major }} | {{ edu.degree
-            }}</p>
+        <li v-for="job in jobs" class="mui-table-view-cell">
+          <a  @tap.stop.prevent="$router.push('/my/info/job/' + job.id)" class="mui-navigate-right">
+            {{ job.company }}
+                  <p class='mui-ellipsis'>{{ job.title }} | {{ job.begin_time }} ~ {{ job.end_time }}</p>
           </a>
         </li>
       </ul>
@@ -42,7 +41,7 @@
 
   export default {
     data: () => ({
-      edus:[],
+      jobs:[],
       loading: true,
       loading_gif: loading_gif
     }),
@@ -56,9 +55,8 @@
     computed:{
 
     },
-
     created () {
-      postRequest(`account/edu/list`, {}).then(response => {
+      postRequest(`account/job/list`, {}).then(response => {
 
         var code = response.data.code;
         if (code !== 1000) {
@@ -66,17 +64,17 @@
           return;
         }
 
-        this.edus = response.data.data;
-        this.loading = false;
+        this.jobs = response.data.data;
 
-        var newEdus = [];
-        for(var i in this.edus) {
-          var info = this.edus[i];
+        var newJobs = [];
+        for(var i in this.jobs) {
+          var info = this.jobs[i];
           var id = info.id;
-          newEdus[id] = info;
+          newJobs[id] = info;
         }
-        localEvent.setLocalItem('edus', newEdus);
+        localEvent.setLocalItem('jobs', newJobs);
 
+        this.loading = false;
       });
     }
   }

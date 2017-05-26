@@ -91,7 +91,14 @@ function updateUserInfoCache(user) {
     account_info_complete_percent:'',
     is_expert:0,
     total_money: '-',
-    datas: {}
+    datas: {},
+    questions:0,
+    answers:0,
+    tasks:0,
+    projects:0,
+    user_level:0,
+    user_credits:0,
+    user_coins:0
   };
   userLocal.user_id = user.id;
   userLocal.name = user.name;
@@ -112,6 +119,14 @@ function updateUserInfoCache(user) {
   userLocal.account_info_complete_percent = user.account_info_complete_percent;
   userLocal.is_expert  = user.is_expert;
   userLocal.total_money = user.total_money;
+
+  userLocal.user_level = user.user_level;
+  userLocal.user_credits = user.user_credits;
+  userLocal.user_coins = user.user_coins;
+  userLocal.questions = user.questions;
+  userLocal.answers = user.answers;
+  userLocal.tasks = user.tasks;
+  userLocal.projects = user.projects;
 
   /*
    user.counts.map(function (count, index) {
