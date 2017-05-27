@@ -243,6 +243,22 @@
         })
       }
     },
+    beforeRouteEnter (to, from, next) {
+
+      mui.plusReady(function () {
+
+        plus.navigator.setFullscreen(true);
+      });
+      next();
+    },
+    beforeRouteLeave(to, from, next) {
+
+      mui.plusReady(function () {
+        plus.navigator.setFullscreen(false);
+      });
+
+      next();
+    },
     computed: {
       error: function () {
         let errors = Object.values(this.errors);

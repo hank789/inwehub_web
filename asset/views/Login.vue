@@ -74,6 +74,22 @@
         }
       });
     },
+    beforeRouteEnter (to, from, next) {
+
+      mui.plusReady(function () {
+
+        plus.navigator.setFullscreen(true);
+      });
+      next();
+    },
+    beforeRouteLeave(to, from, next) {
+
+      mui.plusReady(function () {
+        plus.navigator.setFullscreen(false);
+      });
+
+      next();
+    },
     methods: {
       entryPhone(){
         this.showPhoneLabel = false;

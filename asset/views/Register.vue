@@ -131,6 +131,22 @@
         }
       });
     },
+    beforeRouteEnter (to, from, next) {
+
+      mui.plusReady(function () {
+
+        plus.navigator.setFullscreen(true);
+      });
+      next();
+    },
+    beforeRouteLeave(to, from, next) {
+
+      mui.plusReady(function () {
+        plus.navigator.setFullscreen(false);
+      });
+
+      next();
+    },
     methods: {
       goback () {
         this.$router.go(-1);
