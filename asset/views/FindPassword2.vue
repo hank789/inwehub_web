@@ -1,26 +1,37 @@
 <template>
 
-  <div class="mui-content">
-    <div class="login">
-      <div class="title">找回密码</div>
-      <div class="leftNav" @tap.stop.prevent="goback"></div>
-      <div class="inputWrapper">
-        <input class="text" type="text" v-model.trim.num="phone" name="phone"/>
-        <label @tap.stop.prevent="entryPhone" v-show="showPhoneLabel">手机号码</label>
-      </div>
-      <div class="inputWrapper">
-        <input class="text" type="text" v-model.number.trim="code" name="code"/>
-        <label @tap.stop.prevent="entryYzm" v-show="showYzmLabel">验证码</label>
-        <span class="getYzm" @click="getCode" :disabled="!isCanGetCode">{{ getCodeText }}</span>
-      </div>
-      <div class="inputWrapper">
-        <input class="text" type="password" v-model.trim="password" name="password"/>
-        <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">输入新密码</label>
-      </div>
+  <div class="page page-white">
+    <div class="page-container">
 
+      <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">找回密码</h1>
+      </header>
 
-      <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认</button>
+      <div class="mui-content">
+        <form class="mui-input-group">
+          <div class="mui-input-row">
+            <label>手机号</label>
+            <input type="text"  autocomplete="off" placeholder="输入手机号码" v-model.trim.num="phone" id="phone" name="phone">
+          </div>
+          <div class="mui-input-row">
+            <label>验证码</label>
+            <input type="text" autocomplete="off" placeholder="请输入验证码" v-model.number.trim="code" id="code" name="code">
+            <span class="sendCode" @click="getCode" htmlType="button" :disabled="!isCanGetCode">{{ getCodeText }}</span>
+          </div>
+          <div class="mui-input-row">
+            <label>新密码</label>
+            <input type="password" class="mui-input-password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上登录密码" id="password" name="password">
+          </div>
+
+        </form>
+        <div class="mui-content-padded">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" :disabled="isDisabled" @click.prevent="submit">确认</button>
+        </div>
+
+        <div class="mui-content-padded">
+          <p class="notice error">{{ error }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -48,62 +59,16 @@
       isShowClean: false, // 是否显示清除手机号按钮
       isShowPasswordText: false, // 是否显示明文密码
       isShowPassword: true, // 是否显示真实密码
-      isCanGetCode: true,
+      isCanGetCode: false,
       errors: {}, // 错误对象
       isValidCode: false, // 验证码合法性
       isValidPhone: false, // 是否合法手机号
       isValidPassword: false, // 是否合法密码
       CodeText: '获取验证码', // 获取验证码按钮文字
       time: 0, // 时间倒计时
-      isLoading: false, // 登录loading
-      showYzmLabel: true,
-      showPhoneLabel: true,
-      showPasswordLabel: true,
+      isLoading: false // 登录loading
     }),
-    mounted(){
-
-      mui(".login").on('focusout', 'input', (e) => {
-        switch (e.target.name) {
-          case 'yzm':
-            if (!this.code) this.showYzmLabel = true;
-            break;
-          case 'phone':
-            if (!this.phone) this.showPhoneLabel = true;
-            break;
-          case 'password':
-            if (!this.password) this.showPasswordLabel = true;
-            break;
-        }
-      });
-
-      mui(".login").on('focusin', 'input', (e) => {
-
-        switch (e.target.name) {
-          case 'code':
-            this.showYzmLabel = false;
-            break;
-          case 'phone':
-            this.showPhoneLabel = false;
-            break;
-          case 'password':
-            this.showPasswordLabel = false;
-            break;
-        }
-      });
-    },
     methods: {
-      goback () {
-        this.$router.go(-1);
-      },
-      entryPhone(){
-        this.showPhoneLabel = false;
-      },
-      entryPassword(){
-        this.showPasswordLabel = false;
-      },
-      entryYzm(){
-        this.showYzmLabel = false;
-      },
       // 清理请求错误
       cleanErrors () {
         let errors = this.errors;
@@ -142,16 +107,12 @@
       getCode () {
         let phone = this.phone;
         let type = 'change';
-
-        if (!this.isCanGetCode) return;
+        this.isCanGetCode = false;
 
         if (phone.length !== 11) {
             mui.toast("请正确输入手机号");
             return;
         }
-
-        this.isCanGetCode = false;
-
 
         request.post(createAPI('auth/sendPhoneCode'), {
             mobile:phone,
@@ -165,8 +126,6 @@
             this.time = 60;
             this.timer();
           }
-
-          this.timer ();
 
           var code = response.data.code;
           if (code !== 1000) {
@@ -185,33 +144,6 @@
         let { phone, code, password } = this;
         this.isLoading = true;
         this.isDisabled = true;
-
-        if (!phoneReg.test(this.phone)) {
-          mui.toast("请正确输入手机号");
-          return;
-        }
-
-
-        if (!this.code) {
-          mui.toast("请输入验证码");
-          return;
-        }
-
-        if (!codeReg.test(this.code)) {
-          mui.toast('验证码错误');
-          return;
-        }
-
-        if (!this.password) {
-          mui.toast('请输入新密码');
-          return;
-        }
-
-        if (this.password.length < 6) {
-          mui.toast("新密码长度必须大于6位");
-          return;
-        }
-
         request.post(createAPI('auth/forgot'), {
             mobile:phone,
             code,
@@ -231,7 +163,7 @@
           }
 
           mui.toast('密码重置成功');
-          this.$router.push({ path: '/login' });
+          this.$router.push({ path: 'login' });
 
         })
         .catch(({ response: { data = {} } ={} }) => {
@@ -317,82 +249,24 @@
 
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
-  .login{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:#161616;
-    background-size: cover;
-    text-align: center;
+  .container{
+    padding-top:10px;
+    padding-right:10px;
   }
-
-  .title{
-    margin:140px 0 50px;
-    font-size:36px;
-    color:#fff;
+  .error{
+    color:red;
   }
-
-  input[type='text'],input[type='password']{
-    background-color:transparent;
-    border:none;
-    text-align: center;
-    color:#fff;
-    margin-bottom:0;
-
+  .mui-input-group {
+    margin:20px 0;
   }
-
-  .inputWrapper{
-    border-bottom:1px solid rgba(255,255,255,.6);
-    margin:0 60px;
-    padding:10px 0;
-    position: relative;
-  }
-
-  .inputWrapper label{
+  .sendCode{
+    font-size: 16px;
     position: absolute;
-    left:0;
-    color:#fff;
-    width:100%;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    height: 38px;
     text-align: center;
-    top:50%;
-    margin-top:-8px;
-  }
-
-  .inputWrapper .getYzm{
-    position: absolute;
-    right:0;
-    color:rgba(255,255,255,.6);
-    bottom:5px;
-    font-size:14px;
-  }
-
-  .protocol{
-    color:#fff;
-    font-size:14px;
-    padding: 10px 80px;
-
-  }
-  .protocol span{
-    color:#F6A623;
-  }
-
-  .buttonWrapper{
-    padding:0 122px;
-    margin-top:40px;
-  }
-
-  .mui-btn-block {
-    padding: 10px 0;
-  }
-
-  .leftNav{
-    background: url(../statics/images/icon-login-left.png)  no-repeat ;
-    background-size: cover;
-    width:10px;
-    height:17px;
-    position: absolute;
-    top:10px;
-    left:10px;
-    margin:10px;
+    color: #999;
   }
 </style>

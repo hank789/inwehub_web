@@ -119,7 +119,7 @@
           case 'yqm':
             this.showYqCodeLabel = false;
             break;
-          case 'yzm':
+          case 'code':
             this.showYzmLabel = false;
             break;
           case 'phone':
