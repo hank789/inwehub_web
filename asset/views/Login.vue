@@ -190,28 +190,32 @@
     background-color:transparent;
     border:none;
     text-align: center;
-    border-bottom:1px solid rgba(255,255,255,.9);
     color:#fff;
+    margin-bottom:0;
   }
 
   .inputWrapper{
-    padding:0 60px;
+    border-bottom:1px solid rgba(255,255,255,.9);
+    margin:0 60px;
+    padding:10px 0;
     position: relative;
   }
 
   .inputWrapper label{
     position: absolute;
+    left:0;
     color:#fff;
-    left:50%;
-    margin-left:-32px;
-    top:5px;
+    width:100%;
+    text-align: center;
+    top:50%;
+    margin-top:-8px;
 
   }
   .forget{
     color:rgba(255,255,255, .6);
     font-size:14px;
     text-align: right;
-    padding: 0 80px;
+    padding: 10px 60px;
   }
 
   .buttonWrapper{
