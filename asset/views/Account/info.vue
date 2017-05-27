@@ -27,7 +27,7 @@
           <div class="company" v-show="user.info.company">{{ user.info.company }}</div>
           <div class="phone" v-show="user.info.mobile"><span class="mui-icon myicon myicon-phone"></span>{{ user.info.mobile }}</div>
           <div class="email" v-show="user.info.email"><span class="mui-icon myicon myicon-email"></span>{{ user.info.email }}</div>
-          <div class="address" v-show="user.info.address_detail"><span class="mui-icon myicon myicon-position"></span>{{ user.info.address_detail }}</div>
+          <!--<div class="address" v-show="user.info.address_detail"><span class="mui-icon myicon myicon-position"></span>{{ user.info.address_detail }}</div>-->
         </div>
       </div>
 
@@ -36,7 +36,9 @@
         <div class="progressBar">
           <div class="progress" :style="'width:'+ user.info.account_info_complete_percent +'%'"><span></span></div>
         </div>
-        <div class="tip">还差{{ 100-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
+
+        <div class="tip" v-if="user.info.account_info_complete_percent < 90">还差{{ 90-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
+        <div class="tip" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">距离满分只有一步之遥啦，请再接再厉！</div>
       </div>
 
       <div class="part3">
@@ -259,7 +261,7 @@
     background-color: #161616;
     text-align: center;
     position: relative;
-    padding-bottom: 20px;
+    height: 136px;
   }
 
   .professor .myicon-plus {
@@ -341,7 +343,7 @@
   }
 
   .part2 {
-    padding: 30px 0 20px 20px;
+    padding: 17px 0 17px 20px;
     background: #fff;
   }
 
@@ -365,7 +367,7 @@
     text-align: right;
     overflow: hidden;
     top: 4px;
-    left: 10%;
+    left: 10px;
     height: 20px;
   }
 

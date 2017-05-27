@@ -804,13 +804,13 @@
           if (infoLast) {
              var lastY = infoLast.lastY;
           }
-          mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
+          //mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
         });
       } else {
         if (infoLast) {
           var lastY = infoLast.lastY;
         }
-        mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
+        //mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
       }
     }
   }
