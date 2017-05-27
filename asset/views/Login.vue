@@ -237,8 +237,12 @@
   }
 
   .buttonWrapper{
-    padding:0 122px;
-    margin-top:100px;
+    padding:0 112px;
+    margin-top:80px;
+  }
+
+  .buttonWrapper button{
+    margin-bottom:30px;
   }
 
   .mui-btn-outlined{

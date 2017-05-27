@@ -394,7 +394,7 @@
   }
 
   .buttonWrapper{
-    padding:0 122px;
+    padding:0 112px;
     margin-top:40px;
   }
 
