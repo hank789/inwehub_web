@@ -420,6 +420,10 @@ const routes = [
     path: '/project',
     component: require('../views/Project.vue'),
   },
+  { // project
+    path: '/help',
+    component: require('../views/Account/Help.vue'),
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),

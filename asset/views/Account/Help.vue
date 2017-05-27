@@ -4,38 +4,24 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">设置</h1>
+      <h1 class="mui-title">帮助与反馈</h1>
     </header>
 
     <div class="mui-content">
 
+
       <ul class="mui-table-view mui-table-view-chevron">
 
         <li class="mui-table-view-cell">
-          消息与通知
-
-          <div class="mui-switch mui-switch-mini mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <router-link to="/feedback" class="mui-navigate-right">意见与反馈</router-link>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
+          <router-link to="/about" class="mui-navigate-right">常见问题</router-link>
+        </li>
+        <li class="mui-table-view-cell">
+          <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>
         </li>
       </ul>
-
-
-
-      <div class="mui-table-view">
-        <div class="mui-table-view-cell footer">
-          <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut">
-            退出应用
-
-          </button>
-          <div class="logo"></div>
-          <div class="copyright">CopyRight By InweHub © V1.0.0</div>
-        </div>
-
-      </div>
 
     </div>
 
@@ -238,13 +224,12 @@
   }
 
   .footer {
-    padding: 200px 40px 10px;
+    padding: 30px 40px;
     text-align: center;
   }
 
   .footer .copyright {
     font-size: 12px;
-
     color: #a6a6a6;
   }
 </style>
