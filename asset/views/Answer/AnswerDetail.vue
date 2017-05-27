@@ -28,7 +28,7 @@
             <div>
               <span class="timeAgo"><timeago
                 :since="answer.question.created_at?timeago(answer.question.created_at):''"></timeago></span>
-              <span class="amount">悬赏金额<b>￥{{ answer.question ? answer.question.price : '' }}</b>元</span>
+              <span class="amount">提问金额<b>￥{{ answer.question ? answer.question.price : '' }}</b>元</span>
             </div>
           </div>
 
@@ -117,13 +117,12 @@
 
 
       <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
-        <div class="mui-table-view-cell">
-          评价：<span class="ratingNum">{{ rating }}.0分</span>
-          <star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
-        </div>
         <div class="mui-table-view-cell content">
-          {{ answer.feedback.description }}
-
+          评价：{{ answer.feedback.description }}
+        </div>
+        <div class="mui-table-view-cell">
+          <span class="ratingNum">{{ rating }}.0分</span>
+          <star-rating :rating="rating" :padding="8" :star-size="25" :activeColor="'#F6A623'" :show-rating="showRating" :read-only="readOnly"></star-rating>
         </div>
       </div>
 
@@ -423,9 +422,11 @@
 
 
 <style scoped>
+  .detail-ask{
+    padding:10px 0;
+  }
   .detail-ask .question {
     position: relative;
-    font-size: 13px;
     line-height: 18px;
   }
 
@@ -442,6 +443,7 @@
     position: absolute;
     bottom: 10px;
     right: 15px;
+    font-size:14px;
     color: #ff9800;
   }
 
@@ -467,7 +469,8 @@
   }
 
   .detail-answer {
-    margin-top: 15px;
+    margin-top: -1px;
+    padding:10px 0;
   }
 
   .detail-answer .question {
@@ -496,11 +499,12 @@
   }
 
   .star-rating {
-    float: right;
+    float: left;
   }
 
   .detail-comment-result {
-    margin-top: 15px;
+    margin-top: -1px;
+    padding:10px 0 0;
   }
 
   .detail-comment-result p {
@@ -515,7 +519,6 @@
   }
 
   .content {
-    font-size: 12px;
     line-height: 18px;
   }
 
@@ -601,5 +604,12 @@
   .desc{
     padding-top:15px;
     color:#999;
+  }
+  .mui-table-view-cell:after{
+    display: none;
+  }
+
+  .mui-content > .mui-table-view:first-child{
+    margin-top:0;
   }
 </style>
