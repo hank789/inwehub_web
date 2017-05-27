@@ -29,7 +29,7 @@
                 <div class="person">
                   <div class="mui-media-body">
                     <div>
-                      <span>{{ getStatusText(ask.status)}}</span>
+                      <span>开发中</span>
                       ·
                       <span class="time"><timeago :since="timeago(ask.created_at)"></timeago></span>
                     </div>

@@ -20,23 +20,19 @@
 
         <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">
           <div class="mui-table-view-cell mui-media">
-            <div class="person">
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img :src="answer.user_avatar_url?answer.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
-                </div>
-              </div>
-              <div class="mui-media-body">
-                <span class="username">{{ answer.user_name }}</span>
-                <div>
-                  <span class="time"><timeago :since="timeago(answer.created_at)"></timeago></span>
-                  <span class="amount">悬赏金额<b>￥{{ answer.price }}</b>元</span>
-                </div>
-              </div>
-            </div>
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
             </div>
+            <div class="person">
+              <div class="mui-media-body">
+                <div>
+                  <span>开发中</span>
+                  ·
+              <span class="time"><timeago :since="timeago(answer.created_at)"></timeago></span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -228,11 +224,13 @@
   }
 
   .list-answer .list-answer-item .mui-media-body {
-    padding-left:15px;
+    padding-left:10px;
     line-height: 21px;
+    font-size:12px;
+    color:#9B9B9B;
   }
   .list-answer .list-answer-item .time{
-    color:#8c8c8c;
+    color:#9B9B9B;
     font-size:12px;
   }
 
@@ -262,7 +260,6 @@
     padding-left: 10px;
     line-height: 18px;
     color:#101010;
-    font-size:12px;
   }
 
   .list-answer .site-desc .mui-icon{
@@ -320,16 +317,7 @@
 
   .list-answer .person{
     position: relative;
-    padding-bottom:15px;
   }
 
-  .list-answer .person:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 10px;
-    height: 1px;
-    content: '';
-    background-color: #f2f2f2;
-  }
+
 </style>
