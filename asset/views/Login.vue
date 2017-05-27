@@ -120,6 +120,7 @@
         .then(response => {
 
           var code = response.data.code;
+
           if (code !== 1000) {
             this.isDisabled = false;
             this.isLoading = false;
@@ -154,10 +155,11 @@
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {
+
           this.isDisabled = false;
           const { code = 'xxxx' } = data;
           this.isLoading = false;
-          this.errors = Object.assign({}, this.errors, { code: errorCodes[code] });
+          mui.toast(errorCodes[code]);
         });
       }
     }
