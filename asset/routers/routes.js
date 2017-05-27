@@ -416,6 +416,10 @@ const routes = [
     path: '/about',
     component: require('../views/About.vue'),
   },
+  { // project
+    path: '/project',
+    component: require('../views/Project.vue'),
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),

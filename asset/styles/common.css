@@ -259,6 +259,14 @@ input, textarea, select{
   background: url("../statics/images/icon_ask_detail_jia.png");
 }
 
+.myicon-project{
+  background: url("../statics/images/icon-project.png");
+}
+
+.myicon-project2{
+  background: url("../statics/images/icon_project2.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
@@ -304,3 +312,5 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .mui-btn-link {
   background-color: transparent;
 }
+
+

@@ -3,7 +3,7 @@
 
 
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-icon myicon myicon-qian" @tap.stop.prevent="toggleMenu"></a>
+      <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.push('/project')"></a>
       <h1 class="mui-title">InweHub</h1>
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
     </header>
@@ -186,11 +186,11 @@
 </script>
 
 <style scoped>
-  .mui-bar .myicon-qian {
-    width: 20px;
-    height: 20px;
+  .mui-bar .myicon-project2 {
+    width:18px;
+    height:18px;
     left: 10px;
-    top: 12px;
+    top: 10px;
   }
 
   .mui-bar .myicon-expert {
