@@ -3,7 +3,7 @@
   <div class="mui-content">
     <div class="login">
       <div class="title">用户注册</div>
-      <div class="leftNav" @tap.stop.prevent="goback"></div>
+      <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
       <div class="inputWrapper">
         <input class="text" type="text" name="username" v-model.trim="username" autocomplete="off"/>
         <label @tap.stop.prevent="entryUsername" v-show="showUsernameLabel">真实姓名</label>
@@ -418,14 +418,19 @@
     padding: 10px 0;
   }
 
-  .leftNav {
-    background: url(../statics/images/icon-login-left.png) no-repeat;
-    background-size: cover;
-    width: 10px;
-    height: 17px;
+  .leftNav{
     position: absolute;
-    top: 10px;
-    left: 10px;
-    margin: 10px;
+    padding:30px;
+    left:0;
+    top:0;
+  }
+  .leftNav span{
+    background: url(../statics/images/icon-login-left.png)  no-repeat ;
+    background-size: cover;
+    width:10px;
+    height:17px;
+    position: absolute;
+    left:10px;
+    top:10px;
   }
 </style>

@@ -2,7 +2,7 @@
   <div class="mui-content">
     <div class="login">
       <div class="logo"></div>
-      <div class="leftNav" @tap.stop.prevent="goback"></div>
+      <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
       <div class="inputWrapper">
         <input class="text"  type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" />
         <label v-show="showPhoneLabel" @tap.stop.prevent="entryPhone">手机号码</label>
@@ -233,14 +233,19 @@
   }
 
   .leftNav{
+    position: absolute;
+    padding:30px;
+    left:0;
+    top:0;
+  }
+  .leftNav span{
     background: url(../statics/images/icon-login-left.png)  no-repeat ;
     background-size: cover;
     width:10px;
     height:17px;
     position: absolute;
-    top:10px;
     left:10px;
-    margin:10px;
+    top:10px;
   }
 </style>
 
