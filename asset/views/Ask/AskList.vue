@@ -287,7 +287,7 @@
   .list-ask .site-desc{
     margin-top:10px;
     padding-left:10px;
-    line-height: 18px;
+    line-height: 22px;
     color:#101010;
   }
 
