@@ -25,12 +25,15 @@
 
             <div>
               <span class="timeAgo"><timeago :since="getTime(ask.question.created_at)"></timeago></span>
-              <span class="amount">悬赏金额<b>￥{{ ask.question.price }}</b>元</span></div>
+              </div>
           </div>
         </div>
         <div class="mui-table-view-cell question content">
           提问：{{ ask.question.description }}
 
+        </div>
+        <div class="collectWrapper">
+           <div class="collect"><span class="mui-icon fa fa-heart"></span></div> <span class="amount">提问金额<b>￥{{ ask.question.price }}</b>元</span>
         </div>
       </div>
 
@@ -49,7 +52,7 @@
           </div>
         </div>
         <div class="mui-table-view-cell question content">
-          {{ ask.answers[0] ? ask.answers[0].content : '' }}
+          回答：{{ ask.answers[0] ? ask.answers[0].content : '' }}
 
         </div>
       </div>
@@ -70,28 +73,35 @@
       </div>
 
       <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
-        <div class="mui-table-view-cell">
-          评价：<span class="ratingNum">{{ rating }}.0分</span>
-          <star-rating :rating="rating" :star-size="20" :show-rating="showRating" :read-only="readOnly"></star-rating>
-        </div>
+
         <div class="mui-table-view-cell content">
-          {{ ask.feedback.description }}
+          评价：{{ ask.feedback.description }}
 
-
+        </div>
+        <div class="mui-table-view-cell">
+          <span class="ratingNum">{{ rating }}.0分</span>
+          <star-rating :rating="rating" :padding="8" :star-size="25" :activeColor="'#F6A623'" :show-rating="showRating" :read-only="readOnly"></star-rating>
         </div>
       </div>
 
       <div class="mui-table-view detail-ask-timeline">
         <div class="mui-table-view-cell">
-          <div class="timeline timeline-collapsing">
 
-            <div class="timeline-block" v-for="(item, index) in timelines">
-              <div class="timeline-icon"></div>
-              <div class="timeline-content">
-                {{ item.title }}<br/>
-                <timeago class="timeago" :since="getTime(item.created_at)"></timeago>
-              </div>
-            </div>
+          <div class="timeline">
+              <template v-for="(item, index) in timelines">
+                <div class="nearsite-message">
+                  <div class="timage">
+                    <span class="mui-icon myicon myicon-askDetailHeart" v-if="!index"></span>
+                    <span class="mui-icon myicon myicon-askDetailJia" v-else></span>
+                  </div>
+                  <div class="desc">
+                    <div class="title">{{ item.title }} </div>
+                    <span>{{ item.description }}</span>
+                  </div>
+                  <timeago class="timeago" :since="getTime(item.created_at)"></timeago>
+                </div>
+                <div class="vertbar" v-show="index != timelines.length-1"></div>
+              </template>
           </div>
         </div>
       </div>
@@ -118,9 +128,6 @@
           <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
         </div>
-      </div>
-
-      <div class="mui-clearfix mb70">
       </div>
     </div>
   </div>
@@ -285,6 +292,9 @@
 
 
 <style scoped>
+  .detail-ask{
+    padding-bottom:5px;
+  }
   .detail-ask .question {
     position: relative;
   }
@@ -307,7 +317,7 @@
   }
 
   .detail-answer .timeAgo {
-    color: #999;
+    color: #777;
     font-size: 14px;
   }
 
@@ -323,7 +333,7 @@
   }
 
   .detail-ask-timeline {
-    margin-top: 15px;
+    margin-top: -1px;
     padding-bottom: 10px;
   }
 
@@ -341,7 +351,8 @@
   }
 
   .detail-answer {
-    margin-top: 15px;
+    margin-top: -1px;
+    padding:5px 0 8px;
   }
 
   .detail-comment {
@@ -350,150 +361,26 @@
   }
 
   .detail-comment-result {
-    margin-top: 15px;
+    margin-top: -1px;
+    padding-top:15px;
+    padding-bottom:0;
     text-align: left;
   }
 
   .star-rating {
     color: #f85f48;
-    float: right;
+    float: left;
   }
 
   .detail-comment-result p {
     margin-top: 5px;
   }
 
-  .timeline {
-    box-sizing: border-box;
-    background: #fff;
-  }
 
-  .timeline::before {
-    box-sizing: border-box;
-  }
-
-  .timeline * {
-    box-sizing: border-box;
-  }
-
-  .timeline *::before {
-    box-sizing: border-box;
-  }
-
-  /* Main logic */
-  .timeline {
-    position: relative;
-    font-size: 1em;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    overflow-y: hidden;
-  }
-
-  .timeline .timeline-icon {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    left: 50%;
-    margin-left: -16px;
-    margin-top: 18px;
-    border: 2px solid #999;
-    border-radius: 100%;
-    background-color: white;
-    text-align: center;
-  }
-
-  .timeline .timeline-icon.timeline-icon-hide-border {
-    border: 0;
-  }
-
-  .timeline .timeline-icon.timeline-icon-hide-border i.fa, .timeline .timeline-icon.timeline-icon-hide-border img {
-    margin-left: 0;
-    margin-top: 0;
-  }
-
-  .timeline .timeline-icon i.fa, .timeline .timeline-icon img {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    margin-left: -4px;
-    margin-top: -4px;
-    vertical-align: bottom;
-    line-height: 32px;
-    text-align: center;
-    font-size: 30px;
-  }
-
-  .timeline .timeline-icon img {
-    border-radius: 100%;
-  }
-
-  .timeline .timeline-content {
-    position: relative;
-    width: 45%;
-    padding: 12px;
-    color: #999;
-    line-height: 20px;
-    min-height: 64px;
-  }
-
-  .timeline .timeline-date {
-    position: absolute;
-    width: auto;
-    top: 0;
-    left: 118%;
-    font-size: 80%;
-  }
-
-  .timeline::before {
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    top: 26px;
-    left: 50%;
-    margin-left: -1px;
-    /* Half of width */
-    background-color: #CFCFC4;
-    content: "";
-  }
-
-  .timeline.timeline-collapsing::before {
-    left: auto;
-    margin-left: 30px;
-  }
-
-  .timeline.timeline-collapsing .timeline-block {
-    margin-left: 42px;
-    margin-right: 10px;
-  }
-
-  .timeline.timeline-collapsing .timeline-icon {
-    left: auto;
-    margin-left: -16px;
-  }
-
-  .timeline.timeline-collapsing .timeline-content {
-    width: auto;
-  }
-
-  .timeline.timeline-collapsing .timeline-date {
-    width: auto;
-    left: 0;
-    margin-left: -130px;
-    text-align: right;
-  }
-
-  .timeline .timeline-block:first-child .timeline-icon {
-    border-color: #FF6961;
-  }
-
-  .timeline .timeline-block:first-child .timeline-content {
-    color: #3f3f3f;
-  }
 
   .timeago {
     display: inline-block;
-    color: #007aff;
+    color: #777;
     margin-top: 10px;
   }
 
@@ -543,12 +430,11 @@
     float: right;
     margin-left: 10px;
     position: relative;
-    bottom: -1px;
+    bottom: -3px;
   }
 
   .content {
     line-height: 18px;
-    font-size: 12px;
   }
 
   .buttonWrapper {
@@ -641,4 +527,109 @@
   .successWrapper .sTitle{
     margin-top:20px;
   }
+
+  .mui-content > .mui-table-view:first-child{
+    margin-top:0;
+  }
+
+  /*timeline*/
+  .nearsite-message{
+    display: inline-block;
+    clear:both;
+    width:100%;
+    position: relative;
+    padding: 10px 10px 10px 15px;
+  }
+  .nearsite-message .timage{
+    float: left;
+    margin-top: 22px;
+  }
+  .nearsite-message .timage img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  .nearsite-message .desc{
+    float: left;
+    background: #fff;
+    margin: 0 10px 10px 10px;
+    padding: 10px;
+    border-radius:7px;
+    max-width: 90%;
+    position: relative;
+    min-height: 20px;
+    font-size:12px;
+  }
+  .nearsite-message .desc img{
+    width: 100%;
+  }
+
+  .desc span{
+    color:#777;
+  }
+
+  .nearsite-message .triangle{
+    height:0px;
+    width:0px;
+    border-width:8px;
+    border-style:solid;
+    position: absolute;
+    top:6px;
+    border-color:transparent #fff transparent transparent;
+    left:-16px;
+  }
+  .vertbar{
+    width: 1px;
+    height: 70px;
+    background-color: #a2a2a2;
+    margin: -47px 25px -38px;
+  }
+
+  .timeline .timage .mui-icon{
+    width:22px;
+    height:22px;
+    color:#4990E2;
+    font-size:12px;
+  }
+
+  .timeline time{
+    position: absolute;
+    right:15px;
+  }
+
+  .timeline{
+    font-size:12px;
+  }
+
+  .collectWrapper{
+    padding:10px 0;
+  }
+
+  .collectWrapper .amount{
+    float:right;
+    color:#F6A623;
+    font-size:14px;
+    margin-right:20px;
+    margin-top:5px;
+  }
+
+  .collect{
+    display: inline-block;
+    border: 1px solid #4990E2;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size:12px;
+    text-align: center;
+    margin-left:20px;
+  }
+  .collect .mui-icon{
+    color:#4990E2;
+  }
+
+  .mui-table-view-cell:after{
+    display: none;
+  }
+
 </style>

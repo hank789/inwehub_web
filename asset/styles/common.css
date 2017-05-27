@@ -251,6 +251,14 @@ input, textarea, select{
   background: url("../statics/images/icon-paizhao.png");
 }
 
+.myicon-askDetailHeart{
+  background: url("../statics/images/icon_ask_detail_heart.png");
+}
+
+.myicon-askDetailJia{
+  background: url("../statics/images/icon_ask_detail_jia.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
