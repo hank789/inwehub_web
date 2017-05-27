@@ -359,7 +359,7 @@
   }
 
   .inputWrapper{
-    border-bottom:1px solid rgba(255,255,255,.6);
+    border-bottom:1px solid rgba(255,255,255,.3);
     margin:0 60px;
     padding:10px 0;
     position: relative;
