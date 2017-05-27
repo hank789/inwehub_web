@@ -484,7 +484,7 @@
   }
 
   .detail-comment {
-    margin-top: 15px;
+    margin-top: -1px;
     text-align: center;
   }
 
