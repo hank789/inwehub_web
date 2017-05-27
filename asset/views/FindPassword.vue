@@ -344,7 +344,7 @@
   }
 
   .title{
-    margin:140px 0 50px;
+    margin:100px 0 100px;
     font-size:36px;
     color:#fff;
   }
@@ -395,7 +395,7 @@
 
   .buttonWrapper{
     padding:0 112px;
-    margin-top:40px;
+    margin-top: 150px;
   }
 
   .mui-btn-block {

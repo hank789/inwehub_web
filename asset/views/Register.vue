@@ -375,7 +375,7 @@
   }
 
   .title {
-    margin: 140px 0 50px;
+    margin: 100px 0 50px;
     font-size: 36px;
     color: #fff;
   }

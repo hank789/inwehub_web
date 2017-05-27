@@ -21,23 +21,21 @@
 
             <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
               <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
-                <div class="person">
-                  <div class="avatar">
-                    <div class="avatarInner">
-                      <img :src="ask.user_avatar_url?ask.user_avatar_url:'images/uicon.jpg'" class="avatar"/>
-                    </div>
-                  </div>
-                  <div class="mui-media-body">
-                    <span class="username">{{ ask.user_name }}</span>
-                    <div>
-                      <span class="time"><timeago :since="timeago(ask.created_at)"></timeago></span>
-                      <span class="amount">悬赏金额<b>￥{{ ask.price }}</b>元</span>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="site-desc mui-ellipsis-2">
                   {{ ask.description | textLimit}}
                 </div>
+
+                <div class="person">
+                  <div class="mui-media-body">
+                    <div>
+                      <span>{{ getStatusText(ask.status)}}</span>
+                      ·
+                      <span class="time"><timeago :since="timeago(ask.created_at)"></timeago></span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -82,6 +80,32 @@
       loading_gif: loading_gif
     }),
     methods: {
+      getStatusText(code){
+          switch (code) {
+            case 1:
+                return '待分配';
+                break;
+            case 2:
+              return '待确认';
+              break;
+            case 3:
+              return '已关闭';
+              break;
+            case 4:
+              return '待回答';
+              break;
+            case 5:
+              return '已拒绝';
+              break;
+            case 6:
+              return '已回答';
+              break;
+            case 7:
+              return '已点评';
+              break;
+          }
+          return '';
+      },
       timeago(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
@@ -229,11 +253,14 @@
   }
 
   .list-ask .list-ask-item .mui-media-body {
-    padding-left:15px;
+    padding-left:10px;
     line-height: 24px;
+    margin:5px 0 0;
+    color:#9B9B9B;
+    font-size:12px;
   }
   .list-ask .list-ask-item .time{
-    color:#8c8c8c;
+    color:#9B9B9B;
     font-size:12px;
   }
 
@@ -254,17 +281,6 @@
 
   .list-ask .person{
     position: relative;
-    padding-bottom:15px;
-  }
-
-  .list-ask .person:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 10px;
-    height: 1px;
-    content: '';
-    background-color: #f2f2f2;
   }
 
 
@@ -273,7 +289,6 @@
     padding-left:10px;
     line-height: 18px;
     color:#101010;
-    font-size:12px;
   }
 
   .list-ask .site-desc .mui-icon{
