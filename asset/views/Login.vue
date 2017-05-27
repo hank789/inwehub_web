@@ -1,35 +1,21 @@
 <template>
-  <div class="page page-white">
-    <div class="page-container">
+  <div class="mui-content">
+    <div class="login">
+      <div class="logo"></div>
+      <div class="leftNav" @tap.stop.prevent="goback"></div>
+      <div class="inputWrapper">
+        <input class="text"  type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" />
+        <label v-show="showPhoneLabel" @tap.stop.prevent="entryPhone">手机号码</label>
+      </div>
+      <div class="inputWrapper">
+        <input class="text" type="password" v-model.trim="password"/>
+        <label v-show="showPasswordLabel" @tap.stop.prevent="entryPassword">输入密码</label>
+      </div>
+      <div class="forget" @tap.stop.prevent="$router.push('/findpassword/')">忘记密码</div>
 
-      <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title">登录</h1>
-      </header>
-
-      <div class="mui-content">
-        <form class="mui-input-group">
-          <div class="mui-input-row">
-            <label>手机号</label>
-            <input type="text" class="mui-input-clear" autocomplete="off" placeholder="请输入手机号" v-model.number.trim="phone" id="phone" name="phone">
-          </div>
-          <div class="mui-input-row">
-            <label>密码</label>
-            <input type="password" class="mui-input-password" v-show="isShowPassword" v-model.trim="password" placeholder="请输入6位以上密码" id="password" name="password">
-            <input class="input" v-model.trim="passwordText" v-show="isShowPasswordText" value="" placeholder="请输入6位以上密码" />
-          </div>
-        </form>
-
-        <div class="mui-content-padded">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" :disabled="isDisabled"   @click.prevent="submit">登录</button>
-        </div>
-        <div class="login-nav">
-          <span class="left"><router-link to="/register">手机快速注册</router-link></span>
-          <span class="right"><router-link to="/findpassword">忘记密码</router-link></span>
-        </div>
-        <div class="login-nav">
-          <p class="notice error">{{ error }}</p>
-        </div>
+      <div class="buttonWrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">点击登录</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-outlined" @tap.stop.prevent="$router.push('/register/')">注册账号</button>
       </div>
     </div>
   </div>
@@ -52,93 +38,75 @@
       phone: '', // 手机号码
       password: '', // 密码
       passwordText: '', // 明文密码
-      isDisabled: true, // 提交按钮disabled状态
-      isValidPhone: false, // 是否合法手机号
-      isValidPassword: false, // 是否合法密码
-      isShowClean: false, // 是否显示清除手机号按钮
-      isShowPasswordText: false, // 是否显示明文密码
-      isShowPassword: true, // 是否显示真实密码
-      errors: {}, // 错误对象
-      isLoading: false // 登录loading
+      isLoading: false, // 登录loading
+      showPhoneLabel:true,
+      showPasswordLabel:true
     }),
     watch: {
-      phone: function (newPhone) {
-        this.isShowClean = (newPhone > 0) > 0 ? true : false;
-        this.cleanErrors();
-        if(!phoneReg.test(newPhone)) {
-          this.errors = Object.assign({}, this.errors, { phone: '请输入正确的手机号码' });
-          this.isValidPhone = false;
-        } else {
-          let errors = this.errors;
-          this.isValidPhone = true;
-          delete errors['phone'];
-          this.errors = Object.assign({}, errors);
+      phone: function (newMoney,oldValue) {
+        const askDetail = /^[0-9]+$/;
+        if (!askDetail.test(newMoney) && this.phone) {
+          this.phone = oldValue;
         }
-        this.isDisabled = this.checkIsDisabled()
-      },
-      password: function (newPassword) {
-        this.cleanErrors();
-        if(newPassword.length < 6) {
-          this.errors = Object.assign({}, this.errors, { password: '密码长度必须大于6位' })
-          this.isValidPassword = false;
-        } else {
-          let errors = this.errors;
-          this.isValidPassword = true;
-          delete errors['password'];
-          this.errors = Object.assign({}, errors);
-        }
-        this.passwordText = newPassword;
-        this.isDisabled = this.checkIsDisabled()
-      },
-      passwordText: function (newPasswordText) {
-        this.cleanErrors();
-        if(newPasswordText.length < 6) {
-          this.errors = Object.assign({}, this.errors, { password: '密码长度必须大于6位' })
-          this.isValidPassword = false;
-        } else {
-          let errors = this.errors;
-          this.isValidPassword = true;
-          delete errors['password'];
-          this.errors = Object.assign({}, errors);
-        }
-        this.password = newPasswordText;
-        this.isDisabled = this.checkIsDisabled();
       }
     },
-    computed: {
-      error: function () {
-        let errors = Object.values(this.errors);
-        return errors[0] || '';
-      }
+    mounted(){
+
+      mui(".login").on('focusout', 'input', (e) => {
+          if (e.target.type === 'text' && !this.phone) {
+             this.showPhoneLabel = true;
+          }
+
+        if (e.target.type === 'password' && !this.password) {
+          this.showPasswordLabel = true;
+        }
+      });
+
+      mui(".login").on('focusin', 'input', (e) => {
+
+
+        if (e.target.type === 'text' && !this.phone) {
+          this.showPhoneLabel = false;
+        }
+
+        if (e.target.type === 'password' && !this.password) {
+          this.showPasswordLabel = false;
+        }
+      });
     },
     methods: {
-      // 清理服务端错误信息
+      entryPhone(){
+        this.showPhoneLabel = false;
+      },
+      entryPassword(){
+        this.showPasswordLabel = false;
+      },
       goback () {
           this.$router.go(-1);
       },
-      cleanErrors () {
-        let errors = this.errors;
-        let newErrors = deleteObjectItems(errors, [
-          'code'
-        ]);
-        this.errors = Object.assign({}, newErrors);
-      },
-      checkIsDisabled () {
-         return !(this.isValidPassword && this.isValidPhone);
-      },
-      cleanPhone () {
-        this.phone = '';
-      },
-      showPassword () {
-        if(this.isShowPassword) {
-          this.isShowPassword = false;
-          this.isShowPasswordText = true;
-        } else {
-          this.isShowPassword = true;
-          this.isShowPasswordText = false;
-        }
-      },
       submit () {
+
+        if (!this.phone) {
+          mui.toast('请输入手机号码');
+          return;
+        }
+
+        if(!phoneReg.test(this.phone)) {
+          mui.toast('请输入正确的手机号码');
+          return;
+        }
+
+        if (!this.password) {
+          mui.toast('请输入密码');
+          return;
+        }
+
+        if(this.password.length < 6) {
+          mui.toast('密码长度必须大于等于6位');
+          return;
+        }
+
+
         let { phone, password } = this;
         let device_code = detecdOS();
         this.isLoading = true;
@@ -155,7 +123,7 @@
           if (code !== 1000) {
             this.isDisabled = false;
             this.isLoading = false;
-            this.errors = Object.assign({}, this.errors, { code: errorCodes[code] });
+            mui.toast(response.data.message);
           }
 
           let errors = {};
@@ -200,20 +168,75 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .mui-input-group {
-    margin:20px 0;
+  .login{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: url(../statics/images/bg_login.png);
+    background-size: cover;
+    text-align: center;
   }
-  .login-nav{
-    padding:5px 15px;
+
+  .logo{
+    display: inline-block;
+    background: url(../statics/images/login-logo.png);
+    background-size: cover;
+    width:182px;
+    height:37px;
+    margin:140px 0 80px;
+  }
+
+  input[type='text'],input[type='password'],input[type='number']{
+    background-color:transparent;
+    border:none;
+    text-align: center;
+    border-bottom:1px solid rgba(255,255,255,.9);
+    color:#fff;
+  }
+
+  .inputWrapper{
+    padding:0 60px;
     position: relative;
   }
 
-  .login-nav .right{
-    float: right;
+  .inputWrapper label{
+    position: absolute;
+    color:#fff;
+    left:50%;
+    margin-left:-32px;
+    top:5px;
+
+  }
+  .forget{
+    color:rgba(255,255,255, .6);
+    font-size:14px;
+    text-align: right;
+    padding: 0 80px;
   }
 
-  .error{
-    color:red;
+  .buttonWrapper{
+    padding:0 122px;
+    margin-top:100px;
+  }
+
+  .mui-btn-outlined{
+    color:#fff;
+    border:1px solid #fff;
+  }
+
+  .mui-btn-block {
+    padding: 10px 0;
+  }
+
+  .leftNav{
+    background: url(../statics/images/icon-login-left.png)  no-repeat ;
+    background-size: cover;
+    width:10px;
+    height:17px;
+    position: absolute;
+    top:10px;
+    left:10px;
+    margin:10px;
   }
 </style>
 
