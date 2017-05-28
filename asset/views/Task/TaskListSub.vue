@@ -6,12 +6,6 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
       <div class="mui-scroll">
         <div v-show="nothing == 0">
@@ -76,7 +70,6 @@
     data: () => ({
       tasks: [],
       loading: true,
-      loading_gif: loading_gif,
       currentTime:(new Date()).getTime(),
     }),
     components: {

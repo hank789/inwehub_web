@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--页面主结构开始-->
-    <div id="app_account_info" class="mui-views" v-show="!loading">
+    <div id="app_account_info" class="mui-views">
       <div class="mui-view">
         <div class="mui-navbar">
         </div>
@@ -9,11 +9,7 @@
         </div>
       </div>
     </div>
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
+
     <!--页面主结构结束-->
     <!--单页面开始-->
     <div id="setting" class="mui-page">
@@ -371,7 +367,6 @@
         "女"
       ],
       loading: true,
-      loading_gif: loading_gif,
       cityPicker: null,
       muiView: {},
       descMaxLength: 2000,
