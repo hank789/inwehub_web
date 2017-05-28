@@ -5,7 +5,7 @@
       <h1 class="mui-title">提问</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
           <div class="avatar">

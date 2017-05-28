@@ -7,7 +7,6 @@
     </header>
 
     <div class="mui-content wait-answer">
-
       <div class="mui-table-view">
         <div class="mui-table-view-cell">
           <div class="form form-ask-refuse">

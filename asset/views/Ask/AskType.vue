@@ -7,7 +7,7 @@
         <h1 class="mui-title">选择问题分类</h1>
       </header>
 
-      <div class="mui-content mui-row mui-fullscreen">
+      <div class="mui-content mui-row mui-fullscreen" v-show="!loading">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
             <template v-for="(item, index) in types">

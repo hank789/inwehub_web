@@ -4,7 +4,7 @@
         <h1 class="mui-title">提交成功</h1>
       </header>
 
-      <div class="mui-content pay-success">
+      <div class="mui-content pay-success" v-show="!loading">
 
         <div class="status">
             <i class="mui-icon iconfont icon-success"></i>

@@ -6,7 +6,7 @@
       <a class="mui-icon fa fa-share mui-pull-right"></a>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
 
       <div class="professor">
         <div class="avatar" @tap.stop.prevent="changeAvatar">

@@ -8,7 +8,7 @@
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <ul class="mui-table-view mui-table-view-chevron" v-show="projects.length == 0">
         <li class="mui-table-view-cell no-empty">请维护项目经历</li>
       </ul>

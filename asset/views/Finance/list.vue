@@ -6,7 +6,7 @@
       <h1 class="mui-title">账单明细</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="myMoney mui-table-view">
         <div class="mui-table-view-cell">
           <span class="mui-icon fa fa-diamond"></span>
@@ -44,8 +44,7 @@
     data: () => ({
       list:[],
       totalMoney:localEvent.getLocalItem('wallet').totalMoney,
-      loading: true,
-      loading_gif: loading_gif,
+      loading: true
     }),
     computed: {
 

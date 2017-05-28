@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--页面主结构开始-->
-    <div id="app_account_info" class="mui-views">
+    <div id="app_account_info" class="mui-views" v-show="!loading">
       <div class="mui-view">
         <div class="mui-navbar">
         </div>

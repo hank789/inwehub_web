@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的钱包</h1>
@@ -8,8 +7,7 @@
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">账单明细</a>
     </header>
 
-
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="myMoney">
 
         <span class="mui-icon fa fa-diamond"></span>
