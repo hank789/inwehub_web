@@ -22,13 +22,18 @@ export const addAccessToken = () => {
 export default axios;
 
 export function apiRequest (url, data) {
-
+  if (mui.os.plus){
+    plus.nativeUI.showWaiting();
+  }
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
   )
     .then(response => {
+      if (mui.os.plus){
+        plus.nativeUI.closeWaiting();
+      }
       var code = response.data.code;
       if (code !== 1000) {
         mui.toast(response.data.message);
@@ -44,12 +49,18 @@ export function apiRequest (url, data) {
 
 
 export function postRequest (url, data) {
+  if (mui.os.plus){
+    plus.nativeUI.showWaiting();
+  }
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
   )
     .then(response => {
+      if (mui.os.plus){
+        plus.nativeUI.closeWaiting();
+      }
       return response;
     })
     .catch(e => {
