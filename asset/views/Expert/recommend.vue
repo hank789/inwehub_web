@@ -232,7 +232,7 @@
             gender: this.genderValue,
             work_years: this.workYears,
             mobile: this.mobile,
-            industry_tags: this.infoIndustryTagsCodes,
+            industry_tags: this.infoIndustryTagsCodes.join(','),
             description: this.description,
             images: []
           }).then(response => {
@@ -277,7 +277,7 @@
         task.addData("gender", this.genderValue);
         task.addData("work_years", this.workYears);
         task.addData("mobile", this.mobile);
-        task.addData("industry_tags", this.infoIndustryTagsCodes);
+        task.addData("industry_tags", this.infoIndustryTagsCodes.join(','));
         task.addData("description", this.description);
 
 
