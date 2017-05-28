@@ -1,8 +1,6 @@
 <template>
   <div>
 
-
-
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的钱包</h1>
@@ -11,13 +9,7 @@
     </header>
 
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <div class="myMoney">
 
         <span class="mui-icon fa fa-diamond"></span>
@@ -46,7 +38,6 @@
   export default {
     data: () => ({
       loading: true,
-      loading_gif: loading_gif,
       totalMoeny:'--',
       settlementMoney:'--',  //结算中的资金
       withdrawMinMoney:'--', //用户单次最低提现金额

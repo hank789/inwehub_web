@@ -6,12 +6,6 @@
       <h1 class="mui-title">我的提问</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll">
 
@@ -76,8 +70,7 @@
   const Asks = {
     data: () => ({
       asks: [],
-      loading: true,
-      loading_gif: loading_gif
+      loading: true
     }),
     methods: {
       getStatusText(code){

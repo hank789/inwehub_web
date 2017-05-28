@@ -4,13 +4,7 @@
         <h1 class="mui-title">提交成功</h1>
       </header>
 
-      <div class="mui-content loading" v-show="loading">
-        <div class="loading">
-          <img :src="loading_gif"/>
-        </div>
-      </div>
-
-      <div class="mui-content pay-success" v-show="!loading">
+      <div class="mui-content pay-success">
 
         <div class="status">
             <i class="mui-icon iconfont icon-success"></i>
@@ -55,8 +49,7 @@
         timeline:[]
       },
       id: 0,
-      loading: true,
-      loading_gif: loading_gif
+      loading: true
     }),
     computed: {
       timelines() {

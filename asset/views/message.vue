@@ -5,12 +5,6 @@
       <h1 class="mui-title">消息</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper message-list">
       <div class="mui-scroll">
         <ul class="mui-table-view mui-table-view-chevron" v-show="nothing == 0">
@@ -35,8 +29,7 @@
   export default {
     data: () => ({
       messages:[],
-      loading: true,
-      loading_gif: loading_gif
+      loading: true
     }),
     computed: {
       nothing () {

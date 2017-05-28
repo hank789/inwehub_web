@@ -8,13 +8,7 @@
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <ul class="mui-table-view mui-table-view-chevron" v-show="jobs.length == 0">
         <li class="mui-table-view-cell no-empty">请维护工作经历</li>
       </ul>
@@ -42,8 +36,7 @@
   export default {
     data: () => ({
       jobs:[],
-      loading: true,
-      loading_gif: loading_gif
+      loading: true
     }),
     methods: {
 

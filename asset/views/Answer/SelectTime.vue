@@ -6,16 +6,7 @@
       <h1 class="mui-title">确认时间</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div class="mui-content wait-answer">
-
-
-
 
       <div class="mui-table-view">
         <div class="mui-table-view-cell">

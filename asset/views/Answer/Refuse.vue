@@ -6,13 +6,7 @@
       <h1 class="mui-title">拒绝应答</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
 
 
         <div class="form form-ask-refuse">
@@ -57,7 +51,6 @@
       descMaxLength: 200,
       description: '',
       loading: true,
-      loading_gif: loading_gif,
       buttonRefuseDisable:false
     }),
     computed: {

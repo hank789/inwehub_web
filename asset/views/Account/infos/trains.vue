@@ -8,13 +8,6 @@
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
-
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div class="mui-content" v-show="!loading">
       <ul class="mui-table-view mui-table-view-chevron" v-show="trains.length == 0">
         <li class="mui-table-view-cell no-empty">请维护培训经历</li>
@@ -43,8 +36,7 @@
   export default {
     data: () => ({
       trains:[],
-      loading: true,
-      loading_gif: loading_gif
+      loading: true
     }),
     methods: {
 

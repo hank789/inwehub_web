@@ -6,13 +6,7 @@
       <h1 class="mui-title">账单明细</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <div class="myMoney mui-table-view">
         <div class="mui-table-view-cell">
           <span class="mui-icon fa fa-diamond"></span>

@@ -7,13 +7,7 @@
         <h1 class="mui-title">选择问题分类</h1>
       </header>
 
-      <div class="mui-content loading" v-show="loading">
-        <div class="loading">
-          <img :src="loading_gif"/>
-        </div>
-      </div>
-
-      <div class="mui-content mui-row mui-fullscreen" v-show="!loading">
+      <div class="mui-content mui-row mui-fullscreen">
         <div class="mui-col-xs-3">
           <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
             <template v-for="(item, index) in types">
@@ -42,8 +36,7 @@
 
   const Ask = {
     data: () => ({
-      loading:true,
-      loading_gif:loading_gif
+      loading:true
     }),
     computed: {
       types () {
@@ -66,7 +59,7 @@
 
       //if (askTypes.length == 0 && askTypes != 'undefined') {
       postRequest(`question/request`, {}).then(response => {
-          
+
         var code = response.data.code;
         if (code !== 1000) {
           mui.alert(response.data.message);

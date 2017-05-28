@@ -5,13 +5,7 @@
       <h1 class="mui-title">提问</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
           <div class="avatar">
@@ -152,7 +146,6 @@
       },
       id: 0,
       loading: true,
-      loading_gif: loading_gif,
       description: '',
       rateStar: 0,
       starDesc: '评价会让我们做的更好',

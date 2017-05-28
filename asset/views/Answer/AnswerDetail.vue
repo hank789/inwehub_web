@@ -6,13 +6,7 @@
       <h1 class="mui-title">{{ getTitle() }}</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <div class="mui-table-view detail-ask">
         <div class="mui-table-view-cell">
 
@@ -155,7 +149,6 @@
       description: '',
       descMaxLength: 1000,
       loading: true,
-      loading_gif: loading_gif,
       buttonAnswerDisable:false,
       buttonSelectTimeDisable:false
     }),

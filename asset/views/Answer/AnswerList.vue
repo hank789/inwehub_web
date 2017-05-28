@@ -6,12 +6,6 @@
       <h1 class="mui-title">我的回答</h1>
     </header>
 
-    <div class="mui-content loading" v-show="loading">
-      <div class="loading">
-        <img :src="loading_gif"/>
-      </div>
-    </div>
-
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
 
@@ -69,7 +63,6 @@
       return {
         answers: [],
         loading:true,
-        loading_gif:loading_gif,
         isExpert:currentUser.is_expert
       }
     },
