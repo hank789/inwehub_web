@@ -41,7 +41,7 @@ export function apiRequest (url, data) {
         for (var i in response.data.data) {
           errMsg = errMsg + response.data.data[i] + "<br>";
         }
-        mui.toast(errMsg);
+        mui.toast(errMsg,{type: "div"});
         return false;
       }
       if (code !== 1000) {
@@ -81,7 +81,7 @@ export function postRequest (url, data) {
         for (var i in response.data.data) {
           errMsg = errMsg + response.data.data[i] + "<br>";
         }
-        mui.toast(errMsg);
+        mui.toast(errMsg,{type: "div"});
         return false;
       }
       return response;
