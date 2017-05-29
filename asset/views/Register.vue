@@ -322,7 +322,7 @@
               mui.toast(response.data.message);
               return;
             }
-
+            mui.toast("注册成功！");
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
             //存储设备信息
