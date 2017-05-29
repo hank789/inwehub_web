@@ -299,7 +299,9 @@
           mui.toast("密码长度必须大于6位");
           return;
         }
-
+        if (mui.os.plus){
+          plus.nativeUI.showWaiting();
+        }
         request.post(createAPI('auth/register'), {
             name: username,
             mobile: phone,
@@ -310,6 +312,9 @@
           }
         )
           .then(response => {
+            if (mui.os.plus){
+              plus.nativeUI.closeWaiting();
+            }
             var code = response.data.code;
             if (code !== 1000) {
               this.isDisabled = false;
@@ -342,6 +347,9 @@
             }));
           })
           .catch(({response: {data = {}} = {}}) => {
+            if (mui.os.plus){
+              plus.nativeUI.closeWaiting();
+            }
             this.isDisabled = false;
             const {code = 'xxxx'} = data;
             this.isLoading = false;

@@ -165,9 +165,8 @@
         this.buttonSaveDisabled = true;
 
         postRequest(url, data).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
+          this.buttonSaveDisabled = false;
+          if (response === false) {
             return;
           }
 

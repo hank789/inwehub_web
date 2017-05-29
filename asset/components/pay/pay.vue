@@ -23,6 +23,9 @@
     },
     created () {
       apiRequest(`pay/config`,{}).then(response_data => {
+        if (response_data === false) {
+          return;
+        }
         this.wechatPay = response_data.pay_method_weixin;
         this.aliPay = response_data.pay_method_ali;
       });

@@ -200,41 +200,7 @@
         this.job.product_tags = tags;
       },
       submit(){
-        if (!this.job.company) {
-          mui.toast("公司名称不能为空");
-          return;
-        }
 
-        if (!this.job.title) {
-          mui.toast("公司职位不能为空");
-          return;
-        }
-
-        if (this.job.industry_tags.length === 0) {
-          mui.toast("行业领域不能为空");
-          return;
-        }
-
-        this.job.product_tags = ['1'];
-//        if (this.job.product_tags.length === 0) {
-//          mui.toast("产品类型不能为空");
-//          return;
-//        }
-
-        if (!this.job.begin_time) {
-          mui.toast("开始时间不能为空");
-          return;
-        }
-
-        if (!this.job.end_time) {
-          mui.toast("结束时间不能为空");
-          return;
-        }
-
-        if (this.job.end_time < this.job.begin_time) {
-          mui.alert("开始时间需早于结束时间");
-          return;
-        }
 
 
         var url = '';
@@ -258,13 +224,10 @@
 
 
         postRequest(url, data).then(response => {
-
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
+          this.buttonSaveDisabled = false;
+          if (response === false) {
             return;
           }
-
           mui.toast('操作成功');
           this.bak = '';
           this.$router.go(-1);

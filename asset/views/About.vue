@@ -21,6 +21,9 @@
     }),
     created () {
       apiRequest(`system/service_about`,{}).then(response_data => {
+        if (response_data === false) {
+          return;
+        }
         this.aboutus = response_data.html;
       });
     },

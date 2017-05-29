@@ -35,6 +35,15 @@ export function apiRequest (url, data) {
         plus.nativeUI.closeWaiting();
       }
       var code = response.data.code;
+      // 参数错误
+      if (code === 1008) {
+        var errMsg = '';
+        for (var i in response.data.data) {
+          errMsg = errMsg + response.data.data[i] + "<br>";
+        }
+        mui.toast(errMsg);
+        return false;
+      }
       if (code !== 1000) {
         mui.toast(response.data.message);
         return false;
@@ -42,6 +51,9 @@ export function apiRequest (url, data) {
       return response.data.data;
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+      if (mui.os.plus){
+        plus.nativeUI.closeWaiting();
+      }
       mui.toast(message);
       return false;
     })
@@ -61,9 +73,23 @@ export function postRequest (url, data) {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
       }
+      var code = response.data.code;
+
+      // 参数错误
+      if (code === 1008) {
+        var errMsg = '';
+        for (var i in response.data.data) {
+          errMsg = errMsg + response.data.data[i] + "<br>";
+        }
+        mui.toast(errMsg);
+        return false;
+      }
       return response;
     })
     .catch(e => {
+      if (mui.os.plus){
+        plus.nativeUI.closeWaiting();
+      }
       return {data:{message: '网络状况堪忧', code:0}};
     })
 }

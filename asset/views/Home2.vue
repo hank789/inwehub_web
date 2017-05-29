@@ -188,6 +188,9 @@
       getData:function(){
         var t = this;
         apiRequest(`home`,{}).then(response_data => {
+          if (response_data === false) {
+            return;
+          }
           t.expertNumber = response_data.expert_number;
           t.averageAnswerMinute = response_data.average_answer_minute;
           t.industryNumber = response_data.industry_number;

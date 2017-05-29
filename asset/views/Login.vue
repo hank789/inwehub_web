@@ -127,25 +127,17 @@
         let device_code = detecdOS();
         this.isLoading = true;
         this.isDisabled = true;
-        request.post(createAPI('auth/login'), {
+        apiRequest('auth/login', {
             mobile:phone,
             password,
             device_code
           }
         )
         .then(response => {
-
-          var code = response.data.code;
-
-          if (code !== 1000) {
-            this.isDisabled = false;
-            this.isLoading = false;
-            mui.toast(response.data.message);
+          if (response === false) {
+              return;
           }
-
-          let errors = {};
-          this.errors = Object.assign({}, errors);
-          localEvent.setLocalItem('UserLoginInfo', response.data.data);
+          localEvent.setLocalItem('UserLoginInfo', response);
 
           //存储设备信息
           mui.plusReady(function(){
@@ -163,7 +155,7 @@
             }
           });
 
-          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.user_id, user => {
             let currentUser = user;
             //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
