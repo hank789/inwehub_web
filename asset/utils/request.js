@@ -39,7 +39,7 @@ export function apiRequest (url, data) {
       if (code === 1008) {
         var errMsg = '';
         for (var i in response.data.data) {
-          errMsg = errMsg + response.data.data[i] + "<br>";
+          errMsg = errMsg + response.data.data[i] + '<br>';
         }
         mui.toast(errMsg,{type: "div"});
         return false;
@@ -79,7 +79,7 @@ export function postRequest (url, data) {
       if (code === 1008) {
         var errMsg = '';
         for (var i in response.data.data) {
-          errMsg = errMsg + response.data.data[i] + "<br>";
+          errMsg = errMsg + response.data.data[i] + '<br>';
         }
         mui.toast(errMsg,{type: "div"});
         return false;
