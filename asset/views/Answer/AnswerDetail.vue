@@ -398,7 +398,7 @@
   }
   .detail-ask .question {
     position: relative;
-    line-height: 18px;
+    line-height: 28px;
   }
 
   .mui-media-body {
@@ -491,7 +491,7 @@
   }
 
   .content {
-    line-height: 18px;
+    line-height: 28px;
   }
 
   .avatar {

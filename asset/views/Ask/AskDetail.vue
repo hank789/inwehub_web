@@ -431,7 +431,7 @@
   }
 
   .content {
-    line-height: 18px;
+    line-height: 28px;
   }
 
   .buttonWrapper {
