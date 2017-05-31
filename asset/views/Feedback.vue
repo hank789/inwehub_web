@@ -3,7 +3,7 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">意见反馈</h1>
+      <h1 class="mui-title">反馈建议</h1>
     </header>
 
 

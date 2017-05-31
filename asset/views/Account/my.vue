@@ -62,7 +62,7 @@
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
         </li>
         <li class="mui-table-view-cell">
-          <a to="/setting" class="mui-navigate-right" @tap.stop.prevent="$router.push('/help')"><span class="mui-icon myicon myicon-help"></span>帮助与反馈
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/feedback')"><span class="mui-icon myicon myicon-help"></span>反馈建议
           </a>
         </li>
       </ul>
