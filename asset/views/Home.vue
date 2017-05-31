@@ -14,11 +14,11 @@
       <div class="professor">
         <div class="avatar">
           <div class="avatarInner">
-            <img src="../statics/images/uicon.jpg" class="avatar"/>
+            <img :src="recommend_expert_avatar_url" class="avatar"/>
           </div>
         </div>
         <div class="text">
-          <div class="realname">郭大红</div>
+          <div class="realname">{{ recommend_expert_name }}</div>
           <div class="label">
             <div class="collect"><span class="mui-icon fa fa-vimeo"></span></div>
             今日专家
@@ -35,7 +35,7 @@
       <div class="professorDesc">
         <div class="title"><span class="icon"></span>专家介绍</div>
         <div class="detail mui-ellipsis-3">
-          SAP咨询行业15年从业经历，熟悉离散制造行业，专注pp等模块，是一位非常自身的超级顾问。写三行，永远写三行都写三行。都写三行。都写三行。都写三行。都写三行。
+          {{ recommend_expert_description }}
 
         </div>
       </div>
@@ -52,35 +52,19 @@
 
       <div class="bountyDescList">
 
-        <div class="detail">
+        <div class="detail" v-for="item in recommend_qa">
           <div class="image">
-            <img src="../statics/images/home-youzhitiwen.png"/>
+            <img :src="item.user_avatar_url"/>
           </div>
           <div class="text">
             <div class="content mui-ellipsis-3">
-              SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
-
-
+              {{item.description}}
             </div>
-            <div class="realname">Mike zhang</div>
-            <div class="amount">额外奖励100元</div>
+            <div class="realname">{{ item.user_name }}</div>
+            <div class="amount">额外奖励{{ item.price }}元</div>
           </div>
         </div>
 
-        <div class="detail">
-          <div class="image">
-            <img src="../statics/images/home_youzhihuida.png"/>
-          </div>
-          <div class="text">
-            <div class="content mui-ellipsis-3">
-              SAP咨询行业15年从业经历，熟悉离散制造行业，好回答的问题标题，哈哈哈哈合肥市说u 发挥绥芬河市东方。
-
-
-            </div>
-            <div class="realname">Mike zhang</div>
-            <div class="amount">额外奖励100元</div>
-          </div>
-        </div>
       </div>
 
       <div class="askDetail">
@@ -121,14 +105,11 @@
 
   const Home = {
     data: () => ({
-      loopAsk: false,
-      expertNumber: '--',
-      loading: true,
-      averageAnswerMinute: '--',
-      industryNumber: '--',
-      headerImageUrl: '',
-      recommendQa: [],
-      loading_gif: loading_gif,
+      recommend_expert_name:'',
+      recommend_expert_description:'',
+      recommend_expert_uid:'',
+      recommend_expert_avatar_url:'',
+      recommend_qa:[],
       homeJiangli: homeJiangli,
       homeJinpai: homeJinpai
     }),
@@ -137,11 +118,6 @@
     },
     mounted(){
       document.body.style.backgroundColor = '#fff';
-
-//      var offCanvasInner = document.querySelector('.mui-inner-wrap');
-//      offCanvasInner.addEventListener('drag', function(event) {
-//        event.stopPropagation();
-//      });
     },
     beforeRouteLeave(to, from, next) {
       document.body.style.backgroundColor = '#efeff4';
@@ -168,12 +144,11 @@
           if (response_data === false) {
             return;
           }
-          t.expertNumber = response_data.expert_number;
-          t.averageAnswerMinute = response_data.average_answer_minute;
-          t.industryNumber = response_data.industry_number;
-          t.headerImageUrl = response_data.header_image_url;
-          t.recommendQa = response_data.recommend_qa;
-          t.loading = false;
+          t.recommend_expert_name = response_data.recommend_expert_name;
+          t.recommend_expert_description = response_data.recommend_expert_description;
+          t.recommend_expert_uid = response_data.recommend_expert_uid;
+          t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
+          t.recommend_qa = response_data.recommend_qa;
         });
       },
       getAsks: function () {
