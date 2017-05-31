@@ -27,7 +27,7 @@
           </div>
 
         </div>
-        <div class="mui-table-view-cell question content">{{ answer.question ? answer.question.description : '' }}</div>
+        <div class="mui-table-view-cell question content">提问：{{ answer.question ? answer.question.description : '' }}</div>
       </div>
 
       <div class="mui-row buttons" v-show="answer.question.status==2">
@@ -93,7 +93,7 @@
 
         </div>
 
-        <div class="mui-table-view-cell question content">{{ answer.answers[0] ? answer.answers[0].content : '' }}</div>
+        <div class="mui-table-view-cell question content">回答：{{ answer.answers[0] ? answer.answers[0].content : '' }}</div>
       </div>
 
       <!--<div class="mui-table-view detail-comment" v-show="answer.question.status==6">-->
