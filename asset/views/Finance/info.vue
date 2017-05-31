@@ -17,7 +17,10 @@
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/my/finance/withdraw')">提现
+                  @tap.stop.prevent="$router.push('/my/finance/withdraw')" v-if="totalMoeny != 0.00">提现
+              </button>
+
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled" v-else>提现
               </button>
         </div>
         <div class="help">每天可申请提现一次，每次最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元</div>

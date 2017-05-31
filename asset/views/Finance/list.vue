@@ -15,6 +15,7 @@
         </div>
       </div>
       <div class="type">交易记录</div>
+      <div class="empty mui-table-view"><div class="mui-table-view-cell">暂无记录</div></div>
       <div class="list">
         <div class="item mui-table-view" v-for="(item, index) in list">
           <div class="mui-table-view-cell">
@@ -136,5 +137,9 @@
   }
   .list{
     background: #fff;
+  }
+  .empty{
+    background: #fff;
+    text-align: center;
   }
 </style>
