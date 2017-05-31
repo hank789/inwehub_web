@@ -31,6 +31,8 @@
           <div class="progress" :style="'width:'+ user.info.account_info_complete_percent +'%'"><span></span></div>
         </div>
 
+        <span class="mui-icon fa fa-warning" @tap.stop.prevent="warning"></span>
+
         <div class="tip" v-if="user.info.account_info_complete_percent < 90">还差{{ 90-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
         <div class="tip" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">距离满分只有一步之遥啦，请再接再厉！</div>
       </div>
@@ -114,6 +116,9 @@
       this.getUserInfo();
     },
     methods: {
+      warning:function(){
+          mui.confirm("InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。<br/>【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。", '警告说明', ['我已了解', '继续补充']);
+      },
       changeAvatar:function(){
         if (mui.os.plus) {
           var a = [{
@@ -357,7 +362,7 @@
     position: relative;
     border: 2px solid #4990E2;
     display: inline-block;
-    width: 160px;
+    width: 120px;
     text-align: right;
     overflow: hidden;
     top: 4px;
@@ -382,6 +387,11 @@
     margin-top: 20px;
     color: #F6A623;
     font-size: 16px;
+  }
+
+  .part2 .fa-warning{
+    margin-left:20px;
+    color:#F6A623;
   }
 
   .mui-navigate-right:after, .mui-push-right:after {
@@ -414,5 +424,17 @@
 
   .part3 .important {
     color: #F6A623;
+  }
+
+  @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
+    .part2 .progressBar{
+        width:160px !important;
+    }
+  }
+
+  @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .part2 .progressBar{
+      width:160px !important;
+    }
   }
 </style>
