@@ -25,7 +25,7 @@
 
           </div>
           <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向他提问</div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向Ta提问</div>
             <div class="collect"><span class="mui-icon fa fa-heart-o"></span></div>
             <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
