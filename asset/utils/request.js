@@ -86,6 +86,10 @@ export function postRequest (url, data) {
         mui.toast(s);
         return false;
       }
+      if (code !== 1000) {
+        mui.toast(response.data.message);
+        return false;
+      }
       return response;
     })
     .catch(e => {
