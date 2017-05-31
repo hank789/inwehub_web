@@ -8,7 +8,7 @@
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
 
 
       <div class="professor">
@@ -108,7 +108,8 @@
       recommend_expert_avatar_url:'',
       recommend_qa:[],
       homeJiangli: homeJiangli,
-      homeJinpai: homeJinpai
+      homeJinpai: homeJinpai,
+      loading: true
     }),
     created () {
       this.getData();
@@ -146,6 +147,7 @@
           t.recommend_expert_uid = response_data.recommend_expert_uid;
           t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
           t.recommend_qa = response_data.recommend_qa;
+          t.loading = 0;
         });
       },
       getAsks: function () {
