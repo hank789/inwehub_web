@@ -44,6 +44,9 @@ const routes = [
   { // message
     path: '/home',
     component: require('../views/Home.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   {
     path: '/login',
@@ -391,38 +394,65 @@ const routes = [
   { // message
     path: '/message',
     component: require('../views/message.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // header
     path: '/header',
     component: require('../views/Account/selectHeader.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // discover
     path: '/discover',
     component: require('../views/Discover/Discover.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // setting
     path: '/setting',
     component: require('../views/Account/Setting.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // guide
     path: '/guide',
     component: require('../views/Guide.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // feedback
     path: '/feedback',
     component: require('../views/Feedback.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // about
     path: '/about',
     component: require('../views/About.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // project
     path: '/project',
     component: require('../views/Project.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // project
     path: '/help',
     component: require('../views/Account/Help.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // message
     path: '/*',
