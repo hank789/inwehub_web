@@ -45,10 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="mui-table-view-cell question content">
-          回答：{{ ask.answers[0] ? ask.answers[0].content : '' }}
-
-        </div>
+        <div class="mui-table-view-cell question content">回答：{{ ask.answers[0] ? ask.answers[0].content : '' }}</div>
       </div>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
@@ -307,6 +304,7 @@
 
   .detail-answer .question {
     position: relative;
+    white-space:pre-wrap;
   }
 
   .detail-answer .timeAgo {
