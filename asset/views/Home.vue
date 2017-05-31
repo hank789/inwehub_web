@@ -401,7 +401,7 @@
   .bountyDescList .detail .text:after {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
     height: 1px;
     content: '';
@@ -410,8 +410,8 @@
     background-color: #D9D9D9;
   }
 
-  .bountyDescList .detail:last-child .text {
-    border-bottom: none;
+  .bountyDescList .detail:last-child .text:after {
+    display: none;
   }
 
   .bountyDescList .detail .text .content {
