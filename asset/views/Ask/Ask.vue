@@ -67,6 +67,7 @@
   const Ask = {
     data: () => ({
       money: 88,
+      uid:0,
       description: '',
       selectOther: false,
       hide: 0,
@@ -113,6 +114,14 @@
       }
     },
     created () {
+
+        if (this.$route.query.id) {
+          var id = parseInt(this.$route.query.id);
+          if (id) {
+              this.uid = id;
+          }
+        }
+
       var info = this.$store.state.askType.info;
       if (info.money || info.desc) {
         this.money = info.money;
@@ -249,8 +258,11 @@
           return;
         }
 
+
+
         var data = {
           order_id: order_id,
+          answer_uid:this.uid,
           tags: this.type.split(':')[1],
           price: this.money,
           description: this.description,
@@ -258,6 +270,8 @@
         };
 
         mui('#sheet1').popover('toggle');
+
+
 
         postRequest(`question/store`, data).then(response => {
           var code = response.data.code;
