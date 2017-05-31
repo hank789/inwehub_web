@@ -40,7 +40,7 @@
 
 <script>
   import router from '../routers/index';
-  import request, {createAPI, apiRequest} from '../utils/request';
+  import request, {createAPI, apiRequest, postRequest} from '../utils/request';
   import detecdOS from '../utils/detecdOS';
   import localEvent from '../stores/localStorage';
   import errorCodes from '../stores/errorCodes';
@@ -218,7 +218,7 @@
 
         this.isCanGetCode = false;
 
-        request.post(createAPI('auth/sendPhoneCode'), {
+        postRequest(createAPI('auth/sendPhoneCode'), {
             mobile,
             type,
             'registration_code': this.registrationCode

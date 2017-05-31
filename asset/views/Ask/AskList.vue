@@ -23,7 +23,7 @@
                 <div class="person">
                   <div class="mui-media-body">
                     <div>
-                      <span>开发中</span>
+                      <span>{{ ask.status_description }}</span>
                       ·
                       <span class="time"><timeago :since="timeago(ask.created_at)"></timeago></span>
                     </div>
