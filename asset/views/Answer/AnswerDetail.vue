@@ -102,23 +102,23 @@
         </div>
       </div>
 
-      <div class="mui-table-view detail-comment" v-show="answer.question.status==6">
-        <div class="mui-table-view-cell">
-          暂无评价
+      <!--<div class="mui-table-view detail-comment" v-show="answer.question.status==6">-->
+        <!--<div class="mui-table-view-cell">-->
+          <!--暂无评价-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
 
-      <div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">
-        <div class="mui-table-view-cell content">
-          评价：{{ answer.feedback.description }}
-        </div>
-        <div class="mui-table-view-cell">
-          <span class="ratingNum">{{ rating }}.0分</span>
-          <star-rating :rating="rating" :padding="8" :star-size="25" :activeColor="'#F6A623'" :show-rating="showRating" :read-only="readOnly"></star-rating>
-        </div>
-      </div>
+      <!--<div class="mui-table-view detail-comment-result" v-show="answer.question.status==7">-->
+        <!--<div class="mui-table-view-cell content">-->
+          <!--评价：{{ answer.feedback.description }}-->
+        <!--</div>-->
+        <!--<div class="mui-table-view-cell">-->
+          <!--<span class="ratingNum">{{ rating }}.0分</span>-->
+          <!--<star-rating :rating="rating" :padding="8" :star-size="25" :activeColor="'#F6A623'" :show-rating="showRating" :read-only="readOnly"></star-rating>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="mb70"></div>
 
