@@ -74,7 +74,7 @@
 
       <div class="paizhao">
         <div class="mui-icon myicon myicon-paizhao" @tap.stop.prevent="uploadFile"></div>
-        填写嫌麻烦？拍照或一键上传上传完整简历，小哈帮您填！
+        填写嫌麻烦？拍照或一键上传完整简历，小哈帮您填！
 
 
       </div>
