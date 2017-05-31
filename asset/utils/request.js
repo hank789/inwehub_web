@@ -74,22 +74,6 @@ export function postRequest (url, data) {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
       }
-      var code = response.data.code;
-
-      // 参数错误
-      if (code === 1008) {
-        var errMsg = '';
-        for (var i in response.data.data) {
-          errMsg = errMsg + response.data.data[i] + '\n';
-        }
-        var s = errMsg.substring(0,errMsg.lastIndexOf('\n'));
-        mui.toast(s);
-        return false;
-      }
-      if (code !== 1000) {
-        mui.toast(response.data.message);
-        return false;
-      }
       return response;
     })
     .catch(e => {
