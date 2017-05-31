@@ -276,23 +276,17 @@
             case '0':
               selectTime = '0000';
               break;
-            case '15':
-              selectTime = '0015';
-              break;
-            case '30':
-              selectTime = '0030';
-              break;
-            case '60':
-              selectTime = '0100';
-              break;
             case '120':
               selectTime = '0200';
               break;
-            case '240':
-              selectTime = '0400';
-              break;
             case '360':
               selectTime = '0600';
+              break;
+            case '720':
+              selectTime = '1200';
+              break;
+            case '1440':
+              selectTime = '2400';
               break;
             default:
               selectTime = '';
