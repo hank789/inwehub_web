@@ -242,15 +242,19 @@
             break;
           case 2:
             this.starDesc = '不太满意';
+            this.descriptionPlaceHolder='在这里留下你的反馈';
             break;
           case 3:
             this.starDesc = '一般，还需要改善';
+            this.descriptionPlaceHolder='在这里留下你的反馈';
             break;
           case 4:
             this.starDesc = '比较满意';
+            this.descriptionPlaceHolder='在这里留下你的反馈';
             break;
           case 5:
             this.starDesc = '非常满意';
+            this.descriptionPlaceHolder='在这里留下你的反馈';
             break;
         }
       },
