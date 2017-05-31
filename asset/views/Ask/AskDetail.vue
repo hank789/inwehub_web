@@ -108,7 +108,7 @@
           <div class="title" v-show="!commentState">{{ starDesc }}</div>
 
           <div class="textarea-wrapper" v-show="!commentState">
-            <textarea v-model.trim="description" placeholder="在这里留下你的反馈"></textarea>
+            <textarea v-model.trim="description" :placeholder="descriptionPlaceHolder"></textarea>
             <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
           </div>
 
@@ -144,6 +144,7 @@
       id: 0,
       loading: true,
       description: '',
+      descriptionPlaceHolder:'在这里留下你的反馈',
       rateStar: 0,
       starDesc: '评价会让我们做的更好',
       descMaxLength: 500,
@@ -236,7 +237,8 @@
             this.starDesc = '评价会让我们做的更好';
             break;
           case 1:
-            this.starDesc = '非常不满意';
+            this.starDesc = '差评！！';
+            this.descriptionPlaceHolder='请耐心描述您的差评原因，我们会第一时间了解您的问题，核实后将全额退款。';
             break;
           case 2:
             this.starDesc = '不太满意';
