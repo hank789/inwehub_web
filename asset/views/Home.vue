@@ -27,7 +27,7 @@
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向他提问</div>
             <div class="collect"><span class="mui-icon fa fa-heart-o"></span></div>
-            <div class="collect"><span class="mui-icon fa fa-share"></span></div>
+            <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
         </div>
       </div>
@@ -296,6 +296,11 @@
     line-height: 37px;
     text-align: center;
     margin-left: 3%;
+  }
+
+  .professor .options .collect .myicon-share{
+    width:15px;
+    height:16px;
   }
 
   .professorDesc {

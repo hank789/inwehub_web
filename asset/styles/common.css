@@ -267,6 +267,10 @@ input, textarea, select{
   background: url("../statics/images/icon_project2.png");
 }
 
+.myicon-share{
+  background: url("../statics/images/icon-share.png");
+}
+
 .myicon{
   background-size: contain;
   background-repeat: no-repeat;
