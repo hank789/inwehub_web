@@ -1,5 +1,6 @@
 import axios from 'axios';
 import localEvent from '../stores/localStorage';
+import { logout } from '../utils/auth';
 
 const baseURL = `http://47.92.24.67/`;
 const api = `http://47.92.24.67/api`;
@@ -49,6 +50,11 @@ export function apiRequest (url, data) {
         mui.toast(response.data.message);
         return false;
       }
+
+      if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+        logout();
+      }
+
       return response.data.data;
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
@@ -74,6 +80,13 @@ export function postRequest (url, data) {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
       }
+
+      var code = response.data.code;
+      if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+        logout();
+      }
+
+
       return response;
     })
     .catch(e => {
