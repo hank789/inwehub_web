@@ -244,37 +244,25 @@
         var Picker = new mui.PopPicker();
 
         Picker.setData([
-          {
-            value: '0',
-            text: '立刻回答'
-          },
-          {
-            value: '15',
-            text: '一刻钟后'
-          },
-          {
-            value: '30',
-            text: '半小时后'
-          },
-          {
-            value: '60',
-            text: '一小时后'
-          },
+//          {
+//            value: '0',
+//            text: '立刻回答'
+//          },
           {
             value: '120',
-            text: '两小时后'
-          },
-          {
-            value: '180',
-            text: '三小时后'
-          },
-          {
-            value: '240',
-            text: '四小时后'
+            text: '2小时内'
           },
           {
             value: '360',
-            text: '六小时后'
+            text: '6小时内'
+          },
+          {
+            value: '720',
+            text: '12小时内'
+          },
+          {
+            value: '1440',
+            text: '24小时内'
           }
         ]);
 
