@@ -263,9 +263,15 @@
 
         postRequest(url, data).then(response => {
           this.buttonSaveDisabled = false;
-          if (response === false) {
+
+          var code = response.data.code;
+
+          if (code !== 1000) {
+            mui.alert(response.data.message);
             return;
           }
+
+
 
           mui.toast('操作成功');
           this.$router.go(-1);
