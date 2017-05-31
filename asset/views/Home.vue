@@ -80,9 +80,6 @@
         <li class="mui-table-view-cell">
           <a @tap.stop.prevent="goRecommand">推荐专家</a>
         </li>
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="goExpert">专家管理</a>
-        </li>
       </ul>
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
