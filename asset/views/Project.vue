@@ -12,7 +12,7 @@
     </div>
 
     <div class="empty">
-      <span class="mui-icon myicon myicon-project"></span>
+      <span class="mui-icon myicon myicon-project3"></span>
       <div class="title">尚未发布任何项目需求</div>
 
     </div>
