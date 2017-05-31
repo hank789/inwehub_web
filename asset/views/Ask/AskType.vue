@@ -17,7 +17,8 @@
         </div>
         <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
           <div :id="index" class="mui-control-content mui-active" v-for="(item, index) in types">
-            <ul class="mui-table-view">
+            <div class="emptyChildren mui-table-view" v-if="!item.children.length"><div class="mui-table-view-cell">小哈将陆续开放更多的板块！<br/>敬请期待！</div> </div>
+            <ul class="mui-table-view" v-else>
               <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(item.text, itemSub.text, item.value, itemSub.value)" v-for="(itemSub, subIndex) in item.children">{{ itemSub.text }}</li>
             </ul>
           </div>
@@ -97,6 +98,12 @@
   }
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     background-color: #fff;
+  }
+
+  .emptyChildren{
+    padding:30px;
+    background: #fff;
+    text-align: center;
   }
 
 </style>
