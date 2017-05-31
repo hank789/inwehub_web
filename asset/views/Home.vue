@@ -444,7 +444,11 @@
   }
 
   .askDetail .buttonAsk {
-    position: relative;
+    position: fixed;
+    bottom:75px;
+    left:50%;
+    margin-left:-62px;
+    z-index: 777;
     background: #4990E2;
     display: inline-block;
     width: 125px;
