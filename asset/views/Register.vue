@@ -218,19 +218,13 @@
 
         this.isCanGetCode = false;
 
-        postRequest(createAPI('auth/sendPhoneCode'), {
+        postRequest('auth/sendPhoneCode', {
             mobile,
             type,
             'registration_code': this.registrationCode
           }
         )
           .then(response => {
-            if (response.data.code === 0 || response.data.status) {
-              // 删除网络问题
-              this.cleanErrors();
-              this.time = 60;
-              this.timer();
-            }
 
             var code = response.data.code;
             if (code !== 1000) {
@@ -238,6 +232,9 @@
               mui.toast(response.data.message);
               return;
             }
+
+            this.time = 60;
+            this.timer();
 
             mui.toast('验证码发送成功');
           })
