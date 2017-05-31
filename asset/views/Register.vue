@@ -238,6 +238,8 @@
               mui.toast(response.data.message);
               return;
             }
+
+            mui.toast('验证码发送成功');
           })
           .catch(({response: {data = {}} = {}}) => {
             this.isCanGetCode = true;
@@ -343,7 +345,7 @@
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
               cb(currentUser);
-              router.push({path: 'my'});
+              router.push({path: '/my'});
             }));
           })
           .catch(({response: {data = {}} = {}}) => {
