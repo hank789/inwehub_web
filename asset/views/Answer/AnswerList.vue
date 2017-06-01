@@ -17,7 +17,7 @@
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
             </div>
-            <div class="site-desc site-descSub mui-ellipsis-3">
+            <div class="site-desc site-descSub mui-ellipsis-3" v-show="answer.answer_content.length">
               {{ answer.answer_content }}
             </div>
             <div class="person">
