@@ -17,7 +17,7 @@
         <label @tap.stop.prevent="entryPhone" v-show="showPhoneLabel">手机号码</label>
       </div>
       <div class="inputWrapper">
-        <input class="text" type="text" name="yzm" v-model.trim.num="code" autocomplete="off"/>
+        <input class="text" type="text" name="code" v-model.trim.num="code" autocomplete="off"/>
         <label @tap.stop.prevent="entryYzm" v-show="showYzmLabel">验证码</label>
         <span class="getYzm" @click.stop.prevent="getCode">{{ getCodeText }}</span>
       </div>
@@ -98,7 +98,7 @@
           case 'yqm':
             if (!this.registrationCode) this.showYqCodeLabel = true;
             break;
-          case 'yzm':
+          case 'code':
             if (!this.code) this.showYzmLabel = true;
             break;
           case 'phone':
