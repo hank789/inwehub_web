@@ -22,7 +22,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if(mui.os.plus){
         var lauch = localEvent.getLocalItem('lauchFlag');
-        if (!lauch.showGuide) {
+        if (!lauch.showGuide && 1===2) {
           mui.plusReady(function () {
             plus.navigator.setFullscreen(true);
             next({
