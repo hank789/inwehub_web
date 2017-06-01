@@ -168,14 +168,14 @@
     width:18px;
     height:18px;
     left: 10px;
-    top: 10px;
+    top: 12px;
   }
 
   .mui-bar .myicon-expert {
     width: 27px;
     height: 27px;
     right: 10px;
-    top: 12px;
+    top: 9px;
   }
 
   .professor {
@@ -491,7 +491,7 @@
     left:50%;
     width:70px;
     margin-left:-35px !important;
-    top:15px;
+    top:12px;
   }
 
 
