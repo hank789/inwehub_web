@@ -465,6 +465,10 @@ const routes = [
     path: '/protocol/register',
     component: require('../views/Help/Protocol.vue')
   },
+  { // help/question
+    path: '/help/question',
+    component: require('../views/Help/Question.vue')
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),
