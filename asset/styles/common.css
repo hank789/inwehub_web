@@ -279,9 +279,16 @@ input, textarea, select{
   background: url("../statics/images/home-title.png");
 }
 
+.myicon-jiubei{
+  background: url("../statics/images/icon-jiubei.png");
+}
+
+
+
 
 .myicon{
   background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
 }
 

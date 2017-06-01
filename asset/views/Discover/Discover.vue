@@ -21,7 +21,7 @@
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-fangdajing"></span>附近企业</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right"><span class="mui-icon  myicon myicon-money"></span>新的机会</a>
+          <a class="mui-navigate-right"><span class="mui-icon  myicon myicon-jiubei"></span>最新活动</a>
         </li>
       </ul>
 
