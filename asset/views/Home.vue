@@ -352,7 +352,7 @@
   .bountyDesc {
     background: #fff;
     margin-top: 5px;
-    padding: 15px 0 0 20px;
+    padding:10px 0 0 20px;
   }
 
   .bountyDesc .title .icon {
