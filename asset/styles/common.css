@@ -275,6 +275,10 @@ input, textarea, select{
   background: url("../statics/images/icon-home2.png");
 }
 
+.myicon-home-title{
+  background: url("../statics/images/home-title.png");
+}
+
 
 .myicon{
   background-size: contain;

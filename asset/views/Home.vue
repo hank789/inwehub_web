@@ -4,7 +4,8 @@
 
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.push('/project')"></a>
-      <h1 class="mui-title">InweHub</h1>
+      <!--<h1 class="mui-title">InweHub</h1>-->
+      <span class="mui-icon myicon myicon-home-title"></span>
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
     </header>
 
@@ -484,6 +485,15 @@
     top: 8px;
     left: -13px;
   }
+
+  .myicon-home-title{
+    position: absolute;
+    left:50%;
+    width:70px;
+    margin-left:-35px !important;
+    top:15px;
+  }
+
 
   @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .professor .options .collect {
