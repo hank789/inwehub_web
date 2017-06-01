@@ -328,7 +328,7 @@
 
   .professorDesc .detail {
     font-size: 12px;
-    line-height: 24px;
+    line-height: 21px;
   }
 
   .bountyDesc {
