@@ -215,8 +215,8 @@
         }
 
         if (!this.files.length) {
-          mui.toast('请上传专家名片');
-          return;
+          //mui.toast('请上传专家名片');
+          //return;
         }
 
         if (mui.os.plus) {
