@@ -9,22 +9,32 @@
       <a v-bind:id="'done_' + back_id" @tap.stop.prevent="done" class="mui-btn mui-btn-link mui-pull-right mui-btn-blue"
          v-else>完成<span>({{ iselected.length }})</span></a>
     </header>
-    <div class="mui-content">
-      <div class="mui-indexed-list">
-        <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
-          <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
-        <!--</div>-->
-        <div class="mui-indexed-list-alert"></div>
-        <div class="mui-indexed-list-inner">
-          <div class="mui-indexed-list-empty-alert">没有数据</div>
-          <ul class="mui-table-view">
-            <li v-for="(tag, index) in tags" class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left" @tap.stop.prevent="checkThis" :value="tag.value">
+    <div class="mui-content mui-scroll-wrapper">
 
-              <span class="tagSelect checked" v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1"/><span class="tagSelect" v-else/>{{ tag.text }}
-            </li>
-          </ul>
 
-        </div>
+        <div class="mui-scroll">
+
+          <div class="mui-indexed-list">
+            <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
+            <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
+            <!--</div>-->
+            <div class="mui-indexed-list-alert"></div>
+            <div class="mui-indexed-list-inner">
+              <div class="mui-indexed-list-empty-alert">没有数据</div>
+              <ul class="mui-table-view">
+                <li v-for="(tag, index) in tags"
+                    class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left"
+                    @tap.stop.prevent="checkThis" :value="tag.value">
+
+                  <span class="tagSelect checked"
+                        v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1"/><span
+                  class="tagSelect" v-else/>{{ tag.text }}
+
+                </li>
+              </ul>
+
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -51,7 +61,7 @@
         }
       });
 
-      this.iselected = this.selected?this.selected:[];
+      this.iselected = this.selected ? this.selected : [];
     },
     computed: {
       genderTagName() {
@@ -79,27 +89,27 @@
     },
     methods: {
       done(){
-        this.$emit('selectedIndustryTags',this.iselected, this.object_type);
+        this.$emit('selectedIndustryTags', this.iselected, this.object_type);
         document.getElementById(this.back_id).classList.remove('mui-active');
       },
       checkThis(e){
-          var li = null;
-          if (e.target.tagName==='SPAN') {
-             li = e.target.parentNode;
-          } else {
-             li = e.target;
-          }
+        var li = null;
+        if (e.target.tagName === 'SPAN') {
+          li = e.target.parentNode;
+        } else {
+          li = e.target;
+        }
         var span = li.childNodes[0];
         var value = {
-            text:li.innerText,
-            value:parseInt(li.getAttribute('value'))
+          text: li.innerText,
+          value: parseInt(li.getAttribute('value'))
         };
         var pos = this.getSelectedCodes.indexOf(value.value);
         if (!span.classList.contains('checked')) {
           span.classList.add('checked');
 
           if (pos < 0) {
-              this.iselected.push(value);
+            this.iselected.push(value);
           }
         } else {
           span.classList.remove('checked');
@@ -120,7 +130,16 @@
       muiIndexedList
     },
     mounted() {
+      mui('.mui-scroll-wrapper').scroll();
     }
   }
 
 </script>
+
+
+<style scoped>
+  .mui-bar {
+    position: fixed;
+
+  }
+</style>

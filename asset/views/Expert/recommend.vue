@@ -77,14 +77,12 @@
     </div>
 
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
-      <div class="mui-scroll-wrapper">
-        <div class="mui-scroll">
+
           <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type"
                                       v-on:selectedIndustryTags="selectedIndustryTags">
 
           </industry-tags-indexed-list>
-        </div>
-      </div>
+
     </div>
 
   </div>

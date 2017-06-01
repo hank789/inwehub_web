@@ -78,25 +78,19 @@
 
 
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
-      <div class="mui-scroll-wrapper">
-        <div class="mui-scroll">
           <industry-tags-indexed-list :tag_type="3" :selected="job.industry_tags"  :back_id="page_industry_tags_id" :object_type="object_type"
                                       v-on:selectedIndustryTags="selectedIndustryTags">
 
           </industry-tags-indexed-list>
-        </div>
-      </div>
     </div>
 
 
     <div id="page_product_tags" class="mui-modal mui-pageSub">
-      <div class="mui-scroll-wrapper">
-        <div class="mui-scroll">
+
           <!--这里放置真实显示的DOM内容-->
           <industry-tags-indexed-list :tag_type="4" :selected="job.product_tags" :back_id="page_product_tags_id"  :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
           </industry-tags-indexed-list>
-        </div>
-      </div>
+
     </div>
 
   </div>
@@ -301,7 +295,7 @@
       next();
     },
     mounted () {
-      mui('.mui-scroll-wrapper').scroll();
+
     },
     computed:{
       descLength() {

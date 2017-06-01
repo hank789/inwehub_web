@@ -84,15 +84,12 @@
 
     <!--行业领域模板开始-->
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
-      <div class="mui-scroll-wrapper">
-        <div class="mui-scroll">
+
           <!--这里放置真实显示的DOM内容-->
           <industry-tags-indexed-list :tag_type="3" :selected="newItem.industry_tags" :back_id="page_industry_tags_id"
                                       :object_type="object_type" v-on:selectedIndustryTags="selectedIndustryTags">
 
           </industry-tags-indexed-list>
-        </div>
-      </div>
     </div>
     <!--行业领域模板结束-->
 
