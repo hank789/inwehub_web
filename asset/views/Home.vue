@@ -27,14 +27,17 @@
           </div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向Ta提问</div>
-            <div class="collect"><span class="mui-icon fa fa-heart-o"></span></div>
+            <div class="collect" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart-o"></span></div>
+            <!--<div class="collect collect-active" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart"></span></div>-->
             <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
         </div>
       </div>
 
       <div class="professorDesc">
-        <div class="title"><span class="icon"></span>专家介绍</div>
+        <div class="title"><span class="icon"></span>专家简介
+             <span class="titleSub">资深专家每日更新</span>
+        </div>
         <div class="detail mui-ellipsis-3">
           {{ recommend_expert_description }}
 
@@ -44,9 +47,8 @@
 
       <div class="bountyDesc">
         <div class="title">
-          <span class="icon"></span>奖励问答
-                <span class="titleSub">优质问与答将会获现金奖励</span>
-          <span class="more mui-navigate-right">更多</span>
+          <span class="icon"></span>最新奖励
+                <span class="titleSub">现金奖励优质问答</span>
         </div>
       </div>
 
@@ -108,6 +110,7 @@
       recommend_expert_uid:'',
       recommend_expert_avatar_url:'',
       recommend_qa:[],
+      recommend_expert_is_followed:0,
       homeJiangli: homeJiangli,
       homeJinpai: homeJinpai,
       loading: true
@@ -123,6 +126,9 @@
       next();
     },
     methods: {
+      collectProfessor:function(){
+
+      },
       goRecommand: function () {
         this.expertNav();
         this.$router.push('/expert/recommend')
@@ -148,6 +154,7 @@
           t.recommend_expert_uid = response_data.recommend_expert_uid;
           t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
           t.recommend_qa = response_data.recommend_qa;
+          t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
           t.loading = 0;
         });
       },
@@ -299,6 +306,13 @@
     margin-left: 3%;
   }
 
+  .professor .options .collect-active{
+    /*border:1px solid #4990E2;*/
+  }
+  .professor .options .collect-active span{
+    color:#4990E2;
+  }
+
   .professor .options .collect .myicon-share{
     width:15px;
     height:16px;
@@ -308,19 +322,21 @@
     color: #4A4A4A;
     font-size: 20px;
     background: #fff;
-    padding: 10px 20px 10px;
+    padding: 10px 0 10px 20px;
   }
 
   .professorDesc .title {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-size: 16px;
+    padding-bottom:8px;
+    position: relative;
   }
 
   .professorDesc .title .icon {
     position: relative;
-    top: 3px;
+    top: 2px;
     width: 16px;
-    margin-right: 2px;
+    margin-right: 5px;
     display: inline-block;
     background: url("../statics/images/home-jinpai.png") no-repeat;
     height: 16px;
@@ -330,6 +346,7 @@
   .professorDesc .detail {
     font-size: 12px;
     line-height: 21px;
+    padding-right:20px;
   }
 
   .bountyDesc {
@@ -346,23 +363,58 @@
     background-size: cover;
     position: relative;
     top: 2px;
-    margin-right: 5px;
+    margin-right: 8px;
   }
 
   .bountyDesc .title {
+    position: relative;
     line-height: 20px;
     font-size: 16px;
     color: #4A4A4A;
-    border-bottom: 1px solid #D9D9D9;
-    padding-bottom: 10px;
+    padding-bottom: 11px;
+  }
+
+  .professorDesc .title:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #D9D9D9;
+  }
+
+  .bountyDesc .title:after{
+    position: absolute;
+    right: 0;
+    bottom: 1px;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #D9D9D9;
+  }
+
+
+  .professorDesc .titleSub{
+    display: inline-block;
+    font-size: 12px;
+    color: #9B9B9B;
+    float:right;
+    margin-right:20px;
+    position: relative;
   }
 
   .bountyDesc .titleSub {
     display: inline-block;
     font-size: 12px;
     color: #9B9B9B;
+    float:right;
+    margin-right:20px;
     position: relative;
-    bottom: 1px;
   }
 
   .bountyDesc .more {
