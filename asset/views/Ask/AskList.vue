@@ -44,7 +44,6 @@
           <div class="">
             <div class="title">暂无提问</div>
             <div class="subTitle">提出正确的问题，往往等于解决了问题的大半。
-            <br/><span class="mui-pull-right">——海森堡</span>
             <br/><span>快去提出第一个问题吧！</span>
             </div>
             <div class="buttons">
