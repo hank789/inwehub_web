@@ -349,6 +349,12 @@
     watch: {
     },
     methods: {
+      fixSelect:function(){
+        setTimeout(() => {
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+        }, 200)
+      },
       selectHomeCity(){
         var cityPicker = new mui.PopPicker({
           layer: 2
@@ -500,6 +506,7 @@
       ,
       changeIndustryTagsOwner(owner)
       {
+        this.fixSelect();
         this.object_type = owner;
         if (owner === 'user') {
           this.newItem.industry_tags = this.user.info.industry_tags;

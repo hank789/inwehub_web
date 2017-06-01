@@ -25,7 +25,7 @@
               <li class="mui-table-view-cell">
                 <div class="mui-input-row">
                   <a href="#page_industry_tags"
-                     class="mui-navigate-right">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis"
+                     class="mui-navigate-right" @tap="fixSelect">行业领域<span class="mui-pull-right account-setting-field mui-ellipsis"
                                                           v-if="infoIndustryTagsNames">{{ infoIndustryTagsNames
                     }}</span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
                 </div>
@@ -124,6 +124,12 @@
       buttonSaveDisabled:false
     }),
     methods: {
+      fixSelect:function(){
+          setTimeout(() => {
+            mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+            mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+          }, 200)
+      },
       muiViewBack: function () {
         var newItemChange = JSON.stringify(this.job);
         if (this.bak != '' && newItemChange !== this.bak) {

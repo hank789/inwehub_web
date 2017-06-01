@@ -35,7 +35,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row mui-navigate-right">
             <label class="mui-navigate">行业领域</label>
-            <a href="#page_industry_tags" class="link mui-navigate-right mui-ellipsis"><span
+            <a href="#page_industry_tags" class="link mui-navigate-right mui-ellipsis" @tap="fixSelect"><span
               v-show="!infoIndustryTagsNames">请选择</span><span class="mui-input-clear">{{ infoIndustryTagsNames }}</span></a>
           </div>
         </li>
@@ -139,6 +139,12 @@
       }
     },
     methods: {
+      fixSelect:function(){
+        setTimeout(() => {
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+        }, 200)
+      },
       delFile(index){
         this.files.splice(index, 1);
       },
