@@ -39,9 +39,9 @@
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="">
-            <div class="title">暂无任务</div>
+            <div class="title">暂无回答</div>
             <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-            <div class="subTitle" v-if="!isExpert">认证成为平台专家，才能回答问题展示您的风采！<br/>现在就前往申请认证吧！</div>
+            <div class="subTitle" v-if="!isExpert">只有认证专家才能进行回答。<br/>如果您还不是专家，请积极提升个人在平台的成长值。</div>
           </div>
         </div>
       </div>
