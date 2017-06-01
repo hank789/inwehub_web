@@ -74,12 +74,8 @@
 
       <div class="paizhao">
         <!--<div class="mui-icon myicon myicon-paizhao" @tap.stop.prevent="uploadFile"></div>-->
-        填写嫌麻烦，可发送简历或附件到 hi@inwehub.com ，客服小哈帮您维护！<br/>
- 邮件标题的格式为 “简历维护：用户姓名+注册手机号码“”。
-
-
+        填写嫌麻烦，可发送简历到 <a href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码">hi@inwehub.com</a> ，客服小哈帮您维护！
        </div>
-
     </div>
   </div>
 </template>
@@ -407,8 +403,12 @@
 
   .paizhao {
     position: relative;
-    padding: 20px;
+    padding:20px;
     font-size:14px;
+  }
+
+  .paizhao a{
+    color:#000;
   }
 
   .paizhao .mui-icon {
