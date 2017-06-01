@@ -39,7 +39,7 @@
         <a class="item" @tap.stop.prevent="$router.push('/answers')">
           <span class="number">{{ answers }}</span><span>我的回答</span>
         </a>
-        <a class="item">
+        <a class="item" @tap.stop.prevent="$router.push('/bid')">
           <span class="number">0</span><span>我的竞标</span>
         </a>
         <a  class="item"  @tap.stop.prevent="$router.push('/project')">

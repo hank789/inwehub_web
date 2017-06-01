@@ -461,6 +461,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // bid
+    path: '/bid',
+    component: require('../views/Bid.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     component: require('../views/Help/Protocol.vue')
