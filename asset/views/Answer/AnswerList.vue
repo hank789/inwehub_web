@@ -17,6 +17,9 @@
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
             </div>
+            <div class="site-desc site-descSub mui-ellipsis-3">
+              {{ answer.answer_content }}
+            </div>
             <div class="person">
               <div class="mui-media-body">
                 <div>
@@ -254,6 +257,11 @@
     line-height: 22px;
     color:#101010;
   }
+  .list-answer .site-descSub{
+    font-size:14px;
+    color:#4A4A4A;
+  }
+
 
   .list-answer .site-desc .mui-icon{
     font-size:16px;
