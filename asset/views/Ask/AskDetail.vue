@@ -103,7 +103,7 @@
 
           <div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>
 
-          <star-rating @rating-selected="setRating" :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
+          <star-rating @rating-selected="setRating" :rating="5"  :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
 
           <div class="title" v-show="!commentState">{{ starDesc }}</div>
 
@@ -145,7 +145,7 @@
       loading: true,
       description: '',
       descriptionPlaceHolder:'在这里留下你的反馈',
-      rateStar: 0,
+      rateStar: 5,
       starDesc: '评价会让我们做的更好',
       descMaxLength: 500,
       buttonCommentDisabled:false,
