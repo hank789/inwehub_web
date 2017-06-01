@@ -5,12 +5,14 @@
 
       </button>
       <h1 class="mui-title">提问</h1>
+      <a @tap.stop.prevent="$router.push('/help/ask')"
+         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">帮助</a>
     </header>
 
     <div class="mui-content form form-ask">
       <div class="textarea-wrapper">
         <textarea v-model.trim="description" @keydown.stop="enterWords"
-                  placeholder="提出问题"></textarea>
+                  placeholder="请在这里提出问题。为了更好的通过平台解决问题，提问需要遵循相应规范，请点击帮助了解详情。"></textarea>
       </div>
       <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
     </div>
@@ -409,7 +411,7 @@
   }
 
   .mui-bar .mui-btn-link {
-    color: #999;
+    color: #fff;
   }
 
   .mui-bar .mui-btn-nav.mui-pull-left {

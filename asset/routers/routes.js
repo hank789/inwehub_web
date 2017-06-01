@@ -454,6 +454,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // project
+    path: '/help/ask',
+    component: require('../views/Help/Ask.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),
