@@ -246,8 +246,8 @@
               return;
             }
 
-            mui.alert('提交成功');
-            this.$router.replace('/expert');
+            mui.toast('提交成功');
+            this.$router.replace('/home');
           });
         }
 
