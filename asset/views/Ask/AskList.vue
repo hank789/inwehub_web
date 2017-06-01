@@ -49,7 +49,7 @@
             </div>
             <div class="buttons">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                      @tap.stop.prevent="$router.push('/ask')">快速提问
+                      @tap.stop.prevent="$router.push('/protocol/register')">快速提问
 
 
               </button>

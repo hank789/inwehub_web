@@ -461,6 +461,10 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // protocol/register
+    path: '/protocol/register',
+    component: require('../views/Help/Protocol.vue')
+  },
   { // message
     path: '/*',
     component: require('../views/404.vue'),

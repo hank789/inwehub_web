@@ -25,7 +25,7 @@
         <input class="text" type="password" name="password" v-model.trim="password" autocomplete="off"/>
         <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">登录密码</label>
       </div>
-      <div class="protocol">注册即同意<span>《用户注册服务协议》</span></div>
+      <div class="protocol">注册即同意<span @tap.stop.prevent="$router.push('/protocol/register')">《用户注册服务协议》</span></div>
 
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"
