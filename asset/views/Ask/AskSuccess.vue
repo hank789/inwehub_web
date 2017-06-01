@@ -1,6 +1,7 @@
 <template>
 <div>
       <header class="mui-bar mui-bar-nav">
+        <a class="mui-icon myicon myicon-home2 mui-pull-left" @tap.stop.prevent="$router.push('/home')"></a>
         <h1 class="mui-title">提交成功</h1>
       </header>
 
@@ -21,8 +22,8 @@
 
 
             <div class="buttons">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="$router.replace('/ask')">再问一条</button>
-              <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" @tap.stop.prevent="$router.replace('/ask/' + id)">查看问题</button>
+              <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" @tap.stop.prevent="$router.replace('/ask')">再问一条</button>
+              <button type="button" class="mui-btn mui-btn-primary " @tap.stop.prevent="$router.replace('/ask/' + id)">查看问题</button>
 
             </div>
 
@@ -97,6 +98,10 @@
 
 
 <style scoped>
+  .mui-bar .myicon{
+    left:10px;
+    top:12px;
+  }
   .pay-success{
     text-align: center;
     padding:15px;
