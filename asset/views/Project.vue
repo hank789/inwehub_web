@@ -107,9 +107,9 @@
   }
 
   .mui-bar  .myicon{
-    width:18px;
-    height:18px;
+    width: 18px;
+    height: 18px;
     left: 10px;
-    top: 10px;
+    top: 12px;
   }
 </style>
