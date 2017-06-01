@@ -10,7 +10,7 @@
         <div class="mui-table-view-cell">
           <div class="avatar">
             <div class="avatarInner">
-              <img class="mui-media-object  avatar" :src="ask.question.user_avatar_url">
+              <img :src="ask.question.user_avatar_url">
             </div>
           </div>
 
@@ -35,7 +35,7 @@
         <div class="mui-table-view-cell">
           <div class="avatar">
             <div class="avatarInner">
-              <img class="mui-media-object  avatar" :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
+              <img :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
             </div>
           </div>
           <div class="mui-media-body">

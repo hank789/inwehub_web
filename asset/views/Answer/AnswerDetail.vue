@@ -12,7 +12,7 @@
 
           <div class="avatar">
             <div class="avatarInner">
-              <img class="mui-media-object  avatar" :src="answer.question?answer.question.user_avatar_url:''">
+              <img :src="answer.question?answer.question.user_avatar_url:''">
             </div>
           </div>
 
@@ -78,7 +78,7 @@
 
           <div class="avatar">
             <div class="avatarInner">
-              <img class="mui-media-object  avatar" :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
+              <img :src="answer.answers[0]?answer.answers[0].user_avatar_url:''">
             </div>
           </div>
 
