@@ -18,7 +18,7 @@
         </div>
         <div class="text">
           <div class="realname">{{ name }}</div>
-          <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>认证专家</div>
+          <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
             <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
@@ -99,6 +99,7 @@
         answers:currentUser.answers,
         tasks:currentUser.tasks,
         projects:currentUser.projects,
+        expert_level:currentUser.expert_level
       }
     },
     methods: {
@@ -120,6 +121,7 @@
         this.answers = user.info.answers;
         this.tasks = user.info.tasks;
         this.projects = user.info.projects;
+        this.expert_level = user.info.expert_level;
       }));
     },
     mounted(){

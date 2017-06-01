@@ -127,6 +127,7 @@ function updateUserInfoCache(user) {
   userLocal.answers = user.answers;
   userLocal.tasks = user.tasks;
   userLocal.projects = user.projects;
+  userLocal.expert_level = user.expert_level;
 
   /*
    user.counts.map(function (count, index) {
