@@ -53,7 +53,7 @@
           </a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>优惠券</a>
+          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>我的邀请码</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
