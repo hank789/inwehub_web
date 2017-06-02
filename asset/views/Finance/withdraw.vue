@@ -9,7 +9,7 @@
 
     <div class="mui-content">
       <div class="withdraw">
-        <div class="title">提现到微信账户 <span v-show="isBindWeixin" v-html="bindWeixinNickname"></span> <oauth v-show="isBindWeixin === 0"></oauth></div>
+        <div class="title">提现到微信账户 <span v-show="isBindWeixin">{{ bindWeixinNickname }}</span> <oauth v-show="isBindWeixin === 0"></oauth></div>
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>

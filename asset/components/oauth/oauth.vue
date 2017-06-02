@@ -1,7 +1,5 @@
 <template>
-  <div id="oauth_content">
-    <div id="weixin" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="login('weixin')">微信登陆</div>
-  </div>
+    <span id="weixin" @tap.stop.prevent="login('weixin')">绑定微信</span>
 </template>
 
 <script>
