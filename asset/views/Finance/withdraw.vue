@@ -13,7 +13,7 @@
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
-          <span class="amount"><input type="text" v-model="totalMoeny" /></span>
+          <span class="amount"><input type="text" v-model="withdrawMoney" /></span>
         </div>
         <div class="balance">钱包余额￥{{ totalMoeny }}，<span>全部提现</span></div>
         <div class="button-wrapper">
@@ -35,6 +35,7 @@
   export default {
     data: () => ({
       loading: true,
+      withdrawMoney:0,
       totalMoeny:'--',
       settlementMoney:'--',  //结算中的资金
       withdrawMinMoney:'--', //用户单次最低提现金额
