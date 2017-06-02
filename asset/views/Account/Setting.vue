@@ -41,7 +41,7 @@
 
           </button>
           <div class="logo"></div>
-          <div class="copyright">CopyRight By InweHub © V1.0.0</div>
+          <div class="copyright">Copyright © 2017 InweTech All Rights Reserved. </div>
         </div>
 
       </div>
