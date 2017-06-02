@@ -26,17 +26,17 @@
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-            <span class="mui-icon myicon myicon-task" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
+            <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
-            <span class="mui-icon myicon myicon-task-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
+            <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isAsk"></span></div>
 
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
-            <span class="mui-icon myicon myicon-find" v-if="!isDiscover"></span>
-            <span class="mui-icon myicon myicon-find-hover" v-else></span>
+            <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
+            <span class="mui-icon myicon myicon-task-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
 
           </div>
