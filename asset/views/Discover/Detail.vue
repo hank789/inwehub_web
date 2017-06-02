@@ -9,7 +9,7 @@
     <div class="mui-content">
       <div class="discoverDetail">
         <span class="mui-icon fa fa-thumbs-o-up" @tap="discover"></span>
-        <div>如果您对该功能感兴趣，就点赞给小哈加加油，<br/>我么会优先推出的！</div>
+        <div>如果您对该功能感兴趣，就点赞给小哈加加油，我么会优先推出的！</div>
       </div>
 
     </div>
