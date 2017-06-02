@@ -35,9 +35,32 @@
           auth.login(()=>{
             w&&w.close();
             w=null;
-            console.log("登录认证成功：");
             console.log(JSON.stringify(auth.authResult));
-            userinfo(auth);
+            auth.getUserInfo(function(){
+              console.log("获取用户信息成功：");
+              var nickname=auth.userInfo.nickname||auth.userInfo.name||auth.userInfo.miliaoNick;
+              apiRequest(`oauth/weixin/callback`,{
+                openid: auth.authResult.openid,
+                nickname: nickname,
+                avatar: auth.userInfo.headimgurl,
+                access_token: auth.authResult.access_token,
+                refresh_token: auth.authResult.refresh_token,
+                expires_in: auth.authResult.expires_in,
+                scope: auth.authResult.scope,
+                full_info: auth.userInfo
+              }).then(response_data => {
+                if (response_data === false) {
+                  return;
+                }
+
+              });
+              plus.nativeUI.alert("欢迎“"+nickname+"”登录！");
+            },function(e){
+              console.log("获取用户信息失败：");
+              console.log("["+e.code+"]："+e.message);
+              plus.nativeUI.alert("获取用户信息失败！",null,"登录");
+            });
+
           },function(e){
             w&&w.close();
             w=null;
@@ -48,19 +71,6 @@
           console.log("无效的登录认证通道！");
           plus.nativeUI.alert("无效的登录认证通道！",null,"登录");
         }
-      },
-      userinfo(a){
-        console.log("----- 获取用户信息 -----");
-        a.getUserInfo(function(){
-          console.log("获取用户信息成功：");
-          console.log(JSON.stringify(a.userInfo));
-          var nickname=a.userInfo.nickname||a.userInfo.name||a.userInfo.miliaoNick;
-          plus.nativeUI.alert("欢迎“"+nickname+"”登录！");
-        },function(e){
-          console.log("获取用户信息失败：");
-          console.log("["+e.code+"]："+e.message);
-          plus.nativeUI.alert("获取用户信息失败！",null,"登录");
-        });
       },
       logoutAll(){
         console.log("----- 注销登录认证 -----");
