@@ -41,7 +41,8 @@
 
           </button>
           <div class="logo"></div>
-          <div class="copyright">Copyright © 2017 InweTech All Rights Reserved. </div>
+          <div class="copyright">Copyright © 2017 上海樱维信息科技有限公司<br/>
+All Rights Reserved</div>
         </div>
 
       </div>
