@@ -18,6 +18,7 @@
 
 <script>
   import localEvent from '../../stores/localStorage';
+  import {postRequest} from '../../utils/request';
   export  default {
     data(){
       const currentUser = localEvent.getLocalItem('UserInfo');
@@ -29,7 +30,19 @@
     },
     methods: {
       discover() {
-         mui.toast("点赞成功+1");
+        postRequest(`system/func_zan`, {content:this.title}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
+
+
+          mui.toast("点赞成功+1");
+        });
+
+
+
       }
     },
     created () {
