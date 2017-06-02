@@ -118,8 +118,8 @@
     display: inline-block;
   }
   .amount input{
-    font-size:inherit;
     border:none;
+    font-size:30px;
     padding:0;
     margin:0;
     text-align: left;
