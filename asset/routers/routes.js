@@ -475,6 +475,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // discover detail
+    path: '/collect',
+    component: require('../views/Account/Collect.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     component: require('../views/Help/Protocol.vue')

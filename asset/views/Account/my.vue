@@ -59,7 +59,7 @@
           <a class="mui-navigate-right" @tap.stop.prevent="integralDemo"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/collect')"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/feedback')"><span class="mui-icon myicon myicon-help"></span>反馈建议

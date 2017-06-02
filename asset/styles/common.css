@@ -307,6 +307,9 @@ input, textarea, select{
   background: url("../statics/images/icon-setting-logo.png");
 }
 
+.myicon-ask{
+  background: url("../statics/images/icon_ask.png");
+}
 
 a.mailLink{
   color:#4990e2;
