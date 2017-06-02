@@ -63,7 +63,7 @@
 
       </div>
 
-      <div class="mui-table-view detail-comment-result" v-show="ask.question.status==7">
+      <div class="mui-table-view detail-comment-result" v-if="ask.question.status==7">
 
         <div class="mui-table-view-cell content">
           评价：{{ ask.feedback.description }}
