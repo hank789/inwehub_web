@@ -53,7 +53,7 @@
           </a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>我的邀请码</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="yaoqing"><span class="mui-icon myicon myicon-coupon"></span>我的邀请码</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="integralDemo"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
@@ -103,6 +103,9 @@
       }
     },
     methods: {
+      yaoqing(){
+        mui.alert('您可以通过哈币换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
+      },
       shareOut(){
           mui.alert('我们还暂时不建议您分享！');
       },
