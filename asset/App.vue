@@ -156,9 +156,11 @@
           var noticeTo = function (payload) {
             switch (payload.object_type) {
               case 'question':
+                  mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 router.push('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
               case 'answer':
+                  mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 router.push('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
             }
