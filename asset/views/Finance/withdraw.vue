@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {apiRequest} from '../../utils/request';
+  import {apiRequest, postRequest} from '../../utils/request';
   import oauth from '../../components/oauth/oauth.vue';
 
   export default {
