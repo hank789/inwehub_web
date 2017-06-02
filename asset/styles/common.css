@@ -283,6 +283,10 @@ input, textarea, select{
   background: url("../statics/images/icon-jiubei.png");
 }
 
+.myicon-setting-logo{
+  background: url("../statics/images/icon-setting-logo.png");
+}
+
 
 a.mailLink{
   color:#4990e2;

@@ -36,6 +36,7 @@
 
       <div class="mui-table-view">
         <div class="mui-table-view-cell footer">
+          <div class="logo"><span class="mui-icon myicon myicon-setting-logo"></span></div>
           <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut">
             退出应用
 
@@ -248,8 +249,17 @@ All Rights Reserved</div>
   }
 
   .footer {
-    padding: 200px 40px 10px;
+    padding: 20px 40px 10px;
     text-align: center;
+  }
+  .logo{
+    padding:20px;
+  }
+  .logo .myicon{
+    width:185px;
+    height:106px;
+    opacity: 1;
+
   }
 
   .footer .copyright {
