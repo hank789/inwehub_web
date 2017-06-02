@@ -16,28 +16,35 @@
         </div>
 
         <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
-            <span class="mui-icon myicon myicon-home"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isHome"></span></div>
+          <div class="mui-tab-item mui-active" v-if="isHome">
+            <span class="mui-icon myicon myicon-home-hover"></span>
+            <div><span class="mui-icon myicon myicon-point-hover"></span></div>
+          </div>
 
+          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" v-else>
+            <span class="mui-icon myicon myicon-home"></span>
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-            <span class="mui-icon myicon myicon-task"><span class="mui-badge" v-if="taskCount">{{ taskCount
+            <span class="mui-icon myicon myicon-task" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isAsk"></span></div>
+            <span class="mui-icon myicon myicon-task-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
+              }}</span></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isAsk"></span></div>
 
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
-            <span class="mui-icon myicon myicon-find"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isDiscover"></span></div>
+            <span class="mui-icon myicon myicon-find" v-if="!isDiscover"></span>
+            <span class="mui-icon myicon myicon-find-hover" v-else></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
 
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
-            <span class="mui-icon myicon myicon-my"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isMy"></span></div>
+            <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
+            <span class="mui-icon myicon myicon-my-hover" v-else></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
 
           </div>
         </nav>
@@ -217,6 +224,11 @@
     box-shadow: none;
   }
 
+  .footer-bar .mui-tab-item .mui-icon{
+    width:26px;
+    height:26px;
+  }
+
   .footer-bar {
     border-top: 1px solid #D9D9D9;
   }
@@ -231,9 +243,10 @@
     bottom: 5px;
   }
 
-  .footer-bar .mui-active .myicon-point {
+  .footer-bar .mui-active .myicon-point-hover {
     width: 3px;
     height: 3px;
+    top: 4px;
   }
 </style>
 

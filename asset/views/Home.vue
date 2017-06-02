@@ -27,8 +27,8 @@
           </div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向Ta提问</div>
-            <div class="collect" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart-o"></span></div>
-            <!--<div class="collect collect-active" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart"></span></div>-->
+            <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><span class="mui-icon fa fa-heart-o"></span></div>
+            <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><span class="mui-icon fa fa-heart"></span></div>
             <div class="collect" @tap.stop.prevent="shareProfessor"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
         </div>
@@ -131,6 +131,16 @@
       },
       collectProfessor:function(){
 
+        postRequest(`follow/user`, {id:this.recommend_expert_uid}).then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+            mui.toast(response.data.data.tip);
+        });
+
+         this.recommend_expert_is_followed = !this.recommend_expert_is_followed;
       },
       goRecommand: function () {
         this.expertNav();
@@ -313,7 +323,7 @@
     /*border:1px solid #4990E2;*/
   }
   .professor .options .collect-active span{
-    color:#4990E2;
+    color:#fff;
   }
 
   .professor .options .collect .myicon-share{

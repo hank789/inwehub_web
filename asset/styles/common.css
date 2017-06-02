@@ -155,20 +155,40 @@ input, textarea, select{
   background: url("../statics/images/icon_home.png");
 }
 
+.myicon-home-hover{
+  background: url("../statics/images/icon_home_hover.png");
+}
+
 .myicon-task{
   background: url("../statics/images/icon_task.png");
+}
+
+.myicon-task-hover{
+  background: url("../statics/images/icon_task_hover.png");
 }
 
 .myicon-find{
   background: url("../statics/images/icon_find.png");
 }
 
+.myicon-find-hover{
+  background: url("../statics/images/icon_find_hover.png");
+}
+
 .myicon-my{
   background: url("../statics/images/icon_my.png");
 }
 
+.myicon-my-hover{
+  background: url("../statics/images/icon_my_hover.png");
+}
+
 .myicon-point{
   background: url("../statics/images/icon_point.png");
+}
+
+.myicon-point-hover{
+  background: url("../statics/images/icon_point_hover.png");
 }
 
 .myicon-xiangzi{
