@@ -3,7 +3,7 @@
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的名片</h1>
-      <a class="mui-icon myicon myicon-share mui-pull-right"></a>
+      <!--<a class="mui-icon myicon myicon-share mui-pull-right"></a>-->
     </header>
 
     <div class="mui-content" v-show="!loading">
