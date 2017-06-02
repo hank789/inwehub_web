@@ -158,28 +158,6 @@
 
       }
     },
-    beforeRouteEnter (to, from, next) {
-      mui.alert('in');
-
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-
-      this.id = id;
-      this.getDetail();
-
-      next();
-    },
     computed: {
       rating() {
         return this.ask.feedback.rate_star;
