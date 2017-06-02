@@ -21,15 +21,15 @@
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
-            <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
+            <div class="collect" @tap.stop.prevent="shareOut"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
         </div>
       </div>
 
       <div class="counter">
-        <span class="level">LV{{ user_level }}</span>
-        <span class="grow">成长值：{{ user_credits }}</span>
-        <span class="integral">哈币：{{ user_coins }}</span>
+        <span class="level" @tap.stop.prevent="integralDemo">LV{{ user_level }}</span>
+        <span class="grow" @tap.stop.prevent="integralDemo">成长值：{{ user_credits }}</span>
+        <span class="integral" @tap.stop.prevent="integralDemo">哈币：{{ user_coins }}</span>
       </div>
 
       <div class="part2">
@@ -56,7 +56,7 @@
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-coupon"></span>我的邀请码</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="integralDemo"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
@@ -103,6 +103,12 @@
       }
     },
     methods: {
+      shareOut(){
+          mui.alert('我们还暂时不建议您分享！');
+      },
+      integralDemo(){
+          mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
+      },
       getToken(){
         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
         this.im_tokenMsg = im_token;

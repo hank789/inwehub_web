@@ -21,7 +21,7 @@
     <div class="askDetail">
       <div class="titleSub">点击“+”号可以发布新项目<br/>
         并选择您所需要的委托类型</div>
-      <div class="buttonAsk"><span>+</span> 发布需求</div>
+      <div class="buttonAsk" @tap.stop.prevent="submit"><span>+</span> 发布需求</div>
     </div>
 
   </div>
@@ -29,7 +29,14 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    methods: {
+      submit(){
+        mui.alert('您的账户类型，暂无法使用此功能，如需申请企业账户请发送基本信息到 <a class="mailLink"  href="mailto:hi@inwehub.com">hi@inwehub.com</a>');
+      },
+
+    },
+  };
 </script>
 
 <style scoped="scoped">

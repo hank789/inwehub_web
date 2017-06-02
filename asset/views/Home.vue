@@ -29,7 +29,7 @@
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向Ta提问</div>
             <div class="collect" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart-o"></span></div>
             <!--<div class="collect collect-active" @tap.stop.prevent="collectProfessor"><span class="mui-icon fa fa-heart"></span></div>-->
-            <div class="collect"><span class="mui-icon myicon myicon-share"></span></div>
+            <div class="collect" @tap.stop.prevent="shareProfessor"><span class="mui-icon myicon myicon-share"></span></div>
           </div>
         </div>
       </div>
@@ -126,6 +126,9 @@
       next();
     },
     methods: {
+      shareProfessor:function(){
+          mui.alert("我们还暂时不建议您分享！");
+      },
       collectProfessor:function(){
 
       },

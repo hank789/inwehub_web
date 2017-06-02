@@ -703,7 +703,10 @@ window.mui = (function(document, undefined) {
 								if (tagName === 'A') {
 									var href = e.target.href;
 									if (!(href && ~href.indexOf('tel:'))) {
-										e.preventDefault();
+									  if (!~href.indexOf('mailto:')) {
+                      e.preventDefault();
+                    }
+
 									}
 								} else {
 									e.preventDefault();
@@ -6874,6 +6877,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	});
 	var preventDefaultException = /^(INPUT|TEXTAREA|BUTTON|SELECT)$/;
 	window.addEventListener('tap', function(event) {
+
 		if (!cell) {
 			return;
 		}

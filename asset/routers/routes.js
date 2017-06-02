@@ -468,6 +468,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // discover detail
+    path: '/discover/detail',
+    component: require('../views/Discover/Detail.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     component: require('../views/Help/Protocol.vue')
