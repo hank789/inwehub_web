@@ -35,7 +35,7 @@
                 </div>
               </div>
               <div class="site-desc mui-ellipsis-2">
-                {{ task.description | textLimit}}
+                {{ task.description }}
               </div>
             </div>
             </div>
