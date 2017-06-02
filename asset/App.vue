@@ -156,10 +156,10 @@
           var noticeTo = function (payload) {
             switch (payload.object_type) {
               case 'question':
-                router.push('/ask/' + payload.object_id);
+                router.push('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
               case 'answer':
-                router.push('/answer/' + payload.object_id);
+                router.push('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
             }
           };
