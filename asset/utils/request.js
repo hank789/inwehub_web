@@ -2,8 +2,8 @@ import axios from 'axios';
 import localEvent from '../stores/localStorage';
 import { logout } from '../utils/auth';
 
-const baseURL = `https://api.inwehub.com/`;
-const api = `https://api.inwehub.com/api`;
+const baseURL = `http://47.92.24.67/`;
+const api = `http://47.92.24.67/api`;
 
 // Export a method to create the requested address.
 export const createRequestURI = PATH => `${baseURL}/${PATH}`;
