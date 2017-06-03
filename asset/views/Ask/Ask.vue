@@ -22,8 +22,8 @@
         <span class="counter">(<span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span>)</span>
         <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
       </div>
-      <div class="title select" v-show="!isShowMoneyDev">请先选择问题分类：<span class="active"
-                                                                        @tap.stop.prevent="selectType">{{ type ? type.split(':')[0] : '必选项'
+      <div class="title select" v-show="!isShowMoneyDev">问题分类：<span class="active"
+                                                                        @tap.stop.prevent="selectType">{{ type ? type.split(':')[0] : '请选择'
         }}</span></div>
 
       <div class="button-wrapper" v-show="!isShowMoneyDev">
