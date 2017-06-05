@@ -81,8 +81,9 @@
       },
       getSelectedCodes(){
         var newValue = [];
-        for (var i in this.selected) {
-          newValue.push(this.selected[i].value);
+        for (var i in this.iselected) {
+
+          newValue.push(this.iselected[i].value);
         }
         return newValue;
       }
@@ -104,17 +105,17 @@
           text: li.innerText,
           value: parseInt(li.getAttribute('value'))
         };
+
         var pos = this.getSelectedCodes.indexOf(value.value);
         if (!span.classList.contains('checked')) {
           span.classList.add('checked');
-
           if (pos < 0) {
             this.iselected.push(value);
           }
         } else {
           span.classList.remove('checked');
           if (pos >= 0) {
-            this.iselected.splice(pos, 1);
+             this.iselected.splice(pos, 1);
           }
         }
       }
