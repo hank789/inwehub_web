@@ -13,7 +13,6 @@ function checkUpdate(){
         if (app_version && wgtVer !== app_version){
           //如果是强更
           if (is_force === 1){
-            mui.alert("有新的版本升级");
             if (mui.os.ios) {
               var ios_force_update_url = response_data.ios_force_update_url;
               //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
@@ -35,14 +34,12 @@ function checkUpdate(){
 
 
 function downWgt(wgtUrl){
-  plus.nativeUI.showWaiting("下载更新文件...");
+  plus.nativeUI.showWaiting();
   plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){
     if ( status == 200 ) {
-      console.log("下载wgt成功："+d.filename);
       installWgt(d.filename); // 安装wgt包
     } else {
-      console.log("下载wgt失败！");
-      plus.nativeUI.alert("下载更新文件失败！");
+      // plus.nativeUI.alert("下载更新文件失败！");
     }
     plus.nativeUI.closeWaiting();
   }).start();
@@ -50,7 +47,7 @@ function downWgt(wgtUrl){
 
 // 更新应用资源
 function installWgt(path){
-  plus.nativeUI.showWaiting("安装更新文件...");
+  plus.nativeUI.showWaiting();
   plus.runtime.install(path,{},function(){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
@@ -59,8 +56,8 @@ function installWgt(path){
   },function(e){
     plus.nativeUI.closeWaiting();
     removeFile(path);
-    console.log("安装wgt文件失败["+e.code+"]："+e.message);
-    plus.nativeUI.alert("安装更新文件失败["+e.code+"]："+e.message);
+    // console.log("安装wgt文件失败["+e.code+"]："+e.message);
+    plus.nativeUI.alert("失败["+e.code+"]："+e.message);
   });
 }
 
