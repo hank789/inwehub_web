@@ -30,6 +30,7 @@
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"
                 @click.prevent="register">注册
+
         </button>
       </div>
     </div>
@@ -89,6 +90,8 @@
       }
     },
     mounted(){
+      this.getCacheData();
+
 
       mui(".login").on('focusout', 'input', (e) => {
         switch (e.target.name) {
@@ -137,6 +140,7 @@
 
         plus.navigator.setFullscreen(true);
       });
+
       next();
     },
     beforeRouteLeave(to, from, next) {
@@ -144,6 +148,8 @@
       mui.plusReady(function () {
         plus.navigator.setFullscreen(false);
       });
+
+      this.setCacheData();
 
       next();
     },
@@ -179,6 +185,49 @@
       },
       cleanPhone () {
         this.phone = '';
+      },
+      setCacheData(){
+
+        var CacheRegister = {
+          'username': this.username,
+          'registrationCode': this.registrationCode,
+          'phone': this.phone,
+          'code': this.code,
+          'password': this.password,
+        };
+        localEvent.setLocalItem('CacheRegister', CacheRegister);
+      },
+      getCacheData(){
+
+        var data = localEvent.getLocalItem('CacheRegister');
+        if (data) {
+          this.username = data.username;
+          this.registrationCode = data.registrationCode;
+          this.phone = data.phone;
+          this.code = data.code;
+          this.password = data.password;
+
+          if (this.username) {
+            this.showUsernameLabel = false;
+          }
+
+          if (this.registrationCode) {
+            this.showYqCodeLabel = false;
+          }
+
+          if (this.phone) {
+            this.showPhoneLabel = false;
+          }
+
+          if (this.code) {
+            this.showYzmLabel = false;
+          }
+
+          if (this.password) {
+            this.showPasswordLabel = false;
+          }
+        }
+
       },
       cleanUsername () {
         this.username = '';
@@ -298,7 +347,7 @@
           mui.toast("密码长度必须大于6位");
           return;
         }
-        if (mui.os.plus){
+        if (mui.os.plus) {
           plus.nativeUI.showWaiting();
         }
         request.post(createAPI('auth/register'), {
@@ -311,7 +360,7 @@
           }
         )
           .then(response => {
-            if (mui.os.plus){
+            if (mui.os.plus) {
               plus.nativeUI.closeWaiting();
             }
             var code = response.data.code;
@@ -346,7 +395,7 @@
             }));
           })
           .catch(({response: {data = {}} = {}}) => {
-            if (mui.os.plus){
+            if (mui.os.plus) {
               plus.nativeUI.closeWaiting();
             }
             this.isDisabled = false;
@@ -358,7 +407,7 @@
       }
     },
     watch: {
-      phone: function (newMoney,oldValue) {
+      phone: function (newMoney, oldValue) {
         const askDetail = /^[0-9]+$/;
         if (!askDetail.test(newMoney) && this.phone) {
           this.phone = oldValue;
@@ -434,7 +483,7 @@
   }
 
   .buttonWrapper {
-    padding:0 112px;
+    padding: 0 112px;
     margin-top: 40px;
   }
 
@@ -442,19 +491,20 @@
     padding: 10px 0;
   }
 
-  .leftNav{
+  .leftNav {
     position: absolute;
-    padding:30px;
-    left:0;
-    top:0;
+    padding: 30px;
+    left: 0;
+    top: 0;
   }
-  .leftNav span{
-    background: url(../statics/images/icon-login-left.png)  no-repeat ;
+
+  .leftNav span {
+    background: url(../statics/images/icon-login-left.png) no-repeat;
     background-size: cover;
-    width:10px;
-    height:17px;
+    width: 10px;
+    height: 17px;
     position: absolute;
-    left:10px;
-    top:10px;
+    left: 10px;
+    top: 10px;
   }
 </style>
