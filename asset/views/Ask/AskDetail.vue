@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">提问</h1>
+      <h1 class="mui-title" >提问</h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
@@ -217,6 +217,23 @@
         mui('#commentWapper').popover('toggle');
       },
       getDetail(){
+
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+
+        this.id = id;
+
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -266,24 +283,10 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-      }
+      },
+      '$route': 'getDetail'
     },
     created () {
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-
-      this.id = id;
       this.getDetail();
     }
   }
