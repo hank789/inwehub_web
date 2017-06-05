@@ -85,7 +85,8 @@
                     <span class="mui-icon myicon myicon-askDetailHeart" v-if="!index"></span>
                     <span class="mui-icon myicon myicon-askDetailJia" v-else></span>
                   </div>
-                  <div class="desc">
+
+                  <div class="desc" :class="timelines.length-1 != index?'descBefore':''">
                     <div class="title">{{ item.title }} </div>
                     <span>{{ item.description }}</span>
                   </div>
@@ -556,16 +557,28 @@
   .nearsite-message .desc{
     float: left;
     background: #fff;
-    margin: 0 10px 10px 10px;
-    padding: 10px;
+    margin: 0 10px 0px 10px;
+    padding: 10px 0 0 10px;
     border-radius:7px;
-    max-width: 90%;
+    width:85%;
     position: relative;
     min-height: 20px;
     font-size:12px;
   }
+
   .nearsite-message .desc img{
     width: 100%;
+  }
+
+  .nearsite-message .descBefore:before{
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: #a2a2a2;
+    left: -22px;
+    top: 30px;
+    z-index: 0;
   }
 
   .desc span{
@@ -586,7 +599,8 @@
     width: 1px;
     height: 70px;
     background-color: #a2a2a2;
-    margin: -47px 25px -38px;
+    margin: -45px 25px -38px;
+
   }
 
   .timeline .timage .mui-icon{
@@ -594,6 +608,8 @@
     height:22px;
     color:#4990E2;
     font-size:12px;
+    position: relative;
+    z-index: 777;
   }
 
   .timeline time{
