@@ -197,7 +197,7 @@
 
       pullupRefresh() {
         this.getNextList();
-        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+
       },
       timeago(time) {
         let newDate = new Date();
@@ -231,6 +231,8 @@
           }
 
           this.loading = 0;
+
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       }
     },

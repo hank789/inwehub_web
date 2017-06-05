@@ -134,7 +134,7 @@
 
       function pullupRefresh() {
         that.getNextList();
-        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+
       }
 
       if (mui.os.plus) {
@@ -200,6 +200,8 @@
             this.answers = this.answers.concat(response.data.data);
           }
           this.loading = 0;
+
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       }
     }

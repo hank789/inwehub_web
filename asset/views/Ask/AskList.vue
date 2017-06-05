@@ -129,6 +129,8 @@
             this.asks = this.asks.concat(response.data.data);
           }
           this.loading = 0;
+
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       }
     },
@@ -182,7 +184,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore: '',
+            contentnomore: '没有更多数据了',
             callback: pullupRefresh
           }
         }
@@ -197,7 +199,6 @@
 
       function pullupRefresh() {
         that.getNextList();
-        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
       }
 
       if (mui.os.plus) {
