@@ -162,16 +162,13 @@
     },
     methods: {
       check(){
-          //检查是否有权限查看当前页面
-
-          //信息是否完善
+        //信息是否完善
         const currentUser = localEvent.getLocalItem('UserInfo');
         if (currentUser.hasOwnProperty('account_info_complete_percent')  && parseInt(currentUser.account_info_complete_percent) < 90) {
             mui.alert('您的个人信息还不完善，请先前往我的个人档案中补充完整才能应答。 ', null, null, () => {
               this.$router.replace('/my/info');
             });
         }
-
       },
       selectTime(){
         this.initDate();
@@ -337,6 +334,22 @@
         return newDate;
       },
       getData(){
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+
+        this.id = id;
+
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -346,6 +359,8 @@
 
           this.answer = response.data.data;
           this.loading = 0;
+
+          this.check();
         });
       }
     },
@@ -368,27 +383,11 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-      }
+      },
+      '$route': 'getData'
     },
     created () {
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-
-      this.id = id;
-
       this.getData();
-      this.check();
     }
   }
   export default AnswerDetail;
