@@ -4828,7 +4828,7 @@ body > .mui-progressbar
     position: relative;
     bottom: 0;
 
-    height: 40px;
+    height: 50px;
 }
 .mui-pull-bottom-pocket .mui-pull-loading
 {
@@ -4845,7 +4845,7 @@ body > .mui-progressbar
 
     position: absolute;
     right: 0;
-    bottom: 10px;
+    bottom: 12px;
     left: 0;
 
     text-align: center;

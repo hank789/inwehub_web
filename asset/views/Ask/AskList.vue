@@ -130,7 +130,11 @@
           }
           this.loading = 0;
 
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+          if (response.data.data.length < 10) {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+          } else {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+          }
         });
       }
     },
@@ -184,7 +188,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了',
+            contentnomore: '没有更多了',
             callback: pullupRefresh
           }
         }
@@ -341,4 +345,6 @@
     margin-top:10px;
     padding:0 30px;
   }
+
+
 </style>

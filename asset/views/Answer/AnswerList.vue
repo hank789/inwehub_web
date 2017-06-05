@@ -119,7 +119,7 @@
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore:'',
+            contentnomore:'没有更多了',
             callback: pullupRefresh
           }
         }
@@ -201,7 +201,11 @@
           }
           this.loading = 0;
 
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+          if (response.data.data.length < 10) {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+          } else {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+          }
         });
       }
     }
