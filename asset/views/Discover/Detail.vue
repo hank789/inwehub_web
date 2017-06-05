@@ -15,7 +15,7 @@
         <div>如果您对该功能感兴趣，就点赞给小哈加加油，我么会优先推出的！</div>
 
 
-        <img src="../../statics/images/xiaoha-erweima.jpeg" width="180" style="margin-top:50px;" v-if="title=='智能小哈'"/>
+        <img :src="erweima" width="180" style="margin-top:50px;" v-if="title=='智能小哈'"/>
       </div>
 
     </div>
@@ -25,12 +25,15 @@
 <script>
   import localEvent from '../../stores/localStorage';
   import {postRequest} from '../../utils/request';
+  import erweima from '../../statics/images/xiaoha-erweima.jpeg';
+
   export  default {
     data(){
       const currentUser = localEvent.getLocalItem('UserInfo');
 
       return {
         title:'发现',
+        erweima:erweima,
         account_info_complete_percent: currentUser.account_info_complete_percent
       }
     },
