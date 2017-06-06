@@ -15,10 +15,11 @@
         </a>
           <div class="mui-control-item" @tap.stop.prevent="" href="#item2">
             问答
-        </div>
-
+          </div>
         </div>
       </div>
+
+
       <div class="detailList">
 
         <div id="item1" class=" task-list">
@@ -36,9 +37,11 @@
                     <div class="site-desc mui-ellipsis-3">
                       {{ item.description }}
 
+
                     </div>
                   </div>
-                  <span class="mui-icon myicon myicon-ask" @tap.stop.prevent="$router.push('/ask?id=' + item.user_id)"></span>
+                  <span class="mui-icon myicon myicon-ask"
+                        @tap.stop.prevent="$router.push('/ask?id=' + item.user_id)"></span>
                 </div>
 
               </li>
@@ -47,7 +50,6 @@
             </ul>
           </div>
         </div>
-
 
 
       </div>
@@ -66,13 +68,11 @@
   export  default {
     data(){
       return {
-         list:[],
-         loading:1
+        list: [],
+        loading: 1
       }
     },
-    methods: {
-
-    },
+    methods: {},
     computed: {
       bottomId () {
         var length = this.list.length;
@@ -102,10 +102,11 @@
 
 <style scoped>
 
-  .menu{
+  .menu {
     position: relative;
   }
-  .menu:after{
+
+  .menu:after {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -116,21 +117,24 @@
     transform: scaleY(.5);
     background-color: #D9D9D9;
   }
-  .mui-segmented-control .mui-control-item{
+
+  .mui-segmented-control .mui-control-item {
     line-height: 50px;
-    font-size:16px;
+    font-size: 16px;
   }
-  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     position: relative;
-    border:none;
+    border: none;
   }
-  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width:50px;
+    width: 50px;
     right: 10px;
     bottom: 0;
     left: 50%;
-    margin-left:-25px;
+    margin-left: -25px;
     height: 5px;
     content: '';
     -webkit-transform: scaleY(.5);
@@ -138,61 +142,65 @@
     background-color: #009FE8;
   }
 
-  .detailList{
+  .detailList {
 
   }
 
-
-  .mui-table-view{
+  .mui-table-view {
     background: none;
   }
 
-  .task-list{
+  .task-list {
     line-height: 33px;
   }
-  .task-list .mui-table-view-chevron .mui-table-view-cell{
-    padding-right:5px;
+
+  .task-list .mui-table-view-chevron .mui-table-view-cell {
+    padding-right: 5px;
   }
-  .task-list .time{
+
+  .task-list .time {
     display: inline-block;
-    width:130px;
-    color:#101010;
+    width: 130px;
+    color: #101010;
   }
-  .mui-badge{
-    padding:5px 10px;
+
+  .mui-badge {
+    padding: 5px 10px;
     position: relative;
     bottom: 3px;
   }
-  .task-list .link a{
+
+  .task-list .link a {
     color: #8f8f94;
     font-size: 14px;
   }
-  .task-list .type{
-    font-weight:bold;
+
+  .task-list .type {
+    font-weight: bold;
   }
 
-  .mui-media-body{
-    padding-left:10px;
-  }
-  .task-list .username{
-    color:#555555;
+  .mui-media-body {
+    padding-left: 10px;
   }
 
-
-  .mui-media-body{
-    position:relative;
+  .task-list .username {
+    color: #555555;
   }
 
-  .mui-navigate-right:after{
-    font-size:24px;
-    font-weight:bolder;
+  .mui-media-body {
+    position: relative;
   }
 
-  .avatar{
+  .mui-navigate-right:after {
+    font-size: 24px;
+    font-weight: bolder;
+  }
+
+  .avatar {
     z-index: 0;
     margin-top: 5px;
     color: #ffffff;
-    float:left;
+    float: left;
     display: inline-block;
     height: 55px;
     width: 55px;
@@ -201,7 +209,7 @@
     border-radius: 50%;
   }
 
-  .avatar .avatarInner{
+  .avatar .avatarInner {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -224,27 +232,28 @@
     height: 100%;
     display: block;
   }
-  .site-desc{
-    color:#666;
-    font-size:12px;
+
+  .site-desc {
+    color: #666;
+    font-size: 12px;
     line-height: 18px;
-    padding-right:50px;
+    padding-right: 50px;
   }
 
-  .mui-table-view:after{
+  .mui-table-view:after {
     display: none;
   }
 
-  .myicon-ask{
-    width:30px;
-    height:30px;
+  .myicon-ask {
+    width: 30px;
+    height: 30px;
     position: absolute;
-    right:10px;
-    top:50%;
-    margin-top:-15px;
+    right: 10px;
+    top: 50%;
+    margin-top: -15px;
   }
 
-  .person{
+  .person {
     position: relative;
   }
 </style>

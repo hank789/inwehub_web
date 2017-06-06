@@ -9,10 +9,10 @@
 
     <div class="menu">
       <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-        <a class="mui-control-item mui-active" @tap.stop.prevent="">
+        <a class="mui-control-item" @tap.stop.prevent="$router.replace('/asks')">
           未完成
       </a>
-        <a class="mui-control-item" @tap.stop.prevent="$router.replace('/asks/finish')">
+        <a class="mui-control-item mui-active" @tap.stop.prevent="">
           已完成
         </a>
       </div>
@@ -126,7 +126,7 @@
         return newDate;
       },
       getPrevList(){
-        postRequest(`question/myList`, {type:'1'}).then(response => {
+        postRequest(`question/myList`, {type:'2'}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -140,7 +140,7 @@
         });
       },
       getNextList() {
-        postRequest(`question/myList`, {bottom_id: this.bottomId, type:'1'}).then(response => {
+        postRequest(`question/myList`, {bottom_id: this.bottomId, type:'2'}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);

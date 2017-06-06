@@ -331,6 +331,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { //asks
+    path: '/asks/finish',
+    component: require('../views/Ask/AskListFinish.vue'),
+    meta: {
+      title: '我的提问'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //answer
     path: '/answers',
     component: require('../views/Answer/AnswerList.vue'),
