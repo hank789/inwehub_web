@@ -443,7 +443,12 @@
   }
 
   .buttonWrapper {
-    padding: 10px 50px 0;
+    padding: 15px 50px;
+    background: #fff;
+  }
+
+  .mui-btn-block{
+    margin-bottom:0;
   }
 
   .form-realAnswer {
