@@ -100,9 +100,12 @@
 
       <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
         <div class="form form-realAnswer">
-          <div class="shutdown" @tap.stop.prevent="cancelComment"><span class="mui-icon fa fa-times"></span></div>
+          <div class="commentHeader">
+          <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">取消</button>
 
-          <div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>
+          <button class="submit mui-btn mui-btn-blue mui-poppicker-btn-ok" @tap.stop.prevent="submitComment" v-show="!commentState">提交</button>
+          </div>
+          <!--<div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>-->
 
           <star-rating @rating-selected="setRating" :rating="5"  :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
 
@@ -460,9 +463,9 @@
 
   .form-realAnswer .shutdown {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size:24px;
+    top: 5px;
+    left: 5px;
+    font-size:12px;
   }
 
   .form-realAnswer .star-rating {
@@ -479,8 +482,10 @@
 
   .form-realAnswer .submit {
     position: absolute;
-    right: 10px;
-    top: 4px;
+    right: 5px;
+    top: 5px;
+    font-size: 12px;
+    padding: 5px 10px;
   }
 
   .form-realAnswer textarea {
@@ -657,4 +662,7 @@
     display: none;
   }
 
+  .commentHeader{
+    background-color: #eee;
+  }
 </style>
