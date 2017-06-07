@@ -301,6 +301,10 @@
     background: #fff;
   }
 
+  .list .item:last-child{
+     margin-bottom:0;
+  }
+
   .list .item .time{
     font-size:12px;
 
