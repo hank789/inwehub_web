@@ -102,19 +102,19 @@ All Rights Reserved</div>
             apiRequest(`system/app_market_url`, {}).then(response_data => {
               if (response_data !== false) {
                 this.ios_market_url = response_data.ios_url;
-                this.android_market_url = this.tags.android_url;
-                if (mui.os.ios) {
-                  location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-                } else if (mui.os.android) {
-                  location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+                this.android_market_url = response_data.android_url;
+                if (mui.os.android) {
+                  location.href = this.android_market_url;
+                } else {
+                  location.href = this.ios_market_url;
                 }
               }
             });
           } else {
-            if (mui.os.ios) {
-              location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-            } else if (mui.os.android) {
-              location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+            if (mui.os.android) {
+              location.href = this.android_market_url;
+            } else {
+              location.href = this.ios_market_url;
             }
           }
       }
