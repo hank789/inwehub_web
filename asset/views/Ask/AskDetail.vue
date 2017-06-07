@@ -27,7 +27,7 @@
 
         </div>
         <div class="collectWrapper">
-           <div class="collect"><span class="mui-icon fa fa-heart"></span></div> <span class="amount">提问金额<b>￥{{ ask.question.price }}</b>元</span>
+           <div class="collect active"><span class="mui-icon fa fa-heart"></span></div> <span class="amount">提问金额<b>￥{{ ask.question.price }}</b>元</span>
         </div>
       </div>
 
@@ -654,7 +654,14 @@
     text-align: center;
     margin-left:20px;
   }
+  .collect.active{
+    border:1px solid #4990E2;
+  }
   .collect .mui-icon{
+    color:#4990E2;
+  }
+
+  .collect.active .mui-icon{
     color:#4990E2;
   }
 
