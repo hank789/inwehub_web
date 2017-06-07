@@ -17,8 +17,8 @@
     </div>
 
     <div id="pullrefresh" class="list  mui-scroll-wrapper">
-      <div class="mui-scroll">
-        <div>
+      <div class="mui-scroll" v-show="list.length">
+        <div >
         <div class="item" v-for="(item, index) in list" @tap.stop.prevent="$router.push('/project/submit/' + item.id)">
           <div class="time mui-navigate-right">{{ item.created_at.split(' ')[0]}} 发布</div>
           <div class="title">{{ item.project_name }}</div>
@@ -345,6 +345,7 @@
     position: fixed;
     bottom:70px;
     left:50%;
+    z-index: 999;
     margin-left:-62px;
   }
 
