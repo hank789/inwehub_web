@@ -81,6 +81,13 @@
       }
     },
     mounted(){
+      var t = this;
+      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
+        var lastY = event.detail.lastY;
+
+        localEvent.setLocalItem('projectPos', {lastY:lastY});
+      });
+
       this.initPullRefresh();
     },
     methods: {
@@ -178,8 +185,19 @@
           }
       }
     },
-
+    beforeRouteEnter (to, from, next) {
+      if (from.path === '/home' || from.path === '/my') {
+        localEvent.clearLocalItem('projectPos');
+      }
+      next();
+    },
     created(){
+
+        var pos = localEvent.getLocalItem('projectPos');
+        if (pos) {
+            this.lastY = pos.lastY;
+        }
+
 //      postRequest(`project/myList`, {}).then(response => {
 //        var code = response.data.code;
 //        if (code !== 1000) {
