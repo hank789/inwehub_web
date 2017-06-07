@@ -9,12 +9,6 @@
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=顾问圈')"><span class="mui-icon myicon myicon-xiangzi"></span>顾问圈</a>
-        </li>
-      </ul>
-
-      <ul class="mui-table-view mui-table-view-chevron">
-        <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=项目协作')"><span class="mui-icon myicon myicon-project"></span>项目协作</a>
         </li>
         <li class="mui-table-view-cell">
@@ -29,13 +23,6 @@
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=智能小哈')">
             <span class="mui-icon myicon myicon-xiaoha"></span>智能小哈</a>
-        </li>
-      </ul>
-
-      <ul class="mui-table-view mui-table-view-chevron mb70">
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=商城')">
-            <span class="mui-icon myicon myicon-shop"></span>商城</a>
         </li>
       </ul>
 
