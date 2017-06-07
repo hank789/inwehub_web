@@ -311,6 +311,10 @@ input, textarea, select{
   background: url("../statics/images/icon_ask.png");
 }
 
+.myicon-home-vip{
+  background: url("../statics/images/expert.png");
+}
+
 a.mailLink{
   color:#4990e2;
 }

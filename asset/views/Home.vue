@@ -21,7 +21,7 @@
         <div class="text">
           <div class="realname">{{ recommend_expert_name }}</div>
           <div class="label">
-            <div class="collect"><span class="icon-expert"></span></div>
+            <div class="collect myicon myicon-home-vip"></div>
             今日专家
 
           </div>
@@ -293,18 +293,10 @@
 
   .professor .label .collect {
     display: inline-block;
-
-    border: 1px solid #86C9EF;
-    border-radius: 50%;
     width: 16px;
     height: 16px;
-    line-height: 16px;
-    color: #161616;
-    text-align: center;
-    font-size: 12px;
-    margin-right: 3px;
-    background: #86C9EF;
     opacity: 1;
+    vertical-align: sub;
   }
 
   .professor .options .collect {
