@@ -385,7 +385,7 @@
     height: 12px;
     background-size: cover;
     position: relative;
-    top: 2px;
+    top: 1px;
   }
 
   .bountyDesc .title {
