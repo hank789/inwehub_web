@@ -60,13 +60,9 @@ All Rights Reserved</div>
         phone: currentUser.phone,
         avatar: currentUser.avatar_url,
         title: currentUser.title,
-        company: currentUser.company
-      }
-    },
-    created() {
-      var urls = localEvent.getLocalItem('appMargetUrl');
-      if (urls) {
-
+        company: currentUser.company,
+        ios_market_url: '',
+        android_market_url: ''
       }
     },
     methods: {
@@ -102,11 +98,25 @@ All Rights Reserved</div>
         }
       },
       starApp() {
-        if (mui.os.ios) {
-          location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-        } else if (mui.os.android) {
-          location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-        }
+          if (!this.ios_market_url){
+            apiRequest(`system/app_market_url`, {}).then(response_data => {
+              if (response_data !== false) {
+                this.ios_market_url = response_data.ios_url;
+                this.android_market_url = this.tags.android_url;
+                if (mui.os.ios) {
+                  location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+                } else if (mui.os.android) {
+                  location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+                }
+              }
+            });
+          } else {
+            if (mui.os.ios) {
+              location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+            } else if (mui.os.android) {
+              location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
+            }
+          }
       }
     },
     mounted(){
