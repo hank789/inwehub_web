@@ -35,7 +35,7 @@
 
       </div>
       <div class="textarea-wrapper">
-        <textarea v-model.trim="train.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
+        <textarea v-model.trim="description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
       <div class="deleteWrapper" v-show="id">
@@ -66,6 +66,7 @@
         get_time:'',
         description:'',
       },
+      description:'',
       descMaxLength: 2000,
       buttonSaveDisabled:false
     }),
@@ -164,6 +165,8 @@
         if (this.buttonSaveDisabled) return;
         this.buttonSaveDisabled = true;
 
+        data.description = this.description;
+
         postRequest(url, data).then(response => {
           this.buttonSaveDisabled = false;
           var code = response.data.code;
@@ -194,6 +197,13 @@
     mounted () {
 
     },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      },
+    },
     beforeRouteLeave(to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker');
       if (popDiv) {
@@ -210,8 +220,8 @@
     },
     computed:{
       descLength() {
-        if (this.train.description)
-          return this.train.description.length;
+        if (this.description)
+          return this.description.length;
         else return 0;
       }
     },
@@ -236,6 +246,7 @@
            return;
          }
          this.train = trains[id];
+         this.description = this.train.description;
          this.bak = JSON.stringify(this.train);
       }
 
