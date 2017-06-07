@@ -8,17 +8,6 @@
     </header>
 
     <div class="mui-content">
-      <div class="menu">
-        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-          <a class="mui-control-item mui-active" @tap.stop.prevent="" href="#item1">
-            专家
-        </a>
-          <div class="mui-control-item" @tap.stop.prevent="" href="#item2">
-            问答
-          </div>
-        </div>
-      </div>
-
 
       <div class="detailList">
 
@@ -54,6 +43,11 @@
 
       </div>
 
+      <div class="mui-content list-empty" v-if="!this.list.length && !loading">
+          <div class="mui-table-view-cell">
+              <div class="title">暂无收藏</div>
+          </div>
+      </div>
 
     </div>
 
