@@ -24,8 +24,10 @@
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">项目地点</label>
-            <input type="text" v-model.trim="project.address" placeholder="请选择" @tap.stop.prevent="selectWorkerCity()">
+            <a @tap.stop.prevent="selectWorkerCity(true)" class="mui-navigate-right">项目地点<span
+              class="mui-pull-right account-setting-field mui-ellipsis">{{ project.address !== ''?project.address:'请选择' }}</span></a>
+
+            <!--<input type="text" v-model.trim="project.address" placeholder="请选择" @tap.stop.prevent="selectWorkerCity()">-->
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -332,6 +334,10 @@
 
   .mui-table-view-cell .mui-navigate-right, .mui-table-view-cell .mui-navigate {
     color: #999;
+  }
+
+  .account-setting-field{
+
   }
 
   .account_item_title {
