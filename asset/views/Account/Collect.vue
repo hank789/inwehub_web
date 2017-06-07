@@ -140,10 +140,6 @@
 
   }
 
-  .mui-table-view {
-    background: none;
-  }
-
   .task-list {
     line-height: 33px;
   }
@@ -234,9 +230,7 @@
     padding-right: 50px;
   }
 
-  .mui-table-view:after {
-    display: none;
-  }
+
 
   .myicon-ask {
     width: 30px;
