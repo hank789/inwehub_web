@@ -43,7 +43,7 @@
 
       </div>
 
-      <div class="mui-content list-empty" v-if="!this.list.length">
+      <div class="mui-content list-empty" v-if="!this.list.length && !loading">
           <div class="mui-table-view-cell">
               <div class="title">暂无收藏</div>
           </div>
