@@ -11,7 +11,8 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无活动</div>
-            <div class="subTitle">如果有最新活动，我们会按照用户等级等分批推送。<br/>请积极提升个人在平台的成长贡献。</div>
+            <div class="subTitle">我们会按照用户级别分批推送最新活动，<br/>
+等级较高的用户可优先获取最新的信息！<br/><br/>请积极提升个人的平台成长值和贡献值！</div>
           </div>
         </div>
       </div>

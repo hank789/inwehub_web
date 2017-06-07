@@ -11,7 +11,8 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无项目</div>
-            <div class="subTitle">如果有最新项目，我们会按照用户等级等分批推送，等级较高用户可优先竞标。<br/>请积极提升个人在平台的成长贡献。</div>
+            <div class="subTitle">我们会按照用户级别分批推送最新项目，<br/>
+等级较高的用户可优先参与项目的竞标！<br/><br/>请积极提升个人的平台成长值和贡献值！</div>
           </div>
         </div>
       </div>

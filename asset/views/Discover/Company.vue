@@ -11,7 +11,8 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无企业</div>
-            <div class="subTitle">随着用户等级的提高，您附近企业的可见距离将逐渐扩大。<br/>请积极提升您在平台的成长值和贡献值。</div>
+            <div class="subTitle">随着您的平台用户等级的逐步提升，<br/>
+附近企业的可见距离将会逐渐扩大！<br/><br/>请积极提升个人的平台成长值和贡献值！</div>
           </div>
         </div>
       </div>
