@@ -19,14 +19,6 @@
         </li>
       </ul>
 
-      <ul class="mui-table-view mui-table-view-chevron">
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=智能小哈')">
-            <span class="mui-icon myicon myicon-xiaoha"></span>智能小哈</a>
-        </li>
-      </ul>
-
-
     </div>
   </div>
 </template>

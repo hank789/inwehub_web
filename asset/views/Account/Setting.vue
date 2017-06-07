@@ -63,6 +63,12 @@ All Rights Reserved</div>
         company: currentUser.company
       }
     },
+    created() {
+      var urls = localEvent.getLocalItem('appMargetUrl');
+      if (urls) {
+
+      }
+    },
     methods: {
       clearCache(){
         localEvent.setLocalItem('lauchFlag', {showGuide: false});
