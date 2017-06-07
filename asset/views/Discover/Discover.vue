@@ -9,13 +9,13 @@
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=项目协作')"><span class="mui-icon myicon myicon-project"></span>项目协作</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/project')"><span class="mui-icon myicon myicon-project"></span>项目协作</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=附近企业')"><span class="mui-icon myicon myicon-fangdajing"></span>附近企业</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/company')"><span class="mui-icon myicon myicon-fangdajing"></span>附近企业</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/detail?title=最新活动')"><span class="mui-icon  myicon myicon-jiubei"></span>最新活动</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/discover/activity')"><span class="mui-icon  myicon myicon-jiubei"></span>最新活动</a>
         </li>
       </ul>
 
