@@ -485,6 +485,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // project submit
+    path: '/project/submit/:id',
+    component: require('../views/ProjectForm.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // discover detail
     path: '/collect',
     component: require('../views/Account/Collect.vue'),

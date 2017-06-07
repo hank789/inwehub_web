@@ -65,7 +65,7 @@
 
       </div>
       <div class="textarea-wrapper">
-        <textarea v-model.trim="project.description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
+        <textarea v-model.trim="description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
       <div class="deleteWrapper" v-show="id">
@@ -120,6 +120,7 @@
         industry_tags:[],
         product_tags:[]
       },
+      description:'',
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
       descMaxLength: 2000,
@@ -263,6 +264,8 @@
         data.industry_tags = this.infoIndustryTagsCodes;
         data.product_tags = this.infoProductTagsCodes;
 
+        data.description = this.description;
+
         postRequest(url, data).then(response => {
           this.buttonSaveDisabled = false;
 
@@ -310,10 +313,17 @@
 
       next();
     },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      },
+    },
     computed:{
       descLength() {
-        if (this.project.description)
-          return this.project.description.length;
+        if (this.description)
+          return this.description.length;
         else return 0;
       },
       infoIndustryTagsNames() {
@@ -383,6 +393,7 @@
            return;
          }
          this.project = projects[id];
+         this.description = this.project.description;
          this.bak = JSON.stringify(this.project);
       }
 

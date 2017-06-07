@@ -66,7 +66,7 @@
 
             </div>
             <div class="textarea-wrapper">
-              <textarea v-model.trim="job.description" rows="5"
+              <textarea v-model.trim="description" rows="5"
                         placeholder="请详细填写该工作经历的详细信息"></textarea>
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
@@ -118,6 +118,7 @@
         industry_tags:'',
         product_tags:'',
       },
+      description:'',
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
       descMaxLength: 2000,
@@ -257,6 +258,7 @@
 
         data.industry_tags = this.userIndustryTagsCodes;
 
+        data.description = this.description;
 
         postRequest(url, data).then(response => {
           this.buttonSaveDisabled = false;
@@ -303,10 +305,17 @@
     mounted () {
 
     },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      },
+    },
     computed:{
       descLength() {
-        if (this.job.description)
-          return this.job.description.length;
+        if (this.description)
+          return this.description.length;
         else return 0;
       },
       infoIndustryTagsNames() {
@@ -361,6 +370,8 @@
            return;
          }
          this.job = jobs[id];
+
+        this.description = this.job.description;
          this.bak = JSON.stringify(this.job);
       }
 

@@ -47,7 +47,7 @@
 
       </div>
       <div class="textarea-wrapper">
-        <textarea v-model.trim="edu.description" rows="5"  placeholder="请详细填写该教育经历的详细信息"></textarea>
+        <textarea v-model.trim="description" rows="5"  placeholder="请详细填写该教育经历的详细信息"></textarea>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
       <div class="deleteWrapper" v-show="id">
@@ -81,6 +81,7 @@
         end_time:'',
         description:''
       },
+      description:'',
       descMaxLength: 2000,
       buttonSaveDisabled:false
     }),
@@ -226,6 +227,8 @@
             return ;
         }
 
+        data.description = this.description;
+
         this.buttonSaveDisabled = true;
         postRequest(url, data).then(response => {
           this.buttonSaveDisabled = false;
@@ -257,6 +260,7 @@
     mounted () {
 
     },
+
     beforeRouteLeave(to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker');
       if (popDiv) {
@@ -273,14 +277,21 @@
     },
     computed:{
       descLength() {
-        if (this.edu.description)
-          return this.edu.description.length;
+        if (this.description)
+          return this.description.length;
         else return 0;
       }
     },
     components: {
       popPickerComponent,
       dPickerComponent
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
+        }
+      },
     },
     created () {
       let id = parseInt(this.$route.params.id);
@@ -300,6 +311,7 @@
            return;
          }
          this.edu = edus[id];
+         this.description = this.edu.description;
          this.bak = JSON.stringify(this.edu);
       }
 
