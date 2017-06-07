@@ -11,7 +11,7 @@
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无企业</div>
-            <div class="subTitle">如果有附近企业发布需求，我们会按照用户等级等分批推送，等级较高用户可优先查看。<br/>请积极提升个人在平台的成长贡献。</div>
+            <div class="subTitle">随着用户等级的提高，您附近企业的可见距离将逐渐扩大。<br/>请积极提升您在平台的成长值和贡献值。</div>
           </div>
         </div>
       </div>
