@@ -274,7 +274,7 @@
   .professor .buttonAsk {
     position: relative;
     display: inline-block;
-    width: 48%;
+    width: 60%;
     height: 37px;
     font-size: 14px;
     line-height: 37px;

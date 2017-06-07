@@ -103,7 +103,7 @@
           mui.alert('我们还暂时不建议您分享！');
       },
       integralDemo(){
-          mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
+          //mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
       },
       getToken(){
         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
