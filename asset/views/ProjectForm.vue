@@ -19,7 +19,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目预算</label>
-            <input type="text" v-model.trim="project.price" placeholder="填写预算金额">
+            <input type="number" v-model.trim="project.price" placeholder="填写预算金额">
           </div>
         </li>
         <li class="mui-table-view-cell">
