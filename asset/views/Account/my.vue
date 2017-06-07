@@ -29,7 +29,7 @@
       <div class="counter">
         <span class="level" @tap.stop.prevent="integralDemo">LV{{ user_level }}</span>
         <span class="grow" @tap.stop.prevent="integralDemo">成长值：{{ user_credits }}</span>
-        <span class="integral" @tap.stop.prevent="integralDemo">哈币：{{ user_coins }}</span>
+        <span class="integral" @tap.stop.prevent="integralDemo">贡献值：{{ user_coins }}</span>
       </div>
 
       <div class="part2">
@@ -51,12 +51,6 @@
         <li class="mui-table-view-cell">
           <a  class="mui-navigate-right" @tap.stop.prevent="$router.push('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
           </a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="yaoqing"><span class="mui-icon myicon myicon-coupon"></span>我的邀请码</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="integralDemo"><span class="mui-icon myicon myicon-huiyuan"></span>会员福利</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/collect')"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
@@ -104,7 +98,7 @@
     },
     methods: {
       yaoqing(){
-        mui.alert('您可以通过哈币换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
+        mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
       },
       shareOut(){
           mui.alert('我们还暂时不建议您分享！');

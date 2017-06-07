@@ -21,7 +21,7 @@
         <div class="text">
           <div class="realname">{{ recommend_expert_name }}</div>
           <div class="label">
-            <div class="collect"><span class="mui-icon fa fa-vimeo"></span></div>
+            <div class="collect"><span class="icon-expert"></span></div>
             今日专家
 
           </div>
@@ -377,6 +377,15 @@
     position: relative;
     top: 2px;
     margin-right: 8px;
+  }
+  .icon-expert {
+    width: 12px;
+    display: inline-block;
+    background: url("../statics/images/expert.png") no-repeat;
+    height: 12px;
+    background-size: cover;
+    position: relative;
+    top: 2px;
   }
 
   .bountyDesc .title {

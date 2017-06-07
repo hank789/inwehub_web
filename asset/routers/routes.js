@@ -485,6 +485,27 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // discover project
+    path: '/discover/project',
+    component: require('../views/Discover/Project.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover company
+    path: '/discover/company',
+    component: require('../views/Discover/Company.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover activity
+    path: '/discover/activity',
+    component: require('../views/Discover/Activity.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // discover detail
     path: '/collect',
     component: require('../views/Account/Collect.vue'),
