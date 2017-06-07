@@ -26,9 +26,9 @@
       </div>
 
       <div class="counter">
-        <span class="level" @tap.stop.prevent="integralDemo">LV{{ user_level }}</span>
-        <span class="grow" @tap.stop.prevent="integralDemo">成长值：{{ user_credits }}</span>
-        <span class="integral" @tap.stop.prevent="integralDemo">贡献值：{{ user_coins }}</span>
+        <span class="level">LV{{ user_level }}</span>
+        <span class="grow">成长值：{{ user_credits }}</span>
+        <span class="integral">贡献值：{{ user_coins }}</span>
       </div>
 
       <div class="part2">
