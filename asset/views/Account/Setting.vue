@@ -10,14 +10,6 @@
     <div class="mui-content">
 
       <ul class="mui-table-view mui-table-view-chevron">
-
-        <li class="mui-table-view-cell">
-          消息与通知
-
-          <div class="mui-switch mui-switch-mini mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
-        </li>
         <li class="mui-table-view-cell">
           <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
         </li>
