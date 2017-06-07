@@ -101,7 +101,7 @@
       <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
         <div class="form form-realAnswer">
           <div class="commentHeader">
-          <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">取消</button>
+          <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">关闭</button>
 
           <button class="submit mui-btn mui-btn-blue mui-poppicker-btn-ok" @tap.stop.prevent="submitComment" v-show="!commentState">提交</button>
           </div>
@@ -607,7 +607,7 @@
   }
   .vertbar{
     width: 1px;
-    height: 70px;
+    height: 80px;
     background-color: #a2a2a2;
     margin: -45px 25px -38px;
 
