@@ -367,3 +367,21 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   background-color: transparent;
 }
 
+.ql-toolbar.ql-snow{
+  border:none;
+  border-bottom:1px solid #ccc;
+}
+
+.ql-container.ql-snow {
+  border:none;
+}
+
+.quill-editor{
+  height:200px;
+}
+
+.ql-container{
+  height:160px;
+}
+
+

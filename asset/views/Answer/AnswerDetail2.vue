@@ -53,17 +53,7 @@
         <form>
           <div class="title">在这里留下您的回答：</div>
           <div class="textarea-wrapper">
-
-            <quill-editor ref="myTextEditor"
-                          v-model="description"
-                          :options="editorOption"
-                          @change="onEditorChange($event)"
-                          @blur="onEditorBlur($event)"
-                          @focus="onEditorFocus($event)"
-                          @ready="onEditorReady($event)">
-            </quill-editor>
-
-            <!--<textarea v-model.trim="description" placeholder="请填写回答"></textarea>-->
+            <textarea v-model.trim="description" placeholder="请填写回答"></textarea>
             <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
           </div>
           <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
@@ -103,7 +93,7 @@
 
         </div>
 
-        <div class="mui-table-view-cell question content">回答：<div class="richText" v-html="answer.answers[0] ? answer.answers[0].content : ''"></div></div>
+        <div class="mui-table-view-cell question content">回答：{{ answer.answers[0] ? answer.answers[0].content : '' }}</div>
       </div>
 
       <!--<div class="mui-table-view detail-comment" v-show="answer.question.status==6">-->
@@ -136,18 +126,6 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
 
-  import Quill from 'quill';
-  import { ImageImport } from '../../js/modules/ImageImport.js';
-
-  var renderer  = require('quilljs-renderer');
-  var Document  = renderer.Document;
-  renderer.loadFormat('html');
-
-  Quill.register('modules/imageImport', ImageImport);
-
-
-  import { quillEditor } from '../../components/vue-quill';
-
   const AnswerDetail = {
     data: () => ({
       showRating: false,
@@ -162,59 +140,27 @@
         },
         feedback: {}
       },
-      description: {},
+      description: '',
       descMaxLength: 1000,
-      descLength:0,
       loading: true,
       buttonAnswerDisable:false,
-      buttonSelectTimeDisable:false,
-      editorOption: {
-        placeholder:'请填写回答',
-        modules: {
-          toolbar: [
-            ['bold', 'italic','image']
-          ],
-          history: {
-            delay: 100,
-            maxStack: 1,
-            userOnly: true
-          },
-          imageImport: true
-        }
-      },
-      editorObj:{},
+      buttonSelectTimeDisable:false
     }),
-    components: {
-      quillEditor
-    },
     computed: {
-      editor() {
-        return this.$refs.myTextEditor.quillEditor
+      descLength() {
+        return this.description.length;
       },
       rating() {
         return this.answer.feedback.rate_star;
       }
     },
     mounted(){
+      if (this.$route.query.time) {
 
+
+      }
     },
     methods: {
-      docToHtml(docs){
-        var doc = new Document(docs);
-        return doc.convertTo('html');
-      },
-      onEditorChange(editor){
-        this.descLength = editor.editor.getLength()-1;
-      },
-      onEditorBlur(editor) {
-        //console.log('editor blur!', editor)
-      },
-      onEditorFocus(editor) {
-        //console.log('editor focus!', editor)
-      },
-      onEditorReady(editor) {
-        this.editorObj = editor;
-      },
       check(){
         //信息是否完善
         const currentUser = localEvent.getLocalItem('UserInfo');
@@ -228,8 +174,7 @@
         this.initDate();
       },
       goAnswer(){
-
-        if (this.editorObj.getLength() <= 1) {
+        if (!this.description) {
           mui.toast('请填写回答内容');
           return;
         }
@@ -254,7 +199,9 @@
 
               var code = response.data.code;
               if (code !== 1000) {
-                mui.alert(response.data.message);
+                mui.alert(response.data.message, () => {
+                  this.$router.go(-1);
+                });
                 return;
               }
 
@@ -411,17 +358,6 @@
           }
 
           this.answer = response.data.data;
-
-
-          if (this.answer.answers[0]) {
-            var content = this.answer.answers[0].content;
-            //var objs = JSON.parse(content);
-            if (content && content.ops) {
-              this.answer.answers[0].content =  this.docToHtml(content.ops);
-            }
-          }
-
-
           this.loading = 0;
 
           this.check();
@@ -443,9 +379,9 @@
       next();
     },
     watch: {
-      descLength: function (newDescLength) {
-        if (newDescLength > this.descMaxLength) {
-          this.editorObj.history.undo();
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength);
         }
       },
       '$route': 'getData'
@@ -649,9 +585,5 @@
 
   .mui-content > .mui-table-view:first-child{
     margin-top:0;
-  }
-
-  .richText{
-    display: inline-block;
   }
 </style>
