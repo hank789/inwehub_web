@@ -357,6 +357,7 @@
     margin-top:10px;
     line-height: 23px;
     font-size: 12px;
+    padding-right:10px;
   }
 
   .time{
