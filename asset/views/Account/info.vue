@@ -365,6 +365,7 @@
     top: 4px;
     left: 10px;
     height: 20px;
+    border-radius: 20px;
   }
 
   .part2 .progressBar .progress {
