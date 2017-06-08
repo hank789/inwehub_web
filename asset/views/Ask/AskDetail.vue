@@ -99,12 +99,13 @@
       </div>
 
       <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
-        <div class="form form-realAnswer">
-          <div class="commentHeader">
+        <div class="commentHeader">
           <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">关闭</button>
 
-          <button class="submit mui-btn mui-btn-blue mui-poppicker-btn-ok" @tap.stop.prevent="submitComment" v-show="!commentState">提交</button>
-          </div>
+          评价
+        </div>
+        <div class="form form-realAnswer">
+
           <!--<div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>-->
 
           <star-rating @rating-selected="setRating" :rating="5"  :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
@@ -116,9 +117,19 @@
             <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
           </div>
 
+
+          <div class="buttonWrapper" v-show="!commentState">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                    @click.prevent="submitComment" >匿名提交
+
+        </button>
+          </div>
+
+          <div class="commentDesc" v-show="!commentState">回答者将不会看到您的评价！</div>
+
           <div class="successWrapper" v-show="commentState">
               <div class="mui-icon fa fa-check-circle"></div>
-              <div class="sTitle">感谢您的认真评价，我们非常珍惜您的反馈！</div>
+              <div class="sTitle">感谢您的认真评价，我们非<br/>常珍惜您的反馈！</div>
           </div>
           <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
@@ -461,7 +472,7 @@
     text-align: center;
   }
 
-  .form-realAnswer .shutdown {
+  .commentHeader .shutdown {
     position: absolute;
     top: 5px;
     left: 5px;
@@ -481,9 +492,6 @@
   }
 
   .form-realAnswer .submit {
-    position: absolute;
-    right: 5px;
-    top: 5px;
     font-size: 12px;
     padding: 5px 10px;
   }
@@ -497,7 +505,7 @@
   }
 
   .form-realAnswer .title {
-    margin-top: 5px;
+    margin-top: -10px;
     font-size: 12px;
     color: #ff9800;
     height: 32px;
@@ -533,10 +541,10 @@
 
   .successWrapper{
     text-align: center;
-    padding:40px 0;
+    padding:20px 0;
   }
   .successWrapper .mui-icon{
-    font-size:40px;
+    font-size:90px;
     color:#19ac18;
   }
   .successWrapper .sTitle{
@@ -671,5 +679,26 @@
 
   .commentHeader{
     background-color: #eee;
+    height:41px;
+    line-height: 41px;
+    text-align:center;
+    position: relative;
+  }
+
+  .commentHeader:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #ddd;
+  }
+
+  .commentDesc{
+    font-size:12px;
+    color:#999;
   }
 </style>
