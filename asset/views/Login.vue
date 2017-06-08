@@ -2,7 +2,6 @@
   <div class="mui-content">
     <div class="login">
       <div class="logo"></div>
-      <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
       <div class="inputWrapper">
         <input class="text"  type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" />
         <label v-show="showPhoneLabel" @tap.stop.prevent="entryPhone">手机号码</label>
