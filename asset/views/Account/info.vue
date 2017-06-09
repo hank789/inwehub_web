@@ -362,7 +362,7 @@
     width: 120px;
     text-align: right;
     overflow: hidden;
-    top: 4px;
+    top: 3px;
     left: 10px;
     height: 20px;
     border-radius: 20px;
