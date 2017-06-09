@@ -384,12 +384,23 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   height:160px;
 }
 
+.richText{
+  width:100%;
+}
 .richText .ql-toolbar{
   display: none;
 }
 
 .richText .ql-container{
   height:100%;
+  top:-25px;
 }
 
+.richText .ql-editor{
+  padding:0;
+}
+
+.richText .quill-editor{
+  height: auto;
+}
 

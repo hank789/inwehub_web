@@ -178,7 +178,7 @@
         placeholder:'请填写回答',
         modules: {
           toolbar: [
-            ['bold', 'italic','image']
+            ['bold', 'italic', { 'color': [] }, { 'align': [] }, 'image']
           ],
           history: {
             delay: 100,
@@ -527,7 +527,7 @@
 
   .detail-answer {
     margin-top: -1px;
-    padding:10px 0;
+    padding:10px 0 0;
   }
 
   .detail-answer .question {
@@ -538,7 +538,6 @@
   .detail-answer .timeAgo {
     font-size: 12px;
     color: #8c8c8c;
-
   }
 
   .detail-comment {

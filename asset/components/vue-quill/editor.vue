@@ -9,6 +9,8 @@
   require('quill/dist/quill.snow.css')
   require('quill/dist/quill.bubble.css')
   require('quill/dist/quill.core.css')
+  import Delta from 'quill-delta';
+
   if (!window.Quill) {
     window.Quill = require('quill/dist/quill.js')
   }
@@ -19,20 +21,7 @@
         _content: '',
         defaultModules: {
           toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block'],
-            [{ 'header': 1 }, { 'header': 2 }],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            [{ 'script': 'sub'}, { 'script': 'super' }],
-            [{ 'indent': '-1'}, { 'indent': '+1' }],
-            [{ 'direction': 'rtl' }],
-            [{ 'size': ['small', false, 'large', 'huge'] }],
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'font': [] }],
-            [{ 'align': [] }],
-            ['clean'],
-            ['link', 'image', 'video']
+            ['bold', 'italic', { 'color': [] }, { 'align': [] }, 'image']
           ]
         }
       }
@@ -59,7 +48,7 @@
       initialize() {
         if (this.$el) {
 
-          // options and instance
+          // 获取选项
           var self = this
           self.options.theme = self.options.theme || 'snow'
           self.options.boundary = self.options.boundary || document.body
@@ -67,16 +56,15 @@
           self.options.modules.toolbar = self.options.modules.toolbar !== undefined
                                           ? self.options.modules.toolbar
                                           : self.defaultModules.toolbar
-          self.options.placeholder = self.options.placeholder || 'Insert text here ...'
+          self.options.placeholder = self.options.placeholder || '请填写内容 ...'
           self.options.readOnly = self.options.readOnly !== undefined ? self.options.readOnly : false
           self.quill = new Quill(self.$refs.editor, self.options)
 
-          // set editor content
+
           if (self.value || self.content) {
             self.quill.pasteHTML(self.value || self.content)
           }
 
-          // mark model as touched if editor lost focus
           self.quill.on('selection-change', (range) => {
             if (!range) {
               self.$emit('blur', self.quill)
@@ -85,7 +73,7 @@
             }
           })
 
-          // update model if text changes
+          // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
             var html = self.$refs.editor.children[0].innerHTML
             const text = self.quill.getText()
@@ -99,8 +87,59 @@
             })
           })
 
-          // emit ready
+          // quill准备就绪
           self.$emit('ready', self.quill)
+
+          // 对图片进行限制大小和限制张数
+          var imgHandler = function() {
+            let fileInput = this.container.querySelector('input.ql-image[type=file]');
+            if (fileInput == null) {
+              fileInput = document.createElement('input');
+              fileInput.setAttribute('type', 'file');
+              fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+              fileInput.classList.add('ql-image');
+              fileInput.addEventListener('change', () => {
+                if (fileInput.files != null && fileInput.files[0] != null) {
+
+                  var file = fileInput.files[0];
+                  var size = file.size/1000;  //kb
+                  if (size > 1024) {
+                      alert('图片单张不允许超过1M！');
+                  }
+
+                  var imageNum = 0;
+                  var delta = this.quill.getContents();
+                  var opt = {};
+                  for(var i in delta.ops) {
+                      opt = delta.ops[i];
+                      if (opt.insert.hasOwnProperty('image')) {
+                        imageNum++;
+                      }
+                  }
+
+                  if (imageNum >= 4) {
+                      alert('最多可添加4张图片！');
+                  }
+
+                  let reader = new FileReader();
+                  reader.onload = (e) => {
+                    let range = this.quill.getSelection(true);
+                    this.quill.updateContents(new Delta()
+                        .retain(range.index)
+                        .delete(range.length)
+                        .insert({ image: e.target.result })
+                      , 'user');
+                    fileInput.value = "";
+                  }
+                  reader.readAsDataURL(file);
+                }
+              });
+              this.container.appendChild(fileInput);
+            }
+            fileInput.click();
+          }
+
+          self.quill.getModule("toolbar").addHandler("image", imgHandler)
         }
       }
     },
