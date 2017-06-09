@@ -178,7 +178,7 @@
         placeholder:'请填写回答',
         modules: {
           toolbar: [
-            ['bold', 'italic', { 'color': [] }, { 'align': [] }, 'image']
+            ['bold', { 'color': [] }, { 'align': [] }, 'image']
           ],
           history: {
             delay: 100,
