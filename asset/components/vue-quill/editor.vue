@@ -103,8 +103,8 @@
 
                   var file = fileInput.files[0];
                   var size = file.size/1000;  //kb
-                  if (size > 1024) {
-                      alert('图片单张不允许超过1M！');
+                  if (size > 3072) {
+                      mui.alert('图片单张不允许超过3M！');
                   }
 
                   var imageNum = 0;
@@ -118,7 +118,7 @@
                   }
 
                   if (imageNum >= 4) {
-                      alert('最多可添加4张图片！');
+                      mui.alert('最多可添加4张图片！');
                   }
 
                   let reader = new FileReader();
