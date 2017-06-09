@@ -255,6 +255,11 @@
           return;
         }
 
+        if (this.editorObj.getText().length <= 1) {
+          mui.toast('请填写一段文本信息');
+          return;
+        }
+
         var data = {
           question_id: this.id,
           description: this.description,

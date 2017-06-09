@@ -377,11 +377,11 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 }
 
 .quill-editor{
-  height:200px;
+  min-height:200px;
 }
 
 .ql-container{
-  height:160px;
+  min-height:160px;
 }
 
 .richText{
