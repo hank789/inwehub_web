@@ -103,7 +103,13 @@
 
         </div>
 
-        <div class="mui-table-view-cell question content">回答：<div class="richText" v-html="answer.answers[0] ? answer.answers[0].content : ''"></div></div>
+        <div class="mui-table-view-cell question content">回答：<div class="richText"><quill-editor ref="myTextEditorRead"
+                                                                           :options="editorOptionRead"
+                                                                           @change="onEditorChange($event)"
+                                                                           @blur="onEditorBlur($event)"
+                                                                           @focus="onEditorFocus($event)"
+                                                                           @ready="onEditorReadyRead($event)">
+        </quill-editor></div></div>
       </div>
 
       <!--<div class="mui-table-view detail-comment" v-show="answer.question.status==6">-->
@@ -182,7 +188,16 @@
           imageImport: true
         }
       },
+      editorOptionRead: {
+        placeholder:'',
+        modules: {
+          toolbar: [
+          ]
+        },
+        readOnly: true
+      },
       editorObj:{},
+      editorReadObj:{}
     }),
     components: {
       quillEditor
@@ -190,6 +205,9 @@
     computed: {
       editor() {
         return this.$refs.myTextEditor.quillEditor
+      },
+      editorRead() {
+        return this.$refs.myTextEditorRead.quillEditor
       },
       rating() {
         return this.answer.feedback.rate_star;
@@ -214,6 +232,9 @@
       },
       onEditorReady(editor) {
         this.editorObj = editor;
+      },
+      onEditorReadyRead(editor) {
+          this.editorReadObj = editor;
       },
       check(){
         //信息是否完善
@@ -249,6 +270,8 @@
 
             this.buttonAnswerDisable = true;
 
+            data.description = JSON.stringify(data.description);
+
             postRequest(`answer/store`, data).then(response => {
               this.buttonAnswerDisable = false;
 
@@ -278,6 +301,7 @@
         }
 
         this.buttonSelectTimeDisable = true;
+
         postRequest(`answer/store`, data).then(response => {
           this.buttonSelectTimeDisable = false;
           var code = response.data.code;
@@ -412,15 +436,11 @@
 
           this.answer = response.data.data;
 
-
           if (this.answer.answers[0]) {
             var content = this.answer.answers[0].content;
-            //var objs = JSON.parse(content);
-            if (content && content.ops) {
-              this.answer.answers[0].content =  this.docToHtml(content.ops);
-            }
+            var objs = JSON.parse(content);
+            this.editorReadObj.setContents(objs);
           }
-
 
           this.loading = 0;
 
