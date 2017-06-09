@@ -404,3 +404,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   height: auto;
 }
 
+.mui-bar-top{
+  position: absolute !important;
+  top:0;
+}
