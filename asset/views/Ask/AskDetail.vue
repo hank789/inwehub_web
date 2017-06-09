@@ -45,7 +45,9 @@
             </div>
           </div>
         </div>
-        <div class="mui-table-view-cell question content">回答：{{ ask.answers[0] ? ask.answers[0].content : '' }}</div>
+        <div class="mui-table-view-cell question content">回答：<div class="richText"><quill-editor ref="myTextEditorRead"
+                                                                                                 :options="editorOptionRead" @ready="onEditorReadyRead($event)">
+        </quill-editor></div></div>
       </div>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
@@ -142,6 +144,7 @@
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { quillEditor } from '../../components/vue-quill';
 
 
   const AskDetail = {
@@ -164,7 +167,16 @@
       starDesc: '评价会让我们做的更好',
       descMaxLength: 500,
       buttonCommentDisabled:false,
-      commentState:false //是否已评价
+      commentState:false, //是否已评价
+      editorOptionRead: {
+        placeholder:'',
+        modules: {
+          toolbar: [
+          ]
+        },
+        readOnly: true
+      },
+      editorReadObj:{}
     }),
     mounted(){
       mui.init({swipeBack: true});
@@ -172,6 +184,9 @@
       if (this.$route.query.time) {
 
       }
+    },
+    components: {
+      quillEditor
     },
     computed: {
       rating() {
@@ -185,6 +200,9 @@
       }
     },
     methods: {
+      onEditorReadyRead(editor) {
+        this.editorReadObj = editor;
+      },
       cancelComment(){
           if (this.commentState) {
               this.getDetail();
@@ -257,6 +275,13 @@
           }
 
           this.ask = response.data.data;
+
+          if (this.ask.answers[0]) {
+            var content = this.ask.answers[0].content;
+            var objs = JSON.parse(content);
+            this.editorReadObj.setContents(objs);
+          }
+
           this.loading = 0;
         });
       },
@@ -371,7 +396,7 @@
 
   .detail-answer {
     margin-top: -1px;
-    padding:5px 0 8px;
+    padding:5px 0 0;
   }
 
   .detail-comment {
@@ -700,5 +725,9 @@
   .commentDesc{
     font-size:12px;
     color:#999;
+  }
+
+  .detail-answer .content{
+    padding-bottom:0;
   }
 </style>
