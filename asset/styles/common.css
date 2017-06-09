@@ -394,14 +394,17 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .richText .ql-container{
   height:100%;
   top:-25px;
+  min-height:0;
 }
 
 .richText .ql-editor{
   padding:0;
+  min-height:0;
 }
 
 .richText .quill-editor{
   height: auto;
+  min-height:0;
 }
 
 .mui-bar-top{
