@@ -189,7 +189,7 @@
         }
       },
       editorOptionRead: {
-        placeholder:'',
+        placeholder:' ',
         modules: {
           toolbar: [
           ]

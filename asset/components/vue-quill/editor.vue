@@ -45,6 +45,125 @@
       this.quill = null
     },
     methods: {
+      changeAvatar:function(){
+        if (mui.os.plus) {
+          var a = [{
+            title: "拍照"
+          }, {
+            title: "从手机相册选择"
+          }];
+          plus.nativeUI.actionSheet({
+            title: "选择图片",
+            cancel: "取消",
+            buttons: a
+          }, (b) => {
+            switch (b.index) {
+              case 0:
+                break;
+              case 1:
+                this.getImage();
+                break;
+              case 2:
+                this.galleryImg();
+                break;
+              default:
+                break
+            }
+          })
+        }
+      },
+      getImage:function(){
+        var t = this;
+        var c = plus.camera.getCamera();
+        c.captureImage(function (e) {
+          t.toClip(e);
+
+        }, function (s) {
+          console.log("error" + s);
+        }, {
+          filename: "_doc/bmp_editor.jpg"
+        })
+      },
+      galleryImg:function(){
+        plus.gallery.pick((a) => {
+          this.toClip(a);
+        }, function (a) {
+        }, {
+          filter: "image"
+        })
+      },
+      toClip(path)
+      {
+        var t = this;
+        plus.zip.compressImage({
+            src: path,
+            dst: "_doc/edit.jpg",
+            overwrite: true,
+            quality: 50
+          },
+          function (event) {
+
+              plus.io.requestFileSystem(plus.io.PRIVATE_DOC,
+                function(fs) {
+                  var rootEntry = fs.root;
+                  var reader = null;
+                  rootEntry.getFile('edit.jpg', {},
+                    function(entry) {
+                      entry.file(function(file) {
+
+                          var size = file.size.toString();
+
+                          if (!t.checkImg(size)) {
+                            return;
+                          }
+
+                          reader = new plus.io.FileReader();
+                          reader.onloadend = function(e) {
+                            let range = t.quill.getSelection(true);
+                            t.quill.updateContents(new Delta()
+                                .retain(range.index)
+                                .delete(range.length)
+                                .insert({ image: e.target.result })
+                              , 'user');
+                          };
+                          reader.readAsDataURL(file);
+                        },
+                        function(e) {
+                          console.log(e.message);
+                        });
+                    });
+
+                });
+
+            }, function (error) {
+              console.log(error.message);
+            });
+      },
+      checkImg(size){
+
+        var size = size/1000;  //kb
+        if (size > 3072) {
+          mui.alert('图片单张不允许超过3M！');
+          return false;
+        }
+
+        var imageNum = 0;
+        var delta = this.quill.getContents();
+        var opt = {};
+        for(var i in delta.ops) {
+          opt = delta.ops[i];
+          if (opt.insert.hasOwnProperty('image')) {
+            imageNum++;
+          }
+        }
+
+        if (imageNum >= 4) {
+          mui.alert('最多可添加4张图片！');
+          return false;
+        }
+
+        return true;
+      },
       initialize() {
         if (this.$el) {
 
@@ -102,23 +221,9 @@
                 if (fileInput.files != null && fileInput.files[0] != null) {
 
                   var file = fileInput.files[0];
-                  var size = file.size/1000;  //kb
-                  if (size > 3072) {
-                      mui.alert('图片单张不允许超过3M！');
-                  }
 
-                  var imageNum = 0;
-                  var delta = this.quill.getContents();
-                  var opt = {};
-                  for(var i in delta.ops) {
-                      opt = delta.ops[i];
-                      if (opt.insert.hasOwnProperty('image')) {
-                        imageNum++;
-                      }
-                  }
-
-                  if (imageNum >= 4) {
-                      mui.alert('最多可添加4张图片！');
+                  if (!self.checkImg(file.size)) {
+                      return;
                   }
 
                   let reader = new FileReader();
@@ -137,9 +242,20 @@
               this.container.appendChild(fileInput);
             }
             fileInput.click();
+          };
+
+          var imgHandlerMUI = function() {
+            setTimeout(() => {
+              self.changeAvatar()
+            }, 500);
           }
 
-          self.quill.getModule("toolbar").addHandler("image", imgHandler)
+          if (mui.os.plus) {
+            self.quill.getModule("toolbar").addHandler("image", imgHandlerMUI)
+          } else {
+            self.quill.getModule("toolbar").addHandler("image", imgHandler)
+          }
+
         }
       }
     },

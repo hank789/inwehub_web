@@ -169,7 +169,7 @@
       buttonCommentDisabled:false,
       commentState:false, //是否已评价
       editorOptionRead: {
-        placeholder:'',
+        placeholder:' ',
         modules: {
           toolbar: [
           ]
