@@ -110,7 +110,7 @@
 
           <!--<div class="submit mui-btn-link" @tap.stop.prevent="submitComment" v-show="!commentState">提交</div>-->
 
-          <star-rating @rating-selected="setRating" :rating="rateStar"  :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
+          <star-rating @rating-selected="setRating" @mouseleave.stop.prevent="" :rating="5"  :padding="20" :activeColor="'#F6A623'" :star-size="30" :show-rating="showRating" v-show="!commentState"></star-rating>
 
           <div class="title" v-show="!commentState">{{ starDesc }}</div>
 
@@ -247,7 +247,9 @@
         this.rateStar = rating;
       },
       comment(){
-        mui('#commentWapper').popover('toggle');
+        setTimeout(()=>{
+          mui('#commentWapper').popover('toggle');
+        }, 150);
       },
       getDetail(){
 

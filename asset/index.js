@@ -33,7 +33,8 @@ Raven
 
 import loading_img from './statics/images/image-loading.png';
 import loading_gif from './statics/images/loading.gif';
-import StarRating from 'vue-star-rating'
+import StarRating from './components/star-rating/star-rating';
+
 Vue.component('star-rating', StarRating);
 
 window.loading_gif = loading_gif;
