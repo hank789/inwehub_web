@@ -412,4 +412,25 @@
     top: 88px;
   }
 
+  .mui-segmented-control{
+    background: #fff;
+  }
+
+  .menu{
+    position: relative;
+  }
+
+  .menu:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+    z-index:7;
+  }
+
 </style>
