@@ -123,12 +123,23 @@
 
 
         let { phone, password } = this;
-        let device_code = detecdOS();
+        let device_system = detecdOS();
+        let device_name = '';
+        let device_model = '';
+        let device_code  = '';
+        if (mui.os.plus) {
+          device_name = plus.os.name;
+          device_model = plus.os.model;
+          device_code  = plus.device.uuid;
+        }
         this.isLoading = true;
         this.isDisabled = true;
         apiRequest('auth/login', {
             mobile:phone,
             password,
+            device_system,
+            device_name,
+            device_model,
             device_code
           }
         )
