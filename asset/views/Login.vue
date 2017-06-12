@@ -129,7 +129,7 @@
         let device_code  = '';
         if (mui.os.plus) {
           device_name = plus.os.name;
-          device_model = plus.os.model;
+          device_model = plus.os.version;
           device_code  = plus.device.uuid;
         }
         this.isLoading = true;

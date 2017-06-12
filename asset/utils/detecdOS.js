@@ -19,7 +19,7 @@ const detectOS = () => {
         var isWin7 = sUserAgent.indexOf("Windows NT 6.1") > -1 || sUserAgent.indexOf("Windows 7") > -1;
         if (isWin7) return "Win7";
     }
-    return "other";
+    return navigator.platform;
 };
 
 export default detectOS;
