@@ -82,6 +82,7 @@
       formItem: {
         input: ''
       },
+      isRegisterSuccess:false,
       isLoading: false // 登录loading
     }),
     computed: {
@@ -149,7 +150,9 @@
         plus.navigator.setFullscreen(false);
       });
 
-      this.setCacheData();
+      if (!this.isRegisterSuccess) {
+        this.setCacheData();
+      }
 
       next();
     },
@@ -370,6 +373,10 @@
               mui.toast(response.data.message);
               return;
             }
+
+            localEvent.clearLocalItem('CacheRegister');
+            this.isRegisterSuccess = true;
+
             mui.toast("注册成功！");
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
