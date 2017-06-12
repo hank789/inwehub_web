@@ -10,7 +10,7 @@ function checkUpdate(){
         var app_version = response_data.app_version;
         var package_url = response_data.package_url;
         var is_force = response_data.is_force;
-        if (app_version && wgtVer !== app_version){
+        if (app_version && wgtVer < app_version){
           //如果是强更
           if (is_force === 1){
             if (mui.os.ios) {
