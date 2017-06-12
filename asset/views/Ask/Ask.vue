@@ -212,7 +212,7 @@
       check(){
         var t = this;
 
-        postRequest(`question/request`, {}).then(response => {
+        postRequest(`question/request`, {uid:this.uid}).then(response => {
 
           var code = response.data.code;
 
