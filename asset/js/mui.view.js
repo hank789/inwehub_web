@@ -550,6 +550,21 @@
 				this.setTranslate(this.maxScrollX, 0);
 			}
 		},
+    back2: function() {
+      if (this.isInTransition) {
+        return;
+      }
+      this.isBack = true;
+      this.ratio = 1;
+      if (this._initPageTransform()) {
+        this._trigger('pageBeforeBack', this.activePage);
+        this._trigger('pageBeforeShow', this.previousPage);
+        this._prepareTransition();
+        this.previousPage.offsetHeight;
+        this.activePage.offsetHeight;
+        this.setTranslate(this.maxScrollX, 0);
+      }
+    },
 		go: function(pageSelector) {
 			if (this.isInTransition) {
 				return;
