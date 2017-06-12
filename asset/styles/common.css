@@ -382,7 +382,13 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 
 .ql-container{
   height:260px;
+  font-size:16px;
 }
+
+.ql-container p{
+  font-size:16px;
+}
+
 
 .richText{
   width:100%;
