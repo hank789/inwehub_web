@@ -417,3 +417,11 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   position: absolute !important;
   top:0;
 }
+
+.mui-android .mui-modal .mui-bar{
+  position: fixed;
+}
+
+.mui-android .mui-modal .mui-bar-nav ~ .mui-content{
+  padding-top:44px;
+}
