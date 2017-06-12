@@ -153,7 +153,26 @@
         mui('.mui-off-canvas-wrap').offCanvas('toggle');
       },
       expertNav: function () {
-        mui('#expert').popover('toggle');
+
+        if (mui.os.plus) {
+          var a = [{
+            title: "推荐专家"
+          }];
+          plus.nativeUI.actionSheet({
+            cancel: "取消",
+            buttons: a
+          }, (b) => {
+            switch (b.index) {
+              case 0:
+                  break;
+              case 1:
+                this.$router.push('/expert/recommend');
+                break;
+            }
+          })
+        } else {
+          mui('#expert').popover('toggle');
+        }
       },
       getData: function () {
         var t = this;
