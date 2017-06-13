@@ -36,42 +36,18 @@
 
     <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
       <div class="selectMoney">
-
-        <div class="title">你若问的用心，我将答的精彩</div>
-
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div @tap.stop.prevent="selectMajor2" class="mui-navigate-right"><label>付费选项</label><label
-                class="mui-pull-right account-setting-field">{{ getSelectMoneyMethod }}</label></div>
-            </div>
-          </li>
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div><label>支付金额</label><label
-                class="mui-pull-right account-setting-field">¥ {{money}}.00</label></div>
-            </div>
-          </li>
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div><label>支付方式</label><label
-                class="mui-pull-right account-setting-field apple-icon"><span class="fa fa-apple"></span></label></div>
-            </div>
-          </li>
-        </ul>
-
-        <!--<div class="category">-->
-          <!--<span :class="money == 88 &&  selectOther == false ?'active':''"-->
-                <!--@tap.stop.prevent="selectMoney(88)">88元</span>-->
-          <!--<span :class="money == 188 &&  selectOther == false  ?'active':''"-->
-                <!--@tap.stop.prevent="selectMoney(188)">188元</span>-->
-          <!--<span :class="money == 38 &&  selectOther == false  ?'active':''"-->
-                <!--@tap.stop.prevent="selectMoney(38)">38元</span>-->
-          <!--&lt;!&ndash;<span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>&ndash;&gt;-->
-          <!--&lt;!&ndash;<span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"&ndash;&gt;-->
-                                                           <!--&lt;!&ndash;v-model.number="money"/></span>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="help">你若问的用心，我将答的精彩</div>-->
+        <div class="category">
+          <span :class="money == 88 &&  selectOther == false ?'active':''"
+                @tap.stop.prevent="selectMoney(88)">88元</span>
+          <span :class="money == 188 &&  selectOther == false  ?'active':''"
+                @tap.stop.prevent="selectMoney(188)">188元</span>
+          <span :class="money == 38 &&  selectOther == false  ?'active':''"
+                @tap.stop.prevent="selectMoney(38)">38元</span>
+          <!--<span @tap.stop.prevent="selectMoney(0)" v-show="!selectOther">其他金额</span>-->
+          <!--<span v-show="selectOther" class="active"><input type="number" pattern="\d*" value="" placeholder="其他"-->
+                                                           <!--v-model.number="money"/></span>-->
+        </div>
+        <div class="help">你若问的用心，我将答的精彩</div>
         <div class="button-wrapper">
           <pay :pay_object_type="pay_object_type" :pay_money="money" v-on:pay_success="goAsk">
 
@@ -79,6 +55,7 @@
         </div>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -136,20 +113,6 @@
       },
       descLength() {
         return this.description.length;
-      },
-      getSelectMoneyMethod(){
-        switch (this.money) {
-          case  88:
-            return '积极参与';
-            break;
-          case 188:
-            return '鼎力支持';
-            break;
-          case 28:
-            return '略表心意';
-            break;
-        }
-        return '积极参与';
       }
     },
     created () {
@@ -171,40 +134,6 @@
       this.check();
     },
     methods: {
-      selectMajor2(){
-        if (mui.os.plus) {
-          var a = [{
-            title: "积极参与（ ¥ 88.00 ）"
-          },
-            {
-              title: "鼎力支持（ ¥188.00 ）"
-            },
-            {
-              title: "略表心意（ ¥ 28.00 ）"
-            }
-          ];
-          plus.nativeUI.actionSheet({
-            cancel: "取消",
-            buttons: a
-          }, (b) => {
-            switch (b.index) {
-              case 0:
-                break;
-              case 1:
-                this.money = 88;
-                break;
-              case 2:
-                this.money = 188;
-                break;
-              case 3:
-                this.money = 28;
-                break;
-            }
-          })
-        } else {
-          mui('#expert').popover('toggle');
-        }
-      },
       enterWords(event){
         var key = event.key;
         var code = event.keyCode;
@@ -491,7 +420,7 @@
 
   .selectMoney {
     text-align: center;
-    padding: 0 15px 15px 15px;
+    padding: 40px 30px 20px;
   }
 
   .selectMoney .payDesc {
@@ -507,7 +436,7 @@
   }
 
   .selectMoney .button-wrapper {
-    margin: 20px 0 10px;
+    margin: 10px 0 20px;
     padding: 0 30px;
   }
 
@@ -574,58 +503,5 @@
   .fixedDiv .button-wrapper {
     margin-top: 15px;
     padding: 0 90px
-  }
-
-  .mui-popover .mui-table-view{
-      background: none !important;
-     margin-top:0 !important;
-      color:rgba(155,155,155,100) !important;
-  }
-
-  .selectMoney .title{
-    padding:20px;
-    margin:0 8px;
-    position: relative;
-  }
-
-  .selectMoney .title:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #c8c7cc;
-  }
-
-  .selectMoney .mui-table-view-cell{
-    padding:5px 0;
-  }
-
-  .selectMoney .mui-pull-right{
-     float:right !important;
-    padding-right:35px;
-
-    color:rgba(74,144,226,100) !important;
-    text-align: right;
-  }
-
-  .selectMoney .fa-apple{
-    color:rgba(138,138,138,100);
-    opacity: 0.67;
-    font-size:25px;
-  }
-
-  .selectMoney .apple-icon{
-    padding:8px 35px 0;
-  }
-  .mui-popover .mui-table-view .mui-table-view-cell:last-child, .mui-popover .mui-table-view .mui-table-view-cell:last-child > a:not(.mui-btn){
-    border-radius:0 !important;
-  }
-
-  .mui-table-view-cell:after{
-    left:0 !important;
   }
 </style>
