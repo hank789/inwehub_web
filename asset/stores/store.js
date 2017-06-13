@@ -12,6 +12,7 @@ import askType from './module/askType';
 import task from './module/task';
 import answers from './module/answer';
 import asks from './module/ask';
+import asksFinish from './module/askFinish';
 
 
 import mutations from './mutations'
@@ -25,6 +26,7 @@ const modules = {
   mutations,
   task,
   asks,
+  asksFinish,
   answers,
   askType
 }

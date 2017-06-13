@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import {checkUpdate} from '../utils/updateVersion';
+import localEvent from '../stores/localStorage';
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -14,6 +15,9 @@ router.beforeEach((to, from, next) => {
   mui.plusReady(function() {
     checkUpdate();
   });
+
+  var referer = from.path;
+  localEvent.setLocalItem('referer', {path:referer});
 
   next();
 });

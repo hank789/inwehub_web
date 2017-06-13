@@ -42,3 +42,8 @@ export const ANSWERS_LIST = 'answers_list';
 export const ANSWERS_LIST_APPEND = 'answers_list_append';
 export const ANSWERS_INFO = 'answers_info';
 export const ANSWERS_INFO_APPEND = 'answers_info_append';
+
+export const ASKS_FINISH_LIST = 'task_finish_list';
+export const ASKS_FINISH_LIST_APPEND = 'task_finish_list_append';
+export const ASKS_FINISH_INFO = 'asks_finish_info';
+export const ASKS_FINISH_INFO_APPEND = 'asks_finish_info_append';

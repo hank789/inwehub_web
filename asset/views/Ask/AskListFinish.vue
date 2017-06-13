@@ -83,8 +83,9 @@
 </template>
 
 <script>
-  import {NOTICE, ASKS_INFO, ASKS_LIST, ASKS_INFO_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
+  import {NOTICE, ASKS_FINISH_INFO, ASKS_FINISH_LIST, ASKS_FINISH_INFO_APPEND, ASKS_FINISH_LIST_APPEND} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
 
   const Asks = {
@@ -158,6 +159,13 @@
             mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
           }
         });
+      },
+      isFromDetail(){
+        var referer = localEvent.getLocalItem('referer');
+        if (/\/ask\/[0-9]+/.test(referer.path)) {
+            return true;
+        }
+        return false;
       }
     },
     computed: {
@@ -181,14 +189,23 @@
         return 0;
       },
       lastY (){
-        return 0;//this.$store.state.asks.info.lastY;
+        if (this.isFromDetail()) {
+          return this.$store.state.asksFinish.info.lastY;
+        } else {
+          return 0;
+        }
       }
     },
     updated(){
-      this.$store.dispatch(ASKS_LIST_APPEND, this.asks);
+      this.$store.dispatch(ASKS_FINISH_LIST_APPEND, this.asks);
     },
     created(){
-      var list = []; //this.$store.state.asks.list;
+      if (this.isFromDetail()) {
+        var list = this.$store.state.asksFinish.list;
+      } else {
+        var list = [];
+      }
+
       if (list.length) {
         this.asks = list;
         this.loading = false;
@@ -199,7 +216,7 @@
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
         var lastY = event.detail.lastY;
-        t.$store.dispatch(ASKS_INFO_APPEND, {lastY: lastY});
+        t.$store.dispatch(ASKS_FINISH_INFO_APPEND, {lastY: lastY});
       });
 
       mui.init({
