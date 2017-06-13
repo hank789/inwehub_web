@@ -37,7 +37,7 @@
     <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
       <div class="selectMoney">
 
-        <div class="title">你若问的用心，我将答的精彩</div>
+        <div class="title">您若问的用心，我将答的精彩</div>
 
         <ul class="mui-table-view">
           <li class="mui-table-view-cell">
@@ -586,7 +586,7 @@
   .selectMoney .title{
     padding:22px 0;
     margin:0 8px;
-    text-align: left;
+    text-align: center;
     position: relative;
   }
 
