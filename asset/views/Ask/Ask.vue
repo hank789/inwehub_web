@@ -579,12 +579,14 @@
   .mui-popover .mui-table-view{
       background: none !important;
      margin-top:0 !important;
+    border-radius: 0 !important;
       color:rgba(155,155,155,100) !important;
   }
 
   .selectMoney .title{
-    padding:20px;
+    padding:20px 0;
     margin:0 8px;
+    text-align: left;
     position: relative;
   }
 
