@@ -90,14 +90,24 @@
         return 0;
       },
       lastY (){
-        return this.$store.state.answers.info.lastY;
+        if (this.isFromDetail()) {
+          return this.$store.state.answers.info.lastY;
+        } else {
+            return 0;
+        }
+
       }
     },
     updated(){
       this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
     },
     created(){
-      var list = [];//this.$store.state.answers.list;
+      if (this.isFromDetail()) {
+          var list = this.$store.state.answers.list;
+      } else {
+          var list = [];
+      }
+
       if (list.length) {
         this.answers = list;
         this.loading = false;
@@ -207,6 +217,13 @@
             mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
           }
         });
+      },
+      isFromDetail(){
+        var referer = localEvent.getLocalItem('referer');
+        if (/\/answer\/[0-9]+/.test(referer.path)) {
+          return true;
+        }
+        return false;
       }
     }
   }
