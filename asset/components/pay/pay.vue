@@ -75,8 +75,12 @@
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
               } else {
+                plus.nativeUI.alert(id,function(){
+                },'支付');
                 if (id==='appleiap') {
                   plus.nativeUI.alert(JSON.stringify(response_data),function(){
+                  },'支付');
+                  plus.nativeUI.alert('123',function(){
                   },'支付');
                   this.requestIapOrder(response_data);
                 }else {
@@ -115,6 +119,8 @@
         });
       },
       requestIapOrder(response_data) {
+        plus.nativeUI.alert('456',function(){
+        },'支付');
         plus.nativeUI.alert(JSON.stringify(this.pays['appleiap']),function(){
         },'支付');
         this.pay_waiting=plus.nativeUI.showWaiting();
