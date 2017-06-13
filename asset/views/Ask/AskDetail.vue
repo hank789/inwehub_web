@@ -398,7 +398,7 @@
 
   .detail-answer {
     margin-top: -1px;
-    padding:5px 0 0;
+    padding:0;
   }
 
   .detail-comment {
