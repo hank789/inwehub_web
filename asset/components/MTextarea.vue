@@ -34,6 +34,9 @@
       this.description = this.content;
     },
     watch: {
+      'content'(newVal, oldVal) {
+         this.description = newVal;
+      },
       description: function (newDescription) {
         if (!newDescription) {
           this.$emit('input', this.description);

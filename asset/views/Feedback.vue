@@ -11,10 +11,7 @@
       <div class="feedback">
         <div class="title">我们懂得聆听，您的意见与反馈</div>
 
-        <div class="textarea-wrapper">
-          <textarea placeholder="这里仅针对产品使用期间的任何问题进行收集，如果您有专业问题，请前往首页发起提问功能" v-model="description"></textarea>
-          <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-        </div>
+        <MTextarea v-model.trim="description" :content="description" :rows="9" :descMaxLength="500" :placeholder="'这里仅针对产品使用期间的任何问题进行收集，如果您有专业问题，请前往首页发起提问功能'"></MTextarea>
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">提交</button>
@@ -28,16 +25,14 @@
 <script>
   import {NOTICE} from '../stores/types';
   import {createAPI, addAccessToken} from '../utils/request';
+  import MTextarea from '../components/MTextarea.vue';
 
   const Feedback = {
     data: () => ({
-      description: '',
-      descMaxLength: 500
+      description: ''
     }),
-    computed: {
-      descLength() {
-        return this.description.length;
-      }
+    components: {
+      MTextarea
     },
     methods: {
       submit(){
@@ -45,6 +40,8 @@
           mui.toast('请填写反馈内容');
           return;
         }
+        this.description = '';
+        return;
 
         var data = {
           content: this.description
@@ -74,13 +71,6 @@
               });
             });
           })
-      }
-    },
-    watch: {
-      description: function (newDescription) {
-        if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
-        }
       }
     }
   }

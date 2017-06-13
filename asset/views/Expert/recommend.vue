@@ -47,10 +47,9 @@
         </li>
       </ul>
       <div class="title">在这里补充推荐专家信息：</div>
-      <div class="textarea-wrapper">
-        <textarea v-model.trim="description" rows="5" class="mui-input-clear" placeholder="描述"></textarea>
-        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-      </div>
+
+      <MTextarea v-model.trim="description" :content="description" :rows="4" :descMaxLength="500" :placeholder="'描述'"></MTextarea>
+
       <div class="title">上传专家名片：</div>
 
       <div class="image-list">
@@ -91,11 +90,11 @@
   import {createAPI, apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
+  import MTextarea from '../../components/MTextarea.vue';
 
   export  default {
     data: () => ({
       name: '',
-      descMaxLength: 500,
       description: '',
       gender: '',
       genderValue: '',
@@ -110,11 +109,6 @@
 
     },
     computed: {
-      descLength() {
-        if (this.description)
-          return this.description.length;
-        else return 0;
-      },
       infoIndustryTagsNames() {
         if (this.industryTags) {
           var newValue = [];
@@ -354,14 +348,8 @@
       next();
     },
     components: {
-      industryTagsIndexedList
-    },
-    watch: {
-      description: function (newDescription) {
-        if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
-        }
-      }
+      industryTagsIndexedList,
+      MTextarea
     }
   }
 
@@ -414,25 +402,6 @@
     padding: 5px;
     color: #a6a6a6;
     font-size: 12px;
-  }
-
-  .textarea-wrapper {
-    padding: 0 5px;
-    height: 100%;
-    position: relative;
-  }
-
-  .textarea-wrapper .counter {
-    position: absolute;
-    right: 10px;
-    font-size: 12px;
-    bottom: 10px;
-    color: #b0b0b0;
-  }
-
-  .textarea-wrapper textarea {
-    border-radius: 5px;
-    margin: 0;
   }
 
   .button-wrapper {
