@@ -90,7 +90,7 @@
           // console.log(JSON.stringify(result));
           if (id === 'appleiap') {
             // 验证iap支付结果
-            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, result}).then(response_data => {
+            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, transactionState: result.transactionState, payment: result.payment, transactionDate: result.transactionDate, transactionReceipt: result.transactionReceipt, transactionIdentifier: result.transactionIdentifier}).then(response_data => {
               this.pay_waiting.close();
               this.pay_waiting=null;
               if (response_data !== false){
@@ -113,8 +113,6 @@
         });
       },
       requestIapOrder(response_data) {
-        alert('456');
-        alert(JSON.stringify(this.pays['appleiap']));
         this.pay_waiting=plus.nativeUI.showWaiting();
         this.pays['appleiap'].requestOrder(response_data.iap_ids,(e)=>{
           console.log('requestOrder success: '+JSON.stringify(e));
