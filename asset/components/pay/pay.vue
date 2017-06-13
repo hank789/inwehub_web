@@ -90,7 +90,7 @@
           // console.log(JSON.stringify(result));
           if (id === 'appleiap') {
             // 验证iap支付结果
-            apiRequest(`pay/iap_notify`,{result}).then(response_data => {
+            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, result}).then(response_data => {
               this.pay_waiting.close();
               this.pay_waiting=null;
               if (response_data !== false){
