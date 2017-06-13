@@ -25,7 +25,7 @@
           <div class="mui-scroll">
             <ul class="mui-table-view mui-table-view-chevron">
               <li class="mui-table-view-cell">
-                <a href="#account_name" class="mui-navigate-right">用户姓名<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">用户姓名<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.name ? user.info.name : '必填' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -33,11 +33,11 @@
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ genderName ? genderName : '请选择'}}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_company" class="mui-navigate-right">当前公司<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/company')" class="mui-navigate-right">当前公司<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.company ? user.info.company : '必填' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_title" class="mui-navigate-right">当前职位<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/position')" class="mui-navigate-right">当前职位<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.title ? user.info.title : '必填'}}</span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -51,7 +51,7 @@
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ work_city !== ' '?work_city:'请选择' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_address_detail" class="mui-navigate-right">详细地址<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/address')" class="mui-navigate-right">详细地址<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.address_detail ? user.info.address_detail : '必填'}}</span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -60,7 +60,7 @@
                   }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_email" class="mui-navigate-right">电子邮箱<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/email')" class="mui-navigate-right">电子邮箱<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.email ? user.info.email : '必填'}}</span></a>
               </li>
               <li class="mui-table-view-cell">
@@ -71,7 +71,7 @@
                 <a class="mui-navigate-right" @tap.stop.prevent="selectHomeCity">家乡地区<span class="mui-pull-right account-setting-field mui-ellipsis">{{ home_city !== ' '?home_city:'请选择' }}</span></a>
               </li>
               <li class="mui-table-view-cell">
-                <a href="#account_description" class="mui-navigate-right">个人签名<span
+                <a @tap.stop.prevent="$router.push('/my/info/basic/description')" class="mui-navigate-right">个人签名<span
                   class="mui-pull-right account-setting-field mui-ellipsis">{{user.info.description ? user.info.description : '请填写'}}</span></a>
               </li>
             </ul>

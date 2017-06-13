@@ -179,6 +179,66 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 个人签名
+    path: '/my/info/basic/description',
+    component: require('../views/Account/infos/basic_description.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 姓名
+    path: '/my/info/basic/name',
+    component: require('../views/Account/infos/basic_name.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 地址
+    path: '/my/info/basic/address',
+    component: require('../views/Account/infos/basic_address.vue'),
+    meta: {
+      title: '个人信息'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 公司
+    path: '/my/info/basic/company',
+    component: require('../views/Account/infos/basic_company.vue'),
+    meta: {
+      title: '编辑'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 职位
+    path: '/my/info/basic/position',
+    component: require('../views/Account/infos/basic_position.vue'),
+    meta: {
+      title: '编辑'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // email
+    path: '/my/info/basic/email',
+    component: require('../views/Account/infos/basic_email.vue'),
+    meta: {
+      title: '编辑'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 培训经历
     path: '/my/info/train/:id',
     component: require('../views/Account/infos/train.vue'),
