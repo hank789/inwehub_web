@@ -2,29 +2,25 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">填写回答</h1>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back">取消</a>
+      <h1 class="mui-title">回答</h1>
     </header>
 
     <div class="mui-content">
-      <div class="mui-content-padded">
+
         <div class="form form-realAnswer">
-          <form>
-            <div class="title">在这里留下您的回答：</div>
-            <div class="textarea-wrapper">
-              <textarea v-model.trim="description" placeholder="请填写回答"></textarea>
-              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-            </div>
+            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)"></Meditor>
+
             <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
 
-            <div class="button-wrapper">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">发布</button>
-              <div class="desc">注意：发布后将不能更改，请再次检查内容！</div>
-            </div>
-          </form>
+
         </div>
+
+      <div class="button-wrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -33,21 +29,30 @@
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
+  import Meditor from '../../components/vue-quill/Meditor.vue';
+
   const Answer = {
     data: () => ({
       id: null,
-      description: '',
-      descMaxLength: 1000
+      description: {},
+      editorObj:{}
     }),
-    computed: {
-      descLength() {
-        return this.description.length;
-      }
+    components: {
+      Meditor
     },
     methods: {
+      onEditorReady(editor) {
+        this.editorObj = editor;
+      },
       goAnswer(){
-        if (!this.description) {
+
+        if (this.editorObj.getLength() <= 1) {
           mui.toast('请填写回答内容');
+          return;
+        }
+
+        if (this.editorObj.getText().length <= 1) {
+          mui.toast('请填写一段文本信息');
           return;
         }
 
@@ -57,18 +62,25 @@
           promise_time: ''
         };
 
-        postRequest(`answer/store`, data).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+        mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
+          if (e.index == 1) {
+
+            data.description = JSON.stringify(data.description);
+
+            postRequest(`answer/store`, data).then(response => {
+
+              var code = response.data.code;
+              if (code !== 1000) {
+                mui.alert(response.data.message);
+                return;
+              }
+
+              mui.toast(response.data.message);
+
+              this.$router.go(-1);
+            });
           }
-
-          mui.toast(response.data.message);
-
-          var id = response.data.data.id;
-          this.$router.replace('/answer/' + this.id);
-        });
+        }, 'div');
       },
       speech(){
         var options = {};
@@ -81,13 +93,6 @@
         });
       }
     },
-    watch: {
-      description: function (newDescription) {
-        if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
-        }
-      }
-    },
     created () {
       let id = parseInt(this.$route.params.id);
       this.id = id;
@@ -98,42 +103,12 @@
 
 
 <style scoped>
+ .button-wrapper{
+    margin-top: 15px;
+    padding: 0 50px 15px;
+  }
 
   .form-realAnswer{
-    padding:0 20px;
-  }
-  .form-realAnswer textarea {
-    width:100%;
-    height:200px;
-    border:1px solid #efefef;
-  }
-  .form-realAnswer .title{
-    margin-top:30px;
-    color:#8b8b8b;
-    height:32px;
-  }
-
-
-  .form-realAnswer .button-wrapper{
-    margin-top:15px;
-    padding-bottom:15px;
-  }
-
-  .mui-content{
-    background-color:#fff;
-  }
-
-  .textarea-wrapper{
-    position: relative;
-  }
-  .textarea-wrapper .counter{
-    position: absolute;
-    right: 10px;
-    bottom: 30px;
-    color:#999;
-  }
-  .desc{
-    padding-top:15px;
-    color:#999;
+    padding:5px 0;
   }
 </style>
