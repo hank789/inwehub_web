@@ -114,11 +114,9 @@
 
           <div class="title" v-show="!commentState">{{ starDesc }}</div>
 
-          <div class="textarea-wrapper" v-show="!commentState">
-            <textarea v-model.trim="description" :placeholder="descriptionPlaceHolder"></textarea>
-            <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-          </div>
 
+
+          <MTextarea v-model.trim="description" :content="description" :rows="6" :descMaxLength="500" :placeholder="descriptionPlaceHolder" v-show="!commentState"></MTextarea>
 
           <div class="buttonWrapper" v-show="!commentState">
             <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
@@ -145,6 +143,7 @@
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import { quillEditor } from '../../components/vue-quill';
+  import MTextarea from '../../components/MTextarea.vue';
 
 
   const AskDetail = {
@@ -186,7 +185,8 @@
       }
     },
     components: {
-      quillEditor
+      quillEditor,
+      MTextarea
     },
     computed: {
       rating() {
@@ -495,7 +495,7 @@
   .form-realAnswer {
     position: relative;
     background: #fff;
-    padding: 20px 5px;
+    padding: 20px 0;
     text-align: center;
   }
 
@@ -541,29 +541,6 @@
   .form-realAnswer .button-wrapper {
     margin-top: 15px;
     padding-bottom: 15px;
-  }
-
-  .textarea-wrapper {
-    padding-bottom:20px;
-    position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
-  }
-
-  .textarea-wrapper textarea{
-    margin:0;
-  }
-
-  .textarea-wrapper .counter {
-    position: absolute;
-    right: 10px;
-    font-size: 12px;
-    bottom: 10px;
-    color: #999;
-  }
-
-  .form-realAnswer .textarea-wrapper .counter {
-    bottom: 2px;
   }
 
   .successWrapper{

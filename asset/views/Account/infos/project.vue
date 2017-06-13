@@ -64,10 +64,9 @@
 
 
       </div>
-      <div class="textarea-wrapper">
-        <textarea v-model.trim="description" rows="5"  placeholder="请详细填写该项目经历的详细信息"></textarea>
-        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-      </div>
+
+      <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该项目经历的详细信息'"></MTextarea>
+
       <div class="deleteWrapper" v-show="id">
         <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem('project')">
           删除
@@ -104,6 +103,7 @@
   import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue';
   import ACCOUNT_API from '../../../api/account';
   import dPickerComponent from '../../../components/picker/date-picker.vue';
+  import MTextarea from '../../../components/MTextarea.vue';
 
   export default {
     data: () => ({
@@ -315,6 +315,10 @@
     },
     watch: {
       description: function (newDescription) {
+        if (!newDescription) {
+          return;
+        }
+
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
@@ -373,7 +377,8 @@
     },
     components: {
       industryTagsIndexedList,
-      dPickerComponent
+      dPickerComponent,
+      MTextarea
     },
     created () {
       let id = parseInt(this.$route.params.id);

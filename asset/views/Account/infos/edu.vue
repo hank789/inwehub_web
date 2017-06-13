@@ -46,10 +46,9 @@
 
 
       </div>
-      <div class="textarea-wrapper">
-        <textarea v-model.trim="description" rows="5"  placeholder="请详细填写该教育经历的详细信息"></textarea>
-        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-      </div>
+
+      <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该教育经历的详细信息'"></MTextarea>
+
       <div class="deleteWrapper" v-show="id">
         <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem">删除
 
@@ -67,6 +66,7 @@
   import ACCOUNT_API from '../../../api/account';
   import dPickerComponent from '../../../components/picker/date-picker.vue';
   import popPickerComponent from '../../../components/picker/poppicker.vue';
+  import MTextarea from '../../../components/MTextarea.vue';
 
   export default {
     data: () => ({
@@ -276,22 +276,12 @@
       next();
     },
     computed:{
-      descLength() {
-        if (this.description)
-          return this.description.length;
-        else return 0;
-      }
+
     },
     components: {
       popPickerComponent,
-      dPickerComponent
-    },
-    watch: {
-      description: function (newDescription) {
-        if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
-        }
-      },
+      dPickerComponent,
+      MTextarea
     },
     created () {
       let id = parseInt(this.$route.params.id);
@@ -352,30 +342,6 @@
 
   .mui-table-view-cell{
     padding: 0;
-  }
-
-  .textarea-wrapper {
-    margin: 0 5px;
-    height: 100%;
-    position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
-    background: #fff;
-    padding-bottom: 20px;
-  }
-
-  .textarea-wrapper .counter {
-    position: absolute;
-    right: 4px;
-    font-size: 12px;
-    bottom: 2px;
-    color: #b0b0b0;
-  }
-
-  .textarea-wrapper textarea {
-    border: none;
-    margin: 0;
-    padding-bottom: 0;
   }
 
   .deleteWrapper {

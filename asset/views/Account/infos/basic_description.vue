@@ -10,14 +10,11 @@
     </header>
 
     <div class="mui-content">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-                    <textarea v-model.trim="description" rows="5"
-                              placeholder="个人签名"></textarea>
-          </div>
-        </li>
-      </ul>
+
+
+        <div class="descriptionWrapper">
+          <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写个人签名'"></MTextarea>
+        </div>
     </div>
   </div>
 </template>
@@ -27,6 +24,7 @@
 
   import localEvent from '../../../stores/localStorage';
   import {apiRequest} from '../../../utils/request';
+  import MTextarea from '../../../components/MTextarea.vue';
 
   export default {
     data: () => ({
@@ -36,7 +34,9 @@
       var userInfo = localEvent.getLocalItem('UserInfo');
       this.description = userInfo.description;
     },
-
+    components: {
+      MTextarea
+    },
     methods:{
       submitInfo: function () {
         if (!this.description) {
@@ -72,5 +72,9 @@
 
   input{
     text-align: right;
+  }
+
+  .descriptionWrapper{
+    margin-top:5px;
   }
 </style>
