@@ -316,8 +316,8 @@
           return;
         }
 
-        if (this.money < 38) {
-          mui.toast('提问金额不能小于38');
+        if (this.money < 28) {
+          mui.toast('提问金额不能小于28');
           return;
         }
 
