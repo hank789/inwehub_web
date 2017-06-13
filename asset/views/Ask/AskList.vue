@@ -18,6 +18,27 @@
       </div>
     </div>
 
+
+    <div class="mui-content list-empty" v-if="nothing == 1">
+      <div class="mui-table-view list-ask-item">
+        <div class="mui-table-view-cell">
+          <div class="">
+            <div class="title">暂无提问</div>
+            <div class="subTitle">提出正确的问题，往往等于解决了问题的大半。
+            <br/><span>快去提出第一个问题吧！</span>
+            </div>
+            <div class="buttons">
+              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                      @tap.stop.prevent="$router.push('/ask')">快速提问
+
+
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="item1" class="mui-control-content mui-active">
 
       <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
@@ -57,25 +78,7 @@
 
 
 
-    <div class="mui-content list-empty" v-if="nothing == 1">
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
-          <div class="">
-            <div class="title">暂无提问</div>
-            <div class="subTitle">提出正确的问题，往往等于解决了问题的大半。
-            <br/><span>快去提出第一个问题吧！</span>
-            </div>
-            <div class="buttons">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                      @tap.stop.prevent="$router.push('/ask')">快速提问
 
-
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 
@@ -451,4 +454,9 @@
     z-index:7;
   }
 
+  .list-empty{
+    padding-top:0 !important;
+    margin-top:-6px;
+
+  }
 </style>

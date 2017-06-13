@@ -449,4 +449,9 @@
     background-color: #c8c7cc;
     z-index:7;
   }
+
+  .list-empty{
+    padding-top:0 !important;
+    margin-top:-6px;
+  }
 </style>
