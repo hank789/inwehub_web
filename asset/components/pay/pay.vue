@@ -90,10 +90,10 @@
           // console.log(JSON.stringify(result));
           if (id === 'appleiap') {
             // 验证iap支付结果
-            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, transactionState: result.transactionState, payment: result.payment, transactionDate: result.transactionDate, transactionReceipt: result.transactionReceipt, transactionIdentifier: result.transactionIdentifier}).then(response_data => {
+            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, transactionState: result.transactionState, payment: result.payment, transactionDate: result.transactionDate, transactionReceipt: result.transactionReceipt, transactionIdentifier: result.transactionIdentifier}).then(response_data_notify => {
               this.pay_waiting.close();
               this.pay_waiting=null;
-              if (response_data !== false){
+              if (response_data_notify !== false){
                 this.$emit('pay_success', response_data.order_id, this.pay_object_type);
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
