@@ -2,7 +2,7 @@
   <div id="pay_content">
     <div id="wxpay" class="mui-btn mui-btn-block mui-btn-primary" v-if="wechatPay === '1'" @tap.stop.prevent="pay('wxpay')">微信支付</div>
     <div id="alipay" class="mui-btn mui-btn-block mui-btn-primary" v-if="aliPay === '1'"  @tap.stop.prevent="pay('alipay')">支付宝支付</div>
-    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" style="display: none;" @tap.stop.prevent="pay('appleiap')">苹果支付</div>
+    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" v-if="iapPay === '1'" @tap.stop.prevent="pay('appleiap')">苹果支付</div>
   </div>
 </template>
 
@@ -15,7 +15,8 @@
         pays:{},
         pay_waiting: null,
         wechatPay:false,
-        aliPay:false
+        aliPay:false,
+        iapPay:false
       }
     },
     props: ['pay_object_type','pay_money'],
@@ -28,10 +29,14 @@
         }
         this.wechatPay = response_data.pay_method_weixin;
         this.aliPay = response_data.pay_method_ali;
+        this.iapPay = '0';
+        if (mui.os.ios) {
+          this.iapPay = response_data.pay_method_iap;
+        }
       });
     },
     methods: {
-        pay(id){
+      pay(id){
 
           if (!mui.os.plus) {
               mui.alert('仅支持app');
@@ -39,17 +44,14 @@
           }
 
           if(this.pay_waiting){return;}//检查是否请求订单中
-          if(id==='appleiap'){
-            mui.toast('暂不支持应用内支付');
-            return;
-          }
+
           var amount = this.pay_money;
           if (amount <= 0) {
             plus.nativeUI.alert('支付金额有误！', null, '支付');
             return;
           }
           // ('----- 请求支付 -----');
-          if(id=='alipay'||id=='wxpay'){
+          if(id=='alipay'||id=='wxpay'||id=='appleiap'){
 
           }else{
             plus.nativeUI.alert('当前环境不支持此支付通道！', null, '支付');
@@ -73,23 +75,61 @@
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
               } else {
-                var order = response_data.order_info;
-                plus.payment.request(this.pays[id],order,(result) => {
-                  // console.log(JSON.stringify(result));
-                  this.$emit('pay_success', response_data.order_id, this.pay_object_type);
-                  plus.nativeUI.alert('支付成功！',function(){
-                  },'支付');
-                },function(e){
-                  if (e.code == -100){
-                    plus.nativeUI.alert('', null, '支付已取消');
-                  }else {
-                    plus.nativeUI.alert('请联系客服', null, '支付失败');
-                  }
-                });
+                if (id==='appleiap') {
+                  this.requestIapOrder(response_data);
+                }else {
+                  this.requestPay(id,response_data);
+                }
               }
             }
           });
-        }
+        },
+      requestPay(id,response_data) {
+        var order = response_data.order_info;
+        plus.payment.request(this.pays[id],order,(result) => {
+          // console.log(JSON.stringify(result));
+          if (id === 'appleiap') {
+            // 验证iap支付结果
+            apiRequest(`pay/iap_notify`,{result}).then(response_data => {
+              this.pay_waiting.close();
+              this.pay_waiting=null;
+              if (response_data !== false){
+                this.$emit('pay_success', response_data.order_id, this.pay_object_type);
+                plus.nativeUI.alert('支付成功！',function(){
+                },'支付');
+              }
+            });
+          }else {
+            this.$emit('pay_success', response_data.order_id, this.pay_object_type);
+            plus.nativeUI.alert('支付成功！',function(){
+            },'支付');
+          }
+        },function(e){
+          if (e.code == -100){
+            plus.nativeUI.alert('', null, '支付已取消');
+          }else {
+            plus.nativeUI.alert('请联系客服', null, '支付失败');
+          }
+        });
+      },
+      requestIapOrder(response_data) {
+        plus.nativeUI.showWaiting('', {style:"black",background:"rgba(0,0,0,0)"});
+        this.pays['appleiap'].requestOrder(response_data.ids,(e)=>{
+          plus.nativeUI.closeWaiting();
+          console.log('requestOrder success: '+JSON.stringify(e));
+          this.requestPay('appleiap',response_data);
+        },(e)=>{
+          console.log('requestOrder failed: '+JSON.stringify(e));
+          plus.nativeUI.closeWaiting();
+          plus.nativeUI.confirm("错误信息："+JSON.stringify(e), (e) => {
+            if(e.index==0){
+              this.requestIapOrder(response_data.ids);
+            }else{
+
+            }
+          }, '重新请求支付',['确定','取消']);
+        });
+      }
     },
     mounted() {
       if (mui.os.plus) {
