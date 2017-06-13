@@ -128,7 +128,7 @@
           this.pay_waiting=null;
           plus.nativeUI.confirm("错误信息："+JSON.stringify(e), (e) => {
             if(e.index==0){
-              this.requestIapOrder(response_data.ids);
+              this.requestIapOrder(response_data);
             }else{
 
             }
