@@ -116,9 +116,6 @@
         this.pay_waiting=plus.nativeUI.showWaiting();
         this.pays['appleiap'].requestOrder(response_data.iap_ids,(e)=>{
           console.log('requestOrder success: '+JSON.stringify(e));
-          plus.nativeUI.alert(JSON.stringify(e),function(){
-          },'支付');
-
           this.requestPay('appleiap',response_data);
         },(e)=>{
           console.log('requestOrder failed: '+JSON.stringify(e));
