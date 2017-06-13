@@ -105,6 +105,8 @@
             },'支付');
           }
         },function(e){
+          this.pay_waiting.close();
+          this.pay_waiting=null;
           if (e.code == -100){
             plus.nativeUI.alert('', null, '支付已取消');
           }else {
