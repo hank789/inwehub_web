@@ -75,13 +75,9 @@
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
               } else {
-                plus.nativeUI.alert(id,function(){
-                },'支付');
+                mui.toast(id);
                 if (id==='appleiap') {
-                  plus.nativeUI.alert(JSON.stringify(response_data),function(){
-                  },'支付');
-                  plus.nativeUI.alert('123',function(){
-                  },'支付');
+                  mui.toast(JSON.stringify(response_data));
                   this.requestIapOrder(response_data);
                 }else {
                   this.requestPay(id,response_data);
@@ -119,10 +115,8 @@
         });
       },
       requestIapOrder(response_data) {
-        plus.nativeUI.alert('456',function(){
-        },'支付');
-        plus.nativeUI.alert(JSON.stringify(this.pays['appleiap']),function(){
-        },'支付');
+        mui.toast('456');
+        mui.toast(JSON.stringify(this.pays['appleiap']));
         this.pay_waiting=plus.nativeUI.showWaiting();
         this.pays['appleiap'].requestOrder(response_data.iap_ids,(e)=>{
           console.log('requestOrder success: '+JSON.stringify(e));
