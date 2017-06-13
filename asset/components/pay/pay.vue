@@ -104,7 +104,7 @@
             plus.nativeUI.alert('支付成功！',function(){
             },'支付');
           }
-        },function(e){
+        },(e)=>{
           this.pay_waiting.close();
           this.pay_waiting=null;
           if (e.code == -100){
