@@ -116,6 +116,8 @@
       },
       requestIapOrder(response_data) {
         this.pay_waiting=plus.nativeUI.showWaiting();
+        plus.nativeUI.alert(JSON.stringify(this.pays['appleiap']),function(){
+        },'支付');
         this.pays['appleiap'].requestOrder(response_data.iap_ids,(e)=>{
           console.log('requestOrder success: '+JSON.stringify(e));
           plus.nativeUI.alert(JSON.stringify(e),function(){
