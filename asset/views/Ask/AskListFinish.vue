@@ -181,7 +181,7 @@
         return 0;
       },
       lastY (){
-        return this.$store.state.asks.info.lastY;
+        return 0;//this.$store.state.asks.info.lastY;
       }
     },
     updated(){
