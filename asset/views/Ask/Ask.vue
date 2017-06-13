@@ -584,7 +584,7 @@
   }
 
   .selectMoney .title{
-    padding:20px 0;
+    padding:22px 0;
     margin:0 8px;
     text-align: left;
     position: relative;
@@ -603,7 +603,7 @@
   }
 
   .selectMoney .mui-table-view-cell{
-    padding:5px 0;
+    padding:10px 0;
   }
 
   .selectMoney .mui-pull-right{
@@ -629,5 +629,10 @@
 
   .mui-table-view-cell:after{
     left:0 !important;
+  }
+
+  .mui-input-row label{
+    padding-left:5px;
+    text-align: left;
   }
 </style>
