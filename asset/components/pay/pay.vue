@@ -99,7 +99,7 @@
                 },'支付');
               }
             });
-          }else {
+          } else {
             this.$emit('pay_success', response_data.order_id, this.pay_object_type);
             plus.nativeUI.alert('支付成功！',function(){
             },'支付');
@@ -113,14 +113,14 @@
         });
       },
       requestIapOrder(response_data) {
-        plus.nativeUI.showWaiting('', {style:"black",background:"rgba(0,0,0,0)"});
+        this.pay_waiting=plus.nativeUI.showWaiting();
         this.pays['appleiap'].requestOrder(response_data.ids,(e)=>{
-          plus.nativeUI.closeWaiting();
           console.log('requestOrder success: '+JSON.stringify(e));
           this.requestPay('appleiap',response_data);
         },(e)=>{
           console.log('requestOrder failed: '+JSON.stringify(e));
-          plus.nativeUI.closeWaiting();
+          this.pay_waiting.close();
+          this.pay_waiting=null;
           plus.nativeUI.confirm("错误信息："+JSON.stringify(e), (e) => {
             if(e.index==0){
               this.requestIapOrder(response_data.ids);
