@@ -90,10 +90,10 @@
           // console.log(JSON.stringify(result));
           if (id === 'appleiap') {
             // 验证iap支付结果
-            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, result}).then(response_data => {
+            apiRequest(`pay/iap_notify`,{orderId: response_data.order_id, transactionState: result.transactionState, payment: result.payment, transactionDate: result.transactionDate, transactionReceipt: result.transactionReceipt, transactionIdentifier: result.transactionIdentifier}).then(response_data_notify => {
               this.pay_waiting.close();
               this.pay_waiting=null;
-              if (response_data !== false){
+              if (response_data_notify !== false){
                 this.$emit('pay_success', response_data.order_id, this.pay_object_type);
                 plus.nativeUI.alert('支付成功！',function(){
                 },'支付');
@@ -104,7 +104,9 @@
             plus.nativeUI.alert('支付成功！',function(){
             },'支付');
           }
-        },function(e){
+        },(e)=>{
+          this.pay_waiting.close();
+          this.pay_waiting=null;
           if (e.code == -100){
             plus.nativeUI.alert('', null, '支付已取消');
           }else {
@@ -114,7 +116,7 @@
       },
       requestIapOrder(response_data) {
         this.pay_waiting=plus.nativeUI.showWaiting();
-        this.pays['appleiap'].requestOrder(response_data.ids,(e)=>{
+        this.pays['appleiap'].requestOrder(response_data.iap_ids,(e)=>{
           console.log('requestOrder success: '+JSON.stringify(e));
           this.requestPay('appleiap',response_data);
         },(e)=>{
@@ -123,7 +125,7 @@
           this.pay_waiting=null;
           plus.nativeUI.confirm("错误信息："+JSON.stringify(e), (e) => {
             if(e.index==0){
-              this.requestIapOrder(response_data.ids);
+              this.requestIapOrder(response_data);
             }else{
 
             }
