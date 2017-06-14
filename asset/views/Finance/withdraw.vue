@@ -13,7 +13,7 @@
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
-          <span class="amount"><input type="text" v-model="withdrawMoney" /></span>
+          <span class="amount"><input type="number" v-model="withdrawMoney" /></span>
         </div>
         <div class="balance">钱包余额￥{{ totalMoeny }}，<span>全部提现</span></div>
         <div class="button-wrapper">
@@ -55,6 +55,10 @@
 
     methods: {
       submitWithdraw() {
+        if (this.withdrawMoney < 0) {
+          mui.toast('请正确填写提现金额');
+          return;
+        }
         if (this.withdrawMoney > this.totalMoeny) {
             mui.toast('提现金额不能大于账户余额');
             return;
