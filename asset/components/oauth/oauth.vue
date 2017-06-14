@@ -98,7 +98,7 @@
                   plus.nativeUI.toast('您尚未安装微信客户端');
                   return;
                 }
-                document.getElementById(service.id).style.display="block";
+                
               }
             }
           },function(e){
