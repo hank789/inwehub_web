@@ -70,7 +70,6 @@
             return;
           }
           mui.toast(response.data.data.tips);
-          this.getWallet();
           this.totalMoeny -= this.withdrawMoney;
         });
       },
