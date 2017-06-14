@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <header class="mui-bar mui-bar-nav">
+    <header class="mui-bar mui-bar-nav mui-bar-top">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back">取消</a>
       <h1 class="mui-title">回答</h1>
     </header>
