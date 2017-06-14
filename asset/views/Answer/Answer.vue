@@ -11,7 +11,7 @@
         <div class="form form-realAnswer">
             <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)"></Meditor>
 
-            <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
+            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
 
         </div>

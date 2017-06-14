@@ -50,28 +50,10 @@
 
 
       <div class="form form-realAnswer" v-show="answer.question.status==4">
-        <form>
-          <div class="title">在这里留下您的回答：</div>
-          <div class="textarea-wrapper">
 
-            <quill-editor ref="myTextEditor"
-                          v-model="description"
-                          :options="editorOption"
-                          @change="onEditorChange($event)"
-                          @blur="onEditorBlur($event)"
-                          @focus="onEditorFocus($event)"
-                          @ready="onEditorReady($event)">
-            </quill-editor>
-
-            <!--<textarea v-model.trim="description" placeholder="请填写回答"></textarea>-->
-            <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-          </div>
-          <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
-
-          <div class="button-wrapper">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer" :disabled="buttonAnswerDisable">我回答好了</button>
-          </div>
-        </form>
+        <div class="button-wrapper">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容</button>
+        </div>
       </div>
 
 
@@ -624,6 +606,7 @@
 
   .form-realAnswer{
     padding-top:10px;
+    background: #fff;
   }
   .form-realAnswer textarea {
     background: none;
