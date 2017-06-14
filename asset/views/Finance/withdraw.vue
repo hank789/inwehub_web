@@ -63,6 +63,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
+            this.totalMoeny -= this.withdrawMoney;
             return;
           }
           mui.toast(response.data.data.tips);
