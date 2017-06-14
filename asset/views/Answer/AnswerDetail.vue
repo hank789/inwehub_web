@@ -653,9 +653,23 @@
 
   .form-realAnswer{
     padding-top:20px;
+    padding-bottom:20px;
     background: #fff;
     position: relative;
   }
+
+  .form-realAnswer:after{
+    position: absolute;
+    content: '';
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
+
   .form-realAnswer textarea {
     background: none;
     width:100%;
