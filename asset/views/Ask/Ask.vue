@@ -238,6 +238,9 @@
       },
       showMoney(){
 
+        var inputElem = document.querySelector('textarea');
+        inputElem.blur();
+
         if (!this.type) {
           mui.toast('请选择问题分类');
           return;
