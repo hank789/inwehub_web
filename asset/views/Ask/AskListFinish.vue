@@ -161,6 +161,7 @@
         });
       },
       isFromDetail(){
+        return false;
         var referer = localEvent.getLocalItem('referer');
         if (/\/ask\/[0-9]+/.test(referer.path)) {
             return true;

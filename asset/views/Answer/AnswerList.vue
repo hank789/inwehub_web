@@ -219,6 +219,7 @@
         });
       },
       isFromDetail(){
+        return false;
         var referer = localEvent.getLocalItem('referer');
         if (/\/answer\/[0-9]+/.test(referer.path)) {
           return true;
