@@ -20,6 +20,7 @@
 
   import Quill from 'quill';
   import { ImageImport } from '../../js/modules/ImageImport.js';
+  import Sortable from "sortablejs/Sortable";
 
   var renderer  = require('quilljs-renderer');
   var Document  = renderer.Document;
@@ -75,6 +76,9 @@
     methods:{
       onEditorChange(editor){
         this.descLength = editor.editor.getLength()-1;
+
+        var el = document.getElementsByClassName('ql-editor')[0];
+        var sortable = Sortable.create(el);
       },
       onEditorBlur(editor) {
         //console.log('editor blur!', editor)
@@ -85,6 +89,9 @@
       onEditorReady(editor) {
         this.editorObj = editor;
         this.$emit('ready', editor)
+
+
+
       },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
