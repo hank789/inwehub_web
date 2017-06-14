@@ -55,7 +55,7 @@
           <li class="mui-table-view-cell">
             <div class="mui-input-row">
               <div><label>支付方式</label><label
-                class="mui-pull-right account-setting-field apple-icon"><span class="fa fa-apple"></span></label></div>
+                class="mui-pull-right account-setting-field apple-icon"><span :class="'fa '+getMethodIcon()"></span></label></div>
             </div>
           </li>
         </ul>
@@ -171,6 +171,13 @@
       this.check();
     },
     methods: {
+      getMethodIcon(){
+        if (mui.os.plus && mui.os.ios) {
+          return 'fa-apple';
+        }
+
+        return 'fa-wechat';
+      },
       selectMajor2(){
         if (mui.os.plus) {
           var a = [{
@@ -617,7 +624,7 @@
     text-align: right;
   }
 
-  .selectMoney .fa-apple{
+  .selectMoney .fa-apple,.selectMoney .fa-wechat{
     color:rgba(138,138,138,100);
     opacity: 0.67;
     font-size:25px;
