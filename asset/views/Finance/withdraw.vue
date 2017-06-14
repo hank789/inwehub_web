@@ -18,7 +18,7 @@
         <div class="balance">钱包余额￥{{ totalMoeny }}，<span>全部提现</span></div>
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="">提现
+                  @tap.stop.prevent="submitWithdraw">提现
               </button>
         </div>
         <div class="help">预计5个工作日到账</div>
@@ -44,21 +44,7 @@
       bindWeixinNickname: '' //绑定微信昵称
     }),
     created () {
-      postRequest(`account/wallet`, {}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          this.$router.go(-1);
-        }
-
-        this.totalMoeny = response.data.data.total_money;
-        this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
-        this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
-        this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
-        this.loading = 0;
-        this.isBindWeixin = response.data.data.is_bind_weixin;
-        this.bindWeixinNickname = response.data.data.bind_weixin_nickname;
-      });
+        this.getWallet();
     },
     computed: {
 
@@ -68,8 +54,37 @@
     },
 
     methods: {
-      check_withdraw() {
+      submitWithdraw() {
+        if (this.withdrawMoney > this.totalMoeny) {
+            mui.toast('提现金额不能大于账户余额');
+            return;
+        }
+        postRequest(`withdraw/request`, {amount: this.withdrawMoney}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+          mui.toast(response.data.data.tips);
+          this.getWallet();
+        });
+      },
+      getWallet() {
+        postRequest(`account/wallet`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
 
+          this.totalMoeny = response.data.data.total_money;
+          this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
+          this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
+          this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
+          this.loading = 0;
+          this.isBindWeixin = response.data.data.is_bind_weixin;
+          this.bindWeixinNickname = response.data.data.bind_weixin_nickname;
+        });
       }
     },
     watch: {
