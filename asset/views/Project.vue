@@ -367,7 +367,7 @@
     position: fixed;
     bottom:70px;
     left:50%;
-    z-index: 2;
+    z-index: 997;
     margin-left:-62px;
   }
 
