@@ -78,7 +78,10 @@
         this.descLength = editor.editor.getLength()-1;
 
         var el = document.getElementsByClassName('ql-editor')[0];
-        var sortable = Sortable.create(el);
+        var sortable = Sortable.create(el, {
+          ghostClass: "meditor-ghost",
+          chosenClass: "meditor-chosen"
+        });
       },
       onEditorBlur(editor) {
         //console.log('editor blur!', editor)
