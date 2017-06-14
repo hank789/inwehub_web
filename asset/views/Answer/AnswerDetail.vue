@@ -51,6 +51,17 @@
 
       <div class="form form-realAnswer" v-show="answer.question.status==4">
 
+        <span class="time" v-if="startCountdown(answer.question)">倒计时<count-down :start-time="currentTime"
+                                                                      :end-time="getEndTime(answer.question)"
+                                                                      :dayTxt="':'" :hourTxt="':'"
+                                                                      :minutesTxt="':'"></count-down></span>
+
+        <span class="time" v-else-if="isTimeout(answer.question)"><b>已超时</b><timeago :since="timeago(answer.question.promise_answer_time)"
+                                                                          :auto-update="60"></timeago></span>
+
+        <span class="time" v-else><b v-show="isTimeout(answer.question)">已超时</b><timeago
+          :since="timeago(answer.question.created_at)" :auto-update="60"></timeago></span>
+
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容</button>
         </div>
@@ -135,12 +146,14 @@
 
 
   import { quillEditor } from '../../components/vue-quill';
+  import CountDown from 'vue2-countdown';
 
   const AnswerDetail = {
     data: () => ({
       showRating: false,
       readOnly: true,
       id: null,
+      currentTime: (new Date()).getTime(),
       answer: {
         answers: [{
           promise_time: null
@@ -182,7 +195,8 @@
       editorReadObj:{}
     }),
     components: {
-      quillEditor
+      quillEditor,
+      CountDown
     },
     computed: {
       editor() {
@@ -199,6 +213,39 @@
 
     },
     methods: {
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      },
+      isTimeout(question){
+        if (!question.promise_answer_time) {
+          return false;
+        }
+
+        var endtime = this.getEndTime(question);
+        var currentTime = (new Date()).getTime() / 1000;
+        if (endtime < currentTime) {
+          return true;
+        }
+
+        return false;
+      },
+      startCountdown(question){
+        var endtime = this.getEndTime(question);
+        var currentTime = (new Date()).getTime() / 1000;
+        if (endtime < currentTime) {
+          return false;
+        }
+        return true;
+      },
+      getEndTime(question){
+        var deadline = question.promise_answer_time;
+        if (deadline) {
+          return Date.parse(deadline.replace(/-/g, "/")) / 1000;
+        }
+        return null;
+      },
       docToHtml(docs){
         var doc = new Document(docs);
         return doc.convertTo('html');
@@ -605,8 +652,9 @@
   }
 
   .form-realAnswer{
-    padding-top:10px;
+    padding-top:20px;
     background: #fff;
+    position: relative;
   }
   .form-realAnswer textarea {
     background: none;
@@ -621,8 +669,21 @@
 
 
   .form-realAnswer .button-wrapper{
-    margin-top:15px;
+    margin-top:30px;
     padding:0 50px 15px;
+  }
+
+  .form-realAnswer .time{
+    font-size:14px;
+    color:#ff9800;
+    position: absolute;
+    top:15px;
+    right: 16px;
+  }
+
+  .form-realAnswer .time b {
+    font-weight:normal;
+    margin-right:5px;
   }
 
   .textarea-wrapper{
@@ -660,5 +721,10 @@
 
   .richText{
     display: inline-block;
+  }
+
+  .time div {
+    display: inline-block;
+    margin-left:5px;
   }
 </style>
