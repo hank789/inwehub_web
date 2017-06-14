@@ -24,7 +24,7 @@
                   <div class="mui-media-body">
                     <span class="username">{{ item.user_name }}</span>
                     <div class="site-desc mui-ellipsis-3">
-                      {{ item.description }}
+                      {{ item.description }}&nbsp;
 
 
                     </div>
