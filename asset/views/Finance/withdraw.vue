@@ -35,7 +35,7 @@
   export default {
     data: () => ({
       loading: true,
-      withdrawMoney:0,
+      withdrawMoney:'',
       totalMoeny:'--',
       settlementMoney:'--',  //结算中的资金
       withdrawMinMoney:'--', //用户单次最低提现金额
@@ -67,11 +67,11 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.totalMoeny -= this.withdrawMoney;
             return;
           }
           mui.toast(response.data.data.tips);
           this.getWallet();
+          this.totalMoeny -= this.withdrawMoney;
         });
       },
       getWallet() {
