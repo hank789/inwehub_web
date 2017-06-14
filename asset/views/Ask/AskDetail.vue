@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="mui-table-view-cell question content">
-          提问：{{ ask.question.description }}
+          提问：<br/>{{ ask.question.description }}
 
         </div>
         <div class="collectWrapper">
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="mui-table-view-cell question content">回答：<div class="richText"><quill-editor ref="myTextEditorRead"
+        <div class="mui-table-view-cell question content">回答：<br/><div class="richText"><quill-editor ref="myTextEditorRead"
                                                                                                  :options="editorOptionRead" @ready="onEditorReadyRead($event)">
         </quill-editor></div></div>
       </div>
@@ -68,7 +68,7 @@
       <div class="mui-table-view detail-comment-result" v-if="ask.question.status==7">
 
         <div class="mui-table-view-cell content">
-          评价：{{ ask.feedback.description }}
+          评价：<br/>{{ ask.feedback.description }}
 
         </div>
         <div class="mui-table-view-cell">

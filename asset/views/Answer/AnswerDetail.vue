@@ -27,7 +27,7 @@
           </div>
 
         </div>
-        <div class="mui-table-view-cell question content">提问：{{ answer.question ? answer.question.description : '' }}</div>
+        <div class="mui-table-view-cell question content">提问：<br/>{{ answer.question ? answer.question.description : '' }}</div>
       </div>
 
       <div class="mui-row buttons" v-show="answer.question.status==2">
@@ -96,7 +96,7 @@
 
         </div>
 
-        <div class="mui-table-view-cell question content">回答：<div class="richText"><quill-editor ref="myTextEditorRead"
+        <div class="mui-table-view-cell question content">回答：<br/><div class="richText"><quill-editor ref="myTextEditorRead"
                                                                            :options="editorOptionRead"
                                                                            @change="onEditorChange($event)"
                                                                            @blur="onEditorBlur($event)"
