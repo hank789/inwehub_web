@@ -62,6 +62,8 @@
         if (!patrn.test(newMoney) && newMoney !== '') {
            this.withdrawMoney = oldMoney;
         }
+
+        this.withdrawMoney = parseFloat(this.withdrawMoney);
       }
     },
     methods: {
@@ -72,6 +74,8 @@
            this.withdrawMoney =this.totalMoeny;
       },
       submitWithdraw() {
+
+        this.withdrawMoney = parseFloat(this.withdrawMoney);
 
         if (!this.isBindWeixin) {
           mui.toast('请先绑定微信');
