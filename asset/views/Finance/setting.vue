@@ -107,7 +107,7 @@
   }
 
   .mui-table-view-cell {
-    padding: 0;
+    padding: 5px 0;
   }
 
 
