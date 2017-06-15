@@ -49,7 +49,20 @@
     data: () => ({
       list: [],
       totalMoney: localEvent.getLocalItem('wallet').totalMoney,
-      loading: true
+      loading: true,
+      topId () {
+        if (this.list.length) {
+          return this.list[0].id;
+        }
+        return 0;
+      },
+      bottomId () {
+        var length = this.list.length;
+        if (length) {
+          return this.list[length-1].id;
+        }
+        return 0;
+      }
     }),
     computed: {},
     mounted(){

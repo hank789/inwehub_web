@@ -56,7 +56,14 @@
     components: {
       oauth
     },
-
+    watch:{
+      withdrawMoney: function (newMoney, oldMoney) {
+        var patrn=/^(([1-9]\d{0,8})|0)(\.\d{1,2})?$/;
+        if (!patrn.test(newMoney) && newMoney !== '') {
+           this.withdrawMoney = oldMoney;
+        }
+      }
+    },
     methods: {
       bindSuccess(){
           this.getWallet();
@@ -108,9 +115,6 @@
           this.withdraw_day_limit = data.withdraw_day_limit;
         });
       }
-    },
-    watch: {
-
     }
   }
 </script>
