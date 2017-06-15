@@ -47,7 +47,8 @@
           imageImport: true
         }
       },
-      editorObj:{}
+      editorObj:{},
+      sortable:null
     }),
     props: {
       content:{
@@ -78,9 +79,11 @@
         this.descLength = editor.editor.getLength()-1;
 
         var el = document.getElementsByClassName('ql-editor')[0];
-        var sortable = Sortable.create(el, {
+
+        this.sortable = Sortable.create(el, {
           ghostClass: "meditor-ghost",
-          chosenClass: "meditor-chosen"
+          chosenClass: "meditor-chosen",
+          forceFallback:true
         });
       },
       onEditorBlur(editor) {
