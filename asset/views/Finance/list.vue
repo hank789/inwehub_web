@@ -14,7 +14,8 @@
           <div class="mui-table-view-cell">
             <div class="first">
               <span class="title">{{ item.title }}</span>
-              <span class="m">{{ item.change_money*item.io }}元</span>
+              <span class="m add" v-if="item.change_money*item.io>0">+{{ item.change_money*item.io }}</span>
+              <span class="m reduce" v-else>{{ item.change_money*item.io }}</span>
             </div>
             <div class="second">
               <span class="status">{{ getStates(item) }}</span>
@@ -53,6 +54,7 @@
         }
 
         this.list = response.data.data;
+
         this.loading = false;
       });
     },
@@ -115,12 +117,18 @@
     font-weight:bold;
     float:right;
   }
+
+  .item .first .m.add{
+    color:#37A18E;
+  }
+
   .item .second{
     font-size:12px;
     color:#101010;
   }
   .item .second .time{
     float:right;
+    color:#9B9B9B;
   }
   .type{
     color:#8c8c8c;
@@ -129,10 +137,16 @@
     line-height:30px;
   }
   .list{
+    margin-top:10px;
     background: #fff;
   }
   .empty{
     background: #fff;
     text-align: center;
+    margin-top:10px !important;
+  }
+
+  .status{
+    color:#9B9B9B;
   }
 </style>

@@ -9,7 +9,7 @@
 
     <div class="mui-content">
       <div class="withdraw">
-        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><span class="wechatBind mui-navigate-right" v-else>前往绑定</span></div>
+        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><oauth class="wechatBind mui-navigate-right" :content="'前往绑定'" v-else></oauth></div>
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
@@ -58,7 +58,13 @@
 
     methods: {
       submitWithdraw() {
-        if (this.withdrawMoney < 0) {
+
+        if (!this.isBindWeixin) {
+          mui.toast('请先绑定微信');
+          return;
+        }
+
+        if (!this.withdrawMoney || this.withdrawMoney < 0) {
           mui.toast('请正确填写提现金额');
           return;
         }

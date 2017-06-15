@@ -1,5 +1,5 @@
 <template>
-    <span id="weixin" @tap.stop.prevent="login('weixin')">绑定微信</span>
+    <span @tap.stop.prevent="login('weixin')">{{ content }}</span>
 </template>
 
 <script>
@@ -12,12 +12,23 @@
         oauth_waiting: null
       }
     },
-    props: [],
+    props: {
+      content:{
+        type: String,
+        default: '绑定微信'
+      },
+    },
     components:{
     },
     methods: {
       login(id){
-        console.log(id);
+
+        if (!mui.os.plus) {
+          mui.alert('仅支持app');
+          return;
+        }
+
+
         var auth=this.oauth_services[id];
         if(auth){
           var w=null;
@@ -98,7 +109,7 @@
                   plus.nativeUI.toast('您尚未安装微信客户端');
                   return;
                 }
-                
+
               }
             }
           },function(e){
