@@ -49,7 +49,9 @@
     data: () => ({
       list: [],
       totalMoney: localEvent.getLocalItem('wallet').totalMoney,
-      loading: true,
+      loading: true
+    }),
+    computed: {
       topId () {
         if (this.list.length) {
           return this.list[0].id;
@@ -63,8 +65,7 @@
         }
         return 0;
       }
-    }),
-    computed: {},
+    },
     mounted(){
 
       var that = this;
@@ -128,7 +129,6 @@
         });
       },
       getNextList() {
-
         postRequest(`account/money_log`, {bottom_id: this.bottomId}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
