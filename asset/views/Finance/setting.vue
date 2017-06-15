@@ -42,7 +42,7 @@
     }),
     methods: {
       binded(){
-          mui.alert('绑定后不可修改，如有问题请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了');
+          mui.alert('绑定后不可修改，如有问题请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了', null, 'div');
       },
       bindSuccess(){
         this.getWallet();
