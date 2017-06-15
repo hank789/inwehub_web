@@ -58,7 +58,7 @@
     },
     watch:{
       withdrawMoney: function (newMoney, oldMoney) {
-        var patrn=/^(([1-9]\d{0,8})|0)(\.\d{1,2})?$/;
+        var patrn=/^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
         if (!patrn.test(newMoney) && newMoney !== '') {
            this.withdrawMoney = oldMoney;
         }
