@@ -209,6 +209,7 @@
     font-size:40px;
     padding:0;
     margin:0;
+    height:50px;
     text-align: left;
   }
   .balance{
