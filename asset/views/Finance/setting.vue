@@ -17,7 +17,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <div class="mui-navigate-right"><label>绑定微信</label><label
-              class="mui-pull-right account-setting-field" v-if="isBindWeixin">{{ bindWeixinNickname }}</label><label v-else><oauth @success="bindSuccess" class="mui-pull-right account-setting-field bind-warning" :content="'前往绑定'" ></oauth></label></div>
+              class="mui-pull-right account-setting-field" @tap.stop.prevent="binded"  v-if="isBindWeixin">{{ bindWeixinNickname }}</label><label v-else><oauth @success="bindSuccess" class="mui-pull-right account-setting-field bind-warning" :content="'前往绑定'" ></oauth></label></div>
           </div>
         </li>
       </ul>
@@ -41,6 +41,9 @@
       phone:'',
     }),
     methods: {
+      binded(){
+          mui.alert('绑定后不可修改，如有问题请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了');
+      },
       bindSuccess(){
         this.getWallet();
       },
