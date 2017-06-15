@@ -28,6 +28,8 @@
           return;
         }
 
+        var self = this;
+
 
         var auth=this.oauth_services[id];
         if(auth){
@@ -65,7 +67,7 @@
               });
               plus.nativeUI.alert("欢迎“"+nickname+"”登录！");
 
-              this.$emit('success', nickname)
+              self.$emit('success', nickname);
 
             },function(e){
               console.log("获取用户信息失败：");
