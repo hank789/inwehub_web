@@ -6,7 +6,7 @@
       <h1 class="mui-title">安全设置</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
@@ -17,7 +17,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <div class="mui-navigate-right"><label>绑定微信</label><label
-              class="mui-pull-right account-setting-field" v-if="isBindWeixin">{{ bindWeixinNickname }}</label><label v-else><oauth class="mui-pull-right account-setting-field bind-warning" :content="'前往绑定'" ></oauth></label></div>
+              class="mui-pull-right account-setting-field" v-if="isBindWeixin">{{ bindWeixinNickname }}</label><label v-else><oauth @success="bindSuccess" class="mui-pull-right account-setting-field bind-warning" :content="'前往绑定'" ></oauth></label></div>
           </div>
         </li>
       </ul>
@@ -35,12 +35,29 @@
 
   export default {
     data: () => ({
+      loading:1,
       isBindWeixin:0,
       bindWeixinNickname:'',
       phone:'',
     }),
     methods: {
+      bindSuccess(){
+        this.getWallet();
+      },
+      getWallet(){
+        postRequest(`account/wallet`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            this.$router.go(-1);
+          }
 
+          this.isBindWeixin = response.data.data.is_bind_weixin;
+          this.bindWeixinNickname = response.data.data.bind_weixin_nickname;
+          this.phone = response.data.data.user_phone;
+          this.loading = 0;
+        });
+      }
     },
     mounted () {
 
@@ -50,17 +67,7 @@
     },
 
     created () {
-      postRequest(`account/wallet`, {}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          this.$router.go(-1);
-        }
-
-        this.isBindWeixin = response.data.data.is_bind_weixin;
-        this.bindWeixinNickname = response.data.data.bind_weixin_nickname;
-        this.phone = response.data.data.user_phone;
-      });
+      this.getWallet();
     }
   }
 </script>

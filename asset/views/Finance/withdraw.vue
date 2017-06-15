@@ -7,15 +7,15 @@
     </header>
 
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="withdraw">
-        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><oauth class="wechatBind mui-navigate-right" :content="'前往绑定'" v-else></oauth></div>
+        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="'前往绑定'" v-else></oauth></div>
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
           <span class="amount"><input type="number" v-model="withdrawMoney" /></span>
         </div>
-        <div class="balance" v-if="isBindWeixin">可提现余额 ￥{{ totalMoeny }}<span>全部提现</span></div>
+        <div class="balance" v-if="isBindWeixin">可提现余额 ￥{{ totalMoeny }}<span @tap.stop.prevent="withdrawAll">全部提现</span></div>
         <div class="balance balance-warning" v-else>还未绑定微信账户</div>
       </div>
 
@@ -24,7 +24,7 @@
                 @tap.stop.prevent="submitWithdraw">确认提现
               </button>
       </div>
-      <div class="help">今日还可提现1次<br/>每次提现最低1元，最高2000元</div>
+      <div class="help">今日还可提现{{ withdraw_day_limit }}次<br/>每次提现最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元</div>
 
     </div>
 
@@ -44,6 +44,7 @@
       withdrawMinMoney:'--', //用户单次最低提现金额
       withdrawMaxMoney:'--', //用户单次最高提现金额
       isBindWeixin: 0, //是否绑定微信
+      withdraw_day_limit:'--',
       bindWeixinNickname: '' //绑定微信昵称
     }),
     created () {
@@ -57,6 +58,12 @@
     },
 
     methods: {
+      bindSuccess(){
+          this.getWallet();
+      },
+      withdrawAll(){
+           this.withdrawMoney =this.totalMoeny;
+      },
       submitWithdraw() {
 
         if (!this.isBindWeixin) {
@@ -90,13 +97,15 @@
             this.$router.go(-1);
           }
 
-          this.totalMoeny = response.data.data.total_money;
-          this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
-          this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
-          this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
+          var data = response.data.data;
+          this.totalMoeny = data.total_money;
+          this.settlementMoney = parseFloat(data.pay_settlement_money);
+          this.withdrawMinMoney = data.withdraw_per_min_money;
+          this.withdrawMaxMoney = data.withdraw_per_max_money;
           this.loading = 0;
-          this.isBindWeixin = response.data.data.is_bind_weixin;
-          this.bindWeixinNickname = response.data.data.bind_weixin_nickname;
+          this.isBindWeixin = data.is_bind_weixin;
+          this.bindWeixinNickname = data.bind_weixin_nickname;
+          this.withdraw_day_limit = data.withdraw_day_limit;
         });
       }
     },
