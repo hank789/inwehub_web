@@ -315,6 +315,14 @@ input, textarea, select{
   background: url("../statics/images/expert.png");
 }
 
+.myicon-money-record{
+  background: url("../statics/images/icon-money-record.png");
+}
+
+.myicon-withdraw{
+  background: url("../statics/images/icon-withdraw.png");
+}
+
 a.mailLink{
   color:#4990e2;
 }

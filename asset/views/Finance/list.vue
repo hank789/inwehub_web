@@ -3,20 +3,13 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">账单明细</h1>
+      <h1 class="mui-title">交易记录</h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div class="myMoney mui-table-view">
-        <div class="mui-table-view-cell">
-          <span class="mui-icon fa fa-diamond"></span>
-          <div class="money">{{ totalMoney }}</div>
-          <div class="unit">余额 （元）</div>
-        </div>
-      </div>
-      <div class="type">交易记录</div>
-      <div class="empty mui-table-view"><div class="mui-table-view-cell">暂无记录</div></div>
-      <div class="list">
+      <div class="empty mui-table-view" v-if="!list.length"><div class="mui-table-view-cell">暂无记录</div></div>
+
+      <div class="list" v-else>
         <div class="item mui-table-view" v-for="(item, index) in list">
           <div class="mui-table-view-cell">
             <div class="first">

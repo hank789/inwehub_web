@@ -3,28 +3,35 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的钱包</h1>
-      <a @tap.stop.prevent="$router.push('/my/finance/list')"
-         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">账单明细</a>
+      <a @tap.stop.prevent="$router.push('/my/finance/setting')"
+         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">安全设置</a>
     </header>
 
     <div class="mui-content" v-show="!loading">
       <div class="myMoney">
 
-        <span class="mui-icon fa fa-diamond"></span>
-        <div class="money">{{ totalMoeny }}</div>
-        <div class="unit">余额 （元）</div>
-        <div class="info"><span v-show="settlementMoney">您有 {{ settlementMoney }} 元正在结算处理中</span></div>
+        <div class="title">钱包余额</div>
+        <div class="money"><span>¥</span>{{ totalMoeny }}</div>
 
-        <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/my/finance/withdraw')" v-if="totalMoeny != 0.00">提现
-              </button>
-
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled" v-else>提现
-              </button>
-        </div>
-        <div class="help">每天可申请提现一次，每次最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元</div>
       </div>
+
+
+      <div class="menus">
+          <div class="mui-row ">
+            <div class="mui-col-sm-6 mui-col-xs-6 menu-item" @tap.stop.prevent="$router.push('/my/finance/list')">
+              <span class="myicon myicon-money-record"></span>
+              <br/>
+              <span class="title">交易记录</span>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 menu-item" @tap.stop.prevent="$router.push('/my/finance/withdraw')">
+              <span class="myicon myicon-withdraw"></span>
+              <br/>
+              <span class="title">余额提现</span>
+            </div>
+          </div>
+          <div class="menu-splite"></div>
+      </div>
+
     </div>
 
   </div>
@@ -81,38 +88,62 @@
 
 <style scoped>
   .myMoney{
-    padding:30px;
-    position: relative;
+     background: #161616;
+     height:136px;
+     color:#fff;
+     padding:20px 30px;
+  }
+
+  .myMoney .title{
+    font-size:14px;
+  }
+
+  .myMoney span{
+    font-size:24px;
+    margin-right:10px;
+    font-weight:normal;
+  }
+
+  .myMoney .money{
+    margin-top:30px;
+    font-size:44px;
+    font-weight: 200;
+  }
+
+  .menus{
+      position: relative;
+  }
+  .menus .menu-item{
     text-align: center;
-  }
-  .fa{
-    position: relative;
-    font-size:58px;
-    left: -110px;
-    top: 46px;
-    color:#ff9800;
+    height:92px;
+    background: #fff;
+    display: inline-block;
   }
 
-  .info{
-    font-size:13px;
-    color:#101010;
-    margin:70px 0 5px;
-  }
-  .money{
-    font-size:38px;
-    color:#101010;
-  }
-
-  .unit{
+  .menus .menu-item .myicon{
     margin-top:20px;
-    color:#101010;
-    font-size:16px;
+    display: inline-block;
+    width:30px;
+    height:21px;
   }
-  .button-wrapper{
-    padding:0 50px;
+
+  .menus .menu-item .title{
+    display: inline-block;
+    font-size:14px;
+    margin-top:10px;
   }
-  .help{
-    color:#757575;
-    font-size:12px;
+
+  .menus .menu-splite{
+    position: absolute;
+    width: 1px;
+    height: 66px;
+    background-color: #D9D9D9;
+    top:13px;
+    left:50%;
+
+    -webkit-transform: scaleX(.5);
+    transform: scaleX(.5);
   }
+
+
 </style>

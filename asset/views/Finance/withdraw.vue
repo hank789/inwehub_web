@@ -3,26 +3,29 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">提取现金</h1>
+      <h1 class="mui-title">余额提现</h1>
     </header>
 
 
     <div class="mui-content">
       <div class="withdraw">
-        <div class="title">提现到微信账户 <span v-if="isBindWeixin">{{ bindWeixinNickname }}</span> <oauth v-else></oauth></div>
+        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><span class="wechatBind mui-navigate-right" v-else>前往绑定</span></div>
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
           <span class="amount"><input type="number" v-model="withdrawMoney" /></span>
         </div>
-        <div class="balance">钱包余额￥{{ totalMoeny }}，<span>全部提现</span></div>
-        <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="submitWithdraw">提现
-              </button>
-        </div>
-        <div class="help">预计5个工作日到账</div>
+        <div class="balance" v-if="isBindWeixin">可提现余额 ￥{{ totalMoeny }}<span>全部提现</span></div>
+        <div class="balance balance-warning" v-else>还未绑定微信账户</div>
       </div>
+
+      <div class="button-wrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="submitWithdraw">确认提现
+              </button>
+      </div>
+      <div class="help">今日还可提现1次<br/>每次提现最低1元，最高2000元</div>
+
     </div>
 
   </div>
@@ -101,56 +104,103 @@
 <style scoped>
 
   .withdraw{
-    border:1px solid #bbb;
-    margin:20px;
+    margin:10px 0;
+    font-size:14px;
     background: #fff;
-    height:320px;
+    position: relative;
   }
 
-  .title{
-    padding:20px;
-    border-bottom:1px solid #bbb;
+  .withdraw .wechatName{
+    float:right;
   }
+
+  .withdraw .wechatBind{
+    float:right;
+    margin-right:18px;
+    color:#4990E2;
+  }
+
+  .withdraw:before{
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
+
+
+  .title{
+    padding:15px;
+    position: relative;
+  }
+
+  .title:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 30px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
+
   .title span{
-    color:#ff9800;
     margin-left:10px;
   }
   .tip{
     margin-top:15px;
-    padding-left:20px;
+    padding-left:15px;
   }
   .textArea{
-    margin:40px 30px 0 30px;
-    text-align: center;
-    padding-left:20px;
+    margin:30px 0 0 15px;
+    padding-left:0;
     padding-bottom:10px;
-    border-bottom:1px solid #bbb;
+    position: relative;
 
   }
+  .textArea:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
   .unit{
-    font-size:38px;
+    color:#37A18E;
+    font-size:24px;
+    margin-left:-2px;
   }
   .amount{
-    font-size:48px;
-    color:#888;
-    width: 120px;
+    color:#37A18E;
+    width:70%;
     display: inline-block;
   }
   .amount input{
     border:none;
-    font-size:30px;
+    font-size:40px;
     padding:0;
     margin:0;
     text-align: left;
   }
   .balance{
-    margin-top:10px;
-    font-size:12px;
-    padding-left:20px;
+    padding:15px 0 15px 15px;
+    font-size:14px;
     color:#757575;
   }
   .balance span{
-    color:#5677fc;
+    color:#4990E2;
+    float: right;
+    margin-right:30px;
     font-size:14px;
   }
   .button-wrapper{
@@ -158,9 +208,14 @@
     margin-top:20px;
   }
   .help{
-    color:#757575;
-    font-size:12px;
+    margin-top:20px;
+    color:#9B9B9B;
+    line-height: 25px;
+    font-size:14px;
     text-align: center;
+  }
+  .balance-warning{
+    color:#E3533E;
   }
 
 </style>
