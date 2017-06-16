@@ -56,10 +56,21 @@
           return;
         }
 
+        // 提问设备，1为IOS，2为安卓，3为网页，4为微信小程序
+        var device = 1;
+        if (mui.os.plus) {
+          if (mui.os.android) {
+            device = 2;
+          }
+        } else {
+          device = 3;
+        }
+
         var data = {
           question_id: this.id,
           description: this.description,
-          promise_time: ''
+          promise_time: '',
+          device: device
         };
 
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {

@@ -341,7 +341,15 @@
           return;
         }
 
-
+        // 提问设备，1为IOS，2为安卓，3为网页，4为微信小程序
+        var device = 1;
+        if (mui.os.plus) {
+            if (mui.os.android) {
+              device = 2;
+            }
+        } else {
+          device = 3;
+        }
 
         var data = {
           order_id: order_id,
@@ -349,7 +357,8 @@
           tags: this.type.split(':')[1],
           price: this.money,
           description: this.description,
-          hide: this.hide
+          hide: this.hide,
+          device: device
         };
 
         mui('#sheet1').popover('toggle');
