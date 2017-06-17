@@ -111,7 +111,7 @@
                 this.oauth_services[service.id]=service;
                 var is_installed = isInstalled(service.id);
                 if (!is_installed){
-                  plus.nativeUI.toast('您尚未安装微信客户端');
+                  //plus.nativeUI.toast('您尚未安装微信客户端');
                   return;
                 }
 
