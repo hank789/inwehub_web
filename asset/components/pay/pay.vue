@@ -153,7 +153,7 @@
               }
               this.pays[channel.id] = channel;
               //document.getElementById(channel.id).style.display = "block";
-              checkServices(channel);
+              //checkServices(channel);
             }
           }, function (e) {
             mui.toast('获取支付通道失败：' + e.message);
