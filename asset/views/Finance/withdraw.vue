@@ -9,22 +9,30 @@
 
     <div class="mui-content" v-show="!loading">
       <div class="withdraw">
-        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span><oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="'前往绑定'" v-else></oauth></div>
+        <div class="title">提现至微信账户 <span class="wechatName" v-if="isBindWeixin">{{ bindWeixinNickname }}</span>
+          <oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="'前往绑定'" v-else></oauth>
+        </div>
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
-          <span class="amount"><input type="text" v-model="withdrawMoney" /></span>
+          <span class="amount"><input type="text" autocorrect="off" autocomplete="off" v-model="withdrawMoney"/></span>
         </div>
-        <div class="balance" v-if="isBindWeixin">可提现余额 ￥{{ totalMoeny }}<span @tap.stop.prevent="withdrawAll">全部提现</span></div>
-        <div class="balance balance-warning" v-else>还未绑定微信账户</div>
+        <div class="balance" v-if="!getWarning">可提现余额 ￥{{ totalMoeny }}<span @tap.stop.prevent="withdrawAll">全部提现</span>
+        </div>
+
+        <div class="balance balance-warning" v-else>{{warning}}</div>
       </div>
+
+      <div class="unFinish" v-show="settlementMoney">尚有 ￥{{settlementMoney}} 结算处理中</div>
 
       <div class="button-wrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="submitWithdraw">确认提现
-              </button>
+                @tap.stop.prevent="submitWithdraw" :disabled="isDisabled">确认提现
+
+        </button>
       </div>
-      <div class="help">今日还可提现{{ withdraw_day_limit }}次<br/>每次提现最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元</div>
+      <div class="help">今日还可提现{{ withdraw_day_remain }}次<br/>每次提现最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元
+      </div>
 
     </div>
 
@@ -38,50 +46,78 @@
   export default {
     data: () => ({
       loading: true,
-      withdrawMoney:'',
-      totalMoeny:'--',
-      settlementMoney:'--',  //结算中的资金
-      withdrawMinMoney:'--', //用户单次最低提现金额
-      withdrawMaxMoney:'--', //用户单次最高提现金额
+      withdrawMoney: '',
+      totalMoeny: '--',
+      settlementMoney: '--',  //结算中的资金
+      withdrawMinMoney: '--', //用户单次最低提现金额
+      withdrawMaxMoney: '--', //用户单次最高提现金额
       isBindWeixin: 0, //是否绑定微信
-      withdraw_day_limit:'--',
-      bindWeixinNickname: '' //绑定微信昵称
+      withdraw_day_limit: '--',
+      bindWeixinNickname: '', //绑定微信昵称,
+      withdraw_day_remain:'--',
+      isDisabled: true,
+      warning: ''
     }),
     created () {
-        this.getWallet();
+      this.getWallet();
     },
     computed: {
+      getWarning () {
+        if (!this.isBindWeixin) {
+          this.warning = '还未绑定微信账户';
+          return true;
+        }
 
+        if (this.withdrawMoney > parseFloat(this.totalMoeny)) {
+          this.warning = '已超过可提现余额';
+          return true;
+        }
+
+        if (!this.withdraw_day_remain) {
+          this.warning = '已超出今日提现次数';
+          return true;
+        }
+
+        if (this.withdrawMoney < 1 && this.withdrawMoney > 0) {
+          this.warning = '提现金额不足一元';
+          return true;
+        }
+        
+        return false;
+      },
     },
     components: {
       oauth
     },
-    watch:{
+    watch: {
       withdrawMoney: function (newMoney, oldMoney) {
         if (newMoney === '') {
           this.withdrawMoney = '';
         } else {
-          var patrn=/^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
+          var patrn = /^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
           if (!patrn.test(newMoney)) {
-              if (isNaN(this.withdrawMoney)) {
-                this.withdrawMoney = '';
-              } else {
-                this.withdrawMoney = this.withdrawMoney.slice(0, -1);
-                this.withdrawMoney = parseFloat(this.withdrawMoney);
-              }
+            if (isNaN(this.withdrawMoney)) {
+              this.withdrawMoney = '';
+            } else {
+              this.withdrawMoney = this.withdrawMoney.slice(0, -1);
+              this.withdrawMoney = parseFloat(this.withdrawMoney);
+            }
           }
         }
 
-
-
+        if (this.withdrawMoney <= parseFloat(this.totalMoeny) && this.withdrawMoney > 0) {
+          this.isDisabled = false;
+        } else {
+          this.isDisabled = true;
+        }
       }
     },
     methods: {
       bindSuccess(){
-          this.getWallet();
+        this.getWallet();
       },
       withdrawAll(){
-           this.withdrawMoney =this.totalMoeny;
+        this.withdrawMoney = this.totalMoeny;
       },
       submitWithdraw() {
 
@@ -97,8 +133,8 @@
           return;
         }
         if (this.withdrawMoney > this.totalMoeny) {
-            mui.toast('提现金额不能大于账户余额');
-            return;
+          mui.toast('提现金额不能大于账户余额');
+          return;
         }
         postRequest(`withdraw/request`, {amount: this.withdrawMoney}).then(response => {
           var code = response.data.code;
@@ -107,7 +143,8 @@
             return;
           }
           mui.toast(response.data.data.tips);
-          this.totalMoeny -= this.withdrawMoney;
+
+          this.getWallet();
         });
       },
       getWallet() {
@@ -127,6 +164,9 @@
           this.isBindWeixin = data.is_bind_weixin;
           this.bindWeixinNickname = data.bind_weixin_nickname;
           this.withdraw_day_limit = data.withdraw_day_limit;
+          this.withdraw_day_remain = data.withdraw_day_remain;
+
+
         });
       }
     }
@@ -136,24 +176,24 @@
 
 <style scoped>
 
-  .withdraw{
-    margin:10px 0;
-    font-size:14px;
+  .withdraw {
+    margin: 10px 0;
+    font-size: 14px;
     background: #fff;
     position: relative;
   }
 
-  .withdraw .wechatName{
-    float:right;
+  .withdraw .wechatName {
+    float: right;
   }
 
-  .withdraw .wechatBind{
-    float:right;
-    margin-right:18px;
-    color:#4990E2;
+  .withdraw .wechatBind {
+    float: right;
+    margin-right: 18px;
+    color: #4990E2;
   }
 
-  .withdraw:before{
+  .withdraw:before {
     position: absolute;
     right: 0;
     top: 0;
@@ -165,13 +205,24 @@
     background-color: #c8c7cc;
   }
 
+  .withdraw:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
 
-  .title{
-    padding:15px;
+  .title {
+    padding: 15px;
     position: relative;
   }
 
-  .title:after{
+  .title:after {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -183,21 +234,24 @@
     background-color: #c8c7cc;
   }
 
-  .title span{
-    margin-left:10px;
+  .title span {
+    margin-left: 10px;
   }
-  .tip{
-    margin-top:15px;
-    padding-left:15px;
+
+  .tip {
+    margin-top: 15px;
+    padding-left: 15px;
   }
-  .textArea{
-    margin:30px 0 0 15px;
-    padding-left:0;
-    padding-bottom:10px;
+
+  .textArea {
+    margin: 30px 0 0 15px;
+    padding-left: 0;
+    padding-bottom: 10px;
     position: relative;
 
   }
-  .textArea:after{
+
+  .textArea:after {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -208,48 +262,62 @@
     transform: scaleY(.5);
     background-color: #c8c7cc;
   }
-  .unit{
-    color:#37A18E;
-    font-size:24px;
-    margin-left:-2px;
+
+  .unit {
+    color: #37A18E;
+    font-size: 24px;
+    margin-left: -2px;
   }
-  .amount{
-    color:#37A18E;
-    width:70%;
+
+  .amount {
+    color: #37A18E;
+    width: 70%;
     display: inline-block;
   }
-  .amount input{
-    border:none;
-    font-size:40px;
-    padding:0;
-    margin:0;
-    height:50px;
+
+  .amount input {
+    border: none;
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+    height: 50px;
     text-align: left;
   }
-  .balance{
-    padding:15px 0 15px 15px;
-    font-size:14px;
-    color:#757575;
+
+  .balance {
+    padding: 15px 0 15px 15px;
+    font-size: 14px;
+    color: #757575;
   }
-  .balance span{
-    color:#4990E2;
+
+  .balance span {
+    color: #4990E2;
     float: right;
-    margin-right:30px;
-    font-size:14px;
+    margin-right: 30px;
+    font-size: 14px;
   }
-  .button-wrapper{
-    padding:0 50px;
-    margin-top:20px;
+
+  .button-wrapper {
+    padding: 0 50px;
+    margin-top: 20px;
   }
-  .help{
-    margin-top:20px;
-    color:#9B9B9B;
+
+  .help {
+    margin-top: 20px;
+    color: #9B9B9B;
     line-height: 25px;
-    font-size:14px;
+    font-size: 14px;
     text-align: center;
   }
-  .balance-warning{
-    color:#E3533E;
+
+  .balance-warning {
+    color: #E3533E;
+  }
+
+  .unFinish {
+    color: #9B9B9B;
+    margin-left: 15px;
+    font-size: 14px;
   }
 
 </style>
