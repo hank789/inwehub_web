@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav mui-bar-top">
-      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back">取消</a>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" @tap.stop.prevent="cancelAnswer">取消</a>
       <h1 class="mui-title">回答</h1>
     </header>
 
@@ -41,6 +41,18 @@
       Meditor
     },
     methods: {
+      cancelAnswer(){
+        if (this.editorObj.getLength() <= 1) {
+          this.$router.go(-1);
+          return;
+        }
+
+        mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
+          if (e.index == 0) {
+            this.$router.go(-1);
+          }
+        }, 'div');
+      },
       onEditorReady(editor) {
         this.editorObj = editor;
       },
