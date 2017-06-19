@@ -51,7 +51,8 @@
       descMaxLength: 200,
       description: '',
       loading: true,
-      buttonRefuseDisable:false
+      buttonRefuseDisable:false,
+      needDesc:true
     }),
     computed: {
       nothing () {
@@ -72,6 +73,15 @@
         } else {
           this.sTags.push(tag.value);
         }
+
+        var pos = this.sTags.indexOf(67);
+
+        if (pos >=0 ) {
+            this.needDesc = true;
+        } else {
+            this.needDesc = false;
+        }
+
       },
       speech(){
         var options = {};
@@ -90,7 +100,8 @@
           return;
         }
 
-        if (!this.description) {
+
+        if (this.needDesc && !this.description) {
           mui.toast('请再详细说明下拒绝的原因，非常感谢！');
           return;
         }
