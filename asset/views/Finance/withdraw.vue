@@ -82,7 +82,7 @@
           this.warning = '提现金额不足一元';
           return true;
         }
-        
+
         return false;
       },
     },
@@ -142,9 +142,9 @@
             mui.alert(response.data.message);
             return;
           }
-          mui.toast(response.data.data.tips);
+          //mui.toast(response.data.data.tips);
 
-          this.getWallet();
+          this.$router.push('/paySuccess?account='+ this.bindWeixinNickname +'&money=' + this.withdrawMoney);
         });
       },
       getWallet() {

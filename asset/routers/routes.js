@@ -340,6 +340,16 @@ const routes = [
     }
   },
   { //ask-success
+    path: '/paySuccess',
+    component: require('../views/Pay/PaySuccess.vue'),
+    meta: {
+      title: '余额提现'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { //ask-success
     path: '/askSuccess/:id',
     component: require('../views/Ask/AskSuccess.vue'),
     meta: {
@@ -598,6 +608,8 @@ const routes = [
     path: '/help/question',
     component: require('../views/Help/Question.vue')
   },
+
+
   { // message
     path: '/*',
     component: require('../views/404.vue'),
