@@ -13,7 +13,7 @@
         <div class="tip">提取金额</div>
         <div class="textArea">
           <span class="unit">￥</span>
-          <span class="amount"><input type="number" v-model="withdrawMoney" /></span>
+          <span class="amount"><input type="text" v-model="withdrawMoney" /></span>
         </div>
         <div class="balance" v-if="isBindWeixin">可提现余额 ￥{{ totalMoeny }}<span @tap.stop.prevent="withdrawAll">全部提现</span></div>
         <div class="balance balance-warning" v-else>还未绑定微信账户</div>
@@ -58,12 +58,22 @@
     },
     watch:{
       withdrawMoney: function (newMoney, oldMoney) {
-        var patrn=/^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
-        if (!patrn.test(newMoney) && newMoney !== '') {
-           this.withdrawMoney = oldMoney;
+        if (newMoney === '') {
+          this.withdrawMoney = '';
+        } else {
+          var patrn=/^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
+          if (!patrn.test(newMoney)) {
+              if (isNaN(this.withdrawMoney)) {
+                this.withdrawMoney = '';
+              } else {
+                this.withdrawMoney = this.withdrawMoney.slice(0, -1);
+                this.withdrawMoney = parseFloat(this.withdrawMoney);
+              }
+          }
         }
 
-        this.withdrawMoney = parseFloat(this.withdrawMoney);
+
+
       }
     },
     methods: {
