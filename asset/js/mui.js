@@ -7055,7 +7055,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			//默认显示在底部；
 			$.plusReady(function() {
 				plus.nativeUI.toast(message, {
-					verticalAlign: 'bottom'
+					verticalAlign: 'center'
 				});
 			});
 		} else {
