@@ -37,7 +37,7 @@
         placeholder:'请填写回答',
         modules: {
           toolbar: [
-            ['bold', { 'color': [] }, { 'align': [] }, 'image']
+            ['image']
           ],
           history: {
             delay: 100,
@@ -80,10 +80,26 @@
 
         var el = document.getElementsByClassName('ql-editor')[0];
 
+        var ps  = el.childNodes;
+        for (var i in ps) {
+            var pNode = ps[i];
+            if (pNode.nodeName !== 'P') continue;
+            if (pNode.querySelector('img')) {
+
+                if (!/hasImg/.test(pNode.className)) {
+                  pNode.className += " hasImg";
+                  var handlerObj = document.createElement('img');
+                  handlerObj.className = 'handlerImg';
+                  pNode.appendChild(handlerObj);
+                }
+            }
+        }
+
         this.sortable = Sortable.create(el, {
           ghostClass: "meditor-ghost",
           chosenClass: "meditor-chosen",
-          forceFallback:true
+          forceFallback:true,
+          handle:'.handlerImg'
         });
       },
       onEditorBlur(editor) {
