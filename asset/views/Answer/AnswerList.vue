@@ -6,7 +6,8 @@
       <h1 class="mui-title">我的回答</h1>
     </header>
 
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+
+    <div id="pullrefresh" :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
 
     <div class="mui-content" v-if="nothing == 0">

@@ -6,11 +6,19 @@
       <h1 class="mui-title">交易记录</h1>
     </header>
 
+    <div class="mui-content list-empty" v-show="nothing == 1">
+      <div class="empty mui-table-view">
+        <div class="mui-table-view-cell">
+            暂无记录
+        </div>
+      </div>
+    </div>
 
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+
+    <div id="pullrefresh" :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'emptyList':nothing}">
       <div class="mui-scroll">
 
-        <div class="mui-content" v-if="!loading && list.length">
+        <div class="mui-content" v-show="nothing == 0">
         <div class="list">
           <div class="item mui-table-view" v-for="(item, index) in list">
             <div class="mui-table-view-cell">
@@ -31,11 +39,7 @@
   </div>
 
 
-  <div class="mui-content" v-show="!loading && !list.length">
-    <div class="empty mui-table-view">
-      <div class="mui-table-view-cell">暂无记录</div>
-    </div>
-  </div>
+
 
   </div>
 </template>
@@ -52,6 +56,12 @@
       loading: true
     }),
     computed: {
+      nothing () {
+        if (this.loading) {
+          return -1;
+        }
+        return this.list.length ? 0 : 1;
+      },
       topId () {
         if (this.list.length) {
           return this.list[0].id;
@@ -122,6 +132,8 @@
             this.$router.go(-1);
           }
 
+
+
           if (response.data.data.length > 0) {
             this.list = response.data.data;
           }
@@ -135,6 +147,8 @@
             mui.alert(response.data.message);
             this.$router.go(-1);
           }
+
+
 
           if (response.data.data.length > 0) {
             this.list = this.list.concat(response.data.data);
@@ -214,4 +228,6 @@
   .status {
     color: #9B9B9B;
   }
+
+
 </style>

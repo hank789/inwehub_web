@@ -5,7 +5,7 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper task-list">
+    <div id="pullrefresh"  :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
       <div class="mui-scroll">
         <div v-show="nothing == 0">
           <template v-for="(task, index) in tasks">

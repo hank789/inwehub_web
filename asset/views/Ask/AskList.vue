@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div id="item1" class="mui-control-content mui-active">
+    <div id="item1" :class="{'mui-control-content':true, 'mui-active':true, 'emptyList':nothing}">
 
       <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
         <div class="mui-scroll">

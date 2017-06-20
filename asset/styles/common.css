@@ -466,3 +466,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .textarea-wrapper #toolbar{
 
 }
+
+.emptyList .mui-pull-bottom-pocket{
+  display: none !important;
+}
