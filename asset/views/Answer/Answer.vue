@@ -101,6 +101,16 @@
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
           if (e.index == 1) {
 
+
+            for (var i in data.description.ops) {
+                if (data.description.ops[i].insert.hasOwnProperty('image')) {
+                  if (/drag/.test(data.description.ops[i].insert.image)) {
+                     data.description.ops.splice(i, 1);
+                  }
+                }
+            }
+
+            
             data.description = JSON.stringify(data.description);
 
             postRequest(`answer/store`, data).then(response => {
