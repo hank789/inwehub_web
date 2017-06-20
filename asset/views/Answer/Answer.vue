@@ -110,7 +110,7 @@
                 }
             }
 
-            
+
             data.description = JSON.stringify(data.description);
 
             postRequest(`answer/store`, data).then(response => {
@@ -167,6 +167,7 @@
   }
 
  .answerRichText.blur .form-realAnswer{
+    overflow: hidden;
     height:100%;
  }
 
