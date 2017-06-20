@@ -733,10 +733,6 @@
     margin-top:0;
   }
 
-  .richText{
-    display: inline-block;
-  }
-
   .time div {
     display: inline-block;
     margin-left:5px;
