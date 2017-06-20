@@ -1,7 +1,7 @@
 <template>
   <div class="quill-editor">
-    <slot name="toolbar"></slot>
     <div ref="editor"></div>
+    <slot name="toolbar"></slot>
   </div>
 </template>
 
@@ -124,7 +124,14 @@
                                 .retain(range.index)
                                 .delete(range.length)
                                 .insert({ image: e.target.result })
+                                .insert('\n')
                               , 'user');
+                            setTimeout(function(){
+                              t.quill.setSelection(range.index+2, 'user');
+                              t.quill.focus();
+                            }, 3000);
+
+
                           };
                           reader.readAsDataURL(file);
                         },
@@ -153,9 +160,12 @@
         for(var i in delta.ops) {
           opt = delta.ops[i];
           if (opt.insert.hasOwnProperty('image')) {
-            imageNum++;
+              if (!/drag/.test(opt.insert.image)) {
+                imageNum++;
+              }
           }
         }
+
 
         if (imageNum >= 4) {
           mui.alert('最多可添加4张图片！');
@@ -192,6 +202,10 @@
             }
           })
 
+          self.quill.on('update', () => {
+            self.$emit('blur', self.quill)
+          })
+
           // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
             var html = self.$refs.editor.children[0].innerHTML
@@ -202,7 +216,8 @@
             self.$emit('change', {
               editor: self.quill,
               html: html,
-              text: text
+              text: text,
+              source:source
             })
           })
 
@@ -233,7 +248,10 @@
                         .retain(range.index)
                         .delete(range.length)
                         .insert({ image: e.target.result })
+                        .insert('\n')
+
                       , 'user');
+                    this.quill.setSelection(range.index+2, 'user');
                     fileInput.value = "";
                   }
                   reader.readAsDataURL(file);

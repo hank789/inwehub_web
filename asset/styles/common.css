@@ -323,6 +323,10 @@ input, textarea, select{
   background: url("../statics/images/icon-withdraw.png");
 }
 
+.myicon-drag{
+  background: url("../statics/images/icon-drag.png");
+}
+
 a.mailLink{
   color:#4990e2;
 }
@@ -452,12 +456,14 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   position: relative;
 }
 .ql-editor .handlerImg{
-  content: '';
   position: absolute;
   right:10px;
   top:10px;
-  width:24px;
-  height:24px;
-  background: green;
+  width:32px;
+  height:32px;
   z-index:999;
+}
+
+.textarea-wrapper #toolbar{
+
 }

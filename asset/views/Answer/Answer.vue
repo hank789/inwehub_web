@@ -4,21 +4,22 @@
     <header class="mui-bar mui-bar-nav mui-bar-top">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" @tap.stop.prevent="cancelAnswer">取消</a>
       <h1 class="mui-title">回答</h1>
+      <a @tap.stop.prevent="goAnswer"
+         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</a>
     </header>
 
-    <div class="mui-content">
-
+    <div class="mui-content answerRichText blur">
         <div class="form form-realAnswer">
-            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)"></Meditor>
+            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
 
         </div>
 
-      <div class="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>
-      </div>
+      <!--<div class="button-wrapper">-->
+        <!--<button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>-->
+      <!--</div>-->
     </div>
 
 
@@ -40,7 +41,10 @@
     components: {
       Meditor
     },
+    mounted(){
+    },
     methods: {
+
       cancelAnswer(){
         if (this.editorObj.getLength() <= 1) {
           this.$router.go(-1);
@@ -52,6 +56,15 @@
             this.$router.go(-1);
           }
         }, 'div');
+      },
+      onEditorBlur(editor) {
+//        document.getElementsByClassName('answerRichText')[0].className = document.getElementsByClassName('answerRichText')[0].className.replace('focus', '');
+//        document.getElementsByClassName('answerRichText')[0].className = document.getElementsByClassName('answerRichText')[0].className.replace('blur', '')+' blur';
+      },
+      onEditorFocus(editor) {
+
+//        document.getElementsByClassName('answerRichText')[0].className = document.getElementsByClassName('answerRichText')[0].className.replace('blur', '');
+//        document.getElementsByClassName('answerRichText')[0].className = document.getElementsByClassName('answerRichText')[0].className.replace('focus', '')+' focus';
       },
       onEditorReady(editor) {
         this.editorObj = editor;
@@ -125,7 +138,7 @@
 </script>
 
 
-<style scoped>
+<style>
  .button-wrapper{
     margin-top: 15px;
     padding: 0 50px 15px;
@@ -134,4 +147,32 @@
   .form-realAnswer{
     padding:5px 0;
   }
+
+
+
+  .answerRichText.blur{
+    position: absolute;
+    width:100%;
+    height:100%;
+  }
+
+ .answerRichText.blur .form-realAnswer{
+    height:100%;
+ }
+
+ .answerRichText.blur .form-realAnswer > div{
+   height:100%;
+ }
+
+ .answerRichText.blur .textarea-wrapper{
+   height:100% !important;
+ }
+
+ .answerRichText.blur .quill-editor{
+   height:100%;
+ }
+
+ .answerRichText.blur .ql-container{
+   height:90%;
+ }
 </style>
