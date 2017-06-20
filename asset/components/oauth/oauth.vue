@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import {apiRequest} from '../../utils/request';
+  import {apiRequest, postRequest} from '../../utils/request';
 
   export default{
     data(){
@@ -50,7 +50,7 @@
             auth.getUserInfo(function(){
               console.log("获取用户信息成功：");
               var nickname=auth.userInfo.nickname||auth.userInfo.name||auth.userInfo.miliaoNick;
-              apiRequest(`oauth/weixin/callback`,{
+              postRequest(`oauth/weixin/callback`,{
                 openid: auth.authResult.openid,
                 nickname: nickname,
                 avatar: auth.userInfo.headimgurl,
@@ -59,31 +59,36 @@
                 expires_in: auth.authResult.expires_in,
                 scope: auth.authResult.scope,
                 full_info: auth.userInfo
-              }).then(response_data => {
-                if (response_data === false) {
+              }).then(response => {
+                var code = response.data.code;
+
+                if (code === 1113) {
+                    mui.alert('该微信号已经绑定过其他InweHub账号，请更换其他微信账号绑定。如有疑惑请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了', null, 'div');
+                    return;
+                }
+
+                if (code !== 1000) {
+                  mui.alert(response.data.message);
                   return;
                 }
 
+                self.$emit('success', nickname);
               });
-              plus.nativeUI.alert("欢迎“"+nickname+"”登录！");
-
-              self.$emit('success', nickname);
-
             },function(e){
               console.log("获取用户信息失败：");
               console.log("["+e.code+"]："+e.message);
-              plus.nativeUI.alert("获取用户信息失败！",null,"登录");
+              mui.alert("获取用户信息失败！",null,"登录");
             });
 
           },function(e){
             w&&w.close();
             w=null;
             console.log("["+e.code+"]："+e.message);
-            plus.nativeUI.alert("",null,"登录失败["+e.code+"]："+e.message);
+            mui.alert("",null,"登录失败["+e.code+"]："+e.message);
           });
         }else{
           console.log("无效的登录认证通道！");
-          plus.nativeUI.alert("无效的登录认证通道！",null,"登录");
+          mui.alert("无效的登录认证通道！",null,"登录");
         }
       },
       logoutAll(){
