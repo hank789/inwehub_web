@@ -4,7 +4,7 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" >取消</a>
-      <h1 class="mui-title">编辑</h1>
+      <h1 class="mui-title">当前公司</h1>
       <a @tap.stop.prevent="submitInfo()"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
     </header>
@@ -13,7 +13,7 @@
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">公司</label>
+            <label class="mui-navigate">当前公司</label>
             <input type="text"  v-model.trim="company" placeholder="请填写">
           </div>
         </li>
