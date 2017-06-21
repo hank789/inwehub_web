@@ -7,7 +7,7 @@
 
 
 
-        <div v-wechat-title="$route.meta.title"></div>
+        <!--<div v-wechat-title="$route.meta.title"></div>-->
 
         <div class='view'>
           <transition name='none' mode="out-in">
