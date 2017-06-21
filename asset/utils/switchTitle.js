@@ -5,7 +5,7 @@ module.exports = function (title) {
     var iframe = document.createElement('iframe')
     iframe.style.display = 'none'
     // 替换成站标favicon路径或者任意存在的较小的图片即可
-    iframe.setAttribute('src', '../images/favicon.ico')
+    iframe.setAttribute('src', '/favicon.ico')
     var iframeCallback = function () {
       setTimeout(function () {
         iframe.removeEventListener('load', iframeCallback)
