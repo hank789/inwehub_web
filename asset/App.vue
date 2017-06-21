@@ -7,7 +7,7 @@
 
 
 
-        <div v-wechat-title="Inwehub"></div>
+        <div v-wechat-title="'Inwehub'"></div>
 
         <div class='view'>
           <transition name='none' mode="out-in">
