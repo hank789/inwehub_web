@@ -4,7 +4,7 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" >取消</a>
-      <h1 class="mui-title">编辑</h1>
+      <h1 class="mui-title">当前职位</h1>
       <a @tap.stop.prevent="submitInfo()"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
     </header>

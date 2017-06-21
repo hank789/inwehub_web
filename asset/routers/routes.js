@@ -113,7 +113,7 @@ const routes = [
     path: '/my/info/project/:id',
     component: require('../views/Account/infos/project.vue'),
     meta: {
-      title: '个人信息'
+      title: '项目经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -123,7 +123,7 @@ const routes = [
     path: '/my/info/edu/:id',
     component: require('../views/Account/infos/edu.vue'),
     meta: {
-      title: '个人信息'
+      title: '教育经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -133,7 +133,7 @@ const routes = [
     path: '/my/info/edus',
     component: require('../views/Account/infos/edus.vue'),
     meta: {
-      title: '个人信息'
+      title: '教育经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -143,7 +143,7 @@ const routes = [
     path: '/my/info/jobs',
     component: require('../views/Account/infos/jobs.vue'),
     meta: {
-      title: '个人信息'
+      title: '工作经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -153,7 +153,7 @@ const routes = [
     path: '/my/info/projects',
     component: require('../views/Account/infos/projects.vue'),
     meta: {
-      title: '个人信息'
+      title: '项目经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -163,17 +163,17 @@ const routes = [
     path: '/my/info/trains',
     component: require('../views/Account/infos/trains.vue'),
     meta: {
-      title: '个人信息'
+      title: '培训经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
   },
-  { // 基本信息
+  { // 我的档案
     path: '/my/info/basic',
     component: require('../views/Account/infos/basic.vue'),
     meta: {
-      title: '个人信息'
+      title: '我的档案'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -183,7 +183,7 @@ const routes = [
     path: '/my/info/basic/description',
     component: require('../views/Account/infos/basic_description.vue'),
     meta: {
-      title: '个人信息'
+      title: '个人签名'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -193,7 +193,7 @@ const routes = [
     path: '/my/info/basic/name',
     component: require('../views/Account/infos/basic_name.vue'),
     meta: {
-      title: '个人信息'
+      title: '用户姓名'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -203,7 +203,7 @@ const routes = [
     path: '/my/info/basic/address',
     component: require('../views/Account/infos/basic_address.vue'),
     meta: {
-      title: '个人信息'
+      title: '详细地址'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -213,7 +213,7 @@ const routes = [
     path: '/my/info/basic/company',
     component: require('../views/Account/infos/basic_company.vue'),
     meta: {
-      title: '编辑'
+      title: '当前公司'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -223,7 +223,7 @@ const routes = [
     path: '/my/info/basic/position',
     component: require('../views/Account/infos/basic_position.vue'),
     meta: {
-      title: '编辑'
+      title: '当前职位'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -233,7 +233,7 @@ const routes = [
     path: '/my/info/basic/email',
     component: require('../views/Account/infos/basic_email.vue'),
     meta: {
-      title: '编辑'
+      title: '电子邮箱'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -243,7 +243,7 @@ const routes = [
     path: '/my/info/train/:id',
     component: require('../views/Account/infos/train.vue'),
     meta: {
-      title: '个人信息'
+      title: '培训经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -279,11 +279,11 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 我的钱包
+  { // 安全设置
     path: '/my/Finance/setting',
     component: require('../views/Finance/setting.vue'),
     meta: {
-      title: '我的钱包'
+      title: '安全设置'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -343,7 +343,7 @@ const routes = [
     path: '/paySuccess',
     component: require('../views/Pay/PaySuccess.vue'),
     meta: {
-      title: '余额提现'
+      title: '支付成功'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -395,7 +395,7 @@ const routes = [
     path: '/ask/:id',
     component: require('../views/Ask/AskDetail.vue'),
     meta: {
-      title: '受理成功'
+      title: '提问'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -465,7 +465,7 @@ const routes = [
     path: '/realAnswer/:id',
     component: require('../views/Answer/Answer.vue'),
     meta: {
-      title: '确认应答'
+      title: '应答'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -490,6 +490,9 @@ const routes = [
   },
   { // header
     path: '/header',
+    meta: {
+      title: '选择头像'
+    },
     component: require('../views/Account/selectHeader.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -497,6 +500,9 @@ const routes = [
   },
   { // discover
     path: '/discover',
+    meta: {
+      title: '发现'
+    },
     component: require('../views/Discover/Discover.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -504,6 +510,9 @@ const routes = [
   },
   { // setting
     path: '/setting',
+    meta: {
+      title: '设置'
+    },
     component: require('../views/Account/Setting.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -518,6 +527,9 @@ const routes = [
   },
   { // feedback
     path: '/feedback',
+    meta: {
+      title: '反馈建议'
+    },
     component: require('../views/Feedback.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -525,6 +537,9 @@ const routes = [
   },
   { // about
     path: '/about',
+    meta: {
+      title: '关于我们'
+    },
     component: require('../views/About.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -532,6 +547,9 @@ const routes = [
   },
   { // project
     path: '/project',
+    meta: {
+      title: '发布项目'
+    },
     component: require('../views/Project.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -539,13 +557,19 @@ const routes = [
   },
   { // project
     path: '/help',
+    meta: {
+      title: '反馈建议'
+    },
     component: require('../views/Account/Help.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
   },
-  { // project
+  { // 提问帮助
     path: '/help/ask',
+    meta: {
+      title: '提问帮助'
+    },
     component: require('../views/Help/Ask.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -553,6 +577,9 @@ const routes = [
   },
   { // bid
     path: '/bid',
+    meta: {
+      title: '我的竞标'
+    },
     component: require('../views/Bid.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -560,6 +587,9 @@ const routes = [
   },
   { // discover detail
     path: '/discover/detail',
+    meta: {
+      title: '发现'
+    },
     component: require('../views/Discover/Detail.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -567,6 +597,9 @@ const routes = [
   },
   { // discover project
     path: '/discover/project',
+    meta: {
+      title: '项目协作'
+    },
     component: require('../views/Discover/Project.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -574,6 +607,9 @@ const routes = [
   },
   { // discover company
     path: '/discover/company',
+    meta: {
+      title: '附近企业'
+    },
     component: require('../views/Discover/Company.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -581,6 +617,9 @@ const routes = [
   },
   { // discover activity
     path: '/discover/activity',
+    meta: {
+      title: '最新活动'
+    },
     component: require('../views/Discover/Activity.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -588,6 +627,9 @@ const routes = [
   },
   { // project submit
     path: '/project/submit/:id',
+    meta: {
+      title: '发布项目'
+    },
     component: require('../views/ProjectForm.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -595,6 +637,9 @@ const routes = [
   },
   { // discover detail
     path: '/collect',
+    meta: {
+      title: '我的收藏'
+    },
     component: require('../views/Account/Collect.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -602,16 +647,25 @@ const routes = [
   },
   { // protocol/register
     path: '/protocol/register',
+    meta: {
+      title: '注册协议'
+    },
     component: require('../views/Help/Protocol.vue')
   },
   { // help/question
     path: '/help/question',
+    meta: {
+      title: '常见问题'
+    },
     component: require('../views/Help/Question.vue')
   },
 
 
   { // message
     path: '/*',
+    meta: {
+      title: '404'
+    },
     component: require('../views/404.vue'),
   }
 ];
