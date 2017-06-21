@@ -180,6 +180,8 @@ function getUserInfo (user_id, cb) {
 
     let user = response.data.data.info;
 
+    localEvent.setLocalItem('UserInfoReal', response.data.data);
+
     var userLocal = updateUserInfoCache(user);
 
     cb(response.data.data);

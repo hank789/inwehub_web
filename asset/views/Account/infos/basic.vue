@@ -1,28 +1,11 @@
 <template>
   <div>
-    <!--页面主结构开始-->
-    <div id="app_account_info" class="mui-views" v-show="!loading">
-      <div class="mui-view">
-        <div class="mui-navbar">
-        </div>
-        <div class="mui-pages">
-        </div>
-      </div>
-    </div>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
+      <h1 class="mui-title">我的档案</h1>
+    </header>
 
-    <!--页面主结构结束-->
-    <!--单页面开始-->
-    <div id="setting" class="mui-page">
-      <!--页面标题栏开始-->
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
-        <h1 class="mui-center mui-title">我的档案</h1>
-      </div>
-      <!--页面标题栏结束-->
-      <!--页面主内容区开始-->
-      <div class="mui-page-content">
-        <div class="mui-scroll-wrapper" id="infoWrapper">
-          <div class="mui-scroll">
+      <div class="mui-content">
             <ul class="mui-table-view mui-table-view-chevron">
               <li class="mui-table-view-cell">
                 <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">用户姓名<span
@@ -75,14 +58,8 @@
                   class="mui-pull-right account-setting-field mui-ellipsis">{{user.info.description ? user.info.description : '请填写'}}</span></a>
               </li>
             </ul>
-          </div>
         </div>
-      </div>
-      <!--页面主内容区结束-->
-    </div>
-    <!--单页面结束-->
 
-    <!--行业领域模板开始-->
     <div id="page_industry_tags" class="mui-modal mui-pageSub">
 
           <!--这里放置真实显示的DOM内容-->
@@ -91,137 +68,7 @@
 
           </industry-tags-indexed-list>
     </div>
-    <!--行业领域模板结束-->
 
-
-    <!--编辑姓名开始-->
-    <div id="account_name" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo('name')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">姓名</label>
-                  <input type="text"  placeholder="必填" v-model.trim="user.info.name">
-                </div>
-              </li>
-            </ul>
-
-      </div>
-    </div>
-    <!--编辑姓名结束-->
-
-    <!--编辑公司开始-->
-    <div id="account_company" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo('company')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">公司</label>
-                  <input type="text"  v-model.trim="user.info.company">
-                </div>
-              </li>
-            </ul>
-
-      </div>
-    </div>
-    <!--编辑公司结束-->
-
-    <!--编辑职位开始-->
-    <div id="account_title" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo('title')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">当前职位</label>
-                  <input type="text"  v-model.trim="user.info.title">
-                </div>
-              </li>
-            </ul>
-
-      </div>
-    </div>
-    <!--编辑职位结束-->
-
-    <!--编辑邮箱地址开始-->
-    <div id="account_email" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo('email')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label class="mui-navigate">电子邮箱</label>
-                  <input type="text"  v-model.trim="user.info.email">
-                </div>
-              </li>
-            </ul>
-      </div>
-    </div>
-    <!--编辑邮箱地址结束-->
-
-    <!--编辑详细地址开始-->
-    <div id="account_address_detail" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">编辑</h1>
-        <a @tap.stop.prevent="submitInfo('address_detail')"
-           class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <label>详细地址</label>
-                  <input type="text"  v-model.trim="user.info.address_detail">
-                </div>
-              </li>
-            </ul>
-      </div>
-    </div>
-    <!--编辑详细地址结束-->
-
-    <!--编辑个人签名开始-->
-    <div id="account_description" class="mui-page mui-pageSub">
-      <div class="mui-navbar-inner mui-bar mui-bar-nav">
-        <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
-        <h1 class="mui-center mui-title">个人签名</h1>
-        <a @tap.stop.prevent="submitInfo('description')" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
-      </div>
-      <div class="mui-page-content">
-            <ul class="mui-table-view">
-              <li class="mui-table-view-cell">
-                <div class="mui-input-row">
-                  <textarea v-model.trim="user.info.description" rows="5"
-                            placeholder="个人签名"></textarea>
-                </div>
-              </li>
-            </ul>
-      </div>
-    </div>
-    <!--编辑个人签名结束-->
   </div>
 
 </template>
@@ -281,7 +128,7 @@
         "男",
         "女"
       ],
-      loading: true,
+      loading: false,
       cityPicker: null,
       muiView: {},
       descMaxLength: 2000,
@@ -428,6 +275,15 @@
       },
       getUserInfo()
       {
+
+        var userInfo = localEvent.getLocalItem('UserInfoReal');
+        if (userInfo) {
+          this.work_city = userInfo.info.province.name + ' ' + userInfo.info.city.name;
+          this.home_city = userInfo.info.hometown_province.name + ' ' + userInfo.info.hometown_city.name;
+
+          this.user = userInfo;
+          this.loading = 0;
+        }
 
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
@@ -682,42 +538,6 @@
       sortArrByBeginTime: function (a, b) {
         return a.begin_time < b.begin_time;
       },
-      initViewApi:function(){
-        //初始化单页view
-        var viewApi = mui('#app_account_info').view({
-          defaultPage: '#setting'
-        });
-
-        var view = viewApi.view;
-        var t = this;
-        (function ($) {
-          //处理view的后退与webview后退
-          var oldBack = $.back;
-          $.back = function () {
-            if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-              viewApi.back();
-            } else { //执行webview后退
-              oldBack();
-            }
-          };
-          //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-          //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
-          view.addEventListener('pageBeforeShow', function (e) {
-            //console.log(e);
-          });
-          view.addEventListener('pageShow', function (e) {
-            t.newItemChange = JSON.stringify(t.newItem);
-            t.userInfoBmp = JSON.stringify(t.user.info);
-          });
-          view.addEventListener('pageBeforeBack', function (e) {
-
-
-          });
-          view.addEventListener('pageBack', function (e) {
-          });
-        })(mui);
-        this.muiView = viewApi;
-      },
       getImage:function(){
         var t = this;
         var c = plus.camera.getCamera();
@@ -785,85 +605,14 @@
       }
 
       next();
-    },
-    mounted () {
-      mui('.mui-scroll-wrapper').scroll();
-
-      this.initViewApi();
-
-      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
-        var lastY = event.detail.lastY;
-        localEvent.setLocalItem('infoLast', {lastY:lastY})
-      });
-
-      var infoLast = localEvent.getLocalItem('infoLast');
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-          if (infoLast) {
-             var lastY = infoLast.lastY;
-          }
-          //mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
-        });
-      } else {
-        if (infoLast) {
-          var lastY = infoLast.lastY;
-        }
-        //mui('#infoWrapper').pullRefresh().scrollTo(0,lastY,0)
-      }
     }
   }
 </script>
 <style scoped>
-  .mui-views,
-  .mui-view,
-  .mui-pages,
-  .mui-page,
-  .mui-page-content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #efeff4;
-  }
-
-  .mui-pages {
-    top: 46px;
-    height: auto;
-  }
-
-  .mui-fullscreen {
-    position: fixed;
-    z-index: 20;
-    background-color: #000;
-  }
-
-  .mui-scroll-wrapper,
-  .mui-scroll {
-    background-color: #efeff4;
-  }
-
-  .mui-page.mui-transitioning {
-    -webkit-transition: -webkit-transform 300ms ease;
-    transition: transform 300ms ease;
-  }
-
   .account_item_title {
     padding: 5px;
     color: #a6a6a6;
     font-size: 12px;
-  }
-
-  .mui-page-left {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  .mui-ios .mui-page-left {
-    -webkit-transform: translate3d(-20%, 0, 0);
-    transform: translate3d(-20%, 0, 0);
   }
 
   .mui-navbar {
@@ -1122,5 +871,9 @@
   .titleSubSub{
     font-size:12px;
     color:#999;
+  }
+
+  .mui-content > .mui-table-view:first-child{
+    margin-top:0;
   }
 </style>

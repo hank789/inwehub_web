@@ -8,7 +8,7 @@ import FindPassword from '../views/FindPassword.vue';
 
 import Home from '../views/Home.vue';
 
-import { requestAuth, CanNotGetInWhenLogged } from '../utils/auth';
+import {requestAuth, CanNotGetInWhenLogged} from '../utils/auth';
 
 import localEvent from '../stores/localStorage';
 
@@ -20,9 +20,9 @@ const routes = [
       title: '主页'
     },
     beforeEnter: (to, from, next) => {
-      if(mui.os.plus){
+      if (mui.os.plus) {
         var lauch = localEvent.getLocalItem('lauchFlag');
-        if (!lauch.showGuide && 1===2) {
+        if (!lauch.showGuide && 1 === 2) {
           mui.plusReady(function () {
             plus.navigator.setFullscreen(true);
             next({
@@ -171,74 +171,81 @@ const routes = [
   },
   { // 我的档案
     path: '/my/info/basic',
-    component: require('../views/Account/infos/basic.vue'),
+    component: require('../components/PageTransition.vue'),
     meta: {
       title: '我的档案'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
-    }
-  },
-  { // 个人签名
-    path: '/my/info/basic/description',
-    component: require('../views/Account/infos/basic_description.vue'),
-    meta: {
-      title: '个人签名'
     },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // 姓名
-    path: '/my/info/basic/name',
-    component: require('../views/Account/infos/basic_name.vue'),
-    meta: {
-      title: '用户姓名'
+    children: [{
+      path: '',
+      component: require('../views/Account/infos/basic.vue'),
     },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
+      { // 个人签名
+        path: '/my/info/basic/description',
+        component: require('../views/Account/infos/basic_description.vue'),
+        meta: {
+          title: '个人信息'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 姓名
+        path: '/my/info/basic/name',
+        component: require('../views/Account/infos/basic_name.vue'),
+        meta: {
+          title: '用户姓名'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 地址
+        path: '/my/info/basic/address',
+        component: require('../views/Account/infos/basic_address.vue'),
+        meta: {
+          title: '详细地址'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 公司
+        path: '/my/info/basic/company',
+        component: require('../views/Account/infos/basic_company.vue'),
+        meta: {
+          title: '当前公司'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 职位
+        path: '/my/info/basic/position',
+        component: require('../views/Account/infos/basic_position.vue'),
+        meta: {
+          title: '当前职位'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // email
+        path: '/my/info/basic/email',
+        component: require('../views/Account/infos/basic_email.vue'),
+        meta: {
+          title: '电子邮箱'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      }
+    ]
   },
-  { // 地址
-    path: '/my/info/basic/address',
-    component: require('../views/Account/infos/basic_address.vue'),
-    meta: {
-      title: '详细地址'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // 公司
-    path: '/my/info/basic/company',
-    component: require('../views/Account/infos/basic_company.vue'),
-    meta: {
-      title: '当前公司'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // 职位
-    path: '/my/info/basic/position',
-    component: require('../views/Account/infos/basic_position.vue'),
-    meta: {
-      title: '当前职位'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // email
-    path: '/my/info/basic/email',
-    component: require('../views/Account/infos/basic_email.vue'),
-    meta: {
-      title: '电子邮箱'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
+
+
   { // 培训经历
     path: '/my/info/train/:id',
     component: require('../views/Account/infos/train.vue'),
@@ -380,17 +387,17 @@ const routes = [
     }
   },
   /*
-  { //task sub
-    path: '/task/list',
-    component: require('../views/Task/TaskListSub.vue'),
-    meta: {
-      title: '任务'
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  */
+   { //task sub
+   path: '/task/list',
+   component: require('../views/Task/TaskListSub.vue'),
+   meta: {
+   title: '任务'
+   },
+   beforeEnter: (to, from, next) => {
+   requestAuth(to, from, next)
+   }
+   },
+   */
   { //ask-detail
     path: '/ask/:id',
     component: require('../views/Ask/AskDetail.vue'),

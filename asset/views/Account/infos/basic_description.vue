@@ -3,7 +3,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" >取消</a>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" @tap.stop.prevent="$router.goBack()">取消</a>
       <h1 class="mui-title">个人签名</h1>
       <a @tap.stop.prevent="submitInfo()"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
