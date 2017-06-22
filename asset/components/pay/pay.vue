@@ -42,7 +42,7 @@
           return;
         }
 
-        if (mui.os.ios && this.iapPay) {
+        if (mui.os.ios && this.iapPay && mui.os.plus) {
           var id = 'appleiap';
         } else {
           var id = 'wxpay';
