@@ -6,10 +6,11 @@ import TimeAgo from 'vue-timeago';
 import router from './routers/index';
 
 // import VueLazyloadImg from 'vue-lazyload-img';
-import VueLazyload from 'vue-lazyload';
+//import VueLazyload from 'vue-lazyload';
 
 import store from './../../stores/store';
 import App from './App';
+
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -22,27 +23,22 @@ Raven
   .addPlugin(RavenVue, Vue)
   .install();
 
-
-import loading_img from './../../statics/images/image-loading.png';
 import loading_gif from './../../statics/images/loading.gif';
 import StarRating from './../../components/star-rating/star-rating';
 
 Vue.component('star-rating', StarRating);
-
 window.loading_gif = loading_gif;
 
 import './../../styles/mui.css';
-import './../../styles/icons-extra.css';
-import './../../styles/iconfont.css';
 import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/font-awesome.css';
 
 Vue.use(VueWechatTitle);
-Vue.use(VueLazyload, {
-  loading: loading_img,
-  try: 3
-});
+// Vue.use(VueLazyload, {
+//   loading: loading_img,
+//   try: 3
+// });
 
 mui.init({swipeBack:true});
 

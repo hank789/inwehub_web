@@ -138,10 +138,6 @@
   import Quill from 'quill';
   import { ImageImport } from '../../js/modules/ImageImport.js';
 
-  var renderer  = require('quilljs-renderer');
-  var Document  = renderer.Document;
-  renderer.loadFormat('html');
-
   Quill.register('modules/imageImport', ImageImport);
 
 
