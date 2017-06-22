@@ -1,29 +1,13 @@
 <template>
   <div id="app">
 
-    <div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
-
-      <!-- 菜单容器 -->
-      <aside class="mui-off-canvas-left mySideMenu">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
-            <!-- 菜单具体展示内容 -->
-            ...
 
 
 
-          </div>
-        </div>
-
-      </aside>
 
 
 
-      <!-- 主页面容器 -->
-      <div class="mui-inner-wrap">
-
-
-        <div v-wechat-title="$route.meta.title"></div>
+        <div v-wechat-title="'Inwehub'"></div>
 
         <div class='view'>
           <transition name='none' mode="out-in">
@@ -32,61 +16,46 @@
         </div>
 
         <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" :class="{ 'mui-active' : isHome}">
-            <span class="mui-icon myicon myicon-home"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isHome"></span></div>
+          <div class="mui-tab-item mui-active" v-if="isHome">
+            <span class="mui-icon myicon myicon-home-hover"></span>
+            <div><span class="mui-icon myicon myicon-point-hover"></span></div>
+          </div>
 
+          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" v-else>
+            <span class="mui-icon myicon myicon-home"></span>
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
-            <span class="mui-icon myicon myicon-task"><span class="mui-badge" v-if="taskCount">{{ taskCount
+            <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isAsk"></span></div>
+            <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
+              }}</span></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isAsk"></span></div>
 
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
-            <span class="mui-icon myicon myicon-find"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isDiscover"></span></div>
+            <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
+            <span class="mui-icon myicon myicon-task-hover" v-else></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
 
           </div>
 
           <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
-            <span class="mui-icon myicon myicon-my"></span>
-            <div><span class="mui-icon myicon myicon-point" v-show="isMy"></span></div>
+            <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
+            <span class="mui-icon myicon myicon-my-hover" v-else></span>
+            <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
 
           </div>
         </nav>
-
-        <div id="backdrop" class="mui-off-canvas-backdrop"></div>
-
-
-      </div>
-    </div>
-
-    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="goRecommand">推荐专家</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="goExpert">专家管理</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="expertNav"><b>取消</b></a>
-        </li>
-      </ul>
-    </div>
 
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
-  import {createAPI, addAccessToken, postRequest} from './utils/request';
-  import localEvent from './stores/localStorage';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
   export default {
     data () {
@@ -187,10 +156,14 @@
           var noticeTo = function (payload) {
             switch (payload.object_type) {
               case 'question':
-                router.push('/ask/' + payload.object_id);
+                 // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                //router.go(-1);
+                router.push('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
               case 'answer':
-                router.push('/answer/' + payload.object_id);
+                //router.go(-1);
+                 // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                router.push('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
             }
           };
@@ -255,6 +228,11 @@
     box-shadow: none;
   }
 
+  .footer-bar .mui-tab-item .mui-icon{
+    width:26px;
+    height:26px;
+  }
+
   .footer-bar {
     border-top: 1px solid #D9D9D9;
   }
@@ -269,9 +247,10 @@
     bottom: 5px;
   }
 
-  .footer-bar .mui-active .myicon-point {
+  .footer-bar .mui-active .myicon-point-hover {
     width: 3px;
     height: 3px;
+    top: 4px;
   }
 </style>
 

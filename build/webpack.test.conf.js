@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var entris = require('./entris')
 
 var env = config.test.env
 
@@ -43,22 +44,22 @@ var webpackConfig = merge(baseWebpackConfig, {
         safe: true
       }
     }),
-    new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.test.index,
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: process.env.NODE_ENV === 'testing'
+    //     ? 'index.html'
+    //     : config.test.index,
+    //   template: 'index.html',
+    //   inject: true,
+    //   minify: {
+    //     removeComments: true,
+    //     collapseWhitespace: true,
+    //     removeAttributeQuotes: true
+    //     // more options:
+    //     // https://github.com/kangax/html-minifier#options-quick-reference
+    //   },
+    //   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    //   chunksSortMode: 'dependency'
+    // }),
     // new OptimizeCSSPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
@@ -96,5 +97,20 @@ if (config.test.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
+
+Object.keys(entris).forEach(function(entry) {
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    chunks: [ 'manifest', 'vendor', entry ],
+    filename: 'public/' + entry + '.html',
+    template: 'index.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    },
+    chunksSortMode: 'dependency'
+  }))
+})
 
 module.exports = webpackConfig

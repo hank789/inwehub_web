@@ -4,14 +4,15 @@ var config = require('../config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+var entris = require('./entris')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
-module.exports = merge(baseWebpackConfig, {
+var config = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
@@ -25,11 +26,25 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true
+    // }),
     new FriendlyErrorsPlugin()
   ]
 })
+
+
+Object.keys(entris).forEach(function(entry) {
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      chunks: ['vendor', entry],
+      filename: entry + '.html',
+      template: 'index.html',
+      inject: true
+    })
+  )
+})
+
+module.exports = config

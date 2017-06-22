@@ -7,17 +7,19 @@ var projectRoot = path.resolve(__dirname, '../')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
+var entris = require('./entris')
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-module.exports = {
+var baseWebpackConfig = {
   entry: {
-    user: './asset/index.js'
+    //user: './asset/index.js'
   },
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : (process.env.NODE_ENV === 'development' ? config.dev.assetsPublicPath : config.test.assetsPublicPath)
@@ -29,8 +31,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-      'muse-components': 'muse-ui/src'
+      '@': resolve('asset'),
     }
   },
   module: {
@@ -76,6 +77,9 @@ module.exports = {
     ]
   }
 }
+
+baseWebpackConfig.entry = Object.assign(baseWebpackConfig.entry, entris)
+module.exports = baseWebpackConfig
 
 // module.exports = merge(webpackConfig, {
 //   plugins: [

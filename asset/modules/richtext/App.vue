@@ -54,8 +54,8 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import {createAPI, addAccessToken, postRequest} from './utils/request';
-  import localEvent from './stores/localStorage';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
 
   export default {
     data () {
