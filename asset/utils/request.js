@@ -25,6 +25,8 @@ export default axios;
 export function apiRequest (url, data) {
   if (mui.os.plus){
     plus.nativeUI.showWaiting();
+  } else {
+    mui.waiting();
   }
   return addAccessToken().post(createAPI(url), data,
     {
@@ -34,6 +36,8 @@ export function apiRequest (url, data) {
     .then(response => {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
+      } else {
+        mui.closeWaiting();
       }
       var code = response.data.code;
       // 参数错误
@@ -60,6 +64,8 @@ export function apiRequest (url, data) {
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
+      } else {
+        mui.closeWaiting();
       }
       mui.toast(message);
       return false;
@@ -70,6 +76,8 @@ export function apiRequest (url, data) {
 export function postRequest (url, data) {
   if (mui.os.plus){
     plus.nativeUI.showWaiting();
+  } else {
+    mui.waiting();
   }
   return addAccessToken().post(createAPI(url), data,
     {
@@ -79,6 +87,8 @@ export function postRequest (url, data) {
     .then(response => {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
+      } else {
+        mui.closeWaiting();
       }
 
       var code = response.data.code;
@@ -92,6 +102,8 @@ export function postRequest (url, data) {
     .catch(e => {
       if (mui.os.plus){
         plus.nativeUI.closeWaiting();
+      } else {
+        mui.closeWaiting();
       }
       return {data:{message: '网络状况堪忧', code:0}};
     })
