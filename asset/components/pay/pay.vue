@@ -53,6 +53,8 @@
           var appid = plus.runtime.appid;
         } else {
           var appid = navigator.userAgent;
+          // 公众号支付
+          id = 'wx_pub';
         }
         // 请求支付订单
         apiRequest(`pay/request`, {
@@ -116,7 +118,7 @@
             }
           });
         } else {
-          //h5微信支付
+          //h5微信支付,id=wx_pub
           WeixinJSBridge.invoke(
             'getBrandWCPayRequest', order,
             (res) => {
