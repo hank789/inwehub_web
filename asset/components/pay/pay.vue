@@ -32,18 +32,13 @@
     methods: {
       pay(){
 
-        if (!mui.os.plus) {
-          mui.alert('仅支持app');
-          return;
-        }
-
         if (this.pay_waiting) {
           return;
         }
 
         var amount = this.pay_money;
         if (amount <= 0) {
-          plus.nativeUI.alert('支付金额有误！', null, '支付');
+          mui.toast('支付金额有误！');
           return;
         }
 
@@ -53,13 +48,12 @@
           var id = 'wxpay';
         }
 
-        var appid = plus.runtime.appid;
-        if (navigator.userAgent.indexOf('StreamApp') >= 0) {
-          appid = 'Stream';
+        this.pay_waiting = 'waiting';
+        if (mui.os.plus){
+          var appid = plus.runtime.appid;
+        } else {
+          var appid = navigator.userAgent;
         }
-
-        this.pay_waiting = plus.nativeUI.showWaiting();
-
         // 请求支付订单
         apiRequest(`pay/request`, {
           app_id: appid,
@@ -67,7 +61,6 @@
           pay_channel: id,
           pay_object_type: this.pay_object_type
         }).then(response_data => {
-          this.pay_waiting.close();
           this.pay_waiting = null;
           if (response_data !== false) {
             var is_debug = response_data.debug;
@@ -87,40 +80,55 @@
       },
       requestPay(id, response_data) {
         var order = response_data.order_info;
-        plus.payment.request(this.pays[id], order, (result) => {
-          // console.log(JSON.stringify(result));
-          if (id === 'appleiap') {
-            // 验证iap支付结果
-            apiRequest(`pay/iap_notify`, {
-              orderId: response_data.order_id,
-              transactionState: result.transactionState,
-              payment: result.payment,
-              transactionDate: result.transactionDate,
-              transactionReceipt: result.transactionReceipt,
-              transactionIdentifier: result.transactionIdentifier
-            }).then(response_data_notify => {
-              this.pay_waiting.close();
-              this.pay_waiting = null;
-              if (response_data_notify !== false) {
+        if (mui.os.plus) {
+          plus.payment.request(this.pays[id], order, (result) => {
+            // console.log(JSON.stringify(result));
+            if (id === 'appleiap') {
+              // 验证iap支付结果
+              apiRequest(`pay/iap_notify`, {
+                orderId: response_data.order_id,
+                transactionState: result.transactionState,
+                payment: result.payment,
+                transactionDate: result.transactionDate,
+                transactionReceipt: result.transactionReceipt,
+                transactionIdentifier: result.transactionIdentifier
+              }).then(response_data_notify => {
+                this.pay_waiting.close();
+                this.pay_waiting = null;
+                if (response_data_notify !== false) {
+                  this.$emit('pay_success', response_data.order_id, this.pay_object_type);
+                  plus.nativeUI.alert('支付成功！', function () {
+                  }, '支付');
+                }
+              });
+            } else {
+              this.$emit('pay_success', response_data.order_id, this.pay_object_type);
+              plus.nativeUI.alert('支付成功！', function () {
+              }, '支付');
+            }
+          }, (e) => {
+            this.pay_waiting.close();
+            this.pay_waiting = null;
+            if (e.code == -100) {
+              plus.nativeUI.alert('', null, '支付已取消');
+            } else {
+              plus.nativeUI.alert('请联系客服', null, '支付失败');
+            }
+          });
+        } else {
+          //h5微信支付
+          WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', order,
+            (res) => {
+              if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                 this.$emit('pay_success', response_data.order_id, this.pay_object_type);
-                plus.nativeUI.alert('支付成功！', function () {
-                }, '支付');
+              }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+              else{
+                alert("支付失败，请重试");
               }
-            });
-          } else {
-            this.$emit('pay_success', response_data.order_id, this.pay_object_type);
-            plus.nativeUI.alert('支付成功！', function () {
-            }, '支付');
-          }
-        }, (e) => {
-          this.pay_waiting.close();
-          this.pay_waiting = null;
-          if (e.code == -100) {
-            plus.nativeUI.alert('', null, '支付已取消');
-          } else {
-            plus.nativeUI.alert('请联系客服', null, '支付失败');
-          }
-        });
+            }
+          );
+        }
       },
       requestIapOrder(response_data) {
         this.pay_waiting = plus.nativeUI.showWaiting();
@@ -152,8 +160,6 @@
                 continue;
               }
               this.pays[channel.id] = channel;
-              //document.getElementById(channel.id).style.display = "block";
-              //checkServices(channel);
             }
           }, function (e) {
             mui.toast('获取支付通道失败：' + e.message);
