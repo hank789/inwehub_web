@@ -25,7 +25,10 @@ var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  quiet: true
+  stats: {
+    colors: true,
+    chunks: false
+  }
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {

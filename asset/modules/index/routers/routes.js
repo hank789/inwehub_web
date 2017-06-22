@@ -103,7 +103,7 @@ const routes = [
     path: '/my/info/job/:id',
     component: require('../../../views/Account/infos/job.vue'),
     meta: {
-      title: '个人信息'
+      title: '工作经历'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -386,18 +386,6 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  /*
-   { //task sub
-   path: '/task/list',
-   component: require('../../../views/Task/TaskListSub.vue'),
-   meta: {
-   title: '任务'
-   },
-   beforeEnter: (to, from, next) => {
-   requestAuth(to, from, next)
-   }
-   },
-   */
   { //ask-detail
     path: '/ask/:id',
     component: require('../../../views/Ask/AskDetail.vue'),
@@ -592,16 +580,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // discover detail
-    path: '/discover/detail',
-    meta: {
-      title: '发现'
-    },
-    component: require('../../../views/Discover/Detail.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
+  // { // discover detail
+  //   path: '/discover/detail',
+  //   meta: {
+  //     title: '发现'
+  //   },
+  //   component: require('../../../views/Discover/Detail.vue'),
+  //   beforeEnter: (to, from, next) => {
+  //     requestAuth(to, from, next)
+  //   }
+  // },
   { // discover project
     path: '/discover/project',
     meta: {
@@ -666,8 +654,6 @@ const routes = [
     },
     component: require('../../../views/Help/Question.vue')
   },
-
-
   { // message
     path: '/*',
     meta: {
