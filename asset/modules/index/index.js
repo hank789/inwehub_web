@@ -80,6 +80,12 @@ Vue.use(TimeAgo, {
   }
 });
 
+
+import {showWebview} from '../../utils/webview';
+Vue.nextTick(function () {
+  showWebview();
+});
+
 const app = new Vue({
   router,
   store,
