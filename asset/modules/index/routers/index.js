@@ -24,11 +24,24 @@ const router = new VueRouter({
 
 
 router.pushPlus = function (url) {
-  var id = url.replace('/', '');
+  var id = url.replace(/\//g, '');
   if (mui.os.plus) {
     mui.plusReady(function(){
       var fullUrl = plus.webview.currentWebview().getURL();
+
+      console.log('id:'+id);
+      console.log('url:'+url);
+
+      console.log('fullUrl1:' + fullUrl);
+
       fullUrl = fullUrl.replace(/#\/.*?$/, '#'+url);
+
+      if (!fullUrl) {
+        fullUrl = 'index.html#' + url;
+      }
+
+      console.log('fullUrl2:' + fullUrl);
+
       mui.openWindow({
         url: fullUrl,
         id: id,
