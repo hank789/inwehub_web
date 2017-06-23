@@ -35,7 +35,7 @@
           this.user_status = response_data.status;
           this.user_status_desc = response_data.tips;
         } else {
-          this.$router.go(-1);
+          mui.back();
         }
       });
     },

@@ -40,7 +40,17 @@ Vue.use(VueWechatTitle);
 //   try: 3
 // });
 
-mui.init({swipeBack:true});
+mui.init({
+  swipeBack:true,
+  beforeback: function(){
+    if (mui.os.plus) {
+      mui.plusReady(function() {
+
+      });
+    }
+    return true;
+  }
+});
 
 var waitingElements = [];
 mui.waiting = function () {

@@ -72,7 +72,7 @@
             return;
           }
 
-          this.$router.go(-1);
+          mui.back();
         });
       },
       setRating: function(rating){

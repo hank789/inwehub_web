@@ -62,7 +62,7 @@
         });
       },
       cancel(){
-        this.$router.go(-1);
+        mui.back();
       },
       upload(file){
         var that = this;
@@ -80,7 +80,7 @@
               } else {
                   mui.alert(response.message);
               }
-              that.$router.go(-1);
+              mui.back();
             } else {
               mui.alert( "Upload failed: " + status );
             }

@@ -391,7 +391,7 @@
         if (this.userInfoBmp !== '') {
           this.user.info = JSON.parse(this.userInfoBmp);
         }
-        this.muiView.back2();
+        mui.back();
       }
       ,
       initDate: function (objType) {

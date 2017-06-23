@@ -166,7 +166,7 @@
               case 0:
                   break;
               case 1:
-                this.$router.push('/expert/recommend');
+                this.$router.pushPlus('/expert/recommend');
                 break;
             }
           })

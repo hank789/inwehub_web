@@ -232,14 +232,14 @@
         inputElem.blur();
 
         if (!this.type && !this.description) {
-          this.$router.go(-1);
+          mui.back();
           return;
         }
 
         mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
           if (e.index == 0) {
             this.clearCache();
-            this.$router.go(-1);
+            mui.back();
           }
         }, 'div');
       },

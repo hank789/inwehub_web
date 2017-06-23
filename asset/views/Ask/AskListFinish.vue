@@ -28,7 +28,7 @@
             <div class="list-ask">
 
               <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
-                <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.push('/ask/' + ask.id)">
+                <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.pushPlus('/ask/' + ask.id)">
 
                   <div class="site-desc mui-ellipsis-2">
                     {{ ask.description | textLimit}}
@@ -131,7 +131,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {
@@ -145,7 +145,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {

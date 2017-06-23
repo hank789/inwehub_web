@@ -116,13 +116,13 @@
         if (this.bak != '' && newItemChange !== this.bak) {
           mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
             if (e.index == 1) {
-              this.$router.go(-1);
+              mui.back();
             } else {
               return false;
             }
           }, 'div');
         } else {
-          this.$router.go(-1);
+          mui.back();
         }
       },
       submit(){
@@ -188,7 +188,7 @@
 
           mui.toast('操作成功');
           this.bak = '';
-          this.$router.go(-1);
+          mui.back();
         });
       },
       deleteItem(){
@@ -198,7 +198,7 @@
             var url = 'project/destroy';
             postRequest(url, {id: this.id}).then(response => {
               mui.toast('删除成功');
-              this.$router.go(-1);
+              mui.back();
             });
           }
         });

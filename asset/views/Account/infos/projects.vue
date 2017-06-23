@@ -4,7 +4,7 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">项目经历</h1>
-      <a @tap.stop.prevent="$router.push('/my/info/project/0')"
+      <a @tap.stop.prevent="$router.pushPlus('/my/info/project/0')"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
@@ -15,7 +15,7 @@
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li v-for="project in projects" class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/project/'+project.id)" class="mui-navigate-right">
+          <a @tap.stop.prevent="$router.pushPlus('/my/info/project/'+project.id)" class="mui-navigate-right">
             {{ project.project_name }}
                   <p class='mui-ellipsis'>{{ project.begin_time }} ~ {{ project.end_time }} | {{ project.title }}</p>
           </a>

@@ -19,7 +19,7 @@
     <div id="pullrefresh" class="list  mui-scroll-wrapper">
       <div class="mui-scroll" v-show="list.length">
         <div >
-        <div class="item" v-for="(item, index) in list" @tap.stop.prevent="$router.push('/project/submit/' + item.id)">
+        <div class="item" v-for="(item, index) in list" @tap.stop.prevent="$router.pushPlus('/project/submit/' + item.id)">
           <div class="time mui-navigate-right">{{ item.created_at.split(' ')[0]}} 发布</div>
           <div class="title">{{ item.project_name }}</div>
           <div class="desc mui-ellipsis-3">
@@ -96,7 +96,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {
@@ -110,7 +110,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {
@@ -179,7 +179,7 @@
       },
       add(){
           if (this.isCompany) {
-            this.$router.push('/project/submit/0');
+            this.$router.pushPlus('/project/submit/0');
           } else {
             mui.alert('您的账户类型，暂无法使用此功能，如需申请企业账户请发送基本信息到 <a class="mailLink"  href="mailto:hi@inwehub.com">hi@inwehub.com</a>', null, '', null, 'div');
           }
@@ -202,7 +202,7 @@
 //        var code = response.data.code;
 //        if (code !== 1000) {
 //          mui.alert(response.data.message);
-//          this.$router.go(-1);
+//          mui.back();
 //        }
 //
 //        if (response.data.data.length > 0) {

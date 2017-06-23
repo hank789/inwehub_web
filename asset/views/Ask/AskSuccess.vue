@@ -85,7 +85,7 @@
         var code = response.data.code;
         if (code !== 1000) {
           mui.alert(response.data.message);
-          this.$router.go(-1);
+          mui.back();
         }
 
         this.ask = response.data.data;

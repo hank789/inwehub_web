@@ -93,7 +93,7 @@
     },
     methods: {
       goback () {
-        this.$router.go(-1);
+        mui.back();
       },
       entryPhone(){
         this.showPhoneLabel = false;

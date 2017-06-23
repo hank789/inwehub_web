@@ -34,10 +34,11 @@ router.pushPlus = function (url) {
         id: id,
         preload: true,
         show: {
+          autoShow:false,
           aniShow: 'pop-in'
         },
         styles: {
-          popGesture: 'hide'
+          popGesture: 'close'
         },
         waiting: {
           autoShow: true

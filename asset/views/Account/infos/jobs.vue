@@ -4,7 +4,7 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">工作经历</h1>
-      <a @tap.stop.prevent="$router.push('/my/info/job/0')"
+      <a @tap.stop.prevent="$router.pushPlus('/my/info/job/0')"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">添加</a>
     </header>
 
@@ -15,7 +15,7 @@
 
       <ul class="mui-table-view mui-table-view-chevron">
         <li v-for="job in jobs" class="mui-table-view-cell">
-          <a  @tap.stop.prevent="$router.push('/my/info/job/' + job.id)" class="mui-navigate-right">
+          <a  @tap.stop.prevent="$router.pushPlus('/my/info/job/' + job.id)" class="mui-navigate-right">
             {{ job.company }}
                   <p class='mui-ellipsis'>{{ job.title }} | {{ job.begin_time }} ~ {{ job.end_time }}</p>
           </a>

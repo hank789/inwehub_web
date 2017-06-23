@@ -10,11 +10,11 @@
         <input class="text" type="password" v-model.trim="password"/>
         <label v-show="showPasswordLabel" @tap.stop.prevent="entryPassword">输入密码</label>
       </div>
-      <div class="forget" @tap.stop.prevent="$router.push('/findpassword/')">忘记密码</div>
+      <div class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</div>
 
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">点击登录</button>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-outlined" @tap.stop.prevent="$router.push('/register/')">注册账号</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-outlined" @tap.stop.prevent="$router.pushPlus('/register/')">注册账号</button>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@
         this.showPasswordLabel = false;
       },
       goback () {
-          this.$router.go(-1);
+          mui.back();
       },
       submit () {
 

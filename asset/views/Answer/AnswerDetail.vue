@@ -341,7 +341,7 @@
           }
 
           if (time != '0000') {
-            this.$router.go(-1);
+            mui.back();
           } else {
             this.getData();
           }
@@ -461,7 +461,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           this.answer = response.data.data;

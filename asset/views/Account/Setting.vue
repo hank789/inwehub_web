@@ -14,10 +14,10 @@
           <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/help/question" class="mui-navigate-right">常见问题</router-link>
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/help/question')" class="mui-navigate-right">常见问题</a>
         </li>
         <li class="mui-table-view-cell">
-          <router-link to="/about" class="mui-navigate-right">关于我们</router-link>
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about')" class="mui-navigate-right">关于我们</a>
         </li>
         <li class="mui-table-view-cell">
           <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>

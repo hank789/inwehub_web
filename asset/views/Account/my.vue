@@ -4,7 +4,7 @@
 
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <h1 class="mui-title">我的</h1>
-      <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.push('/setting')"></a>
+      <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.pushPlus('/setting')"></a>
     </header>
 
     <div class="mui-content">
@@ -20,7 +20,7 @@
           <div class="realname">{{ name }}</div>
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.push('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
           </div>
         </div>
       </div>

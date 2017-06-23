@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="mui.back()"></a>
       <h1 class="mui-title">消息</h1>
     </header>
 
@@ -125,7 +125,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {
@@ -159,7 +159,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {

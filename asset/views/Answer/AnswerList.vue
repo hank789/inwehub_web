@@ -13,7 +13,7 @@
     <div class="mui-content" v-if="nothing == 0">
       <div class="list-answer">
 
-        <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.push('/answer/' + answer.question_id)">
+        <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.pushPlus('/answer/' + answer.question_id)">
           <div class="mui-table-view-cell mui-media">
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
@@ -189,7 +189,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {
@@ -204,7 +204,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
-            this.$router.go(-1);
+            mui.back();
           }
 
           if (response.data.data.length > 0) {

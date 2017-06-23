@@ -51,7 +51,7 @@
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
             mui.toast('保存成功');
-            this.$router.go(-1);
+            mui.back();
           }
         });
       }
