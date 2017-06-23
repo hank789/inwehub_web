@@ -25,7 +25,7 @@ const router = new VueRouter({
 
 router.pushPlus = function (url) {
   var id = url.replace(/\//g, '');
-  if (mui.os.plus) {
+  if (mui.os.plus && mui.os.ios) {
     mui.plusReady(function(){
       var fullUrl = plus.webview.currentWebview().getURL();
 
