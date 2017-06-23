@@ -32,30 +32,30 @@
       </div>
 
       <div class="part2">
-        <a class="item" @tap.stop.prevent="$router.push('/asks')">
+        <a class="item" @tap.stop.prevent="$router.pushPlus('/asks')">
           <span class="number">{{ questions }}</span><span>我的提问</span>
         </a>
-        <a class="item" @tap.stop.prevent="$router.push('/answers')">
+        <a class="item" @tap.stop.prevent="$router.pushPlus('/answers')">
           <span class="number">{{ answers }}</span><span>我的回答</span>
         </a>
-        <a class="item" @tap.stop.prevent="$router.push('/bid')">
+        <a class="item" @tap.stop.prevent="$router.pushPlus('/bid')">
           <span class="number">0</span><span>我的竞标</span>
         </a>
-        <a  class="item"  @tap.stop.prevent="$router.push('/project')">
+        <a  class="item"  @tap.stop.prevent="$router.pushPlus('/project')">
           <span class="number">{{ projects }}</span><span>我的项目</span>
         </a>
       </div>
 
       <ul class="mui-table-view mui-table-view-chevron firstItem">
         <li class="mui-table-view-cell">
-          <a  class="mui-navigate-right" @tap.stop.prevent="$router.push('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
+          <a  class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
           </a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/collect')"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/collect')"><span class="mui-icon myicon myicon-heart"></span>我的收藏</a>
         </li>
         <li class="mui-table-view-cell">
-          <a class="mui-navigate-right" @tap.stop.prevent="$router.push('/feedback')"><span class="mui-icon myicon myicon-help"></span>反馈建议
+          <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/feedback')"><span class="mui-icon myicon myicon-help"></span>反馈建议
           </a>
         </li>
       </ul>

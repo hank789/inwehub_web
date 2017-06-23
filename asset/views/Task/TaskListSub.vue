@@ -201,9 +201,9 @@
       {
         var id = task.object_id;
         if (task.task_type == 1) {
-          this.$router.push('/answer/' + id)
+          this.$router.pushPlus('/answer/' + id)
         } else {
-          this.$router.push('/ask/' + id)
+          this.$router.pushPlus('/ask/' + id)
         }
       },
       pulldownRefresh() {

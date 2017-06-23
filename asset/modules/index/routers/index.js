@@ -10,6 +10,8 @@ VueRouter.prototype.goBack = function () {
   window.history.go(-1)
 }
 
+
+
 VueRouter.prototype.jump = function (url) {
   window.location.href=url;
 }
@@ -19,6 +21,33 @@ const router = new VueRouter({
   mode: 'hash',
   routes
 });
+
+
+router.pushPlus = function (url) {
+  var id = url.replace('/', '');
+  if (mui.os.plus) {
+    mui.plusReady(function(){
+      var fullUrl = plus.webview.currentWebview().getURL();
+      fullUrl = fullUrl.replace(/#\/.*?$/, '#'+url);
+      mui.openWindow({
+        url: fullUrl,
+        id: id,
+        preload: true,
+        show: {
+          aniShow: 'pop-in'
+        },
+        styles: {
+          popGesture: 'hide'
+        },
+        waiting: {
+          autoShow: true
+        }
+      });
+    });
+  } else {
+    router.push(url);
+  }
+}
 
 router.beforeEach((to, from, next) => {
   // 检查版本更新
