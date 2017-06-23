@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.go(-1)"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack2"></a>
       <h1 class="mui-title">我的档案</h1>
     </header>
 
@@ -386,6 +386,9 @@
       selectedProductTags(tags, object_type)
       {
         this.newItem.product_tags = tags;
+      },
+      muiViewBack2: function () {
+        mui.back();
       },
       muiViewBack: function () {
         if (this.userInfoBmp !== '') {
