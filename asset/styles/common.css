@@ -524,6 +524,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   height: 100%;
   opacity: 0;
   background: transparent;
+  z-index:9999;
 }
 .mint-indicator-enter, .mint-indicator-leave-active {
   opacity: 0;
