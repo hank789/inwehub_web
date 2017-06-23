@@ -28,11 +28,8 @@
   import {ImageImport} from '../../js/modules/ImageImport.js';
   import Sortable from "sortablejs/Sortable";
 
-  var renderer = require('quilljs-renderer');
-  var Document = renderer.Document;
-  renderer.loadFormat('html');
+  //Quill.register('modules/imageImport', ImageImport);
 
-  Quill.register('modules/imageImport', ImageImport);
   import {quillEditor} from '../../components/vue-quill';
 
   import iconDrag from '../../statics/images/icon-drag.png';
