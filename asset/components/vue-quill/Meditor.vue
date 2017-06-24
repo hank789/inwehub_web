@@ -74,6 +74,11 @@
     },
     mounted() {
       this.description = this.content;
+      mui.plusReady(function(){
+        plus.webview.currentWebview().setStyle({
+          softinputMode: "adjustResize"
+        });
+      });
     },
     components: {
       quillEditor

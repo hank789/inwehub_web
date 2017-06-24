@@ -54,7 +54,7 @@ router.pushPlus = function (url) {
           popGesture: 'close'
         },
         waiting: {
-          autoShow: true
+          autoShow: false
         }
       });
     });
