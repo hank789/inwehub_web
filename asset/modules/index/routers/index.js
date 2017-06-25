@@ -23,7 +23,7 @@ const router = new VueRouter({
 });
 
 
-router.pushPlus = function (url, autoShow=true, popGesture='hide') {
+router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide') {
   if (mui.os.plus && mui.os.ios) {
     mui.plusReady(function(){
       var currentUrl = plus.webview.currentWebview().getURL();
@@ -45,7 +45,7 @@ router.pushPlus = function (url, autoShow=true, popGesture='hide') {
         preload: false,//一定要为false
         show: {
           autoShow: autoShow,
-          aniShow: 'pop-in'
+          aniShow: aniShow
         },
         styles: {
           popGesture: popGesture
