@@ -1,18 +1,31 @@
 const localEvent = {
   getLocalItem: (item) => {
-    return JSON.parse(window.localStorage.getItem('TS+_' + item)) || [];
+    if (mui.os.plus) {
+      return JSON.parse(plus.storage.getItem('inwehub_' + item)) || [];
+    } else
+      return JSON.parse(window.localStorage.getItem('inwehub_' + item)) || [];
   },
 
   setLocalItem: (item, obj) => {
-    window.localStorage.setItem('TS+_' + item,JSON.stringify(obj));
+    if (mui.os.plus) {
+      return plus.storage.setItem('inwehub_' + item, JSON.stringify(obj));
+    } else
+      window.localStorage.setItem('inwehub_' + item, JSON.stringify(obj));
   },
 
   clearLocalItem: (item) => {
-    window.localStorage.removeItem('TS+_' + item);
+    if (mui.os.plus) {
+      return plus.storage.removeItem('inwehub_' + item);
+    } else
+      window.localStorage.removeItem('inwehub_' + item);
   },
 
   clearLocalAll: () => {
-    window.localStorage.clear();
+    if (mui.os.plus) {
+      plus.storage.clear();
+    } else {
+      window.localStorage.clear();
+    }
   }
 }
 

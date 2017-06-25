@@ -297,7 +297,11 @@
       }
     },
     mounted () {
-
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-project');
+      });
     },
     beforeRouteLeave(to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker');

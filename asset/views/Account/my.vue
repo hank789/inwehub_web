@@ -108,26 +108,34 @@
       getToken(){
         var im_token = JSON.parse(sessionStorage.getItem('im_token'))
         this.im_tokenMsg = im_token;
+      },
+      initData(){
+        this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+          cb(user);
+          this.account_info_complete_percent = user.info.account_info_complete_percent;
+          this.isExpert = user.info.is_expert;
+          this.user_level = user.info.user_level;
+          this.user_credits = user.info.user_credits;
+          this.user_coins = user.info.user_coins;
+          this.questions = user.info.questions;
+          this.answers = user.info.answers;
+          this.tasks = user.info.tasks;
+          this.projects = user.info.projects;
+          this.expert_level = user.info.expert_level;
+        }));
       }
     },
     created () {
-
-      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-        cb(user);
-        this.account_info_complete_percent = user.info.account_info_complete_percent;
-        this.isExpert = user.info.is_expert;
-        this.user_level = user.info.user_level;
-        this.user_credits = user.info.user_credits;
-        this.user_coins = user.info.user_coins;
-        this.questions = user.info.questions;
-        this.answers = user.info.answers;
-        this.tasks = user.info.tasks;
-        this.projects = user.info.projects;
-        this.expert_level = user.info.expert_level;
-      }));
+      this.initData();
     },
     mounted(){
-      this.getToken()
+      this.getToken();
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-my');
+        this.initData();
+      });
     }
   }
 

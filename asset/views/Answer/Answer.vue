@@ -42,6 +42,11 @@
       Meditor
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-answer');
+      });
     },
     methods: {
 

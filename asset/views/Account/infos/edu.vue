@@ -131,6 +131,14 @@
           mui.back();
         }
       },
+      resetEdu: function () {
+        this.edu.school = '';
+        this.edu.major = '';
+        this.edu.degree = '';
+        this.edu.begin_time = '';
+        this.edu.end_time = '';
+        this.edu.description = '';
+      },
       initDate: function (objType) {
         let currentDate = new Date();
 
@@ -259,7 +267,12 @@
       }
     },
     mounted () {
-
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-edu');
+        this.resetEdu();
+      });
     },
 
     beforeRouteLeave(to, from, next) {

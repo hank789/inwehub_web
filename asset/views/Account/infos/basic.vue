@@ -78,7 +78,6 @@
   import {apiRequest} from '../../../utils/request';
   import localEvent from '../../../stores/localStorage';
   import popPickerComponent from '../../../components/picker/poppicker.vue';
-  import "../../../js/mui.view";
   import cityData from '../../../components/city/city.data';
   import ACCOUNT_API from '../../../api/account';
   import dPickerComponent from '../../../components/picker/date-picker.vue';
@@ -594,6 +593,14 @@
           localEvent.setLocalItem('infoLast', {});
         }
         next();
+    },
+    mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-basic');
+        this.getUserInfo();
+      });
     },
     beforeRouteLeave(to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker');

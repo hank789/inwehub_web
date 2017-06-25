@@ -40,18 +40,6 @@ Vue.use(VueWechatTitle);
 //   try: 3
 // });
 
-mui.init({
-  swipeBack:true,
-  beforeback: function(){
-    if (mui.os.plus) {
-      mui.plusReady(function() {
-
-      });
-    }
-    return true;
-  }
-});
-
 var waitingElements = [];
 mui.waiting = function () {
 
@@ -92,9 +80,7 @@ Vue.use(TimeAgo, {
 
 
 import {showWebview} from '../../utils/webview';
-Vue.nextTick(function () {
-  showWebview();
-});
+window.showInwehubWebview = showWebview;
 
 const app = new Vue({
   router,

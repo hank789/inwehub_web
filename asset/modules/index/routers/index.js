@@ -23,40 +23,38 @@ const router = new VueRouter({
 });
 
 
-router.pushPlus = function (url) {
-  var id = url.replace(/\//g, '');
+router.pushPlus = function (url, autoShow=true, popGesture='hide') {
   if (mui.os.plus && mui.os.ios) {
     mui.plusReady(function(){
-      var fullUrl = plus.webview.currentWebview().getURL();
+      var currentUrl = plus.webview.currentWebview().getURL();
 
-      console.log('id:'+id);
+      var nextUrl = currentUrl;
+
       console.log('url:'+url);
 
-      console.log('fullUrl1:' + fullUrl);
+      console.log('current_url:' + currentUrl);
 
-      fullUrl = fullUrl.replace(/#\/.*?$/, '#'+url);
+      //nextUrl = nextUrl.replace(/#\/.*?$/, '#'+url);
+      nextUrl = 'index.html#' + url;
 
-      if (!fullUrl) {
-        fullUrl = 'index.html#' + url;
-      }
+      console.log('nextUrl:' + nextUrl);
 
-      console.log('fullUrl2:' + fullUrl);
-
-      mui.openWindow({
-        url: fullUrl,
-        id: id,
-        preload: true,
+      var nw = mui.openWindow({
+        url: nextUrl,
+        id: nextUrl,
+        preload: false,//一定要为false
         show: {
-          autoShow:false,
+          autoShow: autoShow,
           aniShow: 'pop-in'
         },
         styles: {
-          popGesture: 'close'
+          popGesture: popGesture
         },
         waiting: {
           autoShow: false
         }
       });
+      console.log(nw.id);
     });
   } else {
     router.push(url);

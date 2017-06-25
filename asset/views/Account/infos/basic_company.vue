@@ -36,7 +36,13 @@
       var userInfo = localEvent.getLocalItem('UserInfo');
       this.company = userInfo.company;
     },
-
+    mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-company');
+      });
+    },
     methods:{
       submitInfo: function () {
         if (!this.company) {

@@ -195,7 +195,11 @@
       }
     },
     mounted () {
-
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-train');
+      });
     },
 
     beforeRouteLeave(to, from, next) {

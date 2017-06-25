@@ -36,7 +36,13 @@
       var userInfo = localEvent.getLocalItem('UserInfo');
       this.title = userInfo.title;
     },
-
+    mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-basic-position');
+      });
+    },
     methods:{
       submitInfo: function () {
         if (!this.title) {

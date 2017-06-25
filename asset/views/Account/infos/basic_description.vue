@@ -37,6 +37,13 @@
     components: {
       MTextarea
     },
+    mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-description');
+      });
+    },
     methods:{
       submitInfo: function () {
         if (!this.description) {

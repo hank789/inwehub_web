@@ -77,52 +77,35 @@
       }
     },
     mounted(){
-
-      var that = this;
       mui.init({
         pullRefresh: {
           container: '#pullrefresh',
           down: {
-            callback: pulldownRefresh
+            callback: this.pulldownRefresh
           },
           up: {
             contentrefresh: '正在加载...',
             contentnomore: '没有更多了',
-            callback: pullupRefresh
+            callback: this.pullupRefresh
           }
         }
       });
-
-      function pulldownRefresh() {
-        that.getPrevList();
-        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-      }
-
-      function pullupRefresh() {
-        that.getNextList();
-      }
-
-
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-
-          if (!that.list.length) {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }
-        });
-      } else {
-        mui.ready(function () {
-
-          if (!that.list.length) {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }
-        });
-      }
+      this.getPrevList();
     },
     created () {
 
     },
     methods: {
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
+      },
+      pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
+      },
       getPrevList(){
 
         postRequest(`account/money_log`, {}).then(response => {
@@ -138,6 +121,8 @@
             this.list = response.data.data;
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+
         });
       },
       getNextList() {
@@ -147,8 +132,6 @@
             mui.alert(response.data.message);
             mui.back();
           }
-
-
 
           if (response.data.data.length > 0) {
             this.list = this.list.concat(response.data.data);

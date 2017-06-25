@@ -115,6 +115,12 @@
       }
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-answerList');
+        this.getPrevList();
+      });
 
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
@@ -126,47 +132,16 @@
         pullRefresh: {
           container: '#pullrefresh',
           down: {
-            callback: pulldownRefresh
+            callback: this.pulldownRefresh
           },
           up: {
             contentrefresh: '正在加载...',
             contentnomore:'没有更多了',
-            callback: pullupRefresh
+            callback: this.pullupRefresh
           }
         }
       });
-
-      var that = this;
-
-      function pulldownRefresh() {
-        that.getPrevList();
-        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-      }
-
-      function pullupRefresh() {
-        that.getNextList();
-
-      }
-
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-
-            if (!that.answers.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
-
-
-        });
-      } else {
-        mui.ready(function () {
-
-          if (!that.answers.length) {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }
-          mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
-        });
-      }
+      this.getPrevList();
     },
     filters: {
        textLimit(text){
@@ -178,6 +153,16 @@
        }
     },
     methods: {
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
+      },
+     pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
+      },
       timeago(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
@@ -196,6 +181,8 @@
             this.answers = response.data.data;
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+
         });
       },
       getNextList() {

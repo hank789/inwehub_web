@@ -103,6 +103,8 @@
             this.tasks = response.data.data;
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+
         });
       },
       getNextList() {
@@ -136,13 +138,14 @@
         });
       },
       pulldownRefresh() {
-        this.getPrevList();
-        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
       },
-
       pullupRefresh() {
-        this.getNextList();
-
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
       },
       initPullRefresh(){
         mui.init({
@@ -158,24 +161,7 @@
             }
           }
         });
-
-        var t = this;
-
-        if (mui.os.plus) {
-          mui.plusReady(function () {
-            if (!t.list.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
-          });
-        } else {
-          mui.ready(function () {
-            if (!t.list.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0,t.lastY,0)
-          });
-        }
+        this.getPrevList();
       },
       add(){
           if (this.isCompany) {

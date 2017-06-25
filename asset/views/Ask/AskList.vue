@@ -12,7 +12,7 @@
         <a class="mui-control-item mui-active" @tap.stop.prevent="">
           未完成
       </a>
-        <a class="mui-control-item" @tap.stop.prevent="$router.replace('/asks/finish')">
+        <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
           已完成
         </a>
       </div>
@@ -98,6 +98,16 @@
       loading: true
     }),
     methods: {
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
+      },
+      pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
+      },
       getStatusText(code){
           switch (code) {
             case 1:
@@ -141,6 +151,7 @@
             this.asks = response.data.data;
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       },
       getNextList() {
@@ -217,7 +228,13 @@
       }
     },
     mounted(){
-
+      console.log('ask1');
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-asklist');
+        this.getPrevList();
+      });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
         var lastY = event.detail.lastY;
@@ -228,45 +245,16 @@
         pullRefresh: {
           container: '#pullrefresh',
           down: {
-            callback: pulldownRefresh
+            callback: this.pulldownRefresh
           },
           up: {
             contentrefresh: '正在加载...',
             contentnomore: '没有更多了',
-            callback: pullupRefresh
+            callback: this.pullupRefresh
           }
         }
       });
-
-
-      var that = this;
-
-      function pulldownRefresh() {
-        that.getPrevList();
-        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-      }
-
-      function pullupRefresh() {
-        that.getNextList();
-      }
-
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-
-          if (!that.asks.length) {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }
-          mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
-
-        });
-      } else {
-        mui.ready(function () {
-          if (!that.asks.length) {
-            mui('#pullrefresh').pullRefresh().pullupLoading();
-          }
-          mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
-        });
-      }
+      this.getPrevList();
     },
     filters: {
       textLimit(text){

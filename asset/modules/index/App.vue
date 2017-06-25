@@ -21,11 +21,11 @@
             <div><span class="mui-icon myicon myicon-point-hover"></span></div>
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/')" v-else>
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/')" v-else>
             <span class="mui-icon myicon myicon-home"></span>
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/task')" :class="{ 'mui-active' : isAsk}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/task')" :class="{ 'mui-active' : isAsk}">
             <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
             <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
@@ -34,14 +34,14 @@
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/discover')" :class="{ 'mui-active' : isDiscover}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover')" :class="{ 'mui-active' : isDiscover}">
             <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
             <span class="mui-icon myicon myicon-task-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="linkTo('/my')" :class="{ 'mui-active':isMy}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/my')" :class="{ 'mui-active':isMy}">
             <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
             <span class="mui-icon myicon myicon-my-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
@@ -216,6 +216,26 @@
             }
 
           }, false);
+        }
+      });
+
+      mui.init({
+        swipeBack:true, //启用右滑关闭功能
+        beforeback: function(){
+          console.log('beforeback');
+          if (mui.os.plus) {
+            var self = plus.webview.currentWebview();
+            //获得父页面的webview
+            var parent_webview = self.opener();
+            if (parent_webview){
+              console.log('Webview窗口：'+parent_webview.getURL());
+              //触发父页面的自定义事件(refresh),从而进行刷新
+              mui.fire(parent_webview, 'refreshData');
+              //子页面也刷新数据
+              mui.fire(self, 'refreshData');
+            }
+          }
+          return true;
         }
       });
     }

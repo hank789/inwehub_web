@@ -122,6 +122,12 @@
       }
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-task');
+        this.initPullRefresh();
+      });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
         var lastY = event.detail.lastY;
@@ -178,24 +184,8 @@
             }
           }
         });
+        this.getPrevList();
 
-        var t = this;
-
-        if (mui.os.plus) {
-          mui.plusReady(function () {
-            if (!t.tasks.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
-          });
-        } else {
-          mui.ready(function () {
-            if (!t.tasks.length) {
-              mui('#pullrefresh').pullRefresh().pullupLoading();
-            }
-            mui('#pullrefresh').pullRefresh().scrollTo(0, t.lastY, 0)
-          });
-        }
       },
       goDetail(task)
       {
@@ -207,13 +197,15 @@
         }
       },
       pulldownRefresh() {
-        this.getPrevList();
-        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
       },
 
       pullupRefresh() {
-        this.getNextList();
-
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
       },
       timeago(time) {
         let newDate = new Date();
@@ -232,6 +224,7 @@
             this.tasks = response.data.data;
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       },
       getNextList() {

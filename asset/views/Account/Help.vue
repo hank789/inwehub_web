@@ -88,6 +88,11 @@
     },
     mounted(){
       mui('.mui-switch')['switch']();
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-help');
+      });
     }
   }
 

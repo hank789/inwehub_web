@@ -105,6 +105,11 @@
       pay
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', function(e){
+        //执行刷新
+        console.log('refresh-ask');
+      });
       mui.init();
 
       var fixedDiv = mui('.fixedDiv')[0];
