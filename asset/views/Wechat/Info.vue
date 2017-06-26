@@ -7,20 +7,19 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-denglu"></use>
       </svg>
-      <input class="text" type="text" @focus="focus" @blur="blur" placeholder="填写您的真实姓名" name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"/>
+      <input class="text" type="text" @focus="focus" @blur="blur" placeholder="填写您的真实姓名" name="realname" v-model.trim.num="realname" autocomplete="off"/>
     </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-mima"></use>
       </svg>
-      <input class="text" ref="phone" id="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="填写您的登陆密码" name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off" v-tooltip="{content:'请输入有效的手机号码', placement:'bottom', trigger:'manual'}"/>
+      <input class="text" ref="password" type="text" @focus="focus" @blur="blur" placeholder="填写您的登陆密码" name="password" v-model.trim.num="password" autocomplete="off" />
     </div>
 
 
-
     <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled"
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
               @click.prevent="register">确认
         </button>
     </div>
@@ -36,18 +35,39 @@
 
 
 <script>
-
-  import Vue from 'vue'
-  import VTooltip from 'v-tooltip'
-  Vue.use(VTooltip);
+  import request, {createAPI, apiRequest, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
+  import {USERS_APPEND} from '../../stores/types';
+  import router from '../../routers/index';
 
   export default {
     data: () => ({
-      registrationCode:'', //邀请码
-      phone: '', // 手机号码
-      code: '', // 手机验证码
+      realname:'', //真实姓名
+      password: '', // 登录密码
+      disableRegister:false
     }),
+    watch: {
+      realname: function (newValue, oldValue) {
+        this.checkValid();
+      },
+      password: function (newValue, oldValue) {
+        this.checkValid();
+      }
+    },
     methods: {
+      checkValid(){
+        if (!this.realname) {
+          this.disableRegister = true;
+          return false;
+        }
+
+        if (!this.password) {
+          this.disableRegister = true;
+          return false;
+        }
+
+        this.disableRegister = false;
+      },
       getCode(){
 
       },
@@ -62,9 +82,33 @@
         event.target.parentElement.className += ' blur';
       },
       register () {
-        this.$refs.phone._tooltip.show();
+        var data = {
+          mobile:0,
+          name:'',
+          code:0,
+          password:this.password,
+          registration_code:'',
+          openid:0,
+          device_code:0,
+        };
+        postRequest('auth/wxgzh/register', data)
+          .then(response => {
+            var code = response.data.code;
 
+            if (code !== 1000) {
+                mui.toast(response.data.message);
+                return;
+            }
 
+            localEvent.setLocalItem('UserLoginInfo', response.data.data);
+
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+              let currentUser = user;
+              cb(currentUser);
+              router.push({path: '/my'});
+            }));
+
+          });
       },
       mounted(){
 
