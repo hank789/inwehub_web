@@ -12,27 +12,27 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yaoqingma"></use>
       </svg>
-      <input class="text" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略" name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"/>
+      <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略" name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off" v-tooltip="{content:'请输入邀请码', placement:'bottom', trigger:'manual'}"/>
     </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shoujihao"></use>
       </svg>
-      <input class="text" ref="phone" id="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号" name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off" v-tooltip="{content:'请输入有效的手机号码', placement:'bottom', trigger:'manual'}"/>
+      <input class="text" ref="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号" name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off" v-tooltip="{content:'请输入有效的手机号码', placement:'bottom', trigger:'manual'}"/>
 
-      <span class="getYzm" @click.stop.prevent="getCode">发送验证</span>
+      <span class="getYzm" @tap.stop.prevent="getCode">{{getCodeText}}</span>
     </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yanzhengma"></use>
       </svg>
-      <input class="text" type="text" @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
+      <input class="text" ref="code" v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" type="text" @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
     </div>
 
     <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled"
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
               @click.prevent="register">确认
         </button>
     </div>
@@ -51,19 +51,107 @@
 
 <script>
 
+  import request, {createAPI, apiRequest, postRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage';
+
   import Vue from 'vue'
-  import VTooltip from 'v-tooltip'
+  import {USERS_APPEND} from '../../stores/types';
+  import VTooltip from 'v-tooltip';
+  import router from '../../routers/index';
+
   Vue.use(VTooltip);
 
   export default {
     data: () => ({
       registrationCode:'', //邀请码
       phone: '', // 手机号码
-      code: '', // 手机验证码
+      isCanGetCode: true,
+      time: 0, // 时间倒计时
+      openid:0,
+      code: '', // 手机验证码,
+      disableRegister:true
     }),
+    computed: {
+      getCodeText () {
+        return this.time == 0 ? '发送验证' : this.time + '秒后重发';
+      }
+    },
+    watch: {
+      registrationCode: function (newValue, oldValue) {
+          this.checkValid();
+      },
+      phone: function (newValue, oldValue) {
+        this.checkValid();
+      },
+      code: function (newValue, oldValue) {
+        this.checkValid();
+      }
+    },
     methods: {
+      timer () {
+        if (this.time > 0) {
+          this.isCanGetCode = false;
+          this.time -= 1;
+          if (this.time == 0) {
+            this.isCanGetCode = true;
+            return;
+          }
+          setTimeout(this.timer, 1000)
+        }
+      },
       getCode(){
+        let mobile = this.phone;
+        let type = 'register';
 
+        if (!this.isCanGetCode) {
+          return;
+        }
+
+        if (!this.registrationCode) {
+          mui.toast("请输入邀请码");
+          return;
+        }
+
+        if (this.registrationCode.length < 6) {
+          mui.toast("邀请码至少6位");
+          return;
+        }
+
+        if (mobile.length !== 11) {
+          this.$refs.phone._tooltip.show();
+          setTimeout(() => {
+            this.$refs.phone._tooltip.hide();
+          }, 2000);
+          return;
+        }
+
+        this.isCanGetCode = false;
+
+        postRequest('auth/sendPhoneCode', {
+            mobile,
+            type,
+            'registration_code': this.registrationCode
+          }
+        )
+          .then(response => {
+
+            var code = response.data.code;
+            if (code !== 1000) {
+              this.isCanGetCode = true;
+              mui.toast(response.data.message);
+              return;
+            }
+
+            this.time = 60;
+            this.timer();
+
+            mui.toast('验证码发送成功');
+          })
+          .catch(({response: {data = {}} = {}}) => {
+            this.isCanGetCode = true;
+            const {code = 'xxxx'} = data;
+            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
+          })
       },
       focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
@@ -75,10 +163,56 @@
         event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
         event.target.parentElement.className += ' blur';
       },
+      checkValid(){
+        if (!this.registrationCode) {
+            this.disableRegister = true;
+            return false;
+        }
+
+        if (!this.phone) {
+          this.disableRegister = true;
+          return false;
+        }
+
+        if (!this.code) {
+          this.disableRegister = true;
+          return false;
+        }
+
+        this.disableRegister = false;
+      },
       register () {
-        this.$refs.phone._tooltip.show();
 
+        var data = {
+          mobile:this.phone,
+          code:this.code,
+          registration_code:this.registrationCode,
+          openid:this.openid
+        };
 
+        postRequest('auth/wxgzh/check_rg', data)
+          .then(response => {
+            var code = response.data.code;
+
+            if (code !== 1000) {
+              if (code === 1115) {
+                  //去填写注册信息
+                 router.push({path: '/wechat/info'});
+              } else {
+                mui.toast(response.data.message);
+                return;
+              }
+            }
+
+            localEvent.setLocalItem('UserLoginInfo', response.data.data);
+
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+              let currentUser = user;
+              cb(currentUser);
+              router.push({path: '/my'});
+            }));
+
+          });
       },
       mounted(){
 
@@ -191,11 +325,5 @@
     text-align: center;
   }
 
-  .bgCover{
-    position: absolute;
-    z-index:999;
-    width:100%;
-    height:100%;
-    background: url("http://web/myzhizuo/facsimile/test.png");
-  }
+
 </style>

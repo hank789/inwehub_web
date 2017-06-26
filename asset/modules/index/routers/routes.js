@@ -665,6 +665,17 @@ const routes = [
       next();
     }
   },
+  {
+    path: '/wechat/info',
+    component: require('../../../views/Wechat/Info.vue'),
+    meta: {
+      title: '填写信息'
+    },
+    beforeEnter: (to, from, next) => {
+      //CanNotGetInWhenLogged(to, from, next)
+      next();
+    }
+  },
   { // message
     path: '/*',
     meta: {
