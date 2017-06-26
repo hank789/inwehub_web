@@ -39,7 +39,7 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
 
       console.log('nextUrl:' + nextUrl);
 
-      var nw = mui.openWindow({
+      mui.openWindow({
         url: nextUrl,
         id: nextUrl,
         preload: false,//一定要为false
@@ -54,7 +54,6 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
           autoShow: false
         }
       });
-      console.log(nw.id);
     });
   } else {
     router.push(url);
