@@ -125,8 +125,8 @@
       showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
-        console.log('refresh-task');
-        this.initPullRefresh();
+        console.log('refresh-taskList');
+        this.getPrevList();
       });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {

@@ -66,7 +66,22 @@
         loading: 1
       }
     },
-    methods: {},
+    methods: {
+      initData() {
+        postRequest(`followed/users`, {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          if (response.data.data.length > 0) {
+            this.list = this.list.concat(response.data.data);
+          }
+          this.loading = 0;
+        });
+      }
+    },
     computed: {
       bottomId () {
         var length = this.list.length;
@@ -77,24 +92,14 @@
       }
     },
     created(){
-      postRequest(`followed/users`, {bottom_id: this.bottomId}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          mui.back();
-        }
-
-        if (response.data.data.length > 0) {
-          this.list = this.list.concat(response.data.data);
-        }
-        this.loading = 0;
-      });
+        this.initData();
     },
     mounted(){
       showInwehubWebview();
-      window.addEventListener('refreshData', function(e){
+      window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-collect');
+        this.initData();
       });
     }
   }

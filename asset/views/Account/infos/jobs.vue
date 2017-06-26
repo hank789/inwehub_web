@@ -39,13 +39,35 @@
       loading: true
     }),
     methods: {
+        initData() {
+          postRequest(`account/job/list`, {}).then(response => {
 
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+
+            this.jobs = response.data.data;
+
+            var newJobs = [];
+            for(var i in this.jobs) {
+              var info = this.jobs[i];
+              var id = info.id;
+              newJobs[id] = info;
+            }
+            localEvent.setLocalItem('jobs', newJobs);
+
+            this.loading = false;
+          });
+        }
     },
     mounted () {
       showInwehubWebview();
-      window.addEventListener('refreshData', function(e){
+      window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-jobs');
+        this.initData();
       });
     },
 
@@ -53,26 +75,7 @@
 
     },
     created () {
-      postRequest(`account/job/list`, {}).then(response => {
-
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          return;
-        }
-
-        this.jobs = response.data.data;
-
-        var newJobs = [];
-        for(var i in this.jobs) {
-          var info = this.jobs[i];
-          var id = info.id;
-          newJobs[id] = info;
-        }
-        localEvent.setLocalItem('jobs', newJobs);
-
-        this.loading = false;
-      });
+      this.initData();
     }
   }
 </script>
