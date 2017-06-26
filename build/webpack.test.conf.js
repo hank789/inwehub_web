@@ -106,8 +106,8 @@ Object.keys(entris).forEach(function(entry) {
     inject: true,
     minify: {
       removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
+      collapseWhitespace: true
+      //removeAttributeQuotes: true
     },
     chunksSortMode: 'dependency'
   }))
