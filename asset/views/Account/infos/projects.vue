@@ -39,13 +39,34 @@
       loading: true
     }),
     methods: {
+        initData() {
+          postRequest(`account/project/list`, {}).then(response => {
 
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+
+            this.projects = response.data.data;
+            this.loading = false;
+
+            var newProjects = [];
+            for(var i in this.projects) {
+              var info = this.projects[i];
+              var id = info.id;
+              newProjects[id] = info;
+            }
+            localEvent.setLocalItem('projects', newProjects);
+          });
+        }
     },
     mounted () {
       showInwehubWebview();
-      window.addEventListener('refreshData', function(e){
+      window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-projects');
+        this.initData();
       });
     },
 
@@ -54,26 +75,7 @@
     },
 
     created () {
-      postRequest(`account/project/list`, {}).then(response => {
-
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          return;
-        }
-
-        this.projects = response.data.data;
-        this.loading = false;
-
-        var newProjects = [];
-        for(var i in this.projects) {
-          var info = this.projects[i];
-          var id = info.id;
-          newProjects[id] = info;
-        }
-        localEvent.setLocalItem('projects', newProjects);
-      });
-
+      this.initData();
     }
   }
 </script>

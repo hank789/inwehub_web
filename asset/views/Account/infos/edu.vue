@@ -271,7 +271,6 @@
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-edu');
-        this.resetEdu();
       });
     },
 

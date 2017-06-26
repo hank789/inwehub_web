@@ -60,24 +60,35 @@
     methods: {
       check_withdraw() {
 
+      },
+      initData() {
+        postRequest(`account/wallet`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          this.totalMoeny = response.data.data.total_money;
+          this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
+          this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
+          this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
+          this.loading = 0;
+
+          localEvent.setLocalItem('wallet', {totalMoney:this.totalMoeny})
+        });
       }
     },
-    created () {
-      postRequest(`account/wallet`, {}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          mui.back();
-        }
-
-        this.totalMoeny = response.data.data.total_money;
-        this.settlementMoney = parseFloat(response.data.data.pay_settlement_money);
-        this.withdrawMinMoney = response.data.data.withdraw_per_min_money;
-        this.withdrawMaxMoney = response.data.data.withdraw_per_max_money;
-        this.loading = 0;
-
-        localEvent.setLocalItem('wallet', {totalMoney:this.totalMoeny})
+    mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e) => {
+        //执行刷新
+        console.log('refresh-finance-info');
+        this.initData();
       });
+    },
+    created () {
+      this.initData();
     },
     watch: {
 
