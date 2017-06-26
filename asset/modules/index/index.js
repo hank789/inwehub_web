@@ -34,6 +34,8 @@ import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/font-awesome.css';
 
+import './../../js/iconfont.js';
+
 Vue.use(VueWechatTitle);
 // Vue.use(VueLazyload, {
 //   loading: loading_img,

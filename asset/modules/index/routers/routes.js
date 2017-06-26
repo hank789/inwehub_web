@@ -654,6 +654,17 @@ const routes = [
     },
     component: require('../../../views/Help/Question.vue')
   },
+  {
+    path: '/wechat/register',
+    component: require('../../../views/Wechat/Register.vue'),
+    meta: {
+      title: '绑定注册'
+    },
+    beforeEnter: (to, from, next) => {
+      //CanNotGetInWhenLogged(to, from, next)
+      next();
+    }
+  },
   { // message
     path: '/*',
     meta: {

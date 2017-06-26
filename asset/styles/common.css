@@ -661,3 +661,57 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 /**
 旋转动画结束
  */
+
+
+.tooltip {
+  display: block !important;
+  padding: 4px;
+  z-index: 10000;
+}
+
+.tooltip .tooltip-inner {
+  background: #111111;
+  opacity: 0.7;
+  font-size:13px;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px 4px;
+}
+
+.tooltip .tooltip-arrow{
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  top: -1px;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #111;
+  opacity: 0.7;
+}
+
+
+
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .15s, visibility .15s;
+}
+
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .15s;
+}
+
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+
