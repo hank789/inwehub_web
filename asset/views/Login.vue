@@ -148,7 +148,7 @@
               return;
           }
           localEvent.setLocalItem('UserLoginInfo', response);
-
+          clearAllWebViewCache();
           //存储设备信息
           mui.plusReady(function(){
             if (mui.os.plus) {

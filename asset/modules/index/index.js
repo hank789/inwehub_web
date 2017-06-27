@@ -81,9 +81,9 @@ Vue.use(TimeAgo, {
 });
 
 
-import {showWebview} from '../../utils/webview';
+import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
-
+window.clearAllWebViewCache = clearAllWebViewCache;
 
 import VueQrcode from 'vue-qrcode'
 Vue.component('qrcode', VueQrcode);
