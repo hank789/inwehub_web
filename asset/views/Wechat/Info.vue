@@ -26,7 +26,7 @@
     </div>
 
     <div class="help">
-      注册即同意 <a href="">《用户注册服务协议》</a>
+      注册即同意 <a href="javascript:void(0)" @tap.stop.prevent="$router.push('/protocol/register')">《用户注册服务协议》</a>
     </div>
   </div>
 </template>

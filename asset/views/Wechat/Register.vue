@@ -47,10 +47,8 @@
     </div>
 
 
-    <div class="help">
+    <div class="help" @tap.stop.prevent="">
       我没有邀请码？
-
-
     </div>
 
 
