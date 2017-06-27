@@ -75,6 +75,13 @@
                 this.requestIapOrder(response_data);
               } else if (id ==='wx_pub') {
                 mui.waiting();
+                alert(response_data.order_info.appId);
+                alert(response_data.order_info.timeStamp);
+                alert(response_data.order_info.nonceStr);
+                alert(response_data.order_info.package);
+                alert(response_data.order_info.signType);
+                alert(response_data.order_info.paySign);
+
                 //h5微信支付
                 WeixinJSBridge.invoke(
                   'getBrandWCPayRequest', {
