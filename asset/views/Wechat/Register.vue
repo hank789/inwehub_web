@@ -177,7 +177,7 @@
               return;
             }
 
-            this.time = 60;
+            this.time = 120;
             this.timer();
 
             mui.toast('验证码发送成功');
