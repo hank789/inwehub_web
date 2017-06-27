@@ -98,6 +98,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 个人名片
+    path: '/my/resume',
+    component: require('../../../views/Account/Resume.vue'),
+    meta: {
+      title: '个人名片'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 
   { // 个人信息
     path: '/my/info/job/:id',
