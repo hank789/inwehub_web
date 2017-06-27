@@ -165,6 +165,7 @@
         postRequest('auth/sendPhoneCode', {
             mobile,
             type,
+            openid:this.openid,
             'registration_code': this.registrationCode
           }
         )
