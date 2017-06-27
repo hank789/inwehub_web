@@ -1,14 +1,14 @@
 const localEvent = {
   getLocalItem: (item) => {
-    return JSON.parse(window.localStorage.getItem('TS+_' + item)) || [];
+    return JSON.parse(window.localStorage.getItem('inwehub_' + item)) || [];
   },
 
   setLocalItem: (item, obj) => {
-    window.localStorage.setItem('TS+_' + item,JSON.stringify(obj));
+    window.localStorage.setItem('inwehub_' + item,JSON.stringify(obj));
   },
 
   clearLocalItem: (item) => {
-    window.localStorage.removeItem('TS+_' + item);
+    window.localStorage.removeItem('inwehub_' + item);
   },
 
   clearLocalAll: () => {
