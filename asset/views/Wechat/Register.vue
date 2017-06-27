@@ -2,47 +2,56 @@
   <div class="register">
 
 
-     <div class="logo">
-       <svg class="icon" aria-hidden="true">
-         <use xlink:href="#icon-logo"></use>
-       </svg>
-     </div>
+    <div class="logo">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-logo"></use>
+      </svg>
+    </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yaoqingma"></use>
       </svg>
-      <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略" name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off" v-tooltip="{content:'请输入邀请码', placement:'bottom', trigger:'manual'}"/>
+      <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略"
+             name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"
+             v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
     </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shoujihao"></use>
       </svg>
-      <input class="text" ref="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号" name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off" v-tooltip="{content:'请输入有效的手机号码', placement:'bottom', trigger:'manual'}"/>
+      <input class="text" ref="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号"
+             name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
+             v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
 
-      <span class="getYzm" @tap.stop.prevent="getCode">{{getCodeText}}</span>
+
+      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="disableSendCode">{{getCodeText}}</span>
+      <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
     </div>
 
     <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yanzhengma"></use>
       </svg>
-      <input class="text" ref="code" v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" type="text" @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
+      <input class="text" ref="code" v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" type="text"
+             @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
     </div>
 
     <div class="buttonWrapper">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
               @click.prevent="register">确认
-        </button>
-    </div>
 
+
+      </button>
+    </div>
 
 
     <div class="help">
       我没有邀请码？
-    </div>
 
+
+    </div>
 
 
   </div>
@@ -58,29 +67,38 @@
   import {USERS_APPEND} from '../../stores/types';
   import VTooltip from 'v-tooltip';
   import router from '../../routers/index';
+  import {NOTICE} from '../../stores/types';
+  import { getUserInfo, getAvatar } from '../../utils/user';
 
   Vue.use(VTooltip);
 
   export default {
     data: () => ({
-      registrationCode:'', //邀请码
+      registrationCode: '', //邀请码
       phone: '', // 手机号码
       isCanGetCode: true,
       time: 0, // 时间倒计时
-      openid:0,
+      openid: '',
       code: '', // 手机验证码,
-      disableRegister:true
+      disableRegister: true,
+      disableSendCode: true,
+      errorMsg: '',
     }),
     computed: {
       getCodeText () {
         return this.time == 0 ? '发送验证' : this.time + '秒后重发';
       }
     },
+    created () {
+      this.getOpenId();
+    },
     watch: {
       registrationCode: function (newValue, oldValue) {
-          this.checkValid();
+        this.checkSendCodeValid();
+        this.checkValid();
       },
       phone: function (newValue, oldValue) {
+        this.checkSendCodeValid();
         this.checkValid();
       },
       code: function (newValue, oldValue) {
@@ -88,6 +106,28 @@
       }
     },
     methods: {
+      getOpenId(){
+        let openid = this.$route.query.openid;
+        if (!openid) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+        this.openid = openid;
+      },
+      showTip(obj, msg){
+        this.errorMsg = msg;
+        obj._tooltip.show();
+        setTimeout(() => {
+          obj._tooltip.hide();
+        }, 2000);
+      },
       timer () {
         if (this.time > 0) {
           this.isCanGetCode = false;
@@ -108,20 +148,17 @@
         }
 
         if (!this.registrationCode) {
-          mui.toast("请输入邀请码");
+          this.showTip(this.$refs.registrationCode, '请输入邀请码');
           return;
         }
 
         if (this.registrationCode.length < 6) {
-          mui.toast("邀请码至少6位");
+          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
           return;
         }
 
-        if (mobile.length !== 11) {
-          this.$refs.phone._tooltip.show();
-          setTimeout(() => {
-            this.$refs.phone._tooltip.hide();
-          }, 2000);
+        if (mobile.length !== 11 || /^1\d{10}$/.test(mobile) === false) {
+          this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
 
@@ -156,17 +193,30 @@
       focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
         event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
-          event.target.parentElement.className += ' focus';
+        event.target.parentElement.className += ' focus';
       },
       blur(){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
         event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
         event.target.parentElement.className += ' blur';
       },
+      checkSendCodeValid(){
+        if (!this.registrationCode) {
+          this.disableSendCode = true;
+          return false;
+        }
+
+        if (!this.phone) {
+          this.disableSendCode = true;
+          return false;
+        }
+
+        this.disableSendCode = false;
+      },
       checkValid(){
         if (!this.registrationCode) {
-            this.disableRegister = true;
-            return false;
+          this.disableRegister = true;
+          return false;
         }
 
         if (!this.phone) {
@@ -182,12 +232,11 @@
         this.disableRegister = false;
       },
       register () {
-
         var data = {
-          mobile:this.phone,
-          code:this.code,
-          registration_code:this.registrationCode,
-          openid:this.openid
+          mobile: this.phone,
+          code: this.code,
+          registration_code: this.registrationCode,
+          openid: this.openid
         };
 
         postRequest('auth/wxgzh/check_rg', data)
@@ -196,8 +245,9 @@
 
             if (code !== 1000) {
               if (code === 1115) {
-                  //去填写注册信息
-                 router.push({path: '/wechat/info'});
+                //去填写注册信息
+                localEvent.setLocalItem('wechatInfo', data);
+                router.push({path: '/wechat/info'});
               } else {
                 mui.toast(response.data.message);
                 return;
@@ -223,40 +273,40 @@
 
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .logo{
-    margin:42px 0 38px;
+  .logo {
+    margin: 42px 0 38px;
     text-align: center;
   }
-  .logo .icon{
-    font-size:125px;
+
+  .logo .icon {
+    font-size: 125px;
   }
 
-  .inputWrapper .icon{
+  .inputWrapper .icon {
     position: absolute;
-    top:4px;
-    font-size:24px;
-    color:#c8c8c8;
+    top: 4px;
+    font-size: 24px;
+    color: #c8c8c8;
   }
 
   .inputWrapper {
     margin: 0 33px 22px;
     position: relative;
 
-
   }
 
-  .inputWrapper.focus{
+  .inputWrapper.focus {
 
-    &:after{
+    &:after {
       background-color: #3c95f9;
     }
 
-    .icon{
-      color:#3c95f9;
+    .icon {
+      color: #3c95f9;
     }
   }
 
-  .inputWrapper .getYzm{
+  .inputWrapper .getYzm {
     display: inline-block;
     font-size: 14px;
     color: #3c95f9;
@@ -268,59 +318,62 @@
     padding: 3px 14px;
   }
 
-  .inputWrapper:after{
-      position: absolute;
-      right: 0;
-      bottom: 3px;
-      left: 0;
-      height: 1px;
-      content: '';
-      -webkit-transform: scaleY(.5);
-      transform: scaleY(.5);
-      background-color: rgb(220,220,220);
+  .inputWrapper .getYzm.disabled {
+    border: 1px solid #dcdcdc;
+    color: #c8c8c8;
   }
 
-  .inputWrapper input{
-    color:#444;
-    border:none;
-    margin:0;
-    padding:0 0 0 36px;
-    font-size:14px;
+  .inputWrapper:after {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+
+  .inputWrapper input {
+    color: #444;
+    border: none;
+    margin: 0;
+    padding: 0 0 0 36px;
+    font-size: 14px;
     background: none;
     display: inline-block;
   }
 
-  .register{
+  .register {
     background: #f3f4f6;
     position: absolute;
-    top:0;
-    bottom:0;
-    width:100%;
+    top: 0;
+    bottom: 0;
+    width: 100%;
   }
 
-  .buttonWrapper{
-    margin:40px 36px 16px;
+  .buttonWrapper {
+    margin: 40px 36px 16px;
   }
 
-  ::-webkit-input-placeholder{
-    color:#b4b4b6;
+  ::-webkit-input-placeholder {
+    color: #b4b4b6;
   }
 
-  .buttonWrapper button{
+  .buttonWrapper button {
     border-radius: 5px;
 
-    &:disabled{
+    &:disabled {
       background: #dcdcdc;
-      border:1px solid #dcdcdc;
-      color:#b4b4b6;
+      border: 1px solid #dcdcdc;
+      color: #b4b4b6;
 
     }
   }
 
-
-
-  .help{
-    font-size:14px;
+  .help {
+    font-size: 14px;
     color: #3c95f9;
     text-align: center;
   }
