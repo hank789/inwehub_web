@@ -75,22 +75,17 @@
                 this.requestIapOrder(response_data);
               } else if (id ==='wx_pub') {
                 mui.waiting();
-                alert(response_data.order_info.appId);
-                alert(response_data.order_info.timeStamp);
-                alert(response_data.order_info.nonceStr);
-                alert(response_data.order_info.package);
-                alert(response_data.order_info.signType);
-                alert(response_data.order_info.paySign);
-
+                alert(response_data.order_info);
+                var wx_order_info = JSON.parse(response_data.order_info);
                 //h5微信支付
                 WeixinJSBridge.invoke(
                   'getBrandWCPayRequest', {
-                    "appId":response_data.order_info.appId,     //公众号名称，由商户传入
-                    "timeStamp":response_data.order_info.timeStamp,         //时间戳，自1970年以来的秒数
-                    "nonceStr":response_data.order_info.nonceStr, //随机串
-                    "package":response_data.order_info.package,
-                    "signType":response_data.order_info.signType,         //微信签名方式：
-                    "paySign":response_data.order_info.paySign //微信签名
+                    "appId":wx_order_info.appId,     //公众号名称，由商户传入
+                    "timeStamp":wx_order_info.timeStamp,         //时间戳，自1970年以来的秒数
+                    "nonceStr":wx_order_info.nonceStr, //随机串
+                    "package":wx_order_info.package,
+                    "signType":wx_order_info.signType,         //微信签名方式：
+                    "paySign":wx_order_info.paySign //微信签名
                   },
                   (res) => {
                     mui.closeWaiting();
