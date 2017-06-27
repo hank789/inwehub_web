@@ -48,7 +48,7 @@
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png"/></div>
             <div class="share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-dingwei"></use>
+                <use xlink:href="#icon-fenxiang"></use>
               </svg>
             </div>
             <div class="header">
