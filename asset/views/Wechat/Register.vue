@@ -92,7 +92,6 @@
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
-        this.checkSendCodeValid();
         this.checkValid();
       },
       phone: function (newValue, oldValue) {
@@ -139,21 +138,21 @@
       },
       getCode(){
         let mobile = this.phone;
-        let type = 'register';
+        let type = 'wx_gzh_register';
 
         if (!this.isCanGetCode) {
           return;
         }
 
-        if (!this.registrationCode) {
-          this.showTip(this.$refs.registrationCode, '请输入邀请码');
-          return;
-        }
-
-        if (this.registrationCode.length < 6) {
-          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
-          return;
-        }
+//        if (!this.registrationCode) {
+//          this.showTip(this.$refs.registrationCode, '请输入邀请码');
+//          return;
+//        }
+//
+//        if (this.registrationCode.length < 6) {
+//          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
+//          return;
+//        }
 
         if (mobile.length !== 11 || /^1\d{10}$/.test(mobile) === false) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码');
@@ -200,11 +199,6 @@
         event.target.parentElement.className += ' blur';
       },
       checkSendCodeValid(){
-        if (!this.registrationCode) {
-          this.disableSendCode = true;
-          return false;
-        }
-
         if (!this.phone) {
           this.disableSendCode = true;
           return false;
