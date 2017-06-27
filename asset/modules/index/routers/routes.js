@@ -560,16 +560,6 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // project
-    path: '/help',
-    meta: {
-      title: '反馈建议'
-    },
-    component: require('../../../views/Account/Help.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
   { // 提问帮助
     path: '/help/ask',
     meta: {
