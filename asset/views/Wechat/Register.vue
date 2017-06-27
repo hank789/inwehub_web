@@ -88,6 +88,7 @@
       }
     },
     created () {
+      this.checkToken();
       this.getOpenId();
     },
     watch: {
@@ -103,6 +104,22 @@
       }
     },
     methods: {
+      checkToken(){
+        let token = this.$route.query.token;
+        if (token) {
+          var data = {
+            token:token
+          };
+          localEvent.setLocalItem('UserLoginInfo', data);
+
+          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+            let currentUser = user;
+            cb(currentUser);
+            router.replace({path: '/my'});
+          }));
+        }
+
+      },
       getOpenId(){
         let openid = this.$route.query.openid;
         if (!openid) {
