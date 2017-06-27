@@ -25,6 +25,7 @@
     "v-tooltip": "^2.0.0-beta.5",
     "vue": "^2.2.1",
     "vue-awesome-swiper": "^2.3.8",
+    "vue-qrcode": "github:xkeshi/vue-qrcode",
     "vue-router": "^2.2.0",
     "vue-timeago": "^3.3.0",
     "vue-wechat-title": "^2.0.0",

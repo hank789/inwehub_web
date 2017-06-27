@@ -7,6 +7,37 @@
     </header>
 
     <div class="mui-content">
+
+      <div class="erweimaWrapper" style="display: none">
+        <div class="header">
+          <div class="avatar">
+            <div class="avatarInner">
+              <img :src="avatar" class="avatar"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="realname">
+          <span>郭大红</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhuanjiabiaoji"></use>
+          </svg>
+        </div>
+
+        <div class="erweimaSplite">
+          <span></span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logowenzi"></use>
+          </svg>
+          <span></span>
+        </div>
+        <div class="qRCode">
+          <qrcode value="Hello, World!" :options="{ size: 190,padding:10}"></qrcode>
+        </div>
+
+      </div>
+
+
       <div class="professor">
 
       </div>
@@ -172,6 +203,114 @@
     text-align: center;
     position: relative;
     height: 78px;
+  }
+
+  .erweimaWrapper{
+    position: absolute;
+    left: 16px;
+    background: #444;
+    margin-top: 8px;
+    width: 263px;
+    border-radius: 4px;
+    z-index: 77;
+    text-align: center;
+    padding-bottom: 36px;
+
+    .header {
+      position: relative;
+      height: 92px;
+
+      .avatar {
+        position: absolute;
+        left: 50%;
+        margin-top:15px;
+        margin-left: -34.5px;
+
+        z-index: 9;
+        color: #ffffff;
+        display: inline-block;
+        height: 69px;
+        width: 69px;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 50%;
+        vertical-align: top;
+      }
+
+      .avatar .avatarInner {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+
+      .avatar img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+
+    .realname {
+      margin-top:20px;
+      color:#fff;
+      font-size:14px;
+      font-weight: bold;
+
+      span{
+        position: relative;
+        right:-3px;
+      }
+      .icon {
+        vertical-align: top;
+        font-size: 20px;
+        color: #3c95f9;
+      }
+
+
+    }
+
+    .erweimaSplite{
+      margin-top: -30px;
+
+      span{
+        display: inline-block;
+        width:62px;
+        margin: 0 3px;
+        border-bottom:1px solid #808080;
+      }
+
+      .icon{
+        color: #252525;
+        font-size: 50px;
+        position: relative;
+        top: 17px;
+      }
+    }
+
+    .qRCode{
+      margin-top:10px;
+      margin-left:36px;
+      background: #fff;
+      width:190px;
+      height:190px;
+      border-radius: 4px;
+
+      canvas{
+        border-radius: 4px;
+      }
+    }
   }
 
   .basic {

@@ -84,6 +84,11 @@ Vue.use(TimeAgo, {
 import {showWebview} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 
+
+import VueQrcode from 'vue-qrcode'
+Vue.component('qrcode', VueQrcode);
+
+
 const app = new Vue({
   router,
   store,
