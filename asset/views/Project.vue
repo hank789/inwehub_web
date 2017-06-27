@@ -81,6 +81,12 @@
       }
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-asklist');
+        this.getPrevList();
+      });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
         var lastY = event.detail.lastY;
