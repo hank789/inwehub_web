@@ -99,7 +99,8 @@ function updateUserInfoCache(user) {
     user_level:0,
     user_credits:0,
     user_coins:0,
-    is_company:0
+    is_company:0,
+    show_my_wallet:false
   };
   userLocal.user_id = user.id;
   userLocal.name = user.name;
@@ -130,6 +131,7 @@ function updateUserInfoCache(user) {
   userLocal.projects = user.projects;
   userLocal.expert_level = user.expert_level;
   userLocal.is_company = user.is_company;
+  userLocal.show_my_wallet = user.show_my_wallet;
 
   /*
    user.counts.map(function (count, index) {
