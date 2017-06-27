@@ -26,7 +26,7 @@
              v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
 
 
-      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="disableSendCode">{{getCodeText}}</span>
+      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
       <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
     </div>
 
@@ -74,7 +74,7 @@
     data: () => ({
       registrationCode: '', //邀请码
       phone: '', // 手机号码
-      isCanGetCode: true,
+      isCanGetCode: false,
       time: 0, // 时间倒计时
       openid: '',
       code: '', // 手机验证码,
@@ -200,11 +200,11 @@
       },
       checkSendCodeValid(){
         if (!this.phone) {
-          this.disableSendCode = true;
+          this.isCanGetCode = false;
           return false;
         }
 
-        this.disableSendCode = false;
+        this.isCanGetCode = true;
       },
       checkValid(){
         if (!this.registrationCode) {
