@@ -75,6 +75,7 @@
                 this.requestIapOrder(response_data);
               } else if (id ==='wx_pub') {
                 mui.waiting();
+                mui.alert(JSON.stringify(response_data.order_info));
                 //h5微信支付
                 WeixinJSBridge.invoke(
                   'getBrandWCPayRequest', response_data.order_info,
