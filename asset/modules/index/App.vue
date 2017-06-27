@@ -21,7 +21,7 @@
             <div><span class="mui-icon myicon myicon-point-hover"></span></div>
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/',true,'none','none')" v-else>
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/home',true,'none','none')" v-else>
             <span class="mui-icon myicon myicon-home"></span>
           </div>
 

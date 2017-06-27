@@ -24,13 +24,12 @@ const router = new VueRouter({
 
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide') {
+  console.log('url:'+url);
   if (mui.os.plus && mui.os.ios) {
     mui.plusReady(function(){
       var currentUrl = plus.webview.currentWebview().getURL();
 
       var nextUrl = currentUrl;
-
-      console.log('url:'+url);
 
       console.log('current_url:' + currentUrl);
 

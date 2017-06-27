@@ -1,7 +1,7 @@
 <template>
 <div>
   <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.push('/home')"></a>
+    <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
     <h1 class="mui-title">发布项目</h1>
   </header>
 
@@ -106,7 +106,7 @@
           }
 
           if (response.data.data.length > 0) {
-            this.tasks = response.data.data;
+            this.list = response.data.data;
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
