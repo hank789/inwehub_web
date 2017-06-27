@@ -373,6 +373,7 @@
               mui.toast(response.data.message);
               return;
             }
+            clearAllWebViewCache();
 
             localEvent.clearLocalItem('CacheRegister');
             this.isRegisterSuccess = true;

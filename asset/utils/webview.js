@@ -21,7 +21,24 @@ function showWebview(){
   }
 }
 
+function clearAllWebViewCache() {
+  if (mui.os.plus) {
+    if (mui.os.ios) {
+      mui.plusReady(function () {
+        var self = plus.webview.currentWebview();
+        var wvs=plus.webview.all();
+        for(var i=0;i<wvs.length;i++){
+          if (wvs[i].id !== self.id){
+            wvs[i].close();
+          }
+        }
+      });
+    }
+  }
+}
+
 export {
-  showWebview
+  showWebview,
+  clearAllWebViewCache
 };
 
