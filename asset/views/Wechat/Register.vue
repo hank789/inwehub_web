@@ -207,10 +207,10 @@
         this.isCanGetCode = true;
       },
       checkValid(){
-        if (!this.registrationCode) {
-          this.disableRegister = true;
-          return false;
-        }
+//        if (!this.registrationCode) {
+//          this.disableRegister = true;
+//          return false;
+//        }
 
         if (!this.phone) {
           this.disableRegister = true;
