@@ -75,7 +75,7 @@
                 this.requestIapOrder(response_data);
               } else if (id ==='wx_pub') {
                 mui.waiting();
-                mui.alert(JSON.stringify(response_data.order_info));
+                alert(JSON.stringify(response_data.order_info));
                 //h5微信支付
                 WeixinJSBridge.invoke(
                   'getBrandWCPayRequest', response_data.order_info,
@@ -85,7 +85,7 @@
                       this.$emit('pay_success', response_data.order_id, this.pay_object_type);
                     }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                     else{
-                      alert("支付失败，请重试");
+                      alert(res.err_msg);
                     }
                   }
                 );
