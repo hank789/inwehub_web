@@ -47,7 +47,7 @@
       </div>
 
       <ul class="mui-table-view mui-table-view-chevron firstItem">
-        <li class="mui-table-view-cell">
+        <li v-if="show_my_wallet" class="mui-table-view-cell">
           <a  class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
           </a>
         </li>
@@ -92,7 +92,8 @@
         answers:currentUser.answers,
         tasks:currentUser.tasks,
         projects:currentUser.projects,
-        expert_level:currentUser.expert_level
+        expert_level:currentUser.expert_level,
+        show_my_wallet:currentUser.show_my_wallet
       }
     },
     methods: {
@@ -122,6 +123,7 @@
           this.tasks = user.info.tasks;
           this.projects = user.info.projects;
           this.expert_level = user.info.expert_level;
+          this.show_my_wallet = user.info.show_my_wallet;
         }));
       }
     },
