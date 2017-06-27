@@ -26,7 +26,7 @@
              v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
 
 
-      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="disableSendCode">{{getCodeText}}</span>
+      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
       <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
     </div>
 
@@ -47,10 +47,8 @@
     </div>
 
 
-    <div class="help">
+    <div class="help" @tap.stop.prevent="">
       我没有邀请码？
-
-
     </div>
 
 
@@ -76,7 +74,7 @@
     data: () => ({
       registrationCode: '', //邀请码
       phone: '', // 手机号码
-      isCanGetCode: true,
+      isCanGetCode: false,
       time: 0, // 时间倒计时
       openid: '',
       code: '', // 手机验证码,
@@ -90,11 +88,11 @@
       }
     },
     created () {
+      this.checkToken();
       this.getOpenId();
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
-        this.checkSendCodeValid();
         this.checkValid();
       },
       phone: function (newValue, oldValue) {
@@ -106,6 +104,22 @@
       }
     },
     methods: {
+      checkToken(){
+        let token = this.$route.query.token;
+        if (token) {
+          var data = {
+            token:token
+          };
+          localEvent.setLocalItem('UserLoginInfo', data);
+
+          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+            let currentUser = user;
+            cb(currentUser);
+            router.replace({path: '/my'});
+          }));
+        }
+
+      },
       getOpenId(){
         let openid = this.$route.query.openid;
         if (!openid) {
@@ -141,21 +155,21 @@
       },
       getCode(){
         let mobile = this.phone;
-        let type = 'register';
+        let type = 'wx_gzh_register';
 
         if (!this.isCanGetCode) {
           return;
         }
 
-        if (!this.registrationCode) {
-          this.showTip(this.$refs.registrationCode, '请输入邀请码');
-          return;
-        }
-
-        if (this.registrationCode.length < 6) {
-          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
-          return;
-        }
+//        if (!this.registrationCode) {
+//          this.showTip(this.$refs.registrationCode, '请输入邀请码');
+//          return;
+//        }
+//
+//        if (this.registrationCode.length < 6) {
+//          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
+//          return;
+//        }
 
         if (mobile.length !== 11 || /^1\d{10}$/.test(mobile) === false) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码');
@@ -167,6 +181,7 @@
         postRequest('auth/sendPhoneCode', {
             mobile,
             type,
+            openid:this.openid,
             'registration_code': this.registrationCode
           }
         )
@@ -179,7 +194,7 @@
               return;
             }
 
-            this.time = 60;
+            this.time = 120;
             this.timer();
 
             mui.toast('验证码发送成功');
@@ -201,23 +216,18 @@
         event.target.parentElement.className += ' blur';
       },
       checkSendCodeValid(){
-        if (!this.registrationCode) {
-          this.disableSendCode = true;
-          return false;
-        }
-
         if (!this.phone) {
-          this.disableSendCode = true;
+          this.isCanGetCode = false;
           return false;
         }
 
-        this.disableSendCode = false;
+        this.isCanGetCode = true;
       },
       checkValid(){
-        if (!this.registrationCode) {
-          this.disableRegister = true;
-          return false;
-        }
+//        if (!this.registrationCode) {
+//          this.disableRegister = true;
+//          return false;
+//        }
 
         if (!this.phone) {
           this.disableRegister = true;
