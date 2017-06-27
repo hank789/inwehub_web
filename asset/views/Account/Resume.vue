@@ -8,7 +8,7 @@
 
     <div class="mui-content">
 
-      <div class="erweimaWrapper" style="display: none">
+      <div class="erweimaWrapper" v-show="showQrCode" @tap.stop.prevent="toggleQrCode">
         <div class="header">
           <div class="avatar">
             <div class="avatarInner">
@@ -45,8 +45,8 @@
       <div class="basic">
         <div class="cardWrapper">
           <div class="card">
-            <div class="erweima"><img src="../../statics/images/resume_erweima_3x.png"/></div>
-            <div class="share">
+            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png"/></div>
+            <div class="share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-dingwei"></use>
               </svg>
@@ -159,6 +159,16 @@
               >继续编辑
         </button>
 
+
+      <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+          <div class="title">分享到</div>
+          <div class="more">
+               <div class="single">
+                   <img src="../../statics/images/wechat_2x.png"/>
+               </div>
+          </div>
+      </div>
+
   </div>
 </template>
 
@@ -190,9 +200,20 @@
         answers: currentUser.answers,
         tasks: currentUser.tasks,
         projects: currentUser.projects,
-        expert_level: currentUser.expert_level
+        expert_level: currentUser.expert_level,
+        showQrCode:false
       }
     },
+    methods:{
+      share(){
+        setTimeout(()=>{
+          mui('#shareWrapper').popover('toggle');
+        }, 150);
+      },
+      toggleQrCode(){
+          this.showQrCode = !this.showQrCode;
+      }
+    }
   };
 
 </script>
@@ -561,5 +582,30 @@
     height:48px;
     margin:0;
     font-size:17px;
+  }
+
+  .shareWrapper {
+      .title{
+        background: #ececee;
+        text-align: center;
+        font-size:14px;
+        padding:12px 0;
+      }
+
+    .more{
+      background: #fff;
+      padding:10px;
+
+      .single{
+        width:55px;
+        height:55px;
+        margin:0 10px;
+
+        img{
+          width:100%;
+          height:100%;
+        }
+      }
+    }
   }
 </style>
