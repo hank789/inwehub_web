@@ -247,7 +247,7 @@
               if (code === 1115) {
                 //去填写注册信息
                 localEvent.setLocalItem('wechatInfo', data);
-                router.push({path: '/wechat/info'});
+                router.replace({path: '/wechat/info'});
               } else {
                 mui.toast(response.data.message);
                 return;
