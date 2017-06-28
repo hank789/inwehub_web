@@ -63,7 +63,11 @@ router.beforeEach((to, from, next) => {
   localEvent.setLocalItem('referer', {path:referer});
 
   mui.plusReady(function () {
-    plus.navigator.setFullscreen(false);
+    if (from.path === 'login') {
+      plus.navigator.setFullscreen(true);
+    } else {
+      plus.navigator.setFullscreen(false);
+    }
   });
 
   next();
