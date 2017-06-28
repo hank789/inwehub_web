@@ -115,10 +115,10 @@
       loading_gif: loading_gif
     }),
     created () {
+      showInwehubWebview();
       this.getUserInfo();
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-info');

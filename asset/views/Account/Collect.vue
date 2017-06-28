@@ -92,10 +92,10 @@
       }
     },
     created(){
-        this.initData();
+      showInwehubWebview();
+      this.initData();
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-collect');

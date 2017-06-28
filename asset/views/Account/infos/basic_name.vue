@@ -37,11 +37,7 @@
       this.name = userInfo.name;
     },
     mounted(){
-      showInwehubWebview();
-      window.addEventListener('refreshData', function(e){
-        //执行刷新
-        console.log('refresh-basic-name');
-      });
+
     },
     methods:{
       submitInfo: function () {

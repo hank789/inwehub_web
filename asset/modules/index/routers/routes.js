@@ -11,6 +11,7 @@ import Home from '../../../views/Home.vue';
 import {requestAuth, CanNotGetInWhenLogged} from '../../../utils/auth';
 
 import localEvent from '../../../stores/localStorage';
+import {checkUpdate} from '../../../utils/updateVersion';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
       title: '主页'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       if (mui.os.plus) {
         var lauch = localEvent.getLocalItem('lauchFlag');
         if (!lauch.showGuide && 1 === 2) {
@@ -85,6 +90,10 @@ const routes = [
       title: '个人中心'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -106,7 +115,8 @@ const routes = [
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
-    }
+    },
+
   },
 
   { // 个人信息
@@ -282,6 +292,10 @@ const routes = [
       title: '我的钱包'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -352,6 +366,10 @@ const routes = [
       title: '提问'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -402,6 +420,10 @@ const routes = [
       title: '任务'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -422,6 +444,10 @@ const routes = [
       title: '我的提问'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -442,6 +468,10 @@ const routes = [
       title: '我的回答'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },
@@ -519,6 +549,10 @@ const routes = [
     },
     component: require('../../../views/Discover/Discover.vue'),
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       requestAuth(to, from, next)
     }
   },

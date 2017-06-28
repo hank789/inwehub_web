@@ -42,14 +42,12 @@
       Meditor
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', function(e){
         //执行刷新
         console.log('refresh-answer');
       });
     },
     methods: {
-
       cancelAnswer(){
         if (this.editorObj.getLength() <= 1) {
           mui.back();
@@ -145,6 +143,7 @@
       }
     },
     created () {
+      showInwehubWebview();
       let id = parseInt(this.$route.params.id);
       this.id = id;
     }

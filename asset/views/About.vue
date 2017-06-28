@@ -21,6 +21,7 @@
       loading:1
     }),
     created () {
+      showInwehubWebview();
       apiRequest(`system/service_about`,{}).then(response_data => {
         if (response_data === false) {
           return;

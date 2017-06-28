@@ -136,13 +136,13 @@
       }
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', function(e){
         //执行刷新
         console.log('refresh-refuse');
       });
     },
     created () {
+      showInwehubWebview();
       let id = parseInt(this.$route.params.id);
 
       if (!id) {

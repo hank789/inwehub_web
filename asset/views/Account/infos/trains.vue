@@ -39,30 +39,29 @@
       loading: true
     }),
     methods: {
-        initData() {
-          postRequest(`account/train/list`, {}).then(response => {
+      initData() {
+        postRequest(`account/train/list`, {}).then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
 
-            this.trains = response.data.data;
-            this.loading = false;
+          this.trains = response.data.data;
+          this.loading = false;
 
-            var newTrains = [];
-            for(var i in this.trains) {
-              var info = this.trains[i];
-              var id = info.id;
-              newTrains[id] = info;
-            }
-            localEvent.setLocalItem('trains', newTrains);
-          });
-        }
+          var newTrains = [];
+          for(var i in this.trains) {
+            var info = this.trains[i];
+            var id = info.id;
+            newTrains[id] = info;
+          }
+          localEvent.setLocalItem('trains', newTrains);
+        });
+      }
     },
     mounted () {
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-trains');
@@ -75,6 +74,7 @@
     },
 
     created () {
+      showInwehubWebview();
       this.initData();
     }
   }

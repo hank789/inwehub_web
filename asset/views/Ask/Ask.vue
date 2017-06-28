@@ -105,7 +105,6 @@
       pay
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', function(e){
         //执行刷新
         console.log('refresh-ask');
@@ -158,13 +157,13 @@
       }
     },
     created () {
-
-        if (this.$route.query.id) {
-          var id = parseInt(this.$route.query.id);
-          if (id) {
-              this.uid = id;
-          }
+      showInwehubWebview();
+      if (this.$route.query.id) {
+        var id = parseInt(this.$route.query.id);
+        if (id) {
+            this.uid = id;
         }
+      }
 
       var info = this.$store.state.askType.info;
       if (info.money || info.desc) {

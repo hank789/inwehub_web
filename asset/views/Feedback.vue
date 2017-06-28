@@ -34,6 +34,9 @@
     components: {
       MTextarea
     },
+    created () {
+      showInwehubWebview();
+    },
     methods: {
       submit(){
         if (!this.description) {

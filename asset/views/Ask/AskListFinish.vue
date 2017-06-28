@@ -213,6 +213,7 @@
       this.$store.dispatch(ASKS_FINISH_LIST_APPEND, this.asks);
     },
     created(){
+      showInwehubWebview();
       if (this.isFromDetail()) {
         var list = this.$store.state.asksFinish.list;
       } else {
@@ -225,10 +226,10 @@
       }
     },
     mounted(){
-      showInwehubWebview();
-      window.addEventListener('refreshData', function(e){
+      window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-askListFinish');
+        this.getPrevList();
       });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {

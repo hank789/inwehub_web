@@ -19,7 +19,11 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    created () {
+      showInwehubWebview();
+    },
+  };
 </script>
 
 <style scoped="scoped">

@@ -4,7 +4,7 @@
 
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <h1 class="mui-title">我的</h1>
-      <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.pushPlus('/setting')"></a>
+      <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.pushPlus('/setting',false,'pop-in','close')"></a>
     </header>
 
     <div class="mui-content">
@@ -129,11 +129,11 @@
       }
     },
     created () {
+      showInwehubWebview();
       this.initData();
     },
     mounted(){
       this.getToken();
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-my');

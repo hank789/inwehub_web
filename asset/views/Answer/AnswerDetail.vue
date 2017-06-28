@@ -206,7 +206,6 @@
       }
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-answerDetail');
@@ -506,6 +505,7 @@
       '$route': 'getData'
     },
     created () {
+      showInwehubWebview();
       this.getData();
     }
   }
