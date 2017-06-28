@@ -1,7 +1,7 @@
 <template>
 <div>
   <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.push('/home')"></a>
+    <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
     <h1 class="mui-title">发布项目</h1>
   </header>
 
@@ -81,6 +81,12 @@
       }
     },
     mounted(){
+      showInwehubWebview();
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-asklist');
+        this.getPrevList();
+      });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
         var lastY = event.detail.lastY;
@@ -100,7 +106,7 @@
           }
 
           if (response.data.data.length > 0) {
-            this.tasks = response.data.data;
+            this.list = response.data.data;
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed

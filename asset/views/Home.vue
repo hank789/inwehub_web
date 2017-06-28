@@ -3,7 +3,7 @@
 
 
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.push('/project')"></a>
+      <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.pushPlus('/project')"></a>
       <!--<h1 class="mui-title">InweHub</h1>-->
       <span class="mui-icon myicon myicon-home-title"></span>
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
