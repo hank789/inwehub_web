@@ -47,7 +47,7 @@
     </div>
 
 
-    <div class="help" @tap.stop.prevent="">
+    <div class="help" @tap.stop.prevent="jumpToForm">
       我没有邀请码？
     </div>
 
@@ -104,6 +104,9 @@
       }
     },
     methods: {
+      jumpToForm(){
+          window.location.href="http://cn.mikecrm.com/ovYy1u4";
+      },
       checkToken(){
         let token = this.$route.query.token;
         if (token) {
