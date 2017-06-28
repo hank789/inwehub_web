@@ -108,7 +108,7 @@
       },
       getPrevList(){
 
-        postRequest(`account/money_log`, {}).then(response => {
+        postRequest(`account/money_log`, {top_id: this.topId}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -118,11 +118,10 @@
 
 
           if (response.data.data.length > 0) {
-            this.list = response.data.data;
+            this.list = response.data.data.concat(this.list);
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-
         });
       },
       getNextList() {

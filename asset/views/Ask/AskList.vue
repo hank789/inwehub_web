@@ -152,6 +152,8 @@
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+          mui('#pullrefresh').pullRefresh().refresh(true);
+
         });
       },
       getNextList() {
