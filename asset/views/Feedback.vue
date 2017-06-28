@@ -43,8 +43,6 @@
           mui.toast('请填写反馈内容');
           return;
         }
-        this.description = '';
-        return;
 
         var data = {
           content: this.description
