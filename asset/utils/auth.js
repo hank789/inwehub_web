@@ -1,5 +1,5 @@
 import localEvent from '../stores/localStorage';
-import router from '../routers/index';
+import router from '../modules/index/routers/index';
 
 // 判断是否可以进入目标路由
 function requestAuth (to, from, next) {
@@ -35,7 +35,7 @@ function CanNotGetInWhenLogged (to, from, next) {
 function logout () {
   localEvent.clearLocalItem('UserLoginInfo');
   localEvent.clearLocalItem('UserInfo');
-  router.push({ path: '/login' });
+  router.pushPlus('/login',true,'none','none');
 }
 
 export {

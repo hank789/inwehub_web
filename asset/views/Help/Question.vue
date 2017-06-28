@@ -24,7 +24,6 @@
     }),
     mounted(){
 
-
     },
     created () {
       showInwehubWebview();

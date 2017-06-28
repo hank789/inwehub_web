@@ -47,7 +47,7 @@ All Rights Reserved</div>
 <script>
   import localEvent from '../../stores/localStorage';
   import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
-  import router from '../../routers/index';
+  import router from '../../modules/index/routers/index';
   import {apiRequest} from '../../utils/request';
 
   export  default {
@@ -79,8 +79,7 @@ All Rights Reserved</div>
         this.$store.dispatch(ASKS_LIST_APPEND, {});
         this.$store.dispatch(ANSWERS_LIST_APPEND, {});
         this.$store.dispatch(TASK_LIST_APPEND, {});
-
-        router.push({path: 'login'});
+        router.pushPlus('/login',true,'none','none');
       },
       logOut(){
         if (mui.os.plus) {

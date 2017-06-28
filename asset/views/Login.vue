@@ -23,7 +23,7 @@
 <script>
   import request, { createAPI,apiRequest } from '../utils/request';
   import localEvent from '../stores/localStorage';
-  import router from '../routers/index';
+  import router from '../modules/index/routers/index';
   import detecdOS from '../utils/detecdOS';
   import errorCodes from '../stores/errorCodes';
   import deleteObjectItems from '../utils/deleteObjectItems';
@@ -41,6 +41,10 @@
       showPhoneLabel:true,
       showPasswordLabel:true
     }),
+    created () {
+      showInwehubWebview();
+      clearAllWebViewCache();
+    },
     watch: {
       phone: function (newMoney,oldValue) {
         const askDetail = /^[0-9]+$/;
@@ -50,7 +54,12 @@
       }
     },
     mounted(){
-
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-login');
+        this.phone = '';
+        this.password = '';
+      });
       mui(".login").on('focusout', 'input', (e) => {
           if (e.target.type === 'text' && !this.phone) {
              this.showPhoneLabel = true;
@@ -169,7 +178,7 @@
             let currentUser = user;
             //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
-            router.push({ path: 'my' });
+            router.pushPlus('/my',true,'none','none');
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {

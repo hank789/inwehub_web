@@ -24,9 +24,9 @@
     }),
     mounted(){
 
-
     },
     created () {
+      showInwehubWebview();
       postRequest(`system/service_register`, {}).then(response => {
         var code = response.data.code;
         if (code !== 1000) {

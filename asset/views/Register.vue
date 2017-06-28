@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import router from '../routers/index';
+  import router from '../modules/index/routers/index';
   import request, {createAPI, apiRequest, postRequest} from '../utils/request';
   import detecdOS from '../utils/detecdOS';
   import localEvent from '../stores/localStorage';
@@ -89,6 +89,9 @@
       getCodeText () {
         return this.time == 0 ? '获取验证码' : this.time + '秒后重发';
       }
+    },
+    created () {
+      showInwehubWebview();
     },
     mounted(){
       this.getCacheData();
@@ -399,7 +402,7 @@
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
               cb(currentUser);
-              router.push({path: '/my'});
+              router.pushPlus('/my',true,'none','none');
             }));
           })
           .catch(({response: {data = {}} = {}}) => {
