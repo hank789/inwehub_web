@@ -49,7 +49,7 @@
 
       <ul class="mui-table-view mui-table-view-chevron firstItem">
         <li v-if="show_my_wallet" class="mui-table-view-cell">
-          <a  class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/finance')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
+          <a  class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/finance',true,'pop-in','close')"><span class="mui-icon myicon myicon-wallet"></span>我的钱包
           </a>
         </li>
         <li class="mui-table-view-cell">
