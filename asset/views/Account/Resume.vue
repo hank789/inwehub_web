@@ -105,16 +105,17 @@
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知
+        负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
     </div>
 
@@ -123,16 +124,16 @@
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
     </div>
 
@@ -141,22 +142,20 @@
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
-        <div class="toggle">收起</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
     </div>
 
-
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-              >继续编辑
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')">继续编辑
         </button>
 
 
@@ -205,6 +204,25 @@
       }
     },
     methods:{
+      toggleDeatil(event){
+
+          var Desc = event.target.previousSibling.previousSibling;
+          if (/hide/.test(Desc.className)) {
+            Desc.className = Desc.className.replace(' hide', '');
+            Desc.className = Desc.className.replace(' mui-ellipsis-3', '');
+            Desc.className += ' show';
+
+            event.target.className = "toggle hide";
+            event.target.innerText = '收起';
+          } else {
+            Desc.className = Desc.className.replace(' show', '');
+            Desc.className += ' hide mui-ellipsis-3';
+
+            event.target.className = "toggle show";
+            event.target.innerText = '查看';
+          }
+
+      },
       share(){
         setTimeout(()=>{
           mui('#shareWrapper').popover('toggle');
@@ -342,6 +360,7 @@
       color: #808080;
       padding: 19px 14px 35px;
       line-height: 24px;
+
       .icon {
         font-size: 20px;
         color: #3c95f9;
@@ -551,6 +570,12 @@
         font-size:13px;
         margin-top: 6px;
         line-height: 24px;
+        -webkit-transition:all 3s;
+        height:auto;
+
+        &.hide{
+          height:69px;
+        }
       }
 
       .toggle{
@@ -561,6 +586,13 @@
         margin-right:5px;
         color:#3c95f9;
 
+        &.show:before{
+          border:none;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 10px solid #d8d8d8;
+        }
+
         &:before{
             position: absolute;
             left:-19px;
@@ -568,6 +600,7 @@
             width: 0;
             height: 0;
             content:'';
+            border:none;
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
             border-bottom: 10px solid #d8d8d8;
