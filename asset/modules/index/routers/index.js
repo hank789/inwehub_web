@@ -61,6 +61,11 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
 router.beforeEach((to, from, next) => {
   var referer = from.path;
   localEvent.setLocalItem('referer', {path:referer});
+
+  mui.plusReady(function () {
+    plus.navigator.setFullscreen(false);
+  });
+
   next();
 });
 
