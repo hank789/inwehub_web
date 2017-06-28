@@ -3,5 +3,5 @@ var devEnv = require('./dev.env')
 
 module.exports = merge(devEnv, {
   NODE_ENV: '"test"',
-  API_ROOT: '"http://api.ywhub.com/"'
+  API_ROOT: '"https://api.ywhub.com/"'
 })
