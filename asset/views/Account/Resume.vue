@@ -124,6 +124,11 @@
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
+        <div class="others">
+          <div class="other"><div class="title">【行业领域】</div><div class="content">专业服务</div></div>
+          <div class="other"><div class="title">【客户名称】</div><div class="content">SAO Business One；SAO Business One…</div></div>
+          <div class="other"><div class="title">【公司名称】</div><div class="content">上海樱维网络有限公司</div></div>
+        </div>
         <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
@@ -141,14 +146,14 @@
     <div class="list">
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
+        <div class="company">兰州大学<i class="separate"></i>硕士<i class="separate"></i>市场研究</div>
         <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
       <div class="item">
         <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
+        <div class="company">兰州大学<i class="separate"></i>硕士<i class="separate"></i>市场研究</div>
         <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
@@ -200,8 +205,20 @@
         tasks: currentUser.tasks,
         projects: currentUser.projects,
         expert_level: currentUser.expert_level,
-        showQrCode:false
+        showQrCode:false,
+        isShare:false,
       }
+    },
+    created () {
+        var from = this.$router.currentRoute.path;
+        if (from === '/share/resume') {
+            this.isShare = true;
+            let token = this.$route.query.token;
+
+        }
+    },
+    mounted(){
+
     },
     methods:{
       toggleDeatil(event){
@@ -541,6 +558,22 @@
         display: none;
       }
 
+      .others{
+        color:#b4b4b6;
+        font-size:13px;
+
+        .other{
+
+          display:-webkit-flex;
+          display:flex;
+
+          .title{
+              margin-left:-10px;
+              width:80px;
+          }
+        }
+      }
+
       .time{
         position: relative;
         font-size:14px;
@@ -550,7 +583,7 @@
 
       .time:before{
         position: absolute;
-        left:-19px;
+        left:-18px;
         top:5px;
         content: '';
         width:8px;

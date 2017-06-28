@@ -118,6 +118,17 @@ const routes = [
     },
 
   },
+  { // 共享个人名片
+    path: '/share/resume',
+    component: require('../../../views/Account/Resume.vue'),
+    meta: {
+      title: '个人名片'
+    },
+    beforeEnter: (to, from, next) => {
+      next();
+    },
+
+  },
 
   { // 个人信息
     path: '/my/info/job/:id',
@@ -704,7 +715,7 @@ const routes = [
       title: '绑定注册'
     },
     beforeEnter: (to, from, next) => {
-      //CanNotGetInWhenLogged(to, from, next)
+      CanNotGetInWhenLogged(to, from, next)
       next();
     }
   },
@@ -715,7 +726,7 @@ const routes = [
       title: '填写信息'
     },
     beforeEnter: (to, from, next) => {
-      //CanNotGetInWhenLogged(to, from, next)
+      CanNotGetInWhenLogged(to, from, next)
       next();
     }
   },

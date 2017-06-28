@@ -29,11 +29,9 @@
       <div class="mui-table-view">
         <div class="mui-table-view-cell footer">
           <div class="logo"><span class="mui-icon myicon myicon-setting-logo"></span></div>
-          <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut">
+          <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut" v-show="!isWeiXin()">
             退出应用
-
           </button>
-          <div class="logo"></div>
           <div class="copyright">Copyright © 2017 InweTech.<br/>
 All Rights Reserved</div>
         </div>
@@ -69,6 +67,16 @@ All Rights Reserved</div>
       showInwehubWebview();
     },
     methods: {
+      isWeiXin(){
+        return false;
+        var ua = window.navigator.userAgent.toLowerCase();
+
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+           return true;
+        }else{
+           return false;
+        }
+      },
       clearCache(){
         localEvent.setLocalItem('lauchFlag', {showGuide: false});
         mui.toast('清除成功');
