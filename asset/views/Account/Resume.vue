@@ -155,7 +155,7 @@
       </div>
     </div>
 
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary">继续编辑
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')">继续编辑
         </button>
 
 

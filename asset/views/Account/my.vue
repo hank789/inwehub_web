@@ -20,7 +20,8 @@
           <div class="realname">{{ name }}</div>
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')"><span>{{ account_info_complete_percent }}%</span> 编辑名片</div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片<span>{{ account_info_complete_percent }}%</span></div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
           </div>
         </div>
       </div>
@@ -233,20 +234,18 @@
   .professor .buttonAsk {
     position: relative;
     display: inline-block;
-    width: 60%;
     height: 37px;
     font-size: 14px;
     line-height: 37px;
     text-align: center;
     border: 1px solid #fff;
     border-radius: 50px;
-    padding-left: 45px;
+    padding:0 15px;
+    margin-right:2px;
   }
 
   .professor .buttonAsk span {
-    position: absolute;
-    font-size: 20px;
-    left: 10px;
+    margin-left:5px;
     color: #F6A623;
   }
 
