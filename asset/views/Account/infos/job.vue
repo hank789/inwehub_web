@@ -302,7 +302,6 @@
       next();
     },
     mounted () {
-      showInwehubWebview();
       window.addEventListener('refreshData', function(e){
         //执行刷新
         console.log('refresh-job');
@@ -345,7 +344,9 @@
       MTextarea
     },
     created () {
+      showInwehubWebview();
       let id = parseInt(this.$route.params.id);
+      console.log("id:"+id);
       this.id = id;
       if (this.id) {
          var jobs = localEvent.getLocalItem('jobs');

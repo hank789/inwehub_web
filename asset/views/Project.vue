@@ -81,7 +81,6 @@
       }
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-asklist');
@@ -184,11 +183,11 @@
       next();
     },
     created(){
-
-        var pos = localEvent.getLocalItem('projectPos');
-        if (pos) {
-            this.lastY = pos.lastY;
-        }
+      showInwehubWebview();
+      var pos = localEvent.getLocalItem('projectPos');
+      if (pos) {
+          this.lastY = pos.lastY;
+      }
 
 //      postRequest(`project/myList`, {}).then(response => {
 //        var code = response.data.code;

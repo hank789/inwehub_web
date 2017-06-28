@@ -20,3 +20,10 @@
 
   </div>
 </template>
+<script>
+  export  default {
+    created () {
+      showInwehubWebview();
+    }
+  };
+</script>

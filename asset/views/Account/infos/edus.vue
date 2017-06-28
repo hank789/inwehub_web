@@ -40,31 +40,30 @@
       loading: true
     }),
     methods: {
-        initData() {
-          postRequest(`account/edu/list`, {}).then(response => {
+      initData() {
+        postRequest(`account/edu/list`, {}).then(response => {
 
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
 
-            this.edus = response.data.data;
-            this.loading = false;
+          this.edus = response.data.data;
+          this.loading = false;
 
-            var newEdus = [];
-            for(var i in this.edus) {
-              var info = this.edus[i];
-              var id = info.id;
-              newEdus[id] = info;
-            }
-            localEvent.setLocalItem('edus', newEdus);
+          var newEdus = [];
+          for(var i in this.edus) {
+            var info = this.edus[i];
+            var id = info.id;
+            newEdus[id] = info;
+          }
+          localEvent.setLocalItem('edus', newEdus);
 
-          });
-        }
+        });
+      }
     },
     mounted () {
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-edus');
@@ -77,6 +76,7 @@
     },
 
     created () {
+      showInwehubWebview();
       this.initData();
     }
   }

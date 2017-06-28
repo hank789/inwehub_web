@@ -33,8 +33,10 @@
         account_info_complete_percent: currentUser.account_info_complete_percent
       }
     },
-    mounted(){
+    created () {
       showInwehubWebview();
+    },
+    mounted(){
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-discover');

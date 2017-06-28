@@ -110,6 +110,7 @@
       }
     },
     created(){
+      showInwehubWebview();
       if (this.isFromDetail()) {
         var list = this.$store.state.task.list;
       } else {
@@ -122,7 +123,6 @@
       }
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-taskList');

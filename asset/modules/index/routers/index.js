@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
-import {checkUpdate} from '../../../utils/updateVersion';
 import localEvent from '../../../stores/localStorage';
 
 
@@ -60,14 +59,8 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
 }
 
 router.beforeEach((to, from, next) => {
-  // 检查版本更新
-  mui.plusReady(function() {
-    checkUpdate();
-  });
-
   var referer = from.path;
   localEvent.setLocalItem('referer', {path:referer});
-
   next();
 });
 

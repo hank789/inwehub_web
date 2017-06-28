@@ -215,7 +215,7 @@
       this.$store.dispatch(ASKS_LIST_APPEND, this.asks);
     },
     created(){
-
+      showInwehubWebview();
       if (this.isFromDetail()) {
         var list = this.$store.state.asks.list;
       } else {
@@ -228,8 +228,6 @@
       }
     },
     mounted(){
-      console.log('ask1');
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-asklist');

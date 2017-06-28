@@ -103,6 +103,7 @@
       this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
     },
     created(){
+      showInwehubWebview();
       if (this.isFromDetail()) {
           var list = this.$store.state.answers.list;
       } else {
@@ -115,7 +116,6 @@
       }
     },
     mounted(){
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-answerList');

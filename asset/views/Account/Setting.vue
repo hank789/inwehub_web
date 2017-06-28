@@ -65,6 +65,9 @@ All Rights Reserved</div>
         android_market_url: ''
       }
     },
+    created () {
+      showInwehubWebview();
+    },
     methods: {
       clearCache(){
         localEvent.setLocalItem('lauchFlag', {showGuide: false});
@@ -121,7 +124,6 @@ All Rights Reserved</div>
     },
     mounted(){
       mui('.mui-switch')['switch']();
-      showInwehubWebview();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-setting');
