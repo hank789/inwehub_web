@@ -255,7 +255,16 @@ const routes = [
     ]
   },
 
-
+  { // 隐私设置
+    path: '/my/info/privacy',
+    component: require('../../../views/Account/infos/privacy.vue'),
+    meta: {
+      title: '隐私设置'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 培训经历
     path: '/my/info/train/:id',
     component: require('../../../views/Account/infos/train.vue'),
