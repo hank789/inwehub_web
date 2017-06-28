@@ -106,7 +106,7 @@
       mobile: ''
     }),
     created () {
-
+      showInwehubWebview();
     },
     computed: {
       infoIndustryTagsNames() {
