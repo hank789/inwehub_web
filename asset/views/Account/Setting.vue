@@ -68,7 +68,6 @@ All Rights Reserved</div>
     },
     methods: {
       isWeiXin(){
-        return false;
         var ua = window.navigator.userAgent.toLowerCase();
 
         if(ua.match(/MicroMessenger/i) == 'micromessenger'){
