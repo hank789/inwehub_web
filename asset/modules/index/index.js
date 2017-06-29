@@ -92,6 +92,21 @@ import VueQrcode from 'vue-qrcode'
 Vue.component('qrcode', VueQrcode);
 
 
+Vue.mixin({
+  mounted() {
+    if (mui.os.wechat && this.$router.currentRoute.meta.wechatHideHeader) {
+       var header = document.getElementsByTagName('header');
+       if (header && header[0]) {
+         header[0].className = header[0].className.replace("mui-bar", "");
+         header[0].className = header[0].className.replace("mui-bar-nav", "");
+
+         header[0].className += " mui-wechat-hidden";
+       }
+    }
+  }
+})
+
+
 const app = new Vue({
   router,
   store,

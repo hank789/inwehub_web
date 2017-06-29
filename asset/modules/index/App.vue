@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-
-
-
-
-
-
-
-        <div v-wechat-title="'Inwehub'"></div>
+        <div v-wechat-title="$route.meta.title"></div>
 
         <div class='view'>
           <transition name='none' mode="out-in">
