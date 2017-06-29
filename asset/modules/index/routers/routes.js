@@ -49,7 +49,7 @@ const routes = [
   { // message
     path: '/home',
     meta: {
-      title: ''
+      title: 'Inwehub'
     },
     component: require('../../../views/Home.vue'),
     beforeEnter: (to, from, next) => {
@@ -90,7 +90,7 @@ const routes = [
     path: '/my',
     component: require('../../../views/Account/my.vue'),
     meta: {
-      title: '个人中心'
+      title: '我的'
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -104,7 +104,8 @@ const routes = [
     path: '/my/info',
     component: require('../../../views/Account/info.vue'),
     meta: {
-      title: '个人信息'
+      title: '我的名片',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -220,7 +221,8 @@ const routes = [
         path: '/my/info/basic/description',
         component: require('../../../views/Account/infos/basic_description.vue'),
         meta: {
-          title: '个人信息'
+          title: '我的档案',
+          wechatHideHeader:true
         },
         beforeEnter: (to, from, next) => {
           requestAuth(to, from, next)
@@ -497,7 +499,8 @@ const routes = [
     path: '/answer/:id',
     component: require('../../../views/Answer/AnswerDetail.vue'),
     meta: {
-      title: '应答'
+      title: '回答问题',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -507,7 +510,8 @@ const routes = [
     path: '/answerrefuse/:id',
     component: require('../../../views/Answer/Refuse.vue'),
     meta: {
-      title: '拒绝应答'
+      title: '拒绝应答',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -517,7 +521,8 @@ const routes = [
     path: '/answerTime/:id',
     component: require('../../../views/Answer/SelectTime.vue'),
     meta: {
-      title: '确认应答'
+      title: '确认应答',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -527,7 +532,8 @@ const routes = [
     path: '/realAnswer/:id',
     component: require('../../../views/Answer/Answer.vue'),
     meta: {
-      title: '应答'
+      title: '确认应答',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -638,7 +644,8 @@ const routes = [
   { // bid
     path: '/bid',
     meta: {
-      title: '我的竞标'
+      title: '我的竞标',
+      wechatHideHeader:true
     },
     component: require('../../../views/Bid.vue'),
     beforeEnter: (to, from, next) => {
@@ -658,7 +665,8 @@ const routes = [
   { // discover project
     path: '/discover/project',
     meta: {
-      title: '项目协作'
+      title: '项目协作',
+      wechatHideHeader:true
     },
     component: require('../../../views/Discover/Project.vue'),
     beforeEnter: (to, from, next) => {
@@ -668,7 +676,8 @@ const routes = [
   { // discover company
     path: '/discover/company',
     meta: {
-      title: '附近企业'
+      title: '附近企业',
+      wechatHideHeader:true
     },
     component: require('../../../views/Discover/Company.vue'),
     beforeEnter: (to, from, next) => {
@@ -678,7 +687,8 @@ const routes = [
   { // discover activity
     path: '/discover/activity',
     meta: {
-      title: '最新活动'
+      title: '最新活动',
+      wechatHideHeader:true
     },
     component: require('../../../views/Discover/Activity.vue'),
     beforeEnter: (to, from, next) => {
