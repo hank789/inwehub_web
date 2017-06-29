@@ -276,8 +276,8 @@
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
+            mui.toast(response.data.message);
+            this.$router.pushPlus('/task');
           }
 
           this.ask = response.data.data;
