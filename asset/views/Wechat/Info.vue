@@ -168,25 +168,21 @@
 
           });
       },
-      mounted(){
 
-      },
-      beforeRouteEnter (to, from, next) {
 
-        if (!this.isRegisterSuccess) {
-          this.getCacheData();
-        }
+    },
+    mounted(){
+      if (!this.isRegisterSuccess) {
+        this.getCacheData();
+      }
+    },
+    beforeRouteLeave(to, from, next) {
 
-        next();
-      },
-      beforeRouteLeave(to, from, next) {
+      if (!this.isRegisterSuccess) {
+        this.setCacheData();
+      }
 
-        if (!this.isRegisterSuccess) {
-          this.setCacheData();
-        }
-
-        next();
-      },
+      next();
     }
   }
 </script>
