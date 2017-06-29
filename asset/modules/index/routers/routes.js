@@ -532,7 +532,7 @@ const routes = [
     path: '/realAnswer/:id',
     component: require('../../../views/Answer/Answer.vue'),
     meta: {
-      title: '确认应答'
+      title: '回答'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

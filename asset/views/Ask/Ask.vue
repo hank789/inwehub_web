@@ -674,7 +674,7 @@
   }
 
   .selectMoney .apple-icon{
-    padding:8px 35px 0;
+    padding:8px 35px 0 0;
   }
   .mui-popover .mui-table-view .mui-table-view-cell:last-child, .mui-popover .mui-table-view .mui-table-view-cell:last-child > a:not(.mui-btn){
     border-radius:0 !important;
