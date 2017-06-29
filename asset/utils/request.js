@@ -55,8 +55,10 @@ export function apiRequest (url, data) {
         return false;
       }
 
-      if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-        logout();
+      if (typeof WeixinJSBridge === undefined){
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          logout();
+        }
       }
 
       return response.data.data;
@@ -92,10 +94,13 @@ export function postRequest (url, data) {
       }
 
       var code = response.data.code;
-      if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-        logout();
-      }
 
+
+      if (typeof WeixinJSBridge === undefined){
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          logout();
+        }
+      }
 
       return response;
     })
