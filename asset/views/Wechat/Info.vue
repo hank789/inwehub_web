@@ -49,6 +49,7 @@
       realname: '', //真实姓名
       password: '', // 登录密码
       disableRegister: true,
+      isRegisterSuccess:false,
       device_code:'',
       redirect:'',
     }),
@@ -101,6 +102,23 @@
 
         this.disableRegister = false;
       },
+      getCacheData(){
+
+        var data = localEvent.getLocalItem('weChatCacheRegister');
+        if (data) {
+          this.realname = data.realname;
+          this.password = data.password;
+        }
+
+      },
+      setCacheData(){
+
+        var CacheRegister = {
+          'realname': this.realname,
+          'password': this.password,
+        };
+        localEvent.setLocalItem('weChatCacheRegister', CacheRegister);
+      },
       getCode(){
 
       },
@@ -135,7 +153,10 @@
               return;
             }
 
+            this.isRegisterSuccess = true;
+
             localEvent.clearLocalItem('wechatInfo');
+            localEvent.clearLocalItem('weChatCacheRegister');
 
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
 
@@ -149,7 +170,23 @@
       },
       mounted(){
 
-      }
+      },
+      beforeRouteEnter (to, from, next) {
+
+        if (!this.isRegisterSuccess) {
+          this.getCacheData();
+        }
+
+        next();
+      },
+      beforeRouteLeave(to, from, next) {
+
+        if (!this.isRegisterSuccess) {
+          this.setCacheData();
+        }
+
+        next();
+      },
     }
   }
 </script>
