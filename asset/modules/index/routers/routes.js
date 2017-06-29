@@ -715,7 +715,7 @@ const routes = [
       title: '绑定注册'
     },
     beforeEnter: (to, from, next) => {
-      CanNotGetInWhenLogged(to, from, next)
+      //CanNotGetInWhenLogged(to, from, next)
       next();
     }
   },
@@ -726,7 +726,7 @@ const routes = [
       title: '填写信息'
     },
     beforeEnter: (to, from, next) => {
-      CanNotGetInWhenLogged(to, from, next)
+      //CanNotGetInWhenLogged(to, from, next)
       next();
     }
   },
