@@ -137,6 +137,15 @@
       }
     },
     mounted () {
+
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        if (this.showBottom) {
+          console.log('refresh-app');
+          this.getCount();
+        }
+      });
+
       var router = this.$router;
 
       //监听推送
