@@ -147,6 +147,13 @@
           plus.navigator.setStatusBarStyle('light');
 
           var noticeTo = function (payload) {
+            var repeatKey = payload.object_type + payload.object_id;
+            var isRepeat = localEvent.getLocalItem(repeatKey);
+            if (isRepeat.key) {
+                return;
+            } else {
+              localEvent.setLocalItem(repeatKey,{key:repeatKey});
+            }
             switch (payload.object_type) {
               case 'question':
                  // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));

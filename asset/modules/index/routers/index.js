@@ -36,11 +36,6 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
       nextUrl = 'index.html#' + url;
 
       console.log('nextUrl:' + nextUrl);
-      var nextWv = plus.webview.getWebviewById(nextUrl);
-      //如果要打开的webview已存在并且已经显示，就不打开了
-      if (nextWv && nextWv.isVisible()){
-        return;
-      }
 
       mui.openWindow({
         url: nextUrl,
