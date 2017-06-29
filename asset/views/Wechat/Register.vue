@@ -136,7 +136,8 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             let currentUser = user;
             cb(currentUser);
-            router.replace({path: '/my'});
+
+            router.replace({path: this.redirect});
           }));
         } else {
             this.loading = false;
@@ -296,7 +297,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               cb(currentUser);
-              router.push({path: '/my'});
+              router.push({path: this.redirect});
             }));
 
           });
