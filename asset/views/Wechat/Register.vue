@@ -110,8 +110,9 @@
           if (cache.openid) {
               var openid = cache.openid;
               if (openid === this.openid) {
-                router.replace({path: '/wechat/info'});
-                return;
+                this.phone = cache.phone;
+                this.code = cache.code;
+                this.registrationCode = cache.registration_code;
               }
           }
       },
@@ -271,7 +272,7 @@
               if (code === 1115) {
                 //去填写注册信息
                 localEvent.setLocalItem('wechatInfo', data);
-                router.replace({path: '/wechat/info'});
+                router.push({path: '/wechat/info'});
                 return;
               } else {
                 mui.toast(response.data.message);
