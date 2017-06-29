@@ -107,7 +107,7 @@
     methods: {
       checkCache(){
           var cache = localEvent.getLocalItem('wechatInfo');
-          if (cache.length > 0) {
+          if (cache.openid) {
               var openid = cache.openid;
               if (openid === this.openid) {
                 router.replace({path: '/wechat/info'});
