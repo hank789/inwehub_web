@@ -163,7 +163,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               cb(currentUser);
-              router.replace(redirect);
+              router.replace(this.redirect);
             }));
 
           });
