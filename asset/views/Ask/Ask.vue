@@ -80,6 +80,26 @@
       </div>
     </div>
 
+
+    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="selectMoney(88)">积极参与（ ¥ 88.00 ）</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="selectMoney(188)">鼎力支持（ ¥188.00 ）</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="selectMoney(28)">略表心意（ ¥ 28.00 ）</a>
+        </li>
+      </ul>
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="selectMajor2()"><b>取消</b></a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -273,6 +293,10 @@
           this.selectOther = false;
           this.money = money
         }
+
+        this.selectMajor2();
+        this.showMoney();
+
       },
       speech(){
         var options = {};
@@ -604,6 +628,12 @@
      margin-top:0 !important;
     border-radius: 0 !important;
       color:rgba(155,155,155,100) !important;
+  }
+
+  #expert.mui-popover .mui-table-view{
+    background: #fff !important;
+    border-radius: 5px !important;
+    color:#4990E2 !important;
   }
 
   .selectMoney .title{
