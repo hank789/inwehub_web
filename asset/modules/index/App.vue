@@ -14,11 +14,11 @@
             <div><span class="mui-icon myicon myicon-point-hover"></span></div>
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/home',true,'none','none')" v-else>
+          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/home')" v-else>
             <span class="mui-icon myicon myicon-home"></span>
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/task',true,'none','none')" :class="{ 'mui-active' : isAsk}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/task')" :class="{ 'mui-active' : isAsk}">
             <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
               }}</span></span>
             <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
@@ -27,14 +27,14 @@
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none','none')" :class="{ 'mui-active' : isDiscover}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" :class="{ 'mui-active' : isDiscover}">
             <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
             <span class="mui-icon myicon myicon-task-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/my',true,'none','none')" :class="{ 'mui-active':isMy}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" :class="{ 'mui-active':isMy}">
             <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
             <span class="mui-icon myicon myicon-my-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
@@ -147,13 +147,6 @@
           plus.navigator.setStatusBarStyle('light');
 
           var noticeTo = function (payload) {
-            var repeatKey = payload.object_type + payload.object_id;
-            var isRepeat = localEvent.getLocalItem(repeatKey);
-            if (isRepeat.key) {
-                return;
-            } else {
-              localEvent.setLocalItem(repeatKey,{key:repeatKey});
-            }
             switch (payload.object_type) {
               case 'question':
                  // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
@@ -187,6 +180,13 @@
               } else {
                 var payload = JSON.parse(msg.payload);
               }
+              var repeatKey = payload.object_type + payload.object_id;
+              var isRepeat = localEvent.getLocalItem(repeatKey);
+              if (isRepeat.key) {
+                return;
+              } else {
+                localEvent.setLocalItem(repeatKey,{key:repeatKey});
+              }
               noticeTo(payload);
             }
 
@@ -205,6 +205,13 @@
                 var payload = msg.payload.payload;
               } else {
                 var payload = JSON.parse(msg.payload);
+              }
+              var repeatKey = payload.object_type + payload.object_id;
+              var isRepeat = localEvent.getLocalItem(repeatKey);
+              if (isRepeat.key) {
+                return;
+              } else {
+                localEvent.setLocalItem(repeatKey,{key:repeatKey});
               }
 
               var btnArray = ['取消', '前往查看'];
