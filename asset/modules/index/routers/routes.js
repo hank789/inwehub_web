@@ -532,8 +532,7 @@ const routes = [
     path: '/realAnswer/:id',
     component: require('../../../views/Answer/Answer.vue'),
     meta: {
-      title: '确认应答',
-      wechatHideHeader:true
+      title: '确认应答'
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
