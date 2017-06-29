@@ -114,6 +114,7 @@
 
   .pay-success .status span{
     color:#417505;
+    margin-right:7px;
   }
 
   .pay-success .status .mui-icon{
