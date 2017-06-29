@@ -13,7 +13,7 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-mima"></use>
       </svg>
-      <input class="text" ref="password" type="text" @focus="focus" @blur="blur" placeholder="填写您的登陆密码" name="password"
+      <input class="text" ref="password" type="password" @focus="focus" @blur="blur" placeholder="填写您的登陆密码" name="password"
              v-model.trim.num="password" autocomplete="off"/>
     </div>
 

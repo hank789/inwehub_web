@@ -21,7 +21,7 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shoujihao"></use>
       </svg>
-      <input class="text" ref="phone" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号"
+      <input class="text" ref="phone" pattern="\d*" type="text" @focus="focus" @blur="blur" maxlength="11" placeholder="输入手机号"
              name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
              v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
 
@@ -261,6 +261,7 @@
                 //去填写注册信息
                 localEvent.setLocalItem('wechatInfo', data);
                 router.replace({path: '/wechat/info'});
+                return;
               } else {
                 mui.toast(response.data.message);
                 return;
