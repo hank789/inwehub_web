@@ -422,6 +422,10 @@
     top: 88px;
   }
 
+  .mui-wechat .mui-control-content{
+    top:44px !important;
+  }
+
   .mui-segmented-control{
     background: #fff;
   }
