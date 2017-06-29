@@ -90,6 +90,7 @@
     created () {
       this.checkToken();
       this.getOpenId();
+      this.checkCache();
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
@@ -104,6 +105,16 @@
       }
     },
     methods: {
+      checkCache(){
+          var cache = localEvent.getLocalItem('wechatInfo');
+          if (cache.length > 0) {
+              var openid = cache.openid;
+              if (openid === this.openid) {
+                router.replace({path: '/wechat/info'});
+                return;
+              }
+          }
+      },
       jumpToForm(){
           window.location.href="http://cn.mikecrm.com/ovYy1u4";
       },

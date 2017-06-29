@@ -133,6 +133,8 @@
               return;
             }
 
+            localEvent.clearLocalItem('wechatInfo');
+
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
