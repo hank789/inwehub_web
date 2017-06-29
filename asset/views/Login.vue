@@ -178,7 +178,7 @@
             let currentUser = user;
             //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
-            router.pushPlus('/my',true,'none','none');
+            router.push('/my');
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {
