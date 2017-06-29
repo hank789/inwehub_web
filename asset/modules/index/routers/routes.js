@@ -393,7 +393,8 @@ const routes = [
     path: '/pay/ask/:id',
     component: require('../../../views/Pay/AskSuccess.vue'),
     meta: {
-      title: '支付成功'
+      title: '支付成功',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -403,7 +404,8 @@ const routes = [
     path: '/paySuccess',
     component: require('../../../views/Pay/PaySuccess.vue'),
     meta: {
-      title: '支付成功'
+      title: '支付成功',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -423,7 +425,8 @@ const routes = [
     path: '/ask/type',
     component: require('../../../views/Ask/AskType.vue'),
     meta: {
-      title: '选择问题分类'
+      title: '选择问题分类',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -448,7 +451,8 @@ const routes = [
     path: '/ask/:id',
     component: require('../../../views/Ask/AskDetail.vue'),
     meta: {
-      title: '提问'
+      title: '提问',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -542,7 +546,8 @@ const routes = [
     path: '/askComment/:id',
     component: require('../../../views/Ask/Comment.vue'),
     meta: {
-      title: '应答'
+      title: '评价',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -633,7 +638,8 @@ const routes = [
   { // 提问帮助
     path: '/help/ask',
     meta: {
-      title: '提问帮助'
+      title: '提问帮助',
+      wechatHideHeader:true
     },
     component: require('../../../views/Help/Ask.vue'),
     beforeEnter: (to, from, next) => {
@@ -718,7 +724,8 @@ const routes = [
   { // protocol/register
     path: '/protocol/register',
     meta: {
-      title: '注册协议'
+      title: '注册协议',
+      wechatHideHeader:true
     },
     component: require('../../../views/Help/Protocol.vue')
   },
