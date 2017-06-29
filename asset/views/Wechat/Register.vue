@@ -1,5 +1,6 @@
 <template>
-  <div class="register">
+
+  <div class="register" v-show="!loading">
 
 
     <div class="logo">
@@ -82,6 +83,7 @@
       disableSendCode: true,
       errorMsg: '',
       redirect:'',
+      loading:true,
     }),
     computed: {
       getCodeText () {
@@ -123,16 +125,21 @@
       checkToken(){
         let token = this.$route.query.token;
         if (token) {
+          mui.waiting();
           var data = {
             token:token
           };
           localEvent.setLocalItem('UserLoginInfo', data);
+
+
 
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             let currentUser = user;
             cb(currentUser);
             router.replace({path: '/my'});
           }));
+        } else {
+            this.loading = false;
         }
 
       },
