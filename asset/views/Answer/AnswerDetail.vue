@@ -345,7 +345,7 @@
           }
 
           if (time != '0000') {
-            mui.back();
+            this.$router.pushPlus('/task');
           } else {
             this.getData();
           }

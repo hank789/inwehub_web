@@ -208,21 +208,25 @@ const routes = [
     path: '/my/info/basic',
     component: require('../../../components/PageTransition.vue'),
     meta: {
-      title: '我的档案'
+      title: '我的档案',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     },
     children: [{
       path: '',
+      meta:{
+        title: '我的档案',
+        wechatHideHeader:true
+      },
       component: require('../../../views/Account/infos/basic.vue'),
     },
       { // 个人签名
         path: '/my/info/basic/description',
         component: require('../../../views/Account/infos/basic_description.vue'),
         meta: {
-          title: '我的档案',
-          wechatHideHeader:true
+          title: '个人签名'
         },
         beforeEnter: (to, from, next) => {
           requestAuth(to, from, next)
