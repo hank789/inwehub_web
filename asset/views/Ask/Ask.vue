@@ -636,6 +636,10 @@
     color:#4990E2 !important;
   }
 
+  #expert.mui-popover .mui-table-view-cell{
+    padding:13px 15px;
+  }
+
   .selectMoney .title{
     padding:22px 0;
     margin:0 8px;
