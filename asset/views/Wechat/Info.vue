@@ -50,6 +50,7 @@
       password: '', // 登录密码
       disableRegister: true,
       device_code:'',
+      redirect:'',
     }),
     watch: {
       realname: function (newValue, oldValue) {
@@ -78,6 +79,7 @@
       this.code = data.code;
       this.registration_code = data.registration_code;
       this.openid = data.openid;
+      this.redirect = data.redirect;
 
       if (mui.os.plus) {
         mui.plusReady(function () {
@@ -140,7 +142,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               cb(currentUser);
-              router.replace({path: '/my'});
+              router.replace(redirect);
             }));
 
           });

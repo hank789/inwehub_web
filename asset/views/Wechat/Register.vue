@@ -81,6 +81,7 @@
       disableRegister: true,
       disableSendCode: true,
       errorMsg: '',
+      redirect:'',
     }),
     computed: {
       getCodeText () {
@@ -110,7 +111,7 @@
           if (cache.openid) {
               var openid = cache.openid;
               if (openid === this.openid) {
-                this.phone = cache.phone;
+                this.phone = cache.mobile;
                 this.code = cache.code;
                 this.registrationCode = cache.registration_code;
               }
@@ -137,6 +138,8 @@
       },
       getOpenId(){
         let openid = this.$route.query.openid;
+        let redirect = this.$route.query.redirect?this.$route.query.redirect:'/home';
+        this.redirect = redirect;
         if (!openid) {
           this.$store.dispatch(NOTICE, cb => {
             cb({
@@ -271,6 +274,7 @@
             if (code !== 1000) {
               if (code === 1115) {
                 //去填写注册信息
+                data.redirect = this.redirect;
                 localEvent.setLocalItem('wechatInfo', data);
                 router.push({path: '/wechat/info'});
                 return;
