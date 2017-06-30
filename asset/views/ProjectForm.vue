@@ -87,6 +87,37 @@
     }),
 
     methods: {
+      initData(){
+        let id = parseInt(this.$route.params.id);
+        this.id = id;
+        if (this.id) {
+          var projects = localEvent.getLocalItem('projects');
+
+          if (!projects || !projects[id]) {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: '发生一些错误',
+                time: 1500,
+                status: false
+              });
+            });
+            this.$router.back();
+            return;
+          }
+
+          this.project = {
+            name: projects[id].project_name,
+            price: projects[id].project_amount,
+            address: projects[id].project_province.name + ' ' + projects[id].project_city.name,
+            company: projects[id].company_name,
+            description: projects[id].description,
+            province:projects[id].project_province.key,
+            city:projects[id].project_city.key,
+          };
+          this.description = projects[id].description;
+          this.bak = JSON.stringify(this.project);
+        }
+      },
       selectWorkerCity(){
 
         var cityPicker = new mui.PopPicker({
@@ -219,7 +250,11 @@
       next();
     },
     mounted () {
-
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-projectform');
+        this.initData();
+      });
     },
     computed: {
       descLength() {
@@ -237,35 +272,7 @@
     },
     created () {
       showInwehubWebview();
-      let id = parseInt(this.$route.params.id);
-      this.id = id;
-      if (this.id) {
-        var projects = localEvent.getLocalItem('projects');
-
-        if (!projects || !projects[id]) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            });
-          });
-          this.$router.back();
-          return;
-        }
-
-        this.project = {
-          name: projects[id].project_name,
-          price: projects[id].project_amount,
-          address: projects[id].project_province.name + ' ' + projects[id].project_city.name,
-          company: projects[id].company_name,
-          description: projects[id].description,
-          province:projects[id].project_province.key,
-          city:projects[id].project_city.key,
-        };
-        this.description = projects[id].description;
-        this.bak = JSON.stringify(this.project);
-      }
+      this.initData();
     }
   }
 </script>
