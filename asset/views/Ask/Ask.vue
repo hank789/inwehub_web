@@ -674,7 +674,7 @@
   .selectMoney .fa-apple,.selectMoney .fa-wechat{
     color:rgba(138,138,138,100);
     opacity: 0.67;
-    font-size:25px;
+    font-size:24px;
   }
 
   .selectMoney .apple-icon{
