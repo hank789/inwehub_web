@@ -192,6 +192,8 @@
           var noticeTo = function (payload) {
             switch (payload.object_type) {
               case 'question':
+              case 'question_answered':
+              case 'question_answer_confirmed':
                  // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 //router.go(-1);
                 router.pushPlus('/ask/' + payload.object_id);
