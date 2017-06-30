@@ -50,7 +50,7 @@
             auth.getUserInfo(function(){
               console.log("获取用户信息成功：");
               var nickname=auth.userInfo.nickname||auth.userInfo.name||auth.userInfo.miliaoNick;
-              postRequest(`oauth/weixin/callback`,{
+              postRequest(`oauth/weixinapp/callback`,{
                 openid: auth.authResult.openid,
                 nickname: nickname,
                 avatar: auth.userInfo.headimgurl,
