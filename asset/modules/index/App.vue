@@ -210,12 +210,12 @@
               case 'question_answer_confirmed':
                  // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 //router.go(-1);
-                router.pushPlus('/ask/' + payload.object_id);
+                router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
                 break;
               case 'answer':
                 //router.go(-1);
                  // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                router.pushPlus('/answer/' + payload.object_id);
+                router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
             }
           };
