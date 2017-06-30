@@ -50,15 +50,18 @@ export function apiRequest (url, data) {
         mui.toast(s);
         return false;
       }
-      if (code !== 1000) {
-        mui.toast(response.data.message);
-        return false;
-      }
 
       if (typeof WeixinJSBridge === undefined){
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          mui.toast(response.data.message);
           logout();
+          return;
         }
+      }
+
+      if (code !== 1000) {
+        mui.toast(response.data.message);
+        return false;
       }
 
       return response.data.data;
@@ -98,7 +101,9 @@ export function postRequest (url, data) {
 
       if (typeof WeixinJSBridge === undefined){
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          mui.toast(response.data.message);
           logout();
+          return;
         }
       }
 
