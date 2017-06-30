@@ -4,7 +4,7 @@
 
         <div class='view'>
           <transition name='none' mode="out-in">
-            <router-view @countChange="onCountChange($event)"></router-view>
+            <router-view @countChange="onCountChange($event)" ref="routerView"></router-view>
           </transition>
         </div>
 
@@ -175,6 +175,9 @@
         if (this.showBottom) {
           console.log('refresh-app');
           this.getCount();
+          if (this.$refs.routerView.initData) {
+            this.$refs.routerView.initData();
+          }
         }
       });
 
