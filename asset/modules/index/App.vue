@@ -88,6 +88,7 @@
             return;
           }
           this.taskCount = response.data.data.todo_tasks;
+
         });
       },
       linkTo(dest){
@@ -143,6 +144,17 @@
         if (this.showBottom) {
           console.log('refresh-app');
           this.getCount();
+
+          mui.plusReady(function () {
+            var webv = plus.webview.getWebviewById('index.html#/home');
+            mui.fire(webv, 'refreshData');
+
+            var webv = plus.webview.getWebviewById('index.html#/discover');
+            mui.fire(webv, 'refreshData');
+
+            var webv = plus.webview.getWebviewById('index.html#/my');
+            mui.fire(webv, 'refreshData');
+          });
         }
       });
 
