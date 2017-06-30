@@ -123,11 +123,6 @@
       }
     },
     mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-taskList');
-        this.getPrevList();
-      });
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
         var lastY = event.detail.lastY;
@@ -139,6 +134,11 @@
       this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
     },
     methods: {
+      initData(){
+        //执行刷新
+        console.log('refresh-taskList');
+        this.initPullRefresh();
+      },
       isTimeout(task){
         if (!task.deadline) {
           return false;

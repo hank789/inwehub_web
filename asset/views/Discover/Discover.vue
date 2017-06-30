@@ -37,10 +37,7 @@
       showInwehubWebview();
     },
     mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-discover');
-      });
+      
     }
   };
 </script>
