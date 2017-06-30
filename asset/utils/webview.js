@@ -11,9 +11,9 @@ function showWebview(){
               if (parent_webview){
                 console.log('popGesture：'+parent_webview.getURL());
                 //触发父页面的自定义事件(refresh),从而进行刷新
-                mui.fire(parent_webview, 'refreshData');
+                mui.fire(parent_webview, 'refreshData', {childId: self.id});
                 //子页面也刷新数据
-                mui.fire(self, 'refreshData');
+                mui.fire(self, 'refreshData', {parentId: parent_webview.id});
               }
             }
           }, false);

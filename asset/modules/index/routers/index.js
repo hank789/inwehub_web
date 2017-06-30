@@ -28,12 +28,10 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
     mui.plusReady(function(){
       var currentUrl = plus.webview.currentWebview().getURL();
 
-      var nextUrl = currentUrl;
-
       console.log('current_url:' + currentUrl);
 
       //nextUrl = nextUrl.replace(/#\/.*?$/, '#'+url);
-      nextUrl = 'index.html#' + url;
+      var nextUrl = 'index.html#' + url;
 
       console.log('nextUrl:' + nextUrl);
 
