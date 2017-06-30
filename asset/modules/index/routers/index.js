@@ -31,7 +31,7 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
       console.log('current_url:' + currentUrl);
 
       //nextUrl = nextUrl.replace(/#\/.*?$/, '#'+url);
-      nextUrl = 'index.html#' + url;
+      var nextUrl = 'index.html#' + url;
 
       console.log('nextUrl:' + nextUrl);
 
