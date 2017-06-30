@@ -373,7 +373,8 @@ const routes = [
     path: '/expert/recommend',
     component: require('../../../views/Expert/recommend.vue'),
     meta: {
-      title: '推荐专家'
+      title: '推荐专家',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
