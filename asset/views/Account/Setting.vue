@@ -29,7 +29,7 @@
       <div class="mui-table-view">
         <div class="mui-table-view-cell footer">
           <div class="logo"><span class="mui-icon myicon myicon-setting-logo"></span></div>
-          <div class="version">V{{ appVersion }}</div>
+          <div class="version">{{ appVersion }}</div>
 
           <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut" v-show="!isWeiXin()">
             退出应用
@@ -55,7 +55,7 @@ All Rights Reserved</div>
       const currentUser = localEvent.getLocalItem('UserInfo');
 
       return {
-        appVersion:'1.0',
+        appVersion:'',
         im_tokenMsg: '',
         name: currentUser.name,
         phone: currentUser.phone,
