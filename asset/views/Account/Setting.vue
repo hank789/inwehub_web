@@ -69,10 +69,10 @@ All Rights Reserved</div>
     created () {
       var obj = localEvent.getLocalItem('app_version');
       if (obj) {
-        if (mui.os.ios) {
-          this.version = 'for iPhone V' + obj.version;
-        } else if (mui.os.android) {
-          this.version = 'for android V' + obj.version;
+        if (mui.os.ios && obj.version) {
+          this.appVersion = 'for iPhone V' + obj.version;
+        } else if (mui.os.android && obj.version) {
+          this.appVersion = 'for android V' + obj.version;
         }
       }
       showInwehubWebview();
@@ -303,6 +303,6 @@ All Rights Reserved</div>
   .version{
       position: relative;
       top:-40px;
-    font-weight: bolder;
+    font-weight: bold;
   }
 </style>
