@@ -146,14 +146,27 @@
           this.getCount();
 
           mui.plusReady(function () {
-            var webv = plus.webview.getWebviewById('index.html#/home');
-            mui.fire(webv, 'refreshTaskCount');
 
-            var webv = plus.webview.getWebviewById('index.html#/discover');
-            mui.fire(webv, 'refreshTaskCount');
+            var webv = plus.webview.getWebviewById('index.html#/task');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
 
-            var webv = plus.webview.getWebviewById('index.html#/my');
-            mui.fire(webv, 'refreshTaskCount');
+
+            webv = plus.webview.getWebviewById('index.html#/home');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+
+            webv = plus.webview.getWebviewById('index.html#/discover');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+
+            webv = plus.webview.getWebviewById('index.html#/my');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
           });
         }
       });
