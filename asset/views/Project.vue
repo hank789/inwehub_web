@@ -97,7 +97,7 @@
     },
     methods: {
       getPrevList(){
-        postRequest(`project/myList`, {top_id: this.topId}).then(response => {
+        postRequest(`project/myList`, {}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -105,11 +105,17 @@
           }
 
           if (response.data.data.length > 0) {
-            this.list = response.data.data.concat(this.list);
+            this.list = response.data.data;
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-
+          var newProjects = [];
+          for (var i in this.list) {
+            var info = this.list[i];
+            var id = info.id;
+            newProjects[id] = info;
+          }
+          localEvent.setLocalItem('projects', newProjects);
         });
       },
       getNextList() {
