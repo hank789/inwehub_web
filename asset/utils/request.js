@@ -51,7 +51,8 @@ export function apiRequest (url, data) {
         return false;
       }
 
-      if (typeof WeixinJSBridge === undefined){
+      if (!mui.os.wechat){
+
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           mui.toast(response.data.message);
           logout();
@@ -98,8 +99,7 @@ export function postRequest (url, data) {
 
       var code = response.data.code;
 
-
-      if (typeof WeixinJSBridge === undefined){
+      if (!mui.os.wechat){
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           mui.toast(response.data.message);
           logout();
