@@ -112,6 +112,8 @@
         this.im_tokenMsg = im_token;
       },
       initData(){
+        //执行刷新
+        console.log('refresh-my');
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
           this.account_info_complete_percent = user.info.account_info_complete_percent;
@@ -137,11 +139,6 @@
     },
     mounted(){
       this.getToken();
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-my');
-        this.initData();
-      });
     }
   }
 

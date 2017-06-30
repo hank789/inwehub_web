@@ -115,11 +115,6 @@
     },
     mounted(){
       showInwehubWebview();
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-home');
-        this.getData();
-      });
       document.body.style.backgroundColor = '#fff';
     },
     beforeRouteLeave(to, from, next) {
