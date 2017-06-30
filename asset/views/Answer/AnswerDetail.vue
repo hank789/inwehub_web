@@ -345,7 +345,7 @@
           }
 
           if (time != '0000') {
-            this.$router.pushPlus('/task');
+            this.getData();
           } else {
             this.getData();
           }
