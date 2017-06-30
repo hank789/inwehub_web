@@ -147,14 +147,23 @@
 
           mui.plusReady(function () {
             var webv = plus.webview.getWebviewById('index.html#/home');
-            mui.fire(webv, 'refreshData');
+            mui.fire(webv, 'refreshTaskCount');
 
             var webv = plus.webview.getWebviewById('index.html#/discover');
-            mui.fire(webv, 'refreshData');
+            mui.fire(webv, 'refreshTaskCount');
 
             var webv = plus.webview.getWebviewById('index.html#/my');
-            mui.fire(webv, 'refreshData');
+            mui.fire(webv, 'refreshTaskCount');
           });
+        }
+      });
+
+
+      window.addEventListener('refreshTaskCount', (e)=>{
+        //执行刷新
+        if (this.showBottom) {
+          console.log('refresh-task-count');
+          this.getCount();
         }
       });
 
