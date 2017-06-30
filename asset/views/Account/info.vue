@@ -40,31 +40,31 @@
       <div class="part3">
         <ul class="mui-table-view mui-table-view-chevron firstItem">
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/basic')"><span class="mui-icon myicon myicon-wallet"></span>基本资料
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/basic')">基本资料
                 <span class="desc important">{{ user.infos }}</span>
             </a>
 
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')"><span class="mui-icon myicon myicon-coupon"></span>工作经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')">工作经历
                 <span class="desc" v-if="user.jobs">{{ user.jobs }}</span>
                 <span class="desc important" v-else>请添加工作经历</span>
             </a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects')"><span class="mui-icon myicon myicon-huiyuan"></span>项目经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects')">项目经历
                 <span class="desc" v-if="user.projects">{{ user.projects }}</span>
                 <span class="desc important" v-else>请添加项目经历</span>
             </a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus')"><span class="mui-icon myicon myicon-heart"></span>教育经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus')">教育经历
                 <span class="desc" v-if="user.edus">{{ user.edus }}</span>
                 <span class="desc important" v-else>请添加教育经历</span>
             </a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains')"><span class="mui-icon myicon myicon-help"></span>培训认证
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains')">培训认证
                 <span class="desc" v-if="user.trains">{{ user.trains }}</span>
                 <span class="desc important" v-else>请添加培训认证</span>
             </a>

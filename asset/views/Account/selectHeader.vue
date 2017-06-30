@@ -16,7 +16,7 @@
 
   export default {
     data:() => ({
-        localUrl:'/images/uicon.jpg',
+        localUrl:'',
         localPath:'',
         cropper:null,
         img:{

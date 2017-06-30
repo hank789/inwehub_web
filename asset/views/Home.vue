@@ -99,8 +99,6 @@
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import {apiRequest} from '../utils/request';
-  import homeJiangli from '../statics/images/home-jiangli.png';
-  import homeJinpai from '../statics/images/home-jinpai.png';
 
   const Home = {
     data: () => ({
@@ -110,8 +108,6 @@
       recommend_expert_avatar_url:'',
       recommend_qa:[],
       recommend_expert_is_followed:0,
-      homeJiangli: homeJiangli,
-      homeJinpai: homeJinpai,
       loading: true
     }),
     created () {
@@ -393,15 +389,6 @@
     position: relative;
     top: 2px;
     margin-right: 8px;
-  }
-  .icon-expert {
-    width: 12px;
-    display: inline-block;
-    background: url("../statics/images/expert.png") no-repeat;
-    height: 12px;
-    background-size: cover;
-    position: relative;
-    top: 1px;
   }
 
   .bountyDesc .title {

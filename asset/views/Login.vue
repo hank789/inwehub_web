@@ -29,7 +29,6 @@
   import deleteObjectItems from '../utils/deleteObjectItems';
   import { getUserInfo, getAvatar } from '../utils/user';
   import { USERS_APPEND } from '../stores/types';
-  import defaultAvatar from '../statics/images/common_ico_bottom_me_normal@3x.png';
 
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
   const login = {
