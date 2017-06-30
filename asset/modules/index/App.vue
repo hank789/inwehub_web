@@ -4,7 +4,7 @@
 
         <div class='view'>
           <transition name='none' mode="out-in">
-            <router-view></router-view>
+            <router-view @countChange="onCountChange($event)"></router-view>
           </transition>
         </div>
 
@@ -63,6 +63,37 @@
       }
     },
     methods: {
+      onCountChange(count){
+          this.taskCount = count;
+
+          mui.plusReady(function () {
+
+            localEvent.setLocalItem('taskCount', {
+                value:count,
+            });
+
+            var webv = plus.webview.getWebviewById('index.html#/task');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+
+
+            webv = plus.webview.getWebviewById('index.html#/home');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+
+            webv = plus.webview.getWebviewById('index.html#/discover');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+
+            webv = plus.webview.getWebviewById('index.html#/my');
+            if (webv) {
+              mui.fire(webv, 'refreshTaskCount');
+            }
+          });
+      },
       goRecommand: function () {
         this.expertNav();
         this.$router.push('/expert/recommend')
@@ -87,8 +118,8 @@
             mui.alert(response.data.message);
             return;
           }
-          this.taskCount = response.data.data.todo_tasks;
-
+          var taskCount = response.data.data.todo_tasks;
+          this.onCountChange(taskCount);
         });
       },
       linkTo(dest){
@@ -144,30 +175,6 @@
         if (this.showBottom) {
           console.log('refresh-app');
           this.getCount();
-
-          mui.plusReady(function () {
-
-            var webv = plus.webview.getWebviewById('index.html#/task');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-
-            webv = plus.webview.getWebviewById('index.html#/home');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/discover');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/my');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-          });
         }
       });
 
@@ -176,7 +183,11 @@
         //执行刷新
         if (this.showBottom) {
           console.log('refresh-task-count');
-          this.getCount();
+
+          var taskCount = localEvent.getLocalItem('taskCount');
+          if (taskCount.value) {
+              this.taskCount = taskCount.value;
+          }
         }
       });
 

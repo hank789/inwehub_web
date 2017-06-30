@@ -227,31 +227,7 @@
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
           mui('#pullrefresh').pullRefresh().refresh(true);
 
-
-          mui.plusReady(function () {
-
-            var webv = plus.webview.getWebviewById('index.html#/task');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-
-            webv = plus.webview.getWebviewById('index.html#/home');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/discover');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/my');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-          });
-
+          this.$emit('countChange', this.tasks.length);
         });
 
 
