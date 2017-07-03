@@ -170,6 +170,7 @@
         var tmpArr = to.path.split('/');
         var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
         this.changeNav(curPath, this.$route.path);
+        this.wechatTitle = this.$route.meta.title;
       }
     },
     mounted () {
