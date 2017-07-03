@@ -3,7 +3,7 @@
 
     <header class="mui-bar mui-bar-nav mui-bar-top">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{ getTitle() }}</h1>
+      <h1 class="mui-title">{{ title }}</h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
@@ -159,6 +159,7 @@
         },
         feedback: {}
       },
+      title:'回答问题',
       description: {},
       descMaxLength: 1000,
       descLength:0,
@@ -434,7 +435,10 @@
           default:
             title = '我的回答';
         }
-        return title;
+
+        this.$emit('changeWechatTitle', title);
+
+        this.title = title;
       },
       timeago(time) {
         if (!time) {
@@ -477,6 +481,8 @@
           }
 
           this.loading = 0;
+
+          this.getTitle();
 
           this.check();
         });

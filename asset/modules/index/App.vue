@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-        <div v-wechat-title="$route.meta.title"></div>
+        <div v-wechat-title="wechatTitle"></div>
 
         <div class='view'>
           <transition name='none' mode="out-in">
-            <router-view @countChange="onCountChange($event)" ref="routerView"></router-view>
+            <router-view @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
           </transition>
         </div>
 
@@ -53,6 +53,7 @@
   export default {
     data () {
       return {
+        wechatTitle:this.$route.meta.title,
         isHome: false,
         isAsk: false,
         isMy: false,
@@ -63,6 +64,9 @@
       }
     },
     methods: {
+      onChangeWechatTitle(title) {
+          this.wechatTitle = title;
+      },
       onCountChange(count){
           this.taskCount = count;
 
