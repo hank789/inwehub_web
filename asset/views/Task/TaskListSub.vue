@@ -220,14 +220,14 @@
             mui.back();
           }
 
-          if (response.data.data.length > 0) {
-            this.tasks = response.data.data;
+          if (response.data.data.list.length > 0) {
+            this.tasks = response.data.data.list;
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
           mui('#pullrefresh').pullRefresh().refresh(true);
 
-          this.$emit('countChange', this.tasks.length);
+          this.$emit('countChange', response.data.data.total);
         });
 
 
@@ -241,13 +241,13 @@
             mui.back();
           }
 
-          if (response.data.data.length > 0) {
-            this.tasks = this.tasks.concat(response.data.data);
+          if (response.data.data.list.length > 0) {
+            this.tasks = this.tasks.concat(response.data.data.list);
           }
 
           this.loading = 0;
 
-          if (response.data.data.length < 10) {
+          if (response.data.data.list.length < 10) {
             mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
           } else {
             mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
