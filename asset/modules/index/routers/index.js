@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import localEvent from '../../../stores/localStorage';
-
+import ga from 'vue-ga';
 
 VueRouter.prototype.goBack = function () {
   this.isBack = true;
@@ -20,7 +20,9 @@ const router = new VueRouter({
   mode: 'hash',
   routes
 });
+const gaCode = process.env.GA_CODE;
 
+ga(router, gaCode);
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide') {
   console.log('url:'+url);

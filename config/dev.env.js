@@ -3,5 +3,6 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_ROOT: '"https://api.ywhub.com/"'
+  API_ROOT: '"https://api.ywhub.com/"',
+  GA_CODE: '"UA-97476315-3"'
 })
