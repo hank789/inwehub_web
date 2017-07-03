@@ -80,10 +80,6 @@
         var data = {
           user_avatar:base64,
         };
-        console.log(data);
-
-        var formData = new FormData();
-        formData.append('user_avatar', base64);
 
         postRequest(`profile/updateAvatar`, data).then(response => {
 
