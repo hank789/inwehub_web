@@ -73,7 +73,11 @@
             height: parseInt(this.img.height).toString() + 'px'
         };
 
-        var base64 = this.cropper.getCroppedCanvas().toDataURL('image/png', 0.3);
+       // var base64Pre = this.cropper.getCroppedCanvas().toDataURL();
+        var base64 = this.cropper.getCroppedCanvas().toDataURL('image/jpeg', 0.1);
+
+        //console.log('压缩前长度:'+(base64Pre.length*2/1000/1024));
+        console.log('压缩后长度:'+(base64.length*2/1000/1024));
 
         var data = {
           user_avatar:base64,
