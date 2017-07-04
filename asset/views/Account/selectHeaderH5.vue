@@ -34,8 +34,8 @@
           mui.back();
           return;
       }
-      this.localUrl =  this.$router.currentRoute.params.file;
-      this.clip(this.localUrl);
+      var localUrl =  this.$router.currentRoute.params.file;
+      this.clip(localUrl);
     },
     methods: {
       clip(path){
@@ -73,9 +73,7 @@
             height: parseInt(this.img.height).toString() + 'px'
         };
 
-        var base64 = this.cropper.getCroppedCanvas().toDataURL();
-
-
+        var base64 = this.cropper.getCroppedCanvas().toDataURL('image/png', 0.3);
 
         var data = {
           user_avatar:base64,
