@@ -84,7 +84,7 @@
           return;
         }
 
-        // 提问设备，1为IOS，2为安卓，3为微信公众号，4为微信小程序
+        // 提问设备，1为IOS，2为安卓，3为网页，4为微信小程序
         var device = 1;
         if (mui.os.plus) {
           if (mui.os.android) {
