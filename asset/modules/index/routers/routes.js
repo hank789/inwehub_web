@@ -575,6 +575,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // header
+    path: '/header-h5',
+    meta: {
+      title: '选择头像'
+    },
+    component: require('../../../views/Account/selectHeaderH5.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // discover
     path: '/discover',
     meta: {

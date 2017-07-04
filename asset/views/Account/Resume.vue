@@ -3,22 +3,21 @@
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">个人名片</h1>
-      <!--<a class="mui-icon myicon myicon-share mui-pull-right"></a>-->
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
 
       <div class="erweimaWrapper" v-show="showQrCode" @tap.stop.prevent="toggleQrCode">
         <div class="header">
           <div class="avatar">
             <div class="avatarInner">
-              <img :src="avatar" class="avatar"/>
+              <img :src="resume.info.avatar_url" class="avatar"/>
             </div>
           </div>
         </div>
 
         <div class="realname">
-          <span>郭大红</span>
+          <span>{{ resume.info.name }}</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhuanjiabiaoji"></use>
           </svg>
@@ -32,9 +31,8 @@
           <span></span>
         </div>
         <div class="qRCode">
-          <qrcode value="Hello, World!" :options="{ size: 190,padding:10}"></qrcode>
+          <qrcode :value="uuid" :options="qRCodeOptions"></qrcode>
         </div>
-
       </div>
 
 
@@ -47,44 +45,47 @@
           <div class="card">
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png"/></div>
             <div class="share" @tap.stop.prevent="share">
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true"  v-show="resume.info.is_expert">
                 <use xlink:href="#icon-fenxiang"></use>
               </svg>
             </div>
             <div class="header">
               <div class="avatar">
                 <div class="avatarInner">
-                  <img :src="avatar" class="avatar"/>
+                  <img :src="resume.info.avatar_url" class="avatar"/>
                 </div>
               </div>
             </div>
             <div class="detail">
               <div class="realname">
-                <span>郭大红</span>
-                <svg class="icon" aria-hidden="true">
+                <span>{{ resume.info.name }}</span>
+                <svg class="icon" aria-hidden="true" v-show="resume.info.is_expert">
                   <use xlink:href="#icon-zhuanjiabiaoji"></use>
                 </svg>
               </div>
-              <div class="counter">关注<b>0</b>次<i class="separate"></i>咨询<b>2</b>次<i class="separate"></i>评价<b>2</b>次<i
-                class="separate"></i>综合评分暂无
+              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.questions }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
+                class="separate"></i>{{ resume.info.total_score }}
 
 
 
               </div>
               <div class="item">
-                <span>上海樱维网络有限公司</span>
+                <span>{{ resume.info.company }}</span>
                 <i class="separate"></i>
-                <span>运营专员</span>
+                <span>{{ resume.info.title }}</span>
               </div>
               <div class="item">
-                <span>1998-10-19从业</span>
+                <span>{{ resume.info.work_years }}年工作经验</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-dingwei"></use>
                 </svg>
-                <span>上海 黄浦</span>
+                <span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>
               </div>
-              <div class="item">
-                消费品行业；咨询行业 ；企业维护
+              <div class="item industry">
+                <template v-for="(industry, index) in resume.info.industry_tags">
+                    <span>{{industry.text}}</span>
+                </template>
+
 
               </div>
             </div>
@@ -95,34 +96,26 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jianjie"></use>
           </svg>
-          <span>SAP咨询行业15年从业经历，熟悉离散制造行业，专注pp等模块，是一位非常自身的超级顾问。写三行，永远写三行都写三行。都写三行。都写三行。</span>
+          <span>{{ resume.info.description }}</span>
         </div>
       </div>
     </div>
 
-    <h5>工作经历</h5>
-    <div class="list">
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知
-        负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知
-        </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
-      </div>
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+    <h5 v-show="resume.jobs.length">工作经历</h5>
+    <div class="list" v-show="resume.jobs.length">
+      <div class="item" v-for="(job, index) in resume.jobs">
+        <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
+        <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
+        <div class="description  hide mui-ellipsis-3">{{ job.description }}
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
     </div>
 
-    <h5>项目经历</h5>
-    <div class="list">
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
+    <h5 v-show="resume.projects.length">项目经历</h5>
+    <div class="list" v-show="resume.projects.length">
+      <div class="item" v-for="(project, index) in resume.projects">
+        <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
         <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
         <div class="others">
           <div class="other"><div class="title">【行业领域】</div><div class="content">专业服务</div></div>
@@ -133,13 +126,7 @@
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
       </div>
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
-        </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
-      </div>
+
     </div>
 
     <h5>教育经历</h5>
@@ -181,6 +168,7 @@
   import localEvent from '../../stores/localStorage';
   import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND} from '../../stores/types';
   import router from '../../routers/index';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import {updateUserInfoCache, getUserInfo} from '../../utils/user';
 
   export  default {
@@ -189,24 +177,16 @@
 
       return {
         im_tokenMsg: '',
-        name: currentUser.name,
-        phone: currentUser.phone,
-        avatar: currentUser.avatar_url,
-        title: currentUser.title,
-        company: currentUser.company,
-        account_info_complete_percent: currentUser.account_info_complete_percent,
-        isExpert: currentUser.is_expert,
-        total_money: currentUser.total_money,
-        user_level: currentUser.user_level,
-        user_credits: currentUser.user_credits,
-        user_coins: currentUser.user_coins,
-        questions: currentUser.questions,
-        answers: currentUser.answers,
-        tasks: currentUser.tasks,
-        projects: currentUser.projects,
-        expert_level: currentUser.expert_level,
+        uuid: currentUser.uuid,
         showQrCode:false,
         isShare:false,
+        loading:true,
+        resume:{
+            info:{
+              avatar_url:'',
+            }
+        },
+        qRCodeOptions:{ size: 190,padding:10}
       }
     },
     created () {
@@ -214,8 +194,17 @@
         if (from === '/share/resume') {
             this.isShare = true;
             let token = this.$route.query.token;
-
         }
+
+        postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.toast(response.data.message);
+          }
+
+          this.resume = response.data.data;
+          this.loading = 0;
+        });
     },
     mounted(){
 
@@ -496,8 +485,6 @@
           }
         }
 
-
-
         .item {
           color: #444444;
           font-size: 14px;
@@ -506,6 +493,16 @@
           .icon {
             color: #b4b4b6;
             font-size: 16px;
+          }
+
+          &.industry span{
+              border:1px solid #cbcbcb;
+              display: inline-block;
+              border-radius: 50px;
+              color:#808080;
+              font-size:12px;
+              padding:0 7px;
+              margin:0 2px;
           }
         }
       }

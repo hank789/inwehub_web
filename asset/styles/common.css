@@ -714,3 +714,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .mui-toast-container{
   top:50% !important;
 }
+
+input.upload-avatar[type=file]{
+  display: none;
+}

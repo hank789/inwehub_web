@@ -9,7 +9,7 @@
     <div class="mui-content" v-show="!loading">
 
       <div class="professor">
-        <div class="avatar" @tap.stop.prevent="changeAvatar">
+        <div class="avatar" @tap.stop.prevent="changeAvatarH5">
           <div class="avatarInner">
             <img :src="user.info.avatar_url" class="avatar"/>
           </div>
@@ -128,6 +128,47 @@
     methods: {
       warning:function(){
           mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function(){}, 'div');
+      },
+      uploadAvatar:function(){
+        if (mui.os.plus) {
+          this.changeAvatar();
+        } else {
+          this.changeAvatarH5();
+        }
+      },
+      changeAvatarH5:function(){
+        let fileInput = document.body.querySelector('input.upload-avatar[type=file]');
+        if (fileInput == null) {
+          fileInput = document.createElement('input');
+          fileInput.setAttribute('type', 'file');
+          fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+          fileInput.classList.add('upload-avatar');
+          fileInput.addEventListener('change', () => {
+            if (fileInput.files != null && fileInput.files[0] != null) {
+
+              var file = fileInput.files[0];
+
+              var size = file.size/1000;  //kb
+              if (size > 5120) {
+                mui.alert('图片单张不允许超过5M！');
+                return false;
+              }
+
+              let reader = new FileReader();
+              reader.onload = (e) => {
+                fileInput.value = "";
+
+                this.$router.push({path:'/header-h5', params:{file:file}}, function(router){
+                  router.params.file = e.target.result;
+                });
+              }
+              reader.readAsDataURL(file);
+
+            }
+          });
+          document.body.appendChild(fileInput);
+        }
+        fileInput.click();
       },
       changeAvatar:function(){
         if (mui.os.plus) {
