@@ -276,7 +276,7 @@
           var wechatBtn = document.getElementById('wechatShareBtn');
           wechatBtn.addEventListener('click', () => {
 
-            var title = "InweHub名片 | " + t.resume.info.name;
+            var title = "InweHub名片 | " + t.resume.info.name + '：' + t.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
             var desc = "咨询顾问的专属身份认证@InweHub\n" + t.resume.info.company;
 
             wx.onMenuShareAppMessage({
