@@ -146,6 +146,13 @@
       </div>
     </div>
 
+      <div class="noPublic" v-show="is_edu_info_public || is_job_info_public ||  is_project_info_public">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-bugongkai"></use>
+          </svg>
+          <div class="desc">部分信息暂未公开</div>
+      </div>
+
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare">继续编辑
       </button>
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-else>向Ta咨询
@@ -234,7 +241,7 @@
       var currentUrlEncoded = encodeURIComponent(currentUrl); //encodeURIComponent(currentUrl);
 
 
-      mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
+      //mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
       postRequest(`share/wechat/jssdk`, {current_url:currentUrlEncoded}).then(response => {
         var code = response.data.code;
         if (code !== 1000) {
@@ -248,13 +255,13 @@
     methods:{
       appendWechat(){
         var t = this;
-        mui.alert('当前url:'+location.href);
+        //mui.alert('当前url:'+location.href);
         var config = this.wechatConfig;
         console.log(config);
         wx.config(config);
 
         wx.error(function(res){
-          mui.alert('wx:error:'+ JSON.stringify(res));
+          //mui.alert('wx:error:'+ JSON.stringify(res));
         });
 
         wx.ready(function(){
@@ -745,5 +752,19 @@
         }
       }
     }
+  }
+
+  .noPublic{
+      margin:18px 0;
+      background: #fff;
+      text-align: center;
+      font-size:13px;
+      color:#b4b4b6;
+      padding-bottom:10px;
+
+      .icon{
+        font-size:50px;
+        color:#f3f4f6;
+      }
   }
 </style>
