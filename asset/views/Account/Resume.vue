@@ -155,7 +155,7 @@
       <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
           <div class="title">分享到</div>
           <div class="more">
-               <div class="single" @tap.stop.prevent="shareWechat()">
+               <div class="single" id="wechatShareBtn">
                    <img src="../../statics/images/wechat_2x.png"/>
                </div>
           </div>
@@ -264,49 +264,30 @@
           });
 
           wx.ready(function(){
-            mui.toast('share');
 
-            wx.onMenuShareAppMessage({
-              title: 'test', // 分享标题
-              desc: 'test', // 分享描述
-              link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: '', // 分享图标
-              type: '', // 分享类型,music、video或link，不填默认为link
-              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-              success: function () {
-                // 用户确认分享后执行的回调函数
-              },
-              cancel: function () {
-                // 用户取消分享后执行的回调函数
-              }
+            var wechatBtn = document.getElementById('wechatShareBtn');
+            wechatBtn.addEventListener('click', () => {
+              mui.toast('share');
+              wx.onMenuShareAppMessage({
+                title: 'test', // 分享标题
+                desc: 'test', // 分享描述
+                link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                  // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                  // 用户取消分享后执行的回调函数
+                }
+              });
             });
-
-
           });
 
         });
 
         document.body.appendChild(s);
-      },
-      shareWechat(){
-        mui.toast('share');
-
-
-
-
-
-//        if (typeof WeixinJSBridge == "undefined") {
-//          mui.alert("请用微信浏览器打开");
-//        } else {
-//          mui.toast('开始分享');
-//          WeixinJSBridge.invoke('sendAppMessage', {
-//            "appid":"",
-//            "title": "36氪",
-//            "link": "http://10.102.10.19:8080",
-//            "desc": "关注互联网创业",
-//            "img_url": "http://www.36kr.com/assets/images/apple-touch-icon.png"
-//          });
-//        }
       },
       toggleDeatil(event){
 
