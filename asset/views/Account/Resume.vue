@@ -31,7 +31,7 @@
           <span></span>
         </div>
         <div class="qRCode">
-          <qrcode :value="shareUrl" :options="qRCodeOptions"></qrcode>
+          <qrcode :value="shareUrl" :options="qRCodeOptions" :tag="'img'"></qrcode>
         </div>
       </div>
 
@@ -204,7 +204,7 @@
             jobs:[],
 
         },
-        qRCodeOptions:{ size: 190,padding:10}
+        qRCodeOptions:{ size: 100,padding:0}
       }
     },
     created () {
@@ -423,7 +423,10 @@
       height:190px;
       border-radius: 4px;
 
-      canvas{
+      img{
+        width:170px;
+        height:170px;
+        margin-top:10px;
         border-radius: 4px;
       }
     }
