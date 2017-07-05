@@ -146,7 +146,7 @@
       </div>
     </div>
 
-      <div class="noPublic" v-show="isShare && (!is_edu_info_public || !is_job_info_public ||  !is_project_info_public)">
+      <div class="noPublic" v-show="isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-bugongkai"></use>
           </svg>
@@ -266,6 +266,7 @@
 
           var wechatBtn = document.getElementById('wechatShareBtn');
           wechatBtn.addEventListener('click', () => {
+
             mui.toast('share');
             wx.onMenuShareAppMessage({
               title: 'test', // 分享标题
@@ -283,6 +284,17 @@
                 mui.toast('用户取消了分享');
               }
             });
+
+            if (WeixinJSBridge) {
+              WeixinJSBridge.invoke("sendAppMessage",{
+                "appid":"",
+                "img_url":"",
+                "link":t.shareUrl,
+                "desc": 'test',
+                "title":'test'
+              });
+            }
+
           });
         });
       },
