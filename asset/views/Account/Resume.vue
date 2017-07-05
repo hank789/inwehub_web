@@ -128,8 +128,7 @@
           </div></div>
           <div class="other"><div class="title">【客户名称】</div><div class="content">{{ project.customer_name }}</div></div>
         </div>
-        <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}
-        </div>
+        <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}</div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
       </div>
 
@@ -167,6 +166,13 @@
                </div>
           </div>
       </div>
+
+
+    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top" @tap.stop.prevent="toggleShareNav()">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-dianzheli"></use>
+      </svg>
+    </div>
 
   </div>
 </template>
@@ -251,6 +257,9 @@
       });
     },
     methods:{
+      toggleShareNav(){
+         mui('#shareShowWrapper').popover('toggle');
+      },
       appendWechat(){
         var t = this;
         //mui.alert('当前url:'+location.href);
@@ -266,8 +275,6 @@
 
           var wechatBtn = document.getElementById('wechatShareBtn');
           wechatBtn.addEventListener('click', () => {
-
-            mui.toast('share');
             wx.onMenuShareAppMessage({
               title: 'test', // 分享标题
               desc: 'test', // 分享描述
@@ -285,16 +292,8 @@
               }
             });
 
-            if (WeixinJSBridge) {
-              WeixinJSBridge.invoke("sendAppMessage",{
-                "appid":"",
-                "img_url":"",
-                "link":t.shareUrl,
-                "desc": 'test',
-                "title":'test'
-              });
-            }
-
+            mui('#shareWrapper').popover('toggle');
+            t.toggleShareNav();
           });
         });
       },
@@ -651,13 +650,15 @@
         font-size:13px;
 
         .other{
-
-          display:-webkit-flex;
-          display:flex;
+          display: -webkit-box;
 
           .title{
               margin-left:-10px;
               width:80px;
+          }
+
+          .content{
+            padding-right: 70px;
           }
         }
       }
@@ -694,6 +695,7 @@
         -webkit-transition:all 3s;
         margin-bottom:30px;
         height:auto;
+        white-space:pre-wrap;
 
         &.hide{
           height:69px;
@@ -776,5 +778,19 @@
         font-size:50px;
         color:#f3f4f6;
       }
+  }
+
+  #shareShowWrapper{
+    position: absolute;
+    right:0;
+    top:0;
+
+    .icon{
+        color:#fff;
+        position: absolute;
+        right:15px;
+        top:10px;
+        font-size: 70px;
+    }
   }
 </style>
