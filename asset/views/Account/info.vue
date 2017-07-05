@@ -69,11 +69,11 @@
                 <span class="desc important" v-else>请添加培训认证</span>
             </a>
           </li>
-          <!--<li class="mui-table-view-cell">-->
-            <!--<a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')"><span class="mui-icon myicon myicon-help"></span>隐私设置-->
-              <!--<span class="desc important">请选择信息公开情况</span>-->
-            <!--</a>-->
-          <!--</li>-->
+          <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')"><span class="mui-icon myicon myicon-help"></span>隐私设置
+              <span class="desc important">请选择信息公开情况</span>
+            </a>
+          </li>
         </ul>
       </div>
 

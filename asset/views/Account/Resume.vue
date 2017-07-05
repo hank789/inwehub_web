@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare"></a>
       <h1 class="mui-title">个人名片</h1>
     </header>
 
@@ -99,8 +99,8 @@
       </div>
     </div>
 
-    <h5 v-show="resume.jobs.length">工作经历</h5>
-    <div class="list" v-show="resume.jobs.length">
+    <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
+    <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
       <div class="item" v-for="(job, index) in resume.jobs">
         <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
         <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
@@ -110,8 +110,8 @@
       </div>
     </div>
 
-    <h5 v-show="resume.projects.length">项目经历</h5>
-    <div class="list" v-show="resume.projects.length">
+    <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
+    <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
       <div class="item" v-for="(project, index) in resume.projects">
         <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
         <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
@@ -135,8 +135,8 @@
 
     </div>
 
-    <h5 v-show="resume.edus.length">教育经历</h5>
-    <div class="list" v-show="resume.edus.length">
+    <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
+    <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
       <div class="item" v-for="(edu, index) in resume.edus">
         <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
         <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i class="separate"></i>{{ edu.major }}</div>
@@ -146,16 +146,16 @@
       </div>
     </div>
 
-      <div class="noPublic" v-show="is_edu_info_public || is_job_info_public ||  is_project_info_public">
+      <div class="noPublic" v-show="isShare && (!is_edu_info_public || !is_job_info_public ||  !is_project_info_public)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-bugongkai"></use>
           </svg>
           <div class="desc">部分信息暂未公开</div>
       </div>
 
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare">继续编辑
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
       </button>
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-else>向Ta咨询
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
       </button>
 
 

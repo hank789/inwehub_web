@@ -26,7 +26,7 @@
 
           </div>
           <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uid)"><span>+</span> 向Ta提问</div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uuid)"><span>+</span> 向Ta提问</div>
             <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><span class="mui-icon fa fa-heart-o"></span></div>
             <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><span class="mui-icon fa fa-heart"></span></div>
           </div>
@@ -104,7 +104,7 @@
     data: () => ({
       recommend_expert_name:'',
       recommend_expert_description:'',
-      recommend_expert_uid:'',
+      recommend_expert_uuid:'',
       recommend_expert_avatar_url:'',
       recommend_qa:[],
       recommend_expert_is_followed:0,
@@ -179,7 +179,7 @@
           }
           t.recommend_expert_name = response_data.recommend_expert_name;
           t.recommend_expert_description = response_data.recommend_expert_description;
-          t.recommend_expert_uid = response_data.recommend_expert_uid;
+          t.recommend_expert_uuid = response_data.recommend_expert_uuid;
           t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
           t.recommend_qa = response_data.recommend_qa;
           t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
