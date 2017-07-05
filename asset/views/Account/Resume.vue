@@ -217,7 +217,12 @@
             this.uuid = this.$route.query.id;
         }
 
-        postRequest(`share/wechat/jssdk`, {current_url:encodeURIComponent(fullUrl.split('#')[0])}).then(response => {
+        var currentUrl = fullUrl;  //fullUrl.split('#')[0]
+        var currentUrlEncoded = currentUrl; //encodeURIComponent(currentUrl);
+
+
+        mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
+        postRequest(`share/wechat/jssdk`, {current_url:currentUrlEncoded}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
