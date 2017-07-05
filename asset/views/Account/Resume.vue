@@ -106,9 +106,9 @@
       <div class="item" v-for="(job, index) in resume.jobs">
         <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
         <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
-        <div class="description  hide mui-ellipsis-3">{{ job.description }}
+        <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
         </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
       </div>
     </div>
 
@@ -116,39 +116,40 @@
     <div class="list" v-show="resume.projects.length">
       <div class="item" v-for="(project, index) in resume.projects">
         <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
-        <div class="company">上海樱维网络有限公司<i class="separate"></i>运营专员</div>
+        <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
         <div class="others">
-          <div class="other"><div class="title">【行业领域】</div><div class="content">专业服务</div></div>
-          <div class="other"><div class="title">【客户名称】</div><div class="content">SAO Business One；SAO Business One…</div></div>
-          <div class="other"><div class="title">【公司名称】</div><div class="content">上海樱维网络有限公司</div></div>
+          <div class="other"><div class="title">【行业领域】</div><div class="content">
+              <template v-for="(industry, index) in project.industry_tags">
+                  {{ industry.text }} ;
+              </template>
+          </div></div>
+          <div class="other"><div class="title">【产品类型】</div><div class="content">
+            <template v-for="(productTag, index) in project.product_tags">
+              {{ productTag.text }} ;
+              </template>
+          </div></div>
+          <div class="other"><div class="title">【客户名称】</div><div class="content">{{ project.customer_name }}</div></div>
         </div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+        <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}
         </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
       </div>
 
     </div>
 
-    <h5>教育经历</h5>
-    <div class="list">
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">兰州大学<i class="separate"></i>硕士<i class="separate"></i>市场研究</div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
+    <h5 v-show="resume.edus.length">教育经历</h5>
+    <div class="list" v-show="resume.edus.length">
+      <div class="item" v-for="(edu, index) in resume.edus">
+        <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
+        <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i class="separate"></i>{{ edu.major }}</div>
+        <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
         </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
-      </div>
-      <div class="item">
-        <div class="time">2015-02-17 ~ 至今</div>
-        <div class="company">兰州大学<i class="separate"></i>硕士<i class="separate"></i>市场研究</div>
-        <div class="description  hide mui-ellipsis-3">负责内部有关工作指示和会议精神的传达;负责公司会议室布置和有关会议的准备工作;负责内部人员的上传下达工作的沟通和联系;根据上级的安排，负责起草有关通知、通知等文件;
-        </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil">查看</div>
+        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
       </div>
     </div>
 
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')">继续编辑
-        </button>
+      </button>
 
 
       <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
@@ -184,7 +185,20 @@
         resume:{
             info:{
               avatar_url:'',
-            }
+              industry_tags:[],
+              province:{
+                  key:'',
+                  name:''
+              },
+              city:{
+                  key:'',
+                  name:'',
+              }
+            },
+            edus:[],
+            projects:[],
+            jobs:[],
+
         },
         qRCodeOptions:{ size: 190,padding:10}
       }
@@ -522,7 +536,7 @@
 
   .list{
     background: #fff;
-    padding:0 10px 28px 30px;
+    padding:0 10px 0 30px;
     position: relative;
 
     &:before{
@@ -537,7 +551,7 @@
 
     .item{
       position: relative;
-      padding:10px 0 41px 5px;
+      padding:10px 0 10px 5px;
 
       &:after{
         position: absolute;
@@ -601,6 +615,7 @@
         margin-top: 6px;
         line-height: 24px;
         -webkit-transition:all 3s;
+        margin-bottom:30px;
         height:auto;
 
         &.hide{
