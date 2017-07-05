@@ -238,8 +238,6 @@
     mounted(){
       var fullUrl = window.location.href;
       var currentUrl = fullUrl.split('#')[0];
-      var currentUrlEncoded = encodeURIComponent(currentUrl); //encodeURIComponent(currentUrl);
-
 
       //mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
       postRequest(`share/wechat/jssdk`, {current_url:currentUrl}).then(response => {
