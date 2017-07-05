@@ -252,14 +252,7 @@
         s.src = 'https://res.wx.qq.com/open/js/jweixin-1.2.0.js';
 
         s.addEventListener("load", (event) => {
-            var config = {
-              debug:true,
-              appId:this.wechatConfig.appId,
-              timestamp:this.wechatConfig.timestamp,
-              nonceStr:this.wechatConfig.nonceStr,
-              signature:this.wechatConfig.signature,
-              jsApiList:this.wechatConfig.jsApiList
-            };
+            var config = this.wechatConfig;
             console.log(config);
             wx.config(config);
 
