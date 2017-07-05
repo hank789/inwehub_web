@@ -171,7 +171,7 @@
   import router from '../../routers/index';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import {updateUserInfoCache, getUserInfo} from '../../utils/user';
-  import '../../js/jweixin';
+  import wx from 'weixin-js-sdk';
 
   export  default {
     data(){
