@@ -21,7 +21,7 @@
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片<span>{{ account_info_complete_percent }}%</span></div>
-            <!--<div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>-->
+            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
           </div>
         </div>
       </div>
