@@ -217,7 +217,7 @@
             this.uuid = this.$route.query.id;
         }
 
-        postRequest(`share/wechat/jssdk`, {url:fullUrl.split('#')[0]}).then(response => {
+        postRequest(`share/wechat/jssdk`, {current_url:fullUrl.split('#')[0]}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
