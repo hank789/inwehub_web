@@ -230,7 +230,7 @@
     },
     mounted(){
       var fullUrl = window.location.href;
-      //var currentUrl = fullUrl.split('#')[0];
+      var currentUrl = fullUrl.split('#')[0];
       var currentUrlEncoded = encodeURIComponent(fullUrl); //encodeURIComponent(currentUrl);
 
 
