@@ -274,40 +274,41 @@
         wx.ready(function(){
 
           var wechatBtn = document.getElementById('wechatShareBtn');
+
+          var title = "InweHub名片 | " + t.resume.info.name + '：' + t.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
+          var desc = "咨询顾问的专属身份认证@InweHub\n" + t.resume.info.company;
+
+          wx.onMenuShareAppMessage({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: t.resume.info.avatar_url, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              mui.toast('用户分享成功');
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              mui.toast('用户取消了分享');
+            }
+          });
+
+          wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: t.resume.info.avatar_url, // 分享图标
+            success: function () {
+              mui.toast('用户分享成功');
+            },
+            cancel: function () {
+              mui.toast('用户取消了分享');
+            }
+          });
+
+
           wechatBtn.addEventListener('click', () => {
-
-            var title = "InweHub名片 | " + t.resume.info.name + '：' + t.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
-            var desc = "咨询顾问的专属身份认证@InweHub\n" + t.resume.info.company;
-
-            wx.onMenuShareAppMessage({
-              title: title, // 分享标题
-              desc: desc, // 分享描述
-              link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: t.resume.info.avatar_url, // 分享图标
-              type: '', // 分享类型,music、video或link，不填默认为link
-              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-              success: function () {
-                // 用户确认分享后执行的回调函数
-                mui.toast('用户分享成功');
-              },
-              cancel: function () {
-                // 用户取消分享后执行的回调函数
-                mui.toast('用户取消了分享');
-              }
-            });
-
-            wx.onMenuShareTimeline({
-              title: title, // 分享标题
-              link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: t.resume.info.avatar_url, // 分享图标
-              success: function () {
-                mui.toast('用户分享成功');
-              },
-              cancel: function () {
-                mui.toast('用户取消了分享');
-              }
-            });
-
             mui('#shareWrapper').popover('toggle');
             t.toggleShareNav();
           });
