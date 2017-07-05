@@ -229,7 +229,7 @@
     },
     mounted(){
       var fullUrl = window.location.href;
-      var currentUrl = fullUrl;  //fullUrl.split('#')[0]
+      var currentUrl = fullUrl.split('#')[0];
       var currentUrlEncoded = encodeURIComponent(currentUrl); //encodeURIComponent(currentUrl);
 
 
@@ -247,6 +247,7 @@
     methods:{
       appendWechat(){
           var t = this;
+          mui.alert('当前url:'+location.href);
         const s = document.createElement('script');
         s.type = 'text/javascript';
         s.src = 'https://res.wx.qq.com/open/js/jweixin-1.2.0.js';
