@@ -229,8 +229,8 @@
     },
     mounted(){
       var fullUrl = window.location.href;
-      var currentUrl = fullUrl.split('#')[0];  //fullUrl.split('#')[0]
-      var currentUrlEncoded = currentUrl; //encodeURIComponent(currentUrl);
+      var currentUrl = fullUrl;  //fullUrl.split('#')[0]
+      var currentUrlEncoded = encodeURIComponent(currentUrl); //encodeURIComponent(currentUrl);
 
 
       mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
