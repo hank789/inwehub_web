@@ -115,7 +115,8 @@ const routes = [
     path: '/my/resume',
     component: require('../../../views/Account/Resume.vue'),
     meta: {
-      title: '个人名片'
+      title: '个人名片',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -126,7 +127,8 @@ const routes = [
     path: '/share/resume',
     component: require('../../../views/Account/Resume.vue'),
     meta: {
-      title: '个人名片'
+      title: '个人名片',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       next();
