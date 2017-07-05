@@ -275,8 +275,11 @@
 
           var wechatBtn = document.getElementById('wechatShareBtn');
           wechatBtn.addEventListener('click', () => {
+
+            var title = "InweHub名片 | " + t.resume.info.name;
+
             wx.onMenuShareAppMessage({
-              title: 'test', // 分享标题
+              title: title, // 分享标题
               desc: 'test', // 分享描述
               link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: t.resume.info.avatar_url, // 分享图标
@@ -288,6 +291,18 @@
               },
               cancel: function () {
                 // 用户取消分享后执行的回调函数
+                mui.toast('用户取消了分享');
+              }
+            });
+
+            wx.onMenuShareTimeline({
+              title: title, // 分享标题
+              link: t.shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: t.resume.info.avatar_url, // 分享图标
+              success: function () {
+                mui.toast('用户分享成功');
+              },
+              cancel: function () {
                 mui.toast('用户取消了分享');
               }
             });
