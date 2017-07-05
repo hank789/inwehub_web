@@ -99,6 +99,7 @@ function updateUserInfoCache(user) {
   userLocal.expert_level = user.expert_level;
   userLocal.is_company = user.is_company;
   userLocal.show_my_wallet = user.show_my_wallet;
+  userLocal.uuid = user.uuid;
 
   /*
    user.counts.map(function (count, index) {
