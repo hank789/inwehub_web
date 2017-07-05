@@ -238,7 +238,7 @@
     mounted(){
       var fullUrl = window.location.href;
       var currentUrl = fullUrl.split('#')[0];
-      var currentUrlEncoded = encodeURIComponent(currentUrl); //encodeURIComponent(currentUrl);
+      var currentUrlEncoded = encodeURIComponent(fullUrl); //encodeURIComponent(currentUrl);
 
 
       //mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
