@@ -208,29 +208,14 @@
     },
     created () {
         var from = this.$router.currentRoute.path;
-
         var fullUrl = window.location.href;
+
         this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid);
 
         if (from === '/share/resume') {
             this.isShare = true;
             this.uuid = this.$route.query.id;
         }
-
-        var currentUrl = fullUrl;  //fullUrl.split('#')[0]
-        var currentUrlEncoded = currentUrl; //encodeURIComponent(currentUrl);
-
-
-        mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
-        postRequest(`share/wechat/jssdk`, {current_url:currentUrlEncoded}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.toast(response.data.message);
-          }
-
-          this.wechatConfig = response.data.data.config;
-          this.appendWechat();
-        });
 
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
@@ -243,7 +228,21 @@
         });
     },
     mounted(){
+      var fullUrl = window.location.href;
+      var currentUrl = fullUrl.split('#')[0];  //fullUrl.split('#')[0]
+      var currentUrlEncoded = currentUrl; //encodeURIComponent(currentUrl);
 
+
+      mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
+      postRequest(`share/wechat/jssdk`, {current_url:currentUrlEncoded}).then(response => {
+        var code = response.data.code;
+        if (code !== 1000) {
+          mui.toast(response.data.message);
+        }
+
+        this.wechatConfig = response.data.data.config;
+        this.appendWechat();
+      });
     },
     methods:{
       appendWechat(){
@@ -282,9 +281,11 @@
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
                   // 用户确认分享后执行的回调函数
+                  mui.toast('用户分享成功');
                 },
                 cancel: function () {
                   // 用户取消分享后执行的回调函数
+                  mui.toast('用户取消了分享');
                 }
               });
             });
