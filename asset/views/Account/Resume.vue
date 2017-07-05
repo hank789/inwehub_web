@@ -242,7 +242,7 @@
 
 
       //mui.alert('当前url:' + currentUrl +'编译后:'+currentUrlEncoded);
-      postRequest(`share/wechat/jssdk`, {current_url:currentUrlEncoded}).then(response => {
+      postRequest(`share/wechat/jssdk`, {current_url:currentUrl}).then(response => {
         var code = response.data.code;
         if (code !== 1000) {
           mui.toast(response.data.message);
