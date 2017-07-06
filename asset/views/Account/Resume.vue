@@ -217,7 +217,7 @@
             jobs:[],
 
         },
-        qRCodeOptions:{ size: 100,padding:0}
+        qRCodeOptions:{ size: 100,padding:0,level:'H'}
       }
     },
     created () {
