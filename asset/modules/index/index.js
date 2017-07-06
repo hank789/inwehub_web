@@ -89,9 +89,8 @@ import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
 
-import VueQrcode from 'vue-qrcode'
-Vue.component('qrcode', VueQrcode);
-
+import VueQRCodeComponent from 'vue-qrcode-component';
+Vue.component('qr-code', VueQRCodeComponent);
 
 Vue.mixin({
   mounted() {

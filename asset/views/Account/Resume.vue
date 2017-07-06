@@ -31,7 +31,10 @@
           <span></span>
         </div>
         <div class="qRCode">
-          <qrcode :value="shareUrl" :options="qRCodeOptions" :tag="'img'"></qrcode>
+          <qr-code :text="shareUrl" size="170" error-level="M"></qr-code>
+        </div>
+        <div class="qRhelp">
+          扫一扫试试?
         </div>
       </div>
 
@@ -364,11 +367,11 @@
     left: 16px;
     background: #444;
     margin-top: 8px;
-    width: 263px;
+    width: 81%;
     border-radius: 4px;
     z-index: 77;
     text-align: center;
-    padding-bottom: 36px;
+    padding-bottom: 18px;
 
     .header {
       position: relative;
@@ -455,18 +458,34 @@
 
     .qRCode{
       margin-top:10px;
-      margin-left:36px;
-      background: #fff;
-      width:190px;
+      position: relative;
+      text-align: center;
       height:190px;
-      border-radius: 4px;
 
-      img{
-        width:170px;
-        height:170px;
-        margin-top:10px;
+      div {
+        position: absolute;
+        left:50%;
+        margin-left:-95px;
+        width:190px;
+        height:190px;
         border-radius: 4px;
+        background: #fff;
+        padding:10px;
+
+        img{
+          width:170px;
+          height:170px;
+          margin-top:10px !important;
+          border-radius: 4px;
+        }
       }
+
+    }
+    .qRhelp{
+      margin-top:8px;
+      text-align: center;
+      color:#fff;
+      font-size:13px;
     }
   }
 
