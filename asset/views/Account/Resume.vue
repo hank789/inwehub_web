@@ -362,10 +362,12 @@
             success: function () {
               // 用户确认分享后执行的回调函数
               mui.toast('分享成功');
+              t.toggleShareNav();
             },
             cancel: function () {
               // 用户取消分享后执行的回调函数
               mui.toast('取消了分享');
+              t.toggleShareNav();
             }
           });
 
