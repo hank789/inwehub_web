@@ -328,6 +328,12 @@
         event.target.style.display='none';
       },
       goAsk(url){
+
+          if (!this.resume.info.is_expert) {
+            mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！');
+            return;
+          }
+
           if (this.uuid == this.cuuid) {
               mui.alert('不能向自己提问！');
               return;
