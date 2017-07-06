@@ -565,7 +565,7 @@
       line-height: 24px;
 
       .icon {
-        font-size: 20px;
+        font-size: 16px;
         color: #3c95f9;
         position: relative;
         top: 2px;
