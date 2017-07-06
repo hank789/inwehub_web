@@ -375,9 +375,11 @@
             imgUrl: t.resume.info.avatar_url, // 分享图标
             success: function () {
               mui.toast('分享成功');
+              t.toggleShareNav();
             },
             cancel: function () {
               mui.toast('取消了分享');
+              t.toggleShareNav();
             }
           });
 
