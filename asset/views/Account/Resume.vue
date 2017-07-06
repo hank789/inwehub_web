@@ -243,14 +243,14 @@
     },
     created () {
         var from = this.$router.currentRoute.path;
-        var fullUrl = window.location.href;
+        var fullUrl = process.env.H5_ROOT;
 
         if (from === '/share/resume') {
             this.isShare = true;
             this.uuid = this.$route.query.id;
         }
 
-        this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime()));
+        this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
 
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;

@@ -129,7 +129,12 @@
           this.expert_level = user.info.expert_level;
           this.show_my_wallet = user.info.show_my_wallet;
 
-          this.show_resume = !(mui.os.ios && user.info.show_ios_resume === false);
+          // ios 审核成功后去掉，需要显示个人名片
+          if(mui.os.plus){
+            this.show_resume = !(mui.os.ios && user.info.show_ios_resume === false);
+          }else {
+            this.show_resume = true;
+          }
 
           this.avatar = user.info.avatar_url;
           this.name = user.info.name;
