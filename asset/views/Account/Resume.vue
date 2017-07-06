@@ -370,6 +370,7 @@
               mui.toast('分享成功');
               if (isShowShareNav) {
                 t.toggleShareNav();
+                isShowShareNav = false;
               }
             },
             cancel: () => {
@@ -377,6 +378,7 @@
               mui.toast('取消了分享');
               if (isShowShareNav) {
                 t.toggleShareNav();
+                isShowShareNav = false;
               }
             }
           });
@@ -390,12 +392,14 @@
 
               if (isShowShareNav) {
                 t.toggleShareNav();
+                isShowShareNav = false;
               }
             },
             cancel:  () => {
               mui.toast('取消了分享');
               if (isShowShareNav) {
                 t.toggleShareNav();
+                isShowShareNav = false;
               }
             }
           });
