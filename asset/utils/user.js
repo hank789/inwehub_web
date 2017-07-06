@@ -67,7 +67,8 @@ function updateUserInfoCache(user) {
     user_credits:0,
     user_coins:0,
     is_company:0,
-    show_my_wallet:false
+    show_my_wallet:false,
+    show_ios_resume:false
   };
   userLocal.user_id = user.id;
   userLocal.name = user.name;
@@ -99,6 +100,7 @@ function updateUserInfoCache(user) {
   userLocal.expert_level = user.expert_level;
   userLocal.is_company = user.is_company;
   userLocal.show_my_wallet = user.show_my_wallet;
+  userLocal.show_ios_resume = user.show_ios_resume;
   userLocal.uuid = user.uuid;
 
   /*
