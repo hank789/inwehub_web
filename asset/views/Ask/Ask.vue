@@ -179,7 +179,7 @@
     created () {
       showInwehubWebview();
       if (this.$route.query.id) {
-        var id = parseInt(this.$route.query.id);
+        var id = this.$route.query.id;
         if (id) {
             this.uid = id;
         }
@@ -321,7 +321,7 @@
       check(){
         var t = this;
 
-        postRequest(`question/request`, {uid:this.uid}).then(response => {
+        postRequest(`question/request`, {uuid:this.uid}).then(response => {
 
           var code = response.data.code;
 
