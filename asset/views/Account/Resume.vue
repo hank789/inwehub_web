@@ -300,18 +300,11 @@
         if (mui.os.plus) {
           var shares = [];
           mui.plusReady(() => {
-            this.downLoadHeader();
-
             var t = this;
             var title = "InweHub名片 | " + t.resume.info.name + '：' + t.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
             var desc = "咨询顾问的专属身份认证@InweHub\n" + t.resume.info.company;
             var link = t.shareUrl;
-
-            if (!t.downloadHeader) {
-                mui.alert('请稍候再试!');
-            } else {
-              var imgUrl = ["_downloads/resume.png"];
-            }
+            var imgUrl = t.resume.info.avatar_url;
 
 
             plus.share.getServices((shareService) => {
@@ -330,12 +323,14 @@
                   wechatBtn.addEventListener('click', () => {
                     mui('#shareWrapper').popover('toggle');
 
+                    console.log('图片:'+imgUrl);
+
                     wechat.send({
                       content:desc,
                       href:link,
                       title:title,
                       pictures:imgUrl,
-                      //thumbs:imgUrl,
+                      thumbs:imgUrl,
                       extra:{scene:"WXSceneSession"}
                     }, ()=>{
                       mui.toast('分享成功');
@@ -349,12 +344,14 @@
                   wechatBtn2.addEventListener('click', () => {
                     mui('#shareWrapper').popover('toggle');
 
+                    console.log('图片:'+imgUrl);
+
                     wechat.send({
                       content:desc,
                       href:link,
                       title:title,
                       pictures:imgUrl,
-                      //thumbs:imgUrl,
+                      thumbs:imgUrl,
                       extra:{scene:"WXSceneTimeline"}
                     }, ()=>{
                       mui.toast('分享成功');
