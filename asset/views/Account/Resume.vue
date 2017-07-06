@@ -329,8 +329,8 @@
                       content:desc,
                       href:link,
                       title:title,
-                      pictures:imgUrl,
-                      thumbs:imgUrl,
+                      pictures:[imgUrl],
+                      thumbs:[imgUrl],
                       extra:{scene:"WXSceneSession"}
                     }, ()=>{
                       mui.toast('分享成功');
@@ -350,8 +350,8 @@
                       content:desc,
                       href:link,
                       title:title,
-                      pictures:imgUrl,
-                      thumbs:imgUrl,
+                      pictures:[imgUrl],
+                      thumbs:[imgUrl],
                       extra:{scene:"WXSceneTimeline"}
                     }, ()=>{
                       mui.toast('分享成功');
