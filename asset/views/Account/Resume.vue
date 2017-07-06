@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vueWrapper">
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare"></a>
       <h1 class="mui-title">个人名片</h1>
@@ -92,7 +92,7 @@
 
         <div class="description">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jianjie"></use>
+            <use xlink:href="#icon-jieshaoshixin"></use>
           </svg>
           <span>{{ resume.info.description }}</span>
         </div>
@@ -152,9 +152,9 @@
           <div class="desc">部分信息暂未公开</div>
       </div>
 
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+      <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
       </button>
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+      <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
       </button>
 
 
@@ -230,7 +230,7 @@
             this.uuid = this.$route.query.id;
         }
 
-        this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid);
+        this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime()));
 
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
@@ -478,6 +478,8 @@
       .icon {
         font-size: 20px;
         color: #3c95f9;
+        position: relative;
+        top: 2px;
       }
     }
   }
@@ -499,7 +501,7 @@
       background: #ececee;
       width: 100%;
       position: relative;
-      padding-bottom: 1px;
+      padding-bottom: 15px;
 
       .erweima {
         width: 55px;
@@ -610,7 +612,7 @@
               color:#808080;
               font-size:12px;
               padding:0 7px;
-              margin:0 2px 5px;
+              margin: 0 2px 8px;
           }
         }
       }
@@ -785,12 +787,14 @@
   }
 
   .noPublic{
-      margin:18px 0;
+      margin:20px 0 0;
+
       background: #fff;
       text-align: center;
       font-size:13px;
       color:#b4b4b6;
-      padding-bottom:10px;
+      padding-bottom: 30px;
+      padding-top: 20px;
 
       .icon{
         font-size:50px;
@@ -810,5 +814,15 @@
         top:10px;
         font-size: 70px;
     }
+  }
+
+  .vueWrapper{
+    padding-bottom:48px;
+  }
+
+  .bottomButton{
+    position: fixed;
+    bottom:0;
+    right:0;
   }
 </style>
