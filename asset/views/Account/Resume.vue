@@ -111,6 +111,8 @@
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
       </div>
+
+      <!--<div class="seeMore">查看所有工作经历</div>-->
     </div>
 
     <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
@@ -196,6 +198,7 @@
       return {
         im_tokenMsg: '',
         uuid: currentUser.uuid,
+        cuuid: currentUser.uuid,
         showQrCode:false,
         isShare:false,
         loading:true,
@@ -227,6 +230,7 @@
         var from = this.$router.currentRoute.path;
         var fullUrl = window.location.href;
 
+        mui.alert(this.cuuid);
 
         if (from === '/share/resume') {
             this.isShare = true;
