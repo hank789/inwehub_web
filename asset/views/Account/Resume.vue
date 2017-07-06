@@ -497,8 +497,8 @@
       border-radius: 4px;
       background: #ececee;
       width: 100%;
-      height: 300px;
       position: relative;
+      padding-bottom: 1px;
 
       .erweima {
         width: 55px;
@@ -595,7 +595,7 @@
         .item {
           color: #444444;
           font-size: 14px;
-          margin: 7px;
+          margin: 7px 7px 2px 7px;
 
           .icon {
             color: #b4b4b6;
@@ -609,7 +609,7 @@
               color:#808080;
               font-size:12px;
               padding:0 7px;
-              margin:0 2px;
+              margin:0 2px 5px;
           }
         }
       }
