@@ -224,12 +224,13 @@
         var from = this.$router.currentRoute.path;
         var fullUrl = window.location.href;
 
-        this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid);
 
         if (from === '/share/resume') {
             this.isShare = true;
             this.uuid = this.$route.query.id;
         }
+
+        this.shareUrl = fullUrl.replace(/#\/.*?$/, '#/share/resume?id=' + this.uuid);
 
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
