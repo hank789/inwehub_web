@@ -334,6 +334,7 @@
 
           if (code !== 1000) {
             mui.alert(response.data.message);
+            mui.back();
             return;
           }
         });
@@ -381,7 +382,7 @@
 
         var data = {
           order_id: order_id,
-          answer_uid:this.uid,
+          answer_uuid:this.uid,
           tags: this.type.split(':')[1],
           price: this.money,
           description: this.description,
