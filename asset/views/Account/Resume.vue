@@ -671,9 +671,10 @@
 
         .other{
           display: -webkit-box;
+          overflow: hidden;
 
           .title{
-              margin-left:-10px;
+              margin-left:-8px;
               width:80px;
           }
 
