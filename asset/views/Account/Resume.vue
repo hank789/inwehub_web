@@ -328,6 +328,10 @@
         event.target.style.display='none';
       },
       goAsk(url){
+          if (this.uuid == this.cuuid) {
+              this.$router.push("/my");
+              return;
+          }
           window.location.href='https://api.ywhub.com//wechat/oauth?redirect=' + url;
           return;
       },
@@ -336,6 +340,8 @@
       },
       appendWechat(){
         var t = this;
+        var isShowShareNav = false;
+
         //mui.alert('当前url:'+location.href);
         var config = this.wechatConfig;
         console.log(config);
@@ -362,12 +368,16 @@
             success: () => {
               // 用户确认分享后执行的回调函数
               mui.toast('分享成功');
-              t.toggleShareNav();
+              if (isShowShareNav) {
+                t.toggleShareNav();
+              }
             },
             cancel: () => {
               // 用户取消分享后执行的回调函数
               mui.toast('取消了分享');
-              t.toggleShareNav();
+              if (isShowShareNav) {
+                t.toggleShareNav();
+              }
             }
           });
 
@@ -377,17 +387,23 @@
             imgUrl: t.resume.info.avatar_url, // 分享图标
             success: () => {
               mui.toast('分享成功');
-              t.toggleShareNav();
+
+              if (isShowShareNav) {
+                t.toggleShareNav();
+              }
             },
             cancel:  () => {
               mui.toast('取消了分享');
-              t.toggleShareNav();
+              if (isShowShareNav) {
+                t.toggleShareNav();
+              }
             }
           });
 
 
           wechatBtn.addEventListener('click', () => {
             mui('#shareWrapper').popover('toggle');
+            isShowShareNav = true;
             t.toggleShareNav();
           });
         });
