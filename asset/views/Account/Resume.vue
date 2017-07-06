@@ -31,7 +31,7 @@
           <span></span>
         </div>
         <div class="qRCode">
-          <qr-code :text="shareUrl" size="170" error-level="M"></qr-code>
+          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
         </div>
         <div class="qRhelp">
           扫一扫试试?
@@ -104,20 +104,22 @@
 
     <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
     <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-      <div class="item" v-for="(job, index) in resume.jobs">
+      <div :class="{item:true, itemJobMore:isShare && index >= 3}" v-for="(job, index) in resume.jobs">
         <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
         <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
         <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
         </div>
         <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
       </div>
+    </div>
 
-      <!--<div class="seeMore">查看所有工作经历</div>-->
+    <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
+      <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
     </div>
 
     <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
     <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
-      <div class="item" v-for="(project, index) in resume.projects">
+      <div :class="{item:true, itemProjectMore:isShare && index >= 3}" v-for="(project, index) in resume.projects">
         <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
         <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
         <div class="others">
@@ -139,9 +141,13 @@
 
     </div>
 
+    <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
+      <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
+    </div>
+
     <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
     <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-      <div class="item" v-for="(edu, index) in resume.edus">
+      <div :class="{item:true, itemEduMore:isShare && index >= 3}" v-for="(edu, index) in resume.edus">
         <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
         <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i class="separate"></i>{{ edu.major }}</div>
         <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
@@ -150,7 +156,11 @@
       </div>
     </div>
 
-      <div class="noPublic" v-show="isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public)">
+    <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
+      <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
+    </div>
+
+      <div class="noPublic" v-show="isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-bugongkai"></use>
           </svg>
@@ -230,8 +240,6 @@
         var from = this.$router.currentRoute.path;
         var fullUrl = window.location.href;
 
-        mui.alert(this.cuuid);
-
         if (from === '/share/resume') {
             this.isShare = true;
             this.uuid = this.$route.query.id;
@@ -265,6 +273,60 @@
       });
     },
     methods:{
+      showJobMore(event){
+
+          if (!this.cuuid) {
+            window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+            return;
+          }
+
+          var jobs = document.getElementsByClassName('itemJobMore');
+
+          for (var i in jobs) {
+              var job = jobs[i];
+              if (job.className) {
+                job.className = job.className.replace('itemJobMore', '');
+              }
+
+          }
+          event.target.style.display='none';
+      },
+      showProjectMore(event){
+
+        if (!this.cuuid) {
+          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+          return;
+        }
+
+        var jobs = document.getElementsByClassName('itemProjectMore');
+
+        for (var i in jobs) {
+          var job = jobs[i];
+          if (job.className) {
+            job.className = job.className.replace('itemProjectMore', '');
+          }
+
+        }
+        event.target.style.display='none';
+      },
+      showEduMore(event){
+
+        if (!this.cuuid) {
+          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+          return;
+        }
+
+        var jobs = document.getElementsByClassName('itemEduMore');
+
+        for (var i in jobs) {
+          var job = jobs[i];
+          if (job.className) {
+            job.className = job.className.replace('itemEduMore', '');
+          }
+
+        }
+        event.target.style.display='none';
+      },
       goAsk(url){
           window.location.href='https://api.ywhub.com//wechat/oauth?redirect=' + url;
           return;
@@ -672,6 +734,11 @@
       background-color: #ececee;
     }
 
+
+    .itemJobMore, .itemProjectMore, .itemEduMore{
+      display: none;
+    }
+
     .item{
       position: relative;
       padding:10px 0 10px 5px;
@@ -691,6 +758,8 @@
       &:last-child:after{
         display: none;
       }
+
+
 
       .others{
         color:#b4b4b6;
@@ -779,6 +848,9 @@
         }
       }
     }
+
+
+
   }
 
   button{
@@ -852,5 +924,29 @@
     position: fixed;
     bottom:0;
     right:0;
+    z-index: 11;
   }
+
+  .seeMoreWrapper{
+    background: #fff;
+    padding-bottom:30px;
+    margin-top: -2px;
+    z-index: 5;
+    position: relative;
+
+    .seeMore{
+      font-size:14px;
+      color:#3c95f9;
+      text-align: center;
+      padding: 9px 0 8px;
+      background: #fff;
+      border:1px solid #dcdcdc;
+      border-radius: 4px;
+      margin:0 20px;
+    }
+  }
+
+
+
+
 </style>
