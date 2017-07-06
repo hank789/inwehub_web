@@ -154,7 +154,7 @@
 
       <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
       </button>
-      <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+      <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
       </button>
 
 
@@ -258,6 +258,10 @@
       });
     },
     methods:{
+      goAsk(url){
+          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=' + url;
+          return;
+      },
       toggleShareNav(){
          mui('#shareShowWrapper').popover('toggle');
       },
