@@ -329,7 +329,7 @@
       },
       goAsk(url){
           if (this.uuid == this.cuuid) {
-              this.$router.push("/my");
+              mui.alert('不能向自己提问！');
               return;
           }
           window.location.href='https://api.ywhub.com//wechat/oauth?redirect=' + url;
