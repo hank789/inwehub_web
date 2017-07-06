@@ -21,7 +21,7 @@
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片<span>{{ account_info_complete_percent }}%</span></div>
-            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
+            <div v-if="show_resume" class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
           </div>
         </div>
       </div>
@@ -94,7 +94,8 @@
         tasks:currentUser.tasks,
         projects:currentUser.projects,
         expert_level:currentUser.expert_level,
-        show_my_wallet:currentUser.show_my_wallet
+        show_my_wallet:currentUser.show_my_wallet,
+        show_resume: false
       }
     },
     methods: {
@@ -102,7 +103,7 @@
         mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
       },
       shareOut(){
-          mui.alert('我们还暂时不建议您分享！');
+        mui.alert('我们还暂时不建议您分享！');
       },
       integralDemo(){
           //mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
@@ -127,6 +128,9 @@
           this.projects = user.info.projects;
           this.expert_level = user.info.expert_level;
           this.show_my_wallet = user.info.show_my_wallet;
+
+          this.show_resume = !(mui.os.ios && user.info.show_ios_resume === false);
+
           this.avatar = user.info.avatar_url;
           this.name = user.info.name;
           this.title = user.info.title;
