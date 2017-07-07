@@ -230,7 +230,7 @@
             if (fileInput == null) {
               fileInput = document.createElement('input');
               fileInput.setAttribute('type', 'file');
-              fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+              fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/jpg, image/bmp, image/x-icon');
               fileInput.classList.add('ql-image');
               fileInput.addEventListener('change', () => {
                 if (fileInput.files != null && fileInput.files[0] != null) {
