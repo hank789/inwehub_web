@@ -259,7 +259,7 @@
             this.isShare = true;
             this.uuid = this.$route.query.id;
         }
-        
+
 
         this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
 
@@ -277,6 +277,11 @@
     mounted(){},
     methods:{
       collectProfessor:function(){
+
+        if (!this.cuuid) {
+          window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=/home';
+          return;
+        }
 
         postRequest(`follow/user`, {id:this.uuid}).then(response => {
           var code = response.data.code;
