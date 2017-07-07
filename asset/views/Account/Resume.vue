@@ -432,7 +432,7 @@
         event.target.style.display='none';
       },
       goAsk(url){
-
+          
           if (!this.resume.info.is_expert) {
             mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！');
             return;
@@ -442,7 +442,7 @@
               mui.alert('不能向自己提问！');
               return;
           }
-          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=' + url;
+          window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=' + url;
           return;
       },
       toggleShareNav(){
