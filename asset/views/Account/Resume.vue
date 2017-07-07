@@ -47,6 +47,16 @@
         <div class="cardWrapper">
           <div class="card">
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png"/></div>
+            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shoucang"></use>
+              </svg>
+            </div>
+            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shoucanghover"></use>
+              </svg>
+            </div>
             <div class="share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true"  v-show="resume.info.is_expert">
                 <use xlink:href="#icon-fenxiang"></use>
@@ -249,6 +259,7 @@
             this.isShare = true;
             this.uuid = this.$route.query.id;
         }
+        
 
         this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
 
@@ -265,6 +276,18 @@
     },
     mounted(){},
     methods:{
+      collectProfessor:function(){
+
+        postRequest(`follow/user`, {id:this.uuid}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+          this.resume.is_followed = !this.resume.is_followed;
+          mui.toast(response.data.data.tip);
+        });
+      },
       downLoadHeader(){
         var that = this;
         var dtask = plus.downloader.createDownload(this.resume.info.avatar_url, {filename:"_downloads/resume.png"}, function(d, status) {
@@ -741,6 +764,14 @@
           width: 100%;
           height: 100%;
         }
+      }
+
+      .collect{
+        position: absolute;
+        font-size: 30px;
+        right: 55px;
+        top: 12px;
+        color: #808080;
       }
 
       .share {

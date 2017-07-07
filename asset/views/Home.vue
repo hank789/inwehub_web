@@ -134,10 +134,10 @@
               mui.alert(response.data.message);
               return;
             }
+            this.recommend_expert_is_followed = !this.recommend_expert_is_followed;
             mui.toast(response.data.data.tip);
         });
 
-         this.recommend_expert_is_followed = !this.recommend_expert_is_followed;
       },
       goRecommand: function () {
         this.expertNav();
