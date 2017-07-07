@@ -380,7 +380,7 @@
       showJobMore(event){
 
           if (!this.cuuid) {
-            window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+            window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=/home';
             return;
           }
 
@@ -398,7 +398,7 @@
       showProjectMore(event){
 
         if (!this.cuuid) {
-          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+          window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
 
@@ -416,7 +416,7 @@
       showEduMore(event){
 
         if (!this.cuuid) {
-          window.location.href='https://api.ywhub.com//wechat/oauth?redirect=/home';
+          window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
 
@@ -432,7 +432,7 @@
         event.target.style.display='none';
       },
       goAsk(url){
-          
+
           if (!this.resume.info.is_expert) {
             mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！');
             return;
