@@ -291,7 +291,8 @@ const routes = [
     path: '/my/info/privacy',
     component: require('../../../views/Account/infos/privacy.vue'),
     meta: {
-      title: '隐私设置'
+      title: '隐私设置',
+      wechatHideHeader:true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
