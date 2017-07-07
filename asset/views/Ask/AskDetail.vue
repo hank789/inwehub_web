@@ -33,7 +33,7 @@
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status==6||ask.question.status==7">
         <div class="mui-table-view-cell">
-          <div class="avatar">
+          <div class="avatar" @tap.stop.prevent="toAnswerResume()">
             <div class="avatarInner">
               <img :src="ask.answers[0]?ask.answers[0].user_avatar_url:''">
             </div>
@@ -204,6 +204,10 @@
       }
     },
     methods: {
+      toAnswerResume(){
+        var uuid = this.ask.answers[0] ? this.ask.answers[0].uuid:0;
+        this.$router.push('/share/resume?id=' + uuid + '&time=' + (new Date().getTime()));
+      },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
       },
