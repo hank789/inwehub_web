@@ -21,6 +21,10 @@ const routes = [
       title: '主页'
     },
     beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
       if (mui.os.plus) {
         var lauch = localEvent.getLocalItem('lauchFlag');
         if (!lauch.showGuide && 1 === 2) {
