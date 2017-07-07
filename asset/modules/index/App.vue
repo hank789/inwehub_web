@@ -290,25 +290,32 @@
         }
       });
 
-      mui.init({
-        swipeBack:true, //启用右滑关闭功能
-        beforeback: function(){
-          console.log('beforeback');
-          if (mui.os.plus) {
-            var self = plus.webview.currentWebview();
-            //获得父页面的webview
-            var parent_webview = self.opener();
-            if (parent_webview){
-              console.log('Webview窗口：'+parent_webview.getURL());
-              //触发父页面的自定义事件(refresh),从而进行刷新
-              mui.fire(parent_webview, 'refreshData');
-              //子页面也刷新数据
-              mui.fire(self, 'refreshData');
-            }
+
+
+      if (mui.os.plus && mui.os.ios) {
+        mui.init({
+          swipeBack:true, //启用右滑关闭功能
+          beforeback: function(){
+
+              var self = plus.webview.currentWebview();
+              //获得父页面的webview
+              var parent_webview = self.opener();
+              if (parent_webview){
+                console.log('Webview窗口：'+parent_webview.getURL());
+                //触发父页面的自定义事件(refresh),从而进行刷新
+                mui.fire(parent_webview, 'refreshData');
+                //子页面也刷新数据
+                mui.fire(self, 'refreshData');
+              }
+
+            return true;
           }
-          return true;
-        }
-      });
+        });
+      } else {
+        mui.init({
+          swipeBack:true, //启用右滑关闭功能
+        });
+      }
     }
   }
 </script>

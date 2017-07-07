@@ -106,6 +106,15 @@ Vue.mixin({
   }
 })
 
+mui.muiOldBack = mui.back;
+mui.back = function(){
+  if (mui.os.plus && mui.os.ios) {
+    mui.muiOldBack();
+  } else {
+    router.go(-1);
+  }
+};
+
 
 const app = new Vue({
   router,
