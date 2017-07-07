@@ -24,7 +24,9 @@ export default axios;
 
 export function apiRequest (url, data) {
   if (mui.os.plus){
-    plus.nativeUI.showWaiting();
+    mui.plusReady(() => {
+      plus.nativeUI.showWaiting();
+    });
   } else {
     mui.waiting();
   }
@@ -35,7 +37,9 @@ export function apiRequest (url, data) {
   )
     .then(response => {
       if (mui.os.plus){
-        plus.nativeUI.closeWaiting();
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
       } else {
         mui.closeWaiting();
       }
@@ -69,7 +73,9 @@ export function apiRequest (url, data) {
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
       if (mui.os.plus){
-        plus.nativeUI.closeWaiting();
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
       } else {
         mui.closeWaiting();
       }
@@ -81,7 +87,9 @@ export function apiRequest (url, data) {
 
 export function postRequest (url, data) {
   if (mui.os.plus){
-    plus.nativeUI.showWaiting();
+    mui.plusReady(() => {
+       plus.nativeUI.showWaiting();
+    });
   } else {
     mui.waiting();
   }
@@ -92,7 +100,9 @@ export function postRequest (url, data) {
   )
     .then(response => {
       if (mui.os.plus){
-        plus.nativeUI.closeWaiting();
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
       } else {
         mui.closeWaiting();
       }
@@ -111,7 +121,9 @@ export function postRequest (url, data) {
     })
     .catch(e => {
       if (mui.os.plus){
-        plus.nativeUI.closeWaiting();
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
       } else {
         mui.closeWaiting();
       }
