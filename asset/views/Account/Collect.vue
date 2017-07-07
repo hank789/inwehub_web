@@ -30,7 +30,7 @@
                     </div>
                   </div>
                   <span class="mui-icon myicon myicon-ask"
-                        @tap.stop.prevent="$router.push('/ask?id=' + item.user_id)"></span>
+                        @tap.stop.prevent="$router.push('/ask?id=' + item.uuid)"></span>
                 </div>
 
               </li>
