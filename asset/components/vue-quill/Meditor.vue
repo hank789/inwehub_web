@@ -69,7 +69,7 @@
       },
       descMaxLength: {
         type: Number,
-        default: 1000
+        default: 50000
       }
     },
     mounted() {
