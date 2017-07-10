@@ -15,7 +15,7 @@ function resolve (dir) {
 
 var baseWebpackConfig = {
   entry: {
-
+    //user: './asset/index.js'
   },
   output: {
     path: config.build.assetsRoot,
