@@ -334,7 +334,6 @@
             var link = t.shareUrl;
             var imgUrl = t.resume.info.avatar_url;
 
-
             plus.share.getServices((shareService) => {
               for(var i in shareService){
                 var shareObj = shareService[i];
@@ -358,12 +357,12 @@
                       href:link,
                       title:title,
                       pictures:[imgUrl],
-                      thumbs:[imgUrl],
+                      thumbs:[imgUrl+'?x-oss-process=image/resize,h_100'],
                       extra:{scene:"WXSceneSession"}
                     }, ()=>{
                       mui.toast('分享成功');
                     }, (error)=>{
-                     // mui.toast('分享失败' + error.message);
+                      console.log('分享失败' + error.message);
                     });
                   });
 
@@ -379,12 +378,12 @@
                       href:link,
                       title:title,
                       pictures:[imgUrl],
-                      thumbs:[imgUrl],
+                      thumbs:[imgUrl+'?x-oss-process=image/resize,h_100'],
                       extra:{scene:"WXSceneTimeline"}
                     }, ()=>{
                       mui.toast('分享成功');
                     }, (error)=>{
-                     // mui.toast('分享失败' + error.message);
+                     console.log('分享失败' + error.message);
                     });
                   });
                 }
