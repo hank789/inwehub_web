@@ -32,7 +32,6 @@ window.loading_gif = loading_gif;
 import './../../styles/mui.css';
 import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';
-import './../../styles/font-awesome.css';
 import './../../styles/iconfont.css';
 
 import './../../js/iconfont.js';
