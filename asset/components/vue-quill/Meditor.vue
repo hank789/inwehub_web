@@ -86,6 +86,18 @@
           softinputMode: "adjustResize"
         });
       });
+
+      window.onbeforeunload = (e) => {
+        e = e || window.event;
+       
+        // 兼容IE8和Firefox 4之前的版本
+        if (e) {
+          e.returnValue = '关闭后未保存的数据将丢失';
+        }
+
+        // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+        return '关闭后未保存的数据将丢失';
+      }
     },
     components: {
       quillEditor
