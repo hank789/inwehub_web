@@ -13,6 +13,7 @@ import task from './module/task';
 import answers from './module/answer';
 import asks from './module/ask';
 import asksFinish from './module/askFinish';
+import richText from './module/richText';
 
 
 import mutations from './mutations'
@@ -28,7 +29,8 @@ const modules = {
   asks,
   asksFinish,
   answers,
-  askType
+  askType,
+  richText
 }
 
 const store = new Vuex.Store({

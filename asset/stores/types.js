@@ -47,3 +47,6 @@ export const ASKS_FINISH_LIST = 'task_finish_list';
 export const ASKS_FINISH_LIST_APPEND = 'task_finish_list_append';
 export const ASKS_FINISH_INFO = 'asks_finish_info';
 export const ASKS_FINISH_INFO_APPEND = 'asks_finish_info_append';
+
+export const RICHTEXT_ANSWER_SET = 'richtext_answer_set';
+export const RICHTEXT_ANSWER_GET = 'richtext_answer_get';
