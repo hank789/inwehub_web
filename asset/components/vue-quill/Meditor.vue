@@ -53,6 +53,8 @@
           imageImport: true
         }
       },
+      timeInterVal:false,
+      iosAutoSaveTime:10, //隔几秒自动保存
       editorObj: {},
       sortable: null
     }),
@@ -91,7 +93,9 @@
     methods: {
       onEditorChange(editor){
 
-        this.storeContent(editor.editor.getContents());
+        if (!(mui.os.plus && mui.os.ios)) {
+          this.storeContent(editor.editor.getContents());
+        }
 
         this.descLength = editor.editor.getLength() - 1;
 
@@ -155,8 +159,14 @@
             }
           }
         }
-
-        this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:content, id:this.id});
+        console.log('storeContent:' + (new Date()).getTime());
+        if (mui.os.plus && mui.os.ios) {
+          mui.plusReady(() => {
+            plus.storage.setItem(this.id, JSON.stringify(content));
+          });
+        } else {
+          this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:content, id:this.id});
+        }
       },
       onEditorBlur(editor) {
         //console.log('editor blur!', editor)
@@ -166,20 +176,57 @@
         //console.log('editor focus!', editor)
         this.$emit('onEditorFocus', editor)
       },
+      nowSave(){
+        var contents = this.description;
+        this.storeContent(contents);
+      },
+      autoSave(){
+
+        setTimeout(() => {
+          if (this._isDestroyed) {
+              return;
+          }
+
+          var nowTime = (new Date()).getTime();
+
+          console.log('最新时间:'+nowTime/1000);
+
+          this.nowSave();
+          this.autoSave();
+        }, this.iosAutoSaveTime * 1000);
+      },
       onEditorReady(editor) {
         this.editorObj = editor;
-        this.$emit('ready', editor)
+        this.$emit('ready', editor);
 
+        if (mui.os.plus && mui.os.ios) {
 
+          mui.plusReady(() => {
+            var contents = plus.storage.getItem(this.id);
 
-        var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
-        if (index > -1) {
-          var contents = this.$store.state.richText.answer[index].content;
-          if (contents) {
-            console.log('restore contents:');
-            this.editorObj.setContents(contents);
+            if (contents) {
+              contents = JSON.parse(contents);
+              console.log('restore contents:');
+              this.editorObj.setContents(contents);
+              if (!this.timeInterVal) {
+                this.timeInterVal = true;
+                this.autoSave();
+              }
+            }
+          });
+        } else {
+          var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
+          if (index > -1) {
+            var contents = this.$store.state.richText.answer[index].content;
+
+            if (contents) {
+              console.log('restore contents:');
+              this.editorObj.setContents(contents);
+            }
           }
         }
+
+
       },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;

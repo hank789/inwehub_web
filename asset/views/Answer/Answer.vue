@@ -10,7 +10,7 @@
 
     <div class="mui-content answerRichText blur">
         <div class="form form-realAnswer">
-            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="'answer'+id" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
+            <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="'answer'+id" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
@@ -49,6 +49,12 @@
     },
     methods: {
       cancelAnswer(){
+
+        if (mui.os.plus && mui.os.ios) {
+          this.$refs.myTextEditor.nowSave();
+        }
+
+
         if (this.editorObj.getLength() <= 1) {
           mui.back();
           return;
@@ -127,7 +133,13 @@
 
               mui.toast(response.data.message);
 
-              this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
+              if (mui.os.plus && mui.os.ios) {
+                mui.plusReady(() => {
+                  plus.storage.setItem(this.id, '');
+                });
+              } else {
+                this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
+              }
 
               mui.back();
             });
