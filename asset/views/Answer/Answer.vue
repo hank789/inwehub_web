@@ -10,7 +10,7 @@
 
     <div class="mui-content answerRichText blur">
         <div class="form form-realAnswer">
-            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
+            <Meditor v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 

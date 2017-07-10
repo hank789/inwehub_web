@@ -167,8 +167,8 @@
         }
 
 
-        if (imageNum >= 4) {
-          mui.alert('最多可添加4张图片！');
+        if (imageNum >= 11) {
+          mui.alert('最多可添加10张图片！');
           return false;
         }
 

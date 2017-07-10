@@ -57,10 +57,10 @@
                                                                       :minutesTxt="':'"></count-down></span>
 
         <span class="time" v-else-if="isTimeout(answer.question)"><b>已超时</b><timeago :since="timeago(answer.question.promise_answer_time)"
-                                                                          :auto-update="60"></timeago></span>
+                                                                          :auto-update="60" locale="zh-Diff"></timeago></span>
 
         <span class="time" v-else><b v-show="isTimeout(answer.question)">已超时</b><timeago
-          :since="timeago(answer.question.created_at)" :auto-update="60"></timeago></span>
+          :since="timeago(answer.question.created_at)" :auto-update="60" locale="zh-Diff"></timeago></span>
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容</button>

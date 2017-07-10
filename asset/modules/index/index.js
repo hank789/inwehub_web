@@ -80,7 +80,17 @@ Vue.use(TimeAgo, {
   name: 'timeago',
   locale: 'zh-CN',
   locales: {
-    'zh-CN': require('vue-timeago/locales/zh-CN.json')
+    'zh-CN': require('vue-timeago/locales/zh-CN.json'),
+    'zh-Diff': [
+      "刚刚",
+      "%s 秒",
+      "%s 分钟",
+      "%s 小时",
+      "%s 天",
+      "%s 周",
+      "%s 月",
+      "%s 年"
+    ]
   }
 });
 
