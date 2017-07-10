@@ -6,7 +6,7 @@
         <button class="ql-image"></button>
       </div>
 
-      <quill-editor ref="myTextEditor"
+      <quill-editor :id="id" ref="myTextEditor"
                     v-model="description"
                     :options="editorOption"
 
@@ -33,6 +33,8 @@
   import {quillEditor} from '../../components/vue-quill';
 
   import iconDrag from '../../statics/images/icon-drag.png';
+  import {NOTICE, RICHTEXT_ANSWER_GET, RICHTEXT_ANSWER_SET} from '../../stores/types';
+  import {getIndexByIdArray} from '../../utils/array';
 
   export default {
     data: () => ({
@@ -55,6 +57,9 @@
       sortable: null
     }),
     props: {
+      id:{
+        type:String,
+      },
       content: {
         type: Object,
         default: {}
@@ -86,7 +91,7 @@
     methods: {
       onEditorChange(editor){
 
-
+        this.storeContent(editor.editor.getContents());
 
         this.descLength = editor.editor.getLength() - 1;
 
@@ -142,6 +147,17 @@
           }
         });
       },
+      storeContent(content){
+        for (var i in content.ops) {
+          if (content.ops[i].insert.hasOwnProperty('image')) {
+            if (/drag/.test(content.ops[i].insert.image)) {
+              content.ops.splice(i, 1);
+            }
+          }
+        }
+
+        this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:content, id:this.id});
+      },
       onEditorBlur(editor) {
         //console.log('editor blur!', editor)
         this.$emit('onEditorBlur', editor)
@@ -153,6 +169,17 @@
       onEditorReady(editor) {
         this.editorObj = editor;
         this.$emit('ready', editor)
+
+
+
+        var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
+        if (index > -1) {
+          var contents = this.$store.state.richText.answer[index].content;
+          if (contents) {
+            console.log('restore contents:');
+            this.editorObj.setContents(contents);
+          }
+        }
       },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
