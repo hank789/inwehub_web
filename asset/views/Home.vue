@@ -27,8 +27,12 @@
           </div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uuid)"><span>+</span> 向Ta提问</div>
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><span class="mui-icon fa fa-heart-o"></span></div>
-            <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><span class="mui-icon fa fa-heart"></span></div>
+            <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucang"></use>
+            </svg></div>
+            <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucanghover"></use>
+            </svg></div>
           </div>
         </div>
       </div>
@@ -328,10 +332,16 @@
     margin-left: 3%;
   }
 
+  .professor .options .collect .icon{
+    font-size: 20px;
+    position: relative;
+    top: 1px;
+  }
+
   .professor .options .collect-active{
     /*border:1px solid #4990E2;*/
   }
-  .professor .options .collect-active span{
+  .professor .options .collect-active .icon{
     color:#fff;
   }
 

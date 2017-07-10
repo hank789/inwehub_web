@@ -55,7 +55,9 @@
           <li class="mui-table-view-cell">
             <div class="mui-input-row">
               <div><label>支付方式</label><label
-                class="mui-pull-right account-setting-field apple-icon"><span :class="'fa '+getMethodIcon()"></span></label></div>
+                class="mui-pull-right account-setting-field apple-icon "><svg class="icon mui-icon" aria-hidden="true">
+                <use :xlink:href="getMethodIcon()"></use>
+              </svg></label></div>
             </div>
           </li>
         </ul>
@@ -197,10 +199,10 @@
     methods: {
       getMethodIcon(){
         if (mui.os.plus && mui.os.ios) {
-          return 'fa-apple';
+          return '#icon-apple';
         }
 
-        return 'fa-wechat';
+        return '#icon-wechat';
       },
       selectMajor2(){
         if (mui.os.plus) {
@@ -672,7 +674,7 @@
     text-align: right;
   }
 
-  .selectMoney .fa-apple,.selectMoney .fa-wechat{
+  .selectMoney .mui-icon{
     color:rgba(138,138,138,100);
     opacity: 0.67;
     font-size:24px;

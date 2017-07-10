@@ -27,7 +27,9 @@
 
         </div>
         <div class="collectWrapper">
-           <div class="collect active"><span class="mui-icon fa fa-heart"></span></div> <span class="amount">提问金额<b>￥{{ ask.question.price }}</b>元</span>
+           <div class="collect active"><svg class="mui-icon icon" aria-hidden="true">
+             <use xlink:href="#icon-shoucanghover"></use>
+           </svg></div> <span class="amount">提问金额<b>￥{{ ask.question.price }}</b>元</span>
         </div>
       </div>
 
@@ -128,7 +130,9 @@
           <div class="commentDesc" v-show="!commentState">回答者将不会看到您的评价！</div>
 
           <div class="successWrapper" v-show="commentState">
-              <div class="mui-icon fa fa-check-circle"></div>
+              <svg class="icon mui-icon" aria-hidden="true">
+                <use xlink:href="#icon-check-circle"></use>
+              </svg>
               <div class="sTitle">感谢您的认真评价，我们非<br/>常珍惜您的反馈！</div>
           </div>
           <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
@@ -680,6 +684,9 @@
   }
   .collect .mui-icon{
     color:#4990E2;
+    font-size: 16px;
+    position: relative;
+    top: 2px;
   }
 
   .collect.active .mui-icon{

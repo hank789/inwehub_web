@@ -64,7 +64,10 @@
 
         <div class="image-item space" @tap.stop.prevent="selectImages" v-show="files.length < 2">
           <div class="image-close">X</div>
-          <span class="mui-icon fa fa-plus"></span>
+          <svg class="icon mui-icon" aria-hidden="true">
+            <use xlink:href="#icon-plus--"></use>
+          </svg>
+
         </div>
 
       </div>
@@ -431,11 +434,11 @@
   }
 
   .image-item .mui-icon {
-    font-size:50px;
+    font-size: 40px;
     position: absolute;
-    top:8px;
-    left:12px;
-    color:#ccc;
+    top: 11px;
+    left: 11px;
+    color: #ccc;
   }
 
   .image-item .file {

@@ -33,15 +33,17 @@
       <div class="mui-row buttons" v-show="answer.question.status==2">
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="selectTime"><span
-            class="mui-icon fa fa-check-square-o"></span>确认应答
+                  @tap.stop.prevent="selectTime"><svg class="mui-icon icon" aria-hidden="true">
+            <use xlink:href="#icon-check-square"></use>
+          </svg>确认应答
 
-          </button>
+              </button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="$router.replace('/answerrefuse/' + answer.question.id)"><span
-            class="mui-icon fa fa-times"></span>拒绝应答
+                  @tap.stop.prevent="$router.replace('/answerrefuse/' + answer.question.id)"><svg class="mui-icon icon" aria-hidden="true">
+            <use xlink:href="#icon-times"></use>
+          </svg>拒绝应答
 
           </button>
         </div>
