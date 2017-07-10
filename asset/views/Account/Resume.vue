@@ -470,7 +470,13 @@
               mui.alert('不能向自己提问！');
               return;
           }
-          window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=' + url;
+
+          if (mui.os.wechat) {
+            window.location.href= process.env.API_ROOT + 'wechat/oauth?redirect=' + url;
+          } else {
+            this.$router.push(url);
+          }
+
           return;
       },
       toggleShareNav(){
