@@ -123,7 +123,7 @@
       }
     },
     activated: function () {
-      
+
     },
     mounted(){
       var t = this;

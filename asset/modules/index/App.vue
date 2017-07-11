@@ -117,7 +117,7 @@
           return;
         }
 
-        postRequest(`notification/count`, {}).then(response => {
+        postRequest(`notification/count`, {}, false).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
