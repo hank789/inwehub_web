@@ -252,6 +252,7 @@
       }
     },
     created () {
+        showInwehubWebview();
         var from = this.$router.currentRoute.path;
         var fullUrl = process.env.H5_ROOT;
 
@@ -263,6 +264,17 @@
 
         this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
 
+        this.getData();
+    },
+    mounted(){
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-resume');
+        this.getData();
+      });
+    },
+    methods:{
+      getData:function(){
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -273,9 +285,7 @@
           this.loading = 0;
           this.bindWechatShare();
         });
-    },
-    mounted(){},
-    methods:{
+      },
       collectProfessor:function(){
 
         if (!this.cuuid) {
