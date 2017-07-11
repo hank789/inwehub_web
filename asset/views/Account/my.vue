@@ -146,6 +146,9 @@
       showInwehubWebview();
       this.initData();
     },
+    activated: function () {
+      this.initData();
+    },
     mounted(){
       this.getToken();
     }

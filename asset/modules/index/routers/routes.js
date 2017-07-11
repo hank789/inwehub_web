@@ -49,7 +49,8 @@ const routes = [
   { // message
     path: '/home',
     meta: {
-      title: 'Inwehub'
+      title: 'Inwehub',
+      keepAlive: true
     },
     component: require('../../../views/Home.vue'),
     beforeEnter: (to, from, next) => {
@@ -90,7 +91,8 @@ const routes = [
     path: '/my',
     component: require('../../../views/Account/my.vue'),
     meta: {
-      title: '我的'
+      title: '我的',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -445,7 +447,8 @@ const routes = [
     component: require('../../../views/Task/TaskListSub.vue'),
     meta: {
       title: '任务',
-      wechatHideHeader:true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -592,7 +595,8 @@ const routes = [
     path: '/discover',
     meta: {
       title: '发现',
-      wechatHideHeader:true
+      wechatHideHeader:true,
+      keepAlive: true
     },
     component: require('../../../views/Discover/Discover.vue'),
     beforeEnter: (to, from, next) => {

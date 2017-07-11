@@ -118,6 +118,9 @@
     created () {
       this.getData();
     },
+    activated: function () {
+      this.getData();
+    },
     mounted(){
       showInwehubWebview();
       document.body.style.backgroundColor = '#fff';

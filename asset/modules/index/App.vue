@@ -3,9 +3,10 @@
         <div v-wechat-title="wechatTitle"></div>
 
         <div class='view'>
-          <transition name='none' mode="out-in">
-            <router-view @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
-          </transition>
+          <keep-alive>
+            <router-view v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+          </keep-alive>
+          <router-view v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
 
         <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
