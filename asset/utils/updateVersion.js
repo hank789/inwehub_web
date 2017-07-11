@@ -65,7 +65,8 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     removeFile(path);
     // console.log("安装wgt文件失败["+e.code+"]："+e.message);
-    plus.nativeUI.alert("失败["+e.code+"]："+e.message);
+    Raven.captureException(e);
+    //plus.nativeUI.alert("失败["+e.code+"]："+e.message);
   });
 }
 
