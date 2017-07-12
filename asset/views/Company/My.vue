@@ -43,14 +43,14 @@
     <div class="nav">
       <div class="navWrapper mui-row">
 
-        <div class="item mui-col-sm-6 mui-col-xs-6">
+        <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="$router.push('/company/help')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shuru"></use>
           </svg>
           <div>发布需求</div>
         </div>
         <div class="line"></div>
-        <div class="item mui-col-sm-6 mui-col-xs-6">
+        <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="$router.push('/company/help')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xuqiuguanli"></use>
           </svg>
@@ -62,7 +62,7 @@
     <div class="river"></div>
 
     <div class="more">
-      <a class="mui-navigate-right">查看个人页面</a>
+      <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.push('/my')">查看个人页面</a>
     </div>
   </div>
 

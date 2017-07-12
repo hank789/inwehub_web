@@ -750,6 +750,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // company-help
+    path: '/company/help',
+    meta: {
+      title: '',
+    },
+    component: require('../../../views/Company/Help.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
