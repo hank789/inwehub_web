@@ -41,7 +41,7 @@
         <div class="title"><span class="icon"></span>专家简介
              <span class="titleSub">资深专家每日更新</span>
         </div>
-        <div class="detail mui-ellipsis-3">
+        <div class="detail">
           {{ recommend_expert_description }}
 
         </div>
