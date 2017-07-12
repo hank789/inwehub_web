@@ -278,6 +278,7 @@
     padding:10px 15px 13px;
     font-size:14px;
     color:#808080;
+    width:100%;
   }
   .more a:after{
     font-size:22px;
