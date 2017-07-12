@@ -76,7 +76,7 @@
                   <use xlink:href="#icon-zhuanjiabiaoji"></use>
                 </svg>
               </div>
-              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.questions }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
+              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
                 class="separate"></i>{{ resume.info.total_score }}
 
               </div>
