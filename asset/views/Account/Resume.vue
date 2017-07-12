@@ -52,7 +52,7 @@
                 <use xlink:href="#icon-shoucang"></use>
               </svg>
             </div>
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
+            <div class="collect active" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucanghover"></use>
               </svg>
@@ -792,6 +792,10 @@
         right: 55px;
         top: 12px;
         color: #808080;
+
+        &.active{
+          color:#3c95f9;
+        }
       }
 
       .share {
