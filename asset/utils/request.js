@@ -22,13 +22,15 @@ export const addAccessToken = () => {
 
 export default axios;
 
-export function apiRequest (url, data) {
-  if (mui.os.plus){
-    mui.plusReady(() => {
-      plus.nativeUI.showWaiting();
-    });
-  } else {
-    mui.waiting();
+export function apiRequest (url, data, showWaiting = true) {
+  if (showWaiting){
+    if (mui.os.plus){
+      mui.plusReady(() => {
+        plus.nativeUI.showWaiting();
+      });
+    } else {
+      mui.waiting();
+    }
   }
   return addAccessToken().post(createAPI(url), data,
     {
@@ -36,12 +38,14 @@ export function apiRequest (url, data) {
     }
   )
     .then(response => {
-      if (mui.os.plus){
-        mui.plusReady(() => {
-          plus.nativeUI.closeWaiting();
-        });
-      } else {
-        mui.closeWaiting();
+      if (showWaiting){
+        if (mui.os.plus){
+          mui.plusReady(() => {
+            plus.nativeUI.closeWaiting();
+          });
+        } else {
+          mui.closeWaiting();
+        }
       }
       var code = response.data.code;
       // 参数错误
@@ -72,12 +76,14 @@ export function apiRequest (url, data) {
       return response.data.data;
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-      if (mui.os.plus){
-        mui.plusReady(() => {
-          plus.nativeUI.closeWaiting();
-        });
-      } else {
-        mui.closeWaiting();
+      if (showWaiting){
+        if (mui.os.plus){
+          mui.plusReady(() => {
+            plus.nativeUI.closeWaiting();
+          });
+        } else {
+          mui.closeWaiting();
+        }
       }
       mui.toast(message);
       return false;
@@ -85,26 +91,31 @@ export function apiRequest (url, data) {
 }
 
 
-export function postRequest (url, data) {
-  if (mui.os.plus){
-    mui.plusReady(() => {
-       plus.nativeUI.showWaiting();
-    });
-  } else {
-    mui.waiting();
+export function postRequest (url, data, showWaiting = true) {
+  if (showWaiting){
+    if (mui.os.plus){
+      mui.plusReady(() => {
+        plus.nativeUI.showWaiting();
+      });
+    } else {
+      mui.waiting();
+    }
   }
+
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
   )
     .then(response => {
-      if (mui.os.plus){
-        mui.plusReady(() => {
-          plus.nativeUI.closeWaiting();
-        });
-      } else {
-        mui.closeWaiting();
+      if (showWaiting) {
+        if (mui.os.plus){
+          mui.plusReady(() => {
+            plus.nativeUI.closeWaiting();
+          });
+        } else {
+          mui.closeWaiting();
+        }
       }
 
       var code = response.data.code;
@@ -120,12 +131,14 @@ export function postRequest (url, data) {
       return response;
     })
     .catch(e => {
-      if (mui.os.plus){
-        mui.plusReady(() => {
-          plus.nativeUI.closeWaiting();
-        });
-      } else {
-        mui.closeWaiting();
+      if (showWaiting) {
+        if (mui.os.plus){
+          mui.plusReady(() => {
+            plus.nativeUI.closeWaiting();
+          });
+        } else {
+          mui.closeWaiting();
+        }
       }
       return {data:{message: '网络状况堪忧', code:0}};
     })

@@ -52,7 +52,7 @@
                 <use xlink:href="#icon-shoucang"></use>
               </svg>
             </div>
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
+            <div class="collect active" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucanghover"></use>
               </svg>
@@ -76,7 +76,7 @@
                   <use xlink:href="#icon-zhuanjiabiaoji"></use>
                 </svg>
               </div>
-              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.questions }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
+              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
                 class="separate"></i>{{ resume.info.total_score }}
 
               </div>
@@ -252,6 +252,7 @@
       }
     },
     created () {
+        showInwehubWebview();
         var from = this.$router.currentRoute.path;
         var fullUrl = process.env.H5_ROOT;
 
@@ -263,6 +264,17 @@
 
         this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
 
+        this.getData();
+    },
+    mounted(){
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-resume');
+        this.getData();
+      });
+    },
+    methods:{
+      getData:function(){
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -273,9 +285,7 @@
           this.loading = 0;
           this.bindWechatShare();
         });
-    },
-    mounted(){},
-    methods:{
+      },
       collectProfessor:function(){
 
         if (!this.cuuid) {
@@ -782,6 +792,10 @@
         right: 55px;
         top: 12px;
         color: #808080;
+
+        &.active{
+          color:#3c95f9;
+        }
       }
 
       .share {

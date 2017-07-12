@@ -10,7 +10,7 @@ function checkUpdate(){
         var wgtVer=inf.version;
         console.log("当前应用版本："+wgtVer);
         localEvent.setLocalItem('app_version',{version:wgtVer});
-        apiRequest(`system/version`, {}).then(response_data => {
+        apiRequest(`system/version`, {},false).then(response_data => {
           if (response_data !== false) {
             var app_version = response_data.app_version;
             var package_url = response_data.package_url;
@@ -65,7 +65,8 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     removeFile(path);
     // console.log("安装wgt文件失败["+e.code+"]："+e.message);
-    plus.nativeUI.alert("失败["+e.code+"]："+e.message);
+    Raven.captureException(e);
+    //plus.nativeUI.alert("失败["+e.code+"]："+e.message);
   });
 }
 

@@ -122,6 +122,9 @@
         this.loading = false;
       }
     },
+    activated: function () {
+
+    },
     mounted(){
       var t = this;
       mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {

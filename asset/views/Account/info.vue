@@ -31,7 +31,9 @@
           <div class="progress" :style="'width:'+ user.info.account_info_complete_percent +'%'"><span></span></div>
         </div>
 
-        <span class="mui-icon fa fa-warning" @tap.stop.prevent="warning"></span>
+        <svg class="icon mui-icon" aria-hidden="true" @tap.stop.prevent="warning">
+          <use xlink:href="#icon-warning"></use>
+        </svg>
 
         <div class="tip" v-if="user.info.account_info_complete_percent < 90">还差{{ 90-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
         <div class="tip" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">距离满分只有一步之遥啦，请再接再厉！</div>
@@ -441,8 +443,9 @@
     font-size: 16px;
   }
 
-  .part2 .fa-warning{
+  .part2 .mui-icon{
     margin-left:20px;
+    font-size: 17px;
     color:#F6A623;
   }
 
