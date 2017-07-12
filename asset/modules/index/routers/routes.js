@@ -600,10 +600,6 @@ const routes = [
     },
     component: require('../../../views/Discover/Discover.vue'),
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      mui.plusReady(function() {
-        checkUpdate();
-      });
       requestAuth(to, from, next)
     }
   },
