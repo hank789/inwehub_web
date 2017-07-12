@@ -739,6 +739,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // company
+    path: '/company/my',
+    meta: {
+      title: 'InweHub企业版',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Company/My.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
