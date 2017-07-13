@@ -16,6 +16,9 @@
     <div class="tip">认证流程</div>
     <div class="flowWrapper">
       <div class="flow"></div>
+
+    </div>
+    <div class="flowWrapper">
       <div class="fText">
         <span class="f1">提交申请</span>
         <span class="f2">等待审核</span>
@@ -74,7 +77,7 @@
     color:#323232;
   }
   .mui-content .tip{
-    margin:17px 0;
+    margin:17px 0 15px;
     color:#808080;
     font-size:14px;
   }
@@ -119,7 +122,7 @@
     font-size:12px;
     color:#808080;
     height:22px;
-    top:-6px;
+    top:-4px;
 
   }
   .fText .f1{
@@ -137,5 +140,9 @@
   .fText .f4{
     position: absolute;
     right:0;
+  }
+
+  .cover{
+    bottom:0px !important;
   }
 </style>
