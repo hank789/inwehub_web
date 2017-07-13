@@ -7,51 +7,41 @@
       <h1 class="mui-title">我的收藏</h1>
     </header>
 
-    <div class="mui-content">
-
-      <div class="detailList">
-
-        <div id="item1" class=" task-list">
-          <div class="mui-content mui-scroll-wrapper" id="pullrefresh">
-            <div class="mui-scroll">
-              <ul class="mui-table-view mui-table-view-chevron collect-list">
-                <li class="mui-table-view-cell" v-for="(item, index) in list">
-                  <div class="person">
-                    <div class="avatar" @tap.stop.prevent="$router.push('/share/resume?id=' + item.uuid)">
-                      <div class="avatarInner">
-                        <img :src="item.user_avatar_url" class="avatar"/>
-                      </div>
-                    </div>
-                    <div class="mui-media-body">
-                      <span class="username">{{ item.user_name }}</span>
-                      <div class="site-desc mui-ellipsis-3">
-                        {{ item.description }}&nbsp;
+    <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
+      <div class="mui-scroll">
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell" v-for="(item, index) in list">
+            <div class="person">
+              <div class="avatar" @tap.stop.prevent="$router.push('/share/resume?id=' + item.uuid)">
+                <div class="avatarInner">
+                  <img :src="item.user_avatar_url" class="avatar"/>
+                </div>
+              </div>
+              <div class="mui-media-body">
+                <span class="username">{{ item.user_name }}</span>
+                <div class="site-desc mui-ellipsis-3">
+                  {{ item.description }}&nbsp;
 
 
-                      </div>
-                    </div>
-                    <span class="mui-icon myicon myicon-ask"
-                          @tap.stop.prevent="$router.push('/ask?id=' + item.uuid)"></span>
-                  </div>
-
-                </li>
-
-
-              </ul>
+                </div>
+              </div>
+              <span class="mui-icon myicon myicon-ask"
+                    @tap.stop.prevent="$router.push('/ask?id=' + item.uuid)"></span>
             </div>
-          </div>
-        </div>
+
+          </li>
 
 
+        </ul>
       </div>
-
-      <div class="mui-content list-empty" v-if="!this.list.length && !loading">
-          <div class="mui-table-view-cell">
-              <div class="title">暂无收藏</div>
-          </div>
-      </div>
-
     </div>
+
+    <div class="mui-content list-empty" v-if="!this.list.length && !loading">
+        <div class="mui-table-view-cell">
+            <div class="title">暂无收藏</div>
+        </div>
+    </div>
+
 
   </div>
 </template>
@@ -170,10 +160,6 @@
     position: relative;
   }
 
-  .collect-list{
-    margin-top:44px;
-  }
-
   .menu:after {
     position: absolute;
     right: 0;
@@ -208,10 +194,6 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #009FE8;
-  }
-
-  .detailList {
-
   }
 
   .task-list {
