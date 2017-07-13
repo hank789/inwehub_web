@@ -90,19 +90,20 @@
          return false;
       },
     },
+
     methods: {
       goSubmitRequirement(){
-          if (user.info.company_status === 0) {
+          if (this.user.info.company_status === 0) {
              this.$router.push('/company/help');
           } else {
-             this.$router.push('/company/help');
+
           }
       },
       goRequirement(){
-        if (user.info.company_status === 0) {
+        if (this.user.info.company_status === 0) {
           this.$router.push('/company/help');
         } else {
-          this.$router.push('/company/help');
+
         }
       },
       nothing(){

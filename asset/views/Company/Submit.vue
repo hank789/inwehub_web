@@ -11,13 +11,13 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">企业名称</label>
-          <input type="text"  placeholder="输入企业名称" maxlength="60">
+          <input type="text" v-model="name" placeholder="输入企业名称" maxlength="60">
         </div>
       </li>
-      <li class="mui-table-view-cell noBottomBorder">
+      <li :class="{'mui-table-view-cell':true, noBottomBorder:industryTags.length}">
         <div class="mui-input-row">
           <label class="mui-navigate">行业领域</label>
-          <a href="#page_industry_tags"><svg class="icon modify" aria-hidden="true">
+          <a href="#page_industry_tags" @tap="fixSelect"><svg class="icon modify" aria-hidden="true">
               <use xlink:href="#icon-shuru"></use>
             </svg></a>
         </div>
@@ -33,37 +33,37 @@
         <div class="mui-input-row">
           <label class="mui-navigate">公司规模</label>
           <span class="unit">人</span>
-          <input type="text" class="inputUnit"  placeholder="输入公司人数">
+          <input type="text"  pattern="\d*" v-model="company_workers" class="inputUnit"  placeholder="输入公司人数">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">统一社会信用代码</label>
-          <input type="text" placeholder="输入代码">
+          <input type="text" v-model="company_credit_code" placeholder="输入代码">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户银行</label>
-          <input type="text" placeholder="输入银行信息">
+          <input type="text" v-model="company_bank" placeholder="输入开户银行">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户账户</label>
-          <input type="text" placeholder="输入账户信息">
+          <input type="text" v-model="company_bank_account" placeholder="输入开户账户">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司地址<span class="optional">（选填）</span></label>
-          <input type="text" placeholder="输入详细地址">
+          <input type="text" v-model="company_address" placeholder="输入公司地址">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司电话<span class="optional">（选填）</span></label>
-          <input type="text" placeholder="输入银行账户">
+          <input type="text" v-model="company_work_phone" placeholder="输入公司电话">
         </div>
       </li>
     </ul>
@@ -75,11 +75,11 @@
           <label class="mui-navigate">对接人员</label>
           <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio">
+                    <input name="radio1" type="radio" v-model="company_represent_person_is_self" value="1">
                     发布者本人
                 </span>
             <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio" checked="checked">
+                    <input name="radio1" type="radio" checked="checked" v-model="company_represent_person_is_self" value="0">
                     其他人
                 </span>
           </div>
@@ -89,25 +89,25 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接人名</label>
-          <input type="text" placeholder="输入对接人名">
+          <input type="text" v-model="company_represent_person_name" placeholder="输入对接人名">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接职位</label>
-          <input type="text" placeholder="输入对接人职位">
+          <input type="text" v-model="company_represent_person_title" placeholder="输入对接人职位">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接手机</label>
-          <input type="text" placeholder="输入对接人手机">
+          <input type="text" pattern="\d*" v-model="company_represent_person_phone" placeholder="输入对接人手机">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接邮箱</label>
-          <input type="text" placeholder="输入对接人邮箱">
+          <input type="text" v-model="company_represent_person_email" placeholder="输入对接人邮箱">
         </div>
       </li>
     </ul>
@@ -150,7 +150,6 @@
   </div>
 
 
-
 </div>
 </template>
 
@@ -161,6 +160,7 @@
 
   export default {
     data(){
+      const currentUser = localEvent.getLocalItem('UserInfo');
       return {
         loading: 1,
         name:'',
@@ -171,7 +171,7 @@
         company_bank_account:'',
         company_address:'',
         company_work_phone:'',
-        company_represent_person_is_self:'',
+        company_represent_person_is_self:0,
         company_represent_person_name:'',
         company_represent_person_title:'',
         company_represent_person_phone:'',
@@ -179,17 +179,49 @@
         company_auth_mode:'',
         object_type: 'company',
         page_industry_tags_id: 'page_industry_tags',
+        localUser:currentUser
       }
     },
     computed: {
-      nothing () {
-         return false;
-      },
+      infoIndustryTagsCodes() {
+        var newValue = [];
+        for (var i in this.industryTags) {
+          if (typeof(this.industryTags[i]) === 'object') {
+            newValue.push(this.industryTags[i].value);
+          } else {
+            newValue.push(this.industryTags[i]);
+          }
+        }
+        return newValue;
+      }
+    },
+    watch: {
+      company_represent_person_is_self: function (newValue) {
+
+         if (parseInt(newValue) === 1) {
+             this.company_represent_person_name = this.localUser.name;
+             this.company_represent_person_title = this.localUser.title;
+             this.company_represent_person_phone = this.localUser.phone;
+             this.company_represent_person_email = this.localUser.email;
+         } else {
+
+             this.company_represent_person_name = '';
+             this.company_represent_person_title = '';
+             this.company_represent_person_phone = '';
+             this.company_represent_person_email = '';
+         }
+      }
     },
     components: {
       industryTagsIndexedList
     },
     methods: {
+      fixSelect:function(){
+        setTimeout(() => {
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+        }, 200)
+      },
       closeIndustry(index) {
         this.industryTags.splice(index, 1);
       },
@@ -202,8 +234,36 @@
       alertProtocol(){
         var html=document.getElementById('validMode').innerHTML;
         mui.alert(html, '选择验证模式', '确定', () => {
-            this.submit();
+            this.submitLast();
         }, 'div');
+      },
+      submitLast(){
+        var data = {
+          company_name:this.name,
+          industry_tags:this.infoIndustryTagsCodes,
+          company_workers:this.company_workers,
+          company_credit_code:this.company_credit_code,
+          company_bank:this.company_bank,
+          company_bank_account:this.company_bank_account,
+          company_address:this.company_address,
+          company_work_phone:this.company_work_phone,
+          company_represent_person_is_self:this.company_represent_person_is_self,
+          company_represent_person_name:this.company_represent_person_name,
+          company_represent_person_title:this.company_represent_person_title,
+          company_represent_person_phone:this.company_represent_person_phone,
+          company_represent_person_email:this.company_represent_person_email,
+          company_auth_mode:1,
+        };
+
+        postRequest(`company/apply`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.$router.replace('/company/success');
+        });
       },
       submit(){
         if (!this.name) {
@@ -256,32 +316,7 @@
           return;
         }
 
-        var data = {
-          company_name:this.name,
-          industry_tags:this.industryTags,
-          company_workers:this.company_workers,
-          company_credit_code:this.company_credit_code,
-          company_bank:this.company_bank,
-          company_bank_account:this.company_bank_account,
-          company_address:this.company_address,
-          company_work_phone:this.company_work_phone,
-          company_represent_person_is_self:this.company_represent_person_is_self,
-          company_represent_person_name:this.company_represent_person_name,
-          company_represent_person_title:this.company_represent_person_title,
-          company_represent_person_phone:this.company_represent_person_phone,
-          company_represent_person_email:this.company_represent_person_email,
-          company_auth_mode:1,
-        };
-
-        postRequest(`company/apply`, data).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
-
-          this.$router.replace('/company/success');
-        });
+        this.alertProtocol();
       },
     },
     mounted(){
