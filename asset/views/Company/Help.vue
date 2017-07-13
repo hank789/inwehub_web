@@ -37,7 +37,7 @@
     </div>
 
     <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary">立刻申请</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/submit')">立刻申请</button>
     </div>
 
   </div>
@@ -188,10 +188,5 @@
     border-radius: 5px;
     background: #03aef9;
     border:1px solid #03aef9;
-  }
-
-
-  .cover{
-    bottom:0px !important;
   }
 </style>

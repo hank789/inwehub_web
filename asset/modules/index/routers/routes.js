@@ -760,6 +760,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 认证企业用户
+    path: '/company/submit',
+    meta: {
+      title: '认证企业用户',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Company/Submit.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
