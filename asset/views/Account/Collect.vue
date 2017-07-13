@@ -69,7 +69,7 @@
       }
     },
     activated: function () {
-      this.pulldownRefresh();
+
     },
     methods: {
       initData() {
