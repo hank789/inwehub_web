@@ -58,7 +58,7 @@
               </svg>
             </div>
             <div class="share" @tap.stop.prevent="share">
-              <svg class="icon" aria-hidden="true"  v-show="resume.info.is_expert">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fenxiang"></use>
               </svg>
             </div>
