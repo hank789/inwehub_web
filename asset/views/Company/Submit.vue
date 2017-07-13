@@ -178,6 +178,7 @@
         company_represent_person_email:'',
         company_auth_mode:'',
         object_type: 'company',
+        apply_status:0,
         page_industry_tags_id: 'page_industry_tags',
         localUser:currentUser
       }
@@ -204,6 +205,9 @@
              this.company_represent_person_phone = this.localUser.phone;
              this.company_represent_person_email = this.localUser.email;
          } else {
+             if (parseInt(this.apply_status) === 3) {
+                 return;
+             }
 
              this.company_represent_person_name = '';
              this.company_represent_person_title = '';
@@ -216,6 +220,35 @@
       industryTagsIndexedList
     },
     methods: {
+      initData:function(){
+        postRequest(`company/applyInfo`, {}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          var data = response.data.data;
+
+          this.name = data.company_name;
+          this.industryTags = data.industry_tags;
+          this.company_workers = data.company_workers;
+          this.company_credit_code = data.company_credit_code;
+          this.company_bank = data.company_bank;
+          this.company_bank_account = data.company_bank_account;
+          this.company_address = data.company_address;
+          this.company_work_phone = data.company_work_phone;
+          this.company_represent_person_is_self = data.company_represent_person_is_self;
+          this.company_represent_person_name = data.company_represent_person_name;
+          this.company_represent_person_title = data.company_represent_person_title;
+          this.company_represent_person_phone = data.company_represent_person_phone;
+          this.company_represent_person_email = data.company_represent_person_email;
+          this.company_auth_mode = data.company_auth_mode;
+          this.apply_status = data.apply_status;
+
+          
+        });
+      },
       fixSelect:function(){
         setTimeout(() => {
           mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
@@ -324,6 +357,7 @@
     },
     created(){
       this.company_represent_person_is_self = 1;
+      this.initData();
     }
   };
 </script>
