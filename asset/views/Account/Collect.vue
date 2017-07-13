@@ -68,9 +68,12 @@
         loading: 1
       }
     },
+    activated: function () {
+      this.pulldownRefresh();
+    },
     methods: {
       initData() {
-          this.getPrevList();
+          this.pulldownRefresh();
       },
       pulldownRefresh() {
         setTimeout(() => {
