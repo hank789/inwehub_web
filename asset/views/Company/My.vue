@@ -32,7 +32,7 @@
       </svg>{{ getRenzhengText(user.info.company_status) }}</div>
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 0">认证企业版</button>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 3">点击重新认证</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 3">重新认证</button>
       </div>
       <div class="line"></div>
       <div class="infos">
