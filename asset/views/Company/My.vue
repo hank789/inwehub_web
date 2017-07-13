@@ -95,15 +95,15 @@
       goSubmitRequirement(){
           if (this.user.info.company_status === 0) {
              this.$router.push('/company/help');
-          } else {
-
+          } else if (this.user.info.company_status == 1) {
+            this.$router.push('/company/success?type=waiting');
           }
       },
       goRequirement(){
         if (this.user.info.company_status === 0) {
           this.$router.push('/company/help');
-        } else {
-
+        } else if (this.user.info.company_status == 1) {
+          this.$router.push('/company/success?type=waiting');
         }
       },
       nothing(){

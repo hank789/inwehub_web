@@ -8,7 +8,8 @@
 
     <div class="iconWrapper">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-check-circle-o"></use>
+        <use xlink:href="#icon-check-circle-o" v-if="!type"></use>
+        <use xlink:href="#icon-zhongbiao" v-else></use>
       </svg>
     </div>
 
@@ -39,7 +40,8 @@
   export default {
     data(){
       return {
-        loading: 1
+        loading: 1,
+        type:null,
       }
     },
     computed: {
@@ -56,7 +58,8 @@
 
     },
     created(){
-
+        
+      this.type = this.$route.query.type;
     }
   };
 </script>
