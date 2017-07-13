@@ -31,7 +31,8 @@
         <use xlink:href="#icon-times" v-else-if="user.info.company_status === 3"></use>
       </svg>{{ getRenzhengText(user.info.company_status) }}</div>
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/submit')" v-show="user.info.company_status === 0">认证企业版</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 0">认证企业版</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 3">点击重新认证</button>
       </div>
       <div class="line"></div>
       <div class="infos">
@@ -93,14 +94,14 @@
 
     methods: {
       goSubmitRequirement(){
-          if (this.user.info.company_status === 0) {
+          if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
              this.$router.push('/company/help');
           } else if (this.user.info.company_status == 1) {
             this.$router.push('/company/success?type=waiting');
           }
       },
       goRequirement(){
-        if (this.user.info.company_status === 0) {
+        if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
           this.$router.push('/company/help');
         } else if (this.user.info.company_status == 1) {
           this.$router.push('/company/success?type=waiting');

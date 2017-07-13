@@ -323,7 +323,7 @@
 
     },
     created(){
-
+      this.company_represent_person_is_self = 1;
     }
   };
 </script>

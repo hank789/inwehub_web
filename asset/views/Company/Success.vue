@@ -58,7 +58,7 @@
 
     },
     created(){
-        
+
       this.type = this.$route.query.type;
     }
   };
