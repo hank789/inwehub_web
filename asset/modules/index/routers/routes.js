@@ -771,6 +771,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 企业用户申请成功
+    path: '/company/success',
+    meta: {
+      title: ''
+    },
+    component: require('../../../views/Company/Success.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
