@@ -17,15 +17,13 @@
       <li class="mui-table-view-cell noBottomBorder">
         <div class="mui-input-row">
           <label class="mui-navigate">行业领域</label>
-          <svg class="icon modify" aria-hidden="true">
-            <use xlink:href="#icon-shuru"></use>
-          </svg>
+          <a href="#page_industry_tags"><svg class="icon modify" aria-hidden="true">
+              <use xlink:href="#icon-shuru"></use>
+            </svg></a>
         </div>
         <div class="selectedWrapper">
-                    <span class="selected">专业服务<svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-guanbi"></use>
-                </svg></span>
-          <span class="selected">生命科学行业<svg class="icon" aria-hidden="true">
+
+                    <span class="selected" v-for="(industry, index) in industryTags">{{industry.text}}<svg class="icon" aria-hidden="true" @tap.stop.prevent="closeIndustry(index)">
                     <use xlink:href="#icon-guanbi"></use>
                 </svg></span>
 
@@ -116,21 +114,71 @@
 
 
     <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary">确认</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认</button>
     </div>
 
   </div>
+
+  <div id="page_industry_tags" class="mui-modal mui-pageSub">
+
+    <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type"
+                                v-on:selectedIndustryTags="selectedIndustryTags">
+
+    </industry-tags-indexed-list>
+
+  </div>
+
+  <div id="validMode" style="display: none;">
+    <div class="validMode">
+      <div class="item">
+             <span class="mui-radio radioWrapper">
+                 <label>
+             <input name="radio3" type="radio" checked="checked">
+                 <b>协议验证：</b>请应用内/公众号联系客服或发送申请邮件到hi@inwehub.com，获取专业客服一对一对接服务</label>
+             </span>
+      </div>
+      <div class="item">
+             <span class="mui-radio radioWrapper">
+                 <label>
+                     <input name="radio3" type="radio" disabled="disabled">
+                     <b>打款验证：</b>我司3个工作日内会向贵司开户银行汇入一笔随机金额的资金，请随时关注打款进度并及时在应用内反馈打款金额<span class="noZhichi">（暂不支持）</span>
+                 </label>
+
+             </span>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 </template>
 
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
 
   export default {
     data(){
       return {
-        loading: 1
+        loading: 1,
+        name:'',
+        industryTags:[],
+        company_workers:'',
+        company_credit_code:'',
+        company_bank:'',
+        company_bank_account:'',
+        company_address:'',
+        company_work_phone:'',
+        company_represent_person_is_self:'',
+        company_represent_person_name:'',
+        company_represent_person_title:'',
+        company_represent_person_phone:'',
+        company_represent_person_email:'',
+        company_auth_mode:'',
+        object_type: 'company',
+        page_industry_tags_id: 'page_industry_tags',
       }
     },
     computed: {
@@ -138,10 +186,103 @@
          return false;
       },
     },
+    components: {
+      industryTagsIndexedList
+    },
     methods: {
+      closeIndustry(index) {
+        this.industryTags.splice(index, 1);
+      },
+      selectedIndustryTags(tags, object_type) {
+        this.industryTags = tags;
+      },
       nothing(){
 
-      }
+      },
+      alertProtocol(){
+        var html=document.getElementById('validMode').innerHTML;
+        mui.alert(html, '选择验证模式', '确定', () => {
+            this.submit();
+        }, 'div');
+      },
+      submit(){
+        if (!this.name) {
+          mui.toast('请输入企业名称');
+          return;
+        }
+
+        if (this.industryTags.length < 1) {
+          mui.toast('请输入行业领域');
+          return;
+        }
+
+        if (!this.company_workers) {
+          mui.toast('请输入公司规模');
+          return;
+        }
+
+        if (!this.company_credit_code) {
+          mui.toast('请输入统一社会信用代码');
+          return;
+        }
+
+        if (!this.company_bank) {
+          mui.toast('请输入开户银行');
+          return;
+        }
+
+        if (!this.company_bank_account) {
+          mui.toast('请输入开户账户');
+          return;
+        }
+
+        if (!this.company_represent_person_name) {
+          mui.toast('请输入对接人名');
+          return;
+        }
+
+        if (!this.company_represent_person_title) {
+          mui.toast('请输入对接人职位');
+          return;
+        }
+
+        if (!this.company_represent_person_phone) {
+          mui.toast('请输入对接人手机');
+          return;
+        }
+
+        if (!this.company_represent_person_email) {
+          mui.toast('请输入对接人邮箱');
+          return;
+        }
+
+        var data = {
+          company_name:this.name,
+          industry_tags:this.industryTags,
+          company_workers:this.company_workers,
+          company_credit_code:this.company_credit_code,
+          company_bank:this.company_bank,
+          company_bank_account:this.company_bank_account,
+          company_address:this.company_address,
+          company_work_phone:this.company_work_phone,
+          company_represent_person_is_self:this.company_represent_person_is_self,
+          company_represent_person_name:this.company_represent_person_name,
+          company_represent_person_title:this.company_represent_person_title,
+          company_represent_person_phone:this.company_represent_person_phone,
+          company_represent_person_email:this.company_represent_person_email,
+          company_auth_mode:1,
+        };
+
+        postRequest(`company/apply`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.$router.replace('/company/success');
+        });
+      },
     },
     mounted(){
 
@@ -151,6 +292,19 @@
     }
   };
 </script>
+
+<style>
+  .mui-popup-title{
+    font-size:16px !important;
+    color:#444 !important;
+    font-weight: normal !important;
+  }
+  .mui-popup-button{
+    color:#03aef9 !important;
+    font-size:16px !important;
+    font-weight: normal !important;
+  }
+</style>
 
 <style scoped="scoped">
   .title{
@@ -193,9 +347,11 @@
   }
 
   .companyForm input{
+    width:61% !important;
     text-align: right;
     font-size:14px;
     padding-right: 0;
+
   }
 
   .companyForm .mui-table-view-cell{
@@ -224,6 +380,8 @@
   }
 
   .companyForm label{
+    width:auto !important;
+    max-width:39%;
     padding-right:0;
     line-height: normal;
   }
@@ -237,7 +395,7 @@
   }
 
   .companyForm .inputUnit{
-    width:55%;
+    width:55% !important;
     padding:10px;
   }
 
@@ -271,6 +429,9 @@
     padding:11px 0 11px 25px;
     margin-left:18px;
   }
+  .radioWrapper:first-child{
+    margin-left:0;
+  }
   .radioWrapper input[type='radio']{
     left:0;
     top:11px;
@@ -287,5 +448,28 @@
 
   .noBottomBorder:after{
     display: none;
+  }
+
+  .validMode{
+    color:#808080;
+    font-size:12px;
+  }
+  .validMode b{
+    font-weight: normal;
+    color:#444;
+  }
+  .validMode .radioWrapper input[type='radio']{
+    top:14px;
+  }
+
+  .validMode .noZhichi{
+    color:#03aef9;
+  }
+  .validMode label{
+    padding-right: 0;
+  }
+  .validMode .radioWrapper{
+    padding-bottom:0;
+    text-align: left;
   }
 </style>

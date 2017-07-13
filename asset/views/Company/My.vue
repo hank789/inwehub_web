@@ -5,7 +5,7 @@
     <h1 class="mui-title">InweHub企业版</h1>
   </header>
 
-  <div class="mui-content">
+  <div class="mui-content" v-show="!loading">
 
     <div class="basic">
       <div class="header">
@@ -24,8 +24,11 @@
       <div class="company">
         {{ user.info.company }}
     </div>
-      <div class="authentication"><svg class="icon" aria-hidden="true" v-show="user.info.company_apply_status !== 2">
-        <use xlink:href="#icon-weirenzheng"></use>
+      <div class="authentication"><svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-weirenzheng" v-if="user.info.company_status === 0"></use>
+        <use xlink:href="#icon-zhengzaishenhe" v-else-if="user.info.company_status === 1"></use>
+        <use xlink:href="#icon-check-circle" v-else-if="user.info.company_status === 2"></use>
+        <use xlink:href="#icon-times" v-else-if="user.info.company_status === 3"></use>
       </svg>{{ getRenzhengText(user.info.company_status) }}</div>
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/submit')" v-show="user.info.company_status === 0">认证企业版</button>
@@ -77,7 +80,9 @@
     data(){
       return {
         loading: 1,
-        user:{},
+        user:{
+          info:{}
+        },
       }
     },
     computed: {
