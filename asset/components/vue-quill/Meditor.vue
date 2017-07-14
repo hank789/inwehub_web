@@ -80,7 +80,6 @@
       }
     },
     mounted() {
-      this.description = this.content;
       mui.plusReady(function(){
         plus.webview.currentWebview().setStyle({
           softinputMode: "adjustResize"
@@ -89,7 +88,7 @@
 
       window.onbeforeunload = (e) => {
         e = e || window.event;
-       
+
         // 兼容IE8和Firefox 4之前的版本
         if (e) {
           e.returnValue = '关闭后未保存的数据将丢失';
