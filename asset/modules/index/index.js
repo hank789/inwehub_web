@@ -101,17 +101,16 @@ window.clearAllWebViewCache = clearAllWebViewCache;
 import VueQRCodeComponent from 'vue-qrcode-component';
 Vue.component('qr-code', VueQRCodeComponent);
 
-Vue.mixin({
-  mounted() {
-    if (mui.os.wechat && this.$router.currentRoute.meta.wechatHideHeader) {
-       var header = document.getElementsByTagName('header');
-       if (header && header[0]) {
-         header[0].className = header[0].className.replace("mui-bar", "");
-         header[0].className = header[0].className.replace("mui-bar-nav", "");
 
-         header[0].className += " mui-wechat-hidden";
-       }
-    }
+import {hideHeaderHandler} from '../../utils/wechat';
+
+Vue.mixin({
+  activated(){
+
+    hideHeaderHandler(this, 'activated');
+  },
+  mounted() {
+    hideHeaderHandler(this, 'mounted');
   }
 })
 
