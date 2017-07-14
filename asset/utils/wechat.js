@@ -10,7 +10,7 @@ function hideHeaderHandler(obj, type){
       var destHeader = headers[i];
       if (obj.$router.currentRoute.meta.wechatHideHeader) {
         if (destHeader) {
-          if (!/hidden/.test(destHeader.className)) {
+          if (!/hidden/.test(destHeader.className) && !/mustshow/.test(destHeader.className)) {
             destHeader.className = destHeader.className.replace("mui-bar-nav", "");
             destHeader.className = destHeader.className.replace("mui-bar", "");
             destHeader.className += " mui-wechat-hidden";

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
+    <header class="mui-bar mui-bar-nav mustshow">
       <a class="mui-icon mui-icon-close mui-pull-left"
          :href="'#'+this.back_id"></a>
       <h1 class="mui-title" v-text="genderTagName"></h1>
