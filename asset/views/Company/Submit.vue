@@ -501,6 +501,8 @@
     color:#c8c8c8;
     font-size:11px;
     margin-left:7px;
+    position: relative;
+    top: -1px;
   }
 
   .river{
