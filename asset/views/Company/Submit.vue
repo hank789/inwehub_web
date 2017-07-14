@@ -378,6 +378,10 @@
     font-size:16px !important;
     font-weight: normal !important;
   }
+
+  .mui-radio input[type='radio'][disabled]:before{
+    opacity: 1 !important;
+  }
   /*.mui-popup-button{*/
     /*background:#fff !important;*/
   /*}*/
