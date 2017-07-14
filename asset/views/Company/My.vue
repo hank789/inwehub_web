@@ -65,9 +65,12 @@
 
     <div class="river"></div>
 
-    <div class="more">
-      <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.push('/my')">查看个人页面</a>
+    <div class="moreWrapper">
+      <div class="more">
+        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.push('/my')">查看个人页面</a>
+      </div>
     </div>
+
   </div>
 
 </div>
@@ -137,7 +140,7 @@
 
           this.user = response.data.data;
 
-          if (this.user.info && this.user.info.company_status) {
+          if (this.user.info) {
             localEvent.setLocalItem('companyStatus', {status:this.user.info.company_status});
           }
 
@@ -327,6 +330,7 @@
 
   .more{
     position: relative;
+    background: #fff;
   }
 
   .more a{
@@ -350,5 +354,10 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #dcdcdc;
+  }
+
+  .moreWrapper{
+    padding-bottom:10px;
+    background: #fff;
   }
 </style>

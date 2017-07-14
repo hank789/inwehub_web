@@ -180,7 +180,8 @@
 
   .buttonWrapper{
     margin-top:20px;
-    padding:0 16px;
+    padding:0 16px 10px;
+    background: #fff;
   }
 
   .buttonWrapper button{
