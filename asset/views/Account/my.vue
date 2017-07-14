@@ -42,7 +42,7 @@
         <a class="item" @tap.stop.prevent="$router.pushPlus('/bid')">
           <span class="number">0</span><span>我的竞标</span>
         </a>
-        <a  class="item"  @tap.stop.prevent="$router.pushPlus('/project')">
+        <a  class="item"  @tap.stop.prevent="$router.pushPlus('/company/my')">
           <span class="number">{{ projects }}</span><span>我的项目</span>
         </a>
       </div>

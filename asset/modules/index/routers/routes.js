@@ -740,6 +740,48 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // company
+    path: '/company/my',
+    meta: {
+      title: 'InweHub企业版',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Company/My.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // company-help
+    path: '/company/help',
+    meta: {
+      title: '',
+    },
+    component: require('../../../views/Company/Help.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 认证企业用户
+    path: '/company/submit',
+    meta: {
+      title: '认证企业用户',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Company/Submit.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 企业用户申请成功
+    path: '/company/success',
+    meta: {
+      title: ''
+    },
+    component: require('../../../views/Company/Success.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
