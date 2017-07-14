@@ -9,7 +9,7 @@ function hideHeaderHandler(obj, type){
     for (var i in headers) {
       var destHeader = headers[i];
       if (obj.$router.currentRoute.meta.wechatHideHeader) {
-        if (destHeader) {
+        if (destHeader && destHeader.className) {
           if (!/hidden/.test(destHeader.className) && !/mustshow/.test(destHeader.className)) {
             destHeader.className = destHeader.className.replace("mui-bar-nav", "");
             destHeader.className = destHeader.className.replace("mui-bar", "");
@@ -18,7 +18,7 @@ function hideHeaderHandler(obj, type){
         }
 
       } else {
-        if (destHeader) {
+        if (destHeader && destHeader.className) {
           if (/hidden/.test(destHeader.className)) {
             destHeader.className = destHeader.className.replace("mui-wechat-hidden", "");
             destHeader.className += " mui-bar mui-bar-nav";
