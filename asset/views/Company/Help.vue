@@ -37,7 +37,7 @@
     </div>
 
     <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/submit')">立刻申请</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.replace('/company/submit')">立刻申请</button>
     </div>
 
   </div>
