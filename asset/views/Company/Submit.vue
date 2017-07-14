@@ -246,7 +246,10 @@
           this.company_auth_mode = data.company_auth_mode;
           this.apply_status = data.apply_status;
 
-          
+          if (this.apply_status !== 0 || this.apply_status !== 3) {
+             mui.back();
+          }
+
         });
       },
       fixSelect:function(){
@@ -357,7 +360,10 @@
     },
     created(){
       this.company_represent_person_is_self = 1;
-      this.initData();
+      var companyStatus = localEvent.getLocalItem('companyStatus');
+      if (companyStatus && companyStatus.status === 3) {
+         this.initData();
+      }
     }
   };
 </script>
@@ -372,6 +378,12 @@
     color:#03aef9 !important;
     font-size:16px !important;
     font-weight: normal !important;
+  }
+  .mui-popup-button{
+    background:#fff !important;
+  }
+  .mui-popup-inner{
+    background: #fff !important;
   }
 </style>
 

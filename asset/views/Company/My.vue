@@ -137,6 +137,10 @@
 
           this.user = response.data.data;
 
+          if (this.user.info && this.user.info.company_status) {
+            localEvent.setLocalItem('companyStatus', {status:this.user.info.company_status});
+          }
+
           this.loading = false;
         });
       }
