@@ -13,7 +13,8 @@
       </svg>
     </div>
 
-    <h5>企业用户申请成功!</h5>
+    <h5>企业账户申请正在审核</h5>
+    <div class="h5e">请耐心等待</div>
     <div class="tip">认证流程</div>
     <div class="flowWrapper">
       <div class="flow"></div>
@@ -79,6 +80,13 @@
     font-size:20px;
     color:#323232;
   }
+  .mui-content .h5e{
+    margin-top:7px;
+    font-size:20px;
+    color:#808080;
+    font-weight: normal;
+  }
+
   .mui-content .tip{
     margin:17px 0 15px;
     color:#808080;
