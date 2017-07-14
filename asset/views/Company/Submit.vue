@@ -245,8 +245,7 @@
           this.company_represent_person_email = data.company_represent_person_email;
           this.company_auth_mode = data.company_auth_mode;
           this.apply_status = data.apply_status;
-
-          if (this.apply_status !== 0 || this.apply_status !== 3) {
+          if (parseInt(this.apply_status) !== 0 && parseInt(this.apply_status) !== 3) {
              mui.back();
           }
 
