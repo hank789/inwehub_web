@@ -732,7 +732,8 @@ const routes = [
     path: '/collect',
     meta: {
       title: '我的收藏',
-      wechatHideHeader:true
+      wechatHideHeader:true,
+      keepAlive: true
     },
     component: require('../../../views/Account/Collect.vue'),
     beforeEnter: (to, from, next) => {

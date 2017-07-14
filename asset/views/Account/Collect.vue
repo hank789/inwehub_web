@@ -7,49 +7,41 @@
       <h1 class="mui-title">我的收藏</h1>
     </header>
 
-    <div class="mui-content">
-
-      <div class="detailList">
-
-        <div id="item1" class=" task-list">
-          <div class="">
-            <ul class="mui-table-view mui-table-view-chevron">
-              <li class="mui-table-view-cell" v-for="(item, index) in list">
-                <div class="person">
-                  <div class="avatar" @tap.stop.prevent="$router.push('/share/resume?id=' + item.uuid)">
-                    <div class="avatarInner">
-                      <img :src="item.user_avatar_url" class="avatar"/>
-                    </div>
-                  </div>
-                  <div class="mui-media-body">
-                    <span class="username">{{ item.user_name }}</span>
-                    <div class="site-desc mui-ellipsis-3">
-                      {{ item.description }}&nbsp;
-
-
-                    </div>
-                  </div>
-                  <span class="mui-icon myicon myicon-ask"
-                        @tap.stop.prevent="$router.push('/ask?id=' + item.uuid)"></span>
+    <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
+      <div class="mui-scroll">
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell" v-for="(item, index) in list">
+            <div class="person">
+              <div class="avatar" @tap.stop.prevent="$router.push('/share/resume?id=' + item.uuid)">
+                <div class="avatarInner">
+                  <img :src="item.user_avatar_url" class="avatar"/>
                 </div>
-
-              </li>
-
-
-            </ul>
-          </div>
-        </div>
+              </div>
+              <div class="mui-media-body">
+                <span class="username">{{ item.user_name }}</span>
+                <div class="site-desc mui-ellipsis-3">
+                  {{ item.description }}&nbsp;
 
 
+                </div>
+              </div>
+              <span class="mui-icon myicon myicon-ask"
+                    @tap.stop.prevent="$router.push('/ask?id=' + item.uuid)"></span>
+            </div>
+
+          </li>
+
+
+        </ul>
       </div>
-
-      <div class="mui-content list-empty" v-if="!this.list.length && !loading">
-          <div class="mui-table-view-cell">
-              <div class="title">暂无收藏</div>
-          </div>
-      </div>
-
     </div>
+
+    <div class="mui-content list-empty" v-if="!this.list.length && !loading">
+        <div class="mui-table-view-cell">
+            <div class="title">暂无收藏</div>
+        </div>
+    </div>
+
 
   </div>
 </template>
@@ -66,8 +58,40 @@
         loading: 1
       }
     },
+    activated: function () {
+
+    },
     methods: {
       initData() {
+          this.pulldownRefresh();
+      },
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1500);
+      },
+      pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1500);
+      },
+      getPrevList(){
+
+        postRequest(`followed/users`, {top_id: this.topId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          if (response.data.data.length > 0) {
+            this.list = response.data.data;
+          }
+          this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        });
+      },
+      getNextList() {
         postRequest(`followed/users`, {bottom_id: this.bottomId}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -79,27 +103,51 @@
             this.list = this.list.concat(response.data.data);
           }
           this.loading = 0;
+
+          if (response.data.data.length < 10) {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+          } else {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+          }
         });
-      }
+      },
     },
     computed: {
+      topId () {
+        if (this.list.length) {
+          return this.list[0].id;
+        }
+        return 0;
+      },
       bottomId () {
         var length = this.list.length;
         if (length) {
-          return this.list[length - 1].id;
+          return this.list[length-1].id;
         }
         return 0;
       }
     },
     created(){
       showInwehubWebview();
-      this.initData();
     },
     mounted(){
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-collect');
         this.initData();
+      });
+      mui.init({
+        pullRefresh: {
+          container: '#pullrefresh',
+          down: {
+            callback: this.pulldownRefresh
+          },
+          up: {
+            auto:true,
+            contentrefresh: '正在加载...',
+            callback: this.pullupRefresh
+          }
+        }
       });
     }
   }
@@ -146,10 +194,6 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #009FE8;
-  }
-
-  .detailList {
-
   }
 
   .task-list {

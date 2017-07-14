@@ -144,7 +144,6 @@
     },
     created () {
       showInwehubWebview();
-      this.initData();
     },
     activated: function () {
       this.initData();

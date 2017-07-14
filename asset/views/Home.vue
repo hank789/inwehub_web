@@ -116,7 +116,7 @@
       loading: true
     }),
     created () {
-      this.getData();
+
     },
     activated: function () {
       this.getData();
