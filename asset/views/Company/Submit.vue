@@ -32,8 +32,7 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司规模</label>
-          <span class="unit" @tap.stop.prevent="selectCompanyWorkers()">人</span>
-          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" class="inputUnit"  readonly="readonly" placeholder="选择公司人数">
+          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" readonly="readonly" placeholder="选择公司人数">
         </div>
       </li>
       <li class="mui-table-view-cell">
@@ -261,7 +260,7 @@
 
         userPicker.show(items => {
           this.company_workers.value = items[0].value;
-          this.company_workers.text = items[0].text.replace(/人/g, '');
+          this.company_workers.text = items[0].text;
           userPicker.dispose();
         });
       },
@@ -278,7 +277,6 @@
           this.name = data.company_name;
           this.industryTags = data.industry_tags;
           this.company_workers = data.company_workers;
-          this.company_workers.text = this.company_workers.text.replace(/人/g, '');
           this.company_credit_code = data.company_credit_code;
           this.company_bank = data.company_bank;
           this.company_bank_account = data.company_bank_account;
