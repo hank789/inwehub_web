@@ -11,7 +11,7 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">企业名称</label>
-          <input type="text" v-model="name" placeholder="输入企业名称" maxlength="60">
+          <input type="text" name="name" v-model="name" placeholder="输入企业名称" maxlength="60">
         </div>
       </li>
       <li :class="{'mui-table-view-cell':true, noBottomBorder:industryTags.length}">
@@ -32,37 +32,37 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司规模</label>
-          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text"  readonly="readonly" placeholder="选择公司人数">
+          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" name="company_workers_text"  readonly="readonly" placeholder="选择公司人数">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">统一社会信用代码</label>
-          <input type="text" v-model="company_credit_code" placeholder="输入代码">
+          <input type="text" name="company_credit_code" v-model="company_credit_code" placeholder="输入代码">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户银行</label>
-          <input type="text" v-model="company_bank" placeholder="输入开户银行">
+          <input type="text" name="company_bank" v-model="company_bank" placeholder="输入开户银行">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户账户</label>
-          <input type="text" v-model="company_bank_account" placeholder="输入开户账户">
+          <input type="text" name="company_bank_account" v-model="company_bank_account" placeholder="输入开户账户">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司地址<span class="optional">（选填）</span></label>
-          <input type="text" v-model="company_address" placeholder="输入公司地址">
+          <input type="text" name="company_address" v-model="company_address" placeholder="输入公司地址">
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司电话<span class="optional">（选填）</span></label>
-          <input type="text" v-model="company_work_phone" placeholder="输入公司电话">
+          <input type="text" name="company_work_phone" v-model="company_work_phone" placeholder="输入公司电话">
         </div>
       </li>
     </ul>
@@ -88,29 +88,29 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接人名</label>
-          <input type="text" v-model="company_represent_person_name" placeholder="输入对接人名" v-if="parseInt(company_represent_person_is_self) === 0 ">
-          <input type="text" v-model="company_represent_person_name" readonly="readonly" placeholder="输入对接人名" v-else>
+          <input type="text" name="company_represent_person_name" v-model="company_represent_person_name" placeholder="输入对接人名" v-if="parseInt(company_represent_person_is_self) === 0 ">
+          <input type="text" name="company_represent_person_name_1" v-model="company_represent_person_name" readonly="readonly" placeholder="输入对接人名" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接职位</label>
-          <input type="text" v-model="company_represent_person_title" placeholder="输入对接人职位" v-if="parseInt(company_represent_person_is_self) ===0">
-          <input type="text" v-model="company_represent_person_title" readonly="readonly" placeholder="输入对接人职位" v-else>
+          <input type="text" name="company_represent_person_title" v-model="company_represent_person_title" placeholder="输入对接人职位" v-if="parseInt(company_represent_person_is_self) ===0">
+          <input type="text" name="company_represent_person_title_1" v-model="company_represent_person_title" readonly="readonly" placeholder="输入对接人职位" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接手机</label>
-          <input type="text" pattern="\d*" v-model="company_represent_person_phone" placeholder="输入对接人手机" v-if="parseInt(company_represent_person_is_self) === 0 ">
-          <input type="text" pattern="\d*" v-model="company_represent_person_phone" readonly="readonly"  placeholder="输入对接人手机" v-else>
+          <input type="text" name="company_represent_person_phone" pattern="\d*" v-model="company_represent_person_phone" placeholder="输入对接人手机" v-if="parseInt(company_represent_person_is_self) === 0 ">
+          <input type="text" name="company_represent_person_phone_1" pattern="\d*" v-model="company_represent_person_phone" readonly="readonly"  placeholder="输入对接人手机" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">对接邮箱</label>
-          <input type="text" v-model="company_represent_person_email" placeholder="输入对接人邮箱" v-if="parseInt(company_represent_person_is_self) === 0">
-          <input type="text" v-model="company_represent_person_email" readonly="readonly" placeholder="输入对接人邮箱" v-else>
+          <input type="text" name="company_represent_person_email" v-model="company_represent_person_email" placeholder="输入对接人邮箱" v-if="parseInt(company_represent_person_is_self) === 0">
+          <input type="text" name="company_represent_person_email1" v-model="company_represent_person_email" readonly="readonly" placeholder="输入对接人邮箱" v-else>
         </div>
       </li>
     </ul>
