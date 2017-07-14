@@ -5,34 +5,31 @@ function hideHeaderHandler(obj, type){
       return;
     }
 
-    var header = document.getElementsByTagName('header');
-    var destHeader = null;
-    if (header[0]) {
-      destHeader = header[0];
-    }
-    if (header[1]) {
-      destHeader = header[1];
-    }
+    var headers = document.getElementsByTagName('header');
+    for (var i in headers) {
+      var destHeader = headers[i];
+      if (obj.$router.currentRoute.meta.wechatHideHeader) {
+        if (destHeader) {
+          if (!/hidden/.test(destHeader.className)) {
+            destHeader.className = destHeader.className.replace("mui-bar-nav", "");
+            destHeader.className = destHeader.className.replace("mui-bar", "");
+            destHeader.className += " mui-wechat-hidden";
+          }
+        }
 
-    if (obj.$router.currentRoute.meta.wechatHideHeader) {
-
-      if (header && destHeader) {
-        if (!/hidden/.test(destHeader.className)) {
-          destHeader.className = destHeader.className.replace("mui-bar-nav", "");
-          destHeader.className = destHeader.className.replace("mui-bar", "");
-          destHeader.className += " mui-wechat-hidden";
+      } else {
+        if (destHeader) {
+          if (/hidden/.test(destHeader.className)) {
+            destHeader.className = destHeader.className.replace("mui-wechat-hidden", "");
+            destHeader.className += " mui-bar mui-bar-nav";
+          }
         }
       }
 
-    } else {
-
-      if (header && destHeader) {
-        if (/hidden/.test(destHeader.className)) {
-          destHeader.className = destHeader.className.replace("mui-wechat-hidden", "");
-          destHeader.className += " mui-bar mui-bar-nav";
-        }
-      }
     }
+
+
+
   }
 }
 
