@@ -13,8 +13,10 @@
       </svg>
     </div>
 
-    <h5>企业账户申请正在审核</h5>
-    <div class="h5e">请耐心等待</div>
+
+    <h5 v-if="!type">企业用户申请成功!</h5>
+    <h5 v-if="type">企业账户申请正在审核</h5>
+    <div class="h5e" v-if="type">请耐心等待</div>
     <div class="tip">认证流程</div>
     <div class="flowWrapper">
       <div class="flow"></div>
