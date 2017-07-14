@@ -32,8 +32,8 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司规模</label>
-          <span class="unit">人</span>
-          <input type="text"  pattern="\d*" v-model="company_workers" class="inputUnit"  placeholder="输入公司人数">
+          <span class="unit" @tap.stop.prevent="selectCompanyWorkers()">人</span>
+          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" class="inputUnit"  readonly="readonly" placeholder="选择公司人数">
         </div>
       </li>
       <li class="mui-table-view-cell">
@@ -171,7 +171,10 @@
         loading: 1,
         name:'',
         industryTags:[],
-        company_workers:'',
+        company_workers:{
+            text:'',
+            value:0,
+        },
         company_credit_code:'',
         company_bank:'',
         company_bank_account:'',
@@ -226,6 +229,42 @@
       industryTagsIndexedList
     },
     methods: {
+      selectCompanyWorkers(){
+
+        var userPicker = new mui.PopPicker();
+
+        userPicker.setData([
+          {
+            value: '1',
+            text: '1-10人'
+          },
+          {
+            value: '2',
+            text: '10-20人'
+          },
+          {
+            value: '3',
+            text: '20-100人'
+          },
+          {
+            value: '4',
+            text: '100-1000人'
+          },
+          {
+            value: '5',
+            text: '1000人以上'
+          }
+        ]);
+
+        userPicker.pickers[0].setSelectedValue(this.company_workers.value);
+
+
+        userPicker.show(items => {
+          this.company_workers.value = items[0].value;
+          this.company_workers.text = items[0].text.replace(/人/g, '');
+          userPicker.dispose();
+        });
+      },
       initData:function(){
         postRequest(`company/applyInfo`, {}).then(response => {
           var code = response.data.code;
@@ -282,7 +321,7 @@
         var data = {
           company_name:this.name,
           industry_tags:this.infoIndustryTagsCodes,
-          company_workers:this.company_workers,
+          company_workers:this.company_workers.value,
           company_credit_code:this.company_credit_code,
           company_bank:this.company_bank,
           company_bank_account:this.company_bank_account,
@@ -317,7 +356,7 @@
           return;
         }
 
-        if (!this.company_workers) {
+        if (!this.company_workers.value) {
           mui.toast('请输入公司规模');
           return;
         }
