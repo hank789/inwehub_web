@@ -278,6 +278,7 @@
           this.name = data.company_name;
           this.industryTags = data.industry_tags;
           this.company_workers = data.company_workers;
+          this.company_workers.text = this.company_workers.text.replace(/人/g, '');
           this.company_credit_code = data.company_credit_code;
           this.company_bank = data.company_bank;
           this.company_bank_account = data.company_bank_account;
