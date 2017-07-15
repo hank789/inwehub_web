@@ -1,5 +1,6 @@
 import {apiRequest} from '../utils/request';
 import localEvent from '../stores/localStorage';
+import Raven from 'raven-js';
 
 function checkUpdate(){
   if (mui.os.plus) {
@@ -22,7 +23,7 @@ function checkUpdate(){
                 if (mui.os.ios) {
                   var ios_force_update_url = response_data.ios_force_update_url;
                   //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-                  location.href = ios_force_update_url;
+                  plus.runtime.openURL(ios_force_update_url);
                 } else if (mui.os.android) {
                   var android_force_update_url = response_data.android_force_update_url;
                   //market://details?id=io.dcloud.HelloMUI
@@ -65,7 +66,7 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     removeFile(path);
     // console.log("安装wgt文件失败["+e.code+"]："+e.message);
-    Raven.captureException(e);
+    Raven.captureException(JSON.stringify(e));
     //plus.nativeUI.alert("失败["+e.code+"]："+e.message);
   });
 }

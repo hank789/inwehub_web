@@ -20,7 +20,7 @@
           <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about')" class="mui-navigate-right">关于我们</a>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>
+          <a class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>
         </li>
       </ul>
 
@@ -118,25 +118,19 @@ All Rights Reserved</div>
         }
       },
       starApp() {
-          if (!this.ios_market_url){
-            apiRequest(`system/app_market_url`, {}).then(response_data => {
-              if (response_data !== false) {
-                this.ios_market_url = response_data.ios_url;
-                this.android_market_url = response_data.android_url;
-                if (mui.os.android) {
-                  location.href = this.android_market_url;
-                } else {
-                  location.href = this.ios_market_url;
-                }
-              }
-            });
-          } else {
-            if (mui.os.android) {
+        apiRequest(`system/app_market_url`, {}).then(response_data => {
+          if (response_data !== false) {
+            this.ios_market_url = response_data.ios_url;
+            this.android_market_url = response_data.android_url;
+            if (mui.os.ios) {
+              plus.runtime.openURL(this.ios_market_url);
+            } else if (mui.os.android) {
               location.href = this.android_market_url;
             } else {
               location.href = this.ios_market_url;
             }
           }
+        });
       }
     },
     mounted(){

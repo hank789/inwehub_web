@@ -6,6 +6,7 @@
 
 <script>
   import {apiRequest} from '../../utils/request';
+  import Raven from 'raven-js';
 
   export default{
     data(){
@@ -152,7 +153,8 @@
           console.log('requestOrder failed: ' + JSON.stringify(e));
           this.pay_waiting.close();
           this.pay_waiting = null;
-          plus.nativeUI.confirm("错误信息：" + JSON.stringify(e), (e) => {
+          Raven.captureException(JSON.stringify(e));
+          plus.nativeUI.confirm("支付失败，请稍后再试", (e) => {
             if (e.index == 0) {
               this.requestIapOrder(response_data);
             } else {
