@@ -85,14 +85,8 @@
 
     <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
       <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="selectMoney(88)">积极参与（ ¥ 88.00 ）</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="selectMoney(188)">鼎力支持（ ¥188.00 ）</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="selectMoney(28)">略表心意（ ¥ 28.00 ）</a>
+        <li class="mui-table-view-cell" v-for="(item, index) in payItems">
+          <a @tap.stop.prevent="selectMoney(item.value)">{{ item.text }}</a>
         </li>
       </ul>
       <ul class="mui-table-view">
@@ -114,6 +108,7 @@
   const Ask = {
     data: () => ({
       money: 88,
+      payItems:[],
       uid:0,
       description: '',
       selectOther: false,
@@ -164,18 +159,12 @@
         return this.description.length;
       },
       getSelectMoneyMethod(){
-        switch (this.money) {
-          case  88:
-            return '积极参与';
-            break;
-          case 188:
-            return '鼎力支持';
-            break;
-          case 28:
-            return '略表心意';
-            break;
+        for (var i in this.payItems) {
+            var item = this.payItems[i];
+            if (this.money == item.value) {
+              return item.text.replace(/（.*?）/, '');
+            }
         }
-        return '积极参与';
       }
     },
     created () {
@@ -205,33 +194,25 @@
         return '#icon-wechat';
       },
       selectMajor2(){
+
         if (mui.os.plus) {
-          var a = [{
-            title: "积极参与（ ¥ 88.00 ）"
-          },
-            {
-              title: "鼎力支持（ ¥188.00 ）"
-            },
-            {
-              title: "略表心意（ ¥ 28.00 ）"
-            }
-          ];
+
+          var options = [];
+          mui.each(this.payItems, function(index, item) {
+            options.push({
+              title:item.text
+            });
+          });
+
+          var a = options;
           plus.nativeUI.actionSheet({
             cancel: "取消",
             buttons: a
           }, (b) => {
-            switch (b.index) {
-              case 0:
-                break;
-              case 1:
-                this.money = 88;
-                break;
-              case 2:
-                this.money = 188;
-                break;
-              case 3:
-                this.money = 28;
-                break;
+            var vIndex = b.index + 1;
+
+            if (this.payItems[vIndex]) {
+              this.money = this.payItems[vIndex].value;
             }
           })
         } else {
@@ -339,6 +320,8 @@
             mui.back();
             return;
           }
+
+          this.payItems = response.data.data.pay_items;
         });
       },
       clearCache(){
