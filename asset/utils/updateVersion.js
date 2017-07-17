@@ -4,8 +4,6 @@ import Raven from 'raven-js';
 
 function checkUpdate(){
   if (mui.os.plus) {
-    let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
-    if(UserLoginInfo.token) {
       // 获取本地应用资源版本号
       plus.runtime.getProperty(plus.runtime.appid,function(inf){
         var wgtVer=inf.version;
@@ -38,12 +36,11 @@ function checkUpdate(){
         });
       });
     }
-  }
 }
 
 
 function downWgt(wgtUrl){
-  plus.nativeUI.showWaiting();
+  plus.nativeUI.showWaiting('有新版本更新');
   plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){
     if ( status == 200 ) {
       installWgt(d.filename); // 安装wgt包
