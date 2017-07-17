@@ -47,6 +47,13 @@
         </div>
       </div>
 
+      <div class="freeAskWrapper">
+        <div class="freeAsk">
+          <div class="icon"></div>
+          <div class="text">你的首问免费机会还剩 <span>71</span>小时 <span>20</span>分 <span>14</span>秒</div>
+        </div>
+      </div>
+
 
       <div class="bountyDesc">
         <div class="title">
@@ -593,4 +600,40 @@
       margin-left: 9% !important;
     }
   }
+
+  .freeAskWrapper{
+    position: relative;
+    height:48px;
+    margin-top:15px;
+  }
+  .freeAsk{
+    position: absolute;
+    left: 20px;
+    right:20px;
+  }
+  .freeAsk .icon{
+    position: absolute;
+    width:35px;
+    left:-8px;
+    top:-5px;
+    height:48px;
+    display: inline-block;
+    background-image: url("../statics/images/icon_xiaoha@2x.png");
+    background-size: contain;
+    background-position: center;
+  }
+  .freeAsk .text{
+     background: #dcdcdc;
+     border:1px #dcdcdc solid;
+     border-radius: 50px;
+     font-size:14px;
+     color:#323232;
+     padding:10px 30px 10px 35px;
+
+  }
+  .freeAsk .text span{
+    color:#03aef9;
+  }
+
+
 </style>
