@@ -313,8 +313,19 @@
       alertProtocol(){
         var html=document.getElementById('validMode').innerHTML;
         mui.alert(html, '选择验证模式', '确定', () => {
-            this.submitLast();
+            return;
         }, 'div');
+
+      },
+      closePopup(){
+        mui('body').on('tap', '.mui-popup-backdrop', () => {
+          mui.closePopup();
+        });
+
+        mui('body').on('tap', '.mui-popup-button', () => {
+          mui.closePopup();
+          this.submitLast();
+        });
       },
       submitLast(){
         var data = {
@@ -412,12 +423,17 @@
     mounted(){
 
     },
+    beforeRouteLeave(to, from, next) {
+      mui.closePopup();
+      next();
+    },
     created(){
       this.company_represent_person_is_self = 1;
       var companyStatus = localEvent.getLocalItem('companyStatus');
       if (companyStatus && companyStatus.status === 3) {
          this.initData();
       }
+      this.closePopup();
     }
   };
 </script>
