@@ -21,11 +21,11 @@ const routes = [
       title: '主页'
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      mui.plusReady(function() {
-        checkUpdate();
-      });
       if (mui.os.plus) {
+        // 检查版本更新
+        mui.plusReady(function() {
+          checkUpdate();
+        });
         var lauch = localEvent.getLocalItem('lauchFlag');
         if (!lauch.showGuide && 1 === 2) {
           mui.plusReady(function () {
@@ -64,10 +64,6 @@ const routes = [
       title: '登录'
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      mui.plusReady(function() {
-        checkUpdate();
-      });
       CanNotGetInWhenLogged(to, from, next)
     }
   },
