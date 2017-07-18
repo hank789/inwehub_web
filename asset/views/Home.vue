@@ -784,22 +784,22 @@
   .freeAskGet{
     position: fixed;
     top:50%;
-    left:50%;
-    margin:-100px 0 0 -150px;
+    margin-top:-131px;
+    left:10px;
+    right:10px;
     background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
     background-size:contain;
-    width:300px;
-    height:200px;
+    height:262px;
     z-index: 999;
   }
 
   .freeAskGetButton{
     position: fixed;
-    top:50%;
-    margin:-15px 0 0 -80px;
-    left:50%;
-    width:100px;
-    height:50px;
+    top: 50%;
+    margin: -20px 0 0 -100px;
+    left: 50%;
+    width: 150px;
+    height: 70px;
     z-index: 1000;
   }
 
