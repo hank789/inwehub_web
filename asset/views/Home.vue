@@ -55,7 +55,7 @@
       </div>
 
 
-      <div id="slider" class="mui-slider" >
+      <div id="slider" class="mui-slider" v-if="notices.length">
         <div class="mui-slider-group mui-slider-loop">
           <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
@@ -296,14 +296,14 @@
               t.showFreeAskGet();
           }
 
-          setTimeout(function(){
-            var slider = mui("#slider");
-            slider.slider({
-              interval: 5000
-            });
-          }, 100);
-
-
+          if (t.notices.length) {
+            setTimeout(function(){
+              var slider = mui("#slider");
+              slider.slider({
+                interval: 5000
+              });
+            }, 100);
+          }
         });
       },
       getAsks: function () {
