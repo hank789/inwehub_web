@@ -66,7 +66,7 @@
 
 
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a href="#">
+            <a :href="notice.url" target="_blank">
               <img :src="notice.img_url">
             </a>
           </div>
@@ -79,10 +79,7 @@
           </div>
         </div>
         <div class="mui-slider-indicator">
-          <div class="mui-indicator mui-active"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
+          <div :class="{'mui-indicator':true, 'mui-active':index==0}" v-for="(notice, index) in notices"></div>
         </div>
       </div>
 
