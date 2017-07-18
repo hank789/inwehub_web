@@ -11,7 +11,9 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">企业名称</label>
-          <input type="text" name="name" v-model="name" placeholder="输入企业名称" maxlength="60">
+          <input type="text" name="name" v-model="name" maxlength="60" v-if="name">
+          <input type="text" name="name" v-model="name" placeholder="输入企业名称" maxlength="60" v-else>
+
         </div>
       </li>
       <li :class="{'mui-table-view-cell':true, noBottomBorder:industryTags.length}">
@@ -32,37 +34,45 @@
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司规模</label>
-          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" name="company_workers_text"  readonly="readonly" placeholder="选择公司人数">
+          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" name="company_workers_text"  readonly="readonly" v-if="company_workers.text">
+
+          <input type="text" @tap.stop.prevent="selectCompanyWorkers()"  pattern="\d*" v-model="company_workers.text" name="company_workers_text"  readonly="readonly" placeholder="选择公司人数" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">统一社会信用代码</label>
-          <input type="text" name="company_credit_code" v-model="company_credit_code" placeholder="输入代码">
+          <input type="text" name="company_credit_code" v-model="company_credit_code" v-if="company_credit_code">
+          <input type="text" name="company_credit_code" v-model="company_credit_code" placeholder="输入代码" v-else>
+
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户银行</label>
-          <input type="text" name="company_bank" v-model="company_bank" placeholder="输入开户银行">
+          <input type="text" name="company_bank" v-model="company_bank" v-if="company_bank">
+          <input type="text" name="company_bank" v-model="company_bank" placeholder="输入开户银行" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">开户账户</label>
-          <input type="text" name="company_bank_account" v-model="company_bank_account" placeholder="输入开户账户">
+          <input type="text" name="company_bank_account" v-model="company_bank_account"  v-if="company_bank_account">
+          <input type="text" name="company_bank_account" v-model="company_bank_account" placeholder="输入开户账户" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司地址<span class="optional">（选填）</span></label>
-          <input type="text" name="company_address" v-model="company_address" placeholder="输入公司地址">
+          <input type="text" name="company_address" v-model="company_address"  v-if="company_address">
+          <input type="text" name="company_address" v-model="company_address" placeholder="输入公司地址" v-else>
         </div>
       </li>
       <li class="mui-table-view-cell">
         <div class="mui-input-row">
           <label class="mui-navigate">公司电话<span class="optional">（选填）</span></label>
-          <input type="text" name="company_work_phone" v-model="company_work_phone" placeholder="输入公司电话">
+          <input type="text" name="company_work_phone" v-model="company_work_phone" v-if="company_work_phone">
+          <input type="text" name="company_work_phone" v-model="company_work_phone" placeholder="输入公司电话" v-else>
         </div>
       </li>
     </ul>
