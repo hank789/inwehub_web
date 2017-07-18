@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="freeAskWrapper" v-show="firstAsk && couponExpireAtText" @tap.stop.prevent="$router.pushPlus('/ask')">
+      <div class="freeAskWrapper" v-show="couponExpireAtText" @tap.stop.prevent="$router.pushPlus('/ask')">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
           <div class="text">你的首问免费机会还剩 <div v-html="couponExpireAtText"></div></div>
@@ -101,6 +101,19 @@
       </ul>
     </div>
 
+    <div id="freeAskTemplate" style="display: none;">
+        <div class="freeAskGet"></div>
+        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
+    </div>
+
+    <div id="freeAskSuccessTemplate" style="display: none;">
+      <div class="xiaoha"></div>
+      <div class="success"></div>
+      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-times"></use>
+      </svg></div>
+    </div>
+
 
   </div>
 
@@ -147,7 +160,39 @@
       }
     },
     methods: {
-
+      closeFreeAskSuccessTemplate:function(){
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
+        FreeTemplate.style.display = 'none';
+        if (mui('.mui-backdrop')[0]) {
+          mui('.mui-backdrop')[0].style.display = 'none';
+        }
+      },
+      getFreeAsk:function(){
+        postRequest(`activity/getCoupon`, {'coupon_type':1}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+          this.showFreeAskGetSuccess();
+        });
+      },
+      showFreeAskGet:function(){
+          var FreeTemplate = document.getElementById('freeAskTemplate');
+          FreeTemplate.style.display = 'block';
+          var mask = mui.createMask(() => {
+            FreeTemplate.style.display = 'none';
+          });
+          mask.show();//显示遮罩
+      },
+      showFreeAskGetSuccess:function(){
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
+        FreeTemplate.style.display = 'block';
+        var mask = mui.createMask(() => {
+          FreeTemplate.style.display = 'none';
+        });
+        mask.show();//显示遮罩
+      },
       shareProfessor:function(){
           mui.alert("我们还暂时不建议您分享！");
       },
@@ -213,6 +258,10 @@
           t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
           t.couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
           t.loading = 0;
+          if (t.firstAsk) {
+              t.showFreeAskGet();
+          }
+
         });
       },
       getAsks: function () {
@@ -231,6 +280,9 @@
   .freeAsk .text div span{
     color:#03aef9;
     margin-left:5px;
+  }
+  .mui-backdrop{
+    background-color: rgba(0, 0, 0, .7) !important;
   }
 </style>
 
@@ -658,10 +710,67 @@
     display: inline-block;
   }
 
+  .freeAskGet{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -150px;
+    background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
+    background-size:contain;
+    width:300px;
+    height:200px;
+    z-index: 999;
+  }
+
+  .freeAskGetButton{
+    position: fixed;
+    top:50%;
+    margin:-15px 0 0 -80px;
+    left:50%;
+    width:100px;
+    height:50px;
+    z-index: 1000;
+  }
+
   .mui-navigate-right:after{
     right:10px;
     font-size:22px;
   }
 
+  #freeAskSuccessTemplate .xiaoha{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:-195px 0 0 -50px;
+    background: url("../statics/images/xiaoha-welcome@2x.png") no-repeat center;
+    background-size:contain;
+    width:100px;
+    height:150px;
+    z-index: 999;
+  }
+
+  #freeAskSuccessTemplate .success{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:-45px 0 0 -146px;
+    background: url("../statics/images/getSuccess@2x.png") no-repeat center;
+    background-size:contain;
+    width:292px;
+    height:91px;
+    z-index: 999;
+  }
+
+  #freeAskSuccessTemplate .close{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:90px 0 0 -19px;
+    z-index: 999;
+  }
+  #freeAskSuccessTemplate .close .icon{
+    font-size:38px;
+    color: #b4b4b6;
+  }
 
 </style>
