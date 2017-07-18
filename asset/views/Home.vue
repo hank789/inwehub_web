@@ -47,10 +47,10 @@
         </div>
       </div>
 
-      <div class="freeAskWrapper">
-        <div class="freeAsk">
+      <div class="freeAskWrapper" v-show="firstAsk && couponExpireAtText" @tap.stop.prevent="$router.pushPlus('/ask')">
+        <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
-          <div class="text">你的首问免费机会还剩 <span>71</span>小时 <span>20</span>分 <span>14</span>秒</div>
+          <div class="text">你的首问免费机会还剩 <div v-html="couponExpireAtText"></div></div>
         </div>
       </div>
 
@@ -110,6 +110,7 @@
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import {apiRequest} from '../utils/request';
+  import {TimeEndText} from '../utils/time';
 
   const Home = {
     data: () => ({
@@ -120,6 +121,8 @@
       recommend_expert_avatar_url:'',
       recommend_qa:[],
       recommend_expert_is_followed:0,
+      firstAsk:false,
+      couponExpireAt:'',
       loading: true
     }),
     created () {
@@ -136,7 +139,15 @@
       document.body.style.backgroundColor = '#efeff4';
       next();
     },
+    computed: {
+      couponExpireAtText(){
+          if (this.couponExpireAt) {
+              return TimeEndText(this.couponExpireAt);
+          }
+      }
+    },
     methods: {
+
       shareProfessor:function(){
           mui.alert("我们还暂时不建议您分享！");
       },
@@ -199,6 +210,8 @@
           t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
           t.recommend_qa = response_data.recommend_qa;
           t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
+          t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
+          t.couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
           t.loading = 0;
         });
       },
@@ -213,6 +226,13 @@
   };
   export default Home;
 </script>
+
+<style>
+  .freeAsk .text div span{
+    color:#03aef9;
+    margin-left:5px;
+  }
+</style>
 
 <style scoped>
   .mui-bar .myicon-project2 {
@@ -604,7 +624,7 @@
   .freeAskWrapper{
     position: relative;
     height:48px;
-    margin-top:15px;
+    margin-top:11px;
   }
   .freeAsk{
     position: absolute;
@@ -619,6 +639,7 @@
     height:48px;
     display: inline-block;
     background-image: url("../statics/images/icon_xiaoha@2x.png");
+    background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
   }
@@ -627,12 +648,19 @@
      border:1px #dcdcdc solid;
      border-radius: 50px;
      font-size:14px;
+     line-height: 14px;
      color:#323232;
-     padding:10px 30px 10px 35px;
+     padding:13px 30px 13px 35px;
 
   }
-  .freeAsk .text span{
-    color:#03aef9;
+
+  .freeAsk .text div{
+    display: inline-block;
+  }
+
+  .mui-navigate-right:after{
+    right:10px;
+    font-size:22px;
   }
 
 
