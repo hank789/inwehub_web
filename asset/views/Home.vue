@@ -66,7 +66,7 @@
 
 
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a :href="notice.url" target="_blank">
+            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank">
               <img :src="notice.img_url">
             </a>
           </div>
@@ -154,6 +154,7 @@
   import {apiRequest} from '../utils/request';
   import {TimeEndText} from '../utils/time';
 
+
   const Home = {
     data: () => ({
       recommend_expert_name:'',
@@ -190,6 +191,31 @@
       }
     },
     methods: {
+      goLink:function(url){
+          if (/http/.test(url)) {
+            if (mui.os.plus && mui.os.ios) {
+              mui.openWindow({
+                url: url,
+                id: url,
+                preload: false,//一定要为false
+                show: {
+                  autoShow: true,
+                  aniShow: 'pop-in'
+                },
+                styles: {
+                  popGesture: 'hide'
+                },
+                waiting: {
+                  autoShow: false
+                }
+              });
+            } else {
+                window.location.href=url;
+            }
+          } else {
+              this.$router.pushPlus(url);
+          }
+      },
       closeFreeAskSuccessTemplate:function(){
         var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
         FreeTemplate.style.display = 'none';

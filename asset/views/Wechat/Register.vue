@@ -65,7 +65,6 @@
   import Vue from 'vue'
   import {USERS_APPEND} from '../../stores/types';
   import VTooltip from 'v-tooltip';
-  import router from '../../routers/index';
   import {NOTICE} from '../../stores/types';
   import { getUserInfo, getAvatar } from '../../utils/user';
 
@@ -137,7 +136,7 @@
             let currentUser = user;
             cb(currentUser);
 
-            router.replace({path: this.redirect});
+            this.$router.replace({path: this.redirect});
           }));
         } else {
             this.loading = false;
@@ -284,7 +283,7 @@
                 //去填写注册信息
                 data.redirect = this.redirect;
                 localEvent.setLocalItem('wechatInfo', data);
-                router.push({path: '/wechat/info'});
+                this.$router.push({path: '/wechat/info'});
                 return;
               } else {
                 mui.toast(response.data.message);
@@ -297,7 +296,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               cb(currentUser);
-              router.replace({path: this.redirect});
+              this.$router.replace({path: this.redirect});
             }));
 
           });

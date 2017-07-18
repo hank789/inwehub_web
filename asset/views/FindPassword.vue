@@ -28,7 +28,6 @@
 </template>
 
 <script>
-  import router from '../routers/index';
   import request, { createAPI } from '../utils/request';
   import detecdOS from '../utils/detecdOS';
   import localEvent from '../stores/localStorage';

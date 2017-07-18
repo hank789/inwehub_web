@@ -36,7 +36,6 @@
   import request, {createAPI, apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import {USERS_APPEND} from '../../stores/types';
-  import router from '../../routers/index';
   import {NOTICE} from '../../stores/types';
   import {getUserInfo, getAvatar} from '../../utils/user';
 
@@ -163,7 +162,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               let currentUser = user;
               cb(currentUser);
-              router.replace(this.redirect);
+              this.$router.replace(this.redirect);
             }));
 
           });
