@@ -50,7 +50,7 @@
       <div class="freeAskWrapper" v-show="couponExpireAtText" @tap.stop.prevent="$router.pushPlus('/ask')">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
-          <div class="text">你的首问免费机会还剩 <div v-html="couponExpireAtText"></div></div>
+          <div class="text">你的首问1元特惠还剩 <div v-html="couponExpireAtText"></div></div>
         </div>
       </div>
 
