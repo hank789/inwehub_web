@@ -55,6 +55,38 @@
       </div>
 
 
+      <div id="slider" class="mui-slider" >
+        <div class="mui-slider-group mui-slider-loop">
+          <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
+            <a href="#">
+              <img :src="notices[notices.length-1].img_url">
+            </a>
+          </div>
+
+
+          <div class="mui-slider-item" v-for="(notice, index) in notices">
+            <a href="#">
+              <img :src="notice.img_url">
+            </a>
+          </div>
+
+          <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
+            <a href="#">
+              <img :src="notices[0].img_url">
+            </a>
+          </div>
+        </div>
+        <div class="mui-slider-indicator">
+          <div class="mui-indicator mui-active"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+        </div>
+      </div>
+
+
       <div class="bountyDesc">
         <div class="title">
           <span class="icon"></span>最新奖励
@@ -136,6 +168,7 @@
       recommend_expert_is_followed:0,
       firstAsk:false,
       couponExpireAt:'',
+      notices:[],
       loading: true
     }),
     created () {
@@ -257,10 +290,19 @@
           t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
           t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
           t.couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
+          t.notices = response_data.notices;
           t.loading = 0;
           if (t.firstAsk) {
               t.showFreeAskGet();
           }
+
+          setTimeout(function(){
+            var slider = mui("#slider");
+            slider.slider({
+              interval: 5000
+            });
+          }, 100);
+
 
         });
       },
@@ -283,6 +325,12 @@
   }
   .mui-backdrop{
     background-color: rgba(0, 0, 0, .7) !important;
+  }
+  .mui-slider-indicator .mui-indicator{
+    box-shadow:none !important;
+  }
+  .mui-slider-indicator{
+    bottom:0 !important;
   }
 </style>
 
@@ -773,4 +821,11 @@
     color: #b4b4b6;
   }
 
+  #slider{
+    margin-top:5px;
+  }
+  #slider img{
+    max-height:98px;
+    width:100%;
+  }
 </style>
