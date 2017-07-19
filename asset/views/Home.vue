@@ -200,10 +200,10 @@
           if (/http/.test(url)) {
             if (mui.os.plus && mui.os.ios) {
               mui.openWindow({
-                url: url,
+                url: 'index.html#/webview/article',
                 id: url,
                 preload: false,//一定要为false
-                createNew:true,
+                createNew:false,
                 show: {
                   autoShow: true,
                   aniShow: 'pop-in'

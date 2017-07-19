@@ -830,6 +830,13 @@ const routes = [
       next();
     }
   },
+  {
+    path: '/webview/article',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/Webview/article.vue'),
+  },
   { // message
     path: '/*',
     meta: {
