@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import router from '../modules/index/routers/index';
   import request, {createAPI, apiRequest, postRequest} from '../utils/request';
   import detecdOS from '../utils/detecdOS';
   import localEvent from '../stores/localStorage';
@@ -402,7 +401,7 @@
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
               cb(currentUser);
-              router.pushPlus('/my',true,'none','none');
+              this.$router.pushPlus('/my',true,'none','none');
             }));
           })
           .catch(({response: {data = {}} = {}}) => {

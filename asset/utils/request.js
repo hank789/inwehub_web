@@ -32,6 +32,11 @@ export function apiRequest (url, data, showWaiting = true) {
       mui.waiting();
     }
   }
+  var app_version = localEvent.getLocalItem('app_version');
+  if (app_version) {
+    data.current_version = app_version.version;
+  }
+
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
@@ -101,7 +106,10 @@ export function postRequest (url, data, showWaiting = true) {
       mui.waiting();
     }
   }
-
+  var app_version = localEvent.getLocalItem('app_version');
+  if (app_version) {
+    data.current_version = app_version.version;
+  }
   return addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200

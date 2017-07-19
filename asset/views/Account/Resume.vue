@@ -210,7 +210,6 @@
 <script>
   import localEvent from '../../stores/localStorage';
   import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND} from '../../stores/types';
-  import router from '../../routers/index';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import {updateUserInfoCache, getUserInfo} from '../../utils/user';
   import wx from 'weixin-js-sdk';

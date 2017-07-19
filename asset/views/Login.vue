@@ -23,7 +23,6 @@
 <script>
   import request, { createAPI,apiRequest } from '../utils/request';
   import localEvent from '../stores/localStorage';
-  import router from '../modules/index/routers/index';
   import detecdOS from '../utils/detecdOS';
   import errorCodes from '../stores/errorCodes';
   import deleteObjectItems from '../utils/deleteObjectItems';
@@ -177,7 +176,7 @@
             let currentUser = user;
             //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
-            router.pushPlus('/my',true,'none','none');
+            this.$router.pushPlus('/my',true,'none','none');
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {
