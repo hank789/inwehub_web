@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="freeAskWrapper" v-show="couponExpireAtText" @tap.stop.prevent="$router.pushPlus('/ask')">
+      <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/ask')">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
           <div class="text">你的首问1元特惠还剩 <div v-html="couponExpireAtText"></div></div>
@@ -343,6 +343,8 @@
           if (couponExpireAt) {
              t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, "/")) / 1000;
              t.timeAutoEnd();
+          } else {
+             t.couponExpireAtTime = null;
           }
 
           t.notices = response_data.notices;
