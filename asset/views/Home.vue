@@ -202,6 +202,7 @@
                 url: url,
                 id: url,
                 preload: false,//一定要为false
+                createNew:true,
                 show: {
                   autoShow: true,
                   aniShow: 'pop-in'
@@ -243,6 +244,7 @@
             mui.alert(response.data.message);
             return;
           }
+          this.getData();
           this.showFreeAskGetSuccess();
         });
       },
