@@ -180,6 +180,8 @@
     mounted(){
       showInwehubWebview();
       document.body.style.backgroundColor = '#fff';
+
+
     },
     beforeRouteLeave(to, from, next) {
       document.body.style.backgroundColor = '#efeff4';
@@ -346,6 +348,7 @@
           if (t.firstAsk) {
               t.showFreeAskGet();
           }
+
 
           if (t.notices.length) {
             setTimeout(function(){
@@ -812,7 +815,7 @@
   .freeAskGet{
     position: fixed;
     top:50%;
-    margin-top:-131px;
+    margin-top:-181px;
     left:10px;
     right:10px;
     background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
@@ -824,7 +827,7 @@
   .freeAskGetButton{
     position: fixed;
     top: 50%;
-    margin: -20px 0 0 -100px;
+    margin: -70px 0 0 -100px;
     left: 50%;
     width: 150px;
     height: 70px;
@@ -864,7 +867,7 @@
     position: fixed;
     top:50%;
     left:50%;
-    margin:90px 0 0 -19px;
+    margin:94px 0 0 -19px;
     z-index: 999;
   }
   #freeAskSuccessTemplate .close .icon{

@@ -322,6 +322,14 @@
           }
 
           this.payItems = response.data.data.pay_items;
+
+          for (var i in this.payItems) {
+            var item = this.payItems[i];
+            if (item.default) {
+              this.money = parseInt(item.value);
+            }
+          }
+
         });
       },
       clearCache(){
