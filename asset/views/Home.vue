@@ -335,7 +335,7 @@
           t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
           t.recommend_qa = response_data.recommend_qa;
           t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
-          t.firstAsk = true;//response_data.first_ask_ac.show_first_ask_coupon;
+          t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
           var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
 
           if (couponExpireAt) {
