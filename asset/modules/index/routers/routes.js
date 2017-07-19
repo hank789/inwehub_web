@@ -782,6 +782,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 活动-首次提问优惠活动
+    path: '/activity/ask',
+    meta: {
+      title: '首次提问优惠',
+    },
+    component: require('../../../views/Activity/Ask.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {

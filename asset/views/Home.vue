@@ -47,10 +47,10 @@
         </div>
       </div>
 
-      <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/ask')">
+      <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
-          <div class="text">你的首问1元特惠还剩 <div v-html="couponExpireAtText"></div></div>
+          <div class="text">你的首问1元特惠还剩<div v-html="couponExpireAtText"></div></div>
         </div>
       </div>
 
@@ -814,7 +814,7 @@
      font-size:14px;
      line-height: 14px;
      color:#323232;
-     padding:13px 30px 13px 35px;
+     padding:13px 0px 13px 35px;
 
   }
 
