@@ -348,13 +348,8 @@
           return;
         }
 
-        if (this.money < 28) {
-          mui.toast('提问金额不能小于28');
-          return;
-        }
-
-        if (this.money > 188) {
-          mui.toast('打赏钱有点多，提问金额的上限为188元');
+        if (this.money < 0) {
+          mui.toast('提问金额不能小于0');
           return;
         }
 
