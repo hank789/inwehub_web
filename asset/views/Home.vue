@@ -165,9 +165,11 @@
       recommend_qa:[],
       recommend_expert_is_followed:0,
       firstAsk:false,
-      couponExpireAt:'',
+      couponExpireAtTime:'',
       notices:[],
-      loading: true
+      currentTime:parseInt((new Date()).getTime() / 1000),
+      loading: true,
+      timeAutoEndTimeOut:false,
     }),
     created () {
 
@@ -185,8 +187,8 @@
     },
     computed: {
       couponExpireAtText(){
-          if (this.couponExpireAt) {
-              return TimeEndText(this.couponExpireAt);
+          if (this.couponExpireAtTime) {
+              return TimeEndText(this.currentTime, this.couponExpireAtTime);
           }
       }
     },
@@ -219,8 +221,17 @@
       closeFreeAskSuccessTemplate:function(){
         var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
         FreeTemplate.style.display = 'none';
+
         if (mui('.mui-backdrop')[0]) {
-          mui('.mui-backdrop')[0].style.display = 'none';
+          document.body.removeChild(mui('.mui-backdrop')[0]);
+        }
+      },
+      closeFreeAskTemplate:function(){
+        var FreeTemplate = document.getElementById('freeAskTemplate');
+        FreeTemplate.style.display = 'none';
+
+        if (mui('.mui-backdrop')[0]) {
+          document.body.removeChild(mui('.mui-backdrop')[0]);
         }
       },
       getFreeAsk:function(){
@@ -242,6 +253,8 @@
           mask.show();//显示遮罩
       },
       showFreeAskGetSuccess:function(){
+        this.closeFreeAskTemplate();
+
         var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
         FreeTemplate.style.display = 'block';
         var mask = mui.createMask(() => {
@@ -298,6 +311,15 @@
           mui('#expert').popover('toggle');
         }
       },
+      timeAutoEnd:function(){
+        if (this.timeAutoEndTimeOut) {
+            clearTimeout(this.timeAutoEndTimeOut);
+        }
+        this.timeAutoEndTimeOut = setTimeout(() => {
+          this.currentTime = parseInt((new Date()).getTime() / 1000);
+          this.timeAutoEnd();
+        }, 1000);
+      },
       getData: function () {
         var t = this;
         apiRequest(`home`, {}).then(response_data => {
@@ -312,7 +334,13 @@
           t.recommend_qa = response_data.recommend_qa;
           t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
           t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
-          t.couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
+          var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
+
+          if (couponExpireAt) {
+             t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, "/")) / 1000;
+             t.timeAutoEnd();
+          }
+
           t.notices = response_data.notices;
           t.loading = 0;
           if (t.firstAsk) {

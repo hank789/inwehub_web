@@ -25,9 +25,9 @@ function formatSeconds(value) {
  * @param endTime 2017-07-18 13:00:00
  * @constructor
  */
-function TimeEndText(endTime){
-  var currentTime = parseInt((new Date()).getTime() / 1000);
-  var futureTime = Date.parse(endTime.replace(/-/g, "/")) / 1000;
+function TimeEndText(currentTime, endTime){
+  var currentTime = currentTime;
+  var futureTime = endTime;
   if (futureTime <= currentTime) {
      return false;
   }
