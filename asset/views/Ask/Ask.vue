@@ -209,7 +209,7 @@
             cancel: "取消",
             buttons: a
           }, (b) => {
-            var vIndex = b.index + 1;
+            var vIndex = b.index-1;
 
             if (this.payItems[vIndex]) {
               this.money = this.payItems[vIndex].value;
