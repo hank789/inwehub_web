@@ -21,7 +21,7 @@
           <div class="label" v-show="isExpert"><span class="mui-icon myicon myicon-gaojizhuanjia"></span>{{ expert_level }}</div>
           <div class="options">
             <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片<span>{{ account_info_complete_percent }}%</span></div>
-            <div v-if="show_resume" class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
+            <div class="buttonAsk" @tap.stop.prevent="$router.pushPlus('/my/resume')">预览</div>
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
         projects:currentUser.projects,
         expert_level:currentUser.expert_level,
         show_my_wallet:currentUser.show_my_wallet,
-        show_resume: false
+        show_resume: true
       }
     },
     methods: {
@@ -127,13 +127,6 @@
           this.projects = user.info.projects;
           this.expert_level = user.info.expert_level;
           this.show_my_wallet = user.info.show_my_wallet;
-
-          // ios 审核成功后去掉，需要显示个人名片
-          if(mui.os.plus){
-            this.show_resume = !(mui.os.ios && user.info.show_ios_resume === false);
-          }else {
-            this.show_resume = true;
-          }
 
           this.avatar = user.info.avatar_url;
           this.name = user.info.name;
