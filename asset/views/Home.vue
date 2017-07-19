@@ -175,6 +175,7 @@
 
     },
     activated: function () {
+      document.body.style.backgroundColor = '#fff';
       this.getData();
     },
     mounted(){
