@@ -327,7 +327,7 @@
       },
       getData: function () {
         var t = this;
-        apiRequest(`home`, {}).then(response_data => {
+        apiRequest(`home`, {}, false).then(response_data => {
           if (response_data === false) {
             return;
           }
