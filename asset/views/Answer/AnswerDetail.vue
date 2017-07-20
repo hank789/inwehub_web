@@ -163,7 +163,6 @@
       },
       title:'回答问题',
       description: {},
-      descMaxLength: 1000,
       descLength:0,
       loading: true,
       buttonAnswerDisable:false,
@@ -279,52 +278,6 @@
       },
       selectTime(){
         this.initDate();
-      },
-      goAnswer(){
-
-        if (this.editorObj.getLength() <= 1) {
-          mui.toast('请填写回答内容');
-          return;
-        }
-
-        if (this.editorObj.getText().length <= 1) {
-          mui.toast('请填写一段文本信息');
-          return;
-        }
-
-        var data = {
-          question_id: this.id,
-          description: this.description,
-          promise_time: ''
-        };
-
-
-        mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
-          if (e.index == 1) {
-            if (this.buttonAnswerDisable) {
-                return;
-            }
-
-            this.buttonAnswerDisable = true;
-
-            data.description = JSON.stringify(data.description);
-
-            postRequest(`answer/store`, data).then(response => {
-              this.buttonAnswerDisable = false;
-
-              var code = response.data.code;
-              if (code !== 1000) {
-                mui.alert(response.data.message);
-                return;
-              }
-
-              mui.toast(response.data.message);
-
-              var id = response.data.data.id;
-              this.getData();
-            });
-          }
-        }, 'div');
       },
       submit(time)
       {
@@ -506,9 +459,7 @@
     },
     watch: {
       descLength: function (newDescLength) {
-        if (newDescLength > this.descMaxLength) {
-          this.editorObj.history.undo();
-        }
+
       },
       '$route': 'getData'
     },
