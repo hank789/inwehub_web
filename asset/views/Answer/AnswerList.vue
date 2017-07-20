@@ -6,6 +6,17 @@
       <h1 class="mui-title">我的回答</h1>
     </header>
 
+    <div class="mui-content list-empty" v-if="nothing == 1">
+      <div class="mui-table-view list-ask-item">
+        <div class="mui-table-view-cell">
+          <div class="">
+            <div class="title">暂无回答</div>
+            <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
+            <div class="subTitle" v-if="!isExpert">只有认证专家才能进行回答。<br/>如果您还不是专家，请积极提升个人在平台的成长值。</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="pullrefresh" :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
@@ -39,17 +50,7 @@
     </div>
     </div>
 
-    <div class="mui-content list-empty" v-if="nothing == 1">
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
-          <div class="">
-            <div class="title">暂无回答</div>
-            <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-            <div class="subTitle" v-if="!isExpert">只有认证专家才能进行回答。<br/>如果您还不是专家，请积极提升个人在平台的成长值。</div>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 </template>

@@ -5,6 +5,17 @@
       <h1 class="mui-title">任务</h1>
     </header>
 
+    <div class="mui-content list-empty" v-if="nothing==1">
+      <div class="mui-table-view list-ask-item">
+        <div class="mui-table-view-cell">
+          <div class="">
+            <div class="title">暂无任务</div>
+            <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="pullrefresh"  :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
       <div class="mui-scroll">
         <div v-show="nothing == 0">
@@ -51,16 +62,7 @@
     </div>
 
 
-    <div class="mui-content list-empty" v-if="nothing==1">
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
-          <div class="">
-            <div class="title">暂无任务</div>
-            <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
 
   </div>
