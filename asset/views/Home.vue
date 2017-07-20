@@ -198,7 +198,7 @@
     methods: {
       goLink:function(url){
           if (/http/.test(url)) {
-            if (mui.os.plus && mui.os.ios) {
+            if (mui.os.plus) {
               mui.openWindow({
                 url: 'index.html#/webview/article',
                 id: url,
