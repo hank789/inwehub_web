@@ -803,6 +803,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目-具体需求
+    path: '/project/concrete',
+    meta: {
+      title: '具体需求',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Concrete.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {

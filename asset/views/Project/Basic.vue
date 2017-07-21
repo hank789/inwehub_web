@@ -70,7 +70,7 @@
       </div>
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled">下一步</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/project/concrete')">下一步</button>
       </div>
 
     </div>
