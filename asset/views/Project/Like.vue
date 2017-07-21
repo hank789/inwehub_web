@@ -2,144 +2,85 @@
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">具体需求</h1>
+      <h1 class="mui-title">偏好设置</h1>
     </header>
 
     <div class="mui-content">
-      <div class="schedule schedule-2"></div>
+      <div class="schedule schedule-3"></div>
       <div class="basic">
-        <div class="title">有什么具体要求</div>
-        <div class="titleSub">我们会根据你的需求提供匹配的服务</div>
+        <div class="title">马上就可以发布了</div>
+        <div class="titleSub">还有什么要交代的</div>
 
       </div>
 
-      <ul class="mui-table-view companyForm noBottomBorder">
+      <ul class="mui-table-view companyForm">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">顾问数量</label>
-            <input type="text">
-            <svg class="icon modify" aria-hidden="true">
-              <use xlink:href="#icon-shuru"></use>
-            </svg>
+            <div class="fileSelect">资质要求<span class="option">（选填）</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-plus"></use>
+              </svg>
+            </div>
+            <div class="fileList">
+              <div class="item"><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-times"></use>
+              </svg>建筑业企业资质等级标准是建筑业企业资质的一个分级标准。</div>
+              <div class="item"><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-times"></use>
+              </svg>建筑业企业资质</div>
+            </div>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">顾问级别</label>
-            <div class="textRight">
-                    <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio">
-                    熟练
-                </span>
-              <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio" checked="checked">
-                    精通
-                </span>
-              <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio" checked="checked">
-                    资深
-                </span>
+            <div class="fileSelect">其他条件<span class="option">（选填）</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-plus"></use>
+              </svg>
+            </div>
+            <div class="fileList">
+              <div class="item"><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-times"></use>
+              </svg>建筑业企业资质等级标准是建筑业企业资质的一个分级标准。</div>
+              <div class="item"><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-times"></use>
+              </svg>建筑业企业资质</div>
             </div>
 
           </div>
         </li>
+
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">项目预算</label>
-            <span class="unit">万</span>
-            <input type="text" class="inputUnit">
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">计费模式</label>
+            <label class="mui-navigate">是否需要查看顾问简历</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
                     <input name="radio2" type="radio">
-                    按人天算
+                    是
                 </span>
               <span class="mui-radio radioWrapper">
                     <input name="radio2" type="radio" checked="checked">
-                    整体打包
+                    否
                 </span>
             </div>
 
           </div>
         </li>
+
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">开始时间</label>
-            <input type="text">
-            <svg class="icon modify" aria-hidden="true">
-              <use xlink:href="#icon-shuru"></use>
-            </svg>
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">项目周期</label>
-            <input type="text">
-            <svg class="icon modify" aria-hidden="true">
-              <use xlink:href="#icon-shuru"></use>
-            </svg>
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">工作密度</label>
-            <input type="text">
-            <svg class="icon modify" aria-hidden="true">
-              <use xlink:href="#icon-shuru"></use>
-            </svg>
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">远程工作</label>
+            <label class="mui-navigate">是否需要顾问投递申请</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio">
-                    接受
+                    <input name="radio2" type="radio">
+                    是
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio" checked="checked">
-                    不接受
+                    <input name="radio2" type="radio" checked="checked">
+                    否
                 </span>
             </div>
 
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">差旅费用</label>
-            <div class="textRight">
-                    <span class="mui-radio radioWrapper">
-                    <input name="radio4" type="radio">
-                    包含在项目内
-                </span>
-              <span class="mui-radio radioWrapper">
-                    <input name="radio4" type="radio" checked="checked">
-                    单独结算
-                </span>
-            </div>
-          </div>
-        </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <label class="mui-navigate">工作地点</label>
-            <input type="text">
-            <svg class="icon modify" aria-hidden="true">
-              <use xlink:href="#icon-shuru"></use>
-            </svg>
-          </div>
-
-          <div class="selectedWrapper">
-                    <span class="selected">江苏 南京<svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-guanbi"></use>
-                </svg></span>
-            <span class="selected">上海<svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-guanbi"></use>
-                </svg></span>
           </div>
         </li>
       </ul>
@@ -147,9 +88,11 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/project/like')">下一步</button>
+        <button type="button" class="mui-btn mui-btn-block preview" ><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gongkai"></use>
+        </svg><span>预览</span></button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" >完成</button>
       </div>
-
     </div>
 
   </div>
@@ -191,8 +134,8 @@
     height:3px;
     background: #03aef9;
   }
-  .schedule-2{
-    margin-left:25%;
+  .schedule-3{
+    margin-left:50%;
   }
 
   .basic{
@@ -214,6 +157,7 @@
     font-size:14px;
     color:#808080;
   }
+
 
   .companyForm{
     font-size:14px;
@@ -271,7 +215,7 @@
 
   .companyForm label{
     width:auto !important;
-    max-width:39%;
+    max-width: 49%;
     padding-right:0;
     line-height: normal;
   }
@@ -324,39 +268,49 @@
 
   .fileSelect{
     font-size:14px;
-    color:#c8c8c8;
+    color:#808080;
     background: #fff;
-    padding:15px;
+    padding:11px 0;
     position: relative;
   }
   .fileSelect .icon{
     position: absolute;
-    right:15px;
+    right:1px;
     color: #03aef9;
+    top:9px;
     font-size:22px;
+  }
+  .fileSelect .option{
+    color:#c8c8c8;
   }
 
   .fileList{
-    padding:0 15px 30px;
+    padding:0 15px 0 0;
     background: #fff;
     font-size:14px;
   }
   .fileList .item{
-    padding:5px 0;
+    position: relative;
+    line-height: 22px;
+    padding:1px 0 10px 25px;
+    color:#808080;
   }
   .fileList .icon{
+    position: absolute;
+    left:0;
+    top:4px;
     font-size:16px;
     color:#c8c8c8;
-    margin-right:10px;
   }
 
   .buttonWrapper{
     padding:14px 16px 30px;
     background: #fff;
-    text-align: center;
+    text-align: right;
   }
 
   .buttonWrapper button{
+    position: relative;
     display: inline-block;
     width:115px;
     margin-top:10px;
@@ -364,11 +318,30 @@
     border:1px solid #03aef9;
   }
 
-  .buttonWrapper button:disabled{
-    background: #dcdcdc;
-    border:1px solid #dcdcdc;
-    color:#b4b4b6;
-    opacity: 1;
+
+
+  .buttonWrapper button .icon{
+    color:#03aef9;
+    font-size:26px;
+    position: absolute;
+    top:6px;
+    left:21px;
+    margin-right:5px;
+    vertical-align: top;
+  }
+
+
+
+  .buttonWrapper button.preview{
+    background: #ececee;
+    border:1px solid #ececee;
+    color:#03aef9;
+    opacity:1;
+    float:left;
+  }
+
+  .buttonWrapper button.preview span{
+    margin-left:24px;
   }
 
 
@@ -379,7 +352,7 @@
     border-radius: 5px;
     padding:4px 10px 3px;
     font-size:14px;
-    margin:5px 7px 0 0;
+    margin:7px 7px 0 0;
   }
 
   .selected .icon{

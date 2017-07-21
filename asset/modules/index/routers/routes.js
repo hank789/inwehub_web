@@ -814,6 +814,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目-偏好设置
+    path: '/project/like',
+    meta: {
+      title: '偏好设置',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Like.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
