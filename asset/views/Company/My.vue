@@ -152,7 +152,8 @@
 
     },
     created(){
-       this.initData();
+      showInwehubWebview();
+      this.initData();
     }
   };
 </script>
