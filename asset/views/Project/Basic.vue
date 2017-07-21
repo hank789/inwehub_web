@@ -110,7 +110,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .schedule{
-    width:20%;
+    width:25%;
     height:3px;
     background: #03aef9;
   }
@@ -130,7 +130,7 @@
 
   .basic .titleSub{
     position: relative;
-    top:60px;
+    top:55px;
     font-size:14px;
     color:#808080;
   }
@@ -138,6 +138,7 @@
 
   .companyForm{
     font-size:14px;
+    margin-top:10px;
   }
   .companyForm:before{
     left:16px;
@@ -165,7 +166,7 @@
   }
 
   .companyForm .mui-table-view-cell{
-    padding:5px 15px;
+    padding:6px 15px;
   }
 
   .companyForm .mui-table-view-cell:after{
@@ -202,7 +203,7 @@
 
   .textarea-wrapper {
 
-    margin: 38px 0 0 ;
+    margin: 46px 0 0 ;
     height: 164px;
     position: relative;
     border-radius: 5px;
@@ -213,15 +214,16 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
+    right: 7px;
     font-size: 14px;
-    bottom: 0px;
+    bottom: 5px;
     color: #c8c8c8;
   }
 
   .textarea-wrapper textarea {
     border: none;
     margin: 0;
+    height:100%;
     padding-bottom: 0;
   }
 
@@ -234,7 +236,7 @@
 
   .companyForm .inputUnit{
     padding:10px;
-    margin-right:15px;
+    margin-right:17px;
   }
 
   .companyForm .textRight{
@@ -272,18 +274,18 @@
     font-size:14px;
     color:#c8c8c8;
     background: #fff;
-    padding:15px;
+    padding:11px 15px;
     position: relative;
   }
   .fileSelect .icon{
     position: absolute;
-    right:15px;
+    right:16px;
     color: #03aef9;
     font-size:22px;
   }
 
   .fileList{
-    padding:0 15px 30px;
+    padding:0 15px 0;
     background: #fff;
     font-size:14px;
   }
@@ -297,7 +299,7 @@
   }
 
   .buttonWrapper{
-    padding:20px 16px;
+    padding:7px 16px 30px;
     background: #fff;
     text-align: center;
   }
@@ -314,6 +316,8 @@
     background: #dcdcdc;
     border:1px solid #dcdcdc;
     color:#b4b4b6;
+    opacity: 1;
   }
+
 
 </style>
