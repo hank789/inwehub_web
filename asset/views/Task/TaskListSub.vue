@@ -225,7 +225,7 @@
             mui.back();
           }
 
-          if (response.data.data.list.length > 0) {
+          if (response.data.data.list) {
             this.tasks = response.data.data.list;
           }
           this.loading = 0;
