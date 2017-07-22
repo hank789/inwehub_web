@@ -135,7 +135,7 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             let currentUser = user;
             cb(currentUser);
-
+            mui.closeWaiting();
             this.$router.replace({path: this.redirect});
           }));
         } else {
