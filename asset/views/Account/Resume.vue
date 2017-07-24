@@ -1,7 +1,7 @@
 <template>
   <div class="vueWrapper">
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare || (isShare && canBack)"></a>
       <h1 class="mui-title">个人名片</h1>
     </header>
 
@@ -224,6 +224,7 @@
         cuuid: currentUser.uuid,
         showQrCode:false,
         isShare:false,
+        canBack:false,
         loading:true,
         shareUrl:'',
         wechatConfig:{},
@@ -252,6 +253,11 @@
     },
     created () {
         showInwehubWebview();
+
+        if (this.$route.query.goback) {
+            this.canBack = true;
+        }
+
         var from = this.$router.currentRoute.path;
         var fullUrl = process.env.H5_ROOT;
 
