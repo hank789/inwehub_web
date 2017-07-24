@@ -1,10 +1,9 @@
 <template>
-  <div>
+
     <div class="textarea-wrapper">
       <textarea v-model.trim="description" :rows="rows" :placeholder="placeholder"></textarea>
       <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
     </div>
-  </div>
 </template>
 
 <script type="text/javascript">

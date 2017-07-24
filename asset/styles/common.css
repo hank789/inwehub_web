@@ -469,6 +469,10 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 
 }
 
+.textarea-wrapper textarea{
+  height:100%;
+}
+
 .emptyList .mui-pull-bottom-pocket{
   display: none !important;
 }
@@ -722,5 +726,9 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 }
 
 input.upload-avatar[type=file]{
+  display: none;
+}
+
+input.upload-file[type=file]{
   display: none;
 }

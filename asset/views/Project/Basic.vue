@@ -16,7 +16,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目名称</label>
-            <input type="text"  placeholder="输入项目名称" maxlength="60">
+            <input type="text" v-model="project_name" placeholder="输入项目名称" maxlength="60">
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -24,11 +24,11 @@
             <label class="mui-navigate">项目类型</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio">
+                    <input name="radio1" type="radio" v-model="project_type" value="1">
                     一次性
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio1" type="radio" checked="checked">
+                    <input name="radio1" type="radio" v-model="project_type" value="2">
                     持续性
                 </span>
             </div>
@@ -38,8 +38,8 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目阶段</label>
-            <input type="text" class="inputUnit" readonly="readonly" value="项目已立项，就等顾问来操刀">
-            <svg class="icon modify" aria-hidden="true">
+            <input type="text"  class="inputUnit" readonly="readonly" :value="project_stage_text" @tap.stop.prevent="selectProjectStage">
+            <svg class="icon modify" aria-hidden="true" @tap.stop.prevent="selectProjectStage">
               <use xlink:href="#icon-shuru"></use>
             </svg>
           </div>
@@ -47,30 +47,25 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目描述</label>
-            <div class="textarea-wrapper">
-              <textarea class="textarea"></textarea>
-              <span class="counter"><span>0</span><span>/</span><span>500</span></span>
-            </div>
+
+            <MTextarea v-model.trim="project_description" :content="project_description" :rows="5" :descMaxLength="500" :placeholder="''"></MTextarea>
           </div>
         </li>
       </ul>
 
       <div class="fileSelect">添加附件（.jpg）
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectImgs()">
         <use xlink:href="#icon-plus"></use>
       </svg>
       </div>
       <div class="fileList">
-        <div class="item"><svg class="icon" aria-hidden="true">
+        <div class="item" v-for="(image, index) in images"><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
           <use xlink:href="#icon-times"></use>
-        </svg>企业logo.jpg</div>
-        <div class="item"><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-times"></use>
-        </svg>整体思维导图.jpg</div>
+        </svg>{{image.name}}</div>
       </div>
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/project/concrete')">下一步</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">下一步</button>
       </div>
 
     </div>
@@ -81,10 +76,19 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import MTextarea from '../../components/MTextarea.vue';
+  import {selectFileH5} from '../../utils/uploadFile';
 
   export default {
     data(){
       return {
+        project_id:null,
+        project_name:'',
+        project_type:1,
+        project_stage:null,
+        project_stage_text:'',
+        project_description:'',
+        images:[],
         loading: 1
       }
     },
@@ -94,14 +98,59 @@
       },
     },
     methods: {
-      nothing(){
+      selectProjectStage(){
 
+        var userPicker = new mui.PopPicker();
+
+        userPicker.setData([
+          {
+            value: '1',
+            text: '只有个想法，还需要看看'
+          },
+          {
+            value: '2',
+            text: '项目已立项，就等顾问来操刀'
+          },
+          {
+            value: '3',
+            text: '项目进行中，需要大牛加入'
+          },
+        ]);
+
+        if (this.project_stage) {
+          userPicker.pickers[0].setSelectedValue(this.project_stage);
+        }
+
+        userPicker.show(items => {
+          this.project_stage = items[0].value;
+          this.project_stage_text = items[0].text;
+          userPicker.dispose();
+        });
+      },
+      selectImgs(){
+        selectFileH5('img', (file, base64) => {
+            var imgInfo = {
+              name : file.name,
+              size: file.size,
+              base64: base64
+            };
+            this.images.push(imgInfo);
+        });
+      },
+      delImg(index) {
+          this.images.splice(index, 1);
+      },
+      submit(){
+
+        this.$router.push('/project/concrete');
       }
     },
     mounted(){
 
     },
-
+    components: {
+      MTextarea
+    },
     created(){
 
     }
@@ -222,8 +271,8 @@
 
   .textarea-wrapper textarea {
     border: none;
+    height: 100%;
     margin: 0;
-    height:100%;
     padding-bottom: 0;
   }
 
