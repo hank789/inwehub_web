@@ -825,6 +825,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目-企业信息
+    path: '/project/company',
+    meta: {
+      title: '企业信息',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Company.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
