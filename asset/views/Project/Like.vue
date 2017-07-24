@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="schedule schedule-3"></div>
+      <div class="schedule schedule-4"></div>
       <div class="basic">
         <div class="title">马上就可以发布了</div>
         <div class="titleSub">还有什么要交代的</div>
@@ -129,14 +129,17 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+
+  .schedule-4{
+    margin-left:75%;
+  }
+
   .schedule{
     width:25%;
     height:3px;
     background: #03aef9;
   }
-  .schedule-3{
-    margin-left:50%;
-  }
+
 
   .basic{
     height:150px;

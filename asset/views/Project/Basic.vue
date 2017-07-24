@@ -65,7 +65,7 @@
       </div>
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">下一步</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()" :disabled="disableButton">下一步</button>
       </div>
 
     </div>
@@ -88,6 +88,7 @@
         project_stage:null,
         project_stage_text:'',
         project_description:'',
+        disableButton:true,
         images:[],
         loading: 1
       }
@@ -140,13 +141,34 @@
       delImg(index) {
           this.images.splice(index, 1);
       },
+      isEnableButton() {
+        if (!this.project_name) {
+
+          return;
+        }
+
+        if (!this.project_type) {
+
+          return;
+        }
+
+        if (!this.project_stage) {
+
+          return;
+        }
+
+        if (!this.project_description) {
+
+          return;
+        }
+
+        this.disableButton = false;
+      },
       submit(){
         if (!this.project_name) {
             mui.toast('请输入项目名称');
             return;
         }
-
-
 
         if (!this.project_type) {
           mui.toast('请选择项目类型');
@@ -192,6 +214,21 @@
       MTextarea
     },
     created(){
+
+    },
+    watch: {
+      project_name: function (newMoney, oldMoney) {
+          this.isEnableButton();
+      },
+      project_type: function (newMoney, oldMoney) {
+        this.isEnableButton();
+      },
+      project_stage: function (newMoney, oldMoney) {
+        this.isEnableButton();
+      },
+      project_description: function (newMoney, oldMoney) {
+        this.isEnableButton();
+      },
 
     }
   };

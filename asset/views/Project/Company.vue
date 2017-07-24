@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="schedule schedule-4"></div>
+      <div class="schedule schedule-3"></div>
       <div class="basic">
         <div class="title">很好</div>
         <div class="titleSub">现在完善你的企业信息</div>
@@ -138,7 +138,7 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" disabled="disabled">下一步</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/project/like')">下一步</button>
       </div>
 
 
@@ -183,8 +183,9 @@
     height:3px;
     background: #03aef9;
   }
-  .schedule-4{
-    margin-left:75%;
+
+  .schedule-3{
+    margin-left:50%;
   }
 
   .basic{
