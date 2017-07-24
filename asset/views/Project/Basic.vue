@@ -141,8 +141,48 @@
           this.images.splice(index, 1);
       },
       submit(){
+        if (!this.project_name) {
+            mui.toast('请输入项目名称');
+            return;
+        }
 
-        this.$router.push('/project/concrete');
+
+
+        if (!this.project_type) {
+          mui.toast('请选择项目类型');
+          return;
+        }
+
+        if (!this.project_stage) {
+          mui.toast('请选择项目阶段');
+          return;
+        }
+
+        if (!this.project_description) {
+          mui.toast('请填写项目描述');
+          return;
+        }
+
+        var data = {
+          project_name:this.project_name,
+          project_type:this.project_type,
+          project_stage:this.project_stage,
+          project_description:this.project_description,
+        };
+
+        for (var i in this.images) {
+            data['image_' +i] = this.images[i].base64;
+        }
+
+        postRequest(`project/step_one`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.$router.push('/project/concrete');
+        });
       }
     },
     mounted(){
