@@ -198,7 +198,7 @@
     methods: {
       goLink:function(url){
           if (/http/.test(url)) {
-            if (mui.os.plus && mui.os.ios) {
+            if (mui.os.plus) {
               mui.openWindow({
                 url: 'index.html#/webview/article',
                 id: url,
@@ -327,7 +327,7 @@
       },
       getData: function () {
         var t = this;
-        apiRequest(`home`, {}).then(response_data => {
+        apiRequest(`home`, {}, false).then(response_data => {
           if (response_data === false) {
             return;
           }

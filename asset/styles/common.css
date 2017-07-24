@@ -9,6 +9,10 @@ body{
   -webkit-user-select: none;
 }
 
+.quill-editor{
+  -webkit-user-select:auto;
+}
+
 #app{
   height:100%;
 }

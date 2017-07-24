@@ -116,7 +116,7 @@ Vue.mixin({
 
 mui.muiOldBack = mui.back;
 mui.back = function(){
-  if (mui.os.plus && mui.os.ios) {
+  if (mui.os.plus) {
     mui.muiOldBack();
   } else {
     router.go(-1);
