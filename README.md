@@ -1,21 +1,19 @@
-# plus-component-web
-
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
+## 初始化
 npm install
 
-# serve with hot reload at localhost:8080
+## 构建
+### 开发环境
 npm run dev
 
-# build for production with minification
+### 测试环境
+npm run test
+
+### 生产环境
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 目录介绍
+/asset  资源目录,开发主要目录
+/dist   生成的静态文件
+
+
