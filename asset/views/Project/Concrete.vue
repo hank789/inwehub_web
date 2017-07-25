@@ -148,8 +148,7 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()"
-                disabled="disabledButton">下一步
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()"  :disabled="disabledButton">下一步
         </button>
       </div>
 
@@ -167,6 +166,7 @@
   export default {
     data(){
       return {
+        project_id:null,
         worker_num: '',
         worker_num_text: '',
         worker_level: 1,
@@ -191,47 +191,47 @@
     },
     methods: {
       isEnableButton:function () {
+        this.disabledButton = true;
         if (!this.worker_num) {
-          mui.toast('请输入顾问数量');
+
           return;
         }
 
         if (!this.worker_level) {
-          mui.toast('请输入顾问级别');
+
           return;
         }
 
         if (!this.project_amount) {
-          mui.toast('请输入项目预算');
+
           return;
         }
 
         if (!this.billing_mode) {
-          mui.toast('请输入计费模式');
+
           return;
         }
 
         if (!this.project_begin_time) {
-          mui.toast('请输入开始时间');
+
           return;
         }
 
         if (!this.project_cycle) {
-          mui.toast('请输入项目周期');
+
           return;
         }
 
         if (!this.work_intensity) {
-          mui.toast('请输入工作密度');
+
           return;
         }
 
-        if (!this.work_address) {
-          mui.toast('请输入工作地点');
+        if (this.work_address.length === 0) {
           return;
         }
 
-        this.disableButton = false;
+        this.disabledButton = false;
       },
       submit: function () {
         if (!this.worker_num) {
@@ -269,12 +269,13 @@
           return;
         }
 
-        if (!this.work_address) {
+        if (this.work_address.length === 0) {
           mui.toast('请输入工作地点');
           return;
         }
 
         var data = {
+          project_id:this.project_id,
           worker_num:this.worker_num,
           worker_level:this.worker_level,
           project_amount:this.project_amount,
@@ -294,7 +295,7 @@
             return;
           }
 
-          this.$router.push('/project/company')
+          this.$router.push('/project/company?id='+this.project_id);
         });
 
 
@@ -458,10 +459,24 @@
             value: items[2].value ? items[2].value : items[0].value,
             text: items[2].text ? items[1].text + ' ' + items[2].text : items[0].text,
           };
-          this.work_address.push(obj);
+          if (obj.value === '2') {
+              mui.prompt('输入海外地点', '', ' ', ['确定','取消'], (e) => {
+                if (e.index === 0) {
+                  obj = {
+                    value: e.value,
+                    text: e.value,
+                  };
+                  this.work_address.push(obj);
+                  return;
+                }
+              }, 'div');
+          } else {
+            this.work_address.push(obj);
+          }
         });
       }
     },
+
     mounted(){
 
     },
@@ -487,7 +502,10 @@
     },
 
     created(){
-
+      this.project_id = this.$route.query.id;
+      if (!this.project_id) {
+          mui.back();
+      }
     }
   };
 </script>
@@ -701,6 +719,8 @@
     color: #c8c8c8;
     font-size: 11px;
     margin-left: 7px;
+    position: relative;
+    top: -1px;
   }
 
 
