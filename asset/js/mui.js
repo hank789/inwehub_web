@@ -2954,7 +2954,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                   $container.pullRefresh(pullRefreshOptions);
                 });
 
-              } else if($.os.android) { //非原生转圈，但是Android环境
+              } else if($.os.android && 1==2) { //非原生转圈，但是Android环境
                 $.plusReady(function() {
                   //这里改写$.fn.pullRefresh
                   $.fn.pullRefresh = $.fn.pullRefresh_native
