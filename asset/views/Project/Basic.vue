@@ -142,6 +142,7 @@
           this.images.splice(index, 1);
       },
       isEnableButton() {
+        this.disableButton = true;
         if (!this.project_name) {
 
           return;
@@ -203,7 +204,9 @@
             return;
           }
 
-          this.$router.push('/project/concrete');
+          this.project_id = response.data.data.id;
+
+          this.$router.push('/project/concrete?id='+this.project_id);
         });
       }
     },
