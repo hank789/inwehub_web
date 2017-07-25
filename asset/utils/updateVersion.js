@@ -13,21 +13,18 @@ function checkUpdate(){
           if (response_data !== false) {
             var app_version = response_data.app_version;
             var package_url = response_data.package_url;
-            var is_force = response_data.is_force;
+            var is_ios_force = response_data.is_ios_force;
+            var is_android_force = response_data.is_android_force;
             if (app_version && wgtVer < app_version){
               //如果是强更
-              if (is_force === 1){
+              if (is_ios_force === 1 && mui.os.ios){
                 mui.alert("有新的版本升级");
-                if (mui.os.ios) {
-                  var ios_force_update_url = response_data.ios_force_update_url;
-                  //location.href = 'https://itunes.apple.com/cn/app/jie-zou-da-shi/id493901993?mt=8';
-                  plus.runtime.openURL(ios_force_update_url);
-                } else if (mui.os.android) {
-                  var android_force_update_url = response_data.android_force_update_url;
-                  //market://details?id=io.dcloud.HelloMUI
-                  location.href = android_force_update_url;
-                }
-              }else {
+                plus.runtime.openURL(response_data.ios_force_update_url);
+              } else if (is_android_force === 1 && mui.os.android){
+                mui.alert("有新的版本升级");
+                //market://details?id=io.dcloud.HelloMUI
+                plus.runtime.openURL(response_data.android_force_update_url);
+              } else {
                 //下载升级包
                 downWgt(package_url);
               }
