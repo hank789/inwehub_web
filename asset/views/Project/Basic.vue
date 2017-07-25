@@ -154,6 +154,10 @@
           return;
         }
 
+        if (this.images.length === 0) {
+          return;
+        }
+
         this.disableButton = false;
       },
       submit(){
@@ -175,6 +179,11 @@
         if (!this.project_description) {
           mui.toast('请填写项目描述');
           return;
+        }
+
+        if (this.images.length === 0) {
+            mui.toast('请添加附件');
+            return;
         }
 
         var data = {
@@ -224,7 +233,9 @@
       project_description: function (newMoney, oldMoney) {
         this.isEnableButton();
       },
-
+      images: function (newMoney, oldMoney) {
+        this.isEnableButton();
+      },
     }
   };
 </script>
@@ -259,7 +270,6 @@
 
   .companyForm{
     font-size:14px;
-    margin-top:10px;
   }
   .companyForm:before{
     left:16px;

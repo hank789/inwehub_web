@@ -172,7 +172,12 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-
+  .mui-content{
+    position: fixed;
+    height:100%;
+    width:100%;
+    background: #fff;
+  }
   .schedule-4{
     margin-left:75%;
   }
@@ -207,7 +212,6 @@
 
   .companyForm{
     font-size:14px;
-    margin-top:10px;
   }
   .companyForm:before{
     left:16px;

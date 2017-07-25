@@ -544,7 +544,6 @@
 
   .companyForm {
     font-size: 14px;
-    margin-top: 10px;
   }
 
   .companyForm:before {
