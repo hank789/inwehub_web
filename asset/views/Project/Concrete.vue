@@ -462,12 +462,13 @@
           if (obj.value === '2') {
               mui.prompt('输入海外地点', '', ' ', ['确定','取消'], (e) => {
                 if (e.index === 0) {
-                  obj = {
-                    value: e.value,
-                    text: e.value,
-                  };
-                  this.work_address.push(obj);
-                  return;
+                  if (e.value) {
+                    obj = {
+                      value: e.value,
+                      text: e.value,
+                    };
+                    this.work_address.push(obj);
+                  }
                 }
               }, 'div');
           } else {

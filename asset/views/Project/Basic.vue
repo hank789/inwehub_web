@@ -78,6 +78,7 @@
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
   import {selectFileH5} from '../../utils/uploadFile';
+  import {selectKeyValue} from '../../utils/select';
 
   export default {
     data(){
@@ -100,10 +101,7 @@
     },
     methods: {
       selectProjectStage(){
-
-        var userPicker = new mui.PopPicker();
-
-        userPicker.setData([
+        selectKeyValue(this.project_stage, [
           {
             value: '1',
             text: '只有个想法，还需要看看'
@@ -116,16 +114,9 @@
             value: '3',
             text: '项目进行中，需要大牛加入'
           },
-        ]);
-
-        if (this.project_stage) {
-          userPicker.pickers[0].setSelectedValue(this.project_stage);
-        }
-
-        userPicker.show(items => {
-          this.project_stage = items[0].value;
-          this.project_stage_text = items[0].text;
-          userPicker.dispose();
+        ], (value, key) => {
+          this.project_stage = value;
+          this.project_stage_text = key;
         });
       },
       selectImgs(){
@@ -187,6 +178,7 @@
         }
 
         var data = {
+          project_id:this.project_id,
           project_name:this.project_name,
           project_type:this.project_type,
           project_stage:this.project_stage,
@@ -217,7 +209,7 @@
       MTextarea
     },
     created(){
-
+      this.project_id = this.$route.query.id?this.$route.query.id:0;
     },
     watch: {
       project_name: function (newMoney, oldMoney) {

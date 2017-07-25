@@ -17,34 +17,30 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <div class="fileSelect">资质要求<span class="option">（选填）</span>
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="inputQualification()">
                 <use xlink:href="#icon-plus"></use>
               </svg>
             </div>
             <div class="fileList">
-              <div class="item"><svg class="icon" aria-hidden="true">
+              <div class="item" v-for="(item, index) in qualification_requirements"><svg class="icon" aria-hidden="true" @tap.stop.prevent="closeQualification(index)">
                 <use xlink:href="#icon-times"></use>
-              </svg>建筑业企业资质等级标准是建筑业企业资质的一个分级标准。</div>
-              <div class="item"><svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-times"></use>
-              </svg>建筑业企业资质</div>
+              </svg>{{item}}</div>
+
             </div>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <div class="fileSelect">其他条件<span class="option">（选填）</span>
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="inputOther()">
                 <use xlink:href="#icon-plus"></use>
               </svg>
             </div>
             <div class="fileList">
-              <div class="item"><svg class="icon" aria-hidden="true">
+              <div class="item" v-for="(item, index) in other_requirements"><svg class="icon" aria-hidden="true" @tap.stop.prevent="closeOtherRequirements(index)">
                 <use xlink:href="#icon-times"></use>
-              </svg>建筑业企业资质等级标准是建筑业企业资质的一个分级标准。</div>
-              <div class="item"><svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-times"></use>
-              </svg>建筑业企业资质</div>
+              </svg>{{ item }}</div>
+
             </div>
 
           </div>
@@ -55,11 +51,11 @@
             <label class="mui-navigate">是否需要查看顾问简历</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio2" type="radio">
+                    <input name="radio2" type="radio" value="1" v-model="is_view_resume">
                     是
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio2" type="radio" checked="checked">
+                    <input name="radio2" type="radio" value="0" v-model="is_view_resume">
                     否
                 </span>
             </div>
@@ -72,11 +68,11 @@
             <label class="mui-navigate">是否需要顾问投递申请</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio2" type="radio">
+                    <input name="radio3" type="radio">
                     是
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio2" type="radio" checked="checked">
+                    <input name="radio3" type="radio" checked="checked">
                     否
                 </span>
             </div>
@@ -91,7 +87,7 @@
         <button type="button" class="mui-btn mui-btn-block preview" ><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
         </svg><span>预览</span></button>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" >完成</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">完成</button>
       </div>
     </div>
 
@@ -105,6 +101,10 @@
   export default {
     data(){
       return {
+        qualification_requirements:[],
+        other_requirements:[],
+        is_view_resume:0,
+        is_apply_request:0,
         loading: 1
       }
     },
@@ -114,16 +114,59 @@
       },
     },
     methods: {
-      nothing(){
+      closeQualification(index) {
+        this.qualification_requirements.splice(index, 1);
+      },
+      closeOtherRequirements(index) {
+        this.other_requirements.splice(index, 1);
+      },
+      inputQualification(){
+        mui.prompt('输入资质要求', '', ' ', ['确定','取消'], (e) => {
+          if (e.index === 0) {
+            if (e.value) {
+              this.qualification_requirements.push(e.value);
+            }
+          }
+        }, 'div');
+      },
+      inputOther(){
+        mui.prompt('输入其他条件', '', ' ', ['确定','取消'], (e) => {
+          if (e.index === 0) {
+              if (e.value) {
+                this.other_requirements.push(e.value);
+              }
+          }
+        }, 'div');
+      },
+      submit(){
+        var data = {
+          project_id:this.project_id,
+          qualification_requirements:this.qualification_requirements,
+          other_requirements:this.other_requirements,
+          is_view_resume:this.is_view_resume,
+          is_apply_request:this.is_apply_request,
+        };
+        postRequest(`project/step_four`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
 
+          mui.alert('发布完成!');
+        });
       }
+
     },
     mounted(){
 
     },
 
     created(){
-
+      this.project_id = this.$route.query.id;
+      if (!this.project_id) {
+        mui.back();
+      }
     }
   };
 </script>
