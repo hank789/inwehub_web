@@ -280,7 +280,7 @@
           mui.toast('请选择行业领域');
           return;
         }
-        
+
 
         if (parseInt(this.company_represent_person_is_self) === 0) {
             if (!this.company_represent_person_name) {
@@ -482,7 +482,6 @@
 
   .companyForm{
     font-size:14px;
-    margin-top:10px;
   }
   .companyForm:before{
     left:16px;
