@@ -67,12 +67,12 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       getPrevList(){
 
@@ -142,12 +142,12 @@
             callback: this.pulldownRefresh
           },
           up: {
-            auto:true,
             contentrefresh: '正在加载...',
             callback: this.pullupRefresh
           }
         }
       });
+      this.getPrevList();
     }
   }
 
