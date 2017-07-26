@@ -141,13 +141,13 @@
             </template>
 
           </div>
-          <div class="item" v-if="info.qualification_requirements">
+          <div class="item" v-if="info.qualification_requirements && info.qualification_requirements.length">
             <div class="title">资质要求</div>
             <div class="content">
               <div class="li" v-for="(qualification_requirement, index) in info.qualification_requirements">{{ qualification_requirement }}</div>
             </div>
           </div>
-          <div class="item" v-if="info.other_requirements">
+          <div class="item" v-if="info.other_requirements && info.other_requirements.length">
             <div class="title">其他条件</div>
             <div class="content">
               <div class="li" v-for="(other_requirement, index) in info.other_requirements">{{ other_requirement }}</div>
