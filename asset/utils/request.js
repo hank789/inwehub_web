@@ -95,7 +95,7 @@ export function apiRequest (url, data, showWaiting = true) {
     })
 }
 
-
+//对后端数据进行请求；（showWaiting = true 加载gif）
 export function postRequest (url, data, showWaiting = true) {
   if (showWaiting){
     if (mui.os.plus){

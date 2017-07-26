@@ -8,7 +8,7 @@
       <span class="mui-icon myicon myicon-home-title"></span>
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
     </header>
-
+  
     <div class="mui-content" v-show="!loading">
 
 
@@ -46,7 +46,10 @@
 
         </div>
       </div>
-
+       
+      <!--
+      	首页的特惠时间； 点击跳入特惠的详情；
+      --> 
       <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
@@ -116,7 +119,7 @@
       <div class="mb70"></div>
     </div>
 
-
+     //首页遮罩层
     <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
@@ -189,6 +192,9 @@
       next();
     },
     computed: {
+    	
+    	
+    	  //首页倒计时；
       couponExpireAtText(){
           if (this.couponExpireAtTime) {
               return TimeEndText(this.currentTime, this.couponExpireAtTime);
@@ -284,7 +290,8 @@
 
       },
       goRecommand: function () {
-        this.expertNav();
+      //点击推荐专家时，跳转新页面；
+        this.expertNav(); 　
         this.$router.push('/expert/recommend')
       },
       goExpert: function () {
@@ -294,28 +301,36 @@
       toggleMenu(){
         mui('.mui-off-canvas-wrap').offCanvas('toggle');
       },
+      //当是webapp时调用遮罩层；
       expertNav: function () {
-
+        //如果是os或者plus 调用系统方法；
         if (mui.os.plus) {
           var a = [{
             title: "推荐专家"
           }];
+          //调用系统的选择按钮；
           plus.nativeUI.actionSheet({
+          	//两个参数；
             cancel: "取消",
             buttons: a
           }, (b) => {
             switch (b.index) {
+            	//b.index   参数索引值；
               case 0:
+              //关闭选择按钮；
                   break;
               case 1:
+              //跳转到推荐专家页面；
                 this.$router.pushPlus('/expert/recommend');
                 break;
             }
           })
         } else {
+        	  // 如果不是调用自己写的方法；
           mui('#expert').popover('toggle');
         }
       },
+      
       timeAutoEnd:function(){
         if (this.timeAutoEndTimeOut) {
             clearTimeout(this.timeAutoEndTimeOut);
@@ -325,6 +340,7 @@
           this.timeAutoEnd();
         }, 1000);
       },
+      //请求的数据；
       getData: function () {
         var t = this;
         apiRequest(`home`, {}, false).then(response_data => {

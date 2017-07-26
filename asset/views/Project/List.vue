@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
-  <div class="mui-content">
+  <div class="mui-content mui-scroll-wrapper">
   	  <ul class="projectList1" v-for="item in list">
   	  	<li>
   	  		<span>{{item.project_name}}</span>
