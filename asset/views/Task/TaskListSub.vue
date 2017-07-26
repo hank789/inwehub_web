@@ -230,7 +230,6 @@
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#pullrefresh').pullRefresh().refresh(true);
 
           this.$emit('countChange', response.data.data.total);
         });
@@ -251,12 +250,8 @@
           }
 
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
 
-          if (response.data.data.list.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
         });
       },
       isFromDetail(){

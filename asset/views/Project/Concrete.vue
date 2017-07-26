@@ -162,9 +162,15 @@
   import localEvent from '../../stores/localStorage';
   import {selectTime, selectKeyValue, selectCityThreeLevel} from '../../utils/select';
   import cityData from '../../components/city/city.data';
+  import {setCacheInfo, getCacheInfo} from '../../utils/project';
 
   export default {
     data(){
+      var cacheData = getCacheInfo();
+      if (cacheData && cacheData.concrete) {
+        return cacheData.concrete;
+      }
+
       return {
         project_id:null,
         worker_num: '',
@@ -294,6 +300,9 @@
             mui.alert(response.data.message);
             return;
           }
+
+
+          setCacheInfo('concrete', this.$data);
 
           this.$router.push('/project/company?id='+this.project_id);
         });

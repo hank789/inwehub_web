@@ -101,6 +101,8 @@
              this.$router.push('/company/help');
           } else if (this.user.info.company_status == 1) {
             this.$router.push('/company/success?type=waiting');
+          } else {
+            this.$router.push('/project/basic');
           }
       },
       goRequirement(){
@@ -108,6 +110,8 @@
           this.$router.push('/company/help');
         } else if (this.user.info.company_status == 1) {
           this.$router.push('/company/success?type=waiting');
+        } else {
+          this.$router.push('/project/list');
         }
       },
       nothing(){

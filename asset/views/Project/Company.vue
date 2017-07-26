@@ -161,9 +161,15 @@
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
+  import {setCacheInfo, getCacheInfo} from '../../utils/project';
 
   export default {
     data(){
+      var cacheData = getCacheInfo();
+      if (cacheData && cacheData.company) {
+        return cacheData.company;
+      }
+
       const currentUser = localEvent.getLocalItem('UserInfo');
       return {
         project_id:null,
@@ -360,6 +366,7 @@
             return;
           }
 
+          setCacheInfo('company', this.$data);
           this.$router.push('/project/like?id='+this.project_id);
         });
       },

@@ -68,11 +68,11 @@
             <label class="mui-navigate">是否需要顾问投递申请</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio">
+                    <input name="radio3" type="radio" value="1" v-model="is_apply_request">
                     是
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio" checked="checked">
+                    <input name="radio3" type="radio" value="0" v-model="is_apply_request">
                     否
                 </span>
             </div>
@@ -84,7 +84,7 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block preview" ><svg class="icon" aria-hidden="true">
+        <button type="button" class="mui-btn mui-btn-block preview" @tap.stop.prevent="submit(true)"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
         </svg><span>预览</span></button>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">完成</button>
@@ -97,9 +97,16 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import {setCacheInfo, getCacheInfo, clearCacheIno} from '../../utils/project';
 
   export default {
     data(){
+
+      var cacheData = getCacheInfo();
+      if (cacheData && cacheData.like) {
+        return cacheData.like;
+      }
+
       return {
         qualification_requirements:[],
         other_requirements:[],
@@ -138,7 +145,7 @@
           }
         }, 'div');
       },
-      submit(){
+      submit(isReview = false){
         var data = {
           project_id:this.project_id,
           qualification_requirements:this.qualification_requirements,
@@ -153,7 +160,15 @@
             return;
           }
 
-          mui.alert('发布完成!');
+
+
+          if (isReview) {
+            setCacheInfo('like', this.$data);
+            this.$router.push('/project/review?id='+this.project_id);
+          } else {
+            clearCacheIno();
+            mui.alert('发布完成!');
+          }
         });
       }
 
@@ -161,20 +176,26 @@
     mounted(){
 
     },
+    beforeRouteLeave(to, from, next) {
+      document.body.style.backgroundColor = '#efeff4';
+      next();
+    },
 
     created(){
       this.project_id = this.$route.query.id;
       if (!this.project_id) {
         mui.back();
       }
+
+      document.body.style.backgroundColor = '#fff';
     }
   };
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
-    position: fixed;
-    height:100%;
+    position: relative;
+    min-height:100%;
     width:100%;
     background: #fff;
   }
@@ -410,6 +431,4 @@
     font-size:11px;
     margin-left:7px;
   }
-
-
 </style>

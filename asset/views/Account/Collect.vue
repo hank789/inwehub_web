@@ -102,12 +102,7 @@
             this.list = this.list.concat(response.data.data);
           }
           this.loading = 0;
-
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       },
     },
