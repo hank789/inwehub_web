@@ -836,6 +836,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目-预览
+    path: '/project/review',
+    meta: {
+      title: '',
+    },
+    component: require('../../../views/Project/Review.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {
