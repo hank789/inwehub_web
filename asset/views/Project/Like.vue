@@ -68,11 +68,11 @@
             <label class="mui-navigate">是否需要顾问投递申请</label>
             <div class="textRight">
                     <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio">
+                    <input name="radio3" type="radio" value="1" v-model="is_apply_request">
                     是
                 </span>
               <span class="mui-radio radioWrapper">
-                    <input name="radio3" type="radio" checked="checked">
+                    <input name="radio3" type="radio" value="0" v-model="is_apply_request">
                     否
                 </span>
             </div>
@@ -84,7 +84,7 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block preview" ><svg class="icon" aria-hidden="true">
+        <button type="button" class="mui-btn mui-btn-block preview" @tap.stop.prevent="goReview()"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
         </svg><span>预览</span></button>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">完成</button>
@@ -97,9 +97,16 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import {setCacheInfo, getCacheInfo} from '../../utils/project';
 
   export default {
     data(){
+
+      var cacheData = getCacheInfo();
+      if (cacheData && cacheData.like) {
+        return cacheData.like;
+      }
+
       return {
         qualification_requirements:[],
         other_requirements:[],
@@ -114,6 +121,10 @@
       },
     },
     methods: {
+      goReview(){
+        setCacheInfo('like', this.$data);
+        this.$router.push('/project/review?id='+this.project_id);
+      },
       closeQualification(index) {
         this.qualification_requirements.splice(index, 1);
       },
@@ -152,6 +163,8 @@
             mui.alert(response.data.message);
             return;
           }
+
+          setCacheInfo('like', this.$data);
 
           mui.alert('发布完成!');
         });

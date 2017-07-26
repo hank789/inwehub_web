@@ -78,14 +78,22 @@
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
   import {selectFileH5} from '../../utils/uploadFile';
+  import {setCacheInfo, getCacheInfo} from '../../utils/project';
   import {selectKeyValue} from '../../utils/select';
+
 
   export default {
     data(){
+
+      var cacheData = getCacheInfo();
+      if (cacheData && cacheData.basic) {
+        return cacheData.basic;
+      }
+
       return {
         project_id:null,
         project_name:'',
-        project_type:1,
+        project_type:'1',
         project_stage:null,
         project_stage_text:'',
         project_description:'',
@@ -194,8 +202,13 @@
           project_description:this.project_description,
         };
 
+        var cacheImages = [];
         for (var i in this.images) {
-            data['image_' +i] = this.images[i].base64;
+            if (this.images[i].base64) {
+              data['image_' +i] = this.images[i].base64;
+            }
+            cacheImages[i]={};
+            cacheImages[i].name = this.images[i].name;
         }
 
         postRequest(`project/step_one`, data).then(response => {
@@ -206,6 +219,10 @@
           }
 
           this.project_id = response.data.data.id;
+
+          var cacheData = this.$data;
+          cacheData.images = cacheImages;
+          setCacheInfo('basic', cacheData);
 
           this.$router.push('/project/concrete?id='+this.project_id);
         });
