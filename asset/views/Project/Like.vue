@@ -84,7 +84,7 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block preview" @tap.stop.prevent="goReview()"><svg class="icon" aria-hidden="true">
+        <button type="button" class="mui-btn mui-btn-block preview" @tap.stop.prevent="submit(true)"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
         </svg><span>预览</span></button>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">完成</button>
@@ -97,7 +97,7 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
-  import {setCacheInfo, getCacheInfo} from '../../utils/project';
+  import {setCacheInfo, getCacheInfo, clearCacheIno} from '../../utils/project';
 
   export default {
     data(){
@@ -121,10 +121,6 @@
       },
     },
     methods: {
-      goReview(){
-        setCacheInfo('like', this.$data);
-        this.$router.push('/project/review?id='+this.project_id);
-      },
       closeQualification(index) {
         this.qualification_requirements.splice(index, 1);
       },
@@ -149,7 +145,7 @@
           }
         }, 'div');
       },
-      submit(){
+      submit(isReview = false){
         var data = {
           project_id:this.project_id,
           qualification_requirements:this.qualification_requirements,
@@ -164,9 +160,15 @@
             return;
           }
 
-          setCacheInfo('like', this.$data);
 
-          mui.alert('发布完成!');
+
+          if (isReview) {
+            setCacheInfo('like', this.$data);
+            this.$router.push('/project/review?id='+this.project_id);
+          } else {
+            clearCacheIno();
+            mui.alert('发布完成!');
+          }
         });
       }
 
@@ -423,6 +425,4 @@
     font-size:11px;
     margin-left:7px;
   }
-
-
 </style>
