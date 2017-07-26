@@ -733,3 +733,10 @@ input.upload-avatar[type=file]{
 input.upload-file[type=file]{
   display: none;
 }
+
+.mui-popup-input input{
+  border:1px solid #dcdcdc !important;
+  border-radius: 5px !important;
+  height:40px !important;
+  line-height: 40px !important;
+}

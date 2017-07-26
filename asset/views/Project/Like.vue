@@ -176,20 +176,26 @@
     mounted(){
 
     },
+    beforeRouteLeave(to, from, next) {
+      document.body.style.backgroundColor = '#efeff4';
+      next();
+    },
 
     created(){
       this.project_id = this.$route.query.id;
       if (!this.project_id) {
         mui.back();
       }
+
+      document.body.style.backgroundColor = '#fff';
     }
   };
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
-    position: fixed;
-    height:100%;
+    position: relative;
+    min-height:100%;
     width:100%;
     background: #fff;
   }
