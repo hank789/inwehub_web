@@ -348,7 +348,7 @@ function resetCache(obj)
   if (project && project.basic && !project.basic.editMode) {
       console.log('bmp模式直接读取');
       for (var i in project.basic) {
-        if (i == 'images') continue;
+        if (i == 'images' || i == 'deleted_images') continue;
         obj[i] = project.basic[i];
       }
 
