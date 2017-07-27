@@ -183,7 +183,7 @@
     },
 
     created(){
-      this.project_id = this.$route.query.id;
+      this.project_id = this.$route.query.pid;
       if (!this.project_id) {
         mui.back();
       }

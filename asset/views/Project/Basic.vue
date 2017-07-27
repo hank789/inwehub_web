@@ -236,11 +236,12 @@
 
           setCacheInfo('basic', this.$data);
 
-          this.$router.push('/project/concrete?id='+this.project_id);
+          this.$router.push('/project/concrete?pid='+this.project_id);
         });
       },
       getData(){
         var projectId = this.$route.query.id?this.$route.query.id:0;
+        console.log('projectId:' + projectId);
         if (projectId) {
           //缓存projectInfo
           this.editMode = true;

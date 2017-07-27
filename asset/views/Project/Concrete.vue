@@ -304,7 +304,7 @@
 
           setCacheInfo('concrete', this.$data);
 
-          this.$router.push('/project/company?id='+this.project_id);
+          this.$router.push('/project/company?pid='+this.project_id);
         });
 
 
@@ -512,7 +512,7 @@
     },
 
     created(){
-      this.project_id = this.$route.query.id;
+      this.project_id = this.$route.query.pid;
       if (!this.project_id) {
           mui.back();
       }

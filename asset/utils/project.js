@@ -234,7 +234,7 @@ function cacheProject(projectId, obj) {
 
 
     var concrete = {
-      disabledButton: true,
+      disabledButton: false,
       worker_num: projectInfo.worker_num,
       worker_num_text: options.worker_num_text(projectInfo.worker_num),
       worker_level: projectInfo.worker_level,
@@ -256,7 +256,7 @@ function cacheProject(projectId, obj) {
 
     const currentUser = localEvent.getLocalItem('UserInfo');
     var company = {
-      disabledButton: true,
+      disabledButton: false,
       company_name:projectInfo.company_name,
       company_description:projectInfo.company_description,
       company_industry_tags:projectInfo.company_industry_tags,
