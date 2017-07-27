@@ -162,6 +162,7 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import {options} from '../../utils/project';
 
   export default {
     data(){
@@ -179,147 +180,31 @@
     },
     computed: {
         project_stage_text() {
-            switch(parseInt(this.info.project_stage)) {
-              case 1:
-                  return '只有个想法，还需要看看';
-                  break;
-              case 2:
-                  return '项目已立项，就等顾问来操刀';
-                  break;
-              case 3:
-                  return '项目进行中，需要大牛加入';
-                  break;
-            }
+            return options.project_stage_text(this.info.project_stage);
         },
       project_type_text(){
-        switch(parseInt(this.info.project_type)) {
-          case 1:
-            return '一次性';
-            break;
-          case 2:
-            return '持续性';
-            break;
-        }
+        return options.project_type_text(this.info.project_type);
       },
       worker_num_text(){
-        switch(parseInt(this.info.worker_num)) {
-          case 1:
-            return '1个';
-            break;
-          case 2:
-            return '2个';
-            break;
-          case 3:
-            return '3~5个';
-            break;
-          case 4:
-            return '5~8个';
-            break;
-          case 5:
-            return '8个以上';
-            break;
-          case 6:
-            return '其他';
-            break;
-          case 7:
-            return '不确定';
-            break;
-        }
+        return options.worker_num_text(this.info.worker_num);
       },
       project_cycle_text(){
-        switch(parseInt(this.info.project_cycle)) {
-          case 1:
-            return '小于1周';
-            break;
-          case 2:
-            return '1-2周';
-            break;
-          case 3:
-            return '2-4周';
-            break;
-          case 4:
-            return '1-2月';
-            break;
-          case 5:
-            return '2-4月';
-            break;
-          case 6:
-            return '4-6月';
-            break;
-          case 7:
-            return '半年以上';
-            break;
-          case 8:
-            return '不确定';
-            break;
-          case 9:
-            return '其他';
-            break;
-        }
+        return options.project_cycle_text(this.info.project_cycle);
       },
       billing_mode_text(){
-        switch(parseInt(this.info.billing_mode)) {
-          case 1:
-            return '按人计算';
-            break;
-          case 2:
-            return '2整体打包';
-            break;
-        }
+        return options.billing_mode_text(this.info.billing_mode);
+
       },
       work_intensity_text(){
-        switch(parseInt(this.info.work_intensity)) {
-          case 1:
-            return '2H/W';
-            break;
-          case 2:
-            return '4H/W';
-            break;
-          case 3:
-            return '8H/W';
-            break;
-          case 4:
-            return '16H/W';
-            break;
-          case 5:
-            return '24H/W';
-            break;
-          case 6:
-            return '32H/W';
-            break;
-          case 7:
-            return '40H/W';
-            break;
-          case 8:
-            return '其他';
-            break;
-          case 9:
-            return '我不确定';
-            break;
-        }
+        return options.work_intensity_text(this.info.work_intensity);
+
       },
       worker_level_text(){
-        switch(parseInt(this.info.worker_level)) {
-          case 1:
-            return '熟练';
-            break;
-          case 2:
-            return '精通';
-            break;
-          case 3:
-            return '3资深';
-            break;
-        }
+        return options.worker_level_text(this.info.worker_level);
+
       },
       remote_work_text(){
-        switch(parseInt(this.info.remote_work)) {
-          case 1:
-            return '接受';
-            break;
-          case 2:
-            return '不接受';
-            break;
-        }
+        return options.remote_work_text(this.info.remote_work);
       },
       work_address_text(){
           var bmp = [];
@@ -600,7 +485,7 @@
 
   .section .contentWrapper .requirement .icon {
     color: #c8c8c8;
-    margin-right: 8px;
+    margin-right: 0;
     vertical-align: middle;
   }
 

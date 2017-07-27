@@ -78,7 +78,7 @@
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
   import {selectFileH5} from '../../utils/uploadFile';
-  import {setCacheInfo, getCacheInfo} from '../../utils/project';
+  import {setCacheInfo, getCacheInfo, cacheProject, resetCache} from '../../utils/project';
   import {selectKeyValue} from '../../utils/select';
 
 
@@ -213,9 +213,7 @@
             if (this.images[i].base64) {
               data['image_' +i] = this.images[i].base64;
             }
-
         }
-
         postRequest(`project/step_one`, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -246,7 +244,13 @@
       MTextarea
     },
     created(){
-      this.project_id = this.$route.query.id?this.$route.query.id:0;
+      var projectId = this.$route.query.id?this.$route.query.id:0;
+      if (projectId) {
+          //缓存projectInfo
+        cacheProject(projectId, this);
+      } else {
+        resetCache(this);
+      }
     },
     watch: {
       project_name: function (newMoney, oldMoney) {
