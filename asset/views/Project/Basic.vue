@@ -61,7 +61,7 @@
       <div class="fileList">
         <div class="item" v-for="(image, index) in images"><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
           <use xlink:href="#icon-times"></use>
-        </svg>{{image.name}}</div>
+        </svg><img :src="image.base64" width="61" height="61" v-if="image.base64"/><img :src="image.url" v-if="image.url" width="61" height="61"/></div>
       </div>
 
       <div class="buttonWrapper">
@@ -98,6 +98,7 @@
         project_stage_text:'',
         project_description:'',
         disableButton:true,
+        deleted_images:[],
         images:[],
         loading: 1
       }
@@ -138,6 +139,10 @@
         });
       },
       delImg(index) {
+          var img = this.images[index];
+          if (img.url) {
+              this.deleted_images.push(img.url);
+          }
           this.images.splice(index, 1);
       },
       isEnableButton() {
@@ -200,15 +205,15 @@
           project_type:this.project_type,
           project_stage:this.project_stage,
           project_description:this.project_description,
+          deleted_images:this.deleted_images,
         };
 
-        var cacheImages = [];
+
         for (var i in this.images) {
             if (this.images[i].base64) {
               data['image_' +i] = this.images[i].base64;
             }
-            cacheImages[i]={};
-            cacheImages[i].name = this.images[i].name;
+
         }
 
         postRequest(`project/step_one`, data).then(response => {
@@ -219,6 +224,12 @@
           }
 
           this.project_id = response.data.data.id;
+          var images = response.data.data.images;
+          var cacheImages = [];
+          for(var i in images) {
+            cacheImages[i]={};
+            cacheImages[i].url = images[i];
+          }
 
           var cacheData = this.$data;
           cacheData.images = cacheImages;
@@ -438,12 +449,23 @@
     font-size:14px;
   }
   .fileList .item{
-    padding:5px 0;
+    position: relative;
+    width:61px;
+    height:61px;
+    margin-right:6px;
+    background-color:#e3e3e3;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .fileList .item img{
+    border-radius: 5px;
   }
   .fileList .icon{
-    font-size:16px;
-    color:#c8c8c8;
-    margin-right:10px;
+    position: absolute;
+    right:-4px;
+    top:-4px;
+    font-size:18px;
+    color:#808080;
   }
 
   .buttonWrapper{
