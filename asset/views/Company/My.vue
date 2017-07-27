@@ -102,7 +102,7 @@
           } else if (this.user.info.company_status == 1) {
             this.$router.push('/company/success?type=waiting');
           } else {
-            this.$router.push('/project/basic');
+            this.$router.pushPlus('/project/basic');
           }
       },
       goRequirement(){
@@ -111,7 +111,7 @@
         } else if (this.user.info.company_status == 1) {
           this.$router.push('/company/success?type=waiting');
         } else {
-          this.$router.push('/project/list');
+          this.$router.pushPlus('/project/list');
         }
       },
       nothing(){

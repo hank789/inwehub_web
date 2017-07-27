@@ -244,24 +244,32 @@
 
           this.$router.push('/project/concrete?id='+this.project_id);
         });
+      },
+      getData(){
+        var projectId = this.$route.query.id?this.$route.query.id:0;
+        if (projectId) {
+          //缓存projectInfo
+          this.editMode = true;
+          cacheProject(projectId, this);
+        } else {
+          this.editMode = false;
+          resetCache(this);
+        }
       }
     },
     mounted(){
-
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        this.getData();
+      });
     },
     components: {
       MTextarea
     },
     created(){
-      var projectId = this.$route.query.id?this.$route.query.id:0;
-      if (projectId) {
-          //缓存projectInfo
-        this.editMode = true;
-        cacheProject(projectId, this);
-      } else {
-        this.editMode = false;
-        resetCache(this);
-      }
+      showInwehubWebview();
+
+      this.getData();
     },
     watch: {
       project_name: function (newMoney, oldMoney) {
