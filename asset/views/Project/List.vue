@@ -8,14 +8,12 @@
   	  <ul class="projectList1" v-for="item in list">
   	  	<li>
   	  		<span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
-<<<<<<< HEAD
+
 
   	  		<span class="waiting" v-if="item.status =='1'">等待审核</span>
   	  		<span class="fail"  v-if="item.status =='3'">审核未通过</span>
   	  		<span class="pass"  v-if="item.status =='2'">审核通过</span>
-=======
-  	  		<span>等待审核</span>
->>>>>>> d9ab6e2995c61fdc3f30d3a19229a82ae63dd119
+
   	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
 			  <use xlink:href="#icon-shuru"></use>
 			</svg>
