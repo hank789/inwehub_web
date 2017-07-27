@@ -11,7 +11,9 @@
   	  	<li>
   	  		<span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
 
-  	  		<span>等待审核</span>
+  	  		<span class="waiting" v-if="item.status =='1'">等待审核</span>
+  	  		<span class="fail"  v-if="item.status =='3'">审核未通过</span>
+  	  		<span class="pass"  v-if="item.status =='2'">审核通过</span>
   	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
 			  <use xlink:href="#icon-shuru"></use>
 			</svg>
@@ -38,6 +40,10 @@
       return {
       	 list:[]
       }
+    },
+    created(){
+    	// 点击一次进行跳转；
+    showInwehubWebview();
     },
     methods: {
 
@@ -115,6 +121,12 @@
 
     	},
     mounted(){
+    	//每次进入页面进行刷新；
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        console.log('refresh-answerList');
+        this.getPrevList();
+      });
     	//请求数据；
     	  mui.init({
         pullRefresh: {
@@ -148,6 +160,15 @@
  		list-style: none;
  	}
  }
+ .waiting{
+	background: #a8dff7;
+ }
+ .pass{
+ 	background: #03aef9;
+ }
+ .fail{
+ 	background: #f03c69;
+ }
   .mui-content{
     height:100%;
     width:100%;
@@ -172,10 +193,9 @@
 				color: #444444;
 			}
 			&:nth-child(2){
-				/*width:65px;*/
 				height: 20px;
 			    border-radius: 50px;
-				background: #03aef9;
+				/*background: #a8dff7;*/
 				font-family: "PingFangSC";
 		        font-size: 11px;
 	            text-align:center;
@@ -194,12 +214,11 @@
 			}
   }
   &:nth-child(2){
-  	margin-top: 20px;
+  	margin-top: 10px;
   	width: 100%;
   	height: 14px;
   	span{
   	&:nth-child(1){
-  		/*width: 44px;*/
 		height: 14px;
 		font-family: ".PingFangSC";
 		color: #808080;
@@ -216,7 +235,6 @@
 
 	}
   &:nth-child(3){
-   	/*width: 146.5px;*/
 	height: 14px;
 	font-family: ".PingFangSC";
 	color: #808080;
