@@ -105,6 +105,7 @@
       },
     },
     methods: {
+    	//点击时用封装好的调用体统的方法；
       selectProjectStage(){
         selectKeyValue(this.project_stage, [
           {
@@ -197,7 +198,7 @@
             mui.toast('请添加附件');
             return;
         }
-
+         //向后端发送的值；
         var data = {
           project_id:this.project_id,
           project_name:this.project_name,
@@ -214,7 +215,7 @@
               data['image_' +i] = compressBase64; //this.images[i].base64;
             }
         }
-
+        //提交时把信息
         postRequest(`project/step_one`, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -232,6 +233,7 @@
               base64: serverImages[i],
               isNew:false,
             };
+            //把图片赋给初始的images
             this.images.push(newImage);
           }
 
