@@ -9,9 +9,10 @@
   		<div class="mui-content">
   	  <ul class="projectList1" v-for="item in list">
   	  	<li>
-  	  		<span>{{item.project_name}}需求管理需求管理需求管理需求管理需求管理需求管理需求管理需求管理需求管理</span>
+  	  		<span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
+
   	  		<span>等待审核</span>
-  	  		<svg class="icon" aria-hidden="true">
+  	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
 			  <use xlink:href="#icon-shuru"></use>
 			</svg>
   	  	</li>
@@ -25,20 +26,21 @@
   	  </div> 
   	 </div>
   </div>
-   
-   
-    
+
+
+
 </div>
 </template>
 <script>
 	import {apiRequest, postRequest} from '../../utils/request';
-	export default { 
+	export default {
     data(){
       return {
       	 list:[]
       }
     },
     methods: {
+
     	//下拉刷新;
     	pulldownRefresh() {
         setTimeout(() => {
@@ -48,6 +50,7 @@
       //下拉刷新请求的数据；
       getPrevList(){
         postRequest(`project/myList`, {}).then(response => {
+
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -109,6 +112,7 @@
         }
         return 0;
       }
+
     	},
     mounted(){
     	//请求数据；
@@ -128,9 +132,11 @@
           }
         }
       });
+
      //加载页面请求一次；
      this.getPrevList();
   } 
+
 	}
 </script>
 
@@ -146,7 +152,7 @@
     height:100%;
     width:100%;
     background: #ececee;
-    
+
   }
   .projectList1{
 	width: 100%;
@@ -203,11 +209,11 @@
 	display: inline-block;
 	width: 1px;
 	height: 14px;
-	background:#c8c8c8;	
+	background:#c8c8c8;
 	margin-left: 8px;
 	margin-right: 8px;
-	margin-bottom: -2px;	
-		
+	margin-bottom: -2px;
+
 	}
   &:nth-child(3){
    	/*width: 146.5px;*/
@@ -217,9 +223,9 @@
 	color: #808080;
   	font-size: 14px;
    }
-  	
+
   }
-  
+
   }
   &:nth-child(3){
   	margin-top: 15.5px;
@@ -231,5 +237,5 @@
   }
   }
   }
-  
+
 </style>
