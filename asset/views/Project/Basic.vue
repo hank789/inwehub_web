@@ -61,7 +61,7 @@
       <div class="fileList">
         <div class="item" v-for="(image, index) in images"><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
           <use xlink:href="#icon-times"></use>
-        </svg><img :src="image.base64" width="61" height="61" v-if="image.base64"/><img :src="image.url" v-if="image.url" width="61" height="61"/></div>
+        </svg><img :id="'image_' + index" :src="image.base64"/></div>
       </div>
 
       <div class="buttonWrapper">
@@ -77,7 +77,7 @@
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
-  import {selectFileH5} from '../../utils/uploadFile';
+  import {selectFileH5, compressImg} from '../../utils/uploadFile';
   import {setCacheInfo, getCacheInfo, cacheProject, resetCache} from '../../utils/project';
   import {selectKeyValue} from '../../utils/select';
 
@@ -134,8 +134,11 @@
             var imgInfo = {
               name : file.name,
               size: file.size,
-              base64: base64
+              base64: base64,
+              isNew:true,
             };
+            console.log(imgInfo);
+            console.log(this.images);
             this.images.push(imgInfo);
         });
       },
@@ -211,8 +214,9 @@
 
 
         for (var i in this.images) {
-            if (this.images[i].base64) {
-              data['image_' +i] = this.images[i].base64;
+            if (this.images[i].isNew) {
+              var compressBase64 = compressImg('image_' +i);
+              data['image_' +i] = compressBase64; //this.images[i].base64;
             }
         }
         postRequest(`project/step_one`, data).then(response => {
@@ -226,8 +230,12 @@
           var images = response.data.data.images;
           var cacheImages = [];
           for(var i in images) {
-            cacheImages[i]={};
-            cacheImages[i].url = images[i];
+            cacheImages[i]={
+              name : '',
+              size: '',
+              base64: images[i],
+              isNew:false,
+            };
           }
 
           var cacheData = this.$data;
@@ -248,9 +256,10 @@
       var projectId = this.$route.query.id?this.$route.query.id:0;
       if (projectId) {
           //缓存projectInfo
-        cacheProject(projectId, this);
         this.editMode = true;
+        cacheProject(projectId, this);
       } else {
+        this.editMode = false;
         resetCache(this);
       }
     },
@@ -465,6 +474,8 @@
   }
   .fileList .item img{
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
   }
   .fileList .icon{
     position: absolute;

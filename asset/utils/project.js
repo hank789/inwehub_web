@@ -272,7 +272,7 @@ function cacheProject(projectId, obj) {
 }
 
 /**
- * 重置缓存
+ * 重置缓存(bmp模式)
  */
 function resetCache(obj)
 {
@@ -288,7 +288,31 @@ function resetCache(obj)
       }
     }
   }
+
+  var project = getCacheInfo();
+  if (project && project.basic && project.basic.editMode) {
+      var basic = {
+        project_id:null,
+        project_name:'',
+        project_type:'1',
+        project_stage:null,
+        project_stage_text:'',
+        project_description:'',
+        disableButton:true,
+        deleted_images:[],
+        editMode:false,
+        images:[],
+        loading: 1
+      };
+      if (basic) {
+        for (var i in basic) {
+          obj[i] = basic[i];
+        }
+      }
+  }
 }
+
+
 
 function clearCacheIno() {
   localEvent.clearLocalItem('ProjectInfo');
