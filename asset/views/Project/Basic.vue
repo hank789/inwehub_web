@@ -239,7 +239,7 @@
 
           this.$router.push('/project/concrete?pid='+this.project_id);
           //刷新页面；
-          //location.reload();
+          location.reload();
         });
       },
       getData(){
