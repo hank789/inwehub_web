@@ -16,7 +16,8 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目名称</label>
-            <input type="text" v-model="project_name" placeholder="输入项目名称" maxlength="60">
+            <input type="text" v-model="project_name" maxlength="60" v-if="project_name">
+            <input type="text" v-model="project_name" placeholder="输入项目名称" maxlength="60" v-else>
           </div>
         </li>
         <li class="mui-table-view-cell">
