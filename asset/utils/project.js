@@ -280,7 +280,7 @@ function resetCache(obj)
   if (info && info.basic && !info.basic.editMode) {
       clearCacheIno();
       localEvent.clearLocalItem('ProjectInfoBmp');
-      localEvent.setLocalItem('ProjectInfo', info); 
+      localEvent.setLocalItem('ProjectInfo', info);
 
     if (info.basic) {
       for (var i in info.basic) {

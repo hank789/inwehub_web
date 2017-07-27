@@ -7,7 +7,7 @@
   <div class="mui-content" id="refurbish">
   	  <ul class="projectList1" v-for="item in list">
   	  	<li>
-  	  		<span>{{item.project_name}}</span>
+  	  		<span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
   	  		<span>等待审核</span>
   	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
 			  <use xlink:href="#icon-shuru"></use>
