@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
-  <div class="mui-content">
+  <div class="mui-content" id="refurbish">
   	  <ul class="projectList1" v-for="item in list">
   	  	<li>
   	  		<span>{{item.project_name}}</span>
@@ -35,21 +35,35 @@
       }
     },
     methods: {
-//  	submit(){
-//      postRequest(`project/myList`, data).then(response => {
-//        var code = response.data;
-//        console.log(code)
-//        if (code !== 1000) {
-//          mui.alert(response.data.message);
-//          return;
-//        }
-//      
-//   });
-//  }
-    	},
-    mounted(){
-    	  
-      postRequest("project/myList", {}).then(response => {
+//  	pulldownRefresh() {
+//      setTimeout(() => {
+//        this.getPrevList();
+//      },1000);
+//    },
+//  pullupRefresh() {
+//      setTimeout(() => {
+//        this.getNextList();
+//      },1000);
+//    },  
+    getNextList() {
+        postRequest("project/myList", {bottom_id: this.bottomId, type:'1'}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          if (response.data.data.length > 0) {
+            this.asks = this.asks.concat(response.data.data);
+          }
+          this.loading = 0;
+
+          mui('#refurbish').pullRefresh().endPullupToRefresh(false);
+
+        });
+     },
+    	getdata(){
+       postRequest("project/myList", {type:'1'}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -60,7 +74,25 @@
     	      console.log(this.list)
      });
     }
-    
+    	},
+    mounted(){
+    	//请求数据；
+    	  this.getdata();
+    	  mui.init({
+        pullRefresh: {
+          container: '#refurbish',
+          down: {
+            callback: this.pulldownRefresh
+          },
+          up: {
+            contentrefresh: '正在加载...',
+            contentnomore: '没有更多了',
+            callback: this.pullupRefresh
+          }
+        }
+      });
+     
+  } 
 	}
 </script>
 
@@ -76,7 +108,9 @@
     position: fixed;
     height:100%;
     width:100%;
-    background: #ececee; 
+    background: #ececee;
+    overflow-y: auto; 
+    
   }
   .projectList1{
 	width: 100%;
@@ -89,7 +123,7 @@
 		width: 309px;
 	  	span{
 	  		&:nth-child(1){
-		  		/*width: 125px;*/
+		  		width: 125px;
 				height: 22.5px;
 				font-family: "PingFangSC";
 				font-size: 16px;
@@ -99,7 +133,7 @@
 				/*width:65px;*/
 				height: 20px;
 			    border-radius: 50px;
-				background: #a8dff7;
+				background: #03aef9;
 				font-family: "PingFangSC";
 		        font-size: 11px;
 	            text-align:center;

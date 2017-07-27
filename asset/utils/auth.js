@@ -1,4 +1,5 @@
 import localEvent from '../stores/localStorage';
+//用户浏览行为；
 import router from '../modules/index/routers/index';
 
 // 判断是否可以进入目标路由
