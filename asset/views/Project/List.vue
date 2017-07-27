@@ -1,30 +1,32 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-dark mui-bar-nav">
+    <header class="mui-bar mui-bar-dark mui-bar-nav goheader">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
-    <div class="mui-content" id="refurbish">
-      <ul class="projectList1" v-for="item in list">
-        <li>
-          <span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
+    <div class="mui-content mui-scroll-wrapper" id="refurbish">
+      <div class="mui-scroll">
+        <div class="mui-content">
+          <ul class="projectList1" v-for="item in list">
+            <li>
+              <span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
 
-
-          <span class="waiting" v-if="item.status =='1'">等待审核</span>
-          <span class="fail"  v-if="item.status =='3'">审核未通过</span>
-          <span class="pass"  v-if="item.status =='2'">审核通过</span>
-
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
-            <use xlink:href="#icon-shuru"></use>
-          </svg>
-        </li>
-        <li>
-          <span>{{item.company_represent_person_name}}</span>
-          <span></span>
-          <span>{{item.company_name}}</span>
-        </li>
-        <li>{{item.updated_at}}</li>
-      </ul>
+              <span class="waiting" v-if="item.status =='1'">等待审核</span>
+              <span class="fail"  v-if="item.status =='3'">审核未通过</span>
+              <span class="pass"  v-if="item.status =='2'">审核通过</span>
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
+                <use xlink:href="#icon-shuru"></use>
+              </svg>
+            </li>
+            <li>
+              <span>{{item.company_represent_person_name}}</span>
+              <span></span>
+              <span>{{item.company_name}}</span>
+            </li>
+            <li>{{item.updated_at}}</li>
+          </ul>
+        </div> 
+  	 </div>
     </div>
 
 
@@ -44,18 +46,17 @@
       showInwehubWebview();
     },
     methods: {
-//      pulldownRefresh() {
-//      setTimeout(() => {
-//        this.getPrevList();
-//      },1000);
-//    },
-//  pullupRefresh() {
-//      setTimeout(() => {
-//        this.getNextList();
-//      },1000);
-//    },
-      getNextList() {
-        postRequest("project/myList", {bottom_id: this.bottomId, type:'1'}).then(response => {
+
+      //下拉刷新;
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1000);
+      },
+      //下拉刷新请求的数据；
+      getPrevList(){
+        postRequest(`project/myList`, {}).then(response => {
+
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -63,26 +64,61 @@
           }
 
           if (response.data.data.length > 0) {
-            this.asks = this.asks.concat(response.data.data);
+            this.list = response.data.data;
           }
-          this.loading = 0;
+          //this.loading = 0;
+          mui('#refurbish').pullRefresh().endPulldownToRefresh(); //refresh completed
+
+
+        });
+      },
+      pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1000);
+      },
+      getNextList() {
+        postRequest("project/myList", {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          if (response.data.data.length > 0) {
+            //给请求的数据重新赋值；刷新最新的数据；
+            this.list = this.list.concat(response.data.data);
+          }
+          // this.loading = 0;
 
           mui('#refurbish').pullRefresh().endPullupToRefresh(false);
 
         });
-      },
-      getdata(){
-        postRequest("project/myList", {type:'1'}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
-
-          this.list = response.data.data;
-          console.log(this.list)
-        });
       }
+//  ,
+//  	getdata(){
+//     postRequest("project/myList", {}).then(response => {
+//        var code = response.data.code;
+//        if (code !== 1000) {
+//          mui.alert(response.data.message);
+//          return;
+//        }
+//
+//  	      this.list = response.data.data; 
+//  	      console.log(this.list)
+//   });
+//  }
+    },
+    computed: {
+      //动态计算最后一个数据的id；
+      bottomId () {
+        var length = this.list.length;
+        if (length) {
+          return this.list[length - 1].id;
+        }
+        return 0;
+      }
+
     },
     mounted(){
       //每次进入页面进行刷新；
@@ -92,22 +128,27 @@
         this.getPrevList();
       });
       //请求数据；
-      this.getdata();
       mui.init({
         pullRefresh: {
           container: '#refurbish',
           down: {
+            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
             callback: this.pulldownRefresh
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore: '没有更多了',
-            callback: this.pullupRefresh
+            contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+            callback: this.getNextList
           }
         }
       });
 
+      //加载页面请求一次；
+      this.getPrevList();
     }
+
   }
 </script>
 
@@ -129,11 +170,9 @@
     background: #f03c69;
   }
   .mui-content{
-    position: fixed;
     height:100%;
     width:100%;
     background: #ececee;
-    overflow-y: auto;
 
   }
   .projectList1{
