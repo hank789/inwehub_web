@@ -173,7 +173,7 @@ function setCacheInfo(pageName, projectObj) {
 function cacheProject(projectId, obj) {
 
   var info = localEvent.getLocalItem('ProjectInfo');
-  if (info && info.isBmp) {
+  if (info && info.basic && !info.basic.editMode) {
     localEvent.setLocalItem('ProjectInfoBmp', info);
   }
 
@@ -203,6 +203,7 @@ function cacheProject(projectId, obj) {
       project_stage_text: options.project_stage_text(projectInfo.project_stage),
       project_description: projectInfo.project_description,
       disableButton: false,
+      editMode:true,
       deleted_images: [],
       images: cacheImages,
       loading: 0
@@ -276,9 +277,10 @@ function cacheProject(projectId, obj) {
 function resetCache(obj)
 {
   var info = localEvent.getLocalItem('ProjectInfoBmp');
-  if (info && info.isBmp) {
+  if (info && info.basic && !info.basic.editMode) {
       clearCacheIno();
-      localEvent.setLocalItem('ProjectInfo', info);
+      localEvent.clearLocalItem('ProjectInfoBmp');
+      localEvent.setLocalItem('ProjectInfo', info); 
 
     if (info.basic) {
       for (var i in info.basic) {

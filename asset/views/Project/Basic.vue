@@ -99,6 +99,7 @@
         project_description:'',
         disableButton:true,
         deleted_images:[],
+        editMode:false,
         images:[],
         loading: 1
       }
@@ -248,6 +249,7 @@
       if (projectId) {
           //缓存projectInfo
         cacheProject(projectId, this);
+        this.editMode = true;
       } else {
         resetCache(this);
       }

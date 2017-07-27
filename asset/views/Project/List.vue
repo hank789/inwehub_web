@@ -9,7 +9,7 @@
   	  	<li>
   	  		<span>{{item.project_name}}</span>
   	  		<span>等待审核</span>
-  	  		<svg class="icon" aria-hidden="true">
+  	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
 			  <use xlink:href="#icon-shuru"></use>
 			</svg>
   	  	</li>
@@ -21,14 +21,14 @@
   	  	<li>{{item.updated_at}}</li>
   	  </ul>
   </div>
-   
-   
-    
+
+
+
 </div>
 </template>
 <script>
 	import {apiRequest, postRequest} from '../../utils/request';
-	export default { 
+	export default {
     data(){
       return {
       	 list:[]
@@ -44,7 +44,7 @@
 //      setTimeout(() => {
 //        this.getNextList();
 //      },1000);
-//    },  
+//    },
     getNextList() {
         postRequest("project/myList", {bottom_id: this.bottomId, type:'1'}).then(response => {
           var code = response.data.code;
@@ -69,7 +69,7 @@
             mui.alert(response.data.message);
             return;
           }
-          
+
     	      this.list = response.data.data; 
     	      console.log(this.list)
      });
@@ -91,8 +91,8 @@
           }
         }
       });
-     
-  } 
+
+  }
 	}
 </script>
 
@@ -109,8 +109,8 @@
     height:100%;
     width:100%;
     background: #ececee;
-    overflow-y: auto; 
-    
+    overflow-y: auto;
+
   }
   .projectList1{
 	width: 100%;
@@ -167,11 +167,11 @@
 	display: inline-block;
 	width: 1px;
 	height: 14px;
-	background:#c8c8c8;	
+	background:#c8c8c8;
 	margin-left: 8px;
 	margin-right: 8px;
-	margin-bottom: -2px;	
-		
+	margin-bottom: -2px;
+
 	}
   &:nth-child(3){
    	/*width: 146.5px;*/
@@ -181,9 +181,9 @@
 	color: #808080;
   	font-size: 14px;
    }
-  	
+
   }
-  
+
   }
   &:nth-child(3){
   	margin-top: 15.5px;
@@ -195,5 +195,5 @@
   }
   }
   }
-  
+
 </style>
