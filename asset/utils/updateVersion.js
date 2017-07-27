@@ -23,7 +23,17 @@ function checkUpdate(){
               } else if (is_android_force === 1 && mui.os.android){
                 mui.alert("有新的版本升级");
                 //market://details?id=io.dcloud.HelloMUI
-                plus.runtime.openURL(response_data.android_force_update_url);
+                plus.runtime.openURL(response_data.android_force_update_url,function(e) {
+                  plus.nativeUI.confirm( "很抱歉，您未安装腾讯应用宝，请安装后再更新", function(i){
+                    if ( 0==i.index ) {
+                      plus.runtime.openURL( "market://details?id=com.tencent.android.qqdownloader" );
+                    } else if ( 1==i.index ) {
+                      plus.runtime.quit();
+                    } else {
+                      plus.runtime.quit();
+                    }
+                  }, inf.title, ["立即下载","暂不下载","取　　消"] );
+                }, "com.tencent.android.qqdownloader");
               } else {
                 //下载升级包
                 downWgt(package_url);
