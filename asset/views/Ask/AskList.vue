@@ -186,14 +186,17 @@
         if (this.loading) {
           return -1;
         }
+       //判断有没有数据 0 代表隐藏   1代表显示数据；
         return this.asks.length ? 0 : 1;
       },
+     //获取请求数据第一个数据的id；
       topId () {
         if (this.asks.length) {
           return this.asks[0].id;
         }
         return 0;
       },
+     //获取请求数据最后一个数据的id；
       bottomId () {
         var length = this.asks.length;
         if (length) {
