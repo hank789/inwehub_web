@@ -246,7 +246,7 @@ function cacheProject(projectId, obj) {
       company_represent_person_title:projectInfo.company_represent_person_title,
       company_represent_person_phone:projectInfo.company_represent_person_phone,
       company_represent_person_email:projectInfo.company_represent_person_email,
-      company_billing_need:projectInfo.company_billing_need,
+      company_billing_need:projectInfo.company_billing_title?'1':'0',
       company_billing_title:projectInfo.company_billing_title,
       company_billing_bank:projectInfo.company_billing_bank,
       company_billing_account:projectInfo.company_billing_account,
