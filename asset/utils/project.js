@@ -318,7 +318,9 @@ function resetCache(obj)
   //当前是编辑模式清空
   var project = getCacheInfo();
   if (project && project.basic && project.basic.editMode) {
-    console.log('当前是编辑模式清空');
+      console.log('当前是编辑模式清空');
+      clearCacheInfo();
+
       var basic = {
         project_id:null,
         project_name:'',
@@ -356,7 +358,7 @@ function resetCache(obj)
 
 
 
-function clearCacheIno() {
+function clearCacheInfo() {
   localEvent.clearLocalItem('ProjectInfo');
 }
 
@@ -367,7 +369,7 @@ function clearCacheIno() {
 export {
   getCacheInfo,
   setCacheInfo,
-  clearCacheIno,
+  clearCacheInfo,
   resetCache,
   cacheProject,
   options,

@@ -97,7 +97,7 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
-  import {setCacheInfo, getCacheInfo, clearCacheIno} from '../../utils/project';
+  import {setCacheInfo, getCacheInfo, clearCacheInfo} from '../../utils/project';
 
   export default {
     data(){
@@ -166,7 +166,7 @@
             setCacheInfo('like', this.$data);
             this.$router.push('/project/review?id='+this.project_id);
           } else {
-            clearCacheIno();
+            clearCacheInfo();
             mui.toast('操作成功');
             this.$router.push('/project/list');
           }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav goheader">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.pushPlus('/company/my')"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
     <div class="mui-content mui-scroll-wrapper" id="refurbish">
