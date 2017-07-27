@@ -37,6 +37,7 @@ function selectFileH5(acceptType = '', callback){
           let reader = new FileReader();
           reader.onload = (e) => {
             fileInput.value = "";
+            document.body.removeChild(fileInput);
             callback(file, e.target.result);
           }
           reader.readAsDataURL(file);
