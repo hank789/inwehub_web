@@ -60,8 +60,8 @@
       </div>
       <div class="fileList">
         <div class="item" v-for="(image, index) in images"><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
-          <use xlink:href="#icon-times"></use>
-        </svg><img :src="image.base64" width="61" height="61" v-if="image.base64"/><img :src="image.url" v-if="image.url" width="61" height="61"/></div>
+          <use xlink:href="#icon-times1"></use>
+        </svg><img :id="'image_' + index" :src="image.base64"/></div>
       </div>
 
       <div class="buttonWrapper">
@@ -77,19 +77,13 @@
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import MTextarea from '../../components/MTextarea.vue';
-  import {selectFileH5} from '../../utils/uploadFile';
+  import {selectFileH5, compressImg} from '../../utils/uploadFile';
   import {setCacheInfo, getCacheInfo, cacheProject, resetCache} from '../../utils/project';
   import {selectKeyValue} from '../../utils/select';
 
 
   export default {
     data(){
-
-      var cacheData = getCacheInfo();
-      if (cacheData && cacheData.basic) {
-        return cacheData.basic;
-      }
-
       return {
         project_id:null,
         project_name:'',
@@ -99,6 +93,7 @@
         project_description:'',
         disableButton:true,
         deleted_images:[],
+        editMode:false,
         images:[],
         loading: 1
       }
@@ -133,15 +128,18 @@
             var imgInfo = {
               name : file.name,
               size: file.size,
-              base64: base64
+              base64: base64,
+              isNew:true,
             };
+            console.log(imgInfo);
+            console.log(this.images);
             this.images.push(imgInfo);
         });
       },
       delImg(index) {
           var img = this.images[index];
-          if (img.url) {
-              this.deleted_images.push(img.url);
+          if (!img.isNew) {
+              this.deleted_images.push(img.base64);
           }
           this.images.splice(index, 1);
       },
@@ -210,10 +208,12 @@
 
 
         for (var i in this.images) {
-            if (this.images[i].base64) {
-              data['image_' +i] = this.images[i].base64;
+            if (this.images[i].isNew) {
+              var compressBase64 = compressImg('image_' +i);
+              data['image_' +i] = compressBase64; //this.images[i].base64;
             }
         }
+
         postRequest(`project/step_one`, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -222,35 +222,48 @@
           }
 
           this.project_id = response.data.data.id;
-          var images = response.data.data.images;
-          var cacheImages = [];
-          for(var i in images) {
-            cacheImages[i]={};
-            cacheImages[i].url = images[i];
+          var serverImages = response.data.data.images;
+          this.images = [];
+          for(var i in serverImages) {
+            var newImage = {
+              name : '',
+              size: '',
+              base64: serverImages[i],
+              isNew:false,
+            };
+            this.images.push(newImage);
           }
 
-          var cacheData = this.$data;
-          cacheData.images = cacheImages;
-          setCacheInfo('basic', cacheData);
+          setCacheInfo('basic', this.$data);
 
           this.$router.push('/project/concrete?id='+this.project_id);
         });
+      },
+      getData(){
+        var projectId = this.$route.query.id?this.$route.query.id:0;
+        if (projectId) {
+          //缓存projectInfo
+          this.editMode = true;
+          cacheProject(projectId, this);
+        } else {
+          this.editMode = false;
+          resetCache(this);
+        }
       }
     },
     mounted(){
-
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        this.getData();
+      });
     },
     components: {
       MTextarea
     },
     created(){
-      var projectId = this.$route.query.id?this.$route.query.id:0;
-      if (projectId) {
-          //缓存projectInfo
-        cacheProject(projectId, this);
-      } else {
-        resetCache(this);
-      }
+      showInwehubWebview();
+
+      this.getData();
     },
     watch: {
       project_name: function (newMoney, oldMoney) {
@@ -267,7 +280,7 @@
       },
       images: function (newMoney, oldMoney) {
         this.isEnableButton();
-      },
+      }
     }
   };
 </script>
@@ -463,6 +476,8 @@
   }
   .fileList .item img{
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
   }
   .fileList .icon{
     position: absolute;

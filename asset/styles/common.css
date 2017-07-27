@@ -472,6 +472,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .textarea-wrapper textarea{
   font-size:14px;
   height:100%;
+  padding: 5px 10px;
 }
 
 .emptyList .mui-pull-bottom-pocket{
@@ -825,4 +826,8 @@ input.upload-file[type=file]{
   background: none !important;
   border:none !important;
   color:#03aef9 !important;
+}
+
+.colorC8{
+  color:#c8c8c8 !important;
 }

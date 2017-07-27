@@ -234,30 +234,38 @@
         }
 
       },
+      getDetail(){
+        postRequest(`project/info`, {
+          id:this.project_id
+        }).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.info = response.data.data;
+          this.loading = 0;
+        });
+      }
 
     },
     mounted(){
-
+      window.addEventListener('refreshData', (e)=>{
+        //执行刷新
+        this.getDetail();
+      });
     },
 
     created(){
+      showInwehubWebview();
+
       this.project_id = this.$route.query.id;
       if (!this.project_id) {
         mui.back();
       }
 
-      postRequest(`project/info`, {
-        id:this.project_id
-      }).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          return;
-        }
-
-        this.info = response.data.data;
-        this.loading = 0;
-      });
+      this.getDetail();
     }
   };
 </script>
@@ -447,6 +455,7 @@
 
   .section .contentWrapper table td {
     padding: 5px 0;
+    vertical-align: top;
   }
 
   .section .contentWrapper table .tdTitle {
