@@ -367,7 +367,7 @@
           }
 
           setCacheInfo('company', this.$data);
-          this.$router.push('/project/like?id='+this.project_id);
+          this.$router.push('/project/like?pid='+this.project_id);
         });
       },
       closeIndustry(index) {
@@ -447,7 +447,7 @@
 
     created(){
       this.company_represent_person_is_self = 1;
-      this.project_id = this.$route.query.id;
+      this.project_id = this.$route.query.pid;
       if (!this.project_id) {
         mui.back();
       }

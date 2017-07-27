@@ -167,7 +167,8 @@
             this.$router.push('/project/review?id='+this.project_id);
           } else {
             clearCacheIno();
-            mui.alert('发布完成!');
+            mui.toast('操作成功');
+            this.$router.push('/project/list');
           }
         });
       }
@@ -182,7 +183,7 @@
     },
 
     created(){
-      this.project_id = this.$route.query.id;
+      this.project_id = this.$route.query.pid;
       if (!this.project_id) {
         mui.back();
       }

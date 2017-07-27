@@ -1,5 +1,6 @@
 import localEvent from '../stores/localStorage';
 import {apiRequest, postRequest} from '../utils/request';
+import {selectFileH5} from '../utils/uploadFile';
 
 var options = {
   project_stage_text(project_stage) {
@@ -15,6 +16,8 @@ var options = {
         return '项目进行中，需要大牛加入';
         break;
     }
+
+    return '';
   },
   project_type_text(project_type){
     switch(parseInt(project_type)) {
@@ -25,6 +28,7 @@ var options = {
         return '持续性';
         break;
     }
+    return '';
   },
   worker_num_text(worker_num){
     switch(parseInt(worker_num)) {
@@ -50,6 +54,7 @@ var options = {
         return '不确定';
         break;
     }
+    return '';
   },
   project_cycle_text(project_cycle){
     switch(parseInt(project_cycle)) {
@@ -81,6 +86,7 @@ var options = {
         return '其他';
         break;
     }
+    return '';
   },
   billing_mode_text(billing_mode){
     switch(parseInt(billing_mode)) {
@@ -91,6 +97,7 @@ var options = {
         return '2整体打包';
         break;
     }
+    return '';
   },
   work_intensity_text(work_intensity){
     switch(parseInt(work_intensity)) {
@@ -122,6 +129,7 @@ var options = {
         return '我不确定';
         break;
     }
+    return '';
   },
   worker_level_text(worker_level){
     switch(parseInt(worker_level)) {
@@ -135,6 +143,7 @@ var options = {
         return '3资深';
         break;
     }
+    return '';
   },
   remote_work_text(remote_work){
     switch(parseInt(remote_work)) {
@@ -145,6 +154,7 @@ var options = {
         return '不接受';
         break;
     }
+    return '';
   },
 };
 
@@ -173,7 +183,8 @@ function setCacheInfo(pageName, projectObj) {
 function cacheProject(projectId, obj) {
 
   var info = localEvent.getLocalItem('ProjectInfo');
-  if (info && info.isBmp) {
+  if (info && info.basic && !info.basic.editMode) {
+    console.log('编辑模式：缓存草稿');
     localEvent.setLocalItem('ProjectInfoBmp', info);
   }
 
@@ -186,14 +197,9 @@ function cacheProject(projectId, obj) {
       return;
     }
 
-    var projectInfo = response.data.data;
+    console.log('编辑模式：请求新数据');
 
-    var images = projectInfo.images;
-    var cacheImages = [];
-    for(var i in images) {
-      cacheImages[i]={};
-      cacheImages[i].url = images[i];
-    }
+    var projectInfo = response.data.data;
 
     var basic = {
       project_id: projectInfo.project_id,
@@ -203,8 +209,8 @@ function cacheProject(projectId, obj) {
       project_stage_text: options.project_stage_text(projectInfo.project_stage),
       project_description: projectInfo.project_description,
       disableButton: false,
+      editMode:true,
       deleted_images: [],
-      images: cacheImages,
       loading: 0
     };
 
@@ -212,10 +218,23 @@ function cacheProject(projectId, obj) {
       obj[i] = basic[i];
     }
 
+    var images = projectInfo.images;
+    obj.images = [];
+    for(var i in images) {
+      var cacheImg = {
+        name : '',
+        size: '',
+        base64: images[i],
+        isNew:false,
+      };
+      obj.images.push(cacheImg);
+    }
+
     setCacheInfo('basic', basic);
 
 
     var concrete = {
+      disabledButton: false,
       worker_num: projectInfo.worker_num,
       worker_num_text: options.worker_num_text(projectInfo.worker_num),
       worker_level: projectInfo.worker_level,
@@ -229,14 +248,15 @@ function cacheProject(projectId, obj) {
       remote_work: projectInfo.remote_work,
       travel_expense: projectInfo.travel_expense,
       work_address: projectInfo.work_address,
-      disabledButton: false,
       loading: 0
-    }
+    };
+
     setCacheInfo('concrete', concrete);
 
 
     const currentUser = localEvent.getLocalItem('UserInfo');
     var company = {
+      disabledButton: false,
       company_name:projectInfo.company_name,
       company_description:projectInfo.company_description,
       company_industry_tags:projectInfo.company_industry_tags,
@@ -245,12 +265,11 @@ function cacheProject(projectId, obj) {
       company_represent_person_title:projectInfo.company_represent_person_title,
       company_represent_person_phone:projectInfo.company_represent_person_phone,
       company_represent_person_email:projectInfo.company_represent_person_email,
-      company_billing_need:projectInfo.company_billing_need,
+      company_billing_need:projectInfo.company_billing_title?'1':'0',
       company_billing_title:projectInfo.company_billing_title,
       company_billing_bank:projectInfo.company_billing_bank,
       company_billing_account:projectInfo.company_billing_account,
       company_billing_taxes:projectInfo.company_billing_taxes,
-      disabledButton: false,
       page_industry_tags_id: 'page_industry_tags',
       object_type: 'project',
       localUser:currentUser,
@@ -267,26 +286,75 @@ function cacheProject(projectId, obj) {
       loading: 0
     };
     setCacheInfo('like', like);
+
+
   });
 }
 
 /**
- * 重置缓存
+ * 重置缓存(bmp模式)
  */
 function resetCache(obj)
 {
+  //从bmp里恢复
   var info = localEvent.getLocalItem('ProjectInfoBmp');
-  if (info && info.isBmp) {
+
+  if (info && info.basic && !info.basic.editMode) {
+      console.log('从bmp里恢复');
       clearCacheIno();
+      localEvent.clearLocalItem('ProjectInfoBmp');
       localEvent.setLocalItem('ProjectInfo', info);
 
     if (info.basic) {
       for (var i in info.basic) {
+        if (i == 'images') continue;
         obj[i] = info.basic[i];
       }
+
+      obj.images = info.basic.images;
     }
   }
+
+  //当前是编辑模式清空
+  var project = getCacheInfo();
+  if (project && project.basic && project.basic.editMode) {
+    console.log('当前是编辑模式清空');
+      var basic = {
+        project_id:null,
+        project_name:'',
+        project_type:'1',
+        project_stage:null,
+        project_stage_text:'',
+        project_description:'',
+        disableButton:true,
+        deleted_images:[],
+        editMode:false,
+        images:[],
+        loading: 1
+      };
+      if (basic) {
+        for (var i in basic) {
+          if (i == 'images') continue;
+          obj[i] = basic[i];
+        }
+      }
+
+      obj.images = basic.images;
+  }
+
+  //bmp模式直接读取
+  if (project && project.basic && !project.basic.editMode) {
+      console.log('bmp模式直接读取');
+      for (var i in project.basic) {
+        if (i == 'images') continue;
+        obj[i] = project.basic[i];
+      }
+
+      obj.images = project.basic.images;
+  }
 }
+
+
 
 function clearCacheIno() {
   localEvent.clearLocalItem('ProjectInfo');

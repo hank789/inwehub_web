@@ -47,6 +47,18 @@ function selectFileH5(acceptType = '', callback){
     fileInput.click();
 }
 
+function compressImg(id)
+{
+    var image = document.getElementById(id);
+    var canvas = document.createElement("canvas");
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    canvas.getContext("2d").drawImage(image, 0, 0);
+    var result = canvas.toDataURL('image/jpeg', 0.1);
+    return result;
+}
+
 export {
-  selectFileH5
+  selectFileH5,
+  compressImg
 };
