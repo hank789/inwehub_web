@@ -16,6 +16,8 @@ var options = {
         return '项目进行中，需要大牛加入';
         break;
     }
+
+    return '';
   },
   project_type_text(project_type){
     switch(parseInt(project_type)) {
@@ -26,6 +28,7 @@ var options = {
         return '持续性';
         break;
     }
+    return '';
   },
   worker_num_text(worker_num){
     switch(parseInt(worker_num)) {
@@ -51,6 +54,7 @@ var options = {
         return '不确定';
         break;
     }
+    return '';
   },
   project_cycle_text(project_cycle){
     switch(parseInt(project_cycle)) {
@@ -82,6 +86,7 @@ var options = {
         return '其他';
         break;
     }
+    return '';
   },
   billing_mode_text(billing_mode){
     switch(parseInt(billing_mode)) {
@@ -92,6 +97,7 @@ var options = {
         return '2整体打包';
         break;
     }
+    return '';
   },
   work_intensity_text(work_intensity){
     switch(parseInt(work_intensity)) {
@@ -123,6 +129,7 @@ var options = {
         return '我不确定';
         break;
     }
+    return '';
   },
   worker_level_text(worker_level){
     switch(parseInt(worker_level)) {
@@ -136,6 +143,7 @@ var options = {
         return '3资深';
         break;
     }
+    return '';
   },
   remote_work_text(remote_work){
     switch(parseInt(remote_work)) {
@@ -146,6 +154,7 @@ var options = {
         return '不接受';
         break;
     }
+    return '';
   },
 };
 
@@ -175,6 +184,7 @@ function cacheProject(projectId, obj) {
 
   var info = localEvent.getLocalItem('ProjectInfo');
   if (info && info.basic && !info.basic.editMode) {
+    console.log('编辑模式：缓存草稿');
     localEvent.setLocalItem('ProjectInfoBmp', info);
   }
 
@@ -187,18 +197,9 @@ function cacheProject(projectId, obj) {
       return;
     }
 
-    var projectInfo = response.data.data;
+    console.log('编辑模式：请求新数据');
 
-    var images = projectInfo.images;
-    var cacheImages = [];
-    for(var i in images) {
-      cacheImages[i]={
-        name : '',
-        size: '',
-        base64: images[i],
-        isNew:false,
-      };
-    }
+    var projectInfo = response.data.data;
 
     var basic = {
       project_id: projectInfo.project_id,
@@ -217,13 +218,23 @@ function cacheProject(projectId, obj) {
       obj[i] = basic[i];
     }
 
-    obj.images = cacheImages;
-
+    var images = projectInfo.images;
+    obj.images = [];
+    for(var i in images) {
+      var cacheImg = {
+        name : '',
+        size: '',
+        base64: images[i],
+        isNew:false,
+      };
+      obj.images.push(cacheImg);
+    }
 
     setCacheInfo('basic', basic);
 
 
     var concrete = {
+      disabledButton: true,
       worker_num: projectInfo.worker_num,
       worker_num_text: options.worker_num_text(projectInfo.worker_num),
       worker_level: projectInfo.worker_level,
@@ -237,14 +248,15 @@ function cacheProject(projectId, obj) {
       remote_work: projectInfo.remote_work,
       travel_expense: projectInfo.travel_expense,
       work_address: projectInfo.work_address,
-      disabledButton: false,
       loading: 0
-    }
+    };
+
     setCacheInfo('concrete', concrete);
 
 
     const currentUser = localEvent.getLocalItem('UserInfo');
     var company = {
+      disabledButton: true,
       company_name:projectInfo.company_name,
       company_description:projectInfo.company_description,
       company_industry_tags:projectInfo.company_industry_tags,
@@ -258,7 +270,6 @@ function cacheProject(projectId, obj) {
       company_billing_bank:projectInfo.company_billing_bank,
       company_billing_account:projectInfo.company_billing_account,
       company_billing_taxes:projectInfo.company_billing_taxes,
-      disabledButton: false,
       page_industry_tags_id: 'page_industry_tags',
       object_type: 'project',
       localUser:currentUser,
