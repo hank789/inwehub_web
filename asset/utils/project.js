@@ -1,5 +1,6 @@
 import localEvent from '../stores/localStorage';
 import {apiRequest, postRequest} from '../utils/request';
+import {selectFileH5, compressImg} from '../utils/uploadFile';
 
 var options = {
   project_stage_text(project_stage) {
@@ -191,8 +192,12 @@ function cacheProject(projectId, obj) {
     var images = projectInfo.images;
     var cacheImages = [];
     for(var i in images) {
-      cacheImages[i]={};
-      cacheImages[i].url = images[i];
+      cacheImages[i]={
+        name : '',
+        size: '',
+        base64: images[i],
+        isNew:false,
+      };
     }
 
     var basic = {
@@ -212,6 +217,19 @@ function cacheProject(projectId, obj) {
     for (var i in basic) {
       obj[i] = basic[i];
     }
+
+    obj.selectImgs = () => {
+      selectFileH5('img', (file, base64) => {
+        var imgInfo = {
+          name : file.name,
+          size: file.size,
+          base64: base64,
+          isNew:true,
+        };
+
+        obj.images.push(imgInfo);
+      });
+    };
 
     setCacheInfo('basic', basic);
 
@@ -268,6 +286,8 @@ function cacheProject(projectId, obj) {
       loading: 0
     };
     setCacheInfo('like', like);
+
+
   });
 }
 

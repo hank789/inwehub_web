@@ -137,15 +137,14 @@
               base64: base64,
               isNew:true,
             };
-            console.log(imgInfo);
-            console.log(this.images);
+
             this.images.push(imgInfo);
         });
       },
       delImg(index) {
           var img = this.images[index];
-          if (img.url) {
-              this.deleted_images.push(img.url);
+          if (!img.isNew) {
+              this.deleted_images.push(img.base64);
           }
           this.images.splice(index, 1);
       },
