@@ -60,7 +60,7 @@
       </div>
       <div class="fileList">
         <div class="item" v-for="(image, index) in images"><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
-          <use xlink:href="#icon-times"></use>
+          <use xlink:href="#icon-times1"></use>
         </svg><img :id="'image_' + index" :src="image.base64"/></div>
       </div>
 
@@ -84,12 +84,6 @@
 
   export default {
     data(){
-
-      var cacheData = getCacheInfo();
-      if (cacheData && cacheData.basic) {
-        return cacheData.basic;
-      }
-
       return {
         project_id:null,
         project_name:'',
@@ -137,7 +131,8 @@
               base64: base64,
               isNew:true,
             };
-
+            console.log(imgInfo);
+            console.log(this.images);
             this.images.push(imgInfo);
         });
       },
@@ -218,6 +213,7 @@
               data['image_' +i] = compressBase64; //this.images[i].base64;
             }
         }
+
         postRequest(`project/step_one`, data).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -226,20 +222,19 @@
           }
 
           this.project_id = response.data.data.id;
-          var images = response.data.data.images;
-          var cacheImages = [];
-          for(var i in images) {
-            cacheImages[i]={
+          var serverImages = response.data.data.images;
+          this.images = [];
+          for(var i in serverImages) {
+            var newImage = {
               name : '',
               size: '',
-              base64: images[i],
+              base64: serverImages[i],
               isNew:false,
             };
+            this.images.push(newImage);
           }
 
-          var cacheData = this.$data;
-          cacheData.images = cacheImages;
-          setCacheInfo('basic', cacheData);
+          setCacheInfo('basic', this.$data);
 
           this.$router.push('/project/concrete?id='+this.project_id);
         });
@@ -285,7 +280,7 @@
       },
       images: function (newMoney, oldMoney) {
         this.isEnableButton();
-      },
+      }
     }
   };
 </script>

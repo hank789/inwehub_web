@@ -1,6 +1,6 @@
 import localEvent from '../stores/localStorage';
 import {apiRequest, postRequest} from '../utils/request';
-import {selectFileH5, compressImg} from '../utils/uploadFile';
+import {selectFileH5} from '../utils/uploadFile';
 
 var options = {
   project_stage_text(project_stage) {
@@ -210,7 +210,6 @@ function cacheProject(projectId, obj) {
       disableButton: false,
       editMode:true,
       deleted_images: [],
-      images: cacheImages,
       loading: 0
     };
 
@@ -218,18 +217,8 @@ function cacheProject(projectId, obj) {
       obj[i] = basic[i];
     }
 
-    obj.selectImgs = () => {
-      selectFileH5('img', (file, base64) => {
-        var imgInfo = {
-          name : file.name,
-          size: file.size,
-          base64: base64,
-          isNew:true,
-        };
+    obj.images = cacheImages;
 
-        obj.images.push(imgInfo);
-      });
-    };
 
     setCacheInfo('basic', basic);
 
@@ -296,21 +285,29 @@ function cacheProject(projectId, obj) {
  */
 function resetCache(obj)
 {
+  //从bmp里恢复
   var info = localEvent.getLocalItem('ProjectInfoBmp');
+
   if (info && info.basic && !info.basic.editMode) {
+      console.log('从bmp里恢复');
       clearCacheIno();
       localEvent.clearLocalItem('ProjectInfoBmp');
       localEvent.setLocalItem('ProjectInfo', info);
 
     if (info.basic) {
       for (var i in info.basic) {
+        if (i == 'images') continue;
         obj[i] = info.basic[i];
       }
+
+      obj.images = info.basic.images;
     }
   }
 
+  //当前是编辑模式清空
   var project = getCacheInfo();
   if (project && project.basic && project.basic.editMode) {
+    console.log('当前是编辑模式清空');
       var basic = {
         project_id:null,
         project_name:'',
@@ -326,9 +323,23 @@ function resetCache(obj)
       };
       if (basic) {
         for (var i in basic) {
+          if (i == 'images') continue;
           obj[i] = basic[i];
         }
       }
+
+      obj.images = basic.images;
+  }
+
+  //bmp模式直接读取
+  if (project && project.basic && !project.basic.editMode) {
+      console.log('bmp模式直接读取');
+      for (var i in project.basic) {
+        if (i == 'images') continue;
+        obj[i] = project.basic[i];
+      }
+
+      obj.images = project.basic.images;
   }
 }
 
