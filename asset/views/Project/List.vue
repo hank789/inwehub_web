@@ -4,8 +4,23 @@
       <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.push('/company/my')"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
-    <div class="mui-content mui-scroll-wrapper" id="refurbish">
-      <div class="mui-scroll">
+    
+   
+    
+    
+    <div class="mui-content mui-scroll-wrapper" id="refurbish" >
+    	  
+    	  <div class="nocontent"v-if="nothing == 1">
+    	  	<div class="Logo">
+    	  	  <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
+                <use xlink:href="#icon-zanwushuju"></use>
+          </svg> 
+          <p>暂时还没有数据呀～</p>
+         </div>
+    	  </div>
+    	
+    	
+      <div class="mui-scroll" v-show="nothing == 0">
         <div class="mui-content">
           <ul class="projectList1" v-for="item in list">
             <li>
@@ -38,7 +53,7 @@
   export default {
     data(){
       return {
-        list:[]
+      list:[]
       }
     },
     created(){
@@ -117,7 +132,11 @@
           return this.list[length - 1].id;
         }
         return 0;
-      }
+      },
+      //有无数据；
+       nothing () {
+        return this.list.length ? 0 : 1;
+      },
 
     },
     mounted(){
@@ -153,6 +172,40 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+.nocontent{
+  	width: 100%;
+  	height: 100%;
+  	background: #ffffff;
+  	position: relative;
+  	.Logo{
+  		width: 205px;
+  		height: 122px;
+  		position: absolute;
+  		left: 0;
+  		right: 0;
+  		top: 0;
+  		bottom: 0;
+  		margin: auto;
+  		 svg{
+  		 	width: 90px;
+  		 	height:65px ;
+  		 	display: block;
+  		 	margin: 0 auto;
+  		 	
+  		 }
+  		 p{
+  		 	width: 205px;
+			height: 24px;
+			font-family: "PingFangSC";
+			font-size:14px;
+			line-height: 24px;
+			text-align: center;
+			color: #808080;
+			margin-top: 12px;
+  		 }
+  	}
+  }
+
   ul {
     padding: 0;
     margin: 0;
@@ -169,6 +222,7 @@
   .fail{
     background: #f03c69;
   }
+  
   .mui-content{
     height:100%;
     width:100%;
