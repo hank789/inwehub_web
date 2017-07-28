@@ -1,7 +1,7 @@
 <template>
 <div>
   <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
     <h1 class="mui-title">InweHub企业版</h1>
   </header>
 
