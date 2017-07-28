@@ -340,11 +340,10 @@
   }
 
   .companyForm input{
-    width:61% !important;
+    width:69% !important;
     text-align: right;
     font-size:14px;
     padding-right: 0;
-
   }
 
   .companyForm .mui-table-view-cell{
