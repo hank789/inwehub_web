@@ -110,7 +110,7 @@
 //  }
     },
     computed: {
-      //动态计算最后一个数据的id；
+      //动态计算最后一个数据的id
       bottomId () {
         var length = this.list.length;
         if (length) {

@@ -21,6 +21,7 @@ function selectTime (options, callback) {
  * @param options
  * @param callback (value, key)
  */
+//调用系统的选择框；
 function selectKeyValue(defaultValue, options, callback) {
 
   var Picker = new mui.PopPicker();
