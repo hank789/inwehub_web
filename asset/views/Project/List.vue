@@ -4,32 +4,32 @@
       <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.push('/company/my')"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
-    
-   
-    
-    
+
+
+
+
     <div class="mui-content mui-scroll-wrapper" id="refurbish" >
-    	  
+
     	  <div class="nocontent" v-if="nothing == 1">
     	  	<div class="Logo">
     	  	  <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
                 <use xlink:href="#icon-zanwushuju"></use>
-          </svg> 
+          </svg>
           <p>暂时还没有数据呀～</p>
          </div>
     	  </div>
-    	
-    	
+
+
       <div class="mui-scroll" v-show="nothing == 0">
         <div class="mui-content">
-          <ul class="projectList1" v-for="item in list">
+          <ul class="projectList1" v-for="item in list" @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">
             <li>
-              <span @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">{{item.project_name}}</span>
+              <span>{{item.project_name}}</span>
 
               <span class="waiting" v-if="item.status =='1'">等待审核</span>
               <span class="fail"  v-if="item.status =='3'">审核未通过</span>
               <span class="pass"  v-if="item.status =='2'">审核通过</span>
-              <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)" v-if="item.status !='2'">
                 <use xlink:href="#icon-shuru"></use>
               </svg>
             </li>
@@ -44,8 +44,8 @@
   	 </div>
     </div>
 
-   
-   
+
+
 
   </div>
 </template>
@@ -106,7 +106,7 @@
             //给请求的数据重新赋值；刷新最新的数据；
             this.list = this.list.concat(response.data.data);
           }
-          
+
           this.loading = 0;
 
           mui('#refurbish').pullRefresh().endPullupToRefresh(false);
@@ -197,7 +197,7 @@
   		 	height:65px ;
   		 	display: block;
   		 	margin: 0 auto;
-  		 	
+
   		 }
   		 p{
   		 	width: 205px;
@@ -228,7 +228,7 @@
   .fail{
     background: #f03c69;
   }
-  
+
   .mui-content{
     height:100%;
     width:100%;
