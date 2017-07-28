@@ -116,9 +116,7 @@
       }
     },
     computed: {
-      nothing () {
-        return false;
-      },
+
     },
     methods: {
       closeQualification(index) {

@@ -191,9 +191,6 @@
       }
     },
     computed: {
-      nothing () {
-        return false;
-      },
     },
     methods: {
       isEnableButton:function () {

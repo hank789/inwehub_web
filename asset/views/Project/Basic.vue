@@ -260,7 +260,9 @@
     mounted(){
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
-        this.getData();
+        if (this.$router.currentRoute.path === '/project/basic') {
+          this.getData();
+        }
       });
     },
     components: {
