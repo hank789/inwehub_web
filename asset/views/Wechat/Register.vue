@@ -119,7 +119,7 @@
           }
       },
       jumpToForm(){
-          window.location.href="http://cn.mikecrm.com/ovYy1u4";
+          window.location.href="https://jinshuju.net/f/bWXY8y";
       },
       checkToken(){
         let token = this.$route.query.token;
