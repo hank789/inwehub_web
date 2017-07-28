@@ -12,7 +12,7 @@
         <ul class="mui-table-view mui-table-view-chevron">
           <li class="mui-table-view-cell" v-for="(item, index) in list">
             <div class="person">
-              <div class="avatar" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid)">
+              <div class="avatar" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
                 <div class="avatarInner">
                   <img :src="item.user_avatar_url" class="avatar"/>
                 </div>

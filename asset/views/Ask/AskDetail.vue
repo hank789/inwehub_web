@@ -210,7 +210,7 @@
     methods: {
       toAnswerResume(){
         var uuid = this.ask.answers[0] ? this.ask.answers[0].uuid:0;
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&time=' + (new Date().getTime()));
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' +  '&time=' + (new Date().getTime()));
       },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
