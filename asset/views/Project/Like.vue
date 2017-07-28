@@ -150,6 +150,7 @@
           other_requirements:this.other_requirements,
           is_view_resume:this.is_view_resume,
           is_apply_request:this.is_apply_request,
+          status:isReview?0:1,
         };
         postRequest(`project/step_four`, data).then(response => {
           var code = response.data.code;

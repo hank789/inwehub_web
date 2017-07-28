@@ -104,19 +104,19 @@
             <div class="title">对接邮箱：</div>
             <div class="content">{{ info.company_represent_person_email }}</div>
           </div>
-          <div class="item">
+          <div class="item" v-show="info.company_billing_title">
             <div class="title">开票抬头：</div>
             <div class="content colorC8">{{ info.company_billing_title}}</div>
           </div>
-          <div class="item">
+          <div class="item" v-show="info.company_billing_bank">
             <div class="title">开户银行：</div>
             <div class="content colorC8">{{ info.company_billing_bank }}</div>
           </div>
-          <div class="item">
+          <div class="item" v-show="info.company_billing_account">
             <div class="title">开户账户：</div>
             <div class="content colorC8">{{ info.company_billing_account }}</div>
           </div>
-          <div class="item">
+          <div class="item" v-show="info.company_billing_taxes">
             <div class="title">纳税识别号：</div>
             <div class="content content-5 colorC8">{{ info.company_billing_taxes }}</div>
           </div>
