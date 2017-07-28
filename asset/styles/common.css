@@ -831,3 +831,5 @@ input.upload-file[type=file]{
 .colorC8{
   color:#c8c8c8 !important;
 }
+
+.schedule{position: fixed;}
