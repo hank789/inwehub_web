@@ -10,7 +10,7 @@
     
     <div class="mui-content mui-scroll-wrapper" id="refurbish" >
     	  
-    	  <div class="nocontent"v-if="nothing == 1">
+    	  <div class="nocontent" v-if="nothing == 1">
     	  	<div class="Logo">
     	  	  <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/project/basic?id=' + item.id)">
                 <use xlink:href="#icon-zanwushuju"></use>
@@ -44,7 +44,8 @@
   	 </div>
     </div>
 
-
+   
+   
 
   </div>
 </template>
@@ -53,7 +54,8 @@
   export default {
     data(){
       return {
-      list:[]
+      list:[],
+      loading: true
       }
     },
     created(){
@@ -79,9 +81,9 @@
           }
 
           if (response.data.data.length > 0) {
-            this.list = response.data.data;
+          	this.list = response.data.data;
           }
-          //this.loading = 0;
+          this.loading = 0;
           mui('#refurbish').pullRefresh().endPulldownToRefresh(); //refresh completed
 
 
@@ -104,7 +106,8 @@
             //给请求的数据重新赋值；刷新最新的数据；
             this.list = this.list.concat(response.data.data);
           }
-          // this.loading = 0;
+          
+          this.loading = 0;
 
           mui('#refurbish').pullRefresh().endPullupToRefresh(false);
 
@@ -134,7 +137,10 @@
         return 0;
       },
       //有无数据；
-       nothing () {
+      nothing () {
+       	 if (this.loading) {
+            return -1;
+         }
         return this.list.length ? 0 : 1;
       },
 
