@@ -301,7 +301,7 @@ function resetCache(obj)
 
   if (info && info.basic && !info.basic.editMode) {
       console.log('从bmp里恢复');
-      clearCacheIno();
+      clearCacheInfo();
       localEvent.clearLocalItem('ProjectInfoBmp');
       localEvent.setLocalItem('ProjectInfo', info);
 
