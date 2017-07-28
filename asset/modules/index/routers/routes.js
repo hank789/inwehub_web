@@ -792,6 +792,69 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 项目-项目概况
+    path: '/project/basic',
+    meta: {
+      title: '项目概括',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Basic.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 项目-具体需求
+    path: '/project/concrete',
+    meta: {
+      title: '具体需求',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Concrete.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 项目-偏好设置
+    path: '/project/like',
+    meta: {
+      title: '偏好设置',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Like.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 项目-企业信息
+    path: '/project/company',
+    meta: {
+      title: '企业信息',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/Company.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+
+  { // 项目-需求管理
+    path: '/project/list',
+    meta: {
+      title: '需求管理',
+      wechatHideHeader:true
+    },
+    component: require('../../../views/Project/List.vue'),
+  },
+  { // 项目-预览
+    path: '/project/review',
+    meta: {
+      title: '',
+    },
+    component: require('../../../views/Project/Review.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // protocol/register
     path: '/protocol/register',
     meta: {

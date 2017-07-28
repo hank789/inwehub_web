@@ -67,12 +67,12 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       getPrevList(){
 
@@ -102,12 +102,7 @@
             this.list = this.list.concat(response.data.data);
           }
           this.loading = 0;
-
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       },
     },
@@ -142,12 +137,12 @@
             callback: this.pulldownRefresh
           },
           up: {
-            auto:true,
             contentrefresh: '正在加载...',
             callback: this.pullupRefresh
           }
         }
       });
+      this.getPrevList();
     }
   }
 

@@ -86,8 +86,10 @@ All Rights Reserved</div>
            return false;
         }
       },
+      //清除缓存；
       clearCache(){
         localEvent.setLocalItem('lauchFlag', {showGuide: false});
+        //调用系统toast;
         mui.toast('清除成功');
       },
       clearUserCache(){
@@ -124,7 +126,9 @@ All Rights Reserved</div>
             if (mui.os.ios) {
               plus.runtime.openURL(this.ios_market_url);
             } else if (mui.os.android) {
-              location.href = this.android_market_url;
+              plus.runtime.openURL(this.android_market_url,function(e) {
+                mui.alert("很抱歉，您未安装腾讯应用宝，暂时无法评分，感谢支持");
+              }, "com.tencent.android.qqdownloader");
             } else {
               location.href = this.ios_market_url;
             }

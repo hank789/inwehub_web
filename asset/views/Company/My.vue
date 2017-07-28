@@ -1,7 +1,7 @@
 <template>
 <div>
   <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
     <h1 class="mui-title">InweHub企业版</h1>
   </header>
 
@@ -101,6 +101,8 @@
              this.$router.push('/company/help');
           } else if (this.user.info.company_status == 1) {
             this.$router.push('/company/success?type=waiting');
+          } else {
+            this.$router.pushPlus('/project/basic');
           }
       },
       goRequirement(){
@@ -108,6 +110,8 @@
           this.$router.push('/company/help');
         } else if (this.user.info.company_status == 1) {
           this.$router.push('/company/success?type=waiting');
+        } else {
+          this.$router.push('/project/list');
         }
       },
       nothing(){

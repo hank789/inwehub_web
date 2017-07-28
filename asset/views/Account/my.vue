@@ -6,7 +6,7 @@
       <h1 class="mui-title">我的</h1>
       <a class="mui-icon myicon myicon-setup mui-pull-right" @tap.stop.prevent="$router.pushPlus('/setting')"></a>
     </header>
-
+     
     <div class="mui-content">
 
 

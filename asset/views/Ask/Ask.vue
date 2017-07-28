@@ -5,7 +5,7 @@
 
       </button>
       <h1 class="mui-title">提问</h1>
-      <a @tap.stop.prevent="$router.push('/help/ask')"
+      <a @tap.stop.prevent="$router.pushPlus('/help/ask')"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">帮助</a>
     </header>
 

@@ -99,23 +99,20 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       getPrevList(){
-
         postRequest(`account/money_log`, {top_id: this.topId}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
           }
-
-
 
           if (response.data.data.length > 0) {
             this.list = response.data.data.concat(this.list);
@@ -137,11 +134,7 @@
           }
           this.loading = 0;
 
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       },
       getStates(item){

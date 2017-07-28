@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import localEvent from '../../../stores/localStorage';
+//统计用户的浏览行为;
 import ga from 'vue-ga';
 
 VueRouter.prototype.goBack = function () {

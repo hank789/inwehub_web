@@ -98,12 +98,12 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       getStatusText(code){
           switch (code) {
@@ -149,7 +149,6 @@
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#pullrefresh').pullRefresh().refresh(true);
 
         });
       },
@@ -166,11 +165,8 @@
           }
           this.loading = 0;
 
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+
         });
       },
       isFromDetail(){

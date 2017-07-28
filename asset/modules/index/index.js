@@ -1,34 +1,43 @@
 import "../../js/mui"
 import Vue from 'vue';
 
+//Vuejs 单页应用在iOS系统下部分APP的webview中 标题不能通过 document.title = xxx 的方式修改;
 import VueWechatTitle from 'vue-wechat-title';
+// vue 使用时间的插件；
 import TimeAgo from 'vue-timeago';
+
 import router from './routers/index';
 
 // import VueLazyloadImg from 'vue-lazyload-img';
 //import VueLazyload from 'vue-lazyload';
 
+ //vuex 状态管理器；
 import store from './../../stores/store';
+//主体的组件；
 import App from './App';
 
+////检查错误信息插件
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
 var sentry_url = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478';
 if (process.env.NODE_ENV === 'production') {
-  sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
+sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
 }
 Raven
-  .config(sentry_url)
-  .addPlugin(RavenVue, Vue)
-  .install();
+.config(sentry_url)
+.addPlugin(RavenVue, Vue)
+.install();
 
+//正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';
+//vue 评分插件；
 import StarRating from './../../components/star-rating/star-rating';
 
 Vue.component('star-rating', StarRating);
 window.loading_gif = loading_gif;
 
+ //mui的插件；
 import './../../styles/mui.css';
 import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';

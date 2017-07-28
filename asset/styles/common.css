@@ -469,6 +469,12 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 
 }
 
+.textarea-wrapper textarea{
+  font-size:14px;
+  height:100%;
+  padding: 5px 10px;
+}
+
 .emptyList .mui-pull-bottom-pocket{
   display: none !important;
 }
@@ -724,3 +730,106 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 input.upload-avatar[type=file]{
   display: none;
 }
+
+input.upload-file[type=file]{
+  display: none;
+}
+
+/* mui.消息通知 */
+.mui-popup-input input{
+  border:1px solid #dcdcdc !important;
+  border-radius: 5px !important;
+  height:40px !important;
+  line-height: 40px !important;
+}
+
+
+.mui-picker{
+  background-color: #fff !important;
+}
+
+.mui-pciker-list li.highlight{
+  color:#444 !important;
+}
+
+.mui-pciker-rule-ft{
+  border:none !important;
+  position: relative;
+}
+
+.mui-pciker-rule-ft:before{
+  position: absolute;
+  top: 0;
+  left: 15px;
+  right:15px;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #dcdcdc;
+}
+
+.mui-pciker-rule-ft:after{
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right:15px;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #dcdcdc;
+}
+
+.mui-poppicker {
+  background-color: #fff !important;
+}
+.mui-poppicker-body{
+  border-top:1px solid #dcdcdc !important;
+}
+
+.mui-popup-title + .mui-popup-text{
+  font-size:16px !important;
+  color:#444;
+}
+.mui-popup-inner {
+  padding: 23px 15px 30px 15px !important;
+}
+.mui-poppicker-header .mui-btn{
+  border:none !important;
+  font-size:16px !important;
+  color:#808080 !important;
+}
+.mui-poppicker-btn-ok{
+  background: none !important;
+  border:none !important;
+  color:#03aef9 !important;
+}
+.mui-poppicker-header .mui-btn.mui-poppicker-btn-ok{
+  color:#03aef9 !important;
+}
+
+.mui-dtpicker-header button{
+  border:none !important;
+  font-size:16px !important;
+  color:#808080 !important;
+}
+
+.mui-dtpicker{
+  background: #fff !important;
+}
+.mui-dtpicker-title h5{
+  background: #fff !important;
+}
+
+.mui-dtpicker-header button:last-child{
+  background: none !important;
+  border:none !important;
+  color:#03aef9 !important;
+}
+
+.colorC8{
+  color:#c8c8c8 !important;
+}
+
+.schedule{position: fixed;}

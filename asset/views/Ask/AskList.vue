@@ -101,12 +101,12 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       getStatusText(code){
           switch (code) {
@@ -152,7 +152,6 @@
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#pullrefresh').pullRefresh().refresh(true);
 
         });
       },
@@ -169,11 +168,8 @@
           }
           this.loading = 0;
 
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+
         });
       },
       isFromDetail(){
@@ -190,14 +186,17 @@
         if (this.loading) {
           return -1;
         }
+       //判断有没有数据 0 代表隐藏   1代表显示数据；
         return this.asks.length ? 0 : 1;
       },
+     //获取请求数据第一个数据的id；
       topId () {
         if (this.asks.length) {
           return this.asks[0].id;
         }
         return 0;
       },
+     //获取请求数据最后一个数据的id；
       bottomId () {
         var length = this.asks.length;
         if (length) {

@@ -32,7 +32,7 @@
                     <span class="username">{{ getType(task)}}</span>
                     <div>
 
-
+                      <!--对时间状态的判断-->
                       <span class="time" v-if="startCountdown(task)">倒计时<count-down :start-time="currentTime"
                                                                                     :end-time="getEndTime(task)"
                                                                                     :dayTxt="':'" :hourTxt="':'"
@@ -43,8 +43,8 @@
 
                       <span class="time" v-else><b v-show="isTimeout(task)">已超时</b><timeago
                         :since="timeago(task.created_at)" :auto-update="60"></timeago></span>
-
-                      <span class="mui-badge mui-badge-danger" v-if="task.priority =='高'">优先级 高</span>
+                      <!-- 判断task.priority的值，改变span的样式；-->
+                      <span class="mui-badge mui-badge-danger"  v-if="task.priority =='高'">优先级 高</span>
                       <span class="mui-badge mui-badge-warning" v-if="task.priority =='中'">优先级 中</span>
                       <span class="mui-badge mui-badge-warning" v-if="task.priority =='低'">优先级 低</span>
                     </div>
@@ -144,11 +144,12 @@
         console.log('refresh-taskList');
         this.initPullRefresh();
       },
+      //判断是否超时；
       isTimeout(task){
         if (!task.deadline) {
           return false;
         }
-
+       
         var endtime = this.getEndTime(task);
         var currentTime = (new Date()).getTime() / 1000;
         if (endtime < currentTime) {
@@ -165,6 +166,7 @@
         }
         return true;
       },
+      //对获取的时间做的处理;
       getEndTime(task){
         var deadline = task.deadline;
         if (deadline) {
@@ -172,9 +174,11 @@
         }
         return null;
       },
+      //对后台的数据进行拼接；
       getType(task){
         return task.task_type_description + '任务-' + task.status_description;
       },
+      //数据列表的刷新 加载的操作；
       initPullRefresh(){
         mui.init({
           pullRefresh: {
@@ -189,9 +193,11 @@
             }
           }
         });
+        //刷新页面时自动加载； 默认10条数据；
         this.getPrevList();
 
       },
+      //跳转时判断类型。1为提问  2是回答
       goDetail(task)
       {
         var id = task.object_id;
@@ -201,43 +207,45 @@
           this.$router.pushPlus('/ask/' + id)
         }
       },
+      //下拉刷新时的延时操作；
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
-
+      //下拉加载时的延时操作；
       pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
-      },
+      //时间处理；
+      timeago(time) {                                              
+        let newDate = new Date();                                  
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));      
+        return newDate;                                            
+      },                                                           
+      //下拉刷新具体执行的逻辑处理；
       getPrevList(){
         postRequest(`task/myList`, {}).then(response => {
           var code = response.data.code;
+          //如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
           }
-
+            //请求成功的操作
           if (response.data.data.list) {
             this.tasks = response.data.data.list;
           }
+          //没有数据的显示框不显示；
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#pullrefresh').pullRefresh().refresh(true);
-
+           //向父组件传递参数；
           this.$emit('countChange', response.data.data.total);
         });
-
-
-
       },
+      //下拉刷新的具体实现；
       getNextList() {
         postRequest(`task/myList`, {bottom_id: this.bottomId}).then(response => {
           var code = response.data.code;
@@ -251,12 +259,8 @@
           }
 
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
 
-          if (response.data.data.list.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
         });
       },
       isFromDetail(){

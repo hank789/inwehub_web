@@ -157,12 +157,12 @@
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
-        },1500);
+        },1000);
       },
      pullupRefresh() {
         setTimeout(() => {
           this.getNextList();
-        },1500);
+        },1000);
       },
       timeago(time) {
         let newDate = new Date();
@@ -183,7 +183,6 @@
           }
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#pullrefresh').pullRefresh().refresh(true);
 
         });
       },
@@ -200,12 +199,8 @@
             this.answers = this.answers.concat(response.data.data);
           }
           this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
 
-          if (response.data.data.length < 10) {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-          } else {
-            mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-          }
         });
       },
       isFromDetail(){
