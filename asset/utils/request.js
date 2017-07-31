@@ -96,7 +96,7 @@ export function apiRequest (url, data, showWaiting = true) {
 }
 
 //对后端数据进行请求；（showWaiting = true 加载gif）
-export function postRequest (url, data, showWaiting = true) {
+export function postRequest (url, data, showWaiting = true, options = {}) {
   if (showWaiting){
     if (mui.os.plus){
       mui.plusReady(() => {
@@ -110,11 +110,20 @@ export function postRequest (url, data, showWaiting = true) {
   if (app_version) {
     data.current_version = app_version.version;
   }
-  return addAccessToken().post(createAPI(url), data,
-    {
-      validateStatus: status => status === 200
-    }
-  )
+
+
+
+  var config = {};
+  config.validateStatus = status => status === 200;
+
+  if (options.showUploadProgress) {
+    config.onUploadProgress = function(progressEvent) {
+      var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+      console.log(percentCompleted);
+    };
+  }
+
+  return addAccessToken().post(createAPI(url), data, config)
     .then(response => {
       if (showWaiting) {
         if (mui.os.plus){
