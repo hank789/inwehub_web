@@ -116,15 +116,17 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
   var config = {};
   config.validateStatus = status => status === 200;
 
-  if (options.showUploadProgress) {
-    config.onUploadProgress = function(progressEvent) {
-      var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-      console.log(percentCompleted);
-    };
+  if (options.onUploadProgress) {
+    config.onUploadProgress = options.onUploadProgress;
   }
 
   return addAccessToken().post(createAPI(url), data, config)
     .then(response => {
+
+      if (options.onUploadProgress) {
+           mui.closeUploadWaiting();
+      }
+
       if (showWaiting) {
         if (mui.os.plus){
           mui.plusReady(() => {
