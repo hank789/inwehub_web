@@ -220,10 +220,6 @@
           return;
         }
 
-        if (!this.company_description) {
-
-          return;
-        }
 
         if (this.company_industry_tags.length === 0) {
 
@@ -283,11 +279,7 @@
           mui.toast('请输入企业名称');
           return;
         }
-
-        if (!this.company_description) {
-          mui.toast('请输入企业简介');
-          return;
-        }
+        
 
         if (this.company_industry_tags.length === 0) {
           mui.toast('请选择行业领域');
