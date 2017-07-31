@@ -167,10 +167,6 @@
           return;
         }
 
-        if (this.images.length === 0) {
-          return;
-        }
-
         this.disableButton = false;
       },
       submit(){
@@ -194,10 +190,6 @@
           return;
         }
 
-        if (this.images.length === 0) {
-            mui.toast('请添加附件');
-            return;
-        }
          //向后端发送的值；
         var data = {
           project_id:this.project_id,
