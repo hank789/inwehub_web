@@ -7,7 +7,7 @@
 	      <div class="my-img">
 	          <img :src="avatar" class="avatar"/>
 	      </div>
-	      
+
 	      <div class="my-personal">
 	      	 <div class="my-info">
 	      	 	<span>郭大红</span>
@@ -22,15 +22,15 @@
 	      	 	<span class="share" @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
 	      	 	<i class="bot"></i>
 	      	 </div>
-	      	 
+
 	      	 <div class="my-detail">
-	      	 	<span class="grow">成长值:</span> 
+	      	 	<span class="grow">成长值:</span>
 	      	 	<span>{{user_credits }}</span>
                 <span class="integral">贡献值:</span>
                 <span>{{user_coins }}</span>
-	      	 </div> 
+	      	 </div>
 	      </div>
-	      
+
       </div>
       <div class="my-news">
 	     	<p>关注<span>{{attention}}</span></p>
@@ -38,7 +38,7 @@
 	     	<p>评分<span>{{grade}}</span></p>
 	     	<p>{{total_score}}</p>
 	  </div>
-	  
+
 	  <div class="my-progress">
 	    <span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
 	    <span>{{account_info_complete_percent}}%</span>
@@ -56,7 +56,7 @@
 				<span v-if="expert_apply_status =='2'">认证成功</span>
 				<span v-if="expert_apply_status =='3'">认证失败</span>
 			</p>
-			
+
 	  	</div>
 	  	<div @tap.stop.prevent="$router.pushPlus('/company/my')">
 	  	 <svg class="icon" aria-hidden="true">
@@ -69,12 +69,12 @@
 			<span v-if="expert_apply_status =='2'">认证成功</span>
 			<span v-if="company_apply_status =='3'">认证失败</span>
 		</p>
-		
+
 	  	</div>
 	  </div>
-	  
+
     </div>
-    
+
 
       <div class="part2">
         <a class="item" @tap.stop.prevent="$router.pushPlus('/asks')">
@@ -164,13 +164,13 @@
 			</svg>
 			<i class="bot"></i>
         </li>
-       </ul>     
+       </ul>
 
-      
+
     </div>
-    
-    
-	
+
+
+
   </div>
 </template>
 <script>
@@ -211,10 +211,18 @@
         show_my_wallet:currentUser.show_my_wallet,
         show_resume: true,
         my:"",
-        
+
       }
     },
     methods: {
+      getNumbers:function(number){
+        var html = '';
+        for(var i=0; i<number.length;i++) {
+          var num = number[i];
+          html += '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-icon-test'+num+'"></use></svg>';
+        }
+        return html;
+      },
     	getData:function(){
         postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
           var code = response.data.code;
@@ -275,7 +283,7 @@
     },
     mounted(){
       this.getToken();
-      
+
     }
   }
 
@@ -291,9 +299,9 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220,220,220);
- 	
+
  }
- 
+
  .bott{
  	position: absolute;
     right:16px;
@@ -303,7 +311,7 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220,220,220);
- 	
+
  }
 
  .my-top{
@@ -316,8 +324,8 @@
   .professor{
     width: 100%;
     height: 100px;
-  } 
-  
+  }
+
   .professor .avatar {
   	width: 69px;
   	height: 68.5px;
@@ -325,31 +333,31 @@
   	margin-top: 30.5px;
   	float: left;
   }
- 
+
  .my-personal {
    width:70%;
    height: 69px;
    margin: 30.5px 0 0 15.5px;
    float: left;
- } 
- 
+ }
+
  .my-personal .my-info{
   width: 100%;
-  height: 30px;		
+  height: 30px;
   margin-bottom:9px;
   position: relative;
  }
 
- 
+
  .my-personal .my-info span:nth-of-type(1){
  	font-family: "PingFangSC";
 	font-size: 18px;
 	font-weight: 600;
 	color: #444444;
 	margin-right: 1.5px;
-	
+
  }
- 
+
  .my-personal .my-info img{
  	width: 18px;
 	height: 18px;
@@ -358,7 +366,7 @@
  	color:rgb(7,215,253);
  	position: relative;
  }
- 
+
  .my-personal .my-info i:nth-of-type(1){
  	font-style: normal;
  	position:absolute;
@@ -368,26 +376,26 @@
 	text-align:center;
 	color:#FFFFFF;
  }
- 
+
  .my-personal .my-info svg:nth-of-type(1){
  	font-size:26px;
  	margin-bottom: -2px;
  	margin-left: -6px;
  	color:rgb(3,174,249);
  	position: relative;
- 	
- 	
+
+
  }
- 
+
  .my-personal .my-info svg:nth-of-type(2){
  	font-size:19px;
  	color:rgb(3,174,249);
  	position: absolute;
  	right:26%;
- 	
- 	
+
+
  }
- 
+
  .my-personal .my-info span:nth-of-type(2){
  	display: inline-block;
  	padding: 0;
@@ -398,14 +406,14 @@
 	text-align: center;
 	float: right;
 	color: #808080;
-    
-	
+
+
  }
- 
- 
+
+
  .my-personal .my-detail{
 	 width: 100%;
-	 height: 30px; 
+	 height: 30px;
 	 }
 
  .my-detail span:nth-of-type(1),span:nth-of-type(3){
@@ -416,13 +424,13 @@
  .my-detail span:nth-of-type(3){
  	margin-left: 3px;
  }
- 
+
  .my-detail span:nth-of-type(2),span:nth-of-type(4){
  	font-family:"PingFangSC";
 	font-size: 14px;
 	color:#fa4975;
  }
- 
+
  .my-news{
  	width: 100%;
  	height: 36px;
@@ -430,12 +438,12 @@
 	background: #ffffff;
     margin-top: 32px;
     padding-top: 10px;
-  -webkit-box-shadow:0 0 10px rgb(243,244,246);  
-  -moz-box-shadow:0 0 10px rgb(243,244,246);  
-  box-shadow:0 0 10px rgb(243,244,246);    
+  -webkit-box-shadow:0 0 10px rgb(243,244,246);
+  -moz-box-shadow:0 0 10px rgb(243,244,246);
+  box-shadow:0 0 10px rgb(243,244,246);
  }
- 
- 
+
+
  .my-news p{
  	display:inherit;
  	float: left;
@@ -448,19 +456,19 @@
 	padding: 0 10px 0 10px;
 
  }
- 
+
  .my-news p:last-child{
  	border-right:none;
  }
- 
+
  .my-news p span{
   color: #fa4975;
  }
- 
+
  .my-news p:nth-of-type(3) span{
  	color: rgb(68,68,68);
  }
- 
+
 .my-progress {
  width: 100%;
  margin-top: 20px;
@@ -474,7 +482,7 @@
 	overflow: hidden;
 	border: 0.5px solid rgb(3,174,249);
 	margin-bottom: -2px;
-	
+
 }
 .my-progress span:nth-of-type(1) i{
 	display: inline-block;
@@ -489,8 +497,8 @@
 	font-size: 12px;
 	color: #808080;
 	margin-right: 1px;
-	
-	
+
+
 }
 .my-progress span:nth-of-type(3){
 	font-family: "PingFangSC";
@@ -498,8 +506,8 @@
 	color: rgb(3,174,249);
 	float: right;
 	margin-top: 2px;
-	
-	
+
+
 }
 
 .my-apply{
@@ -535,7 +543,7 @@
 .my-apply div p{
 	margin-top: 10px;
 	margin-left:10px;
-	
+
 }
 .my-apply div p span{
  display: block;
