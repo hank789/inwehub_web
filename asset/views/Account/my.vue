@@ -217,6 +217,7 @@
     methods: {
       getNumbers:function(number){
         var html = '';
+        number = number.toString();
         for(var i=0; i<number.length;i++) {
           var num = number[i];
           html += '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
