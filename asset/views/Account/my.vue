@@ -16,10 +16,11 @@
 				<svg class="icon" aria-hidden="true">
 				  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				</svg>
-                <svg class="icon share" aria-hidden="true" @tap.stop.prevent="share">
+                <svg class="icon share" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
 				  <use xlink:href="#icon-fenxiang"></use>
 				</svg>
-	      	 	<span class="share" @tap.stop.prevent="share">分享名片</span>
+	      	 	<span class="share" @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
+	      	 	<i class="bot"></i>
 	      	 </div>
 	      	 
 	      	 <div class="my-detail">
@@ -57,9 +58,9 @@
 			</p>
 			
 	  	</div>
-	  	<div>
+	  	<div @tap.stop.prevent="$router.pushPlus('/company/my')">
 	  	 <svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+			  <use xlink:href="#icon-qiyezhanghao"></use>
 		 </svg>
 		 <p>
 		 	<span>申请企业账号</span>
@@ -77,17 +78,49 @@
 
       <div class="part2">
         <a class="item" @tap.stop.prevent="$router.pushPlus('/asks')">
-          <span class="number">{{ questions }}</span><span>我的提问</span>
+          <span class="number">
+          	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+          </span><span>我的提问</span>
         </a>
         <a class="item" @tap.stop.prevent="$router.pushPlus('/answers')">
-          <span class="number">{{ answers }}</span><span>我的回答</span>
+          <span class="number">
+          	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+          </span>
+          <span>我的回答</span>
         </a>
         <a class="item" @tap.stop.prevent="$router.pushPlus('/bid')">
-          <span class="number">0</span><span>我的竞标</span>
+          <span class="number">
+          	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+          </span>
+          <span>我的竞标</span>
         </a>
         <a  class="item"  @tap.stop.prevent="$router.pushPlus('/company/my')">
-          <span class="number">{{ projects }}</span><span>我的项目</span>
+          <span class="number">
+          	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-icon-test"></use>
+			</svg>
+          </span>
+          <span>我的项目</span>
         </a>
+        <i class="bott"></i>
       </div>
 
        <ul class="my-option">
@@ -99,6 +132,7 @@
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-chakangengduojiantou"></use>
 			</svg>
+			<i class="bot"></i>
         </li>
        	<li  @tap.stop.prevent="$router.pushPlus('/collect')">
        		<svg class="icon" aria-hidden="true">
@@ -108,6 +142,7 @@
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-chakangengduojiantou"></use>
 			</svg>
+			<i class="bot"></i>
         </li>
        	<li @tap.stop.prevent="$router.pushPlus('/feedback')">
        		<svg class="icon" aria-hidden="true">
@@ -117,6 +152,7 @@
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-chakangengduojiantou"></use>
 			</svg>
+			<i class="bot"></i>
         </li>
        	<li @tap.stop.prevent="$router.pushPlus('/setting')">
        		<svg class="icon" aria-hidden="true">
@@ -126,24 +162,13 @@
 			<svg class="icon" aria-hidden="true">
 			 <use xlink:href="#icon-chakangengduojiantou"></use>
 			</svg>
+			<i class="bot"></i>
         </li>
        </ul>     
 
       
     </div>
     
-     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
-          <div class="title">分享到</div>
-          <div class="more">
-               <div class="single" id="wechatShareBtn">
-                   <img src="../../statics/images/wechat_2x.png"/>
-               </div>
-              <div class="single" id="wechatShareBtn2">
-                <img src="../../statics/images/pengyouquan.png"/>
-              </div>
-
-          </div>
-      </div>
     
 	
   </div>
@@ -250,7 +275,6 @@
     },
     mounted(){
       this.getToken();
-      console.log(localEvent.getLocalItem('UserInfoReal').info.company_status)
       
     }
   }
@@ -258,6 +282,30 @@
 </script>
 
 <style  lang="less" rel="stylesheet/less"  scoped>
+.bot{
+ 	position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220,220,220);
+ 	
+ }
+ 
+ .bott{
+ 	position: absolute;
+    right:16px;
+    bottom: 0;
+    left: 16px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220,220,220);
+ 	
+ }
+
  .my-top{
  	width: 100%;
  	height: 310px;
@@ -287,9 +335,9 @@
  
  .my-personal .my-info{
   width: 100%;
-  height: 30px;	
-  border-bottom:1.5px solid rgb(220,220,220);	
+  height: 30px;		
   margin-bottom:9px;
+  position: relative;
  }
 
  
@@ -303,27 +351,27 @@
  }
  
  .my-personal .my-info img{
- 	width: 17px;
-	height: 17px;
+ 	width: 18px;
+	height: 18px;
  	margin-bottom:-1px;
  	margin-left: 2px;
  	color:rgb(7,215,253);
  	position: relative;
  }
  
- .my-personal .my-info i{
+ .my-personal .my-info i:nth-of-type(1){
  	font-style: normal;
  	position:absolute;
- 	left:169px;
+ 	left:68px;
  	z-index: 99;
  	font-size: 10px;
 	text-align:center;
-	color: #ffffff;
+	color:#FFFFFF;
  }
  
  .my-personal .my-info svg:nth-of-type(1){
  	font-size:26px;
- 	margin-bottom: -3px;
+ 	margin-bottom: -2px;
  	margin-left: -6px;
  	color:rgb(3,174,249);
  	position: relative;
@@ -335,7 +383,7 @@
  	font-size:19px;
  	color:rgb(3,174,249);
  	position: absolute;
- 	right:24%;
+ 	right:26%;
  	
  	
  }
@@ -475,6 +523,15 @@
 	color: rgb(3,174,249);
 	float: left;
 }
+
+.my-apply div:nth-of-type(2) svg{
+	margin-top: 13px;
+	margin-left: 10px;
+	font-size: 32px;
+	color: rgb(3,174,249);
+	float: left;
+}
+
 .my-apply div p{
 	margin-top: 10px;
 	margin-left:10px;
@@ -530,10 +587,11 @@
 
 
   .part2 {
-    height: 60px;
+    height: 70px;
     text-align: center;
     background: #fff;
     margin-top: 10px;
+    position: relative;
   }
 
   .part2 .item {
@@ -542,15 +600,20 @@
     text-align: center;
     color: #777;
   }
+ .part2 .item span{
+ 	display: block;
+ 	font-size: 12px;
+ }
 
-  .part2 .item .number {
-    padding-top: 10px;
-    color: #161616;
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
+.part2 .item .number svg{
+	margin-top: 10px;
+	margin-bottom: 7px;
+	font-size: 13px;
+	color: #444444;
+}
+.part2 .item .number svg:nth-of-type(2){
+	margin-left: -8px;
+}
 .my-option{
 	width: 100%;
 	height: 237px;
@@ -567,56 +630,22 @@
 	height: 44px;
 	padding-top:12px;
 	padding-bottom: 12px;
-	border-top: 1px solid rgb(220,220,220);
+	position: relative;
 }
 
-.my-option li:last-child{
-	border-bottom: 1px solid rgb(220,220,220);
+.my-option li span {
+	margin-left: 10px;
 }
+
+
 
 .my-option li svg:nth-of-type(1){
 	font-size: 22px;
+	margin-bottom: -3px;
 }
 .my-option li svg:nth-of-type(2){
 	float: right;
 }
 
- #shareShowWrapper{
-    position: absolute;
-    right:0;
-    top:0;
-  }
-   #shareShowWrapper .icon{
-        color:#fff;
-        position: absolute;
-        right:15px;
-        top:10px;
-        font-size: 70px;
-    }
 
-.shareWrapper {
-      .title{
-        background: #ececee;
-        text-align: center;
-        font-size:14px;
-        padding:12px 0;
-      }
-
-    .more{
-      background: #fff;
-      padding:10px;
-
-      .single{
-        width:55px;
-        height:55px;
-        margin:0 10px;
-        display: inline-block;
-
-        img{
-          width:100%;
-          height:100%;
-        }
-      }
-    }
-  }
 </style>
