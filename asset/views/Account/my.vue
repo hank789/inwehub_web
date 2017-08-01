@@ -124,7 +124,7 @@
       </div>
 
        <ul class="my-option">
-       	<li>
+       	<li @tap.stop.prevent="$router.pushPlus('/my/focus')">
        		<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-wodeguanzhu"></use>
 			</svg>
