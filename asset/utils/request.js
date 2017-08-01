@@ -96,7 +96,7 @@ export function apiRequest (url, data, showWaiting = true) {
 }
 
 //对后端数据进行请求；（showWaiting = true 加载gif）
-export function postRequest (url, data, showWaiting = true) {
+export function postRequest (url, data, showWaiting = true, options = {}) {
   if (showWaiting){
     if (mui.os.plus){
       mui.plusReady(() => {
@@ -110,12 +110,23 @@ export function postRequest (url, data, showWaiting = true) {
   if (app_version) {
     data.current_version = app_version.version;
   }
-  return addAccessToken().post(createAPI(url), data,
-    {
-      validateStatus: status => status === 200
-    }
-  )
+
+
+
+  var config = {};
+  config.validateStatus = status => status === 200;
+
+  if (options.onUploadProgress) {
+    config.onUploadProgress = options.onUploadProgress;
+  }
+
+  return addAccessToken().post(createAPI(url), data, config)
     .then(response => {
+
+      if (options.onUploadProgress) {
+           mui.closeUploadWaiting();
+      }
+
       if (showWaiting) {
         if (mui.os.plus){
           mui.plusReady(() => {
@@ -147,6 +158,10 @@ export function postRequest (url, data, showWaiting = true) {
         } else {
           mui.closeWaiting();
         }
+      }
+
+      if (options.onUploadProgress) {
+        mui.closeUploadWaiting();
       }
       return {data:{message: '网络状况堪忧', code:0}};
     })
