@@ -219,7 +219,7 @@
         var html = '';
         for(var i=0; i<number.length;i++) {
           var num = number[i];
-          html += '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-icon-test'+num+'"></use></svg>';
+          html += '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
         }
         return html;
       },
