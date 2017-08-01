@@ -32,15 +32,15 @@
 	      
       </div>
       <div class="my-news">
-	     	<p>关注<span>1</span></p>
-	     	<p>咨询<span>2</span></p>
-	     	<p>评分<span>3</span></p>
-	     	<p>综合评分暂无</p>
+	     	<p>关注<span>{{attention}}</span></p>
+	     	<p>咨询<span>{{advisory}}</span></p>
+	     	<p>评分<span>{{grade}}</span></p>
+	     	<p>{{total_score}}</p>
 	  </div>
 	  
 	  <div class="my-progress">
-	    <span><i></i></span>
-	    <span>72%</span>
+	    <span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
+	    <span>{{account_info_complete_percent}}%</span>
 	    <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
 	  </div>
 	  <div class="my-apply">
@@ -50,7 +50,10 @@
 			</svg>
 			<p>
 				<span>申请专家认证</span>
-				<span>专家已认证</span>
+				<span v-if="expert_apply_status =='0'">未申请</span>
+				<span v-if="expert_apply_status =='1'">认证审核中</span>
+				<span v-if="expert_apply_status =='2'">认证成功</span>
+				<span v-if="expert_apply_status =='3'">认证失败</span>
 			</p>
 			
 	  	</div>
@@ -59,8 +62,11 @@
 			  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 		 </svg>
 		 <p>
-			<span>申请企业账号</span>
-			<span>企业认证中</span>
+		 	<span>申请企业账号</span>
+			<span v-if="company_apply_status =='0'">未申请</span>
+			<span v-if="company_apply_status =='1'">认证审核中</span>
+			<span v-if="expert_apply_status =='2'">认证成功</span>
+			<span v-if="company_apply_status =='3'">认证失败</span>
 		</p>
 		
 	  	</div>
@@ -151,8 +157,15 @@
   export  default {
     data(){
       const currentUser = localEvent.getLocalItem('UserInfo');
+      const infomation = localEvent.getLocalItem('UserInfoReal');
 
       return {
+      	attention:infomation.info.followers,
+      	advisory:infomation.info.questions,
+      	grade:infomation.info.feedbacks,
+      	total_score:infomation.info.total_score,
+      	expert_apply_status:infomation.info.expert_apply_status,
+      	company_apply_status:infomation.info.company_status,
         im_tokenMsg: '',
         name: currentUser.name,
         phone: currentUser.phone,
@@ -172,7 +185,8 @@
         expert_level:currentUser.expert_level,
         show_my_wallet:currentUser.show_my_wallet,
         show_resume: true,
-        my:""
+        my:"",
+        
       }
     },
     methods: {
@@ -236,6 +250,8 @@
     },
     mounted(){
       this.getToken();
+      console.log(localEvent.getLocalItem('UserInfoReal').info.company_status)
+      
     }
   }
 
@@ -263,7 +279,7 @@
   }
  
  .my-personal {
-   width:75%;
+   width:70%;
    height: 69px;
    margin: 30.5px 0 0 15.5px;
    float: left;
@@ -310,22 +326,31 @@
  	margin-bottom: -3px;
  	margin-left: -6px;
  	color:rgb(3,174,249);
+ 	position: relative;
+ 	
+ 	
  }
  
  .my-personal .my-info svg:nth-of-type(2){
  	font-size:19px;
- 	margin-left:60px;
  	color:rgb(3,174,249);
- 	position: relative;
+ 	position: absolute;
+ 	right:24%;
+ 	
+ 	
  }
  
  .my-personal .my-info span:nth-of-type(2){
+ 	display: inline-block;
+ 	padding: 0;
+ 	margin: 0;
+ 	/*background: #007AFF;*/
  	font-family: "PingFangSC";
 	font-size:13px;
 	text-align: center;
+	float: right;
 	color: #808080;
-	position: absolute;
-    margin-left:8px;
+    
 	
  }
  
@@ -372,7 +397,7 @@
 	font-size: 14px;
 	color: #808080;
 	border-right: 1px solid #c8c8c8;
-	padding: 0 10px 0 15px;
+	padding: 0 10px 0 10px;
 
  }
  
@@ -384,6 +409,10 @@
   color: #fa4975;
  }
  
+ .my-news p:nth-of-type(3) span{
+ 	color: rgb(68,68,68);
+ }
+ 
 .my-progress {
  width: 100%;
  margin-top: 20px;
@@ -391,12 +420,13 @@
 
 .my-progress span:nth-of-type(1){
 	display: inline-block;
-	width: 73%;
+	width: 70%;
 	height: 12px;
 	border-radius: 50px;
 	overflow: hidden;
 	border: 0.5px solid rgb(3,174,249);
 	margin-bottom: -2px;
+	
 }
 .my-progress span:nth-of-type(1) i{
 	display: inline-block;
@@ -410,13 +440,17 @@
 	font-family: "PingFangSC";
 	font-size: 12px;
 	color: #808080;
+	margin-right: 1px;
+	
 	
 }
 .my-progress span:nth-of-type(3){
 	font-family: "PingFangSC";
 	font-size:13px;
 	color: rgb(3,174,249);
-	margin-left: 4px;
+	float: right;
+	margin-top: 2px;
+	
 	
 }
 
