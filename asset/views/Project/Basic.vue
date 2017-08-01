@@ -282,21 +282,6 @@
     created(){
       showInwehubWebview();
 
-      mui.showUploadWaiting();
-//
-     // mui.uploadWaitingValue(50);
-      var i=1;
-      var interval = setInterval(() => {
-          if (i>=100) {
-            clearInterval(interval);
-          }
-
-        mui.uploadWaitingValue(i++);
-
-      }, 100);
-
-
-
       this.getData();
     },
     watch: {

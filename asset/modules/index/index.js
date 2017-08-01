@@ -16,7 +16,7 @@ import store from './../../stores/store';
 //主体的组件；
 import App from './App';
 
-////检查错误信息插件
+//检查错误信息插件
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -42,6 +42,7 @@ import './../../styles/mui.css';
 import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/iconfont.css';
+import './../../styles/percircle.css';
 
 import './../../js/iconfont.js';
 
@@ -83,6 +84,8 @@ mui.waiting = function () {
 }
 
 
+import {bindUploadWaiting} from '../../utils/uploadProgress';
+bindUploadWaiting(mui);
 
 Vue.use(TimeAgo, {
   name: 'timeago',

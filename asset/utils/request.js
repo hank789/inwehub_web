@@ -159,6 +159,10 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
           mui.closeWaiting();
         }
       }
+
+      if (options.onUploadProgress) {
+        mui.closeUploadWaiting();
+      }
       return {data:{message: '网络状况堪忧', code:0}};
     })
 }
