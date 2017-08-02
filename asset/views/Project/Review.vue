@@ -554,6 +554,9 @@
     overflow: hidden;
   }
 
+  .section .contentWrapper .files{
+    padding-top:5px;
+  }
   .section .contentWrapper .files img {
     border: 1px solid #e5e5e5;
     border-radius: 4px;

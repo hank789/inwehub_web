@@ -102,6 +102,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+   { // 我的关注
+    path: '/my/focus',
+    component: require('../../../views/Account/focus.vue'),
+    meta: {
+      title: '我的关注',
+      wechatHideHeader:true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 个人信息
     path: '/my/info',
     component: require('../../../views/Account/info.vue'),
