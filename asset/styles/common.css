@@ -512,6 +512,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
   color: white;
   box-sizing: border-box;
   text-align: center;
+  z-index: 9999;
 }
 .mint-indicator-text {
   display: block;
