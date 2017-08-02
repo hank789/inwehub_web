@@ -15,7 +15,7 @@
               <div>
               	<p>
               		<span>{{item.user_name}}</span>
-              		 <svg class="icon" aria-hidden="true">
+              		 <svg  class="icon" aria-hidden="true">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
               	</p>
@@ -25,8 +25,11 @@
               	  <span>樱伟信息科技</span>
               	</p>
               </div>
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.user_id)" v-if="nothing == 0">
 			    <use xlink:href="#icon-shoucang"></use>
+		    	 </svg>
+		    	 <svg class="icon" aria-hidden="true"  style="color: rgb(3,174,249);"  @tap.stop.prevent="collectProfessor(item.user_id)" v-if="nothing == 1">
+			    <use xlink:href="#icon-shoucanghover"></use>
 		    	 </svg>
 		    	 <i class="bot"></i>
           </li>
@@ -49,7 +52,8 @@
     data(){
       return {
         list: [],
-        loading: 1
+        loading: 1,
+        tip:""
       }
     },
     methods: {
@@ -78,9 +82,8 @@
           if (response.data.data.length > 0) {
             this.list = response.data.data;
           }
-          console.log(this.list)
           this.loading = 0;
-//        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       },
       getNextList() {
@@ -97,10 +100,28 @@
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
-      }
       },
-     
+      collectProfessor(id, index) {
+        postRequest(`follow/question`, {id:id}).then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+            this.tip = response.data.data.tip;
+//          this.list[index].is = 23
+            mui.toast(response.data.data.tip);
+        });
+
+      }
+      },   
     computed: {
+    	 nothing () {
+       	 if (this.tip == "关注成功") {
+            return 1;
+         }
+        return  0;
+      },
       topId () {
         if (this.list.length) {
           return this.list[0].id;
