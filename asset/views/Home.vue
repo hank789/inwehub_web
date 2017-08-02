@@ -8,7 +8,7 @@
       <span class="mui-icon myicon myicon-home-title"></span>
       <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
     </header>
-  
+
     <div class="mui-content" v-show="!loading">
 
 
@@ -46,10 +46,10 @@
 
         </div>
       </div>
-       
+
       <!--
       	首页的特惠时间； 点击跳入特惠的详情；
-      --> 
+      -->
       <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
         <div class="freeAsk mui-navigate-right">
           <div class="icon"></div>
@@ -119,7 +119,6 @@
       <div class="mb70"></div>
     </div>
 
-     //首页遮罩层
     <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
@@ -192,8 +191,8 @@
       next();
     },
     computed: {
-    	
-    	
+
+
     	  //首页倒计时；
       couponExpireAtText(){
           if (this.couponExpireAtTime) {
@@ -330,7 +329,7 @@
           mui('#expert').popover('toggle');
         }
       },
-      
+
       timeAutoEnd:function(){
         if (this.timeAutoEndTimeOut) {
             clearTimeout(this.timeAutoEndTimeOut);
