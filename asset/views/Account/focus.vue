@@ -4,17 +4,17 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的关注</h1>
+      <h1 class="mui-title">关注我的</h1>
     </header>
 
     <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
       <div class="mui-scroll">
         <ul class="my-focus">
-          <li class="my-focus-item" >
-              <img src="../../statics/images/pengyouquan.png" />
+          <li class="my-focus-item" v-for="(item, index) in list" >
+              <img :src="item.user_avatar_url" />
               <div>
               	<p>
-              		<span>郭大红</span>
+              		<span>{{item.user_name}}</span>
               		 <svg class="icon" aria-hidden="true">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
@@ -53,6 +53,19 @@
       }
     },
     methods: {
+    	 initData() {
+          this.pulldownRefresh();
+      },
+      pulldownRefresh() {
+        setTimeout(() => {
+          this.getPrevList();
+        },1000);
+      },
+      pullupRefresh() {
+        setTimeout(() => {
+          this.getNextList();
+        },1000);
+      },
       getPrevList(){
 
         postRequest("follow_my/users", {top_id: this.topId}).then(response => {
@@ -68,6 +81,21 @@
           console.log(this.list)
           this.loading = 0;
 //        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        });
+      },
+      getNextList() {
+        postRequest("follow_my/users", {bottom_id: this.bottomId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+          }
+
+          if (response.data.data.length > 0) {
+            this.list = this.list.concat(response.data.data);
+          }
+          this.loading = 0;
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       }
       },
@@ -96,18 +124,20 @@
         console.log('refresh-collect');
         this.initData();
       });
-//    mui.init({
-//      pullRefresh: {
-//        container: '#pullrefresh',
-//        down: {
-//          callback: this.pulldownRefresh
-//        },
-//        up: {
-//          contentrefresh: '正在加载...',
-//          callback: this.pullupRefresh
-//        }
-//      }
-//    });
+      mui.init({
+        pullRefresh: {
+          container: '#pullrefresh',
+          down: {
+            callback: this.pulldownRefresh
+          },
+          up: {
+            contentdown : "下拉可以刷新",
+            contentover : "释放立即刷新",
+            contentrefresh : "正在刷新...",
+            callback: this.pullupRefresh
+          }
+        }
+      });
       this.getPrevList();
     }
   }
