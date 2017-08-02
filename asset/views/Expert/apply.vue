@@ -45,8 +45,8 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">从业时间</label>
-            <input type="text"  class="inputUnit" readonly="readonly">
-            <svg class="icon modify" aria-hidden="true">
+            <input type="text" :value="time_text"  class="inputUnit" readonly="readonly" @tap.stop.prevent="selectTime">
+            <svg class="icon modify" aria-hidden="true" @tap.stop.prevent="selectTime">
               <use xlink:href="#icon-shuru"></use>
             </svg>
           </div>
@@ -57,8 +57,9 @@
       <ul class="mui-table-view companyForm noBottomBorder titleBottomForm">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
+
             <label class="mui-navigate">手机号码</label>
-            <input type="text" placeholder="填写手机号码" maxlength="11">
+            <div class="inputOnlyText">{{ phone }}</div>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -83,7 +84,7 @@
         </li>
       </ul>
       <div class="buttonWrapper">
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button">提交申请</button>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" >提交申请</button>
       </div>
     </div>
   </div>
@@ -92,11 +93,21 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import {selectKeyValue} from '../../utils/select';
 
   export default {
     data(){
       return {
-        loading: 1
+        name:'',
+        gender:'',
+        company:'',
+        title:'',
+        time:'',
+        time_text:'',
+        phone:'',
+        address_detail:'',
+        email:'',
+        description:'',
       }
     },
     computed: {
@@ -105,14 +116,79 @@
       },
     },
     methods: {
-      nothing(){
+      submit(){
+        if (!this.name) {
+          mui.toast('请填写用户姓名');
+          return;
+        }
 
-      }
+        if (!this.company) {
+          mui.toast('请填写当前公司');
+          return;
+        }
+
+        if (!this.title) {
+          mui.toast('请填写当前职位');
+          return;
+        }
+
+        if (!this.email) {
+          mui.toast('请填写邮箱地址');
+          return;
+        }
+
+        if (!this.address_detail) {
+          mui.toast('请填写详细地址');
+          return;
+        }
+
+        if (!this.description) {
+          mui.toast('请填写个人描述');
+          return;
+        }
+
+        data = {
+          name:this.name,
+          gender:this.gender,
+          company:this.company,
+          title:this.title,
+          address_detail:this.address_detail,
+          email:this.email,
+          description:this.description,
+        };
+        postRequest(`expert/apply`, data).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.$router.push('/expert/apply/success');
+        });
+      },
+      selectTime(){
+        selectKeyValue(this.time, [
+          {
+            value: '1',
+            text: '10-15年'
+          },
+          {
+            value: '2',
+            text: '15-20年'
+          },
+          {
+            value: '3',
+            text: '20年以上'
+          },
+        ], (value, key) => {
+          this.time = value;
+          this.time_text = key;
+        });
+      },
     },
     mounted(){
 
     },
-
     created(){
 
     }
@@ -302,6 +378,7 @@
     display: block;
     background-color: #dcdcdc;
     left: 15px;
+    right: 15px;
   }
   .buttonWrapper {
     padding: 6px 16px 30px;
