@@ -6,10 +6,10 @@
     <div class="mui-content">
       <div class="professorCard">
         <div class="header">
-          <div class="avatar">
+          <div class="avatar" @tap.stop.prevent="uploadHeader()">
             <div class="avatarInner"><img class="avatar" :src="avatar"></div>
           </div>
-          <svg class="icon" aria-hidden="true">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadHeader()">
             <use xlink:href="#icon-xiangji"></use>
           </svg>
         </div>
@@ -93,6 +93,7 @@
   import localEvent from '../../stores/localStorage';
   import {selectKeyValue} from '../../utils/select';
   import MTextarea from '../../components/MTextarea.vue';
+  import {selectFileH5, compressImg} from '../../utils/uploadFile';
 
   export default {
     data(){
@@ -115,6 +116,13 @@
       MTextarea
     },
     methods: {
+      uploadHeader(){
+        selectFileH5('img', (file, base64) => {
+          this.$router.push({path:'/header-h5', params:{file:file}}, function(router){
+            router.params.file = base64;
+          });
+        });
+      },
       submit(){
         if (!this.name) {
           mui.toast('请填写用户姓名');
