@@ -102,6 +102,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+   { // 关注我的
+    path: '/my/focus',
+    component: require('../../../views/Account/focus.vue'),
+    meta: {
+      title: '关注我的',
+      wechatHideHeader:true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 个人信息
     path: '/my/info',
     component: require('../../../views/Account/info.vue'),
@@ -369,6 +380,26 @@ const routes = [
     component: require('../../../views/Expert/index.vue'),
     meta: {
       title: '专家管理'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 专家申请
+    path: '/expert/apply',
+    component: require('../../../views/Expert/apply.vue'),
+    meta: {
+      title: '专家申请'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 专家申请成功
+    path: '/expert/apply/success',
+    component: require('../../../views/Expert/applySuccess.vue'),
+    meta: {
+      title: ''
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
