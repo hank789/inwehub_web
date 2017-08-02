@@ -38,7 +38,7 @@
     methods: {
       loaded() {
           console.log('loaded');
-          mui.alert(this.iframe.contentWindow.document.body);
+         
       }
     }
   }
