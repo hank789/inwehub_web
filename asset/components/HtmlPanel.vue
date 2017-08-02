@@ -17,7 +17,8 @@
     },
     data () {
       return {
-        iframeState: false
+        iframeState: false,
+        iframe:{}
       }
     },
     watch: {
@@ -27,6 +28,7 @@
     },
     mounted () {
       const oIframe = document.getElementById('show-iframe');
+      this.iframe = oIframe;
       const deviceWidth = document.documentElement.clientWidth;
       const deviceHeight = document.documentElement.clientHeight - 50;
       oIframe.style.width = deviceWidth + 'px';
@@ -36,6 +38,7 @@
     methods: {
       loaded() {
           console.log('loaded');
+          mui.alert(this.iframe.contentWindow.document.body);
       }
     }
   }

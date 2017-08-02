@@ -1,6 +1,6 @@
 <template>
 <div class="mui-content">
-  <html-panel :url="url"></html-panel>
+  <html-panel :url="url" v-if="url"></html-panel>
 </div>
 </template>
 
