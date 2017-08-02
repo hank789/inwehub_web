@@ -28,7 +28,7 @@
     mounted () {
       const oIframe = document.getElementById('show-iframe');
       const deviceWidth = document.documentElement.clientWidth;
-      const deviceHeight = document.documentElement.clientHeight;
+      const deviceHeight = document.documentElement.clientHeight - 50;
       oIframe.style.width = deviceWidth + 'px';
       oIframe.style.height = deviceHeight + 'px';
       this.iframeState = true;
