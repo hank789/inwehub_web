@@ -385,6 +385,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 专家申请
+    path: '/expert/apply',
+    component: require('../../../views/Expert/apply.vue'),
+    meta: {
+      title: '专家申请'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 推荐专家
     path: '/expert/recommend',
     component: require('../../../views/Expert/recommend.vue'),
