@@ -94,6 +94,11 @@
 
           mui.toast(response.data.message);
 
+          var user_avatar_url = response.data.data.user_avatar_url;
+          var userInfo = localEvent.getLocalItem('UserInfo');
+          userInfo.avatar_url = user_avatar_url;
+          localEvent.setLocalItem('UserInfo', userInfo);
+          
           mui.back();
         });
 

@@ -6,11 +6,11 @@
     <div class="mui-content">
       <div class="professorCard">
         <div class="header">
-          <div class="avatar">
-            <div class="avatarInner"><img class="avatar" src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEIVaaLLXibu2J52gbpia5qw1VsJdoPmYVoaaB90xEWZHJJkYHe8mBwjictcjpPOONQ0VI8RicDqrpQf6g/0"></div>
+          <div class="avatar" @tap.stop.prevent="uploadHeader()">
+            <div class="avatarInner"><img class="avatar" :src="avatar"></div>
           </div>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiangji"></use>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadHeader()">
+            <use xlink:href="#icon-xiangjibaidi"></use>
           </svg>
         </div>
         <div class="title">用户头像</div>
@@ -19,34 +19,34 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">用户姓名</label>
-            <input type="text" placeholder="填写用户姓名" maxlength="30">
+            <input type="text" placeholder="填写用户姓名" maxlength="30" v-model="name">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">用户性别</label>
             <div class="textRight"><span class="mui-radio radioWrapper">
-                <input name="sex" type="radio">                    男</span><span class="mui-radio radioWrapper">
-                <input name="sex" type="radio" checked="checked">                    女</span></div>
+                <input name="sex" type="radio" value="1" v-model="gender">                    男</span><span class="mui-radio radioWrapper">
+                <input name="sex" type="radio" value="2" v-model="gender">                     女</span></div>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">当前公司</label>
-            <input type="text" placeholder="填写公司民称" maxlength="100">
+            <input type="text" placeholder="填写公司民称" maxlength="100" v-model="company">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">当前职位</label>
-            <input type="text" placeholder="填写当前职位" maxlength="100">
+            <input type="text" placeholder="填写当前职位" maxlength="100" v-model="title">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">从业时间</label>
-            <input type="text"  class="inputUnit" readonly="readonly">
-            <svg class="icon modify" aria-hidden="true">
+            <input type="text" :value="time_text"  class="inputUnit" readonly="readonly" @tap.stop.prevent="selectTime">
+            <svg class="icon modify" aria-hidden="true" @tap.stop.prevent="selectTime">
               <use xlink:href="#icon-shuru"></use>
             </svg>
           </div>
@@ -57,33 +57,32 @@
       <ul class="mui-table-view companyForm noBottomBorder titleBottomForm">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
+
             <label class="mui-navigate">手机号码</label>
-            <input type="text" placeholder="填写手机号码" maxlength="11">
+            <div class="inputOnlyText">{{ phone }}</div>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">邮箱地址</label>
-            <input type="text" placeholder="填写邮箱地址" maxlength="100">
+            <input type="text" placeholder="填写邮箱地址" maxlength="100" v-model="email">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">详细地址</label>
-            <input type="text" placeholder="填写详细地址" maxlength="200">
+            <input type="text" placeholder="填写详细地址" maxlength="200" v-model="address_detail">
           </div>
         </li>
         <li class="mui-table-view-cell noBorder">
           <div class="mui-input-row">
             <label class="mui-navigate">个人描述</label>
-            <div class="textarea-wrapper">
-              <textarea class="textarea"></textarea><span class="counter"><span>0</span><span>/</span><span>500</span></span>
-            </div>
+            <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="''"></MTextarea>
           </div>
         </li>
       </ul>
       <div class="buttonWrapper">
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button">提交申请</button>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="submit()">提交申请</button>
       </div>
     </div>
   </div>
@@ -92,27 +91,130 @@
 <script>
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import {selectKeyValue} from '../../utils/select';
+  import MTextarea from '../../components/MTextarea.vue';
+  import {selectFileH5, compressImg} from '../../utils/uploadFile';
+  import {updateUserInfo} from '../../utils/user';
 
   export default {
     data(){
+      var currentUser = localEvent.getLocalItem('UserInfo');
       return {
-        loading: 1
+        avatar:currentUser.avatar_url,
+        name:currentUser.name,
+        gender:currentUser.gender,
+        company:currentUser.company,
+        title:currentUser.title,
+        time:'',
+        time_text:'',
+        phone:currentUser.phone,
+        address_detail:currentUser.address_detail,
+        email:currentUser.email,
+        description:currentUser.description,
       }
     },
-    computed: {
-      nothing () {
-        return false;
-      },
+    components: {
+      MTextarea
     },
     methods: {
-      nothing(){
+      uploadHeader(){
+        selectFileH5('img', (file, base64) => {
+          this.$router.push({path:'/header-h5', params:{file:file}}, function(router){
+            router.params.file = base64;
+          });
+        });
+      },
+      submit(){
+        if (!this.name) {
+          mui.toast('请填写用户姓名');
+          return;
+        }
 
-      }
+        if (!this.company) {
+          mui.toast('请填写当前公司');
+          return;
+        }
+
+        if (!this.title) {
+          mui.toast('请填写当前职位');
+          return;
+        }
+
+        if (!this.email) {
+          mui.toast('请填写邮箱地址');
+          return;
+        }
+
+        var Regex = /^(?:\w+\.?)*\w+@(?:\w+\.)*\w+$/;
+        if (!Regex.test(this.email)){
+          mui.toast('请正确输入邮箱');
+          return;
+        }
+
+        if (!this.address_detail) {
+          mui.toast('请填写详细地址');
+          return;
+        }
+
+        if (!this.description) {
+          mui.toast('请填写个人描述');
+          return;
+        }
+
+        var data = {
+          name:this.name,
+          gender:this.gender,
+          company:this.company,
+          title:this.title,
+          work_years:this.time,
+          address_detail:this.address_detail,
+          email:this.email,
+          description:this.description,
+        };
+        postRequest(`expert/apply`, data).then(response => {
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          updateUserInfo({
+            name:this.name,
+            gender:this.gender,
+            company:this.company,
+            title:this.title,
+            address_detail:this.address_detail,
+            email:this.email,
+            description:this.description
+          });
+
+          this.$router.push('/expert/apply/success');
+        });
+      },
+      selectTime(){
+        selectKeyValue(this.time, [
+          {
+            value: '1',
+            text: '10-15年'
+          },
+          {
+            value: '2',
+            text: '15-20年'
+          },
+          {
+            value: '3',
+            text: '20年以上'
+          },
+        ], (value, key) => {
+          this.time = value;
+          this.time_text = key;
+        });
+      },
     },
     mounted(){
 
     },
-
     created(){
 
     }
@@ -243,6 +345,17 @@
     float: right;
     display: inline-block;
   }
+  .companyForm .inputOnlyText{
+    width:61% !important;
+    text-align: right;
+    font-size:14px;
+    float: right;
+    border: 0;
+    padding: 10px 0;
+    height:40px;
+    line-height: 21px;
+    color:#c8c8c8;
+  }
   .textarea-wrapper {
     margin: 46px 0 0 ;
     height: 164px;
@@ -302,6 +415,7 @@
     display: block;
     background-color: #dcdcdc;
     left: 15px;
+    right: 15px;
   }
   .buttonWrapper {
     padding: 6px 16px 30px;

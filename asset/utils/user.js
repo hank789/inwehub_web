@@ -165,9 +165,19 @@ function getUserInfo (user_id, cb) {
   })
 };
 
+function updateUserInfo(options)
+{
+    var UserInfo = localEvent.getLocalItem('UserInfo');
+    for(var key in options) {
+      UserInfo[key] = options[key];
+    }
+    localEvent.setLocalItem('UserInfo', UserInfo);
+}
+
 export {
   getUserInfo,
   updateUserInfoCache,
   unFollowingUser,
+  updateUserInfo,
   followingUser
 };

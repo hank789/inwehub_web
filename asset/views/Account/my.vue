@@ -50,7 +50,7 @@
 			  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 			</svg>
 			<p>
-				<span>申请专家认证</span>
+				<span @tap.stop.prevent="$router.pushPlus('/expert/apply')">申请专家认证</span>
 				<span v-if="expert_apply_status =='0'">未申请</span>
 				<span v-if="expert_apply_status =='1'">认证审核中</span>
 				<span v-if="expert_apply_status =='2'">认证成功</span>
