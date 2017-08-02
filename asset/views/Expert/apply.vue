@@ -42,6 +42,15 @@
             <input type="text" placeholder="填写当前职位" maxlength="100">
           </div>
         </li>
+        <li class="mui-table-view-cell">
+          <div class="mui-input-row">
+            <label class="mui-navigate">从业时间</label>
+            <input type="text"  class="inputUnit" readonly="readonly">
+            <svg class="icon modify" aria-hidden="true">
+              <use xlink:href="#icon-shuru"></use>
+            </svg>
+          </div>
+        </li>
       </ul>
       <div class="river"></div>
       <div class="formTitle">详细信息</div>
@@ -308,8 +317,4 @@
   .noBottomBorder:after {
     display: none;
   }
-  .cover {
-    top: -19.5px !important;
-  }
-
 </style>
