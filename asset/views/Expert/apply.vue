@@ -94,6 +94,7 @@
   import {selectKeyValue} from '../../utils/select';
   import MTextarea from '../../components/MTextarea.vue';
   import {selectFileH5, compressImg} from '../../utils/uploadFile';
+  import {updateUserInfo} from '../../utils/user';
 
   export default {
     data(){
@@ -171,11 +172,22 @@
           description:this.description,
         };
         postRequest(`expert/apply`, data).then(response => {
+
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
             return;
           }
+
+          updateUserInfo({
+            name:this.name,
+            gender:this.gender,
+            company:this.company,
+            title:this.title,
+            address_detail:this.address_detail,
+            email:this.email,
+            description:this.description
+          });
 
           this.$router.push('/expert/apply/success');
         });
