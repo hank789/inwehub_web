@@ -33,8 +33,8 @@
 
       </div>
       <div class="my-news">
-	     	<p>关注<span>{{attention}}</span></p>
-	     	<p>咨询<span>{{advisory}}</span></p>
+	     	<p  @tap.stop.prevent="$router.pushPlus('/my/focus')">关注<span>{{attention}}</span></p>
+	     	<p>咨询<span>{{answers}}</span></p>
 	     	<p>评价<span>{{grade}}</span></p>
 	     	<p>{{total_score}}</p>
 	  </div>
@@ -45,29 +45,31 @@
 	    <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
 	  </div>
 	  <div class="my-apply">
-	  	<div>
+	  	<div @tap.stop.prevent="toApply(expert_apply_status)">
 	  		<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 			</svg>
 			<p>
-				<span @tap.stop.prevent="$router.pushPlus('/expert/apply')">申请专家认证</span>
-				<span v-if="expert_apply_status =='0'">未申请</span>
-				<span v-if="expert_apply_status =='1'">认证审核中</span>
-				<span v-if="expert_apply_status =='2'">认证成功</span>
-				<span v-if="expert_apply_status =='3'">认证失败</span>
+				<span  v-if="expert_apply_status =='2'">平台认证专家</span>
+				<span  v-else>申请专家认证</span>
+				<span v-if="expert_apply_status =='0'">点击前往认证</span>
+				<span v-if="expert_apply_status =='1'">认证处理中</span>
+				<span v-if="expert_apply_status =='2'">身份已认证</span>
+				<span v-if="expert_apply_status =='3'">失败，重新认证</span>
 			</p>
 
 	  	</div>
-	  	<div @tap.stop.prevent="$router.pushPlus('/company/my')">
+	  	<div @tap.stop.prevent="toApprove(expert_apply_status)">
 	  	 <svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-qiyezhanghao"></use>
 		 </svg>
 		 <p>
-		 	<span>申请企业账号</span>
-			<span v-if="company_apply_status =='0'">未申请</span>
-			<span v-if="company_apply_status =='1'">认证审核中</span>
-			<span v-if="expert_apply_status =='2'">认证成功</span>
-			<span v-if="company_apply_status =='3'">认证失败</span>
+		 	<span v-if="expert_apply_status =='2'">企业账号认证号</span>
+		 	<span 　v-else>申请企业账</span>
+			<span v-if="company_apply_status =='0'">点击前往申请</span>
+			<span v-if="company_apply_status =='1'">申请审核中</span>
+			<span v-if="expert_apply_status =='2'">切换至企业版</span>
+			<span v-if="company_apply_status =='3'">失败，重新认证</span>
 		</p>
 
 	  	</div>
@@ -97,7 +99,7 @@
       </ul>
 
        <ul class="my-option">
-       	<li @tap.stop.prevent="$router.pushPlus('/my/focus')">
+       	<li @tap.stop.prevent="$router.pushPlus('/collect')">
        		<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-wodeguanzhu"></use>
 			</svg>
@@ -107,7 +109,7 @@
 			</svg>
 			<i class="bot"></i>
         </li>
-       	<li  @tap.stop.prevent="$router.pushPlus('/collect')">
+       	<li  >
        		<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-wodeshoucang"></use>
 			</svg>
@@ -117,7 +119,7 @@
 			</svg>
 			<i class="bot"></i>
         </li>
-       	<li @tap.stop.prevent="$router.pushPlus('/feedback')">
+       	<li @tap.stop.prevent="$router.pushPlus('/feedback')" >
        		<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-wodefankuijianyi"></use>
 			</svg>
@@ -188,6 +190,32 @@
       }
     },
     methods: {
+    	    toApprove(status){
+    	    	 switch (status) {
+	    		 case 2:
+                 this.$router.pushPlus('/company/my');
+                break;
+              default:
+               this.$router.pushPlus('/company/submit');
+              
+            }
+	    		
+    	    },
+	    	toApply(status){
+	    		switch (status) {
+	    		 case 0:
+                 this.$router.pushPlus('/expert/apply');
+                break;
+              case 1:
+                this.$router.pushPlus('/expert/apply/success?type=0');
+                break;
+              case 3:
+                this.$router.pushPlus('/expert/apply');
+                break;
+              
+            }
+	    		
+	    	},
       getNumbers:function(number){
         var html = '';
         number = number.toString();
@@ -196,6 +224,7 @@
           html += '<svg class="icon a" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
         }
         return html;
+       
       },
       yaoqing(){
         mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
@@ -303,6 +332,8 @@
    height: 69px;
    margin: 30.5px 0 0 15.5px;
    float: left;
+   position: absolute;
+   right: 8px;
  }
 
  .my-personal .my-info{
