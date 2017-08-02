@@ -30,18 +30,18 @@
     },
     mounted(){
       this.currentUser = localEvent.getLocalItem('UserInfo');
+      this.url = process.env.READHUB_URL + '?uuid=' + this.currentUser.uuid;
       if (mui.os.plus) {
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
           ws.addEventListener('show',createEmbed(ws),false);
 
           function createEmbed(ws) {
-            var embed=plus.webview.create(process.env.READHUB_URL,'embed',{bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
+            var embed=plus.webview.create(this.url,'embed',{bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
             ws.append(embed);
           }
         });
       } else {
-        this.url = process.env.READHUB_URL + '?uuid=' + this.currentUser.uuid;
         this.is_h5 = true;
       }
 
