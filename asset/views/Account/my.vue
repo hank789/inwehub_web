@@ -35,7 +35,7 @@
       <div class="my-news">
 	     	<p>关注<span>{{attention}}</span></p>
 	     	<p>咨询<span>{{advisory}}</span></p>
-	     	<p>评分<span>{{grade}}</span></p>
+	     	<p>评价<span>{{grade}}</span></p>
 	     	<p>{{total_score}}</p>
 	  </div>
 
@@ -76,52 +76,25 @@
     </div>
 
 
-      <div class="part2">
-        <a class="item" @tap.stop.prevent="$router.pushPlus('/asks')">
-          <span class="number">
-          	<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-          </span><span>我的提问</span>
-        </a>
-        <a class="item" @tap.stop.prevent="$router.pushPlus('/answers')">
-          <span class="number">
-          	<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-          </span>
-          <span>我的回答</span>
-        </a>
-        <a class="item" @tap.stop.prevent="$router.pushPlus('/bid')">
-          <span class="number">
-          	<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-          </span>
-          <span>我的竞标</span>
-        </a>
-        <a  class="item"  @tap.stop.prevent="$router.pushPlus('/company/my')">
-          <span class="number">
-          	<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-icon-test"></use>
-			</svg>
-          </span>
-          <span>我的项目</span>
-        </a>
+      <ul class="part2">
+      	<li @tap.stop.prevent="$router.pushPlus('/asks')">
+      		<span v-html="getNumbers(questions)"></span>
+      		<span>我的提问</span>
+      	</li>
+      	<li @tap.stop.prevent="$router.pushPlus('/answers')">
+      		<span v-html="getNumbers(answers)"></span>
+      		<span>我的回答</span>
+      	</li>
+      	<li @tap.stop.prevent="$router.pushPlus('/bid')">
+      		<span v-html="getNumbers(0)"></span>
+      		<span>我的竞标</span>
+      	</li>
+      	<li @tap.stop.prevent="$router.pushPlus('/company/my')">
+      		<span v-html="getNumbers(projects)"></span>
+      		<span>我的项目</span>
+      	</li>
         <i class="bott"></i>
-      </div>
+      </ul>
 
        <ul class="my-option">
        	<li @tap.stop.prevent="$router.pushPlus('/my/focus')">
@@ -220,20 +193,9 @@
         number = number.toString();
         for(var i=0; i<number.length;i++) {
           var num = number[i];
-          html += '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
+          html += '<svg class="icon a" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
         }
         return html;
-      },
-    	getData:function(){
-        postRequest(`profile/resumeInfo`, {uuid:this.uuid}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.toast(response.data.message);
-          }
-          this.my = response.data.data;
-          this.loading = 0;
-          this.bindWechatShare();
-        });
       },
       yaoqing(){
         mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
@@ -284,6 +246,7 @@
     },
     mounted(){
       this.getToken();
+      
 
     }
   }
@@ -305,9 +268,9 @@
 
  .bott{
  	position: absolute;
-    right:16px;
+    right:15px;
     bottom: 0;
-    left: 16px;
+    left: 15px;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -318,7 +281,7 @@
  .my-top{
  	width: 100%;
  	height: 310px;
- 	padding: 0 15px 0 17px;
+ 	padding: 0 13px 0 13px;
  	background-color: #ffffff;
  }
 
@@ -336,7 +299,7 @@
   }
 
  .my-personal {
-   width:70%;
+   width:71%;
    height: 69px;
    margin: 30.5px 0 0 15.5px;
    float: left;
@@ -454,7 +417,7 @@
 	font-size: 14px;
 	color: #808080;
 	border-right: 1px solid #c8c8c8;
-	padding: 0 10px 0 10px;
+	padding: 0 12px 0 12px;
 
  }
 
@@ -528,6 +491,7 @@
 .my-apply div svg{
 	margin-top: 10px;
 	margin-left: 10px;
+	margin-right:4px;
 	font-size: 40px;
 	color: rgb(3,174,249);
 	float: left;
@@ -536,6 +500,7 @@
 .my-apply div:nth-of-type(2) svg{
 	margin-top: 13px;
 	margin-left: 10px;
+	margin-right:8px;
 	font-size: 32px;
 	color: rgb(3,174,249);
 	float: left;
@@ -543,7 +508,7 @@
 
 .my-apply div p{
 	margin-top: 10px;
-	margin-left:10px;
+	
 
 }
 .my-apply div p span{
@@ -563,66 +528,47 @@
 	color: #808080;
 
 }
-  /*.professor .label {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 14px;
-  }*/
-
-  /*.professor .text .realname {
-    font-size: 20px;
-    font-weight: bolder;
-    margin-left: 20px;
-  }
-
-  .professor .myicon-share{
-    width:15px;
-    height:16px;
-  }
-
-  .avatar {
-    z-index: 9;
-    color: #ffffff;
-    display: inline-block;
-    margin-top: 10px;
-    height: 100px;
-    width: 100px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 50%;
-    vertical-align: top;
-  }*/
-
 
   .part2 {
-    height: 70px;
-    text-align: center;
-    background: #fff;
+  	padding: 0;
+    margin: 0;
+    list-style: none;
+    width:100%;
+    height:70px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #FFFFFF;
     margin-top: 10px;
     position: relative;
-  }
-
-  .part2 .item {
-    display: inline-block;
-    width: 23%;
-    text-align: center;
-    color: #777;
-  }
- .part2 .item span{
- 	display: block;
- 	font-size: 12px;
- }
-
-.part2 .item .number svg{
-	margin-top: 10px;
-	margin-bottom: 7px;
+    }
+   .part2  li{
+   	display: inline-block;
+   	width: 23%;
+   	height: 70px;
+   	text-align: center;
+   	
+   	
+   }
+   .part2  li span:nth-of-type(1){
+  	padding: 0;
+  	margin: 0;
+  	display:block;
+  	margin-top: 13px;
+	margin-bottom: 3px;
 	font-size: 13px;
 	color: #444444;
-}
-.part2 .item .number svg:nth-of-type(2){
-	margin-left: -8px;
-}
+  }
+ 
+  .part2  li span:nth-of-type(2){
+  	padding: 0;
+  	margin: 0;
+  	font-family: "PingFangSC";
+	font-size: 12px;
+	color: #808080;
+	display:block;
+  }
+  
+
 .my-option{
 	width: 100%;
 	height: 237px;
@@ -644,13 +590,15 @@
 
 .my-option li span {
 	margin-left: 10px;
+	font-size: 14px;
+	color: #444444;
 }
 
 
 
 .my-option li svg:nth-of-type(1){
 	font-size: 22px;
-	margin-bottom: -3px;
+	margin-bottom: -4px;
 }
 .my-option li svg:nth-of-type(2){
 	float: right;
