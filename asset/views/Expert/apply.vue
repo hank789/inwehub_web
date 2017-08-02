@@ -7,7 +7,7 @@
       <div class="professorCard">
         <div class="header">
           <div class="avatar">
-            <div class="avatarInner"><img class="avatar" src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEIVaaLLXibu2J52gbpia5qw1VsJdoPmYVoaaB90xEWZHJJkYHe8mBwjictcjpPOONQ0VI8RicDqrpQf6g/0"></div>
+            <div class="avatarInner"><img class="avatar" :src="avatar"></div>
           </div>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xiangji"></use>
@@ -19,27 +19,27 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">用户姓名</label>
-            <input type="text" placeholder="填写用户姓名" maxlength="30">
+            <input type="text" placeholder="填写用户姓名" maxlength="30" v-model="name">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">用户性别</label>
             <div class="textRight"><span class="mui-radio radioWrapper">
-                <input name="sex" type="radio">                    男</span><span class="mui-radio radioWrapper">
-                <input name="sex" type="radio" checked="checked">                    女</span></div>
+                <input name="sex" type="radio" value="1" v-model="gender">                    男</span><span class="mui-radio radioWrapper">
+                <input name="sex" type="radio" value="2" v-model="gender">                     女</span></div>
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">当前公司</label>
-            <input type="text" placeholder="填写公司民称" maxlength="100">
+            <input type="text" placeholder="填写公司民称" maxlength="100" v-model="company">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">当前职位</label>
-            <input type="text" placeholder="填写当前职位" maxlength="100">
+            <input type="text" placeholder="填写当前职位" maxlength="100" v-model="title">
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -65,26 +65,24 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">邮箱地址</label>
-            <input type="text" placeholder="填写邮箱地址" maxlength="100">
+            <input type="text" placeholder="填写邮箱地址" maxlength="100" v-model="email">
           </div>
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">详细地址</label>
-            <input type="text" placeholder="填写详细地址" maxlength="200">
+            <input type="text" placeholder="填写详细地址" maxlength="200" v-model="address_detail">
           </div>
         </li>
         <li class="mui-table-view-cell noBorder">
           <div class="mui-input-row">
             <label class="mui-navigate">个人描述</label>
-            <div class="textarea-wrapper">
-              <textarea class="textarea"></textarea><span class="counter"><span>0</span><span>/</span><span>500</span></span>
-            </div>
+            <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="1000" :placeholder="''"></MTextarea>
           </div>
         </li>
       </ul>
       <div class="buttonWrapper">
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" >提交申请</button>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="submit()">提交申请</button>
       </div>
     </div>
   </div>
@@ -94,26 +92,27 @@
   import {apiRequest, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import {selectKeyValue} from '../../utils/select';
+  import MTextarea from '../../components/MTextarea.vue';
 
   export default {
     data(){
+      var currentUser = localEvent.getLocalItem('UserInfo');
       return {
-        name:'',
-        gender:'',
-        company:'',
-        title:'',
+        avatar:currentUser.avatar_url,
+        name:currentUser.name,
+        gender:currentUser.gender,
+        company:currentUser.company,
+        title:currentUser.title,
         time:'',
         time_text:'',
-        phone:'',
-        address_detail:'',
-        email:'',
-        description:'',
+        phone:currentUser.phone,
+        address_detail:currentUser.address_detail,
+        email:currentUser.email,
+        description:currentUser.description,
       }
     },
-    computed: {
-      nothing () {
-        return false;
-      },
+    components: {
+      MTextarea
     },
     methods: {
       submit(){
@@ -137,6 +136,12 @@
           return;
         }
 
+        var Regex = /^(?:\w+\.?)*\w+@(?:\w+\.)*\w+$/;
+        if (!Regex.test(this.email)){
+          mui.toast('请正确输入邮箱');
+          return;
+        }
+
         if (!this.address_detail) {
           mui.toast('请填写详细地址');
           return;
@@ -147,11 +152,12 @@
           return;
         }
 
-        data = {
+        var data = {
           name:this.name,
           gender:this.gender,
           company:this.company,
           title:this.title,
+          work_years:this.time,
           address_detail:this.address_detail,
           email:this.email,
           description:this.description,
@@ -318,6 +324,17 @@
   .companyForm .textRight {
     float: right;
     display: inline-block;
+  }
+  .companyForm .inputOnlyText{
+    width:61% !important;
+    text-align: right;
+    font-size:14px;
+    float: right;
+    border: 0;
+    padding: 10px 0;
+    height:40px;
+    line-height: 21px;
+    color:#c8c8c8;
   }
   .textarea-wrapper {
     margin: 46px 0 0 ;
