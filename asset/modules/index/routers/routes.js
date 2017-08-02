@@ -598,7 +598,7 @@ const routes = [
       wechatHideHeader:true,
       keepAlive: true
     },
-    component: require('../../../views/Discover/Discover.vue'),
+    component: require('../../../views/Readhub/Readhub.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
