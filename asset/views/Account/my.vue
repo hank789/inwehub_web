@@ -133,7 +133,8 @@
 
 		</div>
 
-		<div id="statusBarStyle" bgColor="#fff" mode="dark"></div>
+		
+		<div id="statusBarStyle" background="#fff"   bgColor="#fff"mode="light"></div>
 
 	</div>
 </template>
@@ -579,7 +580,7 @@
 	
 	.my-option {
 		width: 100%;
-		height: 237px;
+		height: 130px;
 		background: #FFFFFF;
 		padding: 0;
 		margin: 0;
