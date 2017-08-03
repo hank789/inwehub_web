@@ -87,12 +87,15 @@ Vue.component('qr-code', VueQRCodeComponent);
 
 import {hideHeaderHandler} from '../../utils/wechat';
 
+import {autoHeight} from '../../utils/statusBar';
+
 Vue.mixin({
   activated(){
-
+    autoHeight();
     hideHeaderHandler(this, 'activated');
   },
   mounted() {
+    autoHeight();
     hideHeaderHandler(this, 'mounted');
   }
 })
