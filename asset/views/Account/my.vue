@@ -396,6 +396,7 @@
 		font-family: "PingFangSC";
 		font-size: 13px;
 		text-align: center;
+		font-weight: normal;
 		float: right;
 		color: #808080;
 		margin-left: 3px;
