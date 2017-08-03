@@ -7,37 +7,44 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-
-      <div class="professor">
-        <div class="avatar" @tap.stop.prevent="changeAvatarH5">
-          <div class="avatarInner">
-            <img :src="user.info.avatar_url" class="avatar"/>
-          </div>
-          <span class="mui-icon myicon myicon-plus"></span>
-        </div>
-        <div class="text">
-          <div class="realname" v-show="user.info.name">{{ user.info.name }}</div>
-          <div class="postion" v-show="user.info.title">{{ user.info.title }}</div>
-          <div class="company" v-show="user.info.company">{{ user.info.company }}</div>
-          <div class="phone" v-show="user.info.mobile"><span class="mui-icon myicon myicon-phone"></span>{{ user.info.mobile }}</div>
-          <div class="email" v-show="user.info.email"><span class="mui-icon myicon myicon-email"></span>{{ user.info.email }}</div>
-          <!--<div class="address" v-show="user.info.address_detail"><span class="mui-icon myicon myicon-position"></span>{{ user.info.address_detail }}</div>-->
-        </div>
-      </div>
-
-      <div class="part2">
-        资料完整度  {{ user.info.account_info_complete_percent }}%
-        <div class="progressBar">
-          <div class="progress" :style="'width:'+ user.info.account_info_complete_percent +'%'"><span></span></div>
-        </div>
-
-        <svg class="icon mui-icon" aria-hidden="true" @tap.stop.prevent="warning">
-          <use xlink:href="#icon-warning"></use>
-        </svg>
-
-        <div class="tip" v-if="user.info.account_info_complete_percent < 90">还差{{ 90-user.info.account_info_complete_percent }}%名片信息才较为完整</div>
-        <div class="tip" v-if="user.info.account_info_complete_percent >= 90 && user.info.account_info_complete_percent !== 100">距离满分只有一步之遥啦，请再接再厉！</div>
-      </div>
+     
+     <div class="info-professor">
+     	<div class="info-look" @tap.stop.prevent="$router.pushPlus('/my/resume')">
+     		<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-gongkai"></use>
+			</svg>
+			<span>预览</span>
+     	</div>
+     	<p  @tap.stop.prevent="show">
+     		<img :src="user.info.avatar_url" class="avatar"/>
+     		<span>
+     		<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-xiangji"></use>
+			</svg>
+			</span>
+     	</p>
+     	<p>
+     		<span>{{ user.info.name }}</span>
+     		<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+			</svg>
+     	</p>
+     	<p>
+     		<span>{{ user.info.company }}</span>
+     		<i></i>
+     		<span>{{ user.info.title }}</span>
+     	</p>
+     	<p>
+     	  {{ user.info.mobile }}
+     	</p>
+     	<p>
+     		{{ user.info.email }}
+     	</p>
+     	<p>
+     		<span class="info-progress"><i  :style="'width:'+ user.info.account_info_complete_percent +'%'"></i></span>
+     		<span class="info-text">已编辑{{ user.info.account_info_complete_percent }}%</span>
+     	</p>
+     </div>
 
       <div class="part3">
         <ul class="mui-table-view mui-table-view-chevron firstItem">
@@ -49,40 +56,54 @@
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')">工作经历
-                <span class="desc" v-if="user.jobs">{{ user.jobs }}</span>
-                <span class="desc important" v-else>请添加工作经历</span>
+              
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects')">项目经历
-                <span class="desc" v-if="user.projects">{{ user.projects }}</span>
-                <span class="desc important" v-else>请添加项目经历</span>
+               
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus')">教育经历
-                <span class="desc" v-if="user.edus">{{ user.edus }}</span>
-                <span class="desc important" v-else>请添加教育经历</span>
+                
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains')">培训认证
-                <span class="desc" v-if="user.trains">{{ user.trains }}</span>
-                <span class="desc important" v-else>请添加培训认证</span>
+                
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')"><span class="mui-icon myicon myicon-help"></span>隐私设置
-              <span class="desc important">请选择信息公开情况</span>
+             
             </a>
           </li>
         </ul>
       </div>
 
       <div class="paizhao">
-        <!--<div class="mui-icon myicon myicon-paizhao" @tap.stop.prevent="uploadFile"></div>-->
-        填写嫌麻烦，可发送简历到 <a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码">hi@inwehub.com</a> ，客服小哈帮您维护！
+        填写嫌麻烦，可发送简历到 <a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码">hi@inwehub.com</a> ,小哈帮您维护！
        </div>
+       
+        
+    <div class="info-choose mui-popover mui-popover-action mui-popover-bottom" id="mui-popover-action">
+    	   <p @tap.stop.prevent="changeAvatarH5">
+    	   	 <svg class="icon" aria-hidden="true">
+		     <use xlink:href="#icon-xiangce"></use>
+		 </svg>
+		 <span>相册</span>
+    	   </p>
+	   <p @tap.stop.prevent="changeAvatar">
+	   	 <svg class="icon" aria-hidden="true">
+		   <use xlink:href="#icon-xiangji"></use>
+		 </svg>
+		  <span>相机</span>
+	   </p>
+	</div>
+	</div>
+   
+       
     </div>
   </div>
 </template>
@@ -128,6 +149,12 @@
       });
     },
     methods: {
+    	show(){
+    		
+			mui(".info-choose").popover('toggle'); 
+		   
+		    
+    	},
       warning:function(){
           mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function(){}, 'div');
       },
@@ -308,171 +335,138 @@
     right: 8px;
     top: 8px;
   }
-
-  .professor {
-    background-color: #161616;
-    text-align: center;
+  p,span{
+  	margin: 0;
+  	padding: 0;
+  }
+.info-professor{
+	width: 100%;
+	padding:20px 15px 20px 16px;
+	background: #F3F4F6;
+	text-align: center;
+	position: relative;
+}
+.info-look{
+	position: absolute;
+	top: 20px;
+	right: 15px;
+}
+.info-look svg{
+	font-size: 24px;
+	color: rgb(3,174,249);
+	margin-bottom: -2px;
+}
+.info-look span{
+	font-family: "PingFangSC";
+	font-size:14px;
+	color:#444444;
+	
+}
+ .info-professor p:nth-of-type(1) img{
+ 	width: 69px;
+ 	height: 69px;
+ 	border-radius: 50%;
+ }
+ .info-professor p:nth-of-type(1) span{
+ 	display:inline-block;
+ 	width: 18px;
+ 	height:18px;
+ 	border-radius: 50%;
+ 	background: #FFFFFF;
+ 	margin-left: -18px;
+    margin-bottom:6px;
     position: relative;
-    height: 136px;
-  }
+ }
+ .info-professor p:nth-of-type(1) span svg{
+   font-size: 25px;
+   color:#808080;
+   position: absolute;
+   left: -4px;
+   top: -3px;
+  
+	}
+.info-professor p:nth-of-type(2){
+	margin-top: 12px;
+}
+.info-professor p:nth-of-type(2) span{
+	font-family: "PingFangSC";
+	font-size: 16px;
+	font-weight: 600;
+	color:#444444;
+}
+.info-professor p:nth-of-type(2) svg{
+	font-size: 20px;
+	color: rgb(3,174,249);
+	margin-bottom: -2px;
+	
+}
+.info-professor p:nth-of-type(3){
+	margin-top: 7px;
+}
+.info-professor p:nth-of-type(3) span{
+	font-family: "PingFangSC";
+	font-size: 13px;
+	color: #444444;
+}
+.info-professor p:nth-of-type(3) i{
+	display: inline-block;
+	width: 1px;
+	height: 13px;
+	background:#c8c8c8;
+	margin: 0 3px -2px 3px;
+}
+.info-professor p:nth-of-type(4){
+	margin-top: 7px;
+}
+.info-professor p:nth-of-type(5){
+	margin-top: 6px;
+	margin-bottom: 8px;
+}
 
-  .professor .myicon-plus {
-    width: 41px;
-    height: 41px;
-    position: absolute;
-    z-index: 77;
-    bottom: -10px;
-    right: 0;
-  }
+.info-professor p:nth-of-type(4),.info-professor p:nth-of-type(5){
+	font-family: "PingFangSC";
+	font-size: 14px;
+	color: #444444;
 
-  .professor .text {
-    width: 65%;
-    height: 100%;
-    padding-top: 20px;
-    padding-left: 20px;
-    display: inline-block;
-    color: #fff;
-    text-align: left;
-    font-size: 12px;
-    position: relative;
-  }
-
-  .professor .text .realname {
-    font-size: 20px;
-    font-weight: bolder;
-    margin-bottom: 5px;
-  }
-
-  .professor .text .postion {
-    position: absolute;
-    right: 10px;
-    top: 20px;
-  }
-
-  .professor .text .mui-icon {
-    width: 12px;
-    height: 12px;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-
-  .avatar {
-    z-index: 9;
-    color: #ffffff;
-    display: inline-block;
-    margin-top: 10px;
-    height: 100px;
-    width: 100px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 50%;
-    vertical-align: top;
-    position: relative;
-  }
-
-  .avatar .avatarInner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .avatar img {
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .part2 {
-    padding: 17px 0 17px 20px;
-    background: #fff;
-  }
-
-  .part2:after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-  .part2 .progressBar {
-    position: relative;
-    border: 2px solid #4990E2;
-    display: inline-block;
-    width: 120px;
-    text-align: right;
-    overflow: hidden;
-    top: 3px;
-    left: 10px;
-    height: 20px;
-    border-radius: 20px;
-  }
-
-  .part2 .progressBar .progress {
-    background: #4990e2;
-    color: #fff;
-    width: 75%;
-  }
-
-  .part2 .progressBar .progress span {
-    display: inline-block;
-    position: relative;
-    top: -2px;
-    right: 40px;
-  }
-
-  .part2 .tip {
-    margin-top: 20px;
-    color: #F6A623;
-    font-size: 16px;
-  }
-
-  .part2 .mui-icon{
-    margin-left:20px;
-    font-size: 17px;
-    color:#F6A623;
-  }
-
-  .mui-navigate-right:after, .mui-push-right:after {
-    color: #4a4a4a;
-  }
-
-  .mui-table-view-cell {
-    color: #4A4A4A;
-    padding-top: 12px;
-    padding-bottom: 13px;
-  }
-
+	
+}
+.info-professor p:nth-of-type(6) .info-progress{
+	display: inline-block;
+	width: 70%;
+	height: 12px;
+	border:1px solid rgb(3,174,249);
+	border-radius: 50px;
+	margin-right: 10px;
+	margin-bottom: -3px;
+	overflow: hidden;
+	
+}
+.info-professor p:nth-of-type(6) .info-progress>i{
+	font-style: normal;
+	display: inline-block;
+	width: 80px;
+	height:13px;
+	background: rgb(3,174,249);
+	margin-bottom: 3px;
+	margin-left: -161px;
+}
+.info-professor p:nth-of-type(6) .info-text{
+	font-family: "PingFangSC";
+	font-size:12px;
+	color:#808080;
+}
   .paizhao {
-    position: relative;
-    padding:20px;
-    font-size:14px;
+  	width: 100%;
+	height:100px;
+	background: #FFFFFF;
+	padding: 19px 12px 0 12px;
+  	
+  	font-family: "PingFangSC";
+	font-size:12px;
+	color: rgb(128,128,128);
+	
+
   }
-
-
-
-  .paizhao .mui-icon {
-
-    width: 100px;
-    height: 100px;
-  }
-
   .part3 .desc {
     margin-left: 40px;
     font-size: 12px;
@@ -481,6 +475,45 @@
   .part3 .important {
     color: #F6A623;
   }
+  
+  .info-choose{
+  	width: 100%;
+  	height:95px;
+  	background: #FFFFFF;
+  	position: absolute;
+  	bottom: 0;
+  	padding-top:13px;
+  	padding-left: 39px;
+  	z-index: 999;
+  	display: none;
+   
+  }
+  .info-choose p{
+  	width: 45px;
+  	height: 71px;
+    float: left;
+  	
+  }
+.info-choose p:nth-of-type(2){
+	margin-left: 36px;
+}
+.info-choose p svg{
+	font-size: 48px;
+	color: rgb(220,220,220);
+}
+
+.info-choose p span{
+	display: block;
+	margin-left: 10px;
+	margin-top: 2px;
+	color:#808080;
+	font-size: 13px;
+	
+}
+
+#mui-popover-action{
+	background: #FFFFFF;
+}
 
   @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     .part2 .progressBar{
