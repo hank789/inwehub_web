@@ -41,7 +41,7 @@
      		{{ user.info.email }}
      	</p>
      	<p>
-     		<span class="info-progress"><i  :style="'width:'+ user.info.account_info_complete_percent +'%'"></i></span>
+     		<span class="info-progress"><i :style="'width:'+ user.info.account_info_complete_percent +'%'"></i></span>
      		<span class="info-text">已编辑{{ user.info.account_info_complete_percent }}%</span>
      	</p>
      </div>
@@ -430,25 +430,26 @@
 
 	
 }
+
+
+
 .info-professor p:nth-of-type(6) .info-progress{
 	display: inline-block;
 	width: 70%;
 	height: 12px;
-	border:1px solid rgb(3,174,249);
 	border-radius: 50px;
-	margin-right: 10px;
-	margin-bottom: -3px;
 	overflow: hidden;
+	border: 0.5px solid rgb(3,174,249);
+	margin-bottom: -2px;
 	
 }
 .info-professor p:nth-of-type(6) .info-progress>i{
-	font-style: normal;
 	display: inline-block;
-	width: 80px;
-	height:13px;
-	background: rgb(3,174,249);
-	margin-bottom: 3px;
-	margin-left: -161px;
+	font-style: normal;
+	margin-bottom: 8px;
+	margin-left: -14px;
+	height:12px;
+	background:rgb(3,174,249) ;
 }
 .info-professor p:nth-of-type(6) .info-text{
 	font-family: "PingFangSC";
