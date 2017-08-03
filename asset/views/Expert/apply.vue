@@ -10,7 +10,7 @@
             <div class="avatarInner"><img class="avatar" :src="avatar"></div>
           </div>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadHeader()">
-            <use xlink:href="#icon-xiangji"></use>
+            <use xlink:href="#icon-xiangjibaidi"></use>
           </svg>
         </div>
         <div class="title">用户头像</div>
