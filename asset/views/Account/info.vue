@@ -15,7 +15,7 @@
 			</svg>
 			<span>预览</span>
      	</div>
-     	<p  @tap.stop.prevent="show">
+     	<p  @tap.stop.prevent="uploadAvatar()">
      		<img :src="user.info.avatar_url" class="avatar"/>
      		<span>
      		<svg class="icon" aria-hidden="true">
@@ -88,7 +88,7 @@
        
         
     <div class="info-choose mui-popover mui-popover-action mui-popover-bottom" id="mui-popover-action">
-    	   <p @tap.stop.prevent="changeAvatarH5">
+    	   <p @tap.stop.prevent="getImage()">
     	   	 <svg class="icon" aria-hidden="true">
 		     <use xlink:href="#icon-xiangce"></use>
 		 </svg>
@@ -150,17 +150,14 @@
     },
     methods: {
     	show(){
-    		
-			mui(".info-choose").popover('toggle'); 
-		   
-		    
+	 mui(".info-choose").popover('toggle'); 	    
     	},
       warning:function(){
           mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function(){}, 'div');
       },
       uploadAvatar:function(){
         if (mui.os.plus) {
-          this.changeAvatar();
+          this.show();
         } else {
           this.changeAvatarH5();
         }
