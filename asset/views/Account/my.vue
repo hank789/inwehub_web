@@ -144,7 +144,7 @@
 
     </div>
 
-
+     <div id="statusBarStyle" bgColor="#fff" mode="dark"></div>
 
   </div>
 </template>
@@ -197,9 +197,9 @@
                 break;
               default:
                this.$router.pushPlus('/company/submit');
-              
+
             }
-	    		
+
     	    },
 	    	toApply(status){
 	    		switch (status) {
@@ -212,9 +212,9 @@
               case 3:
                 this.$router.pushPlus('/expert/apply');
                 break;
-              
+
             }
-	    		
+
 	    	},
       getNumbers:function(number){
         var html = '';
@@ -224,7 +224,7 @@
           html += '<svg class="icon a" aria-hidden="true"><use xlink:href="#icon-'+num+'"></use></svg>';
         }
         return html;
-       
+
       },
       yaoqing(){
         mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
@@ -275,7 +275,7 @@
     },
     mounted(){
       this.getToken();
-      
+
 
     }
   }
@@ -539,7 +539,7 @@
 
 .my-apply div p{
 	margin-top: 10px;
-	
+
 
 }
 .my-apply div p span{
@@ -577,8 +577,8 @@
    	width: 23%;
    	height: 70px;
    	text-align: center;
-   	
-   	
+
+
    }
    .part2  li span:nth-of-type(1){
   	padding: 0;
@@ -589,7 +589,7 @@
 	font-size: 13px;
 	color: #444444;
   }
- 
+
   .part2  li span:nth-of-type(2){
   	padding: 0;
   	margin: 0;
@@ -598,7 +598,7 @@
 	color: #808080;
 	display:block;
   }
-  
+
 
 .my-option{
 	width: 100%;

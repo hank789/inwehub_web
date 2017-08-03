@@ -834,3 +834,7 @@ input.upload-file[type=file]{
 }
 
 .schedule{position: fixed;}
+
+#statusBarStyle{
+  display: none;
+}
