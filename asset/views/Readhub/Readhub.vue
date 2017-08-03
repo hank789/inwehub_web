@@ -50,7 +50,7 @@
           function createEmbed(ws,url) {
             var topoffset='0px';
 
-            var embed=plus.webview.create(url,'embed',{popGesture: 'hide',
+            var embed=plus.webview.create(url,'inwehub_embed',{popGesture: 'hide',
               top:topoffset,
               bottom:'0px',
               position:'dock',
