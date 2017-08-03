@@ -15,7 +15,7 @@
 			</svg>
 			<span>预览</span>
      	</div>
-     	<p  @tap.stop.prevent="changeAvatarH5">
+     	<p  @tap.stop.prevent="show">
      		<img :src="user.info.avatar_url" class="avatar"/>
      		<span>
      		<svg class="icon" aria-hidden="true">
@@ -87,15 +87,14 @@
        </div>
        
         
-    <div class="info-choose">
-    	<div class="info-show">
-    	   <p>
+    <div class="info-choose mui-popover mui-popover-action mui-popover-bottom" id="mui-popover-action">
+    	   <p @tap.stop.prevent="changeAvatarH5">
     	   	 <svg class="icon" aria-hidden="true">
 		     <use xlink:href="#icon-xiangce"></use>
 		 </svg>
 		 <span>相册</span>
     	   </p>
-	   <p>
+	   <p @tap.stop.prevent="changeAvatar">
 	   	 <svg class="icon" aria-hidden="true">
 		   <use xlink:href="#icon-xiangji"></use>
 		 </svg>
@@ -103,7 +102,6 @@
 	   </p>
 	</div>
 	</div>
-    </div>
    
        
     </div>
@@ -151,6 +149,12 @@
       });
     },
     methods: {
+    	show(){
+    		
+			mui(".info-choose").popover('toggle'); 
+		   
+		    
+    	},
       warning:function(){
           mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function(){}, 'div');
       },
@@ -472,24 +476,16 @@
     color: #F6A623;
   }
   
-
   .info-choose{
-  	width: 100%;
-  	height:93.5%;
-  	opacity: 0.3;
-	background: #323232;
-  	position:fixed;
-  	bottom: 0;
-  	padding-top:13px;
-  	padding-left: 39px;
-  	display: none;
-  }
-  .info-show{
   	width: 100%;
   	height:95px;
   	background: #FFFFFF;
   	position: absolute;
   	bottom: 0;
+  	padding-top:13px;
+  	padding-left: 39px;
+  	z-index: 999;
+  	display: none;
    
   }
   .info-choose p{
@@ -514,6 +510,11 @@
 	font-size: 13px;
 	
 }
+
+#mui-popover-action{
+	background: #FFFFFF;
+}
+
   @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     .part2 .progressBar{
         width:160px !important;
