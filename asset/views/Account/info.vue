@@ -88,13 +88,13 @@
        
         
     <div class="info-choose mui-popover mui-popover-action mui-popover-bottom" id="mui-popover-action">
-    	   <p @tap.stop.prevent="getImage()">
+    	   <p @tap.stop.prevent="galleryImg()">
     	   	 <svg class="icon" aria-hidden="true">
 		     <use xlink:href="#icon-xiangce"></use>
 		 </svg>
 		 <span>相册</span>
     	   </p>
-	   <p @tap.stop.prevent="changeAvatar">
+	   <p @tap.stop.prevent="getImage()">
 	   	 <svg class="icon" aria-hidden="true">
 		   <use xlink:href="#icon-xiangji"></use>
 		 </svg>

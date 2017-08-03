@@ -10,9 +10,11 @@
 
 	      <div class="my-personal">
 	      	 <div class="my-info">
-	      	 	<span>郭大红</span>
-	      	 	<img src="../../statics/images/rank.png" />
-	      	 	<i>1</i>
+	      	 	<span>{{name}}</span>
+	      	 	<p>
+	      	 	  <img src="../../statics/images/rank.png" />
+	      	 	  <i>1</i>
+	      	 	</p>
 				<svg class="icon" aria-hidden="true">
 				  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				</svg>
@@ -341,6 +343,7 @@
   height: 30px;
   margin-bottom:9px;
   position: relative;
+  
  }
 
 
@@ -352,30 +355,35 @@
 	margin-right: 1.5px;
 
  }
+.my-personal .my-info p{
+	display: inline-block;
+	position: relative;
+	
+}
 
- .my-personal .my-info img{
- 	width: 18px;
+ .my-personal .my-info p img{
+ 	width: 19px;
 	height: 18px;
- 	margin-bottom:-1px;
- 	margin-left: 2px;
  	color:rgb(7,215,253);
- 	position: relative;
+ 	margin-bottom: -3px;
+ 	margin-left: 3px;
+ 	
  }
 
- .my-personal .my-info i:nth-of-type(1){
+ .my-personal .my-info p  i:nth-of-type(1){
  	font-style: normal;
- 	position:absolute;
- 	left:68px;
- 	z-index: 99;
- 	font-size: 10px;
-	text-align:center;
-	color:#FFFFFF;
+ 	font-size: 10px; 
+	color:#FFFFFF; 
+	position: absolute;
+	top: -3px;
+	left:9px;
+    
  }
 
  .my-personal .my-info svg:nth-of-type(1){
  	font-size:26px;
- 	margin-bottom: -2px;
- 	margin-left: -6px;
+ 	margin-bottom: -4px;
+ 	margin-left:-3px;
  	color:rgb(3,174,249);
  	position: relative;
 
