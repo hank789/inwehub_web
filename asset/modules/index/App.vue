@@ -206,8 +206,6 @@
       //监听推送
       mui.plusReady(function () {
         if (mui.os.plus) {
-          plus.navigator.setStatusBarBackground("#161616");
-          plus.navigator.setStatusBarStyle('light');
 
           var noticeTo = function (payload) {
             switch (payload.object_type) {
