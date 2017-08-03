@@ -28,7 +28,7 @@
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" :class="{ 'mui-active' : isDiscover}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none')" :class="{ 'mui-active' : isDiscover}">
             <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
             <span class="mui-icon myicon myicon-task-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
@@ -293,20 +293,32 @@
 
 
 
-      if (mui.os.plus && mui.os.ios) {
+      if (mui.os.plus) {
         mui.init({
+          //预加载页面，用于加载外部url
+          preloadPages:[
+            {
+              url:'index.html#/discover',
+              id:'index.html#/discover',
+              styles: {
+                popGesture: 'hide'
+              },
+              extras:{preload: true}
+            }
+          ],
           swipeBack:true, //启用右滑关闭功能
           beforeback: function(){
-
-              var self = plus.webview.currentWebview();
-              //获得父页面的webview
-              var parent_webview = self.opener();
-              if (parent_webview){
-                console.log('Webview窗口：'+parent_webview.getURL());
-                //触发父页面的自定义事件(refresh),从而进行刷新
-                mui.fire(parent_webview, 'refreshData');
-                //子页面也刷新数据
-                mui.fire(self, 'refreshData');
+              if (mui.os.ios) {
+                var self = plus.webview.currentWebview();
+                //获得父页面的webview
+                var parent_webview = self.opener();
+                if (parent_webview){
+                  console.log('Webview窗口：'+parent_webview.getURL());
+                  //触发父页面的自定义事件(refresh),从而进行刷新
+                  mui.fire(parent_webview, 'refreshData');
+                  //子页面也刷新数据
+                  mui.fire(self, 'refreshData');
+                }
               }
 
             return true;
