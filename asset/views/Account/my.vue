@@ -18,17 +18,19 @@
 				<svg class="icon" aria-hidden="true">
 				  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				</svg>
-                <svg class="icon share" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
-				  <use xlink:href="#icon-fenxiang"></use>
-				</svg>
-	      	 	<span class="share" @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
+			    <p>
+	                <svg class="icon share" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
+					  <use xlink:href="#icon-fenxiang"></use>
+					</svg>
+		      	 	<span class="share" @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
+	      	 	</p>
 	      	 	<i class="bot"></i>
 	      	 </div>
 
 	      	 <div class="my-detail">
-	      	 	<span class="grow">成长值:</span>
+	      	 	<span class="grow">成长值</span>
 	      	 	<span>{{user_credits }}</span>
-                <span class="integral">贡献值:</span>
+                <span class="integral">贡献值</span>
                 <span>{{user_coins }}</span>
 	      	 </div>
 	      </div>
@@ -36,7 +38,7 @@
       </div>
       <div class="my-news">
 	     	<p  @tap.stop.prevent="$router.pushPlus('/my/focus')">关注<span>{{attention}}</span></p>
-	     	<p>咨询<span>{{answers}}</span></p>
+	     	<p @tap.stop.prevent="$router.pushPlus('/answers')">咨询<span>{{answers}}</span></p>
 	     	<p>评价<span>{{grade}}</span></p>
 	     	<p>{{total_score}}</p>
 	  </div>
@@ -66,7 +68,7 @@
 			  <use xlink:href="#icon-qiyezhanghao"></use>
 		 </svg>
 		 <p>
-		 	<span v-if="expert_apply_status =='2'">企业账号认证号</span>
+		 	<span v-if="expert_apply_status =='2'">企业账号认证</span>
 		 	<span 　v-else>申请企业账</span>
 			<span v-if="company_apply_status =='0'">点击前往申请</span>
 			<span v-if="company_apply_status =='1'">申请审核中</span>
@@ -332,7 +334,8 @@
  .my-personal {
    width:71%;
    height: 69px;
-   margin: 30.5px 0 0 15.5px;
+   margin: 30.5px 0 0 6px;
+   padding-right: 4px;
    float: left;
    position: absolute;
    right: 8px;
@@ -355,7 +358,7 @@
 	margin-right: 1.5px;
 
  }
-.my-personal .my-info p{
+.my-personal .my-info p:nth-of-type(1){
 	display: inline-block;
 	position: relative;
 	
@@ -380,6 +383,7 @@
     
  }
 
+
  .my-personal .my-info svg:nth-of-type(1){
  	font-size:26px;
  	margin-bottom: -4px;
@@ -390,25 +394,27 @@
 
  }
 
- .my-personal .my-info svg:nth-of-type(2){
- 	font-size:19px;
+.my-personal .my-info p:nth-of-type(2){
+	display: inline-block;
+	position: relative;
+	float: right;
+	
+}
+ .my-personal .my-info  p:nth-of-type(2) svg{
+ 	font-size:18px;
  	color:rgb(3,174,249);
- 	position: absolute;
- 	right:26%;
+ 	margin-bottom: -3px;
 
 
  }
 
- .my-personal .my-info span:nth-of-type(2){
- 	display: inline-block;
- 	padding: 0;
- 	margin: 0;
- 	/*background: #007AFF;*/
+ .my-personal .my-info  p:nth-of-type(2) span{
  	font-family: "PingFangSC";
 	font-size:13px;
 	text-align: center;
 	float: right;
 	color: #808080;
+	margin-left: 3px;
 
 
  }
@@ -450,18 +456,22 @@
  .my-news p{
  	display:inherit;
  	float: left;
+ 	width: 18%;
  	height: 16px;
  	line-height: 16px;
  	font-family: ".PingFangSC";
 	font-size: 14px;
 	color: #808080;
+	text-align: center;
 	border-right: 1px solid #c8c8c8;
-	padding: 0 12px 0 12px;
+	/*padding: 0 12px 0 12px;*/
 
  }
 
  .my-news p:last-child{
  	border-right:none;
+ 	width: 30%;
+ 	margin-left: 8px;
  }
 
  .my-news p span{
