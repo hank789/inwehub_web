@@ -1,8 +1,7 @@
 <template>
 <div>
-  <header class="mui-bar mui-bar-nav">
+  <header v-show="iframeState" id="header" class="mui-bar mui-bar-transparent">
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">阅读</h1>
   </header>
   <iframe v-show="iframeState" id="show-iframe"  @load="loaded" frameborder=0 name="showHere" scrolling=auto></iframe>
 </div>
@@ -49,11 +48,24 @@
           ws.addEventListener('show',createEmbed(ws,this.url),false);
 
           function createEmbed(ws,url) {
-            var topoffset='44px';
-            if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
-              topoffset=(Math.round(plus.navigator.getStatusbarHeight())+44)+'px';
-            }
-            var embed=plus.webview.create(url,'embed',{popGesture: 'hide',top:topoffset,bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
+            var topoffset='0px';
+
+            var embed=plus.webview.create(url,'embed',{popGesture: 'hide',
+              top:topoffset,
+              bottom:'0px',
+              position:'dock',
+              dock:'bottom',
+              titleNView: {
+                backgroundColor: '#f7f7f7', //导航栏背景色
+                titleText: '', //导航栏标题
+                titleColor: '#000000', //文字颜色
+                type: 'transparent', //透明渐变样式
+                autoBackButton: true, //自动绘制返回箭头
+                splitLine: { //底部分割线
+                  color: '#cccccc'
+                }
+              },
+              bounce:'vertical'});
             ws.append(embed);
           }
         });

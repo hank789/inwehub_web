@@ -49,6 +49,7 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
         styles: {
           popGesture: popGesture
         },
+        extras:{preload: false},
         waiting: {
           autoShow: false
         }
