@@ -761,7 +761,7 @@ const routes = [{
 	{ // discover detail
 		path: '/collect',
 		meta: {
-			title: '我的收藏',
+			title: '我的关注',
 			wechatHideHeader: true,
 			keepAlive: true
 		},
