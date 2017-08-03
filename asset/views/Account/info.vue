@@ -7,7 +7,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-     
+
      <div class="info-professor">
      	<div class="info-look" @tap.stop.prevent="$router.pushPlus('/my/resume')">
      		<svg class="icon" aria-hidden="true">
@@ -56,27 +56,27 @@
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')">工作经历
-              
+
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects')">项目经历
-               
+
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus')">教育经历
-                
+
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains')">培训认证
-                
+
             </a>
           </li>
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')"><span class="mui-icon myicon myicon-help"></span>隐私设置
-             
+
             </a>
           </li>
         </ul>
@@ -85,27 +85,13 @@
       <div class="paizhao">
         填写嫌麻烦，可发送简历到 <a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码">hi@inwehub.com</a> ,小哈帮您维护！
        </div>
-       
-        
-    <div class="info-choose mui-popover mui-popover-action mui-popover-bottom" id="mui-popover-action">
-    	   <p @tap.stop.prevent="galleryImg()">
-    	   	 <svg class="icon" aria-hidden="true">
-		     <use xlink:href="#icon-xiangce"></use>
-		 </svg>
-		 <span>相册</span>
-    	   </p>
-	   <p @tap.stop.prevent="getImage()">
-	   	 <svg class="icon" aria-hidden="true">
-		   <use xlink:href="#icon-xiangji"></use>
-		 </svg>
-		  <span>相机</span>
-	   </p>
+
+
+      <uploadHeader ref="uploadHeader"></uploadHeader>
+
 	</div>
-	</div>
-   
-       
+
     </div>
-  </div>
 </template>
 
 <script>
@@ -114,6 +100,8 @@
   import localEvent from '../../stores/localStorage';
   import ACCOUNT_API from '../../api/account';
   import {updateUserInfoCache, getUserInfo} from '../../utils/user';
+  import uploadHeader from '../../components/uploadHeader.vue';
+
   export default {
     data: () => ({
       user: {
@@ -141,6 +129,9 @@
       showInwehubWebview();
       this.getUserInfo();
     },
+    components: {
+      uploadHeader
+    },
     mounted(){
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
@@ -149,129 +140,11 @@
       });
     },
     methods: {
-    	show(){
-	 mui(".info-choose").popover('toggle'); 	    
-    	},
       warning:function(){
           mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function(){}, 'div');
       },
       uploadAvatar:function(){
-        if (mui.os.plus) {
-          this.show();
-        } else {
-          this.changeAvatarH5();
-        }
-      },
-      changeAvatarH5:function(){
-        let fileInput = document.body.querySelector('input.upload-avatar[type=file]');
-        if (fileInput == null) {
-          fileInput = document.createElement('input');
-          fileInput.setAttribute('type', 'file');
-          fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/jpg, image/bmp, image/x-icon');
-          fileInput.classList.add('upload-avatar');
-          fileInput.addEventListener('change', () => {
-            if (fileInput.files != null && fileInput.files[0] != null) {
-
-              var file = fileInput.files[0];
-
-              var size = file.size/1000;  //kb
-              if (size > 5120) {
-                mui.alert('图片单张不允许超过5M！');
-                return false;
-              }
-
-              let reader = new FileReader();
-              reader.onload = (e) => {
-                fileInput.value = "";
-
-                this.$router.push({path:'/header-h5', params:{file:file}}, function(router){
-                  router.params.file = e.target.result;
-                });
-              }
-              reader.readAsDataURL(file);
-
-            }
-          });
-          document.body.appendChild(fileInput);
-        }
-        fileInput.click();
-      },
-      changeAvatar:function(){
-        if (mui.os.plus) {
-          var a = [{
-            title: "拍照"
-          }, {
-            title: "从手机相册选择"
-          }];
-          plus.nativeUI.actionSheet({
-            title: "修改头像",
-            cancel: "取消",
-            buttons: a
-          }, (b) => {
-            switch (b.index) {
-              case 0:
-                break;
-              case 1:
-                this.getImage();
-                break;
-              case 2:
-                this.galleryImg();
-                break;
-              default:
-                break
-            }
-          })
-        }
-      },
-      uploadFile(){
-          mui.alert('开发中');
-      },
-      getImage:function(){
-        var t = this;
-        var c = plus.camera.getCamera();
-        c.captureImage(function (e) {
-          t.toClip(e);
-
-        }, function (s) {
-          console.log("error" + s);
-        }, {
-          filename: "_doc/head.jpg"
-        })
-      },
-      toClip(path)
-      {
-        var t = this;
-        plus.zip.compressImage({
-            src: path,
-            dst: "_doc/c.jpg",
-            overwrite: true,
-            quality: 20
-          },
-          function (event) {
-
-            var newurl = plus.io.convertLocalFileSystemURL(event.target);
-            if (mui.os.ios) {
-              newurl = 'file://' + newurl;
-            }
-
-            plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
-              t.localUrl = entry.toRemoteURL();
-              localEvent.setLocalItem('avatar', {url: t.localUrl, path: entry.toLocalURL()});
-              t.$router.push('/header');
-            }, function (error) {
-              alert(error.message);
-            });
-          }, function (error) {
-            alert("Compress error!" + error.message);
-          });
-      },
-      galleryImg:function(){
-        plus.gallery.pick((a) => {
-          this.toClip(a);
-        }, function (a) {
-        }, {
-          filter: "image"
-        })
+        this.$refs.uploadHeader.uploadAvatar();
       },
       getUserInfo()
       {
@@ -357,7 +230,7 @@
 	font-family: "PingFangSC";
 	font-size:14px;
 	color:#444444;
-	
+
 }
  .info-professor p:nth-of-type(1) img{
  	width: 69px;
@@ -380,7 +253,7 @@
    position: absolute;
    left: -4px;
    top: -3px;
-  
+
 	}
 .info-professor p:nth-of-type(2){
 	margin-top: 12px;
@@ -395,7 +268,7 @@
 	font-size: 20px;
 	color: rgb(3,174,249);
 	margin-bottom: -2px;
-	
+
 }
 .info-professor p:nth-of-type(3){
 	margin-top: 7px;
@@ -425,7 +298,7 @@
 	font-size: 14px;
 	color: #444444;
 
-	
+
 }
 
 
@@ -438,7 +311,7 @@
 	overflow: hidden;
 	border: 0.5px solid rgb(3,174,249);
 	margin-bottom: -2px;
-	
+
 }
 .info-professor p:nth-of-type(6) .info-progress>i{
 	display: inline-block;
@@ -458,11 +331,11 @@
 	height:100px;
 	background: #FFFFFF;
 	padding: 19px 12px 0 12px;
-  	
+
   	font-family: "PingFangSC";
 	font-size:12px;
 	color: rgb(128,128,128);
-	
+
 
   }
   .part3 .desc {
@@ -473,7 +346,7 @@
   .part3 .important {
     color: #F6A623;
   }
-  
+
   .info-choose{
   	width: 100%;
   	height:95px;
@@ -484,13 +357,13 @@
   	padding-left: 39px;
   	z-index: 999;
   	display: none;
-   
+
   }
   .info-choose p{
   	width: 45px;
   	height: 71px;
     float: left;
-  	
+
   }
 .info-choose p:nth-of-type(2){
 	margin-left: 36px;
@@ -506,7 +379,7 @@
 	margin-top: 2px;
 	color:#808080;
 	font-size: 13px;
-	
+
 }
 
 #mui-popover-action{
