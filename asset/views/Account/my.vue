@@ -11,10 +11,7 @@
 					<div class="my-personal">
 						<div class="my-info">
 							<span>{{name}}</span>
-							<p>
-								<img src="../../statics/images/rank.png" />
-								<i>1</i>
-							</p>
+							<p>{{ user_level }}</p>
 							<svg class="icon" aria-hidden="true">
 								<use xlink:href="#icon-zhuanjiabiaoji"></use>
 							</svg>
@@ -341,27 +338,23 @@
 	}
 	
 	.my-personal .my-info p:nth-of-type(1) {
-		display: inline-block;
-		position: relative;
-	}
-	
-	.my-personal .my-info p img {
 		width: 19px;
 		height: 18px;
-		color: rgb(7, 215, 253);
-		margin-bottom: -3px;
-		margin-left: 3px;
-	}
-	
-	.my-personal .my-info p i:nth-of-type(1) {
+		display: inline-block;
+		position: relative;
+		top: -2px;
 		font-style: normal;
+		line-height: 15px;
 		font-size: 10px;
-		color: #FFFFFF;
-		position: absolute;
-		top: -3px;
-		left: 9px;
+		color:#FFFFFF;
+		text-align: center;
+		background:url("../../statics/images/rank.png") no-repeat;
+		background-size: 19px 19px;
+		background-position:top;
+		
+		
 	}
-	
+
 	.my-personal .my-info svg:nth-of-type(1) {
 		font-size: 26px;
 		margin-bottom: -4px;
