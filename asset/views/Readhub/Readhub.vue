@@ -1,8 +1,5 @@
 <template>
 <div>
-  <header v-show="iframeState" id="header" class="mui-bar mui-bar-transparent">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-  </header>
   <iframe v-show="iframeState" id="show-iframe"  @load="loaded" frameborder=0 name="showHere" scrolling=auto></iframe>
 </div>
 
