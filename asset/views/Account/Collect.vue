@@ -24,7 +24,7 @@
               	</p>
               </div>
               <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" >
-			    <use xlink:href="#tiwen"></use>
+			    <use xlink:href="#icon-tiwen"></use>
 		    	 </svg>
 		    	 
 		    	 <i class="bot"></i>
@@ -196,8 +196,8 @@
  	float: left;
  }
  .my-focus-item>svg{
-    font-size: 25px;
-    margin-top: 10px;
+    font-size:60px;
+    margin-top:-7px;
     float: right;
  }
  .my-focus-item div p:nth-of-type(1) span{
