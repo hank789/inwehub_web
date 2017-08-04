@@ -68,10 +68,7 @@
 
             <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该工作经历的详细信息'"></MTextarea>
 
-            <div class="deleteWrapper" v-show="id">
-              <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem">删除
-              </button>
-            </div>
+            
     </div>
 
 
@@ -272,18 +269,6 @@
           mui.toast('操作成功');
           this.bak = '';
           mui.back();
-        });
-      },
-      deleteItem(){
-        var btnArray = ['否', '是'];
-        mui.confirm('确认要删除？', '删除', btnArray, e => {
-            if (e.index == 1) {
-                var url = ACCOUNT_API.DELETE_ACCOUNT_JOB;
-                postRequest(url, {id:this.id}).then(response => {
-                  mui.toast('删除成功');
-                  mui.back();
-                });
-            }
         });
       }
     },
