@@ -28,7 +28,7 @@
 
           </div>
 
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none')" :class="{ 'mui-active' : isDiscover}">
+          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none','hide',true)" :class="{ 'mui-active' : isDiscover}">
             <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
             <span class="mui-icon myicon myicon-task-hover" v-else></span>
             <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
