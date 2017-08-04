@@ -19,7 +19,7 @@ function setStatusBarStyle(style)
 
 function autoStatusBar()
 {
-  var defaultBgColor = '#161616';
+  var defaultBgColor = '#3c3e44';
   var defaultMode = 'light';
   var defaultBackground = '';
 

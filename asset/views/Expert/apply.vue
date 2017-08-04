@@ -6,10 +6,10 @@
     <div class="mui-content">
       <div class="professorCard">
         <div class="header">
-          <div class="avatar" @tap.stop.prevent="uploadHeader()">
+          <div class="avatar" @tap.stop.prevent="uploadAvatar()">
             <div class="avatarInner"><img class="avatar" :src="avatar"></div>
           </div>
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadHeader()">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadAvatar()">
             <use xlink:href="#icon-xiangjibaidi"></use>
           </svg>
         </div>
@@ -85,6 +85,9 @@
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="submit()">提交申请</button>
       </div>
     </div>
+
+    <uploadHeader ref="uploadHeader"></uploadHeader>
+
   </div>
 </template>
 
@@ -95,6 +98,7 @@
   import MTextarea from '../../components/MTextarea.vue';
   import {selectFileH5, compressImg} from '../../utils/uploadFile';
   import {updateUserInfo} from '../../utils/user';
+  import uploadHeader from '../../components/uploadHeader.vue';
 
   export default {
     data(){
@@ -114,15 +118,12 @@
       }
     },
     components: {
-      MTextarea
+      MTextarea,
+      uploadHeader
     },
     methods: {
-      uploadHeader(){
-        selectFileH5('img', (file, base64) => {
-          this.$router.push({path:'/header-h5', params:{file:file}}, function(router){
-            router.params.file = base64;
-          });
-        });
+      uploadAvatar:function(){
+        this.$refs.uploadHeader.uploadAvatar();
       },
       submit(){
         if (!this.name) {
