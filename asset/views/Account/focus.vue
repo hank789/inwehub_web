@@ -25,10 +25,10 @@
               	  <span>樱伟信息科技</span>
               	</p>
               </div>
-              <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.user_id)" v-if="nothing == 0">
+              <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.user_id,index)" v-if="!item.is_following">
 			    <use xlink:href="#icon-shoucang"></use>
 		    	 </svg>
-		    	 <svg class="icon" aria-hidden="true"  style="color: rgb(3,174,249);"  @tap.stop.prevent="collectProfessor(item.user_id)" v-if="nothing == 1">
+		    	 <svg class="icon" aria-hidden="true"  style="color: rgb(3,174,249);"  @tap.stop.prevent="collectProfessor(item.user_id,index)" v-else>
 			    <use xlink:href="#icon-shoucanghover"></use>
 		    	 </svg>
 		    	 <i class="bot"></i>
@@ -101,15 +101,15 @@
           mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
         });
       },
-      collectProfessor(id, index) {
-        postRequest(`follow/question`, {id:id}).then(response => {
+      collectProfessor(id,index) {
+        postRequest(`follow/user`, {id:id}).then(response => {
             var code = response.data.code;
             if (code !== 1000) {
               mui.alert(response.data.message);
               return;
             }
-            this.tip = response.data.data.tip;
-//          this.list[index].is = 23
+            console.log(this.list[index].is_following )
+            this.list[index].is_following = !this.list[index].is_following;
             mui.toast(response.data.data.tip);
         });
 

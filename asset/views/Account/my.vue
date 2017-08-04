@@ -343,7 +343,7 @@
 		height: 18px;
 		display: inline-block;
 		position: relative;
-		top: -2px;
+		top: -3px;
 		font-style: normal;
 		line-height: 15px;
 		font-size: 10px;

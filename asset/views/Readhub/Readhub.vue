@@ -1,8 +1,5 @@
 <template>
 <div>
-  <header v-show="iframeState" id="header" class="mui-bar mui-bar-transparent">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-  </header>
   <iframe v-show="iframeState" id="show-iframe"  @load="loaded" frameborder=0 name="showHere" scrolling=auto></iframe>
 </div>
 
@@ -55,13 +52,6 @@
               bottom:'0px',
               position:'dock',
               dock:'bottom',
-              titleNView: {
-                backgroundColor: '#f7f7f7', //导航栏背景色
-                titleText: '阅读', //导航栏标题
-                titleColor: '#000000', //文字颜色
-                type: 'default', //透明渐变样式
-                autoBackButton: true //自动绘制返回箭头
-              },
               bounce:'vertical'});
             ws.append(embed);
           }

@@ -398,7 +398,37 @@
 	#mui-popover-action {
 		background: #FFFFFF;
 	}
-	
+	.mui-table-view:after {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 14px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #F2F2F2;
+}
+.mui-table-view-cell:after {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    }
+
+   .mui-table-view:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #fff;
+}
 	@media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
 		.part2 .progressBar {
 			width: 160px !important;
