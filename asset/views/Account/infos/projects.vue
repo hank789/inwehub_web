@@ -201,9 +201,9 @@
    }
   .box-shadow-3{  
   	
-  -webkit-box-shadow:0 0 10px rgba(3, 174, 249, .8);  
-  -moz-box-shadow:0 0 10px rgba(3, 174, 249, .8);
-  box-shadow:0 0 10px rgba(3, 174, 249, .8);
+  -webkit-box-shadow:0 0 5px rgba(3, 174, 249, .8);  
+  -moz-box-shadow:0 0 5px rgba(3, 174, 249, .8);
+  box-shadow:0 0 5px rgba(3, 174, 249, .8);
 
 }  
 </style>
