@@ -49,13 +49,13 @@
     </div>
 
 
-    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/my',true,'none')" v-if="isMy">
+    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/my')" v-if="isMy">
       <svg class="icon fourIcon" aria-hidden="true">
         <use xlink:href="#icon-wode-hover"></use>
       </svg>
     </div>
 
-    <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my',true,'none')" v-else>
+    <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" v-else>
       <svg class="icon fourIcon" aria-hidden="true">
         <use xlink:href="#icon-wode"></use>
       </svg>
