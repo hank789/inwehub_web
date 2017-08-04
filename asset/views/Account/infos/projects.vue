@@ -7,15 +7,15 @@
 		</header>
 
 		<div class="mui-content" v-show="!loading" id="container">
-			<ul class="mui-table-view mui-table-view-chevron" v-show="projects.length == 0">
+			<ul class="mui-table-view-chevron" v-show="projects.length == 0">
 				<li class="mui-table-view-cell no-empty">请维护项目经历</li>
 			</ul>
 
 			<ul class="mui-table-view mui-table-view-chevron"  id="OA_task_1">
-				<li v-for="(project, index) in projects" class="mui-table-view-cell  intro  mui-table-view-cell" >
+				<li v-for="(project, index) in projects" class="intro  mui-table-view-cell" >
 					
 					<div class="mui-slider-right mui-disabled" id="roof"   @tap.stop.prevent="deleteItem(project.id, index)">
-						<a class="mui-btn mui-btn-red">删除</a>
+						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
 					</div>
 					<div class="mui-slider-handle  slider" >
 						<p> {{ project.project_name }}</p>
@@ -32,7 +32,7 @@
 				</li>
 			</ul>
 
-			<div class="add" @tap.stop.prevent="$router.pushPlus('/my/info/project/0')">
+			<div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/project/0')">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-shuru"></use>
 				</svg>
@@ -40,7 +40,7 @@
 
 		</div>
 		
-		<div id="statusBarStyle" background="#fff" mode="light"></div>
+		<div id="statusBarStyle" background="#fefefe" mode="light"></div>
 		
 	</div>
 </template>
@@ -155,7 +155,7 @@
 		font-size: 18px;
 		color: rgb(3, 174, 249);
 		top: 13px;
-		right: 10px;
+		right: 15px;
 		
 	}
 	
@@ -179,4 +179,31 @@
 	#roof{
 		z-index: 999;
 	}
+	
+ .mui-table-view:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    background: #f2f2f2;
+    }
+  
+   .mui-table-view-cell:after{
+   	 position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    background: #f2f2f2;
+   }
+  .box-shadow-3{  
+  	
+  -webkit-box-shadow:0 0 10px rgba(3, 174, 249, .8);  
+  -moz-box-shadow:0 0 10px rgba(3, 174, 249, .8);
+  box-shadow:0 0 10px rgba(3, 174, 249, .8);
+
+}  
 </style>
