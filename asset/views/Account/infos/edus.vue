@@ -29,7 +29,7 @@
 							<span>{{ edu.degree}}</span>
 						</p>
 					</div>
-					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/project/'+project.id)">
+					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/edu/'+edu.id)">
 							<use xlink:href="#icon-xiugai"></use>
 					</svg>
 				</li>
