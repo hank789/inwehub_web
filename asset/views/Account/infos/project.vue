@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack"></a>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="muiViewBack">取消</a>
       <h1 class="mui-title">项目经历</h1>
       <a @tap.stop.prevent="submit"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" :disabled="buttonSaveDisabled">保存</a>
@@ -67,11 +67,6 @@
 
       <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该项目经历的详细信息'"></MTextarea>
 
-      <!--<div class="deleteWrapper" v-show="id">
-        <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem('project')">
-          删除
-        </button>
-      </div>-->
     </div>
 
 
@@ -281,18 +276,6 @@
           mui.toast('操作成功');
           mui.back();
           this.bak = '';
-        });
-      },
-      deleteItem(){
-        var btnArray = ['否', '是'];
-        mui.confirm('确认要删除？', '删除', btnArray, e => {
-            if (e.index == 1) {
-                var url = ACCOUNT_API.DELETE_ACCOUNT_PROJECT;
-                postRequest(url, {f:this.id}).then(response => {
-                  mui.toast('删除成功');
-                  mui.back();
-                });
-            }
         });
       }
     },
