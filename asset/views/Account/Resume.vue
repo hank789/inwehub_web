@@ -11,7 +11,7 @@
         <div class="header">
           <div class="avatar">
             <div class="avatarInner">
-              <img :src="resume.isShareinfo.avatar_url" class="avatar"/>
+              <img :src="resume.info.avatar_url" class="avatar"/>
             </div>
           </div>
         </div>
