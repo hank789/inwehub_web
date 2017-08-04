@@ -9,40 +9,7 @@
           <router-view v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
 
-        <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
-          <div class="mui-tab-item mui-active" v-if="isHome">
-            <span class="mui-icon myicon myicon-home-hover"></span>
-            <div><span class="mui-icon myicon myicon-point-hover"></span></div>
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/home')" v-else>
-            <span class="mui-icon myicon myicon-home"></span>
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/task')" :class="{ 'mui-active' : isAsk}">
-            <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
-              }}</span></span>
-            <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
-              }}</span></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isAsk"></span></div>
-
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none')" :class="{ 'mui-active' : isDiscover}">
-            <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
-            <span class="mui-icon myicon myicon-task-hover" v-else></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
-
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" :class="{ 'mui-active':isMy}">
-            <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
-            <span class="mui-icon myicon myicon-my-hover" v-else></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
-
-          </div>
-        </nav>
-
+        <FooterComponent ref="Footer"></FooterComponent>
   </div>
 </template>
 
@@ -50,54 +17,20 @@
   import {mapGetters} from 'vuex'
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import FooterComponent from '../../components/Footer.vue';
 
   export default {
     data () {
       return {
         wechatTitle:this.$route.meta.title,
-        isHome: false,
-        isAsk: false,
-        isMy: false,
-        showBottom: true,
-        div: false,
-        isDiscover: false,
-        taskCount: 0
       }
     },
     methods: {
+      onCountChange(count){
+          this.$refs.Footer.onCountChange(count);
+      },
       onChangeWechatTitle(title) {
           this.wechatTitle = title;
-      },
-      onCountChange(count){
-          this.taskCount = count;
-
-          mui.plusReady(function () {
-
-            localEvent.setLocalItem('taskCount', {
-                value:count,
-            });
-
-            var webv = plus.webview.getWebviewById('index.html#/task');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-
-            webv = plus.webview.getWebviewById('index.html#/home');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/discover');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/my');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-          });
       },
       goRecommand: function () {
         this.expertNav();
@@ -110,96 +43,29 @@
       expertNav: function () {
         mui('#expert').popover('toggle');
       },
-      getCount(){
-
-        let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
-        if (!UserLoginInfo.token) {
-          return;
-        }
-
-        postRequest(`notification/count`, {}, false).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
-          var taskCount = response.data.data.todo_tasks;
-          this.onCountChange(taskCount);
-        });
-      },
       linkTo(dest){
         this.$router.push(dest);
-      },
-      changeNav(path, fullPath)
-      {
-        var curPath = path == '' ? 'home' : path;
-        this.isHome = this.isAsk = this.isMy = this.isDiscover = false;
-        this.showBottom = true;
-        mui.each(mui(".mui-tab-item"), function (index, item) {
-          item.className = "mui-tab-item";
-        });
-
-        switch (fullPath) {
-          case '/home':
-            this.isHome = true;
-            break;
-          case '/my':
-            this.isMy = true;
-            break;
-          case '/task':
-            this.isAsk = true;
-            break;
-          case '/discover':
-            this.isDiscover = true;
-            break;
-          default:
-            this.showBottom = false;
-        }
-
-        if (this.showBottom) {
-          this.getCount();
-        }
       }
     },
     created(){
-      var tmpArr = this.$route.path.split('/')
-      var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-      this.changeNav(curPath, this.$route.path);
+    },
+    components: {
+      FooterComponent
     },
     watch: {
       $route(to) {
-        var tmpArr = to.path.split('/');
-        var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-        this.changeNav(curPath, this.$route.path);
         this.wechatTitle = this.$route.meta.title;
       }
     },
     mounted () {
-
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
-        if (this.showBottom) {
-          console.log('refresh-app');
-          this.getCount();
+        if (this.$refs.Footer.showBottom) {
           if (this.$refs.routerView.initData) {
             this.$refs.routerView.initData();
           }
         }
       });
-
-
-      window.addEventListener('refreshTaskCount', (e)=>{
-        //执行刷新
-        if (this.showBottom) {
-          console.log('refresh-task-count');
-
-          var taskCount = localEvent.getLocalItem('taskCount');
-          if (taskCount.value) {
-              this.taskCount = taskCount.value;
-          }
-        }
-      });
-
 
       var router = this.$router;
 
@@ -294,16 +160,16 @@
       if (mui.os.plus) {
         mui.init({
           //预加载页面，用于加载外部url
-          preloadPages:[
-            {
-              url:'index.html#/discover',
-              id:'index.html#/discover',
-              styles: {
-                popGesture: 'hide'
-              },
-              extras:{preload: true}
-            }
-          ],
+//          preloadPages:[
+//            {
+//              url:'index.html#/discover',
+//              id:'index.html#/discover',
+//              styles: {
+//                popGesture: 'hide'
+//              },
+//              extras:{preload: true}
+//            }
+//          ],
           swipeBack:true, //启用右滑关闭功能
           beforeback: function(){
               if (mui.os.ios) {
@@ -330,36 +196,4 @@
     }
   }
 </script>
-
-<style scoped>
-  .footer-bar {
-    background-color: #fff;
-    box-shadow: none;
-  }
-
-  .footer-bar .mui-tab-item .mui-icon{
-    width:26px;
-    height:26px;
-  }
-
-  .footer-bar {
-    border-top: 1px solid #D9D9D9;
-  }
-
-  .footer-bar .mui-tab-item {
-    position: relative;
-  }
-
-  .footer-bar .mui-active div {
-    position: absolute;
-    width: 100%;
-    bottom: 5px;
-  }
-
-  .footer-bar .mui-active .myicon-point-hover {
-    width: 3px;
-    height: 3px;
-    top: 4px;
-  }
-</style>
 

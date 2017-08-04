@@ -113,7 +113,7 @@
       </div>
 
       <div class="askDetail">
-        <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 付费提问</div>
+        <!--<div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 付费提问</div>-->
       </div>
 
       <div class="mb70"></div>
