@@ -55,13 +55,6 @@
               bottom:'0px',
               position:'dock',
               dock:'bottom',
-              titleNView: {
-                backgroundColor: '#f7f7f7', //导航栏背景色
-                titleText: '阅读', //导航栏标题
-                titleColor: '#000000', //文字颜色
-                type: 'default', //透明渐变样式
-                autoBackButton: true //自动绘制返回箭头
-              },
               bounce:'vertical'});
             ws.append(embed);
           }
