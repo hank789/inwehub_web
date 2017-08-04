@@ -36,7 +36,7 @@
 
 
 
-    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.pushPlus('/discover',true,'none')" v-if="isDiscover">
+    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.pushPlus('/discover',true,'none','hide',true)" v-if="isDiscover">
       <svg class="icon threeIcon" aria-hidden="true">
         <use xlink:href="#icon-faxian-hover"></use>
       </svg>

@@ -25,9 +25,9 @@ const gaCode = process.env.GA_CODE;
 
 ga(router, gaCode);
 
-router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide') {
+router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('url:'+url);
-  if (mui.os.plus && mui.os.ios) {
+  if (mui.os.plus && (mui.os.ios || forceWebView)) {
     mui.plusReady(function(){
       var currentUrl = plus.webview.currentWebview().getURL();
 
