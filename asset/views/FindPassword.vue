@@ -340,7 +340,7 @@
     position:absolute;
     width:100%;
     min-height:100%;
-    background:#161616;
+    background:#3c3e44;
     background-size: cover;
     text-align: center;
   }

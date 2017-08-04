@@ -611,7 +611,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .professor {
-    background-color: #161616;
+    background-color: #3c3e44;
     text-align: center;
     position: relative;
     height: 78px;
