@@ -133,7 +133,7 @@
 
 		</div>
 
-		
+
 		<div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
 
 	</div>
@@ -183,7 +183,7 @@
 			toApprove(status) {
 				switch(status) {
 					case 2:
-						this.$router.pushPlus('/company/my');
+						this.$router.pushPlus('/company/my?back=/my');
 						break;
 					default:
 						this.$router.pushPlus('/company/submit');
@@ -281,7 +281,7 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.bott {
 		position: absolute;
 		right: 15px;
@@ -292,19 +292,19 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.my-top {
 		width: 100%;
 		height: 310px;
 		padding: 0 13px 0 13px;
 		background-color: #ffffff;
 	}
-	
+
 	.professor {
 		width: 100%;
 		height: 100px;
 	}
-	
+
 	.professor .avatar {
 		width: 69px;
 		height: 68.5px;
@@ -312,7 +312,7 @@
 		margin-top: 30.5px;
 		float: left;
 	}
-	
+
 	.my-personal {
 		width: 71%;
 		height: 69px;
@@ -322,14 +322,14 @@
 		position: absolute;
 		right: 8px;
 	}
-	
+
 	.my-personal .my-info {
 		width: 100%;
 		height: 30px;
 		margin-bottom: 9px;
 		position: relative;
 	}
-	
+
 	.my-personal .my-info span:nth-of-type(1) {
 		font-family: "PingFangSC";
 		font-size: 18px;
@@ -337,7 +337,7 @@
 		color: #444444;
 		margin-right: 1.5px;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(1) {
 		width: 19px;
 		height: 18px;
@@ -352,8 +352,8 @@
 		background:url("../../statics/images/rank.png") no-repeat;
 		background-size: 19px 19px;
 		background-position:top;
-		
-		
+
+
 	}
 
 	.my-personal .my-info svg:nth-of-type(1) {
@@ -363,19 +363,19 @@
 		color: rgb(3, 174, 249);
 		position: relative;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(2) {
 		display: inline-block;
 		position: relative;
 		float: right;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(2) svg {
 		font-size: 18px;
 		color: rgb(3, 174, 249);
 		margin-bottom: -3px;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(2) span {
 		font-family: "PingFangSC";
 		font-size: 13px;
@@ -385,30 +385,30 @@
 		color: #808080;
 		margin-left: 5px;
 	}
-	
+
 	.my-personal .my-detail {
 		width: 100%;
 		height: 30px;
 	}
-	
+
 	.my-detail span:nth-of-type(1),
 	span:nth-of-type(3) {
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #808080;
 	}
-	
+
 	.my-detail span:nth-of-type(3) {
 		margin-left: 3px;
 	}
-	
+
 	.my-detail span:nth-of-type(2),
 	span:nth-of-type(4) {
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #fa4975;
 	}
-	
+
 	.my-news {
 		width: 100%;
 		height: 36px;
@@ -420,7 +420,7 @@
 		-moz-box-shadow: 0 0 10px rgb(243, 244, 246);
 		box-shadow: 0 0 10px rgb(243, 244, 246);
 	}
-	
+
 	.my-news p {
 		display: inherit;
 		float: left;
@@ -433,26 +433,26 @@
 		text-align: center;
 		border-right: 1px solid #c8c8c8;
 	}
-	
+
 	.my-news p:last-child {
 		border-right: none;
 		width: 30%;
 		margin-left: 8px;
 	}
-	
+
 	.my-news p span {
 		color: #fa4975;
 	}
-	
+
 	.my-news p:nth-of-type(3) span {
 		color: rgb(68, 68, 68);
 	}
-	
+
 	.my-progress {
 		width: 100%;
 		margin-top: 20px;
 	}
-	
+
 	.my-progress span:nth-of-type(1) {
 		display: inline-block;
 		width: 70%;
@@ -462,7 +462,7 @@
 		border: 0.5px solid rgb(3, 174, 249);
 		margin-bottom: -2px;
 	}
-	
+
 	.my-progress span:nth-of-type(1) i {
 		display: inline-block;
 		font-style: normal;
@@ -471,14 +471,14 @@
 		height: 12px;
 		background: rgb(3, 174, 249);
 	}
-	
+
 	.my-progress span:nth-of-type(2) {
 		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #808080;
 		margin-right: 1px;
 	}
-	
+
 	.my-progress span:nth-of-type(3) {
 		font-family: "PingFangSC";
 		font-size: 13px;
@@ -486,13 +486,13 @@
 		float: right;
 		margin-top: 2px;
 	}
-	
+
 	.my-apply {
 		margin-top: 20px;
 		width: 100%;
 		height: 61px;
 	}
-	
+
 	.my-apply div {
 		display: inline-block;
 		width: 49%;
@@ -500,7 +500,7 @@
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-	
+
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 10px;
@@ -509,7 +509,7 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
@@ -518,27 +518,27 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div p {
 		margin-top: 10px;
 	}
-	
+
 	.my-apply div p span {
 		display: block;
 	}
-	
+
 	.my-apply div p span:nth-of-type(1) {
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-apply div p span:nth-of-type(2) {
 		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.part2 {
 		padding: 0;
 		margin: 0;
@@ -551,14 +551,14 @@
 		margin-top: 10px;
 		position: relative;
 	}
-	
+
 	.part2 li {
 		display: inline-block;
 		width: 23%;
 		height: 70px;
 		text-align: center;
 	}
-	
+
 	.part2 li span:nth-of-type(1) {
 		padding: 0;
 		margin: 0;
@@ -568,7 +568,7 @@
 		font-size: 13px;
 		color: #444444;
 	}
-	
+
 	.part2 li span:nth-of-type(2) {
 		padding: 0;
 		margin: 0;
@@ -577,7 +577,7 @@
 		color: #808080;
 		display: block;
 	}
-	
+
 	.my-option {
 		width: 100%;
 		height: 130px;
@@ -588,7 +588,7 @@
 		padding-left: 16px;
 		padding-right: 16px;
 	}
-	
+
 	.my-option li {
 		width: 100%;
 		height: 44px;
@@ -596,18 +596,18 @@
 		padding-bottom: 12px;
 		position: relative;
 	}
-	
+
 	.my-option li span {
 		margin-left: 10px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-option li svg:nth-of-type(1) {
 		font-size: 22px;
 		margin-bottom: -4px;
 	}
-	
+
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
