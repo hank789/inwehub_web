@@ -9,7 +9,9 @@
           <router-view v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
 
+
         <FooterComponent ref="Footer"></FooterComponent>
+
   </div>
 </template>
 
