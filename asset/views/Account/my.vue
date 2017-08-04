@@ -69,7 +69,7 @@
 							<span 　v-else>申请企业账</span>
 							<span v-if="company_apply_status =='0'">点击前往申请</span>
 							<span v-if="company_apply_status =='1'">申请审核中</span>
-							<span v-if="expert_apply_status =='2'">切换至企业版</span>
+							<span v-if="company_apply_status =='2'">切换至企业版</span>
 							<span v-if="company_apply_status =='3'">失败，重新认证</span>
 						</p>
 
