@@ -162,16 +162,16 @@
       if (mui.os.plus) {
         mui.init({
           //预加载页面，用于加载外部url
-//          preloadPages:[
-//            {
-//              url:'index.html#/discover',
-//              id:'index.html#/discover',
-//              styles: {
-//                popGesture: 'hide'
-//              },
-//              extras:{preload: true}
-//            }
-//          ],
+          preloadPages:[
+            {
+              url:'index.html#/discover',
+              id:'index.html#/discover',
+              styles: {
+                popGesture: 'hide'
+              },
+              extras:{preload: true}
+            }
+          ],
           swipeBack:true, //启用右滑关闭功能
           beforeback: function(){
               if (mui.os.ios) {
