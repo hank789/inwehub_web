@@ -4,13 +4,13 @@
 
         <div class='view'>
           <keep-alive>
-            <router-view v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+            <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
           </keep-alive>
-          <router-view v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+          <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
 
 
-        <FooterComponent ref="Footer"></FooterComponent>
+        <FooterComponent ref="Footer" id="Footer"></FooterComponent>
 
   </div>
 </template>
@@ -20,6 +20,7 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import FooterComponent from '../../components/Footer.vue';
+  import {goBack} from '../../utils/webview';
 
   export default {
     data () {
@@ -173,22 +174,7 @@
             }
           ],
           swipeBack:true, //启用右滑关闭功能
-          beforeback: function(){
-              if (mui.os.ios) {
-                var self = plus.webview.currentWebview();
-                //获得父页面的webview
-                var parent_webview = self.opener();
-                if (parent_webview){
-                  console.log('Webview窗口：'+parent_webview.getURL());
-                  //触发父页面的自定义事件(refresh),从而进行刷新
-                  mui.fire(parent_webview, 'refreshData');
-                  //子页面也刷新数据
-                  mui.fire(self, 'refreshData');
-                }
-              }
-
-            return true;
-          }
+          beforeback: goBack
         });
       } else {
         mui.init({

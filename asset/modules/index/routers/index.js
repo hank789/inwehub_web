@@ -2,6 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import localEvent from '../../../stores/localStorage';
+import {autoHeight} from '../../../utils/statusBar';
+import {openWebviewByUrl} from '../../../utils/webview';
+
 //统计用户的浏览行为;
 import ga from 'vue-ga';
 
@@ -28,37 +31,11 @@ ga(router, gaCode);
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('url:'+url);
   if (mui.os.plus && (mui.os.ios || forceWebView)) {
-    mui.plusReady(function(){
-      var currentUrl = plus.webview.currentWebview().getURL();
-
-      console.log('current_url:' + currentUrl);
-
-      //nextUrl = nextUrl.replace(/#\/.*?$/, '#'+url);
-      var nextUrl = 'index.html#' + url;
-
-      console.log('nextUrl:' + nextUrl);
-
-      mui.openWindow({
-        url: nextUrl,
-        id: nextUrl,
-        preload: false,//一定要为false
-        show: {
-          autoShow: autoShow,
-          aniShow: aniShow
-        },
-        styles: {
-          popGesture: popGesture
-        },
-        extras:{preload: false},
-        waiting: {
-          autoShow: false
-        }
-      });
-    });
+    openWebviewByUrl(url, autoShow, aniShow, popGesture);
   } else {
     router.push(url);
   }
-}
+};
 
 router.beforeEach((to, from, next) => {
   var referer = from.path;

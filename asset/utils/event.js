@@ -9,9 +9,8 @@ var EventObj = () => {
        if (events[name] !== undefined) {
            return -1;
        } else {
-
-           events[name] = callback;
-
+           events[name] = 1;
+           console.log('bindEvent: ' + name);
            window.addEventListener(name, callback, false);
        }
    };
