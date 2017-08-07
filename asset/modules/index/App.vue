@@ -21,6 +21,7 @@
   import localEvent from '../../stores/localStorage';
   import FooterComponent from '../../components/Footer.vue';
   import {goBack} from '../../utils/webview';
+  import EventObj from '../../utils/event';
 
   export default {
     data () {
@@ -61,10 +62,13 @@
       }
     },
     mounted () {
-      window.addEventListener('refreshData', (e)=>{
+      console.log('refreshDataAppMounted');
+      EventObj.addEventListener('refreshData', (e)=>{
         //执行刷新
+
         if (this.$refs.Footer.showBottom) {
-          if (this.$refs.routerView.initData) {
+          if (this.$refs.routerView.hasOwnProperty('initData')) {
+            console.log('refreshDataApp');
             this.$refs.routerView.initData();
           }
         }
