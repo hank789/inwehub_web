@@ -1,13 +1,8 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav mustshow">
-      <a class="mui-icon mui-icon-close mui-pull-left"
-         :href="'#'+this.back_id"></a>
+    	 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" :href="'#'+this.back_id"></a>
       <h1 class="mui-title" v-text="genderTagName"></h1>
-      <a class="mui-btn mui-btn-link mui-pull-right mui-btn-blue mui-disabled"
-         v-if="iselected.length === 0">完成</a>
-      <a v-bind:id="'done_' + back_id" @tap.stop.prevent="done" class="mui-btn mui-btn-link mui-pull-right mui-btn-blue"
-         v-else>完成<span>({{ iselected.length }})</span></a>
     </header>
     <div class="mui-content mui-scroll-wrapper">
 
@@ -15,21 +10,25 @@
         <div class="mui-scroll">
 
           <div class="mui-indexed-list">
-            <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
-            <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
-            <!--</div>-->
             <div class="mui-indexed-list-alert"></div>
             <div class="mui-indexed-list-inner">
               <div class="mui-indexed-list-empty-alert">没有数据</div>
+              
+              <div class="tag_success">
+              	<p v-if="iselected.length === 0">确认</p>
+              	<p v-bind:id="'done_' + back_id" @tap.stop.prevent="done" v-else>确认 ({{ iselected.length }})</p>
+              </div>
+              
               <ul class="mui-table-view">
-                <li v-for="(tag, index) in tags"
-                    class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left"
-                    @tap.stop.prevent="checkThis" :value="tag.value">
-
-                  <span class="tagSelect checked"
-                        v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1"/><span
-                  class="tagSelect" v-else/>{{ tag.text }}
-
+     
+                <li v-for="(tag, index) in tags"   class="mui-indexed-list-item tag_text"  @tap.stop.prevent="checkThis" :value="tag.value">
+                        {{ tag.text }}
+                    <span class="checked"
+                        v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1">
+                       <i class="round"></i>
+                    </span>
+                    <span v-else></span>
+                   <i class="bot"></i>
                 </li>
               </ul>
 
@@ -57,8 +56,10 @@
       apiRequest(`tags/load`, {tag_type: this.tag_type}).then(response_data => {
         if (response_data !== false) {
           this.tags = response_data.tags;
+          console.log(response_data.tags);
           this.counts = this.tags.length;
         }
+        
       });
 
       this.iselected = this.selected ? this.selected : [];
@@ -100,7 +101,7 @@
         } else {
           li = e.target;
         }
-        var span = li.childNodes[0];
+        var span = li.childNodes[1];
         var value = {
           text: li.innerText,
           value: parseInt(li.getAttribute('value'))
@@ -143,4 +144,85 @@
     position: fixed;
 
   }
+.bot {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0px;
+		height: 1px;
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: #dcdcdc;
+	}
+
+
+ul{
+	padding: 0 20px;
+}
+.tag_success{
+	 width: 100%;	
+	 height: 54px;
+}
+.tag_success p{
+	width:89%;
+	height: 34px;
+	border-radius: 4px;
+	background:#ececee;
+	text-align: center;
+    line-height: 34px;
+    color: #03aef9;
+    font-family: "PingFangSC";
+	font-size: 14px;
+	margin: 10px 20px;
+ }
+.tag_text{
+	width: 98%;
+	height: 45px;
+	line-height: 45px;
+	font-family: "PingFangSC";
+	font-size: 14px;
+	color: #444444;
+	position: relative;
+	
+}
+
+.tag_text span:nth-of-type(1){
+	padding: 0;
+	margin: 0;
+	list-style: none;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 0.5px solid #c8c8c8;
+    float: right;
+    margin-top: 13px;
+    border-radius: 50%;
+    margin-right: -55px;
+    
+}
+
+.tag_text span:nth-of-type(1) i.round{
+	width: 8px;
+	height: 8px;
+	font-style: normal;
+	display: inline-block;
+	background:#03aef9;
+	border-radius: 50%;
+	margin-left: 4px;
+    margin-bottom: 15px;
+	
+}
+.tag_text span.checked{
+   display: inline-block;
+    width: 18px;
+    height: 18px;
+    float: right;
+    margin-top: 13px;
+    margin-right: -55px;
+    border: none;
+    border: 0.5px solid #c8c8c8;
+}
+
+
+
 </style>
