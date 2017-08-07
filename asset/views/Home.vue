@@ -2,63 +2,13 @@
   <div>
 
 
-    <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.pushPlus('/company/my')"></a>
-      <!--<h1 class="mui-title">InweHub</h1>-->
-      <span class="mui-icon myicon myicon-home-title"></span>
-      <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
+    <header>
+          <span>InweHub</span>
     </header>
 
-    <div class="mui-content" v-show="!loading">
-
-
-      <div class="professor">
-        <div class="avatar">
-          <div class="avatarInner">
-            <img :src="recommend_expert_avatar_url" class="avatar"/>
-          </div>
-        </div>
-        <div class="text">
-          <div class="realname">{{ recommend_expert_name }}</div>
-          <div class="label">
-            <div class="collect myicon myicon-home-vip"></div>
-            今日专家
-
-          </div>
-          <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uuid)"><span>+</span> 向Ta提问</div>
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucang"></use>
-            </svg></div>
-            <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucanghover"></use>
-            </svg></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="professorDesc">
-        <div class="title"><span class="icon"></span>专家简介
-             <span class="titleSub">资深专家每日更新</span>
-        </div>
-        <div class="detail">
-          {{ recommend_expert_description }}
-
-        </div>
-      </div>
-
-      <!--
-      	首页的特惠时间； 点击跳入特惠的详情；
-      -->
-      <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
-        <div class="freeAsk mui-navigate-right">
-          <div class="icon"></div>
-          <div class="text">你的首问1元特惠还剩<div v-html="couponExpireAtText"></div></div>
-        </div>
-      </div>
-
-
-      <div id="slider" class="mui-slider" v-if="notices.length">
+    <div class="mui-content" v-show="!loading"> 
+      <!--首页轮播-->
+       <div id="slider" class="mui-slider" v-if="notices.length">
         <div class="mui-slider-group mui-slider-loop">
           <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
@@ -85,67 +35,176 @@
           <div :class="{'mui-indicator':true, 'mui-active':index==0}" v-for="(notice, index) in notices"></div>
         </div>
       </div>
-
-
-      <div class="bountyDesc">
-        <div class="title">
-          <span class="icon"></span>最新奖励
-                <span class="titleSub">现金奖励优质问答</span>
+      <!--专业问答 和 成为专家-->
+      <div class="home-expert">
+      	 <p>
+      	 	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-zhuanyewenda"></use>
+			</svg>
+      	 	<span>专业问答</span>
+      	 	
+      	 </p>
+      	 <p>
+      	 	<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-chengweizhuanjia"></use>
+			</svg>
+      	 	<span>成为专家</span>	
+      	 </p>
+      </div>
+     
+      <!--
+      	首页的特惠时间； 点击跳入特惠的详情；
+      -->
+      <div class="freeAskWrapper" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
+        <div class="freeAsk mui-navigate-right">
+          <div class="icon"></div>
+          <div class="text">你的首问1元特惠还剩<div v-html="couponExpireAtText"></div></div>
         </div>
       </div>
-
-
-      <div class="bountyDescList">
-
-        <div class="detail" v-for="item in recommend_qa">
-          <div class="image">
-            <img :src="item.user_avatar_url"/>
-          </div>
-          <div class="text">
-            <div class="content mui-ellipsis-3">
-              {{item.description}}
-            </div>
-            <div class="realname">{{ item.user_name }}</div>
-            <div class="amount">额外奖励{{ item.price }}元</div>
-          </div>
-        </div>
-
+       <!--人物推荐-->
+      <div class="home-recommend">
+      	<div class="home-card">
+      	    <img src="../statics/images/bg_login.png" />
+      	    <span>
+      	      	郭大红
+      	      	<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+				</svg>
+      	    </span>
+      	    <span>高级品牌助理</span>
+      	    <span>查看</span>
+      	    <p>
+      	    	  <svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-nianfendise"></use>
+			  </svg>
+			  <i>12年</i>
+      	    </p>
+      	</div>
+      	<div class="home-card">
+      	    <img src="../statics/images/bg_login.png" />
+      	    <span>
+      	      	郭大红
+      	      	<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+				</svg>
+      	    </span>
+      	    <span>高级品牌助理</span>
+      	    <span>查看</span>
+      	</div>
+      	
+     
       </div>
+  <!--向你推荐 -->
+  <div class="home-reading">
+  	  <div class="reader-upper">
+  	  	<span>向你推荐</span>
+  	  	<span>更多阅读</span>
+  	  	<i class="bot"></i>
+  	  </div>
+  	  <ul>
+  	  	<li>
+  	  	   <img src="../statics/images/bg_login.png" />
+  	  	   <div>
+  	  	   	  <p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
+  	  	   	  <p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
+  	  	   	  <p class="mui-ellipsis">作者：严威</p>
+  	  	   	  <p class="mui-ellipsis">
+  	  	   	  	<span class="home-time">2017/2/14 13:20</span>
+  	  	   	  	<span class="home-laud">
+  	  	   	  		<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-dianzan"></use>
+					</svg>
+					 <i>10</i>
+  	  	   	  	</span>
+  	  	   	  </p>
+  	  	   </div>
+  	  	    <i class="bot"></i>
+  	  	</li>
+  	  	<li>
+  	  	   <img src="../statics/images/bg_login.png" />
+  	  	   <div>
+  	  	   	  <p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
+  	  	   	  <p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
+  	  	   	  <p class="mui-ellipsis">作者：严威</p>
+  	  	   	  <p class="mui-ellipsis">
+  	  	   	  	<span class="home-time">2017/2/14 13:20</span>
+  	  	   	  	<span class="home-laud">
+  	  	   	  		<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-dianzan"></use>
+					</svg>
+					 <i>10</i>
+  	  	   	  	</span>
+  	  	   	  </p>
+  	  	   </div>
+  	  	    <i class="bot"></i>
+  	  	</li><li>
+  	  	   <img src="../statics/images/bg_login.png" />
+  	  	   <div>
+  	  	   	  <p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
+  	  	   	  <p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
+  	  	   	  <p class="mui-ellipsis">作者：严威</p>
+  	  	   	  <p class="mui-ellipsis">
+  	  	   	  	<span class="home-time">2017/2/14 13:20</span>
+  	  	   	  	<span class="home-laud">
+  	  	   	  		<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-dianzan"></use>
+					</svg>
+					 <i>10</i>
+  	  	   	  	</span>
+  	  	   	  </p>
+  	  	   </div>
+  	  	    <i class="bot"></i>
+  	  	</li>
+  	  	<li>
+  	  	   <img src="../statics/images/bg_login.png" />
+  	  	   <div>
+  	  	   	  <p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
+  	  	   	  <p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
+  	  	   	  <p class="mui-ellipsis">作者：严威</p>
+  	  	   	  <p class="mui-ellipsis">
+  	  	   	  	<span class="home-time">2017/2/14 13:20</span>
+  	  	   	  	<span class="home-laud">
+  	  	   	  		<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-dianzan"></use>
+					</svg>
+					 <i>10</i>
+  	  	   	  	</span>
+  	  	   	  </p>
+  	  	   </div>
+  	  	    <i class="bot"></i>
+  	  	</li>
+  	  	<li>
+  	  	   <img src="../statics/images/bg_login.png" />
+  	  	   <div>
+  	  	   	  <p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
+  	  	   	  <p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
+  	  	   	  <p class="mui-ellipsis">作者：严威</p>
+  	  	   	  <p class="mui-ellipsis">
+  	  	   	  	<span class="home-time">2017/2/14 13:20</span>
+  	  	   	  	<span class="home-laud">
+  	  	   	  		<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-dianzan"></use>
+					</svg>
+					 <i>10</i>
+  	  	   	  	</span>
+  	  	   	  </p>
+  	  	   </div>
+  	  	    <i class="bot"></i>
+  	  	</li>
+  	  </ul>
+  </div>
+       
+  <div class="home-bot">
+  	  你已经到达我的底线
+  </div>
+      
 
-      <div class="askDetail">
-        <!--<div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 付费提问</div>-->
-      </div>
 
-      <div class="mb70"></div>
+      
+
+     
+      
     </div>
-
-    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="goRecommand">推荐专家</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="expertNav"><b>取消</b></a>
-        </li>
-      </ul>
-    </div>
-
-    <div id="freeAskTemplate" style="display: none;">
-        <div class="freeAskGet"></div>
-        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
-    </div>
-
-    <div id="freeAskSuccessTemplate" style="display: none;">
-      <div class="xiaoha"></div>
-      <div class="success"></div>
-      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-times"></use>
-      </svg></div>
-    </div>
-
-
   </div>
 
 </template>
@@ -392,424 +451,101 @@
   export default Home;
 </script>
 
-<style>
-  .freeAsk .text div{
-    font-size:12px;
-    color:#444;
-  }
-  .freeAsk .text div span{
-    color:#03aef9;
-    margin-left:5px;
-    font-size:14px;
-  }
-  .mui-backdrop{
-    background-color: rgba(0, 0, 0, .7) !important;
-  }
-  .mui-slider-indicator .mui-indicator{
-    box-shadow:none !important;
-  }
-  .mui-slider-indicator{
-    bottom:0 !important;
-  }
-</style>
-
 <style scoped>
-  .mui-bar .myicon-project2 {
-    width:18px;
-    height:18px;
-    left: 10px;
-    top: 12px;
-  }
-
-  .mui-bar .myicon-expert {
-    width: 27px;
-    height: 27px;
-    right: 10px;
-    top: 9px;
-  }
-
-  .professor {
-    background-color: #3c3e44;
-    text-align: center;
-    position: relative;
+  /*2.0版本css样式*/
+.mui-content{
+	overflow-y: auto;
+}
+ div,span,p,ul,li,i,a{
+ 	margin: 0;
+ 	padding: 0;
+ 	list-style: none;
+ }
+ 
+ .bot {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0px;
+		height: 1px;
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: rgb(220, 220, 220);
+	}
+ 
+ 
+ /*头部样式*/
+ header{
+    width:100;
+	height:44px;
+	background: #f3f4f6;
+	text-align: center;
+	line-height: 44px;
+	
+ }
+ header span{
+ 	font-family: "PingFangSC";
+	font-size: 18px;
+	color: #323232;
+	font-weight: 600;
+ }
+/*轮播样式*/	
+#slider img{
     height: 136px;
-  }
-
-  .professor .text {
-    width: 65%;
-    height: 100%;
-    padding-top: 20px;
-    padding-left: 0px;
-    display: inline-block;
-    color: #fff;
-    text-align: left;
-
-  }
-
-  .professor .label {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 14px;
-  }
-
-  .professor .text .realname {
-    font-size: 20px;
-    font-weight: bolder;
-    margin-left: 20px;
-  }
-
-  .avatar {
-    z-index: 9;
-    color: #ffffff;
-    display: inline-block;
-    margin-top: 10px;
-    height: 100px;
-    width: 100px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 50%;
-    vertical-align: top;
-  }
-
-  .avatar .avatarInner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
     width: 100%;
-    height: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
   }
-
-  .avatar img {
-    border-radius: 50%;
+/*专业问答 和 成为专家 */
+ .home-expert{
     width: 100%;
-    height: 100%;
-    display: block;
+    height: 70px;
   }
-
-  .professor .options {
-    position: relative;
-    margin-top: 30px;
-    margin-left: 10px;
-  }
-
-  .professor .buttonAsk {
-    position: relative;
-    display: inline-block;
-    width: 60%;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
-    text-align: center;
-    border: 1px solid #fff;
-    border-radius: 50px;
-    padding-left: 20px;
-  }
-
-  .professor .buttonAsk span {
-    position: absolute;
-    font-size: 30px;
-    left: 10px;
-    top: -4px;
-  }
-
-  .professor .label .collect {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    opacity: 1;
-    vertical-align: sub;
-  }
-
-  .professor .options .collect {
-    display: inline-block;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    width: 37px;
-    height: 37px;
-    line-height: 37px;
-    text-align: center;
-    margin-left: 3%;
-  }
-
-  .professor .options .collect .icon{
-    font-size: 20px;
-    position: relative;
-    top: 1px;
-  }
-
-  .professor .options .collect-active{
-    /*border:1px solid #4990E2;*/
-  }
-  .professor .options .collect-active .icon{
-    color:#fff;
-  }
-
-  .professor .options .collect .myicon-share{
-    width:15px;
-    height:16px;
-  }
-
-  .professorDesc {
-    color: #4A4A4A;
-    font-size: 20px;
-    background: #fff;
-    padding: 10px 0 10px 20px;
-  }
-
-  .professorDesc .title {
-    margin-bottom: 8px;
-    font-size: 16px;
-    padding-bottom:8px;
-    position: relative;
-  }
-
-  .professorDesc .title .icon {
-    position: relative;
-    top: 2px;
-    width: 16px;
-    margin-right: 5px;
-    display: inline-block;
-    background: url("../statics/images/home-jinpai.png") no-repeat;
-    height: 16px;
-    background-size: cover;
-  }
-
-  .professorDesc .detail {
-    font-size: 12px;
-    line-height: 21px;
-    padding-right:20px;
-  }
-
-  .bountyDesc {
-    background: #fff;
-    margin-top: 5px;
-    padding:10px 0 0 20px;
-  }
-
-  .bountyDesc .title .icon {
-    width: 13px;
-    display: inline-block;
-    background: url("../statics/images/home-jiangli.png") no-repeat;
-    height: 16px;
-    background-size: cover;
-    position: relative;
-    top: 2px;
-    margin-right: 8px;
-  }
-
-  .bountyDesc .title {
-    position: relative;
-    line-height: 20px;
-    font-size: 16px;
-    color: #4A4A4A;
-    padding-bottom: 11px;
-  }
-
-  .professorDesc .title:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-  .bountyDesc .title:after{
-    position: absolute;
-    right: 0;
-    bottom: 1px;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
+.home-expert p{
+	float: left;
+	width: 44.5%;
+	height: 50px;
+	background: #FFFFFF;
+	border-radius:4px;
+	margin-top: 10px;
+	padding-top: 15px;	
+}	
 
 
-  .professorDesc .titleSub{
-    display: inline-block;
-    font-size: 12px;
-    color: #9B9B9B;
-    float:right;
-    margin-right:20px;
-    position: relative;
-  }
+.home-expert p:nth-of-type(1){
+ margin-left: 4%;	
+}
 
-  .bountyDesc .titleSub {
-    display: inline-block;
-    font-size: 12px;
-    color: #9B9B9B;
-    float:right;
-    margin-right:20px;
-    position: relative;
-  }
+.home-expert p:nth-of-type(2){
+   margin-left: 3%;		
+}	
 
-  .bountyDesc .more {
-    display: inline-block;
-    width: 63px;
-    float: right;
-    position: relative;
-  }
-
-  .bountyDescList {
-    background: #fff;
-  }
-
-  .bountyDescList .detail {
-    position: relative;
-    padding: 20px 0 0 20px;
-  }
-
-  .bountyDescList .detail .image {
-    position: absolute;
-    display: inline-block;
-    width: 60px;
-  }
-
-  .bountyDescList .detail .image img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .bountyDescList .detail .text {
-    margin-left: 70px;
-    padding-bottom: 40px;
-    padding-right: 10px;
-    position: relative;
-  }
-
-  .bountyDescList .detail .text:after {
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-  .bountyDescList .detail:last-child .text:after {
-    display: none;
-  }
-
-  .bountyDescList .detail .text .content {
-    font-size: 12px;
-    padding-right: 10px;
-  }
-
-  .bountyDescList .detail .realname {
-    color: #4990E2;
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    font-size: 14px;
-  }
-
-  .bountyDescList .detail .amount {
-    color: #F6A623;
-    font-size: 14px;
-    position: absolute;
-    right: 20px;
-    bottom: 10px;
-  }
-
-  .askDetail {
-    height: 67px;
-    line-height: 67px;
-    text-align: center;
-    background: #fff;
-    margin-top: 5px;
-  }
-
-  .askDetail .buttonAsk {
-    position: fixed;
-    bottom:75px;
-    left:50%;
-    margin-left:-62px;
-    z-index: 777;
-    background: #4990E2;
-    display: inline-block;
-    width: 125px;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
-    text-align: center;
-    border-radius: 50px;
-    padding-left: 20px;
-
-    color: #fff;
-  }
-
-  .askDetail .buttonAsk span {
-    position: absolute;
-    font-size: 30px;
-    left: 20px;
-    top: -4px;
-  }
-
-  .footer-bar {
-    background-color: #fff;
-    box-shadow: none;
-  }
-
-  .footer-bar {
-    border-top: 1px solid #D9D9D9;
-  }
-
-  .footer-bar .mui-active .myicon-point {
-    width: 3px;
-    height: 3px;
-    top: 8px;
-    left: -13px;
-  }
-
-  .myicon-home-title{
-    position: absolute;
-    left:50%;
-    width:70px;
-    margin-left:-35px !important;
-    top:12px;
-  }
-
-
-  @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
-    .professor .options .collect {
-      margin-left: 7% !important;
-    }
-  }
-
-  @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
-    .professor .options .collect {
-      margin-left: 9% !important;
-    }
-  }
-
+.home-expert p svg{
+	font-size: 21px;
+	margin-left: 38px;
+	margin-bottom: -3px;
+	
+}
+    
+.home-expert p span{
+	font-family: "PingFangSC";
+	font-size: 13px;
+	color: #444444;
+	margin-left: 6px;
+}	
+	
+	
+/*一元特惠*/	
   .freeAskWrapper{
     position: relative;
     height:48px;
-    margin-top:11px;
+    
   }
+  
   .freeAsk{
     position: absolute;
-    left: 20px;
-    right:20px;
-  }
+    left:15px;
+    right:15px;
+     }
+  
   .freeAsk .icon{
     position: absolute;
     width:35px;
@@ -847,64 +583,191 @@
     background-size:contain;
     height:262px;
     z-index: 999;
-  }
+  }	
+/*人物推荐*/
+.home-recommend{
+	width: 100%;
+	height: 170px;
+	background: #FFFFFF;
+	margin-top: 5px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.home-recommend div:nth-of-type(1){
+   margin-left:0px;	
+}
+.home-card{
+	width: 114px;
+	height: 148px;
+	background: #ececee;
+	margin-top: 11px;
+	float: left;
+	margin-left: 10px;	
+	position: relative;
+}
+.home-card img{
+	width:50px;
+	height: 50px;
+	display: block;
+	border-radius: 50%;
+	margin-top: 10px;
+	margin-left: 32px;
+} 
 
-  .freeAskGetButton{
-    position: fixed;
-    top: 50%;
-    margin: -70px 0 0 -100px;
-    left: 50%;
-    width: 150px;
-    height: 70px;
-    z-index: 1000;
-  }
+.home-card span{
+	display: block;
+} 
+.home-card span:nth-of-type(1){
+	font-family: "PingFangSC";
+	font-size:14px;
+	font-weight: 600;
+	color:#444444;
+	margin-top: 6px;
+}
+.home-card span:nth-of-type(1) svg{
+	font-size: 20px;
+	color: #03aef9;
+	margin-bottom: -2px;
+	margin-left: -3px;
+	
+}
+.home-card span:nth-of-type(2){
+	font-family: "PingFangSC";
+	font-size: 12px;
+	color: #444444;
+}
+.home-card span:nth-of-type(3){
+	width: 70%;
+	height:24px;
+	border-radius: 50px;
+	border:0.5px solid #03aef9;
+	margin-left: 15%;
+	margin-top: 6px;
+	font-family: "PingFangSC";
+	font-size: 14px;
+	text-align: center;
+	color:#03aef9;
+}
 
-  .mui-navigate-right:after{
-    right:10px;
-    font-size:22px;
-  }
+.home-card p{
+	position: absolute;
+	top: -4px;
+	right:-1px;
+}
+.home-card p svg{
+	font-size: 30px;
+	color:rgb( 180,180,182);
 
-  #freeAskSuccessTemplate .xiaoha{
-    position: fixed;
-    top:50%;
-    left:50%;
-    margin:-195px 0 0 -50px;
-    background: url("../statics/images/xiaoha-welcome@2x.png") no-repeat center;
-    background-size:contain;
-    width:100px;
-    height:150px;
-    z-index: 999;
-  }
+}
+.home-card p i{
+position: absolute;
+top:2px;
+right: 3px;
+font-family: "PingFangSC";
+font-size:10px;
+color: #ffffff;
+font-style: normal;
 
-  #freeAskSuccessTemplate .success{
-    position: fixed;
-    top:50%;
-    left:50%;
-    margin:-45px 0 0 -146px;
-    background: url("../statics/images/getSuccess@2x.png") no-repeat center;
-    background-size:contain;
-    width:292px;
-    height:91px;
-    z-index: 999;
-  }
+}
 
-  #freeAskSuccessTemplate .close{
-    position: fixed;
-    top:50%;
-    left:50%;
-    margin:94px 0 0 -19px;
-    z-index: 999;
-  }
-  #freeAskSuccessTemplate .close .icon{
-    font-size:38px;
-    color: #b4b4b6;
-  }
 
-  #slider{
-    margin-top:5px;
-  }
-  #slider img{
-    max-height:98px;
-    width:100%;
-  }
+/*向你推荐*/
+.home-reading{
+	width: 100%;
+	background: #FFFFFF;
+}
+.reader-upper{
+	width: 90%;
+	height: 50px;
+	margin-left: 5%;
+	position: relative;
+}
+
+.reader-upper span:nth-of-type(1){
+  float: left;
+  line-height: 50px;
+  font-family: "PingFangSC";
+  font-size: 16px;
+  color: #444444;
+}
+.reader-upper span:nth-of-type(2){
+  float: right;
+  line-height: 50px;
+  font-family: "PingFangSC";
+  font-size: 13px;
+  color: #03aef9;
+}
+
+.home-reading ul{
+ width: 100%;
+}
+.home-reading ul li{
+  width: 90%;
+  height: 125px;
+  margin-left: 5%;
+  position: relative; 
+}
+.home-reading ul li:last-child{
+   position: static;
+}
+.home-reading ul li img{
+	width: 35%;
+	height: 80px;
+    float: left;
+    margin-top:21px;
+    border-radius: 4px;
+}
+.home-reading ul li div{
+    float: left;
+    width: 63%;
+    margin-left: 2%;
+    margin-top: 21px;
+	
+}
+
+.home-reading ul li div p:nth-of-type(1){
+	font-family:"PingFangSC";
+	font-size: 14px;
+	color: #444444;
+}
+.home-reading ul li div p:nth-of-type(2){
+	font-family: "PingFangSC";
+	font-size: 12px;
+	color: #808080;
+}
+.home-reading ul li div p:nth-of-type(3){
+	font-family: "PingFangSC";
+	font-size:12px;
+	color: #808080;
+}
+.home-time{
+  float: left;	
+  font-family: "PingFangSC";
+  font-size: 12px;
+  color: #b4b4b6;
+}
+.home-laud{
+ float: right;
+}
+.home-laud>svg{
+	font-size: 17px;
+	Color: #b4b4b6;
+}
+.home-laud>i{
+	font-size:20px;
+	font-family: "PingFangSC";
+	font-size: 13px;
+	color: #03aef9;
+    font-style: normal;
+}
+.home-bot{
+	width: 100%;
+	height: 140px;
+    background: #FFFFFF;
+    font-family: "PingFangSC";
+	font-size: 14px;
+	text-align: center;
+	color: #c8c8c8;
+}
 </style>
+
