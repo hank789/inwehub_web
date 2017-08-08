@@ -36,13 +36,13 @@
 
 
 
-    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.pushPlus('/discover',true,'none','hide',true)" v-if="isDiscover">
+    <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/discover')" v-if="isDiscover">
       <svg class="icon threeIcon" aria-hidden="true">
         <use xlink:href="#icon-faxian-hover"></use>
       </svg>
     </div>
 
-    <div class="mui-tab-item" @tap.stop.prevent="$router.pushPlus('/discover',true,'none')" v-else>
+    <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" v-else>
       <svg class="icon threeIcon" aria-hidden="true">
         <use xlink:href="#icon-faxian"></use>
       </svg>

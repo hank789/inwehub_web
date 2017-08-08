@@ -63,6 +63,7 @@
     },
     mounted () {
       console.log('refreshDataAppMounted');
+
       EventObj.addEventListener('refreshData', (e)=>{
         //执行刷新
 
@@ -165,14 +166,20 @@
 
 
       if (mui.os.plus) {
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '?uuid=' + currentUser.uuid;
         mui.init({
           //预加载页面，用于加载外部url
           preloadPages:[
             {
-              url:'index.html#/discover',
-              id:'index.html#/discover',
+              url: url,
+              id: 'inwehub_embed',
               styles: {
-                popGesture: 'hide'
+                popGesture: 'hide',
+                top: '0px',
+                dock: 'top',
+                bottom: '75px',
+                bounce:'vertical'
               },
               extras:{preload: true}
             }

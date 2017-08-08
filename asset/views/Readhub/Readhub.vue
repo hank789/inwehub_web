@@ -18,7 +18,7 @@
       currentUser: {}
     }),
     created () {
-      showInwehubWebview();
+
     },
     methods: {
       loaded() {
@@ -32,7 +32,16 @@
 
     },
     activated: function () {
-
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        if (inwehub_embed_webview) {
+          inwehub_embed_webview.show();
+        }
+    },
+    deactivated: function () {
+      var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+      if (inwehub_embed_webview) {
+        inwehub_embed_webview.hide();
+      }
     },
     mounted(){
       this.currentUser = localEvent.getLocalItem('UserInfo');
@@ -45,15 +54,17 @@
           ws.addEventListener('show',createEmbed(ws,this.url),false);
 
           function createEmbed(ws,url) {
-            var topoffset='0px';
-
-            var embed=plus.webview.create(url,'inwehub_embed',{popGesture: 'hide',
-              top:topoffset,
-              bottom:'0px',
-              position:'dock',
-              dock:'bottom',
-              bounce:'vertical'});
-            ws.append(embed);
+            var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+            if (!inwehub_embed_webview){
+              inwehub_embed_webview=plus.webview.create(url,'inwehub_embed',{
+                popGesture: 'hide',
+                top: '0px',
+                dock: 'top',
+                bottom: '75px',
+                bounce:'vertical'
+              });
+            }
+            ws.append(inwehub_embed_webview);
           }
         });
       } else {

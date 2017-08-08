@@ -8,8 +8,9 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
 
       var nextUrl = 'index.html#' + url;
 
-      if (webview = plus.webview.getWebviewById(nextUrl)) {
-          mui.fire(webview, 'autoHeight', false);
+      var current_webview = plus.webview.getWebviewById(nextUrl);
+      if (current_webview) {
+          mui.fire(current_webview, 'autoHeight', false);
       }
 
       var webview = mui.openWindow({
