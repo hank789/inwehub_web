@@ -89,16 +89,49 @@ import {hideHeaderHandler} from '../../utils/wechat';
 
 import {autoHeight} from '../../utils/statusBar';
 
+import EventObj from '../../utils/event';
+
+
+
 Vue.mixin({
   activated(){
+    if (!this.$el || this.$el.id !== 'router-view') {
+      return;
+    }
+
     autoHeight();
     hideHeaderHandler(this, 'activated');
   },
   mounted() {
+    if (!this.$el || this.$el.id !== 'router-view') {
+       return;
+    }
+
+    //调节状态栏高度方法
+    EventObj.addEventListener('autoHeight', (e) => {
+       console.log('calledEvent: autoHeight');
+       autoHeight();
+    });
+
+    //刷行数据方法
+    EventObj.addEventListener('refreshPageData', (e) => {
+       console.log('calledEvent: refreshPageData');
+       if (this.refreshPageData) {
+           this.refreshPageData();
+       }
+    });
+
     autoHeight();
     hideHeaderHandler(this, 'mounted');
+  },
+  created(){
+    //当使用webview方式打开的话，会显示webview，并绑定侧滑事件
+    if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
+      showWebview();
+    }
   }
-})
+});
+
 
 mui.muiOldBack = mui.back;
 mui.back = function(){
