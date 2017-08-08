@@ -32,15 +32,19 @@
 
     },
     activated: function () {
+      if (mui.os.plus) {
         var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
         if (inwehub_embed_webview) {
           inwehub_embed_webview.show();
         }
+      }
     },
     deactivated: function () {
-      var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-      if (inwehub_embed_webview) {
-        inwehub_embed_webview.hide();
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        if (inwehub_embed_webview) {
+          inwehub_embed_webview.hide();
+        }
       }
     },
     mounted(){
