@@ -8,9 +8,16 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <ul class="mui-table-view mui-table-view-chevron" v-show="trains.length == 0">
-        <li class="mui-table-view-cell no-empty">请维护培训经历</li>
-      </ul>
+    
+      
+      <div  class="container"  v-show="trains.length == 0">
+			   <svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-zanwushuju"></use>
+				</svg>
+                <p>暂时还没有数据呀～</p>
+			</div>
+			
+			
 
 			<ul class="mui-table-view mui-table-view-chevron"  id="OA_task_1">
 				<li v-for="(train, index) in trains" class="intro  mui-table-view-cell" >
@@ -205,4 +212,23 @@
   box-shadow:0 0 5px rgba(3, 174, 249, .8);
 
 }  
+
+.container{
+	  position: absolute;
+	   top:40%;
+	   left: 36%;
+	  
+}
+.container svg{
+	font-size: 60px;
+	margin-left: 23px;
+	margin-bottom:8px ;
+	
+}
+
+.container p{
+	font-family: "PingFangSC";
+	font-size: 12px;
+	color: #c8c8c8;
+}
 </style>
