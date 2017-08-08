@@ -138,13 +138,13 @@
 	}
 	
 	.intro .slider p:nth-of-type(1) {
-		font-family: "PingFangSC";
+		
 		font-size: 14px;
 		color: #444444;
 	}
 	
 	.intro .slider p:nth-of-type(2) span {
-		font-family: "PingFangSC";
+		
 		font-size: 13px;
 		color: #808080;
 	}
@@ -225,7 +225,7 @@
 	}
 	
 	.container p {
-		font-family: "PingFangSC";
+		
 		font-size: 12px;
 		color: #c8c8c8;
 	}

@@ -12,7 +12,7 @@
 						<div class="my-info">
 							<span>{{name}}</span>
 							<p>{{ user_level }}</p>
-							<svg class="icon" aria-hidden="true">
+							<svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
 								<use xlink:href="#icon-zhuanjiabiaoji"></use>
 							</svg>
 							<p>
@@ -91,7 +91,7 @@
 					<span v-html="getNumbers(0)"></span>
 					<span>我的竞标</span>
 				</li>
-				<li @tap.stop.prevent="$router.pushPlus('/company/my')">
+				<li @tap.stop.prevent="exclusive(expert_apply_status)">
 					<span v-html="getNumbers(projects)"></span>
 					<span>我的项目</span>
 				</li>
@@ -180,6 +180,18 @@
 			}
 		},
 		methods: {
+			//我的项目跳转判断
+			exclusive(status){
+				switch(status) {
+					case 2:
+						this.$router.pushPlus('/project/list');
+						break;
+					default:
+						mui.toast("您还不是企业版账号，请点击申请企业账号前往认证");
+
+				}
+			},
+			//认证专家跳转判断；
 			toApprove(status) {
 				switch(status) {
 					case 2:
@@ -331,7 +343,6 @@
 	}
 
 	.my-personal .my-info span:nth-of-type(1) {
-		font-family: "PingFangSC";
 		font-size: 18px;
 		font-weight: 600;
 		color: #444444;
@@ -377,7 +388,6 @@
 	}
 
 	.my-personal .my-info p:nth-of-type(2) span {
-		font-family: "PingFangSC";
 		font-size: 13px;
 		text-align: center;
 		font-weight: normal;
@@ -393,7 +403,6 @@
 
 	.my-detail span:nth-of-type(1),
 	span:nth-of-type(3) {
-		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #808080;
 	}
@@ -404,7 +413,6 @@
 
 	.my-detail span:nth-of-type(2),
 	span:nth-of-type(4) {
-		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #fa4975;
 	}
@@ -426,8 +434,6 @@
 		float: left;
 		width: 18%;
 		height: 16px;
-		line-height: 16px;
-		font-family: ".PingFangSC";
 		font-size: 14px;
 		color: #808080;
 		text-align: center;
@@ -473,14 +479,12 @@
 	}
 
 	.my-progress span:nth-of-type(2) {
-		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #808080;
 		margin-right: 1px;
 	}
 
 	.my-progress span:nth-of-type(3) {
-		font-family: "PingFangSC";
 		font-size: 13px;
 		color: rgb(3, 174, 249);
 		float: right;
@@ -528,13 +532,11 @@
 	}
 
 	.my-apply div p span:nth-of-type(1) {
-		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
 	}
 
 	.my-apply div p span:nth-of-type(2) {
-		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #808080;
 	}
@@ -572,7 +574,6 @@
 	.part2 li span:nth-of-type(2) {
 		padding: 0;
 		margin: 0;
-		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #808080;
 		display: block;
