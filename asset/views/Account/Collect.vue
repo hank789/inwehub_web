@@ -201,7 +201,7 @@
     float: right;
  }
  .my-focus-item div p:nth-of-type(1) span{
-    font-family: "PingFangSC";
+    
 	font-size: 14px;
 	color: #444444;
  	
@@ -215,7 +215,7 @@
  }
  
  .my-focus-item div p:nth-of-type(2) span{
- 	font-family: "PingFangSC";
+ 	
 	font-size:13px;
 	color: #b4b4b6;
  }

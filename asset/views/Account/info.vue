@@ -228,7 +228,7 @@
 	}
 	
 	.info-look span {
-		font-family: "PingFangSC";
+		
 		font-size: 14px;
 		color: #444444;
 	}
@@ -263,7 +263,7 @@
 	}
 	
 	.info-professor p:nth-of-type(2) span {
-		font-family: "PingFangSC";
+		
 		font-size: 16px;
 		font-weight: 600;
 		color: #444444;
@@ -280,7 +280,7 @@
 	}
 	
 	.info-professor p:nth-of-type(3) span {
-		font-family: "PingFangSC";
+		
 		font-size: 13px;
 		color: #444444;
 	}
@@ -303,7 +303,7 @@
 	
 	.info-professor p:nth-of-type(4),
 	.info-professor p:nth-of-type(5) {
-		font-family: "PingFangSC";
+		
 		font-size: 14px;
 		color: #444444;
 	}
@@ -335,7 +335,7 @@
 	}
 	
 	.info-progresbar .info-text {
-		font-family: "PingFangSC";
+		
 		float: right;
 		font-size: 12px;
 		color: #808080;
@@ -346,7 +346,7 @@
 		height: 100px;
 		background: #FFFFFF;
 		padding: 19px 12px 0 12px;
-		font-family: "PingFangSC";
+		
 		font-size: 12px;
 		color: rgb(128, 128, 128);
 	}
