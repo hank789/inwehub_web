@@ -63,6 +63,33 @@
     },
     mounted () {
       console.log('refreshDataAppMounted');
+      if (mui.os.plus) {
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '?uuid=' + currentUser.uuid;
+        mui.init({
+          //预加载页面，用于加载外部url
+          preloadPages:[
+            {
+              url: url,
+              id: 'inwehub_embed',
+              styles: {
+                popGesture: 'hide',
+                top: '0px',
+                dock: 'top',
+                bottom: '75px',
+                bounce:'vertical'
+              },
+              extras:{preload: true}
+            }
+          ],
+          swipeBack:true, //启用右滑关闭功能
+          beforeback: goBack
+        });
+      } else {
+        mui.init({
+          swipeBack:true, //启用右滑关闭功能
+        });
+      }
 
       EventObj.addEventListener('refreshData', (e)=>{
         //执行刷新
@@ -162,36 +189,6 @@
           }, false);
         }
       });
-
-
-
-      if (mui.os.plus) {
-        var currentUser = localEvent.getLocalItem('UserInfo');
-        var url = process.env.READHUB_URL + '?uuid=' + currentUser.uuid;
-        mui.init({
-          //预加载页面，用于加载外部url
-          preloadPages:[
-            {
-              url: url,
-              id: 'inwehub_embed',
-              styles: {
-                popGesture: 'hide',
-                top: '0px',
-                dock: 'top',
-                bottom: '75px',
-                bounce:'vertical'
-              },
-              extras:{preload: true}
-            }
-          ],
-          swipeBack:true, //启用右滑关闭功能
-          beforeback: goBack
-        });
-      } else {
-        mui.init({
-          swipeBack:true, //启用右滑关闭功能
-        });
-      }
     }
   }
 </script>
