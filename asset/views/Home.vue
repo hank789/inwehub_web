@@ -1,8 +1,10 @@
 <template>
 	<div>
 
-		<header>
-			<span>InweHub</span>
+		<header>	
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-logowenzi"></use>
+		    </svg>
 		</header>
 
 		<div class="mui-content" v-show="!loading">
@@ -35,14 +37,14 @@
 			</div>
 			<!--专业问答 和 成为专家-->
 			<div class="home-expert">
-				<p>
+				<p @tap.stop.prevent="$router.pushPlus('/asks')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-zhuanyewenda"></use>
 					</svg>
-					<span>专业问答</span>
+					<span >专业问答</span>
 
 				</p>
-				<p>
+				<p @tap.stop.prevent="toApprove(is_expert)">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-chengweizhuanjia"></use>
 					</svg>
@@ -53,7 +55,7 @@
 			<!--
       	首页的特惠时间； 点击跳入特惠的详情；
       -->
-			<div class="freeAskWrapper" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
+			<div class="freeAskWrapper"  v-show="couponExpireAtText && couponExpireAtTime"  @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
 				<div class="freeAsk mui-navigate-right">
 					<div class="icon"></div>
 					<div class="text">你的首问1元特惠还剩
@@ -63,55 +65,18 @@
 			</div>
 			<!--人物推荐-->
 			<swiper :options="swiperOption" class="home-recommend">
-			    <swiper-slide class="home-card">
-			        <img src="../statics/images/bg_login.png" />
+			    <swiper-slide class="home-card" v-for="(experts, index) in recommend_experts"  key="index">
+			        <img  :src="experts.avatar_url" />
 					<span>
-      	      	        郭大红
-	      	      	<svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-zhuanjiabiaoji"></use>
-					</svg>
-	      	        </span>
-					<span>高级品牌助理</span>
-					<span>查看</span>
-					<p>
-						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-nianfendise1"></use>
+	      	      	       {{ experts.name }}
+		      	      	<svg class="icon" aria-hidden="true">
+						  <use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
-						<i>12年</i>
-					</p>	
-				</swiper-slide>
-			    <swiper-slide class="home-card">
-			        <img src="../statics/images/bg_login.png" />
-					<span>
-      	      	        郭大红
-	      	      	<svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-zhuanjiabiaoji"></use>
-					</svg>
 	      	        </span>
-					<span>高级品牌助理</span>
-					<span>查看</span>
+					<span>{{ experts.title?experts.title:'　' }}</span>
+					<span @click.stop.prevent="$router.pushPlus('/my/resume')">查看</span>
 					<p>
-						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-nianfendise1"></use>
-						</svg>
-						<i>12年</i>
-					</p>	
-				</swiper-slide>
-				<swiper-slide class="home-card">
-			        <img src="../statics/images/bg_login.png" />
-					<span>
-      	      	        郭大红
-	      	      	<svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-zhuanjiabiaoji"></use>
-					</svg>
-	      	        </span>
-					<span>高级品牌助理</span>
-					<span>查看</span>
-					<p>
-						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-nianfendise1"></use>
-						</svg>
-						<i>13年</i>
+					    {{experts.work_years}}年
 					</p>	
 				</swiper-slide>
 			 
@@ -121,28 +86,27 @@
 			<div class="home-reading">
 				<div class="reader-upper">
 					<span>向你推荐</span>
-					<span>更多阅读</span>
+					<span @tap.stop.prevent="$router.pushPlus('/discover')">更多</span>
 					<i class="bot"></i>
 				</div>
 				<ul>
-					<li>
-						<img src="../statics/images/bg_login.png" />
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "detail(reads.view_url)">
+						<img  :src="reads.img_url" />
 						<div>
-							<p class="mui-ellipsis">大咖在此，SAP物料账里SAP物料SAP物料的弯弯绕</p>
-							<p class="mui-ellipsis">自己懒得提问，只想看看SAP物料SAP物料别人的问题</p>
-							<p class="mui-ellipsis">作者：严威</p>
-							<p class="mui-ellipsis">
-								<span class="home-time">2017/2/14 13:20</span>
+							<p class="mui-ellipsis-2">{{reads.title}}</p>
+							<p>
+								<span class="home-time">{{reads.publish_at}}</span>
 								<span class="home-laud">
 				  	  	   	  		<svg class="icon" aria-hidden="true">
 									  <use xlink:href="#icon-dianzan"></use>
 									</svg>
-									 <i>10</i>
+									 <i>{{reads.upvotes}}</i>
   	  	   	  	                 </span>
 						    </p>
 						</div>
 						<i class="bot"></i>
 					</li>
+					
 				</ul>
 			</div>
              
@@ -152,6 +116,9 @@
 			</div>
 
 		</div>
+		
+		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
+		<div id="statusBarStyle" background="#f3f4f6"   bgColor="#f3f4f6" mode="dark"></div>
 	</div>
 
 </template>
@@ -164,13 +131,9 @@
 
 	const Home = {
 		data: () => ({
-			recommend_expert_name: '',
-			recommend_expert_description: '',
-			recommend_expert_uuid: '',
-			recommend_expert_uid: '',
-			recommend_expert_avatar_url: '',
-			recommend_qa: [],
-			recommend_expert_is_followed: 0,
+			is_expert:"",
+			recommend_read:"",
+			recommend_experts:"",
 			firstAsk: false,
 			couponExpireAtTime: '',
 			notices: [],
@@ -192,21 +155,14 @@
 			swiper,
 			swiperSlide
 		},
-		activated: function() {
-			document.body.style.backgroundColor = '#fff';
+		//缓存；  
+	   activated: function () {
 			this.getData();
 		},
 		mounted() {
 			showInwehubWebview();
-			document.body.style.backgroundColor = '#fff';
-
-		},
-		beforeRouteLeave(to, from, next) {
-			document.body.style.backgroundColor = '#efeff4';
-			next();
 		},
 		computed: {
-
 			//首页倒计时；
 			couponExpireAtText() {
 				if(this.couponExpireAtTime) {
@@ -215,6 +171,22 @@
 			}
 		},
 		methods: {
+			detail(url){
+			   window.location.href=url;
+			},
+			//认证专家跳转判断；
+			toApprove(status) {
+				
+				switch(status) {
+					case 1:
+						mui.toast("您已经是认证专家了");
+						break;
+					default:
+						this.$router.pushPlus('/company/submit');
+
+				}
+
+			},
 			goLink: function(url) {
 				if(/http/.test(url)) {
 					if(mui.os.plus) {
@@ -288,66 +260,7 @@
 				});
 				mask.show(); //显示遮罩
 			},
-			shareProfessor: function() {
-				mui.alert("我们还暂时不建议您分享！");
-			},
-			collectProfessor: function() {
-
-				postRequest(`follow/user`, {
-					id: this.recommend_expert_uid
-				}).then(response => {
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						return;
-					}
-					this.recommend_expert_is_followed = !this.recommend_expert_is_followed;
-					mui.toast(response.data.data.tip);
-				});
-
-			},
-			goRecommand: function() {
-				//点击推荐专家时，跳转新页面；
-				this.expertNav();　
-				this.$router.push('/expert/recommend')
-			},
-			goExpert: function() {
-				this.expertNav();
-				this.$router.push('/expert')
-			},
-			toggleMenu() {
-				mui('.mui-off-canvas-wrap').offCanvas('toggle');
-			},
-			//当是webapp时调用遮罩层；
-			expertNav: function() {
-				//如果是os或者plus 调用系统方法；
-				if(mui.os.plus) {
-					var a = [{
-						title: "推荐专家"
-					}];
-					//调用系统的选择按钮；
-					plus.nativeUI.actionSheet({
-						//两个参数；
-						cancel: "取消",
-						buttons: a
-					}, (b) => {
-						switch(b.index) {
-							//b.index   参数索引值；
-							case 0:
-								//关闭选择按钮；
-								break;
-							case 1:
-								//跳转到推荐专家页面；
-								this.$router.pushPlus('/expert/recommend');
-								break;
-						}
-					})
-				} else {
-					// 如果不是调用自己写的方法；
-					mui('#expert').popover('toggle');
-				}
-			},
-
+		  //对时间的处理；
 			timeAutoEnd: function() {
 				if(this.timeAutoEndTimeOut) {
 					clearTimeout(this.timeAutoEndTimeOut);
@@ -364,14 +277,19 @@
 					if(response_data === false) {
 						return;
 					}
-					t.recommend_expert_name = response_data.recommend_expert_name;
-					t.recommend_expert_description = response_data.recommend_expert_description;
-					t.recommend_expert_uuid = response_data.recommend_expert_uuid;
-					t.recommend_expert_uid = response_data.recommend_expert_uid;
-					t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
-					t.recommend_qa = response_data.recommend_qa;
-					t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
+					
+					console.log(response_data.is_expert)
+				 
+					//推荐专家；
+				   t.recommend_experts = response_data.recommend_experts;
+				   //推荐阅读；
+				   t.recommend_read = response_data.recommend_read;
+					//返回是否显示首次提问免费的福利；
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
+					//是否是专家；
+					t.is_expert = response_data.is_expert;
+					
+					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
 
 					if(couponExpireAt) {
@@ -380,13 +298,15 @@
 					} else {
 						t.couponExpireAtTime = null;
 					}
-
+                    
+                    //轮播图；
 					t.notices = response_data.notices;
+						
 					t.loading = 0;
 					if(t.firstAsk) {
 						t.showFreeAskGet();
 					}
-
+       
 					if(t.notices.length) {
 						setTimeout(function() {
 							var slider = mui("#slider");
@@ -396,20 +316,13 @@
 						}, 100);
 					}
 				});
-			},
-			getAsks: function() {
-				this.getData();
-				this.loopAsk = true;
-				setTimeout(() => {
-					this.loopAsk = false;
-				}, 2000)
 			}
 		}
 	};
 	export default Home;
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 	/*2.0版本css样式*/
 	
 	.mui-content {
@@ -445,14 +358,13 @@
 		height: 44px;
 		background: #f3f4f6;
 		text-align: center;
-		line-height: 44px;
+		
 	}
 	
-	header span {
-		font-family: "PingFangSC";
-		font-size: 18px;
-		color: #323232;
-		font-weight: 600;
+	header svg {
+		font-size:80px;
+	    color: #3c3e44;
+	    margin-top: -13px;
 	}
 	/*轮播样式*/
 	
@@ -486,16 +398,15 @@
 	}
 	
 	.home-expert p svg {
-		font-size: 21px;
+		font-size: 25px;
 		margin-left: 38px;
 		margin-bottom: -3px;
 	}
 	
 	.home-expert p span {
-		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #444444;
-		margin-left: 6px;
+		margin-left:3px;
 	}
 	/*一元特惠*/
 	
@@ -555,7 +466,6 @@
 		height: 170px;
 		background: #FFFFFF;
 		margin-top: 5px;
-		text-align: center;
 		margin-bottom: 10px;
 	}
 	
@@ -585,7 +495,9 @@
 	}
 	
 	.home-card span:nth-of-type(1) {
-		font-family: "PingFangSC";
+		display: inline-block;
+		width: 100%;
+		text-align: center;
 		font-size: 14px;
 		font-weight: 600;
 		color: #444444;
@@ -600,7 +512,9 @@
 	}
 	
 	.home-card span:nth-of-type(2) {
-		font-family: "PingFangSC";
+		display: inline-block;
+		width: 100%;
+		text-align: center;
 		font-size: 12px;
 		color: #444444;
 	}
@@ -620,24 +534,17 @@
 	
 	.home-card p {
 		position: absolute;
-		top: -4px;
-		right: -1px;
+		top: 0px;
+		right: 0px;
+		width: 35px;
+	    text-align: center;
+		background: url("../statics/images/fill_1@2x.png") no-repeat;
+		background-size: 100% 100%;
+		font-size: 12px;
+	    color: #ffffff;
 	}
 	
-	.home-card p svg {
-		font-size: 30px;
-		color: rgb( 180, 180, 182);
-	}
 	
-	.home-card p i {
-		position: absolute;
-		top: 2px;
-		right: 3px;
-		font-family: "PingFangSC";
-		font-size: 10px;
-		color: #ffffff;
-		font-style: normal;
-	}
 	/*向你推荐*/
 	
 	.home-reading {
@@ -655,18 +562,16 @@
 	.reader-upper span:nth-of-type(1) {
 		float: left;
 		line-height: 50px;
-		font-family: "PingFangSC";
 		font-size: 16px;
 		color: #444444;
 	}
-	
 	.reader-upper span:nth-of-type(2) {
 		float: right;
 		line-height: 50px;
-		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #03aef9;
 	}
+	
 	
 	.home-reading ul {
 		width: 100%;
@@ -680,7 +585,16 @@
 	}
 	
 	.home-reading ul li:last-child {
-		position: static;
+		.bot{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0px;
+		height: 0px;
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: rgb(220, 220, 220);	
+		}
 	}
 	
 	.home-reading ul li img {
@@ -699,26 +613,20 @@
 	}
 	
 	.home-reading ul li div p:nth-of-type(1) {
-		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
 	}
 	
 	.home-reading ul li div p:nth-of-type(2) {
-		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #808080;
+		margin-top: 20px;
 	}
 	
-	.home-reading ul li div p:nth-of-type(3) {
-		font-family: "PingFangSC";
-		font-size: 12px;
-		color: #808080;
-	}
+	
 	
 	.home-time {
 		float: left;
-		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #b4b4b6;
 	}
@@ -734,7 +642,6 @@
 	
 	.home-laud>i {
 		font-size: 20px;
-		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #03aef9;
 		font-style: normal;
@@ -744,7 +651,6 @@
 		width: 100%;
 		height: 140px;
 		background: #FFFFFF;
-		font-family: "PingFangSC";
 		font-size: 14px;
 		text-align: center;
 		color: #c8c8c8;
