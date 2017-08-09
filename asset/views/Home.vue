@@ -76,7 +76,7 @@
 					<span>{{ experts.title?experts.title:'　' }}</span>
 					<span :class="experts.uuid">查看</span>
 					<p>
-					    {{experts.work_years}}年
+					    {{experts.work_years?experts.work_years:"0"}}年
 					</p>	
 				</swiper-slide>
 			 
@@ -145,8 +145,7 @@
 		created() {
 			this.swiperOption = {
 				pagination: '.swiper-pagination',
-				loop: true,
-				loopedSlides :7,
+				loop: true,	
 			    slidesPerView : 3,
                 spaceBetween :10,
                 preventClicks : false,
