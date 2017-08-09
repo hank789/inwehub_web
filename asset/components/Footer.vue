@@ -9,7 +9,7 @@
 
     <div class="mui-tab-item" @tap.stop.prevent="$router.push('/home')" v-else>
       <svg class="icon oneIcon" aria-hidden="true">
-        <use xlink:href="#icon-shouye"></use>
+        <use xlink:href="#icon-shouye1"></use>
       </svg>
     </div>
 
@@ -23,7 +23,7 @@
 
     <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/task')" v-else>
       <svg class="icon twoIcon" aria-hidden="true">
-        <use xlink:href="#icon-xiaoxi"></use>
+        <use xlink:href="#icon-xiaoxi1"></use>
       </svg>
       <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
     </div>
@@ -44,7 +44,7 @@
 
     <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" v-else>
       <svg class="icon threeIcon" aria-hidden="true">
-        <use xlink:href="#icon-faxian"></use>
+        <use xlink:href="#icon-faxian1"></use>
       </svg>
     </div>
 
@@ -57,7 +57,7 @@
 
     <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" v-else>
       <svg class="icon fourIcon" aria-hidden="true">
-        <use xlink:href="#icon-wode"></use>
+        <use xlink:href="#icon-wode1"></use>
       </svg>
     </div>
 
