@@ -98,7 +98,7 @@
 								<span class="home-time">{{reads.publish_at}}</span>
 								<span class="home-laud">
 				  	  	   	  		<svg class="icon" aria-hidden="true">
-									  <use xlink:href="#icon-dianzan"></use>
+									  <use xlink:href="#icon-dianzan1"></use>
 									</svg>
 									 <i>{{reads.upvotes}}</i>
   	  	   	  	                 </span>
