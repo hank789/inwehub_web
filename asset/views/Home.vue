@@ -137,7 +137,7 @@
            	   </p>
            	   <p>下载APP</p>
            	   <p>立即打开</p>
-           </div>-->
+           </div>
            
       
 			<div class="home-bot">
