@@ -49,6 +49,7 @@ const routes = [{
 		path: '/home',
 		meta: {
 			title: 'Inwehub',
+			wechatHideHeader: true,
 			keepAlive: true
 		},
 		component: require('../../../views/Home.vue'),

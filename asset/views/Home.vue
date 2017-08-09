@@ -1,7 +1,7 @@
 <template>
 	<div>
 
-		<header>	
+		<header class="hidewechattitle">	
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-logowenzi"></use>
 		    </svg>
