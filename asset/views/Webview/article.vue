@@ -64,7 +64,8 @@
                     console.log('bookmark');
                     axios.post(url,{
                       api_name : 'bookmark-submission',
-                      id : ws.article_id
+                      id : ws.article_id,
+                      need_refresh: true
                     }).then((response) => {
                       plus.nativeUI.toast('收藏成功');
                     }).catch((error) => {
@@ -82,7 +83,8 @@
                     axios.post(url,{
                       api_name : 'upvote-submission',
                       previous_vote: null,
-                      submission_id : ws.article_id
+                      submission_id : ws.article_id,
+                      need_refresh: true
                     }).then((response) => {
                       plus.nativeUI.toast('已赞');
                     }).catch((error) => {
@@ -101,7 +103,8 @@
                     axios.post(url,{
                       api_name : 'downvote-submission',
                       previous_vote: null,
-                      submission_id : ws.article_id
+                      submission_id : ws.article_id,
+                      need_refresh: true
                     }).then((response) => {
                       plus.nativeUI.toast('已踩');
                     }).catch((error) => {
