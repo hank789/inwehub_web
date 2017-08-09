@@ -180,7 +180,7 @@
         	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
-			   window.location.href=url;
+			   this.goLink(url);
 			},
 			//认证专家跳转判断；
 			toApprove(status) {
@@ -395,7 +395,7 @@
 		background: #FFFFFF;
 		border-radius: 4px;
 		margin-top: 10px;
-		padding-top: 15px;
+		padding-top: 13px;
 	}
 	
 	.home-expert p:nth-of-type(1) {
@@ -409,7 +409,7 @@
 	.home-expert p svg {
 		font-size: 25px;
 		margin-left: 38px;
-		margin-bottom: -3px;
+		margin-bottom: -4px;
 	}
 	
 	.home-expert p span {
