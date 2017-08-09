@@ -49,7 +49,7 @@
     },
     mounted(){
       this.currentUser = localEvent.getLocalItem('UserInfo');
-      this.url = process.env.READHUB_URL + '?uuid=' + this.currentUser.uuid;
+      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
 
       if (mui.os.plus) {
         this.iframeState = false;

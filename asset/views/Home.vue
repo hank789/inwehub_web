@@ -1,5 +1,6 @@
 <template>
 	<div>
+
         
 		<header class="hidewechattitle">	
 			<svg class="icon" aria-hidden="true">
@@ -77,20 +78,20 @@
 					<span :class="experts.uuid">查看</span>
 					<p>
 					    {{experts.work_years?experts.work_years:"0"}}年
-					</p>	
+					</p>
 				</swiper-slide>
-			 
+
               </swiper>
 
 			<!--向你推荐 -->
 			<div class="home-reading">
 				<div class="reader-upper">
 					<span>向你推荐</span>
-					<span @tap.stop.prevent="$router.pushPlus('/discover')">更多</span>
+					<span @tap.stop.prevent="$router.push('/discover')">更多</span>
 					<i class="bot"></i>
 				</div>
 				<ul>
-					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "detail(reads.view_url)">
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title)">
 						<img  :src="reads.img_url" />
 						<div>
 							<p class="mui-ellipsis-2">{{reads.title}}</p>
@@ -106,9 +107,10 @@
 						</div>
 						<i class="bot"></i>
 					</li>
-					
+
 				</ul>
 			</div>
+
              
              <!--手机端-->
              <div class="suspend">
@@ -125,7 +127,7 @@
 	            	  立即打开
 	            </p>
 	        </div>
-           <!---->
+           
            <!--微信端-->
            <div class="suspension">
            	   <p>
@@ -135,15 +137,15 @@
            	   </p>
            	   <p>下载APP</p>
            	   <p>立即打开</p>
-           </div>
+           </div>-->
            
-           
+      
 			<div class="home-bot">
 				你已经到达我的底线
 			</div>
 
 		</div>
-		
+
 		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
 		<div id="statusBarStyle" background="#f3f4f6"   bgColor="#f3f4f6" mode="dark"></div>
 	</div>
@@ -172,7 +174,7 @@
 		created() {
 			this.swiperOption = {
 				pagination: '.swiper-pagination',
-				loop: true,	
+				loop: true,
 			    slidesPerView : 3,
                 spaceBetween :10,
                 preventClicks : false,
@@ -183,7 +185,7 @@
 			swiper,
 			swiperSlide
 		},
-		//缓存；  
+		//缓存；
 	   activated: function () {
 			this.getData();
 		},
@@ -210,7 +212,7 @@
 			},
 			//认证专家跳转判断；
 			toApprove(status) {
-				
+
 				switch(status) {
 					case 1:
 						mui.toast("您已经是认证专家了");
@@ -221,11 +223,42 @@
 				}
 
 			},
+      goArticle: function(url,id,title='') {
+        if(/http/.test(url)) {
+          if(mui.os.plus) {
+            mui.openWindow({
+              url: 'index.html#/webview/article',
+              id: 'readhub_article_'+id,
+              preload: false, //一定要为false
+              createNew: false,
+              show: {
+                autoShow: true,
+                aniShow: 'pop-in'
+              },
+              styles: {
+                popGesture: 'hide'
+              },
+              waiting: {
+                autoShow: false
+              },
+              extras: {
+                article_id: id,
+                article_url: url,
+                article_title: title
+              }
+            });
+          } else {
+            window.location.href = url;
+          }
+        } else {
+          this.$router.pushPlus(url);
+        }
+      },
 			goLink: function(url) {
 				if(/http/.test(url)) {
 					if(mui.os.plus) {
 						mui.openWindow({
-							url: 'index.html#/webview/article',
+							url: 'index.html#/webview/notice',
 							id: url,
 							preload: false, //一定要为false
 							createNew: false,
@@ -312,9 +345,9 @@
 					if(response_data === false) {
 						return;
 					}
-					
+
 					console.log(response_data.is_expert)
-				 
+
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
 				   //推荐阅读；
@@ -323,7 +356,7 @@
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
 					t.is_expert = response_data.is_expert;
-					
+
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
 
@@ -333,15 +366,15 @@
 					} else {
 						t.couponExpireAtTime = null;
 					}
-                    
+
                     //轮播图；
 					t.notices = response_data.notices;
-						
+
 					t.loading = 0;
 					if(t.firstAsk) {
 						t.showFreeAskGet();
 					}
-       
+
 					if(t.notices.length) {
 						setTimeout(function() {
 							var slider = mui("#slider");
@@ -464,11 +497,11 @@
     margin-right: 14px;
 }
 	/*2.0版本css样式*/
-	
+
 	.mui-content {
 		overflow-y: auto;
 	}
-	
+
 	div,
 	span,
 	p,
@@ -480,7 +513,7 @@
 		padding: 0;
 		list-style: none;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right: 0;
@@ -492,33 +525,33 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*头部样式*/
-	
+
 	header {
 		width: 100;
 		height: 44px;
 		background: #f3f4f6;
 		text-align: center;
-		
+
 	}
-	
+
 	header svg {
 		font-size:80px;
 	    color: #3c3e44;
 	    margin-top: -13px;
 	}
 	/*轮播样式*/
-	
+
 	#slider img {
 		height: 136px;
 		width: 100%;
 	}
 	/*专业问答 和 成为专家 */
-	
+
 	.home-expert {
 		width: 100%;
 		height: 70px;
 	}
-	
+
 	.home-expert p {
 		float: left;
 		width: 44.5%;
@@ -528,39 +561,39 @@
 		margin-top: 10px;
 		padding-top: 13px;
 	}
-	
+
 	.home-expert p:nth-of-type(1) {
 		margin-left: 4%;
 	}
-	
+
 	.home-expert p:nth-of-type(2) {
 		margin-left: 3%;
 	}
-	
+
 	.home-expert p svg {
 		font-size: 25px;
 		margin-left: 38px;
 		margin-bottom: -4px;
 	}
-	
+
 	.home-expert p span {
 		font-size: 13px;
 		color: #444444;
 		margin-left:3px;
 	}
 	/*一元特惠*/
-	
+
 	.freeAskWrapper {
 		position: relative;
 		height: 48px;
 	}
-	
+
 	.freeAsk {
 		position: absolute;
 		left: 15px;
 		right: 15px;
 	}
-	
+
 	.freeAsk .icon {
 		position: absolute;
 		width: 35px;
@@ -573,7 +606,7 @@
 		background-size: contain;
 		background-position: center;
 	}
-	
+
 	.freeAsk .text {
 		background: #dcdcdc;
 		border: 1px #dcdcdc solid;
@@ -583,11 +616,11 @@
 		color: #323232;
 		padding: 13px 0px 13px 35px;
 	}
-	
+
 	.freeAsk .text div {
 		display: inline-block;
 	}
-	
+
 	.freeAskGet {
 		position: fixed;
 		top: 50%;
@@ -600,7 +633,7 @@
 		z-index: 999;
 	}
 	/*人物推荐*/
-	
+
 	.home-recommend {
 		width: 100%;
 		height: 170px;
@@ -608,11 +641,11 @@
 		margin-top: 5px;
 		margin-bottom: 10px;
 	}
-	
+
 	.home-recommend div:nth-of-type(1) {
 		margin-left: 0px;
 	}
-	
+
 	.home-card {
 		width: 114px;
 		height: 148px;
@@ -620,7 +653,7 @@
 		margin-top: 11px;
 		position: relative;
 	}
-	
+
 	.home-card img {
 		width: 50px;
 		height: 50px;
@@ -629,11 +662,11 @@
 		margin-top: 10px;
 		margin-left: 32px;
 	}
-	
+
 	.home-card span {
 		display: block;
 	}
-	
+
 	.home-card span:nth-of-type(1) {
 		display: inline-block;
 		width: 100%;
@@ -643,14 +676,14 @@
 		color: #444444;
 		margin-top: 6px;
 	}
-	
+
 	.home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
 		margin-bottom: -2px;
 		margin-left: -3px;
 	}
-	
+
 	.home-card span:nth-of-type(2) {
 		display: inline-block;
 		width: 100%;
@@ -658,7 +691,7 @@
 		font-size: 12px;
 		color: #444444;
 	}
-	
+
 	.home-card span:nth-of-type(3) {
 		width: 70%;
 		height: 24px;
@@ -671,7 +704,7 @@
 		text-align: center;
 		color: #03aef9;
 	}
-	
+
 	.home-card p {
 		position: absolute;
 		top: 0px;
@@ -683,22 +716,22 @@
 		font-size: 12px;
 	    color: #ffffff;
 	}
-	
-	
+
+
 	/*向你推荐*/
-	
+
 	.home-reading {
 		width: 100%;
 		background: #FFFFFF;
 	}
-	
+
 	.reader-upper {
 		width: 90%;
 		height: 50px;
 		margin-left: 5%;
 		position: relative;
 	}
-	
+
 	.reader-upper span:nth-of-type(1) {
 		float: left;
 		line-height: 50px;
@@ -711,19 +744,19 @@
 		font-size: 13px;
 		color: #03aef9;
 	}
-	
-	
+
+
 	.home-reading ul {
 		width: 100%;
 	}
-	
+
 	.home-reading ul li {
 		width: 90%;
 		height: 125px;
 		margin-left: 5%;
 		position: relative;
 	}
-	
+
 	.home-reading ul li:last-child {
 		.bot{
 		position: absolute;
@@ -733,10 +766,10 @@
 		height: 0px;
 		-webkit-transform: scaleY(.5);
 		transform: scaleY(.5);
-		background-color: rgb(220, 220, 220);	
+		background-color: rgb(220, 220, 220);
 		}
 	}
-	
+
 	.home-reading ul li img {
 		width: 35%;
 		height: 80px;
@@ -744,49 +777,49 @@
 		margin-top: 21px;
 		border-radius: 4px;
 	}
-	
+
 	.home-reading ul li div {
 		float: left;
 		width: 63%;
 		margin-left: 2%;
 		margin-top: 21px;
 	}
-	
+
 	.home-reading ul li div p:nth-of-type(1) {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.home-reading ul li div p:nth-of-type(2) {
 		font-size: 12px;
 		color: #808080;
 		margin-top: 20px;
 	}
-	
-	
-	
+
+
+
 	.home-time {
 		float: left;
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-	
+
 	.home-laud {
 		float: right;
 	}
-	
+
 	.home-laud>svg {
 		font-size: 17px;
 		color: #b4b4b6;
 	}
-	
+
 	.home-laud>i {
 		font-size: 20px;
 		font-size: 13px;
 		color: #03aef9;
 		font-style: normal;
 	}
-	
+
 	.home-bot {
 		width: 100%;
 		height: 140px;

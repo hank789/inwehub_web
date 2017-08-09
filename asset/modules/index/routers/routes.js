@@ -925,12 +925,19 @@ const routes = [{
 		}
 	},
 	{
-		path: '/webview/article',
+		path: '/webview/notice',
 		meta: {
 			title: 'InweHub'
 		},
-		component: require('../../../views/Webview/article.vue'),
+		component: require('../../../views/Webview/notice.vue'),
 	},
+  {
+    path: '/webview/article',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/Webview/article.vue'),
+  },
 	{ // message
 		path: '/*',
 		meta: {

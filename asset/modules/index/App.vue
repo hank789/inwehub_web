@@ -65,7 +65,7 @@
       console.log('refreshDataAppMounted');
       if (mui.os.plus) {
         var currentUser = localEvent.getLocalItem('UserInfo');
-        var url = process.env.READHUB_URL + '?uuid=' + currentUser.uuid;
+        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
         mui.init({
           //预加载页面，用于加载外部url
           preloadPages:[
