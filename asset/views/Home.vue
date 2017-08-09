@@ -65,7 +65,7 @@
 			</div>
 			<!--人物推荐-->
 			<swiper :options="swiperOption" class="home-recommend">
-			    <swiper-slide class="home-card" v-for="(experts, index) in recommend_experts"  key="index">
+			    <swiper-slide class="home-card" v-for="(experts, index) in recommend_experts"  :key="index">
 			        <img  :src="experts.avatar_url" />
 					<span>
 	      	      	       {{ experts.name }}
@@ -74,7 +74,7 @@
 						</svg>
 	      	        </span>
 					<span>{{ experts.title?experts.title:'　' }}</span>
-					<span @click.stop.prevent="$router.pushPlus('/my/resume')">查看</span>
+					<span :class="experts.uuid">查看</span>
 					<p>
 					    {{experts.work_years}}年
 					</p>	
@@ -140,16 +140,18 @@
 			currentTime: parseInt((new Date()).getTime() / 1000),
 			loading: true,
 			timeAutoEndTimeOut: false,
-			swiperOption: {
-				pagination: '.swiper-pagination',
-				loop: true,
-				loopAdditionalSlides: 1,
-			    slidesPerView : 3,
-                spaceBetween :10
-			}
+			swiperOption:{}
 		}),
 		created() {
-
+			this.swiperOption = {
+				pagination: '.swiper-pagination',
+				loop: true,
+				loopedSlides :7,
+			    slidesPerView : 3,
+                spaceBetween :10,
+                preventClicks : false,
+                onClick:this.swipperClick
+			}
 		},
 		components: {
 			swiper,
@@ -171,6 +173,12 @@
 			}
 		},
 		methods: {
+			swipperClick(swiper, event){
+                	  console.log(event.srcElement.className)
+        	           var uuid = event.srcElement.className
+        	           //window.location.href="www.baidu.com";
+        	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
+			},
 			detail(url){
 			   window.location.href=url;
 			},
@@ -272,6 +280,7 @@
 			},
 			//请求的数据；
 			getData: function() {
+				var deration = this;
 				var t = this;
 				apiRequest(`home`, {}, false).then(response_data => {
 					if(response_data === false) {
