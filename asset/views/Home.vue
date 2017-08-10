@@ -655,7 +655,9 @@
 		height: 148px;
 		background: #ececee;
 		margin-top: 11px;
+		padding-top: 10px;
 		position: relative;
+		border-radius: 4px;
 	}
 
 	#home-card img {
@@ -663,8 +665,7 @@
 		height: 50px;
 		display: block;
 		border-radius: 50%;
-		margin-top: 10px;
-		margin-left: 32px;
+		margin: 0 auto;
 	}
 
 	#home-card span {
@@ -672,7 +673,9 @@
 		text-align:center;
 		font-size: 12px;
 	}
-
+    #home-card span:nth-of-type(1) i{
+    	  font-style: normal;
+    }
 	#home-card span:nth-of-type(1) {
 		display: inline-block;
 		width: 100%;
@@ -714,10 +717,10 @@
 		position: absolute;
 		top: 0px;
 		right: 0px;
-		width: 35px;
+		width: 28px;
 	    text-align: center;
 		background: url("../statics/images/fill_1@2x.png") no-repeat;
-		background-size: 100% 100%;
+		background-size: 100%  100%;
 		font-size: 12px;
 	    color: #ffffff;
 	}
