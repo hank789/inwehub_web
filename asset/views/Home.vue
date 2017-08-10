@@ -39,7 +39,7 @@
 			<!--专业问答 和 成为专家-->
 			<div class="home-expert">
 				<p @tap.stop.prevent="$router.pushPlus('/asks')">
-					<svg class="icon" aria-hidden="true">
+					<svg class="icon" aria-hidden="true" >
 						<use xlink:href="#icon-zhuanyewenda"></use>
 					</svg>
 					<span >专业问答</span>
@@ -65,17 +65,17 @@
 				</div>
 			</div>
 			<!--人物推荐-->
-			<swiper :options="swiperOption" class="home-recommend">
-			    <swiper-slide class="home-card" v-for="(experts, index) in recommend_experts"  :key="index">
-			        <img  :src="experts.avatar_url" />
+			<swiper :options="swiperOption" id="home-recommend">
+			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index">
+			        <img :src="experts.avatar_url" :class="experts.uuid"  />
 					<span>
-	      	      	       {{ experts.name }}
-		      	      	<svg class="icon" aria-hidden="true">
-						  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+	      	      	       <i :class="experts.uuid">{{ experts.name }}</i>
+		      	      	<svg class="icon" aria-hidden="true" >
+						  <use xlink:href="#icon-zhuanjiabiaoji" ></use>
 						</svg>
 	      	        </span>
 					<span>{{ experts.title?experts.title:'　' }}</span>
-					<span :class="experts.uuid">查看</span>
+					<span >查看</span>
 					<p>
 					    {{experts.work_years?experts.work_years:"0"}}年
 					</p>
@@ -177,8 +177,7 @@
 				loop: true,
 			    slidesPerView : 3,
                 spaceBetween :10,
-                preventClicks : false,
-                onClick:this.swipperClick
+                onTap:this.swipperClick
 			}
 		},
 		components: {
@@ -201,11 +200,16 @@
 			}
 		},
 		methods: {
-			swipperClick(swiper, event){
-                	  console.log(event.srcElement.className)
-        	           var uuid = event.srcElement.className
-        	           //window.location.href="www.baidu.com";
-        	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
+			swipperClick(swiper, event){        
+      	          var  Ele = event.srcElement.parentNode.firstChild.className.split(" ");
+     	            var uuid = "";
+      	            if(Ele.length ===1){
+      	            	  uuid = Ele[0]
+     	            }else{
+      	            	    uuid = Ele[1]
+   	            	   }
+        	           
+     	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
 			   this.goLink(url);
@@ -634,7 +638,7 @@
 	}
 	/*人物推荐*/
 
-	.home-recommend {
+	#home-recommend {
 		width: 100%;
 		height: 170px;
 		background: #FFFFFF;
@@ -642,11 +646,11 @@
 		margin-bottom: 10px;
 	}
 
-	.home-recommend div:nth-of-type(1) {
+	#home-recommend div:nth-of-type(1) {
 		margin-left: 0px;
 	}
 
-	.home-card {
+	#home-card {
 		width: 114px;
 		height: 148px;
 		background: #ececee;
@@ -654,7 +658,7 @@
 		position: relative;
 	}
 
-	.home-card img {
+	#home-card img {
 		width: 50px;
 		height: 50px;
 		display: block;
@@ -663,11 +667,13 @@
 		margin-left: 32px;
 	}
 
-	.home-card span {
+	#home-card span {
 		display: block;
+		text-align:center;
+		font-size: 12px;
 	}
 
-	.home-card span:nth-of-type(1) {
+	#home-card span:nth-of-type(1) {
 		display: inline-block;
 		width: 100%;
 		text-align: center;
@@ -677,7 +683,7 @@
 		margin-top: 6px;
 	}
 
-	.home-card span:nth-of-type(1) svg {
+	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
 		margin-bottom: -2px;
@@ -687,12 +693,11 @@
 	.home-card span:nth-of-type(2) {
 		display: inline-block;
 		width: 100%;
-		text-align: center;
-		font-size: 12px;
+		
 		color: #444444;
 	}
 
-	.home-card span:nth-of-type(3) {
+	#home-card span:nth-of-type(3) {
 		width: 70%;
 		height: 24px;
 		border-radius: 50px;
@@ -705,7 +710,7 @@
 		color: #03aef9;
 	}
 
-	.home-card p {
+	#home-card p {
 		position: absolute;
 		top: 0px;
 		right: 0px;
