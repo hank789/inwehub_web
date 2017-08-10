@@ -65,7 +65,7 @@
                 top: '0px',
                 dock: 'top',
                 bottom: '75px',
-                bounce:'vertical'
+                bounce:'none'
               });
             }
             ws.append(inwehub_embed_webview);
