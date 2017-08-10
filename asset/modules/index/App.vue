@@ -77,7 +77,7 @@
                 top: '0px',
                 dock: 'top',
                 bottom: '75px',
-                bounce:'vertical'
+                bounce:'none'
               },
               extras:{preload: true}
             }
