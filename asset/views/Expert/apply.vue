@@ -190,7 +190,7 @@
             description:this.description
           });
 
-          this.$router.push('/expert/apply/success');
+          this.$router.replace('/expert/apply/success');
         });
       },
       selectTime(){
