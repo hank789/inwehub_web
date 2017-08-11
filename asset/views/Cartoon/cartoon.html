@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>动画</title>
+		<link rel="stylesheet" href="swiper-3.4.2.min.css">
+		 <style type="text/css">
+		 	body{
+		 		width: 100%;
+		 		height: 100%;
+		 		margin:0;
+		 	}
+		 	.swiper-container {
+			        width: 100%;
+			        height: 100%;
+			 }
+			/*css3动画效果和兼容处理*/
+				img{
+				position: absolute;
+			    width:20px;
+			    top:460px;
+			    left:150px;
+			    z-index: 999;
+				animation:myfirst 3s linear 1s infinite alternate;
+				/* Safari and Chrome: */
+				-webkit-animation:myfirst 3s linear 1s infinite alternate;
+				}
+				@keyframes myfirst
+				{
+				0%   {opacity: 1;}
+				25%  {opacity: 0;}
+				50%  {opacity: 1;}
+				75%  {opacity: 0;}
+				100% {opacity: 1;}
+				}
+				@-webkit-keyframes myfirst /* Safari and Chrome */
+				{
+				0%   {opacity: 1;}
+				25%  {opacity: 0;}
+				50%  {opacity: 1;}
+				75%  {opacity: 0;}
+				100% {opacity: 1;}
+				}
+		/*屏幕适配*/	
+			@media  screen and (min-width: 320px){
+				.swiper-wrapper {
+					height: 568px;
+				 }
+			}  
+			@media screen and (min-width: 375px){
+				.swiper-wrapper {
+					height: 667px;
+					
+				 }
+			}  
+			@media screen and (min-width: 417px){
+				.swiper-wrapper{
+					height: 736px;
+					
+			
+			}  
+		 </style>
+	</head>
+	<body>
+		<div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+        </div>
+        <img src="icon_money.png"  id="disappear" >
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+	</body>
+	<script src="swiper-3.4.2.min.js"></script>
+	<script type="text/javascript">
+		  var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true,
+		        direction: 'vertical',
+		        onSlideChangeStart: function(swiper){
+		              var disappear = document.getElementById('disappear');
+				      if(swiper.activeIndex==4){	 	
+		        	             disappear.style.display = "none";
+				      }else{
+				      	   disappear.style.display = "block";
+				      }
+				    }
+		    });
+	</script>
+</html>
