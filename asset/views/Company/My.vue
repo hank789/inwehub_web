@@ -67,7 +67,7 @@
 
     <div class="moreWrapper">
       <div class="more">
-        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.push('/my')">切换至个人页面</a>
+        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.pushPlus('/my')">切换至个人页面</a>
       </div>
     </div>
 
