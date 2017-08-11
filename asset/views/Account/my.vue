@@ -362,7 +362,7 @@
 		color:#FFFFFF;
 		text-align: center;
 		background:url("../../statics/images/rank.png") no-repeat;
-		background-size: 19px 19px;
+		background-size: 19px 18px;
 		background-position:top;
 
 
