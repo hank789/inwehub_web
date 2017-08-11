@@ -11,11 +11,11 @@
       <div class="mui-scroll">
         <ul class="my-focus">
           <li class="my-focus-item" v-for="(item, index) in list" >
-              <img :src="item.user_avatar_url" />
+              <img :src="item.user_avatar_url" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
               <div>
               	<p>
               		<span>{{item.user_name}}</span>
-              		 <svg  class="icon" aria-hidden="true">
+              		 <svg  class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
               	</p>
@@ -25,10 +25,10 @@
               	  <span>樱伟信息科技</span>
               	</p>
               </div>
-              <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.user_id,index)" v-if="!item.is_following">
+              <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
 			    <use xlink:href="#icon-shoucang"></use>
 		    	 </svg>
-		    	 <svg class="icon" aria-hidden="true"  style="color: rgb(3,174,249);"  @tap.stop.prevent="collectProfessor(item.user_id,index)" v-else>
+		    	 <svg class="icon" aria-hidden="true"  style="color: rgb(3,174,249);"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>
 			    <use xlink:href="#icon-shoucanghover"></use>
 		    	 </svg>
 		    	 <i class="bot"></i>
