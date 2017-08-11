@@ -98,7 +98,6 @@ function goBack(){
  */
 function clearAllWebViewCache() {
   if (mui.os.plus) {
-    if (mui.os.ios) {
       mui.plusReady(function () {
         var self = plus.webview.currentWebview();
         var wvs=plus.webview.all();
@@ -108,7 +107,6 @@ function clearAllWebViewCache() {
           }
         }
       });
-    }
   }
 }
 
