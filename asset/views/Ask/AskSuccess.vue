@@ -26,8 +26,8 @@
               <button type="button" class="mui-btn mui-btn-primary " @tap.stop.prevent="$router.replace('/ask/' + id)">查看问题</button>
 
             </div>
-
       </div>
+      <div id="statusBarStyle" background="#eeeff3"   bgColor="#eeeff3" mode="dark"></div>
 </div>
 </template>
 
