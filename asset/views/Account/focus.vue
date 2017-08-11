@@ -121,12 +121,6 @@
          }
         return  0;
       },
-      topId () {
-        if (this.list.length) {
-          return this.list[0].id;
-        }
-        return 0;
-      },
       bottomId () {
         var length = this.list.length;
         if (length) {
