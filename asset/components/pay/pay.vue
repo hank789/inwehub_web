@@ -55,6 +55,7 @@
           var appid = plus.runtime.appid;
         } else {
           if (typeof WeixinJSBridge === "undefined"){
+            mui('#sheet1').popover('toggle');
             mui.alert('目前仅支持微信公众号支付，请前往微信公众号访问！');
             return;
           }
