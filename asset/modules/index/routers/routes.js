@@ -389,7 +389,8 @@ const routes = [{
 		path: '/expert/apply',
 		component: require('../../../views/Expert/apply.vue'),
 		meta: {
-			title: '专家申请'
+			title: '专家申请',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
