@@ -38,7 +38,7 @@
 			</div>
 			<!--专业问答 和 成为专家-->
 			<div class="home-expert">
-				<p @tap.stop.prevent="$router.pushPlus('/asks')">
+				<p @tap.stop.prevent="$router.pushPlus('/ask')">
 					<svg class="icon" aria-hidden="true" >
 						<use xlink:href="#icon-zhuanyewenda"></use>
 					</svg>
@@ -91,7 +91,8 @@
 					<i class="bot"></i>
 				</div>
 				<ul>
-					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title)">
+					<li v-if="recommend_read.length=='0'"></li>
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title)" v-else>
 						<img  :src="reads.img_url" />
 						<div>
 							<p class="mui-ellipsis-2">{{reads.title}}</p>

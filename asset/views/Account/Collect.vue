@@ -15,7 +15,7 @@
               <div>
               	<p>
               		<span>{{item.user_name}}</span>
-              		 <svg  class="icon" aria-hidden="true">
+              		 <svg  class="icon" aria-hidden="true" v-if="item.is_expert=='1'">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
               	</p>
@@ -23,7 +23,7 @@
               	  <span>{{ item.description }}</span>
               	</p>
               </div>
-              <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" >
+              <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" v-if="item.is_expert=='1'" >
 			    <use xlink:href="#icon-tiwen"></use>
 		    	 </svg>
 		    	 
@@ -60,9 +60,6 @@
 
     },
     methods: {
-      initData() {
-          this.pulldownRefresh();
-      },
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
@@ -75,7 +72,7 @@
       },
       getPrevList(){
 
-        postRequest(`followed/users`, {top_id: this.topId}).then(response => {
+        postRequest(`followed/users`, {}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -127,7 +124,7 @@
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-collect');
-        this.initData();
+        this.getPrevList();
       });
       mui.init({
         pullRefresh: {
