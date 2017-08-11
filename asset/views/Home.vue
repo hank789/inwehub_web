@@ -563,7 +563,7 @@
 		height: 50px;
 		background: #FFFFFF;
 		border-radius: 4px;
-		margin-top: 10px;
+		margin-top: 12.5px;
 		padding-top: 13px;
 	}
 
@@ -825,7 +825,7 @@
 	.home-laud>i {
 		font-size: 20px;
 		font-size: 13px;
-		color: #03aef9;
+		color: #b4b4b6;
 		font-style: normal;
 	}
 
@@ -837,4 +837,22 @@
 		text-align: center;
 		color: #c8c8c8;
 	}
+	
+	.mui-slider-indicator .mui-active.mui-indicator {
+    background: #03aef9;
+     }
+     
+	.mui-slider-indicator .mui-indicator {
+	    display: inline-block;
+	    width: 6px;
+	    height: 6px;
+	    margin: 1px 6px;
+	    cursor: pointer;
+	    border-radius: 50%;
+	    background: #d8d8d8;
+	    -webkit-box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
+	    box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
+	}
+	
+	
 </style>
