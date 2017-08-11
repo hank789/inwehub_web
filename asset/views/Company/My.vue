@@ -121,9 +121,9 @@
           this.$router.push('/project/list');
         }
       },
-      nothing(){
-
-      },
+//    nothing(){
+//
+//    },
       getRenzhengText(status){
          switch(status) {
            case 0:
