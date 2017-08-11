@@ -15,7 +15,7 @@
               <div>
               	<p>
               		<span>{{item.user_name}}</span>
-              		 <svg  class="icon" aria-hidden="true">
+              		 <svg  class="icon" aria-hidden="true" v-if="item.is_expert=='1'">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
               	</p>
@@ -23,7 +23,7 @@
               	  <span>{{ item.description }}</span>
               	</p>
               </div>
-              <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" >
+              <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" v-if="item.is_expert=='1'" >
 			    <use xlink:href="#icon-tiwen"></use>
 		    	 </svg>
 		    	 
