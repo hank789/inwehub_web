@@ -72,7 +72,7 @@
       },
       getPrevList(){
 
-        postRequest("follow_my/users", {top_id: this.topId}).then(response => {
+        postRequest("follow_my/users", {}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -93,7 +93,6 @@
             mui.alert(response.data.message);
             mui.back();
           }
-
           if (response.data.data.length > 0) {
             this.list = this.list.concat(response.data.data);
           }
