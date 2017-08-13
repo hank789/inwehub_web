@@ -63,8 +63,9 @@
     },
     mounted () {
       console.log('refreshDataAppMounted');
-      if (mui.os.plus) {
-        var currentUser = localEvent.getLocalItem('UserInfo');
+      var currentUser = localEvent.getLocalItem('UserInfo');
+      if (mui.os.plus && currentUser.uuid) {
+        console.log('refreshDataAppMounted1:'+currentUser.uuid);
         var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
         mui.init({
           //预加载页面，用于加载外部url
