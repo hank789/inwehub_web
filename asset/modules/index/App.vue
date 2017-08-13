@@ -64,25 +64,23 @@
     mounted () {
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
-      if (mui.os.plus && currentUser.uuid) {
-        console.log('refreshDataAppMounted1:'+currentUser.uuid);
-        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+      if (mui.os.plus) {
+        if (currentUser.uuid) {
+          var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+          //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
+          mui.preload({
+            url: url,
+            id: 'inwehub_embed',
+            styles: {
+              popGesture: 'hide',
+              top: '0px',
+              dock: 'top',
+              bottom: '75px',
+              bounce:'none'},
+            extras: {}
+          });
+        }
         mui.init({
-          //预加载页面，用于加载外部url
-          preloadPages:[
-            {
-              url: url,
-              id: 'inwehub_embed',
-              styles: {
-                popGesture: 'hide',
-                top: '0px',
-                dock: 'top',
-                bottom: '75px',
-                bounce:'none'
-              },
-              extras:{preload: true}
-            }
-          ],
           swipeBack:true, //启用右滑关闭功能
           beforeback: goBack
         });
