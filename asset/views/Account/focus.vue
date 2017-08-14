@@ -20,9 +20,9 @@
 				    	 </svg>
               	</p>
               	<p>
-              	  <span>网络专员</span>
+              	  <span>{{item.title}}</span>
               	  <i></i>
-              	  <span>樱伟信息科技</span>
+              	  <span>{{item.company}}</span>
               	</p>
               </div>
               <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
