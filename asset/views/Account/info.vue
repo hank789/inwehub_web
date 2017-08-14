@@ -43,7 +43,11 @@
 			</div>
 			<p class="info-progresbar">
 				<span class="info-progress"><i :style="'width:'+ user.info.account_info_complete_percent +'%'"></i></span>
-				<span class="info-text">已编辑{{ user.info.account_info_complete_percent }}%</span>
+				<span class="info-text">{{ user.info.account_info_complete_percent }}%</span>
+				<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
+				    <use xlink:href="#icon-jinggao"></use>
+				</svg>
+			   <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
 			</p>
 			<div class="part3">
 				<ul class="mui-table-view mui-table-view-chevron firstItem">
@@ -139,6 +143,23 @@
 			});
 		},
 		methods: {
+					//警告框
+	wran(){
+		var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">'+'为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。'+'</p>'+
+		           '<p style="text-align: left; color: #444444;">'+'平台对所有个人信息绝对保密，不会提供给任何第三方。'+'</p>';
+		var title='<p style="font-size:16px; margin-bottom:15px">'
+		           +'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">'
+		           +'<use xlink:href="#icon-jinggao"></use>'
+	               +'</svg>'
+		           +'警告说明 '
+		           +'</p>';
+		
+		
+           document.getElementById("confirmBtn").addEventListener('tap', function() {
+             var btnArray = ['取消', '确认'];
+             mui.confirm(font, title)
+              });
+			},
 			warning: function() {
 				mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function() {}, 'div');
 			},
@@ -313,11 +334,28 @@
 		height: 50px;
 		padding: 10px 17px 0 16px;
 		background: #F3F4F6;
+		position: relative;
+	}
+	.info-progresbar svg{
+      font-size: 15px;
+      color: #fcc816; 
+      margin-left: 0px;
+      margin-top: 4px;
+      position: absolute;
+      right: 72px;
+      
+    }
+    
+    .info-progresbar span:nth-of-type(3) {
+		font-size: 13px;
+		color: rgb(3, 174, 249);
+		float: right;
+		margin-top: 2px;
 	}
 	
 	.info-progresbar .info-progress {
 		display: inline-block;
-		width: 77%;
+		width: 65%;
 		height: 12px;
 		border-radius: 50px;
 		overflow: hidden;
@@ -335,8 +373,6 @@
 	}
 	
 	.info-progresbar .info-text {
-		
-		float: right;
 		font-size: 12px;
 		color: #808080;
 	}
