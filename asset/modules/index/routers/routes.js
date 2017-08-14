@@ -102,6 +102,21 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ // 专家认证引导
+		path: '/my/pilot',
+		component: require('../../../views/Account/Expertpilot.vue'),
+		meta: {
+			title: '专家认证引导',
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
 	{ // 关注我的
 		path: '/my/focus',
 		component: require('../../../views/Account/focus.vue'),

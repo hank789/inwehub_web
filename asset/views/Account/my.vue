@@ -50,11 +50,11 @@
 				</div>
 				<div class="my-apply">
 					<div @tap.stop.prevent="toApply(expert_apply_status)">
-						<svg class="icon" aria-hidden="true">
+						<svg class="icon" aria-hidden="true" >
 							<use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
 						<p>
-							<span v-if="expert_apply_status =='2'">平台认证专家</span>
+							<span v-if="expert_apply_status =='2'" >平台认证专家</span>
 							<span v-else>申请专家认证</span>
 							<span v-if="expert_apply_status =='0'">点击前往认证</span>
 							<span v-if="expert_apply_status =='1'">认证处理中</span>
@@ -227,13 +227,13 @@
 			toApply(status) {
 				switch(status) {
 					case 0:
-						this.$router.pushPlus('/expert/apply');
+						this.$router.pushPlus('/my/pilot');
 						break;
 					case 1:
 						this.$router.pushPlus('/expert/apply/success?type=0');
 						break;
 					case 3:
-						this.$router.pushPlus('/expert/apply');
+						this.$router.pushPlus('/my/pilot');
 						break;
 
 				}
