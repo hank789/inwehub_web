@@ -217,15 +217,22 @@
 			},
 			//认证专家跳转判断；
 			toApprove(status) {
-
-				switch(status) {
+			switch(status) {
+					case 0:
+						this.$router.pushPlus('/expert/apply');
+						break;
 					case 1:
+						this.$router.pushPlus('/expert/apply/success?type=0');
+						break;
+					//认证专家；
+					case 2:
 						mui.toast("您已经是认证专家了");
 						break;
-					default:
-						this.$router.pushPlus('/company/submit');
+					case 3:
+						this.$router.pushPlus('/expert/apply');
+						break;
 
-				}
+			}
 
 			},
       goArticle: function(url,id,title='') {
