@@ -367,7 +367,7 @@
 					//返回是否显示首次提问免费的福利；
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
-					t.is_expert = response_data.is_expert;
+					t.is_expert = response_data.expert_apply_status;
 
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
