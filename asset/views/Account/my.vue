@@ -43,6 +43,9 @@
 				<div class="my-progress">
 					<span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
 					<span>{{account_info_complete_percent}}%</span>
+					 <svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
+						<use xlink:href="#icon-jinggao"></use>
+				     </svg>
 					<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
 				</div>
 				<div class="my-apply">
@@ -114,7 +117,7 @@
 						<use xlink:href="#icon-wodefankuijianyi"></use>
 					</svg>
 					<span>反馈建议</span>
-					<svg class="icon" aria-hidden="true">
+					<svg class="icon" aria-hidden="true" >
 						<use xlink:href="#icon-chakangengduojiantou"></use>
 					</svg>
 					<i class="bot"></i>
@@ -180,6 +183,23 @@
 			}
 		},
 		methods: {
+			//警告框
+	wran(){
+		var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">'+'为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。'+'</p>'+
+		           '<p style="text-align: left; color: #444444;">'+'平台对所有个人信息绝对保密，不会提供给任何第三方。'+'</p>';
+		var title='<p style="font-size:16px; margin-bottom:15px">'
+		           +'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">'
+		           +'<use xlink:href="#icon-jinggao"></use>'
+	               +'</svg>'
+		           +'警告说明 '
+		           +'</p>';
+		
+		
+           document.getElementById("confirmBtn").addEventListener('tap', function() {
+             var btnArray = ['取消', '确认'];
+             mui.confirm(font, title)
+              });
+			},
 			//我的项目跳转判断
 			exclusive(status){
 				switch(status) {
@@ -458,11 +478,21 @@
 	.my-progress {
 		width: 100%;
 		margin-top: 20px;
+		position: relative;
+		
 	}
-
+    .my-progress svg{
+      font-size: 15px;
+      color: #fcc816; 
+      margin-left: 0px;
+      margin-top: 4px;
+      position: absolute;
+      right: 55px;
+      
+    }
 	.my-progress span:nth-of-type(1) {
 		display: inline-block;
-		width: 70%;
+		width:65%;
 		height: 12px;
 		border-radius: 50px;
 		overflow: hidden;
@@ -613,4 +643,9 @@
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
+.mui-popup-inner {
+    padding: 23px 15px 1px 15px;
+    }
+  
+
 </style>
