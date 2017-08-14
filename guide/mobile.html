@@ -4,23 +4,37 @@
 		<meta charset="UTF-8">
 	     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>引导页面</title>
-		<link rel="stylesheet" href="swiper-3.4.2.min.css">
+		<link rel="stylesheet" href="assets/swiper-3.4.2.min.css">
 		 <style type="text/css">
+		 	div,span,p,img,i{
+		 		margin: 0;
+		 		padding: 0;
+		 		list-style: none;
+		 	}
 		 	body{
 		 		width: 100%;
 		 		height: 100%;
 		 		margin:0;
+		 		font-family: PingFang-SC-Regular, sans-serif;
+			    -webkit-tap-highlight-color: transparent;
+			    -webkit-font-smoothing: antialiased;
+			    font-size: 16px;
+			    -webkit-user-select: none;
+			    background: transparent !important;
 		 	}
 		 	.swiper-container {
 			     width: 100%;
 			     height: 100%;
 			 }
 			/*css3动画效果和兼容处理*/
-				img{
+				#disappear{
 				position: absolute;
-			    width:20px;
-			    left:46%;
-			    top: 90%;
+			    width:16px;
+			    
+			    left: 0;
+				right: 0;
+				top:90%;
+				margin:auto;
 			    z-index: 999;
 				animation:myfirst 3s linear 1s infinite alternate;
 				/* Safari and Chrome: */
@@ -57,26 +71,322 @@
 			@media screen and (min-width: 417px){
 				.swiper-wrapper{
 					height: 736px;
-					
-			
+				}
 			}  
-		 </style>
+			/*****************第一个页面************************************/
+			.part1{
+				width: 100%;
+				height: 100%;
+				background: url("images/backdrop.jpg") no-repeat;
+				background-size: 120% 120%;
+				background-position:-20px -80px;
+				position: relative;
+				text-align: center;
+			}
+		   .part1>img{
+		   	width: 87px;
+		   	height: 87px;
+		    position: absolute;
+		    left: 0;
+		    right: 0;
+		    top: 73px;
+		    margin: auto;
+		   }
+		    .part1 span:nth-of-type(1){
+		    	font-size: 29px;
+			font-weight: bold;
+			color: #dbdfe3;
+			position: absolute;
+			top: 220px;
+		    }
+		    .part1 span:nth-of-type(2){
+		    	display: inline-block;
+		    	font-size: 15px;
+			color:#dbdfe3;
+			margin-top: 260px;
+		    }
+			 .part1  p{
+			 	width:54%;
+			 	margin-left: 23%;
+				height: 44px;
+				border-radius: 22px;
+				background: #03aef9;
+				text-align: center;
+				line-height: 44px;
+				font-size: 17px;
+				color: #FFFFFF;
+				margin-top: 120px;
+				opacity: 0.8;
+			 }
+			 .swiper-container-vertical>.swiper-pagination-bullets {
+			    right: 10px;
+			    top: 35%;
+			    -webkit-transform: translate3d(0,-50%,0);
+			    -moz-transform: translate3d(0,-50%,0);
+			    -o-transform: translate(0,-50%);
+			    -ms-transform: translate3d(0,-50%,0);
+			    transform: translate3d(0,-50%,0);
+			}
+		/*****************第二，三个页面************************************/
+		.part2{
+			width: 100%;
+			padding-top: 120px;
+			height: 100%;	 
+		}
+		.part2>.main{
+			width: 247px;
+			height: 286px;
+			margin: 0 auto;
+			
+		}
+		.part2_l{
+			width: 51px;
+			height: 286px;
+			float: left;
+		}
+		.part2_l img{
+			width: 51px;
+            height:51px;
+            margin: 0;
+		    padding: 0;
+		}
+		.part2_l i{
+			display: block;
+			width: 1px;
+			height: 62px;
+			border-right: 1px dashed #03aef9;
+			margin-left: 25px;
+			margin-bottom: 1px;
+		}
+		.part2_r{
+			width: 145px;
+			margin-left: 23px;
+			margin-right: 23px;
+			height: 286px;
+			float: left;
+		}	
+		.part2_r p:nth-of-type(2){
+			margin-top: 75px;
+		}
+		.part2_r span:nth-of-type(2){
+			display: block;
+			margin-bottom: 75px;
+		}
+		.part2_r p{
+			font-size:17px;
+			font-weight: 500px;
+			color: #505050;
+			
+		}
+		.part2_r span{
+			font-size: 12px;
+			color: #6e6e6e;
+		}
+		/*****************第四个页面************************************/
+		.part4{
+			width: 100%;
+			height: 100%;
+		}
+		.part4>img{
+			display: block;
+			width: 190px;
+			height: 152px;
+			margin: 96px auto;
+			margin-bottom: 0;
+		}
+		.part4 p:nth-of-type(1){
+			width: 132px;
+	        height: 18px;
+			font-size: 18px;
+			font-weight: 500;
+			color: #505050;
+			margin: 0 auto;
+			margin-top: 40px;
+		}
+		.part4 p:nth-of-type(2){
+			width:250px;
+			height: 71px;
+			font-size: 12px;
+			color: #6e6e6e;
+			margin: 0 auto;
+			margin-top: 20px;
+			
+		}
+		/*****************第五个页面************************************/
+		.part5{
+			width: 100%;
+			height: 100%;
+			padding-top: 67px;
+			
+		}
+		.part5_t{
+			width:165px;
+	        height: 17px;
+			font-size: 18px;
+			font-weight: 500;
+			color: #505050;
+			margin:0 auto
+		}
+		.part5 .main{
+			width: 257px;
+			height:258px;
+			border-radius: 16px;
+			background: #f4f5f6;
+			margin: 0 auto;
+			margin-top: 30px;
+			padding-top: 30px;
+		}
+		.part5 .main img{
+			display: block;
+			width: 131px;
+	        height: 131px;
+	        margin: 0 auto;	
+	 }
+		.part5 .main span{
+			display: block;
+			width:120px;
+			height: 15px;
+			font-size: 12px;
+			color: #505050;
+			margin: 11px auto;	
+		}
+		.part5 .main p{
+			width: 200px;
+			height: 44px;
+			border-radius:22px;
+			background: #03aef9;
+			opacity: 0.8;
+			text-align: center;
+             line-height: 44px;
+             font-size: 17px;
+             color:#FFFFFF;
+             margin: 0 auto;
+             margin-top: 28px;
+		}
+		.part5>p{
+			width: 278px;
+			height: 32px;
+			font-size: 12px;
+			color: #6e6e6e;
+			margin: 0 auto;
+			margin-top: 95px;
+		}
+		.part5>p i{
+		 color: #03aef9;
+		 font-style: normal;	
+		}
+		.part5>span{
+			display: block;
+			width: 60px;
+			height: 12px;
+			font-size:12px;
+			color: #03aef9;
+			margin: 0 auto;
+			margin-top: 18px;
+		}
+		
+		.swiper-pagination-bullet {
+		    width: 6px;
+		    height: 6px;
+		    background: #b4b5b5;
+		}
+		
+		.swiper-pagination-bullet-active {
+		    opacity: 1;
+		    background: #007aff;
+		}
+		</style>
 	</head>
 	<body>
 		<div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
+        	<!--第1个页面-->
+            <div class="swiper-slide">
+	            <div class="part1">
+	            	    <img src="images/inwehub@2x.png" /> 
+	            	    <span>不负期待·专家同行</span>
+	                <span>为企业和咨询顾问提供专家辅助服务</span>
+	                <p>下载APP</p>
+	            </div>
+            </div>
+            
+        <!--第2个页面-->    
+            <div class="swiper-slide">
+            	    <div class="part2">
+            	    	<div class="main">
+            	    		<!--左边部分-->
+            	    	   <div class="part2_l">
+            	    	   	   <img src="images/counselor.png" />
+            	    	   	   <i></i>
+            	    	   	   <img src="images/topspeed.png" />
+            	    	   	   <i></i>
+            	    	   	   <img src="images/synergy.png" />
+            	    	   </div>
+            	    	   <!--右边部分-->
+            	    	   <div class="part2_r">
+            	    	   	   <p>汇聚资深顾问 </p>
+            	    	   	   <span>为企业便捷提供高质服务</span>
+            	    	   	   <p>极速高质响应 </p>
+            	    	   	   <span>为顾问快速准确的解答疑惑</span>
+            	    	   	   <p>高效智能协同</p>
+            	    	   	   <span>高效协作智能管理高质交付</span>
+            	    	   </div>
+            	    	 </div>
+            	    </div>
+            </div>
+       <!--第3个页面-->
+            <div class="swiper-slide">
+            	  <div class="part2">
+            	    	<div class="main">
+            	    		
+            	    	   <!--右边部分-->
+            	    	   <div class="part2_r">
+            	    	   	   <p style="text-align: right;">把握行业脉搏 </p>
+            	    	   	   <span>打造公平与客观的平台环境</span>
+            	    	   	   <p style="text-align:right;">信息资源对接  </p>
+            	    	   	   <span>为行业人士带来一站式服务</span>
+            	    	   	   <p style="text-align: right;">行业价值延伸 </p>
+            	    	   	   <span>延伸行业链条实现价值提升</span>
+            	    	   </div>
+            	    	   <!--左边部分-->
+            	    	   <div class="part2_l">
+            	    	   	   <img src="images/lifeline.png" />
+            	    	   	   <i></i>
+            	    	   	   <img src="images/resource.png" />
+            	    	   	   <i></i>
+            	    	   	   <img src="images/worth.png" />
+            	    	   </div>
+            	    	 </div>
+            	    </div>
+            </div>
+       <!--第4个页面-->
+            <div class="swiper-slide">
+            	<div  class="part4">
+                <img src="images/newworld.png"  />
+                <p>开启你的新视界</p>
+                <p>无论你是资深顾问还是咨询新人，无论你是企业高管还是企业核心用户，InweHub都为你量身定制了专属服务，为你带来专业、品质为核心都互联网企业咨询服务。</p>
+            </div>
+            </div>
+       <!--第5个页面-->
+            <div class="swiper-slide">
+            	<div class="part5">
+            		<div class="part5_t">你离InweHub仅一步</div>
+            		<div class="main">
+            			<img src="images/code.png" />
+            			<span>扫一扫关注微信公众号</span>
+            			<p>下载APP</p>
+            		</div>
+            		<p>目前inwehub采用“邀请码”注册方式，你可以从身边的优秀顾问处获得邀请码，也可以点<i>这里</i>申请内测。</p>
+            		<span>进入电脑版</span>
+            	</div>
+            </div>
         </div>
-        <img src="icon_money.png"  id="disappear" >
+        <img src="images/arrows.png"  id="disappear" >
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
 	</body>
-	<script src="swiper-3.4.2.min.js"></script>
+	<script src="assets/swiper-3.4.2.min.js"></script>
 	<script type="text/javascript">
 		  var swiper = new Swiper('.swiper-container', {
 		        pagination: '.swiper-pagination',
