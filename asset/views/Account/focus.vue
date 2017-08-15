@@ -14,15 +14,15 @@
               <img :src="item.user_avatar_url" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
               <div>
               	<p>
-              		<span>{{item.user_name}}</span>
+              		<span class="mui-ellipsis">{{item.user_name}}</span>
               		 <svg  class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
 					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
 				    	 </svg>
               	</p>
               	<p>
-              	  <span>{{item.title}}</span>
-              	  <i></i>
-              	  <span>{{item.company}}</span>
+              	  <span class="mui-ellipsis">{{item.title}}</span>
+              	  <i v-show="(item.title && item.company)" ></i>
+              	  <span class="mui-ellipsis">{{item.company}}</span>
               	</p>
               </div>
               <svg class="icon" aria-hidden="true"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
@@ -211,6 +211,10 @@
     float: right;
  }
  .my-focus-item div p:nth-of-type(1) span{
+ 	display: inline-block;
+ 	max-width: 126px;
+ 	height: 20px;
+ 	overflow: hidden;
     font-family: "PingFangSC";
 	font-size: 14px;
 	color: #444444;
@@ -219,12 +223,15 @@
  
  .my-focus-item div p:nth-of-type(1) svg{
  	font-size:20px;
- 	margin-bottom: -2px;
+ 	margin-bottom: 2px;
  	color: #3c95f9;
 
  }
  
  .my-focus-item div p:nth-of-type(2) span{
+ 	display: inline-block;
+ 	max-width: 122px;
+    height: 21px; 
  	font-family: "PingFangSC";
 	font-size:13px;
 	color: #b4b4b6;
@@ -233,9 +240,9 @@
  .my-focus-item div p:nth-of-type(2) i{
  	display: inline-block;
  	width: 1px;
- 	height: 12px;
+ 	height: 11px;
  	background:#b4b4b6;
- 	margin-bottom: -2px;
+ 	margin-bottom: 5px;
  }
  
      
