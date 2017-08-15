@@ -197,7 +197,7 @@
 		
            document.getElementById("confirmBtn").addEventListener('tap', function() {
              var btnArray = ['取消', '确认'];
-             mui.confirm(font, title)
+             mui.confirm(font, title,function() {}, 'div')
               });
 			},
 			//我的项目跳转判断
