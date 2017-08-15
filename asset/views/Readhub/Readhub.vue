@@ -23,35 +23,8 @@
     methods: {
       loaded() {
         console.log('loaded');
-      }
-    },
-    computed: {
-
-    },
-    watch: {
-
-    },
-    activated: function () {
-      if (mui.os.plus) {
-        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-        if (inwehub_embed_webview) {
-          inwehub_embed_webview.show();
-        }
-      }
-    },
-    deactivated: function () {
-      if (mui.os.plus) {
-        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-        if (inwehub_embed_webview) {
-          inwehub_embed_webview.hide();
-        }
-      }
-    },
-    mounted(){
-      this.currentUser = localEvent.getLocalItem('UserInfo');
-      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
-
-      if (mui.os.plus) {
+      },
+      createReadWebview() {
         this.iframeState = false;
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
@@ -71,6 +44,38 @@
             ws.append(inwehub_embed_webview);
           }
         });
+      }
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    activated: function () {
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        if (inwehub_embed_webview) {
+          inwehub_embed_webview.show();
+        } else {
+          this.createReadWebview();
+        }
+      }
+    },
+    deactivated: function () {
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        if (inwehub_embed_webview) {
+          inwehub_embed_webview.hide();
+        }
+      }
+    },
+    mounted(){
+      this.currentUser = localEvent.getLocalItem('UserInfo');
+      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
+
+      if (mui.os.plus) {
+          this.createReadWebview();
       } else {
         this.iframeState = true;
         const deviceWidth = document.documentElement.clientWidth;
