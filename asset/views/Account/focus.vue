@@ -230,7 +230,7 @@
  
  .my-focus-item div p:nth-of-type(2) span{
  	display: inline-block;
- 	max-width: 122px;
+ 	max-width: 80px;
     height: 21px; 
  	font-family: "PingFangSC";
 	font-size:13px;

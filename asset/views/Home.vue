@@ -680,21 +680,22 @@
 		display: block;
 		text-align:center;
 		font-size: 12px;
+		padding: 0 4px;
 	}
     #home-card span:nth-of-type(1) i{
     	   display: inline-block;
-    	  max-width: 84px;
+    	  max-width: 70px;
     	  height: 20px;
     	  font-style: normal;
     }
 	#home-card span:nth-of-type(1) {
-		display: inline-block;
 		width: 100%;
 		text-align: center;
 		font-size: 14px;
 		font-weight: 600;
 		color: #444444;
-		margin-top: 6px;
+		margin-top:2px;
+		
 	}
 
 	#home-card span:nth-of-type(1) svg {
@@ -804,6 +805,7 @@
 	}
 
 	.home-reading ul li div p:nth-of-type(1) {
+		height: 42px;
 		font-size: 14px;
 		color: #444444;
 	}
@@ -829,6 +831,7 @@
 	.home-laud>svg {
 		font-size: 17px;
 		color: #b4b4b6;
+		margin-bottom: 1.5px;
 	}
 
 	.home-laud>i {

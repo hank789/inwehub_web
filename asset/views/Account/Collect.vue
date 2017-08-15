@@ -198,11 +198,11 @@
     float: right;
  }
  .my-focus-item div p:nth-of-type(1) span{
- 	display: inline-block;
-     max-width: 196px;
+ 	 display: inline-block;
+     max-width: 140px;
      height: 20px;
-	font-size: 14px;
-	color: #444444;
+	 font-size: 14px;
+	 color: #444444;
 		
  }
  
@@ -215,7 +215,7 @@
  
  .my-focus-item div p:nth-of-type(2) span{
  	display: inline-block;
- 	width: 211px;
+ 	width: 210px;
  	height: 18px;
 	font-size:13px;
 	color: #b4b4b6;

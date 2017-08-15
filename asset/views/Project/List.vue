@@ -247,7 +247,7 @@
         span{
           &:nth-child(1){
           	display: inline-block;
-            max-width: 192px;
+            max-width: 180px;
             height: 22.5px;
             font-family: "PingFangSC";
             font-size: 16px;
@@ -282,7 +282,7 @@
         span{
           &:nth-child(1){
           	display: inline-block;
-          	max-width: 150px;
+          	max-width: 130px;
           	height: 20px;
             font-family: ".PingFangSC";
             color: #808080;
@@ -300,7 +300,7 @@
           }
           &:nth-child(3){
           	display: inline-block;
-          	max-width: 150px;
+          	max-width: 130px;
           	height: 20px;
             font-family: ".PingFangSC";
             color: #808080;

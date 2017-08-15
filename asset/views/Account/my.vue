@@ -10,7 +10,7 @@
 
 					<div class="my-personal">
 						<div class="my-info">
-							<span>{{name}}</span>
+							<span class="mui-ellipsis">{{name}}</span>
 							<p>{{ user_level }}</p>
 							<svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
 								<use xlink:href="#icon-zhuanjiabiaoji"></use>
@@ -361,10 +361,13 @@
 	}
 
 	.my-personal .my-info span:nth-of-type(1) {
+		display: inline-block;
+		max-width: 72px;
 		font-size: 18px;
 		font-weight: 600;
 		color: #444444;
 		margin-right: 1.5px;
+		margin-bottom: -4px;
 	}
 
 	.my-personal .my-info p:nth-of-type(1) {
@@ -536,7 +539,7 @@
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 10px;
-		margin-right: 4px;
+		margin-right: 2px;
 		font-size: 40px;
 		color: rgb(3, 174, 249);
 		float: left;
