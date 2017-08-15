@@ -102,6 +102,16 @@
 			</ul>
 
 			<ul class="my-option">
+				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')"  v-if="show_my_wallet">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-qianbao"></use>
+					</svg>
+					<span>我的钱包</span>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-chakangengduojiantou"></use>
+					</svg>
+					<i class="bot"></i>
+				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/collect')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-wodeguanzhu"></use>
@@ -280,10 +290,12 @@
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-
+                     this.expert_apply_status =  user.info.expert_apply_status,
+				    this.company_apply_status =  user.info.company_status,
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
+					this.show_my_wallet =  user.info.show_my_wallet;
 				}));
 			}
 		},
@@ -294,6 +306,7 @@
 			this.initData();
 		},
 		mounted() {
+			
 			this.getToken();
 
 		}
