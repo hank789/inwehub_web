@@ -143,7 +143,7 @@
 			});
 		},
 		methods: {
-					//警告框
+		//警告框
 	wran(){
 		var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">'+'为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。'+'</p>'+
 		           '<p style="text-align: left; color: #444444;">'+'平台对所有个人信息绝对保密，不会提供给任何第三方。'+'</p>';
@@ -154,11 +154,8 @@
 		           +'警告说明 '
 		           +'</p>';
 		
-		
-           document.getElementById("confirmBtn").addEventListener('tap', function() {
              var btnArray = ['取消', '确认'];
-             mui.confirm(font, title)
-              });
+             mui.confirm(font, title,function() {}, 'div');
 			},
 			warning: function() {
 				mui.confirm("<div style='text-align: left'>InweHub是一个真实诚信的社区，每一位用户的信息都真实有效，我们保证对平台所有个人信息绝对保密，绝不会提供给任何第三方，平台中个人信息的开放范围完全取决于用户个性的设置，默认值为不开放。\n【注意】您填写个人信息时务必真实，如发现虚假信息，第一次将给予警告，第二次发现将永久封号。</div>", '警告说明', ['我已了解', '继续补充'], function() {}, 'div');

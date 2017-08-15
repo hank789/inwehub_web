@@ -194,11 +194,8 @@
 		           +'警告说明 '
 		           +'</p>';
 		
-		
-           document.getElementById("confirmBtn").addEventListener('tap', function() {
              var btnArray = ['取消', '确认'];
-             mui.confirm(font, title,function() {}, 'div')
-              });
+             mui.confirm(font, title,function() {}, 'div');
 			},
 			//我的项目跳转判断
 			exclusive(status){
