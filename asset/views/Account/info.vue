@@ -126,7 +126,8 @@
 				},
 			},
 			loading: true,
-			loading_gif: loading_gif
+			loading_gif: loading_gif,
+			
 		}),
 		created() {
 			showInwehubWebview();
@@ -203,7 +204,9 @@
 					this.work_city = user.info.province.name + ' ' + user.info.city.name;
 					this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name;
 
-					this.user = user;
+   					this.user = user;
+   				
+   					console.log(user);
 					this.loading = 0;
 
 				}));
@@ -346,7 +349,7 @@
 	
 	.info-progresbar .info-progress {
 		display: inline-block;
-		width: 65%;
+		width: 80%;
 		height: 12px;
 		border-radius: 50px;
 		overflow: hidden;
