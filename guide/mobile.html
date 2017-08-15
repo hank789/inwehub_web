@@ -308,7 +308,7 @@
 	            	    <img src="images/inwehub@2x.png" /> 
 	            	    <span>不负期待·专家同行</span>
 	                <span>为企业和咨询顾问提供专家辅助服务</span>
-	                <p>下载APP</p>
+	                <p onclick="download()">下载APP</p>
 	            </div>
             </div>
             
@@ -376,10 +376,10 @@
             		<div class="main">
             			<img src="images/code.png" />
             			<span>扫一扫关注微信公众号</span>
-            			<p>下载APP</p>
+            			<p onclick="computer()">下载APP</p>
             		</div>
-            		<p>目前inwehub采用“邀请码”注册方式，你可以从身边的优秀顾问处获得邀请码，也可以点<i>这里</i>申请内测。</p>
-            		<span>进入电脑版</span>
+            		<p>目前inwehub采用“邀请码”注册方式，你可以从身边的优秀顾问处获得邀请码，也可以点<i onclick="download()">这里</i>申请内测。</p>
+            		<span onclick="computer()">进入电脑版</span>
             	</div>
             </div>
         </div>
@@ -403,6 +403,15 @@
 				      }
 				    }
 		    });
+		    function here(){
+		      	window.open ("http://cn.mikecrm.com/ovYy1u4");
+		    }
+		     function computer(){
+		      	window.open ("https://www.inwehub.com/");
+		    }
+		    function download(){
+		      	window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp");
+		    }
 	</script>
 </html>
 
