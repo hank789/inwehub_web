@@ -419,7 +419,7 @@
     right: 15px;
   }
   .buttonWrapper {
-    padding: 6px 16px 30px;
+    padding: 6px 16px 6px;
     background: #fff;
   }
   .buttonWrapper button {
