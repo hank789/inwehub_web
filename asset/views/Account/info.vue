@@ -47,7 +47,7 @@
 				<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
 				    <use xlink:href="#icon-jinggao"></use>
 				</svg>
-			   <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
+			   <!--<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>-->
 			</p>
 			<div class="part3">
 				<ul class="mui-table-view mui-table-view-chevron firstItem">
@@ -331,24 +331,18 @@
 		height: 50px;
 		padding: 10px 17px 0 16px;
 		background: #F3F4F6;
-		position: relative;
+		
 	}
 	.info-progresbar svg{
+	  float: right;
       font-size: 15px;
       color: #fcc816; 
       margin-left: 0px;
       margin-top: 4px;
-      position: absolute;
-      right: 72px;
       
     }
     
-    .info-progresbar span:nth-of-type(3) {
-		font-size: 13px;
-		color: rgb(3, 174, 249);
-		float: right;
-		margin-top: 2px;
-	}
+   
 	
 	.info-progresbar .info-progress {
 		display: inline-block;

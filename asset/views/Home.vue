@@ -69,12 +69,12 @@
 			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index">
 			        <img :src="experts.avatar_url" :class="experts.uuid"  />
 					<span>
-	      	      	       <i :class="experts.uuid">{{ experts.name }}</i>
+	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
 		      	      	<svg class="icon" aria-hidden="true" >
 						  <use xlink:href="#icon-zhuanjiabiaoji" ></use>
 						</svg>
 	      	        </span>
-					<span>{{ experts.title?experts.title:'　' }}</span>
+					<span class="mui-ellipsis">{{ experts.title?experts.title:'　' }}</span>
 					<span >查看</span>
 					<p>
 					    {{experts.work_years?experts.work_years:"0"}}年
@@ -682,6 +682,9 @@
 		font-size: 12px;
 	}
     #home-card span:nth-of-type(1) i{
+    	   display: inline-block;
+    	  max-width: 84px;
+    	  height: 20px;
     	  font-style: normal;
     }
 	#home-card span:nth-of-type(1) {
@@ -697,14 +700,13 @@
 	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
-		margin-bottom: -2px;
+		margin-bottom: 2px;
 		margin-left: -3px;
 	}
 
 	.home-card span:nth-of-type(2) {
 		display: inline-block;
-		width: 100%;
-		
+		max-width: 90%;
 		color: #444444;
 	}
 
