@@ -33,7 +33,7 @@
         <p>邮箱：hi@inwehub.com/微信：hiinwe</p>
 	</div>
 	
-	<div class="home-apply" @tap.stop.prevent="$router.pushPlus('/expert/apply')" >立刻申请</div>
+	<div class="home-apply" @tap.stop.prevent="$router.replace('/expert/apply')" >立刻申请</div>
 </div>		
 </template>
 
