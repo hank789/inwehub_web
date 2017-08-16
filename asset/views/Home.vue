@@ -211,7 +211,7 @@
       	            	    uuid = Ele[1]
    	            	   }
 
-     	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
+     	           this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
 			   this.goLink(url);
