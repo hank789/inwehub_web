@@ -203,7 +203,7 @@
 	               +'</svg>'
 		           +'警告说明 '
 		           +'</p>';
-		
+
              var btnArray = ['取消', '确认'];
              mui.confirm(font, title,function() {}, 'div');
 			},
@@ -290,8 +290,8 @@
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-                     this.expert_apply_status =  user.info.expert_apply_status,
-				    this.company_apply_status =  user.info.company_status,
+          this.expert_apply_status =  user.info.expert_apply_status;
+          this.company_apply_status =  user.info.company_status;
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
@@ -306,7 +306,7 @@
 			this.initData();
 		},
 		mounted() {
-			
+
 			this.getToken();
 
 		}
@@ -492,16 +492,16 @@
 		width: 100%;
 		margin-top: 20px;
 		position: relative;
-		
+
 	}
     .my-progress svg{
       font-size: 15px;
-      color: #fcc816; 
+      color: #fcc816;
       margin-left: 0px;
       margin-top: 4px;
       position: absolute;
       right: 55px;
-      
+
     }
 	.my-progress span:nth-of-type(1) {
 		display: inline-block;
@@ -659,6 +659,6 @@
 .mui-popup-inner {
     padding: 23px 15px 1px 15px;
     }
-  
+
 
 </style>
