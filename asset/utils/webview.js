@@ -54,14 +54,16 @@ function openWebviewByHome(url, pathUrl, title)
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
     var  webviewBackButton = () => {
-      var ws = plus.webview.getWebviewById(url);
+      var ws = plus.webview.getWebviewById('home-read-webview');
       if (ws) {
+        console.log('webviewBackButton close');
         ws.close();
         autoHeight();
+        plus.key.removeEventListener('backbutton',webviewBackButton);
       }
     }
 
-    var webview = plus.webview.create(url, url,{popGesture: 'hide',
+    var webview = plus.webview.create(url, 'home-read-webview',{popGesture: 'close',
       top:'0px',
       bottom:'0px',
       position:'dock',
@@ -83,6 +85,7 @@ function openWebviewByHome(url, pathUrl, title)
 
     plus.key.addEventListener("backbutton",() =>{
       webviewBackButton();
+
     });
 
     webview.addEventListener('popGesture', (e) => {
