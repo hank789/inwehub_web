@@ -105,6 +105,22 @@ import {autoHeight} from '../../utils/statusBar';
 import EventObj from '../../utils/event';
 
 
+mui.toast = (str) => {
+     var oldtoast = mui.toast;
+     mui.toast = (str) => { return false }
+    
+     var toast = document.querySelector("#toast");
+     toast.style.display ="block";
+     //console.log(toast.innerHTML);
+     toast.innerHTML = str;
+
+     var timer = setInterval(() => {
+       toast.style.display = "none";
+       mui.toast = oldtoast;
+       clearTimeout(timer);
+     },3000);
+}
+
 
 Vue.mixin({
   activated(){
