@@ -6,7 +6,12 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
 
       console.log('calledMethod: openWebviewByUrl');
 
-      var nextUrl = 'index.html#' + url;
+      if (/^http/.test(url)) {
+        var nextUrl =  url;
+      } else {
+        var nextUrl = 'index.html#' + url;
+      }
+
 
       var current_webview = plus.webview.getWebviewById(nextUrl);
       if (current_webview) {
@@ -51,7 +56,7 @@ function openWebviewByHome(url, pathUrl, title)
       }
     }
 
-    var webview=plus.webview.create(url, url,{popGesture: 'hide',
+    var webview = plus.webview.create(url, url,{popGesture: 'hide',
       top:'0px',
       bottom:'0px',
       position:'dock',
@@ -76,6 +81,7 @@ function openWebviewByHome(url, pathUrl, title)
 
     //创建底部菜单
     var toolUrl = pathUrl + '/webview';
+    console.log('toolUrl:' + toolUrl);
     var embed =plus.webview.create(toolUrl, toolUrl, {
       cachemode:'noCache',
       popGesture: 'hide',
@@ -97,15 +103,13 @@ function openWebviewByHome(url, pathUrl, title)
       {tag:'rect',id:'rect',rectStyles:{color:'rgba(0,0,0,0)'},position:{bottom:'0px',left:'0px',width:'100%',height:'44px'}},
     ]);
     view.addEventListener('click', () => {
-      console.log('准备跳转');
-      webview.loadUrl(pathUrl);
+      console.log('准备跳转:'+pathUrl);
+      openWebviewByUrl(pathUrl);
     }, false);
-
     view.show();
 
     webview.append(view);
     webview.show();
-
 
 }
 
