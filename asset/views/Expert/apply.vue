@@ -275,7 +275,7 @@
     font-size: 27px;
     color: #808080;
     top: 59px;
-    z-index: 10;
+    z-index: 9;
   }
   .professorCard .title {
     padding: 3px 0;
@@ -419,7 +419,7 @@
     right: 15px;
   }
   .buttonWrapper {
-    padding: 6px 16px 30px;
+    padding: 6px 16px 6px;
     background: #fff;
   }
   .buttonWrapper button {

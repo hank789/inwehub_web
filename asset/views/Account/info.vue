@@ -25,7 +25,7 @@
 				</p>
 				<p>
 					<span>{{ user.info.name }}</span>
-					<svg class="icon" aria-hidden="true">
+					<svg class="icon" aria-hidden="true" v-if="user.info.is_expert =='1'">
 						<use xlink:href="#icon-zhuanjiabiaoji"></use>
 					</svg>
 				</p>
@@ -35,10 +35,10 @@
 					<span>{{ user.info.title }}</span>
 				</p>
 				<p>
-					{{ user.info.mobile }}
+					{{ user.info.mobile }} 
 				</p>
 				<p>
-					{{ user.info.email }}
+					{{ user.info.email }} 
 				</p>
 			</div>
 			<p class="info-progresbar">
@@ -47,7 +47,7 @@
 				<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
 				    <use xlink:href="#icon-jinggao"></use>
 				</svg>
-			   <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
+			   <!--<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>-->
 			</p>
 			<div class="part3">
 				<ul class="mui-table-view mui-table-view-chevron firstItem">
@@ -126,7 +126,8 @@
 				},
 			},
 			loading: true,
-			loading_gif: loading_gif
+			loading_gif: loading_gif,
+			
 		}),
 		created() {
 			showInwehubWebview();
@@ -203,7 +204,9 @@
 					this.work_city = user.info.province.name + ' ' + user.info.city.name;
 					this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name;
 
-					this.user = user;
+   					this.user = user;
+   				
+   					console.log(user);
 					this.loading = 0;
 
 				}));
@@ -331,28 +334,22 @@
 		height: 50px;
 		padding: 10px 17px 0 16px;
 		background: #F3F4F6;
-		position: relative;
+		
 	}
 	.info-progresbar svg{
+	  float: right;
       font-size: 15px;
       color: #fcc816; 
       margin-left: 0px;
       margin-top: 4px;
-      position: absolute;
-      right: 72px;
       
     }
     
-    .info-progresbar span:nth-of-type(3) {
-		font-size: 13px;
-		color: rgb(3, 174, 249);
-		float: right;
-		margin-top: 2px;
-	}
+   
 	
 	.info-progresbar .info-progress {
 		display: inline-block;
-		width: 65%;
+		width: 80%;
 		height: 12px;
 		border-radius: 50px;
 		overflow: hidden;

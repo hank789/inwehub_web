@@ -6,5 +6,6 @@ module.exports = merge(devEnv, {
   API_ROOT: '"https://api.ywhub.com/"',
   H5_ROOT: '"https://web.ywhub.com"',
   READHUB_URL: '"https://read.ywhub.com"',
-  GA_CODE: '"UA-97476315-3"'
+  GA_CODE: '"UA-97476315-3"',
+  ECHO_SERVER_ADDRESS: '"https://read.ywhub.com"'
 })

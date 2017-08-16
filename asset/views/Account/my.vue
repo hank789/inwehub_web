@@ -10,7 +10,7 @@
 
 					<div class="my-personal">
 						<div class="my-info">
-							<span>{{name}}</span>
+							<span class="mui-ellipsis">{{name}}</span>
 							<p>{{ user_level }}</p>
 							<svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
 								<use xlink:href="#icon-zhuanjiabiaoji"></use>
@@ -102,6 +102,16 @@
 			</ul>
 
 			<ul class="my-option">
+				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')"  v-if="show_my_wallet">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-qianbao"></use>
+					</svg>
+					<span>我的钱包</span>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-chakangengduojiantou"></use>
+					</svg>
+					<i class="bot"></i>
+				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/collect')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-wodeguanzhu"></use>
@@ -193,7 +203,7 @@
 	               +'</svg>'
 		           +'警告说明 '
 		           +'</p>';
-		
+
              var btnArray = ['取消', '确认'];
              mui.confirm(font, title,function() {}, 'div');
 			},
@@ -280,10 +290,12 @@
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-
+          this.expert_apply_status =  user.info.expert_apply_status;
+          this.company_apply_status =  user.info.company_status;
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
+					this.show_my_wallet =  user.info.show_my_wallet;
 				}));
 			}
 		},
@@ -294,6 +306,7 @@
 			this.initData();
 		},
 		mounted() {
+
 			this.getToken();
 
 		}
@@ -361,10 +374,13 @@
 	}
 
 	.my-personal .my-info span:nth-of-type(1) {
+		display: inline-block;
+		max-width: 72px;
 		font-size: 18px;
 		font-weight: 600;
 		color: #444444;
 		margin-right: 1.5px;
+		margin-bottom: -4px;
 	}
 
 	.my-personal .my-info p:nth-of-type(1) {
@@ -476,16 +492,16 @@
 		width: 100%;
 		margin-top: 20px;
 		position: relative;
-		
+
 	}
     .my-progress svg{
       font-size: 15px;
-      color: #fcc816; 
+      color: #fcc816;
       margin-left: 0px;
       margin-top: 4px;
       position: absolute;
       right: 55px;
-      
+
     }
 	.my-progress span:nth-of-type(1) {
 		display: inline-block;
@@ -536,7 +552,7 @@
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 10px;
-		margin-right: 4px;
+		margin-right: 2px;
 		font-size: 40px;
 		color: rgb(3, 174, 249);
 		float: left;
@@ -643,6 +659,6 @@
 .mui-popup-inner {
     padding: 23px 15px 1px 15px;
     }
-  
+
 
 </style>

@@ -24,7 +24,7 @@
         <div class="mui-content">
           <ul class="projectList1" v-for="item in list" @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">
             <li>
-              <span>{{item.project_name}}</span>
+              <span class="mui-ellipsis">{{item.project_name}}</span>
 
               <span class="waiting" v-if="item.status =='1'">等待审核</span>
               <span class="fail"  v-if="item.status =='3'">审核未通过</span>
@@ -34,9 +34,9 @@
               </svg>
             </li>
             <li>
-              <span>{{item.company_represent_person_name}}</span>
+              <span class="mui-ellipsis">{{item.company_represent_person_name}}</span>
               <span></span>
-              <span>{{item.company_name}}</span>
+              <span class="mui-ellipsis">{{item.company_name}}</span>
             </li>
             <li>{{item.updated_at}}</li>
           </ul>
@@ -246,22 +246,24 @@
         width: 309px;
         span{
           &:nth-child(1){
-            width: 125px;
+          	display: inline-block;
+            max-width: 180px;
             height: 22.5px;
             font-family: "PingFangSC";
             font-size: 16px;
             color: #444444;
+            margin-bottom: -6px;
           }
           &:nth-child(2){
             height: 20px;
             border-radius: 50px;
-            /*background: #a8dff7;*/
             font-family: "PingFangSC";
             font-size: 11px;
             text-align:center;
             color: #ffffff;
             padding: 2px 11px 3px 10px;
             margin-left:8px;
+            margin-bottom: 2px;
           }
         }
         svg{
@@ -279,7 +281,9 @@
         height: 14px;
         span{
           &:nth-child(1){
-            height: 14px;
+          	display: inline-block;
+          	max-width: 130px;
+          	height: 20px;
             font-family: ".PingFangSC";
             color: #808080;
             font-size: 14px;
@@ -291,11 +295,13 @@
             background:#c8c8c8;
             margin-left: 8px;
             margin-right: 8px;
-            margin-bottom: -2px;
+            margin-bottom: 2px;
 
           }
           &:nth-child(3){
-            height: 14px;
+          	display: inline-block;
+          	max-width: 130px;
+          	height: 20px;
             font-family: ".PingFangSC";
             color: #808080;
             color: #808080;

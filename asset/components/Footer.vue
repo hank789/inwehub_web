@@ -106,6 +106,22 @@
       });
     },
     methods:{
+      listen() {
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        if (currentUser.user_id){
+          // 监听通知事件
+          Echo.channel('notification.user.' + currentUser.user_id)
+            .notification((notification) => {
+              notification.broadcasted = true;
+              console.log(notification.type);
+              switch (notification.type) {
+                case 'App\\Notifications\\AuthenticationUpdated':
+                    console.log('AuthenticationUpdated');
+                    break;
+              }
+            });
+        }
+      },
       onCountChange(count){
         this.taskCount = count;
 
@@ -195,6 +211,7 @@
       }
     },
     created(){
+      this.listen();
       var tmpArr = this.$route.path.split('/')
       var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
       this.changeNav(curPath, this.$route.path);
