@@ -54,7 +54,7 @@ function openWebviewByHome(url, pathUrl, title)
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
     var  webviewBackButton = () => {
-      var ws = plus.webview.getWebviewById('home-read-webview');
+      var ws = plus.webview.getWebviewById(url);
       if (ws) {
         console.log('webviewBackButton close');
         ws.close();
@@ -63,7 +63,7 @@ function openWebviewByHome(url, pathUrl, title)
       }
     }
 
-    var webview = plus.webview.create(url, 'home-read-webview',{popGesture: 'close',
+    var webview = plus.webview.create(url, url,{popGesture: 'hide',
       top:'0px',
       bottom:'0px',
       position:'dock',
