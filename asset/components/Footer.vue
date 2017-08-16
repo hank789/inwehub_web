@@ -112,11 +112,10 @@
           // 监听通知事件
           Echo.channel('notification.user.' + currentUser.user_id)
             .notification((notification) => {
-              notification.broadcasted = true;
-              console.log(notification.type);
+              console.log(notification);
               switch (notification.type) {
                 case 'App\\Notifications\\AuthenticationUpdated':
-                    console.log('AuthenticationUpdated');
+                    console.log(notification.body);
                     break;
               }
             });
