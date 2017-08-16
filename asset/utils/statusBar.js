@@ -93,5 +93,6 @@ function autoHeight()
 
 export {
   setStatusBarStyle,
+  setStatusBarBackgroundAndStyle,
   autoHeight
 };

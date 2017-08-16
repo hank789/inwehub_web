@@ -81,6 +81,8 @@ import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
 
+import '../../js/socket.io.min';
+
 import Echo from "laravel-echo";
 window.Echo = new Echo({
   broadcaster: 'socket.io',
@@ -108,7 +110,7 @@ import EventObj from '../../utils/event';
 mui.toast = (str) => {
      var oldtoast = mui.toast;
      mui.toast = (str) => { return false }
-    
+
      var toast = document.querySelector("#toast");
      toast.style.display ="block";
      //console.log(toast.innerHTML);
