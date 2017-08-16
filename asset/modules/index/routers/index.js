@@ -40,14 +40,14 @@ Vue.use(VueMultianalytics, {
     vueRouter: router, //  Pass the router instance to automatically sync with router (optional)
     preferredProperty: 'path', // By default 'path' and related with vueRouter (optional)
     ingoredViews: [], // Views that will not be tracked
-    ignoredModules: ['ga'] // Modules that will not send route change events. The event sent will be this.$ma.trackView({viewName: 'homepage'}, ['ga'])
+    ignoredModules: ['ga','facebook','segment'] // Modules that will not send route change events. The event sent will be this.$ma.trackView({viewName: 'homepage'}, ['ga'])
   }
 })
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('url:'+url);
   if (mui.os.plus && (mui.os.ios || forceWebView)) {
-    Vue.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
+    this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
     openWebviewByUrl(url, autoShow, aniShow, popGesture);
   } else {
     router.push(url);
