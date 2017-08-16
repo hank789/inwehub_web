@@ -1,3 +1,5 @@
+import {  setStatusBarBackgroundAndStyle, autoHeight } from './statusBar';
+
 /**
  * 打开webview
  */
@@ -47,12 +49,15 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
  */
 function openWebviewByHome(url, pathUrl, title)
 {
+    setStatusBarBackgroundAndStyle('#3c3e44', 'light');
+
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
-    function webviewBackButton(){
+    var  webviewBackButton = () => {
       var ws = plus.webview.getWebviewById(url);
       if (ws) {
         ws.close();
+        autoHeight();
       }
     }
 
@@ -62,6 +67,7 @@ function openWebviewByHome(url, pathUrl, title)
       position:'dock',
       dock:'bottom',
       backButtonAutoControl: 'hide',
+      statusbar:{background:'#3c3e44'},
       titleNView: {
         backgroundColor: '#3c3e44', //导航栏背景色
         titleText: title, //导航栏标题
@@ -78,6 +84,10 @@ function openWebviewByHome(url, pathUrl, title)
     plus.key.addEventListener("backbutton",() =>{
       webviewBackButton();
     });
+
+    webview.addEventListener('popGesture', (e) => {
+      autoHeight();
+    }, false);
 
     //创建底部菜单
     var toolUrl = pathUrl + '/webview';
@@ -103,8 +113,8 @@ function openWebviewByHome(url, pathUrl, title)
       {tag:'rect',id:'rect',rectStyles:{color:'rgba(0,0,0,0)'},position:{bottom:'0px',left:'0px',width:'100%',height:'44px'}},
     ]);
     view.addEventListener('click', () => {
-      console.log('准备跳转:'+pathUrl);
-      openWebviewByUrl(pathUrl);
+      console.log('准备跳转:'+pathUrl + '?from=webview');
+      openWebviewByUrl(pathUrl + '?from=webview');
     }, false);
     view.show();
 
