@@ -8,10 +8,8 @@
           </keep-alive>
           <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
-
-
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
-
+        <div id="toast"></div>
   </div>
 </template>
 

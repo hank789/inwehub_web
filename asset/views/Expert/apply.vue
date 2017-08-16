@@ -85,9 +85,7 @@
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="submit()">提交申请</button>
       </div>
     </div>
-
     <uploadHeader ref="uploadHeader"></uploadHeader>
-
   </div>
 </template>
 
@@ -132,7 +130,13 @@
         }
 
         if (!this.company) {
-          mui.toast('请填写当前公司');
+//      	    if(mui.os.android){
+        	    	   mui.toast('请填写当前公司');
+//      	    }else{
+//      	    	  console.log('请填写当前公司')
+//      	    }
+            
+         //  mui.toast('登陆成功',{ duration:'long', type:'div' })
           return;
         }
 
@@ -419,7 +423,7 @@
     right: 15px;
   }
   .buttonWrapper {
-    padding: 6px 16px 6px;
+    padding: 6px 16px 30px;
     background: #fff;
   }
   .buttonWrapper button {
@@ -432,4 +436,12 @@
   .noBottomBorder:after {
     display: none;
   }
+  
+  
+  .mui-toast-message {
+	z-index: 999;
+	display: block;
+	}
+	
+	
 </style>
