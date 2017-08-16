@@ -25,7 +25,7 @@
 				</p>
 				<p>
 					<span>{{ user.info.name }}</span>
-					<svg class="icon" aria-hidden="true">
+					<svg class="icon" aria-hidden="true" v-if="user.info.is_expert =='1'">
 						<use xlink:href="#icon-zhuanjiabiaoji"></use>
 					</svg>
 				</p>
@@ -35,10 +35,10 @@
 					<span>{{ user.info.title }}</span>
 				</p>
 				<p>
-					{{ user.info.mobile }}
+					{{ user.info.mobile }} 
 				</p>
 				<p>
-					{{ user.info.email }}
+					{{ user.info.email }} 
 				</p>
 			</div>
 			<p class="info-progresbar">
