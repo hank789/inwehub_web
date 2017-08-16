@@ -49,6 +49,7 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
  */
 function openWebviewByHome(url, pathUrl, title)
 {
+
     setStatusBarBackgroundAndStyle('#3c3e44', 'light');
 
     var pathUrl = process.env.READHUB_URL + pathUrl;
@@ -124,6 +125,7 @@ function openWebviewByHome(url, pathUrl, title)
     webview.append(view);
     webview.show();
 
+    return webview;
 }
 
 /**

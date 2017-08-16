@@ -240,7 +240,29 @@
         if(/http/.test(url)) {
           if(mui.os.plus) {
 
-            openWebviewByHome(url, pathUrl, title);
+            mui.openWindow({
+              url: 'index.html#/webview/article',
+              id: 'readhub_article_'+id,
+              preload: false, //一定要为false
+              createNew: false,
+              show: {
+                autoShow: true,
+                aniShow: 'pop-in'
+              },
+              styles: {
+                popGesture: 'hide'
+              },
+              waiting: {
+                autoShow: false
+              },
+              extras: {
+                article_id: id,
+                article_url: url,
+                article_title: title,
+                pathUrl:pathUrl,
+
+              }
+            });
           } else {
             window.location.href = url;
           }
