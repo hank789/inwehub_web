@@ -47,7 +47,7 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
  * @param pathUrl
  * @param title
  */
-function openWebviewByHome(url, pathUrl, title)
+function openWebviewByHome(id, url, pathUrl, title)
 {
 
     setStatusBarBackgroundAndStyle('#3c3e44', 'light');
@@ -55,7 +55,7 @@ function openWebviewByHome(url, pathUrl, title)
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
     var  webviewBackButton = () => {
-      var ws = plus.webview.getWebviewById(url);
+      var ws = plus.webview.getWebviewById(id);
       if (ws) {
         console.log('webviewBackButton close');
         ws.close();
@@ -64,7 +64,7 @@ function openWebviewByHome(url, pathUrl, title)
       }
     }
 
-    var webview = plus.webview.create(url, url,{popGesture: 'hide',
+    var webview = plus.webview.create(url, id,{popGesture: 'close',
       top:'0px',
       bottom:'0px',
       position:'dock',
