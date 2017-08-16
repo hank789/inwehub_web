@@ -35,6 +35,81 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
 }
 
 /**
+ * 首页打开readhub的详情页
+ * @param url
+ * @param pathUrl
+ * @param title
+ */
+function openWebviewByHome(url, pathUrl, title)
+{
+    var pathUrl = process.env.READHUB_URL + pathUrl;
+
+    function webviewBackButton(){
+      var ws = plus.webview.getWebviewById(url);
+      if (ws) {
+        ws.close();
+      }
+    }
+
+    var webview=plus.webview.create(url, url,{popGesture: 'hide',
+      top:'0px',
+      bottom:'0px',
+      position:'dock',
+      dock:'bottom',
+      backButtonAutoControl: 'hide',
+      titleNView: {
+        backgroundColor: '#3c3e44', //导航栏背景色
+        titleText: title, //导航栏标题
+        titleColor: '#fff', //文字颜色
+        type: 'transparent', //透明渐变样式
+        titleSize:'18px',
+        autoBackButton: true, //自动绘制返回箭头
+        splitLine: { //底部分割线
+          color: '#3c3e44'
+        }
+      },
+      bounce:'vertical'});
+
+    plus.key.addEventListener("backbutton",() =>{
+      webviewBackButton();
+    });
+
+    //创建底部菜单
+    var toolUrl = pathUrl + '/webview';
+    var embed =plus.webview.create(toolUrl, toolUrl, {
+      cachemode:'noCache',
+      popGesture: 'hide',
+      bottom:'0px',
+      height:'44px',
+      dock:'bottom',
+      position:'dock',
+      backButtonAutoControl: 'hide',
+      bounce:'none', //不允许滑动
+      scrollIndicator:'none', //不显示滚动条
+    });
+    embed.show();
+    webview.append(embed);
+
+    //创建评论链接
+    var view = new plus.nativeObj.View('test', {bottom:'0px',left:'39%',height:'44px',width:'100px'});
+
+    view.draw([
+      {tag:'rect',id:'rect',rectStyles:{color:'rgba(0,0,0,0)'},position:{bottom:'0px',left:'0px',width:'100%',height:'44px'}},
+    ]);
+    view.addEventListener('click', () => {
+      console.log('准备跳转');
+      webview.loadUrl(pathUrl);
+    }, false);
+
+    view.show();
+
+    webview.append(view);
+    webview.show();
+
+
+}
+
+/**
  * 显示webview并绑定侧滑关闭事件
  */
 function showWebview(){
@@ -114,6 +189,7 @@ export {
   openWebviewByUrl,
   goBack,
   showWebview,
-  clearAllWebViewCache
+  clearAllWebViewCache,
+  openWebviewByHome
 };
 

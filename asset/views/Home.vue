@@ -1,8 +1,8 @@
 <template>
 	<div>
 
-        
-		<header class="hidewechattitle">	
+
+		<header class="hidewechattitle">
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-logowenzi"></use>
 		    </svg>
@@ -92,7 +92,7 @@
 				</div>
 				<ul>
 					<li v-if="recommend_read.length=='0'"></li>
-					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title)" v-else>
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title, reads.comment_url)" v-else>
 						<img  :src="reads.img_url" />
 						<div>
 							<p class="mui-ellipsis-2">{{reads.title}}</p>
@@ -112,7 +112,7 @@
 				</ul>
 			</div>
 
-             
+
              <!--手机端-->
              <div class="suspend">
 	            <p>
@@ -128,7 +128,7 @@
 	            	  立即打开
 	            </p>
 	        </div>
-           
+
            <!--微信端-->
            <div class="suspension">
            	   <p>
@@ -139,8 +139,8 @@
            	   <p>下载APP</p>
            	   <p>立即打开</p>
            </div>
-           
-      
+
+
 			<div class="home-bot">
 				你已经到达我的底线
 			</div>
@@ -157,7 +157,8 @@
 	import { createAPI, addAccessToken, postRequest } from '../utils/request';
 	import { apiRequest } from '../utils/request';
 	import { TimeEndText } from '../utils/time';
-	import { swiper, swiperSlide } from 'vue-awesome-swiper'
+	import { swiper, swiperSlide } from 'vue-awesome-swiper';
+	import { openWebviewByHome } from '../utils/webview';
 
 	const Home = {
 		data: () => ({
@@ -201,7 +202,7 @@
 			}
 		},
 		methods: {
-			swipperClick(swiper, event){        
+			swipperClick(swiper, event){
       	          var  Ele = event.srcElement.parentNode.firstChild.className.split(" ");
      	            var uuid = "";
       	            if(Ele.length ===1){
@@ -209,7 +210,7 @@
      	            }else{
       	            	    uuid = Ele[1]
    	            	   }
-        	           
+
      	           this.$router.push('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
@@ -235,30 +236,11 @@
 			}
 
 			},
-      goArticle: function(url,id,title='') {
+      goArticle: function(url,id,title='', pathUrl) {
         if(/http/.test(url)) {
           if(mui.os.plus) {
-            mui.openWindow({
-              url: 'index.html#/webview/article',
-              id: 'readhub_article_'+id,
-              preload: false, //一定要为false
-              createNew: false,
-              show: {
-                autoShow: true,
-                aniShow: 'pop-in'
-              },
-              styles: {
-                popGesture: 'hide'
-              },
-              waiting: {
-                autoShow: false
-              },
-              extras: {
-                article_id: id,
-                article_url: url,
-                article_title: title
-              }
-            });
+
+            openWebviewByHome(url, pathUrl, title);
           } else {
             window.location.href = url;
           }
@@ -422,7 +404,7 @@
 	background: #F3F4F6;
 	margin-top: 8.5px;
 	margin-left: 10px;
-	text-align: center;	
+	text-align: center;
 }
 .suspend p:nth-of-type(1)>svg{
 	font-size: 34px;
@@ -704,7 +686,7 @@
 	.home-card span:nth-of-type(2) {
 		display: inline-block;
 		width: 100%;
-		
+
 		color: #444444;
 	}
 
@@ -844,11 +826,11 @@
 		text-align: center;
 		color: #c8c8c8;
 	}
-	
+
 	.mui-slider-indicator .mui-active.mui-indicator {
     background: #03aef9;
      }
-     
+
 	.mui-slider-indicator .mui-indicator {
 	    display: inline-block;
 	    width: 6px;
@@ -860,6 +842,6 @@
 	    -webkit-box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
 	    box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
 	}
-	
-	
+
+
 </style>
