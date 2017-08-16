@@ -81,6 +81,19 @@ import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
 
+import Echo from "laravel-echo";
+window.Echo = new Echo({
+  broadcaster: 'socket.io',
+  host: process.env.ECHO_SERVER_ADDRESS,
+  auth:
+    {
+      headers:
+        {
+          'Authorization': 'Bearer ' + 'nb35mdq2ca9828qgl4sgjf4imil5811sn41qsmcaph0p3h6sa5ht8hoktdeg'
+        }
+    }
+});
+
 import VueQRCodeComponent from 'vue-qrcode-component';
 Vue.component('qr-code', VueQRCodeComponent);
 

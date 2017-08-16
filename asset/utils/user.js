@@ -57,6 +57,7 @@ function updateUserInfoCache(user) {
     counts: {},
     account_info_complete_percent:'',
     is_expert:0,
+    expert_apply_status:0,
     total_money: '-',
     datas: {},
     questions:0,
@@ -82,12 +83,14 @@ function updateUserInfoCache(user) {
   userLocal.address_detail = user.address_detail;
   userLocal.title = user.title;
   userLocal.company = user.company;
+  userLocal.company_status = user.company_status;
   userLocal.industry_tags = user.industry_tags;
   userLocal.description = user.description;
   userLocal.tags = user.tags;
   userLocal.status = user.status;
   userLocal.account_info_complete_percent = user.account_info_complete_percent;
   userLocal.is_expert  = user.is_expert;
+  userLocal.expert_apply_status = user.expert_apply_status;
   userLocal.total_money = user.total_money;
 
   userLocal.user_level = user.user_level;
