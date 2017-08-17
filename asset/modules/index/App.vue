@@ -88,16 +88,22 @@
         });
       }
 
-      EventObj.addEventListener('refreshData', (e)=>{
-        //执行刷新
-
-        if (this.$refs.Footer.showBottom) {
-          if (this.$refs.routerView.hasOwnProperty('initData')) {
-            console.log('refreshDataApp');
-            this.$refs.routerView.initData();
-          }
+      if (mui.os.plus) {
+        var ws = plus.webview.currentWebview();
+        console.log('bindEvent-runtime:' + plus.runtime.appid);
+        console.log('bindEvent-wsid:' + ws.id);
+        if (ws.id === plus.runtime.appid) {
+          EventObj.addEventListener('refreshData', (e) => {
+            //执行刷新
+            if (this.$refs.Footer.showBottom) {
+              if (this.$refs.routerView.hasOwnProperty('initData')) {
+                console.log('refreshDataApp');
+                this.$refs.routerView.initData();
+              }
+            }
+          });
         }
-      });
+      }
 
       var router = this.$router;
 
