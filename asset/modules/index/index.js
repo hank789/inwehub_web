@@ -17,6 +17,7 @@ import store from './../../stores/store';
 import App from './App';
 
 //检查错误信息插件
+
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -28,6 +29,7 @@ Raven
 .config(sentry_url)
 .addPlugin(RavenVue, Vue)
 .install();
+
 
 //正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';
@@ -107,21 +109,21 @@ import {autoHeight} from '../../utils/statusBar';
 import EventObj from '../../utils/event';
 
 
-mui.toast = (str) => {
-     var oldtoast = mui.toast;
-     mui.toast = (str) => { return false }
-
-     var toast = document.querySelector("#toast");
-     toast.style.display ="block";
-     //console.log(toast.innerHTML);
-     toast.innerHTML = str;
-
-     var timer = setInterval(() => {
-       toast.style.display = "none";
-       mui.toast = oldtoast;
-       clearTimeout(timer);
-     },3000);
-}
+//mui.toast = (str) => {
+//   var oldtoast = mui.toast;
+//   mui.toast = (str) => { return false }
+//
+//   var toast = document.querySelector("#toast");
+//   toast.style.display ="block";
+//   //console.log(toast.innerHTML);
+//   toast.innerHTML = str;
+//
+//   var timer = setInterval(() => {
+//     toast.style.display = "none";
+//     mui.toast = oldtoast;
+//     clearTimeout(timer);
+//   },3000);
+//}
 
 
 Vue.mixin({

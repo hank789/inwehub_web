@@ -136,7 +136,7 @@
 
   <div id="page_industry_tags" class="mui-modal mui-pageSub">
 
-    <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type"
+    <industry-tags-indexed-list :tag_type="3" :selected="industryTags" :back_id="page_industry_tags_id" :object_type="object_type"
                                 v-on:selectedIndustryTags="selectedIndustryTags">
 
     </industry-tags-indexed-list>
