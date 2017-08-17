@@ -11,10 +11,10 @@
       <div class="mui-scroll">
       	
      <div class="container" v-if="!this.list.length && !loading" >
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-zanwushuju"></use>
+		</svg>
+		<p>暂时还没有数据呀～</p>
 	</div>
 
 
@@ -31,7 +31,7 @@
               	</p>
               	<p>
               	  <span class="mui-ellipsis">{{item.title}}</span>
-              	  <i v-show="(item.title && item.company)" ></i>
+              	  <!--<i v-show="(item.title && item.company)" ></i>-->
               	  <span class="mui-ellipsis">{{item.company}}</span>
               	</p>
               </div>
@@ -241,19 +241,35 @@
  .my-focus-item div p:nth-of-type(2) span{
  	display: inline-block;
  	max-width: 80px;
-    height: 21px; 
+    height: 14px; 
  	font-family: "PingFangSC";
 	font-size:13px;
 	color: #b4b4b6;
+	line-height: 13px;
  }
 
- .my-focus-item div p:nth-of-type(2) i{
+.my-focus-item div p:nth-of-type(2) span:nth-of-type(1){
+ 	display: inline-block;
+ 	max-width: 80px;
+    height: 14px; 
+ 	font-family: "PingFangSC";
+	font-size:13px;
+	color: #b4b4b6;
+	line-height: 13px;
+	border-right: 1px solid #b4b4b6;
+	padding-right: 5px;
+ }
+/*.my-focus-item div p:nth-of-type(2) span:nth-of-type(2){
+	line-height: 10px;
+}*/
+
+ /*.my-focus-item div p:nth-of-type(2) i{
  	display: inline-block;
  	width: 1px;
  	height: 11px;
  	background:#b4b4b6;
  	margin-bottom: 5px;
- }
+ }*/
  
  .container {
 		position: absolute;
