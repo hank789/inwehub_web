@@ -471,6 +471,7 @@
 		font-size: 14px;
 		color: #808080;
 		text-align: center;
+		line-height: 16px;
 		border-right: 1px solid #c8c8c8;
 	}
 
