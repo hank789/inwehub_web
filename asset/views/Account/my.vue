@@ -265,10 +265,6 @@
 			integralDemo() {
 				//mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
 			},
-			getToken() {
-				var im_token = JSON.parse(sessionStorage.getItem('im_token'))
-				this.im_tokenMsg = im_token;
-			},
 			share() {
 				setTimeout(() => {
 					mui('#shareWrapper').popover('toggle');
@@ -303,11 +299,12 @@
 			showInwehubWebview();
 		},
 		activated: function() {
+		    console.log('activated');
 			this.initData();
 		},
 		mounted() {
 
-			this.getToken();
+
 
 		}
 	}
