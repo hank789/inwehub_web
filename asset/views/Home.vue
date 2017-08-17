@@ -144,15 +144,15 @@
 				你已经到达我的底线
 			</div>
 
-			
-    
+
+
 		</div>
 
 			<div id="freeAskTemplate" style="display: none;">
 		        <div class="freeAskGet"></div>
 		        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
 		    </div>
-		
+
 		    <div id="freeAskSuccessTemplate" style="display: none;">
 		      <div class="xiaoha"></div>
 		      <div class="success"></div>
@@ -160,7 +160,7 @@
 		        <use xlink:href="#icon-times"></use>
 		      </svg></div>
 		    </div>
-		    
+
 		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
 		<div id="statusBarStyle" background="#f3f4f6"   bgColor="#f3f4f6" mode="dark"></div>
 	</div>
@@ -173,6 +173,7 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
+  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar'
 
 	const Home = {
 		data: () => ({
@@ -344,7 +345,9 @@
 				FreeTemplate.style.display = 'block';
 				var mask = mui.createMask(() => {
 					FreeTemplate.style.display = 'none';
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
 				});
+        setStatusBarBackgroundAndStyle('#A8A9AB', 'light');
 				mask.show(); //显示遮罩
 			},
 			showFreeAskGetSuccess: function() {
@@ -354,6 +357,7 @@
 				FreeTemplate.style.display = 'block';
 				var mask = mui.createMask(() => {
 					FreeTemplate.style.display = 'none';
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
 				});
 				mask.show(); //显示遮罩
 			},
@@ -663,7 +667,7 @@
 		height: 262px;
 		z-index: 999;
 	}
-	
+
 	.freeAskGetButton{
     position: fixed;
     top: 50%;
