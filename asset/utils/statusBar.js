@@ -44,7 +44,7 @@ function autoStatusBar()
   }
 
   if (background) {
-    document.body.style.background = background;
+    document.body.style.background = background + ' !important';
   } else {
     document.body.style.background = '';
   }
