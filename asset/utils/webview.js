@@ -90,7 +90,12 @@ function openWebviewByHome(id, url, pathUrl, title)
     });
 
     webview.addEventListener('popGesture', (e) => {
-      autoHeight();
+      if(e.type == "end" && e.result == true){
+        var parent_webview = self.opener();
+        if (parent_webview){
+           autoHeight();
+        }
+      }
     }, false);
 
     //创建底部菜单
