@@ -95,7 +95,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </template>
 
@@ -104,6 +103,7 @@
   import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import pay from '../../components/pay/pay.vue';
+  import {setStatusBarBackgroundAndStyle} from '../../utils/statusBar';
 
   const Ask = {
     data: () => ({
@@ -122,6 +122,8 @@
       pay
     },
     mounted(){
+      setStatusBarBackgroundAndStyle('#3c3e44', 'light');
+
       window.addEventListener('refreshData', function(e){
         //执行刷新
         console.log('refresh-ask');
@@ -146,8 +148,8 @@
         });
       }
 
-      var inputElem = document.querySelector('textarea');
-      inputElem.focus();
+//      var inputElem = document.querySelector('textarea');
+//      inputElem.focus();
 
 
     },

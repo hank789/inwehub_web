@@ -26,8 +26,9 @@ function autoStatusBar()
   var bgColor = null, mode = null, background = null;
 
   var statusBarStyleElement = document.getElementById('statusBarStyle');
-  if (statusBarStyleElement) {
 
+  if (statusBarStyleElement) {
+    console.log('监测到statusBarStyle， 读取配置参数');
     bgColor = statusBarStyleElement.getAttribute('bgColor');
     mode = statusBarStyleElement.getAttribute('mode');
     background = statusBarStyleElement.getAttribute('background');
