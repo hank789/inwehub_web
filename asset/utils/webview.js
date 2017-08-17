@@ -64,7 +64,7 @@ function openWebviewByHome(id, url, pathUrl, title)
       }
     }
 
-    var webview = plus.webview.create(url, id,{popGesture: 'close',
+    var webview = plus.webview.create(url, id,{popGesture: 'hide',
       top:'0px',
       bottom:'0px',
       position:'dock',

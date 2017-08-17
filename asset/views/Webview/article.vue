@@ -32,9 +32,9 @@
 
         function createEmbed(ws) {
           console.log(ws.article_url);
-          console.log(ws.pathUrl);
+          console.log(ws.article_comment_url);
           console.log(ws.article_title);
-          var embed = openWebviewByHome(ws.id, ws.article_url, ws.pathUrl, ws.article_title);
+          var embed = openWebviewByHome(ws.id, ws.article_url, ws.article_comment_url, ws.article_title);
           ws.append(embed);
         }
       });

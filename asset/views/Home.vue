@@ -259,7 +259,7 @@
                 article_id: id,
                 article_url: url,
                 article_title: title,
-                pathUrl:pathUrl,
+                article_comment_url: pathUrl,
 
               }
             });
