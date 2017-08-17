@@ -145,6 +145,19 @@
 				你已经到达我的底线
 			</div>
 
+			<div id="freeAskTemplate" style="display: none;">
+		        <div class="freeAskGet"></div>
+		        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
+		    </div>
+		
+		    <div id="freeAskSuccessTemplate" style="display: none;">
+		      <div class="xiaoha"></div>
+		      <div class="success"></div>
+		      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
+		        <use xlink:href="#icon-times"></use>
+		      </svg></div>
+		    </div>
+    
 		</div>
 
 		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
@@ -220,7 +233,7 @@
 			toApprove(status) {
 			switch(status) {
 					case 0:
-						this.$router.pushPlus('/expert/apply');
+						this.$router.pushPlus('/my/pilot');
 						break;
 					case 1:
 						this.$router.pushPlus('/expert/apply/success?type=0');
@@ -230,7 +243,7 @@
 						mui.toast("您已经是认证专家了");
 						break;
 					case 3:
-						this.$router.pushPlus('/expert/apply');
+						this.$router.pushPlus('/my/pilot');
 						break;
 
 			}
@@ -566,6 +579,7 @@
 	.home-expert {
 		width: 100%;
 		height: 70px;
+		margin-bottom: 3px;
 	}
 
 	.home-expert p {
@@ -648,6 +662,53 @@
 		height: 262px;
 		z-index: 999;
 	}
+	
+	.freeAskGetButton{
+    position: fixed;
+    top: 50%;
+    margin: -70px 0 0 -100px;
+    left: 50%;
+    width: 150px;
+    height: 70px;
+    z-index: 1000;
+  }
+
+
+#freeAskSuccessTemplate .xiaoha{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:-195px 0 0 -50px;
+    background: url("../statics/images/xiaoha-welcome@2x.png") no-repeat center;
+    background-size:contain;
+    width:100px;
+    height:150px;
+    z-index: 999;
+  }
+
+  #freeAskSuccessTemplate .success{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:-45px 0 0 -146px;
+    background: url("../statics/images/getSuccess@2x.png") no-repeat center;
+    background-size:contain;
+    width:292px;
+    height:91px;
+    z-index: 999;
+  }
+
+  #freeAskSuccessTemplate .close{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin:94px 0 0 -19px;
+    z-index: 999;
+  }
+  #freeAskSuccessTemplate .close .icon{
+    font-size:38px;
+    color: #b4b4b6;
+  }
 	/*人物推荐*/
 
 	#home-recommend {
