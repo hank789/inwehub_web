@@ -1,6 +1,8 @@
 <template>
 <div>
   <iframe v-show="iframeState" id="show-iframe"  @load="loaded" frameborder=0 name="showHere" scrolling=auto></iframe>
+
+  <div id="statusBarStyle" background="transparent"></div>
 </div>
 
 </template>
