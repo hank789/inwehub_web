@@ -198,6 +198,7 @@
         object_type: 'company',
         apply_status:0,
         page_industry_tags_id: 'page_industry_tags',
+        isSubmit:false,
         localUser:currentUser
       }
     },
@@ -338,6 +339,12 @@
         });
       },
       submitLast(){
+        if (this.isSubmit) {
+            return;
+        }
+
+        this.isSubmit = true;
+
         var data = {
           company_name:this.name,
           industry_tags:this.infoIndustryTagsCodes,

@@ -13,14 +13,14 @@
             <div class="mui-indexed-list-alert"></div>
             <div class="mui-indexed-list-inner">
               <div class="mui-indexed-list-empty-alert">没有数据</div>
-              
+
               <div class="tag_success">
               	<p v-if="iselected.length === 0">确认</p>
               	<p v-bind:id="'done_' + back_id" @tap.stop.prevent="done" v-else>确认 ({{ iselected.length }})</p>
               </div>
-              
+
               <ul class="mui-table-view">
-     
+
                 <li v-for="(tag, index) in tags"   class="mui-indexed-list-item tag_text"  @tap.stop.prevent="checkThis" :value="tag.value">
                         {{ tag.text }}
                     <span class="checked"
@@ -56,10 +56,10 @@
       apiRequest(`tags/load`, {tag_type: this.tag_type}).then(response_data => {
         if (response_data !== false) {
           this.tags = response_data.tags;
-          console.log(response_data.tags);
+          //console.log(response_data.tags);
           this.counts = this.tags.length;
         }
-        
+
       });
 
       this.iselected = this.selected ? this.selected : [];
@@ -160,7 +160,7 @@ ul{
 	padding: 0 20px;
 }
 .tag_success{
-	 width: 100%;	
+	 width: 100%;
 	 height: 54px;
 }
 .tag_success p{
@@ -183,7 +183,7 @@ ul{
 	font-size: 14px;
 	color: #444444;
 	position: relative;
-	
+
 }
 
 .tag_text span:nth-of-type(1){
@@ -198,7 +198,7 @@ ul{
     margin-top: 13px;
     border-radius: 50%;
     margin-right: -55px;
-    
+
 }
 
 .tag_text span:nth-of-type(1) i.round{
@@ -210,7 +210,7 @@ ul{
 	border-radius: 50%;
 	margin-left: 4px;
     margin-bottom: 15px;
-	
+
 }
 .tag_text span.checked{
    display: inline-block;
