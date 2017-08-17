@@ -8,8 +8,17 @@
     </header>
 
     <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
-      <div class="mui-scroll">
-        <ul class="my-focus">
+      <div class="mui-scroll">  
+      	
+      		<div class="container" v-if="!this.list.length && !loading" >
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-zanwushuju"></use>
+				</svg>
+				<p>暂时还没有数据呀～</p>
+		</div>
+      	
+        <ul class="my-focus" >
+        	
           <li class="my-focus-item" v-for="(item, index) in list" >
               <img :src="item.user_avatar_url"  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')" />
               <div>
@@ -35,11 +44,11 @@
       </div>
     </div>
 
-    <div class="mui-content list-empty" v-if="!this.list.length && !loading">
+    <!--<div class="mui-content list-empty" v-if="!this.list.length && !loading">
         <div class="mui-table-view-cell">
             <div class="title">暂无收藏</div>
         </div>
-    </div>
+    </div>-->
 
 
   </div>
@@ -229,4 +238,22 @@
  	margin-bottom: -2px;
  }
  
+ 
+ .container {
+		position: absolute;
+		top: 500%;
+		left: 36%;
+	}
+	
+	.container svg {
+		font-size: 60px;
+		margin-left: 23px;
+		margin-bottom: 8px;
+	}
+	
+	.container p {
+		font-family: "PingFangSC";
+		font-size: 12px;
+		color: #c8c8c8;
+	}
 </style>
