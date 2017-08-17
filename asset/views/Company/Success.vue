@@ -48,14 +48,10 @@
       }
     },
     computed: {
-      nothing () {
-         return false;
-      },
+
     },
     methods: {
-      nothing(){
 
-      }
     },
     mounted(){
 
