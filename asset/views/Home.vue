@@ -1,7 +1,6 @@
 <template>
 	<div>
 
-
 		<header class="hidewechattitle">
 			<svg class="icon" aria-hidden="true">
 			  <use xlink:href="#icon-logowenzi"></use>
@@ -145,6 +144,10 @@
 				你已经到达我的底线
 			</div>
 
+			
+    
+		</div>
+
 			<div id="freeAskTemplate" style="display: none;">
 		        <div class="freeAskGet"></div>
 		        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
@@ -157,9 +160,7 @@
 		        <use xlink:href="#icon-times"></use>
 		      </svg></div>
 		    </div>
-    
-		</div>
-
+		    
 		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
 		<div id="statusBarStyle" background="#f3f4f6"   bgColor="#f3f4f6" mode="dark"></div>
 	</div>
