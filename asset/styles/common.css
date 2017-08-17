@@ -7,7 +7,7 @@ body{
   font-size: 16px;
 
   -webkit-user-select: none;
-  background: transparent !important;
+  /*background: transparent !important;*/
 }
 
 .quill-editor{
@@ -861,8 +861,8 @@ input.upload-file[type=file]{
 	animation:toast 3s linear 1s infinite alternate;
 	/* Safari and Chrome: */
 	 -webkit-animation:toast 3s linear 1s infinite alternate;
-		
-				
+
+
 }
 
 @keyframes toast
@@ -876,7 +876,7 @@ input.upload-file[type=file]{
 
 /* Safari and Chrome */
 
-/*@-webkit-keyframes toast 
+/*@-webkit-keyframes toast
 {
 0%   {opacity: 0.5;}
 25%  {opacity: 0.55;}
