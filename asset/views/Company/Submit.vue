@@ -136,7 +136,7 @@
 
   <div id="page_industry_tags" class="mui-modal mui-pageSub">
 
-    <industry-tags-indexed-list :tag_type="3" :back_id="page_industry_tags_id" :object_type="object_type"
+    <industry-tags-indexed-list :tag_type="3" :selected="industryTags" :back_id="page_industry_tags_id" :object_type="object_type"
                                 v-on:selectedIndustryTags="selectedIndustryTags">
 
     </industry-tags-indexed-list>
@@ -198,6 +198,7 @@
         object_type: 'company',
         apply_status:0,
         page_industry_tags_id: 'page_industry_tags',
+        isSubmit:false,
         localUser:currentUser
       }
     },
@@ -338,6 +339,12 @@
         });
       },
       submitLast(){
+        if (this.isSubmit) {
+            return;
+        }
+
+        this.isSubmit = true;
+
         var data = {
           company_name:this.name,
           industry_tags:this.infoIndustryTagsCodes,

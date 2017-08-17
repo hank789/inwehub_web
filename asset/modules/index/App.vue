@@ -4,45 +4,12 @@
 
         <div class='view'>
           <keep-alive>
-            <router-view v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+            <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
           </keep-alive>
-          <router-view v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+          <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
-
-        <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
-          <div class="mui-tab-item mui-active" v-if="isHome">
-            <span class="mui-icon myicon myicon-home-hover"></span>
-            <div><span class="mui-icon myicon myicon-point-hover"></span></div>
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/home')" v-else>
-            <span class="mui-icon myicon myicon-home"></span>
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/task')" :class="{ 'mui-active' : isAsk}">
-            <span class="mui-icon myicon myicon-find" v-if="!isAsk"><span class="mui-badge" v-if="taskCount">{{ taskCount
-              }}</span></span>
-            <span class="mui-icon myicon myicon-find-hover" v-else><span class="mui-badge" v-if="taskCount">{{ taskCount
-              }}</span></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isAsk"></span></div>
-
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" :class="{ 'mui-active' : isDiscover}">
-            <span class="mui-icon myicon myicon-task" v-if="!isDiscover"></span>
-            <span class="mui-icon myicon myicon-task-hover" v-else></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isDiscover"></span></div>
-
-          </div>
-
-          <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" :class="{ 'mui-active':isMy}">
-            <span class="mui-icon myicon myicon-my" v-if="!isMy"></span>
-            <span class="mui-icon myicon myicon-my-hover" v-else></span>
-            <div><span class="mui-icon myicon myicon-point-hover" v-show="isMy"></span></div>
-
-          </div>
-        </nav>
-
+        <FooterComponent ref="Footer" id="Footer"></FooterComponent>
+        <div id="toast"></div>
   </div>
 </template>
 
@@ -50,54 +17,22 @@
   import {mapGetters} from 'vuex'
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
+  import FooterComponent from '../../components/Footer.vue';
+  import {goBack} from '../../utils/webview';
+  import EventObj from '../../utils/event';
 
   export default {
     data () {
       return {
         wechatTitle:this.$route.meta.title,
-        isHome: false,
-        isAsk: false,
-        isMy: false,
-        showBottom: true,
-        div: false,
-        isDiscover: false,
-        taskCount: 0
       }
     },
     methods: {
+      onCountChange(count){
+          this.$refs.Footer.onCountChange(count);
+      },
       onChangeWechatTitle(title) {
           this.wechatTitle = title;
-      },
-      onCountChange(count){
-          this.taskCount = count;
-
-          mui.plusReady(function () {
-
-            localEvent.setLocalItem('taskCount', {
-                value:count,
-            });
-
-            var webv = plus.webview.getWebviewById('index.html#/task');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-
-            webv = plus.webview.getWebviewById('index.html#/home');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/discover');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-
-            webv = plus.webview.getWebviewById('index.html#/my');
-            if (webv) {
-              mui.fire(webv, 'refreshTaskCount');
-            }
-          });
       },
       goRecommand: function () {
         this.expertNav();
@@ -110,104 +45,73 @@
       expertNav: function () {
         mui('#expert').popover('toggle');
       },
-      getCount(){
-
-        let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
-        if (!UserLoginInfo.token) {
-          return;
-        }
-
-        postRequest(`notification/count`, {}, false).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
-          var taskCount = response.data.data.todo_tasks;
-          this.onCountChange(taskCount);
-        });
-      },
       linkTo(dest){
         this.$router.push(dest);
-      },
-      changeNav(path, fullPath)
-      {
-        var curPath = path == '' ? 'home' : path;
-        this.isHome = this.isAsk = this.isMy = this.isDiscover = false;
-        this.showBottom = true;
-        mui.each(mui(".mui-tab-item"), function (index, item) {
-          item.className = "mui-tab-item";
-        });
-
-        switch (fullPath) {
-          case '/home':
-            this.isHome = true;
-            break;
-          case '/my':
-            this.isMy = true;
-            break;
-          case '/task':
-            this.isAsk = true;
-            break;
-          case '/discover':
-            this.isDiscover = true;
-            break;
-          default:
-            this.showBottom = false;
-        }
-
-        if (this.showBottom) {
-          this.getCount();
-        }
       }
     },
     created(){
-      var tmpArr = this.$route.path.split('/')
-      var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-      this.changeNav(curPath, this.$route.path);
+    },
+    components: {
+      FooterComponent
     },
     watch: {
       $route(to) {
-        var tmpArr = to.path.split('/');
-        var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-        this.changeNav(curPath, this.$route.path);
         this.wechatTitle = this.$route.meta.title;
       }
     },
     mounted () {
-
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        if (this.showBottom) {
-          console.log('refresh-app');
-          this.getCount();
-          if (this.$refs.routerView.initData) {
-            this.$refs.routerView.initData();
-          }
+      console.log('refreshDataAppMounted');
+      var currentUser = localEvent.getLocalItem('UserInfo');
+      if (mui.os.plus) {
+        if (currentUser.uuid) {
+          var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+          //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
+          mui.preload({
+            url: url,
+            id: 'inwehub_embed',
+            styles: {
+              popGesture: 'hide',
+              top: '0px',
+              dock: 'top',
+              bottom: '75px',
+              bounce:'none'},
+            extras: {}
+          });
         }
-      });
+        mui.init({
+          swipeBack:true, //启用右滑关闭功能
+          beforeback: goBack
+        });
+      } else {
+        mui.init({
+          swipeBack:true, //启用右滑关闭功能
+        });
+      }
 
-
-      window.addEventListener('refreshTaskCount', (e)=>{
-        //执行刷新
-        if (this.showBottom) {
-          console.log('refresh-task-count');
-
-          var taskCount = localEvent.getLocalItem('taskCount');
-          if (taskCount.value) {
-              this.taskCount = taskCount.value;
+      if (mui.os.plus) {
+        mui.plusReady(() => {
+          var ws = plus.webview.currentWebview();
+          console.log('bindEvent-runtime:' + plus.runtime.appid);
+          console.log('bindEvent-wsid:' + ws.id);
+          if (ws.id === plus.runtime.appid) {
+            EventObj.addEventListener('refreshData', (e) => {
+              //执行刷新
+              if (this.$refs.Footer.showBottom) {
+                if (this.$refs.routerView.hasOwnProperty('initData')) {
+                  console.log('refreshDataApp');
+                  this.$refs.routerView.initData();
+                }
+              }
+            });
           }
-        }
-      });
-
+        });
+      }
 
       var router = this.$router;
 
       //监听推送
       mui.plusReady(function () {
         if (mui.os.plus) {
-          plus.navigator.setStatusBarBackground("#161616");
-          plus.navigator.setStatusBarStyle('light');
 
           var noticeTo = function (payload) {
             switch (payload.object_type) {
@@ -290,66 +194,7 @@
           }, false);
         }
       });
-
-
-
-      if (mui.os.plus && mui.os.ios) {
-        mui.init({
-          swipeBack:true, //启用右滑关闭功能
-          beforeback: function(){
-
-              var self = plus.webview.currentWebview();
-              //获得父页面的webview
-              var parent_webview = self.opener();
-              if (parent_webview){
-                console.log('Webview窗口：'+parent_webview.getURL());
-                //触发父页面的自定义事件(refresh),从而进行刷新
-                mui.fire(parent_webview, 'refreshData');
-                //子页面也刷新数据
-                mui.fire(self, 'refreshData');
-              }
-
-            return true;
-          }
-        });
-      } else {
-        mui.init({
-          swipeBack:true, //启用右滑关闭功能
-        });
-      }
     }
   }
 </script>
-
-<style scoped>
-  .footer-bar {
-    background-color: #fff;
-    box-shadow: none;
-  }
-
-  .footer-bar .mui-tab-item .mui-icon{
-    width:26px;
-    height:26px;
-  }
-
-  .footer-bar {
-    border-top: 1px solid #D9D9D9;
-  }
-
-  .footer-bar .mui-tab-item {
-    position: relative;
-  }
-
-  .footer-bar .mui-active div {
-    position: absolute;
-    width: 100%;
-    bottom: 5px;
-  }
-
-  .footer-bar .mui-active .myicon-point-hover {
-    width: 3px;
-    height: 3px;
-    top: 4px;
-  }
-</style>
 

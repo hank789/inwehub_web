@@ -4,31 +4,39 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的收藏</h1>
+      <h1 class="mui-title">我的关注</h1>
     </header>
 
     <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
       <div class="mui-scroll">
-        <ul class="mui-table-view mui-table-view-chevron">
-          <li class="mui-table-view-cell" v-for="(item, index) in list">
-            <div class="person">
-              <div class="avatar" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
-                <div class="avatarInner">
-                  <img :src="item.user_avatar_url" class="avatar"/>
-                </div>
+
+      		<div class="container" v-if="!this.list.length && !loading" >
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-zanwushuju"></use>
+				</svg>
+				<p>暂时还没有数据呀～</p>
+		</div>
+
+        <ul class="my-focus" >
+
+          <li class="my-focus-item" v-for="(item, index) in list" >
+              <img :src="item.user_avatar_url"  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')" />
+              <div>
+              	<p>
+              		<span class="mui-ellipsis">{{item.user_name}}</span>
+              		 <svg  class="icon" aria-hidden="true" v-if="item.is_expert=='1'">
+					    <use xlink:href="#icon-zhuanjiabiaoji"></use>
+				    	 </svg>
+              	</p>
+              	<p>
+              	  <span class="mui-ellipsis">{{ item.description }}</span>
+              	</p>
               </div>
-              <div class="mui-media-body">
-                <span class="username">{{ item.user_name }}</span>
-                <div class="site-desc mui-ellipsis-3">
-                  {{ item.description }}&nbsp;
+              <svg class="icon" aria-hidden="true"   @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" v-if="item.is_expert=='1'" >
+			    <use xlink:href="#icon-tiwen"></use>
+		    	 </svg>
 
-
-                </div>
-              </div>
-              <span class="mui-icon myicon myicon-ask"
-                    @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)"></span>
-            </div>
-
+		    	 <i class="bot"></i>
           </li>
 
 
@@ -36,11 +44,11 @@
       </div>
     </div>
 
-    <div class="mui-content list-empty" v-if="!this.list.length && !loading">
+    <!--<div class="mui-content list-empty" v-if="!this.list.length && !loading">
         <div class="mui-table-view-cell">
             <div class="title">暂无收藏</div>
         </div>
-    </div>
+    </div>-->
 
 
   </div>
@@ -61,9 +69,6 @@
 
     },
     methods: {
-      initData() {
-          this.pulldownRefresh();
-      },
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
@@ -76,7 +81,7 @@
       },
       getPrevList(){
 
-        postRequest(`followed/users`, {top_id: this.topId}).then(response => {
+        postRequest(`followed/users`, {}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -122,13 +127,13 @@
       }
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     mounted(){
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         console.log('refresh-collect');
-        this.initData();
+        this.getPrevList();
       });
       mui.init({
         pullRefresh: {
@@ -150,148 +155,105 @@
 
 <style scoped>
 
-  .menu {
-    position: relative;
-  }
-
-  .menu:after {
-    position: absolute;
+  .bot{
+ 	position: absolute;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 0px;
     height: 1px;
-    content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
+    background-color: rgb(220,220,220);
 
-  .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 16px;
-  }
+ }
+ p {
+ 	margin: 0;
+ 	padding: 0;
+ }
+ .mui-content{
+ 	background: #FFFFFF;
+ }
 
-  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-    position: relative;
-    border: none;
-  }
+ .my-focus{
+ 	margin: 0;
+ 	padding: 0;
+ 	list-style: none;
+    padding-left:17px;
+    padding-right: 17px;
+ }
+ .my-focus-item{
+ 	width: 100%;
+ 	height:63px;
+ 	list-style: none;
+ 	padding-top: 10px;
+ 	padding-bottom: 10px;
+ 	position: relative;
 
-  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
-    position: absolute;
-    width: 50px;
-    right: 10px;
-    bottom: 0;
-    left: 50%;
-    margin-left: -25px;
-    height: 5px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #009FE8;
-  }
+ }
+ .my-focus-item img{
+ 	width: 44px;
+ 	height: 44px;
+ 	border-radius: 50%;
+ 	margin-right: 8px;
+ 	float: left;
+ }
+ .my-focus-item div{
 
-  .task-list {
-    line-height: 33px;
-  }
+ 	float: left;
+ }
+ .my-focus-item>svg{
+    font-size:60px;
+    margin-top:-7px;
+    float: right;
+ }
+ .my-focus-item div p:nth-of-type(1) span{
+ 	 display: inline-block;
+     max-width: 140px;
+     height: 20px;
+	 font-size: 14px;
+	 color: #444444;
 
-  .task-list .mui-table-view-chevron .mui-table-view-cell {
-    padding-right: 5px;
-  }
+ }
 
-  .task-list .time {
-    display: inline-block;
-    width: 130px;
-    color: #101010;
-  }
+ .my-focus-item div p:nth-of-type(1) svg{
+ 	font-size:20px;
+ 	margin-bottom: 2px;
+ 	color: #3c95f9;
 
-  .mui-badge {
-    padding: 5px 10px;
-    position: relative;
-    bottom: 3px;
-  }
+ }
 
-  .task-list .link a {
-    color: #8f8f94;
-    font-size: 14px;
-  }
+ .my-focus-item div p:nth-of-type(2) span{
+ 	display: inline-block;
+ 	width: 210px;
+ 	height: 18px;
+	font-size:13px;
+	color: #b4b4b6;
+ }
 
-  .task-list .type {
-    font-weight: bold;
-  }
-
-  .mui-media-body {
-    padding-left: 10px;
-  }
-
-  .task-list .username {
-    color: #555555;
-  }
-
-  .mui-media-body {
-    position: relative;
-  }
-
-  .mui-navigate-right:after {
-    font-size: 24px;
-    font-weight: bolder;
-  }
-
-  .avatar {
-    z-index: 0;
-    margin-top: 5px;
-    color: #ffffff;
-    float: left;
-    display: inline-block;
-    height: 55px;
-    width: 55px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 50%;
-  }
-
-  .avatar .avatarInner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .avatar img {
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .site-desc {
-    color: #666;
-    font-size: 12px;
-    line-height: 18px;
-    padding-right: 50px;
-  }
+ .my-focus-item div p:nth-of-type(2) i{
+ 	display: inline-block;
+ 	width: 1px;
+ 	height: 12px;
+ 	background:#b4b4b6;
+ 	margin-bottom: -2px;
+ }
 
 
+ .container {
+		position: absolute;
+		top: 500%;
+		left: 36%;
+	}
 
-  .myicon-ask {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -15px;
-  }
+	.container svg {
+		font-size: 60px;
+		margin-left: 23px;
+		margin-bottom: 8px;
+	}
 
-  .person {
-    position: relative;
-  }
+	.container p {
+		font-family: "PingFangSC";
+		font-size: 12px;
+		color: #c8c8c8;
+	}
 </style>

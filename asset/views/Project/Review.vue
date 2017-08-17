@@ -258,7 +258,7 @@
     },
 
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
 
       this.project_id = this.$route.query.id;
       if (!this.project_id) {

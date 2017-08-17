@@ -123,7 +123,16 @@
 
             data.description = JSON.stringify(data.description);
 
-            postRequest(`answer/store`, data).then(response => {
+            var options = {
+              onUploadProgress: function(progressEvent) {
+                this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                mui.uploadWaitingValue(this.percentCompleted);
+              }
+            };
+
+            mui.showUploadWaiting();
+
+            postRequest(`answer/store`, data, false, options).then(response => {
 
               var code = response.data.code;
               if (code !== 1000) {
@@ -158,7 +167,7 @@
       }
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       let id = parseInt(this.$route.params.id);
       this.id = id;
     }

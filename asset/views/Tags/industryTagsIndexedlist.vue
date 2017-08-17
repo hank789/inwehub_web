@@ -12,29 +12,29 @@
     <div class="mui-content mui-scroll-wrapper">
 
 
-        <div class="mui-scroll">
+      <div class="mui-scroll">
 
-          <div class="mui-indexed-list">
-            <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
-            <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
-            <!--</div>-->
-            <div class="mui-indexed-list-alert"></div>
-            <div class="mui-indexed-list-inner">
-              <div class="mui-indexed-list-empty-alert">没有数据</div>
-              <ul class="mui-table-view">
-                <li v-for="(tag, index) in tags"
-                    class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left"
-                    @tap.stop.prevent="checkThis" :value="tag.value">
+        <div class="mui-indexed-list">
+          <!--<div class="mui-indexed-list-search mui-input-row mui-search">-->
+          <!--<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">-->
+          <!--</div>-->
+          <div class="mui-indexed-list-alert"></div>
+          <div class="mui-indexed-list-inner">
+            <div class="mui-indexed-list-empty-alert">没有数据</div>
+            <ul class="mui-table-view">
+              <li v-for="(tag, index) in tags"
+                  class="mui-input-row mui-table-view-cell mui-indexed-list-item mui-checkbox-2  mui-left"
+                  @tap.stop.prevent="checkThis" :value="tag.value">
 
                   <span class="tagSelect checked"
                         v-if="typeof(getSelectedCodes) === 'object' && getSelectedCodes.indexOf(tag.value) > -1"/><span
-                  class="tagSelect" v-else/>{{ tag.text }}
+                class="tagSelect" v-else/>{{ tag.text }}
 
                 </li>
-              </ul>
+            </ul>
 
-            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -115,7 +115,7 @@
         } else {
           span.classList.remove('checked');
           if (pos >= 0) {
-             this.iselected.splice(pos, 1);
+            this.iselected.splice(pos, 1);
           }
         }
       }

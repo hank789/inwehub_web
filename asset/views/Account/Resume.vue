@@ -170,7 +170,7 @@
       <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
     </div>
 
-      <div class="noPublic" v-show="isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
+      <div class="noPublic" v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-bugongkai"></use>
           </svg>
@@ -252,7 +252,7 @@
       }
     },
     created () {
-        showInwehubWebview();
+        //showInwehubWebview();
 
         if (this.$route.query.goback) {
             this.canBack = true;
@@ -611,7 +611,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .professor {
-    background-color: #161616;
+    background-color: #3c3e44;
     text-align: center;
     position: relative;
     height: 78px;

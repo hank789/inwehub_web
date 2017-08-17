@@ -189,7 +189,7 @@
       next();
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       var pos = localEvent.getLocalItem('projectPos');
       if (pos) {
           this.lastY = pos.lastY;
@@ -223,7 +223,7 @@
 
 <style scoped="scoped">
   .professor{
-    background-color:#161616;
+    background-color:#3c3e44;
     text-align: center;
     position:relative;
     height:136px;

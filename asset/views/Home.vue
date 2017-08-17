@@ -1,855 +1,674 @@
 <template>
-  <div>
+	<div>
 
+		<header class="hidewechattitle">
+			<svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-logowenzi"></use>
+		    </svg>
+		</header>
 
-    <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-icon myicon myicon-project2 mui-pull-left" @tap.stop.prevent="$router.pushPlus('/company/my')"></a>
-      <!--<h1 class="mui-title">InweHub</h1>-->
-      <span class="mui-icon myicon myicon-home-title"></span>
-      <a class="mui-icon myicon myicon-expert mui-pull-right" @tap.stop.prevent="expertNav"></a>
-    </header>
+		<div class="mui-content" v-show="!loading">
+			<!--首页轮播-->
+			<div id="slider" class="mui-slider" v-if="notices.length">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
+						<a href="#">
+							<img :src="notices[notices.length-1].img_url">
+						</a>
+					</div>
 
-    <div class="mui-content" v-show="!loading">
+					<div class="mui-slider-item" v-for="(notice, index) in notices">
+						<a @tap.stop.prevent="goLink(notice.url)" target="_blank">
+							<img :src="notice.img_url">
+						</a>
+					</div>
 
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
+						<a href="#">
+							<img :src="notices[0].img_url">
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div :class="{'mui-indicator':true, 'mui-active':index==0}" v-for="(notice, index) in notices"></div>
+				</div>
+			</div>
+			<!--专业问答 和 成为专家-->
+			<div class="home-expert">
+				<p @tap.stop.prevent="$router.pushPlus('/ask')">
+					<svg class="icon" aria-hidden="true" >
+						<use xlink:href="#icon-zhuanyewenda"></use>
+					</svg>
+					<span >专业问答</span>
 
-      <div class="professor">
-        <div class="avatar">
-          <div class="avatarInner">
-            <img :src="recommend_expert_avatar_url" class="avatar"/>
-          </div>
-        </div>
-        <div class="text">
-          <div class="realname">{{ recommend_expert_name }}</div>
-          <div class="label">
-            <div class="collect myicon myicon-home-vip"></div>
-            今日专家
+				</p>
+				<p @tap.stop.prevent="toApprove(is_expert)">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-chengweizhuanjia"></use>
+					</svg>
+					<span>成为专家</span>
+				</p>
+			</div>
 
-          </div>
-          <div class="options">
-            <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask?id=' + recommend_expert_uuid)"><span>+</span> 向Ta提问</div>
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-if="!recommend_expert_is_followed"><svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucang"></use>
-            </svg></div>
-            <div class="collect collect-active" @tap.stop.prevent="collectProfessor" v-else><svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucanghover"></use>
-            </svg></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="professorDesc">
-        <div class="title"><span class="icon"></span>专家简介
-             <span class="titleSub">资深专家每日更新</span>
-        </div>
-        <div class="detail">
-          {{ recommend_expert_description }}
-
-        </div>
-      </div>
-
-      <!--
+			<!--
       	首页的特惠时间； 点击跳入特惠的详情；
       -->
-      <div class="freeAskWrapper" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
-        <div class="freeAsk mui-navigate-right">
-          <div class="icon"></div>
-          <div class="text">你的首问1元特惠还剩<div v-html="couponExpireAtText"></div></div>
-        </div>
-      </div>
+			<div class="freeAskWrapper"  v-show="couponExpireAtText && couponExpireAtTime"  @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">
+				<div class="freeAsk mui-navigate-right">
+					<div class="icon"></div>
+					<div class="text">你的首问1元特惠还剩
+						<div v-html="couponExpireAtText"></div>
+					</div>
+				</div>
+			</div>
+			<!--人物推荐-->
+			<swiper :options="swiperOption" id="home-recommend">
+			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index">
+			        <img :src="experts.avatar_url" :class="experts.uuid"  />
+					<span>
+	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
+		      	      	<svg class="icon" aria-hidden="true" >
+						  <use xlink:href="#icon-zhuanjiabiaoji" ></use>
+						</svg>
+	      	        </span>
+					<span class="mui-ellipsis">{{ experts.title?experts.title:'　' }}</span>
+					<span >查看</span>
+					<p>
+					    {{experts.work_years?experts.work_years:"0"}}年
+					</p>
+				</swiper-slide>
+
+              </swiper>
+
+			<!--向你推荐 -->
+			<div class="home-reading">
+				<div class="reader-upper">
+					<span>向你推荐</span>
+					<span @tap.stop.prevent="$router.push('/discover')">更多</span>
+					<i class="bot"></i>
+				</div>
+				<ul>
+					<li v-if="recommend_read.length=='0'"></li>
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title, reads.comment_url)" v-else>
+						<img  :src="reads.img_url" />
+						<div>
+							<p class="mui-ellipsis-2">{{reads.title}}</p>
+							<p>
+								<span class="home-time">{{reads.publish_at}}</span>
+								<span class="home-laud">
+				  	  	   	  		<svg class="icon" aria-hidden="true">
+									  <use xlink:href="#icon-dianzan1"></use>
+									</svg>
+									 <i>{{reads.upvotes}}</i>
+  	  	   	  	                 </span>
+						    </p>
+						</div>
+						<i class="bot"></i>
+					</li>
+
+				</ul>
+			</div>
 
 
-      <div id="slider" class="mui-slider" v-if="notices.length">
-        <div class="mui-slider-group mui-slider-loop">
-          <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
-            <a href="#">
-              <img :src="notices[notices.length-1].img_url">
-            </a>
-          </div>
+             <!--手机端-->
+             <div class="suspend">
+	            <p>
+	            	    <svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-logotuxing"></use>
+				    </svg>
+	            </p>
+	            <p>
+	            	   <span>下载APP</span>
+	            	   <span>查看更多专家信息</span>
+	            </p>
+	            <p>
+	            	  立即打开
+	            </p>
+	        </div>
+
+           <!--微信端-->
+           <div class="suspension">
+           	   <p>
+           	   	  <svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-logotuxing"></use>
+				    </svg>
+           	   </p>
+           	   <p>下载APP</p>
+           	   <p>立即打开</p>
+           </div>
 
 
-          <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank">
-              <img :src="notice.img_url">
-            </a>
-          </div>
-
-          <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
-          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
-            <a href="#">
-              <img :src="notices[0].img_url">
-            </a>
-          </div>
-        </div>
-        <div class="mui-slider-indicator">
-          <div :class="{'mui-indicator':true, 'mui-active':index==0}" v-for="(notice, index) in notices"></div>
-        </div>
-      </div>
+			<div class="home-bot">
+				你已经到达我的底线
+			</div>
 
 
-      <div class="bountyDesc">
-        <div class="title">
-          <span class="icon"></span>最新奖励
-                <span class="titleSub">现金奖励优质问答</span>
-        </div>
-      </div>
 
+		</div>
 
-      <div class="bountyDescList">
+			<div id="freeAskTemplate" style="display: none;">
+		        <div class="freeAskGet"></div>
+		        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
+		    </div>
 
-        <div class="detail" v-for="item in recommend_qa">
-          <div class="image">
-            <img :src="item.user_avatar_url"/>
-          </div>
-          <div class="text">
-            <div class="content mui-ellipsis-3">
-              {{item.description}}
-            </div>
-            <div class="realname">{{ item.user_name }}</div>
-            <div class="amount">额外奖励{{ item.price }}元</div>
-          </div>
-        </div>
+		    <div id="freeAskSuccessTemplate" style="display: none;">
+		      <div class="xiaoha"></div>
+		      <div class="success"></div>
+		      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
+		        <use xlink:href="#icon-times"></use>
+		      </svg></div>
+		    </div>
 
-      </div>
-
-      <div class="askDetail">
-        <div class="buttonAsk" @tap.stop.prevent="$router.push('/ask')"><span>+</span> 付费提问</div>
-      </div>
-
-      <div class="mb70"></div>
-    </div>
-
-    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="goRecommand">推荐专家</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="expertNav"><b>取消</b></a>
-        </li>
-      </ul>
-    </div>
-
-    <div id="freeAskTemplate" style="display: none;">
-        <div class="freeAskGet"></div>
-        <div class="freeAskGetButton" @tap.stop.prevent="getFreeAsk()"></div>
-    </div>
-
-    <div id="freeAskSuccessTemplate" style="display: none;">
-      <div class="xiaoha"></div>
-      <div class="success"></div>
-      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-times"></use>
-      </svg></div>
-    </div>
-
-
-  </div>
+		<!--http://localhost:8076/#/share/resume?id=05a855006c6b11e7b3a400163e000d6b&goback=1-->
+		<div id="statusBarStyle" background="#f3f4f6"   bgColor="#f3f4f6" mode="dark"></div>
+	</div>
 
 </template>
 <script>
+	import { NOTICE, ASK_INFO, ASK_TYPE_SELECT } from '../stores/types';
+	import { createAPI, addAccessToken, postRequest } from '../utils/request';
+	import { apiRequest } from '../utils/request';
+	import { TimeEndText } from '../utils/time';
+	import { swiper, swiperSlide } from 'vue-awesome-swiper';
+	import { openWebviewByHome } from '../utils/webview';
+  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar'
 
-  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../utils/request';
-  import {apiRequest} from '../utils/request';
-  import {TimeEndText} from '../utils/time';
+	const Home = {
+		data: () => ({
+			is_expert:"",
+			recommend_read:"",
+			recommend_experts:"",
+			firstAsk: false,
+			couponExpireAtTime: '',
+			notices: [],
+			currentTime: parseInt((new Date()).getTime() / 1000),
+			loading: true,
+			timeAutoEndTimeOut: false,
+			swiperOption:{}
+		}),
+		created() {
+			this.swiperOption = {
+				pagination: '.swiper-pagination',
+				loop: true,
+			    slidesPerView : 3,
+                spaceBetween :10,
+                onTap:this.swipperClick
+			}
+		},
+		components: {
+			swiper,
+			swiperSlide
+		},
+		//缓存；
+	   activated: function () {
+			this.getData();
+		},
+		mounted() {
+			//showInwehubWebview();
+		},
+		computed: {
+			//首页倒计时；
+			couponExpireAtText() {
+				if(this.couponExpireAtTime) {
+					return TimeEndText(this.currentTime, this.couponExpireAtTime);
+				}
+			}
+		},
+		methods: {
+			swipperClick(swiper, event){
+      	          var  Ele = event.srcElement.parentNode.firstChild.className.split(" ");
+     	            var uuid = "";
+      	            if(Ele.length ===1){
+      	            	  uuid = Ele[0]
+     	            }else{
+      	            	    uuid = Ele[1]
+   	            	   }
 
+     	           this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+			},
+			detail(url){
+			   this.goLink(url);
+			},
+			//认证专家跳转判断；
+			toApprove(status) {
+			switch(status) {
+					case 0:
+						this.$router.pushPlus('/my/pilot');
+						break;
+					case 1:
+						this.$router.pushPlus('/expert/apply/success?type=0');
+						break;
+					//认证专家；
+					case 2:
+						mui.toast("您已经是认证专家了");
+						break;
+					case 3:
+						this.$router.pushPlus('/my/pilot');
+						break;
 
-  const Home = {
-    data: () => ({
-      recommend_expert_name:'',
-      recommend_expert_description:'',
-      recommend_expert_uuid:'',
-      recommend_expert_uid:'',
-      recommend_expert_avatar_url:'',
-      recommend_qa:[],
-      recommend_expert_is_followed:0,
-      firstAsk:false,
-      couponExpireAtTime:'',
-      notices:[],
-      currentTime:parseInt((new Date()).getTime() / 1000),
-      loading: true,
-      timeAutoEndTimeOut:false,
-    }),
-    created () {
+			}
 
-    },
-    activated: function () {
-      document.body.style.backgroundColor = '#fff';
-      this.getData();
-    },
-    mounted(){
-      showInwehubWebview();
-      document.body.style.backgroundColor = '#fff';
+			},
+      goArticle: function(url,id,title='', pathUrl) {
+        if(/http/.test(url)) {
+          if(mui.os.plus) {
 
+            mui.openWindow({
+              url: 'index.html#/webview/article',
+              id: 'readhub_article_'+id,
+              preload: false, //一定要为false
+              createNew: false,
+              show: {
+                autoShow: true,
+                aniShow: 'pop-in'
+              },
+              styles: {
+                popGesture: 'hide'
+              },
+              waiting: {
+                autoShow: false
+              },
+              extras: {
+                article_id: id,
+                article_url: url,
+                article_title: title,
+                article_comment_url: pathUrl,
 
-    },
-    beforeRouteLeave(to, from, next) {
-      document.body.style.backgroundColor = '#efeff4';
-      next();
-    },
-    computed: {
-
-
-    	  //首页倒计时；
-      couponExpireAtText(){
-          if (this.couponExpireAtTime) {
-              return TimeEndText(this.currentTime, this.couponExpireAtTime);
-          }
-      }
-    },
-    methods: {
-      goLink:function(url){
-          if (/http/.test(url)) {
-            if (mui.os.plus) {
-              mui.openWindow({
-                url: 'index.html#/webview/article',
-                id: url,
-                preload: false,//一定要为false
-                createNew:false,
-                show: {
-                  autoShow: true,
-                  aniShow: 'pop-in'
-                },
-                styles: {
-                  popGesture: 'hide'
-                },
-                waiting: {
-                  autoShow: false
-                }
-              });
-            } else {
-                window.location.href=url;
-            }
+              }
+            });
           } else {
-              this.$router.pushPlus(url);
+            window.location.href = url;
           }
-      },
-      closeFreeAskSuccessTemplate:function(){
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'none';
-
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
-        }
-      },
-      closeFreeAskTemplate:function(){
-        var FreeTemplate = document.getElementById('freeAskTemplate');
-        FreeTemplate.style.display = 'none';
-
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
-        }
-      },
-      getFreeAsk:function(){
-        postRequest(`activity/getCoupon`, {'coupon_type':1}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
-          }
-          this.getData();
-          this.showFreeAskGetSuccess();
-        });
-      },
-      showFreeAskGet:function(){
-          var FreeTemplate = document.getElementById('freeAskTemplate');
-          FreeTemplate.style.display = 'block';
-          var mask = mui.createMask(() => {
-            FreeTemplate.style.display = 'none';
-          });
-          mask.show();//显示遮罩
-      },
-      showFreeAskGetSuccess:function(){
-        this.closeFreeAskTemplate();
-
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'block';
-        var mask = mui.createMask(() => {
-          FreeTemplate.style.display = 'none';
-        });
-        mask.show();//显示遮罩
-      },
-      shareProfessor:function(){
-          mui.alert("我们还暂时不建议您分享！");
-      },
-      collectProfessor:function(){
-
-        postRequest(`follow/user`, {id:this.recommend_expert_uid}).then(response => {
-            var code = response.data.code;
-            if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
-            }
-            this.recommend_expert_is_followed = !this.recommend_expert_is_followed;
-            mui.toast(response.data.data.tip);
-        });
-
-      },
-      goRecommand: function () {
-      //点击推荐专家时，跳转新页面；
-        this.expertNav(); 　
-        this.$router.push('/expert/recommend')
-      },
-      goExpert: function () {
-        this.expertNav();
-        this.$router.push('/expert')
-      },
-      toggleMenu(){
-        mui('.mui-off-canvas-wrap').offCanvas('toggle');
-      },
-      //当是webapp时调用遮罩层；
-      expertNav: function () {
-        //如果是os或者plus 调用系统方法；
-        if (mui.os.plus) {
-          var a = [{
-            title: "推荐专家"
-          }];
-          //调用系统的选择按钮；
-          plus.nativeUI.actionSheet({
-          	//两个参数；
-            cancel: "取消",
-            buttons: a
-          }, (b) => {
-            switch (b.index) {
-            	//b.index   参数索引值；
-              case 0:
-              //关闭选择按钮；
-                  break;
-              case 1:
-              //跳转到推荐专家页面；
-                this.$router.pushPlus('/expert/recommend');
-                break;
-            }
-          })
         } else {
-        	  // 如果不是调用自己写的方法；
-          mui('#expert').popover('toggle');
+          this.$router.pushPlus(url);
         }
       },
+			goLink: function(url) {
+				if(/http/.test(url)) {
+					if(mui.os.plus) {
+						mui.openWindow({
+							url: 'index.html#/webview/notice',
+							id: url,
+							preload: false, //一定要为false
+							createNew: false,
+							show: {
+								autoShow: true,
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					} else {
+						window.location.href = url;
+					}
+				} else {
+					this.$router.pushPlus(url);
+				}
+			},
+			closeFreeAskSuccessTemplate: function() {
+				var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
+				FreeTemplate.style.display = 'none';
 
-      timeAutoEnd:function(){
-        if (this.timeAutoEndTimeOut) {
-            clearTimeout(this.timeAutoEndTimeOut);
-        }
-        this.timeAutoEndTimeOut = setTimeout(() => {
-          this.currentTime = parseInt((new Date()).getTime() / 1000);
-          this.timeAutoEnd();
-        }, 1000);
-      },
-      //请求的数据；
-      getData: function () {
-        var t = this;
-        apiRequest(`home`, {}, false).then(response_data => {
-          if (response_data === false) {
-            return;
-          }
-          t.recommend_expert_name = response_data.recommend_expert_name;
-          t.recommend_expert_description = response_data.recommend_expert_description;
-          t.recommend_expert_uuid = response_data.recommend_expert_uuid;
-          t.recommend_expert_uid = response_data.recommend_expert_uid;
-          t.recommend_expert_avatar_url = response_data.recommend_expert_avatar_url;
-          t.recommend_qa = response_data.recommend_qa;
-          t.recommend_expert_is_followed = response_data.recommend_expert_is_followed;
-          t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
-          var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
+				if(mui('.mui-backdrop')[0]) {
+					document.body.removeChild(mui('.mui-backdrop')[0]);
+				}
+			},
+			closeFreeAskTemplate: function() {
+				var FreeTemplate = document.getElementById('freeAskTemplate');
+				FreeTemplate.style.display = 'none';
 
-          if (couponExpireAt) {
-             t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, "/")) / 1000;
-             t.timeAutoEnd();
-          } else {
-             t.couponExpireAtTime = null;
-          }
+				if(mui('.mui-backdrop')[0]) {
+					document.body.removeChild(mui('.mui-backdrop')[0]);
+				}
+			},
+			getFreeAsk: function() {
+				postRequest(`activity/getCoupon`, {
+					'coupon_type': 1
+				}).then(response => {
+					var code = response.data.code;
+					if(code !== 1000) {
+						mui.alert(response.data.message);
+						return;
+					}
+					this.getData();
+					this.showFreeAskGetSuccess();
+				});
+			},
+			showFreeAskGet: function() {
+				var FreeTemplate = document.getElementById('freeAskTemplate');
+				FreeTemplate.style.display = 'block';
+				var mask = mui.createMask(() => {
+					FreeTemplate.style.display = 'none';
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
+				});
+        setStatusBarBackgroundAndStyle('#A8A9AB', 'light');
+				mask.show(); //显示遮罩
+			},
+			showFreeAskGetSuccess: function() {
+				this.closeFreeAskTemplate();
 
-          t.notices = response_data.notices;
-          t.loading = 0;
-          if (t.firstAsk) {
-              t.showFreeAskGet();
-          }
+				var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
+				FreeTemplate.style.display = 'block';
+				var mask = mui.createMask(() => {
+					FreeTemplate.style.display = 'none';
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
+				});
+				mask.show(); //显示遮罩
+			},
+		  //对时间的处理；
+			timeAutoEnd: function() {
+				if(this.timeAutoEndTimeOut) {
+					clearTimeout(this.timeAutoEndTimeOut);
+				}
+				this.timeAutoEndTimeOut = setTimeout(() => {
+					this.currentTime = parseInt((new Date()).getTime() / 1000);
+					this.timeAutoEnd();
+				}, 1000);
+			},
+			//请求的数据；
+			getData: function() {
+				var deration = this;
+				var t = this;
+				apiRequest(`home`, {}, false).then(response_data => {
+					if(response_data === false) {
+						return;
+					}
 
+					console.log(response_data.is_expert)
 
-          if (t.notices.length) {
-            setTimeout(function(){
-              var slider = mui("#slider");
-              slider.slider({
-                interval: 5000
-              });
-            }, 100);
-          }
-        });
-      },
-      getAsks: function () {
-        this.getData();
-        this.loopAsk = true;
-        setTimeout(() => {
-          this.loopAsk = false;
-        }, 2000)
-      }
-    }
-  };
-  export default Home;
+					//推荐专家；
+				   t.recommend_experts = response_data.recommend_experts;
+				   //推荐阅读；
+				   t.recommend_read = response_data.recommend_read;
+					//返回是否显示首次提问免费的福利；
+					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
+					//是否是专家；
+					t.is_expert = response_data.expert_apply_status;
+
+					//返回的时间；
+					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
+
+					if(couponExpireAt) {
+						t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, "/")) / 1000;
+						t.timeAutoEnd();
+					} else {
+						t.couponExpireAtTime = null;
+					}
+
+                    //轮播图；
+					t.notices = response_data.notices;
+
+					t.loading = 0;
+					if(t.firstAsk) {
+						t.showFreeAskGet();
+					}
+
+					if(t.notices.length) {
+						setTimeout(function() {
+							var slider = mui("#slider");
+							slider.slider({
+								interval: 5000
+							});
+						}, 100);
+					}
+				});
+			}
+		}
+	};
+	export default Home;
 </script>
 
-<style>
-  .freeAsk .text div{
-    font-size:12px;
-    color:#444;
-  }
-  .freeAsk .text div span{
-    color:#03aef9;
-    margin-left:5px;
-    font-size:14px;
-  }
-  .mui-backdrop{
-    background-color: rgba(0, 0, 0, .7) !important;
-  }
-  .mui-slider-indicator .mui-indicator{
-    box-shadow:none !important;
-  }
-  .mui-slider-indicator{
-    bottom:0 !important;
-  }
-</style>
-
-<style scoped>
-  .mui-bar .myicon-project2 {
-    width:18px;
-    height:18px;
-    left: 10px;
-    top: 12px;
-  }
-
-  .mui-bar .myicon-expert {
-    width: 27px;
-    height: 27px;
-    right: 10px;
-    top: 9px;
-  }
-
-  .professor {
-    background-color: #161616;
-    text-align: center;
-    position: relative;
-    height: 136px;
-  }
-
-  .professor .text {
-    width: 65%;
-    height: 100%;
-    padding-top: 20px;
-    padding-left: 0px;
-    display: inline-block;
-    color: #fff;
-    text-align: left;
-
-  }
-
-  .professor .label {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 14px;
-  }
-
-  .professor .text .realname {
-    font-size: 20px;
-    font-weight: bolder;
-    margin-left: 20px;
-  }
-
-  .avatar {
-    z-index: 9;
-    color: #ffffff;
-    display: inline-block;
-    margin-top: 10px;
-    height: 100px;
-    width: 100px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 50%;
-    vertical-align: top;
-  }
-
-  .avatar .avatarInner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .avatar img {
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .professor .options {
-    position: relative;
-    margin-top: 30px;
-    margin-left: 10px;
-  }
-
-  .professor .buttonAsk {
-    position: relative;
-    display: inline-block;
-    width: 60%;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
-    text-align: center;
-    border: 1px solid #fff;
-    border-radius: 50px;
-    padding-left: 20px;
-  }
-
-  .professor .buttonAsk span {
-    position: absolute;
-    font-size: 30px;
-    left: 10px;
-    top: -4px;
-  }
-
-  .professor .label .collect {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    opacity: 1;
-    vertical-align: sub;
-  }
-
-  .professor .options .collect {
-    display: inline-block;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    width: 37px;
-    height: 37px;
-    line-height: 37px;
-    text-align: center;
-    margin-left: 3%;
-  }
-
-  .professor .options .collect .icon{
-    font-size: 20px;
-    position: relative;
-    top: 1px;
-  }
-
-  .professor .options .collect-active{
-    /*border:1px solid #4990E2;*/
-  }
-  .professor .options .collect-active .icon{
-    color:#fff;
-  }
-
-  .professor .options .collect .myicon-share{
-    width:15px;
-    height:16px;
-  }
-
-  .professorDesc {
-    color: #4A4A4A;
-    font-size: 20px;
-    background: #fff;
-    padding: 10px 0 10px 20px;
-  }
-
-  .professorDesc .title {
-    margin-bottom: 8px;
-    font-size: 16px;
-    padding-bottom:8px;
-    position: relative;
-  }
-
-  .professorDesc .title .icon {
-    position: relative;
-    top: 2px;
-    width: 16px;
-    margin-right: 5px;
-    display: inline-block;
-    background: url("../statics/images/home-jinpai.png") no-repeat;
-    height: 16px;
-    background-size: cover;
-  }
-
-  .professorDesc .detail {
-    font-size: 12px;
-    line-height: 21px;
-    padding-right:20px;
-  }
-
-  .bountyDesc {
-    background: #fff;
-    margin-top: 5px;
-    padding:10px 0 0 20px;
-  }
-
-  .bountyDesc .title .icon {
-    width: 13px;
-    display: inline-block;
-    background: url("../statics/images/home-jiangli.png") no-repeat;
-    height: 16px;
-    background-size: cover;
-    position: relative;
-    top: 2px;
-    margin-right: 8px;
-  }
-
-  .bountyDesc .title {
-    position: relative;
-    line-height: 20px;
-    font-size: 16px;
-    color: #4A4A4A;
-    padding-bottom: 11px;
-  }
-
-  .professorDesc .title:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-  .bountyDesc .title:after{
-    position: absolute;
-    right: 0;
-    bottom: 1px;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-
-  .professorDesc .titleSub{
-    display: inline-block;
-    font-size: 12px;
-    color: #9B9B9B;
-    float:right;
-    margin-right:20px;
-    position: relative;
-  }
-
-  .bountyDesc .titleSub {
-    display: inline-block;
-    font-size: 12px;
-    color: #9B9B9B;
-    float:right;
-    margin-right:20px;
-    position: relative;
-  }
-
-  .bountyDesc .more {
-    display: inline-block;
-    width: 63px;
-    float: right;
-    position: relative;
-  }
-
-  .bountyDescList {
-    background: #fff;
-  }
-
-  .bountyDescList .detail {
-    position: relative;
-    padding: 20px 0 0 20px;
-  }
-
-  .bountyDescList .detail .image {
-    position: absolute;
-    display: inline-block;
-    width: 60px;
-  }
-
-  .bountyDescList .detail .image img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .bountyDescList .detail .text {
-    margin-left: 70px;
-    padding-bottom: 40px;
-    padding-right: 10px;
-    position: relative;
-  }
-
-  .bountyDescList .detail .text:after {
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #D9D9D9;
-  }
-
-  .bountyDescList .detail:last-child .text:after {
-    display: none;
-  }
-
-  .bountyDescList .detail .text .content {
-    font-size: 12px;
-    padding-right: 10px;
-  }
-
-  .bountyDescList .detail .realname {
-    color: #4990E2;
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    font-size: 14px;
-  }
-
-  .bountyDescList .detail .amount {
-    color: #F6A623;
-    font-size: 14px;
-    position: absolute;
-    right: 20px;
-    bottom: 10px;
-  }
-
-  .askDetail {
-    height: 67px;
-    line-height: 67px;
-    text-align: center;
-    background: #fff;
-    margin-top: 5px;
-  }
-
-  .askDetail .buttonAsk {
-    position: fixed;
-    bottom:75px;
-    left:50%;
-    margin-left:-62px;
-    z-index: 777;
-    background: #4990E2;
-    display: inline-block;
-    width: 125px;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
-    text-align: center;
-    border-radius: 50px;
-    padding-left: 20px;
-
-    color: #fff;
-  }
-
-  .askDetail .buttonAsk span {
-    position: absolute;
-    font-size: 30px;
-    left: 20px;
-    top: -4px;
-  }
-
-  .footer-bar {
-    background-color: #fff;
-    box-shadow: none;
-  }
-
-  .footer-bar {
-    border-top: 1px solid #D9D9D9;
-  }
-
-  .footer-bar .mui-active .myicon-point {
-    width: 3px;
-    height: 3px;
-    top: 8px;
-    left: -13px;
-  }
-
-  .myicon-home-title{
-    position: absolute;
-    left:50%;
-    width:70px;
-    margin-left:-35px !important;
-    top:12px;
-  }
-
-
-  @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
-    .professor .options .collect {
-      margin-left: 7% !important;
-    }
-  }
-
-  @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
-    .professor .options .collect {
-      margin-left: 9% !important;
-    }
-  }
-
-  .freeAskWrapper{
-    position: relative;
-    height:48px;
-    margin-top:11px;
-  }
-  .freeAsk{
-    position: absolute;
-    left: 20px;
-    right:20px;
-  }
-  .freeAsk .icon{
-    position: absolute;
-    width:35px;
-    left:-8px;
-    top:-5px;
-    height:48px;
-    display: inline-block;
-    background-image: url("../statics/images/icon_xiaoha@2x.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  }
-  .freeAsk .text{
-     background: #dcdcdc;
-     border:1px #dcdcdc solid;
-     border-radius: 50px;
-     font-size:14px;
-     line-height: 14px;
-     color:#323232;
-     padding:13px 0px 13px 35px;
-
-  }
-
-  .freeAsk .text div{
-    display: inline-block;
-  }
-
-  .freeAskGet{
-    position: fixed;
-    top:50%;
-    margin-top:-181px;
-    left:10px;
-    right:10px;
-    background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
-    background-size:contain;
-    height:262px;
+<style lang="less" scoped>
+/*手机端*/
+.suspend{
+	width: 100%;
+	height:64px;
+	border-radius:4px;
+	background:#252525;
+	position: absolute;
+	top:44px;
+	z-index: 999;
+	display: none;
+}
+.suspend p:nth-of-type(1){
+	float: left;
+	width: 47px;
+	height: 47px;
+	border-radius: 12px;
+	background: #F3F4F6;
+	margin-top: 8.5px;
+	margin-left: 10px;
+	text-align: center;
+}
+.suspend p:nth-of-type(1)>svg{
+	font-size: 34px;
+	margin-top: 6px;
+	color: #009fe8;
+}
+.suspend p:nth-of-type(2){
+	width: 96px;
+	height: 47px;
+	margin-top: 8.5px;
+	margin-left: 10px;
+	padding-top: 5px;
+	float: left;
+}
+.suspend p:nth-of-type(2)>span{
+	display: block;
+	color: #FFFFFF;
+	font-size: 12px;
+}
+.suspend p:nth-of-type(2)>span:nth-of-type(1){
+	font-size:16px
+}
+.suspend p:nth-of-type(2)>span:nth-of-type(2){
+	margin-top: -3px;
+}
+.suspend p:nth-of-type(3){
+	float:right;
+	width: 76px;
+	height:30px;
+	border-radius:4px;
+	background:#3c95f9;
+	text-align: center;
+	line-height: 30px;
+	color: #FFFFFF;
+	margin-top: 17px;
+	margin-right: 10.5px;
+	}
+/*微信端*/
+.suspension{
+	width: 100%;
+	height: 49px;
+	position: absolute;
+    top: 44px;
+    background: #FFFFFF;
     z-index: 999;
-  }
+    box-shadow:0px 3px 5px #b4b4b6;
+    -webkit-box-shadow:0px 3px 5px #b4b4b6;
+    -moz-box-shadow:0px 3px 5px #b4b4b6;
+    display: none;
+}
+.suspension p:nth-of-type(1){
+	float: left;
+	width:35px;
+	height:35px;
+	border-radius:9px;
+	background: #f3f4f6;
+	margin-top: 7px;
+	margin-left: 16px;
+	text-align: center;
+}
+.suspension p:nth-of-type(1) svg{
+	font-size: 25px;
+	margin-top: 6px;
+	color: #009fe8;
+}
+.suspension p:nth-of-type(2){
+    float: left;
+    font-size:16px;
+	color:#171616;
+	margin-top: 14px;
+	margin-left: 10px;
+}
+.suspension p:nth-of-type(3){
+	float:right;
+	width:76px;
+	height:30px;
+	border-radius:4px;
+	background: #3c95f9;
+	font-size: 14px;
+	color: #FFFFFF;
+	text-align: center;
+    line-height: 30px;
+    margin-top: 10px;
+    margin-right: 14px;
+}
+	/*2.0版本css样式*/
 
-  .freeAskGetButton{
+	.mui-content {
+		overflow-y: auto;
+	}
+
+	div,
+	span,
+	p,
+	ul,
+	li,
+	i,
+	a {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.bot {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0px;
+		height: 1px;
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: rgb(220, 220, 220);
+	}
+	/*头部样式*/
+
+	header {
+		width: 100;
+		height: 44px;
+		background: #f3f4f6;
+		text-align: center;
+
+	}
+
+	header svg {
+		font-size:80px;
+	    color: #3c3e44;
+	    margin-top: -13px;
+	}
+	/*轮播样式*/
+
+	#slider img {
+		height: 136px;
+		width: 100%;
+	}
+	/*专业问答 和 成为专家 */
+
+	.home-expert {
+		width: 100%;
+		height: 70px;
+		margin-bottom: 3px;
+	}
+
+	.home-expert p {
+		float: left;
+		width: 44.5%;
+		height: 50px;
+		background: #FFFFFF;
+		border-radius: 4px;
+		margin-top: 12.5px;
+		padding-top: 13px;
+	}
+
+	.home-expert p:nth-of-type(1) {
+		margin-left: 4%;
+	}
+
+	.home-expert p:nth-of-type(2) {
+		margin-left: 3%;
+	}
+
+	.home-expert p svg {
+		font-size: 25px;
+		margin-left: 38px;
+		margin-bottom: -4px;
+	}
+
+	.home-expert p span {
+		font-size: 13px;
+		color: #444444;
+		margin-left:3px;
+	}
+	/*一元特惠*/
+
+	.freeAskWrapper {
+		position: relative;
+		height: 48px;
+	}
+
+	.freeAsk {
+		position: absolute;
+		left: 15px;
+		right: 15px;
+	}
+
+	.freeAsk .icon {
+		position: absolute;
+		width: 35px;
+		left: -8px;
+		top: -5px;
+		height: 48px;
+		display: inline-block;
+		background-image: url("../statics/images/icon_xiaoha@2x.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center;
+	}
+
+	.freeAsk .text {
+		background: #dcdcdc;
+		border: 1px #dcdcdc solid;
+		border-radius: 50px;
+		font-size: 14px;
+		line-height: 14px;
+		color: #323232;
+		padding: 13px 0px 13px 35px;
+	}
+
+	.freeAsk .text div {
+		display: inline-block;
+	}
+
+	.freeAskGet {
+		position: fixed;
+		top: 50%;
+		margin-top: -181px;
+		left: 10px;
+		right: 10px;
+		background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
+		background-size: contain;
+		height: 262px;
+		z-index: 999;
+	}
+
+	.freeAskGetButton{
     position: fixed;
     top: 50%;
     margin: -70px 0 0 -100px;
@@ -859,12 +678,8 @@
     z-index: 1000;
   }
 
-  .mui-navigate-right:after{
-    right:10px;
-    font-size:22px;
-  }
 
-  #freeAskSuccessTemplate .xiaoha{
+#freeAskSuccessTemplate .xiaoha{
     position: fixed;
     top:50%;
     left:50%;
@@ -899,12 +714,227 @@
     font-size:38px;
     color: #b4b4b6;
   }
+	/*人物推荐*/
 
-  #slider{
-    margin-top:5px;
-  }
-  #slider img{
-    max-height:98px;
-    width:100%;
-  }
+	#home-recommend {
+		width: 100%;
+		height: 170px;
+		background: #FFFFFF;
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+
+	#home-recommend div:nth-of-type(1) {
+		margin-left: 0px;
+	}
+
+	#home-card {
+		width: 114px;
+		height: 148px;
+		background: #ececee;
+		margin-top: 11px;
+		padding-top: 10px;
+		position: relative;
+		border-radius: 4px;
+	}
+
+	#home-card img {
+		width: 50px;
+		height: 50px;
+		display: block;
+		border-radius: 50%;
+		margin: 0 auto;
+	}
+
+	#home-card span {
+		display: block;
+		text-align:center;
+		font-size: 12px;
+		padding: 0 4px;
+	}
+    #home-card span:nth-of-type(1) i{
+    	   display: inline-block;
+    	  max-width: 70px;
+    	  height: 20px;
+    	  font-style: normal;
+    }
+	#home-card span:nth-of-type(1) {
+		width: 100%;
+		text-align: center;
+		font-size: 14px;
+		font-weight: 600;
+		color: #444444;
+		margin-top:2px;
+
+	}
+
+	#home-card span:nth-of-type(1) svg {
+		font-size: 20px;
+		color: #03aef9;
+		margin-bottom: 2px;
+		margin-left: -3px;
+	}
+
+	.home-card span:nth-of-type(2) {
+		display: inline-block;
+		width: 100%;
+		color: #444444;
+	}
+
+	#home-card span:nth-of-type(3) {
+		width: 70%;
+		height: 24px;
+		border-radius: 50px;
+		border: 0.5px solid #03aef9;
+		margin-left: 15%;
+		margin-top: 6px;
+		font-family: "PingFangSC";
+		font-size: 14px;
+		text-align: center;
+		color: #03aef9;
+	}
+
+	#home-card p {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		width: 28px;
+	    text-align: center;
+		background: url("../statics/images/fill_1@2x.png") no-repeat;
+		background-size: 100%  100%;
+		font-size: 12px;
+	    color: #ffffff;
+	}
+
+
+	/*向你推荐*/
+
+	.home-reading {
+		width: 100%;
+		background: #FFFFFF;
+	}
+
+	.reader-upper {
+		width: 90%;
+		height: 50px;
+		margin-left: 5%;
+		position: relative;
+	}
+
+	.reader-upper span:nth-of-type(1) {
+		float: left;
+		line-height: 50px;
+		font-size: 16px;
+		color: #444444;
+	}
+	.reader-upper span:nth-of-type(2) {
+		float: right;
+		line-height: 50px;
+		font-size: 13px;
+		color: #03aef9;
+	}
+
+
+	.home-reading ul {
+		width: 100%;
+	}
+
+	.home-reading ul li {
+		width: 90%;
+		height: 125px;
+		margin-left: 5%;
+		position: relative;
+	}
+
+	.home-reading ul li:last-child {
+		.bot{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0px;
+		height: 0px;
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: rgb(220, 220, 220);
+		}
+	}
+
+	.home-reading ul li img {
+		width: 35%;
+		height: 80px;
+		float: left;
+		margin-top: 21px;
+		border-radius: 4px;
+	}
+
+	.home-reading ul li div {
+		float: left;
+		width: 63%;
+		margin-left: 2%;
+		margin-top: 21px;
+	}
+
+	.home-reading ul li div p:nth-of-type(1) {
+		height: 42px;
+		font-size: 14px;
+		color: #444444;
+	}
+
+	.home-reading ul li div p:nth-of-type(2) {
+		font-size: 12px;
+		color: #808080;
+		margin-top: 20px;
+	}
+
+
+
+	.home-time {
+		float: left;
+		font-size: 12px;
+		color: #b4b4b6;
+	}
+
+	.home-laud {
+		float: right;
+	}
+
+	.home-laud>svg {
+		font-size: 17px;
+		color: #b4b4b6;
+		margin-bottom: 1.5px;
+	}
+
+	.home-laud>i {
+		font-size: 20px;
+		font-size: 13px;
+		color: #b4b4b6;
+		font-style: normal;
+	}
+
+	.home-bot {
+		width: 100%;
+		height: 140px;
+		background: #FFFFFF;
+		font-size: 14px;
+		text-align: center;
+		color: #c8c8c8;
+	}
+
+	.mui-slider-indicator .mui-active.mui-indicator {
+    background: #03aef9;
+     }
+
+	.mui-slider-indicator .mui-indicator {
+	    display: inline-block;
+	    width: 6px;
+	    height: 6px;
+	    margin: 1px 6px;
+	    cursor: pointer;
+	    border-radius: 50%;
+	    background: #d8d8d8;
+	    -webkit-box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
+	    box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
+	}
+
+
 </style>

@@ -87,7 +87,7 @@
       });
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       this.initData();
     },
     watch: {
@@ -99,7 +99,7 @@
 
 <style scoped>
   .myMoney{
-     background: #161616;
+     background: #3c3e44;
      height:136px;
      color:#fff;
      padding:20px 30px;

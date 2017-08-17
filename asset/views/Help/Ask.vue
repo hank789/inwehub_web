@@ -26,7 +26,7 @@
 
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       postRequest(`system/service_qa_help`, {}).then(response => {
         var code = response.data.code;
         if (code !== 1000) {

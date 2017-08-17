@@ -1,22 +1,21 @@
 <template>
 <div>
-  <header class="mui-bar mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">InweHub</h1>
-  </header>
 
 </div>
 </template>
 
 
 <script>
+  import localEvent from '../../stores/localStorage';
+  import axios from 'axios';
+  import { openWebviewByHome } from '../../utils/webview';
 
   export default {
     data: () => ({
       loading:1
     }),
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     methods: {
 
@@ -28,13 +27,14 @@
       mui.plusReady(() => {
         var ws = plus.webview.currentWebview();
         ws.addEventListener('show',createEmbed(ws),false);
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '/api-request?uuid=' + currentUser.uuid;
 
         function createEmbed(ws) {
-          var topoffset='44px';
-          if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
-            topoffset=(Math.round(plus.navigator.getStatusbarHeight())+44)+'px';
-          }
-          var embed=plus.webview.create(ws.id,'embed',{top:topoffset,bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
+          console.log(ws.article_url);
+          console.log(ws.article_comment_url);
+          console.log(ws.article_title);
+          var embed = openWebviewByHome(ws.id, ws.article_url, ws.article_comment_url, ws.article_title);
           ws.append(embed);
         }
       });

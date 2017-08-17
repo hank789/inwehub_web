@@ -94,6 +94,7 @@
         project_description:'',
         disableButton:true,
         deleted_images:[],
+        percentCompleted:0,
         editMode:false,
         images:[],
         loading: 1
@@ -167,6 +168,10 @@
           return;
         }
 
+//        if (this.images.length === 0) {
+//          return;
+//        }
+
         this.disableButton = false;
       },
       submit(){
@@ -190,6 +195,10 @@
           return;
         }
 
+//        if (this.images.length === 0) {
+//            mui.toast('请添加附件');
+//            return;
+//        }
          //向后端发送的值；
         var data = {
           project_id:this.project_id,
@@ -207,8 +216,18 @@
               data['image_' +i] = compressBase64; //this.images[i].base64;
             }
         }
+
+        var options = {
+          onUploadProgress: function(progressEvent) {
+            this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            mui.uploadWaitingValue(this.percentCompleted);
+          }
+        };
+
+        mui.showUploadWaiting();
+
         //提交时把信息
-        postRequest(`project/step_one`, data).then(response => {
+        postRequest(`project/step_one`, data, false, options).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -261,7 +280,7 @@
       MTextarea
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
 
       this.getData();
     },
@@ -280,7 +299,7 @@
       },
       images: function (newMoney, oldMoney) {
         this.isEnableButton();
-      }
+      },
     }
   };
 </script>

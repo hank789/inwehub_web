@@ -16,7 +16,8 @@ import store from './../../stores/store';
 //主体的组件；
 import App from './App';
 
-////检查错误信息插件
+//检查错误信息插件
+
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -28,6 +29,7 @@ Raven
 .config(sentry_url)
 .addPlugin(RavenVue, Vue)
 .install();
+
 
 //正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';
@@ -42,6 +44,7 @@ import './../../styles/mui.css';
 import './../../styles/common.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/iconfont.css';
+import './../../styles/percircle.css';
 
 import './../../js/iconfont.js';
 
@@ -51,38 +54,11 @@ Vue.use(VueWechatTitle);
 //   try: 3
 // });
 
-var waitingElements = [];
-mui.waiting = function () {
+import {bindWaitting} from '../../utils/waiting';
+bindWaitting(mui);
 
-  //var canShutdown = false;
-
-  // var mask = mui.createMask(function(){
-  //   return canShutdown;
-  // });
-
-  var indicator = document.getElementsByClassName('mint-indicator');
-  if (indicator.length) {
-    return;
-  }
-
-  var element = document.createElement('div');
-  element.innerHTML='<div class="mint-indicator" style="display: block;"><div class="mint-indicator-wrapper" style="padding: 8px 8px 4px 8px;"><div class="mint-indicator-spin"><div class="mint-spinner-fading-circle circle-color-19" style="width: 20px; height: 20px;"><div class="mint-spinner-fading-circle-circle is-circle2"></div><div class="mint-spinner-fading-circle-circle is-circle3"></div><div class="mint-spinner-fading-circle-circle is-circle4"></div><div class="mint-spinner-fading-circle-circle is-circle5"></div><div class="mint-spinner-fading-circle-circle is-circle6"></div><div class="mint-spinner-fading-circle-circle is-circle7"></div><div class="mint-spinner-fading-circle-circle is-circle8"></div><div class="mint-spinner-fading-circle-circle is-circle9"></div><div class="mint-spinner-fading-circle-circle is-circle10"></div><div class="mint-spinner-fading-circle-circle is-circle11"></div><div class="mint-spinner-fading-circle-circle is-circle12"></div><div class="mint-spinner-fading-circle-circle is-circle13"></div></div></div></div><div class="mint-indicator-mask"></div></div>';
-  document.body.appendChild(element);
-
-  waitingElements.push(element);
-
-  mui.closeWaiting = function(){
-    var element = waitingElements.pop();
-    if (element) {
-      //mask.close();
-      document.body.removeChild(element);
-    }
-  }
-
-  //mask.show();//显示遮罩
-}
-
-
+import {bindUploadWaiting} from '../../utils/uploadProgress';
+bindUploadWaiting(mui);
 
 Vue.use(TimeAgo, {
   name: 'timeago',
@@ -107,21 +83,88 @@ import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
 
+import '../../js/socket.io.min';
+
+import Echo from "laravel-echo";
+window.Echo = new Echo({
+  broadcaster: 'socket.io',
+  host: process.env.ECHO_SERVER_ADDRESS,
+  auth:
+    {
+      headers:
+        {
+          'Authorization': 'Bearer ' + 'nb35mdq2ca9828qgl4sgjf4imil5811sn41qsmcaph0p3h6sa5ht8hoktdeg'
+        }
+    }
+});
+
 import VueQRCodeComponent from 'vue-qrcode-component';
 Vue.component('qr-code', VueQRCodeComponent);
 
 
 import {hideHeaderHandler} from '../../utils/wechat';
 
+import {autoHeight} from '../../utils/statusBar';
+
+import EventObj from '../../utils/event';
+
+
+//mui.toast = (str) => {
+//   var oldtoast = mui.toast;
+//   mui.toast = (str) => { return false }
+//
+//   var toast = document.querySelector("#toast");
+//   toast.style.display ="block";
+//   //console.log(toast.innerHTML);
+//   toast.innerHTML = str;
+//
+//   var timer = setInterval(() => {
+//     toast.style.display = "none";
+//     mui.toast = oldtoast;
+//     clearTimeout(timer);
+//   },3000);
+//}
+
+
 Vue.mixin({
   activated(){
+    if (!this.$el || this.$el.id !== 'router-view') {
+      return;
+    }
 
+    autoHeight();
     hideHeaderHandler(this, 'activated');
   },
   mounted() {
+    if (!this.$el || this.$el.id !== 'router-view') {
+       return;
+    }
+
+    //调节状态栏高度方法
+    EventObj.addEventListener('autoHeight', (e) => {
+       console.log('calledEvent: autoHeight');
+       autoHeight();
+    });
+
+    //刷行数据方法
+    EventObj.addEventListener('refreshPageData', (e) => {
+       console.log('calledEvent: refreshPageData');
+       if (this.refreshPageData) {
+           this.refreshPageData();
+       }
+    });
+
+    autoHeight();
     hideHeaderHandler(this, 'mounted');
+  },
+  created(){
+    //当使用webview方式打开的话，会显示webview，并绑定侧滑事件
+    if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
+      showWebview();
+    }
   }
-})
+});
+
 
 mui.muiOldBack = mui.back;
 mui.back = function(){

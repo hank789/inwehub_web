@@ -1,7 +1,7 @@
 <template>
 <div>
   <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack()"></a>
     <h1 class="mui-title">InweHub企业版</h1>
   </header>
 
@@ -67,7 +67,7 @@
 
     <div class="moreWrapper">
       <div class="more">
-        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.push('/my')">切换至个人页面</a>
+        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.pushPlus('/my')">切换至个人页面</a>
       </div>
     </div>
 
@@ -96,6 +96,13 @@
     },
 
     methods: {
+      goBack(){
+           if (this.$route.query.back) {
+             this.$router.pushPlus(this.$route.query.back);
+           } else {
+             this.$router.pushPlus('/home');
+           }
+      },
       goSubmitRequirement(){
           if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
              this.$router.push('/company/help');
@@ -113,9 +120,6 @@
         } else {
           this.$router.push('/project/list');
         }
-      },
-      nothing(){
-
       },
       getRenzhengText(status){
          switch(status) {
@@ -156,7 +160,7 @@
 
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       this.initData();
     }
   };

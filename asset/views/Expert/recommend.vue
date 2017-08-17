@@ -109,7 +109,7 @@
       mobile: ''
     }),
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     computed: {
       infoIndustryTagsNames() {
