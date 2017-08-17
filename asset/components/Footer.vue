@@ -108,7 +108,7 @@
     methods:{
       listen() {
         var currentUser = localEvent.getLocalItem('UserInfo');
-        if (currentUser.user_id){
+        if (currentUser.user_id && Echo){
           // 监听通知事件
           Echo.channel('notification.user.' + currentUser.user_id)
             .notification((notification) => {
