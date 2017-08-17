@@ -160,7 +160,7 @@
 
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       this.initData();
     }
   };

@@ -90,7 +90,7 @@
       }
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     mounted(){
       this.getCacheData();

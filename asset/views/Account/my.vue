@@ -296,7 +296,7 @@
 			}
 		},
 		created() {
-			showInwehubWebview();
+			//showInwehubWebview();
 		},
 		activated: function() {
 		    console.log('activated');

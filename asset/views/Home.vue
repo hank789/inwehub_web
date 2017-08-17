@@ -206,7 +206,7 @@
 			this.getData();
 		},
 		mounted() {
-			showInwehubWebview();
+			//showInwehubWebview();
 		},
 		computed: {
 			//首页倒计时；

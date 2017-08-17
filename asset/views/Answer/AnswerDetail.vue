@@ -464,7 +464,7 @@
       '$route': 'getData'
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       this.getData();
     }
   }

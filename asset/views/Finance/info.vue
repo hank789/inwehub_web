@@ -87,7 +87,7 @@
       });
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       this.initData();
     },
     watch: {

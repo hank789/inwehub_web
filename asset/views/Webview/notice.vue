@@ -16,7 +16,7 @@
       loading:1
     }),
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     methods: {
 

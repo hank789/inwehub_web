@@ -34,10 +34,10 @@
       }
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     mounted(){
-      
+
     }
   };
 </script>

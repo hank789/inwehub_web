@@ -170,7 +170,7 @@
       }
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       if (this.$route.query.id) {
         var id = this.$route.query.id;
         if (id) {

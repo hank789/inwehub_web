@@ -74,7 +74,7 @@ All Rights Reserved</div>
           this.appVersion = 'for android V' + obj.version;
         }
       }
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     methods: {
       isWeiXin(){
