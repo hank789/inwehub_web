@@ -552,7 +552,7 @@
 
 	.my-apply div svg {
 		margin-top: 10px;
-		margin-left: 10px;
+		margin-left: 6px;
 		margin-right: 2px;
 		font-size: 40px;
 		color: rgb(3, 174, 249);
@@ -626,13 +626,13 @@
 
 	.my-option {
 		width: 100%;
-		height: 130px;
 		background: #FFFFFF;
 		padding: 0;
 		margin: 0;
 		list-style: none;
 		padding-left: 16px;
 		padding-right: 16px;
+	    margin-bottom: 79px;
 	}
 
 	.my-option li {
