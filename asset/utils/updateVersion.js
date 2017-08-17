@@ -65,10 +65,6 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
-    var homews = plus.webview.getWebviewById('HBuilder');
-    homews.setStyle({
-      popGesture: 'none'
-    });
     plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
