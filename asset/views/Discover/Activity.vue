@@ -23,7 +23,7 @@
 <script>
   export  default {
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
     }
   };
 </script>

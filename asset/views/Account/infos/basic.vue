@@ -138,7 +138,7 @@
       object_type: 'user'
     }),
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       this.getUserInfo();
 
       /*

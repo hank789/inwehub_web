@@ -49,7 +49,7 @@
 
       <MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该教育经历的详细信息'"></MTextarea>
 
-      
+
     </div>
   </div>
 </template>
@@ -279,7 +279,7 @@
       MTextarea
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       let id = parseInt(this.$route.params.id);
       console.log("id:"+id);
       this.id = id;

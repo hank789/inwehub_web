@@ -9,7 +9,7 @@
 
     <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
       <div class="mui-scroll">
-      	
+
      <div class="container" v-if="!this.list.length && !loading" >
 		<svg class="icon" aria-hidden="true">
 			<use xlink:href="#icon-zanwushuju"></use>
@@ -18,7 +18,7 @@
 	</div>
 
 
-      	
+
         <ul class="my-focus">
           <li class="my-focus-item" v-for="(item, index) in list" >
               <img :src="item.user_avatar_url" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
@@ -123,7 +123,7 @@
         });
 
       }
-      },   
+      },
     computed: {
     	 nothing () {
        	 if (this.tip == "关注成功") {
@@ -140,7 +140,7 @@
       }
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     mounted(){
       window.addEventListener('refreshData', (e)=>{
@@ -178,7 +178,7 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220,220,220);
- 	
+
  }
  p {
  	margin: 0;
@@ -187,7 +187,7 @@
  .mui-content{
  	background: #FFFFFF;
  }
- 
+
  .my-focus{
  	margin: 0;
  	padding: 0;
@@ -202,7 +202,7 @@
  	padding-top: 10px;
  	padding-bottom: 10px;
  	position: relative;
- 	
+
  }
  .my-focus-item img{
  	width: 44px;
@@ -212,7 +212,7 @@
  	float: left;
  }
  .my-focus-item div{
- 	
+
  	float: left;
  }
  .my-focus-item>svg{
@@ -228,20 +228,20 @@
     font-family: "PingFangSC";
 	font-size: 14px;
 	color: #444444;
- 	
+
  }
- 
+
  .my-focus-item div p:nth-of-type(1) svg{
  	font-size:20px;
  	margin-bottom: 2px;
  	color: #3c95f9;
 
  }
- 
+
  .my-focus-item div p:nth-of-type(2) span{
  	display: inline-block;
  	max-width: 80px;
-    height: 14px; 
+    height: 14px;
  	font-family: "PingFangSC";
 	font-size:13px;
 	color: #b4b4b6;
@@ -251,7 +251,7 @@
 .my-focus-item div p:nth-of-type(2) span:nth-of-type(1){
  	display: inline-block;
  	max-width: 80px;
-    height: 14px; 
+    height: 14px;
  	font-family: "PingFangSC";
 	font-size:13px;
 	color: #b4b4b6;
@@ -270,23 +270,23 @@
  	background:#b4b4b6;
  	margin-bottom: 5px;
  }*/
- 
+
  .container {
 		position: absolute;
 		top: 500%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-family: "PingFangSC";
 		font-size: 12px;
 		color: #c8c8c8;
 	}
-    
+
 </style>

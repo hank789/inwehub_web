@@ -367,7 +367,7 @@
       MTextarea
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       let id = parseInt(this.$route.params.id);
       console.log("id:"+id);
       this.id = id;

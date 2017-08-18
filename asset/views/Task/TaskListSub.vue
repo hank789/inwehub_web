@@ -121,7 +121,7 @@
       }
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       if (this.isFromDetail()) {
         var list = this.$store.state.task.list;
       } else {
@@ -158,7 +158,7 @@
         if (!task.deadline) {
           return false;
         }
-       
+
         var endtime = this.getEndTime(task);
         var currentTime = (new Date()).getTime() / 1000;
         if (endtime < currentTime) {
@@ -229,11 +229,11 @@
         },1000);
       },
       //时间处理；
-      timeago(time) {                                              
-        let newDate = new Date();                                  
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));      
-        return newDate;                                            
-      },                                                           
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      },
       //下拉刷新具体执行的逻辑处理；
       getPrevList(){
         postRequest(`task/myList`, {}).then(response => {

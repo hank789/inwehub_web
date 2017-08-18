@@ -252,7 +252,7 @@
       }
     },
     created () {
-        showInwehubWebview();
+        //showInwehubWebview();
 
         if (this.$route.query.goback) {
             this.canBack = true;

@@ -112,8 +112,7 @@ function openWebviewByHome(id, url, pathUrl, title)
       bounce:'none', //不允许滑动
       scrollIndicator:'none', //不显示滚动条
     });
-    embed.show();
-    webview.append(embed);
+
 
     //创建评论链接
     var view = new plus.nativeObj.View('test', {bottom:'0px',left:'39%',height:'44px',width:'100px'});
@@ -125,10 +124,32 @@ function openWebviewByHome(id, url, pathUrl, title)
       console.log('准备跳转:'+pathUrl + '?from=webview');
       openWebviewByUrl(pathUrl + '?from=webview');
     }, false);
-    view.show();
 
-    webview.append(view);
-    webview.show();
+    //兼容android
+    if (mui.os.plus) {
+      if (mui.os.android) {
+        //创建返回链接
+        var viewBack = new plus.nativeObj.View('test', {top: '0px', left: '0px', height: '44px', width: '100px'});
+
+        viewBack.draw([
+          {
+            tag: 'rect',
+            id: 'rect',
+            rectStyles: {color: 'rgba(0,0,0,0)'},
+            position: {top: '0px', left: '0px', width: '100%', height: '44px'}
+          },
+        ]);
+        viewBack.addEventListener('click', () => {
+          webviewBackButton();
+        }, false);
+        webview.append(viewBack);
+      }
+    }
+
+
+    embed.append(view);
+
+    webview.append(embed);
 
     return webview;
 }

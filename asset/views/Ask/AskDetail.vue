@@ -341,7 +341,7 @@
       '$route': 'getDetail'
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       this.getDetail();
     }
   }

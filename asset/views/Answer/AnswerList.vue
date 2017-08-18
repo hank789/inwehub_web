@@ -104,7 +104,7 @@
       this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       if (this.isFromDetail()) {
           var list = this.$store.state.answers.list;
       } else {
