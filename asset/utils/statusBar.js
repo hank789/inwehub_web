@@ -2,8 +2,13 @@ function setStatusBarBackgroundAndStyle(baColor, style)
 {
     mui.plusReady(function () {
       if (mui.os.plus) {
-        plus.navigator.setStatusBarBackground(baColor);
-        plus.navigator.setStatusBarStyle(style);
+        var ss = plus.navigator.getStatusBarBackground();
+        if (ss !== baColor) {
+          console.log("statusBgcolor:", baColor);
+          console.log("statusBarStyle:", style);
+          plus.navigator.setStatusBarBackground(baColor);
+          plus.navigator.setStatusBarStyle(style);
+        }
       }
     });
 }
@@ -28,7 +33,6 @@ function autoStatusBar()
   var statusBarStyleElement = document.getElementById('statusBarStyle');
 
   if (statusBarStyleElement) {
-    console.log('监测到statusBarStyle， 读取配置参数');
     bgColor = statusBarStyleElement.getAttribute('bgColor');
     mode = statusBarStyleElement.getAttribute('mode');
     background = statusBarStyleElement.getAttribute('background');
@@ -49,8 +53,7 @@ function autoStatusBar()
   } else {
     document.body.style.background = '';
   }
-  console.log("statusBgcolor:", bgColor);
-  console.log("statusBarStyle:", mode);
+
   console.log("bodyBackground:", background);
 }
 
