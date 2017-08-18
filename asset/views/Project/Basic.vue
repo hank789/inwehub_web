@@ -280,7 +280,7 @@
       MTextarea
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
 
       this.getData();
     },

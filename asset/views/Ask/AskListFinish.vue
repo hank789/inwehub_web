@@ -210,7 +210,7 @@
       this.$store.dispatch(ASKS_FINISH_LIST_APPEND, this.asks);
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       if (this.isFromDetail()) {
         var list = this.$store.state.asksFinish.list;
       } else {

@@ -60,7 +60,7 @@
     },
     created(){
       // 点击一次进行跳转；
-      showInwehubWebview();
+      //showInwehubWebview();
     },
     methods: {
 

@@ -189,7 +189,7 @@
       next();
     },
     created(){
-      showInwehubWebview();
+      //showInwehubWebview();
       var pos = localEvent.getLocalItem('projectPos');
       if (pos) {
           this.lastY = pos.lastY;

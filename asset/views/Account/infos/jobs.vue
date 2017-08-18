@@ -111,7 +111,7 @@
 
 		},
 		created() {
-			showInwehubWebview();
+			//showInwehubWebview();
 			this.initData();
 		}
 	}
@@ -123,30 +123,30 @@
 		height: 100%;
 		background: #FFFFFF;
 	}
-	
+
 	.intro {
 		width: 100%;
 		height: 60px;
 		position: relative;
 	}
-	
+
 	.intro .slider {
 		width: 100%;
 		height: 60px;
 	}
-	
+
 	.intro .slider p:nth-of-type(1) {
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.intro .slider p:nth-of-type(2) span {
 		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.intro .slider p:nth-of-type(2) i {
 		display: inline-block;
 		width: 1px;
@@ -154,7 +154,7 @@
 		margin: 0 3px -1px 3px;
 		background: rgb(220, 220, 220);
 	}
-	
+
 	.intro svg {
 		position: absolute;
 		font-size: 18px;
@@ -162,7 +162,7 @@
 		top: 13px;
 		right: 15px;
 	}
-	
+
 	.add {
 		width: 64px;
 		height: 64px;
@@ -174,16 +174,16 @@
 		text-align: center;
 		line-height: 64px;
 	}
-	
+
 	.add svg {
 		font-size: 22px;
 		color: #FFFFFF;
 	}
-	
+
 	#roof {
 		z-index: 999;
 	}
-	
+
 	.mui-table-view:after {
 		position: absolute;
 		right: 15px;
@@ -193,7 +193,7 @@
 		content: '';
 		background: #f2f2f2;
 	}
-	
+
 	.mui-table-view-cell:after {
 		position: absolute;
 		right: 15px;
@@ -203,25 +203,25 @@
 		content: '';
 		background: #f2f2f2;
 	}
-	
+
 	.box-shadow-3 {
 		-webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 		-moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 		box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 	}
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-family: "PingFangSC";
 		font-size: 12px;

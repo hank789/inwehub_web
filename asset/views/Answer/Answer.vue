@@ -167,7 +167,7 @@
       }
     },
     created () {
-      showInwehubWebview();
+      //showInwehubWebview();
       let id = parseInt(this.$route.params.id);
       this.id = id;
     }
