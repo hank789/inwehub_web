@@ -523,7 +523,7 @@ const routes = [{
 	},
 	{ //taskbar 任务动态
 		path: '/taskbar',
-		component: require('../../../views/Task/taskbar.vue'),
+		component: require('../../../views/Task/Taskbar.vue'),
 		meta: {
 			title: '任务动态',
 			wechatHideHeader: true,
