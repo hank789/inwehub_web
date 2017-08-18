@@ -112,8 +112,7 @@ function openWebviewByHome(id, url, pathUrl, title)
       bounce:'none', //不允许滑动
       scrollIndicator:'none', //不显示滚动条
     });
-    embed.show();
-    webview.append(embed);
+
 
     //创建评论链接
     var view = new plus.nativeObj.View('test', {bottom:'0px',left:'39%',height:'44px',width:'100px'});
@@ -125,10 +124,9 @@ function openWebviewByHome(id, url, pathUrl, title)
       console.log('准备跳转:'+pathUrl + '?from=webview');
       openWebviewByUrl(pathUrl + '?from=webview');
     }, false);
-    view.show();
 
-    webview.append(view);
-    webview.show();
+    embed.append(view);
+    webview.append(embed);
 
     return webview;
 }
