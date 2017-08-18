@@ -2,13 +2,22 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
-      <h1 class="mui-title">任务</h1>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">动态</h1>
     </header>
+
+    <!--导航栏-->
+    <div class="menu">
+      <span @tap.stop.prevent="">任务</span>
+      <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
+      <i></i>
+    </div>
+
 
     <div class="mui-content list-empty" v-if="nothing==1">
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
-          <div class="">
+          <div>
             <div class="title">暂无任务</div>
             <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
           </div>
@@ -64,7 +73,7 @@
 
 
 
-
+    <div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
   </div>
 </template>
 
@@ -287,9 +296,46 @@
 
 
 <style scoped>
-  #pullrefresh {
-    margin-top: 10px;
+  /*导航栏的样式*/
+  .menu{
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    top: 44px;
+    z-index: 99;
+    background:#f3f4f6;
   }
+  .menu span{
+    display: inline-block;
+    width: 49%;
+    height: 100%;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+  }
+  .menu span:nth-of-type(1){
+    color: #3c95f9;
+  }
+  .menu i {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 1.8px;
+    left: 20%;
+    bottom: 0.5px;
+    background:#3c95f9;
+  }
+
+  /*滚动区域*/
+
+  #pullrefresh {
+    margin-top: 45px;
+    background: #ffffff;
+  }
+
+
 
   .task-list {
     line-height: 33px;
@@ -406,5 +452,31 @@
     display: inline-block;
   }
 
+  .task-list .mui-table-view-cell {
+    margin-bottom: 0px;
+  }
 
+  .mui-table-view:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 0px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
+
+  .mui-table-view:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
 </style>
