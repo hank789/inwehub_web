@@ -585,6 +585,38 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ //balancebar 余额变动
+		path: '/balancebar',
+		component: require('../../../views/Task/balancebar.vue'),
+		meta: {
+			title: '余额变动',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //chat 客服小哈
+		path: '/chat',
+		component: require('../../../views/Task/chat.vue'),
+		meta: {
+			title: '客服小哈',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
 	{ //ask-detail
 		path: '/ask/:id',
 		component: require('../../../views/Ask/AskDetail.vue'),

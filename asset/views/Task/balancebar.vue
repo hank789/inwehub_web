@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
     	  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">积分变动</h1>
+      <h1 class="mui-title">余额变动</h1>
     </header>
 
     <div class="mui-content"  >
@@ -14,16 +14,17 @@
    	  	<li>
    	  		<p>
    	  			<span class="check">
-   	  				<i>积分变动</i>
+   	  				<i>交易成功</i>
    	  				<i>2017年6月27日 17:00</i>
    	  			</span>
    	  			<span><i>+</i>12</span>
-   	  			<span>成长值到账</span>
+   	  			<span>问答服务费结算到账</span>
    	  			<i class="bot"></i>
    	  		</p>
    	  		<p>
    	  			<span>用户名：<i>张三丰</i></span>
    	  			<span>剩余积分：<i>3393</i></span>
+   	  			<span>感谢您对inwehub的信任!</span>
    	  			<i class="bot"></i>
    	  		</p>
    	  		<p>
@@ -103,7 +104,7 @@ div,p,span,i,img,ul,li,a{
 /*主体部分样式*/
 ul{
 	width: 100%;
-	height: 277px;
+	height: 304px;
 	padding: 0px 16px 0 16px;
 	margin-top: 11px;
 	
@@ -113,7 +114,7 @@ ul p{
 }
 ul li{
  width: 100%;
- height: 238px;
+ height: 265px;
  background: #f3f4f6;
  margin-top: 11px;
  border: 0.5px solid #dcdcdc;
@@ -164,7 +165,7 @@ ul li p:nth-of-type(1) span:nth-of-type(3){
 
 ul li p:nth-of-type(2){
  width: 100%;
- height:76px;
+ height:103px;
 }
 
 ul li p:nth-of-type(2) span:nth-of-type(1){
@@ -172,6 +173,10 @@ ul li p:nth-of-type(2) span:nth-of-type(1){
 }
 
 ul li p:nth-of-type(2) span:nth-of-type(2){
+	margin-top: 6px;
+}
+
+ul li p:nth-of-type(2) span:nth-of-type(3){
 	margin-top: 6px;
 }
 

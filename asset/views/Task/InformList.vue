@@ -23,7 +23,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li>
+       	 <li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
        	 	<p>
        	 	   <span>余额变动</span>
@@ -59,7 +59,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li>
+       	 <li @tap.stop.prevent="$router.pushPlus('/chat')">
        	 	<img src="../../statics/images/service1.png" />  
        	 	<p>
        	 	   <span>客服小哈</span>
