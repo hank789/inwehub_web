@@ -128,7 +128,6 @@ function openWebviewByHome(id, url, pathUrl, title)
     view.show();
 
     webview.append(view);
-    webview.show();
 
     return webview;
 }
