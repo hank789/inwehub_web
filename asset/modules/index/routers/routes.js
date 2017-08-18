@@ -493,7 +493,39 @@ const routes = [{
 		path: '/task',
 		component: require('../../../views/Task/TaskListSub.vue'),
 		meta: {
-			title: '任务',
+			title: '动态',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ ///inform 消息
+		path: '/inform',
+		component: require('../../../views/Task/InformList.vue'),
+		meta: {
+			title: '动态',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //taskbar 任务动态
+		path: '/taskbar',
+		component: require('../../../views/Task/taskbar.vue'),
+		meta: {
+			title: '任务动态',
 			wechatHideHeader: true,
 			keepAlive: true
 		},
