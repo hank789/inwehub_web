@@ -537,6 +537,54 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ //readbar 阅读发现
+		path: '/readbar',
+		component: require('../../../views/Task/readbar.vue'),
+		meta: {
+			title: '阅读发现',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //informbar 通知公告
+		path: '/informbar',
+		component: require('../../../views/Task/informbar.vue'),
+		meta: {
+			title: '通知公告',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //integralbar 积分变动
+		path: '/integralbar',
+		component: require('../../../views/Task/integralbar.vue'),
+		meta: {
+			title: '通知公告',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
 	{ //ask-detail
 		path: '/ask/:id',
 		component: require('../../../views/Ask/AskDetail.vue'),

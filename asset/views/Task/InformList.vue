@@ -13,7 +13,7 @@
     </div>
     <div class="content">
        <ul>
-       	 <li>
+       	 <li  @tap.stop.prevent="$router.pushPlus('/informbar')">
        	 	<img src="../../statics/images/inform1.png" />  
        	 	<div class="message">99</div>
        	 	<p>
@@ -32,7 +32,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li>
+       	 <li @tap.stop.prevent="$router.pushPlus('/integralbar')">
        	 	<img src="../../statics/images/integral1.png" />  
        	 	<p>
        	 	   <span>积分变动</span>
@@ -50,7 +50,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li>
+       	 <li @tap.stop.prevent="$router.pushPlus('/readbar')">
        	 	<img src="../../statics/images/read1.png" />  
        	 	<p>
        	 	   <span>阅读发现</span>
