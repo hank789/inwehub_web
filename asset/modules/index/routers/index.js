@@ -25,30 +25,36 @@ const router = new VueRouter({
   mode: 'hash',
   routes
 });
-const gaCode = process.env.GA_CODE;
 
-ga(router, gaCode);
+if (!window.isLocalEnv) {
+  const gaCode = process.env.GA_CODE;
 
-let mixpanelConfig = {
-  token: '688ee16000ddf4f44891e06b79847d4e'
-}
-Vue.use(VueMultianalytics, {
-  modules: {
-    mixpanel: mixpanelConfig
-  },
-  routing: {
-    vueRouter: router, //  Pass the router instance to automatically sync with router (optional)
-    preferredProperty: 'path', // By default 'path' and related with vueRouter (optional)
-    ingoredViews: [], // Views that will not be tracked
-    ignoredModules: ['ga','facebook','segment'] // Modules that will not send route change events. The event sent will be this.$ma.trackView({viewName: 'homepage'}, ['ga'])
+  ga(router, gaCode);
+
+  let mixpanelConfig = {
+    token: '688ee16000ddf4f44891e06b79847d4e'
   }
-})
+  Vue.use(VueMultianalytics, {
+    modules: {
+      mixpanel: mixpanelConfig
+    },
+    routing: {
+      vueRouter: router, //  Pass the router instance to automatically sync with router (optional)
+      preferredProperty: 'path', // By default 'path' and related with vueRouter (optional)
+      ingoredViews: [], // Views that will not be tracked
+      ignoredModules: ['ga','facebook','segment'] // Modules that will not send route change events. The event sent will be this.$ma.trackView({viewName: 'homepage'}, ['ga'])
+    }
+  })
+}
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('pushPlusUrl:'+url);
   if (mui.os.plus && (mui.os.ios || forceWebView)) {
-    this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
-    if (typeof(isLocalEnv) === "undefined") {
+
+    if (!window.isLocalEnv) {
+
+        this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
+
         if (/^http/.test(url)) {
           var nextUrl =  url;
         } else {

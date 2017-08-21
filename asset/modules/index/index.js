@@ -22,6 +22,13 @@ import RavenVue from 'raven-js/plugins/vue';
 
 
 if (typeof(isLocalEnv) === "undefined") {
+    window.isLocalEnv = false;
+} else {
+    console.log('isLocalEnv');
+    window.isLocalEnv = true;
+}
+
+if (!isLocalEnv) {
   console.log('in raven');
   var sentry_url = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478';
   if (process.env.NODE_ENV === 'production') {
