@@ -8,21 +8,14 @@ function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide
 
       console.log('calledMethod: openWebviewByUrl');
 
-      if (/^http/.test(url)) {
-        var nextUrl =  url;
-      } else {
-        var nextUrl = 'index.html#' + url;
-      }
-
-
-      var current_webview = plus.webview.getWebviewById(nextUrl);
+      var current_webview = plus.webview.getWebviewById(url);
       if (current_webview) {
           mui.fire(current_webview, 'autoHeight', false);
       }
 
       var webview = mui.openWindow({
-        url: nextUrl,
-        id: nextUrl,
+        url: url,
+        id: url,
         preload: false,//一定要为false
         show: {
           autoShow: autoShow,

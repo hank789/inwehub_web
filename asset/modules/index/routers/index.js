@@ -45,11 +45,27 @@ Vue.use(VueMultianalytics, {
 })
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
-  console.log('url:'+url);
+  console.log('pushPlusUrl:'+url);
   if (mui.os.plus && (mui.os.ios || forceWebView)) {
     this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
-    openWebviewByUrl(url, autoShow, aniShow, popGesture);
+    if (typeof(isLocalEnv) === "undefined") {
+        if (/^http/.test(url)) {
+          var nextUrl =  url;
+        } else {
+          var nextUrl = 'index.html#' + url;
+        }
+    } else {
+        if (/^http/.test(url)) {
+          var nextUrl =  url;
+        } else {
+          nextUrl = location.protocol + '//' + window.location.host + '/' + 'index.html#' + url;
+        }
+    }
+
+    console.log('pushPlusUrl-Webview:' + nextUrl);
+    openWebviewByUrl(nextUrl, autoShow, aniShow, popGesture);
   } else {
+    console.log('pushPlusUrl-router:' + url);
     router.push(url);
   }
 };
