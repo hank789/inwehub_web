@@ -205,8 +205,6 @@
 					this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name;
 
    					this.user = user;
-
-   					console.log(user);
 					this.loading = 0;
 
 				}));
