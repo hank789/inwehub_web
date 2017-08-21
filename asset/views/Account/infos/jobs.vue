@@ -22,12 +22,11 @@
 						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
 					</div>
 					<div class="mui-slider-handle  slider">
-						<p> {{ job.company }}</p>
+						<p class="mui-ellipsis"> {{ job.company }}</p>
 						<p>
 
-							<span>{{ job.begin_time }} 至 {{ job.end_time }}</span>
-							<i></i>
-							<span>{{ job.title }}</span>
+							<span class="mui-ellipsis">{{ job.begin_time }} 至 {{ job.end_time }}</span>
+							<span class="mui-ellipsis">{{ job.title }}</span>
 						</p>
 					</div>
 					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/job/' + job.id)">
@@ -139,21 +138,35 @@
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
+		width: 100%;
 	}
 
-	.intro .slider p:nth-of-type(2) span {
-		font-family: "PingFangSC";
-		font-size: 13px;
-		color: #808080;
+  .intro .slider p:nth-of-type(2){
+  	width: 100%;
+  	height: 13px;
+  	line-height: 13px;
+  	margin-top: 5px;
+  }
+	.intro .slider p:nth-of-type(2) span { 
+		display: block;
+		float: left;
+		max-width:135px;
+		height: 13px;
+    	    font-size: 13px;
+        color: #808080;	
 	}
-
-	.intro .slider p:nth-of-type(2) i {
+    .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
+     border-right: 1px solid rgb(220, 220, 220);
+     padding-right: 5px;
+     margin-right: 5px;
+    }
+	/*.intro .slider p:nth-of-type(2) i {
 		display: inline-block;
 		width: 1px;
 		height: 11px;
 		margin: 0 3px -1px 3px;
 		background: rgb(220, 220, 220);
-	}
+	}*/
 
 	.intro svg {
 		position: absolute;

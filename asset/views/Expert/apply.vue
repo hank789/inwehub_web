@@ -130,18 +130,22 @@
         }
 
         if (!this.company) {
-//      	    if(mui.os.android){
-        	    	   mui.toast('请填写当前公司');
-//      	    }else{
-//      	    	  console.log('请填写当前公司')
-//      	    }
-            
-         //  mui.toast('登陆成功',{ duration:'long', type:'div' })
+          mui.toast('请填写当前公司');
+          return;
+        }
+
+        if (!this.gender) {
+          mui.toast('请选择用户性别');
           return;
         }
 
         if (!this.title) {
           mui.toast('请填写当前职位');
+          return;
+        }
+
+        if (!this.time) {
+          mui.toast('请选择从业时间');
           return;
         }
 
@@ -436,12 +440,12 @@
   .noBottomBorder:after {
     display: none;
   }
-  
-  
+
+
   .mui-toast-message {
 	z-index: 999;
 	display: block;
 	}
-	
-	
+
+
 </style>

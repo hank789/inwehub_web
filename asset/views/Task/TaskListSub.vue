@@ -234,14 +234,14 @@
             mui.alert(response.data.message);
             mui.back();
           }
-            //请求成功的操作
+          //请求成功的操作
           if (response.data.data.list) {
             this.tasks = response.data.data.list;
           }
           //没有数据的显示框不显示；
           this.loading = 0;
           mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-           //向父组件传递参数；
+          //向父组件传递参数；
           this.$emit('countChange', response.data.data.total);
         });
       },

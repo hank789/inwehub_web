@@ -54,6 +54,8 @@
       },
       toClip(path)
       {
+        mui(".info-choose").popover('toggle');
+
         var t = this;
         plus.zip.compressImage({
             src: path,

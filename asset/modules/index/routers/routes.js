@@ -198,7 +198,8 @@ const routes = [{
 		path: '/my/info/edus',
 		component: require('../../../views/Account/infos/edus.vue'),
 		meta: {
-			title: '教育经历'
+			title: '教育经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -208,7 +209,8 @@ const routes = [{
 		path: '/my/info/jobs',
 		component: require('../../../views/Account/infos/jobs.vue'),
 		meta: {
-			title: '工作经历'
+			title: '工作经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -218,7 +220,8 @@ const routes = [{
 		path: '/my/info/projects',
 		component: require('../../../views/Account/infos/projects.vue'),
 		meta: {
-			title: '项目经历'
+			title: '项目经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -228,7 +231,8 @@ const routes = [{
 		path: '/my/info/trains',
 		component: require('../../../views/Account/infos/trains.vue'),
 		meta: {
-			title: '培训经历'
+			title: '培训经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -493,7 +497,87 @@ const routes = [{
 		path: '/task',
 		component: require('../../../views/Task/TaskListSub.vue'),
 		meta: {
-			title: '任务',
+			title: '动态',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ ///inform 消息
+		path: '/inform',
+		component: require('../../../views/Task/InformList.vue'),
+		meta: {
+			title: '动态',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //taskbar 任务动态
+		path: '/taskbar',
+		component: require('../../../views/Task/Taskbar.vue'),
+		meta: {
+			title: '任务动态',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //readbar 阅读发现
+		path: '/readbar',
+		component: require('../../../views/Task/readbar.vue'),
+		meta: {
+			title: '阅读发现',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //informbar 通知公告
+		path: '/informbar',
+		component: require('../../../views/Task/informbar.vue'),
+		meta: {
+			title: '通知公告',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //integralbar 积分变动
+		path: '/integralbar',
+		component: require('../../../views/Task/integralbar.vue'),
+		meta: {
+			title: '通知公告',
 			wechatHideHeader: true,
 			keepAlive: true
 		},

@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav goheader">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.push('/company/my')"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack()"></a>
       <h1 class="mui-title">需求管理</h1>
     </header>
 
@@ -63,7 +63,14 @@
       //showInwehubWebview();
     },
     methods: {
-
+    	//判断返回哪个页面；
+    	goBack(){
+           if (this.$route.query.back) {
+             this.$router.pushPlus(this.$route.query.back);
+           } else {
+             this.$router.pushPlus('/company/my');
+           }
+      },
       //下拉刷新;
       pulldownRefresh() {
         setTimeout(() => {
