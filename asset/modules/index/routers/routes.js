@@ -734,6 +734,18 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { // readhub
+    path: '/readhub/detail',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Readhub/DetailH5.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 	{ // setting
 		path: '/setting',
 		meta: {

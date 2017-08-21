@@ -279,7 +279,8 @@
               }
             });
           } else {
-            window.location.href = url;
+            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
           }
         } else {
           this.$router.pushPlus(url);
