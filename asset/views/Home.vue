@@ -113,7 +113,7 @@
 
 
              <!--手机端-->
-             <div class="suspend">
+             <div class="suspend" v-if="isH5">
 	            <p>
 	            	    <svg class="icon" aria-hidden="true">
 					  <use xlink:href="#icon-logotuxing"></use>
@@ -124,19 +124,19 @@
 	            	   <span>查看更多专家信息</span>
 	            </p>
 	            <p>
-	            	  立即打开
+	            	  <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp">立即打开</a>
 	            </p>
 	        </div>
 
            <!--微信端-->
-           <div class="suspension">
+           <div class="suspension" v-if="isWeixin">
            	   <p>
            	   	  <svg class="icon" aria-hidden="true">
 					  <use xlink:href="#icon-logotuxing"></use>
 				    </svg>
            	   </p>
            	   <p>下载APP</p>
-           	   <p>立即打开</p>
+           	   <p> <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp">立即打开</a></p>
            </div>
 
 
@@ -186,7 +186,9 @@
 			currentTime: parseInt((new Date()).getTime() / 1000),
 			loading: true,
 			timeAutoEndTimeOut: false,
-			swiperOption:{}
+			swiperOption:{},
+      isWeixin:false,
+      isH5:false,
 		}),
 		created() {
 			this.swiperOption = {
@@ -207,6 +209,14 @@
 		},
 		mounted() {
 			//showInwehubWebview();
+
+      if (!mui.os.plus) {
+          if (mui.os.wechat) {
+              this.isWeixin = true;
+          } else {
+              this.isH5 = true;
+          }
+      }
 		},
 		computed: {
 			//首页倒计时；
@@ -279,8 +289,8 @@
               }
             });
           } else {
-//            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-//            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
+            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
               window.location.href = url;
 
           }
@@ -437,7 +447,6 @@
 	position: absolute;
 	top:44px;
 	z-index: 999;
-	display: none;
 }
 .suspend p:nth-of-type(1){
 	float: left;
@@ -473,7 +482,7 @@
 .suspend p:nth-of-type(2)>span:nth-of-type(2){
 	margin-top: -3px;
 }
-.suspend p:nth-of-type(3){
+.suspend a{
 	float:right;
 	width: 76px;
 	height:30px;
@@ -496,7 +505,6 @@
     box-shadow:0px 3px 5px #b4b4b6;
     -webkit-box-shadow:0px 3px 5px #b4b4b6;
     -moz-box-shadow:0px 3px 5px #b4b4b6;
-    display: none;
 }
 .suspension p:nth-of-type(1){
 	float: left;
@@ -520,7 +528,7 @@
 	margin-top: 14px;
 	margin-left: 10px;
 }
-.suspension p:nth-of-type(3){
+.suspension a{
 	float:right;
 	width:76px;
 	height:30px;
