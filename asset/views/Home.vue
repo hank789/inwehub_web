@@ -774,7 +774,7 @@
 	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
-		margin-bottom: 2px;
+		margin-bottom: 2.5px;
 		margin-left: -3px;
 	}
 
