@@ -28,7 +28,7 @@
     	
     	   <div class="message" id="message">
     	   	  <input type="text" />
-    	   	  <svg class="icon" aria-hidden="true" @tap.stop.prevent="pop($event)">
+    	   	  <svg class="icon" aria-hidden="true" >
 			<use xlink:href="#icon-plus"></use>
 		  </svg>
     	   	  <span>发送</span>
@@ -55,21 +55,21 @@
 	        
 		},
 		methods: {
-			uploadAvatar(){
-			this.$refs.uploadHeader.uploadAvatar();
-		  },
-		  getStyle(element, attr){
-		      if(element.currentStyle){
-		        return element.currentStyle[attr];
-		      }else{
-		        return window.getComputedStyle(element,null)[attr];
-		      }
-		    },
-			pop(event){
-				var oImg = document.getElementById('message');
-                 window.getComputedStyle(oImg, null).bottom = '95px'; 
-			      console.log(window.getComputedStyle(oImg, null).bottom)   
-			}
+//			uploadAvatar(){
+//			this.$refs.uploadHeader.uploadAvatar();
+//		  },
+//		  getStyle(element, attr){
+//		      if(element.currentStyle){
+//		        return element.currentStyle[attr];
+//		      }else{
+//		        return window.getComputedStyle(element,null)[attr];
+//		      }
+//		    },
+//			pop(event){
+//				var oImg = document.getElementById('message');
+//               window.getComputedStyle(oImg, null).bottom = '95px'; 
+//			      console.log(window.getComputedStyle(oImg, null).bottom)   
+//			}
 		}
 	}
 </script>
