@@ -23,10 +23,10 @@
 						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
 					</div>
 					<div class="mui-slider-handle  slider">
-						<p> {{ train.agency }}</p>
+						<p class="mui-ellipsis"> {{ train.agency }}</p>
 						<p>
 
-							<span>{{ train.get_time }} 至 {{ train.certificate }}</span>
+							<span class="mui-ellipsis">{{ train.get_time }} 至 {{ train.certificate }}</span>
 
 						</p>
 					</div>
@@ -137,24 +137,20 @@
 	}
 
 	.intro .slider p:nth-of-type(1) {
-
+        width: 100%;
 		font-size: 14px;
 		color: #444444;
 	}
 
 	.intro .slider p:nth-of-type(2) span {
-
+        display: block;
+        width: 100%;
 		font-size: 13px;
 		color: #808080;
+		
 	}
 
-	.intro .slider p:nth-of-type(2) i {
-		display: inline-block;
-		width: 1px;
-		height: 11px;
-		margin: 0 3px -1px 3px;
-		background: rgb(220, 220, 220);
-	}
+	
 
 	.intro svg {
 		position: absolute;

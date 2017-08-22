@@ -134,8 +134,7 @@
               base64: base64,
               isNew:true,
             };
-            console.log(imgInfo);
-            console.log(this.images);
+
             this.images.push(imgInfo);
         });
       },

@@ -279,7 +279,10 @@
               }
             });
           } else {
-            window.location.href = url;
+            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
+            //window.location.href = url;
+
           }
         } else {
           this.$router.pushPlus(url);
@@ -771,7 +774,7 @@
 	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
-		margin-bottom: 2px;
+		margin-bottom: 2.5px;
 		margin-left: -3px;
 	}
 

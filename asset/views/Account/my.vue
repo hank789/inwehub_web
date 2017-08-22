@@ -94,7 +94,7 @@
 					<span v-html="getNumbers(0)"></span>
 					<span>我的竞标</span>
 				</li>
-				<li @tap.stop.prevent="exclusive(expert_apply_status)">
+				<li @tap.stop.prevent="exclusive(company_apply_status)">
 					<span v-html="getNumbers(projects)"></span>
 					<span>我的项目</span>
 				</li>
@@ -211,7 +211,7 @@
 			exclusive(status){
 				switch(status) {
 					case 2:
-						this.$router.pushPlus('/project/list');
+						this.$router.pushPlus('/project/list?back=/my');
 						break;
 					default:
 						mui.toast("您还不是企业版账号，请点击申请企业账号前往认证");

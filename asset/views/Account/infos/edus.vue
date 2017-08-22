@@ -23,14 +23,14 @@
 						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
 					</div>
 					<div class="mui-slider-handle  slider">
-						<p> {{ edu.school }}</p>
+						<p class="mui-ellipsis"> {{ edu.school }}</p>
 						<p>
 
-							<span>{{ edu.begin_time }}  至 {{ edu.end_time }}</span>
-							<i></i>
-							<span>{{ edu.major }}</span>
-							<i></i>
-							<span>{{ edu.degree}}</span>
+							<span class="mui-ellipsis">{{ edu.begin_time }}  至 {{ edu.end_time }}</span>
+							
+							<span class="mui-ellipsis">{{ edu.major }}</span>
+							
+							<span class="mui-ellipsis">{{ edu.degree}}</span>
 						</p>
 					</div>
 					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/edu/'+edu.id)">
@@ -140,23 +140,41 @@
 	}
 
 	.intro .slider p:nth-of-type(1) {
-
+        width: 100%;
 		font-size: 14px;
 		color: #444444;
 	}
+	
+	.intro .slider p:nth-of-type(2){
+	  	width: 100%;
+	  	height: 13px;
+	  	line-height: 13px;
+	  	margin-top: 5px;
+	  }
 
 	.intro .slider p:nth-of-type(2) span {
-
+		display: block;
+		float: left;
 		font-size: 13px;
 		color: #808080;
+		height: 13px;
+    	    font-size: 13px;
+        color: #808080;	
 	}
-
-	.intro .slider p:nth-of-type(2) i {
-		display: inline-block;
-		width: 1px;
-		height: 11px;
-		margin: 0 3px -1px 3px;
-		background: rgb(220, 220, 220);
+    .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
+		max-width:128px;	
+	}
+	 .intro .slider p:nth-of-type(2) span:nth-of-type(2) {
+		max-width:128px;	
+		border-right: 1px solid rgb(220, 220, 220);
+		border-left: 1px solid rgb(220, 220, 220);
+		margin-right: 5px;
+		margin-left: 5px;
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+	 .intro .slider p:nth-of-type(2) span:nth-of-type(3) {
+	     max-width:28px;
 	}
 
 	.intro svg {

@@ -17,18 +17,28 @@ import store from './../../stores/store';
 import App from './App';
 
 //检查错误信息插件
-
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
-var sentry_url = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478';
-if (process.env.NODE_ENV === 'production') {
-sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
+
+if (typeof(isLocalEnv) === "undefined") {
+    window.isLocalEnv = false;
+} else {
+    console.log('isLocalEnv');
+    window.isLocalEnv = true;
 }
-Raven
-.config(sentry_url)
-.addPlugin(RavenVue, Vue)
-.install();
+
+if (!isLocalEnv) {
+  console.log('in raven');
+  var sentry_url = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478';
+  if (process.env.NODE_ENV === 'production') {
+    sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
+  }
+  Raven
+    .config(sentry_url)
+    .addPlugin(RavenVue, Vue)
+    .install();
+}
 
 
 //正在加载的图片；
