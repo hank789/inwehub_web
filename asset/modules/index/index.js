@@ -193,4 +193,16 @@ const app = new Vue({
   render: h => h(App)
 });
 
+
+//判断是否已安装app
+if (WeixinJSBridge) {
+  WeixinJSBridge.invoke("getInstallState", {
+    packageName: "com.inwehub.InwehubTest",
+    packageUrl: "inwehubtest://"
+  }, function(M) {
+    alert(JSON.stringify(M));
+  })
+}
+
+
 export { app, router };
