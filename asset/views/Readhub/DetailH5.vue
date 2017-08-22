@@ -2,7 +2,7 @@
   <div>
     <iframe v-show="show" id="show-iframe"  @load="loaded" frameborder=0 name="showHere" scrolling=auto></iframe>
 
-    <iframe class="footer" src="http://read.ywhub.com/c/%E5%B0%8F%E5%93%88%E5%85%AC%E7%A4%BE/sap-iot/webview " height="44px" width="100%"></iframe>
+    <iframe id="readhub-footer" class="footer" height="44px" width="100%"></iframe>
 
     <div class="toComment" @tap.stop.prevent="toDetail()"></div>
   </div>
@@ -40,14 +40,19 @@
     mounted(){
       this.url = this.$route.query.url;
       this.pathUrl = this.$route.query.pathUrl;
+      this.url = this.url.replace(/^http:/, 'https:');
+
       var oIframe = document.getElementById('show-iframe');
       oIframe.src = this.url;
       const deviceWidth = document.documentElement.clientWidth;
       const deviceHeight = document.documentElement.clientHeight - 44;
       oIframe.style.width = deviceWidth + 'px';
       oIframe.style.height = deviceHeight + 'px';
-
       this.show = true;
+
+      this.pathUrl = this.$route.query.pathUrl;
+      var oIframeFooter = document.getElementById('readhub-footer');
+      oIframeFooter.src = this.pathUrl;
     }
   }
 
