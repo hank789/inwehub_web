@@ -68,7 +68,7 @@
   .toComment{
      width:30%;
      height:44px;
-     position: absolute;
+     position: fixed;
      z-index:100;
      bottom:0;
     left:50%;
