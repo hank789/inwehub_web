@@ -7,13 +7,14 @@
     </header>
 
     <!--导航栏-->
-    <div class="mui-content">
     <div class="menu">
       <span @tap.stop.prevent="">任务</span>
       <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
       <i></i>
     </div>
-   </div>
+    
+    
+  
 
     <div class="mui-content list-empty" v-if="nothing==1">
       <div class="mui-table-view list-ask-item">
@@ -297,13 +298,25 @@
 
 
 <style scoped>
+
+	
+	.mui-wechat .menu[data-v-4f45c199] {
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    z-index: 10;
+    background: #f3f4f6;
+    top: 0;
+    }
+  
   /*导航栏的样式*/
+
   .menu{
     width: 100%;
     height: 45px;
     position: absolute;
     top: 44px;
-    z-index: 99;
+    z-index: 10;
     background:#f3f4f6;
   }
   .menu span{
@@ -330,9 +343,9 @@
   }
 
   /*滚动区域*/
-
   #pullrefresh {
-    margin-top: 45px;
+  	position: absolute;
+  	top: 45px;
     background: #ffffff;
   }
 

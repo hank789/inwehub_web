@@ -72,6 +72,9 @@ div,p,span,i,img,ul,li,a{
 	font-style: normal;
 }
 /*滚动区域*/
+.mui-wechat #pullrefresh {
+    margin-top: 0px;
+}
 #pullrefresh {
     margin-top: 45px;
 }

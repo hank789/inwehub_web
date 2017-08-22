@@ -83,6 +83,7 @@
 </script>
 
 <style scoped="scoped">
+	
 	.bot {
 		position: absolute;
 		right: 16px;
@@ -101,6 +102,18 @@ div,p,span,i,img,ul,li,a{
 	font-style: normal;
 }
 /*导航栏的样式*/
+.mui-wechat .menu{
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    background: #f3f4f6;
+    
+    }
+  .mui-wechat .content{
+  	margin-top: 45px;
+  }
 .menu{
 	width: 100%;
 	height: 45px;

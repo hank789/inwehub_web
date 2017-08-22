@@ -55,8 +55,39 @@
 </template>
 
 <script>
-  
- 
+	import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+	const Readbar = {
+		data: () => ({
+			list:""
+		}),
+		created() {
+			
+		},
+		methods: {
+	       getPrevList(){
+	        postRequest(`notification/readhub_list`, {}).then(response => {
+	          var code = response.data.code;
+	          //如果请求不成功提示信息 并且返回上一页；
+	          if (code !== 1000) {
+	            mui.alert(response.data.message);
+	            mui.back();
+	          }
+	          //请求成功的操作
+	          if (response.data.data) {
+	            console.log(response.data.data)
+	          }
+	         
+	        });
+	      }
+		 },
+		mounted() {
+		this.getPrevList()
+		 
+		 
+		}
+		
+}
+export default Readbar; 
 </script>
 
 
@@ -79,6 +110,9 @@ div,p,span,i,img,ul,li,a{
 	font-style: normal;
 }
 /*滚动区域*/
+.mui-wechat #pullrefresh {
+    margin-top: 0px;
+}
 #pullrefresh {
     margin-top: 45px;
 }
