@@ -739,7 +739,7 @@ const routes = [{
     meta: {
       title: '发现',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: require('../../../views/Readhub/DetailH5.vue'),
     beforeEnter: (to, from, next) => {
