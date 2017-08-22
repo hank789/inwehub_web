@@ -109,13 +109,29 @@
       listen() {
         var currentUser = localEvent.getLocalItem('UserInfo');
         if (currentUser.user_id && Echo){
+          console.log('listen notification');
           // 监听通知事件
           Echo.channel('notification.user.' + currentUser.user_id)
             .notification((notification) => {
               console.log(notification);
               switch (notification.type) {
                 case 'App\\Notifications\\AuthenticationUpdated':
+                    // 专家认证有新的通知
                     console.log(notification.body);
+                    break;
+              }
+              switch (notification.notification_type) {
+                case 1:
+                    // 通知公告有新的通知
+                    break;
+                case 2:
+                    // 资金有新的通知
+                    break;
+                case 3:
+                    // 任务有新的通知
+                    break;
+                case 4:
+                    // 阅读发现有新的通知
                     break;
               }
             });
