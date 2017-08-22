@@ -217,6 +217,31 @@
               this.isH5 = true;
           }
       }
+
+      function checkInstallStatus(){
+        function check(){
+          WeixinJSBridge.invoke("getInstallState", {
+            packageName: "com.inwehub.InwehubTest",
+            packageUrl: "inwehubtest://"
+          }, function(M) {
+            alert(JSON.stringify(M));
+          })
+        }
+
+        if (typeof window.WeixinJSBridge == "undefined")
+        {
+          document.addEventListener('WeixinJSBridgeReady', function()
+          {
+            check();
+          });
+        }
+        else
+        {
+          check();
+        }
+      }
+
+      checkInstallStatus();
 		},
 		computed: {
 			//首页倒计时；
