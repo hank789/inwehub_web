@@ -601,11 +601,11 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ //chat 客服小哈
+	{ //chat 客服
 		path: '/chat',
 		component: require('../../../views/Task/chat.vue'),
 		meta: {
-			title: '客服小哈',
+			title: '客服',
 			wechatHideHeader: true,
 			keepAlive: true
 		},
