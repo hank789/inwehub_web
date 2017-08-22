@@ -279,9 +279,10 @@
               }
             });
           } else {
-//            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-//            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
-              window.location.href = url;
+            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
+            //window.location.href = url;
+
           }
         } else {
           this.$router.pushPlus(url);
