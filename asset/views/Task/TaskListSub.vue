@@ -7,12 +7,13 @@
     </header>
 
     <!--导航栏-->
+    <div class="mui-content">
     <div class="menu">
       <span @tap.stop.prevent="">任务</span>
       <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
       <i></i>
     </div>
-
+   </div>
 
     <div class="mui-content list-empty" v-if="nothing==1">
       <div class="mui-table-view list-ask-item">
