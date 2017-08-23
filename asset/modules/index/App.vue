@@ -10,6 +10,7 @@
         </div>
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
         <div id="toast"></div>
+        <OpenAppComponent></OpenAppComponent>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import localEvent from '../../stores/localStorage';
   import FooterComponent from '../../components/Footer.vue';
+  import OpenAppComponent from '../../components/OpenApp.vue';
   import {goBack} from '../../utils/webview';
   import EventObj from '../../utils/event';
 
@@ -52,7 +54,8 @@
     created(){
     },
     components: {
-      FooterComponent
+      FooterComponent,
+      OpenAppComponent
     },
     watch: {
       $route(to) {
