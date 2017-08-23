@@ -15,7 +15,7 @@
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
-					<div class="message">{{count}}</div>
+					<div class="message" >{{unread_notice_message}}</div>
 					<p>
 						<span>通知公告</span>
 						<span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款ub是一款一款一ub是一款一款一</span>
@@ -23,8 +23,9 @@
 					<a>16:44</a>
 					<i class="bot"></i>
 				</li>
-				<!--<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
+		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
+       	 	<div class="message" >{{unread_notice_message}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
        	 	   <span class="mui-ellipsis">问答支出88元 </span>
@@ -32,17 +33,19 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li @tap.stop.prevent="$router.pushPlus('/integralbar')">
+       	 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
        	 	<img src="../../statics/images/integral1.png" />  
+       	 	<div class="message">99</div>
        	 	<p>
        	 	   <span>积分变动</span>
        	 	   <span class="mui-ellipsis">回答了一条问题增加2积分</span>
        	 	</p>
        	 	<a>16:44</a>
-       	 	<i class="bot"></i>
-       	 </li>-->
+       	 	<i class="bot"></i>-->
+       	 </li>
 				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
+					<div class="message">{{unread_notice_message}}</div>
 					<p>
 						<span>任务动态</span>
 						<span class="mui-ellipsis">刘明专家回答了你的提问 </span>
@@ -52,6 +55,7 @@
 				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
 					<img src="../../statics/images/read1.png" />
+					<div class="message" >{{unread_notice_message}}</div>
 					<p>
 						<span>阅读发现</span>
 						<span class="mui-ellipsis">郭大红回复 </span>
@@ -61,6 +65,7 @@
 				</li>
 				<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
        	 	<img src="../../statics/images/service1.png" />  
+       	 	<div class="message">{{99}}</div>
        	 	<p>
        	 	   <span>客服小哈</span>
        	 	   <span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款</span>
@@ -79,7 +84,11 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	const TaskMain = {
 		data: () => ({
-			count: ""
+			count: "",
+			unread_notice_message:"",
+			unread_task_message: "",//未读任务动态数
+		    unread_readhub_message: "",//未读阅读发现数
+		    unread_money_message: "",//未读资金变动数
 		}),
 		methods: {
 			getData() {
@@ -90,7 +99,11 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					this.count = response.data.data.todo_tasks;
+					console.log(response.data)
+					this.unread_notice_message = response.data.data.unread_notice_message;
+					this.unread_task_message = response.data.data.unread_task_messages;
+					this.unread_readhub_message = response.data.data.unread_readhub_message;
+					this.unread_money_message = response.data.data.unread_money_message;
 				});
 			},
 		},

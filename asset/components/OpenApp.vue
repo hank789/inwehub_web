@@ -59,7 +59,7 @@
       stopShowOpenApp(){
           var stopShowOpenApp = localEvent.getLocalItem('stopShowOpenApp');
           if (stopShowOpenApp.stop && stopShowOpenApp.stop === true) {
-              return true;
+              return false;
           }
           return false;
       },
@@ -123,7 +123,7 @@
   /*手机端*/
   .suspend{
     width: 100%;
-    height:64px;
+    height:54px;
     border-radius:4px;
     background:#252525;
     position: absolute;
@@ -136,21 +136,21 @@
     margin-left: 23px;
     width: 30px;
     height: 47px;
-    margin-top: 8.5px;
+    margin-top: 7px;
    
   }
   .suspend p:nth-of-type(1) svg{
     font-size: 18px;
     color: #FFFFFF;
-    margin-top: 14px; 
+    margin-top: 12px; 
   }
   .suspend p:nth-of-type(2){
     float: left;
-    width: 47px;
-    height: 47px;
+    width: 40px;
+    height: 40px;
     border-radius: 12px;
     background: #F3F4F6;
-    margin-top: 8.5px;
+    margin-top: 7px;
    
     text-align: center;
   }
@@ -162,9 +162,9 @@
   .suspend p:nth-of-type(3){
     width: 96px;
     height: 47px;
-    margin-top: 8.5px;
+    margin-top: 7px;
     margin-left: 10px;
-    padding-top: 5px;
+   /* padding-top: 5px;*/
     float: left;
   }
   .suspend p:nth-of-type(3)>span{
@@ -176,7 +176,7 @@
     font-size:16px
   }
   .suspend p:nth-of-type(3)>span:nth-of-type(2){
-    margin-top: -3px;
+    margin-top: 0.5px;
   }
   .suspend a{
     float:right;
@@ -187,7 +187,7 @@
     text-align: center;
     line-height: 30px;
     color: #FFFFFF;
-    margin-top: 17px;
+    margin-top: 12px;
     margin-right: 10.5px;
   }
   /*微信端*/
