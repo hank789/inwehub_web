@@ -913,15 +913,15 @@ input.upload-file[type=file]{
 }
 
 .openAppH5 .mui-bar-nav{
-  top:64px;
+  top:54px;
 }
 
 .openAppH5 .mui-content{
-  padding-top:64px;
+  padding-top:54px;
 }
 
 .openAppH5 .mui-bar-nav ~  .mui-content.absolute{
-  top:108px;
+  top:98px;
   padding-top: 0;
 }
 
