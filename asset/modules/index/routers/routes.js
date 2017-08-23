@@ -1082,6 +1082,13 @@ const routes = [{
     },
     component: require('../../../views/Webview/article.vue'),
   },
+  {
+    path: '/test/open',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/OpenApp.vue'),
+  },
 	{ // message
 		path: '/*',
 		meta: {
