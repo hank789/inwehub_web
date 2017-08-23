@@ -143,7 +143,7 @@ div,p,span,i,img,ul,li,a{
 	position: absolute;
 	width: 30px;
 	height: 1.8px;
-	right: 21.5%;
+	right: 21.65%;
 	bottom: 0.5px;
 	background:#3c95f9;
 }	
