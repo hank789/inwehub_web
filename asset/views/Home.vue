@@ -495,6 +495,17 @@
 	margin-right: 10.5px;
 	}
 /*微信端*/
+.mui-wechat .suspension{
+	width: 100%;
+	height: 49px;
+	position: fixed;
+    top: 0px;
+    background: #FFFFFF;
+    z-index: 999;
+    box-shadow:0px 3px 5px #b4b4b6;
+    -webkit-box-shadow:0px 3px 5px #b4b4b6;
+    -moz-box-shadow:0px 3px 5px #b4b4b6;
+}
 .suspension{
 	width: 100%;
 	height: 49px;
