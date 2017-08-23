@@ -337,7 +337,7 @@
     position: absolute;
     width: 30px;
     height: 1.8px;
-    left: 20.6%;
+    left: 20.55%;
     bottom: 0.5px;
     background:#3c95f9;
   }
