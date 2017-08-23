@@ -1,0 +1,80 @@
+<template>
+<div>
+  <header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">InweHub</h1>
+  </header>
+
+</div>
+</template>
+
+
+<script>
+
+  export default {
+    data: () => ({
+      loading:1
+    }),
+    created () {
+      showInwehubWebview();
+    },
+    methods: {
+
+    },
+    watch: {
+
+    },
+    mounted(){
+      mui.plusReady(() => {
+        var ws = plus.webview.currentWebview();
+        ws.addEventListener('show',createEmbed(ws),false);
+
+        function createEmbed(ws) {
+            var url="https://jinshuju.net/f/bWXY8y";
+
+            var id = "jinshuju";
+            var title = '申请邀请码';
+
+            var webviewBackButton = () => {
+              var currentWs = plus.webview.getWebviewById(id);
+              if (currentWs) {
+                console.log('webviewBackButton close');
+                currentWs.hide();
+
+                plus.key.removeEventListener('backbutton',webviewBackButton);
+              }
+            }
+
+            var webview = plus.webview.create(url, id, {popGesture: 'hide',
+              top:'0px',
+              bottom:'0px',
+              position:'dock',
+              dock:'bottom',
+              backButtonAutoControl: 'hide',
+              statusbar:{background:'#3c3e44'},
+              titleNView: {
+                backgroundColor: '#3c3e44', //导航栏背景色
+                titleText: title, //导航栏标题
+                titleColor: '#fff', //文字颜色
+                type: 'transparent', //透明渐变样式
+                titleSize:'18px',
+                autoBackButton: true, //自动绘制返回箭头
+                splitLine: { //底部分割线
+                  color: '#3c3e44'
+                }
+              },
+              bounce:'vertical'});
+
+            plus.key.addEventListener("backbutton",() =>{
+              webviewBackButton();
+            });
+
+            webview.show();
+            ws.append(webview);
+        }
+      });
+
+    }
+  }
+
+</script>

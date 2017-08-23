@@ -1089,6 +1089,13 @@ const routes = [{
     },
     component: require('../../../views/OpenApp.vue'),
   },
+  {
+    path: '/webview/registerForm',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/Webview/registerForm.vue'),
+  },
 	{ // message
 		path: '/*',
 		meta: {
