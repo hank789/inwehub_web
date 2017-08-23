@@ -10,35 +10,48 @@
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
 
   export default {
+
+
     mounted(){
       var fullUrl = window.location.href;
       var currentUrl = fullUrl.split('#')[0];
 
-      //微信分享
-      postRequest(`share/wechat/jssdk`, {current_url:currentUrl}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.toast(response.data.message);
-        }
-
-        var wechatConfig = response.data.data.config;
-        wx.config(wechatConfig);
-
-        wx.error(function(res){
-            mui.alert('wx:error:'+ JSON.stringify(res));
-        });
-
-        wx.ready(function() {
-            mui.alert('ready');
-        });
-      });
+//      //微信分享
+//      postRequest(`share/wechat/jssdk`, {current_url:currentUrl}).then(response => {
+//        var code = response.data.code;
+//        if (code !== 1000) {
+//          mui.toast(response.data.message);
+//        }
+//
+//        var wechatConfig = response.data.data.config;
+//        wx.config(wechatConfig);
+//
+//        wx.error(function(res){
+//            mui.alert('wx:error:'+ JSON.stringify(res));
+//        });
+//
+//        wx.ready(function() {
+//            mui.alert('ready');
+//        });
+//      });
     },
     methods: {
       openApp(){
         if (mui.os.wechat) {
-          WeixinJSBridge.invoke("launch3rdApp", {appID: "wx060483a470f50b76", extInfo: 'action=open'}, function (e) {
-            alert(JSON.stringify(e));
-          })
+          WeixinJSBridge.invoke('getInstallState',{
+            'appid': 'wx060483a470f50b76', // 公众号appID
+            'packageUrl': 'com.inwehub.InwehubTest://xxx', // IOS必填，xxxx:// 开头的一个scheme
+            'packageName':'com.inwehub.InwehubTest' // android必填，包名
+          },function(res){
+            alert(JSON.stringify(res));
+
+            WeixinJSBridge.invoke("launch3rdApp", {appID: "wx060483a470f50b76", extInfo: 'action=open'}, function (e) {
+              alert(JSON.stringify(e));
+            })
+          });
+
+
+
         }
       }
     }
