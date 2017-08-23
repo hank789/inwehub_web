@@ -887,3 +887,34 @@ input.upload-file[type=file]{
 75%  {opacity: 0.65;}
 100% {opacity: 0.7;}
 }*/
+
+
+.openAppH5 .mui-bar-nav{
+  top:64px;
+}
+
+.openAppH5 .mui-content{
+  padding-top:64px;
+}
+
+.openAppH5 .menu{
+  top:108px;
+}
+
+.openAppH5 .mui-bar-nav ~ .mui-content {
+  padding-top: 108px;
+}
+
+.openAppH5 .mui-bar-nav ~ .menu {
+  margin-top:0;
+}
+
+
+.openAppWechat .mui-content{
+  padding-top:49px;
+}
+
+.openAppWechat .menu{
+  top:49px !important;
+}
+

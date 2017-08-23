@@ -1,13 +1,14 @@
 <template>
 	<div>
 
-		<header class="hidewechattitle">
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-logowenzi"></use>
-		    </svg>
-		</header>
-
 		<div class="mui-content" v-show="!loading">
+
+      <header class="hidewechattitle">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg>
+      </header>
+
 			<!--首页轮播-->
 			<div id="slider" class="mui-slider" v-if="notices.length">
 				<div class="mui-slider-group mui-slider-loop">

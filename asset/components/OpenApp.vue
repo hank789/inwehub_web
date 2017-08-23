@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--手机端-->
-    <div class="suspend" v-if="isH5">
+    <div class="suspend" v-if="isH5" @tap.stop.prevent="close('isH5')">
       <p>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logotuxing"></use>
@@ -17,7 +17,7 @@
     </div>
 
     <!--微信端-->
-    <div class="suspension" v-if="isWeixin">
+    <div class="suspension" v-if="isWeixin" @tap.stop.prevent="close('isWeixin')">
       <p>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logotuxing"></use>
@@ -34,13 +34,39 @@
 
   export default {
     mounted() {
-      if (!mui.os.plus) {
-        if (mui.os.wechat) {
-          this.isWeixin = true;
-        } else {
-          this.isH5 = true;
-        }
+      this.check();
+    },
+    watch: {
+      $route(to) {
+          if (this.$route.path === '/share/resume') {
+              this.check();
+          }
       }
+    },
+    methods: {
+      check(){
+        if (!mui.os.plus) {
+          if (mui.os.wechat) {
+            this.isWeixin = true;
+            document.body.classList.add('openAppWechat');
+          } else {
+            document.body.classList.add('openAppH5');
+            this.isH5 = true;
+          }
+        }
+      },
+      close(type){
+         switch(type) {
+           case 'isWeixin':
+               this.isWeixin = false;
+               document.body.classList.remove('openAppWechat');
+               break;
+           case 'isH5':
+             this.isH5 = false;
+             document.body.classList.remove('openAppH5');
+             break;
+         }
+      },
     },
     data(){
       return {
@@ -48,9 +74,6 @@
         isWeixin:false,
         isH5:false,
       }
-    },
-    methods: {
-
     }
   }
 </script>
@@ -62,7 +85,7 @@
     height:64px;
     border-radius:4px;
     background:#252525;
-    position: fixed;
+    position: absolute;
     opacity: 0.9;
     top:0;
     z-index: 999;
@@ -117,7 +140,7 @@
   .mui-wechat .suspension{
     width: 100%;
     height: 49px;
-    position: fixed;
+    position: absolute;
     opacity: 0.9;
     top: 0px;
     background: #FFFFFF;

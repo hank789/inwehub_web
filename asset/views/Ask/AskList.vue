@@ -41,7 +41,7 @@
 
     <div id="item1" :class="{'mui-control-content':true, 'mui-active':true, 'emptyList':nothing}">
 
-      <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+      <div id="pullrefresh" class="mui-scroll-wrapper">
         <div class="mui-scroll">
 
           <div class="mui-content" v-if="nothing == 0">
@@ -272,7 +272,6 @@
 <style scoped>
 
   .mui-bar-nav ~ .menu {
-    margin-top:44px;
     position: relative;
   }
 
@@ -431,6 +430,7 @@
 
   .menu{
     position: relative;
+    z-index:7;
   }
 
   .menu:after{
