@@ -27,6 +27,10 @@
       </div>
       <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
 
+      <div class="help" @tap.stop.prevent="jumpToForm">
+        我没有邀请码?
+      </div>
+
       <div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"
                 @click.prevent="register">注册
@@ -90,7 +94,7 @@
       }
     },
     created () {
-      //showInwehubWebview();
+      showInwehubWebview();
     },
     mounted(){
       this.getCacheData();
@@ -159,6 +163,31 @@
       next();
     },
     methods: {
+      jumpToForm(){
+        var url="https://jinshuju.net/f/bWXY8y";
+        if (mui.os.plus) {
+          mui.openWindow({
+            url: 'index.html#/webview/registerForm',
+            id: 'jinshuju',
+            preload: false,//一定要为false
+            createNew:false,
+            show: {
+              autoShow: true,
+              aniShow: 'pop-in'
+            },
+            styles: {
+              popGesture: 'hide'
+            },
+            waiting: {
+              autoShow: false
+            }
+          });
+
+        } else {
+          window.open(url);
+        }
+
+      },
       goback () {
         mui.back();
       },
@@ -516,5 +545,11 @@
     position: absolute;
     left: 10px;
     top: 10px;
+  }
+
+  .help {
+    font-size: 14px;
+    color: #F6A623;
+    text-align: center;
   }
 </style>
