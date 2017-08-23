@@ -44,16 +44,41 @@
 
   export default {
     mounted() {
-      this.check();
+      this.showOpenApp();
     },
     watch: {
       $route(to) {
           if (this.$route.path === '/share/resume') {
               this.check();
+          } else {
+              this.showOpenApp();
           }
       }
     },
     methods: {
+      stopShowOpenApp(){
+          var stopShowOpenApp = localEvent.getLocalItem('stopShowOpenApp');
+          if (stopShowOpenApp.stop && stopShowOpenApp.stop === true) {
+              return true;
+          }
+          return false;
+      },
+      showOpenApp(){
+        var isStop = this.stopShowOpenApp();
+        if (!isStop) {
+          //显示
+          this.check();
+        } else {
+          //不显示
+          this.hideOpenApp();
+        }
+      },
+      hideOpenApp(){
+        this.isWeixin = false;
+        this.isH5 = false;
+        document.body.classList.remove('openAppWechat');
+        document.body.classList.remove('openAppH5');
+      },
       check(){
         if (!mui.os.plus) {
           if (mui.os.wechat) {
@@ -66,13 +91,19 @@
         }
       },
       close(type){
+          if (this.$route.path === '/share/resume') {
+              return false;
+          }
+
          switch(type) {
            case 'isWeixin':
                this.isWeixin = false;
+               localEvent.setLocalItem('stopShowOpenApp', {stop:true});
                document.body.classList.remove('openAppWechat');
                break;
            case 'isH5':
              this.isH5 = false;
+             localEvent.setLocalItem('stopShowOpenApp', {stop:true});
              document.body.classList.remove('openAppH5');
              break;
          }
