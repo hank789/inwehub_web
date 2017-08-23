@@ -12,7 +12,7 @@
         <span>查看更多专家信息</span>
       </p>
       <p>
-        <a :href="url">立即打开</a>
+        <a :href="url" target="_blank">立即打开</a>
       </p>
     </div>
 
@@ -24,7 +24,7 @@
         </svg>
       </p>
       <p>下载APP</p>
-      <p> <a :href="url">立即打开</a></p>
+      <p> <a :href="url" target="_blank">立即打开</a></p>
     </div>
   </div>
 </template>
