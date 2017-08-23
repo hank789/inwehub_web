@@ -18,10 +18,10 @@
       </div>
     </div>
 
-    <div id="pullrefresh" :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
+    <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
 
-    <div class="mui-content" v-if="nothing == 0">
+    <div class="" v-if="nothing == 0">
       <div class="list-answer">
 
         <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="$router.pushPlus('/answer/' + answer.question_id)">

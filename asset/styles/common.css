@@ -888,6 +888,29 @@ input.upload-file[type=file]{
 100% {opacity: 0.7;}
 }*/
 
+.mui-content.absolute{
+  position: absolute;
+  top:44px;
+  width:100%;
+  bottom:0;
+  padding-top:0;
+}
+
+.mui-content.absolute .menu ~ #pullrefresh{
+  top:50px;
+}
+
+.mui-bar-nav ~ .mui-content .mui-pull-top-pocket{
+  top:0;
+}
+
+.mui-wechat .mui-control-content{
+  top:50px !important;
+}
+
+.mui-wechat .mui-content.absolute{
+  top:0;
+}
 
 .openAppH5 .mui-bar-nav{
   top:64px;
@@ -897,24 +920,17 @@ input.upload-file[type=file]{
   padding-top:64px;
 }
 
-.openAppH5 .menu{
+.openAppH5 .mui-bar-nav ~  .mui-content.absolute{
   top:108px;
+  padding-top: 0;
 }
-
-.openAppH5 .mui-bar-nav ~ .mui-content {
-  padding-top: 108px;
-}
-
-.openAppH5 .mui-bar-nav ~ .menu {
-  margin-top:0;
-}
-
 
 .openAppWechat .mui-content{
   padding-top:49px;
 }
 
-.openAppWechat .menu{
-  top:49px !important;
+.openAppWechat .mui-content.absolute{
+  top:49px;
+  padding-top:0;
 }
 

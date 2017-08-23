@@ -6,24 +6,23 @@
       <h1 class="mui-title">我的提问</h1>
     </header>
 
+    <div id="item1" class="absolute" :class="{'mui-content':true, 'mui-active':true, 'emptyList':nothing}">
 
-    <div class="menu">
-      <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-        <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks')">
-          未完成
-      </a>
-        <a class="mui-control-item mui-active" @tap.stop.prevent="">
-          已完成
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks')">
+            未完成
         </a>
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            已完成
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div id="item1" :class="{'mui-control-content':true, 'mui-active':true, 'emptyList':nothing}">
 
       <div id="pullrefresh" class="mui-scroll-wrapper">
         <div class="mui-scroll">
 
-          <div class="mui-content" v-if="nothing == 0">
+          <div class="" v-if="nothing == 0">
 
             <div class="list-ask">
 
@@ -298,7 +297,7 @@
   }
 
   #pullrefresh {
-    margin-top:5px;
+
   }
   .list-ask .list-ask-item{
     margin-top:10px;
@@ -414,10 +413,6 @@
     bottom: 0px;
     right: 0px;
     top: 88px;
-  }
-
-  .mui-wechat .mui-control-content{
-    top:44px !important;
   }
 
   .mui-segmented-control{
