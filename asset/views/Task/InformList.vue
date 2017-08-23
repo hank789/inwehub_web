@@ -181,7 +181,7 @@ div,p,span,i,img,ul,li,a{
 	color: #444444;
 }
 .content ul li p{
-	width: 84%;
+	width: 81%;
 	
 }
 .content ul li p span:nth-of-type(2){
