@@ -1,9 +1,9 @@
 <template>
   <div>
     <!--手机端-->
-    <div class="suspend" v-if="isH5" @tap.stop.prevent="close('isH5')">
+    <div class="suspend" v-if="isH5" >
       <p>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">
           <use xlink:href="#icon-logotuxing"></use>
         </svg>
       </p>
@@ -17,9 +17,9 @@
     </div>
 
     <!--微信端-->
-    <div class="suspension" v-if="isWeixin" @tap.stop.prevent="close('isWeixin')">
+    <div class="suspension" v-if="isWeixin" >
       <p>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">
           <use xlink:href="#icon-logotuxing"></use>
         </svg>
       </p>
