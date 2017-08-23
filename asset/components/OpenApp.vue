@@ -2,8 +2,13 @@
   <div>
     <!--手机端-->
     <div class="suspend" v-if="isH5" >
-      <p>
+     	<p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+      </p>
+      <p>
+        <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logotuxing"></use>
         </svg>
       </p>
@@ -18,8 +23,13 @@
 
     <!--微信端-->
     <div class="suspension" v-if="isWeixin" >
-      <p>
+     <p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+      </p>
+      <p>
+        <svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-logotuxing"></use>
         </svg>
       </p>
@@ -92,20 +102,33 @@
   }
   .suspend p:nth-of-type(1){
     float: left;
+    margin-left: 23px;
+    width: 30px;
+    height: 47px;
+    margin-top: 8.5px;
+   
+  }
+  .suspend p:nth-of-type(1) svg{
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-top: 14px; 
+  }
+  .suspend p:nth-of-type(2){
+    float: left;
     width: 47px;
     height: 47px;
     border-radius: 12px;
     background: #F3F4F6;
     margin-top: 8.5px;
-    margin-left: 10px;
+   
     text-align: center;
   }
-  .suspend p:nth-of-type(1)>svg{
+  .suspend p:nth-of-type(2)>svg{
     font-size: 34px;
     margin-top: 6px;
     color: #009fe8;
   }
-  .suspend p:nth-of-type(2){
+  .suspend p:nth-of-type(3){
     width: 96px;
     height: 47px;
     margin-top: 8.5px;
@@ -113,15 +136,15 @@
     padding-top: 5px;
     float: left;
   }
-  .suspend p:nth-of-type(2)>span{
+  .suspend p:nth-of-type(3)>span{
     display: block;
     color: #FFFFFF;
     font-size: 12px;
   }
-  .suspend p:nth-of-type(2)>span:nth-of-type(1){
+  .suspend p:nth-of-type(3)>span:nth-of-type(1){
     font-size:16px
   }
-  .suspend p:nth-of-type(2)>span:nth-of-type(2){
+  .suspend p:nth-of-type(3)>span:nth-of-type(2){
     margin-top: -3px;
   }
   .suspend a{
@@ -160,22 +183,30 @@
     -webkit-box-shadow:0px 3px 5px #b4b4b6;
     -moz-box-shadow:0px 3px 5px #b4b4b6;
   }
-  .suspension p:nth-of-type(1){
+   .suspension p:nth-of-type(1){
+    float: left;
+    color: #b4b4b6;
+    margin-left: 23px;
+    margin-top: 15px;
+    margin-right:20px ;
+    font-size: 16px;
+    
+  }
+  .suspension p:nth-of-type(2){
     float: left;
     width:35px;
     height:35px;
     border-radius:9px;
     background: #f3f4f6;
     margin-top: 7px;
-    margin-left: 16px;
     text-align: center;
   }
-  .suspension p:nth-of-type(1) svg{
+  .suspension p:nth-of-type(2) svg{
     font-size: 25px;
     margin-top: 6px;
     color: #009fe8;
   }
-  .suspension p:nth-of-type(2){
+  .suspension p:nth-of-type(3){
     float: left;
     font-size:16px;
     color:#171616;
