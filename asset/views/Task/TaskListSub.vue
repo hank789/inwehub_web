@@ -6,12 +6,7 @@
       <h1 class="mui-title">动态</h1>
     </header>
 
-    <!--导航栏-->
-    <div class="menu">
-      <span @tap.stop.prevent="">任务</span>
-      <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
-      <i></i>
-    </div>
+    
     
     
   
@@ -27,7 +22,14 @@
       </div>
     </div>
 
-    <div id="pullrefresh"  :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
+	<div class="mui-content absolute">
+		<!--导航栏-->
+	    <div class="menu">
+	      <span @tap.stop.prevent="">任务</span>
+	      <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
+	      <i></i>
+	    </div>
+    <div id="pullrefresh"  :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
       <div class="mui-scroll">
         <div v-show="nothing == 0">
           <template v-for="(task, index) in tasks">
@@ -70,6 +72,7 @@
           </template>
         </div>
       </div>
+    </div>
     </div>
 
 
@@ -315,7 +318,6 @@
     width: 100%;
     height: 45px;
     position: absolute;
-    top: 44px;
     z-index: 10;
     background:#f3f4f6;
   }

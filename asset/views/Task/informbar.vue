@@ -4,14 +4,15 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">通知公告</h1>
 		</header>
-
-		<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+        <div class="mui-content absolute"></div>
+		<div class=" mui-scroll-wrapper" id="pullrefresh">
 			<div class="container" v-if="nothing == 1">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-zanwushuju"></use>
 				</svg>
 				<p>暂时还没有数据呀～</p>
 			</div>
+			
 			<div class="mui-scroll" v-show="nothing == 0">
 				<ul>
 					<li v-for="item in list"  @tap.stop.prevent="$router.pushPlus(item.data.url)">
@@ -196,6 +197,7 @@
 		margin-top: 0px;
 	}
 	
+    
 	.mui-content{
 		background: #FFFFFF;
 	}

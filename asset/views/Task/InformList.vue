@@ -6,12 +6,16 @@
 			<h1 class="mui-title">动态</h1>
 		</header>
 		<!--导航栏-->
-		<div class="menu">
+		
+		<div class="mui-content absolute ">
+		<div class="content">
+			<div class="menu">
 			<span @tap.stop.prevent="$router.pushPlus('/task')">任务</span>
 			<span @tap.stop.prevent="">消息</span>
 			<i></i>
-		</div>
-		<div class="mui-content content">
+		   </div>
+		   
+		   
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
@@ -75,7 +79,7 @@
 				</li>
 			</ul>
 		</div>
-
+        </div>
 		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 	</div>
 </template>
@@ -163,7 +167,7 @@
 		width: 100%;
 		height: 45px;
 		position: absolute;
-		top: 44px;
+		top: 0;
 		z-index: 99;
 		background: #f3f4f6;
 	}

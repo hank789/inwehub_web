@@ -124,7 +124,7 @@
   .suspend{
     width: 100%;
     height:54px;
-    border-radius:4px;
+   /* border-radius:4px;*/
     background:#252525;
     position: absolute;
     opacity: 0.9;
