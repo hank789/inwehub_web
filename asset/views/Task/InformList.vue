@@ -11,7 +11,7 @@
     	    <span  @tap.stop.prevent="">消息</span>
     	    <i></i>
     </div>
-    <div class="content">
+    <div class="mui-content content">
        <ul>
        	 <li  @tap.stop.prevent="$router.pushPlus('/informbar')">
        	 	<img src="../../statics/images/inform1.png" />  
@@ -23,7 +23,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li @tap.stop.prevent="$router.pushPlus('/balancebar')">
+       	 <!--<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
        	 	<p>
        	 	   <span>余额变动</span>
@@ -40,7 +40,7 @@
        	 	</p>
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
-       	 </li>
+       	 </li>-->
        	 <li @tap.stop.prevent="$router.pushPlus('/taskbar')">
        	 	<img src="../../statics/images/mission1.png" />  
        	 	<p>
@@ -59,14 +59,14 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <li @tap.stop.prevent="$router.pushPlus('/chat')">
+       	 <!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
        	 	<img src="../../statics/images/service1.png" />  
        	 	<p>
        	 	   <span>客服小哈</span>
        	 	   <span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款</span>
        	 	</p>
        	 	<a>16:44</a>
-       	 	<i class="bot"></i>
+       	 	<i class="bot"></i>-->
        	 </li>
        </ul> 
     </div>
@@ -102,6 +102,9 @@ div,p,span,i,img,ul,li,a{
 	font-style: normal;
 }
 /*导航栏的样式*/
+.mui-content{
+	background: #FFFFFF;
+}
 .mui-wechat .menu{
     width: 100%;
     height: 45px;
@@ -140,14 +143,14 @@ div,p,span,i,img,ul,li,a{
 	position: absolute;
 	width: 30px;
 	height: 1.8px;
-	right: 21%;
+	right: 21.5%;
 	bottom: 0.5px;
 	background:#3c95f9;
 }	
 
 /*内容区域*/
 .content{
-	margin-top: 90px;
+	margin-top: 45px;
 }
 .content ul li{
 	width: 100%;
