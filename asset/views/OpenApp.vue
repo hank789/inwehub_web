@@ -46,17 +46,19 @@
         if (mui.os.wechat) {
           WeixinJSBridge.invoke('getInstallState',{
             'appid': 'wx060483a470f50b76', // 公众号appID
-            'packageUrl': 'com.inwehub.InwehubTest://xxx', // IOS必填，xxxx:// 开头的一个scheme
+            'packageUrl': 'inwehubtest://abc', // IOS必填，xxxx:// 开头的一个scheme
             'packageName':'com.inwehub.InwehubTest' // android必填，包名
           },function(res){
             alert(JSON.stringify(res));
 
-            WeixinJSBridge.invoke("launch3rdApp", {appID: "wx060483a470f50b76", signature:config.signature,extInfo: 'action=open'}, function (e) {
+            WeixinJSBridge.invoke("launch3rdApp", {
+              'appID': 'wx060483a470f50b76',
+              'messageExt': 'from=weixin_webview',
+              'extInfo': 'from=weixin_webview'},
+              function (e) {
               alert(JSON.stringify(e));
-            })
+            });
           });
-
-
 
         }
       }
