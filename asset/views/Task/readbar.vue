@@ -85,11 +85,11 @@
 						mui.back();
 					}
 					//请求成功的操作
-					 console.log(response)
-					if(response.data.data.length > 0) {
-						this.list = response.data.data;
-						this.data = response.data;
-						console.log(response.data);
+//					 console.log(response.data)
+					if(response.data.data.data.length > 0) {
+						this.list = response.data.data.data;
+						this.data = response.data.data;
+//						console.log(response.data.data);
 					}
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -113,12 +113,11 @@
 					}
 					//请求成功的操作
                     
-					if(response.data.data.length > 0) {
-						//给请求的数据重新赋值；刷新最新的数据；
-						this.list = response.data.data;
-						this.data = response.data;
+					if(response.data.data.data.length > 0) {
+						this.list += response.data.data.data;
+						this.data = response.data.data;
+//						console.log(response.data.data);
 					}
-
 					this.loading = 0;
 
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
@@ -134,6 +133,8 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
+					
+//					console.log(response)
 //
 //					if(response.data.data.length > 0) {
 //						this.list = response.data.data;

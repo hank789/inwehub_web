@@ -20,7 +20,7 @@
 						<img src="../../statics/images/inform1.png" />
 						<div class="message" v-if="item.read_at == null"></div>
 						<p>
-							<span class="mui-ellipsis">{{item.data.body}}</span>
+							<span class="mui-ellipsis">{{item.data.title}}</span>
 							<span>{{item.created_at}}</span>
 						</p>
 						<i class="bot"></i>
@@ -84,10 +84,10 @@
                      
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
-						this.data = response.data;
+						this.data = response.data.data;
 						
 					}
-					console.log(this.list);
+					
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				});
@@ -106,13 +106,13 @@
 					var code = response.data.code;
 					if(code !== 1000) {
 						mui.alert(response.data.message);
-						mui.back();
+						mui.back();     
 					}
 
-					if(response.data.data.length > 0) {
-						//给请求的数据重新赋值；刷新最新的数据；
-						this.list = response.data.data;
-						this.data = response.data;
+					if(response.data.data.data.length > 0) {
+						this.list += response.data.data.data;
+						this.data = response.data.data;
+						
 					}
 
 					this.loading = 0;
