@@ -19,22 +19,22 @@
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
-					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
+					<div class="message" v-if="notice_message.unread_count != 0">{{notice_message.unread_count}}</div>
 					<p>
 						<span>通知公告</span>
-						<span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款ub是一款一款一ub是一款一款一</span>
+						<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.body : ""}}</span>
 					</p>
-					<a>16:44</a>
+					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
 		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
-       	 	<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
+       	 	<div class="message" v-if="money_message.unread_count != 0">{{money_message.unread_count}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
-       	 	   <span class="mui-ellipsis">问答支出88元 </span>
+       	 	   <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.body : ""}} </span>
        	 	</p>
-       	 	<a>16:44</a>
+       	 	<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
        	 	<i class="bot"></i>
        	 </li>
        	 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
@@ -49,22 +49,22 @@
        	 </li>
 				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
-					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
+					<div class="message" v-if="task_message.unread_count != 0">{{task_message.unread_count}}</div>
 					<p>
 						<span>任务动态</span>
-						<span class="mui-ellipsis">刘明专家回答了你的提问 </span>
+						<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.body : ""}} </span>
 					</p>
-					<a>16:44</a>
+					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
 					<img src="../../statics/images/read1.png" />
-					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
+					<div class="message" v-if="readhub_message.unread_count != 0">{{readhub_message.unread_count}}</div>
 					<p>
 						<span>阅读发现</span>
-						<span class="mui-ellipsis">郭大红回复 </span>
+						<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.body : ""}}</span>
 					</p>
-					<a>16:44</a>
+					<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
 				<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
@@ -80,7 +80,7 @@
 			</ul>
 		</div>
         </div>
-		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
+		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
 
@@ -89,10 +89,10 @@
 	const TaskMain = {
 		data: () => ({
 			count: "",
-			unread_notice_message:"",
-			unread_task_message: "",//未读任务动态数
-		    unread_readhub_message: "",//未读阅读发现数
-		    unread_money_message: "",//未读资金变动数
+			notice_message:{},
+			task_message: {},//未读任务动态数
+		    readhub_message: {},//未读阅读发现数
+		    money_message: {},//未读资金变动数
 		}),
 		methods: {
 			getData() {
@@ -103,11 +103,12 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					console.log(response.data)
-					this.unread_notice_message = response.data.data.unread_notice_message;
-					this.unread_task_message = response.data.data.unread_task_messages;
-					this.unread_readhub_message = response.data.data.unread_readhub_message;
-					this.unread_money_message = response.data.data.unread_money_message;
+					
+					this.notice_message = response.data.data.notice_message;
+					this.task_message = response.data.data.task_message;
+					this.readhub_message = response.data.data.readhub_message;
+					this.money_message = response.data.data.money_message;
+					console.log(this.notice_message)
 				});
 			},
 		},
