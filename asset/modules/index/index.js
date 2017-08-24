@@ -142,7 +142,7 @@ Vue.mixin({
       return;
     }
 
-    autoHeight();
+    autoHeight(this.$el);
     hideHeaderHandler(this, 'activated');
   },
   mounted() {
@@ -164,7 +164,8 @@ Vue.mixin({
        }
     });
 
-    autoHeight();
+
+    autoHeight(this.$el);
     hideHeaderHandler(this, 'mounted');
   },
   created(){
