@@ -182,7 +182,7 @@
             return;
           }
           var taskCount = response.data.data.todo_tasks;
-          this.setAppBadgeNumber(taskCount);
+          setAppBadgeNumber(taskCount);
           this.onCountChange(taskCount);
         });
       },
