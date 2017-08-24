@@ -59,7 +59,7 @@
       stopShowOpenApp(){
           var stopShowOpenApp = localEvent.getLocalItem('stopShowOpenApp');
           if (stopShowOpenApp.stop && stopShowOpenApp.stop === true) {
-              return false;
+              return true;
           }
           return false;
       },
@@ -137,12 +137,12 @@
     width: 30px;
     height: 47px;
     margin-top: 7px;
-   
+
   }
   .suspend p:nth-of-type(1) svg{
     font-size: 18px;
     color: #FFFFFF;
-    margin-top: 12px; 
+    margin-top: 12px;
   }
   .suspend p:nth-of-type(2){
     float: left;
@@ -151,7 +151,7 @@
     border-radius: 12px;
     background: #F3F4F6;
     margin-top: 7px;
-   
+
     text-align: center;
   }
   .suspend p:nth-of-type(2)>svg{
@@ -221,7 +221,7 @@
     margin-top: 15px;
     margin-right:20px ;
     font-size: 16px;
-    
+
   }
   .suspension p:nth-of-type(2){
     float: left;
