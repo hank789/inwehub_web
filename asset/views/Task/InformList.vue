@@ -8,6 +8,7 @@
 		<!--导航栏-->
 		
 		<div class="mui-content absolute ">
+	   <div class="mui-scroll-wrapper">
 		<div class="content">
 			<div class="menu">
 			<span @tap.stop.prevent="$router.pushPlus('/task')">任务</span>
@@ -15,7 +16,7 @@
 			<i></i>
 		   </div>
 		   
-		   
+		   <div class="mui-scroll"  id="pullrefresh">
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
@@ -80,6 +81,8 @@
 			</ul>
 		</div>
         </div>
+       </div>
+       </div>
 		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
@@ -95,7 +98,14 @@
 		    money_message: {},//未读资金变动数
 		}),
 		methods: {
-			getData() {
+			//下拉刷新;
+			pulldownRefresh() {
+				setTimeout(() => {
+					this.getPrevList();
+				}, 1000);
+			},
+			//下拉刷新请求的数据
+			getPrevList() {
 				postRequest(`notification/count`, {}).then(response => {
 					var code = response.data.code;
 					//如果请求不成功提示信息 并且返回上一页；
@@ -111,9 +121,38 @@
 					console.log(this.notice_message)
 				});
 			},
+			//请求标记
+			sign() {
+				postRequest(`notification/mark_as_read`, {notification_type:0}).then(response => {
+                     
+					var code = response.data.code;
+					if(code !== 1000) {
+						mui.alert(response.data.message);
+						mui.back();
+					}
+//
+//					if(response.data.data.length > 0) {
+//						this.list = response.data.data;
+//					}
+
+				});
+			}
 		},
 		mounted() {
-           this.getData();
+		  //请求数据；
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: this.pulldownRefresh
+					}
+				}
+			});
+           this.getPrevList();
+           this.sign();
 		}
 	}
 	export default TaskMain;
