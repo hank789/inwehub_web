@@ -16,7 +16,7 @@
       loading:1
     }),
     created () {
-      showInwehubWebview();
+      
     },
     methods: {
 
@@ -69,7 +69,6 @@
               webviewBackButton();
             });
 
-            webview.show();
             ws.append(webview);
         }
       });
