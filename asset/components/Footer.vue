@@ -70,6 +70,7 @@
 <script type="text/javascript">
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import localEvent from '../stores/localStorage';
+  import {setAppBadgeNumber} from '../utils/notice';
 
   export default {
     data () {
@@ -181,6 +182,7 @@
             return;
           }
           var taskCount = response.data.data.todo_tasks;
+          this.setAppBadgeNumber(taskCount);
           this.onCountChange(taskCount);
         });
       },
