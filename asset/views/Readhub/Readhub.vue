@@ -87,12 +87,17 @@
       if (mui.os.plus) {
           this.createReadWebview();
       } else {
+        var url = this.url;
+        if (this.$route.query.redirect_url) {
+          url = url + '&redirect_url=' + this.$route.query.redirect_url;
+        }
+
         this.iframeState = true;
         const deviceWidth = document.documentElement.clientWidth;
         const deviceHeight = document.documentElement.clientHeight - 50;
         const oIframe = document.getElementById('show-iframe');
         this.iframe = oIframe;
-        this.iframe.src = this.url;
+        this.iframe.src = url;
         oIframe.style.width = deviceWidth + 'px';
         oIframe.style.height = deviceHeight + 'px';
       }
