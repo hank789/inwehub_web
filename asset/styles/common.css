@@ -904,13 +904,15 @@ input.upload-file[type=file]{
   top:0;
 }
 
-.mui-wechat .mui-control-content{
-  top:50px !important;
-}
-
-.mui-wechat .mui-content.absolute{
+.mui-content.absolute{
   top:0;
 }
+
+.mui-bar-nav ~ .mui-content.absolute{
+  top:44px;
+}
+
+
 
 .openAppH5 .mui-bar-nav{
   top:54px;
@@ -935,9 +937,22 @@ input.upload-file[type=file]{
   padding-top:49px;
 }
 
+.openAppWechat .mui-bar-nav{
+  top:49px;
+}
+
+.openAppWechat .mui-bar-nav ~  .mui-content{
+  padding-top: 44px;
+}
+
 .openAppWechat .mui-content.absolute{
   top:49px;
   padding-top:0;
+}
+
+.openAppWechat .mui-bar-nav ~  .mui-content.absolute{
+  top:93px;
+  padding-top: 0;
 }
 
 

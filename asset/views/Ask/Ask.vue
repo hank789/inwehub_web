@@ -9,12 +9,16 @@
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">帮助</a>
     </header>
 
-    <div class="mui-content form form-ask">
+    <div class="mui-content absolute">
+
+
+    <div class="form form-ask">
       <div class="textarea-wrapper">
         <textarea v-model.trim="description" @keydown.stop="enterWords"
                   placeholder="请在这里提出问题。为了更好的通过平台解决问题，提问需要遵循相应规范，请点击帮助了解详情。"></textarea>
       </div>
       <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
+    </div>
     </div>
 
     <div class="fixedDiv">
@@ -433,8 +437,8 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    position: fixed;
-    top: 44px;
+    position: absolute;
+    top: 0;
     bottom: 148px;
     width: 100%;
     z-index: 0;
