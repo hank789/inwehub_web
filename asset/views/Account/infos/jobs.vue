@@ -6,41 +6,42 @@
 			<h1 class="mui-title">工作经历</h1>
 		</header>
 
-		<div class="mui-content" v-show="!loading" id="container">
+		<div class="mui-content absolute">
+			<div v-show="!loading" id="container">
 
-			<div class="container" v-show="jobs.length == 0">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
-			</div>
-
-			<ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
-				<li v-for="(job,index) in jobs" class="intro  mui-table-view-cell">
-
-					<div class="mui-slider-right mui-disabled" id="roof" @tap.stop.prevent="deleteItem(job.id, index)">
-						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
-					</div>
-					<div class="mui-slider-handle  slider">
-						<p class="mui-ellipsis"> {{ job.company }}</p>
-						<p>
-
-							<span class="mui-ellipsis">{{ job.begin_time }} 至 {{ job.end_time }}</span>
-							<span class="mui-ellipsis">{{ job.title }}</span>
-						</p>
-					</div>
-					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/job/' + job.id)">
-						<use xlink:href="#icon-xiugai"></use>
+				<div class="container" v-show="jobs.length == 0">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zanwushuju"></use>
 					</svg>
-				</li>
-			</ul>
+					<p>暂时还没有数据呀～</p>
+				</div>
 
-			<div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/job/0')">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-shuru"></use>
-				</svg>
+				<ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
+					<li v-for="(job,index) in jobs" class="intro  mui-table-view-cell">
+
+						<div class="mui-slider-right mui-disabled" id="roof" @tap.stop.prevent="deleteItem(job.id, index)">
+							<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
+						</div>
+						<div class="mui-slider-handle  slider">
+							<p class="mui-ellipsis"> {{ job.company }}</p>
+							<p>
+
+								<span class="mui-ellipsis">{{ job.begin_time }} 至 {{ job.end_time }}</span>
+								<span class="mui-ellipsis">{{ job.title }}</span>
+							</p>
+						</div>
+						<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/job/' + job.id)">
+							<use xlink:href="#icon-xiugai"></use>
+						</svg>
+					</li>
+				</ul>
+
+				<div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/job/0')">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-shuru"></use>
+					</svg>
+				</div>
 			</div>
-
 		</div>
 
 		<div id="statusBarStyle" background="#ffffff" mode="light"></div>
@@ -117,49 +118,54 @@
 </script>
 
 <style scoped>
+	.mui-content{
+		background: #FFFFFF;
+	}
 	#container {
 		width: 100%;
 		height: 100%;
 		background: #FFFFFF;
 	}
-
+	
 	.intro {
 		width: 100%;
 		height: 60px;
 		position: relative;
 	}
-
+	
 	.intro .slider {
 		width: 100%;
 		height: 60px;
 	}
-
+	
 	.intro .slider p:nth-of-type(1) {
 		font-family: "PingFangSC";
 		font-size: 14px;
 		color: #444444;
 		width: 100%;
 	}
-
-  .intro .slider p:nth-of-type(2){
-  	width: 100%;
-  	height: 13px;
-  	line-height: 13px;
-  	margin-top: 5px;
-  }
-	.intro .slider p:nth-of-type(2) span { 
+	
+	.intro .slider p:nth-of-type(2) {
+		width: 100%;
+		height: 13px;
+		line-height: 13px;
+		margin-top: 5px;
+	}
+	
+	.intro .slider p:nth-of-type(2) span {
 		display: block;
 		float: left;
-		max-width:135px;
+		max-width: 135px;
 		height: 13px;
-    	    font-size: 13px;
-        color: #808080;	
+		font-size: 13px;
+		color: #808080;
 	}
-    .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
-     border-right: 1px solid rgb(220, 220, 220);
-     padding-right: 5px;
-     margin-right: 5px;
-    }
+	
+	.intro .slider p:nth-of-type(2) span:nth-of-type(1) {
+		border-right: 1px solid rgb(220, 220, 220);
+		padding-right: 5px;
+		margin-right: 5px;
+	}
 	/*.intro .slider p:nth-of-type(2) i {
 		display: inline-block;
 		width: 1px;
@@ -167,7 +173,7 @@
 		margin: 0 3px -1px 3px;
 		background: rgb(220, 220, 220);
 	}*/
-
+	
 	.intro svg {
 		position: absolute;
 		font-size: 18px;
@@ -175,7 +181,7 @@
 		top: 13px;
 		right: 15px;
 	}
-
+	
 	.add {
 		width: 64px;
 		height: 64px;
@@ -187,16 +193,16 @@
 		text-align: center;
 		line-height: 64px;
 	}
-
+	
 	.add svg {
 		font-size: 22px;
 		color: #FFFFFF;
 	}
-
+	
 	#roof {
 		z-index: 999;
 	}
-
+	
 	.mui-table-view:after {
 		position: absolute;
 		right: 15px;
@@ -206,7 +212,7 @@
 		content: '';
 		background: #f2f2f2;
 	}
-
+	
 	.mui-table-view-cell:after {
 		position: absolute;
 		right: 15px;
@@ -216,25 +222,25 @@
 		content: '';
 		background: #f2f2f2;
 	}
-
+	
 	.box-shadow-3 {
 		-webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 		-moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 		box-shadow: 0 0 5px rgba(3, 174, 249, .8);
 	}
-
+	
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-
+	
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-
+	
 	.container p {
 		font-family: "PingFangSC";
 		font-size: 12px;

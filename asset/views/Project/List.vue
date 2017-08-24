@@ -7,8 +7,8 @@
 
 
 
-
-    <div class="mui-content mui-scroll-wrapper" id="refurbish" >
+    <div class="mui-content absolute">
+    <div class=" mui-scroll-wrapper" id="refurbish" >
 
     	  <div class="nocontent" v-if="nothing == 1">
     	  	<div class="Logo">
@@ -20,8 +20,8 @@
     	  </div>
 
 
-      <div class="mui-scroll" v-show="nothing == 0">
-        <div class="mui-content">
+      <div class="mui-scroll" >
+       <div v-show="nothing == 0">
           <ul class="projectList1" v-for="item in list" @tap.stop.prevent="$router.pushPlus('/project/review?id=' + item.id)">
             <li>
               <span class="mui-ellipsis">{{item.project_name}}</span>
@@ -43,7 +43,7 @@
         </div> 
   	 </div>
     </div>
-
+   </div> 
 
 
 

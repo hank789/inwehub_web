@@ -5,8 +5,9 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">项目经历</h1>
 		</header>
-
-		<div class="mui-content" v-show="!loading" id="container">
+        
+        <div class="mui-content absolute">
+		<div  v-show="!loading" id="container">
 
 			<div class="container" v-show="projects.length == 0">
 				<svg class="icon" aria-hidden="true">
@@ -42,7 +43,7 @@
 			</div>
 
 		</div>
-
+        </div>
 		<div id="statusBarStyle" background="#fefefe" mode="light"></div>
 
 	</div>
@@ -119,6 +120,9 @@
 </script>
 
 <style scoped>
+	.mui-content{
+		background: #FFFFFF;
+	}
 	#container {
 		width: 100%;
 		height: 100%;

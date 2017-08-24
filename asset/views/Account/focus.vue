@@ -7,7 +7,8 @@
       <h1 class="mui-title">关注我的</h1>
     </header>
 
-    <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
+    <div class="mui-content absolute">
+    <div class="mui-scroll-wrapper task-list" id="pullrefresh">
       <div class="mui-scroll">
 
      <div class="container" v-if="!this.list.length && !loading" >
@@ -48,7 +49,7 @@
         </ul>
       </div>
     </div>
-
+    </div>
 
 
   </div>
