@@ -145,6 +145,9 @@
               case 'notification_money':
                   // 资金变动通知
                   break;
+              case 'user_following':
+                  // 用户关注通知
+                  break;
               case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
                   break;
