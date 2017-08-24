@@ -209,13 +209,13 @@
                 } else {
                   var payload = JSON.parse(msg.payload);
                 }
-                var repeatKey = payload.object_type + payload.object_id;
+                /*var repeatKey = payload.object_type + payload.object_id;
                 var isRepeat = localEvent.getLocalItem(repeatKey);
                 if (isRepeat.key) {
                   return;
                 } else {
                   localEvent.setLocalItem(repeatKey,{key:repeatKey});
-                }
+                }*/
 
                 setIncBadgeNumber();
 

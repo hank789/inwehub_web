@@ -30,7 +30,11 @@
         this.iframeState = false;
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
-          ws.addEventListener('show',createEmbed(ws,this.url),false);
+          var redirect_url = this.url;
+          if (this.$route.query.redirect_url) {
+            redirect_url = redirect_url + '&redirect_url=' + this.$route.query.redirect_url;
+          }
+          ws.addEventListener('show',createEmbed(ws,redirect_url),false);
 
           function createEmbed(ws,url) {
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
@@ -58,6 +62,10 @@
       if (mui.os.plus) {
         var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
         if (inwehub_embed_webview) {
+          if (this.$route.query.redirect_url) {
+            var redirect_url = this.url + '&redirect_url=' + this.$route.query.redirect_url;
+            inwehub_embed_webview.loadURL(redirect_url);
+          }
           inwehub_embed_webview.show();
         } else {
           this.createReadWebview();
@@ -74,11 +82,7 @@
     },
     mounted(){
       this.currentUser = localEvent.getLocalItem('UserInfo');
-      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid + '&redirect_url=';
-
-      if (this.$route.query.redirect_url) {
-        this.url = this.url + this.$route.query.redirect_url;
-      }
+      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
 
       if (mui.os.plus) {
           this.createReadWebview();
