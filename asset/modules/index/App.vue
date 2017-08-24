@@ -92,8 +92,10 @@
         });
       }
 
-      if (mui.os.plus) {
-        mui.plusReady(() => {
+      var router = this.$router;
+
+      mui.plusReady(function () {
+        if (mui.os.plus) {
           var ws = plus.webview.currentWebview();
           console.log('bindEvent-runtime:' + plus.runtime.appid);
           console.log('bindEvent-wsid:' + ws.id);
@@ -107,133 +109,127 @@
                 }
               }
             });
-          }
-        });
-      }
 
-      var router = this.$router;
-
-      //监听推送
-      mui.plusReady(function () {
-        if (mui.os.plus) {
-
-          var noticeTo = function (payload) {
-            switch (payload.object_type) {
-              case 'question':
-              case 'question_answered':
-              case 'question_answer_confirmed':
-                 // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                //router.go(-1);
-                router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
-                break;
-              case 'answer':
-                //router.go(-1);
-                 // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                break;
-              case 'authentication_success':
+            //监听推送
+            var noticeTo = function (payload) {
+              switch (payload.object_type) {
+                case 'question':
+                case 'question_answered':
+                case 'question_answer_confirmed':
+                  // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                  //router.go(-1);
+                  router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
+                  break;
+                case 'answer':
+                  //router.go(-1);
+                  // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                  router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                  break;
+                case 'authentication_success':
                   // 专家认证成功
-                router.pushPlus('/my');
-                break;
-              case 'authentication_fail':
+                  router.pushPlus('/my');
+                  break;
+                case 'authentication_fail':
                   // 专家认证失败
-                router.pushPlus('/my/pilot');
-                break;
-              case 'company_auth_success':
+                  router.pushPlus('/my/pilot');
+                  break;
+                case 'company_auth_success':
                   // 企业认证成功
-                router.pushPlus('/company/my');
-                break;
-              case 'company_auth_fail':
+                  router.pushPlus('/company/my');
+                  break;
+                case 'company_auth_fail':
                   // 企业认证失败
-                router.pushPlus('/company/my');
-                break;
-              case 'notification_money':
+                  router.pushPlus('/company/my');
+                  break;
+                case 'notification_money':
                   // 资金变动通知
-                router.pushPlus('/my/Finance');
-                break;
-              case 'user_following':
+                  router.pushPlus('/my/Finance');
+                  break;
+                case 'user_following':
                   // 用户关注通知
-                router.pushPlus('/share/resume?id=' + payload.object_id);
-                break;
-              case 'readhub_comment_replied':
+                  router.pushPlus('/share/resume?id=' + payload.object_id);
+                  break;
+                case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                router.push('/discover?redirect_url=' + payload.object_id);
-                break;
-              case 'readhub_submission_replied':
+                  router.push('/discover?redirect_url=' + payload.object_id);
+                  break;
+                case 'readhub_submission_replied':
                   // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                router.push('/discover?redirect_url=' + payload.object_id);
-                break;
-              case 'readhub_username_mentioned':
+                  router.push('/discover?redirect_url=' + payload.object_id);
+                  break;
+                case 'readhub_username_mentioned':
                   // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                router.push('/discover?redirect_url=' + payload.object_id);
-                break;
-            }
-          };
-
-          // 监听点击消息事件
-          plus.push.addEventListener("click", (msg) => {
-            // 判断是从本地创建还是离线推送的消息
-            switch (msg.payload) {
-              case "LocalMSG":
-                console.log("点击本地创建消息启动：");
-                break;
-              default:
-                console.log(msg);
-                break;
-            }
-            // 提示点击的内容
-            if (msg.payload) {
-              //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
-              if (mui.os.ios) {
-                var payload = msg.payload;
-              } else {
-                var payload = JSON.parse(msg.payload);
+                  router.push('/discover?redirect_url=' + payload.object_id);
+                  break;
               }
-              var repeatKey = payload.object_type + payload.object_id;
-              var isRepeat = localEvent.getLocalItem(repeatKey);
-              if (isRepeat.key) {
-                return;
-              } else {
-                localEvent.setLocalItem(repeatKey,{key:repeatKey});
+            };
+
+            // 监听点击消息事件
+            plus.push.addEventListener("click", (msg) => {
+              // 判断是从本地创建还是离线推送的消息
+              switch (msg.payload) {
+                case "LocalMSG":
+                  console.log("点击本地创建消息启动：");
+                  break;
+                default:
+                  console.log(msg);
+                  break;
               }
-              noticeTo(payload);
-            }
-
-          }, false);
-          // 监听在线消息事件
-          plus.push.addEventListener("receive", (msg) => {
-            if (msg.aps) {  // Apple APNS message
-              console.log("接收到在线APNS消息：");
-            } else {
-              console.log("接收到在线透传消息：");
-            }
-
-            if (msg.payload) {
-              //plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
-              if (mui.os.ios) {
-                var payload = msg.payload.payload;
-              } else {
-                var payload = JSON.parse(msg.payload);
-              }
-              var repeatKey = payload.object_type + payload.object_id;
-              var isRepeat = localEvent.getLocalItem(repeatKey);
-              if (isRepeat.key) {
-                return;
-              } else {
-                localEvent.setLocalItem(repeatKey,{key:repeatKey});
-              }
-
-              setIncBadgeNumber();
-
-              var btnArray = ['取消', '前往查看'];
-              mui.confirm(payload.title, '提示', btnArray, (e) => {
-                if (e.index == 1) {
-                  noticeTo(payload);
+              // 提示点击的内容
+              if (msg.payload) {
+                //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
+                if (mui.os.ios) {
+                  var payload = msg.payload;
+                } else {
+                  var payload = JSON.parse(msg.payload);
                 }
-              });
-            }
+                //var repeatKey = payload.object_type + payload.object_id;
+                //var isRepeat = localEvent.getLocalItem(repeatKey);
+                /*if (isRepeat.key) {
+                 return;
+                 } else {
+                 localEvent.setLocalItem(repeatKey,{key:repeatKey});
+                 }*/
+                noticeTo(payload);
+              }
 
-          }, false);
+            }, false);
+            // 监听在线消息事件
+            plus.push.addEventListener("receive", (msg) => {
+              if (msg.aps) {  // Apple APNS message
+                console.log("接收到在线APNS消息：");
+              } else {
+                console.log("接收到在线透传消息：");
+              }
+
+              if (msg.payload) {
+                //plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
+                if (mui.os.ios) {
+                  var payload = msg.payload.payload;
+                } else {
+                  var payload = JSON.parse(msg.payload);
+                }
+                var repeatKey = payload.object_type + payload.object_id;
+                var isRepeat = localEvent.getLocalItem(repeatKey);
+                if (isRepeat.key) {
+                  return;
+                } else {
+                  localEvent.setLocalItem(repeatKey,{key:repeatKey});
+                }
+
+                setIncBadgeNumber();
+
+                var btnArray = ['取消', '前往查看'];
+                mui.confirm(payload.title, '提示', btnArray, (e) => {
+                  if (e.index == 1) {
+                    noticeTo(payload);
+                  }
+                });
+              }
+
+            }, false);
+          }
+
         }
       });
     }
