@@ -20,7 +20,7 @@
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
-					<div class="message" v-if="notice_message.unread_count != 0">{{notice_message.unread_count}}</div>
+					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
 					<p>
 						<span>通知公告</span>
 						<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.body : ""}}</span>
@@ -30,7 +30,7 @@
 				</li>
 		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
-       	 	<div class="message" v-if="money_message.unread_count != 0">{{money_message.unread_count}}</div>
+       	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
        	 	   <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.body : ""}} </span>
@@ -50,7 +50,7 @@
        	 </li>
 				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
-					<div class="message" v-if="task_message.unread_count != 0">{{task_message.unread_count}}</div>
+					<div class="message" v-if="task_count != 0">{{task_count}}</div>
 					<p>
 						<span>任务动态</span>
 						<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.body : ""}} </span>
@@ -60,7 +60,7 @@
 				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
 					<img src="../../statics/images/read1.png" />
-					<div class="message" v-if="readhub_message.unread_count != 0">{{readhub_message.unread_count}}</div>
+					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
 						<span>阅读发现</span>
 						<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.body : ""}}</span>
@@ -96,6 +96,10 @@
 			task_message: {},//未读任务动态数
 		    readhub_message: {},//未读阅读发现数
 		    money_message: {},//未读资金变动数
+		    notice_count:0,
+		    task_count:0,
+		    readhub_count:0,
+		    money_count:0
 		}),
 		methods: {
 			//下拉刷新;
@@ -118,7 +122,13 @@
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
-					console.log(this.notice_message)
+					
+					
+					this.notice_count = this.notice_message.unread_count;
+				    this.task_count = this.task_message.unread_count;
+				    this.readhub_count = this.readhub_message.unread_count;
+				    this.money_count = this.money_message.unread_count;
+//					console.log(this.notice_message)
 				});
 			},
 			//请求标记
