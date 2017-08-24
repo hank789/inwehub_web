@@ -18,6 +18,8 @@
       </div>
     </div>
 
+    <div class="mui-content absolute">
+
     <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
 
@@ -49,7 +51,7 @@
 
     </div>
     </div>
-
+    </div>
 
 
   </div>

@@ -920,10 +920,16 @@ input.upload-file[type=file]{
   padding-top:54px;
 }
 
+.openAppH5 .mui-bar-nav ~  .mui-content{
+  padding-top: 98px;
+}
+
 .openAppH5 .mui-bar-nav ~  .mui-content.absolute{
   top:98px;
   padding-top: 0;
 }
+
+
 
 .openAppWechat .mui-content{
   padding-top:49px;
@@ -934,3 +940,7 @@ input.upload-file[type=file]{
   padding-top:0;
 }
 
+
+.mui-bar-nav{
+  position: absolute;
+}
