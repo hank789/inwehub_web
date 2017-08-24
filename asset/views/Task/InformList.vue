@@ -19,7 +19,7 @@
 			<ul>
 				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
-					<div class="message" v-if="unread_notice_message">{{unread_notice_message}}</div>
+					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
 					<p>
 						<span>通知公告</span>
 						<span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款ub是一款一款一ub是一款一款一</span>
@@ -29,7 +29,7 @@
 				</li>
 		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />  
-       	 	<div class="message" v-if="unread_notice_message">{{unread_notice_message}}</div>
+       	 	<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
        	 	   <span class="mui-ellipsis">问答支出88元 </span>
@@ -49,7 +49,7 @@
        	 </li>
 				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
-					<div class="message" v-if="unread_notice_message">{{unread_notice_message}}</div>
+					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
 					<p>
 						<span>任务动态</span>
 						<span class="mui-ellipsis">刘明专家回答了你的提问 </span>
@@ -59,7 +59,7 @@
 				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
 					<img src="../../statics/images/read1.png" />
-					<div class="message" v-if="unread_notice_message">{{unread_notice_message}}</div>
+					<div class="message" v-if="unread_notice_message != 0">{{unread_notice_message}}</div>
 					<p>
 						<span>阅读发现</span>
 						<span class="mui-ellipsis">郭大红回复 </span>

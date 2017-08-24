@@ -33,7 +33,7 @@
 						<p>
 							<span>用户名：<i>{{item.data.name}}</i></span>
 							<span>余&nbsp;&nbsp;&nbsp;额：<i>{{item.data.current_balance}}</i></span>
-							<span v-if="item.data.extra_body">{{item.data.extra_body}}</span>
+							<span  v-if="item.data.extra_body">{{item.data.extra_body}}</span>
 							<i class="bot"></i>
 						</p>
 						<p  @tap.stop.prevent="$router.pushPlus(item.data.url)">
@@ -98,55 +98,7 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					//请求成功的操作
-					response = {
-						"status": true,
-						"code": 1000,
-						"message": "操作成功",
-						"data": {
-							"current_page": 1, //当前页
-							"per_page": 10, //每页条数
-							"from": 1, //起始位置
-							"to": 10, //结束位置
-							"data": [{
-									"id": "f54c537e-f186-4338-8311-aab7870f8ac4", //通知id
-									"type": "App\\Notifications\\Readhub\\SubmissionReplied", //类型
-									"data": {
-										"url": "/my", //通知跳转链接
-										"avatar": "", //头像，暂时无用
-										"name": "张三", //用户名
-										"title": "问答服务费结算到账", //通知标题
-										"change_money": "30", //变动金额
-										"before_money": "100", //变动前金额
-										"current_balance": "130", //当前余额
-										"io": "-1", //1为入账，-1为出账
-										"body": "交易成功", //通知内容
-										"extra_body": "0", //额外内容，为空就不显示
-									},
-									"read_at": '2017-04-20 12:24:25', //是否已读,null表示未读
-									"created_at": "2017-04-20 12:24:25", //创建时间
-								},
-								{
-									"id": "f54c537e-f186-4338-8311-aab7870f8ac4", //通知id
-									"type": "App\\Notifications\\Readhub\\SubmissionReplied", //类型
-									"data": {
-										"url": "/my/finance", //通知跳转链接
-										"avatar": "", //头像，暂时无用
-										"name": "王五", //用户名
-										"title": "问答服务费结算到账", //通知标题
-										"change_money": "30", //变动金额
-										"before_money": "100", //变动前金额
-										"current_balance": "130", //当前余额
-										"io": "1", //1为入账，-1为出账
-										"body": "交易成功", //通知内容
-										"extra_body": "感谢您对InweHub的信任!", //额外内容，为空就不显示
-									},
-									"read_at": "2017-08-21 16:30:05", //是否已读,null表示未读
-									"created_at": "2017-04-20 12:24:25", //创建时间
-								}
-							]
-						}
-					}
+					
 					console.log(response.data)
 					if(response.data.data.length > 0) {
 						this.list = response.data.data;
@@ -273,8 +225,102 @@
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
-	
 	ul {
+		width: 100%;
+		padding: 0px 16px 0 16px;
+		margin-top: 11px;
+	}
+	ul p {
+		text-align: center;
+		position: relative;
+	}
+	ul li {
+		width: 100%;
+		background: #f3f4f6;
+		margin-top: 11px;
+		border: 0.5px solid #dcdcdc;
+		border-radius: 5px;
+		padding: 12px 15px;
+	}
+	ul li p:nth-of-type(1) {
+		width: 100%;
+		height: 110px;
+	}
+	ul li p:nth-of-type(1) .check {
+		display: inline-block;
+		width: 100%;
+		height: 20px;
+	}
+	
+	.check i:nth-of-type(1) {
+		float: left;
+		font-size: 14px;
+		color: #444444;
+	}
+	
+	.check i:nth-of-type(2) {
+		font-size: 12px;
+		color: #808080;
+		float: right;
+	}
+	
+	ul li p:nth-of-type(1) span:nth-of-type(2) {
+		display:block;
+		margin-top: 23px;
+		font-size: 23px;
+		color: #444444;
+	}
+	
+	ul li p:nth-of-type(1) span:nth-of-type(3) {
+		display: block;
+		margin-top: 5px;
+		font-size: 14px;
+		color: #808080;
+	}
+    ul li p:nth-of-type(2){
+    	overflow: hidden;
+    }
+	ul li p:nth-of-type(2) span {
+		width: 100%;
+		float: left;
+		text-align: left;
+		display: block;
+		color: rgb(128, 128, 128);
+		height: 28px;
+		line-height: 25px;
+	}
+	
+	ul li p:nth-of-type(2) span:last-of-type {
+		/*width: 100%;
+		height: 35px;
+		line-height: 20px;*/
+		
+		
+	}
+	
+	ul li p:nth-of-type(2) span:nth-child {
+		width: 100%;
+		height: 22px;
+		
+	}
+	ul li p:nth-of-type(3){
+		width: 100%;
+		height: 25px;
+		color: #808080;
+		font-size: 14px;
+		
+	}
+	ul li p:nth-of-type(3) span{
+		float: left;
+		line-height: 35px;
+		
+	}
+	ul li p:nth-of-type(3) svg{
+		float: right;
+		margin-top: 10px;
+		
+	}
+	/*ul {
 		width: 100%;
 		height: 304px;
 		padding: 0px 16px 0 16px;
@@ -396,7 +442,7 @@ ul li p:nth-of-type(1) span:nth-of-type(2) i:nth-child(1){
 		font-size: 13px;
 		color: #808080;
 		margin-top: 14px;
-	}
+	}*/
 	/*无数据的样式 */
 	
 	.container {
