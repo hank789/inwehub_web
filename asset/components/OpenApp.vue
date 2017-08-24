@@ -126,7 +126,7 @@
     height:54px;
    /* border-radius:4px;*/
     background:#252525;
-    position: absolute;
+    position: fixed;
     opacity: 0.9;
     top:0;
     z-index: 999;
@@ -194,7 +194,7 @@
   .mui-wechat .suspension{
     width: 100%;
     height: 49px;
-    position: absolute;
+    position: fixed;
     opacity: 0.9;
     top: 0px;
     background: #FFFFFF;
