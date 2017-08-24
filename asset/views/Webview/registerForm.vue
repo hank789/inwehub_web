@@ -16,7 +16,7 @@
       loading:1
     }),
     created () {
-      
+
     },
     methods: {
 
@@ -32,11 +32,11 @@
         function createEmbed(ws) {
             var url="https://jinshuju.net/f/bWXY8y";
 
-            var id = "jinshuju";
+            var id = "jinshuju_son";
             var title = '申请邀请码';
 
             var webviewBackButton = () => {
-              var currentWs = plus.webview.getWebviewById(id);
+              var currentWs = plus.webview.getWebviewById(ws.id);
               if (currentWs) {
                 console.log('webviewBackButton close');
                 currentWs.hide();
@@ -69,7 +69,28 @@
               webviewBackButton();
             });
 
-            ws.append(webview);
+          //兼容android
+          if (mui.os.plus) {
+            if (mui.os.android) {
+              //创建返回链接
+              var viewBack = new plus.nativeObj.View('test', {top: '0px', left: '0px', height: '44px', width: '100px'});
+
+              viewBack.draw([
+                {
+                  tag: 'rect',
+                  id: 'rect',
+                  rectStyles: {color: 'rgba(0,0,0,0)'},
+                  position: {top: '0px', left: '0px', width: '100%', height: '44px'}
+                },
+              ]);
+              viewBack.addEventListener('click', () => {
+                webviewBackButton();
+              }, false);
+              webview.append(viewBack);
+            }
+          }
+
+          ws.append(webview);
         }
       });
 
