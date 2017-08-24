@@ -133,19 +133,28 @@
                 break;
               case 'authentication_success':
                   // 专家认证成功
-                  break;
+                router.pushPlus('/my');
+                break;
               case 'authentication_fail':
                   // 专家认证失败
-                  break;
+                router.pushPlus('/my/pilot');
+                break;
               case 'company_auth_success':
                   // 企业认证成功
-                  break;
+                router.pushPlus('/company/my');
+                break;
               case 'company_auth_fail':
                   // 企业认证失败
-                  break;
+                router.pushPlus('/company/my');
+                break;
               case 'notification_money':
                   // 资金变动通知
-                  break;
+                router.pushPlus('/my/Finance');
+                break;
+              case 'user_following':
+                  // 用户关注通知
+                router.pushPlus('/share/resume?id=' + payload.object_id);
+                break;
               case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
                   break;

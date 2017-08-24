@@ -57,7 +57,7 @@
   }
 
 </script>
-<style>
+<style scoped="scoped">
   .footer{
     position: fixed;
     bottom:0;

@@ -108,7 +108,7 @@ function openWebviewByHome(id, url, pathUrl, title)
 
 
     //创建评论链接
-    var view = new plus.nativeObj.View('test', {bottom:'0px',left:'39%',height:'44px',width:'100px'});
+    var view = new plus.nativeObj.View('test', {bottom:'0px',left:'0',height:'44px',width:'60%'});
 
     view.draw([
       {tag:'rect',id:'rect',rectStyles:{color:'rgba(0,0,0,0)'},position:{bottom:'0px',left:'0px',width:'100%',height:'44px'}},
