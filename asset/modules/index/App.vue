@@ -22,6 +22,7 @@
   import OpenAppComponent from '../../components/OpenApp.vue';
   import {goBack} from '../../utils/webview';
   import EventObj from '../../utils/event';
+  import {setIncBadgeNumber} from '../../utils/notice';
 
   export default {
     data () {
@@ -212,6 +213,8 @@
               } else {
                 localEvent.setLocalItem(repeatKey,{key:repeatKey});
               }
+
+              setIncBadgeNumber();
 
               var btnArray = ['取消', '前往查看'];
               mui.confirm(payload.title, '提示', btnArray, (e) => {

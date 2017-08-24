@@ -16,8 +16,8 @@
 			</div>
 
 			<div class="mui-scroll" v-show="nothing == 0">
-				<ul>
-					<li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/discover?url=' + item.data.url)">
+				<ul>                    
+					<li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=' + item.data.url)">
 						<img :src="item.data.avatar" />
 						<div class="message" v-if="item.read_at == null"></div>
 						<p>
@@ -34,7 +34,7 @@
 			</div>
 		</div>
        </div>
-		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
+		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
 
@@ -85,59 +85,7 @@
 						mui.back();
 					}
 					//请求成功的操作
-					 //请求成功的操作
-					response = {
-						"status": true,
-						"code": 1000,
-						"message": "操作成功",
-						"data": {
-							"current_page": 1, //当前页
-							"per_page": 10, //每页条数
-							"from": 1, //起始位置
-							"to": 10, //结束位置  
-							"data": [{
-									"id": "f54c537e-f186-4338-8311-aab7870f8ac4",
-									"type": "App\\Notifications\\Readhub\\SubmissionReplied",
-									"data": {
-										"url": "/discover", //通知跳转链接
-										"avatar": "https://intervapp-test.oss-cn-zhangjiakou.aliyuncs.com/media/251/user_origin_15.png",
-										"title": "laoguo回复了文章", //通知标题
-										"body": "测试自写内容辅导费", //通知内容
-										"extra_body": "", //额外内容，为空就不显示
-									},
-									"read_at": 1, //是否已读,null表示未读
-									"created_at": "2017-04-20 12:24:25", //创建时间
-								},
-								{
-									"id": "f54c537e-f186-4338-8311-aab7870f8ac4",
-									"type": "App\\Notifications\\Readhub\\SubmissionReplied",
-									"data": {
-										"url": "/discover", //通知跳转链接
-										"avatar": "https://intervapp-test.oss-cn-zhangjiakou.aliyuncs.com/media/239/user_origin_7.jpg",
-										"title": "郭大红回复", //通知标题
-										"body": "前十四章节已经介绍了如何用django来建立一前十四章节已经介绍了如何用django来建立一前十四章节已经介绍了如何用django来建立一", //通知内容
-										"extra_body": "原文:呵呵哒呵呵哒呵呵哒呵呵哒呵呵哒呵呵哒呵呵哒呵呵哒", //额外内容，为空就不显示
-									},
-									"read_at": null, //是否已读,null表示未读
-									"created_at": "2017-04-20 12:24:25", //创建时间
-								},
-								{
-									"id": "f54c537e-f186-4338-8311-aab7870f8ac4",
-									"type": "App\\Notifications\\Readhub\\SubmissionReplied",
-									"data": {
-										"url": "/discover", //通知跳转链接
-										"avatar": "https://intervapp-test.oss-cn-zhangjiakou.aliyuncs.com/media/247/user_origin_14.png",
-										"title": "laoguo回复了文章", //通知标题
-										"body": "测试自写内容辅导费", //通知内容
-										"extra_body": "原文:呵呵哒", //额外内容，为空就不显示
-									},
-									"read_at": 0, //是否已读,null表示未读
-									"created_at": "2017-04-20 12:24:25", //创建时间
-								}
-
-							]
-						}
-					};
+					
 					if(response.data.data.length > 0) {
 						this.list = response.data.data;
 						this.data = response.data;

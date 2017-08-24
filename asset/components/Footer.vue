@@ -209,6 +209,9 @@
           case '/discover':
             this.isDiscover = true;
             break;
+          case '/inform':
+            this.isAsk = true;
+            break;
           default:
             this.showBottom = false;
         }
