@@ -4,8 +4,8 @@ function setStatusBarBackgroundAndStyle(baColor, style)
       if (mui.os.plus) {
         var ss = plus.navigator.getStatusBarBackground();
         if (ss !== baColor) {
-          console.log("statusBgcolor:", baColor);
-          console.log("statusBarStyle:", style);
+          console.log("statusBgcolor:" + baColor);
+          console.log("statusBarStyle:" + style);
           plus.navigator.setStatusBarBackground(baColor);
           plus.navigator.setStatusBarStyle(style);
         }
@@ -54,7 +54,7 @@ function autoStatusBar()
     document.body.style.background = '';
   }
 
-  console.log("bodyBackground:", background);
+  console.log("bodyBackground:" + background);
 }
 
 /**

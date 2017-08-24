@@ -130,6 +130,30 @@
                  // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                 break;
+              case 'authentication_success':
+                  // 专家认证成功
+                  break;
+              case 'authentication_fail':
+                  // 专家认证失败
+                  break;
+              case 'company_auth_success':
+                  // 企业认证成功
+                  break;
+              case 'company_auth_fail':
+                  // 企业认证失败
+                  break;
+              case 'notification_money':
+                  // 资金变动通知
+                  break;
+              case 'readhub_comment_replied':
+                  // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
+                  break;
+              case 'readhub_submission_replied':
+                  // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
+                  break;
+              case 'readhub_username_mentioned':
+                  // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
+                  break;
             }
           };
 
