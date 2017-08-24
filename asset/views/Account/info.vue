@@ -6,7 +6,7 @@
 			<!--<a class="mui-icon myicon myicon-share mui-pull-right"></a>-->
 		</header>
 
-		<div class="mui-content" v-show="!loading">
+		<div class="mui-content absolute" v-show="!loading">
 
 			<div class="info-professor">
 				<div class="info-look" @tap.stop.prevent="$router.pushPlus('/my/resume')">
@@ -213,6 +213,9 @@
 	}
 </script>
 <style scoped>
+	.mui-content {
+    background-color: #ffffff;
+     }
 	.mui-bar .myicon {
 		width: 16px;
 		height: 16px;

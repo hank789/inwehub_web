@@ -4,7 +4,8 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">通知公告</h1>
 		</header>
-        <div class="mui-content absolute"></div>
+		
+        <div class="mui-content absolute">
 		<div class=" mui-scroll-wrapper" id="pullrefresh">
 			<div class="container" v-if="nothing == 1">
 				<svg class="icon" aria-hidden="true">
@@ -28,7 +29,7 @@
 
 			</div>
 		</div>
-
+        </div>
 		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 	</div>
 </template>

@@ -5,8 +5,9 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">任务动态</h1>
 		</header>
-
-		<div class="mui-scroll-wrapper mui-content" id="pullrefresh">
+        
+        <div class="mui-content absolute">
+		<div class="mui-scroll-wrapper" id="pullrefresh">
 			<div class="container" v-if="nothing == 1">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-zanwushuju"></use>
@@ -32,7 +33,7 @@
 
 			</div>
 		</div>
-
+        </div>
 		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 	</div>
 </template>
@@ -83,6 +84,8 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
+
+
 
 					if(response.data.data.length > 0) {
 						this.list = response.data.data;

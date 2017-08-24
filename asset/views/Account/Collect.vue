@@ -6,8 +6,10 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">我的关注</h1>
     </header>
-
-    <div class="mui-content mui-scroll-wrapper task-list" id="pullrefresh">
+    
+    
+    <div class="mui-content absolute">
+    <div class=" mui-scroll-wrapper task-list" id="pullrefresh">
       <div class="mui-scroll">
 
       		<div class="container" v-if="!this.list.length && !loading" >
@@ -43,12 +45,8 @@
         </ul>
       </div>
     </div>
-
-    <!--<div class="mui-content list-empty" v-if="!this.list.length && !loading">
-        <div class="mui-table-view-cell">
-            <div class="title">暂无收藏</div>
-        </div>
-    </div>-->
+    </div>
+   
 
 
   </div>
