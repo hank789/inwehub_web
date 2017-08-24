@@ -74,7 +74,11 @@
     },
     mounted(){
       this.currentUser = localEvent.getLocalItem('UserInfo');
-      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
+      this.url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid + '&redirect_url=';
+
+      if (this.$route.query.redirect_url) {
+        this.url = this.url + this.$route.query.redirect_url;
+      }
 
       if (mui.os.plus) {
           this.createReadWebview();
