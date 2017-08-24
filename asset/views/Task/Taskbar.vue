@@ -87,10 +87,10 @@
 
 
 
-					if(response.data.data.length > 0) {
-						this.list = response.data.data;
-						this.data = response.data;
-						console.log(response.data);
+					if(response.data.data.data.length > 0) {
+						this.list = response.data.data.data;
+						this.data = response.data.data;
+//						console.log(response.data);
 					}
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -113,10 +113,10 @@
 						mui.back();
 					}
 
-					if(response.data.data.length > 0) {
-						//给请求的数据重新赋值；刷新最新的数据；
-						this.list = response.data.data;
-						this.data = response.data;
+					if(response.data.data.data.length > 0) {
+						this.list += response.data.data.data;
+						this.data = response.data.data;
+//						console.log(response.data);
 					}
 
 					this.loading = 0;
