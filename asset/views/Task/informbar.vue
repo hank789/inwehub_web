@@ -30,7 +30,7 @@
 			</div>
 		</div>
         </div>
-		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
+		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
 

@@ -78,7 +78,7 @@
 
 
 
-    <div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
+   <!-- <div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>-->
   </div>
 </template>
 
@@ -345,6 +345,12 @@
   }
 
   /*滚动区域*/
+ .mui-content.absolute .menu ~ #pullrefresh {
+   top: 45px;
+}
+ 
+ 
+ 
   #pullrefresh {
   	position: absolute;
   	top: 45px;
