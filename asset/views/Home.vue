@@ -66,7 +66,7 @@
 			</div>
 			<!--人物推荐-->
 			<swiper :options="swiperOption" id="home-recommend">
-			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index">
+			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index" :uuid="experts.uuid">
 			        <img :src="experts.avatar_url" :class="experts.uuid"  />
 					<span>
 	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
@@ -145,7 +145,8 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
-  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar'
+  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
+  import {queryParent} from '../utils/dom';
 
 	const Home = {
 		data: () => ({
@@ -200,15 +201,11 @@
 		},
 		methods: {
 			swipperClick(swiper, event){
-      	          var  Ele = event.srcElement.parentNode.firstChild.className.split(" ");
-     	            var uuid = "";
-      	            if(Ele.length ===1){
-      	            	  uuid = Ele[0]
-     	            }else{
-      	            	    uuid = Ele[1]
-   	            	   }
-
-     	           this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+			    var parent = queryParent(event.target, 'swiper-slide');
+          if (!parent) return;
+         
+          var uuid = parent.getAttribute('uuid');
+          this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
 			   this.goLink(url);
