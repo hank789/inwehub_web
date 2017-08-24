@@ -7,8 +7,7 @@
 
 		</header>
 
-		<div class="mui-content" v-show="!loading">
-
+		<div class="mui-content absolute" v-show="!loading">
 			<div class="container" v-show="trains.length == 0">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-zanwushuju"></use>
@@ -122,6 +121,9 @@
 	#container {
 		width: 100%;
 		height: 100%;
+		background: #FFFFFF;
+	}
+	.mui-content{
 		background: #FFFFFF;
 	}
 

@@ -5,8 +5,9 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">余额变动</h1>
 		</header>
-
-		<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+        
+        <div class="mui-content absolute">
+		<div class="mui-scroll-wrapper" id="pullrefresh">
 
 			<div class="container" v-if="nothing == 1">
 				<svg class="icon" aria-hidden="true">
@@ -15,7 +16,8 @@
 				<p>暂时还没有数据呀～</p>
 			</div>
 
-			<div class="mui-scroll" v-show="nothing == 0">
+			<div class="mui-scroll">
+				<div v-show="nothing == 0">
 				<ul v-for="item in list">
 					<p>{{item.read_at}}</p>
 					<li>
@@ -42,10 +44,10 @@
 						</p>
 					</li>
 				</ul>
-
+				</div>
 			</div>
 		</div>
-
+        </div>
 		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 	</div>
 </template>
@@ -119,7 +121,7 @@
 										"current_balance": "130", //当前余额
 										"io": "-1", //1为入账，-1为出账
 										"body": "交易成功", //通知内容
-										"extra_body": "", //额外内容，为空就不显示
+										"extra_body": "0", //额外内容，为空就不显示
 									},
 									"read_at": '2017-04-20 12:24:25', //是否已读,null表示未读
 									"created_at": "2017-04-20 12:24:25", //创建时间
@@ -266,7 +268,7 @@
 }
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
-	}
+	 }
 	.mui-content {
 		background: #FFFFFF;
 	}
