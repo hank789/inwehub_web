@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <ShortTcutComponent ref="short"></ShortTcutComponent>
   <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
 
     <div class="mui-tab-item mui-active" v-if="isHome">
@@ -30,7 +32,7 @@
 
 
     <div class="askWrapper">
-      <div class="askPlus" @tap.stop.prevent="$router.push('/ask')"><div class="askImgBg"></div><div class="askImg"></div></div>
+      <div class="askPlus"  @tap.stop.prevent="show()"><div class="askImgBg"></div><div class="askImg"></div></div>
       <div class="title">提问</div>
     </div>
 
@@ -64,6 +66,8 @@
 
 
   </nav>
+  
+  </div>
 </template>
 
 
@@ -71,6 +75,8 @@
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import localEvent from '../stores/localStorage';
   import {setAppBadgeNumber} from '../utils/notice';
+  
+  import ShortTcutComponent from '../components/ShortTcut.vue';
 
   export default {
     data () {
@@ -86,6 +92,8 @@
     props: {
     },
     mounted () {
+    	
+    	  //this.$refs.short.show();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
         if (this.showBottom) {
@@ -107,6 +115,9 @@
       });
     },
     methods:{
+    	  show(){
+    	  	this.$refs.short.show();
+    	  },
       listen() {
         var currentUser = localEvent.getLocalItem('UserInfo');
         if (currentUser.user_id && Echo){
@@ -222,6 +233,9 @@
       },
 
 
+    },
+    components: {
+      ShortTcutComponent
     },
     watch: {
       $route(to) {

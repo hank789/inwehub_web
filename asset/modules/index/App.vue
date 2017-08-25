@@ -1,7 +1,7 @@
 <template>
   <div id="app">
         <div v-wechat-title="wechatTitle"></div>
-
+        
         <div class='view'>
           <keep-alive>
             <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
@@ -11,6 +11,7 @@
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
+       
   </div>
 </template>
 

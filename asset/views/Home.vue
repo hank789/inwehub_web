@@ -200,12 +200,12 @@
 			}
 		},
 		methods: {
-			swipperClick(swiper, event){
+		swipperClick(swiper, event){
 			    var parent = queryParent(event.target, 'swiper-slide');
-          if (!parent) return;
+                if (!parent) return;
 
-          var uuid = parent.getAttribute('uuid');
-          this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+               var uuid = parent.getAttribute('uuid');
+              this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
 			   this.goLink(url);
