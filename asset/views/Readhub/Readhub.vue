@@ -64,6 +64,7 @@
         if (inwehub_embed_webview) {
           if (this.$route.query.redirect_url) {
             var redirect_url = this.url + '&redirect_url=' + this.$route.query.redirect_url;
+            console.log('readhub:redirect_url:'+redirect_url);
             inwehub_embed_webview.loadURL(redirect_url);
           }
           inwehub_embed_webview.show();

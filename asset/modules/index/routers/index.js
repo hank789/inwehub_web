@@ -49,9 +49,9 @@ if (!window.isLocalEnv) {
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('pushPlusUrl:'+url);
+  var footerTab = ['/discover','/home','/task','/my'];
 
-  if (mui.os.plus && (mui.os.ios || forceWebView)) {
-
+  if (mui.os.plus && ((mui.os.ios && footerTab.indexOf(url) === -1) || forceWebView)) {
     if (!window.isLocalEnv) {
 
         this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
@@ -68,9 +68,14 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
           nextUrl = location.protocol + '//' + window.location.host + '/' + 'index.html#' + url;
         }
     }
+    var id = nextUrl;
+    //底部4个tab的页面默认为主页
+    if (footerTab.indexOf(url) >=0){
+      id = plus.runtime.appid;
+    }
 
     console.log('pushPlusUrl-Webview:' + nextUrl);
-    openWebviewByUrl(nextUrl, autoShow, aniShow, popGesture);
+    openWebviewByUrl(id, nextUrl, autoShow, aniShow, popGesture);
   } else {
     console.log('pushPlusUrl-router:' + url);
     router.push(url);
