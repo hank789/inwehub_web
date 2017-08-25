@@ -58,7 +58,7 @@
 					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
+				<li @tap.stop.prevent="$router.push('/readbar')">
 					<img src="../../statics/images/read1.png" />
 					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
