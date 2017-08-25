@@ -27,7 +27,7 @@
 
             </div>
       </div>
-      <div id="statusBarStyle" background="#eeeff3"   bgColor="#eeeff3" mode="dark"></div>
+      <div id="statusBarStyle" background="#eeeff3"></div>
 </div>
 </template>
 
