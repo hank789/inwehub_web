@@ -36,6 +36,7 @@
 </template>
 <!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
+import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
   export default {
     methods: {
       skip(num){
@@ -67,8 +68,10 @@
             inwehub_embed_webview.setStyle({bottom: '1000px'});
           }
         }
+        
+        setStatusBarBackgroundAndStyle('#D8D9DC', 'light');
 
-        console.log(1111)
+       
 
       },
       hide(){
@@ -78,6 +81,7 @@
         setTimeout(function () {
           document.getElementById("short_all").style.display = "none";
           document.getElementById("down").classList.remove("end");
+          autoHeight();
         }, 300)
 
 
@@ -89,11 +93,20 @@
               inwehub_embed_webview.setStyle({bottom: '75px'});
             }, 300);
           }
+          
+         
         }
+		
+		
 
       }
 
-    }
+    },
+    mounted() {
+
+       
+
+		}
   }
 
 
@@ -112,11 +125,12 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: #f3f4f6;
-    opacity: 0.85;
-    /* filter: blur(9px);*/
+    background:url(../statics/images/bg.jpeg);
+	background-position: center;
+	background-size: cover;
+	opacity: 0.98;
+	filter: opacity(98%);
     display: none;
-
   }
 
   #short_all p {
@@ -139,7 +153,7 @@
   }
 
   ul {
-
+     
     position: absolute;
     width: 70%;
     height: 260px;
