@@ -64,6 +64,10 @@ const routes = [{
 			title: '登录'
 		},
 		beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
 			CanNotGetInWhenLogged(to, from, next)
 		}
 	},
@@ -371,6 +375,10 @@ const routes = [{
 			title: '提现'
 		},
 		beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
 			requestAuth(to, from, next)
 		}
 	},
@@ -518,10 +526,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -534,10 +538,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -550,10 +550,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -566,10 +562,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -582,10 +574,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -598,10 +586,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -614,10 +598,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
