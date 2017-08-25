@@ -203,7 +203,7 @@
 			swipperClick(swiper, event){
 			    var parent = queryParent(event.target, 'swiper-slide');
           if (!parent) return;
-         
+
           var uuid = parent.getAttribute('uuid');
           this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 			},
@@ -258,8 +258,8 @@
               }
             });
           } else {
-            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
+//            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+//            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
               window.location.href = url;
 
           }
