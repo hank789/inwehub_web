@@ -70,20 +70,26 @@
 
       mui.plusReady(function () {
         if (mui.os.plus) {
+          var url = process.env.READHUB_URL + '/h5';
           if (currentUser.uuid) {
-            var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
-            //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
-            mui.preload({
-              url: url,
-              id: 'inwehub_embed',
-              styles: {
-                popGesture: 'hide',
-                top: '0px',
-                dock: 'top',
-                bottom: '75px',
-                bounce:'none'},
-              extras: {}
-            });
+            url = url + '?uuid=' + currentUser.uuid;
+          }
+          //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
+          var inwehub_embed_view = mui.preload({
+            url: url,
+            id: 'inwehub_embed',
+            styles: {
+              popGesture: 'hide',
+              top: '0px',
+              dock: 'top',
+              bottom: '75px',
+              bounce:'none'},
+            extras: {}
+          });
+          console.log("inwehub_embed:"+inwehub_embed_view.getURL());
+          if (inwehub_embed_view.getURL() !== url){
+            console.log('inwehub_embed:reload:'+ url);
+            inwehub_embed_view.loadURL(url);
           }
           mui.init({
             swipeBack:true, //启用右滑关闭功能
