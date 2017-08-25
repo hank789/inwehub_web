@@ -3,35 +3,37 @@ import {  setStatusBarBackgroundAndStyle, autoHeight } from './statusBar';
 /**
  * 打开webview
  */
-function openWebviewByUrl(url, autoShow=true, aniShow='pop-in', popGesture='hide') {
+function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='hide') {
     mui.plusReady(function(){
 
       console.log('calledMethod: openWebviewByUrl');
 
-      var current_webview = plus.webview.getWebviewById(url);
+      var current_webview = plus.webview.getWebviewById(id);
       if (current_webview) {
           mui.fire(current_webview, 'autoHeight', false);
+          if (current_webview.getURL() !== url) {
+            current_webview.loadURL(url);
+          }
+        current_webview.show();
+      } else {
+        var webview = mui.openWindow({
+          url: url,
+          id: id,
+          preload: false,//一定要为false
+          show: {
+            autoShow: autoShow,
+            aniShow: aniShow
+          },
+          styles: {
+            popGesture: popGesture
+          },
+          extras:{preload: false},
+          waiting: {
+            autoShow: false
+          }
+        });
       }
-
-      var webview = mui.openWindow({
-        url: url,
-        id: url,
-        preload: false,//一定要为false
-        show: {
-          autoShow: autoShow,
-          aniShow: aniShow
-        },
-        styles: {
-          popGesture: popGesture
-        },
-        extras:{preload: false},
-        waiting: {
-          autoShow: false
-        }
-      });
-
-      return webview;
-  });
+    });
 }
 
 /**
