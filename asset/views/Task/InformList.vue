@@ -18,7 +18,7 @@
 
 		   <div class="mui-scroll"  id="pullrefresh">
 			<ul>
-				<li @tap.stop.prevent="$router.push('/informbar')">
+				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
 					<img src="../../statics/images/inform1.png" />
 					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
 					<p>
@@ -28,7 +28,7 @@
 					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-		<li @tap.stop.prevent="$router.push('/balancebar')">
+		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
        	 	<img src="../../statics/images/balance1.png" />
        	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
        	 	<p>
@@ -38,7 +38,7 @@
        	 	<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <!--<li @tap.stop.prevent="$router.push('/integralbar')">
+       	 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
        	 	<img src="../../statics/images/integral1.png" />
        	 	<div class="message">99</div>
        	 	<p>
@@ -48,7 +48,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>-->
-				<li @tap.stop.prevent="$router.push('/taskbar')">
+				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
 					<div class="message" v-if="task_count != 0">{{task_count}}</div>
 					<p>
@@ -58,7 +58,7 @@
 					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<li @tap.stop.prevent="$router.push('/readbar')">
+				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
 					<img src="../../statics/images/read1.png" />
 					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
@@ -68,7 +68,7 @@
 					<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<!--<li @tap.stop.prevent="$router.push('/chat')">
+				<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
        	 	<img src="../../statics/images/service1.png" />
        	 	<div class="message">{{99}}</div>
        	 	<p>
