@@ -11,9 +11,11 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
       var current_webview = plus.webview.getWebviewById(id);
       if (current_webview) {
         mui.fire(current_webview, 'autoHeight', false);
+      }
+      if (current_webview && current_webview.getURL()) {
         var current_webview_url = current_webview.getURL();
         console.log('openWebviewByUrl:current:'+current_webview_url);
-        if ((current_webview_url && current_webview_url.indexOf(url) < 0)) {
+        if (current_webview_url.indexOf(url) < 0) {
           console.log('openWebviewByUrl:load:'+url);
           current_webview.loadURL(url);
         }
