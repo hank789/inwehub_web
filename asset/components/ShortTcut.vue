@@ -1,6 +1,6 @@
 <template>
-	<div class="short_all">
-	  <ul>
+	<div id="short_all">
+	  <ul id="down">
 	  	<li>
 	  		<svg class="icon" aria-hidden="true">
 		       <use xlink:href="#icon-fabuxuqiu"></use>
@@ -27,7 +27,7 @@
 	  	</li>
 	  	
 	  </ul>
-	  <p>
+	  <p @tap.stop.prevent="hide()">
 	  	<svg class="icon" aria-hidden="true">
 		  <use xlink:href="#icon-guanbi"></use>
 		</svg>
@@ -35,11 +35,28 @@
 	</div>
 </template>
 
-<script>
+<script type="text/javascript">
+  export default {
+  methods: {	
+	 show(){
+	 	 document.getElementById("short_all").style.display="inline";
+         console.log(1111)
+      
+	 },
+	 hide(){
+//	 	document.getElementById("short_all").style.display="none";
+	 	 console.log(222)
+	 	document.getElementById("down").setAttribute("class", "end"); 
+	 	setTimeout(function(){
+	 		document.getElementById("short_all").style.display="none";
+	 		document.getElementById("down").classList.remove("end");
+	 	},300)
+           
+	 }
 	
-//	show 
-//	   
-//	hide
+ }	
+}
+
 	   
 </script>
 
@@ -49,45 +66,66 @@
 		padding: 0;
 		list-style: none;
 	}
-.short_all{
+#short_all{
 	position: absolute;
+	top: 0;
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
 	background: #f3f4f6;
 	opacity: 0.85;
+    display: none;
+	
 }
-.short_all p{
+#short_all p{
 	position: absolute;
 	bottom: 38px;
 	left: 48%;
 	font-size: 17px;
 	color: #808080;
-	animation: rote 0.8s infinite;
+	animation: rote 0.5s infinite;
 	animation-iteration-count:1;	
-}	
+}
+
+@keyframes rote
+	{  
+	from {transform:rotateZ(0deg);}
+	to {transform:rotateZ(180deg);}
+	}
+
 
 ul{
 	width: 100%;
 	height: 260px;
 	/*background: #009689;*/
 	position: absolute;
-	bottom: 165px;
+	bottom: 110px;
 	/*transform:translateY(165px)*/
-	animation: myfirst 0.8s infinite;
+	animation: myfirst 0.3s infinite ;
 	animation-iteration-count:1;
 }
 
 
 @keyframes myfirst
-	{  
-	from {bottom:-200px; opacity: 0.7;}
-	to {bottom:165px; opacity: 0.8;}
+{
+	from {bottom:-130px; opacity: 0.6;}
+   to {bottom:110px; opacity: 1;}
+} 
+/*结束动画*/
+.end{
+	width: 100%;
+	height: 260px;
+	position: absolute;
+	bottom: -230px;
+	animation: myend 0.1s infinite ;
+	animation-iteration-count:1;
+}
+@keyframes myend
+{  
+	from {bottom:110px; opacity: 0.7;}
+	to {bottom:-140px; opacity: 1;}
 	}
-
-
-
-
+/**************/
 ul li{
 	width: 50%;
     height: 130px;
@@ -97,15 +135,39 @@ ul li{
 ul li:nth-of-type(1){
 	/*background: #009689;*/
 }
-ul li svg{
+/*ul li svg{
 	font-size: 53px;
-	margin-left: 76px;
+	margin-left:76px;
 	margin-top: 28px;
 }
 ul li span{
 	display: inline-block;
 	width: 100%;
 	text-align: center;
+	margin-top: 13px;
+}*/
+ul li:nth-of-type(1) svg,ul li:nth-of-type(3) svg{
+	font-size: 53px;
+	margin-left: 100px;
+	margin-top: 28px;
+}
+ul li:nth-of-type(2) svg,ul li:nth-of-type(4) svg{
+	font-size: 53px;
+	margin-left:63px;
+	margin-top: 28px;
+}
+ul li:nth-of-type(1) span,ul li:nth-of-type(3) span{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	margin-left: 30px;
+	margin-top: 13px;
+}
+ul li:nth-of-type(2) span,ul li:nth-of-type(4) span{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	margin-left: -15px;
 	margin-top: 13px;
 }
 </style>
