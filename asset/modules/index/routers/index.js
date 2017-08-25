@@ -49,6 +49,7 @@ if (!window.isLocalEnv) {
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('pushPlusUrl:'+url);
+
   if (mui.os.plus && (mui.os.ios || forceWebView)) {
 
     if (!window.isLocalEnv) {
