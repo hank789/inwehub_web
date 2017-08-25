@@ -41,7 +41,7 @@ Object.keys(entris).forEach(function(entry) {
     new HtmlWebpackPlugin({
       chunks: ['vendor', entry],
       filename: entry + '.html',
-      template: 'index.html',
+      template: entry + '.html',
       inject: true
     })
   )

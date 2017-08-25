@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="2Zg7K2U0hILa9oR79H3KiWt52qamsPavGdmbovIm">
+
+  <script>
+    window.Laravel = {"csrfToken":"2Zg7K2U0hILa9oR79H3KiWt52qamsPavGdmbovIm","env":"dev","pusherKey":"","is_h5":true,"echo_address":"http:\/\/nodejs-daemon:3000","pusherCluster":""};
+  </script>
+
+  <link rel="shortcut icon" href="/imgs/favicon.ico">
+
+  <title>Readhub</title>
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Readhub - Social Bookmarking For The 21st Century" />
+  <meta property="og:url" content="{{ config('app.url') }}" />
+  <meta property="og:site_name" content="Readhub" />
+
+  <meta name="description" content="A Modern, real-time, open-source, beautiful, deadly simple and warm community."/>
+  <meta property="og:description" content="A Modern, real-time, open-source, beautiful, deadly simple and warm community." />
+  <meta property="og:image" content="http://voten.dev/imgs/voten-circle.png">
+
+  <script type="application/ld+json">
+		{
+		    "@context": "http://schema.org",
+		    "@type": "Organization",
+		    "url": "https://www.inwehub.com",
+		    "name": "Inwehub",
+		    "logo": {
+	            "@type": "ImageObject",
+	            "url": "https://read.inwehub.com/imgs/voten-circle.png",
+	            "width": "512",
+	            "height": "512"
+	        },
+		    "sameAs": [
+		        "https://zhuanlan.zhihu.com/inwehub"
+		    ]
+		}
+	</script>
+
+</head>
+
+<body>
+
+<div id="voten-app" :class="{ 'background-white': Store.contentRouter != 'content', isWechat:isWechat(), isWebview:$route.path.match(/webview/)}">
+
+  <header class="header-inwehub" :path="$route.path">
+    <vui-back-button v-if="$route.path !== '/h5'"></vui-back-button>
+    <div class="title" v-text="title"></div>
+  </header>
+
+
+  <div class="v-content-wrapper  v-content-wrapper-h5  ">
+    <div class="v-side Gray" v-show="sidebar">
+      <sidebar></sidebar>
+    </div>
+
+    <notifications v-show="Store.contentRouter == 'notifications'"></notifications>
+    <messages v-show="Store.contentRouter == 'messages'" :sidebar="sidebar"></messages>
+    <search-modal v-if="Store.contentRouter == 'search'" :sidebar="sidebar"></search-modal>
+
+    <div class="v-content v-content-inwehub" id="v-content" v-show="Store.contentRouter == 'content'" v-infinite-scroll="scrolledToBottom" infinite-scroll-disabled="scrolledBusy" infinite-scroll-distance="10">
+
+
+      <transition name="fade">
+        <report-submission v-if="modalRouter == 'report-submission'" :submission="reportSubmissionId" :category="reportCategory" :sidebar="sidebar"></report-submission>
+        <report-comment v-if="modalRouter == 'report-comment'" :comment="reportCommentId" :category="reportCategory" :sidebar="sidebar"></report-comment>
+        <feedback v-if="modalRouter == 'feedback'" :sidebar="sidebar"></feedback>
+        <rules v-if="modalRouter == 'rules'" :sidebar="sidebar"></rules>
+        <moderators v-if="modalRouter == 'moderators'" :sidebar="sidebar"></moderators>
+        <keyboard-shortcuts-guide v-if="modalRouter == 'keyboard-shortcuts-guide'" :sidebar="sidebar"></keyboard-shortcuts-guide>
+        <markdown-guide v-if="modalRouter == 'markdown-guide'" :sidebar="sidebar"></markdown-guide>
+      </transition>
+      <crop-modal v-if="modalRouter == 'crop-user'" :sidebar="sidebar" :type="'user'"></crop-modal>
+      <crop-modal v-if="modalRouter == 'crop-category'" :sidebar="sidebar" :type="'category'"></crop-modal>
+
+      <div :class="{ 'v-blur-blackandwhite': smallModal }">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+
+  <scroll-button></scroll-button>
+</div>
+
+<script>
+  var auth = {
+    id: '1',
+    bio: ``,
+    name: 'admin',
+    email: 'hank.wang@inwehub.com',
+    color: 'Dark',
+    avatar: '/imgs/default-avatar.png',
+    location: '',
+    username: 'admin',
+    created_at: '2017-08-08 10:30:31',
+    font: 'Lato',
+    nsfw: false,
+    nsfwMedia: false,
+    sidebar_color: 'Gray',
+    notify_comments_replied: true,
+    notify_submissions_replied: true,
+    notify_mentions: false,
+    exclude_upvoted_submissions: false,
+    exclude_downvoted_submissions: true,
+    isMobileDevice: true,
+    submission_small_thumbnail: false,
+    info: {
+      website: '',
+      twitter: ''
+    },
+    stats: {"submissionsCount":7,"commentsCount":9,"submission_karma":-6,"comment_karma":1},
+    isGuest: false,
+    isAdmin: false
+  };
+
+  var preload = {};
+</script>
+
+<!-- built files will be auto injected -->
+
+</body>
+</html>

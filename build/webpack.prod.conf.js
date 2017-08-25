@@ -102,7 +102,7 @@ Object.keys(entris).forEach(function(entry) {
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     chunks: [ 'manifest', 'vendor', entry ],
     filename: 'public/' + entry + '.html',
-    template: 'index.html',
+    template: entry + '.html',
     inject: true,
     minify: {
       // removeComments: true,
