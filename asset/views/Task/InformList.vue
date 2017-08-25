@@ -99,7 +99,8 @@
 		    notice_count:0,
 		    task_count:0,
 		    readhub_count:0,
-		    money_count:0
+		    money_count:0,
+		    loading: true
 		}),
 		methods: {
 			//下拉刷新;
@@ -128,7 +129,9 @@
 				    this.task_count = this.task_message.unread_count;
 				    this.readhub_count = this.readhub_message.unread_count;
 				    this.money_count = this.money_message.unread_count;
-//					console.log(this.notice_message)
+//					console.log(this.notice_message)；
+                     this.loading = 0;
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				});
 			},
 			//请求标记
@@ -154,9 +157,9 @@
 				pullRefresh: {
 					container: '#pullrefresh',
 					down: {
-						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+//						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+//						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+//						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
 						callback: this.pulldownRefresh
 					}
 				}
