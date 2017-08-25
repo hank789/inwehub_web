@@ -87,7 +87,7 @@
             extras: {}
           });
           console.log("inwehub_embed:"+inwehub_embed_view.getURL());
-          if (inwehub_embed_view.getURL() !== url){
+          if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url){
             console.log('inwehub_embed:reload:'+ url);
             inwehub_embed_view.loadURL(url);
           }
