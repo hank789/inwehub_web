@@ -1,7 +1,7 @@
 <template>
   <div id="app">
         <div v-wechat-title="wechatTitle"></div>
-        
+
         <div class='view'>
           <keep-alive>
             <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
@@ -11,7 +11,7 @@
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
-       
+
   </div>
 </template>
 
@@ -68,6 +68,7 @@
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;
+      var self = this;
 
       mui.plusReady(function () {
         if (mui.os.plus) {
@@ -105,10 +106,10 @@
           if (ws.id === plus.runtime.appid) {
             EventObj.addEventListener('refreshData', (e) => {
               //执行刷新
-              if (this.$refs.Footer.showBottom) {
-                if (this.$refs.routerView.hasOwnProperty('initData')) {
+              if (self.$refs.Footer.showBottom) {
+                if (self.$refs.routerView.hasOwnProperty('initData')) {
                   console.log('refreshDataApp');
-                  this.$refs.routerView.initData();
+                  self.$refs.routerView.initData();
                 }
               }
             });
