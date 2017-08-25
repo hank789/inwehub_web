@@ -86,14 +86,14 @@
 		list-style: none;
 	}
 #short_all{
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
 	background: #f3f4f6;
 	opacity: 0.85;
-    display: none;
+    /*display: none;*/
 	
 }
 #short_all p{
@@ -114,12 +114,17 @@
 
 
 ul{
-	width: 100%;
-	height: 260px;
-	/*background: #009689;*/
+	
 	position: absolute;
+	width: 70%;
+	height: 260px;
+	/*top: 0;
+	bottom: 0;*/
+	left: 0;
+	right: 0;
+	margin: auto;
 	bottom: 110px;
-	/*transform:translateY(165px)*/
+	/*background:#CCCCCC;*/
 	animation: myfirst 0.3s infinite ;
 	animation-iteration-count:1;
 }
@@ -146,47 +151,20 @@ ul{
 	}
 /**************/
 ul li{
-	width: 50%;
-    height: 130px;
     float: left;
+    width: 50%;
+    height: 130px;
    
 }
-ul li:nth-of-type(1){
-	/*background: #009689;*/
-}
-/*ul li svg{
+ul li svg{
 	font-size: 53px;
-	margin-left:76px;
+	margin-left: 45px;
 	margin-top: 28px;
 }
 ul li span{
 	display: inline-block;
 	width: 100%;
 	text-align: center;
-	margin-top: 13px;
-}*/
-ul li:nth-of-type(1) svg,ul li:nth-of-type(3) svg{
-	font-size: 53px;
-	margin-left: 100px;
-	margin-top: 28px;
-}
-ul li:nth-of-type(2) svg,ul li:nth-of-type(4) svg{
-	font-size: 53px;
-	margin-left:63px;
-	margin-top: 28px;
-}
-ul li:nth-of-type(1) span,ul li:nth-of-type(3) span{
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	margin-left: 30px;
-	margin-top: 13px;
-}
-ul li:nth-of-type(2) span,ul li:nth-of-type(4) span{
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	margin-left: -15px;
 	margin-top: 13px;
 }
 </style>
