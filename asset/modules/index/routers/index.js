@@ -47,7 +47,7 @@ if (!window.isLocalEnv) {
   })
 }
 
-router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
+router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false, reload = false) {
   console.log('pushPlusUrl:'+url);
   var footerTab = ['/discover','/home','/task','/my'];
 
@@ -75,7 +75,7 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
     }
 
     console.log('pushPlusUrl-Webview:' + nextUrl);
-    openWebviewByUrl(id, nextUrl, autoShow, aniShow, popGesture);
+    openWebviewByUrl(id, nextUrl, autoShow, aniShow, popGesture, reload);
   } else {
     console.log('pushPlusUrl-router:' + url);
     router.push(url);

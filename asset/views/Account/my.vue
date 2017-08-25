@@ -299,7 +299,7 @@
 			//showInwehubWebview();
 		},
 		activated: function() {
-		    console.log('activated');
+      console.log('activated');
 			this.initData();
 		},
 		mounted() {
