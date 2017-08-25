@@ -17,7 +17,7 @@
 
 			<div class="mui-scroll" v-show="nothing == 0">
 				<ul>
-					<li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/discover?url=' + item.data.url)">
+					<li v-for="item in list" @tap.stop.prevent="$router.pushPlus(item.data.url)">
 						<img :src="item.data.avatar" />
 						<div class="message" v-if="item.read_at == null"></div>
 						<p>
