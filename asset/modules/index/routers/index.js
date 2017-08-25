@@ -49,8 +49,9 @@ if (!window.isLocalEnv) {
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false) {
   console.log('pushPlusUrl:'+url);
+  var footerTab = ['/discover','/home','/task','/my'];
 
-  if (mui.os.plus && (mui.os.ios || forceWebView)) {
+  if (mui.os.plus && ((mui.os.ios && footerTab.indexOf(url) === -1) || forceWebView)) {
 
     if (!window.isLocalEnv) {
 

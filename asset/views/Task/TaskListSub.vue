@@ -6,10 +6,10 @@
       <h1 class="mui-title">动态</h1>
     </header>
 
-    
-    
-    
-  
+
+
+
+
 
     <div class="mui-content list-empty" v-if="nothing==1">
       <div class="mui-table-view list-ask-item">
@@ -26,7 +26,7 @@
 		<!--导航栏-->
 	    <div class="menu">
 	      <span @tap.stop.prevent="">任务</span>
-	      <span @tap.stop.prevent="$router.pushPlus('/inform')">消息</span>
+	      <span @tap.stop.prevent="$router.push('/inform')">消息</span>
 	      <i></i>
 	    </div>
     <div id="pullrefresh"  :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
@@ -302,7 +302,7 @@
 
 <style scoped>
 
-	
+
 	.mui-wechat .menu[data-v-4f45c199] {
     width: 100%;
     height: 45px;
@@ -311,7 +311,7 @@
     background: #f3f4f6;
     top: 0;
     }
-  
+
   /*导航栏的样式*/
 
   .menu{
@@ -348,9 +348,9 @@
  .mui-content.absolute .menu ~ #pullrefresh {
    top: 45px;
 }
- 
- 
- 
+
+
+
   #pullrefresh {
   	position: absolute;
   	top: 45px;
