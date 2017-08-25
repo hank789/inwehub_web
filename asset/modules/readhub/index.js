@@ -2,10 +2,6 @@ import Vue from 'vue';
 
 require('./bootstrap');
 
-import Cookie from '../../utils/cookie';
-
-Cookie.set('XSRF-TOKEN', 'eyJpdiI6IlhienZFQmhlbWhpb1hFQ1poOVk0WHc9PSIsInZhbHVlIjoiaWZTdlZyZGdUUW00OTlUTWgyaEd5RFliNSt1UmF4ZjVrTjFIejdMUm9mbm5pSnZcL09WbkxTZGVNYjIwSUszbWVZOWFZWVhhdFlEalZkTHRJMENyK3RRPT0iLCJtYWMiOiJjMzNkYzkzNGRiY2FmNjE1NjVkNmEyZjYxYzNkMTYxZjJkMjgxOTRlYTU3NjE2MDQ5YmVlMDI5MjU2NjI1NDg4In0%3D');
-
 /**
  * This is our global Store, we save so many stuff in it so that we don't have to duplicate data.
  * We might wanna refactor this to use Vuex instead, but untill this moment I don't see why!!!

@@ -13,6 +13,8 @@ window.moment.locale('zh-cn');
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-XSRF-TOKEN'] = 'eyJpdiI6IlRMTjNlTVwva1ltUkFDaTJlakJUVFR3PT0iLCJ2YWx1ZSI6InpVTkpwcHlEMmdGRDNKQzF3Tlg1MHY3QnBGSjRxYXJDUVNJM0lhWmtOUTVoa3E0S2FNVUI3dDF0anoxdk9RcjJQUXA4cjUxZGxJY0VJSkcwTmdSeEN3PT0iLCJtYWMiOiI5YzQ1ZTMwZjA0ZmU3YjgwNDEyZTk2OTllNjY0MDc0NWE4ZjY5ODhiOTVkMjMzN2YwYTcxNGVmZGJiNTExOTc5In0=';
+
 
 window.axios.defaults.baseURL = 'http://readhub.hs.app';
 
