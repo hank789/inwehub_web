@@ -6,19 +6,19 @@
 			<h1 class="mui-title">动态</h1>
 		</header>
 		<!--导航栏-->
-		
+
 		<div class="mui-content absolute ">
 	   <div class="mui-scroll-wrapper">
 		<div class="content">
 			<div class="menu">
-			<span @tap.stop.prevent="$router.pushPlus('/task')">任务</span>
+			<span @tap.stop.prevent="$router.push('/task')">任务</span>
 			<span @tap.stop.prevent="">消息</span>
 			<i></i>
 		   </div>
-		   
+
 		   <div class="mui-scroll"  id="pullrefresh">
 			<ul>
-				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
+				<li @tap.stop.prevent="$router.push('/informbar')">
 					<img src="../../statics/images/inform1.png" />
 					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
 					<p>
@@ -28,8 +28,8 @@
 					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
-       	 	<img src="../../statics/images/balance1.png" />  
+		<li @tap.stop.prevent="$router.push('/balancebar')">
+       	 	<img src="../../statics/images/balance1.png" />
        	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
@@ -38,17 +38,17 @@
        	 	<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
        	 	<i class="bot"></i>
        	 </li>
-       	 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
-       	 	<img src="../../statics/images/integral1.png" />  
+       	 <!--<li @tap.stop.prevent="$router.push('/integralbar')">
+       	 	<img src="../../statics/images/integral1.png" />
        	 	<div class="message">99</div>
        	 	<p>
        	 	   <span>积分变动</span>
        	 	   <span class="mui-ellipsis">回答了一条问题增加2积分</span>
        	 	</p>
        	 	<a>16:44</a>
-       	 	<i class="bot"></i>-->
-       	 </li>
-				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
+       	 	<i class="bot"></i>
+       	 </li>-->
+				<li @tap.stop.prevent="$router.push('/taskbar')">
 					<img src="../../statics/images/mission1.png" />
 					<div class="message" v-if="task_count != 0">{{task_count}}</div>
 					<p>
@@ -58,7 +58,7 @@
 					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<li @tap.stop.prevent="$router.pushPlus('/readbar')">
+				<li @tap.stop.prevent="$router.push('/readbar')">
 					<img src="../../statics/images/read1.png" />
 					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
@@ -68,16 +68,16 @@
 					<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
-       	 	<img src="../../statics/images/service1.png" />  
+				<!--<li @tap.stop.prevent="$router.push('/chat')">
+       	 	<img src="../../statics/images/service1.png" />
        	 	<div class="message">{{99}}</div>
        	 	<p>
        	 	   <span>客服小哈</span>
        	 	   <span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款</span>
        	 	</p>
        	 	<a>16:44</a>
-       	 	<i class="bot"></i>-->
-				</li>
+       	 	<i class="bot"></i>
+				</li>-->
 			</ul>
 		</div>
         </div>
@@ -117,13 +117,13 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					
+
 					this.notice_message = response.data.data.notice_message;
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
-					
-					
+
+
 					this.notice_count = this.notice_message.unread_count;
 				    this.task_count = this.task_message.unread_count;
 				    this.readhub_count = this.readhub_message.unread_count;
@@ -134,7 +134,7 @@
 			//请求标记
 			sign() {
 				postRequest(`notification/mark_as_read`, {notification_type:0}).then(response => {
-                     
+
 					var code = response.data.code;
 					if(code !== 1000) {
 						mui.alert(response.data.message);
@@ -180,7 +180,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -195,11 +195,11 @@
 		font-style: normal;
 	}
 	/*导航栏的样式*/
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
-	
+
 	.mui-wechat .menu {
 		width: 100%;
 		height: 45px;
@@ -208,11 +208,11 @@
 		z-index: 10;
 		background: #f3f4f6;
 	}
-	
+
 	.mui-wechat .content {
 		margin-top: 45px;
 	}
-	
+
 	.menu {
 		width: 100%;
 		height: 45px;
@@ -221,7 +221,7 @@
 		z-index: 99;
 		background: #f3f4f6;
 	}
-	
+
 	.menu span {
 		display: inline-block;
 		width: 49%;
@@ -232,11 +232,11 @@
 		line-height: 45px;
 		font-weight: 600;
 	}
-	
+
 	.menu span:nth-of-type(2) {
 		color: #3c95f9;
 	}
-	
+
 	.menu i {
 		display: block;
 		position: absolute;
@@ -247,31 +247,31 @@
 		background: #3c95f9;
 	}
 	/*内容区域*/
-	
+
 	.content {
 		margin-top: 45px;
 	}
-	
+
 	.content ul li {
 		width: 100%;
 		height: 60px;
 		padding: 0 16px;
 		position: relative;
 	}
-	
+
 	.content ul li img {
 		width: 42px;
 		height: 42px;
 		margin-top: 10px;
 		float: left;
 	}
-	
+
 	.content ul li p {
 		float: left;
 		margin-top: 10px;
 		margin-left: 12px;
 	}
-	
+
 	.content ul li a {
 		position: absolute;
 		top: 10px;
@@ -279,17 +279,17 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
-	
+
 	.content ul li p span:nth-of-type(1) {
 		display: block;
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	.content ul li p {
 		width: 81%;
 	}
-	
+
 	.content ul li p span:nth-of-type(2) {
 		display: block;
 		width: 100%;
@@ -297,7 +297,7 @@
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.message {
 		position: absolute;
 		font-size: 11px;
