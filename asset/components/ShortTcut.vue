@@ -93,7 +93,8 @@
 	z-index: 9999;
 	background: #f3f4f6;
 	opacity: 0.85;
-    /*display: none;*/
+   /* filter: blur(9px);*/
+    display: none;
 	
 }
 #short_all p{
@@ -127,6 +128,7 @@ ul{
 	/*background:#CCCCCC;*/
 	animation: myfirst 0.3s infinite ;
 	animation-iteration-count:1;
+	
 }
 
 
@@ -158,7 +160,9 @@ ul li{
 }
 ul li svg{
 	font-size: 53px;
-	margin-left: 45px;
+	width: 37%;
+	height: 53px;
+	margin-left: 31.5%;
 	margin-top: 28px;
 }
 ul li span{
