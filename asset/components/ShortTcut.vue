@@ -2,25 +2,25 @@
 	<div id="short_all">
 	  <ul id="down">
 	  	<li>
-	  		<svg class="icon" aria-hidden="true">
+	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(1)">
 		       <use xlink:href="#icon-fabuxuqiu"></use>
 		    </svg>
 		    <span>发布需求</span>
 	  	</li>       
 	  	<li>
-	  		<svg class="icon" aria-hidden="true">
+	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(2)">
 		       <use xlink:href="#icon-zhuanyewenda"></use>
 		    </svg>
 		    <span>专业问答</span>
 	  	</li>
 	  	<li>
-	  		<svg class="icon" aria-hidden="true">
+	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(3)">
 		       <use xlink:href="#icon-chengweizhuanjia"></use>
 		    </svg>
 		    <span>成为专家</span>
 	  	</li>
 	  	<li>
-	  		<svg class="icon" aria-hidden="true">
+	  		<svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
 		       <use xlink:href="#icon-tijiaowenzhang"></use>
 		    </svg>
 		    <span>提交文章</span>
@@ -34,10 +34,29 @@
 	  </p>
 	</div>
 </template>
-
+<!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
   export default {
   methods: {	
+  	 skip(num){
+  	 	document.getElementById("short_all").style.display="none";
+  	 	switch(num) {
+			case 1:
+				this.$router.push('/project/basic');
+				break;
+			case 2:
+				this.$router.push('/ask');
+				break;
+		   case 3:
+				this.$router.push('/my/pilot');
+				break;
+		  case 4:
+				this.$router.push('/discover?redirect_url=%2Fsubmit');
+				break;
+
+		}
+  	 	
+  	 },
 	 show(){
 	 	 document.getElementById("short_all").style.display="inline";
          console.log(1111)
