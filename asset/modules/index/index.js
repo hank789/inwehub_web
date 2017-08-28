@@ -118,6 +118,9 @@ import {autoHeight} from '../../utils/statusBar';
 
 import EventObj from '../../utils/event';
 
+import {toast} from '../../utils/toast';
+mui.toast = toast;
+
 
 //mui.toast = (str) => {
 //   var oldtoast = mui.toast;
