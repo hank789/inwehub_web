@@ -382,7 +382,7 @@
           return;
         }
         if (mui.os.plus) {
-          plus.nativeUI.showWaiting();
+          mui.waiting();
         }
         request.post(createAPI('auth/register'), {
             name: username,
@@ -395,7 +395,7 @@
         )
           .then(response => {
             if (mui.os.plus) {
-              plus.nativeUI.closeWaiting();
+              mui.closeWaiting();
             }
             var code = response.data.code;
             if (code !== 1000) {
