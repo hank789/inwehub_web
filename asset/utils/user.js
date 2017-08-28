@@ -177,10 +177,31 @@ function updateUserInfo(options)
     localEvent.setLocalItem('UserInfo', UserInfo);
 }
 
+/**
+ * 是否是专家
+ */
+function isExpert()
+{
+    var UserInfo = localEvent.getLocalItem('UserInfo');
+    return UserInfo.is_expert?true:false;
+}
+
+
+/**
+ * 获取本地用户信息
+ */
+function getLocalUserInfo()
+{
+    var UserInfo = localEvent.getLocalItem('UserInfo');
+    return UserInfo;
+}
+
 export {
   getUserInfo,
   updateUserInfoCache,
   unFollowingUser,
   updateUserInfo,
-  followingUser
+  isExpert,
+  followingUser,
+  getLocalUserInfo
 };
