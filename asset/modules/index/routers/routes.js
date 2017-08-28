@@ -21,10 +21,6 @@ const routes = [{
 		},
 		beforeEnter: (to, from, next) => {
 			if(mui.os.plus) {
-				// 检查版本更新
-				mui.plusReady(function() {
-					checkUpdate();
-				});
 				var lauch = localEvent.getLocalItem('lauchFlag');
 				if(!lauch.showGuide && 1 === 2) {
 					mui.plusReady(function() {
@@ -54,6 +50,10 @@ const routes = [{
 		},
 		component: require('../../../views/Home.vue'),
 		beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
 			requestAuth(to, from, next)
 		}
 	},
