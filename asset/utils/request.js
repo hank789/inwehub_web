@@ -125,12 +125,14 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
            mui.closeUploadWaiting();
       }
 
-      if (mui.os.plus){
-        mui.plusReady(() => {
-          plus.nativeUI.closeWaiting();
-        });
-      } else {
-        mui.closeWaiting();
+      if (showWaiting){
+        if (mui.os.plus){
+          mui.plusReady(() => {
+            plus.nativeUI.closeWaiting();
+          });
+        } else {
+          mui.closeWaiting();
+        }
       }
 
       var code = response.data.code;
