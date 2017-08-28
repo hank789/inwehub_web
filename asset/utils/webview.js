@@ -126,7 +126,8 @@ function openWebviewByHome(id, url, pathUrl, title)
     ]);
     view.addEventListener('click', () => {
       console.log('准备跳转:'+pathUrl + '?from=webview');
-      openWebviewByUrl(pathUrl + '?from=webview');
+
+      openWebviewByUrl('read_comment_link_' + id, pathUrl + '?from=webview');
     }, false);
 
     //兼容android
