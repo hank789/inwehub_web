@@ -43,18 +43,18 @@
 				<div class="my-progress">
 					<span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
 					<span>{{account_info_complete_percent}}%</span>
-					 <svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
+					<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
 						<use xlink:href="#icon-jinggao"></use>
-				     </svg>
+					</svg>
 					<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
 				</div>
 				<div class="my-apply">
 					<div @tap.stop.prevent="toApply(expert_apply_status)">
-						<svg class="icon" aria-hidden="true" >
+						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
 						<p>
-							<span v-if="expert_apply_status =='2'" >平台认证专家</span>
+							<span v-if="expert_apply_status =='2'">平台认证专家</span>
 							<span v-else>申请专家认证</span>
 							<span v-if="expert_apply_status =='0'">点击前往认证</span>
 							<span v-if="expert_apply_status =='1'">认证处理中</span>
@@ -102,7 +102,7 @@
 			</ul>
 
 			<ul class="my-option">
-				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')"  v-if="show_my_wallet">
+				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-qianbao"></use>
 					</svg>
@@ -127,7 +127,7 @@
 						<use xlink:href="#icon-wodefankuijianyi"></use>
 					</svg>
 					<span>反馈建议</span>
-					<svg class="icon" aria-hidden="true" >
+					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-chakangengduojiantou"></use>
 					</svg>
 					<i class="bot"></i>
@@ -146,8 +146,7 @@
 
 		</div>
 
-
-		<div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
+		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 
 	</div>
 </template>
@@ -194,21 +193,21 @@
 		},
 		methods: {
 			//警告框
-	wran(){
-		var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">'+'为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。'+'</p>'+
-		           '<p style="text-align: left; color: #444444;">'+'平台对所有个人信息绝对保密，不会提供给任何第三方。'+'</p>';
-		var title='<p style="font-size:16px; margin-bottom:15px">'
-		           +'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">'
-		           +'<use xlink:href="#icon-jinggao"></use>'
-	               +'</svg>'
-		           +'警告说明 '
-		           +'</p>';
+			wran() {
+				var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+					'<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>';
+				var title = '<p style="font-size:16px; margin-bottom:15px">' +
+					'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
+					'<use xlink:href="#icon-jinggao"></use>' +
+					'</svg>' +
+					'警告说明 ' +
+					'</p>';
 
-             var btnArray = ['取消', '确认'];
-             mui.confirm(font, title,function() {}, 'div');
+				var btnArray = ['取消', '确认'];
+				mui.confirm(font, title, function() {}, 'div');
 			},
 			//我的项目跳转判断
-			exclusive(status){
+			exclusive(status) {
 				switch(status) {
 					case 2:
 						this.$router.pushPlus('/project/list?back=/my');
@@ -220,15 +219,15 @@
 			},
 			//认证专家跳转判断；
 			toApprove(status) {
-			this.$router.pushPlus('/company/my?back=/my');
-//				switch(status) {
-//					case 2:
-//						this.$router.pushPlus('/company/my?back=/my');
-//						break;
-//					default:
-//						this.$router.pushPlus('/company/submit');
-//
-//				}
+				this.$router.pushPlus('/company/my?back=/my');
+				//				switch(status) {
+				//					case 2:
+				//						this.$router.pushPlus('/company/my?back=/my');
+				//						break;
+				//					default:
+				//						this.$router.pushPlus('/company/submit');
+				//
+				//				}
 
 			},
 			toApply(status) {
@@ -286,12 +285,12 @@
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-                    this.expert_apply_status =  user.info.expert_apply_status;
-                    this.company_apply_status =  user.info.company_status;
+					this.expert_apply_status = user.info.expert_apply_status;
+					this.company_apply_status = user.info.company_status;
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
-					this.show_my_wallet =  user.info.show_my_wallet;
+					this.show_my_wallet = user.info.show_my_wallet;
 				}));
 			}
 		},
@@ -299,12 +298,10 @@
 			//showInwehubWebview();
 		},
 		activated: function() {
-      console.log('activated');
+			console.log('activated');
 			this.initData();
 		},
 		mounted() {
-
-
 
 		}
 	}
@@ -321,7 +318,7 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-
+	
 	.bott {
 		position: absolute;
 		right: 15px;
@@ -332,19 +329,19 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-
+	
 	.my-top {
 		width: 100%;
 		height: 310px;
 		padding: 0 13px 0 13px;
 		background-color: #ffffff;
 	}
-
+	
 	.professor {
 		width: 100%;
 		height: 100px;
 	}
-
+	
 	.professor .avatar {
 		width: 69px;
 		height: 68.5px;
@@ -352,7 +349,7 @@
 		margin-top: 30.5px;
 		float: left;
 	}
-
+	
 	.my-personal {
 		width: 71%;
 		height: 69px;
@@ -362,14 +359,14 @@
 		position: absolute;
 		right: 8px;
 	}
-
+	
 	.my-personal .my-info {
 		width: 100%;
 		height: 30px;
 		margin-bottom: 9px;
 		position: relative;
 	}
-
+	
 	.my-personal .my-info span:nth-of-type(1) {
 		display: inline-block;
 		max-width: 72px;
@@ -379,7 +376,7 @@
 		margin-right: 1.5px;
 		margin-bottom: -4px;
 	}
-
+	
 	.my-personal .my-info p:nth-of-type(1) {
 		width: 19px;
 		height: 18px;
@@ -389,15 +386,13 @@
 		font-style: normal;
 		line-height: 15px;
 		font-size: 10px;
-		color:#FFFFFF;
+		color: #FFFFFF;
 		text-align: center;
-		background:url("../../statics/images/rank.png") no-repeat;
+		background: url("../../statics/images/rank.png") no-repeat;
 		background-size: 19px 18px;
-		background-position:top;
-
-
+		background-position: top;
 	}
-
+	
 	.my-personal .my-info svg:nth-of-type(1) {
 		font-size: 26px;
 		margin-bottom: -4px;
@@ -405,19 +400,19 @@
 		color: rgb(3, 174, 249);
 		position: relative;
 	}
-
+	
 	.my-personal .my-info p:nth-of-type(2) {
 		display: inline-block;
 		position: relative;
 		float: right;
 	}
-
+	
 	.my-personal .my-info p:nth-of-type(2) svg {
 		font-size: 18px;
 		color: rgb(3, 174, 249);
 		margin-bottom: -3px;
 	}
-
+	
 	.my-personal .my-info p:nth-of-type(2) span {
 		font-size: 13px;
 		text-align: center;
@@ -426,28 +421,28 @@
 		color: #808080;
 		margin-left: 5px;
 	}
-
+	
 	.my-personal .my-detail {
 		width: 100%;
 		height: 30px;
 	}
-
+	
 	.my-detail span:nth-of-type(1),
 	span:nth-of-type(3) {
 		font-size: 14px;
 		color: #808080;
 	}
-
+	
 	.my-detail span:nth-of-type(3) {
 		margin-left: 3px;
 	}
-
+	
 	.my-detail span:nth-of-type(2),
 	span:nth-of-type(4) {
 		font-size: 14px;
 		color: #fa4975;
 	}
-
+	
 	.my-news {
 		width: 100%;
 		height: 36px;
@@ -459,7 +454,7 @@
 		-moz-box-shadow: 0 0 10px rgb(243, 244, 246);
 		box-shadow: 0 0 10px rgb(243, 244, 246);
 	}
-
+	
 	.my-news p {
 		display: inherit;
 		float: left;
@@ -471,46 +466,46 @@
 		line-height: 16px;
 		border-right: 1px solid #c8c8c8;
 	}
-
+	
 	.my-news p:last-child {
 		border-right: none;
 		width: 30%;
 		margin-left: 8px;
 	}
-
+	
 	.my-news p span {
 		color: #fa4975;
 	}
-
+	
 	.my-news p:nth-of-type(3) span {
 		color: rgb(68, 68, 68);
 	}
-
+	
 	.my-progress {
 		width: 100%;
 		margin-top: 20px;
 		position: relative;
-
 	}
-    .my-progress svg{
-      font-size: 15px;
-      color: #fcc816;
-      margin-left: 0px;
-      margin-top: 4px;
-      position: absolute;
-      right: 55px;
-
-    }
+	
+	.my-progress svg {
+		font-size: 15px;
+		color: #fcc816;
+		margin-left: 0px;
+		margin-top: 4px;
+		position: absolute;
+		right: 55px;
+	}
+	
 	.my-progress span:nth-of-type(1) {
 		display: inline-block;
-		width:65%;
+		width: 65%;
 		height: 12px;
 		border-radius: 50px;
 		overflow: hidden;
 		border: 0.5px solid rgb(3, 174, 249);
 		margin-bottom: -2px;
 	}
-
+	
 	.my-progress span:nth-of-type(1) i {
 		display: inline-block;
 		font-style: normal;
@@ -519,26 +514,26 @@
 		height: 12px;
 		background: rgb(3, 174, 249);
 	}
-
+	
 	.my-progress span:nth-of-type(2) {
 		font-size: 12px;
 		color: #808080;
 		margin-right: 1px;
 	}
-
+	
 	.my-progress span:nth-of-type(3) {
 		font-size: 13px;
 		color: rgb(3, 174, 249);
 		float: right;
 		margin-top: 2px;
 	}
-
+	
 	.my-apply {
 		margin-top: 20px;
 		width: 100%;
 		height: 61px;
 	}
-
+	
 	.my-apply div {
 		display: inline-block;
 		width: 49%;
@@ -546,7 +541,7 @@
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-
+	
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 6px;
@@ -555,7 +550,7 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-
+	
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
@@ -564,25 +559,25 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-
+	
 	.my-apply div p {
 		margin-top: 10px;
 	}
-
+	
 	.my-apply div p span {
 		display: block;
 	}
-
+	
 	.my-apply div p span:nth-of-type(1) {
 		font-size: 14px;
 		color: #444444;
 	}
-
+	
 	.my-apply div p span:nth-of-type(2) {
 		font-size: 13px;
 		color: #808080;
 	}
-
+	
 	.part2 {
 		padding: 0;
 		margin: 0;
@@ -595,14 +590,14 @@
 		margin-top: 10px;
 		position: relative;
 	}
-
+	
 	.part2 li {
 		display: inline-block;
 		width: 23%;
 		height: 70px;
 		text-align: center;
 	}
-
+	
 	.part2 li span:nth-of-type(1) {
 		padding: 0;
 		margin: 0;
@@ -612,7 +607,7 @@
 		font-size: 13px;
 		color: #444444;
 	}
-
+	
 	.part2 li span:nth-of-type(2) {
 		padding: 0;
 		margin: 0;
@@ -620,7 +615,7 @@
 		color: #808080;
 		display: block;
 	}
-
+	
 	.my-option {
 		width: 100%;
 		background: #FFFFFF;
@@ -629,9 +624,9 @@
 		list-style: none;
 		padding-left: 16px;
 		padding-right: 16px;
-	    margin-bottom: 79px;
+		margin-bottom: 79px;
 	}
-
+	
 	.my-option li {
 		width: 100%;
 		height: 44px;
@@ -639,24 +634,23 @@
 		padding-bottom: 12px;
 		position: relative;
 	}
-
+	
 	.my-option li span {
 		margin-left: 10px;
 		font-size: 14px;
 		color: #444444;
 	}
-
+	
 	.my-option li svg:nth-of-type(1) {
 		font-size: 22px;
 		margin-bottom: -4px;
 	}
-
+	
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
-.mui-popup-inner {
-    padding: 23px 15px 1px 15px;
-    }
-
-
+	
+	.mui-popup-inner {
+		padding: 23px 15px 1px 15px;
+	}
 </style>
