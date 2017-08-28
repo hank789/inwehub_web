@@ -954,3 +954,17 @@ input.upload-file[type=file]{
   top:93px;
   padding-top: 0;
 }
+
+.gaussian{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.mui-ios .gaussian{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+

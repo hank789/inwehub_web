@@ -1,5 +1,5 @@
 <template>
-  <div id="short_all">
+  <div id="short_all" class="gaussian">
     <ul id="down">
       <li>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(1)">
@@ -68,10 +68,10 @@ import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js'
             inwehub_embed_webview.setStyle({bottom: '1000px'});
           }
         }
-        
+
         setStatusBarBackgroundAndStyle('#D8D9DC', 'light');
 
-       
+
 
       },
       hide(){
@@ -93,18 +93,18 @@ import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js'
               inwehub_embed_webview.setStyle({bottom: '75px'});
             }, 300);
           }
-          
-         
+
+
         }
-		
-		
+
+
 
       }
 
     },
     mounted() {
 
-       
+
 
 		}
   }
@@ -125,13 +125,6 @@ import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js'
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: #f3f4f6;
-    /*background:url(../statics/images/bg.jpeg);
-	background-position: center;
-	background-size: cover;*/
-	opacity: 0.95;
-	/*filter: opacity(98%);*/
-	/*-webkit-filter: blur(8px) contrast(0.4) brightness(1.4);*/
     display: none;
   }
 
@@ -155,7 +148,7 @@ import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js'
   }
 
   ul {
-     
+
     position: absolute;
     width: 70%;
     height: 260px;
