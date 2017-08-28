@@ -23,7 +23,7 @@
 					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
 					<p>
 						<span>通知公告</span>
-						<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.body : ""}}</span>
+						<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.title : ""}}</span>
 					</p>
 					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
@@ -33,7 +33,7 @@
        	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
        	 	<p>
        	 	   <span>余额变动</span>
-       	 	   <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.body : ""}} </span>
+       	 	   <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.title : ""}} </span>
        	 	</p>
        	 	<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
        	 	<i class="bot"></i>
@@ -53,7 +53,7 @@
 					<div class="message" v-if="task_count != 0">{{task_count}}</div>
 					<p>
 						<span>任务动态</span>
-						<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.body : ""}} </span>
+						<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.title : ""}} </span>
 					</p>
 					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
@@ -63,7 +63,7 @@
 					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
 						<span>阅读发现</span>
-						<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.body : ""}}</span>
+						<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.title : ""}}</span>
 					</p>
 					<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
