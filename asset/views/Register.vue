@@ -430,7 +430,7 @@
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
               cb(currentUser);
-              this.$router.pushPlus('/my',true,'none','none',true);
+              this.$router.pushPlus('/my',true,'none','none',true,true);
             }));
           })
           .catch(({response: {data = {}} = {}}) => {

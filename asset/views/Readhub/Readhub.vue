@@ -30,6 +30,7 @@
         this.iframeState = false;
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
+          console.log('readhub:current:'+ws.id);
           var redirect_url = this.url;
           if (this.$route.query.redirect_url) {
             redirect_url = redirect_url + '&redirect_url=' + this.$route.query.redirect_url;

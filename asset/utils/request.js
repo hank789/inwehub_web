@@ -43,15 +43,15 @@ export function apiRequest (url, data, showWaiting = true) {
     }
   )
     .then(response => {
-      if (showWaiting){
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+
+      if (mui.os.plus){
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
+      } else {
+        mui.closeWaiting();
       }
+
       var code = response.data.code;
       // 参数错误
       if (code === 1008) {
@@ -81,15 +81,15 @@ export function apiRequest (url, data, showWaiting = true) {
       return response.data.data;
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-      if (showWaiting){
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+
+      if (mui.os.plus){
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
+      } else {
+        mui.closeWaiting();
       }
+
       mui.toast(message);
       return false;
     })
@@ -111,8 +111,6 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
     data.current_version = app_version.version;
   }
 
-
-
   var config = {};
   config.validateStatus = status => status === 200;
 
@@ -127,7 +125,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
            mui.closeUploadWaiting();
       }
 
-      if (showWaiting) {
+      if (showWaiting){
         if (mui.os.plus){
           mui.plusReady(() => {
             plus.nativeUI.closeWaiting();
@@ -150,14 +148,13 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
       return response;
     })
     .catch(e => {
-      if (showWaiting) {
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+
+      if (mui.os.plus){
+        mui.plusReady(() => {
+          plus.nativeUI.closeWaiting();
+        });
+      } else {
+        mui.closeWaiting();
       }
 
       if (options.onUploadProgress) {

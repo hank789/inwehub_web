@@ -3,7 +3,7 @@ import {  setStatusBarBackgroundAndStyle, autoHeight } from './statusBar';
 /**
  * 打开webview
  */
-function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='hide') {
+function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='hide', reload = false) {
     mui.plusReady(function(){
 
       console.log('calledMethod: openWebviewByUrl');
@@ -37,6 +37,10 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
             autoShow: false
           }
         });
+        console.log("openWindow:"+webview.getURL());
+        if (reload) {
+          webview.loadURL(url);
+        }
       }
     });
 }
@@ -122,7 +126,8 @@ function openWebviewByHome(id, url, pathUrl, title)
     ]);
     view.addEventListener('click', () => {
       console.log('准备跳转:'+pathUrl + '?from=webview');
-      openWebviewByUrl(pathUrl + '?from=webview');
+
+      openWebviewByUrl('read_comment_link_' + id, pathUrl + '?from=webview');
     }, false);
 
     //兼容android
