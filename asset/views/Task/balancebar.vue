@@ -5,49 +5,49 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">余额变动</h1>
 		</header>
-        
-        <div class="mui-content absolute">
-		<div class="mui-scroll-wrapper" id="pullrefresh">
 
-			<div class="container" v-if="nothing == 1">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
-			</div>
+		<div class="mui-content absolute">
+			<div class="mui-scroll-wrapper" id="pullrefresh">
 
-			<div class="mui-scroll">
-				<div v-show="nothing == 0">
-				<ul v-for="item in list">
-					<!--<p>{{item.read_at}}</p>-->
-					<li>
-						<p>
-							<span class="check">
+				<div class="container" v-if="nothing == 1">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zanwushuju"></use>
+					</svg>
+					<p>暂时还没有数据呀～</p>
+				</div>
+
+				<div class="mui-scroll">
+					<div v-show="nothing == 0">
+						<ul v-for="item in list">
+							<!--<p>{{item.read_at}}</p>-->
+							<li>
+								<p>
+									<span class="check">
 			  				<i>交易成功</i>
 			  				<i>{{item.created_at}}</i>
    	  			             </span>
-							<span><i v-if="item.data.io == 1">+</i><i v-if="item.data.io == -1">-</i><i>{{item.data.change_money}}</i></span>
-							<span>{{item.data.title}}</span>
-							<i class="bot"></i>
-						</p>
-						<p>
-							<span>用户名：<i>{{item.data.name}}</i></span>
-							<span>余&nbsp;&nbsp;&nbsp;额：<i>{{item.data.current_balance}}</i></span>
-							<span  v-if="item.data.extra_body">{{item.data.extra_body}}</span>
-							<i class="bot"></i>
-						</p>
-						<p  @tap.stop.prevent="$router.pushPlus(item.data.url)">
-							<span >查看详情</span>
-							<svg class="icon" aria-hidden="true">
-								<use xlink:href="#icon-chakangengduojiantou"></use>
-							</svg>
-						</p>
-					</li>
-				</ul>
+									<span><i v-if="item.data.io == 1">+</i><i v-if="item.data.io == -1">-</i><i>{{item.data.change_money}}</i></span>
+									<span>{{item.data.title}}</span>
+									<i class="bot"></i>
+								</p>
+								<p>
+									<span>用户名：<i>{{item.data.name}}</i></span>
+									<span>余&nbsp;&nbsp;&nbsp;额：<i>{{item.data.current_balance}}</i></span>
+									<span v-if="item.data.extra_body">{{item.data.extra_body}}</span>
+									<i class="bot"></i>
+								</p>
+								<p @tap.stop.prevent="$router.pushPlus(item.data.url)">
+									<span>查看详情</span>
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-chakangengduojiantou"></use>
+									</svg>
+								</p>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-        </div>
 		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
@@ -98,7 +98,7 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					
+
 					console.log(response.data)
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
@@ -215,25 +215,31 @@
 		font-style: normal;
 	}
 	/*滚动区域*/
-	.mui-bar-nav ~ .mui-content {
-     padding-top: 0px; 
-}
+	
+	.mui-bar-nav~.mui-content {
+		padding-top: 0px;
+	}
+	
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
-	 }
+	}
+	
 	.mui-content {
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
+	
 	ul {
 		width: 100%;
 		padding: 0px 16px 0 16px;
 		margin-top: 11px;
 	}
+	
 	ul p {
 		text-align: center;
 		position: relative;
 	}
+	
 	ul li {
 		width: 100%;
 		background: #f3f4f6;
@@ -242,10 +248,12 @@
 		border-radius: 5px;
 		padding: 12px 15px;
 	}
+	
 	ul li p:nth-of-type(1) {
 		width: 100%;
 		height: 110px;
 	}
+	
 	ul li p:nth-of-type(1) .check {
 		display: inline-block;
 		width: 100%;
@@ -265,7 +273,7 @@
 	}
 	
 	ul li p:nth-of-type(1) span:nth-of-type(2) {
-		display:block;
+		display: block;
 		margin-top: 23px;
 		font-size: 23px;
 		color: #444444;
@@ -277,9 +285,11 @@
 		font-size: 14px;
 		color: #808080;
 	}
-    ul li p:nth-of-type(2){
-    	overflow: hidden;
-    }
+	
+	ul li p:nth-of-type(2) {
+		overflow: hidden;
+	}
+	
 	ul li p:nth-of-type(2) span {
 		width: 100%;
 		float: left;
@@ -294,33 +304,29 @@
 		/*width: 100%;
 		height: 35px;
 		line-height: 20px;*/
-		
-		
 	}
 	
 	ul li p:nth-of-type(2) span:nth-child {
 		width: 100%;
 		height: 22px;
-		
 	}
-	ul li p:nth-of-type(3){
+	
+	ul li p:nth-of-type(3) {
 		width: 100%;
 		height: 25px;
 		color: #808080;
 		font-size: 14px;
-		
-	}
-	ul li p:nth-of-type(3) span{
-		float: left;
-		line-height: 35px;
-		
-	}
-	ul li p:nth-of-type(3) svg{
-		float: right;
-		margin-top: 10px;
-		
 	}
 	
+	ul li p:nth-of-type(3) span {
+		float: left;
+		line-height: 35px;
+	}
+	
+	ul li p:nth-of-type(3) svg {
+		float: right;
+		margin-top: 10px;
+	}
 	/*无数据的样式 */
 	
 	.container {

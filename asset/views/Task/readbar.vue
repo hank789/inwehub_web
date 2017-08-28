@@ -6,34 +6,34 @@
 			<h1 class="mui-title">阅读发现</h1>
 		</header>
 
-        <div class="mui-content absolute">
-		<div class="mui-scroll-wrapper" id="pullrefresh">
-			<div class="container" v-if="nothing == 1">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
-			</div>
+		<div class="mui-content absolute">
+			<div class="mui-scroll-wrapper" id="pullrefresh">
+				<div class="container" v-if="nothing == 1">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zanwushuju"></use>
+					</svg>
+					<p>暂时还没有数据呀～</p>
+				</div>
 
-			<div class="mui-scroll" v-show="nothing == 0">
-				<ul>                    
-					<li v-for="item in list" @tap.stop.prevent="$router.push('/discover?redirect_url=' + item.data.url)">
-						<img :src="item.data.avatar" />
-						<div class="message" v-if="item.read_at == null"></div>
-						<p>
-							<span class="mui-ellipsis">{{item.data.title}}</span>
-							<span class="mui-ellipsis">{{item.data.body}}</span>
-							<span class="mui-ellipsis" v-if="item.data.extra_body">{{item.data.extra_body}}</span>
-						</p>
-						<div class="reader_time">{{item.created_at}}</div>
-						<i class="bot"></i>
-					</li>
+				<div class="mui-scroll" v-show="nothing == 0">
+					<ul>
+						<li v-for="item in list" @tap.stop.prevent="$router.push('/discover?redirect_url=' + item.data.url)">
+							<img :src="item.data.avatar" />
+							<div class="message" v-if="item.read_at == null"></div>
+							<p>
+								<span class="mui-ellipsis">{{item.data.title}}</span>
+								<span class="mui-ellipsis">{{item.data.body}}</span>
+								<span class="mui-ellipsis" v-if="item.data.extra_body">{{item.data.extra_body}}</span>
+							</p>
+							<div class="reader_time">{{item.created_at}}</div>
+							<i class="bot"></i>
+						</li>
 
-				</ul>
+					</ul>
 
+				</div>
 			</div>
 		</div>
-       </div>
 		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
@@ -85,11 +85,11 @@
 						mui.back();
 					}
 					//请求成功的操作
-//					 console.log(response.data)
+					//					 console.log(response.data)
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
 						this.data = response.data.data;
-//						console.log(response.data.data);
+						//						console.log(response.data.data);
 					}
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -112,11 +112,11 @@
 						mui.back();
 					}
 					//请求成功的操作
-                    
+
 					if(response.data.data.data.length > 0) {
 						this.list += response.data.data.data;
 						this.data = response.data.data;
-//						console.log(response.data.data);
+						//						console.log(response.data.data);
 					}
 					this.loading = 0;
 
@@ -126,19 +126,21 @@
 			},
 			//请求标记
 			sign() {
-				postRequest(`notification/mark_as_read`, {notification_type:4}).then(response => {
-                     
+				postRequest(`notification/mark_as_read`, {
+					notification_type: 4
+				}).then(response => {
+
 					var code = response.data.code;
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					
-//					console.log(response)
-//
-//					if(response.data.data.length > 0) {
-//						this.list = response.data.data;
-//					}
+
+					//					console.log(response)
+					//
+					//					if(response.data.data.length > 0) {
+					//						this.list = response.data.data;
+					//					}
 
 				});
 			}
@@ -209,7 +211,6 @@
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
 	}
-	
 	/*主体部分样式*/
 	
 	ul li {

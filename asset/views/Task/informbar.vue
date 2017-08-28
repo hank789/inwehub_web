@@ -4,32 +4,32 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">通知公告</h1>
 		</header>
-		
-        <div class="mui-content absolute">
-		<div class=" mui-scroll-wrapper" id="pullrefresh">
-			<div class="container" v-if="nothing == 1">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
-			</div>
-			
-			<div class="mui-scroll" v-show="nothing == 0">
-				<ul>
-					<li v-for="item in list"  @tap.stop.prevent="$router.pushPlus(item.data.url)">
-						<img src="../../statics/images/inform1.png" />
-						<div class="message" v-if="item.read_at == null"></div>
-						<p>
-							<span class="mui-ellipsis">{{item.data.title}}</span>
-							<span>{{item.created_at}}</span>
-						</p>
-						<i class="bot"></i>
-					</li>
-				</ul>
 
+		<div class="mui-content absolute">
+			<div class=" mui-scroll-wrapper" id="pullrefresh">
+				<div class="container" v-if="nothing == 1">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zanwushuju"></use>
+					</svg>
+					<p>暂时还没有数据呀～</p>
+				</div>
+
+				<div class="mui-scroll" v-show="nothing == 0">
+					<ul>
+						<li v-for="item in list" @tap.stop.prevent="$router.pushPlus(item.data.url)">
+							<img src="../../statics/images/inform1.png" />
+							<div class="message" v-if="item.read_at == null"></div>
+							<p>
+								<span class="mui-ellipsis">{{item.data.title}}</span>
+								<span>{{item.created_at}}</span>
+							</p>
+							<i class="bot"></i>
+						</li>
+					</ul>
+
+				</div>
 			</div>
 		</div>
-        </div>
 		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
@@ -80,14 +80,13 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					
-                     
+
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
 						this.data = response.data.data;
-						
+
 					}
-					
+
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				});
@@ -106,13 +105,13 @@
 					var code = response.data.code;
 					if(code !== 1000) {
 						mui.alert(response.data.message);
-						mui.back();     
+						mui.back();
 					}
 
 					if(response.data.data.data.length > 0) {
 						this.list += response.data.data.data;
 						this.data = response.data.data;
-						
+
 					}
 
 					this.loading = 0;
@@ -198,8 +197,7 @@
 		margin-top: 0px;
 	}
 	
-    
-	.mui-content{
+	.mui-content {
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
@@ -249,7 +247,6 @@
 		left: 15.5%;
 		top: 10%;
 	}
-	
 	/*无数据的样式 */
 	
 	.container {

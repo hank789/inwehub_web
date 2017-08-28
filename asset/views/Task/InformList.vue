@@ -8,37 +8,37 @@
 		<!--导航栏-->
 
 		<div class="mui-content absolute ">
-	   <div class="mui-scroll-wrapper">
-		<div class="content">
-			<div class="menu">
-			<span @tap.stop.prevent="$router.push('/task')">任务</span>
-			<span @tap.stop.prevent="">消息</span>
-			<i></i>
-		   </div>
+			<div class="mui-scroll-wrapper">
+				<div class="content">
+					<div class="menu">
+						<span @tap.stop.prevent="$router.push('/task')">任务</span>
+						<span @tap.stop.prevent="">消息</span>
+						<i></i>
+					</div>
 
-		   <div class="mui-scroll"  id="pullrefresh">
-			<ul>
-				<li   @tap.stop.prevent="skip(1)">
-					<img src="../../statics/images/inform1.png" />
-					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
-					<p>
-						<span>通知公告</span>
-						<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.title : ""}}</span>
-					</p>
-					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
-					<i class="bot"></i>
-				</li>
-		<li @tap.stop.prevent="skip(2)">
-       	 	<img src="../../statics/images/balance1.png" />
-       	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
-       	 	<p>
-       	 	   <span>余额变动</span>
-       	 	   <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.title : ""}} </span>
-       	 	</p>
-       	 	<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
-       	 	<i class="bot"></i>
-       	 </li>
-       	 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
+					<div class="mui-scroll" id="pullrefresh">
+						<ul>
+							<li @tap.stop.prevent="skip(1)">
+								<img src="../../statics/images/inform1.png" />
+								<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
+								<p>
+									<span>通知公告</span>
+									<span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.title : ""}}</span>
+								</p>
+								<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
+								<i class="bot"></i>
+							</li>
+							<li @tap.stop.prevent="skip(2)">
+								<img src="../../statics/images/balance1.png" />
+								<div class="message" v-if="money_count != 0">{{money_count}}</div>
+								<p>
+									<span>余额变动</span>
+									<span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.title : ""}} </span>
+								</p>
+								<a>{{money_message.last_message ? money_message.last_message.created_at:''}}</a>
+								<i class="bot"></i>
+							</li>
+							<!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
        	 	<img src="../../statics/images/integral1.png" />
        	 	<div class="message">99</div>
        	 	<p>
@@ -48,27 +48,27 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>-->
-				<li @tap.stop.prevent="skip(3)">
-					<img src="../../statics/images/mission1.png" />
-					<div class="message" v-if="task_count != 0">{{task_count}}</div>
-					<p>
-						<span>任务动态</span>
-						<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.title : ""}} </span>
-					</p>
-					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
-					<i class="bot"></i>
-				</li>
-				<li @tap.stop.prevent="skip(4)">
-					<img src="../../statics/images/read1.png" />
-					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
-					<p>
-						<span>阅读发现</span>
-						<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.title : ""}}</span>
-					</p>
-					<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
-					<i class="bot"></i>
-				</li>
-				<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
+							<li @tap.stop.prevent="skip(3)">
+								<img src="../../statics/images/mission1.png" />
+								<div class="message" v-if="task_count != 0">{{task_count}}</div>
+								<p>
+									<span>任务动态</span>
+									<span class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.title : ""}} </span>
+								</p>
+								<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
+								<i class="bot"></i>
+							</li>
+							<li @tap.stop.prevent="skip(4)">
+								<img src="../../statics/images/read1.png" />
+								<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
+								<p>
+									<span>阅读发现</span>
+									<span class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.title : ""}}</span>
+								</p>
+								<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
+								<i class="bot"></i>
+							</li>
+							<!--<li @tap.stop.prevent="$router.pushPlus('/chat')">
        	 	<img src="../../statics/images/service1.png" />
        	 	<div class="message">{{99}}</div>
        	 	<p>
@@ -78,11 +78,11 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
 				</li>-->
-			</ul>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
-        </div>
-       </div>
-       </div>
 		<!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 	</div>
 </template>
@@ -92,40 +92,40 @@
 	const TaskMain = {
 		data: () => ({
 			count: "",
-			notice_message:{},
-			task_message: {},//未读任务动态数
-		    readhub_message: {},//未读阅读发现数
-		    money_message: {},//未读资金变动数
-		    notice_count:0,
-		    task_count:0,
-		    readhub_count:0,
-		    money_count:0,
-		    loading: true
+			notice_message: {},
+			task_message: {}, //未读任务动态数
+			readhub_message: {}, //未读阅读发现数
+			money_message: {}, //未读资金变动数
+			notice_count: 0,
+			task_count: 0,
+			readhub_count: 0,
+			money_count: 0,
+			loading: true
 		}),
 		methods: {
-			skip(num){
-		        switch (num) {
-		          case 1:
-		            this.notice_count = 0;
-		            this.$router.push('/informbar');
-		            break;
-		          case 2:
-		            this.money_count = 0;
-		            this.$router.push('/balancebar');
-		            break;
-		          case 3:
-		            this.task_count = 0; 
-		            this.$router.push('/taskbar');
-		            break;
-		          case 4:
-		            this.readhub_count = 0;
-		            this.$router.push('/readbar');
-		            break;
-		
-		        }
-		
-		     },
-            //下拉刷新;
+			skip(num) {
+				switch(num) {
+					case 1:
+						this.notice_count = 0;
+						this.$router.pushPlus('/informbar');
+						break;
+					case 2:
+						this.money_count = 0;
+						this.$router.pushPlus('/balancebar');
+						break;
+					case 3:
+						this.task_count = 0;
+						this.$router.pushPlus('/taskbar');
+						break;
+					case 4:
+						this.readhub_count = 0;
+						this.$router.pushPlus('/readbar');
+						break;
+
+				}
+
+			},
+			//下拉刷新;
 			pulldownRefresh() {
 				setTimeout(() => {
 					this.getPrevList();
@@ -146,19 +146,20 @@
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
 
-
 					this.notice_count = this.notice_message.unread_count;
-				    this.task_count = this.task_message.unread_count;
-				    this.readhub_count = this.readhub_message.unread_count;
-				    this.money_count = this.money_message.unread_count;
-//					console.log(this.notice_message)；
-                     this.loading = 0;
+					this.task_count = this.task_message.unread_count;
+					this.readhub_count = this.readhub_message.unread_count;
+					this.money_count = this.money_message.unread_count;
+					//					console.log(this.notice_message)；
+					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				});
 			},
 			//请求标记
 			sign() {
-				postRequest(`notification/mark_as_read`, {notification_type:0}).then(response => {
+				postRequest(`notification/mark_as_read`, {
+					notification_type: 0
+				}).then(response => {
 
 					var code = response.data.code;
 					if(code !== 1000) {
@@ -170,7 +171,7 @@
 			}
 		},
 		mounted() {
-		  //请求数据；
+			//请求数据；
 			mui.init({
 				pullRefresh: {
 					container: '#pullrefresh',
@@ -182,8 +183,8 @@
 					}
 				}
 			});
-           this.getPrevList();
-           this.sign();
+			this.getPrevList();
+			this.sign();
 		}
 	}
 	export default TaskMain;
@@ -201,7 +202,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-
+	
 	div,
 	p,
 	span,
@@ -216,11 +217,11 @@
 		font-style: normal;
 	}
 	/*导航栏的样式*/
-
+	
 	.mui-content {
 		background: #FFFFFF;
 	}
-
+	
 	.mui-wechat .menu {
 		width: 100%;
 		height: 45px;
@@ -229,11 +230,11 @@
 		z-index: 10;
 		background: #f3f4f6;
 	}
-
+	
 	.mui-wechat .content {
 		margin-top: 45px;
 	}
-
+	
 	.menu {
 		width: 100%;
 		height: 45px;
@@ -242,7 +243,7 @@
 		z-index: 99;
 		background: #f3f4f6;
 	}
-
+	
 	.menu span {
 		display: inline-block;
 		width: 49%;
@@ -253,11 +254,11 @@
 		line-height: 45px;
 		font-weight: 600;
 	}
-
+	
 	.menu span:nth-of-type(2) {
 		color: #3c95f9;
 	}
-
+	
 	.menu i {
 		display: block;
 		position: absolute;
@@ -268,31 +269,31 @@
 		background: #3c95f9;
 	}
 	/*内容区域*/
-
+	
 	.content {
 		margin-top: 45px;
 	}
-
+	
 	.content ul li {
 		width: 100%;
 		height: 60px;
 		padding: 0 16px;
 		position: relative;
 	}
-
+	
 	.content ul li img {
 		width: 42px;
 		height: 42px;
 		margin-top: 10px;
 		float: left;
 	}
-
+	
 	.content ul li p {
 		float: left;
 		margin-top: 10px;
 		margin-left: 12px;
 	}
-
+	
 	.content ul li a {
 		position: absolute;
 		top: 10px;
@@ -300,17 +301,17 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
-
+	
 	.content ul li p span:nth-of-type(1) {
 		display: block;
 		font-size: 16px;
 		color: #444444;
 	}
-
+	
 	.content ul li p {
 		width: 81%;
 	}
-
+	
 	.content ul li p span:nth-of-type(2) {
 		display: block;
 		width: 100%;
@@ -318,7 +319,7 @@
 		font-size: 13px;
 		color: #808080;
 	}
-
+	
 	.message {
 		position: absolute;
 		font-size: 11px;
