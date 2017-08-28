@@ -13,8 +13,6 @@ function toast(message,options) {
     duration: 'short'
   }, options || {});
 
-  console.red(options);
-
   if ($.os.plus && options.type !== 'div') {
     //默认显示在底部；
     $.plusReady(function() {
