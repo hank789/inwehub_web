@@ -101,9 +101,6 @@
       }
     },
     computed: {
-      nothing () {
-        return false;
-      },
     },
     methods: {
     	//点击时用封装好的调用体统的方法；
