@@ -18,7 +18,7 @@
 
 		   <div class="mui-scroll"  id="pullrefresh">
 			<ul>
-				<li @tap.stop.prevent="$router.pushPlus('/informbar')">
+				<li   @tap.stop.prevent="skip(1)">
 					<img src="../../statics/images/inform1.png" />
 					<div class="message" v-if="notice_count != 0">{{notice_count}}</div>
 					<p>
@@ -28,7 +28,7 @@
 					<a>{{notice_message.last_message ? notice_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-		<li @tap.stop.prevent="$router.pushPlus('/balancebar')">
+		<li @tap.stop.prevent="skip(2)">
        	 	<img src="../../statics/images/balance1.png" />
        	 	<div class="message" v-if="money_count != 0">{{money_count}}</div>
        	 	<p>
@@ -48,7 +48,7 @@
        	 	<a>16:44</a>
        	 	<i class="bot"></i>
        	 </li>-->
-				<li @tap.stop.prevent="$router.pushPlus('/taskbar')">
+				<li @tap.stop.prevent="skip(3)">
 					<img src="../../statics/images/mission1.png" />
 					<div class="message" v-if="task_count != 0">{{task_count}}</div>
 					<p>
@@ -58,7 +58,7 @@
 					<a>{{task_message.last_message ? task_message.last_message.created_at:''}}</a>
 					<i class="bot"></i>
 				</li>
-				<li @tap.stop.prevent="$router.push('/readbar')">
+				<li @tap.stop.prevent="skip(4)">
 					<img src="../../statics/images/read1.png" />
 					<div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
 					<p>
@@ -103,7 +103,29 @@
 		    loading: true
 		}),
 		methods: {
-			//下拉刷新;
+			skip(num){
+		        switch (num) {
+		          case 1:
+		            this.notice_count = 0;
+		            this.$router.push('/informbar');
+		            break;
+		          case 2:
+		            this.money_count = 0;
+		            this.$router.push('/balancebar');
+		            break;
+		          case 3:
+		            this.task_count = 0; 
+		            this.$router.push('/taskbar');
+		            break;
+		          case 4:
+		            this.readhub_count = 0;
+		            this.$router.push('/readbar');
+		            break;
+		
+		        }
+		
+		     },
+            //下拉刷新;
 			pulldownRefresh() {
 				setTimeout(() => {
 					this.getPrevList();
@@ -143,10 +165,6 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-//
-//					if(response.data.data.length > 0) {
-//						this.list = response.data.data;
-//					}
 
 				});
 			}
@@ -157,9 +175,9 @@
 				pullRefresh: {
 					container: '#pullrefresh',
 					down: {
-//						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
 						callback: this.pulldownRefresh
 					}
 				}

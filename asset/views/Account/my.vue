@@ -286,8 +286,8 @@
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-          this.expert_apply_status =  user.info.expert_apply_status;
-          this.company_apply_status =  user.info.company_status;
+                    this.expert_apply_status =  user.info.expert_apply_status;
+                    this.company_apply_status =  user.info.company_status;
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
