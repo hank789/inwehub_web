@@ -40,7 +40,7 @@
 </template>
 
 <script type="text/javascript">
-  import localEvent from '../stores/localStorage';
+  import localEvent from '../stores/sessionStorage';
 
   export default {
     mounted() {
