@@ -91,7 +91,7 @@
       } else {
         var url = this.url;
         if (this.$route.query.redirect_url) {
-          url = url + '&redirect_url=' + this.$route.query.redirect_url;
+          url = url + '&redirect_url=' + encodeURIComponent(this.$route.query.redirect_url);
         }
 
         this.iframeState = true;

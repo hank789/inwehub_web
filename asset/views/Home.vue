@@ -92,7 +92,7 @@
 				</div>
 				<ul>
 					<li v-if="recommend_read.length=='0'"></li>
-					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title, reads.comment_url)" v-else>
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads)" v-else>
 						<img  :src="reads.img_url" />
 						<div>
 							<p class="mui-ellipsis-2">{{reads.title}}</p>
@@ -230,7 +230,13 @@
 			}
 
 			},
-      goArticle: function(url,id,title='', pathUrl) {
+      goArticle: function(article) {
+
+        var url = article.view_url;
+        var id = article.id;
+        var title = article.title;
+        var pathUrl = article.comment_url;
+
         if(/http/.test(url)) {
           if(mui.os.plus) {
 
@@ -259,9 +265,11 @@
             });
           } else {
 //            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-//            this.$router.push('/readhub/detail?url='+url+'&pathUrl='+pathUrl);
-              window.location.href = url;
 
+              var url = "/discover?redirect_url=" + pathUrl + '?' + encodeURIComponent('from=h5');
+
+              this.$router.push(url);
+//            window.location.href = url;
           }
         } else {
           this.$router.pushPlus(url);
