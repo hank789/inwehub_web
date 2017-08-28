@@ -19,7 +19,7 @@
 			<div class="mui-scroll">
 				<div v-show="nothing == 0">
 				<ul v-for="item in list">
-					<p>{{item.read_at}}</p>
+					<!--<p>{{item.read_at}}</p>-->
 					<li>
 						<p>
 							<span class="check">
@@ -237,7 +237,7 @@
 	ul li {
 		width: 100%;
 		background: #f3f4f6;
-		margin-top: 11px;
+		margin-top: 20px;
 		border: 0.5px solid #dcdcdc;
 		border-radius: 5px;
 		padding: 12px 15px;
