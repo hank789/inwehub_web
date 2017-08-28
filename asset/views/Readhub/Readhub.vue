@@ -25,9 +25,11 @@
     methods: {
       loaded() {
         console.log('loaded');
+        mui.closeWaiting();
       },
       createReadWebview() {
         this.iframeState = false;
+        mui.waiting();
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
           console.log('readhub:current:'+ws.id);
@@ -49,6 +51,7 @@
               });
             }
             ws.append(inwehub_embed_webview);
+            mui.closeWaiting();
           }
         });
       }
@@ -89,6 +92,7 @@
       if (mui.os.plus) {
           this.createReadWebview();
       } else {
+        mui.waiting();
         var url = this.url;
         if (this.$route.query.redirect_url) {
           url = url + '&redirect_url=' + this.$route.query.redirect_url;

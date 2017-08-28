@@ -166,7 +166,7 @@
                 appid: device_info.appid,
                 appkey: device_info.appkey,
                 device_type: plus.os.name === 'iOS' ? 2 : 1
-              }).then(res => {
+              },false).then(res => {
 
               });
             }

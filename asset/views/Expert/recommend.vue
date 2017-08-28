@@ -251,11 +251,11 @@
       },
       uploadPlus(){
         var that = this;
-        plus.nativeUI.showWaiting();
+        mui.waiting();
         var task = plus.uploader.createUpload(createAPI('expert/recommend'),
           {method: "POST", blocksize: 204800, priority: 100},
           function (t, status) {
-            plus.nativeUI.closeWaiting();
+            mui.closeWaiting();
             // 上传完成
             if (status == 200) {
               var response = JSON.parse(t.responseText);
