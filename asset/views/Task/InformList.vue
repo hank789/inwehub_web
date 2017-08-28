@@ -107,19 +107,19 @@
 		        switch (num) {
 		          case 1:
 		            this.notice_count = 0;
-		            this.$router.push('/informbar');
+		            this.$router.pushPlus('/informbar');
 		            break;
 		          case 2:
 		            this.money_count = 0;
-		            this.$router.push('/balancebar');
+		            this.$router.pushPlus('/balancebar');
 		            break;
 		          case 3:
 		            this.task_count = 0; 
-		            this.$router.push('/taskbar');
+		            this.$router.pushPlus('/taskbar');
 		            break;
 		          case 4:
 		            this.readhub_count = 0;
-		            this.$router.push('/readbar');
+		            this.$router.pushPlus('/readbar');
 		            break;
 		
 		        }
