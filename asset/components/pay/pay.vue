@@ -45,7 +45,7 @@
 
         if (mui.os.ios && this.iapPay && mui.os.plus) {
           var id = 'appleiap';
-          plus.nativeUI.showWaiting();
+          mui.waiting();
         } else {
           var id = 'wxpay';
         }
@@ -76,12 +76,12 @@
             if (is_debug === 1) {
               this.pay_waiting = null;
               if (id === 'appleiap') {
-                plus.nativeUI.closeWaiting();
+                mui.closeWaiting();
               }
               this.$emit('pay_success', response_data.order_id, this.pay_object_type);
             } else {
               if (id === 'appleiap') {
-                plus.nativeUI.closeWaiting();
+                mui.closeWaiting();
                 this.requestIapOrder(response_data);
               } else if (id ==='wx_pub') {
                 var wx_order_info = JSON.parse(response_data.order_info);
@@ -106,7 +106,7 @@
             }
           } else {
             if (id === 'appleiap') {
-              plus.nativeUI.closeWaiting();
+              mui.closeWaiting();
             }
             this.pay_waiting = null;
           }
@@ -114,7 +114,7 @@
       },
       requestPay(id, response_data) {
         var order = response_data.order_info;
-        plus.nativeUI.showWaiting();
+        mui.waiting();
         plus.payment.request(this.pays[id], order, (result) => {
           // console.log(JSON.stringify(result));
           if (id === 'appleiap') {
@@ -127,7 +127,7 @@
               transactionReceipt: result.transactionReceipt,
               transactionIdentifier: result.transactionIdentifier
             }, false).then(response_data_notify => {
-              plus.nativeUI.closeWaiting();
+              mui.closeWaiting();
               this.pay_waiting = null;
               if (response_data_notify !== false) {
                 this.$emit('pay_success', response_data.order_id, this.pay_object_type);
@@ -136,14 +136,14 @@
               }
             });
           } else {
-            plus.nativeUI.closeWaiting();
+            mui.closeWaiting();
             this.pay_waiting = null;
             this.$emit('pay_success', response_data.order_id, this.pay_object_type);
             plus.nativeUI.alert('支付成功！', function () {
             }, '支付');
           }
         }, (e) => {
-          plus.nativeUI.closeWaiting();
+          mui.closeWaiting();
           this.pay_waiting = null;
           if (e.code == -100) {
             plus.nativeUI.alert('', null, '支付已取消');
@@ -155,15 +155,15 @@
       },
       requestIapOrder(response_data) {
         this.pay_waiting = 'waiting';
-        plus.nativeUI.showWaiting();
+        mui.waiting();
 
         this.pays['appleiap'].requestOrder(response_data.iap_ids, (e) => {
           console.log('requestOrder success: ' + JSON.stringify(e));
-          plus.nativeUI.closeWaiting();
+          mui.closeWaiting();
           this.requestPay('appleiap', response_data);
         }, (e) => {
           console.log('requestOrder failed: ' + JSON.stringify(e));
-          plus.nativeUI.closeWaiting();
+          mui.closeWaiting();
           this.pay_waiting = null;
           Raven.captureException(JSON.stringify(e));
           plus.nativeUI.confirm("支付失败，请稍后再试", (e) => {
