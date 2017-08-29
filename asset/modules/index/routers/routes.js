@@ -1063,6 +1063,13 @@ const routes = [{
     component: require('../../../views/Webview/article.vue'),
   },
   {
+    path: '/webview/share',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/Webview/Share.vue'),
+  },
+  {
     path: '/test/open',
     meta: {
       title: 'InweHub'
