@@ -166,7 +166,7 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
       scrollIndicator:'none', //不显示滚动条
     }, {
       title: title,
-      link: url,
+      link: pathUrl,
       content: content,
       imageUrl:img_url,
       thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
