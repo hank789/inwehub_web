@@ -143,10 +143,9 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
     }
 
     //绑定标题
-    var title = '[InweHub发现]' + title;
+    var shareTitle = '[InweHub发现]' + title;
     var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？';
-    var shareUrl = 'index.html#' + '/webview/share';
-      // ?title=' + encodeURIComponent(title)
+    var shareUrl = 'index.html#' + '/webview/share?title=' + encodeURIComponent(title);
       // + '&link=' + encodeURIComponent(url)
       // + '&content=' + encodeURIComponent(content)
       // + '&imageUrl='
@@ -165,7 +164,7 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
       bounce:'none', //不允许滑动
       scrollIndicator:'none', //不显示滚动条
     }, {
-      title: title,
+      title: shareTitle,
       link: pathUrl,
       content: content,
       imageUrl:img_url,

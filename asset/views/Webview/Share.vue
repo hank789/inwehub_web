@@ -47,10 +47,12 @@
       title: '',
     }),
     created () {
+      this.title =  this.$route.query.title;
+
       if (mui.os.plus) {
         mui.plusReady(() => {
           var currentWebview = plus.webview.currentWebview();
-          this.title =  currentWebview.title;
+
           var data = {
             title: currentWebview.title,
             link: currentWebview.link,
