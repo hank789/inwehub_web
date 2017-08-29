@@ -743,7 +743,7 @@ const routes = [{
 		meta: {
 			title: '发现',
 			wechatHideHeader: true,
-			keepAlive: false
+			keepAlive: true
 		},
 		component: require('../../../views/Readhub/Readhub.vue'),
 		beforeEnter: (to, from, next) => {

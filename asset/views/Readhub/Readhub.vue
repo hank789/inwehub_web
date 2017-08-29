@@ -23,11 +23,21 @@
 
     },
     methods: {
+      hideWebview(){
+        console.log('hideWebview');
+        if (mui.os.plus) {
+          var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+          if (inwehub_embed_webview) {
+            inwehub_embed_webview.hide();
+          }
+        }
+      },
       loaded() {
         console.log('loaded');
         mui.closeWaiting();
       },
       reloadUrl(){
+        
         if (!/^\/discover/.test(this.$route.path)) {
             return;
         }
@@ -101,13 +111,7 @@
       this.reloadUrl();
     },
     deactivated: function () {
-      console.log('deactivated');
-      if (mui.os.plus) {
-        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-        if (inwehub_embed_webview) {
-          inwehub_embed_webview.hide();
-        }
-      }
+      this.hideWebview();
     },
     mounted(){
       this.reloadUrl();
