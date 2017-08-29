@@ -140,7 +140,9 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-
+                     
+                     
+                     
 					this.notice_message = response.data.data.notice_message;
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
@@ -185,6 +187,7 @@
 			});
 			this.getPrevList();
 			this.sign();
+			
 		}
 	}
 	export default TaskMain;
