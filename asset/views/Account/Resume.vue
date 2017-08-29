@@ -75,9 +75,17 @@
 									<use xlink:href="#icon-zhuanjiabiaoji"></use>
 								</svg>
 							</div>
+							<!--文章和评论-->
+							<div class="news">
+								<p class="mui-ellipsis">文章<span>{{ resume.info.submission_count }}</span>篇</p>
+								<i></i>
+								<p class="mui-ellipsis">评论<span>{{ resume.info.comment_count }}</span>条</p>
+							</div>	
+							<!---->
 							<div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i class="separate"></i>{{ resume.info.total_score }}
 
 							</div>
+							
 							<div class="item">
 								<span>{{ resume.info.company }}</span>
 								<i class="separate"></i>
@@ -626,6 +634,13 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+/***************清除自带样式*****************/
+div,p,span,ul,li,i,a{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-style: normal;
+}
 	.professor {
 		background-color: #3c3e44;
 		text-align: center;
@@ -858,7 +873,7 @@
 					}
 				}
 				.counter {
-					margin-top: 8px;
+					margin-top: 3px;
 					font-size: 12px;
 					color: #808080;
 					b {
@@ -1096,4 +1111,38 @@
 			margin: 0 20px;
 		}
 	}
+/***********评论和回复************/
+.news{
+	width: 100%;
+	height: 25px;
+	padding: 0 10%;
+	margin-top: 8px;
+	
+}
+.news i{
+	display: inline-block;
+	float: left;
+	width: 1px;
+	height: 11px;
+	border-right: 1px solid #c8c8c8;
+	margin: 7px 8px 0 8px;
+}
+.news p{
+  width: 46%;
+  float: left;
+  font-size: 12px;
+  color: #808080;
+ 
+}
+.news p span{
+ color: #e63964;	
+ font-weight: bold;
+}
+.news p:nth-of-type(1){
+  text-align: right;
+  
+}
+.news p:nth-of-type(2){
+ text-align: left;	
+}
 </style>
