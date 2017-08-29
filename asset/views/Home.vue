@@ -236,6 +236,8 @@
         var id = article.id;
         var title = article.title;
         var pathUrl = article.comment_url;
+        var img_url = article.img_url;
+
 
         if(/http/.test(url)) {
           if(mui.os.plus) {
@@ -260,7 +262,7 @@
                 article_url: url,
                 article_title: title,
                 article_comment_url: pathUrl,
-
+                article_img_url:img_url,
               }
             });
           } else {
