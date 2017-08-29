@@ -113,7 +113,7 @@
 
       },
       failCallback(error){
-        mui.alert(JSON.stringify(error));
+        console.log(JSON.stringify(error));
         mui.toast('分享失败');
       },
       share(){
