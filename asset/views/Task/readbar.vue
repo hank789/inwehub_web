@@ -17,7 +17,7 @@
 
 				<div class="mui-scroll" v-show="nothing == 0">
 					<ul>
-						<li v-for="item in list" @tap.stop.prevent="$router.push('/discover?redirect_url=' + item.data.url)">
+						<li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=' + item.data.url)">
 							<img :src="item.data.avatar" />
 							<div class="message" v-if="item.read_at == null"></div>
 							<p>
@@ -180,7 +180,7 @@
 		background-color: #FFFFFF;
 		-webkit-overflow-scrolling: touch;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right: 16px;
@@ -192,7 +192,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -207,53 +207,53 @@
 		font-style: normal;
 	}
 	/*滚动区域*/
-	
+
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
 	}
 	/*主体部分样式*/
-	
+
 	ul li {
 		position: relative;
 		padding: 10px 16px 0px 16px;
 		overflow: hidden;
 	}
-	
+
 	ul li img {
 		width: 12%;
 		height: 12%;
 		border-radius: 50%;
 		float: left;
 	}
-	
+
 	ul li p {
 		margin-left: 2%;
 		width: 86%;
 		float: left;
 	}
-	
+
 	ul li p span {
 		display: block;
 		margin-bottom: 7px;
 		width: 100%;
 	}
-	
+
 	ul li p span:nth-of-type(1) {
 		max-width: 160px;
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	ul li p span:nth-of-type(2) {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	ul li p span:nth-of-type(3) {
 		font-size: 12px;
 		color: #808080;
 	}
-	
+
 	.message {
 		width: 7px;
 		height: 7px;
@@ -263,7 +263,7 @@
 		left: 14%;
 		top: 9%;
 	}
-	
+
 	.reader_time {
 		font-size: 12px;
 		color: #b4b4b6;
@@ -272,19 +272,19 @@
 		right: 16px;
 	}
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;

@@ -70,7 +70,8 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
     }
     var id = nextUrl;
     //底部4个tab的页面默认为主页
-    if (footerTab.indexOf(url) >=0){
+    var urlSplit = url.split('?',1);
+    if (footerTab.indexOf(urlSplit[0]) >=0){
       id = plus.runtime.appid;
     }
 
