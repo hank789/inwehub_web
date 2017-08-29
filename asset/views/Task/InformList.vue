@@ -140,9 +140,7 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-                     
-                     
-                     
+
 					this.notice_message = response.data.data.notice_message;
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
@@ -152,9 +150,10 @@
 					this.task_count = this.task_message.unread_count;
 					this.readhub_count = this.readhub_message.unread_count;
 					this.money_count = this.money_message.unread_count;
-					//					console.log(this.notice_message)；
+					//	console.log(this.notice_message)；
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					
 				});
 			},
 			//请求标记
