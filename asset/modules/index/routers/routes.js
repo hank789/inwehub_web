@@ -172,7 +172,8 @@ const routes = [{
 		path: '/my/info/job/:id',
 		component: require('../../../views/Account/infos/job.vue'),
 		meta: {
-			title: '工作经历'
+			title: '工作经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -182,7 +183,8 @@ const routes = [{
 		path: '/my/info/project/:id',
 		component: require('../../../views/Account/infos/project.vue'),
 		meta: {
-			title: '项目经历'
+			title: '项目经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -192,7 +194,8 @@ const routes = [{
 		path: '/my/info/edu/:id',
 		component: require('../../../views/Account/infos/edu.vue'),
 		meta: {
-			title: '教育经历'
+			title: '教育经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -338,7 +341,8 @@ const routes = [{
 		path: '/my/info/train/:id',
 		component: require('../../../views/Account/infos/train.vue'),
 		meta: {
-			title: '培训经历'
+			title: '培训经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -739,7 +743,7 @@ const routes = [{
 		meta: {
 			title: '发现',
 			wechatHideHeader: true,
-			keepAlive: true
+			keepAlive: false
 		},
 		component: require('../../../views/Readhub/Readhub.vue'),
 		beforeEnter: (to, from, next) => {
