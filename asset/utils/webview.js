@@ -171,6 +171,7 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
       imageUrl:img_url,
       thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
     });
+    console.log('edwinzz'+shareUrl);
     currentWebview.append(shareView);
 
     embed.append(view);

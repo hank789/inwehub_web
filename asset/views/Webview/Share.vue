@@ -47,15 +47,32 @@
       title: '',
     }),
     created () {
-      mui.plusReady(() => {
-        var currentWebview = plus.webview.currentWebview();
-        this.title =  currentWebview.title;
+      if (mui.os.plus) {
+        mui.plusReady(() => {
+          var currentWebview = plus.webview.currentWebview();
+          this.title =  currentWebview.title;
+          var data = {
+            title: currentWebview.title,
+            link: currentWebview.link,
+            content: currentWebview.content,
+            imageUrl: currentWebview.imageUrl,
+            thumbUrl: currentWebview.thumbUrl,
+          };
+
+          Share.bindShare(
+            this,
+            data,
+            this.successCallback,
+            this.failCallback
+          );
+        });
+      } else {
         var data = {
-          title: currentWebview.title,
-          link: currentWebview.link,
-          content: currentWebview.content,
-          imageUrl: currentWebview.imageUrl,
-          thumbUrl: currentWebview.thumbUrl,
+          title: 'test',
+          link: 'test',
+          content: 'test',
+          imageUrl: 'test',
+          thumbUrl: 'test',
         };
 
         Share.bindShare(
@@ -64,7 +81,8 @@
           this.successCallback,
           this.failCallback
         );
-      });
+      }
+
     },
     methods: {
       toggleShareNav() {
@@ -91,7 +109,8 @@
       successCallback(){
         mui.toast('分享成功');
       },
-      failCallback(){
+      failCallback(error){
+        mui.alert(JSON.stringify(error));
         mui.toast('分享失败');
       },
       share(){

@@ -56,7 +56,7 @@ var Share = () => {
                }, ()=>{
                  self.successCallback();
                }, (error)=>{
-                 self.failCallback();
+                 self.failCallback(error);
                });
              };
 
@@ -71,7 +71,7 @@ var Share = () => {
               }, ()=>{
                 self.successCallback();
               }, (error)=>{
-                self.failCallback();
+                self.failCallback(error);
               });
             }
 
