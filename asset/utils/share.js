@@ -44,16 +44,20 @@ var Share = () => {
 
           var wechat = shares['weixin'];
           if (wechat.nativeClient) {
+
+
+
              self.context.sendHaoyou = () => {
-               //mui.alert(JSON.stringify(self.data));
-               wechat.send({
+               var data = {
                  content:self.data.content,
-                 href:self.data.href,
+                 href:self.data.link,
                  title:self.data.title,
                  pictures:[self.data.imageUrl],
                  thumbs:[self.data.thumbUrl],
                  extra:{scene:"WXSceneSession"}
-               }, ()=>{
+               };
+              
+               wechat.send(data, ()=>{
                  self.successCallback();
                }, (error)=>{
                  self.failCallback(error);
@@ -63,7 +67,7 @@ var Share = () => {
             self.context.sendPengYouQuan = () => {
               wechat.send({
                 content:self.data.content,
-                href:self.data.href,
+                href:self.data.link,
                 title:self.data.title,
                 pictures:[self.data.imageUrl],
                 thumbs:[self.data.thumbUrl],

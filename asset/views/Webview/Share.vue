@@ -96,6 +96,7 @@
             mui('#shareWrapper').popover('toggle');
             mui('#shareShowWrapper').popover('toggle');
           }
+        this.hide();
       },
       shareToPengyouQuan(){
           this.sendPengYouQuan();
@@ -105,9 +106,11 @@
             mui('#shareWrapper').popover('toggle');
             mui('#shareShowWrapper').popover('toggle');
           }
+        this.hide();
       },
       successCallback(){
         mui.toast('分享成功');
+
       },
       failCallback(error){
         mui.alert(JSON.stringify(error));
