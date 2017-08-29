@@ -51,8 +51,10 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
  * @param pathUrl
  * @param title
  */
-function openWebviewByHome(id, url, pathUrl, title)
+function openWebviewByHome(id, url, pathUrl, title, img_url)
 {
+
+    var currentWebview = plus.webview.currentWebview();
 
     setStatusBarBackgroundAndStyle('#3c3e44', 'light');
 
@@ -69,23 +71,12 @@ function openWebviewByHome(id, url, pathUrl, title)
     }
 
     var webview = plus.webview.create(url, id,{popGesture: 'hide',
-      top:'0px',
+      top:'44px',
       bottom:'0px',
       position:'dock',
       dock:'bottom',
       backButtonAutoControl: 'hide',
       statusbar:{background:'#3c3e44'},
-      titleNView: {
-        backgroundColor: '#3c3e44', //导航栏背景色
-        titleText: title, //导航栏标题
-        titleColor: '#fff', //文字颜色
-        type: 'transparent', //透明渐变样式
-        titleSize:'18px',
-        autoBackButton: true, //自动绘制返回箭头
-        splitLine: { //底部分割线
-          color: '#3c3e44'
-        }
-      },
       bounce:'vertical'});
 
     plus.key.addEventListener("backbutton",() =>{
@@ -151,10 +142,41 @@ function openWebviewByHome(id, url, pathUrl, title)
       }
     }
 
+    //绑定标题
+    var title = '[InweHub发现]' + title;
+    var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？';
+    var shareUrl = 'index.html#' + '/webview/share';
+      // ?title=' + encodeURIComponent(title)
+      // + '&link=' + encodeURIComponent(url)
+      // + '&content=' + encodeURIComponent(content)
+      // + '&imageUrl='
+      // + '&thumbUrl=';
+    var shareId = 'webview_readhub_share_' + id;
+    var shareView = plus.webview.create(shareUrl, shareId, {
+      cachemode:'noCache',
+      popGesture: 'hide',
+      top:'0px',
+      right:'0px',
+      width:'100%',
+      height:'44px',
+      dock:'top',
+      position:'dock',
+      backButtonAutoControl: 'hide',
+      bounce:'none', //不允许滑动
+      scrollIndicator:'none', //不显示滚动条
+    }, {
+      title: title,
+      link: url,
+      content: content,
+      imageUrl:img_url,
+      thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
+    });
+    currentWebview.append(shareView);
 
     embed.append(view);
 
     webview.append(embed);
+
 
     return webview;
 }
