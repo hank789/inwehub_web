@@ -140,7 +140,8 @@
           mui.plusReady(function () {
             var currentWebview = plus.webview.currentWebview();
             currentWebview.setStyle({
-              height: '44px'
+              height: '44px',
+              opacity: 1,
             });
           });
         }
