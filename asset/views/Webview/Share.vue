@@ -47,15 +47,34 @@
       title: '',
     }),
     created () {
-      mui.plusReady(() => {
-        var currentWebview = plus.webview.currentWebview();
-        this.title =  currentWebview.title;
+      this.title =  this.$route.query.title;
+
+      if (mui.os.plus) {
+        mui.plusReady(() => {
+          var currentWebview = plus.webview.currentWebview();
+
+          var data = {
+            title: currentWebview.title,
+            link: currentWebview.link,
+            content: currentWebview.content,
+            imageUrl: currentWebview.imageUrl,
+            thumbUrl: currentWebview.thumbUrl,
+          };
+
+          Share.bindShare(
+            this,
+            data,
+            this.successCallback,
+            this.failCallback
+          );
+        });
+      } else {
         var data = {
-          title: currentWebview.title,
-          link: currentWebview.link,
-          content: currentWebview.content,
-          imageUrl: currentWebview.imageUrl,
-          thumbUrl: currentWebview.thumbUrl,
+          title: 'test',
+          link: 'test',
+          content: 'test',
+          imageUrl: 'test',
+          thumbUrl: 'test',
         };
 
         Share.bindShare(
@@ -64,7 +83,8 @@
           this.successCallback,
           this.failCallback
         );
-      });
+      }
+
     },
     methods: {
       toggleShareNav() {
@@ -78,6 +98,7 @@
             mui('#shareWrapper').popover('toggle');
             mui('#shareShowWrapper').popover('toggle');
           }
+        this.hide();
       },
       shareToPengyouQuan(){
           this.sendPengYouQuan();
@@ -87,11 +108,14 @@
             mui('#shareWrapper').popover('toggle');
             mui('#shareShowWrapper').popover('toggle');
           }
+        this.hide();
       },
       successCallback(){
         mui.toast('分享成功');
+
       },
-      failCallback(){
+      failCallback(error){
+        console.log(JSON.stringify(error));
         mui.toast('分享失败');
       },
       share(){
@@ -118,7 +142,8 @@
           mui.plusReady(function () {
             var currentWebview = plus.webview.currentWebview();
             currentWebview.setStyle({
-              height: '44px'
+              height: '44px',
+              opacity: 1,
             });
           });
         }
