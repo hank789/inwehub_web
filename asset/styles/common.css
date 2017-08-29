@@ -501,10 +501,10 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 /**
 加载动画
  */
-.mint-indicator {
+/*.mint-indicator {
   -webkit-transition: opacity .2s linear;
   transition: opacity .2s linear;
-}
+}*/
 .mint-indicator-wrapper {
   top: 50%;
   left: 50%;
@@ -967,4 +967,15 @@ input.upload-file[type=file]{
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-
+/********小哈加载动画************/
+#mint-indicator >img{
+	width: 50px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: -40%;
+    z-index: 9999;
+}
