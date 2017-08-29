@@ -72,7 +72,7 @@
             }
             break;
           case 4:
-            this.$router.push('/discover?redirect_url=%2Fsubmit');
+            this.$router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
             break;
 
         }
@@ -85,9 +85,11 @@
         if (mui.os.plus) {
           if (this.$route.path.match(/discover/)) {
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-            inwehub_embed_webview.setStyle({
-              bottom: '1000px'
-            });
+            if (inwehub_embed_webview) {
+              inwehub_embed_webview.setStyle({
+                bottom: '1000px'
+              });
+            }
           }
         }
 
@@ -109,9 +111,11 @@
           if (this.$route.path.match(/discover/)) {
             setTimeout(() => {
               var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-              inwehub_embed_webview.setStyle({
-                bottom: '75px'
-              });
+              if (inwehub_embed_webview) {
+                inwehub_embed_webview.setStyle({
+                  bottom: '75px'
+                });
+              }
             }, 300);
           }
 
