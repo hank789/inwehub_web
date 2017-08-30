@@ -3,11 +3,7 @@
  */
 var $ = {};
 $.post = (url, payload, callback) => {
-
-    var data = new FormData();
-    data.append( "json", JSON.stringify( payload ) );
-
-
+  
     fetch(url,
     {
       headers: {
