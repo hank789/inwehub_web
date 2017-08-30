@@ -18,7 +18,7 @@
 
 				<div class="mui-scroll">
 					<div v-show="nothing == 0">
-						<ul v-for="item in list">
+						<ul v-for="item in list" @tap.stop.prevent="$router.pushPlus(item.data.url)">
 							<!--<p>{{item.read_at}}</p>-->
 							<li>
 								<p>
@@ -36,7 +36,7 @@
 									<span v-if="item.data.extra_body">{{item.data.extra_body}}</span>
 									<i class="bot"></i>
 								</p>
-								<p @tap.stop.prevent="$router.pushPlus(item.data.url)">
+								<p >
 									<span>查看详情</span>
 									<svg class="icon" aria-hidden="true">
 										<use xlink:href="#icon-chakangengduojiantou"></use>
