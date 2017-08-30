@@ -67,6 +67,3 @@ window.bindShareByWechat = (title, desc, link, imgUrl)=>{
   }));
 };
 
-
-bindShareByWechat('title', 'desc', 'http://www.baidu.com', 'https://m.inwehub.com/public/guide/images/inwehub@2x.png');
-
