@@ -60,11 +60,11 @@
 						<p class="mui-ellipsis">{{user_coins }}</p>
 						<p>贡献值</p>
 					</li>
-					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=' + user_id)">
+					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=@'+user_id)">
 						<p class="mui-ellipsis">{{ user_submission_karma }}</p>
 						<p>发文影响力</p>
 					</li>
-					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=' + user_id)">
+					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url= @' + user_id)">
 						<p class="mui-ellipsis">{{ user_comment_karma }}</p>
 						<p>回复影响值</p>
 					</li>
