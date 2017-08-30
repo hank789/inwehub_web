@@ -67,7 +67,7 @@ function openWebviewByHome(ws)
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
     //绑定标题
-    var shareTitle = '[InweHub发现]' + title;
+    var shareTitle = 'InweHub发现 | ' + title;
     var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？';
     var shareUrl = 'index.html#' + '/webview/share?title=' + encodeURIComponent(title);
     // + '&link=' + encodeURIComponent(url)
