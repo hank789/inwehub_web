@@ -101,9 +101,6 @@
       }
     },
     computed: {
-      nothing () {
-        return false;
-      },
     },
     methods: {
     	//点击时用封装好的调用体统的方法；
@@ -134,8 +131,7 @@
               base64: base64,
               isNew:true,
             };
-            console.log(imgInfo);
-            console.log(this.images);
+
             this.images.push(imgInfo);
         });
       },

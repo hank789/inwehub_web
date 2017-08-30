@@ -4,8 +4,8 @@ function setStatusBarBackgroundAndStyle(baColor, style)
       if (mui.os.plus) {
         var ss = plus.navigator.getStatusBarBackground();
         if (ss !== baColor) {
-          console.log("statusBgcolor:", baColor);
-          console.log("statusBarStyle:", style);
+          console.log("statusBgcolor:" + baColor);
+          console.log("statusBarStyle:" + style);
           plus.navigator.setStatusBarBackground(baColor);
           plus.navigator.setStatusBarStyle(style);
         }
@@ -22,15 +22,20 @@ function setStatusBarStyle(style)
   });
 }
 
-function autoStatusBar()
+function autoStatusBar(context)
 {
+  if (!context) {
+    context =  document.getElementById('router-view');
+  }
+
+
   var defaultBgColor = '#3c3e44';
   var defaultMode = 'light';
   var defaultBackground = '';
 
   var bgColor = null, mode = null, background = null;
 
-  var statusBarStyleElement = document.getElementById('statusBarStyle');
+  var statusBarStyleElement = context.querySelector('#statusBarStyle');
 
   if (statusBarStyleElement) {
     bgColor = statusBarStyleElement.getAttribute('bgColor');
@@ -54,7 +59,7 @@ function autoStatusBar()
     document.body.style.background = '';
   }
 
-  console.log("bodyBackground:", background);
+  console.log("bodyBackground:" + background);
 }
 
 /**
@@ -67,8 +72,12 @@ function autoStatusBar()
  * 非沉浸式处理方式:
  * 1. 检测<div id="statusBarStyle" bgColor="#000000" mode="dark"></div>设置bgcolor 和 mode
  */
-function autoHeight()
+function autoHeight(context)
 {
+  if (!context) {
+    context = document;
+  }
+
   var immersed = 0;
   var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
   if ( ms && ms.length>=3) { // 当前环境为沉浸式状态栏模式
@@ -92,7 +101,7 @@ function autoHeight()
     }
   }
 
-  autoStatusBar();
+  autoStatusBar(context);
 }
 
 export {

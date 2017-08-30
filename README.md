@@ -17,3 +17,18 @@ npm run build
 /dist   生成的静态文件
 
 
+#规范
+页面标题栏
+  <header class="mui-bar-nav">
+      //标题栏内容
+  </header>
+
+页面主体内容
+  <div class="mui-content">
+      //页面主体内容
+  </div>
+
+页面底部内容
+  <nav class="footer-bar">
+      //页面底部内容
+  </nav>

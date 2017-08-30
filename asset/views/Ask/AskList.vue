@@ -7,16 +7,7 @@
     </header>
 
 
-    <div class="menu">
-      <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-        <a class="mui-control-item mui-active" @tap.stop.prevent="">
-          未完成
-      </a>
-        <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
-          已完成
-        </a>
-      </div>
-    </div>
+
 
 
     <div class="mui-content list-empty" v-if="nothing == 1">
@@ -39,12 +30,23 @@
       </div>
     </div>
 
-    <div id="item1" :class="{'mui-control-content':true, 'mui-active':true, 'emptyList':nothing}">
+    <div id="item1" class="absolute" :class="{'mui-content':true, 'mui-active':true, 'emptyList':nothing}">
 
-      <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
+            已完成
+          </a>
+        </div>
+      </div>
+
+      <div id="pullrefresh" class="mui-scroll-wrapper">
         <div class="mui-scroll">
 
-          <div class="mui-content" v-if="nothing == 0">
+          <div class="" v-if="nothing == 0">
 
             <div class="list-ask">
 
@@ -271,12 +273,6 @@
 
 <style scoped>
 
-  .mui-bar-nav ~ .menu {
-    margin-top:44px;
-    position: relative;
-  }
-
-
   .mui-segmented-control .mui-control-item {
     line-height: 50px;
     font-size: 16px;
@@ -303,7 +299,6 @@
   }
 
   #pullrefresh {
-    margin-top:5px;
   }
   .list-ask .list-ask-item{
     margin-top:10px;
@@ -421,16 +416,13 @@
     top: 88px;
   }
 
-  .mui-wechat .mui-control-content{
-    top:44px !important;
-  }
-
   .mui-segmented-control{
     background: #fff;
   }
 
   .menu{
     position: relative;
+    z-index:7;
   }
 
   .menu:after{

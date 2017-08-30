@@ -15,20 +15,23 @@
 							<svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
 								<use xlink:href="#icon-zhuanjiabiaoji"></use>
 							</svg>
-							<p>
-								<svg class="icon share" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
-									<use xlink:href="#icon-fenxiang"></use>
-								</svg>
-								<span class="share" @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
-							</p>
 							<i class="bot"></i>
 						</div>
 
 						<div class="my-detail">
-							<span class="grow">成长值</span>
+							<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info')">
+							  <use xlink:href="#icon-xiugai"></use>
+							</svg>
+							<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片{{account_info_complete_percent}}%</span>
+							<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
+							  <use xlink:href="#icon-fenxiang"></use>
+							</svg>
+							<span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
+							<!--<span class="grow">成长值</span>
 							<span>{{user_credits }}</span>
 							<span class="integral">贡献值</span>
-							<span>{{user_coins }}</span>
+							<span>{{user_coins }}</span>-->
+
 						</div>
 					</div>
 
@@ -40,21 +43,39 @@
 					<p>{{total_score}}</p>
 				</div>
 
-				<div class="my-progress">
+				<!--<div class="my-progress">
 					<span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
 					<span>{{account_info_complete_percent}}%</span>
-					 <svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
+					<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
 						<use xlink:href="#icon-jinggao"></use>
-				     </svg>
+					</svg>
 					<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
-				</div>
+				</div>-->
+				<ul class="my-infuence">
+					<li>
+						<p class="mui-ellipsis">{{user_credits }}</p>
+						<p>成长值</p>
+					</li>
+					<li>
+						<p class="mui-ellipsis">{{user_coins }}</p>
+						<p>贡献值</p>
+					</li>
+					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=@'+user_id)">
+						<p class="mui-ellipsis">{{ user_submission_karma }}</p>
+						<p>发文影响力</p>
+					</li>
+					<li @tap.stop.prevent="$router.pushPlus('/discover?redirect_url= @' + user_id)">
+						<p class="mui-ellipsis">{{ user_comment_karma }}</p>
+						<p>回复影响值</p>
+					</li>
+			     </ul>
 				<div class="my-apply">
 					<div @tap.stop.prevent="toApply(expert_apply_status)">
-						<svg class="icon" aria-hidden="true" >
+						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
 						<p>
-							<span v-if="expert_apply_status =='2'" >平台认证专家</span>
+							<span v-if="expert_apply_status =='2'">平台认证专家</span>
 							<span v-else>申请专家认证</span>
 							<span v-if="expert_apply_status =='0'">点击前往认证</span>
 							<span v-if="expert_apply_status =='1'">认证处理中</span>
@@ -102,7 +123,7 @@
 			</ul>
 
 			<ul class="my-option">
-				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')"  v-if="show_my_wallet">
+				<li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-qianbao"></use>
 					</svg>
@@ -127,7 +148,7 @@
 						<use xlink:href="#icon-wodefankuijianyi"></use>
 					</svg>
 					<span>反馈建议</span>
-					<svg class="icon" aria-hidden="true" >
+					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-chakangengduojiantou"></use>
 					</svg>
 					<i class="bot"></i>
@@ -146,8 +167,7 @@
 
 		</div>
 
-
-		<div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
+		<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 
 	</div>
 </template>
@@ -181,6 +201,9 @@
 				user_level: currentUser.user_level,
 				user_credits: currentUser.user_credits,
 				user_coins: currentUser.user_coins,
+				user_submission_karma:currentUser.submission_karma,
+				user_comment_karma:currentUser.comment_karma,
+				user_id: currentUser.id,
 				questions: currentUser.questions,
 				answers: currentUser.answers,
 				tasks: currentUser.tasks,
@@ -194,21 +217,21 @@
 		},
 		methods: {
 			//警告框
-	wran(){
-		var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">'+'为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。'+'</p>'+
-		           '<p style="text-align: left; color: #444444;">'+'平台对所有个人信息绝对保密，不会提供给任何第三方。'+'</p>';
-		var title='<p style="font-size:16px; margin-bottom:15px">'
-		           +'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">'
-		           +'<use xlink:href="#icon-jinggao"></use>'
-	               +'</svg>'
-		           +'警告说明 '
-		           +'</p>';
+			wran() {
+				var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+					'<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>';
+				var title = '<p style="font-size:16px; margin-bottom:15px">' +
+					'<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
+					'<use xlink:href="#icon-jinggao"></use>' +
+					'</svg>' +
+					'警告说明 ' +
+					'</p>';
 
-             var btnArray = ['取消', '确认'];
-             mui.confirm(font, title,function() {}, 'div');
+				var btnArray = ['取消', '确认'];
+				mui.confirm(font, title, function() {}, 'div');
 			},
 			//我的项目跳转判断
-			exclusive(status){
+			exclusive(status) {
 				switch(status) {
 					case 2:
 						this.$router.pushPlus('/project/list?back=/my');
@@ -220,15 +243,15 @@
 			},
 			//认证专家跳转判断；
 			toApprove(status) {
-			this.$router.pushPlus('/company/my?back=/my');
-//				switch(status) {
-//					case 2:
-//						this.$router.pushPlus('/company/my?back=/my');
-//						break;
-//					default:
-//						this.$router.pushPlus('/company/submit');
-//
-//				}
+				this.$router.pushPlus('/company/my?back=/my');
+				//				switch(status) {
+				//					case 2:
+				//						this.$router.pushPlus('/company/my?back=/my');
+				//						break;
+				//					default:
+				//						this.$router.pushPlus('/company/submit');
+				//
+				//				}
 
 			},
 			toApply(status) {
@@ -280,37 +303,52 @@
 					this.user_level = user.info.user_level;
 					this.user_credits = user.info.user_credits;
 					this.user_coins = user.info.user_coins;
+					this.user_submission_karma = user.info.submission_karma;
+					this.user_comment_karma = user.info.comment_karma;
+					this.user_id = user.info.id;
 					this.questions = user.info.questions;
 					this.answers = user.info.answers;
 					this.tasks = user.info.tasks;
 					this.projects = user.info.projects;
 					this.expert_level = user.info.expert_level;
 					this.show_my_wallet = user.info.show_my_wallet;
-          this.expert_apply_status =  user.info.expert_apply_status;
-          this.company_apply_status =  user.info.company_status;
+					this.expert_apply_status = user.info.expert_apply_status;
+					this.company_apply_status = user.info.company_status;
 					this.avatar = user.info.avatar_url;
 					this.name = user.info.name;
 					this.title = user.info.title;
-					this.show_my_wallet =  user.info.show_my_wallet;
+					this.show_my_wallet = user.info.show_my_wallet;
 				}));
 			}
 		},
 		created() {
 			//showInwehubWebview();
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+        if (inwehub_embed_webview.getURL() !== url) {
+          inwehub_embed_webview.loadURL(url);
+        }
+      }
+
 		},
 		activated: function() {
-		    console.log('activated');
+			console.log('activated');
 			this.initData();
 		},
 		mounted() {
-
-
-
+//			mui.waiting();
 		}
 	}
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+   ul,li,p,span,a,i{
+   	margin: 0;
+   	padding: 0;
+   	list-style: none;
+   }
 	.bot {
 		position: absolute;
 		right: 0;
@@ -335,7 +373,7 @@
 
 	.my-top {
 		width: 100%;
-		height: 310px;
+		height: 330px;
 		padding: 0 13px 0 13px;
 		background-color: #ffffff;
 	}
@@ -389,13 +427,11 @@
 		font-style: normal;
 		line-height: 15px;
 		font-size: 10px;
-		color:#FFFFFF;
+		color: #FFFFFF;
 		text-align: center;
-		background:url("../../statics/images/rank.png") no-repeat;
+		background: url("../../statics/images/rank.png") no-repeat;
 		background-size: 19px 18px;
-		background-position:top;
-
-
+		background-position: top;
 	}
 
 	.my-personal .my-info svg:nth-of-type(1) {
@@ -406,48 +442,25 @@
 		position: relative;
 	}
 
-	.my-personal .my-info p:nth-of-type(2) {
-		display: inline-block;
-		position: relative;
-		float: right;
-	}
-
-	.my-personal .my-info p:nth-of-type(2) svg {
-		font-size: 18px;
-		color: rgb(3, 174, 249);
-		margin-bottom: -3px;
-	}
-
-	.my-personal .my-info p:nth-of-type(2) span {
-		font-size: 13px;
-		text-align: center;
-		font-weight: normal;
-		float: right;
-		color: #808080;
-		margin-left: 5px;
-	}
-
+/**********编辑分享部分***************/
 	.my-personal .my-detail {
 		width: 100%;
 		height: 30px;
 	}
-
-	.my-detail span:nth-of-type(1),
-	span:nth-of-type(3) {
-		font-size: 14px;
+	.my-detail svg{
+		font-size: 18px;
+		color: #03AEF9;
+		margin-bottom: -2px;
+	}
+	.my-detail svg:nth-of-type(2){
+	    margin-left: 10px;
+	}
+	.my-detail span{
+		font-size: 13px;
 		color: #808080;
-	}
 
-	.my-detail span:nth-of-type(3) {
-		margin-left: 3px;
 	}
-
-	.my-detail span:nth-of-type(2),
-	span:nth-of-type(4) {
-		font-size: 14px;
-		color: #fa4975;
-	}
-
+/**********信息部分***************/
 	.my-news {
 		width: 100%;
 		height: 36px;
@@ -485,54 +498,30 @@
 	.my-news p:nth-of-type(3) span {
 		color: rgb(68, 68, 68);
 	}
-
-	.my-progress {
+/**********发布文章信息部分***************/
+	.my-infuence{
 		width: 100%;
-		margin-top: 20px;
-		position: relative;
-
-	}
-    .my-progress svg{
-      font-size: 15px;
-      color: #fcc816;
-      margin-left: 0px;
-      margin-top: 4px;
-      position: absolute;
-      right: 55px;
-
-    }
-	.my-progress span:nth-of-type(1) {
-		display: inline-block;
-		width:65%;
-		height: 12px;
-		border-radius: 50px;
+		margin-top: 22px;
 		overflow: hidden;
-		border: 0.5px solid rgb(3, 174, 249);
-		margin-bottom: -2px;
 	}
-
-	.my-progress span:nth-of-type(1) i {
-		display: inline-block;
-		font-style: normal;
-		margin-bottom: 8px;
-		width: 100px;
-		height: 12px;
-		background: rgb(3, 174, 249);
+	.my-infuence li{
+		width: 25%;
+		height: 100%;
+		float: left;
+		text-align: center;
 	}
-
-	.my-progress span:nth-of-type(2) {
+	.my-infuence li p:nth-of-type(1){
+		width: 100%;
+		font-size: 14px;
+		font-weight: 500;
+		color: #444444;
+	}
+	.my-infuence li p:nth-of-type(2){
 		font-size: 12px;
 		color: #808080;
-		margin-right: 1px;
 	}
 
-	.my-progress span:nth-of-type(3) {
-		font-size: 13px;
-		color: rgb(3, 174, 249);
-		float: right;
-		margin-top: 2px;
-	}
-
+/**********申请部分***************/
 	.my-apply {
 		margin-top: 20px;
 		width: 100%;
@@ -629,7 +618,7 @@
 		list-style: none;
 		padding-left: 16px;
 		padding-right: 16px;
-	    margin-bottom: 79px;
+		margin-bottom: 79px;
 	}
 
 	.my-option li {
@@ -654,9 +643,8 @@
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
-.mui-popup-inner {
-    padding: 23px 15px 1px 15px;
-    }
 
-
+	.mui-popup-inner {
+		padding: 23px 15px 1px 15px;
+	}
 </style>

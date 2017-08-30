@@ -1,65 +1,68 @@
 <template>
 
-  <div>
-    <header class="mui-bar mui-bar-nav">
-      <h1 class="mui-title">任务</h1>
-    </header>
+	<div>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">任务</h1>
+		</header>
 
-    <div class="mui-content"></div>
-  </div>
+		<div class="mui-content"></div>
+	</div>
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken} from '../../utils/request';
+	import { NOTICE } from '../../stores/types';
+	import { createAPI, addAccessToken } from '../../utils/request';
 
-  const TaskMain = {
-    mounted(){
-      //启用双击监听
-      mui.init({
-        gestureConfig:{
-          doubletap:true
-        },
-        subpages:[{
-          url:'#/task/list',
-          id:'#/task/list',
-          styles:{
-            top: '45px',
-            bottom: '0px',
-          }
-        }]
-      });
+	const TaskMain = {
+		mounted() {
+			//启用双击监听
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				},
+				subpages: [{
+					url: '#/task/list',
+					id: '#/task/list',
+					styles: {
+						top: '45px',
+						bottom: '0px',
+					}
+				}]
+			});
 
-      var contentWebview = null;
-      document.querySelector('header').addEventListener('doubletap',function () {
-        if(contentWebview==null){
-          contentWebview = plus.webview.currentWebview().children()[0];
-        }
-        contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
-      });
-    }
-  }
-  export default TaskMain;
+			var contentWebview = null;
+			document.querySelector('header').addEventListener('doubletap', function() {
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			});
+		}
+	}
+	export default TaskMain;
 </script>
 
-
 <style scoped>
-  .task-list{
-    line-height: 33px;
-    margin-top:15px;
-  }
-  .task-list .mui-table-view-chevron .mui-table-view-cell{
-    padding-right:5px;
-  }
-  .task-list .time{
-    float: right;
-    color:#999;
-  }
-  .task-list .link a{
-    color: #8f8f94;
-    font-size: 14px;
-  }
-  .task-list .type{
-    font-weight:bold;
-  }
+	.task-list {
+		line-height: 33px;
+		margin-top: 15px;
+	}
+	
+	.task-list .mui-table-view-chevron .mui-table-view-cell {
+		padding-right: 5px;
+	}
+	
+	.task-list .time {
+		float: right;
+		color: #999;
+	}
+	
+	.task-list .link a {
+		color: #8f8f94;
+		font-size: 14px;
+	}
+	
+	.task-list .type {
+		font-weight: bold;
+	}
 </style>

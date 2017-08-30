@@ -21,10 +21,6 @@ const routes = [{
 		},
 		beforeEnter: (to, from, next) => {
 			if(mui.os.plus) {
-				// 检查版本更新
-				mui.plusReady(function() {
-					checkUpdate();
-				});
 				var lauch = localEvent.getLocalItem('lauchFlag');
 				if(!lauch.showGuide && 1 === 2) {
 					mui.plusReady(function() {
@@ -64,6 +60,10 @@ const routes = [{
 			title: '登录'
 		},
 		beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
 			CanNotGetInWhenLogged(to, from, next)
 		}
 	},
@@ -168,7 +168,8 @@ const routes = [{
 		path: '/my/info/job/:id',
 		component: require('../../../views/Account/infos/job.vue'),
 		meta: {
-			title: '工作经历'
+			title: '工作经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -178,7 +179,8 @@ const routes = [{
 		path: '/my/info/project/:id',
 		component: require('../../../views/Account/infos/project.vue'),
 		meta: {
-			title: '项目经历'
+			title: '项目经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -188,7 +190,8 @@ const routes = [{
 		path: '/my/info/edu/:id',
 		component: require('../../../views/Account/infos/edu.vue'),
 		meta: {
-			title: '教育经历'
+			title: '教育经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -251,7 +254,7 @@ const routes = [{
 		children: [{
 				path: '',
 				meta: {
-					title: '我的档案',
+					title: '基本资料',
 					wechatHideHeader: true
 				},
 				component: require('../../../views/Account/infos/basic.vue'),
@@ -334,7 +337,8 @@ const routes = [{
 		path: '/my/info/train/:id',
 		component: require('../../../views/Account/infos/train.vue'),
 		meta: {
-			title: '培训经历'
+			title: '培训经历',
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -371,6 +375,10 @@ const routes = [{
 			title: '提现'
 		},
 		beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
 			requestAuth(to, from, next)
 		}
 	},
@@ -518,10 +526,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -534,10 +538,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -550,10 +550,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -566,10 +562,6 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
 			requestAuth(to, from, next)
 		}
 	},
@@ -582,10 +574,30 @@ const routes = [{
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {
-			// 检查版本更新
-			mui.plusReady(function() {
-				checkUpdate();
-			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //balancebar 余额变动
+		path: '/balancebar',
+		component: require('../../../views/Task/balancebar.vue'),
+		meta: {
+			title: '余额变动',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //chat 客服
+		path: '/chat',
+		component: require('../../../views/Task/chat.vue'),
+		meta: {
+			title: '客服',
+			wechatHideHeader: true,
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
 	},
@@ -734,6 +746,18 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { // readhub
+    path: '/readhub/detail',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Readhub/DetailH5.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 	{ // setting
 		path: '/setting',
 		meta: {
@@ -1037,6 +1061,20 @@ const routes = [{
       title: 'InweHub'
     },
     component: require('../../../views/Webview/article.vue'),
+  },
+  {
+    path: '/webview/share',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/Webview/Share.vue'),
+  },
+  {
+    path: '/test/open',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/OpenApp.vue'),
   },
   {
     path: '/webview/registerForm',

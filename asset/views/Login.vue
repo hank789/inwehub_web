@@ -166,7 +166,7 @@
                 appid: device_info.appid,
                 appkey: device_info.appkey,
                 device_type: plus.os.name === 'iOS' ? 2 : 1
-              }).then(res => {
+              },false).then(res => {
 
               });
             }
@@ -176,7 +176,7 @@
             let currentUser = user;
             //localEvent.setLocalItem('userInfo', currentUser);
             cb(currentUser);
-            this.$router.pushPlus('/my',true,'none','none');
+            this.$router.pushPlus('/my',true,'none','none',true,true);
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {

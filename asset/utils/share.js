@@ -3,7 +3,7 @@
 
  使用方法:
    //.step1 导入组件
-   import Share from 'untils/share'
+   import Share from 'utils/share'
 
    //.step2 绑定share
    Share.bindShare(
@@ -19,19 +19,20 @@
    context.sendPengYouQuan(); //发送给朋友圈
  **/
 
-import {postRequest}  from 'request'
+import {postRequest}  from './request';
+import wx from 'weixin-js-sdk';
 
-var Share = {
-  currentUrl:null,
-  context:null,
-  data:{},
-  successCallback:() => {
+var Share = () => {
+  var currentUrl = null;
+  var context = null;
+  var data = {};
+  var successCallback= () => {
 
-  },
-  failCallback:() => {
+  };
+  var failCallback = () => {
 
-  },
-  bindShareByPlus:() => {
+  };
+  var bindShareByPlus = () => {
     var self = this;
     var shares = [];
     mui.plusReady(() => {
@@ -43,25 +44,30 @@ var Share = {
 
           var wechat = shares['weixin'];
           if (wechat.nativeClient) {
+
+
+
              self.context.sendHaoyou = () => {
-               wechat.send({
+               var data = {
                  content:self.data.content,
-                 href:self.data.href,
+                 href:self.data.link,
                  title:self.data.title,
                  pictures:[self.data.imageUrl],
                  thumbs:[self.data.thumbUrl],
                  extra:{scene:"WXSceneSession"}
-               }, ()=>{
+               };
+              
+               wechat.send(data, ()=>{
                  self.successCallback();
                }, (error)=>{
-                 self.failCallback();
+                 self.failCallback(error);
                });
              };
 
             self.context.sendPengYouQuan = () => {
               wechat.send({
                 content:self.data.content,
-                href:self.data.href,
+                href:self.data.link,
                 title:self.data.title,
                 pictures:[self.data.imageUrl],
                 thumbs:[self.data.thumbUrl],
@@ -69,7 +75,7 @@ var Share = {
               }, ()=>{
                 self.successCallback();
               }, (error)=>{
-                self.failCallback();
+                self.failCallback(error);
               });
             }
 
@@ -82,9 +88,10 @@ var Share = {
           }
         });
     });
-  },
-  bindShareByWechat:()=>{
+  };
+  var bindShareByWechat = ()=>{
     var self = this;
+
     //微信分享
     postRequest(`share/wechat/jssdk`, {current_url:this.currentUrl}).then(response => {
       var code = response.data.code;
@@ -96,17 +103,18 @@ var Share = {
       wx.config(wechatConfig);
 
       wx.error(function(res){
-        //mui.alert('wx:error:'+ JSON.stringify(res));
+         console.error('wx:error:'+ JSON.stringify(res));
       });
 
-      wx.ready(function() {
+      wx.ready(() => {
+
         wx.onMenuShareAppMessage({
-          title: this.data.title, // 分享标题
-          desc: this.data.desc, // 分享描述
-          link: this.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: this.data.imgUrl, // 分享图标
-          type: this.data.type?this.data.type:'link', // 分享类型,music、video或link，不填默认为link
-          dataUrl: this.data.dataUrl?this.data.dataUrl:'', // 如果type是music或video，则要提供数据链接，默认为空
+          title: self.data.title, // 分享标题
+          desc: self.data.desc, // 分享描述
+          link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: self.data.imgUrl, // 分享图标
+          type: self.data.type?self.data.type:'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: self.data.dataUrl?self.data.dataUrl:'', // 如果type是music或video，则要提供数据链接，默认为空
           success: () => {
             // 用户确认分享后执行的回调函数
             self.successCallback();
@@ -118,9 +126,9 @@ var Share = {
         });
 
         wx.onMenuShareTimeline({
-          title: this.data.title, // 分享标题
-          link: this.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: this.data.imgUrl, // 分享图标
+          title: self.data.title, // 分享标题
+          link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: self.data.imgUrl, // 分享图标
           success: () => {
             self.successCallback();
           },
@@ -128,10 +136,16 @@ var Share = {
             self.failCallback();
           }
         });
+
+        self.context.sendHaoyou = () => {};
+
+        self.context.sendPengYouQuan = () => {};
+
       });
     });
-  },
-  bindShare:(context, data, successCallback, failCallback)=>{
+  };
+  var bindShare = (context, data, successCallback, failCallback)=>{
+
       this.context = context;
       var fullUrl = window.location.href;
       this.currentUrl = fullUrl.split('#')[0];
@@ -144,16 +158,21 @@ var Share = {
         this.failCallback = failCallback;
       }
 
-      if (mui.os.wechat) {
-         this.bindShareByWechat();
-      }
-
       if (mui.os.plus) {
-         this.bindShareByPlus();
+         bindShareByPlus();
+      } else if (mui.os.wechat) {
+         bindShareByWechat();
+      } else {
+         mui.toast('暂不支持当前环境');
+         context.sendHaoyou = () => {};
+         context.sendPengYouQuan = () => {};
       }
   }
-}
+  return {
+    bindShare:bindShare
+  }
+};
 
 
 
-export default Share;
+export default new Share();

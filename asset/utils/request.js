@@ -24,13 +24,7 @@ export default axios;
 
 export function apiRequest (url, data, showWaiting = true) {
   if (showWaiting){
-    if (mui.os.plus){
-      mui.plusReady(() => {
-        plus.nativeUI.showWaiting();
-      });
-    } else {
-      mui.waiting();
-    }
+    mui.waiting();
   }
   var app_version = localEvent.getLocalItem('app_version');
   if (app_version) {
@@ -44,13 +38,7 @@ export function apiRequest (url, data, showWaiting = true) {
   )
     .then(response => {
       if (showWaiting){
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+        mui.closeWaiting();
       }
       var code = response.data.code;
       // 参数错误
@@ -82,13 +70,7 @@ export function apiRequest (url, data, showWaiting = true) {
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
       if (showWaiting){
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+        mui.closeWaiting();
       }
       mui.toast(message);
       return false;
@@ -98,13 +80,7 @@ export function apiRequest (url, data, showWaiting = true) {
 //对后端数据进行请求；（showWaiting = true 加载gif）
 export function postRequest (url, data, showWaiting = true, options = {}) {
   if (showWaiting){
-    if (mui.os.plus){
-      mui.plusReady(() => {
-        plus.nativeUI.showWaiting();
-      });
-    } else {
-      mui.waiting();
-    }
+    mui.waiting();
   }
   var app_version = localEvent.getLocalItem('app_version');
   if (app_version) {
@@ -124,17 +100,11 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
     .then(response => {
 
       if (options.onUploadProgress) {
-           mui.closeUploadWaiting();
+        mui.closeUploadWaiting();
       }
 
       if (showWaiting) {
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+        mui.closeWaiting();
       }
 
       var code = response.data.code;
@@ -151,13 +121,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
     })
     .catch(e => {
       if (showWaiting) {
-        if (mui.os.plus){
-          mui.plusReady(() => {
-            plus.nativeUI.closeWaiting();
-          });
-        } else {
-          mui.closeWaiting();
-        }
+        mui.closeWaiting();
       }
 
       if (options.onUploadProgress) {

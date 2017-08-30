@@ -501,18 +501,20 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 /**
 加载动画
  */
-.mint-indicator {
+/*.mint-indicator {
   -webkit-transition: opacity .2s linear;
   transition: opacity .2s linear;
-}
+}*/
 .mint-indicator-wrapper {
-  top: 50%;
-  left: 50%;
+  /*top: 50%;
+  left:50%;*/
+  top:30%;
+  left:45%;
   position: fixed;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 5px;
-  background: rgba(0, 0, 0, 0.7);
+/*  background: rgba(0, 0, 0, 0.7);*/
   color: white;
   box-sizing: border-box;
   text-align: center;
@@ -887,3 +889,95 @@ input.upload-file[type=file]{
 75%  {opacity: 0.65;}
 100% {opacity: 0.7;}
 }*/
+
+.mui-content.absolute{
+  position: absolute;
+  top:44px;
+  width:100%;
+  bottom:0;
+  padding-top:0;
+}
+
+.mui-content.absolute .menu ~ #pullrefresh{
+  top:50px;
+}
+
+.mui-bar-nav ~ .mui-content .mui-pull-top-pocket{
+  top:0;
+}
+
+.mui-content.absolute{
+  top:0;
+}
+
+.mui-bar-nav ~ .mui-content.absolute{
+  top:44px;
+}
+
+
+
+.openAppH5 .mui-bar-nav{
+  top:54px;
+}
+
+.openAppH5 .mui-content{
+  padding-top:54px;
+}
+
+.openAppH5 .mui-bar-nav ~  .mui-content{
+  padding-top: 98px;
+}
+
+.openAppH5 .mui-bar-nav ~  .mui-content.absolute{
+  top:98px;
+  padding-top: 0;
+}
+
+
+
+.openAppWechat .mui-content{
+  padding-top:49px;
+}
+
+.openAppWechat .mui-bar-nav{
+  top:49px;
+}
+
+.openAppWechat .mui-bar-nav ~  .mui-content{
+  padding-top: 44px;
+}
+
+.openAppWechat .mui-content.absolute{
+  top:49px;
+  padding-top:0;
+}
+
+.openAppWechat .mui-bar-nav ~  .mui-content.absolute{
+  top:93px;
+  padding-top: 0;
+}
+
+.gaussian{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.mui-ios .gaussian{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/********小哈加载动画************/
+.mint-indicator-wrapper >img{
+	width: 35px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: -40%;
+    z-index: 9999;
+}

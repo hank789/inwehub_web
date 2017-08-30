@@ -382,7 +382,7 @@
           return;
         }
         if (mui.os.plus) {
-          plus.nativeUI.showWaiting();
+          mui.waiting();
         }
         request.post(createAPI('auth/register'), {
             name: username,
@@ -395,7 +395,7 @@
         )
           .then(response => {
             if (mui.os.plus) {
-              plus.nativeUI.closeWaiting();
+              mui.closeWaiting();
             }
             var code = response.data.code;
             if (code !== 1000) {
@@ -421,7 +421,7 @@
                 appid: device_info.appid,
                 appkey: device_info.appkey,
                 device_type: plus.os.name === 'iOS' ? 2 : 1
-              }).then(res => {
+              },false).then(res => {
 
               });
             }
@@ -430,7 +430,7 @@
               let currentUser = user;
               //localEvent.setLocalItem('userInfo', currentUser);
               cb(currentUser);
-              this.$router.pushPlus('/my',true,'none','none');
+              this.$router.pushPlus('/my',true,'none','none',true,true);
             }));
           })
           .catch(({response: {data = {}} = {}}) => {

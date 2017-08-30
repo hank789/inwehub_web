@@ -1,13 +1,14 @@
 <template>
 	<div>
 
-		<header class="hidewechattitle">
-			<svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-logowenzi"></use>
-		    </svg>
-		</header>
-
 		<div class="mui-content" v-show="!loading">
+
+      <header class="hidewechattitle">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg>
+      </header>
+
 			<!--首页轮播-->
 			<div id="slider" class="mui-slider" v-if="notices.length">
 				<div class="mui-slider-group mui-slider-loop">
@@ -65,7 +66,7 @@
 			</div>
 			<!--人物推荐-->
 			<swiper :options="swiperOption" id="home-recommend">
-			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index">
+			    <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts"  :key="index" :uuid="experts.uuid">
 			        <img :src="experts.avatar_url" :class="experts.uuid"  />
 					<span>
 	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
@@ -91,7 +92,7 @@
 				</div>
 				<ul>
 					<li v-if="recommend_read.length=='0'"></li>
-					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads.view_url,reads.id,reads.title, reads.comment_url)" v-else>
+					<li v-for="(reads, index) in recommend_read"  @tap.stop.prevent= "goArticle(reads)" v-else>
 						<img  :src="reads.img_url" />
 						<div>
 							<p class="mui-ellipsis-2">{{reads.title}}</p>
@@ -110,35 +111,6 @@
 
 				</ul>
 			</div>
-
-
-             <!--手机端-->
-             <div class="suspend">
-	            <p>
-	            	    <svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-logotuxing"></use>
-				    </svg>
-	            </p>
-	            <p>
-	            	   <span>下载APP</span>
-	            	   <span>查看更多专家信息</span>
-	            </p>
-	            <p>
-	            	  立即打开
-	            </p>
-	        </div>
-
-           <!--微信端-->
-           <div class="suspension">
-           	   <p>
-           	   	  <svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-logotuxing"></use>
-				    </svg>
-           	   </p>
-           	   <p>下载APP</p>
-           	   <p>立即打开</p>
-           </div>
-
 
 			<div class="home-bot">
 				你已经到达我的底线
@@ -173,7 +145,8 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
-  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar'
+  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
+  import {queryParent} from '../utils/dom';
 
 	const Home = {
 		data: () => ({
@@ -186,7 +159,9 @@
 			currentTime: parseInt((new Date()).getTime() / 1000),
 			loading: true,
 			timeAutoEndTimeOut: false,
-			swiperOption:{}
+			swiperOption:{},
+      isWeixin:false,
+      isH5:false,
 		}),
 		created() {
 			this.swiperOption = {
@@ -207,6 +182,14 @@
 		},
 		mounted() {
 			//showInwehubWebview();
+
+      if (!mui.os.plus) {
+          if (mui.os.wechat) {
+              this.isWeixin = true;
+          } else {
+              this.isH5 = true;
+          }
+      }
 		},
 		computed: {
 			//首页倒计时；
@@ -217,16 +200,12 @@
 			}
 		},
 		methods: {
-			swipperClick(swiper, event){
-      	          var  Ele = event.srcElement.parentNode.firstChild.className.split(" ");
-     	            var uuid = "";
-      	            if(Ele.length ===1){
-      	            	  uuid = Ele[0]
-     	            }else{
-      	            	    uuid = Ele[1]
-   	            	   }
+		swipperClick(swiper, event){
+			    var parent = queryParent(event.target, 'swiper-slide');
+                if (!parent) return;
 
-     	           this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+               var uuid = parent.getAttribute('uuid');
+              this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 			},
 			detail(url){
 			   this.goLink(url);
@@ -251,7 +230,15 @@
 			}
 
 			},
-      goArticle: function(url,id,title='', pathUrl) {
+      goArticle: function(article) {
+
+        var url = article.view_url;
+        var id = article.id;
+        var title = article.title;
+        var pathUrl = article.comment_url;
+        var img_url = article.img_url;
+
+
         if(/http/.test(url)) {
           if(mui.os.plus) {
 
@@ -275,11 +262,16 @@
                 article_url: url,
                 article_title: title,
                 article_comment_url: pathUrl,
-
+                article_img_url:img_url,
               }
             });
           } else {
-            window.location.href = url;
+//            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+
+              var url = "/discover?redirect_url=" + pathUrl + '?' + encodeURIComponent('from=h5');
+
+              this.$router.push(url);
+//            window.location.href = url;
           }
         } else {
           this.$router.pushPlus(url);
@@ -425,111 +417,6 @@
 </script>
 
 <style lang="less" scoped>
-/*手机端*/
-.suspend{
-	width: 100%;
-	height:64px;
-	border-radius:4px;
-	background:#252525;
-	position: absolute;
-	top:44px;
-	z-index: 999;
-	display: none;
-}
-.suspend p:nth-of-type(1){
-	float: left;
-	width: 47px;
-	height: 47px;
-	border-radius: 12px;
-	background: #F3F4F6;
-	margin-top: 8.5px;
-	margin-left: 10px;
-	text-align: center;
-}
-.suspend p:nth-of-type(1)>svg{
-	font-size: 34px;
-	margin-top: 6px;
-	color: #009fe8;
-}
-.suspend p:nth-of-type(2){
-	width: 96px;
-	height: 47px;
-	margin-top: 8.5px;
-	margin-left: 10px;
-	padding-top: 5px;
-	float: left;
-}
-.suspend p:nth-of-type(2)>span{
-	display: block;
-	color: #FFFFFF;
-	font-size: 12px;
-}
-.suspend p:nth-of-type(2)>span:nth-of-type(1){
-	font-size:16px
-}
-.suspend p:nth-of-type(2)>span:nth-of-type(2){
-	margin-top: -3px;
-}
-.suspend p:nth-of-type(3){
-	float:right;
-	width: 76px;
-	height:30px;
-	border-radius:4px;
-	background:#3c95f9;
-	text-align: center;
-	line-height: 30px;
-	color: #FFFFFF;
-	margin-top: 17px;
-	margin-right: 10.5px;
-	}
-/*微信端*/
-.suspension{
-	width: 100%;
-	height: 49px;
-	position: absolute;
-    top: 44px;
-    background: #FFFFFF;
-    z-index: 999;
-    box-shadow:0px 3px 5px #b4b4b6;
-    -webkit-box-shadow:0px 3px 5px #b4b4b6;
-    -moz-box-shadow:0px 3px 5px #b4b4b6;
-    display: none;
-}
-.suspension p:nth-of-type(1){
-	float: left;
-	width:35px;
-	height:35px;
-	border-radius:9px;
-	background: #f3f4f6;
-	margin-top: 7px;
-	margin-left: 16px;
-	text-align: center;
-}
-.suspension p:nth-of-type(1) svg{
-	font-size: 25px;
-	margin-top: 6px;
-	color: #009fe8;
-}
-.suspension p:nth-of-type(2){
-    float: left;
-    font-size:16px;
-	color:#171616;
-	margin-top: 14px;
-	margin-left: 10px;
-}
-.suspension p:nth-of-type(3){
-	float:right;
-	width:76px;
-	height:30px;
-	border-radius:4px;
-	background: #3c95f9;
-	font-size: 14px;
-	color: #FFFFFF;
-	text-align: center;
-    line-height: 30px;
-    margin-top: 10px;
-    margin-right: 14px;
-}
 	/*2.0版本css样式*/
 
 	.mui-content {
@@ -771,7 +658,7 @@
 	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
-		margin-bottom: 2px;
+		margin-bottom: 2.5px;
 		margin-left: -3px;
 	}
 

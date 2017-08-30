@@ -90,9 +90,7 @@
       }
     },
     computed: {
-      nothing () {
-         return false;
-      },
+
     },
 
     methods: {
