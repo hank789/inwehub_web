@@ -394,8 +394,9 @@
 	<script type="text/javascript">
 	window.onload = function() {
 	   var localurl = window.location.href;
-	  
-       bindShareByWechat('InweHub-不负期待 专家同行', '为企业和咨询顾问提供高品质资深专家辅助服务', localurl, 'https://m.inwehub.com/public/guide/images/inwehub@2x.png');
+	   var localpre = window.location.protocol + '://' + window.location.host;
+	   console
+       bindShareByWechat('InweHub-不负期待 专家同行', '为企业和咨询顾问提供高品质资深专家辅助服务', localurl, localpre + '/public/guide/images/group_2@2x.png');
        var swiper = new Swiper('.swiper-container', {
 		        pagination: '.swiper-pagination',
 		        paginationClickable: true,
