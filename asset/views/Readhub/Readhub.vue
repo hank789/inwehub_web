@@ -37,7 +37,7 @@
         mui.closeWaiting();
       },
       reloadUrl(){
-        
+
         if (!/^\/discover/.test(this.$route.path)) {
             return;
         }
@@ -58,7 +58,6 @@
       },
       createIframe(url){
         mui.waiting();
-        var url = this.url;
 
 
         this.iframeState = true;
