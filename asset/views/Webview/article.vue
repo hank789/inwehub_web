@@ -31,8 +31,7 @@
         var url = process.env.READHUB_URL + '/api-request?uuid=' + currentUser.uuid;
 
         function createEmbed(ws) {
-          var embed = openWebviewByHome(ws.id, ws.article_url, ws.article_comment_url, ws.article_title, ws.article_img_url);
-          ws.append(embed);
+          openWebviewByHome(ws);
         }
       });
 
