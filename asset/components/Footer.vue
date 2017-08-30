@@ -33,7 +33,7 @@
 
     <div class="askWrapper">
       <div class="askPlus"  @tap.stop.prevent="show()"><div class="askImgBg"></div><div class="askImg"></div></div>
-      <div class="title">提问</div>
+      <div class="title">开启</div>
     </div>
 
 
