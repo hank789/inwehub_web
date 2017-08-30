@@ -31,7 +31,7 @@
 							<span>{{user_credits }}</span>
 							<span class="integral">贡献值</span>
 							<span>{{user_coins }}</span>-->
-							
+
 						</div>
 					</div>
 
@@ -323,6 +323,15 @@
 		},
 		created() {
 			//showInwehubWebview();
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+        if (inwehub_embed_webview.getURL() !== url) {
+          inwehub_embed_webview.loadURL(url);
+        }
+      }
+
 		},
 		activated: function() {
 			console.log('activated');
@@ -350,7 +359,7 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.bott {
 		position: absolute;
 		right: 15px;
@@ -361,19 +370,19 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.my-top {
 		width: 100%;
-		height: 330px;       
+		height: 330px;
 		padding: 0 13px 0 13px;
 		background-color: #ffffff;
 	}
-	
+
 	.professor {
 		width: 100%;
 		height: 100px;
 	}
-	
+
 	.professor .avatar {
 		width: 69px;
 		height: 68.5px;
@@ -381,7 +390,7 @@
 		margin-top: 30.5px;
 		float: left;
 	}
-	
+
 	.my-personal {
 		width: 71%;
 		height: 69px;
@@ -391,14 +400,14 @@
 		position: absolute;
 		right: 8px;
 	}
-	
+
 	.my-personal .my-info {
 		width: 100%;
 		height: 30px;
 		margin-bottom: 9px;
 		position: relative;
 	}
-	
+
 	.my-personal .my-info span:nth-of-type(1) {
 		display: inline-block;
 		max-width: 72px;
@@ -408,7 +417,7 @@
 		margin-right: 1.5px;
 		margin-bottom: -4px;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(1) {
 		width: 19px;
 		height: 18px;
@@ -424,7 +433,7 @@
 		background-size: 19px 18px;
 		background-position: top;
 	}
-	
+
 	.my-personal .my-info svg:nth-of-type(1) {
 		font-size: 26px;
 		margin-bottom: -4px;
@@ -432,8 +441,8 @@
 		color: rgb(3, 174, 249);
 		position: relative;
 	}
-	
-/**********编辑分享部分***************/	
+
+/**********编辑分享部分***************/
 	.my-personal .my-detail {
 		width: 100%;
 		height: 30px;
@@ -444,12 +453,12 @@
 		margin-bottom: -2px;
 	}
 	.my-detail svg:nth-of-type(2){
-	    margin-left: 10px;	
+	    margin-left: 10px;
 	}
 	.my-detail span{
 		font-size: 13px;
 		color: #808080;
-		
+
 	}
 /**********信息部分***************/
 	.my-news {
@@ -463,7 +472,7 @@
 		-moz-box-shadow: 0 0 10px rgb(243, 244, 246);
 		box-shadow: 0 0 10px rgb(243, 244, 246);
 	}
-	
+
 	.my-news p {
 		display: inherit;
 		float: left;
@@ -475,17 +484,17 @@
 		line-height: 16px;
 		border-right: 1px solid #c8c8c8;
 	}
-	
+
 	.my-news p:last-child {
 		border-right: none;
 		width: 30%;
 		margin-left: 8px;
 	}
-	
+
 	.my-news p span {
 		color: #fa4975;
 	}
-	
+
 	.my-news p:nth-of-type(3) span {
 		color: rgb(68, 68, 68);
 	}
@@ -511,14 +520,14 @@
 		font-size: 12px;
 		color: #808080;
 	}
-	
+
 /**********申请部分***************/
 	.my-apply {
 		margin-top: 20px;
 		width: 100%;
 		height: 61px;
 	}
-	
+
 	.my-apply div {
 		display: inline-block;
 		width: 49%;
@@ -526,7 +535,7 @@
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-	
+
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 6px;
@@ -535,7 +544,7 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
@@ -544,25 +553,25 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div p {
 		margin-top: 10px;
 	}
-	
+
 	.my-apply div p span {
 		display: block;
 	}
-	
+
 	.my-apply div p span:nth-of-type(1) {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-apply div p span:nth-of-type(2) {
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.part2 {
 		padding: 0;
 		margin: 0;
@@ -575,14 +584,14 @@
 		margin-top: 10px;
 		position: relative;
 	}
-	
+
 	.part2 li {
 		display: inline-block;
 		width: 23%;
 		height: 70px;
 		text-align: center;
 	}
-	
+
 	.part2 li span:nth-of-type(1) {
 		padding: 0;
 		margin: 0;
@@ -592,7 +601,7 @@
 		font-size: 13px;
 		color: #444444;
 	}
-	
+
 	.part2 li span:nth-of-type(2) {
 		padding: 0;
 		margin: 0;
@@ -600,7 +609,7 @@
 		color: #808080;
 		display: block;
 	}
-	
+
 	.my-option {
 		width: 100%;
 		background: #FFFFFF;
@@ -611,7 +620,7 @@
 		padding-right: 16px;
 		margin-bottom: 79px;
 	}
-	
+
 	.my-option li {
 		width: 100%;
 		height: 44px;
@@ -619,22 +628,22 @@
 		padding-bottom: 12px;
 		position: relative;
 	}
-	
+
 	.my-option li span {
 		margin-left: 10px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-option li svg:nth-of-type(1) {
 		font-size: 22px;
 		margin-bottom: -4px;
 	}
-	
+
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
-	
+
 	.mui-popup-inner {
 		padding: 23px 15px 1px 15px;
 	}
