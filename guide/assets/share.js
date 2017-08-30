@@ -1,6 +1,26 @@
 /**
  * Created by edwin on 2017/8/30.
  */
+var $ = {};
+$.post = (url, payload, callback) => {
+
+    var data = new FormData();
+    data.append( "json", JSON.stringify( payload ) );
+
+
+    fetch(url,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify( payload )
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(response){ callback(response); })
+};
+
 window.bindShareByWechat = (title, desc, link, imgUrl)=>{
   var fullUrl = window.location.href;
   var currentUrl = fullUrl.split('#')[0];
@@ -47,4 +67,6 @@ window.bindShareByWechat = (title, desc, link, imgUrl)=>{
   }));
 };
 
+
+bindShareByWechat('title', 'desc', 'http://www.baidu.com', 'https://m.inwehub.com/public/guide/images/inwehub@2x.png');
 
