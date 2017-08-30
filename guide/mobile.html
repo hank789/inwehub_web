@@ -389,8 +389,14 @@
     </div>
 	</body>
 	<script src="assets/swiper-3.4.2.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+	<script src="assets/share.js"></script>
 	<script type="text/javascript">
-		  var swiper = new Swiper('.swiper-container', {
+	window.onload = function() {
+	   var localurl = window.location.href;
+	  
+       bindShareByWechat('InweHub-不负期待 专家同行', '为企业和咨询顾问提供高品质资深专家辅助服务', localurl, 'https://m.inwehub.com/public/guide/images/inwehub@2x.png');
+       var swiper = new Swiper('.swiper-container', {
 		        pagination: '.swiper-pagination',
 		        paginationClickable: true,
 		        direction: 'vertical',
@@ -412,6 +418,11 @@
 		    function download(){
 		      	window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp");
 		    }
+	
+	}
+		  
+		    
+		    
 	</script>
 </html>
 
