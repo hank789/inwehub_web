@@ -83,12 +83,12 @@
 
         //发现页处理
         if (mui.os.plus) {
+
           if (this.$route.path.match(/discover/)) {
+
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
             if (inwehub_embed_webview) {
-              inwehub_embed_webview.setStyle({
-                bottom: '1000px'
-              });
+              inwehub_embed_webview.hide();
             }
           }
         }
@@ -112,9 +112,7 @@
             setTimeout(() => {
               var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
               if (inwehub_embed_webview) {
-                inwehub_embed_webview.setStyle({
-                  bottom: '75px'
-                });
+                inwehub_embed_webview.show();
               }
             }, 300);
           }
