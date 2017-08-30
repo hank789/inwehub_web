@@ -33,11 +33,65 @@
 			<p>邮箱：hi@inwehub.com/微信：hiinwe</p>
 		</div>
 
-		<div class="home-apply" @tap.stop.prevent="$router.replace('/expert/apply')">立刻申请</div>
+		<div class="home-apply" @tap.stop.prevent = ApplicationJudge()>立刻申请</div>
 	</div>
 </template>
 
 <script>
+	//@tap.stop.prevent="$router.replace('/expert/apply')"
+	import {getLocalUserInfo, getUserInfo } from '../../utils/user';
+	import { USERS_APPEND } from '../../stores/types';
+
+     var userInfo = getLocalUserInfo();
+	export default {
+		data() {
+			return {		
+				percent:userInfo.account_info_complete_percent
+			   }
+		   },
+		   methods: {
+		   	 //判断资料的完善程度；
+		   	ApplicationJudge(){
+		   	  if(this.percent < 96){
+		   	  	console.log ('申请专家认证需要保证个人资料完整度在96%以上，请前往进行维护。')
+		   	  	var font = '<p style= "text-align:left">' + '申请专家认证需要保证个人资料完整度在96%以上，请前往进行维护。' + '</p>' ;
+				var title = '<p style="font-size:16px; margin-bottom:15px">' +'温馨提示 ' +'</p>';
+				var btnArray = ['取消', '确认'];
+				var  that = this;
+				mui.confirm(font, title, function(e) {		
+					 if (e.index == 1) {
+                        that.$router.replace('/my/info');
+                     } else { 
+                        
+                    }
+				}, 'div');
+				
+
+		   	  }else{
+		   	  	this.$router.replace('/expert/apply');
+		   	  }
+		   	  
+		   	},
+		   	initData() {
+				//执行刷新
+				console.log('refresh-my');
+				this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+					cb(user);
+					this.percent = user.info.account_info_complete_percent;
+					
+				}));
+			}
+		   	 
+		   	  
+		   },
+		    mounted() {
+		       console.log(userInfo.account_info_complete_percent);
+		    },
+			activated: function() {
+				console.log('activated');
+				this.initData();
+			}
+	      }
 </script>
 
 <style scoped="scoped">
