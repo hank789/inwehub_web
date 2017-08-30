@@ -23,7 +23,7 @@
 							<p>
 								<span class="mui-ellipsis">{{item.data.title}}</span>
 								<span class="mui-ellipsis">{{item.data.body}}</span>
-								<span class="mui-ellipsis third" v-if="item.data.extra_body">截止时间：<i>{{item.data.extra_body}}</i></span>
+								<span class="mui-ellipsis third" v-if="item.data.extra_body"><i>{{item.data.extra_body}}</i></span>
 								<span class="fourth">{{item.created_at}}</span>
 							</p>
 							<i class="bot"></i>
