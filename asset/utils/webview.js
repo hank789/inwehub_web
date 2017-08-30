@@ -51,38 +51,66 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
  * @param pathUrl
  * @param title
  */
-function openWebviewByHome(id, url, pathUrl, title, img_url)
+function openWebviewByHome(ws)
 {
 
-    var currentWebview = plus.webview.currentWebview();
+    var id = ws.id;
+    var url = ws.article_url;
+    var pathUrl = ws.article_comment_url;
+    var title = ws.article_title;
+    var img_url = ws.article_img_url;
+
+    var currentWebview = ws;
 
     setStatusBarBackgroundAndStyle('#3c3e44', 'light');
 
     var pathUrl = process.env.READHUB_URL + pathUrl;
 
-    var  webviewBackButton = () => {
-      var ws = plus.webview.getWebviewById(id);
-      if (ws) {
-        console.log('webviewBackButton close');
-        ws.close();
-        autoHeight();
-        plus.key.removeEventListener('backbutton',webviewBackButton);
-      }
-    }
-
-    var webview = plus.webview.create(url, id,{popGesture: 'hide',
-      top:'44px',
-      bottom:'0px',
+    //绑定标题
+    var shareTitle = '[InweHub发现]' + title;
+    var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？';
+    var shareUrl = 'index.html#' + '/webview/share?title=' + encodeURIComponent(title);
+    // + '&link=' + encodeURIComponent(url)
+    // + '&content=' + encodeURIComponent(content)
+    // + '&imageUrl='
+    // + '&thumbUrl=';
+    var shareId = 'webview_readhub_share_' + id;
+    var shareView = plus.webview.create(shareUrl, shareId, {
+      cachemode:'noCache',
+      popGesture: 'hide',
+      top:'0px',
+      right:'0px',
+      width:'100%',
+      height:'44px',
+      dock:'top',
       position:'dock',
-      dock:'bottom',
+      backButtonAutoControl: 'hide',
+      bounce:'none', //不允许滑动
+      scrollIndicator:'none', //不显示滚动条
+    }, {
+      title: shareTitle,
+      link: pathUrl,
+      content: content,
+      imageUrl:img_url,
+      thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
+    });
+
+    currentWebview.append(shareView);
+
+    //body部分
+    var bodyTop = '0px';
+    var bodyBottom = '0px';
+    if (mui.os.android) {
+       bodyTop = '44px';
+       bodyBottom = '44px';
+    }
+    var webview = plus.webview.create(url, id,{popGesture: 'hide',
+      top:bodyTop,
+      bottom:bodyBottom,
+      position:'absolute',
       backButtonAutoControl: 'hide',
       statusbar:{background:'#3c3e44'},
       bounce:'vertical'});
-
-    plus.key.addEventListener("backbutton",() =>{
-      webviewBackButton();
-
-    });
 
     webview.addEventListener('popGesture', (e) => {
       if(e.type == "end" && e.result == true){
@@ -92,12 +120,13 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
         }
       }
     }, false);
+    currentWebview.append(webview);
 
     //创建底部菜单
     var toolUrl = pathUrl + '/webview';
     console.log('toolUrl:' + toolUrl);
-    var embed =plus.webview.create(toolUrl, toolUrl, {
-      cachemode:'noCache',
+    var toolUrlId = 'toolUrl_readhub_detail_' + id;
+    var embed =plus.webview.create(toolUrl, toolUrlId, {
       popGesture: 'hide',
       bottom:'0px',
       height:'44px',
@@ -121,64 +150,12 @@ function openWebviewByHome(id, url, pathUrl, title, img_url)
       openWebviewByUrl('read_comment_link_' + id, pathUrl + '?from=webview');
     }, false);
 
-    //兼容android
-    if (mui.os.plus) {
-      if (mui.os.android) {
-        //创建返回链接
-        var viewBack = new plus.nativeObj.View('test', {top: '0px', left: '0px', height: '44px', width: '100px'});
-
-        viewBack.draw([
-          {
-            tag: 'rect',
-            id: 'rect',
-            rectStyles: {color: 'rgba(0,0,0,0)'},
-            position: {top: '0px', left: '0px', width: '100%', height: '44px'}
-          },
-        ]);
-        viewBack.addEventListener('click', () => {
-          webviewBackButton();
-        }, false);
-        webview.append(viewBack);
-      }
-    }
-
-    //绑定标题
-    var shareTitle = '[InweHub发现]' + title;
-    var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？';
-    var shareUrl = 'index.html#' + '/webview/share?title=' + encodeURIComponent(title);
-      // + '&link=' + encodeURIComponent(url)
-      // + '&content=' + encodeURIComponent(content)
-      // + '&imageUrl='
-      // + '&thumbUrl=';
-    var shareId = 'webview_readhub_share_' + id;
-    var shareView = plus.webview.create(shareUrl, shareId, {
-      cachemode:'noCache',
-      popGesture: 'hide',
-      top:'0px',
-      right:'0px',
-      width:'100%',
-      height:'44px',
-      dock:'top',
-      position:'dock',
-      backButtonAutoControl: 'hide',
-      bounce:'none', //不允许滑动
-      scrollIndicator:'none', //不显示滚动条
-    }, {
-      title: shareTitle,
-      link: pathUrl,
-      content: content,
-      imageUrl:img_url,
-      thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
-    });
-    console.log('edwinzz'+shareUrl);
-    currentWebview.append(shareView);
-
     embed.append(view);
 
-    webview.append(embed);
+    currentWebview.append(embed);
 
 
-    return webview;
+    return currentWebview;
 }
 
 /**

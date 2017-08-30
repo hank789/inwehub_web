@@ -254,7 +254,7 @@ const routes = [{
 		children: [{
 				path: '',
 				meta: {
-					title: '我的档案',
+					title: '基本资料',
 					wechatHideHeader: true
 				},
 				component: require('../../../views/Account/infos/basic.vue'),
