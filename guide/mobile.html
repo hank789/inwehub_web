@@ -30,10 +30,9 @@
 				#disappear{
 				position: absolute;
 			    width:16px;
-
 			    left: 0;
 				right: 0;
-				top:90%;
+				top:83%;
 				margin:auto;
 			    z-index: 999;
 				animation:myfirst 3s linear 1s infinite alternate;
@@ -392,14 +391,7 @@
 	<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
 	<script src="assets/share.js"></script>
 	<script type="text/javascript">
-	window.onload = function() {
-	   var localurl = window.location.href;
-	   var localpre = window.location.protocol + '//' + window.location.host;
-//	   console
-       bindShareByWechat('InweHub-不负期待 专家同行', '为企业和咨询顾问提供高品质资深专家辅助服务', localurl, localpre + '/public/guide/images/group_2@2x.png');
-      
-		  
-	}
+	
             var swiper = new Swiper('.swiper-container', {
 		        pagination: '.swiper-pagination',
 		        paginationClickable: true,
@@ -414,7 +406,7 @@
 				    }
 		    });
            function here(){
-		      	window.open ("http://cn.mikecrm.com/ovYy1u4");
+		      	window.open ("https://jinshuju.net/f/bWXY8y");
 		    }
 		     function computer(){
 		      	window.open ("https://www.inwehub.com/");
@@ -423,6 +415,13 @@
 		      	window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp");
 		    }
 
+  window.onload = function() {
+	   var localurl = window.location.href;
+	   var localpre = window.location.protocol + '//' + window.location.host;
+       bindShareByWechat('InweHub-不负期待 专家同行', '为企业和咨询顾问提供高品质资深专家辅助服务', localurl, localpre + '/public/guide/images/group_2@2x.png');
+      
+		  
+	}
 
 	</script>
 </html>
