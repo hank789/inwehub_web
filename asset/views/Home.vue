@@ -129,7 +129,7 @@
 		      <div class="xiaoha"></div>
 		      <div class="success"></div>
 		      <div class="close" @tap.stop.prevent="closeFreeAskSuccessTemplate()"><svg class="icon" aria-hidden="true">
-		        <use xlink:href="#icon-times"></use>
+		        <use xlink:href="#icon-times1"></use>
 		      </svg></div>
 		    </div>
 
