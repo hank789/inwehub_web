@@ -1,4 +1,5 @@
 import {  setStatusBarBackgroundAndStyle, autoHeight } from './statusBar';
+import localEvent from '../stores/localStorage';
 
 /**
  * 打开webview
@@ -64,7 +65,12 @@ function openWebviewByHome(ws)
 
     setStatusBarBackgroundAndStyle('#3c3e44', 'light');
 
-    var pathUrl = process.env.READHUB_URL + pathUrl;
+    var footerPathUrl = process.env.READHUB_URL + pathUrl;
+
+
+    var currentUser = localEvent.getLocalItem('UserInfo');
+    var sharePathUrl = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid + '&redirect_url=' + pathUrl;
+    console.log('sharePathUrl:' + sharePathUrl);
 
     //绑定标题
     var shareTitle = 'InweHub发现 | ' + title;
@@ -89,7 +95,7 @@ function openWebviewByHome(ws)
       scrollIndicator:'none', //不显示滚动条
     }, {
       title: shareTitle,
-      link: pathUrl,
+      link: sharePathUrl,
       content: content,
       imageUrl:img_url,
       thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
@@ -123,7 +129,7 @@ function openWebviewByHome(ws)
     currentWebview.append(webview);
 
     //创建底部菜单
-    var toolUrl = pathUrl + '/webview';
+    var toolUrl = footerPathUrl + '/webview';
     console.log('toolUrl:' + toolUrl);
     var toolUrlId = 'toolUrl_readhub_detail_' + id;
     var embed =plus.webview.create(toolUrl, toolUrlId, {
@@ -145,9 +151,9 @@ function openWebviewByHome(ws)
       {tag:'rect',id:'rect',rectStyles:{color:'rgba(0,0,0,0)'},position:{bottom:'0px',left:'0px',width:'100%',height:'44px'}},
     ]);
     view.addEventListener('click', () => {
-      console.log('准备跳转:'+pathUrl + '?from=webview');
+      console.log('准备跳转:'+footerPathUrl + '?from=webview');
 
-      openWebviewByUrl('read_comment_link_' + id, pathUrl + '?from=webview');
+      openWebviewByUrl('read_comment_link_' + id, footerPathUrl + '?from=webview');
     }, false);
 
     embed.append(view);
