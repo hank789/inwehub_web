@@ -129,7 +129,7 @@
 
 					if(response.data.data.data.length > 0) {
 						//给请求的数据重新赋值；刷新最新的数据；
-						this.list += response.data.data.data;
+						this.list =  this.list.concat(response.data.data.data);
 						this.data = response.data.data;
 					}
 
