@@ -67,9 +67,7 @@ function openWebviewByHome(ws)
 
     var footerPathUrl = process.env.READHUB_URL + pathUrl;
 
-
-    var currentUser = localEvent.getLocalItem('UserInfo');
-    var sharePathUrl = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid + '&redirect_url=' + pathUrl;
+    var sharePathUrl = process.env.API_ROOT + 'wechat/oauth?redirect=/discover?redirect_url=' + pathUrl;
     console.log('sharePathUrl:' + sharePathUrl);
 
     //绑定标题
