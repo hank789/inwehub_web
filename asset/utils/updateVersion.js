@@ -32,7 +32,7 @@ function checkUpdate(){
                     } else {
                       plus.runtime.quit();
                     }
-                  }, inf.title, ["立即下载","暂不下载","取　　消"] );
+                  }, inf.title, ["立即下载","暂不下载","取消"]);
                 }, "com.tencent.android.qqdownloader");
               } else {
                 //下载升级包
