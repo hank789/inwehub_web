@@ -114,7 +114,7 @@
 					//请求成功的操作
 
 					if(response.data.data.data.length > 0) {
-						this.list += response.data.data.data;
+						this.list =  this.list.concat(response.data.data.data);
 						this.data = response.data.data;
 						//						console.log(response.data.data);
 					}

@@ -20,7 +20,7 @@
 							<img src="../../statics/images/inform1.png" />
 							<div class="message" v-if="item.read_at == null"></div>
 							<p>
-								<span class="mui-ellipsis">{{item.data.title}}</span>
+								<span class="mui-ellipsis" >{{item.data.title}}</span>
 								<span>{{item.created_at}}</span>
 							</p>
 							<i class="bot"></i>
@@ -38,7 +38,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	const Taskbar = {
 		data: () => ({
-			list: "",
+			list: [],
 			data: "",
 			loading: true
 
@@ -91,6 +91,7 @@
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
 						this.data = response.data.data;
+						
 
 					}
 
@@ -114,11 +115,11 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-
-					if(response.data.data.data.length > 0) {
-						this.list += response.data.data.data;
-						this.data = response.data.data;
-
+   
+                    
+					if(response.data.data.data) {
+					   this.list =  this.list.concat(response.data.data.data)
+					   this.data = response.data.data;
 					}
 
 					this.loading = 0;

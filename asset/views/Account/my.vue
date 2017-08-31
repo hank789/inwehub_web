@@ -89,7 +89,7 @@
 							<use xlink:href="#icon-qiyezhanghao"></use>
 						</svg>
 						<p>
-							<span v-if="expert_apply_status =='2'">企业账号认证</span>
+							<span v-if="company_apply_status =='2'">企业账号认证</span>
 							<span v-else>申请企业账号</span>
 							<span v-if="company_apply_status =='0'">点击前往申请</span>
 							<span v-if="company_apply_status =='1'">申请审核中</span>
