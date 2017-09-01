@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--手机端-->
-    <div class="suspend" v-if="isH5" >
+    <div class="suspend" v-show="isH5">
      	<p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">
           <use xlink:href="#icon-guanbi"></use>
@@ -17,12 +17,12 @@
         <span>查看更多专家信息</span>
       </p>
       <p>
-        <a :href="url" target="_blank">立即打开</a>
+        <a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>
       </p>
     </div>
 
     <!--微信端-->
-    <div class="suspension" v-if="isWeixin" >
+    <div class="suspension" v-show="isWeixin">
      <p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">
           <use xlink:href="#icon-guanbi"></use>
@@ -34,7 +34,7 @@
         </svg>
       </p>
       <p>下载APP</p>
-      <p> <a :href="url" target="_blank">立即打开</a></p>
+      <p> <a id="btnOpenAppWeixin" :href="url" target="_blank">立即打开</a></p>
     </div>
   </div>
 </template>
@@ -43,8 +43,16 @@
   import localEvent from '../stores/sessionStorage';
 
   export default {
-    mounted() {
+    created() {
       this.showOpenApp();
+    },
+    mounted() {
+      var mlink = 'https://adsolj.mlinks.cc/'+process.env.DEEP_LINK_KEY;
+      //深度链接
+      new Mlink({
+        mlink: mlink,//短链地址
+        button:document.querySelector('a#'+this.mLinkId)
+      });
     },
     watch: {
       $route(to) {
@@ -81,12 +89,14 @@
       },
       check(){
         if (!mui.os.plus) {
+          this.mLinkId = 'btnOpenAppWeixin';
           if (mui.os.wechat) {
             this.isWeixin = true;
             document.body.classList.add('openAppWechat');
           } else {
             document.body.classList.add('openAppH5');
             this.isH5 = true;
+            this.mLinkId = 'btnOpenAppH5';
           }
         }
       },
