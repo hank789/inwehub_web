@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--手机端-->
-    <div class="suspend" v-show="isH5">
+    <div class="suspend" v-if="isH5">
      	<p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">
           <use xlink:href="#icon-guanbi"></use>
@@ -22,7 +22,7 @@
     </div>
 
     <!--微信端-->
-    <div class="suspension" v-show="isWeixin">
+    <div class="suspension" v-if="isWeixin">
      <p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">
           <use xlink:href="#icon-guanbi"></use>
@@ -48,11 +48,22 @@
     },
     mounted() {
       var mlink = 'https://adsolj.mlinks.cc/'+process.env.DEEP_LINK_KEY;
-      //深度链接
-      new Mlink({
-        mlink: mlink,//短链地址
-        button:document.querySelector('a#'+this.mLinkId)
-      });
+
+      if (this.isH5) {
+        //深度链接
+        new Mlink({
+          mlink: mlink,//短链地址
+          button:document.querySelector('a#btnOpenAppH5')
+        });
+      }
+
+      if (this.isWeixin) {
+        //深度链接
+        new Mlink({
+          mlink: mlink,//短链地址
+          button:document.querySelector('a#btnOpenAppWeixin')
+        });
+      }
     },
     watch: {
       $route(to) {
@@ -89,14 +100,13 @@
       },
       check(){
         if (!mui.os.plus) {
-          this.mLinkId = 'btnOpenAppWeixin';
+
           if (mui.os.wechat) {
             this.isWeixin = true;
             document.body.classList.add('openAppWechat');
           } else {
             document.body.classList.add('openAppH5');
             this.isH5 = true;
-            this.mLinkId = 'btnOpenAppH5';
           }
         }
       },
