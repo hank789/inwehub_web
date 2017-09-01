@@ -7,5 +7,6 @@ module.exports = merge(prodEnv, {
   H5_ROOT: '"https://web.ywhub.com"',
   READHUB_URL: '"https://read.ywhub.com"',
   GA_CODE: '"UA-97476315-3"',
-  ECHO_SERVER_ADDRESS: '"https://read.ywhub.com"'
+  ECHO_SERVER_ADDRESS: '"https://read.ywhub.com"',
+  DEEP_LINK_KEY: '"A0kU"'
 })
