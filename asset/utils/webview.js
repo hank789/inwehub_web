@@ -97,7 +97,7 @@ function openWebviewByHome(ws)
       link: sharePathUrl,
       content: content,
       imageUrl:img_url,
-      thumbUrl:img_url + '?x-oss-process=image/resize,h_100'
+      thumbUrl:img_url + '?x-oss-process=image/resize,h_100,w_100'
     });
 
     currentWebview.append(shareView);
