@@ -80,12 +80,12 @@
 								<p class="mui-ellipsis">文章<span>{{ resume.info.submission_count }}</span>篇</p>
 								<i></i>
 								<p class="mui-ellipsis">评论<span>{{ resume.info.comment_count }}</span>条</p>
-							</div>	
+							</div>
 							<!---->
 							<div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i class="separate"></i>{{ resume.info.total_score }}
 
 							</div>
-							
+
 							<div class="item">
 								<span>{{ resume.info.company }}</span>
 								<i class="separate"></i>
@@ -394,7 +394,7 @@
 											href: link,
 											title: title,
 											pictures: [imgUrl],
-											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100'],
+											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
 											extra: {
 												scene: "WXSceneSession"
 											}
@@ -417,7 +417,7 @@
 											href: link,
 											title: title,
 											pictures: [imgUrl],
-											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100'],
+											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
 											extra: {
 												scene: "WXSceneTimeline"
 											}
@@ -647,7 +647,7 @@ div,p,span,ul,li,i,a{
 		position: relative;
 		height: 78px;
 	}
-	
+
 	.erweimaWrapper {
 		position: absolute;
 		left: 16px;
@@ -758,7 +758,7 @@ div,p,span,ul,li,i,a{
 			font-size: 13px;
 		}
 	}
-	
+
 	.basic {
 		background: #fff;
 		.description {
@@ -774,14 +774,14 @@ div,p,span,ul,li,i,a{
 			}
 		}
 	}
-	
+
 	.separate {
 		display: inline-block;
 		height: 10px;
 		margin: 0 8px;
 		border-left: 1px solid #c8c8c8;
 	}
-	
+
 	.cardWrapper {
 		margin-top: -69px;
 		padding: 0 16px;
@@ -901,7 +901,7 @@ div,p,span,ul,li,i,a{
 			}
 		}
 	}
-	
+
 	h5 {
 		margin: 0;
 		padding: 11px 0;
@@ -911,7 +911,7 @@ div,p,span,ul,li,i,a{
 		color: #313131;
 		text-align: center;
 	}
-	
+
 	.list {
 		background: #fff;
 		padding: 0 10px 0 30px;
@@ -1024,7 +1024,7 @@ div,p,span,ul,li,i,a{
 			}
 		}
 	}
-	
+
 	button {
 		border-radius: 0;
 		padding: 12px 0;
@@ -1032,7 +1032,7 @@ div,p,span,ul,li,i,a{
 		margin: 0;
 		font-size: 17px;
 	}
-	
+
 	.shareWrapper {
 		.title {
 			background: #ececee;
@@ -1055,7 +1055,7 @@ div,p,span,ul,li,i,a{
 			}
 		}
 	}
-	
+
 	.noPublic {
 		margin: 20px 0 0;
 		background: #fff;
@@ -1069,7 +1069,7 @@ div,p,span,ul,li,i,a{
 			color: #f3f4f6;
 		}
 	}
-	
+
 	#shareShowWrapper {
 		position: absolute;
 		right: 0;
@@ -1082,18 +1082,18 @@ div,p,span,ul,li,i,a{
 			font-size: 70px;
 		}
 	}
-	
+
 	.vueWrapper {
 		padding-bottom: 48px;
 	}
-	
+
 	.bottomButton {
 		position: fixed;
 		bottom: 0;
 		right: 0;
 		z-index: 11;
 	}
-	
+
 	.seeMoreWrapper {
 		background: #fff;
 		padding-bottom: 30px;
@@ -1117,7 +1117,7 @@ div,p,span,ul,li,i,a{
 	height: 25px;
 	padding: 0 10%;
 	margin-top: 8px;
-	
+
 }
 .news i{
 	display: inline-block;
@@ -1132,17 +1132,17 @@ div,p,span,ul,li,i,a{
   float: left;
   font-size: 12px;
   color: #808080;
- 
+
 }
 .news p span{
- color: #e63964;	
+ color: #e63964;
  font-weight: bold;
 }
 .news p:nth-of-type(1){
   text-align: right;
-  
+
 }
 .news p:nth-of-type(2){
- text-align: left;	
+ text-align: left;
 }
 </style>
