@@ -7,7 +7,6 @@ import {openWebviewByUrl} from '../../../utils/webview';
 
 //统计用户的浏览行为;
 import ga from 'vue-ga';
-import VueMultianalytics from 'vue-multianalytics';
 
 VueRouter.prototype.goBack = function () {
   this.isBack = true;
@@ -30,21 +29,6 @@ if (!window.isLocalEnv) {
   const gaCode = process.env.GA_CODE;
 
   ga(router, gaCode);
-
-  let mixpanelConfig = {
-    token: '688ee16000ddf4f44891e06b79847d4e'
-  }
-  Vue.use(VueMultianalytics, {
-    modules: {
-      mixpanel: mixpanelConfig
-    },
-    routing: {
-      vueRouter: router, //  Pass the router instance to automatically sync with router (optional)
-      preferredProperty: 'path', // By default 'path' and related with vueRouter (optional)
-      ingoredViews: [], // Views that will not be tracked
-      ignoredModules: ['ga','facebook','segment'] // Modules that will not send route change events. The event sent will be this.$ma.trackView({viewName: 'homepage'}, ['ga'])
-    }
-  })
 }
 
 router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false, reload = false) {
@@ -54,13 +38,15 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
   if (mui.os.plus && ((mui.os.ios && footerTab.indexOf(url) === -1) || forceWebView)) {
     if (!window.isLocalEnv) {
 
-        this.app.$ma.trackEvent({category: 'Page Viewed', action: url},['ga']);
+      window.mixpanel.track(
+        url
+      );
 
-        if (/^http/.test(url)) {
-          var nextUrl =  url;
-        } else {
-          var nextUrl = 'index.html#' + url;
-        }
+      if (/^http/.test(url)) {
+        var nextUrl =  url;
+      } else {
+        var nextUrl = 'index.html#' + url;
+      }
     } else {
         if (/^http/.test(url)) {
           var nextUrl =  url;
@@ -96,6 +82,15 @@ router.beforeEach((to, from, next) => {
   });
 
   next();
+});
+
+router.afterEach((to, from) => {
+  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+    window.mixpanel.track(
+      to.fullPath,
+      {"url_name": to.name, "referrer_url": from.fullPath}
+    );
+  }
 });
 
 export default router;
