@@ -27,7 +27,6 @@
     "vue": "^2.2.1",
     "vue-awesome-swiper": "^2.3.8",
     "vue-ga": "^1.0.0",
-    "vue-multianalytics": "^1.6.1",
     "vue-qrcode": "github:xkeshi/vue-qrcode",
     "vue-qrcode-component": "^2.1.1",
     "vue-router": "^2.2.0",
