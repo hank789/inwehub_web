@@ -43,9 +43,9 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
           url
         );
       }
-      if (ga) {
-        ga('set', 'page', url);
-        ga('send', 'pageview');
+      if (window.ga) {
+        window.ga('set', 'page', url);
+        window.ga('send', 'pageview');
       }
 
       if (/^http/.test(url)) {
