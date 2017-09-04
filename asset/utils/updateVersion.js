@@ -50,7 +50,7 @@ function checkUpdate(){
 function reloadReadHub() {
   var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
   if (inwehub_embed_webview) {
-    inwehub_embed_webview.reload(true);
+    inwehub_embed_webview.close();
   }
 }
 
