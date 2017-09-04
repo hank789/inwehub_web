@@ -242,12 +242,14 @@
         if(/http/.test(url)) {
           if(mui.os.plus) {
 
-            window.mixpanel.track(
-              'read_page_detail',
-              {
-                'page_url': url, 'title': title
-              }
-            );
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'read_page_detail',
+                {
+                  'page_url': url, 'title': title
+                }
+              );
+            }
             mui.openWindow({
               url: 'index.html#/webview/article',
               id: 'readhub_article_'+id,

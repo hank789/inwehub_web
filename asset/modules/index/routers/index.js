@@ -38,9 +38,11 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
   if (mui.os.plus && ((mui.os.ios && footerTab.indexOf(url) === -1) || forceWebView)) {
     if (!window.isLocalEnv) {
 
-      window.mixpanel.track(
-        url
-      );
+      if (window.mixpanel.track) {
+        window.mixpanel.track(
+          url
+        );
+      }
 
       if (/^http/.test(url)) {
         var nextUrl =  url;
