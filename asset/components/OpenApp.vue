@@ -218,7 +218,7 @@
     opacity: 0.9;
     top: 0px;
     background: #FFFFFF;
-    z-index: 999;
+    z-index: 997;
     box-shadow:0px 3px 5px #b4b4b6;
     -webkit-box-shadow:0px 3px 5px #b4b4b6;
     -moz-box-shadow:0px 3px 5px #b4b4b6;
@@ -229,7 +229,7 @@
     position: absolute;
     top: 44px;
     background: #FFFFFF;
-    z-index: 999;
+    z-index: 997;
     box-shadow:0px 3px 5px #b4b4b6;
     -webkit-box-shadow:0px 3px 5px #b4b4b6;
     -moz-box-shadow:0px 3px 5px #b4b4b6;
