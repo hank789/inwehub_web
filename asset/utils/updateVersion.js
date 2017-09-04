@@ -20,7 +20,6 @@ function checkUpdate(){
               if (is_ios_force === 1 && mui.os.ios){
                 mui.alert("有新的版本升级");
                 plus.runtime.openURL(response_data.ios_force_update_url);
-                reloadReadHub();
               } else if (is_android_force === 1 && mui.os.android){
                 mui.alert("有新的版本升级");
                 //market://details?id=io.dcloud.HelloMUI
@@ -28,7 +27,6 @@ function checkUpdate(){
                   plus.nativeUI.confirm( "很抱歉，您未安装腾讯应用宝，请安装后再更新", function(i){
                     if ( 0==i.index ) {
                       plus.runtime.openURL( "market://details?id=com.tencent.android.qqdownloader" );
-                      reloadReadHub();
                     } else if ( 1==i.index ) {
                       plus.runtime.quit();
                     } else {
@@ -45,13 +43,6 @@ function checkUpdate(){
         });
       });
     }
-}
-
-function reloadReadHub() {
-  var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-  if (inwehub_embed_webview) {
-    inwehub_embed_webview.close();
-  }
 }
 
 function downWgt(wgtUrl){
@@ -73,7 +64,6 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
-    reloadReadHub();
     plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
