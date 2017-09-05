@@ -16,6 +16,7 @@ import { checkUpdate } from '../../../utils/updateVersion';
 const routes = [{
 		path: '/',
 		component: Home,
+    name: 'land-home',
 		meta: {
 			title: '主页'
 		},
@@ -43,6 +44,7 @@ const routes = [{
 	},
 	{ // message
 		path: '/home',
+    name: 'home',
 		meta: {
 			title: 'Inwehub',
 			wechatHideHeader: true,
@@ -55,6 +57,7 @@ const routes = [{
 	},
 	{
 		path: '/login',
+    name: 'login',
 		component: Login,
 		meta: {
 			title: '登录'
@@ -69,6 +72,7 @@ const routes = [{
 	},
 	{
 		path: '/register',
+    name: 'register',
 		component: Register,
 		meta: {
 			title: '注册'
@@ -79,6 +83,7 @@ const routes = [{
 	},
 	{
 		path: '/findpassword',
+    name: 'findpassword',
 		component: FindPassword,
 		meta: {
 			title: '找回密码'
@@ -89,6 +94,7 @@ const routes = [{
 	},
 	{ // 我的
 		path: '/my',
+    name: 'my',
 		component: require('../../../views/Account/my.vue'),
 		meta: {
 			title: '我的',
@@ -104,6 +110,7 @@ const routes = [{
 	},
 	{ // 专家认证引导
 		path: '/my/pilot',
+    name: 'my-pilot',
 		component: require('../../../views/Account/Expertpilot.vue'),
 		meta: {
 			title: '专家认证引导',
@@ -119,6 +126,7 @@ const routes = [{
 	},
 	{ // 关注我的
 		path: '/my/focus',
+    name: 'my-followed',
 		component: require('../../../views/Account/focus.vue'),
 		meta: {
 			title: '关注我的',
@@ -130,9 +138,10 @@ const routes = [{
 	},
 	{ // 个人信息
 		path: '/my/info',
-		component: require('../../../views/Account/info.vue'),
+    name: 'my-info',
+    component: require('../../../views/Account/info.vue'),
 		meta: {
-			title: '我的名片',
+			title: '我的信息',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -141,7 +150,8 @@ const routes = [{
 	},
 	{ // 个人名片
 		path: '/my/resume',
-		component: require('../../../views/Account/Resume.vue'),
+    name: 'my-resume',
+    component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '个人名片',
 			wechatHideHeader: true
@@ -153,9 +163,10 @@ const routes = [{
 	},
 	{ // 共享个人名片
 		path: '/share/resume',
-		component: require('../../../views/Account/Resume.vue'),
+    name: 'share-resume',
+    component: require('../../../views/Account/Resume.vue'),
 		meta: {
-			title: '个人名片',
+			title: '分享名片',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -166,9 +177,10 @@ const routes = [{
 
 	{ // 个人信息
 		path: '/my/info/job/:id',
+    name: 'my-info-job',
 		component: require('../../../views/Account/infos/job.vue'),
 		meta: {
-			title: '工作经历',
+			title: '工作经历详情',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -177,9 +189,10 @@ const routes = [{
 	},
 	{ // 项目经历
 		path: '/my/info/project/:id',
+    name: 'my-info-project',
 		component: require('../../../views/Account/infos/project.vue'),
 		meta: {
-			title: '项目经历',
+			title: '项目经历详情',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -188,9 +201,10 @@ const routes = [{
 	},
 	{ // 教育经历
 		path: '/my/info/edu/:id',
+    name: 'my-info-edu',
 		component: require('../../../views/Account/infos/edu.vue'),
 		meta: {
-			title: '教育经历',
+			title: '教育经历详情',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -199,9 +213,10 @@ const routes = [{
 	},
 	{ // 教育经历
 		path: '/my/info/edus',
+    name: 'my-info-edus',
 		component: require('../../../views/Account/infos/edus.vue'),
 		meta: {
-			title: '教育经历',
+			title: '教育经历列表',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -210,9 +225,10 @@ const routes = [{
 	},
 	{ // 工作经历
 		path: '/my/info/jobs',
+    name: 'my-info-jobs',
 		component: require('../../../views/Account/infos/jobs.vue'),
 		meta: {
-			title: '工作经历',
+			title: '工作经历列表',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -221,9 +237,10 @@ const routes = [{
 	},
 	{ // 项目经历
 		path: '/my/info/projects',
+    name: 'my-info-projects',
 		component: require('../../../views/Account/infos/projects.vue'),
 		meta: {
-			title: '项目经历',
+			title: '项目经历列表',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -232,9 +249,10 @@ const routes = [{
 	},
 	{ // 培训经历
 		path: '/my/info/trains',
+    name: 'my-info-trains',
 		component: require('../../../views/Account/infos/trains.vue'),
 		meta: {
-			title: '培训经历',
+			title: '培训经历列表',
 			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
@@ -243,6 +261,7 @@ const routes = [{
 	},
 	{ // 我的档案
 		path: '/my/info/basic',
+    name: 'my-info-basic',
 		component: require('../../../components/PageTransition.vue'),
 		meta: {
 			title: '我的档案',
@@ -253,6 +272,7 @@ const routes = [{
 		},
 		children: [{
 				path: '',
+        name: 'my-info-basic',
 				meta: {
 					title: '基本资料',
 					wechatHideHeader: true
@@ -261,6 +281,7 @@ const routes = [{
 			},
 			{ // 个人签名
 				path: '/my/info/basic/description',
+        name: 'my-info-basic-description',
 				component: require('../../../views/Account/infos/basic_description.vue'),
 				meta: {
 					title: '个人签名'
@@ -271,6 +292,7 @@ const routes = [{
 			},
 			{ // 姓名
 				path: '/my/info/basic/name',
+        name: 'my-info-basic-name',
 				component: require('../../../views/Account/infos/basic_name.vue'),
 				meta: {
 					title: '用户姓名'
@@ -281,6 +303,7 @@ const routes = [{
 			},
 			{ // 地址
 				path: '/my/info/basic/address',
+        name: 'my-info-basic-address',
 				component: require('../../../views/Account/infos/basic_address.vue'),
 				meta: {
 					title: '详细地址'
@@ -291,6 +314,7 @@ const routes = [{
 			},
 			{ // 公司
 				path: '/my/info/basic/company',
+        name: 'my-info-basic-company',
 				component: require('../../../views/Account/infos/basic_company.vue'),
 				meta: {
 					title: '当前公司'
@@ -301,6 +325,7 @@ const routes = [{
 			},
 			{ // 职位
 				path: '/my/info/basic/position',
+        name: 'my-info-basic-position',
 				component: require('../../../views/Account/infos/basic_position.vue'),
 				meta: {
 					title: '当前职位'
@@ -311,6 +336,7 @@ const routes = [{
 			},
 			{ // email
 				path: '/my/info/basic/email',
+        name: 'my-info-basic-email',
 				component: require('../../../views/Account/infos/basic_email.vue'),
 				meta: {
 					title: '电子邮箱'
@@ -324,6 +350,7 @@ const routes = [{
 
 	{ // 隐私设置
 		path: '/my/info/privacy',
+    name: 'my-info-privacy',
 		component: require('../../../views/Account/infos/privacy.vue'),
 		meta: {
 			title: '隐私设置',
@@ -335,6 +362,7 @@ const routes = [{
 	},
 	{ // 培训经历
 		path: '/my/info/train/:id',
+    name: 'my-info-train',
 		component: require('../../../views/Account/infos/train.vue'),
 		meta: {
 			title: '培训经历',
@@ -346,7 +374,8 @@ const routes = [{
 	},
 	{ // 我的钱包
 		path: '/my/Finance',
-		component: require('../../../views/Finance/info.vue'),
+    name: 'my-finance',
+    component: require('../../../views/Finance/info.vue'),
 		meta: {
 			title: '我的钱包'
 		},
@@ -360,6 +389,7 @@ const routes = [{
 	},
 	{ // 资金明细
 		path: '/my/Finance/list',
+    name: 'my-finance-list',
 		component: require('../../../views/Finance/list.vue'),
 		meta: {
 			title: '资金明细'
@@ -370,6 +400,7 @@ const routes = [{
 	},
 	{ // 提现
 		path: '/my/Finance/withdraw',
+    name: 'my-finance-withdraw',
 		component: require('../../../views/Finance/withdraw.vue'),
 		meta: {
 			title: '提现'
@@ -384,6 +415,7 @@ const routes = [{
 	},
 	{ // 安全设置
 		path: '/my/Finance/setting',
+    name: 'my-finance-setting',
 		component: require('../../../views/Finance/setting.vue'),
 		meta: {
 			title: '安全设置'
@@ -394,7 +426,8 @@ const routes = [{
 	},
 	{ // 行业领域
 		path: '/tags/industry',
-		component: require('../../../views/Tags/industryTagsIndexedlist.vue'),
+    name: 'select-tags-industry',
+    component: require('../../../views/Tags/industryTagsIndexedlist.vue'),
 		meta: {
 			title: '行业领域'
 		},
@@ -404,7 +437,8 @@ const routes = [{
 	},
 	{ // 专家管理
 		path: '/expert',
-		component: require('../../../views/Expert/index.vue'),
+    name: 'expert',
+    component: require('../../../views/Expert/index.vue'),
 		meta: {
 			title: '专家管理'
 		},
@@ -414,7 +448,8 @@ const routes = [{
 	},
 	{ // 专家申请
 		path: '/expert/apply',
-		component: require('../../../views/Expert/apply.vue'),
+    name: 'expert-apply',
+    component: require('../../../views/Expert/apply.vue'),
 		meta: {
 			title: '专家申请',
 			wechatHideHeader: true
@@ -425,9 +460,10 @@ const routes = [{
 	},
 	{ // 专家申请成功
 		path: '/expert/apply/success',
-		component: require('../../../views/Expert/applySuccess.vue'),
+    name: 'expert-apply-success',
+    component: require('../../../views/Expert/applySuccess.vue'),
 		meta: {
-			title: ''
+			title: '申请专家成功'
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -435,7 +471,8 @@ const routes = [{
 	},
 	{ // 推荐专家
 		path: '/expert/recommend',
-		component: require('../../../views/Expert/recommend.vue'),
+    name: 'expert-recommend',
+    component: require('../../../views/Expert/recommend.vue'),
 		meta: {
 			title: '推荐专家',
 			wechatHideHeader: true
@@ -446,7 +483,8 @@ const routes = [{
 	},
 	{ //ask
 		path: '/ask',
-		component: require('../../../views/Ask/Ask.vue'),
+    name: 'ask',
+    component: require('../../../views/Ask/Ask.vue'),
 		meta: {
 			title: '提问'
 		},
@@ -460,7 +498,8 @@ const routes = [{
 	},
 	{ //ask-pay-success
 		path: '/pay/ask/:id',
-		component: require('../../../views/Pay/AskSuccess.vue'),
+    name: 'pay-ask',
+    component: require('../../../views/Pay/AskSuccess.vue'),
 		meta: {
 			title: '支付成功',
 			wechatHideHeader: true
@@ -471,7 +510,8 @@ const routes = [{
 	},
 	{ //ask-success
 		path: '/paySuccess',
-		component: require('../../../views/Pay/PaySuccess.vue'),
+    name: 'pay-success',
+    component: require('../../../views/Pay/PaySuccess.vue'),
 		meta: {
 			title: '支付成功',
 			wechatHideHeader: true
@@ -482,7 +522,8 @@ const routes = [{
 	},
 	{ //ask-success
 		path: '/askSuccess/:id',
-		component: require('../../../views/Ask/AskSuccess.vue'),
+    name: 'ask-success',
+    component: require('../../../views/Ask/AskSuccess.vue'),
 		meta: {
 			title: '提问成功'
 		},
@@ -492,6 +533,7 @@ const routes = [{
 	},
 	{ //ask-type
 		path: '/ask/type',
+    name: 'select-ask-type',
 		component: require('../../../views/Ask/AskType.vue'),
 		meta: {
 			title: '选择问题分类',
@@ -503,7 +545,8 @@ const routes = [{
 	},
 	{ //task
 		path: '/task',
-		component: require('../../../views/Task/TaskListSub.vue'),
+    name: 'task',
+    component: require('../../../views/Task/TaskListSub.vue'),
 		meta: {
 			title: '动态',
 			wechatHideHeader: true,
@@ -519,7 +562,8 @@ const routes = [{
 	},
 	{ ///inform 消息
 		path: '/inform',
-		component: require('../../../views/Task/InformList.vue'),
+    name: 'inform-list',
+    component: require('../../../views/Task/InformList.vue'),
 		meta: {
 			title: '动态',
 			wechatHideHeader: true,
@@ -531,6 +575,7 @@ const routes = [{
 	},
 	{ //taskbar 任务动态
 		path: '/taskbar',
+    name: 'inform-task',
 		component: require('../../../views/Task/Taskbar.vue'),
 		meta: {
 			title: '任务动态',
@@ -543,7 +588,8 @@ const routes = [{
 	},
 	{ //readbar 阅读发现
 		path: '/readbar',
-		component: require('../../../views/Task/readbar.vue'),
+    name: 'inform-read',
+    component: require('../../../views/Task/readbar.vue'),
 		meta: {
 			title: '阅读发现',
 			wechatHideHeader: true,
@@ -555,7 +601,8 @@ const routes = [{
 	},
 	{ //informbar 通知公告
 		path: '/informbar',
-		component: require('../../../views/Task/informbar.vue'),
+    name: 'inform-notice',
+    component: require('../../../views/Task/informbar.vue'),
 		meta: {
 			title: '通知公告',
 			wechatHideHeader: true,
@@ -567,9 +614,10 @@ const routes = [{
 	},
 	{ //integralbar 积分变动
 		path: '/integralbar',
-		component: require('../../../views/Task/integralbar.vue'),
+    name: 'inform-integral',
+    component: require('../../../views/Task/integralbar.vue'),
 		meta: {
-			title: '通知公告',
+			title: '积分变动',
 			wechatHideHeader: true,
 			keepAlive: true
 		},
@@ -579,7 +627,8 @@ const routes = [{
 	},
 	{ //balancebar 余额变动
 		path: '/balancebar',
-		component: require('../../../views/Task/balancebar.vue'),
+    name: 'inform-balance',
+    component: require('../../../views/Task/balancebar.vue'),
 		meta: {
 			title: '余额变动',
 			wechatHideHeader: true,
@@ -591,7 +640,8 @@ const routes = [{
 	},
 	{ //chat 客服
 		path: '/chat',
-		component: require('../../../views/Task/chat.vue'),
+    name: 'inform-chat',
+    component: require('../../../views/Task/chat.vue'),
 		meta: {
 			title: '客服',
 			wechatHideHeader: true,
@@ -603,7 +653,8 @@ const routes = [{
 	},
 	{ //ask-detail
 		path: '/ask/:id',
-		component: require('../../../views/Ask/AskDetail.vue'),
+    name: 'ask-detail',
+    component: require('../../../views/Ask/AskDetail.vue'),
 		meta: {
 			title: '提问',
 			wechatHideHeader: true
@@ -614,7 +665,8 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks',
-		component: require('../../../views/Ask/AskList.vue'),
+    name: 'ask-list',
+    component: require('../../../views/Ask/AskList.vue'),
 		meta: {
 			title: '我的提问',
 			wechatHideHeader: true
@@ -629,7 +681,8 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks/finish',
-		component: require('../../../views/Ask/AskListFinish.vue'),
+    name: 'ask-finish',
+    component: require('../../../views/Ask/AskListFinish.vue'),
 		meta: {
 			title: '我的提问',
 			wechatHideHeader: true
@@ -640,7 +693,8 @@ const routes = [{
 	},
 	{ //answer
 		path: '/answers',
-		component: require('../../../views/Answer/AnswerList.vue'),
+    name: 'answer-list',
+    component: require('../../../views/Answer/AnswerList.vue'),
 		meta: {
 			title: '我的回答',
 			wechatHideHeader: true
@@ -655,7 +709,8 @@ const routes = [{
 	},
 	{ //answer-detail
 		path: '/answer/:id',
-		component: require('../../../views/Answer/AnswerDetail.vue'),
+    name: 'answer-detail',
+    component: require('../../../views/Answer/AnswerDetail.vue'),
 		meta: {
 			title: '回答问题',
 			wechatHideHeader: true
@@ -666,7 +721,8 @@ const routes = [{
 	},
 	{ //answerrefuse
 		path: '/answerrefuse/:id',
-		component: require('../../../views/Answer/Refuse.vue'),
+    name: 'answer-refuse',
+    component: require('../../../views/Answer/Refuse.vue'),
 		meta: {
 			title: '拒绝应答',
 			wechatHideHeader: true
@@ -677,7 +733,8 @@ const routes = [{
 	},
 	{ // answerTime
 		path: '/answerTime/:id',
-		component: require('../../../views/Answer/SelectTime.vue'),
+    name: 'answer-confirm',
+    component: require('../../../views/Answer/SelectTime.vue'),
 		meta: {
 			title: '确认应答',
 			wechatHideHeader: true
@@ -688,7 +745,8 @@ const routes = [{
 	},
 	{ // answer
 		path: '/realAnswer/:id',
-		component: require('../../../views/Answer/Answer.vue'),
+    name: 'answer-question',
+    component: require('../../../views/Answer/Answer.vue'),
 		meta: {
 			title: '回答'
 		},
@@ -698,7 +756,8 @@ const routes = [{
 	},
 	{ //ask-comment
 		path: '/askComment/:id',
-		component: require('../../../views/Ask/Comment.vue'),
+    name: 'ask-feedback',
+    component: require('../../../views/Ask/Comment.vue'),
 		meta: {
 			title: '评价',
 			wechatHideHeader: true
@@ -709,13 +768,15 @@ const routes = [{
 	},
 	{ // message
 		path: '/message',
-		component: require('../../../views/message.vue'),
+    name: 'message',
+    component: require('../../../views/message.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
 	},
 	{ // header
 		path: '/header',
+    name: 'app-select-avatar',
 		meta: {
 			title: '选择头像'
 		},
@@ -726,6 +787,7 @@ const routes = [{
 	},
 	{ // header
 		path: '/header-h5',
+    name: 'h5-select-avatar',
 		meta: {
 			title: '选择头像'
 		},
@@ -736,7 +798,8 @@ const routes = [{
 	},
 	{ // discover
 		path: '/discover',
-		meta: {
+    name: 'discover',
+    meta: {
 			title: '发现',
 			wechatHideHeader: true,
 			keepAlive: true
@@ -748,8 +811,9 @@ const routes = [{
 	},
   { // readhub
     path: '/readhub/detail',
+    name: 'readhub-detail',
     meta: {
-      title: '发现',
+      title: '发现详情页',
       wechatHideHeader: true,
       keepAlive: false
     },
@@ -760,6 +824,7 @@ const routes = [{
   },
 	{ // setting
 		path: '/setting',
+    name: 'setting',
 		meta: {
 			title: '设置',
 			wechatHideHeader: true
@@ -771,6 +836,10 @@ const routes = [{
 	},
 	{ // guide
 		path: '/guide',
+    name: 'guide',
+    meta: {
+      title: '引导页'
+    },
 		component: require('../../../views/Guide.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -778,7 +847,8 @@ const routes = [{
 	},
 	{ // feedback
 		path: '/feedback',
-		meta: {
+    name: 'feedback',
+    meta: {
 			title: '反馈建议',
 			wechatHideHeader: true
 		},
@@ -789,7 +859,8 @@ const routes = [{
 	},
 	{ // about
 		path: '/about',
-		meta: {
+    name: 'about',
+    meta: {
 			title: '关于我们',
 			wechatHideHeader: true
 		},
@@ -800,7 +871,8 @@ const routes = [{
 	},
 	{ // project
 		path: '/project',
-		meta: {
+    name: 'my-project',
+    meta: {
 			title: '发布项目'
 		},
 		component: require('../../../views/Project.vue'),
@@ -810,7 +882,8 @@ const routes = [{
 	},
 	{ // 提问帮助
 		path: '/help/ask',
-		meta: {
+    name: 'help-ask',
+    meta: {
 			title: '提问帮助',
 			wechatHideHeader: true
 		},
@@ -821,7 +894,8 @@ const routes = [{
 	},
 	{ // bid
 		path: '/bid',
-		meta: {
+    name: 'my-bid',
+    meta: {
 			title: '我的竞标',
 			wechatHideHeader: true
 		},
@@ -842,6 +916,7 @@ const routes = [{
 	// },
 	{ // discover project
 		path: '/discover/project',
+    name: 'discover-project',
 		meta: {
 			title: '项目协作',
 			wechatHideHeader: true
@@ -853,6 +928,7 @@ const routes = [{
 	},
 	{ // discover company
 		path: '/discover/company',
+    name: 'discover-company',
 		meta: {
 			title: '附近企业',
 			wechatHideHeader: true
@@ -864,7 +940,8 @@ const routes = [{
 	},
 	{ // discover activity
 		path: '/discover/activity',
-		meta: {
+    name: 'discover-activity',
+    meta: {
 			title: '最新活动',
 			wechatHideHeader: true
 		},
@@ -875,7 +952,8 @@ const routes = [{
 	},
 	{ // project submit
 		path: '/project/submit/:id',
-		meta: {
+    name: 'project-submit',
+    meta: {
 			title: '发布项目'
 		},
 		component: require('../../../views/ProjectForm.vue'),
@@ -885,7 +963,8 @@ const routes = [{
 	},
 	{ // discover detail
 		path: '/collect',
-		meta: {
+    name: 'my-collect',
+    meta: {
 			title: '我的关注',
 			wechatHideHeader: true,
 			keepAlive: true
@@ -897,7 +976,8 @@ const routes = [{
 	},
 	{ // company
 		path: '/company/my',
-		meta: {
+    name: 'my-company',
+    meta: {
 			title: 'InweHub企业版',
 			wechatHideHeader: true
 		},
@@ -908,8 +988,9 @@ const routes = [{
 	},
 	{ // company-help
 		path: '/company/help',
-		meta: {
-			title: '',
+    name: 'company-help',
+    meta: {
+			title: '企业认证引导页',
 		},
 		component: require('../../../views/Company/Help.vue'),
 		beforeEnter: (to, from, next) => {
@@ -918,7 +999,8 @@ const routes = [{
 	},
 	{ // 认证企业用户
 		path: '/company/submit',
-		meta: {
+    name: 'company-submit',
+    meta: {
 			title: '认证企业用户',
 			wechatHideHeader: true
 		},
@@ -929,8 +1011,9 @@ const routes = [{
 	},
 	{ // 企业用户申请成功
 		path: '/company/success',
-		meta: {
-			title: ''
+    name: 'company-submit-success',
+    meta: {
+			title: '企业认证申请成功'
 		},
 		component: require('../../../views/Company/Success.vue'),
 		beforeEnter: (to, from, next) => {
@@ -939,6 +1022,7 @@ const routes = [{
 	},
 	{ // 活动-首次提问优惠活动
 		path: '/activity/ask',
+    name: 'activity-first-ask',
 		meta: {
 			title: '首次提问优惠',
 		},
@@ -949,7 +1033,8 @@ const routes = [{
 	},
 	{ // 项目-项目概况
 		path: '/project/basic',
-		meta: {
+    name: 'project-submit-step-one',
+    meta: {
 			title: '项目概括',
 			wechatHideHeader: true
 		},
@@ -960,7 +1045,8 @@ const routes = [{
 	},
 	{ // 项目-具体需求
 		path: '/project/concrete',
-		meta: {
+    name: 'project-submit-step-two',
+    meta: {
 			title: '具体需求',
 			wechatHideHeader: true
 		},
@@ -971,7 +1057,8 @@ const routes = [{
 	},
 	{ // 项目-偏好设置
 		path: '/project/like',
-		meta: {
+    name: 'project-submit-step-four',
+    meta: {
 			title: '偏好设置',
 			wechatHideHeader: true
 		},
@@ -982,7 +1069,8 @@ const routes = [{
 	},
 	{ // 项目-企业信息
 		path: '/project/company',
-		meta: {
+    name: 'project-submit-step-three',
+    meta: {
 			title: '企业信息',
 			wechatHideHeader: true
 		},
@@ -994,7 +1082,8 @@ const routes = [{
 
 	{ // 项目-需求管理
 		path: '/project/list',
-		meta: {
+    name: 'project-list',
+    meta: {
 			title: '需求管理',
 			wechatHideHeader: true
 		},
@@ -1002,8 +1091,9 @@ const routes = [{
 	},
 	{ // 项目-预览
 		path: '/project/review',
-		meta: {
-			title: '',
+    name: 'project-review',
+    meta: {
+			title: '项目预览',
 		},
 		component: require('../../../views/Project/Review.vue'),
 		beforeEnter: (to, from, next) => {
@@ -1012,7 +1102,8 @@ const routes = [{
 	},
 	{ // protocol/register
 		path: '/protocol/register',
-		meta: {
+    name: 'protocol-register',
+    meta: {
 			title: '注册协议',
 			wechatHideHeader: true
 		},
@@ -1020,7 +1111,8 @@ const routes = [{
 	},
 	{ // help/question
 		path: '/help/question',
-		meta: {
+    name: 'help-question',
+    meta: {
 			title: '常见问题',
 			wechatHideHeader: true
 		},
@@ -1028,7 +1120,8 @@ const routes = [{
 	},
 	{
 		path: '/wechat/register',
-		component: require('../../../views/Wechat/Register.vue'),
+    name: 'wechat-register',
+    component: require('../../../views/Wechat/Register.vue'),
 		meta: {
 			title: '绑定注册'
 		},
@@ -1039,7 +1132,8 @@ const routes = [{
 	},
 	{
 		path: '/wechat/info',
-		component: require('../../../views/Wechat/Info.vue'),
+    name: 'wechat-register-info',
+    component: require('../../../views/Wechat/Info.vue'),
 		meta: {
 			title: '填写信息'
 		},
@@ -1050,13 +1144,15 @@ const routes = [{
 	},
 	{
 		path: '/webview/notice',
-		meta: {
+    name: 'webview-notice',
+    meta: {
 			title: 'InweHub'
 		},
 		component: require('../../../views/Webview/notice.vue'),
 	},
   {
     path: '/webview/article',
+    name: 'webview-article',
     meta: {
       title: 'InweHub'
     },
@@ -1064,6 +1160,7 @@ const routes = [{
   },
   {
     path: '/webview/share',
+    name: 'webview-share',
     meta: {
       title: 'InweHub'
     },
@@ -1071,6 +1168,7 @@ const routes = [{
   },
   {
     path: '/test/open',
+    name: 'open-app',
     meta: {
       title: 'InweHub'
     },
@@ -1078,6 +1176,7 @@ const routes = [{
   },
   {
     path: '/webview/registerForm',
+    name: 'webview-registerForm',
     meta: {
       title: 'InweHub'
     },
@@ -1085,6 +1184,7 @@ const routes = [{
   },
 	{ // message
 		path: '/*',
+    name: '404',
 		meta: {
 			title: '404'
 		},
