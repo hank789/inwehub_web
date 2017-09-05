@@ -261,7 +261,7 @@ const routes = [{
 	},
 	{ // 我的档案
 		path: '/my/info/basic',
-    name: 'my-info-basic',
+    name: 'my-info-basic-page',
 		component: require('../../../components/PageTransition.vue'),
 		meta: {
 			title: '我的档案',
