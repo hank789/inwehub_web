@@ -39,9 +39,20 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
     if (!window.isLocalEnv) {
 
       if (window.mixpanel.track) {
+        var matchedRoute = this.resolve(url);
+        var mixpanel_event = 'inwehub:';
+        if (matchedRoute.route.name) {
+          mixpanel_event += matchedRoute.route.name;
+        } else {
+          mixpanel_event += matchedRoute.route.fullPath;
+        }
+        window.mixpanel.track(
+          mixpanel_event,
+          {"app": "inwehub", "page": matchedRoute.route.fullPath, "page_name": matchedRoute.route.name, "page_title": matchedRoute.route.meta.title}
+        );
         window.mixpanel.track(
           'inwehub:' + url,
-          {"app": "inwehub", "url": url}
+          {"app": "inwehub", "page": url}
         );
       }
       if (window.ga) {
@@ -101,7 +112,7 @@ router.afterEach((to, from) => {
     }
     window.mixpanel.track(
       mixpanel_event,
-      {"app": "inwehub", "url": to.fullPath, "url_name": to.name, "title": to.meta.title, "referrer_url": from.fullPath}
+      {"app": "inwehub", "page": to.fullPath, "page_name": to.name, "page_title": to.meta.title, "referrer_page": from.fullPath}
     );
   }
 });
