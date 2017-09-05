@@ -81,7 +81,7 @@
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
             if (!inwehub_embed_webview) {
               inwehub_embed_webview = plus.webview.create(url, 'inwehub_embed', {
-                popGesture: 'hide',
+                popGesture: 'none',
                 top: '0px',
                 dock: 'top',
                 bottom: '75px',
