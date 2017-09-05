@@ -12,7 +12,7 @@
 				<p>发挥你的个人价值 </p>
 			</div>
 		</header>
-		<div class="content">
+		<div class="mui-content content">
 			<ul class="why">
 				<p><span>为什么</span>要成为平台认证专家？</p>
 				<li><i></i><span>全面开启平台功能，发挥个人价值</span></li>
@@ -45,8 +45,10 @@
      var userInfo = getLocalUserInfo();
 	export default {
 		data() {
-			return {		
-				percent:userInfo.account_info_complete_percent
+			return {
+        loading:1,
+				percent:userInfo.account_info_complete_percent,
+        expert_apply_status:0,
 			   }
 		   },
 		   methods: {
@@ -58,19 +60,19 @@
 				var title = '<p style="font-size:16px; margin-bottom:15px">' +'温馨提示 ' +'</p>';
 				var btnArray = ['取消', '确认'];
 				var  that = this;
-				mui.confirm(font, title, function(e) {		
+				mui.confirm(font, title, function(e) {
 					 if (e.index == 1) {
                         that.$router.replace('/my/info');
-                     } else { 
-                        
+                     } else {
+
                     }
 				}, 'div');
-				
+
 
 		   	  }else{
 		   	  	this.$router.replace('/expert/apply');
 		   	  }
-		   	  
+
 		   	},
 		   	initData() {
 				//执行刷新
@@ -78,11 +80,28 @@
 				this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
 					cb(user);
 					this.percent = user.info.account_info_complete_percent;
-					
+          this.expert_apply_status  = user.info.expert_apply_status;
+
+          switch(parseInt(this.expert_apply_status)) {
+            case 0:
+            case 3:
+              this.loading = 0;
+              break;
+            case 2:
+              mui.toast('您已经是专家');
+              mui.back();
+              break;
+            case 1:
+              mui.toast('认证审核中');
+              mui.back();
+              break;
+          }
+
+
 				}));
 			}
-		   	 
-		   	  
+
+
 		   },
 		    mounted() {
 		       console.log(userInfo.account_info_complete_percent);
@@ -107,19 +126,19 @@
 		padding: 0;
 		list-style: none;
 	}
-	
+
 	header {
 		width: 100%;
 		height: 130px;
 		background: #ececee;
 	}
-	
+
 	header a {
 		color: #808080;
 		margin-top: 23px;
 		margin-left: 16px;
 	}
-	
+
 	header div {
 		width: 115px;
 		height: 50px;
@@ -127,7 +146,7 @@
 		padding-top: 45px;
 		position: relative;
 	}
-	
+
 	header div p span {
 		position: absolute;
 		font-size: 20px;
@@ -135,44 +154,44 @@
 		left: 27px;
 		top: 49px;
 	}
-	
+
 	header div svg {
 		font-size: 28px;
 		color: #03AEF9;
 		margin-bottom: -3px;
 	}
-	
+
 	header div p:nth-of-type(2) {
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.why {
 		width: 100%;
 		padding-left: 42px;
 		margin-top: 40px;
 	}
-	
+
 	.when {
 		width: 100%;
 		padding-left: 42px;
 		margin-top: 35px;
 	}
-	
+
 	ul p {
 		margin-bottom: 10px;
 		font-size: 14px;
 	}
-	
+
 	ul p span {
 		color: #03aef9;
 	}
-	
+
 	ul li {
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	ul li i {
 		display: inline-block;
 		width: 6px;
@@ -181,22 +200,22 @@
 		border-radius: 50%;
 		margin-bottom: 2px;
 	}
-	
+
 	ul li span {
 		margin-left: 8px;
 	}
-	
+
 	.contact {
 		width: 100%;
 		padding-left: 42px;
 		margin-top: 60px;
 	}
-	
+
 	.contact p {
 		font-size: 12px;
 		color: #808080;
 	}
-	
+
 	.home-apply {
 		width: 91%;
 		height: 41px;
