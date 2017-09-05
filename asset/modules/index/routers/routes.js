@@ -1083,6 +1083,13 @@ const routes = [{
     },
     component: require('../../../views/Webview/registerForm.vue'),
   },
+  {
+    path: '/register/nocode',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/NoCode.vue'),
+  },
 	{ // message
 		path: '/*',
 		meta: {
