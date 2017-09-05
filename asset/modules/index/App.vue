@@ -91,7 +91,7 @@
             url: url,
             id: 'inwehub_embed',
             styles: {
-              popGesture: 'hide',
+              popGesture: 'none',
               top: '0px',
               dock: 'top',
               bottom: '75px',

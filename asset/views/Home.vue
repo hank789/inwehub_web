@@ -241,12 +241,11 @@
 
         if(/http/.test(url)) {
           if(mui.os.plus) {
-
             if (window.mixpanel.track) {
               window.mixpanel.track(
-                'read_page_detail',
+                'inwehub:read_page_detail',
                 {
-                  'page_url': url, 'title': title
+                  "app": "inwehub", "user_device": mui.os.os, 'page': url, 'page_title': title
                 }
               );
             }
@@ -292,6 +291,14 @@
 			goLink: function(url) {
 				if(/http/.test(url)) {
 					if(mui.os.plus) {
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'inwehub:notice_detail',
+                {
+                  "app": "inwehub","user_device": mui.os.os, 'page': url, 'page_title': '首页轮播文章'
+                }
+              );
+            }
 						mui.openWindow({
 							url: 'index.html#/webview/notice',
 							id: url,
