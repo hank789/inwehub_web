@@ -63,12 +63,18 @@
             this.$router.push('/ask');
             break;
           case 3:
-            var is_expert = parseInt(userInfo.is_expert);
-            if (is_expert) {
-              mui.toast('您已经是专家');
-              return false;
-            } else {
-              this.$router.push('/my/pilot');
+            var expertStatus = parseInt(userInfo.expert_apply_status);
+            switch(parseInt(expertStatus)) {
+              case 0:
+              case 3:
+                this.$router.push('/my/pilot');
+                  break;
+              case 2:
+                mui.toast('您已经是专家');
+                  break;
+              case 1:
+                mui.toast('认证审核中');
+                break;
             }
             break;
           case 4:

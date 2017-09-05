@@ -241,13 +241,18 @@
 
         if(/http/.test(url)) {
           if(mui.os.plus) {
-
-            window.mixpanel.track(
-              'read_page_detail',
-              {
-                'page_url': url, 'title': title
-              }
-            );
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'inwehub:read_page_detail',
+                {
+                  "app": "inwehub", 'url': url, 'title': title
+                }
+              );
+            }
+            if (window.ga) {
+              window.ga('set', 'page', url);
+              window.ga('send', 'pageview');
+            }
             mui.openWindow({
               url: 'index.html#/webview/article',
               id: 'readhub_article_'+id,
@@ -286,6 +291,14 @@
 			goLink: function(url) {
 				if(/http/.test(url)) {
 					if(mui.os.plus) {
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'inwehub:notice_detail',
+                {
+                  "app": "inwehub", 'url': url, 'title': '首页轮播文章'
+                }
+              );
+            }
 						mui.openWindow({
 							url: 'index.html#/webview/notice',
 							id: url,

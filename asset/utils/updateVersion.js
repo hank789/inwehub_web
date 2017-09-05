@@ -45,7 +45,6 @@ function checkUpdate(){
     }
 }
 
-
 function downWgt(wgtUrl){
   plus.nativeUI.showWaiting('有新版本更新');
   plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){

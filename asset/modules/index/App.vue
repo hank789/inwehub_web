@@ -91,7 +91,7 @@
             url: url,
             id: 'inwehub_embed',
             styles: {
-              popGesture: 'hide',
+              popGesture: 'none',
               top: '0px',
               dock: 'top',
               bottom: '75px',
@@ -174,6 +174,29 @@
                 case 'readhub_username_mentioned':
                   // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
                   router.push('/discover?redirect_url=' + payload.object_id);
+                  break;
+                case 'push_notice_readhub':
+                  // 推送阅读发现的文章
+                  router.push('/discover?redirect_url=' + payload.object_id);
+                  break;
+                case 'push_notice_article':
+                  // 推送公告文章
+                  mui.openWindow({
+                    url: 'index.html#/webview/notice',
+                    id: payload.object_id,
+                    preload: false, //一定要为false
+                    createNew: false,
+                    show: {
+                      autoShow: true,
+                      aniShow: 'pop-in'
+                    },
+                    styles: {
+                      popGesture: 'hide'
+                    },
+                    waiting: {
+                      autoShow: false
+                    }
+                  });
                   break;
               }
             };
