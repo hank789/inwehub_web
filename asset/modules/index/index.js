@@ -92,6 +92,26 @@ Vue.use(TimeAgo, {
 import {showWebview,clearAllWebViewCache} from '../../utils/webview';
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
+window.getUserAppDevice = function () {
+  var os = mui.os;
+  if (os) {
+    if (os.plus) {
+      if (os.ios) {
+        return 'app_ios';
+      } else if (os.android) {
+        return 'app_android';
+      } else {
+        return 'other_app';
+      }
+    } else if (os.wechat) {
+      return 'wechat';
+    } else {
+      return 'web';
+    }
+  } else {
+    return 'web';
+  }
+}
 
 import '../../js/socket.io.min';
 

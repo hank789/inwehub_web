@@ -245,7 +245,7 @@
               window.mixpanel.track(
                 'inwehub:read_page_detail',
                 {
-                  "app": "inwehub", 'page': url, 'page_title': title
+                  "app": "inwehub", "user_device": getUserAppDevice(), 'page': url, 'page_title': title
                 }
               );
             }
@@ -295,7 +295,7 @@
               window.mixpanel.track(
                 'inwehub:notice_detail',
                 {
-                  "app": "inwehub", 'page': url, 'page_title': '首页轮播文章'
+                  "app": "inwehub","user_device": getUserAppDevice(), 'page': url, 'page_title': '首页轮播文章'
                 }
               );
             }

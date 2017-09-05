@@ -48,11 +48,7 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
         }
         window.mixpanel.track(
           mixpanel_event,
-          {"app": "inwehub", "page": matchedRoute.route.fullPath, "page_name": matchedRoute.route.name, "page_title": matchedRoute.route.meta.title}
-        );
-        window.mixpanel.track(
-          'inwehub:' + url,
-          {"app": "inwehub", "page": url}
+          {"app": "inwehub", "user_device": getUserAppDevice(), "page": matchedRoute.route.fullPath, "page_name": matchedRoute.route.name, "page_title": matchedRoute.route.meta.title}
         );
       }
       if (window.ga) {
@@ -112,7 +108,7 @@ router.afterEach((to, from) => {
     }
     window.mixpanel.track(
       mixpanel_event,
-      {"app": "inwehub", "page": to.fullPath, "page_name": to.name, "page_title": to.meta.title, "referrer_page": from.fullPath}
+      {"app": "inwehub", "user_device": getUserAppDevice(), "page": to.fullPath, "page_name": to.name, "page_title": to.meta.title, "referrer_page": from.fullPath}
     );
   }
 });

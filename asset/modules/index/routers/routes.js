@@ -261,7 +261,7 @@ const routes = [{
 	},
 	{ // 我的档案
 		path: '/my/info/basic',
-    name: 'my-info-basic',
+    name: 'my-info-basic-page',
 		component: require('../../../components/PageTransition.vue'),
 		meta: {
 			title: '我的档案',
@@ -1181,6 +1181,13 @@ const routes = [{
       title: 'InweHub'
     },
     component: require('../../../views/Webview/registerForm.vue'),
+  },
+  {
+    path: '/register/nocode',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/NoCode.vue'),
   },
 	{ // message
 		path: '/*',

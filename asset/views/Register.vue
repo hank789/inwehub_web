@@ -164,29 +164,7 @@
     },
     methods: {
       jumpToForm(){
-        var url="https://jinshuju.net/f/bWXY8y";
-        if (mui.os.plus) {
-          mui.openWindow({
-            url: 'index.html#/webview/registerForm',
-            id: 'jinshuju',
-            preload: false,//一定要为false
-            createNew:false,
-            show: {
-              autoShow: true,
-              aniShow: 'pop-in'
-            },
-            styles: {
-              popGesture: 'hide'
-            },
-            waiting: {
-              autoShow: false
-            }
-          });
-
-        } else {
-          window.open(url);
-        }
-
+          this.$router.push('/register/nocode');
       },
       goback () {
         mui.back();

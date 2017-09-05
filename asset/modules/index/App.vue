@@ -76,7 +76,7 @@
 
         if (currentUser.user_id){
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({ "email": currentUser.email,"gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
         }
       }
 
