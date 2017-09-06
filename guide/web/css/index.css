@@ -49,7 +49,7 @@ body {
 	}
 	.swiper-container2 .swiper-button-next {
 		background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%…2L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E);
-		right: 0%;
+		right: -1%;
 		left: auto;
 		background-size: 15px 44px;
 	}
@@ -86,7 +86,7 @@ body {
 	}
 	.swiper-container2 .swiper-button-next {
 		background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%…2L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E);
-		right: 10%;
+		right: 7%;
 		left: auto;
 		background-size: 15px 44px;
 	}
@@ -382,7 +382,7 @@ header .logo {
 
 .card-r {
 	width: 30%;
-	height: 45%;
+	height: 50%;
 	/* background: pink;*/
 	right: 5%;
 }
@@ -411,25 +411,34 @@ header .logo {
 }
 
 .card-r span:nth-of-type(4) {
-	font-size: 0.18rem;
+	font-size: 0.16rem;
 	color: #03aef9;
 	margin-top: 0.08rem;
 }
 
 .card-r p {
-	font-size: 0.18rem;
-	color: #6E6E6E;
+	width: 100%;
 	margin-top: 0.1rem;
+	/*background: #CCCCCC;*/
+	position: relative;
 }
-
+.card-r p a{
+	display: inline-block;
+	width: 96%;
+	margin-left: 4%;
+	height:10%;
+	font-size: 0.16rem;
+	color: #6E6E6E;
+	/*background: #0062CC;*/
+}
 .card-r p i {
 	display: inline-block;
 	width: 0.03rem;
 	height: 0.03rem;
 	background: #03AEF9;
 	border-radius: 50%;
-	margin-bottom: 0.03rem;
-	margin-right: 0.08rem;
+	position: absolute;
+	margin-top: 3%;
 }
 
 
@@ -450,8 +459,8 @@ header .logo {
 }
 
 .ask-r {
-	width: 30%;
-	height: 45%;
+	width: 33%;
+	height: 50%;
 	/*background: pink;*/
 }
 
@@ -478,26 +487,35 @@ header .logo {
 	margin-top: 0.2rem;
 }
 
-.ask-r span:nth-of-type(4) {
-	font-size: 0.18rem;
+.ask-r span:nth-of-type(4),.ask-r span:nth-of-type(5) {
+	font-size: 0.16rem;
 	color: #03aef9;
 	margin-top: 0.08rem;
 }
 
 .ask-r p {
-	font-size: 0.18rem;
-	color: #6E6E6E;
+	
 	margin-top: 0.1rem;
+	position: relative;
 }
-
+.ask-r p a {
+	display: inline-block;
+	width: 96%;
+	margin-left: 4%;
+	height:10%;
+	font-size: 0.16rem;
+	color: #6E6E6E;
+	/*background: #0062CC;*/
+	
+}
 .ask-r p i {
 	display: inline-block;
 	width: 0.03rem;
 	height: 0.03rem;
 	background: #03AEF9;
 	border-radius: 50%;
-	margin-bottom: 0.03rem;
-	margin-right: 0.08rem;
+	position: absolute;
+	margin-top: 3%;
 }
 
 
@@ -763,6 +781,7 @@ article {
 	color: #505050;
 	font-size: 0.13rem;
 	margin-left: 0.1rem;
+	line-height: 0.2rem;
 }
 
 .article_r ul li:nth-of-type(2),
@@ -860,6 +879,7 @@ article {
 	color: #505050;
 	font-size: 0.12rem;
 	margin-left: 0.1rem;
+	line-height: 0.2rem;
 }
 
 .service_r {
@@ -1004,4 +1024,8 @@ footer {
 	line-height: 0.41rem;
 	font-size: 0.12rem;
 	color: #6e6e6e;
+}
+
+.link{
+	color:#03aef9;
 }
