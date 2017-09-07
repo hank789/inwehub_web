@@ -77,9 +77,9 @@
 							</div>
 							<!--文章和评论-->
 							<div class="news">
-								<p class="mui-ellipsis">文章<span>{{ resume.info.submission_count }}</span>篇</p>
+								<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=@'+resume.info.id)">文章<span>{{ resume.info.submission_count }}</span>篇</p>
 								<i></i>
-								<p class="mui-ellipsis">评论<span>{{ resume.info.comment_count }}</span>条</p>
+								<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/discover?redirect_url=@'+resume.info.id)">评论<span>{{ resume.info.comment_count }}</span>条</p>
 							</div>
 							<!---->
 							<div class="counter">关注<b>{{ resume.info.followers }}</b>次<i class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i class="separate"></i>{{ resume.info.total_score }}
