@@ -73,10 +73,10 @@
       if (process.env.NODE_ENV === 'production') {
         // mixpanel
         window.mixpanel.init("688ee16000ddf4f44891e06b79847d4e");
-
+        var app_version = localEvent.getLocalItem('app_version');
         if (currentUser.user_id){
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email,"gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
         }
       }
 
