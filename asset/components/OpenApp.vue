@@ -53,7 +53,9 @@
         //深度链接
         new Mlink({
           mlink: mlink+'?name=1',//短链地址
-          button:document.querySelector('a#btnOpenAppH5')
+          button:document.querySelector('a#btnOpenAppH5'),
+          params: {url: "test"},
+          cparams: {path: "my"}
         });
       }
 
@@ -61,7 +63,9 @@
         //深度链接
         new Mlink({
           mlink: mlink+'?name=2',//短链地址
-          button:document.querySelector('a#btnOpenAppWeixin')
+          button:document.querySelector('a#btnOpenAppWeixin'),
+          params: {url: "test"},
+          cparams: {path: "my"}
         });
       }
     },
