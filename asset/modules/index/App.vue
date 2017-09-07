@@ -129,7 +129,7 @@
               if (window.mixpanel.track) {
                 window.mixpanel.track(
                   'inwehub:push:click:'+ payload.object_type,
-                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "推送事件"}
+                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "打开推送"}
                 );
               }
               switch (payload.object_type) {
@@ -183,7 +183,35 @@
                   break;
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  if (payload.object) {
+                    mui.openWindow({
+                      url: 'index.html#/webview/article',
+                      id: 'readhub_article_'+payload.object.id,
+                      preload: false, //一定要为false
+                      createNew: false,
+                      show: {
+                        autoShow: true,
+                        aniShow: 'pop-in'
+                      },
+                      styles: {
+                        popGesture: 'hide'
+                      },
+                      waiting: {
+                        autoShow: false
+                      },
+                      extras: {
+                        article_id: payload.object.id,
+                        article_url: payload.object.view_url,
+                        article_title: payload.object.title,
+                        article_comment_url: payload.object.comment_url,
+                        article_img_url:payload.object.img_url,
+                      }
+                    });
+                  }
+                  break;
+                case 'push_notice_app_self':
+                  // 推送app内页
+                  router.push(payload.object_id);
                   break;
                 case 'push_notice_article':
                   // 推送公告文章

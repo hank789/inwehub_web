@@ -35,11 +35,12 @@ function checkUpdate(){
                   }, inf.title, ["立即下载","暂不下载","取消"]);
                 }, "com.tencent.android.qqdownloader");
               } else {
-                var is_muti_update = localEvent.getLocalItem('update_app_version');
-                if (!is_muti_update) {
-                  localEvent.setLocalItem('update_app_version',{version:wgtVer});
+                var is_lock_update = localEvent.getLocalItem('lock_update_app_version');
+                if (is_lock_update.version === undefined) {
+                  localEvent.setLocalItem('lock_update_app_version',{version:wgtVer});
                   //下载升级包
                   downWgt(package_url);
+                  localEvent.clearLocalItem('lock_update_app_version');
                 }
               }
             }
@@ -68,7 +69,7 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
-    localEvent.clearLocalItem('update_app_version');
+    localEvent.clearLocalItem('lock_update_app_version');
     plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
