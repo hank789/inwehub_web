@@ -52,7 +52,7 @@
       if (this.isH5) {
         //深度链接
         new Mlink({
-          mlink: mlink,//短链地址
+          mlink: mlink+'?name=1',//短链地址
           button:document.querySelector('a#btnOpenAppH5')
         });
       }
@@ -60,7 +60,7 @@
       if (this.isWeixin) {
         //深度链接
         new Mlink({
-          mlink: mlink,//短链地址
+          mlink: mlink+'?name=2',//短链地址
           button:document.querySelector('a#btnOpenAppWeixin')
         });
       }
