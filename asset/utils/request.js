@@ -113,7 +113,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           mui.toast(response.data.message);
           logout();
-          return;
+          return response;
         }
       }
 
