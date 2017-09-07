@@ -124,13 +124,6 @@
               }
             });
 
-            document.addEventListener('newintent',function(){
-              console.log("plus.runtime.launcher: "+plus.runtime.launcher);
-              plus.nativeUI.alert("plus.runtime.launcher: "+plus.runtime.launcher);
-              console.log(plus.runtime.arguments);
-              plus.nativeUI.alert(plus.runtime.arguments);
-            },false);
-
             //监听推送
             var noticeTo = function (payload) {
               if (window.mixpanel.track) {
