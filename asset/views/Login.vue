@@ -1,21 +1,46 @@
 <template>
   <div class="mui-content">
     <div class="login">
-      <div class="logo"></div>
-      <div class="inputWrapper">
+      <!--<<!--div class="logo">-->
+      	<svg class="icon logo" aria-hidden="true">
+		  <use xlink:href="#icon-logo"></use>
+		</svg>
+      <!--</div>-->
+      <!--<div class="inputWrapper">
         <input class="text"  type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" />
         <label v-show="showPhoneLabel" @tap.stop.prevent="entryPhone">手机号码</label>
       </div>
       <div class="inputWrapper">
         <input class="text" type="password" v-model.trim="password"/>
         <label v-show="showPasswordLabel" @tap.stop.prevent="entryPassword">输入密码</label>
-      </div>
-      <div class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</div>
+      </div>-->
+      <!--账号密码输入框-->
+     
+      <div class="inputWrapper">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shoujihao"></use>
+      </svg>
+      <input ref="phone"  type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone"  placeholder="手机号码"
+      	 v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @focus="focus" @blur="blur"  @tap.stop.prevent="entryPhone"/>
+     </div>
+     <div class="inputWrapper">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mima"></use>
+      </svg>
+      <input  type="password" v-model.trim="password" placeholder="输入密码"  @focus="focus" @blur="blur"  @tap.stop.prevent="entryPassword"/>
+     </div>
+      
+      
+      <!--忘记密码和账号-->
+       <div class="apply">
+       	<div>
+       	 <span class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</span>
+       	 <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
+       	</div>
+       </div>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">点击登录</button>
 
-      <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">点击登录</button>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-outlined" @tap.stop.prevent="$router.pushPlus('/register/')">注册账号</button>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -28,6 +53,7 @@
   import deleteObjectItems from '../utils/deleteObjectItems';
   import { getUserInfo, getAvatar } from '../utils/user';
   import { USERS_APPEND } from '../stores/types';
+  import VTooltip from 'v-tooltip';
 
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
   const login = {
@@ -37,7 +63,8 @@
       passwordText: '', // 明文密码
       isLoading: false, // 登录loading
       showPhoneLabel:true,
-      showPasswordLabel:true
+      showPasswordLabel:true,
+      errorMsg: '',
     }),
     created () {
       //showInwehubWebview();
@@ -58,27 +85,27 @@
         this.phone = '';
         this.password = '';
       });
-      mui(".login").on('focusout', 'input', (e) => {
-          if (e.target.type === 'text' && !this.phone) {
-             this.showPhoneLabel = true;
-          }
-
-        if (e.target.type === 'password' && !this.password) {
-          this.showPasswordLabel = true;
-        }
-      });
-
-      mui(".login").on('focusin', 'input', (e) => {
-
-
-        if (e.target.type === 'text' && !this.phone) {
-          this.showPhoneLabel = false;
-        }
-
-        if (e.target.type === 'password' && !this.password) {
-          this.showPasswordLabel = false;
-        }
-      });
+//    mui(".login").on('focusout', 'input', (e) => {
+//        if (e.target.type === 'text' && !this.phone) {
+//           this.showPhoneLabel = true;
+//        }
+//
+//      if (e.target.type === 'password' && !this.password) {
+//        this.showPasswordLabel = true;
+//      }
+//    });
+//
+//    mui(".login").on('focusin', 'input', (e) => {
+//
+//
+//      if (e.target.type === 'text' && !this.phone) {
+//        this.showPhoneLabel = false;
+//      }
+//
+//      if (e.target.type === 'password' && !this.password) {
+//        this.showPasswordLabel = false;
+//      }
+//    });
     },
     beforeRouteEnter (to, from, next) {
 
@@ -97,6 +124,25 @@
       next();
     },
     methods: {
+    	//提示
+//    showTip(obj, msg){
+//      this.errorMsg = msg;
+//      obj._tooltip.show();
+//      setTimeout(() => {
+//     obj._tooltip.hide();
+//      }, 2000);
+//    },
+    //变颜色；
+     focus(event){
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
+        event.target.parentElement.className += ' focus';
+      },
+      blur(){
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
+        event.target.parentElement.className += ' blur';
+      },
       entryPhone(){
         this.showPhoneLabel = false;
       },
@@ -109,12 +155,14 @@
       submit () {
 
         if (!this.phone) {
-          mui.toast('请输入手机号码');
+        mui.toast('请输入手机号');
+//        this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
 
         if(!phoneReg.test(this.phone)) {
-          mui.toast('请输入正确的手机号码');
+        mui.toast('请输入正确的手机号');
+//      this.showTip(this.$refs.phone, '请输入正确的手机号码');
           return;
         }
 
@@ -206,84 +254,148 @@
     position:absolute;
     width:100%;
     min-height:100%;
-    background: url(../statics/images/bg_login.png);
+    background: #f3f4f6;
     background-size: cover;
     text-align: center;
   }
-
+/*图标*/
   .logo{
-    display: inline-block;
-    background: url(../statics/images/login-logo.png);
-    background-size: cover;
-    width:182px;
-    height:37px;
-    margin:140px 0 80px;
+   
+    font-size: 110px;
+     margin:110px 0 75px; 
+    
   }
+ 
 
-  input[type='text'],input[type='password'],input[type='number']{
-    background-color:transparent;
-    border:none;
-    text-align: center;
-    color:#fff;
-    margin-bottom:0;
-  }
 
-  .inputWrapper{
-    border-bottom:1px solid rgba(255,255,255, 0.3);
-    margin:0 60px;
-    padding:10px 0;
-    position: relative;
-  }
-
-  .inputWrapper label{
+ /*忘记密码和账号*/
+.apply{
+     width: 100%;
+     height: 30px;
+     position: relative;
+     top: -25px;
+    
+}
+.apply>div{
+	width: 80%;
+	height: 100%;
     position: absolute;
-    left:0;
-    color:#fff;
-    width:100%;
-    text-align: center;
-    top:50%;
-    margin-top:-8px;
-
-  }
-  .forget{
-    color:rgba(255,255,255, .6);
+    top:15px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /*background: #DDDDDD;*/
+	
+}
+.apply>div>span{
+	color:#3c95f9;
     font-size:14px;
-    text-align: right;
-    padding: 10px 60px;
-  }
+}
+.apply>div>span:nth-of-type(1){
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: left;
+}
+.apply>div>span:nth-of-type(2){
+	display: block;
+	float: right;
+	width: 50%;
+	text-align: right;
+}
+/*登录*/
+.button, .mui-btn {
+    border-radius: 5px;
+    color: #f2f2f2;
+    width: 78%;
+    margin-left: 11%;
+    margin-top: 10px;
+    background: #3C95F9;
+}
 
-  .buttonWrapper{
-    padding:0 112px;
-    margin-top:80px;
-  }
-
-  .buttonWrapper button{
-    margin-bottom:30px;
-  }
-
-  .mui-btn-outlined{
-    color:#fff;
-    border:1px solid #fff;
-  }
-
-  .mui-btn-block {
-    padding: 10px 0;
-  }
-
-  .leftNav{
+/*输入框的内容*/
+   .inputWrapper .icon {
     position: absolute;
-    padding:30px;
-    left:0;
-    top:0;
+    top: 5px;
+    font-size: 22px;
+    color: #c8c8c8;
+    left: 0;
+    
   }
-  .leftNav span{
-    background: url(../statics/images/icon-login-left.png)  no-repeat ;
-    background-size: cover;
-    width:10px;
-    height:17px;
+
+  .inputWrapper {
+    margin: 0 33px 22px;
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
+
+  }
+
+  .inputWrapper.focus {
+
+    /*&:after {
+      background-color: #3c95f9;
+    }*/
+
+    .icon {
+      color: #808080;
+    }
+  }
+
+  .inputWrapper .getYzm {
+    display: inline-block;
+    font-size: 14px;
+    color: #3c95f9;
     position: absolute;
-    left:10px;
-    top:10px;
+    right: 2px;
+    top: 6px;
+    border: 1px solid #3c95f9;
+    border-radius: 5px;
+    padding: 3px 14px;
   }
+
+  .inputWrapper .getYzm.disabled {
+    border: 1px solid #dcdcdc;
+    color: #c8c8c8;
+  }
+
+  .inputWrapper:after {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+
+  .inputWrapper input {
+    color: #444;
+    border: none;
+    margin: 0;
+    /*padding: 0 0 0 36px;*/
+    font-size: 14px;
+    background: none;
+    display: inline-block;
+    height: 36px;
+    margin-left: 12px;
+  }
+  
+  
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color:#b4b4b6;
+}
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color:#b4b4b6;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color:#b4b4b6;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color:#b4b4b6;
+}
 </style>
 
