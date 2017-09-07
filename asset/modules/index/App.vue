@@ -126,6 +126,12 @@
 
             //监听推送
             var noticeTo = function (payload) {
+              if (window.mixpanel.track) {
+                window.mixpanel.track(
+                  'inwehub:push:click:'+ payload.object_type,
+                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "推送事件"}
+                );
+              }
               switch (payload.object_type) {
                 case 'question':
                 case 'question_answered':
