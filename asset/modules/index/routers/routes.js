@@ -809,6 +809,16 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { // discover
+    path: '/discover/share',
+    name: 'share-discover',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Readhub/Readhub.vue')
+  },
   { // readhub
     path: '/readhub/detail',
     name: 'readhub-detail',
