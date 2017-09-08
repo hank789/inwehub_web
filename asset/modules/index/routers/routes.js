@@ -22,6 +22,10 @@ const routes = [{
 		},
 		beforeEnter: (to, from, next) => {
 			if(mui.os.plus) {
+        // 检查版本更新
+        mui.plusReady(function() {
+          checkUpdate();
+        });
 				var lauch = localEvent.getLocalItem('lauchFlag');
 				if(!lauch.showGuide && 1 === 2) {
 					mui.plusReady(function() {
@@ -809,6 +813,16 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { // discover
+    path: '/discover/share',
+    name: 'share-discover',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Readhub/Readhub.vue')
+  },
   { // readhub
     path: '/readhub/detail',
     name: 'readhub-detail',

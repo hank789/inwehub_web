@@ -47,6 +47,33 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
 }
 
 /**
+ * 打开阅读站的页面（高性能）
+ * @param url
+ */
+function openReadhubPage(url) {
+  var webview = mui.openWindow({
+    url: process.env.READHUB_URL + '/h5',
+    id: 'readhub_submission_webview',
+    preload: false,//一定要为false
+    show: {
+      autoShow: false,
+      aniShow: 'pop-in'
+    },
+    styles: {
+      popGesture: 'hide'
+    },
+    extras:{preload: false},
+    waiting: {
+      autoShow: false
+    }
+  });
+  mui.fire(webview,'go_to_readhub_page',{url: url});
+  setTimeout( () => {
+    webview.show();
+  },100);
+}
+
+/**
  * 首页打开readhub的详情页
  * @param url
  * @param pathUrl
@@ -67,8 +94,8 @@ function openWebviewByHome(ws)
 
     var footerPathUrl = process.env.READHUB_URL + pathUrl;
 
-    //var sharePathUrl = process.env.API_ROOT + 'wechat/oauth?redirect=/discover?redirect_url=' + pathUrl;
-    var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
+    var sharePathUrl = process.env.H5_ROOT + '/#/discover/share?redirect_url=' + pathUrl + encodeURIComponent('?noback=1');
+    //var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
     console.log('sharePathUrl:' + sharePathUrl);
 
     //绑定标题
@@ -231,7 +258,7 @@ function clearAllWebViewCache() {
         var self = plus.webview.currentWebview();
         var wvs=plus.webview.all();
         for(var i=0;i<wvs.length;i++){
-          if (wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed'){
+          if (wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed' && wvs[i].id !== 'readhub_submission_webview'){
             wvs[i].close();
           }
         }
@@ -241,6 +268,7 @@ function clearAllWebViewCache() {
 
 export {
   openWebviewByUrl,
+  openReadhubPage,
   goBack,
   showWebview,
   clearAllWebViewCache,

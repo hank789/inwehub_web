@@ -9,13 +9,13 @@ function checkUpdate(){
         var wgtVer=inf.version;
         console.log("当前应用版本："+wgtVer);
         localEvent.setLocalItem('app_version',{version:wgtVer});
-        apiRequest(`system/version`, {},false).then(response_data => {
+        apiRequest(`system/version`, {app_uuid: plus.device.uuid},false).then(response_data => {
           if (response_data !== false) {
             var app_version = response_data.app_version;
-            var package_url = response_data.package_url;
-            var is_ios_force = response_data.is_ios_force;
-            var is_android_force = response_data.is_android_force;
             if (app_version && wgtVer < app_version){
+              var package_url = response_data.package_url;
+              var is_ios_force = response_data.is_ios_force;
+              var is_android_force = response_data.is_android_force;
               //如果是强更
               if (is_ios_force === 1 && mui.os.ios){
                 mui.alert("有新的版本升级");

@@ -52,16 +52,20 @@
       if (this.isH5) {
         //深度链接
         new Mlink({
-          mlink: mlink,//短链地址
-          button:document.querySelector('a#btnOpenAppH5')
+          mlink: mlink+'?name=1',//短链地址
+          button:document.querySelector('a#btnOpenAppH5'),
+          params: {url: "test"},
+          cparams: {path: "my"}
         });
       }
 
       if (this.isWeixin) {
         //深度链接
         new Mlink({
-          mlink: mlink,//短链地址
-          button:document.querySelector('a#btnOpenAppWeixin')
+          mlink: mlink+'?name=2',//短链地址
+          button:document.querySelector('a#btnOpenAppWeixin'),
+          params: {url: "test"},
+          cparams: {path: "my"}
         });
       }
     },

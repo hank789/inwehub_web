@@ -73,10 +73,10 @@
       if (process.env.NODE_ENV === 'production') {
         // mixpanel
         window.mixpanel.init("688ee16000ddf4f44891e06b79847d4e");
-
+        var app_version = localEvent.getLocalItem('app_version');
         if (currentUser.user_id){
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email,"gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
         }
       }
 
@@ -96,6 +96,14 @@
               dock: 'top',
               bottom: '75px',
               bounce:'none'},
+            extras: {}
+          });
+          mui.preload({
+            url: url,
+            id: 'readhub_submission_webview',
+            styles: {
+              popGesture: 'hide'
+            },
             extras: {}
           });
           console.log("inwehub_embed:"+inwehub_embed_view.getURL());
@@ -126,6 +134,12 @@
 
             //监听推送
             var noticeTo = function (payload) {
+              if (window.mixpanel.track) {
+                window.mixpanel.track(
+                  'inwehub:push:click:'+ payload.object_type,
+                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "打开推送"}
+                );
+              }
               switch (payload.object_type) {
                 case 'question':
                 case 'question_answered':
@@ -165,19 +179,47 @@
                   break;
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'readhub_submission_replied':
                   // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'readhub_username_mentioned':
                   // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  if (payload.object) {
+                    mui.openWindow({
+                      url: 'index.html#/webview/article',
+                      id: 'readhub_article_'+payload.object.id,
+                      preload: false, //一定要为false
+                      createNew: false,
+                      show: {
+                        autoShow: true,
+                        aniShow: 'pop-in'
+                      },
+                      styles: {
+                        popGesture: 'hide'
+                      },
+                      waiting: {
+                        autoShow: false
+                      },
+                      extras: {
+                        article_id: payload.object.id,
+                        article_url: payload.object.view_url,
+                        article_title: payload.object.title,
+                        article_comment_url: payload.object.comment_url,
+                        article_img_url:payload.object.img_url,
+                      }
+                    });
+                  }
+                  break;
+                case 'push_notice_app_self':
+                  // 推送app内页
+                  router.push(payload.object_id);
                   break;
                 case 'push_notice_article':
                   // 推送公告文章

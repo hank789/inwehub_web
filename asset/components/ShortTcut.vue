@@ -82,7 +82,7 @@
             break;
 
         }
-        document.getElementById("short_all").style.display = "none";
+        this.hide();
       },
       show() {
         document.getElementById("short_all").style.display = "inline";
@@ -104,7 +104,7 @@
       },
       hide() {
         //	 	document.getElementById("short_all").style.display="none";
-        console.log(222)
+        console.log('hide');
         document.getElementById("down").setAttribute("class", "end");
         setTimeout(function () {
           document.getElementById("short_all").style.display = "none";
