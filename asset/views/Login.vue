@@ -38,7 +38,7 @@
        	 <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
        	</div>
        </div>
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">点击登录</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
       
     </div>
@@ -273,7 +273,7 @@
      width: 100%;
      height: 30px;
      position: relative;
-     top: -25px;
+     top: -22px;
     
 }
 .apply>div{
@@ -308,9 +308,9 @@
 .button, .mui-btn {
     border-radius: 5px;
     color: #f2f2f2;
-    width: 78%;
-    margin-left: 11%;
-    margin-top: 10px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5px;
     background: #3C95F9;
 }
 
@@ -381,7 +381,7 @@
     background: none;
     display: inline-block;
     height: 36px;
-    margin-left: 12px;
+    margin-left: 15px;
   }
   
   
@@ -396,6 +396,14 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
     color:#b4b4b6;
+}
+
+.inputWrapper:nth-of-type(2) .icon{
+    position: absolute;
+    top: 5px;
+    font-size: 20px;
+    /*color: #c8c8c8;*/
+    left: 0;
 }
 </style>
 
