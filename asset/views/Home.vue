@@ -391,8 +391,6 @@
 						return;
 					}
 
-					console.log(response_data.is_expert)
-
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
 				   //推荐阅读；
