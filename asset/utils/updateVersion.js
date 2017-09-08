@@ -9,13 +9,13 @@ function checkUpdate(){
         var wgtVer=inf.version;
         console.log("当前应用版本："+wgtVer);
         localEvent.setLocalItem('app_version',{version:wgtVer});
-        apiRequest(`system/version`, {},false).then(response_data => {
+        apiRequest(`system/version`, {app_uuid: plus.device.uuid},false).then(response_data => {
           if (response_data !== false) {
             var app_version = response_data.app_version;
-            var package_url = response_data.package_url;
-            var is_ios_force = response_data.is_ios_force;
-            var is_android_force = response_data.is_android_force;
             if (app_version && wgtVer < app_version){
+              var package_url = response_data.package_url;
+              var is_ios_force = response_data.is_ios_force;
+              var is_android_force = response_data.is_android_force;
               //如果是强更
               if (is_ios_force === 1 && mui.os.ios){
                 mui.alert("有新的版本升级");
@@ -35,13 +35,8 @@ function checkUpdate(){
                   }, inf.title, ["立即下载","暂不下载","取消"]);
                 }, "com.tencent.android.qqdownloader");
               } else {
-                var is_lock_update = localEvent.getLocalItem('lock_update_app_version');
-                if (is_lock_update.version === undefined) {
-                  localEvent.setLocalItem('lock_update_app_version',{version:wgtVer});
-                  //下载升级包
-                  downWgt(package_url);
-                  localEvent.clearLocalItem('lock_update_app_version');
-                }
+                //下载升级包
+                downWgt(package_url);
               }
             }
           }
@@ -69,7 +64,6 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
-    localEvent.clearLocalItem('lock_update_app_version');
     plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
