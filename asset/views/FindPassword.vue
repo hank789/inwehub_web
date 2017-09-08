@@ -473,7 +473,7 @@
     background: none;
     display: inline-block;
     height: 36px;
-    margin-left: 12px;
+    margin-left: 15px;
   }
   
   
@@ -495,15 +495,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .button, .mui-btn {
     border-radius: 5px;
     color: #f2f2f2;
-    width: 78%;
-    margin-left: 11%;
+    width: 80%;
+    margin-left: 10%;
     margin-top: 30px;
     background: #3C95F9;
 }
 
 
 /*2 3图标大小的微调*/
-.inputWrapper:nth-of-type(3) .icon{
+.inputWrapper:nth-of-type(2) .icon{
     position: absolute;
     top: 5px;
     font-size: 25px;
@@ -511,15 +511,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    
     left: 0;
 }
-.inputWrapper:nth-of-type(4) .icon{
+.inputWrapper:nth-of-type(3) .icon{
     position: absolute;
     top: 5px;
-    font-size: 20px;
+    font-size: 21px;
     /*color: #c8c8c8;*/
     left: 0;
 }
 /*手机号input输入框的调整*/
-.inputWrapper:nth-of-type(2) input {
+.inputWrapper:nth-of-type(1) input {
     color: #444;
     border: none;
     margin: 0;

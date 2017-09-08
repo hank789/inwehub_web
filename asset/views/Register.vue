@@ -69,9 +69,9 @@
       </div>-->
       <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
       
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register" :disabled="disableRegister">确定</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register" :disabled="disableRegister">确认</button>
       <!--:disabled="disableRegister"-->
-      <div class="help" @tap.stop.prevent="jumpToForm"><br />
+      <div class="help" @tap.stop.prevent="jumpToForm">
         我没有邀请码?
       </div>
 
@@ -212,7 +212,7 @@
     methods: {
     	 //判断否有值（改变button按钮的状态来改变颜色）；
       checkValid(){
-      console.log(this.phone,this.code,this.registrationCode,this.username,this.password)
+//    console.log(this.phone,this.code,this.registrationCode,this.username,this.password)
       	//手机；
         if (!this.phone) {
           this.disableRegister = true;
@@ -643,9 +643,8 @@
 /*登录*/
 .button, .mui-btn {
     border-radius: 5px;
-    /*color: #f2f2f2;*/
-    width: 78%;
-    margin-left: 11%;
+    width: 80%;
+    margin-left: 10%;
     margin-top: 15px;
     margin-bottom: 15px;
     
@@ -754,7 +753,7 @@
     background: none;
     display: inline-block;
     height: 36px;
-    margin-left: 12px;
+    margin-left:15px;
   }
   
   
@@ -772,7 +771,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 /*手机号input输入框的调整*/
-.inputWrapper:nth-of-type(3) input {
+.inputWrapper:nth-of-type(2) input {
     color: #444;
     border: none;
     margin: 0;
