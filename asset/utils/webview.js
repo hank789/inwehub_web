@@ -258,7 +258,7 @@ function clearAllWebViewCache() {
         var self = plus.webview.currentWebview();
         var wvs=plus.webview.all();
         for(var i=0;i<wvs.length;i++){
-          if (wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed'){
+          if (wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed' && wvs[i].id !== 'readhub_submission_webview'){
             wvs[i].close();
           }
         }
