@@ -202,7 +202,7 @@
           return;
         }
 
-        this.isCanGetCode = false;
+        this.isCanGetCode = true;
 
         postRequest('auth/sendPhoneCode', {
             mobile,

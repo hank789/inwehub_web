@@ -6,8 +6,9 @@
 		  <use xlink:href="#icon-logo"></use>
 		</svg>
       
-      
-      <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
+        <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
+		  <use xlink:href="#icon-fanhui"></use>
+		</svg>
       <!--<div class="inputWrapper">
         <input class="text" type="text" v-model.trim.num="phone" name="phone"/>
         <label @tap.stop.prevent="entryPhone" v-show="showPhoneLabel">手机号码</label>
@@ -393,21 +394,14 @@
     
   }
 
-
-  .leftNav{
+/*小箭头*/
+  .leftNav {
+   
     position: absolute;
-    padding:30px;
-    left:0;
-    top:0;
-  }
-  .leftNav span{
-    background: url(../statics/images/icon-login-left.png)  no-repeat ;
-    background-size: cover;
-    width:10px;
-    height:17px;
-    position: absolute;
-    left:10px;
-    top:10px;
+    left: 12px;
+    top: 15px;
+    font-size: 20px;
+    color: #808080;
   }
  
  
