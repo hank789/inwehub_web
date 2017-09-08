@@ -179,15 +179,15 @@
                   break;
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'readhub_submission_replied':
                   // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'readhub_username_mentioned':
                   // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.push('/discover?redirect_url=' + payload.object_id);
+                  router.pushReadHubPage(payload.object_id);
                   break;
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
