@@ -98,6 +98,14 @@
               bounce:'none'},
             extras: {}
           });
+          mui.preload({
+            url: url,
+            id: 'readhub_submission_webview',
+            styles: {
+              popGesture: 'hide'
+            },
+            extras: {}
+          });
           console.log("inwehub_embed:"+inwehub_embed_view.getURL());
           if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url){
             console.log('inwehub_embed:reload:'+ url);
