@@ -5,7 +5,10 @@
       <svg class="icon logo" aria-hidden="true">
 		  <use xlink:href="#icon-logo"></use>
 	  </svg>
-      <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
+<!--返回箭头-->
+      	<svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
+		  <use xlink:href="#icon-fanhui"></use>
+	  </svg>
       <!--账号密码输入框-->
      
       <div class="inputWrapper">
@@ -22,11 +25,6 @@
       
       <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
       <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
-      
-      
-      	
-      	
-      <!--<span class="getYzm" @click.stop.prevent="getCode">{{ getCodeText }}</span>-->
      </div>
      <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
@@ -71,7 +69,7 @@
       </div>-->
       <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
       
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register">确定</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register" :disabled="disableRegister">确定</button>
       <!--:disabled="disableRegister"-->
       <div class="help" @tap.stop.prevent="jumpToForm"><br />
         我没有邀请码?
@@ -115,7 +113,7 @@
       isShowUserClean: false,
       isShowPasswordText: false, // 是否显示明文密码
       isShowPassword: true, // 是否显示真实密码
-      isCanGetCode: true,
+      isCanGetCode: false,
       errors: {}, // 错误对象
       isValidCode: false, // 验证码合法性
       isValidPhone: false, // 是否合法手机号
@@ -212,13 +210,46 @@
       next();
     },
     methods: {
-//  	//关闭；
-//  	close(){
-//     console.log(document.querySelector('.colse'))
-//     document.querySelector('.colse').onclick=function(){
-//			console.log(23232);
-//			}
-//   },
+    	 //判断否有值（改变button按钮的状态来改变颜色）；
+      checkValid(){
+      console.log(this.phone,this.code,this.registrationCode,this.username,this.password)
+      	//手机；
+        if (!this.phone) {
+          this.disableRegister = true;
+          return false;
+        }
+       //验证码；
+        if (!this.code) {
+          this.disableRegister = true;
+          return false;
+        }
+        //邀请码；
+         if (!this.registrationCode) {
+          this.disableRegister = true;
+          return false;
+        }
+         //姓名；
+          if (!this.username) {
+          this.disableRegister = true;
+          return false;
+        }
+         //密码
+          if (!this.password) {
+          this.disableRegister = true;
+          return false;
+        }
+         
+        this.disableRegister = false;
+      },
+    	//判断手机号是否为空；改变颜色（状态）；
+    	checkSendCodeValid(){
+        if (!this.phone) {
+          this.isCanGetCode = false;
+          return false;
+        }
+
+        this.isCanGetCode = true;
+     },
     	//提示
       showTip(obj, msg){
         this.errorMsg = msg;
@@ -228,9 +259,9 @@
         }, 2000);
       },
     	//弹窗；
-	wran(content,point, callback) {
+	warm(content,point, callback) {
 		var title = 
-			'<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;">' +
+			'<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
 			'<use xlink:href="#icon-guanbi"></use>' +
 			'</svg>';
 			
@@ -238,7 +269,17 @@
 	                point +
 	                '</p>';
 	      
-		    mui.alert(content, title, cont, callback, 'div');
+		    var alertobj = mui.alert(content, title, cont, (index, animate) => {
+		    		if (index.index === -1) {
+//		    			console.log('fire');
+		    			callback();
+		    		}
+		    } , 'div');
+		    
+		    document.getElementById('warmClosealert').onclick=() => {
+		       	alertobj.close({index:1, value:''});
+		    }
+	
 	},
     	focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
@@ -273,10 +314,10 @@
       },
       timer () {
         if (this.time > 0) {
-          this.isCanGetCode = false;
+          this.isCanGetCode =  true;
           this.time -= 1;
           if (this.time == 0) {
-            this.isCanGetCode = true;
+            this.isCanGetCode = false ; 
             return;
           }
           setTimeout(this.timer, 1000)
@@ -344,10 +385,10 @@
       getCode () {
         let mobile = this.phone?this.phone:'';
         let type = 'register';
-
-        if (!this.isCanGetCode) {
-          return;
-        }
+        
+//      if (!this.isCanGetCode) {
+//        return;
+//      }
 
         if (!this.registrationCode) {
           mui.toast("请输入邀请码");
@@ -359,8 +400,8 @@
           return;
         }
 
+
         if (mobile.length !== 11) {
-//        mui.toast("请正确填写手机号");
           this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
@@ -377,14 +418,26 @@
 
             var code = response.data.code;
             if (code !== 1000) {
-              this.isCanGetCode = true;
-//            mui.toast(response.data.message);
+              this.isCanGetCode = false;
               var message = response.data.message;
-            //验证码超时； 
-                this.wran(message,'重新发送', () => {
-//            	  this.$router.push('/register/nocode');
-              	  this.getCode();
+              //验证码超时 邀请码错误； 
+			if(message.indexOf("邀请码错误") > 0 ){
+				  this.warm(message,'获取邀请码', () => {
+	           	     this.$router.push('/register/nocode');
+	              });
+			}
+			else if(message.indexOf("无效") > 0 ){
+				 this.warm(message,'重新发送', () => {
+              	 this.getCode();
               });
+			}
+			else if(message.indexOf("超时") > 0 ){
+				 this.warm(message,'重新发送', () => {
+              	 this.getCode();
+              });
+			}
+			mui.toast(response.data.message);
+          
               return;
             }
 
@@ -399,42 +452,9 @@
             this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
           })
       },
-      //判断否有值
-      checkValid(){
-      	//手机；
-        if (!this.phone) {
-          this.disableRegister = true;
-          return false;
-        }
-       //验证码；
-        if (!this.code) {
-          this.disableRegister = true;
-          return false;
-        }
-        //邀请码；
-         if (!this.registrationCode) {
-          this.disableRegister = true;
-          return false;
-        }
-         //姓名；
-          if (!this.this.username) {
-          this.disableRegister = true;
-          return false;
-        }
-         //密码
-          if (!this.this.password) {
-          this.disableRegister = true;
-          return false;
-        }
-         
-        this.disableRegister = false;
-      },
+     
       // 注册
       register () {
-//    	this.wran("11",'重新发送', () => {
-////            	  this.$router.push('/register/nocode');
-//            	  this.getCode();
-//            });
         let {username, phone, code, password} = this;
         let device_code = detecdOS();
         this.isLoading = true;
@@ -452,7 +472,6 @@
         }
         
          if (!phoneReg.test(this.phone)) {
-//        mui.toast("请正确输入手机号");
            this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
@@ -478,13 +497,11 @@
           mui.toast("用户名不能包含特殊符号以及空格");
           return;
         } else if (this.username.length > 12 || this.username.length <= 1) {
-        	this.disableRegister = true;
           mui.toast("请输入2-12位姓名");
         }
 
 
         if (this.password.length < 6) {
-         	this.disableRegister = true;
           mui.toast("密码长度必须大于6位");
           return;
         }
@@ -510,11 +527,14 @@
               this.isDisabled = false;
               this.isLoading = false;
               //邀请码；
-              mui.toast(response.data.message);
               var message = response.data.message;
-                this.wran(message,'获取邀请码', () => {
-            	   this.$router.push('/register/nocode');
-              });
+              
+              if(message.indexOf("无效") > 0 ){
+				  this.wran(message,'获取邀请码', () => {
+	           	     this.$router.push('/register/nocode');
+	              });
+			}
+              mui.toast(response.data.message); 
               return;
             }
             clearAllWebViewCache();
@@ -569,14 +589,27 @@
       
     },
     watch: {
+     registrationCode: function (newValue, oldValue) {
+        this.checkValid();
+      },
       phone: function (newMoney, oldValue) {
         const askDetail = /^[0-9]+$/;
         if (!askDetail.test(newMoney) && this.phone) {
           this.phone = oldValue;
         }
-      }
-    },
-   
+        this.checkSendCodeValid();
+        this.checkValid();
+      },
+      code: function (newValue, oldValue) {
+        this.checkValid();
+	    },
+	    	username: function (newValue, oldValue) {
+		    this.checkValid();
+		},
+		password: function (newValue, oldValue) {
+		    this.checkValid();
+		},
+    }  
   }
 
   export default register;
@@ -593,56 +626,7 @@
     text-align: center;
   }
 
-  /*.title {
-    margin: 100px 0 50px;
-    font-size: 36px;
-    color: #fff;
-  }
-
-  input[type='text'], input[type='password'] {
-    background-color: transparent;
-    border: none;
-    text-align: center;
-
-    color: #fff;
-    margin-bottom: 0;
-
-  }
-
-  .inputWrapper {
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
-    margin: 0 60px;
-    padding: 10px 0;
-    position: relative;
-  }
-
-  .inputWrapper label {
-    position: absolute;
-    left: 0;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    top: 50%;
-    margin-top: -8px;
-  }
-
-  .inputWrapper .getYzm {
-    position: absolute;
-    right: 0;
-    color: rgba(255, 255, 255, .6);
-    bottom: 5px;
-    font-size: 14px;
-  }
-
   
-  .buttonWrapper {
-    padding: 0 112px;
-    margin-top: 40px;
-  }
-
-  .mui-btn-block {
-    padding: 10px 0;
-  }*/
  /*协议*/
  .protocol {
     color: rgb(128,128,128);
@@ -685,21 +669,15 @@
 
   }
 /*小箭头*/
-  .leftNav {
-    position: absolute;
-    padding: 30px;
-    left: 0;
-    top: 0;
-  }
+ 
 
-  .leftNav span {
-    background: url(../statics/images/icon-login-left.png) no-repeat;
-    background-size: cover;
-    width: 10px;
-    height: 17px;
+  .leftNav {
+   
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 12px;
+    top: 15px;
+    font-size: 20px;
+     color: #808080;
   }
 
  /*图标*/
@@ -742,18 +720,18 @@
    .inputWrapper .getYzm {
     display: inline-block;
     font-size: 14px;
-    color: #444;
+    color: #3c95f9;
     position: absolute;
     right: 2px;
     top: 4.2px;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #3c95f9;
     border-radius: 5px;
     padding: 3px 14px;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 1px solid #3c95f9;
-    color: #3c95f9;
+    border: 1px solid #dcdcdc;
+    color: #444;
   }
 
   .inputWrapper:after {
@@ -821,6 +799,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 /*2 3图标大小的微调*/
+.inputWrapper:nth-of-type(3) .icon{
+    position: absolute;
+    top: 3px;
+    font-size: 25px;
+    /*color: #c8c8c8;*/
+    left: 0;
+}
 .inputWrapper:nth-of-type(4) .icon{
     position: absolute;
     top: 3px;
@@ -830,16 +815,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .inputWrapper:nth-of-type(5) .icon{
     position: absolute;
-    top: 2px;
-    font-size: 27px;
-    /*color: #c8c8c8;*/
-    left: 0;
-}
-.inputWrapper:nth-of-type(6) .icon{
-    position: absolute;
     top: 5px;
-    font-size: 21px;
+    font-size: 20px;
     /*color: #c8c8c8;*/
     left: 0;
 }
+
 </style>
