@@ -160,6 +160,7 @@
         }
         this.openid = openid;
       },
+      //提示
       showTip(obj, msg){
         this.errorMsg = msg;
         obj._tooltip.show();

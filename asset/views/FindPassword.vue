@@ -2,9 +2,13 @@
 
   <div class="mui-content">
     <div class="login">
-      <div class="title">找回密码</div>
+      	<svg class="icon logo" aria-hidden="true">
+		  <use xlink:href="#icon-logo"></use>
+		</svg>
+      
+      
       <div class="leftNav" @tap.stop.prevent="goback"><span></span></div>
-      <div class="inputWrapper">
+      <!--<div class="inputWrapper">
         <input class="text" type="text" v-model.trim.num="phone" name="phone"/>
         <label @tap.stop.prevent="entryPhone" v-show="showPhoneLabel">手机号码</label>
       </div>
@@ -16,12 +20,38 @@
       <div class="inputWrapper">
         <input class="text" type="password" v-model.trim="password" name="password"/>
         <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">输入新密码</label>
-      </div>
+      </div>-->
+      
+       <!--输入框-->
+     <div class="inputWrapper half">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shoujihao"></use>
+      </svg>
+      <input class="text" type="text" v-model.trim.num="phone" name="phone"  @tap.stop.prevent="entryPhone" @focus="focus" @blur="blur" placeholder="输入手机号" />
+       <!--<span class="getYzm disabled" @click="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+      <span class="getYzm" @click="getCode"" v-else>{{getCodeText}}</span>-->
+      	
+     <span class="getYzm" @click="getCode" :disabled="!isCanGetCode">{{ getCodeText }}</span>
+    </div>
+      <div class="inputWrapper">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-yanzhengma"></use>
+      </svg>
+      <input class="text" type="text" v-model.number.trim="code" name="code" @tap.stop.prevent="entryYzm" @focus="focus" @blur="blur" placeholder="请输入验证码"/>
+     </div>
+     <div class="inputWrapper">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mima"></use>
+      </svg>
+      <input  type="password" placeholder="输入新密码" class="text"  v-model.trim="password" name="password" @focus="focus" @blur="blur"  @tap.stop.prevent="entryPassword" />
+     </div>
+      
+    <!--点击登录-->
+    <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认修改</button>
 
-
-      <div class="buttonWrapper">
+      <!--<div class="buttonWrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认</button>
-      </div>
+      </div>-->
     </div>
   </div>
 
@@ -94,6 +124,17 @@
       });
     },
     methods: {
+    	//变颜色；
+     focus(event){
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
+        event.target.parentElement.className += ' focus';
+      },
+      blur(){
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
+        event.target.parentElement.className += ' blur';
+      },
       goback () {
         mui.back();
       },
@@ -340,69 +381,18 @@
     position:absolute;
     width:100%;
     min-height:100%;
-    background:#3c3e44;
+    background:#f3f4f6;
     background-size: cover;
     text-align: center;
   }
 
-  .title{
-    margin:100px 0 100px;
-    font-size:36px;
-    color:#fff;
+ .logo{
+   
+    font-size: 110px;
+     margin:110px 0 75px; 
+    
   }
 
-  input[type='text'],input[type='password']{
-    background-color:transparent;
-    border:none;
-    text-align: center;
-    color:#fff;
-    margin-bottom:0;
-
-  }
-
-  .inputWrapper{
-    border-bottom:1px solid rgba(255,255,255,.3);
-    margin:0 60px;
-    padding:10px 0;
-    position: relative;
-  }
-
-  .inputWrapper label{
-    position: absolute;
-    left:0;
-    color:#fff;
-    width:100%;
-    text-align: center;
-    top:50%;
-    margin-top:-8px;
-  }
-
-  .inputWrapper .getYzm{
-    position: absolute;
-    right:0;
-    color:rgba(255,255,255,.6);
-    bottom:5px;
-    font-size:14px;
-  }
-
-  .protocol{
-    color:#fff;
-    font-size:14px;
-    padding: 10px 80px;
-
-  }
-  .protocol span{
-    color:#F6A623;
-  }
-
-  .buttonWrapper{
-    padding:0 112px;
-    margin-top: 150px;
-  }
-
-  .mui-btn-block {
-    padding: 10px 0;
-  }
 
   .leftNav{
     position: absolute;
@@ -419,4 +409,145 @@
     left:10px;
     top:10px;
   }
+ 
+ 
+ 
+ /*输入框的内容*/
+   .inputWrapper .icon {
+    position: absolute;
+    top: 5px;
+    font-size: 22px;
+    color: #c8c8c8;
+    left: 0;
+    
+  }
+
+  .inputWrapper {
+    margin: 0 33px 22px;
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
+
+  }
+
+  .inputWrapper.focus {
+
+    /*&:after {
+      background-color: #3c95f9;
+    }*/
+
+    .icon {
+      color: #808080;
+    }
+  }
+
+  .inputWrapper .getYzm {
+    display: inline-block;
+    font-size: 14px;
+    color: #444;
+    position: absolute;
+    right: 2px;
+    top: 4.5px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 3px 14px;
+  }
+
+  .inputWrapper .getYzm.disabled {
+    border: 1px solid #3c95f9;
+    color: #3c95f9;
+  }
+
+  .inputWrapper:after {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+
+  .inputWrapper input {
+    color: #444;
+    border: none;
+    margin: 0;
+    /*padding: 0 0 0 36px;*/
+    font-size: 14px;
+    background: none;
+    display: inline-block;
+    height: 36px;
+    margin-left: 12px;
+  }
+  
+  
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color:#b4b4b6;
+}
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color:#b4b4b6;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color:#b4b4b6;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color:#b4b4b6;
+}
+
+
+/*登录*/
+.button, .mui-btn {
+    border-radius: 5px;
+    color: #f2f2f2;
+    width: 78%;
+    margin-left: 11%;
+    margin-top: 30px;
+    background: #3C95F9;
+}
+
+
+/*2 3图标大小的微调*/
+.inputWrapper:nth-of-type(3) .icon{
+    position: absolute;
+    top: 5px;
+    font-size: 25px;
+    /*color: #c8c8c8;*/
+   
+    left: 0;
+}
+.inputWrapper:nth-of-type(4) .icon{
+    position: absolute;
+    top: 5px;
+    font-size: 20px;
+    /*color: #c8c8c8;*/
+    left: 0;
+}
+/*手机号input输入框的调整*/
+.inputWrapper:nth-of-type(2) input {
+    color: #444;
+    border: none;
+    margin: 0;
+    font-size: 14px;
+    background: none;
+    display: inline-block;
+    height: 36px;
+    margin-left: 12px;
+     /*background: #ccc; */
+    width: 60%;
+    margin-right: 40%;
+}
+
+.half:after {
+    position: absolute;
+    right: 36%;
+    bottom: 3px;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    background-color: #dcdcdc;
+}
 </style>
