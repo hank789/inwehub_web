@@ -292,7 +292,7 @@
         event.target.parentElement.className += ' blur';
       },
       jumpToForm(){
-          this.$router.push('/register/nocode');
+          this.$router.pushPlus('/register/nocode');
       },
       goback () {
         mui.back();
