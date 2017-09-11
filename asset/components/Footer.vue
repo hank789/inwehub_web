@@ -66,7 +66,7 @@
 
 
   </nav>
-  
+
   </div>
 </template>
 
@@ -75,7 +75,7 @@
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import localEvent from '../stores/localStorage';
   import {setAppBadgeNumber} from '../utils/notice';
-  
+
   import ShortTcutComponent from '../components/ShortTcut.vue';
 
   export default {
@@ -92,7 +92,7 @@
     props: {
     },
     mounted () {
-    	
+
     	  //this.$refs.short.show();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
@@ -145,6 +145,10 @@
                 case 4:
                     // 阅读发现有新的通知
                     break;
+                case 5:
+                  // 积分变动通知
+                  mui.toast(notification.title + " " + notification.body);
+                  break;
               }
             });
         }

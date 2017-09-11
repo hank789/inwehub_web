@@ -32,7 +32,7 @@ if (!window.isLocalEnv) {
 }
 
 router.pushReadHubPage = function (url) {
-  if (mui.os.plus && mui.os.ios) {
+  if (mui.os.plus) {
     openReadhubPage(url);
   } else {
     router.push('/discover?redirect_url='+url);
