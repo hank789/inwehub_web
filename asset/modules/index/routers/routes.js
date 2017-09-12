@@ -59,6 +59,42 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ //首页活动列表页
+		path: '/home/ActiveList',
+    name: 'home-ActiveList',
+    meta: {
+			title: '活动及机遇',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Activity/ActiveList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //首页机遇列表页
+		path: '/home/OpportunityList',
+    name: 'home-OpportunityList',
+    meta: {
+			title: '活动及机遇',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Activity/OpportunityList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //首页报名页面
+		path: '/home/EnrollmentStatus',
+    name: 'home-EnrollmentStatus.vue',
+    meta: {
+			title: '活动及机遇',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Activity/EnrollmentStatus.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
 	{
 		path: '/login',
     name: 'login',
@@ -102,6 +138,22 @@ const routes = [{
 		component: require('../../../views/Account/my.vue'),
 		meta: {
 			title: '我的',
+			keepAlive: true
+		},
+		beforeEnter: (to, from, next) => {
+			// 检查版本更新
+			mui.plusReady(function() {
+				checkUpdate();
+			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ //成长说明；
+		path: '/my/Growth',
+    name: 'my-Growtht',
+		component: require('../../../views/Account/Growth.vue'),
+		meta: {
+			title: '成长说明',
 			keepAlive: true
 		},
 		beforeEnter: (to, from, next) => {

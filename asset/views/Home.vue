@@ -80,9 +80,36 @@
 					    {{experts.work_years?experts.work_years:"0"}}年
 					</p>
 				</swiper-slide>
-
+                <swiper-slide class="moreExperts">
+	                	<div>
+	                		<span class="Expertround">
+	                		<svg class="icon" aria-hidden="true" >
+						  <use xlink:href="#icon-shouyegengduozhuanjia" ></use>
+						</svg>
+						</span>
+						<p>查看更多专家</p>
+	                	</div>
+                </swiper-slide>
               </swiper>
-
+            <!--活动区-->
+            <div class="activity">
+            	   <div class="weeklyActivity">
+            	   	 <img src="../statics/images/bg_login.png" />
+            	   	 <p>活动</p>
+            	   </div>
+            	   <div class="opportunities">
+            	   	  <div class="newcomers">
+            	   	  	<img src="../statics/images/bg_login.png" />
+            	   	  	<p>机遇</p>
+            	   	  </div>
+            	      <div class="latestWeekly">
+            	      	<img src="../statics/images/bg_login.png" />
+            	      	<p>机遇</p>
+            	      </div>
+            	   </div>
+            	   
+            </div>
+ 
 			<!--向你推荐 -->
 			<div class="home-reading">
 				<div class="reader-upper">
@@ -160,13 +187,13 @@
 			loading: true,
 			timeAutoEndTimeOut: false,
 			swiperOption:{},
-      isWeixin:false,
-      isH5:false,
+            isWeixin:false,
+            isH5:false,
 		}),
 		created() {
 			this.swiperOption = {
 				pagination: '.swiper-pagination',
-				loop: true,
+//				loop: true,
 			    slidesPerView : 3,
                 spaceBetween :10,
                 onTap:this.swipperClick
@@ -625,7 +652,7 @@
 		height: 170px;
 		background: #FFFFFF;
 		margin-top: 5px;
-		margin-bottom: 10px;
+		
 	}
 
 	#home-recommend div:nth-of-type(1) {
@@ -709,8 +736,122 @@
 		font-size: 12px;
 	    color: #ffffff;
 	}
-
-
+    /*查看更多专家样式*/
+  .moreExperts{
+  	width: 118.333px;
+    margin-right: 10px;
+    margin-top: 11px;
+    height: 148px;
+    background: #ececee;
+    position: relative;
+  }
+   .moreExperts>div{
+   	width: 80%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    /*background: #CCCCCC;*/
+   }
+   .moreExperts>div>span{
+   	display: inline-block;
+    border: 1px solid #b4b4b6;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 25%;
+    position: relative;
+   }
+    .moreExperts>div svg{
+    	 font-size: 30px;
+    	 position: absolute;
+    	 left: 0;
+    	 right: 0;
+    	 top: 0;
+    	 bottom: 0;
+    	 margin: auto;
+    	 text-align: center;
+    	 color: #b4b4b6;
+    }
+    .moreExperts>div p{
+    	 text-align: center;
+    	 color: #444444;
+    	 font-size: 12px;
+    	 margin-top: 2px;
+    }
+    
+    /*活动*/
+   .activity{
+   	width:100%;
+   	height: 204px;
+   	padding:11px 4%;
+   	background: #ececee;
+   }
+   .weeklyActivity{
+   	 width: 54%;
+   	 height: 100%;
+   	 background:#C8C7CC;
+   	 float: left;
+   	 position:relative;
+   } 
+   .weeklyActivity>img{
+   	position: absolute;
+    width: 100%;
+    height: 100%;
+   }
+   .weeklyActivity>p{
+   	width: 37px;
+   	height: 18px;
+   	background:#444444;
+   	opacity: 0.7;
+   	text-align: center;
+   	line-height: 18px;
+   	color: #FFFFFF;
+    border-radius: 0 50px 50px 0;
+    font-size: 12px;
+    margin-top: 14px;
+   } 
+   .opportunities{
+   	 width: 43%;
+   	 height: 100%;
+   	 /*background: #03AEF9;*/
+   	 margin-left: 3%;
+   	 float: left;
+   	  
+   }
+   .newcomers{
+   	width: 100%;
+   	height: 46.5%;
+   	background: #009FE8;
+   	float: left;
+   	position:relative;
+   }
+   .latestWeekly{
+   	width: 100%;
+   	height: 46.5%;
+   	margin-top: 7%;
+   	background: #C8C8C8;
+   	float: left;
+   	position:relative;
+   }
+   .newcomers>p,.latestWeekly>p{
+   	width: 37px;
+   	height: 18px;
+   	background:#444444;
+   	opacity: 0.7;
+   	text-align: center;
+   	line-height: 18px;
+   	color: #FFFFFF;
+    border-radius: 0 50px 50px 0;
+    font-size: 12px;
+    margin-top: 12px;
+   }
+  .newcomers>img,.latestWeekly>img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    }
+    
 	/*向你推荐*/
 
 	.home-reading {

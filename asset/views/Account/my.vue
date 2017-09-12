@@ -43,20 +43,12 @@
 					<p>{{total_score}}</p>
 				</div>
 
-				<!--<div class="my-progress">
-					<span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
-					<span>{{account_info_complete_percent}}%</span>
-					<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
-						<use xlink:href="#icon-jinggao"></use>
-					</svg>
-					<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
-				</div>-->
 				<ul class="my-infuence">
-					<li>
+					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
 						<p class="mui-ellipsis">{{user_credits }}</p>
 						<p>成长值</p>
 					</li>
-					<li>
+					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
 						<p class="mui-ellipsis">{{user_coins }}</p>
 						<p>贡献值</p>
 					</li>
