@@ -386,9 +386,9 @@
         let mobile = this.phone?this.phone:'';
         let type = 'register';
         
-//      if (!this.isCanGetCode) {
-//        return;
-//      }
+        if (!this.isCanGetCode) {
+          return;
+        }
 
         if (!this.registrationCode) {
           mui.toast("请输入邀请码");
@@ -418,7 +418,7 @@
 
             var code = response.data.code;
             if (code !== 1000) {
-              this.isCanGetCode = false;
+              this.isCanGetCode = true;
               var message = response.data.message;
               //验证码超时 邀请码错误； 
 			if(message.indexOf("邀请码错误") > 0 ){
