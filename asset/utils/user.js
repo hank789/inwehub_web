@@ -238,7 +238,8 @@ function getUserLevelPercentage()
   console.log('userCredits:' + userCredits);
 
   var result = (userLevel-1) * 25   +    (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]) * 25;
-  console.log('UserLevelPercentage:' + result);
+  console.log('UserLevelPercentage-1:' + (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]));
+  console.log('UserLevelPercentage-2:' + result);
   return result;
 }
 
