@@ -38,13 +38,12 @@
 <script type="text/javascript">
   import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
   import {getLocalUserInfo} from '../utils/user';
-
-  var userInfo = getLocalUserInfo();
-
+  
   export default {
     methods: {
       skip(num) {
 
+        var userInfo = getLocalUserInfo();
         switch (num) {
           case 1:
             var companyStatus = parseInt(userInfo.company_status);
