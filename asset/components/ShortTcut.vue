@@ -37,49 +37,25 @@
 <!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
   import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
-  import {getLocalUserInfo} from '../utils/user';
-  
+  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
+  import userAbility from '../utils/userAbility';
+
   export default {
     methods: {
       skip(num) {
-
-        var userInfo = getLocalUserInfo();
         switch (num) {
           case 1:
-            var companyStatus = parseInt(userInfo.company_status);
-            switch (companyStatus) {
-              case 0: //没有认证去认证
-              case 1:
-              case 3:
-                this.$router.push('/company/my?back=%2Fmy');
-                break;
-              case 2:
-                this.$router.push('/project/basic');
-                break;
-            }
+            userAbility.addProject();
             break;
           case 2:
-            this.$router.push('/ask');
+            userAbility.addAsk();
             break;
           case 3:
-            var expertStatus = parseInt(userInfo.expert_apply_status);
-            switch(parseInt(expertStatus)) {
-              case 0:
-              case 3:
-                this.$router.push('/my/pilot');
-                  break;
-              case 2:
-                mui.toast('您已经是专家');
-                  break;
-              case 1:
-                mui.toast('认证审核中');
-                break;
-            }
+            userAbility.applyProfessor();
             break;
           case 4:
-            this.$router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
+            userAbility.addArticle();
             break;
-
         }
         this.hide();
       },

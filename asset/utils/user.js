@@ -196,6 +196,28 @@ function getLocalUserInfo()
     return UserInfo;
 }
 
+/**
+ * 是否通过企业认证
+ */
+function isCompanyStatus()
+{
+    var userInfo = getLocalUserInfo();
+    var companyStatus = parseInt(userInfo.company_status);
+    var result = false;
+    switch (companyStatus) {
+      case 0: //没有认证去认证
+      case 1:
+      case 3:
+        result = false;
+        break;
+      case 2:
+        result = true;
+        break;
+    }
+    return result;
+}
+
+
 export {
   getUserInfo,
   updateUserInfoCache,
@@ -203,5 +225,6 @@ export {
   updateUserInfo,
   isExpert,
   followingUser,
+  isCompanyStatus,
   getLocalUserInfo
 };
