@@ -33,7 +33,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
           styles: {
             popGesture: popGesture
           },
-          extras:{preload: false},
+          extras:{preload: true},
           waiting: {
             autoShow: false
           }
@@ -62,7 +62,7 @@ function openReadhubPage(url) {
     styles: {
       popGesture: 'hide'
     },
-    extras:{preload: false},
+    extras:{preload: true},
     waiting: {
       autoShow: false
     }
@@ -197,32 +197,30 @@ function showWebview(){
   if (mui.os.plus) {
       mui.plusReady(() => {
         var self = plus.webview.currentWebview();
+        self.show();
+        if (mui.os.ios) {
+          self.addEventListener('popGesture', (e)=>{
+            if(e.type == "end" && e.result == true){
+              var parent_webview = self.opener();
+              if (parent_webview){
+                console.log('calledEvent: popGesture：'+parent_webview.getURL());
 
-        if (self.preload === false || self.preload === undefined){
-          self.show();
-          if (mui.os.ios) {
-            self.addEventListener('popGesture', (e)=>{
-              if(e.type == "end" && e.result == true){
-                var parent_webview = self.opener();
-                if (parent_webview){
-                  console.log('calledEvent: popGesture：'+parent_webview.getURL());
+                //触发父页面的自定义事件(refresh),从而进行刷新
+                mui.fire(parent_webview, 'refreshData', {childId: self.id});
+                //刷新当前页数据
+                mui.fire(self, 'refreshData', {parentId: parent_webview.id});
 
-                  //触发父页面的自定义事件(refresh),从而进行刷新
-                  mui.fire(parent_webview, 'refreshData', {childId: self.id});
-                  //刷新当前页数据
-                  mui.fire(self, 'refreshData', {parentId: parent_webview.id});
+                //触发父页面的自定义事件(refresh),从而进行刷新
+                mui.fire(parent_webview, 'refreshPageData', {childId: self.id});
+                //刷新当前页数据
+                mui.fire(self, 'refreshPageData', {parentId: parent_webview.id});
 
-                  //触发父页面的自定义事件(refresh),从而进行刷新
-                  mui.fire(parent_webview, 'refreshPageData', {childId: self.id});
-                  //刷新当前页数据
-                  mui.fire(self, 'refreshPageData', {parentId: parent_webview.id});
-
-                  mui.fire(parent_webview, 'autoHeight', {childId: self.id});
-                }
+                mui.fire(parent_webview, 'autoHeight', {childId: self.id});
               }
-            }, false);
-          }
+            }
+          }, false);
         }
+
       });
   }
 }

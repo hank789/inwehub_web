@@ -76,7 +76,7 @@
         var app_version = localEvent.getLocalItem('app_version');
         if (currentUser.user_id){
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({ "email": currentUser.email,"user_level": currentUser.user_level, "app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
         }
       }
 
@@ -96,7 +96,7 @@
               dock: 'top',
               bottom: '75px',
               bounce:'none'},
-            extras: {}
+            extras: {preload: true}
           });
           mui.preload({
             url: url,
@@ -104,7 +104,7 @@
             styles: {
               popGesture: 'hide'
             },
-            extras: {}
+            extras: {preload: true}
           });
 
           console.log("inwehub_embed:"+inwehub_embed_view.getURL());

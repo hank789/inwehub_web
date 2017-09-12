@@ -107,9 +107,9 @@
             	      	<p>机遇</p>
             	      </div>
             	   </div>
-            	   
+
             </div>
- 
+
 			<!--向你推荐 -->
 			<div class="home-reading">
 				<div class="reader-upper">
@@ -301,6 +301,7 @@
                 article_title: title,
                 article_comment_url: pathUrl,
                 article_img_url:img_url,
+                preload: true
               }
             });
           } else {
@@ -340,7 +341,10 @@
 							},
 							waiting: {
 								autoShow: false
-							}
+							},
+              extras: {
+                preload: true
+              }
 						});
 					} else {
 						window.location.href = url;
@@ -652,7 +656,7 @@
 		height: 170px;
 		background: #FFFFFF;
 		margin-top: 5px;
-		
+
 	}
 
 	#home-recommend div:nth-of-type(1) {
@@ -779,7 +783,7 @@
     	 font-size: 12px;
     	 margin-top: 2px;
     }
-    
+
     /*活动*/
    .activity{
    	width:100%;
@@ -793,7 +797,7 @@
    	 background:#C8C7CC;
    	 float: left;
    	 position:relative;
-   } 
+   }
    .weeklyActivity>img{
    	position: absolute;
     width: 100%;
@@ -810,14 +814,14 @@
     border-radius: 0 50px 50px 0;
     font-size: 12px;
     margin-top: 14px;
-   } 
+   }
    .opportunities{
    	 width: 43%;
    	 height: 100%;
    	 /*background: #03AEF9;*/
    	 margin-left: 3%;
    	 float: left;
-   	  
+
    }
    .newcomers{
    	width: 100%;
@@ -851,7 +855,7 @@
     width: 100%;
     height: 100%;
     }
-    
+
 	/*向你推荐*/
 
 	.home-reading {
