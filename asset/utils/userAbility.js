@@ -76,12 +76,37 @@ var userAbility = () => {
      router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   };
 
+  /**
+   * 活动或机遇报名
+   */
+  var applyActivity = () => {
+
+  };
+
+  /**
+   * 首页查看更多专家
+   */
+  var moreProfessor = () => {
+
+  };
+
+
+  /**
+   * 升级等级
+   */
+  var upgradeLevel = () => {
+
+  };
+
   return {
     canDo: canDo,
     addProject: addProject,
     applyProfessor: applyProfessor,
     addAsk:addAsk,
-    addArticle:addArticle
+    addArticle:addArticle,
+    applyActivity:applyActivity,
+    moreProfessor:moreProfessor,
+    upgradeLevel:upgradeLevel
   }
 };
 
