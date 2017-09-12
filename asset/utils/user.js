@@ -217,6 +217,32 @@ function isCompanyStatus()
     return result;
 }
 
+/**
+ * 获取用户等级百分比
+ */
+function getUserLevelPercentage()
+{
+  var levelCredits = [
+      0,
+      1000,
+      5000,
+      50000,
+      100000
+  ];
+  var userInfo = getLocalUserInfo();
+  var userCredits = userInfo.user_credits;
+  var userLevel = userInfo.user_level;
+
+
+  console.log('userLevel:' + userLevel);
+  console.log('userCredits:' + userCredits);
+
+  var result = (userLevel-1) * 25   +    (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]) * 25;
+  console.log('UserLevelPercentage-1:' + (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]));
+  console.log('UserLevelPercentage-2:' + result);
+  return result;
+}
+
 
 export {
   getUserInfo,
@@ -226,5 +252,6 @@ export {
   isExpert,
   followingUser,
   isCompanyStatus,
-  getLocalUserInfo
+  getLocalUserInfo,
+  getUserLevelPercentage
 };

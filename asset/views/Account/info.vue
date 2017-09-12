@@ -44,7 +44,7 @@
 			<p class="info-progresbar">
 				<span class="info-progress"><i :style="'width:'+ user.info.account_info_complete_percent +'%'"></i></span>
 				<span class="info-text">{{ user.info.account_info_complete_percent }}%</span>
-				<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
+				<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="warn()">
 					<use xlink:href="#icon-jinggao"></use>
 				</svg>
 				<!--<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>-->
@@ -145,7 +145,7 @@
 		},
 		methods: {
 			//警告框
-			wran() {
+			warn() {
 				var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
 					'<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>';
 				var title = '<p style="font-size:16px; margin-bottom:15px">' +

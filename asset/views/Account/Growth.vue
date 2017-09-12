@@ -8,7 +8,7 @@
 			<div class="integral">
 				<p class="GetPoints">
 			       <span>我的积分</span>
-				   <span>如何获取积分</span>
+				   <span @tap.stop.prevent="warn()">如何获取积分</span>
 				   <i class="bot"></i>
 				</p>
 				<div class="growth">
@@ -42,8 +42,10 @@
 				<div class="Member">
 					<p>会员等级L2</p>
 					<p>由当前成长值决定，成长值从产生开始有效期1年</p>
+					<p class="Prompt">
+					    <b :style="'left:'+ (percent-6) +'%'">{{user_credits}}</b>
+					</p>
 					<div class="ProgressBar">
-						
 						<div>
 						   <i :style="'width:'+ percent +'%'"></i>
 						</div>
@@ -262,13 +264,14 @@
 				<p>为保证用户权益，平台可能会在一段时间内适当调整积分和等级计划。</p>
 				<p>法律允许的范围内，本公司保留对成长计划的最终解释权。</p>
 			</div>
+            <b>123000</b>
         </div>
         <div id="statusBarStyle" background="#FEFFFE"   bgColor="#f3f4f6" mode="dark"></div>
     </div>
 </template>
 
 <script>
-  import {getLocalUserInfo, getUserInfo} from '../../utils/user';
+  import {getLocalUserInfo, getUserInfo, getUserLevelPercentage} from '../../utils/user';
   import {USERS_APPEND} from '../../stores/types';
   
    var userInfo = getLocalUserInfo('UserInfo');
@@ -276,7 +279,7 @@
     data() {
       return {
         loading: 1,
-        percent: userInfo.account_info_complete_percent,//百分比
+        percent: 0,//百分比
         user_credits:userInfo.user_credits,//成长值
 	    user_coins: userInfo.user_coins,//贡献值
 	    user_level: userInfo.user_level,//等级
@@ -288,17 +291,37 @@
         console.log('refresh-my');
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
-          this.percent = user.info.account_info_complete_percent;
-          this.expert_apply_status = user.info.expert_apply_status;
-
+          this.user_credits =user.info.user_credits;
+          this.user_coins =user.info.user_coins;
+          this.user_level =user.info.user_level;
          
 
         }));
-      }
+      },
+      //警告框
+		warn() {
+			
+			var title = '<p style="font-size:16px; margin-bottom:15px">' +'获取积分提升等级解锁特权' + '</p>'
+			var font = '<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' +
+			           '<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
+			           '积极参与平台活动任务，可有效累积成长与贡献值，提升等级解锁新特权。' + 
+			           '</p>' +
+				'<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' + 
+				'<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
+				'常见获取积分的手段有：每日登陆并维护个人资料，完成新手任务，提交文章参与评论互动，积极提问回答问题，认证平台专家，报名活动，对接企业项目需求等。' + '</p>'+
+				'<p style="text-align: left; font-size:14px; color: #808080;">' + 
+				'<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
+				'用户每次可获取的平台成长和贡献值，一般按照以上顺序及贡献程度依次增加。' + '</p>';
+				
+
+			var btnArray = ['取消', '确认'];
+			mui.alert(font, title, function() {}, 'div');
+		},
 
 
     },
     mounted() {
+    	  this.percent = getUserLevelPercentage();
       console.log(this.user_level);
     },
     activated: function () {
@@ -520,15 +543,25 @@
 	font-size: 12px;
 	margin-top: 3px;
 } 
+.Prompt{
+	width: 86%;
+	height: 40px;
+	top:20px;
+	margin-left: 7%;
+	/*background: #CCCCCC;*/
+	position: relative;
+}
  /*进度条*/
  
 .ProgressBar{
 	width: 100%;
 	height: 40px;
-	margin-top: 65px;
+	margin-top: 6px;
 	position: relative;
+	/*background: #CCCCCC;*/
 	
 } 
+
 .ProgressBar>div{
   width: 86%;
   height: 2px;
@@ -729,6 +762,7 @@
     font-size: 14px;
     color: #03aef9;
     margin-top: 7px;
+    
 	
 }
 .powerdetail li .yellow{
@@ -754,7 +788,40 @@
 .power p span.bg:nth-of-type(1){
 	background: url(../../statics/images/rank.png) no-repeat;
 	background-size: 100%;
+	
+	
 }
 
 
+
+b {
+	display: block;
+	width: 45px;
+	padding: 0 2px;
+	height: 25px;
+	background:#03aef9;
+	text-align: center;
+	font-size: 12px;
+	color: #FFFFFF;
+	line-height: 25px;
+	border-radius: 8px;
+	position: absolute;
+	
+}
+
+b::after {
+	content: "";
+	display: block;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-right: 6px solid #03aef9;
+	border-bottom: 6px solid #03aef9;
+	position: absolute;
+	transform: rotate(45deg);
+	bottom: -2px;
+	left:16px;
+}
+
 </style>
+
