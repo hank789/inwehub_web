@@ -31,7 +31,7 @@
 						<i></i>
 						<span>平台价值贡献，后续开放积分兑换礼品等活动</span>
 					</p>
-				</div>	
+				</div>
 			</div>
 			<!--我的等级-->
 			<div class="Grade">
@@ -43,7 +43,7 @@
 					<p>会员等级L2</p>
 					<p>由当前成长值决定，成长值从产生开始有效期1年</p>
 					<div class="ProgressBar">
-						
+
 						<div>
 						   <i :style="'width:'+ percent +'%'"></i>
 						</div>
@@ -61,8 +61,8 @@
 							<span>L4</span>
 							<span>L5</span>
 						</p>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 							<p>专业问答</p>
 							<p class="text_yellow" v-if="user_level >='1'">已获取</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 					    <li>
 							<svg class="icon yellow" aria-hidden="true"  v-if="user_level >='1'">
@@ -101,7 +101,7 @@
 							<p>评论互动</p>
 							<p class="text_yellow" v-if="user_level >='1'">已获取</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 						 <li>
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
@@ -113,7 +113,7 @@
 							<p>问答任务</p>
 							<p  class="text_blue" v-if="user_level >='1'">前往完成</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 						 <li>
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
@@ -127,7 +127,7 @@
 							<p v-else>升级解锁</p>
 						</li>
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -157,9 +157,9 @@
 							<p class="text_yellow" v-if="user_level >='2'">升级解锁</p>
 							<p v-else>已获取</p>
 						</li>
-						 
+
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -212,7 +212,7 @@
 							<p v-else>已获取</p>
 						</li>
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -235,26 +235,26 @@
 							<svg class="icon yellow" aria-hidden="true" v-if="user_level >='4'">
 							  <use xlink:href="#icon-gengduozhuanjia"></use>
 							</svg>
-							<svg class="icon" aria-hidden="true" v-else> 
+							<svg class="icon" aria-hidden="true" v-else>
 							  <use xlink:href="#icon-gengduozhuanjia"></use>
 							</svg>
 							<p>更多专家</p>
 							<p class="text_yellow" v-if="user_level >='4'">升级解锁</p>
 							<p v-else>已获取</p>
 						</li>
-						
+
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
 					   <span :class="{bg:user_level >= 5}">5</span>
 					   <span>L5（成长值满100000，平台定向邀请开放秘密特权)</span>
 					</p>
-					
-					
+
+
 				</div >
-				
+
 			</div>
 			<!--积分申明-->
 			<div class="instruction">
@@ -268,15 +268,15 @@
 </template>
 
 <script>
-  import {getLocalUserInfo, getUserInfo} from '../../utils/user';
+  import {getLocalUserInfo, getUserInfo, getUserLevelPercentage} from '../../utils/user';
   import {USERS_APPEND} from '../../stores/types';
-  
+
    var userInfo = getLocalUserInfo('UserInfo');
   export default {
     data() {
       return {
         loading: 1,
-        percent: userInfo.account_info_complete_percent,//百分比
+        percent: 0,//百分比
         user_credits:userInfo.user_credits,//成长值
 	    user_coins: userInfo.user_coins,//贡献值
 	    user_level: userInfo.user_level,//等级
@@ -288,17 +288,14 @@
         console.log('refresh-my');
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user);
-          this.percent = user.info.account_info_complete_percent;
           this.expert_apply_status = user.info.expert_apply_status;
-
-         
-
         }));
       }
 
 
     },
     mounted() {
+      this.percent = getUserLevelPercentage();
       console.log(this.user_level);
     },
     activated: function () {
@@ -324,7 +321,7 @@
 		list-style: none;
 		font-style: normal;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right:0;
@@ -336,8 +333,8 @@
 		background-color: rgb(220, 220, 220);
 	}
 	.mui-content.absolute{
-  	background: #FEFFFE; 
-  	padding:0px 16px 0 16px;	
+  	background: #FEFFFE;
+  	padding:0px 16px 0 16px;
   }
   /*页面内容*/
  .integral{
@@ -426,9 +423,9 @@
     height: 196px;
  	float: right;
  	position: relative;
- 	
+
  }
- 
+
  .contribution p:nth-child(1){
  	width: 94px;
  	height: 94px;
@@ -519,20 +516,20 @@
 	color: #DCDCDC;
 	font-size: 12px;
 	margin-top: 3px;
-} 
+}
  /*进度条*/
- 
+
 .ProgressBar{
 	width: 100%;
 	height: 40px;
 	margin-top: 65px;
 	position: relative;
-	
-} 
+
+}
 .ProgressBar>div{
   width: 86%;
   height: 2px;
-  background: #7F807F;	
+  background: #7F807F;
   margin-left: 7%;
   margin-top: 15px;
 }
@@ -541,7 +538,7 @@
 	width: 25%;
 	height: 2px;
 	background: #03aef9;
-} 
+}
 .fouce{
 	width: 86%;
 	height: 2px;
@@ -550,7 +547,7 @@
 	top: -1px;
 	position: absolute;
 }
- 
+
 .fouce span{
 	display: block;
 	float: left;
@@ -559,7 +556,7 @@
 	background: #FFFFFF;
 	border-radius: 50%;
 	position: absolute;
-} 
+}
 .fouce span:nth-of-type(1){
 	left: 0;
 }
@@ -585,14 +582,14 @@
 	top: 6px;
 	position: absolute;
 }
- 
+
 .number span{
 	display: block;
 	float: left;
     color: #dcdcdc;
     font-size: 12px;
 	position: absolute;
-} 
+}
 .number span:nth-of-type(1){
 	left: 0;
 }
@@ -608,8 +605,8 @@
 .number span:nth-of-type(5){
 	left: 99%;
 }
- 
- 
+
+
  /*特权*/
  .privilege{
  	width: 100%;
@@ -637,7 +634,7 @@
 }
 .power p{
    width: 100%;
-   overflow: hidden; 
+   overflow: hidden;
    margin-bottom: 5px;
 }
 .power p span:nth-of-type(1){
@@ -699,7 +696,7 @@
 
 .powerdetail li:nth-child(1),.powerdetail li:nth-child(4){
 	margin-left: 6%;
-	
+
 }
 /****积分说明*****/
 .instruction{
@@ -710,7 +707,7 @@
 .instruction p{
 	font-size: 13px;
 	color:#808080 ;
-	
+
 }
 .instruction p:nth-of-type(1){
 	margin-top: 17px;
@@ -729,7 +726,7 @@
     font-size: 14px;
     color: #03aef9;
     margin-top: 7px;
-	
+
 }
 .powerdetail li .yellow{
 	color:#fcc816;
@@ -745,7 +742,7 @@
     font-size: 14px;
     color: #fcc816;
     margin-top: 7px;
-	
+
 }
 
 
