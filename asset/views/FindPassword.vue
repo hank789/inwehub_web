@@ -5,7 +5,7 @@
       	<svg class="icon logo" aria-hidden="true">
 		  <use xlink:href="#icon-logo"></use>
 		</svg>
-      
+
         <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
 		  <use xlink:href="#icon-fanhui"></use>
 		</svg>
@@ -22,7 +22,7 @@
         <input class="text" type="password" v-model.trim="password" name="password"/>
         <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">输入新密码</label>
       </div>-->
-      
+
        <!--输入框-->
      <div class="inputWrapper half">
       <svg class="icon" aria-hidden="true">
@@ -31,7 +31,7 @@
       <input class="text" type="text" v-model.trim.num="phone" name="phone"  @tap.stop.prevent="entryPhone" @focus="focus" @blur="blur" placeholder="输入手机号" />
        <!--<span class="getYzm disabled" @click="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
       <span class="getYzm" @click="getCode"" v-else>{{getCodeText}}</span>-->
-      	
+
      <span class="getYzm" @click="getCode" :disabled="!isCanGetCode">{{ getCodeText }}</span>
     </div>
       <div class="inputWrapper">
@@ -46,7 +46,7 @@
       </svg>
       <input  type="password" placeholder="输入新密码" class="text"  v-model.trim="password" name="password" @focus="focus" @blur="blur"  @tap.stop.prevent="entryPassword" />
      </div>
-      
+
     <!--点击登录-->
     <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认修改</button>
 
@@ -203,20 +203,13 @@
           }
         )
         .then(response => {
-          if(response.data.code === 0 || response.data.status) {
-            // 删除网络问题
-            this.cleanErrors();
-            this.time = 60;
-            this.timer();
-          }
-
-          this.timer ();
-
           var code = response.data.code;
           if (code !== 1000) {
             this.isCanGetCode = true;
             mui.toast(response.data.message);
-            return;
+          } else {
+            this.time = 60;
+            this.timer();
           }
         })
         .catch(({ response: { data = {} } = {} }) => {
@@ -388,24 +381,24 @@
   }
 
  .logo{
-   
+
     font-size: 110px;
-     margin:110px 0 75px; 
-    
+     margin:110px 0 75px;
+
   }
 
 /*小箭头*/
   .leftNav {
-   
+
     position: absolute;
     left: 12px;
     top: 15px;
     font-size: 20px;
     color: #808080;
   }
- 
- 
- 
+
+
+
  /*输入框的内容*/
    .inputWrapper .icon {
     position: absolute;
@@ -413,7 +406,7 @@
     font-size: 22px;
     color: #c8c8c8;
     left: 0;
-    
+
   }
 
   .inputWrapper {
@@ -475,18 +468,18 @@
     height: 36px;
     margin-left: 15px;
   }
-  
-  
- input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+
+
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color:#b4b4b6;
 }
-input:-moz-placeholder, textarea:-moz-placeholder { 
+input:-moz-placeholder, textarea:-moz-placeholder {
     color:#b4b4b6;
 }
-input::-moz-placeholder, textarea::-moz-placeholder { 
+input::-moz-placeholder, textarea::-moz-placeholder {
     color:#b4b4b6;
 }
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:#b4b4b6;
 }
 
@@ -508,7 +501,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     top: 5px;
     font-size: 25px;
     /*color: #c8c8c8;*/
-   
+
     left: 0;
 }
 .inputWrapper:nth-of-type(3) .icon{
