@@ -176,6 +176,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
+  import userAbility from '../../utils/userAbility';
 
 	export default {
 		data() {
@@ -255,19 +256,7 @@
 
 			},
 			toApply(status) {
-				switch(status) {
-					case 0:
-						this.$router.pushPlus('/my/pilot');
-						break;
-					case 1:
-						this.$router.pushPlus('/expert/apply/success?type=0');
-						break;
-					case 3:
-						this.$router.pushPlus('/my/pilot');
-						break;
-
-				}
-
+          userAbility.applyProfessor();
 			},
 			getNumbers: function(number) {
 				var html = '';

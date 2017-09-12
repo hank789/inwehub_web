@@ -51,13 +51,13 @@ var userAbility = () => {
     switch (parseInt(expertStatus)) {
       case 0:
       case 3:
-        router.push('/my/pilot');
+        router.pushPlus('/my/pilot');
         break;
       case 2:
         mui.toast('您已经是专家');
         break;
       case 1:
-        mui.toast('认证审核中');
+        router.pushPlus('/expert/apply/success?type=0');
         break;
     }
   };
