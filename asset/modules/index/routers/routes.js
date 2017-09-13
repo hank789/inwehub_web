@@ -148,6 +148,30 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ // 我的报名 活动
+		path: '/my/Discount',
+    name: 'my-Discount', 
+    meta: {
+			title: '我的报名',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Account/DiscountList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ // 我的报名 机遇
+		path: '/my/Chance',
+    name: 'my-enroll',
+    meta: {
+			title: '我的报名',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Account/ChanceList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
 	{ //成长说明；
 		path: '/my/Growth',
     name: 'my-Growtht',
@@ -957,18 +981,18 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // bid
-		path: '/bid',
-    name: 'my-bid',
-    meta: {
-			title: '我的竞标',
-			wechatHideHeader: true
-		},
-		component: require('../../../views/Bid.vue'),
-		beforeEnter: (to, from, next) => {
-			requestAuth(to, from, next)
-		}
-	},
+//	{ // bid
+//		path: '/bid',
+//  name: 'my-bid',
+//  meta: {
+//			title: '我的竞标',
+//			wechatHideHeader: true
+//		},
+//		component: require('../../../views/Bid.vue'),
+//		beforeEnter: (to, from, next) => {
+//			requestAuth(to, from, next)
+//		}
+//	},
 	// { // discover detail
 	//   path: '/discover/detail',
 	//   meta: {

@@ -103,9 +103,9 @@
 					<span v-html="getNumbers(answers)"></span>
 					<span>我的回答</span>
 				</li>
-				<li @tap.stop.prevent="$router.pushPlus('/bid')">
+				<li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
 					<span v-html="getNumbers(0)"></span>
-					<span>我的竞标</span>
+					<span>我的报名</span>
 				</li>
 				<li @tap.stop.prevent="exclusive(company_apply_status)">
 					<span v-html="getNumbers(projects)"></span>
