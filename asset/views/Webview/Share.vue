@@ -47,18 +47,34 @@
       title: '',
     }),
     created () {
-      this.title =  this.$route.query.title;
 
-      if (mui.os.plus) {
-        mui.plusReady(() => {
-          var currentWebview = plus.webview.currentWebview();
+    },
+    methods: {
+      initWebview(page_tile,share_title,share_link,share_content,share_imageUrl,share_thumbUrl) {
+        this.title =  page_tile;
+        if (mui.os.plus) {
+            var data = {
+              title: share_title,
+              link: share_link,
+              content: share_content,
+              imageUrl: share_imageUrl,
+              thumbUrl: share_thumbUrl,
+            };
 
+            Share.bindShare(
+              this,
+              data,
+              this.successCallback,
+              this.failCallback
+            );
+
+        } else {
           var data = {
-            title: currentWebview.title,
-            link: currentWebview.link,
-            content: currentWebview.content,
-            imageUrl: currentWebview.imageUrl,
-            thumbUrl: currentWebview.thumbUrl,
+            title: 'test',
+            link: 'test',
+            content: 'test',
+            imageUrl: 'test',
+            thumbUrl: 'test',
           };
 
           Share.bindShare(
@@ -67,26 +83,8 @@
             this.successCallback,
             this.failCallback
           );
-        });
-      } else {
-        var data = {
-          title: 'test',
-          link: 'test',
-          content: 'test',
-          imageUrl: 'test',
-          thumbUrl: 'test',
-        };
-
-        Share.bindShare(
-          this,
-          data,
-          this.successCallback,
-          this.failCallback
-        );
-      }
-
-    },
-    methods: {
+        }
+      },
       toggleShareNav() {
           mui('#shareShowWrapper').popover('toggle');
       },
@@ -155,7 +153,13 @@
     ,
     mounted()
     {
-
+      document.addEventListener('load_inwehub_article_share', (event) => {
+        this.initWebview(event.detail.page_title,event.detail.title,event.detail.link,event.detail.content,event.detail.imageUrl,event.detail.thumbUrl);
+      });
+      mui.plusReady(() => {
+        var ws = plus.webview.currentWebview();
+        this.initWebview(ws.page_title,ws.title,ws.link,ws.content,ws.imageUrl,ws.thumbUrl);
+      });
     }
   }
 

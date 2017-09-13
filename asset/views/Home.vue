@@ -280,9 +280,17 @@
               window.ga('set', 'page', url);
               window.ga('send', 'pageview');
             }
-            mui.openWindow({
+            var article_params = {
+              article_id: id,
+              article_url: url,
+              article_title: title,
+              article_comment_url: pathUrl,
+              article_img_url:img_url,
+              preload: true
+            };
+            var article_ws = mui.openWindow({
               url: 'index.html#/webview/article',
-              id: 'readhub_article_'+id,
+              id: 'inwehub_article_view',
               preload: false, //一定要为false
               createNew: false,
               show: {
@@ -295,15 +303,9 @@
               waiting: {
                 autoShow: false
               },
-              extras: {
-                article_id: id,
-                article_url: url,
-                article_title: title,
-                article_comment_url: pathUrl,
-                article_img_url:img_url,
-                preload: true
-              }
+              extras: article_params
             });
+            mui.fire(article_ws,'load_article',article_params);
           } else {
 //            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
 
