@@ -93,16 +93,16 @@
               </swiper>
             <!--活动区-->
             <div class="activity">
-            	   <div class="weeklyActivity">
+            	   <div class="weeklyActivity" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
             	   	 <img src="../statics/images/bg_login.png" />
             	   	 <p>活动</p>
             	   </div>
             	   <div class="opportunities">
-            	   	  <div class="newcomers">
+            	   	  <div class="newcomers" @tap.stop.prevent="$router.pushPlus('/home/OpportunityList')">
             	   	  	<img src="../statics/images/bg_login.png" />
             	   	  	<p>机遇</p>
             	   	  </div>
-            	      <div class="latestWeekly">
+            	      <div class="latestWeekly" @tap.stop.prevent="$router.pushPlus('/home/OpportunityList')">
             	      	<img src="../statics/images/bg_login.png" />
             	      	<p>机遇</p>
             	      </div>

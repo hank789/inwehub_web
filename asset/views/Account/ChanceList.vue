@@ -99,7 +99,7 @@ import { createAPI, addAccessToken, postRequest } from '../../utils/request';
       },
 			//下拉刷新请求的数据；
 			getPrevList() {
-				postRequest(`activity/list`, {activity_type:2}).then(response => {
+				postRequest(`activity/list`, {activity_type:2,is_mine:1}).then(response => {
 					var code = response.data.code;
 					//如果请求不成功提示信息 并且返回上一页；
 					if(code !== 1000) {
@@ -129,6 +129,8 @@ import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 			getNextList() {
 				postRequest("activity/list", {
 					activity_type:2,
+					is_mine:1,
+					page:this.page
 				}).then(response => {
 					var code = response.data.code;
 					if(code !== 1000) {
