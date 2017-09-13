@@ -105,6 +105,7 @@ function updateUserInfoCache(user) {
   userLocal.show_my_wallet = user.show_my_wallet;
   userLocal.show_ios_resume = user.show_ios_resume;
   userLocal.uuid = user.uuid;
+  userLocal.newbie_unfinish_tasks = user.newbie_unfinish_tasks;
 
   /*
    user.counts.map(function (count, index) {
