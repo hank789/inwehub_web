@@ -94,17 +94,20 @@
             <!--活动区-->
             <div class="activity">
             	   <div class="weeklyActivity" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	   	 <img src="../statics/images/bg_login.png" />
-            	   	 <p>活动</p>
+            	   	 <img  :src="recommend_activity[0].image_url"/>
+            	   	 <p v-if="recommend_activity[0].activity_type =='1'">活动</p>
+            	   	 <p v-if="recommend_activity[0].activity_type =='2'">机遇</p>
             	   </div>
             	   <div class="opportunities">
-            	   	  <div class="newcomers" @tap.stop.prevent="$router.pushPlus('/home/OpportunityList')">
-            	   	  	<img src="../statics/images/bg_login.png" />
-            	   	  	<p>机遇</p>
+            	   	  <div class="newcomers" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
+            	   	  	<img :src="recommend_activity[1].image_url" />
+            	   	  	<p v-if="recommend_activity[1].activity_type =='1'">活动</p>
+            	   	   <p v-if="recommend_activity[1].activity_type =='2'">机遇</p>
             	   	  </div>
-            	      <div class="latestWeekly" @tap.stop.prevent="$router.pushPlus('/home/OpportunityList')">
-            	      	<img src="../statics/images/bg_login.png" />
-            	      	<p>机遇</p>
+            	      <div class="latestWeekly" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
+            	      	<img :src="recommend_activity[2].image_url" />
+            	      	<p v-if="recommend_activity[2].activity_type =='1'">活动</p>
+            	   	    <p v-if="recommend_activity[2].activity_type =='2'">机遇</p>
             	      </div>
             	   </div>
 
@@ -172,14 +175,19 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
-  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
-  import {queryParent} from '../utils/dom';
+    import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
+    import {queryParent} from '../utils/dom';
 
 	const Home = {
 		data: () => ({
 			is_expert:"",
 			recommend_read:"",
 			recommend_experts:"",
+			recommend_activity:[
+			  {image_url:''},
+			  {image_url:''},
+			  {image_url:''}
+			],
 			firstAsk: false,
 			couponExpireAtTime: '',
 			notices: [],
@@ -209,7 +217,6 @@
 		},
 		mounted() {
 			//showInwehubWebview();
-
       if (!mui.os.plus) {
           if (mui.os.wechat) {
               this.isWeixin = true;
@@ -423,16 +430,23 @@
 					if(response_data === false) {
 						return;
 					}
-
+                     
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
+				   //首页推荐活动
+				   t.recommend_activity = response_data.recommend_activity;
 				   //推荐阅读；
 				   t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
 					t.is_expert = response_data.expert_apply_status;
-
+ 
+ 
+  
+ 
+ 
+ 
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
 
@@ -789,7 +803,7 @@
     /*活动*/
    .activity{
    	width:100%;
-   	height: 204px;
+   	height: 157px;
    	padding:11px 4%;
    	background: #ececee;
    }
