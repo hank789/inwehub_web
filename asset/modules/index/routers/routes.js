@@ -84,7 +84,7 @@ const routes = [{
 		}
 	},
 	{ //首页报名页面
-		path: '/home/EnrollmentStatus',
+		path: '/EnrollmentStatus/:id',
     name: 'home-EnrollmentStatus.vue',
     meta: {
 			title: '活动及机遇',
