@@ -56,7 +56,19 @@
 
 
 
-    <div class="mui-content list-empty" v-if="nothing == 1">
+    <div class="mui-content list-empty absolute" v-if="nothing == 1">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks')">
+            未完成
+        </a>
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            已完成
+          </a>
+        </div>
+      </div>
+
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="">
@@ -438,7 +450,5 @@
   }
 
   .list-empty{
-    padding-top:0 !important;
-    margin-top:-6px;
   }
 </style>
