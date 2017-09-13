@@ -32,14 +32,14 @@
 				     <li v-for="item in list">
 				     	<img :src="item.image_url" />
 				     	<p>{{item.title}}</p>
-				     	<p>
+				     	<p>  
 				     		<span>{{item.created_at}} </span>
-				     		<span class="blue"  v-if="item.status =='1'">立即报名</span>
-				     		<span class="gray"  v-if="item.status =='2'">报名结束</span>
-				     		<span class="yellow" v-if="item.status =='3'">报名申请中</span>
-				     		<span class="yellow" v-if="item.status =='4'">报名成功</span>
-				     		<span class="gray"  v-if="item.status =='5'">报名失败</span>
-				     		<span class="blue"  v-if="item.status =='6'">重新申请</span>
+				     		<span class="blue"  v-if="item.status =='1'"   @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">立即报名</span>
+				     		<span class="gray"  v-if="item.status =='2'"  @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名结束</span>
+				     		<span class="yellow" v-if="item.status =='3'"  @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名申请中</span>
+				     		<span class="yellow" v-if="item.status =='4'"  @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名成功</span>
+				     		<span class="gray"  v-if="item.status =='5'"  @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名失败</span>
+				     		<span class="blue"  v-if="item.status =='6'"   @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">重新申请</span>
 				     	</p>
 				     	<i class="bot"></i>
 				     </li>
