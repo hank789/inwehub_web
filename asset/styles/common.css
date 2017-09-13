@@ -984,6 +984,22 @@ input.upload-file[type=file]{
 
 
 /** 弹窗 **/
+.alertZoom .alertClose {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  top: 110px;
+  z-index: 3;
+  color: #808080;
+}
+.alertZoom .mui-popup-buttons {
+  display: none;
+}
+.alertZoom .mui-popup-inner {
+  background: #fff;
+  text-align: left;
+  padding: 20px 15px 15px !important;
+}
 .alertZoom .titlePre {
   position: relative;
   top: 27px;
@@ -1016,6 +1032,9 @@ input.upload-file[type=file]{
   background-size: contain;
   background-repeat: no-repeat;
 }
+.alertZoom .mui-popup-title {
+  display: none;
+}
 .alertZoom .mui-popup-button {
   background: #fff;
   color: #03aef9;
@@ -1040,11 +1059,12 @@ input.upload-file[type=file]{
 .alertSkyTwo .titlePre {
   position: relative;
   top: 24px;
-  padding-top: 88px;
+  padding: 88px 10px 0 10px;
   z-index: 1;
   left: 0;
   display: block;
   width: 100%;
+  text-align: left;
   height: 216px;
   background-image: url("../statics/images/alert-question-2.png");
   background-position: center;
@@ -1052,15 +1072,14 @@ input.upload-file[type=file]{
   background-repeat: no-repeat;
 }
 .alertSkyTwo .mui-popup-inner {
+  text-align: left;
   background: #fff;
   border-radius: 0 !important;
   padding: 0 15px 15px !important;
 }
-
 .alertSkyTwo .mui-popup-buttons {
   display: none;
 }
-
 .alertSkyTwo .mui-popup-button {
   background: #fff;
   color: #03aef9;
@@ -1138,4 +1157,5 @@ input.upload-file[type=file]{
     transform: none;
   }
 }
+
 /** 弹窗结束 **/
