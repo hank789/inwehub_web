@@ -981,3 +981,161 @@ input.upload-file[type=file]{
 	top: -40%;
     z-index: 9999;
 }
+
+
+/** 弹窗 **/
+.alertZoom .titlePre {
+  position: relative;
+  top: 27px;
+  z-index: 2;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 116px;
+  background-image: url("../statics/images/alert-zoom-bg@2x.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: titlePreDown;
+  animation-name: titlePreDown;
+}
+.alertZoom .titlePre2 {
+  position: absolute;
+  top: 30px;
+  z-index: 2;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 92px;
+  background-image: url("../statics/images/alert-zoom-ha@2x.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.alertZoom .mui-popup-button {
+  background: #fff;
+  color: #03aef9;
+  font-weight: normal;
+  font-size: 16px;
+}
+.alertSkyTwo .alertClose {
+  position: absolute;
+  right: 10px;
+  top: 74px;
+  z-index: 3;
+  color: #808080;
+}
+.alertSkyTwo .titlePreIcon {
+  position: absolute;
+  left: 50%;
+  font-size: 80px;
+  top: 38px;
+  margin-left: -40px;
+  z-index: 3;
+}
+.alertSkyTwo .titlePre {
+  position: relative;
+  top: 24px;
+  padding-top: 88px;
+  z-index: 1;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 216px;
+  background-image: url("../statics/images/alert-question-2.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.alertSkyTwo .mui-popup-inner {
+  background: #fff;
+  border-radius: 0 !important;
+  padding: 0 15px 15px !important;
+}
+
+.alertSkyTwo .mui-popup-buttons {
+  display: none;
+}
+
+.alertSkyTwo .mui-popup-button {
+  background: #fff;
+  color: #03aef9;
+  font-weight: normal;
+  font-size: 16px;
+}
+.alertSkyTwo.alertSkyTwo-one .titlePre {
+  background-image: url("../statics/images/alert-question-1.png");
+}
+.alertSkyTwo.alertSkyTwo-one .mui-popup-text {
+  position: relative;
+  top: -29px;
+}
+@-webkit-keyframes titlePreDown {
+  0%,
+  60%,
+  75%,
+  90%,
+  100% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes titlePreDown {
+  0%,
+  60%,
+  75%,
+  90%,
+  100% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
+  100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+/** 弹窗结束 **/
