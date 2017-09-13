@@ -34,7 +34,10 @@ function checkUpdate(){
                     }
                   }, inf.title, ["立即下载","暂不下载","取消"]);
                 }, "com.tencent.android.qqdownloader");
-              } else {
+              } else if ((is_ios_force === 2 && mui.os.ios) || (is_android_force === 2 && mui.os.android)) {
+                //什么都不做
+              }
+              else {
                 //下载升级包
                 downWgt(package_url);
               }
