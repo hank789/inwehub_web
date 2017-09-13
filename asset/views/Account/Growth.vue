@@ -114,6 +114,7 @@
 							</svg>
 							<p>问答任务</p>
 							<p  class="text_blue" v-if="user_level >='1'">前往完成</p>
+							<p class="text_yellow" v-else-if = "newbie_unfinish_tasks[3]">已获取</p>
 							<p v-else>升级解锁</p>
 							
 						</li>
@@ -124,8 +125,9 @@
 							<svg class="icon" aria-hidden="true" v-else>
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>
-							<p>互动任务</p>
+							<p>互动任务</p>   
 							<p class="text_blue" v-if="user_level >='1'">前往完成</p>
+							<p class="text_yellow" v-else-if ="newbie_unfinish_tasks[2]">已获取</p>
 							<p v-else>升级解锁</p>
 						</li>
 					</ul>
@@ -283,6 +285,7 @@
         user_credits:userInfo.user_credits,//成长值
 	    user_coins: userInfo.user_coins,//贡献值
 	    user_level: userInfo.user_level,//等级
+	    newbie_unfinish_tasks:userInfo.newbie_unfinish_tasks,
       }
     },
     methods: {
@@ -294,7 +297,8 @@
           this.user_credits =user.info.user_credits;
           this.user_coins =user.info.user_coins;
           this.user_level =user.info.user_level;
-         
+          this.newbie_unfinish_task = user.info.newbie_unfinish_tasks;
+
 
         }));
       },
@@ -322,7 +326,7 @@
     },
     mounted() {
     	  this.percent = getUserLevelPercentage();
-      console.log(this.user_level);
+      console.log(userInfo.newbie_unfinish_tasks);
     },
     activated: function () {
       console.log('activated');
