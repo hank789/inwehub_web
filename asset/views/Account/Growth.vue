@@ -145,8 +145,8 @@
 							  <use xlink:href="#icon-chengchangye-chengweizhuanjia"></use>
 							</svg>
 							<p>成为专家</p>
-							<p class="text_yellow" v-if="user_level >='2'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='2'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 					    <li>
 							<svg class="icon yellow" aria-hidden="true"  v-if="user_level >='2'">
@@ -156,8 +156,8 @@
 							  <use xlink:href="#icon-chengchangye-chengweizhuanjia"></use>
 							</svg>
 							<p>活动报名</p>
-							<p class="text_yellow" v-if="user_level >='2'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='2'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						 
 					</ul>
@@ -177,8 +177,8 @@
 							  <use xlink:href="#icon-chengchangye-fabuqiyexuqiu"></use>
 							</svg>
 							<p>企业需求对接</p>
-							<p class="text_yellow" v-if="user_level >='3'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						 <li>
 						 	<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
@@ -188,8 +188,8 @@
 							  <use xlink:href="#icon-wendashequ"></use>
 							</svg>
 							<p>问答社区</p>
-							<p class="text_yellow" v-if="user_level >='3'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						 <li>
 						 	<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
@@ -199,8 +199,8 @@
 							  <use xlink:href="#icon-xiangmujiyu"></use>
 							</svg>
 							<p>项目机遇</p>
-							<p class="text_yellow" v-if="user_level >='3'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						 <li>
 						 	<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
@@ -210,8 +210,8 @@
 							  <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
 							</svg>
 							<p>专属秘书</p>
-							<p class="text_yellow" v-if="user_level >='3'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 					</ul>
 					
@@ -230,8 +230,8 @@
 							  <use xlink:href="#icon-fujinqiye"></use>
 							</svg>
 							<p>附近企业</p>
-							<p class="text_yellow" v-if="user_level >='4'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='4'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						 <li>
 							<svg class="icon yellow" aria-hidden="true" v-if="user_level >='4'">
@@ -241,8 +241,8 @@
 							  <use xlink:href="#icon-gengduozhuanjia"></use>
 							</svg>
 							<p>更多专家</p>
-							<p class="text_yellow" v-if="user_level >='4'">升级解锁</p>
-							<p v-else>已获取</p>
+							<p class="text_yellow" v-if="user_level >='4'">已获取</p>
+							<p v-else>升级解锁</p>
 						</li>
 						
 					</ul>
@@ -264,7 +264,7 @@
 				<p>为保证用户权益，平台可能会在一段时间内适当调整积分和等级计划。</p>
 				<p>法律允许的范围内，本公司保留对成长计划的最终解释权。</p>
 			</div>
-            <b>123000</b>
+           
         </div>
         <div id="statusBarStyle" background="#FEFFFE"   bgColor="#f3f4f6" mode="dark"></div>
     </div>
