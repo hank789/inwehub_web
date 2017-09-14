@@ -17,6 +17,19 @@ var userAbility = () => {
 
   var UserInfo = localEvent.getLocalItem('UserInfo');
 
+  function getDialogObj(context)
+  {
+      if (typeof context !== 'undefined') {
+          var parentObj = context.$parent;
+          if (typeof parentObj !== 'undefined') {
+             return parentObj.$refs.inwehubDialog;
+          } else {
+            return context.$refs.inwehubDialog;
+          }
+      }
+      return false;
+  }
+
   /**
    * 是否可以做某事
    * @param what
