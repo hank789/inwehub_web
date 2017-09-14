@@ -1169,11 +1169,14 @@ input.upload-file[type=file]{
 .alertSimple .mui-popup-title {
   display: none;
 }
+.alertSimple .mui-popup-inner {
+  background: #fff;
+  text-align: left;
+}
 .alertSimple .mui-popup-button {
   background: #fff;
   color: #03aef9;
   font-weight: normal;
   font-size: 16px;
 }
-
 /** 弹窗结束 **/
