@@ -21,9 +21,11 @@ function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = 
     closeDiv.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#icon-guanbi"></use></svg>';
     mui('.mui-popup-in')[0].insertBefore(closeDiv, mui('.mui-popup-in')[0].firstChild);
 
-    closeDiv.onclick = () => {
-      alertObj.close(-1, '');
-    };
+    setTimeout(() => {
+      closeDiv.onclick = () => {
+        alertObj.close(-1, '');
+      };
+    }, 100);
   }
 
   var alertConfirm = alertObj.element.querySelector('.alertConfirm');
@@ -66,9 +68,11 @@ function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, c
     closeDiv.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#icon-guanbi"></use></svg>';
     mui('.mui-popup-in')[0].insertBefore(closeDiv, mui('.mui-popup-in')[0].firstChild);
 
-    closeDiv.onclick = () => {
-      alertObj.close(-1, '');
-    };
+    setTimeout(() => {
+      closeDiv.onclick = () => {
+        alertObj.close(-1, '');
+      };
+    }, 100);
   }
 
   var alertConfirm = alertObj.element.querySelector('.alertConfirm');
@@ -99,9 +103,15 @@ function alertSimple(contentHtml = '', btnString = '确定', callback = null, cl
     closeDiv.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#icon-guanbi"></use></svg>';
     mui('.mui-popup-in')[0].insertBefore(closeDiv, mui('.mui-popup-in')[0].firstChild);
 
-    closeDiv.onclick = () => {
-      alertObj.close(-1, '');
-    };
+    setTimeout(() => {
+      var closeCallback = (e) => {
+        e.stopPropagation();
+        alertObj.close(-1, '');
+        closeDiv.removeEventListener('click', closeCallback, false);
+      };
+
+      closeDiv.addEventListener('click', closeCallback, false);
+    }, 100);
   }
 }
 

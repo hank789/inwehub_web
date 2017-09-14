@@ -11,8 +11,8 @@
             <!--  {{ options.level?options.level:''}}-->
             </div>
         </div>
-        
- 		       
+
+
     </div>
 </template>
 <script type="text/javascript">
@@ -28,7 +28,9 @@
     },
     created(){
         if (this.$route.path == '/dialog/list') {
-            this.style = ''
+            this.style = '';
+        }  else {
+            this.style = 'display:none';
         }
     },
     methods: {
@@ -37,7 +39,7 @@
           this.$nextTick(() => {
             var obj = document.getElementById(id);
             if (obj) {
-              callback(obj.innerHTML.toString().trim().replace(/\n/g, ''));
+              callback(obj.innerHTML.toString().trim().replace(/\n/g, '').replace(/\sdata-v-.*?=""/g, ''));
             } else {
               callback('');
             }
@@ -100,5 +102,5 @@
     text-align: center;
     line-height: 12px;
     color: #FFFFFF;
-}   
+}
 </style>
