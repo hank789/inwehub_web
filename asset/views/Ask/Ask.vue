@@ -144,6 +144,8 @@
 
           if (document.querySelector('.suspension')) {
             fixedDiv.style.top = '249px';
+          } else if (document.querySelector('.suspend')) {
+            fixedDiv.style.top = '254px';
           } else {
             fixedDiv.style.top = '200px';
           }
