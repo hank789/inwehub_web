@@ -1280,7 +1280,7 @@ const routes = [{
   },
   {
     path: '/dialog/list',
-    name: 'open-app',
+    name: 'dialog-list',
     meta: {
       title: 'InweHub'
     },

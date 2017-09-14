@@ -21,7 +21,7 @@ var userAbility = () => {
    * @param what
    * @returns {boolean}
    */
-  var canDo = (what) => {
+  var canDo = (what, context = null) => {
     var result = false;
     switch (what) {
       case 'apply_professor':  //申请专家
@@ -34,7 +34,7 @@ var userAbility = () => {
   /**
    * 发布需求
    */
-  var addProject = () => {
+  var addProject = (context) => {
     if (isCompanyStatus()) {
       router.push('/project/basic');
     } else {
@@ -45,7 +45,7 @@ var userAbility = () => {
   /**
    * 申请专家
    */
-  var applyProfessor = () => {
+  var applyProfessor = (context) => {
     var userInfo = getLocalUserInfo();
     var expertStatus = parseInt(userInfo.expert_apply_status);
     switch (parseInt(expertStatus)) {
@@ -65,28 +65,28 @@ var userAbility = () => {
   /**
    * 专家提问
    */
-  var addAsk = () => {
+  var addAsk = (context) => {
      router.push('/ask');
   };
 
   /**
    * 提交文章
    */
-  var addArticle = () => {
+  var addArticle = (context) => {
      router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   };
 
   /**
    * 活动或机遇报名
    */
-  var applyActivity = () => {
+  var applyActivity = (context) => {
 
   };
 
   /**
    * 首页查看更多专家
    */
-  var moreProfessor = () => {
+  var moreProfessor = (context) => {
 
   };
 
@@ -94,7 +94,7 @@ var userAbility = () => {
   /**
    * 升级等级
    */
-  var upgradeLevel = () => {
+  var upgradeLevel = (context) => {
 
   };
 
