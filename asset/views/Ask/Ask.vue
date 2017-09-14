@@ -141,7 +141,14 @@
 
         mui(".textarea-wrapper").on('focusin', 'textarea', function () {
           fixedDiv.style.position = 'absolute';
-          fixedDiv.style.top = '200px';
+
+          if (document.querySelector('.suspension')) {
+            fixedDiv.style.top = '249px';
+          } else {
+            fixedDiv.style.top = '200px';
+          }
+
+
           textareaWrapper.style.height='156px';
         });
 
