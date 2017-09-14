@@ -11,24 +11,11 @@
 import localEvent from '../stores/localStorage';
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 import router from '../modules/index/routers/index';
-import {alertZoom, alertSkyOne, alertSkyTwo,alertSimple} from '../utils/dialog';
+import {alertZoom, alertSkyOne, alertSkyTwo, alertSimple, getDialogObj} from '../utils/dialog';
 
 var userAbility = () => {
 
   var UserInfo = localEvent.getLocalItem('UserInfo');
-
-  function getDialogObj(context)
-  {
-      if (typeof context !== 'undefined') {
-          var parentObj = context.$parent;
-          if (typeof parentObj !== 'undefined') {
-             return parentObj.$refs.inwehubDialog;
-          } else {
-            return context.$refs.inwehubDialog;
-          }
-      }
-      return false;
-  }
 
   /**
    * 是否可以做某事
@@ -62,15 +49,16 @@ var userAbility = () => {
 
   var applyProfessor = (context) => {
     var userInfo = getLocalUserInfo();
-  		
-  		
+
+
 	if (userInfo.user_level < 4)  {
-		
-		 context.$parent.$refs.inwehubDialog.getHtml('test', {level:userInfo.user_level}, (html) => {
-            console.log('html:'+html);
-            alertSimple(html,'查看等级详情',(index) =>{ },true);
-       });
-       
+	  var dialogObj = getDialogObj(context);
+	  if (dialogObj) {
+      dialogObj.getHtml('test', {level:userInfo.user_level}, (html) => {
+        console.log(html);
+        alertSimple(html, '查看等级详情', (index) =>{ }, true);
+      });
+    }
 	}else{
     var expertStatus = parseInt(userInfo.expert_apply_status);
     switch (parseInt(expertStatus)) {
@@ -86,9 +74,9 @@ var userAbility = () => {
         break;
     }
 	}
-	
-  	
-    
+
+
+
   };
 
   /**
