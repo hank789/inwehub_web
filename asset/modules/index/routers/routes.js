@@ -150,7 +150,7 @@ const routes = [{
 	},
 	{ // 我的报名 活动
 		path: '/my/Discount',
-    name: 'my-Discount', 
+    name: 'my-Discount',
     meta: {
 			title: '我的报名',
 			wechatHideHeader: true
@@ -1277,6 +1277,14 @@ const routes = [{
       title: 'InweHub'
     },
     component: require('../../../views/NoCode.vue'),
+  },
+  {
+    path: '/dialog/list',
+    name: 'open-app',
+    meta: {
+      title: 'InweHub'
+    },
+    component: require('../../../views/DialogList.vue'),
   },
 	{ // message
 		path: '/*',
