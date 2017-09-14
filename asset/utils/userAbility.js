@@ -48,6 +48,7 @@ var userAbility = () => {
    */
 
   var applyProfessor = (context) => {
+
     var userInfo = getLocalUserInfo();
 
 
@@ -59,6 +60,7 @@ var userAbility = () => {
         alertSimple(html, '查看等级详情', (index) =>{ }, true);
       });
     }
+
 	}else{
     var expertStatus = parseInt(userInfo.expert_apply_status);
     switch (parseInt(expertStatus)) {
@@ -97,6 +99,21 @@ var userAbility = () => {
    * 活动或机遇报名
    */
   var applyActivity = (context) => {
+  	
+ var userInfo = getLocalUserInfo();				
+	if (userInfo.user_level < 4)  {	
+		 var dialog = getDialogObj(context);
+		 if (dialog) {
+		 	dialog.getHtml('test', {level:userInfo.user_level}, (html) => {
+	            console.log('html:'+html);
+	            alertSimple(html,'查看等级详情',(index) =>{ },true);
+	       });
+		 }
+       
+	}else{
+		
+	}
+
 
   };
 

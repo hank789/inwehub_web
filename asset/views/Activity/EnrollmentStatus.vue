@@ -33,7 +33,7 @@
 			 	{{data.description}}
 			 </div>
 			 
-			 <div class="feedback">
+			 <div class="feedback" v-if="list.status =='3' || list.status =='4' ">
 			 	<div class="send">
 				 	<input type="text" v-model.trim="comment"  id="text" placeholder="在此留言"/>
 				 	<svg class="icon" aria-hidden="true" @tap.stop.prevent="message()">
@@ -41,8 +41,8 @@
 					</svg>
 				</div>
 				
-				<!--留言--> <!--v-if="list.status =='3' || list.status =='4' "-->
-				<div style="position: relative;width:100%; min-height: 530px;">
+				<!--留言--> <!---->
+				<div style="position: relative;width:100%; min-height: 530px;"  v-if="list.status =='3' || list.status =='4' ">
 				<div class="mui-scroll-wrapper" id="pullrefresh">
 			    <div class="mui-scroll">
 				<ul class="message" >
