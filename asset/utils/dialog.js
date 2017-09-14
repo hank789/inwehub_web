@@ -89,8 +89,26 @@ function alertSkyTwo(titleHtml = '', contentHtml = '', iconType = '', callback =
   alertSky(titleHtml, contentHtml, iconType, callback, close, ['alertSkyTwo']);
 }
 
+function alertSimple(contentHtml = '', btnString = '确定', callback = null, close = true)
+{
+  var alertObj = mui.alert(contentHtml, null, btnString, callback, 'div');
+  mui('.mui-popup-in')[0].classList.add('alertSimple');
+  if (close) {
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'alertClose';
+    closeDiv.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#icon-guanbi"></use></svg>';
+    mui('.mui-popup-in')[0].insertBefore(closeDiv, mui('.mui-popup-in')[0].firstChild);
+
+    closeDiv.onclick = () => {
+      alertObj.close(-1, '');
+    };
+  }
+}
+
+
 export {
   alertZoom,
   alertSkyOne,
-  alertSkyTwo
+  alertSkyTwo,
+  alertSimple
 };
