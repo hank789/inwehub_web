@@ -1,5 +1,6 @@
 <template>
     <div :style="style">
+        <!--级别限制提示的弹窗-->
         <div id="test">
            <div class="p-level">
              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use></svg>
@@ -11,7 +12,52 @@
             <!--  {{ options.level?options.level:''}}-->
             </div>
         </div>
-        
+        <!-- 升级的弹窗-->
+        <div id="p-upgrade">
+        	    <div class="p-upgrade">
+        	    	   <div class="upgrade_t">
+        	    	   	  <p><span>恭喜你升级L2</span>
+        	    	   	  	<span>1</span>
+        	    	   	  </p>
+        	    	   	  <p>以下特权已解锁</p>
+        	    	   </div>
+        	    	   <div class="upgrade_b">
+        	    	   	   <p>
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-chengweizhuanjia"></use></svg>
+        	    	   	   	 <span>成为专家</span>
+        	    	   	   </p>
+        	    	   	   <p>
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-baominghuodong"></use></svg>
+        	    	   	   	 <span>活动报名</span>
+        	    	   	   </p>
+        	    	   </div>
+        	    </div>
+        </div>
+         <!-- 领取新手任务-->
+         <div id="p-task">
+         <div class="p-task">
+             <div class="task_t">
+             	<p>快来领取新手任务!</p>
+             	<p>完成任务参与积分奖励，升级L2获取新特权！</p>
+             </div>
+             
+             <ul class="task_b">
+             	<li>
+             		<p>完善顾问名片</p>
+             		<p>个人信息保持90%以上完整度</p>
+             	</li>
+             	<li>
+             		<p>参与评论互动</p>
+             		<p>前往发现阅读，参与评论</p>
+             	</li>
+             	<li>
+             		<p>发起专业提问</p>
+             		<p>送你首次提问1元特惠卷</p>
+             	</li>
+             </ul>
+             
+         </div>
+         </div>
  		       
     </div>
 </template>
@@ -49,10 +95,15 @@
 
 <style scoped="scoped">
     #test{
-      width:100%;
-      height:100%;
-      background-color:#CCCCCC;
+      width: 240px;
+      height: 110px;
+      border: 1px solid #007AFF;
     }
+    ul,li,p,span,a,i{
+   	margin: 0;
+   	padding: 0;
+   	list-style: none;
+   }
 /*显示等级弹窗样式*/
 .p-level{
 	width: 240px;
@@ -78,6 +129,7 @@
 	width: 36%;
 	margin-left: 32%;
 	height: 20px;
+	margin-top: 3px;
 	/*background: #CCCCCC;*/
 }
 
@@ -100,5 +152,133 @@
     text-align: center;
     line-height: 12px;
     color: #FFFFFF;
-}   
+}
+
+/*升级的弹窗*/
+  #p-upgrade {
+  	  width: 240px;
+      height: 160px;
+      border: 1px solid #009689;
+  }
+  .p-upgrade{
+  	width: 240px;
+    height: 160px;
+   
+  }
+  .upgrade_t{
+  	width: 100%;
+  	height: 65px;
+  	border-bottom: 0.5px dashed #DCDCDC;
+  }
+   .upgrade_t p:nth-of-type(1){
+   	width: 60%;
+   	margin-left: 20%;
+   	height: 21px;
+   	
+   }
+  .upgrade_t p:nth-of-type(1) span:nth-of-type(1){
+  	color: #03aef9;
+  	font-size: 19px;
+  	float: left;
+  	width: 85%;
+  	/*background: #007AFF;*/
+  }
+  .upgrade_t p:nth-of-type(1) span:nth-of-type(2){
+  	width: 15%;
+  	height: 100%;
+  	background:url(../statics/images/rank.png) no-repeat;
+	background-size: 100%;
+	float: left;
+	text-align: center;
+	line-height: 18px;
+	color: #FFFFFF;
+	}
+	
+   .upgrade_t p:nth-of-type(2){
+   	width: 50%;
+   	margin-left: 20%;
+   	text-align: center;
+	line-height: 18px;
+   	margin-top: 3px;
+   	font-size: 14px;
+   	color: #808080;
+   }
+   .upgrade_b{
+   	width: 100%;
+   	height: 95px;
+   	text-align: center;
+   }
+   .upgrade_b > p{
+   	width: 27%;
+   	height: 100%;
+   	/*background: #CCCCCC;*/
+   	float: left;
+   	margin-left: 6%;
+   }
+   .upgrade_b > p svg{
+   	 font-size: 40px;
+   	 color:#fcc916;
+   	 margin-top: 18px;
+   }
+   .upgrade_b > p span{
+   	 display: block;
+   	 font-size:13px ;
+   	 color:#444444;
+   }
+   
+   /*领取新手任务*/
+   #p-task{
+  	width: 245px;
+    height: 280px;
+   
+  }
+  .p-task{
+  	width: 245px;
+    height: 280px;
+    border: 1px solid #ffffff;
+  }
+  .task_t{
+  	width: 100%;
+  	height: 49px;
+  	
+  }
+  .task_t p:nth-of-type(1){
+  	color: #03aef9;
+  	font-size: 16px;
+  	font-weight: 500;
+  	text-align: center;
+  	
+  }
+  .task_t p:nth-of-type(2){
+  	color: #808080;
+  	font-size: 12px;
+  	text-align: center;
+  	
+  }
+  .task_b{
+  	width: 100%;
+  	height:231px;
+  	margin: 0;
+  }
+  .task_b li{
+  	width: 100%;
+  	height: 77px;
+  	text-align: center;
+  	border-bottom: 0.5px solid #DCDCDC;
+  	padding-top: 17px;
+  }
+  .task_b li p:nth-of-type(1){
+  	width: 100%;
+     text-align: center;
+  	font-size: 16px;
+  	color: #444444;
+  
+  }
+   .task_b li p:nth-of-type(2){
+  	font-size: 14px;
+  	color: #808080;
+  }
+  .task_b li:last-child{
+  	border: none;
+  }
 </style>

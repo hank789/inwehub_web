@@ -240,7 +240,10 @@
                 if (!parent) return;
 
                var uuid = parent.getAttribute('uuid');
-              this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+               if(uuid){
+               	this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+               }
+              
 			},
 			detail(url){
 			   this.goLink(url);
