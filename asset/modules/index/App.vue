@@ -178,7 +178,7 @@
                   break;
                 case 'user_following':
                   // 用户关注通知
-                  router.pushPlus('/share/resume?id=' + payload.object_id);
+                  router.pushPlus('/share/resume?id=' + payload.object_id + '&goback=1');
                   break;
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
