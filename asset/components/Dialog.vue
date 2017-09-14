@@ -59,6 +59,7 @@
          </div>
          </div>
  		       
+
     </div>
 </template>
 <script type="text/javascript">
@@ -74,7 +75,9 @@
     },
     created(){
         if (this.$route.path == '/dialog/list') {
-            this.style = ''
+            this.style = '';
+        }  else {
+            this.style = 'display:none';
         }
     },
     methods: {
@@ -83,7 +86,7 @@
           this.$nextTick(() => {
             var obj = document.getElementById(id);
             if (obj) {
-              callback(obj.innerHTML.toString().trim().replace(/\n/g, ''));
+              callback(obj.innerHTML.toString().trim().replace(/\n/g, '').replace(/\sdata-v-.*?=""/g, ''));
             } else {
               callback('');
             }
@@ -153,6 +156,7 @@
     line-height: 12px;
     color: #FFFFFF;
 }
+
 
 /*升级的弹窗*/
   #p-upgrade {
@@ -281,4 +285,5 @@
   .task_b li:last-child{
   	border: none;
   }
+
 </style>
