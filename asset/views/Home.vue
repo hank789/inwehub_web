@@ -252,7 +252,8 @@
 			},
 			//认证专家跳转判断；
 			toApprove() {
-				userAbility.applyProfessor(this);
+//				userAbility.applyProfessor(this);
+                 userAbility.newbieTask(this)
 			},
 			
       goArticle: function(article) {

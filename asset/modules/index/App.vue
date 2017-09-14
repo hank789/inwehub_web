@@ -55,6 +55,8 @@
       }
     },
     created(){
+    		//领取新手任务；
+        	userAbility.newbieTask(this); 	
     },
     components: {
       FooterComponent,
@@ -67,6 +69,8 @@
       }
     },
     mounted () {
+    
+    	
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;

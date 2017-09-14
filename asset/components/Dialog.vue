@@ -16,21 +16,46 @@
         <div id="p-upgrade">
         	    <div class="p-upgrade">
         	    	   <div class="upgrade_t">
-        	    	   	  <p><span>恭喜你升级L2</span>
-        	    	   	  	<span>1</span>
+        	    	   	  <p><span>恭喜你升级L{{options.level?options.level:''}}</span>
+        	    	   	  	<span>{{options.level?options.level:''}}</span>
         	    	   	  </p>
         	    	   	  <p>以下特权已解锁</p>
         	    	   </div>
         	    	   <div class="upgrade_b">
-        	    	   	   <p>
-        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-chengweizhuanjia"></use></svg>
-        	    	   	   	 <span>成为专家</span>
+        	    	   	   <p v-if="options.level =='1'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-zhuanyewenda"></use></svg>
+        	    	   	   	 <span>专业问答</span>
         	    	   	   </p>
-        	    	   	   <p>
+        	    	   	   <p v-if="options.level =='1'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-hudongpinglun"></use></svg>
+        	    	   	   	 <span>评论互动</span>
+        	    	   	   </p>
+        	    	   	   <p v-if="options.level =='2'">
         	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-baominghuodong"></use></svg>
         	    	   	   	 <span>活动报名</span>
         	    	   	   </p>
+        	    	   	   <p v-if="options.level =='2'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-baominghuodong"></use></svg>
+        	    	   	   	 <span>活动报名</span>
+        	    	   	   </p>
+        	    	   	   <p v-if="options.level =='3'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-fabuqiyexuqiu"></use></svg>
+        	    	   	   	 <span>企业需求对接</span>
+        	    	   	   </p>
+        	    	   	   <p v-if="options.level =='3'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-wendashequ"></use></svg>
+        	    	   	   	 <span>问答社区</span>
+        	    	   	   </p>
+        	    	   	    <p v-if="options.level =='3'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangmujiyu"></use></svg>
+        	    	   	   	 <span>项目机遇</span>
+        	    	   	   </p>
+        	    	   	   <p v-if="options.level =='3'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-zhuanshumishu"></use></svg>
+        	    	   	   	 <span>专属秘书</span>
+        	    	   	   </p>
         	    	   </div>
+        	    	   <div class="upgrade_btn alertConfirm">确定</div>
         	    </div>
         </div>
          <!-- 领取新手任务-->
@@ -55,7 +80,7 @@
              		<p>送你首次提问1元特惠卷</p>
              	</li>
              </ul>
-             
+             <div class="task_btn alertConfirm">确定</div>
          </div>
          </div>
  		       
@@ -161,12 +186,12 @@
 /*升级的弹窗*/
   #p-upgrade {
   	  width: 240px;
-      height: 160px;
+      /*height: 160px;*/
       border: 1px solid #009689;
   }
   .p-upgrade{
   	width: 240px;
-    height: 160px;
+    /*height: 160px;*/
    
   }
   .upgrade_t{
@@ -209,8 +234,10 @@
    }
    .upgrade_b{
    	width: 100%;
-   	height: 95px;
+   	/*height: 95px;*/
+   	overflow: hidden;
    	text-align: center;
+   	border-bottom:0.5px solid #DCDCDC ;
    }
    .upgrade_b > p{
    	width: 27%;
@@ -229,16 +256,25 @@
    	 font-size:13px ;
    	 color:#444444;
    }
+   .upgrade_btn{
+   	width:100%;
+   	height: 50px;
+   	/*background: #CCCCCC;*/
+   	text-align: center;
+   	line-height: 50px;
+   	color: #03aef9;
+   	font-size: 16px;
+   }
    
    /*领取新手任务*/
    #p-task{
   	width: 245px;
-    height: 280px;
+    height: 320px;
    
   }
   .p-task{
   	width: 245px;
-    height: 280px;
+    height: 320px;
     border: 1px solid #ffffff;
   }
   .task_t{
@@ -282,8 +318,16 @@
   	font-size: 14px;
   	color: #808080;
   }
-  .task_b li:last-child{
-  	border: none;
-  }
+  
+  
+  .task_btn{
+   	width:100%;
+   	height: 50px;
+   	/*background: #CCCCCC;*/
+   	text-align: center;
+   	line-height: 50px;
+   	color: #03aef9;
+   	font-size: 16px;
+   }
 
 </style>
