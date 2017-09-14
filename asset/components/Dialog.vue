@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="display:none">
         <div id="test">
             <div class="test">
             hello content <b>bold</b>

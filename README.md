@@ -32,3 +32,27 @@ npm run build
   <nav class="footer-bar">
       //页面底部内容
   </nav>
+
+
+dialog使用:
+1. import {alertSkyOne, alertSkyTwo, alertSimple} from '../../utils/dialog';
+     import inwehubDialog from '../../components/Dialog.vue';
+
+2.  components: {
+         inwehubDialog,
+       },
+
+3. <inwehubDialog ref="inwehubDialog"></inwehubDialog>
+
+
+4. this.$refs.inwehubDialog.getHtml('test', {ok:'this is ok'}, (html) => {
+             console.log('html:'+html);
+             alertSimple(html, 'ok');
+         });
+
+
+dialog全局使用
+  this.$parent.$refs.inwehubDialog.getHtml('test', {ok:'this is ok'}, (html) => {
+            console.log('html:'+html);
+            alertSimple(html, 'ok');
+        });

@@ -11,7 +11,7 @@
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
-
+        <inwehubDialog ref="inwehubDialog"></inwehubDialog>
   </div>
 </template>
 
@@ -24,6 +24,7 @@
   import {goBack} from '../../utils/webview';
   import EventObj from '../../utils/event';
   import {setIncBadgeNumber} from '../../utils/notice';
+  import inwehubDialog from '../../components/Dialog.vue';
 
   export default {
     data () {
@@ -57,7 +58,8 @@
     },
     components: {
       FooterComponent,
-      OpenAppComponent
+      OpenAppComponent,
+      inwehubDialog
     },
     watch: {
       $route(to) {
