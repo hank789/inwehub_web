@@ -41,7 +41,7 @@
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="$router.replace('/answerrefuse/' + answer.question.id)"><svg class="mui-icon icon" aria-hidden="true">
+                  @tap.stop.prevent="$router.pushPlus('/answerrefuse/' + answer.question.id)"><svg class="mui-icon icon" aria-hidden="true">
             <use xlink:href="#icon-times"></use>
           </svg>拒绝应答
 
