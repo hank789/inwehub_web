@@ -242,6 +242,8 @@
                var uuid = parent.getAttribute('uuid');
                if(uuid){
                	this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+               }else{
+               	userAbility.moreProfessor(this);
                }
               
 			},
@@ -251,8 +253,8 @@
 			//认证专家跳转判断；
 			toApprove() {
 				userAbility.applyProfessor(this);
-
 			},
+			
       goArticle: function(article) {
 
         var url = article.view_url;

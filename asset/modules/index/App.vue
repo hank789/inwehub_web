@@ -25,7 +25,7 @@
   import EventObj from '../../utils/event';
   import {setIncBadgeNumber} from '../../utils/notice';
   import inwehubDialog from '../../components/Dialog.vue';
-
+  import userAbility from '../../utils/userAbility';
   export default {
     data () {
       return {
@@ -245,6 +245,7 @@
                   break;
                 case 'notification_level_up':
                     // 用户积分等级提升
+                    userAbility.upgradeLevel(this);
                     break;
               }
             };

@@ -57,7 +57,14 @@ var userAbility = () => {
 	  if (dialogObj) {
       dialogObj.getHtml('test', {level:userInfo.user_level}, (html) => {
         console.log(html);
-        alertSimple(html, '查看等级详情', (index) =>{ }, true);
+        alertSimple(html, '查看等级详情', (num) =>{  
+      
+        	 if(num.index == 0){
+//      	 	console.log('my');
+        	 	router.pushPlus('/my/Growth');
+        	 }
+        	
+        }, true);
       });
     }
 
@@ -107,7 +114,14 @@ var userAbility = () => {
 		 if (dialog) {
 		 	dialog.getHtml('test', {level:userInfo.user_level}, (html) => {
 	            console.log('html:'+html);
-	            alertSimple(html,'查看等级详情',(index) =>{ },true);
+	             alertSimple(html, '查看等级详情', (num) =>{  
+      
+			        	 if(num.index == 0){
+			//      	 	console.log('my');
+			        	 	router.pushPlus('/my/Growth');
+			        	 }
+			        	
+			        }, true);
 	       });
 		 }
        
@@ -130,7 +144,14 @@ var userAbility = () => {
 		 if (dialog) {
 		 	dialog.getHtml('test', {level:userInfo.user_level}, (html) => {
 	            console.log('html:'+html);
-	            alertSimple(html,'查看等级详情',(index) =>{ },true);
+	            alertSimple(html, '查看等级详情', (num) =>{  
+      
+        	 if(num.index == 0){
+//      	 	console.log('my');
+        	 	router.pushPlus('/my/Growth');
+        	 }
+        	
+        }, true);
 	       });
 		 }
        
@@ -144,14 +165,54 @@ var userAbility = () => {
    * 首页查看更多专家
    */
   var moreProfessor = (context) => {
+  	  var userInfo = getLocalUserInfo();
+	if (userInfo.user_level < 4)  {
+	  var dialogObj = getDialogObj(context);
+	  if (dialogObj) {
+      dialogObj.getHtml('test', {level:userInfo.user_level}, (html) => {
+        console.log(html);
+         alertSimple(html, '查看等级详情', (num) =>{  
+      
+        	 if(num.index == 0){
+//      	 	console.log('my');
+        	 	router.pushPlus('/my/Growth');
+        	 }
+        	
+        }, true);
+      });
+    }
 
+	}else{
+        
+	}
+     
   };
 
 
   /**
    * 升级等级
    */
-  var upgradeLevel = (context) => {
+  var upgradeLevel = (context, level) => {
+      var userInfo = getLocalUserInfo();
+	if (userInfo.user_level < 4)  {
+	  var dialogObj = getDialogObj(context);
+	  if (dialogObj) {
+      dialogObj.getHtml('test', {level:userInfo.user_level}, (html) => {
+        console.log(html);
+         alertZoome(html, '查看等级详情', (num) =>{  
+      
+        	 if(num.index == 0){
+//      	 	console.log('my');
+        	 	router.pushPlus('/my/Growth');
+        	 }
+        	
+        }, true);
+      });
+    }
+
+	}else{
+        
+	}
 
   };
 
