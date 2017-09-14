@@ -1,6 +1,6 @@
 <template>
   <div>
-    <inwehubDialog ref="inwehubDialog"></inwehubDialog>
+    
   </div>
 </template>
 

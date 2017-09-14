@@ -1,5 +1,5 @@
 <template>
-    <div style="display:none">
+    <div :style="style">
         <div id="test">
             <div class="test">
             hello content <b>bold</b>
@@ -12,10 +12,16 @@
   export default {
     data () {
       return {
+        style:'display:none',
         options: {
             ok:'test'
         },
       }
+    },
+    created(){
+        if (this.$route.path == '/dialog/list') {
+            this.style = ''
+        }
     },
     methods: {
       getHtml(id, options, callback) {
