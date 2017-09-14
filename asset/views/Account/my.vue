@@ -62,7 +62,7 @@
 					</li>
 			     </ul>
 				<div class="my-apply">
-					<div @tap.stop.prevent="toApply(expert_apply_status)">
+					<div @tap.stop.prevent="toApply()">
 						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
@@ -247,8 +247,9 @@
 				//				}
 
 			},
-			toApply(status) {
-          userAbility.applyProfessor();
+			//认证专家；
+			toApply() {
+               userAbility.applyProfessor(this);
 			},
 			getNumbers: function(number) {
 				var html = '';

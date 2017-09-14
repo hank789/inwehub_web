@@ -11,6 +11,7 @@
 import localEvent from '../stores/localStorage';
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 import router from '../modules/index/routers/index';
+import {alertZoom, alertSkyOne, alertSkyTwo,alertSimple} from '../utils/dialog';
 
 var userAbility = () => {
 
@@ -45,8 +46,19 @@ var userAbility = () => {
   /**
    * 申请专家
    */
+
   var applyProfessor = (context) => {
     var userInfo = getLocalUserInfo();
+  		
+  		
+	if (userInfo.user_level < 4)  {
+		
+		 context.$parent.$refs.inwehubDialog.getHtml('test', {level:userInfo.user_level}, (html) => {
+            console.log('html:'+html);
+            alertSimple(html,'查看等级详情',(index) =>{ },true);
+       });
+       
+	}else{
     var expertStatus = parseInt(userInfo.expert_apply_status);
     switch (parseInt(expertStatus)) {
       case 0:
@@ -60,6 +72,10 @@ var userAbility = () => {
         router.pushPlus('/expert/apply/success?type=0');
         break;
     }
+	}
+	
+  	
+    
   };
 
   /**

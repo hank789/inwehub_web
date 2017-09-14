@@ -45,7 +45,7 @@
 					<span >专业问答</span>
 
 				</p>
-				<p @tap.stop.prevent="toApprove(is_expert)">
+				<p @tap.stop.prevent="toApprove()">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-chengweizhuanjia"></use>
 					</svg>
@@ -177,6 +177,7 @@
 	import { openWebviewByHome } from '../utils/webview';
     import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
     import {queryParent} from '../utils/dom';
+    import userAbility from '../utils/userAbility';
 
 	const Home = {
 		data: () => ({
@@ -245,23 +246,8 @@
 			   this.goLink(url);
 			},
 			//认证专家跳转判断；
-			toApprove(status) {
-			switch(status) {
-					case 0:
-						this.$router.pushPlus('/my/pilot');
-						break;
-					case 1:
-						this.$router.pushPlus('/expert/apply/success?type=0');
-						break;
-					//认证专家；
-					case 2:
-						mui.toast("您已经是认证专家了");
-						break;
-					case 3:
-						this.$router.pushPlus('/my/pilot');
-						break;
-
-			}
+			toApprove() {
+				userAbility.applyProfessor(this);
 
 			},
       goArticle: function(article) {
