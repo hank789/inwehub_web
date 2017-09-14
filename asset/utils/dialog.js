@@ -1,8 +1,8 @@
 /**
  * 放大镜
- * 确定class .alertConfirm
+ * 确定class .alertConfirm   .alertConfirm  callback(index, value)
  */
-function alertZoom(contentHtml = '', callback = null, close = true)
+function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true)
 {
   var alertObj = mui.alert(contentHtml, null, null, callback, 'div');
   mui('.mui-popup-in')[0].classList.add('alertZoom');
