@@ -53,7 +53,7 @@
 
 <script>
 import { createAPI, addAccessToken, postRequest } from '../../utils/request';
-import userAbility from '../../utils/userAbility';
+//import userAbility from '../../utils/userAbility';
 	const Discount = {
 		data: () => ({
 			list: [],
