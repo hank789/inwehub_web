@@ -39,7 +39,7 @@
           this.$nextTick(() => {
             var obj = document.getElementById(id);
             if (obj) {
-              callback(obj.innerHTML.toString().trim().replace(/\n/g, '').replace(/\sdata-v-.*?=""/g, ''));
+              callback(obj.innerHTML.toString().trim().replace(/\n/g, ''));
             } else {
               callback('');
             }
