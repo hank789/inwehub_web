@@ -31,13 +31,13 @@
 				     	<img :src="item.image_url" />
 				     	<p>{{item.title}}</p>
 				     	<p>
-				     		<span>{{item.created_at}} </span>
-				     		<span class="blue"  v-if="item.status =='1'"  @tap.stop.prevent="skip(item.id)"  @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">立即报名</span>
-				     		<span class="gray"  v-if="item.status =='2'"  @tap.stop.prevent="skip(item.id)" @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名结束</span>
-				     		<span class="yellow" v-if="item.status =='3'" @tap.stop.prevent="skip(item.id)" @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名申请中</span>
-				     		<span class="yellow" v-if="item.status =='4'" @tap.stop.prevent="skip(item.id)" @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名成功</span>
-				     		<span class="gray"  v-if="item.status =='5'"  @tap.stop.prevent="skip(item.id)" @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">报名失败</span>
-				     		<span class="blue"  v-if="item.status =='6'"  @tap.stop.prevent="skip(item.id)" @tap.stop.prevent="$router.push('/EnrollmentStatus/'+item.id)">重新申请</span>
+				     		<span>{{item.created_at}} </span>  
+				     		<span class="blue"  v-if="item.status =='1'"  @tap.stop.prevent="skip(item.id)"  >立即报名</span>
+				     		<span class="gray"  v-if="item.status =='2'"  @tap.stop.prevent="skip(item.id)">报名结束</span>
+				     		<span class="yellow" v-if="item.status =='3'"@tap.stop.prevent="skip(item.id)">报名申请中</span>
+				     		<span class="yellow" v-if="item.status =='4'" @tap.stop.prevent="skip(item.id)">报名成功</span>
+				     		<span class="gray"  v-if="item.status =='5'" @tap.stop.prevent="skip(item.id)">报名失败</span>
+				     		<span class="blue"  v-if="item.status =='6'"  @tap.stop.prevent="skip(item.id)">重新申请</span>
 				     	</p>
 				     	<i class="bot"></i>
 				     </li>
@@ -53,7 +53,7 @@
 
 <script>
 import { createAPI, addAccessToken, postRequest } from '../../utils/request';
-//import userAbility from '../../utils/userAbility';
+import userAbility from '../../utils/userAbility';
 	const Discount = {
 		data: () => ({
 			list: [],
@@ -84,8 +84,8 @@ import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 		},
 		methods: {
 			//跳转；
-			skip(){
-				
+			skip(id){
+				 userAbility.applyActivity(this,id);
 			},
 			//下拉刷新;
 			pulldownRefresh() {
@@ -262,16 +262,17 @@ import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	/*滚动区域*/
 	ul{
 		width: 100%;
-		height: 227px;
+		/*height: 227px;*/
 		/*background:#CCCCCC;*/
 		position: relative;
+		padding-bottom: 20px;
 		
 	}
 	ul li{
 		width: 92%;
 		height: 227px;
 		/*background:#E4E5E7;*/
-		position: absolute;
+		position: relative;
 		left: 0;
 		right: 0;
 		margin: auto;

@@ -21,12 +21,12 @@
 			  
 			</div>
 			 <div class="btn">
-				 <div class="blue" v-if="list.status =='1'">立即报名</div>
-				 <div class="gray" v-if="list.status =='2'">报名结束</div>
-				 <div class="yellow" v-if="list.status =='3'">报名申请中</div>
-				 <div class="yellow" v-if="list.status =='4'">报名成功</div>
-				 <div class="gray" v-if="list.status =='5'">报名失败</div>
-				 <div class="blue" v-if="list.status =='6'">重新申请</div> 
+				 <button class="blue" v-if="list.status =='1'"    @tap.stop.prevent="signUp()">立即报名</button>
+				 <button class="gray" v-if="list.status =='2'"  @tap.stop.prevent="signUp()">报名结束</button>
+				 <button class="yellow" v-if="list.status =='3'"  @tap.stop.prevent="signUp()">报名申请中</button>
+				 <button class="yellow" v-if="list.status =='4'"  @tap.stop.prevent="signUp()">报名成功</button>
+				 <button class="gray" v-if="list.status =='5'"  @tap.stop.prevent="signUp()">报名失败</button>
+				 <button class="blue" v-if="list.status =='6'"  @tap.stop.prevent="signUp()">重新申请</button> 
 			 </div>
 			 
 			 <div class="back" v-if="data.description">
@@ -98,6 +98,28 @@
 
 		},
 		methods: {
+			//报名；
+			signUp(){
+				let id = parseInt(this.$route.params.id);
+				postRequest(`activity/enroll`, {activity_id:id}).then(response => {
+					var code = response.data.code;
+					//如果请求不成功提示信息 并且返回上一页；
+					if(code !== 1000) {
+						mui.alert(response.data.message);
+						mui.back();
+					}
+					console.log(response.data.data.tip)
+					if(response.data.data) {
+						
+						
+//						mui.toast(response.data.data.tip)
+
+					}
+
+					this.loading = 0;
+				});
+				
+			},
 			getData() {
 				let id = parseInt(this.$route.params.id);
 				postRequest(`activity/detail`, {activity_id:id}).then(response => {
@@ -299,7 +321,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 line-height: 44px;	 
+   	 /*line-height: 44px;*/	 
    }
    .yellow{
    	 width: 100%;
@@ -310,7 +332,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 line-height: 44px;	 
+   	 /*line-height: 44px;*/	 
    }
    .gray{
    	 width: 100%;
@@ -321,7 +343,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 line-height: 44px;	 
+   	 /*line-height: 44px;*/	 
    }
    
    .feedback{

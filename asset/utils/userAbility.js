@@ -52,7 +52,7 @@ var userAbility = () => {
     var userInfo = getLocalUserInfo();
 
 
-	if (userInfo.user_level < 4)  {
+	if (userInfo.user_level < 2)  {
 	  var dialogObj = getDialogObj(context);
 	  if (dialogObj) {
       dialogObj.getHtml('test', {level:userInfo.user_level}, (html) => {
@@ -96,12 +96,13 @@ var userAbility = () => {
   };
 
   /**
-   * 活动或机遇报名
+   * 活动报名
    */
-  var applyActivity = (context) => {
+  var applyActivity = (context, id) => {
   	
- var userInfo = getLocalUserInfo();				
-	if (userInfo.user_level < 4)  {	
+ var userInfo = getLocalUserInfo();	
+ 
+	if (userInfo.user_level < 2)  {	
 		 var dialog = getDialogObj(context);
 		 if (dialog) {
 		 	dialog.getHtml('test', {level:userInfo.user_level}, (html) => {
@@ -111,12 +112,34 @@ var userAbility = () => {
 		 }
        
 	}else{
-		
+		router.pushPlus('/EnrollmentStatus/'+id);
 	}
 
 
   };
 
+ /**
+   * 机遇报名
+   */
+  var applyOpportunity = (context, id) => {
+  	
+ var userInfo = getLocalUserInfo();	
+ 
+	if (userInfo.user_level < 3)  {	
+		 var dialog = getDialogObj(context);
+		 if (dialog) {
+		 	dialog.getHtml('test', {level:userInfo.user_level}, (html) => {
+	            console.log('html:'+html);
+	            alertSimple(html,'查看等级详情',(index) =>{ },true);
+	       });
+		 }
+       
+	}else{
+		router.pushPlus('/EnrollmentStatus/'+id);
+	}
+
+
+  };
   /**
    * 首页查看更多专家
    */
