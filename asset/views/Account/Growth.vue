@@ -268,7 +268,7 @@
 			</div>
            
         </div>
-        <div id="statusBarStyle" background="#FEFFFE"   bgColor="#3c3e44" mode="dark"></div>
+        <div id="statusBarStyle" background="#FEFFFE"   bgColor="#3c3e44" mode="light"></div>
     </div>
 </template>
 

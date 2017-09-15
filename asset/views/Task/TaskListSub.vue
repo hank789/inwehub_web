@@ -28,7 +28,16 @@
 				<div class="mui-scroll"  v-show="nothing == 0">
 				   <ul>
 						<li v-for="(task, index) in tasks"  @tap.stop.prevent="goDetail(task)">
-							<img :src="task.user_avatar_url" />
+							<svg class="icon" aria-hidden="true" v-if="task.task_type =='3'">
+							  <use xlink:href="#icon-mingpianrenwu"></use>
+							</svg>
+							<svg class="icon" aria-hidden="true" v-else-if="task.task_type =='4'">
+							  <use xlink:href="#icon-chengchangye-hudongpinglun"></use>
+							</svg>
+							<svg class="icon" aria-hidden="true" v-else-if="task.task_type =='5'">
+							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
+							</svg>
+							<img :src="task.user_avatar_url"  v-else/>
 							<p>   
 								<span>  
 									<a v-if="task.task_type_description">{{task.task_type_description}}  |</a>
@@ -412,6 +421,15 @@
 		height: 11%;
 		border-radius: 25%;
 		float: left;
+	}
+	ul li svg {
+		width: 11%;
+		/*height: 11%;*/
+		/*border-radius: 25%;*/
+		/*background: #CCCCCC;*/
+		float: left;
+		color: #03aef9;
+		font-size: 42px;
 	}
 	
 	ul li p {

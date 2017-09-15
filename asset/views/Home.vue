@@ -94,18 +94,18 @@
             <!--活动区-->
             <div class="activity">
             	   <div class="weeklyActivity" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	   	 <img  :src="recommend_activity[0].image_url"/>
+            	   	 <img  :src="recommend_activity[0].image_url" v-show="recommend_activity[0].image_url"/>
             	   	 <p v-if="recommend_activity[0].activity_type =='1'">活动</p>
             	   	 <p v-if="recommend_activity[0].activity_type =='2'">机遇</p>
             	   </div>
             	   <div class="opportunities">
             	   	  <div class="newcomers" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	   	  	<img :src="recommend_activity[1].image_url" />
+            	   	  	<img :src="recommend_activity[1].image_url" v-show="recommend_activity[1].image_url"/>
             	   	  	<p v-if="recommend_activity[1].activity_type =='1'">活动</p>
             	   	   <p v-if="recommend_activity[1].activity_type =='2'">机遇</p>
             	   	  </div>
             	      <div class="latestWeekly" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	      	<img :src="recommend_activity[2].image_url" />
+            	      	<img :src="recommend_activity[2].image_url"  v-show="recommend_activity[2].image_url"/>
             	      	<p v-if="recommend_activity[2].activity_type =='1'">活动</p>
             	   	    <p v-if="recommend_activity[2].activity_type =='2'">机遇</p>
             	      </div>
@@ -425,7 +425,11 @@
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
 				   //首页推荐活动
-				   t.recommend_activity = response_data.recommend_activity;
+				   for (var i in response_data.recommend_activity) {
+				   	   t.recommend_activity[i] = response_data.recommend_activity[i];
+				   }
+				   
+				   
 				   //推荐阅读；
 				   t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
