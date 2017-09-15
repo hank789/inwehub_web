@@ -55,8 +55,7 @@
       }
     },
     created(){
-    		//领取新手任务；
-        	userAbility.newbieTask(this); 	
+    		
     },
     components: {
       FooterComponent,

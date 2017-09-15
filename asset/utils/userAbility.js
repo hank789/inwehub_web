@@ -51,7 +51,7 @@ var userAbility = () => {
   var applyProfessor = (context) => {
 
     var userInfo = getLocalUserInfo();
-   console.log(localEvent.getLocalItem(num))
+   
 
 	if (userInfo.user_level < 2)  {
 	  var dialogObj = getDialogObj(context);
@@ -215,24 +215,29 @@ var userAbility = () => {
   
   
    /**
-   * 新手任务Newbie Task
+   * 新手任务Newbie Task  console.log(localEvent.getLocalItem('num'));
    */
   var newbieTask = (context,id) => {
   	var userInfo = getLocalUserInfo();
-  	console.log(userInfo.newbie_unfinish_tasks);
-  	if (userInfo.newbie_unfinish_tasks)  {
-  	 var dialogObj = getDialogObj(context);
-   if (dialogObj) {
-      dialogObj.getHtml('p-task', {level:userInfo.user_level}, (html) => {
-        console.log(html);
+//	console.log(userInfo.newbie_unfinish_tasks);
+//console.log(typeof(parseInt(localEvent.getLocalItem('num').value)));
+  	var num =parseInt(localEvent.getLocalItem('num').value);
+    if(num != 1 ){
+    	   	if (userInfo.newbie_unfinish_tasks)  {
+  	      var dialogObj = getDialogObj(context);
+       if (dialogObj) {
+         dialogObj.getHtml('p-task', {level:userInfo.user_level}, (html) => {
+//          console.log(html);
           alertZoom(html, (num) =>{  
               console.log(num.index)
-        		  localEvent.setLocalItem('num', "1");
+        		  localEvent.setLocalItem('num', {value:'1'});
         	
         }, false);
       });
     }
     }
+    }
+  
 //	 console.log(localEvent.getLocalItem(num))
   };
 
