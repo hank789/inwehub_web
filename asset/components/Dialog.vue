@@ -54,6 +54,14 @@
         	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chengchangye-zhuanshumishu"></use></svg>
         	    	   	   	 <span>专属秘书</span>
         	    	   	   </p>
+        	    	   	   <p v-if="options.level =='4'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-fujinqiye"></use></svg>
+        	    	   	   	 <span>附近企业</span>
+        	    	   	   </p>
+        	    	   	   <p v-if="options.level =='4'">
+        	    	   	   	 <svg class="icon" aria-hidden="true"><use xlink:href="#icon-gengduozhuanjia"></use></svg>
+        	    	   	   	 <span>更多专家</span>
+        	    	   	   </p>
         	    	   </div>
         	    	   <div class="upgrade_btn alertConfirm">确定</div>
         	    </div>
@@ -94,7 +102,7 @@
         style:'display:none',
         options: {
             ok:'test',
-            level:'',
+            level:3,
         },
       }
     },
@@ -241,10 +249,9 @@
    }
    .upgrade_b > p{
    	width: 27%;
-   	height: 100%;
-   	/*background: #CCCCCC;*/
+   	height: 100px;
    	float: left;
-   	margin-left: 6%;
+   	margin-left: 4.75%;
    }
    .upgrade_b > p svg{
    	 font-size: 40px;
