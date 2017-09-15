@@ -200,7 +200,7 @@ var userAbility = () => {
   	 var dialogObj = getDialogObj(context);
    if (dialogObj) {
       dialogObj.getHtml('p-upgrade', {level:userInfo.user_level}, (html) => {
-        console.log(html);
+//      console.log(html);
          alertZoom(html, (num) =>{  
       
         	 if(num.index == 1){

@@ -793,14 +793,14 @@
     }
 
     /*活动*/
-   .activity{
+   /*.activity{
    	width:100%;
    	height: 157px;
    	padding:11px 4%;
    	background: #ececee;
-   }
+   }*/
    .weeklyActivity{
-   	 width: 54%;
+   	 width: 60%;
    	 height: 100%;
    	 background:#C8C7CC;
    	 float: left;
@@ -824,7 +824,7 @@
     margin-top: 14px;
    }
    .opportunities{
-   	 width: 43%;
+   	 width: 37%;
    	 height: 100%;
    	 /*background: #03AEF9;*/
    	 margin-left: 3%;
@@ -993,5 +993,29 @@
 	    box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
 	}
 
-
+/***媒体查询*****/
+@media  screen and (min-width: 320px){
+.activity{
+    width: 100%;
+    height: 133px;
+    padding: 11px 4%;
+    background: #ececee;
+}
+}
+@media screen and (min-width: 375px){
+.activity{
+    width: 100%;
+    height: 157px;
+    padding: 11px 4%;
+    background: #ececee;
+}
+}
+@media screen and (min-width: 414px){
+	.activity{
+    width: 100%;
+    height: 172px;
+    padding: 11px 4%;
+    background: #ececee;
+}
+}
 </style>
