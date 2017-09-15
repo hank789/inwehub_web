@@ -93,14 +93,18 @@ var userAbility = () => {
           break;
       }
     }
-    
+
   };
 
   /**
    * 专家提问
    */
-  var addAsk = (context) => {
-    router.push('/ask');
+  var addAsk = (context , id = '') => {
+    var url = '/ask';
+    if (id) {
+      url = '/ask/' + id;
+    }
+    router.push(url);
   };
 
   /**

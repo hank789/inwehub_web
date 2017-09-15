@@ -38,8 +38,8 @@
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
 							<img :src="task.user_avatar_url"  v-else/>
-							<p>   
-								<span>  
+							<p>
+								<span>
 									<a v-if="task.task_type_description">{{task.task_type_description}}  |</a>
 									<a>{{task.status_description}}</a>
 									<!--级别判断-->
@@ -63,25 +63,25 @@
                                  </span>
 
                                   <span class="time" v-else><b v-show="isTimeout(task)">已超时</b>
-                                  	<timeago :since="timeago(task.created_at)" :auto-update="60">                                		
+                                  	<timeago :since="timeago(task.created_at)" :auto-update="60">
                                   	</timeago>
                                   </span>
 							</p>
 							<i class="bot"></i>
 						</li>
 
-					</ul>	
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+					</ul>
+
+
+
+
+
+
+
+
+
+
+
 				</div>
 			</div>
 		</div>
@@ -224,12 +224,12 @@
 			//跳转时判断类型。1为提问  2是回答  3新手任务-完善个人信息 4新手任务-参与阅读评论 5新手任务-发起提问
 			goDetail(task) {
 				var id = task.object_id;
-				switch(task.task_type){			
+				switch(task.task_type){
 					case 1:
 					 this.$router.pushPlus('/answer/' + id);
 					  break;
 					case 2:
-					 this.$router.pushPlus('/ask/' + id);
+					 this.$router.push('/ask/' + id);
 					  break;
 					case 3:
 					 this.$router.pushPlus('/my/info');
@@ -238,12 +238,12 @@
 					 this.$router.pushPlus('/discover');
 					  break;
 					case 5:
-					 this.$router.pushPlus('/ask/' + id);
+					 this.$router.push('/ask/' + id);
 					  break;
-					
+
 					}
-				
-				
+
+
 			},
 			//下拉刷新时的延时操作；
 			pulldownRefresh() {
@@ -335,7 +335,7 @@
 		top: 0;
 	}
 	/*导航栏的样式*/
-	
+
 	.menu {
 		width: 100%;
 		height: 45px;
@@ -343,7 +343,7 @@
 		z-index: 10;
 		background: #f3f4f6;
 	}
-	
+
 	.menu span {
 		display: inline-block;
 		width: 49%;
@@ -354,11 +354,11 @@
 		line-height: 45px;
 		font-weight: 600;
 	}
-	
+
 	.menu span:nth-of-type(1) {
 		color: #3c95f9;
 	}
-	
+
 	.menu i {
 		display: block;
 		position: absolute;
@@ -368,12 +368,12 @@
 		bottom: 0.5px;
 		background: #3c95f9;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	.bot {
 		position: absolute;
 		right: 16px;
@@ -385,7 +385,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -400,22 +400,22 @@
 		font-style: normal;
 	}
 	/*滚动区域*/
-	
+
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
 	}
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
-	
+
 	ul li {
 		position: relative;
 		padding: 10px 16px 0px 16px;
 		overflow: hidden;
 	}
-	
+
 	ul li img {
 		width: 11%;
 		height: 11%;
@@ -431,19 +431,19 @@
 		color: #03aef9;
 		font-size: 42px;
 	}
-	
+
 	ul li p {
 		margin-left: 3%;
 		width: 86%;
 		float: left;
 	}
-	
+
 	ul li p span {
 		display: block;
 		margin-bottom: 6px;
 		width: 100%;
 	}
-	
+
 	ul li p span:nth-of-type(1) {
 		/*background: #CCCCCC;*/
 		overflow: hidden;
@@ -455,20 +455,20 @@
 		color: #444444;
 	}
 	ul li p span:nth-of-type(1) a:nth-of-type(1) {
-	
+
 	padding-right: 5px;
 	}
-	
+
 	ul li p span:nth-of-type(1) a.level {
 		font-size: 12px;
 		padding: 4px 5px;
 		color: #FFFFFF;
 		margin-left: 8px;
 	}
-	
-	
-	
-	
+
+
+
+
 	ul li p span:nth-of-type(2) {
 		font-size: 14px;
 		color: #808080;
@@ -477,7 +477,7 @@
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-	
+
 	.message {
 		width: 7px;
 		height: 7px;
@@ -488,19 +488,19 @@
 		top: 8%;
 	}
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;
