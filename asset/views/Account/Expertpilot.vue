@@ -41,6 +41,8 @@
   //@tap.stop.prevent="$router.replace('/expert/apply')"
   import {getLocalUserInfo, getUserInfo} from '../../utils/user';
   import {USERS_APPEND} from '../../stores/types';
+  import userAbility from '../../utils/userAbility';
+  //userAbility.applyProfessor(this);
 
   var userInfo = getLocalUserInfo();
   export default {
@@ -67,6 +69,9 @@
 
             }
           }, 'div');
+
+         userAbility.applyProfessor(this);
+         
 
 
         } else {
