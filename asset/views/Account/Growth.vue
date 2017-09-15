@@ -40,7 +40,7 @@
 				   <i class="bot"></i>
 				</p>
 				<div class="Member">
-					<p>会员等级L2</p>
+					<p>会员等级L{{user_level}}</p>
 					<p>由当前成长值决定，成长值从产生开始有效期1年</p>
 					<p class="Prompt">
 					    <b :style="'left:'+ (percent-6) +'%'">{{user_credits}}</b>
