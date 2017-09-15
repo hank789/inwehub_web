@@ -20,10 +20,10 @@
 			</div>
 			 <div class="btn">
 				 <button class="blue" v-if="list.status =='1'"    @tap.stop.prevent="signUp()">立即报名</button>
-				 <button class="gray" v-if="list.status =='2'"  @tap.stop.prevent="signUp()">报名结束</button>
-				 <button class="yellow" v-if="list.status =='3'"  @tap.stop.prevent="signUp()">报名申请中</button>
-				 <button class="yellow" v-if="list.status =='4'"  @tap.stop.prevent="signUp()">报名成功</button>
-				 <button class="gray" v-if="list.status =='5'"  @tap.stop.prevent="signUp()">报名失败</button>
+				 <button class="gray" v-if="list.status =='2'"  >报名结束</button>
+				 <button class="yellow" v-if="list.status =='3'"  >报名申请中</button>
+				 <button class="yellow" v-if="list.status =='4'"  >报名成功</button>
+				 <button class="gray" v-if="list.status =='5'"  >报名失败</button>
 				 <button class="blue" v-if="list.status =='6'"  @tap.stop.prevent="signUp()">重新申请</button> 
 			 </div>
 			 
@@ -110,7 +110,8 @@
 					if(response.data.data) {
 						
 						
-//						mui.toast(response.data.data.tip)
+//   				   mui.toast(response.data.data.tip);
+				     this.getData();
 
 					}
 
@@ -132,7 +133,7 @@
 						this.list = response.data.data.info;
 						this.data = response.data.data.feedback;
 						
-
+						
 					}
 
 					this.loading = 0;
