@@ -234,7 +234,7 @@ var userAbility = () => {
 //console.log(typeof(parseInt(localEvent.getLocalItem('num').value)));
     var num = parseInt(localEvent.getLocalItem('num').value);
     if (num != 1) {
-      if (userInfo.newbie_unfinish_tasks) {
+      if (userInfo.newbie_unfinish_tasks.complete_userinfo && userInfo.newbie_unfinish_tasks.complete_userinfo && userInfo.newbie_unfinish_tasks.complete_userinfo) {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
