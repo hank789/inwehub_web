@@ -312,6 +312,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	ul li  p:nth-of-type(2) span.yellow{
 	 display: block;
@@ -324,6 +325,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	ul li  p:nth-of-type(2) span.gray{
 	 display: block;
@@ -336,6 +338,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	
 	

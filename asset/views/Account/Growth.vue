@@ -105,7 +105,7 @@
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li>
+						 <li v-if = "newbie_unfinish_tasks[3]">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
@@ -113,12 +113,12 @@
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
 							<p>问答任务</p>
-							<p  class="text_blue" v-if="user_level >='1'">前往完成</p>
-							<p class="text_yellow" v-else-if = "newbie_unfinish_tasks[3]">已获取</p>
+							<p  class="text_blue" v-if="user_level >='1'">待完成</p>
+							<!--<p class="text_yellow" v-else-if = "newbie_unfinish_tasks[3]">已获取</p>-->
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li>
+						 <li v-if ="newbie_unfinish_tasks[2]">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>
@@ -126,8 +126,8 @@
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>
 							<p>互动任务</p>   
-							<p class="text_blue" v-if="user_level >='1'">前往完成</p>
-							<p class="text_yellow" v-else-if ="newbie_unfinish_tasks[2]">已获取</p>
+							<p class="text_blue" v-if="user_level >='1'">待完成</p>
+							<!--<p class="text_yellow" >已获取</p>-->
 							<p v-else>升级解锁</p>
 						</li>
 					</ul>
@@ -268,7 +268,7 @@
 			</div>
            
         </div>
-        <div id="statusBarStyle" background="#FEFFFE"   bgColor="#f3f4f6" mode="dark"></div>
+        <div id="statusBarStyle" background="#FEFFFE"   bgColor="#3c3e44" mode="light"></div>
     </div>
 </template>
 

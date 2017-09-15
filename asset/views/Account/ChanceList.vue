@@ -248,8 +248,9 @@ import userAbility from '../../utils/userAbility';
 		font-weight: 600;
 	}
 	
-	.menu span:nth-of-type(1) {
+	.menu span:nth-of-type(2) {
 		color: #3c95f9;
+		
 	}
 	
 	.menu i {
@@ -318,6 +319,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	ul li  p:nth-of-type(2) span.yellow{
 	 display: block;
@@ -330,6 +332,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	ul li  p:nth-of-type(2) span.gray{
 	 display: block;
@@ -342,6 +345,7 @@ import userAbility from '../../utils/userAbility';
 	 text-align: center;	
 	 line-height: 19px;
 	 border-radius: 50px;
+	 padding: 0 8px;
 	}
 	
 	

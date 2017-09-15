@@ -94,18 +94,18 @@
             <!--活动区-->
             <div class="activity">
             	   <div class="weeklyActivity" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	   	 <img  :src="recommend_activity[0].image_url"/>
+            	   	 <img  :src="recommend_activity[0].image_url" v-show="recommend_activity[0].image_url"/>
             	   	 <p v-if="recommend_activity[0].activity_type =='1'">活动</p>
             	   	 <p v-if="recommend_activity[0].activity_type =='2'">机遇</p>
             	   </div>
             	   <div class="opportunities">
             	   	  <div class="newcomers" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	   	  	<img :src="recommend_activity[1].image_url" />
+            	   	  	<img :src="recommend_activity[1].image_url" v-show="recommend_activity[1].image_url"/>
             	   	  	<p v-if="recommend_activity[1].activity_type =='1'">活动</p>
             	   	   <p v-if="recommend_activity[1].activity_type =='2'">机遇</p>
             	   	  </div>
             	      <div class="latestWeekly" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            	      	<img :src="recommend_activity[2].image_url" />
+            	      	<img :src="recommend_activity[2].image_url"  v-show="recommend_activity[2].image_url"/>
             	      	<p v-if="recommend_activity[2].activity_type =='1'">活动</p>
             	   	    <p v-if="recommend_activity[2].activity_type =='2'">机遇</p>
             	      </div>
@@ -238,8 +238,7 @@
 		swipperClick(swiper, event){
 			    var parent = queryParent(event.target, 'swiper-slide');
                 if (!parent) return;
-
-               var uuid = parent.getAttribute('uuid');
+                 var uuid = parent.getAttribute('uuid');
                if(uuid){
                	this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
                }else{
@@ -429,7 +428,11 @@
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
 				   //首页推荐活动
-				   t.recommend_activity = response_data.recommend_activity;
+				   for (var i in response_data.recommend_activity) {
+				   	   t.recommend_activity[i] = response_data.recommend_activity[i];
+				   }
+				   
+				   
 				   //推荐阅读；
 				   t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
@@ -758,6 +761,7 @@
     margin-top: 11px;
     height: 148px;
     background: #ececee;
+    border-radius: 4px;
     position: relative;
   }
    .moreExperts>div{
@@ -808,6 +812,8 @@
    	 background:#C8C7CC;
    	 float: left;
    	 position:relative;
+   	 border-radius: 4px;
+   	 overflow: hidden;
    }
    .weeklyActivity>img{
    	position: absolute;
@@ -840,6 +846,7 @@
    	background: #009FE8;
    	float: left;
    	position:relative;
+   	border-radius: 4px;
    }
    .latestWeekly{
    	width: 100%;
@@ -848,6 +855,7 @@
    	background: #C8C8C8;
    	float: left;
    	position:relative;
+    border-radius: 4px;
    }
    .newcomers>p,.latestWeekly>p{
    	width: 37px;
@@ -865,6 +873,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 4px;
     }
 
 	/*向你推荐*/
