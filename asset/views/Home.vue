@@ -38,7 +38,7 @@
 			</div>
 			<!--专业问答 和 成为专家-->
 			<div class="home-expert">
-				<p @tap.stop.prevent="$router.pushPlus('/ask')">
+				<p @tap.stop.prevent="toAsk()">
 					<svg class="icon" aria-hidden="true" >
 						<use xlink:href="#icon-zhuanyewenda"></use>
 					</svg>
@@ -244,7 +244,7 @@
                }else{
                	userAbility.moreProfessor(this);
                }
-              
+
 			},
 			detail(url){
 			   this.goLink(url);
@@ -265,7 +265,10 @@
 			      }
 
 			},
-			
+      toAsk() {
+         userAbility.addAsk(this);
+      },
+
       goArticle: function(article) {
 
         var url = article.view_url;
@@ -432,7 +435,7 @@
 					if(response_data === false) {
 						return;
 					}
-                     
+
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
 				   //首页推荐活动
@@ -447,12 +450,12 @@
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
 					t.is_expert = response_data.expert_apply_status;
- 
- 
-  
- 
- 
- 
+
+
+
+
+
+
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
 
