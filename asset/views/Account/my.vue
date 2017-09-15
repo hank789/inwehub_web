@@ -62,7 +62,7 @@
 					</li>
 			     </ul>
 				<div class="my-apply">
-					<div @tap.stop.prevent="toApply()">
+					<div @tap.stop.prevent="toApply(expert_apply_status)">
 						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-zhuanjiabiaoji"></use>
 						</svg>
@@ -168,7 +168,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-  import userAbility from '../../utils/userAbility';
+    import userAbility from '../../utils/userAbility';
 
 	export default {
 		data() {
@@ -249,8 +249,20 @@
 
 			},
 			//认证专家；
-			toApply() {
-               userAbility.applyProfessor(this);
+			toApply(expertStatus) {
+				switch (parseInt(expertStatus)) {
+			        case 0:
+			        case 3:
+			            this.$router.push('/my/pilot');
+			          break;
+			        case 2:
+			          mui.toast('您已经是专家');
+			          break;
+			        case 1:
+			          this.$router.push('/expert/apply/success?type=0');
+			          break;
+			      }
+               
 			},
 			getNumbers: function(number) {
 				var html = '';
