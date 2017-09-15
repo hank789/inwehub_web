@@ -104,7 +104,7 @@
 					<span>我的回答</span>
 				</li>
 				<li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
-					<span v-html="getNumbers(0)"></span>
+					<span v-html="getNumbers(enroll)"></span>
 					<span>我的报名</span>
 				</li>
 				<li @tap.stop.prevent="exclusive(company_apply_status)">
@@ -199,6 +199,7 @@
 				user_id: currentUser.id,
 				questions: currentUser.questions,
 				answers: currentUser.answers,
+				enroll:currentUser.my_activity_enroll,
 				tasks: currentUser.tasks,
 				projects: currentUser.projects,
 				expert_level: currentUser.expert_level,
@@ -289,6 +290,7 @@
 					this.user_comment_karma = user.info.comment_karma;
 					this.user_id = user.info.id;
 					this.questions = user.info.questions;
+					this. enroll = user.info.my_activity_enroll;
 					this.answers = user.info.answers;
 					this.tasks = user.info.tasks;
 					this.projects = user.info.projects;

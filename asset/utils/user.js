@@ -106,6 +106,8 @@ function updateUserInfoCache(user) {
   userLocal.show_ios_resume = user.show_ios_resume;
   userLocal.uuid = user.uuid;
   userLocal.newbie_unfinish_tasks = user.newbie_unfinish_tasks;
+  userLocal.my_activity_enroll = user.my_activity_enroll;
+  
 
   /*
    user.counts.map(function (count, index) {
