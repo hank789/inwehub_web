@@ -238,8 +238,7 @@
 		swipperClick(swiper, event){
 			    var parent = queryParent(event.target, 'swiper-slide');
                 if (!parent) return;
-
-               var uuid = parent.getAttribute('uuid');
+                 var uuid = parent.getAttribute('uuid');
                if(uuid){
                	this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
                }else{
@@ -755,6 +754,7 @@
     margin-top: 11px;
     height: 148px;
     background: #ececee;
+    border-radius: 4px;
     position: relative;
   }
    .moreExperts>div{
@@ -805,6 +805,8 @@
    	 background:#C8C7CC;
    	 float: left;
    	 position:relative;
+   	 border-radius: 4px;
+   	 overflow: hidden;
    }
    .weeklyActivity>img{
    	position: absolute;
@@ -837,6 +839,7 @@
    	background: #009FE8;
    	float: left;
    	position:relative;
+   	border-radius: 4px;
    }
    .latestWeekly{
    	width: 100%;
@@ -845,6 +848,7 @@
    	background: #C8C8C8;
    	float: left;
    	position:relative;
+    border-radius: 4px;
    }
    .newcomers>p,.latestWeekly>p{
    	width: 37px;
@@ -862,6 +866,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 4px;
     }
 
 	/*向你推荐*/
