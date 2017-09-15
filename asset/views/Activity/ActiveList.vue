@@ -11,7 +11,7 @@
 			<!--导航栏-->
 			<div class="menu">
 				<span @tap.stop.prevent="">活动</span>
-				<span @tap.stop.prevent="$router.push('/home/OpportunityList')">机遇</span>
+				<span @tap.stop.prevent="$router.replace('/home/OpportunityList')">机遇</span>
 				<i class="bot"></i>
 			</div>
 			<div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true}">

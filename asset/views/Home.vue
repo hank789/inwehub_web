@@ -92,7 +92,7 @@
                 </swiper-slide>
               </swiper>
             <!--活动区-->
-            <div class="activity">
+            <div class="activity" v-if="isShowActivity">
             	   <div class="weeklyActivity" @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
             	   	 <img  :src="recommend_activity[0].image_url" v-show="recommend_activity[0].image_url"/>
             	   	 <p v-if="recommend_activity[0].activity_type =='1'">活动</p>
@@ -184,6 +184,7 @@
 			is_expert:"",
 			recommend_read:"",
 			recommend_experts:"",
+			isShowActivity:false,
 			recommend_activity:[
 			  {image_url:''},
 			  {image_url:''},
@@ -438,6 +439,9 @@
 
 					//推荐专家；
 				   t.recommend_experts = response_data.recommend_experts;
+				   
+				   this.isShowActivity = response_data.recommend_activity.length?true:false;
+				   
 				   //首页推荐活动
 				   for (var i in response_data.recommend_activity) {
 				   	   t.recommend_activity[i] = response_data.recommend_activity[i];

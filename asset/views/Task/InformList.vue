@@ -11,7 +11,7 @@
 			<div class="mui-scroll-wrapper">
 				<div class="content">
 					<div class="menu">
-						<span @tap.stop.prevent="$router.push('/task')">任务</span>
+						<span @tap.stop.prevent="$router.replace('/task')">任务</span>
 						<span @tap.stop.prevent="">消息</span>
 						<i></i>
 					</div>
