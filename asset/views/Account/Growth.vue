@@ -105,7 +105,7 @@
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li v-if = "newbie_unfinish_tasks[3]">
+						 <li v-if = "newbie_unfinish_tasks.ask == 'false'">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
@@ -118,7 +118,7 @@
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li v-if ="newbie_unfinish_tasks[2]">
+						 <li v-if = "newbie_unfinish_tasks.readhub_comment == 'false'">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>

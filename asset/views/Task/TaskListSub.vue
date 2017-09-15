@@ -21,7 +21,7 @@
 			<!--导航栏-->
 			<div class="menu">
 				<span @tap.stop.prevent="">任务</span>
-				<span @tap.stop.prevent="$router.push('/inform')">消息</span>
+				<span @tap.stop.prevent="$router.replace('/inform')">消息</span>
 				<i></i>
 			</div>
 			<div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">

@@ -10,7 +10,7 @@
 		<div class="mui-content absolute">
 			<!--导航栏-->
 			<div class="menu">
-				<span @tap.stop.prevent="$router.push('/home/ActiveList')">活动</span>
+				<span @tap.stop.prevent="$router.replace('/home/ActiveList')">活动</span>
 				<span @tap.stop.prevent="" >机遇</span>
 				<i class="bot"></i>
 			</div>
