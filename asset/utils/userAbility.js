@@ -234,11 +234,12 @@ var userAbility = () => {
 //console.log(typeof(parseInt(localEvent.getLocalItem('num').value)));
     var num = parseInt(localEvent.getLocalItem('num').value);
     if (num != 1) {
-      if (userInfo.newbie_unfinish_tasks.complete_userinfo && userInfo.newbie_unfinish_tasks.complete_userinfo && userInfo.newbie_unfinish_tasks.complete_userinfo) {
+      if (userInfo.newbie_unfinish_tasks.complete_userinfo =="false" && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false"  && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false" ) 
+      {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
-//          console.log(html);
+          //console.log(html);
             alertZoom(html, (num) => {
               console.log(num.index)
               localEvent.setLocalItem('num', {value: '1'});
