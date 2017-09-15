@@ -4,7 +4,8 @@
  */
 function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true)
 {
-  var alertObj = mui.alert(contentHtml, null, null, callback, 'div');
+  var alertObj = mui.alert(contentHtml, ' ', null, callback, 'div');
+  mui('.mui-popup-in')[0].style.display = 'none';
   mui('.mui-popup-in')[0].classList.add('alertZoom');
 
   var titlePre = document.createElement('div');
@@ -14,6 +15,10 @@ function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = 
   var titlePre2 = document.createElement('div');
   titlePre2.className = 'titlePre2';
   mui('.mui-popup-in')[0].insertBefore(titlePre2, mui('.mui-popup-in')[0].firstChild);
+
+  setTimeout(() => {
+    mui('.mui-popup-in')[0].style.display = '';
+  }, 100);
 
   if (close) {
     var closeDiv = document.createElement('div');
@@ -62,7 +67,7 @@ function getDialogObj(context)
 function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, close = true, classname = 'alertSkyTwo' )
 {
   var alertObj = mui.alert(contentHtml, ' ', null, callback, 'div');
-
+  mui('.mui-popup-in')[0].style.display = 'none';
   for (var i in classname) {
     mui('.mui-popup-in')[0].classList.add(classname[i]);
   }
@@ -78,6 +83,10 @@ function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, c
     titlePreIcon.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#' + iconType + '"></use></svg>';
     mui('.mui-popup-in')[0].insertBefore(titlePreIcon, mui('.mui-popup-in')[0].firstChild);
   }
+
+  setTimeout(() => {
+    mui('.mui-popup-in')[0].style.display = '';
+  }, 100);
 
   if (close) {
     var closeDiv = document.createElement('div');
@@ -112,8 +121,14 @@ function alertSkyTwo(titleHtml = '', contentHtml = '', iconType = '', callback =
 
 function alertSimple(contentHtml = '', btnString = '确定', callback = null, close = true)
 {
-  var alertObj = mui.alert(contentHtml, null, btnString, callback, 'div');
+  var alertObj = mui.alert(contentHtml, ' ', btnString, callback, 'div');
+  mui('.mui-popup-in')[0].style.display = 'none';
   mui('.mui-popup-in')[0].classList.add('alertSimple');
+
+  setTimeout(() => {
+    mui('.mui-popup-in')[0].style.display = '';
+  }, 100);
+
   if (close) {
     var closeDiv = document.createElement('div');
     closeDiv.className = 'alertClose';
@@ -131,7 +146,6 @@ function alertSimple(contentHtml = '', btnString = '确定', callback = null, cl
     }, 100);
   }
 }
-
 
 export {
   alertZoom,
