@@ -33,7 +33,7 @@
 
 			 <div class="feedback"  v-show="list.status =='3' || list.status =='4' ">
 			 	<div class="send">
-				 	<input type="text" v-model.trim="comment"  id="text" placeholder="在此留言"/>
+				 	<input type="text" v-model.trim="comment"  id="text" placeholder='可在此留言，只有您和平台可见!'/>
 				 	<svg class="icon" aria-hidden="true" @tap.stop.prevent="message()">
 					  <use xlink:href="#icon-fasong"></use>
 					</svg>
@@ -279,10 +279,10 @@
   	padding:15px 16px 16px 16px;
   	background: #FEFFFE;
   }
-  .enroll img{
+  /*.enroll img{
   	width: 100%;
   	height: 143px;
-  }
+  }*/
   .enroll-text{
   	width: 100%;
   	height: 57px;
@@ -356,6 +356,7 @@
    .send{
    	width: 100%;
    	height: 42px;
+   	border-radius:5px;
    	border: 0.5px solid #DCDCDC;
    }
    .feedback input{
@@ -403,6 +404,8 @@
   }
   .message li{
   	margin-top: 10px;
+  	overflow: hidden;
+  	border-bottom:0.5px solid #DCDCDC;
   }
   .message p:nth-of-type(1){
   	width: 100%;
@@ -426,7 +429,31 @@
   .message p:nth-of-type(2){
   	width: 100%;
   	font-size: 13px;
+  	margin-bottom: 5px;
+  	margin-top: 3px;
   	color: #444444;
 
   }
+  /***媒体查询*****/
+	
+	@media screen and (min-width: 320px) {
+		.enroll img {
+			width: 100%;
+			height: 133px;
+		}
+	}
+	
+	@media screen and (min-width: 375px) {
+		.enroll img {
+			width: 100%;
+			height: 145px;
+		}
+	}
+	
+	@media screen and (min-width: 414px) {
+		.enroll img {
+			width: 100%;
+			height: 172px;
+		}
+	}
 </style>
