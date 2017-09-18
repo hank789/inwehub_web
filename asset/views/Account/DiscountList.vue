@@ -5,7 +5,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">我的报名</h1>
 		</header>
-		
+
 
 		<div class="mui-content absolute">
 			<!--导航栏-->
@@ -21,9 +21,9 @@
 					</svg>
 					<p>暂时还没有数据呀～</p>
 				</div>
-				
-				
-				
+
+
+
 				<div class="mui-scroll" v-show="nothing == 0">
 				<!---->
 				  <ul>
@@ -85,7 +85,7 @@ import userAbility from '../../utils/userAbility';
 		methods: {
 			//跳转；
 			skip(id){
-				 userAbility.applyActivity(this,id);
+				 userAbility.jumpToApplyActivity(this,id);
 			},
 			//下拉刷新;
 			pulldownRefresh() {
@@ -111,10 +111,10 @@ import userAbility from '../../utils/userAbility';
 					}
                       console.log(response.data.data.data)
 					if(response.data.data.data.length > 0) {
-						
+
 						this.list = response.data.data.data;
 						this.data = response.data.data;
-						
+
 
 					}
 
@@ -140,8 +140,8 @@ import userAbility from '../../utils/userAbility';
 						mui.alert(response.data.message);
 						mui.back();
 					}
-   
-                    
+
+
 					if(response.data.data.data) {
 					   this.list =  this.list.concat(response.data.data.data)
 					   this.data = response.data.data;
@@ -153,7 +153,7 @@ import userAbility from '../../utils/userAbility';
 
 				});
 			},
-			
+
 
 		},
 		mounted() {
@@ -180,7 +180,7 @@ import userAbility from '../../utils/userAbility';
 
 		}
 
-	}	
+	}
 	export default Discount;
 </script>
 
@@ -200,7 +200,7 @@ import userAbility from '../../utils/userAbility';
 		list-style: none;
 		font-style: normal;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right:0;
@@ -226,7 +226,7 @@ import userAbility from '../../utils/userAbility';
   	background: #FEFFFE;
   }
 	/*导航栏的样式*/
-	
+
 	.menu {
 		width: 100%;
 		height: 45px;
@@ -234,7 +234,7 @@ import userAbility from '../../utils/userAbility';
 		z-index: 10;
 		background: #f3f4f6;
 	}
-	
+
 	.menu span {
 		display: inline-block;
 		width: 49%;
@@ -245,11 +245,11 @@ import userAbility from '../../utils/userAbility';
 		line-height: 45px;
 		font-weight: 600;
 	}
-	
+
 	.menu span:nth-of-type(1) {
 		color: #3c95f9;
 	}
-	
+
 	.menu i {
 		display: block;
 		position: absolute;
@@ -266,7 +266,7 @@ import userAbility from '../../utils/userAbility';
 		/*background:#CCCCCC;*/
 		position: relative;
 		padding-bottom: 20px;
-		
+
 	}
 	ul li{
 		width: 92%;
@@ -276,7 +276,7 @@ import userAbility from '../../utils/userAbility';
 		left: 0;
 		right: 0;
 		margin: auto;
-		
+
 	}
 	ul li img{
 		width: 100%;
@@ -299,7 +299,7 @@ import userAbility from '../../utils/userAbility';
 		font-size: 12px;
 		 line-height: 19px;
 		float: left;
-		
+
 	}
 	ul li  p:nth-of-type(2) span.blue{
 	 display: block;
@@ -309,7 +309,7 @@ import userAbility from '../../utils/userAbility';
      background:#03aef9;
      color: #FFFFFF;
      font-size: 14px;
-	 text-align: center;	
+	 text-align: center;
 	 line-height: 19px;
 	 border-radius: 50px;
 	 padding: 0 8px;
@@ -322,7 +322,7 @@ import userAbility from '../../utils/userAbility';
      background:#fcc816;
      color: #FFFFFF;
      font-size: 14px;
-	 text-align: center;	
+	 text-align: center;
 	 line-height: 19px;
 	 border-radius: 50px;
 	 padding: 0 8px;
@@ -335,27 +335,27 @@ import userAbility from '../../utils/userAbility';
      background:#b4b4b6;
      color: #FFFFFF;
      font-size: 14px;
-	 text-align: center;	
+	 text-align: center;
 	 line-height: 19px;
 	 border-radius: 50px;
 	 padding: 0 8px;
 	}
-	
-	
+
+
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;

@@ -45,16 +45,16 @@
       skip(num) {
         switch (num) {
           case 1:
-            userAbility.addProject();
+            userAbility.jumpToAddProject();
             break;
           case 2:
-            userAbility.addAsk();
+            userAbility.jumpToAddAsk();
             break;
           case 3:
-            userAbility.applyProfessor(this);
+            userAbility.jumpToApplyProfessor(this);
             break;
           case 4:
-            userAbility.addArticle();
+            userAbility.jumpToAddArticle();
             break;
         }
         this.hide();
