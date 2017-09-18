@@ -218,7 +218,6 @@ function showWebview(){
   if (mui.os.plus) {
       mui.plusReady(() => {
         var self = plus.webview.currentWebview();
-        console.log(self.custom_preload);
         if (self.custom_preload === false || self.custom_preload === undefined) {
           self.show();
         }
