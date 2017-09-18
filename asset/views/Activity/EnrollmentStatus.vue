@@ -96,9 +96,9 @@
 
 		},
 		methods: {
-      refreshPageData(){
-           this.getNextList();
-      },
+		      refreshPageData(){
+		           this.getNextList();
+		      },
 			//报名；
 			signUp(){
 				let id = parseInt(this.$route.params.id);
@@ -434,6 +434,23 @@
   	color: #444444;
 
   }
+  
+  
+  .mui-bar {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
   /***媒体查询*****/
 	
 	@media screen and (min-width: 320px) {

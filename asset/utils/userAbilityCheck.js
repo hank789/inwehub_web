@@ -12,13 +12,9 @@ import localEvent from '../stores/localStorage';
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 import router from '../modules/index/routers/index';
 import {alertZoom, alertSkyOne, alertSkyTwo, alertSimple, getDialogObj} from '../utils/dialog';
-//import localEvent from '../stores/localStorage';
 
 var userAbilityCheck = () => {
-
   var UserInfo = localEvent.getLocalItem('UserInfo');
-
-
   /**
    * 申请专家条件验证
    */
@@ -104,13 +100,45 @@ var userAbilityCheck = () => {
 
     return true;
   };
+  
+  
+  
+   /**
+   * 完善名片的提示框；
+   */
+  var  perfectCard = (context) => {
+    var userInfo = getLocalUserInfo();
+    
+    if (userInfo.account_info_complete_percent < 96) {
+      var dialogObj = getDialogObj(context);
+      if (dialogObj) {
+        dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
+        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
+          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
+          		if (num.index === 0) {
+	              router.pushPlus('/my/resume');
+	            }
+          	}, true);
+          });
+        });
+      }
+      return false;
+
+    }
+
+    return true;
+  };
+
+ 
 
 
   return {
     applyProfessor: applyProfessor,
-    moreProfessor:moreProfessor
-  }
+    moreProfessor:moreProfessor,
+    perfectCard:perfectCard
+
 };
+}
 
 
 export default new userAbilityCheck();

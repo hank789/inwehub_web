@@ -178,6 +178,7 @@
     import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
     import {queryParent} from '../utils/dom';
     import userAbility from '../utils/userAbility';
+    import userAbilityCheck from '../utils/userAbilityCheck';
 
 	const Home = {
 		data: () => ({
@@ -243,7 +244,8 @@
                if(uuid){
                	this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
                }else{
-               	userAbility.moreProfessor(this);
+             	userAbilityCheck.moreProfessor(this);
+//	            userAbilityCheck.perfectCard(this);
                }
 
 			},
