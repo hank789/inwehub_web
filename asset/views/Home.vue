@@ -889,7 +889,7 @@
   .latestWeekly {
     width: 100%;
     height: 46.5%;
-    margin-top: 7%;
+    margin-top: 7.1%;
     background: #C8C8C8;
     float: left;
     position: relative;
