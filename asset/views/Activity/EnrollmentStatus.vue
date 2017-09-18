@@ -440,6 +440,7 @@
 		.enroll img {
 			width: 100%;
 			height: 133px;
+			border-radius: 4px;
 		}
 	}
 	
@@ -447,6 +448,7 @@
 		.enroll img {
 			width: 100%;
 			height: 145px;
+			border-radius: 4px;
 		}
 	}
 	
@@ -454,6 +456,7 @@
 		.enroll img {
 			width: 100%;
 			height: 172px;
+			border-radius: 4px;
 		}
 	}
 </style>
