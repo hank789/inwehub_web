@@ -156,6 +156,7 @@
 						if(response.data.data) {
 
 							this.cont.unshift(response.data.data);
+							this.comment = '';
 
 						}
 //	                    console.log(this.cont);
@@ -223,12 +224,7 @@
 			mui.init({
 				pullRefresh: {
 					container: '#pullrefresh',
-//					down: {
-//						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-//						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-//						callback: this.pulldownRefresh
-//					},
+
 					up: {
 						contentrefresh: '正在加载...',
 						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
