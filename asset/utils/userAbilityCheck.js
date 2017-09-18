@@ -80,16 +80,35 @@ var userAbilityCheck = () => {
   };
 
 
+  /**
+   * 首页查看更多专家
+   */
+  var moreProfessor = (context) => {
+    var userInfo = getLocalUserInfo();
 
+    if (userInfo.user_level < 4) {
+      var dialogObj = getDialogObj(context);
+      if (dialogObj) {
+        dialogObj.getHtml('test', {level: userInfo.user_level}, (html) => {
 
+          alertSimple(html, '查看等级详情', (num) => {
+            if (num.index === 0) {
+              router.pushPlus('/my/Growth');
+            }
+          }, true);
+        });
+      }
+      return false;
 
+    }
 
-
+    return true;
+  };
 
 
   return {
     applyProfessor: applyProfessor,
-
+    moreProfessor:moreProfessor
   }
 };
 
