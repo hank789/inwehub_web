@@ -465,6 +465,27 @@
           //是否是专家；
           t.is_expert = response_data.expert_apply_status;
 
+          //预加载第一篇文章
+          if (mui.os.plus && t.recommend_read.length > 0) {
+            var article_params = {
+              article_id: t.recommend_read[0].id,
+              article_url: t.recommend_read[0].view_url,
+              article_title: t.recommend_read[0].title,
+              article_comment_url: t.recommend_read[0].comment_url,
+              article_img_url:t.recommend_read[0].img_url,
+              preload: true,
+              custom_preload: true
+            };
+            mui.preload({
+              url: 'index.html#/webview/article',
+              id: 'inwehub_article_view',
+              styles: {
+                popGesture: 'hide'
+              },
+              extras: article_params
+            });
+          }
+
 
           //返回的时间；
           var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
