@@ -74,50 +74,6 @@ var userAbility = () => {
   }
 
   /**
-   * 申请专家条件验证
-   */
-  var applyProfessor = (context) => {
-
-    var userInfo = getLocalUserInfo();
-
-    //验证用户等级
-    if (userInfo.user_level < 2) {
-      var dialogObj = getDialogObj(context);
-      if (dialogObj) {
-        dialogObj.getHtml('test', {level: userInfo.user_level}, (html) => {
-          alertSimple(html, '查看等级详情', (num) => {
-            if (num.index === 0) {
-              router.pushPlus('/my/Growth');
-            }
-          }, true);
-        });
-      }
-      return false;
-    }
-
-    //验证用户状态
-    var expertStatus = parseInt(userInfo.expert_apply_status);
-    switch (parseInt(expertStatus)) {
-      case 0:
-      case 3:
-        //is ok
-        break;
-      case 2:
-        mui.toast('您已经是专家');
-        return false;
-        break;
-      case 1:
-        if (context.$route.path === '/my') {
-          router.pushPlus('/expert/apply/success?type=0');
-        } else {
-          router.push('/expert/apply/success?type=0');
-        }
-        break;
-    }
-    return true;
-  };
-
-  /**
    * 专家提问
    */
   var addAsk = (context , id = '') => {
@@ -278,7 +234,6 @@ var userAbility = () => {
     canDo: canDo,
     addProject: addProject,
     jumpToApplyProfessor:jumpToApplyProfessor,
-    applyProfessor: applyProfessor,
     addAsk: addAsk,
     addArticle: addArticle,
     applyActivity: applyActivity,
