@@ -262,16 +262,14 @@ import userAbility from '../../utils/userAbility';
 	/*滚动区域*/
 	ul{
 		width: 100%;
-		height: 227px;
-		/*background:#CCCCCC;*/
+		overflow: hidden;
 		position: relative;
 		padding-bottom: 20px;
 		
 	}
-	ul li{
+	/*ul li{
 		width: 92%;
 		height: 227px;
-		/*background:#E4E5E7;*/
 		position:relative;
 		left: 0;
 		right: 0;
@@ -282,7 +280,7 @@ import userAbility from '../../utils/userAbility';
 		width: 100%;
 		height: 143px;
 		margin-top: 15px;
-	}
+	}*/
 	ul li  p:nth-of-type(1){
 		font-size: 14px;
 		color: #444444;
@@ -360,4 +358,56 @@ import userAbility from '../../utils/userAbility';
 		font-size: 12px;
 		color: #c8c8c8;
 	}
+	
+/***媒体查询*****/
+@media  screen and (min-width: 320px){
+  ul li{
+		width: 92%;
+		height: 217px;
+		position:relative;
+		left: 0;
+		right: 0;
+		margin: auto;
+		
+	}
+	ul li img{
+		width: 100%;
+		height: 133px;
+		margin-top: 15px;
+	}
+}
+@media screen and (min-width: 375px){
+  ul li{
+		width: 92%;
+		height: 227px;
+		/*background:#E4E5E7;*/
+		position:relative;
+		left: 0;
+		right: 0;
+		margin: auto;
+		
+	}
+	ul li img{
+		width: 100%;
+		height: 145px;
+		margin-top: 15px;
+	}
+}
+@media screen and (min-width: 414px){
+  ul li{
+		width: 92%;
+		height: 256px;
+		/*background:#E4E5E7;*/
+		position:relative;
+		left: 0;
+		right: 0;
+		margin: auto;
+		
+	}
+	ul li img{
+		width: 100%;
+		height: 172px;
+		margin-top: 15px;
+	}
+}
 </style>

@@ -527,13 +527,16 @@
 	}
 
 	.my-apply div {
-		display: inline-block;
+		float: left;
 		width: 49%;
 		height: 61px;
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-
+     .my-apply div:nth-of-type(2){
+     	margin-left: 2%;
+     	width: 49%;
+     }
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 6px;
@@ -546,7 +549,7 @@
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
-		margin-right: 8px;
+		/*margin-right: 8px;*/
 		font-size: 32px;
 		color: rgb(3, 174, 249);
 		float: left;

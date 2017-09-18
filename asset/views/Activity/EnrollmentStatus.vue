@@ -40,7 +40,7 @@
 				</div>
 
 				<!--留言--> <!--v-if="list.status =='3' || list.status =='4' "-->
-				<div style="position: relative;width:100%; min-height: 530px;"  v-show="list.status =='3' || list.status =='4' ">
+				<div class="CommentsBox"   v-show="list.status =='3' || list.status =='4' ">
 				<div class="mui-scroll-wrapper" id="pullrefresh">
 			    <div class="mui-scroll">
 				<ul class="message" >
@@ -395,11 +395,15 @@
 
    }
    /*评论 样式*/
+  .CommentsBox{
+  position: relative;
+  width:100%; 
+  min-height: 530px;
+  }
   .message{
   	width: 100%;
   	overflow: hidden;
   	margin-top: 10px;
-  	/*background: #CCCCCC;*/
   }
   .message li{
   	margin-top: 10px;
