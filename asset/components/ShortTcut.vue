@@ -51,7 +51,7 @@
             userAbility.addAsk();
             break;
           case 3:
-            userAbility.applyProfessor(this);
+            userAbility.jumpToApplyProfessor(this);
             break;
           case 4:
             userAbility.addArticle();
