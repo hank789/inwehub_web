@@ -45,56 +45,33 @@ var userAbility = () => {
   };
 
   /**
-   * 申请专家
+   * 跳转到申请专家
    */
-
-  var applyProfessor = (context) => {
-
+  var jumpToApplyProfessor = (context) => {
     var userInfo = getLocalUserInfo();
+    var expertStatus = parseInt(userInfo.expert_apply_status);
+    switch (parseInt(expertStatus)) {
+      case 0:
+      case 3:
+        if (context.$route.path === '/my') {
+          router.pushPlus('/my/pilot');
+        } else {
+          router.push('/my/pilot');
+        }
+        break;
+      case 2:
+        mui.toast('您已经是专家');
+        break;
+      case 1:
+        if (context.$route.path === '/my') {
+          router.pushPlus('/expert/apply/success?type=0');
+        } else {
+          router.push('/expert/apply/success?type=0');
+        }
 
-
-    if (userInfo.user_level < 2) {
-      var dialogObj = getDialogObj(context);
-      if (dialogObj) {
-        dialogObj.getHtml('test', {level: userInfo.user_level}, (html) => {
-          console.log(html);
-          alertSimple(html, '查看等级详情', (num) => {
-
-            if (num.index == 0) {
-//      	 	console.log('my');
-              router.pushPlus('/my/Growth');
-            }
-
-          }, true);
-        });
-      }
-
-    } else {
-      var expertStatus = parseInt(userInfo.expert_apply_status);
-      switch (parseInt(expertStatus)) {
-        case 0:
-        case 3:
-          if (context.$route.path === '/my') {
-            router.pushPlus('/my/pilot');
-          } else {
-            router.push('/my/pilot');
-          }
-          break;
-        case 2:
-          mui.toast('您已经是专家');
-          break;
-        case 1:
-          if (context.$route.path === '/my') {
-            router.pushPlus('/expert/apply/success?type=0');
-          } else {
-            router.push('/expert/apply/success?type=0');
-          }
-
-          break;
-      }
+        break;
     }
-
-  };
+  }
 
   /**
    * 专家提问
@@ -234,7 +211,7 @@ var userAbility = () => {
 //console.log(typeof(parseInt(localEvent.getLocalItem('num').value)));
     var num = parseInt(localEvent.getLocalItem('num').value);
     if (num != 1) {
-      if (userInfo.newbie_unfinish_tasks.complete_userinfo =="false" && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false"  && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false" ) 
+      if (userInfo.newbie_unfinish_tasks.complete_userinfo =="false" && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false"  && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false" )
       {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
@@ -256,7 +233,7 @@ var userAbility = () => {
   return {
     canDo: canDo,
     addProject: addProject,
-    applyProfessor: applyProfessor,
+    jumpToApplyProfessor:jumpToApplyProfessor,
     addAsk: addAsk,
     addArticle: addArticle,
     applyActivity: applyActivity,

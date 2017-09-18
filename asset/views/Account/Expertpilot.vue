@@ -42,6 +42,7 @@
   import {getLocalUserInfo, getUserInfo} from '../../utils/user';
   import {USERS_APPEND} from '../../stores/types';
   import userAbility from '../../utils/userAbility';
+  import userAbilityCheck from '../../utils/userAbilityCheck';
   //userAbility.applyProfessor(this);
 
   var userInfo = getLocalUserInfo();
@@ -56,28 +57,9 @@
     methods: {
       //判断资料的完善程度；
       ApplicationJudge(){
-        if (this.percent < 96) {
-          console.log('申请专家认证需要保证个人资料完整度在96%以上，请前往进行维护。')
-          var font = '<p style= "text-align:left">' + '申请专家认证需要保证个人资料完整度在96%以上，请前往进行维护。' + '</p>';
-          var title = '<p style="font-size:16px; margin-bottom:15px">' + '温馨提示 ' + '</p>';
-          var btnArray = ['取消', '确认'];
-          var that = this;
-          mui.confirm(font, title, function (e) {
-            if (e.index == 1) {
-              that.$router.replace('/my/info');
-            } else {
-
-            }
-          }, 'div');
-
-         userAbility.applyProfessor(this);
-         
-
-
-        } else {
-          this.$router.replace('/expert/apply');
+        if (userAbilityCheck.applyProfessor()) {
+           this.$router.replace('/expert/apply');
         }
-
       },
       initData() {
         //执行刷新
