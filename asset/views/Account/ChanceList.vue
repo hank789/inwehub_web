@@ -364,7 +364,7 @@ import userAbility from '../../utils/userAbility';
 		font-size: 12px;
 		color: #c8c8c8;
 	}
-	/***媒体查询*****/
+/***媒体查询*****/
 @media  screen and (min-width: 320px){
   ul li{
 		width: 92%;

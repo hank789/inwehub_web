@@ -177,7 +177,7 @@
 	import { openWebviewByHome } from '../utils/webview';
     import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
     import {queryParent} from '../utils/dom';
-//  import userAbility from '../utils/userAbility';
+    import userAbility from '../utils/userAbility';
 
 	const Home = {
 		data: () => ({
@@ -866,7 +866,7 @@
    .latestWeekly{
    	width: 100%;
    	height: 46.5%;
-   	margin-top: 7%;
+   	margin-top: 7.1%;
    	background: #C8C8C8;
    	float: left;
    	position:relative;
