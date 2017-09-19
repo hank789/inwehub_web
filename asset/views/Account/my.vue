@@ -27,11 +27,7 @@
 							  <use xlink:href="#icon-fenxiang"></use>
 							</svg>
 							<span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
-							<!--<span class="grow">成长值</span>
-							<span>{{user_credits }}</span>
-							<span class="integral">贡献值</span>
-							<span>{{user_coins }}</span>-->
-
+							
 						</div>
 					</div>
 

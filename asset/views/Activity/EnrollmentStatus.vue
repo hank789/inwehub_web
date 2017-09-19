@@ -21,7 +21,7 @@
 			 <div class="btn">
 				 <button class="blue" v-if="list.status =='1'"    @tap.stop.prevent="signUp()">立即报名</button>
 				 <button class="gray" v-if="list.status =='2'"  >报名结束</button>
-				 <button class="yellow" v-if="list.status =='3'"  >报名申请中</button>
+				 <button class="yellow" v-if="list.status =='3'"  >申请中</button>
 				 <button class="yellow" v-if="list.status =='4'"  >报名成功</button>
 				 <button class="gray" v-if="list.status =='5'"  >报名失败</button>
 				 <button class="blue" v-if="list.status =='6'"  @tap.stop.prevent="signUp()">重新申请</button>
@@ -185,53 +185,12 @@
 						this.loading = 0;
 					});
 			},
-			//上拉加载；
-			pullupRefresh() {
-				setTimeout(() => {
-					this.getNextList();
-				}, 1000);
-			},
-			//上拉加载；
-			getNextList() {
-				 let id = parseInt(this.$route.params.id);
-				postRequest("activity/commentList", {
-					activity_id:id,
-					page: this.page
-				}).then(response => {
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-					}
-					//请求成功的操作
-                      console.log(response.data.data);
-					if(response.data.data) {
-						this.cont =  this.cont.concat(response.data.data.data);
-						this.number = response.data.data;
-					}
-					this.loading = 0;
-
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-
-				});
-			},
+			
+			
 
 
 		},
 		mounted() {
-
-			//请求数据；
-			mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-
-					up: {
-						contentrefresh: '正在加载...',
-						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-						callback: this.pullupRefresh
-					}
-				}
-			});
 			//活动详情
 			this.getData();
 			//列表
@@ -319,7 +278,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 /*line-height: 44px;*/
+   	 border: none;
    }
    .yellow{
    	 width: 100%;
@@ -330,7 +289,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 /*line-height: 44px;*/
+   	  border: none;
    }
    .gray{
    	 width: 100%;
@@ -341,7 +300,7 @@
    	 border-radius: 5px;
    	 margin-bottom: 15px;
    	 text-align: center;
-   	 /*line-height: 44px;*/
+     border: none;
    }
 
    .feedback{
