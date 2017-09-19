@@ -55,7 +55,7 @@
       }
     },
     created(){
-    		
+
     },
     components: {
       FooterComponent,
@@ -68,8 +68,8 @@
       }
     },
     mounted () {
-    
-    	
+
+
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;
@@ -250,6 +250,11 @@
                     // 用户积分等级提升
                     userAbility.upgradeLevel(this);
                     break;
+                case 'activity_enroll_fail':
+                case 'activity_enroll_success':
+                    // 活动报名事件
+                  router.pushPlus("/EnrollmentStatus/"+payload.object_id);
+                  break;
               }
             };
 
