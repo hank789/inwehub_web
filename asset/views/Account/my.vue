@@ -328,6 +328,7 @@
 		activated: function() {
 			console.log('activated');
 			this.initData();
+			userAbility.newbieTask(this);
 		},
 		mounted() {
 //			mui.waiting();
