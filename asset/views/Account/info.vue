@@ -104,6 +104,7 @@
 	import ACCOUNT_API from '../../api/account';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
 	import uploadHeader from '../../components/uploadHeader.vue';
+	import userAbility from '../../utils/userAbility';
 
 	export default {
 		data: () => ({
@@ -130,7 +131,6 @@
 
 		}),
 		created() {
-			//showInwehubWebview();
 			this.getUserInfo();
 		},
 		components: {
@@ -142,8 +142,12 @@
 				console.log('refresh-info');
 				this.getUserInfo();
 			});
+			
 		},
 		methods: {
+			refreshPageData(){
+                this.getUserInfo();
+               },
 			//警告框
 			warn() {
 				var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
@@ -206,7 +210,9 @@
 
 					this.user = user;
 					this.loading = 0;
-
+					//提示完善名片;
+				     userAbility.perfectCard(this);								        
+     
 				}));
 			}
 		}

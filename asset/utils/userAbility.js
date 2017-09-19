@@ -16,8 +16,6 @@ import {alertZoom, alertSkyOne, alertSkyTwo, alertSimple, getDialogObj} from '..
 
 var userAbility = () => {
 
-  var UserInfo = localEvent.getLocalItem('UserInfo');
-
   /**
    * 是否可以做某事
    * @param what
@@ -34,9 +32,9 @@ var userAbility = () => {
   };
 
   /**
-   * 发布需求
+   * 跳转到发布需求
    */
-  var addProject = (context) => {
+  var jumpToAddProject = (context) => {
     if (isCompanyStatus()) {
       router.push('/project/basic');
     } else {
@@ -74,9 +72,9 @@ var userAbility = () => {
   }
 
   /**
-   * 专家提问
+   * 跳转到专家提问
    */
-  var addAsk = (context , id = '') => {
+  var jumpToAddAsk = (context, id = '') => {
     var url = '/ask';
     if (id) {
       url = '/ask/' + id;
@@ -85,98 +83,58 @@ var userAbility = () => {
   };
 
   /**
-   * 提交文章
+   * 跳转到提交文章
    */
-  var addArticle = (context) => {
+  var jumpToAddArticle = (context) => {
     router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   };
 
   /**
-   * 活动报名
+   * 跳转到活动报名
    */
-  var applyActivity = (context, id) => {
+  var jumpToApplyActivity = (context, id) => {
 
     var userInfo = getLocalUserInfo();
-
-    if (userInfo.user_level < 2) {
-      var dialog = getDialogObj(context);
-      if (dialog) {
+ 
+    if (userInfo.user_level >= 2) {
+      router.pushPlus('/EnrollmentStatus/' + id);
+    } else {
+        var dialog = getDialogObj(context);
+        if (dialog) {
         dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
-          console.log('html:' + html);
           alertSimple(html, '查看等级详情', (num) => {
-
-            if (num.index == 0) {
-              //      	 	console.log('my');
+            if (num.index === 0) {
               router.pushPlus('/my/Growth');
             }
-
           }, true);
         });
       }
-
-    } else {
-      router.pushPlus('/EnrollmentStatus/' + id);
     }
-
-
   };
 
   /**
-   * 机遇报名
+   * 跳转到机遇报名
    */
-  var applyOpportunity = (context, id) => {
-
+  var jumpToApplyOpportunity = (context, id) => {
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level < 3) {
-      var dialog = getDialogObj(context);
+    if (userInfo.user_level >= 3) {
+    router.pushPlus('/EnrollmentStatus/' + id);
+    } else {
+     var dialog = getDialogObj(context);
       if (dialog) {
         dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
-          console.log('html:' + html);
+
           alertSimple(html, '查看等级详情', (num) => {
 
-            if (num.index == 0) {
-//      	 	console.log('my');
+            if (num.index === 0) {
               router.pushPlus('/my/Growth');
             }
 
           }, true);
         });
-      }
-
-    } else {
-      router.pushPlus('/EnrollmentStatus/' + id);
+      } 
     }
-
-
-  };
-  /**
-   * 首页查看更多专家
-   */
-  var moreProfessor = (context) => {
-    var userInfo = getLocalUserInfo();
-
-
-    if (userInfo.user_level < 4) {
-      var dialogObj = getDialogObj(context);
-      if (dialogObj) {
-        dialogObj.getHtml('test', {level: userInfo.user_level}, (html) => {
-          console.log(html);
-          alertSimple(html, '查看等级详情', (num) => {
-
-            if (num.index == 0) {
-//      	 	console.log('my');
-              router.pushPlus('/my/Growth');
-            }
-
-          }, true);
-        });
-      }
-
-    } else {
-
-    }
-
   };
 
 
@@ -188,17 +146,10 @@ var userAbility = () => {
     var dialogObj = getDialogObj(context);
     if (dialogObj) {
       dialogObj.getHtml('p-upgrade', {level: userInfo.user_level}, (html) => {
-//      console.log(html);
         alertZoom(html, (num) => {
-
-          if (num.index == 1) {
-            num.index == -1;
-          }
-
         }, false);
       });
     }
-
   };
 
 
@@ -207,39 +158,70 @@ var userAbility = () => {
    */
   var newbieTask = (context, id) => {
     var userInfo = getLocalUserInfo();
-//	console.log(userInfo.newbie_unfinish_tasks);
-//console.log(typeof(parseInt(localEvent.getLocalItem('num').value)));
-    var num = parseInt(localEvent.getLocalItem('num').value);
+    var mobile = userInfo.phone;
+//  console.log(userInfo)
+    var num = parseInt(localEvent.getLocalItem("num"+mobile).value);
     if (num != 1) {
-      if (userInfo.newbie_unfinish_tasks.complete_userinfo =="false" && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false"  && userInfo.newbie_unfinish_tasks.complete_userinfo  =="false" )
-      {
+    if (userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false") {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
-          //console.log(html);
+
             alertZoom(html, (num) => {
-              console.log(num.index)
-              localEvent.setLocalItem('num', {value: '1'});
+            	  console.log(num);
+            	 
+            	  	  localEvent.setLocalItem("num"+mobile, {value: '1'});
+            	 
+             
 
             }, false);
           });
         }
       }
-    }
-
-//	 console.log(localEvent.getLocalItem(num))
+  }
   };
+  
+  
+  /**
+   * 完善名片的提示框；
+   */
+  var perfectCard = (context, id) => {
+     var userInfo = getLocalUserInfo();
+     var Card = parseInt(localEvent.getLocalItem('PerfectCard').value)
+     if(Card != 1){
+       if (userInfo.account_info_complete_percent >= 90) {
+           var dialogObj = getDialogObj(context);
+		        if (dialogObj) {
+			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
+			        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
+			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {	
+			          		localEvent.setLocalItem('PerfectCard', {value: '1'});
+			          		if (num.index === 0) {
+				              router.pushPlus('/my/resume');
+				            }
+			          	}, true);
+			          });
+			        });
+		        }
+       	}
+       
+      
+    }
+    };
+
+
 
   return {
     canDo: canDo,
-    addProject: addProject,
-    jumpToApplyProfessor:jumpToApplyProfessor,
-    addAsk: addAsk,
-    addArticle: addArticle,
-    applyActivity: applyActivity,
-    moreProfessor: moreProfessor,
+    jumpToAddProject: jumpToAddProject,
+    jumpToApplyProfessor: jumpToApplyProfessor,
+    jumpToAddAsk: jumpToAddAsk,
+    jumpToAddArticle: jumpToAddArticle,
+    jumpToApplyActivity: jumpToApplyActivity,
+    jumpToApplyOpportunity:jumpToApplyOpportunity,
     upgradeLevel: upgradeLevel,
-    newbieTask: newbieTask
+    newbieTask: newbieTask,
+    perfectCard:perfectCard
   }
 };
 

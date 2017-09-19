@@ -171,6 +171,7 @@
             mui.back();
           }
 
+
           if (response.data.data.length > 0) {
             this.asks = this.asks.concat(response.data.data);
           }
@@ -449,6 +450,7 @@
     z-index:7;
   }
 
-  .list-empty{
+  .list-empty .menu{
+    margin-bottom:10px;
   }
 </style>

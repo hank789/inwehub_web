@@ -37,7 +37,7 @@
 							<svg class="icon" aria-hidden="true" v-else-if="task.task_type =='5'">
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
-							<img :src="task.user_avatar_url"  v-else/>
+					 		<img :src="task.user_avatar_url"  v-else/>
 							<p>
 								<span>
 									<a v-if="task.task_type_description">{{task.task_type_description}}  |</a>
@@ -71,15 +71,6 @@
 						</li>
 
 					</ul>
-
-
-
-
-
-
-
-
-
 
 
 				</div>
@@ -147,7 +138,7 @@
 			}
 		},
 		activated: function() {
-
+           this.initPullRefresh();
 		},
 		mounted() {
 			var t = this;
@@ -198,10 +189,6 @@
 				}
 				return null;
 			},
-//			//对后台的数据进行拼接；
-//			getType(task) {
-//				return task.task_type_description + '|' + task.status_description;
-//			},
 			//数据列表的刷新 加载的操作；
 			initPullRefresh() {
 				mui.init({
@@ -273,7 +260,8 @@
 						mui.back();
 					}
 					//请求成功的操作
-					if(response.data.data.list) {
+
+					if(response.data.data.list.length > 0) {
 						this.tasks = response.data.data.list;
 					}
 					//没有数据的显示框不显示；
@@ -477,7 +465,10 @@
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-
+	ul li p span:nth-of-type(3) div {
+	   display: inline-block;	 
+	}
+  
 	.message {
 		width: 7px;
 		height: 7px;
@@ -505,4 +496,11 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
+
+  .list-empty{
+     top:45px;
+  }
+  .list-empty .list-ask-item{
+      padding:10px 0;
+  }
 </style>

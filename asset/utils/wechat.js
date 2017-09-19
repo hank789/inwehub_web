@@ -25,14 +25,22 @@ function hideHeaderHandler(obj, type){
           }
         }
       }
-
     }
+  }
+}
 
-
-
+function rebootAuth(hash)
+{
+  if (mui.os.wechat) {
+    if (!hash) {
+       hash = window.location.hash.replace('#', '');
+    }
+    var url = process.env.API_ROOT + 'wechat/oauth?redirect=' + hash;
+    window.location.href = url;
   }
 }
 
 export {
-  hideHeaderHandler
+  hideHeaderHandler,
+  rebootAuth
 };

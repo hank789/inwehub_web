@@ -213,9 +213,11 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
-	import { setStatusBarBackgroundAndStyle } from '../utils/statusBar';
-	import { queryParent } from '../utils/dom';
-	import userAbility from '../utils/userAbility';
+    import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
+    import {queryParent} from '../utils/dom';
+    import userAbility from '../utils/userAbility';
+    import userAbilityCheck from '../utils/userAbilityCheck';
+
 
 	const Home = {
 		data: () => ({
@@ -279,6 +281,7 @@
 			}
 		},
 		methods: {
+
 			swipperClick(swiper, event) {
 				var parent = queryParent(event.target, 'swiper-slide');
 				if(!parent) return;
@@ -288,6 +291,7 @@
 				} else {
 					userAbility.moreProfessor(this);
 				}
+
 
 			},
 			detail(url) {
@@ -309,9 +313,10 @@
 				}
 
 			},
-			toAsk() {
-				userAbility.addAsk(this);
-			},
+      toAsk() {
+       userAbility.jumpToAddAsk(this);
+//       userAbility.newbieTask(this);
+      },
 
 			goArticle: function(article) {
 
@@ -484,21 +489,48 @@
 					}
 
 					//推荐专家；
-					t.recommend_experts = response_data.recommend_experts;
 
-					this.isShowActivity = response_data.recommend_activity.length ? true : false;
+				   t.recommend_experts = response_data.recommend_experts;
 
-					//首页推荐活动
-					for(var i in response_data.recommend_activity) {
-						t.recommend_activity[i] = response_data.recommend_activity[i];
-					}
+				   this.isShowActivity = response_data.recommend_activity.length?true:false;
 
-					//推荐阅读；
-					t.recommend_read = response_data.recommend_read;
+				   //首页推荐活动
+				   for (var i in response_data.recommend_activity) {
+				   	   t.recommend_activity[i] = response_data.recommend_activity[i];
+				   }
+
+
+				   //推荐阅读；
+				   t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
 					t.is_expert = response_data.expert_apply_status;
+
+
+          //预加载第一篇文章
+          if (mui.os.plus && t.recommend_read.length > 0) {
+            var article_params = {
+              article_id: t.recommend_read[0].id,
+              article_url: t.recommend_read[0].view_url,
+              article_title: t.recommend_read[0].title,
+              article_comment_url: t.recommend_read[0].comment_url,
+              article_img_url:t.recommend_read[0].img_url,
+              preload: true,
+              custom_preload: true
+            };
+            mui.preload({
+              url: 'index.html#/webview/article',
+              id: 'inwehub_article_view',
+              styles: {
+                popGesture: 'hide'
+              },
+              extras: article_params
+            });
+          }
+
+
+
 
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;

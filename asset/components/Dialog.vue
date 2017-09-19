@@ -91,7 +91,20 @@
              <div class="task_btn alertConfirm">确定</div>
          </div>
          </div>
- 		       
+ 		<!-- 完善名片提示-->
+ 		<div id="p-perfectCard">
+ 		<div id="perfectCard-t">
+ 		  <div class="perfectCard-t">
+ 		  	 <p>恭喜！你的名片比较完善了</p>
+ 		  	 <p>（成长值<i>+500</i>）</p>
+ 		  </div>
+ 		 </div>
+ 		  <div id="perfectCard-b">
+ 		  <div class="perfectCard-b alertConfirm">
+ 		  	查看名片并可分享
+ 		  </div>
+ 		  </div>
+ 		 </div>
 
     </div>
 </template>
@@ -275,7 +288,7 @@
    
    /*领取新手任务*/
    #p-task{
-  	width: 245px;
+  	width: 245 px;
     height: 320px;
    
   }
@@ -336,5 +349,48 @@
    	color: #03aef9;
    	font-size: 16px;
    }
+/*完善名片提示*/
+#perfectCard-t{
+   width: 240px;
+   height: 117px;
+   
+}
+.perfectCard-t{
+   width: 250px;
+   height: 100px;
+   /*border: 1px solid #DCDCDC;*/
+}
+.perfectCard-t p:nth-child(1){
+	font-size: 19px;
+	color: #444444;
+	text-align: center;
+	margin-top: 31px;
+}
+.perfectCard-t p:nth-child(2){
+	font-size: 14px;
+	color: #808080;
+	text-align: center;
+	margin-top: 7.5px;
+	
+}
+.perfectCard-t p:nth-child(2) i{
+	color: #03aef9;
+	font-style: normal;
+}
 
+
+#perfectCard-b{
+	width: 240px;
+	height: 54px;
+	/*background: #CCCCCC;*/
+}
+.perfectCard-b{
+	width: 240px;
+	height: 54px;
+	font-size: 16px;
+	color: #03aef9;
+	text-align: center;
+	line-height: 54px;
+	
+}
 </style>

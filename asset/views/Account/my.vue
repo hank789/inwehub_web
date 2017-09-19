@@ -20,18 +20,14 @@
 
 						<div class="my-detail">
 							<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info')">
-								<use xlink:href="#icon-xiugai"></use>
+							  <use xlink:href="#icon-xiugai"></use>
 							</svg>
 							<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片{{account_info_complete_percent}}%</span>
 							<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
-								<use xlink:href="#icon-fenxiang"></use>
+							  <use xlink:href="#icon-fenxiang"></use>
 							</svg>
 							<span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
-							<!--<span class="grow">成长值</span>
-							<span>{{user_credits }}</span>
-							<span class="integral">贡献值</span>
-							<span>{{user_coins }}</span>-->
-
+							
 						</div>
 					</div>
 
@@ -44,11 +40,11 @@
 				</div>
 
 				<ul class="my-infuence">
-					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_credits }}</p>
 						<p>成长值</p>
 					</li>
-					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_coins }}</p>
 						<p>贡献值</p>
 					</li>
@@ -60,7 +56,7 @@
 						<p class="mui-ellipsis">{{ user_comment_karma }}</p>
 						<p>回复影响值</p>
 					</li>
-				</ul>
+			     </ul>
 				<div class="my-apply">
 					<div @tap.stop.prevent="toApply(expert_apply_status)">
 						<svg class="icon" aria-hidden="true">
@@ -168,7 +164,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-	import userAbility from '../../utils/userAbility';
+    import userAbility from '../../utils/userAbility';
 
 	export default {
 		data() {
@@ -194,12 +190,12 @@
 				user_level: currentUser.user_level,
 				user_credits: currentUser.user_credits,
 				user_coins: currentUser.user_coins,
-				user_submission_karma: currentUser.submission_karma,
-				user_comment_karma: currentUser.comment_karma,
+				user_submission_karma:currentUser.submission_karma,
+				user_comment_karma:currentUser.comment_karma,
 				user_id: currentUser.id,
 				questions: currentUser.questions,
 				answers: currentUser.answers,
-				enroll: currentUser.my_activity_enroll,
+				enroll:currentUser.my_activity_enroll,
 				tasks: currentUser.tasks,
 				projects: currentUser.projects,
 				expert_level: currentUser.expert_level,
@@ -250,19 +246,19 @@
 			},
 			//认证专家；
 			toApply(expertStatus) {
-				switch(parseInt(expertStatus)) {
-					case 0:
-					case 3:
-						this.$router.push('/my/pilot');
-						break;
-					case 2:
-						mui.toast('您已经是专家');
-						break;
-					case 1:
-						this.$router.push('/expert/apply/success?type=0');
-						break;
-				}
-
+				switch (parseInt(expertStatus)) {
+			        case 0:
+			        case 3:
+			            this.$router.push('/my/pilot');
+			          break;
+			        case 2:
+			          mui.toast('您已经是专家');
+			          break;
+			        case 1:
+			          this.$router.push('/expert/apply/success?type=0');
+			          break;
+			      }
+               
 			},
 			getNumbers: function(number) {
 				var html = '';
@@ -302,7 +298,7 @@
 					this.user_comment_karma = user.info.comment_karma;
 					this.user_id = user.info.id;
 					this.questions = user.info.questions;
-					this.enroll = user.info.my_activity_enroll;
+					this. enroll = user.info.my_activity_enroll;
 					this.answers = user.info.answers;
 					this.tasks = user.info.tasks;
 					this.projects = user.info.projects;
@@ -319,40 +315,35 @@
 		},
 		created() {
 			//showInwehubWebview();
-			if(mui.os.plus) {
-				var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-				var currentUser = localEvent.getLocalItem('UserInfo');
-				var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
-				if(inwehub_embed_webview.getURL() !== url) {
-					inwehub_embed_webview.loadURL(url);
-				}
-			}
+      if (mui.os.plus) {
+        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
+        var currentUser = localEvent.getLocalItem('UserInfo');
+        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
+        if (inwehub_embed_webview.getURL() !== url) {
+          inwehub_embed_webview.loadURL(url);
+        }
+      }
 
 		},
 		activated: function() {
 			console.log('activated');
 			this.initData();
+			userAbility.newbieTask(this);
 		},
 		mounted() {
-			//			mui.waiting();
+//			mui.waiting();
 			//领取新手任务；
-			userAbility.newbieTask(this);
+//      		userAbility.newbieTask(this); 	
 		}
 	}
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-	ul,
-	li,
-	p,
-	span,
-	a,
-	i {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	
+   ul,li,p,span,a,i{
+   	margin: 0;
+   	padding: 0;
+   	list-style: none;
+   }
 	.bot {
 		position: absolute;
 		right: 0;
@@ -363,7 +354,7 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.bott {
 		position: absolute;
 		right: 15px;
@@ -374,19 +365,19 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	.my-top {
 		width: 100%;
 		height: 330px;
 		padding: 0 13px 0 13px;
 		background-color: #ffffff;
 	}
-	
+
 	.professor {
 		width: 100%;
 		height: 100px;
 	}
-	
+
 	.professor .avatar {
 		width: 69px;
 		height: 68.5px;
@@ -394,7 +385,7 @@
 		margin-top: 30.5px;
 		float: left;
 	}
-	
+
 	.my-personal {
 		width: 71%;
 		height: 69px;
@@ -404,14 +395,14 @@
 		position: absolute;
 		right: 8px;
 	}
-	
+
 	.my-personal .my-info {
 		width: 100%;
 		height: 30px;
 		margin-bottom: 9px;
 		position: relative;
 	}
-	
+
 	.my-personal .my-info span:nth-of-type(1) {
 		display: inline-block;
 		max-width: 72px;
@@ -421,7 +412,7 @@
 		margin-right: 1.5px;
 		margin-bottom: -4px;
 	}
-	
+
 	.my-personal .my-info p:nth-of-type(1) {
 		width: 19px;
 		height: 18px;
@@ -437,7 +428,7 @@
 		background-size: 19px 18px;
 		background-position: top;
 	}
-	
+
 	.my-personal .my-info svg:nth-of-type(1) {
 		font-size: 26px;
 		margin-bottom: -4px;
@@ -445,29 +436,26 @@
 		color: rgb(3, 174, 249);
 		position: relative;
 	}
-	/**********编辑分享部分***************/
-	
+
+/**********编辑分享部分***************/
 	.my-personal .my-detail {
 		width: 100%;
 		height: 30px;
 	}
-	
-	.my-detail svg {
+	.my-detail svg{
 		font-size: 18px;
 		color: #03AEF9;
 		margin-bottom: -2px;
 	}
-	
-	.my-detail svg:nth-of-type(2) {
-		margin-left: 10px;
+	.my-detail svg:nth-of-type(2){
+	    margin-left: 10px;
 	}
-	
-	.my-detail span {
+	.my-detail span{
 		font-size: 13px;
 		color: #808080;
+
 	}
-	/**********信息部分***************/
-	
+/**********信息部分***************/
 	.my-news {
 		width: 100%;
 		height: 36px;
@@ -479,7 +467,7 @@
 		-moz-box-shadow: 0 0 10px rgb(243, 244, 246);
 		box-shadow: 0 0 10px rgb(243, 244, 246);
 	}
-	
+
 	.my-news p {
 		display: inherit;
 		float: left;
@@ -491,54 +479,50 @@
 		line-height: 16px;
 		border-right: 1px solid #c8c8c8;
 	}
-	
+
 	.my-news p:last-child {
 		border-right: none;
 		width: 30%;
 		margin-left: 8px;
 	}
-	
+
 	.my-news p span {
 		color: #fa4975;
 	}
-	
+
 	.my-news p:nth-of-type(3) span {
 		color: rgb(68, 68, 68);
 	}
-	/**********发布文章信息部分***************/
-	
-	.my-infuence {
+/**********发布文章信息部分***************/
+	.my-infuence{
 		width: 100%;
 		margin-top: 22px;
 		overflow: hidden;
 	}
-	
-	.my-infuence li {
+	.my-infuence li{
 		width: 25%;
 		height: 100%;
 		float: left;
 		text-align: center;
 	}
-	
-	.my-infuence li p:nth-of-type(1) {
+	.my-infuence li p:nth-of-type(1){
 		width: 100%;
 		font-size: 14px;
 		font-weight: 500;
 		color: #444444;
 	}
-	
-	.my-infuence li p:nth-of-type(2) {
+	.my-infuence li p:nth-of-type(2){
 		font-size: 12px;
 		color: #808080;
 	}
-	/**********申请部分***************/
-	
+
+/**********申请部分***************/
 	.my-apply {
 		margin-top: 20px;
 		width: 100%;
 		height: 61px;
 	}
-	
+
 	.my-apply div {
 		float: left;
 		width: 49%;
@@ -546,12 +530,9 @@
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-	
-	.my-apply div:nth-of-type(2) {
-		margin-left: 2%;
-		width: 49%;
-	}
-	
+     .my-apply div:nth-of-type(2){
+     	margin-left: 2%;
+     }
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 6px;
@@ -560,7 +541,7 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
@@ -569,25 +550,25 @@
 		color: rgb(3, 174, 249);
 		float: left;
 	}
-	
+
 	.my-apply div p {
 		margin-top: 10px;
 	}
-	
+
 	.my-apply div p span {
 		display: block;
 	}
-	
+
 	.my-apply div p span:nth-of-type(1) {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-apply div p span:nth-of-type(2) {
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.part2 {
 		padding: 0;
 		margin: 0;
@@ -600,14 +581,14 @@
 		margin-top: 10px;
 		position: relative;
 	}
-	
+
 	.part2 li {
 		display: inline-block;
 		width: 23%;
 		height: 70px;
 		text-align: center;
 	}
-	
+
 	.part2 li span:nth-of-type(1) {
 		padding: 0;
 		margin: 0;
@@ -617,7 +598,7 @@
 		font-size: 13px;
 		color: #444444;
 	}
-	
+
 	.part2 li span:nth-of-type(2) {
 		padding: 0;
 		margin: 0;
@@ -625,7 +606,7 @@
 		color: #808080;
 		display: block;
 	}
-	
+
 	.my-option {
 		width: 100%;
 		background: #FFFFFF;
@@ -636,7 +617,7 @@
 		padding-right: 16px;
 		margin-bottom: 79px;
 	}
-	
+
 	.my-option li {
 		width: 100%;
 		height: 44px;
@@ -644,22 +625,22 @@
 		padding-bottom: 12px;
 		position: relative;
 	}
-	
+
 	.my-option li span {
 		margin-left: 10px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-option li svg:nth-of-type(1) {
 		font-size: 22px;
 		margin-bottom: -4px;
 	}
-	
+
 	.my-option li svg:nth-of-type(2) {
 		float: right;
 	}
-	
+
 	.mui-popup-inner {
 		padding: 23px 15px 1px 15px;
 	}

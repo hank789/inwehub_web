@@ -218,7 +218,9 @@ function showWebview(){
   if (mui.os.plus) {
       mui.plusReady(() => {
         var self = plus.webview.currentWebview();
-        self.show();
+        if (self.custom_preload === false || self.custom_preload === undefined) {
+          self.show();
+        }
         if (mui.os.ios) {
           self.addEventListener('popGesture', (e)=>{
             if(e.type == "end" && e.result == true){

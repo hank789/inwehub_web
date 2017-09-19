@@ -105,7 +105,7 @@
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li v-if = "newbie_unfinish_tasks.ask == 'false'">
+						 <li v-if = "!newbie_unfinish_tasks.ask">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
@@ -118,7 +118,7 @@
 							<p v-else>升级解锁</p>
 							
 						</li>
-						 <li v-if = "newbie_unfinish_tasks.readhub_comment == 'false'">
+						 <li v-if = "!newbie_unfinish_tasks.readhub_comment">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>
@@ -288,6 +288,10 @@
 	    newbie_unfinish_tasks:userInfo.newbie_unfinish_tasks,
       }
     },
+    activated: function() {
+    //console.log('activated');
+	this.initData();
+    },
     methods: {
       initData() {
         //执行刷新
@@ -298,8 +302,6 @@
           this.user_coins =user.info.user_coins;
           this.user_level =user.info.user_level;
           this.newbie_unfinish_task = user.info.newbie_unfinish_tasks;
-
-
         }));
       },
       //警告框
