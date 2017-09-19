@@ -269,7 +269,7 @@
 
 			},
       toAsk() {
-         userAbility.addAsk(this);
+         userAbility.jumpToAddAsk(this);
       },
 
       goArticle: function(article) {
