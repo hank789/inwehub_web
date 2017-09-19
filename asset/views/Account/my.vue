@@ -333,7 +333,7 @@
 		mounted() {
 //			mui.waiting();
 			//领取新手任务；
-        		userAbility.newbieTask(this); 	
+//      		userAbility.newbieTask(this); 	
 		}
 	}
 </script>
