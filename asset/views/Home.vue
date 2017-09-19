@@ -116,7 +116,7 @@
 			<div class="hotAnswer">
 				<div class="hotAnswer_t">
 				  <p>热门问答</p>
-				  <p>进入社区</p>
+				  <p  @tap.stop.prevent="$router.pushPlus('/home/MajorList')">进入社区</p>
                   <i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">

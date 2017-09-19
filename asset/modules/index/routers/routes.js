@@ -95,6 +95,30 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+	{ //热门问答列表页面；
+		path: '/home/MajorList',
+    name: 'home-EnrollmentStatus.vue',
+    meta: {
+			title: '问答社区',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Hotquiz/MajorList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //热门悬赏列表页面；
+		path: '/home/RewardList',
+    name: 'home-EnrollmentStatus.vue',
+    meta: {
+			title: '问答社区',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Hotquiz/RewardList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
 	{
 		path: '/login',
     name: 'login',
