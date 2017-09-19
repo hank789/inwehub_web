@@ -162,7 +162,7 @@ var userAbility = () => {
 //  console.log(userInfo)
     var num = parseInt(localEvent.getLocalItem("num"+mobile).value);
     if (num != 1) {
-//    if (userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false") {
+    if (userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false") {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
@@ -178,7 +178,7 @@ var userAbility = () => {
           });
         }
       }
-//  }
+  }
   };
   
   

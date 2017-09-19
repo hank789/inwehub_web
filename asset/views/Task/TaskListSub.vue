@@ -465,7 +465,10 @@
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-
+	ul li p span:nth-of-type(3) div {
+	   display: inline-block;	 
+	}
+  
 	.message {
 		width: 7px;
 		height: 7px;
