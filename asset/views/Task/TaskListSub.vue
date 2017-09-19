@@ -273,7 +273,8 @@
 						mui.back();
 					}
 					//请求成功的操作
-					if(response.data.data.list) {
+
+					if(response.data.data.list.length > 0) {
 						this.tasks = response.data.data.list;
 					}
 					//没有数据的显示框不显示；
@@ -505,4 +506,11 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
+
+  .list-empty{
+     top:45px;
+  }
+  .list-empty .list-ask-item{
+      padding:10px 0;
+  }
 </style>
