@@ -123,7 +123,12 @@
                    <li>
                    	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
                    	<div class="hotAnswer_d">
-                   	   <p><img src="../statics/images/balance1.png"/></p>
+                   	   <p>
+                   	   	<img src="../statics/images/balance1.png"/>
+                   	   	 <svg class="icon" aria-hidden="true">
+							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+						 </svg>
+                   	   </p>
                    	   <p class="mui-ellipsis">回答者：郭大红</p>
                    	   <p class="mui-ellipsis">运营专员</p>
                    	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
@@ -133,7 +138,12 @@
                    <li>
                    	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
                    	<div class="hotAnswer_d">
-                   	   <p><img src="../statics/images/balance1.png"/></p>
+                   	   <p>
+                   	   	<img src="../statics/images/balance1.png"/>
+                   	   	<svg class="icon" aria-hidden="true">
+							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+						 </svg>
+                   	   </p>
                    	   <p class="mui-ellipsis">回答者：郭大红</p>
                    	   <p class="mui-ellipsis">运营专员</p>
                    	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
@@ -985,6 +995,14 @@
 	.hotAnswer_d p:nth-child(1){
 		width: 9.5%;
         height: 32px;
+        /*background: #CCCCCC;*/
+        position: relative;
+	}
+	.hotAnswer_d p:nth-child(1)>svg{
+       position: absolute;
+       font-size: 14px;
+       bottom: 0;
+       right: -4px;
 	}
 	.hotAnswer_d p:nth-child(1)>img{
 		width: 100%;
