@@ -95,10 +95,12 @@ var userAbility = () => {
   var jumpToApplyActivity = (context, id) => {
 
     var userInfo = getLocalUserInfo();
-
-    if (userInfo.user_level < 2) {
-      var dialog = getDialogObj(context);
-      if (dialog) {
+ 
+    if (userInfo.user_level >= 2) {
+      router.pushPlus('/EnrollmentStatus/' + id);
+    } else {
+        var dialog = getDialogObj(context);
+        if (dialog) {
         dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
           alertSimple(html, '查看等级详情', (num) => {
             if (num.index === 0) {
@@ -107,9 +109,6 @@ var userAbility = () => {
           }, true);
         });
       }
-
-    } else {
-      router.pushPlus('/EnrollmentStatus/' + id);
     }
   };
 
@@ -119,8 +118,10 @@ var userAbility = () => {
   var jumpToApplyOpportunity = (context, id) => {
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level < 3) {
-      var dialog = getDialogObj(context);
+    if (userInfo.user_level >= 3) {
+    router.pushPlus('/EnrollmentStatus/' + id);
+    } else {
+     var dialog = getDialogObj(context);
       if (dialog) {
         dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
 
@@ -132,10 +133,7 @@ var userAbility = () => {
 
           }, true);
         });
-      }
-
-    } else {
-      router.pushPlus('/EnrollmentStatus/' + id);
+      } 
     }
   };
 
@@ -186,7 +184,7 @@ var userAbility = () => {
      var userInfo = getLocalUserInfo();
      var Card = parseInt(localEvent.getLocalItem('PerfectCard').value)
      if(Card != 1){
-       if (userInfo.account_info_complete_percent >= 96) {
+       if (userInfo.account_info_complete_percent >= 90) {
            var dialogObj = getDialogObj(context);
 		        if (dialogObj) {
 			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {

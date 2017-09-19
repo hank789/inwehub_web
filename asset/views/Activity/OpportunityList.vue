@@ -87,7 +87,7 @@ import userAbility from '../../utils/userAbility';
 		methods: {
 			//跳转；
 			skip(id){
-				 userAbility.jumpToApplyActivity(this,id);
+				 userAbility.jumpToApplyOpportunity(this,id);
 			},
 			//下拉刷新;
 			pulldownRefresh() {
