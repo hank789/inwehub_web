@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mui-content">
     <header>
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <div>
@@ -12,7 +12,7 @@
         <p>发挥你的个人价值 </p>
       </div>
     </header>
-    <div class="mui-content content">
+    <div class="content">
       <ul class="why">
         <p><span>为什么</span>要成为平台认证专家？</p>
         <li><i></i><span>全面开启平台功能，发挥个人价值</span></li>
