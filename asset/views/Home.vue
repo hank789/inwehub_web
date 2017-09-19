@@ -269,7 +269,8 @@
 
 			},
       toAsk() {
-         userAbility.jumpToAddAsk(this);
+       userAbility.jumpToAddAsk(this);
+//       userAbility.newbieTask(this);
       },
 
       goArticle: function(article) {
