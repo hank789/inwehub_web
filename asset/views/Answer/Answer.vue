@@ -61,8 +61,11 @@
         }
 
         mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
+          console.log(e.index);
           if (e.index == 0) {
-            mui.back();
+            setTimeout(() => {
+              mui.back();
+            }, 100);
           }
         }, 'div');
       },

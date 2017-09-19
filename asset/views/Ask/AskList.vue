@@ -6,11 +6,19 @@
       <h1 class="mui-title">我的提问</h1>
     </header>
 
-
-
-
-
     <div class="mui-content list-empty" v-if="nothing == 1">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
+            已完成
+          </a>
+        </div>
+      </div>
+
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="">
@@ -148,7 +156,7 @@
             mui.alert(response.data.message);
             mui.back();
           }
-
+          
           if (response.data.data.length > 0) {
             this.asks = response.data.data;
           }
@@ -438,9 +446,7 @@
     z-index:7;
   }
 
-  .list-empty{
-    padding-top:0 !important;
-    margin-top:-6px;
-
+  .list-empty .menu{
+    margin-bottom:10px;
   }
 </style>

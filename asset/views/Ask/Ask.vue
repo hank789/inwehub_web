@@ -314,7 +314,7 @@
           selectOther: this.selectOther
         };
         this.$store.dispatch(ASK_INFO, info);
-        this.$router.push('ask/type');
+        this.$router.push('/ask/type');
       },
       check(){
         var t = this;
