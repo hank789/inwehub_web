@@ -37,7 +37,7 @@
 							<svg class="icon" aria-hidden="true" v-else-if="task.task_type =='5'">
 							  <use xlink:href="#icon-chengchangye-wendarenwu"></use>
 							</svg>
-							<img :src="task.user_avatar_url"  v-else/>
+					 		<img :src="task.user_avatar_url"  v-else/>
 							<p>
 								<span>
 									<a v-if="task.task_type_description">{{task.task_type_description}}  |</a>
@@ -71,15 +71,6 @@
 						</li>
 
 					</ul>
-
-
-
-
-
-
-
-
-
 
 
 				</div>
@@ -147,7 +138,7 @@
 			}
 		},
 		activated: function() {
-
+           this.initPullRefresh();
 		},
 		mounted() {
 			var t = this;
@@ -198,10 +189,6 @@
 				}
 				return null;
 			},
-//			//对后台的数据进行拼接；
-//			getType(task) {
-//				return task.task_type_description + '|' + task.status_description;
-//			},
 			//数据列表的刷新 加载的操作；
 			initPullRefresh() {
 				mui.init({
