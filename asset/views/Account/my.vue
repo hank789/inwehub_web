@@ -40,11 +40,11 @@
 				</div>
 
 				<ul class="my-infuence">
-					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_credits }}</p>
 						<p>成长值</p>
 					</li>
-					<li @tap.stop.prevent="$router.pushPlus('/my/Growth')">
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_coins }}</p>
 						<p>贡献值</p>
 					</li>
@@ -328,11 +328,12 @@
 		activated: function() {
 			console.log('activated');
 			this.initData();
+			userAbility.newbieTask(this);
 		},
 		mounted() {
 //			mui.waiting();
 			//领取新手任务；
-        		userAbility.newbieTask(this); 	
+//      		userAbility.newbieTask(this); 	
 		}
 	}
 </script>
