@@ -288,6 +288,10 @@
 	    newbie_unfinish_tasks:userInfo.newbie_unfinish_tasks,
       }
     },
+    activated: function() {
+    //console.log('activated');
+	this.initData();
+    },
     methods: {
       initData() {
         //执行刷新
@@ -298,8 +302,6 @@
           this.user_coins =user.info.user_coins;
           this.user_level =user.info.user_level;
           this.newbie_unfinish_task = user.info.newbie_unfinish_tasks;
-
-
         }));
       },
       //警告框
