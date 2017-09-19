@@ -358,7 +358,7 @@
 .perfectCard-t{
    width: 250px;
    height: 100px;
-   border: 1px solid #DCDCDC;
+   /*border: 1px solid #DCDCDC;*/
 }
 .perfectCard-t p:nth-child(1){
 	font-size: 19px;

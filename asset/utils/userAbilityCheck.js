@@ -103,39 +103,13 @@ var userAbilityCheck = () => {
   
   
   
-   /**
-   * 完善名片的提示框；
-   */
-  var  perfectCard = (context) => {
-    var userInfo = getLocalUserInfo();
-    
-    if (userInfo.account_info_complete_percent < 96) {
-      var dialogObj = getDialogObj(context);
-      if (dialogObj) {
-        dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
-        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
-          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
-          		if (num.index === 0) {
-	              router.pushPlus('/my/resume');
-	            }
-          	}, true);
-          });
-        });
-      }
-      return false;
-
-    }
-
-    return true;
-  };
-
+  
  
 
 
   return {
     applyProfessor: applyProfessor,
-    moreProfessor:moreProfessor,
-    perfectCard:perfectCard
+    moreProfessor:moreProfessor
 
 };
 }

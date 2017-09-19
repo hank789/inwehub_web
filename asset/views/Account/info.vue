@@ -104,7 +104,7 @@
 	import ACCOUNT_API from '../../api/account';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
 	import uploadHeader from '../../components/uploadHeader.vue';
-	import userAbilityCheck from '../../utils/userAbilityCheck';
+	import userAbility from '../../utils/userAbility';
 
 	export default {
 		data: () => ({
@@ -210,8 +210,8 @@
 
 					this.user = user;
 					this.loading = 0;
-					//提示完善名片
-			        userAbilityCheck.perfectCard(this);
+					//提示完善名片;
+				     userAbility.perfectCard(this);								        
      
 				}));
 			}
