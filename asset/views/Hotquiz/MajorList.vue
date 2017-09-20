@@ -28,15 +28,25 @@
 				<!---->
 				  <ul>
 				     <li>
-				     	<div class="">
-				     		
+				     	<div class="major-t">
+				     		<p>
+				     		  <img src="../../statics/images/balance1.png" />
+				     		  <svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+							   </svg>
+				     		</p>
+				     		<p>
+				     		  <span>匿名</span>
+				     		  <span>公司职位保密</span>
+				     		</p>
+				     		<p>￥88元</p>
 				     	</div>
-				     	<div class="">
-				     		
+				     	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
+				     	<div class="major-b">
+				     		<p>2人回答</p>
+				     		<p> 倒计时 01：57：23  </p>
 				     	</div>
-				     	<div class="">
-				     		
-				     	</div>
+				     	<i class="bot"></i>
 				     </li>
 				  </ul>
 				<!---->
@@ -51,134 +61,7 @@
 <script>
 import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 import userAbility from '../../utils/userAbility';
-	const Discount = {
-		data: () => ({
-			list: [],
-			data: "",
-			loading: true
-
-		}),
-		created() {
-
-		},
-		computed: {
-			//动态计算当前的页数；
-			page() {
-				if(this.data) {
-					return parseInt(this.data.current_page) + 1;
-				}
-				return 1;
-
-			},
-			//有无数据；
-			nothing() {
-				if(this.loading) {
-					return -1;
-				}
-				return this.list.length ? 0 : 1;
-			},
-
-		},
-		methods: {
-			//跳转；
-			skip(id){
-				 userAbility.applyActivity(this,id);
-			},
-			//下拉刷新;
-			pulldownRefresh() {
-				setTimeout(() => {
-					this.getPrevList();
-				}, 1000);
-			},
-			goUrl(url) {
-			    if (/resume/.test(url)) {
-			        this.$router.pushPlus(url + '&goback=1');
-          } else {
-            this.$router.pushPlus(url);
-          }
-      },
-			//下拉刷新请求的数据；
-			getPrevList() {
-				postRequest(`activity/list`, {activity_type:1,is_mine:1}).then(response => {
-					var code = response.data.code;
-					//如果请求不成功提示信息 并且返回上一页；
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-					}
-                      console.log(response.data.data.data)
-					if(response.data.data.data.length > 0) {
-						
-						this.list = response.data.data.data;
-						this.data = response.data.data;
-						
-
-					}
-
-					this.loading = 0;
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-				});
-			},
-//			//上拉加载；
-			pullupRefresh() {
-				setTimeout(() => {
-					this.getNextList();
-				}, 1000);
-			},
-			//上拉加载；
-			getNextList() {
-				postRequest("activity/list", {
-					activity_type:1,
-					is_mine:1,
-					page:this.page
-				}).then(response => {
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-					}
-   
-                    
-					if(response.data.data.data) {
-					   this.list =  this.list.concat(response.data.data.data)
-					   this.data = response.data.data;
-					}
-
-					this.loading = 0;
-
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-
-				});
-			},
-			
-
-		},
-		mounted() {
-//			//请求数据；
-			mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-						callback: this.pulldownRefresh
-					},
-					up: {
-						contentrefresh: '正在加载...',
-						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-						callback: this.getNextList
-					}
-				}
-			});
-
-			//加载页面请求一次；
-			this.getPrevList();
-
-		}
-
-	}	
-	export default Discount;
+	
 </script>
 
 <style scoped>
@@ -257,5 +140,126 @@ import userAbility from '../../utils/userAbility';
 		background: #03aef9;
 	}
 	/*滚动区域*/
+ul{
+  width: 100%;
+  overflow: hidden;
+}  
+ul li{
+	width: 92%;
+	margin-left: 4%;
+	height: 152px;
+	position: relative;
+	padding-top: 15px;
+}
+.major-t{
+	width: 100%;
+	height: 44px;
+	
+}
+.major-t p:nth-of-type(1){
+	width: 13%;
+	height: 100%;
+	float: left;
+    /*border: 1px solid #CCCCCC;*/
+    position: relative;
+}
+.major-t p:nth-of-type(1) svg{
+	position: absolute;
+    right: -4px;
+    bottom: 0;
+    font-size: 20px;
+}
+.major-t p:nth-of-type(1) img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.major-t p:nth-of-type(2){
+	width: 70%;
+	height: 100%;
+	float: left;
+	margin-left: 2%;
+    /*border: 1px solid #CCCCCC;*/
+}
+.major-t p:nth-of-type(2) span{
+	display: block;
+	width: 100%;
+}
+.major-t p:nth-of-type(2) span:nth-of-type(1){
+	font-size:14px;
+	color:#444444;
+}
+.major-t p:nth-of-type(2) span:nth-of-type(2){
+	font-size:13px;
+	color:#808080;
+}
+.major-t p:nth-of-type(3){
+	width: 14%;
+	height: 100%;
+	font-size: 12px;
+	color: #fa4975;
+	text-align: right;
+	float: right;
+}	  
+ul li>p{
+	width: 100%;
+	height: 45px;
+	font-size: 16px;
+	color: #444444;
+	margin-top: 12px;
+	margin-bottom: 9px;
+}	
+.major-b{
+	width: 100%;
+	height: 17px;
+
+}	
+.major-b p{
+	font-size: 12px;
+	color: #B4B4B6;
+}
+.major-b p:nth-of-type(1){
+	float: left;
+}
+.major-b p:nth-of-type(2){
+	float:right;
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	  
+  /*无数据的样式 */
+	
+	.container {
+		position: absolute;
+		top: 40%;
+		left: 36%;
+		display: none;
+	}
+	
+	.container svg {
+		font-size: 60px;
+		margin-left: 23px;
+		margin-bottom: 8px;
+	}
+	
+	.container p {
+		font-size: 12px;
+		color: #c8c8c8;
+	}
 </style>
