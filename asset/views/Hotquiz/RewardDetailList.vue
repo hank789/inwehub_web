@@ -3,13 +3,13 @@
 	<div>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">问答社区</h1>
+			<h1 class="mui-title">问答详情</h1>
 		</header>
 
 		<div class="mui-content absolute">
 			<!--导航栏-->
 			<div class="menu">
-				<span @tap.stop.prevent="$router.replace('/home/MajorList')">专业问答</span>
+				<span @tap.stop.prevent="$router.replace('/home/MajorDetailList')">专业问答</span>
 				<span @tap.stop.prevent="">悬赏问答</span>
 				<i class="bot"></i>
 			</div>
@@ -70,7 +70,6 @@
 						</li>
 					</ul>
 				</div>
-				<div class="btn">发布悬赏问答</div>
 			</div>
 		</div>
 
@@ -387,18 +386,7 @@
 	.major-b p:nth-of-type(2) {
 		float: right;
 	}
-	/*发布悬赏问答*/
-	.btn {
-		width: 100%;
-		height: 49px;
-		background:#03aef9;
-		font-size:17px;
-		color: #FFFFFF;
-		text-align: center;
-        line-height: 49px;
-        position: fixed;
-        bottom: 0;
-	}
+
 	/*无数据的样式 */
 	
 	.container {
