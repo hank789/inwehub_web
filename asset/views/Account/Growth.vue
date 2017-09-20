@@ -283,12 +283,8 @@
         user_credits:userInfo.user_credits,//成长值
 	    user_coins: userInfo.user_coins,//贡献值
 	    user_level: userInfo.user_level,//等级
-	    newbie_unfinish_tasks:userInfo.newbie_unfinish_tasks?userInfo.newbie_unfinish_tasks:"",
+	    newbie_unfinish_tasks:userInfo.newbie_unfinish_tasks?userInfo.newbie_unfinish_tasks:{},
       }
-    },
-    activated: function() {
-    //console.log('activated');
-	this.initData();
     },
     methods: {
       initData() {
@@ -299,8 +295,9 @@
           this.user_credits =user.info.user_credits;
           this.user_coins =user.info.user_coins;
           this.user_level =user.info.user_level;
-          this.newbie_unfinish_task = user.info.newbie_unfinish_tasks;
-          
+         
+          this.newbie_unfinish_tasks = user.info.newbie_unfinish_tasks;
+          console.log(this.newbie_unfinish_task);
           this.percent = getUserLevelPercentage();
         }));
       },
@@ -327,7 +324,8 @@
 
     },
     mounted() { 	  
-      console.log(userInfo.newbie_unfinish_tasks);
+//  console.log(userInfo.newbie_unfinish_tasks?userInfo.newbie_unfinish_tasks:"1");
+//  this.initData();
     },
     activated: function () {
       console.log('activated');
