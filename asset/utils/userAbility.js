@@ -186,7 +186,8 @@ var userAbility = () => {
    */
   var perfectCard = (context, id) => {
      var userInfo = getLocalUserInfo();
-     var Card = parseInt(localEvent.getLocalItem('PerfectCard').value)
+     var uid = userInfo.user_id;
+     var Card = parseInt(localEvent.getLocalItem('PerfectCard' + uid).value)
      if(Card != 1){
        if (userInfo.account_info_complete_percent >= 90) {
            var dialogObj = getDialogObj(context);
@@ -194,7 +195,7 @@ var userAbility = () => {
 			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
 			        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
 			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
-			          		localEvent.setLocalItem('PerfectCard', {value: '1'});
+			          		localEvent.setLocalItem('PerfectCard' + uid, {value: '1'});
 			          		if (num.index === 0) {
 				              router.pushPlus('/my/resume');
 				            }
