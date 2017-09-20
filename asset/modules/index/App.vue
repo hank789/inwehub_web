@@ -69,7 +69,6 @@
     },
     mounted () {
 
-
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;
