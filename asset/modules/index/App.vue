@@ -316,7 +316,7 @@
                 setIncBadgeNumber();
 
                 console.log('接收到通知:' + payload.title);
-                this.$refs.MessageComponent.show(payload.title, () => {
+                self.$refs.MessageComponent.show(payload.title, () => {
                     noticeTo(payload);
                 });
               }
