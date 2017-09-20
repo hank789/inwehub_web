@@ -56,3 +56,11 @@ dialog全局使用
             console.log('html:'+html);
             alertSimple(html, 'ok');
         });
+
+
+
+message组件
+    调用
+      this.$refs.MessageComponent.show('hello', () => {
+          //点击后要处理的业务
+            });

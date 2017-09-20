@@ -12,6 +12,7 @@
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
         <inwehubDialog ref="inwehubDialog"></inwehubDialog>
+        <MessageComponent ref="MessageComponent"></MessageComponent>
   </div>
 </template>
 
@@ -26,6 +27,8 @@
   import {setIncBadgeNumber} from '../../utils/notice';
   import inwehubDialog from '../../components/Dialog.vue';
   import userAbility from '../../utils/userAbility';
+  import MessageComponent from '../../components/Message.vue';
+
   export default {
     data () {
       return {
@@ -60,7 +63,8 @@
     components: {
       FooterComponent,
       OpenAppComponent,
-      inwehubDialog
+      inwehubDialog,
+      MessageComponent
     },
     watch: {
       $route(to) {
@@ -68,7 +72,6 @@
       }
     },
     mounted () {
-
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;
@@ -312,11 +315,9 @@
 
                 setIncBadgeNumber();
 
-                var btnArray = ['取消', '前往查看'];
-                mui.confirm(payload.title, '提示', btnArray, (e) => {
-                  if (e.index == 1) {
+                console.log('接收到通知:' + payload.title);
+                this.$refs.MessageComponent.show(payload.title, () => {
                     noticeTo(payload);
-                  }
                 });
               }
 
