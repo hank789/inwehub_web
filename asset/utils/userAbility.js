@@ -95,7 +95,7 @@ var userAbility = () => {
   var jumpToApplyActivity = (context, id) => {
 
     var userInfo = getLocalUserInfo();
- 
+
     if (userInfo.user_level >= 2) {
       router.pushPlus('/EnrollmentStatus/' + id);
     } else {
@@ -133,7 +133,7 @@ var userAbility = () => {
 
           }, true);
         });
-      } 
+      }
     }
   };
 
@@ -161,17 +161,17 @@ var userAbility = () => {
     var mobile = userInfo.phone;
     var num = parseInt(localEvent.getLocalItem("num"+mobile).value);
     if (num != 1) {
-    if (!userInfo.newbie_unfinish_tasks.complete_userinfo) {
+    if (!userInfo.newbie_unfinish_tasks.ask) {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
 
             alertZoom(html, (num) => {
             	  console.log(num);
-            	 
+
             	  	  localEvent.setLocalItem("num"+mobile, {value: '1'});
-            	 
-             
+
+
 
             }, false);
           });
@@ -179,8 +179,8 @@ var userAbility = () => {
       }
   }
   };
-  
-  
+
+
   /**
    * 完善名片的提示框；
    */
@@ -193,7 +193,7 @@ var userAbility = () => {
 		        if (dialogObj) {
 			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
 			        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
-			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {	
+			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
 			          		localEvent.setLocalItem('PerfectCard', {value: '1'});
 			          		if (num.index === 0) {
 				              router.pushPlus('/my/resume');
@@ -203,8 +203,8 @@ var userAbility = () => {
 			        });
 		        }
        	}
-       
-      
+
+
     }
     };
 
