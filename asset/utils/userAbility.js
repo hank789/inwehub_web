@@ -12,7 +12,7 @@ import localEvent from '../stores/localStorage';
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 import router from '../modules/index/routers/index';
 import {alertZoom, alertSkyOne, alertSkyTwo, alertSimple, getDialogObj} from '../utils/dialog';
-//import localEvent from '../stores/localStorage';
+import { createAPI, addAccessToken, postRequest } from '../utils/request';
 
 var userAbility = () => {
 
@@ -95,7 +95,7 @@ var userAbility = () => {
   var jumpToApplyActivity = (context, id) => {
 
     var userInfo = getLocalUserInfo();
- 
+
     if (userInfo.user_level >= 2) {
       router.pushPlus('/EnrollmentStatus/' + id);
     } else {
@@ -133,7 +133,7 @@ var userAbility = () => {
 
           }, true);
         });
-      } 
+      }
     }
   };
 
@@ -159,29 +159,37 @@ var userAbility = () => {
   var newbieTask = (context, id) => {
     var userInfo = getLocalUserInfo();
     var mobile = userInfo.phone;
-//  console.log(userInfo)
     var num = parseInt(localEvent.getLocalItem("num"+mobile).value);
     if (num != 1) {
-    if (userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false" && userInfo.newbie_unfinish_tasks.complete_userinfo == "false") {
+    if (!userInfo.newbie_unfinish_tasks.ask) {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
 
-            alertZoom(html, (num) => {
-            	  console.log(num);
-            	 
-            	  	  localEvent.setLocalItem("num"+mobile, {value: '1'});
-            	 
-             
 
+            alertZoom(html, (num) => {	  
+            	   localEvent.setLocalItem("num"+mobile, {value: '1'});
+            	   postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
+					var code = response.data.code;
+					//如果请求不成功提示信息 并且返回上一页；
+					if(code !== 1000) {
+						mui.alert(response.data.message);
+						mui.back();
+					}
+					//请求成功的操作
+					if(response.data.data) {
+						mui.toast(response.data.data.tip)
+					}
+				});
+            	   
             }, false);
           });
         }
       }
   }
   };
-  
-  
+
+
   /**
    * 完善名片的提示框；
    */
@@ -194,7 +202,7 @@ var userAbility = () => {
 		        if (dialogObj) {
 			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
 			        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
-			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {	
+			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
 			          		localEvent.setLocalItem('PerfectCard', {value: '1'});
 			          		if (num.index === 0) {
 				              router.pushPlus('/my/resume');
@@ -204,8 +212,8 @@ var userAbility = () => {
 			        });
 		        }
        	}
-       
-      
+
+
     }
     };
 

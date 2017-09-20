@@ -310,7 +310,9 @@
 					this.name = user.info.name;
 					this.title = user.info.title;
 					this.show_my_wallet = user.info.show_my_wallet;
+					userAbility.newbieTask(this);
 				}));
+				
 			}
 		},
 		created() {
@@ -328,7 +330,7 @@
 		activated: function() {
 			console.log('activated');
 			this.initData();
-			userAbility.newbieTask(this);
+			
 		},
 		mounted() {
 //			mui.waiting();
