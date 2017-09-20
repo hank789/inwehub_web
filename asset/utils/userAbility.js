@@ -12,7 +12,7 @@ import localEvent from '../stores/localStorage';
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 import router from '../modules/index/routers/index';
 import {alertZoom, alertSkyOne, alertSkyTwo, alertSimple, getDialogObj} from '../utils/dialog';
-//import localEvent from '../stores/localStorage';
+import { createAPI, addAccessToken, postRequest } from '../utils/request';
 
 var userAbility = () => {
 
@@ -166,11 +166,21 @@ var userAbility = () => {
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
 
-            alertZoom(html, (num) => {
-            	  console.log(num);
-            	 
-            	  	  localEvent.setLocalItem("num"+mobile, {value: '1'});
-            	 
+            alertZoom(html, (num) => {	  
+            	   localEvent.setLocalItem("num"+mobile, {value: '1'});
+            	   postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
+					var code = response.data.code;
+					//如果请求不成功提示信息 并且返回上一页；
+					if(code !== 1000) {
+						mui.alert(response.data.message);
+						mui.back();
+					}
+					//请求成功的操作
+					if(response.data.data) {
+						mui.toast(response.data.data.tip)
+					}
+				});
+            	   
              
 
             }, false);
