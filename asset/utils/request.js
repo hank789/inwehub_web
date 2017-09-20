@@ -1,6 +1,7 @@
 import axios from 'axios';
 import localEvent from '../stores/localStorage';
 import { logout } from '../utils/auth';
+import { rebootAuth } from '../utils/wechat';
 
 const baseURL = process.env.API_ROOT;
 const api = process.env.API_ROOT + `api`;
@@ -59,6 +60,11 @@ export function apiRequest (url, data, showWaiting = true) {
           logout();
           return;
         }
+      } else {
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          rebootAuth();
+          return;
+        }
       }
 
       if (code !== 1000) {
@@ -113,6 +119,11 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           mui.toast(response.data.message);
           logout();
+          return response;
+        }
+      } else {
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          rebootAuth();
           return response;
         }
       }

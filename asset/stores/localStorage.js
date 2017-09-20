@@ -5,7 +5,7 @@ const localEvent = {
 
   setLocalItem: (item, obj) => {
     window.localStorage.setItem('inwehub_' + item,JSON.stringify(obj));
-  },
+  },     
 
   clearLocalItem: (item) => {
     window.localStorage.removeItem('inwehub_' + item);

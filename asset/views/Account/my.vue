@@ -27,11 +27,7 @@
 							  <use xlink:href="#icon-fenxiang"></use>
 							</svg>
 							<span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
-							<!--<span class="grow">成长值</span>
-							<span>{{user_credits }}</span>
-							<span class="integral">贡献值</span>
-							<span>{{user_coins }}</span>-->
-
+							
 						</div>
 					</div>
 
@@ -43,20 +39,12 @@
 					<p>{{total_score}}</p>
 				</div>
 
-				<!--<div class="my-progress">
-					<span><i :style="'width:'+ account_info_complete_percent +'%'"></i></span>
-					<span>{{account_info_complete_percent}}%</span>
-					<svg class="icon" aria-hidden="true" id='confirmBtn' @tap.stop.prevent="wran()">
-						<use xlink:href="#icon-jinggao"></use>
-					</svg>
-					<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>
-				</div>-->
 				<ul class="my-infuence">
-					<li>
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_credits }}</p>
 						<p>成长值</p>
 					</li>
-					<li>
+					<li @tap.stop.prevent="$router.push('/my/Growth')">
 						<p class="mui-ellipsis">{{user_coins }}</p>
 						<p>贡献值</p>
 					</li>
@@ -111,9 +99,9 @@
 					<span v-html="getNumbers(answers)"></span>
 					<span>我的回答</span>
 				</li>
-				<li @tap.stop.prevent="$router.pushPlus('/bid')">
-					<span v-html="getNumbers(0)"></span>
-					<span>我的竞标</span>
+				<li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
+					<span v-html="getNumbers(enroll)"></span>
+					<span>我的报名</span>
 				</li>
 				<li @tap.stop.prevent="exclusive(company_apply_status)">
 					<span v-html="getNumbers(projects)"></span>
@@ -176,6 +164,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
+    import userAbility from '../../utils/userAbility';
 
 	export default {
 		data() {
@@ -206,6 +195,7 @@
 				user_id: currentUser.id,
 				questions: currentUser.questions,
 				answers: currentUser.answers,
+				enroll:currentUser.my_activity_enroll,
 				tasks: currentUser.tasks,
 				projects: currentUser.projects,
 				expert_level: currentUser.expert_level,
@@ -254,20 +244,21 @@
 				//				}
 
 			},
-			toApply(status) {
-				switch(status) {
-					case 0:
-						this.$router.pushPlus('/my/pilot');
-						break;
-					case 1:
-						this.$router.pushPlus('/expert/apply/success?type=0');
-						break;
-					case 3:
-						this.$router.pushPlus('/my/pilot');
-						break;
-
-				}
-
+			//认证专家；
+			toApply(expertStatus) {
+				switch (parseInt(expertStatus)) {
+			        case 0:
+			        case 3:
+			            this.$router.push('/my/pilot');
+			          break;
+			        case 2:
+			          mui.toast('您已经是专家');
+			          break;
+			        case 1:
+			          this.$router.push('/expert/apply/success?type=0');
+			          break;
+			      }
+               
 			},
 			getNumbers: function(number) {
 				var html = '';
@@ -307,6 +298,7 @@
 					this.user_comment_karma = user.info.comment_karma;
 					this.user_id = user.info.id;
 					this.questions = user.info.questions;
+					this. enroll = user.info.my_activity_enroll;
 					this.answers = user.info.answers;
 					this.tasks = user.info.tasks;
 					this.projects = user.info.projects;
@@ -336,9 +328,12 @@
 		activated: function() {
 			console.log('activated');
 			this.initData();
+			userAbility.newbieTask(this);
 		},
 		mounted() {
 //			mui.waiting();
+			//领取新手任务；
+//      		userAbility.newbieTask(this); 	
 		}
 	}
 </script>
@@ -529,13 +524,15 @@
 	}
 
 	.my-apply div {
-		display: inline-block;
+		float: left;
 		width: 49%;
 		height: 61px;
 		border-radius: 4px;
 		background-color: #ececee;
 	}
-
+     .my-apply div:nth-of-type(2){
+     	margin-left: 2%;
+     }
 	.my-apply div svg {
 		margin-top: 10px;
 		margin-left: 6px;
@@ -548,7 +545,7 @@
 	.my-apply div:nth-of-type(2) svg {
 		margin-top: 13px;
 		margin-left: 10px;
-		margin-right: 8px;
+		/*margin-right: 8px;*/
 		font-size: 32px;
 		color: rgb(3, 174, 249);
 		float: left;

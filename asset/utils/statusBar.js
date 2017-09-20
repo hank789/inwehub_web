@@ -13,6 +13,15 @@ function setStatusBarBackgroundAndStyle(baColor, style)
     });
 }
 
+function getStatusBarBackgroundAndStyle(callback)
+{
+    mui.plusReady(function () {
+      var statusBarBackground =  plus.navigator.getStatusBarBackground();
+      var statusBarStyle = plus.navigator.getStatusBarStyle();
+      callback(statusBarBackground, statusBarStyle);
+    });
+}
+
 function setStatusBarStyle(style)
 {
   mui.plusReady(function () {
@@ -107,5 +116,6 @@ function autoHeight(context)
 export {
   setStatusBarStyle,
   setStatusBarBackgroundAndStyle,
+  getStatusBarBackgroundAndStyle,
   autoHeight
 };

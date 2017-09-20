@@ -11,7 +11,7 @@
         <FooterComponent ref="Footer" id="Footer"></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
-
+        <inwehubDialog ref="inwehubDialog"></inwehubDialog>
   </div>
 </template>
 
@@ -24,7 +24,8 @@
   import {goBack} from '../../utils/webview';
   import EventObj from '../../utils/event';
   import {setIncBadgeNumber} from '../../utils/notice';
-
+  import inwehubDialog from '../../components/Dialog.vue';
+  import userAbility from '../../utils/userAbility';
   export default {
     data () {
       return {
@@ -54,10 +55,12 @@
       }
     },
     created(){
+
     },
     components: {
       FooterComponent,
-      OpenAppComponent
+      OpenAppComponent,
+      inwehubDialog
     },
     watch: {
       $route(to) {
@@ -65,6 +68,8 @@
       }
     },
     mounted () {
+
+
       console.log('refreshDataAppMounted');
       var currentUser = localEvent.getLocalItem('UserInfo');
       var router = this.$router;
@@ -76,7 +81,7 @@
         var app_version = localEvent.getLocalItem('app_version');
         if (currentUser.user_id){
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({ "email": currentUser.email,"user_level": currentUser.user_level, "app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
         }
       }
 
@@ -96,7 +101,7 @@
               dock: 'top',
               bottom: '75px',
               bounce:'none'},
-            extras: {}
+            extras: {preload: true}
           });
           mui.preload({
             url: url,
@@ -104,8 +109,9 @@
             styles: {
               popGesture: 'hide'
             },
-            extras: {}
+            extras: {preload: true}
           });
+
           console.log("inwehub_embed:"+inwehub_embed_view.getURL());
           if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url){
             console.log('inwehub_embed:reload:'+ url);
@@ -175,7 +181,7 @@
                   break;
                 case 'user_following':
                   // 用户关注通知
-                  router.pushPlus('/share/resume?id=' + payload.object_id);
+                  router.pushPlus('/share/resume?id=' + payload.object_id + '&goback=1');
                   break;
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
@@ -239,6 +245,15 @@
                       autoShow: false
                     }
                   });
+                  break;
+                case 'notification_level_up':
+                    // 用户积分等级提升
+                    userAbility.upgradeLevel(this);
+                    break;
+                case 'activity_enroll_fail':
+                case 'activity_enroll_success':
+                    // 活动报名事件
+                  router.pushPlus("/EnrollmentStatus/"+payload.object_id);
                   break;
               }
             };

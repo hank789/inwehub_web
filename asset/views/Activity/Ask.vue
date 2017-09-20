@@ -36,7 +36,7 @@
         </div>
 
         <div class="buttonWrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask')">立即前往提问</button>
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/ask')">立即前往提问</button>
         </div>
       </div>
     </div>

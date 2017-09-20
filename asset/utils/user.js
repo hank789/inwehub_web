@@ -105,6 +105,9 @@ function updateUserInfoCache(user) {
   userLocal.show_my_wallet = user.show_my_wallet;
   userLocal.show_ios_resume = user.show_ios_resume;
   userLocal.uuid = user.uuid;
+  userLocal.newbie_unfinish_tasks = user.newbie_unfinish_tasks;
+  userLocal.my_activity_enroll = user.my_activity_enroll;
+  
 
   /*
    user.counts.map(function (count, index) {
@@ -196,6 +199,54 @@ function getLocalUserInfo()
     return UserInfo;
 }
 
+/**
+ * 是否通过企业认证
+ */
+function isCompanyStatus()
+{
+    var userInfo = getLocalUserInfo();
+    var companyStatus = parseInt(userInfo.company_status);
+    var result = false;
+    switch (companyStatus) {
+      case 0: //没有认证去认证
+      case 1:
+      case 3:
+        result = false;
+        break;
+      case 2:
+        result = true;
+        break;
+    }
+    return result;
+}
+
+/**
+ * 获取用户等级百分比
+ */
+function getUserLevelPercentage()
+{
+  var levelCredits = [
+      0,
+      1000,
+      5000,
+      50000,
+      100000
+  ];
+  var userInfo = getLocalUserInfo();
+  var userCredits = userInfo.user_credits;
+  var userLevel = userInfo.user_level;
+
+
+  console.log('userLevel:' + userLevel);
+  console.log('userCredits:' + userCredits);
+
+  var result = (userLevel-1) * 25   +    (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]) * 25;
+  console.log('UserLevelPercentage-1:' + (userCredits-levelCredits[userLevel-1])/(levelCredits[userLevel]-levelCredits[userLevel-1]));
+  console.log('UserLevelPercentage-2:' + result);
+  return result;
+}
+
+
 export {
   getUserInfo,
   updateUserInfoCache,
@@ -203,5 +254,7 @@ export {
   updateUserInfo,
   isExpert,
   followingUser,
-  getLocalUserInfo
+  isCompanyStatus,
+  getLocalUserInfo,
+  getUserLevelPercentage
 };

@@ -11,7 +11,7 @@
 			<div class="mui-scroll-wrapper">
 				<div class="content">
 					<div class="menu">
-						<span @tap.stop.prevent="$router.push('/task')">任务</span>
+						<span @tap.stop.prevent="$router.replace('/task')">任务</span>
 						<span @tap.stop.prevent="">消息</span>
 						<i></i>
 					</div>
@@ -39,15 +39,15 @@
 								<i class="bot"></i>
 							</li>
 							<!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
-       	 	<img src="../../statics/images/integral1.png" />
-       	 	<div class="message">99</div>
-       	 	<p>
-       	 	   <span>积分变动</span>
-       	 	   <span class="mui-ellipsis">回答了一条问题增加2积分</span>
-       	 	</p>
-       	 	<a>16:44</a>
-       	 	<i class="bot"></i>
-       	 </li>-->
+					       	 	<img src="../../statics/images/integral1.png" />
+					       	 	<div class="message">99</div>
+					       	 	<p>
+					       	 	   <span>积分变动</span>
+					       	 	   <span class="mui-ellipsis">回答了一条问题增加2积分</span>
+					       	 	</p>
+					       	 	<a>16:44</a>
+					       	 	<i class="bot"></i>
+					       	 </li>-->
 							<li @tap.stop.prevent="skip(3)">
 								<img src="../../statics/images/mission1.png" />
 								<div class="message" v-if="task_count != 0">{{task_count}}</div>

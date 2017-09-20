@@ -15,7 +15,7 @@
         <label v-show="showPasswordLabel" @tap.stop.prevent="entryPassword">输入密码</label>
       </div>-->
       <!--账号密码输入框-->
-     
+
       <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shoujihao"></use>
@@ -29,8 +29,8 @@
       </svg>
       <input  type="password" v-model.trim="password" placeholder="输入密码"  @focus="focus" @blur="blur"  @tap.stop.prevent="entryPassword"/>
      </div>
-      
-      
+
+
       <!--忘记密码和账号-->
        <div class="apply">
        	<div>
@@ -40,7 +40,7 @@
        </div>
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
-      
+
     </div>
   </div>
 </template>
@@ -54,6 +54,7 @@
   import { getUserInfo, getAvatar } from '../utils/user';
   import { USERS_APPEND } from '../stores/types';
   import VTooltip from 'v-tooltip';
+  import { rebootAuth } from '../utils/wechat';
 
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
   const login = {
@@ -108,6 +109,17 @@
 //    });
     },
     beforeRouteEnter (to, from, next) {
+
+      if (mui.os.wechat) {
+          console.oldLog();
+          var hash = null;
+          if (to.query.redirect) {
+            hash = to.query.redirect;
+          }
+          rebootAuth(hash);
+          return;
+      }
+
 
       mui.plusReady(function () {
 
@@ -231,6 +243,8 @@
                 window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
               }
             }
+
+
             this.$router.pushPlus('/my',true,'none','none',true,true);
           }));
         })
@@ -260,12 +274,12 @@
   }
 /*图标*/
   .logo{
-   
+
     font-size: 110px;
-     margin:110px 0 75px; 
-    
+     margin:110px 0 75px;
+
   }
- 
+
 
 
  /*忘记密码和账号*/
@@ -274,7 +288,7 @@
      height: 30px;
      position: relative;
      top: -22px;
-    
+
 }
 .apply>div{
 	width: 80%;
@@ -286,7 +300,7 @@
     right: 0;
     margin: auto;
     /*background: #DDDDDD;*/
-	
+
 }
 .apply>div>span{
 	color:#3c95f9;
@@ -321,7 +335,7 @@
     font-size: 22px;
     color: #c8c8c8;
     left: 0;
-    
+
   }
 
   .inputWrapper {
@@ -383,18 +397,18 @@
     height: 36px;
     margin-left: 15px;
   }
-  
-  
- input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+
+
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color:#b4b4b6;
 }
-input:-moz-placeholder, textarea:-moz-placeholder { 
+input:-moz-placeholder, textarea:-moz-placeholder {
     color:#b4b4b6;
 }
-input::-moz-placeholder, textarea::-moz-placeholder { 
+input::-moz-placeholder, textarea::-moz-placeholder {
     color:#b4b4b6;
 }
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:#b4b4b6;
 }
 

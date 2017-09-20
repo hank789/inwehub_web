@@ -10,7 +10,7 @@
 		  <use xlink:href="#icon-fanhui"></use>
 	  </svg>
       <!--账号密码输入框-->
-     
+
       <div class="inputWrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yaoqingma"></use>
@@ -22,7 +22,7 @@
         <use xlink:href="#icon-shoujihao"></use>
       </svg>
       <input placeholder="请输入手机号"  ref="phone"  @focus="focus" @blur="blur" v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"  @tap.stop.prevent="entryPhone" class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
-      
+
       <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
       <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
      </div>
@@ -44,7 +44,7 @@
       </svg>
       <input placeholder="请输入登录密码" @focus="focus" @blur="blur" class="text" type="password" name="password" v-model.trim="password" autocomplete="off"/>
      </div>
-      
+
       <!--<div class="title">用户注册</div>
       <div class="inputWrapper">
         <input class="text" type="text" name="username" v-model.trim="username" autocomplete="off"/>
@@ -68,7 +68,7 @@
         <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">登录密码</label>
       </div>-->
       <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
-      
+
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register" :disabled="disableRegister">确认</button>
       <!--:disabled="disableRegister"-->
       <div class="help" @tap.stop.prevent="jumpToForm">
@@ -145,7 +145,7 @@
     },
     mounted(){
       this.getCacheData();
-      
+
 
       mui(".login").on('focusout', 'input', (e) => {
         switch (e.target.name) {
@@ -238,7 +238,7 @@
           this.disableRegister = true;
           return false;
         }
-         
+
         this.disableRegister = false;
       },
     	//判断手机号是否为空；改变颜色（状态）；
@@ -260,26 +260,26 @@
       },
     	//弹窗；
 	warm(content,point, callback) {
-		var title = 
+		var title =
 			'<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
 			'<use xlink:href="#icon-guanbi"></use>' +
 			'</svg>';
-			
+
 	    var cont = '<p style="font-size:16px; margin-bottom:15px" >' +
 	                point +
 	                '</p>';
-	      
+
 		    var alertobj = mui.alert(content, title, cont, (index, animate) => {
 		    		if (index.index === -1) {
 //		    			console.log('fire');
 		    			callback();
 		    		}
 		    } , 'div');
-		    
+
 		    document.getElementById('warmClosealert').onclick=() => {
 		       	alertobj.close({index:1, value:''});
 		    }
-	
+
 	},
     	focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
@@ -317,7 +317,7 @@
           this.isCanGetCode =  true;
           this.time -= 1;
           if (this.time == 0) {
-            this.isCanGetCode = false ; 
+            this.isCanGetCode = false ;
             return;
           }
           setTimeout(this.timer, 1000)
@@ -385,10 +385,10 @@
       getCode () {
         let mobile = this.phone?this.phone:'';
         let type = 'register';
-        
-//      if (!this.isCanGetCode) {
-//        return;
-//      }
+
+        if (!this.isCanGetCode) {
+          return;
+        }
 
         if (!this.registrationCode) {
           mui.toast("请输入邀请码");
@@ -418,9 +418,9 @@
 
             var code = response.data.code;
             if (code !== 1000) {
-              this.isCanGetCode = false;
+              this.isCanGetCode = true;
               var message = response.data.message;
-              //验证码超时 邀请码错误； 
+              //验证码超时 邀请码错误；
 			if(message.indexOf("邀请码错误") > 0 ){
 				  this.warm(message,'获取邀请码', () => {
 	           	     this.$router.push('/register/nocode');
@@ -437,7 +437,7 @@
               });
 			}
 			mui.toast(response.data.message);
-          
+
               return;
             }
 
@@ -452,7 +452,7 @@
             this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
           })
       },
-     
+
       // 注册
       register () {
         let {username, phone, code, password} = this;
@@ -462,7 +462,7 @@
 
         if (!this.registrationCode) {
            mui.toast("请输入邀请码");
-		
+
           return;
         }
 
@@ -470,12 +470,12 @@
           mui.toast("邀请码至少6位");
           return;
         }
-        
+
          if (!phoneReg.test(this.phone)) {
            this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
-       
+
          if (!this.code) {
           mui.toast("请输入验证码");
           return;
@@ -486,7 +486,7 @@
           return;
         }
 
-       
+
 
         if (!this.username) {
           mui.toast("请输入真实姓名");
@@ -508,7 +508,7 @@
         if (mui.os.plus) {
           mui.waiting();
         }
-        
+
         request.post(createAPI('auth/register'), {
             name: username,
             mobile: phone,
@@ -528,13 +528,13 @@
               this.isLoading = false;
               //邀请码；
               var message = response.data.message;
-              
+
               if(message.indexOf("无效") > 0 ){
 				  this.wran(message,'获取邀请码', () => {
 	           	     this.$router.push('/register/nocode');
 	              });
 			}
-              mui.toast(response.data.message); 
+              mui.toast(response.data.message);
               return;
             }
             clearAllWebViewCache();
@@ -542,7 +542,8 @@
             localEvent.clearLocalItem('CacheRegister');
             this.isRegisterSuccess = true;
 
-            mui.toast("注册成功！");
+            //已经有通知发送注册成功的消息，并有积分提示
+            //mui.toast("注册成功！");
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
             this.isLoading = false;
             //存储设备信息
@@ -584,9 +585,9 @@
             this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
             mui.toast(errorCodes[code]);
           })
-         
+
       }
-      
+
     },
     watch: {
      registrationCode: function (newValue, oldValue) {
@@ -609,7 +610,7 @@
 		password: function (newValue, oldValue) {
 		    this.checkValid();
 		},
-    }  
+    }
   }
 
   export default register;
@@ -626,7 +627,7 @@
     text-align: center;
   }
 
-  
+
  /*协议*/
  .protocol {
     color: rgb(128,128,128);
@@ -647,7 +648,7 @@
     margin-left: 10%;
     margin-top: 15px;
     margin-bottom: 15px;
-    
+
 }
    button {
     border-radius: 5px;
@@ -659,7 +660,7 @@
 
     }
   }
- 
+
  /*邀请码*/
   .help {
     font-size: 14px;
@@ -668,10 +669,10 @@
 
   }
 /*小箭头*/
- 
+
 
   .leftNav {
-   
+
     position: absolute;
     left: 12px;
     top: 15px;
@@ -681,11 +682,11 @@
 
  /*图标*/
   .logo{
-   
+
     font-size: 110px;
-     margin:40px 0 45px; 
-    
-  } 
+     margin:40px 0 45px;
+
+  }
 
 /*输入框的内容*/
    .inputWrapper .icon {
@@ -694,7 +695,7 @@
     font-size: 22px;
     color: #c8c8c8;
     left: 0;
-    
+
   }
 
   .inputWrapper {
@@ -755,18 +756,18 @@
     height: 36px;
     margin-left:15px;
   }
-  
-  
- input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+
+
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color:#b4b4b6;
 }
-input:-moz-placeholder, textarea:-moz-placeholder { 
+input:-moz-placeholder, textarea:-moz-placeholder {
     color:#b4b4b6;
 }
-input::-moz-placeholder, textarea::-moz-placeholder { 
+input::-moz-placeholder, textarea::-moz-placeholder {
     color:#b4b4b6;
 }
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:#b4b4b6;
 }
 
@@ -780,7 +781,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     display: inline-block;
     height: 36px;
     margin-left: 12px;
-    /*background: #ccc;*/ 
+    /*background: #ccc;*/
     width: 60%;
     margin-right: 40%;
 }
