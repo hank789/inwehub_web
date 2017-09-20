@@ -44,6 +44,7 @@
 								<p>2人回答</p>
 								<p> 倒计时 01：57：23 </p>
 							</div>
+							<div class="interole">邀请回答</div>
 							<i class="bot"></i>
 						</li>
 					</ul>
@@ -150,7 +151,7 @@
 	ul li {
 		width: 92%;
 		margin-left: 4%;
-		height: 152px;
+		height: 217px;
 		position: relative;
 		padding-top: 15px;
 	}
@@ -259,4 +260,16 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
+	
+	/*角色判断的样式*/
+.interole{
+  width: 100%;
+  height: 44px;
+  border-radius: 50px;
+  background:#fcc816;
+  font-size:16px;
+  color:#F2F2F2;
+  margin: 17px;
+ 
+}
 </style>
