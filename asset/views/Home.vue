@@ -116,7 +116,7 @@
 			<div class="hotAnswer">
 				<div class="hotAnswer_t">
 				  <p>热门问答</p>
-				  <p  @tap.stop.prevent="$router.pushPlus('/home/MajorList')">进入社区</p>
+				  <p  @tap.stop.prevent="$router.pushPlus('/MajorList')">进入社区</p>
                   <i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
@@ -134,20 +134,6 @@
                    	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
                    	</div>
                    	<i class="bot"></i>
-                   </li> 
-                   <li>
-                   	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
-                   	<div class="hotAnswer_d">
-                   	   <p>
-                   	   	<img src="../statics/images/balance1.png"/>
-                   	   	<svg class="icon" aria-hidden="true">
-							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-						 </svg>
-                   	   </p>
-                   	   <p class="mui-ellipsis">回答者：郭大红</p>
-                   	   <p class="mui-ellipsis">运营专员</p>
-                   	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
-                   	</div>
                    </li> 
 				</ul>
 			</div>
@@ -977,7 +963,8 @@
 	/*热门回答*/
 	.hotAnswer{
 	  width: 100%;
-	  height: 244px;
+	 /* height: 244px;*/
+	  overflow: hidden;
 	  margin-bottom: 10px;
 	  background: #FFFFFF;
 	}
@@ -1003,7 +990,8 @@
 	.hotAnswer_b{
 	  width: 90%;
 	  margin-left: 5%;
-	  height: 200px;
+	  /*height: 200px;*/
+	 overflow: hidden;
 	}
 	.hotAnswer_b li{
 		 width: 100%;

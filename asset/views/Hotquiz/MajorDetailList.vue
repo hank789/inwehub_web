@@ -44,7 +44,11 @@
 								<p>2人回答</p>
 								<p> 倒计时 01：57：23 </p>
 							</div>
-							<div class="interole">邀请回答</div>
+							<!--<button class="invitationrole">邀请回答</button>-->
+							<div class="allrole">
+								<button>邀请回答</button>
+								<button>参与回答</button>
+							</div>
 							<i class="bot"></i>
 						</li>
 					</ul>
@@ -262,14 +266,37 @@
 	}
 	
 	/*角色判断的样式*/
-.interole{
+.invitationrole{
   width: 100%;
   height: 44px;
   border-radius: 50px;
   background:#fcc816;
   font-size:16px;
   color:#F2F2F2;
-  margin: 17px;
+  border: none;
+  margin-top: 10px;
+}
+.allrole{
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  /*background:#fcc816;*/
  
+}
+.allrole button:nth-child(1){
+  background:#fcc816;
+  width: 48%;
+  height: 44px;	
+  color:#F2F2F2;
+  float: left;
+  border: none;
+}
+.allrole button:nth-child(2){
+ background:#03aef9;
+ width: 48%;
+ height: 44px;
+ color:#F2F2F2;
+ float: right;
+ border: none;
 }
 </style>

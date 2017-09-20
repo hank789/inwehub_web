@@ -7,51 +7,79 @@
 		</header>
 
 		<div class="mui-content absolute">
-			<!--导航栏-->
-			<div class="menu">
-				<span @tap.stop.prevent="">专业回答</span>
-				<span @tap.stop.prevent="$router.replace('/home/RewardList')">悬赏提问</span>
-				<i class="bot"></i>
+			<div class="container">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-zanwushuju"></use>
+				</svg>
+				<p>暂时还没有数据呀～</p>
 			</div>
-			<div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true}">
-				<div class="container">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-zanwushuju"></use>
+			<!--v-if="nothing == 1"  v-show="nothing == 0"-->
+            <div>
+            	<!---->
+            	<div class="hotquiz">
+            	  <div class="quiz">
+            	   <p>
+            	   	  <span>热门问答</span>
+            	   	  <button>提问</button>
+            	   	  <i class="bot"></i>
+            	   </p>
+            	   </div>
+            	   <ul class="hotAnswer_b">
+                   <li>
+                   	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
+                   	<div class="hotAnswer_d">
+                   	   <p>
+                   	   	<img src="../../statics/images/balance1.png"/>
+                   	   	 <svg class="icon" aria-hidden="true">
+							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+						 </svg>
+                   	   </p>
+                   	   <p class="mui-ellipsis">回答者：郭大红</p>
+                   	   <p class="mui-ellipsis">运营专员</p>
+                   	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
+                   	</div>
+                   	<i class="bot"></i>
+                   </li>
+                   
+                </ul>
+            </div>
+            
+            	<div class="recommendlist">
+            	  <div class="recommend">
+            	   <p>
+            	   	  <span>推荐问答</span>
+            	   	  <span>
+            	   	  	
+            	   	  	<a>高科技</a>
+            	   	  	<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-shoucangxingxing"></use>
 					</svg>
-					<p>暂时还没有数据呀～</p>
-				</div>
-				<!--v-if="nothing == 1"  v-show="nothing == 0"-->
-
-				<div class="mui-scroll">
-					<!---->
-					<ul>
-						<li>
-							<div class="major-t">
-								<p>
-									<img src="../../statics/images/balance1.png" />
-									<svg class="icon" aria-hidden="true">
-										<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-									</svg>
-								</p>
-								<p>
-									<span>匿名</span>
-									<span>公司职位保密</span>
-								</p>
-								<p>￥88元</p>
-							</div>
-							<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
-							<div class="major-b">
-								<p>2人回答</p>
-								<p> 倒计时 01：57：23 </p>
-							</div>
-							<i class="bot"></i>
-						</li>
-					</ul>
-					
-					<!---->
-				</div>
-				<div class="btn">发布悬赏问答</div>
-			</div>
+					<i></i>
+            	   	  </span>
+            	   	  <i class="bot"></i>
+            	   </p>
+            	   </div>
+            	   <ul class="recommend_b">
+                   <li>
+                   	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
+                   	<div class="recommend_d">
+                   	   <p>
+                   	   	<img src="../../statics/images/balance1.png"/>
+                   	   	 <svg class="icon" aria-hidden="true">
+							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+						 </svg>
+                   	   </p>
+                   	   <p class="mui-ellipsis">回答者：郭大红</p>
+                   	   <p class="mui-ellipsis">运营专员</p>
+                   	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
+                   	</div>
+                   	<i class="bot"></i>
+                   </li>
+                   
+                </ul>
+            </div>
+            <!---->
+            </div>
 		</div>
 
 		<!-- <div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>-->
@@ -90,167 +118,236 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
-	.mui-wechat .menu[data-v-4f45c199] {
-		width: 100%;
-		height: 45px;
-		position: absolute;
-		z-index: 10;
-		background: #f3f4f6;
-		top: 0;
-	}
-	
-	.mui-content.absolute .menu~#pullrefresh {
-		top: 45px;
-	}
-	
-	.mui-content.absolute {
-		background: #FEFFFE;
-	}
-	/*导航栏的样式*/
-	
-	.menu {
-		width: 100%;
-		height: 45px;
-		position: absolute;
-		z-index: 10;
-		background: #f3f4f6;
-	}
-	
-	.menu span {
-		display: inline-block;
-		width: 49%;
-		height: 100%;
-		font-size: 14px;
-		color: #444444;
-		text-align: center;
-		line-height: 45px;
-		font-weight: 600;
-	}
-	
-	.menu span:nth-of-type(1) {
-		color: #3c95f9;
-	}
-	
-	.menu i {
-		display: block;
-		position: absolute;
-		width: 55px;
-		height: 1.8px;
-		left: 17%;
-		bottom: 0.5px;
-		background: #03aef9;
-	}
-	/*滚动区域*/
-	
-	ul {
+	/*提问样式*/
+	.hotquiz{
 		width: 100%;
 		overflow: hidden;
+		background: #FFFFFF;
 	}
-	
-	ul li {
+	.quiz{
 		width: 92%;
-		margin-left: 4%;
-		height: 152px;
-		position: relative;
-		padding-top: 15px;
-	}
-	
-	.major-t {
-		width: 100%;
 		height: 44px;
-	}
-	
-	.major-t p:nth-of-type(1) {
-		width: 13%;
-		height: 100%;
-		float: left;
-		/*border: 1px solid #CCCCCC;*/
+		margin-left: 4%;
+		background: #FFFFFF;
 		position: relative;
 	}
 	
-	.major-t p:nth-of-type(1) svg {
-		position: absolute;
-		right: -4px;
-		bottom: 0;
-		font-size: 20px;
-	}
-	
-	.major-t p:nth-of-type(1) img {
-		width: 100%;
-		height: 100%;
-		border-radius: 50%;
-	}
-	
-	.major-t p:nth-of-type(2) {
-		width: 70%;
-		height: 100%;
-		float: left;
-		margin-left: 2%;
-		/*border: 1px solid #CCCCCC;*/
-	}
-	
-	.major-t p:nth-of-type(2) span {
+	.quiz  span{
 		display: block;
-		width: 100%;
-	}
-	
-	.major-t p:nth-of-type(2) span:nth-of-type(1) {
-		font-size: 14px;
-		color: #444444;
-	}
-	
-	.major-t p:nth-of-type(2) span:nth-of-type(2) {
-		font-size: 13px;
-		color: #808080;
-	}
-	
-	.major-t p:nth-of-type(3) {
-		width: 14%;
-		height: 100%;
-		font-size: 12px;
-		color: #fa4975;
-		text-align: right;
-		float: right;
-	}
-	
-	ul li>p {
-		width: 100%;
-		height: 45px;
 		font-size: 16px;
 		color: #444444;
-		margin-top: 12px;
-		margin-bottom: 9px;
-	}
-	
-	.major-b {
-		width: 100%;
-		height: 17px;
-	}
-	
-	.major-b p {
-		font-size: 12px;
-		color: #B4B4B6;
-	}
-	
-	.major-b p:nth-of-type(1) {
+		line-height: 44px;
 		float: left;
 	}
-	
-	.major-b p:nth-of-type(2) {
-		float: right;
-	}
-	/*发布悬赏问答*/
-	.btn {
-		width: 100%;
-		height: 49px;
-		background:#03aef9;
-		font-size:17px;
+	.quiz button{
+		width: 65px;
+		height:29px;
+		font-size: 14px;
 		color: #FFFFFF;
-		text-align: center;
-        line-height: 49px;
-        position: fixed;
-        bottom: 0;
+		background:#03aef9;
+		float:right;
+		margin-top: 7px;
+	}
+	/*问答列表*/
+	.hotAnswer_b{
+	  width: 100%;
+	  background: #FFFFFF;
+	  overflow: hidden;
+	}
+	.hotAnswer_b li{
+		 width: 92%;
+		 margin-left: 4%;
+		 height: 88px;
+		 position: relative;
+	}
+	.hotAnswer_b li>p{
+        margin-top: 12px;
+        font-size: 14px;
+        color: #444444;
+	}
+	.hotAnswer_d{
+		width: 100%;
+		height: 32px;
+		margin-top:4.5px;
+	}
+	.hotAnswer_d p{
+		float: left;
+		
+	}
+	.hotAnswer_d p:nth-child(1){
+		width: 9.5%;
+        height: 32px;
+        /*background: #CCCCCC;*/
+        position: relative;
+	}
+	.hotAnswer_d p:nth-child(1)>svg{
+       position: absolute;
+       font-size: 14px;
+       bottom: 0;
+       right: -4px;
+	}
+	.hotAnswer_d p:nth-child(1)>img{
+		width: 100%;
+        height:100%;
+        border-radius: 50%;
+	}
+	.hotAnswer_d p:nth-child(2){
+		width: 32%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        border-right: 1px solid #c8c8c8;
+        text-align: center;
+        line-height: 15px;
+	}
+	.hotAnswer_d p:nth-child(3){
+		width: 21%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        border-right: 1px solid #c8c8c8;
+        text-align: center;
+        line-height: 15px;
+       
+	}
+	.hotAnswer_d p:nth-child(4){
+		width:37.5%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        text-align: center;
+        line-height: 15px;
+      
+	}
+	/*推荐问答*/
+	.recommendlist{
+		width: 100%;
+		overflow: hidden;
+		background: #FFFFFF;
+		margin-top: 10px;
+	}
+	.recommend{
+		width: 92%;
+		height: 44px;
+		margin-left: 4%;
+		background: #FFFFFF;
+		position: relative;
+	}
+	
+	.recommend span:nth-of-type(1){
+		display: block;
+		font-size: 16px;
+		color: #444444;
+		line-height: 44px;
+		float: left;
+	}
+	.recommend span:nth-of-type(2){
+		display: block;
+		width: 70%;
+		height: 44px;
+		float:right;
+		/*background: #CCCCCC;*/
+	}
+	.recommend span:nth-of-type(2) i{
+		float: right;
+		display:block;
+		width: 1px;
+		height: 13px;
+		background: #dbdbdb;
+		margin-top: 14px;
+        margin-right: 15px;
+	}
+	.recommend span:nth-of-type(2) svg{
+		float: right;
+		display:block;
+		font-size: 16px;
+		margin-top: 12px;
+		margin-right: 3px;
+	}
+	.recommend span:nth-of-type(2) a{
+		float: right;
+		display:block;
+		height: 44px;
+		line-height: 44px;
+		color:#03aef9;
+	}
+	
+	/*问答列表*/
+	.recommend_b{
+	  width: 100%;
+	  background: #FFFFFF;
+	  overflow: hidden;
+	}
+	.recommend_b li{
+		 width: 92%;
+		 margin-left: 4%;
+		 height: 88px;
+		 position: relative;
+	}
+	.recommend_b li>p{
+        margin-top: 12px;
+        font-size: 14px;
+        color: #444444;
+	}
+	.recommend_d{
+		width: 100%;
+		height: 32px;
+		margin-top:4.5px;
+	}
+	.recommend_d p{
+		float: left;
+		
+	}
+	.recommend_d p:nth-child(1){
+		width: 9.5%;
+        height: 32px;
+        /*background: #CCCCCC;*/
+        position: relative;
+	}
+	.recommend_d p:nth-child(1)>svg{
+       position: absolute;
+       font-size: 14px;
+       bottom: 0;
+       right: -4px;
+	}
+	.recommend_d p:nth-child(1)>img{
+		width: 100%;
+        height:100%;
+        border-radius: 50%;
+	}
+	.recommend_d p:nth-child(2){
+		width: 32%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        border-right: 1px solid #c8c8c8;
+        text-align: center;
+        line-height: 15px;
+	}
+	.recommend_d p:nth-child(3){
+		width: 21%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        border-right: 1px solid #c8c8c8;
+        text-align: center;
+        line-height: 15px;
+       
+	}
+	.recommend_d p:nth-child(4){
+		width:37.5%;
+        height:15px;
+        margin-top: 8.5px;
+        font-size: 13px;
+        color: #808080;
+        text-align: center;
+        line-height: 15px;
+      
 	}
 	/*无数据的样式 */
 	

@@ -95,26 +95,14 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ //热门问答列表页面；
-		path: '/home/MajorList',
+	{ //专业回答；
+		path: '/MajorList',
     name: 'home-EnrollmentStatus.vue',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Hotquiz/MajorList.vue'),
-		beforeEnter: (to, from, next) => {
-			requestAuth(to, from, next)
-		}
-	},
-	{ //热门悬赏列表页面；
-		path: '/home/RewardList',
-    name: 'home-EnrollmentStatus.vue',
-    meta: {
-			title: '问答社区',
-			wechatHideHeader: true
-		},
-		component: require('../../../views/Hotquiz/RewardList.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
@@ -127,18 +115,6 @@ const routes = [{
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Hotquiz/MajorDetailList.vue'),
-		beforeEnter: (to, from, next) => {
-			requestAuth(to, from, next)
-		}
-	},
-	{ //热门悬赏详情列表页面；
-		path: '/home/RewardDetailList',
-    name: 'home-EnrollmentStatus.vue',
-    meta: {
-			title: '问答社区',
-			wechatHideHeader: true
-		},
-		component: require('../../../views/Hotquiz/RewardDetailList.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
