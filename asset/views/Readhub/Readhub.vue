@@ -1,6 +1,6 @@
 <template>
   <div class="mui-content">
-    <iframe v-show="iframeState" id="show-iframe" @load="loaded" frameborder=0  name="showHere" scrolling=auto></iframe>
+    <iframe v-show="iframeState" id="show-iframe" @load="loaded" frameborder=0  name="showHere" scrolling=no marginheight="0" marginwidth="0"></iframe>
 
     <div id="statusBarStyle" background="transparent"></div>
   </div>
