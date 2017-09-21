@@ -216,7 +216,7 @@
 					 this.$router.pushPlus('/answer/' + id);
 					  break;
 					case 2:
-					 this.$router.push('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id);
 					  break;
 					case 3:
 					 this.$router.pushPlus('/my/info');
@@ -225,7 +225,7 @@
 					 this.$router.pushPlus('/discover');
 					  break;
 					case 5:
-					 this.$router.push('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id);
 					  break;
 
 					}
