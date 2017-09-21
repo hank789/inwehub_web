@@ -384,49 +384,53 @@
 
 									//app 分享
 									var wechatBtn = document.getElementById('wechatShareBtn');
-									wechatBtn.addEventListener('click', () => {
-										mui('#shareWrapper').popover('toggle');
+									if (wechatBtn) {
+                    wechatBtn.addEventListener('click', () => {
+                      mui('#shareWrapper').popover('toggle');
 
-										console.log('图片:' + imgUrl);
+                      console.log('图片:' + imgUrl);
 
-										wechat.send({
-											content: desc,
-											href: link,
-											title: title,
-											pictures: [imgUrl],
-											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
-											extra: {
-												scene: "WXSceneSession"
-											}
-										}, () => {
-											mui.toast('分享成功');
-										}, (error) => {
-											console.log('分享失败' + error.message);
-										});
-									});
+                      wechat.send({
+                        content: desc,
+                        href: link,
+                        title: title,
+                        pictures: [imgUrl],
+                        thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
+                        extra: {
+                          scene: "WXSceneSession"
+                        }
+                      }, () => {
+                        mui.toast('分享成功');
+                      }, (error) => {
+                        console.log('分享失败' + error.message);
+                      });
+                    });
+                  }
 
 									//分享到朋友圈
 									var wechatBtn2 = document.getElementById('wechatShareBtn2');
-									wechatBtn2.addEventListener('click', () => {
-										mui('#shareWrapper').popover('toggle');
+									if (wechatBtn2) {
+                    wechatBtn2.addEventListener('click', () => {
+                      mui('#shareWrapper').popover('toggle');
 
-										console.log('图片:' + imgUrl);
+                      console.log('图片:' + imgUrl);
 
-										wechat.send({
-											content: desc,
-											href: link,
-											title: title,
-											pictures: [imgUrl],
-											thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
-											extra: {
-												scene: "WXSceneTimeline"
-											}
-										}, () => {
-											mui.toast('分享成功');
-										}, (error) => {
-											console.log('分享失败' + error.message);
-										});
-									});
+                      wechat.send({
+                        content: desc,
+                        href: link,
+                        title: title,
+                        pictures: [imgUrl],
+                        thumbs: [imgUrl + '?x-oss-process=image/resize,h_100,w_100'],
+                        extra: {
+                          scene: "WXSceneTimeline"
+                        }
+                      }, () => {
+                        mui.toast('分享成功');
+                      }, (error) => {
+                        console.log('分享失败' + error.message);
+                      });
+                    });
+                  }
 								}
 
 								if(!wechat.authenticated) {
@@ -589,17 +593,21 @@
 						}
 					});
 
-					wechatBtn.addEventListener('click', () => {
-						mui('#shareWrapper').popover('toggle');
-						isShowShareNav = true;
-						t.toggleShareNav();
-					});
+					if (wechatBtn) {
+            wechatBtn.addEventListener('click', () => {
+              mui('#shareWrapper').popover('toggle');
+              isShowShareNav = true;
+              t.toggleShareNav();
+            });
+          }
 
-					wechatBtn2.addEventListener('click', () => {
-						mui('#shareWrapper').popover('toggle');
-						isShowShareNav = true;
-						t.toggleShareNav();
-					});
+          if (wechatBtn2) {
+            wechatBtn2.addEventListener('click', () => {
+              mui('#shareWrapper').popover('toggle');
+              isShowShareNav = true;
+              t.toggleShareNav();
+            });
+          }
 				});
 			},
 			toggleDeatil(event) {

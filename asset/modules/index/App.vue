@@ -200,9 +200,17 @@
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
                   if (payload.object) {
-                    mui.openWindow({
+                    var article_params = {
+                      article_id: payload.object.id,
+                      article_url: payload.object.view_url,
+                      article_title: payload.object.title,
+                      article_comment_url: payload.object.comment_url,
+                      article_img_url:payload.object.img_url,
+                      preload: true
+                    };
+                    var article_ws = mui.openWindow({
                       url: 'index.html#/webview/article',
-                      id: 'readhub_article_'+payload.object.id,
+                      id: 'inwehub_article_view',
                       preload: false, //一定要为false
                       createNew: false,
                       show: {
@@ -215,14 +223,9 @@
                       waiting: {
                         autoShow: false
                       },
-                      extras: {
-                        article_id: payload.object.id,
-                        article_url: payload.object.view_url,
-                        article_title: payload.object.title,
-                        article_comment_url: payload.object.comment_url,
-                        article_img_url:payload.object.img_url,
-                      }
+                      extras: article_params
                     });
+                    mui.fire(article_ws,'load_article',article_params);
                   }
                   break;
                 case 'push_notice_app_self':
