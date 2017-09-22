@@ -38,7 +38,7 @@
 
       <div class="help">
           <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-          <div class="item" @tap.stop.prevent="developing()">问答被查看后我的分成细则？</div>
+          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
 
           <div class="button-wrapper">
             <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="developing()">
@@ -118,6 +118,7 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import pay from '../../components/pay/pay.vue';
   import {setStatusBarBackgroundAndStyle} from '../../utils/statusBar';
+  import {alertFenhongxize} from '../../utils/dialogList';
 
   const Ask = {
     data: () => ({
@@ -179,6 +180,9 @@
       this.check();
     },
     methods: {
+      fenhongxize(){
+        alertFenhongxize(this);
+      },
       developing(){
           mui.toast('开发中...');
       },
