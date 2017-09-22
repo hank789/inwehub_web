@@ -192,6 +192,22 @@ Vue.mixin({
     hideHeaderHandler(this, 'mounted');
   },
   created(){
+
+    mui.plusReady(function() {
+      var current_webview = plus.webview.currentWebview();
+      var index = window.location.href.indexOf('#');
+      if (index !== -1) {
+        var url = window.location.href.slice(index);
+        console.log('bindCurrentUrl:' + url);
+        current_webview.setStyle({
+          additionalHttpHeaders:{
+            url:url
+          }
+        });
+      }
+    });
+
+
     //当使用webview方式打开的话，会显示webview，并绑定侧滑事件
     if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
       showWebview();
