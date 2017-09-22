@@ -1,21 +1,23 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <button type="button" class="mui-btn mui-btn-link mui-btn-nav mui-pull-left" @tap.stop.prevent="cancelAsk">取消
-
-      </button>
-      <h1 class="mui-title">提问</h1>
-      <a @tap.stop.prevent="$router.pushPlus('/help/ask')"
-         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">帮助</a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
+      <h1 class="mui-title">发起提问</h1>
     </header>
 
-    <div class="mui-content absolute">
+    <div class="mui-content absolute askWrapper">
 
+      <div class="category"><span class="tip">问题分类</span>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button"  @tap.stop.prevent="selectType()">{{ type ? type.split(':')[0] : '选择'
+          }}</button>
+      </div>
 
     <div class="form form-ask">
       <div class="textarea-wrapper">
         <textarea v-model.trim="description" @keydown.stop="enterWords"
-                  placeholder="请在这里提出问题。为了更好的通过平台解决问题，提问需要遵循相应规范，请点击帮助了解详情。"></textarea>
+                  placeholder="1.请输入问题详情
+2.答案每被查看一次，你和回答者可从中获取分成
+3.分成比例与提问金额有关"></textarea>
       </div>
       <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
     </div>
@@ -23,18 +25,26 @@
 
     <div class="fixedDiv">
       <div class="fixedContainer">
-        <span class="counter">(<span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span>)</span>
         <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
+        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
-      <div class="title select" v-show="!isShowMoneyDev">问题分类：<span class="active"
-                                                                        @tap.stop.prevent="selectType">{{ type ? type.split(':')[0] : '请选择'
-        }}</span></div>
 
       <div class="button-wrapper" v-show="!isShowMoneyDev">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
           提好问题了
 
         </button>
+      </div>
+
+      <div class="help">
+          <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
+          <div class="item" @tap.stop.prevent="developing()">问答被查看后我的分成细则？</div>
+
+          <div class="button-wrapper">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="developing()">
+              去问答社区看看
+             </button>
+          </div>
       </div>
     </div>
 
@@ -117,7 +127,7 @@
       description: '',
       selectOther: false,
       hide: 0,
-      descMaxLength: 500,
+      descMaxLength: 1000,
       isShowMoneyDev: false,
       test: 0,
       pay_object_type: 'ask'
@@ -133,38 +143,6 @@
         console.log('refresh-ask');
       });
       mui.init();
-
-      var fixedDiv = mui('.fixedDiv')[0];
-      var textareaWrapper = mui('.textarea-wrapper')[0];
-
-      if (mui.os.ios) {
-
-        mui(".textarea-wrapper").on('focusin', 'textarea', function () {
-          fixedDiv.style.position = 'absolute';
-
-          if (document.querySelector('.suspension')) {
-            fixedDiv.style.top = '249px';
-          } else if (document.querySelector('.suspend')) {
-            fixedDiv.style.top = '254px';
-          } else {
-            fixedDiv.style.top = '200px';
-          }
-
-
-          textareaWrapper.style.height='156px';
-        });
-
-        mui(".textarea-wrapper").on('focusout', 'textarea', function () {
-          fixedDiv.style.position = 'fixed';
-          fixedDiv.style.top = 'auto';
-          textareaWrapper.style.height='100%';
-        });
-      }
-
-//      var inputElem = document.querySelector('textarea');
-//      inputElem.focus();
-
-
     },
     computed: {
       type () {
@@ -201,6 +179,9 @@
       this.check();
     },
     methods: {
+      developing(){
+          mui.toast('开发中...');
+      },
       getMethodIcon(){
         if (mui.os.plus && mui.os.ios) {
           return '#icon-apple';
@@ -435,6 +416,27 @@
 
 
 <style scoped>
+
+  .askWrapper .category {
+    background: #fff;
+    padding: 15px 10px;
+    position: relative;
+  }
+  .askWrapper .category .tip {
+    font-size: 16px;
+    color: #444444;
+  }
+  .askWrapper .category button {
+    position: absolute;
+    border: 1px solid #03aef9;
+    background-color: #03aef9;
+    width: auto;
+    font-size:14px;
+    padding: 4px 17px;
+    right: 10px;
+    top: 12px;
+  }
+
   .mui-content > .mui-table-view:first-child {
     margin-top: 0;
   }
@@ -447,7 +449,7 @@
     padding-top: 0;
     background: #fff;
     position: absolute;
-    top: 0;
+    top: 51px;
     bottom: 148px;
     width: 100%;
     z-index: 0;
@@ -458,7 +460,8 @@
     height: 100%;
     border: none;
     margin: 0;
-    padding: 10px;
+    padding: 10px 17px;
+    color:#9b9b9b;
   }
 
   .selectMoney {
@@ -515,22 +518,14 @@
 
   .textarea-wrapper {
     height: 100%;
-    background: #fff;
+    background: #f3f4f6;
   }
 
-  .textarea-wrapper .counter {
-    position: absolute;
-    left: 10px;
-    bottom: 5px;
-    color: #999;
+  .textarea-wrapper textarea{
+    background: #f3f4f6;
   }
 
-  .textarea-wrapper .niming {
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
-    color: #999;
-  }
+
 
   .mui-bar .mui-btn-link {
     color: #fff;
@@ -577,19 +572,28 @@
 
   .fixedContainer {
     position: relative;
-    background: #fff;
+    background: #f3f4f6;
     padding: 5px 10px;
   }
 
   .fixedContainer .counter {
-    color: #999;
+    float: right;
+    color: #c8c8c8;
   }
 
   .fixedContainer .niming {
-    float: right;
-    color: #999;
+    color: #808080;
+    position: relative;
+    font-size:14px;
+    padding-left:17px;
   }
 
+  .fixedContainer .niming input{
+      position: absolute;
+      top:4px;
+      left:0;
+      vertical-align: bottom;
+  }
   .fixedDiv .title {
     margin: 10px 0;
     text-align: center;
@@ -600,7 +604,7 @@
   .fixedDiv {
     padding-bottom: 10px;
     position: absolute;
-    background-color: #f4f4f4;
+    background-color: #fff;
     bottom: 0;
     width: 100%;
   }
@@ -624,7 +628,14 @@
 
   .fixedDiv .button-wrapper {
     margin-top: 15px;
-    padding: 0 90px
+    padding: 0 15px;
+  }
+
+  .fixedDiv .button-wrapper button{
+    background:#03aef9;
+    color:#f2f2f2;
+    border-radius: 5px;
+    border:1px solid #03aef9;
   }
 
   .mui-popover .mui-table-view{
@@ -696,4 +707,26 @@
     padding-left:5px;
     text-align: left;
   }
+
+  .help{
+     color:#03aef9;
+     font-size:14px;
+     padding:0 15px;
+
+  }
+  .help .item{
+    padding:10px 0 0;
+  }
+  .help .button-wrapper{
+    margin-top:46px;
+    padding:0 90px;
+  }
+  .help .button-wrapper button{
+    border-radius:50px;
+    border:1px solid #dcdcdc;
+    background: #fff;
+    color:#444;
+    padding:5px 0;
+  }
+
 </style>
