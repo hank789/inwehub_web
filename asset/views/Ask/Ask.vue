@@ -419,7 +419,7 @@
 
   .askWrapper .category {
     background: #fff;
-    padding: 15px 10px;
+    padding: 15px 17px;
     position: relative;
   }
   .askWrapper .category .tip {
@@ -719,7 +719,7 @@
   }
   .help .button-wrapper{
     margin-top:46px;
-    padding:0 90px;
+    padding:0 75px;
   }
   .help .button-wrapper button{
     border-radius:50px;
