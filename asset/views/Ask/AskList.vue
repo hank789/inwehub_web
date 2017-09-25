@@ -13,7 +13,7 @@
           <a class="mui-control-item mui-active" @tap.stop.prevent="">
             未完成
         </a>
-          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/asks/finish')">
             已完成
           </a>
         </div>
@@ -45,7 +45,7 @@
           <a class="mui-control-item mui-active" @tap.stop.prevent="">
             未完成
         </a>
-          <a class="mui-control-item" @tap.stop.prevent="$router.pushPlus('/asks/finish')">
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/asks/finish')">
             已完成
           </a>
         </div>
