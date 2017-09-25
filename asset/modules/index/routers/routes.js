@@ -810,6 +810,22 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { //answer
+    path: '/answers/finished',
+    name: 'answer-list',
+    component: require('../../../views/Answer/AnswerListFinished.vue'),
+    meta: {
+      title: '我的回答',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
+      requestAuth(to, from, next)
+    }
+  },
 	{ //answer-detail
 		path: '/answer/:id',
     name: 'answer-detail',
