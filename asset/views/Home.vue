@@ -184,7 +184,7 @@
 		data: () => ({
 			is_expert:"",
 			recommend_read:"",
-			recommend_experts:"",
+			recommend_experts:[],
 			isShowActivity:false,
 			recommend_activity:[
 			  {image_url:''},
