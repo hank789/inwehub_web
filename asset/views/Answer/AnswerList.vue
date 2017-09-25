@@ -54,15 +54,11 @@
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
             </div>
-            <div class="site-desc site-descSub mui-ellipsis-3" v-show="answer.answer_content.length">
-              {{ answer.answer_content }}
-            </div>
             <div class="person">
               <div class="mui-media-body">
                 <div>
-                  <span>{{ answer.status_description }}</span>
-                  ·
-              <span class="time"><timeago :since="timeago(answer.created_at)"></timeago></span>
+                  <span class="label">{{ answer.status_description }}</span>
+                  <span class="time">{{ answer.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
                 </div>
               </div>
             </div>
@@ -244,7 +240,6 @@
 
 <style scoped>
   .list-answer .list-answer-item{
-    margin-top:10px;
     position:relative;
     line-height: 40px;
   }
@@ -262,6 +257,8 @@
   .list-answer .list-answer-item .time{
     color:#9B9B9B;
     font-size:12px;
+    float: right;
+    margin-right: 10px;
   }
 
   .list-answer .username{
@@ -286,7 +283,6 @@
 
 
   .list-answer .site-desc{
-    margin-top:10px;
     padding-left: 10px;
     line-height: 22px;
     color:#101010;
@@ -354,21 +350,9 @@
     position: relative;
   }
 
+
   .menu{
     position: relative;
-    z-index:7;
-  }
-
-  .menu:after{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #c8c7cc;
     z-index:7;
   }
 
@@ -378,32 +362,50 @@
 
   .mui-segmented-control .mui-control-item {
     line-height: 50px;
-    font-size: 16px;
+    font-size:14px;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     position: relative;
+    color:#03aef9;
     border: none;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 50px;
-    right: 10px;
+    width: 28px;
     bottom: 0;
     left: 50%;
-    margin-left: -25px;
-    height: 5px;
+    margin-left: -14px;
+    height: 2px;
     z-index: 999;
     content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
     background-color: #009FE8;
   }
 
   .mui-segmented-control{
+    background: #f3f4f6;
+  }
+
+  #pullrefresh{
     background: #fff;
   }
 
+  .mui-table-view:before{
+    display: none;
+  }
 
+  .mui-table-view:after{
+    border:none;
+    left:18px;
+    right:18px;
+  }
+
+  .label{
+    display: inline-block;
+    background:#fcc816;
+    border-radius:50px;
+    color:#fff;
+    padding:0 9px;
+  }
 </style>
