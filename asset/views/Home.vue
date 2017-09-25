@@ -112,29 +112,29 @@
 				</div>
 
 			</div>
-			<!--热门回答-->
+			<!--热门回答  answer_user_avatar_url-->
 			<div class="hotAnswer">
 				<div class="hotAnswer_t">
-				  <p>热门问答</p>
-				  <p  @tap.stop.prevent="$router.pushPlus('/MajorList')">进入社区</p>
-                  <i class="bot"></i>
+					<p>热门问答</p>
+					<p @tap.stop.prevent="$router.pushPlus('/MajorList')">进入社区</p>
+					<i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
-                   <li>
-                   	<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</p>
-                   	<div class="hotAnswer_d">
-                   	   <p>
-                   	   	<img src="../statics/images/balance1.png"/>
-                   	   	 <svg class="icon" aria-hidden="true">
-							  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-						 </svg>
-                   	   </p>
-                   	   <p class="mui-ellipsis">回答者：郭大红</p>
-                   	   <p class="mui-ellipsis">运营专员</p>
-                   	   <p class="mui-ellipsis">上海樱维网络有限公司</p>
-                   	</div>
-                   	<i class="bot"></i>
-                   </li> 
+					<li v-for="(qa, index) in recommend_qa">
+						<p class="mui-ellipsis-2">{{qa.description}}</p>
+						<div class="hotAnswer_d">
+							<p>
+								<img :src="qa.answer_user_avatar_url" />
+								<svg class="icon" aria-hidden="true" v-if="qa.answer_user_is_expert == '1'">
+									<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+								</svg>
+							</p>
+							<p class="mui-ellipsis">回答者：{{qa.answer_username}}</p>
+							<p class="mui-ellipsis">{{qa.answer_user_title}}</p>
+							<p class="mui-ellipsis">{{qa.answer_user_company}}</p>
+						</div>
+						<i class="bot"></i>
+					</li>
 				</ul>
 			</div>
 
@@ -199,23 +199,27 @@
 	import { TimeEndText } from '../utils/time';
 	import { swiper, swiperSlide } from 'vue-awesome-swiper';
 	import { openWebviewByHome } from '../utils/webview';
-    import {setStatusBarBackgroundAndStyle} from '../utils/statusBar';
-    import {queryParent} from '../utils/dom';
-    import userAbility from '../utils/userAbility';
-    import userAbilityCheck from '../utils/userAbilityCheck';
-
+	import { setStatusBarBackgroundAndStyle } from '../utils/statusBar';
+	import { queryParent } from '../utils/dom';
+	import userAbility from '../utils/userAbility';
+	import userAbilityCheck from '../utils/userAbilityCheck';
 
 	const Home = {
 		data: () => ({
-
-			is_expert:"",
-			recommend_read:"",
+			is_expert: "",
+			recommend_read: "",
 			recommend_experts:[],
-			isShowActivity:false,
-			recommend_activity:[
-			  {image_url:''},
-			  {image_url:''},
-			  {image_url:''}
+			recommend_qa:[],
+			isShowActivity: false,
+			recommend_activity: [{
+					image_url: ''
+				},
+				{
+					image_url: ''
+				},
+				{
+					image_url: ''
+				}
 
 			],
 			firstAsk: false,
@@ -275,7 +279,6 @@
 					userAbility.moreProfessor(this);
 				}
 
-
 			},
 			detail(url) {
 				this.goLink(url);
@@ -296,10 +299,10 @@
 				}
 
 			},
-      toAsk() {
-       userAbility.jumpToAddAsk(this);
-//       userAbility.newbieTask(this);
-      },
+			toAsk() {
+				userAbility.jumpToAddAsk(this);
+				//       userAbility.newbieTask(this);
+			},
 
 			goArticle: function(article) {
 
@@ -473,47 +476,44 @@
 
 					//推荐专家；
 
-				   t.recommend_experts = response_data.recommend_experts;
+					t.recommend_experts = response_data.recommend_experts;
 
-				   this.isShowActivity = response_data.recommend_activity.length?true:false;
+					this.isShowActivity = response_data.recommend_activity.length ? true : false;
 
-				   //首页推荐活动
-				   for (var i in response_data.recommend_activity) {
-				   	   t.recommend_activity[i] = response_data.recommend_activity[i];
-				   }
-
-
-				   //推荐阅读；
-				   t.recommend_read = response_data.recommend_read;
+					//首页推荐活动
+					for(var i in response_data.recommend_activity) {
+						t.recommend_activity[i] = response_data.recommend_activity[i];
+					}
+                    
+					//推荐阅读；
+					t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
 					t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
 					//是否是专家；
 					t.is_expert = response_data.expert_apply_status;
-
-
-          //预加载第一篇文章
-          if (mui.os.plus && t.recommend_read.length > 0) {
-            var article_params = {
-              article_id: t.recommend_read[0].id,
-              article_url: t.recommend_read[0].view_url,
-              article_title: t.recommend_read[0].title,
-              article_comment_url: t.recommend_read[0].comment_url,
-              article_img_url:t.recommend_read[0].img_url,
-              preload: true,
-              custom_preload: true
-            };
-            mui.preload({
-              url: 'index.html#/webview/article',
-              id: 'inwehub_article_view',
-              styles: {
-                popGesture: 'hide'
-              },
-              extras: article_params
-            });
-          }
-
-
-
+					 //热门回答；
+                     t.recommend_qa = response_data.recommend_qa;
+                    
+					//预加载第一篇文章
+					if(mui.os.plus && t.recommend_read.length > 0) {
+						var article_params = {
+							article_id: t.recommend_read[0].id,
+							article_url: t.recommend_read[0].view_url,
+							article_title: t.recommend_read[0].title,
+							article_comment_url: t.recommend_read[0].comment_url,
+							article_img_url: t.recommend_read[0].img_url,
+							preload: true,
+							custom_preload: true
+						};
+						mui.preload({
+							url: 'index.html#/webview/article',
+							id: 'inwehub_article_view',
+							styles: {
+								popGesture: 'hide'
+							},
+							extras: article_params
+						});
+					}
 
 					//返回的时间；
 					var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
@@ -958,104 +958,116 @@
 		border-radius: 4px;
 	}
 	/*热门回答*/
-	.hotAnswer{
-	  width: 100%;
-	 /* height: 244px;*/
-	  overflow: hidden;
-	  margin-bottom: 10px;
-	  background: #FFFFFF;
+	
+	.hotAnswer {
+		width: 100%;
+		/* height: 244px;*/
+		overflow: hidden;
+		margin-bottom: 10px;
+		background: #FFFFFF;
 	}
-	.hotAnswer_t{
-	  width: 100%;
-	  height: 44px;
-	  position: relative;
+	
+	.hotAnswer_t {
+		width: 100%;
+		height: 44px;
+		position: relative;
 	}
-	.hotAnswer_t p:nth-of-type(1){
-	   float: left;
-	   margin-left: 5%;
-	   line-height: 44px;
-	   font-size: 16px;
-	   color: #444444;
+	
+	.hotAnswer_t p:nth-of-type(1) {
+		float: left;
+		margin-left: 5%;
+		line-height: 44px;
+		font-size: 16px;
+		color: #444444;
 	}
-	.hotAnswer_t p:nth-of-type(2){
-	   float: right;
-	   margin-right: 5%;
-	   line-height: 44px;
-	   font-size: 14px;
-	   color: #03aef9;
+	
+	.hotAnswer_t p:nth-of-type(2) {
+		float: right;
+		margin-right: 5%;
+		line-height: 44px;
+		font-size: 14px;
+		color: #03aef9;
 	}
-	.hotAnswer_b{
-	  width: 90%;
-	  margin-left: 5%;
-	  /*height: 200px;*/
-	 overflow: hidden;
+	
+	.hotAnswer_b {
+		width: 90%;
+		margin-left: 5%;
+		/*height: 200px;*/
+		overflow: hidden;
 	}
-	.hotAnswer_b li{
-		 width: 100%;
-		 height: 88px;
-		 position: relative;
+	
+	.hotAnswer_b li {
+		width: 100%;
+		height: 88px;
+		position: relative;
 	}
-	.hotAnswer_b li>p{
-        margin-top: 12px;
-        font-size: 14px;
-        color: #444444;
+	
+	.hotAnswer_b li>p {
+		margin-top: 12px;
+		font-size: 14px;
+		color: #444444;
 	}
-	.hotAnswer_d{
+	
+	.hotAnswer_d {
 		width: 100%;
 		height: 32px;
-		margin-top:4.5px;
+		margin-top: 4.5px;
 	}
-	.hotAnswer_d p{
+	
+	.hotAnswer_d p {
 		float: left;
-		
 	}
-	.hotAnswer_d p:nth-child(1){
+	
+	.hotAnswer_d p:nth-child(1) {
 		width: 9.5%;
-        height: 32px;
-        /*background: #CCCCCC;*/
-        position: relative;
+		height: 32px;
+		/*background: #CCCCCC;*/
+		position: relative;
 	}
-	.hotAnswer_d p:nth-child(1)>svg{
-       position: absolute;
-       font-size: 14px;
-       bottom: 0;
-       right: -4px;
+	
+	.hotAnswer_d p:nth-child(1)>svg {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		right: -4px;
 	}
-	.hotAnswer_d p:nth-child(1)>img{
+	
+	.hotAnswer_d p:nth-child(1)>img {
 		width: 100%;
-        height:100%;
-        border-radius: 50%;
+		height: 100%;
+		border-radius: 50%;
 	}
-	.hotAnswer_d p:nth-child(2){
+	
+	.hotAnswer_d p:nth-child(2) {
 		width: 32%;
-        height:15px;
-        margin-top: 8.5px;
-        font-size: 13px;
-        color: #808080;
-        border-right: 1px solid #c8c8c8;
-        text-align: center;
-        line-height: 15px;
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
 	}
-	.hotAnswer_d p:nth-child(3){
+	
+	.hotAnswer_d p:nth-child(3) {
 		width: 21%;
-        height:15px;
-        margin-top: 8.5px;
-        font-size: 13px;
-        color: #808080;
-        border-right: 1px solid #c8c8c8;
-        text-align: center;
-        line-height: 15px;
-       
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
 	}
-	.hotAnswer_d p:nth-child(4){
-		width:37.5%;
-        height:15px;
-        margin-top: 8.5px;
-        font-size: 13px;
-        color: #808080;
-        text-align: center;
-        line-height: 15px;
-      
+	
+	.hotAnswer_d p:nth-child(4) {
+		width: 37.5%;
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		text-align: center;
+		line-height: 15px;
 	}
 	/*向你推荐*/
 	
