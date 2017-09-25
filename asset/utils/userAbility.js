@@ -165,14 +165,21 @@ var userAbility = () => {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
-            alertZoom(html, (num) => { postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
-              var code = response.data.code;
-              //如果请求不成功提示信息 并且返回上一页；
-              if(code !== 1000) {
-                return;
+            alertZoom(html, (num) => {
+              postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
+                var code = response.data.code;
+                //如果请求不成功提示信息 并且返回上一页；
+                if(code !== 1000) {
+                  return;
+                }
+                localEvent.setLocalItem("num"+mobile, {value: '1'});
+              });
+              if (window.mixpanel.track) {
+                window.mixpanel.track(
+                  'inwehub:newbie:dialog',
+                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": 'newbie-dialog', "page_title": "新手任务弹窗"}
+                );
               }
-              localEvent.setLocalItem("num"+mobile, {value: '1'});
-            });
             }, false);
           });
         }
