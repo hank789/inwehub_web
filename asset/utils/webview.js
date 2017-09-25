@@ -7,17 +7,33 @@ import localEvent from '../stores/localStorage';
 function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='hide', reload = false) {
     mui.plusReady(function(){
 
-      console.log('calledMethod: openWebviewByUrl');
+      console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id);
 
       var current_webview = plus.webview.getWebviewById(id);
       if (current_webview) {
         mui.fire(current_webview, 'autoHeight', false);
         mui.fire(current_webview, 'refreshPageData', false);
       }
+
       if (current_webview && current_webview.getURL()) {
         var current_webview_url = current_webview.getURL();
-        console.log('openWebviewByUrl:current:'+current_webview_url);
-        if (current_webview_url.indexOf(url) < 0) {
+
+        if (current_webview.getStyle().additionalHttpHeaders) {
+             var httpHeader = current_webview.getStyle().additionalHttpHeaders;
+             if (httpHeader.url) {
+               current_webview_url = httpHeader.url;
+             }
+        }
+        
+        var urlIndex = url.indexOf('#');
+        var shotUrl = url;
+        if (urlIndex !== -1) {
+          shotUrl = url.slice(urlIndex);
+        }
+
+        console.log('openWebviewByUrl:current_webview_url:'+current_webview_url + ', shortUrl' + shotUrl);
+
+        if (current_webview_url !== shotUrl) {
           console.log('openWebviewByUrl:load:'+url);
           current_webview.loadURL(url);
         }

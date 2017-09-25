@@ -207,19 +207,16 @@
 
 	const Home = {
 		data: () => ({
-			is_expert: "",
-			recommend_read: "",
-			recommend_experts: "",
-			isShowActivity: false,
-			recommend_activity: [{
-					image_url: ''
-				},
-				{
-					image_url: ''
-				},
-				{
-					image_url: ''
-				}
+
+			is_expert:"",
+			recommend_read:"",
+			recommend_experts:[],
+			isShowActivity:false,
+			recommend_activity:[
+			  {image_url:''},
+			  {image_url:''},
+			  {image_url:''}
+
 			],
 			firstAsk: false,
 			couponExpireAtTime: '',

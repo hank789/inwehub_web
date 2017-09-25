@@ -216,7 +216,7 @@
 					 this.$router.pushPlus('/answer/' + id);
 					  break;
 					case 2:
-					 this.$router.push('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id);
 					  break;
 					case 3:
 					 this.$router.pushPlus('/my/info');
@@ -225,7 +225,7 @@
 					 this.$router.pushPlus('/discover');
 					  break;
 					case 5:
-					 this.$router.push('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id);
 					  break;
 
 					}
@@ -261,7 +261,7 @@
 					}
 					//请求成功的操作
 
-					if(response.data.data.list.length > 0) {
+					if(response.data.data.list) {
 						this.tasks = response.data.data.list;
 					}
 					//没有数据的显示框不显示；
@@ -466,9 +466,9 @@
 		color: #b4b4b6;
 	}
 	ul li p span:nth-of-type(3) div {
-	   display: inline-block;	 
+	   display: inline-block;
 	}
-  
+
 	.message {
 		width: 7px;
 		height: 7px;
