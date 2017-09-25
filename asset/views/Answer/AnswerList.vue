@@ -7,6 +7,18 @@
     </header>
 
     <div class="mui-content list-empty" v-if="nothing == 1">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="">
+            已完成
+          </a>
+        </div>
+      </div>
+
       <div class="mui-table-view list-ask-item">
         <div class="mui-table-view-cell">
           <div class="">
@@ -19,6 +31,17 @@
     </div>
 
     <div class="mui-content absolute">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="">
+            已完成
+          </a>
+        </div>
+      </div>
 
     <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
@@ -329,6 +352,57 @@
 
   .list-answer .person{
     position: relative;
+  }
+
+  .menu{
+    position: relative;
+    z-index:7;
+  }
+
+  .menu:after{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+    z-index:7;
+  }
+
+  .list-empty .menu{
+    margin-bottom:10px;
+  }
+
+  .mui-segmented-control .mui-control-item {
+    line-height: 50px;
+    font-size: 16px;
+  }
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    position: relative;
+    border: none;
+  }
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
+    position: absolute;
+    width: 50px;
+    right: 10px;
+    bottom: 0;
+    left: 50%;
+    margin-left: -25px;
+    height: 5px;
+    z-index: 999;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #009FE8;
+  }
+
+  .mui-segmented-control{
+    background: #fff;
   }
 
 
