@@ -21,7 +21,13 @@
         <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
       </div>
 
-       <Statistics></Statistics>
+       <Statistics
+          :answerId="answer.id"
+          :commentNum="answer.comment_number"
+          :seeNum="answer.view_number"
+          :supportNum="answer.support_number"
+          :isSupported="answer.is_supported?true:false"
+       ></Statistics>
     </div>
   </div>
 </template>
@@ -60,7 +66,6 @@
       }
     },
     created(){
-
     },
     watch: {
       'answer'(newVal, oldVal) {
@@ -74,7 +79,7 @@
     methods: {
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
-      },
+      }
     }
   };
 </script>

@@ -7,7 +7,7 @@
         </svg>
       </div>
 
-      <span>2</span>
+      <span>{{ commentNum }}</span>
     </div>
 
     <div class="item">
@@ -16,25 +16,31 @@
           <use xlink:href="#icon-gongkai"></use>
         </svg>
       </div>
-      <span>2</span>
+      <span>{{ seeNum }}</span>
     </div>
 
-    <div class="item active">
+    <div class="item" :class="{'active':!isSupportedLocal}" @tap.stop.prevent="support()">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
       </div>
-      <span>2</span>
+      <span>{{ supportNumLocal }}</span>
     </div>
 
   </div>
 </template>
 
 <script type="text/javascript">
+
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+
   export default {
     data () {
-      return {}
+      return {
+        supportNumLocal:0,
+        isSupportedLocal:true
+      }
     },
     components: {},
     props: {
@@ -53,12 +59,48 @@
       answerId: {
         type: Number,
         default: 0
+      },
+      isSupported: {
+        type: Boolean,
+        default: true
       }
     },
-    created(){
-
+    watch: {
+      supportNum:(newVal, oldVal) => {
+        this.supportNumLocal = newVal;
+      },
+      isSupported:(newVal, oldVal) => {
+        this.isSupportedLocal = newVal;
+      },
     },
-    methods: {}
+    created(){
+      this.isSupportedLocal = this.isSupported;
+      this.supportNumLocal = this.supportNum;
+    },
+    methods: {
+      support(){
+
+        if (this.isSupportedLocal) {
+          return;
+        }
+
+        var data = {
+          id: this.answerId
+        };
+
+        postRequest(`support/answer`, data).then(response => {
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          this.supportNumLocal++;
+          this.isSupportedLocal = !this.isSupportedLocal;
+        });
+      },
+    },
   };
 </script>
 

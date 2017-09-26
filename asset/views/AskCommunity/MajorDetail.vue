@@ -24,7 +24,9 @@
       </div>
 
 
-      <Discuss></Discuss>
+      <Discuss
+        :answerId="ask.answers[0] ? ask.answers[0].id:0"
+      ></Discuss>
 
     </div>
   </div>
