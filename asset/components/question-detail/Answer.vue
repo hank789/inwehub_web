@@ -7,7 +7,7 @@
       :realname="answer.user_name ? answer.user_name : ''"
       :position="answer.title ? answer.title : ''"
       :company="answer.company ? answer.company : ''"
-      :isFollow="true"
+      :isFollow="isFollow"
       :isFollowed="answer.is_followed?true:false"
       :isExpert="answer.is_expert ? answer.is_expert : 0"
     ></UserInfo>
@@ -53,6 +53,10 @@
       answer: {
         type: Object,
         default: {}
+      },
+      isFollow: {
+        type: Boolean,
+        default: false
       }
     },
     created(){

@@ -1,6 +1,6 @@
 <template>
   <div class="statistics">
-    <div class="item active">
+    <div class="item">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
@@ -19,7 +19,7 @@
       <span>2</span>
     </div>
 
-    <div class="item">
+    <div class="item active">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>

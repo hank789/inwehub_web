@@ -6,7 +6,7 @@
       :realname="ask.user_name"
       :position="ask.title"
       :company="ask.company"
-      :isFollow="false"
+      :isFollow="isFollow"
       :isFollowed="ask.is_followed?true:false"
       :isExpert="ask.is_expert?1:0"
     ></UserInfo>

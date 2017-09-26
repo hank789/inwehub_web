@@ -14,6 +14,7 @@
 
       <Answer v-show="ask.question.status==6||ask.question.status==7"
               :answer="ask.answers[0] ? ask.answers[0]:{}"
+              :isFollow="true"
       ></Answer>
 
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
