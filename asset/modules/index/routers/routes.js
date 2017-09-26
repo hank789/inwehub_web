@@ -780,7 +780,7 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks',
-    name: 'ask-list',
+    name: 'ask-list-unfinish',
     component: require('../../../views/Ask/AskList.vue'),
 		meta: {
 			title: '我的提问',
@@ -796,7 +796,7 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks/finish',
-    name: 'ask-finish',
+    name: 'ask-list-finished',
     component: require('../../../views/Ask/AskListFinish.vue'),
 		meta: {
 			title: '我的提问',
@@ -808,7 +808,7 @@ const routes = [{
 	},
 	{ //answer
 		path: '/answers',
-    name: 'answer-list',
+    name: 'answer-list-unfinish',
     component: require('../../../views/Answer/AnswerList.vue'),
 		meta: {
 			title: '我的回答',
@@ -824,7 +824,7 @@ const routes = [{
 	},
   { //answer
     path: '/answers/finished',
-    name: 'answer-list',
+    name: 'answer-list-finished',
     component: require('../../../views/Answer/AnswerListFinished.vue'),
     meta: {
       title: '我的回答',
