@@ -10,10 +10,10 @@
 
       <div class="menu">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers');">
             未完成
         </a>
-          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers/finished');">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
             已完成
           </a>
         </div>
@@ -34,10 +34,10 @@
 
       <div class="menu">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers');">
             未完成
         </a>
-          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers/finished');">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
             已完成
           </a>
         </div>

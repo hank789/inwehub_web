@@ -61,9 +61,9 @@ const routes = [{
 	},
 	{ //首页活动列表页
 		path: '/home/ActiveList',
-    name: 'home-ActiveList',
+    name: 'activity-list',
     meta: {
-			title: '活动及机遇',
+			title: '活动列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/ActiveList.vue'),
@@ -73,9 +73,9 @@ const routes = [{
 	},
 	{ //首页机遇列表页
 		path: '/home/OpportunityList',
-    name: 'home-OpportunityList',
+    name: 'opportunity-list',
     meta: {
-			title: '活动及机遇',
+			title: '机遇列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/OpportunityList.vue'),
@@ -85,9 +85,9 @@ const routes = [{
 	},
 	{ //首页报名页面
 		path: '/EnrollmentStatus/:id',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'activity-detail',
     meta: {
-			title: '活动及机遇',
+			title: '活动详情',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/EnrollmentStatus.vue'),
@@ -97,7 +97,11 @@ const routes = [{
 	},
 	{ //专业回答；
 		path: '/MajorList',
+<<<<<<< HEAD
     name: 'home-EnrollmentStatus',
+=======
+    name: 'ask-major-list',
+>>>>>>> 8b88de2c9497d9bd054d71776232aedbf0c5125a
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -109,7 +113,11 @@ const routes = [{
 	},
 	{ //热门问答详情列表页面；
 		path: '/home/MajorDetailList',
+<<<<<<< HEAD
     name: 'home-EnrollmentStatus',
+=======
+    name: 'ask-major-detail',
+>>>>>>> 8b88de2c9497d9bd054d71776232aedbf0c5125a
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -810,6 +818,22 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { //answer
+    path: '/answers/finished',
+    name: 'answer-list',
+    component: require('../../../views/Answer/AnswerListFinished.vue'),
+    meta: {
+      title: '我的回答',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
+      requestAuth(to, from, next)
+    }
+  },
 	{ //answer-detail
 		path: '/answer/:id',
     name: 'answer-detail',

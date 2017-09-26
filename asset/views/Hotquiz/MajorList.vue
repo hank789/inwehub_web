@@ -115,12 +115,12 @@
 				return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
 			}
 
-			},
-			methods: {				
+		},
+		methods: {
 			selectType(type_text) {
 				this.$router.push('/ask/type?type=majorlist')
 			},
-					//热门回答的列表；			
+			//热门回答的列表；			
 			getData() {
 				postRequest(`question/majorHot`, {}).then(response => {
 					var code = response.data.code;
@@ -138,7 +138,9 @@
 				});
 			},
 			getPrevList() {
-				postRequest(`question/majorList`, {tag_id:this.type.split(':')[1]}).then(response => {
+				postRequest(`question/majorList`, {
+					tag_id: this.type.split(':')[1]
+				}).then(response => {
 					var code = response.data.code;
 					//如果请求不成功提示信息 并且返回上一页；
 					if(code !== 1000) {
@@ -162,7 +164,7 @@
 			getNextList() {
 				postRequest(`question/majorList`, {
 					bottom_id: this.bottomId,
-					tag_id:this.type.split(':')[1]
+					tag_id: this.type.split(':')[1]
 				}).then(response => {
 					console.log(1111);
 					var code = response.data.code;
@@ -195,7 +197,7 @@
 			})
 			this.getData();
 			this.getPrevList();
-//			console.log(this.type.split(':')[1]);
+			//			console.log(this.type.split(':')[1]);
 
 		},
 	}
