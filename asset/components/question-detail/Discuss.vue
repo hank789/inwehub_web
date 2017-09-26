@@ -3,7 +3,7 @@
     <div class="message">
       <div class="message_title">
         <p>问答留言</p>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment()">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
         <i class="bot"></i>
@@ -32,18 +32,30 @@
             </li>
           </ul>
       </div>
-
     </div>
+
+    <div class="commentWrapper" v-show="showTextarea">
+      <div class="textareaWrapper">
+        <textarea v-model="textarea" placeholder="在此留言" id="commentTextarea"></textarea>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="submit()">
+          <use xlink:href="#icon-fasong"></use>
+        </svg>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import autosize from 'autosize';
 
   const Discuss = {
     data: () => ({
+      showTextarea:false,
       loading: true,
+      textarea:'',
       list:[]
     }),
     props: {
@@ -57,6 +69,28 @@
     components: {},
     computed: {},
     methods: {
+      comment(){
+          this.showTextarea = true;
+          setTimeout(() => {
+            document.getElementById('commentTextarea').focus();
+          }, 500);
+      },
+      submit(){
+          if (!this.textarea) {
+              return false;
+          }
+
+          postRequest(`answer/comment`, {'answer_id':this.answerId, content:this.textarea}).then(response => {
+            var code = response.data.code;
+            if (code !== 1000) {
+              mui.alert(response.data.message);
+              return;
+            }
+
+            mui.toast('留言成功');
+            this.showTextarea = false;
+          });
+      },
       getList(){
         if (!this.answerId) {
             console.log('answerId:' + this.answerId);
@@ -208,4 +242,43 @@
   }
 
   .listWrapper{}
+
+  .commentWrapper{
+    background: #ececee;
+    position: fixed;
+    width:100%;
+    bottom:0;
+    padding:5px 15px;
+  }
+
+  .commentWrapper .textareaWrapper{
+    position: relative;
+    background:#fff;
+    border-radius:5px;
+    height:35px;
+  }
+
+  .commentWrapper textarea{
+    border:none;
+    display: inline-block;
+    width:50%;
+    height:100%;
+    margin:0;
+    padding:0 5px;
+    line-height: 35px;
+    font-size:14px;
+
+  }
+
+  .commentWrapper textarea::placeholder {
+    color: #c8c8c8;
+  }
+
+  .commentWrapper .icon{
+    position: absolute;
+    right:5px;
+    color:#03aef9;
+    font-size:26px;
+    top:5px;
+  }
 </style>
