@@ -20,6 +20,8 @@
         </quill-editor>
         <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
       </div>
+
+       <Statistics></Statistics>
     </div>
   </div>
 </template>
@@ -27,6 +29,7 @@
 <script type="text/javascript">
   import UserInfo from './UserInfo.vue';
   import {quillEditor} from '../../components/vue-quill';
+  import Statistics from './Statistics.vue';
 
   export default {
     data () {
@@ -43,7 +46,8 @@
     },
     components: {
       UserInfo,
-      quillEditor
+      quillEditor,
+      Statistics
     },
     props: {
       answer: {
