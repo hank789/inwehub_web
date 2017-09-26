@@ -25,7 +25,7 @@
 						</p>
 					</div>
 					<ul class="hotAnswer_b">
-						<li v-for="(hot, index) in majorHot">
+						<li v-for="(hot, index) in majorHot" @tap.stop.prevent="toDetail(hot.id)">
 							<p class="mui-ellipsis-2">{{hot.description}}</p>
 							<div class="hotAnswer_d">
 								<p>
@@ -50,7 +50,7 @@
 						<p>
 							<span>推荐问答</span>
 							<span>
-            	   	  	
+
             	   	  	<a @tap.stop.prevent="selectType()">{{ type ? type.split(':')[0] : '全部'}}</a>
             	   	  	<svg class="icon" aria-hidden="true">
 					  <use xlink:href="#icon-fenleichakan"></use>
@@ -64,7 +64,7 @@
 					<ul class="recommend_b mui-content" id="pullrefresh">
 						<div class="mui-scroll-wrapper">
 							<div class="mui-scroll">
-								<li v-for="(list, index) in majorlist">
+								<li v-for="(list, index) in majorlist" @tap.stop.prevent="toDetail(list.id)">
 									<p class="mui-ellipsis-2">{{list.description}}</p>
 									<div class="recommend_d">
 										<p>
@@ -117,10 +117,13 @@
 
 		},
 		methods: {
+      toDetail(id) {
+          this.$router.push('/askCommunity/major/' + id);
+      },
 			selectType(type_text) {
 				this.$router.push('/ask/type?type=majorlist')
 			},
-			//热门回答的列表；			
+			//热门回答的列表；
 			getData() {
 				postRequest(`question/majorHot`, {}).then(response => {
 					var code = response.data.code;
@@ -206,7 +209,7 @@
 
 <style scoped>
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -220,7 +223,7 @@
 		list-style: none;
 		font-style: normal;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right: 0;
@@ -232,13 +235,13 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*提问样式*/
-	
+
 	.hotquiz {
 		width: 100%;
 		overflow: hidden;
 		background: #FFFFFF;
 	}
-	
+
 	.quiz {
 		width: 92%;
 		height: 44px;
@@ -246,7 +249,7 @@
 		background: #FFFFFF;
 		position: relative;
 	}
-	
+
 	.quiz span {
 		display: block;
 		font-size: 16px;
@@ -254,7 +257,7 @@
 		line-height: 44px;
 		float: left;
 	}
-	
+
 	.quiz button {
 		width: 65px;
 		height: 29px;
@@ -266,56 +269,56 @@
 		border: none;
 	}
 	/*问答列表*/
-	
+
 	.hotAnswer_b {
 		width: 100%;
 		background: #FFFFFF;
 		overflow: hidden;
 	}
-	
+
 	.hotAnswer_b li {
 		width: 92%;
 		margin-left: 4%;
 		height: 88px;
 		position: relative;
 	}
-	
+
 	.hotAnswer_b li>p {
 		margin-top: 12px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.hotAnswer_d {
 		width: 100%;
 		height: 32px;
 		margin-top: 4.5px;
 	}
-	
+
 	.hotAnswer_d p {
 		float: left;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1) {
 		width: 9.5%;
 		height: 32px;
 		/*background: #CCCCCC;*/
 		position: relative;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1)>svg {
 		position: absolute;
 		font-size: 14px;
 		bottom: 0;
 		right: -4px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1)>img {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.hotAnswer_d p:nth-child(2) {
 		width: 32%;
 		height: 15px;
@@ -326,7 +329,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(3) {
 		width: 21%;
 		height: 15px;
@@ -337,7 +340,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(4) {
 		width: 37.5%;
 		height: 15px;
@@ -348,14 +351,14 @@
 		line-height: 15px;
 	}
 	/*推荐问答*/
-	
+
 	.recommendlist {
 		width: 100%;
 		overflow: hidden;
 		background: #FFFFFF;
 		margin-top: 10px;
 	}
-	
+
 	.recommend {
 		width: 92%;
 		height: 44px;
@@ -363,7 +366,7 @@
 		background: #FFFFFF;
 		position: relative;
 	}
-	
+
 	.recommend span:nth-of-type(1) {
 		display: block;
 		font-size: 16px;
@@ -371,7 +374,7 @@
 		line-height: 44px;
 		float: left;
 	}
-	
+
 	.recommend span:nth-of-type(2) {
 		display: block;
 		width: 70%;
@@ -379,7 +382,7 @@
 		float: right;
 		/*background: #CCCCCC;*/
 	}
-	
+
 	.recommend span:nth-of-type(2) i {
 		float: right;
 		display: block;
@@ -389,7 +392,7 @@
 		margin-top: 14px;
 		margin-right: 15px;
 	}
-	
+
 	.recommend span:nth-of-type(2) svg {
 		float: right;
 		display: block;
@@ -398,7 +401,7 @@
 		margin-right: 3px;
 		color: #03aef9;
 	}
-	
+
 	.recommend span:nth-of-type(2) a {
 		float: right;
 		display: block;
@@ -407,56 +410,56 @@
 		color: #03aef9;
 	}
 	/*问答列表*/
-	
+
 	.recommend_b {
 		width: 100%;
 		background: #FFFFFF;
 		overflow: hidden;
 	}
-	
+
 	.recommend_b li {
 		width: 92%;
 		margin-left: 4%;
 		height: 88px;
 		position: relative;
 	}
-	
+
 	.recommend_b li>p {
 		margin-top: 12px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.recommend_d {
 		width: 100%;
 		height: 32px;
 		margin-top: 4.5px;
 	}
-	
+
 	.recommend_d p {
 		float: left;
 	}
-	
+
 	.recommend_d p:nth-child(1) {
 		width: 9.5%;
 		height: 32px;
 		/*background: #CCCCCC;*/
 		position: relative;
 	}
-	
+
 	.recommend_d p:nth-child(1)>svg {
 		position: absolute;
 		font-size: 14px;
 		bottom: 0;
 		right: -4px;
 	}
-	
+
 	.recommend_d p:nth-child(1)>img {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.recommend_d p:nth-child(2) {
 		width: 32%;
 		height: 15px;
@@ -467,7 +470,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.recommend_d p:nth-child(3) {
 		width: 21%;
 		height: 15px;
@@ -478,7 +481,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.recommend_d p:nth-child(4) {
 		width: 37.5%;
 		height: 15px;
@@ -489,26 +492,26 @@
 		line-height: 15px;
 	}
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 		display: none;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;
 	}
 	/*滚动区域*/
-	
+
 	.mui-scroll-wrapper {
 		position: relative;
 		z-index: 2;
@@ -518,7 +521,7 @@
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.mui-scroll {
 		position: relative;
 		z-index: 1;
