@@ -97,11 +97,7 @@ const routes = [{
 	},
 	{ //专业回答；
 		path: '/MajorList',
-<<<<<<< HEAD
-    name: 'home-EnrollmentStatus',
-=======
     name: 'ask-major-list',
->>>>>>> 8b88de2c9497d9bd054d71776232aedbf0c5125a
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -113,11 +109,7 @@ const routes = [{
 	},
 	{ //热门问答详情列表页面；
 		path: '/home/MajorDetailList',
-<<<<<<< HEAD
-    name: 'home-EnrollmentStatus',
-=======
     name: 'ask-major-detail',
->>>>>>> 8b88de2c9497d9bd054d71776232aedbf0c5125a
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -180,7 +172,19 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // 我的报名 活动
+	{ // 我的围观       
+		path: '/my/onlookers',
+    name: 'my-onlookers',
+    meta: {
+			title: '我的围观',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Account/Onlookers.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ // 我的报名 活动 
 		path: '/my/Discount',
     name: 'my-Discount',
     meta: {
