@@ -53,8 +53,8 @@
   }
 
   .timeline .timage .mui-icon {
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     color: #4990E2;
     font-size: 12px;
     position: relative;
@@ -81,7 +81,7 @@
 
   .nearsite-message .timage {
     float: left;
-    margin-top: 22px;
+    margin-top: 21px;
   }
 
   .nearsite-message .timage img {
@@ -99,7 +99,7 @@
     width: 85%;
     position: relative;
     min-height: 20px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .nearsite-message .desc img {
@@ -109,7 +109,6 @@
   .nearsite-message .descBefore:before {
     content: "";
     position: absolute;
-    width: 1px;
     height: 100%;
     background-color: #a2a2a2;
     left: -22px;
@@ -153,10 +152,12 @@
   .time{
       position: absolute;
       right: 10px;
-      top: 21px;
+      top:15px;
       color:#b4b4b6;
   }
   .mui-table-view:after{
     display: none;
   }
+  
+  
 </style>

@@ -6,7 +6,7 @@
                      :read-only="readOnly"></star-rating>
          {{ description }}
           </div>
-        <span class="ratingNum">{{ rating }}.0分</span>
+        <span class="ratingNum">{{ rating }}.0</span>
     </div>
 </template>
 
@@ -49,7 +49,7 @@
 .detail-comment-result .ratingNum{
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 20px;
   color:#fcc816;
   font-size:18px;
 }
@@ -67,5 +67,9 @@
 .mui-table-view-cell{
   color:#444;
   font-size:14px;
+   padding: 20px 15px 17px 15px;
 }
+
+
+   
 </style>
