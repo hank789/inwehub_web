@@ -95,26 +95,26 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ //专业回答；
-		path: '/MajorList',
-    name: 'ask-major-list',
+	{ //问答社区-专业回答
+		path: '/askCommunity/majors',
+    name: 'askCommunity-major-list',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
 		},
-		component: require('../../../views/Hotquiz/MajorList.vue'),
+		component: require('../../../views/AskCommunity/MajorList.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
 	},
-	{ //热门问答详情列表页面；
-		path: '/home/MajorDetailList',
+	{ //问答社区-专业回答-问答详情；
+		path: '/askCommunity/major/:id',
     name: 'ask-major-detail',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
 		},
-		component: require('../../../views/Hotquiz/MajorDetailList.vue'),
+		component: require('../../../views/AskCommunity/MajorDetail.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
@@ -172,7 +172,7 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // 我的围观       
+	{ // 我的围观
 		path: '/my/onlookers',
     name: 'my-onlookers',
     meta: {
@@ -184,7 +184,7 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // 我的报名 活动 
+	{ // 我的报名 活动
 		path: '/my/Discount',
     name: 'my-Discount',
     meta: {

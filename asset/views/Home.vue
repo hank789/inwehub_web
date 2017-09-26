@@ -46,7 +46,7 @@
 					<span>专业问答</span>
                      <b>分红</b>
 				</p>
-				
+
 				</div>
 				<i></i>
 				<div @tap.stop.prevent="toApprove(is_expert)">
@@ -122,7 +122,7 @@
 			<div class="hotAnswer">
 				<div class="hotAnswer_t">
 					<p>热门问答</p>
-					<p @tap.stop.prevent="$router.pushPlus('/MajorList')">进入社区</p>
+					<p @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">进入社区</p>
 					<i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
@@ -490,7 +490,7 @@
 					for(var i in response_data.recommend_activity) {
 						t.recommend_activity[i] = response_data.recommend_activity[i];
 					}
-                    
+
 					//推荐阅读；
 					t.recommend_read = response_data.recommend_read;
 					//返回是否显示首次提问免费的福利；
@@ -499,7 +499,7 @@
 					t.is_expert = response_data.expert_apply_status;
 					 //热门回答；
                      t.recommend_qa = response_data.recommend_qa;
-                    
+
 					//预加载第一篇文章
 					if(mui.os.plus && t.recommend_read.length > 0) {
 						var article_params = {
@@ -556,11 +556,11 @@
 
 <style lang="less" scoped>
 	/*2.0版本css样式*/
-	
+
 	.mui-content {
 		overflow-y: auto;
 	}
-	
+
 	div,
 	span,
 	p,
@@ -572,7 +572,7 @@
 		padding: 0;
 		list-style: none;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right: 0;
@@ -584,27 +584,27 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*头部样式*/
-	
+
 	header {
 		width: 100;
 		height: 44px;
 		background: #f3f4f6;
 		text-align: center;
 	}
-	
+
 	header svg {
 		font-size: 80px;
 		color: #3c3e44;
 		margin-top: -13px;
 	}
 	/*轮播样式*/
-	
+
 	#slider img {
 		height: 136px;
 		width: 100%;
 	}
 	/*专业问答 和 成为专家 */
-	
+
 	.home-expert {
 		width: 100%;
 		height: 44px;
@@ -631,11 +631,11 @@
 		line-height: 44px;
 		position: relative;
 	}
-	
+
 	.home-expert div:nth-of-type(1) {
 		float: left;
 	}
-	
+
 	.home-expert div:nth-of-type(2) {
 		float: right;
 	}
@@ -650,14 +650,14 @@
 		margin: auto;
 		line-height: 25px;
 	}
-	
+
 	.home-expert div p svg {
 		display: block;
 		float: left;
 		font-size: 25px;
 		margin-bottom: -4px;
 	}
-	
+
 	.home-expert div p span {
 		display: block;
 		float: left;
@@ -677,12 +677,12 @@
 		color: #FFFFFF;
 		line-height: 18px;
 		border-radius: 5px;
-		position:relative; 
-		z-index: 5;  
+		position:relative;
+		z-index: 5;
 		top:3.5px;
 		left: 5px;
 	}
-			
+
 	.home-expert div p b::after {
 		content: "";
 		display: block;
@@ -700,18 +700,18 @@
 	    z-index: -1;
 	    }
 	/*一元特惠*/
-	
+
 	.freeAskWrapper {
 		position: relative;
 		height: 48px;
 	}
-	
+
 	.freeAsk {
 		position: absolute;
 		left: 15px;
 		right: 15px;
 	}
-	
+
 	.freeAsk .icon {
 		position: absolute;
 		width: 35px;
@@ -724,7 +724,7 @@
 		background-size: contain;
 		background-position: center;
 	}
-	
+
 	.freeAsk .text {
 		background: #dcdcdc;
 		border: 1px #dcdcdc solid;
@@ -734,11 +734,11 @@
 		color: #323232;
 		padding: 13px 0px 13px 35px;
 	}
-	
+
 	.freeAsk .text div {
 		display: inline-block;
 	}
-	
+
 	.freeAskGet {
 		position: fixed;
 		top: 50%;
@@ -750,7 +750,7 @@
 		height: 262px;
 		z-index: 999;
 	}
-	
+
 	.freeAskGetButton {
 		position: fixed;
 		top: 50%;
@@ -760,7 +760,7 @@
 		height: 70px;
 		z-index: 1000;
 	}
-	
+
 	#freeAskSuccessTemplate .xiaoha {
 		position: fixed;
 		top: 50%;
@@ -772,7 +772,7 @@
 		height: 150px;
 		z-index: 999;
 	}
-	
+
 	#freeAskSuccessTemplate .success {
 		position: fixed;
 		top: 50%;
@@ -784,7 +784,7 @@
 		height: 91px;
 		z-index: 999;
 	}
-	
+
 	#freeAskSuccessTemplate .close {
 		position: fixed;
 		top: 50%;
@@ -792,24 +792,24 @@
 		margin: 94px 0 0 -19px;
 		z-index: 999;
 	}
-	
+
 	#freeAskSuccessTemplate .close .icon {
 		font-size: 38px;
 		color: #b4b4b6;
 	}
 	/*人物推荐*/
-	
+
 	#home-recommend {
 		width: 100%;
 		height: 170px;
 		background: #FFFFFF;
 		margin-top: 5px;
 	}
-	
+
 	#home-recommend div:nth-of-type(1) {
 		margin-left: 0px;
 	}
-	
+
 	#home-card {
 		width: 114px;
 		height: 148px;
@@ -819,7 +819,7 @@
 		position: relative;
 		border-radius: 4px;
 	}
-	
+
 	#home-card img {
 		width: 50px;
 		height: 50px;
@@ -827,21 +827,21 @@
 		border-radius: 50%;
 		margin: 0 auto;
 	}
-	
+
 	#home-card span {
 		display: block;
 		text-align: center;
 		font-size: 12px;
 		padding: 0 4px;
 	}
-	
+
 	#home-card span:nth-of-type(1) i {
 		display: inline-block;
 		max-width: 70px;
 		height: 20px;
 		font-style: normal;
 	}
-	
+
 	#home-card span:nth-of-type(1) {
 		width: 100%;
 		text-align: center;
@@ -850,20 +850,20 @@
 		color: #444444;
 		margin-top: 2px;
 	}
-	
+
 	#home-card span:nth-of-type(1) svg {
 		font-size: 20px;
 		color: #03aef9;
 		margin-bottom: 2.5px;
 		margin-left: -3px;
 	}
-	
+
 	.home-card span:nth-of-type(2) {
 		display: inline-block;
 		width: 100%;
 		color: #444444;
 	}
-	
+
 	#home-card span:nth-of-type(3) {
 		width: 70%;
 		height: 24px;
@@ -876,7 +876,7 @@
 		text-align: center;
 		color: #03aef9;
 	}
-	
+
 	#home-card p {
 		position: absolute;
 		top: 0px;
@@ -889,7 +889,7 @@
 		color: #ffffff;
 	}
 	/*查看更多专家样式*/
-	
+
 	.moreExperts {
 		width: 118.333px;
 		margin-right: 10px;
@@ -899,7 +899,7 @@
 		border-radius: 4px;
 		position: relative;
 	}
-	
+
 	.moreExperts>div {
 		width: 80%;
 		height: 60%;
@@ -908,7 +908,7 @@
 		left: 10%;
 		/*background: #CCCCCC;*/
 	}
-	
+
 	.moreExperts>div>span {
 		display: inline-block;
 		border: 1px solid #b4b4b6;
@@ -918,7 +918,7 @@
 		margin-left: 25%;
 		position: relative;
 	}
-	
+
 	.moreExperts>div svg {
 		font-size: 30px;
 		position: absolute;
@@ -930,7 +930,7 @@
 		text-align: center;
 		color: #b4b4b6;
 	}
-	
+
 	.moreExperts>div p {
 		text-align: center;
 		color: #444444;
@@ -944,7 +944,7 @@
    	padding:11px 4%;
    	background: #ececee;
    }
-	
+
 	.weeklyActivity {
 		width: 60%;
 		height: 100%;
@@ -954,13 +954,13 @@
 		border-radius: 4px;
 		overflow: hidden;
 	}
-	
+
 	.weeklyActivity>img {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.weeklyActivity>p {
 		width: 37px;
 		height: 18px;
@@ -973,7 +973,7 @@
 		font-size: 12px;
 		margin-top: 14px;
 	}
-	
+
 	.opportunities {
 		width: 37%;
 		height: 100%;
@@ -981,7 +981,7 @@
 		margin-left: 3%;
 		float: left;
 	}
-	
+
 	.newcomers {
 		width: 100%;
 		height: 46.5%;
@@ -990,7 +990,7 @@
 		position: relative;
 		border-radius: 4px;
 	}
-	
+
 	.latestWeekly {
 		width: 100%;
 		height: 46.5%;
@@ -1000,7 +1000,7 @@
 		position: relative;
 		border-radius: 4px;
 	}
-	
+
 	.newcomers>p,
 	.latestWeekly>p {
 		width: 37px;
@@ -1014,7 +1014,7 @@
 		font-size: 12px;
 		margin-top: 12px;
 	}
-	
+
 	.newcomers>img,
 	.latestWeekly>img {
 		position: absolute;
@@ -1023,7 +1023,7 @@
 		border-radius: 4px;
 	}
 	/*热门回答*/
-	
+
 	.hotAnswer {
 		width: 100%;
 		/* height: 244px;*/
@@ -1031,13 +1031,13 @@
 		margin-bottom: 10px;
 		background: #FFFFFF;
 	}
-	
+
 	.hotAnswer_t {
 		width: 100%;
 		height: 44px;
 		position: relative;
 	}
-	
+
 	.hotAnswer_t p:nth-of-type(1) {
 		float: left;
 		margin-left: 5%;
@@ -1045,7 +1045,7 @@
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	.hotAnswer_t p:nth-of-type(2) {
 		float: right;
 		margin-right: 5%;
@@ -1053,56 +1053,56 @@
 		font-size: 14px;
 		color: #03aef9;
 	}
-	
+
 	.hotAnswer_b {
 		width: 90%;
 		margin-left: 5%;
 		/*height: 200px;*/
 		overflow: hidden;
 	}
-	
+
 	.hotAnswer_b li {
 		width: 100%;
 		height: 88px;
 		position: relative;
 	}
-	
+
 	.hotAnswer_b li>p {
 		margin-top: 12px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.hotAnswer_d {
 		width: 100%;
 		height: 32px;
 		margin-top: 4.5px;
 	}
-	
+
 	.hotAnswer_d p {
 		float: left;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1) {
 		width: 9.5%;
 		height: 32px;
 		/*background: #CCCCCC;*/
 		position: relative;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1)>svg {
 		position: absolute;
 		font-size: 14px;
 		bottom: 0;
 		right: -4px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(1)>img {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.hotAnswer_d p:nth-child(2) {
 		width: 32%;
 		height: 15px;
@@ -1113,7 +1113,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(3) {
 		width: 21%;
 		height: 15px;
@@ -1124,7 +1124,7 @@
 		text-align: center;
 		line-height: 15px;
 	}
-	
+
 	.hotAnswer_d p:nth-child(4) {
 		width: 37.5%;
 		height: 15px;
@@ -1135,44 +1135,44 @@
 		line-height: 15px;
 	}
 	/*向你推荐*/
-	
+
 	.home-reading {
 		width: 100%;
 		background: #FFFFFF;
 	}
-	
+
 	.reader-upper {
 		width: 90%;
 		height: 50px;
 		margin-left: 5%;
 		position: relative;
 	}
-	
+
 	.reader-upper span:nth-of-type(1) {
 		float: left;
 		line-height: 50px;
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	.reader-upper span:nth-of-type(2) {
 		float: right;
 		line-height: 50px;
 		font-size: 13px;
 		color: #03aef9;
 	}
-	
+
 	.home-reading ul {
 		width: 100%;
 	}
-	
+
 	.home-reading ul li {
 		width: 90%;
 		height: 125px;
 		margin-left: 5%;
 		position: relative;
 	}
-	
+
 	.home-reading ul li:last-child {
 		.bot {
 			position: absolute;
@@ -1185,7 +1185,7 @@
 			background-color: rgb(220, 220, 220);
 		}
 	}
-	
+
 	.home-reading ul li img {
 		width: 35%;
 		height: 80px;
@@ -1193,49 +1193,49 @@
 		margin-top: 21px;
 		border-radius: 4px;
 	}
-	
+
 	.home-reading ul li div {
 		float: left;
 		width: 63%;
 		margin-left: 2%;
 		margin-top: 21px;
 	}
-	
+
 	.home-reading ul li div p:nth-of-type(1) {
 		height: 42px;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.home-reading ul li div p:nth-of-type(2) {
 		font-size: 12px;
 		color: #808080;
 		margin-top: 20px;
 	}
-	
+
 	.home-time {
 		float: left;
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-	
+
 	.home-laud {
 		float: right;
 	}
-	
+
 	.home-laud>svg {
 		font-size: 17px;
 		color: #b4b4b6;
 		margin-bottom: 1.5px;
 	}
-	
+
 	.home-laud>i {
 		font-size: 20px;
 		font-size: 13px;
 		color: #b4b4b6;
 		font-style: normal;
 	}
-	
+
 	.home-bot {
 		width: 100%;
 		height: 140px;
@@ -1244,11 +1244,11 @@
 		text-align: center;
 		color: #c8c8c8;
 	}
-	
+
 	.mui-slider-indicator .mui-active.mui-indicator {
 		background: #03aef9;
 	}
-	
+
 	.mui-slider-indicator .mui-indicator {
 		display: inline-block;
 		width: 6px;
@@ -1261,7 +1261,7 @@
 		box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
 	}
 	/***媒体查询*****/
-	
+
 	@media screen and (min-width: 320px) {
 		.activity {
 			height: 133px;
@@ -1270,7 +1270,7 @@
 		  width:74%;
 		}
 	}
-	
+
 	@media screen and (min-width: 375px) {
 		.activity {
 			height: 157px;
@@ -1279,7 +1279,7 @@
 		  width:65%;
 		}
 	}
-	
+
 	@media screen and (min-width: 414px) {
 		.activity {
 			height: 172px;
