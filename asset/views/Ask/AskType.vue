@@ -40,8 +40,9 @@
       loading:true
     }),
     computed: {
-      types () {
-          return this.$store.getters[ASK_TYPES];
+      types () {	 
+      	  return this.$store.getters[ASK_TYPES]
+//    	  unshift({value:0, text: "全部"})   
       },
       subTypes(){
         return this.$store.getters[ASK_SUB_TYPES];
@@ -76,6 +77,11 @@
           this.loading=0;
       }
       */
+    },
+   mounted() {
+//  	let id = parseInt();
+    	console.log(this.$route.query.type);
+
     }
   }
   export default Ask;

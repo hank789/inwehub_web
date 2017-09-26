@@ -61,9 +61,9 @@ const routes = [{
 	},
 	{ //首页活动列表页
 		path: '/home/ActiveList',
-    name: 'home-ActiveList',
+    name: 'activity-list',
     meta: {
-			title: '活动及机遇',
+			title: '活动列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/ActiveList.vue'),
@@ -73,9 +73,9 @@ const routes = [{
 	},
 	{ //首页机遇列表页
 		path: '/home/OpportunityList',
-    name: 'home-OpportunityList',
+    name: 'opportunity-list',
     meta: {
-			title: '活动及机遇',
+			title: '机遇列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/OpportunityList.vue'),
@@ -85,9 +85,9 @@ const routes = [{
 	},
 	{ //首页报名页面
 		path: '/EnrollmentStatus/:id',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'activity-detail',
     meta: {
-			title: '活动及机遇',
+			title: '活动详情',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/EnrollmentStatus.vue'),
@@ -97,7 +97,7 @@ const routes = [{
 	},
 	{ //专业回答；
 		path: '/MajorList',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'ask-major-list',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -109,7 +109,7 @@ const routes = [{
 	},
 	{ //热门问答详情列表页面；
 		path: '/home/MajorDetailList',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'ask-major-detail',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -172,7 +172,19 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // 我的报名 活动
+	{ // 我的围观       
+		path: '/my/onlookers',
+    name: 'my-onlookers',
+    meta: {
+			title: '我的围观',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Account/Onlookers.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ // 我的报名 活动 
 		path: '/my/Discount',
     name: 'my-Discount',
     meta: {
