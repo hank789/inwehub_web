@@ -18,23 +18,24 @@ npm run build
 
 
 #规范
-页面标题栏
-  <header class="mui-bar-nav">
-      //标题栏内容
-  </header>
+#页面布局
+  页面标题栏
+    <header class="mui-bar-nav">
+        //标题栏内容
+    </header>
 
-页面主体内容
-  <div class="mui-content">
-      //页面主体内容
-  </div>
+  页面主体内容
+    <div class="mui-content">
+        //页面主体内容
+    </div>
 
-页面底部内容
-  <nav class="footer-bar">
-      //页面底部内容
-  </nav>
+  页面底部内容
+    <nav class="footer-bar">
+        //页面底部内容
+    </nav>
 
 
-dialog使用:
+#dialog使用:
 1. import {alertSkyOne, alertSkyTwo, alertSimple} from '../../utils/dialog';
      import inwehubDialog from '../../components/Dialog.vue';
 
@@ -51,7 +52,7 @@ dialog使用:
          });
 
 
-dialog全局使用
+#dialog全局使用
   this.$parent.$refs.inwehubDialog.getHtml('test', {ok:'this is ok'}, (html) => {
             console.log('html:'+html);
             alertSimple(html, 'ok');
@@ -59,8 +60,18 @@ dialog全局使用
 
 
 
-message组件
+#message组件
     调用
       this.$refs.MessageComponent.show('hello', () => {
           //点击后要处理的业务
             });
+
+
+#路由命名
+   1 小驼峰式
+   2 列表如: /my/info/trains 以复数形式结尾
+   3 详情
+        如: '/my/info/train/:id'  需要id以:id结尾, 不需要id的以单数形式结尾
+
+
+
