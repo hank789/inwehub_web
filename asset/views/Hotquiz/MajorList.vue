@@ -117,9 +117,8 @@
 
 			},
 			methods: {				
-			
 			selectType(type_text) {
-				this.$router.push('/ask/type');
+				this.$router.push('/ask/type?type=majorlist')
 			},
 					//热门回答的列表；			
 			getData() {
@@ -139,7 +138,7 @@
 				});
 			},
 			getPrevList() {
-				postRequest(`question/majorList`, {}).then(response => {
+				postRequest(`question/majorList`, {tag_id:this.type.split(':')[1]}).then(response => {
 					var code = response.data.code;
 					//如果请求不成功提示信息 并且返回上一页；
 					if(code !== 1000) {
@@ -196,7 +195,7 @@
 			})
 			this.getData();
 			this.getPrevList();
-			console.log(this.type.split(':')[1]);
+//			console.log(this.type.split(':')[1]);
 
 		},
 	}
@@ -262,6 +261,7 @@
 		background: #03aef9;
 		float: right;
 		margin-top: 7px;
+		border: none;
 	}
 	/*问答列表*/
 	
