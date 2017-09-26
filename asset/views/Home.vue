@@ -38,19 +38,25 @@
 			</div>
 			<!--专业问答 和 成为专家-->
 			<div class="home-expert">
-				<p @tap.stop.prevent="toAsk()">
+			<div @tap.stop.prevent="toAsk()">
+				<p >
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-zhuanyewenda"></use>
 					</svg>
 					<span>专业问答</span>
-
+                     <b>分红</b>
 				</p>
-				<p @tap.stop.prevent="toApprove(is_expert)">
+				
+				</div>
+				<i></i>
+				<div @tap.stop.prevent="toApprove(is_expert)">
+				<p >
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-chengweizhuanjia"></use>
 					</svg>
 					<span>成为专家</span>
 				</p>
+				</div>
 			</div>
 
 			<!--
@@ -601,39 +607,98 @@
 	
 	.home-expert {
 		width: 100%;
-		height: 70px;
+		height: 44px;
 		margin-bottom: 3px;
-	}
-	
-	.home-expert p {
-		float: left;
-		width: 44.5%;
-		height: 50px;
 		background: #FFFFFF;
-		border-radius: 4px;
-		margin-top: 12.5px;
-		padding-top: 13px;
+		position: relative;
+	}
+	.home-expert i{
+	  display: block;
+	  float: left;
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  margin: auto;
+	   width: 1px;
+	   height: 20px;
+	   background: #DCDCDC;
+	}
+	.home-expert div {
+		width: 49%;
+		height: 44px;
+		line-height: 44px;
+		position: relative;
 	}
 	
-	.home-expert p:nth-of-type(1) {
-		margin-left: 4%;
+	.home-expert div:nth-of-type(1) {
+		float: left;
 	}
 	
-	.home-expert p:nth-of-type(2) {
-		margin-left: 3%;
+	.home-expert div:nth-of-type(2) {
+		float: right;
+	}
+	.home-expert div p{
+		/*width:65%;*/
+		height:25px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		line-height: 25px;
 	}
 	
-	.home-expert p svg {
+	.home-expert div p svg {
+		display: block;
+		float: left;
 		font-size: 25px;
-		margin-left: 38px;
 		margin-bottom: -4px;
 	}
 	
-	.home-expert p span {
-		font-size: 13px;
+	.home-expert div p span {
+		display: block;
+		float: left;
+		font-size: 14px;
 		color: #444444;
 		margin-left: 3px;
 	}
+	.home-expert div p b {
+		display: block;
+		float: left;
+		width:30px;
+		padding: 0 2px;
+		height: 18px;
+		background:#F8C732;
+		text-align: center;
+		font-size: 12px;
+		color: #FFFFFF;
+		line-height: 18px;
+		border-radius: 5px;
+		position:relative; 
+		z-index: 5;  
+		top:3.5px;
+		left: 5px;
+	}
+			
+	.home-expert div p b::after {
+		content: "";
+		display: block;
+		width: 0;
+		height: 0;
+		border: 6px solid transparent;
+		border-right: 6px solid #F8C732;
+		border-bottom: 6px solid #F8C732;
+		position: absolute;
+		transform: rotate(135deg);
+	    left:-1px;
+	    top: 0;
+	    bottom: 0;
+	    margin: auto;
+	    z-index: 1;
+	    }
 	/*一元特惠*/
 	
 	.freeAskWrapper {
@@ -873,12 +938,12 @@
 		margin-top: 2px;
 	}
 	/*活动*/
-	/*.activity{
+ .activity{
    	width:100%;
-   	height: 157px;
+   	/*height: 157px;*/
    	padding:11px 4%;
    	background: #ececee;
-   }*/
+   }
 	
 	.weeklyActivity {
 		width: 60%;
@@ -1199,28 +1264,28 @@
 	
 	@media screen and (min-width: 320px) {
 		.activity {
-			width: 100%;
 			height: 133px;
-			padding: 11px 4%;
-			background: #ececee;
+		}
+		.home-expert div p{
+		  width:74%;
 		}
 	}
 	
 	@media screen and (min-width: 375px) {
 		.activity {
-			width: 100%;
 			height: 157px;
-			padding: 11px 4%;
-			background: #ececee;
+		}
+		.home-expert div p{
+		  width:65%;
 		}
 	}
 	
 	@media screen and (min-width: 414px) {
 		.activity {
-			width: 100%;
 			height: 172px;
-			padding: 11px 4%;
-			background: #ececee;
+		}
+		.home-expert div p{
+		  width:60%;
 		}
 	}
 </style>
