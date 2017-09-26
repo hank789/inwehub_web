@@ -17,10 +17,11 @@
               :isFollow="true"
       ></Answer>
 
-      <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
-        <div class="mui-table-view-cell">
-          暂无回答
-        </div>
+      <div class="detail-answer-wait" v-show="ask.question.status!=6&&ask.question.status!=7">
+           <svg class="icon" aria-hidden="true">
+			  <use xlink:href="#icon-zanwushuju"></use>
+		  </svg>
+         <p>正在等待专家回答</p>
       </div>
 
       <Comment v-show="ask.question.status===6"
@@ -145,4 +146,25 @@
   .mui-content {
     background: #f3f4f6;
   }
+  .detail-answer-wait{
+  	width: 100%;	
+  	background:#FFFFFF;
+  	margin-bottom: 10px;
+  	text-align: center;
+  	padding: 20px 0;
+  }
+  .detail-answer-wait svg{	
+    font-size: 50px;
+      	
+  }
+
+  .detail-answer-wait  p{
+  	 width: 100%;
+  	 font-size: 12px;
+  	 color:#c8c8c8;
+  	 text-align: center;
+   
+     
+  }
+  
 </style>
