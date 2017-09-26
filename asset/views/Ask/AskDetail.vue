@@ -36,6 +36,9 @@
       <Timeline
         :timelines="timelines"
       ></Timeline>
+
+      <Discuss></Discuss>
+
     </div>
   </div>
 </template>
