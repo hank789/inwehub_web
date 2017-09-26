@@ -373,8 +373,8 @@ input[type='button'], input[type='submit'], input[type='reset'], button, .mui-bt
 }
 
 input[type='submit'], .mui-btn-primary, .mui-btn-blue{
-  border:1px solid #4990E2;
-  background-color: #4990E2;
+  border:1px solid #03aef9;
+  background-color: #03aef9;
 }
 
 .mui-btn-outlined {

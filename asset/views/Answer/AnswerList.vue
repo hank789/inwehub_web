@@ -192,7 +192,7 @@
       },
       getPrevList(){
 
-        postRequest(`answer/myList`, {}).then(response => {
+        postRequest(`answer/myList`, {type:1}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -209,7 +209,7 @@
       },
       getNextList() {
 
-        postRequest(`answer/myList`, {bottom_id: this.bottomId}).then(response => {
+        postRequest(`answer/myList`, {bottom_id: this.bottomId, type:1}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
