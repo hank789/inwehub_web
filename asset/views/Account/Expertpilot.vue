@@ -33,7 +33,7 @@
       <p>邮箱：hi@inwehub.com/微信：hiinwe</p>
     </div>
 
-    <div class="home-apply" @tap.stop.prevent=ApplicationJudge()>立刻申请</div>
+    <div class="home-apply" @tap.stop.prevent="ApplicationJudge()">立刻申请</div>
   </div>
 </template>
 
@@ -57,7 +57,7 @@
     methods: {
       //判断资料的完善程度；
       ApplicationJudge(){
-        if (userAbilityCheck.applyProfessor()) {
+        if (userAbilityCheck.applyProfessor(this)) {
            this.$router.replace('/expert/apply');
         }
       },
