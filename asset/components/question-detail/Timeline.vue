@@ -6,8 +6,16 @@
         <template v-for="(item, index) in timelines">
           <div class="nearsite-message">
             <div class="timage">
-              <span class="mui-icon myicon myicon-askDetailHeart" v-if="!index"></span>
-              <span class="mui-icon myicon myicon-askDetailJia" v-else></span>
+              <span   v-if="!index">
+              	<svg class="icon blue pos" aria-hidden="true">
+				  <use xlink:href="#icon-shoucanghover"></use>
+				</svg>
+              </span>
+              <span  v-else>
+              	<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-plus--"></use>
+				</svg>
+              </span>
             </div>
 
             <div class="desc" :class="timelines.length-1 != index?'descBefore':''">
@@ -82,13 +90,30 @@
   .nearsite-message .timage {
     float: left;
     margin-top: 21px;
-  }
-
-  .nearsite-message .timage img {
-    width: 30px;
-    height: 30px;
+    width: 23px;
+    height: 23px;
+    border: 1px solid #DCDCDC;
+    background: #FFFFFF;
     border-radius: 50%;
+    position: relative;
+    left: -1.2px;
   }
+.nearsite-message .timage svg{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 5px;
+	margin: auto;
+	font-size: 10px;
+}
+.blue{
+	color: #03aef9;
+}
+.nearsite-message .timage svg.pos{
+	right: 4px;
+	
+}
+ 
 
   .nearsite-message .desc {
     float: left;
