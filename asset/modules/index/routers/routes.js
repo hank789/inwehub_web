@@ -97,7 +97,7 @@ const routes = [{
 	},
 	{ //专业回答；
 		path: '/MajorList',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'home-EnrollmentStatus',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
@@ -109,7 +109,7 @@ const routes = [{
 	},
 	{ //热门问答详情列表页面；
 		path: '/home/MajorDetailList',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'home-EnrollmentStatus',
     meta: {
 			title: '问答社区',
 			wechatHideHeader: true
