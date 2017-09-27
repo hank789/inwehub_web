@@ -48,6 +48,14 @@
     </div>
 
 
+    <Share
+        :title="'test'"
+        :link="'test'"
+        :content="'test'"
+        :imageUrl="''"
+        :thumbUrl="''"
+    ></Share>
+
 
     <div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 
@@ -60,14 +68,11 @@
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
-  import UserInfo from '../../components/question-detail/UserInfo.vue';
   import Question from '../../components/question-detail/Question.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
-  import StarRating from '../../components/question-detail/StarRating.vue';
-  import Statistics from '../../components/question-detail/Statistics.vue';
-  import Timeline from '../../components/question-detail/Timeline.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';
+  import Share from '../../components/Share.vue';
 
   import userAbility from '../../utils/userAbility';
 
@@ -93,14 +98,11 @@
       });
     },
     components: {
-      UserInfo,
       Question,
       Discuss,
-      StarRating,
-      Statistics,
-      Timeline,
       Answer,
-      Comment
+      Comment,
+      Share
     },
     computed: {
       timelines() {
