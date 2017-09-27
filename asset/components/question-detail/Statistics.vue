@@ -19,13 +19,13 @@
       <span>{{ seeNum }}</span>
     </div>
 
-    <div class="item" :class="{'active':!isSupportedLocal}" @tap.stop.prevent="support()">
+    <div class="item active" @tap.stop.prevent="support()">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
       </div>
-      <span>{{ supportNumLocal }}</span>
+      <span>{{ supportNum }}</span>
     </div>
 
   </div>
@@ -38,8 +38,6 @@
   export default {
     data () {
       return {
-        supportNumLocal:0,
-        isSupportedLocal:true
       }
     },
     components: {},
@@ -65,24 +63,10 @@
         default: true
       }
     },
-    watch: {
-      supportNum:(newVal, oldVal) => {
-        this.supportNumLocal = newVal;
-      },
-      isSupported:(newVal, oldVal) => {
-        this.isSupportedLocal = newVal;
-      },
-    },
     created(){
-      this.isSupportedLocal = this.isSupported;
-      this.supportNumLocal = this.supportNum;
     },
     methods: {
       support(){
-
-        if (this.isSupportedLocal) {
-          return;
-        }
 
         var data = {
           id: this.answerId
@@ -96,8 +80,17 @@
             return;
           }
 
-          this.supportNumLocal++;
-          this.isSupportedLocal = !this.isSupportedLocal;
+          if (this.isSupported) {
+              this.$emit('supportNumDesc');
+              this.supportNumLocal--;
+          } else {
+              this.$emit('supportNumAdd');
+              this.supportNumLocal++;
+          }
+
+          this.$emit('setSupportStatus', response.data.data.type);
+
+          mui.toast(response.data.data.tip);
         });
       },
     },

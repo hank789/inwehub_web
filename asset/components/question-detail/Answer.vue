@@ -27,6 +27,9 @@
           :seeNum="answer.view_number"
           :supportNum="answer.support_number"
           :isSupported="answer.is_supported?true:false"
+          @supportNumDesc="supportNumDesc"
+          @supportNumAdd="supportNumAdd"
+          @setSupportStatus="setSupportStatus"
        ></Statistics>
     </div>
   </div>
@@ -79,6 +82,20 @@
     methods: {
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
+      },
+      supportNumAdd()
+      {
+          this.answer.support_number++;
+          console.olog(this.answer);
+      },
+      supportNumDesc()
+      {
+          this.answer.support_number--;
+          console.olog(this.answer);
+      },
+      setSupportStatus(type)
+      {
+        this.answer.is_supported = type === 'support'?1:0;
       }
     }
   };
