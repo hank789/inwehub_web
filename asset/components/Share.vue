@@ -129,7 +129,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .shareBtn{
-    position: absolute;
+    position: fixed;
     right:10px;
     top:10px;
     z-index:11;
