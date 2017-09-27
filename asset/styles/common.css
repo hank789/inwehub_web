@@ -39,6 +39,7 @@ p{
 
 body{
   color:#3f3f3f;
+  background-color: #fff;
 }
 
 a{
@@ -1181,3 +1182,8 @@ input.upload-file[type=file]{
 }
 /** 弹窗结束 **/
 
+
+.river{
+  height:10px;
+  background: #f3f4f6;
+}

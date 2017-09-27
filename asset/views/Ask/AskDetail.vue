@@ -39,7 +39,10 @@
         :timelines="timelines"
       ></Timeline>
 
-      <Discuss></Discuss>
+      <Discuss v-show="ask.question.status==6||ask.question.status==7"
+         :answerId="ask.answers[0] ? ask.answers[0].id:0"
+      >
+      </Discuss>
 
     </div>
   </div>
@@ -147,15 +150,15 @@
     background: #f3f4f6;
   }
   .detail-answer-wait{
-  	width: 100%;	
+  	width: 100%;
   	background:#FFFFFF;
   	margin-bottom: 10px;
   	text-align: center;
   	padding: 20px 0;
   }
-  .detail-answer-wait svg{	
+  .detail-answer-wait svg{
     font-size: 50px;
-      	
+
   }
 
   .detail-answer-wait  p{
@@ -163,8 +166,8 @@
   	 font-size: 12px;
   	 color:#c8c8c8;
   	 text-align: center;
-   
-     
+
+
   }
-  
+
 </style>
