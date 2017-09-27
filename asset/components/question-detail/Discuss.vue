@@ -121,7 +121,6 @@
       },
       prependItem(id, msg, created_at, username){
         var userInfo = getLocalUserInfo();
-        console.olog(userInfo);
 
         var item = {
           id,
@@ -235,9 +234,9 @@
 
   .message_title svg {
     float: right;
-    font-size: 17px;
+    font-size: 19px;
     color: #03aef9;
-    margin-top: 13.5px;
+    margin-top: 12px;
   }
 
   .message_detail {
