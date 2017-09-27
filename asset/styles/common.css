@@ -1187,3 +1187,9 @@ input.upload-file[type=file]{
   height:10px;
   background: #f3f4f6;
 }
+
+
+.mui-btn-grey{
+  background:#b4b4b6;
+  color:#fff;
+}

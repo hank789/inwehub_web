@@ -16,23 +16,18 @@
 
       <div class="mui-row buttons" v-show="answer.question.status===2">
         <div class="mui-col-sm-6 mui-col-xs-6">
-          <button type="button" class="mui-btn  mui-btn-block"
-                  @tap.stop.prevent="selectTime">
-            <svg class="mui-icon icon" aria-hidden="true">
-              <use xlink:href="#icon-check-square"></use>
-            </svg>
-            确认应答
-          </button>
-        </div>
-        <div class="mui-col-sm-6 mui-col-xs-6">
-          <button type="button" class="mui-btn  mui-btn-block"
+          <button type="button" class="mui-btn mui-btn-block mui-btn-grey"
                   @tap.stop.prevent="$router.pushPlus('/answerrefuse/' + answer.question.id)">
-            <svg class="mui-icon icon" aria-hidden="true">
-              <use xlink:href="#icon-times"></use>
-            </svg>
             拒绝应答
           </button>
         </div>
+        <div class="mui-col-sm-6 mui-col-xs-6">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                  @tap.stop.prevent="selectTime">
+            确认应答
+          </button>
+        </div>
+
       </div>
 
 
@@ -354,23 +349,17 @@
 
 
 <style scoped>
-
-  .buttons {
-    margin-left: -1px;
+  .mui-content{
+    background: #fff;
   }
 
-  .buttons button {
-    margin: -1px;
-    padding: 10px 0;
-    border-right: 0px;
-    border-radius: 0;
+  .buttons{
+    margin-top:5px;
+  }
+  .buttons .mui-col-sm-6{
+      padding:15px;
   }
 
-  .buttons button .mui-icon {
-    font-size: 24px;
-    vertical-align: bottom;
-    margin-right: 10px;
-  }
 
   .timeEnd {
     margin-top: 15px;
@@ -443,4 +432,6 @@
     display: inline-block;
     margin-left: 5px;
   }
+
+
 </style>

@@ -485,4 +485,10 @@
     line-height:20px;
     padding:0 9px;
   }
+
+  .mui-table-view-cell:after{
+    height:1px !important;
+    left:15px;
+    right:15px;
+  }
 </style>
