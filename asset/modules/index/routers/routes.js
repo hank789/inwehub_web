@@ -1241,26 +1241,6 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-  { // 问答社区
-    path: '/askCommunity/list',
-    meta: {
-      title: '问答社区',
-    },
-    component: require('../../../views/AskCommunity/List.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // 问答详情
-    path: '/askCommunity/detail',
-    meta: {
-      title: '问答详情',
-    },
-    component: require('../../../views/AskCommunity/Detail.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
 	{ // protocol/register
 		path: '/protocol/register',
     name: 'protocol-register',

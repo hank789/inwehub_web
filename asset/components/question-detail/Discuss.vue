@@ -12,7 +12,7 @@
       <div class="listWrapper">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="item in list">
+            <li v-for="(item, index) in list">
               <div class="message_t">
                 <p>
                   <img :src="item.user_avatar_url"/>
@@ -29,7 +29,7 @@
                 {{ item.content }}
 
               </div>
-              <i class="bot"></i>
+              <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
           </ul>
         </div>

@@ -28,9 +28,29 @@
         :answerId="ask.answers[0] ? ask.answers[0].id:0"
       ></Discuss>
 
+      <div class="help">
+         <div class="title">
+             什么是专业问题
+         </div>
+         <div class="body">
+           InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
+专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+         </div>
+      </div>
+
+      <div class="buttonWrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
+          我也要提问
+         </button>
+      </div>
+
     </div>
 
+
+
     <div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
+
+
 
   </div>
 </template>
@@ -47,6 +67,8 @@
   import Timeline from '../../components/question-detail/Timeline.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';
+
+  import userAbility from '../../utils/userAbility';
 
 
   const AskDetail = {
@@ -85,6 +107,12 @@
       }
     },
     methods: {
+      toSeeHelp(){
+        this.$router.pushPlus('/help/ask');
+      },
+      toAsk(){
+        userAbility.jumpToAddAsk();
+      },
       getDetail(){
 
         let id = parseInt(this.$route.params.id);
@@ -134,5 +162,34 @@
 
   .mui-content {
     background: #f3f4f6;
+  }
+
+  .help{
+    margin-top:10px;
+    font-size:14px;
+    background: #fff;
+  }
+  .help .title{
+    padding:15px 15px 10px;
+    color:#444;
+  }
+  .help .body{
+    padding:0 15px;
+    color:#808080;
+  }
+
+  .help .body a{
+    color:#03aef9;
+  }
+
+  .buttonWrapper{
+    padding-top: 33px;
+    background: #fff;
+  }
+
+  .buttonWrapper button{
+    border-radius:0;
+    margin-bottom:0;
+    padding:13px 0;
   }
 </style>
