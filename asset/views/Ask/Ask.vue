@@ -41,7 +41,7 @@
           <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
 
           <div class="button-wrapper">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="developing()">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/askCommunity/majors')">
               去问答社区看看
              </button>
           </div>

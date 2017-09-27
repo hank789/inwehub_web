@@ -36,7 +36,7 @@
                   <div class="person">
                     <div class="mui-media-body">
                       <div>
-                        <span class="label">{{ ask.status_description }}</span>
+                        <span :class="'label label_' + ask.status">{{ ask.status_description }}</span>
                         <span class="time">{{ ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
                       </div>
                     </div>
@@ -495,5 +495,9 @@
 
   .list-empty .menu{
     margin-bottom:10px;
+  }
+
+  .label.label_7{
+    background: #c8c8c8;
   }
 </style>

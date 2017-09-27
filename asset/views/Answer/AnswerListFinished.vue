@@ -57,7 +57,7 @@
             <div class="person">
               <div class="mui-media-body">
                 <div>
-                  <span class="label">{{ answer.status_description }}</span>
+                  <span :class="'label label_' + answer.status">{{ answer.status_description }}</span>
                   <span class="time">{{ answer.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
                 </div>
               </div>
@@ -411,4 +411,14 @@
     color:#fff;
     padding:0 9px;
   }
+
+  .label.label_7{
+      background: #c8c8c8;
+  }
+
+  .label.label_6{
+    background: #c8c8c8;
+  }
+
+
 </style>

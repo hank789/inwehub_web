@@ -68,7 +68,7 @@
                   <div class="person">
                     <div class="mui-media-body">
                       <div>
-                        <span class="label">{{ ask.status_description }}</span>
+                        <span :class="'label label_' + ask.status">{{ ask.status_description }}</span>
                         <span class="time">{{ ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
                       </div>
                     </div>
@@ -435,7 +435,7 @@
   }
 
   .list-empty .menu{
-    margin-bottom:10px;
+    margin-bottom:0;
   }
 
   .mui-segmented-control .mui-control-item {
@@ -474,9 +474,7 @@
   }
 
   .mui-table-view:after{
-    border:none;
-    left:18px;
-    right:18px;
+    display: none;
   }
 
   .label{
@@ -486,9 +484,5 @@
     color:#fff;
     line-height:20px;
     padding:0 9px;
-  }
-
-  .list-empty .menu{
-    margin-bottom:10px;
   }
 </style>
