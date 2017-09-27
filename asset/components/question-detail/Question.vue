@@ -9,6 +9,7 @@
       :isFollow="isFollow"
       :isFollowed="ask.is_followed?true:false"
       :isExpert="ask.is_expert?1:0"
+      @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
     <div class="content">
@@ -48,6 +49,9 @@
 
     },
     methods: {
+      setFollowStatus(status){
+        this.ask.is_followed=status;
+      },
       getHtml(id, options, callback) {
       }
     }

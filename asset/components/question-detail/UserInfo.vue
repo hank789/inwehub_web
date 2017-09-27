@@ -14,15 +14,17 @@
     <div class="mui-media-body">
       {{ realname }}
 
+
       <div class="detail">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
         <span class="company">{{ company }}</span>
       </div>
 
-       <div class="followWrapper" v-if="isFollow">
-           <span class="followButton" @tap.stop.prevent="collectProfessor()">{{ is_followed?'取消关注':'关注'}}</span>
-       </div>
+      <div class="followWrapper" v-if="isFollow">
+        <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
+        <span class="followButton" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
+      </div>
     </div>
 
   </div>
@@ -33,13 +35,11 @@
 
   export default {
     data () {
-      return {
-        is_followed:false
-      }
+      return {}
     },
     props: {
-      uuid:{
-        default:''
+      uuid: {
+        default: ''
       },
       avatar: {
         type: String,
@@ -66,20 +66,20 @@
         default: false
       },
       isExpert: {
-        type:Number,
+        type: Number,
         default: false
       }
     },
     created(){
-       this.is_followed = this.isFollowed;
+
     },
     methods: {
       toAnswerResume(){
         var uuid = this.ask.answers[0] ? this.ask.answers[0].uuid : 0;
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
       },
-      collectProfessor: function() {
-        if(!this.uuid) {
+      collectProfessor: function () {
+        if (!this.uuid) {
           return;
         }
 
@@ -87,12 +87,16 @@
           id: this.uuid
         }).then(response => {
           var code = response.data.code;
-          if(code !== 1000) {
+          if (code !== 1000) {
             mui.alert(response.data.message);
             return;
           }
-          this.is_followed = !this.is_followed;
+
+          var is_followed = response.data.data.type === 'follow' ? 1 : 0;
+
           mui.toast(response.data.data.tip);
+
+          this.$emit('setFollowStatus', is_followed);
         });
       },
     }
@@ -145,46 +149,52 @@
     display: none;
   }
 
-  .detail{
-    font-size:14px;
-    color:#808080;
+  .detail {
+    font-size: 14px;
+    color: #808080;
   }
-  .split{
+
+  .split {
     position: relative;
-    top:3px;
-    margin:0 4px;
+    top: 3px;
+    margin: 0 4px;
     display: inline-block;
-    width:1px;
-    height:13px;
+    width: 1px;
+    height: 13px;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
 
-  .followButton{
+  .followButton {
     display: inline-block;
-    border:1px solid #03aef9;
+    border: 1px solid #03aef9;
     line-height: 17px;
     border-radius: 50px;
-    font-size:13px;
-    color:#03aef9;
-    padding:0 15px;
+    font-size: 13px;
+    color: #03aef9;
+    padding: 0 15px;
   }
 
-  .mui-media-body{
+  .followButton.active{
+    background-color: #03aef9;
+    color:#fff;
+  }
+
+  .mui-media-body {
     position: relative;
   }
 
-  .mui-media-body .followWrapper{
+  .mui-media-body .followWrapper {
     position: absolute;
-    top:5px;
-    right:0;
+    top: 5px;
+    right: 0;
   }
 
-  .avatarInner{
+  .avatarInner {
     position: relative;
   }
 
-  .avatarInner .icon{
+  .avatarInner .icon {
     position: absolute;
     right: -6px;
     bottom: -1px;

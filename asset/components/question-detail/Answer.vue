@@ -10,6 +10,7 @@
       :isFollow="isFollow"
       :isFollowed="answer.is_followed?true:false"
       :isExpert="answer.is_expert ? answer.is_expert : 0"
+      @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
 
@@ -103,6 +104,9 @@
       },
     },
     methods: {
+      setFollowStatus(status){
+        this.answer.is_followed=status;
+      },
       paySuccess(orderId){
         postRequest(`answer/payforview`, {
           order_id: orderId,
