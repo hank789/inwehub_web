@@ -9,7 +9,14 @@
         <i class="bot"></i>
       </div>
 
-      <div class="listWrapper">
+      <div class="listWrapper empty" v-show="list.length === 0">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zanwushuju"></use>
+        </svg>
+        <p>暂无留言</p>
+      </div>
+
+      <div class="listWrapper" v-show="list.length !== 0">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
             <li v-for="(item, index) in list">
@@ -335,5 +342,28 @@
     color: #03aef9;
     font-size: 26px;
     top: 5px;
+  }
+
+  .empty{
+
+  }
+
+  .empty{
+    width: 100%;
+    background:#FFFFFF;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .empty .icon{
+    font-size: 50px;
+  }
+
+  .empty  p{
+    width: 100%;
+    font-size: 12px;
+    color:#c8c8c8;
+    text-align: center;
   }
 </style>
