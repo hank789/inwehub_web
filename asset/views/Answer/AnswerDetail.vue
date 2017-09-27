@@ -33,6 +33,13 @@
 
       <div class="form form-realAnswer" v-show="answer.question.status===4">
 
+        <div class="button-wrapper">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                  @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容
+
+          </button>
+        </div>
+
         <span class="time" v-if="startCountdown(answer.question)">倒计时<count-down :start-time="currentTime"
                                                                                  :end-time="getEndTime(answer.question)"
                                                                                  :dayTxt="':'" :hourTxt="':'"
@@ -44,13 +51,6 @@
 
         <span class="time" v-else><b v-show="isTimeout(answer.question)">已超时</b><timeago
           :since="timeago(answer.question.created_at)" :auto-update="60" locale="zh-Diff"></timeago></span>
-
-        <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容
-
-          </button>
-        </div>
       </div>
 
 
@@ -379,6 +379,7 @@
   }
 
   .form-realAnswer:after {
+    display: none;
     position: absolute;
     content: '';
     right: 0;
@@ -403,16 +404,13 @@
   }
 
   .form-realAnswer .button-wrapper {
-    margin-top: 30px;
-    padding: 0 50px 15px;
+    padding: 0 15px 0;
   }
 
   .form-realAnswer .time {
-    font-size: 14px;
-    color: #ff9800;
-    position: absolute;
-    top: 15px;
-    right: 16px;
+    font-size: 12px;
+    color: #fa4975;
+    padding-left:15px;
   }
 
   .form-realAnswer .time b {

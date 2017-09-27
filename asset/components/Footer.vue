@@ -125,7 +125,6 @@
           // 监听通知事件
           Echo.channel('notification.user.' + currentUser.user_id)
             .notification((notification) => {
-              console.log(notification);
               switch (notification.type) {
                 case 'App\\Notifications\\AuthenticationUpdated':
                     // 专家认证有新的通知

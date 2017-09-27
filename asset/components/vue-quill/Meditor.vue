@@ -28,7 +28,7 @@
   import {ImageImport} from '../../js/modules/ImageImport.js';
   import Sortable from "sortablejs/Sortable";
 
-  //Quill.register('modules/imageImport', ImageImport);
+  Quill.register('modules/imageImport', ImageImport);
 
   import {quillEditor} from '../../components/vue-quill';
 
@@ -50,7 +50,7 @@
             maxStack: 1,
             userOnly: true
           },
-          imageImport: true
+          imageImport: false
         }
       },
       timeInterVal:false,
