@@ -20,6 +20,9 @@ import App from './App';
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
+var infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll);
+
 
 if (typeof(isLocalEnv) === "undefined") {
     window.isLocalEnv = false;

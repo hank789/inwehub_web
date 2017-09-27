@@ -150,7 +150,7 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-					console.log(response.data.data)
+
 					//请求成功的操作
 					if(response.data.data) {
 						this.majorlist = response.data.data;
