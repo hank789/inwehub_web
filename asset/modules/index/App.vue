@@ -260,6 +260,10 @@
                     // 活动报名事件
                   router.pushPlus("/EnrollmentStatus/"+payload.object_id);
                   break;
+                case 'answer_new_comment':
+                  //专业回答新的回复
+                  router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
+                  break;
               }
             };
 
