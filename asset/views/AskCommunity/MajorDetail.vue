@@ -14,6 +14,7 @@
 
       <Answer v-show="ask.question.status==6||ask.question.status==7"
               :answer="ask.answers[0] ? ask.answers[0]:{}"
+              :needMoney="true"
               :isFollow="true"
       ></Answer>
 

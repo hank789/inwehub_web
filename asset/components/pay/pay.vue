@@ -1,6 +1,6 @@
 <template>
   <div id="pay_content">
-    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="pay()">确认支付</div>
+    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="pay()">{{ btnText ?btnText:'确认支付'}}</div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@
         iapPay: false
       }
     },
-    props: ['pay_object_type', 'pay_money'],
+    props: ['pay_object_type', 'pay_money', 'btnText'],
     components: {},
     created () {
       apiRequest(`pay/config`,{}).then(response_data => {
