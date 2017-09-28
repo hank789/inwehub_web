@@ -179,8 +179,8 @@
           this.loading = 0;
 
           successCallback();
-          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
           mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
+          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
         });
       }
     },
