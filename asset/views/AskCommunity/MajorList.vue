@@ -102,7 +102,13 @@
     }),
     computed: {
       type() {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
+        var selectType =  this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
+
+        if (selectType === '全部-全部:0') {
+          selectType = '全部:0';
+        }
+
+        return selectType;
       },
       bottomId() {
         var length = this.recommendList.length;
