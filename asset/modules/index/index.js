@@ -23,9 +23,7 @@ import RavenVue from 'raven-js/plugins/vue';
 var infiniteScroll =  require('vue-infinite-scroll');
 Vue.use(infiniteScroll);
 
-import MeScroll from 'mescroll.js';
-import 'mescroll.js/mescroll.css';
-window.MeScroll = MeScroll;
+
 
 if (typeof(isLocalEnv) === "undefined") {
     window.isLocalEnv = false;

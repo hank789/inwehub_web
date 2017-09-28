@@ -5,65 +5,64 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading" id="mescroll">
+    <div class="mui-content" v-show="!loading">
+      <PageDown :downCallback="downRefresh">
+        <Question
+          :ask="ask.question"
+          :isFollow="true"
+        ></Question>
 
-      <Question
-        :ask="ask.question"
-        :isFollow="true"
-      ></Question>
-
-      <Answer v-show="ask.question.status==6||ask.question.status==7"
-              :answer="ask.answers[0] ? ask.answers[0]:{}"
-              :needMoney="true"
-              :isFollow="true"
-      ></Answer>
+        <Answer v-show="ask.question.status==6||ask.question.status==7"
+                :answer="ask.answers[0] ? ask.answers[0]:{}"
+                :needMoney="true"
+                :isFollow="true"
+        ></Answer>
 
 
-      <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
-        <div class="mui-table-view-cell">
-          暂无回答
+        <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
+          <div class="mui-table-view-cell">
+            暂无回答
+          </div>
         </div>
-      </div>
 
 
+        <Discuss
+          :answerId="ask.answers[0] ? ask.answers[0].id:0"
+          ref="discuss"
+        ></Discuss>
 
-      <Discuss
-        :answerId="ask.answers[0] ? ask.answers[0].id:0"
-        ref="discuss"
-      ></Discuss>
+        <div class="help">
+          <div class="title">
+            什么是专业问题
+          </div>
+          <div class="body">
+            InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
+ 专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
-      <div class="help">
-         <div class="title">
-             什么是专业问题
-         </div>
-         <div class="body">
-           InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
-专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
-         </div>
-      </div>
+          </div>
+        </div>
 
-      <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
-          我也要提问
-         </button>
-      </div>
+        <div class="buttonWrapper">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
+            我也要提问
 
+          </button>
+        </div>
 
+      </PageDown>
     </div>
 
 
     <Share
-        :title="'test'"
-        :link="'test'"
-        :content="'test'"
-        :imageUrl="''"
-        :thumbUrl="''"
+      :title="'test'"
+      :link="'test'"
+      :content="'test'"
+      :imageUrl="''"
+      :thumbUrl="''"
     ></Share>
 
 
     <div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
-
-
 
   </div>
 </template>
@@ -79,6 +78,7 @@
   import Share from '../../components/Share.vue';
 
   import userAbility from '../../utils/userAbility';
+  import PageDown from '../../components/refresh/PageDown.vue';
 
 
   const AskDetail = {
@@ -92,7 +92,6 @@
         timeline: []
       },
       id: 0,
-      mescroll:null,
       loading: true
     }),
     mounted(){
@@ -101,35 +100,21 @@
         console.log('refresh-answerDetail');
         this.getDetail();
       });
-
-       this.mescroll = new MeScroll("mescroll", {
-         down:{
-           auto:false,//是否在初始化完毕之后自动执行下拉回调callback; 默认true
-           callback: () => {
-               this.getDetail(() => {
-                 this.mescroll.endSuccess();
-                 this.$refs.discuss.resetList();
-               });
-
-           }, //下拉刷新的回调
-         },
-      });
     },
     components: {
       Question,
       Discuss,
       Answer,
       Comment,
-      Share
-    },
-    computed: {
-      timelines() {
-        return this.ask.timeline.reverse();
-      }
+      Share,
+      PageDown
     },
     methods: {
-      refresh(){
-
+      downRefresh(callback){
+        this.getDetail(() => {
+          callback();
+          this.$refs.discuss.resetList();
+        });
       },
       toSeeHelp(){
         this.$router.pushPlus('/help/ask');
@@ -137,7 +122,8 @@
       toAsk(){
         userAbility.jumpToAddAsk();
       },
-      getDetail(successCallback = () => {}){
+      getDetail(successCallback = () => {
+                }){
 
         let id = parseInt(this.$route.params.id);
 
@@ -190,37 +176,34 @@
     background: #f3f4f6;
   }
 
-  .help{
-    margin-top:10px;
-    font-size:14px;
+  .help {
+    margin-top: 10px;
+    font-size: 14px;
     background: #fff;
   }
-  .help .title{
-    padding:15px 15px 10px;
-    color:#444;
-  }
-  .help .body{
-    padding:0 15px;
-    color:#808080;
+
+  .help .title {
+    padding: 15px 15px 10px;
+    color: #444;
   }
 
-  .help .body a{
-    color:#03aef9;
+  .help .body {
+    padding: 0 15px;
+    color: #808080;
   }
 
-  .buttonWrapper{
+  .help .body a {
+    color: #03aef9;
+  }
+
+  .buttonWrapper {
     padding-top: 33px;
     background: #fff;
   }
 
-  .buttonWrapper button{
-    border-radius:0;
-    margin-bottom:0;
-    padding:13px 0;
-  }
-
-  .scrollerWrapper{
-    width:100%;
-    height:100px;
+  .buttonWrapper button {
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 13px 0;
   }
 </style>
