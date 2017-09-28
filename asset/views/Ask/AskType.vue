@@ -19,6 +19,7 @@
           <div :id="index" class="mui-control-content mui-active" v-for="(item, index) in types">
             <div class="emptyChildren mui-table-view" v-if="!item.children.length"><div class="mui-table-view-cell">小哈。。。敬请期待！</div> </div>
             <ul class="mui-table-view" v-else>
+              <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(item.text, '全部', item.value, item.value)" v-if="isAddAll && item.value !==0">全部</li>
               <li class="mui-table-view-cell" @tap.stop.prevent="selectTypeItem(item.text, itemSub.text, item.value, itemSub.value)" v-for="(itemSub, subIndex) in item.children">{{ itemSub.text }}</li>
             </ul>
           </div>
@@ -37,15 +38,32 @@
 
   const Ask = {
     data: () => ({
-      loading:true
+      loading:true,
+      isAddAll:false
     }),
     computed: {
-      types () {	 
-      	  return this.$store.getters[ASK_TYPES]
-//    	  unshift({value:0, text: "全部"})   
+      types () {
+          var list = this.$store.getters[ASK_TYPES];
+
+          if (this.isAddAll && list.length > 0) {
+
+              var all = {
+                  text:'全部',
+                  value:0,
+                  children:[
+                    {
+                        text:'全部',
+                        value:0
+                    }
+                  ]
+              };
+              list.unshift(all);
+          }
+
+          return list;
       },
       subTypes(){
-        return this.$store.getters[ASK_SUB_TYPES];
+        var list = this.$store.getters[ASK_SUB_TYPES];
       }
     },
     methods: {
@@ -57,9 +75,10 @@
     },
     created () {
 
-      //var askTypes = localEvent.getLocalItem('ask_types2');
+      if (this.$route.query.type && this.$route.query.type === 'majorlist' ) {
+          this.isAddAll = true;
+      }
 
-      //if (askTypes.length == 0 && askTypes != 'undefined') {
       postRequest(`question/request`, {}).then(response => {
 
         var code = response.data.code;
@@ -71,16 +90,6 @@
         this.$store.dispatch(ASK_TYPES_SET, response.data.data.tags);
         this.loading=0;
       });
-      /*
-      } else {
-          this.$store.dispatch(ASK_TYPES_SET, askTypes);
-          this.loading=0;
-      }
-      */
-    },
-   mounted() {
-//  	let id = parseInt();
-    	console.log(this.$route.query.type);
 
     }
   }

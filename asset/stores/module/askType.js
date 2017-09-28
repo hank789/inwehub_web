@@ -4,7 +4,7 @@
 import { ASK_TYPES_SET, ASK_TYPES, ASK_SUB_TYPES, ASK_TYPE_SELECT,ASK_INFO } from '../types';
 
 const state = {
-  types: {},
+  types: [],
   selected: '',
   info:{}
 };
