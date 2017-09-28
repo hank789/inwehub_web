@@ -143,6 +143,15 @@
       </div>
     </div>
 
+    <!--提问页内的弹窗-->
+    <div id="helpWrapper">
+      <div class="helpWrapper">
+        <div class="title">什么是专业问答？</div>
+        <div class="desc">InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。</div>
+        <div class="desc desc-1">专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。</div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -490,4 +499,24 @@
     top: 16px;
   }
 
+
+  .helpWrapper {
+    background: #fff;
+    position: relative;
+  }
+
+  .helpWrapper .title {
+    font-size: 16px;
+    text-align: center;
+    color: #444;
+    margin-bottom:15px;
+  }
+
+  .helpWrapper .desc {
+    font-size: 14px;
+    color: #444;
+  }
+  .helpWrapper .desc-1{
+    margin-top:20px;
+  }
 </style>

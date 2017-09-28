@@ -7,16 +7,6 @@
 
     <div class="mui-content absolute askWrapper">
 
-      <div class="helpWrapper" v-show="showHelpWrapper">
-        <div class="title">什么是专业问答？</div>
-        <div class="desc">InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问，我们会根据您的提问自动匹配回答专家。</div>
-        <div class="closeWrapper" @tap.stop.prevent="closeHelpWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-guanbi"></use>
-          </svg>
-        </div>
-      </div>
-
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
           {{ type ? type.split(':')[0] : '选择'
@@ -24,14 +14,13 @@
         </button>
       </div>
 
-      <div class="form form-ask" :class="{helpShow:showHelpWrapper}">
+      <div class="form form-ask">
         <div class="textarea-wrapper">
         <textarea v-model.trim="description" @keydown.stop="enterWords"
-                  placeholder="1.请输入问题详情
+                  placeholder="1.请精确描述输入问题详情，并等待平台专家回答
 2.答案每被查看一次，你和回答者可从中获取分成
-3.分成比例与提问金额有关"></textarea>
+3.请根据问题难易程度等合理选择支付金额"></textarea>
         </div>
-        <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
       </div>
     </div>
 
@@ -125,6 +114,7 @@
   import {setStatusBarBackgroundAndStyle} from '../../utils/statusBar';
   import {alertFenhongxize} from '../../utils/dialogList';
   import localEvent from '../../stores/sessionStorage';
+  import {alertSimple, getDialogObj} from '../../utils/dialog';
 
   const Ask = {
     data: () => ({
@@ -137,8 +127,7 @@
       descMaxLength: 1000,
       isShowMoneyDev: false,
       test: 0,
-      pay_object_type: 'ask',
-      showHelpWrapper:false
+      pay_object_type: 'ask'
     }),
     components: {
       pay
@@ -151,6 +140,8 @@
         console.log('refresh-ask');
       });
       mui.init();
+
+      this.helpWrapper();
     },
     computed: {
       type () {
@@ -185,20 +176,22 @@
         this.selectOther = info.selectOther;
       }
       this.check();
-
-      this.helpWrapper();
     },
     methods: {
-      closeHelpWrapper(){
-          this.showHelpWrapper = false;
-          localEvent.setLocalItem('showHelpWrapper', {closed:true});
-      },
       helpWrapper(){
+
         var showHelpWrapper = localEvent.getLocalItem('showHelpWrapper');
-        if (showHelpWrapper.closed && showHelpWrapper.closed === true) {
-          this.showHelpWrapper = false;
-        } else {
-          this.showHelpWrapper = true;
+        if (typeof showHelpWrapper.closed === 'undefined') {
+          var dialogObj = getDialogObj(this);
+          if (dialogObj) {
+            dialogObj.getHtml('helpWrapper', {}, (html) => {
+              alertSimple(html, '确定', (num) => {
+                if (num.index <= 0) {
+                  localEvent.setLocalItem('showHelpWrapper', {closed:true});
+                }
+              }, true);
+            });
+          }
         }
       },
       fenhongxize(){
@@ -476,7 +469,7 @@
     background: #fff;
     position: absolute;
     top: 51px;
-    bottom: 148px;
+    bottom: 259px;
     width: 100%;
     z-index: 0;
   }
@@ -757,46 +750,5 @@
     background: #fff;
     color: #444;
     padding: 5px 0;
-  }
-
-  .helpWrapper {
-    background: #fff;
-    padding: 15px;
-    position: relative;
-  }
-
-  .helpWrapper::after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #dcdcdc;
-  }
-
-  .helpWrapper .title {
-    font-size: 14px;
-    color: #444;
-  }
-
-  .helpWrapper .desc {
-    font-size: 14px;
-    color: #808080;
-  }
-
-  .helpWrapper .closeWrapper{
-    position: absolute;
-    right:0;
-    top:0;
-    padding:10px;
-    font-size:18px;
-    color:#808080;
-  }
-
-  .helpShow {
-    top: 165px;
   }
 </style>
