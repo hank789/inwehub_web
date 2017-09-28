@@ -5,13 +5,12 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
-      <PageDown :downCallback="downRefresh">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+      <div class="mui-scroll">
         <Question
           :ask="ask.question"
           :isFollow="true"
         ></Question>
-      </PageDown>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
                 :answer="answer"
@@ -40,7 +39,7 @@
           </div>
           <div class="body">
             InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
- 专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+            专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
           </div>
         </div>
@@ -52,6 +51,7 @@
           </button>
         </div>
 
+      </div>
 
     </div>
 
@@ -95,6 +95,18 @@
       loading: true
     }),
     mounted(){
+      mui.init({
+        pullRefresh : {
+          container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+          down : {
+            auto: false,//可选,默认false.首次加载自动下拉刷新一次
+            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+            callback :this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+          }
+        }
+      });
       window.addEventListener('refreshData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
@@ -115,13 +127,13 @@
       }
     },
     methods: {
+
       paySuccess(content)
       {
           this.ask.answers[0].content = content;
       },
       downRefresh(callback){
         this.getDetail(() => {
-          callback();
           this.$refs.discuss.resetList();
         });
       },
@@ -162,6 +174,7 @@
           this.loading = 0;
 
           successCallback();
+          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       }
     },
