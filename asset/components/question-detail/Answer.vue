@@ -17,14 +17,14 @@
     <div class="mui-table-view-cell">
 
 
-      <div class="richText" v-if="answer.content != ''">
+      <div class="richText" v-show="answer.content != ''">
         <quill-editor ref="myTextEditorRead"
                       :options="editorOptionRead" @ready="onEditorReadyRead($event)">
         </quill-editor>
         <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
       </div>
 
-      <div class="needMoneyWrapper" v-else>
+      <div class="needMoneyWrapper" v-show="answer.content == ''">
         <div class="buttonWrapper">
 
           <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_object_id="answer.id" :pay_money="money"
@@ -103,11 +103,17 @@
         }
       },
     },
+    mounted(){
+    },
     methods: {
       setFollowStatus(status){
         this.answer.is_followed=status;
       },
       paySuccess(orderId){
+        var self = this;
+
+
+
         postRequest(`answer/payforview`, {
           order_id: orderId,
           answer_id: this.answer.id,
@@ -119,9 +125,11 @@
           }
 
           var content = response.data.data.content;
+
           if (content) {
+            self.answer.content = content;
             var objs = JSON.parse(content);
-            this.editorReadObj.setContents(objs);
+            self.editorReadObj.setContents(objs);
           }
         });
       },
@@ -131,12 +139,10 @@
       supportNumAdd()
       {
         this.answer.support_number++;
-        console.olog(this.answer);
       },
       supportNumDesc()
       {
         this.answer.support_number--;
-        console.olog(this.answer);
       },
       setSupportStatus(type)
       {
