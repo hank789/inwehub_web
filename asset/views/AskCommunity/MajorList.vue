@@ -6,7 +6,7 @@
       <h1 class="mui-title">问答社区</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <PageDown :downCallback="downRefresh">
         <div class="hotquiz">
           <div class="quiz">
