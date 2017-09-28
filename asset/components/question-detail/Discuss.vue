@@ -35,6 +35,7 @@
               <div class="message_b">
                 {{ item.content }}
 
+
               </div>
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
@@ -81,6 +82,12 @@
     components: {},
     computed: {},
     methods: {
+      resetList()
+      {
+          this.page = 1;
+          this.list = [];
+          this.getList();
+      },
       comment(){
         this.showTextarea = !this.showTextarea;
 
@@ -110,10 +117,10 @@
           mui.toast(data.tips);
 
           this.prependItem(
-              data.comment_id,
-              this.textarea,
-              data.created_at,
-              data.user_name
+            data.comment_id,
+            this.textarea,
+            data.created_at,
+            data.user_name
           );
           this.textarea = '';
           this.showTextarea = false;
@@ -144,10 +151,6 @@
           console.log('answerId:' + this.answerId);
           return;
         }
-
-        console.log('getList');
-
-
         postRequest(`answer/commentList`, {'answer_id': this.answerId, page: this.page}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
@@ -343,26 +346,26 @@
     top: 5px;
   }
 
-  .empty{
+  .empty {
 
   }
 
-  .empty{
+  .empty {
     width: 100%;
-    background:#FFFFFF;
+    background: #FFFFFF;
     margin-bottom: 10px;
     text-align: center;
     padding: 20px 0;
   }
 
-  .empty .icon{
+  .empty .icon {
     font-size: 50px;
   }
 
-  .empty  p{
+  .empty p {
     width: 100%;
     font-size: 12px;
-    color:#c8c8c8;
+    color: #c8c8c8;
     text-align: center;
   }
 </style>

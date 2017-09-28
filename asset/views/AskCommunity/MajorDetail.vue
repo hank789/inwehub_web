@@ -5,7 +5,7 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content" v-show="!loading" id="mescroll">
 
       <Question
         :ask="ask.question"
@@ -18,6 +18,7 @@
               :isFollow="true"
       ></Answer>
 
+
       <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
         <div class="mui-table-view-cell">
           暂无回答
@@ -25,8 +26,10 @@
       </div>
 
 
+
       <Discuss
         :answerId="ask.answers[0] ? ask.answers[0].id:0"
+        ref="discuss"
       ></Discuss>
 
       <div class="help">
@@ -44,6 +47,7 @@
           我也要提问
          </button>
       </div>
+
 
     </div>
 
@@ -88,6 +92,7 @@
         timeline: []
       },
       id: 0,
+      mescroll:null,
       loading: true
     }),
     mounted(){
@@ -95,6 +100,19 @@
         //执行刷新
         console.log('refresh-answerDetail');
         this.getDetail();
+      });
+
+       this.mescroll = new MeScroll("mescroll", {
+         down:{
+           auto:false,//是否在初始化完毕之后自动执行下拉回调callback; 默认true
+           callback: () => {
+               this.getDetail(() => {
+                 this.mescroll.endSuccess();
+                 this.$refs.discuss.resetList();
+               });
+
+           }, //下拉刷新的回调
+         },
       });
     },
     components: {
@@ -110,13 +128,16 @@
       }
     },
     methods: {
+      refresh(){
+
+      },
       toSeeHelp(){
         this.$router.pushPlus('/help/ask');
       },
       toAsk(){
         userAbility.jumpToAddAsk();
       },
-      getDetail(){
+      getDetail(successCallback = () => {}){
 
         let id = parseInt(this.$route.params.id);
 
@@ -144,6 +165,8 @@
           this.ask = response.data.data;
 
           this.loading = 0;
+
+          successCallback();
         });
       }
     },
@@ -194,5 +217,10 @@
     border-radius:0;
     margin-bottom:0;
     padding:13px 0;
+  }
+
+  .scrollerWrapper{
+    width:100%;
+    height:100px;
   }
 </style>
