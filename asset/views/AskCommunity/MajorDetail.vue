@@ -11,6 +11,7 @@
           :ask="ask.question"
           :isFollow="true"
         ></Question>
+      </PageDown>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
                 :answer="ask.answers[0] ? ask.answers[0]:{}"
@@ -49,7 +50,7 @@
           </button>
         </div>
 
-      </PageDown>
+
     </div>
 
 
