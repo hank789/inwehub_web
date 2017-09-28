@@ -111,7 +111,6 @@
     beforeRouteEnter (to, from, next) {
 
       if (mui.os.wechat) {
-          console.oldLog();
           var hash = null;
           if (to.query.redirect) {
             hash = to.query.redirect;
