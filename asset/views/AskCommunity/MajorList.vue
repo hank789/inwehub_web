@@ -38,7 +38,7 @@
           </ul>
         </div>
         <!--推荐问答-->
-        <div class="recommendlist" v-if="!this.loading">
+        <div class="recommendlist" v-show="!this.loading">
           <div class="recommend">
             <p>
               <span>推荐问答</span>
