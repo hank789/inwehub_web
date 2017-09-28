@@ -131,6 +131,16 @@
 					</svg>
 					<i class="bot"></i>
 				</li>
+        <li @tap.stop.prevent="$router.pushPlus('/my/onlookers')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodeshoucang"></use>
+          </svg>
+          <span>我的收藏</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
 				<li @tap.stop.prevent="$router.pushPlus('/feedback')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-wodefankuijianyi"></use>

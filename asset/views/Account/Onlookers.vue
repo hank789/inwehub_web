@@ -31,8 +31,8 @@
                   </svg>
                 </p>
                 <p class="mui-ellipsis">回答者：{{ item.answer_username}}</p>
-                <p class="mui-ellipsis">计算机科学与技术</p>
-                <p class="mui-ellipsis">上海科技有限公司</p>
+                <p class="mui-ellipsis">{{ item.answer_user_title }}</p>
+                <p class="mui-ellipsis">{{ item.answer_user_company }}</p>
               </div>
               <i class="bot"></i>
             </li>
