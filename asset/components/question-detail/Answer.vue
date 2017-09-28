@@ -27,7 +27,7 @@
       <div class="needMoneyWrapper" v-else>
         <div class="buttonWrapper">
 
-          <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_money="money"
+          <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_object_id="answer.id" :pay_money="money"
                v-on:pay_success="paySuccess">
 
           </pay>
@@ -110,7 +110,7 @@
       paySuccess(orderId){
         postRequest(`answer/payforview`, {
           order_id: orderId,
-          answer_id: answer.id,
+          answer_id: this.answer.id,
           device: 1
         }).then(response => {
           var code = response.data.code;
