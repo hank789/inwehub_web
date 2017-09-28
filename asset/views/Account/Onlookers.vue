@@ -21,7 +21,7 @@
 
         <div class="mui-scroll">
           <ul class="hotAnswer_b">
-            <li v-for="(item, index) in list">
+            <li v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.question_id)">
               <p class="mui-ellipsis-2">{{ item.description }}</p>
               <div class="hotAnswer_d">
                 <p>
@@ -54,6 +54,9 @@
       loading: true
     }),
     methods: {
+      toDetail(id) {
+        this.$router.push('/askCommunity/major/' + id);
+      },
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();
