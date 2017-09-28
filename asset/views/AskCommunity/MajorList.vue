@@ -6,8 +6,8 @@
       <h1 class="mui-title">问答社区</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
-      <PageDown :downCallback="downRefresh">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+      <div class="mui-scroll">
         <div class="hotquiz">
           <div class="quiz">
             <p>
@@ -37,9 +37,8 @@
 
           </ul>
         </div>
-      </PageDown>
         <!--推荐问答-->
-        <div class="recommendlist">
+        <div class="recommendlist" v-show="!this.loading">
           <div class="recommend">
             <p>
               <span>推荐问答</span>
@@ -62,7 +61,7 @@
             <p>暂时还没有数据呀～</p>
           </div>
 
-          <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10" v-show="recommendList.length">
+          <div>
             <ul class="recommend_b">
               <li v-for="(list, index) in recommendList" @tap.stop.prevent="toDetail(list.id)">
                 <p class="mui-ellipsis-2">{{list.description}}</p>
@@ -83,10 +82,8 @@
             </ul>
           </div>
         </div>
+      </div>
     </div>
-
-
-
   </div>
 </template>
 
@@ -104,13 +101,7 @@
     }),
     computed: {
       type() {
-        var selectType =  this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
-
-        if (selectType === '全部-全部:0') {
-          selectType = '全部:0';
-        }
-
-        return selectType;
+        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
       },
       bottomId() {
         var length = this.recommendList.length;
@@ -124,9 +115,8 @@
       PageDown
     },
     methods: {
-      downRefresh(callback){
+      downRefresh(){
         this.getHotList(() => {
-          callback();
           this.getRecommendList();
         });
       },
@@ -136,7 +126,7 @@
         this.getNextList();
       },
       toDetail(id) {
-        this.$router.pushPlus('/askCommunity/major/' + id);
+        this.$router.push('/askCommunity/major/' + id);
       },
       selectType(type_text) {
         this.$router.push('/ask/type?type=majorlist')
@@ -154,8 +144,6 @@
           if (response.data.data) {
             this.hotList = response.data.data;
           }
-          //没有数据的显示框不显示；
-          this.loading = 0;
           callback();
         });
       },
@@ -174,7 +162,8 @@
             this.recommendList = response.data.data;
           }
           //没有数据的显示框不显示；
-          this.loading = 0;
+          this.loading = false;
+          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       },
       getNextList() {
@@ -198,15 +187,31 @@
           } else {
             this.busy = false;
           }
+          this.loading = false;
+          mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy);
 
-          this.loading = 0;
         });
       }
 
     },
     mounted() {
-      this.getHotList();
-      this.getRecommendList();
+      mui.init({
+        pullRefresh : {
+          container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+          down : {
+            auto: true,//可选,默认false.首次加载自动下拉刷新一次
+            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+            callback :this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+          },
+          up: {
+            contentrefresh: '正在加载...',
+            contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            callback: this.getNextList
+          }
+        }
+      });
     },
   }
   export default MajorList;
