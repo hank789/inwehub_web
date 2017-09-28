@@ -539,6 +539,9 @@
 						t.showFreeAskGet();
 					}
 
+					//新手任务
+          userAbility.newbieTask(this);
+
 					if(t.notices.length) {
 						setTimeout(function() {
 							var slider = mui("#slider");
