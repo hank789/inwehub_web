@@ -172,7 +172,7 @@
     border-radius: 50px;
     font-size: 13px;
     color: #03aef9;
-    padding: 0 15px;
+    padding: 2px 15px;
   }
 
   .followButton.active{

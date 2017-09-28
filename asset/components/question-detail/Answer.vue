@@ -118,7 +118,11 @@
             mui.alert(response.data.message);
           }
 
-          this.answer.content = response.data.data.content;
+          var content = response.data.data.content;
+          if (content) {
+            var objs = JSON.parse(content);
+            this.editorReadObj.setContents(objs);
+          }
         });
       },
       onEditorReadyRead(editor) {
