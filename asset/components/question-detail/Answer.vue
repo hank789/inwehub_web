@@ -110,7 +110,7 @@
       paySuccess(orderId){
         postRequest(`answer/payforview`, {
           order_id: orderId,
-          answer_id: answer.id,
+          answer_id: this.answer.id,
           device: 1
         }).then(response => {
           var code = response.data.code;
