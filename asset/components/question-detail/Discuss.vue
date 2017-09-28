@@ -163,6 +163,7 @@
 
           if (response.data.data.data.length < 10) {
             this.busy = true;
+            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();//禁用上拉刷新
           } else {
             this.busy = false;
