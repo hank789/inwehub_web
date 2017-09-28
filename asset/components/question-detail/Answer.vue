@@ -27,7 +27,7 @@
       <div class="needMoneyWrapper" v-else>
         <div class="buttonWrapper">
 
-          <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_money="money"
+          <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_object_id="answer.id" :pay_money="money"
                v-on:pay_success="paySuccess">
 
           </pay>

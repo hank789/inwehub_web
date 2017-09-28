@@ -83,7 +83,7 @@
         </ul>
 
         <div class="button-wrapper">
-          <pay :pay_object_type="pay_object_type" :pay_money="money" v-on:pay_success="goAsk">
+          <pay :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money" v-on:pay_success="goAsk">
 
           </pay>
         </div>
