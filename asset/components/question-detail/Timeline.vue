@@ -6,16 +6,12 @@
         <template v-for="(item, index) in timelines">
           <div class="nearsite-message">
             <div class="timage">
-              <span   v-if="!index">
-              	<svg class="icon blue pos" aria-hidden="true">
-				  <use xlink:href="#icon-shoucanghover"></use>
-				</svg>
-              </span>
-              <span  v-else>
-              	<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-plus--"></use>
-				</svg>
-              </span>
+              	<svg class="icon blue pos" aria-hidden="true" v-if="!index">
+                  <use xlink:href="#icon-shoucanghover"></use>
+                </svg>
+              	<svg class="icon" aria-hidden="true"  v-else>
+                  <use xlink:href="#icon-plus--"></use>
+                </svg>
             </div>
 
             <div class="desc" :class="timelines.length-1 != index?'descBefore':''">
@@ -36,13 +32,9 @@
 <script type="text/javascript">
   export default {
     data () {
-      return {
-
-      }
+      return {}
     },
-    components: {
-
-    },
+    components: {},
     props: {
       timelines: {
         type: Array,
@@ -90,30 +82,27 @@
   .nearsite-message .timage {
     float: left;
     margin-top: 21px;
-    width: 23px;
-    height: 23px;
+    width: 24px;
+    height: 24px;
     border: 1px solid #DCDCDC;
     background: #FFFFFF;
     border-radius: 50%;
     position: relative;
+    font-size:10px;
+    color:#03aef9;
     left: -1.2px;
+    text-align: center;
   }
-.nearsite-message .timage svg{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 5px;
-	margin: auto;
-	font-size: 10px;
-}
-.blue{
-	color: #03aef9;
-}
-.nearsite-message .timage svg.pos{
-	right: 4px;
-	
-}
- 
+
+  .timage .icon{
+    position: relative;
+  }
+
+
+  .blue {
+    color: #03aef9;
+  }
+
 
   .nearsite-message .desc {
     float: left;
@@ -164,25 +153,25 @@
 
   }
 
-
   .detail-ask-timeline .mui-table-view-cell {
-    padding:0;
+    padding: 0;
   }
 
-  .mui-table-view:before{
+  .mui-table-view:before {
     display: none;
-    margin-top:0;
+    margin-top: 0;
   }
 
-  .time{
-      position: absolute;
-      right: 10px;
-      top:15px;
-      color:#b4b4b6;
+  .time {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    color: #b4b4b6;
   }
-  .mui-table-view:after{
+
+  .mui-table-view:after {
     display: none;
   }
-  
-  
+
+
 </style>
