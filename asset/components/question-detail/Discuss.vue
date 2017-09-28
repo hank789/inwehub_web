@@ -313,6 +313,7 @@
     width: 100%;
     bottom: 0;
     padding: 5px 15px;
+    z-index: 77;
   }
 
   .commentWrapper .textareaWrapper {

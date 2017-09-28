@@ -110,9 +110,6 @@
         this.answer.is_followed=status;
       },
       paySuccess(orderId){
-        var self = this;
-
-
 
         postRequest(`answer/payforview`, {
           order_id: orderId,
@@ -127,9 +124,9 @@
           var content = response.data.data.content;
 
           if (content) {
-            self.answer.content = content;
             var objs = JSON.parse(content);
-            self.editorReadObj.setContents(objs);
+            this.editorReadObj.setContents(objs);
+            this.$emit('paySuccess', content);
           }
         });
       },
