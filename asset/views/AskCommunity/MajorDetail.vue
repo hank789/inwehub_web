@@ -13,9 +13,10 @@
         ></Question>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
-                :answer="ask.answers[0] ? ask.answers[0]:{}"
+                :answer="answer"
                 :needMoney="true"
                 :isFollow="true"
+                @paySuccess="paySuccess"
         ></Answer>
 
 
@@ -29,6 +30,7 @@
         <Discuss
           :answerId="ask.answers[0] ? ask.answers[0].id:0"
           ref="discuss"
+          v-show="ask.answers[0] && ask.answers[0].content"
         ></Discuss>
 
         <div class="help">
@@ -124,8 +126,18 @@
       Share,
       PageDown
     },
+    computed: {
+        answer () {
+          return this.ask.answers[0] ? this.ask.answers[0]:{};
+      }
+    },
     methods: {
-      downRefresh(){
+
+      paySuccess(content)
+      {
+          this.ask.answers[0].content = content;
+      },
+      downRefresh(callback){
         this.getDetail(() => {
           this.$refs.discuss.resetList();
         });

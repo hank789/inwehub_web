@@ -509,15 +509,13 @@
   /*无数据的样式 */
 
   .container {
-    position: absolute;
-    top: 40%;
-    left: 36%;
+    text-align: center;
+    padding:20px;
   }
 
   .container svg {
     font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+
   }
 
   .container p {

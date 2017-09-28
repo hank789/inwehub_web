@@ -4,7 +4,7 @@
         <h1 class="mui-title">支付成功</h1>
       </header>
 
-      <div class="mui-content pay-success">
+      <div class="mui-content pay-success absolute">
         <div class="status">
           <i class="mui-icon iconfont icon-success"></i>
           <br/>
@@ -68,7 +68,7 @@
           if (this.timestart < this.timeend) {
               setTimeout(this.countUp, 1000);
           } else {
-            this.$router.replace('/askSuccess/'+this.id);
+            this.$router.replace('/ask/'+this.id);
           }
       }
     }
@@ -116,4 +116,6 @@
     color:orange;
     margin:0 5px;
   }
+
+
 </style>

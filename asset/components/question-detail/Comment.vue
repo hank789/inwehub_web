@@ -54,6 +54,7 @@
       return {
         commentState: false, //是否已评价
         showRating:false,
+        rateStar:5,
         starDesc: '评价会让我们做的更好',
         description: '',
         descriptionPlaceHolder: '在这里留下你的反馈',
@@ -72,6 +73,7 @@
         type: Number,
         default: 0
       },
+
     },
     created(){
 
