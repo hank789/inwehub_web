@@ -17,7 +17,7 @@
       </div>
 
       <div class="listWrapper" v-show="list.length !== 0">
-        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+        <div>
           <ul class="message_detail">
             <li v-for="(item, index) in list">
               <div class="message_t">
@@ -163,8 +163,10 @@
 
           if (response.data.data.data.length < 10) {
             this.busy = true;
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();//禁用上拉刷新
           } else {
             this.busy = false;
+            mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
           }
 
           this.page++;

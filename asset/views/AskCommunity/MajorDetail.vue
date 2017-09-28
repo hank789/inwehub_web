@@ -102,6 +102,11 @@
             contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
             contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
             callback :this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+          },
+          up: {
+            contentrefresh: '',
+            contentnomore: null, //可选，请求完毕若没有更多数据时显示的提醒内容；
+            callback: this.$refs.discuss.getList
           }
         }
       });
@@ -162,6 +167,7 @@
           this.loading = 0;
 
           successCallback();
+          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
           mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
         });
       }
