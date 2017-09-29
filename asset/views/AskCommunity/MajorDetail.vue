@@ -94,8 +94,7 @@
       loading: true
     }),
     mounted(){
-      var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
-      this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+
       //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
@@ -177,6 +176,9 @@
 
           var username = this.answer.user_name?this.answer.user_name:'';
           this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
+
+          var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
+          this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
         });
       }
     },
