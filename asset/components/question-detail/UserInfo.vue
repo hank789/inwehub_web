@@ -1,7 +1,7 @@
 <template>
   <div class="mui-table-view-cell">
     <div class="avatar">
-      <div class="avatarInner">
+      <div class="avatarInner" @tap.stop.prevent="toResume()">
         <img :src="avatar">
 
         <svg class="icon" aria-hidden="true" v-show="isExpert">
@@ -74,8 +74,11 @@
 
     },
     methods: {
-      toAnswerResume(){
-        var uuid = this.ask.answers[0] ? this.ask.answers[0].uuid : 0;
+      toResume(){
+        var uuid = this.uuid;
+        if (!uuid) {
+            return false;
+        }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
       },
       collectProfessor: function () {

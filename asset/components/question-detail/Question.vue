@@ -1,7 +1,7 @@
 <template>
   <div class="mui-table-view detail-ask">
     <UserInfo
-      :uuid="ask.user_id"
+      :uuid="ask.uuid"
       :avatar="ask.user_avatar_url"
       :realname="ask.user_name"
       :position="ask.title"
