@@ -80,8 +80,7 @@
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
         };
-
-
+        
         Share.bindShare(
           this,
           data,
