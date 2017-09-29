@@ -172,13 +172,16 @@
 
           this.loading = 0;
 
-          successCallback();
-
           var username = this.answer.user_name?this.answer.user_name:'';
           this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
 
-          var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
+          var currentUrl = '/askCommunity/major/' + this.id;
           this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+
+          successCallback();
+
+
+
         });
       }
     },
