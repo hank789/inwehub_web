@@ -17,7 +17,7 @@
       </div>
 
       <div class="listWrapper" v-show="list.length !== 0">
-        <div>
+        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
             <li v-for="(item, index) in list">
               <div class="message_t">
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="commentWrapper" v-show="showTextarea">
+    <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
         <textarea v-on:keydown.enter="sendMessage" v-model="textarea" placeholder="在此留言" id="commentTextarea"
                   autocomplete="off"></textarea>
@@ -163,11 +163,8 @@
 
           if (response.data.data.data.length < 10) {
             this.busy = true;
-            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();//禁用上拉刷新
           } else {
             this.busy = false;
-            mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
           }
 
           this.page++;

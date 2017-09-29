@@ -39,6 +39,8 @@ Raven
     .install();
 }
 
+var infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll);
 
 //正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';
@@ -196,7 +198,7 @@ Vue.mixin({
       var current_webview = plus.webview.currentWebview();
       var index = window.location.href.indexOf('#');
       if (index !== -1) {
-        var url = window.location.href.slice(index);
+        var url = window.location.href.slice(index+1);
         console.log('bindCurrentUrl:' + url);
         current_webview.setStyle({
           additionalHttpHeaders:{
@@ -219,7 +221,7 @@ mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
     var current_webview = plus.webview.currentWebview();
-    var need_hide = ['askCommunity-major-detail'];
+    var need_hide = ['list-detail-page'];
 
     if (need_hide.indexOf(current_webview.id) !== -1) {
       current_webview.hide();

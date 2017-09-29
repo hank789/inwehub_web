@@ -5,8 +5,8 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div id="refreshContainer" class="mui-content mui-scroll-wrapper" v-show="!loading">
-      <div class="mui-scroll">
+    <div id="refreshContainer" class="mui-content" v-show="!loading">
+      <div>
         <Question
           :ask="ask.question"
           :isFollow="true"
@@ -50,18 +50,15 @@
 
           </button>
         </div>
-
-      </div>
-
+        </div>
     </div>
 
-
     <Share
-      :title="'test'"
-      :link="'test'"
-      :content="'test'"
-      :imageUrl="''"
-      :thumbUrl="''"
+      :title="shareTitle"
+      :link="shareUrl"
+      :content="ask.question.description"
+      :imageUrl="shareImg"
+      :thumbUrl="shareImg"
     ></Share>
 
   </div>
@@ -81,42 +78,42 @@
   import PageDown from '../../components/refresh/PageDown.vue';
 
 
+
   const AskDetail = {
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: ''},
+        question: {created_at: '', description:''},
         feedback: {
           rate_star: 0
         },
         timeline: []
       },
+      shareUrl:'',
+      shareImg:'',
+      shareTitle:'',
       id: 0,
       loading: true
     }),
     mounted(){
-      mui.init({
-        pullRefresh : {
-          container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-          down : {
-            auto: false,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback :this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          },
-          up: {
-            contentrefresh: '',
-            contentnomore: null, //可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.$refs.discuss.getList
-          }
-        }
+      var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
+      this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+      //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
+      this.shareImg = 'http://cdnread.ywhub.com/media/284/user_origin_4.jpg';
+
+      mui.plusReady(() => {
+        plus.webview.currentWebview().setStyle({
+          softinputMode: "adjustResize"
+        });
       });
+
       window.addEventListener('refreshData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
         this.getDetail();
       });
+
+      this.getDetail();
     },
     components: {
       Question,
@@ -179,8 +176,9 @@
           this.loading = 0;
 
           successCallback();
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
+
+          var username = this.answer.user_name?this.answer.user_name:'';
+          this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
         });
       }
     },
@@ -188,7 +186,7 @@
       '$route': 'getDetail'
     },
     created () {
-      this.getDetail();
+
     }
   }
   export default AskDetail;

@@ -15,7 +15,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
         mui.fire(current_webview, 'refreshPageData', false);
       }
 
-      if (current_webview && current_webview.getURL()) {
+      if (current_webview) {
         var current_webview_url = current_webview.getURL();
 
         if (current_webview.getStyle().additionalHttpHeaders) {
@@ -24,18 +24,22 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
                current_webview_url = httpHeader.url;
              }
         }
-        
+
         var urlIndex = url.indexOf('#');
         var shotUrl = url;
         if (urlIndex !== -1) {
-          shotUrl = url.slice(urlIndex);
+          shotUrl = url.slice(urlIndex+1);
         }
 
         console.log('openWebviewByUrl:current_webview_url:'+current_webview_url + ', shortUrl' + shotUrl);
 
         if (current_webview_url !== shotUrl) {
           console.log('openWebviewByUrl:load:'+url);
-          current_webview.loadURL(url);
+          if (/^http/.test(url)) {
+            current_webview.loadURL(url);
+          }else {
+            mui.fire(current_webview,'go_to_target_page',{url: shotUrl});
+          }
         }
         current_webview.show();
       } else {
