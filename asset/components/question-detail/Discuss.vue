@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="commentWrapper" v-show="showTextarea">
+    <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
         <textarea v-on:keydown.enter="sendMessage" v-model="textarea" placeholder="在此留言" id="commentTextarea"
                   autocomplete="off"></textarea>
