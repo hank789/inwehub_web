@@ -266,23 +266,12 @@
 				}
 			}
 		},
+    watch: {
+      '$route' () {
+        this.getData();
+      }
+    },
 		created() {
-			//showInwehubWebview();
-
-			if(this.$route.query.goback) {
-				this.canBack = true;
-			}
-
-			var from = this.$router.currentRoute.path;
-			var fullUrl = process.env.H5_ROOT;
-
-			if(from === '/share/resume') {
-				this.isShare = true;
-				this.uuid = this.$route.query.id;
-			}
-
-			this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
-
 			this.getData();
 		},
 		mounted() {
@@ -294,6 +283,20 @@
 		},
 		methods: {
 			getData: function() {
+        if(this.$route.query.goback) {
+          this.canBack = true;
+        }
+
+        var from = this.$router.currentRoute.name;
+        var fullUrl = process.env.H5_ROOT;
+
+        if(from === 'share-resume' || from === 'share-resume-old') {
+          this.isShare = true;
+          this.uuid = this.$route.query.id || this.$route.params.id;
+        }
+
+        this.shareUrl = fullUrl + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime());
+
 				postRequest(`profile/resumeInfo`, {
 					uuid: this.uuid
 				}).then(response => {

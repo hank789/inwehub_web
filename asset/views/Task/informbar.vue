@@ -73,7 +73,7 @@
 			},
 			goUrl(url) {
 			    if (/resume/.test(url)) {
-			        this.$router.pushPlus(url + '&goback=1','list-detail-page');
+			        this.$router.pushPlus(url + '?goback=1','list-detail-page');
           } else {
             this.$router.pushPlus(url,'list-detail-page');
           }

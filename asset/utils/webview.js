@@ -17,11 +17,12 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
 
       if (current_webview) {
         var current_webview_url = current_webview.getURL();
+        var bind_http_url = current_webview.getURL();
 
         if (current_webview.getStyle().additionalHttpHeaders) {
              var httpHeader = current_webview.getStyle().additionalHttpHeaders;
              if (httpHeader.url) {
-               current_webview_url = httpHeader.url;
+               bind_http_url = httpHeader.url;
              }
         }
 
@@ -33,7 +34,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
 
         console.log('openWebviewByUrl:current_webview_url:'+current_webview_url + ', shortUrl' + shotUrl);
 
-        if (current_webview_url !== shotUrl) {
+        if (current_webview_url !== shotUrl || bind_http_url !== shotUrl) {
           console.log('openWebviewByUrl:load:'+url);
           if (/^http/.test(url)) {
             current_webview.loadURL(url);
