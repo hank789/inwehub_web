@@ -149,6 +149,7 @@
           if (e.code == -100) {
             plus.nativeUI.alert('', null, '支付已取消');
           } else {
+            Raven.captureException(JSON.stringify(e));
             plus.nativeUI.alert('请联系客服', null, '支付失败');
           }
         });
