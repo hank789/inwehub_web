@@ -41,6 +41,7 @@
 
       <Discuss v-show="ask.question.status==6||ask.question.status==7"
          :answerId="ask.answers[0] ? ask.answers[0].id:0"
+         ref="discuss"
       >
       </Discuss>
 
@@ -98,7 +99,12 @@
       }
     },
     methods: {
-      getDetail(){
+      downRefresh(callback){
+        this.getDetail(() => {
+          this.$refs.discuss.resetList();
+        });
+      },
+      getDetail(successCallback = () => {}){
 
         let id = parseInt(this.$route.params.id);
 
@@ -123,6 +129,8 @@
             this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
           }
 
+          successCallback();
+
           this.ask = response.data.data;
 
           this.loading = 0;
@@ -130,7 +138,7 @@
       }
     },
     watch: {
-      '$route': 'getDetail'
+      '$route': 'downRefresh'
     },
     created () {
       //showInwehubWebview();
