@@ -57,11 +57,11 @@
 
 
     <Share
-      :title="'test'"
-      :link="'test'"
-      :content="'test'"
-      :imageUrl="''"
-      :thumbUrl="''"
+      :title="'InweHub专业问答| 专家' + ask.answers[0] ? ask.answers[0].user_name:'' + '的回答'"
+      :link="shareUrl"
+      :content="ask.question.description"
+      :imageUrl="shareImg"
+      :thumbUrl="shareImg"
     ></Share>
 
   </div>
@@ -81,20 +81,27 @@
   import PageDown from '../../components/refresh/PageDown.vue';
 
 
+
   const AskDetail = {
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: ''},
+        question: {created_at: '', description:''},
         feedback: {
           rate_star: 0
         },
         timeline: []
       },
+      shareUrl:'',
+      shareImg:'',
       id: 0,
       loading: true
     }),
     mounted(){
+      var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
+      this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+      this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
+
       mui.init({
         pullRefresh : {
           container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等

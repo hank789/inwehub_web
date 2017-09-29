@@ -136,7 +136,7 @@
         <div class="desc">依支付金额不同，问题被查看后提问者与回答者按照以下比例结算：</div>
         <ul class="items">
           <li class="item">28元提问，按3:7分成</li>
-          <li class="item">58元提问，按5:5分成</li>
+          <li class="item">60元提问，按5:5分成</li>
           <li class="item">88元提问，按7:3分成</li>
           <li class="item">首问一元特惠提问，查看收入全部归回答者所有</li>
         </ul>
