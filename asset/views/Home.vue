@@ -1066,12 +1066,12 @@
 
 	.hotAnswer_b li {
 		width: 100%;
-		height: 88px;
+		overflow: hidden;
+		padding: 12px 0;
 		position: relative;
 	}
 
 	.hotAnswer_b li>p {
-		margin-top: 12px;
 		font-size: 14px;
 		color: #444444;
 	}
@@ -1107,7 +1107,7 @@
 	}
 
 	.hotAnswer_d p:nth-child(2) {
-		width: 32%;
+		max-width: 32%;
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1115,10 +1115,11 @@
 		border-right: 1px solid #c8c8c8;
 		text-align: center;
 		line-height: 15px;
+		padding: 0 3%;
 	}
 
 	.hotAnswer_d p:nth-child(3) {
-		width: 21%;
+		max-width: 21%;
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1126,16 +1127,18 @@
 		border-right: 1px solid #c8c8c8;
 		text-align: center;
 		line-height: 15px;
+		padding: 0 3%;
 	}
 
 	.hotAnswer_d p:nth-child(4) {
-		width: 37.5%;
+		max-width: 37.5%;
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
 		color: #808080;
 		text-align: center;
 		line-height: 15px;
+		padding: 0 3%;
 	}
 	/*向你推荐*/
 
