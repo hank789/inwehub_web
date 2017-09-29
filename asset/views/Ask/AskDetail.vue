@@ -138,7 +138,7 @@
       }
     },
     watch: {
-      '$route': 'downRefresh'
+      '$route': 'getDetail'
     },
     created () {
       //showInwehubWebview();
