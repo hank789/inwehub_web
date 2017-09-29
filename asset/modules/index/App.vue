@@ -128,6 +128,12 @@
           var ws = plus.webview.currentWebview();
           console.log('bindEvent-runtime:' + plus.runtime.appid);
           console.log('bindEvent-wsid:' + ws.id);
+          //监听自定义事件，前往页面
+          document.addEventListener('go_to_target_page', (event) => {
+            var url = event.detail.url;
+            console.log('go_to_target_page:'+url);
+            router.push(url);
+          });
           // 只在主页面监听一次
           if (ws.id === plus.runtime.appid) {
             EventObj.addEventListener('refreshData', (e) => {
