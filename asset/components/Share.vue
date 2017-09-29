@@ -62,22 +62,27 @@
         default: ''
       }
     },
+    watch: {
+      'title'(newVal, oldVal) {
+        var data = {
+          title: this.title,
+          link:  this.link,
+          content: this.content,
+          imageUrl: this.imageUrl,
+          thumbUrl: this.thumbUrl,
+        };
+
+        Share.bindShare(
+          this,
+          data,
+          this.successCallback,
+          this.failCallback
+        );
+      },
+    },
     mounted(){
 
-      var data = {
-        title: this.title,
-        link:  this.link,
-        content: this.content,
-        imageUrl: this.imageUrl,
-        thumbUrl: this.thumbUrl,
-      };
 
-      Share.bindShare(
-        this,
-        data,
-        this.successCallback,
-        this.failCallback
-      );
     },
 
     methods: {

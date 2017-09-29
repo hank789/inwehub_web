@@ -39,6 +39,8 @@ Raven
     .install();
 }
 
+var infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll);
 
 //正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';

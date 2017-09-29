@@ -314,7 +314,7 @@
   }
 
   .hotAnswer_d p:nth-child(1) {
-    width: 9.5%;
+    /*width: 8.4%;*/
     height: 32px;
     /*background: #CCCCCC;*/
     position: relative;
@@ -358,7 +358,7 @@
   }
 
   .hotAnswer_d p:nth-child(4) {
-    max-width: 37.5%;
+    max-width: 36%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -461,7 +461,7 @@
   }
 
   .recommend_d p:nth-child(1) {
-    width: 9.5%;
+    /*width: 8.4%;*/
     height: 32px;
     /*background: #CCCCCC;*/
     position: relative;
@@ -505,7 +505,7 @@
   }
 
   .recommend_d p:nth-child(4) {
-    max-width: 37.5%;
+    max-width: 36%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -536,4 +536,27 @@
   .mui-content{
     background-color: #fff;
   }
+  
+  
+  /***媒体查询*****/
+
+	@media screen and (min-width: 320px) {
+		
+		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
+		width: 11%;
+		}
+	}
+
+	@media screen and (min-width: 375px) {
+		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
+			width: 9.5%;
+	      }
+	}
+
+	@media screen and (min-width: 414px) {
+		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
+		width: 8.4%;
+		}
+		
+	}
 </style>
