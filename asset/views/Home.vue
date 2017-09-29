@@ -1087,7 +1087,7 @@
 	}
 
 	.hotAnswer_d p:nth-child(1) {
-		width: 9.5%;
+		/*width: 8.4%;*/
 		height: 32px;
 		/*background: #CCCCCC;*/
 		position: relative;
@@ -1131,7 +1131,7 @@
 	}
 
 	.hotAnswer_d p:nth-child(4) {
-		max-width: 37.5%;
+		max-width: 36%;
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1275,6 +1275,9 @@
 		.home-expert div p{
 		  width:74%;
 		}
+		.hotAnswer_d p:nth-child(1) {
+		width: 11%;
+		}
 	}
 
 	@media screen and (min-width: 375px) {
@@ -1283,6 +1286,9 @@
 		}
 		.home-expert div p{
 		  width:65%;
+		}
+		.hotAnswer_d p:nth-child(1) {
+		width: 9.5%;
 		}
 	}
 
@@ -1293,5 +1299,9 @@
 		.home-expert div p{
 		  width:60%;
 		}
+		.hotAnswer_d p:nth-child(1) {
+		width: 8.4%;
+		}
+		
 	}
 </style>
