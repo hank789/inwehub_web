@@ -112,7 +112,7 @@ const routes = [{
     name: 'ask-major-detail',
     meta: {
 			title: '问答社区',
-			wechatHideHeader: true
+			wechatHideHeader: false
 		},
 		component: require('../../../views/AskCommunity/MajorDetail.vue'),
 		beforeEnter: (to, from, next) => {
