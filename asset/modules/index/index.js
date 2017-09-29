@@ -198,7 +198,7 @@ Vue.mixin({
       var current_webview = plus.webview.currentWebview();
       var index = window.location.href.indexOf('#');
       if (index !== -1) {
-        var url = window.location.href.slice(index);
+        var url = window.location.href.slice(index+1);
         console.log('bindCurrentUrl:' + url);
         current_webview.setStyle({
           additionalHttpHeaders:{
