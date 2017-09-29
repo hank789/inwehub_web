@@ -90,7 +90,6 @@
 <script>
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import userAbility from '../../utils/userAbility';
-  import PageDown from '../../components/refresh/PageDown.vue';
 
   const MajorList = {
     data: () => ({
@@ -112,7 +111,7 @@
       },
     },
     components: {
-      PageDown
+
     },
     methods: {
       downRefresh(){
