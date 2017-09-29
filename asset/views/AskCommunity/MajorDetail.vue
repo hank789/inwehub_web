@@ -50,14 +50,11 @@
 
           </button>
         </div>
-
-      </div>
-
+        </div>
     </div>
 
-
     <Share
-      :title="'InweHub专业问答| 专家' + ask.answers[0] ? ask.answers[0].user_name:'' + '的回答'"
+      :title="shareTitle"
       :link="shareUrl"
       :content="ask.question.description"
       :imageUrl="shareImg"
@@ -94,6 +91,7 @@
       },
       shareUrl:'',
       shareImg:'',
+      shareTitle:'',
       id: 0,
       loading: true
     }),
@@ -101,6 +99,9 @@
       var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
       this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
       this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
+
+
+
 
       mui.init({
         pullRefresh : {
@@ -119,11 +120,14 @@
           }
         }
       });
+
       window.addEventListener('refreshData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
         this.getDetail();
       });
+
+      this.getDetail();
     },
     components: {
       Question,
@@ -188,6 +192,10 @@
           successCallback();
           mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
           mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
+
+
+          var username = this.answer.user_name?this.answer.user_name:'';
+          this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
         });
       }
     },
@@ -195,7 +203,7 @@
       '$route': 'getDetail'
     },
     created () {
-      this.getDetail();
+
     }
   }
   export default AskDetail;
