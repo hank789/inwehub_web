@@ -10,15 +10,16 @@
       <div class="title">分享到</div>
       <div class="more">
         <div class="single" id="wechatShareBtn" @tap.stop.prevent="shareToHaoyou()">
-          <img src="../statics/images/wechat_2x.png" />
+          <img src="../statics/images/wechat_2x.png"/>
         </div>
         <div class="single" id="wechatShareBtn2" @tap.stop.prevent="shareToPengyouQuan()">
-          <img src="../statics/images/pengyouquan.png" />
+          <img src="../statics/images/pengyouquan.png"/>
         </div>
       </div>
     </div>
 
-    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top" @tap.stop.prevent="toggleShareNav()">
+    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top"
+         @tap.stop.prevent="toggleShareNav()">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-dianzheli"></use>
       </svg>
@@ -33,13 +34,9 @@
 
   export default {
     data () {
-      return {
-
-      }
+      return {}
     },
-    components: {
-
-    },
+    components: {},
     props: {
       title: {
         type: String,
@@ -64,13 +61,26 @@
     },
     watch: {
       'link'(newVal, oldVal) {
+        this.bindShare();
+      },
+    },
+    mounted(){
+      if (this.link) {
+        this.bindShare();
+      }
+    },
+
+    methods: {
+      bindShare(){
+
         var data = {
           title: this.title,
-          link:  this.link,
+          link: this.link,
           content: this.content,
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
         };
+
 
         Share.bindShare(
           this,
@@ -79,13 +89,6 @@
           this.failCallback
         );
       },
-    },
-    mounted(){
-
-
-    },
-
-    methods: {
       toggleShareNav() {
         mui('#shareShowWrapper').popover('toggle');
       },
@@ -120,7 +123,7 @@
       share(){
         setTimeout(() => {
           mui('#shareWrapper').popover('toggle');
-          mui("body").on('tap','.mui-backdrop', () => {
+          mui("body").on('tap', '.mui-backdrop', () => {
             this.hide();
           })
         }, 150);
@@ -133,19 +136,18 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .shareBtn{
+  .shareBtn {
     position: fixed;
-    right:10px;
-    top:10px;
-    z-index:11;
-    color:#fff;
+    right: 10px;
+    top: 10px;
+    z-index: 11;
+    color: #fff;
   }
 
   .mui-content {
     padding: 200px;
     text-align: center;
   }
-
 
   .shareWrapper {
     .title {
@@ -170,8 +172,6 @@
     }
   }
 
-
-
   #shareShowWrapper {
     position: absolute;
     right: 0;
@@ -184,7 +184,6 @@
       font-size: 70px;
     }
   }
-
 
 
 </style>
