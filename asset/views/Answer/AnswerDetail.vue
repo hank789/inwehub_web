@@ -67,8 +67,6 @@
       ></Answer>
 
       <div class="mb70"></div>
-
-      <div id="statusBarStyle" background="#fff"   bgColor="#fff" mode="dark"></div>
     </div>
 
   </div>
