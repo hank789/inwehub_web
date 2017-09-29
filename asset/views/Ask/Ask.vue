@@ -26,7 +26,7 @@
 
     <div class="fixedDiv">
       <div class="fixedContainer">
-        <span class="niming"><label class="nimingCheckbox" :class="{'active':hide}" @tap.stop.prevent="toggleHide"></label>匿名</span>
+        <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
 
