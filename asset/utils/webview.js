@@ -15,7 +15,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
         mui.fire(current_webview, 'refreshPageData', false);
       }
 
-      if (current_webview && current_webview.getURL()) {
+      if (current_webview) {
         var current_webview_url = current_webview.getURL();
 
         if (current_webview.getStyle().additionalHttpHeaders) {
@@ -24,7 +24,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
                current_webview_url = httpHeader.url;
              }
         }
-        
+
         var urlIndex = url.indexOf('#');
         var shotUrl = url;
         if (urlIndex !== -1) {
