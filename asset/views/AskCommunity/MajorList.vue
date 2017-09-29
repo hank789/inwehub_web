@@ -11,7 +11,7 @@
         <div class="hotquiz">
           <div class="quiz">
             <p>
-              <span>热门问答</span>
+              <span>热门</span>
               <button @tap.stop.prevent="$router.pushPlus('/ask')">提问</button>
               <i class="bot"></i>
             </p>
@@ -44,10 +44,10 @@
         <div class="recommendlist" v-show="!this.loading">
           <div class="recommend">
             <p>
-              <span>推荐问答</span>
+              <span>推荐</span>
               <span>
 
-            	   	  	<a @tap.stop.prevent="selectType()">{{ type ? type.split(':')[0] : '全部'}}</a>
+            	   	  	<a @tap.stop.prevent="">{{ type ? type.split(':')[0] : '全部'}}</a>
             	   	  	<svg class="icon" aria-hidden="true">
 					  <use xlink:href="#icon-fenleichakan"></use>
 					</svg>
@@ -536,12 +536,12 @@
   .mui-content{
     background-color: #fff;
   }
-  
-  
+
+
   /***媒体查询*****/
 
 	@media screen and (min-width: 320px) {
-		
+
 		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
 		width: 11%;
 		}
@@ -557,6 +557,6 @@
 		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
 		width: 8.4%;
 		}
-		
+
 	}
 </style>
