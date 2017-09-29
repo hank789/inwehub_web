@@ -122,6 +122,12 @@
         }
       });
 
+      mui.plusReady(() => {
+        plus.webview.currentWebview().setStyle({
+          softinputMode: "adjustResize"
+        });
+      });
+
       window.addEventListener('refreshData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
