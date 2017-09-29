@@ -128,7 +128,7 @@
         this.getNextList();
       },
       toDetail(id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'askCommunity-major-detail' ,true,'pop-in','hide',true);
+        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page' ,true,'pop-in','hide',true);
       },
       selectType(type_text) {
         this.$router.push('/ask/type?type=majorlist')

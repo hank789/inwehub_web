@@ -213,10 +213,10 @@
 				var id = task.object_id;
 				switch(task.task_type){
 					case 1:
-					 this.$router.pushPlus('/answer/' + id);
+					 this.$router.pushPlus('/answer/' + id,'list-detail-page');
 					  break;
 					case 2:
-					 this.$router.pushPlus('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id,'list-detail-page');
 					  break;
 					case 3:
 					 this.$router.pushPlus('/my/info');
@@ -225,7 +225,7 @@
 					 this.$router.pushPlus('/discover');
 					  break;
 					case 5:
-					 this.$router.pushPlus('/ask/' + id);
+					 this.$router.pushPlus('/ask/' + id,'list-detail-page');
 					  break;
 
 					}

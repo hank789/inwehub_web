@@ -73,9 +73,9 @@
 			},
 			goUrl(url) {
 			    if (/resume/.test(url)) {
-			        this.$router.pushPlus(url + '&goback=1');
+			        this.$router.pushPlus(url + '&goback=1','list-detail-page');
           } else {
-            this.$router.pushPlus(url);
+            this.$router.pushPlus(url,'list-detail-page');
           }
       },
 			//下拉刷新请求的数据；
@@ -91,7 +91,7 @@
 					if(response.data.data.data.length > 0) {
 						this.list = response.data.data.data;
 						this.data = response.data.data;
-						
+
 
 					}
 
@@ -115,8 +115,8 @@
 						mui.alert(response.data.message);
 						mui.back();
 					}
-   
-                    
+
+
 					if(response.data.data.data) {
 					   this.list =  this.list.concat(response.data.data.data)
 					   this.data = response.data.data;
