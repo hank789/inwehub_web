@@ -38,6 +38,9 @@
           </ul>
         </div>
         <!--推荐问答-->
+
+        <div class="river"></div>
+
         <div class="recommendlist" v-show="!this.loading">
           <div class="recommend">
             <p>
@@ -368,7 +371,6 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-    margin-top: 10px;
   }
 
   .recommend {
@@ -521,8 +523,9 @@
     font-size: 12px;
     color: #c8c8c8;
   }
-
   /*滚动区域*/
 
-
+  .mui-content{
+    background-color: #fff;
+  }
 </style>
