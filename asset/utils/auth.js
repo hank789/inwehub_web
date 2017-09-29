@@ -36,7 +36,7 @@ function CanNotGetInWhenLogged (to, from, next) {
 function logout () {
   localEvent.clearLocalItem('UserLoginInfo');
   localEvent.clearLocalItem('UserInfo');
-  router.pushPlus('/login',true,'none','none');
+  router.pushPlus('/login','',true,'none','none');
 }
 
 export {

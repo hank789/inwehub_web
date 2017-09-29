@@ -128,7 +128,7 @@
         this.getNextList();
       },
       toDetail(id) {
-        this.$router.push('/askCommunity/major/' + id);
+        this.$router.pushPlus('/askCommunity/major/' + id, 'askCommunity-major-detail' ,true,'pop-in','hide',true);
       },
       selectType(type_text) {
         this.$router.push('/ask/type?type=majorlist')
@@ -293,12 +293,12 @@
   .hotAnswer_b li {
     width: 92%;
     margin-left: 4%;
-    height: 88px;
+    overflow: hidden;
+    padding: 12px 0;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    margin-top: 12px;
     font-size: 14px;
     color: #444444;
   }
@@ -334,7 +334,7 @@
   }
 
   .hotAnswer_d p:nth-child(2) {
-    width: 32%;
+    max-width: 32%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -342,10 +342,11 @@
     border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
+    padding: 0 2%;
   }
 
   .hotAnswer_d p:nth-child(3) {
-    width: 21%;
+    max-width: 21%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -353,16 +354,18 @@
     border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
+    padding: 0 2%;
   }
 
   .hotAnswer_d p:nth-child(4) {
-    width: 37.5%;
+    max-width: 37.5%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
     color: #808080;
     text-align: center;
     line-height: 15px;
+    padding: 0 2%;
   }
 
   /*推荐问答*/
@@ -401,9 +404,9 @@
     float: right;
     display: block;
     width: 1px;
-    height: 13px;
+    height: 15px;
     background: #dbdbdb;
-    margin-top: 14px;
+    margin-top: 15px;
     margin-right: 15px;
   }
 
@@ -435,12 +438,14 @@
   .recommend_b li {
     width: 92%;
     margin-left: 4%;
-    height: 88px;
+   /* height: 88px;*/
+    overflow: hidden;
+    padding: 12px 0;
     position: relative;
   }
 
   .recommend_b li > p {
-    margin-top: 12px;
+   /* margin-top: 12px;*/
     font-size: 14px;
     color: #444444;
   }
@@ -476,7 +481,7 @@
   }
 
   .recommend_d p:nth-child(2) {
-    width: 32%;
+    max-width: 32%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -484,10 +489,11 @@
     border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
+    padding: 0 2%;
   }
 
   .recommend_d p:nth-child(3) {
-    width: 21%;
+    max-width: 21%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
@@ -495,16 +501,18 @@
     border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
+     padding: 0 2%;
   }
 
   .recommend_d p:nth-child(4) {
-    width: 37.5%;
+    max-width: 37.5%;
     height: 15px;
     margin-top: 8.5px;
     font-size: 13px;
     color: #808080;
     text-align: center;
     line-height: 15px;
+     padding: 0 2%;
   }
 
   /*无数据的样式 */

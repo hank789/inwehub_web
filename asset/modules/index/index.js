@@ -218,7 +218,14 @@ Vue.mixin({
 mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
-    mui.muiOldBack();
+    var current_webview = plus.webview.currentWebview();
+    var need_hide = ['askCommunity-major-detail'];
+
+    if (need_hide.indexOf(current_webview.id) !== -1) {
+      current_webview.hide();
+    } else {
+      mui.muiOldBack();
+    }
   } else {
     router.go(-1);
   }
