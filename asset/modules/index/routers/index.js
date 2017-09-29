@@ -83,6 +83,12 @@ router.pushPlus = function (url, id = '', autoShow=true, aniShow='pop-in', popGe
     var urlSplit = url.split('?',1);
     if (footerTab.indexOf(urlSplit[0]) >=0){
       id = plus.runtime.appid;
+    } else if (id === nextUrl){
+      urlSplit = url.split('/');
+      //判断是否列表页面
+      if (urlSplit[urlSplit.length-1] > 0) {
+        id = 'list-detail-page';
+      }
     }
 
     console.log('pushPlusUrl-Webview:' + nextUrl);
