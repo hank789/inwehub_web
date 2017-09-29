@@ -56,7 +56,7 @@
     <Share
       :title="shareTitle"
       :link="shareUrl"
-      :content="ask.question.description"
+      :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
     ></Share>
@@ -89,6 +89,7 @@
       },
       shareUrl:'',
       shareImg:'',
+      shareContent:'',
       shareTitle:'',
       id: 0,
       loading: true
@@ -173,10 +174,12 @@
           this.loading = 0;
 
           var username = this.answer.user_name?this.answer.user_name:'';
-          this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
+          this.shareTitle = '问答|' + this.ask.question.description  + '-' + username + '的回答';
 
           var currentUrl = '/askCommunity/major/' + this.id;
           this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+
+          this.shareContent = '专家' + username + '的回答，点击前往围观互动';
 
           successCallback();
 
