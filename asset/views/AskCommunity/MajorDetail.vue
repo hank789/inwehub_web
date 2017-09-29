@@ -5,7 +5,7 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div id="refreshContainer" class="mui-content" v-show="!loading">
+    <div id="majorDetail" class="mui-content absolute" v-show="!loading">
       <div>
         <Question
           :ask="ask.question"

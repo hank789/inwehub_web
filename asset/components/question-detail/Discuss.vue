@@ -16,7 +16,7 @@
         <p>暂无留言</p>
       </div>
 
-      <div class="listWrapper" v-show="list.length !== 0">
+      <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
             <li v-for="(item, index) in list">
@@ -46,7 +46,7 @@
 
     <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" v-model="textarea" placeholder="在此留言" id="commentTextarea"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" v-model="textarea" placeholder="在此留言" id="commentTextarea"
                   autocomplete="off"></textarea>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
           <use xlink:href="#icon-fasong"></use>
@@ -68,6 +68,7 @@
       loading: true,
       textarea: '',
       busy: false,
+      showList:true,
       page: 1,
       list: []
     }),
@@ -82,6 +83,14 @@
     components: {},
     computed: {},
     methods: {
+      textareaFocus(){
+         // mui.toast('focus');
+
+      },
+      textareaBlur(){
+        //mui.toast('blur');
+
+      },
       resetList()
       {
           this.page = 1;
@@ -312,6 +321,9 @@
     position: fixed;
     width: 100%;
     bottom: 0;
+    left:0;
+    height:45px;
+    overflow: hidden;
     padding: 5px 15px;
     z-index: 77;
   }
