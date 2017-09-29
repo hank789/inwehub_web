@@ -273,15 +273,15 @@
 				this.canBack = true;
 			}
 
-			var from = this.$router.currentRoute.path;
+			var from = this.$router.currentRoute.name;
 			var fullUrl = process.env.H5_ROOT;
 
-			if(from === '/share/resume') {
+			if(from === 'share-resume' || from === 'share-resume-old') {
 				this.isShare = true;
-				this.uuid = this.$route.query.id;
+				this.uuid = this.$route.query.id || this.$route.params.id;
 			}
 
-			this.shareUrl = fullUrl + '/?#/share/resume?id=' + this.uuid + '&time=' + (new Date().getTime());
+			this.shareUrl = fullUrl + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime());
 
 			this.getData();
 		},

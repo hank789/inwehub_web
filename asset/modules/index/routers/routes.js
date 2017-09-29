@@ -279,7 +279,7 @@ const routes = [{
 	},
 	{ // 共享个人名片
 		path: '/share/resume',
-    name: 'share-resume',
+    name: 'share-resume-old',
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '分享名片',
@@ -290,6 +290,19 @@ const routes = [{
 		},
 
 	},
+  { // 共享个人名片
+    path: '/share/resume/:id',
+    name: 'share-resume',
+    component: require('../../../views/Account/Resume.vue'),
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next();
+    },
+
+  },
 
 	{ // 个人信息
 		path: '/my/info/job/:id',
