@@ -63,7 +63,7 @@
       }
     },
     watch: {
-      'title'(newVal, oldVal) {
+      'link'(newVal, oldVal) {
         var data = {
           title: this.title,
           link:  this.link,
