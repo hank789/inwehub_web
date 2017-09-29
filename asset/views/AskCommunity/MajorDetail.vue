@@ -181,7 +181,7 @@
       }
     },
     watch: {
-      '$route': 'getDetail'
+      '$route': 'downRefresh'
     },
     created () {
 
