@@ -244,7 +244,7 @@
             }
 
 
-            this.$router.pushPlus('/my',true,'none','none',true,true);
+            this.$router.pushPlus('/my','',true,'none','none',true,true);
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {
