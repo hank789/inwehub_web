@@ -97,7 +97,7 @@
       var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
       this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
       //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
-      this.shareImg = 'https://cdn.inwehub.com/readhub/public/imgs/favicon.ico';
+      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
       mui.plusReady(() => {
         plus.webview.currentWebview().setStyle({
