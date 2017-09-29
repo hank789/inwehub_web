@@ -186,7 +186,7 @@
       'answerId'(newVal, oldVal) {
         if (newVal) {
           console.log('answerId new' + newVal);
-          this.getList();
+          this.resetList();
         }
       },
     },
