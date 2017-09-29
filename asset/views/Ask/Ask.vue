@@ -26,7 +26,7 @@
 
     <div class="fixedDiv">
       <div class="fixedContainer">
-        <span class="niming"><label><input type="checkbox" v-model="hide"/> 匿名</label></span>
+        <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
         <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
       </div>
 
@@ -178,6 +178,9 @@
       this.check();
     },
     methods: {
+      toggleHide(){
+          this.hide = !this.hide;
+      },
       helpWrapper(){
 
         var showHelpWrapper = localEvent.getLocalItem('showHelpWrapper');
@@ -603,7 +606,7 @@
     color: #808080;
     position: relative;
     font-size: 14px;
-    padding-left: 17px;
+    padding-left: 9px;
   }
 
   .fixedContainer .niming input {
@@ -750,5 +753,32 @@
     background: #fff;
     color: #444;
     padding: 5px 0;
+  }
+
+  .nimingCheckbox{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    border: 1px solid #c8c8c8;
+    border-radius: 50%;
+    top: 3px;
+    right: 5px;
+  }
+
+
+  .nimingCheckbox.active:after{
+    content:' ';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    border: 1px solid #03aef9;
+    background-color: #03aef9;
+    border-radius: 50%;
+    left:50%;
+    margin-left:-3px;
+    top:50%;
+    margin-top:-3px;
   }
 </style>
