@@ -21,7 +21,7 @@
           <ul class="message_detail">
             <li v-for="(item, index) in list">
               <div class="message_t">
-                <p>
+                <p @tap.stop.prevent="toResume(item.uuid)">
                   <img :src="item.user_avatar_url"/>
                   <svg class="icon" aria-hidden="true" v-show="item.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -83,6 +83,12 @@
     components: {},
     computed: {},
     methods: {
+      toResume(uuid){
+        if (!uuid) {
+          return false;
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
+      },
       textareaFocus(){
          // mui.toast('focus');
 
