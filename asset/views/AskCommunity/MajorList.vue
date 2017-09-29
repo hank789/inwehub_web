@@ -6,7 +6,7 @@
       <h1 class="mui-title">问答社区</h1>
     </header>
 
-    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper" v-show="!this.loading">
       <div class="mui-scroll">
         <div class="hotquiz">
           <div class="quiz">
