@@ -98,29 +98,8 @@
     mounted(){
       var currentUrl = '/askCommunity/major/' + parseInt(this.$route.params.id);
       this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-      this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
-
-
-
-
-      mui.init({
-        pullRefresh : {
-          container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-          down : {
-            style:'circle',
-            auto: false,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback :this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          },
-          up: {
-            contentrefresh: '',
-            contentnomore: null, //可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.$refs.discuss.getList
-          }
-        }
-      });
+      //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
+      this.shareImg = 'http://cdnread.ywhub.com/media/284/user_origin_4.jpg';
 
       mui.plusReady(() => {
         plus.webview.currentWebview().setStyle({
@@ -197,9 +176,6 @@
           this.loading = 0;
 
           successCallback();
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
-          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();//启用上拉刷新
-
 
           var username = this.answer.user_name?this.answer.user_name:'';
           this.shareTitle = 'InweHub专业问答| 专家' + username + '的回答';
