@@ -5,8 +5,8 @@
       <h1 class="mui-title">问答详情</h1>
     </header>
 
-    <div id="refreshContainer" class="mui-content mui-scroll-wrapper" v-show="!loading">
-      <div class="mui-scroll">
+    <div id="refreshContainer" class="mui-content" v-show="!loading">
+      <div>
         <Question
           :ask="ask.question"
           :isFollow="true"
@@ -107,6 +107,7 @@
         pullRefresh : {
           container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
           down : {
+            style:'circle',
             auto: false,//可选,默认false.首次加载自动下拉刷新一次
             contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
             contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
