@@ -22,35 +22,38 @@
 3.请根据问题难易程度等合理选择支付金额"></textarea>
         </div>
       </div>
-    </div>
 
-    <div class="fixedDiv">
-      <div class="fixedContainer">
-        <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
-        <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-      </div>
+      <div class="fixedDiv">
+        <div class="fixedContainer">
+          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
+          <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+        </div>
 
-      <div class="button-wrapper" v-show="!isShowMoneyDev">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
-          提好问题了
+        <div class="button-wrapper" v-show="!isShowMoneyDev">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
+            提好问题了
 
-
-        </button>
-      </div>
-
-      <div class="help">
-        <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-        <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
-
-        <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/askCommunity/majors')">
-            去问答社区看看
 
           </button>
         </div>
+
+        <div class="help">
+          <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
+          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
+
+          <div class="button-wrapper">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                    @tap.stop.prevent="$router.push('/askCommunity/majors')">
+              去问答社区看看
+
+            </button>
+          </div>
+        </div>
       </div>
+
     </div>
+
+
 
     <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
       <div class="selectMoney">
@@ -237,18 +240,18 @@
         }
       },
       enterWords(event){
-        var key = event.key;
-        var code = event.keyCode;
-
-        if (code == 13) {
-          if (window.event) {
-            window.event.returnValue = false;
-          } else {
-            event.preventDefault();//for firefox
-          }
-        }
-
-        return false;
+//        var key = event.key;
+//        var code = event.keyCode;
+//
+//        if (code == 13) {
+//          if (window.event) {
+//            window.event.returnValue = false;
+//          } else {
+//            event.preventDefault();//for firefox
+//          }
+//        }
+//
+//        return false;
       },
       cancelAsk(){
 
@@ -421,7 +424,7 @@
           this.description = this.description.slice(0, this.descMaxLength);
         }
 
-        this.description = this.description.replace("\n", "");
+        //this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
         const askDetail = /^[0-9]+$/;
@@ -436,6 +439,7 @@
 
 
 <style scoped>
+
 
   .askWrapper .category {
     background: #fff;
@@ -463,6 +467,10 @@
     margin-top: 0;
   }
 
+  .mui-content{
+    background-color: #fff;
+  }
+
   .mui-bar-nav ~ .mui-content {
     padding-top: 0;
   }
@@ -470,9 +478,7 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    position: absolute;
-    top: 51px;
-    bottom: 259px;
+    height:313px;
     width: 100%;
     z-index: 0;
   }
@@ -625,9 +631,7 @@
 
   .fixedDiv {
     padding-bottom: 10px;
-    position: absolute;
     background-color: #fff;
-    bottom: 0;
     width: 100%;
   }
 
@@ -781,4 +785,11 @@
     top:50%;
     margin-top:-3px;
   }
+
+  @media screen and (max-width: 374px) {
+    .form-ask{
+      height:220px;
+    }
+  }
+
 </style>
