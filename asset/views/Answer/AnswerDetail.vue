@@ -356,10 +356,11 @@
 
 
 <style scoped>
- 
+
 
   .buttons{
-    margin-top:5px;
+    padding-top: 5px;
+    background: #fff;
   }
   .buttons .mui-col-sm-6{
       padding:15px;
