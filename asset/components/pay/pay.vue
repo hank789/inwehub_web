@@ -1,6 +1,6 @@
 <template>
   <div id="pay_content">
-    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="pay()">确认支付</div>
+    <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="pay()">{{ btnText ?btnText:'确认支付'}}</div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@
         iapPay: false
       }
     },
-    props: ['pay_object_type', 'pay_money'],
+    props: ['pay_object_type', 'pay_object_id', 'pay_money', 'btnText'],
     components: {},
     created () {
       apiRequest(`pay/config`,{}).then(response_data => {
@@ -68,7 +68,8 @@
           app_id: appid,
           amount: amount,
           pay_channel: id,
-          pay_object_type: this.pay_object_type
+          pay_object_type: this.pay_object_type,
+          pay_object_id: this.pay_object_id
         }, false).then(response_data => {
           if (response_data !== false) {
             var is_debug = response_data.debug;
@@ -148,6 +149,7 @@
           if (e.code == -100) {
             plus.nativeUI.alert('', null, '支付已取消');
           } else {
+            Raven.captureException(JSON.stringify(e));
             plus.nativeUI.alert('请联系客服', null, '支付失败');
           }
         });

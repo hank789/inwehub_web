@@ -111,7 +111,6 @@
     beforeRouteEnter (to, from, next) {
 
       if (mui.os.wechat) {
-          console.oldLog();
           var hash = null;
           if (to.query.redirect) {
             hash = to.query.redirect;
@@ -245,7 +244,7 @@
             }
 
 
-            this.$router.pushPlus('/my',true,'none','none',true,true);
+            this.$router.pushPlus('/my','',true,'none','none',true,true);
           }));
         })
         .catch(({ response: { data = {} } = {} } ) => {

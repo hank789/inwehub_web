@@ -101,7 +101,7 @@
               popGesture: 'none',
               top: '0px',
               dock: 'top',
-              bottom: '75px',
+              bottom: '50px',
               bounce:'none'},
             extras: {preload: true}
           });
@@ -128,6 +128,12 @@
           var ws = plus.webview.currentWebview();
           console.log('bindEvent-runtime:' + plus.runtime.appid);
           console.log('bindEvent-wsid:' + ws.id);
+          //监听自定义事件，前往页面
+          document.addEventListener('go_to_target_page', (event) => {
+            var url = event.detail.url;
+            console.log('go_to_target_page:'+url);
+            router.push(url);
+          });
           // 只在主页面监听一次
           if (ws.id === plus.runtime.appid) {
             EventObj.addEventListener('refreshData', (e) => {
@@ -183,7 +189,7 @@
                   break;
                 case 'user_following':
                   // 用户关注通知
-                  router.pushPlus('/share/resume?id=' + payload.object_id + '&goback=1');
+                  router.pushPlus('/share/resume/' + payload.object_id + '?goback=1');
                   break;
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
@@ -259,6 +265,14 @@
                 case 'activity_enroll_success':
                     // 活动报名事件
                   router.pushPlus("/EnrollmentStatus/"+payload.object_id);
+                  break;
+                case 'answer_new_comment':
+                  //专业回答新的回复
+                  router.pushPlus('/askCommunity/major/' + payload.object_id);
+                  break;
+                case 'answer_new_support':
+                  //专业回答赞
+                  router.pushPlus('/askCommunity/major/' + payload.object_id);
                   break;
               }
             };

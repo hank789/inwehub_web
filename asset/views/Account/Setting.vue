@@ -26,7 +26,7 @@
 
 
 
-      <div class="mui-table-view">
+      <div class="mui-table-view noAfter">
         <div class="mui-table-view-cell footer">
           <div class="logo"><span class="mui-icon myicon myicon-setting-logo"></span></div>
           <div class="version">{{ appVersion }}</div>

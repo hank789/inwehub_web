@@ -27,7 +27,7 @@
 							  <use xlink:href="#icon-fenxiang"></use>
 							</svg>
 							<span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
-							
+
 						</div>
 					</div>
 
@@ -131,6 +131,16 @@
 					</svg>
 					<i class="bot"></i>
 				</li>
+        <li @tap.stop.prevent="$router.pushPlus('/my/onlookers')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodeshoucang"></use>
+          </svg>
+          <span>我的收藏</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
 				<li @tap.stop.prevent="$router.pushPlus('/feedback')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-wodefankuijianyi"></use>
@@ -164,7 +174,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-    import userAbility from '../../utils/userAbility';
+  import userAbility from '../../utils/userAbility';
 
 	export default {
 		data() {
@@ -258,7 +268,7 @@
 			          this.$router.push('/expert/apply/success?type=0');
 			          break;
 			      }
-               
+
 			},
 			getNumbers: function(number) {
 				var html = '';
@@ -312,7 +322,7 @@
 					this.show_my_wallet = user.info.show_my_wallet;
 					userAbility.newbieTask(this);
 				}));
-				
+
 			}
 		},
 		created() {
@@ -330,12 +340,12 @@
 		activated: function() {
 			console.log('activated');
 			this.initData();
-			
+
 		},
 		mounted() {
 //			mui.waiting();
 			//领取新手任务；
-//      		userAbility.newbieTask(this); 	
+//      		userAbility.newbieTask(this);
 		}
 	}
 </script>

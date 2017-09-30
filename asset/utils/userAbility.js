@@ -90,6 +90,52 @@ var userAbility = () => {
   };
 
   /**
+   * 跳转到问答社区
+   */
+  var jumpToAskCommunity = (context) => {
+
+    var userInfo = getLocalUserInfo();
+
+    if (userInfo.user_level >= 2) {
+      router.pushPlus('/askCommunity/majors');
+    } else {
+      var dialog = getDialogObj(context);
+      if (dialog) {
+        dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+          alertSimple(html, '查看等级详情', (num) => {
+            if (num.index === 0) {
+              router.pushPlus('/my/Growth');
+            }
+          }, true);
+        });
+      }
+    }
+  };
+
+  /**
+   * 跳转到问答社区具体问答详情页
+   */
+  var jumpToAskCommunityDetail = (context, id) => {
+
+    var userInfo = getLocalUserInfo();
+
+    if (userInfo.user_level >= 2) {
+      router.pushPlus('/askCommunity/major/' + id,'list-detail-page' ,true,'pop-in','hide',true);
+    } else {
+      var dialog = getDialogObj(context);
+      if (dialog) {
+        dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+          alertSimple(html, '查看等级详情', (num) => {
+            if (num.index === 0) {
+              router.pushPlus('/my/Growth');
+            }
+          }, true);
+        });
+      }
+    }
+  };
+
+  /**
    * 跳转到活动报名
    */
   var jumpToApplyActivity = (context, id) => {
@@ -165,14 +211,21 @@ var userAbility = () => {
         var dialogObj = getDialogObj(context);
         if (dialogObj) {
           dialogObj.getHtml('p-task', {level: userInfo.user_level}, (html) => {
-            alertZoom(html, (num) => { postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
-              var code = response.data.code;
-              //如果请求不成功提示信息 并且返回上一页；
-              if(code !== 1000) {
-                return;
+            alertZoom(html, (num) => {
+              postRequest(`activity/getCoupon`, {coupon_type:1}).then(response => {
+                var code = response.data.code;
+                //如果请求不成功提示信息 并且返回上一页；
+                if(code !== 1000) {
+                  return;
+                }
+                localEvent.setLocalItem("num"+mobile, {value: '1'});
+              });
+              if (window.mixpanel.track) {
+                window.mixpanel.track(
+                  'inwehub:newbie:dialog',
+                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": 'newbie-dialog', "page_title": "新手任务弹窗"}
+                );
               }
-              localEvent.setLocalItem("num"+mobile, {value: '1'});
-            });
             }, false);
           });
         }
@@ -219,6 +272,8 @@ var userAbility = () => {
     jumpToAddArticle: jumpToAddArticle,
     jumpToApplyActivity: jumpToApplyActivity,
     jumpToApplyOpportunity:jumpToApplyOpportunity,
+    jumpToAskCommunity: jumpToAskCommunity,
+    jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
     newbieTask: newbieTask,
     perfectCard:perfectCard

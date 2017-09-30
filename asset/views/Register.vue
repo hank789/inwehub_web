@@ -572,7 +572,7 @@
                   window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
                 }
               }
-              this.$router.pushPlus('/my',true,'none','none',true,true);
+              this.$router.pushPlus('/my','',true,'none','none',true,true);
             }));
           })
           .catch(({response: {data = {}} = {}}) => {

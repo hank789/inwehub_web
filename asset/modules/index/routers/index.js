@@ -39,7 +39,7 @@ router.pushReadHubPage = function (url) {
   }
 }
 
-router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false, reload = false) {
+router.pushPlus = function (url, id = '', autoShow=true, aniShow='pop-in', popGesture='hide', forceWebView = false, reload = false) {
   console.log('pushPlusUrl:'+url);
   var footerTab = ['/discover','/home','/task','/my'];
 
@@ -76,11 +76,19 @@ router.pushPlus = function (url, autoShow=true, aniShow='pop-in', popGesture='hi
           nextUrl = location.protocol + '//' + window.location.host + '/' + 'index.html#' + url;
         }
     }
-    var id = nextUrl;
+    if (!id) {
+      id = nextUrl;
+    }
     //底部4个tab的页面默认为主页
     var urlSplit = url.split('?',1);
     if (footerTab.indexOf(urlSplit[0]) >=0){
       id = plus.runtime.appid;
+    } else if (id === nextUrl){
+      urlSplit = url.split('/');
+      //判断是否列表页面
+      if (urlSplit[urlSplit.length-1] > 0) {
+        id = 'list-detail-page';
+      }
     }
 
     console.log('pushPlusUrl-Webview:' + nextUrl);

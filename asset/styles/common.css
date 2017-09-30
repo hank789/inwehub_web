@@ -7,6 +7,7 @@ body{
   font-size: 16px;
 
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   /*background: transparent !important;*/
 }
 
@@ -39,6 +40,7 @@ p{
 
 body{
   color:#3f3f3f;
+  background-color: #fff;
 }
 
 a{
@@ -277,13 +279,13 @@ input, textarea, select{
   background: url("../statics/images/icon-position.png");
 }
 
-.myicon-askDetailHeart{
+/*.myicon-askDetailHeart{
   background: url("../statics/images/icon_ask_detail_heart.png");
-}
+}*/
 
-.myicon-askDetailJia{
+/*.myicon-askDetailJia{
   background: url("../statics/images/icon_ask_detail_jia.png");
-}
+}*/
 
 .myicon-project3{
   background: url("../statics/images/icon_project3.png");
@@ -373,8 +375,8 @@ input[type='button'], input[type='submit'], input[type='reset'], button, .mui-bt
 }
 
 input[type='submit'], .mui-btn-primary, .mui-btn-blue{
-  border:1px solid #4990E2;
-  background-color: #4990E2;
+  border:1px solid #03aef9;
+  background-color: #03aef9;
 }
 
 .mui-btn-outlined {
@@ -896,6 +898,7 @@ input.upload-file[type=file]{
   width:100%;
   bottom:0;
   padding-top:0;
+  overflow: scroll;
 }
 
 .mui-content.absolute .menu ~ #pullrefresh{
@@ -1181,3 +1184,19 @@ input.upload-file[type=file]{
 }
 /** 弹窗结束 **/
 
+
+.river{
+  height:10px;
+  background: #f3f4f6;
+}
+
+
+.mui-btn-grey{
+  background:#b4b4b6;
+  color:#fff;
+}
+
+
+.noAfter:after{
+    display: none;
+}

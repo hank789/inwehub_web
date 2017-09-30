@@ -27,7 +27,7 @@ const routes = [{
           checkUpdate();
         });
 				var lauch = localEvent.getLocalItem('lauchFlag');
-				if(!lauch.showGuide && 1 === 2) {
+				if(!lauch.showGuide) {
 					mui.plusReady(function() {
 						plus.navigator.setFullscreen(true);
 						next({
@@ -61,9 +61,9 @@ const routes = [{
 	},
 	{ //首页活动列表页
 		path: '/home/ActiveList',
-    name: 'home-ActiveList',
+    name: 'activity-list',
     meta: {
-			title: '活动及机遇',
+			title: '活动列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/ActiveList.vue'),
@@ -73,9 +73,9 @@ const routes = [{
 	},
 	{ //首页机遇列表页
 		path: '/home/OpportunityList',
-    name: 'home-OpportunityList',
+    name: 'opportunity-list',
     meta: {
-			title: '活动及机遇',
+			title: '机遇列表',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/OpportunityList.vue'),
@@ -85,12 +85,36 @@ const routes = [{
 	},
 	{ //首页报名页面
 		path: '/EnrollmentStatus/:id',
-    name: 'home-EnrollmentStatus.vue',
+    name: 'activity-detail',
     meta: {
-			title: '活动及机遇',
+			title: '活动详情',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/Activity/EnrollmentStatus.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //问答社区-专业回答
+		path: '/askCommunity/majors',
+    name: 'askCommunity-major-list',
+    meta: {
+			title: '问答社区',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/AskCommunity/MajorList.vue'),
+		beforeEnter: (to, from, next) => {
+			requestAuth(to, from, next)
+		}
+	},
+	{ //问答社区-专业回答-问答详情；
+		path: '/askCommunity/major/:id',
+    name: 'ask-major-detail',
+    meta: {
+			title: '问答社区',
+			wechatHideHeader: false
+		},
+		component: require('../../../views/AskCommunity/MajorDetail.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
@@ -145,6 +169,18 @@ const routes = [{
 			mui.plusReady(function() {
 				checkUpdate();
 			});
+			requestAuth(to, from, next)
+		}
+	},
+	{ // 我的围观
+		path: '/my/onlookers',
+    name: 'my-onlookers',
+    meta: {
+			title: '我的围观',
+			wechatHideHeader: true
+		},
+		component: require('../../../views/Account/Onlookers.vue'),
+		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}
 	},
@@ -243,17 +279,30 @@ const routes = [{
 	},
 	{ // 共享个人名片
 		path: '/share/resume',
-    name: 'share-resume',
+    name: 'share-resume-old',
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '分享名片',
-			wechatHideHeader: true
+			wechatHideHeader: false
 		},
 		beforeEnter: (to, from, next) => {
 			next();
 		},
 
 	},
+  { // 共享个人名片
+    path: '/share/resume/:id',
+    name: 'share-resume',
+    component: require('../../../views/Account/Resume.vue'),
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: false
+    },
+    beforeEnter: (to, from, next) => {
+      next();
+    },
+
+  },
 
 	{ // 个人信息
 		path: '/my/info/job/:id',
@@ -744,7 +793,7 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks',
-    name: 'ask-list',
+    name: 'ask-list-unfinish',
     component: require('../../../views/Ask/AskList.vue'),
 		meta: {
 			title: '我的提问',
@@ -760,7 +809,7 @@ const routes = [{
 	},
 	{ //asks
 		path: '/asks/finish',
-    name: 'ask-finish',
+    name: 'ask-list-finished',
     component: require('../../../views/Ask/AskListFinish.vue'),
 		meta: {
 			title: '我的提问',
@@ -772,7 +821,7 @@ const routes = [{
 	},
 	{ //answer
 		path: '/answers',
-    name: 'answer-list',
+    name: 'answer-list-unfinish',
     component: require('../../../views/Answer/AnswerList.vue'),
 		meta: {
 			title: '我的回答',
@@ -786,6 +835,22 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { //answer
+    path: '/answers/finished',
+    name: 'answer-list-finished',
+    component: require('../../../views/Answer/AnswerListFinished.vue'),
+    meta: {
+      title: '我的回答',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
+      requestAuth(to, from, next)
+    }
+  },
 	{ //answer-detail
 		path: '/answer/:id',
     name: 'answer-detail',

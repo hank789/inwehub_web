@@ -20,7 +20,6 @@ import App from './App';
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
-
 if (typeof(isLocalEnv) === "undefined") {
     window.isLocalEnv = false;
 } else {
@@ -40,6 +39,8 @@ Raven
     .install();
 }
 
+var infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll);
 
 //正在加载的图片；
 import loading_gif from './../../statics/images/loading.gif';
@@ -192,6 +193,22 @@ Vue.mixin({
     hideHeaderHandler(this, 'mounted');
   },
   created(){
+
+    mui.plusReady(function() {
+      var current_webview = plus.webview.currentWebview();
+      var index = window.location.href.indexOf('#');
+      if (index !== -1) {
+        var url = window.location.href.slice(index+1);
+        console.log('bindCurrentUrl:' + url);
+        current_webview.setStyle({
+          additionalHttpHeaders:{
+            url:url
+          }
+        });
+      }
+    });
+
+
     //当使用webview方式打开的话，会显示webview，并绑定侧滑事件
     if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
       showWebview();
@@ -203,7 +220,16 @@ Vue.mixin({
 mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
-    mui.muiOldBack();
+    var current_webview = plus.webview.currentWebview();
+    var need_hide = ['list-detail-page'];
+
+    if (need_hide.indexOf(current_webview.id) !== -1) {
+      current_webview.hide();
+    } else if (mui.os.ios){
+      mui.muiOldBack();
+    } else {
+      router.go(-1);
+    }
   } else {
     router.go(-1);
   }

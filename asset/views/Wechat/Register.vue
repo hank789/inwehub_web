@@ -145,7 +145,7 @@
       },
       getOpenId(){
         let openid = this.$route.query.openid;
-        let redirect = this.$route.query.redirect?this.$route.query.redirect:'/home';
+        let redirect = this.$route.query.redirect?this.$route.query.redirect:'/my';
         this.redirect = redirect;
         if (!openid) {
           this.$store.dispatch(NOTICE, cb => {

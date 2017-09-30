@@ -7,8 +7,20 @@
     </header>
 
     <div class="mui-content list-empty" v-if="nothing == 1">
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers/finished');">
+            已完成
+          </a>
+        </div>
+      </div>
+
+      <div class="mui-table-view list-ask-item emptyListWrapper">
+        <div class="mui-table-view-cell ">
           <div class="">
             <div class="title">暂无回答</div>
             <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
@@ -19,6 +31,17 @@
     </div>
 
     <div class="mui-content absolute">
+
+      <div class="menu">
+        <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+          <a class="mui-control-item mui-active" @tap.stop.prevent="">
+            未完成
+        </a>
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/answers/finished');">
+            已完成
+          </a>
+        </div>
+      </div>
 
     <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
     <div class="mui-scroll">
@@ -31,15 +54,11 @@
             <div class="site-desc mui-ellipsis-2">
               {{ answer.description }}
             </div>
-            <div class="site-desc site-descSub mui-ellipsis-3" v-show="answer.answer_content.length">
-              {{ answer.answer_content }}
-            </div>
             <div class="person">
               <div class="mui-media-body">
                 <div>
-                  <span>{{ answer.status_description }}</span>
-                  ·
-              <span class="time"><timeago :since="timeago(answer.created_at)"></timeago></span>
+                  <span :class="'label label_' + answer.status">{{ answer.status_description }}</span>
+                  <span class="time">{{ answer.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
                 </div>
               </div>
             </div>
@@ -173,7 +192,7 @@
       },
       getPrevList(){
 
-        postRequest(`answer/myList`, {}).then(response => {
+        postRequest(`answer/myList`, {type:1}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -190,7 +209,7 @@
       },
       getNextList() {
 
-        postRequest(`answer/myList`, {bottom_id: this.bottomId}).then(response => {
+        postRequest(`answer/myList`, {bottom_id: this.bottomId, type:1}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -220,8 +239,10 @@
 
 
 <style scoped>
+  .list-answer{
+    margin-top:5px;
+  }
   .list-answer .list-answer-item{
-    margin-top:10px;
     position:relative;
     line-height: 40px;
   }
@@ -239,6 +260,8 @@
   .list-answer .list-answer-item .time{
     color:#9B9B9B;
     font-size:12px;
+    float: right;
+    margin-right: 10px;
   }
 
   .list-answer .username{
@@ -263,7 +286,6 @@
 
 
   .list-answer .site-desc{
-    margin-top:10px;
     padding-left: 10px;
     line-height: 22px;
     color:#101010;
@@ -332,4 +354,65 @@
   }
 
 
+  .menu{
+    position: relative;
+    z-index:7;
+  }
+
+  .list-empty .menu{
+    margin-bottom:0px;
+  }
+
+  .mui-segmented-control .mui-control-item {
+    line-height: 50px;
+    font-size:14px;
+  }
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    position: relative;
+    color:#03aef9;
+    border: none;
+  }
+
+  .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
+    position: absolute;
+    width: 28px;
+    bottom: 0;
+    left: 50%;
+    margin-left: -14px;
+    height: 2px;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
+  }
+
+  .mui-segmented-control{
+    background: #f3f4f6;
+  }
+
+  #pullrefresh{
+    background: #fff;
+  }
+
+  .mui-table-view:before{
+    display: none;
+  }
+
+  .mui-table-view:after{
+    border:none;
+    left:18px;
+    right:18px;
+  }
+
+  .label{
+    display: inline-block;
+    background:#fcc816;
+    border-radius:50px;
+    color:#fff;
+    padding:0 9px;
+  }
+
+  .emptyListWrapper{
+    padding-top:0px;
+  }
 </style>

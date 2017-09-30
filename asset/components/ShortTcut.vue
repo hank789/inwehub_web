@@ -131,8 +131,8 @@
 
   #short_all p {
     position: absolute;
-    bottom: 38px;
-    left: 48%;
+    bottom: 14px;
+    left: 47.2%;
     font-size: 17px;
     color: #808080;
     animation: rote 0.5s infinite;
@@ -144,7 +144,7 @@
       transform: rotateZ(0deg);
     }
     to {
-      transform: rotateZ(180deg);
+      transform: rotateZ(360deg);
     }
   }
 
