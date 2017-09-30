@@ -74,7 +74,7 @@
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                     </svg>
                   </p>
-                  <p class="mui-ellipsis">回答者：{{hot.answer_username}}</p>
+                  <p class="mui-ellipsis">回答者：{{list.answer_username}}</p>
                   <p class="mui-ellipsis">{{list.answer_user_title}}</p>
                   <p class="mui-ellipsis">{{list.answer_user_company}}</p>
                 </div>
