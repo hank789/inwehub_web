@@ -31,6 +31,7 @@
 <script type="text/javascript">
 
   import Share from '../utils/share';
+  import { postRequest } from '../utils/request';
 
   export default {
     data () {
@@ -80,7 +81,7 @@
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
         };
-        
+
         Share.bindShare(
           this,
           data,
@@ -112,8 +113,19 @@
         this.hide();
       },
       successCallback(){
-        mui.toast('分享成功');
+        postRequest(`share/wechat/success`, {
+          'target': this.link,
+          'title' : this.title
+        }).then(response => {
 
+        });
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:success',
+            {"app": "inwehub", "user_device": getUserAppDevice(), "page": this.link, "page_name": 'share', "page_title": this.title, "referrer_page": ''}
+          );
+        }
       },
       failCallback(error){
         console.log(JSON.stringify(error));
