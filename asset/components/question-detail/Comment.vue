@@ -98,9 +98,11 @@
           mui('#commentWapper').popover('toggle');
           setTimeout(() => {
             var obj = document.querySelector('.mui-backdrop');
-            obj.addEventListener('tap', function(e) {
-              obj.remove();
-            });
+            if (obj) {
+              obj.addEventListener('tap', function(e) {
+                obj.remove();
+              });
+            }
             document.querySelector('.mui-content').appendChild(obj);
           }, 150);
         }, 150);
