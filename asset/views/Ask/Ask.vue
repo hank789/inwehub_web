@@ -44,7 +44,7 @@
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="userAbility.jumpToAskCommunity(this)">
+                  @tap.stop.prevent="toAskCommunity">
             去问答社区看看
             </button>
           </div>
@@ -184,6 +184,9 @@
     methods: {
       toggleHide(){
           this.hide = !this.hide;
+      },
+      toAskCommunity() {
+        userAbility.jumpToAskCommunity(this);
       },
       helpWrapper(){
 

@@ -122,7 +122,7 @@
 			<div class="hotAnswer">
 				<div class="hotAnswer_t">
 					<p>热门问答</p>
-					<p @tap.stop.prevent="userAbility.jumpToAskCommunity(this)">进入社区</p>
+					<p @tap.stop.prevent="toAskCommunity">进入社区</p>
 					<i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
@@ -276,6 +276,9 @@
 		methods: {
       toMajorDetail(id) {
         userAbility.jumpToAskCommunityDetail(this,id);
+      },
+      toAskCommunity() {
+        userAbility.jumpToAskCommunity(this);
       },
 			swipperClick(swiper, event) {
 				var parent = queryParent(event.target, 'swiper-slide');
