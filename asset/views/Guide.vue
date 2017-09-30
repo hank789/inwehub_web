@@ -277,7 +277,7 @@
   .guide{
     background-repeat: no-repeat;
     background-position: center 24%;
-    background-size:90%;
+    background-size:contain;
     background-color: #f2fbfe;
   }
 
@@ -286,7 +286,7 @@
   }
 
   .guide-1{
-    background-image:url(../statics/images/guide_2.png);
+    background-image:url(../statics/images/guide_02.png);
     background-color: #646668;
   }
 
