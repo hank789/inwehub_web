@@ -44,7 +44,7 @@
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/askCommunity/majors')">
+                  @tap.stop.prevent="userAbility.jumpToAskCommunity(this)">
             去问答社区看看
 
           </button>
@@ -115,6 +115,7 @@
   import {alertFenhongxize} from '../../utils/dialogList';
   import localEvent from '../../stores/sessionStorage';
   import {alertSimple, getDialogObj} from '../../utils/dialog';
+  import userAbility from '../../utils/userAbility';
 
   const Ask = {
     data: () => ({
