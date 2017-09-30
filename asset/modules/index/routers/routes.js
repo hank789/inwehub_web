@@ -27,7 +27,7 @@ const routes = [{
           checkUpdate();
         });
 				var lauch = localEvent.getLocalItem('lauchFlag');
-				if(!lauch.showGuide && 1 === 2) {
+				if(!lauch.showGuide) {
 					mui.plusReady(function() {
 						plus.navigator.setFullscreen(true);
 						next({

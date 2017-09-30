@@ -2,51 +2,40 @@
   <div>
     <div id="slider" class="mui-slider mui-fullscreen" style="background-color: black;">
       <div class="mui-slider-group">
+
+
+
+
         <!-- 第一张 -->
-        <div class="mui-slider-item">
-          <div class="item-logo" style="background-color: #D74B28">
-            <a href="#">Inwehub</a>
-            <div class="animate guide-show">
-              <h2 class="animated bounceInDown">专业</h2>
-              <li class="animated bounceInLeft">专业</li>
-              <li class="animated bounceInRight">专业</li>
-            </div>
-          </div>
+        <div class="mui-slider-item guide guide-0">
+
         </div>
         <!-- 第二张 -->
-        <div class="mui-slider-item">
-          <div class="item-logo" style="background-color: #02C1ED;">
-            <a href="#">Inwehub</a>
-            <div id="tips-2" class="animate mui-hidden">
-              <h2 class="animated bounceInDown">专业</h2>
-              <li class="animated bounceInLeft">专业</li>
-              <li class="animated bounceInRight">专业</li>
-            </div>
-          </div>
+        <div class="mui-slider-item guide guide-1">
+
         </div>
         <!-- 第三张 -->
-        <div class="mui-slider-item">
-          <div class="item-logo" style="background-color: #67C962;">
-            <a href="#">Inwehub</a>
-            <div id="tips-3" class="animate mui-hidden">
-              <h2 class="animated bounceInDown">专业</h2>
-              <li class="animated bounceInLeft">专业</li>
-              <li class="animated bounceInRight">专业</li>
-            </div>
-          </div>
+        <div class="mui-slider-item guide guide-2">
         </div>
         <!-- 第四张 -->
-        <div class="mui-slider-item">
-          <div class="item-logo" style="background-color: #FCD208;">
-            <a href="#">Inwehub</a>
-            <div class="animate">
-              <button id='close' class="mui-btn mui-btn-warning mui-btn-outlined">立即体验</button>
-            </div>
+        <div class="mui-slider-item guide guide-3">
+
+        </div>
+
+        <!-- 第五张 -->
+        <div class="mui-slider-item guide guide-4">
+          <div class="logo">
+            <div class="title">最具品质的咨询顾问社区</div>
+          </div>
+          <div class="animate">
+            <div id='close' class="mui-btn mui-btn-warning mui-btn-outlined">开启</div>
           </div>
         </div>
+
       </div>
       <div class="mui-slider-indicator">
         <div class="mui-indicator mui-active"></div>
+        <div class="mui-indicator"></div>
         <div class="mui-indicator"></div>
         <div class="mui-indicator"></div>
         <div class="mui-indicator"></div>
@@ -75,16 +64,16 @@
       }, false);
 
       //图片切换时，触发动画
-      document.querySelector('.mui-slider').addEventListener('slide', function (event) {
-        var index = event.detail.slideNumber + 1;
-        if (index == 2 || index == 3) {
-          var item = document.getElementById("tips-" + index);
-          if (item.classList.contains("mui-hidden")) {
-            item.classList.remove("mui-hidden");
-            item.classList.add("guide-show");
-          }
-        }
-      });
+//      document.querySelector('.mui-slider').addEventListener('slide', function (event) {
+//        var index = event.detail.slideNumber + 1;
+//        if (index == 2 || index == 3) {
+//          var item = document.getElementById("tips-" + index);
+//          if (item.classList.contains("mui-hidden")) {
+//            item.classList.remove("mui-hidden");
+//            item.classList.add("guide-show");
+//          }
+//        }
+//      });
     }
   }
 </script>
@@ -92,13 +81,13 @@
 <style scoped="scoped">
   #close {
     position: absolute;
-    width: 160px;
+    width: 156px;
     left: 50%;
     margin-left: -80px;
     bottom: 15%;
     padding: 10px;
-    color: #fff;
-    border-color: #fff;
+    color: #03aef9;
+    border-color: #03aef9;
   }
 
   .item-logo {
@@ -127,7 +116,7 @@
   .animate {
     position: absolute;
     left: 0;
-    bottom: 15%;
+    top: 60%;
     width: 100%;
     color: #fff;
     display: -moz-box;
@@ -263,5 +252,69 @@
       -webkit-transform: none;
       transform: none;
     }
+  }
+
+  .mui-slider-indicator .mui-indicator{
+    background: #dcdcdc;
+    box-shadow:none;
+    width:9px;
+    height:9px;
+    margin:1px 1px;
+  }
+
+  .mui-slider-indicator .mui-active.mui-indicator{
+    background: #41cff9;
+  }
+
+  .mui-slider-indicator{
+    bottom:39px;
+  }
+
+  .guide{
+    background-repeat: no-repeat;
+    background-position: center 24%;
+    background-size:90%;
+    background-color: #f2fbfe;
+  }
+
+  .guide-0{
+    background-image:url(../statics/images/guide_01.png);
+  }
+
+  .guide-1{
+    background-image:url(../statics/images/guide_2.png);
+    background-color: #646668;
+  }
+
+  .guide-2{
+    background-image:url(../statics/images/guide_03.png);
+    background-color: #f2fbfe;
+  }
+
+  .guide-3{
+    background-image:url(../statics/images/guide_04.png);
+    background-color: #646668;
+  }
+
+  .guide-4 .logo{
+    margin-left:-117px;
+    position: absolute;
+    left:50%;
+    top:20%;
+    width:234px;
+    height:133px;
+    background-image:url(../statics/images/guide_05.png);
+    background-color: #f2fbfe;
+    background-size:92%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .guide-4 .logo .title{
+    font-size:15px;
+    color:#323436;
+    text-align: center;
+    position: absolute;
+    bottom:7px;
+    width: 100%;
   }
 </style>
