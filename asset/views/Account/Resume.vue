@@ -5,7 +5,7 @@
       <h1 class="mui-title">个人名片</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content resumeWrapper" v-show="!loading">
 
       <div class="erweimaWrapper" v-show="showQrCode" @tap.stop.prevent="toggleQrCode">
         <div class="header">
@@ -40,7 +40,13 @@
       </div>
 
       <div class="professor">
-
+        <Share
+          :title="shareOptions.title"
+          :link="shareUrl"
+          :content="shareOptions.content"
+          :imageUrl="shareOptions.imageUrl"
+          :thumbUrl="shareOptions.thumbUrl"
+        ></Share>
       </div>
 
       <div class="basic">
@@ -119,6 +125,9 @@
           <span>{{ resume.info.description }}</span>
         </div>
       </div>
+
+
+
     </div>
 
     <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
@@ -214,13 +223,7 @@
 
     </button>
 
-    <Share
-      :title="shareOptions.title"
-      :link="shareUrl"
-      :content="shareOptions.content"
-      :imageUrl="shareOptions.imageUrl"
-      :thumbUrl="shareOptions.thumbUrl"
-    ></Share>
+
 
   </div>
 </template>

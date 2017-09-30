@@ -155,12 +155,22 @@
     color: #fff;
   }
 
+  .resumeWrapper .shareBtn{
+    position: absolute;
+    top: 24px;
+    font-size: 22px;
+    right: 31px;
+    color: #808080;
+  }
+
   .mui-content {
     padding: 200px;
     text-align: center;
   }
 
   .shareWrapper {
+    text-align: left;
+
     .title {
       background: #ececee;
       text-align: center;
