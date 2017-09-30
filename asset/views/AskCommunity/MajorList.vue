@@ -77,7 +77,7 @@
                     </svg>
                   </p>
                    <p class="mui-ellipsis">
-                  <span>回答者：{{hot.answer_username}}</span>
+                  <span>回答者：{{list.answer_username}}</span>
                   <span>{{list.answer_user_title}}</span>
                   <span>{{list.answer_user_company}}</span>
                   </p>
