@@ -101,7 +101,7 @@
               popGesture: 'none',
               top: '0px',
               dock: 'top',
-              bottom: '75px',
+              bottom: '50px',
               bounce:'none'},
             extras: {preload: true}
           });
