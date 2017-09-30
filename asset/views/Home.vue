@@ -618,7 +618,7 @@
 	.home-expert {
 		width: 100%;
 		height: 44px;
-		margin-bottom: 3px;
+		margin-bottom: 10px;
 		background: #FFFFFF;
 		position: relative;
 	}
@@ -1052,7 +1052,7 @@
 
 	.hotAnswer_t p:nth-of-type(1) {
 		float: left;
-		
+
 		line-height: 44px;
 		font-size: 16px;
 		color: #444444;
@@ -1060,7 +1060,7 @@
 
 	.hotAnswer_t p:nth-of-type(2) {
 		float: right;
-		
+
 		line-height: 44px;
 		font-size: 14px;
 		color: #03aef9;
@@ -1114,7 +1114,7 @@
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.hotAnswer_d p:nth-child(2) {
 		/*width: 340px;*/
 		height:18px;
@@ -1293,7 +1293,7 @@
 		.hotAnswer_d p:nth-child(2) {
 		width: 256px;
 		}
-		
+
 	}
 
 	@media screen and (min-width: 375px) {
@@ -1318,6 +1318,6 @@
 		.hotAnswer_d p:nth-child(2) {
 		width: 340px;
 		}
-		
+
 	}
 </style>
