@@ -129,11 +129,11 @@
             this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
           }
 
+          this.ask = response.data.data;
+          this.loading = 0;
+
           successCallback();
 
-          this.ask = response.data.data;
-
-          this.loading = 0;
         });
       }
     },

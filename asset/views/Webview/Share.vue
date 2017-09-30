@@ -41,10 +41,12 @@
 <script>
   import localEvent from '../../stores/localStorage';
   import Share from '../../utils/share';
+  import { postRequest } from '../../utils/request';
 
   export default {
     data: () => ({
       title: '',
+      link: ''
     }),
     created () {
 
@@ -52,6 +54,7 @@
     methods: {
       initWebview(page_tile,share_title,share_link,share_content,share_imageUrl,share_thumbUrl) {
         this.title =  page_tile;
+        this.link = share_link;
         if (mui.os.plus) {
             var data = {
               title: share_title,
@@ -109,7 +112,19 @@
         this.hide();
       },
       successCallback(){
-        mui.toast('分享成功');
+        postRequest(`share/wechat/success`, {
+          'target': this.link,
+          'title' : this.title
+        }).then(response => {
+
+        });
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:success',
+            {"app": "inwehub", "user_device": getUserAppDevice(), "page": this.link, "page_name": 'share', "page_title": this.title, "referrer_page": ''}
+          );
+        }
 
       },
       failCallback(error){
