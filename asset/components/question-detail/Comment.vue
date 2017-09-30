@@ -4,13 +4,15 @@
     <div class="buttonWrapper">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
               @tap.stop.prevent="comment()">点击评价，分享获取分红
-        </button>
+
+      </button>
     </div>
 
     <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
       <div class="commentHeader">
         <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">关闭</button>
         评价
+
       </div>
       <div class="form form-realAnswer">
 
@@ -27,7 +29,8 @@
         <div class="buttonWrapper" v-show="!commentState">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @click.prevent="submitComment">匿名提交
-            </button>
+
+          </button>
         </div>
 
         <div class="commentDesc" v-show="!commentState">回答者将不会看到您的评价！</div>
@@ -53,8 +56,8 @@
     data () {
       return {
         commentState: false, //是否已评价
-        showRating:false,
-        rateStar:5,
+        showRating: false,
+        rateStar: 5,
         starDesc: '评价会让我们做的更好',
         description: '',
         descriptionPlaceHolder: '在这里留下你的反馈',
@@ -83,12 +86,23 @@
         this.comment();
 
         if (this.commentState) {
-            this.$emit('finish');
+          this.$emit('finish');
         }
       },
       comment(){
+        var obj = document.querySelector('.mui-backdrop');
+        if (obj) {
+          obj.remove();
+        }
         setTimeout(() => {
           mui('#commentWapper').popover('toggle');
+          setTimeout(() => {
+            var obj = document.querySelector('.mui-backdrop');
+            obj.addEventListener('tap', function(e) {
+              obj.remove();
+            });
+            document.querySelector('.mui-content').appendChild(obj);
+          }, 150);
         }, 150);
       },
       setRating: function (rating) {
@@ -171,8 +185,6 @@
     padding: 15px;
     background: #fff;
   }
-
-
 
   .mui-btn-block {
     margin-bottom: 0;
