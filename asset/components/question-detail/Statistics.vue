@@ -19,7 +19,7 @@
       <span>{{ seeNum }}</span>
     </div>
 
-    <div class="item active" @tap.stop.prevent="support()">
+    <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
