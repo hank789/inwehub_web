@@ -712,6 +712,7 @@
 	.freeAskWrapper {
 		position: relative;
 		height: 48px;
+    margin-top: 12px;
 	}
 
 	.freeAsk {
