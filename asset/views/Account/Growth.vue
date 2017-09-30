@@ -31,7 +31,7 @@
 						<i></i>
 						<span>平台价值贡献，后续开放积分兑换礼品等活动</span>
 					</p>
-				</div>	
+				</div>
 			</div>
 			<!--我的等级-->
 			<div class="Grade">
@@ -63,8 +63,8 @@
 							<span>L4</span>
 							<span>L5</span>
 						</p>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -91,7 +91,7 @@
 							<p>专业问答</p>
 							<p class="text_yellow" v-if="user_level >='1'">已获取</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 					    <li>
 							<svg class="icon yellow" aria-hidden="true"  v-if="user_level >='1'">
@@ -103,7 +103,7 @@
 							<p>评论互动</p>
 							<p class="text_yellow" v-if="user_level >='1'">已获取</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 						 <li v-if = "!newbie_unfinish_tasks.ask">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
@@ -115,7 +115,7 @@
 							<p>问答任务</p>
 							<p  class="text_blue" v-if="user_level >='1'">待完成</p>
 							<p v-else>升级解锁</p>
-							
+
 						</li>
 						 <li v-if = "!newbie_unfinish_tasks.readhub_comment">
 							<svg class="icon blue" aria-hidden="true"  v-if="user_level >='1'">
@@ -124,12 +124,12 @@
 							<svg class="icon" aria-hidden="true" v-else>
 							  <use xlink:href="#icon-hudongrenwu"></use>
 							</svg>
-							<p>互动任务</p>   
+							<p>互动任务</p>
 							<p class="text_blue" v-if="user_level >='1'">待完成</p>
 							<p v-else>升级解锁</p>
 						</li>
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -159,9 +159,20 @@
 							<p class="text_yellow" v-if="user_level >='2'">已获取</p>
 							<p v-else>升级解锁</p>
 						</li>
-						 
+            <li>
+              <svg class="icon yellow" aria-hidden="true" v-if="user_level >='2'">
+                <use xlink:href="#icon-wendashequ"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true" v-else>
+                <use xlink:href="#icon-wendashequ"></use>
+              </svg>
+              <p>问答社区</p>
+              <p class="text_yellow" v-if="user_level >='2'">已获取</p>
+              <p v-else>升级解锁</p>
+            </li>
+
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -180,17 +191,7 @@
 							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
 							<p v-else>升级解锁</p>
 						</li>
-						 <li>
-						 	<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
-							  <use xlink:href="#icon-wendashequ"></use>
-							</svg>
-							<svg class="icon" aria-hidden="true" v-else>
-							  <use xlink:href="#icon-wendashequ"></use>
-							</svg>
-							<p>问答社区</p>
-							<p class="text_yellow" v-if="user_level >='3'">已获取</p>
-							<p v-else>升级解锁</p>
-						</li>
+
 						 <li>
 						 	<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
 							  <use xlink:href="#icon-xiangmujiyu"></use>
@@ -214,7 +215,7 @@
 							<p v-else>升级解锁</p>
 						</li>
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
@@ -237,26 +238,26 @@
 							<svg class="icon yellow" aria-hidden="true" v-if="user_level >='4'">
 							  <use xlink:href="#icon-gengduozhuanjia"></use>
 							</svg>
-							<svg class="icon" aria-hidden="true" v-else> 
+							<svg class="icon" aria-hidden="true" v-else>
 							  <use xlink:href="#icon-gengduozhuanjia"></use>
 							</svg>
 							<p>更多专家</p>
 							<p class="text_yellow" v-if="user_level >='4'">已获取</p>
 							<p v-else>升级解锁</p>
 						</li>
-						
+
 					</ul>
-					
+
 				</div >
 				<div class="power">
 					<p>
 					   <span :class="{bg:user_level >= 5}">5</span>
 					   <span>L5（成长值满100000，平台定向邀请开放秘密特权)</span>
 					</p>
-					
-					
+
+
 				</div >
-				
+
 			</div>
 			<!--积分申明-->
 			<div class="instruction">
@@ -264,7 +265,7 @@
 				<p>为保证用户权益，平台可能会在一段时间内适当调整积分和等级计划。</p>
 				<p>法律允许的范围内，本公司保留对成长计划的最终解释权。</p>
 			</div>
-           
+
         </div>
         <div id="statusBarStyle" background="#FEFFFE"   bgColor="#3c3e44" mode="light"></div>
     </div>
@@ -273,7 +274,7 @@
 <script>
   import {getLocalUserInfo, getUserInfo, getUserLevelPercentage} from '../../utils/user';
   import {USERS_APPEND} from '../../stores/types';
-  
+
    var userInfo = getLocalUserInfo('UserInfo');
   export default {
     data() {
@@ -295,7 +296,7 @@
           this.user_credits =user.info.user_credits;
           this.user_coins =user.info.user_coins;
           this.user_level =user.info.user_level;
-         
+
           this.newbie_unfinish_tasks = user.info.newbie_unfinish_tasks;
           console.log(this.newbie_unfinish_task);
           this.percent = getUserLevelPercentage();
@@ -303,19 +304,19 @@
       },
       //警告框
 		warn() {
-			
+
 			var title = '<p style="font-size:16px; margin-bottom:15px">' +'获取积分提升等级解锁特权' + '</p>'
 			var font = '<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' +
 			           '<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
-			           '积极参与平台活动任务，可有效累积成长与贡献值，提升等级解锁新特权。' + 
+			           '积极参与平台活动任务，可有效累积成长与贡献值，提升等级解锁新特权。' +
 			           '</p>' +
-				'<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' + 
+				'<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' +
 				'<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
 				'常见获取积分的手段有：每日登陆并维护个人资料，完成新手任务，提交文章参与评论互动，积极提问回答问题，认证平台专家，报名活动，对接企业项目需求等。' + '</p>'+
-				'<p style="text-align: left; font-size:14px; color: #808080;">' + 
+				'<p style="text-align: left; font-size:14px; color: #808080;">' +
 				'<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">'+'</i>'+
 				'用户每次可获取的平台成长和贡献值，一般按照以上顺序及贡献程度依次增加。' + '</p>';
-				
+
 
 			var btnArray = ['取消', '确认'];
 			mui.alert(font, title, function() {}, 'div');
@@ -323,7 +324,7 @@
 
 
     },
-    mounted() { 	  
+    mounted() {
 //  console.log(userInfo.newbie_unfinish_tasks?userInfo.newbie_unfinish_tasks:"1");
 //  this.initData();
     },
@@ -350,7 +351,7 @@
 		list-style: none;
 		font-style: normal;
 	}
-	
+
 	.bot {
 		position: absolute;
 		right:0;
@@ -362,8 +363,8 @@
 		background-color: rgb(220, 220, 220);
 	}
 	.mui-content.absolute{
-  	background: #FEFFFE; 
-  	padding:0px 16px 0 16px;	
+  	background: #FEFFFE;
+  	padding:0px 16px 0 16px;
   }
   /*页面内容*/
  .integral{
@@ -452,9 +453,9 @@
     height: 196px;
  	float: right;
  	position: relative;
- 	
+
  }
- 
+
  .contribution p:nth-child(1){
  	width: 94px;
  	height: 94px;
@@ -545,7 +546,7 @@
 	color: #DCDCDC;
 	font-size: 12px;
 	margin-top: 3px;
-} 
+}
 .Prompt{
 	width: 86%;
 	height: 40px;
@@ -555,20 +556,20 @@
 	position: relative;
 }
  /*进度条*/
- 
+
 .ProgressBar{
 	width: 100%;
 	height: 40px;
 	margin-top: 6px;
 	position: relative;
 	/*background: #CCCCCC;*/
-	
-} 
+
+}
 
 .ProgressBar>div{
   width: 86%;
   height: 2px;
-  background: #7F807F;	
+  background: #7F807F;
   margin-left: 7%;
   margin-top: 15px;
 }
@@ -577,7 +578,7 @@
 	width: 25%;
 	height: 2px;
 	background: #03aef9;
-} 
+}
 .fouce{
 	width: 86%;
 	height: 2px;
@@ -586,7 +587,7 @@
 	top: -1px;
 	position: absolute;
 }
- 
+
 .fouce span{
 	display: block;
 	float: left;
@@ -595,7 +596,7 @@
 	background: #FFFFFF;
 	border-radius: 50%;
 	position: absolute;
-} 
+}
 .fouce span:nth-of-type(1){
 	left: 0;
 }
@@ -621,14 +622,14 @@
 	top: 6px;
 	position: absolute;
 }
- 
+
 .number span{
 	display: block;
 	float: left;
     color: #dcdcdc;
     font-size: 12px;
 	position: absolute;
-} 
+}
 .number span:nth-of-type(1){
 	left: 0;
 }
@@ -644,8 +645,8 @@
 .number span:nth-of-type(5){
 	left: 99%;
 }
- 
- 
+
+
  /*特权*/
  .privilege{
  	width: 100%;
@@ -673,7 +674,7 @@
 }
 .power p{
    width: 100%;
-   overflow: hidden; 
+   overflow: hidden;
    margin-bottom: 5px;
 }
 .power p span:nth-of-type(1){
@@ -735,7 +736,7 @@
 
 .powerdetail li:nth-child(1),.powerdetail li:nth-child(4){
 	margin-left: 6%;
-	
+
 }
 /****积分说明*****/
 .instruction{
@@ -746,7 +747,7 @@
 .instruction p{
 	font-size: 13px;
 	color:#808080 ;
-	
+
 }
 .instruction p:nth-of-type(1){
 	margin-top: 17px;
@@ -765,8 +766,8 @@
     font-size: 14px;
     color: #03aef9;
     margin-top: 7px;
-    
-	
+
+
 }
 .powerdetail li .yellow{
 	color:#fcc816;
@@ -782,7 +783,7 @@
     font-size: 14px;
     color: #fcc816;
     margin-top: 7px;
-	
+
 }
 
 
@@ -791,8 +792,8 @@
 .power p span.bg:nth-of-type(1){
 	background: url(../../statics/images/rank.png) no-repeat;
 	background-size: 100%;
-	
-	
+
+
 }
 
 
@@ -809,7 +810,7 @@ b {
 	line-height: 25px;
 	border-radius: 8px;
 	position: absolute;
-	
+
 }
 
 b::after {
