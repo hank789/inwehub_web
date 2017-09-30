@@ -54,6 +54,10 @@
         mui('.mui-slider').slider();
       });
 
+      mui.plusReady(function() {
+        plus.navigator.setFullscreen(true);
+      });
+
       var t = this;
 
       //立即体验按钮点击事件
