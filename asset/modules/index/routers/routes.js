@@ -270,7 +270,7 @@ const routes = [{
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '个人名片',
-			wechatHideHeader: false
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
@@ -283,7 +283,7 @@ const routes = [{
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '分享名片',
-			wechatHideHeader: false
+			wechatHideHeader: true
 		},
 		beforeEnter: (to, from, next) => {
 			next();
@@ -296,7 +296,7 @@ const routes = [{
     component: require('../../../views/Account/Resume.vue'),
     meta: {
       title: '分享名片',
-      wechatHideHeader: false
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       next();
