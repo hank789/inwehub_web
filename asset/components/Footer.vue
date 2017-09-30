@@ -33,7 +33,6 @@
 
     <div class="askWrapper">
       <div class="askPlus"  @tap.stop.prevent="show()"><div class="askImgBg"></div><div class="askImg"></div></div>
-      <div class="title">开启</div>
     </div>
 
 
@@ -323,7 +322,7 @@
 
   .askWrapper .askPlus{
     position: relative;
-    top:-24px;
+    top:1px;
     width:100%;
     text-align: center;
     border-radius: 53px;
@@ -337,7 +336,8 @@
     width:40px;
     height:40px;
     background: url("../statics/images/home_ask_btn@2x.png") no-repeat;
-    background-size: contain;
+
+    background-size: 35px 35px;
   }
 
   .askWrapper .askPlus .askImgBg{
