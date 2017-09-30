@@ -1195,3 +1195,8 @@ input.upload-file[type=file]{
   background:#b4b4b6;
   color:#fff;
 }
+
+
+.noAfter:after{
+    display: none;
+}
