@@ -270,7 +270,7 @@ const routes = [{
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '个人名片',
-			wechatHideHeader: true
+			wechatHideHeader: false
 		},
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
