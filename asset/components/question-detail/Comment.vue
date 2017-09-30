@@ -80,10 +80,10 @@
     },
     methods: {
       cancelComment(){
+        this.comment();
+
         if (this.commentState) {
             this.$emit('finish');
-        } else {
-          this.comment();
         }
       },
       comment(){
@@ -116,6 +116,7 @@
           return;
         }
         this.buttonCommentDisabled = true;
+
         postRequest(`answer/feedback`, data).then(response => {
           this.buttonCommentDisabled = false;
           var code = response.data.code;
@@ -125,8 +126,6 @@
           }
 
           this.commentState = true;
-
-          this.$emit('finish');
         });
       },
     },
