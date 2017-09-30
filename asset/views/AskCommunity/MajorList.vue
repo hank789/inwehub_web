@@ -27,8 +27,7 @@
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </p>
-                <p class="mui-ellipsis" v-if="hot.hide == 1">回答者：{{hot.answer_username}}</p>
-                <p class="mui-ellipsis" v-if="hot.hide == 0">回答者:匿名</p>
+                <p class="mui-ellipsis">回答者：{{hot.answer_username}}</p>
                 <p class="mui-ellipsis">{{hot.answer_user_title}}</p>
                 <p class="mui-ellipsis">{{hot.answer_user_company}}</p>
               </div>
@@ -75,8 +74,7 @@
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                     </svg>
                   </p>
-                  <p class="mui-ellipsis" v-if="list.hide == 1">回答者：{{hot.answer_username}}</p>
-                  <p class="mui-ellipsis" v-if="list.hide == 0">回答者:匿名</p>
+                  <p class="mui-ellipsis">回答者：{{hot.answer_username}}</p>
                   <p class="mui-ellipsis">{{list.answer_user_title}}</p>
                   <p class="mui-ellipsis">{{list.answer_user_company}}</p>
                 </div>
