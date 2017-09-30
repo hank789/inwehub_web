@@ -66,6 +66,13 @@
               :isFollow="false"
       ></Answer>
 
+
+      <Discuss
+        :answerId="answer.answers[0] ? answer.answers[0].id:0"
+        ref="discuss"
+        v-show="answer.answers[0] && answer.answers[0].content"
+      ></Discuss>
+
       <div class="mb70"></div>
     </div>
 
@@ -78,6 +85,7 @@
   import localEvent from '../../stores/localStorage';
   import Question from '../../components/question-detail/Question.vue';
   import Answer from '../../components/question-detail/Answer.vue';
+  import Discuss from '../../components/question-detail/Discuss.vue';
 
   import CountDown from 'vue2-countdown';
 
@@ -105,7 +113,8 @@
     components: {
       CountDown,
       Question,
-      Answer
+      Answer,
+      Discuss
     },
     computed: {},
     mounted(){
@@ -347,9 +356,7 @@
 
 
 <style scoped>
-  .mui-content{
-    background: #fff;
-  }
+ 
 
   .buttons{
     margin-top:5px;
