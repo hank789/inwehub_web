@@ -283,7 +283,7 @@ const routes = [{
     component: require('../../../views/Account/Resume.vue'),
 		meta: {
 			title: '分享名片',
-			wechatHideHeader: true
+			wechatHideHeader: false
 		},
 		beforeEnter: (to, from, next) => {
 			next();
