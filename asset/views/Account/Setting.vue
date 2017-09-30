@@ -88,7 +88,7 @@ All Rights Reserved</div>
       },
       //清除缓存；
       clearCache(){
-        localEvent.setLocalItem('lauchFlag', {showGuide: false});
+//        localEvent.setLocalItem('lauchFlag', {showGuide: false});
         //调用系统toast;
         mui.toast('清除成功');
       },
