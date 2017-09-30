@@ -95,7 +95,7 @@
         },
         feedback: {}
       },
-      title: '回答问题',
+      title: '专业问答',
       description: {},
       descLength: 0,
       loading: true,
@@ -254,26 +254,26 @@
       },
       getTitle()
       {
-        var status = this.answer.question.status;
-        var title = '';
-        switch (status) {
-          case 2:
-            title = '确认应答';
-            break;
-          case 4:
-            if (this.answer.answers.length && this.answer.answers[0].promise_time) {
-              title = '回答问题';
-            } else {
-              title = '回答问题';  //确认时间
-            }
-            break;
-          default:
-            title = '我的回答';
-        }
+//        var status = this.answer.question.status;
+//        var title = '';
+//        switch (status) {
+//          case 2:
+//            title = '确认应答';
+//            break;
+//          case 4:
+//            if (this.answer.answers.length && this.answer.answers[0].promise_time) {
+//              title = '回答问题';
+//            } else {
+//              title = '回答问题';  //确认时间
+//            }
+//            break;
+//          default:
+//            title = '我的回答';
+//        }
 
-        this.$emit('changeWechatTitle', title);
+        this.$emit('changeWechatTitle', '专业问答');
 
-        this.title = title;
+        this.title = '专业问答';
       },
       timeago(time) {
         if (!time) {
