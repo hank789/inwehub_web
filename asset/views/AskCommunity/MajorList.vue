@@ -28,8 +28,7 @@
                   </svg>
                 </p>
                 <p class="mui-ellipsis">
-	                <span v-if="hot.hide == 1">回答者：{{hot.answer_username}}</span>
-	                <span v-if="hot.hide == 0">回答者:匿名</span>
+	                <span>回答者：{{hot.answer_username}}</span>
 	                <span>{{hot.answer_user_title}}</span>
 	                <span>{{hot.answer_user_company}}</span>
                 </p>
@@ -78,8 +77,7 @@
                     </svg>
                   </p>
                    <p class="mui-ellipsis">
-                  <span v-if="list.hide == 1">回答者：{{hot.answer_username}}</span>
-                  <span v-if="list.hide == 0">回答者:匿名</span>
+                  <span>回答者：{{hot.answer_username}}</span>
                   <span>{{list.answer_user_title}}</span>
                   <span>{{list.answer_user_company}}</span>
                   </p>
@@ -336,7 +334,7 @@
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.hotAnswer_d p:nth-child(2) {
 		/*width: 340px;*/
 		height:18px;
@@ -485,7 +483,7 @@
 		height: 100%;
 		border-radius: 50%;
 	}
-	
+
 	.recommend_d  p:nth-child(2) {
 		/*width: 340px;*/
 		height:18px;
@@ -558,11 +556,11 @@
 		.recommend_d p:nth-child(2) {
 		width: 256px;
 		}
-		
+
 	}
 
 	@media screen and (min-width: 375px) {
-		
+
 		.hotAnswer_d p:nth-child(2) {
 		width: 305px;
 		}
@@ -572,13 +570,13 @@
 	}
 
 	@media screen and (min-width: 414px) {
-		
+
 		.hotAnswer_d p:nth-child(2) {
 		width: 340px;
 		}
 		.recommend_d p:nth-child(2) {
 		width: 256px;
 		}
-		
+
 	}
 </style>

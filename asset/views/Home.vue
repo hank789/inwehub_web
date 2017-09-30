@@ -126,7 +126,7 @@
 					<i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
-					<li v-for="(qa, index) in recommend_qa">
+					<li v-for="(qa, index) in recommend_qa" @tap.stop.prevent="toMajorDetail(qa.id)">
 						<p class="mui-ellipsis-2">{{qa.description}}</p>
 						<div class="hotAnswer_d">
 							<p>
