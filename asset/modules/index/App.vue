@@ -268,7 +268,11 @@
                   break;
                 case 'answer_new_comment':
                   //专业回答新的回复
-                  router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
+                  router.pushPlus('/askCommunity/major/' + payload.object_id);
+                  break;
+                case 'answer_new_support':
+                  //专业回答赞
+                  router.pushPlus('/askCommunity/major/' + payload.object_id);
                   break;
               }
             };
