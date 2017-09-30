@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">提问</h1>
+      <h1 class="mui-title">专业问答</h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
@@ -94,6 +94,17 @@
       Comment
     },
     computed: {
+      title(){
+          switch(parseInt(this.ask.question.question_type)) {
+            case 1:
+                return '专业问答';
+                break;
+            case 2:
+                return '悬赏问答';
+                break;
+          }
+          return '提问';
+      },
       timelines() {
         return this.ask.timeline.reverse();
       }
