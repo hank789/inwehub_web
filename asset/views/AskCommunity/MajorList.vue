@@ -27,9 +27,12 @@
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </p>
-                <p class="mui-ellipsis">回答者：{{hot.answer_username}}</p>
-                <p class="mui-ellipsis">{{hot.answer_user_title}}</p>
-                <p class="mui-ellipsis">{{hot.answer_user_company}}</p>
+                <p class="mui-ellipsis">
+	                <span v-if="hot.hide == 1">回答者：{{hot.answer_username}}</span>
+	                <span v-if="hot.hide == 0">回答者:匿名</span>
+	                <span>{{hot.answer_user_title}}</span>
+	                <span>{{hot.answer_user_company}}</span>
+                </p>
               </div>
               <i class="bot" v-show="index != hotList.length-1"></i>
             </li>
@@ -64,7 +67,7 @@
           </div>
 
           <div>
-            <ul class="recommend_b">
+             <ul class="recommend_b">
               <li v-for="(list, index) in recommendList" @tap.stop.prevent="toDetail(list.id)">
                 <p class="mui-ellipsis-2">{{list.description}}</p>
                 <div class="recommend_d">
@@ -74,9 +77,12 @@
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                     </svg>
                   </p>
-                  <p class="mui-ellipsis">回答者：{{list.answer_username}}</p>
-                  <p class="mui-ellipsis">{{list.answer_user_title}}</p>
-                  <p class="mui-ellipsis">{{list.answer_user_company}}</p>
+                   <p class="mui-ellipsis">
+                  <span v-if="list.hide == 1">回答者：{{hot.answer_username}}</span>
+                  <span v-if="list.hide == 0">回答者:匿名</span>
+                  <span>{{list.answer_user_title}}</span>
+                  <span>{{list.answer_user_company}}</span>
+                  </p>
                 </div>
                 <i class="bot" v-show="index != recommendList.length-1"></i>
               </li>
@@ -283,89 +289,93 @@
   /*问答列表*/
 
   .hotAnswer_b {
-    width: 100%;
-    background: #FFFFFF;
-    overflow: hidden;
-  }
+		width: 90%;
+		margin-left: 5%;
+		/*height: 200px;*/
+		overflow: hidden;
+	}
 
-  .hotAnswer_b li {
-    width: 92%;
-    margin-left: 4%;
-    overflow: hidden;
-    padding: 12px 0;
-    position: relative;
-  }
+	.hotAnswer_b li {
+		width: 100%;
+		overflow: hidden;
+		padding: 12px 0;
+		position: relative;
+	}
 
-  .hotAnswer_b li > p {
-    font-size: 14px;
-    color: #444444;
-  }
+	.hotAnswer_b li>p {
+		font-size: 14px;
+		color: #444444;
+	}
 
-  .hotAnswer_d {
-    width: 100%;
-    height: 32px;
-    margin-top: 4.5px;
-  }
+	.hotAnswer_d {
+		width: 100%;
+		height: 32px;
+		margin-top: 4.5px;
+	}
 
-  .hotAnswer_d p {
-    float: left;
-  }
+	.hotAnswer_d p {
+		float: left;
+	}
 
-  .hotAnswer_d p:nth-child(1) {
-    /*width: 8.4%;*/
-    height: 32px;
-    /*background: #CCCCCC;*/
-    position: relative;
-  }
+	.hotAnswer_d p:nth-child(1) {
+		width: 32px;
+		height: 32px;
+		/*background: #CCCCCC;*/
+		position: relative;
+	}
 
-  .hotAnswer_d p:nth-child(1) > svg {
-    position: absolute;
-    font-size: 14px;
-    bottom: 0;
-    right: -4px;
-  }
+	.hotAnswer_d p:nth-child(1)>svg {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		right: -4px;
+	}
 
-  .hotAnswer_d p:nth-child(1) > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
+	.hotAnswer_d p:nth-child(1)>img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+	
+	.hotAnswer_d p:nth-child(2) {
+		/*width: 340px;*/
+		height:18px;
+		margin-top: 9px;
+		line-height: 18px;
+		/*background: #CCCCCC;*/
+	}
 
-  .hotAnswer_d p:nth-child(2) {
-    max-width: 32%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 2%;
-  }
+	.hotAnswer_d p:nth-child(2) span:nth-child(1){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
 
-  .hotAnswer_d p:nth-child(3) {
-    max-width: 21%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 2%;
-  }
+	.hotAnswer_d p:nth-child(2) span:nth-child(2){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
 
-  .hotAnswer_d p:nth-child(4) {
-    max-width: 36%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 2%;
-  }
-
+	.hotAnswer_d p:nth-child(2) span:nth-child(3){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
   /*推荐问答*/
 
   .recommendlist {
@@ -428,90 +438,93 @@
   /*问答列表*/
 
   .recommend_b {
-    width: 100%;
-    background: #FFFFFF;
-    overflow: hidden;
-  }
+		width: 90%;
+		margin-left: 5%;
+		/*height: 200px;*/
+		overflow: hidden;
+	}
 
-  .recommend_b li {
-    width: 92%;
-    margin-left: 4%;
-   /* height: 88px;*/
-    overflow: hidden;
-    padding: 12px 0;
-    position: relative;
-  }
+	.recommend_b li {
+		width: 100%;
+		overflow: hidden;
+		padding: 12px 0;
+		position: relative;
+	}
 
-  .recommend_b li > p {
-   /* margin-top: 12px;*/
-    font-size: 14px;
-    color: #444444;
-  }
+	.recommend_b  li>p {
+		font-size: 14px;
+		color: #444444;
+	}
 
-  .recommend_d {
-    width: 100%;
-    height: 32px;
-    margin-top: 4.5px;
-  }
+	.recommend_d  {
+		width: 100%;
+		height: 32px;
+		margin-top: 4.5px;
+	}
 
-  .recommend_d p {
-    float: left;
-  }
+	.recommend_d  p {
+		float: left;
+	}
 
-  .recommend_d p:nth-child(1) {
-    /*width: 8.4%;*/
-    height: 32px;
-    /*background: #CCCCCC;*/
-    position: relative;
-  }
+	.recommend_d  p:nth-child(1) {
+		width: 32px;
+		height: 32px;
+		/*background: #CCCCCC;*/
+		position: relative;
+	}
 
-  .recommend_d p:nth-child(1) > svg {
-    position: absolute;
-    font-size: 14px;
-    bottom: 0;
-    right: -4px;
-  }
+	.recommend_d  p:nth-child(1)>svg {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		right: -4px;
+	}
 
-  .recommend_d p:nth-child(1) > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
+	.recommend_d  p:nth-child(1)>img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+	
+	.recommend_d  p:nth-child(2) {
+		/*width: 340px;*/
+		height:18px;
+		margin-top: 9px;
+		line-height: 18px;
+		/*background: #CCCCCC;*/
+	}
 
-  .recommend_d p:nth-child(2) {
-    max-width: 32%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 2%;
-  }
+	.recommend_d  p:nth-child(2) span:nth-child(1){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
 
-  .recommend_d p:nth-child(3) {
-    max-width: 21%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-     padding: 0 2%;
-  }
+	.recommend_d  p:nth-child(2) span:nth-child(2){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		border-right: 1px solid #c8c8c8;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
 
-  .recommend_d p:nth-child(4) {
-    max-width: 36%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    text-align: center;
-    line-height: 15px;
-     padding: 0 2%;
-  }
+	.recommend_d  p:nth-child(2) span:nth-child(3){
+		height: 15px;
+		margin-top: 8.5px;
+		font-size: 13px;
+		color: #808080;
+		text-align: center;
+		line-height: 15px;
+		padding: 0 3%;
+	}
 
   /*无数据的样式 */
 
@@ -539,22 +552,33 @@
   /***媒体查询*****/
 
 	@media screen and (min-width: 320px) {
-
-		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
-		width: 11%;
+		.hotAnswer_d p:nth-child(2) {
+		width: 256px;
 		}
+		.recommend_d p:nth-child(2) {
+		width: 256px;
+		}
+		
 	}
 
 	@media screen and (min-width: 375px) {
-		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
-			width: 9.5%;
-	      }
+		
+		.hotAnswer_d p:nth-child(2) {
+		width: 305px;
+		}
+		.recommend_d p:nth-child(2) {
+		width: 256px;
+		}
 	}
 
 	@media screen and (min-width: 414px) {
-		.recommend_d p:nth-child(1),.hotAnswer_d p:nth-child(1)  {
-		width: 8.4%;
+		
+		.hotAnswer_d p:nth-child(2) {
+		width: 340px;
 		}
-
+		.recommend_d p:nth-child(2) {
+		width: 256px;
+		}
+		
 	}
 </style>

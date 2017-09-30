@@ -126,7 +126,7 @@
 					<i class="bot"></i>
 				</div>
 				<ul class="hotAnswer_b">
-					<li v-for="(qa, index) in recommend_qa" @tap.stop.prevent="toMajorDetail(qa.id)">
+					<li v-for="(qa, index) in recommend_qa">
 						<p class="mui-ellipsis-2">{{qa.description}}</p>
 						<div class="hotAnswer_d">
 							<p>
@@ -135,9 +135,11 @@
 									<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
 								</svg>
 							</p>
-							<p class="mui-ellipsis">回答者：{{qa.answer_username}}</p>
-							<p class="mui-ellipsis">{{qa.answer_user_title}}</p>
-							<p class="mui-ellipsis">{{qa.answer_user_company}}</p>
+							<p class="mui-ellipsis">
+								<span>回答者：{{qa.answer_username}}</span>
+								<span>{{qa.answer_user_title}}</span>
+								<span>{{qa.answer_user_company}}</span>
+							</p>
 						</div>
 						<i class="bot"></i>
 					</li>
@@ -1042,14 +1044,15 @@
 	}
 
 	.hotAnswer_t {
-		width: 100%;
+		width: 90%;
+		margin-left: 5%;
 		height: 44px;
 		position: relative;
 	}
 
 	.hotAnswer_t p:nth-of-type(1) {
 		float: left;
-		margin-left: 5%;
+		
 		line-height: 44px;
 		font-size: 16px;
 		color: #444444;
@@ -1057,7 +1060,7 @@
 
 	.hotAnswer_t p:nth-of-type(2) {
 		float: right;
-		margin-right: 5%;
+		
 		line-height: 44px;
 		font-size: 14px;
 		color: #03aef9;
@@ -1093,7 +1096,7 @@
 	}
 
 	.hotAnswer_d p:nth-child(1) {
-		/*width: 8.4%;*/
+		width: 32px;
 		height: 32px;
 		/*background: #CCCCCC;*/
 		position: relative;
@@ -1111,9 +1114,16 @@
 		height: 100%;
 		border-radius: 50%;
 	}
-
+	
 	.hotAnswer_d p:nth-child(2) {
-		max-width: 32%;
+		/*width: 340px;*/
+		height:18px;
+		margin-top: 9px;
+		line-height: 18px;
+		/*background: #CCCCCC;*/
+	}
+
+	.hotAnswer_d p:nth-child(2) span:nth-child(1){
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1124,8 +1134,7 @@
 		padding: 0 3%;
 	}
 
-	.hotAnswer_d p:nth-child(3) {
-		max-width: 21%;
+	.hotAnswer_d p:nth-child(2) span:nth-child(2){
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1136,8 +1145,7 @@
 		padding: 0 3%;
 	}
 
-	.hotAnswer_d p:nth-child(4) {
-		max-width: 36%;
+	.hotAnswer_d p:nth-child(2) span:nth-child(3){
 		height: 15px;
 		margin-top: 8.5px;
 		font-size: 13px;
@@ -1273,6 +1281,7 @@
 		box-shadow: 0 0 0px 0px rgba(216, 216, 216, 1);
 	}
 	/***媒体查询*****/
+/***媒体查询*****/
 
 	@media screen and (min-width: 320px) {
 		.activity {
@@ -1281,9 +1290,10 @@
 		.home-expert div p{
 		  width:74%;
 		}
-		.hotAnswer_d p:nth-child(1) {
-		width: 11%;
+		.hotAnswer_d p:nth-child(2) {
+		width: 256px;
 		}
+		
 	}
 
 	@media screen and (min-width: 375px) {
@@ -1293,8 +1303,8 @@
 		.home-expert div p{
 		  width:65%;
 		}
-		.hotAnswer_d p:nth-child(1) {
-		width: 9.5%;
+		.hotAnswer_d p:nth-child(2) {
+		width: 305px;
 		}
 	}
 
@@ -1305,9 +1315,9 @@
 		.home-expert div p{
 		  width:60%;
 		}
-		.hotAnswer_d p:nth-child(1) {
-		width: 8.4%;
+		.hotAnswer_d p:nth-child(2) {
+		width: 340px;
 		}
-
+		
 	}
 </style>
