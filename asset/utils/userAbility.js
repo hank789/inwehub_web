@@ -90,6 +90,52 @@ var userAbility = () => {
   };
 
   /**
+   * 跳转到问答社区
+   */
+  var jumpToAskCommunity = (context) => {
+
+    var userInfo = getLocalUserInfo();
+
+    if (userInfo.user_level >= 3) {
+      router.pushPlus('/askCommunity/majors');
+    } else {
+      var dialog = getDialogObj(context);
+      if (dialog) {
+        dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+          alertSimple(html, '查看等级详情', (num) => {
+            if (num.index === 0) {
+              router.pushPlus('/my/Growth');
+            }
+          }, true);
+        });
+      }
+    }
+  };
+
+  /**
+   * 跳转到问答社区具体问答详情页
+   */
+  var jumpToAskCommunityDetail = (context, id) => {
+
+    var userInfo = getLocalUserInfo();
+
+    if (userInfo.user_level >= 3) {
+      router.pushPlus('/askCommunity/major/' + id,'list-detail-page' ,true,'pop-in','hide',true);
+    } else {
+      var dialog = getDialogObj(context);
+      if (dialog) {
+        dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+          alertSimple(html, '查看等级详情', (num) => {
+            if (num.index === 0) {
+              router.pushPlus('/my/Growth');
+            }
+          }, true);
+        });
+      }
+    }
+  };
+
+  /**
    * 跳转到活动报名
    */
   var jumpToApplyActivity = (context, id) => {
@@ -226,6 +272,8 @@ var userAbility = () => {
     jumpToAddArticle: jumpToAddArticle,
     jumpToApplyActivity: jumpToApplyActivity,
     jumpToApplyOpportunity:jumpToApplyOpportunity,
+    jumpToAskCommunity: jumpToAskCommunity,
+    jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
     newbieTask: newbieTask,
     perfectCard:perfectCard
