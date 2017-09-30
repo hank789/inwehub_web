@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="mui-table-view list-ask-item">
+      <div class="mui-table-view list-ask-item emptyListWrapper">
         <div class="mui-table-view-cell">
           <div class="">
             <div class="title">暂无回答</div>
@@ -360,7 +360,7 @@
   }
 
   .list-empty .menu{
-    margin-bottom:10px;
+    margin-bottom:0px;
   }
 
   .mui-segmented-control .mui-control-item {
@@ -418,6 +418,10 @@
 
   .label.label_6{
     background: #c8c8c8;
+  }
+
+  .emptyListWrapper{
+    padding-top:0px;
   }
 
 

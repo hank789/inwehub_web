@@ -19,8 +19,8 @@
         </div>
       </div>
 
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
+      <div class="mui-table-view list-ask-item emptyListWrapper">
+        <div class="mui-table-view-cell ">
           <div class="">
             <div class="title">暂无回答</div>
             <div class="subTitle" v-if="isExpert">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
@@ -360,7 +360,7 @@
   }
 
   .list-empty .menu{
-    margin-bottom:10px;
+    margin-bottom:0px;
   }
 
   .mui-segmented-control .mui-control-item {
@@ -410,5 +410,9 @@
     border-radius:50px;
     color:#fff;
     padding:0 9px;
+  }
+
+  .emptyListWrapper{
+    padding-top:0px;
   }
 </style>
