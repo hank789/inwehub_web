@@ -6,7 +6,7 @@
       <h1 class="mui-title">专业问答</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content absolute" v-show="!loading">
 
       <Question
         :ask="answer.question"
