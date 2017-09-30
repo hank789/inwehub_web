@@ -16,10 +16,7 @@
 
       <div class="form form-ask">
         <div class="textarea-wrapper">
-        <textarea v-model.trim="description" @keydown.stop="enterWords"
-                  placeholder="1.请精确描述输入问题详情，并等待平台专家回答
-2.答案每被查看一次，你和回答者可从中获取分成
-3.请根据问题难易程度等合理选择支付金额"></textarea>
+        <textarea id="description" v-model.trim="description" @keydown.stop="enterWords" @focus="textareaFocus" @blur="textareaBlur"></textarea>
         </div>
       </div>
 
@@ -131,7 +128,10 @@
       descMaxLength: 1000,
       isShowMoneyDev: false,
       test: 0,
-      pay_object_type: 'ask'
+      pay_object_type: 'ask',
+      descPlaceholder:'1.请精确描述输入问题详情，并等待平台专家回答' + "\n"
+        + '2.答案每被查看一次，你和回答者可从中获取分成' + "\n"
+        + '3.请根据问题难易程度等合理选择支付金额',
     }),
     components: {
       pay
@@ -146,6 +146,8 @@
       mui.init();
 
       this.helpWrapper();
+
+      this.textareaBlur();
     },
     computed: {
       type () {
@@ -182,6 +184,16 @@
       this.check();
     },
     methods: {
+      textareaFocus(){
+          if (this.description === this.descPlaceholder) {
+              this.description = '';
+          }
+      },
+      textareaBlur(){
+        if (this.description === '') {
+          this.description = this.descPlaceholder;
+        }
+      },
       toggleHide(){
           this.hide = !this.hide;
       },
@@ -427,7 +439,7 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-
+        
         //this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
@@ -795,5 +807,4 @@
       height:220px;
     }
   }
-
 </style>
