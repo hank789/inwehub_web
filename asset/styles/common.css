@@ -937,7 +937,7 @@ input.upload-file[type=file]{
 }
 
 .openAppH5 .shareBtn{
-  top:64px;
+  top:64px !important;
 }
 
 
@@ -965,7 +965,7 @@ input.upload-file[type=file]{
 
 
 .openAppWechat .shareBtn{
-  top:59px;
+  top:59px !important;
 }
 
 
