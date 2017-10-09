@@ -936,6 +936,9 @@ input.upload-file[type=file]{
   padding-top: 0;
 }
 
+.openAppH5 .shareBtn{
+  top:64px;
+}
 
 
 .openAppWechat .mui-content{
@@ -959,6 +962,12 @@ input.upload-file[type=file]{
   top:93px;
   padding-top: 0;
 }
+
+
+.openAppWechat .shareBtn{
+  top:59px;
+}
+
 
 .gaussian{
   backdrop-filter: blur(10px);
