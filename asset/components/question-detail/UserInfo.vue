@@ -153,7 +153,7 @@
   }
 
   .detail {
-    font-size: 14px;
+    font-size: 13px;
     color: #808080;
   }
 
@@ -175,7 +175,7 @@
     border-radius: 50px;
     font-size: 13px;
     color: #03aef9;
-    padding: 2px 15px;
+    padding: 1px 15px;
   }
 
   .followButton.active{
@@ -189,7 +189,7 @@
 
   .mui-media-body .followWrapper {
     position: absolute;
-    top: 5px;
+    top:0;
     right: 0;
   }
 
