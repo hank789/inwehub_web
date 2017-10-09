@@ -152,6 +152,25 @@
       </div>
     </div>
 
+    <!--问答社区详情页分享成功-->
+    <div id="askCommunityDetailShare" class="boxWrapper">
+        <div id="askCommunityDetailShare_title">
+            <div class="askCommunityDetailShare_title">
+              <div class="title">分享成功！</div>
+              <div class="titleSub">（成长值<span>+1</span>）</div>
+            </div>
+        </div>
+        <div id="askCommunityDetailShare_body">
+          <div class="askCommunityDetailShare_body">
+            <div class="title">相关阅读推荐</div>
+            <ul class="normal">
+              <li>开发中...</li>
+              <li>开发中...</li>
+            </ul>
+          </div>
+        </div>
+
+    </div>
   </div>
 </template>
 <script type="text/javascript">
@@ -518,5 +537,30 @@
   }
   .helpWrapper .desc-1{
     margin-top:20px;
+  }
+
+  .boxWrapper{
+    border:1px solid blue;
+  }
+
+  .askCommunityDetailShare_title{
+    text-align: center;
+    margin-top: 17px;
+  }
+  .askCommunityDetailShare_title .title{
+    font-size:19px;
+    color:#444;
+  }
+  .askCommunityDetailShare_title .titleSub{
+    margin-top: 10px;
+    font-size:14px;
+    color:#808080;
+  }
+  .askCommunityDetailShare_title .titleSub span{
+    color:#03aef9;
+  }
+  .askCommunityDetailShare_body .title{
+    font-size:14px;
+    color:#808080;
   }
 </style>
