@@ -262,4 +262,8 @@
     bottom: 2px;
     color: #999;
   }
+
+  .mui-content{
+    background: #fff;
+  }
 </style>
