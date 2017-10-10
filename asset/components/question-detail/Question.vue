@@ -94,6 +94,7 @@
     font-size:16px;
     color:#444444;
     padding-left:15px;
+    padding-right:15px;
   }
 
   .footer{
