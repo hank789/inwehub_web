@@ -146,7 +146,11 @@
       });
       mui.init();
 
-      this.helpWrapper();
+
+      //付费专业问答-介绍弹窗
+      if (this.question_type === 1) {
+         this.helpWrapper();
+      }
 
       this.textareaBlur();
     },
