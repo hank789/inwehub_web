@@ -95,11 +95,11 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ //问答社区-专业回答
+	{ //问答社区-专业问答
 		path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
-			title: '问答社区',
+			title: '问答社区-专业问答',
 			wechatHideHeader: true
 		},
 		component: require('../../../views/AskCommunity/MajorList.vue'),
@@ -111,7 +111,7 @@ const routes = [{
 		path: '/askCommunity/major/:id',
     name: 'ask-major-detail',
     meta: {
-			title: '问答社区',
+			title: '问答社区-专业问答详情',
 			wechatHideHeader: false
 		},
 		component: require('../../../views/AskCommunity/MajorDetail.vue'),
@@ -119,6 +119,18 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { //问答社区-互动回答
+    path: '/askCommunity/interactions',
+    name: 'askCommunity-interaction-list',
+    meta: {
+      title: '问答社区-互动回答',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/AskCommunity/InteractionList.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 	{
 		path: '/login',
     name: 'login',

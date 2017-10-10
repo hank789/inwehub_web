@@ -14,7 +14,7 @@
           <a class="mui-control-item mui-active" @tap.stop.prevent="">
             专业问答
         </a>
-          <a class="mui-control-item" @tap.stop.prevent="">
+          <a class="mui-control-item" @tap.stop.prevent="$router.replace('/askCommunity/interactions')">
             互动问答
           </a>
         </div>
