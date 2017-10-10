@@ -289,7 +289,7 @@
 				if(uuid) {
 					this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
 				} else {
-					userAbility.moreProfessor(this);
+					userAbilityCheck.moreProfessor(this);
 				}
 
 			},
