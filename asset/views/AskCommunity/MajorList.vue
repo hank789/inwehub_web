@@ -9,7 +9,7 @@
 
     <div class="mui-content absolute" v-show="!this.loading">
 
-      <div class="menu">
+      <div class="menu" v-if="1===2">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
           <a class="mui-control-item mui-active" @tap.stop.prevent="">
             专业问答
@@ -43,8 +43,8 @@
                   </p>
                   <p class="mui-ellipsis">
                     <span>回答者：{{hot.answer_username}}</span>
-                    <span>{{hot.answer_user_title}}</span>
-                    <span>{{hot.answer_user_company}}</span>
+                    <!--<span>{{hot.answer_user_title}}</span>-->
+                    <!--<span>{{hot.answer_user_company}}</span>-->
                   </p>
                 </div>
                 <i class="bot" v-show="index != hotList.length-1"></i>
@@ -92,8 +92,8 @@
                     </p>
                     <p class="mui-ellipsis">
                       <span>回答者：{{list.answer_username}}</span>
-                      <span>{{list.answer_user_title}}</span>
-                      <span>{{list.answer_user_company}}</span>
+                      <!--<span>{{list.answer_user_title}}</span>-->
+                      <!--<span>{{list.answer_user_company}}</span>-->
                     </p>
                   </div>
                   <i class="bot" v-show="index != recommendList.length-1"></i>
@@ -362,7 +362,7 @@
     margin-top: 8.5px;
     font-size: 13px;
     color: #808080;
-    border-right: 1px solid #c8c8c8;
+
     text-align: center;
     line-height: 15px;
     padding: 0 3%;
@@ -512,7 +512,6 @@
     margin-top: 8.5px;
     font-size: 13px;
     color: #808080;
-    border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
     padding: 0 3%;
@@ -634,7 +633,7 @@
     background: #f3f4f6;
   }
 
-  #refreshContainer{
-    top:50px;
-  }
+  /*#refreshContainer{*/
+    /*top:50px;*/
+  /*}*/
 </style>

@@ -137,8 +137,8 @@
 							</p>
 							<p class="mui-ellipsis">
 								<span>回答者：{{qa.answer_username}}</span>
-								<span>{{qa.answer_user_title}}</span>
-								<span>{{qa.answer_user_company}}</span>
+								<!--<span>{{qa.answer_user_title}}</span>-->
+								<!--<span>{{qa.answer_user_company}}</span>-->
 							</p>
 						</div>
 						<i class="bot"></i>
@@ -1128,7 +1128,6 @@
 		margin-top: 8.5px;
 		font-size: 13px;
 		color: #808080;
-		border-right: 1px solid #c8c8c8;
 		text-align: center;
 		line-height: 15px;
 		padding: 0 3%;
