@@ -15,7 +15,7 @@
       {{ realname }}
 
 
-      <div class="detail">
+      <div class="detail" v-if="isShowPositionAndCompany">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
         <span class="company">{{ company }}</span>
@@ -68,6 +68,10 @@
       isExpert: {
         type: Number,
         default: false
+      },
+      isShowPositionAndCompany:{
+        type: Boolean,
+        default:false
       }
     },
     created(){
@@ -146,6 +150,7 @@
 
   .mui-media-body {
     padding-left: 10px;
+    min-height: 25px;
   }
 
   .mui-table-view-cell:after {

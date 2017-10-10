@@ -9,6 +9,7 @@
       :isFollow="isFollow"
       :isFollowed="ask.is_followed?true:false"
       :isExpert="ask.is_expert?1:0"
+      :isShowPositionAndCompany="isShowPositionAndCompany"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
@@ -41,6 +42,10 @@
         default: {}
       },
       isFollow: {
+        type: Boolean,
+        default: false
+      },
+      isShowPositionAndCompany:{
         type: Boolean,
         default: false
       }

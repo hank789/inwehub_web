@@ -10,6 +10,7 @@
       :isFollow="isFollow"
       :isFollowed="answer.is_followed?true:false"
       :isExpert="answer.is_expert ? answer.is_expert : 0"
+      :isShowPositionAndCompany="isShowPositionAndCompany"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
@@ -88,6 +89,10 @@
         default: false
       },
       needMoney: {
+        type: Boolean,
+        default: false
+      },
+      isShowPositionAndCompany:{
         type: Boolean,
         default: false
       }
