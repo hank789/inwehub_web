@@ -131,10 +131,10 @@
     },
     methods: {
       shareSuccess(){
-          alertAskCommunityDetailShareSuccess(this);
+          //alertAskCommunityDetailShareSuccess(this);
       },
       shareFail(error){
-          
+
       },
       paySuccess(content)
       {
