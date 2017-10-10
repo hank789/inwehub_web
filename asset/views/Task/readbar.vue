@@ -83,6 +83,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					//请求成功的操作
 					//					 console.log(response.data)
@@ -110,6 +111,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					//请求成功的操作
 
@@ -134,6 +136,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					//					console.log(response)

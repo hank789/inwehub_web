@@ -80,6 +80,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					if(response.data.data.length > 0) {
@@ -97,6 +98,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					if(response.data.data.length > 0) {
@@ -159,16 +161,16 @@
 		transform: scaleY(.5);
 		background-color: rgb(220, 220, 220);
 	}
-	
+
 	p {
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
-	
+
 	.my-focus {
 		margin: 0;
 		padding: 0;
@@ -176,7 +178,7 @@
 		padding-left: 17px;
 		padding-right: 17px;
 	}
-	
+
 	.my-focus-item {
 		width: 100%;
 		height: 63px;
@@ -185,7 +187,7 @@
 		padding-bottom: 10px;
 		position: relative;
 	}
-	
+
 	.my-focus-item img {
 		width: 44px;
 		height: 44px;
@@ -193,17 +195,17 @@
 		margin-right: 8px;
 		float: left;
 	}
-	
+
 	.my-focus-item div {
 		float: left;
 	}
-	
+
 	.my-focus-item>svg {
 		font-size: 60px;
 		margin-top: -7px;
 		float: right;
 	}
-	
+
 	.my-focus-item div p:nth-of-type(1) span {
 		display: inline-block;
 		max-width: 140px;
@@ -211,13 +213,13 @@
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.my-focus-item div p:nth-of-type(1) svg {
 		font-size: 20px;
 		margin-bottom: 2px;
 		color: #3c95f9;
 	}
-	
+
 	.my-focus-item div p:nth-of-type(2) span {
 		display: inline-block;
 		width: 210px;
@@ -225,7 +227,7 @@
 		font-size: 13px;
 		color: #b4b4b6;
 	}
-	
+
 	.my-focus-item div p:nth-of-type(2) i {
 		display: inline-block;
 		width: 1px;
@@ -233,19 +235,19 @@
 		background: #b4b4b6;
 		margin-bottom: -2px;
 	}
-	
+
 	.container {
 		position: absolute;
 		top: 500%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-family: "PingFangSC";
 		font-size: 12px;

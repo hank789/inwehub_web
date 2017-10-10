@@ -53,6 +53,7 @@
           if (code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
+            return;
           }
 
           this.isBindWeixin = response.data.data.is_bind_weixin;

@@ -163,6 +163,7 @@
         if (code !== 1000) {
           mui.alert(response.data.message);
           mui.back();
+          return;
         }
 
         this.tags = response.data.data.tags;

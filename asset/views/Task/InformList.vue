@@ -139,6 +139,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					this.notice_message = response.data.data.notice_message;
@@ -153,7 +154,7 @@
 					//	console.log(this.notice_message)；
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-					
+
 				});
 			},
 			//请求标记
@@ -166,6 +167,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 				});
@@ -186,7 +188,7 @@
 			});
 			this.getPrevList();
 			this.sign();
-			
+
 		}
 	}
 	export default TaskMain;
@@ -204,7 +206,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -219,11 +221,11 @@
 		font-style: normal;
 	}
 	/*导航栏的样式*/
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
-	
+
 	.mui-wechat .menu {
 		width: 100%;
 		height: 45px;
@@ -232,11 +234,11 @@
 		z-index: 10;
 		background: #f3f4f6;
 	}
-	
+
 	.mui-wechat .content {
 		margin-top: 45px;
 	}
-	
+
 	.menu {
 		width: 100%;
 		height: 45px;
@@ -245,7 +247,7 @@
 		z-index: 99;
 		background: #f3f4f6;
 	}
-	
+
 	.menu span {
 		display: inline-block;
 		width: 49%;
@@ -256,11 +258,11 @@
 		line-height: 45px;
 		font-weight: 600;
 	}
-	
+
 	.menu span:nth-of-type(2) {
 		color: #3c95f9;
 	}
-	
+
 	.menu i {
 		display: block;
 		position: absolute;
@@ -271,31 +273,31 @@
 		background: #3c95f9;
 	}
 	/*内容区域*/
-	
+
 	.content {
 		margin-top: 45px;
 	}
-	
+
 	.content ul li {
 		width: 100%;
 		height: 60px;
 		padding: 0 16px;
 		position: relative;
 	}
-	
+
 	.content ul li img {
 		width: 42px;
 		height: 42px;
 		margin-top: 10px;
 		float: left;
 	}
-	
+
 	.content ul li p {
 		float: left;
 		margin-top: 10px;
 		margin-left: 12px;
 	}
-	
+
 	.content ul li a {
 		position: absolute;
 		top: 10px;
@@ -303,17 +305,17 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
-	
+
 	.content ul li p span:nth-of-type(1) {
 		display: block;
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	.content ul li p {
 		width: 81%;
 	}
-	
+
 	.content ul li p span:nth-of-type(2) {
 		display: block;
 		width: 100%;
@@ -321,7 +323,7 @@
 		font-size: 13px;
 		color: #808080;
 	}
-	
+
 	.message {
 		position: absolute;
 		font-size: 11px;

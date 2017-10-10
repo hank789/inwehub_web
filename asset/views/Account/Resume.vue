@@ -319,6 +319,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
+            return;
           }
 
           this.resume = response.data.data;

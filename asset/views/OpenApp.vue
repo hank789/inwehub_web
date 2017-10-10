@@ -26,6 +26,7 @@
         var code = response.data.code;
         if (code !== 1000) {
           mui.toast(response.data.message);
+          return;
         }
 
         var wechatConfig = response.data.data.config;

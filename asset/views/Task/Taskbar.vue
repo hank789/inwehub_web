@@ -83,6 +83,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					if(response.data.data.data.length > 0) {
@@ -109,6 +110,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					if(response.data.data.data.length > 0) {
@@ -133,6 +135,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 				});
@@ -180,7 +183,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -195,67 +198,67 @@
 		font-style: normal;
 	}
 	/*滚动区域*/
-	
+
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
 	}
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
-	
+
 	ul li {
 		position: relative;
 		padding: 10px 16px 0px 16px;
 		overflow: hidden;
 	}
-	
+
 	ul li img {
 		width: 11%;
 		height: 11%;
 		border-radius: 25%;
 		float: left;
 	}
-	
+
 	ul li p {
 		margin-left: 3%;
 		width: 86%;
 		float: left;
 	}
-	
+
 	ul li p span {
 		display: block;
 		margin-bottom: 6px;
 		width: 100%;
 	}
-	
+
 	ul li p span:nth-of-type(1) {
 		font-size: 16px;
 		color: #444444;
 	}
-	
+
 	ul li p span:nth-of-type(2) {
 		font-size: 14px;
 		color: #808080;
 	}
-	
+
 	ul li p .third {
 		font-size: 14px;
 		color: rgb( 68, 68, 68);
 		font-weight: 500;
 	}
-	
+
 	ul li p .third i {
 		font-size: 14px;
 		color: #3c95f9;
 	}
-	
+
 	ul li p .fourth {
 		font-size: 12px;
 		color: #b4b4b6;
 	}
-	
+
 	.message {
 		width: 7px;
 		height: 7px;
@@ -266,19 +269,19 @@
 		top: 8%;
 	}
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;

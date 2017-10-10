@@ -58,6 +58,7 @@
         var code = response.data.code;
         if (code !== 1000) {
           mui.toast(response.data.message);
+          return;
         }
 
         this.jobSee = response.data.data.is_job_info_public;
@@ -72,6 +73,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
+            return;
           }
 
           mui.toast(response.data.message);
