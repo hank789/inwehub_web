@@ -620,10 +620,10 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 28px;
+    width: 56px;
     bottom: 0;
     left: 50%;
-    margin-left: -14px;
+    margin-left: -28px;
     height: 2px;
     z-index: 999;
     content: '';

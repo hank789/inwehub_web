@@ -50,6 +50,14 @@
           </div>
         </div>
       </div>
+
+
+      <div class="button-wrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">
+          发布互动问答
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -267,10 +275,10 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 28px;
+    width: 56px;
     bottom: 0;
     left: 50%;
-    margin-left: -14px;
+    margin-left: -28px;
     height: 2px;
     z-index: 999;
     content: '';
@@ -299,5 +307,19 @@
   .container p {
     font-size: 12px;
     color: #c8c8c8;
+  }
+
+  .button-wrapper{
+    position: fixed;
+    bottom:0;
+    width:100%;
+    padding:0;
+    z-index: 999;
+  }
+  .button-wrapper button{
+    border-radius: 0;
+    margin-bottom:0;
+    padding:12px 0;
+    font-size:17px;
   }
 </style>

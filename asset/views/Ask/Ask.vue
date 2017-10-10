@@ -123,6 +123,7 @@
       payItems: [],
       uid: 0,
       description: '',
+      question_type:1,  //提问类型，1为付费专业问答，2为免费问答互助,默认为1
       selectOther: false,
       hide: 0,
       descMaxLength: 1000,
@@ -171,6 +172,16 @@
         var id = this.$route.query.id;
         if (id) {
           this.uid = id;
+        }
+      }
+
+      if (this.$route.query.question_type) {
+        var question_type = parseInt(this.$route.query.question_type);
+        if (question_type) {
+          this.question_type = question_type;
+          if (this.question_type === 2) {
+              this.descPlaceholder = '可征集多人答案，可在详情页进行回答邀请。';
+          }
         }
       }
 
@@ -406,10 +417,11 @@
 
         var data = {
           order_id: order_id,
+          question_type:this.question_type,
           answer_uuid: this.uid,
-          tags: this.type.split(':')[1],
-          price: this.money,
           description: this.description,
+          price: this.money,
+          tags: this.type.split(':')[1],
           hide: this.hide,
           device: device
         };
@@ -439,7 +451,7 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-        
+
         //this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
