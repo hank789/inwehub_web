@@ -46,26 +46,6 @@
                   <div class="three">2人回答</div>
                 </li>
               </ul>
-
-              <!--<ul class="recommend_b">-->
-                <!--<li v-for="(list, index) in recommendList" @tap.stop.prevent="toDetail(list.id)">-->
-                  <!--<p class="mui-ellipsis-2">{{list.description}}</p>-->
-                  <!--<div class="recommend_d">-->
-                    <!--<p>-->
-                      <!--<img :src="list.answer_user_avatar_url"/>-->
-                      <!--<svg class="icon" aria-hidden="true" v-if="list.answer_user_is_expert == 1">-->
-                        <!--<use xlink:href="#icon-zhuanjiabiaojishixin"></use>-->
-                      <!--</svg>-->
-                    <!--</p>-->
-                    <!--<p class="mui-ellipsis">-->
-                      <!--<span>回答者：{{list.answer_username}}</span>-->
-                      <!--<span>{{list.answer_user_title}}</span>-->
-                      <!--<span>{{list.answer_user_company}}</span>-->
-                    <!--</p>-->
-                  <!--</div>-->
-                  <!--<i class="bot" v-show="index != recommendList.length-1"></i>-->
-                <!--</li>-->
-              <!--</ul>-->
             </div>
           </div>
         </div>
