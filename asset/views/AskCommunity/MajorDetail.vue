@@ -59,6 +59,8 @@
       :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
+      @success="shareSuccess"
+      @fail="shareFail"
     ></Share>
 
   </div>
@@ -72,6 +74,7 @@
   import Discuss from '../../components/question-detail/Discuss.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';
+  import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
 
   import userAbility from '../../utils/userAbility';
@@ -127,7 +130,12 @@
       }
     },
     methods: {
+      shareSuccess(){
+          //alertAskCommunityDetailShareSuccess(this);
+      },
+      shareFail(error){
 
+      },
       paySuccess(content)
       {
           this.ask.answers[0].content = content;
@@ -167,6 +175,7 @@
           if (code !== 1000) {
             mui.toast(response.data.message);
             this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
+            return;
           }
 
           this.ask = response.data.data;

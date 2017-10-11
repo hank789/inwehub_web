@@ -97,6 +97,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 					console.log(response.data)
@@ -124,6 +125,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					//请求成功的操作
 
@@ -149,6 +151,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					//
 					//					if(response.data.data.length > 0) {
@@ -200,7 +203,7 @@
 		background-color: rgb(220, 220, 220);
 	}
 	/*清掉自带样式*/
-	
+
 	div,
 	p,
 	span,
@@ -215,31 +218,31 @@
 		font-style: normal;
 	}
 	/*滚动区域*/
-	
+
 	.mui-bar-nav~.mui-content {
 		padding-top: 0px;
 	}
-	
+
 	.mui-wechat #pullrefresh {
 		margin-top: 0px;
 	}
-	
+
 	.mui-content {
 		background: #FFFFFF;
 	}
 	/*主体部分样式*/
-	
+
 	ul {
 		width: 100%;
 		padding: 0px 16px 0 16px;
 		margin-top: 11px;
 	}
-	
+
 	ul p {
 		text-align: center;
 		position: relative;
 	}
-	
+
 	ul li {
 		width: 100%;
 		background: #f3f4f6;
@@ -248,48 +251,48 @@
 		border-radius: 5px;
 		padding: 12px 15px;
 	}
-	
+
 	ul li p:nth-of-type(1) {
 		width: 100%;
 		height: 110px;
 	}
-	
+
 	ul li p:nth-of-type(1) .check {
 		display: inline-block;
 		width: 100%;
 		height: 20px;
 	}
-	
+
 	.check i:nth-of-type(1) {
 		float: left;
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.check i:nth-of-type(2) {
 		font-size: 12px;
 		color: #808080;
 		float: right;
 	}
-	
+
 	ul li p:nth-of-type(1) span:nth-of-type(2) {
 		display: block;
 		margin-top: 23px;
 		font-size: 23px;
 		color: #444444;
 	}
-	
+
 	ul li p:nth-of-type(1) span:nth-of-type(3) {
 		display: block;
 		margin-top: 5px;
 		font-size: 14px;
 		color: #808080;
 	}
-	
+
 	ul li p:nth-of-type(2) {
 		overflow: hidden;
 	}
-	
+
 	ul li p:nth-of-type(2) span {
 		width: 100%;
 		float: left;
@@ -299,48 +302,48 @@
 		height: 28px;
 		line-height: 25px;
 	}
-	
+
 	ul li p:nth-of-type(2) span:last-of-type {
 		/*width: 100%;
 		height: 35px;
 		line-height: 20px;*/
 	}
-	
+
 	ul li p:nth-of-type(2) span:nth-child {
 		width: 100%;
 		height: 22px;
 	}
-	
+
 	ul li p:nth-of-type(3) {
 		width: 100%;
 		height: 25px;
 		color: #808080;
 		font-size: 14px;
 	}
-	
+
 	ul li p:nth-of-type(3) span {
 		float: left;
 		line-height: 35px;
 	}
-	
+
 	ul li p:nth-of-type(3) svg {
 		float: right;
 		margin-top: 10px;
 	}
 	/*无数据的样式 */
-	
+
 	.container {
 		position: absolute;
 		top: 40%;
 		left: 36%;
 	}
-	
+
 	.container svg {
 		font-size: 60px;
 		margin-left: 23px;
 		margin-bottom: 8px;
 	}
-	
+
 	.container p {
 		font-size: 12px;
 		color: #c8c8c8;

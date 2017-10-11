@@ -36,7 +36,7 @@
 
         <div class="help">
           <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
+          <div class="item" v-show="question_type === 1"  @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
 
 
         <div class="button-wrapper">
@@ -84,12 +84,10 @@
 
         <div class="button-wrapper">
           <pay :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money" v-on:pay_success="goAsk">
-
           </pay>
         </div>
       </div>
     </div>
-
 
     <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
       <ul class="mui-table-view">
@@ -123,6 +121,7 @@
       payItems: [],
       uid: 0,
       description: '',
+      question_type:1,  //提问类型，1为付费专业问答，2为免费问答互助,默认为1
       selectOther: false,
       hide: 0,
       descMaxLength: 1000,
@@ -145,7 +144,11 @@
       });
       mui.init();
 
-      this.helpWrapper();
+
+      //付费专业问答-介绍弹窗
+      if (this.question_type === 1) {
+         this.helpWrapper();
+      }
 
       this.textareaBlur();
     },
@@ -171,6 +174,16 @@
         var id = this.$route.query.id;
         if (id) {
           this.uid = id;
+        }
+      }
+
+      if (this.$route.query.question_type) {
+        var question_type = parseInt(this.$route.query.question_type);
+        if (question_type) {
+          this.question_type = question_type;
+          if (this.question_type === 2) {
+              this.descPlaceholder = '可征集大家的意见，可在问题详情页进行回答邀请。';
+          }
         }
       }
 
@@ -302,7 +315,12 @@
           return;
         }
 
-        mui('#sheet1').popover('toggle');
+        //互动问答
+        if (this.question_type === 2) {
+            this.goAsk(0, null);
+        } else {
+          mui('#sheet1').popover('toggle');
+        }
       },
       selectMoney(money) {
         if (!money) {
@@ -406,16 +424,18 @@
 
         var data = {
           order_id: order_id,
+          question_type:this.question_type,
           answer_uuid: this.uid,
-          tags: this.type.split(':')[1],
-          price: this.money,
           description: this.description,
+          price: this.money,
+          tags: this.type.split(':')[1],
           hide: this.hide,
           device: device
         };
 
-        mui('#sheet1').popover('toggle');
-
+        if (this.question_type === 1) {
+          mui('#sheet1').popover('toggle');
+        }
 
         postRequest(`question/store`, data).then(response => {
           var code = response.data.code;
@@ -430,7 +450,11 @@
           var id = result.id;
           var timeend = result.waiting_second ? result.waiting_second : 15;
 
-          this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend});
+          if (this.question_type === 1) {
+            this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend});
+          } else {
+            this.$router.replace({path: '/ask/' + id});
+          }
         });
       }
     },
@@ -439,7 +463,7 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-        
+
         //this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {

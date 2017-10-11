@@ -84,6 +84,7 @@
         var code = response.data.code;
         if (code !== 1000) {
           mui.back();
+          return;
         }
 
         localEvent.setLocalItem('ask_types2', response.data.data.tags);

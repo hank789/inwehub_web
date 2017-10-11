@@ -138,6 +138,7 @@
           if (code !== 1000) {
             mui.toast(response.data.message);
             this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
+            return;
           }
 
           this.ask = response.data.data;

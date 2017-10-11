@@ -1,5 +1,5 @@
 /**
- * 放大镜
+ * 拿着放大镜的小蛤弹窗(如升级提示弹窗)
  * 确定class .alertConfirm   .alertConfirm  callback(index, value)
  */
 function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true)
@@ -83,7 +83,7 @@ function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, c
 
   if (iconType) {
     var titlePreIcon = document.createElement('div');
-    titlePreIcon.className = 'titlePreIcon';
+    titlePreIcon.className = 'titlePreIcon ' + iconType;
     titlePreIcon.innerHTML='<svg class="icon" aria-hidden="true"><use xlink:href="#' + iconType + '"></use></svg>';
     mui('.mui-popup-in')[0].insertBefore(titlePreIcon, mui('.mui-popup-in')[0].firstChild);
   }
@@ -113,16 +113,40 @@ function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, c
   }
 }
 
+/**
+ * 云层弹窗-云层内仅有一行文字的弹窗
+ * @param titleHtml
+ * @param contentHtml
+ * @param iconType
+ * @param callback
+ * @param close
+ */
 function alertSkyOne(titleHtml = '', contentHtml = '', iconType = '', callback = null, close = true)
 {
   alertSky(titleHtml, contentHtml, iconType, callback, close, ['alertSkyTwo','alertSkyTwo-one']);
 }
 
+/**
+ * 云层弹窗-云层内仅有两行文字的弹窗
+ * @param titleHtml
+ * @param contentHtml
+ * @param iconType
+ * @param callback
+ * @param close
+ */
 function alertSkyTwo(titleHtml = '', contentHtml = '', iconType = '', callback = null, close = true)
 {
   alertSky(titleHtml, contentHtml, iconType, callback, close, ['alertSkyTwo']);
 }
 
+
+/**
+ * 简单弹窗（如:等级不够弹窗）
+ * @param contentHtml
+ * @param btnString
+ * @param callback
+ * @param close
+ */
 function alertSimple(contentHtml = '', btnString = '确定', callback = null, close = true)
 {
   var alertObj = mui.alert(contentHtml, ' ', btnString, callback, 'div');

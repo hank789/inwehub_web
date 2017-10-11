@@ -107,6 +107,7 @@ import userAbility from '../../utils/userAbility';
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
                       console.log(response.data.data.data)
 					if(response.data.data.data.length > 0) {
@@ -138,6 +139,7 @@ import userAbility from '../../utils/userAbility';
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 
 
@@ -359,7 +361,7 @@ import userAbility from '../../utils/userAbility';
 		color: #c8c8c8;
 	}
 	/***媒体查询*****/
-	
+
 	@media screen and (min-width: 320px) {
 		ul li {
 			width: 92%;
@@ -376,7 +378,7 @@ import userAbility from '../../utils/userAbility';
 			border-radius: 4px;
 		}
 	}
-	
+
 	@media screen and (min-width: 375px) {
 		ul li {
 			width: 92%;
@@ -393,7 +395,7 @@ import userAbility from '../../utils/userAbility';
 			border-radius: 4px;
 		}
 	}
-	
+
 	@media screen and (min-width: 414px) {
 		ul li {
 			width: 92%;

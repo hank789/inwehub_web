@@ -18,7 +18,7 @@ npm run build
 
 
 #规范
-#页面布局
+##页面布局
   页面标题栏
     <header class="mui-bar-nav">
         //标题栏内容
@@ -35,7 +35,7 @@ npm run build
     </nav>
 
 
-#dialog使用:
+##dialog使用:
 1. import {alertSkyOne, alertSkyTwo, alertSimple} from '../../utils/dialog';
      import inwehubDialog from '../../components/Dialog.vue';
 
@@ -52,7 +52,7 @@ npm run build
          });
 
 
-#dialog全局使用
+##dialog全局使用
   this.$parent.$refs.inwehubDialog.getHtml('test', {ok:'this is ok'}, (html) => {
             console.log('html:'+html);
             alertSimple(html, 'ok');
@@ -60,18 +60,30 @@ npm run build
 
 
 
-#message组件
+##message组件
     调用
       this.$refs.MessageComponent.show('hello', () => {
           //点击后要处理的业务
             });
 
 
-#路由命名
+##路由命名
    1 小驼峰式
    2 列表如: /my/info/trains 以复数形式结尾
    3 详情
         如: '/my/info/train/:id'  需要id以:id结尾, 不需要id的以单数形式结尾
 
+
+##pc端阶梯式布局尺寸参考值
+    1-768        手机    100%
+    768-992      平板    750px
+    992-1200     小pc    970px
+    1200-1919    大pc    1170px
+    1920-        超大pc
+
+
+
+##inwehub-web参考值
+    768-x  1100px
 
 

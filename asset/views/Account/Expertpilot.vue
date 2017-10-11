@@ -1,5 +1,5 @@
 <template>
-  <div class="mui-content">
+  <div class="mui-content absolute">
     <header>
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <div>

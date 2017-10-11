@@ -112,6 +112,7 @@
           if (code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
+            return;
           }
 
           if (response.data.data.length > 0) {
@@ -127,6 +128,7 @@
           if (code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
+            return;
           }
 
           if (response.data.data.length > 0) {

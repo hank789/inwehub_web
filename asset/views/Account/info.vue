@@ -90,10 +90,12 @@
 				<a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码" style="color: rgb( 3,174,249);">hi@inwehub.com</a> ,小哈帮您维护！
 			</div>
 
-			<uploadHeader ref="uploadHeader"></uploadHeader>
+
 
 		</div>
 		<div id="statusBarStyle" background="#ffffff" mode="light"></div>
+
+    <uploadHeader ref="uploadHeader"></uploadHeader>
 	</div>
 </template>
 
@@ -142,7 +144,7 @@
 				console.log('refresh-info');
 				this.getUserInfo();
 			});
-			
+
 		},
 		methods: {
 			refreshPageData(){
@@ -211,8 +213,8 @@
 					this.user = user;
 					this.loading = 0;
 					//提示完善名片;
-				     userAbility.perfectCard(this);								        
-     
+				     userAbility.perfectCard(this);
+
 				}));
 			}
 		}
@@ -222,20 +224,20 @@
 	.mui-content {
 		background-color: #ffffff;
 	}
-	
+
 	.mui-bar .myicon {
 		width: 16px;
 		height: 16px;
 		right: 8px;
 		top: 8px;
 	}
-	
+
 	p,
 	span {
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	.info-professor {
 		width: 100%;
 		padding: 20px 15px 0px 16px;
@@ -243,30 +245,30 @@
 		text-align: center;
 		position: relative;
 	}
-	
+
 	.info-look {
 		position: absolute;
 		top: 20px;
 		right: 15px;
 	}
-	
+
 	.info-look svg {
 		font-size: 24px;
 		color: rgb(3, 174, 249);
 		margin-bottom: -2px;
 	}
-	
+
 	.info-look span {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.info-professor p:nth-of-type(1) img {
 		width: 69px;
 		height: 69px;
 		border-radius: 50%;
 	}
-	
+
 	.info-professor p:nth-of-type(1) span {
 		display: inline-block;
 		width: 18px;
@@ -277,7 +279,7 @@
 		margin-bottom: 6px;
 		position: relative;
 	}
-	
+
 	.info-professor p:nth-of-type(1) span svg {
 		font-size: 25px;
 		color: #808080;
@@ -285,32 +287,32 @@
 		left: -4px;
 		top: -3px;
 	}
-	
+
 	.info-professor p:nth-of-type(2) {
 		margin-top: 6px;
 	}
-	
+
 	.info-professor p:nth-of-type(2) span {
 		font-size: 16px;
 		font-weight: 600;
 		color: #444444;
 	}
-	
+
 	.info-professor p:nth-of-type(2) svg {
 		font-size: 20px;
 		color: rgb(3, 174, 249);
 		margin-bottom: -2px;
 	}
-	
+
 	.info-professor p:nth-of-type(3) {
 		margin-top: 7px;
 	}
-	
+
 	.info-professor p:nth-of-type(3) span {
 		font-size: 13px;
 		color: #444444;
 	}
-	
+
 	.info-professor p:nth-of-type(3) i {
 		display: inline-block;
 		width: 1px;
@@ -318,28 +320,28 @@
 		background: #c8c8c8;
 		margin: 0 3px -2px 3px;
 	}
-	
+
 	.info-professor p:nth-of-type(4) {
 		margin-top: 7px;
 	}
-	
+
 	.info-professor p:nth-of-type(5) {
 		margin-top: 6px;
 	}
-	
+
 	.info-professor p:nth-of-type(4),
 	.info-professor p:nth-of-type(5) {
 		font-size: 14px;
 		color: #444444;
 	}
-	
+
 	.info-progresbar {
 		width: 100%;
 		height: 50px;
 		padding: 10px 17px 0 16px;
 		background: #F3F4F6;
 	}
-	
+
 	.info-progresbar svg {
 		float: right;
 		font-size: 15px;
@@ -347,7 +349,7 @@
 		margin-left: 0px;
 		margin-top: 4px;
 	}
-	
+
 	.info-progresbar .info-progress {
 		display: inline-block;
 		width: 80%;
@@ -357,7 +359,7 @@
 		border: 0.5px solid rgb(3, 174, 249);
 		margin-bottom: -2px;
 	}
-	
+
 	.info-progresbar .info-progress>i {
 		display: inline-block;
 		font-style: normal;
@@ -366,12 +368,12 @@
 		height: 12px;
 		background: rgb(3, 174, 249);
 	}
-	
+
 	.info-progresbar .info-text {
 		font-size: 12px;
 		color: #808080;
 	}
-	
+
 	.paizhao {
 		width: 100%;
 		height: 100px;
@@ -380,16 +382,16 @@
 		font-size: 12px;
 		color: rgb(128, 128, 128);
 	}
-	
+
 	.part3 .desc {
 		margin-left: 40px;
 		font-size: 12px;
 	}
-	
+
 	.part3 .important {
 		color: #F6A623;
 	}
-	
+
 	.info-choose {
 		width: 100%;
 		height: 95px;
@@ -401,22 +403,22 @@
 		z-index: 999;
 		display: none;
 	}
-	
+
 	.info-choose p {
 		width: 45px;
 		height: 71px;
 		float: left;
 	}
-	
+
 	.info-choose p:nth-of-type(2) {
 		margin-left: 36px;
 	}
-	
+
 	.info-choose p svg {
 		font-size: 48px;
 		color: rgb(220, 220, 220);
 	}
-	
+
 	.info-choose p span {
 		display: block;
 		margin-left: 10px;
@@ -424,11 +426,11 @@
 		color: #808080;
 		font-size: 13px;
 	}
-	
+
 	#mui-popover-action {
 		background: #FFFFFF;
 	}
-	
+
 	.mui-table-view:after {
 		position: absolute;
 		right: 16px;
@@ -440,7 +442,7 @@
 		transform: scaleY(.5);
 		background-color: #F2F2F2;
 	}
-	
+
 	.mui-table-view-cell:after {
 		position: absolute;
 		right: 16px;
@@ -449,7 +451,7 @@
 		height: 1px;
 		content: '';
 	}
-	
+
 	.mui-table-view:before {
 		position: absolute;
 		top: 0;
@@ -461,13 +463,13 @@
 		transform: scaleY(.5);
 		background-color: #fff;
 	}
-	
+
 	@media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
 		.part2 .progressBar {
 			width: 160px !important;
 		}
 	}
-	
+
 	@media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
 		.part2 .progressBar {
 			width: 160px !important;

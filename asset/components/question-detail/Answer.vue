@@ -10,6 +10,7 @@
       :isFollow="isFollow"
       :isFollowed="answer.is_followed?true:false"
       :isExpert="answer.is_expert ? answer.is_expert : 0"
+      :isShowPositionAndCompany="isShowPositionAndCompany"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
@@ -90,6 +91,10 @@
       needMoney: {
         type: Boolean,
         default: false
+      },
+      isShowPositionAndCompany:{
+        type: Boolean,
+        default: false
       }
     },
     created(){
@@ -119,6 +124,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
+            return;
           }
 
           var content = response.data.data.content;

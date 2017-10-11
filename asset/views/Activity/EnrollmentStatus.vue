@@ -108,6 +108,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					console.log(response.data.data.tip)
 					if(response.data.data) {
@@ -130,6 +131,7 @@
 					if(code !== 1000) {
 						mui.alert(response.data.message);
 						mui.back();
+						return;
 					}
 					if(response.data.data) {
 
@@ -151,6 +153,7 @@
 						if(code !== 1000) {
 							mui.alert(response.data.message);
 							mui.back();
+							return;
 						}
 //						console.log(response.data.data)
 						if(response.data.data) {
@@ -174,6 +177,7 @@
 						if(code !== 1000) {
 							mui.alert(response.data.message);
 							mui.back();
+							return;
 						}
 //						console.log(response.data.data.data)
 						if(response.data.data) {
@@ -185,8 +189,8 @@
 						this.loading = 0;
 					});
 			},
-			
-			
+
+
 
 
 		},
@@ -393,11 +397,11 @@
   	color: #444444;
 
   }
-  
-  
-  
+
+
+
   /***媒体查询*****/
-	
+
 	@media screen and (min-width: 320px) {
 		.enroll img {
 			width: 100%;
@@ -405,7 +409,7 @@
 			border-radius: 4px;
 		}
 	}
-	
+
 	@media screen and (min-width: 375px) {
 		.enroll img {
 			width: 100%;
@@ -413,7 +417,7 @@
 			border-radius: 4px;
 		}
 	}
-	
+
 	@media screen and (min-width: 414px) {
 		.enroll img {
 			width: 100%;

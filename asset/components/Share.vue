@@ -113,6 +113,8 @@
         this.hide();
       },
       successCallback(){
+        this.$emit('success');
+
         postRequest(`share/wechat/success`, {
           'target': this.link,
           'title' : this.title
@@ -128,6 +130,7 @@
         }
       },
       failCallback(error){
+        this.$emit('fail', error);
         console.log(JSON.stringify(error));
         mui.toast('分享失败');
       },

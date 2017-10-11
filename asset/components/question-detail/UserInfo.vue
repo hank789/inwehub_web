@@ -15,13 +15,13 @@
       {{ realname }}
 
 
-      <div class="detail">
+      <div class="detail" v-if="isShowPositionAndCompany">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
         <span class="company">{{ company }}</span>
       </div>
 
-      <div class="followWrapper" v-if="isFollow">
+      <div class="followWrapper" v-if="isFollow && realname !== '匿名'">
         <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
         <span class="followButton" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
@@ -68,6 +68,10 @@
       isExpert: {
         type: Number,
         default: false
+      },
+      isShowPositionAndCompany:{
+        type: Boolean,
+        default:false
       }
     },
     created(){
@@ -146,6 +150,7 @@
 
   .mui-media-body {
     padding-left: 10px;
+    min-height: 25px;
   }
 
   .mui-table-view-cell:after {
@@ -153,7 +158,7 @@
   }
 
   .detail {
-    font-size: 14px;
+    font-size: 13px;
     color: #808080;
   }
 
@@ -175,7 +180,7 @@
     border-radius: 50px;
     font-size: 13px;
     color: #03aef9;
-    padding: 2px 15px;
+    padding: 1px 15px;
   }
 
   .followButton.active{
@@ -189,7 +194,7 @@
 
   .mui-media-body .followWrapper {
     position: absolute;
-    top: 5px;
+    top:0;
     right: 0;
   }
 
