@@ -160,7 +160,7 @@
 
   .resumeWrapper .shareBtn{
     position: absolute;
-    top: 24px;
+    top: 24px !important;
     font-size: 22px;
     right: 31px;
     color: #808080;
