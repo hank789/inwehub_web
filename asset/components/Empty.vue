@@ -27,7 +27,7 @@
 
 <style lang="less" scoped>
     .emptyWrapper {
-        padding-top:30px;
+        padding:30px 0;
         font-size: 50px;
         text-align: center;
         color:#dcdcdc;
