@@ -10,6 +10,8 @@
         <QustionInteraction
           :ask="ask.question"
           :isFollow="true"
+          :isFollowAsked="ask.is_followed_question?true:false"
+          @setFollowAskStatus="setFollowAskStatus"
         ></QustionInteraction>
 
         <div class="river"></div>
@@ -58,6 +60,7 @@
         },
         timeline: []
       },
+      answers:[],
       shareUrl: '',
       shareImg: '',
       shareContent: '',
@@ -83,6 +86,7 @@
       });
 
       this.getDetail();
+      //this.getAnswerList();
     },
     components: {
       QustionInteraction,
@@ -104,20 +108,20 @@
       shareFail(error){
 
       },
-      paySuccess(content)
-      {
-        this.ask.answers[0].content = content;
+      setFollowAskStatus(status){
+        this.ask.is_followed_question = status;
       },
-      downRefresh(callback){
-        this.getDetail(() => {
-          this.$refs.discuss.resetList();
-        });
-      },
-      toSeeHelp(){
-        this.$router.pushPlus('/help/ask');
-      },
-      toAsk(){
-        userAbility.jumpToAddAsk();
+      getAnswerList(){
+        postRequest(`question/answerList`, {question_id: this.id}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.toast(response.data.message);
+            mui.back();
+            return;
+          }
+
+          this.answers = response.data.data;
+        })
       },
       getDetail(successCallback = () => {
                 }){

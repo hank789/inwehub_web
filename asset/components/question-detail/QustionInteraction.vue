@@ -17,20 +17,21 @@
     </div>
 
     <div class="answerCount">
-      2人回答
-      <span>关注问题</span>
+      {{ ask.answer_num }}人回答
+      <span v-if="isFollowAsked">已关注</span>
+      <span @tap.stop.prevent="collectAsk()" v-else>关注问题</span>
     </div>
 
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.push('/answerrefuse/' + answer.question.id)">
+                @tap.stop.prevent="$router.push('/contact')">
           邀请回答
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="">
+                @tap.stop.prevent="$router.push('/realAnswer/' + ask.id)">
           参与回答（草稿）
        </button>
       </div>
@@ -41,6 +42,7 @@
 <script type="text/javascript">
 
   import UserInfo from './UserInfo.vue';
+  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
   export default {
     data () {
@@ -55,6 +57,10 @@
         type: Object,
         default: {}
       },
+      isFollowAsked:{
+        type:Boolean,
+        default:false
+      },
       isFollow: {
         type: Boolean,
         default: false
@@ -66,6 +72,27 @@
     methods: {
       setFollowStatus(status){
         this.ask.is_followed=status;
+      },
+      collectAsk: function () {
+        if (!this.ask.id) {
+          return;
+        }
+
+        postRequest(`follow/question`, {
+          id: this.ask.id
+        }).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          var is_followed = response.data.data.type === 'follow' ? 1 : 0;
+
+          mui.toast(response.data.data.tip);
+
+          this.$emit('setFollowAskStatus', is_followed);
+        });
       },
       getHtml(id, options, callback) {
       }

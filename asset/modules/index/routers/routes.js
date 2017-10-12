@@ -143,6 +143,18 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { //邀请回答
+    path: '/contact',
+    name: 'contact',
+    meta: {
+      title: '邀请回答',
+      wechatHideHeader: false
+    },
+    component: require('../../../views/Contact.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 	{
 		path: '/login',
     name: 'login',
