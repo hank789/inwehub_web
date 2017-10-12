@@ -187,11 +187,112 @@
         </div>
       </div>
     </div>
-    
-    
-    
-    
-    
+   <!--文章发表成功--> 
+   <div id="article_t">
+   	  <div class="article_t">
+   	  	<p>你的文章发表成功啦！</p>
+   	  	<p>（成长值<i>+5</i>）</p>	
+   	  </div>
+   </div>
+   <div id="article_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 	<p>分享文章</p>
+   	 </ul>
+   </div>
+  <!--文章评论分享成功-->  
+   <div id="articlecomment_t">
+   	  <div class="article_t">
+   	  	<p>分享成功！</p>
+   	  	<p>（成长值<i>+1</i>）</p>	
+   	  </div>
+   </div>
+   <div id="articlecomment_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 </ul>
+   </div> 
+    <!--评论发表成功-->
+     <div id="comment_t">
+   	  <div class="article_t">
+   	  	<p>你的评论发表成功啦！</p>
+   	  	<p>（成长值<i>+5</i>）</p>	
+   	  </div>
+   </div>
+   <div id="comment_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 	<p>分享评论</p>
+   	 </ul>
+   </div>
+   
+   
+   <!--互动问答答案提交成功-->
+   <div id="community_t">
+   	  <div class="article_t">
+   	  	<p>你的答案已成功提交！</p>
+   	  	<p>（成长值<i>+200</i>，贡献值<i>+200</i>）</p>	
+   	  </div>
+   </div>
+ <div id="community_b">
+	<ul class="hotAnswer_b">
+		<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li>
+			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img src="../statics/images/balance1.png" />
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：郭大红</p>
+			</div>
+			<i class="bot"></i>
+		</li>
+		<span class="share">分享我的问答</span>
+	</ul>
+	
+</div>
+ 
+ 
+ 
+  <!--专业问答分享成功-->
+   <div id="community_t">
+   	  <div class="article_t">
+   	  	<p>分享成功！</p>
+   	  	<p>（成长值<i>+1</i>）</p>	
+   	  </div>
+   </div>
+ <div id="community_b">
+	<ul class="hotAnswer_b">
+		<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li>
+			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img src="../statics/images/balance1.png" />
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：郭大红</p>
+			</div>
+			<i class="bot"></i>
+		</li>
+		<!--<span class="share">分享我的问答</span>-->
+	</ul>
+	
+</div>
     
   </div>
 </template>
@@ -635,4 +736,150 @@
     line-height: 54px;
 
   }
+  /*文章*/
+ .article_t {
+ 	 /*width: 240px;*/
+     /*height: 100px;*/
+    /* border: 1px solid #CCCCCC;*/
+ }
+ .article_t p:nth-child(1){
+ 	font-size: 19px;
+ 	color: #444444;
+ 	text-align: center;
+    margin-top: 15px;
+   
+ }
+ .article_t p:nth-child(2){
+ 	font-size: 14px;
+ 	color:#808080;
+ 	margin-top: 8px;
+ 	text-align: center;
+   
+ }
+ .article_t p:nth-child(2) i{
+ 	font-size: 14px;
+ 	color:#03aef9;
+ 	font-style:normal;
+ 	
+   
+ }
+ 
+ 
+ 
+
+.article_b li{
+	font-size: 14px;
+	color:#444444;
+	margin-bottom:12px;
+	position: relative;
+	margin-left: 13px;
+}
+
+.article_b span{
+	font-size: 14px;
+	color:#808080;
+	margin-top:15px;
+	margin-bottom:12px;
+	display: block;
+}
+
+.article_b li:before {
+    content: '';
+    background: #03aef9;
+    border: 1px solid #03aef9;
+    position: absolute;
+    border-radius: 50%;
+    width: 3px;
+    height: 3px;
+    top: 8px;
+    left: -10px;
+
+}
+.article_b  p{
+	color: #03aef9;
+	font-size: 16px;
+	border-top:1px solid  #dcdcdc;
+	text-align: center;
+	padding-top: 12px;
+	padding-bottom: 20px;
+}
+
+/*互动问答答案提交成功*/
+.hotAnswer_b {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.hotAnswer_b li {
+		width: 100%;
+		overflow: hidden;
+		padding: 12px 0;
+		position: relative;
+	}
+
+	.hotAnswer_b li>p {
+		font-size: 14px;
+		color: #444444;
+	}
+
+	.hotAnswer_d {
+		width: 100%;
+		height: 32px;
+		margin-top: 4.5px;
+	}
+
+	.hotAnswer_d p {
+		float: left;
+	}
+
+	.hotAnswer_d p:nth-child(1) {
+		width: 32px;
+		height: 32px;
+		/*background: #CCCCCC;*/
+		position: relative;
+	}
+
+	.hotAnswer_d p:nth-child(1)>svg {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		right: -4px;
+	}
+
+	.hotAnswer_d p:nth-child(1)>img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+
+	.hotAnswer_d p:nth-child(2) {
+		/*width: 340px;*/
+		height:18px;
+		margin-top: 9px;
+		line-height: 18px;
+		font-size: 13px;
+		color: #808080;
+		/*background: #CCCCCC;*/
+		margin-left: 8px;
+	}
+.hotAnswer_recommend{
+	font-size:14px;
+	color:#808080;
+	margin-top: 15px;
+}
+
+ .hotAnswer_b .share{
+ 	display: block;
+	width: 100%;
+	height: 40px;
+	background:#03aef9;
+	border-radius: 4px;
+	font-size: 16px;
+	color:#FFFFFF;
+	text-align: center;
+    line-height: 40px;
+    margin-top: 20px;
+}
+
+	
 </style>
