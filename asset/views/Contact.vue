@@ -28,6 +28,18 @@
 
         </div>
       </Contact>
+
+      <Share
+        ref="ShareBtn"
+        :hideShareBtn="true"
+        :title="''"
+        :link="'http://www.baidu.com'"
+        :content="''"
+        :imageUrl="''"
+        :thumbUrl="''"
+        @success="shareSuccess"
+        @fail="shareFail"
+      ></Share>
     </div>
   </div>
 </template>
@@ -36,6 +48,7 @@
 
   import Contact from './../components/contact/Index.vue'
   import { apiRequest, postRequest } from '../utils/request';
+  import Share from '../components/Share.vue';
 
 
   export default {
@@ -47,10 +60,17 @@
       }
     },
     components: {
-      Contact
+      Contact,
+      Share
     },
     computed: {},
     methods: {
+      shareSuccess(){
+
+      },
+      shareFail(){
+
+      },
       choose(item){
         console.log(item);
         postRequest(`question/inviteAnswer`, {
@@ -67,7 +87,7 @@
         });
       },
       toFollowMore(){
-          this.$router.push('/askCommunity/majors');
+          this.$refs.ShareBtn.share();
       },
       getList(id) {
         postRequest(`question/inviterList`, {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="share()">
+    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="share()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fenxiang"></use>
       </svg>
@@ -58,6 +58,10 @@
       thumbUrl: {
         type: String,
         default: ''
+      },
+      hideShareBtn:{
+          type:Boolean,
+          default:false
       }
     },
     watch: {
@@ -93,7 +97,10 @@
         mui('#shareShowWrapper').popover('toggle');
       },
       shareToHaoyou(){
-        this.sendHaoyou();
+        if (this.sendHaoyou) {
+          this.sendHaoyou();
+        }
+
         if (mui.os.plus) {
           mui('#shareWrapper').popover('toggle');
         } else {
@@ -103,7 +110,9 @@
         this.hide();
       },
       shareToPengyouQuan(){
-        this.sendPengYouQuan();
+        if (this.sendPengYouQuan) {
+          this.sendPengYouQuan();
+        }
         if (mui.os.plus) {
           mui('#shareWrapper').popover('toggle');
         } else {
