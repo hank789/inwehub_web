@@ -256,18 +256,19 @@
 			},
 			//认证专家；
 			toApply(expertStatus) {
-				switch (parseInt(expertStatus)) {
-			        case 0:
-			        case 3:
-			            this.$router.push('/my/pilot');
-			          break;
-			        case 2:
-			          mui.toast('您已经是专家');
-			          break;
-			        case 1:
-			          this.$router.push('/expert/apply/success?type=0');
-			          break;
-			      }
+				userAbility.jumpToApplyProfessor(this);
+//				switch (parseInt(expertStatus)) {
+//			        case 0:
+//			        case 3:
+//			            this.$router.push('/my/pilot');
+//			          break;
+//			        case 2:
+//			          mui.toast('您已经是专家');
+//			          break;
+//			        case 1:
+//			          this.$router.push('/expert/apply/success?type=0');
+//			          break;
+//			      }
 
 			},
 			getNumbers: function(number) {
@@ -344,8 +345,12 @@
 		},
 		mounted() {
 //			mui.waiting();
-			//领取新手任务；
-//      		userAbility.newbieTask(this);
+			//成为认证专提示；
+			if(this.$route.query.needalert){
+				userAbility.expertcertification(this);
+			}
+//		 console.log()
+        		
 		}
 	}
 </script>

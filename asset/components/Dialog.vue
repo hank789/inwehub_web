@@ -171,6 +171,28 @@
         </div>
 
     </div>
+    
+    <!-- 专家申请成功呢提示-->
+    <div id="p-expertapplication">
+      <div id="expertapplication-t">
+        <div class="expertapplication-t">
+          <p>恭喜！您已成为平台专家</p>
+          <p>（成长值<i>+200</i>，贡献值<i>+500</i>）</p>
+        </div>
+      </div>
+      <div id="expertapplication-b">
+        <div class="expertapplication-b alertConfirm">
+          查看个人海报并可分享
+
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    
   </div>
 </template>
 <script type="text/javascript">
@@ -562,5 +584,55 @@
   .askCommunityDetailShare_body .title{
     font-size:14px;
     color:#808080;
+  }
+  
+  
+  /*认证专家*/
+  /*完善名片提示*/
+  #expertapplication-t {
+    width: 240px;
+    height: 117px;
+  border: 1px solid #DCDCDC;
+  }
+
+  .expertapplication-t {
+    width: 250px;
+    height: 100px;
+  }
+
+  .expertapplication-t p:nth-child(1) {
+    font-size: 19px;
+    color: #444444;
+    text-align: center;
+    margin-top: 31px;
+  }
+
+  .expertapplication-t p:nth-child(2) {
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+    margin-top: 7.5px;
+
+  }
+
+  .expertapplication-t p:nth-child(2) i {
+    color: #03aef9;
+    font-style: normal;
+  }
+
+  #expertapplication-b {
+    width: 240px;
+    height: 54px;
+    /*background: #CCCCCC;*/
+  }
+
+  .expertapplication-b {
+    width: 240px;
+    height: 54px;
+    font-size: 16px;
+    color: #03aef9;
+    text-align: center;
+    line-height: 54px;
+
   }
 </style>
