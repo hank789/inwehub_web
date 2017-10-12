@@ -8,10 +8,27 @@
                     <ul v-for="(list, key) in data" class="index-bar-group">
                         <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
                         <li v-for="(item, index) in list" :key="index" @tap="chooseItem" :data-raw="item.raw"
-                            class="index-bar-cell tap-active">
-                            {{item.raw}}
+                            class="index-bar-cell tap-active" :class="{bottomBorder:index !== list.length-1  }">
 
-                    </li>
+                            <div class="avatar">
+                                <div class="avatarInner" @tap.stop.prevent="">
+                                    <img src="/images/whiteLogo@2x.png">
+
+                                    <svg class="icon" aria-hidden="true" v-show="true">
+                                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="textBody">
+                                {{item.raw}}
+                                <div class="desc">显示个人签名</div>
+                            </div>
+
+                            <div class="ibutton">邀请</div>
+
+
+                        </li>
                     </ul>
                 </div>
 
@@ -101,8 +118,13 @@
                 }
             },
             chooseIndex (e) {
-                var oPos = e.target.offsetTop;
-                document.getElementsByClassName('index-bar-content')[0].scrollTo(0, oPos);
+                var innerHTML = e.target.innerHTML;
+                var target = document.getElementById(innerHTML);
+                if (target) {
+                    var oPos = target.offsetTop;
+                    console.log(oPos);
+                    document.getElementsByClassName('groupWrapper')[0].scrollTo(0, oPos - 12);
+                }
             },
             chooseItem (e) {
                 var raw = e.target.getAttribute('data-raw')
@@ -113,72 +135,52 @@
 </script>
 <style scoped>
     .index-bar-container {
-        position: fixed;
-        z-index: 10;
-        left: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-orient: vertical;
-        box-orient: vertical;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-    }
 
-    .index-bar-container .index-bar-head {
-        background: #ffffff;
-        width: 100%;
     }
 
     .index-bar-container .index-bar-main {
-        -webkit-box-flex: 1;
-        box-flex: 1;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        height: 1%;
-        -webkit-flex: 1;
-        flex: 1;
-        position: relative;
+
     }
 
-    .index-bar-container .index-bar-main .index-bar-content {
-        height: 100%;
+    .groupWrapper{
         overflow-y: auto;
+        position: fixed;
+        z-index: 10;
+        top:149px;
+        left: 0;
+        right: 0;
+        bottom:0;
+        width: 100%;
     }
+
+
 
     .index-bar-container .index-bar-main .index-bar-content .index-bar-group {
-        font-size: 0.75rem;
         padding: 0;
         margin: 0;
         color: #656565;
     }
 
     .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell {
-        padding-left: 0.8rem;
+        padding-left: 15px;
         color: #000000;
-        height: 2.2rem;
-        line-height: 2.2rem;
+
         background-color: #ffffff;
-        border-bottom: 1px solid #f7f7f7;
     }
 
     .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell.index-bar-cell-head {
-        font-size: 0.7rem;
+        font-size:13px;
         height: 25px;
         line-height: 25px;
-        padding-left: 0.8rem;
+        padding-left: 15px;
         background-color: #f5f5f5;
-        margin-top: -1px;
     }
 
     .index-bar {
         position: absolute;
         right: 0;
-        top: 35px;
-        z-index: 1;
+        top: 135px;
+        z-index: 12;
         height: 100%;
         width: 23px;
         font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -202,14 +204,84 @@
 
     .index-bar .index-bar-item {
         color: #444;
-        line-height:17px;
+        line-height: 17px;
         font-size: 12px;
         text-align: center;
         display: inline-block;
     }
 
-    .groupWrapper{
-        background:#fff;
-        padding-right:30px;
+    .groupWrapper {
+        background: #fff;
+        padding-right: 30px;
+        overflow-y: scroll;
+    }
+
+    .bottomBorder:after{
+        right:0;
+    }
+
+    .groupWrapper:last-child:after{
+        display: none;
+    }
+
+    .avatar {
+        z-index: 0;
+        color: #ffffff;
+        background-color: #bdbdbd;
+        display: inline-block;
+        height: 44px;
+        width: 44px;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .avatar .avatarInner {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    .avatar img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .tap-active{
+        font-size:14px;
+        padding:10px 0 4px;
+    }
+
+    .textBody{
+        display: inline-block;
+        vertical-align: top;
+        color:#565656;
+    }
+    .textBody .desc{
+        color:#b4b4b6;
+    }
+
+    .ibutton{
+        float:right;
+        color:#03aef9;
+        border-radius:50px;
+        border:1px solid #03aef9;
+        padding:0 15px;
+        position: relative;
+        top:10px;
+        margin-right:5px;
     }
 </style>
