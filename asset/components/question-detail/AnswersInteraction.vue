@@ -4,7 +4,7 @@
     <Empty :description="'正在等待抢答'" v-if="list.length === 0"></Empty>
 
 
-    <div class="item bottomBorder" v-else  v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
+    <div class="item listBottomBorder" v-else  v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
       <UserInfo
         :uuid="11111"
         :avatar="item.user_avatar_url"

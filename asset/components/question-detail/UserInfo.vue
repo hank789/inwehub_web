@@ -1,5 +1,5 @@
 <template>
-  <div class="mui-table-view-cell">
+  <div class="mui-table-view-cell userInfoWrapper">
     <div class="avatar">
       <div class="avatarInner" @tap.stop.prevent="toResume()">
         <img :src="avatar">
@@ -210,5 +210,8 @@
     color: #03aef9;
   }
 
+  .userInfoWrapper{
+    padding:15px;
+  }
 
 </style>
