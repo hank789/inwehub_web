@@ -18,7 +18,7 @@
           </div>
 
           <div class="notFound">
-            找不到成员？<span>添加新的关注</span>
+            找不到成员？<span @tap.stop.prevent="toFollowMore()">微信直接邀请</span>
           </div>
 
         </div>
@@ -52,6 +52,9 @@
     methods: {
       choose(item){
          mui.alert('开发中...');
+      },
+      toFollowMore(){
+          this.$router.push('/askCommunity/majors');
       },
       getList() {
         postRequest(`followed/users`, {}).then(response => {

@@ -78,7 +78,6 @@
   import Share from '../../components/Share.vue';
 
   import userAbility from '../../utils/userAbility';
-  import PageDown from '../../components/refresh/PageDown.vue';
 
   const AskDetail = {
     data: () => ({
@@ -121,8 +120,7 @@
       Discuss,
       Answer,
       Comment,
-      Share,
-      PageDown
+      Share
     },
     computed: {
         answer () {

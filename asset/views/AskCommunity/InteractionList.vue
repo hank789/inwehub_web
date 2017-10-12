@@ -6,7 +6,7 @@
       <h1 class="mui-title">互动问答</h1>
     </header>
 
-    <div class="mui-content absolute" v-show="!this.loading">
+    <div class="mui-content absolute">
 
       <div class="menu">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -19,41 +19,35 @@
         </div>
       </div>
 
-      <div class="mui-scroll-wrapper" id="refreshContainer">
-        <div class="mui-scroll">
-          <div class="recommendlist" v-show="!this.loading">
-
-
-            <div class="container" v-show="list.length === 0">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zanwushuju"></use>
-              </svg>
-              <p>暂时还没有数据呀～</p>
-            </div>
-
-            <div>
-
-              <ul class="mui-table-view mui-table-view-chevron">
-                <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
-                  <div class="first">
-                    <div class="avatar">
-                      <div class="avatarInner"><img class="avatar" :src="item.question_user_avatar_url"></div>
-                    </div>
-                    <div class="mui-media-body">{{ item.question_username }}</div>
+      <RefreshList
+        v-model="list"
+        :api="'question/commonList'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :list="list"
+      >
+        <div class="recommendlist">
+          <div>
+            <ul class="mui-table-view mui-table-view-chevron">
+              <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
+                <div class="first">
+                  <div class="avatar">
+                    <div class="avatarInner"><img class="avatar" :src="item.question_user_avatar_url"></div>
                   </div>
-                  <div class="second">{{ item.description }}</div>
-                  <div class="three">{{ item.answer_num }}人回答</div>
-                </li>
-              </ul>
-            </div>
+                  <div class="mui-media-body">{{ item.question_username }}</div>
+                </div>
+                <div class="second">{{ item.description }}</div>
+                <div class="three">{{ item.answer_num }}人回答</div>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-
+      </RefreshList>
 
       <div class="button-wrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">发布互动问答
+
         </button>
       </div>
 
@@ -62,108 +56,20 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import userAbility from '../../utils/userAbility';
+  import RefreshList from '../../components/refresh/List.vue';
 
   const InteractionList = {
     data: () => ({
-      list: [],
-      busy: false,
-      loading: true,
+      list: []
     }),
-    computed: {
-      type() {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
-      },
-      bottomId() {
-        var length = this.list.length;
-        if (length) {
-          return this.list[length - 1].id;
-        }
-        return 0;
-      },
+    components: {
+      RefreshList
     },
-    components: {},
     methods: {
-      downRefresh(){
-        this.getList();
-      },
-      loadMore(){
-        this.busy = true;
-        this.getNextList();
-      },
       toDetail(id) {
         this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
-      },
-      selectType(type_text) {
-        this.$router.push('/ask/type?type=majorlist')
-      },
-      getList() {
-        postRequest(`question/commonList`, {
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
-          }
-
-          if (response.data.data) {
-            this.list = response.data.data;
-          }
-          //没有数据的显示框不显示；
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
-        });
-      },
-      getNextList() {
-        postRequest(`question/commonList`, {
-          bottom_id: this.bottomId,
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-          }
-
-          if (response.data.data.length > 0) {
-            this.list = this.list.concat([]); //response.data.data
-          }
-
-          if (response.data.data.length < 10) {
-            this.busy = true;
-          } else {
-            this.busy = false;
-          }
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy);
-
-        });
       }
-
-    },
-    mounted() {
-      mui.init({
-        pullRefresh: {
-          container: "#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-          down: {
-            auto: true,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown: "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          },
-          up: {
-            contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.getNextList
-          }
-        }
-      });
-    },
+    }
   }
   export default InteractionList;
 </script>
