@@ -23,7 +23,8 @@
         <div class="mui-scroll">
           <div class="recommendlist" v-show="!this.loading">
 
-            <div class="container" v-show="recommendList.length === 0">
+
+            <div class="container" v-show="list.length === 0">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zanwushuju"></use>
               </svg>
@@ -33,17 +34,15 @@
             <div>
 
               <ul class="mui-table-view mui-table-view-chevron">
-                <li class="mui-table-view-cell" v-for="(list, index) in recommendList">
+                <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
                   <div class="first">
                     <div class="avatar">
-                      <div class="avatarInner"><img class="avatar" src="images/expert.png"></div>
+                      <div class="avatarInner"><img class="avatar" :src="item.question_user_avatar_url"></div>
                     </div>
-                    <div class="mui-media-body">realname
-            <div class="detail"><span class="position">运营专员</span><span class="split"></span><span class="company">上海樱维网络有限公</span></div>
-                    </div>
+                    <div class="mui-media-body">{{ item.question_username }}</div>
                   </div>
-                  <div class="second">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</div>
-                  <div class="three">2人回答</div>
+                  <div class="second">{{ item.description }}</div>
+                  <div class="three">{{ item.answer_num }}人回答</div>
                 </li>
               </ul>
             </div>
@@ -53,8 +52,8 @@
 
 
       <div class="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">
-          发布互动问答
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">发布互动问答
         </button>
       </div>
 
@@ -66,10 +65,9 @@
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import userAbility from '../../utils/userAbility';
 
-  const MajorList = {
+  const InteractionList = {
     data: () => ({
-      hotList: [],
-      recommendList: [],
+      list: [],
       busy: false,
       loading: true,
     }),
@@ -78,9 +76,9 @@
         return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
       },
       bottomId() {
-        var length = this.recommendList.length;
+        var length = this.list.length;
         if (length) {
-          return this.recommendList[length - 1].id;
+          return this.list[length - 1].id;
         }
         return 0;
       },
@@ -88,21 +86,20 @@
     components: {},
     methods: {
       downRefresh(){
-          this.getRecommendList();
+        this.getList();
       },
       loadMore(){
-        console.log('loadMore');
         this.busy = true;
         this.getNextList();
       },
       toDetail(id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
+        this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
       },
       selectType(type_text) {
         this.$router.push('/ask/type?type=majorlist')
       },
-      getRecommendList() {
-        postRequest(`question/majorList`, {
+      getList() {
+        postRequest(`question/commonList`, {
           tag_id: this.type.split(':')[1]
         }).then(response => {
           var code = response.data.code;
@@ -114,7 +111,7 @@
           }
 
           if (response.data.data) {
-            this.recommendList = []; //response.data.data;
+            this.list = response.data.data;
           }
           //没有数据的显示框不显示；
           this.loading = false;
@@ -122,7 +119,7 @@
         });
       },
       getNextList() {
-        postRequest(`question/majorList`, {
+        postRequest(`question/commonList`, {
           bottom_id: this.bottomId,
           tag_id: this.type.split(':')[1]
         }).then(response => {
@@ -133,7 +130,7 @@
           }
 
           if (response.data.data.length > 0) {
-            this.recommendList = this.recommendList.concat([]); //response.data.data
+            this.list = this.list.concat([]); //response.data.data
           }
 
           if (response.data.data.length < 10) {
@@ -168,11 +165,11 @@
       });
     },
   }
-  export default MajorList;
+  export default InteractionList;
 </script>
 
 <style scoped>
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 
@@ -218,14 +215,14 @@
   }
 
   .mui-table-view-cell:after {
-    right:15px;
+    right: 15px;
   }
 
-  .mui-table-view:after{
+  .mui-table-view:after {
     display: none;
   }
 
-  .mui-table-view:before{
+  .mui-table-view:before {
     display: none;
   }
 
@@ -234,13 +231,13 @@
     color: #808080;
   }
 
-  .first{
-    height:50px;
+  .first {
+    height: 50px;
   }
 
-  .three{
-    font-size:12px;
-    color:#b4b4b6;
+  .three {
+    font-size: 12px;
+    color: #b4b4b6;
   }
 
   .split {
@@ -290,10 +287,9 @@
     background: #f3f4f6;
   }
 
-  #refreshContainer{
-    top:45px;
+  #refreshContainer {
+    top: 45px;
   }
-
 
   .container {
     text-align: center;
@@ -310,17 +306,18 @@
     color: #c8c8c8;
   }
 
-  .button-wrapper{
+  .button-wrapper {
     position: fixed;
-    bottom:0;
-    width:100%;
-    padding:0;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
     z-index: 999;
   }
-  .button-wrapper button{
+
+  .button-wrapper button {
     border-radius: 0;
-    margin-bottom:0;
-    padding:12px 0;
-    font-size:17px;
+    margin-bottom: 0;
+    padding: 12px 0;
+    font-size: 17px;
   }
 </style>

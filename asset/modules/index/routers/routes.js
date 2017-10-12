@@ -131,6 +131,18 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { //问答社区-互动回答-回答列表；
+    path: '/askCommunity/interaction/answers/:id',
+    name: 'ask-interaction',
+    meta: {
+      title: '问答社区-互动回答-回答列表',
+      wechatHideHeader: false
+    },
+    component: require('../../../views/AskCommunity/InteractionAnswers.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
 	{
 		path: '/login',
     name: 'login',

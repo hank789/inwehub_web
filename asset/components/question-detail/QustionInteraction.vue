@@ -1,5 +1,5 @@
 <template>
-  <div class="mui-table-view questionInteractionWrapper">
+  <div class="mui-table-view questionInteractionWrapper afterHidden">
     <UserInfo
       :uuid="ask.uuid"
       :avatar="ask.user_avatar_url"
