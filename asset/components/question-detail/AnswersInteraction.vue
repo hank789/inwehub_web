@@ -3,30 +3,27 @@
 
     <Empty :description="'正在等待抢答'" v-if="list.length === 0"></Empty>
 
-    <div class="item bottomBorder" v-else>
+
+    <div class="item bottomBorder" v-else  v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
       <UserInfo
         :uuid="11111"
-        :avatar="'/images/whiteLogo@2x.png'"
-        :realname="'test'"
-        :position="'phper'"
-        :company="'company'"
+        :avatar="item.user_avatar_url"
+        :realname="item.user_name"
+        :position="''"
+        :company="''"
         :isFollow="false"
         :isFollowed="false"
-        :isExpert="1"
-        :isShowPositionAndCompany="true"
+        :isExpert="item.is_expert"
+        :isShowPositionAndCompany="false"
         @setFollowStatus="setFollowStatus"
       ></UserInfo>
 
       <div class="content">
-        发布会一上来，雷军就说小米终于回到全球出货量前五名了！排在三星、苹果、华为和OPPO后面，估计是因为小米6带来的强势反弹吧。雷军
-
-
+        {{item.content}}
       </div>
 
       <div class="time">
-        2016/03/12 18:00
-
-
+        {{ item.created_at}}
       </div>
     </div>
 
@@ -50,13 +47,22 @@
         type: Array,
         default: []
       },
+      questionId:''
     },
     created(){
+
     },
 
     mounted(){
     },
-    methods: {}
+    methods: {
+      setFollowStatus(){
+
+      },
+      toDetail(id){
+          this.$router.push('/askCommunity/interaction/' + id);
+      }
+    }
   };
 </script>
 

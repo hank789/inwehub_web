@@ -7,21 +7,26 @@
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
       <div>
-        <QustionInteraction
+        <Question
           :ask="ask.question"
           :isFollow="true"
-          :isFollowAsked="ask.is_followed_question?true:false"
-          @setFollowAskStatus="setFollowAskStatus"
-        ></QustionInteraction>
+        ></Question>
 
-        <div class="river"></div>
+        <Answer v-show="ask.question.status==6||ask.question.status==7"
+                :answer="answer"
+                :needMoney="true"
+                :isFollow="true"
+                @paySuccess="paySuccess"
+        ></Answer>
 
-        <AnswersInteraction
-          :list="answers"
-          :questionId="ask.question.id"
-        ></AnswersInteraction>
 
-      </div>
+        <Discuss
+          :answerId="ask.answer ? ask.answer.id:0"
+          ref="discuss"
+          v-show="ask.answer && ask.answer.content"
+        ></Discuss>
+
+        </div>
     </div>
 
     <Share
@@ -41,9 +46,9 @@
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
-  import QustionInteraction from '../../components/question-detail/QustionInteraction.vue';
+  import Question from '../../components/question-detail/Question.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
-  import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue';
+  import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';
   import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
@@ -54,17 +59,16 @@
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: '', description: ''},
+        question: {created_at: '', description:''},
         feedback: {
           rate_star: 0
         },
         timeline: []
       },
-      answers:[],
-      shareUrl: '',
-      shareImg: '',
-      shareContent: '',
-      shareTitle: '',
+      shareUrl:'',
+      shareImg:'',
+      shareContent:'',
+      shareTitle:'',
       id: 0,
       loading: true
     }),
@@ -86,41 +90,40 @@
       });
 
       this.getDetail();
-      this.getAnswerList();
     },
     components: {
-      QustionInteraction,
+      Question,
       Discuss,
-      AnswersInteraction,
+      Answer,
       Comment,
       Share
     },
     computed: {
-      answer () {
-        return this.ask.answers[0] ? this.ask.answers[0] : {};
+        answer () {
+          return this.ask.answer ? this.ask.answer:{};
       }
     },
     methods: {
       shareSuccess(){
-        //alertAskCommunityDetailShareSuccess(this);
+          //alertAskCommunityDetailShareSuccess(this);
       },
       shareFail(error){
 
       },
-      setFollowAskStatus(status){
-        this.ask.is_followed_question = status;
+      paySuccess(content)
+      {
+          this.ask.answers[0].content = content;
       },
-      getAnswerList(){
-        postRequest(`question/answerList`, {question_id: this.id}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.toast(response.data.message);
-            mui.back();
-            return;
-          }
-
-          this.answers = response.data.data.data;
-        })
+      downRefresh(callback){
+        this.getDetail(() => {
+          this.$refs.discuss.resetList();
+        });
+      },
+      toSeeHelp(){
+        this.$router.pushPlus('/help/ask');
+      },
+      toAsk(){
+        userAbility.jumpToAddAsk();
       },
       getDetail(successCallback = () => {
                 }){
@@ -141,11 +144,11 @@
 
         this.id = id;
 
-        postRequest(`question/info`, {id: this.id}).then(response => {
+        postRequest(`answer/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
-            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
+            this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
             return;
           }
 
@@ -153,11 +156,11 @@
 
           this.loading = 0;
 
-          var username = this.answer.user_name ? this.answer.user_name : '';
-          this.shareTitle = '问答|' + this.ask.question.description + '-' + username + '的回答';
+          var username = this.answer.user_name?this.answer.user_name:'';
+          this.shareTitle = '问答|' + this.ask.question.description  + '-' + username + '的回答';
 
           var currentUrl = '/askCommunity/major/' + this.id;
-          this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+          this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
 
           this.shareContent = '专家' + username + '的回答，点击前往围观互动';
 
