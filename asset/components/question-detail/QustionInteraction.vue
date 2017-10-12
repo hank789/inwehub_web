@@ -25,7 +25,7 @@
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.push('/contact')">
+                @tap.stop.prevent="$router.push('/contact?id=' + ask.id)">
           邀请回答
         </button>
       </div>

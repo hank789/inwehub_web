@@ -18,7 +18,7 @@
         @setFollowStatus="setFollowStatus"
       ></UserInfo>
 
-      <div class="content">
+      <div class="content mui-ellipsis-3">
         {{item.content}}
       </div>
 

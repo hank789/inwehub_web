@@ -12,7 +12,7 @@
 
                             <div class="avatar">
                                 <div class="avatarInner" @tap.stop.prevent="">
-                                    <img :src="item.user_avatar_url">
+                                    <img :src="item.avatar_url">
 
                                     <svg class="icon" aria-hidden="true" v-show="true">
                                         <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -21,11 +21,12 @@
                             </div>
 
                             <div class="textBody">
-                                {{item.user_name}}
+                                {{item.name}}
                                 <div class="desc">{{item.description}}</div>
                             </div>
 
-                            <div class="ibutton" @tap.stop.prevent="chooseItem(item)">邀请</div>
+                            <div class="ibutton active" v-if="item.is_invited">已邀请</div>
+                          <div class="ibutton" @tap.stop.prevent="chooseItem(item)" v-else>邀请</div>
 
                         </li>
                     </ul>
@@ -84,7 +85,7 @@
                     map[c] = []
                 })
                 let arr = this.list.map(function (item) {
-                    item.pinyin =  pinyin.getFullCamelChars(item.user_name)
+                    item.pinyin =  pinyin.getFullCamelChars(item.name)
                     return item;
                 })
 
@@ -131,6 +132,7 @@
                 }
             },
             chooseItem (item) {
+                item.is_invited = true;
                 this.$emit('click', item)
             }
         }
@@ -287,4 +289,9 @@
         top:10px;
         margin-right:5px;
     }
+
+  .ibutton.active{
+    background:#03aef9;
+    color:#fff;
+  }
 </style>

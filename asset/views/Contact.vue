@@ -41,6 +41,7 @@
   export default {
     data(){
       return {
+        id:0,
         search: '',
         list: []
       }
@@ -51,13 +52,27 @@
     computed: {},
     methods: {
       choose(item){
-         mui.alert('开发中...');
+        console.log(item);
+        postRequest(`question/inviteAnswer`, {
+          question_id:this.id,
+          user_id:item.id
+        }).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+          mui.toast(response.data.message);
+        });
       },
       toFollowMore(){
           this.$router.push('/askCommunity/majors');
       },
-      getList() {
-        postRequest(`followed/users`, {}).then(response => {
+      getList(id) {
+        postRequest(`question/inviterList`, {
+          question_id:id
+        }).then(response => {
           var code = response.data.code;
           if(code !== 1000) {
             mui.alert(response.data.message);
@@ -75,9 +90,9 @@
     mounted(){
 
     },
-
     created(){
-      this.getList();
+      this.id = parseInt(this.$route.query.id);
+      this.getList(this.id);
     }
   };
 </script>
