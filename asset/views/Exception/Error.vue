@@ -12,13 +12,14 @@
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
 				</svg>
-				<p>这可能是你手机的问题！不是bug！！</p>
+				<!--<p>这可能是你手机的问题！不是bug！！</p>-->
+				<p>你的网络异常！</p>
 				
 			</div>
 			
 			<div class="refresh">
 				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
+					<use xlink:href="#icon-shuaxin"></use>
 				</svg>
 				<p>点击刷新</p>
 			</div>
@@ -77,6 +78,29 @@ div,
 	.cont p{
 		
         margin-top: 70px;
+		font-size: 14px;
+		color: #B4B4B6;
+		text-align: center;
+		
+	}
+	.refresh{
+		width: 100%;
+	    height:50px;
+	    /*border: 1px solid #CCCCCC;*/
+	    position: fixed;
+	    bottom: 30px;
+	}
+	.refresh svg{
+       color: #03aef9;
+		font-size: 26px;
+		position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;	
+	}
+	.refresh p{
+		
+        margin-top: 30px;
 		font-size: 14px;
 		color: #B4B4B6;
 		text-align: center;
