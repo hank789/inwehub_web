@@ -169,7 +169,7 @@
                   break;
                 case 'authentication_success':
                   // 专家认证成功
-                  router.pushPlus('/my');
+                  router.pushPlus('/my?needalert=1');
                   break;
                 case 'authentication_fail':
                   // 专家认证失败
@@ -258,7 +258,7 @@
                   });
                   break;
                 case 'notification_level_up':
-                    // 用户积分等级提升
+                    // 用户积分等级提升;
                     userAbility.upgradeLevel(this);
                     break;
                 case 'activity_enroll_fail':

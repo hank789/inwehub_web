@@ -298,18 +298,19 @@
 			},
 			//认证专家跳转判断；
 			toApprove(expertStatus) {
-				switch(parseInt(expertStatus)) {
-					case 0:
-					case 3:
-						this.$router.push('/my/pilot');
-						break;
-					case 2:
-						mui.toast('您已经是专家');
-						break;
-					case 1:
-						this.$router.push('/expert/apply/success?type=0');
-						break;
-				}
+				userAbility.jumpToApplyProfessor(this);
+//				switch(parseInt(expertStatus)) {
+//					case 0:
+//					case 3:
+//						this.$router.push('/my/pilot');
+//						break;
+//					case 2:
+//						mui.toast('您已经是专家');
+//						break;
+//					case 1:
+//						this.$router.push('/expert/apply/success?type=0');
+//						break;
+//				}
 
 			},
 			toAsk() {

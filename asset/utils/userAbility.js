@@ -263,6 +263,32 @@ var userAbility = () => {
     };
 
 
+//专家认证提示；
+
+ var expertcertification = (context, id) => {
+    var userInfo = getLocalUserInfo();
+    var dialogObj = getDialogObj(context);
+     if (dialogObj) {
+			          dialogObj.getHtml('expertapplication-t', {level: userInfo.user_level}, (titlehtml) => {
+			        	  dialogObj.getHtml('expertapplication-b', {level: userInfo.user_level}, (contenthtml) => {
+			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
+			          		console.log(num)
+			          		if (num.index === 0) {
+				              router.pushPlus('/my/resume');
+				            }
+			          	}, true);
+			          });
+			        });
+		        }
+  };
+
+
+
+
+
+
+
+
 
   return {
     canDo: canDo,
@@ -276,7 +302,8 @@ var userAbility = () => {
     jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
     newbieTask: newbieTask,
-    perfectCard:perfectCard
+    perfectCard:perfectCard,
+    expertcertification:expertcertification
   }
 };
 
