@@ -7,12 +7,12 @@
                 <div class="groupWrapper">
                     <ul v-for="(list, key) in data" class="index-bar-group">
                         <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
-                        <li v-for="(item, index) in list" :key="index" @tap="chooseItem" :data-raw="item.raw"
+                        <li v-for="(item, index) in list" :key="index" :data-raw="item.raw"
                             class="index-bar-cell tap-active" :class="{bottomBorder:index !== list.length-1  }">
 
                             <div class="avatar">
                                 <div class="avatarInner" @tap.stop.prevent="">
-                                    <img src="/images/whiteLogo@2x.png">
+                                    <img :src="item.user_avatar_url">
 
                                     <svg class="icon" aria-hidden="true" v-show="true">
                                         <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -21,12 +21,11 @@
                             </div>
 
                             <div class="textBody">
-                                {{item.raw}}
-                                <div class="desc">显示个人签名</div>
+                                {{item.user_name}}
+                                <div class="desc">{{item.description}}</div>
                             </div>
 
-                            <div class="ibutton">邀请</div>
-
+                            <div class="ibutton" @tap.stop.prevent="chooseItem(item)">邀请</div>
 
                         </li>
                     </ul>
@@ -70,7 +69,7 @@
                 let tmp = []
                 for (let key in this.map) {
                     tmp = this.map[key].filter(function (item) {
-                        return item.raw.indexOf(search) > -1 || item.camel.indexOf(search.toUpperCase()) > -1 || item.full.toUpperCase().indexOf(search.toUpperCase()) > -1
+                        return item.pinyin.raw.indexOf(search) > -1 || item.pinyin.camel.indexOf(search.toUpperCase()) > -1 || item.pinyin.full.toUpperCase().indexOf(search.toUpperCase()) > -1
                     })
                     if (tmp.length) {
                         map[key] = tmp
@@ -85,8 +84,10 @@
                     map[c] = []
                 })
                 let arr = this.list.map(function (item) {
-                    return pinyin.getFullCamelChars(item)
+                    item.pinyin =  pinyin.getFullCamelChars(item.user_name)
+                    return item;
                 })
+
                 arr.forEach((item) => {
                     this.sort(map, item)
                 })
@@ -95,14 +96,17 @@
                         delete map[key]
                     }
                 }
+
                 return map
             }
         },
         methods: {
             sort (map, item) {
-                var initial = item.camel[0]
+                var initial = item.pinyin.camel[0]
+
                 var arr = map[initial]
-                var len = arr.length
+
+              var len = arr.length
                 var i = len - 1
                 if (len === 0) {
                     return arr.push(item)
@@ -126,9 +130,8 @@
                     document.getElementsByClassName('groupWrapper')[0].scrollTo(0, oPos - 12);
                 }
             },
-            chooseItem (e) {
-                var raw = e.target.getAttribute('data-raw')
-                this.$emit('click', raw)
+            chooseItem (item) {
+                this.$emit('click', item)
             }
         }
     }

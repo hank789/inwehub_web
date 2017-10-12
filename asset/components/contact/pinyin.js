@@ -427,6 +427,10 @@ function getFullCamelChars (str) {
         i++
     }
 
+    if (charmapReg.test(str)) {
+       camel = str[0].toUpperCase();
+    }
+
     return {full: result, camel: camel, raw: str}
 }
 

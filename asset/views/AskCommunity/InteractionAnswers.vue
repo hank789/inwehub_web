@@ -10,6 +10,8 @@
         <QustionInteraction
           :ask="ask.question"
           :isFollow="true"
+          :isFollowAsked="ask.is_followed_question?true:false"
+          @setFollowAskStatus="setFollowAskStatus"
         ></QustionInteraction>
 
         <div class="river"></div>
@@ -118,6 +120,9 @@
       },
       toAsk(){
         userAbility.jumpToAddAsk();
+      },
+      setFollowAskStatus(status){
+        this.ask.is_followed_question = status;
       },
       getDetail(successCallback = () => {
                 }){
