@@ -43,6 +43,7 @@
         :seeNum="answer.view_number"
         :supportNum="answer.support_number"
         :isSupported="answer.is_supported?true:false"
+        :showShoucang="showShoucang"
         @supportNumDesc="supportNumDesc"
         @supportNumAdd="supportNumAdd"
         @setSupportStatus="setSupportStatus"
@@ -91,6 +92,10 @@
       needMoney: {
         type: Boolean,
         default: false
+      },
+      showShoucang:{
+        type:Boolean,
+        default:false
       },
       isShowPositionAndCompany:{
         type: Boolean,

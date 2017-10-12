@@ -16,6 +16,7 @@
                 :answer="answer"
                 :needMoney="true"
                 :isFollow="true"
+                :showShoucang="true"
                 @paySuccess="paySuccess"
         ></Answer>
 
@@ -46,7 +47,7 @@
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
 
-  import Question from '../../components/question-detail/Question.vue';
+  import Question from '../../components/question-detail/QuestionInteractionDetail.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';

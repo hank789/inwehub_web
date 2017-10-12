@@ -10,10 +10,19 @@
       <span>{{ commentNum }}</span>
     </div>
 
-    <div class="item">
+    <div class="item" v-if="!showShoucang">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
+        </svg>
+      </div>
+      <span>{{ seeNum }}</span>
+    </div>
+
+    <div class="item" v-else>
+      <div class="iconWrapper showcangWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucangxingxing"></use>
         </svg>
       </div>
       <span>{{ seeNum }}</span>
@@ -61,6 +70,10 @@
       isSupported: {
         type: Boolean,
         default: true
+      },
+      showShoucang:{
+          type:Boolean,
+          default:false
       }
     },
     created(){
@@ -130,6 +143,15 @@
 
   .item:nth-child(2) .iconWrapper {
     font-size: 24px;
+  }
+
+  .item:nth-child(2) .iconWrapper.showcangWrapper {
+    font-size: 18px;
+  }
+
+  .item:nth-child(2) .iconWrapper.showcangWrapper .icon{
+    position: relative;
+    top:-1px;
   }
 
   .item:nth-child(3) .iconWrapper{
