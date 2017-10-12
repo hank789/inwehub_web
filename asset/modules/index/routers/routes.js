@@ -1375,6 +1375,14 @@ const routes = [{
     },
     component: require('../../../views/DialogList.vue'),
   },
+  {
+    path: '/exception',
+    name: 'exception',
+    meta: {
+      title: 'exception'
+    },
+    component: require('../../../views/Exception/Error.vue'),
+  },
 	{ // message
 		path: '/*',
     name: '404',
