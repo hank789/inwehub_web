@@ -8,6 +8,9 @@
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
 
       <RefreshList
+
+        ref="refreshList"
+
         v-model="answers"
         :api="'question/answerList'"
         :prevOtherData="prevOtherData"
@@ -81,9 +84,10 @@
       loading: true
     }),
     mounted(){
+
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
-      window.addEventListener('refreshData', (e) => {
+      window.addEventListener('refreshPageData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
         this.getDetail();
@@ -107,6 +111,23 @@
       }
     },
     methods: {
+      getId(){
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+
+        this.id = id;
+      },
       shareSuccess(){
         //alertAskCommunityDetailShareSuccess(this);
       },
@@ -121,6 +142,10 @@
       },
       getDetail(successCallback = () => {
                 }){
+
+        this.getId();
+
+        console.log('getDetail' + this.id);
 
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
@@ -155,21 +180,7 @@
       '$route': 'getDetail'
     },
     created () {
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-
-      this.id = id;
+      this.getId();
     }
   }
   export default AskDetail;
