@@ -19,7 +19,7 @@
       ></UserInfo>
 
       <div class="content mui-ellipsis-3">
-        {{item.content}}
+        {{item.content?item.content:'[图片]'}}
       </div>
 
       <div class="time">

@@ -17,7 +17,7 @@
         <ul class="hotAnswer_b">
           <li class="listBottomBorder" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
             <div class="mui-ellipsis title">{{ item.title }}</div>
-            <div class="mui-ellipsis-2 titleSub">{{ item.description }}</div>
+            <div class="mui-ellipsis-2 titleSub">{{ item.description?item.description:'[图片]' }}</div>
             <div class="hotAnswer_d">
               <p>
                 <img :src="item.user_avatar_url"/>
