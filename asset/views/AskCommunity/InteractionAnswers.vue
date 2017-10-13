@@ -113,6 +113,7 @@
     },
     methods: {
       refreshPage(){
+          this.getId();
           this.$refs.refreshList.getPrevList();
       },
       getId(){
