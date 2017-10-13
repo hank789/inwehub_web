@@ -1,7 +1,7 @@
 <template>
   <div class="mui-scroll-wrapper" id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
-      <Empty v-if="list.length===0 && autoShowEmpty"></Empty>
+      <Empty v-if="nothing===1 && autoShowEmpty"></Empty>
       <slot v-else></slot>
     </div>
   </div>
@@ -55,7 +55,13 @@
           return this.list[length - 1].id;
         }
         return 0;
-      }
+      },
+      nothing () {
+        if (this.loading) {
+          return -1;
+        }
+        return this.list.length ? 0 : 1;
+      },
     },
     methods: {
       getPrevList(){

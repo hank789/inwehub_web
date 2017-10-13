@@ -220,14 +220,14 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
-	{ // 我的围观
-		path: '/my/onlookers',
-    name: 'my-onlookers',
+	{ // 我的收藏
+		path: '/my/collected',
+    name: 'my-collected',
     meta: {
-			title: '我的围观',
+			title: '我的收藏',
 			wechatHideHeader: true
 		},
-		component: require('../../../views/Account/Onlookers.vue'),
+		component: require('../../../views/Account/Collected.vue'),
 		beforeEnter: (to, from, next) => {
 			requestAuth(to, from, next)
 		}

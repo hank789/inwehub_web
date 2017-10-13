@@ -131,7 +131,7 @@
 					</svg>
 					<i class="bot"></i>
 				</li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/onlookers')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/collected')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodeshoucang"></use>
           </svg>
@@ -350,7 +350,7 @@
 				userAbility.expertcertification(this);
 			}
 //		 console.log()
-        		
+
 		}
 	}
 </script>
