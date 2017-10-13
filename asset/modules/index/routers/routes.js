@@ -672,6 +672,21 @@ const routes = [{
 			requestAuth(to, from, next)
 		}
 	},
+  { //ask-interaction
+    path: '/ask/interaction',
+    name: 'ask/interaction',
+    component: require('../../../views/Ask/AskInteraction.vue'),
+    meta: {
+      title: '提问'
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      mui.plusReady(function() {
+        checkUpdate();
+      });
+      requestAuth(to, from, next)
+    }
+  },
 	{ //ask-pay-success
 		path: '/pay/ask/:id',
     name: 'pay-ask',

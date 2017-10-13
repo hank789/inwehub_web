@@ -38,7 +38,7 @@
         }
 
         var amount = this.pay_money;
-        if (amount <= 0) {
+        if (amount <= 0 && this.pay_object_type != 'free_ask') {
           mui.toast('支付金额有误！');
           return;
         }

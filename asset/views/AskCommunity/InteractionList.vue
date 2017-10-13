@@ -46,7 +46,7 @@
 
       <div class="button-wrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">发布互动问答
+                @tap.stop.prevent="$router.pushPlus('/ask/interaction')">发布互动问答
 
         </button>
       </div>
