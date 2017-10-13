@@ -21,7 +21,7 @@
         <span class="company">{{ company }}</span>
       </div>
 
-      <div class="followWrapper" v-if="isFollow && realname !== '匿名'">
+      <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
         <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
         <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
@@ -32,12 +32,16 @@
 <script type="text/javascript">
 
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import {getLocalUserInfo} from '../../utils/user';
 
   export default {
     data () {
-      return {}
+      return {
+        localUuid:0
+      }
     },
     props: {
+
       uuid: {
         default: ''
       },
@@ -75,7 +79,8 @@
       }
     },
     created(){
-
+        var user = getLocalUserInfo();
+        this.localUuid = user.uuid;
     },
     methods: {
       toResume(){
