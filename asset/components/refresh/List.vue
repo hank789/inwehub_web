@@ -16,34 +16,39 @@
     data () {
       return {
         loading: true,
-        list:[]
+        currentPage: 0,
+        list: []
       }
     },
     props: {
-      api:{
+      api: {
         type: String,
-        default:''
+        default: ''
       },
       prevOtherData: {
         type: Object,
-        default:{}
+        default: {}
       },
       nextOtherData: {
         type: Object,
-        default:{}
+        default: {}
       },
       prevSuccessCallback: {
         type: Function,
-        default:null
+        default: null
       },
       autoShowEmpty: {
         type: Boolean,
-        default:true
+        default: true
       },
       nextSuccessCallback: {
         type: Function,
-        default:null
+        default: null
       },
+      pageMode: {
+        type: Boolean,
+        default: false
+      }
     },
     components: {
       Empty
@@ -79,8 +84,9 @@
 
           var list = response.data.data;
 
-          if (response.data.data.data) {
+          if (this.pageMode) {
             list = response.data.data.data;
+            this.currentPage = response.data.data.current_page;
           }
 
           if (list) {
@@ -91,18 +97,25 @@
           mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 
           if (this.prevSuccessCallback) {
-              this.prevSuccessCallback();
+            this.prevSuccessCallback();
           }
         });
       },
       getNextList(){
 
-        var param = {
-          bottom_id: this.bottomId
-        };
+        if (this.pageMode) {
+          var param = {
+            page: this.currentPage + 1
+          }
+        } else {
+          var param = {
+            bottom_id: this.bottomId
+          };
+        }
+
         param = Object.assign(param, this.nextOtherData);
 
-        postRequest(`question/commonList`, param).then(response => {
+        postRequest(this.api, param).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
@@ -111,12 +124,13 @@
 
           var list = response.data.data;
 
-          if (response.data.data.data) {
+          if (this.pageMode) {
             list = response.data.data.data;
+            this.currentPage = response.data.data.current_page;
           }
 
           if (list.length > 0) {
-              this.list = this.list.concat(list);
+            this.list = this.list.concat(list);
           }
 
           if (list.length < 10) {
@@ -126,6 +140,8 @@
           }
 
           this.loading = false;
+
+
 
           if (this.nextSuccessCallback) {
             this.nextSuccessCallback();

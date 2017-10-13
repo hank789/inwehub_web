@@ -17,6 +17,7 @@
         :nextOtherData="prevOtherData"
         :prevSuccessCallback="prevSuccessCallback"
         :list="answers"
+        :pageMode="true"
         :autoShowEmpty="false"
       >
 
