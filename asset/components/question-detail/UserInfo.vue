@@ -23,7 +23,7 @@
 
       <div class="followWrapper" v-if="isFollow && realname !== '匿名'">
         <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
-        <span class="followButton" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
+        <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
     </div>
 

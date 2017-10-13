@@ -32,11 +32,11 @@
       <Share
         ref="ShareBtn"
         :hideShareBtn="true"
-        :title="''"
-        :link="'http://www.baidu.com'"
+        :title="title"
+        :link="shareUrl"
         :content="''"
-        :imageUrl="''"
-        :thumbUrl="''"
+        :imageUrl="shareImg"
+        :thumbUrl="shareImg"
         @success="shareSuccess"
         @fail="shareFail"
       ></Share>
@@ -56,6 +56,10 @@
       return {
         id:0,
         search: '',
+        username:'',
+        shareUrl:'',
+        shareImg:'',
+        title:'',
         list: []
       }
     },
@@ -112,6 +116,13 @@
     },
     created(){
       this.id = parseInt(this.$route.query.id);
+      this.username = this.$route.query.username;
+      this.title = this.$route.query.title;
+
+      var currentUrl = '/askCommunity/interaction/' + this.id;
+      this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+
       this.getList(this.id);
     }
   };

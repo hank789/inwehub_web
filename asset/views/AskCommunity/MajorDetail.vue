@@ -181,7 +181,7 @@
           this.loading = 0;
 
           var username = this.answer.user_name?this.answer.user_name:'';
-          this.shareTitle = '问答|' + this.ask.question.description  + '-' + username + '的回答';
+          this.shareTitle = '专业问答|' + this.ask.question.description  + '-' + username + '的回答';
 
           var currentUrl = '/askCommunity/major/' + this.id;
           this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;

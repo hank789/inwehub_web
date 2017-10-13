@@ -79,9 +79,9 @@
       bindShare(){
 
         var data = {
-          title: this.title,
+          title: this.title.substr(0, 50),
           link: this.link,
-          content: this.content,
+          content: this.content.substr(0, 150),
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
         };
