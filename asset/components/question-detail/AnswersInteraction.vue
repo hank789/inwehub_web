@@ -60,7 +60,7 @@
 
       },
       toDetail(id){
-          this.$router.push('/askCommunity/interaction/' + id);
+          this.$router.pushPlus('/askCommunity/interaction/' + id);
       }
     }
   };

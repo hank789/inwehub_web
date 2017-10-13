@@ -25,20 +25,20 @@
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.push('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+0)">
+                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+0)">
           邀请回答
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.push('/realAnswer/' + ask.id)">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id)">
           参与回答
        </button>
       </div>
 
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.push('/askCommunity/interaction/' + myAnswerId)">
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId)">
           查看我的回答
        </button>
       </div>
