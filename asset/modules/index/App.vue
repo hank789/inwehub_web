@@ -156,11 +156,14 @@
               }
               switch (payload.object_type) {
                 case 'question':
-                case 'question_answered':
+                case 'pay_question_answered':
                 case 'question_answer_confirmed':
                   // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   //router.go(-1);
                   router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
+                  break;
+                case 'free_question_answered':
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
                   break;
                 case 'answer':
                   //router.go(-1);
@@ -274,9 +277,13 @@
                   //互动问答新的回复
                   router.pushPlus('/askCommunity/interaction/' + payload.object_id);
                   break;
-                case 'answer_new_support':
+                case 'pay_answer_new_support':
                   //专业回答赞
                   router.pushPlus('/askCommunity/major/' + payload.object_id);
+                  break;
+                case 'free_answer_new_support':
+                  //专业回答赞
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
                   break;
               }
             };
