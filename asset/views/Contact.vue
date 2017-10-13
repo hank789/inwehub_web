@@ -32,9 +32,9 @@
       <Share
         ref="ShareBtn"
         :hideShareBtn="true"
-        :title="title"
+        :title="'邀您前往回答|' + title"
         :link="shareUrl"
-        :content="''"
+        :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
         :imageUrl="shareImg"
         :thumbUrl="shareImg"
         @success="shareSuccess"
@@ -59,6 +59,8 @@
         username:'',
         shareUrl:'',
         shareImg:'',
+        answernum:0,
+        followednum:0,
         title:'',
         list: []
       }
@@ -118,6 +120,8 @@
       this.id = parseInt(this.$route.query.id);
       this.username = this.$route.query.username;
       this.title = this.$route.query.title;
+      this.answernum = this.$route.query.answernum;
+      this.followednum = this.$route.query.followednum;
 
       var currentUrl = '/askCommunity/interaction/' + this.id;
       this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;

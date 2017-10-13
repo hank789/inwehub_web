@@ -134,12 +134,16 @@
           this.loading = 0;
 
           var username = this.answer.user_name ? this.answer.user_name : '';
-          this.shareTitle = '互动问答|' + this.ask.question.description;
+          this.shareTitle = '问答|' + this.ask.question.description;
 
           var currentUrl = '/askCommunity/interaction/' + this.id;
           this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
 
-          this.shareContent = '点击前往围观互动';
+          var answerNum = this.ask.question.answer_num;
+
+          var followNum = 0;
+
+          this.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
 
           successCallback();
 

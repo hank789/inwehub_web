@@ -156,11 +156,11 @@
           this.loading = 0;
 
           var username = this.answer.user_name ? this.answer.user_name : '';
-          this.shareTitle = '互动问答|' + this.ask.question.description + '-' + username + '的回答';
+          this.shareTitle = '问答|' + this.ask.question.description + '-' + username + '的回答';
 
           var currentUrl = '/askCommunity/interaction/answers/' + this.id;
           this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-          this.shareContent = '点击前往围观互动';
+          this.shareContent = username + '的回答，点击前往围观互动';
 
           successCallback();
 
