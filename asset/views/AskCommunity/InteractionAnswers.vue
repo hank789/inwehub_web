@@ -112,6 +112,9 @@
       }
     },
     methods: {
+      refreshPage(){
+          this.$refs.refreshList.getPrevList();
+      },
       getId(){
         let id = parseInt(this.$route.params.id);
 
@@ -178,7 +181,7 @@
       }
     },
     watch: {
-      '$route': 'getDetail'
+      '$route': 'refreshPage'
     },
     created () {
       this.getId();
