@@ -88,7 +88,6 @@
             mui.back();
             return;
           }
-          mui.toast(response.data.message);
         });
       },
       toFollowMore(){
