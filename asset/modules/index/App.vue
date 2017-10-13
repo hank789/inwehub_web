@@ -266,9 +266,13 @@
                     // 活动报名事件
                   router.pushPlus("/EnrollmentStatus/"+payload.object_id);
                   break;
-                case 'answer_new_comment':
+                case 'pay_answer_new_comment':
                   //专业回答新的回复
                   router.pushPlus('/askCommunity/major/' + payload.object_id);
+                  break;
+                case 'free_answer_new_comment':
+                  //互动问答新的回复
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
                   break;
                 case 'answer_new_support':
                   //专业回答赞
