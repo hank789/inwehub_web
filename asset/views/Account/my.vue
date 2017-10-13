@@ -346,9 +346,9 @@
 		mounted() {
 //			mui.waiting();
 			//成为认证专提示；
-			if(this.$route.query.needalert){
-				userAbility.expertcertification(this);
-			}
+//			if(this.$route.query.needalert){
+//				userAbility.expertcertification(this);
+//			}
 //		 console.log()
 
 		}
