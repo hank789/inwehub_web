@@ -6,7 +6,7 @@
       <h1 class="mui-title">邀请回答</h1>
     </header>
 
-    <div class="mui-content absolute">
+    <div class="mui-content">
       <Contact
         @click="choose"
         :list="list"

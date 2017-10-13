@@ -148,14 +148,7 @@
     }
 
     .groupWrapper{
-        overflow-y: auto;
-        position: fixed;
-        z-index: 10;
-        top:149px;
-        left: 0;
-        right: 0;
-        bottom:0;
-        width: 100%;
+
     }
 
 
@@ -184,9 +177,8 @@
     .index-bar {
         position: absolute;
         right: 0;
-        top: 135px;
+        top: 160px;
         z-index: 12;
-        height: 100%;
         width: 23px;
         font-family: 'Helvetica Neue', Helvetica, sans-serif;
         font-size: 10px;
