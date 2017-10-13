@@ -50,9 +50,9 @@
     methods: {
       toDetail(item) {
           if (item.question_type === 2) {
-            this.$router.push('/askCommunity/interaction/' + item.answer_id);
+            this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true);
           } else {
-            this.$router.push('/askCommunity/major/' + item.question_id);
+            this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true);
           }
       },
     },
