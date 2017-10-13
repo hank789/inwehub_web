@@ -78,7 +78,6 @@
 
       },
       choose(item){
-        console.log(item);
         postRequest(`question/inviteAnswer`, {
           question_id:this.id,
           user_id:item.id
