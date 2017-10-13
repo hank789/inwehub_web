@@ -1,7 +1,7 @@
 <template>
   <div class="mui-scroll-wrapper" id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
-      <Empty v-if="list.length===0"></Empty>
+      <Empty v-if="list.length===0 && autoShowEmpty"></Empty>
       <slot v-else></slot>
     </div>
   </div>
@@ -36,6 +36,10 @@
         type: Function,
         default:null
       },
+      autoShowEmpty: {
+        type: Boolean,
+        default:true
+      },
       nextSuccessCallback: {
         type: Function,
         default:null
@@ -67,8 +71,14 @@
             return;
           }
 
-          if (response.data.data) {
-            this.list = response.data.data;
+          var list = response.data.data;
+
+          if (response.data.data.data) {
+            list = response.data.data.data;
+          }
+
+          if (list) {
+            this.list = list;
           }
 
           this.loading = false;
@@ -93,11 +103,17 @@
             mui.back();
           }
 
-          if (response.data.data.length > 0) {
-              this.list = this.list.concat(response.data.data);
+          var list = response.data.data;
+
+          if (response.data.data.data) {
+            list = response.data.data.data;
           }
 
-          if (response.data.data.length < 10) {
+          if (list.length > 0) {
+              this.list = this.list.concat(list);
+          }
+
+          if (list.length < 10) {
             mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
           } else {
             mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);

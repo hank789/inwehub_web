@@ -6,7 +6,17 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
-      <div>
+
+      <RefreshList
+        v-model="answers"
+        :api="'question/answerList'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="prevOtherData"
+        :prevSuccessCallback="prevSuccessCallback"
+        :list="answers"
+        :autoShowEmpty="false"
+      >
+
         <QustionInteraction
           :ask="ask.question"
           :isFollow="true"
@@ -21,7 +31,8 @@
           :questionId="ask.question.id"
         ></AnswersInteraction>
 
-      </div>
+      </RefreshList>
+
     </div>
 
     <Share
@@ -47,7 +58,7 @@
   import Comment from '../../components/question-detail/Comment.vue';
   import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
-
+  import RefreshList from '../../components/refresh/List.vue';
   import userAbility from '../../utils/userAbility';
 
   const AskDetail = {
@@ -73,31 +84,27 @@
       //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
-      mui.plusReady(() => {
-        plus.webview.currentWebview().setStyle({
-          softinputMode: "adjustResize"
-        });
-      });
-
       window.addEventListener('refreshData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
         this.getDetail();
       });
 
-      this.getDetail();
-      this.getAnswerList();
     },
     components: {
       QustionInteraction,
       Discuss,
       AnswersInteraction,
       Comment,
+      RefreshList,
       Share
     },
     computed: {
       answer () {
         return this.ask.answers[0] ? this.ask.answers[0] : {};
+      },
+      prevOtherData() {
+         return {question_id: this.id}
       }
     },
     methods: {
@@ -107,39 +114,14 @@
       shareFail(error){
 
       },
+      prevSuccessCallback(){
+         this.getDetail();
+      },
       setFollowAskStatus(status){
         this.ask.is_followed_question = status;
       },
-      getAnswerList(){
-        postRequest(`question/answerList`, {question_id: this.id}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.toast(response.data.message);
-            mui.back();
-            return;
-          }
-
-          this.answers = response.data.data.data;
-        })
-      },
       getDetail(successCallback = () => {
                 }){
-
-        let id = parseInt(this.$route.params.id);
-
-        if (!id) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            });
-          });
-          this.$router.back();
-          return;
-        }
-
-        this.id = id;
 
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
@@ -170,7 +152,21 @@
       '$route': 'getDetail'
     },
     created () {
+      let id = parseInt(this.$route.params.id);
 
+      if (!id) {
+        this.$store.dispatch(NOTICE, cb => {
+          cb({
+            text: '发生一些错误',
+            time: 1500,
+            status: false
+          });
+        });
+        this.$router.back();
+        return;
+      }
+
+      this.id = id;
     }
   }
   export default AskDetail;
