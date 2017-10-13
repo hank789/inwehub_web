@@ -114,6 +114,7 @@
     methods: {
       refreshPage(){
           this.getId();
+          this.$refs.refreshList.prevOtherData = {question_id: this.id};
           this.$refs.refreshList.getPrevList();
       },
       getId(){
