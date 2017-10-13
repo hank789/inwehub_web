@@ -610,7 +610,7 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
+    line-height: 45px;
     font-size: 14px;
   }
 
