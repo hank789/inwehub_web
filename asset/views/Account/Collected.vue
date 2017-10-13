@@ -15,7 +15,7 @@
         :list="list"
       >
         <ul class="hotAnswer_b">
-          <li class="listBottomBorder" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.question_id)">
+          <li class="listBottomBorder" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
             <div class="mui-ellipsis title">{{ item.title }}</div>
             <div class="mui-ellipsis-2 titleSub">{{ item.description }}</div>
             <div class="hotAnswer_d">
@@ -48,8 +48,12 @@
       RefreshList
     },
     methods: {
-      toDetail(id) {
-        this.$router.push('/askCommunity/major/' + id);
+      toDetail(item) {
+          if (item.question_type === 2) {
+            this.$router.push('/askCommunity/interaction/' + item.answer_id);
+          } else {
+            this.$router.push('/askCommunity/major/' + item.question_id);
+          }
       },
     },
     computed: {
