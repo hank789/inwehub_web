@@ -19,6 +19,7 @@
 
         <QustionInteraction
           :ask="ask.question"
+          :myAnswerId="ask.my_answer_id"
           :isFollow="true"
           :isFollowAsked="ask.is_followed_question?true:false"
           @setFollowAskStatus="setFollowAskStatus"

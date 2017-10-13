@@ -29,10 +29,17 @@
           邀请回答
         </button>
       </div>
-      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2">
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.push('/realAnswer/' + ask.id)">
-          参与回答（草稿）
+          参与回答
+       </button>
+      </div>
+
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.push('/askCommunity/interaction/' + myAnswerId)">
+          查看我的回答
        </button>
       </div>
     </div>
@@ -60,6 +67,10 @@
       isFollowAsked:{
         type:Boolean,
         default:false
+      },
+      myAnswerId:{
+        type:Number,
+        default:0
       },
       isFollow: {
         type: Boolean,
