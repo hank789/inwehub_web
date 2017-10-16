@@ -145,7 +145,18 @@
                     break;
                 case 5:
                   // 积分变动通知
+                  console.log(notification);
                   mui.toast(notification.title + " " + notification.body);
+                  //notification.add_coins   增加的贡献值
+                  //notification.add_credits  增加的成长值
+                  switch (notification.integral_action){
+                    case 'ask':
+                        //提问
+                        break;
+                    case 'first_ask':
+                        //首次提问
+                        break;
+                  }
                   break;
               }
             });
