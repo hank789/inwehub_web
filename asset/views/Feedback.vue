@@ -7,7 +7,7 @@
     </header>
 
 
-    <div class="mui-content">
+    <div class="mui-content absolute">
       <div class="feedback">
         <div class="title">我们懂得聆听，您的意见与反馈</div>
 
