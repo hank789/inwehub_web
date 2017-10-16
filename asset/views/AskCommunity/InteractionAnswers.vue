@@ -51,7 +51,7 @@
     ></Share>
 
   </div>
-  
+
 </template>
 
 <script>
@@ -90,20 +90,20 @@
 
       window.addEventListener('refreshPageData', (e) => {
         //执行刷新
-        console.log('refresh-answerDetail');
+        console.log('refresh-interactionAnswers');
         this.refreshPage();
       });
-      
-      
-      
+
+
+
       //判断是否评论的弹窗；
       if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          alertAskCommunityInteractiveAnswer(this);  
+          alertAskCommunityInteractiveAnswer(this);
           localEvent.clearLocalItem("isAnswer"+this.id);
       }
       //提问完毕的弹窗；
        if(localEvent.getLocalItem("isQuestions"+this.id).value){
-          alertAskCommunityQuestioningSuccess(this);  
+          alertAskCommunityQuestioningSuccess(this);
           localEvent.clearLocalItem("isQuestions"+this.id);
       }
 
