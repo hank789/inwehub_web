@@ -42,7 +42,9 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
             mui.fire(current_webview,'go_to_target_page',{url: shotUrl});
           }
         }
-        current_webview.show();
+        setTimeout(function () {
+          current_webview.show("slide-in-right", 300);
+        },150);
       } else {
         var webview = mui.openWindow({
           url: url,
