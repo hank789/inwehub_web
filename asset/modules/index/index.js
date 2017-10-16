@@ -221,7 +221,7 @@ mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
     var current_webview = plus.webview.currentWebview();
-    var need_hide = ['list-detail-page'];
+    var need_hide = ['list-detail-page', 'list-detail-page-interaction'];
 
     if (need_hide.indexOf(current_webview.id) !== -1) {
       current_webview.hide();
