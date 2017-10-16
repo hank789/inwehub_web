@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">互动问答</h1>
+      <h1 class="mui-title">问答社区</h1>
     </header>
 
     <div class="mui-content absolute">
@@ -31,7 +31,7 @@
             <ul class="mui-table-view">
               <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
                 <div class="second mui-ellipsis-2">{{ item.description }}</div>
-                <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?true:false}">关注问题{{item.follow_num}}</span></div>
+                <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
               </li>
             </ul>
           </div>
