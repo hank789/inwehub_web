@@ -33,10 +33,14 @@ function alertZoom(contentHtml = '<btn class="alertConfirm"></btn>', callback = 
     }, 100);
   }
 
-  var alertConfirm = alertObj.element.querySelector('.alertConfirm');
-  if (alertConfirm) {
-    alertObj.element.querySelector('.alertConfirm').onclick = () => {
-      alertObj.close(0, '');
+  var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm');
+  if (alertConfirms.length) {
+    for(var i =0; i<alertConfirms.length;i++) {
+      (function(index){
+        alertConfirms[index].onclick = function () {
+          alertObj.close(index, '');
+        }
+      })(i);
     }
   }
 
@@ -105,10 +109,14 @@ function alertSky(titleHtml, contentHtml = '', iconType = '', callback = null, c
     }, 100);
   }
 
-  var alertConfirm = alertObj.element.querySelector('.alertConfirm');
-  if (alertConfirm) {
-    alertObj.element.querySelector('.alertConfirm').onclick = () => {
-      alertObj.close(0, '');
+  var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm');
+  if (alertConfirms.length) {
+    for(var i =0; i<alertConfirms.length;i++) {
+      (function(index){
+        alertConfirms[index].onclick = function () {
+          alertObj.close(index, '');
+        }
+      })(i);
     }
   }
 }
