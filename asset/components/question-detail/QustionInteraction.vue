@@ -18,27 +18,27 @@
 
     <div class="answerCount">
       {{ ask.answer_num }}人回答
-      <span v-if="isFollowAsked">已关注</span>
-      <span @tap.stop.prevent="collectAsk()" v-else>关注问题</span>
+      <span v-if="isFollowAsked">已关注{{ask.follow_num}}</span>
+      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.follow_num}}</span>
     </div>
 
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+0)">
+                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num, 'list-detail-page-contact')">
           邀请回答
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id)">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer')">
           参与回答
        </button>
       </div>
 
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else >
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId)">
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction')">
           查看我的回答
        </button>
       </div>
@@ -101,6 +101,8 @@
           var is_followed = response.data.data.type === 'follow' ? 1 : 0;
 
           mui.toast(response.data.data.tip);
+
+          this.ask.follow_num++;
 
           this.$emit('setFollowAskStatus', is_followed);
         });
