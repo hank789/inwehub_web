@@ -181,7 +181,7 @@
 
           var answerNum = this.ask.question.answer_num;
 
-          var followNum = 0;
+          var followNum = this.ask.question.follow_num;
 
           this.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
 

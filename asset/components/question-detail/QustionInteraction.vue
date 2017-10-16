@@ -18,14 +18,14 @@
 
     <div class="answerCount">
       {{ ask.answer_num }}人回答
-      <span v-if="isFollowAsked">已关注</span>
-      <span @tap.stop.prevent="collectAsk()" v-else>关注问题</span>
+      <span v-if="isFollowAsked">已关注{{ask.follow_num}}</span>
+      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.follow_num}}</span>
     </div>
 
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+0)">
+                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num)">
           邀请回答
         </button>
       </div>
