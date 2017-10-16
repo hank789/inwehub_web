@@ -160,7 +160,7 @@ const routes = [{
     name: 'contact',
     meta: {
       title: '邀请回答',
-      wechatHideHeader: false
+      wechatHideHeader: true
     },
     component: require('../../../views/Contact.vue'),
     beforeEnter: (to, from, next) => {
