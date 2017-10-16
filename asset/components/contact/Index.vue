@@ -20,10 +20,9 @@
                 </div>
               </div>
 
-              <div class="textBody">
-                {{item.name}}
-
-                <div class="desc">{{item.description}}</div>
+              <div class="textBody ">
+                <div class="name mui-ellipsis">{{item.name}}</div>
+                <div class="desc mui-ellipsis">{{item.description}}</div>
               </div>
 
               <div class="ibutton active" v-if="item.is_invited">已邀请</div>
@@ -289,5 +288,9 @@
   .ibutton.active {
     background: #03aef9;
     color: #fff;
+  }
+
+  .name, .desc{
+    max-width: 200px;
   }
 </style>
