@@ -132,7 +132,7 @@
         if (target) {
           var oPos = target.offsetTop;
           console.log(oPos);
-          document.getElementsByClassName('groupWrapper')[0].scrollTo(0, oPos - 12);
+          window.scrollTo(0, oPos-40);
         }
       },
       chooseItem (item) {
@@ -177,8 +177,8 @@
   }
 
   .index-bar {
-    position: absolute;
-    right: 0;
+    position: fixed;
+    right:0;
     top: 160px;
     z-index: 12;
     width: 23px;
@@ -188,6 +188,7 @@
   }
 
   .index-bar .index-bar-list {
+
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
