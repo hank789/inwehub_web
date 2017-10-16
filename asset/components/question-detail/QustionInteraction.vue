@@ -102,6 +102,8 @@
 
           mui.toast(response.data.data.tip);
 
+          this.ask.follow_num++;
+
           this.$emit('setFollowAskStatus', is_followed);
         });
       },
