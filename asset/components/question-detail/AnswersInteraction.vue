@@ -73,7 +73,7 @@
 
       },
       toDetail(id){
-        this.$router.pushPlus('/askCommunity/interaction/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
+        this.$router.pushPlus('/askCommunity/interaction/' + id, 'list-detail-page-interaction', true, 'pop-in', 'hide', true);
       }
     }
   };
