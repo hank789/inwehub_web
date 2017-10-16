@@ -22,8 +22,21 @@
         {{item.content?item.content:'[图片]'}}
       </div>
 
-      <div class="time">
-        {{ item.created_at}}
+      <div class="itemFooter">
+        <div class="iconWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-pinglun1"></use>
+          </svg>
+          {{item.comment_number}}
+        </div>
+        <div class="iconWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dianzan1"></use>
+          </svg>
+            {{item.support_number}}
+        </div>
+
+        <div class="time">{{ item.created_at}}</div>
       </div>
     </div>
 
@@ -76,11 +89,23 @@
       position: relative;
     }
 
-    .time {
+    .itemFooter{
       padding: 0 15px 10px;
-      font-size: 13px;
-      color: #c8c8c8;
-      text-align: right;
+
+      .iconWrapper{
+        display: inline-block;
+        color:#808080;
+        font-size:13px;
+        margin-right:5px;
+      }
+
+      .time {
+        float:right;
+        font-size: 13px;
+        color: #c8c8c8;
+        text-align: right;
+      }
     }
+
   }
 </style>
