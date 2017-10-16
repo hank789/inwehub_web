@@ -121,7 +121,7 @@
       this.answernum = this.$route.query.answernum;
       this.followednum = this.$route.query.followednum;
 
-      var currentUrl = '/askCommunity/interaction/' + this.id;
+      var currentUrl = '/askCommunity/interaction/answers/' + this.id;
       this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 

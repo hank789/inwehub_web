@@ -158,7 +158,7 @@
           var username = this.answer.user_name ? this.answer.user_name : '';
           this.shareTitle = '问答|' + this.ask.question.description + '-' + username + '的回答';
 
-          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
+          var currentUrl = '/askCommunity/interaction/' + this.id;
           this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
           this.shareContent = username + '的回答，点击前往围观互动';
 
