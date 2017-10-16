@@ -865,7 +865,7 @@
 .hotAnswer_recommend{
 	font-size:14px;
 	color:#808080;
-	margin-top: 15px;
+	/*margin-top: 15px;*/
 }
 
  .hotAnswer_b .share{
@@ -878,7 +878,7 @@
 	color:#FFFFFF;
 	text-align: center;
     line-height: 40px;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 	
