@@ -217,7 +217,6 @@
     margin-top: 10px;
     font-size: 14px;
     background: #fff;
-    padding-bottom:60px;
   }
 
   .help .title {
@@ -235,6 +234,7 @@
   }
 
   .buttonWrapper {
+    padding-top: 33px;
     background: #fff;
   }
 
@@ -242,11 +242,5 @@
     border-radius: 0;
     margin-bottom: 0;
     padding: 13px 0;
-  }
-
-  .iNeedAskWrapper{
-    position: fixed;
-    bottom:0;
-    width:100%;
   }
 </style>
