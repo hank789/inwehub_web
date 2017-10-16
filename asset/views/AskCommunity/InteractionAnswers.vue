@@ -168,7 +168,7 @@
           var username = this.answer.user_name ? this.answer.user_name : '';
           this.shareTitle = '问答|' + this.ask.question.description;
 
-          var currentUrl = '/askCommunity/interaction/' + this.id;
+          var currentUrl = '/askCommunity/interaction/answers' + this.id;
           this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
 
           var answerNum = this.ask.question.answer_num;
