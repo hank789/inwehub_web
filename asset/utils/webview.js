@@ -282,6 +282,9 @@ function goBack(){
       //触发父页面的自定义事件(refresh),从而进行刷新
       mui.fire(parent_webview, 'refreshData');
 
+      //触发父页面的自定义事件(refresh),从而进行刷新
+      mui.fire(parent_webview, 'refreshPageData', {childId: self.id});
+
       //子页面也刷新数据
       mui.fire(self, 'refreshData');
       mui.fire(parent_webview, 'autoHeight');
