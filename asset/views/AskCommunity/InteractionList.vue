@@ -225,4 +225,8 @@
   .isFollowed{
     color:#03aef9;
   }
+
+  .second{
+    font-size:14px;
+  }
 </style>
