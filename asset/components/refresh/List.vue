@@ -94,7 +94,9 @@
           }
 
           this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+          if (mui('#refreshContainer').length) {
+            mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+          }
 
           if (this.prevSuccessCallback) {
             this.prevSuccessCallback();
@@ -134,9 +136,14 @@
           }
 
           if (list.length < 10) {
-            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+            if (mui('#refreshContainer').length) {
+              mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+            }
+
           } else {
-            mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+            if (mui('#refreshContainer').length) {
+              mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+            }
           }
 
           this.loading = false;
