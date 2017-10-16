@@ -21,8 +21,8 @@
               </div>
 
               <div class="textBody ">
-                <div class="name mui-ellipsis">{{item.name}}</div>
-                <div class="desc mui-ellipsis">{{item.description}}</div>
+                <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
+                <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
               <div class="ibutton active" v-if="item.is_invited">已邀请</div>
