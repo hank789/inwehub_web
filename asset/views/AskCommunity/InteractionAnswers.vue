@@ -93,14 +93,14 @@
         console.log('refresh-answerDetail');
         this.getDetail();
       });
-      
-      
+
+
       //判断是否评论的弹窗；
       if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          userAbility.InteractiveAnswer(this);  
+          userAbility.InteractiveAnswer(this);
           localEvent.clearLocalItem("isAnswer"+this.id);
       }
-      
+
 
     },
     components: {
@@ -176,7 +176,7 @@
           var username = this.answer.user_name ? this.answer.user_name : '';
           this.shareTitle = '问答|' + this.ask.question.description;
 
-          var currentUrl = '/askCommunity/interaction/answers' + this.id;
+          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
           this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
 
           var answerNum = this.ask.question.answer_num;
