@@ -1250,6 +1250,10 @@ ul.normal li:before {
   display: none;
 }
 
+
+.bottomBorder{
+  position: relative;
+}
 .bottomBorder:after{
   position: absolute;
   bottom: 0;
