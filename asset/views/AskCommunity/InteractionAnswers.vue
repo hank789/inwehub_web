@@ -91,7 +91,7 @@
       window.addEventListener('refreshPageData', (e) => {
         //执行刷新
         console.log('refresh-answerDetail');
-        this.getDetail();
+        this.refreshPage();
       });
 
 
