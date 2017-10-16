@@ -41,6 +41,7 @@
     </div>
 
     <Share
+      ref="ShareBtn"
       :title="shareTitle"
       :link="shareUrl"
       :content="shareContent"
@@ -126,6 +127,9 @@
       }
     },
     methods: {
+      share(){
+        this.$refs.ShareBtn.share();
+      },
       refreshPage(){
           this.getId();
           this.$refs.refreshList.prevOtherData = {question_id: this.id};
