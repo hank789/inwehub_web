@@ -263,41 +263,6 @@ var userAbility = () => {
     };
 
 
-//专家认证提示；
- var expertcertification = (context, id) => {
-    var userInfo = getLocalUserInfo();
-    var dialogObj = getDialogObj(context);
-     if (dialogObj) {
-			          dialogObj.getHtml('expertapplication-t', {level: userInfo.user_level}, (titlehtml) => {
-			        	  dialogObj.getHtml('expertapplication-b', {level: userInfo.user_level}, (contenthtml) => {
-			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
-			          		console.log(num)
-			          		if (num.index === 0) {
-				              router.pushPlus('/my/resume');
-				            }
-			          	}, true);
-			          });
-			        });
-		        }
-  };
-
-//互动问答 答案提交成功弹窗 Interactive answer；
-var InteractiveAnswer = (context, id) => {
-    var userInfo = getLocalUserInfo();
-    var dialogObj = getDialogObj(context);
-     if (dialogObj) {
-			          dialogObj.getHtml('community_t', {level: userInfo.user_level}, (titlehtml) => {
-			        	  dialogObj.getHtml('community_b', {level: userInfo.user_level}, (contenthtml) => {
-			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
-			          		console.log(num)
-			          		if (num.index === 0) {
-				              router.pushPlus('/my/resume');
-				            }
-			          	}, true);
-			          });
-			        });
-		        }
-  };
 
 
 
@@ -317,9 +282,7 @@ var InteractiveAnswer = (context, id) => {
     jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
     newbieTask: newbieTask,
-    perfectCard:perfectCard,
-    expertcertification:expertcertification,
-    InteractiveAnswer:InteractiveAnswer
+    perfectCard:perfectCard
   }
 };
 

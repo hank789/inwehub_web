@@ -29,8 +29,42 @@ function alertAskCommunityDetailShareSuccess(context)
     });
   }
 }
+//互动问答 答案提交成功弹窗 Interactive answer；
+function alertAskCommunityInteractiveAnswer(context)
+{
+   var dialogObj = getDialogObj(context); 
+  if (dialogObj) {
+    dialogObj.getHtml('community_t', {}, (titlehtml) => {
+      dialogObj.getHtml('community_b', {}, (contenthtml) => {
+	    alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
+			          
+	    }, true);
+      });
+    });
+  }
+}
+//专家认证提示;
+
+function expertcertification(context)
+{
+   var dialogObj = getDialogObj(context); 
+  if (dialogObj) {
+     dialogObj.getHtml('expertapplication-t', {}, (titlehtml) => {
+        dialogObj.getHtml('expertapplication-b', {}, (contenthtml) => {
+		  alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
+//			    if (num.index === 0) {
+//	              this.$router.pushPlus('/my/resume');
+//	            }        		
+       }, true);
+      });
+    });
+  }
+}
+
 
 export {
   alertFenhongxize,
-  alertAskCommunityDetailShareSuccess
+  alertAskCommunityDetailShareSuccess,
+  expertcertification,
+  alertAskCommunityInteractiveAnswer
 };

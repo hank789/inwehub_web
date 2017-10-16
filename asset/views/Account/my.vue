@@ -175,6 +175,8 @@
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
     import userAbility from '../../utils/userAbility';
+   import {expertcertification} from '../../utils/dialogList';
+  
 
 	export default {
 		data() {
@@ -347,7 +349,7 @@
 //			mui.waiting();
 			//成为认证专提示；
 //			if(this.$route.query.needalert){
-//				userAbility.expertcertification(this);
+			expertcertification(this);
 //			}
 //		 console.log()
 
