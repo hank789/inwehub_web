@@ -65,7 +65,7 @@
   import Share from '../../components/Share.vue';
   import RefreshList from '../../components/refresh/List.vue';
   import userAbility from '../../utils/userAbility';
-
+  import localEvent from '../../stores/localStorage';
   const AskDetail = {
     data: () => ({
       ask: {
@@ -93,6 +93,14 @@
         console.log('refresh-answerDetail');
         this.getDetail();
       });
+      
+      
+      //判断是否评论的弹窗；
+      if(localEvent.getLocalItem("isAnswer"+this.id).value){
+          userAbility.InteractiveAnswer(this);  
+          localEvent.clearLocalItem("isAnswer"+this.id);
+      }
+      
 
     },
     components: {

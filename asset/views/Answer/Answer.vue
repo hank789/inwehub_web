@@ -29,7 +29,7 @@
 <script>
   import {NOTICE, RICHTEXT_ANSWER_SET} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-
+  import localEvent from '../../stores/localStorage';
   import Meditor from '../../components/vue-quill/Meditor.vue';
 
   const Answer = {
@@ -114,7 +114,6 @@
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
           if (e.index == 1) {
 
-
             for (var i in data.description.ops) {
                 if (data.description.ops[i].insert.hasOwnProperty('image')) {
                   if (/drag/.test(data.description.ops[i].insert.image)) {
@@ -152,7 +151,10 @@
               } else {
                 this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
               }
-
+              //储存状态用来判断是否评论；
+              localEvent.setLocalItem("isAnswer"+this.id, {value: 'true'});
+             
+            
               mui.back();
             });
           }
