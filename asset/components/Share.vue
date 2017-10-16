@@ -80,7 +80,7 @@
 
         var data = {
           title: this.title.substr(0, 50),
-          link: this.link,
+          link: this.link + '&isShare=1',
           content: this.content.substr(0, 150),
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
