@@ -28,16 +28,10 @@
       >
         <div class="recommendlist">
           <div>
-            <ul class="mui-table-view mui-table-view-chevron">
+            <ul class="mui-table-view">
               <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
-                <div class="first">
-                  <div class="avatar">
-                    <div class="avatarInner"><img class="avatar" :src="item.question_user_avatar_url"></div>
-                  </div>
-                  <div class="mui-media-body">{{ item.question_username }}</div>
-                </div>
-                <div class="second">{{ item.description }}</div>
-                <div class="three">{{ item.answer_num }}人回答</div>
+                <div class="second mui-ellipsis-2">{{ item.description }}</div>
+                <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?true:false}">关注问题{{item.follow_num}}</span></div>
               </li>
             </ul>
           </div>
@@ -144,6 +138,7 @@
   .three {
     font-size: 12px;
     color: #b4b4b6;
+    padding-top: 5px;
   }
 
   .split {
@@ -225,5 +220,9 @@
     margin-bottom: 0;
     padding: 12px 0;
     font-size: 17px;
+  }
+
+  .isFollowed{
+    color:#03aef9;
   }
 </style>
