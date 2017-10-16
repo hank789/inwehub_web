@@ -93,7 +93,6 @@
         console.log('refresh-answerDetail');
         this.getDetail();
       });
-<<<<<<< HEAD
       
       
       
@@ -107,16 +106,7 @@
           alertAskCommunityQuestioningSuccess(this);  
           localEvent.clearLocalItem("isQuestions"+this.id);
       }
-=======
 
-
-      //判断是否评论的弹窗；
-      if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          userAbility.InteractiveAnswer(this);
-          localEvent.clearLocalItem("isAnswer"+this.id);
-      }
-
->>>>>>> 604bf605d0ba4fa8991a5a08d78f6d55dded5c0c
 
     },
     components: {
