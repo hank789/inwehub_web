@@ -110,22 +110,33 @@
           this.loading = 0;
         });
       },
+      refreshPageData()
+      {
+        this.id = parseInt(this.$route.query.id);
+        this.username = this.$route.query.username;
+        this.title = this.$route.query.title;
+        this.answernum = this.$route.query.answernum;
+        this.followednum = this.$route.query.followednum;
+
+        var currentUrl = '/askCommunity/interaction/answers/' + this.id;
+        this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+        this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+
+        this.getList(this.id);
+      }
+    },
+    watch: {
+      '$route': 'refreshPageData'
     },
     mounted(){
-
+      window.addEventListener('refreshData', (e) => {
+        //执行刷新
+        console.log('refresh-contact');
+        this.refreshPageData();
+      });
     },
     created(){
-      this.id = parseInt(this.$route.query.id);
-      this.username = this.$route.query.username;
-      this.title = this.$route.query.title;
-      this.answernum = this.$route.query.answernum;
-      this.followednum = this.$route.query.followednum;
-
-      var currentUrl = '/askCommunity/interaction/answers/' + this.id;
-      this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
-
-      this.getList(this.id);
+        this.refreshPageData();
     }
   };
 </script>

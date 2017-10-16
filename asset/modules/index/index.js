@@ -216,6 +216,7 @@ Vue.mixin({
   }
 });
 
+import {goBack} from '../../utils/webview';
 
 mui.muiOldBack = mui.back;
 mui.back = function(){
@@ -224,6 +225,7 @@ mui.back = function(){
     var need_hide = ['list-detail-page', 'list-detail-page-interaction', 'list-detail-page-contact', 'list-detail-page-realAnswer'];
 
     if (need_hide.indexOf(current_webview.id) !== -1) {
+      goBack();
       current_webview.hide();
     } else if (mui.os.ios){
       mui.muiOldBack();

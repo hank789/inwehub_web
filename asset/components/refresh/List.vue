@@ -11,6 +11,7 @@
 
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
   import Empty from '../../components/Empty.vue';
+  import {goBack} from '../../utils/webview';
 
   export default {
     data () {
@@ -158,6 +159,7 @@
     },
     mounted() {
       mui.init({
+        beforeback: goBack,
         pullRefresh: {
           container: "#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
           down: {

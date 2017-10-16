@@ -42,7 +42,9 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
             mui.fire(current_webview,'go_to_target_page',{url: shotUrl});
           }
         }
-        current_webview.show();
+        setTimeout(function () {
+          current_webview.show("slide-in-right", 300);
+        },150);
       } else {
         var webview = mui.openWindow({
           url: url,
@@ -281,6 +283,9 @@ function goBack(){
 
       //触发父页面的自定义事件(refresh),从而进行刷新
       mui.fire(parent_webview, 'refreshData');
+
+      //触发父页面的自定义事件(refresh),从而进行刷新
+      mui.fire(parent_webview, 'refreshPageData', {childId: self.id});
 
       //子页面也刷新数据
       mui.fire(self, 'refreshData');

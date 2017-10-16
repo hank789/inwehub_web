@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <div class="buttonWrapper">
+        <div class="buttonWrapper iNeedAskWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
 

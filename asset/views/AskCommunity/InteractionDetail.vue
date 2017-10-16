@@ -28,6 +28,23 @@
         ></Discuss>
 
         </div>
+
+      <div class="help">
+        <div class="title">
+          什么是互动问答？
+        </div>
+        <div class="body">
+          InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+
+            </div>
+      </div>
+
+      <div class="buttonWrapper iNeedAskWrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id, '')">
+          查看全部回答
+
+        </button>
+      </div>
     </div>
 
     <Share
@@ -103,6 +120,12 @@
       }
     },
     methods: {
+      toAsk(){
+        this.$router.pushPlus('/ask/interaction');
+      },
+      toSeeHelp(){
+        this.$router.pushPlus('/help/ask');
+      },
       shareSuccess(){
           //alertAskCommunityDetailShareSuccess(this);
       },
@@ -117,12 +140,6 @@
         this.getDetail(() => {
           this.$refs.discuss.resetList();
         });
-      },
-      toSeeHelp(){
-        this.$router.pushPlus('/help/ask');
-      },
-      toAsk(){
-        userAbility.jumpToAddAsk();
       },
       getDetail(successCallback = () => {
                 }){

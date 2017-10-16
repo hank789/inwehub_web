@@ -1,7 +1,7 @@
 <template>
   <div class="mui-table-view answersWrapper beforeHidden afterHidden">
 
-    <Empty :description="'正在等待抢答'" v-if="list.length === 0"></Empty>
+    <Empty :description="'快来参与回答'" v-if="list.length === 0"></Empty>
 
 
     <div class="item listBottomBorder" v-else  v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
