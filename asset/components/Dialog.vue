@@ -293,6 +293,34 @@
 	</ul>
 	
 </div>
+
+<!--互动问答提问成功-->
+   <div id="ask_t">
+   	  <div class="article_t">
+   	  	<p>提问成功！可邀请好友回答</p>
+   	  	<p>（成长值<i>+200</i>，贡献值<i>+200</i>）</p>	
+   	  </div>
+   </div>
+ <div id="ask_b">
+	<ul class="hotAnswer_b">
+		<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li>
+			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img src="../statics/images/balance1.png" />
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：郭大红</p>
+			</div>
+			<i class="bot"></i>
+		</li>
+		<span class="ask_share alertConfirm">进入问答社区</span>
+	</ul>
+	
+</div>
     
   </div>
 </template>
@@ -880,6 +908,16 @@
     line-height: 40px;
     margin-top: 5px;
 }
-
+/*提问成功*/
+.hotAnswer_b  .ask_share{
+	display: block;
+	width: 100%;
+	height: 40px;
+	font-size: 16px;
+	color:#03aef9;
+	text-align: center;
+    line-height: 40px;
+    margin-top: 5px;
+}
 	
 </style>

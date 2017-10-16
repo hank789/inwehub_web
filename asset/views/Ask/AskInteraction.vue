@@ -62,7 +62,7 @@
   import pay from '../../components/pay/pay.vue';
   import {setStatusBarBackgroundAndStyle} from '../../utils/statusBar';
   import {alertFenhongxize} from '../../utils/dialogList';
-  import localEvent from '../../stores/sessionStorage';
+  import localEvent from '../../stores/localStorage';
   import {alertSimple, getDialogObj} from '../../utils/dialog';
   import userAbility from '../../utils/userAbility';
 
@@ -122,6 +122,7 @@
     },
     methods: {
       submit(){
+      	  
           this.$refs.pay.pay();
       },
       textareaFocus(){
@@ -239,6 +240,9 @@
           var result = response.data.data;
           var id = result.id;
 
+          //储存状态用来判断是否评论；  
+          localEvent.setLocalItem("isQuestions"+id, {value: 'true'});
+         
           this.$router.replace({path: '/askCommunity/interaction/answers/' + id});
         });
       }

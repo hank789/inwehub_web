@@ -36,7 +36,7 @@ function alertAskCommunityInteractiveAnswer(context)
   if (dialogObj) {
     dialogObj.getHtml('community_t', {}, (titlehtml) => {
       dialogObj.getHtml('community_b', {}, (contenthtml) => {
-	    alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
+	    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
 			          
 	    }, true);
       });
@@ -52,19 +52,35 @@ function expertcertification(context)
      dialogObj.getHtml('expertapplication-t', {}, (titlehtml) => {
         dialogObj.getHtml('expertapplication-b', {}, (contenthtml) => {
 		  alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
-//			    if (num.index === 0) {
-//	              this.$router.pushPlus('/my/resume');
-//	            }        		
+			    if (num.index === 0) {
+	              context.$router.pushPlus('/my/resume');
+	            }        		
        }, true);
       });
     });
   }
 }
-
+//提问完成；
+function alertAskCommunityQuestioningSuccess(context)
+{
+   var dialogObj = getDialogObj(context); 
+  if (dialogObj) {
+    dialogObj.getHtml('ask_t', {}, (titlehtml) => {
+      dialogObj.getHtml('ask_b', {}, (contenthtml) => {
+	    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {        
+			    if (num.index === 0) {
+	              context.$router.pushPlus('/askCommunity/interactions');
+	            } 
+	    }, true);
+      });
+    });
+  }
+}
 
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
   expertcertification,
-  alertAskCommunityInteractiveAnswer
+  alertAskCommunityInteractiveAnswer,
+  alertAskCommunityQuestioningSuccess
 };

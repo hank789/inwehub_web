@@ -51,17 +51,17 @@
     ></Share>
 
   </div>
+  
 </template>
 
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-
   import QustionInteraction from '../../components/question-detail/QustionInteraction.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
   import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue';
   import Comment from '../../components/question-detail/Comment.vue';
-  import {alertAskCommunityDetailShareSuccess,alertAskCommunityInteractiveAnswer} from '../../utils/dialogList';
+  import {alertAskCommunityDetailShareSuccess,alertAskCommunityInteractiveAnswer,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
   import RefreshList from '../../components/refresh/List.vue';
   import userAbility from '../../utils/userAbility';
@@ -101,7 +101,11 @@
           alertAskCommunityInteractiveAnswer(this);  
           localEvent.clearLocalItem("isAnswer"+this.id);
       }
-      
+      //提问完毕的弹窗；
+       if(localEvent.getLocalItem("isQuestions"+this.id).value){
+          alertAskCommunityQuestioningSuccess(this);  
+          localEvent.clearLocalItem("isQuestions"+this.id);
+      }
 
     },
     components: {
