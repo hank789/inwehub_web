@@ -209,9 +209,10 @@
                   //notification.add_coins   增加的贡献值
                   //notification.add_credits  增加的成长值
                   if (mui.os.plus) {
-                    var ws=plus.webview.currentWebview();
+                    var top_ws=plus.webview.getTopWebview();
+                    var ws = plus.webview.currentWebview();
                     //隐藏的webview不提示
-                    if (false === ws.isVisible()) return;
+                    if (top_ws.id !== ws.id) return;
                   }
                   switch (notification.integral_action){
                     case 'first_community_ask':
