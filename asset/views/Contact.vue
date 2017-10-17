@@ -110,7 +110,7 @@
           this.loading = 0;
         });
       },
-      refreshRouteData()
+      refreshPageData()
       {
         console.log('refreshRouteData');
         this.id = parseInt(this.$route.query.id);

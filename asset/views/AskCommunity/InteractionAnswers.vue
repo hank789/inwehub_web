@@ -151,7 +151,6 @@
       },
       refreshPageData(){
           console.log('refreshPageData');
-          this.loading = 1;
           this.getId();
           this.Popup();
       },
@@ -168,6 +167,10 @@
           });
           this.$router.back();
           return;
+        }
+
+        if (id !== this.id) {
+            this.loading = 1;
         }
 
         this.id = id;
