@@ -62,10 +62,19 @@
       </svg>
     </div>
 
-
-
   </nav>
-
+  
+  
+   <!--<Share
+      ref="ShareBtn"
+      :title="shareTitle"
+      :link="shareUrl"
+      :content="shareContent"
+      :imageUrl="shareImg"
+      :thumbUrl="shareImg"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>-->
   </div>
 </template>
 
@@ -74,8 +83,10 @@
   import {createAPI, addAccessToken, postRequest} from '../utils/request';
   import localEvent from '../stores/localStorage';
   import {setAppBadgeNumber} from '../utils/notice';
-
+  import {perfectCard,readhubCommenSuccess,expertcertification,alertAskCommunityInteractiveAnswer,alertAskCommunityQuestioningSuccess} from '../utils/dialogList';
   import ShortTcutComponent from '../components/ShortTcut.vue';
+  import Share from '../components/Share.vue';
+  
 
   export default {
     data () {
@@ -85,7 +96,10 @@
         isMy: false,
         showBottom: true,
         isDiscover: false,
-        taskCount: 0
+        taskCount: 0,
+        shareoption:{
+        	   
+        }
       }
     },
     props: {
@@ -126,8 +140,10 @@
             .notification((notification) => {
               switch (notification.type) {
                 case 'App\\Notifications\\AuthenticationUpdated':
-                    // 专家认证有新的通知
+                // 专家认证有新的通知;
                     console.log(notification.body);
+                    
+                    
                     break;
               }
               switch (notification.notification_type) {
@@ -152,7 +168,43 @@
                   switch (notification.integral_action){
                     case 'ask':
                         //提问
+                        //成长值；
+                        var ask_coins = notification.add_coins;
+                        //贡献alertAskCommunityInteractiveAnswer值；
+                        var ask_credits = notification.add_credits;
+                       
+                       
+                       
+                         alertAskCommunityQuestioningSuccess(this,ask_coins,ask_credits); 
                         break;
+                    case 'answer':
+                       //回答
+                       //成长值；
+                        var answer_coins = notification.add_coins;
+                        //贡献值；
+                        var answer_credits = notification.add_credits;
+                        alertAskCommunityInteractiveAnswer(this,answer_coins,answer_credits);  
+                        break;
+                      case 'expert_valid':
+                          //专家认证；
+	                      //成长值；
+	                      var expert_credits = notification.add_credits;
+	                     //贡献值；
+	                     var expert_coins = notification.add_coins;
+	                     expertcertification(this,expert_credits,expert_coins);
+                        break; 
+                        case 'readhub_new_comment':
+                          //阅读的评论；
+	                      //成长值；
+	                      var readhub_comment_credits = notification.add_credits;
+//	                       readhubCommenSuccess(this,readhub_comment_credits);
+                        break; 
+                       case 'user_info_complete':
+                          //简历完善；
+	                      //成长值；
+	                      var info_complete_credits = notification.add_credits;
+	                      perfectCard(this,info_complete_credits);
+                        break;  
                     case 'first_ask':
                         //首次提问
                         break;

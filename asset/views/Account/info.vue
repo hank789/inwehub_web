@@ -212,8 +212,7 @@
 
 					this.user = user;
 					this.loading = 0;
-					//提示完善名片;
-				     userAbility.perfectCard(this);
+					
 
 				}));
 			}

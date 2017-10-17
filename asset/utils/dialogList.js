@@ -30,9 +30,9 @@ function alertAskCommunityDetailShareSuccess(context)
   }
 }
 //互动问答 答案提交成功弹窗；
-function alertAskCommunityInteractiveAnswer(context)
+function alertAskCommunityInteractiveAnswer(context,coins,credits)
 {
-var id = parseInt(context.$route.params.id);
+    var id = parseInt(context.$route.params.id);
 	   //请求数据；
 	  postRequest(`question/relatedQuestion`, {id:id}).then(response => {
 			var code = response.data.code;
@@ -44,15 +44,16 @@ var id = parseInt(context.$route.params.id);
 	  var answerlist = response.data.data;
 	   var dialogObj = getDialogObj(context); 
 	  if (dialogObj) {
-	    dialogObj.getHtml('community_t', {}, (titlehtml) => {
+	    dialogObj.getHtml('community_t', {answercoins:coins,answercredits:credits}, (titlehtml) => {
 	      dialogObj.getHtml('community_b', {answerlist:answerlist}, (contenthtml) => {
 		    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
+		    	      
 		    	 if (num.index === 0) {
-	  			context.$router.pushPlus('/askCommunity/major/' + id);
-		    	 }else if(num.index === 1){
-		    	 	 if (context.share) {
-			      	     context.share();
-			         }
+		    	 	console.log(0)
+		    	 	if (context.share) {
+				     console.log(1)
+		      	     context.share();
+			      }
 		    	 }
 				    
 		    }, true);
@@ -67,11 +68,11 @@ var id = parseInt(context.$route.params.id);
 }
 //专家认证提示;
 
-function expertcertification(context)
+function expertcertification(context,coins,credits)
 {
    var dialogObj = getDialogObj(context); 
   if (dialogObj) {
-     dialogObj.getHtml('expertapplication-t', {}, (titlehtml) => {
+     dialogObj.getHtml('expertapplication-t', {expert_coins:coins,expert_credits:credits}, (titlehtml) => {
         dialogObj.getHtml('expertapplication-b', {}, (contenthtml) => {
 		  alertSkyTwo(titlehtml,  contenthtml, 'icon-chengweizhuanjia1', (num) => {
 			    if (num.index === 0) {
@@ -84,47 +85,90 @@ function expertcertification(context)
 }
 //提问完成；
  
-function alertAskCommunityQuestioningSuccess(context)
+function alertAskCommunityQuestioningSuccess(context, coins,credits)
 {
 	var id = parseInt(context.$route.params.id);
+	
 	   //请求数据；
-	  postRequest(`question/relatedQuestion`, {id:id}).then(response => {
+	  postRequest(`question/info`, {id:id}).then(response => {
 			var code = response.data.code;
 			if(code !== 1000) {
 				mui.alert(response.data.message);
 				mui.back();
 				return;
 			}
-	      var questList = response.data.data;
+	      var ask = response.data.data.question;
 	      var dialogObj = getDialogObj(context); 
 		  if (dialogObj) {
-		    dialogObj.getHtml('ask_t', {}, (titlehtml) => {
-		      dialogObj.getHtml('ask_b', {questlist:questList}, (contenthtml) => {
+		  	
+		    dialogObj.getHtml('ask_t', {askcoins:coins,askcredits:credits}, (titlehtml) => {
+		      dialogObj.getHtml('ask_b', {}, (contenthtml) => {
 			    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => { 
-			    	   
-			    	        console.log(num.index)
 			    	         if (num.index === 0) {
-			              context.$router.pushPlus('/askCommunity/major/' + id);
+         context.$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num, 'list-detail-page-contact');
 			            } 
-					    else if (num.index === 1) {
-			              context.$router.pushPlus('/askCommunity/interactions');
-			            } 
+					    
 			    }, true);
 		      });
 		    });
 		  }
-         console.log(questList)
+         
   
+     });
+}
+
+//阅读的评论完成;
+
+function readhubCommenSuccess(context,credits)
+{
+   var dialogObj = getDialogObj(context); 
+  if (dialogObj) {
+     dialogObj.getHtml('comment_t', {readhub_commen_credits:credits}, (titlehtml) => {
+        dialogObj.getHtml('comment_b', {}, (contenthtml) => {
+		  alertSkyTwo(titlehtml,  contenthtml, 'icon-huifuchenggong', (num) => {
+			    if (num.index === 0) {
+	             //分享评论的方法；
+	            }        		
+       }, true);
       });
-   
+    });
+  }
+}
+
+
+//完善名片；
+/**
+   * 完善名片的提示框；
+   */
+function perfectCard(context,credits)
+{
+   var dialogObj = getDialogObj(context); 
+  if (dialogObj) {
+          dialogObj.getHtml('perfectCard-t', {perfectCard_credits:credits}, (titlehtml) => {
+        	  dialogObj.getHtml('perfectCard-b', {}, (contenthtml) => {
+          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
+          		if (num.index === 0) {
+	              context.$router.pushPlus('/my/resume');
+	            }
+          	}, true);
+          });
+        });
+    }
+	}
 
   
-}
+  
+  
+  
+  
+ 
 
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
   expertcertification,
   alertAskCommunityInteractiveAnswer,
-  alertAskCommunityQuestioningSuccess
+  alertAskCommunityQuestioningSuccess,
+  readhubCommenSuccess,
+  perfectCard
 };
