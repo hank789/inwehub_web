@@ -144,6 +144,10 @@
         mui.toast('分享失败');
       },
       share(){
+        if (this.link) {
+          this.bindShare();
+        }
+
         setTimeout(() => {
           mui('#shareWrapper').popover('toggle');
           mui("body").on('tap', '.mui-backdrop', () => {
