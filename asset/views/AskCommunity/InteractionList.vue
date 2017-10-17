@@ -25,6 +25,7 @@
         :prevOtherData="{}"
         :nextOtherData="{}"
         :list="list"
+        class="listWrapper"
       >
         <div class="recommendlist">
           <div>
@@ -227,5 +228,9 @@
 
   .second{
     font-size:14px;
+  }
+
+  .listWrapper{
+    bottom:50px;
   }
 </style>
