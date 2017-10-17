@@ -156,21 +156,6 @@
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
 				});
-			},
-			//请求标记
-			sign() {
-				postRequest(`notification/mark_as_read`, {
-					notification_type: 0
-				}).then(response => {
-
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-						return;
-					}
-
-				});
 			}
 		},
 		mounted() {
@@ -187,8 +172,6 @@
 				}
 			});
 			this.getPrevList();
-			this.sign();
-
 		}
 	}
 	export default TaskMain;

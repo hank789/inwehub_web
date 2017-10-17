@@ -1277,3 +1277,8 @@ ul.normal li:before {
   transform: scaleY(.5);
   background-color: #dcdcdc;
 }
+
+
+.hideUpToRefreshDescription .mui-pull-bottom-pocket{
+  display: none !important;
+}

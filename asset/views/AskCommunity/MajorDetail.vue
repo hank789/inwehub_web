@@ -107,12 +107,6 @@
         });
       });
 
-      window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-answerDetail');
-        this.getDetail();
-      });
-
       this.getDetail();
     },
     components: {
@@ -128,6 +122,11 @@
       }
     },
     methods: {
+      refreshPageData(){
+          console.log('refreshPageData');
+          this.loading = 1;
+          this.getDetail();
+      },
       shareSuccess(){
           //alertAskCommunityDetailShareSuccess(this);
       },
@@ -194,7 +193,7 @@
       }
     },
     watch: {
-      '$route': 'getDetail'
+      '$route': 'refreshPageData'
     },
     created () {
 

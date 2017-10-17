@@ -15,6 +15,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :prevSuccessCallback="prevSuccessCallback"
+        :isShowUpToRefreshDescription="false"
         :list="answers"
         :pageMode="true"
         :autoShowEmpty="false"
@@ -107,6 +108,7 @@
 
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
+<<<<<<< HEAD
       window.addEventListener('refreshPageData', (e) => {
         //执行刷新
         console.log('refresh-interactionAnswers');
@@ -114,6 +116,9 @@
         
       });
       
+=======
+      this.Popup();
+>>>>>>> a7aa688a6e262dca0ce63e2c88e17fcc3a3ea82a
     },
     components: {
       QustionInteraction,
@@ -141,10 +146,10 @@
       share(){
          this.$refs.ShareBtn.share();
       },
-      refreshPage(){
+      refreshPageData(){
+          console.log('refreshPageData');
           this.getId();
-          this.$refs.refreshList.prevOtherData = {question_id: this.id};
-          this.$refs.refreshList.getPrevList();
+          this.Popup();
       },
       getId(){
         let id = parseInt(this.$route.params.id);
@@ -159,6 +164,10 @@
           });
           this.$router.back();
           return;
+        }
+
+        if (id !== this.id) {
+            this.loading = 1;
         }
 
         this.id = id;
@@ -212,7 +221,7 @@
       }
     },
     watch: {
-      '$route': 'refreshPage'
+      '$route': 'refreshPageData'
     },
     created () {
       this.getId();
