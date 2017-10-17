@@ -136,7 +136,7 @@
          this.$refs.ShareBtn.share();
       },
       refreshPageData(){
-          console.log('refreshPageData');
+          console.log('refreshPageData-zz-answers');
           this.getId();
       },
       getId(){

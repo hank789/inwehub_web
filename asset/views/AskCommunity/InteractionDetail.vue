@@ -40,7 +40,7 @@
       </div>
 
       <div class="buttonWrapper iNeedAskWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id, '')">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id)">
           查看全部回答
 
         </button>
@@ -115,7 +115,7 @@
     },
     methods: {
       refreshPageData(){
-          console.log('refreshPageData');
+          console.log('refreshPageData-zz-detail');
           this.loading = 1;
           this.getDetail();
       },

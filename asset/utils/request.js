@@ -88,6 +88,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
   if (showWaiting){
     mui.waiting();
   }
+
   var app_version = localEvent.getLocalItem('app_version');
   if (app_version) {
     data.current_version = app_version.version;
@@ -112,6 +113,8 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
       if (showWaiting) {
         mui.closeWaiting();
       }
+
+      console.log('post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
 
       var code = response.data.code;
 
