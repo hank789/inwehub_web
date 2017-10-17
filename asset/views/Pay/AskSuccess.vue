@@ -40,29 +40,40 @@
       }
     },
     created(){
-      this.info.money = this.$route.query.money?this.$route.query.money:0;
-      this.timeend = this.$route.query.timeend?this.$route.query.timeend:15;
-
-
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-      this.id  = id;
+      this.getParam();
     },
     mounted(){
         this.countUp();
     },
+    watch: {
+      '$route': 'refreshPageData'
+    },
     methods: {
+      getParam(){
+        this.info.money = this.$route.query.money?this.$route.query.money:0;
+        this.timeend = this.$route.query.timeend?this.$route.query.timeend:15;
+
+
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+        this.id  = id;
+      },
+      refreshPageData(){
+          this.getParam();
+          this.timestart = 0;
+          this.countUp();
+      },
       countUp() {
           this.timestart++;
           if (this.timestart < this.timeend) {
