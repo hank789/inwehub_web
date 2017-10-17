@@ -246,20 +246,20 @@
  <div id="community_b">
 	<ul class="hotAnswer_b">
 		<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li>
-			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+		<li class="alertConfirm" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
+			<p class="mui-ellipsis-2">{{item.title}}</p>
 			<div class="hotAnswer_d">
 				<p>
-					<img src="../statics/images/balance1.png" />
-					<svg class="icon" aria-hidden="true">
+					<img :src="item.user_avatar_url"  />
+					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
 						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
 					</svg>
 				</p>
-				<p>回答者：郭大红</p>
+				<p>回答者：{{item.user_name}}</p>
 			</div>
 			<i class="bot"></i>
 		</li>
-		<span class="share">分享我的问答</span>
+		<span class="share alertConfirm">分享我的问答</span>
 	</ul>
 	
 </div>
@@ -303,17 +303,17 @@
    </div>
  <div id="ask_b">
 	<ul class="hotAnswer_b">
-		<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li>
-			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+		<p class="hotAnswer_recommend">相关问答推荐2</p>
+		<li class="alertConfirm" v-for="item in options.questlist" >
+			<p class="mui-ellipsis-2">{{item.title}}</p>
 			<div class="hotAnswer_d">
 				<p>
-					<img src="../statics/images/balance1.png" />
-					<svg class="icon" aria-hidden="true">
+					<img :src="item.user_avatar_url"  />
+					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
 						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
 					</svg>
 				</p>
-				<p>回答者：郭大红</p>
+				<p>回答者：{{item.user_name}}</p>
 			</div>
 			<i class="bot"></i>
 		</li>
@@ -325,6 +325,7 @@
   </div>
 </template>
 <script type="text/javascript">
+import userAbility from '../utils/userAbility';
   export default {
     data () {
       return {
@@ -332,6 +333,8 @@
         options: {
           ok: 'test',
           level: 3,
+          questlist:[],
+          answerlist:[]
         },
       }
     },
@@ -343,6 +346,7 @@
       }
     },
     methods: {
+    	
       getHtml(id, options, callback) {
         this.options = options;
         this.$nextTick(() => {

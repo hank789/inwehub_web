@@ -97,6 +97,8 @@
           this.loading = false;
           if (mui('#refreshContainer').length) {
             mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+            //使用disablePullupToRefresh()方法禁用上拉加载后，可通过enablePullupToRefresh()方法再次启用上拉加载
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
 
           if (this.prevSuccessCallback) {
@@ -139,6 +141,8 @@
           if (list.length < 10) {
             if (mui('#refreshContainer').length) {
               mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+              //在部分场景下希望禁用上拉加载，比如在列表数据过少时，不想显示“上拉显示更多”、“没有更多数据”的提示语，开发者可以通过调用disablePullupToRefresh()方法实现类似需求
+              mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }
 
           } else {

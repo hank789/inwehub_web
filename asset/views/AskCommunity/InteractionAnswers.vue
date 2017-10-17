@@ -8,7 +8,6 @@
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
 
       <RefreshList
-
         ref="refreshList"
 
         v-model="answers"
@@ -112,22 +111,11 @@
         //执行刷新
         console.log('refresh-interactionAnswers');
         this.refreshPage();
+         this.Popup();
+        
       });
-
-
-
-      //判断是否评论的弹窗；
-      if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          alertAskCommunityInteractiveAnswer(this);
-          localEvent.clearLocalItem("isAnswer"+this.id);
-      }
-      //提问完毕的弹窗；
-       if(localEvent.getLocalItem("isQuestions"+this.id).value){
-          alertAskCommunityQuestioningSuccess(this);
-          localEvent.clearLocalItem("isQuestions"+this.id);
-      }
-
-
+      
+      this.Popup();
     },
     components: {
       QustionInteraction,
@@ -146,6 +134,19 @@
       }
     },
     methods: {
+    	//提问和回答的弹窗；
+    	  Popup(){
+    	    //提问完毕的弹窗；
+       if(localEvent.getLocalItem("isQuestions"+this.id).value){
+          alertAskCommunityQuestioningSuccess(this);  
+          localEvent.clearLocalItem("isQuestions"+this.id);
+      }   
+      //判断是否回答成功的弹窗；
+      if(localEvent.getLocalItem("isAnswer"+this.id).value){
+          alertAskCommunityInteractiveAnswer(this);  
+          localEvent.clearLocalItem("isAnswer"+this.id);
+      }	
+    	  },
       toAsk(){
           this.$router.pushPlus('/ask/interaction');
       },
