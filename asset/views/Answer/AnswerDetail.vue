@@ -118,13 +118,12 @@
     },
     computed: {},
     mounted(){
-      window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-answerDetail');
-        this.getData();
-      });
     },
     methods: {
+      refreshPageData(){
+        this.loading = 1;
+        this.getData();
+      },
       timeago(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
@@ -345,7 +344,7 @@
       descLength: function (newDescLength) {
 
       },
-      '$route': 'getData'
+      '$route': 'refreshPageData'
     },
     created () {
       //showInwehubWebview();
