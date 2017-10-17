@@ -77,11 +77,6 @@
       loading: true
     }),
     mounted(){
-      window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-answerDetail');
-        this.getDetail();
-      });
     },
     components: {
       UserInfo,
@@ -114,6 +109,10 @@
         this.getDetail(() => {
           this.$refs.discuss.resetList();
         });
+      },
+      refreshPageData(){
+        this.loading = 1;
+        this.getDetail();
       },
       getDetail(successCallback = () => {}){
 
@@ -150,7 +149,7 @@
       }
     },
     watch: {
-      '$route': 'getDetail'
+      '$route': 'refreshPageData'
     },
     created () {
       //showInwehubWebview();
