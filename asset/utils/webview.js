@@ -40,7 +40,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
         }
         setTimeout(function () {
           current_webview.show("slide-in-right", 300);
-          //mui.fire(current_webview, 'autoHeight', false);
+          mui.fire(current_webview, 'autoHeight', false);
           //mui.fire(current_webview, 'refreshPageData', false);
         },150);
       } else {
