@@ -65,16 +65,15 @@
   </nav>
   
   
-   <!--<Share
+   <Share
       ref="ShareBtn"
-      :title="shareTitle"
-      :link="shareUrl"
-      :content="shareContent"
-      :imageUrl="shareImg"
-      :thumbUrl="shareImg"
-      @success="shareSuccess"
-      @fail="shareFail"
-    ></Share>-->
+      :title="shareoption.shareTitle"
+      :link="shareoption.shareUrl"
+      :content="shareoption.shareContent"
+      :imageUrl="shareoption.shareImg"
+      :thumbUrl="shareoption.shareImg"
+      :hideShareBtn="true"
+    ></Share>
   </div>
 </template>
 
@@ -98,14 +97,18 @@
         isDiscover: false,
         taskCount: 0,
         shareoption:{
-        	   
+        	   shareUrl: '',
+	       shareImg: '',
+	       shareContent: '',
+	       shareTitle: '',
+	       id:""
         }
       }
     },
     props: {
     },
     mounted () {
-
+    	  this.shareoption.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
     	  //this.$refs.short.show();
       window.addEventListener('refreshData', (e)=>{
         //执行刷新
@@ -128,6 +131,39 @@
       });
     },
     methods:{
+    	getDetail(successCallback = () => {
+               }){
+
+        postRequest(`question/info`, {id: this.shareoption.id}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.toast(response.data.message);
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
+            return;
+          }
+          var ask = response.data.data;
+
+          this.loading = 0;
+
+         
+          this.shareoption.shareTitle = '问答|' +  ask.question.description;
+
+          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
+          this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+
+          var answerNum = ask.question.answer_num;
+
+          var followNum = ask.question.follow_num;
+
+          this.shareoption.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
+
+          successCallback();
+
+        });
+      },
+    	share(){
+         this.$refs.ShareBtn.share();
+      },
     	  show(){
     	  	this.$refs.short.show();
     	  },
@@ -172,10 +208,20 @@
                         var ask_coins = notification.add_coins;
                         //贡献alertAskCommunityInteractiveAnswer值；
                         var ask_credits = notification.add_credits;
-                       
-                       
-                       
-                         alertAskCommunityQuestioningSuccess(this,ask_coins,ask_credits); 
+                        //id
+                         var id = notification.source_id;
+                           //请求数据；
+						  postRequest(`question/info`, {id:id}).then(response => {
+								var code = response.data.code;
+								if(code !== 1000) {
+									mui.alert(response.data.message);
+									mui.back();
+									return;
+								}
+						      var ask = response.data.data.question;
+						       alertAskCommunityQuestioningSuccess(this,ask_coins,ask_credits,ask); 
+						      
+						  });         
                         break;
                     case 'answer':
                        //回答
@@ -183,6 +229,9 @@
                         var answer_coins = notification.add_coins;
                         //贡献值；
                         var answer_credits = notification.add_credits;
+                        //id
+                        this.shareoption.id = notification.source_id;
+                        this.getDetail();
                         alertAskCommunityInteractiveAnswer(this,answer_coins,answer_credits);  
                         break;
                       case 'expert_valid':
@@ -300,7 +349,8 @@
 
     },
     components: {
-      ShortTcutComponent
+      ShortTcutComponent,
+      Share
     },
     watch: {
       $route(to) {
