@@ -67,6 +67,10 @@ function installWgt(path){
     plus.nativeUI.closeWaiting();
     console.log("安装wgt文件成功！");
     removeFile(path);
+    var wvs=plus.webview.all();
+    for(var i=0;i<wvs.length;i++){
+      if (wvs[i].id !== plus.runtime.appid) wvs[i].close();
+    }
     plus.runtime.restart();
   },function(e){
     plus.nativeUI.closeWaiting();
