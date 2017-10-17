@@ -83,6 +83,32 @@
 			buttonSaveDisabled: false
 		}),
 		methods: {
+      refreshPageData(){
+        this.getDetail();
+      },
+			getDetail(){
+        let id = parseInt(this.$route.params.id);
+        console.log("id:" + id);
+        this.id = id;
+        if(this.id) {
+          var edus = localEvent.getLocalItem('edus');
+
+          if(!edus || !edus[id]) {
+            this.$store.dispatch(NOTICE, cb => {
+              cb({
+                text: '发生一些错误',
+                time: 1500,
+                status: false
+              });
+            });
+            this.$router.back();
+            return;
+          }
+          this.edu = edus[id];
+          this.description = this.edu.description;
+          this.bak = JSON.stringify(this.edu);
+        }
+      },
 			selectMajor() {
 				var degreePicker = new mui.PopPicker();
 
@@ -277,30 +303,12 @@
 			dPickerComponent,
 			MTextarea
 		},
+    watch: {
+      '$route': 'refreshPageData'
+    },
 		created() {
 			//showInwehubWebview();
-			let id = parseInt(this.$route.params.id);
-			console.log("id:" + id);
-			this.id = id;
-			if(this.id) {
-				var edus = localEvent.getLocalItem('edus');
-
-				if(!edus || !edus[id]) {
-					this.$store.dispatch(NOTICE, cb => {
-						cb({
-							text: '发生一些错误',
-							time: 1500,
-							status: false
-						});
-					});
-					this.$router.back();
-					return;
-				}
-				this.edu = edus[id];
-				this.description = this.edu.description;
-				this.bak = JSON.stringify(this.edu);
-			}
-
+      this.getDetail();
 		}
 	}
 </script>
@@ -309,16 +317,16 @@
 	.mui-input-row label {
 		padding-right: 0;
 	}
-	
+
 	.mui-input-row textarea {
 		border: none !important;
 	}
-	
+
 	.mui-input-row input {
 		text-align: right;
 		padding-right: 40px;
 	}
-	
+
 	.mui-input-row a {
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		line-height: 1.1;
@@ -326,7 +334,7 @@
 		width: 35%;
 		padding: 11px 15px;
 	}
-	
+
 	.mui-input-row a {
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		line-height: 1.1;
@@ -334,27 +342,27 @@
 		width: 35%;
 		padding: 11px 15px;
 	}
-	
+
 	.mui-table-view-cell {
 		padding: 0;
 	}
-	
+
 	.deleteWrapper {
 		text-align: right;
 		padding: 10px;
 	}
-	
+
 	.mui-table-view-cell .mui-navigate-right,
 	.mui-table-view-cell .mui-navigate {
 		color: #999;
 	}
-	
+
 	.account_item_title {
 		padding: 5px;
 		color: #a6a6a6;
 		font-size: 12px;
 	}
-	
+
 	.account-setting-field {
 		position: absolute;
 		text-align: right;
@@ -365,7 +373,7 @@
 		padding-right: 0;
 	}
 	/**/
-	
+
 	.account_item_title {
 		padding-top: 8px;
 		padding-bottom: 8px;
@@ -373,7 +381,7 @@
 		font-size: 14px;
 		margin-left: 10px;
 	}
-	
+
 	.mui-table-view-cell:after {
 		position: absolute;
 		right: 15px;
@@ -385,7 +393,7 @@
 		transform: scaleY(.5);
 		background-color: #dcdcdc;
 	}
-	
+
 	.mui-table-view:after {
 		position: absolute;
 		right: 15px;
@@ -397,12 +405,12 @@
 		transform: scaleY(.5);
 		background-color: #dcdcdc;
 	}
-	
+
 	.mui-input-row {
 		position: relative;
 		font-size: 14px;
 	}
-	
+
 	.textarea-wrapper[data-v-c8d6295a] {
 		margin: 0 15px 0 14px;
 		height: 100%;
@@ -412,32 +420,32 @@
 		padding-bottom: 20px;
 		background: #FEFEFE;
 	}
-	
+
 	.textarea-wrapper textarea {
 		font-size: 14px;
 		height: 100%;
 		padding: 5px 10px;
 		background: #fefefe;
 	}
-	
+
 	.mui-content>.mui-table-view:first-child {
 		margin-top: 15px;
 		background: #fefefe;
 		margin-top: 0px;
 	}
-	
+
 	.mui-content {
 		background: #fefefe;
 	}
 	/****取消和保存按钮样式****/
-	
+
 	.options {
 		width: 100%;
 		height: 41px;
 		margin-top: 20px;
 		padding: 0 15px;
 	}
-	
+
 	.options a {
 		display: block;
 		width: 115px;
@@ -447,13 +455,13 @@
 		line-height: 38px;
 		border-radius: 50px;
 	}
-	
+
 	.options a:nth-of-type(1) {
 		float: left;
 		background: #ececee;
 		color: #03aef9;
 	}
-	
+
 	.options a:nth-of-type(2) {
 		float: right;
 		background: #03aef9;
