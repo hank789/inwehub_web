@@ -10,7 +10,7 @@
 
     <div class="mui-content answerRichText blur">
         <div class="form form-realAnswer">
-            <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="'answer'+id" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
+            <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
@@ -42,12 +42,25 @@
       Meditor
     },
     mounted(){
-      window.addEventListener('refreshData', function(e){
-        //执行刷新
-        console.log('refresh-answer');
-      });
+    },
+    watch: {
+      '$route': 'refreshPageData'
+    },
+    computed: {
+      meditorId() {
+        return 'answer' + this.id;
+      }
     },
     methods: {
+      refreshPageData(){
+         console.log('refreshPageData');
+         this.getId();
+         console.log(this.id);
+      },
+      getId(){
+        let id = parseInt(this.$route.params.id);
+        this.id = id;
+      },
       cancelAnswer(){
 
         if (mui.os.plus && mui.os.ios) {
@@ -153,8 +166,8 @@
               }
               //储存状态用来判断是否评论；
               localEvent.setLocalItem("isAnswer"+this.id, {value: 'true'});
-             
-            
+
+
               mui.back();
             });
           }
@@ -172,9 +185,8 @@
       }
     },
     created () {
-      //showInwehubWebview();
-      let id = parseInt(this.$route.params.id);
-      this.id = id;
+        //showInwehubWebview();
+        this.getId();
     }
   }
   export default Answer;

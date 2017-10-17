@@ -102,3 +102,12 @@ npm run build
     768-x  1100px
 
 
+
+##详情页规则
+1. 请求参数中有id的，都要有以下方法
+refreshPageData
+
+2. 并且添加
+      watch: {
+        '$route': 'refreshPageData'
+      },
