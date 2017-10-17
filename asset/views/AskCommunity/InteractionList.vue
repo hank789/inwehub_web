@@ -20,6 +20,7 @@
       </div>
 
       <RefreshList
+        ref="RefreshList"
         v-model="list"
         :api="'question/commonList'"
         :prevOtherData="{}"

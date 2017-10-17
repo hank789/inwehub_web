@@ -110,8 +110,9 @@
           this.loading = 0;
         });
       },
-      refreshPageData()
+      refreshRouteData()
       {
+        console.log('refreshRouteData');
         this.id = parseInt(this.$route.query.id);
         this.username = this.$route.query.username;
         this.title = this.$route.query.title;
@@ -126,7 +127,7 @@
       }
     },
     watch: {
-      '$route': 'refreshPageData'
+      '$route': 'refreshRouteData'
     },
     mounted(){
       window.addEventListener('refreshData', (e) => {

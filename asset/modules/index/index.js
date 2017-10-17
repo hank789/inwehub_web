@@ -184,6 +184,7 @@ Vue.mixin({
     EventObj.addEventListener('refreshPageData', (e) => {
        console.log('calledEvent: refreshPageData');
        if (this.refreshPageData) {
+           console.log('calledMethod: refreshPageData');
            this.refreshPageData();
        }
     });

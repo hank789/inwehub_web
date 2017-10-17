@@ -107,14 +107,6 @@
 
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
-      window.addEventListener('refreshPageData', (e) => {
-        //执行刷新
-        console.log('refresh-interactionAnswers');
-        this.refreshPage();
-         this.Popup();
-        
-      });
-      
       this.Popup();
     },
     components: {
@@ -138,14 +130,14 @@
     	  Popup(){
     	    //提问完毕的弹窗；
        if(localEvent.getLocalItem("isQuestions"+this.id).value){
-          alertAskCommunityQuestioningSuccess(this);  
+          alertAskCommunityQuestioningSuccess(this);
           localEvent.clearLocalItem("isQuestions"+this.id);
-      }   
+      }
       //判断是否回答成功的弹窗；
       if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          alertAskCommunityInteractiveAnswer(this);  
+          alertAskCommunityInteractiveAnswer(this);
           localEvent.clearLocalItem("isAnswer"+this.id);
-      }	
+      }
     	  },
       toAsk(){
           this.$router.pushPlus('/ask/interaction');
@@ -156,10 +148,13 @@
       share(){
         this.$refs.ShareBtn.share();
       },
-      refreshPage(){
+      refreshRouteData(){
+          console.log('refreshRouteData');
+          this.loading = 1;
           this.getId();
           this.$refs.refreshList.prevOtherData = {question_id: this.id};
           this.$refs.refreshList.getPrevList();
+          this.Popup();
       },
       getId(){
         let id = parseInt(this.$route.params.id);
@@ -227,7 +222,7 @@
       }
     },
     watch: {
-      '$route': 'refreshPage'
+      '$route': 'refreshRouteData'
     },
     created () {
       this.getId();
