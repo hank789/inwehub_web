@@ -44,7 +44,7 @@
     mounted(){
     },
     watch: {
-      '$route': 'refreshRouteData'
+      //'$route': 'refreshRouteData'
     },
     computed: {
       meditorId() {
@@ -52,8 +52,8 @@
       }
     },
     methods: {
-      refreshRouteData(){
-         console.log('refreshRouteData');
+      refreshPageData(){
+         console.log('refreshPageData');
          this.getId();
          console.log(this.id);
       },
