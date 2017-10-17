@@ -207,7 +207,8 @@
                 case 5:
                   // 积分变动通知
                   console.log(notification);
-                  mui.toast(notification.title + " " + notification.body);
+                 
+                  
                   //notification.add_coins   增加的贡献值
                   //notification.add_credits  增加的成长值
                   switch (notification.integral_action){
@@ -318,6 +319,9 @@
                     case 'first_ask':
                         //首次提问rate_answer
                         break;
+                        default:
+                           mui.toast(notification.title + " " + notification.body);
+                        
                   }
                   break;
               }
