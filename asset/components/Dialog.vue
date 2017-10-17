@@ -188,7 +188,7 @@
       </div>
     </div>
    <!--文章发表成功--> 
-   <div id="article_t">
+   <!--<div id="article_t">
    	  <div class="article_t">
    	  	<p>你的文章发表成功啦！</p>
    	  	<p>（成长值<i>+5</i>）</p>	
@@ -202,9 +202,9 @@
    	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
    	 	<p>分享文章</p>
    	 </ul>
-   </div>
+   </div>-->
   <!--文章评论分享成功-->  
-   <div id="articlecomment_t">
+   <!--<div id="articlecomment_t">
    	  <div class="article_t">
    	  	<p>分享成功！</p>
    	  	<p>（成长值<i>+1</i>）</p>	
@@ -217,9 +217,9 @@
    	 	<li>InweHub诚意推荐《顾问周刊》</li>
    	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
    	 </ul>
-   </div> 
+   </div> -->
     <!--阅读评论发表成功-->
-     <div id="comment_t">
+     <!--<div id="comment_t">
    	  <div class="article_t">
    	  	<p>你的评论发表成功啦！</p>
    	  	<p>（成长值<i>+{{options.readhub_commen_credits}}</i>）</p>	
@@ -233,7 +233,7 @@
    	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
    	 	<p>分享评论</p>
    	 </ul>
-   </div>
+   </div>-->
    
    
    <!--互动问答答案提交成功-->
@@ -267,7 +267,7 @@
  
  
   <!--专业问答分享成功-->
-   <div id="community_t">
+   <!--<div id="community_t">
    	  <div class="article_t">
    	  	<p>分享成功！</p>
    	  	<p>（成长值<i>+1</i>）</p>	
@@ -289,10 +289,10 @@
 			</div>
 			<i class="bot"></i>
 		</li>
-		<!--<span class="share">分享我的问答</span>-->
+		<span class="share">分享我的问答</span>
 	</ul>
 	
-</div>
+</div>-->
 
 <!--互动问答提问成功-->
    <div id="ask_t">
@@ -321,6 +321,51 @@
 	</ul>
 	
 </div>
+<!--专业问答的提问成功-->
+<div id="majoraskSubmit_t">
+   	  <div class="article_t">
+   	  	<p>提问成功！正为你匹配专家</p>
+   	  	<p>（成长值<i>+{{options.major_ask_credits }}</i>，贡献值<i>+{{options.major_ask_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskSubmit_b">
+	<ul class="hotAnswer_b">
+		<span class="ask_share alertConfirm">返回问答社区</span>
+	</ul>
+	
+</div>
+<!--专业问答的回答成功-->
+<div id="majoraskAnswer_t">
+   	  <div class="article_t">
+   	  	<p>你的答案已成功提交！</p>
+   	  	<p>（成长值<i>+{{options.major_answer_credits}}</i>，贡献值<i>+{{options.major_answer_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskAnswer_b">
+	<ul class="hotAnswer_b">
+		<span class="alertConfirm share">分享我的问答</span>
+		<span class="ask_divided">其他人查看答案，你可从中获取分成</span>
+	</ul>
+	
+</div>
+
+<!--专业问答的评论成功-->
+<div id="majoraskcomment_t">
+   	  <div class="article_t">
+   	  	<p>你的评价已成功提交！</p>
+   	  	<p>（成长值<i>+{{options.major_comment_credits}}</i>，贡献值<i>+{{options.major_comment_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskcomment_b">
+	<ul class="hotAnswer_b">
+		<span class="alertConfirm share">分享我的问答</span>
+		<span class="ask_divided">其他人查看答案，你可从中获取分成</span>
+	</ul>
+	
+</div>
+
+
+
     
   </div>
 </template>
@@ -342,7 +387,13 @@ import userAbility from '../utils/userAbility';
           expert_coins:"",
           expert_credits:"",
           readhub_commen_credits:"",
-          perfectCard_credits:''
+          perfectCard_credits:'',
+          major_ask_credits:"",
+          major_ask_coins:"",
+          major_answer_credits:"",
+          major_answer_coins:"",
+          major_comment_coins:"",
+          major_comment_credits:""
         },
       }
     },
@@ -932,5 +983,13 @@ import userAbility from '../utils/userAbility';
     line-height: 40px;
     margin-top: 5px;
 }
-	
+.hotAnswer_b  .ask_divided{
+	display: block;
+	width: 100%;
+	height: 30px;
+	font-size: 13px;
+	color:#808080;
+	text-align: center;
+	margin-top: 10px;
+}
 </style>

@@ -68,7 +68,7 @@ function expertcertification(context,coins,credits)
     });
   }
 }
-//提问完成；
+//互动提问完成；
  
 function alertAskCommunityQuestioningSuccess(context, coins,credits,ask)
 {
@@ -130,7 +130,72 @@ function perfectCard(context,credits)
     }
 	}
 
-  
+//专业问答 答案提交成功弹窗；
+function alertMajorAskSuccess(context,credits,coins)
+{
+	   var dialogObj = getDialogObj(context); 
+	  if (dialogObj) {
+	    dialogObj.getHtml('majoraskSubmit_t', {major_ask_credits:credits,major_ask_coins:coins}, (titlehtml) => {
+	      dialogObj.getHtml('majoraskSubmit_b', {}, (contenthtml) => {
+		    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
+		    	      
+		    	 if (num.index === 0) {
+		    	     //返回专业问答社区;
+		    	       context.$router.pushPlus('/askCommunity/majors');
+		    	 
+		    	 
+		    	 }
+				    
+		    }, true);
+	      });
+	    });
+	  } 
+}  
+
+//专业问答 答案回复成功弹窗；
+function alertMajorReplySuccess(context,credits,coins)
+{
+	   var dialogObj = getDialogObj(context); 
+	  if (dialogObj) {
+	    dialogObj.getHtml('majoraskAnswer_t', {major_answer_credits:credits,major_answer_coins:coins}, (titlehtml) => {
+	      dialogObj.getHtml('majoraskAnswer_b', {}, (contenthtml) => {
+		    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
+		    	      
+		    	 if (num.index === 0) {
+                if (context.share) {
+		      	     context.share();
+			      }    	 
+		    	 
+		    	 }
+				    
+		    }, true);
+	      });
+	    });
+	  } 
+}  
+
+
+//专业问答 答案回复成功弹窗；
+function alertMajorCommentSuccess(context,credits,coins)
+{
+	   var dialogObj = getDialogObj(context); 
+	  if (dialogObj) {
+	    dialogObj.getHtml('majoraskcomment_t', {major_comment_credits:credits,major_comment_coins:coins}, (titlehtml) => {
+	      dialogObj.getHtml('majoraskcomment_b', {}, (contenthtml) => {
+		    alertSkyTwo(titlehtml,  contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
+		    	      
+		    	 if (num.index === 0) {
+                if (context.share) {
+		      	     context.share();
+			      }    	 
+		    	 
+		    	 }
+				    
+		    }, true);
+	      });
+	    });
+	  } 
+}  
   
   
   
@@ -144,5 +209,7 @@ export {
   alertAskCommunityInteractiveAnswer,
   alertAskCommunityQuestioningSuccess,
   readhubCommenSuccess,
-  perfectCard
+  perfectCard,
+  alertMajorAskSuccess,
+  alertMajorReplySuccess
 };

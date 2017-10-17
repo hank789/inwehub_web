@@ -175,7 +175,7 @@
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
     import userAbility from '../../utils/userAbility';
-   import {expertcertification,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
+   import {alertMajorReplySuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
   
 
 	export default {
@@ -346,7 +346,8 @@
 
 		},
 		mounted() {
-//      alertAskCommunityQuestioningSuccess(this,7,5);
+
+       alertMajorReplySuccess(this);
  
 
 		}
