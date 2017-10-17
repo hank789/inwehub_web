@@ -108,7 +108,6 @@
 
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
-      this.Popup();
     },
     components: {
       QustionInteraction,
@@ -127,19 +126,6 @@
       }
     },
     methods: {
-    	//提问和回答的弹窗；
-    	  Popup(){
-    	    //提问完毕的弹窗；
-       if(localEvent.getLocalItem("isQuestions"+this.id).value){
-          alertAskCommunityQuestioningSuccess(this);
-          localEvent.clearLocalItem("isQuestions"+this.id);
-      }
-      //判断是否回答成功的弹窗；
-      if(localEvent.getLocalItem("isAnswer"+this.id).value){
-          alertAskCommunityInteractiveAnswer(this);
-          localEvent.clearLocalItem("isAnswer"+this.id);
-      }
-    	  },
       toAsk(){
           this.$router.pushPlus('/ask/interaction');
       },
@@ -147,12 +133,11 @@
           this.$router.pushPlus('/help/ask');
       },
       share(){
-        this.$refs.ShareBtn.share();
+         this.$refs.ShareBtn.share();
       },
       refreshPageData(){
           console.log('refreshPageData');
           this.getId();
-          this.Popup();
       },
       getId(){
         let id = parseInt(this.$route.params.id);

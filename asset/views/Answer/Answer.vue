@@ -164,9 +164,6 @@
               } else {
                 this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
               }
-              //储存状态用来判断是否评论；
-              localEvent.setLocalItem("isAnswer"+this.id, {value: 'true'});
-
 
               mui.back();
             });

@@ -240,8 +240,7 @@
           var result = response.data.data;
           var id = result.id;
 
-          //储存状态用来判断是否评论；  
-          localEvent.setLocalItem("isQuestions"+id, {value: 'true'});
+         
          
           this.$router.replace({path: '/askCommunity/interaction/answers/' + id});
         });
