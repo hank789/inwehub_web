@@ -9,29 +9,30 @@
     <div class="mui-content" v-show="!loading">
 
 
-        <div class="form form-ask-refuse">
-          <form>
+      <div class="form form-ask-refuse">
+        <form>
 
-            <div class="title">您怎么就拒绝回答啦？</div>
-            <div class="category">
+          <div class="title">您怎么就拒绝回答啦？</div>
+          <div class="category">
               <span v-for="(item, index) in tags" :class="sTags.indexOf(item.value) >= 0 ?'active':''"
                     @tap.stop.prevent="selectTags(item)">{{ item.text }}</span>
-            </div>
+          </div>
 
-            <div class="textarea-wrapper">
-              <textarea v-model.trim="description" placeholder="请详细说明下拒绝的原因"></textarea>
-              <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-            </div>
+          <div class="textarea-wrapper">
+            <textarea v-model.trim="description" placeholder="请详细说明下拒绝的原因"></textarea>
+            <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+          </div>
 
-            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
+          <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
-            <div class="button-wrapper">
-              <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                      @tap.stop.prevent="submit" :disabled="buttonRefuseDisable">提交反馈
-              </button>
-            </div>
+          <div class="button-wrapper">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                    @tap.stop.prevent="submit" :disabled="buttonRefuseDisable">提交反馈
 
-          </form>
+            </button>
+          </div>
+
+        </form>
       </div>
 
     </div>
@@ -47,12 +48,12 @@
     data: () => ({
       tags: [],
       sTags: [],
-      id:null,
+      id: null,
       descMaxLength: 200,
       description: '',
       loading: true,
-      buttonRefuseDisable:false,
-      needDesc:true
+      buttonRefuseDisable: false,
+      needDesc: true
     }),
     computed: {
       nothing () {
@@ -66,6 +67,38 @@
       }
     },
     methods: {
+      refreshPageData(){
+        this.loading = true;
+        this.getDetail();
+      },
+      getDetail(){
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+        this.id = id;
+
+        postRequest(`tags/load`, {tag_type: 2}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+
+          this.tags = response.data.data.tags;
+          this.loading = 0;
+        });
+      },
       selectTags (tag) {
         var pos = this.sTags.indexOf(tag.value);
         if (pos >= 0) {
@@ -76,10 +109,10 @@
 
         var pos = this.sTags.indexOf(67);
 
-        if (pos >=0 ) {
-            this.needDesc = true;
+        if (pos >= 0) {
+          this.needDesc = true;
         } else {
-            this.needDesc = false;
+          this.needDesc = false;
         }
 
       },
@@ -87,10 +120,10 @@
         var options = {};
         options.engine = 'iFly';
         var t = this;
-        plus.speech.startRecognize( options, function ( s ) {
+        plus.speech.startRecognize(options, function (s) {
           t.description += s;
-        }, function ( e ) {
-          mui.alert( "语音识别失败："+e.message );
+        }, function (e) {
+          mui.alert("语音识别失败：" + e.message);
         });
       },
       submit(){
@@ -117,7 +150,7 @@
           if (e.index == 1) {
 
             if (this.buttonRefuseDisable) {
-                return;
+              return;
             }
 
             this.buttonRefuseDisable = true;
@@ -136,46 +169,18 @@
       }
     },
     mounted(){
-      window.addEventListener('refreshData', function(e){
-        //执行刷新
-        console.log('refresh-refuse');
-      });
     },
     created () {
       //showInwehubWebview();
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-      this.id = id;
-
-      postRequest(`tags/load`, {tag_type: 2}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          mui.back();
-          return;
-        }
-
-        this.tags = response.data.data.tags;
-        this.loading = 0;
-      });
+      this.getDetail();
     },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength);
         }
-      }
+      },
+      '$route': 'refreshPageData'
     }
   }
   export default Refuse;
@@ -184,30 +189,30 @@
 
 <style scoped>
   .form-ask-refuse {
-    padding:0 5px;
+    padding: 0 5px;
   }
 
   .form-ask-refuse textarea {
     margin-top: 15px;
     width: 100%;
     height: 138px;
-    border:none;
+    border: none;
   }
 
   .form-ask-refuse .title {
     margin-top: 10px;
-    margin-left:10px;
+    margin-left: 10px;
     color: #8b8b8b;
     height: 32px;
   }
 
-  .form-ask-refuse .category{
-    padding:10px 20px;
+  .form-ask-refuse .category {
+    padding: 10px 20px;
   }
 
   .form-ask-refuse .category span.active {
     border: 1px solid #4a90e2;
-    color:#4a90e2;
+    color: #4a90e2;
   }
 
   .form-ask-refuse .category span {
@@ -217,10 +222,10 @@
     display: inline-block;
     height: 32px;
     background: #fff;
-    font-size:14px;
+    font-size: 14px;
     margin: 5px 6px;
     text-align: center;
-    color:#333;
+    color: #333;
     line-height: 32px;
     position: relative;
   }
@@ -241,30 +246,31 @@
 
   .form-ask-refuse .button-wrapper {
     margin-top: 15px;
-    padding:0 50px;
+    padding: 0 50px;
   }
 
   .textarea-wrapper {
     position: relative;
     background: #fff;
-    padding-bottom:20px;
+    padding-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #bbbbbb;
   }
-  .textarea-wrapper textarea{
-    margin:0;
-    padding-bottom:0;
+
+  .textarea-wrapper textarea {
+    margin: 0;
+    padding-bottom: 0;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
-    font-size:12px;
+    font-size: 12px;
     bottom: 2px;
     color: #999;
   }
 
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 </style>
