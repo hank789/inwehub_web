@@ -228,10 +228,8 @@ mui.back = function(){
     if (need_hide.indexOf(current_webview.id) !== -1) {
       goBack();
       current_webview.hide();
-    } else if (mui.os.ios){
+    } else{
       mui.muiOldBack();
-    } else {
-      router.go(-1);
     }
   } else {
     router.go(-1);
