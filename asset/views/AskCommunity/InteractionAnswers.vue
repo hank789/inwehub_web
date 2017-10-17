@@ -138,7 +138,6 @@
       refreshPageData(){
           console.log('refreshPageData');
           this.getId();
-          this.Popup();
       },
       getId(){
         let id = parseInt(this.$route.params.id);
