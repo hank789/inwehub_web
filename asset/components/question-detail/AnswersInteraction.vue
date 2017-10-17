@@ -6,7 +6,7 @@
 
     <div class="item listBottomBorder" v-else  v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
       <UserInfo
-        :uuid="11111"
+        :uuid="item.uuid"
         :avatar="item.user_avatar_url"
         :realname="item.user_name"
         :position="''"
