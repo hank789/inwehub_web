@@ -105,14 +105,12 @@ npm run build
 
 ##webview-详情页规则(请求参数中有id的，都要遵守以下规则)
 1. 都要有以下方法
-    refreshRouteData
+    refreshPageData
 
 2. 并且添加
       watch: {
-        '$route': 'refreshRouteData'
+        '$route': 'refreshPageData'
       },
-
-3. 不能有refreshPageData方法
 
 
 ##webview-页面规则(请求中没有参数id的，都要遵守以下规则)
