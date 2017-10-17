@@ -191,7 +191,7 @@
         var contents = this.description;
         this.storeContent(contents);
       },
-      refreshPageData(){
+      refreshRouteData(){
           console.log('newid' + this.id);
           this.initDefaultValue();
       },
@@ -256,7 +256,7 @@
     },
     watch: {
       'id'(newVal, oldVal) {
-          this.refreshPageData();
+          this.refreshRouteData();
       },
       'content'(newVal, oldVal) {
         this.description = newVal;
