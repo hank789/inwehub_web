@@ -57,7 +57,42 @@
         return this.ask.timeline.reverse();
       }
     },
+    watch: {
+      '$route': 'refreshPageData'
+    },
     methods: {
+      refreshPageData(){
+          this.getDetail();
+      },
+      getDetail(){
+        let id = parseInt(this.$route.params.id);
+
+        if (!id) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            });
+          });
+          this.$router.back();
+          return;
+        }
+
+        this.id = id;
+
+        postRequest(`question/info`, {id: id}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+
+          this.ask = response.data.data;
+          this.loading = 0;
+        });
+      },
       getTime(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
@@ -65,33 +100,7 @@
       }
     },
     created () {
-      let id = parseInt(this.$route.params.id);
-
-      if (!id) {
-        this.$store.dispatch(NOTICE, cb => {
-          cb({
-            text: '发生一些错误',
-            time: 1500,
-            status: false
-          });
-        });
-        this.$router.back();
-        return;
-      }
-
-      this.id = id;
-
-      postRequest(`question/info`, {id: id}).then(response => {
-        var code = response.data.code;
-        if (code !== 1000) {
-          mui.alert(response.data.message);
-          mui.back();
-          return;
-        }
-
-        this.ask = response.data.data;
-        this.loading = 0;
-      });
+        this.getDetail();
     }
   }
   export default AskSuccess;
