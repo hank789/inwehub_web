@@ -97,11 +97,11 @@
         isDiscover: false,
         taskCount: 0,
         shareoption:{
-        	   shareUrl: '',
-	       shareImg: '',
-	       shareContent: '',
-	       shareTitle: '',
-	       id:""
+          shareUrl: '',
+	        shareImg: '',
+	        shareContent: '',
+	        shareTitle: '',
+	        id:""
         },
         ask: {
         answers: [],
@@ -139,10 +139,10 @@
       });
     },
     methods:{
-    	getDetail(successCallback = () => {
+    	getDetailByAnswerId(answerId,successCallback = () => {
                }){
 
-        postRequest(`question/info`, {id: this.shareoption.id}).then(response => {
+        postRequest(`answer/info`, {id: answerId}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
@@ -153,10 +153,9 @@
 
           this.loading = 0;
 
-
           this.shareoption.shareTitle = '问答|' +  this.ask.question.description;
 
-          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
+          var currentUrl = '/askCommunity/interaction/answers/' + this.ask.question.id;
           this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
 
           var answerNum = this.ask.question.answer_num;
@@ -246,7 +245,7 @@
                         var answer_credits = notification.add_credits;
                         //id
                         this.shareoption.id = notification.source_id;
-                        this.getDetail();
+                        this.getDetailByAnswerId(notification.source_id);
                         alertAskCommunityInteractiveAnswer(this,answer_coins,answer_credits);
                         break;
                     case 'expert_valid':
@@ -275,8 +274,7 @@
                         var major_ask_coins = notification.add_coins;
                         //贡献值；
                         var major_ask_credits = notification.add_credits;
-                         alertMajorAskSuccess(this,major_ask_credits,major_ask_coins);
-
+                        alertMajorAskSuccess(this,major_ask_credits,major_ask_coins);
                        break;
                     case 'first_answer':
                     case 'answer':
@@ -286,20 +284,8 @@
                         var major_answer_credits = notification.add_credits;
                         //id
                         this.shareoption.id = notification.source_id;
-                        //修改
-                          this.shareoption.shareTitle = '专家回答|' +  this.ask.question.description;
-
-				          var currentUrl = '/askCommunity/major/' + this.id;
-				          this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-
-				          var answername = this.ask.question.user_name;
-
-
-				          this.shareoption.shareContent = '专家' + answername  + '的回答，' + '点击前往围观互动';
-
-                          this.getDetail();
-                          alertMajorReplySuccess(this,major_answer_credits,major_answer_coins);
-
+                        this.getDetailByAnswerId(notification.source_id);
+                        alertMajorReplySuccess(this,major_answer_credits,major_answer_coins);
                        break;
                     case 'rate_answer':
                       //成长值；
@@ -308,20 +294,8 @@
                         var major_comment_credits = notification.add_credits;
                         //id
                         this.shareoption.id = notification.source_id;
-                        //修改
-                          this.shareoption.shareTitle = '专家回答|' +  this.ask.question.description;
-
-				          var currentUrl = '/askCommunity/major/' + this.id;
-				          this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-
-				          var answername = this.ask.question.user_name;
-
-
-				          this.shareoption.shareContent = '专家' + answername  + '的回答，' + '点击前往围观互动';
-
-                          this.getDetail();
-                          alertMajorReplySuccess(this,major_comment_credits,major_comment_coins);
-
+                        this.getDetailByAnswerId(notification.source_id);
+                        alertMajorReplySuccess(this,major_comment_credits,major_comment_coins);
                        break;
                     default:
                       mui.toast(notification.title + " " + notification.body);
