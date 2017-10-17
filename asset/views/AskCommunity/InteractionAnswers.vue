@@ -108,17 +108,6 @@
 
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
-<<<<<<< HEAD
-      window.addEventListener('refreshPageData', (e) => {
-        //执行刷新
-        console.log('refresh-interactionAnswers');
-        this.refreshPage();
-        
-      });
-      
-=======
-      this.Popup();
->>>>>>> a7aa688a6e262dca0ce63e2c88e17fcc3a3ea82a
     },
     components: {
       QustionInteraction,
