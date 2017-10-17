@@ -1,5 +1,6 @@
 <template>
-  <div class="mui-scroll-wrapper" :class="{hideUpToRefreshDescription:!isShowUpToRefreshDescription}"  id="refreshContainer" v-show="!loading">
+  <div class="mui-scroll-wrapper" :class="{hideUpToRefreshDescription:!isShowUpToRefreshDescription}"
+       id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
       <Empty v-if="nothing===1 && autoShowEmpty"></Empty>
       <slot v-else></slot>
@@ -22,9 +23,9 @@
       }
     },
     props: {
-      isShowUpToRefreshDescription:{  //是否显示上拉刷新的提示区域
-        type:Boolean,
-        default:true
+      isShowUpToRefreshDescription: {  //是否显示上拉刷新的提示区域
+        type: Boolean,
+        default: true
       },
       api: {
         type: String,
@@ -74,9 +75,16 @@
       },
     },
     methods: {
+      refreshPageData(prevOtherData){
+        this.loading = 1;
+        this.prevOtherData = prevOtherData;
+        this.getPrevList();
+      },
       getPrevList(){
         var param = {};
         param = Object.assign(param, this.prevOtherData);
+
+        console.log(JSON.stringify(param));
 
         postRequest(this.api, param).then(response => {
           var code = response.data.code;
@@ -158,7 +166,6 @@
           this.loading = false;
 
 
-
           if (this.nextSuccessCallback) {
             this.nextSuccessCallback();
           }
@@ -189,6 +196,13 @@
       list: function (newValue) {
         this.$emit('input', newValue);
       },
+      prevOtherData:function(newValue, oldValue)
+      {
+
+         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+            this.refreshPageData(newValue);
+        }
+      }
     }
   };
 </script>

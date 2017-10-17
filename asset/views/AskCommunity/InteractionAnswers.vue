@@ -153,8 +153,6 @@
           console.log('refreshPageData');
           this.loading = 1;
           this.getId();
-          this.$refs.refreshList.prevOtherData = {question_id: this.id};
-          this.$refs.refreshList.getPrevList();
           this.Popup();
       },
       getId(){
