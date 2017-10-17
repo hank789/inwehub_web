@@ -223,13 +223,26 @@ mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
     var current_webview = plus.webview.currentWebview();
-    var need_hide = ['list-detail-page', 'list-detail-page-interaction', 'list-detail-page-contact', 'list-detail-page-realAnswer'];
+    var need_hide = [
+      'inwehub_notice_view',
+      'list-detail-page',
+      'list-detail-page-interaction',
+      'list-detail-page-contact',
+      'list-detail-page-realAnswer'
+    ];
 
+    var need_webview_back = [
+      'inwehub_article_title',
+      'inwehub_article_view'
+    ];
+    console.log(current_webview.id);
     if (need_hide.indexOf(current_webview.id) !== -1) {
       goBack();
       current_webview.hide();
-    } else{
+    } else if (mui.os.ios || need_webview_back.indexOf(current_webview.id) !== -1){
       mui.muiOldBack();
+    } else {
+      router.go(-1);
     }
   } else {
     router.go(-1);

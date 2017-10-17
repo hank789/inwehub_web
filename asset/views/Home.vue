@@ -393,9 +393,9 @@
 								}
 							);
 						}
-						mui.openWindow({
+						var notice_ws = mui.openWindow({
 							url: 'index.html#/webview/notice',
-							id: url,
+							id: 'inwehub_notice_view',
 							preload: false, //一定要为false
 							createNew: false,
 							show: {
@@ -409,10 +409,13 @@
 								autoShow: false
 							},
 							extras: {
-								preload: true
+								preload: true,
+                article_url: url
 							}
 						});
-					} else {
+            mui.fire(notice_ws, 'load_article', {article_url: url});
+
+          } else {
 						window.location.href = url;
 					}
 				} else {
