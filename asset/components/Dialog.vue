@@ -118,7 +118,7 @@
       <div id="perfectCard-t">
         <div class="perfectCard-t">
           <p>恭喜！你的名片比较完善了</p>
-          <p>（成长值<i>+500</i>）</p>
+          <p>（成长值<i>+{{options.perfectCard_credits}}</i>）</p>
         </div>
       </div>
       <div id="perfectCard-b">
@@ -177,7 +177,7 @@
       <div id="expertapplication-t">
         <div class="expertapplication-t">
           <p>恭喜！您已成为平台专家</p>
-          <p>（成长值<i>+200</i>，贡献值<i>+500</i>）</p>
+          <p>（成长值<i>+{{options.expert_credits}}</i>，贡献值<i>+{{options.expert_coins}}</i>）</p>
         </div>
       </div>
       <div id="expertapplication-b">
@@ -218,11 +218,11 @@
    	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
    	 </ul>
    </div> 
-    <!--评论发表成功-->
+    <!--阅读评论发表成功-->
      <div id="comment_t">
    	  <div class="article_t">
    	  	<p>你的评论发表成功啦！</p>
-   	  	<p>（成长值<i>+5</i>）</p>	
+   	  	<p>（成长值<i>+{{options.readhub_commen_credits}}</i>）</p>	
    	  </div>
    </div>
    <div id="comment_b">
@@ -240,13 +240,13 @@
    <div id="community_t">
    	  <div class="article_t">
    	  	<p>你的答案已成功提交！</p>
-   	  	<p>（成长值<i>+200</i>，贡献值<i>+200</i>）</p>	
+   	  	<p>（成长值<i>+{{options.answercredits}}</i>，贡献值<i>+{{options.answercoins}}</i>）</p>	
    	  </div>
    </div>
  <div id="community_b">
 	<ul class="hotAnswer_b">
-		<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li class="alertConfirm" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
+		<!--<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li class="" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
 			<p class="mui-ellipsis-2">{{item.title}}</p>
 			<div class="hotAnswer_d">
 				<p>
@@ -258,8 +258,8 @@
 				<p>回答者：{{item.user_name}}</p>
 			</div>
 			<i class="bot"></i>
-		</li>
-		<span class="share alertConfirm">分享我的问答</span>
+		</li>-->
+		<span class="share alertConfirm">分享我的回答</span>
 	</ul>
 	
 </div>
@@ -298,12 +298,12 @@
    <div id="ask_t">
    	  <div class="article_t">
    	  	<p>提问成功！可邀请好友回答</p>
-   	  	<p>（成长值<i>+200</i>，贡献值<i>+200</i>）</p>	
+   	  	<p>（成长值<i>+{{options.askcredits}}</i>，贡献值<i>+{{options.askcoins}}</i>）</p>	
    	  </div>
    </div>
  <div id="ask_b">
 	<ul class="hotAnswer_b">
-		<p class="hotAnswer_recommend">相关问答推荐2</p>
+		<!--<p class="hotAnswer_recommend">相关问答推荐</p>
 		<li class="alertConfirm" v-for="item in options.questlist" >
 			<p class="mui-ellipsis-2">{{item.title}}</p>
 			<div class="hotAnswer_d">
@@ -316,8 +316,8 @@
 				<p>回答者：{{item.user_name}}</p>
 			</div>
 			<i class="bot"></i>
-		</li>
-		<span class="ask_share alertConfirm">进入问答社区</span>
+		</li>-->
+		<span class="ask_share alertConfirm">邀请好友回答</span>
 	</ul>
 	
 </div>
@@ -334,7 +334,15 @@ import userAbility from '../utils/userAbility';
           ok: 'test',
           level: 3,
           questlist:[],
-          answerlist:[]
+          answerlist:[],
+          askcredits:"",
+          askcoins:"",
+          answercoins:"",
+          answercredits:"",
+          expert_coins:"",
+          expert_credits:"",
+          readhub_commen_credits:"",
+          perfectCard_credits:''
         },
       }
     },
@@ -773,6 +781,7 @@ import userAbility from '../utils/userAbility';
  	 /*width: 240px;*/
      /*height: 100px;*/
     /* border: 1px solid #CCCCCC;*/
+    margin-top: 20px;
  }
  .article_t p:nth-child(1){
  	font-size: 19px;
@@ -832,8 +841,8 @@ import userAbility from '../utils/userAbility';
 	font-size: 16px;
 	border-top:1px solid  #dcdcdc;
 	text-align: center;
-	padding-top: 12px;
-	padding-bottom: 20px;
+	padding-top: 15px;
+	padding-bottom: 0px;
 }
 
 /*互动问答答案提交成功*/

@@ -175,7 +175,7 @@
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
     import userAbility from '../../utils/userAbility';
-   import {expertcertification} from '../../utils/dialogList';
+   import {expertcertification,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
   
 
 	export default {
@@ -346,12 +346,8 @@
 
 		},
 		mounted() {
-//			mui.waiting();
-			//成为认证专提示；
-			if(this.$route.query.needalert){
-			expertcertification(this);
-       		}
-//		 console.log()
+//      alertAskCommunityQuestioningSuccess(this,7,5);
+ 
 
 		}
 	}
