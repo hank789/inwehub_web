@@ -222,7 +222,7 @@
       }
     },
     watch: {
-      //'$route': 'refreshRouteData'
+      '$route': 'refreshPageData'
     },
     created () {
       this.getId();

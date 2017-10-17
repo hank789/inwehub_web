@@ -184,7 +184,7 @@
       }
     },
     watch: {
-      //'$route': 'refreshRouteData'
+      '$route': 'refreshPageData'
     },
     created () {
 
