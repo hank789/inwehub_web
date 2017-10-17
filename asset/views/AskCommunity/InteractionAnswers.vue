@@ -138,6 +138,7 @@
       refreshPageData(){
           console.log('refreshPageData-zz-answers');
           this.getId();
+          this.$refs.refreshList.setPageData(this.prevOtherData);
       },
       getId(){
         let id = parseInt(this.$route.params.id);
