@@ -209,6 +209,11 @@
                   console.log(notification);
                   //notification.add_coins   增加的贡献值
                   //notification.add_credits  增加的成长值
+                  if (mui.os.plus) {
+                    var ws=plus.webview.currentWebview();
+                    //隐藏的webview不提示
+                    if (false === ws.isVisible()) return;
+                  }
                   switch (notification.integral_action){
                     case 'first_community_ask':
                     case 'community_ask':
@@ -218,19 +223,19 @@
                         //贡献alertAskCommunityInteractiveAnswer值；
                         var ask_credits = notification.add_credits;
                         //id
-                         var id = notification.source_id;
-                           //请求数据；
-						  postRequest(`question/info`, {id:id}).then(response => {
-								var code = response.data.code;
-								if(code !== 1000) {
-									mui.alert(response.data.message);
-									mui.back();
-									return;
-								}
-						      var ask = response.data.data.question;
-						       alertAskCommunityQuestioningSuccess(this,ask_coins,ask_credits,ask);
+                        var id = notification.source_id;
+                        //请求数据；
+                        postRequest(`question/info`, {id:id}).then(response => {
+                          var code = response.data.code;
+                          if(code !== 1000) {
+                            mui.alert(response.data.message);
+                            mui.back();
+                            return;
+                          }
+                            var ask = response.data.data.question;
+                             alertAskCommunityQuestioningSuccess(this,ask_coins,ask_credits,ask);
 
-						  });
+                        });
                         break;
                     case 'first_community_answer':
                     case 'community_answer':
