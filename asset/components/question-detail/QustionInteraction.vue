@@ -25,20 +25,20 @@
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num, 'list-detail-page-contact')">
+                @tap.stop.prevent="$router.pushPlus('/contact?id=' + ask.id + '&username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num, 'list-detail-page-contact',true,'pop-in','hide',true)">
           邀请回答
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer')">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer',true,'pop-in','hide',true)">
           参与回答
        </button>
       </div>
 
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else >
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction')">
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction',true,'pop-in','hide',true)">
           查看我的回答
        </button>
       </div>
