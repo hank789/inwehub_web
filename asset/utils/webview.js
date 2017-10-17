@@ -10,10 +10,6 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
       console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id);
 
       var current_webview = plus.webview.getWebviewById(id);
-      if (current_webview) {
-        mui.fire(current_webview, 'autoHeight', false);
-        mui.fire(current_webview, 'refreshPageData', false);
-      }
 
       if (current_webview) {
         var current_webview_url = current_webview.getURL();
@@ -44,6 +40,8 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
         }
         setTimeout(function () {
           current_webview.show("slide-in-right", 300);
+          mui.fire(current_webview, 'autoHeight', false);
+          mui.fire(current_webview, 'refreshPageData', false);
         },150);
       } else {
         var webview = mui.openWindow({
