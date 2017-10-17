@@ -80,6 +80,11 @@
         this.prevOtherData = prevOtherData;
         this.getPrevList();
       },
+      setPageData(prevOtherData){
+        this.loading = 1;
+        this.prevOtherData = prevOtherData;
+        this.getPrevList();
+      },
       getPrevList(){
         var param = {};
         param = Object.assign(param, this.prevOtherData);
