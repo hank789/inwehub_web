@@ -45,6 +45,17 @@
       >
       </Discuss>
 
+      <Share
+        v-show="ask.question.status==6||ask.question.status==7"
+        :title="shareOption.title"
+        :link="shareOption.link"
+        :content="shareOption.content"
+        :imageUrl="shareOption.imageUrl"
+        :thumbUrl="shareOption.thumbUrl"
+        @success="shareSuccess"
+        @fail="shareFail"
+      ></Share>
+
     </div>
   </div>
 </template>
@@ -61,6 +72,8 @@
   import Timeline from '../../components/question-detail/Timeline.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Comment from '../../components/question-detail/Comment.vue';
+  import Share from '../../components/Share.vue';
+  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
 
 
   const AskDetail = {
@@ -74,6 +87,13 @@
         timeline: []
       },
       id: 0,
+      shareOption:{
+        title:'',
+        link:'',
+        content:'',
+        imageUrl:'',
+        thumbUrl:''
+      },
       loading: true
     }),
     mounted(){
@@ -86,7 +106,8 @@
       Statistics,
       Timeline,
       Answer,
-      Comment
+      Comment,
+      Share
     },
     computed: {
       title(){
@@ -105,6 +126,12 @@
       }
     },
     methods: {
+      shareSuccess(){
+
+      },
+      shareFail(){
+
+      },
       downRefresh(callback){
         this.getDetail(() => {
           this.$refs.discuss.resetList();
@@ -142,6 +169,11 @@
 
           this.ask = response.data.data;
           this.loading = 0;
+
+          var answer = this.ask.answers[0] ? this.ask.answers[0] : {};
+          var username = answer.user_name ? answer.user_name : '';
+
+          this.shareOption = getAskCommunityMajorDetail(this.id, this.ask.question.description, username);
 
           successCallback();
 
