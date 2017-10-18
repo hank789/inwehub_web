@@ -175,7 +175,7 @@ function alertMajorReplySuccess(context,credits,coins)
 }
 
 
-//专业问答 答案回复成功弹窗；
+//专业问答 评价成功弹窗；
 function alertMajorCommentSuccess(context,credits,coins)
 {
 	   var dialogObj = getDialogObj(context);
@@ -211,5 +211,6 @@ export {
   readhubCommenSuccess,
   perfectCard,
   alertMajorAskSuccess,
-  alertMajorReplySuccess
+  alertMajorReplySuccess,
+  alertMajorCommentSuccess
 };
