@@ -3,10 +3,10 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">互动问答</h1>
+      <h1 class="mui-title">问答社区</h1>
     </header>
 
-    <div class="mui-content absolute" v-show="!this.loading">
+    <div class="mui-content absolute">
 
       <div class="menu">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -19,42 +19,30 @@
         </div>
       </div>
 
-      <div class="mui-scroll-wrapper" id="refreshContainer">
-        <div class="mui-scroll">
-          <div class="recommendlist" v-show="!this.loading">
-
-            <div class="container" v-show="recommendList.length === 0">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zanwushuju"></use>
-              </svg>
-              <p>暂时还没有数据呀～</p>
-            </div>
-
-            <div>
-
-              <ul class="mui-table-view mui-table-view-chevron">
-                <li class="mui-table-view-cell" v-for="(list, index) in recommendList">
-                  <div class="first">
-                    <div class="avatar">
-                      <div class="avatarInner"><img class="avatar" src="images/expert.png"></div>
-                    </div>
-                    <div class="mui-media-body">realname
-            <div class="detail"><span class="position">运营专员</span><span class="split"></span><span class="company">上海樱维网络有限公</span></div>
-                    </div>
-                  </div>
-                  <div class="second">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布。</div>
-                  <div class="three">2人回答</div>
-                </li>
-              </ul>
-            </div>
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'question/commonList'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :list="list"
+        class="listWrapper"
+      >
+        <div class="recommendlist">
+          <div>
+            <ul class="mui-table-view">
+              <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
+                <div class="second mui-ellipsis-2">{{ item.description }}</div>
+                <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-
+      </RefreshList>
 
       <div class="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/ask?question_type=2')">
-          发布互动问答
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.pushPlus('/ask/interaction')">发布互动问答
         </button>
       </div>
 
@@ -63,116 +51,26 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import userAbility from '../../utils/userAbility';
+  import RefreshList from '../../components/refresh/List.vue';
 
-  const MajorList = {
+  const InteractionList = {
     data: () => ({
-      hotList: [],
-      recommendList: [],
-      busy: false,
-      loading: true,
+      list: []
     }),
-    computed: {
-      type() {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
-      },
-      bottomId() {
-        var length = this.recommendList.length;
-        if (length) {
-          return this.recommendList[length - 1].id;
-        }
-        return 0;
-      },
+    components: {
+      RefreshList
     },
-    components: {},
     methods: {
-      downRefresh(){
-          this.getRecommendList();
-      },
-      loadMore(){
-        console.log('loadMore');
-        this.busy = true;
-        this.getNextList();
-      },
       toDetail(id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
-      },
-      selectType(type_text) {
-        this.$router.push('/ask/type?type=majorlist')
-      },
-      getRecommendList() {
-        postRequest(`question/majorList`, {
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
-          }
-
-          if (response.data.data) {
-            this.recommendList = []; //response.data.data;
-          }
-          //没有数据的显示框不显示；
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
-        });
-      },
-      getNextList() {
-        postRequest(`question/majorList`, {
-          bottom_id: this.bottomId,
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-          }
-
-          if (response.data.data.length > 0) {
-            this.recommendList = this.recommendList.concat([]); //response.data.data
-          }
-
-          if (response.data.data.length < 10) {
-            this.busy = true;
-          } else {
-            this.busy = false;
-          }
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy);
-
-        });
+        this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
       }
-
-    },
-    mounted() {
-      mui.init({
-        pullRefresh: {
-          container: "#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-          down: {
-            auto: true,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown: "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          },
-          up: {
-            contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.getNextList
-          }
-        }
-      });
-    },
+    }
   }
-  export default MajorList;
+  export default InteractionList;
 </script>
 
 <style scoped>
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 
@@ -218,14 +116,14 @@
   }
 
   .mui-table-view-cell:after {
-    right:15px;
+    right: 15px;
   }
 
-  .mui-table-view:after{
+  .mui-table-view:after {
     display: none;
   }
 
-  .mui-table-view:before{
+  .mui-table-view:before {
     display: none;
   }
 
@@ -234,13 +132,14 @@
     color: #808080;
   }
 
-  .first{
-    height:50px;
+  .first {
+    height: 50px;
   }
 
-  .three{
-    font-size:12px;
-    color:#b4b4b6;
+  .three {
+    font-size: 12px;
+    color: #b4b4b6;
+    padding-top: 5px;
   }
 
   .split {
@@ -290,10 +189,9 @@
     background: #f3f4f6;
   }
 
-  #refreshContainer{
-    top:45px;
+  #refreshContainer {
+    top: 45px;
   }
-
 
   .container {
     text-align: center;
@@ -310,17 +208,30 @@
     color: #c8c8c8;
   }
 
-  .button-wrapper{
+  .button-wrapper {
     position: fixed;
-    bottom:0;
-    width:100%;
-    padding:0;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
     z-index: 999;
   }
-  .button-wrapper button{
+
+  .button-wrapper button {
     border-radius: 0;
-    margin-bottom:0;
-    padding:12px 0;
-    font-size:17px;
+    margin-bottom: 0;
+    padding: 12px 0;
+    font-size: 17px;
+  }
+
+  .isFollowed{
+    color:#03aef9;
+  }
+
+  .second{
+    font-size:14px;
+  }
+
+  .listWrapper{
+    bottom:50px;
   }
 </style>

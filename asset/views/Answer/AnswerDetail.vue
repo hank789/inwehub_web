@@ -73,8 +73,21 @@
         v-show="answer.answers[0] && answer.answers[0].content"
       ></Discuss>
 
+
+
       <div class="mb70"></div>
     </div>
+
+    <Share
+      v-show="answer.question.status==6||answer.question.status==7"
+      :title="shareOption.title"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
 
   </div>
 </template>
@@ -86,6 +99,8 @@
   import Question from '../../components/question-detail/Question.vue';
   import Answer from '../../components/question-detail/Answer.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
+  import Share from '../../components/Share.vue';
+  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
 
   import CountDown from 'vue2-countdown';
 
@@ -107,6 +122,13 @@
       description: {},
       descLength: 0,
       loading: true,
+      shareOption:{
+        title:'',
+        link:'',
+        content:'',
+        imageUrl:'',
+        thumbUrl:''
+      },
       buttonAnswerDisable: false,
       buttonSelectTimeDisable: false,
     }),
@@ -114,17 +136,19 @@
       CountDown,
       Question,
       Answer,
-      Discuss
+      Discuss,
+      Share
     },
     computed: {},
     mounted(){
-      window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-answerDetail');
-        this.getData();
-      });
     },
     methods: {
+      shareSuccess(){},
+      shareFail(){},
+      refreshPageData(){
+        this.loading = 1;
+        this.getData();
+      },
       timeago(time) {
         let newDate = new Date();
         newDate.setTime(Date.parse(time.replace(/-/g, "/")));
@@ -324,6 +348,11 @@
           this.getTitle();
 
           this.check();
+
+          var answer = this.answer.answers[0] ? this.answer.answers[0] : {};
+          var username = answer.user_name ? answer.user_name : '';
+          this.shareOption = getAskCommunityMajorDetail(this.id, this.answer.question.description, username);
+
         });
       }
     },
@@ -345,7 +374,7 @@
       descLength: function (newDescLength) {
 
       },
-      '$route': 'getData'
+      '$route': 'refreshPageData'
     },
     created () {
       //showInwehubWebview();

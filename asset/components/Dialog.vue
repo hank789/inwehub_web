@@ -118,7 +118,7 @@
       <div id="perfectCard-t">
         <div class="perfectCard-t">
           <p>恭喜！你的名片比较完善了</p>
-          <p>（成长值<i>+500</i>）</p>
+          <p>（成长值<i>+{{options.perfectCard_credits}}</i>）</p>
         </div>
       </div>
       <div id="perfectCard-b">
@@ -171,9 +171,206 @@
         </div>
 
     </div>
+    
+    <!-- 专家申请成功呢提示-->
+    <div id="p-expertapplication">
+      <div id="expertapplication-t">
+        <div class="expertapplication-t">
+          <p>恭喜！您已成为平台专家</p>
+          <p>（成长值<i>+{{options.expert_credits}}</i>，贡献值<i>+{{options.expert_coins}}</i>）</p>
+        </div>
+      </div>
+      <div id="expertapplication-b">
+        <div class="expertapplication-b alertConfirm">
+          查看个人海报并可分享
+
+        </div>
+      </div>
+    </div>
+   <!--文章发表成功--> 
+   <!--<div id="article_t">
+   	  <div class="article_t">
+   	  	<p>你的文章发表成功啦！</p>
+   	  	<p>（成长值<i>+5</i>）</p>	
+   	  </div>
+   </div>
+   <div id="article_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 	<p>分享文章</p>
+   	 </ul>
+   </div>-->
+  <!--文章评论分享成功-->  
+   <!--<div id="articlecomment_t">
+   	  <div class="article_t">
+   	  	<p>分享成功！</p>
+   	  	<p>（成长值<i>+1</i>）</p>	
+   	  </div>
+   </div>
+   <div id="articlecomment_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 </ul>
+   </div> -->
+    <!--阅读评论发表成功-->
+     <!--<div id="comment_t">
+   	  <div class="article_t">
+   	  	<p>你的评论发表成功啦！</p>
+   	  	<p>（成长值<i>+{{options.readhub_commen_credits}}</i>）</p>	
+   	  </div>
+   </div>
+   <div id="comment_b">
+   	 <ul class="article_b">
+   	 	<span>相关阅读推荐</span>
+   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
+   	 	<li>InweHub诚意推荐《顾问周刊》</li>
+   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
+   	 	<p>分享评论</p>
+   	 </ul>
+   </div>-->
+   
+   
+   <!--互动问答答案提交成功-->
+   <div id="community_t">
+   	  <div class="article_t">
+   	  	<p>你的答案已成功提交！</p>
+   	  	<p>（成长值<i>+{{options.answercredits}}</i>，贡献值<i>+{{options.answercoins}}</i>）</p>	
+   	  </div>
+   </div>
+ <div id="community_b">
+	<ul class="hotAnswer_b">
+		<!--<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li class="" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
+			<p class="mui-ellipsis-2">{{item.title}}</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img :src="item.user_avatar_url"  />
+					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：{{item.user_name}}</p>
+			</div>
+			<i class="bot"></i>
+		</li>-->
+		<span class="share alertConfirm">分享我的回答</span>
+	</ul>
+	
+</div>
+ 
+ 
+ 
+  <!--专业问答分享成功-->
+   <!--<div id="community_t">
+   	  <div class="article_t">
+   	  	<p>分享成功！</p>
+   	  	<p>（成长值<i>+1</i>）</p>	
+   	  </div>
+   </div>
+ <div id="community_b">
+	<ul class="hotAnswer_b">
+		<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li>
+			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img src="../statics/images/balance1.png" />
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：郭大红</p>
+			</div>
+			<i class="bot"></i>
+		</li>
+		<span class="share">分享我的问答</span>
+	</ul>
+	
+</div>-->
+
+<!--互动问答提问成功-->
+   <div id="ask_t">
+   	  <div class="article_t">
+   	  	<p>提问成功！可邀请好友回答</p>
+   	  	<p>（成长值<i>+{{options.askcredits}}</i>，贡献值<i>+{{options.askcoins}}</i>）</p>	
+   	  </div>
+   </div>
+ <div id="ask_b">
+	<ul class="hotAnswer_b">
+		<!--<p class="hotAnswer_recommend">相关问答推荐</p>
+		<li class="alertConfirm" v-for="item in options.questlist" >
+			<p class="mui-ellipsis-2">{{item.title}}</p>
+			<div class="hotAnswer_d">
+				<p>
+					<img :src="item.user_avatar_url"  />
+					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
+						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+					</svg>
+				</p>
+				<p>回答者：{{item.user_name}}</p>
+			</div>
+			<i class="bot"></i>
+		</li>-->
+		<span class="ask_share alertConfirm">邀请好友回答</span>
+	</ul>
+	
+</div>
+<!--专业问答的提问成功-->
+<div id="majoraskSubmit_t">
+   	  <div class="article_t">
+   	  	<p>提问成功！正为你匹配专家</p>
+   	  	<p>（成长值<i>+{{options.major_ask_credits }}</i>，贡献值<i>+{{options.major_ask_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskSubmit_b">
+	<ul class="hotAnswer_b">
+		<span class="ask_share alertConfirm">返回问答社区</span>
+	</ul>
+	
+</div>
+<!--专业问答的回答成功-->
+<div id="majoraskAnswer_t">
+   	  <div class="article_t">
+   	  	<p>你的答案已成功提交！</p>
+   	  	<p>（成长值<i>+{{options.major_answer_credits}}</i>，贡献值<i>+{{options.major_answer_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskAnswer_b">
+	<ul class="hotAnswer_b">
+		<span class="alertConfirm share">分享我的问答</span>
+		<span class="ask_divided">其他人查看答案，你可从中获取分成</span>
+	</ul>
+	
+</div>
+
+<!--专业问答的评论成功-->
+<div id="majoraskcomment_t">
+   	  <div class="article_t">
+   	  	<p>你的评价已成功提交！</p>
+   	  	<p>（成长值<i>+{{options.major_comment_credits}}</i>，贡献值<i>+{{options.major_comment_coins}}</i>）</p>	
+   	  </div>
+</div>
+<div id="majoraskcomment_b">
+	<ul class="hotAnswer_b">
+		<span class="alertConfirm share">分享我的问答</span>
+		<span class="ask_divided">其他人查看答案，你可从中获取分成</span>
+	</ul>
+	
+</div>
+
+
+
+    
   </div>
 </template>
 <script type="text/javascript">
+import userAbility from '../utils/userAbility';
   export default {
     data () {
       return {
@@ -181,6 +378,22 @@
         options: {
           ok: 'test',
           level: 3,
+          questlist:[],
+          answerlist:[],
+          askcredits:"",
+          askcoins:"",
+          answercoins:"",
+          answercredits:"",
+          expert_coins:"",
+          expert_credits:"",
+          readhub_commen_credits:"",
+          perfectCard_credits:'',
+          major_ask_credits:"",
+          major_ask_coins:"",
+          major_answer_credits:"",
+          major_answer_coins:"",
+          major_comment_coins:"",
+          major_comment_credits:""
         },
       }
     },
@@ -192,6 +405,7 @@
       }
     },
     methods: {
+    	
       getHtml(id, options, callback) {
         this.options = options;
         this.$nextTick(() => {
@@ -563,4 +777,219 @@
     font-size:14px;
     color:#808080;
   }
+  
+  
+  /*认证专家*/
+  /*完善名片提示*/
+  #expertapplication-t {
+    width: 240px;
+    height: 117px;
+  border: 1px solid #DCDCDC;
+  }
+
+  .expertapplication-t {
+    width: 250px;
+    height: 100px;
+  }
+
+  .expertapplication-t p:nth-child(1) {
+    font-size: 19px;
+    color: #444444;
+    text-align: center;
+    margin-top: 31px;
+  }
+
+  .expertapplication-t p:nth-child(2) {
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+    margin-top: 7.5px;
+
+  }
+
+  .expertapplication-t p:nth-child(2) i {
+    color: #03aef9;
+    font-style: normal;
+  }
+
+  #expertapplication-b {
+    width: 240px;
+    height: 54px;
+    /*background: #CCCCCC;*/
+  }
+
+  .expertapplication-b {
+    width: 240px;
+    height: 54px;
+    font-size: 16px;
+    color: #03aef9;
+    text-align: center;
+    line-height: 54px;
+
+  }
+  /*文章*/
+ .article_t {
+ 	 /*width: 240px;*/
+     /*height: 100px;*/
+    /* border: 1px solid #CCCCCC;*/
+    margin-top: 20px;
+ }
+ .article_t p:nth-child(1){
+ 	font-size: 19px;
+ 	color: #444444;
+ 	text-align: center;
+    margin-top: 15px;
+   
+ }
+ .article_t p:nth-child(2){
+ 	font-size: 14px;
+ 	color:#808080;
+ 	margin-top: 8px;
+ 	text-align: center;
+   
+ }
+ .article_t p:nth-child(2) i{
+ 	font-size: 14px;
+ 	color:#03aef9;
+ 	font-style:normal;
+ 	
+   
+ }
+ 
+ 
+ 
+
+.article_b li{
+	font-size: 14px;
+	color:#444444;
+	margin-bottom:12px;
+	position: relative;
+	margin-left: 13px;
+}
+
+.article_b span{
+	font-size: 14px;
+	color:#808080;
+	margin-top:15px;
+	margin-bottom:12px;
+	display: block;
+}
+
+.article_b li:before {
+    content: '';
+    background: #03aef9;
+    border: 1px solid #03aef9;
+    position: absolute;
+    border-radius: 50%;
+    width: 3px;
+    height: 3px;
+    top: 8px;
+    left: -10px;
+
+}
+.article_b  p{
+	color: #03aef9;
+	font-size: 16px;
+	border-top:1px solid  #dcdcdc;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 0px;
+}
+
+/*互动问答答案提交成功*/
+.hotAnswer_b {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.hotAnswer_b li {
+		width: 100%;
+		overflow: hidden;
+		padding: 12px 0;
+		position: relative;
+	}
+
+	.hotAnswer_b li>p {
+		font-size: 14px;
+		color: #444444;
+	}
+
+	.hotAnswer_d {
+		width: 100%;
+		height: 32px;
+		margin-top: 4.5px;
+	}
+
+	.hotAnswer_d p {
+		float: left;
+	}
+
+	.hotAnswer_d p:nth-child(1) {
+		width: 32px;
+		height: 32px;
+		/*background: #CCCCCC;*/
+		position: relative;
+	}
+
+	.hotAnswer_d p:nth-child(1)>svg {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		right: -4px;
+	}
+
+	.hotAnswer_d p:nth-child(1)>img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+
+	.hotAnswer_d p:nth-child(2) {
+		/*width: 340px;*/
+		height:18px;
+		margin-top: 9px;
+		line-height: 18px;
+		font-size: 13px;
+		color: #808080;
+		/*background: #CCCCCC;*/
+		margin-left: 8px;
+	}
+.hotAnswer_recommend{
+	font-size:14px;
+	color:#808080;
+	/*margin-top: 15px;*/
+}
+
+ .hotAnswer_b .share{
+ 	display: block;
+	width: 100%;
+	height: 40px;
+	background:#03aef9;
+	border-radius: 4px;
+	font-size: 16px;
+	color:#FFFFFF;
+	text-align: center;
+    line-height: 40px;
+    margin-top: 5px;
+}
+/*提问成功*/
+.hotAnswer_b  .ask_share{
+	display: block;
+	width: 100%;
+	height: 40px;
+	font-size: 16px;
+	color:#03aef9;
+	text-align: center;
+    line-height: 40px;
+    margin-top: 5px;
+}
+.hotAnswer_b  .ask_divided{
+	display: block;
+	width: 100%;
+	height: 30px;
+	font-size: 13px;
+	color:#808080;
+	text-align: center;
+	margin-top: 10px;
+}
 </style>

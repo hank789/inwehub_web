@@ -10,10 +10,6 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
       console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id);
 
       var current_webview = plus.webview.getWebviewById(id);
-      if (current_webview) {
-        mui.fire(current_webview, 'autoHeight', false);
-        mui.fire(current_webview, 'refreshPageData', false);
-      }
 
       if (current_webview) {
         var current_webview_url = current_webview.getURL();
@@ -42,7 +38,11 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
             mui.fire(current_webview,'go_to_target_page',{url: shotUrl});
           }
         }
-        current_webview.show();
+        setTimeout(function () {
+          current_webview.show("slide-in-right", 300);
+          mui.fire(current_webview, 'autoHeight', false);
+          //mui.fire(current_webview, 'refreshPageData', false);
+        },150);
       } else {
         var webview = mui.openWindow({
           url: url,
@@ -282,6 +282,9 @@ function goBack(){
       //触发父页面的自定义事件(refresh),从而进行刷新
       mui.fire(parent_webview, 'refreshData');
 
+      //触发父页面的自定义事件(refresh),从而进行刷新
+      mui.fire(parent_webview, 'refreshPageData', {childId: self.id});
+
       //子页面也刷新数据
       mui.fire(self, 'refreshData');
       mui.fire(parent_webview, 'autoHeight');
@@ -300,7 +303,7 @@ function clearAllWebViewCache() {
         var self = plus.webview.currentWebview();
         var wvs=plus.webview.all();
         for(var i=0;i<wvs.length;i++){
-          if (wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed' && wvs[i].id !== 'readhub_submission_webview'){
+          if (wvs[i].id !== plus.runtime.appid && wvs[i].id !== self.id && wvs[i].id !== 'inwehub_embed' && wvs[i].id !== 'readhub_submission_webview'){
             wvs[i].close();
           }
         }

@@ -96,7 +96,7 @@ var userAbility = () => {
 
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level >= 2) {
+    if (userInfo.user_level >= 1) {
       router.pushPlus('/askCommunity/majors');
     } else {
       var dialog = getDialogObj(context);
@@ -119,7 +119,7 @@ var userAbility = () => {
 
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level >= 2) {
+    if (userInfo.user_level >= 1) {
       router.pushPlus('/askCommunity/major/' + id,'list-detail-page' ,true,'pop-in','hide',true);
     } else {
       var dialog = getDialogObj(context);
@@ -234,33 +234,13 @@ var userAbility = () => {
   };
 
 
-  /**
-   * 完善名片的提示框；
-   */
-  var perfectCard = (context, id) => {
-     var userInfo = getLocalUserInfo();
-     var uid = userInfo.user_id;
-     var Card = parseInt(localEvent.getLocalItem('PerfectCard' + uid).value)
-     if(Card != 1){
-       if (userInfo.account_info_complete_percent >= 90) {
-           var dialogObj = getDialogObj(context);
-		        if (dialogObj) {
-			          dialogObj.getHtml('perfectCard-t', {level: userInfo.user_level}, (titlehtml) => {
-			        	  dialogObj.getHtml('perfectCard-b', {level: userInfo.user_level}, (contenthtml) => {
-			          	alertSkyTwo(titlehtml,  contenthtml, 'icon-mingpianwanshan', (num) => {
-			          		localEvent.setLocalItem('PerfectCard' + uid, {value: '1'});
-			          		if (num.index === 0) {
-				              router.pushPlus('/my/resume');
-				            }
-			          	}, true);
-			          });
-			        });
-		        }
-       	}
+  
 
 
-    }
-    };
+
+
+
+
 
 
 
@@ -275,8 +255,7 @@ var userAbility = () => {
     jumpToAskCommunity: jumpToAskCommunity,
     jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
-    newbieTask: newbieTask,
-    perfectCard:perfectCard
+    newbieTask: newbieTask
   }
 };
 

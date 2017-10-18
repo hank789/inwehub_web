@@ -276,9 +276,11 @@
 			}
 		},
 		methods: {
+		  //详情；
       toMajorDetail(id) {
         userAbility.jumpToAskCommunityDetail(this,id);
       },
+      //进入社区；
       toAskCommunity() {
         userAbility.jumpToAskCommunity(this);
       },
@@ -298,18 +300,19 @@
 			},
 			//认证专家跳转判断；
 			toApprove(expertStatus) {
-				switch(parseInt(expertStatus)) {
-					case 0:
-					case 3:
-						this.$router.push('/my/pilot');
-						break;
-					case 2:
-						mui.toast('您已经是专家');
-						break;
-					case 1:
-						this.$router.push('/expert/apply/success?type=0');
-						break;
-				}
+				userAbility.jumpToApplyProfessor(this);
+//				switch(parseInt(expertStatus)) {
+//					case 0:
+//					case 3:
+//						this.$router.push('/my/pilot');
+//						break;
+//					case 2:
+//						mui.toast('您已经是专家');
+//						break;
+//					case 1:
+//						this.$router.push('/expert/apply/success?type=0');
+//						break;
+//				}
 
 			},
 			toAsk() {
@@ -392,9 +395,9 @@
 								}
 							);
 						}
-						mui.openWindow({
+						var notice_ws = mui.openWindow({
 							url: 'index.html#/webview/notice',
-							id: url,
+							id: 'inwehub_notice_view',
 							preload: false, //一定要为false
 							createNew: false,
 							show: {
@@ -408,10 +411,13 @@
 								autoShow: false
 							},
 							extras: {
-								preload: true
+								preload: true,
+                article_url: url
 							}
 						});
-					} else {
+            mui.fire(notice_ws, 'load_article', {article_url: url});
+
+          } else {
 						window.location.href = url;
 					}
 				} else {

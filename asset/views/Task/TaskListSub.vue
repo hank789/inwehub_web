@@ -10,6 +10,7 @@
       <div class="menu">
         <span @tap.stop.prevent="">任务</span>
         <span @tap.stop.prevent="$router.replace('/inform')">消息</span>
+        
         <i></i>
         <div class="mui-table-view list-ask-item">
           <div class="mui-table-view-cell">
@@ -28,6 +29,8 @@
 			<div class="menu">
 				<span @tap.stop.prevent="">任务</span>
 				<span @tap.stop.prevent="$router.replace('/inform')">消息</span>
+				
+				<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
 				<i></i>
 			</div>
 			<div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
@@ -92,12 +95,18 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import CountDown from 'vue2-countdown';
 	import localEvent from '../../stores/localStorage';
+	import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
+	
 
 	const Task = {
 		data: () => ({
 			tasks: [],
 			loading: true,
 			currentTime: (new Date()).getTime(),
+			total_count:0,
+			mobile:0
+			
+			
 		}),
 		components: {
 			CountDown
@@ -155,11 +164,20 @@
 				});
 			});
 			this.initPullRefresh();
+			
+	
+		  
+			
+			
 		},
 		updated() {
 			this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
 		},
 		methods: {
+		  messagecountchange(obj){
+		     this.total_count = obj;
+            
+		  },
 			initData() {
 				//执行刷新
 				console.log('refresh-taskList');
@@ -212,6 +230,9 @@
 				});
 				//刷新页面时自动加载； 默认10条数据；
 				this.getPrevList();
+				  
+				 
+				
 
 			},
 			//跳转时判断类型。1为提问  2是回答  3新手任务-完善个人信息 4新手任务-参与阅读评论 5新手任务-发起提问
@@ -510,5 +531,19 @@
   }
   .list-empty .list-ask-item{
       padding:10px 0;
+  }
+  .menu_message{
+    position: absolute;
+    right: 14%;
+    top: 8px;
+    background: #f03c69;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    padding: 0px 3px;
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: 15px;
+    line-height: 15px;
   }
 </style>

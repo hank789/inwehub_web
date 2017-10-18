@@ -10,13 +10,22 @@
       <span>{{ commentNum }}</span>
     </div>
 
-    <div class="item">
+    <div class="item" v-if="!showShoucang">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
         </svg>
       </div>
       <span>{{ seeNum }}</span>
+    </div>
+
+    <div class="item" :class="{active:isCollected}" @tap.stop.prevent="collect()" v-else>
+      <div class="iconWrapper showcangWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucangxingxing"></use>
+        </svg>
+      </div>
+      <span>{{ collectNum }}</span>
     </div>
 
     <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
@@ -61,11 +70,47 @@
       isSupported: {
         type: Boolean,
         default: true
+      },
+      isCollected: {
+        type: Boolean,
+        default: true
+      },
+      collectNum: {
+        type: Number,
+        default: 0
+      },
+      showShoucang:{
+          type:Boolean,
+          default:false
       }
     },
     created(){
     },
     methods: {
+      collect(){
+        var data = {
+          id: this.answerId
+        };
+
+        postRequest(`collect/answer`, data).then(response => {
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          if (this.isCollected) {
+            this.$emit('collectNumDesc');
+          } else {
+            this.$emit('collectNumAdd');
+          }
+
+          this.$emit('setCollectStatus', response.data.data.type);
+
+          mui.toast(response.data.data.tip);
+        });
+      },
       support(){
 
         var data = {
@@ -82,10 +127,8 @@
 
           if (this.isSupported) {
               this.$emit('supportNumDesc');
-              this.supportNumLocal--;
           } else {
               this.$emit('supportNumAdd');
-              this.supportNumLocal++;
           }
 
           this.$emit('setSupportStatus', response.data.data.type);
@@ -130,6 +173,15 @@
 
   .item:nth-child(2) .iconWrapper {
     font-size: 24px;
+  }
+
+  .item:nth-child(2) .iconWrapper.showcangWrapper {
+    font-size: 18px;
+  }
+
+  .item:nth-child(2) .iconWrapper.showcangWrapper .icon{
+    position: relative;
+    top:-1px;
   }
 
   .item:nth-child(3) .iconWrapper{

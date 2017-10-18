@@ -8,7 +8,9 @@
           </keep-alive>
           <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
-        <FooterComponent ref="Footer" id="Footer"></FooterComponent>
+        <FooterComponent ref="Footer" id="Footer"
+          @messagecountchange="messagecountchange"
+          ></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
         <inwehubDialog ref="inwehubDialog"></inwehubDialog>
@@ -36,6 +38,12 @@
       }
     },
     methods: {
+      messagecountchange(obj){
+           if (this.$refs.routerView.messagecountchange) {
+               this.$refs.routerView.messagecountchange(obj);
+           }
+           
+      },
       onCountChange(count){
           this.$refs.Footer.onCountChange(count);
       },
@@ -156,20 +164,27 @@
               }
               switch (payload.object_type) {
                 case 'question':
-                case 'question_answered':
+                case 'pay_question_answered':
                 case 'question_answer_confirmed':
                   // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   //router.go(-1);
                   router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
                   break;
+                case 'free_question_answered':
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
+                  break;
+                case 'pay_answer':
                 case 'answer':
                   //router.go(-1);
                   // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   break;
+                case 'free_answer':
+                  router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id);
+                  break;
                 case 'authentication_success':
                   // 专家认证成功
-                  router.pushPlus('/my');
+                  router.pushPlus('/my?needalert=1');
                   break;
                 case 'authentication_fail':
                   // 专家认证失败
@@ -258,7 +273,7 @@
                   });
                   break;
                 case 'notification_level_up':
-                    // 用户积分等级提升
+                    // 用户积分等级提升;
                     userAbility.upgradeLevel(this);
                     break;
                 case 'activity_enroll_fail':
@@ -266,13 +281,21 @@
                     // 活动报名事件
                   router.pushPlus("/EnrollmentStatus/"+payload.object_id);
                   break;
-                case 'answer_new_comment':
+                case 'pay_answer_new_comment':
                   //专业回答新的回复
                   router.pushPlus('/askCommunity/major/' + payload.object_id);
                   break;
-                case 'answer_new_support':
+                case 'free_answer_new_comment':
+                  //互动问答新的回复
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
+                  break;
+                case 'pay_answer_new_support':
                   //专业回答赞
                   router.pushPlus('/askCommunity/major/' + payload.object_id);
+                  break;
+                case 'free_answer_new_support':
+                  //专业回答赞
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
                   break;
               }
             };
@@ -343,6 +366,7 @@
         } else {
           mui.init({
             swipeBack:true, //启用右滑关闭功能
+            beforeback: goBack
           });
         }
       });

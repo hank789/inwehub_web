@@ -2,62 +2,65 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">专业问答</h1>
+      <h1 class="mui-title">互动问答</h1>
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
-      <div>
-        <Question
+
+      <RefreshList
+        ref="refreshList"
+
+        v-model="answers"
+        :api="'question/answerList'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="prevOtherData"
+        :prevSuccessCallback="prevSuccessCallback"
+        :isShowUpToRefreshDescription="false"
+        :list="answers"
+        :pageMode="true"
+        :autoShowEmpty="false"
+      >
+
+        <QustionInteraction
           :ask="ask.question"
+          :myAnswerId="ask.my_answer_id"
           :isFollow="true"
-        ></Question>
+          :isFollowAsked="ask.is_followed_question?true:false"
+          @setFollowAskStatus="setFollowAskStatus"
+        ></QustionInteraction>
 
-        <Answer v-show="ask.question.status==6||ask.question.status==7"
-                :answer="answer"
-                :needMoney="true"
-                :isFollow="true"
-                @paySuccess="paySuccess"
-        ></Answer>
+        <div class="river"></div>
 
-
-        <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
-          <div class="mui-table-view-cell">
-            暂无回答
-
-          </div>
-        </div>
-
-
-        <Discuss
-          :answerId="ask.answers[0] ? ask.answers[0].id:0"
-          ref="discuss"
-          v-show="ask.answers[0] && ask.answers[0].content"
-        ></Discuss>
+        <AnswersInteraction
+          :list="answers"
+          :questionId="ask.question.id"
+        ></AnswersInteraction>
 
         <div class="help">
           <div class="title">
-            什么是专业问题
-
+            什么是互动问答？
           </div>
           <div class="body">
-            InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
-            专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+            InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
-
-          </div>
+            </div>
         </div>
 
         <div class="buttonWrapper iNeedAskWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
 
-
           </button>
         </div>
-      </div>
+
+      </RefreshList>
+
+
+
     </div>
 
     <Share
+      ref="ShareBtn"
       :title="shareTitle"
       :link="shareUrl"
       :content="shareContent"
@@ -68,21 +71,21 @@
     ></Share>
 
   </div>
+
 </template>
 
 <script>
   import {NOTICE} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-
-  import Question from '../../components/question-detail/Question.vue';
+  import QustionInteraction from '../../components/question-detail/QustionInteraction.vue';
   import Discuss from '../../components/question-detail/Discuss.vue';
-  import Answer from '../../components/question-detail/Answer.vue';
+  import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue';
   import Comment from '../../components/question-detail/Comment.vue';
-  import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
+  import {alertAskCommunityDetailShareSuccess,alertAskCommunityInteractiveAnswer,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
-  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
+  import RefreshList from '../../components/refresh/List.vue';
   import userAbility from '../../utils/userAbility';
-
+  import localEvent from '../../stores/localStorage';
   const AskDetail = {
     data: () => ({
       ask: {
@@ -93,6 +96,7 @@
         },
         timeline: []
       },
+      answers:[],
       shareUrl: '',
       shareImg: '',
       shareContent: '',
@@ -101,56 +105,42 @@
       loading: true
     }),
     mounted(){
-      mui.plusReady(() => {
-        plus.webview.currentWebview().setStyle({
-          softinputMode: "adjustResize"
-        });
-      });
 
-      this.getDetail();
+      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+
     },
     components: {
-      Question,
+      QustionInteraction,
       Discuss,
-      Answer,
+      AnswersInteraction,
       Comment,
+      RefreshList,
       Share
     },
     computed: {
       answer () {
         return this.ask.answers[0] ? this.ask.answers[0] : {};
+      },
+      prevOtherData() {
+         return {question_id: this.id}
       }
     },
     methods: {
-      refreshPageData(){
-        console.log('refreshPageData');
-        this.loading = 1;
-        this.getDetail();
-      },
-      shareSuccess(){
-        //alertAskCommunityDetailShareSuccess(this);
-      },
-      shareFail(error){
-
-      },
-      paySuccess(content)
-      {
-        this.ask.answers[0].content = content;
-      },
-      downRefresh(callback){
-        this.getDetail(() => {
-          this.$refs.discuss.resetList();
-        });
+      toAsk(){
+          this.$router.pushPlus('/ask/interaction');
       },
       toSeeHelp(){
-        this.$router.pushPlus('/help/ask');
+          this.$router.pushPlus('/help/ask');
       },
-      toAsk(){
-        userAbility.jumpToAddAsk();
+      share(){
+         this.$refs.ShareBtn.share();
       },
-      getDetail(successCallback = () => {
-                }){
-
+      refreshPageData(){
+          console.log('refreshPageData-zz-answers');
+          this.getId();
+          this.$refs.refreshList.setPageData(this.prevOtherData);
+      },
+      getId(){
         let id = parseInt(this.$route.params.id);
 
         if (!id) {
@@ -165,7 +155,30 @@
           return;
         }
 
+        if (id !== this.id) {
+            this.loading = 1;
+        }
+
         this.id = id;
+      },
+      shareSuccess(){
+        //alertAskCommunityDetailShareSuccess(this);
+      },
+      shareFail(error){
+
+      },
+      prevSuccessCallback(){
+         this.getDetail();
+      },
+      setFollowAskStatus(status){
+        this.ask.is_followed_question = status;
+      },
+      getDetail(successCallback = () => {
+                }){
+
+        this.getId();
+
+        console.log('getDetail' + this.id);
 
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
@@ -180,12 +193,16 @@
           this.loading = 0;
 
           var username = this.answer.user_name ? this.answer.user_name : '';
+          this.shareTitle = '问答|' + this.ask.question.description;
 
-          var shareOptions = getAskCommunityMajorDetail(this.id, this.ask.question.description, username);
-          this.shareImg = shareOptions.imageUrl;
-          this.shareContent = shareOptions.content;
-          this.shareUrl = shareOptions.link;
-          this.shareTitle = shareOptions.title;
+          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
+          this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+
+          var answerNum = this.ask.question.answer_num;
+
+          var followNum = this.ask.question.follow_num;
+
+          this.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
 
           successCallback();
 
@@ -196,7 +213,7 @@
       '$route': 'refreshPageData'
     },
     created () {
-
+      this.getId();
     }
   }
   export default AskDetail;
@@ -242,4 +259,6 @@
     margin-bottom: 0;
     padding: 13px 0;
   }
+
+
 </style>

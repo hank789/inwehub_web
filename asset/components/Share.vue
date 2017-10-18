@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="share()">
+    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="share()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fenxiang"></use>
       </svg>
@@ -58,6 +58,10 @@
       thumbUrl: {
         type: String,
         default: ''
+      },
+      hideShareBtn:{
+          type:Boolean,
+          default:false
       }
     },
     watch: {
@@ -75,9 +79,9 @@
       bindShare(){
 
         var data = {
-          title: this.title,
-          link: this.link,
-          content: this.content,
+          title: this.title.substr(0, 50),
+          link: this.link + '&isShare=1',
+          content: this.content.substr(0, 150),
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl,
         };
@@ -93,7 +97,10 @@
         mui('#shareShowWrapper').popover('toggle');
       },
       shareToHaoyou(){
-        this.sendHaoyou();
+        if (this.sendHaoyou) {
+          this.sendHaoyou();
+        }
+
         if (mui.os.plus) {
           mui('#shareWrapper').popover('toggle');
         } else {
@@ -103,7 +110,9 @@
         this.hide();
       },
       shareToPengyouQuan(){
-        this.sendPengYouQuan();
+        if (this.sendPengYouQuan) {
+          this.sendPengYouQuan();
+        }
         if (mui.os.plus) {
           mui('#shareWrapper').popover('toggle');
         } else {
@@ -135,6 +144,10 @@
         mui.toast('分享失败');
       },
       share(){
+        if (this.link) {
+          this.bindShare();
+        }
+
         setTimeout(() => {
           mui('#shareWrapper').popover('toggle');
           mui("body").on('tap', '.mui-backdrop', () => {
@@ -160,7 +173,7 @@
 
   .resumeWrapper .shareBtn{
     position: absolute;
-    top: 24px;
+    top: 24px !important;
     font-size: 22px;
     right: 31px;
     color: #808080;

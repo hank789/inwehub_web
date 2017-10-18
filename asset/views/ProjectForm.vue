@@ -87,6 +87,9 @@
     }),
 
     methods: {
+      refreshPageData(){
+        this.initData();
+      },
       initData(){
         let id = parseInt(this.$route.params.id);
         this.id = id;
@@ -250,11 +253,6 @@
       next();
     },
     mounted () {
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-projectform');
-        this.initData();
-      });
     },
     computed: {
       descLength() {
@@ -269,6 +267,7 @@
           this.description = this.description.slice(0, this.descMaxLength);
         }
       },
+      '$route': 'refreshPageData'
     },
     created () {
       //showInwehubWebview();

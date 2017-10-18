@@ -128,13 +128,24 @@
 							<p class="text_blue" v-if="user_level >='1'">待完成</p>
 							<p v-else>升级解锁</p>
 						</li>
+            <li>
+              <svg class="icon yellow" aria-hidden="true" v-if="user_level >='1'">
+                <use xlink:href="#icon-wendashequ"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true" v-else>
+                <use xlink:href="#icon-wendashequ"></use>
+              </svg>
+              <p>问答社区</p>
+              <p class="text_yellow" v-if="user_level >='1'">已获取</p>
+              <p v-else>升级解锁</p>
+            </li>
 					</ul>
 
 				</div >
 				<div class="power">
 					<p>
 					   <span :class="{bg:user_level >= 2}">2</span>
-					   <span class="mui-ellipsis">L2（成长值满1000)</span>
+					   <span class="mui-ellipsis">L2（成长值满500)</span>
 					</p>
 					<ul class="powerdetail">
 						<li>
@@ -159,17 +170,7 @@
 							<p class="text_yellow" v-if="user_level >='2'">已获取</p>
 							<p v-else>升级解锁</p>
 						</li>
-            <li>
-              <svg class="icon yellow" aria-hidden="true" v-if="user_level >='2'">
-                <use xlink:href="#icon-wendashequ"></use>
-              </svg>
-              <svg class="icon" aria-hidden="true" v-else>
-                <use xlink:href="#icon-wendashequ"></use>
-              </svg>
-              <p>问答社区</p>
-              <p class="text_yellow" v-if="user_level >='2'">已获取</p>
-              <p v-else>升级解锁</p>
-            </li>
+
 
 					</ul>
 
@@ -252,7 +253,7 @@
 				<div class="power">
 					<p>
 					   <span :class="{bg:user_level >= 5}">5</span>
-					   <span>L5（成长值满100000，平台定向邀请开放秘密特权)</span>
+					   <span>L5（成长值满500000，平台定向邀请开放秘密特权)</span>
 					</p>
 
 

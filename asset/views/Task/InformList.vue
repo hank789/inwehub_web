@@ -13,6 +13,7 @@
 					<div class="menu">
 						<span @tap.stop.prevent="$router.replace('/task')">任务</span>
 						<span @tap.stop.prevent="">消息</span>
+						<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
 						<i></i>
 					</div>
 
@@ -89,6 +90,8 @@
 
 <script type="text/javascript">
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
+	import localEvent from '../../stores/localStorage';
+	import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
 	const TaskMain = {
 		data: () => ({
 			count: "",
@@ -100,9 +103,15 @@
 			task_count: 0,
 			readhub_count: 0,
 			money_count: 0,
-			loading: true
+			loading: true,
+			total_count:0,
+			mobile:0
 		}),
 		methods: {
+		  messagecountchange(obj){
+         this.total_count = obj;
+//           console.log(obj);
+      },
 			skip(num) {
 				switch(num) {
 					case 1:
@@ -141,37 +150,24 @@
 						mui.back();
 						return;
 					}
-
+           
 					this.notice_message = response.data.data.notice_message;
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
 
-					this.notice_count = this.notice_message.unread_count;
-					this.task_count = this.task_message.unread_count;
-					this.readhub_count = this.readhub_message.unread_count;
-					this.money_count = this.money_message.unread_count;
-					//	console.log(this.notice_message)；
+          this.notice_count = this.notice_message.unread_count;
+          this.task_count = this.task_message.unread_count;
+          this.readhub_count = this.readhub_message.unread_count;
+          this.money_count = this.money_message.unread_count;
+
+					
+//					console.log(this.notice_message,this.task_message,this.readhub_message,this.money_message);
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
 				});
-			},
-			//请求标记
-			sign() {
-				postRequest(`notification/mark_as_read`, {
-					notification_type: 0
-				}).then(response => {
-
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-						return;
-					}
-
-				});
-			}
+			} 
 		},
 		mounted() {
 			//请求数据；
@@ -187,8 +183,9 @@
 				}
 			});
 			this.getPrevList();
-			this.sign();
-
+			
+		
+			
 		}
 	}
 	export default TaskMain;
@@ -336,5 +333,20 @@
 		line-height: 18px;
 		left: 45px;
 		top: 5px;
+	}
+	
+	.menu_message{
+	  position: absolute;
+    right: 14%;
+    top: 8px;
+    background: #f03c69;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    padding: 0px 3px;
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: 15px;
+    line-height: 15px;
 	}
 </style>

@@ -47,6 +47,7 @@ function autoStatusBar(context)
   var statusBarStyleElement = context.querySelector('#statusBarStyle');
 
   if (statusBarStyleElement) {
+    console.log('监测到#statusBarStyle');
     bgColor = statusBarStyleElement.getAttribute('bgColor');
     mode = statusBarStyleElement.getAttribute('mode');
     background = statusBarStyleElement.getAttribute('background');

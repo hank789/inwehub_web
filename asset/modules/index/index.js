@@ -21,24 +21,23 @@ import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
 if (typeof(isLocalEnv) === "undefined") {
-    window.isLocalEnv = false;
+   window.isLocalEnv = false;
 } else {
-    console.log('isLocalEnv');
-    window.isLocalEnv = true;
+   console.log('isLocalEnv');
+   window.isLocalEnv = true;
 }
 
 if (!isLocalEnv) {
 console.log('in raven');
 var sentry_url = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478';
 if (process.env.NODE_ENV === 'production') {
-    sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
+   sentry_url = 'https://0b85668d118943ffa71c7b6c34f0a6bf@sentry.io/175782';
 }
 Raven
-    .config(sentry_url)
-    .addPlugin(RavenVue, Vue)
-    .install();
+   .config(sentry_url)
+   .addPlugin(RavenVue, Vue)
+   .install();
 }
-
 var infiniteScroll =  require('vue-infinite-scroll');
 Vue.use(infiniteScroll);
 
@@ -184,6 +183,7 @@ Vue.mixin({
     EventObj.addEventListener('refreshPageData', (e) => {
        console.log('calledEvent: refreshPageData');
        if (this.refreshPageData) {
+           console.log('calledMethod: refreshPageData');
            this.refreshPageData();
        }
     });
@@ -216,16 +216,29 @@ Vue.mixin({
   }
 });
 
+import {goBack} from '../../utils/webview';
 
 mui.muiOldBack = mui.back;
 mui.back = function(){
   if (mui.os.plus) {
     var current_webview = plus.webview.currentWebview();
-    var need_hide = ['list-detail-page'];
+    var need_hide = [
+      'inwehub_notice_view',
+      'list-detail-page',
+      'list-detail-page-interaction',
+      'list-detail-page-contact',
+      'list-detail-page-realAnswer'
+    ];
 
+    var need_webview_back = [
+      'inwehub_article_title',
+      'inwehub_article_view'
+    ];
+    console.log(current_webview.id);
     if (need_hide.indexOf(current_webview.id) !== -1) {
+      goBack();
       current_webview.hide();
-    } else if (mui.os.ios){
+    } else if (mui.os.ios || need_webview_back.indexOf(current_webview.id) !== -1){
       mui.muiOldBack();
     } else {
       router.go(-1);

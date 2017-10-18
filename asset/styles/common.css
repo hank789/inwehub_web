@@ -1242,3 +1242,43 @@ ul.normal li:before {
   top: 12px;
 }
 
+.afterHidden:after {
+  display: none;
+}
+
+.beforeHidden:before{
+  display: none;
+}
+
+
+.bottomBorder{
+  position: relative;
+}
+.bottomBorder:after{
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right:15px;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #dcdcdc;
+}
+
+.listBottomBorder:not(:last-child):after{
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right:15px;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #dcdcdc;
+}
+
+
+.hideUpToRefreshDescription .mui-pull-bottom-pocket{
+  display: none !important;
+}

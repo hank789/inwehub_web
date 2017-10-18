@@ -43,9 +43,15 @@
         :seeNum="answer.view_number"
         :supportNum="answer.support_number"
         :isSupported="answer.is_supported?true:false"
+        :showShoucang="showShoucang"
+        :collectNum="answer.collect_num"
+        :isCollected="answer.is_collected?true:false"
         @supportNumDesc="supportNumDesc"
         @supportNumAdd="supportNumAdd"
         @setSupportStatus="setSupportStatus"
+        @collectNumDesc="collectNumDesc"
+        @collectNumAdd="collectNumAdd"
+        @setCollectStatus="setCollectStatus"
       ></Statistics>
     </div>
   </div>
@@ -91,6 +97,10 @@
       needMoney: {
         type: Boolean,
         default: false
+      },
+      showShoucang:{
+        type:Boolean,
+        default:false
       },
       isShowPositionAndCompany:{
         type: Boolean,
@@ -150,6 +160,18 @@
       setSupportStatus(type)
       {
         this.answer.is_supported = type === 'support' ? 1 : 0;
+      },
+      collectNumAdd()
+      {
+        this.answer.collect_num++;
+      },
+      collectNumDesc()
+      {
+        this.answer.collect_num--;
+      },
+      setCollectStatus(type)
+      {
+        this.answer.is_collected = type === 'collect' ? 1 : 0;
       }
     }
   };

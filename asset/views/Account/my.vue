@@ -131,7 +131,7 @@
 					</svg>
 					<i class="bot"></i>
 				</li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/onlookers')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/collected')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodeshoucang"></use>
           </svg>
@@ -174,7 +174,9 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-  import userAbility from '../../utils/userAbility';
+    import userAbility from '../../utils/userAbility';
+   import {alertMajorCommentSuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
+  
 
 	export default {
 		data() {
@@ -256,18 +258,19 @@
 			},
 			//认证专家；
 			toApply(expertStatus) {
-				switch (parseInt(expertStatus)) {
-			        case 0:
-			        case 3:
-			            this.$router.push('/my/pilot');
-			          break;
-			        case 2:
-			          mui.toast('您已经是专家');
-			          break;
-			        case 1:
-			          this.$router.push('/expert/apply/success?type=0');
-			          break;
-			      }
+				userAbility.jumpToApplyProfessor(this);
+//				switch (parseInt(expertStatus)) {
+//			        case 0:
+//			        case 3:
+//			            this.$router.push('/my/pilot');
+//			          break;
+//			        case 2:
+//			          mui.toast('您已经是专家');
+//			          break;
+//			        case 1:
+//			          this.$router.push('/expert/apply/success?type=0');
+//			          break;
+//			      }
 
 			},
 			getNumbers: function(number) {
@@ -343,9 +346,10 @@
 
 		},
 		mounted() {
-//			mui.waiting();
-			//领取新手任务；
-//      		userAbility.newbieTask(this);
+
+       
+ 
+
 		}
 	}
 </script>

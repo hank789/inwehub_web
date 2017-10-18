@@ -19,26 +19,51 @@
       //showInwehubWebview();
     },
     methods: {
-
+      load_article(url) {
+        var ws = plus.webview.currentWebview();
+        var topoffset = '44px';
+        if (plus.navigator.isImmersedStatusbar()) {// 兼容immersed状态栏模式
+          topoffset = (Math.round(plus.navigator.getStatusbarHeight()) + 44) + 'px';
+        }
+        var embed = mui.openWindow({
+          url: url,
+          id: 'inwehub_notice_embed',
+          preload: false,
+          show: {
+            autoShow: false,
+            aniShow: 'pop-in'
+          },
+          styles: {
+            cachemode:'noCache',
+            popGesture: 'hide',
+            top:topoffset,
+            bottom: '0px',
+            position: 'dock',
+            dock: 'bottom',
+            bounce: 'vertical'
+          },
+          waiting: {
+            autoShow: false
+          }
+        });
+        if (url !== embed.getURL()) {
+          embed.loadURL(url);
+        }
+        ws.append(embed);
+      },
     },
     watch: {
 
     },
     mounted(){
-      mui.plusReady(() => {
-        var ws = plus.webview.currentWebview();
-        ws.addEventListener('show',createEmbed(ws),false);
-
-        function createEmbed(ws) {
-          var topoffset='44px';
-          if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
-            topoffset=(Math.round(plus.navigator.getStatusbarHeight())+44)+'px';
-          }
-          var embed=plus.webview.create(ws.id,'embed',{top:topoffset,bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
-          ws.append(embed);
-        }
+      document.addEventListener('load_article', (event) => {
+        this.load_article(event.detail.article_url);
       });
 
+      mui.plusReady(() => {
+        var ws = plus.webview.currentWebview();
+        this.load_article(ws.article_url);
+      });
     }
   }
 

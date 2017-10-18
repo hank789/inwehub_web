@@ -60,12 +60,27 @@ npm run build
 
 
 
-##message组件
+##message组件使用
     调用
       this.$refs.MessageComponent.show('hello', () => {
           //点击后要处理的业务
             });
 
+
+##列表组件使用
+    第一步: 引入 import
+          RefreshList from '../../components/refresh/List.vue';
+    第二步: 绑定数据
+          <RefreshList
+                  v-model="list"
+                  :api="'question/commonList'"      //api地址
+                  :prevOtherData="{}"               //向上请求时要携带的参数
+                  :nextOtherData="{}"               //向下请求时要携带的参数
+                  :list="list"                      //列表数据
+                >
+                //.....
+          </RefreshList>
+    第三部:循环list即可
 
 ##路由命名
    1 小驼峰式
@@ -87,3 +102,16 @@ npm run build
     768-x  1100px
 
 
+
+##webview-详情页规则(请求参数中有id的，都要遵守以下规则)
+1. 都要有以下方法
+    refreshPageData
+
+2. 并且添加
+      watch: {
+        '$route': 'refreshPageData'
+      },
+
+
+##webview-页面规则(请求中没有参数id的，都要遵守以下规则)
+1. 必须有refreshPageData方法(如果页面切换间需要刷新当前页面的)

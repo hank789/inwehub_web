@@ -10,7 +10,7 @@
 
     <div class="mui-content answerRichText blur">
         <div class="form form-realAnswer">
-            <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="'answer'+id" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
+            <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
             <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
 
@@ -29,7 +29,7 @@
 <script>
   import {NOTICE, RICHTEXT_ANSWER_SET} from '../../stores/types';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-
+  import localEvent from '../../stores/localStorage';
   import Meditor from '../../components/vue-quill/Meditor.vue';
 
   const Answer = {
@@ -42,12 +42,25 @@
       Meditor
     },
     mounted(){
-      window.addEventListener('refreshData', function(e){
-        //执行刷新
-        console.log('refresh-answer');
-      });
+    },
+    watch: {
+      '$route': 'refreshPageData'
+    },
+    computed: {
+      meditorId() {
+        return 'answer' + this.id;
+      }
     },
     methods: {
+      refreshPageData(){
+         console.log('refreshPageData');
+         this.getId();
+         console.log(this.id);
+      },
+      getId(){
+        let id = parseInt(this.$route.params.id);
+        this.id = id;
+      },
       cancelAnswer(){
 
         if (mui.os.plus && mui.os.ios) {
@@ -114,7 +127,6 @@
         mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
           if (e.index == 1) {
 
-
             for (var i in data.description.ops) {
                 if (data.description.ops[i].insert.hasOwnProperty('image')) {
                   if (/drag/.test(data.description.ops[i].insert.image)) {
@@ -170,9 +182,8 @@
       }
     },
     created () {
-      //showInwehubWebview();
-      let id = parseInt(this.$route.params.id);
-      this.id = id;
+        //showInwehubWebview();
+        this.getId();
     }
   }
   export default Answer;

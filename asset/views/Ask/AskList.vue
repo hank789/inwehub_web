@@ -59,7 +59,7 @@
             <div class="list-ask">
 
               <div class="mui-table-view list-ask-item" v-for="(ask, index) in asks">
-                <div class="mui-table-view-cell mui-media" @tap.stop.prevent="$router.pushPlus('/ask/' + ask.id)">
+                <div class="mui-table-view-cell mui-media" @tap.stop.prevent="toDetail(ask)">
 
                   <div class="site-desc mui-ellipsis-2">
                     {{ ask.description | textLimit}}
@@ -107,6 +107,13 @@
       loading: true
     }),
     methods: {
+      toDetail(item){
+          if (item.question_type === 2) {
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id);
+          } else {
+            this.$router.pushPlus('/ask/' + item.id);
+          }
+      },
       pulldownRefresh() {
         setTimeout(() => {
           this.getPrevList();

@@ -191,6 +191,10 @@
         var contents = this.description;
         this.storeContent(contents);
       },
+      refreshPageData(){
+          console.log('newid' + this.id);
+          this.initDefaultValue();
+      },
       autoSave(){
 
         setTimeout(() => {
@@ -206,23 +210,24 @@
           this.autoSave();
         }, this.iosAutoSaveTime * 1000);
       },
-      onEditorReady(editor) {
-        this.editorObj = editor;
-        this.$emit('ready', editor);
-
+      initDefaultValue(){
         if (mui.os.plus && mui.os.ios) {
 
           mui.plusReady(() => {
             var contents = plus.storage.getItem(this.id);
 
             if (contents) {
-              contents = JSON.parse(contents);
               console.log('restore contents:');
-              this.editorObj.setContents(contents);
-              if (!this.timeInterVal) {
-                this.timeInterVal = true;
-                this.autoSave();
-              }
+              contents = JSON.parse(contents);
+            } else {
+              contents = [];
+              console.log('restore contents:');
+            }
+
+            this.editorObj.setContents(contents);
+            if (!this.timeInterVal) {
+              this.timeInterVal = true;
+              this.autoSave();
             }
           });
         } else {
@@ -232,18 +237,27 @@
 
             if (contents) {
               console.log('restore contents:');
-              this.editorObj.setContents(contents);
+            } else {
+              contents = [];
             }
+
+            this.editorObj.setContents(contents);
           }
         }
-
-
+      },
+      onEditorReady(editor) {
+        this.editorObj = editor;
+        this.$emit('ready', editor);
+        this.initDefaultValue();
       },
       onEditorReadyRead(editor) {
         this.editorReadObj = editor;
       },
     },
     watch: {
+      'id'(newVal, oldVal) {
+          this.refreshPageData();
+      },
       'content'(newVal, oldVal) {
         this.description = newVal;
       },

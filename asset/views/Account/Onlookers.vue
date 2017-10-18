@@ -31,8 +31,6 @@
                   </svg>
                 </p>
                 <p class="mui-ellipsis">回答者：{{ item.answer_username}}</p>
-                <p class="mui-ellipsis">{{ item.answer_user_title }}</p>
-                <p class="mui-ellipsis">{{ item.answer_user_company }}</p>
               </div>
               <i class="bot"></i>
             </li>
@@ -197,7 +195,7 @@
 
   .hotAnswer_b li {
     width: 100%;
-    height: 93px;
+    height: 74px;
     position: relative;
   }
 
@@ -243,7 +241,6 @@
     margin-top: 8.5px;
     font-size: 13px;
     color: #808080;
-    border-right: 1px solid #c8c8c8;
     text-align: center;
     line-height: 15px;
   }

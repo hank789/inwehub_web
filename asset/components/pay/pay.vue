@@ -38,7 +38,7 @@
         }
 
         var amount = this.pay_money;
-        if (amount <= 0) {
+        if (amount <= 0 && this.pay_object_type != 'free_ask') {
           mui.toast('支付金额有误！');
           return;
         }
@@ -54,7 +54,7 @@
         if (mui.os.plus){
           var appid = plus.runtime.appid;
         } else {
-          if (typeof WeixinJSBridge === "undefined"){
+          if (amount > 0 && typeof WeixinJSBridge === "undefined"){
             mui('#sheet1').popover('toggle');
             mui.alert('目前仅支持微信公众号支付，请前往微信公众号访问！');
             return;
