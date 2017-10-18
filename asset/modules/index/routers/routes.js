@@ -156,7 +156,7 @@ const routes = [{
     }
   },
   { //邀请回答
-    path: '/contact',
+    path: '/contact/:id',
     name: 'contact',
     meta: {
       title: '邀请回答',

@@ -112,8 +112,8 @@
       },
       refreshPageData()
       {
-        console.log('refreshRouteData');
-        this.id = parseInt(this.$route.query.id);
+        console.log('refreshPageData');
+        this.id = parseInt(this.$route.params.id);
         this.username = this.$route.query.username;
         this.title = this.$route.query.title;
         this.answernum = this.$route.query.answernum;
@@ -127,7 +127,7 @@
       }
     },
     watch: {
-      '$route': 'refreshRouteData'
+      '$route': 'refreshPageData'
     },
     mounted(){
       window.addEventListener('refreshData', (e) => {
