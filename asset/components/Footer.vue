@@ -62,7 +62,7 @@
 
     </nav>
 
-    <Share ref="ShareBtn" :title="shareoption.shareTitle" :link="shareoption.shareUrl" :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg" :hideShareBtn="true"></Share>
+    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :link="shareoption.shareUrl" :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg" :hideShareBtn="true"></Share>
   </div>
 </template>
 
@@ -118,7 +118,7 @@
     },
     methods: {
       share() {
-        this.$refs.ShareBtn.share();
+        this.$refs.FooterShareBtn.share();
       },
       show() {
         this.$refs.short.show();

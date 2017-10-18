@@ -96,7 +96,7 @@ var userAbility = () => {
 
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level >= 2) {
+    if (userInfo.user_level >= 1) {
       router.pushPlus('/askCommunity/majors');
     } else {
       var dialog = getDialogObj(context);
@@ -119,7 +119,7 @@ var userAbility = () => {
 
     var userInfo = getLocalUserInfo();
 
-    if (userInfo.user_level >= 2) {
+    if (userInfo.user_level >= 1) {
       router.pushPlus('/askCommunity/major/' + id,'list-detail-page' ,true,'pop-in','hide',true);
     } else {
       var dialog = getDialogObj(context);

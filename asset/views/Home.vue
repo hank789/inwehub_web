@@ -276,9 +276,11 @@
 			}
 		},
 		methods: {
+		  //详情；
       toMajorDetail(id) {
         userAbility.jumpToAskCommunityDetail(this,id);
       },
+      //进入社区；
       toAskCommunity() {
         userAbility.jumpToAskCommunity(this);
       },

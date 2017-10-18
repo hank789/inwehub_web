@@ -13,6 +13,7 @@
 					<div class="menu">
 						<span @tap.stop.prevent="$router.replace('/task')">任务</span>
 						<span @tap.stop.prevent="">消息</span>
+						<div class="menu_message" v-if="total_count != 0">{{total_count}}</div>
 						<i></i>
 					</div>
 
@@ -100,25 +101,30 @@
 			task_count: 0,
 			readhub_count: 0,
 			money_count: 0,
-			loading: true
+			loading: true,
+			total_count:0
 		}),
 		methods: {
 			skip(num) {
 				switch(num) {
 					case 1:
 						this.notice_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/informbar');
 						break;
 					case 2:
 						this.money_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/balancebar');
 						break;
 					case 3:
 						this.task_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/taskbar');
 						break;
 					case 4:
 						this.readhub_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/readbar');
 						break;
 
@@ -151,6 +157,7 @@
 					this.task_count = this.task_message.unread_count;
 					this.readhub_count = this.readhub_message.unread_count;
 					this.money_count = this.money_message.unread_count;
+					this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 					//	console.log(this.notice_message)；
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -319,5 +326,20 @@
 		line-height: 18px;
 		left: 45px;
 		top: 5px;
+	}
+	
+	.menu_message{
+	  position: absolute;
+	  right: 70px;
+    top: 8px;
+	  background: #f03c69;
+	  border-radius: 50%;
+	  min-width: 18px;
+    height: 18px;
+    color: #ffffff;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+	  padding: 1px;
 	}
 </style>

@@ -253,7 +253,7 @@
 				<div class="power">
 					<p>
 					   <span :class="{bg:user_level >= 5}">5</span>
-					   <span>L5（成长值满100000，平台定向邀请开放秘密特权)</span>
+					   <span>L5（成长值满500000，平台定向邀请开放秘密特权)</span>
 					</p>
 
 
