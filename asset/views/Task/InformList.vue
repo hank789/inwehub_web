@@ -332,7 +332,7 @@
 	
 	.menu_message{
 	  position: absolute;
-	  right: 65px;
+	  right:14%;
     top: 8px;
 	  background: #f03c69;
 	  border-radius: 50%;
@@ -341,7 +341,7 @@
     color: #ffffff;
     font-size: 11px;
     text-align: center;
-    line-height: 18px;
+    line-height: 15px;
 	  padding: 1px;
 	}
 </style>
