@@ -116,7 +116,9 @@
             mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 
             setTimeout(() => {
-              mui('#refreshContainer').pullRefresh().refresh(true);
+              if (mui('#refreshContainer').length) {
+                mui('#refreshContainer').pullRefresh().refresh(true);
+              }
             }, 1000)
           }
 
