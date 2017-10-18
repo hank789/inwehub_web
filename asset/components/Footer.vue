@@ -93,7 +93,7 @@
       }
     },
     props: {},
-    mounted() {
+    mounted() {      
       this.shareoption.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
       //this.$refs.short.show();
       window.addEventListener('refreshData', (e) => {
@@ -117,7 +117,7 @@
       });
     },
     methods: {
-      getDetailByAnswerId(answerId, successCallback = () => {}) {
+      getDetailByAnswerId(answerId) {
 
         postRequest(`answer/info`, {
           id: answerId
@@ -132,9 +132,10 @@
 
           this.loading = 0;
           //1为专业问答  2为互动问答
+         
           if(ask.question.question_type == 1) {
             this.shareoption.shareTitle = '专家回答|' + ask.question.description;
-            var currentUrl = '/answer/' + ask.question.id;
+            var currentUrl = '/askCommunity/major/' + ask.question.id;
             this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
             var answername = ask.question.user_name;
             this.shareoption.shareContent = '专家' + answername + '的回答，' + '点击前往围观互动';
@@ -147,7 +148,7 @@
             this.shareoption.shareContent = '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
           }
 
-          successCallback();
+         
 
         });
       },
