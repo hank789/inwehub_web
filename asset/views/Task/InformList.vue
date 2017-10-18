@@ -91,6 +91,7 @@
 <script type="text/javascript">
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import localEvent from '../../stores/localStorage';
+	import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
 	const TaskMain = {
 		data: () => ({
 			count: "",
@@ -103,7 +104,8 @@
 			readhub_count: 0,
 			money_count: 0,
 			loading: true,
-			total_count:0
+			total_count:0,
+			mobile:0
 		}),
 		methods: {
 			skip(num) {
@@ -111,25 +113,25 @@
 					case 1:
 						this.notice_count = 0;
 						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount", {value: this.total_count});
+						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/informbar');
 						break;
 					case 2:
 						this.money_count = 0;
 						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount", {value: this.total_count});
+						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/balancebar');
 						break;
 					case 3:
 						this.task_count = 0;
 						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount", {value: this.total_count});
+						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/taskbar');
 						break;
 					case 4:
 						this.readhub_count = 0;
 						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount", {value: this.total_count});
+						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/readbar');
 						break;
 
@@ -152,7 +154,7 @@
 						mui.back();
 						return;
 					}
-
+           
 					this.notice_message = response.data.data.notice_message;
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
@@ -163,7 +165,7 @@
 					this.readhub_count = this.readhub_message.unread_count;
 					this.money_count = this.money_message.unread_count;
 					this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-					localEvent.setLocalItem("informCount", {value: this.total_count});
+					localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 					//	console.log(this.notice_message)；
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -186,7 +188,9 @@
 			});
 			this.getPrevList();
 			
-			console.log(121212);
+			//用户手机号；
+			this.mobile = getLocalUserInfo().phone;
+			
 		}
 	}
 	export default TaskMain;

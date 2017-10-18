@@ -94,6 +94,7 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import CountDown from 'vue2-countdown';
 	import localEvent from '../../stores/localStorage';
+	import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
 	
 
 	const Task = {
@@ -101,7 +102,9 @@
 			tasks: [],
 			loading: true,
 			currentTime: (new Date()).getTime(),
-			total_count:0
+			total_count:0,
+			mobile:0
+			
 			
 		}),
 		components: {
@@ -162,10 +165,13 @@
 			this.initPullRefresh();
 			
 			
-			var count = parseInt(localEvent.getLocalItem("informCount").value);
+			var count = parseInt(localEvent.getLocalItem("informCount"+this.mobile).value);
 			if(count){
 			  this.total_count = count;
 			}
+			
+			//用户手机号；
+      this.mobile = getLocalUserInfo().phone;
 			
 		},
 		updated() {
@@ -225,7 +231,7 @@
 				//刷新页面时自动加载； 默认10条数据；
 				this.getPrevList();
 				  
-				  var count = parseInt(localEvent.getLocalItem("informCount").value);
+				  var count = parseInt(localEvent.getLocalItem("informCount"+this.mobile).value);
 				 if(count){
 				   this.total_count = count;
 				 }
