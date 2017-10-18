@@ -537,13 +537,13 @@
     right: 14%;
     top: 8px;
     background: #f03c69;
-    border-radius: 50%;
-    min-width: 18px;
-    height: 18px;
-    color: #ffffff;
     font-size: 11px;
     text-align: center;
+    color: #fff;
+    padding: 0px 3px;
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: 15px;
     line-height: 15px;
-    padding: 1px;
   }
 </style>
