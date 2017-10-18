@@ -164,20 +164,19 @@
 			});
 			this.initPullRefresh();
 			
+	
+		  this.messagecountchange();
 			
-			var count = parseInt(localEvent.getLocalItem("informCount"+this.mobile).value);
-			if(count){
-			  this.total_count = count;
-			}
-			
-			//用户手机号；
-      this.mobile = getLocalUserInfo().phone;
 			
 		},
 		updated() {
 			this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
 		},
 		methods: {
+		  messagecountchange(obj){
+		     this.total_count = obj;
+             console.log(obj);
+		  },
 			initData() {
 				//执行刷新
 				console.log('refresh-taskList');
