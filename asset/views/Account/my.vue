@@ -347,7 +347,7 @@
 		},
 		mounted() {
 
-       alertMajorReplySuccess(this);
+       //     alertMajorReplySuccess(this);
  
 
 		}

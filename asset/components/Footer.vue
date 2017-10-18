@@ -97,20 +97,12 @@
         isDiscover: false,
         taskCount: 0,
         shareoption:{
-          shareUrl: '',
+            shareUrl: '',
 	        shareImg: '',
 	        shareContent: '',
 	        shareTitle: '',
 	        id:""
-        },
-        ask: {
-        answers: [],
-        question: {created_at: '', description: ''},
-        feedback: {
-          rate_star: 0
-        },
-        timeline: []
-      },
+        }
       }
     },
     props: {
@@ -149,20 +141,26 @@
             this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
             return;
           }
-          this.ask = response.data.data;
+          var ask = response.data.data;
 
           this.loading = 0;
+          //1为专业问答  2为互动问答
+          if(ask.question.question_type == 1){
+          	  this.shareoption.shareTitle = '专家回答|' +  ask.question.description;
+	          var currentUrl = '/askCommunity/major/' + this.id;
+	          this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+	          var answername = ask.question.user_name;
+	          this.shareoption.shareContent = '专家' + answername  + '的回答，' + '点击前往围观互动';
 
-          this.shareoption.shareTitle = '问答|' +  this.ask.question.description;
-
-          var currentUrl = '/askCommunity/interaction/answers/' + this.ask.question.id;
-          this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-
-          var answerNum = this.ask.question.answer_num;
-
-          var followNum = this.ask.question.follow_num;
-
-          this.shareoption.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
+          }else{
+          	this.shareoption.shareTitle = '问答|' +  ask.question.description; 
+            var currentUrl = '/askCommunity/interaction/' + ask.question.id;
+            this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+            var answerNum = ask.question.answer_num;
+            var followNum = ask.question.follow_num;
+            this.shareoption.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
+          }
+          
 
           successCallback();
 
