@@ -115,7 +115,7 @@ function socketResponseManage(notification, context) {
           alertAskCommunityInteractiveAnswer(context, answer_coins, answer_credits);
           break;
         case 'expert_valid':
-          //专家认证；
+          //专家认证成功之后的弹窗；
           //成长值；
           var expert_credits = notification.add_credits;
           //贡献值；
