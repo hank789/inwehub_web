@@ -29,6 +29,7 @@
 			<div class="menu">
 				<span @tap.stop.prevent="">任务</span>
 				<span @tap.stop.prevent="$router.replace('/inform')">消息</span>
+				
 				<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
 				<i></i>
 			</div>
@@ -165,7 +166,7 @@
 			this.initPullRefresh();
 			
 	
-		  this.messagecountchange();
+		  
 			
 			
 		},
@@ -175,7 +176,7 @@
 		methods: {
 		  messagecountchange(obj){
 		     this.total_count = obj;
-             console.log(obj);
+            
 		  },
 			initData() {
 				//执行刷新
@@ -230,10 +231,7 @@
 				//刷新页面时自动加载； 默认10条数据；
 				this.getPrevList();
 				  
-				  var count = parseInt(localEvent.getLocalItem("informCount"+this.mobile).value);
-				 if(count){
-				   this.total_count = count;
-				 }
+				 
 				
 
 			},
