@@ -109,18 +109,22 @@
 				switch(num) {
 					case 1:
 						this.notice_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/informbar');
 						break;
 					case 2:
 						this.money_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/balancebar');
 						break;
 					case 3:
 						this.task_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/taskbar');
 						break;
 					case 4:
 						this.readhub_count = 0;
+						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
 						this.$router.pushPlus('/readbar');
 						break;
 
