@@ -45,18 +45,20 @@
       >
       </Discuss>
 
-      <Share
-        v-show="ask.question.status==6||ask.question.status==7"
-        :title="shareOption.title"
-        :link="shareOption.link"
-        :content="shareOption.content"
-        :imageUrl="shareOption.imageUrl"
-        :thumbUrl="shareOption.thumbUrl"
-        @success="shareSuccess"
-        @fail="shareFail"
-      ></Share>
+
 
     </div>
+
+    <Share
+      v-show="ask.question.status==6||ask.question.status==7"
+      :title="shareOption.title"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
   </div>
 </template>
 
