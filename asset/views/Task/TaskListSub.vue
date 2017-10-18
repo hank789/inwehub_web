@@ -161,7 +161,12 @@
 			});
 			this.initPullRefresh();
 			
-			this.total_count = parseInt(localEvent.getLocalItem("informCount").value);
+			
+			var count = parseInt(localEvent.getLocalItem("informCount").value);
+			if(count){
+			  this.total_count = count;
+			}
+			
 		},
 		updated() {
 			this.$store.dispatch(TASK_LIST_APPEND, this.tasks);
@@ -219,7 +224,12 @@
 				});
 				//刷新页面时自动加载； 默认10条数据；
 				this.getPrevList();
-				this.total_count = parseInt(localEvent.getLocalItem("informCount").value);
+				  
+				  var count = parseInt(localEvent.getLocalItem("informCount").value);
+				 if(count){
+				   this.total_count = count;
+				 }
+				
 
 			},
 			//跳转时判断类型。1为提问  2是回答  3新手任务-完善个人信息 4新手任务-参与阅读评论 5新手任务-发起提问
@@ -521,7 +531,7 @@
   }
   .menu_message{
     position: absolute;
-    right: 70px;
+    right: 65px;
     top: 8px;
     background: #f03c69;
     border-radius: 50%;

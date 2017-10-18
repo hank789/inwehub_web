@@ -338,7 +338,7 @@
 	
 	.menu_message{
 	  position: absolute;
-	  right: 70px;
+	  right: 65px;
     top: 8px;
 	  background: #f03c69;
 	  border-radius: 50%;
