@@ -110,7 +110,7 @@
 		methods: {
 		  messagecountchange(obj){
          this.total_count = obj;
-             console.log(obj);
+//           console.log(obj);
       },
 			skip(num) {
 				switch(num) {
@@ -167,7 +167,7 @@
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
 				});
-			}
+			} 
 		},
 		mounted() {
 			//请求数据；
@@ -183,7 +183,7 @@
 				}
 			});
 			this.getPrevList();
-			this.messagecountchange();
+			
 		
 			
 		}
