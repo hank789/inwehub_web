@@ -73,19 +73,21 @@
         v-show="answer.answers[0] && answer.answers[0].content"
       ></Discuss>
 
-      <Share
-        v-show="answer.question.status==6||answer.question.status==7"
-        :title="shareOption.title"
-        :link="shareOption.link"
-        :content="shareOption.content"
-        :imageUrl="shareOption.imageUrl"
-        :thumbUrl="shareOption.thumbUrl"
-        @success="shareSuccess"
-        @fail="shareFail"
-      ></Share>
+
 
       <div class="mb70"></div>
     </div>
+
+    <Share
+      v-show="answer.question.status==6||answer.question.status==7"
+      :title="shareOption.title"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
 
   </div>
 </template>
