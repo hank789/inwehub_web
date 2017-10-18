@@ -156,8 +156,13 @@
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
 
+          this.notice_count = this.notice_message.unread_count;
+          this.task_count = this.task_message.unread_count;
+          this.readhub_count = this.readhub_message.unread_count;
+          this.money_count = this.money_message.unread_count;
+
 					
-					//	console.log(this.notice_message)；
+//					console.log(this.notice_message,this.task_message,this.readhub_message,this.money_message);
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
