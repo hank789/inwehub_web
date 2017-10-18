@@ -132,14 +132,15 @@
 
           this.loading = 0;
           //1为专业问答  2为互动问答
-         
           if(ask.question.question_type == 1) {
+             console.log("专业回答");
             this.shareoption.shareTitle = '专家回答|' + ask.question.description;
             var currentUrl = '/askCommunity/major/' + ask.question.id;
             this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
             var answername = ask.question.user_name;
             this.shareoption.shareContent = '专家' + answername + '的回答，' + '点击前往围观互动';
           } else {
+            console.log("互动回答");
             this.shareoption.shareTitle = '问答|' + ask.question.description;
             var currentUrl = '/askCommunity/interaction/' + ask.question.id;
             this.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
