@@ -848,7 +848,7 @@ const routes = [{
     component: require('../../../views/Ask/AskDetail.vue'),
     meta: {
       title: '提问',
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -920,7 +920,7 @@ const routes = [{
     component: require('../../../views/Answer/AnswerDetail.vue'),
     meta: {
       title: '回答问题',
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
