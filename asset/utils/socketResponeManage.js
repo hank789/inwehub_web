@@ -10,7 +10,7 @@ import {
 } from '../utils/dialogList';
 
 import {postRequest} from '../utils/request';
-import {getAskCommunityMajorDetail} from '../utils/shareTemplate';
+import {getAskCommunityMajorDetail, getAskCommunityInteractionDetail} from '../utils/shareTemplate';
 
 function getDetailByAnswerId(answerId, context) {
 
@@ -40,14 +40,15 @@ function getDetailByAnswerId(answerId, context) {
       context.shareoption.shareImg = shareOption.imageUrl;
 
     } else {
-      context.shareoption.shareTitle = '问答|' + ask.question.description;
-      var currentUrl = '/askCommunity/interaction/' + ask.question.id;
-      context.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-      var answerNum = ask.question.answer_num;
-      var followNum = ask.question.follow_num;
-      context.shareoption.shareContent = '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
-    }
+      var answer = ask.answer ? ask.answer : {};
+      var username = answer.user_name ? answer.user_name : '';
 
+      var shareOption = getAskCommunityInteractionDetail(answerId, ask.question.description, username);
+      context.shareoption.shareTitle = shareOption.title;
+      context.shareoption.shareContent = shareOption.content;
+      context.shareoption.shareUrl = shareOption.link;
+      context.shareoption.shareImg = shareOption.imageUrl;
+    }
   });
 }
 

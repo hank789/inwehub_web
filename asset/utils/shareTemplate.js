@@ -17,7 +17,25 @@ function getAskCommunityMajorDetail(questionId, questionDescription, answerUsern
     }
 }
 
+/**
+ * 互动问答详情页-微信分享模版
+ * url: /askCommunity/interaction/356
+ */
+function getAskCommunityInteractionDetail(answerId, questionDescription, answerUsername)
+{
+  var link =  process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId;
+
+  return {
+    title: '问答|' + questionDescription + '-' + answerUsername + '的回答',
+    link:link,
+    content:answerUsername + '的回答，点击前往围观互动',
+    imageUrl:whiteLogo,
+    thumbUrl:whiteLogo
+  }
+}
+
 
 export {
-  getAskCommunityMajorDetail
+  getAskCommunityMajorDetail,
+  getAskCommunityInteractionDetail
 };

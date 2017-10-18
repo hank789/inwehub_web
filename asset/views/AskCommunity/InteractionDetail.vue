@@ -70,6 +70,7 @@
   import Comment from '../../components/question-detail/Comment.vue';
   import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
+  import {getAskCommunityInteractionDetail} from '../../utils/shareTemplate';
 
   import userAbility from '../../utils/userAbility';
 
@@ -172,14 +173,14 @@
           this.loading = 0;
 
           var username = this.answer.user_name ? this.answer.user_name : '';
-          this.shareTitle = '问答|' + this.ask.question.description + '-' + username + '的回答';
 
-          var currentUrl = '/askCommunity/interaction/' + this.id;
-          this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-          this.shareContent = username + '的回答，点击前往围观互动';
+          var shareOptions = getAskCommunityInteractionDetail(this.id, this.ask.question.description, username);
+          this.shareImg = shareOptions.imageUrl;
+          this.shareContent = shareOptions.content;
+          this.shareUrl = shareOptions.link;
+          this.shareTitle = shareOptions.title;
 
           successCallback();
-
         });
       }
     },
