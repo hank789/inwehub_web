@@ -98,7 +98,7 @@
     },
     props: {},
     mounted() {
-      this.shareoption.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+
       //this.$refs.short.show();
       window.addEventListener('refreshData', (e) => {
         //执行刷新

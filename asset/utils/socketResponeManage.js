@@ -10,6 +10,7 @@ import {
 } from '../utils/dialogList';
 
 import {postRequest} from '../utils/request';
+import {getAskCommunityMajorDetail} from '../utils/shareTemplate';
 
 function getDetailByAnswerId(answerId, context) {
 
@@ -27,11 +28,17 @@ function getDetailByAnswerId(answerId, context) {
 
     //1为专业问答  2为互动问答
     if (ask.question.question_type == 1) {
-      context.shareoption.shareTitle = '专家回答|' + ask.question.description;
-      var currentUrl = '/askCommunity/major/' + ask.question.id;
-      context.shareoption.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-      var answername = ask.question.user_name;
-      context.shareoption.shareContent = '专家' + answername + '的回答，' + '点击前往围观互动';
+
+      var answer = ask.answer ? ask.answer : {};
+      var username = answer.user_name ? answer.user_name : '';
+
+      var shareOption = getAskCommunityMajorDetail(ask.question.id, ask.question.description, username);
+
+      context.shareoption.shareTitle = shareOption.title;
+      context.shareoption.shareContent = shareOption.content;
+      context.shareoption.shareUrl = shareOption.link;
+      context.shareoption.shareImg = shareOption.imageUrl;
+
     } else {
       context.shareoption.shareTitle = '问答|' + ask.question.description;
       var currentUrl = '/askCommunity/interaction/' + ask.question.id;

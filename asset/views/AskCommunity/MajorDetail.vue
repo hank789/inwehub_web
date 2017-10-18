@@ -23,6 +23,7 @@
         <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
           <div class="mui-table-view-cell">
             暂无回答
+
           </div>
         </div>
 
@@ -36,10 +37,12 @@
         <div class="help">
           <div class="title">
             什么是专业问题
+
           </div>
           <div class="body">
             InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
             专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+
 
           </div>
         </div>
@@ -48,9 +51,10 @@
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
 
+
           </button>
         </div>
-        </div>
+      </div>
     </div>
 
     <Share
@@ -76,31 +80,27 @@
   import Comment from '../../components/question-detail/Comment.vue';
   import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
   import Share from '../../components/Share.vue';
-
+  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
   import userAbility from '../../utils/userAbility';
 
   const AskDetail = {
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: '', description:''},
+        question: {created_at: '', description: ''},
         feedback: {
           rate_star: 0
         },
         timeline: []
       },
-      shareUrl:'',
-      shareImg:'',
-      shareContent:'',
-      shareTitle:'',
+      shareUrl: '',
+      shareImg: '',
+      shareContent: '',
+      shareTitle: '',
       id: 0,
       loading: true
     }),
     mounted(){
-
-      //this.shareImg = process.env.H5_ROOT  + '/images/whiteLogo@2x.png';
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
-
       mui.plusReady(() => {
         plus.webview.currentWebview().setStyle({
           softinputMode: "adjustResize"
@@ -117,25 +117,25 @@
       Share
     },
     computed: {
-        answer () {
-          return this.ask.answers[0] ? this.ask.answers[0]:{};
+      answer () {
+        return this.ask.answers[0] ? this.ask.answers[0] : {};
       }
     },
     methods: {
       refreshPageData(){
-          console.log('refreshPageData');
-          this.loading = 1;
-          this.getDetail();
+        console.log('refreshPageData');
+        this.loading = 1;
+        this.getDetail();
       },
       shareSuccess(){
-          //alertAskCommunityDetailShareSuccess(this);
+        //alertAskCommunityDetailShareSuccess(this);
       },
       shareFail(error){
 
       },
       paySuccess(content)
       {
-          this.ask.answers[0].content = content;
+        this.ask.answers[0].content = content;
       },
       downRefresh(callback){
         this.getDetail(() => {
@@ -171,7 +171,7 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.toast(response.data.message);
-            this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
             return;
           }
 
@@ -179,13 +179,13 @@
 
           this.loading = 0;
 
-          var username = this.answer.user_name?this.answer.user_name:'';
-          this.shareTitle = '专业问答|' + this.ask.question.description  + '-' + username + '的回答';
+          var username = this.answer.user_name ? this.answer.user_name : '';
 
-          var currentUrl = '/askCommunity/major/' + this.id;
-          this.shareUrl  = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-
-          this.shareContent = '专家' + username + '的回答，点击前往围观互动';
+          var shareOptions = getAskCommunityMajorDetail(this.id, this.ask.question.description, username);
+          this.shareImg = shareOptions.imageUrl;
+          this.shareContent = shareOptions.content;
+          this.shareUrl = shareOptions.link;
+          this.shareTitle = shareOptions.title;
 
           successCallback();
 
