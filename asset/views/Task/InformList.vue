@@ -13,7 +13,7 @@
 					<div class="menu">
 						<span @tap.stop.prevent="$router.replace('/task')">任务</span>
 						<span @tap.stop.prevent="">消息</span>
-						<div class="menu_message" v-if="total_count != 0">{{total_count}}</div>
+						<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
 						<i></i>
 					</div>
 
