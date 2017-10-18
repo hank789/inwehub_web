@@ -5,7 +5,8 @@ import {
   readhubCommenSuccess,
   expertcertification,
   alertAskCommunityInteractiveAnswer,
-  alertAskCommunityQuestioningSuccess
+  alertAskCommunityQuestioningSuccess,
+  alertMajorCommentSuccess
 } from '../utils/dialogList';
 
 import {postRequest} from '../utils/request';
@@ -79,7 +80,7 @@ function socketResponseManage(notification, context) {
       switch (notification.integral_action) {
         case 'first_community_ask':
         case 'community_ask':
-          //互动提问
+          //互动提问成功的弹窗；
           //成长值；
           var ask_coins = notification.add_coins;
           //贡献alertAskCommunityInteractiveAnswer值；
@@ -103,7 +104,7 @@ function socketResponseManage(notification, context) {
           break;
         case 'first_community_answer':
         case 'community_answer':
-          //互动回答
+          //互动社区参与回答成功后的弹窗；
           //成长值；
           var answer_coins = notification.add_coins;
           //贡献值；
@@ -122,19 +123,20 @@ function socketResponseManage(notification, context) {
           expertcertification(context, expert_credits, expert_coins);
           break;
         case 'readhub_new_comment':
-          //阅读的评论；
+          //发现评论成功的弹窗；
           //成长值；
           var readhub_comment_credits = notification.add_credits;
           //	                       readhubCommenSuccess(context,readhub_comment_credits);
           break;
         case 'user_info_complete':
-          //简历完善；
+          //简历完成在96%的弹窗；
           //成长值；
           var info_complete_credits = notification.add_credits;
           perfectCard(context, info_complete_credits);
           break;
         case 'first_ask':
         case 'ask':
+        //专业问答提问成功的弹窗；
           //成长值；
           var major_ask_coins = notification.add_coins;
           //贡献值；
@@ -143,6 +145,7 @@ function socketResponseManage(notification, context) {
           break;
         case 'first_answer':
         case 'answer':
+        //问答社区回答成功的弹窗；
           //成长值；
           var major_answer_coins = notification.add_coins;
           //贡献值；
@@ -153,6 +156,7 @@ function socketResponseManage(notification, context) {
           alertMajorReplySuccess(context, major_answer_credits, major_answer_coins);
           break;
         case 'rate_answer':
+        //问答社区评价成功的弹窗；
           //成长值；
           var major_comment_coins = notification.add_coins;
           //贡献值；
@@ -160,7 +164,7 @@ function socketResponseManage(notification, context) {
           //id
           context.shareoption.id = notification.source_id;
           getDetailByAnswerId(notification.source_id, context);
-          alertMajorReplySuccess(context, major_comment_credits, major_comment_coins);
+          alertMajorCommentSuccess(context, major_comment_credits, major_comment_coins);
           break;
         default:
           mui.toast(notification.title + " " + notification.body);
