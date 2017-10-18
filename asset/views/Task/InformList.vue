@@ -337,7 +337,7 @@
 	
 	.menu_message{
 	  position: absolute;
-    right: 14%;
+    left: 79%;
     top: 8px;
     background: #f03c69;
     font-size: 11px;
