@@ -18,7 +18,7 @@
           </div>
 
           <div class="notFound">
-            找不到成员？<span @tap.stop.prevent="toFollowMore()">微信直接邀请</span>
+            找不到成员？<span>添加新的关注</span> 或 <span @tap.stop.prevent="toFollowMore()">微信直接邀请</span>
           </div>
 
         </div>
