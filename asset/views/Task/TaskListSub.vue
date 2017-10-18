@@ -29,7 +29,7 @@
 			<div class="menu">
 				<span @tap.stop.prevent="">任务</span>
 				<span @tap.stop.prevent="$router.replace('/inform')">消息</span>
-				<div class="menu_message" v-if="total_count != 0">{{total_count}}</div>
+				<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
 				<i></i>
 			</div>
 			<div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
