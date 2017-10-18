@@ -8,7 +8,9 @@
           </keep-alive>
           <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
         </div>
-        <FooterComponent ref="Footer" id="Footer"></FooterComponent>
+        <FooterComponent ref="Footer" id="Footer"
+          @messagecountchange="messagecountchange"
+          ></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
         <inwehubDialog ref="inwehubDialog"></inwehubDialog>
@@ -36,6 +38,12 @@
       }
     },
     methods: {
+      messagecountchange(obj){
+           if (this.$refs.routerView.messagecountchange) {
+               this.$refs.routerView.messagecountchange(obj);
+           }
+           
+      },
       onCountChange(count){
           this.$refs.Footer.onCountChange(count);
       },

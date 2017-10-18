@@ -108,30 +108,26 @@
 			mobile:0
 		}),
 		methods: {
+		  messagecountchange(obj){
+         this.total_count = obj;
+             console.log(obj);
+      },
 			skip(num) {
 				switch(num) {
 					case 1:
 						this.notice_count = 0;
-						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/informbar');
 						break;
 					case 2:
 						this.money_count = 0;
-						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/balancebar');
 						break;
 					case 3:
 						this.task_count = 0;
-						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/taskbar');
 						break;
 					case 4:
 						this.readhub_count = 0;
-						this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-						localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
 						this.$router.pushPlus('/readbar');
 						break;
 
@@ -160,12 +156,7 @@
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
 
-					this.notice_count = this.notice_message.unread_count;
-					this.task_count = this.task_message.unread_count;
-					this.readhub_count = this.readhub_message.unread_count;
-					this.money_count = this.money_message.unread_count;
-					this.total_count =this.notice_count+this.task_count+this.readhub_count+this.money_count;
-					localEvent.setLocalItem("informCount"+this.mobile, {value: this.total_count});
+					
 					//	console.log(this.notice_message)；
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -187,9 +178,8 @@
 				}
 			});
 			this.getPrevList();
-			
-			//用户手机号；
-			this.mobile = getLocalUserInfo().phone;
+			this.messagecountchange();
+		
 			
 		}
 	}

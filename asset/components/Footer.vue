@@ -59,6 +59,8 @@
           <use xlink:href="#icon-wode1"></use>
         </svg>
       </div>
+      
+      
 
     </nav>
 
@@ -73,6 +75,7 @@
   import {socketResponseManage} from '../utils/socketResponeManage';
   import ShortTcutComponent from '../components/ShortTcut.vue';
   import Share from '../components/Share.vue';
+  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
 
   export default {
     data() {
@@ -83,6 +86,7 @@
         showBottom: true,
         isDiscover: false,
         taskCount: 0,
+        message_total_count:0,
         shareoption: {
           shareUrl: '',
           shareImg: '',
@@ -108,13 +112,15 @@
         //执行刷新
         if(this.showBottom) {
           console.log('refresh-task-count');
-
+         
           var taskCount = localEvent.getLocalItem('taskCount');
           if(taskCount.value) {
             this.taskCount = taskCount.value;
           }
+         
         }
       });
+      
     },
     methods: {
       share() {
@@ -173,9 +179,21 @@
         postRequest(`notification/count`, {}, false).then(response => {
           var code = response.data.code;
           if(code !== 1000) {
-            mui.alert(response.data.message);
+            mui.alert(response.donCountChangeata.message);
             return;
           }
+          //消息的数字角标；
+          var money_message = response.data.data.money_message.unread_count;
+          var notice_message = response.data.data.notice_message.unread_count;
+          var readhub_message = response.data.data.readhub_message.unread_count;
+          var task_message = response.data.data.task_message.unread_count;
+   
+          this.message_total_count = money_message+notice_message+readhub_message+task_message;
+ 
+          this.$emit('messagecountchange', this.message_total_count);
+          
+          
+          
           var taskCount = response.data.data.todo_tasks;
           setAppBadgeNumber(taskCount);
           this.onCountChange(taskCount);
