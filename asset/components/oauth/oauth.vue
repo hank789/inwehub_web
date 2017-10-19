@@ -72,6 +72,9 @@
                   return;
                 }
 
+                //如果返回token有值，则登陆成功，如果为null，走注册流程
+                var token = response.data.data.token;
+
                 self.$emit('success', nickname);
               });
             },function(e){
