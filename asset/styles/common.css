@@ -335,6 +335,10 @@ input, textarea, select{
   background: url("../statics/images/icon-drag.png");
 }
 
+.myicon-wechat{
+  background: url("../statics/images/wechat@2x.png");
+}
+
 a.mailLink{
   color:#4990e2;
 }

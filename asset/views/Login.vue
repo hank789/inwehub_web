@@ -41,6 +41,11 @@
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
 
+        <div class="wechatWrapper" @tap.stop.prevent="wechatLogin()">
+          <div class="myicon myicon-wechat"></div>
+          通过微信登录
+        </div>
+
     </div>
   </div>
 </template>
@@ -144,6 +149,38 @@
 //      }, 2000);
 //    },
     //变颜色；
+      applyLogin(service){
+        service.login((event) => {
+
+          /**
+           * event = {"target":{"id":"weixin","description":"微信","authResult":{"access_token":"4_eUux6wS6DdQFtVNocoaDhn-VZ9O8DS0sCetpNcgfFY_C3Mn_0ce5SAEHsSHbVB5Ll0Bv1JHrRB4zJfoNypGKZgh5uuu6cThNK_nRRBxAU","expires_in":7200,"refresh_token":"5IYQhpBkQZIZAHYZkeV5lsIhyoyjp9IR5ls9p3BH9DXW4b_DfTDaJB-PM9Y0vx5RJXIykVLofeP_geqpNsB7-7i12IYNmlm8WVqrlGl0kjQ","openid":"oRrdQt0jOFo3U6AGrYFHGxbuvNNY","scope":"snsapi_userinfo","unionid":"oU5Yyt0D6LharrpUKrFCUpNzEZ1U"},"userInfo":{"openid":"oRrdQt0jOFo3U6AGrYFHGxbuvNNY","nickname":"edwinจุ๊บ","sex":1,"language":"zh_CN","city":"浦东新区","province":"上海","country":"中国","headimgurl":"http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eofnBQqhryFQgcDRrn7p9ab5wY1EdMclF0jpQcCtibVrKr9tTibmTZJEPMavkczQ3T3gBIfy7mCH5mQ/0","privilege":[],"unionid":"oU5Yyt0D6LharrpUKrFCUpNzEZ1U"}}};
+           */
+          var openid = event.target.authResult.openid;
+          var access_token = event.target.authResult.access_token;
+
+           alert( "登录认证成功："+JSON.stringify(event) );
+        }, (err) => {
+          alert( "获取分享服务列表失败："+err.message+" - "+err.code );
+        }, {
+        });
+      },
+      wechatLogin(){
+        if (window.plus) {
+          plus.oauth.getServices((services) => {
+            console.log(services);
+            for(var i in services) {
+              if (services[i].id === 'weixin') {
+                this.applyLogin(services[i]);
+              }
+            }
+          }, function(e){
+            alert( "获取分享服务列表失败："+e.message+" - "+e.code );
+          } );
+        } else {
+            mui.toast('仅app内有效');
+        }
+
+      },
      focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
         event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
@@ -418,5 +455,22 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     /*color: #c8c8c8;*/
     left: 0;
 }
+
+  .wechatWrapper {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    margin-left: -57px;
+    font-size:14px;
+    color:#808080;
+  }
+
+  .myicon{
+    display: inline-block;
+    width:26px;
+    height:21px;
+    position: relative;
+    top:7px;
+  }
 </style>
 
