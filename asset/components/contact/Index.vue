@@ -210,6 +210,12 @@
     display: inline-block;
   }
 
+  @media screen and (max-width: 370px) {
+    .index-bar .index-bar-item {
+      line-height: 14px;
+    }
+  }
+
   .groupWrapper {
     background: #fff;
     padding-right: 30px;
