@@ -1,5 +1,5 @@
 <template>
-    <span @tap.stop.prevent="login('weixin')">{{ content }}</span>
+  <span @tap.stop.prevent="login('weixin')">{{ content }}</span>
 </template>
 
 <script>
@@ -7,19 +7,18 @@
 
   export default{
     data(){
-      return{
-        oauth_services:{},
+      return {
+        oauth_services: {},
         oauth_waiting: null
       }
     },
     props: {
-      content:{
+      content: {
         type: String,
         default: '绑定微信'
       },
     },
-    components:{
-    },
+    components: {},
     methods: {
       login(id){
 
@@ -30,27 +29,28 @@
 
         var self = this;
 
+        var auth = this.oauth_services[id];
+        if (auth) {
+          var w = null;
 
-        var auth=this.oauth_services[id];
-        if(auth){
-          var w=null;
-          if(plus.os.name=="Android"){
-            w=plus.nativeUI.showWaiting();
+          if (plus.os.name == "Android") {
+            w = plus.nativeUI.showWaiting();
           }
-          document.addEventListener("pause",function(){
-            setTimeout(function(){
-              w&&w.close();
-              w=null;
-            },2000);
-          }, false );
-          auth.login(()=>{
-            w&&w.close();
-            w=null;
+
+          document.addEventListener("pause", function () {
+            setTimeout(function () {
+              w && w.close();
+              w = null;
+            }, 2000);
+          }, false);
+          auth.login(() => {
+            w && w.close();
+            w = null;
             console.log(JSON.stringify(auth.authResult));
-            auth.getUserInfo(function(){
+            auth.getUserInfo(function () {
               console.log("获取用户信息成功：");
-              var nickname=auth.userInfo.nickname||auth.userInfo.name||auth.userInfo.miliaoNick;
-              postRequest(`oauth/weixinapp/callback`,{
+              var nickname = auth.userInfo.nickname || auth.userInfo.name || auth.userInfo.miliaoNick;
+              postRequest(`oauth/weixinapp/callback`, {
                 openid: auth.authResult.openid,
                 nickname: nickname,
                 avatar: auth.userInfo.headimgurl,
@@ -63,8 +63,8 @@
                 var code = response.data.code;
 
                 if (code === 1113) {
-                    mui.alert('该微信号已经绑定过其他InweHub账号，请更换其他微信账号绑定。如有疑惑请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了', null, 'div');
-                    return;
+                  mui.alert('该微信号已经绑定过其他InweHub账号，请更换其他微信账号绑定。如有疑惑请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了', null, 'div');
+                  return;
                 }
 
                 if (code !== 1000) {
@@ -75,58 +75,56 @@
                 //如果返回token有值，则登陆成功，如果为null，走注册流程
                 var token = response.data.data.token;
 
-                self.$emit('success', nickname);
+                self.$emit('success', token, auth.authResult.openid);
               });
-            },function(e){
-              console.log("获取用户信息失败：");
-              console.log("["+e.code+"]："+e.message);
-              mui.alert("获取用户信息失败！",null,"登录");
+            }, function (e) {
+              self.$emit('fail', "获取用户信息失败： [" + e.code + "]：" + e.message);
             });
 
-          },function(e){
-            w&&w.close();
-            w=null;
-            console.log("["+e.code+"]："+e.message);
-            mui.alert("",null,"登录失败["+e.code+"]："+e.message);
+          }, function (e) {
+            w && w.close();
+            w = null;
+            console.log("[" + e.code + "]：" + e.message);
+            self.$emit('fail', "获取用户信息失败： [" + e.code + "]：" + e.message);
           });
-        }else{
+        } else {
           console.log("无效的登录认证通道！");
-          mui.alert("无效的登录认证通道！",null,"登录");
+          self.$emit('fail', "无效的登录认证通道");
         }
       },
       logoutAll(){
         console.log("----- 注销登录认证 -----");
-        for(var i in auths){
+        for (var i in auths) {
           logout(auths[i]);
         }
       },
       logout(auth){
-        auth.logout(function(){
-          console.log("注销\""+auth.description+"\"成功");
-        },function(e){
-          console.log("注销\""+auth.description+"\"失败："+e.message);
+        auth.logout(function () {
+          console.log("注销\"" + auth.description + "\"成功");
+        }, function (e) {
+          console.log("注销\"" + auth.description + "\"失败：" + e.message);
         });
       }
     },
     mounted() {
-      mui.plusReady( () => {
+      mui.plusReady(() => {
         if (mui.os.plus) {
           // 获取登录认证通道
-          plus.oauth.getServices((services)=>{
-            for(var i in services){
-              var service=services[i];
-              if(service.id === 'weixin'){
-                this.oauth_services[service.id]=service;
+          plus.oauth.getServices((services) => {
+            for (var i in services) {
+              var service = services[i];
+              if (service.id === 'weixin') {
+                this.oauth_services[service.id] = service;
                 var is_installed = isInstalled(service.id);
-                if (!is_installed){
+                if (!is_installed) {
                   //plus.nativeUI.toast('您尚未安装微信客户端');
                   return;
                 }
 
               }
             }
-          },function(e){
-            console.log("获取登录认证失败："+e.message);
+          }, function (e) {
+            console.log("获取登录认证失败：" + e.message);
           });
         }
       });
@@ -146,7 +144,8 @@
           }
           try {
             return packageManager.getPackageInfo(packageName[id], PackageManager.GET_ACTIVITIES);
-          } catch (e) {}
+          } catch (e) {
+          }
         } else {
           switch (id) {
             case "qq":
