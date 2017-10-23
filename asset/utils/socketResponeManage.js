@@ -62,7 +62,7 @@ function socketResponseManage(notification, context) {
       break;
     case 'App\\Notifications\\NewMessage':
         //新的聊天信息；
-      
+        console.log(notification);
       
       
       
