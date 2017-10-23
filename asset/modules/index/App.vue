@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="immersedClass">
         <div v-wechat-title="wechatTitle"></div>
 
         <div class='view'>
@@ -34,6 +34,7 @@
   export default {
     data () {
       return {
+        immersedClass:'immersed' + window.immersedHeight,
         wechatTitle:this.$route.meta.title,
       }
     },
@@ -42,7 +43,7 @@
            if (this.$refs.routerView.messagecountchange) {
                this.$refs.routerView.messagecountchange(obj);
            }
-           
+
       },
       onCountChange(count){
           this.$refs.Footer.onCountChange(count);
