@@ -1,5 +1,14 @@
 function setStatusBarBackgroundAndStyle(baColor, style)
 {
+    if (window.plus) {
+      var ws = plus.webview.currentWebview();
+      if (!ws.isVisible()) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
     mui.plusReady(function () {
       if (mui.os.plus) {
         var ss = plus.navigator.getStatusBarBackground();
@@ -24,6 +33,16 @@ function getStatusBarBackgroundAndStyle(callback)
 
 function setStatusBarStyle(style)
 {
+
+  if (window.plus) {
+    var ws = plus.webview.currentWebview();
+    if (!ws.isVisible()) {
+      return false;
+    }
+  } else {
+    return false;
+  }
+
   mui.plusReady(function () {
     if (mui.os.plus) {
       plus.navigator.setStatusBarStyle(style);
@@ -35,6 +54,15 @@ function autoStatusBar(context)
 {
   if (!context) {
     context =  document.getElementById('router-view');
+  }
+
+  if (window.plus) {
+    var ws = plus.webview.currentWebview();
+    if (!ws.isVisible()) {
+      return false;
+    }
+  } else {
+    return false;
   }
 
 
@@ -88,10 +116,15 @@ function autoHeight(context)
     context = document;
   }
 
-  var ws = plus.webview.currentWebview();
-  if (!ws.isVisible()) {
+  if (window.plus) {
+    var ws = plus.webview.currentWebview();
+    if (!ws.isVisible()) {
       return false;
+    }
+  } else {
+    return false;
   }
+
 
   var immersed = 0;
   var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
