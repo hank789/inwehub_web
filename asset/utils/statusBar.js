@@ -88,6 +88,11 @@ function autoHeight(context)
     context = document;
   }
 
+  var ws = plus.webview.currentWebview();
+  if (!ws.isVisible()) {
+      return false;
+  }
+
   var immersed = 0;
   var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
   if ( ms && ms.length>=3) { // 当前环境为沉浸式状态栏模式
