@@ -116,7 +116,7 @@
             hash = to.query.redirect;
           }
           rebootAuth(hash);
-          return;
+          //return;
       }
 
 
