@@ -3,87 +3,67 @@
   <div class="mui-content">
     <div class="login">
       <svg class="icon logo" aria-hidden="true">
-		  <use xlink:href="#icon-logo"></use>
-	  </svg>
-<!--返回箭头-->
-      	<svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
-		  <use xlink:href="#icon-fanhui"></use>
-	  </svg>
+        <use xlink:href="#icon-logo"></use>
+      </svg>
+      <!--返回箭头-->
+      <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
+        <use xlink:href="#icon-fanhui"></use>
+      </svg>
       <!--账号密码输入框-->
 
-      <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-yaoqingma"></use>
-      </svg>
-      <input placeholder="请输入邀请码" @focus="focus" @blur="blur"  class="text" type="text" name="yqm" v-model.trim="registrationCode" autocomplete="off" @tap.stop.prevent="entryYqCode"/>
-     </div>
-     <div class="inputWrapper half">
-      <svg class="icon" aria-hidden="true" >
-        <use xlink:href="#icon-shoujihao"></use>
-      </svg>
-      <input placeholder="请输入手机号"  ref="phone"  @focus="focus" @blur="blur" v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"  @tap.stop.prevent="entryPhone" class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
+      <div class="inputWrapper" v-if="isNeedRegistrationCode">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yaoqingma"></use>
+        </svg>
+        <input placeholder="请输入邀请码" @focus="focus" @blur="blur" class="text" type="text" name="yqm"
+               v-model.trim="registrationCode" autocomplete="off" @tap.stop.prevent="entryYqCode"/>
+      </div>
+      <div class="inputWrapper half">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoujihao"></use>
+        </svg>
+        <input placeholder="请输入手机号" ref="phone" @focus="focus" @blur="blur"
+               v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @tap.stop.prevent="entryPhone"
+               class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
 
-      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
-      <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
-     </div>
-     <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-yanzhengma"></use>
-      </svg>
-      <input placeholder="请输入验证码" @focus="focus" @blur="blur" class="text" type="text" name="code" v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
-     </div>
-     <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-denglu"></use>
-      </svg>
-      <input placeholder="请输入真实姓名" @focus="focus" @blur="blur" class="text" type="text" name="username" v-model.trim="username" autocomplete="off" @tap.stop.prevent="entryUsername"/>
-     </div>
-     <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-mima"></use>
-      </svg>
-      <input placeholder="请输入登录密码" @focus="focus" @blur="blur" class="text" type="password" name="password" v-model.trim="password" autocomplete="off"/>
-     </div>
+        <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+        <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
+      </div>
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yanzhengma"></use>
+        </svg>
+        <input placeholder="请输入验证码" @focus="focus" @blur="blur" class="text" type="text" name="code"
+               v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
+      </div>
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-denglu"></use>
+        </svg>
+        <input placeholder="请输入真实姓名" @focus="focus" @blur="blur" class="text" type="text" name="username"
+               v-model.trim="username" autocomplete="off" @tap.stop.prevent="entryUsername"/>
+      </div>
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-mima"></use>
+        </svg>
+        <input placeholder="请输入登录密码" @focus="focus" @blur="blur" class="text" type="password" name="password"
+               v-model.trim="password" autocomplete="off"/>
+      </div>
 
-      <!--<div class="title">用户注册</div>
-      <div class="inputWrapper">
-        <input class="text" type="text" name="username" v-model.trim="username" autocomplete="off"/>
-        <label @tap.stop.prevent="entryUsername" v-show="showUsernameLabel">真实姓名</label>
+      <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span>
       </div>
-      <div class="inputWrapper">
-        <input class="text" type="text" name="yqm" v-model.trim="registrationCode" autocomplete="off"/>
-        <label @tap.stop.prevent="entryYqCode" v-show="showYqCodeLabel">邀请码</label>
-      </div>
-      <div class="inputWrapper">
-        <input class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off"/>
-        <label @tap.stop.prevent="entryPhone" v-show="showPhoneLabel">手机号码</label>
-      </div>
-      <div class="inputWrapper">
-        <input class="text" type="text" name="code" v-model.trim.num="code" autocomplete="off"/>
-        <label @tap.stop.prevent="entryYzm" v-show="showYzmLabel">验证码</label>
-        <span class="getYzm" @click.stop.prevent="getCode">{{ getCodeText }}</span>
-      </div>
-      <div class="inputWrapper">
-        <input class="text" type="password" name="password" v-model.trim="password" autocomplete="off"/>
-        <label @tap.stop.prevent="entryPassword" v-show="showPasswordLabel">登录密码</label>
-      </div>-->
-      <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
 
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"  @click.prevent="register" :disabled="disableRegister">确认</button>
-      <!--:disabled="disableRegister"-->
-      <div class="help" @tap.stop.prevent="jumpToForm">
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="register"
+              :disabled="disableRegister">确认
+      </button>
+
+      <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
         我没有邀请码?
-      </div>
 
-      <!--<div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading"
-                @click.prevent="register">注册
-
-        </button>-->
       </div>
     </div>
   </div>
-
 
 </template>
 
@@ -103,6 +83,7 @@
   const codeReg = /^[0-9]{4}$/;
   const register = {
     data: () => ({
+      isNeedRegistrationCode:false,
       phone: '', // 手机号码
       password: '', // 密码
       username: '', // 昵称
@@ -132,7 +113,7 @@
       formItem: {
         input: ''
       },
-      isRegisterSuccess:false,
+      isRegisterSuccess: false,
       isLoading: false // 登录loading
     }),
     computed: {
@@ -145,7 +126,6 @@
     },
     mounted(){
       this.getCacheData();
-
 
       mui(".login").on('focusout', 'input', (e) => {
         switch (e.target.name) {
@@ -210,78 +190,77 @@
       next();
     },
     methods: {
-    	 //判断否有值（改变button按钮的状态来改变颜色）；
+      //判断否有值（改变button按钮的状态来改变颜色）；
       checkValid(){
-//    console.log(this.phone,this.code,this.registrationCode,this.username,this.password)
-      	//手机；
+        //手机；
         if (!this.phone) {
           this.disableRegister = true;
           return false;
         }
-       //验证码；
+        //验证码；
         if (!this.code) {
           this.disableRegister = true;
           return false;
         }
         //邀请码；
-         if (!this.registrationCode) {
+        if (this.isNeedRegistrationCode && !this.registrationCode) {
           this.disableRegister = true;
           return false;
         }
-         //姓名；
-          if (!this.username) {
+        //姓名；
+        if (!this.username) {
           this.disableRegister = true;
           return false;
         }
-         //密码
-          if (!this.password) {
+        //密码
+        if (!this.password) {
           this.disableRegister = true;
           return false;
         }
 
         this.disableRegister = false;
       },
-    	//判断手机号是否为空；改变颜色（状态）；
-    	checkSendCodeValid(){
+      //判断手机号是否为空；改变颜色（状态）；
+      checkSendCodeValid(){
         if (!this.phone) {
           this.isCanGetCode = false;
           return false;
         }
 
         this.isCanGetCode = true;
-     },
-    	//提示
+      },
+      //提示
       showTip(obj, msg){
         this.errorMsg = msg;
         obj._tooltip.show();
         setTimeout(() => {
-       obj._tooltip.hide();
+          obj._tooltip.hide();
         }, 2000);
       },
-    	//弹窗；
-	warm(content,point, callback) {
-		var title =
-			'<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
-			'<use xlink:href="#icon-guanbi"></use>' +
-			'</svg>';
+      //弹窗；
+      warm(content, point, callback) {
+        var title =
+          '<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
+          '<use xlink:href="#icon-guanbi"></use>' +
+          '</svg>';
 
-	    var cont = '<p style="font-size:16px; margin-bottom:15px" >' +
-	                point +
-	                '</p>';
+        var cont = '<p style="font-size:16px; margin-bottom:15px" >' +
+          point +
+          '</p>';
 
-		    var alertobj = mui.alert(content, title, cont, (index, animate) => {
-		    		if (index.index === -1) {
+        var alertobj = mui.alert(content, title, cont, (index, animate) => {
+          if (index.index === -1) {
 //		    			console.log('fire');
-		    			callback();
-		    		}
-		    } , 'div');
+            callback();
+          }
+        }, 'div');
 
-		    document.getElementById('warmClosealert').onclick=() => {
-		       	alertobj.close({index:1, value:''});
-		    }
+        document.getElementById('warmClosealert').onclick = () => {
+          alertobj.close({index: 1, value: ''});
+        }
 
-	},
-    	focus(event){
+      },
+      focus(event){
         event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
         event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
         event.target.parentElement.className += ' focus';
@@ -292,7 +271,7 @@
         event.target.parentElement.className += ' blur';
       },
       jumpToForm(){
-          this.$router.pushPlus('/register/nocode');
+        this.$router.pushPlus('/register/nocode');
       },
       goback () {
         mui.back();
@@ -314,10 +293,10 @@
       },
       timer () {
         if (this.time > 0) {
-          this.isCanGetCode =  true;
+          this.isCanGetCode = true;
           this.time -= 1;
           if (this.time == 0) {
-            this.isCanGetCode = false ;
+            this.isCanGetCode = false;
             return;
           }
           setTimeout(this.timer, 1000)
@@ -383,23 +362,22 @@
       },
       // 获取验证码
       getCode () {
-        let mobile = this.phone?this.phone:'';
+        let mobile = this.phone ? this.phone : '';
         let type = 'register';
 
         if (!this.isCanGetCode) {
           return;
         }
 
-        if (!this.registrationCode) {
+        if (this.isNeedRegistrationCode && !this.registrationCode) {
           mui.toast("请输入邀请码");
           return;
         }
 
-        if (this.registrationCode.length < 6) {
+        if (this.isNeedRegistrationCode && this.registrationCode.length < 6) {
           mui.toast("邀请码至少6位");
           return;
         }
-
 
         if (mobile.length !== 11) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码');
@@ -421,22 +399,22 @@
               this.isCanGetCode = true;
               var message = response.data.message;
               //验证码超时 邀请码错误；
-			if(message.indexOf("邀请码错误") > 0 ){
-				  this.warm(message,'获取邀请码', () => {
-	           	     this.$router.push('/register/nocode');
-	              });
-			}
-			else if(message.indexOf("无效") > 0 ){
-				 this.warm(message,'重新发送', () => {
-              	 this.getCode();
-              });
-			}
-			else if(message.indexOf("超时") > 0 ){
-				 this.warm(message,'重新发送', () => {
-              	 this.getCode();
-              });
-			}
-			mui.toast(response.data.message);
+              if (message.indexOf("邀请码错误") > 0) {
+                this.warm(message, '获取邀请码', () => {
+                  this.$router.push('/register/nocode');
+                });
+              }
+              else if (message.indexOf("无效") > 0) {
+                this.warm(message, '重新发送', () => {
+                  this.getCode();
+                });
+              }
+              else if (message.indexOf("超时") > 0) {
+                this.warm(message, '重新发送', () => {
+                  this.getCode();
+                });
+              }
+              mui.toast(response.data.message);
 
               return;
             }
@@ -460,23 +438,23 @@
         this.isLoading = true;
         this.isDisabled = true;
 
-        if (!this.registrationCode) {
-           mui.toast("请输入邀请码");
+        if (this.isNeedRegistrationCode && !this.registrationCode) {
+          mui.toast("请输入邀请码");
 
           return;
         }
 
-         if (this.registrationCode.length < 6) {
+        if (this.isNeedRegistrationCode && this.registrationCode.length < 6) {
           mui.toast("邀请码至少6位");
           return;
         }
 
-         if (!phoneReg.test(this.phone)) {
-           this.showTip(this.$refs.phone, '请输入有效的手机号码');
+        if (!phoneReg.test(this.phone)) {
+          this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
         }
 
-         if (!this.code) {
+        if (!this.code) {
           mui.toast("请输入验证码");
           return;
         }
@@ -485,8 +463,6 @@
           mui.toast('验证码错误');
           return;
         }
-
-
 
         if (!this.username) {
           mui.toast("请输入真实姓名");
@@ -499,7 +475,6 @@
         } else if (this.username.length > 12 || this.username.length <= 1) {
           mui.toast("请输入2-12位姓名");
         }
-
 
         if (this.password.length < 6) {
           mui.toast("密码长度必须大于6位");
@@ -529,11 +504,11 @@
               //邀请码；
               var message = response.data.message;
 
-              if(message.indexOf("无效") > 0 ){
-				  this.wran(message,'获取邀请码', () => {
-	           	     this.$router.push('/register/nocode');
-	              });
-			}
+              if (message.indexOf("无效") > 0) {
+                this.wran(message, '获取邀请码', () => {
+                  this.$router.push('/register/nocode');
+                });
+              }
               mui.toast(response.data.message);
               return;
             }
@@ -555,7 +530,7 @@
                 appid: device_info.appid,
                 appkey: device_info.appkey,
                 device_type: plus.os.name === 'iOS' ? 2 : 1
-              },false).then(res => {
+              }, false).then(res => {
 
               });
             }
@@ -567,12 +542,19 @@
               if (process.env.NODE_ENV === 'production') {
                 // mixpanel
                 var app_version = localEvent.getLocalItem('app_version');
-                if (currentUser.user_id){
+                if (currentUser.user_id) {
                   window.mixpanel.identify(currentUser.user_id);
-                  window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+                  window.mixpanel.people.set({
+                    "email": currentUser.email,
+                    "app_version": app_version.version,
+                    "gender": currentUser.gender,
+                    "phone": currentUser.phone,
+                    "name": currentUser.name,
+                    "avatar": currentUser.avatar_url
+                  });
                 }
               }
-              this.$router.pushPlus('/my','',true,'none','none',true,true);
+              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
             }));
           })
           .catch(({response: {data = {}} = {}}) => {
@@ -590,7 +572,7 @@
 
     },
     watch: {
-     registrationCode: function (newValue, oldValue) {
+      registrationCode: function (newValue, oldValue) {
         this.checkValid();
       },
       phone: function (newMoney, oldValue) {
@@ -603,13 +585,13 @@
       },
       code: function (newValue, oldValue) {
         this.checkValid();
-	    },
-	    	username: function (newValue, oldValue) {
-		    this.checkValid();
-		},
-		password: function (newValue, oldValue) {
-		    this.checkValid();
-		},
+      },
+      username: function (newValue, oldValue) {
+        this.checkValid();
+      },
+      password: function (newValue, oldValue) {
+        this.checkValid();
+      },
     }
   }
 
@@ -627,10 +609,9 @@
     text-align: center;
   }
 
-
- /*协议*/
- .protocol {
-    color: rgb(128,128,128);
+  /*协议*/
+  .protocol {
+    color: rgb(128, 128, 128);
     font-size: 12px;
     width: 80%;
     margin-left: 10%;
@@ -641,16 +622,18 @@
   .protocol span {
     color: #3c95f9;
   }
-/*登录*/
-.button, .mui-btn {
+
+  /*登录*/
+  .button, .mui-btn {
     border-radius: 5px;
     width: 80%;
     margin-left: 10%;
     margin-top: 15px;
     margin-bottom: 15px;
 
-}
-   button {
+  }
+
+  button {
     border-radius: 5px;
 
     &:disabled {
@@ -661,15 +644,15 @@
     }
   }
 
- /*邀请码*/
+  /*邀请码*/
   .help {
     font-size: 14px;
     color: #3c95f9;
-    text-align:center;
+    text-align: center;
 
   }
-/*小箭头*/
 
+  /*小箭头*/
 
   .leftNav {
 
@@ -677,19 +660,19 @@
     left: 12px;
     top: 15px;
     font-size: 20px;
-     color: #808080;
+    color: #808080;
   }
 
- /*图标*/
-  .logo{
+  /*图标*/
+  .logo {
 
     font-size: 110px;
-     margin:40px 0 45px;
+    margin: 40px 0 45px;
 
   }
 
-/*输入框的内容*/
-   .inputWrapper .icon {
+  /*输入框的内容*/
+  .inputWrapper .icon {
     position: absolute;
     top: 5px;
     font-size: 22px;
@@ -716,8 +699,9 @@
       color: #3c95f9;
     }
   }
-/*验证码*/
-   .inputWrapper .getYzm {
+
+  /*验证码*/
+  .inputWrapper .getYzm {
     display: inline-block;
     font-size: 14px;
     color: #3c95f9;
@@ -754,25 +738,27 @@
     background: none;
     display: inline-block;
     height: 36px;
-    margin-left:15px;
+    margin-left: 15px;
   }
 
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #b4b4b6;
+  }
 
- input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    color:#b4b4b6;
-}
-input:-moz-placeholder, textarea:-moz-placeholder {
-    color:#b4b4b6;
-}
-input::-moz-placeholder, textarea::-moz-placeholder {
-    color:#b4b4b6;
-}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    color:#b4b4b6;
-}
+  input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #b4b4b6;
+  }
 
-/*手机号input输入框的调整*/
-.inputWrapper:nth-of-type(2) input {
+  input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #b4b4b6;
+  }
+
+  input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #b4b4b6;
+  }
+
+  /*手机号input输入框的调整*/
+  .inputWrapper:nth-of-type(2) input {
     color: #444;
     border: none;
     margin: 0;
@@ -784,9 +770,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     /*background: #ccc;*/
     width: 60%;
     margin-right: 40%;
-}
+  }
 
-.half:after {
+  .half:after {
     position: absolute;
     right: 36%;
     bottom: 3px;
@@ -796,29 +782,31 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     background-color: #dcdcdc;
-}
+  }
 
-/*2 3图标大小的微调*/
-.inputWrapper:nth-of-type(3) .icon{
+  /*2 3图标大小的微调*/
+  .inputWrapper:nth-of-type(3) .icon {
     position: absolute;
     top: 3px;
     font-size: 25px;
     /*color: #c8c8c8;*/
     left: 0;
-}
-.inputWrapper:nth-of-type(4) .icon{
+  }
+
+  .inputWrapper:nth-of-type(4) .icon {
     position: absolute;
     top: 3px;
     font-size: 25px;
     /*color: #c8c8c8;*/
     left: 0;
-}
-.inputWrapper:nth-of-type(5) .icon{
+  }
+
+  .inputWrapper:nth-of-type(5) .icon {
     position: absolute;
     top: 5px;
     font-size: 20px;
     /*color: #c8c8c8;*/
     left: 0;
-}
+  }
 
 </style>

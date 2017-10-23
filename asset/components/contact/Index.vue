@@ -14,7 +14,7 @@
                 <div class="avatarInner" @tap.stop.prevent="">
                   <img :src="item.avatar_url">
 
-                  <svg class="icon" aria-hidden="true" v-show="true">
+                  <svg class="icon" aria-hidden="true" v-show="item.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
@@ -43,7 +43,7 @@
 </template>
 <script type="text/babel">
   let pinyin = require('./pinyin')
-  let chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  let chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']
   export default{
     props: {
       list: {
@@ -164,7 +164,7 @@
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell {
     padding-left: 15px;
     color: #000000;
-
+    position: relative;
     background-color: #ffffff;
   }
 
@@ -210,6 +210,12 @@
     display: inline-block;
   }
 
+  @media screen and (max-width: 370px) {
+    .index-bar .index-bar-item {
+      line-height: 14px;
+    }
+  }
+
   .groupWrapper {
     background: #fff;
     padding-right: 30px;
@@ -237,6 +243,7 @@
   }
 
   .avatar .avatarInner {
+    position: relative;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -260,13 +267,24 @@
     display: block;
   }
 
+  .avatarInner .icon {
+    position: absolute;
+    right: -6px;
+    bottom: -1px;
+    font-size: 24px;
+    color: #03aef9;
+  }
+
   .tap-active {
     font-size: 14px;
     padding: 10px 0 4px;
   }
 
   .textBody {
-    display: inline-block;
+    position: absolute;
+    top:12px;
+    right:68px;
+    left:68px;
     vertical-align: top;
     color: #565656;
   }
@@ -291,7 +309,4 @@
     color: #fff;
   }
 
-  .name, .desc{
-    max-width: 200px;
-  }
 </style>

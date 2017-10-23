@@ -25,7 +25,7 @@
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.pushPlus('/contact/' + ask.id + '?username=' + ask.user_name + '&title=' + ask.description + '&answernum='+ask.answer_num+'&followednum='+ask.follow_num, 'list-detail-page-contact',true,'pop-in','hide',true)">
+                @tap.stop.prevent="toContact()">
           邀请回答
         </button>
       </div>
@@ -81,6 +81,13 @@
 
     },
     methods: {
+      toContact(){
+        var description = encodeURIComponent(this.ask.description.replace(/\s/g, ''));
+        var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''));
+        var answerNum = this.ask.answer_num?this.ask.answer_num:0;
+        var followedNum = this.ask.follow_num?this.ask.follow_num:0;
+        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum='+answerNum+'&followednum='+followedNum, 'list-detail-page-contact',true,'pop-in','hide',true);
+      },
       setFollowStatus(status){
         this.ask.is_followed=status;
       },

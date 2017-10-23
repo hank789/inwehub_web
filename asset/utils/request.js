@@ -41,6 +41,9 @@ export function apiRequest (url, data, showWaiting = true) {
       if (showWaiting){
         mui.closeWaiting();
       }
+
+      console.log('api-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
+
       var code = response.data.code;
       // 参数错误
       if (code === 1008) {
@@ -114,7 +117,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         mui.closeWaiting();
       }
 
-//    console.log('post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
+      console.log('post-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
 
       var code = response.data.code;
 

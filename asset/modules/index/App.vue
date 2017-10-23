@@ -42,7 +42,7 @@
            if (this.$refs.routerView.messagecountchange) {
                this.$refs.routerView.messagecountchange(obj);
            }
-           
+
       },
       onCountChange(count){
           this.$refs.Footer.onCountChange(count);
@@ -296,6 +296,9 @@
                 case 'free_answer_new_support':
                   //专业回答赞
                   router.pushPlus('/askCommunity/interaction/' + payload.object_id);
+                  break;
+                case 'im_message':
+                  //聊天信息
                   break;
               }
             };

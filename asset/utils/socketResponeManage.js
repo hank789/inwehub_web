@@ -60,6 +60,9 @@ function socketResponseManage(notification, context) {
       console.log(notification.body);
 
       break;
+    case 'App\\Notifications\\NewMessage':
+      //新的聊天信息
+      break;
   }
 
   switch (notification.notification_type) {
