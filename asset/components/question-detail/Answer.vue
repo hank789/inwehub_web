@@ -46,6 +46,7 @@
         :showShoucang="showShoucang"
         :collectNum="answer.collect_num"
         :isCollected="answer.is_collected?true:false"
+        :questionId="questionId"
         :showModifyBtn="answer.user_id === curUid?true:false"
         @supportNumDesc="supportNumDesc"
         @supportNumAdd="supportNumAdd"
@@ -91,6 +92,10 @@
       pay
     },
     props: {
+      questionId: {
+        type: Number,
+        default: 0
+      },
       answer: {
         type: Object,
         default: {}

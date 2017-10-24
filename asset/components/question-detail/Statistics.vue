@@ -68,6 +68,10 @@
         type: Number,
         default: 0
       },
+      questionId: {
+        type: Number,
+        default: 0
+      },
       seeNum: {
         type: Number,
         default: 0
@@ -105,7 +109,7 @@
     },
     methods: {
       modify(){
-         this.$router.pushPlus('/realAnswer/' + this.answerId, 'list-detail-page-realAnswer',true,'pop-in','hide',true);
+         this.$router.pushPlus('/realAnswer/' + this.questionId+'?answerId='+this.answerId, 'list-detail-page-realAnswer',true,'pop-in','hide',true);
       },
       collect(){
         var data = {
