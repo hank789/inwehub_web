@@ -961,6 +961,17 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { // answer
+    path: '/realAnswer/:id/:answerId',
+    name: 'answer-question',
+    component: require('../../../views/Answer/Answer.vue'),
+    meta: {
+      title: '回答'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //ask-comment
     path: '/askComment/:id',
     name: 'ask-feedback',

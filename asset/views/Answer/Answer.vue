@@ -50,17 +50,20 @@
       refreshPageData(){
          console.log('refreshPageData');
          this.getId();
-         console.log(this.id);
+
       },
       getId(){
         let id = parseInt(this.$route.params.id);
         this.id = id;
 
-        let answerId = parseInt(this.$route.query.answerId);
+        let answerId = parseInt(this.$route.params.answerId);
         if (answerId) {
             this.answerId = answerId;
             this.getDetail();
         }
+
+        console.log('id:' + this.id);
+        console.log('answerId:' + this.answerId);
       },
       cancelAnswer(){
 
