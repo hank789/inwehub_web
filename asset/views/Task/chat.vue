@@ -5,31 +5,26 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">客服小哈</h1>
     </header>
-    <RefreshList ref="RefreshList" v-model="list" 
-      :api="'im/messages'" 
-      :autoShowEmpty="false"
-      :pageMode="true" 
-      :prevOtherData="{page:1, contact_id:0}" 
-      :prevSuccessCallback="conut()" 
-      :nextOtherData="{contact_id:0}" 
-      :list="list" class="listWrapper">
-      <ul class="user">
+    <div class="mui-content absolute" id='contentwrapper'>
+    <RefreshList ref="RefreshList" v-model="list" :api="'im/messages'" :autoShowEmpty="false" :pageMode="true" :downLoadMoreMode="true" :isShowUpToRefreshDescription="false" :prevOtherData="{contact_id:0}" :nextOtherData="{contact_id:0}" :list="list" class="listWrapper">
+     <div id="myData">
+     <ul class="user"  v-for="item in list">
         <!--客服-->
-        <li class="consumer">
-          <p>8:00</p>
+        <li class="consumer" v-if="id != item.user_id">
+          <p>{{item.created_at}}</p>
           <p>
-            <img src="../../statics/images/balance2.png" />
+            <img src="../../statics/images/service1.png" />
             <span>
-                  客服客服客服客服客服客服客服客服
+                  {{item.data.text}}
              </span>
           </p>
 
         </li>
         <!--自己-->
-        <li class="Customerservice"   v-for="item in list" v-if="id = item.user_id">
-          <p >{{item.created_at}}</p>
+        <li class="Customerservice" v-if="id == item.user_id">
+          <p>{{item.created_at}}</p>
           <p>
-            <img src="../../statics/images/service1.png" />
+            <img :src="avatar" />
             <span>
                   {{item.data.text}}
             </span>
@@ -38,7 +33,7 @@
         </li>
 
       </ul>
-
+      </div>
     </RefreshList>
 
     <!--发送消息框-->
@@ -49,6 +44,7 @@
       </svg>
     </div>
     <!--发送消息框end-->
+  
   </div>
   </div>
 </template>
@@ -57,30 +53,46 @@
   import { postRequest } from '../../utils/request';
   import uploadHeader from '../../components/uploadHeader.vue';
   import RefreshList from '../../components/refresh/List.vue';
-  import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
+  import { getLocalUserInfo, isCompanyStatus } from '../../utils/user';
+  import localEvent from '../../stores/localStorage';
   const Chat = {
     data: () => ({
       list: [],
       page: 1,
-      comment:"",
-      userId:"",
-      id:""
+      comment: "",
+      id: "",
+      avatar: ""
+
     }),
     created() {
-       this.id = getLocalUserInfo().user_id;
-      console.log(this.id)
+      //id  和  头像；
+      this.id = getLocalUserInfo().user_id;
+      this.avatar = getLocalUserInfo().avatar_url;
+     
 
     },
     computed: {
-
+     sroll(){
+       document.getElementById('myData').scrollTop = document.getElementById('myData').scrollHeight;
+       console.warn(document.getElementById('myData').scrollTop)
+     }
     },
     components: {
       RefreshList
     },
     methods: {
-      conut() {
-        //this.page++;
-      },
+    chat(obj){
+       var item = {
+           created_at:obj.created_at,
+           data:{text:obj.body.text},
+           id:obj.id,
+           user_id:0,
+           avatar:obj.avatar,
+       };      
+       this.list = this.list.concat(item);
+        console.log(item);
+        console.log(this.list);
+    },
       // 消息；
       message() {
         let id = parseInt(this.$route.params.id);
@@ -96,14 +108,12 @@
               mui.back();
               return;
             }
-            if(response.data.data) {   
+            if(response.data.data) {
               this.comment = '';
-              this.list =  this.list.concat(response.data.data);
-              this.userId = response.data.data.user_id;
+              this.list = this.list.concat(response.data.data);
+              
             }
-            console.log(this.list);
-            console.log(this.userId);
-            this.loading = 0;
+             this.loading = 0;
           });
 
         }
@@ -112,8 +122,12 @@
       //end；
 
     },
-    mounted() {
-     
+    mounted() {     
+
+    },
+    updated(){
+      document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
+    
     }
   }
   export default Chat;
@@ -173,6 +187,7 @@
     width: 96%;
     margin-left: 2%;
     overflow: hidden;
+    /*background: #CCCCCC;*/
   }
   
   .user li {
@@ -256,6 +271,7 @@
     width: 42px;
     height: 42px;
     float: right;
+    border-radius: 8px;
   }
   
   .Customerservice p:nth-of-type(2) span {
@@ -290,7 +306,7 @@
   }
   
   .listWrapper {
-    bottom: 50px;
-    top: 40px;
+    bottom:47px;
+    
   }
 </style>

@@ -187,8 +187,10 @@
           var notice_message = response.data.data.notice_message.unread_count;
           var readhub_message = response.data.data.readhub_message.unread_count;
           var task_message = response.data.data.task_message.unread_count;
-   
-          this.message_total_count = money_message+notice_message+readhub_message+task_message;
+          var im_messages = response.data.data.im_messages.length >0 ?response.data.data.im_messages[0].unread_count : 0;
+          this.message_total_count = money_message+notice_message+readhub_message+task_message+im_messages;
+           
+//         console.log(im_messages)
  
           this.$emit('messagecountchange', this.message_total_count);
           
