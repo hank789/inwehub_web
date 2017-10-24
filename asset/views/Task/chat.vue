@@ -5,41 +5,39 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">客服小哈</h1>
     </header>
-    <RefreshList ref="RefreshList" 
-      v-model="list" 
+    <RefreshList ref="RefreshList" v-model="list" 
       :api="'im/messages'" 
-      :pageMode="true"
+      :autoShowEmpty="false"
+      :pageMode="true" 
       :prevOtherData="{page:1, contact_id:0}" 
-      :prevSuccessCallback="conut()"
-      :nextOtherData="{contact_id:0}"
-       :list="list" 
-       class="listWrapper">
-        <ul class="user">
-          <!--客服-->
-          <li class="consumer">
-            <p>8:00</p>
-            <p>
-              <img src="../../statics/images/balance2.png" />
-              <span>
+      :prevSuccessCallback="conut()" 
+      :nextOtherData="{contact_id:0}" 
+      :list="list" class="listWrapper">
+      <ul class="user">
+        <!--客服-->
+        <li class="consumer">
+          <p>8:00</p>
+          <p>
+            <img src="../../statics/images/balance2.png" />
+            <span>
                   客服客服客服客服客服客服客服客服
-                </span>
+             </span>
+          </p>
 
-            </p>
-
-          </li>
-          <!--自己-->
-          <li class="Customerservice" v-for="item in list">
-            <p>{{item.created_at}}</p>
-            <p>
-              <img src="../../statics/images/service1.png" />
-              <span>
+        </li>
+        <!--自己-->
+        <li class="Customerservice"   v-for="item in list" v-if="id = item.user_id">
+          <p >{{item.created_at}}</p>
+          <p>
+            <img src="../../statics/images/service1.png" />
+            <span>
                   {{item.data.text}}
-                </span>
-            </p>
+            </span>
+          </p>
 
-          </li>
+        </li>
 
-        </ul>
+      </ul>
 
     </RefreshList>
 
@@ -51,7 +49,7 @@
       </svg>
     </div>
     <!--发送消息框end-->
-    </div>
+  </div>
   </div>
 </template>
 
@@ -59,24 +57,28 @@
   import { postRequest } from '../../utils/request';
   import uploadHeader from '../../components/uploadHeader.vue';
   import RefreshList from '../../components/refresh/List.vue';
+  import {getLocalUserInfo, isCompanyStatus} from '../../utils/user';
   const Chat = {
     data: () => ({
       list: [],
-      page:1,
-      comment:""
+      page: 1,
+      comment:"",
+      userId:"",
+      id:""
     }),
     created() {
+       this.id = getLocalUserInfo().user_id;
+      console.log(this.id)
 
     },
     computed: {
-     
 
     },
     components: {
       RefreshList
     },
     methods: {
-      conut(){
+      conut() {
         //this.page++;
       },
       // 消息；
@@ -94,13 +96,13 @@
               mui.back();
               return;
             }
-            console.log(response.data.data)
-            if(response.data.data) {
+            if(response.data.data) {   
               this.comment = '';
-
+              this.list =  this.list.concat(response.data.data);
+              this.userId = response.data.data.user_id;
             }
-            this.getPrevList();
-
+            console.log(this.list);
+            console.log(this.userId);
             this.loading = 0;
           });
 
@@ -108,13 +110,10 @@
 
       }
       //end；
-    
 
     },
     mounted() {
-      
-      
-
+     
     }
   }
   export default Chat;
@@ -290,8 +289,8 @@
     margin: auto;
   }
   
-  .listWrapper{
-    bottom:50px;
+  .listWrapper {
+    bottom: 50px;
     top: 40px;
   }
 </style>
