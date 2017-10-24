@@ -46,6 +46,8 @@
         :showShoucang="showShoucang"
         :collectNum="answer.collect_num"
         :isCollected="answer.is_collected?true:false"
+        :questionId="questionId"
+        :showModifyBtn="answer.user_id === curUid?true:false"
         @supportNumDesc="supportNumDesc"
         @supportNumAdd="supportNumAdd"
         @setSupportStatus="setSupportStatus"
@@ -63,9 +65,12 @@
   import Statistics from './Statistics.vue';
   import pay from '../../components/pay/pay.vue';
   import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import {getLocalUserInfo} from '../../utils/user';
+
 
   export default {
     data () {
+      var user = getLocalUserInfo();
       return {
         editorOptionRead: {
           placeholder: ' ',
@@ -76,6 +81,7 @@
         },
         editorReadObj: {},
         money: 1,
+        curUid:user.user_id,
         pay_object_type: 'view_answer'
       }
     },
@@ -86,6 +92,10 @@
       pay
     },
     props: {
+      questionId: {
+        type: Number,
+        default: 0
+      },
       answer: {
         type: Object,
         default: {}

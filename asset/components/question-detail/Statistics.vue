@@ -10,7 +10,27 @@
       <span>{{ commentNum }}</span>
     </div>
 
-    <div class="item" v-if="!showShoucang">
+
+    <div class="item active" v-if="showModifyBtn" @tap.stop.prevent="modify()">
+      <div class="iconWrapper modifyWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xiugai"></use>
+        </svg>
+      </div>
+      <span>修改</span>
+    </div>
+
+
+    <div class="item" :class="{active:isCollected}" @tap.stop.prevent="collect()" v-else-if="showShoucang">
+      <div class="iconWrapper showcangWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucangxingxing"></use>
+        </svg>
+      </div>
+      <span>{{ collectNum }}</span>
+    </div>
+
+    <div class="item" v-else>
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gongkai"></use>
@@ -19,14 +39,7 @@
       <span>{{ seeNum }}</span>
     </div>
 
-    <div class="item" :class="{active:isCollected}" @tap.stop.prevent="collect()" v-else>
-      <div class="iconWrapper showcangWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-        </svg>
-      </div>
-      <span>{{ collectNum }}</span>
-    </div>
+
 
     <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
       <div class="iconWrapper">
@@ -52,6 +65,10 @@
     components: {},
     props: {
       commentNum: {
+        type: Number,
+        default: 0
+      },
+      questionId: {
         type: Number,
         default: 0
       },
@@ -82,11 +99,18 @@
       showShoucang:{
           type:Boolean,
           default:false
+      },
+      showModifyBtn:{
+        type:Boolean,
+        default:false
       }
     },
     created(){
     },
     methods: {
+      modify(){
+         this.$router.pushPlus('/realAnswer/' + this.questionId+'?answerId='+this.answerId, 'list-detail-page-realAnswer',true,'pop-in','hide',true);
+      },
       collect(){
         var data = {
           id: this.answerId
@@ -186,6 +210,15 @@
 
   .item:nth-child(3) .iconWrapper{
     font-size: 18px;
+  }
+
+  .modifyWrapper{
+    font-size:16px !important;
+  }
+
+  .modifyWrapper .icon{
+    position: relative;
+    top:-1px;
   }
 
   .statistics {
