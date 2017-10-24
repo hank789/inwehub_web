@@ -69,7 +69,16 @@
 								<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 								<i class="bot"></i>
 							</li>
-   
+							<li @tap.stop.prevent="$router.pushPlus('/chat')">
+             	 	<img src="../../statics/images/service1.png" />
+             	 	<div class="message">{{99}}</div>
+             	 	<p>
+             	 	   <span>客服小哈</span>
+             	 	   <span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款</span>
+             	 	</p>
+             	 	<a>16:44</a>
+             	 	<i class="bot"></i>
+      				  </li>
 						</ul>
 					</div>
 				</div>
