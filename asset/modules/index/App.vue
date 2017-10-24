@@ -10,6 +10,7 @@
         </div>
         <FooterComponent ref="Footer" id="Footer"
           @messagecountchange="messagecountchange"
+          @chat ="chat"
           ></FooterComponent>
         <div id="toast"></div>
         <OpenAppComponent></OpenAppComponent>
@@ -43,6 +44,12 @@
                this.$refs.routerView.messagecountchange(obj);
            }
 
+      },
+      //聊天推送的内容；
+      chat(obj){
+        if (this.$refs.routerView.chat) {
+               this.$refs.routerView.chat(obj);
+           }
       },
       onCountChange(count){
           this.$refs.Footer.onCountChange(count);

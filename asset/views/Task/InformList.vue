@@ -69,14 +69,14 @@
 								<a>{{readhub_message.last_message ? readhub_message.last_message.created_at:''}}</a>
 								<i class="bot"></i>
 							</li>
-							<li @tap.stop.prevent="$router.pushPlus('/chat')">
-             	 	<img src="../../statics/images/service1.png" />
-             	 	<div class="message">{{99}}</div>
+							<li @tap.stop.prevent="skip(5)">
+             	 	<img :src="im_messages.avatar"  class="radius"/>
+             	 	<div class="message" v-if="im_messages_count != 0">{{im_messages_count}}</div>
              	 	<p>
-             	 	   <span>客服小哈</span>
-             	 	   <span class="mui-ellipsis">===关于我们===Inwehub是一款一款一款一款</span>
+             	 	   <span class="mui-ellipsis">{{im_messages.name ?  im_messages.name : ""}}</span>
+             	 	   <span class="mui-ellipsis">{{im_messages.last_message ? im_messages.last_message.text : ""}}</span>
              	 	</p>
-             	 	<a>16:44</a>
+             	 	<a>{{im_messages.last_message ? im_messages.last_message.created_at : ""}}</a>
              	 	<i class="bot"></i>
       				  </li>
 						</ul>
@@ -99,13 +99,15 @@
 			task_message: {}, //未读任务动态数
 			readhub_message: {}, //未读阅读发现数
 			money_message: {}, //未读资金变动数
+			im_messages:[],//未读消息变动数
 			notice_count: 0,
 			task_count: 0,
 			readhub_count: 0,
 			money_count: 0,
 			loading: true,
 			total_count:0,
-			mobile:0
+			mobile:0,
+			im_messages_count:0
 		}),
 		methods: {
 		  messagecountchange(obj){
@@ -130,7 +132,11 @@
 						this.readhub_count = 0;
 						this.$router.pushPlus('/readbar');
 						break;
-
+						
+          case 5:
+            this.im_messages_count = 0;
+            this.$router.pushPlus('/chat');
+            break;
 				}
 
 			},
@@ -155,14 +161,15 @@
 					this.task_message = response.data.data.task_message;
 					this.readhub_message = response.data.data.readhub_message;
 					this.money_message = response.data.data.money_message;
+					this.im_messages = response.data.data.im_messages[0] ? response.data.data.im_messages[0] : [];
 
           this.notice_count = this.notice_message.unread_count;
           this.task_count = this.task_message.unread_count;
           this.readhub_count = this.readhub_message.unread_count;
           this.money_count = this.money_message.unread_count;
-
-					
-//					console.log(this.notice_message,this.task_message,this.readhub_message,this.money_message);
+          this.im_messages_count = this.im_messages.length > 0 ? this.im_messages[0].unread_count : 0;
+          
+					console.log(this.im_messages)
 					this.loading = 0;
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
@@ -348,5 +355,9 @@
     min-height: 15px;
     border-radius: 15px;
     line-height: 15px;
+	}
+	
+	.radius{
+	  border-radius: 10px;
 	}
 </style>
