@@ -132,7 +132,7 @@
 
     <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
     <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-      <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && isShowItemJobMore)" :jobIndex="jobIndex">
+      <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
         <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
         <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
         <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
@@ -189,7 +189,7 @@
 
     <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
     <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-      <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && isShowitemEduMore)" :eduIndex="eduIndex">
+      <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
         <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
         <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
           class="separate"></i>{{ edu.major }}
