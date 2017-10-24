@@ -1,21 +1,23 @@
 <template>
-  <div id="app">
-        <div v-wechat-title="wechatTitle"></div>
+  <div id="app" :class="immersedClass">
+    <div v-wechat-title="wechatTitle"></div>
 
-        <div class='view'>
-          <keep-alive>
-            <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
-          </keep-alive>
-          <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView" @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
-        </div>
-        <FooterComponent ref="Footer" id="Footer"
-          @messagecountchange="messagecountchange"
-          @chat ="chat"
-          ></FooterComponent>
-        <div id="toast"></div>
-        <OpenAppComponent></OpenAppComponent>
-        <inwehubDialog ref="inwehubDialog"></inwehubDialog>
-        <MessageComponent ref="MessageComponent"></MessageComponent>
+    <div class='view'>
+      <keep-alive>
+        <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+                     @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+      </keep-alive>
+      <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+                   @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
+    </div>
+    <FooterComponent ref="Footer" id="Footer"
+                     @messagecountchange="messagecountchange"
+                     @chat="chat"
+    ></FooterComponent>
+    <div id="toast"></div>
+    <OpenAppComponent></OpenAppComponent>
+    <inwehubDialog ref="inwehubDialog"></inwehubDialog>
+    <MessageComponent ref="MessageComponent"></MessageComponent>
   </div>
 </template>
 
@@ -35,27 +37,28 @@
   export default {
     data () {
       return {
-        wechatTitle:this.$route.meta.title,
+        immersedClass: 'immersed' + window.immersedHeight,
+        wechatTitle: this.$route.meta.title,
       }
     },
     methods: {
       messagecountchange(obj){
-           if (this.$refs.routerView.messagecountchange) {
-               this.$refs.routerView.messagecountchange(obj);
-           }
+        if (this.$refs.routerView.messagecountchange) {
+          this.$refs.routerView.messagecountchange(obj);
+        }
 
       },
       //聊天推送的内容；
       chat(obj){
         if (this.$refs.routerView.chat) {
-               this.$refs.routerView.chat(obj);
-           }
+          this.$refs.routerView.chat(obj);
+        }
       },
       onCountChange(count){
-          this.$refs.Footer.onCountChange(count);
+        this.$refs.Footer.onCountChange(count);
       },
       onChangeWechatTitle(title) {
-          this.wechatTitle = title;
+        this.wechatTitle = title;
       },
       goRecommand: function () {
         this.expertNav();
@@ -96,9 +99,17 @@
         // mixpanel
         window.mixpanel.init("688ee16000ddf4f44891e06b79847d4e");
         var app_version = localEvent.getLocalItem('app_version');
-        if (currentUser.user_id){
+        if (currentUser.user_id) {
           window.mixpanel.identify(currentUser.user_id);
-          window.mixpanel.people.set({ "email": currentUser.email,"user_level": currentUser.user_level, "app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
+          window.mixpanel.people.set({
+            "email": currentUser.email,
+            "user_level": currentUser.user_level,
+            "app_version": app_version.version,
+            "gender": currentUser.gender,
+            "phone": currentUser.phone,
+            "name": currentUser.name,
+            "avatar": currentUser.avatar_url
+          });
         }
       }
 
@@ -117,7 +128,8 @@
               top: '0px',
               dock: 'top',
               bottom: '50px',
-              bounce:'none'},
+              bounce: 'none'
+            },
             extras: {preload: true}
           });
           mui.preload({
@@ -129,16 +141,15 @@
             extras: {preload: true}
           });
 
-          console.log("inwehub_embed:"+inwehub_embed_view.getURL());
-          if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url){
-            console.log('inwehub_embed:reload:'+ url);
+          console.log("inwehub_embed:" + inwehub_embed_view.getURL());
+          if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url) {
+            console.log('inwehub_embed:reload:' + url);
             inwehub_embed_view.loadURL(url);
           }
           mui.init({
-            swipeBack:true, //启用右滑关闭功能
+            swipeBack: true, //启用右滑关闭功能
             beforeback: goBack
           });
-
 
           var ws = plus.webview.currentWebview();
           console.log('bindEvent-runtime:' + plus.runtime.appid);
@@ -146,7 +157,7 @@
           //监听自定义事件，前往页面
           document.addEventListener('go_to_target_page', (event) => {
             var url = event.detail.url;
-            console.log('go_to_target_page:'+url);
+            console.log('go_to_target_page:' + url);
             router.push(url);
           });
           // 只在主页面监听一次
@@ -165,7 +176,7 @@
             var noticeTo = function (payload) {
               if (window.mixpanel.track) {
                 window.mixpanel.track(
-                  'inwehub:push:click:'+ payload.object_type,
+                  'inwehub:push:click:' + payload.object_type,
                   {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "打开推送"}
                 );
               }
@@ -175,7 +186,7 @@
                 case 'question_answer_confirmed':
                   // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   //router.go(-1);
-                  router.pushPlus('/ask/' + payload.object_id+ '?time=' + Date.parse(new Date()));
+                  router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   break;
                 case 'free_question_answered':
                   router.pushPlus('/askCommunity/interaction/' + payload.object_id);
@@ -233,7 +244,7 @@
                       article_url: payload.object.view_url,
                       article_title: payload.object.title,
                       article_comment_url: payload.object.comment_url,
-                      article_img_url:payload.object.img_url,
+                      article_img_url: payload.object.img_url,
                       preload: true
                     };
                     var article_ws = mui.openWindow({
@@ -253,7 +264,7 @@
                       },
                       extras: article_params
                     });
-                    mui.fire(article_ws,'load_article',article_params);
+                    mui.fire(article_ws, 'load_article', article_params);
                   }
                   break;
                 case 'push_notice_app_self':
@@ -280,13 +291,13 @@
                   });
                   break;
                 case 'notification_level_up':
-                    // 用户积分等级提升;
-                    userAbility.upgradeLevel(this);
-                    break;
+                  // 用户积分等级提升;
+                  userAbility.upgradeLevel(this);
+                  break;
                 case 'activity_enroll_fail':
                 case 'activity_enroll_success':
-                    // 活动报名事件
-                  router.pushPlus("/EnrollmentStatus/"+payload.object_id);
+                  // 活动报名事件
+                  router.pushPlus("/EnrollmentStatus/" + payload.object_id);
                   break;
                 case 'pay_answer_new_comment':
                   //专业回答新的回复
@@ -356,18 +367,18 @@
                   var payload = JSON.parse(msg.payload);
                 }
                 /*var repeatKey = payload.object_type + payload.object_id;
-                var isRepeat = localEvent.getLocalItem(repeatKey);
-                if (isRepeat.key) {
-                  return;
-                } else {
-                  localEvent.setLocalItem(repeatKey,{key:repeatKey});
-                }*/
+                 var isRepeat = localEvent.getLocalItem(repeatKey);
+                 if (isRepeat.key) {
+                 return;
+                 } else {
+                 localEvent.setLocalItem(repeatKey,{key:repeatKey});
+                 }*/
 
                 setIncBadgeNumber();
 
                 console.log('接收到通知:' + payload.title);
                 self.$refs.MessageComponent.show(payload.title, () => {
-                    noticeTo(payload);
+                  noticeTo(payload);
                 });
               }
 
@@ -375,7 +386,7 @@
           }
         } else {
           mui.init({
-            swipeBack:true, //启用右滑关闭功能
+            swipeBack: true, //启用右滑关闭功能
             beforeback: goBack
           });
         }
