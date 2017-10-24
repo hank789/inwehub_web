@@ -42,7 +42,7 @@
 
     </div>
 
-    <oauth ref="oauth" @success="wechatLoginSuccess" @fail="wechatLoginFail" style="display:none"></oauth>
+    <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail" style="display:none"></oauth>
 
   </div>
 </template>

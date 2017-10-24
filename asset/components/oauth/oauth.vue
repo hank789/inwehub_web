@@ -1,5 +1,5 @@
 <template>
-  <span @tap.stop.prevent="login('weixin')">{{ content }}</span>
+  <span @tap.stop.prevent="login('weixin')" v-show="isShowBtn">{{ content }}</span>
 </template>
 
 <script>
@@ -16,6 +16,10 @@
       content: {
         type: String,
         default: '绑定微信'
+      },
+      isShowBtn: {
+        type: Boolean,
+        default: true
       },
     },
     components: {},
