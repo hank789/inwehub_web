@@ -27,6 +27,10 @@
         type: Boolean,
         default: true
       },
+      downLoadMoreMode:{  //下来加载更多模式
+        type: Boolean,
+        default: false
+      },
       api: {
         type: String,
         default: ''
@@ -51,6 +55,27 @@
         type: Function,
         default: null
       },
+      contentdown:{
+        type: String,
+        default: '下拉可以刷新'
+      },
+      contentover:{
+        type: String,
+        default: '释放立即刷新'
+      },
+      downcontentrefresh:{
+        type: String,
+        default: '正在刷新...'
+      },
+      upcontentrefresh:{
+        type: String,
+        default: '正在加载...'
+      },
+      upcontentnomore:{
+        type: String,
+        default: '没有更多数据了'
+      },
+
       pageMode: {
         type: Boolean,
         default: false
@@ -84,6 +109,53 @@
         this.loading = 1;
         this.prevOtherData = prevOtherData;
         this.getPrevList();
+      },
+      getDownLoadMoreModePrevList(){
+
+        if (this.pageMode) {
+          var param = {
+            page: this.currentPage + 1
+          }
+        } else {
+          var param = {
+            bottom_id: this.bottomId
+          };
+        }
+
+
+        param = Object.assign(param, this.prevOtherData);
+
+        console.log(JSON.stringify(param));
+
+        postRequest(this.api, param).then(response => {
+          var code = response.data.code;
+
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+
+          var list = response.data.data;
+
+          if (this.pageMode) {
+            list = response.data.data.data;
+            this.currentPage = response.data.data.current_page;
+          }
+
+          if (list) {
+            this.list = list.concat(this.list);
+          }
+
+          this.loading = false;
+          if (mui('#refreshContainer').length) {
+            mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+          }
+
+          if (this.prevSuccessCallback) {
+            this.prevSuccessCallback();
+          }
+        });
       },
       getPrevList(){
         var param = {};
@@ -126,6 +198,11 @@
             this.prevSuccessCallback();
           }
         });
+      },
+      getDownLoadMoreModeNextList(){
+        if (mui('#refreshContainer').length) {
+          mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+        }
       },
       getNextList(){
 
@@ -186,15 +263,15 @@
           container: "#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
           down: {
             auto: true,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown: "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.getPrevList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            contentdown: this.contentdown?this.contentdown:"下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover:this.contentover?this.contentover:"释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentrefresh: this.downcontentrefresh?this.downcontentrefresh:"正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+            callback: this.downLoadMoreMode?this.getDownLoadMoreModePrevList:this.getPrevList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
           },
           up: {
-            contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.getNextList
+            contentrefresh: this.upcontentrefresh?this.upcontentrefresh:'正在加载...',
+            contentnomore: this.upcontentnomore?this.upcontentnomore:'没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            callback: this.downLoadMoreMode?this.getDownLoadMoreModeNextList:this.getNextList
           }
         }
       });
