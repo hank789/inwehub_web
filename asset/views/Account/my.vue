@@ -176,7 +176,7 @@
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
     import userAbility from '../../utils/userAbility';
    import {alertMajorCommentSuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
-  
+
 
 	export default {
 		data() {
@@ -347,8 +347,6 @@
 		},
 		mounted() {
 
-       
- 
 
 		}
 	}
@@ -660,4 +658,8 @@
 	.mui-popup-inner {
 		padding: 23px 15px 1px 15px;
 	}
+
+  .mui-content{
+    background: #fff;
+  }
 </style>

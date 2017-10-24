@@ -1,3 +1,9 @@
+var defaultBgColor = '#3c3e44';
+var defaultMode = 'light';
+var defaultBackground = '';
+
+var bgColor = null, mode = null, background = null;
+
 function setStatusBarBackgroundAndStyle(baColor, style)
 {
     if (window.plus) {
@@ -45,33 +51,16 @@ function setStatusBarStyle(style)
 
   mui.plusReady(function () {
     if (mui.os.plus) {
+      console.log("statusBarStyle:" + style);
       plus.navigator.setStatusBarStyle(style);
     }
   });
 }
 
-function autoStatusBar(context)
-{
-  if (!context) {
-    context =  document.getElementById('router-view');
-  }
-
-  if (window.plus) {
-    var ws = plus.webview.currentWebview();
-    if (!ws.isVisible()) {
-      return false;
-    }
-  } else {
-    return false;
-  }
-
-
-  var defaultBgColor = '#3c3e44';
-  var defaultMode = 'light';
-  var defaultBackground = '';
-
-  var bgColor = null, mode = null, background = null;
-
+/**
+ * 获取页面配置
+ */
+function getPageConfig(){
   var statusBarStyleElement = context.querySelector('#statusBarStyle');
 
   if (statusBarStyleElement) {
@@ -80,6 +69,15 @@ function autoStatusBar(context)
     mode = statusBarStyleElement.getAttribute('mode');
     background = statusBarStyleElement.getAttribute('background');
   }
+}
+
+function autoStatusBar(context)
+{
+  if (!context) {
+    context =  document.getElementById('router-view');
+  }
+
+  getPageConfig();
 
   bgColor = bgColor?bgColor:defaultBgColor;
   mode = mode?mode:defaultMode;
@@ -125,36 +123,24 @@ function autoHeight(context)
     return false;
   }
 
+  autoStatusBar();
+}
 
+
+function getImmersedHeight(){
   var immersed = 0;
-  var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
-  if ( ms && ms.length>=3) { // 当前环境为沉浸式状态栏模式
-
-    var immersed = parseFloat(ms[2]);// 获取状态栏的高度
-    document.body.className += " immersed";
-
-    var immersedPaddingTops = document.getElementsByClassName('immersedPaddingTop');
-    if (immersedPaddingTops && immersedPaddingTops.length) {
-      for (var i=0; i<immersedPaddingTops.length; i++ ) {
-        immersedPaddingTops[i].style.paddingTop = immersed + 'px';
-      }
-    }
-
-    var immersedTops = document.getElementsByClassName('immersedTop');
-
-    if (immersedTops && immersedTops.length) {
-      for (var i=0; i<immersedTops.length; i++ ) {
-        immersedTops[i].style.top = immersed + 'px';
-      }
-    }
+  var ms=(/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
+  if(ms&&ms.length>=3){ // 当前环境为沉浸式状态栏模式
+    immersed=parseFloat(ms[2]);// 获取状态栏的高度
   }
-
-  autoStatusBar(context);
+  console.log('immersed:' + immersed);
+  return immersed;
 }
 
 export {
   setStatusBarStyle,
   setStatusBarBackgroundAndStyle,
   getStatusBarBackgroundAndStyle,
-  autoHeight
+  autoHeight,
+  getImmersedHeight
 };

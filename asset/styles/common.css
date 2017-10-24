@@ -1286,3 +1286,30 @@ ul.normal li:before {
 .hideUpToRefreshDescription .mui-pull-bottom-pocket{
   display: none !important;
 }
+
+/* 沉浸式状态栏 start */
+.immersed20 .mui-bar-nav{
+  padding-top: 20px;
+  height:64px;
+}
+
+.immersed20 .mui-content{
+  padding-top:20px;
+}
+
+.immersed20 .mui-content.absolute{
+  padding-top:0;
+}
+
+.immersed20 .mui-bar-nav ~ .mui-content{
+  padding-top:64px;
+}
+
+.immersed20 .mui-bar-nav ~ .mui-content.absolute{
+   top:64px;
+   padding-top:0;
+}
+.immersed20 .shareBtn{
+   top:30px;
+}
+/* 沉浸式状态栏 end */

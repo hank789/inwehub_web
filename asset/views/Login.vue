@@ -1,5 +1,5 @@
 <template>
-  <div class="mui-content">
+  <div class="mui-content absolute">
     <div class="login">
 
       <svg class="icon logo" aria-hidden="true">
@@ -442,6 +442,10 @@
     height: 21px;
     position: relative;
     top: 7px;
+  }
+
+  .mui-content{
+    background-color:#f3f4f6;
   }
 </style>
 
