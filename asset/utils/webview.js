@@ -6,9 +6,13 @@ import localEvent from '../stores/localStorage';
  */
 function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='hide', reload = false) {
     mui.plusReady(function(){
-
       console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id);
 
+      var preload_back_close = true;
+      if (id === url) {
+        //非特殊页面返回时关闭webview
+        preload_back_close = false;
+      }
       var current_webview = plus.webview.getWebviewById(id);
 
       if (current_webview) {
@@ -55,7 +59,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
           styles: {
             popGesture: popGesture
           },
-          extras:{preload: true},
+          extras:{preload: preload_back_close},
           waiting: {
             autoShow: false
           }

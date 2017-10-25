@@ -43,7 +43,7 @@ router.pushPlus = function (url, id = '', autoShow=true, aniShow='pop-in', popGe
   console.log('pushPlusUrl:'+url);
   var footerTab = ['/discover','/home','/task','/my'];
 
-  if (mui.os.plus && ((mui.os.ios && footerTab.indexOf(url) === -1) || forceWebView)) {
+  if (mui.os.plus && ((footerTab.indexOf(url) === -1) || forceWebView)) {
     if (!window.isLocalEnv) {
 
       if (window.mixpanel.track) {

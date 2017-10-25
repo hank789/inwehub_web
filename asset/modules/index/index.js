@@ -242,7 +242,7 @@ mui.back = function(){
     if (need_hide.indexOf(current_webview.id) !== -1) {
       goBack();
       current_webview.hide();
-    } else if (mui.os.ios || need_webview_back.indexOf(current_webview.id) !== -1){
+    } else if (mui.os.plus || need_webview_back.indexOf(current_webview.id) !== -1){
       mui.muiOldBack();
     } else {
       router.go(-1);
