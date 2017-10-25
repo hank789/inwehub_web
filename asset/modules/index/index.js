@@ -160,8 +160,7 @@ mui.toast = toast;
 //}
 
 
-import {getImmersedHeight} from '../../utils/statusBar'
-window.immersedHeight = getImmersedHeight();
+
 
 
 Vue.mixin({
