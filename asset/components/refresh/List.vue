@@ -143,13 +143,22 @@
             this.currentPage = response.data.data.current_page;
           }
 
-          if (list) {
+          if (list.length > 0) {
             this.list = list.concat(this.list);
           }
 
           this.loading = false;
-          if (mui('#refreshContainer').length) {
-            mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+
+
+          if (list.length < 10) {
+            if (mui('#refreshContainer').length) {
+              mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+              mui('#refreshContainer').pullRefresh().setStopped(true);
+            }
+          } else {
+            if (mui('#refreshContainer').length) {
+              mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+            }
           }
 
           if (this.prevSuccessCallback) {
