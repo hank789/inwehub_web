@@ -5,22 +5,25 @@ var defaultBackground = '';
 var bgColor = null, mode = null, background = null;
 
 function setStatusBarBackgroundAndStyle(baColor, style) {
-  if (window.plus) {
-    var ws = plus.webview.currentWebview();
-    if (!ws.isVisible()) {
-      return false;
-    }
-  } else {
-    return false;
-  }
-
   mui.plusReady(function () {
     if (mui.os.plus) {
       var ss = plus.navigator.getStatusBarBackground();
+      var statusBarStyle = plus.navigator.getStatusBarStyle();
+
+      console.log('当前状态栏: bacolor:'+ss + ', style:' + statusBarStyle);
+
       if (ss !== baColor) {
-        console.log("statusBgcolor:" + baColor);
-        console.log("statusBarStyle:" + style);
+        console.log("设置"+ss+"=>statusBgcolor:" + baColor);
         plus.navigator.setStatusBarBackground(baColor);
+      }
+      
+      if (style === 'light' && statusBarStyle !== 'UIStatusBarStyleBlackTranslucent') {
+         console.log("设置"+statusBarStyle+"=>statusBarStyle:" + style);
+         plus.navigator.setStatusBarStyle(style);
+      }
+
+      if (style === 'dark' && statusBarStyle !== 'UIStatusBarStyleDefault') {
+        console.log("设置"+statusBarStyle+"=>statusBarStyle:" + style);
         plus.navigator.setStatusBarStyle(style);
       }
     }
@@ -36,16 +39,6 @@ function getStatusBarBackgroundAndStyle(callback) {
 }
 
 function setStatusBarStyle(style) {
-
-  if (window.plus) {
-    var ws = plus.webview.currentWebview();
-    if (!ws.isVisible()) {
-      return false;
-    }
-  } else {
-    return false;
-  }
-
   mui.plusReady(function () {
     if (mui.os.plus) {
       console.log("statusBarStyle:" + style);
@@ -57,14 +50,21 @@ function setStatusBarStyle(style) {
 /**
  * 获取页面配置
  */
-function getPageConfig() {
+function getPageConfig(context) {
+
+  bgColor = null;
+  mode = null;
+  background = null;
+
   var statusBarStyleElement = context.querySelector('#statusBarStyle');
 
   if (statusBarStyleElement) {
-    console.log('监测到#statusBarStyle');
+
     bgColor = statusBarStyleElement.getAttribute('bgColor');
     mode = statusBarStyleElement.getAttribute('mode');
     background = statusBarStyleElement.getAttribute('background');
+
+    console.log('监测到#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background);
   }
 }
 
@@ -73,11 +73,13 @@ function autoStatusBar(context) {
     context = document.getElementById('router-view');
   }
 
-  getPageConfig();
+  getPageConfig(context);
 
   bgColor = bgColor ? bgColor : defaultBgColor;
   mode = mode ? mode : defaultMode;
   background = background ? background : defaultBackground;
+
+  console.log('准备设置#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background);
 
   if (bgColor && mode) {
     setStatusBarBackgroundAndStyle(bgColor, mode);
@@ -106,22 +108,14 @@ function autoHeight(context) {
   if (!context) {
     context = document;
   }
+  console.log('in autoHeight');
 
   initImmersed();
-
-  if (window.plus) {
-    var ws = plus.webview.currentWebview();
-    if (!ws.isVisible()) {
-      return false;
-    }
-  } else {
-    return false;
-  }
 
   autoStatusBar();
 }
 
-function initImmersed(){
+function initImmersed() {
   var immersedHeight = getImmersedHeight();
   document.body.classList.add('immersed' + immersedHeight);
 
@@ -140,15 +134,15 @@ function initImmersed(){
   immersedWrapper.style.background = firstBackground;
 }
 
-function getStyle(elem, property){
-  if(!elem || !property){
+function getStyle(elem, property) {
+  if (!elem || !property) {
     return false;
   }
 
-  if(document.defaultView && document.defaultView.getComputedStyle){
-     var css = document.defaultView.getComputedStyle(elem, null);
-     var value = css ? css.getPropertyValue(property) : null;
-     return value;
+  if (document.defaultView && document.defaultView.getComputedStyle) {
+    var css = document.defaultView.getComputedStyle(elem, null);
+    var value = css ? css.getPropertyValue(property) : null;
+    return value;
   }
 
   return false;
@@ -157,15 +151,13 @@ function getStyle(elem, property){
 /**
  * 是否启用沉浸式模式
  */
-function isEnableImmersed()
-{
+function isEnableImmersed() {
   if (window.plus && mui.os.ios) {
-    return false;
+    //return false;
   }
 
   return true;
 }
-
 
 function getImmersedHeight() {
 
@@ -188,7 +180,6 @@ function getImmersedHeight() {
   console.log('immersed:' + immersed);
   return immersed;
 }
-
 
 export {
   setStatusBarStyle,
