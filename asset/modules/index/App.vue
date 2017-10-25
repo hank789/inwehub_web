@@ -1,13 +1,13 @@
 <template>
-  <div id="app" :class="immersedClass">
+  <div id="app">
     <div v-wechat-title="wechatTitle"></div>
 
     <div class='view'>
       <keep-alive>
-        <router-view id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+        <router-view class="pageWrapper" id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
                      @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
       </keep-alive>
-      <router-view id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+      <router-view class="pageWrapper" id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
                    @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
     </div>
     <FooterComponent ref="Footer" id="Footer"
@@ -37,7 +37,6 @@
   export default {
     data () {
       return {
-        immersedClass: 'immersed' + window.immersedHeight,
         wechatTitle: this.$route.meta.title,
       }
     },
@@ -394,4 +393,5 @@
     }
   }
 </script>
+
 

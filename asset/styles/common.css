@@ -17,9 +17,20 @@ body{
 
 #app{
   height:100%;
-  /*max-width: 768px;*/
-  /*margin: 0 auto;*/
-  /*position: relative;*/
+  position: absolute;
+  width:100%;
+}
+
+.view{
+  position: absolute;
+  width:100%;
+  height:100%;
+}
+
+#router-view{
+  position: absolute;
+  width:100%;
+  height:100%;
 }
 
 p{
@@ -896,16 +907,16 @@ input.upload-file[type=file]{
 100% {opacity: 0.7;}
 }*/
 
-.mui-content.absolute{
+.mui-content{
   position: absolute;
-  top:44px;
+  top:0;
   width:100%;
   bottom:0;
   padding-top:0;
   overflow: scroll;
 }
 
-.mui-content.absolute .menu ~ #pullrefresh{
+.mui-content .menu ~ #pullrefresh{
   top:50px;
 }
 
@@ -913,29 +924,21 @@ input.upload-file[type=file]{
   top:0;
 }
 
-.mui-content.absolute{
-  top:0;
-}
-
-.mui-bar-nav ~ .mui-content.absolute{
+.mui-bar-nav ~ .mui-content{
   top:44px;
+  padding-top:0;
 }
-
-
 
 .openAppH5 .mui-bar-nav{
   top:54px;
 }
 
 .openAppH5 .mui-content{
-  padding-top:54px;
+  top:54px;
+  padding-top: 0;
 }
 
 .openAppH5 .mui-bar-nav ~  .mui-content{
-  padding-top: 98px;
-}
-
-.openAppH5 .mui-bar-nav ~  .mui-content.absolute{
   top:98px;
   padding-top: 0;
 }
@@ -944,34 +947,23 @@ input.upload-file[type=file]{
   top:64px !important;
 }
 
-
-.openAppWechat .mui-content{
-  padding-top:49px;
-}
-
 .openAppWechat .mui-bar-nav{
   top:49px;
 }
 
-.openAppWechat .mui-bar-nav ~  .mui-content{
-  padding-top: 44px;
-}
-
-.openAppWechat .mui-content.absolute{
+.openAppWechat .mui-content{
   top:49px;
   padding-top:0;
 }
 
-.openAppWechat .mui-bar-nav ~  .mui-content.absolute{
+.openAppWechat .mui-bar-nav ~  .mui-content{
   top:93px;
   padding-top: 0;
 }
 
-
 .openAppWechat .shareBtn{
   top:59px !important;
 }
-
 
 .gaussian{
   backdrop-filter: blur(10px);
@@ -1287,29 +1279,8 @@ ul.normal li:before {
   display: none !important;
 }
 
-/* 沉浸式状态栏 start */
-.immersed20 .mui-bar-nav{
-  padding-top: 20px;
-  height:64px;
+#immersedWrapper{
+  position: fixed;
+  width:100%;
+  top:0;
 }
-
-.immersed20 .mui-content{
-  padding-top:20px;
-}
-
-.immersed20 .mui-content.absolute{
-  padding-top:0;
-}
-
-.immersed20 .mui-bar-nav ~ .mui-content{
-  padding-top:64px;
-}
-
-.immersed20 .mui-bar-nav ~ .mui-content.absolute{
-   top:64px;
-   padding-top:0;
-}
-.immersed20 .shareBtn{
-   top:30px;
-}
-/* 沉浸式状态栏 end */

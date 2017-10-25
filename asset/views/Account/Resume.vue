@@ -128,7 +128,7 @@
 
 
 
-    </div>
+
 
     <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
     <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
@@ -214,6 +214,9 @@
       <div class="desc">部分信息暂未公开</div>
     </div>
 
+
+  </div>
+
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
             @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
 
@@ -222,6 +225,7 @@
             @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
 
     </button>
+
   </div>
 </template>
 
@@ -963,10 +967,13 @@
 
   .news p:nth-of-type(1) {
     text-align: right;
-
   }
 
   .news p:nth-of-type(2) {
     text-align: left;
+  }
+
+  .resumeWrapper{
+    bottom:48px;
   }
 </style>
