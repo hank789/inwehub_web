@@ -186,7 +186,6 @@ function getImmersedHeight() {
   }
 
   console.log('immersed:' + immersed);
-  immersed = 20;
   return immersed;
 }
 
