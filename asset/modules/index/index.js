@@ -52,6 +52,7 @@ window.loading_gif = loading_gif;
  //mui的插件；
 import './../../styles/mui.css';
 import './../../styles/common.css';
+import './../../styles/immersed.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/iconfont.css';
 import './../../styles/percircle.css';
