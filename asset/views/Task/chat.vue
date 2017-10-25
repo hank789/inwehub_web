@@ -6,46 +6,46 @@
       <h1 class="mui-title">客服小哈</h1>
     </header>
     <div class="mui-content absolute" id='contentwrapper'>
-    <RefreshList ref="RefreshList" v-model="list" :api="'im/messages'" :autoShowEmpty="false" :pageMode="true" :downLoadMoreMode="true" :isShowUpToRefreshDescription="false" :prevOtherData="{contact_id:0}" :nextOtherData="{contact_id:0}" :list="list" class="listWrapper">
-     <div id="myData">
-     <ul class="user"  v-for="item in list">
-        <!--客服-->
-        <li class="consumer" v-if="id != item.user_id">
-          <p>{{item.created_at}}</p>
-          <p>
-            <img src="../../statics/images/service1.png" />
-            <span>
+      <RefreshList ref="RefreshList" v-model="list" :api="'im/messages'" :autoShowEmpty="false" :pageMode="true" :downLoadMoreMode="true" :isShowUpToRefreshDescription="false" :prevOtherData="{contact_id:0}" :nextOtherData="{contact_id:0}" :list="list" class="listWrapper">
+
+        <ul class="user" id="myData">
+          <template v-for="item in list">
+            <!--客服-->
+            <li class="consumer" v-if="id != item.user_id">
+              <p>{{item.created_at}}</p>
+              <p>
+                <img src="../../statics/images/service1.png" />
+                <span>
                   {{item.data.text}}
              </span>
-          </p>
+              </p>
 
-        </li>
-        <!--自己-->
-        <li class="Customerservice" v-if="id == item.user_id">
-          <p>{{item.created_at}}</p>
-          <p>
-            <img :src="avatar" />
-            <span>
+            </li>
+            <!--自己-->
+            <li class="Customerservice" v-if="id == item.user_id">
+              <p>{{item.created_at}}</p>
+              <p>
+                <img :src="avatar" />
+                <span>
                   {{item.data.text}}
             </span>
-          </p>
+              </p>
 
-        </li>
+            </li>
+          </template>
+        </ul>
+      </RefreshList>
 
-      </ul>
+      <!--发送消息框-->
+      <div class="message" id="message">
+        <input type="text" v-model.trim="comment" />
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
+        </svg>
       </div>
-    </RefreshList>
+      <!--发送消息框end-->
 
-    <!--发送消息框-->
-    <div class="message" id="message">
-      <input type="text" v-model.trim="comment" />
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
-      </svg>
     </div>
-    <!--发送消息框end-->
-  
-  </div>
   </div>
 </template>
 
@@ -61,38 +61,46 @@
       page: 1,
       comment: "",
       id: "",
-      avatar: ""
+      avatar: "",
+      flag: true
 
     }),
     created() {
       //id  和  头像；
       this.id = getLocalUserInfo().user_id;
       this.avatar = getLocalUserInfo().avatar_url;
-     
 
     },
     computed: {
-     sroll(){
-       document.getElementById('myData').scrollTop = document.getElementById('myData').scrollHeight;
-       console.warn(document.getElementById('myData').scrollTop)
-     }
+
     },
     components: {
       RefreshList
     },
     methods: {
-    chat(obj){
-       var item = {
-           created_at:obj.created_at,
-           data:{text:obj.body.text},
-           id:obj.id,
-           user_id:0,
-           avatar:obj.avatar,
-       };      
-       this.list = this.list.concat(item);
+      //   conut(){
+      //     var obj = document.getElementById('refreshContainer');
+      //     if (obj) {
+      //       console.error(obj);
+      //       obj.scrollTop = 800;
+      //     }
+      //     
+      //     
+      //   },
+      chat(obj) {
+        var item = {
+          created_at: obj.created_at,
+          data: {
+            text: obj.body.text
+          },
+          id: obj.id,
+          user_id: 0,
+          avatar: obj.avatar,
+        };
+        this.list = this.list.concat(item);
         console.log(item);
         console.log(this.list);
-    },
+      },
       // 消息；
       message() {
         let id = parseInt(this.$route.params.id);
@@ -111,9 +119,10 @@
             if(response.data.data) {
               this.comment = '';
               this.list = this.list.concat(response.data.data);
-              
+
             }
-             this.loading = 0;
+            //           document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
+            this.loading = 0;
           });
 
         }
@@ -122,12 +131,21 @@
       //end；
 
     },
-    mounted() {     
+    mounted() {
 
     },
-    updated(){
-      document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
-    
+    updated() {
+      //    document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
+      if(this.flag) {
+        this.flag = false;
+        var obj = document.getElementById('refreshContainer');
+        if(obj) {
+          console.error(obj);
+          obj.scrollTop = document.getElementById('myData').scrollHeight;
+        }
+
+      }
+
     }
   }
   export default Chat;
@@ -162,6 +180,7 @@
     position: absolute;
     bottom: 0;
     padding: 0 10px;
+    z-index: 999;
   }
   
   .message input {
@@ -306,7 +325,16 @@
   }
   
   .listWrapper {
-    bottom:47px;
-    
+    bottom: 47px;
+  }
+  
+  .mui-scroll-wrapper {
+    /*position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;*/
+    overflow: scroll;
+    /*width: 100%;*/
   }
 </style>
