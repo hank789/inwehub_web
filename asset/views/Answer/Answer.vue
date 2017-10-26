@@ -57,9 +57,12 @@
         this.id = id;
 
         let answerId = parseInt(this.$route.params.answerId);
+
         if (answerId) {
             this.answerId = answerId;
             this.getDetail();
+        } else {
+            this.answerId = 0;
         }
 
         console.log('id:' + this.id);
@@ -114,7 +117,7 @@
 
           var objs = JSON.parse(content);
           var cache = JSON.stringify(this.description);
-         
+
           if (cache === '{}' || cache === '{"ops":[{"insert":"\\n"}]}') {
              this.editorObj.setContents(objs);
           }
