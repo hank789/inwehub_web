@@ -1,33 +1,68 @@
 <template>
   <div id="short_all" class="gaussian">
+    <!--quick-->
+    
+    <div class="quick">
+       <p>我要爆料<span></span></p>
+       <p>我有建议<span></span></p>
+       <p>我的擅长<span></span></p>
+    </div>
+    
+
+    
     <ul id="down">
       <li>
+        <p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(1)">
-          <use xlink:href="#icon-fabuxuqiu"></use>
+          <use xlink:href="#icon-faxuqiu"></use>
         </svg>
-        <span>发布需求</span>
+         </p>
+        <span>发需求</span>
+        
       </li>
       <li>
+         <p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(2)">
-          <use xlink:href="#icon-zhuanyewenda"></use>
+          <use xlink:href="#icon-zhaoguwen"></use>
         </svg>
+         </p>
+        <span>找顾问</span>
+      </li>
+      <li>
+         <p>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(3)">
+          <use xlink:href="#icon-xunhezuo"></use>
+        </svg>
+         </p>
+        <span>寻合作</span>
+      </li>
+      <li>
+         <p>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
+          <use xlink:href="#icon-zhuanyewenda-"></use>
+        </svg>
+         </p>
         <span>专业问答</span>
       </li>
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(3)">
-          <use xlink:href="#icon-chengweizhuanjia"></use>
+         <p>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(5)">
+          <use xlink:href="#icon-hudongwenda-"></use>
         </svg>
-        <span>成为专家</span>
+         </p>
+        <span>互动问答</span>
       </li>
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
-          <use xlink:href="#icon-tijiaowenzhang"></use>
+        <p>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(6)">
+          <use xlink:href="#icon-tijiaowenzhang1"></use>
         </svg>
+        </p>
         <span>提交文章</span>
       </li>
 
     </ul>
-    <p @tap.stop.prevent="hide()">
+    <p @tap.stop.prevent="hide()" class="turn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-guanbi"></use>
       </svg>
@@ -47,13 +82,13 @@
           case 1:
             userAbility.jumpToAddProject();
             break;
-          case 2:
+          case 4:
             userAbility.jumpToAddAsk();
             break;
-          case 3:
-            userAbility.jumpToApplyProfessor(this);
-            break;
-          case 4:
+//        case 3:
+//          userAbility.jumpToApplyProfessor(this);
+//          break;
+          case 6:
             userAbility.jumpToAddArticle();
             break;
         }
@@ -129,7 +164,7 @@
     display: none;
   }
 
-  #short_all p {
+  #short_all .turn {
     position: absolute;
     bottom: 14px;
     left: 47.2%;
@@ -150,10 +185,8 @@
 
   ul {
     position: absolute;
-    width: 70%;
-    height: 260px;
-    /*top: 0;
-      bottom: 0;*/
+    width: 63.3%;
+    height: 220px;
     left: 0;
     right: 0;
     margin: auto;
@@ -177,10 +210,10 @@
   /*结束动画*/
 
   .end {
-    width: 100%;
+    width: 63.3%;
     height: 260px;
     position: absolute;
-    bottom: -230px;
+    bottom: -250px;
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
@@ -200,22 +233,84 @@
 
   ul li {
     float: left;
-    width: 50%;
-    height: 130px;
+    width: 33.3%;
+    height: 110px;
+    /*background:#CCCCCC;*/
+    position: relative;
   }
 
-  ul li svg {
-    font-size: 53px;
-    width: 37%;
-    height: 53px;
-    margin-left: 31.5%;
-    margin-top: 28px;
+  
+ ul li p{
+   width: 64px;
+   height: 64px;
+   background:#b5e8fe;
+   border-radius: 50%;
+   position: absolute;
+   left: 0;
+   right: 0;
+   margin: auto;
+ }
+ 
+ ul li p svg {
+     font-size: 35px;
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     margin: auto;
   }
 
   ul li span {
     display: inline-block;
     width: 100%;
     text-align: center;
-    margin-top: 13px;
+    position: absolute;
+    top:73px;
+    font-size:14px;
+    color:#444444;
   }
+  
+  
+  /*quick*/
+ .quick{
+   width: 63.3%;
+   height:14px;
+   /*background: #CCCCCC;*/
+   position: absolute;
+   top: 40px;
+   left: 0;
+   right: 0;
+   margin: auto;
+ }
+ .quick p{
+   width: 30%;
+   margin-right: 5%;
+   float: left;
+   font-size:13px;
+   color:#444444;
+   text-align: left;
+   line-height: 14px;
+   border-right: 0.5px solid #dcdcdc;
+   /*border: 1px solid #000000;*/
+ }
+ .quick p:nth-of-type(3){
+   margin-right: 0;
+   border-color: #fff;
+ }
+ 
+.quick>p span{ 
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #a8dff7;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    margin-left:6px;
+    
+    }
 </style>

@@ -232,6 +232,18 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { // 我的擅长
+    path: '/my/advantage',
+    name: 'my-advantage',
+    meta: {
+      title: '我的擅长',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Account/Advantage.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的报名 活动
     path: '/my/Discount',
     name: 'my-Discount',
@@ -1433,6 +1445,14 @@ const routes = [{
     },
     component: require('../../../views/Exception/Error.vue'),
   },
+//{
+//  path: '/short',
+//  name: 'short',
+//  meta: {
+//    title: 'short'
+//  },
+//  component: require('../../../components/shortTcut.vue'),
+//},
   { // message
     path: '/*',
     name: '404',
