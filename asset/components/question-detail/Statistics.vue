@@ -109,7 +109,7 @@
     },
     methods: {
       modify(){
-         this.$router.pushPlus('/realAnswer/' + this.questionId+'/'+this.answerId, 'list-detail-page-realAnswer',true,'pop-in','hide',true);
+         this.$router.pushPlus('/realAnswer/' + this.questionId+'/'+this.answerId, 'list-detail-page-realAnswer-once',true,'pop-in','hide',true);
       },
       collect(){
         var data = {

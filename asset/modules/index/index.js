@@ -230,8 +230,7 @@ mui.back = function(){
       'inwehub_notice_view',
       'list-detail-page',
       'list-detail-page-interaction',
-      'list-detail-page-contact',
-      'list-detail-page-realAnswer'
+      'list-detail-page-contact'
     ];
 
     var need_webview_back = [
@@ -240,11 +239,16 @@ mui.back = function(){
     ];
     console.log(current_webview.id);
     if (need_hide.indexOf(current_webview.id) !== -1) {
+      console.log('hide');
       goBack();
       current_webview.hide();
     } else if (mui.os.plus || need_webview_back.indexOf(current_webview.id) !== -1){
+      console.log('close');
+      goBack();
       mui.muiOldBack();
+      current_webview.close();
     } else {
+      console.log('go(-1)');
       router.go(-1);
     }
   } else {
