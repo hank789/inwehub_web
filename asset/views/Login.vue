@@ -1,49 +1,53 @@
 <template>
-  <div class="mui-content absolute">
-    <div class="login">
+  <div>
+    <div class="mui-content absolute">
+      <div class="login">
 
-      <svg class="icon logo" aria-hidden="true">
-        <use xlink:href="#icon-logo"></use>
-      </svg>
-
-
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoujihao"></use>
+        <svg class="icon logo" aria-hidden="true">
+          <use xlink:href="#icon-logo"></use>
         </svg>
-        <input ref="phone" type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" placeholder="手机号码"
-               v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @focus="focus" @blur="blur"
-               @tap.stop.prevent="entryPhone"/>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-mima"></use>
-        </svg>
-        <input type="password" v-model.trim="password" placeholder="输入密码" @focus="focus" @blur="blur"
-               @tap.stop.prevent="entryPassword"/>
-      </div>
 
 
-      <!--忘记密码和账号-->
-      <div class="apply">
-        <div>
-          <span class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</span>
-          <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoujihao"></use>
+          </svg>
+          <input ref="phone" type="text" pattern="\d*" autocomplete="off" v-model.number.trim="phone" placeholder="手机号码"
+                 v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @focus="focus" @blur="blur"
+                 @tap.stop.prevent="entryPhone"/>
         </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-mima"></use>
+          </svg>
+          <input type="password" v-model.trim="password" placeholder="输入密码" @focus="focus" @blur="blur"
+                 @tap.stop.prevent="entryPassword"/>
+        </div>
+
+
+        <!--忘记密码和账号-->
+        <div class="apply">
+          <div>
+            <span class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</span>
+            <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
+          </div>
+        </div>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
+
+
+        <div class="wechatWrapper" @tap.stop.prevent="wechatLogin()">
+          <div class="myicon myicon-wechat"></div>
+          通过微信登录
+
+
+        </div>
+
       </div>
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
-
-      <div class="wechatWrapper" @tap.stop.prevent="wechatLogin()">
-        <div class="myicon myicon-wechat"></div>
-        通过微信登录
-
-      </div>
+      <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail"
+             style="display:none"></oauth>
 
     </div>
-
-    <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail" style="display:none"></oauth>
-
   </div>
 </template>
 
@@ -120,17 +124,17 @@
     },
     methods: {
       wechatLoginSuccess(token, openid){
-          console.log(token);
-          console.log(openid);
-          if (token) {
-              this.$router.pushPlus('/wechat/register?token=' + token);
-          } else {
-              this.$router.pushPlus('/wechat/register?openid=' + openid);
-          }
+        console.log(token);
+        console.log(openid);
+        if (token) {
+          this.$router.pushPlus('/wechat/register?token=' + token);
+        } else {
+          this.$router.pushPlus('/wechat/register?openid=' + openid);
+        }
       },
       wechatLoginFail(errorMessage) {
-          console.log(errorMessage);
-          mui.toast(errorMessage);
+        console.log(errorMessage);
+        mui.toast(errorMessage);
       },
       wechatLogin(){
         this.$refs.oauth.login('weixin');
@@ -194,7 +198,6 @@
 
           this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
         }));
-
 
       },
       submit () {
@@ -444,8 +447,9 @@
     top: 7px;
   }
 
-  .mui-content{
-    background-color:#f3f4f6;
+  .mui-content {
+    background-color: #f3f4f6;
+    min-height:600px;
   }
 </style>
 
