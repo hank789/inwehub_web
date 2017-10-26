@@ -17,6 +17,7 @@
                 :questionId="ask.question.id"
                 :needMoney="true"
                 :isFollow="true"
+                :showModifyBtn="true"
                 :showShoucang="true"
                 @paySuccess="paySuccess"
         ></Answer>

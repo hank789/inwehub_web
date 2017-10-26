@@ -114,7 +114,7 @@
 
           var objs = JSON.parse(content);
           var cache = JSON.stringify(this.description);
-          console.olog(cache);
+         
           if (cache === '{}' || cache === '{"ops":[{"insert":"\\n"}]}') {
              this.editorObj.setContents(objs);
           }

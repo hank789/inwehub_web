@@ -42,7 +42,7 @@
 
 
     <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
-      <div class="iconWrapper">
+      <div class="iconWrapper dianzanWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
@@ -218,7 +218,7 @@
 
   .modifyWrapper .icon{
     position: relative;
-    top:-1px;
+    top:0px;
   }
 
   .statistics {
@@ -228,6 +228,11 @@
     justify-content: space-around;
   }
 
+
+  .dianzanWrapper .icon{
+    position: relative;
+    top:-1px;
+  }
 
   .active{
     color:#03aef9;
