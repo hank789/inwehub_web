@@ -449,7 +449,7 @@
 
   .mui-content {
     background-color: #f3f4f6;
-    min-height:600px;
+    min-height:568px;
   }
 </style>
 
