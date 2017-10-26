@@ -33,6 +33,7 @@
   import inwehubDialog from '../../components/Dialog.vue';
   import userAbility from '../../utils/userAbility';
   import MessageComponent from '../../components/Message.vue';
+  import {getImmersedHeight} from '../../utils/statusBar';
 
   export default {
     data () {
@@ -112,6 +113,7 @@
         }
       }
 
+
       mui.plusReady(function () {
         if (mui.os.plus) {
           var url = process.env.READHUB_URL + '/h5';
@@ -119,12 +121,15 @@
             url = url + '?uuid=' + currentUser.uuid;
           }
           //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
+
+          var immersedHeight = getImmersedHeight();
+
           var inwehub_embed_view = mui.preload({
             url: url,
             id: 'inwehub_embed',
             styles: {
               popGesture: 'none',
-              top: '0px',
+              top: immersedHeight + 'px',
               dock: 'top',
               bottom: '50px',
               bounce: 'none'

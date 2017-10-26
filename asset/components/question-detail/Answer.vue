@@ -47,7 +47,7 @@
         :collectNum="answer.collect_num"
         :isCollected="answer.is_collected?true:false"
         :questionId="questionId"
-        :showModifyBtn="answer.user_id === curUid?true:false"
+        :showModifyBtn="showModifyBtn && answer.user_id === curUid?true:false"
         @supportNumDesc="supportNumDesc"
         @supportNumAdd="supportNumAdd"
         @setSupportStatus="setSupportStatus"
@@ -105,6 +105,10 @@
         default: false
       },
       needMoney: {
+        type: Boolean,
+        default: false
+      },
+      showModifyBtn: {
         type: Boolean,
         default: false
       },

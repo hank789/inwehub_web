@@ -16,7 +16,7 @@ function setStatusBarBackgroundAndStyle(baColor, style) {
         console.log("设置"+ss+"=>statusBgcolor:" + baColor);
         plus.navigator.setStatusBarBackground(baColor);
       }
-      
+
       if (style === 'light' && statusBarStyle !== 'UIStatusBarStyleBlackTranslucent') {
          console.log("设置"+statusBarStyle+"=>statusBarStyle:" + style);
          plus.navigator.setStatusBarStyle(style);
@@ -153,10 +153,10 @@ function getStyle(elem, property) {
  */
 function isEnableImmersed() {
   if (window.plus && mui.os.ios) {
-    //return false;
+    return false;
   }
 
-  return true;
+  return false;
 }
 
 function getImmersedHeight() {

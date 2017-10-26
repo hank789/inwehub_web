@@ -13,6 +13,7 @@
 
 <script>
   import localEvent from '../../stores/localStorage';
+  import {getImmersedHeight} from '../../utils/statusBar';
 
   export default {
     data: () => ({
@@ -81,11 +82,12 @@
           ws.addEventListener('show', createEmbed(ws, url), false);
 
           function createEmbed(ws, url) {
+            var ImmersedHeight = getImmersedHeight();
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
             if (!inwehub_embed_webview) {
               inwehub_embed_webview = plus.webview.create(url, 'inwehub_embed', {
                 popGesture: 'none',
-                top: '0px',
+                top: ImmersedHeight + 'px',
                 dock: 'top',
                 bottom: '50px',
                 bounce: 'none'
