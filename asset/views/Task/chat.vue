@@ -78,15 +78,6 @@
       RefreshList
     },
     methods: {
-      //   conut(){
-      //     var obj = document.getElementById('refreshContainer');
-      //     if (obj) {
-      //       console.error(obj);
-      //       obj.scrollTop = 800;
-      //     }
-      //     
-      //     
-      //   },
       chat(obj) {
         var item = {
           created_at: obj.created_at,
@@ -98,8 +89,9 @@
           avatar: obj.avatar,
         };
         this.list = this.list.concat(item);
-        console.log(item);
-        console.log(this.list);
+        this.flag = true;
+//      console.log(item);
+//      console.log(this.list);
       },
       // 消息；
       message() {
@@ -118,10 +110,13 @@
             }
             if(response.data.data) {
               this.comment = '';
+              
               this.list = this.list.concat(response.data.data);
+              
+              this.flag = true;
 
             }
-            //           document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
+           
             this.loading = 0;
           });
 
@@ -140,7 +135,6 @@
         this.flag = false;
         var obj = document.getElementById('refreshContainer');
         if(obj) {
-          console.error(obj);
           obj.scrollTop = document.getElementById('myData').scrollHeight;
         }
 
