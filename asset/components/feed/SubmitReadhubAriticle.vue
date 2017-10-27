@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="container-image margin-10-0-0">
-          <image :src="data.feed.img"></image>
+          <img :src="data.feed.img"/>
         </div>
         <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}{{data.feed.domain}}</div>
       </div>
@@ -41,7 +41,7 @@
     watch: {
     },
     mounted(){
-      
+
     },
     methods: {
 

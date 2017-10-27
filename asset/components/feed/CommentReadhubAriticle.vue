@@ -16,7 +16,7 @@
     <div class="container-answer margin-5-0-0">
       <div class="color-808080 font-13">发布者：{{data.feed.submission_username}}</div>
       <div class="container-image margin-10-0-0">
-        <image :src="data.feed.img"></image>
+        <img :src="data.feed.img"/>
       </div>
       <div class="color-444 font-16 margin-10-0-0 mui-ellipsis-2">{{data.feed.title}}{{data.feed.domain}}</div>
     </div>
