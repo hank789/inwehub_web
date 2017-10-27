@@ -119,6 +119,10 @@ All Rights Reserved</div>
         }
       },
       starApp() {
+        if (!window.plus) {
+            mui.toast('仅app内可用');
+            return;
+        }
         apiRequest(`system/app_market_url`, {}).then(response_data => {
           if (response_data !== false) {
             this.ios_market_url = response_data.ios_url;
