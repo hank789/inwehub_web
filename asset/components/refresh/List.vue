@@ -3,7 +3,9 @@
        id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
       <Empty v-if="nothing===1 && autoShowEmpty"></Empty>
-      <slot v-else></slot>
+      <div v-else>
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
