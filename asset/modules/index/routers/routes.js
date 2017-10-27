@@ -975,7 +975,7 @@ const routes = [{
   },
   { // answer
     path: '/realAnswer/:id/:answerId',
-    name: 'answer-question',
+    name: 'answer-question-answerid',
     component: require('../../../views/Answer/Answer.vue'),
     meta: {
       title: '回答'
@@ -1086,7 +1086,7 @@ const routes = [{
     }
   },
   { // feedback
-    path: '/feedback',
+    path: '/feedback/:type',
     name: 'feedback',
     meta: {
       title: '反馈建议',
