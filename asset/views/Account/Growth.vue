@@ -224,7 +224,7 @@
               </svg>-->
               <img src="../../statics/images/ipad_air2@3x.png" class="air"/>
               <p>iPad air2 32G</p>
-              <p class="text_yellow"  v-if="user_level >='3'"><i>25000</i><i>贡献值兑换</i></p>
+              <p class="text_yellow"  v-if="user_level >='3'"><i class="num_yellow">25000</i><i class="num_yellow">贡献值兑换</i></p>
               <p v-else ><i>25000</i><i>贡献值兑换</i></p>
             </li>
 					</ul>
@@ -261,14 +261,14 @@
 						<li>
              <img src="../../statics/images/case.png"  class="case"/>
               <p>日默瓦 CF 20寸</p>
-              <p class="text_yellow" id="num" v-if="user_level >='4'"><i>50000</i><i>贡献值兑换</i></p>
+              <p class="text_yellow" id="num" v-if="user_level >='4'"><i class="num_yellow">50000</i><i class="num_yellow">贡献值兑换</i></p>
               <p v-else  id="num"><i>50000</i><i>贡献值兑换</i></p>
             </li>
             <li>
               
               <p>iPhone8 256GB</p>
               <img src="../../statics/images/iphone8@3x.png"  class="iphone"/>
-              <p class="text_yellow"  id="num" v-if="user_level >='4'"><i>80000</i><i>贡献值兑换</i></p>
+              <p class="text_yellow"  id="num" v-if="user_level >='4'"><i class="num_yellow">80000</i><i class="num_yellow">贡献值兑换</i></p>
               <p v-else id="num"><i>80000</i><i>贡献值兑换</i></p>
             </li>
 
@@ -784,6 +784,7 @@
   height: 35px;
   margin-top: 10px;
 }
+
 .powerdetail li p:nth-of-type(2) i:nth-of-type(1){
   display: block;
   font-size: 12px;
@@ -795,6 +796,22 @@
   right: 0;
   margin: auto;
 }
+
+
+
+.powerdetail li p:nth-of-type(2) i:nth-of-type(1){
+  display: block;
+  font-size: 12px;
+  color:#444444;
+  text-align: center;
+  position:absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+
 .powerdetail li p:nth-of-type(2) i:nth-of-type(2){
   display: block;
   font-size: 12px;
@@ -805,6 +822,10 @@
   left: 0;
   right: 0;
   margin: auto;
+}
+
+.powerdetail li p:nth-of-type(2) i.num_yellow{
+  color:#fcc916;
 }
 
 /****积分说明*****/
