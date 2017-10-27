@@ -4,7 +4,7 @@
       <div class="author">
         <div class="avatar">
           <div class="avatarInner"><img :src="data.user.avatar">
-            <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1>
+            <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
           </div>
