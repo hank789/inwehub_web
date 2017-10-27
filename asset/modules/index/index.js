@@ -239,7 +239,11 @@ mui.back = function(){
       'inwehub_article_view'
     ];
     console.log(current_webview.id);
-    if (need_hide.indexOf(current_webview.id) !== -1) {
+
+    if (current_webview.id === window.plus.runtime.appid) {
+      goBack();
+      mui.muiOldBack();
+    } else if (need_hide.indexOf(current_webview.id) !== -1) {
       console.log('hide');
       goBack();
       current_webview.hide();
