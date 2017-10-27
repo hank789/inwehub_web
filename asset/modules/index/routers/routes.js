@@ -59,6 +59,32 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { // feed
+    path: '/feed',
+    name: 'feed',
+    meta: {
+      title: 'Inwehub',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Feed.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feedtest
+    path: '/feedtest',
+    name: 'feedtest',
+    meta: {
+      title: 'Inwehub',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Feedtest.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //首页活动列表页
     path: '/home/ActiveList',
     name: 'activity-list',
@@ -975,7 +1001,7 @@ const routes = [{
   },
   { // answer
     path: '/realAnswer/:id/:answerId',
-    name: 'answer-question',
+    name: 'answer-question-answerid',
     component: require('../../../views/Answer/Answer.vue'),
     meta: {
       title: '回答'
@@ -1086,7 +1112,7 @@ const routes = [{
     }
   },
   { // feedback
-    path: '/feedback',
+    path: '/feedback/:type',
     name: 'feedback',
     meta: {
       title: '反馈建议',
