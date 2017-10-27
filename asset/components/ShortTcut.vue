@@ -201,7 +201,7 @@
   
   ul {
     position: absolute;
-    width: 63.3%;
+    width:72.5%;
     height: 220px;
     left: 0;
     right: 0;
