@@ -81,29 +81,29 @@
             userAbility.jumpToAddProject();
             break;
           case 2:
-            this.$router.push('/feedback/consultant');
+            this.$router.pushPlus('/feedback/consultant');
             break;
           case 3:
-            this.$router.push('/feedback/cooperate');
+            this.$router.pushPlus('/feedback/cooperate');
             break;
 
           case 4:
             userAbility.jumpToAddAsk();
             break;
           case 5:
-            this.$router.push('/ask/interaction');
+            this.$router.pushPlus('/ask/interaction');
             break;
           case 6:
             userAbility.jumpToAddArticle();
             break;
           case 7:
-            this.$router.push('/feedback/news');
+            this.$router.pushPlus('/feedback/news');
             break;
           case 8:
-            this.$router.push('/feedback/advise');
+            this.$router.pushPlus('/feedback/advise');
             break;
           case 9:
-            this.$router.push('/my/advantage');
+            this.$router.pushPlus('/my/advantage');
             break;
             
 
