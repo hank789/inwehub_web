@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="container-image margin-10-0-0">
-          <image src="images/bg.png"></image>
+          <img src="images/bg.png"></image>
         </div>
         <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">客户虐我千百遍，爱意如初永感念。客户虐我千百遍，爱意如初永感念-baidu.com</div>
       </div>
@@ -187,7 +187,7 @@
         <div class="container-answer margin-5-0-0">
           <div class="color-808080 font-13">发布者：郭伟</div>
           <div class="container-image margin-10-0-0">
-            <image src="images/bg.png"></image>
+            <img src="images/bg.png"></image>
           </div>
           <div class="color-444 font-16 margin-10-0-0 mui-ellipsis-2">最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</div>
         </div>
@@ -245,7 +245,7 @@
         <div class="container-answer">
           <div class="color-808080 font-13">发布者：郭伟</div>
           <div class="container-image margin-10-0-0">
-            <image src="images/bg.png"></image>
+            <img src="images/bg.png"></image>
           </div>
           <div class="color-444 font-16 margin-10-0-0 mui-ellipsis-2">最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</div>
         </div>
