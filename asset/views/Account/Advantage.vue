@@ -6,42 +6,17 @@
     </header>
 
     <div class="mui-content absolute">
-      <ul class="myLabel">
+      <ul class="myLabel" v-if="skill_tags.length > '0'">
         <p>擅长标签</p>
-        <li>
-          高科技
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-times--"></use>
-          </svg>
-
-        </li>
-        <li>
-          SAP
+        <li v-for="(item, index) in skill_tags">
+           {{item.text}}
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-times--"></use>
           </svg>
         </li>
-        <li>
-          模型
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-times--"></use>
-          </svg>
-        </li>
-        <li>
-          高科
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-times--"></use>
-          </svg>
-        </li>
-        <li>
-          机械制造
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-times--"></use>
-          </svg>
-        </li>
-
+        
       </ul>
-      <div class="gray"></div>
+      <div class="gray" v-if="skill_tags.length > '0'"></div>
 
       <div class="addLable">
         <p>添加标签</p>
@@ -57,22 +32,12 @@
             <p @tap.stop.prevent="Obtain()">申请添加</p>
             <i class="bot"></i>
           </li>
-          <li>
-            高科技
+          <!--搜素到的标签名 -->
+          <li v-for="(item, index) in list"  @tap.stop.prevent="addSkillTag(item.text)">
+            {{item.text}}
             <i class="bot"></i>
           </li>
-          <li>
-            高科技
-            <i class="bot"></i>
-          </li>
-          <li>
-            高科技
-            <i class="bot"></i>
-          </li>
-          <li>
-            高科技
-            <i class="bot"></i>
-          </li>
+        
         </ul>
 
       </div>
@@ -84,39 +49,107 @@
 <script>
   import { getLocalUserInfo, getUserInfo, getUserLevelPercentage } from '../../utils/user';
   import {searchText} from '../../utils/search';
+  import { apiRequest, postRequest } from '../../utils/request';
+
   export default {
     data() {
       return {
-          searchText:''
+          searchText:'',
+          loading: 1,
+          list:[],
+          skill_tags:[]
       }
     },
     methods: {
       Obtain() {
+        var that =  this;
         var btnArray = ['取消', '确定'];
         mui.prompt('', '标签名称', '输入标签名称', btnArray, function(e) {
           if(e.index == 1) {
-            console.log(e.value);
-//          info.innerText = '谢谢你的评语：' + e.value;
+            //申请添加擅长标签；
+            that.applySkillTag(e.value);
+           
           } else {
-            console.log(22);
-//          info.innerText = '你点了取消按钮';
+            console.log(e.value); 
           }
         })
       },
-      search(){
-          console.log('ok');
+      //添加擅长标签；
+      addSkillTag(text){
+        console.error(text);
+         postRequest("profile/addSkillTag", {tags:[text]}).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+           mui.toast("成功");
+          this.loading = 0;
+          });
+      },
+      //申请添加擅长标签；
+      applySkillTag(text){ 
+        postRequest("system/applySkillTag", {tag_name:text}).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+           mui.toast("申请提交成功");
+          this.loading = 0;
+          });
+      },
+      //我的擅长列表；
+     skillTags(){
+          postRequest("profile/info", {}).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+
+          if(response.data.data.info.skill_tags.length > 0) {
+            this.skill_tags = response.data.data.info.skill_tags;
+          }
+          
+//        console.error(this.skill_tags);
+          this.loading = 0;
+        });
+      
+
+    },
+      //搜索标签列表；
+      search(text){
+          postRequest("tags/load", {tag_type:5,word:text}).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+          if(response.data.data.tags.length > 0) {
+            this.list = response.data.data.tags;
+          }
+          this.loading = 0;
+        });
       }
 
     },
     watch: {
       searchText: function (newValue) {
-         searchText(newValue, () => {
-             console.log('请求api搜索:'+newValue);
-         });
+        
+//       console.error('请求api搜索:'+newValue);
+         
+         this.search(newValue);
+         
+       
       },
     },
     mounted() {
-
+        this.skillTags();
     }
   }
 </script>
