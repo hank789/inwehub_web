@@ -94,6 +94,7 @@
 
         var data = {
           name: this.type,
+          title: this.headercontent,
           content: this.description
         };
 
