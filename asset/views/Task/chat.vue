@@ -78,6 +78,41 @@
       RefreshList
     },
     methods: {
+      //获取本地时间；
+      CurentTime() {
+        var now = new Date();
+
+        var year = now.getFullYear(); //年  
+        var month = now.getMonth() + 1; //月  
+        var day = now.getDate(); //日  
+
+        var hh = now.getHours(); //时  
+        var mm = now.getMinutes(); //分  
+        var ss = now.getSeconds(); //秒  
+
+        var clock = year + "-";
+
+        if(month < 10)
+          clock += "0";
+
+        clock += month + "-";
+
+        if(day < 10)
+          clock += "0";
+
+        clock += day + " ";
+
+        if(hh < 10)
+          clock += "0";
+
+        clock += hh + ":";
+        if(mm < 10) clock += '0';
+        clock += mm + ":";
+
+        if(ss < 10) clock += '0';
+        clock += ss;
+        return(clock);
+      },
       chat(obj) {
         var item = {
           created_at: obj.created_at,
@@ -90,13 +125,28 @@
         };
         this.list = this.list.concat(item);
         this.flag = true;
-//      console.log(item);
-//      console.log(this.list);
+        //      console.log(item);
+        //      console.log(this.list);
       },
       // 消息；
       message() {
         let id = parseInt(this.$route.params.id);
         if(this.comment) {
+          
+          
+          var item = {
+              // created_at: new Date().toLocaleString(),
+              created_at: this.CurentTime(),
+              data: {
+                text: this.comment
+              },
+              id: 2,
+              user_id: this.id,
+
+            };
+
+            this.list = this.list.concat(item);
+
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: 0
@@ -108,15 +158,18 @@
               mui.back();
               return;
             }
+            
+
             if(response.data.data) {
+
               this.comment = '';
-              
-              this.list = this.list.concat(response.data.data);
-              
+
+              //            this.list = this.list.concat(response.data.data);
+
               this.flag = true;
 
             }
-           
+
             this.loading = 0;
           });
 
