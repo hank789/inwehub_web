@@ -23,7 +23,7 @@
 
         <template v-for="(item, index) in list">
 
-          <Swiper v-if="index===1"></Swiper>
+          <Swiper v-if="index===2"></Swiper>
 
           <div @tap.stop.prevent="toDetail(item)">
 
