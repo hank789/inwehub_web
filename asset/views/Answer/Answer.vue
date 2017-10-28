@@ -9,17 +9,10 @@
     </header>
 
     <div class="mui-content answerRichText blur">
-        <div class="form form-realAnswer">
+        <div class="form form-realAnswer" v-show="!loading">
             <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000" :placeholder="'请填写回答'"  :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur" @onEditorFocus="onEditorFocus"></Meditor>
 
-            <!--<span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>-->
-
-
         </div>
-
-      <!--<div class="button-wrapper">-->
-        <!--<button type="button" class="mui-btn mui-btn-block mui-btn-primary"    @tap.stop.prevent="goAnswer">我回答好了</button>-->
-      <!--</div>-->
     </div>
 
 
@@ -34,8 +27,10 @@
 
   const Answer = {
     data: () => ({
-      id: null,
+      id: null,  //提问id
+      answerId:null, //回答id
       description: {},
+      loading:0,
       editorObj:{}
     }),
     components: {
@@ -48,18 +43,30 @@
     },
     computed: {
       meditorId() {
-        return 'answer' + this.id;
+        return 'answer' + this.id + '-' + this.answerId;
       }
     },
     methods: {
       refreshPageData(){
          console.log('refreshPageData');
          this.getId();
-         console.log(this.id);
+
       },
       getId(){
         let id = parseInt(this.$route.params.id);
         this.id = id;
+
+        let answerId = parseInt(this.$route.params.answerId);
+
+        if (answerId) {
+            this.answerId = answerId;
+            this.getDetail();
+        } else {
+            this.answerId = 0;
+        }
+
+        console.log('id:' + this.id);
+        console.log('answerId:' + this.answerId);
       },
       cancelAnswer(){
 
@@ -95,6 +102,78 @@
         this.editorObj = editor;
 
       },
+      getDetail(){
+        this.loading = 1;
+        postRequest(`answer/info`, {id: this.answerId}).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.toast(response.data.message);
+            this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
+            return;
+          }
+
+          var data = response.data.data;
+          var content = data.answer.content;
+
+          var objs = JSON.parse(content);
+          var cache = JSON.stringify(this.description);
+
+          if (cache === '{}' || cache === '{"ops":[{"insert":"\\n"}]}') {
+             this.editorObj.setContents(objs);
+          }
+
+          this.loading = 0;
+
+        });
+      },
+      submit(data){
+        for (var i in data.description.ops) {
+          if (data.description.ops[i].insert.hasOwnProperty('image')) {
+            if (/drag/.test(data.description.ops[i].insert.image)) {
+              data.description.ops.splice(i, 1);
+            }
+          }
+        }
+
+
+        data.description = JSON.stringify(data.description);
+
+        var options = {
+          onUploadProgress: function(progressEvent) {
+            this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            mui.uploadWaitingValue(this.percentCompleted);
+          }
+        };
+
+        mui.showUploadWaiting();
+
+        if (this.answerId) {
+            var url = 'answer/update';
+            data.answer_id = this.answerId;
+        } else {
+            var url = 'answer/store';
+        }
+        postRequest(url, data, false, options).then(response => {
+
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+
+          mui.toast(response.data.message);
+
+          if (mui.os.plus && mui.os.ios) {
+            mui.plusReady(() => {
+              plus.storage.setItem(this.id, '');
+            });
+          } else {
+            this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
+          }
+
+          mui.back();
+        });
+      },
       goAnswer(){
 
         if (this.editorObj.getLength() <= 1) {
@@ -124,51 +203,15 @@
           device: device
         };
 
-        mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
-          if (e.index == 1) {
-
-            for (var i in data.description.ops) {
-                if (data.description.ops[i].insert.hasOwnProperty('image')) {
-                  if (/drag/.test(data.description.ops[i].insert.image)) {
-                     data.description.ops.splice(i, 1);
-                  }
-                }
+        if (this.answerId) {
+          this.submit(data);
+        } else {
+          mui.confirm("回答提交后就不能再修改了，你确认提交么？ ", null, ['取消', '确定'], e => {
+            if (e.index == 1) {
+              this.submit(data);
             }
-
-
-            data.description = JSON.stringify(data.description);
-
-            var options = {
-              onUploadProgress: function(progressEvent) {
-                this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                mui.uploadWaitingValue(this.percentCompleted);
-              }
-            };
-
-            mui.showUploadWaiting();
-
-            postRequest(`answer/store`, data, false, options).then(response => {
-
-              var code = response.data.code;
-              if (code !== 1000) {
-                mui.alert(response.data.message);
-                return;
-              }
-
-              mui.toast(response.data.message);
-
-              if (mui.os.plus && mui.os.ios) {
-                mui.plusReady(() => {
-                  plus.storage.setItem(this.id, '');
-                });
-              } else {
-                this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:'', id:this.id});
-              }
-
-              mui.back();
-            });
-          }
-        }, 'div');
+          }, 'div');
+        }
       },
       speech(){
         var options = {};
@@ -182,7 +225,6 @@
       }
     },
     created () {
-        //showInwehubWebview();
         this.getId();
     }
   }

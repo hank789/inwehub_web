@@ -141,7 +141,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-				<li @tap.stop.prevent="$router.pushPlus('/feedback')">
+				<li @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-wodefankuijianyi"></use>
 					</svg>
@@ -174,9 +174,9 @@
 	import { createAPI, addAccessToken, postRequest } from '../../utils/request';
 	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
 	import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-    import userAbility from '../../utils/userAbility';
-   import {alertMajorCommentSuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
-  
+  import userAbility from '../../utils/userAbility';
+  import {alertMajorCommentSuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
+
 
 	export default {
 		data() {
@@ -347,8 +347,6 @@
 		},
 		mounted() {
 
-       
- 
 
 		}
 	}
@@ -660,4 +658,8 @@
 	.mui-popup-inner {
 		padding: 23px 15px 1px 15px;
 	}
+
+  .mui-content{
+    background: #fff;
+  }
 </style>

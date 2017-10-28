@@ -36,7 +36,8 @@ function rebootAuth(hash)
        hash = window.location.hash.replace('#', '');
     }
     var url = process.env.API_ROOT + 'wechat/oauth?redirect=' + hash;
-    window.location.href = url;
+    //-----
+      window.location.href = url;
   }
 }
 

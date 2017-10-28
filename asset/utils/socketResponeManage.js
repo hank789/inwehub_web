@@ -11,6 +11,9 @@ import {
 
 import {postRequest} from '../utils/request';
 import {getAskCommunityMajorDetail, getAskCommunityInteractionDetail} from '../utils/shareTemplate';
+import localEvent from '../stores/localStorage';
+import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
+
 
 function getDetailByAnswerId(answerId, context) {
 
@@ -52,13 +55,17 @@ function getDetailByAnswerId(answerId, context) {
   });
 }
 
-function socketResponseManage(notification, context) {
 
+function socketResponseManage(notification, context) {   
   switch (notification.type) {
     case 'App\\Notifications\\AuthenticationUpdated':
       // 专家认证有新的通知;
       console.log(notification.body);
-
+      break;
+    case 'App\\Notifications\\NewMessage':
+        //新的聊天信息；
+        console.log(notification);
+        context.$emit('chat', notification); 
       break;
   }
 

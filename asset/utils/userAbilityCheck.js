@@ -81,7 +81,6 @@ var userAbilityCheck = () => {
    */
   var moreProfessor = (context) => {
     var userInfo = getLocalUserInfo();
-
     if (userInfo.user_level < 4) {
       var dialogObj = getDialogObj(context);
       if (dialogObj) {
@@ -100,11 +99,11 @@ var userAbilityCheck = () => {
 
     return true;
   };
-  
-  
-  
-  
- 
+
+
+
+
+
 
 
   return {

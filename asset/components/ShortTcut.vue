@@ -1,33 +1,67 @@
 <template>
   <div id="short_all" class="gaussian">
+    <!--quick-->
+
+    <div class="quick">
+      <p   @tap.stop.prevent="skip(7)">我要爆料<span></span></p>
+      <p  @tap.stop.prevent="skip(8)">我有建议<span></span></p>
+      <p  @tap.stop.prevent="skip(9)">我的擅长<span></span></p>
+    </div>
+
     <ul id="down">
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(1)">
-          <use xlink:href="#icon-fabuxuqiu"></use>
-        </svg>
-        <span>发布需求</span>
+        <p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(1)">
+            <use xlink:href="#icon-faxuqiu"></use>
+          </svg>
+        </p>
+        <span class="aside_l">发需求</span>
+
       </li>
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(2)">
-          <use xlink:href="#icon-zhuanyewenda"></use>
-        </svg>
-        <span>专业问答</span>
+        <p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(2)">
+            <use xlink:href="#icon-zhaoguwen"></use>
+          </svg>
+        </p>
+        <span>找顾问</span>
       </li>
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(3)">
-          <use xlink:href="#icon-chengweizhuanjia"></use>
-        </svg>
-        <span>成为专家</span>
+        <p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(3)">
+            <use xlink:href="#icon-xunhezuo"></use>
+          </svg>
+        </p>
+        <span class="aside_r">寻合作</span>
       </li>
       <li>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
-          <use xlink:href="#icon-tijiaowenzhang"></use>
-        </svg>
-        <span>提交文章</span>
+        <p>
+          <i>分红</i>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
+            <use xlink:href="#icon-zhuanyewenda-"></use>
+          </svg>
+        </p>
+        <span class="aside_l">专业问答</span>
+      </li>
+      <li>
+        <p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(5)">
+            <use xlink:href="#icon-hudongwenda-"></use>
+          </svg>
+        </p>
+        <span>互动问答</span>
+      </li>
+      <li>
+        <p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(6)">
+            <use xlink:href="#icon-tijiaowenzhang1"></use>
+          </svg>
+        </p>
+        <span class="aside_r">提交文章</span>
       </li>
 
     </ul>
-    <p @tap.stop.prevent="hide()">
+    <p @tap.stop.prevent="hide()" class="turn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-guanbi"></use>
       </svg>
@@ -36,26 +70,44 @@
 </template>
 <!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
-  import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
-  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
+  import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js';
+  import { getLocalUserInfo, isCompanyStatus } from '../utils/user';
   import userAbility from '../utils/userAbility';
 
   export default {
     methods: {
       skip(num) {
-        switch (num) {
+        switch(num) {
           case 1:
             userAbility.jumpToAddProject();
             break;
           case 2:
-            userAbility.jumpToAddAsk();
+            this.$router.pushPlus('/feedback/consultant');
             break;
           case 3:
-            userAbility.jumpToApplyProfessor(this);
+            this.$router.pushPlus('/feedback/cooperate');
             break;
+
           case 4:
-            userAbility.jumpToAddArticle();
+            userAbility.jumpToAddAsk();
             break;
+          case 5:
+            this.$router.pushPlus('/ask/interaction');
+            break;
+          case 6:
+            this.$router.pushReadHubPage('/submit');
+            break;
+          case 7:
+            this.$router.pushPlus('/feedback/news');
+            break;
+          case 8:
+            this.$router.pushPlus('/feedback/advise');
+            break;
+          case 9:
+            this.$router.pushPlus('/my/advantage');
+            break;
+
+
         }
         this.hide();
       },
@@ -63,12 +115,12 @@
         document.getElementById("short_all").style.display = "inline";
 
         //发现页处理
-        if (mui.os.plus) {
+        if(mui.os.plus) {
 
-          if (this.$route.path.match(/discover/)) {
+          if(this.$route.path.match(/discover/)) {
 
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-            if (inwehub_embed_webview) {
+            if(inwehub_embed_webview) {
               inwehub_embed_webview.hide();
             }
           }
@@ -81,18 +133,18 @@
         //	 	document.getElementById("short_all").style.display="none";
         console.log('hide');
         document.getElementById("down").setAttribute("class", "end");
-        setTimeout(function () {
+        setTimeout(function() {
           document.getElementById("short_all").style.display = "none";
           document.getElementById("down").classList.remove("end");
           autoHeight();
         }, 300)
 
         //发现页处理
-        if (mui.os.plus) {
-          if (this.$route.path.match(/discover/)) {
+        if(mui.os.plus) {
+          if(this.$route.path.match(/discover/)) {
             setTimeout(() => {
               var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-              if (inwehub_embed_webview) {
+              if(inwehub_embed_webview) {
                 inwehub_embed_webview.show();
               }
             }, 300);
@@ -110,6 +162,25 @@
 </script>
 
 <style scoped="scoped">
+
+@media (min-width:320px) {
+    ul{
+         width:80%;
+    }
+}
+
+@media (min-width: 375px) {
+   ul{
+         width:72.5%;
+    }
+
+}
+
+@media (min-width: 414px) {
+    ul{
+        width:72.5%;
+    }
+}
   ul,
   li,
   div,
@@ -129,7 +200,7 @@
     display: none;
   }
 
-  #short_all p {
+  #short_all .turn {
     position: absolute;
     bottom: 14px;
     left: 47.2%;
@@ -150,10 +221,9 @@
 
   ul {
     position: absolute;
-    width: 70%;
-    height: 260px;
-    /*top: 0;
-      bottom: 0;*/
+   /* width:72.5%;*/
+    /*width: 300px;*/
+    height: 220px;
     left: 0;
     right: 0;
     margin: auto;
@@ -173,14 +243,13 @@
       opacity: 1;
     }
   }
-
   /*结束动画*/
 
   .end {
-    width: 100%;
+    width: 63.3%;
     height: 260px;
     position: absolute;
-    bottom: -230px;
+    bottom: -250px;
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
@@ -195,27 +264,154 @@
       opacity: 1;
     }
   }
-
   /**************/
 
   ul li {
     float: left;
-    width: 50%;
-    height: 130px;
+    width: 33.3%;
+    height: 110px;
+    /*background:#CCCCCC;*/
+    position: relative;
   }
 
-  ul li svg {
-    font-size: 53px;
-    width: 37%;
-    height: 53px;
-    margin-left: 31.5%;
-    margin-top: 28px;
+  ul li:nth-of-type(2) p,ul li:nth-of-type(5) p {
+    width: 64px;
+    height: 64px;
+    background: #b5e8fe;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  ul li:nth-of-type(1) p,ul li:nth-of-type(4) p {
+    width: 64px;
+    height: 64px;
+    background: #b5e8fe;
+    border-radius: 50%;
+    position: absolute;
+  }
+  ul li:nth-of-type(3) p,ul li:nth-of-type(6) p {
+    width: 64px;
+    height: 64px;
+    background: #b5e8fe;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+
+  }
+  /*分红*/
+   ul li:nth-of-type(4) p i{
+     position: absolute;
+     font-style: normal;
+     width:35px;
+     height:20px;
+     font-size:12px;
+     color:#FFFFFF;
+     border-radius: 4px;
+     background:#fa4975;
+     text-align: center;
+     line-height: 17px;
+     top: 5px;
+    right: -25px;
+
+
+
+   }
+   ul li:nth-of-type(4) p i:after{
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fa4975;
+    /*border: 1px solid #dcdcdc;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left:-3px;
+    /*border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;*/
+    top: 0px;
+    bottom: 0;
+    margin: auto;
+    }
+    /**/
+
+  ul li p svg {
+    font-size: 35px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 
   ul li span {
     display: inline-block;
     width: 100%;
     text-align: center;
-    margin-top: 13px;
+    position: absolute;
+    top: 73px;
+    font-size: 14px;
+    color: #444444;
   }
+  ul li .aside_r{
+    width: 64px;
+    right: 0;
+
+
+  }
+  ul li .aside_l{
+    width: 64px;
+    left: 0;
+
+
+  }
+  /*quick*/
+
+  .quick {
+    width: 63.3%;
+    height: 14px;
+    /*background: #CCCCCC;*/
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .quick p {
+    width: 30%;
+    margin-right: 5%;
+    float: left;
+    font-size: 13px;
+    color: #444444;
+    text-align: left;
+    line-height: 14px;
+    border-right: 0.5px solid #dcdcdc;
+    /*border: 1px solid #000000;*/
+  }
+
+  .quick p:nth-of-type(3) {
+    margin-right: 0;
+    border-color: #fff;
+  }
+
+  .quick>p span {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #a8dff7;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    margin-left: 6px;
+  }
+
+
+
 </style>

@@ -9,7 +9,7 @@
       </svg>
     </div>
 
-    <div class="inputWrapper">
+    <div class="inputWrapper" v-if="isNeedRegistrationCode">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yaoqingma"></use>
       </svg>
@@ -48,7 +48,7 @@
     </div>
 
 
-    <div class="help" @tap.stop.prevent="jumpToForm">
+    <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
       我没有邀请码？
     </div>
 
@@ -72,6 +72,7 @@
 
   export default {
     data: () => ({
+      isNeedRegistrationCode:false,
       registrationCode: '', //邀请码
       phone: '', // 手机号码
       isCanGetCode: false,
@@ -187,16 +188,6 @@
           return;
         }
 
-//        if (!this.registrationCode) {
-//          this.showTip(this.$refs.registrationCode, '请输入邀请码');
-//          return;
-//        }
-//
-//        if (this.registrationCode.length < 6) {
-//          this.showTip(this.$refs.registrationCode, '邀请码至少6位');
-//          return;
-//        }
-
         if (mobile.length !== 11 || /^1\d{10}$/.test(mobile) === false) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码');
           return;
@@ -250,11 +241,6 @@
         this.isCanGetCode = true;
       },
       checkValid(){
-//        if (!this.registrationCode) {
-//          this.disableRegister = true;
-//          return false;
-//        }
-
         if (!this.phone) {
           this.disableRegister = true;
           return false;

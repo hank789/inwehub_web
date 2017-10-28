@@ -1,15 +1,19 @@
 <template>
-  <div class="mui-content">
-    <iframe v-show="iframeState" id="show-iframe" @load="loaded" frameborder=0  name="showHere" scrolling=no marginheight="0" marginwidth="0"></iframe>
+  <div>
+    <div style="background:#3c3e44;display: none;"></div>
+    <div class="mui-content">
+      <iframe v-show="iframeState" id="show-iframe" @load="loaded" frameborder=0   name="showHere" scrolling=no
+              marginheight="0" marginwidth="0"></iframe>
 
-    <div id="statusBarStyle" background="transparent"></div>
+      <div id="statusBarStyle" background="transparent"></div>
+    </div>
   </div>
-
 </template>
 
 
 <script>
   import localEvent from '../../stores/localStorage';
+  import {getImmersedHeight} from '../../utils/statusBar';
 
   export default {
     data: () => ({
@@ -39,7 +43,7 @@
       reloadUrl(){
 
         if (!/^\/discover/.test(this.$route.path)) {
-            return;
+          return;
         }
 
         this.currentUser = localEvent.getLocalItem('UserInfo');
@@ -60,7 +64,6 @@
       createIframe(url){
         mui.waiting();
 
-
         this.iframeState = true;
         const deviceWidth = document.documentElement.clientWidth;
         const deviceHeight = document.documentElement.clientHeight - 50;
@@ -75,28 +78,28 @@
         mui.waiting();
         mui.plusReady(() => {
           var ws = plus.webview.currentWebview();
-          console.log('wsid:'+ws.id);
+          console.log('wsid:' + ws.id);
           ws.addEventListener('show', createEmbed(ws, url), false);
 
           function createEmbed(ws, url) {
+            var ImmersedHeight = getImmersedHeight();
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
             if (!inwehub_embed_webview) {
               inwehub_embed_webview = plus.webview.create(url, 'inwehub_embed', {
                 popGesture: 'none',
-                top: '0px',
+                top: ImmersedHeight + 'px',
                 dock: 'top',
                 bottom: '50px',
                 bounce: 'none'
               });
               ws.append(inwehub_embed_webview);
             } else {
-              console.log('zzzedd'+inwehub_embed_webview.getURL() + ' url:'+ url);
+              console.log('zzzedd' + inwehub_embed_webview.getURL() + ' url:' + url);
               if (inwehub_embed_webview.getURL() !== url) {
                 inwehub_embed_webview.loadURL(url);
               }
               inwehub_embed_webview.show();
             }
-
 
             mui.closeWaiting();
           }

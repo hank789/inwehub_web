@@ -14,8 +14,10 @@
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
                 :answer="answer"
+                :questionId="ask.question.id"
                 :needMoney="true"
                 :isFollow="true"
+                :showModifyBtn="true"
                 :showShoucang="true"
                 @paySuccess="paySuccess"
         ></Answer>

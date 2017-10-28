@@ -52,9 +52,35 @@ const routes = [{
     meta: {
       title: 'Inwehub',
       wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Feed.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed
+    path: '/feed',
+    name: 'feed',
+    meta: {
+      title: 'Inwehub',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Feed.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feedtest
+    path: '/feedtest',
+    name: 'feedtest',
+    meta: {
+      title: 'Inwehub',
+      wechatHideHeader: true,
       keepAlive: true
     },
-    component: require('../../../views/Home.vue'),
+    component: require('../../../views/Feedtest.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -228,6 +254,18 @@ const routes = [{
       wechatHideHeader: true
     },
     component: require('../../../views/Account/Collected.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的擅长
+    path: '/my/advantage',
+    name: 'my-advantage',
+    meta: {
+      title: '我的擅长',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Account/Advantage.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -961,6 +999,17 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { // answer
+    path: '/realAnswer/:id/:answerId',
+    name: 'answer-question-answerid',
+    component: require('../../../views/Answer/Answer.vue'),
+    meta: {
+      title: '回答'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { //ask-comment
     path: '/askComment/:id',
     name: 'ask-feedback',
@@ -1063,7 +1112,7 @@ const routes = [{
     }
   },
   { // feedback
-    path: '/feedback',
+    path: '/feedback/:type',
     name: 'feedback',
     meta: {
       title: '反馈建议',
@@ -1422,6 +1471,14 @@ const routes = [{
     },
     component: require('../../../views/Exception/Error.vue'),
   },
+//{
+//  path: '/short',
+//  name: 'short',
+//  meta: {
+//    title: 'short'
+//  },
+//  component: require('../../../components/shortTcut.vue'),
+//},
   { // message
     path: '/*',
     name: '404',

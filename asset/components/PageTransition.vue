@@ -31,6 +31,7 @@
     position: absolute;
     top:0;
     left:0;
+    bottom:0;
     width:100%;
     transition: all .2s cubic-bezier(.55,0,.1,1);
   }

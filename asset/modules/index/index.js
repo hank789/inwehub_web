@@ -52,6 +52,8 @@ window.loading_gif = loading_gif;
  //mui的插件；
 import './../../styles/mui.css';
 import './../../styles/common.css';
+import './../../styles/feed.min.css';
+import './../../styles/immersed.css';
 import './../../styles/mui.picker.all.css';
 import './../../styles/iconfont.css';
 import './../../styles/percircle.css';
@@ -159,6 +161,9 @@ mui.toast = toast;
 //}
 
 
+
+
+
 Vue.mixin({
   activated(){
     if (!this.$el || this.$el.id !== 'router-view') {
@@ -227,7 +232,7 @@ mui.back = function(){
       'list-detail-page',
       'list-detail-page-interaction',
       'list-detail-page-contact',
-      'list-detail-page-realAnswer'
+      'readhub_submission_webview'
     ];
 
     var need_webview_back = [
@@ -235,12 +240,21 @@ mui.back = function(){
       'inwehub_article_view'
     ];
     console.log(current_webview.id);
-    if (need_hide.indexOf(current_webview.id) !== -1) {
+
+    if (current_webview.id === window.plus.runtime.appid) {
+      goBack();
+      mui.muiOldBack();
+    } else if (need_hide.indexOf(current_webview.id) !== -1) {
+      console.log('hide');
       goBack();
       current_webview.hide();
-    } else if (mui.os.ios || need_webview_back.indexOf(current_webview.id) !== -1){
+    } else if (mui.os.plus || need_webview_back.indexOf(current_webview.id) !== -1){
+      console.log('close');
+      goBack();
       mui.muiOldBack();
+      current_webview.close();
     } else {
+      console.log('go(-1)');
       router.go(-1);
     }
   } else {

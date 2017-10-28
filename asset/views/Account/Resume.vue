@@ -128,11 +128,11 @@
 
 
 
-    </div>
+
 
     <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
     <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-      <div :class="{item:true, itemJobMore:isShare && index >= 3}" v-for="(job, index) in resume.jobs">
+      <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
         <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
         <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
         <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
@@ -149,7 +149,7 @@
 
     <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
     <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
-      <div :class="{item:true, itemProjectMore:isShare && index >= 3}" v-for="(project, index) in resume.projects">
+      <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex" v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
         <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
         <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
         <div class="others">
@@ -189,7 +189,7 @@
 
     <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
     <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-      <div :class="{item:true, itemEduMore:isShare && index >= 3}" v-for="(edu, index) in resume.edus">
+      <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
         <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
         <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
           class="separate"></i>{{ edu.major }}
@@ -214,6 +214,9 @@
       <div class="desc">部分信息暂未公开</div>
     </div>
 
+
+  </div>
+
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
             @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
 
@@ -222,8 +225,6 @@
             @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
 
     </button>
-
-
 
   </div>
 </template>
@@ -255,6 +256,9 @@
         shareUrl: '',
         wechatConfig: {},
         downloadHeader: false,
+        isShowProjectMore:false,
+        isShowItemJobMore:false,
+        isShowitemEduMore:false,
         resume: {
 
           info: {
@@ -377,15 +381,7 @@
           return;
         }
 
-        var jobs = document.getElementsByClassName('itemJobMore');
-
-        for (var i in jobs) {
-          var job = jobs[i];
-          if (job.className) {
-            job.className = job.className.replace('itemJobMore', '');
-          }
-
-        }
+        this.isShowItemJobMore = true;
         event.target.style.display = 'none';
       },
       showProjectMore(event) {
@@ -395,15 +391,8 @@
           return;
         }
 
-        var jobs = document.getElementsByClassName('itemProjectMore');
+        this.isShowProjectMore = true;
 
-        for (var i in jobs) {
-          var job = jobs[i];
-          if (job.className) {
-            job.className = job.className.replace('itemProjectMore', '');
-          }
-
-        }
         event.target.style.display = 'none';
       },
       showEduMore(event) {
@@ -413,15 +402,7 @@
           return;
         }
 
-        var jobs = document.getElementsByClassName('itemEduMore');
-
-        for (var i in jobs) {
-          var job = jobs[i];
-          if (job.className) {
-            job.className = job.className.replace('itemEduMore', '');
-          }
-
-        }
+        this.isShowitemEduMore = true;
         event.target.style.display = 'none';
       },
       goAsk(url) {
@@ -986,10 +967,13 @@
 
   .news p:nth-of-type(1) {
     text-align: right;
-
   }
 
   .news p:nth-of-type(2) {
     text-align: left;
+  }
+
+  .resumeWrapper{
+    bottom:48px;
   }
 </style>

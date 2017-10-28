@@ -41,6 +41,7 @@
 
   export default {
     data: () => ({
+      isNeedRegistrationCode:false,
       phone:'',
       code:'',
       registration_code:'',

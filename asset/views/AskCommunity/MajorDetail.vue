@@ -16,6 +16,7 @@
                 :answer="answer"
                 :needMoney="true"
                 :isFollow="true"
+                :showModifyBtn="false"
                 @paySuccess="paySuccess"
         ></Answer>
 

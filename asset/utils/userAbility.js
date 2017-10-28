@@ -86,7 +86,8 @@ var userAbility = () => {
    * 跳转到提交文章
    */
   var jumpToAddArticle = (context) => {
-    router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
+    context.$router.pushReadHubPage('/submit');
+    // router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   };
 
   /**
@@ -234,7 +235,7 @@ var userAbility = () => {
   };
 
 
-  
+
 
 
 

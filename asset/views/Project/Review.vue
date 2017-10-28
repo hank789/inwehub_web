@@ -550,10 +550,6 @@
     border-radius: 3px;
   }
 
-  .mui-content{
-    overflow: hidden;
-  }
-
   .section .contentWrapper .files{
     padding-top:5px;
   }

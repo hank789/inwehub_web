@@ -102,8 +102,8 @@
               obj.addEventListener('tap', function(e) {
                 obj.remove();
               });
+              document.querySelector('.mui-content').appendChild(obj);
             }
-            document.querySelector('.mui-content').appendChild(obj);
           }, 150);
         }, 150);
       },
