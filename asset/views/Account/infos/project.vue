@@ -57,6 +57,11 @@
 
 			<MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该项目经历的详细信息'"></MTextarea>
 
+      <div class="options">
+        <a @tap.stop.prevent="muiViewBack">取消</a>
+        <a @tap.stop.prevent="submit" :disabled="buttonSaveDisabled">保存</a>
+      </div>
+
 		</div>
 
 		<div id="page_industry_tags" class="mui-modal mui-pageSub">
@@ -75,10 +80,7 @@
 
 		</div>
 
-		<div class="options">
-			<a @tap.stop.prevent="muiViewBack">取消</a>
-			<a @tap.stop.prevent="submit" :disabled="buttonSaveDisabled">保存</a>
-		</div>
+
 
 		<div id="statusBarStyle" background="#fefefe" mode="light"></div>
 
@@ -425,29 +427,6 @@
 		padding: 0;
 	}
 
-	.textarea-wrapper {
-		margin: 0 5px;
-		height: 100%;
-		position: relative;
-		border-radius: 5px;
-		border: 1px solid #bbbbbb;
-		background: #fff;
-		padding-bottom: 20px;
-	}
-
-	.textarea-wrapper .counter {
-		position: absolute;
-		right: 4px;
-		font-size: 12px;
-		bottom: 2px;
-		color: #b0b0b0;
-	}
-
-	.textarea-wrapper textarea {
-		border: none;
-		margin: 0;
-		padding-bottom: 0;
-	}
 
 	.deleteWrapper {
 		text-align: right;

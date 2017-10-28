@@ -64,7 +64,6 @@
 <style scoped>
   .textarea-wrapper {
     margin: 0 5px;
-    height: 100%;
     position: relative;
     border-radius: 5px;
     border: 1px solid #bbbbbb;
