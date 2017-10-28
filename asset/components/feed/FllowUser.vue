@@ -6,7 +6,7 @@
             <div class="container-avatarAndText">
               <div class="author">
                 <div class="avatar">
-                  <div class="avatarInner"><img :src="data.avatar">
+                  <div class="avatarInner"><img :src="data.user.avatar">
                     <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                     </svg>
@@ -29,7 +29,7 @@
             <div class="container-avatarAndText">
               <div class="author">
                 <div class="avatar">
-                  <div class="avatarInner"><img :src="data.avatar.follow_user_avatar">
+                  <div class="avatarInner"><img :src="data.feed.follow_user_avatar">
                     <svg class="icon" aria-hidden="true" v-if="data.feed.follow_user_is_expert === 1">
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                     </svg>
