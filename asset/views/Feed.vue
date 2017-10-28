@@ -7,6 +7,9 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
+
+      <Activity></Activity>
+
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -17,8 +20,6 @@
         :list="list"
         class="listWrapper"
       >
-
-
         <div v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
           <!--x回答了专业问答-->
           <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
@@ -88,6 +89,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle';
 
   import RefreshList from '../components/refresh/List.vue';
+  import Activity from '../components/home/Activity.vue';
 
   const Feed = {
     data: () => ({
@@ -95,7 +97,7 @@
       list: []
     }),
     created() {
-
+      this.getHomeData();
     },
     components: {
       RefreshList,
@@ -110,7 +112,8 @@
       CommentReadhubAriticle,
       UpvotePayQuestion,
       UpvoteFreeQuestion,
-      UpvoteReadhubAriticle
+      UpvoteReadhubAriticle,
+      Activity
 
     },
     //缓存；
@@ -122,6 +125,15 @@
     },
     computed: {},
     methods: {
+      getHomeData(){
+        postRequest(`home`, {}, false).then(response => {
+          var code = response.data.code;
+          if (code !== 1000) {
+            mui.toast(response.data.message);
+            return;
+          }
+        });
+      },
       toDetail(item){
 
         if (item.feed_type === 7) item.url += '?goback=1';
@@ -154,5 +166,12 @@
 </script>
 
 <style lang="less" scoped>
+  .listWrapper {
+    top: 0;
+    bottom: 50px;
+  }
 
+  .activityWrapper.unIsGetted ~ .listWrapper {
+    top: 42px;
+  }
 </style>
