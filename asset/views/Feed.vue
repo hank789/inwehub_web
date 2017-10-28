@@ -144,7 +144,7 @@
     computed: {},
     methods: {
       toAddArticle(){
-        userAbility.jumpToAddArticle();
+        userAbility.jumpToAddArticle(this);
       },
       goArticle: function (article) {
 
