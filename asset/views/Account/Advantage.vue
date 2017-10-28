@@ -8,9 +8,9 @@
     <div class="mui-content absolute">
       <ul class="myLabel" v-if="skill_tags.length > '0'">
         <p>擅长标签</p>
-        <li v-for="(item, index) in skill_tags">
+        <li v-for="(item, index) in skill_tags" >
            {{item.text}}
-          <svg class="icon" aria-hidden="true">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">
             <use xlink:href="#icon-times--"></use>
           </svg>
         </li>
@@ -33,7 +33,7 @@
             <i class="bot"></i>
           </li>
           <!--搜素到的标签名 -->
-          <li v-for="(item, index) in list"  @tap.stop.prevent="addSkillTag(item.text)">
+          <li v-for="(item, index) in list"  @tap.stop.prevent="addSkillTag(item.value)">
             {{item.text}}
             <i class="bot"></i>
           </li>
@@ -74,17 +74,38 @@
           }
         })
       },
-      //添加擅长标签；
-      addSkillTag(text){
-        console.error(text);
-         postRequest("profile/addSkillTag", {tags:[text]}).then(response => {
+      //删除擅长标签；
+      delSkillTag(val){
+        console.error(val);
+        postRequest("profile/delSkillTag", {tags:[val]}).then(response => {
           var code = response.data.code;
           if(code !== 1000) {
             mui.alert(response.data.message);
             mui.back();
             return;
           }
-           mui.toast("成功");
+           console.error(response.data);
+            mui.toast("删除成功");
+           //刷新我的擅长列表；
+           this.skillTags();
+           
+          this.loading = 0;
+          });
+        
+      },
+      //添加擅长标签；
+      addSkillTag(val){
+        console.error(val);
+         postRequest("profile/addSkillTag", {tags:[val]}).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            mui.back();
+            return;
+          }
+//         mui.toast("添加成功");
+           //刷新我的擅长列表；
+           this.skillTags();
           this.loading = 0;
           });
       },
@@ -114,8 +135,6 @@
           if(response.data.data.info.skill_tags.length > 0) {
             this.skill_tags = response.data.data.info.skill_tags;
           }
-          
-//        console.error(this.skill_tags);
           this.loading = 0;
         });
       
