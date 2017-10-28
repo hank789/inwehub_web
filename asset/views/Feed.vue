@@ -8,8 +8,6 @@
 
     <div class="mui-content" v-show="!loading">
 
-      <Activity></Activity>
-
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -20,48 +18,56 @@
         :list="list"
         class="listWrapper"
       >
-        <div v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
-          <!--x回答了专业问答-->
-          <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 
-          <!--x回答了互动问答-->
-          <AnswerInteraction v-else-if="item.feed_type === 2" :data="item"></AnswerInteraction>
+        <Activity></Activity>
 
-          <!--x发布了互动问答-->
-          <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
+        <template v-for="(item, index) in list">
 
-          <!--x发布了文章-->
-          <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item"></SubmitReadhubAriticle>
+          <Swiper v-if="index===1"></Swiper>
 
-          <!--x关注了互动问答-->
-          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
+          <div @tap.stop.prevent="toDetail(item)">
 
-          <!--x关注了互动问答-->
-          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
+            <!--x回答了专业问答-->
+            <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 
-          <!--x关注了新的朋友-->
-          <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
+            <!--x回答了互动问答-->
+            <AnswerInteraction v-else-if="item.feed_type === 2" :data="item"></AnswerInteraction>
 
-          <!--x评论了专业回答-->
-          <CommentPayQustion v-else-if="item.feed_type === 8" :data="item"></CommentPayQustion>
+            <!--x发布了互动问答-->
+            <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
-          <!--x评论了互动回答-->
-          <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
+            <!--x发布了文章-->
+            <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item"></SubmitReadhubAriticle>
 
-          <!--x评论了文章-->
-          <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
+            <!--x关注了互动问答-->
+            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
 
-          <!--x赞了专业回答-->
-          <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
+            <!--x关注了互动问答-->
+            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
 
-          <!--x赞了互动回答-->
-          <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
+            <!--x关注了新的朋友-->
+            <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
 
-          <!--x赞了文章-->
-          <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
+            <!--x评论了专业回答-->
+            <CommentPayQustion v-else-if="item.feed_type === 8" :data="item"></CommentPayQustion>
 
+            <!--x评论了互动回答-->
+            <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
 
-        </div>
+            <!--x评论了文章-->
+            <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
+
+            <!--x赞了专业回答-->
+            <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
+
+            <!--x赞了互动回答-->
+            <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
+
+            <!--x赞了文章-->
+            <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
+
+          </div>
+        </template>
 
         <div class="flex center font-12 color-c8c8c8 padding-13-0-20-0">你已经到达我的底线</div>
 
@@ -90,6 +96,8 @@
 
   import RefreshList from '../components/refresh/List.vue';
   import Activity from '../components/home/Activity.vue';
+  import Swiper from '../components/home/Swiper.vue';
+  import userAbility from '../utils/userAbility';
 
   const Feed = {
     data: () => ({
@@ -113,7 +121,8 @@
       UpvotePayQuestion,
       UpvoteFreeQuestion,
       UpvoteReadhubAriticle,
-      Activity
+      Activity,
+      Swiper
 
     },
     //缓存；
@@ -122,6 +131,8 @@
     },
     mounted() {
 
+      //新手任务
+      userAbility.newbieTask(this);
     },
     computed: {},
     methods: {
