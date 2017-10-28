@@ -19,48 +19,50 @@
       >
 
 
-        <template v-for="(item, index) in list">
+        <div v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
           <!--x回答了专业问答-->
-          <AnswerMajor v-if="item.feed_type === 1" :data="item" @tap.stop.prevent="toDetail(item)"></AnswerMajor>
+          <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 
           <!--x回答了互动问答-->
-          <AnswerInteraction v-else-if="item.feed_type === 2" :data="item" @tap.stop.prevent="toDetail(item)"></AnswerInteraction>
+          <AnswerInteraction v-else-if="item.feed_type === 2" :data="item"></AnswerInteraction>
 
           <!--x发布了互动问答-->
-          <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item" @tap.stop.prevent="toDetail(item)"></CreateFreeQuestion>
+          <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
           <!--x发布了文章-->
-          <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item" @tap.stop.prevent="toDetail(item)"></SubmitReadhubAriticle>
+          <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item"></SubmitReadhubAriticle>
 
           <!--x关注了互动问答-->
-          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" @tap.stop.prevent="toDetail(item)"></FllowFreeQuestion>
+          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
 
           <!--x关注了互动问答-->
-          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" @tap.stop.prevent="toDetail(item)"></FllowFreeQuestion>
+          <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
 
           <!--x关注了新的朋友-->
-          <FllowUser v-else-if="item.feed_type === 7" :data="item" @tap.stop.prevent="toDetail(item)"></FllowUser>
+          <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
 
           <!--x评论了专业回答-->
-          <CommentPayQustion v-else-if="item.feed_type === 8" :data="item" @tap.stop.prevent="toDetail(item)"></CommentPayQustion>
+          <CommentPayQustion v-else-if="item.feed_type === 8" :data="item"></CommentPayQustion>
 
           <!--x评论了互动回答-->
-          <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item" @tap.stop.prevent="toDetail(item)"></CommentFreeQuestion>
+          <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
 
           <!--x评论了文章-->
-          <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item" @tap.stop.prevent="toDetail(item)"></CommentReadhubAriticle>
+          <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
 
           <!--x赞了专业回答-->
-          <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item" @tap.stop.prevent="toDetail(item)"></UpvotePayQuestion>
+          <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
 
           <!--x赞了互动回答-->
-          <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item" @tap.stop.prevent="toDetail(item)"></UpvoteFreeQuestion>
+          <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
 
           <!--x赞了文章-->
-          <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item" @tap.stop.prevent="toDetail(item)"></UpvoteReadhubAriticle>
+          <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
 
 
-        </template>
+        </div>
+
+        <div class="flex center font-12 color-c8c8c8 padding-13-0-20-0">你已经到达我的底线</div>
 
       </RefreshList>
 
@@ -121,27 +123,30 @@
     computed: {},
     methods: {
       toDetail(item){
-           switch(item.feed_type) {
-             case 1:
-             case 2:
-             case 3:
-             case 4:
-             case 6:
-             case 7:
-             case 8:
-             case 9:
-             case 11:
-             case 12:
-                 this.$router.pushPlus(item.url);
-               break;
-             case 5:
-             case 10:
-             case 13:
-                 this.$router.pushReadHubPage(item.url);
-               break;
-             default:
-               break;
-           }
+
+        if (item.feed_type === 7) item.url += '?goback=1';
+
+        switch (item.feed_type) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 6:
+          case 7:
+          case 8:
+          case 9:
+          case 11:
+          case 12:
+            this.$router.pushPlus(item.url);
+            break;
+          case 5:
+          case 10:
+          case 13:
+            this.$router.pushReadHubPage(item.url);
+            break;
+          default:
+            break;
+        }
       }
     }
   };
