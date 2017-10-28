@@ -56,7 +56,12 @@
 
 			<MTextarea v-model.trim="description" :content="description" :rows="5" :descMaxLength="2000" :placeholder="'请详细填写该工作经历的详细信息'"></MTextarea>
 
-		</div>
+      <div class="options">
+        <a @tap.stop.prevent="muiViewBack">取消</a>
+        <a @tap.stop.prevent="submit" :disabled="buttonSaveDisabled">保存</a>
+      </div>
+
+    </div>
 
 		<div id="page_industry_tags" class="mui-modal mui-pageSub">
 			<industry-tags-indexed-list :tag_type="3" :selected="job.industry_tags" :back_id="page_industry_tags_id" :object_type="object_type" v-on:selectedIndustryTags="selectedIndustryTags">
@@ -72,10 +77,6 @@
 
 		</div>
 
-		<div class="options">
-			<a @tap.stop.prevent="muiViewBack">取消</a>
-			<a @tap.stop.prevent="submit" :disabled="buttonSaveDisabled">保存</a>
-		</div>
 
 		<div id="statusBarStyle" background="#fefefe" mode="light"></div>
 
@@ -444,23 +445,6 @@
 	.mui-input-row {
 		position: relative;
 		font-size: 14px;
-	}
-
-	.textarea-wrapper[data-v-c8d6295a] {
-		margin: 0 15px 0 14px;
-		height: 100%;
-		position: relative;
-		border-radius: 5px;
-		border: 1px solid #dcdcdc;
-		padding-bottom: 20px;
-		background: #FEFEFE;
-	}
-
-	.textarea-wrapper textarea {
-		font-size: 14px;
-		height: 100%;
-		padding: 5px 10px;
-		background: #fefefe;
 	}
 
 	.mui-content>.mui-table-view:first-child {

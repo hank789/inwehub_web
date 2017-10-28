@@ -145,7 +145,6 @@
             extras: {preload: true}
           });
 
-          console.log("inwehub_embed:" + inwehub_embed_view.getURL());
           if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url) {
             console.log('inwehub_embed:reload:' + url);
             inwehub_embed_view.loadURL(url);
@@ -156,8 +155,6 @@
           });
 
           var ws = plus.webview.currentWebview();
-          console.log('bindEvent-runtime:' + plus.runtime.appid);
-          console.log('bindEvent-wsid:' + ws.id);
           //监听自定义事件，前往页面
           document.addEventListener('go_to_target_page', (event) => {
             var url = event.detail.url;
@@ -191,6 +188,9 @@
                   // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
                   //router.go(-1);
                   router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
+                  break;
+                case 'pay_question_answered_askCommunity':
+                  router.pushPlus('/askCommunity/major/' + payload.object_id);
                   break;
                 case 'free_question_answered':
                   router.pushPlus('/askCommunity/interaction/' + payload.object_id);
@@ -287,7 +287,7 @@
                       aniShow: 'pop-in'
                     },
                     styles: {
-                      popGesture: 'hide'
+                      popGesture: 'close'
                     },
                     waiting: {
                       autoShow: false
@@ -321,6 +321,7 @@
                   break;
                 case 'im_message':
                   //聊天信息
+                  router.pushPlus('/chat');
                   break;
               }
             };
