@@ -95,7 +95,7 @@
             this.$router.pushPlus('/ask/interaction');
             break;
           case 6:
-            userAbility.jumpToAddArticle();
+            this.$router.pushReadHubPage('/submit');
             break;
           case 7:
             this.$router.pushPlus('/feedback/news');
@@ -106,7 +106,7 @@
           case 9:
             this.$router.pushPlus('/my/advantage');
             break;
-            
+
 
         }
         this.hide();
@@ -162,7 +162,7 @@
 </script>
 
 <style scoped="scoped">
-   
+
 @media (min-width:320px) {
     ul{
          width:80%;
@@ -173,7 +173,7 @@
    ul{
          width:72.5%;
     }
-    
+
 }
 
 @media (min-width: 414px) {
@@ -190,7 +190,7 @@
     padding: 0;
     list-style: none;
   }
-  
+
   #short_all {
     position: fixed;
     top: 0;
@@ -199,7 +199,7 @@
     z-index: 9999;
     display: none;
   }
-  
+
   #short_all .turn {
     position: absolute;
     bottom: 14px;
@@ -209,7 +209,7 @@
     animation: rote 0.5s infinite;
     animation-iteration-count: 1;
   }
-  
+
   @keyframes rote {
     from {
       transform: rotateZ(0deg);
@@ -218,7 +218,7 @@
       transform: rotateZ(360deg);
     }
   }
-  
+
   ul {
     position: absolute;
    /* width:72.5%;*/
@@ -232,7 +232,7 @@
     animation: myfirst 0.3s infinite;
     animation-iteration-count: 1;
   }
-  
+
   @keyframes myfirst {
     from {
       bottom: -130px;
@@ -244,7 +244,7 @@
     }
   }
   /*结束动画*/
-  
+
   .end {
     width: 63.3%;
     height: 260px;
@@ -253,7 +253,7 @@
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
-  
+
   @keyframes myend {
     from {
       bottom: 110px;
@@ -265,7 +265,7 @@
     }
   }
   /**************/
-  
+
   ul li {
     float: left;
     width: 33.3%;
@@ -273,7 +273,7 @@
     /*background:#CCCCCC;*/
     position: relative;
   }
-  
+
   ul li:nth-of-type(2) p,ul li:nth-of-type(5) p {
     width: 64px;
     height: 64px;
@@ -314,11 +314,11 @@
      line-height: 17px;
      top: 5px;
     right: -25px;
-     
 
-     
+
+
    }
-   ul li:nth-of-type(4) p i:after{ 
+   ul li:nth-of-type(4) p i:after{
     content: "";
     display: block;
     width: 6px;
@@ -336,7 +336,7 @@
     margin: auto;
     }
     /**/
-  
+
   ul li p svg {
     font-size: 35px;
     position: absolute;
@@ -346,7 +346,7 @@
     bottom: 0;
     margin: auto;
   }
-  
+
   ul li span {
     display: inline-block;
     width: 100%;
@@ -359,17 +359,17 @@
   ul li .aside_r{
     width: 64px;
     right: 0;
-    
-    
+
+
   }
   ul li .aside_l{
     width: 64px;
     left: 0;
-    
-   
+
+
   }
   /*quick*/
-  
+
   .quick {
     width: 63.3%;
     height: 14px;
@@ -380,7 +380,7 @@
     right: 0;
     margin: auto;
   }
-  
+
   .quick p {
     width: 30%;
     margin-right: 5%;
@@ -392,12 +392,12 @@
     border-right: 0.5px solid #dcdcdc;
     /*border: 1px solid #000000;*/
   }
-  
+
   .quick p:nth-of-type(3) {
     margin-right: 0;
     border-color: #fff;
   }
-  
+
   .quick>p span {
     display: inline-block;
     width: 0;
@@ -411,7 +411,7 @@
     margin: auto;
     margin-left: 6px;
   }
-  
- 
+
+
 
 </style>
