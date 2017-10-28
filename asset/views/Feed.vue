@@ -195,7 +195,7 @@
             //            window.location.href = url;
           }
         } else {
-          this.$router.pushPlus(url);
+          this.$router.pushReadHubPage(url);
         }
       },
       getHomeData(){
@@ -230,7 +230,7 @@
           case 5:
           case 13:
             var article = {
-              view_url:item.feed.view_url,
+              view_url:item.url,
               id:item.feed.submission_id,
               title:item.feed.title,
               comment_url:item.feed.comment_url,
