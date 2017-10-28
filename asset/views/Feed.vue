@@ -4,6 +4,13 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-logowenzi"></use>
       </svg>
+
+      <div class="rightWrapper" @tap.stop.prevent="toAddArticle()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-plus--"></use>
+        </svg>
+      </div>
+
     </header>
 
     <div class="mui-content" v-show="!loading">
@@ -136,6 +143,9 @@
     },
     computed: {},
     methods: {
+      toAddArticle(){
+        userAbility.jumpToAddArticle();
+      },
       goArticle: function (article) {
 
         var url = article.view_url;
@@ -256,5 +266,15 @@
 
   .activityWrapper.unIsGetted ~ .listWrapper {
     top: 42px;
+  }
+
+  .rightWrapper{
+    position: absolute;
+    right: 10px;
+    top: 12px;
+  }
+
+  .rightWrapper .icon{
+    font-size:17px;
   }
 </style>
