@@ -1,6 +1,9 @@
 <template>
-<div>
-  <img :src="localUrl" width="100%" height="200" id="image"/><br/>
+<div class="mui-content">
+  <div class="imageWrapper">
+    <img :src="localUrl" width="100%" height="200" id="image"/>
+  </div>
+
   <button type="button" class="mui-btn  mui-btn-block"
           @tap.stop.prevent="cancel">取消</button>
   <button type="button" class="mui-btn  mui-btn-block"
@@ -52,6 +55,7 @@
           minCropBoxHeight:200,
           minCanvasWidth:200,
           minCanvasHeight:200,
+          maxCanvasHeight:200,
           minContainerWidth:200,
           minContainerHeight:200,
           crop: function(data) {
@@ -98,7 +102,7 @@
           var userInfo = localEvent.getLocalItem('UserInfo');
           userInfo.avatar_url = user_avatar_url;
           localEvent.setLocalItem('UserInfo', userInfo);
-          
+
           mui.back();
         });
 
@@ -114,3 +118,10 @@
     }
   }
 </script>
+
+<style scoped="scoped">
+  .imageWrapper{
+    height:200px;
+    margin-bottom:15px;
+  }
+</style>
