@@ -324,6 +324,7 @@
                   break;
                 case 'im_message':
                   //聊天信息
+                  router.pushPlus('/chat');
                   break;
               }
             };
