@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content absolute">
-      <ul class="myLabel" v-if="skill_tags.length > '0'">
+      <ul class="myLabel" v-if="skill_tags.length">
         <p>擅长标签</p>
         <li v-for="(item, index) in skill_tags">
           {{item.text}}
@@ -14,9 +14,8 @@
             <use xlink:href="#icon-times--"></use>
           </svg>
         </li>
-
       </ul>
-      <div class="gray" v-if="skill_tags.length > '0'"></div>
+      <div class="gray" v-if="skill_tags.length"></div>
 
       <div class="addLable">
         <p>添加标签</p>
@@ -33,7 +32,7 @@
             <i class="bot"></i>
           </li>
           <!--搜素到的标签名 -->
-          <li v-if="list.length > '0'" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item.value,item.text)">
+          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item.value,item.text)">
             {{item.text}}
             <i class="bot"></i>
           </li>
@@ -113,18 +112,18 @@
             data.push(this.skill_tags[i].text)
 
           }
-         
+
           // 判断是否已经添加；
           if(data.indexOf(text) > -1){
             //有重复；
             mui.toast("已经添加");
-           
+
           }else{
             //无重复；
  //          mui.toast("添加成功");
           }
 
-          
+
           //刷新我的擅长列表；
           this.skillTags();
           this.loading = 0;
@@ -190,11 +189,12 @@
     },
     watch: {
       searchText: function(newValue) {
-
-        //       console.error('请求api搜索:'+newValue);
-
-        this.search(newValue);
-
+        if (!newValue) {
+            this.list = [];
+        }
+        searchText(newValue, () => {
+          this.search(newValue);
+        });
       },
     },
     mounted() {
@@ -214,7 +214,7 @@
     padding: 0;
     list-style: none;
   }
-  
+
   .bot {
     position: absolute;
     right: 0px;
@@ -225,18 +225,18 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  
+
   .mui-content {
     background: #FFFFFF;
   }
-  
+
   .myLabel {
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
     padding: 0 4% 15px 2%;
   }
-  
+
   .myLabel p {
     font-size: 13px;
     margin-top: 15px;
@@ -244,7 +244,7 @@
     color: #808080;
     margin-left: 10px;
   }
-  
+
   .myLabel li {
     display: inline-block;
     background: #f3f4f6;
@@ -254,31 +254,31 @@
     margin-top: 10px;
     margin-left: 10px;
   }
-  
+
   .myLabel li svg {
     font-size: 10px;
     color: #c8c8c8;
     margin-bottom: 2px;
     margin-left: 5px;
   }
-  
+
   .gray {
     width: 100%;
     height: 10px;
     background: #f3f4f6;
   }
-  
+
   .addLable {
     width: 100%;
     background: #FFFFFF;
     padding: 15px 4% 0 4%;
   }
-  
+
   .addLable p {
     font-size: 13px;
     color: #808080;
   }
-  
+
   .search {
     width: 100%;
     height: 38px;
@@ -286,7 +286,7 @@
     background: #F3F4F5;
     border-radius: 100px;
   }
-  
+
   .search svg {
     font-size: 17px;
     color: #c8c8c8;
@@ -295,24 +295,24 @@
     /*margin-right: 5px;*/
     float: left;
   }
-  
+
   .search input {
+    background: #F3F4F5;
     width: 80%;
-    height: 20px;
-    margin-top: 7px;
+    height: 35px;
+    margin-top: 2px;
     float: left;
     border: none;
-    background: #F3F4F5;
     font-size: 14px;
     color: #444444;
   }
-  
+
   .addLable ul {
     width: 100%;
     overflow: hidden;
     margin-top: 22px;
   }
-  
+
   .addLable ul li {
     width: 100%;
     height: 44px;
@@ -322,12 +322,12 @@
     font-size: 14px;
     color: #808080;
   }
-  
+
   .addLable ul li:nth-of-type(1) p:nth-of-type(1) {
     float: left;
     color: #03aef9;
   }
-  
+
   .addLable ul li:nth-of-type(1) p:nth-of-type(2) {
     width: 86px;
     height: 27px;
@@ -340,7 +340,7 @@
     color: #03aef9;
   }
   /*按钮的color*/
-  
+
   .mui-popup-buttons span..mui-popup-buttons span.mui-popup-button {
     color: #808080;
   }
