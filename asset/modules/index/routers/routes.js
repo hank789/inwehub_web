@@ -52,9 +52,9 @@ const routes = [{
     meta: {
       title: 'Inwehub',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
-    component: require('../../../views/Home.vue'),
+    component: require('../../../views/Feed.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
