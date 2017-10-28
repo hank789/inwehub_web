@@ -5,7 +5,7 @@
           <div class="left">
             <div class="container-avatarAndText">
               <div class="author">
-                <div class="avatar">
+                <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
                   <div class="avatarInner"><img :src="data.user.avatar">
                     <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -26,7 +26,7 @@
           <div class="right">
             <div class="container-avatarAndText">
               <div class="author">
-                <div class="avatar">
+                <div class="avatar" @tap.stop.prevent="toResume(data.feed.follow_user_uuid)">
                   <div class="avatarInner"><img :src="data.feed.follow_user_avatar">
                     <svg class="icon" aria-hidden="true" v-if="data.feed.follow_user_is_expert === 1">
                       <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -63,7 +63,12 @@
 
     },
     methods: {
-
+      toResume(uuid){
+        if (!uuid) {
+          return false;
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
+      }
     }
   };
 </script>
