@@ -18,7 +18,7 @@
           </div>
           <div class="middle-width">
             <div class="component-follow">
-                <svg class="icon" aria-hidden="true" >
+                <svg class="icon" aria-hidden="true" style="display: none">
                   <use xlink:href="#icon-plus-o"></use>
                 </svg>
             </div>
