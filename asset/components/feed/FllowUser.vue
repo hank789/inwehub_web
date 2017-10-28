@@ -1,7 +1,7 @@
 <template>
     <div class="container-item">
         <div class="color-808080 font-13">{{data.title}}</div>
-        <div class="flex space-between margin-5-0-0">
+        <div class="flex margin-5-0-0">
           <div class="left">
             <div class="container-avatarAndText">
               <div class="author">
@@ -16,13 +16,11 @@
               </div>
             </div>
           </div>
-          <div class="middle grow-2">
+          <div class="middle-width">
             <div class="component-follow">
-              <div class="circle">
                 <svg class="icon" aria-hidden="true" >
-                  <use xlink:href="#icon-plus--"></use>
+                  <use xlink:href="#icon-plus-o"></use>
                 </svg>
-              </div>
             </div>
           </div>
           <div class="right">
@@ -69,3 +67,17 @@
     }
   };
 </script>
+
+<style>
+  .component-follow .icon{
+    margin-left: -11px !important;
+    margin-top: -10px !important;
+    font-size: 21px !important;
+    z-index: 9 !important;
+    color:#dcdcdc !important;
+  }
+
+  .middle-width{
+     width:133px;
+  }
+</style>
