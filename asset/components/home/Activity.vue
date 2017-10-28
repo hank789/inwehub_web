@@ -72,7 +72,7 @@
             return;
           }
 
-          this.firstAsk = response.data.data.first_ask_ac.show_first_ask_coupon;
+          this.firstAsk = false; //response.data.data.first_ask_ac.show_first_ask_coupon;
           var couponExpireAtTime = response.data.data.first_ask_ac.coupon_expire_at;
           if (couponExpireAtTime) {
               this.couponExpireAtTime = Date.parse(couponExpireAtTime.replace(/-/g, "/")) / 1000;
@@ -132,13 +132,11 @@
       },
       //对时间的处理；
       timeAutoEnd: function () {
-        console.error('11');
         if (this.timeAutoEndTimeOut) {
           clearTimeout(this.timeAutoEndTimeOut);
         }
         this.timeAutoEndTimeOut = setTimeout(() => {
           this.currentTime = parseInt((new Date()).getTime() / 1000);
-          console.log('sss');
           this.timeAutoEnd();
         }, 1000);
       },
