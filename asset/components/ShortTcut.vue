@@ -36,6 +36,7 @@
       </li>
       <li>
         <p>
+          <i>分红</i>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="skip(4)">
             <use xlink:href="#icon-zhuanyewenda-"></use>
           </svg>
@@ -161,6 +162,25 @@
 </script>
 
 <style scoped="scoped">
+   
+@media (min-width:320px) {
+    ul{
+         width:80%;
+    }
+}
+
+@media (min-width: 375px) {
+   ul{
+         width:72.5%;
+    }
+    
+}
+
+@media (min-width: 414px) {
+    ul{
+        width:72.5%;
+    }
+}
   ul,
   li,
   div,
@@ -201,7 +221,8 @@
   
   ul {
     position: absolute;
-    width:72.5%;
+   /* width:72.5%;*/
+    /*width: 300px;*/
     height: 220px;
     left: 0;
     right: 0;
@@ -279,6 +300,42 @@
     right: 0;
 
   }
+  /*分红*/
+   ul li:nth-of-type(4) p i{
+     position: absolute;
+     font-style: normal;
+     width:35px;
+     height:20px;
+     font-size:12px;
+     color:#FFFFFF;
+     border-radius: 4px;
+     background:#fa4975;
+     text-align: center;
+     line-height: 17px;
+     top: 5px;
+    right: -25px;
+     
+
+     
+   }
+   ul li:nth-of-type(4) p i:after{ 
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fa4975;
+    /*border: 1px solid #dcdcdc;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left:-3px;
+    /*border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;*/
+    top: 0px;
+    bottom: 0;
+    margin: auto;
+    }
+    /**/
   
   ul li p svg {
     font-size: 35px;
@@ -354,4 +411,7 @@
     margin: auto;
     margin-left: 6px;
   }
+  
+ 
+
 </style>
