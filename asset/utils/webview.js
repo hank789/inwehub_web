@@ -12,6 +12,7 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
       if (id === url) {
         //非特殊页面返回时关闭webview
         preload_back_close = false;
+        popGesture = 'close';
       }
       var current_webview = plus.webview.getWebviewById(id);
 
