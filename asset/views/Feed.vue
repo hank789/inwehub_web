@@ -136,6 +136,68 @@
     },
     computed: {},
     methods: {
+      goArticle: function (article) {
+
+        var url = article.view_url;
+        var id = article.id;
+        var title = article.title;
+        var pathUrl = article.comment_url;
+        var img_url = article.img_url;
+
+        if (/http/.test(url)) {
+          if (mui.os.plus) {
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'inwehub:read_page_detail', {
+                  "app": "inwehub",
+                  "user_device": getUserAppDevice(),
+                  'page': url,
+                  'page_title': title
+                }
+              );
+            }
+            if (window.ga) {
+              window.ga('set', 'page', url);
+              window.ga('send', 'pageview');
+            }
+            var article_params = {
+              article_id: id,
+              article_url: url,
+              article_title: title,
+              article_comment_url: pathUrl,
+              article_img_url: img_url,
+              preload: true
+            };
+            var article_ws = mui.openWindow({
+              url: 'index.html#/webview/article',
+              id: 'inwehub_article_view',
+              preload: false, //一定要为false
+              createNew: false,
+              show: {
+                autoShow: true,
+                aniShow: 'pop-in'
+              },
+              styles: {
+                popGesture: 'hide'
+              },
+              waiting: {
+                autoShow: false
+              },
+              extras: article_params
+            });
+            mui.fire(article_ws, 'load_article', article_params);
+          } else {
+            //            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+
+            var url = "/discover?redirect_url=" + pathUrl + '?' + encodeURIComponent('from=h5');
+
+            this.$router.push(url);
+            //            window.location.href = url;
+          }
+        } else {
+          this.$router.pushPlus(url);
+        }
+      },
       getHomeData(){
         postRequest(`home`, {}, false).then(response => {
           var code = response.data.code;
@@ -162,10 +224,20 @@
           case 12:
             this.$router.pushPlus(item.url);
             break;
-          case 5:
           case 10:
-          case 13:
             this.$router.pushReadHubPage(item.url);
+            break;
+          case 5:
+          case 13:
+            var article = {
+              view_url:item.feed.view_url,
+              id:item.feed.submission_id,
+              title:item.feed.title,
+              comment_url:item.feed.comment_url,
+              img_url:item.feed.img,
+            };
+            console.debug(article);
+            this.goArticle(article);
             break;
           default:
             break;
