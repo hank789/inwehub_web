@@ -83,6 +83,6 @@
   }
 
   .middle-width{
-     width:133px;
+     width:68px;
   }
 </style>
