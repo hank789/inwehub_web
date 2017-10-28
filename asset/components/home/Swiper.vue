@@ -9,7 +9,7 @@
         <span>
 	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
 		      	      	<svg class="icon" aria-hidden="true">
-						  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+						  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
 						</svg>
 	      	        </span>
         <span class="mui-ellipsis">{{ experts.title ? experts.title : '　' }}</span>
