@@ -14,7 +14,7 @@
 	      	        </span>
         <span class="mui-ellipsis">{{ experts.title ? experts.title : '　' }}</span>
         <span class="followed" :id="'follow_' + index" v-if="experts.is_followed">已关注</span>
-        <span class="follow" :id="'follow_' + index" v-else>关注Ta</span>
+        <span class="follow" :id="'follow_' + index" v-else>关注 Ta</span>
         <p>
           {{experts.work_years ? experts.work_years : "0"}}年
 					</p>
