@@ -38,7 +38,7 @@
 
       <!--发送消息框-->
       <div class="message" id="message">
-        <input type="text" v-model.trim="comment" />
+        <input type="text" v-model.trim="comment"  @keyup="show($event)"/>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
         </svg>
@@ -56,28 +56,35 @@
   import { getLocalUserInfo, isCompanyStatus } from '../../utils/user';
   import localEvent from '../../stores/localStorage';
   const Chat = {
-    data: () => ({
-      list: [],
-      page: 1,
-      comment: "",
-      id: "",
-      avatar: "",
-      flag: true
+      data: () => ({
+        list: [],
+        page: 1,
+        comment: "",
+        id: "",
+        avatar: "",
+        flag: true
 
-    }),
-    created() {
-      //id  和  头像；
-      this.id = getLocalUserInfo().user_id;
-      this.avatar = getLocalUserInfo().avatar_url;
+      }),
+      created() {
+        //id  和  头像；
+        this.id = getLocalUserInfo().user_id;
+        this.avatar = getLocalUserInfo().avatar_url;
 
-    },
-    computed: {
+      },
+      computed: {
 
-    },
-    components: {
-      RefreshList
-    },
-    methods: {
+      },
+      components: {
+        RefreshList
+      },
+      methods: {
+        //回车键发送‘
+        show:function(ev){  
+        if(ev.keyCode == 13) {
+          //发送
+           this.message();
+        }
+      },
       //获取本地时间；
       CurentTime() {
         var now = new Date();
@@ -132,20 +139,19 @@
       message() {
         let id = parseInt(this.$route.params.id);
         if(this.comment) {
-          
-          
+
           var item = {
-              // created_at: new Date().toLocaleString(),
-              created_at: this.CurentTime(),
-              data: {
-                text: this.comment
-              },
-              id: 2,
-              user_id: this.id,
+            // created_at: new Date().toLocaleString(),
+            created_at: this.CurentTime(),
+            data: {
+              text: this.comment
+            },
+            id: 2,
+            user_id: this.id,
 
-            };
+          };
 
-            this.list = this.list.concat(item);
+          this.list = this.list.concat(item);
 
           postRequest(`im/message-store`, {
             text: this.comment,
@@ -158,7 +164,6 @@
               mui.back();
               return;
             }
-            
 
             if(response.data.data) {
 
@@ -224,7 +229,7 @@
     width: 100%;
     height: 47px;
     background: #ececee;
-    position:fixed;
+    position: fixed;
     bottom: 0;
     padding: 0 10px;
     z-index: 999;
