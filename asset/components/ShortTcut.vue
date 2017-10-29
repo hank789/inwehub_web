@@ -136,8 +136,9 @@
         setTimeout(function() {
           document.getElementById("short_all").style.display = "none";
           document.getElementById("down").classList.remove("end");
-          autoHeight();
         }, 300)
+
+        autoHeight();
 
         //发现页处理
         if(mui.os.plus) {

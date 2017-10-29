@@ -65,6 +65,8 @@ function getPageConfig(context) {
     background = statusBarStyleElement.getAttribute('background');
 
     console.log('监测到#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background);
+  } else {
+    console.log('未监测到#statusBarStyle');
   }
 }
 
@@ -106,13 +108,13 @@ function autoStatusBar(context) {
  */
 function autoHeight(context) {
   if (!context) {
-    context = document;
+    context = document.getElementById('router-view');
   }
   console.log('in autoHeight');
 
   initImmersed();
 
-  autoStatusBar();
+  autoStatusBar(context);
 }
 
 function initImmersed() {
