@@ -66,11 +66,16 @@
 
         this.iframeState = true;
         const deviceWidth = document.documentElement.clientWidth;
-        const deviceHeight = document.documentElement.clientHeight - 50;
+        var deviceHeight = document.documentElement.clientHeight - 50;
         const oIframe = document.getElementById('show-iframe');
         this.iframe = oIframe;
         this.iframe.src = url;
         oIframe.style.width = deviceWidth + 'px';
+
+        if (document.body.classList && document.body.classList.contains('openAppWechat')) {
+          deviceHeight-=49;
+        }
+
         oIframe.style.height = deviceHeight + 'px';
       },
       createReadWebview(url) {
