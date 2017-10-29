@@ -277,4 +277,6 @@
   .rightWrapper .icon{
     font-size:17px;
   }
+
+  .mui-content{background:#fff}
 </style>

@@ -1106,10 +1106,7 @@ const routes = [{
     meta: {
       title: '引导页'
     },
-    component: require('../../../views/Guide.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/Guide.vue')
   },
   { // feedback
     path: '/feedback/:type',
