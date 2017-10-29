@@ -49,17 +49,15 @@
   import localEvent from '../stores/localStorage';
   export default {
     data: () => ({}),
-    mounted(){
-      mui.ready(function() {
-        mui('.mui-slider').slider();
-      });
-
+    created(){
       mui.plusReady(function() {
         plus.navigator.setFullscreen(true);
       });
+    },
+    mounted(){
+      mui('.mui-slider').slider();
 
       var t = this;
-
       //立即体验按钮点击事件
       document.getElementById("close").addEventListener('tap', function (event) {
         localEvent.setLocalItem('lauchFlag', {showGuide:true});
