@@ -29,7 +29,7 @@
 									</svg>
 								</p>
 								<div class="mui-ellipsis">
-									<span>{{item.description}}</span>
+									<span class="descriptionText">{{item.description}}</span>
 								</div>
 							</div>
 							<svg class="icon" aria-hidden="true" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
@@ -287,4 +287,9 @@
 		font-size: 12px;
 		color: #c8c8c8;
 	}
+
+  .descriptionText{
+    font-size: 13px;
+    color: #b4b4b6;
+  }
 </style>
