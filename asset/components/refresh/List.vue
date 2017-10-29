@@ -116,8 +116,10 @@
         if (mui('#refreshContainer')) {
           var posY = document.querySelector('#listWrapper').scrollHeight;
           var obj = document.getElementById('refreshContainer');
-          if(obj) {
+          if(obj.scrollTo) {
             obj.scrollTo(0, posY);
+          } else {
+            obj.scrollTop = posY;
           }
         }
       },
