@@ -263,7 +263,7 @@ import userAbility from '../../utils/userAbility';
 	/*滚动区域*/
 	ul{
 		width: 100%;
-		height: 227px;
+		/*height: 227px;*/
 		overflow: hidden;
 		position: relative;
 		padding-bottom: 20px;
