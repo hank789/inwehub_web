@@ -38,7 +38,7 @@
 
       <!--发送消息框-->
       <div class="message" id="message">
-        <input type="text" v-model.trim="comment" />
+        <input type="text" v-model.trim="comment" @keyup="show($event)" />
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
         </svg>
@@ -78,17 +78,24 @@
       RefreshList
     },
     methods: {
+      //回车键发送‘
+      show: function(ev) {
+        if(ev.keyCode == 13) {
+          //发送
+          this.message();
+        }
+      },
       //获取本地时间；
       CurentTime() {
         var now = new Date();
 
-        var year = now.getFullYear(); //年  
-        var month = now.getMonth() + 1; //月  
-        var day = now.getDate(); //日  
+        var year = now.getFullYear(); //年
+        var month = now.getMonth() + 1; //月
+        var day = now.getDate(); //日
 
-        var hh = now.getHours(); //时  
-        var mm = now.getMinutes(); //分  
-        var ss = now.getSeconds(); //秒  
+        var hh = now.getHours(); //时
+        var mm = now.getMinutes(); //分
+        var ss = now.getSeconds(); //秒
 
         var clock = year + "-";
 
@@ -125,27 +132,25 @@
         };
         this.list = this.list.concat(item);
         this.flag = true;
-        //      console.log(item);
-        //      console.log(this.list);
+        // console.log(item);
+        //  console.log(this.list);
       },
       // 消息；
       message() {
         let id = parseInt(this.$route.params.id);
         if(this.comment) {
-          
-          
           var item = {
-              // created_at: new Date().toLocaleString(),
-              created_at: this.CurentTime(),
-              data: {
-                text: this.comment
-              },
-              id: 2,
-              user_id: this.id,
+            // created_at: new Date().toLocaleString(),
+            created_at: this.CurentTime(),
+            data: {
+              text: this.comment
+            },
+            id: 2,
+            user_id: this.id,
 
-            };
+          };
 
-            this.list = this.list.concat(item);
+          this.list = this.list.concat(item);
 
           postRequest(`im/message-store`, {
             text: this.comment,
@@ -158,7 +163,6 @@
               mui.back();
               return;
             }
-            
 
             if(response.data.data) {
 
@@ -183,16 +187,13 @@
 
     },
     updated() {
-      //    document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
       if(this.flag) {
         this.flag = false;
-        var obj = document.getElementById('refreshContainer');
-        if(obj) {
-          obj.scrollTop = document.getElementById('myData').scrollHeight;
-        }
 
+        this.$nextTick(() => {
+          this.$refs.RefreshList.scrollToBottom();
+        });
       }
-
     }
   }
   export default Chat;
@@ -224,7 +225,7 @@
     width: 100%;
     height: 47px;
     background: #ececee;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     padding: 0 10px;
     z-index: 999;

@@ -78,6 +78,11 @@ function openWebviewByUrl(id, url, autoShow=true, aniShow='pop-in', popGesture='
  * @param url
  */
 function openReadhubPage(url) {
+  setTimeout(() => {
+    setStatusBarBackgroundAndStyle('#3c3e44', 'light');
+  }, 100);
+
+
   var webview = mui.openWindow({
     url: process.env.READHUB_URL + '/h5',
     id: 'readhub_submission_webview',

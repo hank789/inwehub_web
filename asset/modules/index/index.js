@@ -60,6 +60,12 @@ import './../../styles/percircle.css';
 
 import './../../js/iconfont.js';
 
+mui.oldConfirm = mui.confirm;
+mui.confirm = (message, title, btnArray, callback, type) => {
+  var newType = mui.os.android?null:type;
+  mui.oldConfirm(message, title, btnArray, callback, newType);
+};
+
 Vue.use(VueWechatTitle);
 // Vue.use(VueLazyload, {
 //   loading: loading_img,

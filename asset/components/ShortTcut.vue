@@ -95,7 +95,9 @@
             this.$router.pushPlus('/ask/interaction');
             break;
           case 6:
-            this.$router.pushReadHubPage('/submit');
+            setTimeout(() => {
+              this.$router.pushReadHubPage('/submit');
+            }, 300);
             break;
           case 7:
             this.$router.pushPlus('/feedback/news');
@@ -136,8 +138,9 @@
         setTimeout(function() {
           document.getElementById("short_all").style.display = "none";
           document.getElementById("down").classList.remove("end");
-          autoHeight();
         }, 300)
+
+        autoHeight();
 
         //发现页处理
         if(mui.os.plus) {
@@ -311,9 +314,9 @@
      border-radius: 4px;
      background:#fa4975;
      text-align: center;
-     line-height: 17px;
+     line-height: 20px;
      top: 5px;
-    right: -25px;
+     right: -25px;
 
 
 

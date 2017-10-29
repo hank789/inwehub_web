@@ -270,11 +270,13 @@
 
   .rightWrapper{
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 12px;
   }
 
   .rightWrapper .icon{
     font-size:17px;
   }
+
+  .mui-content{background:#fff}
 </style>

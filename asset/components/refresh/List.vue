@@ -3,7 +3,7 @@
        id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
       <Empty v-if="nothing===1 && autoShowEmpty"></Empty>
-      <div v-else>
+      <div class="listWrapper" id="listWrapper"  v-else>
         <slot></slot>
       </div>
     </div>
@@ -111,6 +111,17 @@
         this.loading = 1;
         this.prevOtherData = prevOtherData;
         this.getPrevList();
+      },
+      scrollToBottom(){
+        if (mui('#refreshContainer')) {
+          var posY = document.querySelector('#listWrapper').scrollHeight;
+          var obj = document.getElementById('refreshContainer');
+          if(obj.scrollTo) {
+            obj.scrollTo(0, posY);
+          } else {
+            obj.scrollTop = posY;
+          }
+        }
       },
       getDownLoadMoreModePrevList(){
 
@@ -303,5 +314,6 @@
 </script>
 
 <style scoped="scoped">
-
+.listWrapper{
+}
 </style>

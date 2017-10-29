@@ -287,7 +287,7 @@
         var inputElem = document.querySelector('textarea');
         inputElem.blur();
 
-        if (!this.type && !this.description) {
+        if (!this.type && this.description === this.descPlaceholder) {
           mui.back();
           return;
         }
