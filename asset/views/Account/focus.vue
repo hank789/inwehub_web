@@ -28,11 +28,9 @@
 										<use xlink:href="#icon-zhuanjiabiaoji"></use>
 									</svg>
 								</p>
-								<p>
-									<span class="mui-ellipsis">{{item.title}}</span>
-									<!--<i v-show="(item.title && item.company)" ></i>-->
-									<span class="mui-ellipsis">{{item.company}}</span>
-								</p>
+								<div class="mui-ellipsis">
+									<span>{{item.description}}</span>
+								</div>
 							</div>
 							<svg class="icon" aria-hidden="true" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
 								<use xlink:href="#icon-shoucang"></use>
@@ -217,13 +215,14 @@
 	}
 
 	.my-focus-item div {
-		float: left;
+
 	}
 
 	.my-focus-item>svg {
+    position: absolute;
+    right:0;
+    top:18px;
 		font-size: 25px;
-		margin-top: 10px;
-		float: right;
 	}
 
 	.my-focus-item div p:nth-of-type(1) span {
@@ -244,7 +243,6 @@
 
 	.my-focus-item div p:nth-of-type(2) span {
 		display: inline-block;
-		max-width: 80px;
 		height: 14px;
 		font-family: "PingFangSC";
 		font-size: 13px;
@@ -254,13 +252,11 @@
 
 	.my-focus-item div p:nth-of-type(2) span:nth-of-type(1) {
 		display: inline-block;
-		max-width: 80px;
 		height: 14px;
 		font-family: "PingFangSC";
 		font-size: 13px;
 		color: #b4b4b6;
 		line-height: 13px;
-		border-right: 1px solid #b4b4b6;
 		padding-right: 5px;
 	}
 	/*.my-focus-item div p:nth-of-type(2) span:nth-of-type(2){
