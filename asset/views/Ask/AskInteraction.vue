@@ -122,7 +122,7 @@
     },
     methods: {
       submit(){
-      	  
+
           this.$refs.pay.pay();
       },
       textareaFocus(){
@@ -146,7 +146,7 @@
         var inputElem = document.querySelector('textarea');
         inputElem.blur();
 
-        if (!this.type && !this.description) {
+        if (!this.type && this.description === this.descPlaceholder) {
           mui.back();
           return;
         }
@@ -240,8 +240,8 @@
           var result = response.data.data;
           var id = result.id;
 
-         
-         
+
+
           this.$router.replace({path: '/askCommunity/interaction/answers/' + id});
         });
       }
