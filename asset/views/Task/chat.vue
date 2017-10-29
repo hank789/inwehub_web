@@ -224,7 +224,7 @@
     width: 100%;
     height: 47px;
     background: #ececee;
-    position: absolute;
+    position:fixed;
     bottom: 0;
     padding: 0 10px;
     z-index: 999;
