@@ -95,7 +95,9 @@
             this.$router.pushPlus('/ask/interaction');
             break;
           case 6:
-            this.$router.pushReadHubPage('/submit');
+            setTimeout(() => {
+              this.$router.pushReadHubPage('/submit');
+            }, 300);
             break;
           case 7:
             this.$router.pushPlus('/feedback/news');
