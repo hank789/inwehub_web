@@ -82,13 +82,13 @@
       CurentTime() {
         var now = new Date();
 
-        var year = now.getFullYear(); //年  
-        var month = now.getMonth() + 1; //月  
-        var day = now.getDate(); //日  
+        var year = now.getFullYear(); //年
+        var month = now.getMonth() + 1; //月
+        var day = now.getDate(); //日
 
-        var hh = now.getHours(); //时  
-        var mm = now.getMinutes(); //分  
-        var ss = now.getSeconds(); //秒  
+        var hh = now.getHours(); //时
+        var mm = now.getMinutes(); //分
+        var ss = now.getSeconds(); //秒
 
         var clock = year + "-";
 
@@ -132,8 +132,8 @@
       message() {
         let id = parseInt(this.$route.params.id);
         if(this.comment) {
-          
-          
+
+
           var item = {
               // created_at: new Date().toLocaleString(),
               created_at: this.CurentTime(),
@@ -158,7 +158,7 @@
               mui.back();
               return;
             }
-            
+
 
             if(response.data.data) {
 
@@ -183,16 +183,13 @@
 
     },
     updated() {
-      //    document.getElementById('refreshContainer').scrollTop = document.getElementById('myData').scrollHeight;
       if(this.flag) {
         this.flag = false;
-        var obj = document.getElementById('refreshContainer');
-        if(obj) {
-          obj.scrollTop = document.getElementById('myData').scrollHeight;
-        }
 
+        this.$nextTick(() => {
+          this.$refs.RefreshList.scrollToBottom();
+        });
       }
-
     }
   }
   export default Chat;
@@ -200,7 +197,7 @@
 
 <style scoped>
   /*清掉自带样式*/
-  
+
   div,
   p,
   span,
@@ -214,12 +211,12 @@
     list-style: none;
     font-style: normal;
   }
-  
+
   .mui-content {
     background: #f3f4f6;
   }
   /*input 输入框*/
-  
+
   .message {
     width: 100%;
     height: 47px;
@@ -229,7 +226,7 @@
     padding: 0 10px;
     z-index: 999;
   }
-  
+
   .message input {
     width: 88%;
     height: 35px;
@@ -240,7 +237,7 @@
     margin-top: 6px;
     float: left;
   }
-  
+
   .message svg {
     font-size: 32px;
     margin-top: 7px;
@@ -248,38 +245,38 @@
     float: right;
   }
   /*内容区域*/
-  
+
   .user {
     width: 96%;
     margin-left: 2%;
     overflow: hidden;
     /*background: #CCCCCC;*/
   }
-  
+
   .user li {
     width: 100%;
     overflow: hidden;
     /*border: 1px solid #CCCCCC;*/
   }
-  
+
   .consumer p:nth-of-type(1) {
     text-align: center;
     font-size: 13px;
     color: #b4b4b6;
     line-height: 46px;
   }
-  
+
   .consumer p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .consumer p:nth-of-type(2) img {
     width: 42px;
     height: 42px;
     float: left;
   }
-  
+
   .consumer p:nth-of-type(2) span {
     position: relative;
     float: left;
@@ -293,7 +290,7 @@
     background: #FFFFFF;
     padding: 7px;
   }
-  
+
   .consumer p:nth-of-type(2) span:after {
     content: "";
     display: block;
@@ -314,12 +311,12 @@
     margin: auto;
   }
   /*客服*/
-  
+
   .Customerservice {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .Customerservice p:nth-of-type(1) {
     width: 100%;
     text-align: center;
@@ -327,19 +324,19 @@
     color: #b4b4b6;
     line-height: 46px;
   }
-  
+
   .Customerservice p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .Customerservice p:nth-of-type(2) img {
     width: 42px;
     height: 42px;
     float: right;
     border-radius: 8px;
   }
-  
+
   .Customerservice p:nth-of-type(2) span {
     position: relative;
     float: right;
@@ -353,7 +350,7 @@
     background: #FFFFFF;
     padding: 7px;
   }
-  
+
   .Customerservice p:nth-of-type(2) span:after {
     content: "";
     display: block;
@@ -370,11 +367,11 @@
     top: 15px;
     margin: auto;
   }
-  
+
   .listWrapper {
     bottom: 47px;
   }
-  
+
   .mui-scroll-wrapper {
     /*position: absolute;
     z-index: 2;
