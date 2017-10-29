@@ -62,16 +62,16 @@
     methods: {
       Obtain() {
         var that = this;
+
         var btnArray = ['取消', '确定'];
         mui.prompt('', '标签名称', '输入标签名称', btnArray, function(e) {
           if(e.index == 1) {
             //申请添加擅长标签；
-            that.applySkillTag(e.value);
-
-          } else {
-//          console.log(e.value);
+            if (e.value) {
+              that.applySkillTag(e.value);
+            }
           }
-        })
+        }, 'div')
       },
       //删除擅长标签；
       delSkillTag(val) {
