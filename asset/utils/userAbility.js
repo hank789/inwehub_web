@@ -87,7 +87,7 @@ var userAbility = () => {
    */
   var jumpToAddArticle = (context) => {
     context.$router.pushReadHubPage('/submit');
-    // router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
+    //router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   };
 
   /**
