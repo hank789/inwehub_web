@@ -312,9 +312,9 @@
      border-radius: 4px;
      background:#fa4975;
      text-align: center;
-     line-height: 17px;
+     line-height: 20px;
      top: 5px;
-    right: -25px;
+     right: -25px;
 
 
 
