@@ -266,8 +266,9 @@
             </li>
             <li>
               
-              <p>iPhone8 256GB</p>
+              
               <img src="../../statics/images/iphone8@3x.png"  class="iphone"/>
+              <p>iPhone8 256GB</p>
               <p class="text_yellow"  id="num" v-if="user_level >='4'"><i class="num_yellow">80000</i><i class="num_yellow">贡献值兑换</i></p>
               <p v-else id="num"><i>80000</i><i>贡献值兑换</i></p>
             </li>
