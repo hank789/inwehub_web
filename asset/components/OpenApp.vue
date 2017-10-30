@@ -124,6 +124,13 @@
                this.isWeixin = false;
                localEvent.setLocalItem('stopShowOpenApp', {stop:true});
                document.body.classList.remove('openAppWechat');
+
+               var iframe = document.querySelector('#show-iframe');
+               if (iframe) {
+                   var height = parseInt(iframe.style.height);
+                   iframe.style.height = (height+49) + 'px';
+               }
+
                break;
            case 'isH5':
              this.isH5 = false;
