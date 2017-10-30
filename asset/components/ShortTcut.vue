@@ -3,9 +3,9 @@
     <!--quick-->
 
     <div class="quick">
-      <p   @tap.stop.prevent="skip(7)">我要爆料<span></span></p>
-      <p  @tap.stop.prevent="skip(8)">我有建议<span></span></p>
-      <p  @tap.stop.prevent="skip(9)">我的擅长<span></span></p>
+      <p @tap.stop.prevent="skip(7)">我要爆料<span></span></p>
+      <p @tap.stop.prevent="skip(8)">我有建议<span></span></p>
+      <p @tap.stop.prevent="skip(9)">我的擅长<span></span></p>
     </div>
 
     <ul id="down">
@@ -70,59 +70,59 @@
 </template>
 <!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
-  import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js';
-  import { getLocalUserInfo, isCompanyStatus } from '../utils/user';
+  import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
+  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
   import userAbility from '../utils/userAbility';
 
   export default {
     methods: {
       skip(num) {
-        switch(num) {
-          case 1:
-            userAbility.jumpToAddProject();
-            break;
-          case 2:
-            this.$router.pushPlus('/feedback/consultant');
-            break;
-          case 3:
-            this.$router.pushPlus('/feedback/cooperate');
-            break;
+        setTimeout(() => {
+          switch (num) {
+            case 1:
+              userAbility.jumpToAddProject();
+              break;
+            case 2:
+              this.$router.pushPlus('/feedback/consultant');
+              break;
+            case 3:
+              this.$router.pushPlus('/feedback/cooperate');
+              break;
 
-          case 4:
-            userAbility.jumpToAddAsk();
-            break;
-          case 5:
-            this.$router.pushPlus('/ask/interaction');
-            break;
-          case 6:
-            setTimeout(() => {
+            case 4:
+              userAbility.jumpToAddAsk();
+              break;
+            case 5:
+              this.$router.pushPlus('/ask/interaction');
+              break;
+            case 6:
               this.$router.pushReadHubPage('/submit');
-            }, 300);
-            break;
-          case 7:
-            this.$router.pushPlus('/feedback/news');
-            break;
-          case 8:
-            this.$router.pushPlus('/feedback/advise');
-            break;
-          case 9:
-            this.$router.pushPlus('/my/advantage');
-            break;
+              break;
+            case 7:
+              this.$router.pushPlus('/feedback/news');
+              break;
+            case 8:
+              this.$router.pushPlus('/feedback/advise');
+              break;
+            case 9:
+              this.$router.pushPlus('/my/advantage');
+              break;
 
+          }
+        }, 100);
 
-        }
         this.hide();
       },
       show() {
         document.getElementById("short_all").style.display = "inline";
 
         //发现页处理
-        if(mui.os.plus) {
+        if (mui.os.plus) {
 
-          if(this.$route.path.match(/discover/)) {
+          if (this.$route.path.match(/discover/)) {
 
             var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-            if(inwehub_embed_webview) {
+            if (inwehub_embed_webview) {
               inwehub_embed_webview.hide();
             }
           }
@@ -135,7 +135,7 @@
         //	 	document.getElementById("short_all").style.display="none";
         console.log('hide');
         document.getElementById("down").setAttribute("class", "end");
-        setTimeout(function() {
+        setTimeout(function () {
           document.getElementById("short_all").style.display = "none";
           document.getElementById("down").classList.remove("end");
         }, 300)
@@ -143,14 +143,14 @@
         autoHeight();
 
         //发现页处理
-        if(mui.os.plus) {
-          if(this.$route.path.match(/discover/)) {
+        if (mui.os.plus) {
+          if (this.$route.path.match(/discover/)) {
             setTimeout(() => {
               var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-              if(inwehub_embed_webview) {
+              if (inwehub_embed_webview) {
                 inwehub_embed_webview.show();
               }
-            }, 300);
+            }, 100);
           }
 
         }
@@ -166,24 +166,25 @@
 
 <style scoped="scoped">
 
-@media (min-width:320px) {
-    ul{
-         width:80%;
+  @media (min-width: 320px) {
+    ul {
+      width: 80%;
     }
-}
+  }
 
-@media (min-width: 375px) {
-   ul{
-         width:72.5%;
+  @media (min-width: 375px) {
+    ul {
+      width: 72.5%;
     }
 
-}
+  }
 
-@media (min-width: 414px) {
-    ul{
-        width:72.5%;
+  @media (min-width: 414px) {
+    ul {
+      width: 72.5%;
     }
-}
+  }
+
   ul,
   li,
   div,
@@ -224,7 +225,7 @@
 
   ul {
     position: absolute;
-   /* width:72.5%;*/
+    /* width:72.5%;*/
     /*width: 300px;*/
     height: 220px;
     left: 0;
@@ -246,6 +247,7 @@
       opacity: 1;
     }
   }
+
   /*结束动画*/
 
   .end {
@@ -267,6 +269,7 @@
       opacity: 1;
     }
   }
+
   /**************/
 
   ul li {
@@ -277,7 +280,7 @@
     position: relative;
   }
 
-  ul li:nth-of-type(2) p,ul li:nth-of-type(5) p {
+  ul li:nth-of-type(2) p, ul li:nth-of-type(5) p {
     width: 64px;
     height: 64px;
     background: #b5e8fe;
@@ -287,14 +290,16 @@
     right: 0;
     margin: auto;
   }
-  ul li:nth-of-type(1) p,ul li:nth-of-type(4) p {
+
+  ul li:nth-of-type(1) p, ul li:nth-of-type(4) p {
     width: 64px;
     height: 64px;
     background: #b5e8fe;
     border-radius: 50%;
     position: absolute;
   }
-  ul li:nth-of-type(3) p,ul li:nth-of-type(6) p {
+
+  ul li:nth-of-type(3) p, ul li:nth-of-type(6) p {
     width: 64px;
     height: 64px;
     background: #b5e8fe;
@@ -303,25 +308,25 @@
     right: 0;
 
   }
+
   /*分红*/
-   ul li:nth-of-type(4) p i{
-     position: absolute;
-     font-style: normal;
-     width:35px;
-     height:20px;
-     font-size:12px;
-     color:#FFFFFF;
-     border-radius: 4px;
-     background:#fa4975;
-     text-align: center;
-     line-height: 20px;
-     top: 5px;
-     right: -25px;
+  ul li:nth-of-type(4) p i {
+    position: absolute;
+    font-style: normal;
+    width: 35px;
+    height: 20px;
+    font-size: 12px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    background: #fa4975;
+    text-align: center;
+    line-height: 20px;
+    top: 5px;
+    right: -25px;
 
+  }
 
-
-   }
-   ul li:nth-of-type(4) p i:after{
+  ul li:nth-of-type(4) p i:after {
     content: "";
     display: block;
     width: 6px;
@@ -331,14 +336,15 @@
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left:-3px;
+    left: -3px;
     /*border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;*/
     top: 0px;
     bottom: 0;
     margin: auto;
-    }
-    /**/
+  }
+
+  /**/
 
   ul li p svg {
     font-size: 35px;
@@ -359,18 +365,19 @@
     font-size: 14px;
     color: #444444;
   }
-  ul li .aside_r{
+
+  ul li .aside_r {
     width: 64px;
     right: 0;
 
-
   }
-  ul li .aside_l{
+
+  ul li .aside_l {
     width: 64px;
     left: 0;
 
-
   }
+
   /*quick*/
 
   .quick {
@@ -401,7 +408,7 @@
     border-color: #fff;
   }
 
-  .quick>p span {
+  .quick > p span {
     display: inline-block;
     width: 0;
     height: 0;
@@ -414,7 +421,6 @@
     margin: auto;
     margin-left: 6px;
   }
-
 
 
 </style>
