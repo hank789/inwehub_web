@@ -40,13 +40,7 @@
       </div>
 
       <div class="professor">
-        <Share
-          :title="shareOptions.title"
-          :link="shareUrl"
-          :content="shareOptions.content"
-          :imageUrl="shareOptions.imageUrl"
-          :thumbUrl="shareOptions.thumbUrl"
-        ></Share>
+
       </div>
 
       <div class="basic">
@@ -64,6 +58,11 @@
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucanghover"></use>
               </svg>
+            </div>
+            <div class="share" @tap.stop.prevent="share">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-fenxiang"></use>
+                  </svg>
             </div>
             <div class="header">
               <div class="avatar">
@@ -217,6 +216,16 @@
 
   </div>
 
+    <Share
+      :title="shareOptions.title"
+      :link="shareUrl"
+      :hideShareBtn="true"
+      :content="shareOptions.content"
+      :imageUrl="shareOptions.imageUrl"
+      :thumbUrl="shareOptions.thumbUrl"
+      ref="shareComponent"
+    ></Share>
+
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
             @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
 
@@ -303,6 +312,9 @@
       });
     },
     methods: {
+      share:function(){
+        this.$refs.shareComponent.share();
+      },
       getData: function () {
         if (this.$route.query.goback) {
           this.canBack = true;
