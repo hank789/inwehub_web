@@ -101,6 +101,7 @@
   import Discuss from '../../components/question-detail/Discuss.vue';
   import Share from '../../components/Share.vue';
   import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
+  import {alertAnswerRepeat} from '../../utils/dialogList';
 
   import CountDown from 'vue2-countdown';
 
@@ -212,8 +213,15 @@
           var code = response.data.code;
           if (code !== 1000) {
             mui.alert(response.data.message);
+        
             return;
           }
+           //回答过的；
+            if (code == 3003) {
+             alertAnswerRepeat(this);
+            }
+            
+            
 
           if (time != '0000') {
             this.getData();
@@ -340,6 +348,11 @@
             this.$router.pushPlus('/task', true, 'pop-in', 'hide', true);
             return;
           }
+          if (code == 3003) {
+            alertAnswerRepeat(this);
+          }
+          //code 3003
+           
 
           this.answer = response.data.data;
 
