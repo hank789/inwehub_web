@@ -4,7 +4,9 @@
 
     <div class="quick">
       <p @tap.stop.prevent="skip(7)">我要爆料<span></span></p>
+      <a></a>
       <p @tap.stop.prevent="skip(8)">我有建议<span></span></p>
+      <a></a>
       <p @tap.stop.prevent="skip(9)">我的擅长<span></span></p>
     </div>
 
@@ -169,13 +171,20 @@
   @media (min-width: 320px) {
     ul {
       width: 80%;
+      
     }
+    .quick{
+       width: 80%;
+    } 
   }
 
   @media (min-width: 375px) {
     ul {
       width: 72.5%;
     }
+    .quick{
+      width: 72.5%;
+    } 
 
   }
 
@@ -183,6 +192,9 @@
     ul {
       width: 72.5%;
     }
+     .quick{
+      width: 72.5%;
+    } 
   }
 
   ul,
@@ -381,7 +393,7 @@
   /*quick*/
 
   .quick {
-    width: 63.3%;
+    /*width: 63.3%;*/
     height: 14px;
     /*background: #CCCCCC;*/
     position: absolute;
@@ -390,23 +402,40 @@
     right: 0;
     margin: auto;
   }
-
+.quick a{
+  display: inline-block;
+  float: left;
+  width: 0.5px;
+  height: 14px;
+  color:red;
+}
   .quick p {
-    width: 30%;
-    margin-right: 5%;
+    width: 25%;
+    /*background: #CCCCCC;*/
     float: left;
     font-size: 13px;
     color: #444444;
-    text-align: left;
+    text-align: center;
     line-height: 14px;
-    border-right: 0.5px solid #dcdcdc;
+    
+   /* border-right: 0.5px solid #dcdcdc;*/
     /*border: 1px solid #000000;*/
   }
-
-  .quick p:nth-of-type(3) {
-    margin-right: 0;
-    border-color: #fff;
+  .quick p:nth-of-type(2) {
+    text-align: center;
+    margin-left: 12.5%;
   }
+  .quick p:nth-of-type(3) {
+     float:right;
+  }
+.quick a{
+  position: absolute;
+  width: 1px;
+  height: 14px;
+  background: #dcdcdc;
+  margin-left: 7%;
+}
+  
 
   .quick > p span {
     display: inline-block;
