@@ -536,24 +536,8 @@
             }
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              var currentUser = localEvent.getLocalItem('UserInfo');
-              //localEvent.setLocalItem('userInfo', currentUser);
               cb(user);
-              if (process.env.NODE_ENV === 'production') {
-                // mixpanel
-                var app_version = localEvent.getLocalItem('app_version');
-                if (currentUser.user_id) {
-                  window.mixpanel.identify(currentUser.user_id);
-                  window.mixpanel.people.set({
-                    "email": currentUser.email,
-                    "app_version": app_version.version,
-                    "gender": currentUser.gender,
-                    "phone": currentUser.phone,
-                    "name": currentUser.name,
-                    "avatar": currentUser.avatar_url
-                  });
-                }
-              }
+              mixpanelIdentify();
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
             }));
           })
