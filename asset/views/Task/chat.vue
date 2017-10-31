@@ -6,7 +6,15 @@
       <h1 class="mui-title">客服小哈</h1>
     </header>
     <div class="mui-content absolute" id='contentwrapper'>
-      <RefreshList ref="RefreshList" v-model="list" :api="'im/messages'" :autoShowEmpty="false" :pageMode="true" :downLoadMoreMode="true" :isShowUpToRefreshDescription="false" :prevOtherData="{contact_id:0}" :nextOtherData="{contact_id:0}" :list="list" class="listWrapper">
+      <RefreshList ref="RefreshList" 
+        v-model="list" :api="'im/messages'" 
+        :autoShowEmpty="false" 
+        :pageMode="true" 
+        :downLoadMoreMode="true" 
+        :isShowUpToRefreshDescription="false" 
+        :prevOtherData="{contact_id:0}" 
+        :nextOtherData="{contact_id:0}" 
+        :list="list" class="listWrapper">
 
         <ul class="user" id="myData">
           <template v-for="item in list">
