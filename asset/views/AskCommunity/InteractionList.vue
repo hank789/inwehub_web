@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import RefreshList from '../../components/refresh/List.vue';
+  import RefreshList from '../../components/refresh/List.vue'
 
   const InteractionList = {
     data: () => ({
@@ -63,12 +63,12 @@
       RefreshList
     },
     methods: {
-      toDetail(id) {
-        this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
+      toDetail (id) {
+        this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       }
     }
   }
-  export default InteractionList;
+  export default InteractionList
 </script>
 
 <style scoped>
