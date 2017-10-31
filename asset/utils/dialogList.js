@@ -21,8 +21,11 @@ function alertAnswerRepeat(context)
   var dialogObj = getDialogObj(context);
   if (dialogObj) {
     dialogObj.getHtml('AnswerRepeat', {}, (html) => {
-      alertSimple(html, '去互动问答看看', () => {
-          //...
+      alertSimple(html, '去互动问答看看', (num) => {
+        console.error(num.index)
+        if (num.index === 0) {
+            context.$router.pushPlus('/askCommunity/interactions');
+        }
       }, true);
     });
   }
@@ -39,6 +42,7 @@ function alertAskCommunityDetailShareSuccess(context)
     dialogObj.getHtml('askCommunityDetailShare_title', {}, (titlehtml) => {
       dialogObj.getHtml('askCommunityDetailShare_body', {}, (contenthtml) => {
         alertSkyTwo(titlehtml,  contenthtml, 'icon-fenxiangchenggong', (num) => {
+           
 
         }, true);
       });
