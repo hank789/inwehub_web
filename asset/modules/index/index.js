@@ -98,6 +98,8 @@ Vue.use(TimeAgo, {
 
 
 import {showWebview,clearAllWebViewCache} from '../../utils/webview';
+import localEvent from '../../stores/localStorage';
+
 window.showInwehubWebview = showWebview;
 window.clearAllWebViewCache = clearAllWebViewCache;
 window.getUserAppDevice = function () {
@@ -119,7 +121,25 @@ window.getUserAppDevice = function () {
   } else {
     return 'web';
   }
-}
+};
+
+window.mixpanelIdentify = function () {
+  if (process.env.NODE_ENV === 'production') {
+    // mixpanel
+    var app_version = localEvent.getLocalItem('app_version');
+    if (currentUser.user_id) {
+      window.mixpanel.identify(currentUser.user_id);
+      window.mixpanel.people.set({
+        "email": currentUser.email,
+        "app_version": app_version.version,
+        "gender": currentUser.gender,
+        "phone": currentUser.phone,
+        "name": currentUser.name,
+        "avatar": currentUser.avatar_url
+      });
+    }
+  }
+};
 
 import '../../js/socket.io.min';
 
