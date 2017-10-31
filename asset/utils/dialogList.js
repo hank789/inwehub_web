@@ -14,6 +14,22 @@ function alertFenhongxize(context)
 }
 
 /**
+ * 专业问答被抢答之后的弹窗；
+ */
+function alertAnswerRepeat(context)
+{
+  var dialogObj = getDialogObj(context);
+  if (dialogObj) {
+    dialogObj.getHtml('AnswerRepeat', {}, (html) => {
+      alertSimple(html, '去互动问答看看', () => {
+          //...
+      }, true);
+    });
+  }
+}
+
+
+/**
  * 问答社区详情分享成功后弹窗；
  */
 function alertAskCommunityDetailShareSuccess(context)
@@ -212,5 +228,6 @@ export {
   perfectCard,
   alertMajorAskSuccess,
   alertMajorReplySuccess,
-  alertMajorCommentSuccess
+  alertMajorCommentSuccess,
+  alertAnswerRepeat
 };

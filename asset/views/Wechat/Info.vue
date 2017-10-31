@@ -38,6 +38,7 @@
   import {USERS_APPEND} from '../../stores/types';
   import {NOTICE} from '../../stores/types';
   import {getUserInfo, getAvatar} from '../../utils/user';
+  import {clearAllWebViewCache} from '../../utils/webview';
 
   export default {
     data: () => ({
@@ -161,17 +162,16 @@
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              var currentUser = localEvent.getLocalItem('UserInfo');
               cb(user);
-              if (process.env.NODE_ENV === 'production') {
-                // mixpanel
-                var app_version = localEvent.getLocalItem('app_version');
-                if (currentUser.user_id){
-                  window.mixpanel.identify(currentUser.user_id);
-                  window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
-                }
+              mixpanelIdentify();
+
+              clearAllWebViewCache();
+
+              if (mui.os.plus) {
+                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+              } else {
+                this.$router.replace(this.redirect);
               }
-              this.$router.replace(this.redirect);
             }));
 
           });

@@ -131,13 +131,18 @@
           };
           localEvent.setLocalItem('UserLoginInfo', data);
 
+          clearAllWebViewCache();
 
 
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-            let currentUser = user;
-            cb(currentUser);
+            cb(user);
             mui.closeWaiting();
-            this.$router.replace({path: this.redirect});
+            mixpanelIdentify();
+            if (mui.os.plus) {
+              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+            } else {
+              this.$router.replace({path: this.redirect});
+            }
           }));
         } else {
             this.loading = false;
@@ -281,17 +286,13 @@
             localEvent.setLocalItem('UserLoginInfo', response.data.data);
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              var currentUser = localEvent.getLocalItem('UserInfo');
               cb(user);
-              if (process.env.NODE_ENV === 'production') {
-                // mixpanel
-                var app_version = localEvent.getLocalItem('app_version');
-                if (currentUser.user_id){
-                  window.mixpanel.identify(currentUser.user_id);
-                  window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
-                }
+              mixpanelIdentify();
+              if (mui.os.plus) {
+                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+              } else {
+                this.$router.replace({path: this.redirect});
               }
-              this.$router.replace({path: this.redirect});
             }));
 
           });
