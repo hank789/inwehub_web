@@ -38,6 +38,7 @@
   import {USERS_APPEND} from '../../stores/types';
   import {NOTICE} from '../../stores/types';
   import {getUserInfo, getAvatar} from '../../utils/user';
+  import {clearAllWebViewCache} from '../../utils/webview';
 
   export default {
     data: () => ({
@@ -171,6 +172,9 @@
                   window.mixpanel.people.set({ "email": currentUser.email,"app_version": app_version.version, "gender": currentUser.gender, "phone": currentUser.phone ,"name": currentUser.name, "avatar": currentUser.avatar_url });
                 }
               }
+
+              clearAllWebViewCache();
+
               this.$router.replace(this.redirect);
             }));
 

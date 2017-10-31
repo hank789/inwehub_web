@@ -127,6 +127,7 @@
         console.log(token);
         console.log(openid);
         if (token) {
+          clearAllWebViewCache();
           this.$router.pushPlus('/wechat/register?token=' + token);
         } else {
           this.$router.pushPlus('/wechat/register?openid=' + openid);
