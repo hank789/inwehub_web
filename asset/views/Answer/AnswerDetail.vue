@@ -211,14 +211,14 @@
         postRequest(`answer/store`, data).then(response => {
           this.buttonSelectTimeDisable = false;
           var code = response.data.code;
-          if (code !== 1000) {
-             //回答过的；
-//          if (code == 3003) {
-//            console.error('store');
-//           alertAnswerRepeat(this);
-//          }
-            
-            mui.alert(response.data.message);
+           
+          if (code !== 1000) {   
+            //回答过的；
+            if (code == 3003) {
+              console.error('store');
+             alertAnswerRepeat(this);
+            }
+            mui.toast(response.data.message);
         
             return;
           }
@@ -347,10 +347,10 @@
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
-//           if (code == 3003) {
-//              console.error('info');
-//               alertAnswerRepeat(this);
-//            }
+             if (code == 3003) {
+                console.error('info');
+                 alertAnswerRepeat(this);
+              }
           //code 3003
             
             mui.toast(response.data.message);
