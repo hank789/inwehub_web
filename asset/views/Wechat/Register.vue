@@ -131,13 +131,34 @@
           };
           localEvent.setLocalItem('UserLoginInfo', data);
 
+          clearAllWebViewCache();
 
 
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-            let currentUser = user;
-            cb(currentUser);
+            var currentUser = localEvent.getLocalItem('UserInfo');
+            cb(user);
             mui.closeWaiting();
-            this.$router.replace({path: this.redirect});
+            if (process.env.NODE_ENV === 'production') {
+
+              // mixpanel
+              var app_version = localEvent.getLocalItem('app_version');
+              if (currentUser.user_id) {
+                window.mixpanel.identify(currentUser.user_id);
+                window.mixpanel.people.set({
+                  "email": currentUser.email,
+                  "app_version": app_version.version,
+                  "gender": currentUser.gender,
+                  "phone": currentUser.phone,
+                  "name": currentUser.name,
+                  "avatar": currentUser.avatar_url
+                });
+              }
+            }
+            if (this.redirect) {
+              this.$router.replace({path: this.redirect});
+            } else {
+              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+            }
           }));
         } else {
             this.loading = false;

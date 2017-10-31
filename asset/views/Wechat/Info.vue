@@ -175,7 +175,11 @@
 
               clearAllWebViewCache();
 
-              this.$router.replace(this.redirect);
+              if (this.redirect) {
+                this.$router.replace(this.redirect);
+              } else {
+                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+              }
             }));
 
           });
