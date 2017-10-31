@@ -25,7 +25,6 @@
         :api="'question/commonList'"
         :prevOtherData="{}"
         :nextOtherData="{}"
-        :list="list"
         class="listWrapper"
       >
         <div class="recommendlist">

@@ -67,20 +67,7 @@ npm run build
             });
 
 
-##列表组件使用
-    第一步: 引入 import
-          RefreshList from '../../components/refresh/List.vue';
-    第二步: 绑定数据
-          <RefreshList
-                  v-model="list"
-                  :api="'question/commonList'"      //api地址
-                  :prevOtherData="{}"               //向上请求时要携带的参数
-                  :nextOtherData="{}"               //向下请求时要携带的参数
-                  :list="list"                      //列表数据
-                >
-                //.....
-          </RefreshList>
-    第三部:循环list即可
+
 
 ##路由命名
    1 小驼峰式
