@@ -127,6 +127,7 @@ window.mixpanelIdentify = function () {
   if (process.env.NODE_ENV === 'production') {
     // mixpanel
     var app_version = localEvent.getLocalItem('app_version');
+    var currentUser = localEvent.getLocalItem('UserInfo');
     if (currentUser.user_id) {
       window.mixpanel.identify(currentUser.user_id);
       window.mixpanel.people.set({
