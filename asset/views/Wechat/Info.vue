@@ -167,10 +167,10 @@
 
               clearAllWebViewCache();
 
-              if (this.redirect) {
-                this.$router.replace(this.redirect);
-              } else {
+              if (mui.os.plus) {
                 this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+              } else {
+                this.$router.replace(this.redirect);
               }
             }));
 

@@ -138,10 +138,10 @@
             cb(user);
             mui.closeWaiting();
             mixpanelIdentify();
-            if (this.redirect) {
-              this.$router.replace({path: this.redirect});
-            } else {
+            if (mui.os.plus) {
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+            } else {
+              this.$router.replace({path: this.redirect});
             }
           }));
         } else {
@@ -288,7 +288,7 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user);
               mixpanelIdentify();
-              if (this.redirect === '/my') {
+              if (mui.os.plus) {
                 this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
               } else {
                 this.$router.replace({path: this.redirect});
