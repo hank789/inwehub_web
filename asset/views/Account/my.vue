@@ -15,109 +15,146 @@
               <svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
                 <use xlink:href="#icon-zhuanjiabiaoji"></use>
               </svg>
+              <i class="bot"></i>
             </div>
-            <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">名片{{account_info_complete_percent}}%</div>
+
             <div class="my-detail">
-              <span @tap.stop.prevent="$router.push('/my/Growth')">等级详情 ></span>
-              <i></i>
-              <span@tap.stop.prevent="$router.push('/my/advantage')">我的擅长 ></span>
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info')">
+                <use xlink:href="#icon-xiugai"></use>
+              </svg>
+              <span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片{{account_info_complete_percent}}%</span>
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/resume')">
+                <use xlink:href="#icon-fenxiang"></use>
+              </svg>
+              <span @tap.stop.prevent="$router.pushPlus('/my/resume')">分享名片</span>
 
             </div>
           </div>
 
         </div>
         <div class="my-news">
-          <i>Hot</i><span>邀请我的好友</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
+          <p @tap.stop.prevent="$router.pushPlus('/my/focus')">关注<span>{{attention}}</span></p>
+          <p @tap.stop.prevent="$router.pushPlus('/answers')">咨询<span>{{answers}}</span></p>
+          <p>评价<span>{{grade}}</span></p>
+          <p>{{total_score}}</p>
+        </div>
+
+        <ul class="my-infuence">
+          <li @tap.stop.prevent="$router.push('/my/Growth')">
+            <p class="mui-ellipsis">{{user_credits }}</p>
+            <p>成长值</p>
+          </li>
+          <li @tap.stop.prevent="$router.push('/my/Growth')">
+            <p class="mui-ellipsis">{{user_coins }}</p>
+            <p>贡献值</p>
+          </li>
+          <li @tap.stop.prevent="$router.pushReadHubPage('/@'+user_id)">
+            <p class="mui-ellipsis">{{ user_submission_karma }}</p>
+            <p>发文影响力</p>
+          </li>
+          <li @tap.stop.prevent="$router.pushReadHubPage('/@'+ user_id)">
+            <p class="mui-ellipsis">{{ user_comment_karma }}</p>
+            <p>回复影响值</p>
+          </li>
+           </ul>
+        <div class="my-apply">
+          <div @tap.stop.prevent="toApply(expert_apply_status)">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaoji"></use>
+            </svg>
+            <p>
+              <span v-if="expert_apply_status =='2'">平台认证专家</span>
+              <span v-else>申请专家认证</span>
+              <span v-if="expert_apply_status =='0'">点击前往认证</span>
+              <span v-if="expert_apply_status =='1'">认证处理中</span>
+              <span v-if="expert_apply_status =='2'">身份已认证</span>
+              <span v-if="expert_apply_status =='3'">失败，重新认证</span>
+            </p>
+
+          </div>
+          <div @tap.stop.prevent="toApprove(expert_apply_status)">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-qiyezhanghao"></use>
+            </svg>
+            <p>
+              <span v-if="company_apply_status =='2'">企业账号已认证</span>
+              <span v-else>申请企业账号</span>
+              <span v-if="company_apply_status =='0'">点击前往申请</span>
+              <span v-if="company_apply_status =='1'">申请审核中</span>
+              <span v-if="company_apply_status =='2'">切换至企业版</span>
+              <span v-if="company_apply_status =='3'">失败，重新认证</span>
+            </p>
+
+          </div>
         </div>
 
       </div>
-      <!--灰色-->
-      <div class="gray"></div>
 
-      <!--part2-->
       <ul class="part2">
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodefankuijianyi"></use>
-          </svg>
-          <span>我的发布</span>
+        <li @tap.stop.prevent="$router.pushPlus('/asks')">
+          <span v-html="getNumbers(questions)"></span>
+          <span>我的提问</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/collect')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodeguanzhu"></use>
-          </svg>
-          <span>我的关注</span>
+        <li @tap.stop.prevent="$router.pushPlus('/answers')">
+          <span v-html="getNumbers(answers)"></span>
+          <span>我的回答</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/collected')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodeshoucang"></use>
-          </svg>
-          <span>我的收藏</span>
-
+        <li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
+          <span v-html="getNumbers(enroll)"></span>
+          <span>我的报名</span>
+        </li>
+        <li @tap.stop.prevent="exclusive(company_apply_status)">
+          <span v-html="getNumbers(projects)"></span>
+          <span>我的项目</span>
         </li>
         <i class="bott"></i>
       </ul>
-      <!--part3认证-->
-      <ul class="part3">
-        <li>
-          <p>平台认证<i></i></p>
-        </li>
-        <li @tap.stop.prevent="toApply(expert_apply_status)">
-          <p v-if="expert_apply_status =='0'">点击前往认证</p>
-          <p v-if="expert_apply_status =='1'">认证处理中</p>
-          <p v-if="expert_apply_status =='2'">身份已认证</p>
-          <p v-if="expert_apply_status =='3'">失败，重新认证</p>
-          <p v-if="expert_apply_status =='2'">平台认证专家</p>
-          <p v-else>申请专家认证</p>
-        </li>
-        <li @tap.stop.prevent="toApprove(expert_apply_status)">
-          <p v-if="company_apply_status =='0'">点击前往申请</p>
-          <p v-if="company_apply_status =='1'">申请审核中</p>
-          <p v-if="company_apply_status =='2'">切换至企业版</p>
-          <p v-if="company_apply_status =='3'">失败，重新认证</p>
-          <p v-if="company_apply_status =='2'">企业账号已认证</p>
-          <p v-else>申请企业账号</p>
-        </li>
-      </ul>
-      <!--gray-->
-      <div class="gray"></div>
 
       <ul class="my-option">
         <li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
-
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-qianbao"></use>
+          </svg>
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
-
-          <span>我的报名</span>
+        <li @tap.stop.prevent="$router.pushPlus('/collect')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodeguanzhu"></use>
+          </svg>
+          <span>我的关注</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
-
+        <li @tap.stop.prevent="$router.pushPlus('/my/collected')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodeshoucang"></use>
+          </svg>
+          <span>我的收藏</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
         <li @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
-          <span>反馈帮助</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-wodefankuijianyi"></use>
           </svg>
-          <i class="bot"></i>
-        </li>
-        <li >
-          <span>我的福利</span>
+          <span>反馈建议</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/setting')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodeshezhi"></use>
+          </svg>
           <span>设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -138,7 +175,8 @@
   import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
   import { updateUserInfoCache, getUserInfo } from '../../utils/user';
   import userAbility from '../../utils/userAbility';
-  import { alertMajorCommentSuccess, readhubCommenSuccess, perfectCard, alertAskCommunityQuestioningSuccess } from '../../utils/dialogList';
+  import {alertMajorCommentSuccess,readhubCommenSuccess,perfectCard,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
+
 
   export default {
     data() {
@@ -164,19 +202,18 @@
         user_level: currentUser.user_level,
         user_credits: currentUser.user_credits,
         user_coins: currentUser.user_coins,
-        user_submission_karma: currentUser.submission_karma,
-        user_comment_karma: currentUser.comment_karma,
+        user_submission_karma:currentUser.submission_karma,
+        user_comment_karma:currentUser.comment_karma,
         user_id: currentUser.id,
         questions: currentUser.questions,
         answers: currentUser.answers,
-        enroll: currentUser.my_activity_enroll,
+        enroll:currentUser.my_activity_enroll,
         tasks: currentUser.tasks,
         projects: currentUser.projects,
         expert_level: currentUser.expert_level,
         show_my_wallet: currentUser.show_my_wallet,
         show_resume: true,
         my: "",
-
 
       }
     },
@@ -209,31 +246,31 @@
       //认证专家跳转判断；
       toApprove(status) {
         this.$router.pushPlus('/company/my?back=/my');
-        //				switch(status) {
-        //					case 2:
-        //						this.$router.pushPlus('/company/my?back=/my');
-        //						break;
-        //					default:
-        //						this.$router.pushPlus('/company/submit');
+        //        switch(status) {
+        //          case 2:
+        //            this.$router.pushPlus('/company/my?back=/my');
+        //            break;
+        //          default:
+        //            this.$router.pushPlus('/company/submit');
         //
-        //				}
+        //        }
 
       },
       //认证专家；
       toApply(expertStatus) {
         userAbility.jumpToApplyProfessor(this);
-        //				switch (parseInt(expertStatus)) {
-        //			        case 0:
-        //			        case 3:
-        //			            this.$router.push('/my/pilot');
-        //			          break;
-        //			        case 2:
-        //			          mui.toast('您已经是专家');
-        //			          break;
-        //			        case 1:
-        //			          this.$router.push('/expert/apply/success?type=0');
-        //			          break;
-        //			      }
+//        switch (parseInt(expertStatus)) {
+//              case 0:
+//              case 3:
+//                  this.$router.push('/my/pilot');
+//                break;
+//              case 2:
+//                mui.toast('您已经是专家');
+//                break;
+//              case 1:
+//                this.$router.push('/expert/apply/success?type=0');
+//                break;
+//            }
 
       },
       getNumbers: function(number) {
@@ -274,7 +311,7 @@
           this.user_comment_karma = user.info.comment_karma;
           this.user_id = user.info.id;
           this.questions = user.info.questions;
-          this.enroll = user.info.my_activity_enroll;
+          this. enroll = user.info.my_activity_enroll;
           this.answers = user.info.answers;
           this.tasks = user.info.tasks;
           this.projects = user.info.projects;
@@ -293,11 +330,11 @@
     },
     created() {
       //showInwehubWebview();
-      if(mui.os.plus) {
+      if (mui.os.plus) {
         var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
         var currentUser = localEvent.getLocalItem('UserInfo');
         var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
-        if(inwehub_embed_webview.getURL() !== url) {
+        if (inwehub_embed_webview.getURL() !== url) {
           inwehub_embed_webview.loadURL(url);
         }
       }
@@ -316,17 +353,11 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  ul,
-  li,
-  p,
-  span,
-  a,
-  i {
+   ul,li,p,span,a,i{
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-  
+   }
   .bot {
     position: absolute;
     right: 0;
@@ -337,7 +368,7 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  
+
   .bott {
     position: absolute;
     right: 15px;
@@ -348,47 +379,44 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  
+
   .my-top {
     width: 100%;
-    overflow: hidden;
+    height: 330px;
     padding: 0 13px 0 13px;
     background-color: #ffffff;
   }
-  
+
   .professor {
     width: 100%;
-    height: 120px;
+    height: 100px;
   }
-  
+
   .professor .avatar {
     width: 69px;
     height: 68.5px;
     border-radius: 50%;
-    margin-top: 25px;
+    margin-top: 30.5px;
     float: left;
   }
-  
+
   .my-personal {
-    width: 75%;
+    width: 71%;
     height: 69px;
-    margin: 25px 0 0 6px;
+    margin: 30.5px 0 0 6px;
     padding-right: 4px;
     float: left;
     position: absolute;
     right: 8px;
-    /*top: 0;
-		bottom: 0;
-		margin: auto;*/
   }
-  
+
   .my-personal .my-info {
     width: 100%;
     height: 30px;
-    margin-top: 9px;
+    margin-bottom: 9px;
     position: relative;
   }
-  
+
   .my-personal .my-info span:nth-of-type(1) {
     display: inline-block;
     max-width: 72px;
@@ -398,7 +426,7 @@
     margin-right: 1.5px;
     margin-bottom: -4px;
   }
-  
+
   .my-personal .my-info p:nth-of-type(1) {
     width: 19px;
     height: 18px;
@@ -414,7 +442,7 @@
     background-size: 19px 18px;
     background-position: top;
   }
-  
+
   .my-personal .my-info svg:nth-of-type(1) {
     font-size: 26px;
     margin-bottom: -4px;
@@ -422,214 +450,177 @@
     color: rgb(3, 174, 249);
     position: relative;
   }
-  /**********等级 擅长部分***************/
-  
+
+/**********编辑分享部分***************/
   .my-personal .my-detail {
     width: 100%;
     height: 30px;
   }
-  
-  .my-detail span {
-    font-size: 13px;
-    color: #444444;
-  }
-  
-  .my-detail i {
-    display: inline-block;
-    width: 1px;
-    height: 12px;
-    background: #DCDCDC;
-    margin-left: 9px;
-    margin-right: 9px;
+  .my-detail svg{
+    font-size: 18px;
+    color: #03AEF9;
     margin-bottom: -2px;
   }
-  /**********名片***************/
-  
-  .account_info {
-    position: absolute;
-    right: -10px;
-    width: 83px;
-    height: 29px;
-    border-radius: 100px 0 0 100px;
-    background: #808080;
-    line-height: 29px;
-    color: #FFFFFF;
-    font-size: 14px;
-    padding-left: 10px;
+  .my-detail svg:nth-of-type(2){
+      margin-left: 10px;
   }
-  /**********邀请我的好友***************/
-  
+  .my-detail span{
+    font-size: 13px;
+    color: #808080;
+
+  }
+/**********信息部分***************/
   .my-news {
     width: 100%;
     height: 36px;
     border-radius: 4px;
     background: #ffffff;
+    margin-top: 32px;
+    padding-top: 10px;
     -webkit-box-shadow: 0 0 10px rgb(243, 244, 246);
     -moz-box-shadow: 0 0 10px rgb(243, 244, 246);
     box-shadow: 0 0 10px rgb(243, 244, 246);
-    position: relative;
-    margin-bottom: 20px;
   }
-  
-  .my-news i {
-    font-style: normal;
-    display: inline-block;
-    width: 30px;
-    height: 17px;
-    background: #E95D8C;
-    font-size: 12px;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 17px;
-    border-radius: 4px;
-    margin-left: 19px;
-    margin-right: 10px;
-    position: relative;
-    /*渐变*/
-    background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
-  }
-  
-  .my-news i:after {
-    content: "";
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: rgb(253, 128, 173);
-    position: absolute;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
-    right: -2px;
-    top: 0px;
-    bottom: 0;
-    margin: auto;
-  }
-  
-  .my-news span {
-    font-size: 14px;
-    color: #444444;
-    line-height: 36px;
-  }
-  
-  .my-news svg {
+
+  .my-news p {
+    display: inherit;
+    float: left;
+    width: 18%;
+    height: 16px;
     font-size: 14px;
     color: #808080;
-    position: absolute;
-    right: 15px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  
-  .gray {
-    width: 100%;
-    height: 10px;
-    background: #F3F4F5;
-  }
-  /*中间的发布认证*/
-  
-  .part2 {
-    list-style: none;
-    width: 100%;
-    height: 72px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background: #FFFFFF;
-    position: relative;
-  }
-  
-  .part2 li {
-    float: left;
-    width: 33%;
-    height: 100%;
     text-align: center;
-    position: relative;
+    line-height: 16px;
+    border-right: 1px solid #c8c8c8;
   }
-  
-  .part2 li svg {
-    font-size: 24px;
+
+  .my-news p:last-child {
+    border-right: none;
+    width: 30%;
+    margin-left: 8px;
+  }
+
+  .my-news p span {
+    color: #fa4975;
+  }
+
+  .my-news p:nth-of-type(3) span {
+    color: rgb(68, 68, 68);
+  }
+/**********发布文章信息部分***************/
+  .my-infuence{
+    width: 100%;
+    margin-top: 22px;
+    overflow: hidden;
+  }
+  .my-infuence li{
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: center;
+  }
+  .my-infuence li p:nth-of-type(1){
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444444;
+  }
+  .my-infuence li p:nth-of-type(2){
+    font-size: 12px;
+    color: #808080;
+  }
+
+/**********申请部分***************/
+  .my-apply {
+    margin-top: 20px;
+    width: 100%;
+    height: 61px;
+  }
+
+  .my-apply div {
+    float: left;
+    width: 49%;
+    height: 61px;
+    border-radius: 4px;
+    background-color: #ececee;
+  }
+     .my-apply div:nth-of-type(2){
+      margin-left: 2%;
+     }
+  .my-apply div svg {
+    margin-top: 10px;
+    margin-left: 6px;
+    margin-right: 2px;
+    font-size: 40px;
+    color: rgb(3, 174, 249);
+    float: left;
+  }
+
+  .my-apply div:nth-of-type(2) svg {
+    margin-top: 13px;
+    margin-left: 10px;
+    /*margin-right: 8px;*/
+    font-size: 32px;
+    color: rgb(3, 174, 249);
+    float: left;
+  }
+
+  .my-apply div p {
     margin-top: 10px;
   }
-  
-  .part2 li span {
-    font-size: 12px;
-    color: #808080;
+
+  .my-apply div p span {
     display: block;
-    margin-top: 7px;
   }
-  /*part3认证*/
-  
-  .part3 {
+
+  .my-apply div p span:nth-of-type(1) {
+    font-size: 14px;
+    color: #444444;
+  }
+
+  .my-apply div p span:nth-of-type(2) {
+    font-size: 13px;
+    color: #808080;
+  }
+
+  .part2 {
+    padding: 0;
+    margin: 0;
     list-style: none;
     width: 100%;
-    height: 73px;
+    height: 70px;
     padding-left: 15px;
     padding-right: 15px;
     background: #FFFFFF;
+    margin-top: 10px;
     position: relative;
   }
-  
-  .part3 li {
-    float: left;
-    width: 33%;
-    height: 100%;
-    text-align: center;
-    position: relative;
-  }
-  
-  .part3 li p:nth-of-type(1) {
-    width: 60px;
-    height: 19px;
-    font-size: 13px;
-    text-align: center;
-    color: #ffffff;
-    line-height: 19px;
-    background: #fcc816;
-    border-radius: 100px;
-    position: absolute;
-    top: 12px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  
-  .part3 li p:nth-of-type(2) {
-    text-align: center;
-    font-size: 13px;
-    color: #808080;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  
-  .part3 li:nth-of-type(1) p {
-    background: #FFF;
-    font-size: 13px;
-    color: #808080;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  
-  .part3 li:nth-of-type(1) p i {
+
+  .part2 li {
     display: inline-block;
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid #dcdcdc;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    margin-left: 6px;
+    width: 23%;
+    height: 70px;
+    text-align: center;
   }
-  /*底部*/
-  
+
+  .part2 li span:nth-of-type(1) {
+    padding: 0;
+    margin: 0;
+    display: block;
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 13px;
+    color: #444444;
+  }
+
+  .part2 li span:nth-of-type(2) {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    color: #808080;
+    display: block;
+  }
+
   .my-option {
     width: 100%;
     background: #FFFFFF;
@@ -640,7 +631,7 @@
     padding-right: 16px;
     margin-bottom: 79px;
   }
-  
+
   .my-option li {
     width: 100%;
     height: 44px;
@@ -648,22 +639,27 @@
     padding-bottom: 12px;
     position: relative;
   }
-  
+
   .my-option li span {
     margin-left: 10px;
     font-size: 14px;
     color: #444444;
   }
-  
-  .my-option li svg {
+
+  .my-option li svg:nth-of-type(1) {
+    font-size: 22px;
+    margin-bottom: -4px;
+  }
+
+  .my-option li svg:nth-of-type(2) {
     float: right;
   }
-  
+
   .mui-popup-inner {
     padding: 23px 15px 1px 15px;
   }
-  
-  .mui-content {
+
+  .mui-content{
     background: #fff;
   }
 </style>

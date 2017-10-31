@@ -212,14 +212,16 @@
           this.buttonSelectTimeDisable = false;
           var code = response.data.code;
           if (code !== 1000) {
+             //回答过的；
+            if (code == 3003) {
+             alertAnswerRepeat(this);
+            }
+            
             mui.alert(response.data.message);
         
             return;
           }
-           //回答过的；
-            if (code == 3003) {
-             alertAnswerRepeat(this);
-            }
+          
             
             
 
@@ -344,14 +346,16 @@
         postRequest(`question/info`, {id: this.id}).then(response => {
           var code = response.data.code;
           if (code !== 1000) {
+             if (code == 3003) {
+                 alertAnswerRepeat(this);
+              }
+          //code 3003
+            
             mui.toast(response.data.message);
             this.$router.pushPlus('/task', true, 'pop-in', 'hide', true);
             return;
           }
-          if (code == 3003) {
-            alertAnswerRepeat(this);
-          }
-          //code 3003
+         
            
 
           this.answer = response.data.data;
