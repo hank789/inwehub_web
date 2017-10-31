@@ -39,7 +39,7 @@
 
       <!--part2-->
       <ul class="part2">
-        <li>
+        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodefankuijianyi"></use>
           </svg>

@@ -338,6 +338,54 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
+  { // 我的发布_回答；
+    path: '/my/publishAnswers',
+    name: 'my-publish_answers',
+    component: require('../../../views/Account/publish/publishAnswers.vue'),
+    meta: {
+      title: '我的发布',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+   { // 我的发布_提问；
+    path: '/my/publishQuestions',
+    name: 'my-publish_questions',
+    component: require('../../../views/Account/publish/publishQuestions.vue'),
+    meta: {
+      title: '我的发布',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的发布_文章；
+    path: '/my/publishArticle',
+    name: 'my-publish_article',
+    component: require('../../../views/Account/publish/publishArticle.vue'),
+    meta: {
+      title: '我的发布',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的发布_评论；
+    path: '/my/publishComment',
+    name: 'my-publish_comment',
+    component: require('../../../views/Account/publish/publishComment.vue'),
+    meta: {
+      title: '我的发布',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 个人信息
     path: '/my/info',
     name: 'my-info',

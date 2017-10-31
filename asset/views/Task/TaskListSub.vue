@@ -7,11 +7,6 @@
 		</header>
 
 		<div class="mui-content list-empty absolute" v-if="nothing==1">
-      <div class="menu">
-        <span @tap.stop.prevent="">任务</span>
-        <span @tap.stop.prevent="$router.replace('/inform')">消息</span>
-        
-        <i></i>
         <div class="mui-table-view list-ask-item">
           <div class="mui-table-view-cell">
             <div>
@@ -19,7 +14,6 @@
               <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
             </div>
           </div>
-        </div>
       </div>
 
 		</div>
