@@ -10,6 +10,7 @@
       <Contact
         @click="choose"
         :list="list"
+        v-model="lastList"
         :search="search">
         <div slot="header" class="indexHeader">
           <div class="searchWrapper">
@@ -26,6 +27,34 @@
         <div class="indexTitle">
           已关注的成员
 
+        </div>
+
+        <div class="groupWrapper">
+          <ul v-for="(list, key) in lastList" class="index-bar-group">
+            <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
+            <li v-for="(item, index) in list" :key="index" :data-raw="item.raw"
+                class="index-bar-cell tap-active" :class="{bottomBorder:index !== list.length-1  }">
+
+              <div class="avatar">
+                <div class="avatarInner" @tap.stop.prevent="">
+                  <img :src="item.avatar_url">
+
+                  <svg class="icon" aria-hidden="true" v-show="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="textBody ">
+                <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
+                <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
+              </div>
+
+              <div class="ibutton active" v-if="item.is_invited">已邀请</div>
+              <div class="ibutton" @tap.stop.prevent="chooseItem(item)" v-else>邀请</div>
+
+            </li>
+          </ul>
         </div>
       </Contact>
 
@@ -62,7 +91,8 @@
         answernum:0,
         followednum:0,
         title:'',
-        list: []
+        list: [],
+        lastList:[]
       }
     },
     components: {
@@ -124,6 +154,10 @@
         this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
 
         this.getList(this.id);
+      },
+      chooseItem (item) {
+        item.is_invited = true;
+        this.choose(item);
       }
     },
     watch: {
