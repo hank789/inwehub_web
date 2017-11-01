@@ -1,4 +1,4 @@
-import { IMGSWIPER } from '../types';
+import { IMGSWIPER } from '../types'
 
 const state = {
   imageSwiper: {
@@ -6,31 +6,29 @@ const state = {
     value: 0,
     show: false
   }
-};
+}
 
 const mutations = {
   [IMGSWIPER] (state, images) {
-      state.imageSwiper = { ...state.imageSwiper, ...images };
+    state.imageSwiper = {...state.imageSwiper, ...images}
   }
-};
+}
 
 const actions = {
   [IMGSWIPER]: (context, cb) => {
-    cb( (images) => {
-      context.commit(IMGSWIPER, images);
-    });
+    cb((images) => {
+      context.commit(IMGSWIPER, images)
+    })
   }
-};
-
-const getters = {
-
 }
+
+const getters = {}
 
 const store = {
   state,
   mutations,
   actions,
   getters
-};
+}
 
-export default store;
+export default store
