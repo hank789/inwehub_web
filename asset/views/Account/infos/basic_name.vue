@@ -3,7 +3,8 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" @tap.stop.prevent="$router.goBack()" >取消</a>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back"
+         @tap.stop.prevent="$router.goBack()">取消</a>
       <h1 class="mui-title">用户姓名</h1>
       <a @tap.stop.prevent="submitInfo()"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
@@ -14,7 +15,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">姓名</label>
-            <input type="text"  placeholder="请填写" v-model.trim="name">
+            <input type="text" placeholder="请填写" v-model.trim="name">
           </div>
         </li>
       </ul>
@@ -25,37 +26,37 @@
 
 <script>
 
-  import localEvent from '../../../stores/localStorage';
-  import {apiRequest} from '../../../utils/request';
+  import localEvent from '../../../stores/localStorage'
+  import { apiRequest } from '../../../utils/request'
 
   export default {
     data: () => ({
-      name:'',
+      name: ''
     }),
     created () {
-      var userInfo = localEvent.getLocalItem('UserInfo');
-      this.name = userInfo.name;
+      var userInfo = localEvent.getLocalItem('UserInfo')
+      this.name = userInfo.name
     },
-    mounted(){
+    mounted () {
 
     },
-    methods:{
+    methods: {
       submitInfo: function () {
         if (!this.name) {
-          mui.toast('请填写姓名');
-          return false;
+          window.mui.toast('请填写姓名')
+          return false
         }
 
         var data = {
-            'name':this.name
-        };
+          'name': this.name
+        }
 
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
-            mui.toast('保存成功');
-            mui.back();
+            window.mui.toast('保存成功')
+            window.mui.back()
           }
-        });
+        })
       }
     }
   }
@@ -63,8 +64,8 @@
 
 
 <style scoped>
-  .mui-content > .mui-table-view:first-child{
-    margin-top:0;
+  .mui-content > .mui-table-view:first-child {
+    margin-top: 0;
   }
 
   .mui-table-view-cell {
@@ -76,7 +77,7 @@
     color: #999;
   }
 
-  input{
+  input {
     text-align: right;
   }
 </style>
