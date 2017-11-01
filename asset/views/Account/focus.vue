@@ -22,7 +22,7 @@
 						<li class="my-focus-item" v-for="(item, index) in list">
 							<img :src="item.user_avatar_url" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')" />
 							<div>
-								<p>
+								<p>     
 									<span class="mui-ellipsis">{{item.user_name}}</span>
 									<svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
 										<use xlink:href="#icon-zhuanjiabiaoji"></use>
@@ -32,12 +32,8 @@
 									<span class="descriptionText">{{item.description}}</span>
 								</div>
 							</div>
-							<svg class="icon" aria-hidden="true" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
-								<use xlink:href="#icon-shoucang"></use>
-							</svg>
-							<svg class="icon" aria-hidden="true" style="color: rgb(3,174,249);" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>
-								<use xlink:href="#icon-shoucanghover"></use>
-							</svg>
+							<p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">关注Ta</p>
+							<p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>已互关</p>
 							<i class="bot"></i>
 						</li>
 
@@ -217,12 +213,24 @@
 	.my-focus-item div {
 
 	}
-
-	.my-focus-item>svg {
+/*关注和取消*/
+	.my-focus-item .follows {
     position: absolute;
+    width: 62px;
+    height:27px;
+    border: 1px solid #03aef9;
+    border-radius:50px;
+    text-align: center;
+    line-height: 27px;
     right:0;
     top:18px;
-		font-size: 25px;
+		font-size:14px;
+		color: #03aef9;
+	}
+	.my-focus-item .bgblue{
+	  background:#03aef9;
+	  color: #FFFFFF;
+	  
 	}
 
 	.my-focus-item div p:nth-of-type(1) span {

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../utils/request'
+  import{createAPI, addAccessToken, postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
