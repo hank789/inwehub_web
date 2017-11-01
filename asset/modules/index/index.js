@@ -63,7 +63,14 @@ import './../../js/iconfont.js'
 window.mui.oldConfirm = window.mui.confirm
 window.mui.confirm = (message, title, btnArray, callback, type) => {
   var newType = window.mui.os.android ? null : type
-  window.mui.oldConfirm(message, title, btnArray, callback, newType)
+  var newCallback = callback;
+  if (mui.os.android) {
+    newCallback = (e) => {
+      e.index = e.index === 0?1:0;
+      callback(e);
+    }
+  }
+  mui.oldConfirm(message, title, btnArray, newCallback, newType)
 }
 
 Vue.use(VueWechatTitle)
