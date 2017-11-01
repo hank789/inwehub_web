@@ -25,12 +25,17 @@
         :nextOtherData="{type:0}"
         class="listWrapper">
         <ul class="answer">
-          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
+          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.submission_url)">
             <div class="container-image margin-10-0-0" v-if="ask.img" >
               <img :src="ask.img" />
             </div>
             <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
-            <p>{{ask.created_at}}<a v-if="ask.category_name">#{{ask.category_name}}</a></p>
+            <p>
+              <!--{{ask.created_at}}-->
+              <timeago :since="timeago(ask.created_at)" :auto-update="60">
+              </timeago>
+              <a v-if="ask.category_name">#{{ask.category_name}}</a>
+            </p>
             <i class="bot"></i>
           </li>
         </ul>
@@ -59,6 +64,12 @@
       RefreshList
     },
     methods: {
+      //时间处理；
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      }
     },
     mounted() {
     },

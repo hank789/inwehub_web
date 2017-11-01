@@ -54,21 +54,23 @@
 								<span class="mui-ellipsis">{{ task.description }}</span>
 								<!--时间判断-->
 								<span class="time" v-if="startCountdown(task)">倒计时
-									<count-down :start-time="currentTime"
+									<count-down     :start-time="currentTime"
                                     :end-time="getEndTime(task)"
                                     :dayTxt="':'" :hourTxt="':'"
-                                    :minutesTxt="':'"></count-down>
+                                    :minutesTxt="':'">
+								</count-down>
 								</span>
 
-                                 <span class="time" v-else-if="isTimeout(task)">
-                                 	<b>已超时</b><timeago :since="timeago(task.deadline)"
-                                   :auto-update="60"></timeago>
-                                 </span>
+                 <span class="time" v-else-if="isTimeout(task)">
+                 	<b>已超时</b><timeago :since="timeago(task.deadline)"
+                   :auto-update="60"></timeago>
+                 </span>
 
-                                  <span class="time" v-else><b v-show="isTimeout(task)">已超时</b>
-                                  	<timeago :since="timeago(task.created_at)" :auto-update="60">
-                                  	</timeago>
-                                  </span>
+                  <span class="time" v-else><b v-show="isTimeout(task)">已超时</b>
+                  	<timeago :since="timeago(task.created_at)" :auto-update="60">
+                  	</timeago>
+                  </span>
+                  
 							</p>
 							<i class="bot"></i>
 						</li>
