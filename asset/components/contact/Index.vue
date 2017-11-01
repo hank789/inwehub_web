@@ -14,7 +14,7 @@
   </div>
 </template>
 <script type="text/babel">
-  let pinyin = require('./pinyin');
+  let pinyin = require('./pinyin')
   let chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']
   export default{
     props: {
@@ -60,9 +60,8 @@
 
         let arr = this.list.map(function (item) {
           item.pinyin = pinyin.getFullCamelChars(item.name)
-          return item;
+          return item
         })
-
 
         arr.forEach((item) => {
           this.sort(map, item)
@@ -99,19 +98,19 @@
         }
       },
       chooseIndex (e) {
-        var innerHTML = e.target.innerHTML;
-        var target = document.getElementById(innerHTML);
+        var innerHTML = e.target.innerHTML
+        var target = document.getElementById(innerHTML)
         if (target) {
-          var oPos = target.offsetTop;
-          console.log(oPos);
-          window.scrollTo(0, oPos-40);
+          var oPos = target.offsetTop
+          console.log(oPos)
+          window.scrollTo(0, oPos - 40)
         }
       }
     },
     watch: {
       data: function (newValue) {
-          this.$emit('input', newValue);
-      },
+        this.$emit('input', newValue)
+      }
     }
   }
 </script>
@@ -151,7 +150,7 @@
 
   .index-bar {
     position: fixed;
-    right:0;
+    right: 0;
     top: 160px;
     z-index: 12;
     width: 23px;
@@ -255,9 +254,9 @@
 
   .textBody {
     position: absolute;
-    top:12px;
-    right:68px;
-    left:68px;
+    top: 12px;
+    right: 68px;
+    left: 68px;
     vertical-align: top;
     color: #565656;
   }
