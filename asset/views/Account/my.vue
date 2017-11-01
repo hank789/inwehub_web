@@ -51,7 +51,7 @@
           </svg>
           <span>我的关注</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/collected')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/collectedAnswers')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodeshoucang"></use>
           </svg>
