@@ -14,6 +14,7 @@
 
     <div class="content">
       {{ ask.description }}
+
     </div>
 
     <div class="answerCount">
@@ -27,20 +28,23 @@
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
                 @tap.stop.prevent="toContact()">
           邀请回答
+
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer-once',true,'pop-in','hide',true)">
           参与回答
-       </button>
+
+        </button>
       </div>
 
-      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else >
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction',true,'pop-in','hide',true)">
           查看我的回答
-       </button>
+
+        </button>
       </div>
     </div>
 
@@ -48,13 +52,12 @@
 </template>
 <script type="text/javascript">
 
-  import UserInfo from './UserInfo.vue';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import UserInfo from './UserInfo.vue'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
-      return {
-      }
+      return {}
     },
     components: {
       UserInfo
@@ -64,99 +67,99 @@
         type: Object,
         default: {}
       },
-      isFollowAsked:{
-        type:Boolean,
-        default:false
+      isFollowAsked: {
+        type: Boolean,
+        default: false
       },
-      myAnswerId:{
-        type:Number,
-        default:0
+      myAnswerId: {
+        type: Number,
+        default: 0
       },
       isFollow: {
         type: Boolean,
         default: false
       }
     },
-    created(){
+    created () {
 
     },
     methods: {
-      toContact(){
-        var description = encodeURIComponent(this.ask.description.replace(/\s/g, ''));
-        var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''));
-        var answerNum = this.ask.answer_num?this.ask.answer_num:0;
-        var followedNum = this.ask.follow_num?this.ask.follow_num:0;
-        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum='+answerNum+'&followednum='+followedNum, 'list-detail-page-contact',true,'pop-in','hide',true);
+      toContact () {
+        var description = encodeURIComponent(this.ask.description.replace(/\s/g, ''))
+        var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
+        var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
+        var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
+        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page-contact', true, 'pop-in', 'hide', true)
       },
-      setFollowStatus(status){
-        this.ask.is_followed=status;
+      setFollowStatus (status) {
+        this.ask.is_followed = status
       },
       collectAsk: function () {
         if (!this.ask.id) {
-          return;
+          return
         }
 
         postRequest(`follow/question`, {
           id: this.ask.id
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          var is_followed = response.data.data.type === 'follow' ? 1 : 0;
+          var isFollowed = response.data.data.type === 'follow' ? 1 : 0
 
-          mui.toast(response.data.data.tip);
+          window.mui.toast(response.data.data.tip)
 
-          this.ask.follow_num++;
+          this.ask.follow_num++
 
-          this.$emit('setFollowAskStatus', is_followed);
-        });
+          this.$emit('setFollowAskStatus', isFollowed)
+        })
       },
-      getHtml(id, options, callback) {
+      getHtml (id, options, callback) {
       }
     }
-  };
+  }
 </script>
 
 <style lang="less" scoped>
-  .questionInteractionWrapper{
-    margin-top:0 !important;
+  .questionInteractionWrapper {
+    margin-top: 0 !important;
 
-    .content{
-      padding:0 15px;
+    .content {
+      padding: 0 15px;
     }
 
-    .answerCount{
-      color:#b4b4b6;
-      font-size:12px;
-      padding:5px 15px 15px;
+    .answerCount {
+      color: #b4b4b6;
+      font-size: 12px;
+      padding: 5px 15px 15px;
 
-      span{
-        color:#03aef9;
-        margin-left:5px;
+      span {
+        color: #03aef9;
+        margin-left: 5px;
       }
     }
 
-    .buttonWrapper{
+    .buttonWrapper {
 
-      &.buttonWrapper-1{
-        padding:0 7px 0 15px;
+      &.buttonWrapper-1 {
+        padding: 0 7px 0 15px;
       }
 
-      &.buttonWrapper-2{
-        padding:0 15px 0 7px;
+      &.buttonWrapper-2 {
+        padding: 0 15px 0 7px;
       }
 
-      .mui-btn-warning{
+      .mui-btn-warning {
         background-color: #fcc816;
-        border:1px solid #fcc816;
+        border: 1px solid #fcc816;
       }
     }
   }
 
-  .afterHidden:after{
+  .afterHidden:after {
     display: none;
   }
 </style>

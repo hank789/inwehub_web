@@ -2,7 +2,9 @@
   <div :class="['star-rating', {inline: inline}]">
     <div class="star-rating">
             <span v-for="n in maxRating" :class="[{pointer: !readOnly }, 'star']">
-              <star :fill="fillLevel[n-1]" :size="starSize" :star-id="n" :step="step" :active-color="activeColor" :inactive-color="inactiveColor" :border-color="borderColor" :border-width="borderWidth" :padding="padding" @star-selected="setRating($event, true)"></star>
+              <star :fill="fillLevel[n-1]" :size="starSize" :star-id="n" :step="step" :active-color="activeColor"
+                    :inactive-color="inactiveColor" :border-color="borderColor" :border-width="borderWidth"
+                    :padding="padding" @star-selected="setRating($event, true)"></star>
             </span>
       <span v-if="showRating" :class="['rating-text', textClass]"> {{currentRating}}</span>
     </div>
@@ -10,7 +12,7 @@
 </template>
 
 <script type="text/javascript">
-  import star from './star.vue';
+  import star from './star.vue'
   export default {
     components: {
       star
@@ -30,11 +32,11 @@
       },
       activeColor: {
         type: String,
-        default: "#ffd055"
+        default: '#ffd055'
       },
       inactiveColor: {
         type: String,
-        default: "#d8d8d8"
+        default: '#d8d8d8'
       },
       maxRating: {
         type: Number,
@@ -54,7 +56,7 @@
       },
       textClass: {
         type: String,
-        default: ""
+        default: ''
       },
       inline: {
         type: Boolean,
@@ -62,7 +64,7 @@
       },
       borderColor: {
         type: String,
-        default: "#999"
+        default: '#999'
       },
       borderWidth: {
         type: Number,
@@ -73,56 +75,56 @@
         default: 0
       }
     },
-    created() {
-      this.step = this.increment * 100;
-      this.currentRating = this.rating;
-      this.selectedRating = this.rating;
-      this.createStars();
+    created () {
+      this.step = this.increment * 100
+      this.currentRating = this.rating
+      this.selectedRating = this.rating
+      this.createStars()
     },
     methods: {
-      setRating($event, persist) {
+      setRating ($event, persist) {
         if (!this.readOnly) {
-          let position = $event.position / 100;
-          this.currentRating = (($event.id + position) - 1).toFixed(2);
-          this.currentRating = (this.currentRating > this.maxRating) ? this.maxRating : this.currentRating;
-          this.createStars();
+          let position = $event.position / 100
+          this.currentRating = (($event.id + position) - 1).toFixed(2)
+          this.currentRating = (this.currentRating > this.maxRating) ? this.maxRating : this.currentRating
+          this.createStars()
           if (persist) {
-            this.selectedRating = this.currentRating;
-            this.$emit('rating-selected', this.selectedRating);
+            this.selectedRating = this.currentRating
+            this.$emit('rating-selected', this.selectedRating)
           } else {
-            this.$emit('current-rating', this.currentRating);
+            this.$emit('current-rating', this.currentRating)
           }
         }
       },
-      resetRating() {
+      resetRating () {
         if (!this.readOnly) {
-          this.currentRating = this.selectedRating;
-          this.createStars();
+          this.currentRating = this.selectedRating
+          this.createStars()
         }
       },
-      createStars() {
-        this.round();
+      createStars () {
+        this.round()
         for (var i = 0; i < this.maxRating; i++) {
-          let level = 0;
+          let level = 0
           if (i < this.currentRating) {
-            level = (this.currentRating - i > 1) ? 100 : (this.currentRating - i) * 100;
+            level = (this.currentRating - i > 1) ? 100 : (this.currentRating - i) * 100
           }
-          this.$set(this.fillLevel, i, Math.round(level));
+          this.$set(this.fillLevel, i, Math.round(level))
         }
       },
-      round() {
-        var inv = 1.0 / this.increment;
-        this.currentRating = Math.ceil(this.currentRating * inv) / inv;
+      round () {
+        var inv = 1.0 / this.increment
+        this.currentRating = Math.ceil(this.currentRating * inv) / inv
       }
     },
     watch: {
-      rating(val) {
-        this.currentRating = val;
-        this.selectedRating = val;
-        this.createStars();
+      rating (val) {
+        this.currentRating = val
+        this.selectedRating = val
+        this.createStars()
       }
     },
-    data() {
+    data () {
       return {
         step: 0,
         fillLevel: [],

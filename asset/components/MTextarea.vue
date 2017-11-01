@@ -1,18 +1,18 @@
 <template>
 
-    <div class="textarea-wrapper">
-      <textarea v-model.trim="description" :rows="rows" :placeholder="placeholder"></textarea>
-      <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-    </div>
+  <div class="textarea-wrapper">
+    <textarea v-model.trim="description" :rows="rows" :placeholder="placeholder"></textarea>
+    <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+  </div>
 </template>
 
 <script type="text/javascript">
   export default {
     data: () => ({
-      description:""
+      description: ''
     }),
     props: {
-      content:{
+      content: {
         type: String,
         default: ''
       },
@@ -20,44 +20,44 @@
         type: Number,
         default: 5
       },
-      placeholder:{
+      placeholder: {
         type: String,
         default: ''
       },
-      descMaxLength:{
+      descMaxLength: {
         type: Number,
         default: 5000
       }
     },
-    mounted() {
-      this.description = this.content;
+    mounted () {
+      this.description = this.content
     },
     watch: {
-      'content'(newVal, oldVal) {
-         this.description = newVal;
+      'content' (newVal, oldVal) {
+        this.description = newVal
       },
       description: function (newDescription) {
         if (!newDescription) {
-          this.$emit('input', this.description);
-          return;
+          this.$emit('input', this.description)
+          return
         }
 
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
 
-        this.$emit('input', this.description);
-      },
-    },
-    computed:{
-      descLength() {
-        if (this.description) {
-          return this.description.length;
-        } else {
-          return 0;
-        }
+        this.$emit('input', this.description)
       }
     },
+    computed: {
+      descLength () {
+        if (this.description) {
+          return this.description.length
+        } else {
+          return 0
+        }
+      }
+    }
   }
 </script>
 

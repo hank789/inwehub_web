@@ -2,18 +2,17 @@
 
 </template>
 <style>
-    @import "./mui.picker.min.css";
+  @import "./mui.picker.min.css";
 </style>
 <script>
-    import './mui.picker.js';
-    import './mui.dtpicker.js';
-    export default{
-        data(){
-            return{
-                msg:'时间组件'
-            }
-        },
-        components:{
-        }
-    }
+  import './mui.picker.js'
+  import './mui.dtpicker.js'
+  export default{
+    data () {
+      return {
+        msg: '时间组件'
+      }
+    },
+    components: {}
+  }
 </script>

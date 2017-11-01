@@ -5,7 +5,8 @@
     v-on:leave="leave"
   >
     <div v-show="show" :class="$style.swiper">
-      <swiper :show-dots="true" dots-position="left" style="width: 100%; height: 100%" :show-desc-mask="false" :duration="150" v-model="value" height="100%">
+      <swiper :show-dots="true" dots-position="left" style="width: 100%; height: 100%" :show-desc-mask="false"
+              :duration="150" v-model="value" height="100%">
         <swiper-item @click="hideSwiper" class="swiper-demo-img" v-for="(item, index) in list" :key="index">
           <img @click="hideSwiper" class="big-img" v-lazy="item">
         </swiper-item>
@@ -15,9 +16,9 @@
 </template>
 
 <script>
-  import { Swiper, SwiperItem } from 'vux/src/components/swiper';
-  import { mapState } from 'vuex';
-  import { IMGSWIPER } from '../stores/types';
+  import { Swiper, SwiperItem } from 'vux/src/components/swiper'
+  import { mapState } from 'vuex'
+  import { IMGSWIPER } from '../stores/types'
 
   const imageSwiper = {
     components: {
@@ -36,7 +37,7 @@
       beforeEnter (el) {
 
       },
-      leave(el, done) {
+      leave (el, done) {
 
       },
       hideSwiper () {
@@ -45,8 +46,8 @@
             list: [],
             value: 0,
             show: false
-          });
-        });
+          })
+        })
       }
     }
   }
@@ -69,41 +70,8 @@
     background-color: rgb(0, 0, 0);
     z-index: 9;
     transition: transform .2s;
-    transform:scale(1);
+    transform: scale(1);
     height: 100%;
     width: 100%;
-  }
-</style>
-<style>
-  .vux-swiper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .v-enter-active.v-enter-to {
-    transform: scale(1,1);
-  }
-  .vux-slider>.vux-swiper>.vux-swiper-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .vux-swiper-item img {
-    width: 100%;
-    max-height: 100%;
-  }
-  .vux-slider>.vux-swiper {
-    overflow: auto!important;
-  }
-  img.big-img[lazy=loading] {
-    width: auto;
-    height: auto;
-    animation:change 1s linear infinite;
-  }
-  @-webkit-keyframes change
-  {
-　　0%{-webkit-transform:rotate(0deg);}
-　　50%{-webkit-transform:rotate(180deg);}
-　　100%{-webkit-transform:rotate(360deg);}
   }
 </style>

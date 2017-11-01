@@ -9,19 +9,19 @@
   require('quill/dist/quill.snow.css')
   require('quill/dist/quill.bubble.css')
   require('quill/dist/quill.core.css')
-  import Delta from 'quill-delta';
+  import Delta from 'quill-delta'
 
   if (!window.Quill) {
     window.Quill = require('quill/dist/quill.js')
   }
   export default {
     name: 'quill-editor',
-    data() {
+    data () {
       return {
         _content: '',
         defaultModules: {
           toolbar: [
-            ['bold', 'italic', { 'color': [] }, { 'align': [] }, 'image']
+            ['bold', 'italic', {'color': []}, {'align': []}, 'image']
           ]
         }
       }
@@ -33,162 +33,150 @@
       options: {
         type: Object,
         required: false,
-        default() {
+        default () {
           return {}
         }
       }
     },
-    mounted() {
+    mounted () {
       this.initialize()
     },
-    beforeDestroy() {
+    beforeDestroy () {
       this.quill = null
     },
     methods: {
-      changeAvatar:function(){
-        if (mui.os.plus) {
+      changeAvatar: function () {
+        if (window.mui.os.plus) {
           var a = [{
-            title: "拍照"
+            title: '拍照'
           }, {
-            title: "从手机相册选择"
-          }];
-          plus.nativeUI.actionSheet({
-            title: "选择图片",
-            cancel: "取消",
+            title: '从手机相册选择'
+          }]
+          window.plus.nativeUI.actionSheet({
+            title: '选择图片',
+            cancel: '取消',
             buttons: a
           }, (b) => {
             switch (b.index) {
               case 0:
-                break;
+                break
               case 1:
-                this.getImage();
-                break;
+                this.getImage()
+                break
               case 2:
-                this.galleryImg();
-                break;
+                this.galleryImg()
+                break
               default:
                 break
             }
           })
         }
       },
-      getImage:function(){
-        var t = this;
-        var c = plus.camera.getCamera();
+      getImage: function () {
+        var t = this
+        var c = window.plus.camera.getCamera()
         c.captureImage(function (e) {
-          t.toClip(e);
-
+          t.toClip(e)
         }, function (s) {
-          console.log("error" + s);
+          console.log('error' + s)
         }, {
-          filename: "_doc/bmp_editor.jpg"
+          filename: '_doc/bmp_editor.jpg'
         })
       },
-      galleryImg:function(){
-        plus.gallery.pick((a) => {
-          this.toClip(a);
+      galleryImg: function () {
+        window.plus.gallery.pick((a) => {
+          this.toClip(a)
         }, function (a) {
         }, {
-          filter: "image"
+          filter: 'image'
         })
       },
-      toClip(path)
-      {
-        var t = this;
-        plus.zip.compressImage({
-            src: path,
-            dst: "_doc/edit.jpg",
-            overwrite: true,
-            quality: 50
-          },
+      toClip (path) {
+        var t = this
+        window.plus.zip.compressImage({
+          src: path,
+          dst: '_doc/edit.jpg',
+          overwrite: true,
+          quality: 50
+        },
           function (event) {
+            window.plus.io.requestFileSystem(window.plus.io.PRIVATE_DOC,
+              function (fs) {
+                var rootEntry = fs.root
+                var reader = null
+                rootEntry.getFile('edit.jpg', {},
+                  function (entry) {
+                    entry.file(function (file) {
+                      var size = file.size.toString()
 
-              plus.io.requestFileSystem(plus.io.PRIVATE_DOC,
-                function(fs) {
-                  var rootEntry = fs.root;
-                  var reader = null;
-                  rootEntry.getFile('edit.jpg', {},
-                    function(entry) {
-                      entry.file(function(file) {
+                      if (!t.checkImg(size)) {
+                        return
+                      }
 
-                          var size = file.size.toString();
-
-                          if (!t.checkImg(size)) {
-                            return;
-                          }
-
-                          reader = new plus.io.FileReader();
-                          reader.onloadend = function(e) {
-                            let range = t.quill.getSelection(true);
-                            t.quill.updateContents(new Delta()
-                                .retain(range.index)
-                                .delete(range.length)
-                                .insert({ image: e.target.result })
-                                .insert('\n')
-                              , 'user');
-                            setTimeout(function(){
-                              t.quill.setSelection(range.index+2, 'user');
-                              t.quill.focus();
-                            }, 3000);
-
-
-                          };
-                          reader.readAsDataURL(file);
-                        },
-                        function(e) {
-                          console.log(e.message);
-                        });
-                    });
-
-                });
-
-            }, function (error) {
-              console.log(error.message);
-            });
+                      reader = new window.plus.io.FileReader()
+                      reader.onloadend = function (e) {
+                        let range = t.quill.getSelection(true)
+                        t.quill.updateContents(new Delta()
+                            .retain(range.index)
+                            .delete(range.length)
+                            .insert({image: e.target.result})
+                            .insert('\n')
+                          , 'user')
+                        setTimeout(function () {
+                          t.quill.setSelection(range.index + 2, 'user')
+                          t.quill.focus()
+                        }, 3000)
+                      }
+                      reader.readAsDataURL(file)
+                    },
+                      function (e) {
+                        console.log(e.message)
+                      })
+                  })
+              })
+          }, function (error) {
+            console.log(error.message)
+          })
       },
-      checkImg(size){
-
-        var size = size/1000;  //kb
+      checkImg (size) {
+        size = size / 1000  // kb
         if (size > 3072) {
-          mui.alert('图片单张不允许超过3M！');
-          return false;
+          window.mui.alert('图片单张不允许超过3M！')
+          return false
         }
 
-        var imageNum = 0;
-        var delta = this.quill.getContents();
-        var opt = {};
-        for(var i in delta.ops) {
-          opt = delta.ops[i];
+        var imageNum = 0
+        var delta = this.quill.getContents()
+        var opt = {}
+        for (var i in delta.ops) {
+          opt = delta.ops[i]
           if (opt.insert.hasOwnProperty('image')) {
-              if (!/drag/.test(opt.insert.image)) {
-                imageNum++;
-              }
+            if (!/drag/.test(opt.insert.image)) {
+              imageNum++
+            }
           }
         }
 
-
         if (imageNum >= 11) {
-          mui.alert('最多可添加10张图片！');
-          return false;
+          window.mui.alert('最多可添加10张图片！')
+          return false
         }
 
-        return true;
+        return true
       },
-      initialize() {
+      initialize () {
         if (this.$el) {
-
           // 获取选项
           var self = this
           self.options.theme = self.options.theme || 'snow'
           self.options.boundary = self.options.boundary || document.body
           self.options.modules = self.options.modules || self.defaultModules
           self.options.modules.toolbar = self.options.modules.toolbar !== undefined
-                                          ? self.options.modules.toolbar
-                                          : self.defaultModules.toolbar
+            ? self.options.modules.toolbar
+            : self.defaultModules.toolbar
           self.options.placeholder = self.options.placeholder || '请填写内容 ...'
           self.options.readOnly = self.options.readOnly !== undefined ? self.options.readOnly : false
-          self.quill = new Quill(self.$refs.editor, self.options)
-
+          self.quill = new window.Quill(self.$refs.editor, self.options)
 
           if (self.value || self.content) {
             self.quill.pasteHTML(self.value || self.content)
@@ -211,13 +199,13 @@
             var html = self.$refs.editor.children[0].innerHTML
             const text = self.quill.getText()
             if (html === '<p><br></p>') html = ''
-            self._content = self.quill.getContents();
+            self._content = self.quill.getContents()
             self.$emit('input', self._content)
             self.$emit('change', {
               editor: self.quill,
               html: html,
               text: text,
-              source:source
+              source: source
             })
           })
 
@@ -225,80 +213,77 @@
           self.$emit('ready', self.quill)
 
           // 对图片进行限制大小和限制张数
-          var imgHandler = function() {
-            let fileInput = this.container.querySelector('input.ql-image[type=file]');
+          var imgHandler = function () {
+            let fileInput = this.container.querySelector('input.ql-image[type=file]')
             if (fileInput == null) {
-              fileInput = document.createElement('input');
-              fileInput.setAttribute('type', 'file');
-              fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/jpg, image/bmp, image/x-icon');
-              fileInput.classList.add('ql-image');
+              fileInput = document.createElement('input')
+              fileInput.setAttribute('type', 'file')
+              fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/jpg, image/bmp, image/x-icon')
+              fileInput.classList.add('ql-image')
               fileInput.addEventListener('change', () => {
                 if (fileInput.files != null && fileInput.files[0] != null) {
-
-                  var file = fileInput.files[0];
+                  var file = fileInput.files[0]
 
                   if (!self.checkImg(file.size)) {
-                      return;
+                    return
                   }
 
-                  let reader = new FileReader();
+                  let reader = new FileReader()
                   reader.onload = (e) => {
-                    let range = this.quill.getSelection(true);
+                    let range = this.quill.getSelection(true)
                     this.quill.updateContents(new Delta()
                         .retain(range.index)
                         .delete(range.length)
-                        .insert({ image: e.target.result })
+                        .insert({image: e.target.result})
                         .insert('\n')
-
-                      , 'user');
-                    this.quill.setSelection(range.index+2, 'user');
-                    fileInput.value = "";
+                      , 'user')
+                    this.quill.setSelection(range.index + 2, 'user')
+                    fileInput.value = ''
                   }
-                  reader.readAsDataURL(file);
+                  reader.readAsDataURL(file)
                 }
-              });
-              this.container.appendChild(fileInput);
+              })
+              this.container.appendChild(fileInput)
             }
-            fileInput.click();
-          };
+            fileInput.click()
+          }
 
-          var imgHandlerMUI = function() {
+          var imgHandlerMUI = function () {
             setTimeout(() => {
               self.changeAvatar()
-            }, 500);
+            }, 500)
           }
 
-          if (mui.os.plus) {
-            self.quill.getModule("toolbar").addHandler("image", imgHandlerMUI)
+          if (window.mui.os.plus) {
+            self.quill.getModule('toolbar').addHandler('image', imgHandlerMUI)
           } else {
-            self.quill.getModule("toolbar").addHandler("image", imgHandler)
+            self.quill.getModule('toolbar').addHandler('image', imgHandler)
           }
-
         }
       }
     },
     watch: {
-      'content'(newVal, oldVal) {
+      'content' (newVal, oldVal) {
         if (this.quill) {
           if (!!newVal && newVal !== this._content) {
             this._content = newVal
             this.quill.pasteHTML(newVal)
-          } else if(!newVal) {
+          } else if (!newVal) {
             this.quill.setText('')
           }
         }
       },
-      'value'(newVal, oldVal) {
+      'value' (newVal, oldVal) {
         if (this.quill) {
           if (newVal !== this._content) {
             this._content = newVal
             this.quill.pasteHTML(newVal)
-          } else if(!newVal) {
+          } else if (!newVal) {
             this.quill.setText('')
           }
         }
       },
-      'disabled'(newVal, oldVal) {
+      'disabled' (newVal, oldVal) {
         if (this.quill) {
           this.quill.enable(!newVal)
         }

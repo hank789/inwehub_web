@@ -24,17 +24,17 @@
 
 <script type="text/javascript">
 
-  import Quill from 'quill';
-  import {ImageImport} from '../../js/modules/ImageImport.js';
-  import Sortable from "sortablejs/Sortable";
+  import Quill from 'quill'
+  import { ImageImport } from '../../js/modules/ImageImport.js'
+  import Sortable from 'sortablejs/Sortable'
 
-  Quill.register('modules/imageImport', ImageImport);
+  Quill.register('modules/imageImport', ImageImport)
 
-  import {quillEditor} from '../../components/vue-quill';
+  import { quillEditor } from '../../components/vue-quill'
 
-  import iconDrag from '../../statics/images/icon-drag.png';
-  import {NOTICE, RICHTEXT_ANSWER_GET, RICHTEXT_ANSWER_SET} from '../../stores/types';
-  import {getIndexByIdArray} from '../../utils/array';
+  import iconDrag from '../../statics/images/icon-drag.png'
+  import { RICHTEXT_ANSWER_SET } from '../../stores/types'
+  import { getIndexByIdArray } from '../../utils/array'
 
   export default {
     data: () => ({
@@ -53,14 +53,14 @@
           imageImport: false
         }
       },
-      timeInterVal:false,
-      iosAutoSaveTime:10, //隔几秒自动保存
+      timeInterVal: false,
+      iosAutoSaveTime: 10, // 隔几秒自动保存
       editorObj: {},
       sortable: null
     }),
     props: {
-      id:{
-        type:String,
+      id: {
+        type: String
       },
       content: {
         type: Object,
@@ -79,205 +79,199 @@
         default: 5000
       }
     },
-    mounted() {
-      mui.plusReady(function(){
-        plus.webview.currentWebview().setStyle({
-          softinputMode: "adjustResize"
-        });
-      });
+    mounted () {
+      window.mui.plusReady(function () {
+        window.plus.webview.currentWebview().setStyle({
+          softinputMode: 'adjustResize'
+        })
+      })
 
       window.onbeforeunload = (e) => {
-        e = e || window.event;
+        e = e || window.event
 
         // 兼容IE8和Firefox 4之前的版本
         if (e) {
-          e.returnValue = '关闭后未保存的数据将丢失';
+          e.returnValue = '关闭后未保存的数据将丢失'
         }
 
         // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
-        return '关闭后未保存的数据将丢失';
+        return '关闭后未保存的数据将丢失'
       }
     },
     components: {
       quillEditor
     },
     methods: {
-      onEditorChange(editor){
-
-        if (!(mui.os.plus && mui.os.ios)) {
-          this.storeContent(editor.editor.getContents());
+      onEditorChange (editor) {
+        if (!(window.mui.os.plus && window.mui.os.ios)) {
+          this.storeContent(editor.editor.getContents())
         }
 
-        this.descLength = editor.editor.getLength() - 1;
+        this.descLength = editor.editor.getLength() - 1
 
-        var el = document.getElementsByClassName('ql-editor')[0];
+        var el = document.getElementsByClassName('ql-editor')[0]
 
-
-
-        var ps = el.childNodes;
+        var ps = el.childNodes
         for (var i in ps) {
-          var pNode = ps[i];
-          if (pNode.nodeName !== 'P') continue;
-          var imgObj = pNode.querySelector('img');
-          var imgCount = pNode.querySelectorAll('img').length;
-          var imgHandlerCount = pNode.querySelectorAll('.handlerImg').length;
+          var pNode = ps[i]
+          if (pNode.nodeName !== 'P') continue
+          var imgObj = pNode.querySelector('img')
+          var imgCount = pNode.querySelectorAll('img').length
+          var imgHandlerCount = pNode.querySelectorAll('.handlerImg').length
 
-          //console.log('imgHandlerCount:'+imgHandlerCount+','+'imgCount:'+imgCount);
+          // console.log('imgHandlerCount:'+imgHandlerCount+','+'imgCount:'+imgCount);
 
           if (imgHandlerCount === 1 && imgCount === 1) {
-              pNode.removeChild(imgObj);
-              //pNode.className = pNode.className.replace(' hasImg', '');
-              continue;
+            pNode.removeChild(imgObj)
+            // pNode.className = pNode.className.replace(' hasImg', '');
+            continue
           }
 
           if (imgObj) {
-            var imgHandlerCount = pNode.querySelectorAll('.handlerImg').length;
+            imgHandlerCount = pNode.querySelectorAll('.handlerImg').length
             if (!imgHandlerCount) {
-              pNode.className += " hasImg";
-              var handlerObj = document.createElement('img');
-              handlerObj.className = 'handlerImg';
-              handlerObj.src = iconDrag;
-              pNode.insertBefore(handlerObj, pNode.childNodes[0]);
+              pNode.className += ' hasImg'
+              var handlerObj = document.createElement('img')
+              handlerObj.className = 'handlerImg'
+              handlerObj.src = iconDrag
+              pNode.insertBefore(handlerObj, pNode.childNodes[0])
             }
           }
         }
 
-
-        var self = this;
+        var self = this
 
         this.sortable = Sortable.create(el, {
-          ghostClass: "meditor-ghost",
-          chosenClass: "meditor-chosen",
+          ghostClass: 'meditor-ghost',
+          chosenClass: 'meditor-chosen',
           forceFallback: true,
           handle: '.handlerImg',
           onChoose: function (e) {
             setTimeout(function () {
-              self.editorObj.blur();
-              self.$emit('onEditorBlur', self.editorObj);
-            }, 200);
+              self.editorObj.blur()
+              self.$emit('onEditorBlur', self.editorObj)
+            }, 200)
           },
           onMove: function () {
-            self.editorObj.blur();
-            self.$emit('onEditorBlur', self.editorObj);
+            self.editorObj.blur()
+            self.$emit('onEditorBlur', self.editorObj)
           }
-        });
+        })
       },
-      storeContent(content){
+      storeContent (content) {
         for (var i in content.ops) {
           if (content.ops[i].insert.hasOwnProperty('image')) {
             if (/drag/.test(content.ops[i].insert.image)) {
-              content.ops.splice(i, 1);
+              content.ops.splice(i, 1)
             }
           }
         }
-        console.log('storeContent:' + (new Date()).getTime());
-        if (mui.os.plus && mui.os.ios) {
-          mui.plusReady(() => {
-            plus.storage.setItem(this.id, JSON.stringify(content));
-          });
+        console.log('storeContent:' + (new Date()).getTime())
+        if (window.mui.os.plus && window.mui.os.ios) {
+          window.mui.plusReady(() => {
+            window.plus.storage.setItem(this.id, JSON.stringify(content))
+          })
         } else {
-          this.$store.dispatch(RICHTEXT_ANSWER_SET, {content:content, id:this.id});
+          this.$store.dispatch(RICHTEXT_ANSWER_SET, {content: content, id: this.id})
         }
       },
-      onEditorBlur(editor) {
-        //console.log('editor blur!', editor)
+      onEditorBlur (editor) {
+        // console.log('editor blur!', editor)
         this.$emit('onEditorBlur', editor)
       },
-      onEditorFocus(editor) {
-        //console.log('editor focus!', editor)
+      onEditorFocus (editor) {
+        // console.log('editor focus!', editor)
         this.$emit('onEditorFocus', editor)
       },
-      nowSave(){
-        var contents = this.description;
-        this.storeContent(contents);
+      nowSave () {
+        var contents = this.description
+        this.storeContent(contents)
       },
-      refreshPageData(){
-          console.log('newid' + this.id);
-          this.initDefaultValue();
+      refreshPageData () {
+        console.log('newid' + this.id)
+        this.initDefaultValue()
       },
-      autoSave(){
-
+      autoSave () {
         setTimeout(() => {
           if (this._isDestroyed) {
-              return;
+            return
           }
 
-          var nowTime = (new Date()).getTime();
+          var nowTime = (new Date()).getTime()
 
-          console.log('最新时间:'+nowTime/1000);
+          console.log('最新时间:' + nowTime / 1000)
 
-          this.nowSave();
-          this.autoSave();
-        }, this.iosAutoSaveTime * 1000);
+          this.nowSave()
+          this.autoSave()
+        }, this.iosAutoSaveTime * 1000)
       },
-      initDefaultValue(){
-        if (mui.os.plus && mui.os.ios) {
-
-          mui.plusReady(() => {
-            var contents = plus.storage.getItem(this.id);
+      initDefaultValue () {
+        if (window.mui.os.plus && window.mui.os.ios) {
+          window.mui.plusReady(() => {
+            var contents = window.plus.storage.getItem(this.id)
 
             if (contents) {
-              console.log('restore contents:');
-              contents = JSON.parse(contents);
+              console.log('restore contents:')
+              contents = JSON.parse(contents)
             } else {
-              contents = [];
-              console.log('restore contents:');
+              contents = []
+              console.log('restore contents:')
             }
 
-            this.editorObj.setContents(contents);
+            this.editorObj.setContents(contents)
             if (!this.timeInterVal) {
-              this.timeInterVal = true;
-              this.autoSave();
+              this.timeInterVal = true
+              this.autoSave()
             }
-          });
+          })
         } else {
           var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
           if (index > -1) {
-            var contents = this.$store.state.richText.answer[index].content;
+            var contents = this.$store.state.richText.answer[index].content
 
             if (contents) {
-              console.log('restore contents:');
+              console.log('restore contents:')
             } else {
-              contents = [];
+              contents = []
             }
 
-            this.editorObj.setContents(contents);
+            this.editorObj.setContents(contents)
           }
         }
       },
-      onEditorReady(editor) {
-        this.editorObj = editor;
-        this.$emit('ready', editor);
-        this.initDefaultValue();
+      onEditorReady (editor) {
+        this.editorObj = editor
+        this.$emit('ready', editor)
+        this.initDefaultValue()
       },
-      onEditorReadyRead(editor) {
-        this.editorReadObj = editor;
-      },
+      onEditorReadyRead (editor) {
+        this.editorReadObj = editor
+      }
     },
     watch: {
-      'id'(newVal, oldVal) {
-          this.refreshPageData();
+      'id' (newVal, oldVal) {
+        this.refreshPageData()
       },
-      'content'(newVal, oldVal) {
-        this.description = newVal;
+      'content' (newVal, oldVal) {
+        this.description = newVal
       },
       descLength: function (newDescLength) {
         if (newDescLength > this.descMaxLength) {
-          this.editorObj.history.undo();
+          this.editorObj.history.undo()
         }
       },
       description: function (newDescription) {
         if (!newDescription) {
-          this.$emit('input', this.description);
-          return;
+          this.$emit('input', this.description)
+          return
         }
 
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
 
-        this.$emit('input', this.description);
-      },
+        this.$emit('input', this.description)
+      }
     }
   }
 </script>

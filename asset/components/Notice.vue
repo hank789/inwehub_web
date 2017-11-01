@@ -12,8 +12,7 @@
 </template>
 
 <script>
-  import { NOTICE } from '../stores/types';
-  import { mapState } from 'vuex';
+  import { mapState } from 'vuex'
 
   const noticeText = {
     computed: mapState({
@@ -23,7 +22,7 @@
       status: state => state.notice.notice.status
     })
   }
-  export default noticeText;
+  export default noticeText
 </script>
 
 <style lang="scss" module>

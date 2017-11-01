@@ -36,6 +36,7 @@
                 {{ item.content }}
 
 
+
               </div>
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
@@ -46,7 +47,8 @@
 
     <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" v-model="textarea" placeholder="在此留言" id="commentTextarea"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus"
+                  v-model="textarea" placeholder="在此留言" id="commentTextarea"
                   autocomplete="off"></textarea>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
           <use xlink:href="#icon-fasong"></use>
@@ -58,9 +60,8 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import {getLocalUserInfo} from '../../utils/user';
+  import { postRequest } from '../../utils/request'
+  import { getLocalUserInfo } from '../../utils/user'
 
   const Discuss = {
     data: () => ({
@@ -68,7 +69,7 @@
       loading: true,
       textarea: '',
       busy: false,
-      showList:true,
+      showList: true,
       page: 1,
       list: []
     }),
@@ -76,73 +77,70 @@
       answerId: {
         type: Number,
         default: 0
-      },
+      }
     },
-    mounted(){
+    mounted () {
     },
     components: {},
     computed: {},
     methods: {
-      toResume(uuid){
+      toResume (uuid) {
         if (!uuid) {
-          return false;
+          return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      textareaFocus(){
-         // mui.toast('focus');
+      textareaFocus () {
+        // mui.toast('focus');
 
       },
-      textareaBlur(){
-        //mui.toast('blur');
-
+      textareaBlur () {
+        // mui.toast('blur');
       },
-      resetList()
-      {
-          this.page = 1;
-          this.list = [];
-          this.getList();
+      resetList () {
+        this.page = 1
+        this.list = []
+        this.getList()
       },
-      comment(){
-        this.showTextarea = !this.showTextarea;
+      comment () {
+        this.showTextarea = !this.showTextarea
 
         if (this.showTextarea) {
           setTimeout(() => {
-            document.getElementById('commentTextarea').focus();
-          }, 500);
+            document.getElementById('commentTextarea').focus()
+          }, 500)
         }
       },
-      sendMessage(event){
-
-        event.preventDefault();
+      sendMessage (event) {
+        event.preventDefault()
 
         if (!this.textarea.trim()) {
-          return false;
+          return false
         }
 
         postRequest(`answer/comment`, {'answer_id': this.answerId, content: this.textarea}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          var data = response.data.data;
+          var data = response.data.data
 
-          mui.toast(data.tips);
+          window.mui.toast(data.tips)
 
           this.prependItem(
             data.comment_id,
             this.textarea,
             data.created_at,
             data.user_name
-          );
-          this.textarea = '';
-          this.showTextarea = false;
-        });
+          )
+          this.textarea = ''
+          this.showTextarea = false
+        })
       },
-      prependItem(id, msg, created_at, username){
-        var userInfo = getLocalUserInfo();
+      prependItem (id, msg, createdAt, username) {
+        var userInfo = getLocalUserInfo()
 
         var item = {
           id,
@@ -151,57 +149,57 @@
           user_avatar_url: userInfo.avatar_url,
           user_id: userInfo.user_id,
           user_name: username,
-          created_at
-        };
+          createdAt
+        }
 
-        this.list.unshift(item);
+        this.list.unshift(item)
       },
-      loadMore(){
-        this.busy = true;
-        console.log('loadMore');
-        this.getList();
+      loadMore () {
+        this.busy = true
+        console.log('loadMore')
+        this.getList()
       },
-      getList(){
+      getList () {
         if (!this.answerId) {
-          console.log('answerId:' + this.answerId);
-          return;
+          console.log('answerId:' + this.answerId)
+          return
         }
         postRequest(`answer/commentList`, {'answer_id': this.answerId, page: this.page}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
           if (response.data.data.data.length > 0) {
-            this.list = this.list.concat(response.data.data.data);
+            this.list = this.list.concat(response.data.data.data)
           }
 
           if (response.data.data.data.length < 10) {
-            this.busy = true;
+            this.busy = true
           } else {
-            this.busy = false;
+            this.busy = false
           }
 
-          this.page++;
+          this.page++
 
-          this.loading = 0;
-        });
+          this.loading = 0
+        })
       }
     },
     watch: {
-      'answerId'(newVal, oldVal) {
+      'answerId' (newVal, oldVal) {
         if (newVal) {
-          console.log('answerId new' + newVal);
-          this.resetList();
+          console.log('answerId new' + newVal)
+          this.resetList()
         }
-      },
+      }
     },
     created () {
 
     }
   }
-  export default Discuss;
+  export default Discuss
 </script>
 
 <style scoped="scoped">
@@ -328,8 +326,8 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    left:0;
-    height:45px;
+    left: 0;
+    height: 45px;
     overflow: hidden;
     padding: 5px 15px;
     z-index: 77;

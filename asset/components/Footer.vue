@@ -59,26 +59,26 @@
           <use xlink:href="#icon-wode1"></use>
         </svg>
       </div>
-      
-      
+
 
     </nav>
 
-    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :link="shareoption.shareUrl" :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg" :hideShareBtn="true"></Share>
+    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :link="shareoption.shareUrl"
+           :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg"
+           :hideShareBtn="true"></Share>
   </div>
 </template>
 
 <script type="text/javascript">
-  import { createAPI, addAccessToken, postRequest } from '../utils/request';
-  import localEvent from '../stores/localStorage';
-  import { setAppBadgeNumber } from '../utils/notice';
-  import {socketResponseManage} from '../utils/socketResponeManage';
-  import ShortTcutComponent from '../components/ShortTcut.vue';
-  import Share from '../components/Share.vue';
-  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
+  import { postRequest } from '../utils/request'
+  import localEvent from '../stores/localStorage'
+  import { setAppBadgeNumber } from '../utils/notice'
+  import { socketResponseManage } from '../utils/socketResponeManage'
+  import ShortTcutComponent from '../components/ShortTcut.vue'
+  import Share from '../components/Share.vue'
 
   export default {
-    data() {
+    data () {
       return {
         isHome: false,
         isAsk: false,
@@ -86,171 +86,163 @@
         showBottom: true,
         isDiscover: false,
         taskCount: 0,
-        message_total_count:0,
+        message_total_count: 0,
         shareoption: {
           shareUrl: '',
           shareImg: '',
           shareContent: '',
           shareTitle: '',
-          id: ""
+          id: ''
         }
       }
     },
     props: {},
-    mounted() {
-
-      //this.$refs.short.show();
+    mounted () {
+      // this.$refs.short.show();
       window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        if(this.showBottom) {
-          console.log('refresh-app');
-          this.getCount();
+        // 执行刷新
+        if (this.showBottom) {
+          console.log('refresh-app')
+          this.getCount()
         }
-      });
+      })
 
       window.addEventListener('refreshTaskCount', (e) => {
-        //执行刷新
-        if(this.showBottom) {
-          console.log('refresh-task-count');
-         
-          var taskCount = localEvent.getLocalItem('taskCount');
-          if(taskCount.value) {
-            this.taskCount = taskCount.value;
+        // 执行刷新
+        if (this.showBottom) {
+          console.log('refresh-task-count')
+
+          var taskCount = localEvent.getLocalItem('taskCount')
+          if (taskCount.value) {
+            this.taskCount = taskCount.value
           }
-         
         }
-      });
-      
+      })
     },
     methods: {
-      share() {
-        this.$refs.FooterShareBtn.share();
+      share () {
+        this.$refs.FooterShareBtn.share()
       },
-      show() {
-        this.$refs.short.show();
+      show () {
+        this.$refs.short.show()
       },
-      listen() {
-        var currentUser = localEvent.getLocalItem('UserInfo');
-        if(currentUser.user_id && Echo) {
-          console.log('listen notification');
+      listen () {
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        if (currentUser.user_id && window.Echo) {
+          console.log('listen notification')
           // 监听通知事件
-          Echo.channel('notification.user.' + currentUser.user_id)
+          window.Echo.channel('notification.user.' + currentUser.user_id)
             .notification((notification) => {
-                socketResponseManage(notification, this);
-            });
+              socketResponseManage(notification, this)
+            })
         }
       },
-      onCountChange(count) {
-        this.taskCount = count;
+      onCountChange (count) {
+        this.taskCount = count
 
-        mui.plusReady(function() {
-
+        window.mui.plusReady(function () {
           localEvent.setLocalItem('taskCount', {
-            value: count,
-          });
+            value: count
+          })
 
-          var webv = plus.webview.getWebviewById('index.html#/task');
-          if(webv) {
-            mui.fire(webv, 'refreshTaskCount');
+          var webv = window.plus.webview.getWebviewById('index.html#/task')
+          if (webv) {
+            window.mui.fire(webv, 'refreshTaskCount')
           }
 
-          webv = plus.webview.getWebviewById('index.html#/home');
-          if(webv) {
-            mui.fire(webv, 'refreshTaskCount');
+          webv = window.plus.webview.getWebviewById('index.html#/home')
+          if (webv) {
+            window.mui.fire(webv, 'refreshTaskCount')
           }
 
-          webv = plus.webview.getWebviewById('index.html#/discover');
-          if(webv) {
-            mui.fire(webv, 'refreshTaskCount');
+          webv = window.plus.webview.getWebviewById('index.html#/discover')
+          if (webv) {
+            window.mui.fire(webv, 'refreshTaskCount')
           }
 
-          webv = plus.webview.getWebviewById('index.html#/my');
-          if(webv) {
-            mui.fire(webv, 'refreshTaskCount');
+          webv = window.plus.webview.getWebviewById('index.html#/my')
+          if (webv) {
+            window.mui.fire(webv, 'refreshTaskCount')
           }
-        });
+        })
       },
-      getCount() {
-        let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
-        if(!UserLoginInfo.token) {
-          return;
+      getCount () {
+        let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
+        if (!UserLoginInfo.token) {
+          return
         }
 
         postRequest(`notification/count`, {}, false).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.donCountChangeata.message);
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.donCountChangeata.message)
+            return
           }
-          //消息的数字角标；
-          var money_message = response.data.data.money_message.unread_count;
-          var notice_message = response.data.data.notice_message.unread_count;
-          var readhub_message = response.data.data.readhub_message.unread_count;
-          var task_message = response.data.data.task_message.unread_count;
-          var im_messages = response.data.data.im_messages.length >0 ?response.data.data.im_messages[0].unread_count : 0;
-          this.message_total_count = money_message+notice_message+readhub_message+task_message+im_messages;
-           
-//         console.log(im_messages)
- 
-          this.$emit('messagecountchange', this.message_total_count);
-          
-          
-          
-          var taskCount = response.data.data.todo_tasks;
-          setAppBadgeNumber(taskCount);
-          this.onCountChange(taskCount);
-        });
-      },
-      changeNav(path, fullPath) {
-        var curPath = path == '' ? 'home' : path;
-        this.isHome = this.isAsk = this.isMy = this.isDiscover = false;
-        this.showBottom = true;
-        mui.each(mui(".mui-tab-item"), function(index, item) {
-          item.className = "mui-tab-item";
-        });
+          // 消息的数字角标；
+          var moneyMessage = response.data.data.money_message.unread_count
+          var noticeMessage = response.data.data.notice_message.unread_count
+          var readhubMessage = response.data.data.readhub_message.unread_count
+          var taskMessage = response.data.data.task_message.unread_count
+          var imMessages = response.data.data.im_messages.length > 0 ? response.data.data.im_messages[0].unread_count : 0
+          this.message_total_count = moneyMessage + noticeMessage + readhubMessage + taskMessage + imMessages
 
-        switch(fullPath) {
+          // console.log(im_messages)
+
+          this.$emit('messagecountchange', this.message_total_count)
+
+          var taskCount = response.data.data.todo_tasks
+          setAppBadgeNumber(taskCount)
+          this.onCountChange(taskCount)
+        })
+      },
+      changeNav (path, fullPath) {
+        this.isHome = this.isAsk = this.isMy = this.isDiscover = false
+        this.showBottom = true
+        window.mui.each(window.mui('.mui-tab-item'), function (index, item) {
+          item.className = 'mui-tab-item'
+        })
+
+        switch (fullPath) {
           case '/home':
-            this.isHome = true;
-            break;
+            this.isHome = true
+            break
           case '/my':
-            this.isMy = true;
-            break;
+            this.isMy = true
+            break
           case '/task':
-            this.isAsk = true;
-            break;
+            this.isAsk = true
+            break
           case '/discover':
-            this.isDiscover = true;
-            break;
+            this.isDiscover = true
+            break
           case '/inform':
-            this.isAsk = true;
-            break;
+            this.isAsk = true
+            break
           default:
-            this.showBottom = false;
+            this.showBottom = false
         }
 
-        if(this.showBottom) {
-          this.getCount();
+        if (this.showBottom) {
+          this.getCount()
         }
-      },
-
+      }
     },
     components: {
       ShortTcutComponent,
       Share
     },
     watch: {
-      $route(to) {
-        var tmpArr = to.path.split('/');
-        var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-        this.changeNav(curPath, this.$route.path);
+      $route (to) {
+        var tmpArr = to.path.split('/')
+        var curPath = tmpArr[1] === '' ? 'home' : tmpArr[1]
+        this.changeNav(curPath, this.$route.path)
       }
     },
-    created() {
-      this.listen();
+    created () {
+      this.listen()
       var tmpArr = this.$route.path.split('/')
-      var curPath = tmpArr[1] == '' ? 'home' : tmpArr[1];
-      this.changeNav(curPath, this.$route.path);
+      var curPath = tmpArr[1] === '' ? 'home' : tmpArr[1]
+      this.changeNav(curPath, this.$route.path)
     }
   }
 </script>
@@ -293,7 +285,7 @@
     font-size: 23px;
   }
 
-  .twoIcon~.mui-badge {
+  .twoIcon ~ .mui-badge {
     position: absolute;
     display: inline-block;
     background: #fa4975;

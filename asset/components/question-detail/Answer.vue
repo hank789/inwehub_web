@@ -60,17 +60,16 @@
 </template>
 
 <script type="text/javascript">
-  import UserInfo from './UserInfo.vue';
-  import {quillEditor} from '../../components/vue-quill';
-  import Statistics from './Statistics.vue';
-  import pay from '../../components/pay/pay.vue';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import {getLocalUserInfo} from '../../utils/user';
-
+  import UserInfo from './UserInfo.vue'
+  import { quillEditor } from '../../components/vue-quill'
+  import Statistics from './Statistics.vue'
+  import pay from '../../components/pay/pay.vue'
+  import { postRequest } from '../../utils/request'
+  import { getLocalUserInfo } from '../../utils/user'
 
   export default {
     data () {
-      var user = getLocalUserInfo();
+      var user = getLocalUserInfo()
       return {
         editorOptionRead: {
           placeholder: ' ',
@@ -81,7 +80,7 @@
         },
         editorReadObj: {},
         money: 1,
-        curUid:user.user_id,
+        curUid: user.user_id,
         pay_object_type: 'view_answer'
       }
     },
@@ -112,83 +111,76 @@
         type: Boolean,
         default: false
       },
-      showShoucang:{
-        type:Boolean,
-        default:false
+      showShoucang: {
+        type: Boolean,
+        default: false
       },
-      isShowPositionAndCompany:{
+      isShowPositionAndCompany: {
         type: Boolean,
         default: false
       }
     },
-    created(){
+    created () {
     },
     watch: {
-      'answer'(newVal, oldVal) {
-        var content = newVal.content;
+      'answer' (newVal, oldVal) {
+        var content = newVal.content
         if (content) {
-          var objs = JSON.parse(content);
-          this.editorReadObj.setContents(objs);
+          var objs = JSON.parse(content)
+          this.editorReadObj.setContents(objs)
         }
-      },
+      }
     },
-    mounted(){
+    mounted () {
     },
     methods: {
-      setFollowStatus(status){
-        this.answer.is_followed=status;
+      setFollowStatus (status) {
+        this.answer.is_followed = status
       },
-      paySuccess(orderId){
-
+      paySuccess (orderId) {
         postRequest(`answer/payforview`, {
           order_id: orderId,
           answer_id: this.answer.id,
           device: 1
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          var content = response.data.data.content;
+          var content = response.data.data.content
 
           if (content) {
-            var objs = JSON.parse(content);
-            this.editorReadObj.setContents(objs);
-            this.$emit('paySuccess', content);
+            var objs = JSON.parse(content)
+            this.editorReadObj.setContents(objs)
+            this.$emit('paySuccess', content)
           }
-        });
+        })
       },
-      onEditorReadyRead(editor) {
-        this.editorReadObj = editor;
+      onEditorReadyRead (editor) {
+        this.editorReadObj = editor
       },
-      supportNumAdd()
-      {
-        this.answer.support_number++;
+      supportNumAdd () {
+        this.answer.support_number++
       },
-      supportNumDesc()
-      {
-        this.answer.support_number--;
+      supportNumDesc () {
+        this.answer.support_number--
       },
-      setSupportStatus(type)
-      {
-        this.answer.is_supported = type === 'support' ? 1 : 0;
+      setSupportStatus (type) {
+        this.answer.is_supported = type === 'support' ? 1 : 0
       },
-      collectNumAdd()
-      {
-        this.answer.collect_num++;
+      collectNumAdd () {
+        this.answer.collect_num++
       },
-      collectNumDesc()
-      {
-        this.answer.collect_num--;
+      collectNumDesc () {
+        this.answer.collect_num--
       },
-      setCollectStatus(type)
-      {
-        this.answer.is_collected = type === 'collect' ? 1 : 0;
+      setCollectStatus (type) {
+        this.answer.is_collected = type === 'collect' ? 1 : 0
       }
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">
