@@ -109,13 +109,13 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li >
+        <!--<li >
           <span>我的福利</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
-        </li>
+        </li>-->
         <li @tap.stop.prevent="$router.pushPlus('/setting')">
           <span>设置</span>
           <svg class="icon" aria-hidden="true">

@@ -11,7 +11,7 @@
         <div class="header">
           <div class="avatar">
             <div class="avatarInner">
-              <img :src="resume.info.avatar_url" class="avatar"/>
+              <img :src="resume.info.avatar_url" class="avatar" />
             </div>
           </div>
         </div>
@@ -46,28 +46,26 @@
       <div class="basic">
         <div class="cardWrapper">
           <div class="card">
-            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
-              src="../../statics/images/resume_erweima_3x.png"/></div>
+            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png" /></div>
             <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucang"></use>
               </svg>
             </div>
-            <div class="collect active" @tap.stop.prevent="collectProfessor"
-                 v-show="uuid !== cuuid && resume.is_followed">
+            <div class="collect active" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucanghover"></use>
               </svg>
             </div>
             <div class="share" @tap.stop.prevent="share">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-fenxiang"></use>
-                  </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-fenxiang"></use>
+              </svg>
             </div>
             <div class="header">
               <div class="avatar">
                 <div class="avatarInner">
-                  <img :src="resume.info.avatar_url" class="avatar"/>
+                  <img :src="resume.info.avatar_url" class="avatar" />
                 </div>
               </div>
             </div>
@@ -79,21 +77,14 @@
                 </svg>
               </div>
               <!--文章和评论-->
-              <div class="news">
+              <!--<div class="news">
                 <p class="mui-ellipsis" @tap.stop.prevent="$router.pushReadHubPage('/@'+resume.info.id)">
                   文章<span>{{ resume.info.submission_count }}</span>篇</p>
                 <i></i>
                 <p class="mui-ellipsis" @tap.stop.prevent="$router.pushReadHubPage('/@'+resume.info.id)">
                   评论<span>{{ resume.info.comment_count }}</span>条</p>
-              </div>
-              <!---->
-              <div class="counter">关注<b>{{ resume.info.followers }}</b>次<i
-                class="separate"></i>咨询<b>{{ resume.info.answers }}</b>次<i
-                class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次<i
-                class="separate"></i>{{ resume.info.total_score }}
-
-
-              </div>
+              </div>-->
+             
 
               <div class="item">
                 <span>{{ resume.info.company }}</span>
@@ -107,131 +98,118 @@
                 </svg>
                 <span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>
               </div>
-              <div class="item industry">
+               <!--关注 被赞 综合评分-->
+             <div class="counter">
+               关注Ta <b>{{ resume.info.followers }}</b>
+               <i class="separate"></i>
+               被赞 <b>{{ resume.info.supports }}</b>
+               <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
+               <i class="separate"></i>{{ resume.info.total_score }}
+              </div>
+              
+              <!--<div class="item industry">
                 <template v-for="(industry, index) in resume.info.industry_tags">
                   <span>{{industry.text}}</span>
                 </template>
-
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
 
+       <!--个人简介-->
         <div class="description">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jieshaoshixin"></use>
-          </svg>
+          <p>个人简介</p>
           <span>{{ resume.info.description }}</span>
         </div>
       </div>
+     <!--工作经历-->
+      <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
+      <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
+        <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
+          <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
+          <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
+          <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
 
-
-
-
-
-    <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
-    <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-      <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
-        <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
-        <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
-        <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
-
+          </div>
+          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
         </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
       </div>
-    </div>
 
-    <div class="seeMoreWrapper"
-         v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
-      <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
-    </div>
+      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
+        <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
+      </div>
 
-    <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
-    <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
-      <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex" v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
-        <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
-        <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
-        <div class="others">
-          <div class="other">
-            <div class="title">【行业领域】</div>
-            <div class="content">
-              <template v-for="(industry, index) in project.industry_tags">
-                {{ industry.text }} ;
+      <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
+      <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
+        <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex" v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
+          <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
+          <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
+          <div class="others">
+            <div class="other">
+              <div class="title">【行业领域】</div>
+              <div class="content">
+                <template v-for="(industry, index) in project.industry_tags">
+                  {{ industry.text }} ;
 
-              </template>
+                </template>
+              </div>
+            </div>
+            <div class="other">
+              <div class="title">【产品类型】</div>
+              <div class="content">
+                <template v-for="(productTag, index) in project.product_tags">
+                  {{ productTag.text }} ;
+
+                </template>
+              </div>
+            </div>
+            <div class="other">
+              <div class="title">【客户名称】</div>
+              <div class="content">{{ project.customer_name }}</div>
             </div>
           </div>
-          <div class="other">
-            <div class="title">【产品类型】</div>
-            <div class="content">
-              <template v-for="(productTag, index) in project.product_tags">
-                {{ productTag.text }} ;
-
-              </template>
-            </div>
-          </div>
-          <div class="other">
-            <div class="title">【客户名称】</div>
-            <div class="content">{{ project.customer_name }}</div>
-          </div>
+          <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}</div>
+          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
         </div>
-        <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}</div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
+
+      </div>
+
+      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
+        <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
+      </div>
+
+      <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
+      <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
+        <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
+          <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
+          <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i class="separate"></i>{{ edu.major }}
+          </div>
+          <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
+
+          </div>
+          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
+        </div>
+      </div>
+
+      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
+        <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
+      </div>
+
+      <div class="noPublic" v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-bugongkai"></use>
+        </svg>
+        <div class="desc">部分信息暂未公开</div>
       </div>
 
     </div>
 
-    <div class="seeMoreWrapper"
-         v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
-      <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
-    </div>
+    <Share :title="shareOptions.title" :link="shareUrl" :hideShareBtn="true" :content="shareOptions.content" :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
 
-    <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
-    <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-      <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
-        <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
-        <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
-          class="separate"></i>{{ edu.major }}
-        </div>
-        <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
-
-        </div>
-        <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
-      </div>
-    </div>
-
-    <div class="seeMoreWrapper"
-         v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
-      <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
-    </div>
-
-    <div class="noPublic"
-         v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-bugongkai"></use>
-      </svg>
-      <div class="desc">部分信息暂未公开</div>
-    </div>
-
-
-  </div>
-
-    <Share
-      :title="shareOptions.title"
-      :link="shareUrl"
-      :hideShareBtn="true"
-      :content="shareOptions.content"
-      :imageUrl="shareOptions.imageUrl"
-      :thumbUrl="shareOptions.thumbUrl"
-      ref="shareComponent"
-    ></Share>
-
-    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
-            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
 
     </button>
-    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
-            @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
 
     </button>
 
@@ -240,58 +218,58 @@
 
 <script>
   import localEvent from '../../stores/localStorage';
-  import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import {updateUserInfoCache, getUserInfo} from '../../utils/user';
+  import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
+  import { createAPI, addAccessToken, postRequest } from '../../utils/request';
+  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
   import Share from '../../components/Share.vue';
 
   const currentUser = localEvent.getLocalItem('UserInfo');
 
   export default {
-    data:() => ({
-        shareOptions: {
-          title: '',
-          content: '',
-          imageUrl: '',
-          thumbUrl: ''
-        },
-        im_tokenMsg: '',
-        uuid: currentUser.uuid,
-        cuuid: currentUser.uuid,
-        showQrCode: false,
-        isShare: false,
-        canBack: false,
-        loading: true,
-        shareUrl: '',
-        wechatConfig: {},
-        downloadHeader: false,
-        isShowProjectMore:false,
-        isShowItemJobMore:false,
-        isShowitemEduMore:false,
-        resume: {
+    data: () => ({
+      shareOptions: {
+        title: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: ''
+      },
+      im_tokenMsg: '',
+      uuid: currentUser.uuid,
+      cuuid: currentUser.uuid,
+      showQrCode: false,
+      isShare: false,
+      canBack: false,
+      loading: true,
+      shareUrl: '',
+      wechatConfig: {},
+      downloadHeader: false,
+      isShowProjectMore: false,
+      isShowItemJobMore: false,
+      isShowitemEduMore: false,
+      resume: {
 
-          info: {
-            avatar_url: '',
-            industry_tags: [],
-            province: {
-              key: '',
-              name: ''
-            },
-            city: {
-              key: '',
-              name: '',
-            }
+        info: {
+          avatar_url: '',
+          industry_tags: [],
+          province: {
+            key: '',
+            name: ''
           },
-          edus: [],
-          projects: [],
-          jobs: [],
-
+          city: {
+            key: '',
+            name: '',
+          }
         },
-        qRCodeOptions: {
-          size: 100,
-          padding: 0,
-          level: 'H'
-        }
+        edus: [],
+        projects: [],
+        jobs: [],
+
+      },
+      qRCodeOptions: {
+        size: 100,
+        padding: 0,
+        level: 'H'
+      }
     }),
     components: {
       Share
@@ -312,28 +290,27 @@
       });
     },
     methods: {
-      share:function(){
+      share: function() {
         this.$refs.shareComponent.share();
       },
-      getData: function () {
-        if (this.$route.query.goback) {
+      getData: function() {
+        if(this.$route.query.goback) {
           this.canBack = true;
         }
 
         var from = this.$router.currentRoute.name;
         var fullUrl = process.env.H5_ROOT;
 
-        if (from === 'share-resume' || from === 'share-resume-old') {
+        if(from === 'share-resume' || from === 'share-resume-old') {
           this.isShare = true;
           this.uuid = this.$route.query.id || this.$route.params.id;
         }
-
 
         postRequest(`profile/resumeInfo`, {
           uuid: this.uuid
         }).then(response => {
           var code = response.data.code;
-          if (code !== 1000) {
+          if(code !== 1000) {
             mui.toast(response.data.message);
             return;
           }
@@ -343,9 +320,9 @@
           this.bindWechatShare();
         });
       },
-      collectProfessor: function () {
+      collectProfessor: function() {
 
-        if (!this.cuuid) {
+        if(!this.cuuid) {
           window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
@@ -354,7 +331,7 @@
           id: this.uuid
         }).then(response => {
           var code = response.data.code;
-          if (code !== 1000) {
+          if(code !== 1000) {
             mui.alert(response.data.message);
             return;
           }
@@ -366,8 +343,8 @@
         var that = this;
         var dtask = plus.downloader.createDownload(this.resume.info.avatar_url, {
           filename: "_downloads/resume.png"
-        }, function (d, status) {
-          if (status == 200) {
+        }, function(d, status) {
+          if(status == 200) {
             //下载成功
             console.log("下载成功:" + d.filename);
             console.debug(d);
@@ -388,7 +365,7 @@
       },
       showJobMore(event) {
 
-        if (!this.cuuid) {
+        if(!this.cuuid) {
           window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
@@ -398,7 +375,7 @@
       },
       showProjectMore(event) {
 
-        if (!this.cuuid) {
+        if(!this.cuuid) {
           window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
@@ -409,7 +386,7 @@
       },
       showEduMore(event) {
 
-        if (!this.cuuid) {
+        if(!this.cuuid) {
           window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
           return;
         }
@@ -419,17 +396,17 @@
       },
       goAsk(url) {
 
-        if (!this.resume.info.is_expert) {
+        if(!this.resume.info.is_expert) {
           mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！');
           return;
         }
 
-        if (this.uuid == this.cuuid) {
+        if(this.uuid == this.cuuid) {
           mui.alert('不能向自己提问！');
           return;
         }
 
-        if (mui.os.wechat) {
+        if(mui.os.wechat) {
           window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=' + url;
         } else {
           this.$router.push(url);
@@ -443,7 +420,7 @@
       toggleDeatil(event) {
 
         var Desc = event.target.previousSibling.previousSibling;
-        if (/hide/.test(Desc.className)) {
+        if(/hide/.test(Desc.className)) {
           Desc.className = Desc.className.replace(' hide', '');
           Desc.className = Desc.className.replace(' mui-ellipsis-3', '');
           Desc.className += ' show';
@@ -468,20 +445,27 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   /***************清除自带样式*****************/
-  div, p, span, ul, li, i, a {
+  
+  div,
+  p,
+  span,
+  ul,
+  li,
+  i,
+  a {
     margin: 0;
     padding: 0;
     list-style: none;
     font-style: normal;
   }
-
+  
   .professor {
     background-color: #3c3e44;
     text-align: center;
     position: relative;
     height: 78px;
   }
-
+  
   .erweimaWrapper {
     position: absolute;
     left: 16px;
@@ -592,30 +576,28 @@
       font-size: 13px;
     }
   }
-
+  
   .basic {
     background: #fff;
     .description {
       font-size: 14px;
       color: #808080;
-      padding: 19px 14px 35px;
+      padding: 11px 14px 13px;
       line-height: 24px;
-      .icon {
-        font-size: 16px;
-        color: #3c95f9;
-        position: relative;
-        top: 2px;
+      span{
+         font-size: 13px;
+         color:#444444;
       }
     }
   }
-
+  
   .separate {
     display: inline-block;
     height: 10px;
     margin: 0 8px;
     border-left: 1px solid #c8c8c8;
   }
-
+  
   .cardWrapper {
     margin-top: -69px;
     padding: 0 16px;
@@ -707,23 +689,27 @@
           }
         }
         .counter {
-          margin-top: 3px;
-          font-size: 12px;
-          color: #808080;
+          width: 91%;
+          margin-left: 4.5%;
+          padding-top: 12px;
+          margin-top: 12px;
+          border-top: 1px dashed #dcdcdc;
+          font-size: 13px;
+          color: #444444;
           b {
             color: #e63964;
           }
         }
         .item {
-          color: #444444;
-          font-size: 14px;
+          color:#808080;
+          font-size: 13px;
           margin: 7px 7px 2px 7px;
           .icon {
             color: #b4b4b6;
             font-size: 16px;
           }
           &.industry span {
-            border: 1px solid #cbcbcb;
+            border: 1px solid #c8c8c8;
             display: inline-block;
             border-radius: 50px;
             color: #808080;
@@ -735,7 +721,7 @@
       }
     }
   }
-
+  
   h5 {
     margin: 0;
     padding: 11px 0;
@@ -745,7 +731,7 @@
     color: #313131;
     text-align: center;
   }
-
+  
   .list {
     background: #fff;
     padding: 0 10px 0 30px;
@@ -858,7 +844,7 @@
       }
     }
   }
-
+  
   button {
     border-radius: 0;
     padding: 12px 0;
@@ -866,7 +852,7 @@
     margin: 0;
     font-size: 17px;
   }
-
+  
   .shareWrapper {
     .title {
       background: #ececee;
@@ -889,7 +875,7 @@
       }
     }
   }
-
+  
   .noPublic {
     margin: 20px 0 0;
     background: #fff;
@@ -903,7 +889,7 @@
       color: #f3f4f6;
     }
   }
-
+  
   #shareShowWrapper {
     position: absolute;
     right: 0;
@@ -916,18 +902,18 @@
       font-size: 70px;
     }
   }
-
+  
   .vueWrapper {
     padding-bottom: 48px;
   }
-
+  
   .bottomButton {
     position: fixed;
     bottom: 0;
     right: 0;
     z-index: 11;
   }
-
+  
   .seeMoreWrapper {
     background: #fff;
     padding-bottom: 30px;
@@ -945,16 +931,15 @@
       margin: 0 20px;
     }
   }
-
   /***********评论和回复************/
+  
   .news {
     width: 100%;
     height: 25px;
     padding: 0 10%;
     margin-top: 8px;
-
   }
-
+  
   .news i {
     display: inline-block;
     float: left;
@@ -963,29 +948,28 @@
     border-right: 1px solid #c8c8c8;
     margin: 7px 8px 0 8px;
   }
-
+  
   .news p {
     width: 46%;
     float: left;
     font-size: 12px;
     color: #808080;
-
   }
-
+  
   .news p span {
     color: #e63964;
     font-weight: bold;
   }
-
+  
   .news p:nth-of-type(1) {
     text-align: right;
   }
-
+  
   .news p:nth-of-type(2) {
     text-align: left;
   }
-
-  .resumeWrapper{
-    bottom:48px;
+  
+  .resumeWrapper {
+    bottom: 48px;
   }
 </style>
