@@ -34,7 +34,10 @@
             <p class="mui-ellipsis">{{ask.content}}</p>
             <p class="mui-ellipsis">原文章：最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</p>
             <p>
-              <span>{{ask.created_at }}</span>
+              <span>
+                <timeago :since="timeago(ask.created_at)" :auto-update="60">
+               </timeago>
+              </span>
             </p>
             <i class="bot"></i>
           </li>
@@ -67,6 +70,12 @@
       RefreshList
     },
     methods: {
+      //时间处理；
+      timeago(time) {
+        let newDate = new Date();
+        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
+        return newDate;
+      }
      
   
     },
