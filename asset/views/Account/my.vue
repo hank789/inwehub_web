@@ -56,7 +56,6 @@
             <use xlink:href="#icon-wodeshoucang"></use>
           </svg>
           <span>我的收藏</span>
-
         </li>
         <i class="bott"></i>
       </ul>
@@ -110,13 +109,13 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li >
+        <!--<li >
           <span>我的福利</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
-        </li>
+        </li>-->
         <li @tap.stop.prevent="$router.pushPlus('/setting')">
           <span>设置</span>
           <svg class="icon" aria-hidden="true">
@@ -577,7 +576,7 @@
   }
   
   .part3 li p:nth-of-type(1) {
-    width: 60px;
+    display: inline-block;
     height: 19px;
     font-size: 13px;
     text-align: center;
@@ -585,11 +584,8 @@
     line-height: 19px;
     background: #fcc816;
     border-radius: 100px;
-    position: absolute;
-    top: 12px;
-    left: 0;
-    right: 0;
-    margin: auto;
+    margin-top: 12px;
+    padding: 0 5px 0 5px;
   }
   
   .part3 li p:nth-of-type(2) {
