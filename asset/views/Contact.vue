@@ -57,19 +57,18 @@
           </ul>
         </div>
       </Contact>
-
-      <Share
-        ref="ShareBtn"
-        :hideShareBtn="true"
-        :title="'邀您回答|' + title"
-        :link="shareUrl"
-        :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
-        :imageUrl="shareImg"
-        :thumbUrl="shareImg"
-        @success="shareSuccess"
-        @fail="shareFail"
-      ></Share>
     </div>
+    <Share
+      ref="ShareBtn"
+      :hideShareBtn="true"
+      :title="'邀您回答|' + title"
+      :link="shareUrl"
+      :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
+      :imageUrl="shareImg"
+      :thumbUrl="shareImg"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
   </div>
 </template>
 
