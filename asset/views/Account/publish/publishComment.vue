@@ -5,17 +5,7 @@
       <h1 class="mui-title">我的发布</h1>
     </header>
 
-    <!--无内容-->
-    <!--<div class="mui-content list-empty absolute" >
-        <div class="mui-table-view list-ask-item">
-          <div class="mui-table-view-cell">
-            <div>
-              <div class="title">暂无任务</div>
-              <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-            </div>
-          </div>
-      </div>
-    </div>-->
+  
 
     <!--组件-->
     <div class="mui-content">
@@ -39,10 +29,11 @@
         :list="list" 
         class="listWrapper">
         <ul class="answer">
-          <li v-for="(ask, index) in list">
-            <p class="mui-ellipsis-2">{{ask.content}}</p>
+          <!--{{ask.origin_title}}-->
+          <li v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
+            <p class="mui-ellipsis">{{ask.content}}</p>
+            <p class="mui-ellipsis">原文章：最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</p>
             <p>
-            
               <span>{{ask.created_at }}</span>
             </p>
             <i class="bot"></i>
@@ -182,12 +173,19 @@
   
   .answer li p:nth-of-type(1) {
     color: #444444;
-    font-size: 16px;
+    font-size: 14px;
+  }
+  .answer li p:nth-of-type(2) {
+    color:#808080;
+    font-size: 12px;
+    margin-top: 3px;
   }
   
-  .answer li p:nth-of-type(2) {
+  .answer li p:nth-of-type(3) {
     overflow: hidden;
     margin-top: 6px;
+    color:#b4b4b6;
+    font-size: 12px;
   }
   
   

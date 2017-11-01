@@ -2,19 +2,18 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的发布</h1>
+      <h1 class="mui-title">我的收藏</h1>
     </header>
 
    
     <!--组件-->
     <div class="mui-content">
       <!--导航栏-->
+       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/my/publishAnswers')">回答 </span>
-        <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
-        <span @tap.stop.prevent="">文章  <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
-
+        <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答  </span>
+        <span>文章 <i></i></span>
+        
       </div>
       <!--内容区域-->
       <RefreshList 
@@ -44,8 +43,8 @@
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../../utils/request'
-  import RefreshList from '../../../components/refresh/List.vue'
+  import { createAPI, addAccessToken, postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -94,7 +93,7 @@
   
   .menu span {
     display: block;
-    width: 25%;
+    width: 50%;
     height: 100%;
     float: left;
     font-size: 14px;
@@ -104,7 +103,7 @@
     font-weight: 600;
   }
   
-  .menu span:nth-of-type(3) {
+  .menu span:nth-of-type(2) {
     color: #3c95f9;
     position: relative;
   }
@@ -114,7 +113,7 @@
     position: absolute;
     width: 27px;
     height: 1.5px;
-    left: 34%;
+    left: 42.5%;
     bottom: 0.5px;
     background: #3c95f9;
   }
@@ -164,7 +163,7 @@
   .answer li p:nth-of-type(1){
     font-size:15px;
     color:#444444;
-   
+    
     
   }
   .answer li p:nth-of-type(1) a{

@@ -5,17 +5,7 @@
       <h1 class="mui-title">我的发布</h1>
     </header>
 
-    <!--无内容-->
-    <!--<div class="mui-content list-empty absolute" >
-        <div class="mui-table-view list-ask-item">
-          <div class="mui-table-view-cell">
-            <div>
-              <div class="title">暂无任务</div>
-              <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-            </div>
-          </div>
-      </div>
-    </div>-->
+   
 
     <!--组件-->
     <div class="mui-content">
@@ -25,7 +15,6 @@
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
         <span @tap.stop.prevent="$router.replace('/my/publishArticle')">文章</span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
-
       </div>
       <!--内容区域-->
       <RefreshList 
@@ -39,7 +28,7 @@
         :list="list" 
         class="listWrapper">
         <ul class="answer">
-          <li v-for="(ask, index) in list">
+          <li v-for="(ask, index) in list"  @tap.stop.prevent="toDetail(ask)">
             <p class="mui-ellipsis-2">{{ask.description}}</p>
             <p>
               <span class="label" :class="'label_' + ask.status">{{ask.status_description}}</span>
@@ -76,6 +65,13 @@
       RefreshList
     },
     methods: {
+       toDetail(item){
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/' + item.id);
+        } else {
+          this.$router.pushPlus('/answer/' + item.question_id);
+        }
+      }
      
   
     },

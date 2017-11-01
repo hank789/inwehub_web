@@ -246,14 +246,26 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
-  { // 我的收藏
-    path: '/my/collected',
-    name: 'my-collected',
+  { // 我的收藏——回答
+    path: '/my/collectedAnswers',
+    name: 'my-collected_answers',
     meta: {
       title: '我的收藏',
       wechatHideHeader: true
     },
     component: require('../../../views/Account/Collected.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的收藏——文章
+    path: '/my/collectedArticle',
+    name: 'my-collected_article',
+    meta: {
+      title: '我的收藏',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Account/CollectedArticle.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
