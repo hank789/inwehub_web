@@ -19,9 +19,7 @@
       <RefreshList 
         ref="RefreshList" 
         v-model="list" 
-        :api="'readhub/mySubmission'"
-        :prevOtherData="{type:0}" 
-        :nextOtherData="{type:0}"
+        :api="'collected/readhubSubmission'"
         class="listWrapper">
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
