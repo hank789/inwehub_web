@@ -1,7 +1,9 @@
 <template>
   <div class="activityWrapper" :class="{unIsGetted:!isGeted}">
 
-    <div class="container-1-yuan mui-navigate-right" v-show="couponExpireAtText && couponExpireAtTime" @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">你的首问1元特惠还剩<span v-html="couponExpireAtText"></span></div>
+    <div class="container-1-yuan mui-navigate-right" v-show="couponExpireAtText && couponExpireAtTime"
+         @tap.stop.prevent="$router.pushPlus('/activity/ask?couponExpireAtTime='+couponExpireAtTime)">你的首问1元特惠还剩<span
+      v-html="couponExpireAtText"></span></div>
 
     <div id="freeAskTemplate" style="display: none;">
       <div class="freeAskGet"></div>
@@ -22,135 +24,134 @@
 
 
 <script type="text/javascript">
-  import {TimeEndText} from '../../utils/time';
-  import {setStatusBarBackgroundAndStyle, setStatusBarStyle} from '../../utils/statusBar';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { TimeEndText } from '../../utils/time'
+  import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
+  import { postRequest } from '../../utils/request'
 
   export default {
-    data() {
+    data () {
       return {
-        isGeted:false,
-        firstAsk:false,
-        couponExpireAtTime:0,
+        isGeted: false,
+        firstAsk: false,
+        couponExpireAtTime: 0,
         currentTime: parseInt((new Date()).getTime() / 1000),
         timeAutoEndTimeOut: false
       }
     },
     computed: {
-      //首页倒计时；
-      couponExpireAtText() {
+      // 首页倒计时；
+      couponExpireAtText () {
         if (this.couponExpireAtTime) {
-          return TimeEndText(this.currentTime, this.couponExpireAtTime);
+          return TimeEndText(this.currentTime, this.couponExpireAtTime)
         }
       }
     },
-    props: {
-    },
-    created() {
+    props: {},
+    created () {
     },
     watch: {
-      'couponExpireAtTime'(newVal, oldVal) {
-          if (newVal) {
-            this.timeAutoEnd();
-          }
-      },
-      'firstAsk'(newVal, oldVal) {
+      'couponExpireAtTime' (newVal, oldVal) {
         if (newVal) {
-          this.showFreeAskGet();
+          this.timeAutoEnd()
+        }
+      },
+      'firstAsk' (newVal, oldVal) {
+        if (newVal) {
+          this.showFreeAskGet()
         }
       }
     },
-    mounted() {
-      this.getHomeData();
+    mounted () {
+      this.getHomeData()
     },
     methods: {
-      getHomeData(){
+      getHomeData () {
         postRequest(`home`, {}, false).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            return;
+            window.mui.toast(response.data.message)
+            return
           }
 
-          this.firstAsk = false; //response.data.data.first_ask_ac.show_first_ask_coupon;
-          var couponExpireAtTime = response.data.data.first_ask_ac.coupon_expire_at;
+          this.firstAsk = false // response.data.data.first_ask_ac.show_first_ask_coupon;
+          var couponExpireAtTime = response.data.data.first_ask_ac.coupon_expire_at
           if (couponExpireAtTime) {
-              this.couponExpireAtTime = Date.parse(couponExpireAtTime.replace(/-/g, "/")) / 1000;
+            this.couponExpireAtTime = Date.parse(couponExpireAtTime.replace(/-/g, '/')) / 1000
           }
-        });
+        })
       },
       closeFreeAskSuccessTemplate: function () {
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'none';
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate')
+        FreeTemplate.style.display = 'none'
 
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
+        if (window.mui('.mui-backdrop')[0]) {
+          document.body.removeChild(window.mui('.mui-backdrop')[0])
         }
       },
       closeFreeAskTemplate: function () {
-        var FreeTemplate = document.getElementById('freeAskTemplate');
-        FreeTemplate.style.display = 'none';
+        var FreeTemplate = document.getElementById('freeAskTemplate')
+        FreeTemplate.style.display = 'none'
 
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
+        if (window.mui('.mui-backdrop')[0]) {
+          document.body.removeChild(window.mui('.mui-backdrop')[0])
         }
       },
       getFreeAsk: function () {
         postRequest(`activity/getCoupon`, {
           'coupon_type': 1
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
-          this.isGeted = true;
-          this.showFreeAskGetSuccess();
-          this.getHomeData();
-        });
+          this.isGeted = true
+          this.showFreeAskGetSuccess()
+          this.getHomeData()
+        })
       },
       showFreeAskGet: function () {
-        var FreeTemplate = document.getElementById('freeAskTemplate');
-        FreeTemplate.style.display = 'block';
-        var mask = mui.createMask(() => {
-          FreeTemplate.style.display = 'none';
-          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
-        });
-        setStatusBarBackgroundAndStyle('#A8A9AB', 'light');
-        mask.show(); //显示遮罩
+        var FreeTemplate = document.getElementById('freeAskTemplate')
+        FreeTemplate.style.display = 'block'
+        var mask = window.mui.createMask(() => {
+          FreeTemplate.style.display = 'none'
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark')
+        })
+        setStatusBarBackgroundAndStyle('#A8A9AB', 'light')
+        mask.show() // 显示遮罩
       },
       showFreeAskGetSuccess: function () {
-        this.closeFreeAskTemplate();
+        this.closeFreeAskTemplate()
 
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'block';
-        var mask = mui.createMask(() => {
-          FreeTemplate.style.display = 'none';
-          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
-        });
-        mask.show(); //显示遮罩
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate')
+        FreeTemplate.style.display = 'block'
+        var mask = window.mui.createMask(() => {
+          FreeTemplate.style.display = 'none'
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark')
+        })
+        mask.show() // 显示遮罩
       },
-      //对时间的处理；
+      // 对时间的处理；
       timeAutoEnd: function () {
         if (this.timeAutoEndTimeOut) {
-          clearTimeout(this.timeAutoEndTimeOut);
+          clearTimeout(this.timeAutoEndTimeOut)
         }
         this.timeAutoEndTimeOut = setTimeout(() => {
-          this.currentTime = parseInt((new Date()).getTime() / 1000);
-          this.timeAutoEnd();
-        }, 1000);
-      },
+          this.currentTime = parseInt((new Date()).getTime() / 1000)
+          this.timeAutoEnd()
+        }, 1000)
+      }
     }
-  };
+  }
 </script>
 <style scoped="scoped">
   /*一元特惠*/
-  #freeAskTemplate{
+  #freeAskTemplate {
     position: absolute;
-    top:0;
-    width:100%;
-    bottom:0;
-    left:0;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
   }
 
   .freeAskWrapper {

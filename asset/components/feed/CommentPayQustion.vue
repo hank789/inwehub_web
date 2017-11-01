@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
   export default {
-    data() {
+    data () {
       return {
 
       }
@@ -34,20 +34,20 @@
       data: {
         type: Object,
         default: {}
-      },
+      }
     },
-    created() {},
+    created () {},
     watch: {},
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      toResume(uuid){
+      toResume (uuid) {
         if (!uuid) {
-          return false;
+          return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       }
     }
-  };
+  }
 </script>

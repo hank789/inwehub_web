@@ -34,15 +34,13 @@
 </template>
 
 <script type="text/javascript">
-  import {setStatusBarBackgroundAndStyle, setStatusBarStyle} from '../../utils/statusBar';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import {swiper, swiperSlide} from 'vue-awesome-swiper';
-  import {queryParent} from '../../utils/dom';
-  import userAbility from '../../utils/userAbility';
-  import userAbilityCheck from '../../utils/userAbilityCheck';
+  import { postRequest } from '../../utils/request'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { queryParent } from '../../utils/dom'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   export default {
-    data() {
+    data () {
       return {
         recommend_experts: [],
         swiperOption: {}
@@ -53,8 +51,8 @@
       swiperSlide
     },
     props: {},
-    created() {
-      this.getHomeData();
+    created () {
+      this.getHomeData()
       this.swiperOption = {
         pagination: '.swiper-pagination',
         slidesPerView: 3,
@@ -63,67 +61,66 @@
       }
     },
     watch: {},
-    mounted() {
+    mounted () {
 
     },
     methods: {
       collectProfessor: function (uuid, index) {
         if (!uuid) {
-          return;
+          return
         }
 
         postRequest(`follow/user`, {
           id: uuid
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          var is_followed = response.data.data.type === 'follow' ? 1 : 0;
-          var obj = document.querySelector('#follow_' + index);
+          var obj = document.querySelector('#follow_' + index)
           if (obj) {
-            obj.classList.add('followed');
-            obj.classList.remove('follow');
-            obj.innerText = '已关注';
+            obj.classList.add('followed')
+            obj.classList.remove('follow')
+            obj.innerText = '已关注'
           }
 
-          mui.toast(response.data.data.tip);
-        });
+          window.mui.toast(response.data.data.tip)
+        })
       },
-      swipperClick(swiper, event) {
-        var classList = event.target.classList;
-        var parent = queryParent(event.target, 'swiper-slide');
-        if (!parent) return;
-        var uuid = parent.getAttribute('uuid');
-        var index = parent.getAttribute('index');
+      swipperClick (swiper, event) {
+        var classList = event.target.classList
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var uuid = parent.getAttribute('uuid')
+        var index = parent.getAttribute('index')
         if (uuid) {
           if (classList && classList.contains('follow')) {
-            this.collectProfessor(uuid, index);
+            this.collectProfessor(uuid, index)
           } else {
-            this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+            this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
           }
         } else {
-          userAbilityCheck.moreProfessor(this.$parent);
+          userAbilityCheck.moreProfessor(this.$parent)
         }
       },
-      more(){
-        userAbilityCheck.moreProfessor(this.$parent);
+      more () {
+        userAbilityCheck.moreProfessor(this.$parent)
       },
-      getHomeData(){
+      getHomeData () {
         postRequest(`home`, {}, false).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            return;
+            window.mui.toast(response.data.message)
+            return
           }
 
-          this.recommend_experts = response.data.data.recommend_experts;
-        });
-      },
+          this.recommend_experts = response.data.data.recommend_experts
+        })
+      }
     }
-  };
+  }
 </script>
 <style scoped="scoped">
   /*人物推荐*/
