@@ -13,37 +13,33 @@
 </template>
 
 <script>
-  import {apiRequest} from '../utils/request';
+  import { apiRequest } from '../utils/request'
 
   export default {
     data: () => ({
       aboutus: '',
-      loading:1
+      loading: 1
     }),
     created () {
-      //showInwehubWebview();
-      apiRequest(`system/service_about`,{}).then(response_data => {
-        if (response_data === false) {
-          return;
+      // showInwehubWebview();
+      apiRequest(`system/service_about`, {}).then(responseData => {
+        if (responseData === false) {
+          return
         }
-        this.aboutus = response_data.html;
-        this.loading = 0;
-      });
+        this.aboutus = responseData.html
+        this.loading = 0
+      })
     },
-    methods: {
-
-    },
-    watch: {
-
-    }
+    methods: {},
+    watch: {}
   }
 
 </script>
 
 
 <style scoped>
-  .mui-content{
+  .mui-content {
     background: #fff;
-    padding-bottom:15px;
+    padding-bottom: 15px;
   }
 </style>

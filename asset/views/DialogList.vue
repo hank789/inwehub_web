@@ -1,19 +1,18 @@
 <template>
   <div>
-    
+
   </div>
 </template>
 
 <script>
-  import inwehubDialog from '../components/Dialog.vue';
+  import inwehubDialog from '../components/Dialog.vue'
   export default {
-    mounted(){
-
+    mounted () {
     },
     components: {
-      inwehubDialog,
-    },
-  };
+      inwehubDialog
+    }
+  }
 </script>
 
 <style scoped="scoped">
