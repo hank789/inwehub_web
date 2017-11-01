@@ -45,7 +45,7 @@
           </svg>
           <span>我的发布</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/collect')">
+        <li @tap.stop.prevent="$router.pushPlus('/collectUser')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodeguanzhu"></use>
           </svg>

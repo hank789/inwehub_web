@@ -8,6 +8,15 @@
 		</header>
 
 		<div class="mui-content absolute">
+		  <!--导航栏-->
+      <div class="menu">
+        <span @tap.stop.prevent="">关注的用户 <i></i></span>
+        <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
+        
+      </div>
+		  
+		  
+		  
 			<div class=" mui-scroll-wrapper task-list" id="pullrefresh">
 				<div class="mui-scroll">
 
@@ -151,6 +160,43 @@
 </script>
 
 <style scoped>
+    /*导航栏的样式*/
+  
+  .menu {
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    z-index: 10;
+    background: #f3f4f6;
+  }
+  
+  .menu span {
+    display: block;
+    width: 50%;
+    height: 100%;
+    float: left;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+  }
+  
+  .menu span:nth-of-type(1) {
+    color: #3c95f9;
+    position: relative;
+  }
+  
+  .menu i {
+    display: block;
+    position: absolute;
+    width: 73px;
+    height: 1.5px;
+    left: 30%;
+    bottom: 0.5px;
+    background: #3c95f9;
+  }
+  /**/
 	.bot {
 		position: absolute;
 		right: 0;

@@ -2,37 +2,32 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的发布</h1>
+      <h1 class="mui-title">我的收藏</h1>
     </header>
 
    
-
     <!--组件-->
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="">回答  <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">文章</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
+        <span @tap.stop.prevent="$router.replace('/collectUser')">关注的用户</span>
+        <span @tap.stop.prevent="">关注的问题  <i></i></span>  
       </div>
       <!--内容区域-->
       <RefreshList 
         ref="RefreshList" 
         v-model="list" 
-        :api="'answer/myList'"
-        :downLoadMoreMode="true" 
-        :isShowUpToRefreshDescription="true" 
-        :prevOtherData="{type:0}" 
-        :nextOtherData="{type:0}" 
-        :list="list" 
+        :api="'followed/questions'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
         class="listWrapper">
         <ul class="answer">
-          <li v-for="(ask, index) in list"  @tap.stop.prevent="toDetail(ask)">
-            <p class="mui-ellipsis-2">{{ask.description}}</p>
+          <li  v-for="(questions, index) in list"  @tap.stop.prevent="toDetail(questions)">      
+            <p class="mui-ellipsis-2">{{questions.description}}</p>
             <p>
-              <span class="label" :class="'label_' + ask.status">{{ask.status_description}}</span>
-              <span>{{ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
+              <span>回答{{questions.answer_num}}</span>
+              <a></a>
+              <span>关注问题{{questions.follow_num}}</span>
             </p>
             <i class="bot"></i>
           </li>
@@ -47,36 +42,30 @@
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../../utils/request';
-  import RefreshList from '../../../components/refresh/List.vue';
+  import { createAPI, addAccessToken, postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
-      list: [],
-
+      list: []
     }),
-    created() {
-     
-
+    created () {
     },
     computed: {
 
     },
-   components: {
+    components: {
       RefreshList
     },
     methods: {
-       toDetail(item){
-         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/' + item.id);
+     toDetail(item){
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.question_id);
         } else {
-          this.$router.pushPlus('/answer/' + item.question_id);
+          this.$router.pushPlus('/askCommunity/major/' + item.question_id);
         }
       }
-  
     },
     mounted() {
-      
-
     },
     updated() {
 //    console.error(this.list);
@@ -110,7 +99,7 @@
   
   .menu span {
     display: block;
-    width: 25%;
+    width: 50%;
     height: 100%;
     float: left;
     font-size: 14px;
@@ -120,7 +109,7 @@
     font-weight: 600;
   }
   
-  .menu span:nth-of-type(1) {
+  .menu span:nth-of-type(2) {
     color: #3c95f9;
     position: relative;
   }
@@ -128,9 +117,9 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 27px;
+    width: 73px;
     height: 1.5px;
-    left: 34%;
+    left: 30%;
     bottom: 0.5px;
     background: #3c95f9;
   }
@@ -171,46 +160,45 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 14px 0 13px 0;
+    padding: 15px 0 13px 0;
     position: relative;
   }
+   .answer li div{ 
+     margin-bottom: 12px;
+   }
+  .answer li p:nth-of-type(1){
+    font-size:15px;
+    color:#444444;
+    
+    
+  }
+  .answer li p:nth-of-type(2){
+    margin-top:6px;
+    
+  }
+  .answer li p:nth-of-type(2) span:nth-of-type(1){
+   font-size:12px;
+   color:#b4b4b6;
+  }
+  .answer li p:nth-of-type(2) span:nth-of-type(2){
+   font-size:12px;
+   color:#03aef9;
+    
+  }
+   .answer li p:nth-of-type(2) a{
+   display: inline-block;
+   width: 1px;
+   height: 12px;
+   background: #DCDCDC;
+   margin:0 9px -2px 7px;
   
-  .answer li p:nth-of-type(1) {
-    color: #444444;
-    font-size: 16px;
+    
   }
   
-  .answer li p:nth-of-type(2) {
-    overflow: hidden;
-    margin-top: 6px;
-  }
   
-  .label {
-    float: left;
-    width: 50px;
-    height: 17px;
-    line-height: 17px;
-    border-radius: 50px;
-    background: #fcc816;
-    color: #ffffff;
-    font-size: 12px;
-    text-align: center;
-  }
   
-  .answer li p:nth-of-type(2) span:nth-of-type(2) {
-    float: right;
-    font-size: 12px;
-    color: #b4b4b6;
-  }
-   /*状态的颜色*/
- .label_1,.label_2,.label_4{
-    background: #fcc816;
+  /*listWrapper*/
+ .listWrapper{
+   top: 45px;
  }
-
- .label_3,.label_5,.label_6,.label_7{
-   background: #c8c8c8;
- }
-  .listWrapper{
-    top: 45px;
-  }
 </style>

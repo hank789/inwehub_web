@@ -32,7 +32,7 @@
           <!--{{ask.origin_title}}-->
           <li v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
             <p class="mui-ellipsis">{{ask.content}}</p>
-            <p class="mui-ellipsis">原文章：最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</p>
+            <p class="mui-ellipsis">{{ask.origin_title}}</p>
             <p>
               <span>
                 <timeago :since="timeago(ask.created_at)" :auto-update="60">

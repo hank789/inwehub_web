@@ -1284,15 +1284,28 @@ const routes = [{
       requestAuth(to, from, next)
     }
   },
-  { // discover detail
-    path: '/collect',
-    name: 'my-collect',
+  { // discover detail 
+    path: '/collectUser',
+    name: 'my-collect-user',
     meta: {
       title: '我的关注',
       wechatHideHeader: true,
       keepAlive: true
     },
-    component: require('../../../views/Account/Collect.vue'),
+    component: require('../../../views/Account/collectUser.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover detail 
+    path: '/collectQuestion',
+    name: 'my-collect-question',
+    meta: {
+      title: '我的关注',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Account/collectQuestion.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
