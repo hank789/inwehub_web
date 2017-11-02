@@ -103,7 +103,12 @@
         if (target) {
           var oPos = target.offsetTop
           console.log(oPos)
-          window.scrollTo(0, oPos - 40)
+          var obj = document.querySelector('.mui-content')
+          if (obj.scrollTo) {
+            obj.scrollTo(0, oPos - 40)
+          } else {
+            obj.scrollTop = oPos - 40
+          }
         }
       }
     },

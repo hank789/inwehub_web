@@ -217,6 +217,5 @@
 
   .mui-content {
     background: #fff;
-    position: static !important;
   }
 </style>
