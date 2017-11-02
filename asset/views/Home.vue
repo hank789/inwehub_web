@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="mui-slider-indicator">
-          <div :class="{'mui-indicator':true, 'mui-active':index==0}" v-for="(notice, index) in notices"></div>
+          <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in notices"></div>
         </div>
       </div>
       <!--专业问答 和 成为专家-->
@@ -204,34 +204,30 @@
 
 </template>
 <script>
-  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../utils/request';
-  import {apiRequest} from '../utils/request';
-  import {TimeEndText} from '../utils/time';
-  import {swiper, swiperSlide} from 'vue-awesome-swiper';
-  import {openWebviewByHome} from '../utils/webview';
-  import {setStatusBarBackgroundAndStyle, setStatusBarStyle} from '../utils/statusBar';
-  import {queryParent} from '../utils/dom';
-  import userAbility from '../utils/userAbility';
-  import userAbilityCheck from '../utils/userAbilityCheck';
+  import {postRequest, apiRequest} from '../utils/request'
+  import {TimeEndText} from '../utils/time'
+  import {swiper, swiperSlide} from 'vue-awesome-swiper'
+  import {setStatusBarBackgroundAndStyle} from '../utils/statusBar'
+  import {queryParent} from '../utils/dom'
+  import userAbility from '../utils/userAbility'
+  import userAbilityCheck from '../utils/userAbilityCheck'
 
   const Home = {
     data: () => ({
-      is_expert: "",
-      recommend_read: "",
+      is_expert: '',
+      recommend_read: '',
       recommend_experts: [],
       recommend_qa: [],
       isShowActivity: false,
       recommend_activity: [{
         image_url: ''
       },
-        {
-          image_url: ''
-        },
-        {
-          image_url: ''
-        }
-
+      {
+        image_url: ''
+      },
+      {
+        image_url: ''
+      }
       ],
       firstAsk: false,
       couponExpireAtTime: '',
@@ -241,12 +237,11 @@
       timeAutoEndTimeOut: false,
       swiperOption: {},
       isWeixin: false,
-      isH5: false,
+      isH5: false
     }),
-    created() {
+    created () {
       this.swiperOption = {
         pagination: '.swiper-pagination',
-        //				loop: true,
         slidesPerView: 3,
         spaceBetween: 10,
         onTap: this.swipperClick
@@ -256,109 +251,92 @@
       swiper,
       swiperSlide
     },
-    //缓存；
+    // 缓存；
     activated: function () {
-      this.getData();
+      this.getData()
     },
-    mounted() {
-      //showInwehubWebview();
-      if (!mui.os.plus) {
-        if (mui.os.wechat) {
-          this.isWeixin = true;
+    mounted () {
+      // showInwehubWebview();
+      if (!window.mui.os.plus) {
+        if (window.mui.os.wechat) {
+          this.isWeixin = true
         } else {
-          this.isH5 = true;
+          this.isH5 = true
         }
       }
     },
     computed: {
-      //首页倒计时；
-      couponExpireAtText() {
+      // 首页倒计时；
+      couponExpireAtText () {
         if (this.couponExpireAtTime) {
-          return TimeEndText(this.currentTime, this.couponExpireAtTime);
+          return TimeEndText(this.currentTime, this.couponExpireAtTime)
         }
       }
     },
     methods: {
-      //详情；
-      toMajorDetail(id) {
-        userAbility.jumpToAskCommunityDetail(this, id);
+      // 详情；
+      toMajorDetail (id) {
+        userAbility.jumpToAskCommunityDetail(this, id)
       },
-      //进入社区；
-      toAskCommunity() {
-        userAbility.jumpToAskCommunity(this);
+      // 进入社区；
+      toAskCommunity () {
+        userAbility.jumpToAskCommunity(this)
       },
-      swipperClick(swiper, event) {
-        var parent = queryParent(event.target, 'swiper-slide');
-        if (!parent) return;
-        var uuid = parent.getAttribute('uuid');
+      swipperClick (swiper, event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var uuid = parent.getAttribute('uuid')
         if (uuid) {
-          this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1');
+          this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
         } else {
-          userAbilityCheck.moreProfessor(this);
+          userAbilityCheck.moreProfessor(this)
         }
-
       },
-      detail(url) {
-        this.goLink(url);
+      detail (url) {
+        this.goLink(url)
       },
-      //认证专家跳转判断；
-      toApprove(expertStatus) {
-        userAbility.jumpToApplyProfessor(this);
-//				switch(parseInt(expertStatus)) {
-//					case 0:
-//					case 3:
-//						this.$router.push('/my/pilot');
-//						break;
-//					case 2:
-//						mui.toast('您已经是专家');
-//						break;
-//					case 1:
-//						this.$router.push('/expert/apply/success?type=0');
-//						break;
-//				}
-
+      // 认证专家跳转判断；
+      toApprove (expertStatus) {
+        userAbility.jumpToApplyProfessor(this)
       },
-      toAsk() {
-        userAbility.jumpToAddAsk(this);
-        //       userAbility.newbieTask(this);
+      toAsk () {
+        userAbility.jumpToAddAsk(this)
       },
-
       goArticle: function (article) {
-
-        var url = article.view_url;
-        var id = article.id;
-        var title = article.title;
-        var pathUrl = article.comment_url;
-        var img_url = article.img_url;
+        var url = article.view_url
+        var id = article.id
+        var title = article.title
+        var pathUrl = article.comment_url
+        var imgUrl = article.img_url
 
         if (/http/.test(url)) {
-          if (mui.os.plus) {
+          if (window.mui.os.plus) {
             if (window.mixpanel.track) {
               window.mixpanel.track(
                 'inwehub:read_page_detail', {
-                  "app": "inwehub",
-                  "user_device": getUserAppDevice(),
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
                   'page': url,
                   'page_title': title
                 }
-              );
+              )
             }
             if (window.ga) {
-              window.ga('set', 'page', url);
-              window.ga('send', 'pageview');
+              window.ga('set', 'page', url)
+              window.ga('send', 'pageview')
             }
-            var article_params = {
+            var articleParams = {
               article_id: id,
               article_url: url,
               article_title: title,
               article_comment_url: pathUrl,
-              article_img_url: img_url,
+              article_img_url: imgUrl,
               preload: true
-            };
-            var article_ws = mui.openWindow({
+            }
+            var articleWs = window.mui.openWindow({
               url: 'index.html#/webview/article',
               id: 'inwehub_article_view',
-              preload: false, //一定要为false
+              preload: false, // 一定要为false
               createNew: false,
               show: {
                 autoShow: true,
@@ -370,38 +348,37 @@
               waiting: {
                 autoShow: false
               },
-              extras: article_params
-            });
-            mui.fire(article_ws, 'load_article', article_params);
+              extras: articleParams
+            })
+            window.mui.fire(articleWs, 'load_article', articleParams)
           } else {
             //            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
 
-            var url = "/discover?redirect_url=" + pathUrl + '?' + encodeURIComponent('from=h5');
-
-            this.$router.push(url);
+            url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
+            this.$router.push(url)
             //            window.location.href = url;
           }
         } else {
-          this.$router.pushPlus(url);
+          this.$router.pushPlus(url)
         }
       },
       goLink: function (url) {
         if (/http/.test(url)) {
-          if (mui.os.plus) {
+          if (window.mui.os.plus) {
             if (window.mixpanel.track) {
               window.mixpanel.track(
                 'inwehub:notice_detail', {
-                  "app": "inwehub",
-                  "user_device": getUserAppDevice(),
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
                   'page': url,
                   'page_title': '首页轮播文章'
                 }
-              );
+              )
             }
-            var notice_ws = mui.openWindow({
+            var noticeWs = window.mui.openWindow({
               url: 'index.html#/webview/notice',
               id: 'inwehub_notice_view',
-              preload: false, //一定要为false
+              preload: false, // 一定要为false
               createNew: false,
               show: {
                 autoShow: true,
@@ -417,108 +394,106 @@
                 preload: true,
                 article_url: url
               }
-            });
-            mui.fire(notice_ws, 'load_article', {article_url: url});
-
+            })
+            window.mui.fire(noticeWs, 'load_article', {article_url: url})
           } else {
-            window.location.href = url;
+            window.location.href = url
           }
         } else {
-          this.$router.pushPlus(url);
+          this.$router.pushPlus(url)
         }
       },
       closeFreeAskSuccessTemplate: function () {
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'none';
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate')
+        FreeTemplate.style.display = 'none'
 
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
+        if (window.mui('.mui-backdrop')[0]) {
+          document.body.removeChild(window.mui('.mui-backdrop')[0])
         }
       },
       closeFreeAskTemplate: function () {
-        var FreeTemplate = document.getElementById('freeAskTemplate');
-        FreeTemplate.style.display = 'none';
+        var FreeTemplate = document.getElementById('freeAskTemplate')
+        FreeTemplate.style.display = 'none'
 
-        if (mui('.mui-backdrop')[0]) {
-          document.body.removeChild(mui('.mui-backdrop')[0]);
+        if (window.mui('.mui-backdrop')[0]) {
+          document.body.removeChild(window.mui('.mui-backdrop')[0])
         }
       },
       getFreeAsk: function () {
         postRequest(`activity/getCoupon`, {
           'coupon_type': 1
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
-          this.getData();
-          this.showFreeAskGetSuccess();
-        });
+          this.getData()
+          this.showFreeAskGetSuccess()
+        })
       },
       showFreeAskGet: function () {
-        var FreeTemplate = document.getElementById('freeAskTemplate');
-        FreeTemplate.style.display = 'block';
-        var mask = mui.createMask(() => {
-          FreeTemplate.style.display = 'none';
-          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
-        });
-        setStatusBarBackgroundAndStyle('#A8A9AB', 'light');
-        mask.show(); //显示遮罩
+        var FreeTemplate = document.getElementById('freeAskTemplate')
+        FreeTemplate.style.display = 'block'
+        var mask = window.mui.createMask(() => {
+          FreeTemplate.style.display = 'none'
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark')
+        })
+        setStatusBarBackgroundAndStyle('#A8A9AB', 'light')
+        mask.show() // 显示遮罩
       },
       showFreeAskGetSuccess: function () {
-        this.closeFreeAskTemplate();
+        this.closeFreeAskTemplate()
 
-        var FreeTemplate = document.getElementById('freeAskSuccessTemplate');
-        FreeTemplate.style.display = 'block';
-        var mask = mui.createMask(() => {
-          FreeTemplate.style.display = 'none';
-          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark');
-        });
-        mask.show(); //显示遮罩
+        var FreeTemplate = document.getElementById('freeAskSuccessTemplate')
+        FreeTemplate.style.display = 'block'
+        var mask = window.mui.createMask(() => {
+          FreeTemplate.style.display = 'none'
+          setStatusBarBackgroundAndStyle('#f3f4f6', 'dark')
+        })
+        mask.show() // 显示遮罩
       },
-      //对时间的处理；
+      // 对时间的处理；
       timeAutoEnd: function () {
         if (this.timeAutoEndTimeOut) {
-          clearTimeout(this.timeAutoEndTimeOut);
+          clearTimeout(this.timeAutoEndTimeOut)
         }
         this.timeAutoEndTimeOut = setTimeout(() => {
-          this.currentTime = parseInt((new Date()).getTime() / 1000);
-          this.timeAutoEnd();
-        }, 1000);
+          this.currentTime = parseInt((new Date()).getTime() / 1000)
+          this.timeAutoEnd()
+        }, 1000)
       },
-      //请求的数据；
+      // 请求的数据；
       getData: function () {
-        var deration = this;
-        var t = this;
-        apiRequest(`home`, {}, false).then(response_data => {
-          if (response_data === false) {
-            return;
+        var t = this
+        apiRequest(`home`, {}, false).then(responseData => {
+          if (responseData === false) {
+            return
           }
 
-          //推荐专家；
+          // 推荐专家
 
-          t.recommend_experts = response_data.recommend_experts;
+          t.recommend_experts = responseData.recommend_experts
 
-          this.isShowActivity = response_data.recommend_activity.length ? true : false;
+          this.isShowActivity = !!responseData.recommend_activity.length
 
-          //首页推荐活动
-          for (var i in response_data.recommend_activity) {
-            t.recommend_activity[i] = response_data.recommend_activity[i];
+          // 首页推荐活动
+          for (var i in responseData.recommend_activity) {
+            t.recommend_activity[i] = responseData.recommend_activity[i]
           }
 
-          //推荐阅读；
-          t.recommend_read = response_data.recommend_read;
-          //返回是否显示首次提问免费的福利；
-          t.firstAsk = response_data.first_ask_ac.show_first_ask_coupon;
-          //是否是专家；
-          t.is_expert = response_data.expert_apply_status;
-          //热门回答；
-          t.recommend_qa = response_data.recommend_qa;
+          // 推荐阅读；
+          t.recommend_read = responseData.recommend_read
+          // 返回是否显示首次提问免费的福利；
+          t.firstAsk = responseData.first_ask_ac.show_first_ask_coupon
+          // 是否是专家；
+          t.is_expert = responseData.expert_apply_status
+          // 热门回答；
+          t.recommend_qa = responseData.recommend_qa
 
-          //预加载第一篇文章
-          if (mui.os.plus && t.recommend_read.length > 0) {
-            var article_params = {
+          // 预加载第一篇文章
+          if (window.mui.os.plus && t.recommend_read.length > 0) {
+            var articleParams = {
               article_id: t.recommend_read[0].id,
               article_url: t.recommend_read[0].view_url,
               article_title: t.recommend_read[0].title,
@@ -526,51 +501,50 @@
               article_img_url: t.recommend_read[0].img_url,
               preload: true,
               custom_preload: true
-            };
-            mui.preload({
+            }
+            window.mui.preload({
               url: 'index.html#/webview/article',
               id: 'inwehub_article_view',
               styles: {
                 popGesture: 'hide'
               },
-              extras: article_params
-            });
+              extras: articleParams
+            })
           }
 
-          //返回的时间；
-          var couponExpireAt = response_data.first_ask_ac.coupon_expire_at;
-
+          // 返回的时间；
+          var couponExpireAt = responseData.first_ask_ac.coupon_expire_at
           if (couponExpireAt) {
-            t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, "/")) / 1000;
-            t.timeAutoEnd();
+            t.couponExpireAtTime = Date.parse(couponExpireAt.replace(/-/g, '/')) / 1000
+            t.timeAutoEnd()
           } else {
-            t.couponExpireAtTime = null;
+            t.couponExpireAtTime = null
           }
 
-          //轮播图；
-          t.notices = response_data.notices;
+          // 轮播图；
+          t.notices = responseData.notices
 
-          t.loading = 0;
+          t.loading = 0
           if (t.firstAsk) {
-            t.showFreeAskGet();
+            t.showFreeAskGet()
           }
 
-          //新手任务
-          userAbility.newbieTask(this);
+          // 新手任务
+          userAbility.newbieTask(this)
 
           if (t.notices.length) {
             setTimeout(function () {
-              var slider = mui("#slider");
+              var slider = window.mui('#slider')
               slider.slider({
                 interval: 5000
-              });
-            }, 100);
+              })
+            }, 100)
           }
-        });
+        })
       }
     }
-  };
-  export default Home;
+  }
+  export default Home
 </script>
 
 <style lang="less" scoped>
@@ -606,7 +580,7 @@
   /*头部样式*/
 
   header {
-    width: 100;
+    width: 100%;
     height: 44px;
     background: #f3f4f6;
     text-align: center;
