@@ -72,19 +72,6 @@ const routes = [{
     requestAuth(to, from, next)
   }
 },
-{ // feedtest
-  path: '/feedtest',
-  name: 'feedtest',
-  meta: {
-    title: 'Inwehub',
-    wechatHideHeader: true,
-    keepAlive: true
-  },
-  component: require('../../../views/Feedtest.vue'),
-  beforeEnter: (to, from, next) => {
-    requestAuth(to, from, next)
-  }
-},
 { // 首页活动列表页
   path: '/home/ActiveList',
   name: 'activity-list',
@@ -1081,14 +1068,6 @@ const routes = [{
     requestAuth(to, from, next)
   }
 },
-{ // message
-  path: '/message',
-  name: 'message',
-  component: require('../../../views/message.vue'),
-  beforeEnter: (to, from, next) => {
-    requestAuth(to, from, next)
-  }
-},
 { // header
   path: '/header',
   name: 'app-select-avatar',
@@ -1480,27 +1459,12 @@ const routes = [{
   component: require('../../../views/Webview/Share.vue')
 },
 {
-  path: '/test/open',
-  name: 'open-app',
-  meta: {
-    title: 'InweHub'
-  },
-  component: require('../../../views/OpenApp.vue')
-},
-{
   path: '/webview/registerForm',
   name: 'webview-registerForm',
   meta: {
     title: 'InweHub'
   },
   component: require('../../../views/Webview/registerForm.vue')
-},
-{
-  path: '/register/nocode',
-  meta: {
-    title: 'InweHub'
-  },
-  component: require('../../../views/NoCode.vue')
 },
 {
   path: '/dialog/list',

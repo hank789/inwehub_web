@@ -25,7 +25,8 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <a @tap.stop.prevent="selectWorkerCity(true)" class="mui-navigate-right">项目地点<span
-              class="mui-pull-right account-setting-field mui-ellipsis">{{ project.address !== ''?project.address:'请选择' }}</span></a>
+              class="mui-pull-right account-setting-field mui-ellipsis">{{ project.address !== '' ? project.address : '请选择'
+              }}</span></a>
 
             <!--<input type="text" v-model.trim="project.address" placeholder="请选择" @tap.stop.prevent="selectWorkerCity()">-->
           </div>
@@ -42,6 +43,7 @@
         项目简介
 
 
+
       </div>
       <div class="textarea-wrapper">
               <textarea v-model.trim="description" rows="5"
@@ -52,6 +54,7 @@
         <button type="button" class="mui-btn mui-btn-primary" @tap.stop.prevent="deleteItem">删除
 
 
+
         </button>
       </div>
     </div>
@@ -59,13 +62,10 @@
 </template>
 
 <script>
-  import {NOTICE} from '../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../utils/request';
-  import localEvent from '../stores/localStorage';
-  import industryTagsIndexedList from './Tags/industryTagsIndexedlist.vue';
-  import ACCOUNT_API from '../api/account';
-  import dPickerComponent from '../components/picker/date-picker.vue';
-  import cityData from '../components/city/city.data';
+  import { NOTICE } from '../stores/types'
+  import { postRequest } from '../utils/request'
+  import localEvent from '../stores/localStorage'
+  import cityData from '../components/city/city.data'
 
   export default {
     data: () => ({
@@ -75,8 +75,8 @@
       project: {
         name: '',
         price: '',
-        province:'',
-        city:'',
+        province: '',
+        city: '',
         address: '',
         company: '',
         description: ''
@@ -87,14 +87,14 @@
     }),
 
     methods: {
-      refreshPageData(){
-        this.initData();
+      refreshPageData () {
+        this.initData()
       },
-      initData(){
-        let id = parseInt(this.$route.params.id);
-        this.id = id;
+      initData () {
+        let id = parseInt(this.$route.params.id)
+        this.id = id
         if (this.id) {
-          var projects = localEvent.getLocalItem('projects');
+          var projects = localEvent.getLocalItem('projects')
 
           if (!projects || !projects[id]) {
             this.$store.dispatch(NOTICE, cb => {
@@ -102,10 +102,10 @@
                 text: '发生一些错误',
                 time: 1500,
                 status: false
-              });
-            });
-            this.$router.back();
-            return;
+              })
+            })
+            this.$router.back()
+            return
           }
 
           this.project = {
@@ -114,164 +114,159 @@
             address: projects[id].project_province.name + ' ' + projects[id].project_city.name,
             company: projects[id].company_name,
             description: projects[id].description,
-            province:projects[id].project_province.key,
-            city:projects[id].project_city.key,
-          };
-          this.description = projects[id].description;
-          this.bak = JSON.stringify(this.project);
+            province: projects[id].project_province.key,
+            city: projects[id].project_city.key
+          }
+          this.description = projects[id].description
+          this.bak = JSON.stringify(this.project)
         }
       },
-      selectWorkerCity(){
-
-        var cityPicker = new mui.PopPicker({
+      selectWorkerCity () {
+        var cityPicker = new window.mui.PopPicker({
           layer: 2
-        });
-        cityPicker.setData(cityData);
-
-
+        })
+        cityPicker.setData(cityData)
 
         if (this.project.province) {
-
           cityPicker.pickers[0].setSelectedValue(this.project.province, 0, () => {
             cityPicker.pickers[1].setSelectedValue(this.project.city, 0, () => {
-            });
-          });
+            })
+          })
         }
 
         cityPicker.show(items => {
-          this.project.province = items[0].value;
-          this.project.city = items[1].value;
-          this.project.address = items[0].text + " " + items[1].text;
-          cityPicker.dispose();
-        });
+          this.project.province = items[0].value
+          this.project.city = items[1].value
+          this.project.address = items[0].text + ' ' + items[1].text
+          cityPicker.dispose()
+        })
       },
       muiViewBack: function () {
-        var newItemChange = JSON.stringify(this.project);
-        if (this.bak != '' && newItemChange !== this.bak) {
-          mui.confirm("您还未保存，确定退出么? ", '退出编辑', ['取消', '确定'], e => {
-            if (e.index == 1) {
-              mui.back();
+        var newItemChange = JSON.stringify(this.project)
+        if (this.bak !== '' && newItemChange !== this.bak) {
+          window.mui.confirm('您还未保存，确定退出么? ', '退出编辑', ['取消', '确定'], e => {
+            if (e.index === 1) {
+              window.mui.back()
             } else {
-              return false;
+              return false
             }
-          }, 'div');
+          }, 'div')
         } else {
-          mui.back();
+          window.mui.back()
         }
       },
-      submit(){
-
+      submit () {
         if (!this.project.name) {
-          mui.toast("项目名称不能为空");
-          return;
+          window.mui.toast('项目名称不能为空')
+          return
         }
 
         if (!this.project.price) {
-          mui.toast("项目预算不能为空");
-          return;
+          window.mui.toast('项目预算不能为空')
+          return
         }
 
         if (!this.project.address) {
-          mui.toast("项目地点不能为空");
-          return;
+          window.mui.toast('项目地点不能为空')
+          return
         }
 
         if (!this.project.company) {
-          mui.toast("公司名称不能为空");
-          return;
+          window.mui.toast('公司名称不能为空')
+          return
         }
 
         if (!this.description) {
-          mui.toast("项目简介不能为空");
-          return;
+          window.mui.toast('项目简介不能为空')
+          return
         }
 
-        var url = '';
+        var url = ''
         if (this.id) {
-          url = 'project/update';
+          url = 'project/update'
         } else {
-          url = 'project/submit';
+          url = 'project/submit'
         }
 
-        var json = JSON.stringify(this.project);
         var data = {
           'project_name': this.project.name,
           'project_amount': this.project.price,
           'company_name': this.project.company,
-          'project_province':this.project.province,
-          'project_city':this.project.city,
+          'project_province': this.project.province,
+          'project_city': this.project.city,
           description: this.description
         }
 
         if (this.id) {
-          data.id = this.id;
+          data.id = this.id
         }
 
-        if (this.buttonSaveDisabled) return;
-        this.buttonSaveDisabled = true;
+        if (this.buttonSaveDisabled) return
+        this.buttonSaveDisabled = true
 
         postRequest(url, data).then(response => {
-          this.buttonSaveDisabled = false;
+          this.buttonSaveDisabled = false
 
-          var code = response.data.code;
+          var code = response.data.code
 
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          mui.toast('操作成功');
-          this.bak = '';
-          mui.back();
-        });
+          window.mui.toast('操作成功')
+          this.bak = ''
+          window.mui.back()
+        })
       },
-      deleteItem(){
-        var btnArray = ['否', '是'];
-        mui.confirm('确认要删除？', '删除', btnArray, e => {
-          if (e.index == 1) {
-            var url = 'project/destroy';
+      deleteItem () {
+        var btnArray = ['否', '是']
+        window.mui.confirm('确认要删除？', '删除', btnArray, e => {
+          if (e.index === 1) {
+            var url = 'project/destroy'
             postRequest(url, {id: this.id}).then(response => {
-              mui.toast('删除成功');
-              mui.back();
-            });
+              window.mui.toast('删除成功')
+              window.mui.back()
+            })
           }
-        });
+        })
       }
     },
-    beforeRouteLeave(to, from, next) {
-      var popDiv = document.querySelector('.mui-dtpicker');
+    beforeRouteLeave (to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {
-        document.body.removeChild(popDiv);
+        document.body.removeChild(popDiv)
       }
 
-
-      popDiv = document.querySelector('.mui-poppicker');
+      popDiv = document.querySelector('.mui-poppicker')
       if (popDiv) {
-        document.body.removeChild(popDiv);
+        document.body.removeChild(popDiv)
       }
 
-      next();
+      next()
     },
     mounted () {
     },
     computed: {
-      descLength() {
-        if (this.description)
-          return this.description.length;
-        else return 0;
+      descLength () {
+        if (this.description) {
+          return this.description.length
+        } else {
+          return 0
+        }
       }
     },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       },
       '$route': 'refreshPageData'
     },
     created () {
-      //showInwehubWebview();
-      this.initData();
+      // showInwehubWebview();
+      this.initData()
     }
   }
 </script>
@@ -343,7 +338,7 @@
     color: #999;
   }
 
-  .account-setting-field{
+  .account-setting-field {
 
   }
 

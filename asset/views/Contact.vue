@@ -27,6 +27,8 @@
         <div class="indexTitle">
           已关注的成员
 
+
+
         </div>
 
         <div class="groupWrapper">
@@ -75,23 +77,22 @@
 <script>
 
   import Contact from './../components/contact/Index.vue'
-  import { apiRequest, postRequest } from '../utils/request';
-  import Share from '../components/Share.vue';
-
+  import { postRequest } from '../utils/request'
+  import Share from '../components/Share.vue'
 
   export default {
-    data(){
+    data () {
       return {
-        id:0,
+        id: 0,
         search: '',
-        username:'',
-        shareUrl:'',
-        shareImg:'',
-        answernum:0,
-        followednum:0,
-        title:'',
+        username: '',
+        shareUrl: '',
+        shareImg: '',
+        answernum: 0,
+        followednum: 0,
+        title: '',
         list: [],
-        lastList:[]
+        lastList: []
       }
     },
     components: {
@@ -100,79 +101,78 @@
     },
     computed: {},
     methods: {
-      shareSuccess(){
+      shareSuccess () {
 
       },
-      shareFail(){
+      shareFail () {
 
       },
-      choose(item){
+      choose (item) {
         postRequest(`question/inviteAnswer`, {
-          question_id:this.id,
-          user_id:item.id
+          question_id: this.id,
+          user_id: item.id
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
-        });
+        })
       },
-      toFollowMore(){
-          this.$refs.ShareBtn.share();
+      toFollowMore () {
+        this.$refs.ShareBtn.share()
       },
-      getList(id) {
+      getList (id) {
         postRequest(`question/inviterList`, {
-          question_id:id
+          question_id: id
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          if(response.data.data.length > 0) {
-            this.list = response.data.data;
+          if (response.data.data.length > 0) {
+            this.list = response.data.data
           }
-          this.loading = 0;
-        });
+          this.loading = 0
+        })
       },
-      refreshPageData()
-      {
-        console.log('refreshPageData');
-        this.id = parseInt(this.$route.params.id);
-        this.username = this.$route.query.username;
-        this.title = this.$route.query.title;
-        this.answernum = this.$route.query.answernum;
-        this.followednum = this.$route.query.followednum;
+      refreshPageData () {
+        console.log('refreshPageData')
+        this.id = parseInt(this.$route.params.id)
+        this.username = this.$route.query.username
+        this.title = this.$route.query.title
+        this.answernum = this.$route.query.answernum
+        this.followednum = this.$route.query.followednum
 
-        var currentUrl = '/askCommunity/interaction/answers/' + this.id;
-        this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
-        this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+        var currentUrl = '/askCommunity/interaction/answers/' + this.id
+        this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl
+        this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
-        this.getList(this.id);
+        this.getList(this.id)
       },
       chooseItem (item) {
-        item.is_invited = true;
-        this.choose(item);
+        item.is_invited = true
+        this.choose(item)
       }
     },
     watch: {
       '$route': 'refreshPageData'
     },
-    mounted(){
+    mounted () {
       window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-contact');
-        this.refreshPageData();
-      });
+        // 执行刷新
+        console.log('refresh-contact')
+        this.refreshPageData()
+      })
     },
-    created(){
-        this.refreshPageData();
+    created () {
+      this.refreshPageData()
     }
-  };
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>

@@ -1,15 +1,15 @@
 <template>
 <div>
- 
+
 </div>
 </template>
 
 <script>
   export default {
     created () {
-      //showInwehubWebview();
-    },
-  };
+      // showInwehubWebview();
+    }
+  }
 </script>
 
 <style scoped="scoped">

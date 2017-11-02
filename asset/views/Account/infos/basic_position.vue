@@ -25,37 +25,37 @@
 
 <script>
 
-  import localEvent from '../../../stores/localStorage';
-  import {apiRequest} from '../../../utils/request';
+  import localEvent from '../../../stores/localStorage'
+  import {apiRequest} from '../../../utils/request'
 
   export default {
     data: () => ({
-      title:'',
+      title: ''
     }),
     created () {
-      var userInfo = localEvent.getLocalItem('UserInfo');
-      this.title = userInfo.title;
+      var userInfo = localEvent.getLocalItem('UserInfo')
+      this.title = userInfo.title
     },
-    mounted(){
+    mounted () {
 
     },
-    methods:{
+    methods: {
       submitInfo: function () {
         if (!this.title) {
-          mui.toast('请填写当前职位');
-          return false;
+          window.mui.toast('请填写当前职位')
+          return false
         }
 
         var data = {
-            'title':this.title
-        };
+          'title': this.title
+        }
 
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
-            mui.toast('保存成功');
-            mui.back();
+            window.mui.toast('保存成功')
+            window.mui.back()
           }
-        });
+        })
       }
     }
   }
