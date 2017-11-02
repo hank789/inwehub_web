@@ -88,8 +88,8 @@
                 <span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>
               </div>
                <!--关注 被赞 综合评分-->
-             <div class="counter">
-               关注Ta <b>{{ resume.info.followers }}</b>
+             <div class="counter" >
+               关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus')">{{ resume.info.followers }}</b>
                <i class="separate"></i>
                被赞 <b>{{ resume.info.supports }}</b>
                <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
