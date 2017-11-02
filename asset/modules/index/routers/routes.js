@@ -72,19 +72,6 @@ const routes = [{
     requestAuth(to, from, next)
   }
 },
-{ // feedtest
-  path: '/feedtest',
-  name: 'feedtest',
-  meta: {
-    title: 'Inwehub',
-    wechatHideHeader: true,
-    keepAlive: true
-  },
-  component: require('../../../views/Feedtest.vue'),
-  beforeEnter: (to, from, next) => {
-    requestAuth(to, from, next)
-  }
-},
 { // 首页活动列表页
   path: '/home/ActiveList',
   name: 'activity-list',
