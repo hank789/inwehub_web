@@ -25,6 +25,7 @@
           <div class="mui-table-view-cell">
             暂无回答
 
+
           </div>
         </div>
 
@@ -39,10 +40,12 @@
           <div class="title">
             什么是专业问题
 
+
           </div>
           <div class="body">
             InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
             专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+
 
 
           </div>
@@ -51,6 +54,7 @@
         <div class="buttonWrapper iNeedAskWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
+
 
 
           </button>
@@ -72,17 +76,16 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
 
-  import Question from '../../components/question-detail/Question.vue';
-  import Discuss from '../../components/question-detail/Discuss.vue';
-  import Answer from '../../components/question-detail/Answer.vue';
-  import Comment from '../../components/question-detail/Comment.vue';
-  import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
-  import Share from '../../components/Share.vue';
-  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
-  import userAbility from '../../utils/userAbility';
+  import Question from '../../components/question-detail/Question.vue'
+  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Answer from '../../components/question-detail/Answer.vue'
+  import Comment from '../../components/question-detail/Comment.vue'
+  import Share from '../../components/Share.vue'
+  import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
+  import userAbility from '../../utils/userAbility'
 
   const AskDetail = {
     data: () => ({
@@ -101,14 +104,14 @@
       id: 0,
       loading: true
     }),
-    mounted(){
-      mui.plusReady(() => {
-        plus.webview.currentWebview().setStyle({
-          softinputMode: "adjustResize"
-        });
-      });
+    mounted () {
+      window.mui.plusReady(() => {
+        window.plus.webview.currentWebview().setStyle({
+          softinputMode: 'adjustResize'
+        })
+      })
 
-      this.getDetail();
+      this.getDetail()
     },
     components: {
       Question,
@@ -119,40 +122,36 @@
     },
     computed: {
       answer () {
-        return this.ask.answers[0] ? this.ask.answers[0] : {};
+        return this.ask.answers[0] ? this.ask.answers[0] : {}
       }
     },
     methods: {
-      refreshPageData(){
-        console.log('refreshPageData');
-        this.loading = 1;
-        this.getDetail();
+      refreshPageData () {
+        console.log('refreshPageData')
+        this.loading = 1
+        this.getDetail()
       },
-      shareSuccess(){
-        //alertAskCommunityDetailShareSuccess(this);
+      shareSuccess () {
+        // alertAskCommunityDetailShareSuccess(this);
       },
-      shareFail(error){
-
+      shareFail () {
       },
-      paySuccess(content)
-      {
-        this.ask.answers[0].content = content;
+      paySuccess (content) {
+        this.ask.answers[0].content = content
       },
-      downRefresh(callback){
+      downRefresh (callback) {
         this.getDetail(() => {
-          this.$refs.discuss.resetList();
-        });
+          this.$refs.discuss.resetList()
+        })
       },
-      toSeeHelp(){
-        this.$router.pushPlus('/help/ask');
+      toSeeHelp () {
+        this.$router.pushPlus('/help/ask')
       },
-      toAsk(){
-        userAbility.jumpToAddAsk();
+      toAsk () {
+        userAbility.jumpToAddAsk()
       },
-      getDetail(successCallback = () => {
-                }){
-
-        let id = parseInt(this.$route.params.id);
+      getDetail (successCallback = () => {}) {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -160,37 +159,36 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
 
-        this.id = id;
+        this.id = id
 
         postRequest(`question/info`, {id: this.id}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
-            return;
+            window.mui.toast(response.data.message)
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
+            return
           }
 
-          this.ask = response.data.data;
+          this.ask = response.data.data
 
-          this.loading = 0;
+          this.loading = 0
 
-          var username = this.answer.user_name ? this.answer.user_name : '';
+          var username = this.answer.user_name ? this.answer.user_name : ''
 
-          var shareOptions = getAskCommunityMajorDetail(this.id, this.ask.question.description, username);
-          this.shareImg = shareOptions.imageUrl;
-          this.shareContent = shareOptions.content;
-          this.shareUrl = shareOptions.link;
-          this.shareTitle = shareOptions.title;
+          var shareOptions = getAskCommunityMajorDetail(this.id, this.ask.question.description, username)
+          this.shareImg = shareOptions.imageUrl
+          this.shareContent = shareOptions.content
+          this.shareUrl = shareOptions.link
+          this.shareTitle = shareOptions.title
 
-          successCallback();
-
-        });
+          successCallback()
+        })
       }
     },
     watch: {
@@ -200,7 +198,7 @@
 
     }
   }
-  export default AskDetail;
+  export default AskDetail
 </script>
 
 

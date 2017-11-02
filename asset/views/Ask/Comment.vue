@@ -19,10 +19,11 @@
               <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
             </div>
             <span class="mui-icon mui-icon-speech mui-plus-visible" @tap.stop.prevent="speech"></span>
-            <star-rating @rating-selected ="setRating" :star-size="30" :show-rating="showRating"></star-rating>
+            <star-rating @rating-selected="setRating" :star-size="30" :show-rating="showRating"></star-rating>
             <div class="button-wrapper">
               <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                       @tap.stop.prevent="submit">提交
+
               </button>
             </div>
 
@@ -36,114 +37,115 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { postRequest } from '../../utils/request'
 
   const Refuse = {
     data: () => ({
-      showRating:false,
+      showRating: false,
       id: null,
       description: '',
-      rateStar:0,
+      rateStar: 0,
       descMaxLength: 500
     }),
     computed: {
-      descLength() {
-        return this.description.length;
+      descLength () {
+        return this.description.length
       }
     },
-    mounted(){
+    mounted () {
       window.addEventListener('refreshData', function (e) {
-        //执行刷新
-        console.log('refresh-ask-comment');
-      });
+        // 执行刷新
+        console.log('refresh-ask-comment')
+      })
     },
     methods: {
-      submit(){
+      submit () {
         if (!this.description) {
-          mui.toast('请填写反馈内容');
-          return;
+          window.mui.toast('请填写反馈内容')
+          return
         }
 
         var data = {
           answer_id: this.id,
           description: this.description,
           rate_star: this.rateStar
-        };
+        }
 
         postRequest(`answer/feedback`, data).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          mui.back();
-        });
+          window.mui.back()
+        })
       },
-      setRating: function(rating){
-        this.rateStar= rating;
+      setRating: function (rating) {
+        this.rateStar = rating
       },
-      speech(){
-        var options = {};
-        options.engine = 'iFly';
-        var t = this;
-        plus.speech.startRecognize( options, function ( s ) {
-          t.description += s;
-        }, function ( e ) {
-          mui.alert( "语音识别失败："+e.message );
-        });
+      speech () {
+        var options = {}
+        options.engine = 'iFly'
+        var t = this
+        window.plus.speech.startRecognize(options, function (s) {
+          t.description += s
+        }, function (e) {
+          window.mui.alert('语音识别失败：' + e.message)
+        })
       }
     },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       }
     },
     created () {
-      //showInwehubWebview();
-      let id = parseInt(this.$route.params.id);
-      this.id = id;
+      // showInwehubWebview();
+      let id = parseInt(this.$route.params.id)
+      this.id = id
     }
   }
-  export default Refuse;
+  export default Refuse
 </script>
 
 
 <style scoped>
-  .form-realAnswer{
-    padding:0 20px;
+  .form-realAnswer {
+    padding: 0 20px;
   }
+
   .form-realAnswer textarea {
-    margin-top:20px;
-    width:100%;
-    height:200px;
-    border:1px solid #efefef;
-  }
-  .form-realAnswer .title{
-    margin-top:30px;
-    height:32px;
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #efefef;
   }
 
-
-  .form-realAnswer .button-wrapper{
-    margin-top:15px;
-    padding-bottom:15px;
+  .form-realAnswer .title {
+    margin-top: 30px;
+    height: 32px;
   }
 
-  .mui-content{
-    background-color:#fff;
+  .form-realAnswer .button-wrapper {
+    margin-top: 15px;
+    padding-bottom: 15px;
   }
 
-  .textarea-wrapper{
+  .mui-content {
+    background-color: #fff;
+  }
+
+  .textarea-wrapper {
     position: relative;
   }
-  .textarea-wrapper .counter{
+
+  .textarea-wrapper .counter {
     position: absolute;
     right: 10px;
     bottom: 30px;
-    color:#999;
+    color: #999;
   }
 </style>

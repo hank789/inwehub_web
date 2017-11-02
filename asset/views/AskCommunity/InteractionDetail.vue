@@ -29,21 +29,26 @@
           v-show="ask.answer && ask.answer.content"
         ></Discuss>
 
-        </div>
+      </div>
 
       <div class="help">
         <div class="title">
           什么是互动问答？
+
         </div>
         <div class="body">
-          InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+          InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a
+          @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
-            </div>
+
+        </div>
       </div>
 
       <div class="buttonWrapper iNeedAskWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id)">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id)">
           返回查看全部回答
+
 
         </button>
       </div>
@@ -63,46 +68,43 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
 
-  import Question from '../../components/question-detail/QuestionInteractionDetail.vue';
-  import Discuss from '../../components/question-detail/Discuss.vue';
-  import Answer from '../../components/question-detail/Answer.vue';
-  import Comment from '../../components/question-detail/Comment.vue';
-  import {alertAskCommunityDetailShareSuccess} from '../../utils/dialogList';
-  import Share from '../../components/Share.vue';
-  import {getAskCommunityInteractionDetail} from '../../utils/shareTemplate';
-
-  import userAbility from '../../utils/userAbility';
+  import Question from '../../components/question-detail/QuestionInteractionDetail.vue'
+  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Answer from '../../components/question-detail/Answer.vue'
+  import Comment from '../../components/question-detail/Comment.vue'
+  import Share from '../../components/Share.vue'
+  import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
 
   const AskDetail = {
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: '', description:''},
+        question: {created_at: '', description: ''},
         feedback: {
           rate_star: 0
         },
         timeline: []
       },
-      shareUrl:'',
-      shareImg:'',
-      shareContent:'',
-      shareTitle:'',
+      shareUrl: '',
+      shareImg: '',
+      shareContent: '',
+      shareTitle: '',
       id: 0,
       loading: true
     }),
-    mounted(){
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
+    mounted () {
+      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
-      mui.plusReady(() => {
-        plus.webview.currentWebview().setStyle({
-          softinputMode: "adjustResize"
-        });
-      });
+      window.mui.plusReady(() => {
+        window.plus.webview.currentWebview().setStyle({
+          softinputMode: 'adjustResize'
+        })
+      })
 
-      this.getDetail();
+      this.getDetail()
     },
     components: {
       Question,
@@ -112,41 +114,38 @@
       Share
     },
     computed: {
-        answer () {
-          return this.ask.answer ? this.ask.answer:{};
+      answer () {
+        return this.ask.answer ? this.ask.answer : {}
       }
     },
     methods: {
-      refreshPageData(){
-          console.log('refreshPageData-zz-detail');
-          this.loading = 1;
-          this.getDetail();
+      refreshPageData () {
+        console.log('refreshPageData-zz-detail')
+        this.loading = 1
+        this.getDetail()
       },
-      toAsk(){
-        this.$router.pushPlus('/ask/interaction');
+      toAsk () {
+        this.$router.pushPlus('/ask/interaction')
       },
-      toSeeHelp(){
-        this.$router.pushPlus('/help/ask');
+      toSeeHelp () {
+        this.$router.pushPlus('/help/ask')
       },
-      shareSuccess(){
-          //alertAskCommunityDetailShareSuccess(this);
+      shareSuccess () {
+        // alertAskCommunityDetailShareSuccess(this);
       },
-      shareFail(error){
+      shareFail () {
 
       },
-      paySuccess(content)
-      {
-          this.ask.answers[0].content = content;
+      paySuccess (content) {
+        this.ask.answers[0].content = content
       },
-      downRefresh(callback){
+      downRefresh (callback) {
         this.getDetail(() => {
-          this.$refs.discuss.resetList();
-        });
+          this.$refs.discuss.resetList()
+        })
       },
-      getDetail(successCallback = () => {
-                }){
-
-        let id = parseInt(this.$route.params.id);
+      getDetail (successCallback = () => {}) {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -154,36 +153,36 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
 
-        this.id = id;
+        this.id = id
 
         postRequest(`answer/info`, {id: this.id}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
-            return;
+            window.mui.toast(response.data.message)
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
+            return
           }
 
-          this.ask = response.data.data;
+          this.ask = response.data.data
 
-          this.loading = 0;
+          this.loading = 0
 
-          var username = this.answer.user_name ? this.answer.user_name : '';
+          var username = this.answer.user_name ? this.answer.user_name : ''
 
-          var shareOptions = getAskCommunityInteractionDetail(this.id, this.ask.question.description, username);
-          this.shareImg = shareOptions.imageUrl;
-          this.shareContent = shareOptions.content;
-          this.shareUrl = shareOptions.link;
-          this.shareTitle = shareOptions.title;
+          var shareOptions = getAskCommunityInteractionDetail(this.id, this.ask.question.description, username)
+          this.shareImg = shareOptions.imageUrl
+          this.shareContent = shareOptions.content
+          this.shareUrl = shareOptions.link
+          this.shareTitle = shareOptions.title
 
-          successCallback();
-        });
+          successCallback()
+        })
       }
     },
     watch: {
@@ -193,7 +192,7 @@
 
     }
   }
-  export default AskDetail;
+  export default AskDetail
 </script>
 
 
