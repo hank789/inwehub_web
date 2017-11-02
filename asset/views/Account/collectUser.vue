@@ -84,8 +84,7 @@
       }
     },
     components: {
-      Contact,
-
+      Contact
     },
     methods: {
       //点击关注；
