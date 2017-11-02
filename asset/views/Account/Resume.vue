@@ -47,16 +47,15 @@
         <div class="cardWrapper">
           <div class="card">
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png" /></div>
+            <!--关注-->
             <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucang"></use>
-              </svg>
+              关注Ta 
             </div>
             <div class="collect active" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucanghover"></use>
-              </svg>
+              已互关
             </div>
+            <!--名片-->
+            <div class="Card">96%</div>
             <div class="share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fenxiang"></use>
@@ -76,16 +75,6 @@
                   <use xlink:href="#icon-zhuanjiabiaoji"></use>
                 </svg>
               </div>
-              <!--文章和评论-->
-              <!--<div class="news">
-                <p class="mui-ellipsis" @tap.stop.prevent="$router.pushReadHubPage('/@'+resume.info.id)">
-                  文章<span>{{ resume.info.submission_count }}</span>篇</p>
-                <i></i>
-                <p class="mui-ellipsis" @tap.stop.prevent="$router.pushReadHubPage('/@'+resume.info.id)">
-                  评论<span>{{ resume.info.comment_count }}</span>条</p>
-              </div>-->
-             
-
               <div class="item">
                 <span>{{ resume.info.company }}</span>
                 <i class="separate"></i>
@@ -106,21 +95,51 @@
                <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
                <i class="separate"></i>{{ resume.info.total_score }}
               </div>
-              
-              <!--<div class="item industry">
-                <template v-for="(industry, index) in resume.info.industry_tags">
-                  <span>{{industry.text}}</span>
-                </template>
-              </div>-->
             </div>
           </div>
         </div>
-
+        <!--Ta的擅长-->
+        <div class="skilled">
+          <p>Ta的擅长</p>
+          <template v-for="(industry, index) in resume.info.industry_tags">
+            <span>{{industry.text}}</span>
+          </template>
+          <i class="bot"></i>
+        </div>
+        <!--发布-->
+       <div class="news">
+         <div>Ta的发布</div>
+         <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+            回答 <span>{{ resume.info.answers }}</span>
+          </p>
+          <a></a>
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishQuestions')">
+            提问 <span>{{ resume.info.questions }}</span>
+          </p>
+          <a></a>
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishArticle')">
+            文章 <span>{{ resume.info.submission_count }}</span>
+          </p>
+          <a></a>
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment')">
+            评论 <span>{{ resume.info.comment_count }}</span>
+          </p>
+          <i class="bot"></i>
+        </div>
+        <!--个人动态-->
+        <div class="dynamic">
+           <p>Ta的动态</p>
+           <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-chakangengduojiantou"></use>
+           </svg>
+           <i class="bot"></i>
+        </div>
        <!--个人简介-->
         <div class="description">
           <p>个人简介</p>
-          <span>{{ resume.info.description }}</span>
+          <div class="mui-ellipsis-3">{{ resume.info.description }}</div>
         </div>
+        
       </div>
      <!--工作经历-->
       <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
@@ -444,6 +463,17 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+.bot {
+    position: absolute;
+    right: 14px;
+    bottom: 0;
+    left: 14px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    /*background-color: rgb(220, 220, 220);*/
+   border: 1px dashed #dcdcdc;
+  }
   /***************清除自带样式*****************/
   
   div,
@@ -576,7 +606,7 @@
       font-size: 13px;
     }
   }
-  
+  /*个人简历*/
   .basic {
     background: #fff;
     .description {
@@ -584,9 +614,11 @@
       color: #808080;
       padding: 11px 14px 13px;
       line-height: 24px;
-      span{
+      div{
+        display: block;
          font-size: 13px;
          color:#444444;
+         line-height:25px;
       }
     }
   }
@@ -616,16 +648,34 @@
           height: 100%;
         }
       }
+      /*关注*/
       .collect {
         position: absolute;
-        font-size: 30px;
+        font-size:14px;
         right: 55px;
-        top: 12px;
-        color: #808080;
+        top: 14px;
+        color:#444444;
+        border:1px solid #b4b4b6;
+        border-radius: 50px;
+        padding:2px 8px;
         &.active {
-          color: #3c95f9;
+          color:#FFFFFF;
+          border:1px solid #03aef9;
+          background:#03aef9;
         }
       }
+      /*名片*/
+     .Card{
+        position: absolute;
+        right: 55px;
+        top: 54px;
+        border:1px solid #b4b4b6;
+        border-radius: 50px;
+        padding:2px 16px;
+        color:#444444;
+        font-size:14px;
+       
+     }
       .share {
         position: absolute;
         font-size: 24px;
@@ -698,6 +748,9 @@
           color: #444444;
           b {
             color: #e63964;
+          }
+          b:nth-of-type(2){
+            color: #808080;
           }
         }
         .item {
@@ -934,42 +987,90 @@
   /***********评论和回复************/
   
   .news {
-    width: 100%;
-    height: 25px;
-    padding: 0 10%;
-    margin-top: 8px;
+    padding: 12px 14px;
+    overflow: hidden;
+    position: relative;
   }
-  
-  .news i {
+   .news  div{
+     font-size:14px;
+     color: #808080;
+     margin-bottom: 8px;
+   }
+  .news a {
     display: inline-block;
     float: left;
     width: 1px;
     height: 11px;
     border-right: 1px solid #c8c8c8;
-    margin: 7px 8px 0 8px;
+    margin: 5px 22px 0 22px ;
   }
   
   .news p {
-    width: 46%;
     float: left;
     font-size: 12px;
     color: #808080;
+    text-align: center;
+  }
+  .news p:nth-of-type(1){
+   text-align:left; 
   }
   
   .news p span {
-    color: #e63964;
-    font-weight: bold;
+    font-size: 14px;
+    color: #444444;
+    font-weight: 500;
   }
   
-  .news p:nth-of-type(1) {
+  /*.news p:nth-of-type(1) {
     text-align: right;
   }
   
   .news p:nth-of-type(2) {
     text-align: left;
-  }
+  }*/
   
   .resumeWrapper {
     bottom: 48px;
   }
+  /*动态*/
+ .dynamic{
+   overflow: hidden;
+   padding: 12px 14px ;
+   position: relative;
+   p{
+     float: left;
+     font-size: 14px;
+     color: #808080;
+   }
+   svg{
+     float: right;
+      font-size: 15px;
+     color:#808080;
+   }
+ }
+ 
+ /*擅长*/
+.skilled{
+  padding: 12px 14px 17px 14px;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.skilled span{
+  background: #ececee;
+  border-radius: 50px;
+  padding: 4px 11px;
+  font-size:12px;
+  color:#444444;
+  margin-left: 15px;
+}
+.skilled span:nth-of-type(1){
+   margin-left: 0px;
+}
+.skilled p{
+  font-size:14px;
+  color:#808080;
+  margin-bottom: 12px;
+}
 </style>

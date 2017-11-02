@@ -3,6 +3,7 @@
   <div>
     <div class="mui-content">
       <div class="my-top">
+        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">名片{{account_info_complete_percent}}%</div>
         <div class="professor">
           <div class="my-img">
             <img :src="avatar" class="avatar" />
@@ -16,8 +17,7 @@
                 <use xlink:href="#icon-zhuanjiabiaoji"></use>
               </svg>
             </div>
-            <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">名片{{account_info_complete_percent}}%</div>
-            <div class="my-detail">
+         <div class="my-detail">
               <span @tap.stop.prevent="$router.push('/my/Growth')">等级详情 ></span>
               <i></i>
               <span@tap.stop.prevent="$router.push('/my/advantage')">我的擅长 ></span>
@@ -325,7 +325,7 @@
     padding: 0;
     list-style: none;
   }
-  
+
   .bot {
     position: absolute;
     right: 0;
@@ -349,36 +349,35 @@
   }
   
   .my-top {
-    width: 100%;
+    width: 92%;
     overflow: hidden;
-    padding: 0 13px 0 13px;
+    margin-left: 4%;
     background-color: #ffffff;
+    
   }
   
   .professor {
     width: 100%;
     height: 120px;
   }
-  
+  .professor .my-img{
+    /*width: 21%;*/
+    height: 100%;
+    float: left;
+  }
   .professor .avatar {
     width: 69px;
     height: 68.5px;
     border-radius: 50%;
     margin-top: 25px;
-    float: left;
+    
   }
   
   .my-personal {
-    width: 75%;
+    /*width: 79%;*/
     height: 69px;
-    margin: 25px 0 0 6px;
-    padding-right: 4px;
+    margin-top: 25px;
     float: left;
-    position: absolute;
-    right: 8px;
-    /*top: 0;
-    bottom: 0;
-    margin: auto;*/
   }
   
   .my-personal .my-info {
@@ -446,15 +445,16 @@
   
   .account_info {
     position: absolute;
-    right: -10px;
-    width: 83px;
+    right: 0;
+    top: 6%;
     height: 29px;
     border-radius: 100px 0 0 100px;
     background: #808080;
     line-height: 29px;
     color: #FFFFFF;
     font-size: 14px;
-    padding-left: 10px;
+    padding-left: 8px;
+    padding-right: 15px;
   }
   /**********邀请我的好友***************/
   
@@ -662,4 +662,34 @@
   .mui-content {
     background: #fff;
   }
+  
+  /*container-image */
+   /* 适配*/
+@media (min-width: 320px) {
+  .professor .my-img{
+    width: 26%;
+    }
+    .my-personal {
+     width: 74%;
+    }
+   
+}
+@media (min-width: 375px) {
+   .professor .my-img{
+    width: 23%;
+    }
+    .my-personal {
+     width: 77%;
+    }
+   
+}
+@media (min-width: 414px) {
+    .professor .my-img{
+     width: 21%;
+    }
+    .my-personal {
+     width: 79%;
+    }
+}
+  
 </style>
