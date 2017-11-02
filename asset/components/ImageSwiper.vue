@@ -52,7 +52,7 @@
     }
   }
 
-  export default imageSwiper;
+  export default imageSwiper
 </script>
 
 <style lang="scss" module>

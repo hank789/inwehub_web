@@ -1,4 +1,5 @@
 import '../../js/mui'
+
 import Vue from 'vue'
 
 // Vuejs 单页应用在iOS系统下部分APP的webview中 标题不能通过 document.title = xxx 的方式修改;
@@ -63,14 +64,14 @@ import './../../js/iconfont.js'
 window.mui.oldConfirm = window.mui.confirm
 window.mui.confirm = (message, title, btnArray, callback, type) => {
   var newType = window.mui.os.android ? null : type
-  var newCallback = callback;
-  if (mui.os.android) {
+  var newCallback = callback
+  if (window.mui.os.android) {
     newCallback = (e) => {
-      e.index = e.index === 0?1:0;
-      callback(e);
+      e.index = e.index === 0 ? 1 : 0
+      callback(e)
     }
   }
-  mui.oldConfirm(message, title, btnArray, newCallback, newType)
+  window.mui.oldConfirm(message, title, btnArray, newCallback, newType)
 }
 
 Vue.use(VueWechatTitle)

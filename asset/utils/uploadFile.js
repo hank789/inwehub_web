@@ -5,7 +5,6 @@
  * @param callback 选择文件后的回调函数 callback(obj, base64)
  */
 function selectFileH5 (acceptType = '', callback) {
-
   let fileInput = document.body.querySelector('input.upload-file[type=file]')
   if (fileInput == null) {
     fileInput = document.createElement('input')

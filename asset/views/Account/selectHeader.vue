@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "crop" }] */
+
   import '../../styles/cropper.min.css'
   import '../../js/cropper.min'
   import localEvent from '../../stores/localStorage'
@@ -40,7 +42,7 @@
         var image = document.getElementById('image')
         image.src = path
         var t = this
-        new Cropper(image, {
+        var crop = new window.Cropper(image, {
           aspectRatio: 1 / 1,
           viewMode: 1,
           dragMode: 'move',

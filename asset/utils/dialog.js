@@ -23,7 +23,7 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
     var closeDiv = document.createElement('div')
     closeDiv.className = 'alertClose'
     closeDiv.innerHTML = '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-guanbi"></use></svg>'
-    window.mui('.mui-popup-in')[0].insertBefore(closeDiv, window.mui('.mui-popup-in')[0].firstChild);
+    window.mui('.mui-popup-in')[0].insertBefore(closeDiv, window.mui('.mui-popup-in')[0].firstChild)
 
     setTimeout(() => {
       closeDiv.onclick = () => {
@@ -32,7 +32,7 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
     }, 100)
   }
 
-  var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm');
+  var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm')
   if (alertConfirms.length) {
     for (var i = 0; i < alertConfirms.length; i++) {
       (function (index) {

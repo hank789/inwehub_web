@@ -45,7 +45,7 @@
         var image = document.getElementById('image')
         image.src = path
         var t = this
-        this.cropper = new Cropper(image, {
+        this.cropper = new window.Cropper(image, {
           aspectRatio: 1 / 1,
           viewMode: 1,
           dragMode: 'move',

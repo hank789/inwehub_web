@@ -30,7 +30,7 @@ var EventObj = () => {
 
   return {
     addEventListener: addEventListener,
-    addOnceEventListener: addOnceEventListener,
+    addOnceEventListener: addOnceEventListener
   }
 }
 

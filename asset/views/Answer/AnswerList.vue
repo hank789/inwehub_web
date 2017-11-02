@@ -224,7 +224,7 @@
           if (response.data.data.length > 0) {
             this.answers = this.answers.concat(response.data.data)
           }
-          this.loading = 0;
+          this.loading = 0
           window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
         })
       },

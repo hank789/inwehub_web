@@ -28,5 +28,5 @@ function setIncBadgeNumber () {
 
 export {
   setAppBadgeNumber,
-  setIncBadgeNumber,
+  setIncBadgeNumber
 }

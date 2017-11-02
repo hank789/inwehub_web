@@ -341,7 +341,7 @@
         }
 
         var from = this.$router.currentRoute.name
-        //var fullUrl = process.env.H5_ROOT
+        // var fullUrl = process.env.H5_ROOT
 
         if (from === 'share-resume' || from === 'share-resume-old') {
           this.isShare = true
@@ -398,9 +398,9 @@
         dtask.start()
       },
       bindWechatShare () {
-        this.shareOptions.title = 'InweHub名片 | ' + this.resume.info.name + '：' + this.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
+        this.shareOptions.title = 'InweHub名片 | ' + this.resume.info.name + '：' + this.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub'
         this.shareOptions.content = '咨询顾问的专属身份认证@InweHub\n' + this.resume.info.company
-        this.shareOptions.imageUrl = this.resume.info.avatar_url;
+        this.shareOptions.imageUrl = this.resume.info.avatar_url
         this.shareOptions.thumbUrl = this.resume.info.avatar_url + '?x-oss-process=image/resize,h_100,w_100'
         this.shareUrl = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
       },
