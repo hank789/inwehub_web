@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="window.mui-content absolute">
+    <div class="mui-content absolute">
       <div class="login">
 
         <svg class="icon logo" aria-hidden="true">
@@ -32,7 +32,7 @@
             <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
           </div>
         </div>
-        <button type="button" class="window.mui-btn window.mui-btn-block window.mui-btn-primary" @tap.prevent="submit">登录</button>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
 
         <div class="wechatWrapper" @tap.stop.prevent="wechatLogin()">
@@ -304,7 +304,7 @@
   }
 
   /*登录*/
-  .button, .window.mui-btn {
+  .button, .mui-btn {
     border-radius: 5px;
     color: #f2f2f2;
     width: 80%;
@@ -424,7 +424,7 @@
     top: 7px;
   }
 
-  .window.mui-content {
+  .mui-content {
     background-color: #f3f4f6;
     min-height: 568px;
   }

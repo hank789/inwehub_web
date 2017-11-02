@@ -1,235 +1,237 @@
 <template>
-<div>
-  <header class="mui-bar mui-bar-dark mui-bar-nav">
-    <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack()"></a>
-    <h1 class="mui-title">InweHub企业版</h1>
-  </header>
+  <div>
+    <header class="mui-bar mui-bar-dark mui-bar-nav">
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack()"></a>
+      <h1 class="mui-title">InweHub企业版</h1>
+    </header>
 
-  <div class="mui-content" v-show="!loading">
+    <div class="mui-content" v-show="!loading">
 
-    <div class="basic">
-      <div class="header">
-        <div class="avatar">
-          <div class="avatarInner">
-            <img :src="user.info.avatar_url"/>
+      <div class="basic">
+        <div class="header">
+          <div class="avatar">
+            <div class="avatarInner">
+              <img :src="user.info.avatar_url"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="realname">
+          {{ user.info.name }}
+        <i class="separate"></i>
+          {{ user.info.title }}
+
+        </div>
+        <div class="company">
+          {{ user.info.company }}
+
+        </div>
+        <div class="authentication">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-weirenzheng" v-if="user.info.company_status === 0"></use>
+            <use xlink:href="#icon-zhengzaishenhe" v-else-if="user.info.company_status === 1"></use>
+            <use xlink:href="#icon-check-circle" v-else-if="user.info.company_status === 2"></use>
+            <use xlink:href="#icon-times" v-else-if="user.info.company_status === 3"></use>
+          </svg>
+          {{ getRenzhengText(user.info.company_status) }}
+        </div>
+        <div class="buttonWrapper">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                  @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 0">认证企业版
+          </button>
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                  @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 3">重新认证
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="infos">
+          <div class="info"><span>手机：</span>{{ user.info.mobile }}</div>
+          <div class="info"><span>邮箱：</span>{{ user.info.email }}</div>
+          <div class="info"><span>地址：</span>{{ user.info.address_detail }}</div>
+        </div>
+      </div>
+
+      <div class="river"></div>
+
+      <div class="nav">
+        <div class="navWrapper mui-row">
+
+          <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="goSubmitRequirement()">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shuru"></use>
+            </svg>
+            <div>发布需求</div>
+          </div>
+          <div class="line"></div>
+          <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="goRequirement()">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xuqiuguanli"></use>
+            </svg>
+            <div>需求管理</div>
           </div>
         </div>
       </div>
 
-      <div class="realname">
-        {{ user.info.name }}
-        <i class="separate"></i>
-        {{ user.info.title }}
-    </div>
-      <div class="company">
-        {{ user.info.company }}
-    </div>
-      <div class="authentication"><svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-weirenzheng" v-if="user.info.company_status === 0"></use>
-        <use xlink:href="#icon-zhengzaishenhe" v-else-if="user.info.company_status === 1"></use>
-        <use xlink:href="#icon-check-circle" v-else-if="user.info.company_status === 2"></use>
-        <use xlink:href="#icon-times" v-else-if="user.info.company_status === 3"></use>
-      </svg>{{ getRenzhengText(user.info.company_status) }}</div>
-      <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 0">认证企业版</button>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.push('/company/help')" v-show="user.info.company_status === 3">重新认证</button>
-      </div>
-      <div class="line"></div>
-      <div class="infos">
-        <div class="info"><span>手机：</span>{{ user.info.mobile }}</div>
-        <div class="info"><span>邮箱：</span>{{ user.info.email }}</div>
-        <div class="info"><span>地址：</span>{{ user.info.address_detail }}</div>
-      </div>
-    </div>
+      <div class="river"></div>
 
-    <div class="river"></div>
-
-    <div class="nav">
-      <div class="navWrapper mui-row">
-
-        <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="goSubmitRequirement()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shuru"></use>
-          </svg>
-          <div>发布需求</div>
-        </div>
-        <div class="line"></div>
-        <div class="item mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="goRequirement()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xuqiuguanli"></use>
-          </svg>
-          <div>需求管理</div>
+      <div class="moreWrapper">
+        <div class="more">
+          <a class="mui-navigate-right" href="javascript:void(0);"
+             @tap.stop.prevent="$router.pushPlus('/my')">切换至个人页面</a>
         </div>
       </div>
-    </div>
 
-    <div class="river"></div>
-
-    <div class="moreWrapper">
-      <div class="more">
-        <a class="mui-navigate-right" href="javascript:void(0);"  @tap.stop.prevent="$router.pushPlus('/my')">切换至个人页面</a>
-      </div>
     </div>
 
   </div>
-
-</div>
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   export default {
-    data(){
+    data () {
       return {
         loading: 1,
-        user:{
-          info:{}
-        },
+        user: {
+          info: {}
+        }
       }
     },
-    computed: {
-
-    },
+    computed: {},
 
     methods: {
-      goBack(){
-           if (this.$route.query.back) {
-             this.$router.pushPlus(this.$route.query.back);
-           } else {
-             this.$router.pushPlus('/home');
-           }
-      },
-      goSubmitRequirement(){
-          if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
-             this.$router.push('/company/help');
-          } else if (this.user.info.company_status == 1) {
-            this.$router.push('/company/success?type=waiting');
-          } else {
-            this.$router.pushPlus('/project/basic');
-          }
-      },
-      goRequirement(){
-        if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
-          this.$router.push('/company/help');
-        } else if (this.user.info.company_status == 1) {
-          this.$router.push('/company/success?type=waiting');
+      goBack () {
+        if (this.$route.query.back) {
+          this.$router.pushPlus(this.$route.query.back)
         } else {
-          this.$router.push('/project/list');
+          this.$router.pushPlus('/home')
         }
       },
-      getRenzhengText(status){
-         switch(status) {
-           case 0:
-               return '企业未认证';
-               break;
-           case 1:
-               return '审核中';
-               break;
-           case 2:
-               return '认证成功';
-               break;
-           case 3:
-               return '认证失败';
-               break;
-         }
+      goSubmitRequirement () {
+        if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
+          this.$router.push('/company/help')
+        } else if (this.user.info.company_status === 1) {
+          this.$router.push('/company/success?type=waiting')
+        } else {
+          this.$router.pushPlus('/project/basic')
+        }
       },
-      initData() {
+      goRequirement () {
+        if (this.user.info.company_status === 0 || this.user.info.company_status === 3) {
+          this.$router.push('/company/help')
+        } else if (this.user.info.company_status === 1) {
+          this.$router.push('/company/success?type=waiting')
+        } else {
+          this.$router.push('/project/list')
+        }
+      },
+      getRenzhengText (status) {
+        switch (status) {
+          case 0:
+            return '企业未认证'
+          case 1:
+            return '审核中'
+          case 2:
+            return '认证成功'
+          case 3:
+            return '认证失败'
+        }
+      },
+      initData () {
         postRequest(`profile/info`, {}).then(response => {
-
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          this.user = response.data.data;
+          this.user = response.data.data
 
           if (this.user.info) {
-            localEvent.setLocalItem('companyStatus', {status:this.user.info.company_status});
+            localEvent.setLocalItem('companyStatus', {status: this.user.info.company_status})
           }
-
-          this.loading = false;
-        });
+          this.loading = false
+        })
       }
     },
-    mounted(){
+    mounted () {
 
     },
-    created(){
-      //showInwehubWebview();
-      this.initData();
+    created () {
+      // showInwehubWebview();
+      this.initData()
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 
   .basic .header {
-    height:80px;
-    margin-top:20px;
+    height: 80px;
+    margin-top: 20px;
   }
 
   .basic .separate {
     display: inline-block;
     position: relative;
-    top:2px;
+    top: 2px;
     height: 14px;
-    width:1px;
+    width: 1px;
     margin: 0 5px;
     border-left: 1px solid #c8c8c8;
   }
 
   .basic {
     text-align: center;
-    font-size:14px;
+    font-size: 14px;
     background: #fff;
-    padding:0 15px;
+    padding: 0 15px;
   }
 
-  .basic .realname{
-    color:#808080;
+  .basic .realname {
+    color: #808080;
 
   }
 
-  .basic .company{
-    font-size:16px;
-    color:#444;
-    font-weight:500;
-    margin:8px 0 8px;
+  .basic .company {
+    font-size: 16px;
+    color: #444;
+    font-weight: 500;
+    margin: 8px 0 8px;
   }
 
-  .basic .authentication{
-    color:#444;
-    margin-bottom:11px;
+  .basic .authentication {
+    color: #444;
+    margin-bottom: 11px;
   }
 
-  .basic .authentication .icon{
-    color:#03aef9;
-    margin-right:5px;
+  .basic .authentication .icon {
+    color: #03aef9;
+    margin-right: 5px;
   }
 
-  .basic .buttonWrapper{
-    padding:0 35%;
-    margin-bottom:15px;
+  .basic .buttonWrapper {
+    padding: 0 35%;
+    margin-bottom: 15px;
   }
 
-  .basic .buttonWrapper .mui-btn-primary{
-    background:#03aef9;
-    border:1px solid #03aef9;
-    padding:6px 0;
-    font-size:14px;
+  .basic .buttonWrapper .mui-btn-primary {
+    background: #03aef9;
+    border: 1px solid #03aef9;
+    padding: 6px 0;
+    font-size: 14px;
   }
 
-  .basic .line{
-    position:relative;
+  .basic .line {
+    position: relative;
   }
 
-  .basic .line:after{
+  .basic .line:after {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -241,53 +243,56 @@
     background-color: #dcdcdc;
   }
 
-  .basic .infos{
+  .basic .infos {
     text-align: left;
-    padding:15px 0;
+    padding: 15px 0;
   }
 
-  .basic .infos span{
-    color:#808080;
+  .basic .infos span {
+    color: #808080;
   }
 
-  .basic .infos .info{
-    padding:5px 0;
+  .basic .infos .info {
+    padding: 5px 0;
   }
 
-  .river{
-    height:10px;
+  .river {
+    height: 10px;
     background: #ececee;
   }
 
-  .nav{
-    padding:20px 16px;
+  .nav {
+    padding: 20px 16px;
 
   }
-  .nav .navWrapper{
+
+  .nav .navWrapper {
     position: relative;
     background: #f3f4f6;
-    font-size:14px;
-    color:#808080;
-  }
-  .nav .navWrapper .line{
-    position: absolute;
-    left:50%;
-    top:10px;
-    bottom:10px;
-    width:1px;
-    background: #dcdcdc;
-  }
-  .nav .navWrapper .item{
-    display: inline-block;
-    text-align: center;
-    width:50%;
-    padding:20px 0 17px;
+    font-size: 14px;
+    color: #808080;
   }
 
-  .nav .navWrapper .item .icon{
-    font-size:30px;
-    color:#03aef9;
-    margin-bottom:3px;
+  .nav .navWrapper .line {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: #dcdcdc;
+  }
+
+  .nav .navWrapper .item {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+    padding: 20px 0 17px;
+  }
+
+  .nav .navWrapper .item .icon {
+    font-size: 30px;
+    color: #03aef9;
+    margin-bottom: 3px;
   }
 
   .avatar {
@@ -330,23 +335,25 @@
     display: block;
   }
 
-  .more{
+  .more {
     position: relative;
     background: #fff;
   }
 
-  .more a{
+  .more a {
     display: inline-block;
-    padding:10px 15px 13px;
-    font-size:14px;
-    color:#808080;
-    width:100%;
+    padding: 10px 15px 13px;
+    font-size: 14px;
+    color: #808080;
+    width: 100%;
   }
-  .more a:after{
-    font-size:22px;
-    right:8px;
+
+  .more a:after {
+    font-size: 22px;
+    right: 8px;
   }
-  .more:after{
+
+  .more:after {
     position: absolute;
     right: 15px;
     bottom: 0;
@@ -358,8 +365,8 @@
     background-color: #dcdcdc;
   }
 
-  .moreWrapper{
-    padding-bottom:10px;
+  .moreWrapper {
+    padding-bottom: 10px;
     background: #fff;
   }
 </style>

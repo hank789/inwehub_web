@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mui-content" v-if="!loading">
-      <div class="projectPreviewCard" >
+      <div class="projectPreviewCard">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <div class="header">
           <div class="avatar">
@@ -10,7 +10,8 @@
           </div>
         </div>
         <div class="title">{{ info.project_name }}</div>
-        <div class="titleSub">{{ info.company_represent_person_name }}<i class="separate"></i>{{info.company_name}}</div>
+        <div class="titleSub">{{ info.company_represent_person_name }}<i class="separate"></i>{{info.company_name}}
+        </div>
         <div class="state">{{ project_stage_text }}</div>
       </div>
       <div class="section">
@@ -29,8 +30,8 @@
             <div class="title">上传附件：</div>
             <div class="content files">
               <img v-if="info.images.length === 0" width="58" height="58"/>
-              <img v-for="(image, index) in info.images"  width="58" height="58"
-                                            :src="image"/>
+              <img v-for="(image, index) in info.images" width="58" height="58"
+                   :src="image"/>
             </div>
           </div>
         </div>
@@ -46,7 +47,8 @@
               </div>
               <div class="line"></div>
               <div class="mui-col-sm-6 mui-col-xs-6" @tap.stop.prevent="goRequirement()">
-                <div class="row1">{{ info && info.project_begin_time && info.project_begin_time.replace(/-/g, '/') }}</div>
+                <div class="row1">{{ info && info.project_begin_time && info.project_begin_time.replace(/-/g, '/') }}
+                </div>
                 <div class="row2">项目开始时间</div>
               </div>
             </div>
@@ -84,13 +86,18 @@
             <div class="title">企业名称：</div>
             <div class="content">{{info.company_name}}</div>
           </div>
-          <div class="selectedWrapper"><span class="selected" v-for="(industry, index) in info.company_industry_tags" >{{industry.text}}</span></div>
+          <div class="selectedWrapper"><span class="selected"
+                                             v-for="(industry, index) in info.company_industry_tags">{{industry.text}}</span>
+          </div>
           <div class="description">
             {{ info.company_description }}
+
           </div>
           <div class="item">
             <div class="title">项目对接：</div>
-            <div class="content">{{ info.company_represent_person_is_self?'发布者本人':'其他人'}}（{{  info.company_represent_person_name }}）</div>
+            <div class="content">
+              {{ info.company_represent_person_is_self ? '发布者本人' : '其他人'}}（{{ info.company_represent_person_name }}）
+            </div>
           </div>
           <div class="item">
             <div class="title">对接职位：</div>
@@ -131,26 +138,31 @@
                 <use xlink:href="#icon-gongkai"></use>
               </svg>
               需要查看顾问简历
+
             </template>
 
             <template v-if="info.is_apply_request">
-            <svg class="icon two" aria-hidden="true">
-              <use xlink:href="#icon-xuyaoguwentoudishenqing"></use>
-            </svg>
-            需要顾问投递申请
+              <svg class="icon two" aria-hidden="true">
+                <use xlink:href="#icon-xuyaoguwentoudishenqing"></use>
+              </svg>
+              需要顾问投递申请
+
             </template>
 
           </div>
           <div class="item" v-if="info.qualification_requirements && info.qualification_requirements.length">
             <div class="title">资质要求</div>
             <div class="content">
-              <div class="li" v-for="(qualification_requirement, index) in info.qualification_requirements">{{ qualification_requirement }}</div>
+              <div class="li" v-for="(qualification_requirement, index) in info.qualification_requirements">
+                {{ qualification_requirement }}
+              </div>
             </div>
           </div>
           <div class="item" v-if="info.other_requirements && info.other_requirements.length">
             <div class="title">其他条件</div>
             <div class="content">
-              <div class="li" v-for="(other_requirement, index) in info.other_requirements">{{ other_requirement }}</div>
+              <div class="li" v-for="(other_requirement, index) in info.other_requirements">{{ other_requirement }}
+              </div>
             </div>
           </div>
         </div>
@@ -160,114 +172,108 @@
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import {options} from '../../utils/project';
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import { options } from '../../utils/project'
 
   export default {
-    data(){
-      var userInfo = localEvent.getLocalItem('UserInfo');
+    data () {
+      var userInfo = localEvent.getLocalItem('UserInfo')
       return {
-        project_id:null,
-        avatar_url:userInfo.avatar_url,
-        info:{
-          project_description:'',
-          images:[],
-          project_begin_time:'',
+        project_id: null,
+        avatar_url: userInfo.avatar_url,
+        info: {
+          project_description: '',
+          images: [],
+          project_begin_time: ''
         },
         loading: 1
       }
     },
     computed: {
-        project_stage_text() {
-            return options.project_stage_text(this.info.project_stage);
-        },
-      project_type_text(){
-        return options.project_type_text(this.info.project_type);
+      project_stage_text () {
+        return options.project_stage_text(this.info.project_stage)
       },
-      worker_num_text(){
-        return options.worker_num_text(this.info.worker_num);
+      project_type_text () {
+        return options.project_type_text(this.info.project_type)
       },
-      project_cycle_text(){
-        return options.project_cycle_text(this.info.project_cycle);
+      worker_num_text () {
+        return options.worker_num_text(this.info.worker_num)
       },
-      billing_mode_text(){
-        return options.billing_mode_text(this.info.billing_mode);
-
+      project_cycle_text () {
+        return options.project_cycle_text(this.info.project_cycle)
       },
-      work_intensity_text(){
-        return options.work_intensity_text(this.info.work_intensity);
-
+      billing_mode_text () {
+        return options.billing_mode_text(this.info.billing_mode)
       },
-      worker_level_text(){
-        return options.worker_level_text(this.info.worker_level);
-
+      work_intensity_text () {
+        return options.work_intensity_text(this.info.work_intensity)
       },
-      remote_work_text(){
-        return options.remote_work_text(this.info.remote_work);
+      worker_level_text () {
+        return options.worker_level_text(this.info.worker_level)
       },
-      work_address_text(){
-          var bmp = [];
-          for(var i in this.info.work_address) {
-              bmp.push(this.info.work_address[i].text);
-          }
-          return bmp.join('; ');
+      remote_work_text () {
+        return options.remote_work_text(this.info.remote_work)
+      },
+      work_address_text () {
+        var bmp = []
+        for (var i in this.info.work_address) {
+          bmp.push(this.info.work_address[i].text)
+        }
+        return bmp.join('; ')
       }
     },
     methods: {
-      toggleDeatil(event){
-
-        var Desc = event.target.previousSibling.previousSibling.lastChild;
-
+      toggleDeatil (event) {
+        var Desc = event.target.previousSibling.previousSibling.lastChild
 
         if (/hide/.test(Desc.className)) {
-          Desc.className = Desc.className.replace(' hide', '');
-          Desc.className = Desc.className.replace(' mui-ellipsis-3', '');
-          Desc.className += ' show';
+          Desc.className = Desc.className.replace(' hide', '')
+          Desc.className = Desc.className.replace(' mui-ellipsis-3', '')
+          Desc.className += ' show'
 
-          event.target.className = "toggle hide";
+          event.target.className = 'toggle hide'
         } else {
-          Desc.className = Desc.className.replace(' show', '');
-          Desc.className += ' hide mui-ellipsis-3';
+          Desc.className = Desc.className.replace(' show', '')
+          Desc.className += ' hide mui-ellipsis-3'
 
-          event.target.className = "toggle show";
+          event.target.className = 'toggle show'
         }
-
       },
-      getDetail(){
+      getDetail () {
         postRequest(`project/info`, {
-          id:this.project_id
+          id: this.project_id
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          this.info = response.data.data;
-          this.loading = 0;
-        });
+          this.info = response.data.data
+          this.loading = 0
+        })
       }
 
     },
-    mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        this.getDetail();
-      });
+    mounted () {
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        this.getDetail()
+      })
     },
 
-    created(){
-      //showInwehubWebview();
+    created () {
+      // showInwehubWebview();
 
-      this.project_id = this.$route.query.id;
+      this.project_id = this.$route.query.id
       if (!this.project_id) {
-        mui.back();
+        window.mui.back()
       }
 
-      this.getDetail();
+      this.getDetail()
     }
-  };
+  }
 </script>
 
 <style scoped>
@@ -280,7 +286,7 @@
 
   .projectPreviewCard a {
     position: absolute;
-    z-index:777;
+    z-index: 777;
     color: #fff;
     font-size: 30px;
     top: 12px;
@@ -550,9 +556,10 @@
     border-radius: 3px;
   }
 
-  .section .contentWrapper .files{
-    padding-top:5px;
+  .section .contentWrapper .files {
+    padding-top: 5px;
   }
+
   .section .contentWrapper .files img {
     border: 1px solid #e5e5e5;
     border-radius: 4px;
@@ -560,7 +567,8 @@
     height: 58px;
     margin-right: 15px;
   }
-  .section .contentWrapper .requirement .icon:first-child{
-    margin-left:0 !important;
+
+  .section .contentWrapper .requirement .icon:first-child {
+    margin-left: 0 !important;
   }
 </style>

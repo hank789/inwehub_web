@@ -6,14 +6,14 @@
       <h1 class="mui-title">客服小哈</h1>
     </header>
     <div class="mui-content absolute" id='contentwrapper'>
-      <RefreshList ref="RefreshList" 
-        v-model="list" :api="'im/messages'" 
-        :autoShowEmpty="false" 
-        :pageMode="true" 
-        :downLoadMoreMode="true" 
-        :isShowUpToRefreshDescription="false" 
-        :prevOtherData="{contact_id:0}" 
-        :nextOtherData="{contact_id:0}" 
+      <RefreshList ref="RefreshList"
+        v-model="list" :api="'im/messages'"
+        :autoShowEmpty="false"
+        :pageMode="true"
+        :downLoadMoreMode="true"
+        :isShowUpToRefreshDescription="false"
+        :prevOtherData="{contact_id:0}"
+        :nextOtherData="{contact_id:0}"
         :list="list" class="listWrapper">
 
         <ul class="user" id="myData">
@@ -58,26 +58,22 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request';
-  import uploadHeader from '../../components/uploadHeader.vue';
-  import RefreshList from '../../components/refresh/List.vue';
-  import { getLocalUserInfo, isCompanyStatus } from '../../utils/user';
-  import localEvent from '../../stores/localStorage';
+  import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
+  import { getLocalUserInfo } from '../../utils/user'
   const Chat = {
     data: () => ({
       list: [],
       page: 1,
-      comment: "",
-      id: "",
-      avatar: "",
+      comment: '',
+      id: '',
+      avatar: '',
       flag: true
-
     }),
-    created() {
-      //id  和  头像；
-      this.id = getLocalUserInfo().user_id;
-      this.avatar = getLocalUserInfo().avatar_url;
-
+    created () {
+      // id  和  头像；
+      this.id = getLocalUserInfo().user_id
+      this.avatar = getLocalUserInfo().avatar_url
     },
     computed: {
 
@@ -86,49 +82,49 @@
       RefreshList
     },
     methods: {
-      //回车键发送‘
-      show: function(ev) {
-        if(ev.keyCode == 13) {
-          //发送
-          this.message();
+      // 回车键发送‘
+      show: function (ev) {
+        if (ev.keyCode === 13) {
+          // 发送
+          this.message()
         }
       },
-      //获取本地时间；
-      CurentTime() {
-        var now = new Date();
+      // 获取本地时间；
+      CurentTime () {
+        var now = new Date()
 
-        var year = now.getFullYear(); //年
-        var month = now.getMonth() + 1; //月
-        var day = now.getDate(); //日
+        var year = now.getFullYear() // 年
+        var month = now.getMonth() + 1 // 月
+        var day = now.getDate() // 日
 
-        var hh = now.getHours(); //时
-        var mm = now.getMinutes(); //分
-        var ss = now.getSeconds(); //秒
+        var hh = now.getHours() // 时
+        var mm = now.getMinutes() // 分
+        var ss = now.getSeconds() // 秒
 
-        var clock = year + "-";
+        var clock = year + '-'
 
-        if(month < 10)
-          clock += "0";
+        if (month < 10) {
+          clock += '0'
+        }
+        clock += month + '-'
 
-        clock += month + "-";
+        if (day < 10) {
+          clock += '0'
+        }
+        clock += day + ' '
 
-        if(day < 10)
-          clock += "0";
+        if (hh < 10) {
+          clock += '0'
+        }
+        clock += hh + ':'
+        if (mm < 10) clock += '0'
+        clock += mm + ':'
 
-        clock += day + " ";
-
-        if(hh < 10)
-          clock += "0";
-
-        clock += hh + ":";
-        if(mm < 10) clock += '0';
-        clock += mm + ":";
-
-        if(ss < 10) clock += '0';
-        clock += ss;
-        return(clock);
+        if (ss < 10) clock += '0'
+        clock += ss
+        return (clock)
       },
-      chat(obj) {
+      chat (obj) {
         var item = {
           created_at: obj.created_at,
           data: {
@@ -136,17 +132,16 @@
           },
           id: obj.id,
           user_id: 0,
-          avatar: obj.avatar,
-        };
-        this.list = this.list.concat(item);
-        this.flag = true;
+          avatar: obj.avatar
+        }
+        this.list = this.list.concat(item)
+        this.flag = true
         // console.log(item);
         //  console.log(this.list);
       },
       // 消息；
-      message() {
-        let id = parseInt(this.$route.params.id);
-        if(this.comment) {
+      message () {
+        if (this.comment) {
           var item = {
             // created_at: new Date().toLocaleString(),
             created_at: this.CurentTime(),
@@ -154,62 +149,56 @@
               text: this.comment
             },
             id: 2,
-            user_id: this.id,
+            user_id: this.id
+          }
 
-          };
-
-          this.list = this.list.concat(item);
+          this.list = this.list.concat(item)
 
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: 0
           }).then(response => {
-            var code = response.data.code;
-            //如果请求不成功提示信息 并且返回上一页；
-            if(code !== 1000) {
-              mui.alert(response.data.message);
-              mui.back();
-              return;
+            var code = response.data.code
+            // 如果请求不成功提示信息 并且返回上一页；
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
             }
 
-            if(response.data.data) {
-
-              this.comment = '';
+            if (response.data.data) {
+              this.comment = ''
 
               //            this.list = this.list.concat(response.data.data);
 
-              this.flag = true;
-
+              this.flag = true
             }
 
-            this.loading = 0;
-          });
-
+            this.loading = 0
+          })
         }
-
       }
-      //end；
+      // end；
+    },
+    mounted () {
 
     },
-    mounted() {
-
-    },
-    updated() {
-      if(this.flag) {
-        this.flag = false;
+    updated () {
+      if (this.flag) {
+        this.flag = false
 
         this.$nextTick(() => {
-          this.$refs.RefreshList.scrollToBottom();
-        });
+          this.$refs.RefreshList.scrollToBottom()
+        })
       }
     }
   }
-  export default Chat;
+  export default Chat
 </script>
 
 <style scoped>
   /*清掉自带样式*/
-  
+
   div,
   p,
   span,
@@ -223,12 +212,12 @@
     list-style: none;
     font-style: normal;
   }
-  
+
   .mui-content {
     background: #f3f4f6;
   }
   /*input 输入框*/
-  
+
   .message {
     width: 100%;
     height: 47px;
@@ -238,7 +227,7 @@
     padding: 0 10px;
     z-index: 999;
   }
-  
+
   .message input {
     width: 88%;
     height: 35px;
@@ -249,7 +238,7 @@
     margin-top: 6px;
     float: left;
   }
-  
+
   .message svg {
     font-size: 32px;
     margin-top: 7px;
@@ -257,38 +246,38 @@
     float: right;
   }
   /*内容区域*/
-  
+
   .user {
     width: 96%;
     margin-left: 2%;
     overflow: hidden;
     /*background: #CCCCCC;*/
   }
-  
+
   .user li {
     width: 100%;
     overflow: hidden;
     /*border: 1px solid #CCCCCC;*/
   }
-  
+
   .consumer p:nth-of-type(1) {
     text-align: center;
     font-size: 13px;
     color: #b4b4b6;
     line-height: 46px;
   }
-  
+
   .consumer p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .consumer p:nth-of-type(2) img {
     width: 42px;
     height: 42px;
     float: left;
   }
-  
+
   .consumer p:nth-of-type(2) span {
     position: relative;
     float: left;
@@ -302,7 +291,7 @@
     background: #FFFFFF;
     padding: 7px;
   }
-  
+
   .consumer p:nth-of-type(2) span:after {
     content: "";
     display: block;
@@ -323,12 +312,12 @@
     margin: auto;
   }
   /*客服*/
-  
+
   .Customerservice {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .Customerservice p:nth-of-type(1) {
     width: 100%;
     text-align: center;
@@ -336,19 +325,19 @@
     color: #b4b4b6;
     line-height: 46px;
   }
-  
+
   .Customerservice p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
   }
-  
+
   .Customerservice p:nth-of-type(2) img {
     width: 42px;
     height: 42px;
     float: right;
     border-radius: 8px;
   }
-  
+
   .Customerservice p:nth-of-type(2) span {
     position: relative;
     float: right;
@@ -362,7 +351,7 @@
     background: #FFFFFF;
     padding: 7px;
   }
-  
+
   .Customerservice p:nth-of-type(2) span:after {
     content: "";
     display: block;
@@ -379,11 +368,11 @@
     top: 15px;
     margin: auto;
   }
-  
+
   .listWrapper {
     bottom: 47px;
   }
-  
+
   .mui-scroll-wrapper {
     /*position: absolute;
     z-index: 2;

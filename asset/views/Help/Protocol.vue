@@ -6,49 +6,50 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-        <div class="content" v-html="html">
+      <div class="content" v-html="html">
 
-        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+
+  import { postRequest } from '../../utils/request'
 
   var Protocol = {
     data: () => ({
       html: '',
-      loading:1
+      loading: 1
     }),
-    mounted(){
+    mounted () {
 
     },
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
       postRequest(`system/service_register`, {}).then(response => {
-        var code = response.data.code;
+        var code = response.data.code
         if (code !== 1000) {
-          mui.alert(response.data.message);
-          mui.back();
-          return;
+          window.mui.alert(response.data.message)
+          window.mui.back()
+          return
         }
 
-        this.html = response.data.data.html;
-        this.loading = 0;
-      });
+        this.html = response.data.data.html
+        this.loading = 0
+      })
     }
   }
-  export default Protocol;
+  export default Protocol
 </script>
 
 
 <style scoped>
-.mui-content{
-  background: #fff;
-}
-  .content{
-    padding:10px 15px;
+  .mui-content {
+    background: #fff;
+  }
+
+  .content {
+    padding: 10px 15px;
   }
 </style>

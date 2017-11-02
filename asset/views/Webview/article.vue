@@ -1,40 +1,35 @@
 <template>
-<div>
+  <div>
 
-</div>
+  </div>
 </template>
 
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  import axios from 'axios';
-  import { openWebviewByHome } from '../../utils/webview';
+  import { openWebviewByHome } from '../../utils/webview'
 
   export default {
     data: () => ({
-      loading:1
+      loading: 1
     }),
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
     },
     methods: {
-        load_article(id,url,pathUrl,title,img_url) {
-          var ws = plus.webview.currentWebview();
-          openWebviewByHome(ws,id,url,pathUrl,title,img_url);
-        }
+      load_article (id, url, pathUrl, title, imgUrl) {
+        var ws = window.plus.webview.currentWebview()
+        openWebviewByHome(ws, id, url, pathUrl, title, imgUrl)
+      }
     },
-    watch: {
-
-    },
-    mounted(){
+    watch: {},
+    mounted () {
       document.addEventListener('load_article', (event) => {
-        this.load_article(event.detail.article_id,event.detail.article_url,event.detail.article_comment_url,event.detail.article_title,event.detail.article_img_url);
-      });
-      mui.plusReady(() => {
-        var ws = plus.webview.currentWebview();
-        openWebviewByHome(ws,ws.id,ws.article_url,ws.article_comment_url,ws.article_title,ws.article_img_url);
-      });
-
+        this.load_article(event.detail.article_id, event.detail.article_url, event.detail.article_comment_url, event.detail.article_title, event.detail.article_img_url)
+      })
+      window.mui.plusReady(() => {
+        var ws = window.plus.webview.currentWebview()
+        openWebviewByHome(ws, ws.id, ws.article_url, ws.article_comment_url, ws.article_title, ws.article_img_url)
+      })
     }
   }
 

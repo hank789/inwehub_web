@@ -21,59 +21,55 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  import {postRequest} from '../../utils/request';
-  import erweima from '../../statics/images/xiaoha-erweima.jpeg';
+  import localEvent from '../../stores/localStorage'
+  import { postRequest } from '../../utils/request'
+  import erweima from '../../statics/images/xiaoha-erweima.jpeg'
 
-  export  default {
-    data(){
-      const currentUser = localEvent.getLocalItem('UserInfo');
+  export default {
+    data () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
 
       return {
-        title:'发现',
-        erweima:erweima,
+        title: '发现',
+        erweima: erweima,
         account_info_complete_percent: currentUser.account_info_complete_percent
       }
     },
     methods: {
-      discover() {
-        postRequest(`system/func_zan`, {content:this.title}).then(response => {
-          var code = response.data.code;
+      discover () {
+        postRequest(`system/func_zan`, {content: this.title}).then(response => {
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-
-          mui.toast("点赞成功+1");
-        });
-
-
-
+          window.mui.toast('点赞成功+1')
+        })
       }
     },
     created () {
       if (this.$route.query.title) {
-         this.title = this.$route.query.title;
+        this.title = this.$route.query.title
       }
     }
-  };
+  }
 </script>
 
 
 <style scoped>
 
-  .discoverDetail{
-    padding:20px;
-    margin-top:100px;
+  .discoverDetail {
+    padding: 20px;
+    margin-top: 100px;
     text-align: center;
     line-height: 26px;
   }
 
-  .discoverDetail .mui-icon{
-    font-size:50px;
-    margin-bottom:20px;
+  .discoverDetail .mui-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
 
   }
 </style>

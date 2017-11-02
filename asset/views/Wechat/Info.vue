@@ -13,7 +13,8 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-mima"></use>
       </svg>
-      <input class="text" ref="password" type="password" @focus="focus" @blur="blur" placeholder="填写您的登陆密码" name="password"
+      <input class="text" ref="password" type="password" @focus="focus" @blur="blur" placeholder="填写您的登陆密码"
+             name="password"
              v-model.trim.num="password" autocomplete="off"/>
     </div>
 
@@ -21,6 +22,7 @@
     <div class="buttonWrapper">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
               @click.prevent="register">确认
+
 
       </button>
     </div>
@@ -33,37 +35,36 @@
 
 
 <script>
-  import request, {createAPI, apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import {USERS_APPEND} from '../../stores/types';
-  import {NOTICE} from '../../stores/types';
-  import {getUserInfo, getAvatar} from '../../utils/user';
-  import {clearAllWebViewCache} from '../../utils/webview';
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import { NOTICE, USERS_APPEND } from '../../stores/types'
+  import { getUserInfo } from '../../utils/user'
+  import { clearAllWebViewCache } from '../../utils/webview'
 
   export default {
     data: () => ({
-      isNeedRegistrationCode:false,
-      phone:'',
-      code:'',
-      registration_code:'',
-      openid:'',
-      realname: '', //真实姓名
+      isNeedRegistrationCode: false,
+      phone: '',
+      code: '',
+      registration_code: '',
+      openid: '',
+      realname: '', // 真实姓名
       password: '', // 登录密码
       disableRegister: true,
-      isRegisterSuccess:false,
-      device_code:'',
-      redirect:'',
+      isRegisterSuccess: false,
+      device_code: '',
+      redirect: ''
     }),
     watch: {
       realname: function (newValue, oldValue) {
-        this.checkValid();
+        this.checkValid()
       },
       password: function (newValue, oldValue) {
-        this.checkValid();
+        this.checkValid()
       }
     },
     created () {
-      var data = localEvent.getLocalItem('wechatInfo');
+      var data = localEvent.getLocalItem('wechatInfo')
 
       if (!data || data.length === 0) {
         this.$store.dispatch(NOTICE, cb => {
@@ -71,71 +72,66 @@
             text: '发生一些错误',
             time: 1500,
             status: false
-          });
-        });
-        this.$router.back();
-        return;
+          })
+        })
+        this.$router.back()
+        return
       }
 
-      this.phone = data.mobile;
-      this.code = data.code;
-      this.registration_code = data.registration_code;
-      this.openid = data.openid;
-      this.redirect = data.redirect;
+      this.phone = data.mobile
+      this.code = data.code
+      this.registration_code = data.registration_code
+      this.openid = data.openid
+      this.redirect = data.redirect
 
-      if (mui.os.plus) {
-        mui.plusReady(function () {
-           this.device_code = plus.device.uuid;
-        });
+      if (window.mui.os.plus) {
+        window.mui.plusReady(function () {
+          this.device_code = window.plus.device.uuid
+        })
       }
     },
     methods: {
-      checkValid(){
+      checkValid () {
         if (!this.realname) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
 
         if (!this.password) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
 
-        this.disableRegister = false;
+        this.disableRegister = false
       },
-      getCacheData(){
-
-        var data = localEvent.getLocalItem('weChatCacheRegister');
+      getCacheData () {
+        var data = localEvent.getLocalItem('weChatCacheRegister')
         if (data) {
-          this.realname = data.realname;
-          this.password = data.password;
+          this.realname = data.realname
+          this.password = data.password
         }
-
       },
-      setCacheData(){
-
+      setCacheData () {
         var CacheRegister = {
           'realname': this.realname,
-          'password': this.password,
-        };
-        localEvent.setLocalItem('weChatCacheRegister', CacheRegister);
+          'password': this.password
+        }
+        localEvent.setLocalItem('weChatCacheRegister', CacheRegister)
       },
-      getCode(){
+      getCode () {
 
       },
-      focus(event){
-        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
-        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
-        event.target.parentElement.className += ' focus';
+      focus (event) {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' focus'
       },
-      blur(){
-        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
-        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
-        event.target.parentElement.className += ' blur';
+      blur () {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' blur'
       },
       register () {
-
-
         var data = {
           mobile: this.phone,
           name: this.realname,
@@ -143,54 +139,50 @@
           password: this.password,
           registration_code: this.registration_code,
           openid: this.openid,
-          device_code: this.device_code,
-        };
+          device_code: this.device_code
+        }
         postRequest('auth/wxgzh/register', data)
           .then(response => {
-            var code = response.data.code;
+            var code = response.data.code
 
             if (code !== 1000) {
-              mui.toast(response.data.message);
-              return;
+              window.mui.toast(response.data.message)
+              return
             }
 
-            this.isRegisterSuccess = true;
+            this.isRegisterSuccess = true
 
-            localEvent.clearLocalItem('wechatInfo');
-            localEvent.clearLocalItem('weChatCacheRegister');
+            localEvent.clearLocalItem('wechatInfo')
+            localEvent.clearLocalItem('weChatCacheRegister')
 
-            localEvent.setLocalItem('UserLoginInfo', response.data.data);
+            localEvent.setLocalItem('UserLoginInfo', response.data.data)
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              cb(user);
-              mixpanelIdentify();
+              cb(user)
+              window.mixpanelIdentify()
 
-              clearAllWebViewCache();
+              clearAllWebViewCache()
 
-              if (mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
+              if (window.mui.os.plus) {
+                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
               } else {
-                this.$router.replace(this.redirect);
+                this.$router.replace(this.redirect)
               }
-            }));
-
-          });
-      },
-
-
-    },
-    mounted(){
-      if (!this.isRegisterSuccess) {
-        this.getCacheData();
+            }))
+          })
       }
     },
-    beforeRouteLeave(to, from, next) {
-
+    mounted () {
       if (!this.isRegisterSuccess) {
-        this.setCacheData();
+        this.getCacheData()
+      }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (!this.isRegisterSuccess) {
+        this.setCacheData()
       }
 
-      next();
+      next()
     }
   }
 </script>

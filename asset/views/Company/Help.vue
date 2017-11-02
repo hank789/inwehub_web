@@ -46,11 +46,9 @@
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
 
   export default {
-    data(){
+    data () {
       return {
         loading: 1
       }
@@ -59,15 +57,15 @@
 
     },
     methods: {
-      
-    },
-    mounted(){
 
     },
-    created(){
+    mounted () {
+
+    },
+    created () {
 
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">

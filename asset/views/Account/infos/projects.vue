@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    <header class="window.mui-bar window.mui-bar-nav">
-      <a class="window.mui-action-back window.mui-icon window.mui-icon-left-nav window.mui-pull-left"></a>
-      <h1 class="window.mui-title">项目经历</h1>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">项目经历</h1>
     </header>
 
-    <div class="window.mui-content absolute">
+    <div class="mui-content absolute">
       <div v-show="!loading" id="container">
 
         <div class="container" v-show="projects.length === 0">
@@ -16,18 +16,18 @@
           <p>暂时还没有数据呀～</p>
         </div>
 
-        <ul class="window.mui-table-view window.mui-table-view-chevron" id="OA_task_1">
-          <li v-for="(project, index) in projects" class="intro  window.mui-table-view-cell">
+        <ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
+          <li v-for="(project, index) in projects" class="intro  mui-table-view-cell">
 
-            <div class="window.mui-slider-right window.mui-disabled" id="roof" @tap.stop.prevent="deleteItem(project.id, index)">
-              <a class="window.mui-btn window.mui-btn-red " style="background: #fa4975">删除</a>
+            <div class="mui-slider-right mui-disabled" id="roof" @tap.stop.prevent="deleteItem(project.id, index)">
+              <a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
             </div>
-            <div class="window.mui-slider-handle  slider">
-              <p class="window.mui-ellipsis"> {{ project.project_name }}</p>
+            <div class="mui-slider-handle  slider">
+              <p class="mui-ellipsis"> {{ project.project_name }}</p>
               <p>
 
-                <span class="window.mui-ellipsis">{{ project.begin_time }} 至 {{ project.end_time }}</span>
-                <span class="window.mui-ellipsis">{{ project.title }}</span>
+                <span class="mui-ellipsis">{{ project.begin_time }} 至 {{ project.end_time }}</span>
+                <span class="mui-ellipsis">{{ project.title }}</span>
               </p>
             </div>
             <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/project/'+project.id)">
@@ -114,7 +114,7 @@
 </script>
 
 <style scoped>
-  .window.mui-content {
+  .mui-content {
     background: #FFFFFF;
   }
 
@@ -200,7 +200,7 @@
     z-index: 999;
   }
 
-  .window.mui-table-view:after {
+  .mui-table-view:after {
     position: absolute;
     right: 15px;
     bottom: 0;
@@ -210,7 +210,7 @@
     background: #f2f2f2;
   }
 
-  .window.mui-table-view-cell:after {
+  .mui-table-view-cell:after {
     position: absolute;
     right: 15px;
     bottom: 0;

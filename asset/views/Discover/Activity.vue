@@ -12,7 +12,8 @@
           <div class="">
             <div class="title">暂无活动</div>
             <div class="subTitle">我们会按照用户级别分批推送最新活动，<br/>
-等级较高的用户可优先获取最新的信息！<br/><br/>请积极提升个人的平台成长值和贡献值！</div>
+              等级较高的用户可优先获取最新的信息！<br/><br/>请积极提升个人的平台成长值和贡献值！
+            </div>
           </div>
         </div>
       </div>
@@ -21,9 +22,9 @@
   </div>
 </template>
 <script>
-  export  default {
+  export default {
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
     }
-  };
+  }
 </script>

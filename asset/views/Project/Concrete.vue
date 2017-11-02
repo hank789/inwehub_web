@@ -148,7 +148,9 @@
 
 
       <div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()"  :disabled="disabledButton">下一步
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()"
+                :disabled="disabledButton">下一步
+
         </button>
       </div>
 
@@ -158,21 +160,20 @@
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import {selectTime, selectKeyValue, selectCityThreeLevel} from '../../utils/select';
-  import cityData from '../../components/city/city.data';
-  import {setCacheInfo, getCacheInfo} from '../../utils/project';
+  import { postRequest } from '../../utils/request'
+  import { selectTime, selectKeyValue, selectCityThreeLevel } from '../../utils/select'
+  import cityData from '../../components/city/city.data'
+  import { setCacheInfo, getCacheInfo } from '../../utils/project'
 
   export default {
-    data(){
-      var cacheData = getCacheInfo();
+    data () {
+      var cacheData = getCacheInfo()
       if (cacheData && cacheData.concrete) {
-        return cacheData.concrete;
+        return cacheData.concrete
       }
 
       return {
-        project_id:null,
+        project_id: null,
         worker_num: '',
         worker_num_text: '',
         worker_level: 1,
@@ -190,137 +191,125 @@
         loading: 1
       }
     },
-    computed: {
-    },
+    computed: {},
     methods: {
-      isEnableButton:function () {
-        this.disabledButton = true;
+      isEnableButton: function () {
+        this.disabledButton = true
         if (!this.worker_num) {
-
-          return;
+          return
         }
 
         if (!this.worker_level) {
-
-          return;
+          return
         }
 
         if (!this.project_amount) {
-
-          return;
+          return
         }
 
         if (!this.billing_mode) {
-
-          return;
+          return
         }
 
         if (!this.project_begin_time) {
-
-          return;
+          return
         }
 
         if (!this.project_cycle) {
-
-          return;
+          return
         }
 
         if (!this.work_intensity) {
-
-          return;
+          return
         }
 
         if (this.work_address.length === 0) {
-          return;
+          return
         }
 
-        this.disabledButton = false;
+        this.disabledButton = false
       },
       submit: function () {
         if (!this.worker_num) {
-          mui.toast('请输入顾问数量');
-          return;
+          window.mui.toast('请输入顾问数量')
+          return
         }
 
         if (!this.worker_level) {
-          mui.toast('请输入顾问级别');
-          return;
+          window.mui.toast('请输入顾问级别')
+          return
         }
 
         if (!this.project_amount) {
-          mui.toast('请输入项目预算');
-          return;
+          window.mui.toast('请输入项目预算')
+          return
         }
 
         if (!this.billing_mode) {
-          mui.toast('请输入计费模式');
-          return;
+          window.mui.toast('请输入计费模式')
+          return
         }
 
         if (!this.project_begin_time) {
-          mui.toast('请输入开始时间');
-          return;
+          window.mui.toast('请输入开始时间')
+          return
         }
 
         if (!this.project_cycle) {
-          mui.toast('请输入项目周期');
-          return;
+          window.mui.toast('请输入项目周期')
+          return
         }
 
         if (!this.work_intensity) {
-          mui.toast('请输入工作密度');
-          return;
+          window.mui.toast('请输入工作密度')
+          return
         }
 
         if (this.work_address.length === 0) {
-          mui.toast('请输入工作地点');
-          return;
+          window.mui.toast('请输入工作地点')
+          return
         }
 
         var data = {
-          project_id:this.project_id,
-          worker_num:this.worker_num,
-          worker_level:this.worker_level,
-          project_amount:this.project_amount,
-          billing_mode:this.billing_mode,
-          project_begin_time:this.project_begin_time,
-          project_cycle:this.project_cycle,
-          work_intensity:this.work_intensity,
-          remote_work:this.remote_work,
-          travel_expense:this.travel_expense,
-          work_address:this.work_address,
-        };
+          project_id: this.project_id,
+          worker_num: this.worker_num,
+          worker_level: this.worker_level,
+          project_amount: this.project_amount,
+          billing_mode: this.billing_mode,
+          project_begin_time: this.project_begin_time,
+          project_cycle: this.project_cycle,
+          work_intensity: this.work_intensity,
+          remote_work: this.remote_work,
+          travel_expense: this.travel_expense,
+          work_address: this.work_address
+        }
 
         postRequest(`project/step_two`, data).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
+          setCacheInfo('concrete', this.$data)
 
-          setCacheInfo('concrete', this.$data);
-
-          this.$router.push('/project/company?pid='+this.project_id);
-        });
-
-
+          this.$router.push('/project/company?pid=' + this.project_id)
+        })
       },
       closeAddress: function (index) {
-        this.work_address.splice(index, 1);
+        this.work_address.splice(index, 1)
       },
       selectProjectBeginTime: function () {
         selectTime({
-          "type": "date",
-          "beginYear": (new Date()).getFullYear(),
-          "value": this.project_begin_time
+          'type': 'date',
+          'beginYear': (new Date()).getFullYear(),
+          'value': this.project_begin_time
         }, (selected) => {
-          this.project_begin_time = selected;
-        });
+          this.project_begin_time = selected
+        })
       },
 
-      selectCounselorNum(){
-
+      selectCounselorNum () {
         selectKeyValue(this.worker_num, [
           {
             value: '1',
@@ -349,15 +338,14 @@
           {
             value: '7',
             text: '不确定'
-          },
+          }
         ], (value, key) => {
-          this.worker_num = value;
-          this.worker_num_text = key;
-        });
+          this.worker_num = value
+          this.worker_num_text = key
+        })
       },
 
-      selectProjectCycle(){
-
+      selectProjectCycle () {
         selectKeyValue(this.project_cycle, [
           {
             value: '1',
@@ -394,14 +382,13 @@
           {
             value: '9',
             text: '其他'
-          },
+          }
         ], (value, key) => {
-          this.project_cycle = value;
-          this.project_cycle_text = key;
-        });
+          this.project_cycle = value
+          this.project_cycle_text = key
+        })
       },
-      selectWorkIntensity(){
-
+      selectWorkIntensity () {
         selectKeyValue(this.work_intensity, [
           {
             value: '1',
@@ -438,83 +425,83 @@
           {
             value: '9',
             text: '我不确定'
-          },
+          }
         ], (value, key) => {
-          this.work_intensity = value;
-          this.work_intensity_text = key;
-        });
+          this.work_intensity = value
+          this.work_intensity_text = key
+        })
       },
-      selectCity(){
+      selectCity () {
         var newCityData = [
           {
             value: '1',
             text: '中国',
-            children: cityData,
+            children: cityData
           },
           {
             value: '2',
             text: '海外',
-            children: [],
-          },
-        ];
+            children: []
+          }
+        ]
 
-        var defaultValues = null;
+        var defaultValues = null
 
         selectCityThreeLevel(defaultValues, newCityData, (items) => {
           var obj = {
             value: items[2].value ? items[2].value : items[0].value,
-            text: items[2].text ? items[1].text + ' ' + items[2].text : items[0].text,
-          };
-          if (obj.value === '2') {
-              mui.prompt('输入海外地点', '', ' ', ['确定','取消'], (e) => {
-                if (e.index === 0) {
-                  if (e.value) {
-                    obj = {
-                      value: e.value,
-                      text: e.value,
-                    };
-                    this.work_address.push(obj);
-                  }
-                }
-              }, 'div');
-          } else {
-            this.work_address.push(obj);
+            text: items[2].text ? items[1].text + ' ' + items[2].text : items[0].text
           }
-        });
+          if (obj.value === '2') {
+            window.mui.prompt('输入海外地点', '', ' ', ['确定', '取消'], (e) => {
+              if (e.index === 0) {
+                if (e.value) {
+                  obj = {
+                    value: e.value,
+                    text: e.value
+                  }
+                  this.work_address.push(obj)
+                }
+              }
+            }, 'div')
+          } else {
+            this.work_address.push(obj)
+          }
+        })
       }
     },
 
-    mounted(){
+    mounted () {
 
     },
     watch: {
       worker_num: function (newMoney, oldMoney) {
-        this.isEnableButton();
+        this.isEnableButton()
       },
       project_amount: function (newMoney, oldMoney) {
-        this.isEnableButton();
+        this.isEnableButton()
       },
       project_begin_time: function (newMoney, oldMoney) {
-        this.isEnableButton();
+        this.isEnableButton()
       },
       project_cycle: function (newMoney, oldMoney) {
-        this.isEnableButton();
+        this.isEnableButton()
       },
       work_intensity: function (newMoney, oldMoney) {
-        this.isEnableButton();
+        this.isEnableButton()
       },
       work_address: function (newMoney, oldMoney) {
-        this.isEnableButton();
-      },
+        this.isEnableButton()
+      }
     },
 
-    created(){
-      this.project_id = this.$route.query.pid;
+    created () {
+      this.project_id = this.$route.query.pid
       if (!this.project_id) {
-          mui.back();
+        window.mui.back()
       }
     }
-  };
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>

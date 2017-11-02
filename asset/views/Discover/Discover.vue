@@ -24,22 +24,21 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  export  default {
-    data(){
-      const currentUser = localEvent.getLocalItem('UserInfo');
-
+  import localEvent from '../../stores/localStorage'
+  export default {
+    data () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
       return {
         account_info_complete_percent: currentUser.account_info_complete_percent
       }
     },
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
     },
-    mounted(){
+    mounted () {
 
     }
-  };
+  }
 </script>
 
 
