@@ -14,16 +14,17 @@
           <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/help/question')" class="mui-navigate-right">常见问题</a>
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/help/question')"
+             class="mui-navigate-right">常见问题</a>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about')" class="mui-navigate-right">关于我们</a>
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about')"
+             class="mui-navigate-right">关于我们</a>
         </li>
         <li class="mui-table-view-cell">
           <a class="mui-navigate-right" @tap.stop.prevent="starApp">前往评价</a>
         </li>
       </ul>
-
 
 
       <div class="mui-table-view noAfter">
@@ -33,9 +34,11 @@
 
           <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut" v-show="!isWeiXin()">
             退出应用
+
           </button>
           <div class="copyright">Copyright © 2017 InweTech.<br/>
-All Rights Reserved</div>
+            All Rights Reserved
+          </div>
         </div>
 
       </div>
@@ -45,16 +48,16 @@ All Rights Reserved</div>
   </div>
 </template>
 <script>
-  import localEvent from '../../stores/localStorage';
-  import {NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
-  import {apiRequest} from '../../utils/request';
+  import localEvent from '../../stores/localStorage'
+  import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../../stores/types'
+  import { apiRequest } from '../../utils/request'
 
-  export  default {
-    data(){
-      const currentUser = localEvent.getLocalItem('UserInfo');
+  export default {
+    data () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
 
       return {
-        appVersion:'',
+        appVersion: '',
         im_tokenMsg: '',
         name: currentUser.name,
         phone: currentUser.phone,
@@ -66,86 +69,86 @@ All Rights Reserved</div>
       }
     },
     created () {
-      var obj = localEvent.getLocalItem('app_version');
+      var obj = localEvent.getLocalItem('app_version')
       if (obj) {
-        if (mui.os.ios && obj.version) {
-          this.appVersion = 'for iPhone V' + obj.version;
-        } else if (mui.os.android && obj.version) {
-          this.appVersion = 'for android V' + obj.version;
+        if (window.mui.os.ios && obj.version) {
+          this.appVersion = 'for iPhone V' + obj.version
+        } else if (window.mui.os.android && obj.version) {
+          this.appVersion = 'for android V' + obj.version
         }
       }
-      //showInwehubWebview();
+      // showInwehubWebview();
     },
     methods: {
-      isWeiXin(){
-        var ua = window.navigator.userAgent.toLowerCase();
+      isWeiXin () {
+        var ua = window.navigator.userAgent.toLowerCase()
 
-        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-           return true;
-        }else{
-           return false;
-        }
-      },
-      //清除缓存；
-      clearCache(){
-        localEvent.setLocalItem('lauchFlag', {showGuide: false});
-        //调用系统toast;
-        mui.toast('清除成功');
-      },
-      clearUserCache(){
-        localEvent.clearLocalItem('UserLoginInfo');
-        localEvent.clearLocalItem('UserInfo');
-        this.$store.dispatch(ASKS_LIST_APPEND, {});
-        this.$store.dispatch(ANSWERS_LIST_APPEND, {});
-        this.$store.dispatch(TASK_LIST_APPEND, {});
-        this.$router.pushPlus('/login',true,'none','none');
-      },
-      logOut(){
-        if (mui.os.plus) {
-          mui.plusReady(() => {
-            var device_info = plus.push.getClientInfo();
-            apiRequest(`auth/logout`, {
-              client_id: device_info.clientid,
-              device_token: device_info.token,
-              appid: device_info.appid,
-              appkey: device_info.appkey,
-              device_type: plus.os.name === 'iOS' ? 2 : 1
-            }).then(res => {
-              this.clearUserCache();
-            });
-          });
+        if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+          return true
         } else {
-          this.clearUserCache();
+          return false
         }
       },
-      starApp() {
-        if (!window.plus) {
-            mui.toast('仅app内可用');
-            return;
+      // 清除缓存；
+      clearCache () {
+        localEvent.setLocalItem('lauchFlag', {showGuide: false})
+        // 调用系统toast;
+        window.mui.toast('清除成功')
+      },
+      clearUserCache () {
+        localEvent.clearLocalItem('UserLoginInfo')
+        localEvent.clearLocalItem('UserInfo')
+        this.$store.dispatch(ASKS_LIST_APPEND, {})
+        this.$store.dispatch(ANSWERS_LIST_APPEND, {})
+        this.$store.dispatch(TASK_LIST_APPEND, {})
+        this.$router.pushPlus('/login', true, 'none', 'none')
+      },
+      logOut () {
+        if (window.mui.os.plus) {
+          window.mui.plusReady(() => {
+            var deviceInfo = window.plus.push.getClientInfo()
+            apiRequest(`auth/logout`, {
+              client_id: deviceInfo.clientid,
+              device_token: deviceInfo.token,
+              appid: deviceInfo.appid,
+              appkey: deviceInfo.appkey,
+              device_type: window.plus.os.name === 'iOS' ? 2 : 1
+            }).then(res => {
+              this.clearUserCache()
+            })
+          })
+        } else {
+          this.clearUserCache()
         }
-        apiRequest(`system/app_market_url`, {}).then(response_data => {
-          if (response_data !== false) {
-            this.ios_market_url = response_data.ios_url;
-            this.android_market_url = response_data.android_url;
-            if (mui.os.ios) {
-              plus.runtime.openURL(this.ios_market_url);
-            } else if (mui.os.android) {
-              plus.runtime.openURL(this.android_market_url,function(e) {
-                mui.alert("很抱歉，您未安装腾讯应用宝，暂时无法评分，感谢支持");
-              }, "com.tencent.android.qqdownloader");
+      },
+      starApp () {
+        if (!window.plus) {
+          window.mui.toast('仅app内可用')
+          return
+        }
+        apiRequest(`system/app_market_url`, {}).then(responseData => {
+          if (responseData !== false) {
+            this.ios_market_url = responseData.ios_url
+            this.android_market_url = responseData.android_url
+            if (window.mui.os.ios) {
+              window.plus.runtime.openURL(this.ios_market_url)
+            } else if (window.mui.os.android) {
+              window.plus.runtime.openURL(this.android_market_url, function (e) {
+                window.mui.alert('很抱歉，您未安装腾讯应用宝，暂时无法评分，感谢支持')
+              }, 'com.tencent.android.qqdownloader')
             } else {
-              location.href = this.ios_market_url;
+              window.location.href = this.ios_market_url
             }
           }
-        });
+        })
       }
     },
-    mounted(){
-      mui('.mui-switch')['switch']();
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-setting');
-      });
+    mounted () {
+      window.mui('.mui-switch')['switch']()
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-setting')
+      })
     }
   }
 
@@ -188,12 +191,14 @@ All Rights Reserved</div>
     padding: 20px 40px 10px;
     text-align: center;
   }
-  .logo{
-    padding:20px;
+
+  .logo {
+    padding: 20px;
   }
-  .logo .myicon{
-    width:185px;
-    height:106px;
+
+  .logo .myicon {
+    width: 185px;
+    height: 106px;
     opacity: 1;
 
   }
@@ -204,9 +209,9 @@ All Rights Reserved</div>
     color: #a6a6a6;
   }
 
-  .version{
-      position: relative;
-      top:-40px;
+  .version {
+    position: relative;
+    top: -40px;
     font-weight: bold;
   }
 </style>

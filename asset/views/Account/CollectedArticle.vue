@@ -5,7 +5,7 @@
       <h1 class="mui-title">我的收藏</h1>
     </header>
 
-   
+
     <!--组件-->
     <div class="mui-content">
       <!--导航栏-->
@@ -13,12 +13,12 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答  </span>
         <span>文章 <i></i></span>
-        
+
       </div>
       <!--内容区域-->
-      <RefreshList 
-        ref="RefreshList" 
-        v-model="list" 
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
         :api="'collected/readhubSubmission'"
         :prevOtherData="{}"
         :nextOtherData="{}"
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
@@ -62,20 +61,20 @@
       RefreshList
     },
     methods: {
-      //时间处理；
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       }
     },
-    mounted() {
+    mounted () {
     },
-    updated() {
+    updated () {
 //    console.error(this.list);
     }
   }
-  export default PublishAnswers;
+  export default PublishAnswers
 </script>
 
 <style scoped="scoped">
@@ -87,12 +86,12 @@
     background: #f3f4f6;
     top: 0;
   }
-  
+
   .mui-content {
     background: #FFFFFF;
   }
   /*导航栏的样式*/
-  
+
   .menu {
     width: 100%;
     height: 45px;
@@ -100,7 +99,7 @@
     z-index: 10;
     background: #f3f4f6;
   }
-  
+
   .menu span {
     display: block;
     width: 50%;
@@ -112,12 +111,12 @@
     line-height: 45px;
     font-weight: 600;
   }
-  
+
   .menu span:nth-of-type(2) {
     color: #3c95f9;
     position: relative;
   }
-  
+
   .menu i {
     display: block;
     position: absolute;
@@ -127,7 +126,7 @@
     bottom: 0.5px;
     background: #3c95f9;
   }
-  
+
   .bot {
     position: absolute;
     right: 0px;
@@ -139,7 +138,7 @@
     background-color: rgb(220, 220, 220);
   }
   /*清掉自带样式*/
-  
+
   div,
   p,
   span,
@@ -154,32 +153,32 @@
     font-style: normal;
   }
   /*滚动区域*/
-  
+
   .answer {
     width: 92%;
     margin-left: 4%;
     overflow: hidden;
   }
-  
+
   .answer li {
     width: 100%;
     overflow: hidden;
     padding: 15px 0 13px 0;
     position: relative;
   }
-   .answer li div{ 
+   .answer li div{
      margin-bottom: 12px;
    }
   .answer li p:nth-of-type(1){
     font-size:15px;
     color:#444444;
-    
-    
+
+
   }
   .answer li p:nth-of-type(1) a{
     font-size:12px;
     color:rgb(180,180,182);
-    
+
   }
    .answer li p:nth-of-type(2){
       font-size:12px;
@@ -189,8 +188,8 @@
     font-size:12px;
     color:rgb(128,128,182);
   }
-  
-  
+
+
   /*状态的颜色*/
  .label_1,.label_2,.label_4{
     background: #fcc816;
@@ -199,7 +198,7 @@
  .label_3,.label_5,.label_6,.label_7{
    background: #c8c8c8;
  }
- 
+
   .listWrapper{
     top: 45px;
   }

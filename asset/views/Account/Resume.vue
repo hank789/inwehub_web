@@ -11,7 +11,7 @@
         <div class="header">
           <div class="avatar">
             <div class="avatarInner">
-              <img :src="resume.info.avatar_url" class="avatar" />
+              <img :src="resume.info.avatar_url" class="avatar"/>
             </div>
           </div>
         </div>
@@ -36,6 +36,7 @@
         <div class="qRhelp">
           扫一扫试试?
 
+
         </div>
       </div>
 
@@ -46,13 +47,17 @@
       <div class="basic">
         <div class="cardWrapper">
           <div class="card">
-            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img src="../../statics/images/resume_erweima_3x.png" /></div>
+            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
+              src="../../statics/images/resume_erweima_3x.png"/></div>
             <!--关注-->
             <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
-              关注Ta 
+              关注Ta
+
             </div>
-            <div class="collect active" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && resume.is_followed">
+            <div class="collect active" @tap.stop.prevent="collectProfessor"
+                 v-show="uuid !== cuuid && resume.is_followed">
               已互关
+
             </div>
             <!--名片-->
             <div class="Card">96%</div>
@@ -64,7 +69,7 @@
             <div class="header">
               <div class="avatar">
                 <div class="avatarInner">
-                  <img :src="resume.info.avatar_url" class="avatar" />
+                  <img :src="resume.info.avatar_url" class="avatar"/>
                 </div>
               </div>
             </div>
@@ -87,13 +92,14 @@
                 </svg>
                 <span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>
               </div>
-               <!--关注 被赞 综合评分-->
-             <div class="counter" >
-               关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus')">{{ resume.info.followers }}</b>
-               <i class="separate"></i>
-               被赞 <b>{{ resume.info.supports }}</b>
-               <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
-               <i class="separate"></i>{{ resume.info.total_score }}
+              <!--关注 被赞 综合评分-->
+              <div class="counter">
+                关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus')">{{ resume.info.followers }}</b>
+                <i class="separate"></i>
+                被赞 <b>{{ resume.info.supports }}</b>
+                <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
+                <i class="separate"></i>{{ resume.info.total_score }}
+
               </div>
             </div>
           </div>
@@ -107,9 +113,9 @@
           <i class="bot"></i>
         </div>
         <!--发布-->
-       <div class="news">
-         <div>Ta的发布</div>
-         <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+        <div class="news">
+          <div>Ta的发布</div>
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
@@ -128,39 +134,44 @@
         </div>
         <!--个人动态-->
         <div class="dynamic">
-           <p>Ta的动态</p>
-           <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-chakangengduojiantou"></use>
-           </svg>
-           <i class="bot"></i>
+          <p>Ta的动态</p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
         </div>
-       <!--个人简介-->
+        <!--个人简介-->
         <div class="description">
           <p>个人简介</p>
           <div class="mui-ellipsis-3">{{ resume.info.description }}</div>
         </div>
-        
+
       </div>
-     <!--工作经历-->
+      <!--工作经历-->
       <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
       <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-        <div class="item" v-for="(job, jobIndex) in resume.jobs" v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
+        <div class="item" v-for="(job, jobIndex) in resume.jobs"
+             v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
           <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
           <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
           <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
+
 
           </div>
           <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
         </div>
       </div>
 
-      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
+      <div class="seeMoreWrapper"
+           v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
         <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
       </div>
 
       <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
-      <div class="list" v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
-        <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex" v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
+      <div class="list"
+           v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
+        <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex"
+             v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
           <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
           <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
           <div class="others">
@@ -170,6 +181,7 @@
                 <template v-for="(industry, index) in project.industry_tags">
                   {{ industry.text }} ;
 
+
                 </template>
               </div>
             </div>
@@ -178,6 +190,7 @@
               <div class="content">
                 <template v-for="(productTag, index) in project.product_tags">
                   {{ productTag.text }} ;
+
 
                 </template>
               </div>
@@ -193,28 +206,35 @@
 
       </div>
 
-      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
+      <div class="seeMoreWrapper"
+           v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
         <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
       </div>
 
       <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
       <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-        <div class="item" v-for="(edu, eduIndex) in resume.edus" v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
+        <div class="item" v-for="(edu, eduIndex) in resume.edus"
+             v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
           <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
-          <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i class="separate"></i>{{ edu.major }}
+          <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
+            class="separate"></i>{{ edu.major }}
+
           </div>
           <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
+
 
           </div>
           <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
         </div>
       </div>
 
-      <div class="seeMoreWrapper" v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
+      <div class="seeMoreWrapper"
+           v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
         <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
       </div>
 
-      <div class="noPublic" v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
+      <div class="noPublic"
+           v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-bugongkai"></use>
         </svg>
@@ -223,12 +243,17 @@
 
     </div>
 
-    <Share :title="shareOptions.title" :link="shareUrl" :hideShareBtn="true" :content="shareOptions.content" :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
+    <Share :title="shareOptions.title" :link="shareUrl" :hideShareBtn="true" :content="shareOptions.content"
+           :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
 
-    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
+            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+
 
     </button>
-    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
+            @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+
 
     </button>
 
@@ -236,13 +261,11 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
-  import { createAPI, addAccessToken, postRequest } from '../../utils/request';
-  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-  import Share from '../../components/Share.vue';
+  import localEvent from '../../stores/localStorage'
+  import { postRequest } from '../../utils/request'
+  import Share from '../../components/Share.vue'
 
-  const currentUser = localEvent.getLocalItem('UserInfo');
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data: () => ({
@@ -276,12 +299,12 @@
           },
           city: {
             key: '',
-            name: '',
+            name: ''
           }
         },
         edus: [],
         projects: [],
-        jobs: [],
+        jobs: []
 
       },
       qRCodeOptions: {
@@ -295,175 +318,168 @@
     },
     watch: {
       '$route' () {
-        this.getData();
+        this.getData()
       }
     },
-    created() {
-      this.getData();
+    created () {
+      this.getData()
     },
-    mounted() {
+    mounted () {
       window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-resume');
-        this.getData();
-      });
+        // 执行刷新
+        console.log('refresh-resume')
+        this.getData()
+      })
     },
     methods: {
-      share: function() {
-        this.$refs.shareComponent.share();
+      share: function () {
+        this.$refs.shareComponent.share()
       },
-      getData: function() {
-        if(this.$route.query.goback) {
-          this.canBack = true;
+      getData: function () {
+        if (this.$route.query.goback) {
+          this.canBack = true
         }
 
-        var from = this.$router.currentRoute.name;
-        var fullUrl = process.env.H5_ROOT;
+        var from = this.$router.currentRoute.name
+        //var fullUrl = process.env.H5_ROOT
 
-        if(from === 'share-resume' || from === 'share-resume-old') {
-          this.isShare = true;
-          this.uuid = this.$route.query.id || this.$route.params.id;
+        if (from === 'share-resume' || from === 'share-resume-old') {
+          this.isShare = true
+          this.uuid = this.$route.query.id || this.$route.params.id
         }
 
         postRequest(`profile/resumeInfo`, {
           uuid: this.uuid
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.toast(response.data.message);
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
           }
 
-          this.resume = response.data.data;
-          this.loading = 0;
-          this.bindWechatShare();
-        });
+          this.resume = response.data.data
+          this.loading = 0
+          this.bindWechatShare()
+        })
       },
-      collectProfessor: function() {
-
-        if(!this.cuuid) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
-          return;
+      collectProfessor: function () {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
         }
 
         postRequest(`follow/user`, {
           id: this.uuid
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
           }
-          this.resume.is_followed = !this.resume.is_followed;
-          mui.toast(response.data.data.tip);
-        });
+          this.resume.is_followed = !this.resume.is_followed
+          window.mui.toast(response.data.data.tip)
+        })
       },
-      downLoadHeader() {
-        var that = this;
-        var dtask = plus.downloader.createDownload(this.resume.info.avatar_url, {
-          filename: "_downloads/resume.png"
-        }, function(d, status) {
-          if(status == 200) {
-            //下载成功
-            console.log("下载成功:" + d.filename);
-            console.debug(d);
-            that.downloadHeader = true;
+      downLoadHeader () {
+        var that = this
+        var dtask = window.plus.downloader.createDownload(this.resume.info.avatar_url, {
+          filename: '_downloads/resume.png'
+        }, function (d, status) {
+          if (status === 200) {
+            // 下载成功
+            console.log('下载成功:' + d.filename)
+            console.debug(d)
+            that.downloadHeader = true
           } else {
-            console.log("下载失败");
+            console.log('下载失败')
           }
-        });
-        //启动下载任务
-        dtask.start();
+        })
+        // 启动下载任务
+        dtask.start()
       },
-      bindWechatShare() {
-        this.shareOptions.title = "InweHub名片 | " + this.resume.info.name + '：' + this.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
-        this.shareOptions.content = "咨询顾问的专属身份认证@InweHub\n" + this.resume.info.company;
+      bindWechatShare () {
+        this.shareOptions.title = 'InweHub名片 | ' + this.resume.info.name + '：' + this.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub';
+        this.shareOptions.content = '咨询顾问的专属身份认证@InweHub\n' + this.resume.info.company
         this.shareOptions.imageUrl = this.resume.info.avatar_url;
-        this.shareOptions.thumbUrl = this.resume.info.avatar_url + '?x-oss-process=image/resize,h_100,w_100';
-        this.shareUrl = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime());
+        this.shareOptions.thumbUrl = this.resume.info.avatar_url + '?x-oss-process=image/resize,h_100,w_100'
+        this.shareUrl = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
       },
-      showJobMore(event) {
-
-        if(!this.cuuid) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
-          return;
+      showJobMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
         }
 
-        this.isShowItemJobMore = true;
-        event.target.style.display = 'none';
+        this.isShowItemJobMore = true
+        event.target.style.display = 'none'
       },
-      showProjectMore(event) {
-
-        if(!this.cuuid) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
-          return;
+      showProjectMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
         }
 
-        this.isShowProjectMore = true;
+        this.isShowProjectMore = true
 
-        event.target.style.display = 'none';
+        event.target.style.display = 'none'
       },
-      showEduMore(event) {
-
-        if(!this.cuuid) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home';
-          return;
+      showEduMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
         }
 
-        this.isShowitemEduMore = true;
-        event.target.style.display = 'none';
+        this.isShowitemEduMore = true
+        event.target.style.display = 'none'
       },
-      goAsk(url) {
-
-        if(!this.resume.info.is_expert) {
-          mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！');
-          return;
+      goAsk (url) {
+        if (!this.resume.info.is_expert) {
+          window.mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！')
+          return
         }
 
-        if(this.uuid == this.cuuid) {
-          mui.alert('不能向自己提问！');
-          return;
+        if (this.uuid === this.cuuid) {
+          window.mui.alert('不能向自己提问！')
+          return
         }
 
-        if(mui.os.wechat) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=' + url;
+        if (window.mui.os.wechat) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=' + url
         } else {
-          this.$router.push(url);
+          this.$router.push(url)
         }
 
-        return;
+        return
       },
-      toggleShareNav() {
-        mui('#shareShowWrapper').popover('toggle');
+      toggleShareNav () {
+        window.mui('#shareShowWrapper').popover('toggle')
       },
-      toggleDeatil(event) {
+      toggleDeatil (event) {
+        var Desc = event.target.previousSibling.previousSibling
+        if (/hide/.test(Desc.className)) {
+          Desc.className = Desc.className.replace(' hide', '')
+          Desc.className = Desc.className.replace(' mui-ellipsis-3', '')
+          Desc.className += ' show'
 
-        var Desc = event.target.previousSibling.previousSibling;
-        if(/hide/.test(Desc.className)) {
-          Desc.className = Desc.className.replace(' hide', '');
-          Desc.className = Desc.className.replace(' mui-ellipsis-3', '');
-          Desc.className += ' show';
-
-          event.target.className = "toggle hide";
-          event.target.innerText = '收起';
+          event.target.className = 'toggle hide'
+          event.target.innerText = '收起'
         } else {
-          Desc.className = Desc.className.replace(' show', '');
-          Desc.className += ' hide mui-ellipsis-3';
+          Desc.className = Desc.className.replace(' show', '')
+          Desc.className += ' hide mui-ellipsis-3'
 
-          event.target.className = "toggle show";
-          event.target.innerText = '查看';
+          event.target.className = 'toggle show'
+          event.target.innerText = '查看'
         }
-
       },
-      toggleQrCode() {
-        this.showQrCode = !this.showQrCode;
+      toggleQrCode () {
+        this.showQrCode = !this.showQrCode
       }
     }
-  };
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-.bot {
+  .bot {
     position: absolute;
     right: 14px;
     bottom: 0;
@@ -472,10 +488,11 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     /*background-color: rgb(220, 220, 220);*/
-   border: 1px dashed #dcdcdc;
+    border: 1px dashed #dcdcdc;
   }
+
   /***************清除自带样式*****************/
-  
+
   div,
   p,
   span,
@@ -488,14 +505,14 @@
     list-style: none;
     font-style: normal;
   }
-  
+
   .professor {
     background-color: #3c3e44;
     text-align: center;
     position: relative;
     height: 78px;
   }
-  
+
   .erweimaWrapper {
     position: absolute;
     left: 16px;
@@ -606,6 +623,7 @@
       font-size: 13px;
     }
   }
+
   /*个人简历*/
   .basic {
     background: #fff;
@@ -614,22 +632,22 @@
       color: #808080;
       padding: 11px 14px 13px;
       line-height: 24px;
-      div{
+      div {
         display: block;
-         font-size: 13px;
-         color:#444444;
-         line-height:25px;
+        font-size: 13px;
+        color: #444444;
+        line-height: 25px;
       }
     }
   }
-  
+
   .separate {
     display: inline-block;
     height: 10px;
     margin: 0 8px;
     border-left: 1px solid #c8c8c8;
   }
-  
+
   .cardWrapper {
     margin-top: -69px;
     padding: 0 16px;
@@ -651,31 +669,31 @@
       /*关注*/
       .collect {
         position: absolute;
-        font-size:14px;
+        font-size: 14px;
         right: 55px;
         top: 14px;
-        color:#444444;
-        border:1px solid #b4b4b6;
+        color: #444444;
+        border: 1px solid #b4b4b6;
         border-radius: 50px;
-        padding:2px 8px;
+        padding: 2px 8px;
         &.active {
-          color:#FFFFFF;
-          border:1px solid #03aef9;
-          background:#03aef9;
+          color: #FFFFFF;
+          border: 1px solid #03aef9;
+          background: #03aef9;
         }
       }
       /*名片*/
-     .Card{
+      .Card {
         position: absolute;
         right: 55px;
         top: 54px;
-        border:1px solid #b4b4b6;
+        border: 1px solid #b4b4b6;
         border-radius: 50px;
-        padding:2px 16px;
-        color:#444444;
-        font-size:14px;
-       
-     }
+        padding: 2px 16px;
+        color: #444444;
+        font-size: 14px;
+
+      }
       .share {
         position: absolute;
         font-size: 24px;
@@ -749,12 +767,12 @@
           b {
             color: #e63964;
           }
-          b:nth-of-type(2){
+          b:nth-of-type(2) {
             color: #808080;
           }
         }
         .item {
-          color:#808080;
+          color: #808080;
           font-size: 13px;
           margin: 7px 7px 2px 7px;
           .icon {
@@ -774,7 +792,7 @@
       }
     }
   }
-  
+
   h5 {
     margin: 0;
     padding: 11px 0;
@@ -784,7 +802,7 @@
     color: #313131;
     text-align: center;
   }
-  
+
   .list {
     background: #fff;
     padding: 0 10px 0 30px;
@@ -897,7 +915,7 @@
       }
     }
   }
-  
+
   button {
     border-radius: 0;
     padding: 12px 0;
@@ -905,7 +923,7 @@
     margin: 0;
     font-size: 17px;
   }
-  
+
   .shareWrapper {
     .title {
       background: #ececee;
@@ -928,7 +946,7 @@
       }
     }
   }
-  
+
   .noPublic {
     margin: 20px 0 0;
     background: #fff;
@@ -942,7 +960,7 @@
       color: #f3f4f6;
     }
   }
-  
+
   #shareShowWrapper {
     position: absolute;
     right: 0;
@@ -955,18 +973,18 @@
       font-size: 70px;
     }
   }
-  
+
   .vueWrapper {
     padding-bottom: 48px;
   }
-  
+
   .bottomButton {
     position: fixed;
     bottom: 0;
     right: 0;
     z-index: 11;
   }
-  
+
   .seeMoreWrapper {
     background: #fff;
     padding-bottom: 30px;
@@ -984,93 +1002,100 @@
       margin: 0 20px;
     }
   }
+
   /***********评论和回复************/
-  
+
   .news {
     padding: 12px 14px;
     overflow: hidden;
     position: relative;
   }
-   .news  div{
-     font-size:14px;
-     color: #808080;
-     margin-bottom: 8px;
-   }
+
+  .news div {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 8px;
+  }
+
   .news a {
     display: inline-block;
     float: left;
     width: 1px;
     height: 11px;
     border-right: 1px solid #c8c8c8;
-    margin: 5px 22px 0 22px ;
+    margin: 5px 22px 0 22px;
   }
-  
+
   .news p {
     float: left;
     font-size: 12px;
     color: #808080;
     text-align: center;
   }
-  .news p:nth-of-type(1){
-   text-align:left; 
+
+  .news p:nth-of-type(1) {
+    text-align: left;
   }
-  
+
   .news p span {
     font-size: 14px;
     color: #444444;
     font-weight: 500;
   }
-  
+
   /*.news p:nth-of-type(1) {
     text-align: right;
   }
-  
+
   .news p:nth-of-type(2) {
     text-align: left;
   }*/
-  
+
   .resumeWrapper {
     bottom: 48px;
   }
-  /*动态*/
- .dynamic{
-   overflow: hidden;
-   padding: 12px 14px ;
-   position: relative;
-   p{
-     float: left;
-     font-size: 14px;
-     color: #808080;
-   }
-   svg{
-     float: right;
-      font-size: 15px;
-     color:#808080;
-   }
- }
- 
- /*擅长*/
-.skilled{
-  padding: 12px 14px 17px 14px;
-  overflow: hidden;
-  position: relative;
-  
-}
 
-.skilled span{
-  background: #ececee;
-  border-radius: 50px;
-  padding: 4px 11px;
-  font-size:12px;
-  color:#444444;
-  margin-left: 15px;
-}
-.skilled span:nth-of-type(1){
-   margin-left: 0px;
-}
-.skilled p{
-  font-size:14px;
-  color:#808080;
-  margin-bottom: 12px;
-}
+  /*动态*/
+  .dynamic {
+    overflow: hidden;
+    padding: 12px 14px;
+    position: relative;
+    p {
+      float: left;
+      font-size: 14px;
+      color: #808080;
+    }
+    svg {
+      float: right;
+      font-size: 15px;
+      color: #808080;
+    }
+  }
+
+  /*擅长*/
+  .skilled {
+    padding: 12px 14px 17px 14px;
+    overflow: hidden;
+    position: relative;
+
+  }
+
+  .skilled span {
+    background: #ececee;
+    border-radius: 50px;
+    padding: 4px 11px;
+    font-size: 12px;
+    color: #444444;
+    margin-left: 15px;
+  }
+
+  .skilled span:nth-of-type(1) {
+    margin-left: 0px;
+  }
+
+  .skilled p {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 12px;
+  }
 </style>

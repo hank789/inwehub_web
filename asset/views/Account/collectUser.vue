@@ -31,12 +31,14 @@
         <div class="indexTitle">
           已关注的成员
 
+
         </div>
 
         <div class="groupWrapper">
           <ul v-for="(list, key) in lastList" class="index-bar-group">
             <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
-            <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active" :class="{bottomBorder:index !== list.length-1  }">
+            <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active"
+                :class="{bottomBorder:index !== list.length-1  }">
 
               <div class="avatar">
                 <div class="avatarInner" @tap.stop.prevent="">
@@ -53,7 +55,9 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="ibutton active" v-if="item.is_invited"  @tap.stop.prevent="collectProfessor(item.uuid,index)">已关注</div>
+              <div class="ibutton active" v-if="item.is_invited" @tap.stop.prevent="collectProfessor(item.uuid,index)">
+                已关注
+              </div>
               <div class="ibutton" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注Ta</div>
 
             </li>
@@ -69,7 +73,7 @@
   import { postRequest } from '../../utils/request'
 
   export default {
-    data() {
+    data () {
       return {
         id: 0,
         search: '',
@@ -87,71 +91,66 @@
       Contact
     },
     methods: {
-      //点击关注；
-     collectProfessor(id, index) {
+      // 点击关注；
+      collectProfessor (id, index) {
         postRequest(`follow/user`, {
           id: id
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
           }
           console.log(this.list[index].is_following)
-          this.list[index].is_following = this.list[index].is_following;
-          mui.toast(response.data.data.tip);
-        });
-
+          this.list[index].is_following = this.list[index].is_following
+          window.mui.toast(response.data.data.tip)
+        })
       },
-      //数据；
-      getList() {
+      // 数据；
+      getList () {
         postRequest(`followed/users`, {}).then(response => {
           var code = response.data.code
-          if(code !== 1000) {
+          if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
             return
           }
-          if(response.data.data.length > 0) {
+          if (response.data.data.length > 0) {
             var arr = response.data.data
-            for(var i = 0; i < arr.length; i++) {
+            for (var i = 0; i < arr.length; i++) {
               var item = {
-                id:arr[i].user_id,
-                name:arr[i].user_name,
-                avatar_url:arr[i].user_avatar_url,
-                description:arr[i].description,
-                is_expert:arr[i].is_expert,
-                is_invited:0,
-                uuid:arr[i].uuid
-                
+                id: arr[i].user_id,
+                name: arr[i].user_name,
+                avatar_url: arr[i].user_avatar_url,
+                description: arr[i].description,
+                is_expert: arr[i].is_expert,
+                is_invited: 0,
+                uuid: arr[i].uuid
+
               }
-              this.list = this.list.concat(item);
-              
+              this.list = this.list.concat(item)
             }
           }
-          console.error(this.list);
+          console.error(this.list)
 
           this.loading = 0
         })
-
       }
     },
 
     watch: {},
-    mounted() {
-      this.getList();
-
+    mounted () {
+      this.getList()
     },
-    created() {
+    created () {
       console.log(this.lastList)
-
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
   /*导航栏的样式*/
-  
+
   .menu {
     width: 100%;
     height: 45px;
@@ -159,7 +158,7 @@
     z-index: 10;
     background: #f3f4f6;
   }
-  
+
   .menu span {
     display: block;
     width: 50%;
@@ -171,12 +170,12 @@
     line-height: 45px;
     font-weight: 600;
   }
-  
+
   .menu span:nth-of-type(1) {
     color: #3c95f9;
     position: relative;
   }
-  
+
   .menu i {
     display: block;
     position: absolute;
@@ -186,8 +185,9 @@
     bottom: 0.5px;
     background: #3c95f9;
   }
+
   /**/
-  
+
   .bot {
     position: absolute;
     right: 0;
@@ -198,10 +198,11 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+
   /*搜索区域*/
-  
+
   .indexHeader {
-    background-color:#FFFFFF;
+    background-color: #FFFFFF;
     padding: 10px 15px;
     margin-top: 45px;
     .searchWrapper {
@@ -225,7 +226,7 @@
       }
     }
   }
-  
+
   .indexTitle {
     background: #ececee;
     font-size: 13px;
@@ -234,7 +235,7 @@
     padding: 0 15px;
     color: #808080;
   }
-  
+
   .mui-content {
     background: #fff;
   }

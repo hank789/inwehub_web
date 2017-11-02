@@ -5,7 +5,7 @@
       <h1 class="mui-title">我的发布</h1>
     </header>
 
-  
+
 
     <!--组件-->
     <div class="mui-content">
@@ -18,15 +18,15 @@
 
       </div>
       <!--内容区域-->
-      <RefreshList 
-        ref="RefreshList" 
-        v-model="list" 
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
         :api="'comment/myList'"
-        :downLoadMoreMode="true" 
-        :isShowUpToRefreshDescription="true" 
-        :prevOtherData="{type:0}" 
-        :nextOtherData="{type:0}" 
-        :list="list" 
+        :downLoadMoreMode="true"
+        :isShowUpToRefreshDescription="true"
+        :prevOtherData="{type:0}"
+        :nextOtherData="{type:0}"
+        :list="list"
         class="listWrapper">
         <ul class="answer">
           <!--{{ask.origin_title}}-->
@@ -52,42 +52,33 @@
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../../utils/request';
-  import RefreshList from '../../../components/refresh/List.vue';
+  import RefreshList from '../../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
-      list: [],
-
+      list: []
     }),
-    created() {
-     
-
+    created () {
     },
     computed: {
-
     },
-   components: {
+    components: {
       RefreshList
     },
     methods: {
-      //时间处理；
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       }
-     
-  
     },
-    mounted() {
-      
-
+    mounted () {
     },
-    updated() {
+    updated () {
 //    console.error(this.list);
     }
   }
-  export default PublishAnswers;
+  export default PublishAnswers
 </script>
 
 <style scoped="scoped">
@@ -99,12 +90,12 @@
     background: #f3f4f6;
     top: 0;
   }
-  
+
   .mui-content {
     background: #FFFFFF;
   }
   /*导航栏的样式*/
-  
+
   .menu {
     width: 100%;
     height: 45px;
@@ -112,7 +103,7 @@
     z-index: 10;
     background: #f3f4f6;
   }
-  
+
   .menu span {
     display: block;
     width: 25%;
@@ -124,12 +115,12 @@
     line-height: 45px;
     font-weight: 600;
   }
-  
+
   .menu span:nth-of-type(4) {
     color: #3c95f9;
     position: relative;
   }
-  
+
   .menu i {
     display: block;
     position: absolute;
@@ -139,7 +130,7 @@
     bottom: 0.5px;
     background: #3c95f9;
   }
-  
+
   .bot {
     position: absolute;
     right: 0px;
@@ -151,7 +142,7 @@
     background-color: rgb(220, 220, 220);
   }
   /*清掉自带样式*/
-  
+
   div,
   p,
   span,
@@ -166,20 +157,20 @@
     font-style: normal;
   }
   /*滚动区域*/
-  
+
   .answer {
     width: 92%;
     margin-left: 4%;
     overflow: hidden;
   }
-  
+
   .answer li {
     width: 100%;
     overflow: hidden;
     padding: 14px 0 13px 0;
     position: relative;
   }
-  
+
   .answer li p:nth-of-type(1) {
     color: #444444;
     font-size: 14px;
@@ -189,16 +180,16 @@
     font-size: 12px;
     margin-top: 3px;
   }
-  
+
   .answer li p:nth-of-type(3) {
     overflow: hidden;
     margin-top: 6px;
     color:#b4b4b6;
     font-size: 12px;
   }
-  
-  
-  
+
+
+
   .answer li p:nth-of-type(2) span:nth-of-type(1) {
     float:left;
     font-size: 12px;
@@ -207,5 +198,5 @@
  .listWrapper{
     top: 45px;
   }
- 
+
 </style>

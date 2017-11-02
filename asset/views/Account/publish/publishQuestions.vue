@@ -5,7 +5,7 @@
       <h1 class="mui-title">我的发布</h1>
     </header>
 
-   
+
 
     <!--组件-->
     <div class="mui-content">
@@ -18,15 +18,15 @@
 
       </div>
       <!--内容区域-->
-      <RefreshList 
-        ref="RefreshList" 
-        v-model="list" 
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
         :api="'question/myList'"
-        :downLoadMoreMode="true" 
-        :isShowUpToRefreshDescription="true" 
-        :prevOtherData="{type:0}" 
-        :nextOtherData="{type:0}" 
-        :list="list" 
+        :downLoadMoreMode="true"
+        :isShowUpToRefreshDescription="true"
+        :prevOtherData="{type:0}"
+        :nextOtherData="{type:0}"
+        :list="list"
         class="listWrapper">
         <ul class="answer">
           <li v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
@@ -43,49 +43,40 @@
       <!---->
     </div>
     <!---->
-    
+
 
   </div>
 </template>
 
 <script>
-  import { createAPI, addAccessToken, postRequest } from '../../../utils/request';
-  import RefreshList from '../../../components/refresh/List.vue';
+  import RefreshList from '../../../components/refresh/List.vue'
   const PublishAnswers = {
     data: () => ({
-      list: [],
-
+      list: []
     }),
-    created() {
-     
-
+    created () {
     },
     computed: {
-
     },
-   components: {
+    components: {
       RefreshList
     },
     methods: {
-      toDetail(item){
-          if (item.question_type === 2) {
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id);
-          } else {
-            this.$router.pushPlus('/ask/' + item.id);
-          }
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
+        } else {
+          this.$router.pushPlus('/ask/' + item.id)
+        }
       }
-     
-  
     },
-    mounted() {
-      
-
+    mounted () {
     },
-    updated() {
+    updated () {
 //    console.error(this.list);
     }
   }
-  export default PublishAnswers;
+  export default PublishAnswers
 </script>
 
 <style scoped="scoped">
@@ -97,12 +88,12 @@
     background: #f3f4f6;
     top: 0;
   }
-  
+
   .mui-content {
     background: #FFFFFF;
   }
   /*导航栏的样式*/
-  
+
   .menu {
     width: 100%;
     height: 45px;
@@ -110,7 +101,7 @@
     z-index: 10;
     background: #f3f4f6;
   }
-  
+
   .menu span {
     display: block;
     width: 25%;
@@ -122,12 +113,12 @@
     line-height: 45px;
     font-weight: 600;
   }
-  
+
   .menu span:nth-of-type(2) {
     color: #3c95f9;
     position: relative;
   }
-  
+
   .menu i {
     display: block;
     position: absolute;
@@ -137,7 +128,7 @@
     bottom: 0.5px;
     background: #3c95f9;
   }
-  
+
   .bot {
     position: absolute;
     right: 0px;
@@ -149,7 +140,7 @@
     background-color: rgb(220, 220, 220);
   }
   /*清掉自带样式*/
-  
+
   div,
   p,
   span,
@@ -164,31 +155,31 @@
     font-style: normal;
   }
   /*滚动区域*/
-  
+
   .answer {
     width: 92%;
     margin-left: 4%;
     overflow: hidden;
   }
-  
+
   .answer li {
     width: 100%;
     overflow: hidden;
     padding: 14px 0 13px 0;
     position: relative;
   }
-  
+
   .answer li p:nth-of-type(2) {
     color: #444444;
     font-size: 16px;
   }
-  
+
   .answer li p:nth-of-type(2) {
     overflow: hidden;
     margin-top: 6px;
-    
+
   }
-  
+
   .label {
     float: left;
     width: 50px;
@@ -200,7 +191,7 @@
     font-size: 12px;
     text-align: center;
   }
-  
+
   .answer li p:nth-of-type(2) span:nth-of-type(2) {
     float: right;
     font-size: 12px;

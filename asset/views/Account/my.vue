@@ -132,17 +132,15 @@
   </div>
 </template>
 <script>
-  import localEvent from '../../stores/localStorage';
-  import { createAPI, addAccessToken, postRequest } from '../../utils/request';
-  import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types';
-  import { updateUserInfoCache, getUserInfo } from '../../utils/user';
-  import userAbility from '../../utils/userAbility';
-  import { alertMajorCommentSuccess, readhubCommenSuccess, perfectCard, alertAskCommunityQuestioningSuccess } from '../../utils/dialogList';
+  import localEvent from '../../stores/localStorage'
+  import { USERS_APPEND } from '../../stores/types'
+  import { getUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
 
   export default {
-    data() {
-      const currentUser = localEvent.getLocalItem('UserInfo');
-      const infomation = localEvent.getLocalItem('UserInfoReal');
+    data () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
+      const infomation = localEvent.getLocalItem('UserInfoReal')
 
       return {
         attention: infomation.info.followers,
@@ -174,40 +172,37 @@
         expert_level: currentUser.expert_level,
         show_my_wallet: currentUser.show_my_wallet,
         show_resume: true,
-        my: "",
-
-
+        my: ''
       }
     },
     methods: {
-      //警告框
-      wran() {
+      // 警告框
+      wran () {
         var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
-          '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>';
+          '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>'
         var title = '<p style="font-size:16px; margin-bottom:15px">' +
           '<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
           '<use xlink:href="#icon-jinggao"></use>' +
           '</svg>' +
           '警告说明 ' +
-          '</p>';
+          '</p>'
 
-        var btnArray = ['取消', '确认'];
-        mui.confirm(font, title, function() {}, 'div');
+        // var btnArray = ['取消', '确认'];
+        window.mui.confirm(font, title, function () {}, 'div')
       },
-      //我的项目跳转判断
-      exclusive(status) {
-        switch(status) {
+      // 我的项目跳转判断
+      exclusive (status) {
+        switch (status) {
           case 2:
-            this.$router.pushPlus('/project/list?back=/my');
-            break;
+            this.$router.pushPlus('/project/list?back=/my')
+            break
           default:
-            mui.toast("您还不是企业版账号，请点击申请企业账号前往认证");
-
+            window.mui.toast('您还不是企业版账号，请点击申请企业账号前往认证')
         }
       },
-      //认证专家跳转判断；
-      toApprove(status) {
-        this.$router.pushPlus('/company/my?back=/my');
+      // 认证专家跳转判断；
+      toApprove (status) {
+        this.$router.pushPlus('/company/my?back=/my')
         //        switch(status) {
         //          case 2:
         //            this.$router.pushPlus('/company/my?back=/my');
@@ -216,11 +211,10 @@
         //            this.$router.pushPlus('/company/submit');
         //
         //        }
-
       },
-      //认证专家；
-      toApply(expertStatus) {
-        userAbility.jumpToApplyProfessor(this);
+      // 认证专家；
+      toApply (expertStatus) {
+        userAbility.jumpToApplyProfessor(this)
         //        switch (parseInt(expertStatus)) {
         //              case 0:
         //              case 3:
@@ -233,83 +227,76 @@
         //                this.$router.push('/expert/apply/success?type=0');
         //                break;
         //            }
-
       },
-      getNumbers: function(number) {
-        var html = '';
-        number = number.toString();
-        for(var i = 0; i < number.length; i++) {
-          var num = number[i];
-          html += '<svg class="icon a" aria-hidden="true"><use xlink:href="#icon-' + num + '"></use></svg>';
+      getNumbers: function (number) {
+        var html = ''
+        number = number.toString()
+        for (var i = 0; i < number.length; i++) {
+          var num = number[i]
+          html += '<svg class="icon a" aria-hidden="true"><use xlink:href="#icon-' + num + '"></use></svg>'
         }
-        return html;
-
+        return html
       },
-      yaoqing() {
-        mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。');
+      yaoqing () {
+        window.mui.alert('您可以通过贡献值换取邀请码，邀请更多的用户注册并获取更多回报。在此之前请先提升您的平台成长值和等级。')
       },
-      shareOut() {
-        mui.alert('我们还暂时不建议您分享！');
+      shareOut () {
+        window.mui.alert('我们还暂时不建议您分享！')
       },
-      integralDemo() {
-        //mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
+      integralDemo () {
+        // mui.alert('小哈正在帮大家争取福利，请再稍等一阵！');
       },
-      share() {
+      share () {
         setTimeout(() => {
-          mui('#shareWrapper').popover('toggle');
-        }, 150);
+          window.mui('#shareWrapper').popover('toggle')
+        }, 150)
       },
-      initData() {
-        //执行刷新
-        console.log('refresh-my');
+      initData () {
+        // 执行刷新
+        console.log('refresh-my')
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-          cb(user);
-          this.account_info_complete_percent = user.info.account_info_complete_percent;
-          this.isExpert = user.info.is_expert;
-          this.user_level = user.info.user_level;
-          this.user_credits = user.info.user_credits;
-          this.user_coins = user.info.user_coins;
-          this.user_submission_karma = user.info.submission_karma;
-          this.user_comment_karma = user.info.comment_karma;
-          this.user_id = user.info.id;
-          this.questions = user.info.questions;
-          this.enroll = user.info.my_activity_enroll;
-          this.answers = user.info.answers;
-          this.tasks = user.info.tasks;
-          this.projects = user.info.projects;
-          this.expert_level = user.info.expert_level;
-          this.show_my_wallet = user.info.show_my_wallet;
-          this.expert_apply_status = user.info.expert_apply_status;
-          this.company_apply_status = user.info.company_status;
-          this.avatar = user.info.avatar_url;
-          this.name = user.info.name;
-          this.title = user.info.title;
-          this.show_my_wallet = user.info.show_my_wallet;
-          userAbility.newbieTask(this);
-        }));
-
+          cb(user)
+          this.account_info_complete_percent = user.info.account_info_complete_percent
+          this.isExpert = user.info.is_expert
+          this.user_level = user.info.user_level
+          this.user_credits = user.info.user_credits
+          this.user_coins = user.info.user_coins
+          this.user_submission_karma = user.info.submission_karma
+          this.user_comment_karma = user.info.comment_karma
+          this.user_id = user.info.id
+          this.questions = user.info.questions
+          this.enroll = user.info.my_activity_enroll
+          this.answers = user.info.answers
+          this.tasks = user.info.tasks
+          this.projects = user.info.projects
+          this.expert_level = user.info.expert_level
+          this.show_my_wallet = user.info.show_my_wallet
+          this.expert_apply_status = user.info.expert_apply_status
+          this.company_apply_status = user.info.company_status
+          this.avatar = user.info.avatar_url
+          this.name = user.info.name
+          this.title = user.info.title
+          this.show_my_wallet = user.info.show_my_wallet
+          userAbility.newbieTask(this)
+        }))
       }
     },
-    created() {
-      //showInwehubWebview();
-      if(mui.os.plus) {
-        var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-        var currentUser = localEvent.getLocalItem('UserInfo');
-        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid;
-        if(inwehub_embed_webview.getURL() !== url) {
-          inwehub_embed_webview.loadURL(url);
+    created () {
+      // showInwehubWebview();
+      if (window.mui.os.plus) {
+        var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid
+        if (inwehubEmbedWebview.getURL() !== url) {
+          inwehubEmbedWebview.loadURL(url)
         }
       }
-
     },
-    activated: function() {
-      console.log('activated');
-      this.initData();
-
+    activated: function () {
+      console.log('activated')
+      this.initData()
     },
-    mounted() {
-
-
+    mounted () {
     }
   }
 </script>
@@ -336,7 +323,7 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  
+
   .bott {
     position: absolute;
     right: 15px;
@@ -347,15 +334,15 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  
+
   .my-top {
     width: 92%;
     overflow: hidden;
     margin-left: 4%;
     background-color: #ffffff;
-    
+
   }
-  
+
   .professor {
     width: 100%;
     height: 120px;
@@ -370,23 +357,23 @@
     height: 68.5px;
     border-radius: 50%;
     margin-top: 25px;
-    
+
   }
-  
+
   .my-personal {
     /*width: 79%;*/
     height: 69px;
     margin-top: 25px;
     float: left;
   }
-  
+
   .my-personal .my-info {
     width: 100%;
     height: 30px;
     margin-top: 9px;
     position: relative;
   }
-  
+
   .my-personal .my-info span:nth-of-type(1) {
     display: inline-block;
     max-width: 72px;
@@ -396,7 +383,7 @@
     margin-right: 1.5px;
     margin-bottom: -4px;
   }
-  
+
   .my-personal .my-info p:nth-of-type(1) {
     width: 19px;
     height: 18px;
@@ -412,7 +399,7 @@
     background-size: 19px 18px;
     background-position: top;
   }
-  
+
   .my-personal .my-info svg:nth-of-type(1) {
     font-size: 26px;
     margin-bottom: -4px;
@@ -421,17 +408,17 @@
     position: relative;
   }
   /**********等级 擅长部分***************/
-  
+
   .my-personal .my-detail {
     width: 100%;
     height: 30px;
   }
-  
+
   .my-detail span {
     font-size: 13px;
     color: #444444;
   }
-  
+
   .my-detail i {
     display: inline-block;
     width: 1px;
@@ -442,7 +429,7 @@
     margin-bottom: -2px;
   }
   /**********名片***************/
-  
+
   .account_info {
     position: absolute;
     right: 0;
@@ -458,7 +445,7 @@
     z-index: 999;
   }
   /**********邀请我的好友***************/
-  
+
   .my-news {
     width: 100%;
     height: 36px;
@@ -470,7 +457,7 @@
     position: relative;
     margin-bottom: 20px;
   }
-  
+
   .my-news i {
     font-style: normal;
     display: inline-block;
@@ -488,7 +475,7 @@
     /*渐变*/
     background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
   }
-  
+
   .my-news i:after {
     content: "";
     display: block;
@@ -503,13 +490,13 @@
     bottom: 0;
     margin: auto;
   }
-  
+
   .my-news span {
     font-size: 14px;
     color: #444444;
     line-height: 36px;
   }
-  
+
   .my-news svg {
     font-size: 14px;
     color: #808080;
@@ -519,14 +506,14 @@
     bottom: 0;
     margin: auto;
   }
-  
+
   .gray {
     width: 100%;
     height: 10px;
     background: #F3F4F5;
   }
   /*中间的发布认证*/
-  
+
   .part2 {
     list-style: none;
     width: 100%;
@@ -536,7 +523,7 @@
     background: #FFFFFF;
     position: relative;
   }
-  
+
   .part2 li {
     float: left;
     width: 33%;
@@ -544,12 +531,12 @@
     text-align: center;
     position: relative;
   }
-  
+
   .part2 li svg {
     font-size: 24px;
     margin-top: 10px;
   }
-  
+
   .part2 li span {
     font-size: 12px;
     color: #808080;
@@ -557,7 +544,7 @@
     margin-top: 7px;
   }
   /*part3认证*/
-  
+
   .part3 {
     list-style: none;
     width: 100%;
@@ -567,7 +554,7 @@
     background: #FFFFFF;
     position: relative;
   }
-  
+
   .part3 li {
     float: left;
     width: 33%;
@@ -575,7 +562,7 @@
     text-align: center;
     position: relative;
   }
-  
+
   .part3 li p:nth-of-type(1) {
     display: inline-block;
     height: 19px;
@@ -588,7 +575,7 @@
     margin-top: 12px;
     padding: 0 5px 0 5px;
   }
-  
+
   .part3 li p:nth-of-type(2) {
     text-align: center;
     font-size: 13px;
@@ -599,7 +586,7 @@
     right: 0;
     margin: auto;
   }
-  
+
   .part3 li:nth-of-type(1) p {
     background: #FFF;
     font-size: 13px;
@@ -611,7 +598,7 @@
     bottom: 0;
     margin: auto;
   }
-  
+
   .part3 li:nth-of-type(1) p i {
     display: inline-block;
     width: 0;
@@ -626,7 +613,7 @@
     margin-left: 6px;
   }
   /*底部*/
-  
+
   .my-option {
     width: 100%;
     background: #FFFFFF;
@@ -637,7 +624,7 @@
     padding-right: 16px;
     margin-bottom: 79px;
   }
-  
+
   .my-option li {
     width: 100%;
     height: 44px;
@@ -645,24 +632,24 @@
     padding-bottom: 12px;
     position: relative;
   }
-  
+
   .my-option li span {
     font-size: 14px;
     color: #444444;
   }
-  
+
   .my-option li svg {
     float: right;
   }
-  
+
   .mui-popup-inner {
     padding: 23px 15px 1px 15px;
   }
-  
+
   .mui-content {
     background: #fff;
   }
-  
+
   /*container-image */
    /* 适配*/
 @media (min-width: 320px) {
@@ -672,7 +659,7 @@
     .my-personal {
      width: 74%;
     }
-   
+
 }
 @media (min-width: 375px) {
    .professor .my-img{
@@ -681,7 +668,7 @@
     .my-personal {
      width: 77%;
     }
-   
+
 }
 @media (min-width: 414px) {
     .professor .my-img{
@@ -691,5 +678,5 @@
      width: 79%;
     }
 }
-  
+
 </style>

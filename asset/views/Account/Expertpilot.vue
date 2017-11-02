@@ -38,64 +38,59 @@
 </template>
 
 <script>
-  //@tap.stop.prevent="$router.replace('/expert/apply')"
-  import {getLocalUserInfo, getUserInfo} from '../../utils/user';
-  import {USERS_APPEND} from '../../stores/types';
-  import userAbility from '../../utils/userAbility';
-  import userAbilityCheck from '../../utils/userAbilityCheck';
-  //userAbility.applyProfessor(this);
+  // @tap.stop.prevent="$router.replace('/expert/apply')"
+  import { getLocalUserInfo, getUserInfo } from '../../utils/user'
+  import { USERS_APPEND } from '../../stores/types'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
+  // userAbility.applyProfessor(this);
 
-  var userInfo = getLocalUserInfo();
+  var userInfo = getLocalUserInfo()
   export default {
-    data() {
+    data () {
       return {
         loading: 1,
         percent: userInfo.account_info_complete_percent,
-        expert_apply_status: 0,
+        expert_apply_status: 0
       }
     },
     methods: {
-      //判断资料的完善程度；
-      ApplicationJudge(){
+      // 判断资料的完善程度；
+      ApplicationJudge () {
         if (userAbilityCheck.applyProfessor(this)) {
-           this.$router.replace('/expert/apply');
+          this.$router.replace('/expert/apply')
         }
       },
-      initData() {
-        //执行刷新
-        console.log('refresh-my');
+      initData () {
+        // 执行刷新
+        console.log('refresh-my')
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-          cb(user);
-          this.percent = user.info.account_info_complete_percent;
-          this.expert_apply_status = user.info.expert_apply_status;
+          cb(user)
+          this.percent = user.info.account_info_complete_percent
+          this.expert_apply_status = user.info.expert_apply_status
 
           switch (parseInt(this.expert_apply_status)) {
             case 0:
             case 3:
-              this.loading = 0;
-              break;
+              this.loading = 0
+              break
             case 2:
-              mui.toast('您已经是专家');
-              mui.back();
-              break;
+              window.mui.toast('您已经是专家')
+              window.mui.back()
+              break
             case 1:
-              mui.toast('认证审核中');
-              mui.back();
-              break;
+              window.mui.toast('认证审核中')
+              window.mui.back()
+              break
           }
-
-
-        }));
+        }))
       }
-
-
     },
-    mounted() {
-      console.log(userInfo.account_info_complete_percent);
+    mounted () {
+      console.log(userInfo.account_info_complete_percent)
     },
     activated: function () {
-      console.log('activated');
-      this.initData();
+      console.log('activated')
+      this.initData()
     }
   }
 </script>

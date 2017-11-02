@@ -30,6 +30,7 @@
       <div class="back" v-if="data.description">
         {{data.description}}
 
+
       </div>
 
       <div class="feedback" v-show="list.status =='3' || list.status =='4' ">
@@ -64,147 +65,130 @@
   </div>
 </template>
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { postRequest } from '../../utils/request'
   const EnrollmentStatus = {
     data: () => ({
       list: [],
-      data: "",
+      data: '',
       comment: '',
       loading: true,
       cont: [],
-      number: "",
-
+      number: ''
     }),
-    created() {
-
+    created () {
     },
     computed: {
-      //动态计算当前的页数；
-      page() {
+      // 动态计算当前的页数；
+      page () {
         if (this.number) {
-          return parseInt(this.number.current_page) + 1;
+          return parseInt(this.number.current_page) + 1
         }
-        return 1;
-
+        return 1
       },
-      //有无数据；
-      nothing() {
+      // 有无数据；
+      nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-        return this.list.length ? 0 : 1;
-      },
-
+        return this.list.length ? 0 : 1
+      }
     },
     methods: {
-      refreshPageData(){
-        this.init();
+      refreshPageData () {
+        this.init()
       },
-      //报名；
-      signUp(){
-        let id = parseInt(this.$route.params.id);
+      // 报名；
+      signUp () {
+        let id = parseInt(this.$route.params.id)
         postRequest(`activity/enroll`, {activity_id: id}).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
           console.log(response.data.data.tip)
           if (response.data.data) {
-
-
-//   				   mui.toast(response.data.data.tip);
-            this.getData();
-
+            // mui.toast(response.data.data.tip);
+            this.getData()
           }
 
-          this.loading = 0;
-        });
-
+          this.loading = 0
+        })
       },
-      getData() {
-        let id = parseInt(this.$route.params.id);
+      getData () {
+        let id = parseInt(this.$route.params.id)
         postRequest(`activity/detail`, {activity_id: id}).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
           if (response.data.data) {
-
-            this.list = response.data.data.info;
-            this.data = response.data.data.feedback;
-
+            this.list = response.data.data.info
+            this.data = response.data.data.feedback
           }
 
-          this.loading = 0;
-        });
+          this.loading = 0
+        })
       },
-      message() {
-        let id = parseInt(this.$route.params.id);
+      message () {
+        let id = parseInt(this.$route.params.id)
         if (this.comment) {
           postRequest(`activity/commentCreate`, {activity_id: id, content: this.comment}).then(response => {
-            var code = response.data.code;
-            //如果请求不成功提示信息 并且返回上一页；
+            var code = response.data.code
+            // 如果请求不成功提示信息 并且返回上一页
             if (code !== 1000) {
-              mui.alert(response.data.message);
-              mui.back();
-              return;
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
             }
-//						console.log(response.data.data)
+
             if (response.data.data) {
-
-              this.cont.unshift(response.data.data);
-              this.comment = '';
-
+              this.cont.unshift(response.data.data)
+              this.comment = ''
             }
-//	                    console.log(this.cont);
-            this.loading = 0;
-          });
-
+            this.loading = 0
+          })
         }
-
       },
-      getPrevList() {
-        let id = parseInt(this.$route.params.id);
+      getPrevList () {
+        let id = parseInt(this.$route.params.id)
         postRequest(`activity/commentList`, {activity_id: id}).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
-//						console.log(response.data.data.data)
+
           if (response.data.data) {
-
-            this.cont = response.data.data.data;
-            this.number = response.data.data;
+            this.cont = response.data.data.data
+            this.number = response.data.data
           }
-//	                    console.log(this.cont);
-          this.loading = 0;
-        });
-      },
-      init(){
-        //活动详情
-        this.getData();
-        //列表
-        this.getPrevList();
-      }
 
+          this.loading = 0
+        })
+      },
+      init () {
+        // 活动详情
+        this.getData()
+        // 列表
+        this.getPrevList()
+      }
     },
     watch: {
       '$route': 'refreshPageData'
     },
-    mounted() {
-        this.init();
+    mounted () {
+      this.init()
     }
   }
-  export default EnrollmentStatus;
+  export default EnrollmentStatus
 </script>
 
 <style scoped="scoped">

@@ -11,10 +11,10 @@
       <div class="menu">
         <span @tap.stop.prevent="">问答  <i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/collectedArticle')">文章</span>
-        
+
       </div>
-      
-      
+
+
       <RefreshList
         v-model="list"
         :api="'collected/answers'"
@@ -46,9 +46,7 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import RefreshList from '../../components/refresh/List.vue';
-
+  import RefreshList from '../../components/refresh/List.vue'
 
   const Obj = {
     data: () => ({
@@ -58,24 +56,24 @@
       RefreshList
     },
     methods: {
-      toDetail(item) {
-          if (item.question_type === 2) {
-            this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true);
-          } else {
-            this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true);
-          }
-      },
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        } else {
+          this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        }
+      }
     },
     computed: {
     },
-    mounted(){
+    mounted () {
       window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-onlookerslist');
-      });
+        // 执行刷新
+        console.log('refresh-onlookerslist')
+      })
     }
-  };
-  export default Obj;
+  }
+  export default Obj
 
 </script>
 
@@ -100,7 +98,7 @@
     background: #FFFFFF;
   }
   /*导航栏的样式*/
-  
+
   .menu {
     width: 100%;
     height: 45px;
@@ -108,7 +106,7 @@
     z-index: 10;
     background: #f3f4f6;
   }
-  
+
   .menu span {
     display: block;
     width: 50%;
@@ -120,12 +118,12 @@
     line-height: 45px;
     font-weight: 600;
   }
-  
+
   .menu span:nth-of-type(1) {
     color: #3c95f9;
     position: relative;
   }
-  
+
   .menu i {
     display: block;
     position: absolute;
@@ -135,7 +133,7 @@
     bottom: 0.5px;
     background: #3c95f9;
   }
-  
+
 
   .bot {
     position: absolute;
@@ -253,7 +251,7 @@
     color:#808080;
     padding:5px 0 0;
   }
-  
+
   .listWrapper{
     top: 45px;
   }
