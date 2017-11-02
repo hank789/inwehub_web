@@ -1,166 +1,157 @@
 <template>
 
-	<div>
+  <div>
 
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">我的关注</h1>
-		</header>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">我的关注</h1>
+    </header>
 
-		<div class="mui-content absolute">
-		  <!--导航栏-->
+    <div class="mui-content">
+      <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="">关注的用户 <i></i></span>
         <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
-        
+
       </div>
-		  
-		  
-		  
-			<div class=" mui-scroll-wrapper task-list" id="pullrefresh">
-				<div class="mui-scroll">
+      <!--搜索区域-->
+      <Contact :list="list" v-model="lastList" :search="search">
 
-					<div class="container" v-if="!this.list.length && !loading">
-						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-zanwushuju"></use>
-						</svg>
-						<p>暂时还没有数据呀～</p>
-					</div>
+        <div slot="header" class="indexHeader">
+          <div class="searchWrapper">
+            <input type="text" placeholder="输入用户名" v-model.trim="search">
+          </div>
 
-					<ul class="my-focus">
+          <div class="notFound">
+            找不到成员？<span>添加新的关注</span>
+          </div>
 
-						<li class="my-focus-item" v-for="(item, index) in list">
-							<img :src="item.user_avatar_url" @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')" />
-							<div>
-								<p>
-									<span class="mui-ellipsis">{{item.user_name}}</span>
-									<svg class="icon" aria-hidden="true" v-if="item.is_expert=='1'">
-										<use xlink:href="#icon-zhuanjiabiaoji"></use>
-									</svg>
-								</p>
-								<p>
-									<span class="mui-ellipsis">{{ item.description }}</span>
-								</p>
-							</div>
-							<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/ask?id=' + item.uuid)" v-if="item.is_expert=='1'">
-								<use xlink:href="#icon-tiwen"></use>
-							</svg>
+        </div>
 
-							<i class="bot"></i>
-						</li>
+        <div class="indexTitle">
+          已关注的成员
 
-					</ul>
-				</div>
-			</div>
-		</div>
+        </div>
 
-	</div>
+        <div class="groupWrapper">
+          <ul v-for="(list, key) in lastList" class="index-bar-group">
+            <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
+            <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active" :class="{bottomBorder:index !== list.length-1  }">
+
+              <div class="avatar">
+                <div class="avatarInner" @tap.stop.prevent="">
+                  <img :src="item.avatar_url">
+
+                  <svg class="icon" aria-hidden="true" v-show="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="textBody ">
+                <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
+                <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
+              </div>
+
+              <div class="ibutton active" v-if="item.is_invited"  @tap.stop.prevent="collectProfessor(item.uuid,index)">已关注</div>
+              <div class="ibutton" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注Ta</div>
+
+            </li>
+          </ul>
+        </div>
+      </Contact>
+
+    </div>
+  </div>
 </template>
 <script>
-	import localEvent from '../../stores/localStorage';
-	import { NOTICE, TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../../stores/types';
-	import { apiRequest, postRequest } from '../../utils/request';
+  import Contact from '../../components/contact/Index.vue'
+  import { postRequest } from '../../utils/request'
 
-	export default {
-		data() {
-			return {
-				list: [],
-				loading: 1
-			}
-		},
-		activated: function() {
+  export default {
+    data() {
+      return {
+        id: 0,
+        search: '',
+        username: '',
+        shareUrl: '',
+        shareImg: '',
+        answernum: 0,
+        followednum: 0,
+        title: '',
+        list: [],
+        lastList: []
+      }
+    },
+    components: {
+      Contact,
 
-		},
-		methods: {
-			pulldownRefresh() {
-				setTimeout(() => {
-					this.getPrevList();
-				}, 1000);
-			},
-			pullupRefresh() {
-				setTimeout(() => {
-					this.getNextList();
-				}, 1000);
-			},
-			getPrevList() {
+    },
+    methods: {
+      //点击关注；
+     collectProfessor(id, index) {
+        postRequest(`follow/user`, {
+          id: id
+        }).then(response => {
+          var code = response.data.code;
+          if(code !== 1000) {
+            mui.alert(response.data.message);
+            return;
+          }
+          console.log(this.list[index].is_following)
+          this.list[index].is_following = this.list[index].is_following;
+          mui.toast(response.data.data.tip);
+        });
 
-				postRequest(`followed/users`, {}).then(response => {
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-						return;
-					}
+      },
+      //数据；
+      getList() {
+        postRequest(`followed/users`, {}).then(response => {
+          var code = response.data.code
+          if(code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if(response.data.data.length > 0) {
+            var arr = response.data.data
+            for(var i = 0; i < arr.length; i++) {
+              var item = {
+                id:arr[i].user_id,
+                name:arr[i].user_name,
+                avatar_url:arr[i].user_avatar_url,
+                description:arr[i].description,
+                is_expert:arr[i].is_expert,
+                is_invited:0,
+                uuid:arr[i].uuid
+                
+              }
+              this.list = this.list.concat(item);
+              
+            }
+          }
+          console.error(this.list);
 
-					if(response.data.data.length > 0) {
-						this.list = response.data.data;
-					}
-					this.loading = 0;
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-				});
-			},
-			getNextList() {
-				postRequest(`followed/users`, {
-					bottom_id: this.bottomId
-				}).then(response => {
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						mui.back();
-						return;
-					}
+          this.loading = 0
+        })
 
-					if(response.data.data.length > 0) {
-						this.list = this.list.concat(response.data.data);
-					}
-					this.loading = 0;
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-				});
-			},
-		},
-		computed: {
-			topId() {
-				if(this.list.length) {
-					return this.list[0].id;
-				}
-				return 0;
-			},
-			bottomId() {
-				var length = this.list.length;
-				if(length) {
-					return this.list[length - 1].id;
-				}
-				return 0;
-			}
-		},
-		created() {
-			//showInwehubWebview();
-		},
-		mounted() {
-			window.addEventListener('refreshData', (e) => {
-				//执行刷新
-				console.log('refresh-collect');
-				this.getPrevList();
-			});
-			mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						callback: this.pulldownRefresh
-					},
-					up: {
-						contentrefresh: '正在加载...',
-						callback: this.pullupRefresh
-					}
-				}
-			});
-			this.getPrevList();
-		}
-	}
+      }
+    },
+
+    watch: {},
+    mounted() {
+      this.getList();
+
+    },
+    created() {
+      console.log(this.lastList)
+
+    }
+  }
 </script>
 
-<style scoped>
-    /*导航栏的样式*/
+<style lang="less" rel="stylesheet/less" scoped>
+  /*导航栏的样式*/
   
   .menu {
     width: 100%;
@@ -197,106 +188,55 @@
     background: #3c95f9;
   }
   /**/
-	.bot {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 0px;
-		height: 1px;
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: rgb(220, 220, 220);
-	}
-
-	p {
-		margin: 0;
-		padding: 0;
-	}
-
-	.mui-content {
-		background: #FFFFFF;
-	}
-
-	.my-focus {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		padding-left: 17px;
-		padding-right: 17px;
-	}
-
-	.my-focus-item {
-		width: 100%;
-		height: 63px;
-		list-style: none;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		position: relative;
-	}
-
-	.my-focus-item img {
-		width: 44px;
-		height: 44px;
-		border-radius: 50%;
-		margin-right: 8px;
-		float: left;
-	}
-
-	.my-focus-item div {
-		float: left;
-	}
-
-	.my-focus-item>svg {
-		font-size: 60px;
-		margin-top: -7px;
-		float: right;
-	}
-
-	.my-focus-item div p:nth-of-type(1) span {
-		display: inline-block;
-		max-width: 140px;
-		height: 20px;
-		font-size: 14px;
-		color: #444444;
-	}
-
-	.my-focus-item div p:nth-of-type(1) svg {
-		font-size: 20px;
-		margin-bottom: 2px;
-		color: #3c95f9;
-	}
-
-	.my-focus-item div p:nth-of-type(2) span {
-		display: inline-block;
-		width: 210px;
-		height: 18px;
-		font-size: 13px;
-		color: #b4b4b6;
-	}
-
-	.my-focus-item div p:nth-of-type(2) i {
-		display: inline-block;
-		width: 1px;
-		height: 12px;
-		background: #b4b4b6;
-		margin-bottom: -2px;
-	}
-
-	.container {
-		position: absolute;
-		top: 500%;
-		left: 36%;
-	}
-
-	.container svg {
-		font-size: 60px;
-		margin-left: 23px;
-		margin-bottom: 8px;
-	}
-
-	.container p {
-		font-family: "PingFangSC";
-		font-size: 12px;
-		color: #c8c8c8;
-	}
+  
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+  /*搜索区域*/
+  
+  .indexHeader {
+    background-color:#FFFFFF;
+    padding: 10px 15px;
+    margin-top: 45px;
+    .searchWrapper {
+      input {
+        height: 34px;
+        font-size: 14px;
+        border-radius: 50px;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+        margin-bottom: 5px;
+        &::placeholder {
+          color: #c8c8c8;
+        }
+      }
+    }
+    .notFound {
+      font-size: 13px;
+      color: #808080;
+      span {
+        color: #03aef9;
+      }
+    }
+  }
+  
+  .indexTitle {
+    background: #ececee;
+    font-size: 13px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 15px;
+    color: #808080;
+  }
+  
+  .mui-content {
+    background: #fff;
+  }
 </style>

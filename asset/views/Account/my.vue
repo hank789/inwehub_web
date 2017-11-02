@@ -18,9 +18,9 @@
               </svg>
             </div>
          <div class="my-detail">
-              <span @tap.stop.prevent="$router.push('/my/Growth')">等级详情 ></span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/Growth')">等级详情 ></span>
               <i></i>
-              <span@tap.stop.prevent="$router.push('/my/advantage')">我的擅长 ></span>
+              <span@tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长 ></span>
 
             </div>
           </div>
@@ -455,6 +455,7 @@
     font-size: 14px;
     padding-left: 8px;
     padding-right: 15px;
+    z-index: 999;
   }
   /**********邀请我的好友***************/
   
@@ -646,7 +647,6 @@
   }
   
   .my-option li span {
-    margin-left: 10px;
     font-size: 14px;
     color: #444444;
   }
