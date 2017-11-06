@@ -18,7 +18,7 @@
     <div id="pullrefresh" :class="{'mui-content':true, 'mui-scroll-wrapper':true, 'emptyList':nothing}">
       <div class="mui-scroll">
 
-        <div class="mui-content" v-show="nothing == 0">
+        <div v-show="nothing == 0">
         <div class="list">
           <div class="item mui-table-view" v-for="(item, index) in list">
             <div class="mui-table-view-cell">

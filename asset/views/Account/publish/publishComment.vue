@@ -24,6 +24,7 @@
         :api="'comment/myList'"
         :prevOtherData="{type:0}"
         :nextOtherData="{type:0}"
+        :pageMode="true"
         :list="list"
         class="listWrapper">
         <ul class="answer">
