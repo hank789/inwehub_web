@@ -60,7 +60,7 @@
 
             </div>
             <!--名片-->
-            <div class="Card">96%</div>
+            <div class="Card"></div>
             <div class="share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fenxiang"></use>
