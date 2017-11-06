@@ -155,7 +155,7 @@
               window.mixpanel.track(
                 'inwehub:read_page_detail', {
                   'app': 'inwehub',
-                  'user_device': this.getUserAppDevice(),
+                  'user_device': window.getUserAppDevice(),
                   'page': url,
                   'page_title': title
                 }
