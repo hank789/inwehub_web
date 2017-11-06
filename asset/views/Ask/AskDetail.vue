@@ -18,10 +18,10 @@
       ></Answer>
 
       <div class="detail-answer-wait" v-show="ask.question.status!=6&&ask.question.status!=7">
-           <svg class="icon" aria-hidden="true">
-			  <use xlink:href="#icon-zanwushuju"></use>
-		  </svg>
-         <p>正在等待专家回答</p>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zanwushuju"></use>
+        </svg>
+        <p>正在等待专家回答</p>
       </div>
 
       <Comment v-show="ask.question.status===6"
@@ -40,11 +40,10 @@
       ></Timeline>
 
       <Discuss v-show="ask.question.status==6||ask.question.status==7"
-         :answerId="ask.answers[0] ? ask.answers[0].id:0"
-         ref="discuss"
+               :answerId="ask.answers[0] ? ask.answers[0].id:0"
+               ref="discuss"
       >
       </Discuss>
-
 
 
     </div>
@@ -63,20 +62,19 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
 
-  import UserInfo from '../../components/question-detail/UserInfo.vue';
-  import Question from '../../components/question-detail/Question.vue';
-  import Discuss from '../../components/question-detail/Discuss.vue';
-  import StarRating from '../../components/question-detail/StarRating.vue';
-  import Statistics from '../../components/question-detail/Statistics.vue';
-  import Timeline from '../../components/question-detail/Timeline.vue';
-  import Answer from '../../components/question-detail/Answer.vue';
-  import Comment from '../../components/question-detail/Comment.vue';
-  import Share from '../../components/Share.vue';
-  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
-
+  import UserInfo from '../../components/question-detail/UserInfo.vue'
+  import Question from '../../components/question-detail/Question.vue'
+  import Discuss from '../../components/question-detail/Discuss.vue'
+  import StarRating from '../../components/question-detail/StarRating.vue'
+  import Statistics from '../../components/question-detail/Statistics.vue'
+  import Timeline from '../../components/question-detail/Timeline.vue'
+  import Answer from '../../components/question-detail/Answer.vue'
+  import Comment from '../../components/question-detail/Comment.vue'
+  import Share from '../../components/Share.vue'
+  import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
 
   const AskDetail = {
     data: () => ({
@@ -89,16 +87,16 @@
         timeline: []
       },
       id: 0,
-      shareOption:{
-        title:'',
-        link:'',
-        content:'',
-        imageUrl:'',
-        thumbUrl:''
+      shareOption: {
+        title: '',
+        link: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: ''
       },
       loading: true
     }),
-    mounted(){
+    mounted () {
     },
     components: {
       UserInfo,
@@ -112,40 +110,35 @@
       Share
     },
     computed: {
-      title(){
-          switch(parseInt(this.ask.question.question_type)) {
-            case 1:
-                return '专业问答';
-                break;
-            case 2:
-                return '悬赏问答';
-                break;
-          }
-          return '提问';
+      title () {
+        switch (parseInt(this.ask.question.question_type)) {
+          case 1:
+            return '专业问答'
+          case 2:
+            return '悬赏问答'
+        }
+        return '提问'
       },
-      timelines() {
-        return this.ask.timeline.reverse();
+      timelines () {
+        return this.ask.timeline.reverse()
       }
     },
     methods: {
-      shareSuccess(){
-
+      shareSuccess () {
       },
-      shareFail(){
-
+      shareFail () {
       },
-      downRefresh(callback){
+      downRefresh (callback) {
         this.getDetail(() => {
-          this.$refs.discuss.resetList();
-        });
+          this.$refs.discuss.resetList()
+        })
       },
-      refreshPageData(){
-        this.loading = 1;
-        this.getDetail();
+      refreshPageData () {
+        this.loading = 1
+        this.getDetail()
       },
-      getDetail(successCallback = () => {}){
-
-        let id = parseInt(this.$route.params.id);
+      getDetail (successCallback = () => {}) {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -153,44 +146,43 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
 
-        this.id = id;
+        this.id = id
 
         postRequest(`question/info`, {id: this.id}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            this.$router.pushPlus('/task','' ,true, 'pop-in', 'hide', true);
-            return;
+            window.mui.toast(response.data.message)
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
+            return
           }
 
-          this.ask = response.data.data;
-          this.loading = 0;
+          this.ask = response.data.data
+          this.loading = 0
 
-          var answer = this.ask.answers[0] ? this.ask.answers[0] : {};
-          var username = answer.user_name ? answer.user_name : '';
+          var answer = this.ask.answers[0] ? this.ask.answers[0] : {}
+          var username = answer.user_name ? answer.user_name : ''
 
-          this.shareOption = getAskCommunityMajorDetail(this.id, this.ask.question.description, username);
+          this.shareOption = getAskCommunityMajorDetail(this.id, this.ask.question.description, username)
 
-          successCallback();
-
-        });
+          successCallback()
+        })
       }
     },
     watch: {
       '$route': 'refreshPageData'
     },
     created () {
-      //showInwehubWebview();
-      this.getDetail();
+      // showInwehubWebview();
+      this.getDetail()
     }
   }
-  export default AskDetail;
+  export default AskDetail
 </script>
 
 
@@ -202,24 +194,25 @@
   .mui-content {
     background: #f3f4f6;
   }
-  .detail-answer-wait{
-  	width: 100%;
-  	background:#FFFFFF;
-  	margin-bottom: 10px;
-  	text-align: center;
-  	padding: 20px 0;
+
+  .detail-answer-wait {
+    width: 100%;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 20px 0;
   }
-  .detail-answer-wait svg{
+
+  .detail-answer-wait svg {
     font-size: 50px;
 
   }
 
-  .detail-answer-wait  p{
-  	 width: 100%;
-  	 font-size: 12px;
-  	 color:#c8c8c8;
-  	 text-align: center;
-
+  .detail-answer-wait p {
+    width: 100%;
+    font-size: 12px;
+    color: #c8c8c8;
+    text-align: center;
 
   }
 

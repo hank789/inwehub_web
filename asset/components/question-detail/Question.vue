@@ -15,6 +15,7 @@
 
     <div class="content">
       {{ ask.description }}
+
     </div>
 
 
@@ -26,12 +27,11 @@
 </template>
 <script type="text/javascript">
 
-  import UserInfo from './UserInfo.vue';
+  import UserInfo from './UserInfo.vue'
 
   export default {
     data () {
-      return {
-      }
+      return {}
     },
     components: {
       UserInfo
@@ -45,29 +45,29 @@
         type: Boolean,
         default: false
       },
-      isShowPositionAndCompany:{
+      isShowPositionAndCompany: {
         type: Boolean,
         default: false
       }
     },
-    created(){
+    created () {
 
     },
     methods: {
-      setFollowStatus(status){
-        this.ask.is_followed=status;
+      setFollowStatus (status) {
+        this.ask.is_followed = status
       },
-      getHtml(id, options, callback) {
+      getHtml (id, options, callback) {
       }
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">
 
   .detail-ask {
     padding-bottom: 5px;
-    margin-top:0 !important;
+    margin-top: 0 !important;
   }
 
   .detail-ask:before {
@@ -95,24 +95,24 @@
     font-weight: normal;
   }
 
-  .content{
-    font-size:16px;
-    color:#444444;
-    padding-left:15px;
-    padding-right:15px;
+  .content {
+    font-size: 16px;
+    color: #444444;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  .footer{
-    padding:10px 15px;
-    font-size:12px;
+  .footer {
+    padding: 10px 15px;
+    font-size: 12px;
   }
 
-  .footer .amount{
-    color:#fa4975;
+  .footer .amount {
+    color: #fa4975;
   }
 
-  .footer .timeAgo{
-    float:right;
-    color:#b4b4b6;
+  .footer .timeAgo {
+    float: right;
+    color: #b4b4b6;
   }
 </style>

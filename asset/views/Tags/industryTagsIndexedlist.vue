@@ -42,8 +42,8 @@
 </template>
 
 <script>
-  import {apiRequest} from '../../utils/request';
-  import muiIndexedList from '../../components/indexedlist/indexedlist.vue';
+  import {apiRequest} from '../../utils/request'
+  import muiIndexedList from '../../components/indexedlist/indexedlist.vue'
 
   export default {
     data: () => ({
@@ -54,84 +54,83 @@
     }),
     props: ['tag_type', 'back_id', 'object_type', 'selected'],
     created () {
-      apiRequest(`tags/load`, {tag_type: this.tag_type}).then(response_data => {
-        if (response_data !== false) {
-          this.tags = response_data.tags;
-          this.counts = this.tags.length;
+      apiRequest(`tags/load`, {tag_type: this.tag_type}).then(responseData => {
+        if (responseData !== false) {
+          this.tags = responseData.tags
+          this.counts = this.tags.length
         }
-      });
+      })
 
-      this.iselected = this.selected ? this.selected : [];
+      this.iselected = this.selected ? this.selected : []
     },
     computed: {
-      genderTagName() {
-        var tag_name = '行业领域';
+      genderTagName () {
+        var tagName = '行业领域'
         switch (this.tag_type) {
           case 3:
-            tag_name = '行业领域';
-            break;
+            tagName = '行业领域'
+            break
           case 4:
-            tag_name = '产品类型';
-            break;
+            tagName = '产品类型'
+            break
         }
-        return tag_name;
+        return tagName
       },
-      getSelected(){
-        return this.selected;
+      getSelected () {
+        return this.selected
       },
-      getSelectedCodes(){
-        var newValue = [];
+      getSelectedCodes () {
+        var newValue = []
         for (var i in this.iselected) {
-
-          newValue.push(this.iselected[i].value);
+          newValue.push(this.iselected[i].value)
         }
-        return newValue;
+        return newValue
       }
     },
     methods: {
-      done(){
-        this.$emit('selectedIndustryTags', this.iselected, this.object_type);
-        document.getElementById(this.back_id).classList.remove('mui-active');
+      done () {
+        this.$emit('selectedIndustryTags', this.iselected, this.object_type)
+        document.getElementById(this.back_id).classList.remove('mui-active')
       },
-      checkThis(e){
-        var li = null;
+      checkThis (e) {
+        var li = null
         if (e.target.tagName === 'SPAN') {
-          li = e.target.parentNode;
+          li = e.target.parentNode
         } else {
-          li = e.target;
+          li = e.target
         }
-        var span = li.childNodes[0];
+        var span = li.childNodes[0]
         var value = {
           text: li.innerText,
           value: parseInt(li.getAttribute('value'))
-        };
+        }
 
-        var pos = this.getSelectedCodes.indexOf(value.value);
+        var pos = this.getSelectedCodes.indexOf(value.value)
         if (!span.classList.contains('checked')) {
-          span.classList.add('checked');
+          span.classList.add('checked')
           if (pos < 0) {
-            this.iselected.push(value);
+            this.iselected.push(value)
           }
         } else {
-          span.classList.remove('checked');
+          span.classList.remove('checked')
           if (pos >= 0) {
-            this.iselected.splice(pos, 1);
+            this.iselected.splice(pos, 1)
           }
         }
       }
     },
     watch: {
       selected: function (val) {
-        if (typeof(val) === 'object') {
-          this.iselected = val;
+        if (typeof (val) === 'object') {
+          this.iselected = val
         }
       }
     },
     components: {
       muiIndexedList
     },
-    mounted() {
-      mui('.mui-scroll-wrapper').scroll();
+    mounted () {
+      window.mui('.mui-scroll-wrapper').scroll()
     }
   }
 

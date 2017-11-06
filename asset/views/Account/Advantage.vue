@@ -46,12 +46,11 @@
 </template>
 
 <script>
-  import { getLocalUserInfo, getUserInfo, getUserLevelPercentage } from '../../utils/user';
-  import { searchText } from '../../utils/search';
-  import { apiRequest, postRequest } from '../../utils/request';
+  import { searchText } from '../../utils/search'
+  import { postRequest } from '../../utils/request'
 
   export default {
-    data() {
+    data () {
       return {
         searchText: '',
         loading: 1,
@@ -60,145 +59,138 @@
       }
     },
     methods: {
-      Obtain() {
-        var that = this;
+      Obtain () {
+        var that = this
 
-        var btnArray = ['取消', '确定'];
-        mui.prompt('', '标签名称', '输入标签名称', btnArray, function(e) {
-          if(e.index == 1) {
-            //申请添加擅长标签；
+        var btnArray = ['取消', '确定']
+        window.mui.prompt('', '标签名称', '输入标签名称', btnArray, function (e) {
+          if (e.index === 1) {
+            // 申请添加擅长标签；
             if (e.value) {
-              that.applySkillTag(e.value);
+              that.applySkillTag(e.value)
             }
           }
         }, 'div')
       },
-      //删除擅长标签；
-      delSkillTag(val) {
+      // 删除擅长标签；
+      delSkillTag (val) {
 //      console.error(val);
-        postRequest("profile/delSkillTag", {
+        postRequest('profile/delSkillTag', {
           tags: [val]
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 //        console.error(response.data);
-          mui.toast("删除成功");
-          //刷新我的擅长列表；
-          this.skillTags();
+          window.mui.toast('删除成功')
+          // 刷新我的擅长列表；
+          this.skillTags()
 
-          this.loading = 0;
-        });
-
+          this.loading = 0
+        })
       },
-      //添加擅长标签；
-      addSkillTag(val, text) {
+      // 添加擅长标签；
+      addSkillTag (val, text) {
 //      console.error(text);
-        postRequest("profile/addSkillTag", {
+        postRequest('profile/addSkillTag', {
           tags: [val]
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          var data = [];
-          for(var i = 0; i < this.skill_tags.length; i++) {
+          var data = []
+          for (var i = 0; i < this.skill_tags.length; i++) {
             data.push(this.skill_tags[i].text)
-
           }
 
           // 判断是否已经添加；
-          if(data.indexOf(text) > -1){
-            //有重复；
-            mui.toast("已经添加");
-
-          }else{
-            //无重复；
+          if (data.indexOf(text) > -1) {
+            // 有重复；
+            window.mui.toast('已经添加')
+          } else {
+            // 无重复；
  //          mui.toast("添加成功");
           }
 
-
-          //刷新我的擅长列表；
-          this.skillTags();
-          this.loading = 0;
-        });
+          // 刷新我的擅长列表
+          this.skillTags()
+          this.loading = 0
+        })
       },
-      //申请添加擅长标签；
-      applySkillTag(text) {
-        postRequest("system/applySkillTag", {
+      // 申请添加擅长标签；
+      applySkillTag (text) {
+        postRequest('system/applySkillTag', {
           tag_name: text
         }).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
-          mui.toast("申请提交成功");
-          this.loading = 0;
-        });
+          window.mui.toast('申请提交成功')
+          this.loading = 0
+        })
       },
-      //我的擅长列表；
-      skillTags() {
-        postRequest("profile/info", {}).then(response => {
-          var code = response.data.code;
-          if(code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+      // 我的擅长列表；
+      skillTags () {
+        postRequest('profile/info', {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          if(response.data.data.info.skill_tags.length > 0) {
-            this.skill_tags = response.data.data.info.skill_tags;
+          if (response.data.data.info.skill_tags.length > 0) {
+            this.skill_tags = response.data.data.info.skill_tags
           }
-          this.loading = 0;
-        });
-
+          this.loading = 0
+        })
       },
-      //搜索标签列表；
-      search(text) {
-        //判断是否为空；
-        if(text) {
-          postRequest("tags/load", {
+      // 搜索标签列表；
+      search (text) {
+        // 判断是否为空；
+        if (text) {
+          postRequest('tags/load', {
             tag_type: 5,
             word: text
           }).then(response => {
-            var code = response.data.code;
-            if(code !== 1000) {
-              mui.alert(response.data.message);
-              mui.back();
-              return;
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
             }
-            if(response.data.data.tags.length > 0) {
-              this.list = response.data.data.tags;
+            if (response.data.data.tags.length > 0) {
+              this.list = response.data.data.tags
             }
-            this.loading = 0;
-          });
+            this.loading = 0
+          })
         } else {
-          this.list = [];
+          this.list = []
         }
-
       }
-
     },
     watch: {
-      searchText: function(newValue) {
+      searchText: function (newValue) {
         if (!newValue) {
-            this.list = [];
+          this.list = []
         }
         searchText(newValue, () => {
-          this.search(newValue);
-        });
-      },
+          this.search(newValue)
+        })
+      }
     },
-    mounted() {
-      this.skillTags();
+    mounted () {
+      this.skillTags()
     }
   }
 </script>

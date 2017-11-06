@@ -31,6 +31,7 @@
                       @tap.stop.prevent="$router.push('/ask')">快速提问
 
 
+
               </button>
             </div>
           </div>
@@ -63,7 +64,8 @@
 
                   <div class="site-desc mui-ellipsis-2">
                     {{ ask.description | textLimit}}
-                </div>
+
+                  </div>
 
                   <div class="person">
                     <div class="mui-media-body">
@@ -85,20 +87,12 @@
     </div>
 
 
-
-
-
-
-
-
   </div>
 </template>
 
 <script>
-  import {NOTICE, ASKS_INFO, ASKS_LIST, ASKS_INFO_APPEND, ASKS_LIST_APPEND} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-
+  import { ASKS_INFO_APPEND, ASKS_LIST_APPEND } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
 
   const Asks = {
     data: () => ({
@@ -107,158 +101,143 @@
       loading: true
     }),
     methods: {
-      toDetail(item){
-          if (item.question_type === 2) {
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id);
-          } else {
-            this.$router.pushPlus('/ask/' + item.id);
-          }
-      },
-      pulldownRefresh() {
-        setTimeout(() => {
-          this.getPrevList();
-        },1000);
-      },
-      pullupRefresh() {
-        setTimeout(() => {
-          this.getNextList();
-        },1000);
-      },
-      getStatusText(code){
-          switch (code) {
-            case 1:
-                return '待分配';
-                break;
-            case 2:
-              return '待确认';
-              break;
-            case 3:
-              return '已关闭';
-              break;
-            case 4:
-              return '待回答';
-              break;
-            case 5:
-              return '已拒绝';
-              break;
-            case 6:
-              return '已回答';
-              break;
-            case 7:
-              return '已点评';
-              break;
-          }
-          return '';
-      },
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
-      },
-      getPrevList(){
-        postRequest(`question/myList`, {type:'1'}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
-          }
-
-          if (response.data.data.length > 0) {
-            this.asks = response.data.data;
-          }
-          this.loading = 0;
-          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-
-        });
-      },
-      getNextList() {
-        postRequest(`question/myList`, {bottom_id: this.bottomId, type:'1'}).then(response => {
-          var code = response.data.code;
-          if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
-          }
-
-          if (response.data.data.length > 0) {
-            this.asks = this.asks.concat(response.data.data);
-          }
-          this.loading = 0;
-
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-
-        });
-      },
-      isFromDetail(){
-        return false;
-        var referer = localEvent.getLocalItem('referer');
-        if (/\/ask\/[0-9]+/.test(referer.path)) {
-          return true;
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
+        } else {
+          this.$router.pushPlus('/ask/' + item.id)
         }
-        return false;
+      },
+      pulldownRefresh () {
+        setTimeout(() => {
+          this.getPrevList()
+        }, 1000)
+      },
+      pullupRefresh () {
+        setTimeout(() => {
+          this.getNextList()
+        }, 1000)
+      },
+      getStatusText (code) {
+        switch (code) {
+          case 1:
+            return '待分配'
+          case 2:
+            return '待确认'
+          case 3:
+            return '已关闭'
+          case 4:
+            return '待回答'
+          case 5:
+            return '已拒绝'
+          case 6:
+            return '已回答'
+          case 7:
+            return '已点评'
+        }
+        return ''
+      },
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
+      getPrevList () {
+        postRequest(`question/myList`, {type: '1'}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          if (response.data.data.length > 0) {
+            this.asks = response.data.data
+          }
+          this.loading = 0
+          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
+        })
+      },
+      getNextList () {
+        postRequest(`question/myList`, {bottom_id: this.bottomId, type: '1'}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          if (response.data.data.length > 0) {
+            this.asks = this.asks.concat(response.data.data)
+          }
+          this.loading = 0
+
+          window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
+        })
+      },
+      isFromDetail () {
+        return false
       }
     },
     computed: {
       nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-       //判断有没有数据 0 代表隐藏   1代表显示数据；
-        return this.asks.length ? 0 : 1;
+        // 判断有没有数据 0 代表隐藏   1代表显示数据；
+        return this.asks.length ? 0 : 1
       },
-     //获取请求数据第一个数据的id；
+      // 获取请求数据第一个数据的id；
       topId () {
         if (this.asks.length) {
-          return this.asks[0].id;
+          return this.asks[0].id
         }
-        return 0;
+        return 0
       },
-     //获取请求数据最后一个数据的id；
+      // 获取请求数据最后一个数据的id；
       bottomId () {
-        var length = this.asks.length;
+        var length = this.asks.length
         if (length) {
-          return this.asks[length - 1].id;
+          return this.asks[length - 1].id
         }
-        return 0;
+        return 0
       },
-      lastY (){
+      lastY () {
         if (this.isFromDetail()) {
-          return this.$store.state.asks.info.lastY;
+          return this.$store.state.asks.info.lastY
         } else {
-          return 0;
+          return 0
         }
       }
     },
-    updated(){
-      this.$store.dispatch(ASKS_LIST_APPEND, this.asks);
+    updated () {
+      this.$store.dispatch(ASKS_LIST_APPEND, this.asks)
     },
-    created(){
-      //showInwehubWebview();
+    created () {
+      // showInwehubWebview();
+      var list = []
       if (this.isFromDetail()) {
-        var list = this.$store.state.asks.list;
-      } else {
-        var list = [];
+        list = this.$store.state.asks.list
       }
 
       if (list.length) {
-        this.asks = list;
-        this.loading = false;
+        this.asks = list
+        this.loading = false
       }
     },
-    mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-asklist');
-        this.getPrevList();
-      });
-      var t = this;
-      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
-        var lastY = event.detail.lastY;
-        t.$store.dispatch(ASKS_INFO_APPEND, {lastY: lastY});
-      });
+    mounted () {
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-asklist')
+        this.getPrevList()
+      })
+      var t = this
+      window.mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
+        var lastY = event.detail.lastY
+        t.$store.dispatch(ASKS_INFO_APPEND, {lastY: lastY})
+      })
 
-      mui.init({
+      window.mui.init({
         pullRefresh: {
           container: '#pullrefresh',
           down: {
@@ -270,27 +249,27 @@
             callback: this.pullupRefresh
           }
         }
-      });
-      this.getPrevList();
+      })
+      this.getPrevList()
     },
     filters: {
-      textLimit(text){
-        var limit = 70;
+      textLimit (text) {
+        var limit = 70
         if (text.length > limit) {
-          text = text.slice(0, limit) + '...';
+          text = text.slice(0, limit) + '...'
         }
-        return text;
+        return text
       }
     }
   }
-  export default Asks;
+  export default Asks
 </script>
 
 
 <style scoped>
 
-  .list-ask{
-    margin-top:5px;
+  .list-ask {
+    margin-top: 5px;
   }
 
   .mui-segmented-control .mui-control-item {
@@ -320,65 +299,66 @@
 
   #pullrefresh {
   }
-  .list-ask .list-ask-item{
-    position:relative;
+
+  .list-ask .list-ask-item {
+    position: relative;
     line-height: 40px;
   }
 
-  .list-ask .list-ask-item .title{
-    line-height:28px;
+  .list-ask .list-ask-item .title {
+    line-height: 28px;
   }
 
   .list-ask .list-ask-item .mui-media-body {
-    padding-left:10px;
+    padding-left: 10px;
     line-height: 24px;
-    margin:5px 0 0;
-    color:#9B9B9B;
-    font-size:12px;
+    margin: 5px 0 0;
+    color: #9B9B9B;
+    font-size: 12px;
   }
-  .list-ask .list-ask-item .time{
-    color:#9B9B9B;
-    font-size:12px;
-    float:right;
+
+  .list-ask .list-ask-item .time {
+    color: #9B9B9B;
+    font-size: 12px;
+    float: right;
     margin-right: 10px;
   }
 
-  .list-ask .username{
-    color:#101010;
+  .list-ask .username {
+    color: #101010;
   }
 
-  .list-ask .list-ask-item .amount{
+  .list-ask .list-ask-item .amount {
     position: absolute;
     right: 10px;
-    color:#ff9800;
-    font-size:16px;
+    color: #ff9800;
+    font-size: 16px;
   }
 
-  .list-ask .list-ask-item .amount b{
+  .list-ask .list-ask-item .amount b {
 
   }
 
-  .list-ask .person{
+  .list-ask .person {
     position: relative;
   }
 
-
-  .list-ask .site-desc{
-    padding-left:10px;
+  .list-ask .site-desc {
+    padding-left: 10px;
     line-height: 22px;
-    color:#101010;
+    color: #101010;
   }
 
-  .list-ask .site-desc .mui-icon{
-    font-size:16px;
+  .list-ask .site-desc .mui-icon {
+    font-size: 16px;
   }
 
-  .list-ask .avatar{
+  .list-ask .avatar {
     z-index: 0;
     color: #ffffff;
-    float:left;
+    float: left;
     display: inline-block;
-    margin-top:3px;
+    margin-top: 3px;
     height: 50px;
     width: 50px;
     font-size: 20px;
@@ -386,8 +366,7 @@
     border-radius: 50%;
   }
 
-
-  .list-ask .avatar .avatarInner{
+  .list-ask .avatar .avatarInner {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -411,24 +390,24 @@
     display: block;
   }
 
-  .list-ask .mui-table-view-cell{
-    padding:11px 8px;
+  .list-ask .mui-table-view-cell {
+    padding: 11px 8px;
   }
 
-  .list-ask .mui-table-view-cell > a:not(.mui-btn){
+  .list-ask .mui-table-view-cell > a:not(.mui-btn) {
     margin: -11px -8px;
   }
-  .list-ask p{
-    margin-left:20px;
+
+  .list-ask p {
+    margin-left: 20px;
   }
 
-  .buttons{
-    margin-top:10px;
-    padding:0 30px;
+  .buttons {
+    margin-top: 10px;
+    padding: 0 30px;
   }
 
-
-  .mui-control-content{
+  .mui-control-content {
     position: absolute;
     width: 100%;
     bottom: 0px;
@@ -436,25 +415,23 @@
     top: 88px;
   }
 
-
-
-  .menu{
+  .menu {
     position: relative;
-    z-index:7;
+    z-index: 7;
   }
 
-  .list-empty .menu{
-    margin-bottom:0;
+  .list-empty .menu {
+    margin-bottom: 0;
   }
 
   .mui-segmented-control .mui-control-item {
     line-height: 50px;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     position: relative;
-    color:#03aef9;
+    color: #03aef9;
     border: none;
   }
 
@@ -470,34 +447,34 @@
     background-color: #009FE8;
   }
 
-  .mui-segmented-control{
+  .mui-segmented-control {
     background: #f3f4f6;
   }
 
-  #pullrefresh{
+  #pullrefresh {
     background: #fff;
   }
 
-  .mui-table-view:before{
+  .mui-table-view:before {
     display: none;
   }
 
-  .mui-table-view:after{
+  .mui-table-view:after {
     display: none;
   }
 
-  .label{
+  .label {
     display: inline-block;
-    background:#fcc816;
-    border-radius:50px;
-    color:#fff;
-    line-height:20px;
-    padding:0 9px;
+    background: #fcc816;
+    border-radius: 50px;
+    color: #fff;
+    line-height: 20px;
+    padding: 0 9px;
   }
 
-  .mui-table-view-cell:after{
-    height:1px !important;
-    left:15px;
-    right:15px;
+  .mui-table-view-cell:after {
+    height: 1px !important;
+    left: 15px;
+    right: 15px;
   }
 </style>

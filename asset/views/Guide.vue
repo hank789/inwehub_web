@@ -4,8 +4,6 @@
       <div class="mui-slider-group">
 
 
-
-
         <!-- 第一张 -->
         <div class="mui-slider-item guide guide-0">
 
@@ -46,26 +44,26 @@
 
 <script>
 
-  import localEvent from '../stores/localStorage';
+  import localEvent from '../stores/localStorage'
   export default {
     data: () => ({}),
-    created(){
-      mui.plusReady(function() {
-        plus.navigator.setFullscreen(true);
-      });
+    created () {
+      window.mui.plusReady(function () {
+        window.plus.navigator.setFullscreen(true)
+      })
     },
-    mounted(){
-      mui('.mui-slider').slider();
+    mounted () {
+      window.mui('.mui-slider').slider()
 
-      var t = this;
-      //立即体验按钮点击事件
-      document.getElementById("close").addEventListener('tap', function (event) {
-        localEvent.setLocalItem('lauchFlag', {showGuide:true});
-        plus.navigator.setFullscreen(false);
-        t.$router.replace('/');
-      }, false);
+      var t = this
+      // 立即体验按钮点击事件
+      document.getElementById('close').addEventListener('tap', function (event) {
+        localEvent.setLocalItem('lauchFlag', {showGuide: true})
+        window.plus.navigator.setFullscreen(false)
+        t.$router.replace('/')
+      }, false)
 
-      //图片切换时，触发动画
+      // 图片切换时，触发动画
 //      document.querySelector('.mui-slider').addEventListener('slide', function (event) {
 //        var index = event.detail.slideNumber + 1;
 //        if (index == 2 || index == 3) {
@@ -256,67 +254,68 @@
     }
   }
 
-  .mui-slider-indicator .mui-indicator{
+  .mui-slider-indicator .mui-indicator {
     background: #dcdcdc;
-    box-shadow:none;
-    width:9px;
-    height:9px;
-    margin:1px 1px;
+    box-shadow: none;
+    width: 9px;
+    height: 9px;
+    margin: 1px 1px;
   }
 
-  .mui-slider-indicator .mui-active.mui-indicator{
+  .mui-slider-indicator .mui-active.mui-indicator {
     background: #41cff9;
   }
 
-  .mui-slider-indicator{
-    bottom:39px;
+  .mui-slider-indicator {
+    bottom: 39px;
   }
 
-  .guide{
+  .guide {
     background-repeat: no-repeat;
     background-position: center 24%;
-    background-size:contain;
+    background-size: contain;
     background-color: #f2fbfe;
   }
 
-  .guide-0{
-    background-image:url(../statics/images/guide_01.png);
+  .guide-0 {
+    background-image: url(../statics/images/guide_01.png);
   }
 
-  .guide-1{
-    background-image:url(../statics/images/guide_02.png);
+  .guide-1 {
+    background-image: url(../statics/images/guide_02.png);
     background-color: #646668;
   }
 
-  .guide-2{
-    background-image:url(../statics/images/guide_03.png);
+  .guide-2 {
+    background-image: url(../statics/images/guide_03.png);
     background-color: #f2fbfe;
   }
 
-  .guide-3{
-    background-image:url(../statics/images/guide_04.png);
+  .guide-3 {
+    background-image: url(../statics/images/guide_04.png);
     background-color: #646668;
   }
 
-  .guide-4 .logo{
-    margin-left:-117px;
+  .guide-4 .logo {
+    margin-left: -117px;
     position: absolute;
-    left:50%;
-    top:20%;
-    width:234px;
-    height:133px;
-    background-image:url(../statics/images/guide_05.png);
+    left: 50%;
+    top: 20%;
+    width: 234px;
+    height: 133px;
+    background-image: url(../statics/images/guide_05.png);
     background-color: #f2fbfe;
-    background-size:92%;
+    background-size: 92%;
     background-repeat: no-repeat;
     background-position: center center;
   }
-  .guide-4 .logo .title{
-    font-size:15px;
-    color:#323436;
+
+  .guide-4 .logo .title {
+    font-size: 15px;
+    color: #323436;
     text-align: center;
     position: absolute;
-    bottom:7px;
+    bottom: 7px;
     width: 100%;
   }
 </style>

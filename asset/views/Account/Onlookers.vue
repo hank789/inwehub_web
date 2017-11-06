@@ -42,9 +42,7 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import userAbility from '../../utils/userAbility';
-
+  import {postRequest} from '../../utils/request'
 
   const Onlookers = {
     data: () => ({
@@ -52,87 +50,85 @@
       loading: true
     }),
     methods: {
-      toDetail(id) {
-        this.$router.push('/askCommunity/major/' + id);
+      toDetail (id) {
+        this.$router.push('/askCommunity/major/' + id)
       },
-      pulldownRefresh() {
+      pulldownRefresh () {
         setTimeout(() => {
-          this.getPrevList();
-        }, 1000);
+          this.getPrevList()
+        }, 1000)
       },
-      pullupRefresh() {
+      pullupRefresh () {
         setTimeout(() => {
-          this.getNextList();
-        }, 1000);
+          this.getNextList()
+        }, 1000)
       },
-      getPrevList(){
+      getPrevList () {
         postRequest(`answer/myOnlookList`, {type: '1'}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.list = response.data.data;
+            this.list = response.data.data
           }
-          this.loading = 0;
-          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-
-        });
+          this.loading = 0
+          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
+        })
       },
-      getNextList() {
+      getNextList () {
         postRequest(`answer/myOnlookList`, {bottom_id: this.bottomId, type: '1'}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.list = this.list.concat(response.data.data);
+            this.list = this.list.concat(response.data.data)
           }
-          this.loading = 0;
+          this.loading = 0
 
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-
-        });
-      },
+          window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
+        })
+      }
     },
     computed: {
       nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-        //判断有没有数据 0 代表隐藏   1代表显示数据；
-        return this.list.length ? 0 : 1;
+        // 判断有没有数据 0 代表隐藏   1代表显示数据；
+        return this.list.length ? 0 : 1
       },
-      //获取请求数据第一个数据的id；
+      // 获取请求数据第一个数据的id；
       topId () {
         if (this.list.length) {
-          return this.list[0].id;
+          return this.list[0].id
         }
-        return 0;
+        return 0
       },
-      //获取请求数据最后一个数据的id；
+      // 获取请求数据最后一个数据的id；
       bottomId () {
-        var length = this.list.length;
+        var length = this.list.length
         if (length) {
-          return this.list[length - 1].id;
+          return this.list[length - 1].id
         }
-        return 0;
+        return 0
       }
     },
-    mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-onlookerslist');
-        this.getPrevList();
-      });
+    mounted () {
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-onlookerslist')
+        this.getPrevList()
+      })
 
-      mui.init({
+      window.mui.init({
         pullRefresh: {
           container: '#pullrefresh',
           down: {
@@ -144,12 +140,12 @@
             callback: this.pullupRefresh
           }
         }
-      });
+      })
 
-      this.getPrevList();
+      this.getPrevList()
     }
-  };
-  export default Onlookers;
+  }
+  export default Onlookers
 
 </script>
 

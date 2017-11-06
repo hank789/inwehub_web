@@ -29,6 +29,7 @@
             <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                     @tap.stop.prevent="submit" :disabled="buttonRefuseDisable">提交反馈
 
+
             </button>
           </div>
 
@@ -41,8 +42,8 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
 
   const Refuse = {
     data: () => ({
@@ -58,21 +59,21 @@
     computed: {
       nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-        return this.answers.length ? 0 : 1;
+        return this.answers.length ? 0 : 1
       },
-      descLength() {
-        return this.description.length;
+      descLength () {
+        return this.description.length
       }
     },
     methods: {
-      refreshPageData(){
-        this.loading = true;
-        this.getDetail();
+      refreshPageData () {
+        this.loading = true
+        this.getDetail()
       },
-      getDetail(){
-        let id = parseInt(this.$route.params.id);
+      getDetail () {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -80,110 +81,105 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
-        this.id = id;
+        this.id = id
 
         postRequest(`tags/load`, {tag_type: 2}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          this.tags = response.data.data.tags;
-          this.loading = 0;
-        });
+          this.tags = response.data.data.tags
+          this.loading = 0
+        })
       },
       selectTags (tag) {
-        var pos = this.sTags.indexOf(tag.value);
+        var pos = this.sTags.indexOf(tag.value)
         if (pos >= 0) {
-          this.sTags.splice(pos, 1);
+          this.sTags.splice(pos, 1)
         } else {
-          this.sTags.push(tag.value);
+          this.sTags.push(tag.value)
         }
 
-        var pos = this.sTags.indexOf(67);
+        pos = this.sTags.indexOf(67)
 
         if (pos >= 0) {
-          this.needDesc = true;
+          this.needDesc = true
         } else {
-          this.needDesc = false;
+          this.needDesc = false
         }
-
       },
-      speech(){
-        var options = {};
-        options.engine = 'iFly';
-        var t = this;
-        plus.speech.startRecognize(options, function (s) {
-          t.description += s;
+      speech () {
+        var options = {}
+        options.engine = 'iFly'
+        var t = this
+        window.plus.speech.startRecognize(options, function (s) {
+          t.description += s
         }, function (e) {
-          mui.alert("语音识别失败：" + e.message);
-        });
+          window.mui.alert('语音识别失败：' + e.message)
+        })
       },
-      submit(){
-
+      submit () {
         if (!this.sTags.length) {
-          mui.toast('请选择标签！');
-          return;
+          window.mui.toast('请选择标签！')
+          return
         }
-
 
         if (this.needDesc && !this.description) {
-          mui.toast('请再详细说明下拒绝的原因，非常感谢！');
-          return;
+          window.mui.toast('请再详细说明下拒绝的原因，非常感谢！')
+          return
         }
 
         var data = {
           tags: this.sTags.join(','),
           description: this.description,
           question_id: this.id
-        };
+        }
 
-
-        mui.confirm("选择确定后您将不能再回答该问题了，您确定拒绝回答么？", null, ['取消', '确定'], e => {
-          if (e.index == 1) {
-
+        window.mui.confirm('选择确定后您将不能再回答该问题了，您确定拒绝回答么？', null, ['取消', '确定'], e => {
+          if (e.index === 1) {
             if (this.buttonRefuseDisable) {
-              return;
+              return
             }
 
-            this.buttonRefuseDisable = true;
+            this.buttonRefuseDisable = true
             postRequest(`question/rejectAnswer`, data).then(response => {
-              this.buttonRefuseDisable = false;
-              var code = response.data.code;
+              this.buttonRefuseDisable = false
+              var code = response.data.code
               if (code !== 1000) {
-                mui.alert(response.data.message);
-                return;
+                window.mui.alert(response.data.message)
+                return
               }
 
-              this.$router.replace('/task');
-            });
+              this.$router.replace('/task')
+            })
           }
-        }, 'div');
+        }, 'div')
       }
     },
-    mounted(){
+    mounted () {
     },
     created () {
-      //showInwehubWebview();
-      this.getDetail();
+      // showInwehubWebview();
+      this.getDetail()
     },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       },
       '$route': 'refreshPageData'
     }
   }
-  export default Refuse;
+  export default Refuse
 </script>
 
 

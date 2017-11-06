@@ -29,9 +29,11 @@
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="submitWithdraw" :disabled="isDisabled">确认提现
 
+
         </button>
       </div>
       <div class="help">今日还可提现{{ withdraw_day_remain }}次<br/>每次提现最低{{ withdrawMinMoney }}元，最高{{ withdrawMaxMoney }}元
+
       </div>
 
     </div>
@@ -40,51 +42,51 @@
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import oauth from '../../components/oauth/oauth.vue';
+  import { postRequest } from '../../utils/request'
+  import oauth from '../../components/oauth/oauth.vue'
 
   export default {
     data: () => ({
       loading: true,
       withdrawMoney: '',
       totalMoeny: '--',
-      settlementMoney: '--',  //结算中的资金
-      withdrawMinMoney: '--', //用户单次最低提现金额
-      withdrawMaxMoney: '--', //用户单次最高提现金额
-      isBindWeixin: 0, //是否绑定微信
+      settlementMoney: '--',  // 结算中的资金
+      withdrawMinMoney: '--', // 用户单次最低提现金额
+      withdrawMaxMoney: '--', // 用户单次最高提现金额
+      isBindWeixin: 0, // 是否绑定微信
       withdraw_day_limit: '--',
-      bindWeixinNickname: '', //绑定微信昵称,
-      withdraw_day_remain:'--',
+      bindWeixinNickname: '', // 绑定微信昵称,
+      withdraw_day_remain: '--',
       isDisabled: true,
       warning: ''
     }),
     created () {
-      this.getWallet();
+      this.getWallet()
     },
     computed: {
       getWarning () {
         if (!this.isBindWeixin) {
-          this.warning = '还未绑定微信账户';
-          return true;
+          this.warning = '还未绑定微信账户'
+          return true
         }
 
         if (this.withdrawMoney > parseFloat(this.totalMoeny)) {
-          this.warning = '已超过可提现余额';
-          return true;
+          this.warning = '已超过可提现余额'
+          return true
         }
 
         if (!this.withdraw_day_remain) {
-          this.warning = '已超出今日提现次数';
-          return true;
+          this.warning = '已超出今日提现次数'
+          return true
         }
 
         if (this.withdrawMoney < 1 && this.withdrawMoney > 0) {
-          this.warning = '提现金额不足一元';
-          return true;
+          this.warning = '提现金额不足一元'
+          return true
         }
 
-        return false;
-      },
+        return false
+      }
     },
     components: {
       oauth
@@ -92,83 +94,80 @@
     watch: {
       withdrawMoney: function (newMoney, oldMoney) {
         if (newMoney === '') {
-          this.withdrawMoney = '';
+          this.withdrawMoney = ''
         } else {
-          var patrn = /^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/;
+          var patrn = /^(([1-9]\d{0,8})|0)(\.\d{0,2})?$/
           if (!patrn.test(newMoney)) {
             if (isNaN(this.withdrawMoney)) {
-              this.withdrawMoney = '';
+              this.withdrawMoney = ''
             } else {
-              this.withdrawMoney = this.withdrawMoney.slice(0, -1);
-              this.withdrawMoney = parseFloat(this.withdrawMoney);
+              this.withdrawMoney = this.withdrawMoney.slice(0, -1)
+              this.withdrawMoney = parseFloat(this.withdrawMoney)
             }
           }
         }
 
         if (this.withdrawMoney <= parseFloat(this.totalMoeny) && this.withdrawMoney > 0) {
-          this.isDisabled = false;
+          this.isDisabled = false
         } else {
-          this.isDisabled = true;
+          this.isDisabled = true
         }
       }
     },
     methods: {
-      bindSuccess(){
-        this.getWallet();
+      bindSuccess () {
+        this.getWallet()
       },
-      withdrawAll(){
-        this.withdrawMoney = this.totalMoeny;
+      withdrawAll () {
+        this.withdrawMoney = this.totalMoeny
       },
-      submitWithdraw() {
-
-        this.withdrawMoney = parseFloat(this.withdrawMoney);
+      submitWithdraw () {
+        this.withdrawMoney = parseFloat(this.withdrawMoney)
 
         if (!this.isBindWeixin) {
-          mui.toast('请先绑定微信');
-          return;
+          window.mui.toast('请先绑定微信')
+          return
         }
 
         if (!this.withdrawMoney || this.withdrawMoney < 0) {
-          mui.toast('请正确填写提现金额');
-          return;
+          window.mui.toast('请正确填写提现金额')
+          return
         }
         if (this.withdrawMoney > this.totalMoeny) {
-          mui.toast('提现金额不能大于账户余额');
-          return;
+          window.mui.toast('提现金额不能大于账户余额')
+          return
         }
         postRequest(`withdraw/request`, {amount: this.withdrawMoney}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
-          //mui.toast(response.data.data.tips);
+          // mui.toast(response.data.data.tips);
 
-          this.$router.push('/paySuccess?account='+ this.bindWeixinNickname +'&money=' + this.withdrawMoney);
-        });
+          this.$router.push('/paySuccess?account=' + this.bindWeixinNickname + '&money=' + this.withdrawMoney)
+        })
       },
-      getWallet() {
+      getWallet () {
         postRequest(`account/wallet`, {}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          var data = response.data.data;
-          this.totalMoeny = data.total_money;
-          this.settlementMoney = parseFloat(data.pay_settlement_money);
-          this.withdrawMinMoney = data.withdraw_per_min_money;
-          this.withdrawMaxMoney = data.withdraw_per_max_money;
-          this.loading = 0;
-          this.isBindWeixin = data.is_bind_weixin;
-          this.bindWeixinNickname = data.bind_weixin_nickname;
-          this.withdraw_day_limit = data.withdraw_day_limit;
-          this.withdraw_day_remain = data.withdraw_day_remain;
-
-
-        });
+          var data = response.data.data
+          this.totalMoeny = data.total_money
+          this.settlementMoney = parseFloat(data.pay_settlement_money)
+          this.withdrawMinMoney = data.withdraw_per_min_money
+          this.withdrawMaxMoney = data.withdraw_per_max_money
+          this.loading = 0
+          this.isBindWeixin = data.is_bind_weixin
+          this.bindWeixinNickname = data.bind_weixin_nickname
+          this.withdraw_day_limit = data.withdraw_day_limit
+          this.withdraw_day_remain = data.withdraw_day_remain
+        })
       }
     }
   }

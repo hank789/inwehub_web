@@ -72,95 +72,88 @@
 </template>
 <!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
-  import {setStatusBarBackgroundAndStyle, autoHeight} from '../utils/statusBar.js';
-  import {getLocalUserInfo, isCompanyStatus} from '../utils/user';
-  import userAbility from '../utils/userAbility';
+  import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js'
+  import userAbility from '../utils/userAbility'
 
   export default {
     methods: {
-      skip(num) {
+      skip (num) {
         setTimeout(() => {
           switch (num) {
             case 1:
-              userAbility.jumpToAddProject();
-              break;
+              userAbility.jumpToAddProject()
+              break
             case 2:
-              this.$router.pushPlus('/feedback/consultant');
-              break;
+              this.$router.pushPlus('/feedback/consultant')
+              break
             case 3:
-              this.$router.pushPlus('/feedback/cooperate');
-              break;
+              this.$router.pushPlus('/feedback/cooperate')
+              break
 
             case 4:
-              userAbility.jumpToAddAsk();
-              break;
+              userAbility.jumpToAddAsk()
+              break
             case 5:
-              this.$router.pushPlus('/ask/interaction');
-              break;
+              this.$router.pushPlus('/ask/interaction')
+              break
             case 6:
-              this.$router.pushReadHubPage('/submit');
-              break;
+              this.$router.pushReadHubPage('/submit')
+              break
             case 7:
-              this.$router.pushPlus('/feedback/news');
-              break;
+              this.$router.pushPlus('/feedback/news')
+              break
             case 8:
-              this.$router.pushPlus('/feedback/advise');
-              break;
+              this.$router.pushPlus('/feedback/advise')
+              break
             case 9:
-              this.$router.pushPlus('/my/advantage');
-              break;
+              this.$router.pushPlus('/my/advantage')
+              break
 
           }
-        }, 100);
+        }, 100)
 
-        this.hide();
+        this.hide()
       },
-      show() {
-        document.getElementById("short_all").style.display = "inline";
+      show () {
+        document.getElementById('short_all').style.display = 'inline'
 
-        //发现页处理
-        if (mui.os.plus) {
-
+        // 发现页处理
+        if (window.mui.os.plus) {
           if (this.$route.path.match(/discover/)) {
-
-            var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-            if (inwehub_embed_webview) {
-              inwehub_embed_webview.hide();
+            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+            if (inwehubEmbedWebview) {
+              inwehubEmbedWebview.hide()
             }
           }
         }
 
-        setStatusBarBackgroundAndStyle('#D8D9DC', 'light');
-
+        setStatusBarBackgroundAndStyle('#D8D9DC', 'light')
       },
-      hide() {
-        //	 	document.getElementById("short_all").style.display="none";
-        console.log('hide');
-        document.getElementById("down").setAttribute("class", "end");
+      hide () {
+        // document.getElementById("short_all").style.display="none";
+        console.log('hide')
+        document.getElementById('down').setAttribute('class', 'end')
         setTimeout(function () {
-          document.getElementById("short_all").style.display = "none";
-          document.getElementById("down").classList.remove("end");
+          document.getElementById('short_all').style.display = 'none'
+          document.getElementById('down').classList.remove('end')
         }, 300)
 
-        autoHeight();
+        autoHeight()
 
-        //发现页处理
-        if (mui.os.plus) {
+        // 发现页处理
+        if (window.mui.os.plus) {
           if (this.$route.path.match(/discover/)) {
             setTimeout(() => {
-              var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-              if (inwehub_embed_webview) {
-                inwehub_embed_webview.show();
+              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+              if (inwehubEmbedWebview) {
+                inwehubEmbedWebview.show()
               }
-            }, 100);
+            }, 100)
           }
-
         }
-
       }
-
     },
-    mounted() {
+    mounted () {
 
     }
   }
@@ -171,20 +164,22 @@
   @media (min-width: 320px) {
     ul {
       width: 80%;
-      
+
     }
-    .quick{
-       width: 80%;
-    } 
+
+    .quick {
+      width: 80%;
+    }
   }
 
   @media (min-width: 375px) {
     ul {
       width: 72.5%;
     }
-    .quick{
+
+    .quick {
       width: 72.5%;
-    } 
+    }
 
   }
 
@@ -192,9 +187,10 @@
     ul {
       width: 72.5%;
     }
-     .quick{
+
+    .quick {
       width: 72.5%;
-    } 
+    }
   }
 
   ul,
@@ -402,13 +398,15 @@
     right: 0;
     margin: auto;
   }
-.quick a{
-  display: inline-block;
-  float: left;
-  width: 0.5px;
-  height: 14px;
-  color:red;
-}
+
+  .quick a {
+    display: inline-block;
+    float: left;
+    width: 0.5px;
+    height: 14px;
+    color: red;
+  }
+
   .quick p {
     width: 25%;
     /*background: #CCCCCC;*/
@@ -417,25 +415,27 @@
     color: #444444;
     text-align: center;
     line-height: 14px;
-    
-   /* border-right: 0.5px solid #dcdcdc;*/
+
+    /* border-right: 0.5px solid #dcdcdc;*/
     /*border: 1px solid #000000;*/
   }
+
   .quick p:nth-of-type(2) {
     text-align: center;
     margin-left: 12.5%;
   }
+
   .quick p:nth-of-type(3) {
-     float:right;
+    float: right;
   }
-.quick a{
-  position: absolute;
-  width: 1px;
-  height: 14px;
-  background: #dcdcdc;
-  margin-left: 7%;
-}
-  
+
+  .quick a {
+    position: absolute;
+    width: 1px;
+    height: 14px;
+    background: #dcdcdc;
+    margin-left: 7%;
+  }
 
   .quick > p span {
     display: inline-block;

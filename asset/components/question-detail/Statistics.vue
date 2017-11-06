@@ -40,7 +40,6 @@
     </div>
 
 
-
     <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
       <div class="iconWrapper dianzanWrapper">
         <svg class="icon" aria-hidden="true">
@@ -55,12 +54,11 @@
 
 <script type="text/javascript">
 
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
-      return {
-      }
+      return {}
     },
     components: {},
     props: {
@@ -96,84 +94,82 @@
         type: Number,
         default: 0
       },
-      showShoucang:{
-          type:Boolean,
-          default:false
+      showShoucang: {
+        type: Boolean,
+        default: false
       },
-      showModifyBtn:{
-        type:Boolean,
-        default:false
+      showModifyBtn: {
+        type: Boolean,
+        default: false
       }
     },
-    created(){
+    created () {
     },
     methods: {
-      modify(){
-         this.$router.pushPlus('/realAnswer/' + this.questionId+'/'+this.answerId, 'list-detail-page-realAnswer-once',true,'pop-in','hide',true);
+      modify () {
+        this.$router.pushPlus('/realAnswer/' + this.questionId + '/' + this.answerId, 'list-detail-page-realAnswer-once', true, 'pop-in', 'hide', true)
       },
-      collect(){
+      collect () {
         var data = {
           id: this.answerId
-        };
+        }
 
         postRequest(`collect/answer`, data).then(response => {
-
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
           if (this.isCollected) {
-            this.$emit('collectNumDesc');
+            this.$emit('collectNumDesc')
           } else {
-            this.$emit('collectNumAdd');
+            this.$emit('collectNumAdd')
           }
 
-          this.$emit('setCollectStatus', response.data.data.type);
+          this.$emit('setCollectStatus', response.data.data.type)
 
-          mui.toast(response.data.data.tip);
-        });
+          window.mui.toast(response.data.data.tip)
+        })
       },
-      support(){
-
+      support () {
         var data = {
           id: this.answerId
-        };
+        }
 
         postRequest(`support/answer`, data).then(response => {
-
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
           if (this.isSupported) {
-              this.$emit('supportNumDesc');
+            this.$emit('supportNumDesc')
           } else {
-              this.$emit('supportNumAdd');
+            this.$emit('supportNumAdd')
           }
 
-          this.$emit('setSupportStatus', response.data.data.type);
+          this.$emit('setSupportStatus', response.data.data.type)
 
-          mui.toast(response.data.data.tip);
-        });
-      },
-    },
-  };
+          window.mui.toast(response.data.data.tip)
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped="scoped">
 
-  .item{
+  .item {
     line-height: 20px;
     color: #b4b4b6;
   }
+
   .item span {
     font-size: 14px;
     position: relative;
-    top:-3px;
+    top: -3px;
   }
 
   .item .iconWrapper {
@@ -187,7 +183,8 @@
     font-size: 24px;
 
   }
-  .item.active .iconWrapper{
+
+  .item.active .iconWrapper {
     border: 1px solid #03aef9;
   }
 
@@ -203,22 +200,22 @@
     font-size: 18px;
   }
 
-  .item:nth-child(2) .iconWrapper.showcangWrapper .icon{
+  .item:nth-child(2) .iconWrapper.showcangWrapper .icon {
     position: relative;
-    top:-1px;
+    top: -1px;
   }
 
-  .item:nth-child(3) .iconWrapper{
+  .item:nth-child(3) .iconWrapper {
     font-size: 18px;
   }
 
-  .modifyWrapper{
-    font-size:16px !important;
+  .modifyWrapper {
+    font-size: 16px !important;
   }
 
-  .modifyWrapper .icon{
+  .modifyWrapper .icon {
     position: relative;
-    top:0px;
+    top: 0px;
   }
 
   .statistics {
@@ -228,13 +225,12 @@
     justify-content: space-around;
   }
 
-
-  .dianzanWrapper .icon{
+  .dianzanWrapper .icon {
     position: relative;
-    top:-1px;
+    top: -1px;
   }
 
-  .active{
-    color:#03aef9;
+  .active {
+    color: #03aef9;
   }
 </style>

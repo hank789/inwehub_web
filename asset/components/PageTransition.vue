@@ -14,13 +14,13 @@
       }
     },
     beforeRouteUpdate (to, from, next) {
-      let isBack = this.$router.isBack;
+      let isBack = this.$router.isBack
       if (isBack) {
         this.transitionName = 'my-slide-right'
       } else {
         this.transitionName = 'my-slide-left'
       }
-      this.$router.isBack = false;
+      this.$router.isBack = false
       next()
     }
   }

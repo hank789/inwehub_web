@@ -26,7 +26,7 @@
 </template>
 <script type="text/javascript">
 
-  import UserInfo from './UserInfo.vue';
+  import UserInfo from './UserInfo.vue'
 
   export default {
     data () {
@@ -45,22 +45,22 @@
         type: Boolean,
         default: false
       },
-      isShowPositionAndCompany:{
+      isShowPositionAndCompany: {
         type: Boolean,
         default: false
       }
     },
-    created(){
+    created () {
 
     },
     methods: {
-      setFollowStatus(status){
-        this.ask.is_followed=status;
+      setFollowStatus (status) {
+        this.ask.is_followed = status
       },
-      getHtml(id, options, callback) {
+      getHtml (id, options, callback) {
       }
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">

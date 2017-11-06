@@ -6,13 +6,22 @@
     </header>
 
 
-    <div class="mui-content absolute">
+    <div class="mui-content">
+      <!--导航栏-->
+      <div class="menu">
+        <span @tap.stop.prevent="">问答  <i></i></span>
+        <span @tap.stop.prevent="$router.replace('/my/collectedArticle')">文章</span>
+
+      </div>
+
+
       <RefreshList
         v-model="list"
         :api="'collected/answers'"
         :prevOtherData="{}"
         :nextOtherData="{}"
         :list="list"
+         class="listWrapper"
       >
         <ul class="hotAnswer_b">
           <li class="listBottomBorder" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item)">
@@ -27,6 +36,7 @@
               </p>
               <p class="mui-ellipsis">回答者：{{ item.user_name}}</p>
             </div>
+            <i class="bot"></i>
           </li>
         </ul>
 
@@ -36,9 +46,7 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import RefreshList from '../../components/refresh/List.vue';
-
+  import RefreshList from '../../components/refresh/List.vue'
 
   const Obj = {
     data: () => ({
@@ -48,24 +56,24 @@
       RefreshList
     },
     methods: {
-      toDetail(item) {
-          if (item.question_type === 2) {
-            this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true);
-          } else {
-            this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true);
-          }
-      },
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        } else {
+          this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        }
+      }
     },
     computed: {
     },
-    mounted(){
+    mounted () {
       window.addEventListener('refreshData', (e) => {
-        //执行刷新
-        console.log('refresh-onlookerslist');
-      });
+        // 执行刷新
+        console.log('refresh-onlookerslist')
+      })
     }
-  };
-  export default Obj;
+  }
+  export default Obj
 
 </script>
 
@@ -86,16 +94,52 @@
     font-style: normal;
   }
 
-  .mui-bar-nav ~ .mui-content.absolute {
-    top: 44px;
-    background: #fff;
+  .mui-content{
+    background: #FFFFFF;
   }
+  /*导航栏的样式*/
+
+  .menu {
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    z-index: 10;
+    background: #f3f4f6;
+  }
+
+  .menu span {
+    display: block;
+    width: 50%;
+    height: 100%;
+    float: left;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+  }
+
+  .menu span:nth-of-type(1) {
+    color: #3c95f9;
+    position: relative;
+  }
+
+  .menu i {
+    display: block;
+    position: absolute;
+    width: 27px;
+    height: 1.5px;
+    left: 42%;
+    bottom: 0.5px;
+    background: #3c95f9;
+  }
+
 
   .bot {
     position: absolute;
-    right: 0;
+    right: 15px;
     bottom: 0;
-    left: 0;
+    left:15px;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -206,5 +250,9 @@
     font-size:14px;
     color:#808080;
     padding:5px 0 0;
+  }
+
+  .listWrapper{
+    top: 45px;
   }
 </style>

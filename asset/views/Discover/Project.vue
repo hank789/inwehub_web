@@ -21,9 +21,9 @@
   </div>
 </template>
 <script>
-  export  default {
+  export default {
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
     }
-  };
+  }
 </script>

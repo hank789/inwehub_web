@@ -39,22 +39,25 @@
         <div class="help">
           <div class="title">
             什么是互动问答？
+
           </div>
           <div class="body">
-            InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+            InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a
+            @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
-            </div>
+
+          </div>
         </div>
 
         <div class="buttonWrapper iNeedAskWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
 
+
           </button>
         </div>
 
       </RefreshList>
-
 
 
     </div>
@@ -75,17 +78,15 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import QustionInteraction from '../../components/question-detail/QustionInteraction.vue';
-  import Discuss from '../../components/question-detail/Discuss.vue';
-  import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue';
-  import Comment from '../../components/question-detail/Comment.vue';
-  import {alertAskCommunityDetailShareSuccess,alertAskCommunityInteractiveAnswer,alertAskCommunityQuestioningSuccess} from '../../utils/dialogList';
-  import Share from '../../components/Share.vue';
-  import RefreshList from '../../components/refresh/List.vue';
-  import userAbility from '../../utils/userAbility';
-  import localEvent from '../../stores/localStorage';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
+  import QustionInteraction from '../../components/question-detail/QustionInteraction.vue'
+  import Discuss from '../../components/question-detail/Discuss.vue'
+  import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue'
+  import Comment from '../../components/question-detail/Comment.vue'
+  import Share from '../../components/Share.vue'
+  import RefreshList from '../../components/refresh/List.vue'
+
   const AskDetail = {
     data: () => ({
       ask: {
@@ -96,7 +97,7 @@
         },
         timeline: []
       },
-      answers:[],
+      answers: [],
       shareUrl: '',
       shareImg: '',
       shareContent: '',
@@ -104,10 +105,8 @@
       id: 0,
       loading: true
     }),
-    mounted(){
-
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png';
-
+    mounted () {
+      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
     },
     components: {
       QustionInteraction,
@@ -119,29 +118,29 @@
     },
     computed: {
       answer () {
-        return this.ask.answers[0] ? this.ask.answers[0] : {};
+        return this.ask.answers[0] ? this.ask.answers[0] : {}
       },
-      prevOtherData() {
-         return {question_id: this.id}
+      prevOtherData () {
+        return {question_id: this.id}
       }
     },
     methods: {
-      toAsk(){
-          this.$router.pushPlus('/ask/interaction');
+      toAsk () {
+        this.$router.pushPlus('/ask/interaction')
       },
-      toSeeHelp(){
-          this.$router.pushPlus('/help/ask');
+      toSeeHelp () {
+        this.$router.pushPlus('/help/ask')
       },
-      share(){
-         this.$refs.ShareBtn.share();
+      share () {
+        this.$refs.ShareBtn.share()
       },
-      refreshPageData(){
-          console.log('refreshPageData-zz-answers');
-          this.getId();
-          this.$refs.refreshList.setPageData(this.prevOtherData);
+      refreshPageData () {
+        console.log('refreshPageData-zz-answers')
+        this.getId()
+        this.$refs.refreshList.setPageData(this.prevOtherData)
       },
-      getId(){
-        let id = parseInt(this.$route.params.id);
+      getId () {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -149,74 +148,69 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
 
         if (id !== this.id) {
-            this.loading = 1;
+          this.loading = 1
         }
 
-        this.id = id;
+        this.id = id
       },
-      shareSuccess(){
-        //alertAskCommunityDetailShareSuccess(this);
+      shareSuccess () {
+        // alertAskCommunityDetailShareSuccess(this);
       },
-      shareFail(error){
+      shareFail () {
+      },
+      prevSuccessCallback () {
+        this.getDetail()
+      },
+      setFollowAskStatus (status) {
+        this.ask.is_followed_question = status
+      },
+      getDetail (successCallback = () => {}) {
+        this.getId()
 
-      },
-      prevSuccessCallback(){
-         this.getDetail();
-      },
-      setFollowAskStatus(status){
-        this.ask.is_followed_question = status;
-      },
-      getDetail(successCallback = () => {
-                }){
-
-        this.getId();
-
-        console.log('getDetail' + this.id);
+        console.log('getDetail' + this.id)
 
         postRequest(`question/info`, {id: this.id}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true);
-            return;
+            window.mui.toast(response.data.message)
+            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
+            return
           }
 
-          this.ask = response.data.data;
+          this.ask = response.data.data
 
-          this.loading = 0;
+          this.loading = 0
 
-          var username = this.answer.user_name ? this.answer.user_name : '';
-          this.shareTitle = '问答|' + this.ask.question.description;
+          this.shareTitle = '问答|' + this.ask.question.description
 
-          var currentUrl = '/askCommunity/interaction/answers/' + this.id;
-          this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl;
+          var currentUrl = '/askCommunity/interaction/answers/' + this.id
+          this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl
 
-          var answerNum = this.ask.question.answer_num;
+          var answerNum = this.ask.question.answer_num
 
-          var followNum = this.ask.question.follow_num;
+          var followNum = this.ask.question.follow_num
 
-          this.shareContent = '已有' + answerNum  + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动';
+          this.shareContent = '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动'
 
-          successCallback();
-
-        });
+          successCallback()
+        })
       }
     },
     watch: {
       '$route': 'refreshPageData'
     },
     created () {
-      this.getId();
+      this.getId()
     }
   }
-  export default AskDetail;
+  export default AskDetail
 </script>
 
 

@@ -9,7 +9,7 @@
     "build": "node build/build.js",
     "test": "node build/build-test.js",
     "watch": "webpack --config build/webpack.dev.js --display-error-details -p --progress --colors --watch",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue asset"
   },
   "dependencies": {
     "axios": "^0.16.1",

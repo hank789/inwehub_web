@@ -1,256 +1,249 @@
 <template>
-	<div>
+  <div>
 
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">教育经历</h1>
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">教育经历</h1>
 
-		</header>
-        
-        <div class="mui-content absolute">
-		<div  v-show="!loading" id="container">
+    </header>
 
-			<div class="container" v-show="edus.length == 0">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-zanwushuju"></use>
-				</svg>
-				<p>暂时还没有数据呀～</p>
-			</div>
+    <div class="mui-content absolute">
+      <div v-show="!loading" id="container">
 
-			<ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
-				<li v-for="(edu, index) in edus" class="intro  mui-table-view-cell">
-
-					<div class="mui-slider-right mui-disabled" id="roof" @tap.stop.prevent="deleteItem(edu.id, index)">
-						<a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
-					</div>
-					<div class="mui-slider-handle  slider">
-						<p class="mui-ellipsis"> {{ edu.school }}</p>
-						<p>
-
-							<span class="mui-ellipsis">{{ edu.begin_time }}  至 {{ edu.end_time }}</span>
-							
-							<span class="mui-ellipsis">{{ edu.major }}</span>
-							
-							<span class="mui-ellipsis">{{ edu.degree}}</span>
-						</p>
-					</div>
-					<svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/edu/'+edu.id)">
-						<use xlink:href="#icon-xiugai"></use>
-					</svg>
-				</li>
-			</ul>
-
-			<div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/edu/0')">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-shuru"></use>
-				</svg>
-			</div>
-
-		</div>
+        <div class="container" v-show="edus.length === 0">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <p>暂时还没有数据呀～</p>
         </div>
-		<div id="statusBarStyle" background="#fefefe" mode="light"></div>
-	</div>
+
+        <ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
+          <li v-for="(edu, index) in edus" class="intro  mui-table-view-cell">
+
+            <div class="mui-slider-right mui-disabled" id="roof" @tap.stop.prevent="deleteItem(edu.id, index)">
+              <a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
+            </div>
+            <div class="mui-slider-handle  slider">
+              <p class="mui-ellipsis"> {{ edu.school }}</p>
+              <p>
+
+                <span class="mui-ellipsis">{{ edu.begin_time }}  至 {{ edu.end_time }}</span>
+
+                <span class="mui-ellipsis">{{ edu.major }}</span>
+
+                <span class="mui-ellipsis">{{ edu.degree}}</span>
+              </p>
+            </div>
+            <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/info/edu/'+edu.id)">
+              <use xlink:href="#icon-xiugai"></use>
+            </svg>
+          </li>
+        </ul>
+
+        <div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/edu/0', 'account_info_list')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shuru"></use>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+    <div id="statusBarStyle" background="#fefefe" mode="light"></div>
+  </div>
 </template>
 
 <script>
-	import { NOTICE } from '../../../stores/types';
-	import { createAPI, addAccessToken, postRequest } from '../../../utils/request';
-	import localEvent from '../../../stores/localStorage';
-	import ACCOUNT_API from '../../../api/account';
-	import dPickerComponent from '../../../components/picker/date-picker.vue';
-	import popPickerComponent from '../../../components/picker/poppicker.vue';
+  import { postRequest } from '../../../utils/request'
+  import localEvent from '../../../stores/localStorage'
+  import ACCOUNT_API from '../../../api/account'
 
-	export default {
-		data: () => ({
-			edus: [],
-			loading: true
-		}),
-		methods: {
-			initData() {
-				postRequest(`account/edu/list`, {}).then(response => {
+  export default {
+    data: () => ({
+      edus: [],
+      loading: true
+    }),
+    methods: {
+      refreshPageData () {
+        this.initData()
+      },
+      initData () {
+        postRequest(`account/edu/list`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
 
-					var code = response.data.code;
-					if(code !== 1000) {
-						mui.alert(response.data.message);
-						return;
-					}
+          this.edus = response.data.data
+          this.loading = false
 
-					this.edus = response.data.data;
-					this.loading = false;
+          var newEdus = []
+          for (var i in this.edus) {
+            var info = this.edus[i]
+            var id = info.id
+            newEdus[id] = info
+          }
+          localEvent.setLocalItem('edus', newEdus)
+        })
+      },
+      deleteItem (id, index) {
+        var btnArray = ['否', '是']
+        window.mui.confirm('确认要删除？', '删除', btnArray, e => {
+          if (e.index === 1) {
+            var url = ACCOUNT_API.DELETE_ACCOUNT_EDU
+            postRequest(url, {
+              id: id
+            }).then(response => {
+              window.mui.toast('删除成功')
+              this.edus.splice(index, 1)
+            })
+          }
+        }, 'div')
+      }
+    },
+    mounted () {},
 
-					var newEdus = [];
-					for(var i in this.edus) {
-						var info = this.edus[i];
-						var id = info.id;
-						newEdus[id] = info;
-					}
-					localEvent.setLocalItem('edus', newEdus);
+    computed: {},
 
-				});
-			},
-			deleteItem(id, index) {
-				var btnArray = ['否', '是'];
-				mui.confirm('确认要删除？', '删除', btnArray, e => {
-					if(e.index == 1) {
-						var url = ACCOUNT_API.DELETE_ACCOUNT_EDU;
-						postRequest(url, {
-							id: id
-						}).then(response => {
-							mui.toast('删除成功');
-							this.edus.splice(index, 1);
-						});
-					}
-				});
-			}
-		},
-		mounted() {
-			window.addEventListener('refreshData', (e) => {
-				//执行刷新
-				console.log('refresh-edus');
-				this.initData();
-			});
-		},
-
-		computed: {
-
-		},
-
-		created() {
-			//showInwehubWebview();
-			this.initData();
-		}
-	}
+    created () {
+      this.initData()
+    }
+  }
 </script>
 
 <style scoped>
-	.mui-content{
-		background: #FFFFFF;
-	}
-	#container {
-		width: 100%;
-		height: 100%;
-		background: #FFFFFF;
-	}
+  .mui-content {
+    background: #FFFFFF;
+  }
 
-	.intro {
-		width: 100%;
-		height: 60px;
-		position: relative;
-	}
+  #container {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+  }
 
-	.intro .slider {
-		width: 100%;
-		height: 60px;
-	}
+  .intro {
+    width: 100%;
+    height: 60px;
+    position: relative;
+  }
 
-	.intro .slider p:nth-of-type(1) {
-        width: 100%;
-		font-size: 14px;
-		color: #444444;
-	}
-	
-	.intro .slider p:nth-of-type(2){
-	  	width: 100%;
-	  	height: 13px;
-	  	line-height: 13px;
-	  	margin-top: 5px;
-	  }
+  .intro .slider {
+    width: 100%;
+    height: 60px;
+  }
 
-	.intro .slider p:nth-of-type(2) span {
-		display: block;
-		float: left;
-		font-size: 13px;
-		color: #808080;
-		height: 13px;
-    	    font-size: 13px;
-        color: #808080;	
-	}
-    .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
-		max-width:128px;	
-	}
-	 .intro .slider p:nth-of-type(2) span:nth-of-type(2) {
-		max-width:128px;	
-		border-right: 1px solid rgb(220, 220, 220);
-		border-left: 1px solid rgb(220, 220, 220);
-		margin-right: 5px;
-		margin-left: 5px;
-		padding-right: 5px;
-		padding-left: 5px;
-	}
-	 .intro .slider p:nth-of-type(2) span:nth-of-type(3) {
-	     max-width:28px;
-	}
+  .intro .slider p:nth-of-type(1) {
+    width: 100%;
+    font-size: 14px;
+    color: #444444;
+  }
 
-	.intro svg {
-		position: absolute;
-		font-size: 18px;
-		color: rgb(3, 174, 249);
-		top: 13px;
-		right: 15px;
-	}
+  .intro .slider p:nth-of-type(2) {
+    width: 100%;
+    height: 13px;
+    line-height: 13px;
+    margin-top: 5px;
+  }
 
-	.add {
-		width: 64px;
-		height: 64px;
-		border-radius: 50%;
-		background: rgb(3, 174, 249);
-		position: absolute;
-		left: 41%;
-		bottom: 21px;
-		text-align: center;
-		line-height: 64px;
-	}
+  .intro .slider p:nth-of-type(2) span {
+    display: block;
+    float: left;
+    font-size: 13px;
+    color: #808080;
+    height: 13px;
+    font-size: 13px;
+    color: #808080;
+  }
 
-	.add svg {
-		font-size: 22px;
-		color: #FFFFFF;
-	}
+  .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
+    max-width: 128px;
+  }
 
-	#roof {
-		z-index: 999;
-	}
+  .intro .slider p:nth-of-type(2) span:nth-of-type(2) {
+    max-width: 128px;
+    border-right: 1px solid rgb(220, 220, 220);
+    border-left: 1px solid rgb(220, 220, 220);
+    margin-right: 5px;
+    margin-left: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 
-	.mui-table-view:after {
-		position: absolute;
-		right: 15px;
-		bottom: 0;
-		left: 15px;
-		height: 1px;
-		content: '';
-		background: #f2f2f2;
-	}
+  .intro .slider p:nth-of-type(2) span:nth-of-type(3) {
+    max-width: 28px;
+  }
 
-	.mui-table-view-cell:after {
-		position: absolute;
-		right: 15px;
-		bottom: 0;
-		left: 15px;
-		height: 1px;
-		content: '';
-		background: #f2f2f2;
-	}
+  .intro svg {
+    position: absolute;
+    font-size: 18px;
+    color: rgb(3, 174, 249);
+    top: 13px;
+    right: 15px;
+  }
 
-	.box-shadow-3 {
-		-webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-		-moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-		box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-	}
+  .add {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgb(3, 174, 249);
+    position: absolute;
+    left: 41%;
+    bottom: 21px;
+    text-align: center;
+    line-height: 64px;
+  }
 
-	.container {
-		position: absolute;
-		top: 40%;
-		left: 36%;
-	}
+  .add svg {
+    font-size: 22px;
+    color: #FFFFFF;
+  }
 
-	.container svg {
-		font-size: 60px;
-		margin-left: 23px;
-		margin-bottom: 8px;
-	}
+  #roof {
+    z-index: 999;
+  }
 
-	.container p {
+  .mui-table-view:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    background: #f2f2f2;
+  }
 
-		font-size: 12px;
-		color: #c8c8c8;
-	}
+  .mui-table-view-cell:after {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    background: #f2f2f2;
+  }
+
+  .box-shadow-3 {
+    -webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
+    -moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
+    box-shadow: 0 0 5px rgba(3, 174, 249, .8);
+  }
+
+  .container {
+    position: absolute;
+    top: 40%;
+    left: 36%;
+  }
+
+  .container svg {
+    font-size: 60px;
+    margin-left: 23px;
+    margin-bottom: 8px;
+  }
+
+  .container p {
+
+    font-size: 12px;
+    color: #c8c8c8;
+  }
 </style>

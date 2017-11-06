@@ -5,6 +5,7 @@
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
               @tap.stop.prevent="comment()">点击评价，分享获取分红
 
+
       </button>
     </div>
 
@@ -12,6 +13,7 @@
       <div class="commentHeader">
         <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">关闭</button>
         评价
+
 
       </div>
       <div class="form form-realAnswer">
@@ -29,6 +31,7 @@
         <div class="buttonWrapper" v-show="!commentState">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @click.prevent="submitComment">匿名提交
+
 
           </button>
         </div>
@@ -49,137 +52,136 @@
 
 <script type="text/javascript">
 
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import MTextarea from '../../components/MTextarea.vue';
+  import { postRequest } from '../../utils/request'
+  import MTextarea from '../../components/MTextarea.vue'
 
   export default {
     data () {
       return {
-        commentState: false, //是否已评价
+        commentState: false, // 是否已评价
         showRating: false,
         rateStar: 5,
         starDesc: '评价会让我们做的更好',
         description: '',
-        descriptionPlaceHolder: '在这里留下你的反馈',
+        descriptionPlaceHolder: '在这里留下你的反馈'
       }
     },
     components: {
       MTextarea
     },
     computed: {
-      descLength() {
-        return this.description.length;
+      descLength () {
+        return this.description.length
       }
     },
     props: {
       answerId: {
         type: Number,
         default: 0
-      },
+      }
 
     },
-    created(){
+    created () {
 
     },
     methods: {
-      cancelComment(){
-        this.comment();
+      cancelComment () {
+        this.comment()
 
         if (this.commentState) {
-          this.$emit('finish');
+          this.$emit('finish')
         }
       },
-      comment(){
-        var obj = document.querySelector('.mui-backdrop');
+      comment () {
+        var obj = document.querySelector('.mui-backdrop')
         if (obj) {
-          obj.remove();
+          obj.remove()
         }
         setTimeout(() => {
-          mui('#commentWapper').popover('toggle');
+          window.mui('#commentWapper').popover('toggle')
           setTimeout(() => {
-            var obj = document.querySelector('.mui-backdrop');
+            var obj = document.querySelector('.mui-backdrop')
             if (obj) {
-              obj.addEventListener('tap', function(e) {
-                obj.remove();
-              });
-              document.querySelector('.mui-content').appendChild(obj);
+              obj.addEventListener('tap', function (e) {
+                obj.remove()
+              })
+              document.querySelector('.mui-content').appendChild(obj)
             }
-          }, 150);
-        }, 150);
+          }, 150)
+        }, 150)
       },
       setRating: function (rating) {
-        this.rateStar = rating;
+        this.rateStar = rating
       },
-      submitComment(){
+      submitComment () {
         if (!this.rateStar) {
-          mui.toast('别忘了打分');
-          return;
+          window.mui.toast('别忘了打分')
+          return
         }
 
         if (!this.description) {
-          mui.toast('请填写反馈内容');
-          return;
+          window.mui.toast('请填写反馈内容')
+          return
         }
 
         var data = {
           answer_id: this.answerId,
           description: this.description,
           rate_star: this.rateStar
-        };
-
+        }
 
         if (this.buttonCommentDisabled) {
-          return;
+          return
         }
-        this.buttonCommentDisabled = true;
+        this.buttonCommentDisabled = true
 
         postRequest(`answer/feedback`, data).then(response => {
-          this.buttonCommentDisabled = false;
-          var code = response.data.code;
+          this.buttonCommentDisabled = false
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          this.commentState = true;
-        });
-      },
+          this.commentState = true
+        })
+      }
     },
     watch: {
       rateStar: function (newRateStar) {
         switch (newRateStar) {
           case 0:
-            this.starDesc = '评价会让我们做的更好';
-            break;
+            this.starDesc = '评价会让我们做的更好'
+            break
           case 1:
-            this.starDesc = '差评！！';
-            this.descriptionPlaceHolder = '请耐心描述您的差评原因，我们会第一时间了解您的问题，核实后将全额退款。';
-            break;
+            this.starDesc = '差评！！'
+            this.descriptionPlaceHolder = '请耐心描述您的差评原因，我们会第一时间了解您的问题，核实后将全额退款。'
+            break
           case 2:
-            this.starDesc = '不太满意';
-            this.descriptionPlaceHolder = '在这里留下你的反馈';
-            break;
+            this.starDesc = '不太满意'
+            this.descriptionPlaceHolder = '在这里留下你的反馈'
+            break
           case 3:
-            this.starDesc = '一般，还需要改善';
-            this.descriptionPlaceHolder = '在这里留下你的反馈';
-            break;
+            this.starDesc = '一般，还需要改善'
+            this.descriptionPlaceHolder = '在这里留下你的反馈'
+            break
           case 4:
-            this.starDesc = '比较满意';
-            this.descriptionPlaceHolder = '在这里留下你的反馈';
-            break;
+            this.starDesc = '比较满意'
+            this.descriptionPlaceHolder = '在这里留下你的反馈'
+            break
           case 5:
-            this.starDesc = '非常满意';
-            this.descriptionPlaceHolder = '在这里留下你的反馈';
-            break;
+            this.starDesc = '非常满意'
+            this.descriptionPlaceHolder = '在这里留下你的反馈'
+            break
         }
       },
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       }
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">

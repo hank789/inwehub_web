@@ -90,12 +90,12 @@
   </div>
 </template>
 <script>
-  import {createAPI, apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue';
-  import MTextarea from '../../components/MTextarea.vue';
+  import {createAPI, postRequest} from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import MTextarea from '../../components/MTextarea.vue'
 
-  export  default {
+  export default {
     data: () => ({
       name: '',
       description: '',
@@ -109,125 +109,120 @@
       mobile: ''
     }),
     created () {
-      //showInwehubWebview();
+      // showInwehubWebview();
     },
     computed: {
-      infoIndustryTagsNames() {
+      infoIndustryTagsNames () {
         if (this.industryTags) {
-          var newValue = [];
+          var newValue = []
           for (var i in this.industryTags) {
-            newValue.push(this.industryTags[i].text);
+            newValue.push(this.industryTags[i].text)
           }
-          return newValue.join();
+          return newValue.join()
         } else {
-          return '';
+          return ''
         }
       },
-      infoIndustryTagsCodes(){
-        var newValue = [];
+      infoIndustryTagsCodes () {
+        var newValue = []
         for (var i in this.industryTags) {
-          if (typeof(this.industryTags[i]) === 'object') {
-            newValue.push(this.industryTags[i].value);
+          if (typeof (this.industryTags[i]) === 'object') {
+            newValue.push(this.industryTags[i].value)
           } else {
-            newValue.push(this.industryTags[i]);
+            newValue.push(this.industryTags[i])
           }
         }
-        return newValue;
+        return newValue
       }
     },
     methods: {
-      fixSelect:function(){
+      fixSelect: function () {
         setTimeout(() => {
-          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
-          mui.trigger(mui('.mui-indexed-list-item')[0],'tap');
+          window.mui.trigger(window.mui('.mui-indexed-list-item')[0], 'tap')
+          window.mui.trigger(window.mui('.mui-indexed-list-item')[0], 'tap')
         }, 200)
       },
-      delFile(index){
-        this.files.splice(index, 1);
+      delFile (index) {
+        this.files.splice(index, 1)
       },
-      selectImages(){
-        var t = this;
-        if (mui.os.plus) {
-          plus.gallery.pick(function (e) {
-            var name = e.substr(e.lastIndexOf('/') + 1);
+      selectImages () {
+        var t = this
+        if (window.mui.os.plus) {
+          window.plus.gallery.pick(function (e) {
+            var name = e.substr(e.lastIndexOf('/') + 1)
 
-            plus.zip.compressImage({
+            window.plus.zip.compressImage({
               src: e,
               dst: '_doc/' + name,
               overwrite: true,
               quality: 50
             }, function (zip) {
               if (zip.size > (10 * 1024 * 1024)) {
-                return mui.toast('文件超大,请重新选择~');
+                return window.mui.toast('文件超大,请重新选择~')
               }
 
-              var newurl = plus.io.convertLocalFileSystemURL(zip.target);
+              var newurl = window.plus.io.convertLocalFileSystemURL(zip.target)
 
-              if (mui.os.ios) {
-                newurl = 'file://' + newurl;
+              if (window.mui.os.ios) {
+                newurl = 'file://' + newurl
               }
 
-              plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
-                var localUrl = entry.toRemoteURL();
+              window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+                var localUrl = entry.toRemoteURL()
                 t.files.push({
                   name: name,
                   path: zip.target,
                   url: localUrl
-                });
-              });
-
+                })
+              })
             }, function (zipe) {
-              mui.toast('压缩失败！')
-            });
-
-          });
+              window.mui.toast('压缩失败！')
+            })
+          })
         } else {
-            mui.alert('该功能仅支持app使用');
+          window.mui.alert('该功能仅支持app使用')
         }
       },
-      goSubmit(){
+      goSubmit () {
         if (!this.name) {
-          mui.toast('请填写专家姓名');
-          return;
+          window.mui.toast('请填写专家姓名')
+          return
         }
         if (!this.gender) {
-          mui.toast('请选择专家性别');
-          return;
+          window.mui.toast('请选择专家性别')
+          return
         }
         if (!this.workYears) {
-          mui.toast('请选择从业时间');
-          return;
+          window.mui.toast('请选择从业时间')
+          return
         }
         if (!this.infoIndustryTagsNames) {
-          mui.toast('请选择行业领域');
-          return;
+          window.mui.toast('请选择行业领域')
+          return
         }
         if (!this.mobile) {
-          mui.toast('请填写联系电话');
-          return;
+          window.mui.toast('请填写联系电话')
+          return
         }
 
-        if (this.mobile.length != 11) {
-          mui.toast('请正确填写联系电话');
-          return;
+        if (this.mobile.length !== 11) {
+          window.mui.toast('请正确填写联系电话')
+          return
         }
 
         if (!this.description) {
-          mui.toast('请填写专家信息');
-          return;
+          window.mui.toast('请填写专家信息')
+          return
         }
 
         if (!this.files.length) {
-          //mui.toast('请上传专家名片');
-          //return;
+          // mui.toast('请上传专家名片');
+          // return;
         }
 
-        if (mui.os.plus) {
-          this.uploadPlus();
+        if (window.mui.os.plus) {
+          this.uploadPlus()
         } else {
-
-
-
           postRequest(`expert/recommend`, {
             name: this.name,
             gender: this.genderValue,
@@ -237,62 +232,60 @@
             description: this.description,
             images: []
           }).then(response => {
-            var code = response.data.code;
+            var code = response.data.code
             if (code !== 1000) {
-              mui.alert(response.data.message);
-              return;
+              window.mui.alert(response.data.message)
+              return
             }
 
-            mui.toast('提交成功');
-            this.$router.replace('/home');
-          });
+            window.mui.toast('提交成功')
+            this.$router.replace('/home')
+          })
         }
-
       },
-      uploadPlus(){
-        var that = this;
-        mui.waiting();
-        var task = plus.uploader.createUpload(createAPI('expert/recommend'),
-          {method: "POST", blocksize: 204800, priority: 100},
+      uploadPlus () {
+        var that = this
+        window.mui.waiting()
+        var task = window.plus.uploader.createUpload(createAPI('expert/recommend'),
+          {method: 'POST', blocksize: 204800, priority: 100},
           function (t, status) {
-            mui.closeWaiting();
+            window.mui.closeWaiting()
             // 上传完成
-            if (status == 200) {
-              var response = JSON.parse(t.responseText);
-              if (response.code == 1000) {
-                mui.alert('提交成功');
-                that.$router.replace('/expert');
+            if (status === 200) {
+              var response = JSON.parse(t.responseText)
+              if (response.code === 1000) {
+                window.mui.alert('提交成功')
+                that.$router.replace('/expert')
               } else {
-                mui.alert(t.responseText + response.message);
+                window.mui.alert(t.responseText + response.message)
               }
             } else {
-              mui.alert("Upload failed: " + status);
+              window.mui.alert('Upload failed: ' + status)
             }
           }
-        );
+        )
 
         for (var i in this.files) {
-          var file = this.files[i];
-          task.addFile(file.path, {key: "images_" + i});
+          var file = this.files[i]
+          task.addFile(file.path, {key: 'images_' + i})
         }
 
-        task.addData("name", this.name);
-        task.addData("gender", this.genderValue);
-        task.addData("work_years", this.workYears);
-        task.addData("mobile", this.mobile);
-        task.addData("industry_tags", this.infoIndustryTagsCodes.join(','));
-        task.addData("description", this.description);
+        task.addData('name', this.name)
+        task.addData('gender', this.genderValue)
+        task.addData('work_years', this.workYears)
+        task.addData('mobile', this.mobile)
+        task.addData('industry_tags', this.infoIndustryTagsCodes.join(','))
+        task.addData('description', this.description)
 
-
-        const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
-        task.setRequestHeader('Authorization', 'bearer ' + UserLoginInfo.token);
-        task.start();
+        const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
+        task.setRequestHeader('Authorization', 'bearer ' + UserLoginInfo.token)
+        task.start()
       },
-      selectedIndustryTags(tags, object_type) {
-        this.industryTags = tags;
+      selectedIndustryTags (tags, objectType) {
+        this.industryTags = tags
       },
       selectGender: function () {
-        var Picker = new mui.PopPicker();
+        var Picker = new window.mui.PopPicker()
 
         Picker.setData([
           {
@@ -303,15 +296,15 @@
             value: '2',
             text: '女'
           }
-        ]);
+        ])
 
         Picker.show(items => {
-          this.gender = items[0].text;
-          this.genderValue = items[0].value;
-        });
+          this.gender = items[0].text
+          this.genderValue = items[0].value
+        })
       },
       selectWorkYear: function () {
-        var Picker = new mui.PopPicker();
+        var Picker = new window.mui.PopPicker()
 
         Picker.setData([
           {
@@ -326,29 +319,27 @@
             value: '20年以上',
             text: '20年以上'
           }
-        ]);
+        ])
 
         Picker.show(items => {
-          this.workYears = items[0].value;
-        });
+          this.workYears = items[0].value
+        })
       }
     },
-    mounted(){
-      mui('.mui-scroll-wrapper').scroll();
+    mounted () {
+      window.mui('.mui-scroll-wrapper').scroll()
     },
-    beforeRouteLeave(to, from, next) {
-      var popDiv = document.querySelector('.mui-dtpicker');
+    beforeRouteLeave (to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {
-        document.body.removeChild(popDiv);
+        document.body.removeChild(popDiv)
+      }
+      popDiv = document.querySelector('.mui-poppicker')
+      if (popDiv) {
+        document.body.removeChild(popDiv)
       }
 
-
-      popDiv = document.querySelector('.mui-poppicker');
-      if (popDiv) {
-        document.body.removeChild(popDiv);
-      }
-
-      next();
+      next()
     },
     components: {
       industryTagsIndexedList,

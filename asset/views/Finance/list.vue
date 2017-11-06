@@ -45,9 +45,8 @@
 </template>
 
 <script>
-  import oauth from '../../components/oauth/oauth.vue';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
+  import {postRequest} from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data: () => ({
@@ -58,26 +57,26 @@
     computed: {
       nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-        return this.list.length ? 0 : 1;
+        return this.list.length ? 0 : 1
       },
       topId () {
         if (this.list.length) {
-          return this.list[0].id;
+          return this.list[0].id
         }
-        return 0;
+        return 0
       },
       bottomId () {
-        var length = this.list.length;
+        var length = this.list.length
         if (length) {
-          return this.list[length-1].id;
+          return this.list[length - 1].id
         }
-        return 0;
+        return 0
       }
     },
-    mounted(){
-      mui.init({
+    mounted () {
+      window.mui.init({
         pullRefresh: {
           container: '#pullrefresh',
           down: {
@@ -89,69 +88,66 @@
             callback: this.pullupRefresh
           }
         }
-      });
-      this.getPrevList();
+      })
+      this.getPrevList()
     },
     created () {
 
     },
     methods: {
-      pulldownRefresh() {
+      pulldownRefresh () {
         setTimeout(() => {
-          this.getPrevList();
-        },1000);
+          this.getPrevList()
+        }, 1000)
       },
-      pullupRefresh() {
+      pullupRefresh () {
         setTimeout(() => {
-          this.getNextList();
-        },1000);
+          this.getNextList()
+        }, 1000)
       },
-      getPrevList(){
+      getPrevList () {
         postRequest(`account/money_log`, {top_id: this.topId}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.list = response.data.data.concat(this.list);
+            this.list = response.data.data.concat(this.list)
           }
-          this.loading = 0;
-          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-        });
+          this.loading = 0
+          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
+        })
       },
-      getNextList() {
+      getNextList () {
         postRequest(`account/money_log`, {bottom_id: this.bottomId}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.list = this.list.concat(response.data.data);
+            this.list = this.list.concat(response.data.data)
           }
-          this.loading = 0;
+          this.loading = 0
 
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-        });
+          window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
+        })
       },
-      getStates(item){
+      getStates (item) {
         switch (item.status) {
           case 0:
-            return '处理中';
-            break;
+            return '处理中'
           case 1:
-            return '处理成功';
-            break;
+            return '处理成功'
           case 2:
-            return '处理失败';
-            break;
+            return '处理失败'
         }
-        return '未知';
+        return '未知'
       }
     },
     watch: {}

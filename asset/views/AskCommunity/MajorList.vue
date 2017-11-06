@@ -108,134 +108,129 @@
 </template>
 
 <script>
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import userAbility from '../../utils/userAbility';
+  import { postRequest } from '../../utils/request'
 
   const MajorList = {
     data: () => ({
       hotList: [],
       recommendList: [],
       busy: false,
-      loading: true,
+      loading: true
     }),
     computed: {
-      type() {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
+      type () {
+        return this.$store.state.askType.selected ? this.$store.state.askType.selected : ''
       },
-      bottomId() {
-        var length = this.recommendList.length;
+      bottomId () {
+        var length = this.recommendList.length
         if (length) {
-          return this.recommendList[length - 1].id;
+          return this.recommendList[length - 1].id
         }
-        return 0;
-      },
+        return 0
+      }
     },
     components: {},
     methods: {
-      downRefresh(){
+      downRefresh () {
         this.getHotList(() => {
-          this.getRecommendList();
-        });
+          this.getRecommendList()
+        })
       },
-      loadMore(){
-        console.log('loadMore');
-        this.busy = true;
-        this.getNextList();
+      loadMore () {
+        console.log('loadMore')
+        this.busy = true
+        this.getNextList()
       },
-      toDetail(id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true);
+      toDetail (id) {
+        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
-      selectType(type_text) {
+      selectType (typeText) {
         this.$router.push('/ask/type?type=majorlist')
       },
-      //热门回答的列表；
-      getHotList(callback = () => {
-                 }) {
+      // 热门回答的列表；
+      getHotList (callback = () => {}) {
         postRequest(`question/majorHot`, {}).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
-          //请求成功的操作
+          // 请求成功的操作
           if (response.data.data) {
-            this.hotList = response.data.data;
+            this.hotList = response.data.data
           }
-          callback();
-        });
+          callback()
+        })
       },
-      getRecommendList() {
+      getRecommendList () {
         postRequest(`question/majorList`, {
           tag_id: this.type.split(':')[1]
         }).then(response => {
-          var code = response.data.code;
-          //如果请求不成功提示信息 并且返回上一页；
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data) {
-            this.recommendList = response.data.data;
+            this.recommendList = response.data.data
           }
-          //没有数据的显示框不显示；
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPulldownToRefresh(); //refresh completed
-        });
+          // 没有数据的显示框不显示；
+          this.loading = false
+          window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh() // refresh completed
+        })
       },
-      getNextList() {
+      getNextList () {
         postRequest(`question/majorList`, {
           bottom_id: this.bottomId,
           tag_id: this.type.split(':')[1]
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.recommendList = this.recommendList.concat(response.data.data);
+            this.recommendList = this.recommendList.concat(response.data.data)
           }
-
 
           if (response.data.data.length < 10) {
-            this.busy = true;
+            this.busy = true
           } else {
-            this.busy = false;
+            this.busy = false
           }
-          this.loading = false;
-          mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy);
-
-        });
+          this.loading = false
+          window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy)
+        })
       }
-
     },
-    mounted() {
-      mui.init({
+    mounted () {
+      window.mui.init({
         pullRefresh: {
-          container: "#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+          container: '#refreshContainer', // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
           down: {
-            auto: true,//可选,默认false.首次加载自动下拉刷新一次
-            contentdown: "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.downRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            auto: true, // 可选,默认false.首次加载自动下拉刷新一次
+            contentdown: '下拉可以刷新', // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover: '释放立即刷新', // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentrefresh: '正在刷新...', // 可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+            callback: this.downRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            contentnomore: '没有更多数据了', // 可选，请求完毕若没有更多数据时显示的提醒内容；
             callback: this.getNextList
           }
         }
-      });
-    },
+      })
+    }
   }
-  export default MajorList;
+  export default MajorList
 </script>
 
 <style scoped>
@@ -636,7 +631,7 @@
     background: #f3f4f6;
   }
 
-  #refreshContainer{
-    top:50px;
+  #refreshContainer {
+    top: 50px;
   }
 </style>

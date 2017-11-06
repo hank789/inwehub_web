@@ -4,6 +4,7 @@
          @click.stop.prevent="onTap(message, index)">
       {{ message.text }}
 
+
     </div>
   </div>
 </template>
@@ -12,68 +13,63 @@
   export default {
     data () {
       return {
-        messages: [],
+        messages: []
       }
     },
     methods: {
-      close(index){
-        var elem = document.getElementById('message_' + index);
-        elem.classList.remove('slideDown');
-        elem.classList.add('slideUp');
+      close (index) {
+        var elem = document.getElementById('message_' + index)
+        elem.classList.remove('slideDown')
+        elem.classList.add('slideUp')
         setTimeout(() => {
-          this.messages.splice(index, 1);
-        }, 1500);
+          this.messages.splice(index, 1)
+        }, 1500)
       },
-      onTap(message, index){
-        message.callback();
-        this.close(index);
+      onTap (message, index) {
+        message.callback()
+        this.close(index)
       },
-      show(message, callback){
+      show (message, callback) {
         this.messages.push({
           text: message,
           callback: callback
-        });
+        })
 
         this.$nextTick(() => {
+          var messages = document.getElementsByClassName('message')
+          window.mui.each(messages, (index, elem) => {
+            var startY
+            var moveY
 
-          var messages = document.getElementsByClassName('message');
+            elem.addEventListener('touchstart', (e) => {
+              e.stopPropagation()
 
-          mui.each(messages, (index, elem) => {
-            var startX, startY, moveX, moveY;
+              var touch = e.touches[0]
+              startY = touch.pageY
+            })
 
-            elem.addEventListener("touchstart", (e) => {
-              e.stopPropagation();
+            elem.addEventListener('touchmove', (e) => {
+              e.stopPropagation()
+              e.preventDefault()
 
-              var touch = e.touches[0];
-              startX = touch.pageX;
-              startY = touch.pageY;
-            });
-
-            elem.addEventListener("touchmove", (e) => {
-              e.stopPropagation();
-              e.preventDefault();
-
-              var touch = e.touches[0];
-              moveX = touch.pageX - startX;
-              moveY = touch.pageY - startY;
+              var touch = e.touches[0]
+              moveY = touch.pageY - startY
 
               if (moveY < 0) {
-                elem.style.top = moveY + 'px';
+                elem.style.top = moveY + 'px'
               }
-            });
+            })
 
-            elem.addEventListener("touchend", (e) => {
-              e.stopPropagation();
+            elem.addEventListener('touchend', (e) => {
+              e.stopPropagation()
 
               if (moveY < -10) {
-                this.close(index);
+                this.close(index)
               }
-            });
-
-
-          });
-        });
-      },
+            })
+          })
+        })
+      }
     }
   }
 </script>

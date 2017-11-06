@@ -39,12 +39,12 @@
       timelines: {
         type: Array,
         default: []
-      },
+      }
     },
-    created(){
+    created () {
 
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">

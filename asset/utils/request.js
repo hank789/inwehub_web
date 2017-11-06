@@ -1,35 +1,35 @@
-import axios from 'axios';
-import localEvent from '../stores/localStorage';
-import { logout } from '../utils/auth';
-import { rebootAuth } from '../utils/wechat';
+import axios from 'axios'
+import localEvent from '../stores/localStorage'
+import { logout } from '../utils/auth'
+import { rebootAuth } from '../utils/wechat'
 
-const baseURL = process.env.API_ROOT;
-const api = process.env.API_ROOT + `api`;
+const baseURL = process.env.API_ROOT
+const api = process.env.API_ROOT + `api`
 
 // Export a method to create the requested address.
-export const createRequestURI = PATH => `${baseURL}/${PATH}`;
+export const createRequestURI = PATH => `${baseURL}/${PATH}`
 
 // Created the request address of API.
-export const createAPI = PATH => `${api}/${PATH}`;
+export const createAPI = PATH => `${api}/${PATH}`
 
 // 注入access-token验证
 export const addAccessToken = () => {
-  const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo');
+  const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
   axios.defaults.headers.common = {
     'Authorization': 'bearer ' + UserLoginInfo.token
-  };
-  return axios;
-};
+  }
+  return axios
+}
 
-export default axios;
+export default axios
 
 export function apiRequest (url, data, showWaiting = true) {
-  if (showWaiting){
-    mui.waiting();
+  if (showWaiting) {
+    window.mui.waiting()
   }
-  var app_version = localEvent.getLocalItem('app_version');
-  if (app_version) {
-    data.current_version = app_version.version;
+  var appVersion = localEvent.getLocalItem('app_version')
+  if (appVersion) {
+    data.current_version = appVersion.version
   }
 
   return addAccessToken().post(createAPI(url), data,
@@ -38,112 +38,108 @@ export function apiRequest (url, data, showWaiting = true) {
     }
   )
     .then(response => {
-      if (showWaiting){
-        mui.closeWaiting();
+      if (showWaiting) {
+        window.mui.closeWaiting()
       }
 
-      console.log('api-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
+      console.log('api-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response))
 
-      var code = response.data.code;
+      var code = response.data.code
       // 参数错误
       if (code === 1008) {
-        var errMsg = '';
+        var errMsg = ''
         for (var i in response.data.data) {
-          errMsg = errMsg + response.data.data[i] + '\n';
+          errMsg = errMsg + response.data.data[i] + '\n'
         }
-        var s = errMsg.substring(0,errMsg.lastIndexOf('\n'));
-        mui.toast(s);
-        return false;
+        var s = errMsg.substring(0, errMsg.lastIndexOf('\n'))
+        window.mui.toast(s)
+        return false
       }
 
-      if (!mui.os.wechat){
-
+      if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-          mui.toast(response.data.message);
-          logout();
-          return;
+          window.mui.toast(response.data.message)
+          logout()
+          return
         }
       } else {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-          rebootAuth();
-          return;
+          rebootAuth()
+          return
         }
       }
 
       if (code !== 1000) {
-        mui.toast(response.data.message);
-        return false;
+        window.mui.toast(response.data.message)
+        return false
       }
 
-      return response.data.data;
+      return response.data.data
     })
     .catch(({response: {message = '网络状况堪忧'} = {}}) => {
-      if (showWaiting){
-        mui.closeWaiting();
+      if (showWaiting) {
+        window.mui.closeWaiting()
       }
-      mui.toast(message);
-      return false;
+      window.mui.toast(message)
+      return false
     })
 }
 
-//对后端数据进行请求；（showWaiting = true 加载gif）
+// 对后端数据进行请求；（showWaiting = true 加载gif）
 export function postRequest (url, data, showWaiting = true, options = {}) {
-  if (showWaiting){
-    mui.waiting();
+  if (showWaiting) {
+    window.mui.waiting()
   }
 
-  var app_version = localEvent.getLocalItem('app_version');
-  if (app_version) {
-    data.current_version = app_version.version;
+  var appVersion = localEvent.getLocalItem('app_version')
+  if (appVersion) {
+    data.current_version = appVersion.version
   }
 
-
-
-  var config = {};
-  config.validateStatus = status => status === 200;
+  var config = {}
+  config.validateStatus = status => status === 200
 
   if (options.onUploadProgress) {
-    config.onUploadProgress = options.onUploadProgress;
+    config.onUploadProgress = options.onUploadProgress
   }
 
   return addAccessToken().post(createAPI(url), data, config)
     .then(response => {
-
       if (options.onUploadProgress) {
-        mui.closeUploadWaiting();
+        window.mui.closeUploadWaiting()
       }
 
       if (showWaiting) {
-        mui.closeWaiting();
+        window.mui.closeWaiting()
       }
 
-      console.log('post-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response));
+      console.log('post-post url:' + url + ', data:' + JSON.stringify(data) + ', response:' + JSON.stringify(response))
 
-      var code = response.data.code;
+      var code = response.data.code
 
-      if (!mui.os.wechat){
+      if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-          mui.toast(response.data.message);
-          logout();
-          return response;
+          window.mui.toast(response.data.message)
+          logout()
+          return response
         }
       } else {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
-          rebootAuth();
-          return response;
+          rebootAuth()
+          return response
         }
       }
 
-      return response;
+      return response
     })
     .catch(e => {
       if (showWaiting) {
-        mui.closeWaiting();
+        window.mui.closeWaiting()
       }
 
       if (options.onUploadProgress) {
-        mui.closeUploadWaiting();
+        window.mui.closeUploadWaiting()
       }
-      return {data:{message: '网络状况堪忧', code:0}};
+      return {data: {message: '网络状况堪忧', code: 0}}
     })
 }

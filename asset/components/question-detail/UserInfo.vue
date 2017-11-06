@@ -15,6 +15,7 @@
       {{ realname }}
 
 
+
       <div class="detail" v-if="isShowPositionAndCompany">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
@@ -31,13 +32,13 @@
 </template>
 <script type="text/javascript">
 
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import {getLocalUserInfo} from '../../utils/user';
+  import { postRequest } from '../../utils/request'
+  import { getLocalUserInfo } from '../../utils/user'
 
   export default {
     data () {
       return {
-        localUuid:0
+        localUuid: 0
       }
     },
     props: {
@@ -73,46 +74,46 @@
         type: Number,
         default: false
       },
-      isShowPositionAndCompany:{
+      isShowPositionAndCompany: {
         type: Boolean,
-        default:false
+        default: false
       }
     },
-    created(){
-        var user = getLocalUserInfo();
-        this.localUuid = user.uuid;
+    created () {
+      var user = getLocalUserInfo()
+      this.localUuid = user.uuid
     },
     methods: {
-      toResume(){
-        var uuid = this.uuid;
+      toResume () {
+        var uuid = this.uuid
         if (!uuid) {
-            return false;
+          return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()));
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       collectProfessor: function () {
         if (!this.uuid) {
-          return;
+          return
         }
 
         postRequest(`follow/user`, {
           id: this.uuid
         }).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          var is_followed = response.data.data.type === 'follow' ? 1 : 0;
+          var isFollowed = response.data.data.type === 'follow' ? 1 : 0
 
-          mui.toast(response.data.data.tip);
+          window.mui.toast(response.data.data.tip)
 
-          this.$emit('setFollowStatus', is_followed);
-        });
-      },
+          this.$emit('setFollowStatus', isFollowed)
+        })
+      }
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">
@@ -188,9 +189,9 @@
     padding: 1px 15px;
   }
 
-  .followButton.active{
+  .followButton.active {
     background-color: #03aef9;
-    color:#fff;
+    color: #fff;
   }
 
   .mui-media-body {
@@ -199,7 +200,7 @@
 
   .mui-media-body .followWrapper {
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
   }
 
@@ -215,8 +216,8 @@
     color: #03aef9;
   }
 
-  .userInfoWrapper{
-    padding:15px;
+  .userInfoWrapper {
+    padding: 15px;
   }
 
 </style>

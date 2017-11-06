@@ -43,33 +43,35 @@
         </div>
       </div>
 
-    <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}" >
-    <div class="mui-scroll">
+      <div id="pullrefresh" :class="{'mui-content':false, 'mui-scroll-wrapper':true, 'emptyList':nothing}">
+        <div class="mui-scroll">
 
-    <div class="" v-if="nothing == 0">
-      <div class="list-answer">
+          <div class="" v-if="nothing == 0">
+            <div class="list-answer">
 
-        <div class="mui-table-view list-answer-item"  v-for="(answer, index) in answers" @tap.stop.prevent="toDetail(answer)">
-          <div class="mui-table-view-cell mui-media">
-            <div class="site-desc mui-ellipsis-2">
-              {{ answer.description }}
-            </div>
-            <div class="person">
-              <div class="mui-media-body">
-                <div>
-                  <span :class="'label label_' + answer.status">{{ answer.status_description }}</span>
-                  <span class="time">{{ answer.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
+              <div class="mui-table-view list-answer-item" v-for="(answer, index) in answers"
+                   @tap.stop.prevent="toDetail(answer)">
+                <div class="mui-table-view-cell mui-media">
+                  <div class="site-desc mui-ellipsis-2">
+                    {{ answer.description }}
+
+                  </div>
+                  <div class="person">
+                    <div class="mui-media-body">
+                      <div>
+                        <span :class="'label label_' + answer.status">{{ answer.status_description }}</span>
+                        <span class="time">{{ answer.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
       </div>
-    </div>
-
-    </div>
-    </div>
     </div>
 
 
@@ -77,80 +79,77 @@
 </template>
 
 <script>
-  import {NOTICE, ANSWERS_INFO, ANSWERS_LIST, ANSWERS_INFO_APPEND, ANSWERS_LIST_APPEND} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-
+  import { ANSWERS_INFO_APPEND, ANSWERS_LIST_APPEND } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   const AnswerList = {
-    data(){
-      const currentUser = localEvent.getLocalItem('UserInfo');
+    data () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
 
       return {
         answers: [],
-        loading:true,
-        isExpert:currentUser.is_expert
+        loading: true,
+        isExpert: currentUser.is_expert
       }
     },
     computed: {
       nothing () {
         if (this.loading) {
-          return -1;
+          return -1
         }
-        return this.answers.length ? 0 : 1;
+        return this.answers.length ? 0 : 1
       },
       topId () {
         if (this.answers.length) {
-          return this.answers[0].id;
+          return this.answers[0].id
         }
-        return 0;
+        return 0
       },
       bottomId () {
-        var length = this.answers.length;
+        var length = this.answers.length
         if (length) {
-          return this.answers[length-1].id;
+          return this.answers[length - 1].id
         }
-        return 0;
+        return 0
       },
-      lastY (){
+      lastY () {
         if (this.isFromDetail()) {
-          return this.$store.state.answers.info.lastY;
+          return this.$store.state.answers.info.lastY
         } else {
-            return 0;
+          return 0
         }
-
       }
     },
-    updated(){
-      this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers);
+    updated () {
+      this.$store.dispatch(ANSWERS_LIST_APPEND, this.answers)
     },
-    created(){
-      //showInwehubWebview();
+    created () {
+      // showInwehubWebview();
+      var list = []
       if (this.isFromDetail()) {
-          var list = this.$store.state.answers.list;
-      } else {
-          var list = [];
+        list = this.$store.state.answers.list
       }
 
       if (list.length) {
-        this.answers = list;
-        this.loading = false;
+        this.answers = list
+        this.loading = false
       }
     },
-    mounted(){
-      window.addEventListener('refreshData', (e)=>{
-        //执行刷新
-        console.log('refresh-answerList');
-        this.getPrevList();
-      });
+    mounted () {
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-answerList')
+        this.getPrevList()
+      })
 
-      var t = this;
-      mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function(event){
-        var lastY = event.detail.lastY;
-        t.$store.dispatch(ANSWERS_INFO_APPEND, {lastY:lastY});
-      });
+      var t = this
+      window.mui('.mui-scroll-wrapper').on('scrollend', '.mui-scroll', function (event) {
+        var lastY = event.detail.lastY
+        t.$store.dispatch(ANSWERS_INFO_APPEND, {lastY: lastY})
+      })
 
-      mui.init({
+      window.mui.init({
         pullRefresh: {
           container: '#pullrefresh',
           down: {
@@ -158,161 +157,153 @@
           },
           up: {
             contentrefresh: '正在加载...',
-            contentnomore:'没有更多了',
+            contentnomore: '没有更多了',
             callback: this.pullupRefresh
           }
         }
-      });
-      this.getPrevList();
+      })
+      this.getPrevList()
     },
     filters: {
-       textLimit(text){
-           var limit = 70;
-           if (text.length > limit) {
-               text = text.slice(0, limit) + '...';
-           }
-           return text;
-       }
+      textLimit (text) {
+        var limit = 70
+        if (text.length > limit) {
+          text = text.slice(0, limit) + '...'
+        }
+        return text
+      }
     },
     methods: {
-      toDetail(item){
+      toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/' + item.id);
+          this.$router.pushPlus('/askCommunity/interaction/' + item.id)
         } else {
-          this.$router.pushPlus('/answer/' + item.question_id);
+          this.$router.pushPlus('/answer/' + item.question_id)
         }
       },
-      pulldownRefresh() {
+      pulldownRefresh () {
         setTimeout(() => {
-          this.getPrevList();
-        },1000);
+          this.getPrevList()
+        }, 1000)
       },
-     pullupRefresh() {
+      pullupRefresh () {
         setTimeout(() => {
-          this.getNextList();
-        },1000);
+          this.getNextList()
+        }, 1000)
       },
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       },
-      getPrevList(){
-
-        postRequest(`answer/myList`, {type:1}).then(response => {
-          var code = response.data.code;
+      getPrevList () {
+        postRequest(`answer/myList`, {type: 1}).then(response => {
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.answers = response.data.data;
+            this.answers = response.data.data
           }
-          this.loading = 0;
-          mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-
-        });
+          this.loading = 0
+          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
+        })
       },
-      getNextList() {
-
-        postRequest(`answer/myList`, {bottom_id: this.bottomId, type:1}).then(response => {
-          var code = response.data.code;
+      getNextList () {
+        postRequest(`answer/myList`, {bottom_id: this.bottomId, type: 1}).then(response => {
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
           if (response.data.data.length > 0) {
-            this.answers = this.answers.concat(response.data.data);
+            this.answers = this.answers.concat(response.data.data)
           }
-          this.loading = 0;
-          mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
-
-        });
+          this.loading = 0
+          window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
+        })
       },
-      isFromDetail(){
-        return false;
-        var referer = localEvent.getLocalItem('referer');
-        if (/\/answer\/[0-9]+/.test(referer.path)) {
-          return true;
-        }
-        return false;
+      isFromDetail () {
+        return false
       }
     }
   }
-  export default AnswerList;
+  export default AnswerList
 </script>
 
 
 <style scoped>
-  .list-answer{
-    margin-top:5px;
+  .list-answer {
+    margin-top: 5px;
   }
-  .list-answer .list-answer-item{
-    position:relative;
+
+  .list-answer .list-answer-item {
+    position: relative;
     line-height: 40px;
   }
 
-  .list-answer .list-answer-item .title{
-    line-height:28px;
+  .list-answer .list-answer-item .title {
+    line-height: 28px;
   }
 
   .list-answer .list-answer-item .mui-media-body {
-    padding-left:10px;
+    padding-left: 10px;
     line-height: 21px;
-    font-size:12px;
-    color:#9B9B9B;
+    font-size: 12px;
+    color: #9B9B9B;
   }
-  .list-answer .list-answer-item .time{
-    color:#9B9B9B;
-    font-size:12px;
+
+  .list-answer .list-answer-item .time {
+    color: #9B9B9B;
+    font-size: 12px;
     float: right;
     margin-right: 10px;
   }
 
-  .list-answer .username{
-    color:#101010;
+  .list-answer .username {
+    color: #101010;
   }
 
-  .list-answer .list-answer-item .amount{
+  .list-answer .list-answer-item .amount {
     position: absolute;
     right: 10px;
-    color:#ff9800;
-    font-size:16px;
+    color: #ff9800;
+    font-size: 16px;
   }
 
-  .list-answer .list-answer-item .amount b{
+  .list-answer .list-answer-item .amount b {
 
-    font-weight:normal;
+    font-weight: normal;
   }
 
-  .list-answer .person{
-    margin-top:10px;
+  .list-answer .person {
+    margin-top: 10px;
   }
 
-
-  .list-answer .site-desc{
+  .list-answer .site-desc {
     padding-left: 10px;
     line-height: 22px;
-    color:#101010;
-  }
-  .list-answer .site-descSub{
-    font-size:14px;
-    color:#4A4A4A;
+    color: #101010;
   }
 
-
-  .list-answer .site-desc .mui-icon{
-    font-size:16px;
+  .list-answer .site-descSub {
+    font-size: 14px;
+    color: #4A4A4A;
   }
 
-  .list-answer .avatar{
+  .list-answer .site-desc .mui-icon {
+    font-size: 16px;
+  }
+
+  .list-answer .avatar {
     z-index: 0;
     color: #ffffff;
-    float:left;
+    float: left;
     background-color: #bdbdbd;
     display: inline-block;
     height: 50px;
@@ -322,8 +313,7 @@
     border-radius: 50%;
   }
 
-
-  .list-answer .avatar .avatarInner{
+  .list-answer .avatar .avatarInner {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -347,39 +337,39 @@
     display: block;
   }
 
-  .list-answer .mui-table-view-cell{
-    padding:11px 8px;
+  .list-answer .mui-table-view-cell {
+    padding: 11px 8px;
   }
 
-  .list-answer .mui-table-view-cell > a:not(.mui-btn){
+  .list-answer .mui-table-view-cell > a:not(.mui-btn) {
     margin: -11px -8px;
   }
-  .list-answer p{
-    margin-left:20px;
+
+  .list-answer p {
+    margin-left: 20px;
   }
 
-  .list-answer .person{
+  .list-answer .person {
     position: relative;
   }
 
-
-  .menu{
+  .menu {
     position: relative;
-    z-index:7;
+    z-index: 7;
   }
 
-  .list-empty .menu{
-    margin-bottom:0px;
+  .list-empty .menu {
+    margin-bottom: 0px;
   }
 
   .mui-segmented-control .mui-control-item {
     line-height: 50px;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     position: relative;
-    color:#03aef9;
+    color: #03aef9;
     border: none;
   }
 
@@ -395,33 +385,33 @@
     background-color: #009FE8;
   }
 
-  .mui-segmented-control{
+  .mui-segmented-control {
     background: #f3f4f6;
   }
 
-  #pullrefresh{
+  #pullrefresh {
     background: #fff;
   }
 
-  .mui-table-view:before{
+  .mui-table-view:before {
     display: none;
   }
 
-  .mui-table-view:after{
-    border:none;
-    left:18px;
-    right:18px;
+  .mui-table-view:after {
+    border: none;
+    left: 18px;
+    right: 18px;
   }
 
-  .label{
+  .label {
     display: inline-block;
-    background:#fcc816;
-    border-radius:50px;
-    color:#fff;
-    padding:0 9px;
+    background: #fcc816;
+    border-radius: 50px;
+    color: #fff;
+    padding: 0 9px;
   }
 
-  .emptyListWrapper{
-    padding-top:0px;
+  .emptyListWrapper {
+    padding-top: 0px;
   }
 </style>

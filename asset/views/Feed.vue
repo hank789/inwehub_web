@@ -86,33 +86,32 @@
 
 </template>
 <script>
-  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../utils/request';
-  import AnswerMajor from '../components/feed/AnswerMajor';
-  import AnswerInteraction from '../components/feed/AnswerInteraction';
-  import CreateFreeQuestion from '../components/feed/CreateFreeQuestion';
-  import SubmitReadhubAriticle from '../components/feed/SubmitReadhubAriticle';
-  import FllowFreeQuestion from '../components/feed/FllowFreeQuestion';
-  import FllowUser from '../components/feed/FllowUser';
-  import CommentPayQustion from '../components/feed/CommentPayQustion';
-  import CommentFreeQuestion from '../components/feed/CommentFreeQuestion';
-  import CommentReadhubAriticle from '../components/feed/CommentReadhubAriticle';
-  import UpvotePayQuestion from '../components/feed/UpvotePayQuestion';
-  import UpvoteFreeQuestion from '../components/feed/UpvoteFreeQuestion';
-  import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle';
+  import { postRequest } from '../utils/request'
+  import AnswerMajor from '../components/feed/AnswerMajor'
+  import AnswerInteraction from '../components/feed/AnswerInteraction'
+  import CreateFreeQuestion from '../components/feed/CreateFreeQuestion'
+  import SubmitReadhubAriticle from '../components/feed/SubmitReadhubAriticle'
+  import FllowFreeQuestion from '../components/feed/FllowFreeQuestion'
+  import FllowUser from '../components/feed/FllowUser'
+  import CommentPayQustion from '../components/feed/CommentPayQustion'
+  import CommentFreeQuestion from '../components/feed/CommentFreeQuestion'
+  import CommentReadhubAriticle from '../components/feed/CommentReadhubAriticle'
+  import UpvotePayQuestion from '../components/feed/UpvotePayQuestion'
+  import UpvoteFreeQuestion from '../components/feed/UpvoteFreeQuestion'
+  import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
 
-  import RefreshList from '../components/refresh/List.vue';
-  import Activity from '../components/home/Activity.vue';
-  import Swiper from '../components/home/Swiper.vue';
-  import userAbility from '../utils/userAbility';
+  import RefreshList from '../components/refresh/List.vue'
+  import Activity from '../components/home/Activity.vue'
+  import Swiper from '../components/home/Swiper.vue'
+  import userAbility from '../utils/userAbility'
 
   const Feed = {
     data: () => ({
       loading: false,
       list: []
     }),
-    created() {
-      this.getHomeData();
+    created () {
+      this.getHomeData()
     },
     components: {
       RefreshList,
@@ -130,58 +129,54 @@
       UpvoteReadhubAriticle,
       Activity,
       Swiper
-
     },
-    //缓存；
     activated: function () {
 
     },
-    mounted() {
-
-      //新手任务
-      userAbility.newbieTask(this);
+    mounted () {
+      // 新手任务
+      userAbility.newbieTask(this)
     },
     computed: {},
     methods: {
-      toAddArticle(){
-        userAbility.jumpToAddArticle(this);
+      toAddArticle () {
+        userAbility.jumpToAddArticle(this)
       },
       goArticle: function (article) {
-
-        var url = article.view_url;
-        var id = article.id;
-        var title = article.title;
-        var pathUrl = article.comment_url;
-        var img_url = article.img_url;
+        var url = article.view_url
+        var id = article.id
+        var title = article.title
+        var pathUrl = article.comment_url
+        var imgUrl = article.img_url
 
         if (/http/.test(url)) {
-          if (mui.os.plus) {
+          if (window.mui.os.plus) {
             if (window.mixpanel.track) {
               window.mixpanel.track(
                 'inwehub:read_page_detail', {
-                  "app": "inwehub",
-                  "user_device": getUserAppDevice(),
+                  'app': 'inwehub',
+                  'user_device': this.getUserAppDevice(),
                   'page': url,
                   'page_title': title
                 }
-              );
+              )
             }
             if (window.ga) {
-              window.ga('set', 'page', url);
-              window.ga('send', 'pageview');
+              window.ga('set', 'page', url)
+              window.ga('send', 'pageview')
             }
-            var article_params = {
+            var articleParams = {
               article_id: id,
               article_url: url,
               article_title: title,
               article_comment_url: pathUrl,
-              article_img_url: img_url,
+              article_img_url: imgUrl,
               preload: true
-            };
-            var article_ws = mui.openWindow({
+            }
+            var articleWs = window.mui.openWindow({
               url: 'index.html#/webview/article',
               id: 'inwehub_article_view',
-              preload: false, //一定要为false
+              preload: false, // 一定要为false
               createNew: false,
               show: {
                 autoShow: true,
@@ -193,33 +188,31 @@
               waiting: {
                 autoShow: false
               },
-              extras: article_params
-            });
-            mui.fire(article_ws, 'load_article', article_params);
+              extras: articleParams
+            })
+            window.mui.fire(articleWs, 'load_article', articleParams)
           } else {
-            //            var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+            // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
 
-            var url = "/discover?redirect_url=" + pathUrl + '?' + encodeURIComponent('from=h5');
-
-            this.$router.push(url);
-            //            window.location.href = url;
+            url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
+            this.$router.push(url)
+            // window.location.href = url
           }
         } else {
-          this.$router.pushReadHubPage(url);
+          this.$router.pushReadHubPage(url)
         }
       },
-      getHomeData(){
+      getHomeData () {
         postRequest(`home`, {}, false).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.toast(response.data.message);
-            return;
+            window.mui.toast(response.data.message)
+            return
           }
-        });
+        })
       },
-      toDetail(item){
-
-        if (item.feed_type === 7) item.url += '?goback=1';
+      toDetail (item) {
+        if (item.feed_type === 7) item.url += '?goback=1'
 
         switch (item.feed_type) {
           case 1:
@@ -232,30 +225,30 @@
           case 9:
           case 11:
           case 12:
-            this.$router.pushPlus(item.url);
-            break;
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
           case 10:
-            this.$router.pushReadHubPage(item.url);
-            break;
+            this.$router.pushReadHubPage(item.url)
+            break
           case 5:
           case 13:
             var article = {
-              view_url:item.url,
-              id:item.feed.submission_id,
-              title:item.feed.title,
-              comment_url:item.feed.comment_url,
-              img_url:item.feed.img,
-            };
-            console.debug(article);
-            this.goArticle(article);
-            break;
+              view_url: item.url,
+              id: item.feed.submission_id,
+              title: item.feed.title,
+              comment_url: item.feed.comment_url,
+              img_url: item.feed.img
+            }
+            console.debug(article)
+            this.goArticle(article)
+            break
           default:
-            break;
+            break
         }
       }
     }
-  };
-  export default Feed;
+  }
+  export default Feed
 </script>
 
 <style lang="less" scoped>
@@ -268,15 +261,17 @@
     top: 42px;
   }
 
-  .rightWrapper{
+  .rightWrapper {
     position: absolute;
     right: 15px;
     top: 12px;
   }
 
-  .rightWrapper .icon{
-    font-size:17px;
+  .rightWrapper .icon {
+    font-size: 17px;
   }
 
-  .mui-content{background:#fff}
+  .mui-content {
+    background: #fff
+  }
 </style>

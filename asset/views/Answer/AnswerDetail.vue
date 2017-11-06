@@ -19,12 +19,14 @@
           <button type="button" class="mui-btn mui-btn-block mui-btn-grey"
                   @tap.stop.prevent="$router.pushPlus('/answerrefuse/' + answer.question.id)">
             拒绝应答
+
           </button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @tap.stop.prevent="selectTime">
             确认应答
+
           </button>
         </div>
 
@@ -36,6 +38,7 @@
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                   @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容
+
 
           </button>
         </div>
@@ -57,6 +60,7 @@
       <div class="mui-table-view timeEnd" v-show="answer.question.status===5">
         <div class="mui-table-view-cell">
           您已拒绝回答该问题
+
         </div>
       </div>
 
@@ -72,7 +76,6 @@
         ref="discuss"
         v-show="answer.answers[0] && answer.answers[0].content"
       ></Discuss>
-
 
 
       <div class="mb70"></div>
@@ -93,17 +96,17 @@
 </template>
 
 <script>
-  import {NOTICE} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import Question from '../../components/question-detail/Question.vue';
-  import Answer from '../../components/question-detail/Answer.vue';
-  import Discuss from '../../components/question-detail/Discuss.vue';
-  import Share from '../../components/Share.vue';
-  import {getAskCommunityMajorDetail} from '../../utils/shareTemplate';
-  import {alertAnswerRepeat} from '../../utils/dialogList';
+  import { NOTICE } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import Question from '../../components/question-detail/Question.vue'
+  import Answer from '../../components/question-detail/Answer.vue'
+  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Share from '../../components/Share.vue'
+  import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
+  import { alertAnswerRepeat } from '../../utils/dialogList'
 
-  import CountDown from 'vue2-countdown';
+  import CountDown from 'vue2-countdown'
 
   const AnswerDetail = {
     data: () => ({
@@ -123,15 +126,15 @@
       description: {},
       descLength: 0,
       loading: true,
-      shareOption:{
-        title:'',
-        link:'',
-        content:'',
-        imageUrl:'',
-        thumbUrl:''
+      shareOption: {
+        title: '',
+        link: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: ''
       },
       buttonAnswerDisable: false,
-      buttonSelectTimeDisable: false,
+      buttonSelectTimeDisable: false
     }),
     components: {
       CountDown,
@@ -141,102 +144,97 @@
       Share
     },
     computed: {},
-    mounted(){
+    mounted () {
     },
     methods: {
-      shareSuccess(){},
-      shareFail(){},
-      refreshPageData(){
-        this.loading = 1;
-        this.getData();
+      shareSuccess () {},
+      shareFail () {},
+      refreshPageData () {
+        this.loading = 1
+        this.getData()
       },
-      timeago(time) {
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       },
-      isTimeout(question){
+      isTimeout (question) {
         if (!question.promise_answer_time) {
-          return false;
+          return false
         }
 
-        var endtime = this.getEndTime(question);
-        var currentTime = (new Date()).getTime() / 1000;
+        var endtime = this.getEndTime(question)
+        var currentTime = (new Date()).getTime() / 1000
         if (endtime < currentTime) {
-          return true;
+          return true
         }
 
-        return false;
+        return false
       },
-      startCountdown(question){
-        var endtime = this.getEndTime(question);
-        var currentTime = (new Date()).getTime() / 1000;
+      startCountdown (question) {
+        var endtime = this.getEndTime(question)
+        var currentTime = (new Date()).getTime() / 1000
         if (endtime < currentTime) {
-          return false;
+          return false
         }
-        return true;
+        return true
       },
-      getEndTime(question){
-        var deadline = question.promise_answer_time;
+      getEndTime (question) {
+        var deadline = question.promise_answer_time
         if (deadline) {
-          return Date.parse(deadline.replace(/-/g, "/")) / 1000;
+          return Date.parse(deadline.replace(/-/g, '/')) / 1000
         }
-        return null;
+        return null
       },
-      check(){
-        //信息是否完善
-        const currentUser = localEvent.getLocalItem('UserInfo');
+      check () {
+        // 信息是否完善
+        const currentUser = localEvent.getLocalItem('UserInfo')
         if (currentUser.hasOwnProperty('account_info_complete_percent') && parseInt(currentUser.account_info_complete_percent) < 90) {
-          mui.alert('您的个人信息还不完善，请先前往我的个人档案中补充完整才能应答。 ', null, null, () => {
-            this.$router.replace('/my/info');
-          });
+          window.mui.alert('您的个人信息还不完善，请先前往我的个人档案中补充完整才能应答。 ', null, null, () => {
+            this.$router.replace('/my/info')
+          })
         }
       },
-      selectTime(){
-        this.initDate();
+      selectTime () {
+        this.initDate()
       },
-      submit(time)
-      {
+      submit (time) {
         var data = {
           question_id: this.id,
           promise_time: time
-        };
-
-        if (this.buttonSelectTimeDisable) {
-          return;
         }
 
-        this.buttonSelectTimeDisable = true;
+        if (this.buttonSelectTimeDisable) {
+          return
+        }
+
+        this.buttonSelectTimeDisable = true
 
         postRequest(`answer/store`, data).then(response => {
-          this.buttonSelectTimeDisable = false;
-          var code = response.data.code;
-          if (code !== 1000) {
-             //回答过的；
-//          if (code == 3003) {
-//            console.error('store');
-//           alertAnswerRepeat(this);
-//          }
-            
-            mui.alert(response.data.message);
-        
-            return;
-          }
-          
-            
-            
+          this.buttonSelectTimeDisable = false
+          var code = response.data.code
 
-          if (time != '0000') {
-            this.getData();
-          } else {
-            this.getData();
+          if (code !== 1000) {
+            // 回答过的；
+            if (code === 3003) {
+              console.error('store')
+              alertAnswerRepeat(this)
+            }
+            window.mui.toast(response.data.message)
+
+            return
           }
-        });
+
+          if (time !== '0000') {
+            this.getData()
+          } else {
+            this.getData()
+          }
+        })
       },
       initDate: function () {
-
-        //普通示例
-        var Picker = new mui.PopPicker();
+        // 普通示例
+        var Picker = new window.mui.PopPicker()
 
         Picker.setData([
 //          {
@@ -259,76 +257,64 @@
             value: '1440',
             text: '24小时内回答'
           }
-        ]);
+        ])
 
-        var selectTime = '';
+        var selectTime = ''
         Picker.show((rs) => {
-          Picker.dispose();
-          var value = rs[0].value;
+          Picker.dispose()
+          var value = rs[0].value
           switch (value) {
             case '0':
-              selectTime = '0000';
-              break;
+              selectTime = '0000'
+              break
             case '120':
-              selectTime = '0200';
-              break;
+              selectTime = '0200'
+              break
             case '360':
-              selectTime = '0600';
-              break;
+              selectTime = '0600'
+              break
             case '720':
-              selectTime = '1200';
-              break;
+              selectTime = '1200'
+              break
             case '1440':
-              selectTime = '2400';
-              break;
+              selectTime = '2400'
+              break
             default:
-              selectTime = '';
-              break;
+              selectTime = ''
+              break
           }
 
-          mui.confirm("选择确定后您将不能拒绝回答该问题了，并请在承诺的反馈时间内回答。", null, ['取消', '确定'], e => {
-            if (e.index == 1) {
-              this.submit(selectTime);
+          window.mui.confirm('选择确定后您将不能拒绝回答该问题了，并请在承诺的反馈时间内回答。', null, ['取消', '确定'], e => {
+            if (e.index === 1) {
+              this.submit(selectTime)
             }
-          }, 'div');
-
-        });
-
-
+          }, 'div')
+        })
       },
-      getTitle()
-      {
-        var status = this.answer.question.status;
-        var title = '';
+      getTitle () {
+        var status = this.answer.question.status
+        var title = ''
         switch (status) {
           case 2:
-            title = '确认应答';
-            break;
+            title = '确认应答'
+            break
           case 4:
             if (this.answer.answers.length && this.answer.answers[0].promise_time) {
-              title = '回答问题';
+              title = '回答问题'
             } else {
-              title = '回答问题';  //确认时间
+              title = '回答问题'  // 确认时间
             }
-            break;
+            break
           default:
-            title = '我的回答';
+            title = '我的回答'
         }
 
-        this.$emit('changeWechatTitle', title);
+        this.$emit('changeWechatTitle', title)
 
-        this.title = title;
+        this.title = title
       },
-      timeago(time) {
-        if (!time) {
-          return '';
-        }
-        let newDate = new Date();
-        newDate.setTime(Date.parse(time.replace(/-/g, "/")));
-        return newDate;
-      },
-      getData(){
-        let id = parseInt(this.$route.params.id);
+      getData () {
+        let id = parseInt(this.$route.params.id)
 
         if (!id) {
           this.$store.dispatch(NOTICE, cb => {
@@ -336,58 +322,54 @@
               text: '发生一些错误',
               time: 1500,
               status: false
-            });
-          });
-          this.$router.back();
-          return;
+            })
+          })
+          this.$router.back()
+          return
         }
 
-        this.id = id;
+        this.id = id
 
         postRequest(`question/info`, {id: this.id}).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-//           if (code == 3003) {
-//              console.error('info');
-//               alertAnswerRepeat(this);
-//            }
-          //code 3003
-            
-            mui.toast(response.data.message);
-            this.$router.pushPlus('/task', true, 'pop-in', 'hide', true);
-            return;
+            if (code === 3003) {
+              console.error('info')
+              alertAnswerRepeat(this)
+            }
+            // code 3003
+
+            window.mui.toast(response.data.message)
+            this.$router.pushPlus('/task', true, 'pop-in', 'hide', true)
+            return
           }
-         
-           
 
-          this.answer = response.data.data;
+          this.answer = response.data.data
 
-          this.loading = 0;
+          this.loading = 0
 
-          this.getTitle();
+          this.getTitle()
 
-          this.check();
+          this.check()
 
-          var answer = this.answer.answers[0] ? this.answer.answers[0] : {};
-          var username = answer.user_name ? answer.user_name : '';
-          this.shareOption = getAskCommunityMajorDetail(this.id, this.answer.question.description, username);
-
-        });
+          var answer = this.answer.answers[0] ? this.answer.answers[0] : {}
+          var username = answer.user_name ? answer.user_name : ''
+          this.shareOption = getAskCommunityMajorDetail(this.id, this.answer.question.description, username)
+        })
       }
     },
-    beforeRouteLeave(to, from, next) {
-      var popDiv = document.querySelector('.mui-dtpicker');
+    beforeRouteLeave (to, from, next) {
+      var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {
-        document.body.removeChild(popDiv);
+        document.body.removeChild(popDiv)
       }
 
-
-      popDiv = document.querySelector('.mui-poppicker');
+      popDiv = document.querySelector('.mui-poppicker')
       if (popDiv) {
-        document.body.removeChild(popDiv);
+        document.body.removeChild(popDiv)
       }
 
-      next();
+      next()
     },
     watch: {
       descLength: function (newDescLength) {
@@ -396,25 +378,25 @@
       '$route': 'refreshPageData'
     },
     created () {
-      //showInwehubWebview();
-      this.getData();
+      // showInwehubWebview();
+      this.getData()
     }
   }
-  export default AnswerDetail;
+  export default AnswerDetail
 </script>
 
 
 <style scoped>
 
 
-  .buttons{
+  .buttons {
     padding-top: 5px;
     background: #fff;
   }
-  .buttons .mui-col-sm-6{
-      padding:15px;
-  }
 
+  .buttons .mui-col-sm-6 {
+    padding: 15px;
+  }
 
   .timeEnd {
     margin-top: 15px;
@@ -465,7 +447,7 @@
   .form-realAnswer .time {
     font-size: 12px;
     color: #fa4975;
-    padding-left:15px;
+    padding-left: 15px;
   }
 
   .form-realAnswer .time b {

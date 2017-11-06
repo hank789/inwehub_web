@@ -4,10 +4,12 @@
 
     <div class='view'>
       <keep-alive>
-        <router-view class="pageWrapper" id="router-view" v-if="$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+        <router-view class="pageWrapper" id="router-view" v-if="$route.meta.keepAlive"
+                     @countChange="onCountChange($event)" ref="routerView"
                      @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
       </keep-alive>
-      <router-view class="pageWrapper" id="router-view" v-if="!$route.meta.keepAlive" @countChange="onCountChange($event)" ref="routerView"
+      <router-view class="pageWrapper" :id="'router-view'" v-if="!$route.meta.keepAlive"
+                   @countChange="onCountChange($event)" ref="routerView"
                    @changeWechatTitle="onChangeWechatTitle($event)"></router-view>
     </div>
     <FooterComponent ref="Footer" id="Footer"
@@ -22,60 +24,56 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
-  import FooterComponent from '../../components/Footer.vue';
-  import OpenAppComponent from '../../components/OpenApp.vue';
-  import {goBack} from '../../utils/webview';
-  import EventObj from '../../utils/event';
-  import {setIncBadgeNumber} from '../../utils/notice';
-  import inwehubDialog from '../../components/Dialog.vue';
-  import userAbility from '../../utils/userAbility';
-  import MessageComponent from '../../components/Message.vue';
-  import {getImmersedHeight} from '../../utils/statusBar';
+  import localEvent from '../../stores/localStorage'
+  import FooterComponent from '../../components/Footer.vue'
+  import OpenAppComponent from '../../components/OpenApp.vue'
+  import { goBack } from '../../utils/webview'
+  import EventObj from '../../utils/event'
+  import { setIncBadgeNumber } from '../../utils/notice'
+  import inwehubDialog from '../../components/Dialog.vue'
+  import userAbility from '../../utils/userAbility'
+  import MessageComponent from '../../components/Message.vue'
+  import { getImmersedHeight } from '../../utils/statusBar'
 
   export default {
     data () {
       return {
-        wechatTitle: this.$route.meta.title,
+        wechatTitle: this.$route.meta.title
       }
     },
     methods: {
-      messagecountchange(obj){
+      messagecountchange (obj) {
         if (this.$refs.routerView.messagecountchange) {
-          this.$refs.routerView.messagecountchange(obj);
+          this.$refs.routerView.messagecountchange(obj)
         }
-
       },
-      //聊天推送的内容；
-      chat(obj){
+      chat (obj) {
         if (this.$refs.routerView.chat) {
-          this.$refs.routerView.chat(obj);
+          this.$refs.routerView.chat(obj)
         }
       },
-      onCountChange(count){
-        this.$refs.Footer.onCountChange(count);
+      onCountChange (count) {
+        this.$refs.Footer.onCountChange(count)
       },
-      onChangeWechatTitle(title) {
-        this.wechatTitle = title;
+      onChangeWechatTitle (title) {
+        this.wechatTitle = title
       },
       goRecommand: function () {
-        this.expertNav();
+        this.expertNav()
         this.$router.push('/expert/recommend')
       },
       goExpert: function () {
-        this.expertNav();
+        this.expertNav()
         this.$router.push('/expert')
       },
       expertNav: function () {
-        mui('#expert').popover('toggle');
+        window.mui('#expert').popover('toggle')
       },
-      linkTo(dest){
-        this.$router.push(dest);
+      linkTo (dest) {
+        this.$router.push(dest)
       }
     },
-    created(){
+    created () {
 
     },
     components: {
@@ -85,34 +83,33 @@
       MessageComponent
     },
     watch: {
-      $route(to) {
-        this.wechatTitle = this.$route.meta.title;
+      $route (to) {
+        this.wechatTitle = this.$route.meta.title
       }
     },
     mounted () {
-      console.log('refreshDataAppMounted');
-      var currentUser = localEvent.getLocalItem('UserInfo');
-      var router = this.$router;
-      var self = this;
+      console.log('refreshDataAppMounted')
+      var currentUser = localEvent.getLocalItem('UserInfo')
+      var router = this.$router
+      var self = this
 
       if (process.env.NODE_ENV === 'production') {
         // mixpanel
-        window.mixpanel.init("688ee16000ddf4f44891e06b79847d4e");
-        mixpanelIdentify();
+        window.mixpanel.init('688ee16000ddf4f44891e06b79847d4e')
+        window.mixpanelIdentify()
       }
 
-
-      mui.plusReady(function () {
-        if (mui.os.plus) {
-          var url = process.env.READHUB_URL + '/h5';
+      window.mui.plusReady(function () {
+        if (window.mui.os.plus) {
+          var url = process.env.READHUB_URL + '/h5'
           if (currentUser.uuid) {
-            url = url + '?uuid=' + currentUser.uuid;
+            url = url + '?uuid=' + currentUser.uuid
           }
-          //通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
+          // 通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
 
-          var immersedHeight = getImmersedHeight();
+          var immersedHeight = getImmersedHeight()
 
-          var inwehub_embed_view = mui.preload({
+          var inwehubEmbedView = window.mui.preload({
             url: url,
             id: 'inwehub_embed',
             styles: {
@@ -123,126 +120,126 @@
               bounce: 'none'
             },
             extras: {preload: true}
-          });
-          mui.preload({
+          })
+          window.mui.preload({
             url: url,
             id: 'readhub_submission_webview',
             styles: {
               popGesture: 'hide'
             },
             extras: {preload: true}
-          });
+          })
 
-          if (inwehub_embed_view.getURL() && inwehub_embed_view.getURL() !== url) {
-            console.log('inwehub_embed:reload:' + url);
-            inwehub_embed_view.loadURL(url);
+          if (inwehubEmbedView.getURL() && inwehubEmbedView.getURL() !== url) {
+            console.log('inwehub_embed:reload:' + url)
+            inwehubEmbedView.loadURL(url)
           }
-          mui.init({
-            swipeBack: true, //启用右滑关闭功能
+          window.mui.init({
+            swipeBack: true, // 启用右滑关闭功能
             beforeback: goBack
-          });
+          })
 
-          var ws = plus.webview.currentWebview();
-          //监听自定义事件，前往页面
+          var ws = window.plus.webview.currentWebview()
+          // 监听自定义事件，前往页面
           document.addEventListener('go_to_target_page', (event) => {
-            var url = event.detail.url;
-            console.log('go_to_target_page:' + url);
-            router.push(url);
-          });
+            var url = event.detail.url
+            console.log('go_to_target_page:' + url)
+            router.push(url)
+          })
           // 只在主页面监听一次
-          if (ws.id === plus.runtime.appid) {
+          if (ws.id === window.plus.runtime.appid) {
             EventObj.addEventListener('refreshData', (e) => {
-              //执行刷新
+              // 执行刷新
               if (self.$refs.Footer.showBottom) {
                 if (self.$refs.routerView.hasOwnProperty('initData')) {
-                  console.log('refreshDataApp');
-                  self.$refs.routerView.initData();
+                  console.log('refreshDataApp')
+                  self.$refs.routerView.initData()
                 }
               }
-            });
+            })
 
-            //监听推送
+            // 监听推送
             var noticeTo = function (payload) {
               if (window.mixpanel.track) {
                 window.mixpanel.track(
                   'inwehub:push:click:' + payload.object_type,
-                  {"app": "inwehub", "user_device": getUserAppDevice(), "page": payload.object_id, "page_title": "打开推送"}
-                );
+                  {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': payload.object_id, 'page_title': '打开推送'}
+                )
               }
               switch (payload.object_type) {
                 case 'question':
                 case 'pay_question_answered':
                 case 'question_answer_confirmed':
                   // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                  //router.go(-1);
-                  router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                  break;
+                  // router.go(-1);
+                  router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()))
+                  break
                 case 'pay_question_answered_askCommunity':
-                  router.pushPlus('/askCommunity/major/' + payload.object_id);
-                  break;
+                  router.pushPlus('/askCommunity/major/' + payload.object_id)
+                  break
                 case 'free_question_answered':
-                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
-                  break;
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+                  break
                 case 'pay_answer':
                 case 'answer':
-                  //router.go(-1);
-                  // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                  router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()));
-                  break;
+                  // router.go(-1);
+                  // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
+                  router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
+                  break
                 case 'free_answer':
-                  router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id);
-                  break;
+                  router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id)
+                  break
                 case 'authentication_success':
                   // 专家认证成功
-                  router.pushPlus('/my?needalert=1');
-                  break;
+                  router.pushPlus('/my?needalert=1')
+                  break
                 case 'authentication_fail':
                   // 专家认证失败
-                  router.pushPlus('/my/pilot');
-                  break;
+                  router.pushPlus('/my/pilot')
+                  break
                 case 'company_auth_success':
                   // 企业认证成功
-                  router.pushPlus('/company/my');
-                  break;
+                  router.pushPlus('/company/my')
+                  break
                 case 'company_auth_fail':
                   // 企业认证失败
-                  router.pushPlus('/company/my');
-                  break;
+                  router.pushPlus('/company/my')
+                  break
                 case 'notification_money':
                   // 资金变动通知
-                  router.pushPlus('/my/Finance');
-                  break;
+                  router.pushPlus('/my/Finance')
+                  break
                 case 'user_following':
                   // 用户关注通知
-                  router.pushPlus('/share/resume/' + payload.object_id + '?goback=1');
-                  break;
+                  router.pushPlus('/share/resume/' + payload.object_id + '?goback=1')
+                  break
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.pushReadHubPage(payload.object_id);
-                  break;
+                  router.pushReadHubPage(payload.object_id)
+                  break
                 case 'readhub_submission_replied':
                   // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.pushReadHubPage(payload.object_id);
-                  break;
+                  router.pushReadHubPage(payload.object_id)
+                  break
                 case 'readhub_username_mentioned':
                   // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-                  router.pushReadHubPage(payload.object_id);
-                  break;
+                  router.pushReadHubPage(payload.object_id)
+                  break
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
                   if (payload.object) {
-                    var article_params = {
+                    var articleParams = {
                       article_id: payload.object.id,
                       article_url: payload.object.view_url,
                       article_title: payload.object.title,
                       article_comment_url: payload.object.comment_url,
                       article_img_url: payload.object.img_url,
                       preload: true
-                    };
-                    var article_ws = mui.openWindow({
+                    }
+                    var articleWs = window.mui.openWindow({
                       url: 'index.html#/webview/article',
                       id: 'inwehub_article_view',
-                      preload: false, //一定要为false
+                      preload: false, // 一定要为false
                       createNew: false,
                       show: {
                         autoShow: true,
@@ -254,21 +251,21 @@
                       waiting: {
                         autoShow: false
                       },
-                      extras: article_params
-                    });
-                    mui.fire(article_ws, 'load_article', article_params);
+                      extras: articleParams
+                    })
+                    window.mui.fire(articleWs, 'load_article', articleParams)
                   }
-                  break;
+                  break
                 case 'push_notice_app_self':
                   // 推送app内页
-                  router.push(payload.object_id);
-                  break;
+                  router.push(payload.object_id)
+                  break
                 case 'push_notice_article':
                   // 推送公告文章
-                  mui.openWindow({
+                  window.mui.openWindow({
                     url: 'index.html#/webview/notice',
                     id: payload.object_id,
-                    preload: false, //一定要为false
+                    preload: false, // 一定要为false
                     createNew: false,
                     show: {
                       autoShow: true,
@@ -280,112 +277,97 @@
                     waiting: {
                       autoShow: false
                     }
-                  });
-                  break;
+                  })
+                  break
                 case 'notification_level_up':
                   // 用户积分等级提升;
-                  userAbility.upgradeLevel(this);
-                  break;
+                  userAbility.upgradeLevel(this)
+                  break
                 case 'activity_enroll_fail':
                 case 'activity_enroll_success':
                   // 活动报名事件
-                  router.pushPlus("/EnrollmentStatus/" + payload.object_id);
-                  break;
+                  router.pushPlus('/EnrollmentStatus/' + payload.object_id)
+                  break
                 case 'pay_answer_new_comment':
-                  //专业回答新的回复
-                  router.pushPlus('/askCommunity/major/' + payload.object_id);
-                  break;
+                  // 专业回答新的回复
+                  router.pushPlus('/askCommunity/major/' + payload.object_id)
+                  break
                 case 'free_answer_new_comment':
-                  //互动问答新的回复
-                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
-                  break;
+                  // 互动问答新的回复
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+                  break
                 case 'pay_answer_new_support':
-                  //专业回答赞
-                  router.pushPlus('/askCommunity/major/' + payload.object_id);
-                  break;
+                  // 专业回答赞
+                  router.pushPlus('/askCommunity/major/' + payload.object_id)
+                  break
                 case 'free_answer_new_support':
-                  //专业回答赞
-                  router.pushPlus('/askCommunity/interaction/' + payload.object_id);
-                  break;
+                  // 专业回答赞
+                  router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+                  break
                 case 'im_message':
-                  //聊天信息
-                  router.pushPlus('/chat');
-                  break;
+                  // 聊天信息
+                  router.pushPlus('/chat')
+                  break
               }
-            };
+            }
 
             // 监听点击消息事件
-            plus.push.addEventListener("click", (msg) => {
+            window.plus.push.addEventListener('click', (msg) => {
               // 判断是从本地创建还是离线推送的消息
               switch (msg.payload) {
-                case "LocalMSG":
-                  console.log("点击本地创建消息启动：");
-                  break;
+                case 'LocalMSG':
+                  console.log('点击本地创建消息启动：')
+                  break
                 default:
-                  console.log(msg);
-                  break;
+                  console.log(msg)
+                  break
               }
+
               // 提示点击的内容
               if (msg.payload) {
-                //plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) );
-                if (mui.os.ios) {
-                  var payload = msg.payload;
+                // plus.nativeUI.alert( "click:payload(JSON): "+JSON.stringify(msg.payload) )
+                var payload = ''
+                if (window.mui.os.ios) {
+                  payload = msg.payload
                 } else {
-                  var payload = JSON.parse(msg.payload);
+                  payload = JSON.parse(msg.payload)
                 }
-                //var repeatKey = payload.object_type + payload.object_id;
-                //var isRepeat = localEvent.getLocalItem(repeatKey);
-                /*if (isRepeat.key) {
-                 return;
-                 } else {
-                 localEvent.setLocalItem(repeatKey,{key:repeatKey});
-                 }*/
-                noticeTo(payload);
-              }
 
-            }, false);
+                noticeTo(payload)
+              }
+            }, false)
             // 监听在线消息事件
-            plus.push.addEventListener("receive", (msg) => {
+            window.plus.push.addEventListener('receive', (msg) => {
               if (msg.aps) {  // Apple APNS message
-                console.log("接收到在线APNS消息：");
+                console.log('接收到在线APNS消息：')
               } else {
-                console.log("接收到在线透传消息：");
+                console.log('接收到在线透传消息：')
               }
-
               if (msg.payload) {
-                //plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
-                if (mui.os.ios) {
-                  var payload = msg.payload.payload;
+                // plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
+                var payload = ''
+                if (window.mui.os.ios) {
+                  payload = msg.payload.payload
                 } else {
-                  var payload = JSON.parse(msg.payload);
+                  payload = JSON.parse(msg.payload)
                 }
-                /*var repeatKey = payload.object_type + payload.object_id;
-                 var isRepeat = localEvent.getLocalItem(repeatKey);
-                 if (isRepeat.key) {
-                 return;
-                 } else {
-                 localEvent.setLocalItem(repeatKey,{key:repeatKey});
-                 }*/
+                setIncBadgeNumber()
 
-                setIncBadgeNumber();
-
-                console.log('接收到通知:' + payload.title);
+                console.log('接收到通知:' + payload.title)
                 self.$refs.MessageComponent.show(payload.title, () => {
-                  noticeTo(payload);
-                });
+                  noticeTo(payload)
+                })
               }
-
-            }, false);
+            }, false)
           }
         } else {
-          mui.init({
-            swipeBack: true, //启用右滑关闭功能
+          window.mui.init({
+            swipeBack: true, // 启用右滑关闭功能
             beforeback: goBack
-          });
+          })
         }
-      });
+      })
     }
   }
 </script>
-
 

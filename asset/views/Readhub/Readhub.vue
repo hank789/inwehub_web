@@ -12,8 +12,8 @@
 
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  import {getImmersedHeight} from '../../utils/statusBar';
+  import localEvent from '../../stores/localStorage'
+  import {getImmersedHeight} from '../../utils/statusBar'
 
   export default {
     data: () => ({
@@ -27,88 +27,87 @@
 
     },
     methods: {
-      hideWebview(){
-        console.log('hideWebview');
-        if (mui.os.plus) {
-          var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-          if (inwehub_embed_webview) {
-            inwehub_embed_webview.hide();
+      hideWebview () {
+        console.log('hideWebview')
+        if (window.mui.os.plus) {
+          var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+          if (inwehubEmbedWebview) {
+            inwehubEmbedWebview.hide()
           }
         }
       },
-      loaded() {
-        console.log('loaded');
-        mui.closeWaiting();
+      loaded () {
+        console.log('loaded')
+        window.mui.closeWaiting()
       },
-      reloadUrl(){
-
+      reloadUrl () {
         if (!/^\/discover/.test(this.$route.path)) {
-          return;
+          return
         }
 
-        this.currentUser = localEvent.getLocalItem('UserInfo');
-        var url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid;
+        this.currentUser = localEvent.getLocalItem('UserInfo')
+        var url = process.env.READHUB_URL + '/h5?uuid=' + this.currentUser.uuid
 
         if (this.$route.query.redirect_url) {
-          url = url + '&redirect_url=' + encodeURIComponent(this.$route.query.redirect_url);
-          this.$route.query.redirect_url = false;
+          url = url + '&redirect_url=' + encodeURIComponent(this.$route.query.redirect_url)
+          this.$route.query.redirect_url = false
         }
-        console.log('reloadUrl:' + url);
+        console.log('reloadUrl:' + url)
 
-        if (mui.os.plus) {
-          this.createReadWebview(url);
+        if (window.mui.os.plus) {
+          this.createReadWebview(url)
         } else {
-          this.createIframe(url);
+          this.createIframe(url)
         }
       },
-      createIframe(url){
-        mui.waiting();
+      createIframe (url) {
+        window.mui.waiting()
 
-        this.iframeState = true;
-        const deviceWidth = document.documentElement.clientWidth;
-        var deviceHeight = document.documentElement.clientHeight - 50;
-        const oIframe = document.getElementById('show-iframe');
-        this.iframe = oIframe;
-        this.iframe.src = url;
-        oIframe.style.width = deviceWidth + 'px';
+        this.iframeState = true
+        const deviceWidth = document.documentElement.clientWidth
+        var deviceHeight = document.documentElement.clientHeight - 50
+        const oIframe = document.getElementById('show-iframe')
+        this.iframe = oIframe
+        this.iframe.src = url
+        oIframe.style.width = deviceWidth + 'px'
 
         if (document.body.classList && document.body.classList.contains('openAppWechat')) {
-          deviceHeight-=49;
+          deviceHeight -= 49
         }
 
-        oIframe.style.height = deviceHeight + 'px';
+        oIframe.style.height = deviceHeight + 'px'
       },
-      createReadWebview(url) {
-        this.iframeState = false;
-        mui.waiting();
-        mui.plusReady(() => {
-          var ws = plus.webview.currentWebview();
-          console.log('wsid:' + ws.id);
-          ws.addEventListener('show', createEmbed(ws, url), false);
+      createReadWebview (url) {
+        this.iframeState = false
+        window.mui.waiting()
+        window.mui.plusReady(() => {
+          var ws = window.plus.webview.currentWebview()
+          console.log('wsid:' + ws.id)
+          ws.addEventListener('show', createEmbed(ws, url), false)
 
-          function createEmbed(ws, url) {
-            var ImmersedHeight = getImmersedHeight();
-            var inwehub_embed_webview = plus.webview.getWebviewById('inwehub_embed');
-            if (!inwehub_embed_webview) {
-              inwehub_embed_webview = plus.webview.create(url, 'inwehub_embed', {
+          function createEmbed (ws, url) {
+            var ImmersedHeight = getImmersedHeight()
+            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+            if (!inwehubEmbedWebview) {
+              inwehubEmbedWebview = window.plus.webview.create(url, 'inwehub_embed', {
                 popGesture: 'none',
                 top: ImmersedHeight + 'px',
                 dock: 'top',
                 bottom: '50px',
                 bounce: 'none'
-              });
-              ws.append(inwehub_embed_webview);
+              })
+              ws.append(inwehubEmbedWebview)
             } else {
-              console.log('zzzedd' + inwehub_embed_webview.getURL() + ' url:' + url);
-              if (inwehub_embed_webview.getURL() !== url) {
-                inwehub_embed_webview.loadURL(url);
+              console.log('zzzedd' + inwehubEmbedWebview.getURL() + ' url:' + url)
+              if (inwehubEmbedWebview.getURL() !== url) {
+                inwehubEmbedWebview.loadURL(url)
               }
-              inwehub_embed_webview.show();
+              inwehubEmbedWebview.show()
             }
 
-            mui.closeWaiting();
+            window.mui.closeWaiting()
           }
-        });
+        })
       }
     },
     computed: {},
@@ -116,13 +115,13 @@
       '$route': 'reloadUrl'
     },
     activated: function () {
-      this.reloadUrl();
+      this.reloadUrl()
     },
     deactivated: function () {
-      this.hideWebview();
+      this.hideWebview()
     },
-    mounted(){
-      this.reloadUrl();
+    mounted () {
+      this.reloadUrl()
     }
   }
 

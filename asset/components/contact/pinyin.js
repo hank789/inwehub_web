@@ -403,7 +403,7 @@ var pinyin = {
 }
 
 var charmapReg = /[-a-zA-Z0-9 ]/
-function getFullCamelChars(str) {
+function getFullCamelChars (str) {
   let i = 0
   let len = str.length
   let word = ''
@@ -428,7 +428,7 @@ function getFullCamelChars(str) {
   }
 
   if (/^[a-zA-Z]+/.test(str)) {
-    camel = str[0].toUpperCase();
+    camel = str[0].toUpperCase()
   }
 
   if (camel === '') {

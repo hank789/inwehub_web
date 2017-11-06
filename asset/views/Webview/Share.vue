@@ -20,15 +20,16 @@
       <div class="title">分享到</div>
       <div class="more">
         <div class="single" id="wechatShareBtn" @tap.stop.prevent="shareToHaoyou()">
-          <img src="../../statics/images/wechat_2x.png" />
+          <img src="../../statics/images/wechat_2x.png"/>
         </div>
         <div class="single" id="wechatShareBtn2" @tap.stop.prevent="shareToPengyouQuan()">
-          <img src="../../statics/images/pengyouquan.png" />
+          <img src="../../statics/images/pengyouquan.png"/>
         </div>
       </div>
     </div>
 
-    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top" @tap.stop.prevent="toggleShareNav()">
+    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top"
+         @tap.stop.prevent="toggleShareNav()">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-dianzheli"></use>
       </svg>
@@ -39,9 +40,8 @@
 
 
 <script>
-  import localEvent from '../../stores/localStorage';
-  import Share from '../../utils/share';
-  import { postRequest } from '../../utils/request';
+  import Share from '../../utils/share'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data: () => ({
@@ -52,129 +52,131 @@
 
     },
     methods: {
-      initWebview(page_tile,share_title,share_link,share_content,share_imageUrl,share_thumbUrl) {
-        this.title =  page_tile;
-        this.link = share_link;
-        if (mui.os.plus) {
-            var data = {
-              title: share_title,
-              link: share_link,
-              content: share_content,
-              imageUrl: share_imageUrl,
-              thumbUrl: share_thumbUrl,
-            };
-
-            Share.bindShare(
-              this,
-              data,
-              this.successCallback,
-              this.failCallback
-            );
-
-        } else {
-          var data = {
-            title: 'test',
-            link: 'test',
-            content: 'test',
-            imageUrl: 'test',
-            thumbUrl: 'test',
-          };
+      initWebview (pageTile, shareTitle, shareLink, shareContent, shareImageUrl, shareThumbUrl) {
+        this.title = pageTile
+        this.link = shareLink
+        var data = {}
+        if (window.mui.os.plus) {
+          data = {
+            title: shareTitle,
+            link: shareLink,
+            content: shareContent,
+            imageUrl: shareImageUrl,
+            thumbUrl: shareThumbUrl
+          }
 
           Share.bindShare(
             this,
             data,
             this.successCallback,
             this.failCallback
-          );
+          )
+        } else {
+          data = {
+            title: 'test',
+            link: 'test',
+            content: 'test',
+            imageUrl: 'test',
+            thumbUrl: 'test'
+          }
+
+          Share.bindShare(
+            this,
+            data,
+            this.successCallback,
+            this.failCallback
+          )
         }
       },
-      toggleShareNav() {
-          mui('#shareShowWrapper').popover('toggle');
+      toggleShareNav () {
+        window.mui('#shareShowWrapper').popover('toggle')
       },
-      shareToHaoyou(){
-          this.sendHaoyou();
-          if (mui.os.plus) {
-            mui('#shareWrapper').popover('toggle');
-          } else {
-            mui('#shareWrapper').popover('toggle');
-            mui('#shareShowWrapper').popover('toggle');
-          }
-        this.hide();
+      shareToHaoyou () {
+        this.sendHaoyou()
+        if (window.mui.os.plus) {
+          window.mui('#shareWrapper').popover('toggle')
+        } else {
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareShowWrapper').popover('toggle')
+        }
+        this.hide()
       },
-      shareToPengyouQuan(){
-          this.sendPengYouQuan();
-          if (mui.os.plus) {
-            mui('#shareWrapper').popover('toggle');
-          } else {
-            mui('#shareWrapper').popover('toggle');
-            mui('#shareShowWrapper').popover('toggle');
-          }
-        this.hide();
+      shareToPengyouQuan () {
+        this.sendPengYouQuan()
+        if (window.mui.os.plus) {
+          window.mui('#shareWrapper').popover('toggle')
+        } else {
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareShowWrapper').popover('toggle')
+        }
+        this.hide()
       },
-      successCallback(){
+      successCallback () {
         postRequest(`share/wechat/success`, {
           'target': this.link,
-          'title' : this.title
+          'title': this.title
         }).then(response => {
 
-        });
+        })
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:success',
-            {"app": "inwehub", "user_device": getUserAppDevice(), "page": this.link, "page_name": 'share', "page_title": this.title, "referrer_page": ''}
-          );
+            {
+              'app': 'inwehub',
+              'user_device': this.getUserAppDevice(),
+              'page': this.link,
+              'page_name': 'share',
+              'page_title': this.title,
+              'referrer_page': ''
+            }
+          )
         }
-
       },
-      failCallback(error){
-        console.log(JSON.stringify(error));
-        mui.toast('分享失败');
+      failCallback (error) {
+        console.log(JSON.stringify(error))
+        window.mui.toast('分享失败')
       },
-      share(){
-        if (mui.os.plus) {
-          mui.plusReady(function () {
-            var currentWebview = plus.webview.currentWebview();
+      share () {
+        if (window.mui.os.plus) {
+          window.mui.plusReady(function () {
+            var currentWebview = window.plus.webview.currentWebview()
             currentWebview.setStyle({
               height: '100%',
-              opacity: 0.97,
-            });
-          });
+              opacity: 0.97
+            })
+          })
         }
 
         setTimeout(() => {
-          mui('#shareWrapper').popover('toggle');
-          mui("body").on('tap','.mui-backdrop', () => {
-               this.hide();
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('body').on('tap', '.mui-backdrop', () => {
+            this.hide()
           })
-        }, 150);
-
+        }, 150)
       },
-      hide(){
-        if (mui.os.plus) {
-          mui.plusReady(function () {
-            var currentWebview = plus.webview.currentWebview();
+      hide () {
+        if (window.mui.os.plus) {
+          window.mui.plusReady(function () {
+            var currentWebview = window.plus.webview.currentWebview()
             currentWebview.setStyle({
               height: '44px',
-              opacity: 1,
-            });
-          });
+              opacity: 1
+            })
+          })
         }
-      },
+      }
     },
-    computed: {}
-    ,
-    watch: {}
-    ,
-    mounted()
-    {
+    computed: {},
+    watch: {},
+    mounted () {
       document.addEventListener('load_inwehub_article_share', (event) => {
-        this.initWebview(event.detail.page_title,event.detail.title,event.detail.link,event.detail.content,event.detail.imageUrl,event.detail.thumbUrl);
-      });
-      mui.plusReady(() => {
-        var ws = plus.webview.currentWebview();
-        this.initWebview(ws.page_title,ws.title,ws.link,ws.content,ws.imageUrl,ws.thumbUrl);
-      });
+        this.initWebview(event.detail.page_title, event.detail.title, event.detail.link, event.detail.content, event.detail.imageUrl, event.detail.thumbUrl)
+      })
+      window.mui.plusReady(() => {
+        var ws = window.plus.webview.currentWebview()
+        this.initWebview(ws.page_title, ws.title, ws.link, ws.content, ws.imageUrl, ws.thumbUrl)
+      })
     }
   }
 
@@ -186,7 +188,6 @@
     padding: 200px;
     text-align: center;
   }
-
 
   .shareWrapper {
     .title {
@@ -211,8 +212,6 @@
     }
   }
 
-
-
   #shareShowWrapper {
     position: absolute;
     right: 0;
@@ -225,7 +224,6 @@
       font-size: 70px;
     }
   }
-
 
 
 </style>

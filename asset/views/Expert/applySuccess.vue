@@ -37,121 +37,124 @@
 </template>
 
 <script>
-  import {apiRequest, postRequest} from '../../utils/request';
-  import localEvent from '../../stores/localStorage';
 
   export default {
-    data(){
+    data () {
       return {
         loading: 1,
-        type:null,
+        type: null
       }
     },
-    computed: {
-   
-    },
-    methods: {
-    
-    },
-    mounted(){
+    computed: {},
+    methods: {},
+    mounted () {
 
     },
-    created(){
-
-      this.type = this.$route.query.type;
+    created () {
+      this.type = this.$route.query.type
     }
-  };
+  }
 </script>
 
 <style scoped="scoped">
-  .mui-content{
+  .mui-content {
     position: absolute;
-    width:100%;
-    top:0;
-    left:0;
-    bottom:0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
     background: #ececee;
     text-align: center;
   }
-  .mui-content h5{
-    margin-top:50px;
-    font-size:20px;
-    color:#323232;
+
+  .mui-content h5 {
+    margin-top: 50px;
+    font-size: 20px;
+    color: #323232;
   }
-  .mui-content .h5e{
-    margin-top:7px;
-    font-size:20px;
-    color:#808080;
+
+  .mui-content .h5e {
+    margin-top: 7px;
+    font-size: 20px;
+    color: #808080;
     font-weight: normal;
   }
 
-  .mui-content .tip{
-    margin:17px 0 15px;
-    color:#808080;
-    font-size:14px;
+  .mui-content .tip {
+    margin: 17px 0 15px;
+    color: #808080;
+    font-size: 14px;
   }
-  .basic{
+
+  .basic {
     position: relative;
-    width:100%;
-    height:129px;
+    width: 100%;
+    height: 129px;
     text-align: center;
   }
 
-  .basic a{
+  .basic a {
     position: absolute;
-    color:#b4b4b6;
-    font-size:30px;
-    top:17px;
-    left:6px;
+    color: #b4b4b6;
+    font-size: 30px;
+    top: 17px;
+    left: 6px;
   }
 
-  .iconWrapper{
+  .iconWrapper {
     text-align: center;
-    padding-top:13px;
-  }
-  .iconWrapper .icon{
-    font-size:124px;
-    color:#dcdcdc;
+    padding-top: 13px;
   }
 
-  .flowWrapper{
+  .iconWrapper .icon {
+    font-size: 124px;
+    color: #dcdcdc;
+  }
+
+  .flowWrapper {
     text-align: center;
   }
-  .flow{
+
+  .flow {
     display: inline-block;
-    height:21px;
+    height: 21px;
     background: url("../../statics/images/flow@2x.png") no-repeat;
-    background-size:cover;
-    width:312px;
+    background-size: cover;
+    width: 312px;
   }
-  .flowWrapper .fText{
+
+  .flowWrapper .fText {
     position: relative;
     display: inline-block;
-    width:312px;
-    font-size:12px;
-    color:#808080;
-    height:22px;
-    top:-4px;
+    width: 312px;
+    font-size: 12px;
+    color: #808080;
+    height: 22px;
+    top: -4px;
 
   }
-  .fText .f1{
+
+  .fText .f1 {
     position: absolute;
-    left:0;
-  }
-  .fText .f2{
-    position: absolute;
-    left:71px;
-  }
-  .fText .f3{
-    position: absolute;
-    right:72px;
-  }
-  .fText .f4{
-    position: absolute;
-    right:0;
+    left: 0;
   }
 
-  .cover{
-    bottom:0px !important;
+  .fText .f2 {
+    position: absolute;
+    left: 71px;
+  }
+
+  .fText .f3 {
+    position: absolute;
+    right: 72px;
+  }
+
+  .fText .f4 {
+    position: absolute;
+    right: 0;
+  }
+
+  .cover {
+    bottom: 0px !important;
   }
 </style>

@@ -11,24 +11,27 @@
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
           {{ type ? type.split(':')[0] : '选择'
           }}
+
         </button>
       </div>
 
       <div class="form form-ask">
         <div class="textarea-wrapper">
-        <textarea id="description" v-model.trim="description"  @focus="textareaFocus" @blur="textareaBlur"></textarea>
+          <textarea id="description" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
         </div>
       </div>
 
       <div class="fixedDiv">
         <div class="fixedContainer">
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
+          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
+                                                                     :class="{'active':hide}"></label>匿名</span>
           <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
         </div>
 
         <div class="button-wrapper" v-show="!isShowMoneyDev">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit();">
             提好问题了
+
 
 
           </button>
@@ -38,10 +41,11 @@
           <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
 
 
-        <div class="button-wrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="toAskCommunity">
-            去问答社区看看
+          <div class="button-wrapper">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                    @tap.stop.prevent="toAskCommunity">
+              去问答社区看看
+
             </button>
           </div>
         </div>
@@ -49,7 +53,8 @@
 
     </div>
 
-    <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money" v-on:pay_success="goAsk">
+    <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
+         v-on:pay_success="goAsk">
     </pay>
 
   </div>
@@ -57,14 +62,11 @@
 
 <script>
 
-  import {NOTICE, ASK_INFO, ASK_TYPE_SELECT} from '../../stores/types';
-  import {createAPI, addAccessToken, postRequest} from '../../utils/request';
-  import pay from '../../components/pay/pay.vue';
-  import {setStatusBarBackgroundAndStyle} from '../../utils/statusBar';
-  import {alertFenhongxize} from '../../utils/dialogList';
-  import localEvent from '../../stores/localStorage';
-  import {alertSimple, getDialogObj} from '../../utils/dialog';
-  import userAbility from '../../utils/userAbility';
+  import { ASK_INFO, ASK_TYPE_SELECT } from '../../stores/types'
+  import { postRequest } from '../../utils/request'
+  import pay from '../../components/pay/pay.vue'
+  import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
+  import userAbility from '../../utils/userAbility'
 
   const Ask = {
     data: () => ({
@@ -72,91 +74,89 @@
       payItems: [],
       uid: 0,
       description: '',
-      question_type:2,  //提问类型，1为付费专业问答，2为免费问答互助,默认为1
+      question_type: 2,  // 提问类型，1为付费专业问答，2为免费问答互助,默认为1
       selectOther: false,
       hide: 0,
       descMaxLength: 1000,
       isShowMoneyDev: false,
       test: 0,
       pay_object_type: 'free_ask',
-      descPlaceholder:'可征集大家的意见，可在问题详情页进行回答邀请。',
+      descPlaceholder: '可征集大家的意见，可在问题详情页进行回答邀请。'
     }),
     components: {
       pay
     },
-    mounted(){
-      setStatusBarBackgroundAndStyle('#3c3e44', 'light');
+    mounted () {
+      setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       window.addEventListener('refreshData', function (e) {
-        //执行刷新
-        console.log('refresh-ask');
-      });
-      mui.init();
+        // 执行刷新
+        console.log('refresh-ask')
+      })
+      window.mui.init()
 
-      this.textareaBlur();
+      this.textareaBlur()
     },
     computed: {
       type () {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : '';
+        return this.$store.state.askType.selected ? this.$store.state.askType.selected : ''
       },
-      descLength() {
-        return this.description.length;
+      descLength () {
+        return this.description.length
       }
     },
     created () {
       if (this.$route.query.id) {
-        var id = this.$route.query.id;
+        var id = this.$route.query.id
         if (id) {
-          this.uid = id;
+          this.uid = id
         }
       }
 
-      var info = this.$store.state.askType.info;
+      var info = this.$store.state.askType.info
       if (info.money || info.desc) {
-        this.money = info.money;
-        this.description = info.desc;
-        this.hide = info.hide;
-        this.selectOther = info.selectOther;
+        this.money = info.money
+        this.description = info.desc
+        this.hide = info.hide
+        this.selectOther = info.selectOther
       }
-      this.check();
+      this.check()
     },
     methods: {
-      submit(){
-
-          this.$refs.pay.pay();
+      submit () {
+        this.$refs.pay.pay()
       },
-      textareaFocus(){
-          if (this.description === this.descPlaceholder) {
-              this.description = '';
-          }
-      },
-      textareaBlur(){
-        if (this.description === '') {
-          this.description = this.descPlaceholder;
+      textareaFocus () {
+        if (this.description === this.descPlaceholder) {
+          this.description = ''
         }
       },
-      toggleHide(){
-          this.hide = !this.hide;
+      textareaBlur () {
+        if (this.description === '') {
+          this.description = this.descPlaceholder
+        }
       },
-      toAskCommunity() {
-        userAbility.jumpToAskCommunity(this);
+      toggleHide () {
+        this.hide = !this.hide
       },
-      cancelAsk(){
-
-        var inputElem = document.querySelector('textarea');
-        inputElem.blur();
+      toAskCommunity () {
+        userAbility.jumpToAskCommunity(this)
+      },
+      cancelAsk () {
+        var inputElem = document.querySelector('textarea')
+        inputElem.blur()
 
         if (!this.type && this.description === this.descPlaceholder) {
-          mui.back();
-          return;
+          window.mui.back()
+          return
         }
 
-        mui.confirm("退出此处编辑？", null, ['确定', '取消'], e => {
-          if (e.index == 0) {
-            this.clearCache();
-            mui.back();
+        window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
+          if (e.index === 0) {
+            this.clearCache()
+            window.mui.back()
           }
-        }, 'div');
+        }, 'div')
       },
       selectType () {
         var info = {
@@ -164,97 +164,94 @@
           desc: this.description,
           hide: this.hide,
           selectOther: this.selectOther
-        };
-        this.$store.dispatch(ASK_INFO, info);
-        this.$router.push('/ask/type');
+        }
+        this.$store.dispatch(ASK_INFO, info)
+        this.$router.push('/ask/type')
       },
-      check(){
-        var t = this;
+      check () {
+        var t = this
 
         postRequest(`question/request`, {uuid: this.uid}).then(response => {
+          var code = response.data.code
 
-          var code = response.data.code;
-
-          if (code == 3000) {
-            mui.alert(response.data.message, null, null, function () {
-              t.$router.replace('/my/info');
-            });
-            return;
+          if (code === 3000) {
+            window.mui.alert(response.data.message, null, null, function () {
+              t.$router.replace('/my/info')
+            })
+            return
           }
 
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            mui.back();
-            return;
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
 
-          this.payItems = response.data.data.pay_items;
-        });
+          this.payItems = response.data.data.pay_items
+        })
       },
-      clearCache(){
-        var info = {};
-        this.$store.dispatch(ASK_INFO, info);
-        this.$store.dispatch(ASK_TYPE_SELECT, '');
+      clearCache () {
+        var info = {}
+        this.$store.dispatch(ASK_INFO, info)
+        this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
-      goAsk(order_id, pay_object_type){
+      goAsk (orderId, payObjectType) {
         if (!this.type) {
-          mui.toast('请选择问题分类');
-          return;
+          window.mui.toast('请选择问题分类')
+          return
         }
 
         if (!this.description) {
-          mui.toast('请填写提问内容');
-          return;
+          window.mui.toast('请填写提问内容')
+          return
         }
 
         // 提问设备，1为IOS，2为安卓，3为网页，4为微信小程序
-        var device = 1;
-        if (mui.os.plus) {
-          if (mui.os.android) {
-            device = 2;
+        var device = 1
+        if (window.mui.os.plus) {
+          if (window.mui.os.android) {
+            device = 2
           }
         } else {
-          device = 3;
+          device = 3
         }
 
         var data = {
-          order_id: order_id,
-          question_type:this.question_type,
+          order_id: orderId,
+          question_type: this.question_type,
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
           tags: this.type.split(':')[1],
           hide: this.hide,
           device: device
-        };
+        }
 
         postRequest(`question/store`, data).then(response => {
-          var code = response.data.code;
+          var code = response.data.code
           if (code !== 1000) {
-            mui.alert(response.data.message);
-            return;
+            window.mui.alert(response.data.message)
+            return
           }
 
-          this.clearCache();
+          this.clearCache()
 
-          var result = response.data.data;
-          var id = result.id;
+          var result = response.data.data
+          var id = result.id
 
-
-
-          this.$router.replace({path: '/askCommunity/interaction/answers/' + id});
-        });
+          this.$router.replace({path: '/askCommunity/interaction/answers/' + id})
+        })
       }
     },
     watch: {
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
-          this.description = this.description.slice(0, this.descMaxLength);
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       }
     }
   }
-  export default Ask;
+  export default Ask
 </script>
 
 <style scoped>
@@ -286,7 +283,7 @@
     margin-top: 0;
   }
 
-  .mui-content{
+  .mui-content {
     background-color: #fff;
   }
 
@@ -297,7 +294,7 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    height:313px;
+    height: 313px;
     width: 100%;
     z-index: 0;
   }
@@ -578,7 +575,7 @@
     padding: 5px 0;
   }
 
-  .nimingCheckbox{
+  .nimingCheckbox {
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -589,9 +586,8 @@
     right: 5px;
   }
 
-
-  .nimingCheckbox.active:after{
-    content:' ';
+  .nimingCheckbox.active:after {
+    content: ' ';
     display: inline-block;
     width: 4px;
     height: 4px;
@@ -599,15 +595,15 @@
     border: 1px solid #03aef9;
     background-color: #03aef9;
     border-radius: 50%;
-    left:50%;
-    margin-left:-3px;
-    top:50%;
-    margin-top:-3px;
+    left: 50%;
+    margin-left: -3px;
+    top: 50%;
+    margin-top: -3px;
   }
 
   @media screen and (max-width: 374px) {
-    .form-ask{
-      height:220px;
+    .form-ask {
+      height: 220px;
     }
   }
 </style>

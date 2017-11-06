@@ -1,2 +1,7 @@
 build/*.js
 config/*.js
+asset/js/*.js
+asset/components/indexedlist/*.js
+asset/components/picker/*.js
+asset/utils/iconfont.js
+asset/js/modules/*.js

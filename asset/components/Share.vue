@@ -30,8 +30,8 @@
 
 <script type="text/javascript">
 
-  import Share from '../utils/share';
-  import { postRequest } from '../utils/request';
+  import Share from '../utils/share'
+  import { postRequest } from '../utils/request'
 
   export default {
     data () {
@@ -59,107 +59,113 @@
         type: String,
         default: ''
       },
-      hideShareBtn:{
-          type:Boolean,
-          default:false
+      hideShareBtn: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
-      'link'(newVal, oldVal) {
-        this.bindShare();
-      },
+      'link' (newVal, oldVal) {
+        this.bindShare()
+      }
     },
-    mounted(){
+    mounted () {
       if (this.link) {
-        this.bindShare();
+        this.bindShare()
       }
     },
 
     methods: {
-      bindShare(){
-
+      bindShare () {
         var data = {
           title: this.title.substr(0, 50),
           link: this.link + '&isShare=1',
           content: this.content.substr(0, 150),
           imageUrl: this.imageUrl,
-          thumbUrl: this.thumbUrl,
-        };
+          thumbUrl: this.thumbUrl
+        }
 
         Share.bindShare(
           this,
           data,
           this.successCallback,
           this.failCallback
-        );
+        )
       },
-      toggleShareNav() {
-        mui('#shareShowWrapper').popover('toggle');
+      toggleShareNav () {
+        window.mui('#shareShowWrapper').popover('toggle')
       },
-      shareToHaoyou(){
+      shareToHaoyou () {
         if (this.sendHaoyou) {
-          this.sendHaoyou();
+          this.sendHaoyou()
         }
 
-        if (mui.os.plus) {
-          mui('#shareWrapper').popover('toggle');
+        if (window.mui.os.plus) {
+          window.mui('#shareWrapper').popover('toggle')
         } else {
-          mui('#shareWrapper').popover('toggle');
-          mui('#shareShowWrapper').popover('toggle');
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareShowWrapper').popover('toggle')
         }
-        this.hide();
+        this.hide()
       },
-      shareToPengyouQuan(){
+      shareToPengyouQuan () {
         if (this.sendPengYouQuan) {
-          this.sendPengYouQuan();
+          this.sendPengYouQuan()
         }
-        if (mui.os.plus) {
-          mui('#shareWrapper').popover('toggle');
+        if (window.mui.os.plus) {
+          window.mui('#shareWrapper').popover('toggle')
         } else {
-          mui('#shareWrapper').popover('toggle');
-          mui('#shareShowWrapper').popover('toggle');
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareShowWrapper').popover('toggle')
         }
-        this.hide();
+        this.hide()
       },
-      successCallback(){
-        this.$emit('success');
+      successCallback () {
+        this.$emit('success')
 
         postRequest(`share/wechat/success`, {
           'target': this.link,
-          'title' : this.title
+          'title': this.title
         }).then(response => {
 
-        });
+        })
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:success',
-            {"app": "inwehub", "user_device": getUserAppDevice(), "page": this.link, "page_name": 'share', "page_title": this.title, "referrer_page": ''}
-          );
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.link,
+              'page_name': 'share',
+              'page_title': this.title,
+              'referrer_page': ''
+            }
+          )
         }
       },
-      failCallback(error){
-        this.$emit('fail', error);
-        console.log(JSON.stringify(error));
-        mui.toast('分享失败');
+      failCallback (error) {
+        this.$emit('fail', error)
+        console.log(JSON.stringify(error))
+        window.mui.toast('分享失败')
       },
-      share(){
+      share () {
         if (this.link) {
-          this.bindShare();
+          this.bindShare()
         }
 
         setTimeout(() => {
-          mui('#shareWrapper').popover('toggle');
-          mui("body").on('tap', '.mui-backdrop', () => {
-            this.hide();
+          window.mui('#shareWrapper').popover('toggle')
+          window.mui('body').on('tap', '.mui-backdrop', () => {
+            this.hide()
           })
-        }, 150);
+        }, 150)
       },
-      hide(){
+      hide () {
 
-      },
+      }
     }
-  };
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
@@ -171,7 +177,7 @@
     color: #fff;
   }
 
-  .resumeWrapper .shareBtn{
+  .resumeWrapper .shareBtn {
     position: absolute;
     top: 24px !important;
     font-size: 22px;

@@ -56,10 +56,12 @@
 
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="register"
               :disabled="disableRegister">确认
+
       </button>
 
       <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
         我没有邀请码?
+
 
       </div>
     </div>
@@ -68,22 +70,20 @@
 </template>
 
 <script>
-  import request, {createAPI, apiRequest, postRequest} from '../utils/request';
-  import detecdOS from '../utils/detecdOS';
-  import localEvent from '../stores/localStorage';
-  import errorCodes from '../stores/errorCodes';
-  import deleteObjectItems from '../utils/deleteObjectItems';
-  import {getUserInfo} from '../utils/user';
-  import {USERS_APPEND} from '../stores/types';
-  import VTooltip from 'v-tooltip';
+  import request, { createAPI, apiRequest, postRequest } from '../utils/request'
+  import detecdOS from '../utils/detecdOS'
+  import localEvent from '../stores/localStorage'
+  import errorCodes from '../stores/errorCodes'
+  import { getUserInfo } from '../utils/user'
+  import { USERS_APPEND } from '../stores/types'
 
   // 手机号码规则
-  const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/;
-  const usernameReg = /^[a-zA-Z_\u4E00-\u9FA5\uF900-\uFA2D][a-zA-Z0-9_\u4E00-\u9FA5\uF900-\uFA2D]*$/;
-  const codeReg = /^[0-9]{4}$/;
+  const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
+  const usernameReg = /^[a-zA-Z_\u4E00-\u9FA5\uF900-\uFA2D][a-zA-Z0-9_\u4E00-\u9FA5\uF900-\uFA2D]*$/
+  const codeReg = /^[0-9]{4}$/
   const register = {
     data: () => ({
-      isNeedRegistrationCode:false,
+      isNeedRegistrationCode: false,
       phone: '', // 手机号码
       password: '', // 密码
       username: '', // 昵称
@@ -101,7 +101,7 @@
       isValidPassword: false, // 是否合法密码
       isValidUsername: false, // 用户名是否合法
       CodeText: '获取验证码', // 获取验证码按钮文字
-      registrationCode: "",
+      registrationCode: '',
       time: 0, // 时间倒计时
       showUsernameLabel: true,
       showYqCodeLabel: true,
@@ -118,468 +118,450 @@
     }),
     computed: {
       getCodeText () {
-        return this.time == 0 ? '获取验证码' : this.time + '秒后重发';
+        return this.time === 0 ? '获取验证码' : this.time + '秒后重发'
       }
     },
     created () {
-      showInwehubWebview();
+      window.showInwehubWebview()
     },
-    mounted(){
-      this.getCacheData();
+    mounted () {
+      this.getCacheData()
 
-      mui(".login").on('focusout', 'input', (e) => {
+      window.mui('.login').on('focusout', 'input', (e) => {
         switch (e.target.name) {
           case 'username':
-            if (!this.username) this.showUsernameLabel = true;
-            break;
+            if (!this.username) this.showUsernameLabel = true
+            break
           case 'yqm':
-            if (!this.registrationCode) this.showYqCodeLabel = true;
-            break;
+            if (!this.registrationCode) this.showYqCodeLabel = true
+            break
           case 'code':
-            if (!this.code) this.showYzmLabel = true;
-            break;
+            if (!this.code) this.showYzmLabel = true
+            break
           case 'phone':
-            if (!this.phone) this.showPhoneLabel = true;
-            break;
+            if (!this.phone) this.showPhoneLabel = true
+            break
           case 'password':
-            if (!this.password) this.showPasswordLabel = true;
-            break;
+            if (!this.password) this.showPasswordLabel = true
+            break
         }
-      });
+      })
 
-      mui(".login").on('focusin', 'input', (e) => {
-
+      window.mui('.login').on('focusin', 'input', (e) => {
         switch (e.target.name) {
           case 'username':
-            this.showUsernameLabel = false;
-            break;
+            this.showUsernameLabel = false
+            break
           case 'yqm':
-            this.showYqCodeLabel = false;
-            break;
+            this.showYqCodeLabel = false
+            break
           case 'code':
-            this.showYzmLabel = false;
-            break;
+            this.showYzmLabel = false
+            break
           case 'phone':
-            this.showPhoneLabel = false;
-            break;
+            this.showPhoneLabel = false
+            break
           case 'password':
-            this.showPasswordLabel = false;
-            break;
+            this.showPasswordLabel = false
+            break
         }
-      });
+      })
     },
     beforeRouteEnter (to, from, next) {
+      window.mui.plusReady(function () {
+        window.plus.navigator.setFullscreen(true)
+      })
 
-      mui.plusReady(function () {
-
-        plus.navigator.setFullscreen(true);
-      });
-
-      next();
+      next()
     },
-    beforeRouteLeave(to, from, next) {
-
-      mui.plusReady(function () {
-        plus.navigator.setFullscreen(false);
-      });
+    beforeRouteLeave (to, from, next) {
+      window.mui.plusReady(function () {
+        window.plus.navigator.setFullscreen(false)
+      })
 
       if (!this.isRegisterSuccess) {
-        this.setCacheData();
+        this.setCacheData()
       }
 
-      next();
+      next()
     },
     methods: {
-      //判断否有值（改变button按钮的状态来改变颜色）；
-      checkValid(){
-        //手机；
+      // 判断否有值（改变button按钮的状态来改变颜色）；
+      checkValid () {
+        // 手机；
         if (!this.phone) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
-        //验证码；
+        // 验证码；
         if (!this.code) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
-        //邀请码；
+        // 邀请码；
         if (this.isNeedRegistrationCode && !this.registrationCode) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
-        //姓名；
+        // 姓名；
         if (!this.username) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
-        //密码
+        // 密码
         if (!this.password) {
-          this.disableRegister = true;
-          return false;
+          this.disableRegister = true
+          return false
         }
 
-        this.disableRegister = false;
+        this.disableRegister = false
       },
-      //判断手机号是否为空；改变颜色（状态）；
-      checkSendCodeValid(){
+      // 判断手机号是否为空；改变颜色（状态）；
+      checkSendCodeValid () {
         if (!this.phone) {
-          this.isCanGetCode = false;
-          return false;
+          this.isCanGetCode = false
+          return false
         }
 
-        this.isCanGetCode = true;
+        this.isCanGetCode = true
       },
-      //提示
-      showTip(obj, msg){
-        this.errorMsg = msg;
-        obj._tooltip.show();
+      // 提示
+      showTip (obj, msg) {
+        this.errorMsg = msg
+        obj._tooltip.show()
         setTimeout(() => {
-          obj._tooltip.hide();
-        }, 2000);
+          obj._tooltip.hide()
+        }, 2000)
       },
-      //弹窗；
-      warm(content, point, callback) {
+      // 弹窗；
+      warm (content, point, callback) {
         var title =
           '<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
           '<use xlink:href="#icon-guanbi"></use>' +
-          '</svg>';
+          '</svg>'
 
         var cont = '<p style="font-size:16px; margin-bottom:15px" >' +
           point +
-          '</p>';
+          '</p>'
 
-        var alertobj = mui.alert(content, title, cont, (index, animate) => {
+        var alertobj = window.mui.alert(content, title, cont, (index, animate) => {
           if (index.index === -1) {
-//		    			console.log('fire');
-            callback();
+            callback()
           }
-        }, 'div');
+        }, 'div')
 
         document.getElementById('warmClosealert').onclick = () => {
-          alertobj.close({index: 1, value: ''});
+          alertobj.close({index: 1, value: ''})
         }
-
       },
-      focus(event){
-        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
-        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
-        event.target.parentElement.className += ' focus';
+      focus (event) {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' focus'
       },
-      blur(){
-        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '');
-        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '');
-        event.target.parentElement.className += ' blur';
+      blur () {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' blur'
       },
-      jumpToForm(){
-        this.$router.pushPlus('/register/nocode');
+      jumpToForm () {
+        this.$router.pushPlus('/register/nocode')
       },
       goback () {
-        mui.back();
+        window.mui.back()
       },
-      entryUsername(){
-        this.showUsernameLabel = false;
+      entryUsername () {
+        this.showUsernameLabel = false
       },
-      entryPhone(){
-        this.showPhoneLabel = false;
+      entryPhone () {
+        this.showPhoneLabel = false
       },
-      entryPassword(){
-        this.showPasswordLabel = false;
+      entryPassword () {
+        this.showPasswordLabel = false
       },
-      entryYqCode(){
-        this.showYqCodeLabel = false;
+      entryYqCode () {
+        this.showYqCodeLabel = false
       },
-      entryYzm(){
-        this.showYzmLabel = false;
+      entryYzm () {
+        this.showYzmLabel = false
       },
       timer () {
         if (this.time > 0) {
-          this.isCanGetCode = true;
-          this.time -= 1;
-          if (this.time == 0) {
-            this.isCanGetCode = false;
-            return;
+          this.isCanGetCode = true
+          this.time -= 1
+          if (this.time === 0) {
+            this.isCanGetCode = false
+            return
           }
           setTimeout(this.timer, 1000)
         }
       },
       cleanPhone () {
-        this.phone = '';
+        this.phone = ''
       },
-      setCacheData(){
-
+      setCacheData () {
         var CacheRegister = {
           'username': this.username,
           'registrationCode': this.registrationCode,
           'phone': this.phone,
           'code': this.code,
-          'password': this.password,
-        };
-        localEvent.setLocalItem('CacheRegister', CacheRegister);
+          'password': this.password
+        }
+        localEvent.setLocalItem('CacheRegister', CacheRegister)
       },
-      getCacheData(){
-
-        var data = localEvent.getLocalItem('CacheRegister');
+      getCacheData () {
+        var data = localEvent.getLocalItem('CacheRegister')
         if (data) {
-          this.username = data.username;
-          this.registrationCode = data.registrationCode;
-          this.phone = data.phone;
-          this.code = data.code;
-          this.password = data.password;
+          this.username = data.username
+          this.registrationCode = data.registrationCode
+          this.phone = data.phone
+          this.code = data.code
+          this.password = data.password
 
           if (this.username) {
-            this.showUsernameLabel = false;
+            this.showUsernameLabel = false
           }
 
           if (this.registrationCode) {
-            this.showYqCodeLabel = false;
+            this.showYqCodeLabel = false
           }
 
           if (this.phone) {
-            this.showPhoneLabel = false;
+            this.showPhoneLabel = false
           }
 
           if (this.code) {
-            this.showYzmLabel = false;
+            this.showYzmLabel = false
           }
 
           if (this.password) {
-            this.showPasswordLabel = false;
+            this.showPasswordLabel = false
           }
         }
-
       },
       cleanUsername () {
-        this.username = '';
+        this.username = ''
       },
       showPassword () {
         if (this.isShowPassword) {
-          this.isShowPassword = false;
-          this.isShowPasswordText = true;
+          this.isShowPassword = false
+          this.isShowPasswordText = true
         } else {
-          this.isShowPassword = true;
-          this.isShowPasswordText = false;
+          this.isShowPassword = true
+          this.isShowPasswordText = false
         }
       },
       // 获取验证码
       getCode () {
-        let mobile = this.phone ? this.phone : '';
-        let type = 'register';
+        let mobile = this.phone ? this.phone : ''
+        let type = 'register'
 
         if (!this.isCanGetCode) {
-          return;
+          return
         }
 
         if (this.isNeedRegistrationCode && !this.registrationCode) {
-          mui.toast("请输入邀请码");
-          return;
+          window.mui.toast('请输入邀请码')
+          return
         }
 
         if (this.isNeedRegistrationCode && this.registrationCode.length < 6) {
-          mui.toast("邀请码至少6位");
-          return;
+          window.mui.toast('邀请码至少6位')
+          return
         }
 
         if (mobile.length !== 11) {
-          this.showTip(this.$refs.phone, '请输入有效的手机号码');
-          return;
+          this.showTip(this.$refs.phone, '请输入有效的手机号码')
+          return
         }
 
-        this.isCanGetCode = false;
+        this.isCanGetCode = false
 
         postRequest('auth/sendPhoneCode', {
-            mobile,
-            type,
-            'registration_code': this.registrationCode
-          }
-        )
+          mobile,
+          type,
+          'registration_code': this.registrationCode
+        })
           .then(response => {
-
-            var code = response.data.code;
+            var code = response.data.code
             if (code !== 1000) {
-              this.isCanGetCode = true;
-              var message = response.data.message;
-              //验证码超时 邀请码错误；
-              if (message.indexOf("邀请码错误") > 0) {
+              this.isCanGetCode = true
+              var message = response.data.message
+              // 验证码超时 邀请码错误；
+              if (message.indexOf('邀请码错误') > 0) {
                 this.warm(message, '获取邀请码', () => {
-                  this.$router.push('/register/nocode');
-                });
-              }
-              else if (message.indexOf("无效") > 0) {
+                  this.$router.push('/register/nocode')
+                })
+              } else if (message.indexOf('无效') > 0) {
                 this.warm(message, '重新发送', () => {
-                  this.getCode();
-                });
-              }
-              else if (message.indexOf("超时") > 0) {
+                  this.getCode()
+                })
+              } else if (message.indexOf('超时') > 0) {
                 this.warm(message, '重新发送', () => {
-                  this.getCode();
-                });
+                  this.getCode()
+                })
               }
-              mui.toast(response.data.message);
+              window.mui.toast(response.data.message)
 
-              return;
+              return
             }
 
-            this.time = 60;
-            this.timer();
+            this.time = 60
+            this.timer()
 
-            mui.toast('验证码发送成功');
+            window.mui.toast('验证码发送成功')
           })
           .catch(({response: {data = {}} = {}}) => {
-            this.isCanGetCode = true;
-            const {code = 'xxxx'} = data;
-            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
+            this.isCanGetCode = true
+            const {code = 'xxxx'} = data
+            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
           })
       },
 
       // 注册
       register () {
-        let {username, phone, code, password} = this;
-        let device_code = detecdOS();
-        this.isLoading = true;
-        this.isDisabled = true;
+        let {username, phone, code, password} = this
+        let deviceCode = detecdOS()
+        this.isLoading = true
+        this.isDisabled = true
 
         if (this.isNeedRegistrationCode && !this.registrationCode) {
-          mui.toast("请输入邀请码");
-
-          return;
+          window.mui.toast('请输入邀请码')
+          return
         }
 
         if (this.isNeedRegistrationCode && this.registrationCode.length < 6) {
-          mui.toast("邀请码至少6位");
-          return;
+          window.mui.toast('邀请码至少6位')
+          return
         }
 
         if (!phoneReg.test(this.phone)) {
-          this.showTip(this.$refs.phone, '请输入有效的手机号码');
-          return;
+          this.showTip(this.$refs.phone, '请输入有效的手机号码')
+          return
         }
 
         if (!this.code) {
-          mui.toast("请输入验证码");
-          return;
+          window.mui.toast('请输入验证码')
+          return
         }
 
         if (!codeReg.test(this.code)) {
-          mui.toast('验证码错误');
-          return;
+          window.mui.toast('验证码错误')
+          return
         }
 
         if (!this.username) {
-          mui.toast("请输入真实姓名");
-          return;
+          window.mui.toast('请输入真实姓名')
+          return
         }
 
         if (!usernameReg.test(this.username)) {
-          mui.toast("用户名不能包含特殊符号以及空格");
-          return;
+          window.mui.toast('用户名不能包含特殊符号以及空格')
+          return
         } else if (this.username.length > 12 || this.username.length <= 1) {
-          mui.toast("请输入2-12位姓名");
+          window.mui.toast('请输入2-12位姓名')
         }
 
         if (this.password.length < 6) {
-          mui.toast("密码长度必须大于6位");
-          return;
+          window.mui.toast('密码长度必须大于6位')
+          return
         }
-        if (mui.os.plus) {
-          mui.waiting();
+        if (window.mui.os.plus) {
+          window.mui.waiting()
         }
 
         request.post(createAPI('auth/register'), {
-            name: username,
-            mobile: phone,
-            code,
-            password,
-            device_code,
-            'registration_code': this.registrationCode
-          }
-        )
+          name: username,
+          mobile: phone,
+          code,
+          password,
+          deviceCode,
+          'registration_code': this.registrationCode
+        })
           .then(response => {
-            if (mui.os.plus) {
-              mui.closeWaiting();
+            if (window.mui.os.plus) {
+              window.mui.closeWaiting()
             }
-            var code = response.data.code;
+            var code = response.data.code
             if (code !== 1000) {
-              this.isDisabled = false;
-              this.isLoading = false;
-              //邀请码；
-              var message = response.data.message;
+              this.isDisabled = false
+              this.isLoading = false
+              // 邀请码；
+              var message = response.data.message
 
-              if (message.indexOf("无效") > 0) {
+              if (message.indexOf('无效') > 0) {
                 this.wran(message, '获取邀请码', () => {
-                  this.$router.push('/register/nocode');
-                });
+                  this.$router.push('/register/nocode')
+                })
               }
-              mui.toast(response.data.message);
-              return;
+              window.mui.toast(response.data.message)
+              return
             }
-            clearAllWebViewCache();
+            window.clearAllWebViewCache()
 
-            localEvent.clearLocalItem('CacheRegister');
-            this.isRegisterSuccess = true;
+            localEvent.clearLocalItem('CacheRegister')
+            this.isRegisterSuccess = true
 
-            //已经有通知发送注册成功的消息，并有积分提示
-            //mui.toast("注册成功！");
-            localEvent.setLocalItem('UserLoginInfo', response.data.data);
-            this.isLoading = false;
-            //存储设备信息
-            if (mui.os.plus) {
-              var device_info = plus.push.getClientInfo();
+            // 已经有通知发送注册成功的消息，并有积分提示
+            // mui.toast("注册成功！");
+            localEvent.setLocalItem('UserLoginInfo', response.data.data)
+            this.isLoading = false
+            // 存储设备信息
+            if (window.mui.os.plus) {
+              var deviceInfo = window.plus.push.getClientInfo()
               apiRequest(`system/device`, {
-                client_id: device_info.clientid,
-                device_token: device_info.token,
-                appid: device_info.appid,
-                appkey: device_info.appkey,
-                device_type: plus.os.name === 'iOS' ? 2 : 1
+                client_id: deviceInfo.clientid,
+                device_token: deviceInfo.token,
+                appid: deviceInfo.appid,
+                appkey: deviceInfo.appkey,
+                device_type: window.plus.os.name === 'iOS' ? 2 : 1
               }, false).then(res => {
-
-              });
+              })
             }
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              cb(user);
-              mixpanelIdentify();
-              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true);
-            }));
+              cb(user)
+              window.mixpanelIdentify()
+              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+            }))
           })
           .catch(({response: {data = {}} = {}}) => {
-            if (mui.os.plus) {
-              plus.nativeUI.closeWaiting();
+            if (window.mui.os.plus) {
+              window.plus.nativeUI.closeWaiting()
             }
-            this.isDisabled = false;
-            const {code = 'xxxx'} = data;
-            this.isLoading = false;
-            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]});
-            mui.toast(errorCodes[code]);
+            this.isDisabled = false
+            const {code = 'xxxx'} = data
+            this.isLoading = false
+            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
+            window.mui.toast(errorCodes[code])
           })
-
       }
-
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
-        this.checkValid();
+        this.checkValid()
       },
       phone: function (newMoney, oldValue) {
-        const askDetail = /^[0-9]+$/;
+        const askDetail = /^[0-9]+$/
         if (!askDetail.test(newMoney) && this.phone) {
-          this.phone = oldValue;
+          this.phone = oldValue
         }
-        this.checkSendCodeValid();
-        this.checkValid();
+        this.checkSendCodeValid()
+        this.checkValid()
       },
       code: function (newValue, oldValue) {
-        this.checkValid();
+        this.checkValid()
       },
       username: function (newValue, oldValue) {
-        this.checkValid();
+        this.checkValid()
       },
       password: function (newValue, oldValue) {
-        this.checkValid();
-      },
+        this.checkValid()
+      }
     }
   }
 
-  export default register;
+  export default register
 
 </script>
 
