@@ -41,7 +41,7 @@
 
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction',true,'pop-in','hide',true)">
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-interaction')">
           查看我的回答
 
         </button>
@@ -89,7 +89,7 @@
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
         var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
         var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
-        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page-contact', true, 'pop-in', 'hide', true)
+        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
       setFollowStatus (status) {
         this.ask.is_followed = status

@@ -225,7 +225,7 @@
           case 9:
           case 11:
           case 12:
-            this.$router.pushPlus(item.url)
+            this.$router.pushPlus(item.url,'list-detail-page')
             break
           case 10:
             this.$router.pushReadHubPage(item.url)
