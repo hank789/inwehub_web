@@ -80,14 +80,14 @@
       </industry-tags-indexed-list>
     </div>
 
-    <div id="page_product_tags" class="mui-modal mui-pageSub">
+    <!--<div id="page_product_tags" class="mui-modal mui-pageSub">-->
 
-      <!--这里放置真实显示的DOM内容-->
-      <industry-tags-indexed-list :tag_type="4" :selected="job.product_tags" :back_id="page_product_tags_id"
-                                  :object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">
-      </industry-tags-indexed-list>
+      <!--&lt;!&ndash;这里放置真实显示的DOM内容&ndash;&gt;-->
+      <!--<industry-tags-indexed-list :tag_type="4" :selected="job.product_tags" :back_id="page_product_tags_id"-->
+                                  <!--:object_type="object_type" v-on:selectedIndustryTags="selectedProductTags">-->
+      <!--</industry-tags-indexed-list>-->
 
-    </div>
+    <!--</div>-->
 
 
     <div id="statusBarStyle" background="#fefefe" mode="light"></div>
