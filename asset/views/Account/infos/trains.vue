@@ -22,10 +22,10 @@
             <a class="mui-btn mui-btn-red " style="background: #fa4975">删除</a>
           </div>
           <div class="mui-slider-handle  slider">
-            <p class="mui-ellipsis"> {{ train.agency }}</p>
+            <p class="mui-ellipsis"> {{ train.certificate }}</p>
             <p>
 
-              <span class="mui-ellipsis">{{ train.get_time }} 至 {{ train.certificate }}</span>
+              <span class="mui-ellipsis">{{ train.get_time }} | {{ train.agency }}</span>
 
             </p>
           </div>

@@ -111,7 +111,7 @@
       },
       // 数据；
       getList () {
-        postRequest(`followed/users`, {}).then(response => {
+        postRequest(`followed/searchUsers`, {}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
