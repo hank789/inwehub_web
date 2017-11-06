@@ -30,7 +30,7 @@
         class="listWrapper">
         <ul class="answer">
           <!--{{ask.origin_title}}-->
-          <li v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
+          <li v-for="(ask, index) in list" @tap.stop.prevent="goToCommentPage(ask.type, ask.comment_url)">
             <p class="mui-ellipsis">{{ask.content}}</p>
             <p class="mui-ellipsis">{{ask.origin_title}}</p>
             <p>
@@ -70,6 +70,13 @@
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
+      },
+      goToCommentPage (type, url) {
+        if (type === 2) {
+          this.$router.pushReadHubPage(url)
+        } else {
+          this.$router.pushPlus(url)
+        }
       }
     },
     mounted () {

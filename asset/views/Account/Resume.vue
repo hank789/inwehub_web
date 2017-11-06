@@ -106,7 +106,7 @@
         <!--Ta的擅长-->
         <div class="skilled">
           <p>Ta的擅长</p>
-          <template v-for="(industry, index) in resume.info.industry_tags">
+          <template v-for="(industry, index) in resume.info.skill_tags">
             <span>{{industry.text}}</span>
           </template>
           <i class="bot"></i>
@@ -114,7 +114,7 @@
         <!--发布-->
         <div class="news">
           <div>Ta的发布</div>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+          <p class="mui-ellipsis">
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
@@ -122,11 +122,11 @@
             提问 <span>{{ resume.info.questions }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishArticle')">
+          <p class="mui-ellipsis">
             文章 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment')">
+          <p class="mui-ellipsis">
             评论 <span>{{ resume.info.comment_count }}</span>
           </p>
           <i class="bot"></i>
