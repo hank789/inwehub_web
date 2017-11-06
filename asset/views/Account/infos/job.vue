@@ -160,10 +160,13 @@
           this.description = this.job.description
           this.bak = JSON.stringify(this.job)
         } else {
-          this.job = this.initJob
-          this.description = ''
-          this.bak = ''
+          this.clearData()
         }
+      },
+      clearData: function () {
+        this.job = this.initJob
+        this.description = ''
+        this.bak = ''
       },
       fixSelect: function () {
         setTimeout(() => {
@@ -176,6 +179,7 @@
         if (this.bak !== '' && newItemChange !== this.bak) {
           window.mui.confirm('您还未保存，确定退出么? ', '退出编辑', ['取消', '确定'], e => {
             if (e.index === 1) {
+              this.clearData()
               window.mui.back()
             } else {
               return false
@@ -309,6 +313,7 @@
 
           window.mui.toast('操作成功')
           this.bak = ''
+          this.clearData()
           window.mui.back()
         })
       }
