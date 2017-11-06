@@ -35,7 +35,7 @@
         </li>
       </ul>
 
-      <div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/train/0')">
+      <div class="add box-shadow-3" @tap.stop.prevent="$router.pushPlus('/my/info/train/0', 'account_info_list')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-shuru"></use>
         </svg>
