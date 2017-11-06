@@ -22,8 +22,6 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/myList'"
-        :downLoadMoreMode="true"
-        :isShowUpToRefreshDescription="true"
         :prevOtherData="{type:0}"
         :nextOtherData="{type:0}"
         :list="list"
