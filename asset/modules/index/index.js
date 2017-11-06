@@ -236,7 +236,6 @@ window.mui.back = function () {
       'inwehub_notice_view',
       'list-detail-page',
       'list-detail-page-interaction',
-      'list-detail-page-contact',
       'readhub_submission_webview'
     ]
 
