@@ -52,33 +52,33 @@
       <div class="part3">
         <ul class="mui-table-view mui-table-view-chevron firstItem">
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/basic','list-detail-page-two')">基本资料
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/basic')">基本资料
 							<span class="desc important">{{ user.infos }}</span>
             </a>
 
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs','list-detail-page-two')">工作经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')">工作经历
 
 						</a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects','list-detail-page-two')">项目经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/projects')">项目经历
 
 						</a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus','list-detail-page-two')">教育经历
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/edus')">教育经历
 
 						</a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains','list-detail-page-two')">培训认证
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/trains')">培训认证
 
 						</a>
           </li>
           <li class="mui-table-view-cell">
-            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy','list-detail-page')"><span
+            <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')"><span
               class="mui-icon myicon myicon-help"></span>隐私设置
 
 						</a>
