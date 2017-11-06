@@ -63,6 +63,9 @@
       loading: true
     }),
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       initData () {
         postRequest(`account/edu/list`, {}).then(response => {
           var code = response.data.code
@@ -95,21 +98,14 @@
               this.edus.splice(index, 1)
             })
           }
-        })
+        }, 'div')
       }
     },
-    mounted () {
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-edus')
-        this.initData()
-      })
-    },
+    mounted () {},
 
     computed: {},
 
     created () {
-      // showInwehubWebview();
       this.initData()
     }
   }

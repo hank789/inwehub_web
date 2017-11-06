@@ -58,6 +58,9 @@
       loading: true
     }),
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       initData () {
         postRequest(`account/train/list`, {}).then(response => {
           var code = response.data.code
@@ -90,21 +93,15 @@
               this.trains.splice(index, 1)
             })
           }
-        })
+        }, 'div')
       }
     },
     mounted () {
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-trains')
-        this.initData()
-      })
     },
 
     computed: {},
 
     created () {
-      // showInwehubWebview();
       this.initData()
     }
   }

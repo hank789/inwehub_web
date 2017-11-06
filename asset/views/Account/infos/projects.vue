@@ -60,6 +60,9 @@
       loading: true
     }),
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       initData () {
         postRequest(`account/project/list`, {}).then(response => {
           var code = response.data.code
@@ -92,22 +95,15 @@
               this.projects.splice(index, 1)
             })
           }
-        })
+        }, 'div')
       }
 
     },
-    mounted () {
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-projects')
-        this.initData()
-      })
-    },
+    mounted () {},
 
     computed: {},
 
     created () {
-      // showInwehubWebview();
       this.initData()
     }
   }
