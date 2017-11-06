@@ -55,7 +55,7 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="ibutton active" v-if="item.is_invited" @tap.stop.prevent="collectProfessor(item.uuid,index)">
+              <div class="ibutton active" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item.uuid,index)">
                 已关注
               </div>
               <div class="ibutton" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注Ta</div>
@@ -101,8 +101,8 @@
             window.mui.alert(response.data.message)
             return
           }
-          console.log(this.list[index].is_following)
-          this.list[index].is_following = this.list[index].is_following
+          console.log(this.list[index].is_followed)
+          this.list[index].is_followed = this.list[index].is_followed
           window.mui.toast(response.data.data.tip)
         })
       },
