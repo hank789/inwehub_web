@@ -91,7 +91,7 @@
 
       },
       toDetail (id) {
-        this.$router.pushPlus('/askCommunity/interaction/' + id, 'list-detail-page-interaction', true, 'pop-in', 'hide', true)
+        this.$router.pushPlus('/askCommunity/interaction/' + id, 'list-detail-page-two', true, 'pop-in', 'hide', true)
       }
     }
   }
