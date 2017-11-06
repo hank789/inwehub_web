@@ -101,8 +101,11 @@
             window.mui.alert(response.data.message)
             return
           }
-          console.log(this.list[index].is_followed)
-          this.list[index].is_followed = this.list[index].is_followed
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
           window.mui.toast(response.data.data.tip)
         })
       },
