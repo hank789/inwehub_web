@@ -93,7 +93,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/Discount', 'list-detail-page-two')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
 
           <span>我的报名</span>
           <svg class="icon" aria-hidden="true">
