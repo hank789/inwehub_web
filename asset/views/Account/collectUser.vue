@@ -124,15 +124,13 @@
                 avatar_url: arr[i].user_avatar_url,
                 description: arr[i].description,
                 is_expert: arr[i].is_expert,
-                is_invited: 0,
+                is_followed: arr[i].is_followed,
                 uuid: arr[i].uuid
 
               }
               this.list = this.list.concat(item)
             }
           }
-          console.error(this.list)
-
           this.loading = 0
         })
       }
