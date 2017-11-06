@@ -78,7 +78,7 @@ var UserAbility = () => {
     if (id) {
       url = '/ask/' + id
     }
-    router.push(url)
+    router.pushPlus(url)
   }
 
   /**

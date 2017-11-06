@@ -292,7 +292,9 @@
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
             this.clearCache()
-            window.mui.back()
+            setTimeout(() => {
+              window.mui.back()
+            }, 100)
           }
         }, 'div')
       },

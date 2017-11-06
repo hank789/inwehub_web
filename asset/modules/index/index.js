@@ -61,19 +61,6 @@ import './../../styles/percircle.css'
 
 import './../../js/iconfont.js'
 
-window.mui.oldConfirm = window.mui.confirm
-window.mui.confirm = (message, title, btnArray, callback, type) => {
-  var newType = window.mui.os.android ? null : type
-  var newCallback = callback
-  if (window.mui.os.android) {
-    newCallback = (e) => {
-      e.index = e.index === 0 ? 1 : 0
-      callback(e)
-    }
-  }
-  window.mui.oldConfirm(message, title, btnArray, newCallback, newType)
-}
-
 Vue.use(VueWechatTitle)
 // Vue.use(VueLazyload, {
 //   loading: loading_img,
