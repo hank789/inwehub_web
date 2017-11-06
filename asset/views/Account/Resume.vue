@@ -119,7 +119,7 @@
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishQuestions')">
+          <p class="mui-ellipsis">
             提问 <span>{{ resume.info.questions }}</span>
           </p>
           <a></a>
