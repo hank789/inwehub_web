@@ -73,9 +73,9 @@
       },
       goToCommentPage (type, url) {
         if (type === 2) {
-          this.router.pushReadHubPage(url)
+          this.$router.pushReadHubPage(url)
         } else {
-          this.router.pushPlus(url)
+          this.$router.pushPlus(url)
         }
       }
     },
