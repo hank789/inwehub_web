@@ -69,6 +69,12 @@
         get_time: '',
         description: ''
       },
+      initTrain: {
+        certificate: '',
+        agency: '',
+        get_time: '',
+        description: ''
+      },
       description: '',
       descMaxLength: 2000,
       buttonSaveDisabled: false
@@ -98,6 +104,10 @@
           this.train = trains[id]
           this.description = this.train.description
           this.bak = JSON.stringify(this.train)
+        } else {
+          this.train = this.initTrain
+          this.description = ''
+          this.bak = ''
         }
       },
       muiViewBack: function () {

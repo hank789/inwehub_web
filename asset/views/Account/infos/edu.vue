@@ -84,6 +84,14 @@
         end_time: '',
         description: ''
       },
+      initEdu: {
+        school: '',
+        major: '',
+        degree: '',
+        begin_time: '',
+        end_time: '',
+        description: ''
+      },
       description: '',
       descMaxLength: 2000,
       buttonSaveDisabled: false
@@ -113,6 +121,10 @@
           this.edu = edus[id]
           this.description = this.edu.description
           this.bak = JSON.stringify(this.edu)
+        } else {
+          this.edu = this.initEdu
+          this.description = ''
+          this.bak = ''
         }
       },
       selectMajor () {
