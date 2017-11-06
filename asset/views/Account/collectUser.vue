@@ -7,13 +7,15 @@
       <h1 class="mui-title">我的关注</h1>
     </header>
 
-    <div class="mui-content">
-      <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="">关注的用户 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
+    <!--导航栏-->
+    <div class="menu">
+      <span @tap.stop.prevent="">关注的用户 <i></i></span>
+      <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
 
-      </div>
+    </div>
+
+    <div class="mui-content">
+
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
 
@@ -155,7 +157,8 @@
   .menu {
     width: 100%;
     height: 45px;
-    position: absolute;
+    position: fixed;
+    top:44px;
     z-index: 10;
     background: #f3f4f6;
   }
