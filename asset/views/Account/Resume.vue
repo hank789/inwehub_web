@@ -106,7 +106,7 @@
         <!--Ta的擅长-->
         <div class="skilled">
           <p>Ta的擅长</p>
-          <template v-for="(industry, index) in resume.info.industry_tags">
+          <template v-for="(industry, index) in resume.info.skill_tags">
             <span>{{industry.text}}</span>
           </template>
           <i class="bot"></i>
