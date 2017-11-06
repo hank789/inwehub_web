@@ -25,7 +25,7 @@
         :nextOtherData="{type:0}"
         class="listWrapper">
         <ul class="answer">
-          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.submission_url)">
+          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
             <div class="container-image margin-10-0-0" v-if="ask.img" >
               <img :src="ask.img" />
             </div>
