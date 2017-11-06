@@ -11,6 +11,9 @@ npm run test
 ### 生产环境
 npm run build
 
+### 代码规范监测
+npm run lint
+
 
 ## 目录介绍
 /asset  资源目录,开发主要目录
@@ -102,3 +105,8 @@ npm run build
 
 ##webview-页面规则(请求中没有参数id的，都要遵守以下规则)
 1. 必须有refreshPageData方法(如果页面切换间需要刷新当前页面的)
+
+
+##webstorm启用规范检查
+    设置->Languages & Frameworks > Javascript > Code Quality Tools> ESLint> 启用
+
