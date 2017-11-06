@@ -235,7 +235,7 @@ window.mui.back = function () {
     var needHide = [
       'inwehub_notice_view',
       'list-detail-page',
-      'list-detail-page-interaction',
+      'list-detail-page-two',
       'readhub_submission_webview'
     ]
 
