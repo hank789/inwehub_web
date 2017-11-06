@@ -124,7 +124,7 @@
             'inwehub:share:success',
             {
               'app': 'inwehub',
-              'user_device': this.getUserAppDevice(),
+              'user_device': window.getUserAppDevice(),
               'page': this.link,
               'page_name': 'share',
               'page_title': this.title,
