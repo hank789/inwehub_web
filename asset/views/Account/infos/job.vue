@@ -118,6 +118,15 @@
         industry_tags: '',
         product_tags: ''
       },
+      initJob: {
+        company: '',
+        title: '',
+        begin_time: '',
+        end_time: '',
+        description: '',
+        industry_tags: '',
+        product_tags: ''
+      },
       description: '',
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
@@ -150,6 +159,10 @@
           this.job = jobs[id]
           this.description = this.job.description
           this.bak = JSON.stringify(this.job)
+        } else {
+          this.job = this.initJob
+          this.description = ''
+          this.bak = ''
         }
       },
       fixSelect: function () {

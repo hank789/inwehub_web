@@ -120,6 +120,16 @@
         industry_tags: [],
         product_tags: []
       },
+      initProject: {
+        project_name: '',
+        title: '',
+        customer_name: '',
+        begin_time: '',
+        end_time: '',
+        description: '',
+        industry_tags: [],
+        product_tags: []
+      },
       description: '',
       page_industry_tags_id: 'page_industry_tags',
       page_product_tags_id: 'page_product_tags',
@@ -151,6 +161,10 @@
           this.project = projects[id]
           this.description = this.project.description
           this.bak = JSON.stringify(this.project)
+        } else {
+          this.project = this.initProject
+          this.description = ''
+          this.bak = ''
         }
       },
       fixSelect: function () {
