@@ -92,7 +92,7 @@
 
     methods: {
       isShowSharePng () {
-        return !!window.mui.os.plus
+        return true // !!window.mui.os.plus
       },
       bindShare () {
         var data = {
