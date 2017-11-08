@@ -50,6 +50,8 @@
       @fail="shareFail"
     ></Share>
 
+
+
   </div>
 </template>
 

@@ -218,6 +218,22 @@ const routes = [
       CanNotGetInWhenLogged(to, from, next)
     }
   },
+  { // 邀请分享图片页
+    path: '/invitation/share',
+    name: 'invitation-share',
+    meta: {
+      title: '邀请分享图片页',
+      keepAlive: true
+    },
+    component: require('../../../components/invitation/image.vue'),
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 邀请好友分享页
     path: '/invitation/info',
     name: 'invitation-info',
