@@ -100,9 +100,11 @@
     width:162px;
     height:31px;
     border-radius: 50px;
-    /*borderStyle: "solid",*/
-    /*borderWidth: 1,*/
-    /*borderColor: "#979797"*/
+    border:1px solid #979797;
+    text-align: center;
+    line-height: 31px;
+    font-size:14px;
+    color:#444444;
     position: absolute;
     bottom:103px;
     left:0;
