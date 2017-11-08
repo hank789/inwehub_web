@@ -27,7 +27,9 @@
 
         </div>
         <div class="my-news">
-          <i>Hot</i><span>邀请我的好友</span>
+          <i>Hot</i>
+          <span>邀请我的好友</span>
+          <p><a>5%</a>返现等你拿</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -448,9 +450,10 @@
 
   .my-news {
     width: 100%;
-    height: 36px;
+    height: 41px;
     border-radius: 4px;
-    background: #ffffff;
+    background:url(../../statics/images/mask@3x.png) no-repeat;
+    background-size:100% 100%;
     -webkit-box-shadow: 0 0 10px rgb(243, 244, 246);
     -moz-box-shadow: 0 0 10px rgb(243, 244, 246);
     box-shadow: 0 0 10px rgb(243, 244, 246);
@@ -494,7 +497,21 @@
   .my-news span {
     font-size: 14px;
     color: #444444;
-    line-height: 36px;
+    line-height: 41px;
+  }
+  .my-news p{
+    font-size: 12px;
+    color: #444444;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:35px;
+    line-height:41px;
+  }
+  .my-news p a{
+    color:rgb(250,73,117);
+    font-style: 12px;
+    letter-spacing:2px;
   }
 
   .my-news svg {

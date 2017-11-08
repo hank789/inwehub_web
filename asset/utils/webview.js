@@ -19,9 +19,9 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
       var currentWebviewUrl = currentWebview.getURL()
       var bindHttpUrl = currentWebview.getURL()
 
-      if (currentWebview.getStyle().additionalHttpHeaders) {
+      if (currentWebview.getStyle()) {
         var httpHeader = currentWebview.getStyle().additionalHttpHeaders
-        if (httpHeader.url) {
+        if (httpHeader && httpHeader.url) {
           bindHttpUrl = httpHeader.url
         }
       }
