@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="shareContentWrapper">
+  <div style="background: #000">
+    <div id="shareContentWrapper" style="display: none;">
       <div style="width:750px;height:1000px;background:#fff;color:red;font-size:24px;line-height:48px;">
         互动问答
         <qr-code :text="'test'" :size="170" error-level="M"></qr-code>

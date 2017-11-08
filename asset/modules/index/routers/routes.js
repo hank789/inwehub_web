@@ -1532,6 +1532,14 @@ const routes = [
     },
     component: require('../../../views/Exception/Error.vue')
   },
+  {
+    path: '/sharepng',
+    name: 'sharepng',
+    meta: {
+      title: 'sharepng'
+    },
+    component: require('../../../views/SharePng.vue')
+  },
 // {
 //  path: '/short',
 //  name: 'short',

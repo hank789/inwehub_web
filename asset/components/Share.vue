@@ -190,7 +190,12 @@
         }
       },
       shareToPengyouQuanWithPng () {
+        var node = document.getElementById(this.DomConvertImageId)
+        if (node) {
+          node.style.display = 'block'
+        }
         this.saveImage(() => {
+          node.style.display = 'none'
           if (this.sendHaoyou) {
             this.sendHaoyou()
           }
