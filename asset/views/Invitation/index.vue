@@ -161,7 +161,8 @@
     width: 42%;
     height: 100%;
     float: left;
-    border: 1px solid #000000;
+    background: url("../../statics/images/invitationNumber@3x.png") no-repeat;
+    background-size: 100% 100%;
   }
 
   .invitation-information li:nth-of-type(2) {
