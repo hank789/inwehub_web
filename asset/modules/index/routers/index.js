@@ -69,7 +69,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
       if (/^http/.test(url)) {
         nextUrl = url
       } else {
-        nextUrl = 'index.html#' + url
+        nextUrl = '/public/index.html#' + url
       }
     } else {
       if (/^http/.test(url)) {

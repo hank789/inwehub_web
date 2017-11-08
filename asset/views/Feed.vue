@@ -174,7 +174,7 @@
               preload: true
             }
             var articleWs = window.mui.openWindow({
-              url: 'index.html#/webview/article',
+              url: '/public/index.html#/webview/article',
               id: 'inwehub_article_view',
               preload: false, // 一定要为false
               createNew: false,

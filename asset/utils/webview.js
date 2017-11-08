@@ -118,7 +118,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   // 绑定标题
   var shareTitle = 'InweHub发现 | ' + title
   var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？'
-  var shareUrl = 'index.html#' + '/webview/share'
+  var shareUrl = '/public/index.html#' + '/webview/share'
   // + '&link=' + encodeURIComponent(url)
   // + '&content=' + encodeURIComponent(content)
   // + '&imageUrl='
