@@ -6,10 +6,10 @@
           <use xlink:href="#icon-logolanse"></use>
         </svg>
         <div class="privilege_avatar">
-          <img src="../../statics/images/uicon.jpg"/>
+          <img :src="inviterAvatar"/>
         </div>
         <div class="privilege_share">
-          <span>章顾问向你发送了特权～</span>
+          <span>{{ inviterName }}问向你发送了特权～</span>
           <span>邀请好友注册立享5%现金分红</span>
         </div>
         <div class="privilege_verification">
@@ -19,18 +19,24 @@
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoujihao"></use>
               </svg>
-              <input type="text" placeholder="请输入手机号"/>
-              <span>发送验证</span>
+              <input ref="phone" pattern="\d*" type="text" @focus="focus" @blur="blur" maxlength="11"
+                     placeholder="请输入手机号"
+                     name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
+                     v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
+              <span @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+              <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
             </li>
             <li>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-yanzhengma"></use>
               </svg>
-              <input type="text" placeholder="请输入验证码"/>
+              <input type="text" placeholder="请输入验证码" ref="code"
+                     v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" @focus="focus" @blur="blur"
+                     name="code" v-model.trim.num="code" autocomplete="off"/>
 
             </li>
             <li>
-              <button>领取特权</button>
+              <button :disabled="disableRegister" @click.prevent="register">领取特权</button>
               <img src="../../statics/images/money@3x.png"/>
             </li>
           </ul>
@@ -51,9 +57,279 @@
     </div>
   </div>
 </template>
+
 <script>
 
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import errorCodes from '../../stores/errorCodes'
+
+  import Vue from 'vue'
+  import { NOTICE, USERS_APPEND } from '../../stores/types'
+  import VTooltip from 'v-tooltip'
+  import { getUserInfo } from '../../utils/user'
+
+  Vue.use(VTooltip)
+
+  export default {
+    data: () => ({
+      isNeedRegistrationCode: false,
+      registrationCode: '', // 邀请码
+      phone: '', // 手机号码
+      isCanGetCode: false,
+      time: 0, // 时间倒计时
+      openid: '',
+      code: '', // 手机验证码,
+      disableRegister: true,
+      disableSendCode: true,
+      inviterName: '',
+      inviterAvatar: '',
+      rcCode: '',
+      errorMsg: '',
+      redirect: '',
+      loading: true
+    }),
+    computed: {
+      getCodeText () {
+        return this.time === 0 ? '发送验证' : this.time + '秒后重发'
+      }
+    },
+    created () {
+      this.checkRcCode()
+      this.checkToken()
+      this.getOpenId()
+      this.checkCache()
+    },
+    watch: {
+      registrationCode: function (newValue, oldValue) {
+        this.checkValid()
+      },
+      phone: function (newValue, oldValue) {
+        this.checkSendCodeValid()
+        this.checkValid()
+      },
+      code: function (newValue, oldValue) {
+        this.checkValid()
+      }
+    },
+    methods: {
+      checkRcCode () {
+        this.rcCode = this.$route.query.rc_code
+        if (!this.rcCode) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            })
+          })
+          this.$router.back()
+          return
+        }
+
+        postRequest('activity/inviteRegister/getInviterInfo', {
+          rc_code: this.rcCode
+        })
+          .then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            this.inviterName = response.data.data.inviter_name
+            this.inviterAvatar = response.data.data.inviter_avatar
+          })
+      },
+      checkCache () {
+        var cache = localEvent.getLocalItem('wechatInfo')
+        if (cache.openid) {
+          var openid = cache.openid
+          if (openid === this.openid) {
+            this.phone = cache.mobile
+            this.code = cache.code
+            this.registrationCode = cache.registration_code
+          }
+        }
+      },
+      checkToken () {
+        let token = this.$route.query.token
+        if (token) {
+          window.mui.waiting()
+          var data = {
+            token: token
+          }
+          localEvent.setLocalItem('UserLoginInfo', data)
+
+          window.clearAllWebViewCache()
+
+          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+            cb(user)
+            window.mui.closeWaiting()
+            window.mixpanelIdentify()
+            if (window.mui.os.plus) {
+              this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
+            } else {
+              this.$router.replace('/invitation/success')
+            }
+          }))
+        } else {
+          this.loading = false
+        }
+      },
+      getOpenId () {
+        let openid = this.$route.query.openid
+        let redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
+        this.redirect = redirect
+        if (!openid) {
+          this.$store.dispatch(NOTICE, cb => {
+            cb({
+              text: '发生一些错误',
+              time: 1500,
+              status: false
+            })
+          })
+          this.$router.back()
+          return
+        }
+        this.openid = openid
+      },
+      // 提示
+      showTip (obj, msg) {
+        this.errorMsg = msg
+        obj._tooltip.show()
+        setTimeout(() => {
+          obj._tooltip.hide()
+        }, 2000)
+      },
+      timer () {
+        if (this.time > 0) {
+          this.isCanGetCode = false
+          this.time -= 1
+          if (this.time === 0) {
+            this.isCanGetCode = true
+            return
+          }
+          setTimeout(this.timer, 1000)
+        }
+      },
+      getCode () {
+        let mobile = this.phone
+        let type = 'wx_gzh_register'
+
+        if (!this.isCanGetCode) {
+          return
+        }
+
+        if (mobile.length !== 11 || /^1\d{10}$/.test(mobile) === false) {
+          this.showTip(this.$refs.phone, '请输入有效的手机号码')
+          return
+        }
+
+        this.isCanGetCode = true
+
+        postRequest('auth/sendPhoneCode', {
+          mobile,
+          type,
+          openid: this.openid,
+          'registration_code': this.registrationCode
+        })
+          .then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              this.isCanGetCode = true
+              window.mui.toast(response.data.message)
+              return
+            }
+
+            this.time = 120
+            this.timer()
+
+            window.mui.toast('验证码发送成功')
+          })
+          .catch(({response: {data = {}} = {}}) => {
+            this.isCanGetCode = true
+            const {code = 'xxxx'} = data
+            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
+          })
+      },
+      focus (event) {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' focus'
+      },
+      blur () {
+        event.target.parentElement.className = event.target.parentElement.className.replace('focus', '')
+        event.target.parentElement.className = event.target.parentElement.className.replace('blur', '')
+        event.target.parentElement.className += ' blur'
+      },
+      checkSendCodeValid () {
+        if (!this.phone) {
+          this.isCanGetCode = false
+          return false
+        }
+
+        this.isCanGetCode = true
+      },
+      checkValid () {
+        if (!this.phone) {
+          this.disableRegister = true
+          return false
+        }
+
+        if (!this.code) {
+          this.disableRegister = true
+          return false
+        }
+
+        this.disableRegister = false
+      },
+      register () {
+        var data = {
+          mobile: this.phone,
+          code: this.code,
+          registration_code: this.registrationCode,
+          openid: this.openid,
+          rcCode: this.rcCode
+        }
+
+        postRequest('auth/wxgzh/check_rg', data)
+          .then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              if (code === 1115) {
+                // 去填写注册信息
+                data.redirect = this.redirect
+                localEvent.setLocalItem('wechatInfo', data)
+                this.$router.push({path: '/invitation/info'})
+                return
+              } else {
+                window.mui.toast(response.data.message)
+                return
+              }
+            }
+
+            localEvent.setLocalItem('UserLoginInfo', response.data.data)
+
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+              cb(user)
+              window.mixpanelIdentify()
+              if (window.mui.os.plus) {
+                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+              } else {
+                this.$router.replace({path: this.redirect})
+              }
+            }))
+          })
+      },
+      mounted () {
+
+      }
+    }
+  }
 </script>
+
+
 <style scoped>
   /*清除样式*/
   div, ul, li, p, span, a, i {
@@ -69,9 +345,9 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height:602px;
+    height: 602px;
 
-    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
 
   }
 
@@ -201,25 +477,29 @@
     color: #FFFFFF;
     margin-left: -3.5px;
   }
+
   .privilege_verification ul li input::-webkit-input-placeholder {
-     color: #b4b4b6;
-     font-size: 14px;
-   }
-  .privilege_verification ul li input::-moz-placeholder {
-     /* Firefox 18- */
     color: #b4b4b6;
     font-size: 14px;
-   }
+  }
+
   .privilege_verification ul li input::-moz-placeholder {
-     /* Firefox 19+ */
+    /* Firefox 18- */
     color: #b4b4b6;
     font-size: 14px;
-   }
+  }
+
   .privilege_verification ul li input::-moz-placeholder {
-     /* Firefox 19+ */
+    /* Firefox 19+ */
     color: #b4b4b6;
     font-size: 14px;
-   }
+  }
+
+  .privilege_verification ul li input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #b4b4b6;
+    font-size: 14px;
+  }
 
   .privilege_verification ul li span {
     width: 25%;
@@ -242,10 +522,12 @@
     margin-top: 28px;
     /*border:1px solid #000000;*/
   }
-  .privilege_verification ul li:nth-of-type(2) svg{
-    font-size:23px;
+
+  .privilege_verification ul li:nth-of-type(2) svg {
+    font-size: 23px;
   }
-  .privilege_verification ul li:nth-of-type(2) input{
+
+  .privilege_verification ul li:nth-of-type(2) input {
     background: #5E6265;
   }
 
@@ -352,9 +634,9 @@
 
   }
 
-  .verification_bg{
-    width:100%;
-    height:120px;
+  .verification_bg {
+    width: 100%;
+    height: 120px;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }
