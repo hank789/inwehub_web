@@ -219,10 +219,10 @@ const routes = [
     }
   },
   { // 邀请好友
-    path: '/Invitation/privilege',
-    name: 'Invitation-privilege',
+    path: '/invitation/register',
+    name: 'invitation-register',
     meta: {
-      title: '邀请好友',
+      title: '邀请好友注册页',
       keepAlive: true
     },
     component: require('../../../views/Invitation/InvitationPrivilege.vue'),
@@ -234,11 +234,11 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 邀请注册
-    path: '/Invitation/register',
-    name: 'Invitation-register',
+  { // 邀请首页
+    path: '/invitation/index',
+    name: 'invitation-index',
     meta: {
-      title: '邀请注册',
+      title: '邀请首页',
       keepAlive: true
     },
     component: require('../../../views/Invitation/InvitationRegister.vue'),
@@ -251,8 +251,8 @@ const routes = [
     }
   },
   { // 邀请成功
-    path: '/Invitation/success',
-    name: 'Invitation-success',
+    path: '/invitation/success',
+    name: 'invitation-success',
     meta: {
       title: '邀请成功',
       keepAlive: true
