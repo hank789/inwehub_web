@@ -136,50 +136,56 @@
         this.hide()
       },
       saveImage (callback) {
-        var node = document.getElementById(this.DomConvertImageId)
-        console.log('id:' + this.DomConvertImageId)
-        console.log(node)
-        if (node) {
-          console.log('node innnerHtml:' + node.innerHTML)
-          domtoimage.toPng(node, {quality: 1}).then((dataUrl) => {
-            console.log('dataUrl' + dataUrl)
-            window.mui.plusReady(() => {
-              var b = new window.plus.nativeObj.Bitmap()
-              b.loadBase64Data(dataUrl, function () {
-                console.log('创建成功')
-              }, function () {
-                console.log('创建失败')
-              })
-              b.save('_www/share.jpeg', {
-                overwrite: true,
-                quality: 100
-              }, () => {
-                console.log('保存成功')
+        if (this.saveImaged) {
+          if (callback) {
+            callback()
+          }
+        } else {
+          var node = document.getElementById(this.DomConvertImageId)
+          console.log('id:' + this.DomConvertImageId)
+          console.log(node)
+          if (node) {
+            console.log('node innnerHtml:' + node.innerHTML)
+            domtoimage.toPng(node, {quality: 1}).then((dataUrl) => {
+              console.log('dataUrl' + dataUrl)
+              window.mui.plusReady(() => {
+                var b = new window.plus.nativeObj.Bitmap()
+                b.loadBase64Data(dataUrl, function () {
+                  console.log('创建成功')
+                }, function () {
+                  console.log('创建失败')
+                })
+                b.save('_www/share.jpeg', {
+                  overwrite: true,
+                  quality: 100
+                }, () => {
+                  console.log('保存成功')
 
-                var data = {
-                  title: '',
-                  link: '',
-                  content: '',
-                  imageUrl: '_www/share.jpeg',
-                  thumbUrl: ''
-                }
-                Share.bindShare(
-                  this,
-                  data,
-                  this.successCallback,
-                  this.failCallback
-                )
+                  var data = {
+                    title: '',
+                    link: '',
+                    content: '',
+                    imageUrl: '_www/share.jpeg',
+                    thumbUrl: ''
+                  }
+                  Share.bindShare(
+                    this,
+                    data,
+                    this.successCallback,
+                    this.failCallback
+                  )
 
-                this.saveImaged = true
+                  this.saveImaged = true
 
-                if (callback) {
-                  callback()
-                }
-              }, () => {
-                console.log('保存失败')
+                  if (callback) {
+                    callback()
+                  }
+                }, () => {
+                  console.log('保存失败')
+                })
               })
             })
-          })
+          }
         }
       },
       shareToPengyouQuanWithPng () {
