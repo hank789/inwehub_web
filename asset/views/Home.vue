@@ -334,7 +334,7 @@
               preload: true
             }
             var articleWs = window.mui.openWindow({
-              url: 'index.html#/webview/article',
+              url: '/public/index.html#/webview/article',
               id: 'inwehub_article_view',
               preload: false, // 一定要为false
               createNew: false,
@@ -376,7 +376,7 @@
               )
             }
             var noticeWs = window.mui.openWindow({
-              url: 'index.html#/webview/notice',
+              url: '/public/index.html#/webview/notice',
               id: 'inwehub_notice_view',
               preload: false, // 一定要为false
               createNew: false,
@@ -503,7 +503,7 @@
               custom_preload: true
             }
             window.mui.preload({
-              url: 'index.html#/webview/article',
+              url: '/public/index.html#/webview/article',
               id: 'inwehub_article_view',
               styles: {
                 popGesture: 'hide'

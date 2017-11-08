@@ -237,7 +237,7 @@
                       preload: true
                     }
                     var articleWs = window.mui.openWindow({
-                      url: 'index.html#/webview/article',
+                      url: '/public/index.html#/webview/article',
                       id: 'inwehub_article_view',
                       preload: false, // 一定要为false
                       createNew: false,
@@ -263,7 +263,7 @@
                 case 'push_notice_article':
                   // 推送公告文章
                   window.mui.openWindow({
-                    url: 'index.html#/webview/notice',
+                    url: '/public/index.html#/webview/notice',
                     id: payload.object_id,
                     preload: false, // 一定要为false
                     createNew: false,
