@@ -89,7 +89,6 @@ div, ul, li, p, span, a, i {
   width:36%;
   height:100%;
   float:right;
-
   background: url("../../statics/images/rewardNumber@3x.png") no-repeat;
   background-size: 100% 100%;
 }
