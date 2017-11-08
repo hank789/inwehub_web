@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="sdfs" style="display:none; background: #EBECED;">
+    <div id="shareContentWrapper" style="display:none; background: #EBECED;">
       <div
         style="width:100%; height:440px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
         <img src="../../statics/images/logo_blue@3x.png" style="height: 24px; margin-top: 20px; margin-left: 17px"  />
@@ -10,9 +10,9 @@
         </div>
         <div
           style="width:92%; margin-left: 4%; background:#fcc816; border-radius:14px; position: relative; padding: 10px 0;">
-          <sapn style="display:block; font-size:18px; color:#444444; font-weight: 600; text-align: center">章顾问向你发送了特权～
-          </sapn>
-          <sapn style="display:block; font-size:14px; color:#444444; text-align: center">邀请好友注册立享5%现金分红</sapn>
+          <span style="display:block; font-size:18px; color:#444444; font-weight: 600; text-align: center">章顾问向你发送了特权～
+          </span>
+          <span style="display:block; font-size:14px; color:#444444; text-align: center">邀请好友注册立享5%现金分红</span>
           <i style="content: ''; display: block; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid #fcc816; position: absolute; -webkit-transform: rotate(0deg); transform: rotate(0deg); left: 0px; right: 0; top: -10px; margin: auto;"></i>
         </div>
         <div style="width: 100%; height:117px;  position: relative;">
