@@ -3,7 +3,7 @@
     <div id="shareContentWrapper">
       <div style="width:750px;height:1000px;background:#fff;color:red;font-size:24px;line-height:48px;">
         互动问答
-        <img src="../statics/images/xiaoha-erweima.jpeg" style="width:100%"/>
+        <qr-code :text="'test'" :size="170" error-level="M"></qr-code>
       </div>
 
     </div>
