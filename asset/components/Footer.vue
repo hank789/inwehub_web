@@ -144,26 +144,6 @@
           localEvent.setLocalItem('taskCount', {
             value: count
           })
-
-          var webv = window.plus.webview.getWebviewById('index.html#/task')
-          if (webv) {
-            window.mui.fire(webv, 'refreshTaskCount')
-          }
-
-          webv = window.plus.webview.getWebviewById('index.html#/home')
-          if (webv) {
-            window.mui.fire(webv, 'refreshTaskCount')
-          }
-
-          webv = window.plus.webview.getWebviewById('index.html#/discover')
-          if (webv) {
-            window.mui.fire(webv, 'refreshTaskCount')
-          }
-
-          webv = window.plus.webview.getWebviewById('index.html#/my')
-          if (webv) {
-            window.mui.fire(webv, 'refreshTaskCount')
-          }
         })
       },
       getCount () {
