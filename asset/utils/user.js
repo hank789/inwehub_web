@@ -106,6 +106,7 @@ function updateUserInfoCache (user) {
   userLocal.uuid = user.uuid
   userLocal.newbie_unfinish_tasks = user.newbie_unfinish_tasks
   userLocal.my_activity_enroll = user.my_activity_enroll
+  userLocal.rc_code = user.rc_code
 
   /*
    user.counts.map(function (count, index) {

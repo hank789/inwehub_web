@@ -32,7 +32,23 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
   }
 }
 
+/**
+ * 邀请注册-模版
+ */
+function getInvitation (username, rcCode) {
+  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
+
+  return {
+    title: username + '邀请您注册',
+    link: link,
+    content: '邀请好友注册立享5%现金分红',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
-  getAskCommunityInteractionDetail
+  getAskCommunityInteractionDetail,
+  getInvitation
 }
