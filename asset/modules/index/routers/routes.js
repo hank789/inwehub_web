@@ -217,6 +217,38 @@ const routes = [{
     CanNotGetInWhenLogged(to, from, next)
   }
 },
+{ // 邀请好友
+  path: '/Invitation/privilege',
+  name: 'Invitation-privilege',
+  meta: {
+    title: '邀请好友',
+    keepAlive: true
+  },
+  component: require('../../../views/Invitation/InvitationPrivilege.vue'),
+  beforeEnter: (to, from, next) => {
+    // 检查版本更新
+    window.mui.plusReady(function () {
+      checkUpdate()
+    })
+    requestAuth(to, from, next)
+  }
+},
+{ // 邀请注册
+  path: '/Invitation/register',
+  name: 'Invitation-register',
+  meta: {
+    title: '邀请注册',
+    keepAlive: true
+  },
+  component: require('../../../views/Invitation/InvitationRegister.vue'),
+  beforeEnter: (to, from, next) => {
+    // 检查版本更新
+    window.mui.plusReady(function () {
+      checkUpdate()
+    })
+    requestAuth(to, from, next)
+  }
+},
 { // 我的
   path: '/my',
   name: 'my',
