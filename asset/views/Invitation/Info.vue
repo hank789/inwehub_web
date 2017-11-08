@@ -15,16 +15,16 @@
       <!--注册-->
       <ul>
         <li>
-          <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-shoujihao"></use>-->
-          <!--</svg>-->
-          <!--<input type="text" placeholder="请输入真实姓名">-->
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoujihao"></use>
+          </svg>
+          <input type="text" placeholder="请输入真实姓名">
         </li>
         <li>
-          <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-mima"></use>-->
-          <!--</svg>-->
-          <!--<input type="text" placeholder="请输入登录密码">-->
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-denglu"></use>
+          </svg>
+          <input type="text" placeholder="请输入登录密码">
         </li>
         <button>离成功只差一步!</button>
         <p>点击即同意<i>《用户注册服务协议》</i></p>
@@ -87,13 +87,12 @@
     margin-left: 10%;
     height: 242px;
     padding-top: 42px;
-    border: 1px solid #000000;
   }
 
   ul li {
     width: 100%;
     height: 28px;
-    background: #cccccc;
+
     border-bottom: 1px solid #dcdcdc;
   }
 
@@ -102,11 +101,49 @@
   }
 
   ul li svg {
+    font-size: 22px;
+    color: #b4b4b6;
     float: left;
+    margin-right: -3px;
+  }
+
+  ul li:nth-of-type(2) svg {
+    font-size: 25px;
   }
 
   ul li input {
+    width: 90%;
+    height: 20px;
     float: left;
+    background: #EBECED;
+    border: none;
+  }
+
+  input::-webkit-input-placeholder {
+    color: #808080;
+    font-size: 14px;
+  }
+
+  input::-moz-placeholder {
+    /* Firefox 18- */
+    color: #808080;
+    font-size: 14px;
+  }
+
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #808080;
+    font-size: 14px;
+  }
+
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #808080;
+    font-size: 14px;
+  }
+
+  ul li:nth-of-type(2) input {
+    height: 22px;
   }
 
   ul button {
@@ -118,12 +155,15 @@
     border-radius: 0;
     margin-top: 35px;
   }
+
   ul p {
-    font-size:12px;
-    color:rgb(60,149,249);
+    font-size: 12px;
+    color: rgb(60, 149, 249);
+    margin-top: 18px;
   }
-  ul p i{
-    color:#3c95f9;
+
+  ul p i {
+    color: #3c95f9;
     font-style: normal;
   }
 
