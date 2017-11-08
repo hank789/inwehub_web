@@ -14,11 +14,11 @@
           <a href="javascript:void(0)" class="mui-navigate-right" @tap.stop.prevent="clearCache">清除缓存</a>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/help/question')"
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/help/question', 'list-detail-page-two')"
              class="mui-navigate-right">常见问题</a>
         </li>
         <li class="mui-table-view-cell">
-          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about')"
+          <a href="javascript:void(0)" @tap.stop.prevent="$router.pushPlus('/about', 'list-detail-page-two')"
              class="mui-navigate-right">关于我们</a>
         </li>
         <li class="mui-table-view-cell">
@@ -101,7 +101,7 @@
         this.$store.dispatch(ASKS_LIST_APPEND, {})
         this.$store.dispatch(ANSWERS_LIST_APPEND, {})
         this.$store.dispatch(TASK_LIST_APPEND, {})
-        this.$router.pushPlus('/login', true, 'none', 'none')
+        this.$router.pushPlus('/login', '', true, 'none', 'none')
       },
       logOut () {
         if (window.mui.os.plus) {
