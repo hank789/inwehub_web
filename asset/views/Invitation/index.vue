@@ -49,6 +49,7 @@
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
+    <Images></Images>
 
 
 
@@ -57,6 +58,7 @@
 
 <script>
   import Share from '../../components/Share.vue'
+  import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
 
@@ -79,7 +81,8 @@
       this.shareOption = getInvitation(user.name, this.rcCode)
     },
     components: {
-      Share
+      Share,
+      Images
     },
     computed: {},
     methods: {

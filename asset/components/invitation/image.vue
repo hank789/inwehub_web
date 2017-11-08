@@ -34,8 +34,6 @@
 
 </script>
 <style scoped>
-  .mui-content {
 
-  }
 
 </style>

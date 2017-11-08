@@ -63,7 +63,7 @@
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import errorCodes from '../../stores/errorCodes'
-  
+
   import Vue from 'vue'
   import { NOTICE, USERS_APPEND } from '../../stores/types'
   import VTooltip from 'v-tooltip'
@@ -511,6 +511,7 @@
     text-align: center;
     line-height: 30px;
     float: right;
+    margin-right: 2px;
   }
 
   .privilege_verification ul li:nth-of-type(1) {
