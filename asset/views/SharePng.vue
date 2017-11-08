@@ -31,7 +31,7 @@
 
   const AskDetail = {
     data: () => ({
-      shareUrl: '',
+      shareUrl: 'http://www.baidu.com',
       shareImg: '',
       shareContent: '',
       shareTitle: '',

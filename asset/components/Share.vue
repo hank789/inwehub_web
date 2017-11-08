@@ -16,7 +16,7 @@
           <img src="../statics/images/pengyouquan.png"/>
         </div>
         <div class="single" id="wechatShareBtn3" @tap.stop.prevent="shareToPengyouQuanWithPng()"
-             v-if="this.DomConvertImage">
+             v-if="this.DomConvertImage && isShowSharePng()">
           <img src="../statics/images/sharePng@2x.png"/>
         </div>
       </div>
@@ -91,6 +91,9 @@
     },
 
     methods: {
+      isShowSharePng () {
+        return !!window.mui.os.plus
+      },
       bindShare () {
         var data = {
           title: this.title.substr(0, 50),
@@ -136,6 +139,9 @@
         this.hide()
       },
       saveImage (callback) {
+        if (!window.mui.os.plus) {
+          return false
+        }
         if (this.saveImaged) {
           if (callback) {
             callback()
@@ -145,9 +151,8 @@
           console.log('id:' + this.DomConvertImageId)
           console.log(node)
           if (node) {
-            console.log('node innnerHtml:' + node.innerHTML)
+            window.mui.waiting()
             domtoimage.toPng(node, {quality: 1}).then((dataUrl) => {
-              console.log('dataUrl' + dataUrl)
               window.mui.plusReady(() => {
                 var b = new window.plus.nativeObj.Bitmap()
                 b.loadBase64Data(dataUrl, function () {
@@ -168,14 +173,10 @@
                     imageUrl: '_www/share.jpeg',
                     thumbUrl: ''
                   }
-                  Share.bindShare(
-                    this,
-                    data,
-                    this.successCallback,
-                    this.failCallback
-                  )
+                  Share.setData(data)
 
                   this.saveImaged = true
+                  window.mui.closeWaiting()
 
                   if (callback) {
                     callback()
@@ -190,12 +191,8 @@
       },
       shareToPengyouQuanWithPng () {
         this.saveImage(() => {
-          if (this.saveImaged) {
-            if (this.sendHaoyou) {
-              this.sendHaoyou()
-            }
-          } else {
-            window.mui.toast('图片生成中，稍候再试')
+          if (this.sendHaoyou) {
+            this.sendHaoyou()
           }
         })
       },
