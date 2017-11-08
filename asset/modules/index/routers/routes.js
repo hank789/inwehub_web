@@ -250,6 +250,22 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 邀请成功
+    path: '/Invitation/success',
+    name: 'Invitation-success',
+    meta: {
+      title: '邀请成功',
+      keepAlive: true
+    },
+    component: require('../../../views/Invitation/InvitationSuccess.vue'),
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的
     path: '/my',
     name: 'my',

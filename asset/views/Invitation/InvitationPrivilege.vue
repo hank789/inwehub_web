@@ -36,9 +36,9 @@
           </ul>
           <p class="verification_b">号码将作为您InweHub账号</p>
         </div>
-      </div>
-      <div class="privilege_m">
+        <div class="verification_bg">
 
+        </div>
       </div>
       <div class="privilege_B">
         <P>最具品质的咨询顾问社区</P>
@@ -69,14 +69,15 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height: 482px;
-    padding: 0px 16px;
-    background: #44474B;
+    height:602px;
+
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
 
   }
 
   .privilege_T svg {
     font-size: 77px;
+    margin-left: 16px;
   }
 
   /*用户头像部分*/
@@ -103,7 +104,8 @@
 
   /*分享现金红包cash*/
   .privilege_share {
-    width: 100%;
+    width: 92%;
+    margin-left: 4%;
     height: 60px;
     background: #fcc816;
     border-radius: 14px;
@@ -111,6 +113,7 @@
     padding-top: 10px;
     margin-top: -10px;
     position: relative;
+
     /*border:1px solid #000000;*/
   }
 
@@ -136,6 +139,7 @@
     display: block;
     font-size: 18px;
     color: #444444;
+    font-weight: 600;
   }
 
   .privilege_share span:nth-of-type(2) {
@@ -146,7 +150,8 @@
 
   /*验证部分*/
   .privilege_verification {
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
     height: 237px;
     margin-top: 25px;
     position: relative;
@@ -180,21 +185,41 @@
   }
 
   .privilege_verification ul li svg {
-    font-size: 25px;
-    color: #FFFFFF;
+    font-size: 22px;
+    color: #c8c8c8;
     margin-left: 5px;
     float: left;
   }
 
   .privilege_verification ul li input {
     width: 60%;
-    height: 100%;
+    height: 80%;
     float: left;
-    background: #44474B;
+    background: #595D60;
     border: none;
     font-size: 14px;
     color: #FFFFFF;
+    margin-left: -3.5px;
   }
+  .privilege_verification ul li input::-webkit-input-placeholder {
+     color: #b4b4b6;
+     font-size: 14px;
+   }
+  .privilege_verification ul li input::-moz-placeholder {
+     /* Firefox 18- */
+    color: #b4b4b6;
+    font-size: 14px;
+   }
+  .privilege_verification ul li input::-moz-placeholder {
+     /* Firefox 19+ */
+    color: #b4b4b6;
+    font-size: 14px;
+   }
+  .privilege_verification ul li input::-moz-placeholder {
+     /* Firefox 19+ */
+    color: #b4b4b6;
+    font-size: 14px;
+   }
 
   .privilege_verification ul li span {
     width: 25%;
@@ -216,6 +241,12 @@
   .privilege_verification ul li:nth-of-type(2) {
     margin-top: 28px;
     /*border:1px solid #000000;*/
+  }
+  .privilege_verification ul li:nth-of-type(2) svg{
+    font-size:23px;
+  }
+  .privilege_verification ul li:nth-of-type(2) input{
+    background: #5E6265;
   }
 
   .privilege_verification ul li:nth-of-type(1):after {
@@ -276,12 +307,14 @@
     width: 100%;
     padding-bottom: 25px;
     position: relative;
+    margin-top: 38px;
   }
 
   .privilege_B p:nth-of-type(1) {
     font-size: 18px;
     color: #444444;
     text-align: center;
+    font-weight: 600;
 
   }
 
@@ -319,19 +352,15 @@
 
   }
 
-  /*中间*/
-  .privilege_m {
-    width: 100%;
-    height: 120px;
-    border: 1px solid #000000;
+
+
+
+  .verification_bg{
+    width:100%;
+    height:120px;
+    background: url("../../statics/images/graywave@3x.png") no-repeat;
+    background-size: 100% 100%;
   }
 
-  .privilege_m svg {
-    /*font-size:;*/
-  }
-
-  /*.privilege_m .icon{*/
-  /*font-size:400px;*/
-  /*}*/
 
 </style>

@@ -8,19 +8,34 @@
       <div class="Invitation_t ">
           <img src="../../statics/images/invitation-register.png" />
       </div>
+
       <div class="invitation-information">
-         <div class="SuccessfulInvitation">
-            <span>10位</span>
-            <span>已成功邀请</span>
-         </div>
-         <div class="InvitationAward">
-           <span>100元</span>
-           <span>已获得奖励</span>
-         </div>
+         <li>
+            <p>10位</p>
+            <p>已成功邀请</p>
+         </li>
+         <li>
+           <p>100元</p>
+           <p>已获得奖励</p>
+         </li>
+      </div>
+      <!--呼朋唤友-->
+      <div class="contactFriends">
+        <span>即可获得好友平台支付或收益5%分红</span>
+        <span>了解平台上可获取的收益 ></span>
+        <div class="contactBtn">
+           <p>呼朋唤友</p>
+           <img src="../../statics/images/money@3x.png" />
+        </div>
+      </div>
+      <!--邀请说明-->
+      <div  class="invitationNote">
+        <p>被邀请好友可享注册大礼包</p>
+        <p>（首次专业提问1元等特权）</p>
+        <p>点击呼朋唤友并分享链接，既是同意 <u>邀请活动规则</u></p>
       </div>
 
     </div>
-
   </div>
 </template>
 
@@ -29,6 +44,16 @@
 </script>
 
 <style scoped>
+/*清除样式*/
+div, ul, li, p, span, a, i {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mui-content{
+   background: #FFFFFF;
+ }
 .Invitation_t{
   width: 100%;
   height:322px;
@@ -54,28 +79,113 @@
   margin-top: 5px;
   padding:0px 25px;
 }
-.SuccessfulInvitation{
+.invitation-information li:nth-of-type(1){
   width:42%;
   height:100%;
   float: left;
   border:1px solid #000000;
 }
-.SuccessfulInvitation span{
- display:block;
- text-align: center;
-}
-.InvitationAward{
+.invitation-information li:nth-of-type(2){
   width:36%;
   height:100%;
   float:right;
   border:1px solid #000000;
 }
-.InvitationAward span{
-  display:block;
-  text-align: center;
 
+.invitation-information li p:nth-of-type(1){
+  font-size:15px;
+  color:#444444;
+  margin-top:22px;
+  text-align: center;
+}
+.invitation-information li p:nth-of-type(2){
+  font-size:14px;
+  color:#808080;
+  text-align: center;
 }
 
+/*呼朋唤友*/
+
+.contactFriends{
+  width:95%;
+  height:85px;
+  border:1px solid #b4b4b6;
+  border-radius: 85px;
+  margin-left: 2.5%;
+  margin-top: 40px;
+  position: relative;
+}
+ .contactFriends span{
+   display: block;
+   text-align: center;
+   font-size:14px;
+
+ }
+ .contactFriends span:nth-of-type(1){
+   color:#444444;
+   margin-top: 29px;
+
+ }
+ .contactFriends span:nth-of-type(2){
+   color:#03aef9;
+   margin-top: 4px;
+ }
+  .contactBtn{
+    position:absolute;
+    width:150px;
+    height:53px;
+    top: -30px;
+    left: 0;
+    right: 0;
+    margin: auto
+
+  }
+ .contactBtn p{
+   width:100%;
+   height:100%;
+   background:#03aef9;
+   border-radius: 50px;
+   text-align: center;
+   line-height: 53px;
+   color:#FFFFFF;
+   font-size: 18px;
+   font-weight: 500;
+   z-index: 999;
+   position: absolute;
+ }
+ .contactBtn img{
+   width:41px;
+   height:29px;
+   position: absolute;
+   left: -15px;
+   top: 23px;
+ }
+/*邀请说明*/
+ .invitationNote{
+   margin-top: 20.5px;
+   margin-bottom: 80px;
+   text-align: center;
+   overflow: hidden;
+}
+.invitationNote p:nth-of-type(1){
+  font-size:16px;
+  color:#444444;
 
 
+}
+.invitationNote p:nth-of-type(2){
+  font-size:14px;
+  color:#808080;
+
+}
+.invitationNote p:nth-of-type(3){
+  font-size:12px;
+  color:#808080;
+  margin-top: 23px;
+
+}
+.invitationNote p:nth-of-type(3) u{
+  font-size:12px;
+  color:rgb(68,68,68);
+}
 </style>
