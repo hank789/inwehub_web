@@ -243,7 +243,6 @@ window.mui.back = function () {
       console.log('close')
       goBack()
       window.mui.muiOldBack()
-      currentWebview.close()
     } else {
       console.log('go(-1)')
       router.go(-1)
