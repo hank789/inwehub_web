@@ -11,11 +11,11 @@
 
       <div class="invitation-information">
         <li>
-          <p>10位</p>
+          <p>{{invitedUsersCount}}位</p>
           <p>已成功邀请</p>
         </li>
         <li>
-          <p>100元</p>
+          <p>{{rewardMoney}}元</p>
           <p>已获得奖励</p>
         </li>
       </div>
@@ -24,7 +24,7 @@
         <span>即可获得好友平台支付或收益5%分红</span>
         <span>了解平台上可获取的收益 ></span>
         <div class="contactBtn">
-          <p>呼朋唤友</p>
+          <p @tap.stop.prevent="share()">呼朋唤友</p>
           <img src="../../statics/images/money@3x.png"/>
         </div>
       </div>
@@ -61,6 +61,7 @@
   import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
+  import { postRequest } from '../../utils/request'
 
   const Index = {
     data: () => ({
@@ -71,14 +72,13 @@
         imageUrl: '',
         thumbUrl: ''
       },
+      invitedUsersCount: '--',
+      rewardMoney: '--',
       rcCode: '',
       id: 0,
       loading: true
     }),
     mounted () {
-      var user = getLocalUserInfo()
-      this.rcCode = user.rc_code || 0
-      this.shareOption = getInvitation(user.name, this.rcCode)
     },
     components: {
       Share,
@@ -86,13 +86,33 @@
     },
     computed: {},
     methods: {
+      getDetail () {
+        postRequest('activity/inviteRegister/introduce', {rc_code: this.rcCode})
+          .then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            this.invitedUsersCount = response.data.data.invited_users
+            this.rewardMoney = response.data.data.reward_money
+          })
+      },
+      share () {
+        this.$refs.ShareBtn.share()
+      },
       shareSuccess () {
 
       },
       shareFail () {
       }
     },
-    created () {}
+    created () {
+      var user = getLocalUserInfo()
+      this.rcCode = user.rc_code || 0
+      this.shareOption = getInvitation(user.name, this.rcCode)
+      this.getDetail()
+    }
   }
   export default Index
 </script>
@@ -104,7 +124,6 @@
     padding: 0;
     list-style: none;
   }
-
 
   .mui-content {
     background: #FFFFFF;

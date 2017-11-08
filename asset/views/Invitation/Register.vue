@@ -9,7 +9,7 @@
           <img :src="inviterAvatar"/>
         </div>
         <div class="privilege_share">
-          <span>{{ inviterName }}问向你发送了特权～</span>
+          <span>{{ inviterName }}向你发送了特权～</span>
           <span>邀请好友注册立享5%现金分红</span>
         </div>
         <div class="privilege_verification">
