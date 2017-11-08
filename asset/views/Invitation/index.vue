@@ -44,7 +44,7 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
-      :DomConvertImage="false"
+      :DomConvertImage="true"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
