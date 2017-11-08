@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div id="shareContentWrapper" style="display:none; background: #EBECED;">
-      <div
+    <div id="shareContentWrapper" style="display:block; background: #EBECED;">
+      <div style="width:750px;" id="widthTotal">
+      <div id="images_t"
         style="width:100%; height:440px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
         <img src="../../statics/images/logo_blue@3x.png" style="height: 24px; margin-top: 20px; margin-left: 17px"  />
         <div style="width: 100%; height: 95px;  position: relative;">
@@ -28,12 +29,17 @@
       </div>
       <img src="../../statics/images/invitation_img@3x.png" style="width: 100%; position: relative; top: -124px;" >
     </div>
+    </div>
   </div>
 </template>
 <script>
 
 </script>
 <style scoped>
-
+#shareContentWrapper #widthTotal{
+  transform-origin:left top;
+  -webkit-transform: scale(.5);
+  transform: scale(.5);
+}
 
 </style>

@@ -13,6 +13,7 @@
         <li>
           <p>{{invitedUsersCount}}位</p>
           <p>已成功邀请</p>
+          <span>查看</span>
         </li>
         <li>
           <p>{{rewardMoney}}元</p>
@@ -151,22 +152,23 @@
   .invitation-information {
     width: 100%;
     height: 88.5px;
-    border: 1px solid #cccccc;
+    /*border: 1px solid #cccccc;*/
     background: #FFFFFF;
     margin-top: 5px;
     padding: 0px 25px;
   }
 
   .invitation-information li:nth-of-type(1) {
-    width: 42%;
+    /*width: 42%;*/
     height: 100%;
     float: left;
     background: url("../../statics/images/invitationNumber@3x.png") no-repeat;
     background-size: 100% 100%;
+    position: relative;
   }
 
   .invitation-information li:nth-of-type(2) {
-    width: 36%;
+    /*width: 36%;*/
     height: 100%;
     float: right;
 
@@ -185,6 +187,15 @@
     font-size: 14px;
     color: #808080;
     text-align: center;
+  }
+  .invitation-information li span {
+    font-size: 13px;
+    color: #FFFFFF;
+    position: absolute;
+    right:0;
+    right: 5%;
+    top: 23%;
+
   }
 
   /*呼朋唤友*/
@@ -291,12 +302,24 @@
     .Invitation_t {
       height: 280px;
     }
+    .invitation-information li:nth-of-type(1) {
+      width: 48%;
+    }
+    .invitation-information li:nth-of-type(2) {
+      width:40%;
+    }
 
   }
 
   @media (min-width: 375px) {
     .Invitation_img {
       height: 270px;
+    }
+    .invitation-information li:nth-of-type(1) {
+      width: 42%;
+    }
+    .invitation-information li:nth-of-type(2) {
+      width: 36%;
     }
 
   }
@@ -308,6 +331,12 @@
 
     .Invitation_t {
       height: 350px;
+    }
+    .invitation-information li:nth-of-type(1) {
+      width: 42%;
+    }
+    .invitation-information li:nth-of-type(2) {
+      width: 36%;
     }
   }
 
