@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="scaleWrapper">
-      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED;">
+      <div id="shareContentWrapper" style="display:none; width:750px; background: #EBECED;">
         <div style="width:750px;">
           <div id="images_t"
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
