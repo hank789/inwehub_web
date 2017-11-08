@@ -225,7 +225,7 @@ const routes = [
       title: '邀请好友注册页',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/InvitationPrivilege.vue'),
+    component: require('../../../views/Invitation/Privilege.vue'),
     beforeEnter: (to, from, next) => {
       // 检查版本更新
       window.mui.plusReady(function () {
@@ -241,7 +241,7 @@ const routes = [
       title: '邀请首页',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/InvitationRegister.vue'),
+    component: require('../../../views/Invitation/index.vue'),
     beforeEnter: (to, from, next) => {
       // 检查版本更新
       window.mui.plusReady(function () {
@@ -257,7 +257,7 @@ const routes = [
       title: '邀请成功',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/InvitationSuccess.vue'),
+    component: require('../../../views/Invitation/Success.vue'),
     beforeEnter: (to, from, next) => {
       // 检查版本更新
       window.mui.plusReady(function () {

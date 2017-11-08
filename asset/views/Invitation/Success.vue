@@ -12,6 +12,9 @@
         <p>登录InweHub使用吧！</p>
       </div>
       <button>下载APP</button>
+      <div class="succcess_share">
+        分享特权给好友
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +78,7 @@
     text-align: center;
     font-size:14px;
     color:#808080;
+    margin-top: 5px;
   }
   /*button*/
   button{
@@ -83,8 +87,26 @@
     background:#03aef9;
     border-radius:50px;
     text-align: center;
-    /*line-height:53px;*/
     font-size:18px;
     color:#ffffff;
+    position: absolute;
+    top:291.5px;
+    left:0;
+    right:0;
+    margin:auto;
+    border-color: #03aef9;
+  }
+  .succcess_share{
+    width:162px;
+    height:31px;
+    border-radius: 50px;
+    /*borderStyle: "solid",*/
+    /*borderWidth: 1,*/
+    /*borderColor: "#979797"*/
+    position: absolute;
+    bottom:103px;
+    left:0;
+    right:0;
+    margin:auto;
   }
 </style>

@@ -6,7 +6,7 @@
     </header>
     <div class="mui-content absolute">
       <div class="Invitation_t ">
-          <img src="../../statics/images/invitation-register.png" />
+          <img src="../../statics/images/invitation-register.png" class="Invitation_img"/>
       </div>
 
       <div class="invitation-information">
@@ -56,14 +56,14 @@ div, ul, li, p, span, a, i {
  }
 .Invitation_t{
   width: 100%;
-  height:322px;
+  /*height:322px;*/
   background: #FFFFFF url("../../statics/images/invitation-bg@2x.png") no-repeat;
   background-size: 100% 100%;
   position: relative;
 }
-.Invitation_t img{
+.Invitation_img{
   width:95%;
-  height:270px;
+  /*height:270px;*/
   position: absolute;
   bottom:0;
   left:0;
@@ -89,7 +89,9 @@ div, ul, li, p, span, a, i {
   width:36%;
   height:100%;
   float:right;
-  border:1px solid #000000;
+
+  background: url("../../statics/images/rewardNumber@3x.png") no-repeat;
+  background-size: 100% 100%;
 }
 
 .invitation-information li p:nth-of-type(1){
@@ -188,4 +190,30 @@ div, ul, li, p, span, a, i {
   font-size:12px;
   color:rgb(68,68,68);
 }
+
+/* 适配*/
+@media (min-width: 320px) {
+  .Invitation_img{
+    height:230px;
+  }
+  .Invitation_t{
+    height:280px;
+  }
+
+}
+@media (min-width: 375px) {
+  .Invitation_img{
+    height:270px;
+  }
+
+}
+@media (min-width: 414px) {
+  .Invitation_img{
+    height:280px;
+  }
+  .Invitation_t{
+    height:350px;
+  }
+}
+
 </style>
