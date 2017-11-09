@@ -430,10 +430,10 @@
 
 
   .innermost {
-    width: 73px;
-    height: 73px;
-    border: 10px solid yellow;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
+    background: #757A7F;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -441,7 +441,7 @@
     left: 0;
     margin: auto;
     z-index: 11;
-
+    opacity: 0;
     animation: myopactity 2s infinite;
     -moz-animation: myopactity 2s infinite; /* Firefox */
     -webkit-animation: myopactity 2s infinite; /* Safari and Chrome */
@@ -449,44 +449,44 @@
     animation-direction: alternate;
     -webkit-animation-direction: alternate;
   }
-  /*@keyframes myopactity {*/
-    /*0% {*/
-      /*opacity: 1;*/
-    /*}*/
-    /*100% {*/
-      /*opacity: 0;*/
-    /*}*/
-  /*}*/
+  @keyframes myopactity {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
-  /*@-moz-keyframes myopactity !* Firefox *!*/
-  /*{*/
-    /*0% {*/
-      /*opacity: 1;*/
-    /*}*/
-    /*100% {*/
-      /*opacity: 0;*/
-    /*}*/
-  /*}*/
+  @-moz-keyframes myopactity /* Firefox */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
-  /*@-webkit-keyframes myopactity !* Safari and Chrome *!*/
-  /*{*/
-    /*0% {*/
-      /*opacity: 1;*/
-    /*}*/
-    /*100% {*/
-      /*opacity: 0;*/
-    /*}*/
-  /*}*/
+  @-webkit-keyframes myopactity /* Safari and Chrome */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
-  /*@-o-keyframes myopactity!* Opera *!*/
-  /*{*/
-    /*0% {*/
-      /*opacity: 1;*/
-    /*}*/
-    /*100% {*/
-      /*opacity: 0;*/
-    /*}*/
-  /*}*/
+  @-o-keyframes myopactity/* Opera */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
   .privilege_avatar img {
     width: 73px;
