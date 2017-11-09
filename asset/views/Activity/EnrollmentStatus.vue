@@ -77,6 +77,19 @@
     }),
     created () {
     },
+    updated () {
+      this.$nextTick(function () {
+        // Code that will run only after the
+        // entire view has been re-rendered
+        var aList = document.querySelectorAll('a[href^="http"]')
+        for (let i = 0; i < aList.length; i++) {
+          aList[i].addEventListener('click', function (e) {
+            e.preventDefault()
+            window.plus.runtime.openURL(this.href)
+          }, false)
+        }
+      })
+    },
     computed: {
       // 动态计算当前的页数；
       page () {
