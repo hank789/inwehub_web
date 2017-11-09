@@ -9,15 +9,31 @@
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">分享到</div>
       <div class="more">
-        <div class="single" id="wechatShareBtn" @tap.stop.prevent="shareToHaoyou()">
+        <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
         </div>
-        <div class="single" id="wechatShareBtn2" @tap.stop.prevent="shareToPengyouQuan()">
+        <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
         </div>
-        <div class="single" id="wechatShareBtn3" @tap.stop.prevent="shareToPengyouQuanWithPng()"
+        <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
           <img src="../statics/images/sharePng@2x.png"/>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="shareImageWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+      <div class="title">分享到</div>
+      <div class="more">
+        <div class="single" @tap.stop.prevent="shareImageToHaoyou()">
+          <img src="../statics/images/wechat_2x.png"/>
+        </div>
+        <div class="single" @tap.stop.prevent="shareImageToPengyouQuan()">
+          <img src="../statics/images/pengyouquan.png"/>
+        </div>
+        <div class="single" @tap.stop.prevent="saveImage()">
+          <img src="../statics/images/save-image@2x.png"/>
         </div>
       </div>
     </div>
@@ -41,7 +57,8 @@
   export default {
     data () {
       return {
-        saveImaged: false  // 是否已保存图片
+        createImaged: false,  // 是否已创建图片
+        imagePath: '_www/share.jpeg'  // 图片文件路径名称
       }
     },
     components: {},
@@ -77,6 +94,10 @@
       DomConvertImageId: {
         type: String,
         default: 'router-view'
+      },
+      ImagePreview: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -92,7 +113,7 @@
 
     methods: {
       isShowSharePng () {
-        return !!window.mui.os.android
+        return true  // !!window.mui.os.android
       },
       bindShare () {
         var data = {
@@ -138,11 +159,11 @@
         }
         this.hide()
       },
-      saveImage (callback) {
+      createImage (callback) {
         if (!window.mui.os.plus) {
           return false
         }
-        if (this.saveImaged) {
+        if (this.createImaged) {
           if (callback) {
             callback()
           }
@@ -160,7 +181,7 @@
                 }, function () {
                   console.log('创建失败')
                 })
-                b.save('_www/share.jpeg', {
+                b.save(this.imagePath, {
                   overwrite: true,
                   quality: 100
                 }, () => {
@@ -170,12 +191,12 @@
                     title: '',
                     link: '',
                     content: '',
-                    imageUrl: '_www/share.jpeg',
-                    thumbUrl: ''
+                    imageUrl: this.imagePath,
+                    thumbUrl: this.imagePath
                   }
                   Share.setData(data)
 
-                  this.saveImaged = true
+                  this.createImaged = true
                   window.mui.closeWaiting()
 
                   if (callback) {
@@ -189,16 +210,29 @@
           }
         }
       },
-      shareToPengyouQuanWithPng () {
+      toPreviewImage () {
+        window.mui('#shareImageWrapper').popover('toggle')
+        this.$router.pushPlus('/invitation/preview')
+      },
+      shareImageToHaoyou () {
         var node = document.getElementById(this.DomConvertImageId)
         if (node) {
-          node.style.display = 'block'
-
           setTimeout(() => {
-            this.saveImage(() => {
-              node.style.display = 'none'
+            this.createImage(() => {
               if (this.sendHaoyou) {
                 this.sendHaoyou()
+              }
+            })
+          }, 100)
+        }
+      },
+      shareImageToPengyouQuan () {
+        var node = document.getElementById(this.DomConvertImageId)
+        if (node) {
+          setTimeout(() => {
+            this.createImage(() => {
+              if (this.sendPengYouQuan) {
+                this.sendPengYouQuan()
               }
             })
           }, 100)
@@ -234,6 +268,11 @@
         window.mui.toast('分享失败')
       },
       share () {
+        if (this.ImagePreview) {
+          this.shareImage()
+          return
+        }
+
         if (this.link) {
           this.bindShare()
         }
@@ -244,6 +283,36 @@
             this.hide()
           })
         }, 150)
+      },
+      shareImage () {
+        if (this.link) {
+          this.bindShare()
+        }
+
+        setTimeout(() => {
+          window.mui('#shareImageWrapper').popover('toggle')
+          window.mui('body').on('tap', '.mui-backdrop', () => {
+            this.hide()
+          })
+        }, 150)
+      },
+      saveImage () {
+        var node = document.getElementById(this.DomConvertImageId)
+        if (node) {
+          setTimeout(() => {
+            this.createImage(() => {
+              window.mui.plusReady(() => {
+                window.plus.gallery.save(this.imagePath, function () {
+                  console.log('保存图片到相册成功')
+                  window.mui.toast('保存成功')
+                }, function () {
+                  console.log('保存图片到相册失败')
+                  window.mui.toast('保存失败')
+                })
+              })
+            })
+          }, 100)
+        }
       },
       hide () {
 

@@ -2,39 +2,9 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">邀请注册</h1>
+      <h1 class="mui-title">图片预览</h1>
     </header>
     <div class="mui-content absolute">
-      <div class="Invitation_t ">
-        <img src="../../statics/images/invitation-register.png" class="Invitation_img"/>
-      </div>
-
-      <div class="invitation-information">
-        <li @tap.stop.prevent="$router.pushPlus('/invitation/friends')">
-          <p>{{invitedUsersCount}}位</p>
-          <p>已成功邀请</p>
-          <span>查看</span>
-        </li>
-        <li>
-          <p>{{rewardMoney}}元</p>
-          <p>已获得奖励</p>
-        </li>
-      </div>
-      <!--呼朋唤友-->
-      <div class="contactFriends">
-        <span>即可获得好友平台支付或收益5%分红</span>
-        <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
-        <div class="contactBtn">
-          <p @tap.stop.prevent="share()">呼朋唤友</p>
-          <img src="../../statics/images/money@3x.png"/>
-        </div>
-      </div>
-      <!--邀请说明-->
-      <div class="invitationNote">
-        <p>被邀请好友可享注册大礼包</p>
-        <p>（首次专业提问1元等特权）</p>
-        <p>点击呼朋唤友并分享链接，既是同意 <u @tap.stop.prevent="$router.pushPlus('/protocol/invitation')">邀请活动规则</u></p>
-      </div>
 
     </div>
 
@@ -45,16 +15,20 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :ImagePreview="true"
       :DomConvertImage="true"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
+
+    <Images></Images>
   </div>
 </template>
 
 <script>
   import Share from '../../components/Share.vue'
+  import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
   import { postRequest } from '../../utils/request'
@@ -77,7 +51,8 @@
     mounted () {
     },
     components: {
-      Share
+      Share,
+      Images
     },
     computed: {},
     methods: {
