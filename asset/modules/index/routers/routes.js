@@ -1499,6 +1499,15 @@ const routes = [
     },
     component: require('../../../views/Help/Protocol.vue')
   },
+  { // protocol/register
+    path: '/protocol/invitation',
+    name: 'protocol-invitation',
+    meta: {
+      title: '邀请活动规则',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Help/Invitation.vue')
+  },
   { // help/question
     path: '/help/question',
     name: 'help-question',
