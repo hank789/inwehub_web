@@ -299,22 +299,17 @@
         }, 150)
       },
       saveImage () {
-        var node = document.getElementById(this.DomConvertImageId)
-        if (node) {
-          setTimeout(() => {
-            this.createImage(() => {
-              window.mui.plusReady(() => {
-                window.plus.gallery.save(this.imagePath, function () {
-                  console.log('保存图片到相册成功')
-                  window.mui.toast('保存成功')
-                }, function () {
-                  console.log('保存图片到相册失败')
-                  window.mui.toast('保存失败')
-                })
-              })
+        this.createImage(() => {
+          window.mui.plusReady(() => {
+            window.plus.gallery.save(this.imagePath, function () {
+              console.log('保存图片到相册成功')
+              window.mui.toast('保存成功')
+            }, function () {
+              console.log('保存图片到相册失败')
+              window.mui.toast('保存失败')
             })
-          }, 100)
-        }
+          })
+        })
       },
       hide () {
 
