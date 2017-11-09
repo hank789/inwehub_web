@@ -128,6 +128,15 @@
         if (content) {
           var objs = JSON.parse(content)
           this.editorReadObj.setContents(objs)
+          if (window.mui.os.plus && this.editorOptionRead.readOnly) {
+            var aList = document.querySelectorAll('a[href^="http"]')
+            for (let i = 0; i < aList.length; i++) {
+              aList[i].addEventListener('click', function (e) {
+                e.preventDefault()
+                window.plus.runtime.openURL(this.href)
+              }, false)
+            }
+          }
         }
       }
     },
