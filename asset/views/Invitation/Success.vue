@@ -1,8 +1,5 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    </header>
     <div class="mui-content absolute">
       <svg class="icon succcess" aria-hidden="true">
         <use xlink:href="#icon-check-circle"></use>
