@@ -113,7 +113,7 @@
 
     methods: {
       isShowSharePng () {
-        return true  // !!window.mui.os.android
+        return !!window.mui.os.android
       },
       bindShare () {
         var data = {

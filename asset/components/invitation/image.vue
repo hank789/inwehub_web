@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div id="scaleWrapper">
-      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED;">
+    <div id="scaleWrapper" >
+      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; left: 0; right: 0; margin: auto" >
         <div style="width:750px;">
           <div id="images_t"
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
@@ -71,7 +71,7 @@
 </script>
 <style scoped>
   #scaleWrapper {
-    transform-origin: left top;
+    transform-origin: center top;
     -webkit-transform: scale(.5);
     transform: scale(.5);
   }
