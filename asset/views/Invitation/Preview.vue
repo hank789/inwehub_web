@@ -2,39 +2,9 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">邀请注册</h1>
+      <h1 class="mui-title">图片预览</h1>
     </header>
     <div class="mui-content absolute">
-      <div class="Invitation_t ">
-        <img src="../../statics/images/invitation-register.png" class="Invitation_img"/>
-      </div>
-
-      <div class="invitation-information">
-        <li @tap.stop.prevent="$router.pushPlus('/invitation/friends')">
-          <p>{{invitedUsersCount}}位</p>
-          <p>已成功邀请</p>
-          <span>查看</span>
-        </li>
-        <li>
-          <p>{{rewardMoney}}元</p>
-          <p>已获得奖励</p>
-        </li>
-      </div>
-      <!--呼朋唤友-->
-      <div class="contactFriends">
-        <span>即可获得好友平台支付或收益5%分红</span>
-        <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
-        <div class="contactBtn">
-          <p @tap.stop.prevent="share()">呼朋唤友</p>
-          <img src="../../statics/images/money@3x.png"/>
-        </div>
-      </div>
-      <!--邀请说明-->
-      <div class="invitationNote">
-        <p>被邀请好友可享注册大礼包</p>
-        <p>（首次专业提问1元等特权）</p>
-        <p>点击呼朋唤友并分享链接，既是同意 <u @tap.stop.prevent="$router.pushPlus('/protocol/invitation')">邀请活动规则</u></p>
-      </div>
 
     </div>
 
@@ -45,16 +15,20 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :ImagePreview="true"
       :DomConvertImage="true"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
+
+    <Images></Images>
   </div>
 </template>
 
 <script>
   import Share from '../../components/Share.vue'
+  import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
   import { postRequest } from '../../utils/request'
@@ -77,14 +51,15 @@
     mounted () {
     },
     components: {
-      Share
+      Share,
+      Images
     },
     computed: {},
     methods: {
       // 警告框
       warn () {
         var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">' +
+        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">'+
           '支付（个人）：' + '</p>' +
           '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0; ">' +
           '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
@@ -142,10 +117,11 @@
     padding: 0;
     list-style: none;
   }
-
   .mui-content {
-    background: #FFFFFF;
+    background: #C0C1C0;
   }
+
+
 
   .Invitation_t {
     width: 100%;
@@ -163,63 +139,6 @@
     left: 0;
     right: 0;
     margin: auto;
-    animation: mymove 1s infinite;
-    -moz-animation: mymove 1s infinite; /* Firefox */
-    -webkit-animation: mymove 1s infinite; /* Safari and Chrome */
-    -o-animation: mymove 1s infinite; /* Opera */
-    animation-direction: alternate;
-    -webkit-animation-direction: alternate;
-  }
-
-  @keyframes mymove {
-    0% {
-      bottom: 0px;
-    }
-    50% {
-      bottom: 5px;
-    }
-    100% {
-      bottom: 0px;
-    }
-  }
-
-  @-moz-keyframes mymove /* Firefox */
-  {
-    0% {
-      bottom: 0px;
-    }
-    50% {
-      bottom: 5px;
-    }
-    100% {
-      bottom: 0px;
-    }
-  }
-
-  @-webkit-keyframes mymove /* Safari and Chrome */
-  {
-    0% {
-      bottom: 0px;
-    }
-    50% {
-      bottom: 5px;
-    }
-    100% {
-      bottom: 0px;
-    }
-  }
-
-  @-o-keyframes mymove /* Opera */
-  {
-    0% {
-      bottom: 0px;
-    }
-    50% {
-      bottom: 5px;
-    }
-    100% {
-      bottom: 0px;
-    }
   }
 
   /*　邀请成功的信息部分*/
@@ -262,12 +181,11 @@
     color: #808080;
     text-align: center;
   }
-
   .invitation-information li span {
     font-size: 13px;
     color: #FFFFFF;
     position: absolute;
-    right: 0;
+    right:0;
     right: 5%;
     top: 23%;
 
@@ -314,7 +232,6 @@
 
   }
 
-  /*动画效果*/
   .contactBtn p {
     width: 100%;
     height: 100%;
@@ -327,117 +244,7 @@
     font-weight: 500;
     z-index: 999;
     position: absolute;
-    animation: myrotate  1s infinite;
-    -moz-animation: myrotate 1s infinite; /* Firefox */
-    -webkit-animation: myrotate  1s infinite; /* Safari and Chrome */
-    -o-animation: myrotate  1s infinite; /* Opera */
-    animation-direction: alternate;
-    -webkit-animation-direction: alternate;
-
   }
-
-  @keyframes myrotate
-  {
-  0% {
-    transform: rotate(0deg);
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -moz-transform: rotate(0deg); /* Firefox */
-    -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-    -o-transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(3deg);
-    -ms-transform: rotate(3deg); /* IE 9 */
-    -moz-transform: rotate(3deg); /* Firefox */
-    -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
-    -o-transform: rotate(3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -moz-transform: rotate(0deg); /* Firefox */
-    -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-    -o-transform: rotate(0deg);
-  }
-  }
-
-  @-moz-keyframes myrotate /* Firefox */
-  {
-    0% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(3deg);
-      -ms-transform: rotate(3deg); /* IE 9 */
-      -moz-transform: rotate(3deg); /* Firefox */
-      -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
-      -o-transform: rotate(3deg);
-    }
-    100% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-  }
-
-  @-webkit-keyframes myrotate /* Safari and Chrome */
-  {
-    0% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(3deg);
-      -ms-transform: rotate(3deg); /* IE 9 */
-      -moz-transform: rotate(3deg); /* Firefox */
-      -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
-      -o-transform: rotate(3deg);
-    }
-    100% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-  }
-
-
-  @-o-keyframes myrotate /* Opera */
-  {
-    0% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(5deg);
-      -ms-transform: rotate(5deg); /* IE 9 */
-      -moz-transform: rotate(5deg); /* Firefox */
-      -webkit-transform: rotate(5deg); /* Safari 和 Chrome */
-      -o-transform: rotate(5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-      -ms-transform: rotate(0deg); /* IE 9 */
-      -moz-transform: rotate(0deg); /* Firefox */
-      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-      -o-transform: rotate(0deg);
-    }
-  }
-
-
 
   .contactBtn img {
     width: 41px;
@@ -488,13 +295,11 @@
     .Invitation_t {
       height: 280px;
     }
-
     .invitation-information li:nth-of-type(1) {
       width: 48%;
     }
-
     .invitation-information li:nth-of-type(2) {
-      width: 40%;
+      width:40%;
     }
 
   }
@@ -503,15 +308,9 @@
     .Invitation_img {
       height: 270px;
     }
-
-    .Invitation_t {
-      height: 322px;
-    }
-
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
-
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }
@@ -526,11 +325,9 @@
     .Invitation_t {
       height: 350px;
     }
-
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
-
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }

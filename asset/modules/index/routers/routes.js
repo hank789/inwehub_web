@@ -314,6 +314,22 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 邀请图片预览
+    path: '/invitation/preview',
+    name: 'invitation-preview',
+    meta: {
+      title: '图片预览',
+      keepAlive: true
+    },
+    component: require('../../../views/Invitation/Preview.vue'),
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的
     path: '/my',
     name: 'my',

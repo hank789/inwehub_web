@@ -1,13 +1,13 @@
 <template>
   <div>
     <div id="scaleWrapper" >
-      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; left: 0; right: 0; margin: auto" >
+      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; top:148px; left:55px; right:55px; margin: auto" >
         <div style="width:750px;">
           <div id="images_t"
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
             <img src="../../statics/images/logo_blue@3x.png" style="height:48px; margin-top: 20px; margin-left: 17px"/>
             <div style="width: 100%; height:183px;  position: relative;">
-              <img id="shareAvatar" src="../../statics/images/balance2.png"
+              <img id="shareAvatar" :src="inviterAvatar"
                    style="width:137.5px; height: width:137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
             </div>
             <div
@@ -70,10 +70,39 @@
   }
 </script>
 <style scoped>
-  #scaleWrapper {
-    transform-origin: center top;
-    -webkit-transform: scale(.5);
-    transform: scale(.5);
+
+
+  /* 适配*/
+  @media (min-width: 320px) {
+    #scaleWrapper {
+      transform-origin: left top;
+      -webkit-transform: scale(.37);
+      transform: scale(.37);
+      margin-top: 15px;
+
+    }
+
   }
+
+  @media (min-width: 375px) {
+    #scaleWrapper {
+      transform-origin: left top;
+      -webkit-transform: scale(.5);
+      transform: scale(.435);
+      margin-top: 5px;
+    }
+
+  }
+
+  @media (min-width: 414px) {
+    #scaleWrapper {
+      transform-origin: left top;
+      margin-left: 5%;
+      -webkit-transform: scale(.5);
+      transform: scale(.44);
+      margin-top: 25px;
+    }
+  }
+
 
 </style>
