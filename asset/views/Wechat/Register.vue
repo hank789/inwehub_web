@@ -143,7 +143,7 @@
             if (window.mui.os.plus) {
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
             } else {
-              this.$router.replace({path: this.redirect})
+              this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + this.$route.query.openid})
             }
           }))
         } else {
