@@ -34,6 +34,17 @@ function dowloadFile (uri, path, callback) {
   })
 }
 
+function getLocalUrl (path, callback) {
+  window.mui.plusReady(() => {
+    var newurl = window.plus.io.convertLocalFileSystemURL(path)
+    window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+      var newurl = entry.toRemoteURL()
+      callback(newurl)
+    })
+  })
+}
+
 export {
-  dowloadFile
+  dowloadFile,
+  getLocalUrl
 }

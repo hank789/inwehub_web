@@ -53,12 +53,14 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
+  import { getLocalUrl } from '../utils/plus'
 
   export default {
     data () {
       return {
         createImaged: false,  // 是否已创建图片
-        imagePath: '_www/share.jpeg'  // 图片文件路径名称
+        imagePath: '_www/share.jpeg',  // 图片文件路径名称
+        shareImageUrl: ''
       }
     },
     components: {},
@@ -164,8 +166,16 @@
           return false
         }
         if (this.createImaged) {
+          var data = {
+            title: '',
+            link: '',
+            content: '',
+            imageUrl: this.imagePath,
+            thumbUrl: this.imagePath
+          }
+          Share.setData(data)
           if (callback) {
-            callback()
+            callback(this.shareImageUrl)
           }
         } else {
           var node = document.getElementById(this.DomConvertImageId)
@@ -186,7 +196,6 @@
                   quality: 100
                 }, () => {
                   console.log('保存成功')
-
                   var data = {
                     title: '',
                     link: '',
@@ -200,7 +209,10 @@
                   window.mui.closeWaiting()
 
                   if (callback) {
-                    callback()
+                    getLocalUrl(this.imagePath, (url) => {
+                      this.shareImageUrl = url
+                      callback(url)
+                    })
                   }
                 }, () => {
                   console.log('保存失败')
@@ -215,28 +227,18 @@
         this.$router.pushPlus('/invitation/preview')
       },
       shareImageToHaoyou () {
-        var node = document.getElementById(this.DomConvertImageId)
-        if (node) {
-          setTimeout(() => {
-            this.createImage(() => {
-              if (this.sendHaoyou) {
-                this.sendHaoyou()
-              }
-            })
-          }, 100)
-        }
+        this.createImage(() => {
+          if (this.sendHaoyou) {
+            this.sendHaoyou()
+          }
+        })
       },
       shareImageToPengyouQuan () {
-        var node = document.getElementById(this.DomConvertImageId)
-        if (node) {
-          setTimeout(() => {
-            this.createImage(() => {
-              if (this.sendPengYouQuan) {
-                this.sendPengYouQuan()
-              }
-            })
-          }, 100)
-        }
+        this.createImage(() => {
+          if (this.sendPengYouQuan) {
+            this.sendPengYouQuan()
+          }
+        })
       },
       successCallback () {
         this.$emit('success')
