@@ -53,7 +53,6 @@
     <Images></Images>
 
 
-
   </div>
 </template>
 
@@ -90,7 +89,7 @@
       // 警告框
       warn () {
         var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">'+
+        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">' +
           '支付（个人）：' + '</p>' +
           '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0; ">' +
           '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
@@ -169,6 +168,63 @@
     left: 0;
     right: 0;
     margin: auto;
+    animation: mymove 1s infinite;
+    -moz-animation: mymove 1s infinite; /* Firefox */
+    -webkit-animation: mymove 1s infinite; /* Safari and Chrome */
+    -o-animation: mymove 1s infinite; /* Opera */
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+  }
+
+  @keyframes mymove {
+    0% {
+      bottom: 0px;
+    }
+    50% {
+      bottom: 5px;
+    }
+    100% {
+      bottom: 0px;
+    }
+  }
+
+  @-moz-keyframes mymove /* Firefox */
+  {
+    0% {
+      bottom: 0px;
+    }
+    50% {
+      bottom: 5px;
+    }
+    100% {
+      bottom: 0px;
+    }
+  }
+
+  @-webkit-keyframes mymove /* Safari and Chrome */
+  {
+    0% {
+      bottom: 0px;
+    }
+    50% {
+      bottom: 5px;
+    }
+    100% {
+      bottom: 0px;
+    }
+  }
+
+  @-o-keyframes mymove /* Opera */
+  {
+    0% {
+      bottom: 0px;
+    }
+    50% {
+      bottom: 5px;
+    }
+    100% {
+      bottom: 0px;
+    }
   }
 
   /*　邀请成功的信息部分*/
@@ -211,11 +267,12 @@
     color: #808080;
     text-align: center;
   }
+
   .invitation-information li span {
     font-size: 13px;
     color: #FFFFFF;
     position: absolute;
-    right:0;
+    right: 0;
     right: 5%;
     top: 23%;
 
@@ -262,6 +319,7 @@
 
   }
 
+  /*动画效果*/
   .contactBtn p {
     width: 100%;
     height: 100%;
@@ -274,7 +332,117 @@
     font-weight: 500;
     z-index: 999;
     position: absolute;
+    animation: myrotate  1s infinite;
+    -moz-animation: myrotate 1s infinite; /* Firefox */
+    -webkit-animation: myrotate  1s infinite; /* Safari and Chrome */
+    -o-animation: myrotate  1s infinite; /* Opera */
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+
   }
+
+  @keyframes myrotate
+  {
+  0% {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -moz-transform: rotate(0deg); /* Firefox */
+    -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+    -o-transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3deg);
+    -ms-transform: rotate(3deg); /* IE 9 */
+    -moz-transform: rotate(3deg); /* Firefox */
+    -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
+    -o-transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -moz-transform: rotate(0deg); /* Firefox */
+    -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+    -o-transform: rotate(0deg);
+  }
+  }
+
+  @-moz-keyframes myrotate /* Firefox */
+  {
+    0% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(3deg);
+      -ms-transform: rotate(3deg); /* IE 9 */
+      -moz-transform: rotate(3deg); /* Firefox */
+      -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
+      -o-transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+  }
+
+  @-webkit-keyframes myrotate /* Safari and Chrome */
+  {
+    0% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(3deg);
+      -ms-transform: rotate(3deg); /* IE 9 */
+      -moz-transform: rotate(3deg); /* Firefox */
+      -webkit-transform: rotate(3deg); /* Safari 和 Chrome */
+      -o-transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+  }
+
+
+  @-o-keyframes myrotate /* Opera */
+  {
+    0% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(5deg);
+      -ms-transform: rotate(5deg); /* IE 9 */
+      -moz-transform: rotate(5deg); /* Firefox */
+      -webkit-transform: rotate(5deg); /* Safari 和 Chrome */
+      -o-transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
+      -moz-transform: rotate(0deg); /* Firefox */
+      -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+  }
+
+
 
   .contactBtn img {
     width: 41px;
@@ -325,11 +493,13 @@
     .Invitation_t {
       height: 280px;
     }
+
     .invitation-information li:nth-of-type(1) {
       width: 48%;
     }
+
     .invitation-information li:nth-of-type(2) {
-      width:40%;
+      width: 40%;
     }
 
   }
@@ -338,9 +508,15 @@
     .Invitation_img {
       height: 270px;
     }
+
+    .Invitation_t {
+      height: 322px;
+    }
+
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
+
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }
@@ -355,9 +531,11 @@
     .Invitation_t {
       height: 350px;
     }
+
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
+
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }

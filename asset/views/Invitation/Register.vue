@@ -6,7 +6,14 @@
           <use xlink:href="#icon-logolanse"></use>
         </svg>
         <div class="privilege_avatar">
-          <img :src="inviterAvatar"/>
+          <div class="outermost">
+            <div class="middle">
+              <div class="innermost">
+                <img :src="inviterAvatar"/>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="privilege_share">
           <span>{{ inviterName }}向你发送了特权～</span>
@@ -346,7 +353,6 @@
   .privilege_T {
     width: 100%;
     height: 602px;
-
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
 
   }
@@ -363,6 +369,19 @@
     position: relative;
     top: -25px;
     /*border:1px solid #000000;*/
+  }
+
+  .innermost{
+    width: 73px;
+    height: 73px;
+    border-radius: 50%;
+    background:#81868A;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
   }
 
   .privilege_avatar img {
@@ -475,7 +494,7 @@
     border: none;
     font-size: 14px;
     color: #FFFFFF;
-    margin-left: -3.5px;
+    margin-left: -3px;
   }
 
   .privilege_verification ul li input::-webkit-input-placeholder {
@@ -502,7 +521,7 @@
   }
 
   .privilege_verification ul li span {
-    width: 25%;
+    width: 28%;
     height: 30px;
     border: 0.5px solid #808080;
     border-radius: 5px;
@@ -534,7 +553,7 @@
 
   .privilege_verification ul li:nth-of-type(1):after {
     position: absolute;
-    right: 30%;
+    right: 34%;
     bottom: 3px;
     left: 2%;
     height: 1px;
