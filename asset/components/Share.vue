@@ -92,7 +92,7 @@
 
     methods: {
       isShowSharePng () {
-        return true // !!window.mui.os.plus
+        return !!window.mui.os.android
       },
       bindShare () {
         var data = {
@@ -193,13 +193,16 @@
         var node = document.getElementById(this.DomConvertImageId)
         if (node) {
           node.style.display = 'block'
+
+          setTimeout(() => {
+            this.saveImage(() => {
+              node.style.display = 'none'
+              if (this.sendHaoyou) {
+                this.sendHaoyou()
+              }
+            })
+          }, 100)
         }
-        this.saveImage(() => {
-          node.style.display = 'none'
-          if (this.sendHaoyou) {
-            this.sendHaoyou()
-          }
-        })
       },
       successCallback () {
         this.$emit('success')

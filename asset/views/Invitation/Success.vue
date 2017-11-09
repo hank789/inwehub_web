@@ -32,6 +32,8 @@
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
+
+    <Images></Images>
   </div>
 </template>
 
@@ -39,6 +41,7 @@
   import Share from '../../components/Share.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
+  import Images from '../../components/invitation/image.vue'
 
   const Index = {
     data: () => ({
@@ -59,7 +62,8 @@
       this.shareOption = getInvitation(user.name, this.rcCode)
     },
     components: {
-      Share
+      Share,
+      Images
     },
     computed: {},
     methods: {

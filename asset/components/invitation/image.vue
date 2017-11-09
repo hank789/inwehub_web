@@ -7,7 +7,7 @@
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
             <img src="../../statics/images/logo_blue@3x.png" style="height:48px; margin-top: 20px; margin-left: 17px"/>
             <div style="width: 100%; height:183px;  position: relative;">
-              <img src="../../statics/images/balance2.png"
+              <img id="shareAvatar" src="../../statics/images/balance2.png"
                    style="width:137.5px; height: width:137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
             </div>
             <div
@@ -37,7 +37,37 @@
   </div>
 </template>
 <script>
+  import { getLocalUserInfo } from '../../utils/user'
+  import { dowloadFile } from '../../utils/plus'
 
+  export default {
+    data () {
+      return {
+        rcCode: '',
+        inviterName: '',
+        inviterAvatar: ''
+      }
+    },
+    components: {},
+
+    methods: {
+      downloadUrl (uri) {
+        dowloadFile(uri, '_downloads/shareavatar.jpeg', (url) => {
+          document.getElementById('shareAvatar').src = url
+        })
+      }
+    },
+    mounted () {
+
+    },
+    created () {
+      var user = getLocalUserInfo()
+      this.rcCode = user.rc_code || 0
+      this.inviterName = user.name
+      this.inviterAvatar = user.avatar_url
+      this.downloadUrl(this.inviterAvatar)
+    }
+  }
 </script>
 <style scoped>
   #scaleWrapper {
