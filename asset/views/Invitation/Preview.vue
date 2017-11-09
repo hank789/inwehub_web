@@ -5,7 +5,7 @@
       <h1 class="mui-title">图片预览</h1>
     </header>
     <div class="mui-content absolute">
-      <Images></Images>
+      <Images ref="imagesCommponent" @imageMounted="imageMounted"></Images>
     </div>
 
     <Share
@@ -21,8 +21,6 @@
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
-
-
   </div>
 </template>
 
@@ -56,10 +54,15 @@
     },
     computed: {},
     methods: {
-      // 警告框
+      imageMounted () {
+        this.$refs.ShareBtn.createImage((url) => {
+          this.$refs.imagesCommponent.changeImage(url)
+          this.$refs.ShareBtn.share()
+        })
+      },
       warn () {
         var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">'+
+        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">' +
           '支付（个人）：' + '</p>' +
           '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0; ">' +
           '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
@@ -117,11 +120,10 @@
     padding: 0;
     list-style: none;
   }
+
   .mui-content {
     background: #C0C1C0;
   }
-
-
 
   .Invitation_t {
     width: 100%;
@@ -181,11 +183,12 @@
     color: #808080;
     text-align: center;
   }
+
   .invitation-information li span {
     font-size: 13px;
     color: #FFFFFF;
     position: absolute;
-    right:0;
+    right: 0;
     right: 5%;
     top: 23%;
 
@@ -295,11 +298,13 @@
     .Invitation_t {
       height: 280px;
     }
+
     .invitation-information li:nth-of-type(1) {
       width: 48%;
     }
+
     .invitation-information li:nth-of-type(2) {
-      width:40%;
+      width: 40%;
     }
 
   }
@@ -308,9 +313,11 @@
     .Invitation_img {
       height: 270px;
     }
+
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
+
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }
@@ -325,9 +332,11 @@
     .Invitation_t {
       height: 350px;
     }
+
     .invitation-information li:nth-of-type(1) {
       width: 42%;
     }
+
     .invitation-information li:nth-of-type(2) {
       width: 36%;
     }
