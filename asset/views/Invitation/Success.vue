@@ -11,7 +11,7 @@
         <p>您的特权已领取～</p>
         <p>登录InweHub使用吧！</p>
       </div>
-      <button>下载APP</button>
+      <button @tap.stop.prevent="downloadApp()">下载APP</button>
       <div class="succcess_share" @tap.stop.prevent="share()">
         分享特权给好友
 
@@ -63,6 +63,9 @@
     },
     computed: {},
     methods: {
+      downloadApp () {
+        window.open('http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp')
+      },
       share () {
         this.$refs.ShareBtn.share()
       },
