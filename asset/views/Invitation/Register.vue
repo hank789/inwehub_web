@@ -6,13 +6,10 @@
           <use xlink:href="#icon-logolanse"></use>
         </svg>
         <div class="privilege_avatar">
-          <div class="outermost">
-            <div class="middle">
-              <div class="innermost">
-                <img :src="inviterAvatar"/>
-              </div>
-            </div>
-          </div>
+          <div class="outermost"></div>
+          <div class="innermost"></div>
+          <img :src="inviterAvatar"/>
+
 
         </div>
         <div class="privilege_share">
@@ -371,23 +368,130 @@
     /*border:1px solid #000000;*/
   }
 
-  .innermost{
-    width: 73px;
-    height: 73px;
+  .outermost {
+    width: 93px;
+    height: 93px;
     border-radius: 50%;
-    background:#81868A;
+    background: #767a80;
+    opacity: 0.3;
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     margin: auto;
+    opacity: 0;
+    z-index: 9;
+    animation: myapper  2s 0.3s infinite;
+    -moz-animation: myapper 2s  0.3s infinite; /* Firefox */
+    -webkit-animation: myapper 2s 0.3s  infinite; /* Safari and Chrome */
+    -o-animation: myapper  2s  0.3s infinite; /* Opera */
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
   }
+  @keyframes myapper {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-moz-keyframes myapper /* Firefox */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes myapper /* Safari and Chrome */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-o-keyframes myapper /* Opera */
+  {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+  .innermost {
+    width: 73px;
+    height: 73px;
+    border: 10px solid yellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: 11;
+
+    animation: myopactity 2s infinite;
+    -moz-animation: myopactity 2s infinite; /* Firefox */
+    -webkit-animation: myopactity 2s infinite; /* Safari and Chrome */
+    -o-animation: myopactity 2s infinite; /* Opera */
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+  }
+  /*@keyframes myopactity {*/
+    /*0% {*/
+      /*opacity: 1;*/
+    /*}*/
+    /*100% {*/
+      /*opacity: 0;*/
+    /*}*/
+  /*}*/
+
+  /*@-moz-keyframes myopactity !* Firefox *!*/
+  /*{*/
+    /*0% {*/
+      /*opacity: 1;*/
+    /*}*/
+    /*100% {*/
+      /*opacity: 0;*/
+    /*}*/
+  /*}*/
+
+  /*@-webkit-keyframes myopactity !* Safari and Chrome *!*/
+  /*{*/
+    /*0% {*/
+      /*opacity: 1;*/
+    /*}*/
+    /*100% {*/
+      /*opacity: 0;*/
+    /*}*/
+  /*}*/
+
+  /*@-o-keyframes myopactity!* Opera *!*/
+  /*{*/
+    /*0% {*/
+      /*opacity: 1;*/
+    /*}*/
+    /*100% {*/
+      /*opacity: 0;*/
+    /*}*/
+  /*}*/
 
   .privilege_avatar img {
     width: 73px;
     height: 73px;
-    border: 2px solid #DBDCDB;
+    border: 2px solid #A0A7AC;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -395,6 +499,7 @@
     right: 0;
     left: 0;
     margin: auto;
+    z-index: 12;
   }
 
   /*分享现金红包cash*/
@@ -425,7 +530,7 @@
     transform: rotate(0deg);
     left: 0px;
     right: 0;
-    top: -10px;
+    top: -9px;
     margin: auto;
 
   }

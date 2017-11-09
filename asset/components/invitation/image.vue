@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="scaleWrapper" >
-      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; left: 0; right: 0; margin: auto" >
+      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; top:88px; left: 0; right: 0; margin: auto" >
         <div style="width:750px;">
           <div id="images_t"
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
@@ -70,10 +70,33 @@
   }
 </script>
 <style scoped>
-  #scaleWrapper {
-    transform-origin: center top;
-    -webkit-transform: scale(.5);
-    transform: scale(.5);
+  /* 适配*/
+  @media (min-width: 320px) {
+    #scaleWrapper {
+      transform-origin: left top;
+      -webkit-transform: scale(.43);
+      transform: scale(.43);
+    }
+
   }
+
+  @media (min-width: 375px) {
+    #scaleWrapper {
+      transform-origin: left top;
+      -webkit-transform: scale(.5);
+      transform: scale(.5);
+    }
+
+  }
+
+  @media (min-width: 414px) {
+    #scaleWrapper {
+      transform-origin: center top;
+      margin-left: 5%;
+      -webkit-transform: scale(.5);
+      transform: scale(.5);
+    }
+  }
+
 
 </style>
