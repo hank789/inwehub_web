@@ -117,10 +117,11 @@
     padding: 0;
     list-style: none;
   }
-
   .mui-content {
-    background: #FFFFFF;
+    background: #C0C1C0;
   }
+
+
 
   .Invitation_t {
     width: 100%;
