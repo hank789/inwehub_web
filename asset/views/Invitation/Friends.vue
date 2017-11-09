@@ -5,47 +5,63 @@
       <h1 class="mui-title">我邀请的好友</h1>
     </header>
     <div class="mui-content">
-      <ul>
-          <li>
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'activity/inviteRegister/myList'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        class="listWrapper">
+        <ul>
+          <li v-for="(item, index) in list" >
             <p class="avatar">
-              <img src="../../statics/images/balance2.png">
-              
+              <img :src="item.user_avatar_url">
+              <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
             </p>
             <div class="information">
-              <p>张大红</p>
-              <p>2017/10/25注册</p>
+              <p>{{item.user_name}}</p>
+              <p>{{item.register_at}}注册</p>
             </div>
             <div class="profit">
-              <p>收益：￥5</p>
-              <p>支付：￥100</p>
+              <p>收益：￥{{item.reward_money}}</p>
+              <p>支付：￥{{item.paid_money}}</p>
             </div>
 
             <i class="bot"></i>
           </li>
-        <li>
-          <p class="avatar">
-            <img src="../../statics/images/balance2.png">
-          </p>
-          <div class="information">
-            <p>张大红</p>
-            <p>2017/10/25注册</p>
-          </div>
-          <div class="profit">
-            <p>收益：￥5</p>
-            <p>支付：￥100</p>
-          </div>
 
-          <i class="bot"></i>
-        </li>
-
-      </ul>
+        </ul>
+      </RefreshList>
 
     </div>
   </div>
 </template>
 
 <script>
+  import RefreshList from '../../components/refresh/List.vue'
 
+  const InvitationFriends = {
+    data: () => ({
+      list: []
+    }),
+    created () {
+
+    },
+    computed: {},
+    components: {
+      RefreshList
+    },
+    methods: {},
+    mounted () {
+
+    },
+    updated () {
+
+    }
+  }
+  export default InvitationFriends
 </script>
 
 <style scoped>
@@ -64,9 +80,11 @@
     list-style: none;
     font-style: normal;
   }
+
   .mui-content {
     background: #FFFFFF;
   }
+
   .bot {
     position: absolute;
     right: 0px;
@@ -77,49 +95,66 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  ul{
-    width:100%;
+
+  ul {
+    width: 100%;
     overflow: hidden;
-    padding:12px 16px 0 16px;
+    padding: 0px 16px;
   }
-  ul li{
-    width:100%;
-    height:64px;
+
+  ul li {
+    width: 100%;
+    height: 64px;
     position: relative;
   }
- .avatar{
-    width:44px;
-    height:44px;
+
+  .avatar {
+    width: 44px;
+    height: 44px;
     margin-top: 10px;
     border-radius: 50%;
     float: left;
+    position: relative;
   }
-  .avatar img{
-    width:100%;
-    height:100%;
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
   }
-  .information{
+
+  .avatar svg {
+    position: absolute;
+    font-size: 20px;
+    right: -5px;
+    bottom: 0px;
+  }
+
+  .information {
     float: left;
     margin-top: 11px;
     margin-left: 8px;
   }
-  .information p:nth-of-type(1){
-    font-size:14px;
-    color:#565656;
+
+  .information p:nth-of-type(1) {
+    font-size: 14px;
+    color: #565656;
   }
-  .information p:nth-of-type(2){
-    font-size:12px;
-    color:#b4b4b6;
+
+  .information p:nth-of-type(2) {
+    font-size: 12px;
+    color: #b4b4b6;
   }
-  .profit{
+
+  .profit {
     float: right;
     margin-top: 11px;
     margin-right: 10px;
   }
-  .profit p{
-    font-size:13px;
-    color:#808080;
+
+  .profit p {
+    font-size: 13px;
+    color: #808080;
   }
 
 
