@@ -5,7 +5,7 @@
       <h1 class="mui-title">图片预览</h1>
     </header>
     <div class="mui-content absolute">
-
+      <Images></Images>
     </div>
 
     <Share
@@ -22,7 +22,7 @@
       @fail="shareFail"
     ></Share>
 
-    <Images></Images>
+
   </div>
 </template>
 

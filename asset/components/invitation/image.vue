@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="scaleWrapper" >
-      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; position: absolute; top:148px; left:55px; right:55px; margin: auto" >
+      <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; " >
         <div style="width:750px;">
           <div id="images_t"
                style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
@@ -76,9 +76,11 @@
   @media (min-width: 320px) {
     #scaleWrapper {
       transform-origin: left top;
-      -webkit-transform: scale(.37);
-      transform: scale(.37);
-      margin-top: 15px;
+      -webkit-transform: scale(.356);
+      transform: scale(.356);
+      position: absolute;
+      top: 30px;
+      left: 27.5px;
 
     }
 
@@ -87,9 +89,11 @@
   @media (min-width: 375px) {
     #scaleWrapper {
       transform-origin: left top;
-      -webkit-transform: scale(.5);
-      transform: scale(.435);
-      margin-top: 5px;
+      -webkit-transform: scale(.43);
+      transform: scale(.43);
+      position: absolute;
+      top: 30px;
+      left: 27.5px
     }
 
   }
@@ -99,8 +103,11 @@
       transform-origin: left top;
       margin-left: 5%;
       -webkit-transform: scale(.5);
-      transform: scale(.44);
-      margin-top: 25px;
+      transform: scale(.48);
+      position: absolute;
+      top: 30px;
+      left: 5px;
+
     }
   }
 
