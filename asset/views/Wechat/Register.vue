@@ -119,7 +119,7 @@
         if (/invitation/.test(this.redirect)) {
           var token = this.$route.query.token || ''
           var openid = this.$route.query.openid || ''
-          this.$router.replace({path: redirect + '&token=' + token + '&openid=' + openid})
+          this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + openid})
           return
         }
       },
