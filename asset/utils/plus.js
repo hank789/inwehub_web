@@ -71,8 +71,35 @@ function saveImageByBase64 (base64, dest, callback) {
   })
 }
 
+function createImageThumb (path, dest, callback) {
+  window.mui.plusReady(() => {
+    window.plus.zip.compressImage({
+      src: path,
+      dst: dest,
+      overwrite: true,
+      width: '100px',
+      quality: 20},
+      function (event) {
+        var newurl = window.plus.io.convertLocalFileSystemURL(event.target)
+        if (window.mui.os.ios) {
+          newurl = 'file://' + newurl
+        }
+
+        window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+          var localUrl = entry.toRemoteURL()
+          callback(localUrl)
+        }, function (error) {
+          alert(error.message)
+        })
+      }, function (error) {
+        alert('Compress error!' + error.message)
+      })
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
+  createImageThumb,
   saveImageByBase64
 }
