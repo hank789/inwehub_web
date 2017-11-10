@@ -592,7 +592,7 @@
   }
 
   .privilege_verification ul li input {
-    width: 60%;
+    width: 50%;
     height: 80%;
     float: left;
     background: #595D60;
@@ -626,7 +626,8 @@
   }
 
   .privilege_verification ul li span {
-    width: 28%;
+    /*width: 35%;*/
+    padding:0 10px;
     height: 30px;
     border: 0.5px solid #808080;
     border-radius: 5px;
@@ -658,7 +659,7 @@
 
   .privilege_verification ul li:nth-of-type(1):after {
     position: absolute;
-    right: 34%;
+    /*right: 34%;*/
     bottom: 3px;
     left: 2%;
     height: 1px;
@@ -766,5 +767,25 @@
     background-size: 100% 100%;
   }
 
+ /* 适配*/
+  @media (min-width: 320px) {
+   .privilege_verification ul li:nth-of-type(1):after {
+      right: 40%;
+   }
 
+  }
+
+  @media (min-width: 375px) {
+    .privilege_verification ul li:nth-of-type(1):after {
+      
+         right: 36%;
+   }
+
+  }
+
+  @media (min-width: 414px) {
+   .privilege_verification ul li:nth-of-type(1):after {
+        right: 34%;
+   }
+  }
 </style>
