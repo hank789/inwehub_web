@@ -169,9 +169,9 @@
               clearAllWebViewCache()
 
               if (window.mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
               } else {
-                this.$router.replace(this.redirect)
+                this.$router.replace('/invitation/success')
               }
             }))
           })
