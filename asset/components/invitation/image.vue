@@ -4,7 +4,7 @@
       <div class="loadding">图片生成中...</div>
       <div id="scaleDivWrapper">
         <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; ">
-          <div style="width:750px;">
+          <div style="width:750px;position: relative">
             <div id="images_t"
                  style="width:100%; height:890px;  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1))); position: relative">
               <img src="../../statics/images/logo_blue@3x.png"
@@ -34,8 +34,12 @@
               </div>
 
             </div>
+            <div style="width: 100%; height:983px;">
+
+            </div>
             <img src="../../statics/images/invitation_img@3x.png"
-                 style="width: 100%; position: relative; top: -260px; ">
+                 style="width: 100%;  position: absolute;bottom:0;">
+
           </div>
         </div>
       </div>
