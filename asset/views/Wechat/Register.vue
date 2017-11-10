@@ -115,13 +115,11 @@
     },
     methods: {
       checkRcCode () {
-        var rcCode = this.$route.query.rc_code
-        if (rcCode) {
-          this.redirect = this.$route.query.redirect || '/my'
-          var redirect = /\?/.test(this.redirect) ? this.redirect + '&' : this.redirect + '?'
+        this.redirect = this.$route.query.redirect || '/my'
+        if (/invitation/.test(this.redirect)) {
           var token = this.$route.query.token || ''
           var openid = this.$route.query.openid || ''
-          this.$router.replace({path: redirect + 'token=' + token + '&openid=' + openid})
+          this.$router.replace({path: redirect + '&token=' + token + '&openid=' + openid})
           return
         }
       },
