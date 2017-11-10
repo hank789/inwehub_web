@@ -4,8 +4,8 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">邀请注册</h1>
     </header>
-    <div class="mui-content absolute">
-      <div class="Invitation_t ">
+    <div class="mui-content">
+      <div class="Invitation_t">
         <img src="../../statics/images/invitation-register.png" class="Invitation_img"/>
       </div>
 
@@ -36,8 +36,6 @@
         <p>点击呼朋唤友并分享链接，既是同意 <u @tap.stop.prevent="$router.pushPlus('/protocol/invitation')">邀请活动规则</u></p>
       </div>
 
-    </div>
-
     <Share
       ref="ShareBtn"
       :title="shareOption.title"
@@ -50,6 +48,7 @@
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
+    </div>
   </div>
 </template>
 
@@ -145,6 +144,7 @@
 
   .mui-content {
     background: #FFFFFF;
+    height:100%;
   }
 
   .Invitation_t {
