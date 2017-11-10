@@ -151,7 +151,7 @@
     width: 100%;
     /*height:322px;*/
     background: #FFFFFF url("../../statics/images/invitation-bg@2x.png") no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 90%;
     position: relative;
   }
 
@@ -159,7 +159,7 @@
     width: 95%;
     /*height:270px;*/
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     left: 0;
     right: 0;
     margin: auto;
@@ -228,7 +228,7 @@
     height: 88.5px;
     /*border: 1px solid #cccccc;*/
     background: #FFFFFF;
-    margin-top: 5px;
+    margin:10px 0;
     padding: 0px 25px;
   }
 
@@ -482,7 +482,7 @@
   /* 适配*/
   @media (min-width: 320px) {
     .Invitation_img {
-      height: 230px;
+      height: 240px;
     }
 
     .Invitation_t {
@@ -501,7 +501,7 @@
 
   @media (min-width: 375px) {
     .Invitation_img {
-      height: 270px;
+      height: 280px;
     }
 
     .Invitation_t {
@@ -520,7 +520,7 @@
 
   @media (min-width: 414px) {
     .Invitation_img {
-      height: 280px;
+      height: 300px;
     }
 
     .Invitation_t {
