@@ -241,14 +241,7 @@ const routes = [
       title: '邀请分享图片页',
       keepAlive: true
     },
-    component: require('../../../components/invitation/image.vue'),
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
+    component: require('../../../components/invitation/image.vue')
   },
   { // 邀请好友分享页
     path: '/invitation/info',
@@ -257,14 +250,7 @@ const routes = [
       title: '邀请好友分享页',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/Info.vue'),
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/Invitation/Info.vue')
   },
   { // 邀请好友注册页
     path: '/invitation/register',
@@ -273,14 +259,7 @@ const routes = [
       title: '邀请好友注册页',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/Register.vue'),
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/Invitation/Register.vue')
   },
   { // 邀请首页
     path: '/invitation/index',

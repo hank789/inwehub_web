@@ -319,9 +319,9 @@
               cb(user)
               window.mixpanelIdentify()
               if (window.mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
               } else {
-                this.$router.replace({path: this.redirect})
+                this.$router.replace('/invitation/success')
               }
             }))
           })
