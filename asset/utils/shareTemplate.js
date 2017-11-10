@@ -39,9 +39,9 @@ function getInvitation (username, rcCode) {
   var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
-    title: username + '邀请您注册',
+    title: username + '邀请您加入InweHub',
     link: link,
-    content: '邀请好友注册立享5%现金分红',
+    content: '受邀请特权与福利，点击领取',
     imageUrl: whiteLogo,
     thumbUrl: whiteLogo
   }

@@ -96,10 +96,12 @@
       }
     },
     created () {
-      this.checkRcCode()
-      this.checkToken()
-      this.getOpenId()
-      this.checkCache()
+      var isContinue = this.checkRcCode()
+      if (isContinue) {
+        this.checkToken()
+        this.getOpenId()
+        this.checkCache()
+      }
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
@@ -120,8 +122,9 @@
           var token = this.$route.query.token || ''
           var openid = this.$route.query.openid || ''
           this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + openid})
-          return
+          return false
         }
+        return true
       },
       checkCache () {
         var cache = localEvent.getLocalItem('wechatInfo')
