@@ -115,6 +115,9 @@
 
     methods: {
       isShowSharePng () {
+        if (window.mui.os.wechat) {
+          return false
+        }
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
       },
       bindShare () {
