@@ -84,6 +84,9 @@
     },
     methods: {
       stopShowOpenApp () {
+        if (this.$route.path === '/invitation/image') {
+          return true
+        }
         var stopShowOpenApp = localEvent.getLocalItem('stopShowOpenApp')
         if (stopShowOpenApp.stop && stopShowOpenApp.stop === true) {
           return true

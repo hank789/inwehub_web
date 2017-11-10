@@ -29,7 +29,6 @@
   import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
-  import { postRequest } from '../../utils/request'
 
   const Index = {
     data: () => ({
@@ -47,6 +46,11 @@
       loading: true
     }),
     mounted () {
+      if (!window.mui.os.android) {
+        setTimeout(() => {
+          this.getImage()
+        }, 1000)
+      }
     },
     components: {
       Share,
@@ -60,54 +64,22 @@
           this.$refs.ShareBtn.share()
         })
       },
-      warn () {
-        var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">' +
-          '支付（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0; ">' +
-          '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
-          '<p style="text-align: left; font-size:14px; rgb(68,68,68); margin: 0;">' +
-          '支付（企业）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0;">' +
-          '服务购买 项目结款 实施费用 咨询费用 合作费用' + '</p>' +
-          '<p style="text-align: left; font-size:14px; rgb(68,68,68); margin-top: 20px; margin-bottom: 0">' +
-          '收益（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0;">' +
-          '解答收益 围观收益 服务收益 项目收益 实施收益 咨询收益 合作收益 任务收益' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin-top: 20px; margin-bottom: 0">' +
-          '*个人分成奖励累积超过5万元，平台可能会代征缴个税，5万元以下请自行主动申报' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin-top: 20px; margin-bottom: 0">' +
-          '*为相应配合国家税务总局，平台会根据相关部分要求，向其提供个人收益分红记录。' + '</p>'
-
-        // var btnArray = ['取消', '确认'];
-        window.mui.alert(font, title, function () {}, 'div')
-      },
-      getDetail () {
-        postRequest('activity/inviteRegister/introduce', {rc_code: this.rcCode})
-          .then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.toast(response.data.message)
-              return
-            }
-            this.invitedUsersCount = response.data.data.invited_users
-            this.rewardMoney = response.data.data.reward_money
-          })
-      },
-      share () {
-        this.$refs.ShareBtn.share()
-      },
       shareSuccess () {
 
       },
       shareFail () {
+      },
+      getImage () {
+        this.$refs.ShareBtn.getImageByServer((url) => {
+          this.$refs.imagesCommponent.changeImage(url)
+          this.$refs.ShareBtn.share()
+        })
       }
     },
     created () {
       var user = getLocalUserInfo()
       this.rcCode = user.rc_code || 0
       this.shareOption = getInvitation(user.name, this.rcCode)
-      this.getDetail()
     }
   }
   export default Index

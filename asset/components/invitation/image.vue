@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="scaleWrapper">
-      <div>图片生成中...</div>
+      <div class="loadding">图片生成中...</div>
       <div id="scaleDivWrapper">
         <div id="shareContentWrapper" style="display:block; width:750px; background: #EBECED; ">
           <div style="width:750px;">
@@ -66,6 +66,7 @@
         })
       },
       changeImage (url) {
+        console.log('changeimage:' + url)
         this.createImaged = true
         document.getElementById('scaleWrapper').innerHTML = '<div style="background-image:url(' + url + ');width:100%;height:1000px;background-size: contain;background-repeat: no-repeat;"/>'
       }
@@ -78,8 +79,10 @@
       this.rcCode = user.rc_code || 0
       this.inviterName = user.name
       this.inviterAvatar = user.avatar_url
-      this.downloadUrl(this.inviterAvatar)
       this.link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + this.rcCode
+      if (window.mui.os.android) {
+        this.downloadUrl(this.inviterAvatar)
+      }
     }
   }
 </script>
@@ -95,5 +98,19 @@
     transform-origin: left top;
     -webkit-transform: scale(.5);
     transform: scale(.5);
+  }
+
+  .onlyImage #scaleWrapper{
+    padding:0;
+    height:2138px;
+    overflow-y: hidden;
+  }
+  .onlyImage #scaleDivWrapper{
+    top:0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  .onlyImage .loadding{
+    display: none;
   }
 </style>

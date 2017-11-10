@@ -53,7 +53,7 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64 } from '../utils/plus'
 
   export default {
     data () {
@@ -115,7 +115,7 @@
 
     methods: {
       isShowSharePng () {
-        return !!window.mui.os.android
+        return window.mui.os.plus // !!window.mui.os.android
       },
       bindShare () {
         var data = {
@@ -313,6 +313,31 @@
       },
       hide () {
 
+      },
+      getImageByServer (callback) {
+        // var node = document.getElementById(this.DomConvertImageId)
+        var url = process.env.H5_ROOT + '/?#/invitation/image'
+        postRequest('system/htmlToImage', {html: url})
+          .then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            saveImageByBase64(response.data.data.image, this.imagePath, (url) => {
+              var data = {
+                title: '',
+                link: '',
+                content: '',
+                imageUrl: this.imagePath,
+                thumbUrl: this.imagePath
+              }
+              Share.setData(data)
+              this.createImaged = true
+              this.shareImageUrl = url
+              callback(url)
+            })
+          })
       }
     }
   }
