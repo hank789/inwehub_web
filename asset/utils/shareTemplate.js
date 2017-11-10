@@ -41,7 +41,7 @@ function getInvitation (username, rcCode) {
   return {
     title: username + '邀请您加入InweHub',
     link: link,
-    content: '受邀请特权与福利，点击领取',
+    content: '受邀特权与福利，点击领取 >',
     imageUrl: whiteLogo,
     thumbUrl: whiteLogo
   }
