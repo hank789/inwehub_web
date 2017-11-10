@@ -78,8 +78,10 @@
       this.rcCode = user.rc_code || 0
       this.inviterName = user.name
       this.inviterAvatar = user.avatar_url
-      this.downloadUrl(this.inviterAvatar)
       this.link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + this.rcCode
+      if (window.mui.os.android) {
+        this.downloadUrl(this.inviterAvatar)
+      }
     }
   }
 </script>
