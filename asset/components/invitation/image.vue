@@ -24,7 +24,7 @@
               <div style="width: 100%; height:234px;  position: relative;">
                 <div
                   style="width:440px; height: 168px;  position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto">
-                  <qr-code :text="'sfdfsfsfsfs'" :size="168" error-level="M"
+                  <qr-code :text="link" :size="168" error-level="M"
                            style="border-radius: 10px; border:9px solid #FFFFFF; float: left;"></qr-code>
                   <div style="float:right; margin-top:50px;">
                     <span style="display: block; font-size:30px; color: #ffffff;">扫描前往领取特权</span>
@@ -52,7 +52,8 @@
         createImaged: false,
         rcCode: '',
         inviterName: '',
-        inviterAvatar: ''
+        inviterAvatar: '',
+        link: ''
       }
     },
     components: {},
@@ -78,6 +79,7 @@
       this.inviterName = user.name
       this.inviterAvatar = user.avatar_url
       this.downloadUrl(this.inviterAvatar)
+      this.link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + this.rcCode
     }
   }
 </script>

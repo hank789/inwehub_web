@@ -223,7 +223,7 @@
         }
       },
       toPreviewImage () {
-        window.mui('#shareImageWrapper').popover('toggle')
+        window.mui('#shareWrapper').popover('toggle')
         this.$router.pushPlus('/invitation/preview')
       },
       shareImageToHaoyou () {
