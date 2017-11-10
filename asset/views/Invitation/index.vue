@@ -505,7 +505,7 @@
     }
 
     .Invitation_t {
-      height: 322px;
+      height: 320px;
     }
 
     .invitation-information li:nth-of-type(1) {
