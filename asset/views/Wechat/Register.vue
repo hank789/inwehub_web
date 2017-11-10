@@ -46,12 +46,14 @@
 
 
 
+
       </button>
     </div>
 
 
     <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
       我没有邀请码？
+
 
     </div>
 
@@ -143,7 +145,8 @@
             if (window.mui.os.plus) {
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
             } else {
-              this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + this.$route.query.openid})
+              var redirect = /\?/.test(this.redirect) ? this.redirect + '&' : this.redirect + '?'
+              this.$router.replace({path: redirect + 'token=' + token + '&openid=' + this.$route.query.openid})
             }
           }))
         } else {

@@ -11,11 +11,11 @@
                    style="height:48px; margin-top: 20px; margin-left: 17px"/>
               <div style="width: 100%; height:183px;  position: relative;">
                 <img id="shareAvatar" :src="inviterAvatar"
-                     style="width:137.5px; height: width:137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
+                     style="width:137.5px; height: 137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
               </div>
               <div
                 style="width:92%; height:144px; margin-left: 4%; background:#fcc816; border-radius:14px; position: relative; padding-top:40px">
-          <span style="display:block; font-size:36px; color:#444444; font-weight: 600; text-align: center; ">章顾问向你发送了特权～
+          <span style="display:block; font-size:36px; color:#444444; font-weight: 600; text-align: center; ">{{inviterName}}向你发送了特权～
           </span>
                 <span style="display:block; font-size:28px; color:#444444; text-align: center;  margin-top:25px">邀请好友注册立享5%现金分红</span>
                 <i
@@ -24,7 +24,7 @@
               <div style="width: 100%; height:234px;  position: relative;">
                 <div
                   style="width:440px; height: 168px;  position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto">
-                  <qr-code :text="'sfdfsfsfsfs'" :size="168" error-level="M"
+                  <qr-code :text="link" :size="168" error-level="M"
                            style="border-radius: 10px; border:9px solid #FFFFFF; float: left;"></qr-code>
                   <div style="float:right; margin-top:50px;">
                     <span style="display: block; font-size:30px; color: #ffffff;">扫描前往领取特权</span>
@@ -52,7 +52,8 @@
         createImaged: false,
         rcCode: '',
         inviterName: '',
-        inviterAvatar: ''
+        inviterAvatar: '',
+        link: ''
       }
     },
     components: {},
@@ -65,7 +66,6 @@
         })
       },
       changeImage (url) {
-        window.mui.alert(url)
         this.createImaged = true
         document.getElementById('scaleWrapper').innerHTML = '<div style="background-image:url(' + url + ');width:100%;height:1000px;background-size: contain;background-repeat: no-repeat;"/>'
       }
@@ -79,6 +79,7 @@
       this.inviterName = user.name
       this.inviterAvatar = user.avatar_url
       this.downloadUrl(this.inviterAvatar)
+      this.link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + this.rcCode
     }
   }
 </script>
