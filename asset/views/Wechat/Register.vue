@@ -96,6 +96,7 @@
       }
     },
     created () {
+      this.checkRcCode()
       this.checkToken()
       this.getOpenId()
       this.checkCache()
@@ -113,6 +114,17 @@
       }
     },
     methods: {
+      checkRcCode () {
+        var rcCode = this.$route.query.rc_code
+        if (rcCode) {
+          this.redirect = this.$route.query.redirect || '/my'
+          var redirect = /\?/.test(this.redirect) ? this.redirect + '&' : this.redirect + '?'
+          var token = this.$route.query.token || ''
+          var openid = this.$route.query.openid || ''
+          this.$router.replace({path: redirect + 'token=' + token + '&openid=' + openid})
+          return
+        }
+      },
       checkCache () {
         var cache = localEvent.getLocalItem('wechatInfo')
         if (cache.openid) {
@@ -129,6 +141,7 @@
       },
       checkToken () {
         let token = this.$route.query.token
+        this.redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
         if (token) {
           window.mui.waiting()
           var data = {
@@ -145,8 +158,7 @@
             if (window.mui.os.plus) {
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
             } else {
-              var redirect = /\?/.test(this.redirect) ? this.redirect + '&' : this.redirect + '?'
-              this.$router.replace({path: redirect + 'token=' + token + '&openid=' + this.$route.query.openid})
+              this.$router.replace({path: this.redirect})
             }
           }))
         } else {
