@@ -372,7 +372,7 @@
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    border:7px solid #767a80;
+    border:4.5px solid #767a80;
     opacity: 0.2;
     position: absolute;
     top: 0;
@@ -382,10 +382,10 @@
     margin: auto;
     opacity: 0;
     z-index: 9;
-    animation: myapper 2s  0.6s infinite;
-    -moz-animation: myapper 2s 0.6s infinite; /* Firefox */
-    -webkit-animation: myapper 2s 0.6s infinite; /* Safari and Chrome */
-    -o-animation: myapper  2s 0.6s infinite; /* Opera */
+    animation: myapper 2s  0.1s infinite;
+    -moz-animation: myapper 2s 0.1s infinite; /* Firefox */
+    -webkit-animation: myapper 2s 0.1s infinite; /* Safari and Chrome */
+    -o-animation: myapper  2s 0.1s infinite; /* Opera */
     animation-direction: alternate;
     -webkit-animation-direction: alternate;
   }
@@ -430,9 +430,9 @@
 
 
   .innermost {
-    width: 79px;
-    height: 79px;
-    border: 3px solid #757A7F;
+    width: 80px;
+    height: 80px;
+    border: 4px solid #757A7F;
     border-radius: 50%;
     position: absolute;
     top: 0;
