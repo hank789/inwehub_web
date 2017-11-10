@@ -1,8 +1,5 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    </header>
     <div class="mui-content absolute">
       <div class="share_t">
         <svg class="icon" aria-hidden="true">
@@ -213,7 +210,7 @@
 
   .share_t {
     width: 100%;
-    height: 193px;
+    height:237px;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
     position: relative;
   }
@@ -223,7 +220,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top:44px;
     margin: auto;
 
   }
@@ -267,11 +264,13 @@
   }
 
   ul li input {
-    width: 90%;
-    height: 20px;
+    width: 80%;
+    height: 26px;
     float: left;
     background: #EBECED;
     border: none;
+    padding: 10px 5px;
+    margin-left: 5px;
   }
 
   input::-webkit-input-placeholder {
@@ -297,9 +296,7 @@
     font-size: 14px;
   }
 
-  ul li:nth-of-type(2) input {
-    height: 22px;
-  }
+  
 
   ul button {
     width: 100%;
@@ -309,12 +306,14 @@
     color: #FFFFFF;
     border-radius: 0;
     margin-top: 35px;
+    border-radius: 5px;
   }
 
   ul p {
     font-size: 12px;
     color: rgb(60, 149, 249);
     margin-top: 18px;
+    color:rgb(128,128,128);
   }
 
   ul p i {
