@@ -65,7 +65,6 @@
         })
       },
       changeImage (url) {
-        window.mui.alert(url)
         this.createImaged = true
         document.getElementById('scaleWrapper').innerHTML = '<div style="background-image:url(' + url + ');width:100%;height:1000px;background-size: contain;background-repeat: no-repeat;"/>'
       }
