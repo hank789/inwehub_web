@@ -35,6 +35,7 @@
         <p>（首次专业提问1元等特权）</p>
         <p>点击呼朋唤友并分享链接，既是同意 <u @tap.stop.prevent="$router.pushPlus('/protocol/invitation')">邀请活动规则</u></p>
       </div>
+    </div>
 
     <Share
       ref="ShareBtn"
@@ -48,7 +49,7 @@
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
     ></Share>
-    </div>
+
   </div>
 </template>
 
