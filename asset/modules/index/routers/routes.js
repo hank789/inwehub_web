@@ -286,7 +286,7 @@ const routes = [
     path: '/invitation/index',
     name: 'invitation-index',
     meta: {
-      title: '邀请首页',
+      title: '邀请注册',
       keepAlive: true
     },
     component: require('../../../views/Invitation/index.vue'),
@@ -322,6 +322,22 @@ const routes = [
       keepAlive: true
     },
     component: require('../../../views/Invitation/Preview.vue'),
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 邀请图片预览
+    path: '/invitation/image',
+    name: 'invitation-image',
+    meta: {
+      title: '图片',
+      keepAlive: true
+    },
+    component: require('../../../views/Invitation/Image.vue'),
     beforeEnter: (to, from, next) => {
       // 检查版本更新
       window.mui.plusReady(function () {

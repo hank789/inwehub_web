@@ -29,7 +29,6 @@
   import Images from '../../components/invitation/image.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
-  import { postRequest } from '../../utils/request'
 
   const Index = {
     data: () => ({
@@ -47,6 +46,11 @@
       loading: true
     }),
     mounted () {
+      if (!window.mui.os.android) {
+        setTimeout(() => {
+          this.getImage()
+        }, 1000)
+      }
     },
     components: {
       Share,
@@ -64,6 +68,12 @@
 
       },
       shareFail () {
+      },
+      getImage () {
+        this.$refs.ShareBtn.getImageByServer((url) => {
+          this.$refs.imagesCommponent.changeImage(url)
+          this.$refs.ShareBtn.share()
+        })
       }
     },
     created () {

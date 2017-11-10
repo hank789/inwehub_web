@@ -37,6 +37,9 @@ function dowloadFile (uri, path, callback) {
 function getLocalUrl (path, callback) {
   window.mui.plusReady(() => {
     var newurl = window.plus.io.convertLocalFileSystemURL(path)
+    if (window.mui.os.ios) {
+      newurl = 'file://' + newurl
+    }
     window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
       var newurl = entry.toRemoteURL()
       callback(newurl)
@@ -44,7 +47,32 @@ function getLocalUrl (path, callback) {
   })
 }
 
+function saveImageByBase64 (base64, dest, callback) {
+  window.mui.plusReady(() => {
+    var b = new window.plus.nativeObj.Bitmap()
+    b.loadBase64Data(base64, function () {
+      console.log('创建成功')
+    }, function () {
+      console.log('创建失败')
+    })
+    b.save(dest, {
+      overwrite: true,
+      quality: 100
+    }, () => {
+      console.log('保存成功')
+      if (callback) {
+        getLocalUrl(dest, (url) => {
+          callback(url)
+        })
+      }
+    }, () => {
+      console.log('保存失败')
+    })
+  })
+}
+
 export {
   dowloadFile,
-  getLocalUrl
+  getLocalUrl,
+  saveImageByBase64
 }
