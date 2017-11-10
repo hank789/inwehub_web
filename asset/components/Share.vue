@@ -315,8 +315,9 @@
 
       },
       getImageByServer (callback) {
-        var node = document.getElementById(this.DomConvertImageId)
-        postRequest('system/htmlToImage', {html: node.innerHTML})
+        // var node = document.getElementById(this.DomConvertImageId)
+        var url = process.env.H5_ROOT + '/?#/invitation/image'
+        postRequest('system/htmlToImage', {html: url})
           .then(response => {
             var code = response.data.code
             if (code !== 1000) {

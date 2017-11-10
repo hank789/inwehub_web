@@ -337,14 +337,7 @@ const routes = [
       title: '图片',
       keepAlive: true
     },
-    component: require('../../../views/Invitation/Image.vue'),
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/Invitation/Image.vue')
   },
   { // 我的
     path: '/my',
