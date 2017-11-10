@@ -369,11 +369,11 @@
   }
 
   .outermost {
-    width: 93px;
-    height: 93px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    background: #767a80;
-    opacity: 0.3;
+    border:7px solid #767a80;
+    opacity: 0.2;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -382,16 +382,16 @@
     margin: auto;
     opacity: 0;
     z-index: 9;
-    animation: myapper  2s 0.3s infinite;
-    -moz-animation: myapper 2s  0.3s infinite; /* Firefox */
-    -webkit-animation: myapper 2s 0.3s  infinite; /* Safari and Chrome */
-    -o-animation: myapper  2s  0.3s infinite; /* Opera */
+    animation: myapper 2s  0.6s infinite;
+    -moz-animation: myapper 2s 0.6s infinite; /* Firefox */
+    -webkit-animation: myapper 2s 0.6s infinite; /* Safari and Chrome */
+    -o-animation: myapper  2s 0.6s infinite; /* Opera */
     animation-direction: alternate;
     -webkit-animation-direction: alternate;
   }
   @keyframes myapper {
     0% {
-      opacity: 1;
+      opacity:0.2;
     }
     100% {
       opacity: 0;
@@ -430,10 +430,10 @@
 
 
   .innermost {
-    width: 82px;
-    height: 82px;
+    width: 79px;
+    height: 79px;
+    border: 3px solid #757A7F;
     border-radius: 50%;
-    background: #757A7F;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -443,9 +443,9 @@
     z-index: 11;
     opacity: 0;
     animation: myopactity 2s infinite;
-    -moz-animation: myopactity 2s infinite; /* Firefox */
-    -webkit-animation: myopactity 2s infinite; /* Safari and Chrome */
-    -o-animation: myopactity 2s infinite; /* Opera */
+    -moz-animation: myopactity 2s  infinite; /* Firefox */
+    -webkit-animation: myopactity 2s  infinite; /* Safari and Chrome */
+    -o-animation: myopactity 2s  infinite; /* Opera */
     animation-direction: alternate;
     -webkit-animation-direction: alternate;
   }
@@ -761,7 +761,7 @@
 
   .verification_bg {
     width: 100%;
-    height: 120px;
+    height: 121px;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }
