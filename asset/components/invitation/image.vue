@@ -11,11 +11,11 @@
                    style="height:48px; margin-top: 20px; margin-left: 17px"/>
               <div style="width: 100%; height:183px;  position: relative;">
                 <img id="shareAvatar" :src="inviterAvatar"
-                     style="width:137.5px; height: width:137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
+                     style="width:137.5px; height: 137.5px; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 2px solid #DBDCDB;">
               </div>
               <div
                 style="width:92%; height:144px; margin-left: 4%; background:#fcc816; border-radius:14px; position: relative; padding-top:40px">
-          <span style="display:block; font-size:36px; color:#444444; font-weight: 600; text-align: center; ">章顾问向你发送了特权～
+          <span style="display:block; font-size:36px; color:#444444; font-weight: 600; text-align: center; ">{{inviterName}}向你发送了特权～
           </span>
                 <span style="display:block; font-size:28px; color:#444444; text-align: center;  margin-top:25px">邀请好友注册立享5%现金分红</span>
                 <i
