@@ -261,7 +261,7 @@
             </li>
             <li>
               <img src="../../statics/images/case.png" class="case"/>
-              <p>日默瓦 CF 20寸</p>
+              <p class="mui-ellipsis">日默瓦 CF 20寸</p>
               <p class="text_yellow"  v-if="user_level >='4'"><i class="num_yellow">50000</i><i
                 class="num_yellow">贡献值兑换</i></p>
               <p v-else ><i>50000</i><i>贡献值兑换</i></p>
@@ -270,7 +270,7 @@
 
 
               <img src="../../statics/images/iphone8@3x.png" class="iphone"/>
-              <p>iPhone8 256GB</p>
+              <p class="mui-ellipsis">iPhone8 256GB</p>
               <p class="text_yellow" v-if="user_level >='4'"><i class="num_yellow">80000</i><i
                 class="num_yellow">贡献值兑换</i></p>
               <p v-else><i>80000</i><i>贡献值兑换</i></p>
@@ -776,7 +776,7 @@
   }
 
   .powerdetail li {
-    width: 30%;
+    width: 32%;
     height: 120px;
     float: left;
     text-align: center;
@@ -808,7 +808,7 @@
   }
 
   .powerdetail li:nth-child(1), .powerdetail li:nth-child(4) {
-    margin-left: 6%;
+    margin-left: 3%;
 
   }
 
