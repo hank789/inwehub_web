@@ -13,7 +13,7 @@
         :nextOtherData="{}"
         class="listWrapper">
         <ul>
-          <li v-for="(item, index) in list" >
+          <li v-for="(item, index) in list">
             <p class="avatar">
               <img :src="item.user_avatar_url" @tap.stop.prevent="toAvatar(item.uuid)">
               <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
@@ -55,9 +55,9 @@
     },
     methods: {
       toAvatar (uuid) {
-          if (!uuid) {
+        if (!uuid) {
           return false
-         }
+        }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       }
     },
