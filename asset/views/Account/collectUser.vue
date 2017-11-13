@@ -57,10 +57,10 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="ibutton active" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item.uuid,index)">
+              <div class="ibutton " v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item.uuid, key, index)">
                 已关注
               </div>
-              <div class="ibutton" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注Ta</div>
+              <div class="ibutton active" @tap.stop.prevent="collectProfessor(item.uuid,key, index)" v-else>关注Ta</div>
 
             </li>
           </ul>
@@ -94,7 +94,7 @@
     },
     methods: {
       // 点击关注；
-      collectProfessor (id, index) {
+      collectProfessor (id, key, index) {
         postRequest(`follow/user`, {
           id: id
         }).then(response => {
@@ -103,10 +103,11 @@
             window.mui.alert(response.data.message)
             return
           }
+          console.log(index)
           if (response.data.data.type === 'unfollow') {
-            this.list[index].is_followed = 0
+            this.lastList[key][index].is_followed = 0
           } else {
-            this.list[index].is_followed = 1
+            this.lastList[key][index].is_followed = 1
           }
           window.mui.toast(response.data.data.tip)
         })
