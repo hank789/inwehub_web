@@ -319,6 +319,22 @@ const routes = [
     component: require('../../../views/Invitation/Image.vue')
   },
   { // 我的
+    path: '/discover/hottopic',
+    name: 'discover_hottopic',
+    component: require('../../../views/Discover/HotTopic.vue'),
+    meta: {
+      title: '发现',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的
     path: '/my',
     name: 'my',
     component: require('../../../views/Account/my.vue'),
