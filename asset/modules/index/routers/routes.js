@@ -1269,6 +1269,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/discover/add',
+    name: 'discover_add',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Discover/Add.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // discover
     path: '/discover/share',
     name: 'share-discover',
@@ -1355,42 +1368,6 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/Help/Ask.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // discover project
-    path: '/discover/project',
-    name: 'discover-project',
-    meta: {
-      title: '项目协作',
-      wechatHideHeader: true
-    },
-    component: require('../../../views/Discover/Project.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // discover company
-    path: '/discover/company',
-    name: 'discover-company',
-    meta: {
-      title: '附近企业',
-      wechatHideHeader: true
-    },
-    component: require('../../../views/Discover/Company.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  { // discover activity
-    path: '/discover/activity',
-    name: 'discover-activity',
-    meta: {
-      title: '最新活动',
-      wechatHideHeader: true
-    },
-    component: require('../../../views/Discover/Activity.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

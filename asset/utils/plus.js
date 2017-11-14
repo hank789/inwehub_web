@@ -97,9 +97,30 @@ function createImageThumb (path, dest, callback) {
   })
 }
 
+/**
+ * 获取geo位置
+ */
+function getGeoPosition (callback) {
+  window.mui.plusReady(() => {
+    window.plus.geolocation.getCurrentPosition((position) => {
+      console.log(position.addresses)
+      var codns = position.coords
+      var info = {
+        addresses: position.addresses, // 地址信息
+        longt: codns.longitude, // 经度
+        lat: codns.latitude // 纬度
+      }
+      callback(info)
+    }, (e) => {
+      console.log('获取位置信息失败:' + e.message)
+    }, {geocode: false})
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
   createImageThumb,
-  saveImageByBase64
+  saveImageByBase64,
+  getGeoPosition
 }
