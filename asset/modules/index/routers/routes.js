@@ -339,7 +339,23 @@ const routes = [
     name: 'discover_newest',
     component: require('../../../views/Discover/Newest.vue'),
     meta: {
-      title: '最新',
+      title: '发现',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 发布成功；
+    path: '/discover/publishSuccessfully',
+    name: 'discover_publishSuccessfully',
+    component: require('../../../views/Discover/PublishSuccessfully.vue'),
+    meta: {
+      title: '发现',
       keepAlive: true
     },
     beforeEnter: (to, from, next) => {
