@@ -44,8 +44,7 @@
 
               <div class="avatar">
                 <div class="avatarInner" @tap.stop.prevent="">
-                  <img :src="item.avatar_url">
-
+                  <img :src="item.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)">
                   <svg class="icon" aria-hidden="true" v-show="item.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
@@ -93,62 +92,75 @@
       Contact
     },
     methods: {
-      // 点击关注；
-      collectProfessor (id, key, index) {
-        postRequest(`follow/user`, {
-          id: id
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-          console.log(index)
-          if (response.data.data.type === 'unfollow') {
-            this.lastList[key][index].is_followed = 0
-          } else {
-            this.lastList[key][index].is_followed = 1
-          }
-          window.mui.toast(response.data.data.tip)
-        })
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      // 数据；
-      getList () {
-        postRequest(`followed/searchUsers`, {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.length > 0) {
-            var arr = response.data.data
-            for (var i = 0; i < arr.length; i++) {
-              var item = {
-                id: arr[i].user_id,
-                name: arr[i].user_name,
-                avatar_url: arr[i].user_avatar_url,
-                description: arr[i].description,
-                is_expert: arr[i].is_expert,
-                is_followed: arr[i].is_followed,
-                uuid: arr[i].uuid
-
-              }
-              this.list = this.list.concat(item)
-            }
-          }
-          this.loading = 0
-        })
+  // 点击关注；
+  collectProfessor(id, key, index)
+  {
+    postRequest(`follow/user`, {
+      id: id
+    }).then(response => {
+      var code = response.data.code
+      if (code !== 1000) {
+        window.mui.alert(response.data.message)
+        return
       }
-    },
+      console.log(index)
+      if (response.data.data.type === 'unfollow') {
+        this.lastList[key][index].is_followed = 0
+      } else {
+        this.lastList[key][index].is_followed = 1
+      }
+      window.mui.toast(response.data.data.tip)
+    })
+  }
+  ,
+  // 数据；
+  getList()
+  {
+    postRequest(`followed/searchUsers`, {}).then(response => {
+      var code = response.data.code
+      if (code !== 1000) {
+        window.mui.alert(response.data.message)
+        window.mui.back()
+        return
+      }
+      if (response.data.data.length > 0) {
+        var arr = response.data.data
+        for (var i = 0; i < arr.length; i++) {
+          var item = {
+            id: arr[i].user_id,
+            name: arr[i].user_name,
+            avatar_url: arr[i].user_avatar_url,
+            description: arr[i].description,
+            is_expert: arr[i].is_expert,
+            is_followed: arr[i].is_followed,
+            uuid: arr[i].uuid
 
-    watch: {},
-    mounted () {
-      this.getList()
-    },
-    created () {
-      console.log(this.lastList)
-    }
+          }
+          this.list = this.list.concat(item)
+        }
+      }
+      this.loading = 0
+    })
+  }
+  },
+
+  watch: {}
+  ,
+  mounted()
+  {
+    this.getList()
+  }
+  ,
+  created()
+  {
+    console.log(this.lastList)
+  }
   }
 </script>
 
@@ -159,7 +171,7 @@
     width: 100%;
     height: 45px;
     position: fixed;
-    top:44px;
+    top: 44px;
     z-index: 10;
     background: #f3f4f6;
   }
@@ -243,5 +255,8 @@
 
   .mui-content {
     background: #fff;
+  }
+  .textBody{
+    width:50%;
   }
 </style>

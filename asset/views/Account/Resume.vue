@@ -50,7 +50,7 @@
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
               src="../../statics/images/resume_erweima_3x.png"/></div>
             <!--关注-->
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
+            <div class="collect" v-show="uuid !== cuuid && !resume.is_followed">
               关注Ta
 
             </div>
@@ -114,19 +114,19 @@
         <!--发布-->
         <div class="news">
           <div>Ta的发布</div>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis" >
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis" >
             提问 <span>{{ resume.info.questions }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis"  >
             文章 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis" >
             评论 <span>{{ resume.info.comment_count }}</span>
           </p>
           <i class="bot"></i>
@@ -1080,17 +1080,19 @@
   }
 
   .skilled span {
+    float: left;
     background: #ececee;
     border-radius: 50px;
     padding: 4px 11px;
     font-size: 12px;
     color: #444444;
-    margin-left: 15px;
+    margin-left:8px;
+    margin-bottom: 6px;
   }
 
-  .skilled span:nth-of-type(1) {
-    margin-left: 0px;
-  }
+  /*.skilled span:nth-of-type(1) {*/
+    /*margin-left: 0px;*/
+  /*}*/
 
   .skilled p {
     font-size: 14px;

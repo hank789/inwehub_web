@@ -8,8 +8,8 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="">热门<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/discover/newest')">最新</span>
+        <span @tap.stop.prevent="$router.replace('/discover/hottopic')">热门</span>
+        <span @tap.stop.prevent="">最新 <i></i></span>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
@@ -51,68 +51,6 @@
               12
             </span>
           </p>
-        </li>
-        <!--带图片的样式-->
-        <li class="imgContainer">
-          <div class="avatar">
-            <p>
-              <img src="../../statics/images/service1.png" />
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-              </svg>
-            </p>
-            <p>郭伟发布了分享</p>
-          </div>
-          <div class="textContainer mui-ellipsis-2">
-            1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。
-          </div>
-          <div class="timeContainer">
-            <span>19小时前发布于</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dingwei1"></use>
-            </svg>
-            <span>曼哈顿 (金陵）商务酒店</span>
-          </div>
-          <div class="PublishContainer">
-            <p class="">
-              <!--<img src="../../statics/images/guide_01.png" />-->
-            </p>
-            <p>
-              <!--<img src="../../statics/images/guide_02.png" />-->
-            </p>
-            <p>
-              <!--<img src="../../statics/images/guide_03.png" />-->
-            </p>
-          </div>
-          <div class="information">
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduo"></use>
-               </svg>
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucangxingxing"></use>
-               </svg>
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun1"></use>
-               </svg>
-              2
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dianzan1"></use>
-            </svg>
-              12
-            </span>
-
-          </div>
-
-
-
-
         </li>
       </ul>
     </div>
@@ -164,6 +102,7 @@
 
   .menu span:nth-of-type(2) {
     margin-left: 34px;
+    position: relative;
   }
 
   .menu svg {
@@ -236,7 +175,6 @@
     padding: 12px 16px 0 16px;
     position: relative;
   }
-
   ul li:after{
     position: absolute;
     bottom: 0;
@@ -308,74 +246,5 @@
     font-size:17px;
     margin-right: 3px;
   }
-/*带定位和图片的样式*/
-.imgContainer{
-  width: 100%;
-  overflow: hidden;
-  background: #FFFFFF;
-  padding: 12px 16px 0 16px;
-  position: relative;
-}
-.imgContainer:after{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    height: 10px;
-    background-color: #f3f4f6;
-    width: 100%;
-  }
-  .imgContainer .avatar{
-    width:100%;
-    height: 34px;
-  }
-  .avatar p:nth-of-type(1){
-    width:34px;
-    height:34px;
-    border-radius: 50%;
-    float: left;
-    position: relative;
-  }
-  .avatar p:nth-of-type(1) svg{
-    position: absolute;
-    font-size:17px;
-    bottom: 0;
-    right:-6px;
-  }
-  .avatar p:nth-of-type(1) img{
-    width:100%;
-    height:100%;
-    border-radius: 50%;
-  }
-  .avatar p:nth-of-type(2){
-    font-size:13px;
-    color: #808080;
-    line-height: 34px;
-    margin-left:8px;
-    float: left;
-  }
-  .textContainer{
-    width:100%;
-    font-size:15px;
-    color:#444444;
-    line-height: 20px;
-    margin-bottom:13px;
-  }
-  .timeContainer{
-    width:100%;
-    height:42px;
-    font-size:12px;
-    line-height: 42px;
 
-  }
-  .timeContainer svg{
-    font-size: 14px;
-    color: #b4b4b6;
-  }
-  .timeContainer span:nth-of-type(1){
-    color: #b4b4b6;
-  }
-  .timeContainer span:nth-of-type(2){
-    color: #808080;
-  }
 </style>
