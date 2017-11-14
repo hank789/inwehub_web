@@ -11,12 +11,15 @@
 
         <div class="container-images">
           <div class="container-image" v-for="(image, index) in images">
+            <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+              <use xlink:href="#icon-times1"></use>
+            </svg>
             <img :id="'image_' + index" :src="image.base64"/>
           </div><div class="component-photograph" @tap.stop.prevent="selectImgs()"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
         <div class="bottomWrapper">
-          <span class="niming"><label class="nimingCheckbox active"></label>匿名</span>
+          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
           <span class="counter"><span>{{descLength}}</span><span>/</span><span>{{descMaxLength}}</span></span>
         </div>
       </div>
@@ -51,6 +54,7 @@
       return {
         description: '',
         images: [],
+        hide: 0,
         descMaxLength: 2000,
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
       }
@@ -66,6 +70,12 @@
     components: {
     },
     methods: {
+      toggleHide () {
+        this.hide = !this.hide
+      },
+      delImg (index) {
+        this.images.splice(index, 1)
+      },
       submit () {
         if (!this.descLength) {
           window.mui.toast('请填写分享内容')
