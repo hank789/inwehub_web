@@ -350,6 +350,22 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 发布文章；
+    path: '/discover/publishArticles',
+    name: 'discover_publishArticles',
+    component: require('../../../views/Discover/PublishArticles.vue'),
+    meta: {
+      title: '发现',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 发布成功；
     path: '/discover/publishSuccessfully',
     name: 'discover_publishSuccessfully',
