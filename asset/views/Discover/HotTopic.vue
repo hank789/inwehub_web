@@ -19,7 +19,7 @@
       </div>
       <!--滚动区域-->
       <ul>
-        <li>
+        <li class="Container">
           <p>[物料规格与单位] 噩梦，那些刺痛PP顾问们的物料单位与规格的问题<i>-baidu.com</i></p>
           <p class="container-image">
             <img src="../../statics/images/guide_01.png">
@@ -66,23 +66,24 @@
           <div class="textContainer mui-ellipsis-2">
             1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。
           </div>
+
+          <div class="PublishContainer">
+            <p class="container-image">
+              <img src="../../statics/images/guide_01.png" />
+            </p>
+            <p class="container-image">
+              <img src="../../statics/images/guide_02.png" />
+            </p>
+            <p class="container-image">
+              <img src="../../statics/images/guide_03.png" />
+            </p>
+          </div>
           <div class="timeContainer">
             <span>19小时前发布于</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dingwei1"></use>
             </svg>
             <span>曼哈顿 (金陵）商务酒店</span>
-          </div>
-          <div class="PublishContainer">
-            <p class="">
-              <!--<img src="../../statics/images/guide_01.png" />-->
-            </p>
-            <p>
-              <!--<img src="../../statics/images/guide_02.png" />-->
-            </p>
-            <p>
-              <!--<img src="../../statics/images/guide_03.png" />-->
-            </p>
           </div>
           <div class="information">
             <span>
@@ -229,41 +230,34 @@
     margin-top: 45px;
   }
 
-  ul li {
+  ul .Container {
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
     padding: 12px 16px 0 16px;
-    position: relative;
+    margin-bottom: 10px;
+
   }
 
-  ul li:after{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    height: 10px;
-    background-color: #f3f4f6;
-    width: 100%;
-  }
 
-  ul li p:nth-of-type(1) {
+
+  ul .Container p:nth-of-type(1) {
     font-size: 15px;
     color: #444444;
     line-height: 20px;
     margin-bottom: 13px;
   }
 
-  ul li p:nth-of-type(1) i {
+  ul .Container p:nth-of-type(1) i {
     font-size: 12px;
     color: rgb(180, 180, 182);
   }
 
-  ul li .container-image {
+  ul .Container .container-image {
     height: 124px;
   }
 
-  ul li p:nth-of-type(3) {
+  ul .Container p:nth-of-type(3) {
     width: 100%;
     height: 44px;
     font-size: 12px;
@@ -272,7 +266,7 @@
     position: relative;
   }
 
-  ul li p:nth-of-type(3) a {
+  ul .Container p:nth-of-type(3) a {
     font-size: 12px;
     color: rgb(128, 128, 128);
   }
@@ -287,7 +281,9 @@
     justify-content:space-between;
     align-items:center;
 
+
   }
+
   .information span{
     color: #808080;
 
@@ -314,7 +310,7 @@
   overflow: hidden;
   background: #FFFFFF;
   padding: 12px 16px 0 16px;
-  position: relative;
+  margin-bottom: 10px;
 }
 .imgContainer:after{
     position: absolute;
@@ -377,5 +373,25 @@
   }
   .timeContainer span:nth-of-type(2){
     color: #808080;
+  }
+  /*图片*/
+  .PublishContainer{
+    width:100%;
+    overflow: hidden;
+    /*border:1px solid #000000;*/
+  }
+  .PublishContainer .container-image{
+    width:32%;
+    height:108px;
+    float: left;
+    /*border:1px solid #000000;*/
+
+  }
+  .PublishContainer .container-image img{
+    width:100%;
+    height:100%;
+  }
+  .PublishContainer p:nth-of-type(2),.PublishContainer p:nth-of-type(3){
+    margin-left: 2%;
   }
 </style>
