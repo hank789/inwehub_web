@@ -28,7 +28,7 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true">
@@ -70,6 +70,27 @@
     components: {
     },
     methods: {
+      selectChannel () {
+        var userPicker = new window.mui.PopPicker()
+
+        userPicker.setData([
+          {
+            value: '1',
+            text: '汽车'
+          },
+          {
+            value: '2',
+            text: '小哈公社'
+          }
+        ])
+        userPicker.pickers[0].setSelectedValue(1)
+
+        userPicker.show(items => {
+          var value = items[0].value
+          console.log(value)
+          userPicker.dispose()
+        })
+      },
       toggleHide () {
         this.hide = !this.hide
       },
@@ -124,5 +145,7 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-
+  .mui-content{
+    background: #fff;
+  }
 </style>
