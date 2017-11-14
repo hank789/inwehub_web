@@ -1237,6 +1237,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/discover/add',
+    name: 'discover_add',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Discover/Add.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // discover
     path: '/discover/share',
     name: 'share-discover',
