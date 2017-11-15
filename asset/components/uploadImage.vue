@@ -27,13 +27,11 @@
     },
     methods: {
       uploadImage: function () {
-        this.show()
-
-//        if (window.mui.os.plus) {
-//          this.show()
-//        } else {
-//          this.changeAvatarH5()
-//        }
+        if (window.mui.os.plus) {
+          this.show()
+        } else {
+          this.changeAvatarH5()
+        }
       },
       changeAvatarH5: function () {
         selectFileH5('img', (file, base64) => {
