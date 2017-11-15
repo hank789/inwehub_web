@@ -34,11 +34,11 @@
         <svg class="icon menu" aria-hidden="true">
           <use xlink:href="#icon-lianjie"></use>
         </svg>
-        <div class="component-labelWithIcon float-right margin-13-15">
+        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="selectAddress">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
-          您的位置
+          {{selectedAddress}}
       </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
   import { compressImg } from '../../utils/uploadFile'
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
+  import { getGeoPosition } from '../../utils/plus'
 
   export default {
     data () {
@@ -61,8 +62,14 @@
         selectedChannel: '',
         maxImageCount: 3,
         percentCompleted: 0,
+        address: '',
+        selectedAddress: '',
         hide: 0,
         descMaxLength: 2000,
+        position: {
+          longt: 0,
+          lat: 0
+        },
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
       }
     },
@@ -80,6 +87,30 @@
     methods: {
       uploadImage: function () {
         this.$refs.uploadImage.uploadImage()
+      },
+      selectAddress () {
+        var userPicker = new window.mui.PopPicker()
+
+        userPicker.setData([
+          {
+            value: '1',
+            text: this.address
+          },
+          {
+            value: '2',
+            text: '不显示位置'
+          }
+        ])
+        if (this.selectedAddress === '不显示位置') {
+          userPicker.pickers[0].setSelectedValue('2')
+        } else {
+          userPicker.pickers[0].setSelectedValue('1')
+        }
+
+        userPicker.show(items => {
+          this.selectedAddress = items[0].text
+          userPicker.dispose()
+        })
       },
       getChannels () {
         postRequest(`article/get-categories`, {}).then(response => {
@@ -124,10 +155,10 @@
           return
         }
 
-        if (!this.images.length) {
-          window.mui.toast('请添加图片')
-          return
-        }
+//        if (!this.images.length) {
+//          window.mui.toast('请添加图片')
+//          return
+//        }
 
         if (!this.selectedChannel) {
           window.mui.toast('请选择频道')
@@ -138,7 +169,10 @@
           type: 'text',
           title: this.description,
           photos: [],
-          category_id: this.selectedChannel
+          category_id: this.selectedChannel,
+          current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
+          current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
+          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
         }
 
         for (var i in this.images) {
@@ -184,6 +218,13 @@
     },
     created () {
       this.getChannels()
+      getGeoPosition((position) => {
+        if (position.addresses) {
+          this.position = position
+          this.address = position.addresses
+          this.selectedAddress = this.address
+        }
+      })
     },
     mounted () {
       window.mui.plusReady(() => {

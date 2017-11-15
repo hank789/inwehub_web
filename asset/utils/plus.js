@@ -102,18 +102,20 @@ function createImageThumb (path, dest, callback) {
  */
 function getGeoPosition (callback) {
   window.mui.plusReady(() => {
+    console.log('准备获取位置信息')
     window.plus.geolocation.getCurrentPosition((position) => {
-      console.log(position.addresses)
       var codns = position.coords
       var info = {
+        coordsType: position.coordsType, //坐标类型
         addresses: position.addresses, // 地址信息
         longt: codns.longitude, // 经度
         lat: codns.latitude // 纬度
       }
+      console.log(info)
       callback(info)
     }, (e) => {
       console.log('获取位置信息失败:' + e.message)
-    }, {geocode: false})
+    }, {geocode: true, provider: 'baidu'})
   })
 }
 

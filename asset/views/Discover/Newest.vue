@@ -21,7 +21,7 @@
         v-model="list"
         :api="'article/list'"
         :pageMode="true"
-        :prevOtherData="{sort:'new', page:1}"
+        :prevOtherData="{sort:'new'}"
         :nextOtherData="{sort:'new'}"
         class="listWrapper">
         <ul>

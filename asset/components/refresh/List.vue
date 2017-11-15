@@ -179,6 +179,14 @@
       },
       getPrevList () {
         var param = {}
+
+        if (this.pageMode) {
+          param = {
+            page: 1
+          }
+        } else {
+          param = {}
+        }
         param = Object.assign(param, this.prevOtherData)
 
         console.log(JSON.stringify(param))
