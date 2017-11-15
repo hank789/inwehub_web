@@ -808,65 +808,6 @@
 
   }
 
-  /*!*air*!*/
-  /*.air {*/
-    /*width: 37px;*/
-    /*height: 40px;*/
-    /*margin-top: 10px;*/
-  /*}*/
-
-  /*!*air*!*/
-  /*.case {*/
-    /*width: 25.5px;*/
-    /*height: 35px;*/
-    /*margin-top: 10px;*/
-  /*}*/
-
-  /*.iphone {*/
-    /*width: 45px;*/
-    /*height: 35px;*/
-    /*margin-top: 10px;*/
-  /*}*/
-
-  /*.powerdetail li p:nth-of-type(2) i:nth-of-type(1) {*/
-    /*display: block;*/
-    /*font-size: 12px;*/
-    /*color: #444444;*/
-    /*text-align: center;*/
-    /*position: absolute;*/
-    /*bottom: 5px;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*margin: auto;*/
-  /*}*/
-
-  /*.powerdetail li p:nth-of-type(2) i:nth-of-type(1) {*/
-    /*display: block;*/
-    /*font-size: 12px;*/
-    /*color: #444444;*/
-    /*text-align: center;*/
-    /*position: absolute;*/
-    /*bottom: 5px;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*margin: auto;*/
-  /*}*/
-
-  /*.powerdetail li p:nth-of-type(2) i:nth-of-type(2) {*/
-    /*display: block;*/
-    /*font-size: 12px;*/
-    /*color: #444444;*/
-    /*text-align: center;*/
-    /*position: absolute;*/
-    /*top: 5px;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*margin: auto;*/
-  /*}*/
-
-  /*.powerdetail li p:nth-of-type(2) i.num_yellow {*/
-    /*color: #fcc916;*/
-  /*}*/
 
   /****积分说明*****/
   .instruction {
