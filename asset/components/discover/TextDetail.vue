@@ -1,153 +1,97 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">发现</h1>
-    </header>
-
-    <div class="mui-content">
-      <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/discover/hottopic')">热门 </span>
-        <span @tap.stop.prevent="">最新 <i></i></span>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/discover/publishArticles')">
-          <use xlink:href="#icon-xiugai"></use>
+    <div class="avatar">
+      <p>
+        <img :src="data.owner.avatar"/>
+        <svg class="icon" aria-hidden="true" v-if="data.owner.is_expert == '1'">
+          <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
         </svg>
+      </p>
+      <p>{{data.owner.username}}发布了分享</p>
+    </div>
+    <div class="textContainer mui-ellipsis-2">
+      {{data.title}}
+            </div>
 
-      </div>
-      <!--滚动区域-->
-      <!--内容区域-->
-      <RefreshList
-        v-model="list"
-        :api="'article/list'"
-        :pageMode="true"
-        :prevOtherData="{sort:'new'}"
-        :nextOtherData="{sort:'new'}"
-        class="listWrapper">
-        <ul>
-          <li class="Container" v-for="(hot, index) in list" v-if="hot.type == 'link'">
-            <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
-            <p class="container-image" v-if="hot.data.img">
-              <img :src="hot.data.img">
-            </p>
-            <p class="timer">
-              <timeago :since="timeago(hot.created_at)" :auto-update="60">
-              </timeago>
-              <a>#{{hot.category_name}}</a>
-              <i class="bot"></i>
-            </p>
-            <p class="information">
-          <span>
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-          </svg>
-          </span>
-              <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-          </svg>
-          </span>
+    <div class="PublishContainer" v-if="data.data.img" >
+      <template v-for="(item,number) in data.data.img">
+        <p class="container-image" v-if="data.data.img.length > 1">
+          <img :src="item"/>
+        </p>
+        <p class="container-image" id="container-image" v-if="data.data.img.length < 2">
+          <img :src="item"/>
+        </p>
+      </template>
+    </div>
+
+    <div class="timeContainer">
               <span>
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-          </svg>
-          {{hot.comments_number}}
-          </span>
-              <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          {{hot.upvotes}}
-          </span>
-            </p>
-          </li>
-          <!--带图片的样式-->
-          <li class="imgContainer" v-for="(hot, num) in list" v-if="hot.type == 'text'">
-            <TextDetail :data="hot" @downvoteComment="downvoteComment"
-                        @bookmarkuBmission="bookmarkuBmission"></TextDetail>
-
-          </li>
-        </ul>
-      </RefreshList>
+                <timeago :since="timeago(data.created_at)" :auto-update="60">
+                </timeago>
+              </span>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-dingwei1"></use>
+      </svg>
+      <span>曼哈顿 (金陵）商务酒店</span>
+    </div>
+    <div class="information">
+            <span>
+               <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-gengduo"></use>
+               </svg>
+            </span>
+      <span @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
+               <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shoucangxingxing"></use>
+               </svg>
+            </span>
+      <span >
+               <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pinglun1"></use>
+               </svg>
+              {{data.comments_number}}
+            </span>
+      <span @tap.stop.prevent="downvoteComment(data)" :class="data.is_upvoted ? 'blue':''">
+               <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dianzan1"></use>
+            </svg>
+              {{data.upvotes}}
+            </span>
     </div>
   </div>
 </template>
-<script>
-  import RefreshList from '../../components/refresh/List.vue'
-  import { postRequest } from '../../utils/request'
-  import TextDetail from '../../components/Discover/TextDetail'
+<script type="text/javascript">
 
-  const PublishAnswers = {
-    data: () => ({
-      list: []
-    }),
-    created () {
+  export default {
+    data () {
+      return {}
     },
-    computed: {},
-    components: {
-      RefreshList,
-      TextDetail
+    components: {},
+    props: {
+      data: {
+        type: Object,
+        default: {}
+      }
+    },
+    created () {
+
     },
     methods: {
-      // 时间处理；
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      // 赞文章
-      downvoteComment (hot) {
-        postRequest(`article/upvote-submission`, {
-          submission_id: hot.id
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.type === 'upvote') {
-              hot.upvotes += 1
-              hot.is_upvoted = 1
-            } else {
-              hot.is_upvoted = 0
-              hot.upvotes -= 1
-            }
-          }
-        })
-      },
-      // 赞文章
       bookmarkuBmission (hot) {
-        postRequest(`article/bookmark-submission`, {
-          id: hot.id
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.type === 'bookmarked') {
-              hot.is_bookmark = 1
-            } else {
-              hot.is_bookmark = 0
-            }
-          }
-        })
+        this.$emit('bookmarkuBmission', hot)
+      },
+      downvoteComment (hot) {
+        this.$emit('downvoteComment', hot)
       }
-    },
-    mounted () {
-
-    },
-    updated () {
     }
   }
-  export default PublishAnswers
 </script>
+
 <style scoped>
   .mui-wechat .menu {
     width: 100%;
