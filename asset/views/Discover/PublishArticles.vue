@@ -15,20 +15,21 @@
       <ul class="concreteContent">
         <li class="address">
           <p>文章地址</p>
-          <input type="text" placeholder="输入URL"/>
+          <input type="text" placeholder="输入URL" v-model.trim="getUrl"/>
           <i class="bot"></i>
         </li>
         <li class="title">
           <p>文章标题</p>
-          <input type="text" placeholder="输入文章标题"/>
+          <input type="text"  placeholder="输入文章标题"  v-model.trim="getTitle"/>
           <i class="bot"></i>
         </li>
         <li class="channel">
           <P>选择频道</P>
-          <p v-if="Channel">{{Channel}}</p>
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel" v-else>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!ChannelValue">
             <use xlink:href="#icon-shuru"></use>
           </svg>
+          <input type="text"   v-model.trim="getChannel" v-else/>
+
 
           <i class="bot"></i>
         </li>
@@ -51,47 +52,64 @@
 
 <script>
   import {getLocalUserInfo,getUserInfo,getUserLevelPercentage} from '../../utils/user'
-
+  import { postRequest } from '../../utils/request'
   export default {
     data () {
       return {
-        Channel:''
+        ChannelValue: '',
+        channels: [],
+        getUrl: "",
+        getTitle: "",
+        getChannel:""
+      }
+    },
+    watch: {
+      getUrl: function (newValue, oldValue) {
+        console.error(newValue)
+      },
+      getTitle: function (newValue, oldValue) {
+        console.error(newValue)
+      },
+      getChannel: function (newValue, oldValue) {
+        this.getChannel = newValue
+        console.error(newValue)
+
       }
     },
     methods: {
+      getChannels () {
+        postRequest(`article/get-categories`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          if (response.data.data.length > 0) {
+            this.channels = response.data.data
+          }
+          this.loading = 0
+        })
+      },
       selectChannel () {
         var userPicker = new window.mui.PopPicker()
 
-        userPicker.setData([
-          {
-            value: '1',
-            text: '汽车'
-          },
-          {
-            value: '2',
-            text: '小哈公社'
-          },
-          {
-            value: '3',
-            text: 'inwehub'
-          },
-          {
-            value: '4',
-            text: '顾问小哈'
-          },
-          {
-            value: '5',
-            text: '快速消费品'
-          }
-        ])
-        userPicker.pickers[0].setSelectedValue(this.Channel)
+        userPicker.setData(this.channels)
+
         userPicker.show(items => {
-          this.Channel = items[0].text
+          this.getChannel = items[0].text
+          var value = items[0].value
           userPicker.dispose()
         })
+      },
+      focus () {
+        console.error("ok")
       }
+    },
+    created () {
+      this.getChannels()
     }
-
   }
 </script>
 
@@ -220,10 +238,14 @@
     font-size: 14px;
   }
 
-  .channel p:nth-of-type(2) {
+  .channel input {
+    width:50%;
     float: right;
     color: #c8c8c8;
     font-size: 14px;
+    border:none;
+    text-align: right;
+    color:#444444;
   }
 
   .channel svg {
