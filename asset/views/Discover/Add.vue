@@ -15,7 +15,7 @@
               <use xlink:href="#icon-times1"></use>
             </svg>
             <img :id="'image_' + index" :src="image.base64"/>
-          </div><div class="component-photograph" @tap.stop.prevent="selectImgs()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+          </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
         <div class="bottomWrapper">
@@ -42,12 +42,15 @@
       </div>
       </div>
     </div>
+
+    <uploadImage ref="uploadImage" v-model="images"></uploadImage>
   </div>
 </template>
 
 <script>
-  import { selectFileH5, compressImg } from '../../utils/uploadFile'
+  import { compressImg } from '../../utils/uploadFile'
   import { postRequest } from '../../utils/request'
+  import uploadImage from '../../components/uploadImage'
 
   export default {
     data () {
@@ -72,8 +75,12 @@
       }
     },
     components: {
+      uploadImage
     },
     methods: {
+      uploadImage: function () {
+        this.$refs.uploadImage.uploadImage()
+      },
       getChannels () {
         postRequest(`article/get-categories`, {}).then(response => {
           var code = response.data.code
@@ -155,18 +162,6 @@
             return
           }
           this.$router.push('/discover/success')
-        })
-      },
-      selectImgs () {
-        selectFileH5('img', (file, base64) => {
-          var imgInfo = {
-            name: file.name,
-            size: file.size,
-            base64: base64,
-            isNew: true
-          }
-
-          this.images.push(imgInfo)
         })
       },
       textareaFocus () {
