@@ -111,6 +111,11 @@
           return
         }
 
+        if (this.descLength < 7) {
+          window.mui.toast('内容不得小于7个字符')
+          return
+        }
+
         if (!this.images.length) {
           window.mui.toast('请添加图片')
           return
