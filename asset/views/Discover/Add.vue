@@ -161,7 +161,7 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.$router.push('/discover/success')
+          this.$router.push('/discover/add/success')
         })
       },
       textareaFocus () {

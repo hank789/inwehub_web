@@ -367,9 +367,9 @@ const routes = [
     }
   },
   { // 发布成功；
-    path: '/discover/publishSuccessfully',
+    path: '/discover/add/success',
     name: 'discover_publishSuccessfully',
-    component: require('../../../views/Discover/PublishSuccessfully.vue'),
+    component: require('../../../views/Discover/AddSuccess.vue'),
     meta: {
       title: '发现',
       keepAlive: true
