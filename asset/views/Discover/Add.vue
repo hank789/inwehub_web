@@ -19,7 +19,7 @@
         </div>
 
         <div class="bottomWrapper">
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}"></label>匿名</span>
+          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}" v-if="false"></label><!--匿名--></span>
           <span class="counter"><span>{{descLength}}</span><span>/</span><span>{{descMaxLength}}</span></span>
         </div>
       </div>
@@ -39,7 +39,6 @@
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
           您的位置
-
       </div>
       </div>
     </div>
@@ -47,13 +46,17 @@
 </template>
 
 <script>
-  import { selectFileH5 } from '../../utils/uploadFile'
+  import { selectFileH5, compressImg } from '../../utils/uploadFile'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
       return {
         description: '',
         images: [],
+        channels: [],
+        selectedChannel: '',
+        percentCompleted: 0,
         hide: 0,
         descMaxLength: 2000,
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
@@ -70,24 +73,29 @@
     components: {
     },
     methods: {
+      getChannels () {
+        postRequest(`article/get-categories`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          if (response.data.data.length > 0) {
+            this.channels = response.data.data
+          }
+          this.loading = 0
+        })
+      },
       selectChannel () {
         var userPicker = new window.mui.PopPicker()
 
-        userPicker.setData([
-          {
-            value: '1',
-            text: '汽车'
-          },
-          {
-            value: '2',
-            text: '小哈公社'
-          }
-        ])
-        userPicker.pickers[0].setSelectedValue(1)
+        userPicker.setData(this.channels)
 
         userPicker.show(items => {
           var value = items[0].value
-          console.log(value)
+          this.selectedChannel = value
           userPicker.dispose()
         })
       },
@@ -103,10 +111,50 @@
           return
         }
 
+        if (this.descLength < 7) {
+          window.mui.toast('内容不得小于7个字符')
+          return
+        }
+
         if (!this.images.length) {
           window.mui.toast('请添加图片')
           return
         }
+
+        if (!this.selectedChannel) {
+          window.mui.toast('请选择频道')
+          return
+        }
+
+        var data = {
+          type: 'text',
+          title: this.description,
+          photos: [],
+          category_id: this.selectedChannel
+        }
+
+        for (var i in this.images) {
+          var compressBase64 = compressImg('image_' + i)
+          data['photos'].push(compressBase64)  // this.images[i].base64;
+        }
+
+        var options = {
+          onUploadProgress: function (progressEvent) {
+            this.percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            window.mui.uploadWaitingValue(this.percentCompleted)
+          }
+        }
+
+        window.mui.showUploadWaiting()
+
+        postRequest(`article/store`, data, false, options).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.$router.push('/discover/success')
+        })
       },
       selectImgs () {
         selectFileH5('img', (file, base64) => {
@@ -138,7 +186,15 @@
         }
       }
     },
+    created () {
+      this.getChannels()
+    },
     mounted () {
+      window.mui.plusReady(() => {
+        window.plus.webview.currentWebview().setStyle({
+          softinputMode: 'adjustResize'
+        })
+      })
       this.textareaBlur()
     }
   }
@@ -147,5 +203,9 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
     background: #fff;
+  }
+
+  .container-bottom-menus{
+    left:0;
   }
 </style>
