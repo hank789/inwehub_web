@@ -8,9 +8,9 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="">热门<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/discover/newest')">最新</span>
-        <svg class="icon" aria-hidden="true">
+        <span @tap.stop.prevent="">热门 <i></i></span>
+        <span @tap.stop.prevent="$router.replace('/discover/newest')">最新 </span>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/discover/publishArticles')">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
 
@@ -25,48 +25,48 @@
         :nextOtherData="{sort:'hot'}"
         class="listWrapper">
         <ul>
-          <!--<li class="Container" v-for="(hot, index) in list" v-if="hot.type == 'link'">-->
-            <!--<p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>-->
-            <!--<p class="container-image" v-if="hot.data.img">-->
-              <!--<img :src="hot.data.img">-->
-            <!--</p>-->
-            <!--<p class="timer">-->
-              <!--<timeago :since="timeago(hot.created_at)" :auto-update="60">-->
-              <!--</timeago>-->
-              <!--<a>#{{hot.category_name}}</a>-->
-              <!--<i class="bot"></i>-->
-            <!--</p>-->
-            <!--<p class="information">-->
-            <!--<span>-->
-               <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-gengduo"></use>-->
-               <!--</svg>-->
-            <!--</span>-->
-              <!--<span>-->
-               <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-shoucangxingxing"></use>-->
-               <!--</svg>-->
-            <!--</span>-->
-              <!--<span>-->
-               <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-pinglun1"></use>-->
-               <!--</svg>-->
-              <!--{{hot.comments_number}}-->
-            <!--</span>-->
-              <!--<span>-->
-               <!--<svg class="icon" aria-hidden="true">-->
-              <!--<use xlink:href="#icon-dianzan1"></use>-->
-            <!--</svg>-->
-              <!--{{hot.upvotes}}-->
-            <!--</span>-->
-            <!--</p>-->
-          <!--</li>-->
+          <li class="Container" v-for="(hot, index) in list" v-if="hot.type == 'link'">
+            <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+            <p class="container-image" v-if="hot.data.img">
+              <img :src="hot.data.img">
+            </p>
+            <p class="timer">
+              <timeago :since="timeago(hot.created_at)" :auto-update="60">
+              </timeago>
+              <a>#{{hot.category_name}}</a>
+              <i class="bot"></i>
+            </p>
+            <p class="information">
+          <span>
+          <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+          </svg>
+          </span>
+              <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
+          <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucangxingxing"></use>
+          </svg>
+          </span>
+              <span >
+          <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun1"></use>
+          </svg>
+          {{hot.comments_number}}
+          </span>
+          <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
+          <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+          </svg>
+          {{hot.upvotes}}
+          </span>
+            </p>
+          </li>
           <!--带图片的样式-->
-          <li class="imgContainer" v-for="(hot, index) in list" v-if="hot.type == 'text'">
+          <li class="imgContainer" v-for="(hot, num) in list" v-if="hot.type == 'text'">
 
             <div class="avatar">
               <p>
-                <img :src="hot.owner.avatar" />
+                <img :src="hot.owner.avatar"/>
                 <svg class="icon" aria-hidden="true" v-if="hot.owner.is_expert == '1'">
                   <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                 </svg>
@@ -77,17 +77,17 @@
               {{hot.title}}
             </div>
 
-            <div class="PublishContainer" v-if="hot.data.photos">
-              <p class="container-image" >
-                <img :src="hot.data.photos"/>
+            <div class="PublishContainer" v-if="hot.data.img" >
+              <template v-for="(item,number) in hot.data.img">
+              <p class="container-image" v-if="hot.data.img.length > 1">
+                <img :src="item"/>
               </p>
-              <!--<p class="container-image">-->
-                <!--<img src="../../statics/images/guide_02.png"/>-->
-              <!--</p>-->
-              <!--<p class="container-image">-->
-                <!--<img src="../../statics/images/guide_03.png"/>-->
-              <!--</p>-->
+              <p class="container-image" id="container-image" v-if="hot.data.img.length < 2">
+                <img :src="item"/>
+              </p>
+              </template>
             </div>
+
             <div class="timeContainer">
               <span>
                 <timeago :since="timeago(hot.created_at)" :auto-update="60">
@@ -104,22 +104,22 @@
                 <use xlink:href="#icon-gengduo"></use>
                </svg>
             </span>
-              <span>
+              <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
                <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucangxingxing"></use>
                </svg>
             </span>
-              <span>
+              <span >
                <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-pinglun1"></use>
                </svg>
-              2
+              {{hot.comments_number}}
             </span>
-              <span>
+              <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
                <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dianzan1"></use>
             </svg>
-              12
+              {{hot.upvotes}}
             </span>
 
             </div>
@@ -133,7 +133,7 @@
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-
+  import { postRequest } from '../../utils/request'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -150,13 +150,62 @@
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
-      }
-    },
-    mounted () {
-    },
-    updated () {
-    console.error(this.list);
+      },
+      // 赞文章
+      downvoteComment (hot) {
+        postRequest(`article/upvote-submission`, {
+          submission_id : hot.id
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+             if(response.data.data.type == 'upvote'){
+                 hot.upvotes += 1
+                 hot.is_upvoted = 1
+             }else{
+               hot.is_upvoted = 0
+               hot.upvotes -= 1
+             }
+          }
+        })
+      },
+    // 赞文章
+    bookmarkuBmission(hot) {
+        console.error(hot.owner.id)
+      postRequest(`article/bookmark-submission`, {
+        id : hot.id
+      }).then(response => {
+        var code = response.data.code
+        // 如果请求不成功提示信息 并且返回上一页；
+        if (code !== 1000) {
+          window.mui.alert(response.data.message)
+          window.mui.back()
+          return
+        }
+        if (response.data.data) {
+          if(response.data.data.type == "bookmarked"){
+            hot.is_bookmark = 1
+          }else{
+            hot.is_bookmark = 0
+          }
+        }
+      })
     }
+  },
+  mounted()
+  {
+
+  }
+  ,
+  updated()
+  {
+//    console.error(this.list)
+  }
   }
   export default PublishAnswers
 </script>
@@ -291,7 +340,7 @@
     position: relative;
   }
 
-  ul .Container p.timer  a {
+  ul .Container p.timer a {
     font-size: 12px;
     color: rgb(128, 128, 128);
   }
@@ -422,14 +471,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content:space-between;
-    align-items:center;
+    justify-content: space-between;
+    align-items: center;
     /*border:1px solid #000000;*/
   }
 
   .PublishContainer .container-image {
-    flex: 1;
-    /*height:108px;*/
+    width: 108px;
     /*border:1px solid #000000;*/
 
   }
@@ -441,5 +489,36 @@
 
   .PublishContainer p:nth-of-type(2), .PublishContainer p:nth-of-type(3) {
     margin-left: 2%;
+  }
+
+  #container-image {
+    width: 150px;
+    height: 226px;
+  }
+
+  /*适配*/
+  @media (min-width: 320px) {
+    .PublishContainer .container-image {
+      height: 92px;
+    }
+
+  }
+
+  @media (min-width: 375px) {
+    .PublishContainer .container-image {
+      height: 108px;
+    }
+
+  }
+
+  @media (min-width: 414px) {
+    .PublishContainer .container-image {
+      height: 108px;
+    }
+
+  }
+
+  .information .blue{
+    color:#03aef9;
   }
 </style>
