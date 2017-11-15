@@ -124,10 +124,10 @@
           return
         }
 
-        if (!this.images.length) {
-          window.mui.toast('请添加图片')
-          return
-        }
+//        if (!this.images.length) {
+//          window.mui.toast('请添加图片')
+//          return
+//        }
 
         if (!this.selectedChannel) {
           window.mui.toast('请选择频道')
