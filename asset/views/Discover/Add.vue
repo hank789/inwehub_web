@@ -15,7 +15,7 @@
               <use xlink:href="#icon-times1"></use>
             </svg>
             <img :id="'image_' + index" :src="image.base64"/>
-          </div><div class="component-photograph" @tap.stop.prevent="selectImgs()"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+          </div><div class="component-photograph" @tap.stop.prevent="selectImgs()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
         <div class="bottomWrapper">
@@ -56,6 +56,7 @@
         images: [],
         channels: [],
         selectedChannel: '',
+        maxImageCount: 3,
         percentCompleted: 0,
         hide: 0,
         descMaxLength: 2000,
