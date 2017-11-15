@@ -13,114 +13,152 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shuaxin"></use>
-        </svg>
+
       </div>
       <!--滚动区域-->
-      <ul>
-        <li class="Container">
-          <p>[物料规格与单位] 噩梦，那些刺痛PP顾问们的物料单位与规格的问题<i>-baidu.com</i></p>
-          <p class="container-image">
-            <img src="../../statics/images/guide_01.png">
-          </p>
-          <p>1小时前发布于<a>#小哈公社</a>
-            <i class="bot"></i>
-          </p>
-          <p class="information">
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduo"></use>
-               </svg>
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucangxingxing"></use>
-               </svg>
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun1"></use>
-               </svg>
-              2
-            </span>
-            <span>
-               <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dianzan1"></use>
-            </svg>
-              12
-            </span>
-          </p>
-        </li>
-        <!--带图片的样式-->
-        <li class="imgContainer">
-          <div class="avatar">
-            <p>
-              <img src="../../statics/images/service1.png" />
+      <!--内容区域-->
+      <RefreshList
+        v-model="list"
+        :api="'article/list'"
+        :pageMode="true"
+        :prevOtherData="{sort:'hot', page:1}"
+        :nextOtherData="{sort:'hot'}"
+        class="listWrapper">
+        <ul>
+          <!--<li class="Container" v-for="(hot, index) in list" v-if="hot.type == 'link'">-->
+            <!--<p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>-->
+            <!--<p class="container-image" v-if="hot.data.img">-->
+              <!--<img :src="hot.data.img">-->
+            <!--</p>-->
+            <!--<p class="timer">-->
+              <!--<timeago :since="timeago(hot.created_at)" :auto-update="60">-->
+              <!--</timeago>-->
+              <!--<a>#{{hot.category_name}}</a>-->
+              <!--<i class="bot"></i>-->
+            <!--</p>-->
+            <!--<p class="information">-->
+            <!--<span>-->
+               <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-gengduo"></use>-->
+               <!--</svg>-->
+            <!--</span>-->
+              <!--<span>-->
+               <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-shoucangxingxing"></use>-->
+               <!--</svg>-->
+            <!--</span>-->
+              <!--<span>-->
+               <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-pinglun1"></use>-->
+               <!--</svg>-->
+              <!--{{hot.comments_number}}-->
+            <!--</span>-->
+              <!--<span>-->
+               <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-dianzan1"></use>-->
+            <!--</svg>-->
+              <!--{{hot.upvotes}}-->
+            <!--</span>-->
+            <!--</p>-->
+          <!--</li>-->
+          <!--带图片的样式-->
+          <li class="imgContainer" v-for="(hot, index) in list" v-if="hot.type == 'text'">
+
+            <div class="avatar">
+              <p>
+                <img :src="hot.owner.avatar" />
+                <svg class="icon" aria-hidden="true" v-if="hot.owner.is_expert == '1'">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
+              </p>
+              <p>{{hot.owner.username}}发布了分享</p>
+            </div>
+            <div class="textContainer mui-ellipsis-2">
+              {{hot.title}}
+            </div>
+
+            <div class="PublishContainer" v-if="hot.data.photos">
+              <p class="container-image" >
+                <img :src="hot.data.photos"/>
+              </p>
+              <!--<p class="container-image">-->
+                <!--<img src="../../statics/images/guide_02.png"/>-->
+              <!--</p>-->
+              <!--<p class="container-image">-->
+                <!--<img src="../../statics/images/guide_03.png"/>-->
+              <!--</p>-->
+            </div>
+            <div class="timeContainer">
+              <span>
+                <timeago :since="timeago(hot.created_at)" :auto-update="60">
+                </timeago>
+              </span>
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                <use xlink:href="#icon-dingwei1"></use>
               </svg>
-            </p>
-            <p>郭伟发布了分享</p>
-          </div>
-          <div class="textContainer mui-ellipsis-2">
-            1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。
-          </div>
-
-          <div class="PublishContainer">
-            <p class="container-image">
-              <img src="../../statics/images/guide_01.png" />
-            </p>
-            <p class="container-image">
-              <img src="../../statics/images/guide_02.png" />
-            </p>
-            <p class="container-image">
-              <img src="../../statics/images/guide_03.png" />
-            </p>
-          </div>
-          <div class="timeContainer">
-            <span>19小时前发布于</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dingwei1"></use>
-            </svg>
-            <span>曼哈顿 (金陵）商务酒店</span>
-          </div>
-          <div class="information">
+              <span>曼哈顿 (金陵）商务酒店</span>
+            </div>
+            <div class="information">
             <span>
                <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-gengduo"></use>
                </svg>
             </span>
-            <span>
+              <span>
                <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shoucangxingxing"></use>
                </svg>
             </span>
-            <span>
+              <span>
                <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-pinglun1"></use>
                </svg>
               2
             </span>
-            <span>
+              <span>
                <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dianzan1"></use>
             </svg>
               12
             </span>
 
-          </div>
+            </div>
 
 
-
-
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 <script>
+  import RefreshList from '../../components/refresh/List.vue'
 
+  const PublishAnswers = {
+    data: () => ({
+      list: []
+    }),
+    created () {
+    },
+    computed: {},
+    components: {
+      RefreshList
+    },
+    methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      }
+    },
+    mounted () {
+    },
+    updated () {
+    console.error(this.list);
+    }
+  }
+  export default PublishAnswers
 </script>
 <style scoped>
   .mui-wechat .menu {
@@ -169,20 +207,9 @@
 
   .menu svg {
     float: right;
-  }
-
-  .menu svg:nth-of-type(1) {
-    font-size: 18px;
+    ont-size: 18px;
     color: #03aef9;
     margin-top: 13px;
-    margin-left: 20px;
-  }
-
-  .menu svg:nth-of-type(2) {
-    font-size: 22px;
-    color: #b4b4b6;
-    margin-top: 12px;
-
   }
 
   .menu i {
@@ -239,13 +266,10 @@
 
   }
 
-
-
   ul .Container p:nth-of-type(1) {
     font-size: 15px;
     color: #444444;
     line-height: 20px;
-    margin-bottom: 13px;
   }
 
   ul .Container p:nth-of-type(1) i {
@@ -255,9 +279,10 @@
 
   ul .Container .container-image {
     height: 124px;
+    margin-top: 13px;
   }
 
-  ul .Container p:nth-of-type(3) {
+  ul .Container p.timer {
     width: 100%;
     height: 44px;
     font-size: 12px;
@@ -266,7 +291,7 @@
     position: relative;
   }
 
-  ul .Container p:nth-of-type(3) a {
+  ul .Container p.timer  a {
     font-size: 12px;
     color: rgb(128, 128, 128);
   }
@@ -278,41 +303,45 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
-    align-items:center;
-
+    justify-content: space-between;
+    align-items: center;
 
   }
 
-  .information span{
+  .information span {
     color: #808080;
 
   }
-  .information span svg{
-    font-size:17px;
+
+  .information span svg {
+    font-size: 17px;
   }
 
-  .information span:nth-of-type(2) svg{
-    font-size:18px;
+  .information span:nth-of-type(2) svg {
+    font-size: 18px;
   }
-  .information span:nth-of-type(3) svg{
-    font-size:17px;
+
+  .information span:nth-of-type(3) svg {
+    font-size: 17px;
     margin-right: 3px;
 
   }
-  .information span:nth-of-type(4) svg{
-    font-size:17px;
+
+  .information span:nth-of-type(4) svg {
+    font-size: 17px;
     margin-right: 3px;
   }
-/*带定位和图片的样式*/
-.imgContainer{
-  width: 100%;
-  overflow: hidden;
-  background: #FFFFFF;
-  padding: 12px 16px 0 16px;
-  margin-bottom: 10px;
-}
-.imgContainer:after{
+
+  /*带定位和图片的样式*/
+  .imgContainer {
+    width: 100%;
+    overflow: hidden;
+    background: #FFFFFF;
+    padding: 12px 16px 0 16px;
+    margin-bottom: 10px;
+  }
+
+  .imgContainer:after {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -321,77 +350,96 @@
     background-color: #f3f4f6;
     width: 100%;
   }
-  .imgContainer .avatar{
-    width:100%;
+
+  .imgContainer .avatar {
+    width: 100%;
     height: 34px;
   }
-  .avatar p:nth-of-type(1){
-    width:34px;
-    height:34px;
+
+  .avatar p:nth-of-type(1) {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     float: left;
     position: relative;
   }
-  .avatar p:nth-of-type(1) svg{
+
+  .avatar p:nth-of-type(1) svg {
     position: absolute;
-    font-size:17px;
+    font-size: 17px;
     bottom: 0;
-    right:-6px;
+    right: -6px;
   }
-  .avatar p:nth-of-type(1) img{
-    width:100%;
-    height:100%;
+
+  .avatar p:nth-of-type(1) img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
   }
-  .avatar p:nth-of-type(2){
-    font-size:13px;
+
+  .avatar p:nth-of-type(2) {
+    font-size: 13px;
     color: #808080;
     line-height: 34px;
-    margin-left:8px;
+    margin-left: 8px;
     float: left;
   }
-  .textContainer{
-    width:100%;
-    font-size:15px;
-    color:#444444;
+
+  .textContainer {
+    width: 100%;
+    font-size: 15px;
+    color: #444444;
     line-height: 20px;
-    margin-bottom:13px;
+    margin-top: 6px;
   }
-  .timeContainer{
-    width:100%;
-    height:42px;
-    font-size:12px;
+
+  .timeContainer {
+    width: 100%;
+    height: 42px;
+    font-size: 12px;
     line-height: 42px;
 
   }
-  .timeContainer svg{
+
+  .timeContainer svg {
     font-size: 14px;
     color: #b4b4b6;
   }
-  .timeContainer span:nth-of-type(1){
+
+  .timeContainer span:nth-of-type(1) {
     color: #b4b4b6;
   }
-  .timeContainer span:nth-of-type(2){
+
+  .timeContainer span:nth-of-type(2) {
     color: #808080;
   }
+
   /*图片*/
-  .PublishContainer{
-    width:100%;
+  .PublishContainer {
+    width: 100%;
     overflow: hidden;
+    margin-top: 13px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    align-items:center;
     /*border:1px solid #000000;*/
   }
-  .PublishContainer .container-image{
-    width:32%;
-    height:108px;
-    float: left;
+
+  .PublishContainer .container-image {
+    flex: 1;
+    /*height:108px;*/
     /*border:1px solid #000000;*/
 
   }
-  .PublishContainer .container-image img{
-    width:100%;
-    height:100%;
+
+  .PublishContainer .container-image img {
+    width: 100%;
+    height: 100%;
   }
-  .PublishContainer p:nth-of-type(2),.PublishContainer p:nth-of-type(3){
+
+  .PublishContainer p:nth-of-type(2), .PublishContainer p:nth-of-type(3) {
     margin-left: 2%;
   }
 </style>
