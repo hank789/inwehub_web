@@ -33,14 +33,14 @@
           <i class="bot"></i>
         </li>
         <!--<li class="coverMap">-->
-          <!--<p>封面图片</p>-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-shuru"></use>-->
-          <!--</svg>-->
-          <!--<div class="container-image">-->
-            <!--<img src="../../statics/images/guide_01.png"/>-->
-          <!--</div>-->
-          <!--<i class="bot"></i>-->
+        <!--<p>封面图片</p>-->
+        <!--<svg class="icon" aria-hidden="true">-->
+        <!--<use xlink:href="#icon-shuru"></use>-->
+        <!--</svg>-->
+        <!--<div class="container-image">-->
+        <!--<img src="../../statics/images/guide_01.png"/>-->
+        <!--</div>-->
+        <!--<i class="bot"></i>-->
         <!--</li>-->
         <button class="submit">发布</button>
       </ul>
@@ -50,12 +50,12 @@
 </template>
 
 <script>
-  import { getLocalUserInfo, getUserInfo, getUserLevelPercentage } from '../../utils/user'
+  import {getLocalUserInfo,getUserInfo,getUserLevelPercentage} from '../../utils/user'
 
   export default {
     data () {
       return {
-        Channel: ""
+        Channel:''
       }
     },
     methods: {
@@ -93,8 +93,6 @@
     }
 
   }
-
-
 </script>
 
 <style scoped="scoped">
@@ -193,8 +191,8 @@
     margin-bottom: 0;
     padding-right: 0;
     border: none;
-    font-size:14px;
-    color:#444444;
+    font-size: 14px;
+    color: #444444;
   }
 
   input::-webkit-input-placeholder { /*WebKit browsers*/

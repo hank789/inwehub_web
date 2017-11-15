@@ -98,69 +98,61 @@
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-  // 点击关注；
-  collectProfessor(id, key, index)
-  {
-    postRequest(`follow/user`, {
-      id: id
-    }).then(response => {
-      var code = response.data.code
-      if (code !== 1000) {
-        window.mui.alert(response.data.message)
-        return
-      }
-      console.log(index)
-      if (response.data.data.type === 'unfollow') {
-        this.lastList[key][index].is_followed = 0
-      } else {
-        this.lastList[key][index].is_followed = 1
-      }
-      window.mui.toast(response.data.data.tip)
-    })
-  }
-  ,
-  // 数据；
-  getList()
-  {
-    postRequest(`followed/searchUsers`, {}).then(response => {
-      var code = response.data.code
-      if (code !== 1000) {
-        window.mui.alert(response.data.message)
-        window.mui.back()
-        return
-      }
-      if (response.data.data.length > 0) {
-        var arr = response.data.data
-        for (var i = 0; i < arr.length; i++) {
-          var item = {
-            id: arr[i].user_id,
-            name: arr[i].user_name,
-            avatar_url: arr[i].user_avatar_url,
-            description: arr[i].description,
-            is_expert: arr[i].is_expert,
-            is_followed: arr[i].is_followed,
-            uuid: arr[i].uuid
-
+      // 点击关注；
+      collectProfessor (id, key, index) {
+        postRequest(`follow/user`, {
+          id: id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
           }
-          this.list = this.list.concat(item)
-        }
-      }
-      this.loading = 0
-    })
-  }
-  },
+          console.log(index)
+          if (response.data.data.type === 'unfollow') {
+            this.lastList[key][index].is_followed = 0
+          } else {
+            this.lastList[key][index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      // 数据；
+      getList () {
+        postRequest(`followed/searchUsers`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.length > 0) {
+            var arr = response.data.data
+            for (var i = 0; i < arr.length; i++) {
+              var item = {
+                id: arr[i].user_id,
+                name: arr[i].user_name,
+                avatar_url: arr[i].user_avatar_url,
+                description: arr[i].description,
+                is_expert: arr[i].is_expert,
+                is_followed: arr[i].is_followed,
+                uuid: arr[i].uuid
 
-  watch: {}
-  ,
-  mounted()
-  {
-    this.getList()
-  }
-  ,
-  created()
-  {
-    console.log(this.lastList)
-  }
+              }
+              this.list = this.list.concat(item)
+            }
+          }
+          this.loading = 0
+        })
+      }
+    },
+    watch: {},
+    mounted () {
+      this.getList()
+    },
+    created () {
+      console.log(this.lastList)
+    }
   }
 </script>
 
@@ -256,7 +248,8 @@
   .mui-content {
     background: #fff;
   }
-  .textBody{
-    width:50%;
+
+  .textBody {
+    width: 50%;
   }
 </style>
