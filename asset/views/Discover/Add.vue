@@ -66,6 +66,10 @@
         selectedAddress: '',
         hide: 0,
         descMaxLength: 2000,
+        position: {
+          longt: 0,
+          lat: 0
+        },
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
       }
     },
@@ -165,7 +169,10 @@
           type: 'text',
           title: this.description,
           photos: [],
-          category_id: this.selectedChannel
+          category_id: this.selectedChannel,
+          current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
+          current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
+          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
         }
 
         for (var i in this.images) {
@@ -213,6 +220,7 @@
       this.getChannels()
       getGeoPosition((position) => {
         if (position.addresses) {
+          this.position = position
           this.address = position.addresses
           this.selectedAddress = this.address
         }
