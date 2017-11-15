@@ -190,6 +190,11 @@
       this.getChannels()
     },
     mounted () {
+      window.mui.plusReady(() => {
+        window.plus.webview.currentWebview().setStyle({
+          softinputMode: 'adjustResize'
+        })
+      })
       this.textareaBlur()
     }
   }
@@ -198,5 +203,9 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
     background: #fff;
+  }
+
+  .container-bottom-menus{
+    left:0;
   }
 </style>
