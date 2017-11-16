@@ -382,6 +382,22 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 发现；
+    path: '/discover/list',
+    name: 'discover_list',
+    component: require('../../../views/Discover/List.vue'),
+    meta: {
+      title: '发现',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   {
     path: '/discover/detail/:slug',
     name: 'discover_detail',

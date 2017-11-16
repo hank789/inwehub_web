@@ -24,7 +24,7 @@
         class="listWrapper">
         <ul>
           <template v-for="(hot, index) in list">
-            <li class="Container" v-if="hot.type === 'link'" >
+            <li class="Container" v-if="hot.type === 'link'"  @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
               <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
               <p class="container-image" v-if="hot.data.img">
                 <img :src="hot.data.img">
@@ -65,7 +65,7 @@
               </div>
             </li>
           <!--带图片的样式-->
-            <li class="imgContainer" v-else-if="hot.type === 'text'">
+            <li class="imgContainer" v-else-if="hot.type === 'text'" @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
               <TextDetail :data="hot" @downvoteComment="downvoteComment"
                           @bookmarkuBmission="bookmarkuBmission"></TextDetail>
 

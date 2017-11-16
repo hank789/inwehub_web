@@ -72,11 +72,6 @@
     },
     watch: {
       url: function (newValue, oldValue) {
-        console.error(newValue)
-//        if (!urlReg.test(newValue)) {
-//          window.mui.toast('请填写正确的url格式')
-//          return
-//        }
         if (newValue) {
            this.isShow = true
         }else {
