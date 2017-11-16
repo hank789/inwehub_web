@@ -21,19 +21,19 @@
           <ul class="message_detail">
             <li v-for="(item, index) in list">
               <div class="message_t">
-                <p @tap.stop.prevent="toResume(item.uuid)">
-                  <img :src="item.user_avatar_url"/>
-                  <svg class="icon" aria-hidden="true" v-show="item.is_expert">
+                <p @tap.stop.prevent="toResume(item.owner.uuid)">
+                  <img :src="item.owner.avatar"/>
+                  <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </p>
                 <p>
-                  <span class="mui-ellipsis">{{ item.user_name }}</span>
+                  <span class="mui-ellipsis">{{ item.owner.username }}</span>
                   <span>{{ item.created_at }}</span>
                 </p>
               </div>
               <div class="message_b">
-                {{ item.content }}
+                {{ item.body }}
 
 
 
@@ -77,6 +77,10 @@
       submissionSlug: {
         type: String,
         default: ''
+      },
+      submissionId: {
+        type: Number,
+        default: 0
       }
     },
     mounted () {
@@ -118,7 +122,7 @@
           return false
         }
 
-        postRequest(`article/comment-store`, {'submission_id': this.submissionSlug, content: this.textarea}).then(response => {
+        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: 0}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -127,29 +131,33 @@
 
           var data = response.data.data
 
-          window.mui.toast(data.tips)
+          window.mui.toast(response.data.message)
 
           this.prependItem(
-            data.comment_id,
+            data.id,
             this.textarea,
             data.created_at,
-            data.user_name
+            data.owner.name,
+            data.owner.uuid
           )
           this.textarea = ''
           this.showTextarea = false
         })
       },
-      prependItem (id, msg, createdAt, username) {
+      prependItem (id, msg, createdAt, username, uuid) {
         var userInfo = getLocalUserInfo()
 
         var item = {
           id,
-          content: msg,
-          is_expert: userInfo.is_expert,
-          user_avatar_url: userInfo.avatar_url,
-          user_id: userInfo.user_id,
-          user_name: username,
-          createdAt
+          body: msg,
+          owner: {
+            is_expert: userInfo.is_expert,
+            avatar: userInfo.avatar_url,
+            user_id: userInfo.user_id,
+            uuid,
+            username: username
+          },
+          created_at: createdAt
         }
 
         this.list.unshift(item)

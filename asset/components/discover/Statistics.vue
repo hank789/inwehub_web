@@ -1,6 +1,6 @@
 <template>
   <div class="statistics">
-    <div class="item">
+    <div class="item" :class="{active:isCommented}">
       <div class="iconWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
@@ -45,6 +45,10 @@
       commentNum: {
         type: Number,
         default: 0
+      },
+      isCommented: {
+        type: Boolean,
+        default: true
       },
       id: {
         type: Number,

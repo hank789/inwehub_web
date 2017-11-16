@@ -22,7 +22,7 @@
         1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。
       </div>
 
-      <Images :images="detail.data.img" class="newestList"></Images>
+      <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
       <div class="timeContainer">
         <span>
@@ -39,6 +39,7 @@
         <Statistics
           :id="detail.id"
           :commentNum="detail.comments_number"
+          :isCommented="detail.is_commented"
           :supportNum="detail.upvotes"
           :isSupported="detail.is_upvoted?true:false"
           :collectNum="detail.bookmarks"
@@ -56,6 +57,7 @@
 
       <Discuss
         :submissionSlug="detail.slug"
+        :submissionId="detail.id"
         ref="discuss"
       ></Discuss>
 
@@ -74,7 +76,17 @@
     data () {
       return {
         slug: '',
-        detail: {},
+        detail: {
+          owner: {
+            uuid: '',
+            avatar: '',
+            username: ''
+          },
+          data: {
+            img: ''
+          },
+          created_at: ''
+        },
         isFollow: true,
         loading: 1
       }
