@@ -19,12 +19,13 @@
         v-model="list"
         :api="'article/list'"
         :pageMode="true"
-        :prevOtherData="{sort:'hot', page:1}"
+        :prevOtherData="{sort:'hot', page: 1}"
         :nextOtherData="{sort:'hot'}"
         class="listWrapper">
         <ul>
           <template v-for="(hot, index) in list">
-            <li class="Container" v-if="hot.type === 'link'"  @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
+            <li class="Container" v-if="hot.type === 'link'"
+                @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
               <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
               <p class="container-image" v-if="hot.data.img">
                 <img :src="hot.data.img">
@@ -37,40 +38,43 @@
               </p>
               <div class="information">
                 <p>
-                  <svg class="icon" aria-hidden="true" >
-                  <use xlink:href="#icon-gengduo"></use>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-gengduo"></use>
                   </svg>
                   <span class="carte">
-                    <a @tap.stop.prevent="report(hot.user_id)" >举报</a>
+                    <a @tap.stop.prevent="report(hot.user_id)">举报</a>
                     <a @tap.stop.prevent="deleterow(hot.user_id)">删除</a>
                   </span>
                 </p>
                 <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
                   <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucangxingxing"></use>
+                    <use xlink:href="#icon-shoucangxingxing"></use>
                   </svg>
                 </p>
                 <p>
                   <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-pinglun1"></use>
+                    <use xlink:href="#icon-pinglun1"></use>
                   </svg>
                   {{hot.comments_number}}
+
                 </p>
                 <p @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
                   <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-dianzan1"></use>
+                    <use xlink:href="#icon-dianzan1"></use>
                   </svg>
-                {{hot.upvotes}}
+                  {{hot.upvotes}}
+
                 </p>
               </div>
             </li>
-          <!--带图片的样式-->
-            <li class="imgContainer" v-else-if="hot.type === 'text'" @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
+            <!--带图片的样式-->
+            <li class="imgContainer" v-else-if="hot.type === 'text'"
+                @tap.stop.prevent="$router.pushPlus('/discover/detail/'+ hot.slug)">
               <TextDetail :data="hot" @downvoteComment="downvoteComment"
                           @bookmarkuBmission="bookmarkuBmission"></TextDetail>
 
             </li>
-        </template>
+          </template>
         </ul>
       </RefreshList>
     </div>
@@ -93,23 +97,23 @@
     },
     methods: {
       report (id) {
-        var btnArray = ['取消', '确定'];
-        mui.confirm('确定举报吗？', ' ', btnArray, function(e) {
-          if (e.index == 1) {
-            window.mui.toast('举报成功');
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            window.mui.toast('举报成功')
           }
         })
       },
       deleterow (id) {
-      var btnArray = ['取消', '确定'];
-      mui.confirm('确定删除吗？', ' ', btnArray, function(e) {
-        if (e.index == 1) {
-          window.mui.toast('删除成功');
-        } else {
-          window.mui.toast('取消删除');
-        }
-      })
-    },
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            window.mui.toast('删除成功')
+          } else {
+            window.mui.toast('取消删除')
+          }
+        })
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -119,7 +123,7 @@
       // 赞文章
       downvoteComment (hot) {
         postRequest(`article/upvote-submission`, {
-          submission_id : hot.id
+          submission_id: hot.id
         }).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
@@ -129,49 +133,46 @@
             return
           }
           if (response.data.data) {
-             if(response.data.data.type == 'upvote'){
-                 hot.upvotes += 1
-                 hot.is_upvoted = 1
-             }else{
-               hot.is_upvoted = 0
-               hot.upvotes -= 1
-             }
+            if (response.data.data.type === 'upvote') {
+              hot.upvotes += 1
+              hot.is_upvoted = 1
+            } else {
+              hot.is_upvoted = 0
+              hot.upvotes -= 1
+            }
           }
         })
       },
-    // 赞文章
-    bookmarkuBmission(hot) {
-      postRequest(`article/bookmark-submission`, {
-        id : hot.id
-      }).then(response => {
-        var code = response.data.code
-        // 如果请求不成功提示信息 并且返回上一页；
-        if (code !== 1000) {
-          window.mui.alert(response.data.message)
-          window.mui.back()
-          return
-        }
-        if (response.data.data) {
-          if(response.data.data.type == "bookmarked"){
-            hot.is_bookmark = 1
-          }else{
-            hot.is_bookmark = 0
+      // 赞文章
+      bookmarkuBmission (hot) {
+        postRequest(`article/bookmark-submission`, {
+          id: hot.id
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
           }
-        }
-      })
-    }
-  },
-  mounted()
-  {
-     document.addEventListener('tap', () => {
+          if (response.data.data) {
+            if (response.data.data.type === 'bookmarked') {
+              hot.is_bookmark = 1
+            } else {
+              hot.is_bookmark = 0
+            }
+          }
+        })
+      }
+    },
+    mounted () {
+      document.addEventListener('tap', () => {
 
-     })
-  }
-  ,
-  updated()
-  {
+      })
+    },
+    updated () {
 //    console.error(this.list)
-  }
+    }
   }
   export default PublishAnswers
 </script>
@@ -327,18 +328,20 @@
     position: relative;
 
   }
+
   /*举报和删除*/
-  .information p:nth-of-type(1) span{
+  .information p:nth-of-type(1) span {
     display: block;
-    width:50px;
-    background:#575857;
+    width: 50px;
+    background: #575857;
     position: absolute;
     top: 20px;
     left: -15px;
     border-radius: 4px;
     z-index: 99;
   }
-  .information p:nth-of-type(1) span:after{
+
+  .information p:nth-of-type(1) span:after {
     content: "";
     display: block;
     width: 0;
@@ -346,22 +349,22 @@
     border: 5px solid transparent;
     border-top: 5px solid #575857;
     border-left: 5px solid #575857;
-    transform:rotate(45deg);
+    transform: rotate(45deg);
     position: absolute;
-    top:-2px;
-    left:0;
-    right:0;
+    top: -2px;
+    left: 0;
+    right: 0;
     margin: auto;
 
   }
-  .information p:nth-of-type(1) span a{
+
+  .information p:nth-of-type(1) span a {
     display: block;
     text-align: center;
-    font-size:13px;
-    color:#FFFFFF;
+    font-size: 13px;
+    color: #FFFFFF;
     padding: 3px 0;
   }
-
 
   .information p svg {
     font-size: 17px;
@@ -519,10 +522,11 @@
 
   }
 
-  .information .blue{
-    color:#03aef9;
+  .information .blue {
+    color: #03aef9;
   }
-  .listWrapper{
+
+  .listWrapper {
     margin-top: 45px;
   }
 </style>

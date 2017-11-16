@@ -21,10 +21,10 @@
         <li class="title">
           <p>文章标题</p>
           <div class="shortContainer" v-if="isShow">
-            <input type="text"  placeholder="输入文章标题"  v-model.trim="title"  />
+            <input type="text" placeholder="输入文章标题" v-model.trim="title"/>
             <span @tap.stop.prevent="getUrl">自动获取</span>
           </div>
-          <input type="text"  placeholder="输入文章标题"  v-model.trim="title" class="longContainer" v-else/>
+          <input type="text" placeholder="输入文章标题" v-model.trim="title" class="longContainer" v-else/>
           <i class="bot"></i>
         </li>
         <li class="channel">
@@ -32,7 +32,7 @@
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!channel">
             <use xlink:href="#icon-shuru"></use>
           </svg>
-          <input type="text"   v-model.trim="channel" v-else/>
+          <input type="text" v-model.trim="channel" v-else/>
 
           <i class="bot"></i>
         </li>
@@ -46,7 +46,9 @@
         <!--</div>-->
         <!--<i class="bot"></i>-->
         <!--</li>-->
-        <button class="submit" :disabled="disableRegister"  :class="isblue ? 'blue':''"  @tap.stop.prevent="goPublish()">发布</button>
+        <button class="submit" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
+          发布
+        </button>
       </ul>
 
     </div>
@@ -54,7 +56,6 @@
 </template>
 
 <script>
-  import {getLocalUserInfo,getUserInfo,getUserLevelPercentage} from '../../utils/user'
   import { postRequest } from '../../utils/request'
   const urlReg = /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]$/
   export default {
@@ -73,12 +74,11 @@
     watch: {
       url: function (newValue, oldValue) {
         if (newValue) {
-           this.isShow = true
-        }else {
+          this.isShow = true
+        } else {
           this.isShow = false
         }
         this.checkValid()
-
       },
       title: function (newValue, oldValue) {
         console.error(newValue)
@@ -115,7 +115,7 @@
         if (!urlReg.test(this.url)) {
           window.mui.toast('请填写正确的url格式')
           return
-        }else {
+        } else {
           postRequest(`article/fetch-url-title`, {
             url: this.url
           }).then(response => {
@@ -130,8 +130,8 @@
             if (response.data.data) {
               this.title = response.data.data.title
             }
-        })
-          }
+          })
+        }
       },
 //    (https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]
       // 判断否有值（改变button按钮的状态来改变颜色）；
@@ -184,9 +184,7 @@
           userPicker.dispose()
         })
       },
-      focus () {
-        console.error("ok")
-      }
+      focus () {}
     },
     created () {
       this.getChannels()
@@ -283,7 +281,7 @@
     font-size: 14px;
   }
 
-  .address input{
+  .address input {
     width: 80%;
     height: 42px;
     float: left;
@@ -293,7 +291,8 @@
     font-size: 14px;
     color: #444444;
   }
-  .title .longContainer{
+
+  .title .longContainer {
     width: 80%;
     height: 42px;
     float: left;
@@ -304,7 +303,8 @@
     color: #444444;
 
   }
-  .title .shortContainer{
+
+  .title .shortContainer {
     width: 80%;
     height: 42px;
     float: left;
@@ -314,22 +314,24 @@
     font-size: 14px;
     color: #444444;
   }
-  .title .shortContainer input{
+
+  .title .shortContainer input {
     width: 74%;
     height: 42px;
-    float:left;
+    float: left;
     margin-bottom: 0;
     padding-right: 0;
     border: none;
     font-size: 14px;
     color: #444444;
   }
-  .title .shortContainer span{
+
+  .title .shortContainer span {
     float: right;
     height: 19px;
     color: #FFFFFF;
-    font-size:12px;
-    background:#03aef9;
+    font-size: 12px;
+    background: #03aef9;
     text-align: center;
     line-height: 18px;
     border-radius: 50px;
@@ -337,19 +339,8 @@
     margin-top: 12px;
 
   }
+
   input::-webkit-input-placeholder { /*WebKit browsers*/
-    color: #c8c8c8;
-    font-size: 14px;
-    text-align: right;
-  }
-
-  input::-moz-input-placeholder { /*Mozilla Firefox*/
-    color: #c8c8c8;
-    font-size: 14px;
-    text-align: right;
-  }
-
-  input::-ms-input-placeholder { /*Internet Explorer*/
     color: #c8c8c8;
     font-size: 14px;
     text-align: right;
@@ -363,13 +354,13 @@
   }
 
   .channel input {
-    width:50%;
+    width: 50%;
     float: right;
     color: #c8c8c8;
     font-size: 14px;
-    border:none;
+    border: none;
     text-align: right;
-    color:#444444;
+    color: #444444;
   }
 
   .channel svg {
@@ -415,7 +406,8 @@
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .blue{
+
+  .blue {
     background: #03aef9;
     color: #FFFFFF;
   }
