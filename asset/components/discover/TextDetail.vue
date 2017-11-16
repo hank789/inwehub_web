@@ -25,7 +25,7 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-dingwei1"></use>
       </svg>
-      <span>曼哈顿 (金陵）商务酒店</span>
+      <span>{{data.data.current_address_name}}</span>
     </div>
     <div class="information">
             <span>
