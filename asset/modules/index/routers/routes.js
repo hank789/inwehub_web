@@ -324,7 +324,7 @@ const routes = [
     component: require('../../../views/Discover/HotTopic.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
