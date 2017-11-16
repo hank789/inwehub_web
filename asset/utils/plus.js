@@ -106,7 +106,7 @@ function getGeoPosition (callback) {
     window.plus.geolocation.getCurrentPosition((position) => {
       var codns = position.coords
       var info = {
-        coordsType: position.coordsType, //坐标类型
+        coordsType: position.coordsType, // 坐标类型
         addresses: position.addresses, // 地址信息
         longt: codns.longitude, // 经度
         lat: codns.latitude // 纬度
