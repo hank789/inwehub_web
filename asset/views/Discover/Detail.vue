@@ -5,7 +5,7 @@
       <h1 class="mui-title">发现</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="mui-table-view detail-discover">
         <UserInfo
           :uuid="detail.owner.uuid"
@@ -19,7 +19,7 @@
         ></UserInfo>
       </div>
       <div class="contentWrapper">
-        1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。
+        {{ detail.title }}
       </div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
@@ -29,7 +29,7 @@
           <timeago :since="timeago(detail.created_at)" :auto-update="60">
           </timeago>
         </span>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" v-show="detail.data.current_address_name">
           <use xlink:href="#icon-dingwei1"></use>
         </svg>
         <span>{{detail.data.current_address_name}}</span>
