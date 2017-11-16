@@ -324,7 +324,7 @@ const routes = [
     component: require('../../../views/Discover/HotTopic.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -370,6 +370,22 @@ const routes = [
     path: '/discover/add/success',
     name: 'discover_publishSuccessfully',
     component: require('../../../views/Discover/AddSuccess.vue'),
+    meta: {
+      title: '发现',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/discover/detail/:slug',
+    name: 'discover_detail',
+    component: require('../../../views/Discover/Detail.vue'),
     meta: {
       title: '发现',
       keepAlive: false

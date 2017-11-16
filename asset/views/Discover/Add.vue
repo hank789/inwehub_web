@@ -31,7 +31,7 @@
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
-        <svg class="icon menu" aria-hidden="true">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
           <use xlink:href="#icon-lianjie"></use>
         </svg>
         <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="selectAddress">
@@ -85,6 +85,9 @@
       uploadImage
     },
     methods: {
+      jumpToLinkMode: function () {
+        this.$router.pushPlus('/discover/publishArticles')
+      },
       uploadImage: function () {
         this.$refs.uploadImage.uploadImage()
       },
