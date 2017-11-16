@@ -16,7 +16,6 @@
 </template>
 
 <script type="text/javascript">
-  import localEvent from '../stores/localStorage'
   import { selectFileH5 } from '../utils/uploadFile'
 
   export default {

@@ -340,7 +340,7 @@ const routes = [
     component: require('../../../views/Discover/Newest.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -356,7 +356,7 @@ const routes = [
     component: require('../../../views/Discover/PublishArticles.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -372,7 +372,7 @@ const routes = [
     component: require('../../../views/Discover/AddSuccess.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
