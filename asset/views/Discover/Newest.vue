@@ -244,7 +244,6 @@
     width: 100%;
     overflow: hidden;
     background: #F3F4F5;
-    margin-top: 45px;
   }
 
   ul .Container {
@@ -461,5 +460,8 @@
 
   .information .blue {
     color: #03aef9;
+  }
+  .listWrapper{
+    margin-top: 45px;
   }
 </style>

@@ -10,16 +10,24 @@
          </svg>
          <p>发布成功！</p>
          <p>你可以通过我的-我的发布来管理发现</p>
-         <button>查看发布</button>
+         <button @tap.stop.prevent="$router.pushPlus('/my/publishArticle')">查看发布</button>
        </div>
     </div>
   </div>
 </template>
 
 <script>
-
+  export default {
+    data () {
+      return {
+      }
+    },
+    methods: {
+    },
+    created () {
+    }
+  }
 </script>
-
 
 <style scoped>
   /*清掉自带样式*/
@@ -82,5 +90,6 @@
     font-size:16px;
     color:#FFFFFF;
     margin-top:47px;
+    border: none;
   }
 </style>

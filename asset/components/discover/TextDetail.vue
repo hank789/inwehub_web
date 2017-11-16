@@ -11,45 +11,45 @@
     </div>
     <div class="textContainer mui-ellipsis-2">
       {{data.title}}
-            </div>
+    </div>
 
-    <div class="PublishContainer" v-if="data.data.img" >
+    <div class="PublishContainer" v-if="data.data.img">
       <Images :images="data.data.img" class="newestList"></Images>
     </div>
 
     <div class="timeContainer">
-              <span>
-                <timeago :since="timeago(data.created_at)" :auto-update="60">
-                </timeago>
-              </span>
-      <svg class="icon" aria-hidden="true">
+      <span>
+        <timeago :since="timeago(data.created_at)" :auto-update="60">
+        </timeago>
+      </span>
+      <svg class="icon" aria-hidden="true" v-if="data.data.current_address_name">
         <use xlink:href="#icon-dingwei1"></use>
       </svg>
       <span>{{data.data.current_address_name}}</span>
     </div>
     <div class="information">
-            <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduo"></use>
-               </svg>
-            </span>
+      <span>
+         <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+         </svg>
+      </span>
       <span @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucangxingxing"></use>
-               </svg>
-            </span>
-      <span >
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun1"></use>
-               </svg>
-              {{data.comments_number}}
-            </span>
+         <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucangxingxing"></use>
+         </svg>
+      </span>
+      <span>
+         <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun1"></use>
+         </svg>
+        {{data.comments_number}}
+      </span>
       <span @tap.stop.prevent="downvoteComment(data)" :class="data.is_upvoted ? 'blue':''">
-               <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dianzan1"></use>
-            </svg>
-              {{data.upvotes}}
-            </span>
+         <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-dianzan1"></use>
+      </svg>
+        {{data.upvotes}}
+      </span>
     </div>
   </div>
 </template>
