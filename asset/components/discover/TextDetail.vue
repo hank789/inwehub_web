@@ -14,14 +14,7 @@
             </div>
 
     <div class="PublishContainer" v-if="data.data.img" >
-      <template v-for="(item,number) in data.data.img">
-        <p class="container-image" v-if="data.data.img.length > 1">
-          <img :src="item"/>
-        </p>
-        <p class="container-image" id="container-image" v-if="data.data.img.length < 2">
-          <img :src="item"/>
-        </p>
-      </template>
+      <Images :images="data.data.img" class="newestList"></Images>
     </div>
 
     <div class="timeContainer">
@@ -62,11 +55,15 @@
 </template>
 <script type="text/javascript">
 
+  import Images from '../../components/image/Images.vue'
+
   export default {
     data () {
       return {}
     },
-    components: {},
+    components: {
+      Images
+    },
     props: {
       data: {
         type: Object,
@@ -404,4 +401,6 @@
   .information .blue {
     color: #03aef9;
   }
+
+
 </style>
