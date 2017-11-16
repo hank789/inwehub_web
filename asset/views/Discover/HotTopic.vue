@@ -25,107 +25,50 @@
         :nextOtherData="{sort:'hot'}"
         class="listWrapper">
         <ul>
-          <li class="Container" v-for="(hot, index) in list" v-if="hot.type == 'link'">
-            <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
-            <p class="container-image" v-if="hot.data.img">
-              <img :src="hot.data.img">
-            </p>
-            <p class="timer">
-              <timeago :since="timeago(hot.created_at)" :auto-update="60">
-              </timeago>
-              <a>#{{hot.category_name}}</a>
-              <i class="bot"></i>
-            </p>
-            <p class="information">
-          <span>
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-          </svg>
-          </span>
-              <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-          </svg>
-          </span>
-              <span >
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-          </svg>
-          {{hot.comments_number}}
-          </span>
-          <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          {{hot.upvotes}}
-          </span>
-            </p>
-          </li>
-          <!--带图片的样式-->
-          <li class="imgContainer" v-for="(hot, num) in list" v-if="hot.type == 'text'">
-
-            <div class="avatar">
-              <p>
-                <img :src="hot.owner.avatar"/>
-                <svg class="icon" aria-hidden="true" v-if="hot.owner.is_expert == '1'">
-                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                </svg>
+          <template v-for="(hot, index) in list">
+            <li class="Container" v-if="hot.type === 'link'">
+              <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+              <p class="container-image" v-if="hot.data.img">
+                <img :src="hot.data.img">
               </p>
-              <p>{{hot.owner.username}}发布了分享</p>
-            </div>
-            <div class="textContainer mui-ellipsis-2">
-              {{hot.title}}
-            </div>
-
-            <div class="PublishContainer" v-if="hot.data.img" >
-              <template v-for="(item,number) in hot.data.img">
-              <p class="container-image" v-if="hot.data.img.length > 1">
-                <img :src="item"/>
-              </p>
-              <p class="container-image" id="container-image" v-if="hot.data.img.length < 2">
-                <img :src="item"/>
-              </p>
-              </template>
-            </div>
-
-            <div class="timeContainer">
-              <span>
+              <p class="timer">
                 <timeago :since="timeago(hot.created_at)" :auto-update="60">
                 </timeago>
-              </span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-dingwei1"></use>
-              </svg>
-              <span>曼哈顿 (金陵）商务酒店</span>
-            </div>
-            <div class="information">
+                <a>#{{hot.category_name}}</a>
+                <i class="bot"></i>
+              </p>
+              <p class="information">
             <span>
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduo"></use>
-               </svg>
-            </span>
-              <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucangxingxing"></use>
-               </svg>
-            </span>
-              <span >
-               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun1"></use>
-               </svg>
-              {{hot.comments_number}}
-            </span>
-              <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
-               <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dianzan1"></use>
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-gengduo"></use>
             </svg>
-              {{hot.upvotes}}
             </span>
+                <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoucangxingxing"></use>
+            </svg>
+            </span>
+                <span >
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-pinglun1"></use>
+            </svg>
+            {{hot.comments_number}}
+            </span>
+            <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dianzan1"></use>
+            </svg>
+            {{hot.upvotes}}
+            </span>
+              </p>
+            </li>
+          <!--带图片的样式-->
+            <li class="imgContainer" v-else-if="hot.type === 'text'">
+              <TextDetail :data="hot" @downvoteComment="downvoteComment"
+                          @bookmarkuBmission="bookmarkuBmission"></TextDetail>
 
-            </div>
-
-
-          </li>
+            </li>
+        </template>
         </ul>
       </RefreshList>
     </div>
@@ -134,6 +77,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import TextDetail from '../../components/Discover/TextDetail'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -142,7 +86,8 @@
     },
     computed: {},
     components: {
-      RefreshList
+      RefreshList,
+      TextDetail
     },
     methods: {
       // 时间处理；
