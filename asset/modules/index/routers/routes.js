@@ -1690,14 +1690,14 @@ const routes = [
     },
     component: require('../../../views/SharePng.vue')
   },
-// {
-//  path: '/short',
-//  name: 'short',
-//  meta: {
-//    title: 'short'
-//  },
-//  component: require('../../../components/shortTcut.vue'),
-// },
+  // {
+  //  path: '/dialog',
+  //  name: 'short',
+  //  meta: {
+  //    title: 'short'
+  //  },
+  //  component: require('../../../components/Dialog.vue'),
+  // },
   { // message
     path: '/*',
     name: '404',
