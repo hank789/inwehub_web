@@ -28,12 +28,12 @@
                   </svg>
                 </p>
                 <p>
-                  <span class="mui-ellipsis">{{ item.owner.username }}</span>
+                  <span class="mui-ellipsis">{{ item.owner.name }}</span>
                   <span>{{ item.created_at }}</span>
                 </p>
               </div>
               <div class="message_b">
-                {{ item.body }}
+                {{ item.content }}
 
 
 
@@ -136,26 +136,23 @@
           this.prependItem(
             data.id,
             this.textarea,
-            data.created_at,
-            data.owner.name,
-            data.owner.uuid
+            data.created_at
           )
           this.textarea = ''
           this.showTextarea = false
         })
       },
-      prependItem (id, msg, createdAt, username, uuid) {
+      prependItem (id, msg, createdAt) {
         var userInfo = getLocalUserInfo()
-
         var item = {
           id,
-          body: msg,
+          content: msg,
           owner: {
             is_expert: userInfo.is_expert,
             avatar: userInfo.avatar_url,
             user_id: userInfo.user_id,
-            uuid,
-            username: username
+            uuid: userInfo.uuid,
+            name: userInfo.name
           },
           created_at: createdAt
         }
