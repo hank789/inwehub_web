@@ -232,7 +232,7 @@
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 10:
-            this.$router.pushReadHubPage(item.url)
+            this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 5:
             if (item.feed_type === 5 && item.feed.domain === '') {
