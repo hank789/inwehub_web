@@ -118,14 +118,14 @@
         document.getElementById('short_all').style.display = 'inline'
 
         // 发现页处理
-        if (window.mui.os.plus) {
-          if (this.$route.path.match(/discover/)) {
-            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-            if (inwehubEmbedWebview) {
-              inwehubEmbedWebview.hide()
-            }
-          }
-        }
+//        if (window.mui.os.plus) {
+//          if (this.$route.path.match(/discover/)) {
+//            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+//            if (inwehubEmbedWebview) {
+//              inwehubEmbedWebview.hide()
+//            }
+//          }
+//        }
 
         setStatusBarBackgroundAndStyle('#D8D9DC', 'light')
       },
@@ -141,16 +141,16 @@
         autoHeight()
 
         // 发现页处理
-        if (window.mui.os.plus) {
-          if (this.$route.path.match(/discover/)) {
-            setTimeout(() => {
-              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-              if (inwehubEmbedWebview) {
-                inwehubEmbedWebview.show()
-              }
-            }, 100)
-          }
-        }
+//        if (window.mui.os.plus) {
+//          if (this.$route.path.match(/discover/)) {
+//            setTimeout(() => {
+//              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+//              if (inwehubEmbedWebview) {
+//                inwehubEmbedWebview.show()
+//              }
+//            }, 100)
+//          }
+//        }
       }
     },
     mounted () {
