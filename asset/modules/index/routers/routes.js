@@ -318,6 +318,22 @@ const routes = [
     },
     component: require('../../../views/Invitation/Image.vue')
   },
+  { // 发现_企业服务列表；
+    path: '/discover/company/services',
+    name: 'discover_companyServices',
+    component: require('../../../views/Discover/CompanyServices.vue'),
+    meta: {
+      title: '企业服务',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 发现；
     path: '/discover/hottopic',
     name: 'discover_hottopic',
