@@ -25,7 +25,7 @@
         :nextOtherData="{type:0}"
         class="listWrapper">
         <ul class="answer">
-          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
+          <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask.comment_url)">
             <div class="container-image margin-10-0-0" v-if="ask.img" >
               <img :src="ask.img" />
             </div>
@@ -68,6 +68,9 @@
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
+      },
+      toDetail (url) {
+        this.$router.pushPlus(url, 'list-detail-page')
       }
     },
     mounted () {
