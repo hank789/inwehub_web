@@ -156,6 +156,8 @@ import { hideHeaderHandler } from '../../utils/wechat'
 
 import { autoHeight } from '../../utils/statusBar'
 
+import { scrollToTop } from '../../utils/scrollToTop'
+
 import EventObj from '../../utils/event'
 
 import { toast } from '../../utils/toast'
@@ -192,6 +194,7 @@ Vue.mixin({
 
     autoHeight(this.$el)
     hideHeaderHandler(this, 'mounted')
+    scrollToTop(this.$el)
   },
   created () {
     window.mui.plusReady(function () {
@@ -251,6 +254,12 @@ window.mui.back = function () {
     router.go(-1)
   }
 }
+
+window.mui.initGlobal({
+  gestureConfig: {
+    doubletap: true
+  }
+})
 
 const app = new Vue({
   router,
