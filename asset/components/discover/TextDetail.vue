@@ -468,7 +468,11 @@
     margin-right: 3px;
 
   }
+  ul .Container .information p {
+    color: #808080;
+    position: relative;
 
+  }
   .information p:nth-of-type(4) svg {
     font-size: 17px;
     margin-right: 3px;
