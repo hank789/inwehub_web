@@ -361,10 +361,25 @@
         <span class="ask_divided">其他人查看答案，你可从中获取分成</span>
       </ul>
     </div>
+
     <div id="AnswerRepeat">
       <div class="AnswerRepeat">
         <p>手慢了一步</p>
         <p>很遗憾，已经有专家抢先回答</p>
+      </div>
+    </div>
+
+    <div id="CompanyUser">
+      <div class="CompanyUser">
+        <p>申请企业服务或获取详情介绍！</p>
+        <p>会有销售顾问尽快联系您</p>
+      </div>
+    </div>
+
+    <div id="Company">
+      <div class="Company">
+        <p>您还不是企业版用户！</p>
+        <p>暂不能申请企业服务</p>
       </div>
     </div>
   </div>
@@ -1020,5 +1035,40 @@
     text-align: center;
     margin-top: 15px;
   }
+/* 是企业用户判读*/
 
+  .CompanyUser {
+    width: 100%;
+  }
+  .CompanyUser p:nth-of-type(1) {
+    font-size: 16px;
+    color:#444444;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .CompanyUser p:nth-of-type(2) {
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+    margin-top: 3px;
+  }
+  /* 不是企业用户判读*/
+
+  .Company {
+    width: 100%;
+  }
+  .Company p:nth-of-type(1) {
+    font-size: 16px;
+    color:#444444;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .Company p:nth-of-type(2) {
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+    margin-top: 3px;
+  }
 </style>

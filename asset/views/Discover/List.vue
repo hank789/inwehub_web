@@ -1,7 +1,6 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">发现</h1>
     </header>
     <div class="mui-content">
@@ -62,14 +61,14 @@
         </div>
           <ul class="recommend">
             <p class="recommend_title">精选推荐</p>
-            <li v-for="(recommend, index) in list">
+            <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id)">
                <div class="container-image">
                  <img :src="recommend.data ? recommend.data.img:''"  />
                  <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
                  <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
                  <p class="container_type blue" v-if="recommend.read_type == '3'">互动回答</p>
-                 <p class="container_type pink" v-if="recommend.read_type == '4'">活动机遇</p>
-                 <p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>
+                 <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+                 <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
                </div>
               <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
               <p class="recommend_time">{{recommend.created_at}}</p>
@@ -108,6 +107,30 @@
     },
     watch: {},
     methods: {
+      goDetial (type,source_id) {
+        switch(type,category_id,slug)
+        {
+          case 1:
+            alert('发现分享');
+            this.$router.pushPlus('/c/'+ category_id+'/'+ slug)
+            break;
+          case 2:
+            this.$router.pushPlus('/askCommunity/major/'+source_id)
+            break;
+          case 3:
+            this.$router.pushPlus('/askCommunity/interaction/answers/'+source_id)
+            break;
+          case 4:
+            this.$router.pushPlus('/EnrollmentStatus/'+source_id)
+            break;
+          case 5:
+            this.$router.pushPlus('/EnrollmentStatus/'+source_id)
+            break;
+          default:
+
+        }
+
+      },
       companyServices () {
         postRequest(`company/services`, {
           page: 1
