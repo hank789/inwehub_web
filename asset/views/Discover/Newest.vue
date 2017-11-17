@@ -77,7 +77,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
-  import TextDetail from '../../components/Discover/TextDetail'
+  import TextDetail from '../../components/discover/TextDetail'
 
   const PublishAnswers = {
     data: () => ({
