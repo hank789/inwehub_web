@@ -399,7 +399,7 @@ const routes = [
     }
   },
   {
-    path: '/discover/detail/:slug',
+    path: '/c/:category_id/:slug',
     name: 'discover_detail',
     component: require('../../../views/Discover/Detail.vue'),
     meta: {

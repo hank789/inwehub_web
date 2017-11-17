@@ -44,7 +44,7 @@
             <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
             <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item"></SubmitReadhubAriticle>
+            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"></SubmitReadhubAriticle>
 
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
@@ -73,6 +73,8 @@
             <!--x赞了文章-->
             <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
 
+            <!--x发布了发现-->
+            <DiscoverShare v-else-if="item.feed_type === 5 && item.feed.domain === ''" :data="item"></DiscoverShare>
           </div>
         </template>
 
@@ -99,6 +101,7 @@
   import UpvotePayQuestion from '../components/feed/UpvotePayQuestion'
   import UpvoteFreeQuestion from '../components/feed/UpvoteFreeQuestion'
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
+  import DiscoverShare from '../components/feed/DiscoverShare.vue'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -128,7 +131,8 @@
       UpvoteFreeQuestion,
       UpvoteReadhubAriticle,
       Activity,
-      Swiper
+      Swiper,
+      DiscoverShare
     },
     activated: function () {
 
@@ -231,6 +235,12 @@
             this.$router.pushReadHubPage(item.url)
             break
           case 5:
+            if (item.feed_type === 5 && item.feed.domain === '') {
+              this.$router.pushPlus(item.url, 'list-detail-page')
+            } else {
+              this.$router.pushPlus(item.url, 'list-detail-page')
+            }
+            break
           case 13:
             var article = {
               view_url: item.url,
