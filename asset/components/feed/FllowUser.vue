@@ -18,8 +18,8 @@
       </div>
       <div class="middle-width">
         <div class="component-follow">
-          <svg class="icon" aria-hidden="true" style="display: none">
-            <use xlink:href="#icon-plus-o"></use>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jia"></use>
           </svg>
         </div>
       </div>
@@ -76,9 +76,10 @@
     font-size: 21px !important;
     z-index: 9 !important;
     color: #dcdcdc !important;
+    background-color: #fff;
   }
 
   .middle-width {
-    width: 68px;
+    width: 113px;
   }
 </style>

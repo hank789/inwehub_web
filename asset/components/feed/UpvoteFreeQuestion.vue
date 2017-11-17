@@ -13,9 +13,9 @@
       </div>
     </div>
     <div class="container-answer">
-      <div class="color-808080 font-13">回答者：{{data.feed.answer_user_name}}</div>
-      <div class="color-444 font-16 margin-5-0-0 mui-ellipsis">{{data.feed.question_title}}</div>
+      <div class="color-444 font-16 mui-ellipsis">{{data.feed.question_title}}</div>
       <div class="text-14-808080 margin-5-0-0 mui-ellipsis-2">{{data.feed.answer_content}}</div>
+      <div class="color-808080 margin-5-0-0 font-13">回答者：{{data.feed.answer_user_name}}</div>
     </div>
   </div>
 </template>

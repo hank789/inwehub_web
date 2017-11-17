@@ -41,7 +41,7 @@
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
     </div>
-    <div class="component-address margin-5-0-0">
+    <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-dingwei1"></use>
       </svg>{{data.feed.current_address_name}}
