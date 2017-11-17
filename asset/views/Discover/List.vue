@@ -5,64 +5,77 @@
       <h1 class="mui-title">发现</h1>
     </header>
     <div class="mui-content">
-      <!--类别-->
-      <ul class="categoryMenu">
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhuanyewenda-"></use>
-          </svg>
-          <p>专业问答</p>
-        </li>
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-hudongwenda-"></use>
-          </svg>
-          <p>互动问答</p>
-        </li>
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tijiaowenzhang1"></use>
-          </svg>
-          <p>发现分享</p>
-        </li>
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-huodongjiyu"></use>
-          </svg>
-          <p>活动机遇</p>
-        </li>
-        <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-fujinqiye1"></use>
-          </svg>
-          <p>附近企业</p>
-        </li>
-      </ul>
-      <!--swiper-->
-      <div class="container-item" >
-        <div class="title">
-          <p>企业服务</p>
-          <p class="more">查看全部</p>
-        </div>
-        <swiper :options="swiperOption" id="home-recommend">
-          <swiper-slide style="width: 220px;" id="home-card">
-             <img src="../../statics/images/guide_01.png"/>
-          </swiper-slide>
-        </swiper>
-      </div>
+
 
       <!--列表-->
-      <ul class="recommend">
-        <p class="recommend_title">精选推荐</p>
-        <li>
-           <div class="container-image">
-             <img src="../../statics/images/guide_01.png"  />
-             <p class="container_type">活动机遇</p>
-           </div>
-          <p class="recommend_content mui-ellipsis-2" >客户虐我千百遍，爱意如初永感念。客户虐我千百遍，爱意如初永感念</p>
-          <p class="recommend_time">2017/02/14 </p>
-        </li>
-      </ul>
+      <RefreshList
+        v-model="list"
+        :api="'recommendRead'"
+        :pageMode="true"
+        :prevOtherData="{page: 1}"
+        :nextOtherData="{}"
+        class="listWrapper">
+        <!--类别-->
+        <ul class="categoryMenu">
+          <li @tap.stop.prevent="judge(hot)">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanyewenda-"></use>
+            </svg>
+            <p>专业问答</p>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-hudongwenda-"></use>
+            </svg>
+            <p>互动问答</p>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tijiaowenzhang1"></use>
+            </svg>
+            <p>发现分享</p>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-huodongjiyu"></use>
+            </svg>
+            <p>活动机遇</p>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-fujinqiye1"></use>
+            </svg>
+            <p>附近企业</p>
+          </li>
+        </ul>
+        <!--swiper -->
+        <div class="container-item" >
+          <div class="title">
+            <p>企业服务</p>
+            <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
+          </div>
+          <swiper :options="swiperOption" id="home-recommend">
+            <swiper-slide style="width: 220px;" id="home-card" v-for="(item, index) in servicesList">
+              <img :src="item.img_url"/>
+            </swiper-slide>
+          </swiper>
+        </div>
+          <ul class="recommend">
+            <p class="recommend_title">精选推荐</p>
+            <li v-for="(recommend, index) in list">
+               <div class="container-image">
+                 <img :src="recommend.data ? recommend.data.img:''"  />
+                 <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+                 <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
+                 <p class="container_type blue" v-if="recommend.read_type == '3'">互动回答</p>
+                 <p class="container_type pink" v-if="recommend.read_type == '4'">活动机遇</p>
+                 <p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>
+               </div>
+              <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
+              <p class="recommend_time">{{recommend.created_at}}</p>
+            </li>
+          </ul>
+      </RefreshList>
 
     </div>
   </div>
@@ -70,15 +83,19 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
   export default {
     data () {
       return {
-        swiperOption: {}
+        swiperOption: {},
+        servicesList: [],
+        list: []
       }
     },
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      RefreshList
     },
     props: {},
     created () {
@@ -88,7 +105,6 @@
         spaceBetween: 10,
         onTap: this.swipperClick
       }
-      this.companyServices()
     },
     watch: {},
     methods: {
@@ -103,15 +119,19 @@
             window.mui.back()
             return
           }
-          console.error(response.data)
-          if (response.data.data) {
-
+          if (response.data.data.data) {
+            this.servicesList = response.data.data.data
           }
         })
-      },
-      mounted () {
-
       }
+    },
+    mounted () {
+      this.companyServices()
+    },
+    updated () {
+//      console.error(this.list)
+//      /EnrollmentStatus/11   活动机遇
+
     }
   }
 </script>
@@ -208,11 +228,22 @@
     height:23px;
     opacity: 0.7;
     border-radius:0 50px 50px 0;
-    background: #03aef9;
     text-align: center;
     line-height: 23px;
-
+    color: #FFFFFF;
   }
+  /*颜色*/
+  .recommend li .blue{
+    background: #03aef9;
+  }
+  .recommend li .yellow{
+    background: #fcc816;
+  }
+  .recommend li .pink{
+    background:#fa4975;
+  }
+
+  /**/
   .recommend_content{
     margin-top: 20px;
     color:#444444;
@@ -232,8 +263,8 @@
 
 /*swiper*/
   .container-item{
-
     background: #FFFFFF;
+    margin-bottom: 10px;
   }
   .container-item .title{
     width:100%;
@@ -257,8 +288,8 @@
   #home-recommend {
     width: 100%;
     height: 162px;
-    margin-left:4%;
-
+    padding-left:4%;
+    background: #FFFFFF;
   }
 
   #home-recommend div:nth-of-type(1) {
@@ -275,7 +306,9 @@
     height:100%;
     border-radius: 4px;
   }
-
+.listWrapper{
+  margin-top: 0px;
+}
 
 
 </style>
