@@ -29,9 +29,13 @@
     </div>
     <div class="information">
       <span>
-         <svg class="icon" aria-hidden="true">
+         <svg class="icon" aria-hidden="true" @tap.stop.prevent="toggleOptions">
           <use xlink:href="#icon-gengduo"></use>
          </svg>
+        <span class="carte" style="display: none;">
+          <a @tap.stop.prevent="report(data.user_id)">举报</a>
+          <a @tap.stop.prevent="deleterow(data.user_id)">删除</a>
+        </span>
       </span>
       <span @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
          <svg class="icon" aria-hidden="true">
@@ -74,6 +78,17 @@
 
     },
     methods: {
+      report (id) {
+        this.$emit('report', id)
+      },
+      deleterow (id) {
+        this.$emit('deleterow', id)
+      },
+      toggleOptions (event) {
+        if (event.target.nodeName !== 'svg') return
+        var target = event.target.nextElementSibling
+        target.style.display = target.style.display === 'none' ? 'block' : 'none'
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
@@ -402,5 +417,61 @@
     color: #03aef9;
   }
 
+
+  /*举报和删除*/
+  .information p:nth-of-type(1) span {
+    display: block;
+    width: 50px;
+    background: #575857;
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    border-radius: 4px;
+    z-index: 99;
+  }
+
+  .information p:nth-of-type(1) span:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top: 5px solid #575857;
+    border-left: 5px solid #575857;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+  }
+
+  .information p:nth-of-type(1) span a {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #FFFFFF;
+    padding: 3px 0;
+  }
+
+  .information p svg {
+    font-size: 17px;
+  }
+
+  .information p:nth-of-type(2) svg {
+    font-size: 18px;
+  }
+
+  .information p:nth-of-type(3) svg {
+    font-size: 17px;
+    margin-right: 3px;
+
+  }
+
+  .information p:nth-of-type(4) svg {
+    font-size: 17px;
+    margin-right: 3px;
+  }
 
 </style>

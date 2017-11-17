@@ -16,7 +16,9 @@
     props: {
       images: {
         type: Array,
-        default: []
+        default: () => {
+          return []
+        }
       }
     },
     created () {

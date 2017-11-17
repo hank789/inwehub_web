@@ -5,7 +5,7 @@
       <h1 class="mui-title">发现</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" @tap="hideAllOptions()">
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="">热门 <i></i></span>
@@ -38,10 +38,10 @@
               </p>
               <div class="information">
                 <p>
-                  <svg class="icon" aria-hidden="true">
+                  <svg class="icon" aria-hidden="true" @tap.stop.prevent="toggleOptions">
                     <use xlink:href="#icon-gengduo"></use>
                   </svg>
-                  <span class="carte">
+                  <span class="carte" style="display: none;">
                     <a @tap.stop.prevent="report(hot.user_id)">举报</a>
                     <a @tap.stop.prevent="deleterow(hot.user_id)">删除</a>
                   </span>
@@ -96,6 +96,18 @@
       TextDetail
     },
     methods: {
+      hideAllOptions () {
+        var list = document.querySelectorAll('.carte')
+        for (var i in list) {
+          if (!list[i].style) continue
+          list[i].style.display = 'none'
+        }
+      },
+      toggleOptions (event) {
+        if (event.target.nodeName !== 'svg') return
+        var target = event.target.nextElementSibling
+        target.style.display = target.style.display === 'none' ? 'block' : 'none'
+      },
       report (id) {
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
@@ -529,4 +541,5 @@
   .listWrapper {
     margin-top: 45px;
   }
+
 </style>
