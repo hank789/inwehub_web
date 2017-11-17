@@ -399,8 +399,8 @@ const routes = [
     }
   },
   { // 发现；
-    path: '/discover/list',
-    name: 'discover_list',
+    path: '/discover',
+    name: 'discover',
     component: require('../../../views/Discover/List.vue'),
     meta: {
       title: '发现',
@@ -1304,19 +1304,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // discover
-    path: '/discover',
-    name: 'discover',
-    meta: {
-      title: '发现',
-      wechatHideHeader: true,
-      keepAlive: true
-    },
-    component: require('../../../views/Readhub/Readhub.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
+  // { // discover
+  //   path: '/discover',
+  //   name: 'discover',
+  //   meta: {
+  //     title: '发现',
+  //     wechatHideHeader: true,
+  //     keepAlive: true
+  //   },
+  //   component: require('../../../views/Readhub/Readhub.vue'),
+  //   beforeEnter: (to, from, next) => {
+  //     requestAuth(to, from, next)
+  //   }
+  // },
   {
     path: '/discover/add',
     name: 'discover_add',
