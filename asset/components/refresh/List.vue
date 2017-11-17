@@ -112,6 +112,11 @@
         this.prevOtherData = prevOtherData
         this.getPrevList()
       },
+      scrollToTop () {
+        if (window.mui('#refreshContainer')) {
+          window.mui('#refreshContainer').pullRefresh().scrollTo(0, 0, 100)
+        }
+      },
       scrollToBottom () {
         if (window.mui('#refreshContainer')) {
           var posY = document.querySelector('#listWrapper').scrollHeight
