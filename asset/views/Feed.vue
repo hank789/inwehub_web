@@ -31,6 +31,7 @@
         <template v-for="(item, index) in list">
 
           <Swiper v-if="index===2"></Swiper>
+          <ServiceRecommendation v-if="index===5"></ServiceRecommendation>
 
           <div @tap.stop.prevent="toDetail(item)">
 
@@ -102,6 +103,7 @@
   import UpvoteFreeQuestion from '../components/feed/UpvoteFreeQuestion'
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
+  import ServiceRecommendation from '../components/feed/ServiceRecommendation'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -133,7 +135,8 @@
       UpvoteReadhubAriticle,
       Activity,
       Swiper,
-      DiscoverShare
+      DiscoverShare,
+      ServiceRecommendation
     },
     activated: function () {
 
@@ -212,6 +215,9 @@
 </script>
 
 <style lang="less" scoped>
+  .mui-content{
+    background:#f3f4f6;
+  }
   .listWrapper {
     top: 0;
     bottom: 50px;

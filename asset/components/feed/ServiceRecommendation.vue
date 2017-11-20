@@ -1,6 +1,6 @@
 <template>
     <!--swiper -->
-    <div class="container-item" v-if="!loading">
+    <div class="container-item" id="swiper" v-if="!loading">
       <div class="title">
         <p>企业服务</p>
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
@@ -89,9 +89,9 @@
     font-style: normal;
   }
   /*swiper*/
-  .container-item{
+  #swiper{
+    margin-bottom: 0;
     background: #FFFFFF;
-    margin-bottom: 10px;
   }
   .container-item .title{
     width:100%;
@@ -114,9 +114,18 @@
 
   #home-recommend {
     width: 100%;
-    height: 162px;
+    height: 172px;
     padding-left:4%;
     background: #FFFFFF;
+  }
+  #home-recommend:after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    height: 10px;
+    background-color: #f3f4f6;
+    width: 100%;
   }
 
   #home-recommend div:nth-of-type(1) {
@@ -134,5 +143,14 @@
     border-radius: 4px;
   }
 
+  .container-item:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    height: 0px;
+    background-color: #97d7fb;
+    width: 100%;
+  }
 </style>
 
