@@ -46,10 +46,12 @@
             <p>附近企业</p>
           </li>
         </ul>
-        <ServiceRecommendation :key="'list-swiper'"></ServiceRecommendation>
+        <ServiceRecommendation :key="'list-swiper'"
+                               @alertClick="alertClick"
+        ></ServiceRecommendation>
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
-          <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id,recommend.data.category_id,recommend.data.slug)">
+          <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
              <div class="container-image">
                <img :src="recommend.data ? recommend.data.img:''"  />
                <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
@@ -71,11 +73,13 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-  import localEvent from '../../stores/localStorage'
-  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
-  const currentUser = localEvent.getLocalItem('UserInfo')
   import userAbility from '../../utils/userAbility'
   import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
+  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
+  import localEvent from '../../stores/localStorage'
+  import { goThirdPartyArticle } from '../../utils/webview'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
 
   export default {
     data () {
@@ -93,16 +97,15 @@
       ServiceRecommendation
     },
     props: {},
-    created () {
-      this.swiperOption = {
-        pagination: '.swiper-pagination',
-        slidesPerView: 1.66,
-        spaceBetween: 10,
-        onTap: this.swipperClick
-      }
-    },
     watch: {},
     methods: {
+      alertClick () {
+        if (this.is_company) {
+          alertCompanyUser(this)
+        } else {
+          alertDiscoverCompany(this)
+        }
+      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -138,29 +141,28 @@
           }
         })
       },
-      swipperClick () {
-        if (this.is_company) {
-          alertCompanyUser(this)
-        } else {
-          alertDiscoverCompany(this)
-        }
-      },
-      goDetial (type, sourceId, categoryId, slug) {
+      goDetial (type, recommend) {
         switch (type) {
           case 1:
-            this.$router.pushPlus('/c/' + categoryId + '/' + slug)
+            goThirdPartyArticle(
+              recommend.data.url,
+              recommend.source_id,
+              recommend.data.title,
+             '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
+              recommend.data.img
+            )
             break
           case 2:
-            this.$router.pushPlus('/askCommunity/major/' + sourceId)
+            this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
             break
           case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + sourceId)
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
             break
           case 4:
-            this.$router.pushPlus('/EnrollmentStatus/' + sourceId)
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
             break
           case 5:
-            this.$router.pushPlus('/EnrollmentStatus/' + sourceId)
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
             break
           default:
 

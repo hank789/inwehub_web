@@ -9,6 +9,10 @@
         <swiper-slide style="width: 220px;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url"/>
         </swiper-slide>
+        <swiper-slide id="service" v-if="isShow ? isShow : 0">
+           <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
+           <p>如您或您的公司希望在InweHub展示业务开展合作，点此申请。</p>
+        </swiper-slide>
       </swiper>
     </div>
 </template>
@@ -17,14 +21,13 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
-  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
 
   export default {
     data () {
       return {
         swiperOption: {
           pagination: '.swiper-pagination',
-          slidesPerView: 1.66,
+          slidesPerView: 1.6,
           spaceBetween: 10,
           onTap: this.swipperClick
         },
@@ -36,18 +39,19 @@
       swiper,
       swiperSlide
     },
-    props: {},
+    props: {
+      isShow: {
+        type: Boolean,
+        default: false
+      }
+    },
     created () {
 
     },
     watch: {},
     methods: {
       swipperClick () {
-        if (this.is_company) {
-          alertCompanyUser(this)
-        } else {
-          alertDiscoverCompany(this)
-        }
+        this.$emit('alertClick')
       },
       companyServices () {
         postRequest(`company/services`, {
@@ -71,7 +75,8 @@
     },
     mounted () {
       this.companyServices()
-    }
+    },
+    updated () {}
   }
 </script>
 
@@ -154,6 +159,30 @@
     height: 0px;
     background-color: #97d7fb;
     width: 100%;
+  }
+  /* 合作*/
+  #service{
+    background: #03aef9;
+    height:147px;
+  }
+  #service p:nth-of-type(1){
+    width:142px;
+    height:35px;
+    border: 1.5px solid #c2cddc;
+    font-size:14px;
+    color:#FFFFFF;
+    text-align: center;
+    line-height: 35px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 13px;
+  }
+  #service p:nth-of-type(2){
+    font-size:13px;
+    color:#FFFFFF;
+    text-align: center;
+    line-height:18px;
+    margin: 0 8%;
   }
 </style>
 
