@@ -38,7 +38,7 @@
     },
     props: {},
     created () {
-      this.companyServices()
+
     },
     watch: {},
     methods: {
@@ -68,6 +68,7 @@
       }
     },
     mounted () {
+      this.companyServices()
     }
   }
 </script>

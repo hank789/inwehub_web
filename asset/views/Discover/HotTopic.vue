@@ -43,7 +43,7 @@
                   </svg>
                   <span class="carte" style="display: none;">
                     <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
-                    <a @tap.stop.prevent="deleterow(hot.user_id)" v-else>删除</a>
+                    <a @tap.stop.prevent="deleterow(hot.id,index)" v-else>删除</a>
                   </span>
                 </p>
                 <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
@@ -71,7 +71,10 @@
             <li class="imgContainer" v-else-if="hot.type === 'text'"
                 @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
               <TextDetail :data="hot" @downvoteComment="downvoteComment"
-                          @bookmarkuBmission="bookmarkuBmission"></TextDetail>
+                          @bookmarkuBmission="bookmarkuBmission"
+                          @report="report"
+                          @deleterow="deleterow"
+              ></TextDetail>
 
             </li>
           </template>
@@ -113,20 +116,37 @@
         target.style.display = target.style.display === 'none' ? 'block' : 'none'
       },
       report (id) {
+        var that = this
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
           if (e.index === 1) {
+            that.hideAllOptions()
             window.mui.toast('举报成功')
           }
         })
       },
-      deleterow (id) {
+      deleterow (id, index) {
         var btnArray = ['取消', '确定']
+        var list = this.list
         window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
           if (e.index === 1) {
-            window.mui.toast('删除成功')
-          } else {
-            window.mui.toast('取消删除')
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              if (response.data.data) {
+                list.splice(index, 1)
+                this.hideAllOptions()
+                window.mui.toast('删除成功')
+              }
+            })
           }
         })
       },
@@ -186,7 +206,9 @@
 
       })
     },
-    updated () {}
+    updated () {
+
+    }
   }
   export default PublishAnswers
 </script>
@@ -536,7 +558,7 @@
 
   }
 
-  .information .blue {
+  ul .Container .information p.blue {
     color: #03aef9;
   }
 

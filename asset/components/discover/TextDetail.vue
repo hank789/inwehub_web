@@ -33,8 +33,8 @@
           <use xlink:href="#icon-gengduo"></use>
          </svg>
         <span class="carte" style="display: none;">
-          <a @tap.stop.prevent="report(data.user_id)">举报</a>
-          <a @tap.stop.prevent="deleterow(data.user_id)">删除</a>
+          <a @tap.stop.prevent="report(data.user_id)" v-if="userId != data.owner.id">举报</a>
+          <a @tap.stop.prevent="deleterow(data.id,index)" v-else>删除</a>
         </span>
       </p>
       <p @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
@@ -60,10 +60,14 @@
 <script type="text/javascript">
 
   import Images from '../../components/image/Images.vue'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
-      return {}
+      return {
+        userId: currentUser.user_id
+      }
     },
     components: {
       Images
@@ -79,22 +83,10 @@
     },
     methods: {
       report (id) {
-        var btnArray = ['取消', '确定']
-        window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            window.mui.toast('举报成功')
-          }
-        })
+        this.$emit('report', id)
       },
-      deleterow (id) {
-        var btnArray = ['取消', '确定']
-        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            window.mui.toast('删除成功')
-          } else {
-            window.mui.toast('取消删除')
-          }
-        })
+      deleterow (id, index) {
+        this.$emit('deleterow', id, index)
       },
       toggleOptions (event) {
         if (event.target.nodeName !== 'svg') return

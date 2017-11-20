@@ -118,6 +118,9 @@
     border-radius: 4px;
     position: relative;
   }
+  .container-image img{
+    box-shadow: 0 0 6px #f3f4f6;
+  }
 
   /*申请企业服务*/
   .apply {

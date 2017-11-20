@@ -404,7 +404,7 @@ const routes = [
     component: require('../../../views/Discover/List.vue'),
     meta: {
       title: '发现',
-      keepAlive: false
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新

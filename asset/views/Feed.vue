@@ -31,7 +31,7 @@
         <template v-for="(item, index) in list">
 
           <Swiper v-if="index===2"></Swiper>
-          <ServiceRecommendation v-if="index===5"></ServiceRecommendation>
+          <ServiceRecommendation v-if="index===5" :key="'feed-swiper'"></ServiceRecommendation>
 
           <div @tap.stop.prevent="toDetail(item)">
 
@@ -216,7 +216,7 @@
 
 <style lang="less" scoped>
   .mui-content{
-    background:#f3f4f6;
+    background: #f3f4f6;
   }
   .listWrapper {
     top: 0;

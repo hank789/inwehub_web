@@ -46,34 +46,22 @@
             <p>附近企业</p>
           </li>
         </ul>
-        <!--swiper -->
-        <!--<div class="container-item" >-->
-          <!--<div class="title">-->
-            <!--<p>企业服务</p>-->
-            <!--<p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>-->
-          <!--</div>-->
-          <!--<swiper :options="swiperOption" id="home-recommend">-->
-            <!--<swiper-slide style="width: 220px;" id="home-card" v-for="(item, index) in servicesList">-->
-              <!--<img :src="item.img_url"/>-->
-            <!--</swiper-slide>-->
-          <!--</swiper>-->
-        <!--</div>-->
-        <ServiceRecommendation></ServiceRecommendation>
-          <ul class="recommend">
-            <p class="recommend_title">精选推荐</p>
-            <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id,recommend.data.category_id)">
-               <div class="container-image">
-                 <img :src="recommend.data ? recommend.data.img:''"  />
-                 <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
-                 <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
-                 <p class="container_type blue" v-if="recommend.read_type == '3'">互动回答</p>
-                 <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
-                 <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
-               </div>
-              <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
-              <p class="recommend_time">{{recommend.created_at}}</p>
-            </li>
-          </ul>
+        <ServiceRecommendation :key="'list-swiper'"></ServiceRecommendation>
+        <ul class="recommend">
+          <p class="recommend_title">精选推荐</p>
+          <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id,recommend.data.category_id,recommend.data.slug)">
+             <div class="container-image">
+               <img :src="recommend.data ? recommend.data.img:''"  />
+               <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+               <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
+               <p class="container_type blue" v-if="recommend.read_type == '3'">互动回答</p>
+               <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+               <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
+             </div>
+            <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
+            <p class="recommend_time">{{recommend.created_at}}</p>
+          </li>
+        </ul>
       </RefreshList>
 
     </div>
@@ -177,27 +165,9 @@
           default:
 
         }
-      },
-      companyServices () {
-        postRequest(`company/services`, {
-          page: 1
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.data) {
-            this.servicesList = response.data.data.data
-          }
-        })
       }
     },
-    mounted () {
-      this.companyServices()
-    },
+    mounted () {},
     updated () {
 //      console.error(this.list)
 //      /EnrollmentStatus/11   活动机遇
