@@ -318,12 +318,79 @@ function clearAllWebViewCache () {
   }
 }
 
+/**
+ * 打开第三方网页
+ * @param url
+ * @param articleId
+ * @param title
+ * @param detailUrl
+ * @param imgUrl
+ */
+function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
+  var id = articleId
+  var pathUrl = detailUrl
+
+  if (/http/.test(url)) {
+    if (window.mui.os.plus) {
+      if (window.mixpanel.track) {
+        window.mixpanel.track(
+          'inwehub:read_page_detail', {
+            'app': 'inwehub',
+            'user_device': window.getUserAppDevice(),
+            'page': url,
+            'page_title': title
+          }
+        )
+      }
+      if (window.ga) {
+        window.ga('set', 'page', url)
+        window.ga('send', 'pageview')
+      }
+      var articleParams = {
+        article_id: id,
+        article_url: url,
+        article_title: title,
+        article_comment_url: pathUrl,
+        article_img_url: imgUrl,
+        preload: true
+      }
+      var articleWs = window.mui.openWindow({
+        url: '/public/index.html#/webview/article',
+        id: 'inwehub_article_view',
+        preload: false, // 一定要为false
+        createNew: false,
+        show: {
+          autoShow: true,
+          aniShow: 'pop-in'
+        },
+        styles: {
+          popGesture: 'hide'
+        },
+        waiting: {
+          autoShow: false
+        },
+        extras: articleParams
+      })
+      window.mui.fire(articleWs, 'load_article', articleParams)
+    } else {
+      // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+
+      url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
+      this.$router.push(url)
+      // window.location.href = url
+    }
+  } else {
+    this.$router.pushReadHubPage(url)
+  }
+}
+
 export {
   openWebviewByUrl,
   openReadhubPage,
   goBack,
   showWebview,
   clearAllWebViewCache,
-  openWebviewByHome
+  openWebviewByHome,
+  goThirdPartyArticle
 }
 

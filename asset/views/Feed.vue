@@ -107,6 +107,7 @@
   import Activity from '../components/home/Activity.vue'
   import Swiper from '../components/home/Swiper.vue'
   import userAbility from '../utils/userAbility'
+  import { goThirdPartyArticle } from '../utils/webview'
 
   const Feed = {
     data: () => ({
@@ -147,64 +148,13 @@
         userAbility.jumpToAddArticle(this)
       },
       goArticle: function (article) {
-        var url = article.view_url
-        var id = article.id
-        var title = article.title
-        var pathUrl = article.comment_url
-        var imgUrl = article.img_url
-
-        if (/http/.test(url)) {
-          if (window.mui.os.plus) {
-            if (window.mixpanel.track) {
-              window.mixpanel.track(
-                'inwehub:read_page_detail', {
-                  'app': 'inwehub',
-                  'user_device': window.getUserAppDevice(),
-                  'page': url,
-                  'page_title': title
-                }
-              )
-            }
-            if (window.ga) {
-              window.ga('set', 'page', url)
-              window.ga('send', 'pageview')
-            }
-            var articleParams = {
-              article_id: id,
-              article_url: url,
-              article_title: title,
-              article_comment_url: pathUrl,
-              article_img_url: imgUrl,
-              preload: true
-            }
-            var articleWs = window.mui.openWindow({
-              url: '/public/index.html#/webview/article',
-              id: 'inwehub_article_view',
-              preload: false, // 一定要为false
-              createNew: false,
-              show: {
-                autoShow: true,
-                aniShow: 'pop-in'
-              },
-              styles: {
-                popGesture: 'hide'
-              },
-              waiting: {
-                autoShow: false
-              },
-              extras: articleParams
-            })
-            window.mui.fire(articleWs, 'load_article', articleParams)
-          } else {
-            // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-
-            url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
-            this.$router.push(url)
-            // window.location.href = url
-          }
-        } else {
-          this.$router.pushReadHubPage(url)
-        }
+        goThirdPartyArticle(
+          article.view_url,
+          article.id,
+          article.title,
+          article.comment_url,
+          article.img_url
+        )
       },
       getHomeData () {
         postRequest(`home`, {}, false).then(response => {
