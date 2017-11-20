@@ -1,7 +1,6 @@
 <template>
-  <div>
     <!--swiper -->
-    <div class="container-item" >
+    <div class="container-item" v-if="!loading">
       <div class="title">
         <p>企业服务</p>
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
@@ -12,7 +11,6 @@
         </swiper-slide>
       </swiper>
     </div>
-  </div>
 </template>
 
 
@@ -24,7 +22,13 @@
   export default {
     data () {
       return {
-        swiperOption: {},
+        swiperOption: {
+          pagination: '.swiper-pagination',
+          slidesPerView: 1.66,
+          spaceBetween: 10,
+          onTap: this.swipperClick
+        },
+        loading: 1,
         servicesList: []
       }
     },
@@ -34,12 +38,7 @@
     },
     props: {},
     created () {
-      this.swiperOption = {
-        pagination: '.swiper-pagination',
-        slidesPerView: 1.66,
-        spaceBetween: 10,
-        onTap: this.swipperClick
-      }
+      this.companyServices()
     },
     watch: {},
     methods: {
@@ -63,17 +62,12 @@
           }
           if (response.data.data.data) {
             this.servicesList = response.data.data.data
+            this.loading = 0
           }
         })
       }
     },
     mounted () {
-      this.companyServices()
-    },
-    updated () {
-//      console.error(this.list)
-//      /EnrollmentStatus/11   活动机遇
-
     }
   }
 </script>
