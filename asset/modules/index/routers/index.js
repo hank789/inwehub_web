@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import localEvent from '../../../stores/localStorage'
-import { openWebviewByUrl, openReadhubPage } from '../../../utils/webview'
+import { openWebviewByUrl } from '../../../utils/webview'
 
 // 统计用户的浏览行为;
 import ga from 'vue-ga'
@@ -29,11 +29,7 @@ if (!window.isLocalEnv) {
 }
 
 router.pushReadHubPage = function (url) {
-  if (window.mui.os.plus) {
-    openReadhubPage(url)
-  } else {
-    router.push('/discover?redirect_url=' + url)
-  }
+  router.pushPlus(url, 'list-detail-page')
 }
 
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', popGesture = 'hide', forceWebView = false, reload = false) {

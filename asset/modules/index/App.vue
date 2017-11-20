@@ -101,39 +101,6 @@
 
       window.mui.plusReady(function () {
         if (window.mui.os.plus) {
-          var url = process.env.READHUB_URL + '/h5'
-          if (currentUser.uuid) {
-            url = url + '?uuid=' + currentUser.uuid
-          }
-          // 通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
-
-          var immersedHeight = getImmersedHeight()
-
-          var inwehubEmbedView = window.mui.preload({
-            url: url,
-            id: 'inwehub_embed',
-            styles: {
-              popGesture: 'none',
-              top: immersedHeight + 'px',
-              dock: 'top',
-              bottom: '50px',
-              bounce: 'none'
-            },
-            extras: {preload: true}
-          })
-          window.mui.preload({
-            url: url,
-            id: 'readhub_submission_webview',
-            styles: {
-              popGesture: 'hide'
-            },
-            extras: {preload: true}
-          })
-
-          if (inwehubEmbedView.getURL() && inwehubEmbedView.getURL() !== url) {
-            console.log('inwehub_embed:reload:' + url)
-            inwehubEmbedView.loadURL(url)
-          }
           window.mui.init({
             swipeBack: true, // 启用右滑关闭功能
             beforeback: goBack
