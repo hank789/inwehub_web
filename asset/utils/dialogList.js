@@ -213,8 +213,6 @@ function alertCompany (context) {
     })
   }
 }
-
-
 // 不是企业用户（申请企业服务）
 function alertDiscoverCompany (context) {
   var dialogObj = getDialogObj(context)

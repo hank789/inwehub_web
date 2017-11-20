@@ -186,9 +186,7 @@
 
       })
     },
-    updated () {
-     console.error(this.userId)
-    }
+    updated () {}
   }
   export default PublishAnswers
 </script>

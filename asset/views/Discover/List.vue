@@ -47,17 +47,18 @@
           </li>
         </ul>
         <!--swiper -->
-        <div class="container-item" >
-          <div class="title">
-            <p>企业服务</p>
-            <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
-          </div>
-          <swiper :options="swiperOption" id="home-recommend">
-            <swiper-slide style="width: 220px;" id="home-card" v-for="(item, index) in servicesList">
-              <img :src="item.img_url"/>
-            </swiper-slide>
-          </swiper>
-        </div>
+        <!--<div class="container-item" >-->
+          <!--<div class="title">-->
+            <!--<p>企业服务</p>-->
+            <!--<p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>-->
+          <!--</div>-->
+          <!--<swiper :options="swiperOption" id="home-recommend">-->
+            <!--<swiper-slide style="width: 220px;" id="home-card" v-for="(item, index) in servicesList">-->
+              <!--<img :src="item.img_url"/>-->
+            <!--</swiper-slide>-->
+          <!--</swiper>-->
+        <!--</div>-->
+        <ServiceRecommendation></ServiceRecommendation>
           <ul class="recommend">
             <p class="recommend_title">精选推荐</p>
             <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id,recommend.data.category_id)">
@@ -86,6 +87,7 @@
   import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import userAbility from '../../utils/userAbility'
+  import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
 
   export default {
     data () {
@@ -99,7 +101,8 @@
     components: {
       swiper,
       swiperSlide,
-      RefreshList
+      RefreshList,
+      ServiceRecommendation
     },
     props: {},
     created () {
