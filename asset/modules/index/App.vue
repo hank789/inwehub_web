@@ -24,7 +24,6 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage'
   import FooterComponent from '../../components/Footer.vue'
   import OpenAppComponent from '../../components/OpenApp.vue'
   import { goBack } from '../../utils/webview'
@@ -33,7 +32,6 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
-  import { getImmersedHeight } from '../../utils/statusBar'
 
   export default {
     data () {
@@ -89,7 +87,6 @@
     },
     mounted () {
       console.log('refreshDataAppMounted')
-      var currentUser = localEvent.getLocalItem('UserInfo')
       var router = this.$router
       var self = this
 
