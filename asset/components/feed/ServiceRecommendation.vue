@@ -1,12 +1,12 @@
 <template>
     <!--swiper -->
-    <div class="container-item" id="swiper" v-if="!loading">
+    <div class="container-item swiper" v-if="!loading">
       <div class="title">
         <p>企业服务</p>
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
       </div>
-      <swiper :options="swiperOption" id="home-recommend">
-        <swiper-slide style="width: 220px;" id="home-card" v-for="(item, index) in servicesList">
+      <swiper :options="swiperOption" class="home-recommend">
+        <swiper-slide style="width: 220px;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url"/>
         </swiper-slide>
       </swiper>
@@ -62,7 +62,9 @@
           }
           if (response.data.data.data) {
             this.servicesList = response.data.data.data
-            this.loading = 0
+            setTimeout(() => {
+              this.loading = 0
+            }, 100)
           }
         })
       }
@@ -90,7 +92,7 @@
     font-style: normal;
   }
   /*swiper*/
-  #swiper{
+  .swiper{
     margin-bottom: 0;
     background: #FFFFFF;
   }
@@ -113,13 +115,13 @@
 
   }
 
-  #home-recommend {
+  .home-recommend {
     width: 100%;
     height: 172px;
     padding-left:4%;
     background: #FFFFFF;
   }
-  #home-recommend:after{
+  .home-recommend:after{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -129,16 +131,16 @@
     width: 100%;
   }
 
-  #home-recommend div:nth-of-type(1) {
+  .home-recommend div:nth-of-type(1) {
     margin-left: 0px;
   }
-  #home-card {
+  .home-card {
     height: 147px;
     background: #ececee;
     position: relative;
     border-radius: 4px;
   }
-  #home-card img{
+  .home-card img{
     width:100%;
     height:100%;
     border-radius: 4px;

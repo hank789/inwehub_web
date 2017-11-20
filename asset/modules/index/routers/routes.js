@@ -53,7 +53,7 @@ const routes = [
     meta: {
       title: 'Inwehub',
       wechatHideHeader: true,
-      keepAlive: false
+      keepAlive: true
     },
     component: require('../../../views/Feed.vue'),
     beforeEnter: (to, from, next) => {
