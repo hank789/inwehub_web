@@ -320,11 +320,11 @@ function clearAllWebViewCache () {
 
 /**
  * 打开第三方网页
- * @param url
- * @param articleId
- * @param title
- * @param detailUrl
- * @param imgUrl
+ * @param url 第三方网页地址
+ * @param articleId 文章id
+ * @param title 文章标题
+ * @param detailUrl 文章详情url
+ * @param imgUrl 文章图片地址
  */
 function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
   var id = articleId
@@ -355,7 +355,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
         preload: true
       }
       var articleWs = window.mui.openWindow({
-        url: '/public/index.html#/webview/article',
+        url: 'index.html#/webview/article',
         id: 'inwehub_article_view',
         preload: false, // 一定要为false
         createNew: false,
