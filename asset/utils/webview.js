@@ -1,4 +1,5 @@
 import { setStatusBarBackgroundAndStyle } from './statusBar'
+import router from '../modules/index/routers/index'
 
 /**
  * 打开webview
@@ -375,12 +376,12 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
     } else {
       // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
 
-      url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
-      this.$router.push(url)
+      // url = '/discover/iframe?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
+      router.push(pathUrl)
       // window.location.href = url
     }
   } else {
-    this.$router.pushReadHubPage(url)
+    router.pushReadHubPage(url)
   }
 }
 
