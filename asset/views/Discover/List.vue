@@ -5,7 +5,6 @@
     </header>
     <div class="mui-content">
 
-
       <!--列表-->
       <RefreshList
         v-model="list"
@@ -16,31 +15,31 @@
         class="listWrapper">
         <!--类别-->
         <ul class="categoryMenu">
-          <li @tap.stop.prevent="judge(hot)">
+          <li @tap.stop.prevent="judge(1)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zhuanyewenda-"></use>
             </svg>
             <p>专业问答</p>
           </li>
-          <li>
+          <li @tap.stop.prevent="judge(2)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-hudongwenda-"></use>
             </svg>
             <p>互动问答</p>
           </li>
-          <li>
+          <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
             <p>发现分享</p>
           </li>
-          <li>
+          <li @tap.stop.prevent="judge(4)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-huodongjiyu"></use>
             </svg>
             <p>活动机遇</p>
           </li>
-          <li>
+          <li @tap.stop.prevent="judge(5)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fujinqiye1"></use>
             </svg>
@@ -61,7 +60,7 @@
         </div>
           <ul class="recommend">
             <p class="recommend_title">精选推荐</p>
-            <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id)">
+            <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend.source_id,recommend.data.category_id)">
                <div class="container-image">
                  <img :src="recommend.data ? recommend.data.img:''"  />
                  <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
@@ -83,12 +82,18 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
+  import localEvent from '../../stores/localStorage'
+  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+  import userAbility from '../../utils/userAbility'
+
   export default {
     data () {
       return {
         swiperOption: {},
         servicesList: [],
-        list: []
+        list: [],
+        is_company: currentUser.is_company
       }
     },
     components: {
@@ -107,29 +112,68 @@
     },
     watch: {},
     methods: {
-      goDetial (type,source_id) {
-        switch(type,category_id,slug)
-        {
+      judge (type) {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: type
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+//          console.error(response.data.data.is_valid)
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              switch (type) {
+                case 1:
+                  this.$router.pushPlus('/askCommunity/majors')
+                  break
+                case 2:
+                  this.$router.pushPlus('/askCommunity/interactions')
+                  break
+                case 4:
+                  this.$router.pushPlus('my/Discount')
+                  break
+                case 5:
+                  this.$router.pushPlus('')
+                  break
+                default:
+              }
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
+      swipperClick () {
+        if (this.is_company) {
+          alertCompanyUser(this)
+        } else {
+          alertDiscoverCompany(this)
+        }
+      },
+      goDetial (type, sourceId, categoryId, slug) {
+        switch (type) {
           case 1:
-            alert('发现分享');
-            this.$router.pushPlus('/c/'+ category_id+'/'+ slug)
-            break;
+            this.$router.pushPlus('/c/' + categoryId + '/' + slug)
+            break
           case 2:
-            this.$router.pushPlus('/askCommunity/major/'+source_id)
-            break;
+            this.$router.pushPlus('/askCommunity/major/' + sourceId)
+            break
           case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/'+source_id)
-            break;
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + sourceId)
+            break
           case 4:
-            this.$router.pushPlus('/EnrollmentStatus/'+source_id)
-            break;
+            this.$router.pushPlus('/EnrollmentStatus/' + sourceId)
+            break
           case 5:
-            this.$router.pushPlus('/EnrollmentStatus/'+source_id)
-            break;
+            this.$router.pushPlus('/EnrollmentStatus/' + sourceId)
+            break
           default:
 
         }
-
       },
       companyServices () {
         postRequest(`company/services`, {

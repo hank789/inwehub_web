@@ -214,6 +214,22 @@ function alertCompany (context) {
   }
 }
 
+
+// 不是企业用户（申请企业服务）
+function alertDiscoverCompany (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('Company', {}, (html) => {
+      alertSimple(html, '企业用户认证', (num) => {
+        console.error(num.index)
+        if (num.index === 0) {
+          context.$router.pushPlus('/company/my?back=/discover')
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -227,5 +243,6 @@ export {
   alertMajorCommentSuccess,
   alertAnswerRepeat,
   alertCompanyUser,
-  alertCompany
+  alertCompany,
+  alertDiscoverCompany
 }

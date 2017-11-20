@@ -5,7 +5,7 @@
       <h1 class="mui-title">发现</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" @tap="hideAllOptions()">
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/discover/hottopic')">热门 </span>
@@ -37,30 +37,36 @@
                 <a>#{{hot.category_name}}</a>
                 <i class="bot"></i>
               </p>
-              <p class="information">
-                <span>
-                <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduo"></use>
-                </svg>
-                </span>
-                      <span @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
-                <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucangxingxing"></use>
-                </svg>
-                </span>
-                      <span>
-                <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun1"></use>
-                </svg>
-                {{hot.comments_number}}
-                </span>
-                      <span @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
-                <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-dianzan1"></use>
-                </svg>
-                {{hot.upvotes}}
-                </span>
-              </p>
+              <div class="information">
+                <p>
+                  <svg class="icon" aria-hidden="true" @tap.stop.prevent="toggleOptions">
+                    <use xlink:href="#icon-gengduo"></use>
+                  </svg>
+                  <span class="carte" style="display: none;">
+                     <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
+                     <a @tap.stop.prevent="deleterow(hot.user_id)" v-else>删除</a>
+                  </span>
+                </p>
+                <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shoucangxingxing"></use>
+                  </svg>
+                </p>
+                <p>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-pinglun1"></use>
+                  </svg>
+                  {{hot.comments_number}}
+
+                </p>
+                <p @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-dianzan1"></use>
+                  </svg>
+                  {{hot.upvotes}}
+
+                </p>
+              </div>
             </li>
             <!--带图片的样式-->
             <li class="imgContainer" v-else-if="hot.type === 'text'" @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
@@ -78,10 +84,13 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import TextDetail from '../../components/discover/TextDetail'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   const PublishAnswers = {
     data: () => ({
-      list: []
+      list: [],
+      userId: currentUser.user_id
     }),
     created () {
     },
@@ -91,6 +100,36 @@
       TextDetail
     },
     methods: {
+      hideAllOptions () {
+        var list = document.querySelectorAll('.carte')
+        for (var i in list) {
+          if (!list[i].style) continue
+          list[i].style.display = 'none'
+        }
+      },
+      toggleOptions (event) {
+        if (event.target.nodeName !== 'svg') return
+        var target = event.target.nextElementSibling
+        target.style.display = target.style.display === 'none' ? 'block' : 'none'
+      },
+      report (id) {
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            window.mui.toast('举报成功')
+          }
+        })
+      },
+      deleterow (id) {
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            window.mui.toast('删除成功')
+          } else {
+            window.mui.toast('取消删除')
+          }
+        })
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -248,7 +287,7 @@
 
   ul .Container {
     width: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background: #FFFFFF;
     padding: 12px 16px 0 16px;
     margin-bottom: 10px;
@@ -297,26 +336,64 @@
 
   }
 
-  .information span {
+  ul .Container .information p {
     color: #808080;
+    position: relative;
 
   }
 
-  .information span svg {
+  /*举报和删除*/
+  .information p:nth-of-type(1) span {
+    display: block;
+    width: 50px;
+    background: #575857;
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    border-radius: 4px;
+    z-index: 99;
+  }
+
+  .information p:nth-of-type(1) span:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top: 5px solid #575857;
+    border-left: 5px solid #575857;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+  }
+
+  .information p:nth-of-type(1) span a {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #FFFFFF;
+    padding: 3px 0;
+  }
+
+  .information p svg {
     font-size: 17px;
   }
 
-  .information span:nth-of-type(2) svg {
+  .information p:nth-of-type(2) svg {
     font-size: 18px;
   }
 
-  .information span:nth-of-type(3) svg {
+  .information p:nth-of-type(3) svg {
     font-size: 17px;
     margin-right: 3px;
 
   }
 
-  .information span:nth-of-type(4) svg {
+  .information p:nth-of-type(4) svg {
     font-size: 17px;
     margin-right: 3px;
   }
@@ -324,7 +401,7 @@
   /*带定位和图片的样式*/
   .imgContainer {
     width: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background: #FFFFFF;
     padding: 12px 16px 0 16px;
     margin-bottom: 10px;
@@ -461,7 +538,8 @@
   .information .blue {
     color: #03aef9;
   }
-  .listWrapper{
+
+  .listWrapper {
     margin-top: 45px;
   }
 </style>

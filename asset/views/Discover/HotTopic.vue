@@ -42,8 +42,8 @@
                     <use xlink:href="#icon-gengduo"></use>
                   </svg>
                   <span class="carte" style="display: none;">
-                    <a @tap.stop.prevent="report(hot.user_id)">举报</a>
-                    <a @tap.stop.prevent="deleterow(hot.user_id)">删除</a>
+                    <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
+                    <a @tap.stop.prevent="deleterow(hot.user_id)" v-else>删除</a>
                   </span>
                 </p>
                 <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
@@ -84,9 +84,13 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import TextDetail from '../../components/discover/TextDetail'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
   const PublishAnswers = {
     data: () => ({
-      list: []
+      list: [],
+      userId: currentUser.user_id
     }),
     created () {
     },
@@ -183,7 +187,7 @@
       })
     },
     updated () {
-//    console.error(this.list)
+     console.error(this.userId)
     }
   }
   export default PublishAnswers
@@ -400,7 +404,7 @@
   /*带定位和图片的样式*/
   .imgContainer {
     width: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background: #FFFFFF;
     padding: 12px 16px 0 16px;
     margin-bottom: 10px;
