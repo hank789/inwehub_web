@@ -236,16 +236,16 @@ var UserAbility = () => {
    */
   var jumpJudgeGrade = (context) => {
     var userInfo = getLocalUserInfo()
-      var dialog = getDialogObj(context)
-      if (dialog) {
-        dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
-          alertSimple(html, '查看等级详情', (num) => {
-            if (num.index === 0) {
-              router.pushPlus('/my/Growth')
-            }
-          }, true)
-        })
-      }
+    var dialog = getDialogObj(context)
+    if (dialog) {
+      dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+        alertSimple(html, '查看等级详情', (num) => {
+          if (num.index === 0) {
+            router.pushPlus('/my/Growth')
+          }
+        }, true)
+      })
+    }
   }
   return {
     canDo: canDo,

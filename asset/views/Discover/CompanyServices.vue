@@ -13,17 +13,17 @@
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
         class="listWrapper">
-          <ul class="services_container">
-            <li class="container-image"  v-for="(item, index) in list"  @tap.stop.prevent="apply()">
-              <img :src="item.img_url"/>
-              <i class="bot"></i>
-            </li>
-          </ul>
-         <div class="apply">
+        <ul class="services_container">
+          <li class="container-image" v-for="(item, index) in list" @tap.stop.prevent="apply()">
+            <img :src="item.img_url"/>
+            <i class="bot"></i>
+          </li>
+        </ul>
+        <div class="apply">
           <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
           <p>如您或您的公司希望在InweHub展示业务开展合作</p>
           <p>点此申请</p>
-         </div>
+        </div>
       </RefreshList>
 
     </div>
@@ -31,10 +31,9 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
-  import { alertCompanyUser,alertCompany } from '../../utils/dialogList'
+  import {alertCompanyUser, alertCompany} from '../../utils/dialogList'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
@@ -58,8 +57,10 @@
         }
       }
     },
-    mounted () {},
-    updated () {}
+    mounted () {
+    },
+    updated () {
+    }
   }
 </script>
 
