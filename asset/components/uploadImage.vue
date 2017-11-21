@@ -24,6 +24,16 @@
         images: []
       }
     },
+    props: {
+      isMultiple: {
+        type: Boolean,
+        default: false
+      },
+      ImageMaximum: {
+        type: Number,
+        default: 1
+      }
+    },
     methods: {
       uploadImage: function () {
         if (window.mui.os.plus) {
@@ -94,10 +104,18 @@
       },
       galleryImg: function () {
         window.plus.gallery.pick((a) => {
-          this.toClip(a)
+          if (this.isMultiple) {
+            for (var i in a.files) {
+              this.toClip(a.files[i])
+            }
+          } else {
+            this.toClip(a)
+          }
         }, function (a) {
         }, {
-          filter: 'image'
+          filter: 'image',
+          multiple: this.isMultiple,
+          maximum: this.ImageMaximum
         })
       }
     }
