@@ -106,6 +106,9 @@
       Discuss
     },
     methods: {
+      refreshPageData () {
+        this.getDetail()
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
@@ -153,7 +156,9 @@
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       }
     },
-    watch: {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
     created () {
       this.getDetail()
     },

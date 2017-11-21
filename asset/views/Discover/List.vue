@@ -46,9 +46,7 @@
             <p>附近企业</p>
           </li>
         </ul>
-        <ServiceRecommendation :key="'list-swiper'"
-                               @alertClick="alertClick"
-        ></ServiceRecommendation>
+        <ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
           <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
