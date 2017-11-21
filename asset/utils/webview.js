@@ -1,5 +1,6 @@
 import { setStatusBarBackgroundAndStyle } from './statusBar'
 import router from '../modules/index/routers/index'
+import { getDiscoverDetail } from './shareTemplate'
 
 /**
  * 打开webview
@@ -112,25 +113,19 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   var footerPathUrl = pathUrl
 
-  var sharePathUrl = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
-  // var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
-  console.log('sharePathUrl:' + sharePathUrl)
+  var shareUrl = '/public/index.html#' + '/webview/share'
 
-  // 绑定标题
-  var shareTitle = 'InweHub发现 | ' + title
-  var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？'
-  var shareUrl = 'index.html#' + '/webview/share'
-  // + '&link=' + encodeURIComponent(url)
-  // + '&content=' + encodeURIComponent(content)
-  // + '&imageUrl='
-  // + '&thumbUrl=';
+  var shareOptions = getDiscoverDetail(pathUrl, title, imgUrl)
+  console.log('shareOptions:')
+  console.log(shareOptions)
+
   var shareViewParams = {
     page_title: title,
-    title: shareTitle,
-    link: sharePathUrl,
-    content: content,
-    imageUrl: imgUrl,
-    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+    title: shareOptions.title,
+    link: shareOptions.link,
+    content: shareOptions.content,
+    imageUrl: shareOptions.imageUrl,
+    thumbUrl: shareOptions.thumbUrl
   }
   console.log('标题栏地址:' + shareUrl)
   var shareView = window.mui.openWindow({
@@ -194,7 +189,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   // 创建底部菜单
   var Slugindex = pathUrl.lastIndexOf('/')
   var slug = pathUrl.substring(Slugindex + 1)
-  var toolUrl = 'index.html#/discover/comment/' + slug
+  var toolUrl = '/public/index.html#/discover/comment/' + slug
   console.log('底部url:' + toolUrl)
 
   var embed = window.mui.openWindow({
@@ -223,6 +218,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   window.mui.fire(embed, 'go_to_readhub_page', {url: pathUrl + '/webview'})
 
   // 创建评论链接
+  var commentUrl = '/public/index.html#' + footerPathUrl
   var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
 
   view.draw([
@@ -234,9 +230,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     }
   ])
   view.addEventListener('click', () => {
-    console.log('准备跳转:' + footerPathUrl + '?from=webview')
-
-    openWebviewByUrl('read_comment_link_' + id, footerPathUrl + '?from=webview')
+    console.log('准备跳转:' + commentUrl)
+    openWebviewByUrl('read_comment_link_' + id, commentUrl)
   }, false)
 
   embed.append(view)
@@ -361,7 +356,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
         preload: true
       }
       var articleWs = window.mui.openWindow({
-        url: 'index.html#/webview/article',
+        url: '/public/index.html#/webview/article',
         id: 'inwehub_article_view',
         preload: false, // 一定要为false
         createNew: false,

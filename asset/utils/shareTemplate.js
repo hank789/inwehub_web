@@ -47,8 +47,28 @@ function getInvitation (username, rcCode) {
   }
 }
 
+/**
+ * 发现详情-模版
+ */
+function getDiscoverDetail (pathUrl, title, imgUrl) {
+  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: 'InweHub发现 | ' + title,
+    link: link,
+    content: '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？',
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
-  getInvitation
+  getInvitation,
+  getDiscoverDetail
 }

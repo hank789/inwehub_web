@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!noback"></a>
       <h1 class="mui-title">发现</h1>
     </header>
 
@@ -76,6 +76,7 @@
     data () {
       return {
         slug: '',
+        noback: false,
         detail: {
           owner: {
             uuid: '',
@@ -116,6 +117,7 @@
       },
       getDetail: function () {
         this.slug = this.$route.params.slug
+        this.noback = !!this.$route.query.noback
 
         if (!this.slug) {
           this.$router.back()
