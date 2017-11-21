@@ -25,7 +25,7 @@
         :nextOtherData="{type:0,uuid: this.$route.params.id}"
         class="listWrapper">
         <ul class="answer">
-          <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask.comment_url)">
+          <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
             <div class="margin-10-0-0" v-if="ask.img && ask.type =='text'">
               <Images :images="ask.img" class="newestList"></Images>
             </div>
@@ -54,6 +54,7 @@
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
   import Images from '../../../components/image/Images.vue'
+  import { goThirdPartyArticle } from '../../../utils/webview'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -74,8 +75,23 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      toDetail (url) {
-        this.$router.pushPlus(url, 'list-detail-page')
+      toDetail (data) {
+        switch (data.type) {
+          case 'text':
+            this.$router.pushPlus(data.comment_url, 'list-detail-page')
+            break
+          case 'link':
+            goThirdPartyArticle(
+              data.submission_url,
+              data.id,
+              data.title,
+              data.comment_url,
+              data.img
+            )
+            break
+          default:
+        }
+
       }
     },
     mounted () {
