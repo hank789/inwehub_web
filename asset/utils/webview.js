@@ -215,7 +215,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       autoShow: false
     }
   })
-  window.mui.fire(embed, 'go_to_target_page', {url: pathUrl + '/webview'})
+  window.mui.fire(embed, 'go_to_target_page', {url: toolUrl})
 
   // 创建评论链接
   var commentUrl = '/public/index.html#' + footerPathUrl
