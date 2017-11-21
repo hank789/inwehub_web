@@ -191,7 +191,14 @@
             if (item.feed_type === 5 && item.feed.domain === '') {
               this.$router.pushPlus(item.url, 'list-detail-page')
             } else {
-              this.$router.pushPlus(item.url, 'list-detail-page')
+              var linkArticle = {
+                view_url: item.url,
+                id: item.feed.submission_id,
+                title: item.feed.title,
+                comment_url: item.feed.comment_url,
+                img_url: item.feed.img
+              }
+              this.goArticle(linkArticle)
             }
             break
           case 13:
@@ -202,7 +209,6 @@
               comment_url: item.feed.comment_url,
               img_url: item.feed.img
             }
-            console.debug(article)
             this.goArticle(article)
             break
           default:
