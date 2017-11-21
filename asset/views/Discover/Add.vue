@@ -43,7 +43,10 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"></uploadImage>
+    <uploadImage ref="uploadImage" v-model="images"
+      :isMultiple="true"
+      :ImageMaximum="3"
+    ></uploadImage>
   </div>
 </template>
 
@@ -120,7 +123,6 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
-            window.mui.back()
             return
           }
 
