@@ -9,7 +9,7 @@
         <swiper-slide style="width: 220px;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url"/>
         </swiper-slide>
-        <swiper-slide id="service" v-if="isShow ? isShow : 0">
+        <swiper-slide class="service" v-if="isShow ? isShow : 0">
            <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
            <p>如您或您的公司希望在InweHub展示业务开展合作，点此申请。</p>
         </swiper-slide>
@@ -68,7 +68,7 @@
             this.servicesList = response.data.data.data
             setTimeout(() => {
               this.loading = 0
-            }, 100)
+            }, 200)
           }
         })
       }
@@ -161,11 +161,11 @@
     width: 100%;
   }
   /* 合作*/
-  #service{
+  .service{
     background: #03aef9;
     height:147px;
   }
-  #service p:nth-of-type(1){
+  .service p:nth-of-type(1){
     width:142px;
     height:35px;
     border: 1.5px solid #c2cddc;
@@ -177,7 +177,7 @@
     margin-top: 30px;
     margin-bottom: 13px;
   }
-  #service p:nth-of-type(2){
+  .service p:nth-of-type(2){
     font-size:13px;
     color:#FFFFFF;
     text-align: center;
