@@ -1336,9 +1336,19 @@ const routes = [
     meta: {
       title: '发现',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: require('../../../views/Readhub/Readhub.vue')
+  },
+  {
+    path: '/discover/comment',
+    name: 'discover-comment',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: require('../../../views/Discover/Comment.vue')
   },
   { // readhub
     path: '/readhub/detail',
