@@ -121,8 +121,10 @@
 
 
 <style scoped>
+
   .component-comment {
     height: 44px;
+    line-height: 44px;
     overflow: hidden;
     background: #f3f4f6;
     padding: 0 20px 0 0;
@@ -137,7 +139,6 @@
   }
   .component-comment .item span {
     font-size: 12px;
-    vertical-align: text-top;
   }
   .component-comment .item .icon {
     color: gray;
@@ -162,7 +163,7 @@
   .component-comment .item.btn-1 .icon {
     font-size: 17px;
     color: #fff;
-    margin-top: 12px;
     margin-right: 5px;
   }
+
 </style>
