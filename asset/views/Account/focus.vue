@@ -68,7 +68,9 @@
         }, 1000)
       },
       getPrevList () {
-        postRequest('follow_my/users', {}).then(response => {
+        postRequest('follow_my/users', {
+          uuid: this.$route.params.id
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -84,7 +86,8 @@
       },
       getNextList () {
         postRequest('follow_my/users', {
-          bottom_id: this.bottomId
+          bottom_id: this.bottomId,
+          uuid: this.$route.params.id
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
