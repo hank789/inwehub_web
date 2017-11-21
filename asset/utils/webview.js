@@ -110,16 +110,16 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
-  var footerPathUrl = process.env.READHUB_URL + pathUrl
+  var footerPathUrl = pathUrl
 
-  var sharePathUrl = process.env.H5_ROOT + '/#/discover/share?redirect_url=' + pathUrl + encodeURIComponent('?noback=1')
+  var sharePathUrl = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
   // var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
   console.log('sharePathUrl:' + sharePathUrl)
 
   // 绑定标题
   var shareTitle = 'InweHub发现 | ' + title
   var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？'
-  var shareUrl = '/public/index.html#' + '/webview/share'
+  var shareUrl = 'index.html#' + '/webview/share'
   // + '&link=' + encodeURIComponent(url)
   // + '&content=' + encodeURIComponent(content)
   // + '&imageUrl='
@@ -132,6 +132,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
   }
+  console.log('标题栏地址:' + shareUrl)
   var shareView = window.mui.openWindow({
     url: shareUrl,
     id: 'inwehub_article_title',
@@ -164,6 +165,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   currentWebview.append(shareView)
 
   // body部分
+  console.log('body url:' + url)
   var bodyTop = '0px'
   var bodyBottom = '0px'
   if (window.mui.os.android) {
@@ -190,8 +192,10 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   currentWebview.append(webview)
 
   // 创建底部菜单
-  var toolUrl = footerPathUrl + '/webview'
-  console.log('toolUrl:' + toolUrl)
+  var Slugindex = pathUrl.lastIndexOf('/')
+  var slug = pathUrl.substring(Slugindex + 1)
+  var toolUrl = 'index.html#/discover/comment/' + slug
+  console.log('底部url:' + toolUrl)
 
   var embed = window.mui.openWindow({
     url: toolUrl,
@@ -328,10 +332,11 @@ function clearAllWebViewCache () {
  * @param imgUrl 文章图片地址
  */
 function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
+  console.log('打开第三方网页 url:' + url + ', articleId:' + articleId + ', title' + title + ', detailUrl' + detailUrl + ', imgUrl' + imgUrl)
   var id = articleId
   var pathUrl = detailUrl
 
-  if (/http/.test(url)) {
+  if (/^http/i.test(url)) {
     if (window.mui.os.plus) {
       if (window.mixpanel.track) {
         window.mixpanel.track(

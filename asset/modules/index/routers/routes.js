@@ -1341,7 +1341,7 @@ const routes = [
     component: require('../../../views/Readhub/Readhub.vue')
   },
   {
-    path: '/discover/comment',
+    path: '/discover/comment/:slug',
     name: 'discover-comment',
     meta: {
       title: '发现',
