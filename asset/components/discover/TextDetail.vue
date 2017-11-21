@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @tap.stop.prevent="$router.pushPlus('/c/'+ data.category_id+'/'+ data.slug)">
+    <div @tap.stop.prevent="goDetial(data)">
         <div class="avatar">
           <p>
             <img :src="data.owner.avatar"/>
@@ -45,7 +45,7 @@
           <use xlink:href="#icon-shoucangxingxing"></use>
          </svg>
       </p>
-      <p>
+      <p @tap.stop.prevent="goDetial(data)">
          <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
          </svg>
@@ -65,6 +65,7 @@
   import Images from '../../components/image/Images.vue'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
+  import { goThirdPartyArticle } from '../../utils/webview'
 
   export default {
     data () {
@@ -85,6 +86,23 @@
 
     },
     methods: {
+      goDetial (hot) {
+        switch (hot.type) {
+          case 'text':
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
+            break
+          case 'link':
+            goThirdPartyArticle(
+              hot.data.url,
+              hot.id,
+              hot.title,
+              '/c/' + hot.category_id + '/' + hot.slug,
+              hot.data.img
+            )
+            break
+          default:
+        }
+      },
       report (id) {
         this.$emit('report', id)
       },

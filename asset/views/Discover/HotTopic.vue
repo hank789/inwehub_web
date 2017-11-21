@@ -25,7 +25,7 @@
         <ul>
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
-              <div @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
+              <div @tap.stop.prevent="goDetial(hot)" >
                 <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img :src="hot.data.img">
@@ -52,7 +52,7 @@
                     <use xlink:href="#icon-shoucangxingxing"></use>
                   </svg>
                 </p>
-                <p>
+                <p @tap.stop.prevent="goDetial(hot)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                   </svg>
@@ -89,6 +89,7 @@
   import TextDetail from '../../components/discover/TextDetail'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
+  import { goThirdPartyArticle } from '../../utils/webview'
 
   const PublishAnswers = {
     data: () => ({
@@ -103,6 +104,23 @@
       TextDetail
     },
     methods: {
+      goDetial (hot) {
+        switch (hot.type) {
+          case 'text':
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
+            break
+          case 'link':
+            goThirdPartyArticle(
+              hot.data.url,
+              hot.id,
+              hot.title,
+              '/c/' + hot.category_id + '/' + hot.slug,
+              hot.data.img
+            )
+            break
+          default:
+        }
+      },
       hideAllOptions () {
         var list = document.querySelectorAll('.carte')
         for (var i in list) {
