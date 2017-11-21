@@ -1,5 +1,6 @@
 import { setStatusBarBackgroundAndStyle } from './statusBar'
 import router from '../modules/index/routers/index'
+import { getDiscoverDetail } from './shareTemplate'
 
 /**
  * 打开webview
@@ -112,25 +113,19 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   var footerPathUrl = pathUrl
 
-  var sharePathUrl = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
-  // var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
-  console.log('sharePathUrl:' + sharePathUrl)
-
-  // 绑定标题
-  var shareTitle = 'InweHub发现 | ' + title
-  var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？'
   var shareUrl = 'index.html#' + '/webview/share'
-  // + '&link=' + encodeURIComponent(url)
-  // + '&content=' + encodeURIComponent(content)
-  // + '&imageUrl='
-  // + '&thumbUrl=';
+
+  var shareOptions = getDiscoverDetail(pathUrl, title, imgUrl)
+  console.log('shareOptions:')
+  console.log(shareOptions)
+
   var shareViewParams = {
     page_title: title,
-    title: shareTitle,
-    link: sharePathUrl,
-    content: content,
-    imageUrl: imgUrl,
-    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+    title: shareOptions.title,
+    link: shareOptions.link,
+    content: shareOptions.content,
+    imageUrl: shareOptions.imageUrl,
+    thumbUrl: shareOptions.thumbUrl
   }
   console.log('标题栏地址:' + shareUrl)
   var shareView = window.mui.openWindow({
