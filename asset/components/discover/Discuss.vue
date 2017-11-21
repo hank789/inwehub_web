@@ -2,7 +2,7 @@
   <div>
     <div class="message">
       <div class="message_title">
-        <p>问答留言</p>
+        <p>留言</p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment()">
           <use xlink:href="#icon-xiugai"></use>
         </svg>

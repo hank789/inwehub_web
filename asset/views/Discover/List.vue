@@ -78,7 +78,6 @@
   import { goThirdPartyArticle } from '../../utils/webview'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
-
   export default {
     data () {
       return {
