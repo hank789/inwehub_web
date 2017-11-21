@@ -539,7 +539,7 @@ const routes = [
     }
   },
   { // 关注我的
-    path: '/my/focus',
+    path: '/my/focus/:id',
     name: 'my-followed',
     component: require('../../../views/Account/focus.vue'),
     meta: {

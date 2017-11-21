@@ -92,7 +92,7 @@
               </div>
               <!--关注 被赞 综合评分-->
               <div class="counter">
-                关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus')">{{ resume.info.followers }}</b>
+                关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">{{ resume.info.followers }}</b>
                 <i class="separate"></i>
                 被赞 <b>{{ resume.info.supports }}</b>
                 <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
@@ -763,11 +763,9 @@
           font-size: 13px;
           color: #444444;
           b {
-            color: #e63964;
+            color:rgb(250,73,117);
           }
-          b:nth-of-type(2) {
-            color: #808080;
-          }
+
         }
         .item {
           color: #808080;

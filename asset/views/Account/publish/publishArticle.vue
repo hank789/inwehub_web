@@ -26,7 +26,10 @@
         class="listWrapper">
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask.comment_url)">
-            <div class="container-image margin-10-0-0" v-if="ask.img" >
+            <div class="margin-10-0-0" v-if="ask.img && ask.type =='text'">
+              <Images :images="ask.img" class="newestList"></Images>
+            </div>
+            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type =='link'" >
               <img :src="ask.img" />
             </div>
             <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
@@ -50,6 +53,7 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import Images from '../../../components/image/Images.vue'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -60,7 +64,8 @@
 
     },
     components: {
-      RefreshList
+      RefreshList,
+      Images
     },
     methods: {
       // 时间处理；
