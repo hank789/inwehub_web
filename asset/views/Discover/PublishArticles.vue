@@ -81,11 +81,9 @@
         this.checkValid()
       },
       title: function (newValue, oldValue) {
-        console.error(newValue)
         this.checkValid()
       },
       channel: function (newValue, oldValue) {
-        console.error(newValue)
         this.checkValid()
       }
     },
