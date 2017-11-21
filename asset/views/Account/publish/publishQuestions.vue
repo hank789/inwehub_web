@@ -22,8 +22,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/myList'"
-        :prevOtherData="{type:0}"
-        :nextOtherData="{type:0}"
+        :prevOtherData="{type:0,uuid: this.$route.params.id}"
+        :nextOtherData="{type:0,uuid: this.$route.params.id}"
         :list="list"
         class="listWrapper">
         <ul class="answer">

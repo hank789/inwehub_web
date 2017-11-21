@@ -299,6 +299,7 @@
       this.initData()
     },
     mounted () {
+      console.error(this.$route.params.id ? this.$route.params.id : '0')
     }
   }
 </script>

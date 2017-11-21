@@ -113,19 +113,19 @@
         <!--发布-->
         <div class="news">
           <div>Ta的发布</div>
-          <p class="mui-ellipsis" >
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis" >
+          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">
             提问 <span>{{ resume.info.questions }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis"  >
+          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
             文章 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis" >
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
             评论 <span>{{ resume.info.comment_count }}</span>
           </p>
           <i class="bot"></i>
