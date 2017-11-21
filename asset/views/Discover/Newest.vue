@@ -26,17 +26,19 @@
         class="listWrapper">
         <ul>
           <template v-for="(hot, index) in list">
-            <li class="Container" v-if="hot.type === 'link'"  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
-              <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
-              <p class="container-image" v-if="hot.data.img">
-                <img :src="hot.data.img">
-              </p>
-              <p class="timer">
-                <timeago :since="timeago(hot.created_at)" :auto-update="60">
-                </timeago>
-                <a>#{{hot.category_name}}</a>
-                <i class="bot"></i>
-              </p>
+            <li class="Container" v-if="hot.type === 'link'"  >
+              <div @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
+                <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+                <p class="container-image" v-if="hot.data.img">
+                  <img :src="hot.data.img">
+                </p>
+                <p class="timer">
+                  <timeago :since="timeago(hot.created_at)" :auto-update="60">
+                  </timeago>
+                  <a>#{{hot.category_name}}</a>
+                  <i class="bot"></i>
+                </p>
+              </div>
               <div class="information">
                 <p>
                   <svg class="icon" aria-hidden="true" @tap.stop.prevent="toggleOptions">

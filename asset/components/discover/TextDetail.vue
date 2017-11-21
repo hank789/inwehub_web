@@ -1,31 +1,34 @@
 <template>
   <div>
-    <div class="avatar">
-      <p>
-        <img :src="data.owner.avatar"/>
-        <svg class="icon" aria-hidden="true" v-if="data.owner.is_expert == '1'">
-          <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-        </svg>
-      </p>
-      <p>{{data.owner.username}}发布了分享</p>
-    </div>
-    <div class="textContainer mui-ellipsis-2">
-      {{data.title}}
-    </div>
+    <div @tap.stop.prevent="$router.pushPlus('/c/'+ data.category_id+'/'+ data.slug)">
+        <div class="avatar">
+          <p>
+            <img :src="data.owner.avatar"/>
+            <svg class="icon" aria-hidden="true" v-if="data.owner.is_expert == '1'">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </p>
+          <p>{{data.owner.username}}发布了分享</p>
+        </div>
+        <div class="textContainer mui-ellipsis-2">
+          {{data.title}}
+        </div>
 
-    <div class="PublishContainer" v-if="data.data.img">
-      <Images :images="data.data.img" class="newestList"></Images>
-    </div>
+        <div class="PublishContainer" v-if="data.data.img">
+          <Images :images="data.data.img" class="newestList"></Images>
+        </div>
 
-    <div class="timeContainer">
-      <span>
-        <timeago :since="timeago(data.created_at)" :auto-update="60">
-        </timeago>
-      </span>
-      <svg class="icon" aria-hidden="true" v-if="data.data.current_address_name">
-        <use xlink:href="#icon-dingwei1"></use>
-      </svg>
-      <span>{{data.data.current_address_name}}</span>
+        <div class="timeContainer">
+          <span>
+            <timeago :since="timeago(data.created_at)" :auto-update="60">
+            </timeago>
+          </span>
+          <svg class="icon" aria-hidden="true" v-if="data.data.current_address_name">
+            <use xlink:href="#icon-dingwei1"></use>
+          </svg>
+          <span>{{data.data.current_address_name}}</span>
+        </div>
+
     </div>
     <div class="information">
       <p>
@@ -456,7 +459,7 @@
 
   }
 
-  .information .blue {
+  ul .imgContainer  .information .blue {
     color: #03aef9;
   }
 
