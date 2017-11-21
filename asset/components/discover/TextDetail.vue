@@ -3,7 +3,7 @@
     <div @tap.stop.prevent="goDetial(data)">
         <div class="avatar">
           <p>
-            <img :src="data.owner.avatar"/>
+            <img :src="data.owner.avatar" @tap.stop.prevent="toAvatar(data.owner.uuid)"/>
             <svg class="icon" aria-hidden="true" v-if="data.owner.is_expert == '1'">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
@@ -86,6 +86,12 @@
 
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
