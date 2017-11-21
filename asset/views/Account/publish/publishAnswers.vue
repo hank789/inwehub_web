@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的发布</h1>
+      <h1 class="mui-title" v-if="uuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
 
@@ -45,10 +46,13 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import localEvent from '../../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
   const PublishAnswers = {
     data: () => ({
-      list: []
-
+      list: [],
+      uuid: currentUser.uuid
     }),
     created () {
 
@@ -67,7 +71,7 @@
       }
     },
     mounted () {
-
+      console.error()
     },
     updated () {
     }

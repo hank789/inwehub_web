@@ -12,6 +12,7 @@ import { requestAuth, CanNotGetInWhenLogged } from '../../../utils/auth'
 
 import localEvent from '../../../stores/localStorage'
 import { checkUpdate } from '../../../utils/updateVersion'
+const currentUser = localEvent.getLocalItem('UserInfo')
 
 const routes = [
   {
@@ -559,7 +560,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      to.params.id = 0
+      to.params.id = to.params.id ? to.params.id : currentUser.uuid
       requestAuth(to, from, next)
     }
   },
@@ -572,7 +573,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      to.params.id = 0
+      to.params.id = to.params.id ? to.params.id : currentUser.uuid
       requestAuth(to, from, next)
     }
   },
@@ -585,7 +586,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      to.params.id = 0
+      to.params.id = to.params.id ? to.params.id : currentUser.uuid
       requestAuth(to, from, next)
     }
   },
@@ -598,7 +599,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      to.params.id = 0
+      to.params.id = to.params.id ? to.params.id : currentUser.uuid
       requestAuth(to, from, next)
     }
   },

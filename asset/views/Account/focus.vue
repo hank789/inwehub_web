@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">关注我的</h1>
+      <h1 class="mui-title" v-if="uuid == this.$route.params.id">关注我的</h1>
+      <h1 class="mui-title" v-else>关注Ta的</h1>
     </header>
     <div class="mui-content absolute">
       <div class="mui-scroll-wrapper task-list" id="pullrefresh">
@@ -44,13 +45,16 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
         list: [],
         loading: 1,
-        tip: ''
+        tip: '',
+        uuid: currentUser.uuid
       }
     },
     methods: {
@@ -156,6 +160,7 @@
         }
       })
       this.getPrevList()
+      console.error()
     }
   }
 </script>
