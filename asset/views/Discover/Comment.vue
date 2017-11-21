@@ -95,6 +95,8 @@
         })
       },
       getDetail () {
+        console.log('comment refreshPageData refresh')
+        console.log('slug:' + this.$route.params.slug)
         this.slug = this.$route.params.slug
 
         if (!this.slug) {
