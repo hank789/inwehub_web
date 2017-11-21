@@ -47,6 +47,9 @@
       }
     },
     methods: {
+      refreshPageData () {
+        this.getDetail()
+      },
       collect () {
         var data = {
           id: this.id
@@ -112,6 +115,9 @@
           this.loading = 0
         })
       }
+    },
+    watch: {
+      '$route': 'refreshPageData'
     },
     created () {
       this.getDetail()

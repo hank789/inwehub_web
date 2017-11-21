@@ -119,10 +119,22 @@ function getGeoPosition (callback) {
   })
 }
 
+/**
+ * 自动调整文本框位置
+ */
+function autoTextArea () {
+  // window.mui.plusReady(() => {
+  //   window.plus.webview.currentWebview().setStyle({
+  //     softinputMode: 'adjustResize'
+  //   })
+  // })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
   createImageThumb,
   saveImageByBase64,
-  getGeoPosition
+  getGeoPosition,
+  autoTextArea
 }
