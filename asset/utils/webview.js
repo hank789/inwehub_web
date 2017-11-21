@@ -99,7 +99,7 @@ function openReadhubPage (url) {
       autoShow: false
     }
   })
-  window.mui.fire(webview, 'go_to_readhub_page', {url: url})
+  window.mui.fire(webview, 'go_to_target_page', {url: url})
   setTimeout(() => {
     webview.show()
   }, 100)
@@ -215,7 +215,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       autoShow: false
     }
   })
-  window.mui.fire(embed, 'go_to_readhub_page', {url: pathUrl + '/webview'})
+  window.mui.fire(embed, 'go_to_target_page', {url: pathUrl + '/webview'})
 
   // 创建评论链接
   var commentUrl = '/public/index.html#' + footerPathUrl

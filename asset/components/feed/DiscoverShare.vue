@@ -37,7 +37,7 @@
       </div>
       <div class="line-horizontal padding-5-0-5-0"></div>
       <div class="container-comments">
-        <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.username}}</span>{{comment.body}}</div>
+        <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
     </div>
