@@ -6,7 +6,7 @@ import Register from '../../../views/Register.vue'
 
 import FindPassword from '../../../views/FindPassword.vue'
 
-import Home from '../../../views/Home.vue'
+import Home from '../../../views/404.vue'
 
 import { requestAuth, CanNotGetInWhenLogged } from '../../../utils/auth'
 
