@@ -232,12 +232,14 @@
       })
     },
     mounted () {
-      window.mui.plusReady(() => {
-        window.plus.webview.currentWebview().setStyle({
-          softinputMode: 'adjustResize'
-        })
-      })
       this.textareaBlur()
+      setTimeout(() => {
+        window.mui.plusReady(() => {
+          window.plus.webview.currentWebview().setStyle({
+            softinputMode: 'adjustResize'
+          })
+        })
+      }, 3000)
     }
   }
 </script>
