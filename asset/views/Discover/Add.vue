@@ -233,13 +233,11 @@
     },
     mounted () {
       this.textareaBlur()
-      setTimeout(() => {
-        window.mui.plusReady(() => {
-          window.plus.webview.currentWebview().setStyle({
-            softinputMode: 'adjustResize'
-          })
-        })
-      }, 3000)
+//      window.mui.plusReady(() => {
+//        window.plus.webview.currentWebview().setStyle({
+//          softinputMode: 'adjustPan'
+//        })
+//      })
     }
   }
 </script>
