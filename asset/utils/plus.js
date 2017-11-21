@@ -130,11 +130,23 @@ function autoTextArea () {
   // })
 }
 
+/**
+ * 获取index.html路径
+ */
+function getIndexPath () {
+  if (window.isLocalEnv) {
+    return 'index.html'
+  } else {
+    return '/public/index.html'
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
   createImageThumb,
   saveImageByBase64,
   getGeoPosition,
-  autoTextArea
+  autoTextArea,
+  getIndexPath
 }
