@@ -223,6 +223,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   window.mui.fire(embed, 'go_to_readhub_page', {url: pathUrl + '/webview'})
 
   // 创建评论链接
+  var commentUrl = 'index.html#' + footerPathUrl
   var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
 
   view.draw([
@@ -234,9 +235,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     }
   ])
   view.addEventListener('click', () => {
-    console.log('准备跳转:' + footerPathUrl + '?from=webview')
-
-    openWebviewByUrl('read_comment_link_' + id, footerPathUrl + '?from=webview')
+    console.log('准备跳转:' + commentUrl)
+    openWebviewByUrl('read_comment_link_' + id, commentUrl)
   }, false)
 
   embed.append(view)
