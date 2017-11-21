@@ -388,7 +388,11 @@
     height: 42px;
     font-size: 12px;
     line-height: 42px;
-
+    display: flex;
+    flex-direction: row;
+    /*flex-wrap: nowrap;*/
+    /*justify-content: space-between;*/
+    align-items: center;
   }
 
   .timeContainer svg {

@@ -290,6 +290,7 @@
     float: left;
     margin-bottom: 0;
     padding-right: 0;
+    padding-left:15px;
     border: none;
     font-size: 14px;
     color: #444444;
