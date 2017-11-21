@@ -77,6 +77,7 @@
   import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
+  import { autoTextArea } from '../../utils/plus'
 
   const AskDetail = {
     data: () => ({
@@ -98,11 +99,7 @@
     mounted () {
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
-      window.mui.plusReady(() => {
-        window.plus.webview.currentWebview().setStyle({
-          softinputMode: 'adjustResize'
-        })
-      })
+      autoTextArea()
 
       this.getDetail()
     },

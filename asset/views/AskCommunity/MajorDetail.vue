@@ -86,6 +86,7 @@
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import userAbility from '../../utils/userAbility'
+  import { autoTextArea } from '../../utils/plus'
 
   const AskDetail = {
     data: () => ({
@@ -105,11 +106,7 @@
       loading: true
     }),
     mounted () {
-      window.mui.plusReady(() => {
-        window.plus.webview.currentWebview().setStyle({
-          softinputMode: 'adjustResize'
-        })
-      })
+      autoTextArea()
 
       this.getDetail()
     },

@@ -54,7 +54,7 @@
   import { compressImg } from '../../utils/uploadFile'
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
-  import { getGeoPosition } from '../../utils/plus'
+  import { getGeoPosition, autoTextArea } from '../../utils/plus'
 
   export default {
     data () {
@@ -233,11 +233,7 @@
     },
     mounted () {
       this.textareaBlur()
-//      window.mui.plusReady(() => {
-//        window.plus.webview.currentWebview().setStyle({
-//          softinputMode: 'adjustPan'
-//        })
-//      })
+      autoTextArea()
     }
   }
 </script>

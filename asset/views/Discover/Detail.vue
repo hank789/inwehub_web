@@ -71,6 +71,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
+  import { autoTextArea } from '../../utils/plus'
 
   export default {
     data () {
@@ -165,11 +166,7 @@
       this.getDetail()
     },
     mounted () {
-//      window.mui.plusReady(() => {
-//        window.plus.webview.currentWebview().setStyle({
-//          softinputMode: 'adjustPan'
-//        })
-//      })
+      autoTextArea()
     }
   }
 </script>
