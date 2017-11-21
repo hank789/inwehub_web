@@ -551,7 +551,7 @@ const routes = [
     }
   },
   { // 我的发布_回答；
-    path: '/my/publishAnswers',
+    path: '/my/publishAnswers/:id?',
     name: 'my-publish_answers',
     component: require('../../../views/Account/publish/publishAnswers.vue'),
     meta: {
@@ -559,11 +559,12 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
+      to.params.id = 0
       requestAuth(to, from, next)
     }
   },
   { // 我的发布_提问；
-    path: '/my/publishQuestions',
+    path: '/my/publishQuestions/:id?',
     name: 'my-publish_questions',
     component: require('../../../views/Account/publish/publishQuestions.vue'),
     meta: {
@@ -571,11 +572,12 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
+      to.params.id = 0
       requestAuth(to, from, next)
     }
   },
   { // 我的发布_文章；
-    path: '/my/publishArticle',
+    path: '/my/publishArticle/:id?',
     name: 'my-publish_article',
     component: require('../../../views/Account/publish/publishArticle.vue'),
     meta: {
@@ -583,11 +585,12 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
+      to.params.id = 0
       requestAuth(to, from, next)
     }
   },
   { // 我的发布_评论；
-    path: '/my/publishComment',
+    path: '/my/publishComment/:id?',
     name: 'my-publish_comment',
     component: require('../../../views/Account/publish/publishComment.vue'),
     meta: {
@@ -595,6 +598,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
+      to.params.id = 0
       requestAuth(to, from, next)
     }
   },

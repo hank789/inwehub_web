@@ -21,8 +21,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'readhub/mySubmission'"
-        :prevOtherData="{type:0}"
-        :nextOtherData="{type:0}"
+        :prevOtherData="{type:0,uuid: this.$route.params.id}"
+        :nextOtherData="{type:0,uuid: this.$route.params.id}"
         class="listWrapper">
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask.comment_url)">
