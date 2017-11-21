@@ -32,7 +32,7 @@
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!channel">
             <use xlink:href="#icon-shuru"></use>
           </svg>
-          <input type="text" v-model.trim="channel" v-else/>
+          <input type="text" v-model.trim="channel"  @tap.stop.prevent="click()"  v-else/>
 
           <i class="bot"></i>
         </li>
@@ -90,6 +90,9 @@
       }
     },
     methods: {
+      click () {
+        this.channel = ''
+      },
       goPublish () {
         postRequest(`article/store`, {
           type: 'link',
@@ -294,6 +297,7 @@
     border: none;
     font-size: 14px;
     color: #444444;
+    text-align: right;
   }
 
   .title .longContainer {
@@ -325,9 +329,11 @@
     float: left;
     margin-bottom: 0;
     padding-right: 0;
+    padding-left: 15px;
     border: none;
     font-size: 14px;
     color: #444444;
+    text-align: right;
   }
 
   .title .shortContainer span {

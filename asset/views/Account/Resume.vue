@@ -52,7 +52,6 @@
             <!--关注-->
             <div class="collect" v-show="uuid !== cuuid && !resume.is_followed">
               关注Ta
-
             </div>
             <div class="collect active" @tap.stop.prevent="collectProfessor"
                  v-show="uuid !== cuuid && resume.is_followed">
