@@ -1713,14 +1713,6 @@ const routes = [
   //  },
   //  component: require('../../../components/Dialog.vue'),
   // },
-  {
-   path: '/service',
-   name: 'short',
-   meta: {
-     title: 'short'
-   },
-   component: require('../../../components/feed/ServiceRecommendation.vue'),
-  },
   { // message
     path: '/*',
     name: '404',
