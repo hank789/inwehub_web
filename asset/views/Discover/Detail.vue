@@ -18,9 +18,7 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper">
-        {{ detail.title }}
-      </div>
+      <div class="contentWrapper">{{ detail.title }}</div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
@@ -212,6 +210,7 @@
   .contentWrapper{
     padding:0 15px;
     background: #fff;
+    white-space: pre;
     font-size:15px;
     color:#444;
   }
