@@ -31,7 +31,7 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
-            <p>发现分享</p>
+            <p>动态分享</p>
           </li>
           <li @tap.stop.prevent="judge(4)">
             <svg class="icon" aria-hidden="true">
