@@ -38,8 +38,8 @@
           <use xlink:href="#icon-dianzan1"></use>
         </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(index)">{{item}}</span>等{{data.feed.support_number}}人
       </div>
-      <div class="line-horizontal padding-5-0-5-0"></div>
-      <div class="container-comments">
+      <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number"></div>
+      <div class="container-comments" v-if="data.feed.comment_number">
         <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
