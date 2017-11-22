@@ -32,9 +32,10 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-  import localEvent from '../../stores/localStorage'
   import {alertCompanyUser, alertCompany} from '../../utils/dialogList'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
+  console.log(currentUser)
 
   export default {
     data () {
@@ -58,6 +59,7 @@
       }
     },
     mounted () {
+      console.error(this.is_company)
     },
     updated () {
     }
