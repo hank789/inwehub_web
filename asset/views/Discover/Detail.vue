@@ -62,6 +62,18 @@
       ></Discuss>
 
     </div>
+
+    <Share
+      ref="ShareBtn"
+      :title="shareOption.title"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
+
   </div>
 </template>
 
@@ -72,6 +84,8 @@
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import { autoTextArea } from '../../utils/plus'
+  import Share from '../../components/Share.vue'
+  import { getDiscoverDetail } from '../../utils/shareTemplate'
 
   export default {
     data () {
@@ -89,6 +103,13 @@
           },
           created_at: ''
         },
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: ''
+        },
         isFollow: true,
         loading: 1
       }
@@ -105,7 +126,8 @@
       UserInfo,
       Images,
       Statistics,
-      Discuss
+      Discuss,
+      Share
     },
     methods: {
       refreshPageData () {
@@ -133,6 +155,15 @@
           }
 
           this.detail = response.data.data
+
+          var detailFirstImage = ''
+          if (typeof this.detail.data.img === 'object') {
+            detailFirstImage = this.detail.data.img[0]
+          } else {
+            detailFirstImage = this.detail.data.img
+          }
+
+          this.shareOption = getDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, detailFirstImage)
 
           this.loading = 0
         })
