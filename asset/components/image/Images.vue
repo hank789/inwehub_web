@@ -19,7 +19,6 @@
         }
       },
       group: {
-        type: String,
         default: '1'
       },
       isImagePreview: {
