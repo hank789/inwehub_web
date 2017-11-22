@@ -97,9 +97,25 @@
     props: {},
     watch: {},
     methods: {
-      alertClick () {
+      alertClick (title) {
         if (this.is_company) {
-          alertCompanyUser(this)
+          alertCompanyUser(this, () => {
+            postRequest(`company/applyService`, {
+              service_title: title
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              console.error(response.data)
+              if (response.data.data) {
+                window.mui.toast(response.data.data.tips)
+              }
+            })
+          })
         } else {
           alertDiscoverCompany(this)
         }

@@ -6,7 +6,7 @@
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
       </div>
       <swiper :options="swiperOption" class="home-recommend">
-        <swiper-slide style="width: 220px;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+        <swiper-slide style="width: 220px;" :title="item.title" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url_slide"/>
         </swiper-slide>
         <swiper-slide class="service" v-if="isShow ? isShow : 0">
@@ -21,6 +21,7 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
+  import { queryParent } from '../../utils/dom'
 
   export default {
     data () {
@@ -50,8 +51,11 @@
     },
     watch: {},
     methods: {
-      swipperClick () {
-        this.$emit('alertClick')
+      swipperClick (swiper, event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var title = parent.getAttribute('title')
+        this.$emit('alertClick', title)
       },
       companyServices () {
         postRequest(`company/services`, {

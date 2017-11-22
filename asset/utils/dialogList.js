@@ -185,14 +185,17 @@ function alertMajorCommentSuccess (context, credits, coins) {
 }
 
 // 不是企业用户（申请企业服务）
-function alertCompanyUser (context) {
+function alertCompanyUser (context, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('CompanyUser', {}, (html) => {
       alertSimple(html, '确定', (num) => {
         console.error(num.index)
         if (num.index === 0) {
-          window.mui.toast('申请成功！我们将尽快与您取得联系')
+          // window.mui.toast('申请成功！我们将尽快与您取得联系')
+          if (callback) {
+            callback()
+          }
         }
       }, true)
     })
