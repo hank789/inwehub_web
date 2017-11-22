@@ -1,10 +1,12 @@
 <template>
     <div class="container-images">
-      <div class="container-image"  v-for="(image, index) in images"><img :src="image" data-preview-src="" :data-preview-group="group"/></div>
+      <div class="container-image"  v-for="(image, index) in images"><img :src="getImage(image)" :data-preview-src="image" :data-preview-group="group"/></div>
     </div>
 </template>
 
 <script type="text/javascript">
+
+  import { getImageSuffix } from '../../utils/image'
 
   export default {
     data () {
@@ -29,7 +31,11 @@
     created () {
 
     },
-    methods: {},
+    methods: {
+      getImage (src) {
+        return getImageSuffix(src, 226, 226)
+      }
+    },
     mounted () {
       if (this.isImagePreview) {
         window.mui.previewImage()
