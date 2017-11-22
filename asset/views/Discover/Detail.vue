@@ -85,7 +85,7 @@
   import Discuss from '../../components/discover/Discuss.vue'
   import { autoTextArea } from '../../utils/plus'
   import Share from '../../components/Share.vue'
-  import { getDiscoverDetail } from '../../utils/shareTemplate'
+  import { getTextDiscoverDetail } from '../../utils/shareTemplate'
 
   export default {
     data () {
@@ -156,14 +156,7 @@
 
           this.detail = response.data.data
 
-          var detailFirstImage = ''
-          if (typeof this.detail.data.img === 'object') {
-            detailFirstImage = this.detail.data.img[0]
-          } else {
-            detailFirstImage = this.detail.data.img
-          }
-
-          this.shareOption = getDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, detailFirstImage)
+          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
 
           this.loading = 0
         })
