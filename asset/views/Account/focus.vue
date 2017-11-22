@@ -27,7 +27,7 @@
                     <use xlink:href="#icon-zhuanjiabiaoji"></use>
                   </svg>
                 </p>
-                <div class="mui-ellipsis">
+                <div class="mui-ellipsis descriptionText">
                   <span class="descriptionText">{{item.description}}</span>
                 </div>
               </div>
@@ -300,6 +300,7 @@
   }
 
   .descriptionText {
+    width:60%;
     font-size: 13px;
     color: #b4b4b6;
   }
