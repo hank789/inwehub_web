@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-images">
-      <div class="container-image" v-for="(image, index) in images"><img :src="image"/></div>
+      <div class="container-image"  v-for="(image, index) in images"><img :src="image" data-preview-src="" :data-preview-group="group"/></div>
     </div>
   </div>
 </template>
@@ -19,12 +19,25 @@
         default: () => {
           return []
         }
+      },
+      group: {
+        type: Number,
+        default: 1
+      },
+      isImagePreview: {
+        type: Boolean,
+        default: true
       }
     },
     created () {
 
     },
-    methods: {}
+    methods: {},
+    mounted () {
+      if (this.isImagePreview) {
+        window.mui.previewImage()
+      }
+    }
   }
 </script>
 

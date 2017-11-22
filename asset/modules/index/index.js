@@ -1,4 +1,6 @@
 import '../../js/mui'
+import '../../js/mui.zoom'
+import '../../js/mui.previewimage'
 
 import Vue from 'vue'
 
@@ -58,6 +60,7 @@ import './../../styles/immersed.css'
 import './../../styles/mui.picker.all.css'
 import './../../styles/iconfont.css'
 import './../../styles/percircle.css'
+import './../../styles/imagePreview.css'
 
 import './../../js/iconfont.js'
 
