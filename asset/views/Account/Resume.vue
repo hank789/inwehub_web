@@ -122,7 +122,7 @@
           </p>
           <a></a>
           <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
-            文章 <span>{{ resume.info.submission_count }}</span>
+            动态 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
           <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
@@ -131,13 +131,13 @@
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <div class="dynamic">
-          <p>Ta的动态</p>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <i class="bot"></i>
-        </div>
+        <!--<div class="dynamic">-->
+          <!--<p>Ta的动态</p>-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+          <!--</svg>-->
+          <!--<i class="bot"></i>-->
+        <!--</div>-->
         <!--个人简介-->
         <div class="description">
           <p>个人简介</p>

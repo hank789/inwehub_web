@@ -59,7 +59,7 @@
             <use xlink:href="#icon-tijiaowenzhang1"></use>
           </svg>
         </p>
-        <span class="aside_r">提交文章</span>
+        <span class="aside_r">动态分享</span>
       </li>
 
     </ul>

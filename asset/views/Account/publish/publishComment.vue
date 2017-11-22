@@ -14,7 +14,7 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/publishAnswers')">回答 </span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">文章</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">动态</span>
         <span @tap.stop.prevent="">评论  <i></i></span>
 
       </div>

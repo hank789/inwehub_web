@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">动态</h1>
+      <h1 class="mui-title">通知</h1>
     </header>
     <!--导航栏-->
 
@@ -53,7 +53,7 @@
                 <img src="../../statics/images/mission1.png"/>
                 <div class="message" v-if="task_count != 0">{{task_count}}</div>
                 <p>
-                  <span>任务动态</span>
+                  <span>问答通知</span>
                   <span
                     class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.title : ""}} </span>
                 </p>
@@ -64,7 +64,7 @@
                 <img src="../../statics/images/read1.png"/>
                 <div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
                 <p>
-                  <span>阅读发现</span>
+                  <span>动态通知</span>
                   <span
                     class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.title : ""}}</span>
                 </p>
