@@ -78,7 +78,7 @@
 
             <!--x赞了文章-->
             <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
-            
+
           </div>
         </template>
 
@@ -238,8 +238,9 @@
 
   .rightWrapper {
     position: absolute;
-    right: 15px;
-    top: 12px;
+    padding:12px;
+    right: 3px;
+    top: 0;
   }
 
   .rightWrapper .icon {
