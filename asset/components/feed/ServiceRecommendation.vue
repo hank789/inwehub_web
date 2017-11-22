@@ -7,7 +7,7 @@
       </div>
       <swiper :options="swiperOption" class="home-recommend">
         <swiper-slide style="width: 220px;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
-          <img :src="item.img_url"/>
+          <img :src="item.img_url_slide"/>
         </swiper-slide>
         <swiper-slide class="service" v-if="isShow ? isShow : 0">
            <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
