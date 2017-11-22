@@ -56,6 +56,7 @@
                <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
                <p class="container_type blue" v-if="recommend.read_type == '3'">互动回答</p>
                <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+               <p class="container_type blue" v-if="recommend.read_type == '6'">互动提问</p>
                <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
              </div>
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
@@ -164,6 +165,9 @@
             break
           case 5:
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
+            break
+          case 6:
+            this.$router.pushPlus(' /askCommunity/interaction/' + recommend.source_id)
             break
           default:
 
