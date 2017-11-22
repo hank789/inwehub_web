@@ -23,7 +23,6 @@
 
   import Avatar from '../../components/image/Avatar.vue'
 
-
   export default {
     data () {
       return {}
