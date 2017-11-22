@@ -16,27 +16,22 @@
 
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
-    <!--<div class="container-images container-images-discover padding-0 margin-10-0-0" v-if="data.feed.img.length > 0">-->
-      <!--<div class="container-image"  v-for="(image, index) in data.feed.img">-->
-        <!--<img :src="image"/>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="options text-right" @tap.stop.prevent="toDetail(data.url)">
       <div class="component-iconNumber iconPenglunWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
         </svg><span>{{data.feed.comment_number}}</span>
       </div>
-      <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}">
+      <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg><span>{{data.feed.support_number}}</span>
       </div>
     </div>
-    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)">
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number">
       <div class="component-dianzanList"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
-        </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(index)">{{item}}</span>等{{data.feed.support_number}}人
+        </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span>等{{data.feed.support_number}}人
       </div>
       <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number"></div>
       <div class="container-comments" v-if="data.feed.comment_number">
@@ -55,6 +50,9 @@
 <script type="text/javascript">
 
   import Images from '../../components/image/Images.vue'
+  import { postRequest } from '../../utils/request'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
@@ -76,6 +74,36 @@
 
     },
     methods: {
+      support () {
+        var data = {
+          submission_id: this.data.feed.submission_id
+        }
+
+        postRequest(`article/upvote-submission`, data).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          var uuid = currentUser.uuid
+          var username = currentUser.name
+
+          this.data.feed.is_upvoted = response.data.data.type === 'upvote' ? 1 : 0
+          if (this.data.feed.is_upvoted) {
+            this.data.feed.support_number++
+            this.data.feed.supporter_list.push({name: username, uuid: uuid})
+          } else {
+            this.data.feed.support_number--
+            for (var i in this.data.feed.supporter_list) {
+              if (this.data.feed.supporter_list[i].uuid === uuid) {
+                this.data.feed.supporter_list.splice(i, 1)
+              }
+            }
+          }
+          window.mui.toast(response.data.message)
+        })
+      },
       toDetail (url) {
         this.$router.pushPlus(url, 'list-detail-page')
       },
