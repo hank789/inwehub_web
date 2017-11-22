@@ -19,7 +19,6 @@ function alertAnswerRepeat (context) {
   if (dialogObj) {
     dialogObj.getHtml('AnswerRepeat', {}, (html) => {
       alertSimple(html, '去互动问答看看', (num) => {
-        console.error(num.index)
         if (num.index === 0) {
           context.$router.pushPlus('/askCommunity/interactions')
         }
@@ -190,7 +189,6 @@ function alertCompanyUser (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('CompanyUser', {}, (html) => {
       alertSimple(html, '确定', (num) => {
-        console.error(num.index)
         if (num.index === 0) {
           // window.mui.toast('申请成功！我们将尽快与您取得联系')
           if (callback) {
@@ -221,7 +219,6 @@ function alertDiscoverCompany (context) {
   if (dialogObj) {
     dialogObj.getHtml('Company', {}, (html) => {
       alertSimple(html, '企业用户认证', (num) => {
-        console.error(num.index)
         if (num.index === 0) {
           context.$router.pushPlus('/company/my?back=/discover')
         }

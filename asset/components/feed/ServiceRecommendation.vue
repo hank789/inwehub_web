@@ -55,7 +55,9 @@
         var parent = queryParent(event.target, 'swiper-slide')
         if (!parent) return
         var title = parent.getAttribute('title')
-        this.$emit('alertClick', title)
+        if (title) {
+          this.$emit('alertClick', title)
+        }
       },
       companyServices () {
         postRequest(`company/services`, {

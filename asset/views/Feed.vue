@@ -157,7 +157,6 @@
       alertClick (title) {
         if (this.is_company) {
           alertCompanyUser(this, () => {
-            console.error(title)
             postRequest(`company/applyService`, {
               service_title: title
             }).then(response => {
