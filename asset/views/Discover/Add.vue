@@ -156,8 +156,8 @@
           return
         }
 
-        if (this.descLength < 7) {
-          window.mui.toast('内容不得小于7个字符')
+        if (!this.descLength) {
+          window.mui.toast('内容不能为空')
           return
         }
 
