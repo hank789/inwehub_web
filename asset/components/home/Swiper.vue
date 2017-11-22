@@ -6,7 +6,7 @@
       <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts" :key="index"
                     :uuid="experts.uuid" :index="index">
         <div class="home_avatar">
-          <img :src="experts.avatar_url" :class="experts.uuid"/>
+          <Avatar :avatar="experts.avatar_url" :class="experts.uuid"></Avatar>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
           </svg>
@@ -41,6 +41,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { queryParent } from '../../utils/dom'
   import userAbilityCheck from '../../utils/userAbilityCheck'
+  import Avatar from '../../components/image/Avatar.vue'
 
   export default {
     data () {
@@ -51,7 +52,8 @@
     },
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      Avatar
     },
     props: {},
     created () {

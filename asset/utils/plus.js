@@ -115,7 +115,7 @@ function getGeoPosition (callback) {
       callback(info)
     }, (e) => {
       console.log('获取位置信息失败:' + e.message)
-    }, {geocode: true, provider: 'baidu'})
+    }, {geocode: true, provider: 'baidu', coordsType: 'bd09ll'})
   })
 }
 

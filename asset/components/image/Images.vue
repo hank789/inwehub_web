@@ -33,7 +33,7 @@
     },
     methods: {
       getImage (src) {
-        return getImageSuffix(src, 226, 226)
+        return getImageSuffix(src, 452, 452)
       }
     },
     mounted () {
