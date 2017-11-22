@@ -10,7 +10,7 @@
         <UserInfo
           :uuid="detail.owner.uuid"
           :avatar="detail.owner.avatar"
-          :realname="detail.owner.username"
+          :realname="detail.owner.name"
           :isFollow="isFollow"
           :isFollowed="detail.is_followed_author?true:false"
           :isShowPositionAndCompany="false"
