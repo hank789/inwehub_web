@@ -128,6 +128,7 @@
 
           if (response.data.data.length > 0) {
             this.channels = response.data.data
+            this.selectedChannel = this.channels[0].value
           }
           this.loading = 0
         })
