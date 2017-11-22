@@ -5,13 +5,15 @@
     <swiper :options="swiperOption" id="home-recommend">
       <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts" :key="index"
                     :uuid="experts.uuid" :index="index">
-        <img :src="experts.avatar_url" :class="experts.uuid"/>
+        <div class="home_avatar">
+          <Avatar :avatar="experts.avatar_url" :class="experts.uuid"></Avatar>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+          </svg>
+        </div>
         <span>
-	      	      	       <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
-		      	      	<svg class="icon" aria-hidden="true">
-						  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-						</svg>
-	      	        </span>
+          <i :class="experts.uuid" class="mui-ellipsis">{{ experts.name }}</i>
+        </span>
         <span class="mui-ellipsis">{{ experts.title ? experts.title : '　' }}</span>
         <span class="followed" :id="'follow_' + index" v-if="experts.is_followed">已关注</span>
         <span class="follow" :id="'follow_' + index" v-else>关注 Ta</span>
@@ -26,7 +28,8 @@
 						  <use xlink:href="#icon-shouyegengduozhuanjia"></use>
 						</svg>
 						</span>
-          <p>查看更多专家</p>
+          <p>申请成为专家</p>
+          <p>开展业务合作</p>
         </div>
       </swiper-slide>
     </swiper>
@@ -38,6 +41,8 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { queryParent } from '../../utils/dom'
   import userAbilityCheck from '../../utils/userAbilityCheck'
+  import Avatar from '../../components/image/Avatar.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -48,7 +53,8 @@
     },
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      Avatar
     },
     props: {},
     created () {
@@ -102,7 +108,8 @@
             this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
           }
         } else {
-          userAbilityCheck.moreProfessor(this.$parent)
+            userAbility.jumpToApplyProfessor(this)
+//          userAbilityCheck.moreProfessor(this.$parent)
         }
       },
       more () {
@@ -129,19 +136,22 @@
     width: 100%;
     height: 157px;
     background: #FFFFFF;
+    padding-left: 4%;
   }
 
   #home-recommend div:nth-of-type(1) {
     margin-left: 0px;
   }
-
+/*box-shadow: 0 0 10px #f3f4f6;*/
   #home-card {
     width: 114px;
     height: 148px;
-    background: #ececee;
+    background:#FFFFFF;
     padding-top: 10px;
     position: relative;
     border-radius: 4px;
+    border:0.2px solid #dcdcdc;
+    box-shadow: 0 0 5px #ececee;
   }
 
   #home-card img {
@@ -204,7 +214,7 @@
   #home-card p {
     position: absolute;
     top: 0px;
-    right: 0px;
+    /*right: 0px;*/
     width: 28px;
     text-align: center;
     background: url("../../statics/images/fill_1@2x.png") no-repeat;
@@ -219,9 +229,11 @@
     width: 118.333px;
     margin-right: 10px;
     height: 148px;
-    background: #ececee;
+    background:#FFFFFF;
     border-radius: 4px;
     position: relative;
+    border: 0.2px solid #dcdcdc;
+    box-shadow: 0 0 5px #ececee;
   }
 
   .moreExperts > div {
@@ -260,6 +272,10 @@
     color: #444444;
     font-size: 12px;
     margin-top: 2px;
+    margin-bottom: 0;
+  }
+  .moreExperts > div p:nth-of-type(2){
+    margin-top:-5px;
   }
 
   .container-item {
@@ -287,4 +303,31 @@
     color: #b4b4b6 !important;
     border-color: #b4b4b6 !important;
   }
+  /*头像*/
+  .home_avatar{
+    position: relative;
+  }
+  .home_avatar svg{
+    font-size:20px;
+    position: absolute;
+    bottom: 0;
+    right: 25%;
+  }
+  /* 适配*/
+  @media (min-width: 320px) {
+    #home-card p {
+      right: 0;
+    }
+  }
+  @media (min-width: 375px) {
+    #home-card p {
+      right: 4%;
+    }
+  }
+  @media (min-width: 414px) {
+    #home-card p {
+      right: 4%;
+    }
+  }
+
 </style>

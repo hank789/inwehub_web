@@ -9,10 +9,10 @@
 
  **/
 import localEvent from '../stores/localStorage'
-import { getLocalUserInfo, isCompanyStatus } from '../utils/user'
+import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
 import router from '../modules/index/routers/index'
-import { alertZoom, alertSimple, getDialogObj } from '../utils/dialog'
-import { postRequest } from '../utils/request'
+import {alertZoom, alertSimple, getDialogObj} from '../utils/dialog'
+import {postRequest} from '../utils/request'
 
 var UserAbility = () => {
   /**
@@ -85,7 +85,8 @@ var UserAbility = () => {
    * 跳转到提交文章
    */
   var jumpToAddArticle = (context) => {
-    context.$router.pushReadHubPage('/submit')
+    context.$router.pushPlus('/discover/add')
+    // context.$router.pushReadHubPage('/submit')
     // router.push('/discover?redirect_url=%2Fsubmit' + '?' + encodeURIComponent('from=h5' + '&time=' + (new Date()).getTime()));
   }
 
@@ -215,7 +216,12 @@ var UserAbility = () => {
               if (window.mixpanel.track) {
                 window.mixpanel.track(
                   'inwehub:newbie:dialog',
-                  {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': 'newbie-dialog', 'page_title': '新手任务弹窗'}
+                  {
+                    'app': 'inwehub',
+                    'user_device': window.getUserAppDevice(),
+                    'page': 'newbie-dialog',
+                    'page_title': '新手任务弹窗'
+                  }
                 )
               }
             }, false)
@@ -225,6 +231,22 @@ var UserAbility = () => {
     }
   }
 
+  /**
+   * 等级样式弹窗；
+   */
+  var jumpJudgeGrade = (context) => {
+    var userInfo = getLocalUserInfo()
+    var dialog = getDialogObj(context)
+    if (dialog) {
+      dialog.getHtml('test', {level: userInfo.user_level}, (html) => {
+        alertSimple(html, '查看等级详情', (num) => {
+          if (num.index === 0) {
+            router.pushPlus('/my/Growth')
+          }
+        }, true)
+      })
+    }
+  }
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -236,7 +258,8 @@ var UserAbility = () => {
     jumpToAskCommunity: jumpToAskCommunity,
     jumpToAskCommunityDetail: jumpToAskCommunityDetail,
     upgradeLevel: upgradeLevel,
-    newbieTask: newbieTask
+    newbieTask: newbieTask,
+    jumpJudgeGrade: jumpJudgeGrade
   }
 }
 

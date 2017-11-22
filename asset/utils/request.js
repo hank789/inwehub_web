@@ -140,6 +140,9 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
       if (options.onUploadProgress) {
         window.mui.closeUploadWaiting()
       }
+
+      console.log('网络异常:' + JSON.stringify(e))
+
       return {data: {message: '网络状况堪忧', code: 0}}
     })
 }

@@ -61,11 +61,13 @@ var Share = () => {
             })
           }
 
+          var pengYouQuanTitle = self.data.title + '：' + self.data.content
+
           self.context.sendPengYouQuan = () => {
             wechat.send({
               content: self.data.content,
               href: self.data.link,
-              title: self.data.title,
+              title: pengYouQuanTitle.substr(0, 150),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneTimeline'}
@@ -140,7 +142,13 @@ var Share = () => {
       })
     })
   }
+
+  var setData = (data) => {
+    this.data = data
+  }
+
   var bindShare = (context, data, successCallback, failCallback) => {
+    console.log('init share')
     this.context = context
     var fullUrl = window.location.href
     this.currentUrl = fullUrl.split('#')[0]
@@ -158,12 +166,15 @@ var Share = () => {
     } else if (window.mui.os.wechat) {
       bindShareByWechat()
     } else {
-      context.sendHaoyou = () => {}
+      context.sendHaoyou = () => {
+        console.log(this.data)
+      }
       context.sendPengYouQuan = () => {}
     }
   }
   return {
     bindShare: bindShare,
+    setData: setData,
     currentUrl: currentUrl,
     context: context,
     data: data,

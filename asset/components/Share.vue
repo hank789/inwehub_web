@@ -9,11 +9,31 @@
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">分享到</div>
       <div class="more">
-        <div class="single" id="wechatShareBtn" @tap.stop.prevent="shareToHaoyou()">
+        <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
         </div>
-        <div class="single" id="wechatShareBtn2" @tap.stop.prevent="shareToPengyouQuan()">
+        <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
+        </div>
+        <div class="single" @tap.stop.prevent="toPreviewImage()"
+             v-if="this.DomConvertImage && isShowSharePng()">
+          <img src="../statics/images/sharePng@2x.png"/>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="shareImageWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+      <div class="title">分享到</div>
+      <div class="more">
+        <div class="single" @tap.stop.prevent="shareImageToHaoyou()">
+          <img src="../statics/images/wechat_2x.png"/>
+        </div>
+        <div class="single" @tap.stop.prevent="shareImageToPengyouQuan()">
+          <img src="../statics/images/pengyouquan.png"/>
+        </div>
+        <div class="single" @tap.stop.prevent="saveImage()">
+          <img src="../statics/images/save-image@2x.png"/>
         </div>
       </div>
     </div>
@@ -31,11 +51,17 @@
 <script type="text/javascript">
 
   import Share from '../utils/share'
+  import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
+  import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
 
   export default {
     data () {
-      return {}
+      return {
+        createImaged: false,  // 是否已创建图片
+        imagePath: '_www/share.jpeg',  // 图片文件路径名称
+        shareImageUrl: ''
+      }
     },
     components: {},
     props: {
@@ -62,6 +88,18 @@
       hideShareBtn: {
         type: Boolean,
         default: false
+      },
+      DomConvertImage: {
+        type: Boolean,
+        default: false
+      },
+      DomConvertImageId: {
+        type: String,
+        default: 'router-view'
+      },
+      ImagePreview: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -76,6 +114,12 @@
     },
 
     methods: {
+      isShowSharePng () {
+        if (window.mui.os.wechat) {
+          return false
+        }
+        return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
+      },
       bindShare () {
         var data = {
           title: this.title.substr(0, 50),
@@ -120,6 +164,85 @@
         }
         this.hide()
       },
+      createImage (callback) {
+        if (!window.mui.os.plus) {
+          return false
+        }
+        if (this.createImaged) {
+          var data = {
+            title: '',
+            link: '',
+            content: '',
+            imageUrl: this.imagePath,
+            thumbUrl: this.imagePath
+          }
+          Share.setData(data)
+          if (callback) {
+            callback(this.shareImageUrl)
+          }
+        } else {
+          var node = document.getElementById(this.DomConvertImageId)
+          console.log('id:' + this.DomConvertImageId)
+          console.log(node)
+          if (node) {
+            window.mui.waiting()
+            domtoimage.toPng(node, {quality: 1}).then((dataUrl) => {
+              window.mui.plusReady(() => {
+                var b = new window.plus.nativeObj.Bitmap()
+                b.loadBase64Data(dataUrl, function () {
+                  console.log('创建成功')
+                }, function () {
+                  console.log('创建失败')
+                })
+                b.save(this.imagePath, {
+                  overwrite: true,
+                  quality: 100
+                }, () => {
+                  console.log('保存成功')
+                  var data = {
+                    title: '',
+                    link: '',
+                    content: '',
+                    imageUrl: this.imagePath,
+                    thumbUrl: this.imagePath
+                  }
+                  Share.setData(data)
+
+                  this.createImaged = true
+                  window.mui.closeWaiting()
+
+                  if (callback) {
+                    getLocalUrl(this.imagePath, (url) => {
+                      this.shareImageUrl = url
+                      callback(url)
+                    })
+                  }
+                }, () => {
+                  console.log('保存失败')
+                })
+              })
+            })
+          }
+        }
+      },
+      toPreviewImage () {
+        window.mui('#shareWrapper').popover('toggle')
+        this.$router.pushPlus('/invitation/preview')
+      },
+      shareImageToHaoyou () {
+        this.createImage(() => {
+          if (this.sendHaoyou) {
+            this.sendHaoyou()
+          }
+        })
+      },
+      shareImageToPengyouQuan () {
+        this.createImage(() => {
+          if (this.sendPengYouQuan) {
+            this.sendPengYouQuan()
+          }
+        })
+      },
       successCallback () {
         this.$emit('success')
 
@@ -150,6 +273,11 @@
         window.mui.toast('分享失败')
       },
       share () {
+        if (this.ImagePreview) {
+          this.shareImage()
+          return
+        }
+
         if (this.link) {
           this.bindShare()
         }
@@ -161,8 +289,60 @@
           })
         }, 150)
       },
+      shareImage () {
+        if (this.link) {
+          this.bindShare()
+        }
+
+        setTimeout(() => {
+          window.mui('#shareImageWrapper').popover('toggle')
+          window.mui('body').on('tap', '.mui-backdrop', () => {
+            this.hide()
+          })
+        }, 150)
+      },
+      saveImage () {
+        this.createImage(() => {
+          window.mui.plusReady(() => {
+            window.plus.gallery.save(this.imagePath, function () {
+              console.log('保存图片到相册成功')
+              window.mui.toast('保存成功')
+            }, function () {
+              console.log('保存图片到相册失败')
+              window.mui.toast('保存失败')
+            })
+          })
+        })
+      },
       hide () {
 
+      },
+      getImageByServer (callback) {
+        var node = document.getElementById(this.DomConvertImageId)
+        // var url = process.env.H5_ROOT + '/?#/invitation/image'
+        postRequest('system/htmlToImage', {html: node.innerHTML})
+          .then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            saveImageByBase64(response.data.data.image, this.imagePath, (url) => {
+              createImageThumb(this.imagePath, '_www/share_thumb.jpeg', (thumbUrl) => {
+                var data = {
+                  title: '',
+                  link: '',
+                  content: '',
+                  imageUrl: this.imagePath,
+                  thumbUrl: thumbUrl
+                }
+                Share.setData(data)
+                this.createImaged = true
+                this.shareImageUrl = url
+                callback(url)
+              })
+            })
+          })
       }
     }
   }

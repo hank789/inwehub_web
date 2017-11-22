@@ -149,7 +149,7 @@
             return
           }
 
-          if (response.data.data.info.skill_tags.length > 0) {
+          if (response.data.data.info.skill_tags.length >= 0) {
             this.skill_tags = response.data.data.info.skill_tags
           }
           this.loading = 0

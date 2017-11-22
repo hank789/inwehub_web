@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的发布</h1>
+      <h1 class="mui-title" v-if="uuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
 
@@ -13,7 +14,7 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/publishAnswers')">回答 </span>
         <span @tap.stop.prevent="">提问</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">文章  <i></i></span>
+        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">动态  <i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
 
       </div>
@@ -22,8 +23,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/myList'"
-        :prevOtherData="{type:0}"
-        :nextOtherData="{type:0}"
+        :prevOtherData="{type:0,uuid: this.$route.params.id}"
+        :nextOtherData="{type:0,uuid: this.$route.params.id}"
         :list="list"
         class="listWrapper">
         <ul class="answer">
@@ -48,9 +49,13 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import localEvent from '../../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
   const PublishAnswers = {
     data: () => ({
-      list: []
+      list: [],
+      uuid: currentUser.uuid
     }),
     created () {
     },

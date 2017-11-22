@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的发布</h1>
+      <h1 class="mui-title" v-if="uuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
 
@@ -12,7 +13,7 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/publishAnswers')">回答 </span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
-        <span @tap.stop.prevent="">文章  <i></i></span>
+        <span @tap.stop.prevent="">动态  <i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
 
       </div>
@@ -21,12 +22,15 @@
         ref="RefreshList"
         v-model="list"
         :api="'readhub/mySubmission'"
-        :prevOtherData="{type:0}"
-        :nextOtherData="{type:0}"
+        :prevOtherData="{type:0,uuid: this.$route.params.id}"
+        :nextOtherData="{type:0,uuid: this.$route.params.id}"
         class="listWrapper">
         <ul class="answer">
-          <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
-            <div class="container-image margin-10-0-0" v-if="ask.img" >
+          <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
+            <div class="margin-10-0-0" v-if="ask.img && ask.type =='text'">
+              <Images :images="ask.img" class="newestList"></Images>
+            </div>
+            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type =='link'" >
               <img :src="ask.img" />
             </div>
             <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
@@ -50,9 +54,15 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import Images from '../../../components/image/Images.vue'
+  import { goThirdPartyArticle } from '../../../utils/webview'
+  import localEvent from '../../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
   const PublishAnswers = {
     data: () => ({
-      list: []
+      list: [],
+      uuid: currentUser.uuid
     }),
     created () {
     },
@@ -60,7 +70,8 @@
 
     },
     components: {
-      RefreshList
+      RefreshList,
+      Images
     },
     methods: {
       // 时间处理；
@@ -68,6 +79,23 @@
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
+      },
+      toDetail (data) {
+        switch (data.type) {
+          case 'text':
+            this.$router.pushPlus(data.comment_url, 'list-detail-page')
+            break
+          case 'link':
+            goThirdPartyArticle(
+              data.submission_url,
+              data.id,
+              data.title,
+              data.comment_url,
+              data.img
+            )
+            break
+          default:
+        }
       }
     },
     mounted () {

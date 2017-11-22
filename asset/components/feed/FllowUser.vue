@@ -6,7 +6,7 @@
         <div class="container-avatarAndText">
           <div class="author">
             <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
-              <div class="avatarInner"><img :src="data.user.avatar">
+              <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
                 <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
                   <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                 </svg>
@@ -18,8 +18,8 @@
       </div>
       <div class="middle-width">
         <div class="component-follow">
-          <svg class="icon" aria-hidden="true" style="display: none">
-            <use xlink:href="#icon-plus-o"></use>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jia"></use>
           </svg>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="container-avatarAndText">
           <div class="author">
             <div class="avatar" @tap.stop.prevent="toResume(data.feed.follow_user_uuid)">
-              <div class="avatarInner"><img :src="data.feed.follow_user_avatar">
+              <div class="avatarInner"><Avatar :avatar="data.feed.follow_user_avatar"></Avatar>
                 <svg class="icon" aria-hidden="true" v-if="data.feed.follow_user_is_expert === 1">
                   <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                 </svg>
@@ -42,11 +42,16 @@
 </template>
 
 <script type="text/javascript">
+
+  import Avatar from '../../components/image/Avatar.vue'
+
   export default {
     data () {
       return {}
     },
-    components: {},
+    components: {
+      Avatar
+    },
     props: {
       data: {
         type: Object,
@@ -76,9 +81,10 @@
     font-size: 21px !important;
     z-index: 9 !important;
     color: #dcdcdc !important;
+    background-color: #fff;
   }
 
   .middle-width {
-    width: 68px;
+    width: 113px;
   }
 </style>

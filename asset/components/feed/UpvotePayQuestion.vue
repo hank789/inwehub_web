@@ -3,7 +3,7 @@
     <div class="container-avatarAndText">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
-          <div class="avatarInner"><img :src="data.user.avatar">
+          <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
             <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
@@ -13,18 +13,22 @@
       </div>
     </div>
     <div class="container-answer">
-      <div class="color-808080 font-13">回答者：{{data.feed.answer_user_name}}</div>
-      <div class="color-444 font-16 margin-5-0-0 mui-ellipsis-2">{{data.feed.question_title}}</div>
+      <div class="color-444 font-16 mui-ellipsis-2">{{data.feed.question_title}}</div>
+      <div class="color-808080 font-13 margin-5-0-0">回答者：{{data.feed.answer_user_name}}</div>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import Avatar from '../../components/image/Avatar.vue'
+
   export default {
     data () {
       return {}
     },
-    components: {},
+    components: {
+      Avatar
+    },
     props: {
       data: {
         type: Object,

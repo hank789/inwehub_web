@@ -112,8 +112,20 @@
           overwrite: true,
           clip: options
         },
-          function (e) {
-            t.upload(e.target)
+          function () {
+            window.plus.zip.compressImage({
+              src: '_doc/user_avatar.jpg', // src在这里是第一步Url里的src。也就是本地路径
+              dst: '_doc/user_avatar.jpg',
+              overwrite: true,
+              width: '200px',
+              height: '200px'
+            },
+            function (e) {
+              t.upload(e.target)
+            },
+            function (error) {
+              window.mui.alert(error.message)
+            })
           },
           function (error) {
             window.mui.alert(error.message)

@@ -1,4 +1,7 @@
 import { setStatusBarBackgroundAndStyle } from './statusBar'
+import router from '../modules/index/routers/index'
+import { getDiscoverDetail } from './shareTemplate'
+import { getIndexPath } from './plus'
 
 /**
  * 打开webview
@@ -97,7 +100,7 @@ function openReadhubPage (url) {
       autoShow: false
     }
   })
-  window.mui.fire(webview, 'go_to_readhub_page', {url: url})
+  window.mui.fire(webview, 'go_to_target_page', {url: url})
   setTimeout(() => {
     webview.show()
   }, 100)
@@ -109,28 +112,23 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
-  var footerPathUrl = process.env.READHUB_URL + pathUrl
+  var footerPathUrl = pathUrl
 
-  var sharePathUrl = process.env.H5_ROOT + '/#/discover/share?redirect_url=' + pathUrl + encodeURIComponent('?noback=1')
-  // var sharePathUrl = process.env.READHUB_URL + '/h5?redirect_url=' + pathUrl;
-  console.log('sharePathUrl:' + sharePathUrl)
+  var shareUrl = getIndexPath() + '#/webview/share'
 
-  // 绑定标题
-  var shareTitle = 'InweHub发现 | ' + title
-  var content = '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？'
-  var shareUrl = 'index.html#' + '/webview/share'
-  // + '&link=' + encodeURIComponent(url)
-  // + '&content=' + encodeURIComponent(content)
-  // + '&imageUrl='
-  // + '&thumbUrl=';
+  var shareOptions = getDiscoverDetail(pathUrl, title, imgUrl)
+  console.log('shareOptions:')
+  console.log(shareOptions)
+
   var shareViewParams = {
     page_title: title,
-    title: shareTitle,
-    link: sharePathUrl,
-    content: content,
-    imageUrl: imgUrl,
-    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+    title: shareOptions.title,
+    link: shareOptions.link,
+    content: shareOptions.content,
+    imageUrl: shareOptions.imageUrl,
+    thumbUrl: shareOptions.thumbUrl
   }
+  console.log('标题栏地址:' + shareUrl)
   var shareView = window.mui.openWindow({
     url: shareUrl,
     id: 'inwehub_article_title',
@@ -163,6 +161,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   currentWebview.append(shareView)
 
   // body部分
+  console.log('body url:' + url)
   var bodyTop = '0px'
   var bodyBottom = '0px'
   if (window.mui.os.android) {
@@ -189,8 +188,10 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   currentWebview.append(webview)
 
   // 创建底部菜单
-  var toolUrl = footerPathUrl + '/webview'
-  console.log('toolUrl:' + toolUrl)
+  var Slugindex = pathUrl.lastIndexOf('/')
+  var slug = pathUrl.substring(Slugindex + 1)
+  var toolUrl = getIndexPath() + '#/discover/comment/' + slug
+  console.log('底部url:' + toolUrl)
 
   var embed = window.mui.openWindow({
     url: toolUrl,
@@ -215,9 +216,10 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       autoShow: false
     }
   })
-  window.mui.fire(embed, 'go_to_readhub_page', {url: pathUrl + '/webview'})
+  window.mui.fire(embed, 'go_to_target_page', {url: '/discover/comment/' + slug})
 
   // 创建评论链接
+  var commentUrl = getIndexPath() + '#' + footerPathUrl
   var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
 
   view.draw([
@@ -229,9 +231,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     }
   ])
   view.addEventListener('click', () => {
-    console.log('准备跳转:' + footerPathUrl + '?from=webview')
-
-    openWebviewByUrl('read_comment_link_' + id, footerPathUrl + '?from=webview')
+    console.log('准备跳转:' + commentUrl)
+    openWebviewByUrl('read_comment_link_' + id, commentUrl)
   }, false)
 
   embed.append(view)
@@ -318,12 +319,80 @@ function clearAllWebViewCache () {
   }
 }
 
+/**
+ * 打开第三方网页
+ * @param url 第三方网页地址
+ * @param articleId 文章id
+ * @param title 文章标题
+ * @param detailUrl 文章详情url
+ * @param imgUrl 文章图片地址
+ */
+function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
+  console.log('打开第三方网页 url:' + url + ', articleId:' + articleId + ', title' + title + ', detailUrl' + detailUrl + ', imgUrl' + imgUrl)
+  var id = articleId
+  var pathUrl = detailUrl
+
+  if (/^http/i.test(url)) {
+    if (window.mui.os.plus) {
+      if (window.mixpanel.track) {
+        window.mixpanel.track(
+          'inwehub:read_page_detail', {
+            'app': 'inwehub',
+            'user_device': window.getUserAppDevice(),
+            'page': url,
+            'page_title': title
+          }
+        )
+      }
+      if (window.ga) {
+        window.ga('set', 'page', url)
+        window.ga('send', 'pageview')
+      }
+      var articleParams = {
+        article_id: id,
+        article_url: url,
+        article_title: title,
+        article_comment_url: pathUrl,
+        article_img_url: imgUrl,
+        preload: true
+      }
+      var articleWs = window.mui.openWindow({
+        url: getIndexPath() + '#/webview/article',
+        id: 'inwehub_article_view',
+        preload: false, // 一定要为false
+        createNew: false,
+        show: {
+          autoShow: true,
+          aniShow: 'pop-in'
+        },
+        styles: {
+          popGesture: 'hide'
+        },
+        waiting: {
+          autoShow: false
+        },
+        extras: articleParams
+      })
+      window.mui.fire(articleWs, 'load_article', articleParams)
+    } else {
+      // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
+
+      // url = '/discover/iframe?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
+      router.push(pathUrl)
+      // window.location.href = url
+    }
+  } else {
+    router.pushReadHubPage(url)
+  }
+}
+
 export {
   openWebviewByUrl,
   openReadhubPage,
   goBack,
   showWebview,
   clearAllWebViewCache,
-  openWebviewByHome
+  openWebviewByHome,
+  goThirdPartyArticle
 }
 

@@ -31,8 +31,14 @@
         <template v-for="(item, index) in list">
 
           <Swiper v-if="index===2"></Swiper>
+          <ServiceRecommendation v-if="index===15" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
 
-          <div @tap.stop.prevent="toDetail(item)">
+
+          <div v-if="item.feed_type === 5 && item.feed.domain === ''">
+            <!--x发布了发现-->
+            <DiscoverShare :data="item"></DiscoverShare>
+          </div>
+          <div @tap.stop.prevent="toDetail(item)" v-else>
 
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
@@ -44,7 +50,7 @@
             <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
             <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5" :data="item"></SubmitReadhubAriticle>
+            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"></SubmitReadhubAriticle>
 
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
@@ -99,16 +105,23 @@
   import UpvotePayQuestion from '../components/feed/UpvotePayQuestion'
   import UpvoteFreeQuestion from '../components/feed/UpvoteFreeQuestion'
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
+  import DiscoverShare from '../components/feed/DiscoverShare.vue'
+  import ServiceRecommendation from '../components/feed/ServiceRecommendation'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
   import Swiper from '../components/home/Swiper.vue'
   import userAbility from '../utils/userAbility'
+  import { goThirdPartyArticle } from '../utils/webview'
+  import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
+  import { getLocalUserInfo } from '../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const Feed = {
     data: () => ({
       loading: false,
-      list: []
+      list: [],
+      is_company: currentUser.is_company
     }),
     created () {
       this.getHomeData()
@@ -128,7 +141,9 @@
       UpvoteFreeQuestion,
       UpvoteReadhubAriticle,
       Activity,
-      Swiper
+      Swiper,
+      DiscoverShare,
+      ServiceRecommendation
     },
     activated: function () {
 
@@ -139,68 +154,39 @@
     },
     computed: {},
     methods: {
+      alertClick (title) {
+        if (this.is_company) {
+          alertCompanyUser(this, () => {
+            postRequest(`company/applyService`, {
+              service_title: title
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              if (response.data.data) {
+                window.mui.toast(response.data.data.tips)
+              }
+            })
+          })
+        } else {
+          alertDiscoverCompany(this)
+        }
+      },
       toAddArticle () {
         userAbility.jumpToAddArticle(this)
       },
       goArticle: function (article) {
-        var url = article.view_url
-        var id = article.id
-        var title = article.title
-        var pathUrl = article.comment_url
-        var imgUrl = article.img_url
-
-        if (/http/.test(url)) {
-          if (window.mui.os.plus) {
-            if (window.mixpanel.track) {
-              window.mixpanel.track(
-                'inwehub:read_page_detail', {
-                  'app': 'inwehub',
-                  'user_device': window.getUserAppDevice(),
-                  'page': url,
-                  'page_title': title
-                }
-              )
-            }
-            if (window.ga) {
-              window.ga('set', 'page', url)
-              window.ga('send', 'pageview')
-            }
-            var articleParams = {
-              article_id: id,
-              article_url: url,
-              article_title: title,
-              article_comment_url: pathUrl,
-              article_img_url: imgUrl,
-              preload: true
-            }
-            var articleWs = window.mui.openWindow({
-              url: 'index.html#/webview/article',
-              id: 'inwehub_article_view',
-              preload: false, // 一定要为false
-              createNew: false,
-              show: {
-                autoShow: true,
-                aniShow: 'pop-in'
-              },
-              styles: {
-                popGesture: 'hide'
-              },
-              waiting: {
-                autoShow: false
-              },
-              extras: articleParams
-            })
-            window.mui.fire(articleWs, 'load_article', articleParams)
-          } else {
-            // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
-
-            url = '/discover?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
-            this.$router.push(url)
-            // window.location.href = url
-          }
-        } else {
-          this.$router.pushReadHubPage(url)
-        }
+        goThirdPartyArticle(
+          article.view_url,
+          article.id,
+          article.title,
+          article.comment_url,
+          article.img_url
+        )
       },
       getHomeData () {
         postRequest(`home`, {}, false).then(response => {
@@ -228,9 +214,22 @@
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 10:
-            this.$router.pushReadHubPage(item.url)
+            this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 5:
+            if (item.feed_type === 5 && item.feed.domain === '') {
+              // ...
+            } else {
+              var linkArticle = {
+                view_url: item.url,
+                id: item.feed.submission_id,
+                title: item.feed.title,
+                comment_url: item.feed.comment_url,
+                img_url: item.feed.img
+              }
+              this.goArticle(linkArticle)
+            }
+            break
           case 13:
             var article = {
               view_url: item.url,
@@ -239,7 +238,6 @@
               comment_url: item.feed.comment_url,
               img_url: item.feed.img
             }
-            console.debug(article)
             this.goArticle(article)
             break
           default:
@@ -252,6 +250,9 @@
 </script>
 
 <style lang="less" scoped>
+  .mui-content{
+    background: #f3f4f6;
+  }
   .listWrapper {
     top: 0;
     bottom: 50px;
@@ -263,8 +264,9 @@
 
   .rightWrapper {
     position: absolute;
-    right: 15px;
-    top: 12px;
+    padding:12px;
+    right: 3px;
+    top: 0;
   }
 
   .rightWrapper .icon {

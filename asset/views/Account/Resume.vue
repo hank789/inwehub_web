@@ -50,13 +50,12 @@
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
               src="../../statics/images/resume_erweima_3x.png"/></div>
             <!--关注-->
-            <div class="collect" @tap.stop.prevent="collectProfessor" v-show="uuid !== cuuid && !resume.is_followed">
+            <div class="collect" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
               关注Ta
-
             </div>
             <div class="collect active" @tap.stop.prevent="collectProfessor"
                  v-show="uuid !== cuuid && resume.is_followed">
-              已互关
+              已关注
 
             </div>
             <!--名片-->
@@ -93,7 +92,7 @@
               </div>
               <!--关注 被赞 综合评分-->
               <div class="counter">
-                关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus')">{{ resume.info.followers }}</b>
+                关注Ta <b @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">{{ resume.info.followers }}</b>
                 <i class="separate"></i>
                 被赞 <b>{{ resume.info.supports }}</b>
                 <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
@@ -114,31 +113,31 @@
         <!--发布-->
         <div class="news">
           <div>Ta的发布</div>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
             回答 <span>{{ resume.info.answers }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">
             提问 <span>{{ resume.info.questions }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
-            文章 <span>{{ resume.info.submission_count }}</span>
+          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
+            动态 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
-          <p class="mui-ellipsis">
+          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
             评论 <span>{{ resume.info.comment_count }}</span>
           </p>
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <div class="dynamic">
-          <p>Ta的动态</p>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <i class="bot"></i>
-        </div>
+        <!--<div class="dynamic">-->
+          <!--<p>Ta的动态</p>-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+          <!--</svg>-->
+          <!--<i class="bot"></i>-->
+        <!--</div>-->
         <!--个人简介-->
         <div class="description">
           <p>个人简介</p>
@@ -764,11 +763,9 @@
           font-size: 13px;
           color: #444444;
           b {
-            color: #e63964;
+            color:rgb(250,73,117);
           }
-          b:nth-of-type(2) {
-            color: #808080;
-          }
+
         }
         .item {
           color: #808080;
@@ -1080,17 +1077,19 @@
   }
 
   .skilled span {
+    float: left;
     background: #ececee;
     border-radius: 50px;
     padding: 4px 11px;
     font-size: 12px;
     color: #444444;
-    margin-left: 15px;
+    margin-left:8px;
+    margin-bottom: 6px;
   }
 
-  .skilled span:nth-of-type(1) {
-    margin-left: 0px;
-  }
+  /*.skilled span:nth-of-type(1) {*/
+    /*margin-left: 0px;*/
+  /*}*/
 
   .skilled p {
     font-size: 14px;

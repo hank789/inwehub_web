@@ -24,7 +24,6 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage'
   import FooterComponent from '../../components/Footer.vue'
   import OpenAppComponent from '../../components/OpenApp.vue'
   import { goBack } from '../../utils/webview'
@@ -33,7 +32,6 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
-  import { getImmersedHeight } from '../../utils/statusBar'
 
   export default {
     data () {
@@ -89,7 +87,6 @@
     },
     mounted () {
       console.log('refreshDataAppMounted')
-      var currentUser = localEvent.getLocalItem('UserInfo')
       var router = this.$router
       var self = this
 
@@ -101,39 +98,6 @@
 
       window.mui.plusReady(function () {
         if (window.mui.os.plus) {
-          var url = process.env.READHUB_URL + '/h5'
-          if (currentUser.uuid) {
-            url = url + '?uuid=' + currentUser.uuid
-          }
-          // 通过mui.preload()方法预加载，可立即返回对应webview的引用，但一次仅能预加载一个页面；若需加载多个webview，则需多次调用mui.preload()方法；
-
-          var immersedHeight = getImmersedHeight()
-
-          var inwehubEmbedView = window.mui.preload({
-            url: url,
-            id: 'inwehub_embed',
-            styles: {
-              popGesture: 'none',
-              top: immersedHeight + 'px',
-              dock: 'top',
-              bottom: '50px',
-              bounce: 'none'
-            },
-            extras: {preload: true}
-          })
-          window.mui.preload({
-            url: url,
-            id: 'readhub_submission_webview',
-            styles: {
-              popGesture: 'hide'
-            },
-            extras: {preload: true}
-          })
-
-          if (inwehubEmbedView.getURL() && inwehubEmbedView.getURL() !== url) {
-            console.log('inwehub_embed:reload:' + url)
-            inwehubEmbedView.loadURL(url)
-          }
           window.mui.init({
             swipeBack: true, // 启用右滑关闭功能
             beforeback: goBack
@@ -237,7 +201,7 @@
                       preload: true
                     }
                     var articleWs = window.mui.openWindow({
-                      url: 'index.html#/webview/article',
+                      url: '/public/index.html#/webview/article',
                       id: 'inwehub_article_view',
                       preload: false, // 一定要为false
                       createNew: false,
@@ -263,7 +227,7 @@
                 case 'push_notice_article':
                   // 推送公告文章
                   window.mui.openWindow({
-                    url: 'index.html#/webview/notice',
+                    url: '/public/index.html#/webview/notice',
                     id: payload.object_id,
                     preload: false, // 一定要为false
                     createNew: false,

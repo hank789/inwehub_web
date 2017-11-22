@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">关注我的</h1>
+      <h1 class="mui-title" v-if="uuid == this.$route.params.id">关注我的</h1>
+      <h1 class="mui-title" v-else>关注Ta的</h1>
     </header>
     <div class="mui-content absolute">
       <div class="mui-scroll-wrapper task-list" id="pullrefresh">
@@ -30,9 +31,9 @@
                   <span class="descriptionText">{{item.description}}</span>
                 </div>
               </div>
-              <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
+              <p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
                 关注Ta</p>
-              <p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>已互关</p>
+              <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>已关注</p>
               <i class="bot"></i>
             </li>
           </ul>
@@ -44,13 +45,16 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
         list: [],
         loading: 1,
-        tip: ''
+        tip: '',
+        uuid: currentUser.uuid
       }
     },
     methods: {
@@ -68,7 +72,9 @@
         }, 1000)
       },
       getPrevList () {
-        postRequest('follow_my/users', {}).then(response => {
+        postRequest('follow_my/users', {
+          uuid: this.$route.params.id
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -84,7 +90,8 @@
       },
       getNextList () {
         postRequest('follow_my/users', {
-          bottom_id: this.bottomId
+          bottom_id: this.bottomId,
+          uuid: this.$route.params.id
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -153,6 +160,7 @@
         }
       })
       this.getPrevList()
+      console.error()
     }
   }
 </script>

@@ -112,6 +112,11 @@
         this.prevOtherData = prevOtherData
         this.getPrevList()
       },
+      scrollToTop () {
+        if (window.mui('#refreshContainer')) {
+          window.mui('#refreshContainer').pullRefresh().scrollTo(0, 0, 100)
+        }
+      },
       scrollToBottom () {
         if (window.mui('#refreshContainer')) {
           var posY = document.querySelector('#listWrapper').scrollHeight
@@ -179,6 +184,14 @@
       },
       getPrevList () {
         var param = {}
+
+        if (this.pageMode) {
+          param = {
+            page: 1
+          }
+        } else {
+          param = {}
+        }
         param = Object.assign(param, this.prevOtherData)
 
         console.log(JSON.stringify(param))
@@ -278,7 +291,7 @@
       window.mui.init({
         beforeback: goBack,
         pullRefresh: {
-          container: '#refreshContainer',
+          container: this.$el,
           down: {
             auto: true,   // 可选,默认false.首次加载自动下拉刷新一次
             contentdown: this.contentdown ? this.contentdown : '下拉可以刷新',  // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容

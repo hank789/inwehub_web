@@ -59,7 +59,7 @@
             <use xlink:href="#icon-tijiaowenzhang1"></use>
           </svg>
         </p>
-        <span class="aside_r">提交文章</span>
+        <span class="aside_r">动态分享</span>
       </li>
 
     </ul>
@@ -97,7 +97,7 @@
               this.$router.pushPlus('/ask/interaction')
               break
             case 6:
-              this.$router.pushReadHubPage('/submit')
+              this.$router.pushPlus('/discover/add')
               break
             case 7:
               this.$router.pushPlus('/feedback/news')
@@ -118,14 +118,14 @@
         document.getElementById('short_all').style.display = 'inline'
 
         // 发现页处理
-        if (window.mui.os.plus) {
-          if (this.$route.path.match(/discover/)) {
-            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-            if (inwehubEmbedWebview) {
-              inwehubEmbedWebview.hide()
-            }
-          }
-        }
+//        if (window.mui.os.plus) {
+//          if (this.$route.path.match(/discover/)) {
+//            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+//            if (inwehubEmbedWebview) {
+//              inwehubEmbedWebview.hide()
+//            }
+//          }
+//        }
 
         setStatusBarBackgroundAndStyle('#D8D9DC', 'light')
       },
@@ -141,16 +141,16 @@
         autoHeight()
 
         // 发现页处理
-        if (window.mui.os.plus) {
-          if (this.$route.path.match(/discover/)) {
-            setTimeout(() => {
-              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-              if (inwehubEmbedWebview) {
-                inwehubEmbedWebview.show()
-              }
-            }, 100)
-          }
-        }
+//        if (window.mui.os.plus) {
+//          if (this.$route.path.match(/discover/)) {
+//            setTimeout(() => {
+//              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
+//              if (inwehubEmbedWebview) {
+//                inwehubEmbedWebview.show()
+//              }
+//            }, 100)
+//          }
+//        }
       }
     },
     mounted () {

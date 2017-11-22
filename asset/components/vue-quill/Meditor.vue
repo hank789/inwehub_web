@@ -35,6 +35,7 @@
   import iconDrag from '../../statics/images/icon-drag.png'
   import { RICHTEXT_ANSWER_SET } from '../../stores/types'
   import { getIndexByIdArray } from '../../utils/array'
+  import { autoTextArea } from '../../utils/plus'
 
   export default {
     data: () => ({
@@ -80,11 +81,7 @@
       }
     },
     mounted () {
-      window.mui.plusReady(function () {
-        window.plus.webview.currentWebview().setStyle({
-          softinputMode: 'adjustResize'
-        })
-      })
+      autoTextArea()
 
       window.onbeforeunload = (e) => {
         e = e || window.event

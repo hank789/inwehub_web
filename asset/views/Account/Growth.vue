@@ -215,17 +215,13 @@
               <p class="text_yellow" v-if="user_level >='3'">已获取</p>
               <p v-else>升级解锁</p>
             </li>
-            <li>
-              <!--<svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
-                <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
-              </svg>
-              <svg class="icon " aria-hidden="true" v-else>
-                <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
-              </svg>-->
+            <li class="commodity">
               <img src="../../statics/images/ipad_air2@3x.png" class="air"/>
               <p>iPad air2 32G</p>
-              <p class="text_yellow" v-if="user_level >='3'"><i class="num_yellow">25000</i><i
-                class="num_yellow">贡献值兑换</i></p>
+              <p  class="text_yellow" v-if="user_level >='3'">
+              <i class="num_yellow">25000</i>
+              <i class="num_yellow">贡献值兑换</i>
+              </p>
               <p v-else><i>25000</i><i>贡献值兑换</i></p>
             </li>
           </ul>
@@ -259,20 +255,20 @@
               <p class="text_yellow" v-if="user_level >='4'">已获取</p>
               <p v-else>升级解锁</p>
             </li>
-            <li>
+            <li class="commodity">
               <img src="../../statics/images/case.png" class="case"/>
-              <p>日默瓦 CF 20寸</p>
-              <p class="text_yellow"  v-if="user_level >='4'"><i class="num_yellow">50000</i><i
-                class="num_yellow">贡献值兑换</i></p>
+              <p class="mui-ellipsis">日默瓦 CF 20寸</p>
+              <p class="text_yellow"  v-if="user_level >='4'">
+                <i class="num_yellow">50000</i>
+                <i class="num_yellow">贡献值兑换</i></p>
               <p v-else ><i>50000</i><i>贡献值兑换</i></p>
             </li>
-            <li>
-
-
+            <li class="commodity">
               <img src="../../statics/images/iphone8@3x.png" class="iphone"/>
-              <p>iPhone8 256GB</p>
-              <p class="text_yellow" v-if="user_level >='4'"><i class="num_yellow">80000</i><i
-                class="num_yellow">贡献值兑换</i></p>
+              <p class="mui-ellipsis">iPhone8 256GB</p>
+              <p class="text_yellow" v-if="user_level >='4'">
+                <i class="num_yellow">80000</i>
+                <i class="num_yellow">贡献值兑换</i></p>
               <p v-else><i>80000</i><i>贡献值兑换</i></p>
             </li>
 
@@ -776,7 +772,7 @@
   }
 
   .powerdetail li {
-    width: 30%;
+    width: 32%;
     height: 120px;
     float: left;
     text-align: center;
@@ -808,69 +804,10 @@
   }
 
   .powerdetail li:nth-child(1), .powerdetail li:nth-child(4) {
-    margin-left: 6%;
+    margin-left: 3%;
 
   }
 
-  /*air*/
-  .air {
-    width: 37px;
-    height: 40px;
-    margin-top: 10px;
-  }
-
-  /*air*/
-  .case {
-    width: 25.5px;
-    height: 35px;
-    margin-top: 10px;
-  }
-
-  .iphone {
-    width: 45px;
-    height: 35px;
-    margin-top: 10px;
-  }
-
-  .powerdetail li p:nth-of-type(2) i:nth-of-type(1) {
-    display: block;
-    font-size: 12px;
-    color: #444444;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  .powerdetail li p:nth-of-type(2) i:nth-of-type(1) {
-    display: block;
-    font-size: 12px;
-    color: #444444;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  .powerdetail li p:nth-of-type(2) i:nth-of-type(2) {
-    display: block;
-    font-size: 12px;
-    color: #444444;
-    text-align: center;
-    position: absolute;
-    top: 5px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  .powerdetail li p:nth-of-type(2) i.num_yellow {
-    color: #fcc916;
-  }
 
   /****积分说明*****/
   .instruction {
@@ -959,6 +896,54 @@
     bottom: -2px;
     left: 16px;
   }
+  /*商品的通用样式*/
+  .commodity{
+    width:32%;
+    height:120px;
+    /*background:#e3e3e3;*/
+  }
+  .commodity img{
+    width: 37px;
+    height: 40px;
+    margin-top:5px;
+}
+  .commodity .case{
+    width: 26px;
+
+  }
+  .commodity .iphone{
+    width: 50px;
+
+  }
+  .commodity p:nth-of-type(2) i:nth-of-type(1) {
+  display: block;
+  font-size: 12px;
+  color: #444444;
+  text-align: center;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  }
+
+
+  .commodity p:nth-of-type(2) i:nth-of-type(2) {
+  display: block;
+  font-size: 12px;
+  color: #444444;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  }
+
+  .commodity  p:nth-of-type(2) i.num_yellow {
+    color: #fcc916;
+  }
+
 
 </style>
 

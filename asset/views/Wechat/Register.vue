@@ -46,12 +46,14 @@
 
 
 
+
       </button>
     </div>
 
 
     <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
       我没有邀请码？
+
 
     </div>
 
@@ -94,9 +96,12 @@
       }
     },
     created () {
-      this.checkToken()
-      this.getOpenId()
-      this.checkCache()
+      var isContinue = this.checkRcCode()
+      if (isContinue) {
+        this.checkToken()
+        this.getOpenId()
+        this.checkCache()
+      }
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
@@ -111,6 +116,16 @@
       }
     },
     methods: {
+      checkRcCode () {
+        this.redirect = this.$route.query.redirect || '/my'
+        if (/invitation/.test(this.redirect)) {
+          var token = this.$route.query.token || ''
+          var openid = this.$route.query.openid || ''
+          this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + openid})
+          return false
+        }
+        return true
+      },
       checkCache () {
         var cache = localEvent.getLocalItem('wechatInfo')
         if (cache.openid) {
@@ -127,6 +142,7 @@
       },
       checkToken () {
         let token = this.$route.query.token
+        this.redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
         if (token) {
           window.mui.waiting()
           var data = {
