@@ -21,10 +21,11 @@
     },
     methods: {
       getImage (src) {
-        return getImageSuffix(src, 50, 50)
+        return getImageSuffix(src, 100, 100)
       }
     },
-    mounted () {}
+    mounted () {
+    }
   }
 </script>
 
