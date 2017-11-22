@@ -61,11 +61,13 @@ var Share = () => {
             })
           }
 
+          var pengYouQuanTitle = self.data.title + '：' + self.data.content
+
           self.context.sendPengYouQuan = () => {
             wechat.send({
               content: self.data.content,
               href: self.data.link,
-              title: self.data.title,
+              title: pengYouQuanTitle.substr(0, 150),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneTimeline'}
