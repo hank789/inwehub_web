@@ -15,7 +15,7 @@
         class="listWrapper">
         <ul class="services_container">
           <li class="container-image" v-for="(item, index) in list" @tap.stop.prevent="apply()">
-            <img :src="item.img_url"/>
+            <img :src="item.img_url_list"/>
             <i class="bot"></i>
           </li>
         </ul>
