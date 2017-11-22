@@ -12,7 +12,7 @@
        <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答  </span>
-        <span>文章 <i></i></span>
+        <span>动态 <i></i></span>
 
       </div>
       <!--内容区域-->
