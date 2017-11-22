@@ -38,4 +38,11 @@
     height: 108px;
     margin-right:5px;
   }
+
+  .container-images .container-image:only-child {
+    width: 226px !important;
+    height: auto !important;
+    max-width: 226px !important;
+    max-height: 226px !important;
+  }
 </style>

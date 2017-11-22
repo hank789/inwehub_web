@@ -123,11 +123,15 @@ function getGeoPosition (callback) {
  * 自动调整文本框位置
  */
 function autoTextArea () {
-  // window.mui.plusReady(() => {
-  //   window.plus.webview.currentWebview().setStyle({
-  //     softinputMode: 'adjustResize'
-  //   })
-  // })
+  if (window.mui.os.ios) {
+    return false
+  } else {
+    window.mui.plusReady(() => {
+      window.plus.webview.currentWebview().setStyle({
+        softinputMode: 'adjustResize'
+      })
+    })
+  }
 }
 
 /**
