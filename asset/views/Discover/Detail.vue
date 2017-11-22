@@ -131,6 +131,11 @@
       refreshPageData () {
         this.getDetail()
       },
+      shareSuccess () {
+
+      },
+      shareFail () {
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
