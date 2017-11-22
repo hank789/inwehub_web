@@ -96,7 +96,6 @@
             break
           default:
         }
-
       }
     },
     mounted () {
