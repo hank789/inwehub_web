@@ -28,7 +28,8 @@
 						  <use xlink:href="#icon-shouyegengduozhuanjia"></use>
 						</svg>
 						</span>
-          <p>查看更多专家</p>
+          <p>申请成为专家</p>
+          <p>开展业务合作</p>
         </div>
       </swiper-slide>
     </swiper>
@@ -267,6 +268,10 @@
     color: #444444;
     font-size: 12px;
     margin-top: 2px;
+    margin-bottom: 0;
+  }
+  .moreExperts > div p:nth-of-type(2){
+    margin-top:-5px;
   }
 
   .container-item {

@@ -31,7 +31,7 @@
         <template v-for="(item, index) in list">
 
           <Swiper v-if="index===2"></Swiper>
-          <ServiceRecommendation v-if="index===5" :isShow="true" :key="'feed-swiper'"></ServiceRecommendation>
+          <ServiceRecommendation v-if="index===5" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
 
 
           <div v-if="item.feed_type === 5 && item.feed.domain === ''">
@@ -78,7 +78,7 @@
 
             <!--x赞了文章-->
             <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
-            
+
           </div>
         </template>
 
@@ -113,11 +113,15 @@
   import Swiper from '../components/home/Swiper.vue'
   import userAbility from '../utils/userAbility'
   import { goThirdPartyArticle } from '../utils/webview'
+  import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
+  import { getLocalUserInfo } from '../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const Feed = {
     data: () => ({
       loading: false,
-      list: []
+      list: [],
+      is_company: currentUser.is_company
     }),
     created () {
       this.getHomeData()
@@ -150,6 +154,13 @@
     },
     computed: {},
     methods: {
+      alertClick () {
+        if (this.is_company) {
+          alertCompanyUser(this)
+        } else {
+          alertDiscoverCompany(this)
+        }
+      },
       toAddArticle () {
         userAbility.jumpToAddArticle(this)
       },
