@@ -42,6 +42,7 @@
   import { queryParent } from '../../utils/dom'
   import userAbilityCheck from '../../utils/userAbilityCheck'
   import Avatar from '../../components/image/Avatar.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -107,7 +108,8 @@
             this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
           }
         } else {
-          userAbilityCheck.moreProfessor(this.$parent)
+            userAbility.jumpToApplyProfessor(this)
+//          userAbilityCheck.moreProfessor(this.$parent)
         }
       },
       more () {
