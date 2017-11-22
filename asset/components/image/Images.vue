@@ -1,9 +1,7 @@
 <template>
-  <div>
     <div class="container-images">
       <div class="container-image"  v-for="(image, index) in images"><img :src="image" data-preview-src="" :data-preview-group="group"/></div>
     </div>
-  </div>
 </template>
 
 <script type="text/javascript">
@@ -21,8 +19,8 @@
         }
       },
       group: {
-        type: Number,
-        default: 1
+        type: String,
+        default: '1'
       },
       isImagePreview: {
         type: Boolean,

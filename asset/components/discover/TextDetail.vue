@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div @tap.stop.prevent="goDetial(data)">
-        <div class="avatar">
+    <div>
+        <div class="avatar" @tap.stop.prevent="goDetial(data)">
           <p>
             <img :src="data.owner.avatar" @tap.stop.prevent="toAvatar(data.owner.uuid)"/>
             <svg class="icon" aria-hidden="true" v-if="data.owner.is_expert == '1'">
@@ -10,15 +10,15 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2">
+        <div class="textContainer mui-ellipsis-2" @tap.stop.prevent="goDetial(data)">
           {{data.title}}
         </div>
 
         <div class="PublishContainer" v-if="data.data.img">
-          <Images :images="data.data.img" class="newestList"></Images>
+          <Images :images="data.data.img" class="newestList" :group="data.slug"></Images>
         </div>
 
-        <div class="timeContainer">
+        <div class="timeContainer" @tap.stop.prevent="goDetial(data)">
           <span>
             <timeago :since="timeago(data.created_at)" :auto-update="60">
             </timeago>
