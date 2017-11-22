@@ -53,7 +53,7 @@ function downWgt (wgtUrl) {
     if (status === 200) {
       installWgt(d.filename) // 安装wgt包
     } else {
-      // plus.nativeUI.alert("下载更新文件失败！");
+      window.plus.nativeUI.alert('下载更新文件失败:' + status)
     }
     window.plus.nativeUI.closeWaiting()
   }).start()
