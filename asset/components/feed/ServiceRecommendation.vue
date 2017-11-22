@@ -28,7 +28,7 @@
       return {
         swiperOption: {
           pagination: '.swiper-pagination',
-          slidesPerView: 1.6,
+          slidesPerView:'auto',
           spaceBetween: 10,
           onTap: this.swipperClick
         },
