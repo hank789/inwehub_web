@@ -205,7 +205,6 @@ function alertCompany (context) {
   if (dialogObj) {
     dialogObj.getHtml('Company', {}, (html) => {
       alertSimple(html, '企业用户认证', (num) => {
-        console.error(num.index)
         if (num.index === 0) {
           context.$router.pushPlus('/company/my?back=/discover/company/services')
         }

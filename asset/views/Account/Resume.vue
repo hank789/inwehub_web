@@ -55,7 +55,7 @@
             </div>
             <div class="collect active" @tap.stop.prevent="collectProfessor"
                  v-show="uuid !== cuuid && resume.is_followed">
-              已互关
+              已关注
 
             </div>
             <!--名片-->

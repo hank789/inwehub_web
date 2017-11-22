@@ -31,9 +31,9 @@
                   <span class="descriptionText">{{item.description}}</span>
                 </div>
               </div>
-              <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
+              <p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
                 关注Ta</p>
-              <p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>已互关</p>
+              <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>已关注</p>
               <i class="bot"></i>
             </li>
           </ul>
