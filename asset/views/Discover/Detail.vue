@@ -18,9 +18,7 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper">
-        {{ detail.title }}
-      </div>
+      <div class="contentWrapper">{{ detail.title }}</div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
@@ -62,6 +60,18 @@
       ></Discuss>
 
     </div>
+
+    <Share
+      ref="ShareBtn"
+      :title="shareOption.title"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
+
   </div>
 </template>
 
@@ -72,6 +82,8 @@
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import { autoTextArea } from '../../utils/plus'
+  import Share from '../../components/Share.vue'
+  import { getTextDiscoverDetail } from '../../utils/shareTemplate'
 
   export default {
     data () {
@@ -89,6 +101,13 @@
           },
           created_at: ''
         },
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: ''
+        },
         isFollow: true,
         loading: 1
       }
@@ -105,7 +124,8 @@
       UserInfo,
       Images,
       Statistics,
-      Discuss
+      Discuss,
+      Share
     },
     methods: {
       refreshPageData () {
@@ -133,6 +153,8 @@
           }
 
           this.detail = response.data.data
+
+          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
 
           this.loading = 0
         })
@@ -188,6 +210,7 @@
   .contentWrapper{
     padding:0 15px;
     background: #fff;
+    white-space: pre;
     font-size:15px;
     color:#444;
   }

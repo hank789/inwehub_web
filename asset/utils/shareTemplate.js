@@ -66,9 +66,34 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
   }
 }
 
+/**
+ * 发现详情-文本类型
+ * @param pathUrl
+ * @param title
+ * @param imgUrl
+ * @param username
+ * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
+ */
+function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
+  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: '分享 ' + username + ' 的InweHub动态',
+    link: link,
+    content: title,
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
   getInvitation,
-  getDiscoverDetail
+  getDiscoverDetail,
+  getTextDiscoverDetail
 }
