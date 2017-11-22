@@ -114,7 +114,7 @@
 
   .container-image {
     padding: 15px 0;
-    height: 128px;
+    height: 158px;
     border-radius: 4px;
     position: relative;
   }

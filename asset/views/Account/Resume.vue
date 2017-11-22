@@ -50,7 +50,7 @@
             <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
               src="../../statics/images/resume_erweima_3x.png"/></div>
             <!--关注-->
-            <div class="collect" v-show="uuid !== cuuid && !resume.is_followed">
+            <div class="collect" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
               关注Ta
             </div>
             <div class="collect active" @tap.stop.prevent="collectProfessor"

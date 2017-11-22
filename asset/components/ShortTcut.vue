@@ -97,7 +97,7 @@
               this.$router.pushPlus('/ask/interaction')
               break
             case 6:
-              this.$router.pushPlus('/discover/publishArticles')
+              this.$router.pushPlus('/discover/add')
               break
             case 7:
               this.$router.pushPlus('/feedback/news')

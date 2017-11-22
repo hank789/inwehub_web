@@ -2,38 +2,57 @@
   <div class="mui-content absolute">
     <header>
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <div>
-        <p>
+      <ul class="expertExplanation">
+        <p  class="expertSign">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhuanjiabiaoji"></use>
           </svg>
           <span>认证专家</span>
         </p>
-        <p>发挥你的个人价值 </p>
-      </div>
+        <li>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
+          <p>全面开启平台功能，发挥个人价值</p>
+        </li>
+        <li>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
+          <p>参与对接企业资源，直接服务企业</p>
+        </li>
+        <li>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
+          <p>展示打造个人品牌，建立商业模式</p>
+        </li>
+      </ul>
     </header>
-    <div class="content">
-      <ul class="why">
-        <p><span>为什么</span>要成为平台认证专家？</p>
-        <li><i></i><span>全面开启平台功能，发挥个人价值</span></li>
-        <li><i></i><span>参与对接企业资源，直接服务企业</span></li>
-        <li><i></i><span>树立打造个人品牌，建立商业模式</span></li>
-      </ul>
+    <ul class="guideExplain">
+      <p class="platformExplain">如何才能成为平台认证专家？</p>
+      <li>
+        <p><i></i>您在企业咨询领域有10年以上专业经验，或在特定领域有所擅长</p>
+        <p>请保证个人名片真实性及96%以上完整度，并维护“我的擅长”标签</p>
+      </li>
+      <li>
+        <p><i></i>您在平台参与互动、展示实力并得到广泛关注和认可（问答、分享、活动话题参与等）</p>
+        <p>平台活跃度等级长久保持L3及以上可申请，等级越高申请通过率越高</p>
+      </li>
+    </ul>
 
-      <ul class="when">
-        <p><span>如何</span>才能成为平台认证专家？</p>
-        <li><i></i><span>您在自己擅长行业领域有10年以上积累</span></li>
-        <li><i></i><span>您的个人信息补充完整，建议在96%以上</span></li>
-        <li><i></i><span>提交专家认证申请，等待平台核实</span></li>
-      </ul>
-    </div>
 
+    <div class="home-apply" @tap.stop.prevent="ApplicationJudge()">立刻申请</div>
     <div class="contact">
       <p>如有疑问请联系</p>
       <p>邮箱：hi@inwehub.com/微信：hiinwe</p>
     </div>
-
-    <div class="home-apply" @tap.stop.prevent="ApplicationJudge()">立刻申请</div>
   </div>
 </template>
 
@@ -108,94 +127,122 @@
     padding: 0;
     list-style: none;
   }
+  .mui-content{
+    background: #FFFFFF;
+  }
 
   header {
     width: 100%;
-    height: 130px;
+    height: 185px;
     background: #ececee;
   }
 
   header a {
     color: #808080;
-    margin-top: 23px;
-    margin-left: 16px;
-  }
-
-  header div {
-    width: 115px;
-    height: 50px;
-    margin: 0 auto;
-    padding-top: 45px;
-    position: relative;
-  }
-
-  header div p span {
     position: absolute;
-    font-size: 20px;
-    color: #444444;
-    left: 27px;
-    top: 49px;
+    top: 23px;
+    left: 16px;
   }
-
-  header div svg {
+  .expertExplanation {
+    width: 100%;
+    height: 185px;
+    padding-top: 43px;
+  }
+  .expertSign{
+    text-align: center;
+  }
+   .expertSign span{
+    width: 100%;
+    font-size: 20px;
+    color:#444444;
+    font-weight: 500;
+    margin-top: 43px;
+  }
+   .expertSign svg{
     font-size: 28px;
-    color: #03AEF9;
+    color: #fcc816;
     margin-bottom: -3px;
   }
-
-  header div p:nth-of-type(2) {
-    font-size: 13px;
-    color: #808080;
+  .expertExplanation li{
+     text-align: center;
+     margin-top: 7px;
+     overflow: hidden;
   }
-
-  .why {
-    width: 100%;
-    padding-left: 42px;
-    margin-top: 40px;
+  .expertExplanation li:nth-of-type(1){
+    margin-top: 18px;
   }
-
-  .when {
-    width: 100%;
-    padding-left: 42px;
-    margin-top: 35px;
-  }
-
-  ul p {
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-
-  ul p span {
-    color: #03aef9;
-  }
-
-  ul li {
-    font-size: 13px;
-    color: #808080;
-  }
-
-  ul li i {
+  .expertExplanation li p:nth-of-type(1){
+    width:18px;
+    height:18px;
+    background: #FFFFFF;
+    border:1px solid #dcdcdc;
     display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: #03AEF9;
+    margin-bottom: -4px;
+    position: relative;
+    right:10px;
+  }
+  .expertExplanation li p:nth-of-type(1) svg{
+      color:#03aef9;
+      font-size: 15px;
+      position: absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      margin: auto;
+  }
+  .expertExplanation li p:nth-of-type(2){
+    display: inline-block;
+    font-size:14px;
+    color:#323232;
+  }
+
+  /*内容区域*/
+  .guideExplain{
+    margin-top: 30px;
+    padding: 0 8.8%;
+  }
+  .platformExplain{
+    font-size:16px;
+    color:#444444;
+    text-align: center;
+    margin-bottom: 26px;
+  }
+  .guideExplain li p:nth-of-type(1){
+    font-size:14px;
+    color:#444444;
+    line-height: 20px;
+  }
+  .guideExplain li p:nth-of-type(1) i{
+    display: inline-block;
+    width:6px;
+    height:6px;
+    background:#808080;
     border-radius: 50%;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    margin-right: 8px;;
+  }
+  .guideExplain li:nth-of-type(2){
+    margin-top: 23px;
+  }
+  .guideExplain li p:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 18px;
+    margin-top: 5px;
   }
 
-  ul li span {
-    margin-left: 8px;
-  }
-
+  /*联系我们*/
   .contact {
     width: 100%;
-    padding-left: 42px;
-    margin-top: 60px;
+    text-align: center;
+    margin-top:12px;
   }
 
   .contact p {
     font-size: 12px;
     color: #808080;
+    line-height: 17px;
   }
 
   .home-apply {
@@ -208,6 +255,7 @@
     line-height: 41px;
     color: #f2f2f2;
     font-size: 16px;
-    margin-top: 26px;
+    margin-top:37px;
+
   }
 </style>
