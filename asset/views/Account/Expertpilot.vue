@@ -10,31 +10,42 @@
           <span>认证专家</span>
         </p>
         <li>
-          <p></p>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
           <p>全面开启平台功能，发挥个人价值</p>
         </li>
         <li>
-          <p></p>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
           <p>参与对接企业资源，直接服务企业</p>
         </li>
         <li>
-          <p></p>
+          <p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gou"></use>
+            </svg>
+          </p>
           <p>展示打造个人品牌，建立商业模式</p>
         </li>
       </ul>
     </header>
     <ul class="guideExplain">
+      <p class="platformExplain">如何才能成为平台认证专家？</p>
       <li>
-        <p>您在企业咨询领域有10年以上专业经验，或在特定领域有所擅长</p>
+        <p><i></i>您在企业咨询领域有10年以上专业经验，或在特定领域有所擅长</p>
         <p>请保证个人名片真实性及96%以上完整度，并维护“我的擅长”标签</p>
       </li>
       <li>
-        <p>您在平台参与互动、展示实力并得到广泛关注和认可（问答、分享、活动话题参与等）</p>
+        <p><i></i>您在平台参与互动、展示实力并得到广泛关注和认可（问答、分享、活动话题参与等）</p>
         <p>平台活跃度等级长久保持L3及以上可申请，等级越高申请通过率越高</p>
       </li>
     </ul>
-
-
 
 
     <div class="home-apply" @tap.stop.prevent="ApplicationJudge()">立刻申请</div>
@@ -167,7 +178,18 @@
     border:1px solid #dcdcdc;
     display: inline-block;
     margin-bottom: -4px;
-    margin-right: 10x;
+    position: relative;
+    right:10px;
+  }
+  .expertExplanation li p:nth-of-type(1) svg{
+      color:#03aef9;
+      font-size: 15px;
+      position: absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      margin: auto;
   }
   .expertExplanation li p:nth-of-type(2){
     display: inline-block;
@@ -178,7 +200,36 @@
   /*内容区域*/
   .guideExplain{
     margin-top: 30px;
-    padding: 0 4.4%;
+    padding: 0 8.8%;
+  }
+  .platformExplain{
+    font-size:16px;
+    color:#444444;
+    text-align: center;
+    margin-bottom: 26px;
+  }
+  .guideExplain li p:nth-of-type(1){
+    font-size:14px;
+    color:#444444;
+    line-height: 20px;
+  }
+  .guideExplain li p:nth-of-type(1) i{
+    display: inline-block;
+    width:6px;
+    height:6px;
+    background:#808080;
+    border-radius: 50%;
+    margin-bottom: 3px;
+    margin-right: 8px;;
+  }
+  .guideExplain li:nth-of-type(2){
+    margin-top: 23px;
+  }
+  .guideExplain li p:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 18px;
+    margin-top: 5px;
   }
 
   /*联系我们*/
@@ -205,5 +256,6 @@
     color: #f2f2f2;
     font-size: 16px;
     margin-top:37px;
+
   }
 </style>
