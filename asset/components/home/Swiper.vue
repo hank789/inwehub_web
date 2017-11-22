@@ -224,9 +224,11 @@
     width: 118.333px;
     margin-right: 10px;
     height: 148px;
-    background: #ececee;
+    background:#FFFFFF;
     border-radius: 4px;
     position: relative;
+    border: 0.2px solid #dcdcdc;
+    box-shadow: 0 0 5px #ececee;
   }
 
   .moreExperts > div {
