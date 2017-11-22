@@ -3,7 +3,7 @@
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
-          <div class="avatarInner"><img :src="data.user.avatar">
+          <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
             <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
@@ -50,6 +50,7 @@
 <script type="text/javascript">
 
   import Images from '../../components/image/Images.vue'
+  import Avatar from '../../components/image/Avatar.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -59,7 +60,8 @@
       return {}
     },
     components: {
-      Images
+      Images,
+      Avatar
     },
     props: {
       data: {

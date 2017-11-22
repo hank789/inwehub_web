@@ -3,7 +3,7 @@
     <div class="container-avatarAndText">
       <div class="author">
         <div class="avatar"  @tap.stop.prevent="toResume(data.user.uuid)">
-          <div class="avatarInner"><img :src="data.user.avatar">
+          <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
             <svg class="icon" aria-hidden="true" v-if="data.user.is_expert === 1">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
@@ -24,6 +24,9 @@
 </template>
 
 <script type="text/javascript">
+
+  import Avatar from '../../components/image/Avatar.vue'
+
   export default {
     data () {
       return {
@@ -31,7 +34,7 @@
       }
     },
     components: {
-
+      Avatar
     },
     props: {
       data: {
