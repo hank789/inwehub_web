@@ -149,8 +149,9 @@
                 '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
                 recommend.data.img
               )
+            } else {
+              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
             }
-            this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
             break
           case 2:
             this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
