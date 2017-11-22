@@ -33,7 +33,12 @@
           <Swiper v-if="index===2"></Swiper>
           <ServiceRecommendation v-if="index===5" :isShow="true" :key="'feed-swiper'"></ServiceRecommendation>
 
-          <div @tap.stop.prevent="toDetail(item)">
+
+          <div v-if="item.feed_type === 5 && item.feed.domain === ''">
+            <!--x发布了发现-->
+            <DiscoverShare :data="item"></DiscoverShare>
+          </div>
+          <div @tap.stop.prevent="toDetail(item)" v-else>
 
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
@@ -73,9 +78,7 @@
 
             <!--x赞了文章-->
             <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
-
-            <!--x发布了发现-->
-            <DiscoverShare v-else-if="item.feed_type === 5 && item.feed.domain === ''" :data="item"></DiscoverShare>
+            
           </div>
         </template>
 
@@ -189,7 +192,7 @@
             break
           case 5:
             if (item.feed_type === 5 && item.feed.domain === '') {
-              this.$router.pushPlus(item.url, 'list-detail-page')
+              // ...
             } else {
               var linkArticle = {
                 view_url: item.url,
