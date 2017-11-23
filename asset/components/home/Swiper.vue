@@ -24,9 +24,9 @@
       <swiper-slide class="moreExperts">
         <div>
 						<span class="Expertround">
-	                		<svg class="icon" aria-hidden="true">
-						  <use xlink:href="#icon-shouyegengduozhuanjia"></use>
-						</svg>
+              <svg class="icon" aria-hidden="true">
+						     <use xlink:href="#icon-shouyegengduozhuanjia"></use>
+						  </svg>
 						</span>
           <p>申请成为专家</p>
           <p>开展业务合作</p>
@@ -75,7 +75,6 @@
         if (!uuid) {
           return
         }
-
         postRequest(`follow/user`, {
           id: uuid
         }).then(response => {
@@ -121,7 +120,6 @@
             window.mui.toast(response.data.message)
             return
           }
-
           this.recommend_experts = response.data.data.recommend_experts
         })
       }
@@ -130,7 +128,6 @@
 </script>
 <style scoped="scoped">
   /*人物推荐*/
-
   #home-recommend {
     width: 100%;
     height: 157px;
