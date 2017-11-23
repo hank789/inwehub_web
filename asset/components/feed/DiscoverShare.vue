@@ -28,13 +28,13 @@
         </svg><span>{{data.feed.support_number}}</span>
       </div>
     </div>
-    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number">
-      <div class="component-dianzanList"><svg class="icon" aria-hidden="true">
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
+      <div class="component-dianzanList" v-if="data.feed.support_number"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span>等{{data.feed.support_number}}人
       </div>
-      <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number"></div>
-      <div class="container-comments" v-if="data.feed.comment_number">
+      <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
+      <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
         <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
