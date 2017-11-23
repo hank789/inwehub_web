@@ -110,7 +110,6 @@
                 window.mui.back()
                 return
               }
-              console.error(response.data)
               if (response.data.data) {
                 window.mui.toast(response.data.data.tips)
               }

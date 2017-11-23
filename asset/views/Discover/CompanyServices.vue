@@ -35,7 +35,6 @@
   import {alertCompanyUser, alertCompany} from '../../utils/dialogList'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
-  console.log(currentUser)
 
   export default {
     data () {
@@ -59,7 +58,7 @@
       }
     },
     mounted () {
-      console.error(this.is_company)
+//      console.error(this.is_company)
     },
     updated () {
     }
