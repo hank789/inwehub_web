@@ -40,6 +40,7 @@
     <Share
       ref="ShareBtn"
       :title="shareOption.title"
+      :shareName="shareOption.shareName"
       :link="shareOption.link"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
@@ -63,6 +64,7 @@
     data: () => ({
       shareOption: {
         title: '',
+        shareName: '邀请注册分享',
         link: '',
         content: '',
         imageUrl: '',

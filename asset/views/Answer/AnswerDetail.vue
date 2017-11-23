@@ -84,6 +84,7 @@
     <Share
       v-show="answer.question.status==6||answer.question.status==7"
       :title="shareOption.title"
+      :shareName="shareOption.shareName"
       :link="shareOption.link"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
@@ -131,7 +132,8 @@
         link: '',
         content: '',
         imageUrl: '',
-        thumbUrl: ''
+        thumbUrl: '',
+        shareName: ''
       },
       buttonAnswerDisable: false,
       buttonSelectTimeDisable: false

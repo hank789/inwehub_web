@@ -130,6 +130,20 @@
           this.$router.back()
           return
         }
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          var mixpanelEvent = 'inwehub:invitation-register'
+          window.mixpanel.track(
+            mixpanelEvent,
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'rc_code': this.rcCode,
+              'page': this.$route.fullPath,
+              'page_name': 'invitation-register',
+              'page_title': this.$route.meta.title
+            }
+          )
+        }
 
         postRequest('activity/inviteRegister/getInviterInfo', {
           rc_code: this.rcCode
@@ -777,7 +791,7 @@
 
   @media (min-width: 375px) {
     .privilege_verification ul li:nth-of-type(1):after {
-      
+
          right: 36%;
    }
 
