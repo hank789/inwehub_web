@@ -18,9 +18,14 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper">{{ detail.title }}</div>
+      <div class="contentWrapper" @tap.stop.prevent="goArticle(detail)">{{ detail.title }}<span class="color-b4b4b6 font-12"
+                                                          v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
+
+      <div class="linkWrapper container-image" v-if="detail.type === 'link'" @tap.stop.prevent="goArticle(detail)">
+        <img :src="detail.data.img"/>
+      </div>
 
       <div class="timeContainer">
         <span>
@@ -84,6 +89,7 @@
   import { autoTextArea } from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
+  import { goThirdPartyArticle } from '../../utils/webview'
 
   export default {
     data () {
@@ -128,6 +134,19 @@
       Share
     },
     methods: {
+      goArticle: function (detail) {
+        if (detail.type !== 'link') {
+          return
+        }
+
+        goThirdPartyArticle(
+          detail.data.url,
+          detail.id,
+          detail.title,
+          '/c/' + detail.category_id + '/' + detail.slug,
+          detail.data.img
+        )
+      },
       refreshPageData () {
         this.getDetail()
       },
@@ -223,6 +242,10 @@
   .newestList{
     padding:10px 15px 0;
     background: #fff;
+  }
+
+  .linkWrapper {
+    padding:10px 15px;
   }
 
   .timeContainer {
