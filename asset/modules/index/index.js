@@ -241,14 +241,17 @@ window.mui.back = function () {
     if (currentWebview.id === window.plus.runtime.appid) {
       goBack()
       window.mui.muiOldBack()
+      return
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
       console.log('hide')
       goBack()
       currentWebview.hide()
+      return
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
       console.log('close')
       goBack()
       window.mui.muiOldBack()
+      return
     } else {
       console.log('go(-1)')
       router.go(-1)
