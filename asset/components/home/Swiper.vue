@@ -108,8 +108,7 @@
             this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
           }
         } else {
-            userAbility.jumpToApplyProfessor(this)
-//          userAbilityCheck.moreProfessor(this.$parent)
+          userAbility.jumpToApplyProfessor(this)
         }
       },
       more () {
