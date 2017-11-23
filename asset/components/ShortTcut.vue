@@ -116,7 +116,6 @@
       },
       show () {
         document.getElementById('short_all').style.display = 'inline'
-
         // 发现页处理
 //        if (window.mui.os.plus) {
 //          if (this.$route.path.match(/discover/)) {
@@ -166,7 +165,6 @@
       width: 80%;
 
     }
-
     .quick {
       width: 80%;
     }
@@ -215,11 +213,12 @@
   #short_all .turn {
     position: absolute;
     bottom: 14px;
-    left: 47.2%;
+    left: 44.2%;
     font-size: 17px;
     color: #808080;
     animation: rote 0.5s infinite;
     animation-iteration-count: 1;
+    padding: 0 12px;
   }
 
   @keyframes rote {
@@ -389,14 +388,15 @@
   /*quick*/
 
   .quick {
-    /*width: 63.3%;*/
     height: 14px;
-    /*background: #CCCCCC;*/
     position: absolute;
     top: 40px;
     left: 0;
     right: 0;
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .quick a {
@@ -408,33 +408,29 @@
   }
 
   .quick p {
-    width: 25%;
-    /*background: #CCCCCC;*/
+    /*width: 25%;*/
     float: left;
     font-size: 13px;
     color: #444444;
     text-align: center;
     line-height: 14px;
 
-    /* border-right: 0.5px solid #dcdcdc;*/
-    /*border: 1px solid #000000;*/
   }
 
-  .quick p:nth-of-type(2) {
-    text-align: center;
-    margin-left: 12.5%;
-  }
-
-  .quick p:nth-of-type(3) {
-    float: right;
-  }
 
   .quick a {
     position: absolute;
     width: 1px;
     height: 14px;
     background: #dcdcdc;
-    margin-left: 7%;
+    margin-left: 32%;
+  }
+  .quick a:nth-of-type(2){
+    position: absolute;
+    width: 1px;
+    height: 14px;
+    background: #dcdcdc;
+    margin-left: 72%;
   }
 
   .quick > p span {

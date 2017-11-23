@@ -201,7 +201,6 @@
     border: 0.5px solid #03aef9;
     margin-left: 15%;
     margin-top: 6px;
-    font-family: "PingFangSC";
     font-size: 14px;
     text-align: center;
     color: #03aef9;
