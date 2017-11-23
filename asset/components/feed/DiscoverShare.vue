@@ -121,7 +121,7 @@
 
 <style scoped>
   .preWrapper{
-    white-space: pre !important;
+    white-space: pre-wrap !important;
   }
   .iconPenglunWrapper{
     margin-right:10px;

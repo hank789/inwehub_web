@@ -215,7 +215,7 @@
   .contentWrapper{
     padding:0 15px;
     background: #fff;
-    white-space: pre;
+    white-space: pre-wrap !important;
     font-size:15px;
     color:#444;
   }
