@@ -118,16 +118,18 @@ router.afterEach((to, from) => {
     } else {
       mixpanelEvent += to.fullPath
     }
+    var baseEvent = {
+      'app': 'inwehub',
+      'user_device': window.getUserAppDevice(),
+      'page': to.fullPath,
+      'page_name': to.name,
+      'page_title': to.meta.title,
+      'referrer_page': from.fullPath
+    }
+    baseEvent = Object.assign(baseEvent, to.query)
     window.mixpanel.track(
       mixpanelEvent,
-      {
-        'app': 'inwehub',
-        'user_device': window.getUserAppDevice(),
-        'page': to.fullPath,
-        'page_name': to.name,
-        'page_title': to.meta.title,
-        'referrer_page': from.fullPath
-      }
+      baseEvent
     )
   }
 })
