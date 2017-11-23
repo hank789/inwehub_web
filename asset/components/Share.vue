@@ -69,6 +69,10 @@
         type: String,
         default: ''
       },
+      shareName: {
+        type: String,
+        default: 'share'
+      },
       link: {
         type: String,
         default: ''
@@ -260,7 +264,7 @@
               'app': 'inwehub',
               'user_device': window.getUserAppDevice(),
               'page': this.link,
-              'page_name': 'share',
+              'page_name': this.shareName,
               'page_title': this.title,
               'referrer_page': ''
             }

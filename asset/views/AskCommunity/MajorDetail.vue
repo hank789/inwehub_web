@@ -65,6 +65,7 @@
     <Share
       :title="shareTitle"
       :link="shareUrl"
+      :shareName="shareName"
       :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
@@ -102,6 +103,7 @@
       shareImg: '',
       shareContent: '',
       shareTitle: '',
+      shareName: '',
       id: 0,
       loading: true
     }),
@@ -183,6 +185,7 @@
           this.shareContent = shareOptions.content
           this.shareUrl = shareOptions.link
           this.shareTitle = shareOptions.title
+          this.shareName = shareOptions.shareName
 
           successCallback()
         })

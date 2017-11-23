@@ -65,6 +65,7 @@
       ref="ShareBtn"
       :title="shareOption.title"
       :link="shareOption.link"
+      :shareName="shareOption.shareName"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
@@ -106,7 +107,8 @@
           link: '',
           content: '',
           imageUrl: '',
-          thumbUrl: ''
+          thumbUrl: '',
+          shareName: ''
         },
         isFollow: true,
         loading: 1

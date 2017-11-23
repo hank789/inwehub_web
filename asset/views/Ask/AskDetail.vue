@@ -51,6 +51,7 @@
     <Share
       v-show="ask.question.status==6||ask.question.status==7"
       :title="shareOption.title"
+      :shareName="shareOption.shareName"
       :link="shareOption.link"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
@@ -92,7 +93,8 @@
         link: '',
         content: '',
         imageUrl: '',
-        thumbUrl: ''
+        thumbUrl: '',
+        shareName: ''
       },
       loading: true
     }),
