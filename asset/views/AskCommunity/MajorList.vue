@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="mui-scroll-wrapper" id="refreshContainer">
+      <div class="mui-scroll-wrapper" id="refreshContainer_majorlist">
         <div class="mui-scroll">
           <div class="hotquiz">
             <div class="quiz">
@@ -181,7 +181,7 @@
           }
           // 没有数据的显示框不显示；
           this.loading = false
-          window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh() // refresh completed
+          window.mui('#refreshContainer_majorlist').pullRefresh().endPulldownToRefresh() // refresh completed
         })
       },
       getNextList () {
@@ -206,14 +206,14 @@
             this.busy = false
           }
           this.loading = false
-          window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(this.busy)
+          window.mui('#refreshContainer_majorlist').pullRefresh().endPullupToRefresh(this.busy)
         })
       }
     },
     mounted () {
       window.mui.init({
         pullRefresh: {
-          container: '#refreshContainer', // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+          container: '#refreshContainer_majorlist', // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
           down: {
             auto: true, // 可选,默认false.首次加载自动下拉刷新一次
             contentdown: '下拉可以刷新', // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
@@ -631,7 +631,7 @@
     background: #f3f4f6;
   }
 
-  #refreshContainer {
+  #refreshContainer_majorlist {
     top: 50px;
   }
 </style>
