@@ -64,6 +64,7 @@
       ref="ShareBtn"
       :hideShareBtn="true"
       :title="'邀您回答|' + title"
+      :shareName="'邀请回答分享'"
       :link="shareUrl"
       :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
       :imageUrl="shareImg"

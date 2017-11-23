@@ -11,6 +11,7 @@
     <Share
       ref="ShareBtn"
       :title="shareTitle"
+      :shareName="'邀请回答分享'"
       :link="shareUrl"
       :content="shareContent"
       :imageUrl="shareImg"

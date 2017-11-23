@@ -12,7 +12,8 @@ function getAskCommunityMajorDetail (questionId, questionDescription, answerUser
     link: link,
     content: '专家' + answerUsername + '的回答，点击前往围观互动',
     imageUrl: whiteLogo,
-    thumbUrl: whiteLogo
+    thumbUrl: whiteLogo,
+    shareName: '专业问题分享'
   }
 }
 
@@ -28,7 +29,8 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
     link: link,
     content: answerUsername + '的回答，点击前往围观互动',
     imageUrl: whiteLogo,
-    thumbUrl: whiteLogo
+    thumbUrl: whiteLogo,
+    shareName: '互动问答回复分享'
   }
 }
 
@@ -43,7 +45,8 @@ function getInvitation (username, rcCode) {
     link: link,
     content: '受邀特权与福利，点击领取 >',
     imageUrl: whiteLogo,
-    thumbUrl: whiteLogo
+    thumbUrl: whiteLogo,
+    shareName: '邀请注册分享'
   }
 }
 
@@ -62,7 +65,8 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
     link: link,
     content: '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？',
     imageUrl: imgUrl,
-    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '文章分享'
   }
 }
 
@@ -86,7 +90,8 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
     link: link,
     content: title,
     imageUrl: imgUrl,
-    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100'
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '动态分享'
   }
 }
 

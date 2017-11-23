@@ -92,7 +92,6 @@
 
       if (process.env.NODE_ENV === 'production') {
         // mixpanel
-        window.mixpanel.init('688ee16000ddf4f44891e06b79847d4e')
         window.mixpanelIdentify()
       }
 

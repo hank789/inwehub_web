@@ -65,6 +65,7 @@
     <Share
       ref="ShareBtn"
       :title="shareTitle"
+      :shareName="'互动问答分享'"
       :link="shareUrl"
       :content="shareContent"
       :imageUrl="shareImg"

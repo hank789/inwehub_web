@@ -63,7 +63,7 @@
 
     </nav>
 
-    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :link="shareoption.shareUrl"
+    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :shareName="shareoption.shareName" :link="shareoption.shareUrl"
            :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg"
            :hideShareBtn="true"></Share>
   </div>
@@ -92,6 +92,7 @@
           shareImg: '',
           shareContent: '',
           shareTitle: '',
+          shareName: '',
           id: ''
         }
       }

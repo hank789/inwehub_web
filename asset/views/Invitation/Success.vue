@@ -23,7 +23,7 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
-
+      :shareName="shareOption.shareName"
       :DomConvertImage="false"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
@@ -44,7 +44,8 @@
         link: '',
         content: '',
         imageUrl: '',
-        thumbUrl: ''
+        thumbUrl: '',
+        shareName: ''
       },
       rcCode: '',
       id: 0,

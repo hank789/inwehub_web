@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+
     </header>
     <div class="mui-content">
        <div class="publishSuccessfully">
@@ -10,7 +10,7 @@
          </svg>
          <p>发布成功！</p>
          <p>你可以通过我的-我的发布来管理发现</p>
-         <button @tap.stop.prevent="$router.pushPlus('/my/publishArticle')">查看发布</button>
+         <button @tap.stop.prevent="$router.pushPlus('/home')">返回首页</button>
        </div>
     </div>
   </div>
