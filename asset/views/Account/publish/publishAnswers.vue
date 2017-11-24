@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title" v-if="uuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-if="isUuid === this.$route.params.id">我的发布</h1>
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
@@ -12,17 +12,17 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="">回答  <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishArticle')">动态</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">动态</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
       </div>
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
         v-model="list"
         :api="'answer/myList'"
-        :prevOtherData="{type:0,uuid: this.$route.params.id }"
-        :nextOtherData="{type:0,uuid: this.$route.params.id }"
+        :prevOtherData="{type:0,uuid: this.uuid }"
+        :nextOtherData="{type:0,uuid: this.uuid }"
         :list="list"
         class="listWrapper">
         <ul class="answer">
@@ -52,10 +52,13 @@
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: currentUser.uuid
+      uuid: currentUser.uuid,
+      isUuid: currentUser.uuid
     }),
     created () {
-
+      if (this.$route.params.id) {
+        this.uuid = this.$route.params.id
+      }
     },
     computed: {},
     components: {
@@ -71,9 +74,9 @@
       }
     },
     mounted () {
-      console.error()
     },
     updated () {
+
     }
   }
   export default PublishAnswers
@@ -125,8 +128,10 @@
     position: absolute;
     width: 27px;
     height: 1.5px;
-    left: 34%;
+    left:0;
+    right:0;
     bottom: 0.5px;
+    margin:auto;
     background: #3c95f9;
   }
 
