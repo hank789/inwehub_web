@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title" v-if="uuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-if="isUuid === this.$route.params.id">我的发布</h1>
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
@@ -11,10 +11,10 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/my/publishAnswers')">回答 </span>
-        <span @tap.stop.prevent="$router.replace('/my/publishQuestions')">提问</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishAnswers/' + uuid)">回答 </span>
+        <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
         <span @tap.stop.prevent="">动态  <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/my/publishComment')">评论</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
 
       </div>
       <!--内容区域-->
@@ -62,9 +62,13 @@
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: currentUser.uuid
+      uuid: currentUser.uuid,
+      isUuid: currentUser.uuid
     }),
     created () {
+      if (this.$route.params.id) {
+        this.uuid = this.$route.params.id
+      }
     },
     computed: {
 
@@ -152,8 +156,10 @@
     position: absolute;
     width: 27px;
     height: 1.5px;
-    left: 34%;
+    left:0;
+    right:0;
     bottom: 0.5px;
+    margin:auto;
     background: #3c95f9;
   }
 
