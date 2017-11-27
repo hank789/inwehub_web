@@ -1,7 +1,6 @@
 import '../../js/mui'
 import '../../js/mui.zoom'
 import '../../js/mui.previewimage'
-
 import Vue from 'vue'
 
 // Vuejs 单页应用在iOS系统下部分APP的webview中 标题不能通过 document.title = xxx 的方式修改;
@@ -200,22 +199,22 @@ Vue.mixin({
     scrollToTop(this.$el)
   },
   created () {
-    window.mui.plusReady(function () {
-      var currentWebview = window.plus.webview.currentWebview()
-      var index = window.location.href.indexOf('#')
-      if (index !== -1) {
-        var url = window.location.href.slice(index + 1)
-        console.log('bindCurrentUrl:' + url)
-        currentWebview.setStyle({
-          additionalHttpHeaders: {
-            url: url
-          }
-        })
-      }
-    })
-
     // 当使用webview方式打开的话，会显示webview，并绑定侧滑事件
     if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
+      window.mui.plusReady(function () {
+        var currentWebview = window.plus.webview.currentWebview()
+        var index = window.location.href.indexOf('#')
+        if (index !== -1) {
+          var url = window.location.href.slice(index + 1)
+          console.log('bindCurrentUrl:' + url)
+          currentWebview.setStyle({
+            additionalHttpHeaders: {
+              url: url
+            }
+          })
+        }
+      })
+
       showWebview()
     }
   }

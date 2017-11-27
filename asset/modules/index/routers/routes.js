@@ -1322,6 +1322,18 @@ const routes = [
   //     requestAuth(to, from, next)
   //   }
   // },
+  { // 附近企业
+    path: '/nearbyCompany',
+    name: 'nearbyCompany',
+    meta: {
+      title: '附近企业',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NearbyCompany/nearbyCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   {
     path: '/discover/add',
     name: 'discover_add',
