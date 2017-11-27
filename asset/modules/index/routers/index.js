@@ -33,7 +33,7 @@ router.pushReadHubPage = function (url) {
 }
 
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', popGesture = 'hide', forceWebView = false, reload = false) {
-  console.log('pushPlusUrl:' + url)
+  console.log('pushPlus 准备打开:' + url)
   var footerTab = ['/discover', '/home', '/task', '/my']
 
   var nextUrl = ''
@@ -83,7 +83,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
       id = window.plus.runtime.appid
     } else if (id === nextUrl) {
       urlSplit = url.split('/')
-      // 判断是否列表页面
+      // 判断是否是详情页面, 详情页面id为list-detail-page
       if (urlSplit[urlSplit.length - 1] > 0) {
         id = 'list-detail-page'
       }

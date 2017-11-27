@@ -51,7 +51,7 @@ function compressImg (id) {
   canvas.width = image.naturalWidth
   canvas.height = image.naturalHeight
   canvas.getContext('2d').drawImage(image, 0, 0)
-  var result = canvas.toDataURL('image/jpeg', 0.1)
+  var result = canvas.toDataURL('image/jpeg', 1)
   return result
 }
 
