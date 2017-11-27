@@ -76,7 +76,7 @@
           src: path,
           dst: '_doc/image_compressed.jpg',
           overwrite: true,
-          width: '1024px',
+          // width: '1024px',
           quality: 100},
           function (event) {
             var newurl = window.plus.io.convertLocalFileSystemURL(event.target)

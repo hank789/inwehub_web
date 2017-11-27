@@ -33,7 +33,7 @@ router.pushReadHubPage = function (url) {
 }
 
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', popGesture = 'hide', forceWebView = false, reload = false) {
-  console.log('pushPlusUrl:' + url)
+  console.log('pushPlus 准备打开:' + url)
   var footerTab = ['/discover', '/home', '/task', '/my']
 
   var nextUrl = ''
