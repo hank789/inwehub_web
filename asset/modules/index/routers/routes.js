@@ -1322,7 +1322,7 @@ const routes = [
   //     requestAuth(to, from, next)
   //   }
   // },
-  { // 附近企业
+  { // 附近企业companyDetails.vue
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
@@ -1330,6 +1330,18 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/NearbyCompany/nearbyCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近企业
+    path: '/companyDetails',
+    name: 'companyDetails',
+    meta: {
+      title: '企业详情',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NearbyCompany/companyDetails.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
