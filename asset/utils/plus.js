@@ -145,6 +145,23 @@ function getIndexPath () {
   }
 }
 
+/**
+ * 打开第三方网址
+ */
+function openVendorUrl (containerDiv) {
+  var aList = containerDiv.querySelectorAll('a[href^="http"]')
+  for (let i = 0; i < aList.length; i++) {
+    aList[i].addEventListener('click', function (e) {
+      e.preventDefault()
+      if (window.plus) {
+        window.plus.runtime.openURL(this.href)
+      } else {
+        window.open(this.href)
+      }
+    }, false)
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -152,5 +169,6 @@ export {
   saveImageByBase64,
   getGeoPosition,
   autoTextArea,
-  getIndexPath
+  getIndexPath,
+  openVendorUrl
 }
