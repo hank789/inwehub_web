@@ -1436,6 +1436,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // seekingCooperation
+    path: '/seekingCooperation',
+    name: 'seekingCooperation',
+    meta: {
+      title: '寻求合作',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/SeekingCooperation.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // project
     path: '/project',
     name: 'my-project',
