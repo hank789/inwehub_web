@@ -18,7 +18,7 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper" @tap.stop.prevent="goArticle(detail)">{{ detail.title }}<span class="color-b4b4b6 font-12"
+      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">{{ detail.title }}<span class="color-b4b4b6 font-12"
                                                           v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
@@ -91,6 +91,8 @@
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
+  import { textToLink } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   export default {
     data () {
@@ -206,6 +208,12 @@
       setCollectStatus (type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       }
+    },
+    updated () {
+      this.$nextTick(function () {
+        textToLink(document.getElementById('contentWrapper'))
+        openVendorUrl(document.getElementById('contentWrapper'))
+      })
     },
     watch: {
       '$route': 'refreshPageData'

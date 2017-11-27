@@ -23,7 +23,17 @@ function queryParent (el, classname) {
   }
 }
 
+/**
+ * 文本转链接
+ */
+function textToLink (domEle) {
+  var text = domEle.innerHTML
+  var re = /(https?:\/\/[^\s<]+)/g
+  domEle.innerHTML = text.replace(re, "<a target='_blank' href='$1'>$1</a>")
+}
+
 export {
-  queryParent
+  queryParent,
+  textToLink
 }
 

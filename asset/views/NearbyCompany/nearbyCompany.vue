@@ -11,8 +11,8 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="输入公司名称"/>
-         <span>
+         <input type="text" placeholder="输入公司名称" v-model="searchText"/>
+         <span v-if="isShow"  @tap.stop.prevent="empty()">
            <svg class="icon" aria-hidden="true">
              <use xlink:href="#icon-guanbi"></use>
            </svg>
@@ -22,12 +22,12 @@
       <!--申请添加-->
       <div class="apply">
         <p>搜不到？</p>
-        <p>申请添加 </p>
+        <p @tap.stop.prevent="Obtain()">申请添加 </p>
         <i class="bot"></i>
       </div>
       <!--搜索列表-->
       <ul>
-        <li>
+        <li  @tap.stop.prevent="$router.pushPlus('/companyDetails')">
           <div class="container-image">
              <img src="../../statics/images/guide_01.png"/>
           </div>
@@ -51,6 +51,43 @@
 </template>
 
 <script>
+  export default {
+    data () {
+      return {
+        searchText: '',
+        loading: 1,
+        isShow: false
+      }
+    },
+    methods: {
+      Obtain () {
+        var that = this
+        var btnArray = ['取消', '确定']
+        window.mui.prompt('', '公司名称', '输入公司名称', btnArray, function (e) {
+          if (e.index === 1) {
+            // 申请添加擅长标签；
+            if (e.value) {
+              that.applySkillTag(e.value)
+            }
+          }
+        }, 'div')
+      },
+      empty () {
+        this.searchText = ''
+      }
+    },
+    watch: {
+      searchText: function (newValue) {
+        console.error(newValue)
+        if (newValue) {
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
+      }
+    },
+    mounted () {}
+  }
 </script>
 
 <style scoped="scoped">
@@ -106,7 +143,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content:space-between;
+    /*justify-content:space-between;*/
     align-items:center;
     padding:0 12px;
   }
@@ -118,6 +155,8 @@
     padding-left: 0;
     font-size:14px;
     color:#444444;
+    float: left;
+    margin-left: 10px;
   }
   .searchContainer p svg{
     color:#c8c8c8;
@@ -129,6 +168,7 @@
     background: #c8c8c8;
     border-radius: 50%;
     position: relative;
+    float:right;
   }
   .searchContainer span svg{
     color: #FFFFFF;
@@ -215,4 +255,11 @@
     flex-direction: row;
     justify-content:space-between;
   }
+
+  input::-webkit-input-placeholder { /*WebKit browsers*/
+    color:#c8c8c8;
+    font-size: 14px;
+    line-height: 34px;
+  }
+
 </style>
