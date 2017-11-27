@@ -142,7 +142,7 @@
 
         param = Object.assign(param, this.prevOtherData)
 
-        console.log(JSON.stringify(param))
+        console.log('getDownLoadMoreModePrevList 额外的参数:' + JSON.stringify(param))
 
         postRequest(this.api, param).then(response => {
           var code = response.data.code
@@ -194,7 +194,7 @@
         }
         param = Object.assign(param, this.prevOtherData)
 
-        console.log(JSON.stringify(param))
+        console.log('getPrevList 额外的参数:' + JSON.stringify(param))
 
         postRequest(this.api, param).then(response => {
           var code = response.data.code
