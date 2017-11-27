@@ -77,7 +77,7 @@
           dst: '_doc/image_compressed.jpg',
           overwrite: true,
           width: '1024px',
-          quality: 80},
+          quality: 100},
           function (event) {
             var newurl = window.plus.io.convertLocalFileSystemURL(event.target)
             if (window.mui.os.ios) {
