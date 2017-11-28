@@ -110,3 +110,8 @@ npm run lint
 ##webstorm启用规范检查
     设置->Languages & Frameworks > Javascript > Code Quality Tools> ESLint> 启用
 
+
+##日志规范
+1. 不要记请求到的数据(记了没有什么意义)
+2. 不要直接记 数值型，布尔型, 对象(如果需要的话，前面加上描述信息)
+3. 不要用console.error记录调试信息
