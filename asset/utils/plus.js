@@ -162,6 +162,16 @@ function openVendorUrl (containerDiv) {
   }
 }
 
+/**
+ * 关闭启动画面
+ */
+function closeSplashscreen () {
+  if (window.plus) {
+    console.log('closeSplashscreen')
+    window.plus.navigator.closeSplashscreen()
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -170,5 +180,6 @@ export {
   getGeoPosition,
   autoTextArea,
   getIndexPath,
-  openVendorUrl
+  openVendorUrl,
+  closeSplashscreen
 }
