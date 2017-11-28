@@ -26,7 +26,7 @@
 <script>
   import FooterComponent from '../../components/Footer.vue'
   import OpenAppComponent from '../../components/OpenApp.vue'
-  import { goBack } from '../../utils/webview'
+  import { goBack,goThirdPartyArticle } from '../../utils/webview'
   import EventObj from '../../utils/event'
   import { setIncBadgeNumber } from '../../utils/notice'
   import inwehubDialog from '../../components/Dialog.vue'
@@ -191,32 +191,13 @@
                 case 'push_notice_readhub':
                   // 推送阅读发现的文章
                   if (payload.object) {
-                    var articleParams = {
-                      article_id: payload.object.id,
-                      article_url: payload.object.view_url,
-                      article_title: payload.object.title,
-                      article_comment_url: payload.object.comment_url,
-                      article_img_url: payload.object.img_url,
-                      preload: true
-                    }
-                    var articleWs = window.mui.openWindow({
-                      url: '/public/index.html#/webview/article',
-                      id: 'inwehub_article_view',
-                      preload: false, // 一定要为false
-                      createNew: false,
-                      show: {
-                        autoShow: true,
-                        aniShow: 'pop-in'
-                      },
-                      styles: {
-                        popGesture: 'hide'
-                      },
-                      waiting: {
-                        autoShow: false
-                      },
-                      extras: articleParams
-                    })
-                    window.mui.fire(articleWs, 'load_article', articleParams)
+                    goThirdPartyArticle(
+                      payload.object.view_url,
+                      payload.object.id,
+                      payload.object.title,
+                      payload.object.comment_url,
+                      payload.object.img_url
+                    )
                   }
                   break
                 case 'push_notice_app_self':
