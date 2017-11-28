@@ -1339,7 +1339,7 @@ const routes = [
     }
   },
   { // 附近企业
-    path: '/companyDetails',
+    path: '/companyDetails/:id',
     name: 'companyDetails',
     meta: {
       title: '企业详情',

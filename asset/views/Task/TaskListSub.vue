@@ -28,7 +28,7 @@
         <i></i>
       </div>
       <div id="pullrefresh"
-           :class="{'mui-scroll-wrapper':true, 'task-list':true, 'emptyList':nothing}">
+           :class="{'mui-scroll-wrapper'  :true, 'task-list':true, 'emptyList':nothing}">
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <li v-for="(task, index) in tasks" @tap.stop.prevent="goDetail(task)">

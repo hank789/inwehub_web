@@ -5,100 +5,165 @@
       <h1 class="mui-title">企业详情</h1>
     </header>
 
-  <div class="mui-content absolute">
-    <div class="companyDetail">
+  <div class="mui-content">
+    <div class="companyDetail" >
       <div class="gray"></div>
       <div class="company_image">
-        <img src="../../statics/images/guide_01.png" />
+        <img :src="datailList.logo" />
       </div>
       <ul class="information">
-        <li>距离我< 200m</li>
-        <li>上海金蝶</li>
-        <li>高科技行业<i></i>其他</li>
-        <li>上海浦东新区市浦东张江高科园区晨晖路88号金蝶软件园</li>
+        <li @tap.stop.prevent="getDistance(datailList.distance)">距离我< {{datailList.distance}}</li>
+        <li>{{datailList.name}}</li>
+        <li>
+          <span v-for="(item, index) in datailList.tags">{{item}} <i></i></span>
+        </li>
+        <li>{{datailList.address_detail}}</li>
       </ul>
     </div>
-    <!-- 相关人员-->
-    <div class="Relevant">
-      <div class="Relevant_title">
-        相关人员
-        <i class="bot"></i>
-      </div>
-      <ul class="Relevant_list">
-        <li>
-          <div class="Relevant_avatar">
-            <img src="../../statics/images/guide_01.png" />
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="Relevant_detail">
-            <p class="mui-ellipsis">
-               安三
-               <span>3</span>
-              （项目）
-            </p>
-            <p class="mui-ellipsis">显示个人签名</p>
-          </div>
-          <div class="Relevant_follow">
-            关注Ta
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="Relevant_avatar">
-            <img src="../../statics/images/guide_01.png" />
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="Relevant_detail">
-            <p class="mui-ellipsis">
-              安三
-              <span>3</span>
-              （项目）
-            </p>
-            <p class="mui-ellipsis">显示个人签名</p>
-          </div>
-          <div class="Relevant_follow">
-            关注Ta
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="Relevant_avatar">
-            <img src="../../statics/images/guide_01.png" />
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="Relevant_detail">
-            <p class="mui-ellipsis">
-              安三
-              <span>3</span>
-              （项目）
-            </p>
-            <p class="mui-ellipsis">显示个人签名</p>
-          </div>
-          <div class="Relevant_follow">
-            关注Ta
-          </div>
-          <i class="bot"></i>
-        </li>
-      </ul>
+    <div class="Relevant_title">
+      相关人员
+      <i class="bott"></i>
     </div>
-
-
-    <button>我也是相关人员</button>
-
-
-
+    <RefreshList
+      v-model="list"
+      :api="'company/dataPeople'"
+      :pageMode="true"
+      :prevOtherData="{page: 1,id:this.id}"
+      :nextOtherData="{}"
+      :isShowUpToRefreshDescription="false"
+      class="listWrapper">
+        <!-- 相关人员-->
+        <div class="Relevant">
+          <ul class="Relevant_list">
+            <li  v-for="(item, index) in list">
+              <div class="Relevant_avatar">
+                <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
+              </div>
+              <div class="Relevant_detail">
+                <p class="mui-ellipsis">
+                   {{item.name}}
+                   <span>{{item.level}}</span>
+                  （{{item.status_info}}）
+                </p>
+                <p class="mui-ellipsis">{{item.description}}</p>
+              </div>
+              <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
+                已关注
+              </div>
+              <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
+                关注Ta
+              </div>
+              <i class="bot"></i>
+            </li>
+          </ul>
+        </div>
+    </RefreshList>
+  <!--/my/info-->
+    <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
   </div>
   </div>
 </template>
 
 <script>
-
+  import { postRequest } from '../../utils/request'
+  import { getGeoPosition } from '../../utils/plus'
+  import RefreshList from '../../components/refresh/List.vue'
+  export default {
+    data () {
+      return {
+        datailList: '',
+        longt: '',
+        lat: '',
+        id: '',
+        list: [],
+        distance: ''
+      }
+    },
+    components: {
+      RefreshList
+    },
+    created () {
+      this.id = this.$route.params.id
+      getGeoPosition((position) => {
+        this.longt = position.longt
+        this.lat = position.lat
+      })
+    },
+    methods: {
+      getDistance (num) {
+        num = num.replace('米', 'm');
+        this.distance = num
+//        if (num < 1000) {
+//          return num.toFixed(0) + 'm';
+//        } else if (num > 1000) {
+//          return (num / 1000).toFixed(1) + 'km';
+//        }
+      },
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      //  弹窗
+      Obtain () {
+        var that = this
+        var btnArray = ['取消', '确定']
+        window.mui.prompt('', '公司名称', '输入公司名称', btnArray, function (e) {
+          if (e.index === 1) {
+            // 申请添加擅长标签；
+            if (e.value) {
+              that.applyAddData(e.value)
+            }
+          }
+        }, 'div')
+      },
+      // 获取企业信息；
+      companyInfo () {
+        var data = {
+          id: this.id,
+          page: this.page,
+          longitude: this.longt,
+          latitude: this.lat
+        }
+        postRequest('company/dataInfo', data).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            this.datailList = response.data.data
+          }
+          console.error(response.data.data)
+          this.loading = 0
+        })
+      },
+      collectProfessor (item) {
+        postRequest('follow/user',
+          {id: item.id}
+        ).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          item.is_followed = !item.is_followed
+          window.mui.toast(response.data.data.tip)
+          this.loading = 0
+        })
+      }
+    },
+    watch: {},
+    mounted () {
+      this.companyInfo()
+    }
+  }
 </script>
 
 <style scoped>
@@ -122,6 +187,16 @@
     right:  0;
     bottom: 0;
     left:  0;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+  .bott {
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+    left: 4%;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -175,14 +250,27 @@
   font-size:14px;
   color:#808080;
   margin-top:8px;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: center;
 }
-.information li:nth-of-type(3) i{
+.information li:nth-of-type(3) span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.information li:nth-of-type(3) span i{
   display: inline-block;
   width:1px;
   height:13px;
   background: #dcdcdc;
-  margin: 0px 6px -1px 6px;
+  margin: 0 6px;
 }
+  .information li:nth-of-type(3) span:nth-last-child(1) i{
+    display: none;
+  }
 .information li:nth-of-type(4){
   text-align: center;
   font-size:12px;
@@ -202,6 +290,7 @@
     font-size:16px;
     color:#444444;
     line-height: 45px;
+    padding: 0 4%;
   }
   .Relevant_list{
     width:100%;
@@ -233,7 +322,7 @@
    position: absolute;
     font-size:17px;
     bottom: 0;
-    right:-6px;
+    right:-2px;
   }
   /*详细的信息*/
   .Relevant_detail{
@@ -276,6 +365,15 @@
     border-radius: 50px;
     text-align: center;
   }
+  .Relevant_empty{
+    width: 64px;
+    height: 27px;
+    border:1px solid #03aef9;
+    color:#03aef9;
+    line-height:27px;
+    border-radius: 50px;
+    text-align: center;
+  }
   button{
     width:100%;
     height:46px;
@@ -286,6 +384,10 @@
     border-radius: 0;
     position: fixed;
     bottom: 0;
+    z-index: 999;
 
+  }
+  .listWrapper{
+    top:248px;
   }
 </style>
