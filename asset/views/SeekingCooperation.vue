@@ -23,7 +23,6 @@
         <MTextarea  class="customStyle" v-model.trim="description" :content="description" :rows="15" :descMaxLength="1000"
                    :placeholder='placeholdercontent'></MTextarea>
 
-
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">提交申请</button>
 
       </div>
