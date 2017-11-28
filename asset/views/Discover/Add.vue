@@ -7,7 +7,7 @@
 
     <div class="mui-content">
       <div class="component-textareaWithImage">
-        <textarea rows="10" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
+        <textarea id="discoverTextarea" rows="10" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
 
         <div class="container-images">
           <div class="container-image" v-for="(image, index) in images">
@@ -92,6 +92,10 @@
         this.$router.pushPlus('/discover/publishArticles')
       },
       uploadImage: function () {
+        var textarea = window.document.getElementById('discoverTextarea')
+        if (textarea) {
+          textarea.blur()
+        }
         this.$refs.uploadImage.uploadImage()
       },
       selectAddress () {
@@ -205,11 +209,13 @@
         })
       },
       textareaFocus () {
+        console.log('textareaFocus')
         if (this.description === this.descPlaceholder) {
           this.description = ''
         }
       },
       textareaBlur () {
+        console.log('textareaBlur')
         if (this.description === '') {
           this.description = this.descPlaceholder
         }

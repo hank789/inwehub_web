@@ -111,10 +111,10 @@ function getGeoPosition (callback) {
         longt: codns.longitude, // 经度
         lat: codns.latitude // 纬度
       }
-      console.log(info)
+      console.log('获取到定位信息: ' + JSON.stringify(info))
       callback(info)
     }, (e) => {
-      console.log('获取位置信息失败:' + e.message)
+      console.log('获取位置信息失败: ' + e.message)
     }, {geocode: true, provider: 'baidu', coordsType: 'bd09ll'})
   })
 }
@@ -162,6 +162,16 @@ function openVendorUrl (containerDiv) {
   }
 }
 
+/**
+ * 关闭启动画面
+ */
+function closeSplashscreen () {
+  if (window.plus) {
+    console.log('closeSplashscreen')
+    window.plus.navigator.closeSplashscreen()
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -170,5 +180,6 @@ export {
   getGeoPosition,
   autoTextArea,
   getIndexPath,
-  openVendorUrl
+  openVendorUrl,
+  closeSplashscreen
 }
