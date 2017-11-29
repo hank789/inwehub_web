@@ -13,7 +13,7 @@
           <i class="bot"></i>
         </div>
         <ul class="cooperation_type">
-          <li v-for="(item, index) in list">{{item}}</li>
+          <li v-for="(item, index) in list" :class="{'presentActive':intergerOn == index }" @tap.stop.prevent="choose(index,item.name)">{{item.name}}</li>
         </ul>
 
         <MTextarea  class="customStyle" v-model.trim="description" :content="description" :rows="15" :descMaxLength="1000"
@@ -34,11 +34,18 @@
 
   const Feedback = {
     data: () => ({
-      list: ['服务入驻', '机遇发布', '活动展示', '专家推荐', '其他'],
+      list: [{name: '服务入驻'},
+          {name: '机遇发布'},
+          {name: '活动展示'},
+          {name: '专家推荐'},
+          {name: '其他'}
+      ],
       description: '',
+      intergerOn: '-1',
       headercontent: '',
       titlecontent: '',
-      type: '',
+      type: '寻求合作',
+      cooperationType: '',
       placeholdercontent: '请简述您的需求，提交并通过审核后，相应内容将会出现在活动版块，并通过平台进行信息分发合作对接，信息的发布完全免费。\n' +
       '\n' +
       '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
@@ -53,15 +60,27 @@
       '$route': 'refreshPageData'
     },
     methods: {
+//      添加颜色
+      choose (index, name) {
+        this.cooperationType = name
+        if (this.intergerOn === index) {
+          this.intergerOn = '-1'
+        } else {
+          this.intergerOn = index
+        }
+      },
       submit () {
+        if (this.intergerOn === '-1') {
+          window.mui.toast('请选择合作类型')
+          return
+        }
         if (!this.description) {
           window.mui.toast('请填写反馈内容')
           return
         }
 
         var data = {
-          name: this.type,
-          title: this.headercontent,
+          title: this.type + '->' + this.cooperationType,
           content: this.description
         }
 
@@ -75,6 +94,7 @@
               return
             }
             this.description = ''
+            this.intergerOn = '-1'
             window.mui.toast('反馈成功')
           })
           .catch(({
@@ -194,5 +214,10 @@
     margin-left: 15px;
     margin-top: 10px;
     line-height: 14px;
+  }
+  /* 点击的颜色*/
+  .cooperation_type .presentActive{
+    background: #03aef9;
+    color: #FFFFFF;
   }
 </style>
