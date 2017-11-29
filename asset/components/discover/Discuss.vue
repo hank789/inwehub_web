@@ -42,16 +42,7 @@
       </div>
     </div>
 
-    <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
-      <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
-                  v-model="textarea" :placeholder="commentTarget?'回复' + commentTarget.owner.name:'在此留言'" id="commentTextarea"
-                  autocomplete="off"></textarea>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
-          <use xlink:href="#icon-fasong"></use>
-        </svg>
-      </div>
-    </div>
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
   </div>
 </template>
@@ -59,13 +50,11 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
-  import { autoHeight } from '../../utils/textarea'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   const Discuss = {
     data: () => ({
-      showTextarea: false,
       loading: true,
-      textarea: '',
       busy: false,
       showList: true,
       commentTarget: null,
@@ -84,24 +73,16 @@
     },
     mounted () {
     },
-    components: {},
+    components: {
+      commentTextarea
+    },
     computed: {},
     methods: {
-      autoTextArea (event) {
-        autoHeight(event)
-      },
       toResume (uuid) {
         if (!uuid) {
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
-      },
-      textareaFocus () {
-        // mui.toast('focus');
-
-      },
-      textareaBlur () {
-        // mui.toast('blur');
       },
       resetList () {
         this.page = 1
@@ -109,26 +90,14 @@
         this.getList()
       },
       comment (item) {
-        this.showTextarea = !this.showTextarea
-
         this.commentTarget = item
-
-        if (this.showTextarea) {
-          setTimeout(() => {
-            document.getElementById('commentTextarea').focus()
-          }, 500)
-        }
+        var commentTargetName = this.commentTarget ? this.commentTarget.owner.name : ''
+        this.$refs.ctextarea.comment(commentTargetName)
       },
-      sendMessage (event) {
-        event.preventDefault()
-
-        if (!this.textarea.trim()) {
-          return false
-        }
-
+      sendMessage (message) {
         var parentId = this.commentTarget ? this.commentTarget.id : 0
 
-        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: parentId}).then(response => {
+        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: message, parent_id: parentId}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -141,11 +110,11 @@
 
           this.prependItem(
             data.id,
-            this.textarea,
+            message,
             data.created_at
           )
-          this.textarea = ''
-          this.showTextarea = false
+
+          this.$refs.ctextarea.finish()
         })
       },
       prependItem (id, msg, createdAt) {
