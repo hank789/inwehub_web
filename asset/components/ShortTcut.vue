@@ -87,9 +87,8 @@
               this.$router.pushPlus('/feedback/consultant')
               break
             case 3:
-              this.$router.pushPlus('/feedback/cooperate')
+              this.$router.pushPlus('/seekingCooperation')
               break
-
             case 4:
               userAbility.jumpToAddAsk()
               break
