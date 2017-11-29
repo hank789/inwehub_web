@@ -409,7 +409,8 @@ const routes = [
     component: require('../../../views/Discover/List.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新

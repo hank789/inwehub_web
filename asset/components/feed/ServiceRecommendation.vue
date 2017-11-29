@@ -74,7 +74,7 @@
             this.servicesList = response.data.data.data
             setTimeout(() => {
               this.loading = 0
-            }, 200)
+            }, 300)
           }
         })
       }
