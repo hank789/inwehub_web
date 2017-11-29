@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list">
+            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item)">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -34,9 +34,6 @@
               </div>
               <div class="message_b">
                 {{ item.content }}
-
-
-
               </div>
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
@@ -48,7 +45,7 @@
     <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
         <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
-                  v-model="textarea" placeholder="在此留言" id="commentTextarea"
+                  v-model="textarea" :placeholder="commentTarget?'回复' + commentTarget.owner.name:'在此留言'" id="commentTextarea"
                   autocomplete="off"></textarea>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
           <use xlink:href="#icon-fasong"></use>
@@ -71,6 +68,7 @@
       textarea: '',
       busy: false,
       showList: true,
+      commentTarget: null,
       page: 1,
       list: []
     }),
@@ -110,8 +108,10 @@
         this.list = []
         this.getList()
       },
-      comment () {
+      comment (item) {
         this.showTextarea = !this.showTextarea
+
+        this.commentTarget = item
 
         if (this.showTextarea) {
           setTimeout(() => {
@@ -126,7 +126,9 @@
           return false
         }
 
-        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: 0}).then(response => {
+        var parentId = this.commentTarget ? this.commentTarget.id : 0
+
+        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: parentId}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
