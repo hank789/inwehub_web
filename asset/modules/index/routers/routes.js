@@ -488,6 +488,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 选择标签
+    path: '/selecttags',
+    name: 'selecttags',
+    meta: {
+      title: '选择标签',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/SelectionTags.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的报名 活动
     path: '/my/Discount',
     name: 'my-Discount',

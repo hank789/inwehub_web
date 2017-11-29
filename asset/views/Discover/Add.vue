@@ -31,7 +31,7 @@
         <svg class="icon menu" aria-hidden="true">
           <use xlink:href="#icon-icon-test1"></use>
         </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/advantage', 'list-detail-page')">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selecttags')">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
@@ -58,10 +58,14 @@
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
+        tags: [],
         description: '',
         images: [],
         channels: [],
@@ -182,7 +186,8 @@
           type: 'text',
           title: this.description,
           photos: [],
-          category_id: this.selectedChannel,
+          category_id: '',
+          tags: this.tags,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
@@ -244,6 +249,13 @@
     mounted () {
       this.textareaBlur()
       autoTextArea()
+      var tag = localEvent.getLocalItem('skill_tags' + this.id)
+      for (var i in tag) {
+        this.tags = this.tags.concat(tag[i].value)
+      }
+    },
+    updated () {
+      console.error(currentUser)
     }
   }
 </script>
