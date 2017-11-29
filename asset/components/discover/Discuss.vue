@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list">
+            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item)">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -34,9 +34,6 @@
               </div>
               <div class="message_b">
                 {{ item.content }}
-
-
-
               </div>
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
@@ -47,8 +44,8 @@
 
     <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus"
-                  v-model="textarea" placeholder="在此留言" id="commentTextarea"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
+                  v-model="textarea" :placeholder="commentTarget?'回复' + commentTarget.owner.name:'在此留言'" id="commentTextarea"
                   autocomplete="off"></textarea>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
           <use xlink:href="#icon-fasong"></use>
@@ -62,6 +59,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
+  import { autoHeight } from '../../utils/textarea'
 
   const Discuss = {
     data: () => ({
@@ -70,6 +68,7 @@
       textarea: '',
       busy: false,
       showList: true,
+      commentTarget: null,
       page: 1,
       list: []
     }),
@@ -88,6 +87,9 @@
     components: {},
     computed: {},
     methods: {
+      autoTextArea (event) {
+        autoHeight(event)
+      },
       toResume (uuid) {
         if (!uuid) {
           return false
@@ -106,8 +108,10 @@
         this.list = []
         this.getList()
       },
-      comment () {
+      comment (item) {
         this.showTextarea = !this.showTextarea
+
+        this.commentTarget = item
 
         if (this.showTextarea) {
           setTimeout(() => {
@@ -122,7 +126,9 @@
           return false
         }
 
-        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: 0}).then(response => {
+        var parentId = this.commentTarget ? this.commentTarget.id : 0
+
+        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: parentId}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -331,7 +337,7 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    height: 45px;
+    min-height: 45px;
     overflow: hidden;
     padding: 5px 15px;
     z-index: 77;
@@ -341,17 +347,16 @@
     position: relative;
     background: #fff;
     border-radius: 5px;
-    height: 35px;
+    min-height: 35px;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 20px;
+    margin: 6px 0 0;
     padding: 0 31px 0 5px;
-    line-height: 35px;
     font-size: 14px;
 
   }
@@ -365,7 +370,7 @@
     right: 5px;
     color: #03aef9;
     font-size: 26px;
-    top: 5px;
+    bottom: 5px;
   }
 
   .empty {
