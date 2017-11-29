@@ -28,7 +28,7 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/my/advantage', 'list-detail-page')">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">

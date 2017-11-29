@@ -94,12 +94,11 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import { autoTextArea } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { textToLink } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
@@ -246,7 +245,6 @@
     },
     mounted () {
       autoTextArea()
-      console.error(this.name, this.uuid)
     }
   }
 </script>
