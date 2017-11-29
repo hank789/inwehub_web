@@ -173,6 +173,7 @@ Vue.mixin({
 
     autoHeight(this.$el)
     hideHeaderHandler(this, 'activated')
+    scrollToTop(this.$el)
   },
   mounted () {
     if (!this.$el || this.$el.id !== 'router-view') {
