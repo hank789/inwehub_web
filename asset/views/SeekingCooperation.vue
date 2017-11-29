@@ -41,7 +41,7 @@
           {name: '其他'}
       ],
       description: '',
-      intergerOn: '-1',
+      intergerOn: '0',
       headercontent: '',
       titlecontent: '',
       type: '寻求合作',
@@ -62,6 +62,33 @@
     methods: {
 //      添加颜色
       choose (index, name) {
+        switch (index) {
+          case 1:
+            this.placeholdercontent = '请简述您的需求，提交并通过审核后，相应内容将会出现在活动版块，并通过平台进行信息分发合作对接，信息的发布完全免费。\n' +
+              '\n' +
+              '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
+            break
+          case 2:
+            this.placeholdercontent = '请简述您的需求，提交并通过审核后，相应内容将会出现在机遇版块，并通过平台进行信息分发合作对接，信息的发布完全免费。\n' +
+              '\n' +
+              '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
+            break
+          case 3:
+            this.placeholdercontent = '请简述您的需求，提交并通过审核后，相应内容将会出现在活动版块，并通过平台进行信息分发合作对接，信息的发布完全免费。\n' +
+              '\n' +
+              '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
+            break
+          case 4:
+            this.placeholdercontent = '请描述您推荐的专家姓名、简介、擅长方向、联系方式等。\n' +
+              '\n' +
+              '如您推荐的专家最终成功入驻，您将获得邀请分红及贡献值奖励兑换礼品。'
+            break
+          case 5:
+            this.placeholdercontent = '请清晰简单的描述您需要寻求的其他合作的类型。\n' +
+              '\n' +
+              '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
+            break
+        }
         this.cooperationType = name
         if (this.intergerOn === index) {
           this.intergerOn = '-1'
@@ -70,10 +97,10 @@
         }
       },
       submit () {
-        if (this.intergerOn === '-1') {
-          window.mui.toast('请选择合作类型')
-          return
-        }
+//        if (this.intergerOn === '-1') {
+//          window.mui.toast('请选择合作类型')
+//          return
+//        }
         if (!this.description) {
           window.mui.toast('请填写反馈内容')
           return
