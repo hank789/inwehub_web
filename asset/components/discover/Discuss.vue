@@ -47,7 +47,7 @@
 
     <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
       <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
                   v-model="textarea" placeholder="在此留言" id="commentTextarea"
                   autocomplete="off"></textarea>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
@@ -62,6 +62,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
+  import { autoHeight } from '../../utils/textarea'
 
   const Discuss = {
     data: () => ({
@@ -88,6 +89,9 @@
     components: {},
     computed: {},
     methods: {
+      autoTextArea (event) {
+        autoHeight(event)
+      },
       toResume (uuid) {
         if (!uuid) {
           return false
@@ -331,7 +335,7 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    height: 45px;
+    min-height: 45px;
     overflow: hidden;
     padding: 5px 15px;
     z-index: 77;
@@ -341,17 +345,16 @@
     position: relative;
     background: #fff;
     border-radius: 5px;
-    height: 35px;
+    min-height: 35px;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 20px;
+    margin: 6px 0 0;
     padding: 0 31px 0 5px;
-    line-height: 35px;
     font-size: 14px;
 
   }
@@ -365,7 +368,7 @@
     right: 5px;
     color: #03aef9;
     font-size: 26px;
-    top: 5px;
+    bottom: 5px;
   }
 
   .empty {
