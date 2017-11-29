@@ -29,6 +29,9 @@
 
       <div class="container-bottom-menus">
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
+          <use xlink:href="#icon-icon-test1"></use>
+        </svg>
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
