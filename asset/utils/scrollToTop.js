@@ -44,6 +44,12 @@ function scrollToTop (context) {
     window.scrollHeaderEventContext = context
     context.querySelector('header').addEventListener('doubletap', headerEventCallback)
   }
+
+  if (context.querySelector('#immersedWrapper')) {
+    console.log('发现immersedWrapper, 绑定双击事件')
+    window.scrollHeaderEventContext = context
+    context.querySelector('#immersedWrapper').addEventListener('doubletap', headerEventCallback)
+  }
 }
 
 export {

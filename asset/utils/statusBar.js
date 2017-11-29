@@ -134,6 +134,7 @@ function initImmersed () {
   }
 
   immersedWrapper.style.background = firstBackground
+  console.log('#immersedWrapper styles:' + JSON.stringify(immersedWrapper.style))
 }
 
 function getStyle (elem, property) {
@@ -154,11 +155,11 @@ function getStyle (elem, property) {
  * 是否启用沉浸式模式
  */
 function isEnableImmersed () {
-  if (window.plus && window.mui.os.ios) {
+  if (window.plus) {
+    return window.plus.navigator.isImmersedStatusbar()
+  } else {
     return false
   }
-
-  return false
 }
 
 function getImmersedHeight () {
@@ -178,7 +179,7 @@ function getImmersedHeight () {
     console.log('app内没有监测到immersed, 初始化为:' + immersed)
   }
 
-  console.log('immersed:' + immersed)
+  console.log('最终immersedHeight:' + immersed)
   return immersed
 }
 
