@@ -55,9 +55,16 @@
           @setCollectStatus="setCollectStatus"
         ></Statistics>
       </div>
-
+      <!--点赞-->
+      <div class="component-dianzanList" v-if="detail.supporter_list ? detail.supporter_list.length:0">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg>
+        <span v-for="(item, index) in detail.supporter_list">{{item.name}}</span>等{{detail.supporter_list.length}}人
+      </div>
+      <!--灰色部分-->
       <div class="river"></div>
-
+      <!--评论部分-->
       <Discuss
         :submissionSlug="detail.slug"
         :submissionId="detail.id"
@@ -93,10 +100,14 @@
   import { goThirdPartyArticle } from '../../utils/webview'
   import { textToLink } from '../../utils/dom'
   import { openVendorUrl } from '../../utils/plus'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
+        name: currentUser.name,
+        uuid: currentUser.uuid,
         slug: '',
         noback: false,
         detail: {
@@ -190,11 +201,23 @@
       setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
+//      点赞
       supportNumAdd () {
         this.detail.upvotes++
+        var support = {
+          name: this.name,
+          uuid: this.uuid
+        }
+        this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
+//      取消点赞
       supportNumDesc () {
         this.detail.upvotes--
+        for (var i in this.detail.supporter_list) {
+          if (this.detail.supporter_list[i].uuid === this.uuid) {
+            this.detail.supporter_list.splice(i, 1)
+          }
+        }
       },
       setSupportStatus (type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
@@ -223,6 +246,7 @@
     },
     mounted () {
       autoTextArea()
+      console.error(this.name, this.uuid)
     }
   }
 </script>
@@ -288,5 +312,14 @@
 
   .statisticsWrapper{
     padding:0 15px 15px;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px 30px 15px;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
   }
 </style>
