@@ -6,6 +6,10 @@ var eventCallback = function () {
     console.log('底部菜单选项双击后找到 #refreshContainer')
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().pulldownLoading()
+  } else if (context.querySelector('#pullrefresh')) {
+    console.log('底部菜单选项双击后找到 #pullrefresh')
+    window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
+    window.mui(context.querySelector('#pullrefresh')).pullRefresh().pulldownLoading()
   } else {
     console.log('底部菜单选项双击后未找到 #refreshContainer')
     context.querySelector('.mui-content').scrollTop = 0
