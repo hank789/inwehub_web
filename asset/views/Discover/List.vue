@@ -144,7 +144,7 @@
                   this.$router.pushPlus('my/Discount')
                   break
                 case 5:
-                  this.$router.pushPlus('')
+                  this.$router.pushPlus('/nearbyCompany')
                   break
                 default:
               }
