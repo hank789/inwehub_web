@@ -13,11 +13,7 @@
           <i class="bot"></i>
         </div>
         <ul class="cooperation_type">
-          <li>服务入驻</li>
-          <li>机遇发布 </li>
-          <li>活动展示 </li>
-          <li>专家推荐</li>
-          <li>其他</li>
+          <li v-for="(item, index) in list">{{item}}</li>
         </ul>
 
         <MTextarea  class="customStyle" v-model.trim="description" :content="description" :rows="15" :descMaxLength="1000"
@@ -38,6 +34,7 @@
 
   const Feedback = {
     data: () => ({
+      list: ['服务入驻', '机遇发布', '活动展示', '专家推荐', '其他'],
       description: '',
       headercontent: '',
       titlecontent: '',
