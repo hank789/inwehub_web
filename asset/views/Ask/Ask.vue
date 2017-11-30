@@ -113,7 +113,7 @@
   import pay from '../../components/pay/pay.vue'
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
-  import localEvent from '../../stores/sessionStorage'
+  import localEvent from '../../stores/localStorage'
   import { alertSimple, getDialogObj } from '../../utils/dialog'
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
