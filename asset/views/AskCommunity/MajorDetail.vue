@@ -6,6 +6,9 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+      <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
+          <p>{{tag}}</p>
+      </div>
       <div>
         <Question
           :ask="ask.question"
@@ -28,13 +31,20 @@
 
           </div>
         </div>
-
+        <!--点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"-->
+        <div class="component-dianzanList" v-if="ask.answers[0] ? true : false">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dianzan1"></use>
+          </svg>
+          <span v-for="(item, index) in ask.answers[0].supporter_list">{{item}}</span>等{{support_number}}人
+        </div>
 
         <Discuss
           :answerId="ask.answers[0] ? ask.answers[0].id:0"
           ref="discuss"
           v-show="ask.answers[0] && ask.answers[0].content"
         ></Discuss>
+
 
         <div class="help">
           <div class="title">
@@ -203,6 +213,22 @@
 
 
 <style scoped>
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
+
   .mui-table-view-cell:after {
     display: none;
   }
@@ -240,5 +266,35 @@
     border-radius: 0;
     margin-bottom: 0;
     padding: 13px 0;
+  }
+  /*标签样式*/
+  .question_tags{
+    width:100%;
+    overflow: hidden;
+    padding: 0  16px 8px 7px;
+  }
+  .question_tags p{
+    float: left;
+     background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px 20px 15px;
+    background: #FFFFFF;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
+  }
+
+  .mui-table-view.detail-answer{
+    margin-bottom: 0;
   }
 </style>
