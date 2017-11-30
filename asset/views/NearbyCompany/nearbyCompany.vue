@@ -11,7 +11,7 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="输入公司名称" v-model="searchText"/>
+         <input type="text" placeholder="输入公司名称"  v-model.trim="searchText"/>
          <span v-if="isShow"  @tap.stop.prevent="empty()">
            <svg class="icon" aria-hidden="true">
              <use xlink:href="#icon-guanbi"></use>
@@ -88,7 +88,7 @@
           longitude: position.longt,
           latitude: position.lat
         }
-        console.log('dataList:' + JSON.stringify(this.dataList))
+//        console.log('dataList:' + JSON.stringify(this.dataList))
       })
     },
     methods: {
@@ -207,6 +207,8 @@
     height:54px;
     background:#f3f4f6;
     padding-top: 10px;
+    position: absolute;
+    top:0;
   }
   .searchContainer p{
     width:92%;
@@ -260,7 +262,8 @@
   height:45px;
   padding: 0 4%;
   line-height: 45px;
-  position: relative;
+  position: absolute;
+  top:54px;
   }
   .apply p:nth-of-type(1){
     float: left;
