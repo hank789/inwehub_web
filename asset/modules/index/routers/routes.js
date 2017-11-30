@@ -1500,6 +1500,19 @@ const routes = [
     }
   },
   { // discover detail
+    path: '/selectUser',
+    name: 'selectUser',
+    meta: {
+      title: '选择用户',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/SelectUser/SelectUsers.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover detail
     path: '/collectUser',
     name: 'my-collect-user',
     meta: {

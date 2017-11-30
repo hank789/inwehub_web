@@ -92,7 +92,7 @@
           value: val,
           text: text
         }
-        this.skill_tags =this.skill_tags.concat(list)
+        this.skill_tags = this.skill_tags.concat(list)
         localEvent.setLocalItem('skill_tags' + this.id, this.skill_tags)
         postRequest('profile/addSkillTag', {
           tags: [val]
