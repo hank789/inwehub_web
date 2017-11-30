@@ -84,8 +84,11 @@
     },
     created () {
       getGeoPosition((position) => {
-        this.longt = position.longt
-        this.lat = position.lat
+        this.dataList = {
+          longt: position.longt,
+          lat: position.lat
+        }
+        console.log('dataList:' + JSON.stringify(this.dataList))
       })
     },
     methods: {
