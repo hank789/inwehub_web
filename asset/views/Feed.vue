@@ -36,7 +36,9 @@
 
           <div v-if="item.feed_type === 5 && item.feed.domain === ''">
             <!--x发布了发现-->
-            <DiscoverShare :data="item"></DiscoverShare>
+            <DiscoverShare :data="item"
+              @comment="comment"
+            ></DiscoverShare>
           </div>
           <div @tap.stop.prevent="toDetail(item)" v-else>
 
@@ -88,6 +90,9 @@
 
     </div>
     <div id="statusBarStyle" background="#f3f4f6" bgColor="#f3f4f6" mode="dark"></div>
+
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 
 </template>
@@ -115,12 +120,16 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
   import { getLocalUserInfo } from '../utils/user'
+
+  import commentTextarea from '../components/comment/Textarea.vue'
+
   const currentUser = getLocalUserInfo()
 
   const Feed = {
     data: () => ({
       loading: false,
       list: [],
+      commentTarget: null,
       is_company: currentUser.is_company
     }),
     created () {
@@ -143,7 +152,8 @@
       Activity,
       Swiper,
       DiscoverShare,
-      ServiceRecommendation
+      ServiceRecommendation,
+      commentTextarea
     },
     activated: function () {
 
@@ -154,6 +164,36 @@
     },
     computed: {},
     methods: {
+      sendMessage (message) {
+        postRequest(`article/comment-store`, {'submission_id': this.commentTarget.submissionId, body: message, parent_id: this.commentTarget.parentId}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          // var data = response.data.data
+
+          window.mui.toast(response.data.message)
+
+//          this.prependItem(
+//            data.id,
+//            message,
+//            data.created_at
+//          )
+
+          this.$refs.ctextarea.finish()
+        })
+      },
+      comment (data, comment) {
+        console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
+        this.commentTarget = {
+          submissionId: data.feed.submission_id,
+          parentId: comment ? comment.id : 0
+        }
+        var commentUsername = comment ? comment.owner.name : ''
+        this.$refs.ctextarea.comment(commentUsername)
+      },
       alertClick (title) {
         if (this.is_company) {
           alertCompanyUser(this, () => {

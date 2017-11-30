@@ -17,7 +17,7 @@
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
     <div class="options text-right" @tap.stop.prevent="toDetail(data.url)">
-      <div class="component-iconNumber iconPenglunWrapper">
+      <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(data)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
         </svg><span>{{data.feed.comment_number}}</span>
@@ -35,7 +35,7 @@
       </div>
       <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
       <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
-        <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
+        <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments" @tap.stop.prevent="commentIt(data, comment)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
     </div>
@@ -76,6 +76,9 @@
 
     },
     methods: {
+      commentIt (data, comment) {
+        this.$emit('comment', data, comment)
+      },
       support () {
         var data = {
           submission_id: this.data.feed.submission_id
