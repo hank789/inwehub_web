@@ -44,7 +44,7 @@
                 <p class="mui-ellipsis">
                   <span  v-for="(tags, index) in item.tags"> {{tags}} <i></i></span>
                 </p>
-                <p><span>{{item.address_province}}</span> <span>< {{getDistance(item.distance)}}</span></p>
+                <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}</span></p>
               </div>
               <i class="bottom"></i>
             </li>
@@ -144,12 +144,19 @@
           this.isShow = true
         } else {
           this.isShow = false
-          this.list = []
+
           this.applyIsShow = true
         }
       }
     },
-    mounted () {}
+    mounted () {
+    },
+    updated () {
+//      this.list = []
+//      this.$nextTick(() => {
+//
+//      })
+    }
    }
 </script>
 
@@ -215,6 +222,7 @@
     height:100%;
     margin: 0;
     border:none;
+    padding: 0;
     padding-left: 0;
     font-size:14px;
     color:#444444;
@@ -330,7 +338,6 @@
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
     font-size: 14px;
-    line-height: 34px;
   }
   .listWrapper{
     top:99px;
