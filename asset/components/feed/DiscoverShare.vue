@@ -35,7 +35,13 @@
       </div>
       <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
       <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
-        <div class="comment text-line-5" v-for="(comment, index) in data.feed.comments" @tap.stop.prevent="commentIt(data, comment)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}</div>
+        <template v-for="(comment, index) in data.feed.comments">
+          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(data, comment)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}
+          </div>
+          <div class="comment text-line-5" v-for="(child, index) in comment.children">
+            <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ comment.owner.name }}</span> {{child.content}}
+          </div>
+        </template>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
     </div>
@@ -53,6 +59,7 @@
   import Avatar from '../../components/image/Avatar.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
+  import { getIndexByIdArray } from '../../utils/array'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -76,8 +83,34 @@
 
     },
     methods: {
+      prependItem (id, msg, createdAt, parentId) {
+        console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
+        var userInfo = getLocalUserInfo()
+        var item = {
+          id,
+          children: [],
+          content: msg,
+          owner: {
+            is_expert: userInfo.is_expert,
+            avatar: userInfo.avatar_url,
+            user_id: userInfo.user_id,
+            uuid: userInfo.uuid,
+            name: userInfo.name
+          },
+          created_at: createdAt
+        }
+
+        if (parentId) {
+          var parentIndex = getIndexByIdArray(this.data.feed.comments, parentId)
+          if (parentIndex) {
+            this.data.feed.comments[parentIndex].children.unshift(item)
+          }
+        } else {
+          this.data.feed.comments.unshift(item)
+        }
+      },
       commentIt (data, comment) {
-        this.$emit('comment', data, comment)
+        this.$emit('comment', data, comment, this)
       },
       support () {
         var data = {
@@ -128,6 +161,14 @@
   }
   .iconPenglunWrapper{
     margin-right:10px;
+  }
+
+  .comment .from{
+    color:#03aef9;
+  }
+
+  .comment .to{
+    color:#808080;
   }
 </style>
 
