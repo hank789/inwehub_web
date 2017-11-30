@@ -28,9 +28,9 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true">
-          <use xlink:href="#icon-icon-test1"></use>
-        </svg>
+        <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
+          <!--<use xlink:href="#icon-icon-test1"></use>-->
+        <!--</svg>-->
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selecttags')">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
@@ -255,7 +255,7 @@
       }
     },
     updated () {
-      console.error(currentUser)
+//      console.error(currentUser)
     }
   }
 </script>

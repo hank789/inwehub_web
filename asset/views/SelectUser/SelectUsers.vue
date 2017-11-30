@@ -4,19 +4,13 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的关注</h1>
+      <h1 class="mui-title">选择用户</h1>
     </header>
 
     <!--导航栏-->
 
 
     <div class="mui-content">
-      <div class="menu">
-        <span @tap.stop.prevent="">关注的用户 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
-
-      </div>
-
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
 
@@ -40,7 +34,7 @@
         <div class="groupWrapper">
           <ul v-for="(list, key) in lastList" class="index-bar-group">
             <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
-            <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active"
+            <li v-for="(item, index) in list" :data-raw="item.raw" class="index-bar-cell tap-active"
                 :class="{bottomBorder:index !== list.length-1  }">
 
               <div class="avatar">
@@ -57,10 +51,14 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="ibutton active" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item.uuid, key, index)">
-                已关注
+              <div class="select active" v-if="Selected[key + '_' + index]" @tap.stop.prevent="collectProfessor(key + '_' + index, item.id)">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-check-circle"></use>
+                </svg>
+
               </div>
-              <div class="ibutton" @tap.stop.prevent="collectProfessor(item.uuid,key, index)" v-else>关注Ta</div>
+              <div class="select" v-else @tap.stop.prevent="collectProfessor(key + '_' + index, item.id)">
+              </div>
 
             </li>
           </ul>
@@ -73,6 +71,9 @@
 <script>
   import Contact from '../../components/contact/Index.vue'
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import Vue from 'vue'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
@@ -86,7 +87,9 @@
         followednum: 0,
         title: '',
         list: [],
-        lastList: []
+        lastList: [],
+        userId: currentUser.user_id,
+        Selected: []
       }
     },
     components: {
@@ -99,24 +102,18 @@
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      // 点击关注；
-      collectProfessor (id, key, index) {
-        postRequest(`follow/user`, {
-          id: id
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
+      // 点击选择；
+      collectProfessor (index, uid) {
+        var value = this.Selected[index] ? false : uid
+        Vue.set(this.Selected, index, value)
+        console.log(this.Selected)
+        var options = []
+        for (var i in this.Selected) {
+          if (this.Selected[i]) {
+            options.push(this.Selected[i])
           }
-          console.log(index)
-          if (response.data.data.type === 'unfollow') {
-            this.lastList[key][index].is_followed = 0
-          } else {
-            this.lastList[key][index].is_followed = 1
-          }
-          window.mui.toast(response.data.data.tip)
-        })
+        }
+        localEvent.setLocalItem('select_users' + this.userId, options)
       },
       // 数据；
       getList () {
@@ -158,43 +155,6 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 45px;
-    z-index: 10;
-    background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 50%;
-    height: 100%;
-    float: left;
-    font-size: 14px;
-    color: #444444;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(1) {
-    color: #3c95f9;
-    position: relative;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 73px;
-    height: 1.5px;
-    left: 30%;
-    bottom: 0.5px;
-    background: #3c95f9;
-  }
-
-  /**/
 
   .bot {
     position: absolute;
@@ -249,5 +209,34 @@
 
   .textBody {
     width: 50%;
+  }
+
+  .select{
+    float: right;
+    width:23px;
+    height:23px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #03aef9;
+    border: 1px solid #dcdcdc;
+    position: relative;
+    top: 10px;
+    margin-right: 5px;
+  }
+  .select.active{
+    background:#FFFFFF;
+    border: 1px solid #FFFFFF;
+
+
+  }
+  .select.active svg{
+    font-size:23px;
+    position: absolute;
+    color:#03aef9;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    margin: auto;
   }
 </style>
