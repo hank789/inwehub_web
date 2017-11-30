@@ -170,7 +170,7 @@
       }
     },
     mounted () {
-      this.skill_tags = localEvent.getLocalItem('skill_tags' + this.id)
+//      this.skill_tags = localEvent.getLocalItem('skill_tags' + this.id)
     }
   }
 </script>

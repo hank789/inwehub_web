@@ -8,10 +8,8 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category"><span class="tip">问题分类</span>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          {{ type ? type.split(':')[0] : '选择'
-          }}
-
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags')">
+          选择
         </button>
       </div>
 
@@ -118,9 +116,13 @@
   import localEvent from '../../stores/sessionStorage'
   import { alertSimple, getDialogObj } from '../../utils/dialog'
   import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const Ask = {
     data: () => ({
+      id: currentUser.user_id,
+      tags: [],
       money: 88,
       payItems: [],
       uid: 0,
@@ -152,6 +154,14 @@
       }
 
       this.textareaBlur()
+
+      var tag = localEvent.getLocalItem('skill_tags' + this.id)
+      console.error(tag)
+//      for (var i in tag) {
+//        this.tags = this.tags.concat(tag[i].value)
+//      }
+
+//       localEvent.clearLocalItem('skill_tags' + this.id)
     },
     computed: {
       type () {
