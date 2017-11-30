@@ -253,6 +253,7 @@
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
       }
+      localEvent.clearLocalItem('skill_tags' + this.id)
     },
     updated () {
 //      console.error(currentUser)

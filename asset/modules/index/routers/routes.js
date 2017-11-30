@@ -1481,7 +1481,8 @@ const routes = [
     name: 'help-ask',
     meta: {
       title: '提问帮助',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: false
     },
     component: require('../../../views/Help/Ask.vue'),
     beforeEnter: (to, from, next) => {
