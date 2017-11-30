@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">附近企业</h1>
     </header>
-    <div class="mui-content absolute">
+    <div class="mui-content">
       <!--搜索框-->
      <div class="searchContainer">
        <p>
@@ -28,6 +28,7 @@
       <!--搜索列表-->
       <RefreshList
         v-model="list"
+        v-if="dataList"
         :api="'company/nearbySearch'"
         :pageMode="true"
         :prevOtherData="dataList"
@@ -75,7 +76,7 @@
         applyIsShow: true,
         data: '',
         distance: '',
-        dataList: {}
+        dataList: null
       }
     },
     components: {
