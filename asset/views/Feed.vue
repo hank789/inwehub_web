@@ -36,7 +36,9 @@
 
           <div v-if="item.feed_type === 5 && item.feed.domain === ''">
             <!--x发布了发现-->
-            <DiscoverShare :data="item"
+            <DiscoverShare
+              :data="item"
+              ref="discoverShare"
               @comment="comment"
             ></DiscoverShare>
           </div>
@@ -172,24 +174,26 @@
             return
           }
 
-          // var data = response.data.data
+          var data = response.data.data
 
           window.mui.toast(response.data.message)
 
-//          this.prependItem(
-//            data.id,
-//            message,
-//            data.created_at
-//          )
+          this.commentTarget.component.prependItem(
+            data.id,
+            message,
+            data.created_at,
+            this.commentTarget.parentId
+          )
 
           this.$refs.ctextarea.finish()
         })
       },
-      comment (data, comment) {
+      comment (data, comment, component) {
         console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
         this.commentTarget = {
           submissionId: data.feed.submission_id,
-          parentId: comment ? comment.id : 0
+          parentId: comment ? comment.id : 0,
+          component
         }
         var commentUsername = comment ? comment.owner.name : ''
         this.$refs.ctextarea.comment(commentUsername)

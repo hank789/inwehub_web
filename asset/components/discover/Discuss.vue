@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item)">
+            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item)" :key="index">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -35,6 +35,17 @@
               <div class="message_b">
                 {{ item.content }}
               </div>
+
+              <div class="component-comment-reply" v-for="(child, childIndex) in item.children" v-show="childIndex < 2 || item.moreReply" :key="index + '-' + childIndex">
+                <div class="who"><span class="from">{{ child.owner.name }}</span>
+                  <div class="triangle-right triangle-right-6"></div><span class="to">{{item.owner.name}}</span>
+                  <div class="time">{{ child.created_at }}</div>
+                </div>
+                <div class="text">{{child.content}}</div>
+              </div>
+
+              <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
+
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
           </ul>
@@ -51,6 +62,8 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import { getIndexByIdArray } from '../../utils/array'
+  import Vue from 'vue'
 
   const Discuss = {
     data: () => ({
@@ -78,6 +91,11 @@
     },
     computed: {},
     methods: {
+      moreReply (item) {
+        item.moreReply = 1
+        var indexOfItem = getIndexByIdArray(this.list, item.id)
+        Vue.set(this.list, indexOfItem, item)
+      },
       toResume (uuid) {
         if (!uuid) {
           return false
@@ -111,16 +129,18 @@
           this.prependItem(
             data.id,
             message,
-            data.created_at
+            data.created_at,
+            parentId
           )
 
           this.$refs.ctextarea.finish()
         })
       },
-      prependItem (id, msg, createdAt) {
+      prependItem (id, msg, createdAt, parentId) {
         var userInfo = getLocalUserInfo()
         var item = {
           id,
+          children: [],
           content: msg,
           owner: {
             is_expert: userInfo.is_expert,
@@ -132,7 +152,14 @@
           created_at: createdAt
         }
 
-        this.list.unshift(item)
+        if (parentId) {
+          var parentIndex = getIndexByIdArray(this.list, parentId)
+          if (parentIndex) {
+            this.list[parentIndex].children.unshift(item)
+          }
+        } else {
+          this.list.unshift(item)
+        }
       },
       loadMore () {
         this.busy = true
@@ -363,5 +390,13 @@
     font-size: 12px;
     color: #c8c8c8;
     text-align: center;
+  }
+
+  .component-comment-reply{
+    margin-top:5px;
+  }
+
+  .moreReply{
+    margin-top:5px;
   }
 </style>
