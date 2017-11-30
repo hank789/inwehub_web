@@ -68,6 +68,8 @@
       <Discuss
         :submissionSlug="detail.slug"
         :submissionId="detail.id"
+        @comment="comment"
+        @commentFinish="commentFinish"
         ref="discuss"
       ></Discuss>
 
@@ -85,6 +87,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -101,6 +105,7 @@
   import { textToLink } from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   export default {
     data () {
@@ -145,9 +150,19 @@
       Images,
       Statistics,
       Discuss,
-      Share
+      Share,
+      commentTextarea
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.$refs.ctextarea.finish()
+      },
       goArticle: function (detail) {
         if (detail.type !== 'link') {
           return

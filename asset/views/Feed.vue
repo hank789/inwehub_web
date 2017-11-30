@@ -190,7 +190,7 @@
         })
       },
       comment (data, comment, component) {
-        console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
+        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
         this.commentTarget = {
           submissionId: data.feed.submission_id,
           parentId: comment ? comment.id : 0,

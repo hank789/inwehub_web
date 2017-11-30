@@ -52,16 +52,12 @@
         </div>
       </div>
     </div>
-
-    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
-
   </div>
 </template>
 
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
-  import commentTextarea from '../../components/comment/Textarea.vue'
   import { getIndexByIdArray } from '../../utils/array'
   import Vue from 'vue'
 
@@ -87,7 +83,6 @@
     mounted () {
     },
     components: {
-      commentTextarea
     },
     computed: {},
     methods: {
@@ -110,7 +105,7 @@
       comment (item) {
         this.commentTarget = item
         var commentTargetName = this.commentTarget ? this.commentTarget.owner.name : ''
-        this.$refs.ctextarea.comment(commentTargetName)
+        this.$emit('comment', commentTargetName)
       },
       sendMessage (message) {
         var parentId = this.commentTarget ? this.commentTarget.id : 0
@@ -133,7 +128,7 @@
             parentId
           )
 
-          this.$refs.ctextarea.finish()
+          this.$emit('commentFinish')
         })
       },
       prependItem (id, msg, createdAt, parentId) {
