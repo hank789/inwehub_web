@@ -1,16 +1,17 @@
 <template>
   <div>
     <header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-logowenzi"></use>
-      </svg>
-
-      <div class="rightWrapper" @tap.stop.prevent="toAddArticle()">
+      <div class="headerWrapper">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-plus--"></use>
+          <use xlink:href="#icon-logowenzi"></use>
         </svg>
-      </div>
 
+        <div class="rightWrapper" @tap.stop.prevent="toAddArticle()">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-plus--"></use>
+          </svg>
+        </div>
+      </div>
     </header>
 
     <div class="mui-content" v-show="!loading">
@@ -319,5 +320,10 @@
 
   .mui-content {
     background: #fff
+  }
+
+  .headerWrapper{
+    height:45px;
+    overflow: hidden;
   }
 </style>
