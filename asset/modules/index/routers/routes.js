@@ -13,7 +13,7 @@ import { requestAuth, CanNotGetInWhenLogged } from '../../../utils/auth'
 import localEvent from '../../../stores/localStorage'
 import { checkUpdate } from '../../../utils/updateVersion'
 const currentUser = localEvent.getLocalItem('UserInfo')
-import { closeSplashscreen, openFullscreen, closeFullscreen } from '../../../utils/plus'
+import { closeSplashscreen, openFullscreen } from '../../../utils/plus'
 
 const routes = [
   {
