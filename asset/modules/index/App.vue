@@ -26,7 +26,7 @@
 <script>
   import FooterComponent from '../../components/Footer.vue'
   import OpenAppComponent from '../../components/OpenApp.vue'
-  import { goBack,goThirdPartyArticle } from '../../utils/webview'
+  import { goBack, goThirdPartyArticle } from '../../utils/webview'
   import EventObj from '../../utils/event'
   import { setIncBadgeNumber } from '../../utils/notice'
   import inwehubDialog from '../../components/Dialog.vue'
