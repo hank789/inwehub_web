@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import localEvent from '../../../stores/localStorage'
 import { openWebviewByUrl } from '../../../utils/webview'
+import { openFullscreen, closeFullscreen } from '../../../utils/plus'
 
 // 统计用户的浏览行为;
 import ga from 'vue-ga'
@@ -99,13 +100,11 @@ router.beforeEach((to, from, next) => {
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
 
-  window.mui.plusReady(function () {
-    if (from.path === 'login') {
-      window.plus.navigator.setFullscreen(true)
-    } else {
-      window.plus.navigator.setFullscreen(false)
-    }
-  })
+  if (from.path === 'login') {
+    openFullscreen()
+  } else {
+    closeFullscreen()
+  }
 
   next()
 })

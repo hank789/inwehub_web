@@ -76,6 +76,7 @@
   import errorCodes from '../stores/errorCodes'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
 
   // 手机号码规则
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
@@ -168,16 +169,12 @@
       })
     },
     beforeRouteEnter (to, from, next) {
-      window.mui.plusReady(function () {
-        window.plus.navigator.setFullscreen(true)
-      })
+      openFullscreen()
 
       next()
     },
     beforeRouteLeave (to, from, next) {
-      window.mui.plusReady(function () {
-        window.plus.navigator.setFullscreen(false)
-      })
+      closeFullscreen()
 
       if (!this.isRegisterSuccess) {
         this.setCacheData()

@@ -62,6 +62,7 @@
   import { rebootAuth } from '../utils/wechat'
   import oauth from '../components/oauth/oauth'
   import { clearAllWebViewCache } from '../utils/webview'
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
 
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
   const login = {
@@ -107,15 +108,11 @@
         return
       }
 
-      window.mui.plusReady(function () {
-        window.plus.navigator.setFullscreen(true)
-      })
+      openFullscreen()
       next()
     },
     beforeRouteLeave (to, from, next) {
-      window.mui.plusReady(function () {
-        window.plus.navigator.setFullscreen(false)
-      })
+      closeFullscreen()
 
       next()
     },

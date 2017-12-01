@@ -172,6 +172,24 @@ function closeSplashscreen () {
   }
 }
 
+/**
+ * 开启全屏模式
+ */
+function openFullscreen () {
+  window.mui.plusReady(function () {
+    window.plus.navigator.setFullscreen(true)
+  })
+}
+
+/**
+ * 关闭全屏模式
+ */
+function closeFullscreen () {
+  window.mui.plusReady(function () {
+    window.plus.navigator.setFullscreen(false)
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -181,5 +199,7 @@ export {
   autoTextArea,
   getIndexPath,
   openVendorUrl,
-  closeSplashscreen
+  closeSplashscreen,
+  openFullscreen,
+  closeFullscreen
 }

@@ -13,7 +13,7 @@ import { requestAuth, CanNotGetInWhenLogged } from '../../../utils/auth'
 import localEvent from '../../../stores/localStorage'
 import { checkUpdate } from '../../../utils/updateVersion'
 const currentUser = localEvent.getLocalItem('UserInfo')
-import { closeSplashscreen } from '../../../utils/plus'
+import { closeSplashscreen, openFullscreen, closeFullscreen } from '../../../utils/plus'
 
 const routes = [
   {
@@ -32,7 +32,7 @@ const routes = [
         var lauch = localEvent.getLocalItem('lauchFlag')
         if (!lauch.showGuide) {
           window.mui.plusReady(function () {
-            window.plus.navigator.setFullscreen(true)
+            openFullscreen()
             closeSplashscreen()
             next({
               path: '/guide'
