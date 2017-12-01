@@ -9,7 +9,8 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags')">
-          选择
+          <span  v-if="this.tags.length">已选择</span>
+          <span  v-else>选择</span>
         </button>
       </div>
 
@@ -156,12 +157,11 @@
       this.textareaBlur()
 
       var tag = localEvent.getLocalItem('skill_tags' + this.id)
-      console.error(tag)
-//      for (var i in tag) {
-//        this.tags = this.tags.concat(tag[i].value)
-//      }
-
-//       localEvent.clearLocalItem('skill_tags' + this.id)
+      for (var i in tag) {
+        this.tags = this.tags.concat(tag[i].value)
+      }
+      console.error(this.tags)
+      localEvent.clearLocalItem('skill_tags' + this.id)
     },
     computed: {
       type () {
@@ -432,7 +432,7 @@
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
-          tags: this.type.split(':')[1],
+          tags: this.tags,
           hide: this.hide,
           device: device
         }

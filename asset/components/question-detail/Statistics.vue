@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="statistics">
     <div class="item">
       <div class="iconWrapper">
@@ -48,6 +49,16 @@
       </div>
       <span>{{ supportNum }}</span>
     </div>
+  </div>
+    <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
+    <div class="component-dianzanList" v-if="answerList.supporter_list.length ? true : false">
+      <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-dianzan1"></use>
+      </svg>
+      <span v-for="(item, index) in answerList.supporter_list">{{item.name}}</span>等{{supportNum}}人
+      <i class="bot"></i>
+    </div>
+
 
   </div>
 </template>
@@ -62,6 +73,10 @@
     },
     components: {},
     props: {
+      answerList: {
+        type: Object,
+        default: {}
+      },
       commentNum: {
         type: Number,
         default: 0
@@ -155,11 +170,39 @@
           window.mui.toast(response.data.data.tip)
         })
       }
+    },
+    mounted () {
+      console.error(this.answerList)
     }
   }
 </script>
 
 <style scoped="scoped">
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
+  .bot {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
 
   .item {
     line-height: 20px;
@@ -232,5 +275,21 @@
 
   .active {
     color: #03aef9;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px 14px 15px;
+    background: #FFFFFF;
+    margin-top: 8px;
+    position: relative;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
+  }
+
+  .mui-table-view.detail-answer{
+    margin-bottom: 0;
   }
 </style>

@@ -38,6 +38,7 @@
       </div>
 
       <Statistics
+        :answerList="answer"
         :answerId="answer.id"
         :commentNum="answer.comment_number"
         :seeNum="answer.view_number"
@@ -81,6 +82,8 @@
         editorReadObj: {},
         money: 1,
         curUid: user.user_id,
+        uuid: user.uuid,
+        name: user.name,
         pay_object_type: 'view_answer'
       }
     },
@@ -140,8 +143,7 @@
         }
       }
     },
-    mounted () {
-    },
+    mounted () {},
     methods: {
       setFollowStatus (status) {
         this.answer.is_followed = status
@@ -172,9 +174,19 @@
       },
       supportNumAdd () {
         this.answer.support_number++
+        var support = {
+          name: this.name,
+          uuid: this.uuid
+        }
+        this.answer.supporter_list = this.answer.supporter_list.concat(support)
       },
       supportNumDesc () {
         this.answer.support_number--
+        for (var i in this.answer.supporter_list) {
+          if (this.answer.supporter_list[i].uuid === this.uuid) {
+            this.answer.supporter_list.splice(i, 1)
+          }
+        }
       },
       setSupportStatus (type) {
         this.answer.is_supported = type === 'support' ? 1 : 0
