@@ -38,7 +38,7 @@
         <template v-for="(comment, index) in data.feed.comments">
 
 
-          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(data, comment)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}
+          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, data.feed.comments)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}
           </div>
 
           <DiscussReplySimple
