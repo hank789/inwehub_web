@@ -54,14 +54,14 @@
         提问
       </p>
      <div class="select" v-if="isShow">
-       <p class="newest">最新</p>
+       <p class="hot">最热</p>
      </div>
-      <div class="hot" @tap.stop.prevent="showNewest()">
+      <div class="newest" @tap.stop.prevent="showNewest()">
         <p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shaixuan"></use>
           </svg>
-          最热
+          最新
         </p>
       </div>
     </div>
@@ -287,7 +287,7 @@
     right: 0;
     border-radius:10px;
   }
-  .hot{
+  .newest{
     width:85px;
     height:34px;
     background: #FFFFFF;
@@ -296,7 +296,7 @@
     right:-1px;
     border-radius: 50px 50px 0 0;
   }
-  .hot p{
+  .newest p{
     width:84px;
     height:34px;
     background:#03aef9;
@@ -311,12 +311,12 @@
     justify-content:center;
     align-items:center;
   }
-  .hot p svg{
+  .newest p svg{
     font-size:18px;
     line-height:34px;
     margin-right: 5px;
   }
-  .newest{
+  .hot{
     width:84px;
     height:34px;
     font-size: 15px;
