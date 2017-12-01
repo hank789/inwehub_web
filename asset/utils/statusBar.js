@@ -5,6 +5,7 @@ var defaultBackground = ''
 var bgColor = null
 var mode = null
 var background = null
+var isStatusBarDebug = false
 
 function setStatusBarBackgroundAndStyle (baColor, style) {
   window.mui.plusReady(function () {
@@ -155,6 +156,10 @@ function getStyle (elem, property) {
  * 是否启用沉浸式模式
  */
 function isEnableImmersed () {
+  if (isStatusBarDebug) {
+    console.log('调试模式下开启沉浸式')
+    return true
+  }
   if (window.plus) {
     return window.plus.navigator.isImmersedStatusbar()
   } else {
@@ -163,6 +168,11 @@ function isEnableImmersed () {
 }
 
 function getImmersedHeight () {
+  if (isStatusBarDebug) {
+    console.log('调试模式下immersedHeight:28')
+    return 28
+  }
+
   var status = isEnableImmersed()
   if (!status) {
     console.log('最终immersedHeight:0')
