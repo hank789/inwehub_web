@@ -311,7 +311,7 @@
     position: absolute;
     padding:12px;
     right: 3px;
-    top: 0;
+    bottom: 0;
   }
 
   .rightWrapper .icon {

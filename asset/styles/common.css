@@ -1288,18 +1288,3 @@ ul.normal li:before {
 .mui-bar{
   height:auto !important;
 }
-
-.mui-bar-nav{
-  /* Status bar height on iOS 11.0 */
-  padding-top: constant(safe-area-inset-top);
-
-  /* Status bar height on iOS 11.2+ */
-  padding-top: env(safe-area-inset-top);
-}
-#router-view {
-  /* Status bar height on iOS 11.0 */
-  top: constant(safe-area-inset-top);
-
-  /* Status bar height on iOS 11.2+ */
-  top: env(safe-area-inset-top);
-}

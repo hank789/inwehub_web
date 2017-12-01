@@ -165,6 +165,7 @@ function isEnableImmersed () {
 function getImmersedHeight () {
   var status = isEnableImmersed()
   if (!status) {
+    console.log('最终immersedHeight:0')
     return 0
   }
 
@@ -177,6 +178,11 @@ function getImmersedHeight () {
   if (window.plus && immersed === 0) {
     immersed = 20
     console.log('app内没有监测到immersed, 初始化为:' + immersed)
+  }
+
+  // iphoneX 顶部距离缩小
+  if (immersed === 44) {
+    immersed = 28
   }
 
   console.log('最终immersedHeight:' + immersed)
