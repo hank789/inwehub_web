@@ -294,7 +294,7 @@
     position:absolute;
     bottom: -0px;
     right:-1px;
-    border-radius: 50px 50px 0 0;
+    border-radius: 50px;
   }
   .newest p{
     width:84px;
