@@ -3,7 +3,7 @@
     <div class="message">
       <div class="message_title">
         <p>留言</p>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment()">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment(0, '', list)">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
         <i class="bot"></i>
@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item)" :key="index">
+            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item.id, item.owner.name, list)" :key="index">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -36,13 +36,13 @@
                 {{ item.content }}
               </div>
 
-              <div class="component-comment-reply" v-for="(child, childIndex) in item.children" v-show="childIndex < 2 || item.moreReply" :key="index + '-' + childIndex">
-                <div class="who"><span class="from">{{ child.owner.name }}</span>
-                  <div class="triangle-right triangle-right-6"></div><span class="to">{{item.owner.name}}</span>
-                  <div class="time">{{ child.created_at }}</div>
-                </div>
-                <div class="text">{{child.content}}</div>
-              </div>
+              <DiscussReplay
+                v-if="item.children.length"
+                :children="item.children"
+                :parentOwnerName="item.owner.name"
+                :isShow="!!item.moreReply"
+                @comment="comment"
+              ></DiscussReplay>
 
               <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
 
@@ -60,6 +60,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import Vue from 'vue'
+  import DiscussReplay from '../../components/discover/DiscussReply.vue'
 
   const Discuss = {
     data: () => ({
@@ -83,6 +84,7 @@
     mounted () {
     },
     components: {
+      DiscussReplay
     },
     computed: {},
     methods: {
@@ -102,13 +104,19 @@
         this.list = []
         this.getList()
       },
-      comment (item) {
-        this.commentTarget = item
-        var commentTargetName = this.commentTarget ? this.commentTarget.owner.name : ''
+      comment (parentId, commentTargetUsername, list) {
+        this.commentTarget = {
+          parentId: parentId || 0,
+          commentTargetUsername: commentTargetUsername || '',
+          list: list
+        }
+        var commentTargetName = commentTargetUsername || ''
+
+        console.log('回复 parentId:' + parentId + ', commentTargetUsername' + commentTargetUsername)
         this.$emit('comment', commentTargetName)
       },
       sendMessage (message) {
-        var parentId = this.commentTarget ? this.commentTarget.id : 0
+        var parentId = this.commentTarget.parentId
 
         postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: message, parent_id: parentId}).then(response => {
           var code = response.data.code
@@ -148,12 +156,16 @@
         }
 
         if (parentId) {
-          var parentIndex = getIndexByIdArray(this.list, parentId)
+          var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
           if (parentIndex) {
-            this.list[parentIndex].children.unshift(item)
+            if (this.commentTarget.list[parentIndex].children) {
+              this.commentTarget.list[parentIndex].children.unshift(item)
+            } else {
+              this.commentTarget.list[parentIndex].children = [item]
+            }
           }
         } else {
-          this.list.unshift(item)
+          this.commentTarget.list.unshift(item)
         }
       },
       loadMore () {

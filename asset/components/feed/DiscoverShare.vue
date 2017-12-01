@@ -17,7 +17,7 @@
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
     <div class="options text-right" @tap.stop.prevent="toDetail(data.url)">
-      <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(data)">
+      <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
         </svg><span>{{data.feed.comment_number}}</span>
@@ -36,11 +36,17 @@
       <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
       <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
         <template v-for="(comment, index) in data.feed.comments">
+
+
           <div class="comment text-line-5"  @tap.stop.prevent="commentIt(data, comment)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}
           </div>
-          <div class="comment text-line-5" v-for="(child, index) in comment.children">
-            <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ comment.owner.name }}</span> {{child.content}}
-          </div>
+
+          <DiscussReplySimple
+            :children="comment.children"
+            :parentOwnerName="comment.owner.name"
+            @comment="commentIt"
+          ></DiscussReplySimple>
+
         </template>
         <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
@@ -60,6 +66,8 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
+  import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
+
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -68,7 +76,8 @@
     },
     components: {
       Images,
-      Avatar
+      Avatar,
+      DiscussReplySimple
     },
     props: {
       data: {
@@ -83,7 +92,7 @@
 
     },
     methods: {
-      prependItem (id, msg, createdAt, parentId) {
+      prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
         var userInfo = getLocalUserInfo()
         var item = {
@@ -101,16 +110,16 @@
         }
 
         if (parentId) {
-          var parentIndex = getIndexByIdArray(this.data.feed.comments, parentId)
+          var parentIndex = getIndexByIdArray(commentList, parentId)
           if (parentIndex) {
-            this.data.feed.comments[parentIndex].children.unshift(item)
+            commentList[parentIndex].children.unshift(item)
           }
         } else {
           this.data.feed.comments.unshift(item)
         }
       },
-      commentIt (data, comment) {
-        this.$emit('comment', data, comment, this)
+      commentIt (parentId = 0, commentTargetUsername = '', list) {
+        this.$emit('comment', this.data.feed.submission_id, parentId, commentTargetUsername, list, this)
       },
       support () {
         var data = {

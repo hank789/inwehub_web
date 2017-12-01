@@ -183,20 +183,22 @@
             data.id,
             message,
             data.created_at,
-            this.commentTarget.parentId
+            this.commentTarget.parentId,
+            this.commentTarget.commentList
           )
 
           this.$refs.ctextarea.finish()
         })
       },
-      comment (data, comment, component) {
+      comment (submissionId, parentId, commentTargetUsername, list, component) {
         // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
         this.commentTarget = {
-          submissionId: data.feed.submission_id,
-          parentId: comment ? comment.id : 0,
-          component
+          submissionId: submissionId,
+          parentId: parentId || 0,
+          component,
+          commentList: list
         }
-        var commentUsername = comment ? comment.owner.name : ''
+        var commentUsername = commentTargetUsername || ''
         this.$refs.ctextarea.comment(commentUsername)
       },
       alertClick (title) {
