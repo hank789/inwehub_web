@@ -93,15 +93,6 @@
       })
     },
     methods: {
-      getDistance (num) {
-        num = num.replace('米', 'm');
-        this.distance = num
-//        if (num < 1000) {
-//          return num.toFixed(0) + 'm';
-//        } else if (num > 1000) {
-//          return (num / 1000).toFixed(1) + 'km';
-//        }
-      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -139,7 +130,7 @@
           if (response.data.data) {
             this.datailList = response.data.data
           }
-          console.error(response.data.data)
+//          console.error(response.data.data)
           this.loading = 0
         })
       },

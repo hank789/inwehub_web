@@ -180,7 +180,7 @@
       }
     },
     mounted () {
-      console.error(this.answerList)
+//      console.error(this.answerList)
     }
   }
 </script>
