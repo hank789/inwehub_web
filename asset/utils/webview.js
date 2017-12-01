@@ -67,7 +67,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
           autoShow: false
         }
       })
-      console.log('openWindow:' + webview.getURL())
+      console.log('openWindow url:' + url + ', popGesture: ' + popGesture)
       if (reload) {
         webview.loadURL(url)
       }
@@ -251,6 +251,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
  * 显示webview并绑定侧滑关闭事件
  */
 function showWebview () {
+  console.log('准备为新webview绑定侧滑返回事件')
   if (window.mui.os.plus) {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
@@ -258,7 +259,9 @@ function showWebview () {
         self.show()
       }
       if (window.mui.os.ios) {
+        console.log('bind event popGesture')
         self.addEventListener('popGesture', (e) => {
+          console.log('run in event popGesture')
           if (e.type === 'end' && e.result === true) {
             var parentWebview = self.opener()
             if (parentWebview) {

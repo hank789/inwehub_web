@@ -18,7 +18,7 @@
       <div id="pullrefresh"
            :class="{'mui-scroll-wrapper'  :true, 'task-list':true, 'list-empty':nothing}">
 
-        <div class="mui-table-view list-ask-item" v-show="nothing">
+        <div class="mui-table-view list-ask-item" v-show="nothing === 1">
           <div class="mui-table-view-cell">
             <div>
               <div class="title">暂无任务</div>
