@@ -6,18 +6,6 @@
       <h1 class="mui-title">通知</h1>
     </header>
 
-    <div class="mui-content list-empty absolute" v-if="nothing==1">
-      <div class="mui-table-view list-ask-item">
-        <div class="mui-table-view-cell">
-          <div>
-            <div class="title">暂无任务</div>
-            <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
     <div class="mui-content absolute">
       <!--导航栏-->
       <div class="menu">
@@ -28,7 +16,17 @@
         <i></i>
       </div>
       <div id="pullrefresh"
-           :class="{'mui-scroll-wrapper'  :true, 'task-list':true, 'emptyList':nothing}">
+           :class="{'mui-scroll-wrapper'  :true, 'task-list':true, 'list-empty':nothing}">
+
+        <div class="mui-table-view list-ask-item" v-show="nothing">
+          <div class="mui-table-view-cell">
+            <div>
+              <div class="title">暂无任务</div>
+              <div class="subTitle">稍安勿躁，是金子总会发光！<br/>平台正准备给您一展风采的机会呢！</div>
+            </div>
+          </div>
+        </div>
+
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <li v-for="(task, index) in tasks" @tap.stop.prevent="goDetail(task)">
@@ -513,6 +511,10 @@
 
   .list-empty .list-ask-item {
     padding: 10px 0;
+  }
+
+  .list-empty .list-ask-item:after{
+    display: none;
   }
 
   .menu_message {

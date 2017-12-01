@@ -446,5 +446,7 @@
     margin-left: 6px;
   }
 
-
+  .immersed28 .quick{
+    top:50px;
+  }
 </style>
