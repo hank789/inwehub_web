@@ -23,7 +23,7 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/commonList'"
-        :prevOtherData="{}"
+        :prevOtherData="data"
         :nextOtherData="{}"
         class="listWrapper"
       >
@@ -33,6 +33,9 @@
               <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
                 <div class="second mui-ellipsis-2">{{ item.description }}</div>
                 <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
+                <div class="respondent mui-ellipsis">
+                  回答者：<span>丁冉</span>
+                </div>
               </li>
             </ul>
           </div>
@@ -44,9 +47,23 @@
     </div>
 
     <div class="button-wrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-              @tap.stop.prevent="$router.pushPlus('/ask/interaction')">发布互动问答
-        </button>
+      <p class="propose" @tap.stop.prevent="$router.pushPlus('/ask/interaction')">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xiugai"></use>
+        </svg>
+        提问
+      </p>
+     <div class="select" v-if="isShow">
+       <p class="newest">最新</p>
+     </div>
+      <div class="hot" @tap.stop.prevent="showNewest()">
+        <p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shaixuan"></use>
+          </svg>
+          最热
+        </p>
+      </div>
     </div>
 
   </div>
@@ -57,12 +74,22 @@
 
   const InteractionList = {
     data: () => ({
-      list: []
+      list: [],
+      isShow: 0,
+      data: {
+        tag_id: 0
+      }
     }),
     components: {
       RefreshList
     },
     methods: {
+      showNewest () {
+        var tagid = this.data.tag_id === 0 ? '' : 0
+        this.data = {
+          tag_id: tagid
+        }
+      },
       toDetail (id) {
         this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       }
@@ -72,6 +99,7 @@
 </script>
 
 <style scoped>
+
   .mui-content {
     background: #fff;
   }
@@ -142,6 +170,7 @@
     font-size: 12px;
     color: #b4b4b6;
     padding-top: 5px;
+    text-align: right;
   }
 
   .split {
@@ -209,31 +238,112 @@
     font-size: 12px;
     color: #c8c8c8;
   }
+  /* fixed样式*/
 
   .button-wrapper {
     position: fixed;
-    bottom: 0;
+    bottom:27px;
+    right:14px;
     width: 100%;
+    height: 68px;
     padding: 0;
     z-index: 999;
+    /*border: 1px solid #cccccc;*/
   }
-
-  .button-wrapper button {
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 12px 0;
-    font-size: 17px;
+  .propose{
+    width:84px;
+    height:34px;
+    background:#03aef9;
+    border-radius: 50px;
+    color: #FFFFFF;
+    position: absolute;
+    right:90px;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
   }
-
+  .propose svg{
+    font-size:18px;
+    line-height:34px;
+    margin-right: 5px;
+  }
+  .select{
+    width:84px;
+    height:68px;
+    background: #FFFFFF;
+    border:1px solid #dcdcdc;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius:10px;
+  }
+  .hot{
+    width:85px;
+    height:34px;
+    background: #FFFFFF;
+    position:absolute;
+    bottom: -0px;
+    right:-1px;
+    border-radius: 50px 50px 0 0;
+  }
+  .hot p{
+    width:84px;
+    height:34px;
+    background:#03aef9;
+    border-radius: 50px;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+  }
+  .hot p svg{
+    font-size:18px;
+    line-height:34px;
+    margin-right: 5px;
+  }
+  .newest{
+    width:84px;
+    height:34px;
+    font-size: 15px;
+    border-radius: 50px;
+    color: #808080;
+    position: absolute;
+    top:0;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items:center;
+    margin: 0;
+    padding: 0;
+    padding-right: 12px;
+  }
+/*回答者的样式*/
+  .respondent{
+    width:100%;
+    padding: 12px 15px;
+    background: #f3f4f6;
+    font-size:13px;
+    color:rgb(128,128,128);
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+  .respondent span{
+    color: #03aef9;
+  }
   .isFollowed{
     color:#03aef9;
   }
 
   .second{
     font-size:14px;
-  }
-
-  .mui-content{
-    bottom:50px;
   }
 </style>

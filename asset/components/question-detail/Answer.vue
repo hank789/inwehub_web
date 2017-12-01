@@ -22,7 +22,10 @@
         <quill-editor ref="myTextEditorRead"
                       :options="editorOptionRead" @ready="onEditorReadyRead($event)">
         </quill-editor>
-        <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
+        <div class="time">
+          <p class="average_rate" v-if="answer.average_rate">{{answer.average_rate}}好评</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+        </div>
       </div>
 
       <div class="needMoneyWrapper" v-show="answer.content == ''">
@@ -34,7 +37,10 @@
           </pay>
         </div>
         <div class="desc">用于鼓励提问者与回答者</div>
-        <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
+        <div class="time">
+          <p v-if="answer.average_rate" class="average_rate">{{answer.average_rate}}好评</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+        </div>
       </div>
 
       <Statistics
@@ -214,8 +220,16 @@
   }
 
   .detail-answer .time {
+    width:100%;
+    overflow: hidden;
     font-size: 12px;
+    margin-top: 13px;
     color: #b4b4b6;
+  }
+  .detail-answer .average_rate{
+    float: left;
+  }
+  .detail-answer .created_at{
     float: right;
   }
 
@@ -227,5 +241,11 @@
     color: #b4b4b6;
     text-align: center;
     font-size: 14px;
+  }
+  .mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 11px 15px 0 15px;
+    -webkit-touch-callout: none;
   }
 </style>
