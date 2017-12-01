@@ -21,7 +21,7 @@
         :autoShowEmpty="false"
       >
         <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
-          <p>{{tag}}</p>
+          <p>{{tag.name}}</p>
         </div>
 
         <QustionInteraction
@@ -38,6 +38,20 @@
           :list="answers"
           :questionId="ask.question.id"
         ></AnswersInteraction>
+
+        <!--返回问答社区-->
+        <div class="back" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
+          <span>前往问答社区</span>
+          <span>（更多精彩问答）</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+        </div>
+
+
 
         <div class="help">
           <div class="title">
@@ -243,7 +257,7 @@
   }
 
   .help {
-    margin-top: 10px;
+
     font-size: 14px;
     background: #fff;
   }
@@ -288,6 +302,36 @@
     margin-left: 9px;
     font-size:12px;
   }
-
+  /*返回问答社区*/
+  .back{
+    width:100%;
+    height:62px;
+    text-align: center;
+    line-height: 62px;
+    background: url("../../statics/images/Community.png") no-repeat;
+    background-size: cover;
+    margin-top: 10px;
+  }
+  .back span:nth-of-type(1){
+    font-size:15px;
+    color:#444444;
+    line-height: 62px;
+  }
+  .back span:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+  }
+  .back svg:nth-of-type(1){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+  }
+  .back svg:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+    margin-left: -10px;
+  }
 
 </style>

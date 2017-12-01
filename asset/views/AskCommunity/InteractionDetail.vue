@@ -6,6 +6,9 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+      <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
+        <p>{{tag.name}}</p>
+      </div>
       <div>
         <Question
           :ask="ask.question"
@@ -197,6 +200,21 @@
 
 
 <style scoped>
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
   .mui-table-view-cell:after {
     display: none;
   }
@@ -235,4 +253,21 @@
     margin-bottom: 0;
     padding: 13px 0;
   }
+  /*标签样式*/
+  .question_tags{
+    width:100%;
+    overflow: hidden;
+    padding: 0  16px 8px 7px;
+  }
+  .question_tags p{
+    float: left;
+    background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
+  }
+
 </style>

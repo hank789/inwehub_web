@@ -51,14 +51,15 @@
     </div>
   </div>
     <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
-    <div class="component-dianzanList" v-if="answerList.supporter_list.length ? true : false">
+    <div class="component-dianzanList" v-if="supportNum">
       <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-dianzan1"></use>
       </svg>
-      <span v-for="(item, index) in answerList.supporter_list">{{item.name}}</span>等{{supportNum}}人
+      <span v-for="(item, index) in answerList.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{supportNum}}人
       <i class="bot"></i>
     </div>
-
+    <!--查看全部回答-->
+    <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answerList.uuid)"> 查看Ta的全部回答 ></div>
 
   </div>
 </template>
@@ -69,7 +70,8 @@
 
   export default {
     data () {
-      return {}
+      return {
+      }
     },
     components: {},
     props: {
@@ -121,6 +123,12 @@
     created () {
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       modify () {
         this.$router.pushPlus('/realAnswer/' + this.questionId + '/' + this.answerId, 'list-detail-page-realAnswer-once', true, 'pop-in', 'hide', true)
       },
@@ -292,4 +300,15 @@
   .mui-table-view.detail-answer{
     margin-bottom: 0;
   }
+  /*查看回答*/
+  .see{
+    width:100%;
+    height:40px;
+    padding: 0 15px;
+    font-size:14px;
+    color:#03aef9;
+    text-align: center;
+    line-height: 40px;
+  }
+
 </style>

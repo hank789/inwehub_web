@@ -36,7 +36,7 @@
 
 
         </div>
-
+s
         <div class="groupWrapper">
           <ul v-for="(list, key) in lastList" class="index-bar-group">
             <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>

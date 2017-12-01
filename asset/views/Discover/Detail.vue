@@ -60,7 +60,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
-        <span v-for="(item, index) in detail.supporter_list">{{item.name}}</span>等{{detail.supporter_list.length}}人
+        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.supporter_list.length}}人
       </div>
       <!--灰色部分-->
       <div class="river"></div>
@@ -154,6 +154,12 @@
       commentTextarea
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
