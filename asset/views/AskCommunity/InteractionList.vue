@@ -34,7 +34,7 @@
                 <div class="second mui-ellipsis-2">{{ item.description }}</div>
                 <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
                 <div class="respondent mui-ellipsis">
-                  回答者：<span>丁冉</span>
+                  回答者：<span  v-for="(answer, index) in item.answer_user_list" @tap.stop.prevent="toAvatar(answer.uuid)">{{answer.name}}<i>,</i></span>
                 </div>
               </li>
             </ul>
@@ -84,6 +84,12 @@
       RefreshList
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       showNewest () {
         var tagid = this.data.tag_id === 0 ? '' : 0
         this.data = {
@@ -338,6 +344,13 @@
   }
   .respondent span{
     color: #03aef9;
+  }
+  .respondent i{
+    color:rgb(146,146,146);
+    margin-right: 5px;
+  }
+  .respondent span:nth-last-child(1) i{
+    display: none;
   }
   .isFollowed{
     color:#03aef9;
