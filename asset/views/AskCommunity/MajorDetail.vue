@@ -31,13 +31,7 @@
 
           </div>
         </div>
-        <!--点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"-->
-        <div class="component-dianzanList" v-if="ask.answers[0] ? true : false">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          <span v-for="(item, index) in ask.answers[0].supporter_list">{{item}}</span>等{{support_number}}人
-        </div>
+
 
         <Discuss
           :answerId="ask.answers[0] ? ask.answers[0].id:0"
@@ -283,18 +277,5 @@
     margin-left: 9px;
     font-size:12px;
   }
-  /*点赞样式*/
-  .component-dianzanList{
-    width:100%;
-    padding: 0 15px 20px 15px;
-    background: #FFFFFF;
-  }
-  .component-dianzanList span{
-    font-size:13px;
-    color:#03aef9;
-  }
 
-  .mui-table-view.detail-answer{
-    margin-bottom: 0;
-  }
 </style>
