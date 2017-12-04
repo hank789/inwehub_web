@@ -1,8 +1,5 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-
-    </header>
     <div class="mui-content">
        <div class="publishSuccessfully">
          <svg class="icon" aria-hidden="true">

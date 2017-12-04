@@ -68,13 +68,13 @@
           filename: '_doc/image.jpg'
         })
       },
-      toClip (path) {
+      toClip (path, index = 0) {
         window.mui('.info-choose').popover('toggle')
 
         var t = this
         window.plus.zip.compressImage({
           src: path,
-          dst: '_doc/image_compressed.jpg',
+          dst: '_doc/image_compressed_' + index + '.jpg',
           overwrite: true,
           // width: '1024px',
           quality: 100},
@@ -83,6 +83,8 @@
             if (window.mui.os.ios) {
               newurl = 'file://' + newurl
             }
+
+            console.log('上传的图片地址:' + newurl)
 
             var bitmap = new window.plus.nativeObj.Bitmap('test')
             bitmap.load(newurl, function () {
@@ -106,7 +108,7 @@
         window.plus.gallery.pick((a) => {
           if (this.isMultiple) {
             for (var i in a.files) {
-              this.toClip(a.files[i])
+              this.toClip(a.files[i], i)
             }
           } else {
             this.toClip(a)
