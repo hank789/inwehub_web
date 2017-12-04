@@ -107,7 +107,7 @@
           document.addEventListener('go_to_target_page', (event) => {
             var url = event.detail.url
             console.log('go_to_target_page:' + url)
-            router.push(url)
+            router.replace(url)
           })
           // 只在主页面监听一次
           if (ws.id === window.plus.runtime.appid) {
