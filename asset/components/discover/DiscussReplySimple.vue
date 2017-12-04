@@ -17,7 +17,6 @@
 
 <script>
   import { textToLinkHtml } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
 
   const Discuss = {
     name: 'DiscussReplaySimple',
@@ -46,10 +45,6 @@
       }
     },
     mounted () {
-      var eles = this.$el.querySelectorAll('.textToLink')
-      for (var i in eles) {
-        openVendorUrl(eles[i])
-      }
     },
     components: {
 

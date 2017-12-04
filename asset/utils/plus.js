@@ -149,6 +149,10 @@ function getIndexPath () {
  * 打开第三方网址
  */
 function openVendorUrl (containerDiv) {
+  if (!containerDiv.querySelectorAll) {
+    return
+  }
+
   var aList = containerDiv.querySelectorAll('a[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
     aList[i].addEventListener('tap', function (e) {

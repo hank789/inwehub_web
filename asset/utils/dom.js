@@ -38,6 +38,10 @@ function textToLink (domEle) {
 }
 
 function textToLinkHtml (text) {
+  if (!text) {
+    return text
+  }
+
   if (/<a/gi.test(text)) {
     return text
   }

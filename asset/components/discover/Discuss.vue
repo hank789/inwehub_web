@@ -216,8 +216,11 @@
 
     },
     updated () {
-      this.$nextTick(function () {
-        openVendorUrl(this.$el.querySelector('.textToLink'))
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
       })
     }
   }
