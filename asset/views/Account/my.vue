@@ -285,14 +285,6 @@
     },
     created () {
       // showInwehubWebview();
-      if (window.mui.os.plus) {
-        var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-        var currentUser = localEvent.getLocalItem('UserInfo')
-        var url = process.env.READHUB_URL + '/h5?uuid=' + currentUser.uuid
-        if (inwehubEmbedWebview.getURL() !== url) {
-          inwehubEmbedWebview.loadURL(url)
-        }
-      }
     },
     activated: function () {
       console.log('activated')

@@ -42,6 +42,7 @@
 <script>
   import Share from '../../utils/share'
   import { postRequest } from '../../utils/request'
+  import { getImmersedHeight } from '../../utils/statusBar'
 
   export default {
     data: () => ({
@@ -143,6 +144,7 @@
             var currentWebview = window.plus.webview.currentWebview()
             currentWebview.setStyle({
               height: '100%',
+              zindex: 999,
               opacity: 0.97
             })
           })
@@ -158,9 +160,10 @@
       hide () {
         if (window.mui.os.plus) {
           window.mui.plusReady(function () {
+            var immersedHeight = getImmersedHeight()
             var currentWebview = window.plus.webview.currentWebview()
             currentWebview.setStyle({
-              height: '44px',
+              height: (immersedHeight + 44) + 'px',
               opacity: 1
             })
           })

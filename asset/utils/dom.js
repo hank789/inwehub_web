@@ -28,12 +28,30 @@ function queryParent (el, classname) {
  */
 function textToLink (domEle) {
   var text = domEle.innerHTML
+
+  if (/<a/gi.test(text)) {
+    return false
+  }
+
   var re = /(https?:\/\/[^\s<]+)/g
   domEle.innerHTML = text.replace(re, "<a target='_blank' href='$1'>$1</a>")
 }
 
+function textToLinkHtml (text) {
+  if (!text) {
+    return text
+  }
+
+  if (/<a/gi.test(text)) {
+    return text
+  }
+  var re = /(https?:\/\/[^\s<]+)/g
+  return text.replace(re, "<a target='_blank' href='$1'>$1</a>")
+}
+
 export {
   queryParent,
-  textToLink
+  textToLink,
+  textToLinkHtml
 }
 

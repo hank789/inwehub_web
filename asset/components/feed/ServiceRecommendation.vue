@@ -10,7 +10,7 @@
           <img :src="item.img_url_slide"/>
         </swiper-slide>
         <swiper-slide  style="width: 220px;" class="service" v-if="isShow ? isShow : 0">
-           <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
+           <p @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">我也可以提供服务</p>
            <p>如您或您的公司希望在InweHub展示业务开展合作，点此申请。</p>
         </swiper-slide>
       </swiper>
@@ -74,7 +74,7 @@
             this.servicesList = response.data.data.data
             setTimeout(() => {
               this.loading = 0
-            }, 200)
+            }, 300)
           }
         })
       }

@@ -1,8 +1,10 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">发现</h1>
     </header>
+
     <div class="mui-content">
 
       <!--列表-->
@@ -144,7 +146,7 @@
                   this.$router.pushPlus('my/Discount')
                   break
                 case 5:
-                  this.$router.pushPlus('')
+                  this.$router.pushPlus('/nearbyCompany')
                   break
                 default:
               }

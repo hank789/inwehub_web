@@ -20,7 +20,7 @@
           </li>
         </ul>
         <div class="apply">
-          <p @tap.stop.prevent="$router.pushPlus('/feedback/cooperate')">我也可以提供服务</p>
+          <p @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">我也可以提供服务</p>
           <p>如您或您的公司希望在InweHub展示业务开展合作</p>
           <p>点此申请</p>
         </div>

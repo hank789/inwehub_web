@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hideImmersedWrapper">
     <div class="component-comment">
       <div class="item btn-1">
         <svg class="icon" aria-hidden="true">

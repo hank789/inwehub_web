@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="statistics">
     <div class="item">
       <div class="iconWrapper">
@@ -48,6 +49,17 @@
       </div>
       <span>{{ supportNum }}</span>
     </div>
+  </div>
+    <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
+    <div class="component-dianzanList" v-if="supportNum">
+      <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-dianzan1"></use>
+      </svg>
+      <span v-for="(item, index) in answerList.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{supportNum}}人
+      <i class="bot"></i>
+    </div>
+    <!--查看全部回答-->
+    <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answerList.uuid)"> 查看Ta的全部回答 ></div>
 
   </div>
 </template>
@@ -58,10 +70,15 @@
 
   export default {
     data () {
-      return {}
+      return {
+      }
     },
     components: {},
     props: {
+      answerList: {
+        type: Object,
+        default: {}
+      },
       commentNum: {
         type: Number,
         default: 0
@@ -106,6 +123,12 @@
     created () {
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       modify () {
         this.$router.pushPlus('/realAnswer/' + this.questionId + '/' + this.answerId, 'list-detail-page-realAnswer-once', true, 'pop-in', 'hide', true)
       },
@@ -155,11 +178,39 @@
           window.mui.toast(response.data.data.tip)
         })
       }
+    },
+    mounted () {
+//      console.error(this.answerList)
     }
   }
 </script>
 
 <style scoped="scoped">
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
+  .bot {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
 
   .item {
     line-height: 20px;
@@ -233,4 +284,31 @@
   .active {
     color: #03aef9;
   }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px 14px 15px;
+    background: #FFFFFF;
+    margin-top: 8px;
+    position: relative;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
+  }
+
+  .mui-table-view.detail-answer{
+    margin-bottom: 0;
+  }
+  /*查看回答*/
+  .see{
+    width:100%;
+    height:40px;
+    padding: 0 15px;
+    font-size:14px;
+    color:#03aef9;
+    text-align: center;
+    line-height: 40px;
+  }
+
 </style>

@@ -226,39 +226,45 @@
 
 
 <style>
-  .button-wrapper {
-    margin-top: 15px;
-    padding: 0 50px 15px;
-  }
-
-  .form-realAnswer {
-    padding: 5px 0;
-  }
-
   .answerRichText.blur {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top:0;
+    bottom:0;
   }
 
   .answerRichText.blur .form-realAnswer {
     overflow: hidden;
-    height: 100%;
+    position: absolute;
+    top:5px;
+    bottom:5px;
+    left:5px;
+    right:5px;
   }
 
   .answerRichText.blur .form-realAnswer > div {
-    height: 100%;
   }
 
   .answerRichText.blur .textarea-wrapper {
-    height: 100% !important;
+    position: absolute;
+    width:100%;
+    margin:0;
+    top:0;
+    bottom:0;
   }
 
   .answerRichText.blur .quill-editor {
-    height: 100%;
+    position: absolute;
+    width:100%;
+    top:41px;
+    bottom:21px;
+    height:auto;
   }
 
   .answerRichText.blur .ql-container {
-    height: 90%;
+    position: absolute;
+    top:0;
+    width:100%;
+    height:auto;
+    bottom:0;
   }
 </style>

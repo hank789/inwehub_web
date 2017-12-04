@@ -4,14 +4,14 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">附近企业</h1>
     </header>
-    <div class="mui-content absolute">
+    <div class="mui-content">
       <!--搜索框-->
      <div class="searchContainer">
        <p>
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="输入公司名称" v-model="searchText"/>
+         <input type="text" placeholder="输入公司名称"  v-model.trim="searchText"/>
          <span v-if="isShow"  @tap.stop.prevent="empty()">
            <svg class="icon" aria-hidden="true">
              <use xlink:href="#icon-guanbi"></use>
@@ -20,46 +20,89 @@
        </p>
      </div>
       <!--申请添加-->
-      <div class="apply">
+      <div class="apply" v-if="applyIsShow">
         <p>搜不到？</p>
         <p @tap.stop.prevent="Obtain()">申请添加 </p>
         <i class="bot"></i>
       </div>
       <!--搜索列表-->
-      <ul>
-        <li  @tap.stop.prevent="$router.pushPlus('/companyDetails')">
-          <div class="container-image">
-             <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>思爱普（中国）有限公司</p>
-            <p>专业服务<i></i>其他</p>
-            <p><span>上海市黄浦区</span> <span>< 200m</span></p>
-          </div>
-          <i class="bottom"></i>
-        </li>
-        <li>
-
-        </li>
-        <li>
-
-        </li>
-      </ul>
-
+      <RefreshList
+        v-model="list"
+        v-if="dataList != null"
+        :api="'company/nearbySearch'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        :isShowUpToRefreshDescription="false"
+        class="listWrapper">
+          <ul>
+            <li  v-for="(item, index) in list" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)" >
+              <div class="container-image">
+                 <img :src="item.logo"/>
+              </div>
+              <div class="container-info">
+                <p>{{item.name}}</p>
+                <p class="mui-ellipsis">
+                  <span  v-for="(tags, index) in item.tags"> {{tags}} <i></i></span>
+                </p>
+                <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}</span></p>
+              </div>
+              <i class="bottom"></i>
+            </li>
+          </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 
+
 <script>
+  import { postRequest } from '../../utils/request'
+  import { getGeoPosition } from '../../utils/allPlatform'
+  import RefreshList from '../../components/refresh/List.vue'
+
   export default {
     data () {
       return {
+        list: [],
         searchText: '',
         loading: 1,
-        isShow: false
+        isShow: false,
+        coords: '',
+        longt: '',
+        lat: '',
+        page: 1,
+        value: '',
+        applyIsShow: true,
+        data: '',
+        distance: '',
+        dataList: null
       }
     },
+    components: {
+      RefreshList
+    },
+    created () {
+      getGeoPosition((position) => {
+        this.dataList = {
+          longitude: position.longt,
+          latitude: position.lat
+        }
+        console.log('dataList:' + JSON.stringify(this.dataList))
+      })
+    },
     methods: {
+      getDistance (num) {
+        console.log('num:' + num)
+        num = parseFloat(num.substring(0, num.length - 1))
+        console.log('num:' + num)
+        if (num < 1000) {
+          return num.toFixed(0) + 'm'
+        } else if (num > 1000) {
+          return (num / 1000).toFixed(1) + 'km'
+        }
+      },
+     //  弹窗
       Obtain () {
         var that = this
         var btnArray = ['取消', '确定']
@@ -67,26 +110,53 @@
           if (e.index === 1) {
             // 申请添加擅长标签；
             if (e.value) {
-              that.applySkillTag(e.value)
+              that.applyAddData(e.value)
             }
           }
         }, 'div')
       },
+      // 申请添加擅长标签；
+      applyAddData (text) {
+        postRequest('company/applyAddData', {
+          name: text
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          window.mui.toast(response.data.data.tips)
+          this.loading = 0
+        })
+      },
+      //  点击清空输入框
       empty () {
         this.searchText = ''
       }
     },
     watch: {
       searchText: function (newValue) {
-        console.error(newValue)
         if (newValue) {
+          this.value = newValue
+          this.dataList = {
+            name: newValue,
+            page: this.page,
+            longitude: this.longt,
+            latitude: this.lat
+          }
           this.isShow = true
         } else {
           this.isShow = false
+
+          this.applyIsShow = true
         }
       }
     },
-    mounted () {}
+    mounted () {
+    },
+    updated () {
+    }
   }
 </script>
 
@@ -133,6 +203,8 @@
     height:54px;
     background:#f3f4f6;
     padding-top: 10px;
+    position: absolute;
+    top:0;
   }
   .searchContainer p{
     width:92%;
@@ -152,6 +224,7 @@
     height:100%;
     margin: 0;
     border:none;
+    padding: 0;
     padding-left: 0;
     font-size:14px;
     color:#444444;
@@ -185,7 +258,8 @@
   height:45px;
   padding: 0 4%;
   line-height: 45px;
-  position: relative;
+  position: absolute;
+  top:54px;
   }
   .apply p:nth-of-type(1){
     float: left;
@@ -241,12 +315,20 @@
     flex-direction: row;
     align-items:center;
   }
-  .container-info p:nth-of-type(2) i{
+  .container-info p:nth-of-type(2) span{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+  }
+  .container-info p:nth-of-type(2) span i{
     display: inline-block;
     width:1px;
     height:13px;
     background:#dcdcdc;
     margin: 0 5px;
+  }
+  .container-info p:nth-of-type(2) span:nth-last-child(1) i{
+    display: none;
   }
   .container-info p:nth-of-type(3){
     font-size:14px;
@@ -259,7 +341,9 @@
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
     font-size: 14px;
-    line-height: 34px;
+  }
+  .listWrapper{
+    top:99px;
   }
 
 </style>

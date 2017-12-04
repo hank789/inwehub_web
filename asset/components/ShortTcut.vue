@@ -87,9 +87,8 @@
               this.$router.pushPlus('/feedback/consultant')
               break
             case 3:
-              this.$router.pushPlus('/feedback/cooperate')
+              this.$router.pushPlus('/seekingCooperation')
               break
-
             case 4:
               userAbility.jumpToAddAsk()
               break
@@ -447,5 +446,7 @@
     margin-left: 6px;
   }
 
-
+  .immersed28 .quick{
+    top:60px;
+  }
 </style>

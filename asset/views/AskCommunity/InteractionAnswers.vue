@@ -20,6 +20,9 @@
         :pageMode="true"
         :autoShowEmpty="false"
       >
+        <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
+          <p>{{tag.name}}</p>
+        </div>
 
         <QustionInteraction
           :ask="ask.question"
@@ -35,6 +38,20 @@
           :list="answers"
           :questionId="ask.question.id"
         ></AnswersInteraction>
+
+        <!--返回问答社区-->
+        <div class="back" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
+          <span>前往问答社区</span>
+          <span>（更多精彩问答）</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+        </div>
+
+
 
         <div class="help">
           <div class="title">
@@ -216,6 +233,21 @@
 
 
 <style scoped>
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
   .mui-table-view-cell:after {
     display: none;
   }
@@ -225,7 +257,7 @@
   }
 
   .help {
-    margin-top: 10px;
+
     font-size: 14px;
     background: #fff;
   }
@@ -254,6 +286,52 @@
     margin-bottom: 0;
     padding: 13px 0;
   }
-
+  /*标签样式*/
+  .question_tags{
+    width:100%;
+    overflow: hidden;
+    padding: 0  16px 8px 7px;
+  }
+  .question_tags p{
+    float: left;
+    background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
+  }
+  /*返回问答社区*/
+  .back{
+    width:100%;
+    height:62px;
+    text-align: center;
+    line-height: 62px;
+    background: url("../../statics/images/Community.png") no-repeat;
+    background-size: cover;
+    margin-top: 10px;
+  }
+  .back span:nth-of-type(1){
+    font-size:15px;
+    color:#444444;
+    line-height: 62px;
+  }
+  .back span:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+  }
+  .back svg:nth-of-type(1){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+  }
+  .back svg:nth-of-type(2){
+    font-size:12px;
+    color:#808080;
+    line-height: 62px;
+    margin-left: -10px;
+  }
 
 </style>

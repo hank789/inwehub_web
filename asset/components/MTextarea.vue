@@ -84,4 +84,18 @@
     margin: 0;
     padding-bottom: 0;
   }
+
+  .customStyle{
+    background: inherit;
+    border:inherit;
+  }
+
+  .customStyle{
+    color:inherit;
+    font-size:inherit;
+  }
+
+  .customStyle textarea{
+    background: inherit;
+  }
 </style>

@@ -7,7 +7,7 @@
 
     <div class="mui-content">
       <div class="component-textareaWithImage">
-        <textarea rows="10" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
+        <textarea id="discoverTextarea" rows="10" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
 
         <div class="container-images">
           <div class="container-image" v-for="(image, index) in images">
@@ -28,7 +28,10 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="selectChannel()">
+        <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
+          <!--<use xlink:href="#icon-icon-test1"></use>-->
+        <!--</svg>-->
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
@@ -55,10 +58,14 @@
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
+        tags: [],
         description: '',
         images: [],
         channels: [],
@@ -88,10 +95,18 @@
       uploadImage
     },
     methods: {
+      totags () {
+        this.$router.pushPlus('/selecttags?from=discover')
+        localEvent.setLocalItem('discover_description' + this.id, this.description)
+      },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
       },
       uploadImage: function () {
+        var textarea = window.document.getElementById('discoverTextarea')
+        if (textarea) {
+          textarea.blur()
+        }
         this.$refs.uploadImage.uploadImage()
       },
       selectAddress () {
@@ -175,7 +190,8 @@
           type: 'text',
           title: this.description,
           photos: [],
-          category_id: this.selectedChannel,
+          category_id: '',
+          tags: this.tags,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
@@ -202,14 +218,19 @@
             return
           }
           this.$router.push('/discover/add/success')
+//          提交成功 清空标签
+          //      删除标签；
+          localEvent.clearLocalItem('discover_skill_tags' + this.id)
         })
       },
       textareaFocus () {
+        console.log('textareaFocus')
         if (this.description === this.descPlaceholder) {
           this.description = ''
         }
       },
       textareaBlur () {
+        console.log('textareaBlur')
         if (this.description === '') {
           this.description = this.descPlaceholder
         }
@@ -235,6 +256,14 @@
     mounted () {
       this.textareaBlur()
       autoTextArea()
+      this.description = localEvent.getLocalItem('discover_description' + this.id)
+      var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+      for (var i in tag) {
+        this.tags = this.tags.concat(tag[i].value)
+      }
+    },
+    updated () {
+//      console.error(currentUser)
     }
   }
 </script>
@@ -245,6 +274,7 @@
   }
 
   .container-bottom-menus{
+    position: absolute;
     left:0;
   }
 </style>

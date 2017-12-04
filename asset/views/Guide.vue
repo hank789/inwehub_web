@@ -45,12 +45,11 @@
 <script>
 
   import localEvent from '../stores/localStorage'
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
   export default {
     data: () => ({}),
     created () {
-      window.mui.plusReady(function () {
-        window.plus.navigator.setFullscreen(true)
-      })
+      openFullscreen()
     },
     mounted () {
       window.mui('.mui-slider').slider()
@@ -59,7 +58,7 @@
       // 立即体验按钮点击事件
       document.getElementById('close').addEventListener('tap', function (event) {
         localEvent.setLocalItem('lauchFlag', {showGuide: true})
-        window.plus.navigator.setFullscreen(false)
+        closeFullscreen()
         t.$router.replace('/')
       }, false)
 

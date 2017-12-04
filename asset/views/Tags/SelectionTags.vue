@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的擅长</h1>
+      <h1 class="mui-title">选择标签</h1>
     </header>
 
     <div class="mui-content absolute">
@@ -48,6 +48,9 @@
 <script>
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
+  import {getIndexByIdArray} from '../../utils/array'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
@@ -56,7 +59,8 @@
         loading: 1,
         list: [],
         skill_tags: [],
-        tags:[]
+        tags: [],
+        id: currentUser.user_id
       }
     },
     methods: {
@@ -75,55 +79,39 @@
       },
       // 删除擅长标签；
       delSkillTag (val) {
-//      console.error(val);
-        postRequest('profile/delSkillTag', {
-          tags: [val]
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
+        for (var i in this.skill_tags) {
+          if (this.skill_tags[i].value === val) {
+            this.skill_tags.splice(i, 1)
           }
-//        console.error(response.data);
+        }
+        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+          localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
           window.mui.toast('删除成功')
-          // 刷新我的擅长列表；
-          this.skillTags()
-
-          this.loading = 0
-        })
+        } else {
+          return false
+        }
       },
       // 添加擅长标签；
       addSkillTag (val, text) {
-//      console.error(text);
-        postRequest('profile/addSkillTag', {
-          tags: [val]
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+        var index = getIndexByIdArray(this.skill_tags, val)
+        if (index >= 0) {
+          window.mui.toast('已经添加')
+        } else {
+          var list = {
+            id: val,
+            value: val,
+            text: text
+          }
+          this.skill_tags.push(list)
+          if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+            localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+            window.mui.toast('添加成功')
             return
-          }
-
-          var data = []
-          for (var i = 0; i < this.skill_tags.length; i++) {
-            data.push(this.skill_tags[i].text)
-          }
-
-          // 判断是否已经添加；
-          if (data.indexOf(text) > -1) {
-            // 有重复；
-            window.mui.toast('已经添加')
           } else {
-            // 无重复；
- //          mui.toast("添加成功");
+            return false
           }
+        }
 
-          // 刷新我的擅长列表
-          this.skillTags()
-          this.loading = 0
-        })
       },
       // 申请添加擅长标签；
       applySkillTag (text) {
@@ -137,22 +125,6 @@
             return
           }
           window.mui.toast('申请提交成功')
-          this.loading = 0
-        })
-      },
-      // 我的擅长列表；
-      skillTags () {
-        postRequest('profile/info', {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-
-          if (response.data.data.info.skill_tags.length >= 0) {
-            this.skill_tags = response.data.data.info.skill_tags
-          }
           this.loading = 0
         })
       },
@@ -191,7 +163,11 @@
       }
     },
     mounted () {
-      this.skillTags()
+      if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+        this.skill_tags = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id)
+      } else {
+        return false
+      }
     }
   }
 </script>
@@ -246,6 +222,7 @@
     padding: 5px 12px 5px 10px;
     margin-top: 10px;
     margin-left: 10px;
+    color:#4c4c4c;
   }
 
   .myLabel li svg {

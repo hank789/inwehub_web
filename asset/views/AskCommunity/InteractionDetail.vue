@@ -6,6 +6,9 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+      <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
+        <p>{{tag.name}}</p>
+      </div>
       <div>
         <Question
           :ask="ask.question"
@@ -24,9 +27,16 @@
 
 
         <Discuss
-          :answerId="ask.answer ? ask.answer.id:0"
+          :listApi="'answer/commentList'"
+          :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+          :storeApi="'answer/comment'"
+          :storeParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+
+          @comment="comment"
+          @commentFinish="commentFinish"
+
           ref="discuss"
-          v-show="ask.answer && ask.answer.content"
+          v-if="ask.answer && ask.answer.content"
         ></Discuss>
 
       </div>
@@ -65,6 +75,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -73,12 +85,13 @@
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/question-detail/QuestionInteractionDetail.vue'
-  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
   import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
   import { autoTextArea } from '../../utils/plus'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   const AskDetail = {
     data: () => ({
@@ -110,7 +123,8 @@
       Discuss,
       Answer,
       Comment,
-      Share
+      Share,
+      commentTextarea
     },
     computed: {
       answer () {
@@ -118,6 +132,16 @@
       }
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
       refreshPageData () {
         console.log('refreshPageData-zz-detail')
         this.loading = 1
@@ -134,6 +158,9 @@
       },
       shareFail () {
 
+      },
+      commentNumAdd () {
+        this.answer.comment_number++
       },
       paySuccess (content) {
         this.ask.answers[0].content = content
@@ -197,6 +224,21 @@
 
 
 <style scoped>
+  /*清掉自带样式*/
+
+  div,
+  p,
+  span,
+  i,
+  img,
+  ul,
+  li,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+  }
   .mui-table-view-cell:after {
     display: none;
   }
@@ -235,4 +277,21 @@
     margin-bottom: 0;
     padding: 13px 0;
   }
+  /*标签样式*/
+  .question_tags{
+    width:100%;
+    overflow: hidden;
+    padding: 0  16px 8px 7px;
+  }
+  .question_tags p{
+    float: left;
+    background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
+  }
+
 </style>

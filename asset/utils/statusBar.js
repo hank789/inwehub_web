@@ -5,6 +5,7 @@ var defaultBackground = ''
 var bgColor = null
 var mode = null
 var background = null
+var isStatusBarDebug = false
 
 function setStatusBarBackgroundAndStyle (baColor, style) {
   window.mui.plusReady(function () {
@@ -134,6 +135,7 @@ function initImmersed () {
   }
 
   immersedWrapper.style.background = firstBackground
+  console.log('#immersedWrapper styles:' + JSON.stringify(immersedWrapper.style))
 }
 
 function getStyle (elem, property) {
@@ -154,16 +156,26 @@ function getStyle (elem, property) {
  * 是否启用沉浸式模式
  */
 function isEnableImmersed () {
-  if (window.plus && window.mui.os.ios) {
+  if (isStatusBarDebug) {
+    console.log('调试模式下开启沉浸式')
+    return true
+  }
+  if (window.plus) {
+    return window.plus.navigator.isImmersedStatusbar()
+  } else {
     return false
   }
-
-  return false
 }
 
 function getImmersedHeight () {
+  if (isStatusBarDebug) {
+    console.log('调试模式下immersedHeight:28')
+    return 28
+  }
+
   var status = isEnableImmersed()
   if (!status) {
+    console.log('最终immersedHeight:0')
     return 0
   }
 
@@ -178,7 +190,12 @@ function getImmersedHeight () {
     console.log('app内没有监测到immersed, 初始化为:' + immersed)
   }
 
-  console.log('immersed:' + immersed)
+  // iphoneX 顶部距离缩小
+  if (immersed === 44) {
+    immersed = 28
+  }
+
+  console.log('最终immersedHeight:' + immersed)
   return immersed
 }
 

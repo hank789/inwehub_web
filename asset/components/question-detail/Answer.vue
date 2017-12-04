@@ -22,7 +22,10 @@
         <quill-editor ref="myTextEditorRead"
                       :options="editorOptionRead" @ready="onEditorReadyRead($event)">
         </quill-editor>
-        <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
+        <div class="time">
+          <p class="average_rate" v-if="answer.average_rate">{{answer.average_rate}}好评</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+        </div>
       </div>
 
       <div class="needMoneyWrapper" v-show="answer.content == ''">
@@ -34,10 +37,14 @@
           </pay>
         </div>
         <div class="desc">用于鼓励提问者与回答者</div>
-        <div class="time">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</div>
+        <div class="time">
+          <p v-if="answer.average_rate" class="average_rate">{{answer.average_rate}}好评</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+        </div>
       </div>
 
       <Statistics
+        :answerList="answer"
         :answerId="answer.id"
         :commentNum="answer.comment_number"
         :seeNum="answer.view_number"
@@ -81,6 +88,8 @@
         editorReadObj: {},
         money: 1,
         curUid: user.user_id,
+        uuid: user.uuid,
+        name: user.name,
         pay_object_type: 'view_answer'
       }
     },
@@ -140,8 +149,7 @@
         }
       }
     },
-    mounted () {
-    },
+    mounted () {},
     methods: {
       setFollowStatus (status) {
         this.answer.is_followed = status
@@ -172,9 +180,19 @@
       },
       supportNumAdd () {
         this.answer.support_number++
+        var support = {
+          name: this.name,
+          uuid: this.uuid
+        }
+        this.answer.supporter_list = this.answer.supporter_list.concat(support)
       },
       supportNumDesc () {
         this.answer.support_number--
+        for (var i in this.answer.supporter_list) {
+          if (this.answer.supporter_list[i].uuid === this.uuid) {
+            this.answer.supporter_list.splice(i, 1)
+          }
+        }
       },
       setSupportStatus (type) {
         this.answer.is_supported = type === 'support' ? 1 : 0
@@ -202,8 +220,16 @@
   }
 
   .detail-answer .time {
+    width:100%;
+    overflow: hidden;
     font-size: 12px;
+    margin-top: 13px;
     color: #b4b4b6;
+  }
+  .detail-answer .average_rate{
+    float: left;
+  }
+  .detail-answer .created_at{
     float: right;
   }
 
@@ -215,5 +241,11 @@
     color: #b4b4b6;
     text-align: center;
     font-size: 14px;
+  }
+  .mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 11px 15px 0 15px;
+    -webkit-touch-callout: none;
   }
 </style>

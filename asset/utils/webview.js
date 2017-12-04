@@ -1,4 +1,4 @@
-import { setStatusBarBackgroundAndStyle } from './statusBar'
+import { setStatusBarBackgroundAndStyle, getImmersedHeight } from './statusBar'
 import router from '../modules/index/routers/index'
 import { getDiscoverDetail } from './shareTemplate'
 import { getIndexPath } from './plus'
@@ -67,7 +67,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
           autoShow: false
         }
       })
-      console.log('openWindow:' + webview.getURL())
+      console.log('openWindow url:' + url + ', popGesture: ' + popGesture)
       if (reload) {
         webview.loadURL(url)
       }
@@ -117,51 +117,13 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   var shareUrl = getIndexPath() + '#/webview/share'
 
   var shareOptions = getDiscoverDetail(pathUrl, title, imgUrl)
-  console.log('shareOptions:')
-  console.log(shareOptions)
+  console.log('shareOptions:' + JSON.stringify(shareOptions))
 
-  var shareViewParams = {
-    page_title: title,
-    title: shareOptions.title,
-    link: shareOptions.link,
-    content: shareOptions.content,
-    imageUrl: shareOptions.imageUrl,
-    thumbUrl: shareOptions.thumbUrl
-  }
-  console.log('标题栏地址:' + shareUrl)
-  var shareView = window.mui.openWindow({
-    url: shareUrl,
-    id: 'inwehub_article_title',
-    preload: false,
-    show: {
-      autoShow: false,
-      aniShow: 'pop-in'
-    },
-    styles: {
-      cachemode: 'noCache',
-      popGesture: 'hide',
-      top: '0px',
-      right: '0px',
-      width: '100%',
-      height: '44px',
-      dock: 'top',
-      position: 'dock',
-      backButtonAutoControl: 'hide',
-      bounce: 'none', // 不允许滑动
-      scrollIndicator: 'none' // 不显示滚动条
-    },
-    extras: shareViewParams,
-    waiting: {
-      autoShow: false
-    }
-  })
-
-  window.mui.fire(shareView, 'load_inwehub_article_share', shareViewParams)
-
-  currentWebview.append(shareView)
+  var immersedHeight = getImmersedHeight()
 
   // body部分
   console.log('body url:' + url)
+
   var bodyTop = '0px'
   var bodyBottom = '0px'
   if (window.mui.os.android) {
@@ -176,6 +138,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       popGesture: 'hide',
       top: bodyTop,
       bottom: bodyBottom,
+      zindex: 6,
       position: 'absolute',
       backButtonAutoControl: 'hide',
       statusbar: {background: '#3c3e44'},
@@ -207,6 +170,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       height: '44px',
       dock: 'bottom',
       position: 'dock',
+      zindex: 7,
       backButtonAutoControl: 'hide',
       bounce: 'none', // 不允许滑动
       scrollIndicator: 'none' // 不显示滚动条
@@ -239,6 +203,47 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   currentWebview.append(embed)
 
+  // 标题栏
+  var shareViewParams = {
+    page_title: title,
+    title: shareOptions.title,
+    link: shareOptions.link,
+    content: shareOptions.content,
+    imageUrl: shareOptions.imageUrl,
+    thumbUrl: shareOptions.thumbUrl
+  }
+  console.log('标题栏地址:' + shareUrl)
+  var shareView = window.mui.openWindow({
+    url: shareUrl,
+    id: 'inwehub_article_title',
+    preload: false,
+    show: {
+      autoShow: false,
+      aniShow: 'pop-in'
+    },
+    styles: {
+      cachemode: 'noCache',
+      popGesture: 'hide',
+      top: '0px',
+      right: '0px',
+      zindex: 9,
+      width: '100%',
+      height: (immersedHeight + 44) + 'px',
+      dock: 'top',
+      position: 'dock',
+      backButtonAutoControl: 'hide',
+      bounce: 'none', // 不允许滑动
+      scrollIndicator: 'none' // 不显示滚动条
+    },
+    extras: shareViewParams,
+    waiting: {
+      autoShow: false
+    }
+  })
+
+  window.mui.fire(shareView, 'load_inwehub_article_share', shareViewParams)
+  currentWebview.append(shareView)
+
   return currentWebview
 }
 
@@ -246,6 +251,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
  * 显示webview并绑定侧滑关闭事件
  */
 function showWebview () {
+  console.log('准备为新webview绑定侧滑返回事件')
   if (window.mui.os.plus) {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
@@ -253,7 +259,9 @@ function showWebview () {
         self.show()
       }
       if (window.mui.os.ios) {
+        console.log('bind event popGesture')
         self.addEventListener('popGesture', (e) => {
+          console.log('run in event popGesture')
           if (e.type === 'end' && e.result === true) {
             var parentWebview = self.opener()
             if (parentWebview) {

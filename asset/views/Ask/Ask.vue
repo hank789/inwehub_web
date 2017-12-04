@@ -8,10 +8,9 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category"><span class="tip">问题分类</span>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          {{ type ? type.split(':')[0] : '选择'
-          }}
-
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags?from=ask')">
+          <span  v-if="this.tags.length">已选择</span>
+          <span  v-else>选择</span>
         </button>
       </div>
 
@@ -115,12 +114,16 @@
   import pay from '../../components/pay/pay.vue'
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
-  import localEvent from '../../stores/sessionStorage'
+  import localEvent from '../../stores/localStorage'
   import { alertSimple, getDialogObj } from '../../utils/dialog'
   import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const Ask = {
     data: () => ({
+      id: currentUser.user_id,
+      tags: [],
       money: 88,
       payItems: [],
       uid: 0,
@@ -152,6 +155,14 @@
       }
 
       this.textareaBlur()
+//      取标签；
+      var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
+      for (var i in tag) {
+        this.tags = this.tags.concat(tag[i].value)
+      }
+//      删除标签
+//      console.error(this.tags)
+//      localEvent.clearLocalItem('skill_tags' + this.id)
     },
     computed: {
       type () {
@@ -302,7 +313,7 @@
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
 
-        if (!this.type) {
+        if (!this.tags.length) {
           window.mui.toast('请选择问题分类')
           return
         }
@@ -318,6 +329,8 @@
         } else {
           window.mui('#sheet1').popover('toggle')
         }
+        //      删除标签；
+        localEvent.clearLocalItem('ask_skill_tags' + this.id)
       },
       selectMoney (money) {
         if (!money) {
@@ -422,7 +435,7 @@
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
-          tags: this.type.split(':')[1],
+          tags: this.tags,
           hide: this.hide,
           device: device
         }

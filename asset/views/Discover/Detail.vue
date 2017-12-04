@@ -18,8 +18,7 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">{{ detail.title }}<span class="color-b4b4b6 font-12"
-                                                          v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
+      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)"><span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span><span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
@@ -55,12 +54,25 @@
           @setCollectStatus="setCollectStatus"
         ></Statistics>
       </div>
-
+      <!--点赞-->
+      <div class="component-dianzanList" v-if="detail.supporter_list ? detail.supporter_list.length:0">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg>
+        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.supporter_list.length}}人
+      </div>
+      <!--灰色部分-->
       <div class="river"></div>
-
+      <!--评论部分-->
       <Discuss
-        :submissionSlug="detail.slug"
-        :submissionId="detail.id"
+        v-if="detail.slug"
+        :listApi="'article/comments'"
+        :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+        :storeApi="'article/comment-store'"
+        :storeParams="{'submission_id': detail.id}"
+
+        @comment="comment"
+        @commentFinish="commentFinish"
         ref="discuss"
       ></Discuss>
 
@@ -78,6 +90,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -87,16 +101,20 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import { autoTextArea } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLink } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
+  import { textToLinkHtml } from '../../utils/dom'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   export default {
     data () {
       return {
+        name: currentUser.name,
+        uuid: currentUser.uuid,
         slug: '',
         noback: false,
         detail: {
@@ -105,6 +123,7 @@
             avatar: '',
             username: ''
           },
+          supporter_list: [],
           data: {
             img: ''
           },
@@ -135,9 +154,29 @@
       Images,
       Statistics,
       Discuss,
-      Share
+      Share,
+      commentTextarea
     },
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
       goArticle: function (detail) {
         if (detail.type !== 'link') {
           return
@@ -190,11 +229,29 @@
       setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
+//      点赞
       supportNumAdd () {
         this.detail.upvotes++
+        var support = {
+          name: this.name,
+          uuid: this.uuid
+        }
+        this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
+//      取消点赞
       supportNumDesc () {
         this.detail.upvotes--
+        for (var i in this.detail.supporter_list) {
+          if (this.detail.supporter_list[i].uuid === this.uuid) {
+            this.detail.supporter_list.splice(i, 1)
+          }
+        }
+      },
+      commentNumAdd () {
+        this.detail.comments_number++
+      },
+      commentNumDesc () {
+        this.detail.comments_number--
       },
       setSupportStatus (type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
@@ -211,8 +268,7 @@
     },
     updated () {
       this.$nextTick(function () {
-        textToLink(document.getElementById('contentWrapper'))
-        openVendorUrl(document.getElementById('contentWrapper'))
+        openVendorUrl(this.$el.querySelector('#contentWrapper'))
       })
     },
     watch: {
@@ -243,12 +299,14 @@
 
   .contentWrapper{
     padding:0 15px;
-    background: #fff;
     white-space: pre-wrap !important;
     font-size:15px;
     color:#444;
   }
-
+  .contentWrapper .tags{
+    color:rgb(33,77,120);
+    margin-left: 6px;
+  }
   .newestList{
     padding:10px 15px 0;
     background: #fff;
@@ -288,5 +346,14 @@
 
   .statisticsWrapper{
     padding:0 15px 15px;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px 30px 15px;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
   }
 </style>

@@ -13,6 +13,7 @@ import { requestAuth, CanNotGetInWhenLogged } from '../../../utils/auth'
 import localEvent from '../../../stores/localStorage'
 import { checkUpdate } from '../../../utils/updateVersion'
 const currentUser = localEvent.getLocalItem('UserInfo')
+import { closeSplashscreen, openFullscreen } from '../../../utils/plus'
 
 const routes = [
   {
@@ -31,17 +32,20 @@ const routes = [
         var lauch = localEvent.getLocalItem('lauchFlag')
         if (!lauch.showGuide) {
           window.mui.plusReady(function () {
-            window.plus.navigator.setFullscreen(true)
+            openFullscreen()
+            closeSplashscreen()
             next({
               path: '/guide'
             })
           })
         } else {
+          closeSplashscreen()
           next({
             path: '/home'
           })
         }
       } else {
+        closeSplashscreen()
         next({
           path: '/home'
         })
@@ -405,7 +409,8 @@ const routes = [
     component: require('../../../views/Discover/List.vue'),
     meta: {
       title: '发现',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -483,6 +488,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 选择标签
+    path: '/selecttags',
+    name: 'selecttags',
+    meta: {
+      title: '选择标签',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/SelectionTags.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的报名 活动
     path: '/my/Discount',
     name: 'my-Discount',
@@ -513,7 +530,8 @@ const routes = [
     component: require('../../../views/Account/Growth.vue'),
     meta: {
       title: '成长说明',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1335,7 +1353,7 @@ const routes = [
     }
   },
   { // 附近企业
-    path: '/companyDetails',
+    path: '/companyDetails/:id',
     name: 'companyDetails',
     meta: {
       title: '企业详情',
@@ -1436,6 +1454,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // seekingCooperation
+    path: '/seekingCooperation',
+    name: 'seekingCooperation',
+    meta: {
+      title: '寻求合作',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/SeekingCooperation.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // project
     path: '/project',
     name: 'my-project',
@@ -1452,7 +1482,8 @@ const routes = [
     name: 'help-ask',
     meta: {
       title: '提问帮助',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: false
     },
     component: require('../../../views/Help/Ask.vue'),
     beforeEnter: (to, from, next) => {
@@ -1466,6 +1497,19 @@ const routes = [
       title: '发布项目'
     },
     component: require('../../../views/ProjectForm.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover detail
+    path: '/selectUser',
+    name: 'selectUser',
+    meta: {
+      title: '选择用户',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/SelectUser/SelectUsers.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

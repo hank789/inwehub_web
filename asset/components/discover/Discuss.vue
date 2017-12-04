@@ -3,7 +3,7 @@
     <div class="message">
       <div class="message_title">
         <p>留言</p>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment()">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment(0, '', list)">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
         <i class="bot"></i>
@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list">
+            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item.id, item.owner.name, list)" :key="index">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -32,97 +32,109 @@
                   <span>{{ item.created_at }}</span>
                 </p>
               </div>
-              <div class="message_b">
-                {{ item.content }}
+              <div class="message_b textToLink" v-html="textToLink(item.content)"></div>
 
+              <DiscussReplay
+                v-if="item.children.length"
+                :children="item.children"
+                :parentOwnerName="item.owner.name"
+                :isShow="!!item.moreReply"
+                @comment="comment"
+              ></DiscussReplay>
 
+              <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
 
-              </div>
               <i class="bot" v-show="list.length-1 !== index"></i>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
-    <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
-      <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus"
-                  v-model="textarea" placeholder="在此留言" id="commentTextarea"
-                  autocomplete="off"></textarea>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
-          <use xlink:href="#icon-fasong"></use>
-        </svg>
-      </div>
-    </div>
-
   </div>
 </template>
 
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
+  import { getIndexByIdArray } from '../../utils/array'
+  import Vue from 'vue'
+  import DiscussReplay from '../../components/discover/DiscussReply.vue'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   const Discuss = {
     data: () => ({
-      showTextarea: false,
       loading: true,
-      textarea: '',
       busy: false,
       showList: true,
+      commentTarget: null,
       page: 1,
       list: []
     }),
     props: {
-      submissionSlug: {
+      listApi: {
         type: String,
         default: ''
       },
-      submissionId: {
-        type: Number,
-        default: 0
+      listParams: {
+        type: Object,
+        default: () => {
+          return null
+        }
+      },
+      storeApi: {
+        type: String,
+        default: ''
+      },
+      storeParams: {
+        type: Object,
+        default: () => {
+          return null
+        }
       }
     },
     mounted () {
     },
-    components: {},
+    components: {
+      DiscussReplay
+    },
     computed: {},
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
+      moreReply (item) {
+        item.moreReply = 1
+        var indexOfItem = getIndexByIdArray(this.list, item.id)
+        Vue.set(this.list, indexOfItem, item)
+      },
       toResume (uuid) {
         if (!uuid) {
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      textareaFocus () {
-        // mui.toast('focus');
-
-      },
-      textareaBlur () {
-        // mui.toast('blur');
-      },
       resetList () {
         this.page = 1
         this.list = []
         this.getList()
       },
-      comment () {
-        this.showTextarea = !this.showTextarea
-
-        if (this.showTextarea) {
-          setTimeout(() => {
-            document.getElementById('commentTextarea').focus()
-          }, 500)
+      comment (parentId, commentTargetUsername, list) {
+        this.commentTarget = {
+          parentId: parentId || 0,
+          commentTargetUsername: commentTargetUsername || '',
+          list: list
         }
+        var commentTargetName = commentTargetUsername || ''
+
+        console.log('回复 parentId:' + parentId + ', commentTargetUsername' + commentTargetUsername)
+        this.$emit('comment', commentTargetName)
       },
-      sendMessage (event) {
-        event.preventDefault()
+      sendMessage (message) {
+        var parentId = this.commentTarget.parentId
+        var params = Object.assign({body: message, content: message, parent_id: parentId}, this.storeParams)
 
-        if (!this.textarea.trim()) {
-          return false
-        }
-
-        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: this.textarea, parent_id: 0}).then(response => {
+        postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -135,17 +147,19 @@
 
           this.prependItem(
             data.id,
-            this.textarea,
-            data.created_at
+            message,
+            data.created_at,
+            parentId
           )
-          this.textarea = ''
-          this.showTextarea = false
+
+          this.$emit('commentFinish')
         })
       },
-      prependItem (id, msg, createdAt) {
+      prependItem (id, msg, createdAt, parentId) {
         var userInfo = getLocalUserInfo()
         var item = {
           id,
+          children: [],
           content: msg,
           owner: {
             is_expert: userInfo.is_expert,
@@ -157,7 +171,18 @@
           created_at: createdAt
         }
 
-        this.list.unshift(item)
+        if (parentId) {
+          var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
+          if (parentIndex) {
+            if (this.commentTarget.list[parentIndex].children) {
+              this.commentTarget.list[parentIndex].children.unshift(item)
+            } else {
+              this.commentTarget.list[parentIndex].children = [item]
+            }
+          }
+        } else {
+          this.commentTarget.list.unshift(item)
+        }
       },
       loadMore () {
         this.busy = true
@@ -165,11 +190,11 @@
         this.getList()
       },
       getList () {
-        if (!this.submissionSlug) {
-          console.log('submissionSlug:' + this.submissionSlug)
-          return
+        if (!this.listParams) {
+          return false
         }
-        postRequest(`article/comments`, {'submission_slug': this.submissionSlug, sort: 'hot', page: this.page}).then(response => {
+        var params = Object.assign({page: this.page}, this.listParams)
+        postRequest(this.listApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -193,15 +218,22 @@
       }
     },
     watch: {
-      'submissionSlug' (newVal, oldVal) {
-        if (newVal) {
-          console.log('submissionSlug new' + newVal)
+      'listParams' (newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
           this.resetList()
         }
       }
     },
     created () {
 
+    },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
+      })
     }
   }
   export default Discuss
@@ -331,7 +363,7 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    height: 45px;
+    min-height: 45px;
     overflow: hidden;
     padding: 5px 15px;
     z-index: 77;
@@ -341,17 +373,16 @@
     position: relative;
     background: #fff;
     border-radius: 5px;
-    height: 35px;
+    min-height: 35px;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 20px;
+    margin: 6px 0 0;
     padding: 0 31px 0 5px;
-    line-height: 35px;
     font-size: 14px;
 
   }
@@ -365,7 +396,7 @@
     right: 5px;
     color: #03aef9;
     font-size: 26px;
-    top: 5px;
+    bottom: 5px;
   }
 
   .empty {
@@ -389,5 +420,13 @@
     font-size: 12px;
     color: #c8c8c8;
     text-align: center;
+  }
+
+  .component-comment-reply{
+    margin-top:5px;
+  }
+
+  .moreReply{
+    margin-top:5px;
   }
 </style>

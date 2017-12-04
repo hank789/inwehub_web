@@ -173,6 +173,7 @@ Vue.mixin({
 
     autoHeight(this.$el)
     hideHeaderHandler(this, 'activated')
+    scrollToTop(this.$el)
   },
   mounted () {
     if (!this.$el || this.$el.id !== 'router-view') {
@@ -223,6 +224,7 @@ Vue.mixin({
 window.mui.muiOldBack = window.mui.back
 window.mui.back = function () {
   if (window.mui.os.plus) {
+    console.log('run event back')
     var currentWebview = window.plus.webview.currentWebview()
     var needHide = [
       'inwehub_notice_view',
@@ -235,23 +237,24 @@ window.mui.back = function () {
       'inwehub_article_title',
       'inwehub_article_view'
     ]
-    console.log(currentWebview.id)
+    console.log('back currentWebviewId:' + currentWebview.id)
 
     if (currentWebview.id === window.plus.runtime.appid) {
       goBack()
       window.mui.muiOldBack()
       return
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
-      console.log('hide')
+      console.log('back 准备隐藏当前webview')
       goBack()
       currentWebview.hide()
       return
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
-      console.log('close')
+      console.log('back 准备close当前webview')
       goBack()
       window.mui.muiOldBack()
       return
     } else {
+      console.log('back 准备vue go(-1)')
       console.log('go(-1)')
       router.go(-1)
     }

@@ -1284,3 +1284,12 @@ ul.normal li:before {
   width:100%;
   top:0;
 }
+
+.mui-bar{
+  height:auto !important;
+}
+
+
+.hideImmersedWrapper #immersedWrapper{
+  display: none;
+}

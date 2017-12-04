@@ -100,7 +100,7 @@ function createImageThumb (path, dest, callback) {
 /**
  * 获取geo位置
  */
-function getGeoPosition (callback) {
+function getGeoPosition (callback, failCallback) {
   window.mui.plusReady(() => {
     console.log('准备获取位置信息')
     window.plus.geolocation.getCurrentPosition((position) => {
@@ -111,10 +111,11 @@ function getGeoPosition (callback) {
         longt: codns.longitude, // 经度
         lat: codns.latitude // 纬度
       }
-      console.log(info)
+      console.log('获取到定位信息: ' + JSON.stringify(info))
       callback(info)
     }, (e) => {
-      console.log('获取位置信息失败:' + e.message)
+      console.log('获取位置信息失败: ' + e.message)
+      failCallback(e.message)
     }, {geocode: true, provider: 'baidu', coordsType: 'bd09ll'})
   })
 }
@@ -124,7 +125,11 @@ function getGeoPosition (callback) {
  */
 function autoTextArea () {
   if (window.mui.os.ios) {
-    return false
+    window.mui.plusReady(() => {
+      window.plus.webview.currentWebview().setStyle({
+        softinputMode: 'adjustResize'
+      })
+    })
   } else {
     window.mui.plusReady(() => {
       window.plus.webview.currentWebview().setStyle({
@@ -149,10 +154,14 @@ function getIndexPath () {
  * 打开第三方网址
  */
 function openVendorUrl (containerDiv) {
+  if (!containerDiv.querySelectorAll) {
+    return
+  }
   var aList = containerDiv.querySelectorAll('a[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
-    aList[i].addEventListener('click', function (e) {
+    aList[i].addEventListener('tap', function (e) {
       e.preventDefault()
+      e.stopPropagation()
       if (window.plus) {
         window.plus.runtime.openURL(this.href)
       } else {
@@ -160,6 +169,34 @@ function openVendorUrl (containerDiv) {
       }
     }, false)
   }
+}
+
+/**
+ * 关闭启动画面
+ */
+function closeSplashscreen () {
+  if (window.plus) {
+    console.log('closeSplashscreen')
+    window.plus.navigator.closeSplashscreen()
+  }
+}
+
+/**
+ * 开启全屏模式
+ */
+function openFullscreen () {
+  window.mui.plusReady(function () {
+    window.plus.navigator.setFullscreen(true)
+  })
+}
+
+/**
+ * 关闭全屏模式
+ */
+function closeFullscreen () {
+  window.mui.plusReady(function () {
+    window.plus.navigator.setFullscreen(false)
+  })
 }
 
 export {
@@ -170,5 +207,8 @@ export {
   getGeoPosition,
   autoTextArea,
   getIndexPath,
-  openVendorUrl
+  openVendorUrl,
+  closeSplashscreen,
+  openFullscreen,
+  closeFullscreen
 }
