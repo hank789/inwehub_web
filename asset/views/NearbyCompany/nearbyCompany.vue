@@ -154,14 +154,8 @@
       }
     },
     mounted () {
-    },
-    updated () {
-//      this.list = []
-//      this.$nextTick(() => {
-//
-//      })
     }
-   }
+  }
 </script>
 
 <style scoped="scoped">
