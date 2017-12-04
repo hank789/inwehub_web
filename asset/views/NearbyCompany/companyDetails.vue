@@ -60,7 +60,7 @@
               </div>
               <i class="bot"></i>
             </li>
-            <div class="white"></div>
+
           </ul>
         </div>
     </RefreshList>
@@ -392,11 +392,7 @@
   }
   .listWrapper{
     top:248px;
+    bottom: 46px;
   }
-  /*遮盖*/
-  .white{
-    width:100%;
-    height:46px;
-    background: #FFFFFF;
-  }
+ 
 </style>
