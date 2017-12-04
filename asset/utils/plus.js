@@ -149,7 +149,7 @@ function getIndexPath () {
  * 打开第三方网址
  */
 function openVendorUrl (containerDiv) {
-  if (!containerDiv) {
+  if (!containerDiv.querySelectorAll) {
     return
   }
 

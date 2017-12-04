@@ -217,8 +217,9 @@
     },
     updated () {
       this.$nextTick(() => {
-        if (this.$el && this.$el.querySelector('.textToLink')) {
-          openVendorUrl(this.$el.querySelector('.textToLink'))
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
         }
       })
     }
