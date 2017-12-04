@@ -68,7 +68,7 @@
 <style scoped="scoped">
   .commentWrapper {
     background: #ececee;
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
     left: 0;

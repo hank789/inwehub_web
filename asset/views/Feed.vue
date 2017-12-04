@@ -115,6 +115,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
+  import { openVendorUrl } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -137,6 +138,14 @@
     }),
     created () {
       this.getHomeData()
+    },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
+      })
     },
     components: {
       RefreshList,

@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)">{{data.feed.title}}</div>
+    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)"><span v-html="textToLink(data.feed.title)">{{data.feed.title}}</span></div>
 
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
@@ -68,7 +68,6 @@
   import { getIndexByIdArray } from '../../utils/array'
   import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
   import { textToLinkHtml } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -166,14 +165,6 @@
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
-      },
-      updated () {
-        this.$nextTick(() => {
-          var eles = this.$el.querySelectorAll('.textToLink')
-          for (var i in eles) {
-            openVendorUrl(eles[i])
-          }
-        })
       }
     }
   }
