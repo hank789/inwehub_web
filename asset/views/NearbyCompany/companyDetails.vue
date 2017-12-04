@@ -164,7 +164,6 @@
       '$route': 'refreshPageData'
     },
     mounted () {
-      this.companyInfo()
     }
   }
 </script>
