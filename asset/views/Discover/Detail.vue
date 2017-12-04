@@ -18,8 +18,10 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">{{ detail.title }}<span class="color-b4b4b6 font-12"
-                                                          v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
+      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+        <span v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>
+        {{ detail.title }}
+        <span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
@@ -120,6 +122,7 @@
             avatar: '',
             username: ''
           },
+          supporter_list: [],
           data: {
             img: ''
           },
@@ -286,12 +289,14 @@
 
   .contentWrapper{
     padding:0 15px;
-    background: #fff;
     white-space: pre-wrap !important;
     font-size:15px;
     color:#444;
   }
-
+  .contentWrapper span{
+    color:rgb(33,77,120);
+    margin-left: 6px;
+  }
   .newestList{
     padding:10px 15px 0;
     background: #fff;
