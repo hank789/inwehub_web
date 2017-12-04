@@ -530,7 +530,8 @@ const routes = [
     component: require('../../../views/Account/Growth.vue'),
     meta: {
       title: '成长说明',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
