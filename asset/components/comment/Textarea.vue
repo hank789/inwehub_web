@@ -49,6 +49,7 @@
       finish () {
         this.textarea = ''
         this.showTextarea = false
+        document.querySelector('#commentTextarea').style.height = '20px'
       },
       sendMessage (event) {
         event.preventDefault()
