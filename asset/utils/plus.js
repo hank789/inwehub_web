@@ -151,8 +151,9 @@ function getIndexPath () {
 function openVendorUrl (containerDiv) {
   var aList = containerDiv.querySelectorAll('a[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
-    aList[i].addEventListener('click', function (e) {
+    aList[i].addEventListener('tap', function (e) {
       e.preventDefault()
+      e.stopPropagation()
       if (window.plus) {
         window.plus.runtime.openURL(this.href)
       } else {

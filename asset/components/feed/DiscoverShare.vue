@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper" @tap.stop.prevent="toDetail(data.url)">{{data.feed.title}}</div>
+    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)">{{data.feed.title}}</div>
 
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
@@ -67,6 +67,8 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
+  import { textToLink } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -89,7 +91,8 @@
     },
     watch: {},
     mounted () {
-
+      textToLink(this.$el.querySelector('.textToLink'))
+      openVendorUrl(this.$el.querySelector('.textToLink'))
     },
     methods: {
       prependItem (id, msg, createdAt, parentId, commentList) {
