@@ -24,6 +24,7 @@
       相关人员
       <i class="bott"></i>
     </div>
+
     <RefreshList
       v-model="list"
       :api="'company/dataPeople'"
@@ -32,6 +33,7 @@
       :nextOtherData="{}"
       :isShowUpToRefreshDescription="false"
       class="listWrapper">
+
         <!-- 相关人员-->
         <div class="Relevant">
           <ul class="Relevant_list">
@@ -58,6 +60,7 @@
               </div>
               <i class="bot"></i>
             </li>
+            <div class="white"></div>
           </ul>
         </div>
     </RefreshList>
@@ -90,9 +93,16 @@
       getGeoPosition((position) => {
         this.longt = position.longt
         this.lat = position.lat
+        this.companyInfo()
+      }, () => {
+        window.mui.toast('获取当前位置失败')
       })
     },
     methods: {
+      refreshPageData () {
+        this.companyInfo()
+        this.id = this.$route.params.id
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -150,7 +160,9 @@
         })
       }
     },
-    watch: {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
     mounted () {
       this.companyInfo()
     }
@@ -380,5 +392,11 @@
   }
   .listWrapper{
     top:248px;
+  }
+  /*遮盖*/
+  .white{
+    width:100%;
+    height:46px;
+    background: #FFFFFF;
   }
 </style>
