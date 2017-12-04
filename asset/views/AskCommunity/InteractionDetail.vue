@@ -27,9 +27,16 @@
 
 
         <Discuss
-          :answerId="ask.answer ? ask.answer.id:0"
+          :listApi="'answer/commentList'"
+          :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+          :storeApi="'answer/comment'"
+          :storeParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+
+          @comment="comment"
+          @commentFinish="commentFinish"
+
           ref="discuss"
-          v-show="ask.answer && ask.answer.content"
+          v-if="ask.answer && ask.answer.content"
         ></Discuss>
 
       </div>
@@ -68,6 +75,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -76,12 +85,13 @@
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/question-detail/QuestionInteractionDetail.vue'
-  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
   import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
   import { autoTextArea } from '../../utils/plus'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   const AskDetail = {
     data: () => ({
@@ -113,7 +123,8 @@
       Discuss,
       Answer,
       Comment,
-      Share
+      Share,
+      commentTextarea
     },
     computed: {
       answer () {
@@ -121,6 +132,16 @@
       }
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
       refreshPageData () {
         console.log('refreshPageData-zz-detail')
         this.loading = 1
@@ -137,6 +158,9 @@
       },
       shareFail () {
 
+      },
+      commentNumAdd () {
+        this.answer.comment_number++
       },
       paySuccess (content) {
         this.ask.answers[0].content = content
