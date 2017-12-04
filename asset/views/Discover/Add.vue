@@ -214,6 +214,9 @@
             return
           }
           this.$router.push('/discover/add/success')
+//          提交成功 清空标签
+          //      删除标签；
+          localEvent.clearLocalItem('discover_skill_tags' + this.id)
         })
       },
       textareaFocus () {
@@ -253,8 +256,6 @@
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
       }
-//      删除标签；
-//       localEvent.clearLocalItem('skill_tags' + this.id)
     },
     updated () {
 //      console.error(currentUser)
