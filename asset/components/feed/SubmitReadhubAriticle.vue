@@ -15,7 +15,7 @@
     <div class="container-image margin-10-0-0" v-if="data.feed.img">
       <img :src="data.feed.img"/>
     </div>
-    <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}span class="color-b4b4b6 font-12"
+    <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}<span> class="color-b4b4b6 font-12"
                                                                                    v-if="data.feed.domain"> - {{data.feed.domain}}</span>
     </div>
   </div>
