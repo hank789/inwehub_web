@@ -91,10 +91,7 @@
     },
     watch: {},
     mounted () {
-      var eles = this.$el.querySelectorAll('.textToLink')
-      for (var i in eles) {
-        openVendorUrl(eles[i])
-      }
+
     },
     methods: {
       textToLink (text) {
@@ -169,6 +166,14 @@
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      updated () {
+        this.$nextTick(() => {
+          var eles = this.$el.querySelectorAll('.textToLink')
+          for (var i in eles) {
+            openVendorUrl(eles[i])
+          }
+        })
       }
     }
   }

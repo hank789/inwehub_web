@@ -216,8 +216,10 @@
 
     },
     updated () {
-      this.$nextTick(function () {
-        openVendorUrl(this.$el.querySelector('.textToLink'))
+      this.$nextTick(() => {
+        if (this.$el && this.$el.querySelector('.textToLink')) {
+          openVendorUrl(this.$el.querySelector('.textToLink'))
+        }
       })
     }
   }
