@@ -7,6 +7,10 @@
     </header>
 
     <div class="mui-content absolute" v-show="!loading">
+      <!--标签-->
+      <div class="tags" v-if="answer.question.tags.length">
+        <p v-for="(item, index) in answer.question.tags">{{item.name}}</p>
+      </div>
 
       <Question
         :ask="answer.question"
@@ -382,6 +386,7 @@
     created () {
       // showInwehubWebview();
       this.getData()
+      console.error(this.answer.question)
     }
   }
   export default AnswerDetail
@@ -469,6 +474,23 @@
     display: inline-block;
     margin-left: 5px;
   }
-
+/*标签*/
+  .tags{
+    width:100%;
+    overflow: hidden;
+    padding:0 16px 10px 9px;
+  }
+  .tags p{
+    float: left;
+    margin: 0;
+    padding: 0;
+    margin-left: 7px;
+    margin-top: 10px;
+    background:#a8dff7;
+    color: #FFFFFF;
+    border-radius: 50px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
 
 </style>

@@ -232,7 +232,7 @@
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
-          tags: this.type.split(':')[1],
+          tags: this.tags,
           hide: this.hide,
           device: device
         }
