@@ -132,7 +132,7 @@
       },
       sendMessage (message) {
         var parentId = this.commentTarget.parentId
-        var params = Object.assign({body: message, parent_id: parentId}, this.storeParams)
+        var params = Object.assign({body: message, content: message, parent_id: parentId}, this.storeParams)
 
         postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
