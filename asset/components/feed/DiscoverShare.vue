@@ -38,7 +38,7 @@
         <template v-for="(comment, index) in data.feed.comments">
 
 
-          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, data.feed.comments)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>{{comment.content}}
+          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, data.feed.comments)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span><span  class="textToLink" v-html="textToLink(comment.content)"></span>
           </div>
 
           <DiscussReplySimple
@@ -67,7 +67,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
-  import { textToLink } from '../../utils/dom'
+  import { textToLinkHtml } from '../../utils/dom'
   import { openVendorUrl } from '../../utils/plus'
 
   const currentUser = getLocalUserInfo()
@@ -91,10 +91,15 @@
     },
     watch: {},
     mounted () {
-      textToLink(this.$el.querySelector('.textToLink'))
-      openVendorUrl(this.$el.querySelector('.textToLink'))
+      var eles = this.$el.querySelectorAll('.textToLink')
+      for (var i in eles) {
+        openVendorUrl(eles[i])
+      }
     },
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
       prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
         var userInfo = getLocalUserInfo()

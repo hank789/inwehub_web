@@ -10,12 +10,15 @@
         @comment="comment"
       ></DiscussReplaySimple>
 
-        <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ parentOwnerName }}</span> {{child.content}}
+      <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ parentOwnerName }}</span> <span class="textToLink" v-html="textToLink(child.content)"></span>
     </div>
   </div>
 </template>
 
 <script>
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
+
   const Discuss = {
     name: 'DiscussReplaySimple',
     data: () => ({
@@ -43,11 +46,18 @@
       }
     },
     mounted () {
+      var eles = this.$el.querySelectorAll('.textToLink')
+      for (var i in eles) {
+        openVendorUrl(eles[i])
+      }
     },
     components: {
 
     },
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
       comment (parentId, commentTargetUsername, list) {
         this.$emit('comment', parentId, commentTargetUsername, list)
       }

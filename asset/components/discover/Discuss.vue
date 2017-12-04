@@ -32,9 +32,7 @@
                   <span>{{ item.created_at }}</span>
                 </p>
               </div>
-              <div class="message_b">
-                {{ item.content }}
-              </div>
+              <div class="message_b textToLink" v-html="textToLink(item.content)"></div>
 
               <DiscussReplay
                 v-if="item.children.length"
@@ -61,6 +59,8 @@
   import { getIndexByIdArray } from '../../utils/array'
   import Vue from 'vue'
   import DiscussReplay from '../../components/discover/DiscussReply.vue'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   const Discuss = {
     data: () => ({
@@ -88,6 +88,9 @@
     },
     computed: {},
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
       moreReply (item) {
         item.moreReply = 1
         var indexOfItem = getIndexByIdArray(this.list, item.id)
@@ -211,6 +214,11 @@
     },
     created () {
 
+    },
+    updated () {
+      this.$nextTick(function () {
+        openVendorUrl(this.$el.querySelector('.textToLink'))
+      })
     }
   }
   export default Discuss

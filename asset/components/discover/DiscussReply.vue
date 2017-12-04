@@ -13,12 +13,15 @@
         <div class="triangle-right triangle-right-6"></div><span class="to">{{ parentOwnerName }}</span>
         <div class="time">{{ child.created_at }}</div>
       </div>
-      <div class="text">{{child.content}}</div>
+      <div class="text textToLink" v-html="textToLink(child.content)"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
+
   const Discuss = {
     name: 'DiscussReplay',
     data: () => ({
@@ -46,11 +49,18 @@
       }
     },
     mounted () {
+      var eles = this.$el.querySelectorAll('.textToLink')
+      for (var i in eles) {
+        openVendorUrl(eles[i])
+      }
     },
     components: {
 
     },
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
       comment (parentId, commentTargetUsername, list) {
         this.$emit('comment', parentId, commentTargetUsername, list)
       }

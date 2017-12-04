@@ -20,7 +20,7 @@
       </div>
       <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
         <span v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>
-        {{ detail.title }}
+        <span v-html="textToLink(detail.title)"></span>
         <span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
@@ -104,7 +104,7 @@
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLink } from '../../utils/dom'
+  import { textToLink, textToLinkHtml } from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -157,6 +157,9 @@
       commentTextarea
     },
     methods: {
+      textToLink (text) {
+        return textToLinkHtml(text)
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -264,8 +267,7 @@
     },
     updated () {
       this.$nextTick(function () {
-        textToLink(document.getElementById('contentWrapper'))
-        openVendorUrl(document.getElementById('contentWrapper'))
+        openVendorUrl(this.$el.querySelector('#contentWrapper'))
       })
     },
     watch: {
