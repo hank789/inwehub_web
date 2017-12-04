@@ -105,7 +105,7 @@
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLink, textToLinkHtml } from '../../utils/dom'
+  import { textToLinkHtml } from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
