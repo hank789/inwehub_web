@@ -124,7 +124,11 @@ function getGeoPosition (callback) {
  */
 function autoTextArea () {
   if (window.mui.os.ios) {
-    return false
+    window.mui.plusReady(() => {
+      window.plus.webview.currentWebview().setStyle({
+        softinputMode: 'adjustResize'
+      })
+    })
   } else {
     window.mui.plusReady(() => {
       window.plus.webview.currentWebview().setStyle({
@@ -152,7 +156,6 @@ function openVendorUrl (containerDiv) {
   if (!containerDiv.querySelectorAll) {
     return
   }
-
   var aList = containerDiv.querySelectorAll('a[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
     aList[i].addEventListener('tap', function (e) {

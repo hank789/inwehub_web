@@ -268,6 +268,7 @@
   }
 
   .container-bottom-menus{
+    position: absolute;
     left:0;
   }
 </style>
