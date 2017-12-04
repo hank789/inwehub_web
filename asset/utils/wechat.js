@@ -42,7 +42,10 @@ function rebootAuth (hash) {
 }
 
 function callWechat (call) {
-  postRequest(`share/wechat/jssdk`, {current_url: this.currentUrl}).then(response => {
+  var fullUrl = window.location.href
+  var currentUrl = fullUrl.split('#')[0]
+
+  postRequest(`share/wechat/jssdk`, {current_url: currentUrl}).then(response => {
     var code = response.data.code
     if (code !== 1000) {
       window.mui.toast(response.data.message)
