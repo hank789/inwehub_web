@@ -313,7 +313,7 @@
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
 
-        if (!this.type) {
+        if (!this.tags.length) {
           window.mui.toast('请选择问题分类')
           return
         }
@@ -329,6 +329,8 @@
         } else {
           window.mui('#sheet1').popover('toggle')
         }
+        //      删除标签；
+        localEvent.clearLocalItem('ask_skill_tags' + this.id)
       },
       selectMoney (money) {
         if (!money) {

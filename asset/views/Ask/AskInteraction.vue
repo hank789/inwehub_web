@@ -135,6 +135,8 @@
     methods: {
       submit () {
         this.$refs.pay.pay()
+        //      删除标签；
+        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
       },
       textareaFocus () {
         if (this.description === this.descPlaceholder) {
