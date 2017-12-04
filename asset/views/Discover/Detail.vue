@@ -170,6 +170,7 @@
         this.$refs.ctextarea.comment(commentTargetName)
       },
       commentFinish () {
+        this.commentNumAdd()
         this.$refs.ctextarea.finish()
       },
       goArticle: function (detail) {
@@ -241,6 +242,12 @@
             this.detail.supporter_list.splice(i, 1)
           }
         }
+      },
+      commentNumAdd () {
+        this.detail.comments_number++
+      },
+      commentNumDesc () {
+        this.detail.comments_number--
       },
       setSupportStatus (type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0

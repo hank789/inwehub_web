@@ -116,9 +116,11 @@
           var parentIndex = getIndexByIdArray(commentList, parentId)
           if (parentIndex) {
             commentList[parentIndex].children.unshift(item)
+            this.data.feed.comment_number++
           }
         } else {
           this.data.feed.comments.unshift(item)
+          this.data.feed.comment_number++
         }
       },
       commentIt (parentId = 0, commentTargetUsername = '', list) {
