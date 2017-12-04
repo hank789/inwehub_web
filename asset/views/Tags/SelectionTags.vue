@@ -48,6 +48,7 @@
 <script>
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
+  import {getIndexByIdArray} from '../../utils/array'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
@@ -92,37 +93,25 @@
       },
       // 添加擅长标签；
       addSkillTag (val, text) {
-        for (var i = 0; i < this.skill_tags.length; i++) {
-          if (this.skill_tags[i].text === text) {
-            console.error(this.skill_tags[i].text === text)
-            window.mui.toast('已经添加')
+        var index = getIndexByIdArray(this.skill_tags, val)
+        if (index >= 0) {
+          window.mui.toast('已经添加')
+        } else {
+          var list = {
+            id: val,
+            value: val,
+            text: text
+          }
+          this.skill_tags.push(list)
+          if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+            localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+            window.mui.toast('添加成功')
             return
+          } else {
+            return false
           }
-            console.error("ok")
-            var list = {
-              value: val,
-              text: text
-            }
-            this.skill_tags = this.skill_tags.concat(list)
-//            if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
-//              localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
-//              window.mui.toast('添加成功')
-//              return
-//            } else {
-//              return false
-//            }
-          }
-//        }
-        postRequest('profile/addSkillTag', {
-          tags: [val]
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-        })
+        }
+
       },
       // 申请添加擅长标签；
       applySkillTag (text) {
