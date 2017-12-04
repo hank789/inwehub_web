@@ -100,7 +100,7 @@ function createImageThumb (path, dest, callback) {
 /**
  * 获取geo位置
  */
-function getGeoPosition (callback) {
+function getGeoPosition (callback, failCallback) {
   window.mui.plusReady(() => {
     console.log('准备获取位置信息')
     window.plus.geolocation.getCurrentPosition((position) => {
@@ -115,6 +115,7 @@ function getGeoPosition (callback) {
       callback(info)
     }, (e) => {
       console.log('获取位置信息失败: ' + e.message)
+      failCallback(e.message)
     }, {geocode: true, provider: 'baidu', coordsType: 'bd09ll'})
   })
 }
