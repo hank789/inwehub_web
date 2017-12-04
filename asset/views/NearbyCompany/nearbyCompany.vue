@@ -57,7 +57,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { getGeoPosition } from '../../utils/plus'
+  import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
 
   export default {

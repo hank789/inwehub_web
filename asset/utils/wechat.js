@@ -1,3 +1,6 @@
+import { postRequest } from './request'
+import wx from 'weixin-js-sdk'
+
 function hideHeaderHandler (obj, type) {
   if (window.mui.os.wechat) {
     if (obj.$router.currentRoute.meta.keepAlive && type === 'mounted') {
@@ -38,7 +41,47 @@ function rebootAuth (hash) {
   }
 }
 
+function callWechat (call) {
+  postRequest(`share/wechat/jssdk`, {current_url: this.currentUrl}).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    var wechatConfig = response.data.data.config
+    wx.config(wechatConfig)
+
+    wx.error(function (res) {
+      console.error('wx:error:' + JSON.stringify(res))
+    })
+
+    wx.ready(() => {
+      call(wx)
+    })
+  })
+}
+
+function getGeoPositionByWechat (callback, failCallback) {
+  console.log('getGeoPositionByWechat')
+  callWechat((wx) => {
+    wx.getLocation({
+      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        console.log('wx.getLocation success res:' + JSON.stringify(res))
+        callback(res)
+      },
+      fail: function (res) {
+        console.log('wx.getLocation fail res:' + JSON.stringify(res))
+        failCallback(res.errMsg)
+      }
+    })
+  })
+}
+
 export {
   hideHeaderHandler,
-  rebootAuth
+  rebootAuth,
+  callWechat,
+  getGeoPositionByWechat
 }
