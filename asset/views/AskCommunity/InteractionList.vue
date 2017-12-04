@@ -150,15 +150,25 @@
   .mui-media-body {
     padding-left: 10px;
   }
-
   .mui-table-view-cell:after {
-    right: 15px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 0px;
   }
 
   .mui-table-view:after {
     display: none;
   }
+  .mui-table-view{
+    background: #f3f4f6;
+  }
 
+  .mui-table-view li{
+    background: #FFFFFF;
+    margin-bottom: 10px;
+  }
   .mui-table-view:before {
     display: none;
   }

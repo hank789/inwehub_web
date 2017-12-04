@@ -8,7 +8,7 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category"><span class="tip">问题分类</span>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags')">
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags?from=ask')">
           <span  v-if="this.tags.length">已选择</span>
           <span  v-else>选择</span>
         </button>
@@ -155,13 +155,14 @@
       }
 
       this.textareaBlur()
-
-      var tag = localEvent.getLocalItem('skill_tags' + this.id)
+//      取标签；
+      var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
       }
-      console.error(this.tags)
-      localEvent.clearLocalItem('skill_tags' + this.id)
+//      删除标签
+//      console.error(this.tags)
+//      localEvent.clearLocalItem('skill_tags' + this.id)
     },
     computed: {
       type () {

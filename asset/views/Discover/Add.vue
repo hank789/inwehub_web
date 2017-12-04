@@ -31,7 +31,7 @@
         <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
           <!--<use xlink:href="#icon-icon-test1"></use>-->
         <!--</svg>-->
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selecttags')">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selecttags?from=discover')">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
@@ -249,11 +249,12 @@
     mounted () {
       this.textareaBlur()
       autoTextArea()
-      var tag = localEvent.getLocalItem('skill_tags' + this.id)
+      var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
       }
-      localEvent.clearLocalItem('skill_tags' + this.id)
+//      删除标签；
+//       localEvent.clearLocalItem('skill_tags' + this.id)
     },
     updated () {
 //      console.error(currentUser)

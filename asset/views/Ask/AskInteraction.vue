@@ -8,10 +8,9 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category"><span class="tip">问题分类</span>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          {{ type ? type.split(':')[0] : '选择'
-          }}
-
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags?from=interaction')">
+          <span  v-if="this.tags.length">已选择</span>
+          <span  v-else>选择</span>
         </button>
       </div>
 
@@ -67,9 +66,14 @@
   import pay from '../../components/pay/pay.vue'
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
+  import localEvent from '../../stores/localStorage'
 
   const Ask = {
     data: () => ({
+      id: currentUser.user_id,
+      tags: [],
       money: 0,
       payItems: [],
       uid: 0,
@@ -96,6 +100,12 @@
       window.mui.init()
 
       this.textareaBlur()
+
+      //      取标签；
+      var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
+      for (var i in tag) {
+        this.tags = this.tags.concat(tag[i].value)
+      }
     },
     computed: {
       type () {

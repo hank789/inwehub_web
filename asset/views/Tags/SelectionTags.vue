@@ -83,17 +83,36 @@
             this.skill_tags.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('skill_tags' + this.id, this.skill_tags)
-        window.mui.toast('删除成功')
+        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+          localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+          window.mui.toast('删除成功')
+        } else {
+          return false
+        }
       },
       // 添加擅长标签；
       addSkillTag (val, text) {
-        var list = {
-          value: val,
-          text: text
-        }
-        this.skill_tags = this.skill_tags.concat(list)
-        localEvent.setLocalItem('skill_tags' + this.id, this.skill_tags)
+        for (var i = 0; i < this.skill_tags.length; i++) {
+          if (this.skill_tags[i].text === text) {
+            console.error(this.skill_tags[i].text === text)
+            window.mui.toast('已经添加')
+            return
+          }
+            console.error("ok")
+            var list = {
+              value: val,
+              text: text
+            }
+            this.skill_tags = this.skill_tags.concat(list)
+//            if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+//              localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+//              window.mui.toast('添加成功')
+//              return
+//            } else {
+//              return false
+//            }
+          }
+//        }
         postRequest('profile/addSkillTag', {
           tags: [val]
         }).then(response => {
@@ -103,21 +122,6 @@
             window.mui.back()
             return
           }
-
-          var data = []
-          for (var i = 0; i < this.skill_tags.length; i++) {
-            data.push(this.skill_tags[i].text)
-          }
-
-          // 判断是否已经添加；
-          if (data.indexOf(text) > -1) {
-            // 有重复；
-            window.mui.toast('已经添加')
-          } else {
-            // 无重复；
-            //  mui.toast("添加成功");
-          }
-          this.loading = 0
         })
       },
       // 申请添加擅长标签；
@@ -170,7 +174,11 @@
       }
     },
     mounted () {
-//      this.skill_tags = localEvent.getLocalItem('skill_tags' + this.id)
+      if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+        this.skill_tags = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id)
+      } else {
+        return false
+      }
     }
   }
 </script>
