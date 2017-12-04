@@ -123,7 +123,8 @@
         }],
         question: {
           status: 0,
-          created_at: ''
+          created_at: '',
+          tags: []
         },
         feedback: {}
       },
@@ -386,7 +387,6 @@
     created () {
       // showInwehubWebview();
       this.getData()
-      console.error(this.answer.question)
     }
   }
   export default AnswerDetail

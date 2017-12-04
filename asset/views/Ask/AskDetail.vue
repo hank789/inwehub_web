@@ -7,7 +7,7 @@
 
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
-      <div class="tags" v-if="ask.question.tags.length">
+      <div class="tags" v-if="ask.question.tags">
         <p v-for="(item, index) in ask.question.tags">{{item.name}}</p>
       </div>
 
@@ -85,7 +85,10 @@
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: ''},
+        question: {
+          created_at: '',
+          tags: []
+        },
         feedback: {
           rate_star: 0
         },

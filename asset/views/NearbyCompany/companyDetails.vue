@@ -12,7 +12,7 @@
         <img :src="datailList.logo" />
       </div>
       <ul class="information">
-        <li @tap.stop.prevent="getDistance(datailList.distance)">距离我< {{datailList.distance}}</li>
+        <li>距离我< {{datailList.distance_format}}</li>
         <li>{{datailList.name}}</li>
         <li>
           <span v-for="(item, index) in datailList.tags">{{item}} <i></i></span>
@@ -100,8 +100,8 @@
     },
     methods: {
       refreshPageData () {
-        this.companyInfo()
         this.id = this.$route.params.id
+        this.companyInfo()
       },
       toAvatar (uuid) {
         if (!uuid) {

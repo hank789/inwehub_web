@@ -28,6 +28,7 @@
       <!--搜索列表-->
       <RefreshList
         v-model="list"
+        v-if="dataList != null"
         :api="'company/nearbySearch'"
         :pageMode="true"
         :prevOtherData="dataList"
