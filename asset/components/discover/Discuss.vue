@@ -72,13 +72,25 @@
       list: []
     }),
     props: {
-      submissionSlug: {
+      listApi: {
         type: String,
         default: ''
       },
-      submissionId: {
-        type: Number,
-        default: 0
+      listParams: {
+        type: Object,
+        default: () => {
+          return null
+        }
+      },
+      storeApi: {
+        type: String,
+        default: ''
+      },
+      storeParams: {
+        type: Object,
+        default: () => {
+          return null
+        }
       }
     },
     mounted () {
@@ -120,8 +132,9 @@
       },
       sendMessage (message) {
         var parentId = this.commentTarget.parentId
+        var params = Object.assign({body: message, parent_id: parentId}, this.storeParams)
 
-        postRequest(`article/comment-store`, {'submission_id': this.submissionId, body: message, parent_id: parentId}).then(response => {
+        postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -177,11 +190,11 @@
         this.getList()
       },
       getList () {
-        if (!this.submissionSlug) {
-          console.log('submissionSlug:' + this.submissionSlug)
-          return
+        if (!this.listParams) {
+          return false
         }
-        postRequest(`article/comments`, {'submission_slug': this.submissionSlug, sort: 'hot', page: this.page}).then(response => {
+        var params = Object.assign({page: this.page}, this.listParams)
+        postRequest(this.listApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -205,9 +218,8 @@
       }
     },
     watch: {
-      'submissionSlug' (newVal, oldVal) {
-        if (newVal) {
-          console.log('submissionSlug new' + newVal)
+      'listParams' (newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
           this.resetList()
         }
       }

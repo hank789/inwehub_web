@@ -65,8 +65,12 @@
       <div class="river"></div>
       <!--评论部分-->
       <Discuss
-        :submissionSlug="detail.slug"
-        :submissionId="detail.id"
+        v-if="detail.slug"
+        :listApi="'article/comments'"
+        :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+        :storeApi="'article/comment-store'"
+        :storeParams="{'submission_id': detail.id}"
+
         @comment="comment"
         @commentFinish="commentFinish"
         ref="discuss"
