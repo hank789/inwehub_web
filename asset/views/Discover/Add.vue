@@ -31,7 +31,7 @@
         <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
           <!--<use xlink:href="#icon-icon-test1"></use>-->
         <!--</svg>-->
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selecttags?from=discover')">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
@@ -95,6 +95,10 @@
       uploadImage
     },
     methods: {
+      totags () {
+        this.$router.pushPlus('/selecttags?from=discover')
+        localEvent.setLocalItem('discover_description' + this.id, this.description)
+      },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
       },
@@ -252,6 +256,7 @@
     mounted () {
       this.textareaBlur()
       autoTextArea()
+      this.description = localEvent.getLocalItem('discover_description' + this.id)
       var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
