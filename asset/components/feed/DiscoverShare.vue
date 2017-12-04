@@ -31,7 +31,7 @@
     <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
       <div class="component-dianzanList" v-if="data.feed.support_number"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
-        </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span>等{{data.feed.support_number}}人
+        </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span><span v-if="data.feed.support_number > data.feed.supporter_list.length">等{{data.feed.support_number}}人</span>
       </div>
       <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
       <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
@@ -48,7 +48,7 @@
           ></DiscussReplySimple>
 
         </template>
-        <div class="more" @tap.stop.prevent="toDetail(data.url)">查看全部{{data.feed.comment_number}}条评论</div>
+        <div class="more" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.comment_number > 8">查看全部{{data.feed.comment_number}}条评论</div>
       </div>
     </div>
     <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">
