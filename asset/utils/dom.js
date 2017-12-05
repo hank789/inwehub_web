@@ -34,7 +34,7 @@ function textToLink (domEle) {
   }
 
   var re = /(https?:\/\/[^\s<]+)/g
-  domEle.innerHTML = text.replace(re, "<a target='_blank' href='$1'>$1</a>")
+  domEle.innerHTML = text.replace(re, "<a target='_blank' class='text-content' href='$1'>$1</a>")
 }
 
 function textToLinkHtml (text) {
@@ -46,7 +46,7 @@ function textToLinkHtml (text) {
     return text
   }
   var re = /(https?:\/\/[^\s<]+)/g
-  return text.replace(re, "<a target='_blank' href='$1'>$1</a>")
+  return text.replace(re, "<a target='_blank' class='text-content' href='$1'>$1</a>")
 }
 
 export {
