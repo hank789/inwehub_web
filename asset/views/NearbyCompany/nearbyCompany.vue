@@ -88,7 +88,8 @@
           longitude: position.longt,
           latitude: position.lat
         }
-        console.log('dataList:' + JSON.stringify(this.dataList))
+        this.longt = position.longt
+        this.lat = position.lat
       })
     },
     methods: {
