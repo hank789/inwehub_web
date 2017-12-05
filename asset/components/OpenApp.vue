@@ -65,7 +65,7 @@
 
       if (this.isWeixin) {
         // 深度链接
-        Mlink = new Mlink({
+        Mlink = new window.Mlink({
           mlink: mlink + '?name=2', // 短链地址
           button: document.querySelector('a#btnOpenAppWeixin'),
           params: {url: 'test'},
