@@ -76,9 +76,16 @@
 
 
       <Discuss
-        :answerId="answer.answers[0] ? answer.answers[0].id:0"
+        :listApi="'answer/commentList'"
+        :listParams="{'answer_id': answer.answers[0] ? answer.answers[0].id:0}"
+        :storeApi="'answer/comment'"
+        :storeParams="{'answer_id': answer.answers[0] ? answer.answers[0].id:0}"
+
+        @comment="comment"
+        @commentFinish="commentFinish"
+
         ref="discuss"
-        v-show="answer.answers[0] && answer.answers[0].content"
+        v-if="answer.answers[0] && answer.answers[0].content"
       ></Discuss>
 
 
@@ -97,6 +104,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -106,10 +115,11 @@
   import localEvent from '../../stores/localStorage'
   import Question from '../../components/question-detail/Question.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Discuss from '../../components/discover/Discuss.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import { alertAnswerRepeat } from '../../utils/dialogList'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   import CountDown from 'vue2-countdown'
 
@@ -148,12 +158,28 @@
       Question,
       Answer,
       Discuss,
-      Share
+      Share,
+      commentTextarea
     },
     computed: {},
     mounted () {
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
+      commentNumAdd () {
+        if (this.answer && this.answer.answers[0]) {
+          this.answer.answers[0].comment_number++
+        }
+      },
       shareSuccess () {},
       shareFail () {},
       refreshPageData () {
