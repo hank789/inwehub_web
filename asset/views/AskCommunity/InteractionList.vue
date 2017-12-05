@@ -33,7 +33,7 @@
               <li class="mui-table-view-cell" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
                 <div class="second mui-ellipsis-2">{{ item.description }}</div>
                 <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
-                <div class="respondent mui-ellipsis">
+                <div class="respondent mui-ellipsis" v-if="item.answer_num">
                   回答者：<span  v-for="(answer, index) in item.answer_user_list" @tap.stop.prevent="toAvatar(answer.uuid)">{{answer.name}}<i>,</i></span>
                 </div>
               </li>
