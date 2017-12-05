@@ -7,7 +7,7 @@
     </header>
 
 
-    <div class="mui-content absolute" v-show="!this.loading">
+    <div class="mui-content absolute">
 
       <div class="menu">
         <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -20,9 +20,9 @@
         </div>
       </div>
 
-      <div class="mui-scroll-wrapper" id="refreshContainer_majorlist">
-        <div class="mui-scroll">
-          <div class="hotquiz">
+          <!--推荐问答-->
+
+          <div class="recommendlist" >
             <div class="quiz">
               <p>
                 <span>热门</span>
@@ -30,81 +30,47 @@
                 <i class="bot"></i>
               </p>
             </div>
-
-            <ul class="hotAnswer_b">
-              <li v-for="(hot, index) in hotList" @tap.stop.prevent="toDetail(hot.id)">
-                <p class="mui-ellipsis-2">{{hot.description}}</p>
-                <div class="hotAnswer_d">
-                  <p>
-                    <img :src="hot.answer_user_avatar_url"/>
-                    <svg class="icon" aria-hidden="true" v-if="hot.answer_user_is_expert == 1">
-                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                    </svg>
-                  </p>
-                  <p class="mui-ellipsis">
-                    <span>回答者：{{hot.answer_username}}</span>
-                    <!--<span>{{hot.answer_user_title}}</span>-->
-                    <!--<span>{{hot.answer_user_company}}</span>-->
-                  </p>
-                </div>
-                <i class="bot" v-show="index != hotList.length-1"></i>
-              </li>
-
-            </ul>
-          </div>
-          <!--推荐问答-->
-
-          <div class="river"></div>
-
-          <div class="recommendlist" v-show="!this.loading">
-            <div class="recommend">
-              <p>
-                <span>推荐</span>
-                <span>
-
-            	   	  	<a @tap.stop.prevent="">{{ type ? type.split(':')[0] : '全部'}}</a>
-            	   	  	<svg class="icon" aria-hidden="true">
-					  <use xlink:href="#icon-fenleichakan"></use>
-					</svg>
-					<i></i>
-            	   	  </span>
-                <i class="bot"></i>
-              </p>
-            </div>
-
-            <div class="container" v-show="recommendList.length === 0">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zanwushuju"></use>
-              </svg>
-              <p>暂时还没有数据呀～</p>
-            </div>
-
             <div>
               <ul class="recommend_b">
-                <li v-for="(list, index) in recommendList" @tap.stop.prevent="toDetail(list.id)">
-                  <p class="mui-ellipsis-2">{{list.description}}</p>
+                <li @tap.stop.prevent="toDetail()">
                   <div class="recommend_d">
                     <p>
-                      <img :src="list.answer_user_avatar_url"/>
-                      <svg class="icon" aria-hidden="true" v-if="list.answer_user_is_expert == 1">
+                      <img src="../../statics/images/guide_01.png"/>
+                      <svg class="icon" aria-hidden="true" >
                         <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                       </svg>
                     </p>
                     <p class="mui-ellipsis">
-                      <span>回答者：{{list.answer_username}}</span>
-                      <!--<span>{{list.answer_user_title}}</span>-->
-                      <!--<span>{{list.answer_user_company}}</span>-->
+                      李专家回答了专业问答
                     </p>
                   </div>
-                  <i class="bot" v-show="index != recommendList.length-1"></i>
+                  <p class="mui-ellipsis-2">最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</p>
+                  <p class="problem_details">
+                    <span>80%好评</span>
+                    <span>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-dianzan1"></use>
+                      </svg>
+                      <i>23232</i>
+                    </span>
+                    <span>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-pinglun1"></use>
+                      </svg>
+                      <i>23232</i>
+                    </span>
+                  </p>
+                  <p class="problem_state">1元看答案／看评论</p>
+                  <p class="problem_state">查看回答</p>
+                  <!--v-show="index != recommendList.length-1" -->
+                  <i class="bot"></i>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -118,116 +84,17 @@
       loading: true
     }),
     computed: {
-      type () {
-        return this.$store.state.askType.selected ? this.$store.state.askType.selected : ''
-      },
-      bottomId () {
-        var length = this.recommendList.length
-        if (length) {
-          return this.recommendList[length - 1].id
-        }
-        return 0
-      }
     },
     components: {},
     methods: {
-      downRefresh () {
-        this.getHotList(() => {
-          this.getRecommendList()
-        })
-      },
-      loadMore () {
-        console.log('loadMore')
-        this.busy = true
-        this.getNextList()
-      },
       toDetail (id) {
         this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
       selectType (typeText) {
         this.$router.push('/ask/type?type=majorlist')
-      },
-      // 热门回答的列表；
-      getHotList (callback = () => {}) {
-        postRequest(`question/majorHot`, {}).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          // 请求成功的操作
-          if (response.data.data) {
-            this.hotList = response.data.data
-          }
-          callback()
-        })
-      },
-      getRecommendList () {
-        postRequest(`question/majorList`, {
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-
-          if (response.data.data) {
-            this.recommendList = response.data.data
-          }
-          // 没有数据的显示框不显示；
-          this.loading = false
-          window.mui('#refreshContainer_majorlist').pullRefresh().endPulldownToRefresh() // refresh completed
-        })
-      },
-      getNextList () {
-        postRequest(`question/majorList`, {
-          bottom_id: this.bottomId,
-          tag_id: this.type.split(':')[1]
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-
-          if (response.data.data.length > 0) {
-            this.recommendList = this.recommendList.concat(response.data.data)
-          }
-
-          if (response.data.data.length < 10) {
-            this.busy = true
-          } else {
-            this.busy = false
-          }
-          this.loading = false
-          window.mui('#refreshContainer_majorlist').pullRefresh().endPullupToRefresh(this.busy)
-        })
       }
     },
     mounted () {
-      window.mui.init({
-        pullRefresh: {
-          container: '#refreshContainer_majorlist', // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-          down: {
-            auto: true, // 可选,默认false.首次加载自动下拉刷新一次
-            contentdown: '下拉可以刷新', // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: '释放立即刷新', // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: '正在刷新...', // 可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.downRefresh // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-          },
-          up: {
-            contentrefresh: '正在加载...',
-            contentnomore: '没有更多数据了', // 可选，请求完毕若没有更多数据时显示的提醒内容；
-            callback: this.getNextList
-          }
-        }
-      })
     }
   }
   export default MajorList
@@ -263,12 +130,6 @@
 
   /*提问样式*/
 
-  .hotquiz {
-    width: 100%;
-    overflow: hidden;
-    background: #FFFFFF;
-  }
-
   .quiz {
     width: 92%;
     height: 44px;
@@ -296,96 +157,6 @@
     border: none;
   }
 
-  /*问答列表*/
-
-  .hotAnswer_b {
-    width: 90%;
-    margin-left: 5%;
-    /*height: 200px;*/
-    overflow: hidden;
-  }
-
-  .hotAnswer_b li {
-    width: 100%;
-    overflow: hidden;
-    padding: 12px 0;
-    position: relative;
-  }
-
-  .hotAnswer_b li > p {
-    font-size: 14px;
-    color: #444444;
-  }
-
-  .hotAnswer_d {
-    width: 100%;
-    height: 32px;
-    margin-top: 4.5px;
-  }
-
-  .hotAnswer_d p {
-    float: left;
-  }
-
-  .hotAnswer_d p:nth-child(1) {
-    width: 32px;
-    height: 32px;
-    /*background: #CCCCCC;*/
-    position: relative;
-  }
-
-  .hotAnswer_d p:nth-child(1) > svg {
-    position: absolute;
-    font-size: 14px;
-    bottom: 0;
-    right: -4px;
-  }
-
-  .hotAnswer_d p:nth-child(1) > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  .hotAnswer_d p:nth-child(2) {
-    /*width: 340px;*/
-    height: 18px;
-    margin-top: 9px;
-    line-height: 18px;
-    /*background: #CCCCCC;*/
-  }
-
-  .hotAnswer_d p:nth-child(2) span:nth-child(1) {
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
-  }
-
-  .hotAnswer_d p:nth-child(2) span:nth-child(2) {
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
-  }
-
-  .hotAnswer_d p:nth-child(2) span:nth-child(3) {
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
-  }
 
   /*推荐问答*/
 
@@ -393,57 +164,6 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-  }
-
-  .recommend {
-    width: 92%;
-    height: 44px;
-    margin-left: 4%;
-    background: #FFFFFF;
-    position: relative;
-  }
-
-  .recommend span:nth-of-type(1) {
-    display: block;
-    font-size: 16px;
-    color: #444444;
-    line-height: 44px;
-    float: left;
-  }
-
-  .recommend span:nth-of-type(2) {
-    display: block;
-    width: 70%;
-    height: 44px;
-    float: right;
-    /*background: #CCCCCC;*/
-  }
-
-  .recommend span:nth-of-type(2) i {
-    float: right;
-    display: block;
-    width: 1px;
-    height: 15px;
-    background: #dbdbdb;
-    margin-top: 15px;
-    margin-right: 15px;
-  }
-
-  .recommend span:nth-of-type(2) svg {
-    float: right;
-    display: block;
-    font-size: 16px;
-    margin-top: 14px;
-    margin-right: 3px;
-    color: #03aef9;
-  }
-
-  .recommend span:nth-of-type(2) a {
-    float: right;
-    display: block;
-    height: 44px;
-    line-height: 44px;
-    color: #03aef9;
   }
 
   /*问答列表*/
@@ -462,15 +182,54 @@
     position: relative;
   }
 
-  .recommend_b li > p {
+  .recommend_b li > p:nth-of-type(1) {
     font-size: 14px;
     color: #444444;
+    margin-top: 5px;
+  }
+  .problem_details{
+    width:100%;
+    height:38px;
+    font-size: 13px;
+    line-height: 38px;
+  }
+  .problem_details span:nth-of-type(1){
+    color: #b4b4b6;
+    float:left;
+  }
+  .problem_details span:nth-of-type(2){
+    color:#808080;
+    float: right;
+  }
+  .problem_details span:nth-of-type(2) svg{
+    color:#808080;
+    font-size:18px;
+  }
+  .problem_details span:nth-of-type(3){
+    color:#808080;
+    float: right;
+    margin-right: 30px;
+
+  }
+  .problem_details span:nth-of-type(3) svg{
+    color:#808080;
+    font-size:16px;
+    margin-bottom: -2px;
+  }
+  .problem_state{
+    width:100%;
+    height:44px;
+    background: #03aef9;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 44px;
+    font-size:16px;
+    color: #f2f2f2;
   }
 
   .recommend_d {
     width: 100%;
     height: 32px;
-    margin-top: 4.5px;
   }
 
   .recommend_d p {
@@ -499,17 +258,17 @@
 
   .recommend_d p:nth-child(2) {
     /*width: 340px;*/
-    height: 18px;
-    margin-top: 9px;
-    line-height: 18px;
-    /*background: #CCCCCC;*/
+    height:32px;
+    line-height: 32px;
+    margin-left:8px;
+    font-size: 13px;
+    color: #808080;
   }
 
   .recommend_d p:nth-child(2) span:nth-child(1) {
     height: 15px;
     margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
+
     text-align: center;
     line-height: 15px;
     padding: 0 3%;
@@ -536,22 +295,6 @@
     padding: 0 3%;
   }
 
-  /*无数据的样式 */
-
-  .container {
-    text-align: center;
-    padding: 20px;
-  }
-
-  .container svg {
-    font-size: 60px;
-
-  }
-
-  .container p {
-    font-size: 12px;
-    color: #c8c8c8;
-  }
 
   /*滚动区域*/
 
@@ -559,41 +302,6 @@
     background-color: #fff;
   }
 
-  /***媒体查询*****/
-
-  @media screen and (min-width: 320px) {
-    .hotAnswer_d p:nth-child(2) {
-      width: 256px;
-    }
-
-    .recommend_d p:nth-child(2) {
-      width: 256px;
-    }
-
-  }
-
-  @media screen and (min-width: 375px) {
-
-    .hotAnswer_d p:nth-child(2) {
-      width: 305px;
-    }
-
-    .recommend_d p:nth-child(2) {
-      width: 256px;
-    }
-  }
-
-  @media screen and (min-width: 414px) {
-
-    .hotAnswer_d p:nth-child(2) {
-      width: 340px;
-    }
-
-    .recommend_d p:nth-child(2) {
-      width: 256px;
-    }
-
-  }
 
   .menu {
     position: relative;
@@ -627,11 +335,4 @@
     background-color: #009FE8;
   }
 
-  .mui-segmented-control {
-    background: #f3f4f6;
-  }
-
-  #refreshContainer_majorlist {
-    top: 50px;
-  }
 </style>
