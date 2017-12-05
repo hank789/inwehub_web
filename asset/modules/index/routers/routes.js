@@ -1341,6 +1341,18 @@ const routes = [
   //   }
   // },
   { // 附近企业companyDetails.vue
+    path: '/selectCompany',
+    name: 'selectCompany',
+    meta: {
+      title: '企业',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Account/selectCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近企业companyDetails.vue
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
