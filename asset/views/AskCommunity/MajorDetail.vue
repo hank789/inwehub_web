@@ -32,11 +32,17 @@
           </div>
         </div>
 
-
         <Discuss
-          :answerId="ask.answers[0] ? ask.answers[0].id:0"
+          :listApi="'answer/commentList'"
+          :listParams="{'answer_id': ask.answers[0] ? ask.answers[0].id:0}"
+          :storeApi="'answer/comment'"
+          :storeParams="{'answer_id': ask.answers[0] ? ask.answers[0].id:0}"
+
+          @comment="comment"
+          @commentFinish="commentFinish"
+
           ref="discuss"
-          v-show="ask.answers[0] && ask.answers[0].content"
+          v-if="ask.answers[0] && ask.answers[0].content"
         ></Discuss>
 
        <!--返回问答社区-->
@@ -88,6 +94,8 @@
       @fail="shareFail"
     ></Share>
 
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
   </div>
 </template>
 
@@ -96,13 +104,14 @@
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/question-detail/Question.vue'
-  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
   import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import userAbility from '../../utils/userAbility'
   import { autoTextArea } from '../../utils/plus'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   const AskDetail = {
     data: () => ({
@@ -132,7 +141,8 @@
       Discuss,
       Answer,
       Comment,
-      Share
+      Share,
+      commentTextarea
     },
     computed: {
       answer () {
@@ -140,6 +150,19 @@
       }
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
+      commentNumAdd () {
+        this.answer.comment_number++
+      },
       refreshPageData () {
         console.log('refreshPageData')
         this.loading = 1

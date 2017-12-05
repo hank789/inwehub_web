@@ -386,8 +386,9 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
       // var pathUrl = process.env.READHUB_URL + pathUrl + '/webview';
 
       // url = '/discover/iframe?redirect_url=' + pathUrl + '?' + encodeURIComponent('from=h5')
-      router.push(pathUrl)
+      // router.push(pathUrl)
       // window.location.href = url
+      window.open(url)
     }
   } else {
     router.pushReadHubPage(url)

@@ -43,11 +43,19 @@
         :timelines="timelines"
       ></Timeline>
 
-      <Discuss v-show="ask.question.status==6||ask.question.status==7"
-               :answerId="ask.answers[0] ? ask.answers[0].id:0"
-               ref="discuss"
-      >
-      </Discuss>
+      <Discuss
+        class="messageWrapper"
+        :listApi="'answer/commentList'"
+        :listParams="{'answer_id': ask.answers[0] ? ask.answers[0].id:0}"
+        :storeApi="'answer/comment'"
+        :storeParams="{'answer_id': ask.answers[0] ? ask.answers[0].id:0}"
+
+        @comment="comment"
+        @commentFinish="commentFinish"
+
+        ref="discuss"
+        v-if="ask.question.status==6||ask.question.status==7"
+      ></Discuss>
 
 
     </div>
@@ -63,6 +71,8 @@
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
+
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
   </div>
 </template>
 
@@ -72,7 +82,7 @@
 
   import UserInfo from '../../components/question-detail/UserInfo.vue'
   import Question from '../../components/question-detail/Question.vue'
-  import Discuss from '../../components/question-detail/Discuss.vue'
+  import Discuss from '../../components/discover/Discuss.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Statistics from '../../components/question-detail/Statistics.vue'
   import Timeline from '../../components/question-detail/Timeline.vue'
@@ -80,6 +90,7 @@
   import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   const AskDetail = {
     data: () => ({
@@ -116,7 +127,8 @@
       Timeline,
       Answer,
       Comment,
-      Share
+      Share,
+      commentTextarea
     },
     computed: {
       title () {
@@ -133,6 +145,21 @@
       }
     },
     methods: {
+      sendMessage (message) {
+        this.$refs.discuss.sendMessage(message)
+      },
+      comment (commentTargetName) {
+        this.$refs.ctextarea.comment(commentTargetName)
+      },
+      commentFinish () {
+        this.commentNumAdd()
+        this.$refs.ctextarea.finish()
+      },
+      commentNumAdd () {
+        if (this.ask && this.ask.answers[0]) {
+          this.ask.answers[0].comment_number++
+        }
+      },
       shareSuccess () {
       },
       shareFail () {
@@ -243,4 +270,7 @@
     padding: 0 8px;
   }
 
+  .messageWrapper{
+    padding-top:10px;
+  }
 </style>
