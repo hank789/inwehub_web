@@ -143,7 +143,7 @@ function autoTextArea () {
  * 获取index.html路径
  */
 function getIndexPath () {
-  if (window.isLocalEnv) {
+  if (window.isLocalEnv && process.env.NODE_ENV === 'development') {
     return 'index.html'
   } else {
     return '/public/index.html'
