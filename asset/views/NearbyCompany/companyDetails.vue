@@ -355,6 +355,7 @@
   .Relevant_detail p:nth-of-type(2){
     font-size:13px;
     color:#b4b4b6;
+    width:90%;
   }
   /*关注*/
   .Relevant_follow{
@@ -365,6 +366,7 @@
     line-height:27px;
     border-radius: 50px;
     text-align: center;
+    font-size: 14px;
   }
   .Relevant_empty{
     width: 64px;
@@ -374,6 +376,7 @@
     line-height:27px;
     border-radius: 50px;
     text-align: center;
+    font-size: 14px;
   }
   button{
     width:100%;
