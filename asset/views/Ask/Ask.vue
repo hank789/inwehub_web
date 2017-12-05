@@ -160,9 +160,13 @@
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
       }
-//      删除标签
-//      console.error(this.tags)
-//      localEvent.clearLocalItem('skill_tags' + this.id)
+//      弹窗
+      var font = '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
+                  '</p>' +
+                  '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
+                  '专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。' +
+                  '</p>'
+      window.mui.alert(font, '什么是专业问答？', function () {}, 'div')
     },
     computed: {
       type () {
