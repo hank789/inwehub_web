@@ -27,10 +27,8 @@
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </p>
-                <p>
-                  <span class="mui-ellipsis">{{ item.owner.name }}</span>
-                  <span>{{ item.created_at }}</span>
-                </p>
+                <p class="mui-ellipsis">{{ item.owner.name }}</p>
+                <p>{{ item.created_at }}</p>
               </div>
               <div class="message_b textToLink" v-html="textToLink(item.content)"></div>
 
@@ -340,14 +338,15 @@
     float: left;
     margin-left: 10px;
     height: 32px;
+    line-height: 32px;
   }
 
-  .message_t p:nth-child(2) span {
-    display: block;
-    width: 100%;
-    height: 50%;
+  .message_t p:nth-child(3) {
+    float: right;
+    height:100%;
+    line-height: 32px;
     font-size: 13px;
-    color: #444444;
+    color: #c8c8c8;
   }
 
   .message_t p:nth-child(2) span:nth-child(2) {
