@@ -31,7 +31,6 @@
       :pageMode="true"
       :prevOtherData="{page: 1,id:this.id}"
       :nextOtherData="{}"
-      :isShowUpToRefreshDescription="false"
       class="listWrapper">
 
         <!-- 相关人员-->

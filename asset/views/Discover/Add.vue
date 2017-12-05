@@ -96,7 +96,7 @@
     },
     methods: {
       totags () {
-        this.$router.pushPlus('/selecttags?from=discover')
+        this.$router.push('/selecttags?from=discover')
         localEvent.setLocalItem('discover_description' + this.id, this.description)
       },
       jumpToLinkMode: function () {

@@ -393,8 +393,9 @@
 
   /*滚动区域*/
 
-  .mui-wechat #pullrefresh {
-    margin-top: 0px;
+  .mui-content .menu ~ #pullrefresh {
+    top:45px;
+    bottom: 41px;
   }
 
   .mui-content {
