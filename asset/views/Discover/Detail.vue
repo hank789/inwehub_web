@@ -305,7 +305,7 @@
   }
   .contentWrapper .tags{
     color:rgb(33,77,120);
-    margin-left: 6px;
+    margin-right: 6px;
   }
   .newestList{
     padding:10px 15px 0;
