@@ -1289,6 +1289,10 @@ ul.normal li:before {
   height:auto !important;
 }
 
+.immersed0 .mui-bar{
+  height:44px !important;
+}
+
 
 .hideImmersedWrapper #immersedWrapper{
   display: none;

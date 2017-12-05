@@ -8,7 +8,7 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category"><span class="tip">问题分类</span>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.pushPlus('/selecttags?from=ask')">
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="$router.push('/selecttags?from=ask')">
           <span  v-if="this.tags.length">已选择</span>
           <span  v-else>选择</span>
         </button>
@@ -322,7 +322,7 @@
           return
         }
 
-        if (!this.description) {
+        if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
           return
         }
@@ -403,7 +403,7 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-        if (!this.type) {
+        if (!this.tags.length) {
           window.mui.toast('请选择问题分类')
           return
         }
