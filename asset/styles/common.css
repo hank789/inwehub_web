@@ -1285,13 +1285,10 @@ ul.normal li:before {
   top:0;
 }
 
-.mui-bar{
-  height:auto !important;
-}
+/*.mui-bar{*/
+  /*height:auto !important;*/
+/*}*/
 
-.immersed0 .mui-bar{
-  height:44px !important;
-}
 
 
 .hideImmersedWrapper #immersedWrapper{
