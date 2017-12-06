@@ -19,55 +19,59 @@
           </a>
         </div>
       </div>
-
+      <div class="recommendlist" >
+        <div class="quiz">
+          <p>
+            <span>热门</span>
+            <button @tap.stop.prevent="$router.pushPlus('/ask')">提问</button>
+            <i class="bot"></i>
+          </p>
+        </div>
+      </div>
           <!--推荐问答-->
-
-          <div class="recommendlist" >
-            <div class="quiz">
-              <p>
-                <span>热门</span>
-                <button @tap.stop.prevent="$router.pushPlus('/ask')">提问</button>
-                <i class="bot"></i>
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'question/majorList'"
+        :prevOtherData="{tag_id :0}"
+        :nextOtherData="{tag_id :0}"
+        class="listWrapper">
+          <ul class="recommend_b" v-for="(item, index) in list">
+            <li @tap.stop.prevent="toDetail(item.id)">
+              <div class="recommend_d">
+                <p>
+                  <img :src="item.answer_user_avatar_url"/>
+                  <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </p>
+                <p class="mui-ellipsis">
+                  {{ item.hide ? item.answer_username : '匿名'}}
+                </p>
+              </div>
+              <p class="mui-ellipsis-2">{{item.description}}</p>
+              <p class="problem_details">
+                <span v-if="item.average_rate" class="average_rate">{{item.average_rate}}好评</span>
+                <span class="support_number">
+                  <svg class="icon" aria-hidden="true" >
+                    <use xlink:href="#icon-dianzan1"></use>
+                  </svg>
+                  <i>{{item.comment_number}}</i>
+                </span>
+                <span class="comment_number">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-pinglun1"></use>
+                  </svg>
+                  <i>{{item.comment_number}}</i>
+              </span>
               </p>
-            </div>
-            <div>
-              <ul class="recommend_b">
-                <li @tap.stop.prevent="toDetail()">
-                  <div class="recommend_d">
-                    <p>
-                      <img src="../../statics/images/guide_01.png"/>
-                      <svg class="icon" aria-hidden="true" >
-                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                      </svg>
-                    </p>
-                    <p class="mui-ellipsis">
-                      李专家回答了专业问答
-                    </p>
-                  </div>
-                  <p class="mui-ellipsis-2">最近开始研究S4 HANA，请问专家1610版本在PP主数据上有什么样的新变化？</p>
-                  <p class="problem_details">
-                    <span>80%好评</span>
-                    <span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-dianzan1"></use>
-                      </svg>
-                      <i>23232</i>
-                    </span>
-                    <span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-pinglun1"></use>
-                      </svg>
-                      <i>23232</i>
-                    </span>
-                  </p>
-                  <p class="problem_state">1元看答案／看评论</p>
-                  <p class="problem_state">查看回答</p>
-                  <!--v-show="index != recommendList.length-1" -->
-                  <i class="bot"></i>
-                </li>
-              </ul>
-            </div>
-          </div>
+              <p class="problem_state" v-if="!item.is_pay_for_view">1元看答案／看评论</p>
+              <p class="problem_state" v-else>查看回答</p>
+              <!--v-show="index != recommendList.length-1" -->
+              <i class="bot"></i>
+            </li>
+          </ul>
+      </RefreshList>
         </div>
       </div>
 
@@ -75,17 +79,19 @@
 
 <script>
   import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
+  import AnswerMajor from '../../components/feed/AnswerMajor'
 
   const MajorList = {
     data: () => ({
-      hotList: [],
-      recommendList: [],
-      busy: false,
-      loading: true
+      list: []
     }),
     computed: {
     },
-    components: {},
+    components: {
+      RefreshList,
+      AnswerMajor
+    },
     methods: {
       toDetail (id) {
         this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
@@ -193,25 +199,25 @@
     font-size: 13px;
     line-height: 38px;
   }
-  .problem_details span:nth-of-type(1){
+  .problem_details .average_rate{
     color: #b4b4b6;
     float:left;
   }
-  .problem_details span:nth-of-type(2){
+  .problem_details .support_number{
     color:#808080;
     float: right;
   }
-  .problem_details span:nth-of-type(2) svg{
+  .problem_details .support_number svg{
     color:#808080;
     font-size:18px;
   }
-  .problem_details span:nth-of-type(3){
+  .problem_details .comment_number{
     color:#808080;
     float: right;
     margin-right: 30px;
 
   }
-  .problem_details span:nth-of-type(3) svg{
+  .problem_details .comment_number svg{
     color:#808080;
     font-size:16px;
     margin-bottom: -2px;
@@ -306,6 +312,7 @@
   .menu {
     position: relative;
     z-index: 7;
+    background: #f3f4f6;
   }
 
   .list-empty .menu {
@@ -334,5 +341,9 @@
     content: '';
     background-color: #009FE8;
   }
+  .listWrapper{
+    top:90px;
+  }
 
 </style>
+
