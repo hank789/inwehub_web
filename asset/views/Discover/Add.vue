@@ -256,7 +256,14 @@
     mounted () {
       this.textareaBlur()
       autoTextArea()
-      this.description = localEvent.getLocalItem('discover_description' + this.id)
+      var placeholder = localEvent.getLocalItem('discover_description' + this.id)
+      if (placeholder.length) {
+        this.description = placeholder
+        return
+      } else {
+        this.description = this.descPlaceholder
+      }
+
       var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
       for (var i in tag) {
         this.tags = this.tags.concat(tag[i].value)
