@@ -159,14 +159,18 @@ function openVendorUrl (containerDiv) {
   if (!containerDiv.querySelectorAll) {
     return
   }
-  var aList = containerDiv.querySelectorAll('a[href^="http"]')
+  var aList = containerDiv.querySelectorAll('.vendorUrl[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
     aList[i].addEventListener('tap', function (e) {
+      this.href = this.getAttribute('href')
+      console.log('openVendorUrl : ' + this.href)
       e.preventDefault()
       e.stopPropagation()
       if (window.plus) {
+        console.log('plus 打开')
         window.plus.runtime.openURL(this.href)
       } else {
+        console.log('window.open 打开')
         window.open(this.href)
       }
     }, false)

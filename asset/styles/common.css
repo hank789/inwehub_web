@@ -1294,3 +1294,12 @@ ul.normal li:before {
 .hideImmersedWrapper #immersedWrapper{
   display: none;
 }
+
+
+a {
+  color: #235280;
+}
+
+.vendorUrl{
+  color: #235280;
+}
