@@ -105,4 +105,18 @@
     width:44px;
     height:44px;
   }
+
+  .container-avatarAndText{
+    height:44px;
+    line-height: 44px;
+    margin-bottom:0 !important;
+  }
+
+  .middle-width{
+    height:44px;
+  }
+
+  .middle-width .component-follow{
+    height:44px;
+  }
 </style>

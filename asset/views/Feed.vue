@@ -14,7 +14,7 @@
       </div>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content feedWrapper" v-show="!loading">
 
       <RefreshList
         ref="RefreshList"
@@ -55,7 +55,9 @@
             <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
             <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"></SubmitReadhubAriticle>
+            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+             @comment="comment"
+            ></SubmitReadhubAriticle>
 
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
@@ -336,5 +338,15 @@
   .headerWrapper{
     height:45px;
     overflow: hidden;
+  }
+</style>
+
+<style>
+  .feedWrapper .container-avatarAndText{
+    margin-bottom:5px;
+  }
+
+  .feedWrapper .iconPenglunWrapper{
+    margin-right:15px;
   }
 </style>
