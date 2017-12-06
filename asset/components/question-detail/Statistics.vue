@@ -52,11 +52,12 @@
   </div>
     <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
     <div class="component-dianzanList" v-if="supportNum">
+      <i class="bot"></i>
       <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-dianzan1"></use>
       </svg>
-      <span v-for="(item, index) in answerList.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{supportNum}}人
-      <i class="bot"></i>
+      <span v-for="(item, index) in answerList.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span><span v-if="supportNum > answerList.supporter_list.length">等{{supportNum}}人</span>
+
     </div>
     <!--查看全部回答-->
     <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answerList.uuid)"> 查看Ta的全部回答 ></div>
@@ -292,7 +293,7 @@
     margin-top: 8px;
     position: relative;
   }
-  .component-dianzanList span{
+  .component-dianzanList span:nth-of-type(1){
     font-size:13px;
     color:#03aef9;
   }
