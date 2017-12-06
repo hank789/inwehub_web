@@ -95,4 +95,14 @@
   .right{
     max-width:40%;
   }
+
+  .left .avatar{
+    width:44px;
+    height:44px;
+  }
+
+  .right .avatar{
+    width:44px;
+    height:44px;
+  }
 </style>
