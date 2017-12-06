@@ -343,7 +343,7 @@
 
 <style>
   .feedWrapper .container-avatarAndText{
-    margin-bottom:5px;
+    margin-bottom:10px;
   }
 
   .feedWrapper .iconPenglunWrapper{
