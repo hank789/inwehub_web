@@ -259,7 +259,6 @@
       var placeholder = localEvent.getLocalItem('discover_description' + this.id)
       if (placeholder.length) {
         this.description = placeholder
-        return
       } else {
         this.description = this.descPlaceholder
       }
