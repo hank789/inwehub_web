@@ -41,6 +41,12 @@
         this.targetUsername = targetUsername
 
         if (this.showTextarea) {
+          console.log('bind comment事件')
+          window.document.addEventListener('tap', (e) => {
+            console.log('document tap 事件被触发')
+            this.showTextarea = false
+          }, false)
+
           setTimeout(() => {
             document.getElementById('commentTextarea').focus()
           }, 500)
