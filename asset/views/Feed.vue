@@ -349,4 +349,35 @@
   .feedWrapper .iconPenglunWrapper{
     margin-right:15px;
   }
+  .labelWrapper{
+    text-align: right;
+  }
+  /*回答者列表*/
+  .answer-list{
+    width:100%;
+    height:43px;
+    background:#f3f4f6;
+    border-radius: 4px;
+    line-height: 43px;
+    padding: 0 15px;
+    font-size:13px;
+    color: rgb(128,128,128);
+    margin-top: 12.5px;
+  }
+  .answer-list span{
+    color:#03aef9;
+  }
+  .answer-list span i{
+    color: rgb(146,146,146);
+    margin-right: 5px;
+  }
+  .answer-list span:nth-last-of-type(1) i{
+    display: none;
+  }
+  /*关注数*/
+  .feedWrapper .component-followed-question{
+     float: left;
+    font-size:12px;
+    color:#03aef9;
+  }
 </style>

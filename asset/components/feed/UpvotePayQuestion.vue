@@ -16,6 +16,21 @@
       <div class="color-444 font-16 mui-ellipsis-2">{{data.feed.question_title}}</div>
       <div class="color-808080 font-13 margin-5-0-0">回答者：{{data.feed.answer_user_name}}</div>
     </div>
+    <!--点赞 关注问题-->
+    <div class="options text-right">
+      <div class="component-followed-question">关注问题{{data.feed.is_followed_question}}</div>
+      <div class="component-iconNumber iconPenglunWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun1"></use>
+        </svg><span>{{data.feed.comment_number}}</span>
+      </div>
+      <div class="component-iconNumber">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg><span>{{data.feed.support_number}}</span>
+      </div>
+    </div>
+
   </div>
 </template>
 
