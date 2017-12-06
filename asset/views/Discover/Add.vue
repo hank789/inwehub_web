@@ -198,7 +198,7 @@
         }
 
         for (var i in this.images) {
-          var compressBase64 = compressImg('image_' + i)
+          var compressBase64 = this.images[i].base64
           data['photos'].push(compressBase64)  // this.images[i].base64;
         }
 

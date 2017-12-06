@@ -76,7 +76,9 @@ function getGeoPositionByWechat (callback, failCallback) {
       },
       fail: function (res) {
         console.log('wx.getLocation fail res:' + JSON.stringify(res))
-        failCallback(res.errMsg)
+        if (failCallback) {
+          failCallback(res.errMsg)
+        }
       }
     })
   })
