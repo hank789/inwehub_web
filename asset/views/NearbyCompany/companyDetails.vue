@@ -396,7 +396,7 @@
     position: fixed;
     bottom: 0;
     z-index: 999;
-
+    border:none;
   }
   /*.listWrapper{*/
     /*top:248px;*/
