@@ -113,10 +113,6 @@
 
 <style scoped>
 
-  .iconPenglunWrapper{
-    margin-right:10px;
-  }
-
   .buttonWrapper{
     margin-top:10px;
   }

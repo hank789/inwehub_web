@@ -166,9 +166,6 @@
   .preWrapper{
     white-space: pre-wrap !important;
   }
-  .iconPenglunWrapper{
-    margin-right:10px;
-  }
 
   .comment .from{
     color:#03aef9;
