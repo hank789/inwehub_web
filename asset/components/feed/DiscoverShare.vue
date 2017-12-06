@@ -1,5 +1,5 @@
 <template>
-  <div class="container-item">
+  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}">
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
@@ -40,7 +40,7 @@
 
         @commentIt="commentIt"
       ></SuppertAndComment>
-      
+
       <!-- 点赞和评论列表end -->
     </div>
     <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">
@@ -176,6 +176,10 @@
 
   .comment .to{
     color:#808080;
+  }
+
+  .noMoreComment .container-answer{
+    padding:10px 15px 10px;
   }
 </style>
 
