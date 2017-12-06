@@ -210,7 +210,7 @@
   /*公司的详情部分*/
 .companyDetail{
   width:100%;
-  height:203px;
+  overflow: hidden;
   background:#ececee;
   position: relative;
 }
