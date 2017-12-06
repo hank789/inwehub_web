@@ -15,7 +15,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">姓名</label>
-            <input type="text" placeholder="请填写" v-model.trim="name">
+            <input type="text" placeholder="请填写" v-model.trim="name" maxlength="15">
           </div>
         </li>
       </ul>
