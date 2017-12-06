@@ -380,4 +380,18 @@
     font-size:12px;
     color:#03aef9;
   }
+  /*标签*/
+  .tags{
+    font-size:16px;
+    color:rgb(35,82,128);
+    margin-right: 5px;
+  }
+  /*关注数 点赞的间距*/
+  .options{
+    margin-top: 9px;
+  }
+  /*好评率*/
+  .feedWrapper .component-followed-question{
+    color:#b4b4b6;
+  }
 </style>

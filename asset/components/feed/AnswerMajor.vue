@@ -15,6 +15,7 @@
     <div class="text-16-444 mui-ellipsis-2">{{data.feed.title}}</div>
 
     <div class="options text-right">
+      <div class="component-followed-question" v-if="data.feed.average_rate">{{data.feed.average_rate}}好评</div>
       <div class="component-iconNumber iconPenglunWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>

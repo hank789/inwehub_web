@@ -18,7 +18,7 @@
     </div>
     <!--点赞 关注问题-->
     <div class="options text-right">
-      <div class="component-followed-question">关注问题{{data.feed.is_followed_question}}</div>
+      <div class="component-followed-question" v-if="data.feed.average_rate">{{data.feed.average_rate}}好评</div>
       <div class="component-iconNumber iconPenglunWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
