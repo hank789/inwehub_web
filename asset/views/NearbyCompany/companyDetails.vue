@@ -24,45 +24,45 @@
       相关人员
       <i class="bott"></i>
     </div>
-    <div style="position: relative; height:300px;">
-    <RefreshList
-      v-model="list"
-      :api="'company/dataPeople'"
-      :pageMode="true"
-      :prevOtherData="{page: 1,id:this.id}"
-      :nextOtherData="{}"
-      class="listWrapper">
+    <div class="refreshWrapper">
+      <RefreshList
+        v-model="list"
+        :api="'company/dataPeople'"
+        :pageMode="true"
+        :prevOtherData="{page: 1,id:this.id}"
+        :nextOtherData="{}"
+        class="listWrapper">
 
-        <!-- 相关人员-->
-        <div class="Relevant">
-          <ul class="Relevant_list">
-            <li  v-for="(item, index) in list">
-              <div class="Relevant_avatar">
-                <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
-                <svg class="icon" aria-hidden="true" v-if="item.is_expert">
-                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                </svg>
-              </div>
-              <div class="Relevant_detail">
-                <p class="mui-ellipsis">
-                   {{item.name}}
-                   <span>{{item.level}}</span>
-                  （{{item.status_info}}）
-                </p>
-                <p class="mui-ellipsis">{{item.description}}</p>
-              </div>
-              <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
-                已关注
-              </div>
-              <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
-                关注Ta
-              </div>
-              <i class="bot"></i>
-            </li>
+          <!-- 相关人员-->
+          <div class="Relevant">
+            <ul class="Relevant_list">
+              <li  v-for="(item, index) in list">
+                <div class="Relevant_avatar">
+                  <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                  <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+                <div class="Relevant_detail">
+                  <p class="mui-ellipsis">
+                     {{item.name}}
+                     <span>{{item.level}}</span>
+                    （{{item.status_info}}）
+                  </p>
+                  <p class="mui-ellipsis">{{item.description}}</p>
+                </div>
+                <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
+                  已关注
+                </div>
+                <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
+                  关注Ta
+                </div>
+                <i class="bot"></i>
+              </li>
 
-          </ul>
-        </div>
-    </RefreshList>
+            </ul>
+          </div>
+      </RefreshList>
     </div>
   <!--/my/info-->
     <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
@@ -400,5 +400,10 @@
     /*top:248px;*/
     /*bottom: 46px;*/
   /*}*/
+
+  .refreshWrapper{
+    position: relative;
+    height:500px;
+  }
 
 </style>
