@@ -24,7 +24,7 @@
       相关人员
       <i class="bott"></i>
     </div>
-
+    <div style="position: relative; height:300px;">
     <RefreshList
       v-model="list"
       :api="'company/dataPeople'"
@@ -63,6 +63,7 @@
           </ul>
         </div>
     </RefreshList>
+    </div>
   <!--/my/info-->
     <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
   </div>
@@ -92,7 +93,7 @@
       getGeoPosition((position) => {
         this.longt = position.longt
         this.lat = position.lat
-        this.companyInfo()
+//        this.companyInfo()
       }, () => {
         window.mui.toast('获取当前位置失败')
       })
@@ -163,6 +164,7 @@
       '$route': 'refreshPageData'
     },
     mounted () {
+      this.companyInfo()
     }
   }
 </script>
@@ -231,7 +233,7 @@
 }
 .information{
   width:100%;
-  height:189px;
+  overflow: hidden;
   padding-top: 13px;
 }
 .information li:nth-of-type(1){
@@ -256,11 +258,14 @@
   flex-direction: row;
   align-items:center;
   justify-content: center;
+  flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span {
+  height:21px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span i{
   display: inline-block;
@@ -391,9 +396,9 @@
     z-index: 999;
 
   }
-  .listWrapper{
-    top:248px;
-    bottom: 46px;
-  }
+  /*.listWrapper{*/
+    /*top:248px;*/
+    /*bottom: 46px;*/
+  /*}*/
 
 </style>
