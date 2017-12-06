@@ -6,8 +6,8 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
-      <div class="question_tags" v-for="(tag, index) in ask.question.tags" v-if="ask.question.tags.length">
-          <p>{{tag.name}}</p>
+      <div class="question_tags"  v-if="ask.question.tags.length">
+          <p v-for="(tag, index) in ask.question.tags">{{tag.name}}</p>
       </div>
       <div>
         <Question
@@ -117,7 +117,11 @@
     data: () => ({
       ask: {
         answers: [],
-        question: {created_at: '', description: ''},
+        question: {
+          created_at: '',
+          description: '',
+          tags: []
+        },
         feedback: {
           rate_star: 0
         },
