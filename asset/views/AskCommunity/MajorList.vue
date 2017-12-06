@@ -36,8 +36,8 @@
         :prevOtherData="{tag_id :0}"
         :nextOtherData="{tag_id :0}"
         class="listWrapper">
-          <ul class="recommend_b" v-for="(item, index) in list">
-            <li @tap.stop.prevent="toDetail(item.id)">
+          <ul class="recommend_b">
+            <li   v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
               <div class="recommend_d">
                 <p>
                   <img :src="item.answer_user_avatar_url"/>
@@ -56,18 +56,25 @@
                   <svg class="icon" aria-hidden="true" >
                     <use xlink:href="#icon-dianzan1"></use>
                   </svg>
-                  <i>{{item.comment_number}}</i>
+                  <i v-if="item.support_number">{{item.support_number}}</i>
                 </span>
-                <span class="comment_number">
+                <span class="comment_number" >
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                   </svg>
-                  <i>{{item.comment_number}}</i>
+                  <i v-if="item.comment_number">{{item.comment_number}}</i>
               </span>
               </p>
               <p class="problem_state" v-if="!item.is_pay_for_view">1元看答案／看评论</p>
               <p class="problem_state" v-else>查看回答</p>
               <!--v-show="index != recommendList.length-1" -->
+              <!--点赞-->
+              <div class="component-dianzanList" v-if="item.support_number">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-dianzan1"></use>
+                </svg>
+                <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>等{{item.support_number}}人
+              </div>
               <i class="bot"></i>
             </li>
           </ul>
@@ -189,7 +196,7 @@
   }
 
   .recommend_b li > p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 16px;
     color: #444444;
     margin-top: 5px;
   }
@@ -343,6 +350,16 @@
   }
   .listWrapper{
     top:90px;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    padding: 0 15px;
+    margin-top: 12px;
+  }
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
   }
 
 </style>

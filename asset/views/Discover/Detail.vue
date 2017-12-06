@@ -70,7 +70,6 @@
         :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
         :storeApi="'article/comment-store'"
         :storeParams="{'submission_id': detail.id}"
-
         @comment="comment"
         @commentFinish="commentFinish"
         ref="discuss"
