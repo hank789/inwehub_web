@@ -35,7 +35,7 @@
             </svg>
             <p>动态分享</p>
           </li>
-          <li @tap.stop.prevent="judge(4)">
+          <li @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-huodongjiyu"></use>
             </svg>
@@ -142,9 +142,9 @@
                 case 2:
                   this.$router.pushPlus('/askCommunity/interactions')
                   break
-                case 4:
-                  this.$router.pushPlus('my/Discount')
-                  break
+//                case 4:
+//                  this.$router.pushPlus('my/Discount')
+//                  break
                 case 5:
                   this.$router.pushPlus('/nearbyCompany')
                   break
