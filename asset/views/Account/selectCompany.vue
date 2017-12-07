@@ -55,10 +55,13 @@
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         list: [],
         searchText: '',
         loading: 1,
@@ -101,7 +104,7 @@
       empty () {
         this.searchText = ''
       },
-//      保存公司名称
+//      保存输入框的公司名称
       submitInfo () {
         if (!this.value) {
           window.mui.toast('请填写公司名称')
@@ -111,36 +114,46 @@
           window.mui.toast('公司名称至少两个字符')
           return
         }
-        postRequest('company/applyAddData', {
-          name: this.value
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
+//        保存输入框的名称；
+        if (this.$route.query.from === 'basic') {
+          postRequest('company/applyAddData', {
+            name: this.value
+          }).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            window.mui.toast(response.data.data.tips)
             window.mui.back()
-            return
-          }
-          window.mui.toast(response.data.data.tips)
+            this.loading = 0
+          })
+        } else {
+          localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, this.value)
           window.mui.back()
-          this.loading = 0
-        })
+        }
       },
-      //      保存公司名称
+      // 保存搜素的公司名称
       submit (name) {
-        postRequest('profile/update', {
-          company: name
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
+        if (this.$route.query.from === 'basic') {
+          postRequest('profile/update', {
+            company: name
+          }).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            window.mui.toast('保存成功')
             window.mui.back()
-            return
-          }
-           console.error(response)
-          window.mui.toast('保存成功')
+            this.loading = 0
+          })
+        } else {
+          localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, name)
           window.mui.back()
-          this.loading = 0
-        })
+        }
       }
     },
     watch: {
@@ -156,11 +169,11 @@
           this.isShow = true
         } else {
           this.isShow = false
-
         }
       }
     },
     mounted () {
+//      console.error(currentUser)
     },
     updated () {
     }

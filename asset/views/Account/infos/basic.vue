@@ -17,7 +17,7 @@
             class="mui-pull-right account-setting-field mui-ellipsis">{{ genderName ? genderName : '请选择'}}</span></a>
         </li>
         <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/selectCompany')" class="mui-navigate-right">当前公司<span
+          <a @tap.stop.prevent="$router.push('/selectCompany?from=basic')" class="mui-navigate-right">当前公司<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.company ? user.info.company : '必填'
             }}</span></a>
         </li>
