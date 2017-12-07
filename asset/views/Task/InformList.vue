@@ -266,13 +266,12 @@
     position: absolute;
     width: 30px;
     height: 1.8px;
-    right: 21.65%;
+    right: 20.65%;
     bottom: 0.5px;
     background: #3c95f9;
   }
 
   /*内容区域*/
-
   .content {
     margin-top: 45px;
   }
