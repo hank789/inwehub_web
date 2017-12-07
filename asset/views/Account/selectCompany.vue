@@ -115,7 +115,10 @@
           return
         }
 //        保存输入框的名称；
-        if (this.$route.query.from === 'basic') {
+        if (!this.$route.query.from) {
+          window.mui.back()
+          return false
+        } else if (this.$route.query.from === 'basic') {
           postRequest('company/applyAddData', {
             name: this.value
           }).then(response => {

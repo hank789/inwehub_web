@@ -12,7 +12,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目名称</label>
-            <input type="text" v-model.trim="project.project_name" placeholder="必填">
+            <input type="text" v-model.trim="project.project_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=project' + type)"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -104,9 +104,13 @@
   import ACCOUNT_API from '../../../api/account'
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'
+  import { getLocalUserInfo } from '../../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
+      user_id: currentUser.user_id,
+      type: '',
       id: null,
       bak: '',
       object_type: '',
@@ -318,6 +322,8 @@
           }
 
           window.mui.toast('操作成功')
+          // 操作成删除保存的公司
+          localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -329,6 +335,14 @@
         // 执行刷新
         console.log('refresh-project')
       })
+      //     选择公司
+      if (this.$route.params.id) {
+        this.type = this.$route.params.id
+      }
+      var placeholder = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
+      if (placeholder.length) {
+        this.project.project_name = placeholder
+      }
     },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')

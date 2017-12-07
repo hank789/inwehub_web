@@ -103,7 +103,8 @@
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'
   import { postRequest } from '../../../utils/request'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUserInfo } from '../../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
@@ -345,7 +346,6 @@
       if (placeholder.length) {
         this.job.company = placeholder
       }
-
     },
     computed: {
       infoIndustryTagsNames () {
