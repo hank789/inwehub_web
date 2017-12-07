@@ -153,12 +153,12 @@
               return
             }
             window.mui.toast('保存成功')
-            window.mui.back()
+            this.$router.go(-1)
             this.loading = 0
           })
         } else {
           localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, name)
-          window.mui.back()
+          this.$router.go(-1)
         }
       }
     },

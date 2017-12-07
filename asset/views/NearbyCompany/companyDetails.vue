@@ -33,7 +33,6 @@
             :prevOtherData="{page: 1,id:this.id}"
             :nextOtherData="{}"
             class="listWrapper">
-
               <!-- 相关人员-->
               <div class="Relevant">
                 <ul class="Relevant_list">
@@ -76,9 +75,12 @@
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
   export default {
     data () {
       return {
+        user_id: currentUser.user_id,
         datailList: '',
         longt: '',
         lat: '',
@@ -147,19 +149,23 @@
         })
       },
       collectProfessor (item) {
-        postRequest('follow/user',
-          {id: item.id}
-        ).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          item.is_followed = !item.is_followed
-          window.mui.toast(response.data.data.tip)
-          this.loading = 0
-        })
+        if (item.id === this.user_id) {
+          window.mui.toast('不能关注自己')
+        } else {
+          postRequest('follow/user',
+            {id: item.id}
+          ).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            item.is_followed = !item.is_followed
+            window.mui.toast(response.data.data.tip)
+            this.loading = 0
+          })
+        }
       }
     },
     watch: {
