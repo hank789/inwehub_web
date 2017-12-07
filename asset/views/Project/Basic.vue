@@ -16,8 +16,8 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目名称</label>
-            <input type="text" v-model="project_name" maxlength="60" v-if="project_name">
-            <input type="text" v-model="project_name" placeholder="输入项目名称" maxlength="60" v-else>
+            <input type="text" v-model="project_name" maxlength="60" @tap.stop.prevent="$router.push('/selectCompany?from=basicone')"  readonly v-if="project_name">
+            <input type="text" v-model="project_name" placeholder="输入项目名称" maxlength="60"  @tap.stop.prevent="$router.push('/selectCompany?from=basic')"  readonly v-else>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -87,10 +87,14 @@
   import { selectFileH5, compressImg } from '../../utils/uploadFile'
   import { setCacheInfo, cacheProject, resetCache } from '../../utils/project'
   import { selectKeyValue } from '../../utils/select'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        user_id: currentUser.user_id,
         project_id: null,
         project_name: '',
         project_type: '1',
@@ -246,6 +250,8 @@
           setCacheInfo('basic', this.$data)
 
           this.$router.push('/project/concrete?pid=' + this.project_id)
+          // 操作成删除保存的公司
+          localEvent.clearLocalItem('basicone' + '_company' + this.user_id)
           // 刷新页面；
           // location.reload();
         })
@@ -270,6 +276,11 @@
           this.getData()
         }
       })
+      // 项目名称
+      var projectName = localEvent.getLocalItem('basicone_company' + this.user_id)
+      if (projectName.length) {
+        this.project_name = projectName
+      }
     },
     components: {
       MTextarea

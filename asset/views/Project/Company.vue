@@ -16,7 +16,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">企业名称</label>
-            <input type="text" placeholder="输入企业名称" v-model="company_name">
+            <input type="text" placeholder="输入企业名称" v-model="company_name"  @tap.stop.prevent="$router.push('/selectCompany?from=basictwo')"  readonly>
           </div>
         </li>
 
@@ -177,6 +177,8 @@
   import MTextarea from '../../components/MTextarea.vue'
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
   import { setCacheInfo, getCacheInfo } from '../../utils/project'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
@@ -184,9 +186,8 @@
       if (cacheData && cacheData.company) {
         return cacheData.company
       }
-
-      const currentUser = localEvent.getLocalItem('UserInfo')
       return {
+        user_id: currentUser.user_id,
         project_id: null,
         company_name: '',
         company_description: '',
@@ -364,6 +365,8 @@
 
           setCacheInfo('company', this.$data)
           this.$router.push('/project/like?pid=' + this.project_id)
+          // 操作成删除保存的公司
+          localEvent.clearLocalItem('basictwo' + '_company' + this.user_id)
         })
       },
       closeIndustry (index) {
@@ -384,6 +387,10 @@
       industryTagsIndexedList
     },
     mounted () {
+      var projectName = localEvent.getLocalItem('basictwo_company' + this.user_id)
+      if (projectName.length) {
+        this.company_name = projectName
+      }
     },
     watch: {
       company_represent_person_is_self: function (newValue) {
@@ -445,7 +452,6 @@
         }
       }
     },
-
     created () {
       this.company_represent_person_is_self = 1
       this.project_id = this.$route.query.pid

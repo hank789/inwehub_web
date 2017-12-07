@@ -118,7 +118,7 @@
         if (!this.$route.query.from) {
           window.mui.back()
           return false
-        } else if (this.$route.query.from === 'basic') {
+        } else if (this.$route.query.from === 'infobasic') {
           postRequest('company/applyAddData', {
             name: this.value
           }).then(response => {
@@ -139,7 +139,7 @@
       },
       // 保存搜素的公司名称
       submit (name) {
-        if (this.$route.query.from === 'basic') {
+        if (this.$route.query.from === 'infobasic') {
           postRequest('profile/update', {
             company: name
           }).then(response => {
