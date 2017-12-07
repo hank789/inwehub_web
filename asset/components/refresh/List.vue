@@ -118,14 +118,17 @@
         }
       },
       scrollToBottom () {
-        if (window.mui('#refreshContainer')) {
-          var posY = document.querySelector('#listWrapper').scrollHeight
-          var obj = document.getElementById('refreshContainer')
-          if (obj.scrollTo) {
-            obj.scrollTo(0, posY)
-          } else {
-            obj.scrollTop = posY
-          }
+        if (window.mui(this.$el)) {
+          window.mui(this.$el).scroll().reLayout()
+          window.mui(this.$el).scroll().scrollToBottom(500) // 毫秒
+
+//          var posY = document.querySelector('#listWrapper').scrollHeight
+//          var obj = document.getElementById('refreshContainer')
+//          if (obj.scrollTo) {
+//            obj.scrollTo(0, posY)
+//          } else {
+//            obj.scrollTop = posY
+//          }
         }
       },
       getDownLoadMoreModePrevList () {
