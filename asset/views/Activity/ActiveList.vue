@@ -44,6 +44,14 @@
           <!---->
         </div>
       </div>
+      <div class="cooperation" @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">
+        <p>寻求合作</p>
+        <p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xunhezuo"></use>
+          </svg>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -409,5 +417,44 @@
       margin-top: 15px;
       border-radius: 4px;
     }
+  }
+  /*需求合作样式*/
+  .cooperation{
+    width:104px;
+    height:51px;
+    border:1px solid #03aef9;
+    background: #FFFFFF;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 20.5px;
+    right:15px;
+    z-index: 999;
+  }
+  .cooperation p:nth-of-type(1){
+    width:28px;
+    height:30px;
+    font-size:14px;
+    color: #444444;
+    line-height:15px;
+    margin-top: 10.5px;
+    margin-left: 19px;
+  }
+  .cooperation p:nth-of-type(2){
+    width:59px;
+    height:59px;
+    background:#03aef9;
+    border-radius: 50%;
+    position: absolute;
+    right:-6px;
+    top:-5px;
+  }
+  .cooperation p:nth-of-type(2) svg{
+    font-size:30px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
   }
 </style>

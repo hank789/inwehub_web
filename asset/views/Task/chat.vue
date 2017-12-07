@@ -5,7 +5,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">客服小哈</h1>
     </header>
-    <div class="mui-content absolute" id='contentwrapper'>
+    <div class="mui-content" id='contentwrapper'>
       <RefreshList ref="RefreshList"
         v-model="list" :api="'im/messages'"
         :autoShowEmpty="false"
@@ -14,7 +14,7 @@
         :isShowUpToRefreshDescription="false"
         :prevOtherData="{contact_id:0}"
         :nextOtherData="{contact_id:0}"
-        :list="list" class="listWrapper">
+        class="listWrapper">
 
         <ul class="user" id="myData">
           <template v-for="item in list">
@@ -43,17 +43,16 @@
           </template>
         </ul>
       </RefreshList>
-
-      <!--发送消息框-->
-      <div class="message" id="message">
-        <input type="text" v-model.trim="comment" @keyup="show($event)" />
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
-        </svg>
-      </div>
-      <!--发送消息框end-->
-
     </div>
+
+    <!--发送消息框-->
+    <div class="message" id="message">
+      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
+      </svg>
+    </div>
+    <!--发送消息框end-->
   </div>
 </template>
 
@@ -61,6 +60,8 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
+  import { autoTextArea } from '../../utils/plus'
+
   const Chat = {
     data: () => ({
       list: [],
@@ -82,6 +83,12 @@
       RefreshList
     },
     methods: {
+      focus () {
+        setTimeout(() => {
+          this.$refs.RefreshList.scrollToBottom()
+        }, 1000)
+      },
+      blur () {},
       // 回车键发送‘
       show: function (ev) {
         if (ev.keyCode === 13) {
@@ -181,16 +188,12 @@
       // end；
     },
     mounted () {
-
+      autoTextArea()
     },
     updated () {
-      if (this.flag) {
-        this.flag = false
-
-        this.$nextTick(() => {
-          this.$refs.RefreshList.scrollToBottom()
-        })
-      }
+      this.$nextTick(() => {
+        this.$refs.RefreshList.scrollToBottom()
+      })
     }
   }
   export default Chat
@@ -222,7 +225,7 @@
     width: 100%;
     height: 47px;
     background: #ececee;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     padding: 0 10px;
     z-index: 999;
