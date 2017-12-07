@@ -113,20 +113,27 @@ function autoHeight (context) {
   }
   console.log('in autoHeight')
 
-  initImmersed()
+  initImmersed(context)
 
   autoStatusBar(context)
 }
 
-function initImmersed () {
+function initImmersed (context) {
   var immersedHeight = getImmersedHeight()
   document.body.classList.add('immersed' + immersedHeight)
 
-  var routerView = document.getElementById('router-view')
+  var routerView = context // document.getElementById('router-view')
 
-  var firstBackground = getStyle(routerView.children[0], 'background')
+  var firsetChildren = routerView.children[0]
+  if (firsetChildren.className === 'child-view') {
+    firsetChildren = firsetChildren.children[0]
+  }
 
-  var immersedWrapper = document.getElementById('immersedWrapper')
+  console.log('#immersedWrapper firsetChildrenId:' + firsetChildren.id + 'firsetChildrenClass:' + firsetChildren.className)
+
+  var firstBackground = getStyle(firsetChildren, 'background')
+
+  var immersedWrapper = context.querySelector('#immersedWrapper')
   if (!immersedWrapper) {
     immersedWrapper = document.createElement('div')
     immersedWrapper.id = 'immersedWrapper'
@@ -135,7 +142,8 @@ function initImmersed () {
   }
 
   immersedWrapper.style.background = firstBackground
-  console.log('#immersedWrapper styles:' + JSON.stringify(immersedWrapper.style))
+
+  console.log('#immersedWrapper background:' + firstBackground)
 }
 
 function getStyle (elem, property) {
