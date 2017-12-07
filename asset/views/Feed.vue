@@ -374,12 +374,6 @@
   .answer-list span:nth-last-of-type(1) i{
     display: none;
   }
-  /*关注数*/
-  .feedWrapper .component-followed-question{
-     float: left;
-    font-size:12px;
-    color:#03aef9;
-  }
   /*标签*/
   .tags{
     font-size:16px;
@@ -392,6 +386,14 @@
   }
   /*好评率*/
   .feedWrapper .component-followed-question{
+    float: left;
+    font-size:13px;
     color:#b4b4b6;
+  }
+  /*关注数*/
+  .feedWrapper .blue{
+    float: left;
+    font-size:12px;
+    color:#03aef9;
   }
 </style>

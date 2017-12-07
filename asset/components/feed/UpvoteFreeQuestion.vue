@@ -21,7 +21,7 @@
     <!--</div>-->
     <!--点赞 关注问题-->
     <div class="options text-right">
-      <div class="component-followed-question">关注问题{{data.feed.follow_question_num}}</div>
+      <div class="component-followed-question blue">关注问题{{data.feed.follow_question_num}}</div>
       <div class="component-iconNumber iconPenglunWrapper">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
