@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="text-16-444 mui-ellipsis">{{data.feed.title}}</div>
-    <div class="text-14-808080 mui-ellipsis-2 margin-10-0-0">{{data.feed.content}}</div>
+    <div class="text-14-808080 text-line-3 margin-10-0-0">{{data.feed.content}}</div>
     <!--点赞 关注问题-->
     <div class="options text-right">
       <div class="component-followed-question">关注问题{{data.feed.follow_question_num}}</div>
