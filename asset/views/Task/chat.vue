@@ -82,8 +82,7 @@
       prevSuccessCallback () {
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
-            window.mui('.mui-scroll-wrapper').scroll().reLayout()
-            window.mui('.mui-scroll-wrapper').scroll().scrollToBottom(1000) // 毫秒
+            this.$refs.RefreshList.scrollToBottom()
           }, 500)
         }
       },
@@ -147,7 +146,7 @@
             user_id: this.id
           }
 
-          this.list.unshift(item)
+          this.list.push(item)
 
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
