@@ -33,6 +33,12 @@ function scrollToTop (context) {
     context = document.getElementById('router-view')
   }
 
+  if (context.querySelector('#refreshContainer')) {
+    window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
+  } else if (context.querySelector('#pullrefresh')) {
+    window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
+  }
+
   if (document.querySelector('.mui-tab-item.mui-active')) {
     console.log('发现底部菜单选项，绑定双击事件')
     window.scrollEventContext = context
