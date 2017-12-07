@@ -1157,7 +1157,7 @@ const routes = [
     meta: {
       title: '客服',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
