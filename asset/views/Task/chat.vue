@@ -14,6 +14,7 @@
         :isShowUpToRefreshDescription="false"
         :prevOtherData="{contact_id:0}"
         :nextOtherData="{contact_id:0}"
+        :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
 
         <ul class="user" id="myData">
@@ -83,6 +84,11 @@
       RefreshList
     },
     methods: {
+      prevSuccessCallback () {
+        setTimeout(() => {
+          this.$refs.RefreshList.scrollToBottom()
+        }, 300)
+      },
       focus () {
         setTimeout(() => {
           this.$refs.RefreshList.scrollToBottom()
@@ -97,7 +103,7 @@
         }
       },
       // 获取本地时间；
-      CurentTime () {
+      currentTime () {
         var now = new Date()
 
         var year = now.getFullYear() // 年
@@ -131,27 +137,11 @@
         clock += ss
         return (clock)
       },
-      chat (obj) {
-        var item = {
-          created_at: obj.created_at,
-          data: {
-            text: obj.body.text
-          },
-          id: obj.id,
-          user_id: 0,
-          avatar: obj.avatar
-        }
-        this.list = this.list.concat(item)
-        this.flag = true
-        // console.log(item);
-        //  console.log(this.list);
-      },
       // 消息；
       message () {
         if (this.comment) {
           var item = {
-            // created_at: new Date().toLocaleString(),
-            created_at: this.CurentTime(),
+            created_at: this.currentTime(),
             data: {
               text: this.comment
             },
@@ -161,12 +151,16 @@
 
           this.list = this.list.concat(item)
 
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 500)
+
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: 0
           }).then(response => {
             var code = response.data.code
-            // 如果请求不成功提示信息 并且返回上一页；
+
             if (code !== 1000) {
               window.mui.alert(response.data.message)
               window.mui.back()
@@ -175,25 +169,13 @@
 
             if (response.data.data) {
               this.comment = ''
-
-              //            this.list = this.list.concat(response.data.data);
-
-              this.flag = true
             }
-
-            this.loading = 0
           })
         }
       }
-      // end；
     },
     mounted () {
       autoTextArea()
-    },
-    updated () {
-      this.$nextTick(() => {
-        this.$refs.RefreshList.scrollToBottom()
-      })
     }
   }
   export default Chat
@@ -374,15 +356,5 @@
 
   .listWrapper {
     bottom: 47px;
-  }
-
-  .mui-scroll-wrapper {
-    /*position: absolute;
-    z-index: 2;
-    top: 0;
-    bottom: 0;
-    left: 0;*/
-    overflow: scroll;
-    /*width: 100%;*/
   }
 </style>
