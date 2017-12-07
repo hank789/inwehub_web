@@ -6,8 +6,10 @@
       <h1 class="mui-title">客服小哈</h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
+
       <RefreshList ref="RefreshList"
-        v-model="list" :api="'im/messages'"
+        v-model="list"
+        :api="'im/messages'"
         :autoShowEmpty="false"
         :pageMode="true"
         :downLoadMoreMode="true"
@@ -15,7 +17,7 @@
         :prevOtherData="{contact_id:0}"
         :nextOtherData="{contact_id:0}"
         :prevSuccessCallback="prevSuccessCallback"
-        class="listWrapper">
+        class="chatListWrapper">
 
         <ul class="user" id="myData">
           <template v-for="item in list">
@@ -31,7 +33,7 @@
 
             </li>
             <!--自己-->
-            <li class="Customerservice" v-if="id == item.user_id">
+            <li class="Customerservice" v-else-if="id == item.user_id">
               <p>{{item.created_at}}</p>
               <p>
                 <img :src="avatar" />
@@ -66,28 +68,24 @@
   const Chat = {
     data: () => ({
       list: [],
-      page: 1,
       comment: '',
-      id: '',
-      avatar: '',
+      id: getLocalUserInfo().user_id,
+      avatar: getLocalUserInfo().avatar_url,
       flag: true
     }),
-    created () {
-      // id  和  头像；
-      this.id = getLocalUserInfo().user_id
-      this.avatar = getLocalUserInfo().avatar_url
-    },
-    computed: {
-
-    },
+    created () {},
+    computed: {},
     components: {
       RefreshList
     },
     methods: {
       prevSuccessCallback () {
-        setTimeout(() => {
-          this.$refs.RefreshList.scrollToBottom()
-        }, 300)
+        if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
+          setTimeout(() => {
+            window.mui('.mui-scroll-wrapper').scroll().reLayout()
+            window.mui('.mui-scroll-wrapper').scroll().scrollToBottom(1000) // 毫秒
+          }, 500)
+        }
       },
       focus () {
         setTimeout(() => {
@@ -149,7 +147,7 @@
             user_id: this.id
           }
 
-          this.list = this.list.concat(item)
+          this.list.unshift(item)
 
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
@@ -313,7 +311,6 @@
 
   .Customerservice p:nth-of-type(2) {
     width: 100%;
-    overflow: hidden;
   }
 
   .Customerservice p:nth-of-type(2) img {
@@ -354,7 +351,7 @@
     margin: auto;
   }
 
-  .listWrapper {
+  .chatListWrapper {
     bottom: 47px;
   }
 </style>
