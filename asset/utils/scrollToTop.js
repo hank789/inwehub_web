@@ -34,9 +34,15 @@ function scrollToTop (context) {
   }
 
   if (context.querySelector('#refreshContainer')) {
-    window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
+    console.log('found #refreshContainer')
+    setTimeout(() => {
+      window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
+    }, 500)
   } else if (context.querySelector('#pullrefresh')) {
-    window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
+    console.log('found #pullrefresh')
+    setTimeout(() => {
+      window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
+    }, 500)
   }
 
   if (document.querySelector('.mui-tab-item.mui-active')) {
