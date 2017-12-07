@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="back()"></a>
       <h1 class="mui-title">企业</h1>
     </header>
     <div class="mui-content">
@@ -90,6 +90,9 @@
       })
     },
     methods: {
+      back () {
+        this.$router.go(-1)
+      },
       getDistance (num) {
         console.log('num:' + num)
         num = parseFloat(num.substring(0, num.length - 1))
@@ -116,7 +119,7 @@
         }
 //        保存输入框的名称；
         if (!this.$route.query.from) {
-          window.mui.back()
+          this.$router.go(-1)
           return false
         } else if (this.$route.query.from === 'infobasic') {
           postRequest('company/applyAddData', {
@@ -129,12 +132,12 @@
               return
             }
             window.mui.toast(response.data.data.tips)
-            window.mui.back()
+            this.$router.go(-1)
             this.loading = 0
           })
         } else {
           localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, this.value)
-          window.mui.back()
+          this.$router.go(-1)
         }
       },
       // 保存搜素的公司名称
