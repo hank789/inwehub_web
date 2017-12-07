@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">项目经历</h1>
 
     </header>
@@ -24,7 +24,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">客户名称</label>
-            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=projectCustomer' + type)"  readonly>
+            <input type="text" v-model.trim="project.customer_name" placeholder="必填">
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -141,6 +141,11 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      empty () {
+        // 操作成删除保存的公司
+        localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
+        this.$router.go(-1)
+      },
       refreshPageData: function () {
         this.getDetail()
       },
@@ -322,9 +327,6 @@
           }
 
           window.mui.toast('操作成功')
-          // 操作成删除保存的公司
-          localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
-          localEvent.clearLocalItem('projectCustomer' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -343,11 +345,6 @@
       var projectName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
       if (projectName.length) {
         this.project.project_name = projectName
-      }
-//     客户名称
-      var customerName = localEvent.getLocalItem('projectCustomer' + this.type + '_company' + this.user_id)
-      if (customerName.length) {
-        this.project.customer_name = customerName
       }
     },
     beforeRouteLeave (to, from, next) {

@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">工作经历</h1>
 
     </header>
@@ -138,6 +138,11 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      empty () {
+        //   操作成删除保存的公司
+        localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
+        this.$router.go(-1)
+      },
       refreshPageData: function () {
         this.getDetail()
       },
@@ -316,8 +321,6 @@
           }
 
           window.mui.toast('操作成功')
-//          操作成删除保存的公司
-          localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()

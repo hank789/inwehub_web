@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="empty()" ></a>
       <h1 class="mui-title">企业信息</h1>
     </header>
 
@@ -223,6 +223,11 @@
       }
     },
     methods: {
+      empty () {
+        // 操作成删除保存的公司
+        localEvent.clearLocalItem('basictwo' + '_company' + this.user_id)
+        this.$router.go(-1)
+      },
       blurThis: function (e) {
         e.target.blur()
       },
@@ -365,8 +370,7 @@
 
           setCacheInfo('company', this.$data)
           this.$router.push('/project/like?pid=' + this.project_id)
-          // 操作成删除保存的公司
-          localEvent.clearLocalItem('basictwo' + '_company' + this.user_id)
+
         })
       },
       closeIndustry (index) {

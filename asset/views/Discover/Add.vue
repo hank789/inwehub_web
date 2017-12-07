@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="$router.pushPlus('/home')"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布动态</h1>
     </header>
 
@@ -95,6 +95,11 @@
       uploadImage
     },
     methods: {
+      empty () {
+        this.$router.pushPlus('/home');
+        //      删除标签；
+        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+      },
       totags () {
         this.$router.push('/selecttags?from=discover')
         localEvent.setLocalItem('discover_description' + this.id, this.description)
@@ -218,9 +223,6 @@
             return
           }
           this.$router.push('/discover/add/success')
-//          提交成功 清空标签
-          //      删除标签；
-          localEvent.clearLocalItem('discover_skill_tags' + this.id)
         })
       },
       textareaFocus () {
