@@ -6,7 +6,14 @@
     </header>
 
   <div class="mui-content">
-    <div class="flexWrapper flex vertical">
+      <RefreshList
+        v-model="list"
+        :api="'company/dataPeople'"
+        :pageMode="true"
+        :prevOtherData="{page: 1,id:this.id}"
+        :nextOtherData="{}"
+        autoShowEmpty="false"
+        class="listWrapper">
         <div class="companyDetail" >
           <div class="gray"></div>
           <div class="company_image">
@@ -25,46 +32,36 @@
           相关人员
           <i class="bott"></i>
         </div>
-        <div class="refreshWrapper grow-2">
-          <RefreshList
-            v-model="list"
-            :api="'company/dataPeople'"
-            :pageMode="true"
-            :prevOtherData="{page: 1,id:this.id}"
-            :nextOtherData="{}"
-            class="listWrapper">
-              <!-- 相关人员-->
-              <div class="Relevant">
-                <ul class="Relevant_list">
-                  <li  v-for="(item, index) in list">
-                    <div class="Relevant_avatar">
-                      <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
-                      <svg class="icon" aria-hidden="true" v-if="item.is_expert">
-                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                      </svg>
-                    </div>
-                    <div class="Relevant_detail">
-                      <p class="mui-ellipsis">
-                         {{item.name}}
-                         <span>{{item.level}}</span>
-                        （{{item.status_info}}）
-                      </p>
-                      <p class="mui-ellipsis">{{item.description}}</p>
-                    </div>
-                    <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
-                      已关注
-                    </div>
-                    <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
-                      关注Ta
-                    </div>
-                    <i class="bot"></i>
-                  </li>
+          <!-- 相关人员-->
+          <div class="Relevant">
+            <ul class="Relevant_list">
+              <li  v-for="(item, index) in list">
+                <div class="Relevant_avatar">
+                  <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                  <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+                <div class="Relevant_detail">
+                  <p class="mui-ellipsis">
+                     {{item.name}}
+                     <span>{{item.level}}</span>
+                    （{{item.status_info}}）
+                  </p>
+                  <p class="mui-ellipsis">{{item.description}}</p>
+                </div>
+                <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
+                  已关注
+                </div>
+                <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
+                  关注Ta
+                </div>
+                <i class="bot"></i>
+              </li>
 
-                </ul>
-              </div>
-          </RefreshList>
-        </div>
-    </div>
+            </ul>
+          </div>
+      </RefreshList>
   <!--/my/info-->
     <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
   </div>
@@ -97,7 +94,7 @@
       getGeoPosition((position) => {
         this.longt = position.longt
         this.lat = position.lat
-//        this.companyInfo()
+        this.companyInfo()
       }, () => {
         window.mui.toast('获取当前位置失败')
       })
@@ -172,7 +169,7 @@
       '$route': 'refreshPageData'
     },
     mounted () {
-      this.companyInfo()
+//      this.companyInfo()
     }
   }
 </script>
@@ -405,20 +402,8 @@
     z-index: 999;
     border:none;
   }
-  /*.listWrapper{*/
-    /*top:248px;*/
-    /*bottom: 46px;*/
-  /*}*/
-
-  .refreshWrapper{
-    position: relative;
-  }
-
-  .flexWrapper{
-    position: absolute;
-    top:0;
-    left:0;
-    width: 100%;
+  .listWrapper{
     bottom: 46px;
   }
+
 </style>
