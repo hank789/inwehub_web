@@ -10,7 +10,7 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/discover/hottopic')">热门 </span>
         <span @tap.stop.prevent="">最新 <i></i></span>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/discover/publishArticles')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/discover/add')">
           <use xlink:href="#icon-xiugai"></use>
         </svg>
 

@@ -19,7 +19,7 @@
 
     <div class="answerCount">
       {{ ask.answer_num }}人回答
-      <span v-if="isFollowAsked">已关注{{ask.follow_num}}</span>
+      <span v-if="isFollowAsked" @tap.stop.prevent="collectAsk()">已关注{{ask.follow_num}}</span>
       <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.follow_num}}</span>
     </div>
 
@@ -111,9 +111,11 @@
           var isFollowed = response.data.data.type === 'follow' ? 1 : 0
 
           window.mui.toast(response.data.data.tip)
-
-          this.ask.follow_num++
-
+          if (isFollowed) {
+            this.ask.follow_num++
+          } else {
+            this.ask.follow_num--
+          }
           this.$emit('setFollowAskStatus', isFollowed)
         })
       },
