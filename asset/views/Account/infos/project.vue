@@ -144,7 +144,7 @@
       empty () {
         // 操作成删除保存的公司
         localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
-        this.$router.go(-1)
+        window.mui.back()
       },
       refreshPageData: function () {
         this.getDetail()
