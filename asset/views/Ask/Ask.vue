@@ -247,9 +247,6 @@
       fenhongxize () {
         alertFenhongxize(this)
       },
-      developing () {
-        window.mui.toast('开发中...')
-      },
       getMethodIcon () {
         if (window.mui.os.plus && window.mui.os.ios) {
           return '#icon-apple'
@@ -305,7 +302,6 @@
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
             //      删除标签；
-            localEvent.clearLocalItem('ask_skill_tags' + this.id)
             this.clearCache()
             setTimeout(() => {
               window.mui.back()
@@ -332,7 +328,6 @@
         } else {
           window.mui('#sheet1').popover('toggle')
         }
-
       },
       selectMoney (money) {
         if (!money) {
@@ -397,6 +392,7 @@
       },
       clearCache () {
         var info = {}
+        localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
