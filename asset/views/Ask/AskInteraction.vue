@@ -69,6 +69,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import localEvent from '../../stores/localStorage'
+  import { autoTextArea } from '../../utils/plus'
 
   const Ask = {
     data: () => ({
@@ -91,6 +92,8 @@
       pay
     },
     mounted () {
+      autoTextArea()
+
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       window.addEventListener('refreshData', function (e) {
@@ -161,8 +164,6 @@
         }
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
-            //      删除标签；
-            localEvent.clearLocalItem('interaction_skill_tags' + this.id)
             this.clearCache()
             window.mui.back()
           }
@@ -202,6 +203,8 @@
       },
       clearCache () {
         var info = {}
+        // 删除标签；
+        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
