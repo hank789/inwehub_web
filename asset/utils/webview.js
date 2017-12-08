@@ -270,12 +270,12 @@ function showWebview () {
               // 触发父页面的自定义事件(refresh),从而进行刷新
               window.mui.fire(parentWebview, 'refreshData', {childId: self.id})
               // 刷新当前页数据
-              window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+              // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
 
               // 触发父页面的自定义事件(refresh),从而进行刷新
               window.mui.fire(parentWebview, 'refreshPageData', {childId: self.id})
               // 刷新当前页数据
-              window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+              // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
 
               window.mui.fire(parentWebview, 'autoHeight', {childId: self.id})
             }
