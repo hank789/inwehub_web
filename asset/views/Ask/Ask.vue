@@ -119,6 +119,7 @@
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
+  import { autoTextArea } from '../../utils/plus'
 
   const Ask = {
     data: () => ({
@@ -141,6 +142,8 @@
       pay
     },
     mounted () {
+      autoTextArea()
+
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       window.addEventListener('refreshData', function (e) {
