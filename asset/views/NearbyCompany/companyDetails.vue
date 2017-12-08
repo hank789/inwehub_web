@@ -97,7 +97,7 @@
       getGeoPosition((position) => {
         this.longt = position.longt
         this.lat = position.lat
-        this.companyInfo()
+//        this.companyInfo()
       }, () => {
         window.mui.toast('获取当前位置失败')
       })
@@ -172,7 +172,7 @@
       '$route': 'refreshPageData'
     },
     mounted () {
-//      this.companyInfo()
+      this.companyInfo()
     }
   }
 </script>
