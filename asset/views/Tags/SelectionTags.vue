@@ -7,7 +7,7 @@
 
     <div class="mui-content absolute">
       <ul class="myLabel" v-if="skill_tags.length">
-        <p>擅长标签</p>
+        <p>标签</p>
         <li v-for="(item, index) in skill_tags">
           {{item.text}}
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">

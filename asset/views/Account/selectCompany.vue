@@ -122,8 +122,8 @@
           this.$router.go(-1)
           return false
         } else if (this.$route.query.from === 'infobasic') {
-          postRequest('company/applyAddData', {
-            name: this.value
+          postRequest('profile/update', {
+            company: this.value
           }).then(response => {
             var code = response.data.code
             if (code !== 1000) {
@@ -131,7 +131,7 @@
               window.mui.back()
               return
             }
-            window.mui.toast(response.data.data.tips)
+            window.mui.toast('保存成功')
             this.$router.go(-1)
             this.loading = 0
           })
@@ -142,6 +142,7 @@
       },
       // 保存搜素的公司名称
       submit (name) {
+        console.log(this.$route)
         if (this.$route.query.from === 'infobasic') {
           postRequest('profile/update', {
             company: name
