@@ -12,7 +12,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">项目名称</label>
-            <input type="text" v-model.trim="project.project_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=project' + type)"  readonly>
+            <input type="text" v-model.trim="project.project_name" placeholder="必填" >
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -23,8 +23,8 @@
         </li>
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">客户名称</label>
-            <input type="text" v-model.trim="project.customer_name" placeholder="必填">
+            <label class="mui-navigate" >客户名称</label>
+            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=project' + type)"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -342,9 +342,9 @@
       if (this.$route.params.id) {
         this.type = this.$route.params.id
       }
-      var projectName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
-      if (projectName.length) {
-        this.project.project_name = projectName
+      var customerName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
+      if (customerName.length) {
+        this.project.customer_name = customerName
       }
     },
     beforeRouteLeave (to, from, next) {
