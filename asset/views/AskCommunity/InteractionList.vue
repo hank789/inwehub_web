@@ -35,6 +35,7 @@
                 <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
                 <div class="respondent mui-ellipsis" v-if="item.answer_num">
                   回答者：<span  v-for="(answer, index) in item.answer_user_list" @tap.stop.prevent="toAvatar(answer.uuid)">{{answer.name}}<i>,</i></span>
+                  <i v-if="item.answer_num >  item.answer_user_list.length">等{{item.answer_num}}人</i>
                 </div>
               </li>
             </ul>
@@ -359,8 +360,13 @@
     color:rgb(146,146,146);
     margin-right: 5px;
   }
-  .respondent span:nth-last-child(1) i{
+  .respondent span:nth-last-of-type(1) i{
     display: none;
+  }
+  .respondent i{
+    font-size:13px;
+    color:rgb(128,128,128);
+    font-style: normal;
   }
   .isFollowed{
     color:#03aef9;

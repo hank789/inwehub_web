@@ -73,7 +73,8 @@
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-dianzan1"></use>
                 </svg>
-                <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>等{{item.support_number}}人
+                <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>
+                <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
               </div>
               <i class="bot"></i>
             </li>
