@@ -362,7 +362,7 @@
     padding: 0 15px;
     font-size:13px;
     color: rgb(128,128,128);
-    margin-top: 12.5px;
+    margin-top: 5px;
   }
   .answer-list span{
     color:#03aef9;

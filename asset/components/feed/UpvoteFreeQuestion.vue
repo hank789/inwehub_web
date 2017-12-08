@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis">{{data.feed.question_title}}</div>
+    <div class="text-16-444 text-line-2">{{data.feed.question_title}}</div>
     <div class="text-14-808080 text-line-3 margin-10-0-0">{{data.feed.answer_content}}</div>
     <!--<div class="container-answer">-->
       <!--<div class="color-444 font-16 mui-ellipsis">{{data.feed.question_title}}</div>-->
