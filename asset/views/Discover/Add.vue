@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import { compressImg } from '../../utils/uploadFile'
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
@@ -96,7 +95,7 @@
     },
     methods: {
       empty () {
-        this.$router.pushPlus('/home');
+        this.$router.pushPlus('/home')
         //      删除标签；
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
       },
