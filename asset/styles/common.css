@@ -1303,3 +1303,7 @@ a {
 .vendorUrl{
   color: #235280;
 }
+
+.mui-modal.mui-active{
+  background-color: #3c3e44;
+}
