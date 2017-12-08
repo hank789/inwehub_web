@@ -206,7 +206,6 @@ Vue.mixin({
   created () {
     // 当使用webview方式打开的话，会显示webview，并绑定侧滑事件
     if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
-
       console.log('global created函数 被调用')
 
       window.mui.plusReady(function () {
