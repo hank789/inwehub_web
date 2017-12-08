@@ -119,6 +119,7 @@
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
+  import { autoTextArea } from '../../utils/plus'
 
   const Ask = {
     data: () => ({
@@ -141,6 +142,8 @@
       pay
     },
     mounted () {
+      autoTextArea()
+
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       window.addEventListener('refreshData', function (e) {
@@ -247,9 +250,6 @@
       fenhongxize () {
         alertFenhongxize(this)
       },
-      developing () {
-        window.mui.toast('开发中...')
-      },
       getMethodIcon () {
         if (window.mui.os.plus && window.mui.os.ios) {
           return '#icon-apple'
@@ -298,14 +298,13 @@
       cancelAsk () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-
-        if (!this.type && this.description === this.descPlaceholder) {
+        if (!this.type && this.description === this.descPlaceholder && !this.tags.length) {
           window.mui.back()
           return
         }
-
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
+            //      删除标签；
             this.clearCache()
             setTimeout(() => {
               window.mui.back()
@@ -316,11 +315,10 @@
       showMoney () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-
-        if (!this.tags.length) {
-          window.mui.toast('请选择问题分类')
-          return
-        }
+//        if (!this.tags.length) {
+//          window.mui.toast('请选择问题分类')
+//          return
+//        }
 
         if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
@@ -333,8 +331,6 @@
         } else {
           window.mui('#sheet1').popover('toggle')
         }
-        //      删除标签；
-        localEvent.clearLocalItem('ask_skill_tags' + this.id)
       },
       selectMoney (money) {
         if (!money) {
@@ -399,14 +395,15 @@
       },
       clearCache () {
         var info = {}
+        localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-        if (!this.tags.length) {
-          window.mui.toast('请选择问题分类')
-          return
-        }
+//        if (!this.tags.length) {
+//          window.mui.toast('请选择问题分类')
+//          return
+//        }
 
         if (!this.money) {
           window.mui.toast('请选择提问金额')

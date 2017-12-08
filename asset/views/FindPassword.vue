@@ -1,51 +1,51 @@
 <template>
-
-  <div class="mui-content">
-    <div class="login">
-      <svg class="icon logo" aria-hidden="true">
-        <use xlink:href="#icon-logo"></use>
-      </svg>
-
-      <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
-        <use xlink:href="#icon-fanhui"></use>
-      </svg>
-
-      <!--输入框-->
-      <div class="inputWrapper half">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoujihao"></use>
+  <div>
+    <div class="mui-content">
+      <div class="login">
+        <svg class="icon logo" aria-hidden="true">
+          <use xlink:href="#icon-logo"></use>
         </svg>
-        <input class="text" type="text" v-model.trim.num="phone" name="phone" @tap.stop.prevent="entryPhone"
-               @focus="focus" @blur="blur" placeholder="输入手机号"/>
-        <!--<span class="getYzm disabled" @click="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
-       <span class="getYzm" @click="getCode"" v-else>{{getCodeText}}</span>-->
 
-        <span class="getYzm" @click="getCode" :disabled="!isCanGetCode">{{ getCodeText }}</span>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-yanzhengma"></use>
+        <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
+          <use xlink:href="#icon-fanhui"></use>
         </svg>
-        <input class="text" type="text" v-model.number.trim="code" name="code" @tap.stop.prevent="entryYzm"
-               @focus="focus" @blur="blur" placeholder="请输入验证码"/>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-mima"></use>
-        </svg>
-        <input type="password" placeholder="输入新密码" class="text" v-model.trim="password" name="password" @focus="focus"
-               @blur="blur" @tap.stop.prevent="entryPassword"/>
-      </div>
 
-      <!--点击登录-->
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认修改</button>
+        <!--输入框-->
+        <div class="inputWrapper half">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoujihao"></use>
+          </svg>
+          <input class="text" type="text" v-model.trim.num="phone" name="phone" @tap.stop.prevent="entryPhone"
+                 @focus="focus" @blur="blur" placeholder="输入手机号"/>
+          <!--<span class="getYzm disabled" @click="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+         <span class="getYzm" @click="getCode"" v-else>{{getCodeText}}</span>-->
 
-      <!--<div class="buttonWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认</button>
-      </div>-->
+          <span class="getYzm" @click="getCode" :disabled="!isCanGetCode">{{ getCodeText }}</span>
+        </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-yanzhengma"></use>
+          </svg>
+          <input class="text" type="text" v-model.number.trim="code" name="code" @tap.stop.prevent="entryYzm"
+                 @focus="focus" @blur="blur" placeholder="请输入验证码"/>
+        </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-mima"></use>
+          </svg>
+          <input type="password" placeholder="输入新密码" class="text" v-model.trim="password" name="password" @focus="focus"
+                 @blur="blur" @tap.stop.prevent="entryPassword"/>
+        </div>
+
+        <!--点击登录-->
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认修改</button>
+
+        <!--<div class="buttonWrapper">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit">确认</button>
+        </div>-->
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -343,6 +343,9 @@
 
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
+  .mui-content{
+    background: #f3f4f6;
+  }
   .login {
     position: absolute;
     width: 100%;

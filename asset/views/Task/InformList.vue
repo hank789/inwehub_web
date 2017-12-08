@@ -17,7 +17,7 @@
             <i></i>
           </div>
 
-          <div class="mui-scroll" id="pullrefresh">
+          <div class="mui-scroll" id="pullrefresh_informList">
             <ul>
               <li @tap.stop.prevent="skip(1)">
                 <img src="../../statics/images/inform1.png"/>
@@ -166,10 +166,8 @@
           this.readhub_count = this.readhub_message.unread_count
           this.money_count = this.money_message.unread_count
           this.im_messages_count = this.im_messages.length > 0 ? this.im_messages[0].unread_count : 0
-
-          console.log(this.im_messages)
           this.loading = 0
-          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
+          window.mui('#pullrefresh_informList').pullRefresh().endPulldownToRefresh() // refresh completed
         })
       }
     },
@@ -177,7 +175,7 @@
       // 请求数据；
       window.mui.init({
         pullRefresh: {
-          container: '#pullrefresh',
+          container: '#pullrefresh_informList',
           down: {
             contentdown: '下拉可以刷新', // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
             contentover: '释放立即刷新', // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
@@ -268,13 +266,12 @@
     position: absolute;
     width: 30px;
     height: 1.8px;
-    right: 21.65%;
+    right: 20.65%;
     bottom: 0.5px;
     background: #3c95f9;
   }
 
   /*内容区域*/
-
   .content {
     margin-top: 45px;
   }

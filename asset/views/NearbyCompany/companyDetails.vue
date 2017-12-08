@@ -6,63 +6,62 @@
     </header>
 
   <div class="mui-content">
-    <div class="companyDetail" >
-      <div class="gray"></div>
-      <div class="company_image">
-        <img :src="datailList.logo" />
-      </div>
-      <ul class="information">
-        <li>距离我< {{datailList.distance_format}}</li>
-        <li>{{datailList.name}}</li>
-        <li>
-          <span v-for="(item, index) in datailList.tags">{{item}} <i></i></span>
-        </li>
-        <li>{{datailList.address_detail}}</li>
-      </ul>
-    </div>
-    <div class="Relevant_title">
-      相关人员
-      <i class="bott"></i>
-    </div>
-
-    <RefreshList
-      v-model="list"
-      :api="'company/dataPeople'"
-      :pageMode="true"
-      :prevOtherData="{page: 1,id:this.id}"
-      :nextOtherData="{}"
-      class="listWrapper">
-
-        <!-- 相关人员-->
-        <div class="Relevant">
-          <ul class="Relevant_list">
-            <li  v-for="(item, index) in list">
-              <div class="Relevant_avatar">
-                <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
-                <svg class="icon" aria-hidden="true" v-if="item.is_expert">
-                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                </svg>
-              </div>
-              <div class="Relevant_detail">
-                <p class="mui-ellipsis">
-                   {{item.name}}
-                   <span>{{item.level}}</span>
-                  （{{item.status_info}}）
-                </p>
-                <p class="mui-ellipsis">{{item.description}}</p>
-              </div>
-              <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
-                已关注
-              </div>
-              <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
-                关注Ta
-              </div>
-              <i class="bot"></i>
+      <RefreshList
+        v-model="list"
+        :api="'company/dataPeople'"
+        :pageMode="true"
+        :prevOtherData="{page: 1,id:this.id}"
+        :nextOtherData="{}"
+        :autoShowEmpty="false"
+        class="listWrapper">
+        <div class="companyDetail" >
+          <div class="gray"></div>
+          <div class="company_image">
+            <img :src="datailList.logo" />
+          </div>
+          <ul class="information">
+            <li>距离我< {{datailList.distance_format}}</li>
+            <li>{{datailList.name}}</li>
+            <li>
+              <span v-for="(item, index) in datailList.tags">{{item}} <i></i></span>
             </li>
-
+            <li>{{datailList.address_detail}}</li>
           </ul>
         </div>
-    </RefreshList>
+        <div class="Relevant_title">
+          相关人员
+          <i class="bott"></i>
+        </div>
+          <!-- 相关人员-->
+          <div class="Relevant">
+            <ul class="Relevant_list">
+              <li  v-for="(item, index) in list">
+                <div class="Relevant_avatar">
+                  <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                  <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+                <div class="Relevant_detail">
+                  <p class="mui-ellipsis">
+                     {{item.name}}
+                     <span>{{item.level}}</span>
+                    （{{item.status_info}}）
+                  </p>
+                  <p class="mui-ellipsis">{{item.description}}</p>
+                </div>
+                <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
+                  已关注
+                </div>
+                <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
+                  关注Ta
+                </div>
+                <i class="bot"></i>
+              </li>
+
+            </ul>
+          </div>
+      </RefreshList>
   <!--/my/info-->
     <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
   </div>
@@ -73,9 +72,12 @@
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
   export default {
     data () {
       return {
+        user_id: currentUser.user_id,
         datailList: '',
         longt: '',
         lat: '',
@@ -144,25 +146,30 @@
         })
       },
       collectProfessor (item) {
-        postRequest('follow/user',
-          {id: item.id}
-        ).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          item.is_followed = !item.is_followed
-          window.mui.toast(response.data.data.tip)
-          this.loading = 0
-        })
+        if (item.id === this.user_id) {
+          window.mui.toast('不能关注自己')
+        } else {
+          postRequest('follow/user',
+            {id: item.id}
+          ).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            item.is_followed = !item.is_followed
+            window.mui.toast(response.data.data.tip)
+            this.loading = 0
+          })
+        }
       }
     },
     watch: {
       '$route': 'refreshPageData'
     },
     mounted () {
+//      this.companyInfo()
     }
   }
 </script>
@@ -206,9 +213,10 @@
   /*公司的详情部分*/
 .companyDetail{
   width:100%;
-  height:203px;
+  overflow: hidden;
   background:#ececee;
   position: relative;
+  padding-bottom: 24px;
 }
 .gray{
   width:100%;
@@ -231,7 +239,7 @@
 }
 .information{
   width:100%;
-  height:189px;
+  overflow: hidden;
   padding-top: 13px;
 }
 .information li:nth-of-type(1){
@@ -256,11 +264,14 @@
   flex-direction: row;
   align-items:center;
   justify-content: center;
+  flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span {
+  height:21px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span i{
   display: inline-block;
@@ -327,7 +338,7 @@
   }
   /*详细的信息*/
   .Relevant_detail{
-    width:70%;
+    /*width:65%;*/
     height:100%;
     margin-left: 7px;
   }
@@ -355,6 +366,7 @@
   .Relevant_detail p:nth-of-type(2){
     font-size:13px;
     color:#b4b4b6;
+    width:90%;
   }
   /*关注*/
   .Relevant_follow{
@@ -365,6 +377,7 @@
     line-height:27px;
     border-radius: 50px;
     text-align: center;
+    font-size: 14px;
   }
   .Relevant_empty{
     width: 64px;
@@ -374,6 +387,7 @@
     line-height:27px;
     border-radius: 50px;
     text-align: center;
+    font-size: 14px;
   }
   button{
     width:100%;
@@ -386,11 +400,26 @@
     position: fixed;
     bottom: 0;
     z-index: 999;
-
+    border:none;
   }
   .listWrapper{
-    top:248px;
     bottom: 46px;
+  }
+  /*适配*/
+  @media (min-width:320px) {
+    .Relevant_detail {
+      width:57%;
+    }
+  }
+  @media (min-width:375px) {
+    .Relevant_detail {
+      width:66%;
+    }
+  }
+  @media (min-width:414px) {
+    .Relevant_detail {
+      width:70%;
+    }
   }
 
 </style>

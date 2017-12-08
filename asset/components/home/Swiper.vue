@@ -197,6 +197,7 @@
   #home-card span:nth-of-type(3) {
     width: 70%;
     height: 24px;
+    line-height: 22px;
     border-radius: 50px;
     border: 0.5px solid #03aef9;
     margin-left: 15%;

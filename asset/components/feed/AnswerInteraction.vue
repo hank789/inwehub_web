@@ -12,8 +12,24 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis">{{data.feed.title}}</div>
-    <div class="text-14-808080 mui-ellipsis-2 margin-10-0-0">{{data.feed.content}}</div>
+    <div class="text-16-444 text-line-2">{{data.feed.title}}</div>
+    <div class="text-14-808080 text-line-3 margin-10-0-0">{{data.feed.content}}</div>
+    <!--点赞 关注问题-->
+    <div class="options text-right">
+      <div class="component-followed-question blue" v-if="data.feed.is_followed_question">已关注{{data.feed.follow_question_num}}</div>
+      <div class="component-followed-question blue" v-else>关注问题{{data.feed.follow_question_num}}</div>
+      <div class="component-iconNumber iconPenglunWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun1"></use>
+        </svg><span>{{data.feed.comment_number}}</span>
+      </div>
+      <div class="component-iconNumber">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg><span>{{data.feed.support_number}}</span>
+      </div>
+    </div>
+
   </div>
 </template>
 

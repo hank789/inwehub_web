@@ -11,7 +11,7 @@
 
       <div class="who"><span class="from">{{ child.owner.name }}</span>
         <div class="triangle-right triangle-right-6"></div><span class="to">{{ parentOwnerName }}</span>
-        <div class="time">{{ child.created_at }}</div>
+        <div class="time">{{ child.created_at.replace(/-/g, '/') }}</div>
       </div>
       <div class="text textToLink" v-html="textToLink(child.content)"></div>
     </div>

@@ -1,72 +1,72 @@
 <template>
-
-  <div class="mui-content">
-    <div class="login">
-      <svg class="icon logo" aria-hidden="true">
-        <use xlink:href="#icon-logo"></use>
-      </svg>
-      <!--返回箭头-->
-      <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
-        <use xlink:href="#icon-fanhui"></use>
-      </svg>
-      <!--账号密码输入框-->
-
-      <div class="inputWrapper" v-if="isNeedRegistrationCode">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-yaoqingma"></use>
+  <div>
+    <div class="mui-content">
+      <div class="login">
+        <svg class="icon logo" aria-hidden="true">
+          <use xlink:href="#icon-logo"></use>
         </svg>
-        <input placeholder="请输入邀请码" @focus="focus" @blur="blur" class="text" type="text" name="yqm"
-               v-model.trim="registrationCode" autocomplete="off" @tap.stop.prevent="entryYqCode"/>
-      </div>
-      <div class="inputWrapper half">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoujihao"></use>
+        <!--返回箭头-->
+        <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
+          <use xlink:href="#icon-fanhui"></use>
         </svg>
-        <input placeholder="请输入手机号" ref="phone" @focus="focus" @blur="blur"
-               v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @tap.stop.prevent="entryPhone"
-               class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
+        <!--账号密码输入框-->
 
-        <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
-        <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-yanzhengma"></use>
-        </svg>
-        <input placeholder="请输入验证码" @focus="focus" @blur="blur" class="text" type="text" name="code"
-               v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-denglu"></use>
-        </svg>
-        <input placeholder="请输入真实姓名" @focus="focus" @blur="blur" class="text" type="text" name="username"
-               v-model.trim="username" autocomplete="off" @tap.stop.prevent="entryUsername"/>
-      </div>
-      <div class="inputWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-mima"></use>
-        </svg>
-        <input placeholder="请输入登录密码" @focus="focus" @blur="blur" class="text" type="password" name="password"
-               v-model.trim="password" autocomplete="off"/>
-      </div>
+        <div class="inputWrapper" v-if="isNeedRegistrationCode">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-yaoqingma"></use>
+          </svg>
+          <input placeholder="请输入邀请码" @focus="focus" @blur="blur" class="text" type="text" name="yqm"
+                 v-model.trim="registrationCode" autocomplete="off" @tap.stop.prevent="entryYqCode"/>
+        </div>
+        <div class="inputWrapper half">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoujihao"></use>
+          </svg>
+          <input placeholder="请输入手机号" ref="phone" @focus="focus" @blur="blur"
+                 v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @tap.stop.prevent="entryPhone"
+                 class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
 
-      <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span>
-      </div>
+          <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+          <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
+        </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-yanzhengma"></use>
+          </svg>
+          <input placeholder="请输入验证码" @focus="focus" @blur="blur" class="text" type="text" name="code"
+                 v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
+        </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-denglu"></use>
+          </svg>
+          <input placeholder="请输入真实姓名" @focus="focus" @blur="blur" class="text" type="text" name="username"
+                 v-model.trim="username" autocomplete="off" @tap.stop.prevent="entryUsername"/>
+        </div>
+        <div class="inputWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-mima"></use>
+          </svg>
+          <input placeholder="请输入登录密码" @focus="focus" @blur="blur" class="text" type="password" name="password"
+                 v-model.trim="password" autocomplete="off"/>
+        </div>
 
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="register"
-              :disabled="disableRegister">确认
+        <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span>
+        </div>
+
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="register"
+                :disabled="disableRegister">确认
 
       </button>
 
-      <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
-        我没有邀请码?
+        <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
+          我没有邀请码?
 
 
+        </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -563,6 +563,9 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .mui-content{
+    background:#f3f4f6;
+  }
   .login {
     position: absolute;
     width: 100%;

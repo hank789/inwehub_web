@@ -1294,3 +1294,16 @@ ul.normal li:before {
 .hideImmersedWrapper #immersedWrapper{
   display: none;
 }
+
+
+a {
+  color: #235280;
+}
+
+.vendorUrl{
+  color: #235280;
+}
+
+.mui-modal.mui-active{
+  background-color: #3c3e44;
+}

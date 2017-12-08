@@ -1,7 +1,7 @@
 <template>
   <div class="container-item">
     <div class="color-808080 font-13">{{data.title}}</div>
-    <div class="flex margin-5-0-0">
+    <div class="flex margin-5-0-0 mui-ellipsis">
       <div class="left">
         <div class="container-avatarAndText">
           <div class="author">
@@ -74,7 +74,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .component-follow .icon {
     margin-left: -11px !important;
     margin-top: -10px !important;
@@ -86,5 +86,37 @@
 
   .middle-width {
     width: 113px;
+  }
+
+  .left{
+    max-width:40%;
+  }
+
+  .right{
+    max-width:40%;
+  }
+
+  .left .avatar{
+    width:44px;
+    height:44px;
+  }
+
+  .right .avatar{
+    width:44px;
+    height:44px;
+  }
+
+  .container-avatarAndText{
+    height:44px;
+    line-height: 44px;
+    margin-bottom:0 !important;
+  }
+
+  .middle-width{
+    height:44px;
+  }
+
+  .middle-width .component-follow{
+    height:44px;
   }
 </style>

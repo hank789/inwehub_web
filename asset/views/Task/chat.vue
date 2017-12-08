@@ -5,16 +5,19 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">客服小哈</h1>
     </header>
-    <div class="mui-content absolute" id='contentwrapper'>
+    <div class="mui-content" id='contentwrapper'>
+
       <RefreshList ref="RefreshList"
-        v-model="list" :api="'im/messages'"
+        v-model="list"
+        :api="'im/messages'"
         :autoShowEmpty="false"
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
         :prevOtherData="{contact_id:0}"
         :nextOtherData="{contact_id:0}"
-        :list="list" class="listWrapper">
+        :prevSuccessCallback="prevSuccessCallback"
+        class="chatListWrapper">
 
         <ul class="user" id="myData">
           <template v-for="item in list">
@@ -22,7 +25,7 @@
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img src="../../statics/images/service1.png" />
+                <img src="../../statics/images/service2.png" />
                 <span>
                   {{item.data.text}}
              </span>
@@ -30,7 +33,7 @@
 
             </li>
             <!--自己-->
-            <li class="Customerservice" v-if="id == item.user_id">
+            <li class="Customerservice" v-else-if="id == item.user_id">
               <p>{{item.created_at}}</p>
               <p>
                 <img :src="avatar" />
@@ -43,17 +46,16 @@
           </template>
         </ul>
       </RefreshList>
-
-      <!--发送消息框-->
-      <div class="message" id="message">
-        <input type="text" v-model.trim="comment" @keyup="show($event)" />
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
-        </svg>
-      </div>
-      <!--发送消息框end-->
-
     </div>
+
+    <!--发送消息框-->
+    <div class="message" id="message">
+      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
+      </svg>
+    </div>
+    <!--发送消息框end-->
   </div>
 </template>
 
@@ -61,27 +63,35 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
+  import { autoTextArea } from '../../utils/plus'
+
   const Chat = {
     data: () => ({
       list: [],
-      page: 1,
       comment: '',
-      id: '',
-      avatar: '',
+      id: getLocalUserInfo().user_id,
+      avatar: getLocalUserInfo().avatar_url,
       flag: true
     }),
-    created () {
-      // id  和  头像；
-      this.id = getLocalUserInfo().user_id
-      this.avatar = getLocalUserInfo().avatar_url
-    },
-    computed: {
-
-    },
+    created () {},
+    computed: {},
     components: {
       RefreshList
     },
     methods: {
+      prevSuccessCallback () {
+        if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 500)
+        }
+      },
+      focus () {
+        setTimeout(() => {
+          this.$refs.RefreshList.scrollToBottom()
+        }, 1000)
+      },
+      blur () {},
       // 回车键发送‘
       show: function (ev) {
         if (ev.keyCode === 13) {
@@ -90,7 +100,7 @@
         }
       },
       // 获取本地时间；
-      CurentTime () {
+      currentTime () {
         var now = new Date()
 
         var year = now.getFullYear() // 年
@@ -124,27 +134,11 @@
         clock += ss
         return (clock)
       },
-      chat (obj) {
-        var item = {
-          created_at: obj.created_at,
-          data: {
-            text: obj.body.text
-          },
-          id: obj.id,
-          user_id: 0,
-          avatar: obj.avatar
-        }
-        this.list = this.list.concat(item)
-        this.flag = true
-        // console.log(item);
-        //  console.log(this.list);
-      },
       // 消息；
       message () {
         if (this.comment) {
           var item = {
-            // created_at: new Date().toLocaleString(),
-            created_at: this.CurentTime(),
+            created_at: this.currentTime(),
             data: {
               text: this.comment
             },
@@ -152,14 +146,18 @@
             user_id: this.id
           }
 
-          this.list = this.list.concat(item)
+          this.list.push(item)
+
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 500)
 
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: 0
           }).then(response => {
             var code = response.data.code
-            // 如果请求不成功提示信息 并且返回上一页；
+
             if (code !== 1000) {
               window.mui.alert(response.data.message)
               window.mui.back()
@@ -168,29 +166,13 @@
 
             if (response.data.data) {
               this.comment = ''
-
-              //            this.list = this.list.concat(response.data.data);
-
-              this.flag = true
             }
-
-            this.loading = 0
           })
         }
       }
-      // end；
     },
     mounted () {
-
-    },
-    updated () {
-      if (this.flag) {
-        this.flag = false
-
-        this.$nextTick(() => {
-          this.$refs.RefreshList.scrollToBottom()
-        })
-      }
+      autoTextArea()
     }
   }
   export default Chat
@@ -222,7 +204,7 @@
     width: 100%;
     height: 47px;
     background: #ececee;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     padding: 0 10px;
     z-index: 999;
@@ -276,6 +258,7 @@
     width: 42px;
     height: 42px;
     float: left;
+    border-radius: 8px;
   }
 
   .consumer p:nth-of-type(2) span {
@@ -328,7 +311,6 @@
 
   .Customerservice p:nth-of-type(2) {
     width: 100%;
-    overflow: hidden;
   }
 
   .Customerservice p:nth-of-type(2) img {
@@ -369,17 +351,7 @@
     margin: auto;
   }
 
-  .listWrapper {
+  .chatListWrapper {
     bottom: 47px;
-  }
-
-  .mui-scroll-wrapper {
-    /*position: absolute;
-    z-index: 2;
-    top: 0;
-    bottom: 0;
-    left: 0;*/
-    overflow: scroll;
-    /*width: 100%;*/
   }
 </style>

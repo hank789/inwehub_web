@@ -69,6 +69,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import localEvent from '../../stores/localStorage'
+  import { autoTextArea } from '../../utils/plus'
 
   const Ask = {
     data: () => ({
@@ -91,6 +92,8 @@
       pay
     },
     mounted () {
+      autoTextArea()
+
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       window.addEventListener('refreshData', function (e) {
@@ -135,8 +138,6 @@
     methods: {
       submit () {
         this.$refs.pay.pay()
-        //      删除标签；
-        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
       },
       textareaFocus () {
         if (this.description === this.descPlaceholder) {
@@ -157,12 +158,10 @@
       cancelAsk () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-
-        if (!this.type && this.description === this.descPlaceholder) {
+        if (!this.type && this.description === this.descPlaceholder && !this.tags.length) {
           window.mui.back()
           return
         }
-
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
             this.clearCache()
@@ -204,15 +203,16 @@
       },
       clearCache () {
         var info = {}
+        // 删除标签；
+        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-        if (!this.tags.length) {
-          window.mui.toast('请选择问题分类')
-          return
-        }
-
+//        if (!this.tags.length) {
+//          window.mui.toast('请选择问题分类')
+//          return
+//        }
         if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
           return

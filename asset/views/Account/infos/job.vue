@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">工作经历</h1>
 
     </header>
@@ -12,7 +12,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">公司</label>
-            <input type="text" v-model.trim="job.company" placeholder="必填">
+            <input type="text" v-model.trim="job.company" placeholder="必填"  @tap.stop.prevent="$router.push('/selectCompany?from=job' + type)"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -103,9 +103,13 @@
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'
   import { postRequest } from '../../../utils/request'
+  import { getLocalUserInfo } from '../../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
+      user_id: currentUser.user_id,
+      type: '',
       id: null,
       bak: '',
       object_type: '',
@@ -134,6 +138,11 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      empty () {
+        //   操作成删除保存的公司
+        localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
+        window.mui.back()
+      },
       refreshPageData: function () {
         this.getDetail()
       },
@@ -332,7 +341,14 @@
       next()
     },
     mounted () {
-
+      //     选择公司
+      if (this.$route.params.id) {
+        this.type = this.$route.params.id
+      }
+      var placeholder = localEvent.getLocalItem('job' + this.type + '_company' + this.user_id)
+      if (placeholder.length) {
+        this.job.company = placeholder
+      }
     },
     computed: {
       infoIndustryTagsNames () {

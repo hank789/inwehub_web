@@ -1157,7 +1157,7 @@ const routes = [
     meta: {
       title: '客服',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -1341,6 +1341,18 @@ const routes = [
   //   }
   // },
   { // 附近企业companyDetails.vue
+    path: '/selectCompany',
+    name: 'selectCompany',
+    meta: {
+      title: '企业',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Account/selectCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近企业companyDetails.vue
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
@@ -1370,7 +1382,7 @@ const routes = [
     meta: {
       title: '发现',
       wechatHideHeader: true,
-      keepAlive: false
+      keepAlive: true
     },
     component: require('../../../views/Discover/Add.vue'),
     beforeEnter: (to, from, next) => {
@@ -1764,14 +1776,6 @@ const routes = [
       title: 'exception'
     },
     component: require('../../../views/Exception/Error.vue')
-  },
-  {
-    path: '/sharepng',
-    name: 'sharepng',
-    meta: {
-      title: 'sharepng'
-    },
-    component: require('../../../views/SharePng.vue')
   },
   // {
   //  path: '/dialog',

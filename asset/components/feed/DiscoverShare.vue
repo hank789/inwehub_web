@@ -1,5 +1,5 @@
 <template>
-  <div class="container-item">
+  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}">
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)"><span v-html="textToLink(data.feed.title)">{{data.feed.title}}</span></div>
+    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)"><span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span><span v-html="textToLink(data.feed.title)">{{data.feed.title}}</span></div>
 
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
@@ -29,27 +29,19 @@
       </div>
     </div>
     <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
-      <div class="component-dianzanList" v-if="data.feed.support_number"><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span><span v-if="data.feed.support_number > data.feed.supporter_list.length">等{{data.feed.support_number}}人</span>
-      </div>
-      <div class="line-horizontal padding-5-0-5-0" v-if="data.feed.comment_number && data.feed.support_number"></div>
-      <div class="container-comments" :class="{'padding-0': parseInt(data.feed.support_number) === 0}" v-if="data.feed.comment_number">
-        <template v-for="(comment, index) in data.feed.comments">
 
+      <!-- 点赞和评论列表start -->
+      <SuppertAndComment
+        :supportNumber="data.feed.support_number"
+        :supportList="data.feed.supporter_list"
+        :commentNumber="data.feed.comment_number"
+        :commentList="data.feed.comments"
+        :detailUrl="data.url"
 
-          <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, data.feed.comments)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span><span  class="textToLink" v-html="textToLink(comment.content)"></span>
-          </div>
+        @commentIt="commentIt"
+      ></SuppertAndComment>
 
-          <DiscussReplySimple
-            :children="comment.children"
-            :parentOwnerName="comment.owner.name"
-            @comment="commentIt"
-          ></DiscussReplySimple>
-
-        </template>
-        <div class="more" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.comment_number > 8">查看全部{{data.feed.comment_number}}条评论</div>
-      </div>
+      <!-- 点赞和评论列表end -->
     </div>
     <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">
       <svg class="icon" aria-hidden="true">
@@ -66,8 +58,8 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
   import { textToLinkHtml } from '../../utils/dom'
+  import SuppertAndComment from './SuppertAndComment.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -78,7 +70,7 @@
     components: {
       Images,
       Avatar,
-      DiscussReplySimple
+      SuppertAndComment
     },
     props: {
       data: {
@@ -174,9 +166,6 @@
   .preWrapper{
     white-space: pre-wrap !important;
   }
-  .iconPenglunWrapper{
-    margin-right:10px;
-  }
 
   .comment .from{
     color:#03aef9;
@@ -184,6 +173,10 @@
 
   .comment .to{
     color:#808080;
+  }
+
+  .noMoreComment .container-answer{
+    padding:10px 15px 10px;
   }
 </style>
 

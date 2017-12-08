@@ -56,7 +56,7 @@
         loading: 1,
         list: [],
         skill_tags: [],
-        tags:[]
+        tags: []
       }
     },
     methods: {
@@ -334,7 +334,7 @@
   }
   /*按钮的color*/
 
-  .mui-popup-buttons span..mui-popup-buttons span.mui-popup-button {
+  .mui-popup-buttons span.mui-popup-buttons span.mui-popup-button {
     color: #808080;
   }
 </style>

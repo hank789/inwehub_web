@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布动态</h1>
     </header>
 
@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import { compressImg } from '../../utils/uploadFile'
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
@@ -68,8 +67,6 @@
         tags: [],
         description: '',
         images: [],
-        channels: [],
-        selectedChannel: '',
         maxImageCount: 3,
         percentCompleted: 0,
         address: '',
@@ -95,9 +92,13 @@
       uploadImage
     },
     methods: {
+      empty () {
+        this.resetData()
+        this.$router.pushPlus('/home')
+      },
       totags () {
-        this.$router.push('/selecttags?from=discover')
         localEvent.setLocalItem('discover_description' + this.id, this.description)
+        this.$router.push('/selecttags?from=discover')
       },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
@@ -133,56 +134,24 @@
           userPicker.dispose()
         })
       },
-      getChannels () {
-        postRequest(`article/get-categories`, {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          if (response.data.data.length > 0) {
-            this.channels = response.data.data
-            this.selectedChannel = this.channels[0].value
-          }
-          this.loading = 0
-        })
-      },
-      selectChannel () {
-        var userPicker = new window.mui.PopPicker()
-
-        userPicker.setData(this.channels)
-
-        userPicker.show(items => {
-          var value = items[0].value
-          this.selectedChannel = value
-          userPicker.dispose()
-        })
-      },
       toggleHide () {
         this.hide = !this.hide
       },
       delImg (index) {
         this.images.splice(index, 1)
       },
+      resetData () {
+        this.tags = []
+        this.description = ''
+        this.images = []
+        this.percentCompleted = 0
+        this.hide = 0
+        localEvent.clearLocalItem('discover_description' + this.id)
+        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+      },
       submit () {
         if (!this.descLength) {
           window.mui.toast('请填写分享内容')
-          return
-        }
-
-        if (!this.descLength) {
-          window.mui.toast('内容不能为空')
-          return
-        }
-
-//        if (!this.images.length) {
-//          window.mui.toast('请添加图片')
-//          return
-//        }
-
-        if (!this.selectedChannel) {
-          window.mui.toast('请选择频道')
           return
         }
 
@@ -198,7 +167,7 @@
         }
 
         for (var i in this.images) {
-          var compressBase64 = compressImg('image_' + i)
+          var compressBase64 = this.images[i].base64
           data['photos'].push(compressBase64)  // this.images[i].base64;
         }
 
@@ -217,10 +186,9 @@
             window.mui.alert(response.data.message)
             return
           }
+
+          this.resetData()
           this.$router.push('/discover/add/success')
-//          提交成功 清空标签
-          //      删除标签；
-          localEvent.clearLocalItem('discover_skill_tags' + this.id)
         })
       },
       textareaFocus () {
@@ -234,6 +202,20 @@
         if (this.description === '') {
           this.description = this.descPlaceholder
         }
+      },
+      initData () {
+        this.textareaBlur()
+        var placeholder = localEvent.getLocalItem('discover_description' + this.id)
+        if (placeholder.length) {
+          this.description = placeholder
+        } else {
+          this.description = this.descPlaceholder
+        }
+
+        var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i in tag) {
+          this.tags = this.tags.concat(tag[i].value)
+        }
       }
     },
     watch: {
@@ -244,7 +226,6 @@
       }
     },
     created () {
-      this.getChannels()
       getGeoPosition((position) => {
         if (position.addresses) {
           this.position = position
@@ -253,17 +234,12 @@
         }
       })
     },
-    mounted () {
-      this.textareaBlur()
-      autoTextArea()
-      this.description = localEvent.getLocalItem('discover_description' + this.id)
-      var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-      for (var i in tag) {
-        this.tags = this.tags.concat(tag[i].value)
-      }
+    activated: function () {
+      this.initData()
     },
-    updated () {
-//      console.error(currentUser)
+    mounted () {
+      autoTextArea()
+      this.initData()
     }
   }
 </script>

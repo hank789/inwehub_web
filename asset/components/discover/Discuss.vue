@@ -28,7 +28,7 @@
                   </svg>
                 </p>
                 <p class="mui-ellipsis">{{ item.owner.name }}</p>
-                <p>{{ item.created_at }}</p>
+                <p>{{ item.created_at.replace(/-/g, '/') }}</p>
               </div>
               <div class="message_b textToLink" v-html="textToLink(item.content)"></div>
 

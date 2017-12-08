@@ -108,7 +108,7 @@
     }
 
     .itemFooter {
-      padding: 0 15px 10px;
+      padding: 9px 15px 13px;
 
       .iconWrapper {
         display: inline-block;

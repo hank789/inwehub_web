@@ -22,7 +22,7 @@
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
-      <div class="linkWrapper container-image" v-if="detail.type === 'link'" @tap.stop.prevent="goArticle(detail)">
+      <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img" @tap.stop.prevent="goArticle(detail)" >
         <img :src="detail.data.img"/>
       </div>
 
@@ -70,7 +70,6 @@
         :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
         :storeApi="'article/comment-store'"
         :storeParams="{'submission_id': detail.id}"
-
         @comment="comment"
         @commentFinish="commentFinish"
         ref="discuss"
