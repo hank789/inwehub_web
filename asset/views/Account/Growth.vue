@@ -206,12 +206,12 @@
             </li>
             <li>
               <svg class="icon yellow" aria-hidden="true" v-if="user_level >='3'">
-                <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
+                <use xlink:href="#icon-fujinqiye"></use>
               </svg>
               <svg class="icon " aria-hidden="true" v-else>
                 <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
               </svg>
-              <p>专属秘书</p>
+              <p>附近企业</p>
               <p class="text_yellow" v-if="user_level >='3'">已获取</p>
               <p v-else>升级解锁</p>
             </li>
@@ -235,12 +235,12 @@
           <ul class="powerdetail">
             <li>
               <svg class="icon yellow" aria-hidden="true" v-if="user_level >='4'">
-                <use xlink:href="#icon-fujinqiye"></use>
+                <use xlink:href="#icon-chengchangye-zhuanshumishu"></use>
               </svg>
               <svg class="icon" aria-hidden="true" v-else>
                 <use xlink:href="#icon-fujinqiye"></use>
               </svg>
-              <p>附近企业</p>
+              <p>专属秘书</p>
               <p class="text_yellow" v-if="user_level >='4'">已获取</p>
               <p v-else>升级解锁</p>
             </li>
