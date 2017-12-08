@@ -31,6 +31,16 @@
       </div>
     </div>
 
+    <div class="buttonWrapper">
+      <button class="mui-btn mui-btn-block mui-btn-primary" v-if="!data.feed.is_pay_for_view">1元看答案／看评论</button>
+      <button class="mui-btn mui-btn-block mui-btn-primary" v-else>查看回答</button>
+    </div>
+
+    <div class="component-dianzanList" v-if="data.feed.support_number"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-dianzan1"></use>
+    </svg><span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span><span v-if="data.feed.support_number > data.feed.supporter_list.length">等{{data.feed.support_number}}人</span>
+    </div>
+
   </div>
 </template>
 
@@ -65,3 +75,10 @@
     }
   }
 </script>
+
+<style scoped>
+
+  .buttonWrapper{
+    margin-top:10px;
+  }
+</style>
