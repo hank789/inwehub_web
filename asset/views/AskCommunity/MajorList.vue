@@ -86,7 +86,6 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import AnswerMajor from '../../components/feed/AnswerMajor'
 

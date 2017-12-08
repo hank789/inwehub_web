@@ -87,7 +87,6 @@
   import { selectFileH5, compressImg } from '../../utils/uploadFile'
   import { setCacheInfo, cacheProject, resetCache } from '../../utils/project'
   import { selectKeyValue } from '../../utils/select'
-  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {

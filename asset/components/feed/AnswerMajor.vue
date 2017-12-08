@@ -80,11 +80,8 @@
             window.mui.alert(response.data.message)
             return
           }
-
 //          var uuid = currentUser.uuid
 //          var username = currentUser.name
-
-
 //          if (false) {
 //            this.data.feed.support_number--
 //            for (var i in this.data.feed.supporter_list) {

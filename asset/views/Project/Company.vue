@@ -367,10 +367,8 @@
             window.mui.alert(response.data.message)
             return
           }
-
           setCacheInfo('company', this.$data)
           this.$router.push('/project/like?pid=' + this.project_id)
-
         })
       },
       closeIndustry (index) {

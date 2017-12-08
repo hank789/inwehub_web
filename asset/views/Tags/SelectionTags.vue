@@ -111,7 +111,6 @@
             return false
           }
         }
-
       },
       // 申请添加擅长标签；
       applySkillTag (text) {
