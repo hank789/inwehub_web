@@ -25,7 +25,7 @@
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img src="../../statics/images/service1.png" />
+                <img src="../../statics/images/service2.png" />
                 <span>
                   {{item.data.text}}
              </span>
@@ -258,6 +258,7 @@
     width: 42px;
     height: 42px;
     float: left;
+    border-radius: 8px;
   }
 
   .consumer p:nth-of-type(2) span {

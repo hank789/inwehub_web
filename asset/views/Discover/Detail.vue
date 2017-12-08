@@ -22,7 +22,7 @@
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
-      <div class="linkWrapper container-image" v-if="detail.type === 'link'" @tap.stop.prevent="goArticle(detail)">
+      <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img" @tap.stop.prevent="goArticle(detail)" >
         <img :src="detail.data.img"/>
       </div>
 
