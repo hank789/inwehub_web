@@ -128,11 +128,12 @@
         this.$refs.short.show()
       },
       listen () {
-        var currentUser = localEvent.getLocalItem('UserInfo')
-        if (currentUser.user_id && window.Echo) {
+        var currentUser = localEvent.getLocalItem('UserLoginInfo')
+        if (currentUser.id && window.Echo) {
           console.log('listen notification')
+          window.Echo.options.auth.headers['Authorization'] = 'Bearer ' + currentUser.token
           // 监听通知事件
-          window.Echo.channel('notification.user.' + currentUser.user_id)
+          window.Echo.channel('notification.user.' + currentUser.id)
             .notification((notification) => {
               socketResponseManage(notification, this)
             })
