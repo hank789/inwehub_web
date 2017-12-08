@@ -135,8 +135,6 @@
     methods: {
       submit () {
         this.$refs.pay.pay()
-        //      删除标签；
-        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
       },
       textareaFocus () {
         if (this.description === this.descPlaceholder) {
@@ -157,14 +155,14 @@
       cancelAsk () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-
-        if (!this.type && this.description === this.descPlaceholder) {
+        if (!this.type && this.description === this.descPlaceholder && !this.tags.length) {
           window.mui.back()
           return
         }
-
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
+            //      删除标签；
+            localEvent.clearLocalItem('interaction_skill_tags' + this.id)
             this.clearCache()
             window.mui.back()
           }
@@ -208,16 +206,14 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-        if (!this.tags.length) {
-          window.mui.toast('请选择问题分类')
-          return
-        }
-
+//        if (!this.tags.length) {
+//          window.mui.toast('请选择问题分类')
+//          return
+//        }
         if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
           return
         }
-
         // 提问设备，1为IOS，2为安卓，3为网页，4为微信小程序
         var device = 1
         if (window.mui.os.plus) {

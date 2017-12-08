@@ -355,13 +355,13 @@
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    padding: 0 15px;
     margin-top: 12px;
   }
   .component-dianzanList span{
     font-size:13px;
     color:#03aef9;
   }
+
 
 </style>
 
