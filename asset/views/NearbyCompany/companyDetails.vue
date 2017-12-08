@@ -12,7 +12,7 @@
         :pageMode="true"
         :prevOtherData="{page: 1,id:this.id}"
         :nextOtherData="{}"
-        autoShowEmpty="false"
+        :autoShowEmpty="false"
         class="listWrapper">
         <div class="companyDetail" >
           <div class="gray"></div>
@@ -338,7 +338,7 @@
   }
   /*详细的信息*/
   .Relevant_detail{
-    width:70%;
+    /*width:65%;*/
     height:100%;
     margin-left: 7px;
   }
@@ -404,6 +404,22 @@
   }
   .listWrapper{
     bottom: 46px;
+  }
+  /*适配*/
+  @media (min-width:320px) {
+    .Relevant_detail {
+      width:57%;
+    }
+  }
+  @media (min-width:375px) {
+    .Relevant_detail {
+      width:66%;
+    }
+  }
+  @media (min-width:414px) {
+    .Relevant_detail {
+      width:70%;
+    }
   }
 
 </style>
