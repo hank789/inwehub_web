@@ -37,7 +37,7 @@
          </svg>
         <span class="carte" style="display: none;">
           <a @tap.stop.prevent="report(data.user_id)" v-if="userId != data.owner.id">举报</a>
-          <a @tap.stop.prevent="deleterow(data.id,index)" v-else>删除</a>
+          <a @tap.stop.prevent="deleterow" v-else>删除</a>
         </span>
       </p>
       <p @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
@@ -112,8 +112,8 @@
       report (id) {
         this.$emit('report', id)
       },
-      deleterow (id, index) {
-        this.$emit('deleterow', id, index)
+      deleterow () {
+        this.$emit('deleterow')
       },
       toggleOptions (event) {
         if (event.target.nodeName !== 'svg') return

@@ -73,7 +73,7 @@
               <TextDetail :data="hot" @downvoteComment="downvoteComment"
                           @bookmarkuBmission="bookmarkuBmission"
                           @report="report"
-                          @deleterow="deleterow"
+                          @deleterow="deleterow(hot.id, index)"
               ></TextDetail>
 
             </li>
@@ -146,7 +146,7 @@
       deleterow (id, index) {
         var btnArray = ['取消', '确定']
         var list = this.list
-        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
             // 进行删除
             postRequest(`article/destroy-submission`, {
