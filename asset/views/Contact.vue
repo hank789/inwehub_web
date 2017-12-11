@@ -53,6 +53,7 @@
               </div>
 
               <div class="ibutton active" v-if="item.is_invited">已邀请</div>
+              <div class="ibutton active" v-else-if="item.is_answered">已回答</div>
               <div class="ibutton" @tap.stop.prevent="chooseItem(item)" v-else>邀请</div>
 
             </li>
