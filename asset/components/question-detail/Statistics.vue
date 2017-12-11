@@ -52,15 +52,12 @@
   </div>
     <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
     <div class="component-dianzanList" v-if="supportNum">
-      <i class="bot"></i>
       <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-dianzan1"></use>
       </svg>
       <span v-for="(item, index) in answerList.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span><span v-if="supportNum > answerList.supporter_list.length">等{{supportNum}}人</span>
 
     </div>
-    <!--查看全部回答-->
-    <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answerList.uuid)"> 查看Ta的全部回答 ></div>
 
   </div>
 </template>
@@ -202,16 +199,7 @@
     list-style: none;
     font-style: normal;
   }
-  .bot {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    height: 1px;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
+
 
   .item {
     line-height: 20px;
@@ -300,16 +288,6 @@
 
   .mui-table-view.detail-answer{
     margin-bottom: 0;
-  }
-  /*查看回答*/
-  .see{
-    width:100%;
-    height:40px;
-    padding: 0 15px;
-    font-size:14px;
-    color:#03aef9;
-    text-align: center;
-    line-height: 40px;
   }
 
 </style>
