@@ -46,7 +46,7 @@
                   </svg>
                 </p>
                 <p class="mui-ellipsis">
-                  {{ item.hide ? item.answer_username : '匿名'}}
+                  {{ item.answer_username }}
                 </p>
               </div>
               <p class="mui-ellipsis-2">{{item.description}}</p>
