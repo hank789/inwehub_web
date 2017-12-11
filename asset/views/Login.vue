@@ -99,6 +99,11 @@
     },
     beforeRouteEnter (to, from, next) {
       if (window.mui.os.wechat) {
+        if (window.isLocalEnv) {
+          next()
+          return
+        }
+
         var hash = null
         if (to.query.redirect) {
           hash = to.query.redirect
