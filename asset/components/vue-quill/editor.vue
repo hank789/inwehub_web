@@ -49,15 +49,17 @@
       this.quill = null
     },
     methods: {
-      appendContent (text) {
+      appendContent (text, attribute) {
         setTimeout(() => {
           let range = this.quill.getSelection(true)
+
           this.quill.updateContents(new Delta()
               .retain(range.index)
-              .insert(text)
+              .insert(text, attribute)
+              .insert(' ', attribute)
             , 'user')
-          this.quill.setSelection(range.index + text.length, 'user')
-        }, 500)
+          this.quill.setSelection(range.index + text.length + 1, 'user')
+        }, 100)
       },
       changeAvatar: function () {
         if (window.mui.os.plus) {
@@ -222,10 +224,14 @@
               source: source
             })
 
-            var trimStr = text.trim()
-            var lastChar = trimStr.charAt(trimStr.length - 1)
-            if (lastChar === '@') {
-              self.$emit('addressAppear')
+            if (delta.ops[1] && delta.ops[1].delete) {
+              // ...
+            } else {
+              var trimStr = text.trim()
+              var lastChar = trimStr.charAt(trimStr.length - 1)
+              if (lastChar === '@') {
+                self.$emit('addressAppear')
+              }
             }
           })
 
