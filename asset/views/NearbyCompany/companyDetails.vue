@@ -11,7 +11,7 @@
         :api="'company/dataPeople'"
         :pageMode="true"
         :prevOtherData="{page: 1,id:this.id}"
-        :nextOtherData="{}"
+        :nextOtherData="{id:this.id}"
         :autoShowEmpty="false"
         class="listWrapper">
         <div class="companyDetail" >
