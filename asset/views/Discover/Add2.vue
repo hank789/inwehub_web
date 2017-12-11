@@ -100,7 +100,11 @@
     },
     methods: {
       addressAppear () {
-        this.$refs.myAddEditor.appendText('test')
+        this.$refs.myAddEditor.appendText('test', {
+          bold: true,
+          'color': '#ffff00',
+          link: true
+        })
       },
       onEditorChange (editor) {
       },

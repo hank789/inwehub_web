@@ -83,8 +83,8 @@
       quillEditor
     },
     methods: {
-      appendText (text) {
-        this.$refs.myTextEditor.appendContent(text)
+      appendText (text, attribute) {
+        this.$refs.myTextEditor.appendContent(text, attribute)
       },
       addressAppear () {
         this.$emit('addressAppear')
