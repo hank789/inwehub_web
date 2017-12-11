@@ -36,6 +36,10 @@
         default () {
           return {}
         }
+      },
+      isEnableImage: {
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
@@ -45,6 +49,16 @@
       this.quill = null
     },
     methods: {
+      appendContent (text) {
+        setTimeout(() => {
+          let range = this.quill.getSelection(true)
+          this.quill.updateContents(new Delta()
+              .retain(range.index)
+              .insert(text)
+            , 'user')
+          this.quill.setSelection(range.index + text.length, 'user')
+        }, 500)
+      },
       changeAvatar: function () {
         if (window.mui.os.plus) {
           var a = [{
@@ -207,6 +221,12 @@
               text: text,
               source: source
             })
+
+            var trimStr = text.trim()
+            var lastChar = trimStr.charAt(trimStr.length - 1)
+            if (lastChar === '@') {
+              self.$emit('addressAppear')
+            }
           })
 
           // quill准备就绪
@@ -254,10 +274,12 @@
             }, 500)
           }
 
-          if (window.mui.os.plus) {
-            self.quill.getModule('toolbar').addHandler('image', imgHandlerMUI)
-          } else {
-            self.quill.getModule('toolbar').addHandler('image', imgHandler)
+          if (self.isEnableImage) {
+            if (window.mui.os.plus) {
+              self.quill.getModule('toolbar').addHandler('image', imgHandlerMUI)
+            } else {
+              self.quill.getModule('toolbar').addHandler('image', imgHandler)
+            }
           }
         }
       }
