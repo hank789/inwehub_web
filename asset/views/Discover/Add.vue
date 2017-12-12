@@ -42,9 +42,9 @@
       </div>
 
       <div class="container-bottom-menus">
-        <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
-          <!--<use xlink:href="#icon-icon-test1"></use>-->
-        <!--</svg>-->
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">
+          <use xlink:href="#icon-icon-test1"></use>
+        </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
@@ -83,6 +83,9 @@
         tag: [],
         tags: [],
         tagsName: [],
+        user: [],
+        userId: [],
+        userName: [],
         description: {},
         images: [],
         maxImageCount: 3,
@@ -124,6 +127,16 @@
         localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
       },
       addressAppearDelete (text) {
+        var name = text.substring(1, text.length)
+        console.error(name)
+        for (var i in this.user) {
+          if (this.user[i].name === name) {
+            this.user.splice(i, 1)
+            this.userId.splice(i, 1)
+            this.userName.splice(i, 1)
+          }
+        }
+        localEvent.setLocalItem('select_users' + this.id, this.user)
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -187,6 +200,8 @@
       resetData () {
         this.tags = []
         this.tagsName = []
+        this.userId = []
+        this.userName = []
         this.description = {}
         this.images = []
         this.percentCompleted = 0
@@ -194,6 +209,7 @@
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
+        localEvent.clearLocalItem('select_users' + this.id)
       },
       submit () {
         if (!this.text) {
@@ -207,6 +223,7 @@
           photos: [],
           category_id: '',
           tags: this.tags,
+          mentions: this.userId,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
@@ -248,6 +265,20 @@
             this.tagsName.push(this.tag[i].text)
             this.$refs.myAddEditor.appendText('#' + this.tag[i].text, {
               'color': '#225180',
+              'size': 'small'
+            })
+          }
+        }
+        // 循环插入@人
+        this.user = localEvent.getLocalItem('select_users' + this.id)
+        for (var num = 0; num < this.user.length; num++) {
+          if (this.userId.indexOf(this.user[num].id) === -1) {
+            this.userId.push(this.user[num].id)
+          }
+          if (this.userName.indexOf(this.user[num].name) === -1) {
+            this.userName.push(this.user[num].name)
+            this.$refs.myAddEditor.appendText('@' + this.user[num].name, {
+              'color': '#42AEF9',
               'size': 'small'
             })
           }
@@ -311,5 +342,8 @@
     bottom: -95px;
     font-size: 14px;
     color: #c8c8c8;
+  }
+  #discoverAddJeditor .ql-editor .ql-size-small{
+    font-size: 16px;
   }
 </style>

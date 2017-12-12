@@ -18,7 +18,9 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)"><span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span><span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
+      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+        <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
+        <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList"></Images>
 
