@@ -19,6 +19,8 @@
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppear="addressAppear"
+          @hashSymbolDelete="hashSymbolDelete"
+          @addressAppearDelete="addressAppearDelete"
         ></Jeditor>
 
         <div class="container-images">
@@ -77,6 +79,7 @@
     data () {
       return {
         id: currentUser.user_id,
+        tag: [],
         tags: [],
         tagsName: [],
         description: {},
@@ -108,8 +111,19 @@
           link: true
         })
       },
+//      删除标签
+      hashSymbolDelete (text) {
+        console.error(text)
+//        for (var i in this.detail.supporter_list) {
+//          if (this.detail.supporter_list[i].uuid === this.uuid) {
+//            this.detail.supporter_list.splice(i, 1)
+//          }
+//        }
+      },
+      addressAppearDelete (text) {
+      },
       onEditorChange (editor) {
-         console.error(editor.html)
+        console.error(editor.html)
         // var html = editor.html
       },
       onEditorBlur (editor) {
@@ -220,14 +234,14 @@
         })
       },
       initData () {
-        var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-        for (var i = 0; i < tag.length; i++) {
-          if (this.tags.indexOf(tag[i].value) === -1) {
-            this.tags.push(tag[i].value)
+        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i = 0; i < this.tag.length; i++) {
+          if (this.tags.indexOf(this.tag[i].value) === -1) {
+            this.tags.push(this.tag[i].value)
           }
-          if (this.tagsName.indexOf(tag[i].text) === -1) {
-            this.tagsName.push(tag[i].text)
-            this.$refs.myAddEditor.appendText('#' + tag[i].text, {
+          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
+            this.tagsName.push(this.tag[i].text)
+            this.$refs.myAddEditor.appendText('#' + this.tag[i].text, {
               'color': '#225180',
               'size': 'small'
             })
