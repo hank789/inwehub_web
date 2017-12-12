@@ -30,7 +30,15 @@
       content: String,
       value: Object,
       disabled: Boolean,
+      isMonitorAddressAppear: {
+        type: Boolean,
+        default: false
+      },
       isEnableAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      isMonitorHashSymbol: {
         type: Boolean,
         default: false
       },
@@ -284,7 +292,7 @@
               var trimStr = text.trim()
               var lastChar = trimStr.charAt(trimStr.length - 1)
 
-              if (self.isEnableAddressAppear) {
+              if (self.isMonitorAddressAppear) {
                 if (lastChar === '@') {
                   console.log('监测到@， 触发addressAppearFound')
                   self.$emit('addressAppearFound')
@@ -292,7 +300,7 @@
                 }
               }
 
-              if (self.isEnableHashSymbol) {
+              if (self.isMonitorHashSymbol) {
                 if (lastChar === '#') {
                   console.log('监测到#， 触发hashSymbolFound')
                   self.$emit('hashSymbolFound')
