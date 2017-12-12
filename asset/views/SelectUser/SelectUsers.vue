@@ -104,6 +104,7 @@
       },
       // 点击选择；
       collectProfessor (index, item) {
+        item.listindex = index
         var value = this.Selected[index] ? false : item
         Vue.set(this.Selected, index, value)
         console.log(this.Selected)
@@ -144,9 +145,22 @@
         })
       }
     },
+    activated () {
+      this.Selected = []
+      var user = localEvent.getLocalItem('select_users' + this.userId)
+      console.error(user)
+      for (var num = 0; num < user.length; num++) {
+        this.collectProfessor(user[num].listindex, user[num])
+      }
+    },
     watch: {},
     mounted () {
       this.getList()
+      var user = localEvent.getLocalItem('select_users' + this.userId)
+      console.error(user)
+      for (var num = 0; num < user.length; num++) {
+        this.collectProfessor(user[num].listindex, user[num])
+      }
     },
     created () {
       console.log(this.lastList)
