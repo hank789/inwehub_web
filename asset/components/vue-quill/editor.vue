@@ -57,6 +57,9 @@
       this.quill = null
     },
     methods: {
+      resetContent (content) {
+        this.quill.setContents(content)
+      },
       appendContent (text, attribute) {
         setTimeout(() => {
           let range = this.quill.getSelection(true)
@@ -190,7 +193,7 @@
       },
       getLastObject (content) {
         var lastObject = content.pop()
-        if (lastObject.insert === '\n') {
+        if (lastObject.insert === '\n' && content.length > 0) {
           return this.getLastObject(content)
         }
         return lastObject

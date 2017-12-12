@@ -53,6 +53,10 @@
       editorObj: {}
     }),
     props: {
+      content: {
+        type: Object,
+        default: {}
+      },
       rows: {
         type: Number,
         default: 5
@@ -88,6 +92,9 @@
       quillEditor
     },
     methods: {
+      resetContent (content = []) {
+        this.$refs.myTextEditor.resetContent(content)
+      },
       addressAppearDelete (text) {
         this.$emit('addressAppearDelete', text)
       },
@@ -127,6 +134,9 @@
       }
     },
     watch: {
+      'content' (newVal, oldVal) {
+        this.description = newVal
+      },
       'id' (newVal, oldVal) {
         this.refreshPageData()
       },
