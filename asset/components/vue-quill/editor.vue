@@ -57,6 +57,9 @@
       this.quill = null
     },
     methods: {
+      resetContent (content) {
+        this.quill.setContents(content)
+      },
       appendContent (text, attribute) {
         setTimeout(() => {
           let range = this.quill.getSelection(true)

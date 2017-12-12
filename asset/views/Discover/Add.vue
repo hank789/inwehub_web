@@ -12,6 +12,7 @@
           id="discoverAddJeditor"
           v-model.trim="description"
           :rows="10"
+          :content="description"
           :descMaxLength="descMaxLength"
           :placeholder="descPlaceholder"
           @ready="onEditorReady($event)"
@@ -173,6 +174,7 @@
         this.description = {}
         this.images = []
         this.percentCompleted = 0
+        this.$refs.myAddEditor.resetContent()
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
