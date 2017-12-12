@@ -101,8 +101,8 @@
       hashSymbolDelete (text) {
         this.$emit('hashSymbolDelete', text)
       },
-      appendText (text, attribute) {
-        this.$refs.myTextEditor.appendContent(text, attribute)
+      appendText (text, attribute, position = 'current') {
+        this.$refs.myTextEditor.appendContent(text, attribute, position)
       },
       addressAppearFound () {
         this.$emit('addressAppearFound')
