@@ -18,6 +18,8 @@
                     @ready="onEditorReady($event)"
                     @addressAppearFound="addressAppearFound"
                     @hashSymbolFound="hashSymbolFound"
+                    @addressAppearDelete="addressAppearDelete"
+                    @hashSymbolDelete="hashSymbolDelete"
       >
       </quill-editor>
 
@@ -86,6 +88,12 @@
       quillEditor
     },
     methods: {
+      addressAppearDelete (text) {
+        this.$emit('addressAppearDelete', text)
+      },
+      hashSymbolDelete (text) {
+        this.$emit('hashSymbolDelete', text)
+      },
       appendText (text, attribute) {
         this.$refs.myTextEditor.appendContent(text, attribute)
       },

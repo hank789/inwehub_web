@@ -257,6 +257,7 @@
                   setTimeout(() => {
                     self.quill.setContents(self._content, 'user')
                     self.quill.setSelection(range.index, 'user')
+                    self.$emit('addressAppearDelete', lastObject.insert)
                   }, 200)
                 } else {
                   console.log('未匹配到@')
@@ -270,6 +271,7 @@
                   setTimeout(() => {
                     self.quill.setContents(self._content, 'user')
                     self.quill.setSelection(range.index, 'user')
+                    self.$emit('hashSymbolDelete', lastObject.insert)
                   }, 200)
                 } else {
                   console.log('未匹配到#')
@@ -281,6 +283,7 @@
 
               if (self.isEnableAddressAppear) {
                 if (lastChar === '@') {
+                  console.log('监测到@， 触发addressAppearFound')
                   self.$emit('addressAppearFound')
                   self.quill.history.undo()
                 }
@@ -288,6 +291,7 @@
 
               if (self.isEnableHashSymbol) {
                 if (lastChar === '#') {
+                  console.log('监测到#， 触发hashSymbolFound')
                   self.$emit('hashSymbolFound')
                   self.quill.history.undo()
                 }

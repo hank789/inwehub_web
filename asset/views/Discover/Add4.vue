@@ -7,7 +7,20 @@
 
     <div class="mui-content">
       <div class="component-textareaWithImage">
-        <textarea id="discoverTextarea" rows="10" v-model.trim="description" @focus="textareaFocus" @blur="textareaBlur"></textarea>
+
+        <Jeditor
+          ref="myAddEditor"
+          id="discoverAddJeditor"
+          v-model.trim="description"
+          :rows="10"
+          :descMaxLength="descMaxLength"
+          :placeholder="descPlaceholder"
+          @ready="onEditorReady($event)"
+          @onEditorBlur="onEditorBlur"
+          @onEditorFocus="onEditorFocus"
+          @onEditorChange="onEditorChange"
+          @addressAppearFound="addressAppearFound"
+        ></Jeditor>
 
         <div class="container-images">
           <div class="container-image" v-for="(image, index) in images">
@@ -46,7 +59,9 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
+      v-model="images"
+      :images="images"
       :isMultiple="true"
       :ImageMaximum="3"
     ></uploadImage>
@@ -92,6 +107,22 @@
       uploadImage
     },
     methods: {
+      addressAppearFound () {
+        this.$refs.myAddEditor.appendText('@test', {
+          bold: true,
+          'color': '#ffff00',
+          link: true
+        })
+      },
+      onEditorChange (editor) {
+      },
+      onEditorBlur (editor) {
+      },
+      onEditorFocus (editor) {
+      },
+      onEditorReady (editor) {
+        this.editorObj = editor
+      },
       empty () {
         this.resetData()
         this.$router.pushPlus('/home')
@@ -240,6 +271,7 @@
     mounted () {
       autoTextArea()
       this.initData()
+      console.log('images:' + JSON.stringify(this.images))
     }
   }
 </script>
