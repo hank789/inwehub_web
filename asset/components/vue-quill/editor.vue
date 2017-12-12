@@ -190,7 +190,7 @@
       },
       getLastObject (content) {
         var lastObject = content.pop()
-        if (lastObject.insert === '\n') {
+        if (lastObject.insert === '\n' && content.length > 0) {
           return this.getLastObject(content)
         }
         return lastObject
