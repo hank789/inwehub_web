@@ -30,6 +30,14 @@
       content: String,
       value: Object,
       disabled: Boolean,
+      isEnableAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      isEnableHashSymbol: {
+        type: Boolean,
+        default: false
+      },
       options: {
         type: Object,
         required: false,
@@ -56,7 +64,7 @@
           this.quill.updateContents(new Delta()
               .retain(range.index)
               .insert(text, attribute)
-              .insert(' ', attribute)
+              .insert(' ', {})
             , 'user')
           this.quill.setSelection(range.index + text.length + 1, 'user')
         }, 100)
@@ -180,6 +188,13 @@
 
         return true
       },
+      getLastObject (content) {
+        var lastObject = content.pop()
+        if (lastObject.insert === '\n') {
+          return this.getLastObject(content)
+        }
+        return lastObject
+      },
       initialize () {
         if (this.$el) {
           // 获取选项
@@ -212,25 +227,70 @@
 
           // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
+            self._content = self.quill.getContents()
+            console.log('text-change被触发, delta:' + JSON.stringify(delta) + ', oldDelta:' + JSON.stringify(oldDelta) + ', content:' + JSON.stringify(self._content))
+
             var html = self.$refs.editor.children[0].innerHTML
             const text = self.quill.getText()
             if (html === '<p><br></p>') html = ''
-            self._content = self.quill.getContents()
+
             self.$emit('input', self._content)
             self.$emit('change', {
               editor: self.quill,
               html: html,
               text: text,
+              obj: self._content,
               source: source
             })
 
             if (delta.ops[1] && delta.ops[1].delete) {
-              // ...
+              // 删除操作
+              // 判断删除的是否是@xxx内容，如果是, 整段删除
+              var lastObject = self.getLastObject(self._content.ops)
+              console.log('lastObject:' + JSON.stringify(lastObject))
+              console.log('lastContent:' + JSON.stringify(self._content))
+
+              if (self.isEnableAddressAppear) {
+                if (/^@/.test(lastObject.insert)) {
+                  console.log('匹配到@')
+                  let range = self.quill.getSelection(true)
+                  setTimeout(() => {
+                    self.quill.setContents(self._content, 'user')
+                    self.quill.setSelection(range.index, 'user')
+                  }, 200)
+                } else {
+                  console.log('未匹配到@')
+                }
+              }
+
+              if (self.isEnableHashSymbol) {
+                if (/^#/.test(lastObject.insert)) {
+                  console.log('匹配到#')
+                  let range = self.quill.getSelection(true)
+                  setTimeout(() => {
+                    self.quill.setContents(self._content, 'user')
+                    self.quill.setSelection(range.index, 'user')
+                  }, 200)
+                } else {
+                  console.log('未匹配到#')
+                }
+              }
             } else {
               var trimStr = text.trim()
               var lastChar = trimStr.charAt(trimStr.length - 1)
-              if (lastChar === '@') {
-                self.$emit('addressAppear')
+
+              if (self.isEnableAddressAppear) {
+                if (lastChar === '@') {
+                  self.$emit('addressAppearFound')
+                  self.quill.history.undo()
+                }
+              }
+
+              if (self.isEnableHashSymbol) {
+                if (lastChar === '#') {
+                  self.$emit('hashSymbolFound')
+                  self.quill.history.undo()
+                }
               }
             }
           })

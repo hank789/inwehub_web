@@ -9,12 +9,15 @@
                     v-model="description"
                     :options="editorOption"
                     :isEnableImage="false"
+                    :isEnableAddressAppear="true"
+                    :isEnableHashSymbol="true"
 
                     @change="onEditorChange($event)"
                     @blur="onEditorBlur($event)"
                     @focus="onEditorFocus($event)"
                     @ready="onEditorReady($event)"
-                    @addressAppear="addressAppear"
+                    @addressAppearFound="addressAppearFound"
+                    @hashSymbolFound="hashSymbolFound"
       >
       </quill-editor>
 
@@ -34,7 +37,7 @@
       description: {},
       descLength: 0,
       editorOption: {
-        debug: true,
+        debug: false,
         placeholder: '请填写回答',
         modules: {
           toolbar: '#toolbar',
@@ -86,8 +89,11 @@
       appendText (text, attribute) {
         this.$refs.myTextEditor.appendContent(text, attribute)
       },
-      addressAppear () {
-        this.$emit('addressAppear')
+      addressAppearFound () {
+        this.$emit('addressAppearFound')
+      },
+      hashSymbolFound () {
+        this.$emit('hashSymbolFound')
       },
       onEditorChange (editor) {
         this.descLength = editor.editor.getLength() - 1
@@ -102,7 +108,7 @@
         this.$emit('onEditorFocus', editor)
       },
       refreshPageData () {
-        console.log('newid' + this.id)
+        console.log('newid:' + this.id)
       },
       onEditorReady (editor) {
         this.editorObj = editor
