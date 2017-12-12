@@ -10,8 +10,8 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2" @tap.stop.prevent="goDetial(data)">
-          {{data.title}}
+        <div class="textContainer mui-ellipsis-2" @tap.stop.prevent="goDetial(data)" v-html="data.title">
+          <!--{{data.title}}-->
         </div>
 
         <div class="PublishContainer" v-if="data.data.img">

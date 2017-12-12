@@ -19,7 +19,7 @@
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
-          @addressAppear="addressAppear"
+          @addressAppearFound="addressAppearFound"
           @hashSymbolDelete="hashSymbolDelete"
           @addressAppearDelete="addressAppearDelete"
         ></Jeditor>
@@ -96,6 +96,8 @@
           lat: 0
         },
         editorObj: null,
+        text: '',
+        html: '',
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
       }
     },
@@ -105,27 +107,27 @@
       Jeditor
     },
     methods: {
-      addressAppear () {
-        this.$refs.myAddEditor.appendText(' @test ', {
-          bold: true,
-          'color': '#ffff00',
-          link: true
-        })
+      addressAppearFound () {
+        this.$refs.myAddEditor.appendText('@', {})
       },
 //      删除标签
       hashSymbolDelete (text) {
-        console.error(text)
-//        for (var i in this.detail.supporter_list) {
-//          if (this.detail.supporter_list[i].uuid === this.uuid) {
-//            this.detail.supporter_list.splice(i, 1)
-//          }
-//        }
+        var name = text.substring(1, text.length)
+        console.error(name)
+        for (var i in this.tag) {
+          if (this.tag[i].text === name) {
+            this.tag.splice(i, 1)
+            this.tags.splice(i, 1)
+            this.tagsName.splice(i, 1)
+          }
+        }
+        localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
       },
       addressAppearDelete (text) {
       },
       onEditorChange (editor) {
-        console.error(editor.html)
-        // var html = editor.html
+        this.html = editor.html
+        this.text = editor.text
       },
       onEditorBlur (editor) {
       },
@@ -194,14 +196,14 @@
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
       },
       submit () {
-        if (!this.descLength) {
+        if (!this.text) {
           window.mui.toast('请填写分享内容')
           return
         }
 
         var data = {
           type: 'text',
-          title: this.description,
+          title: this.html,
           photos: [],
           category_id: '',
           tags: this.tags,
@@ -236,6 +238,7 @@
         })
       },
       initData () {
+        // 循环插入标签
         this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
         for (var i = 0; i < this.tag.length; i++) {
           if (this.tags.indexOf(this.tag[i].value) === -1) {
@@ -249,13 +252,6 @@
             })
           }
         }
-        // 循环插入标签
-//        for (var num = 0; num < this.tagsName.length; num++) {
-//          this.$refs.myAddEditor.appendText('#' + this.tagsName[num], {
-//            'color': '#225180',
-//            'size': 'small'
-//          })
-//        }
       }
     },
     created () {
@@ -273,7 +269,6 @@
     mounted () {
       autoTextArea()
       this.initData()
-
     }
   }
 </script>
