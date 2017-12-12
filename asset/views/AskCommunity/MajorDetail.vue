@@ -22,6 +22,22 @@
                 :showModifyBtn="false"
                 @paySuccess="paySuccess"
         ></Answer>
+        <Comment v-show="answer.content !== '' && !ask.feedback.description"
+                 :answerId="answer?answer.id:0"
+                 @finish="getDetail()"
+                 class="btn"
+        ></Comment>
+
+        <Star-Rating v-if="ask.feedback.description"
+                     :description="ask.feedback.description"
+                     :rating="ask.feedback.rate_star"
+                     :readOnly="true"
+                     class="star"
+        ></Star-Rating>
+        <!--查看全部回答-->
+        <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
+          <i class="bot" v-show="ask.question.status===6"></i>
+        </div>
 
 
         <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
@@ -112,6 +128,7 @@
   import userAbility from '../../utils/userAbility'
   import { autoTextArea } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import StarRating from '../../components/question-detail/StarRating.vue'
 
   const AskDetail = {
     data: () => ({
@@ -146,7 +163,8 @@
       Answer,
       Comment,
       Share,
-      commentTextarea
+      commentTextarea,
+      StarRating
     },
     computed: {
       answer () {
@@ -260,7 +278,16 @@
     list-style: none;
     font-style: normal;
   }
-
+  .bot {
+    position: absolute;
+    right:15px;
+    top: 0px;
+    left:15px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
   .mui-table-view-cell:after {
     display: none;
   }
@@ -344,5 +371,28 @@
   color:#808080;
   line-height: 62px;
   margin-left: -10px;
+  }
+  /*answer*/
+  .detail-answer[data-v-852fb68e] {
+    margin-bottom: 0px;
+  }
+  /*查看回答*/
+  .see{
+    width:100%;
+    height:40px;
+    padding: 0 15px;
+    font-size:14px;
+    color:#03aef9;
+    text-align: center;
+    line-height: 40px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .btn{
+    margin-top: -15px;
+  }
+  .star{
+    margin-top: -15px;
   }
 </style>

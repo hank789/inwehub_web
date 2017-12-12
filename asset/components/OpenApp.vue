@@ -34,7 +34,7 @@
         </svg>
       </p>
       <p @tap.stop.prevent="$router.push('/home')">首页</p>
-      <p><a id="btnOpenAppWeixin" :href="url" target="_blank">立即打开</a></p>
+      <p><a id="btnOpenAppWeixin" :href="url" target="_blank">APP内打开</a></p>
     </div>
   </div>
 </template>
@@ -300,7 +300,7 @@
 
   .suspension a {
     float: right;
-    width: 76px;
+    width: 88px;
     height: 30px;
     border-radius: 4px;
     background: #3c95f9;
