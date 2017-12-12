@@ -68,12 +68,16 @@
       resetContent (content) {
         this.quill.setContents(content)
       },
-      appendContent (text, attribute) {
+      appendContent (text, attribute, position = 'current') {
+        // position 可选值是current, first
         setTimeout(() => {
           let range = this.quill.getSelection(true)
-
+          var positionNum = 0
+          if (position === 'current') {
+            positionNum = range.index
+          }
           this.quill.updateContents(new Delta()
-              .retain(range.index)
+              .retain(positionNum)
               .insert(text, attribute)
               .insert(' ', {})
             , 'user')
