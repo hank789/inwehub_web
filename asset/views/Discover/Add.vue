@@ -48,6 +48,7 @@
 
     <uploadImage ref="uploadImage" v-model="images"
       :isMultiple="true"
+      :images="images"
       :ImageMaximum="3"
     ></uploadImage>
   </div>

@@ -18,7 +18,7 @@
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
-          @addressAppear="addressAppear"
+          @addressAppearFound="addressAppearFound"
         ></Jeditor>
 
         <div class="container-images">
@@ -57,7 +57,9 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
+      v-model="images"
+      :images="images"
       :isMultiple="true"
       :ImageMaximum="3"
     ></uploadImage>
@@ -99,8 +101,8 @@
       Jeditor
     },
     methods: {
-      addressAppear () {
-        this.$refs.myAddEditor.appendText('test', {
+      addressAppearFound () {
+        this.$refs.myAddEditor.appendText('@test', {
           bold: true,
           'color': '#ffff00',
           link: true
@@ -236,6 +238,7 @@
     mounted () {
       autoTextArea()
       this.initData()
+      console.log('images:' + JSON.stringify(this.images))
     }
   }
 </script>

@@ -21,7 +21,6 @@
   export default {
     data () {
       return {
-        images: []
       }
     },
     props: {
@@ -29,10 +28,18 @@
         type: Boolean,
         default: false
       },
+      images: {
+        type: Array,
+        default: () => {
+          return []
+        }
+      },
       ImageMaximum: {
         type: Number,
         default: 1
       }
+    },
+    mounted () {
     },
     methods: {
       uploadImage: function () {
