@@ -1377,6 +1377,19 @@ const routes = [
     }
   },
   {
+    path: '/discover/add2',
+    name: 'discover_add',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Discover/Add4.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
     path: '/discover/add',
     name: 'discover_add',
     meta: {
@@ -1385,19 +1398,6 @@ const routes = [
       keepAlive: true
     },
     component: require('../../../views/Discover/Add.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
-  {
-    path: '/discover/add2',
-    name: 'discover_add2',
-    meta: {
-      title: '发现',
-      wechatHideHeader: true,
-      keepAlive: true
-    },
-    component: require('../../../views/Discover/Add2.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
