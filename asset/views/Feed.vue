@@ -128,6 +128,7 @@
   import { getLocalUserInfo } from '../utils/user'
 
   import commentTextarea from '../components/comment/Textarea.vue'
+  import { autoTextArea } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -175,6 +176,7 @@
     mounted () {
       // 新手任务
       userAbility.newbieTask(this)
+      autoTextArea()
     },
     computed: {},
     methods: {
