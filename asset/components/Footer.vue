@@ -232,6 +232,7 @@
   .footer-bar {
     background-color: #f3f4f6;
     box-shadow: none;
+    position: absolute;
   }
 
   .footer-bar .mui-tab-item .mui-icon {
