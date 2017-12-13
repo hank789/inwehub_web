@@ -10,7 +10,7 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2" @tap.stop.prevent="goDetial(data)" v-html="data.title">
+        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="data.title">
           <!--{{data.title}}-->
         </div>
 
@@ -491,7 +491,5 @@
     color: #03aef9;
   }
 
-
-
-
 </style>
+
