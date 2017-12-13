@@ -34,6 +34,10 @@
         type: Boolean,
         default: false
       },
+      isMonitorSmallSpan: {
+        type: Boolean,
+        default: false
+      },
       isEnableAddressAppear: {
         type: Boolean,
         default: false
@@ -69,6 +73,7 @@
         this.quill.setContents(content)
       },
       appendContent (text, attribute, position = 'current') {
+        console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
         // position 可选值是current, first
         setTimeout(() => {
           let range = this.quill.getSelection(true)
@@ -82,6 +87,29 @@
               .insert(' ', {})
             , 'user')
           this.quill.setSelection(range.index + text.length + 1, 'user')
+        }, 100)
+      },
+      toLast (msg = ' ', attribute = {}) {
+        var content = this.quill.getContents()
+        var lastObject = this.getLastObject(content.ops)
+        console.log('lastObject:' + JSON.stringify(lastObject))
+        console.log('lastContent:' + JSON.stringify(content))
+
+        if (lastObject && lastObject.insert && /^@/.test(lastObject.insert)) {
+          this.appendContent(' ', {})
+          this.appendContent(msg, {})
+        }
+
+        let range = this.quill.getSelection(true)
+        this.quill.setSelection(range.index, 'user')
+      },
+      resetHtml (html) {
+        let range = this.quill.getSelection(true)
+        setTimeout(() => {
+          this.$refs.editor.children[0].innerHTML = html
+          setTimeout(() => {
+            this.quill.setSelection(range.index, 'user')
+          }, 100)
         }, 100)
       },
       changeAvatar: function () {
@@ -205,7 +233,7 @@
       },
       getLastObject (content) {
         var lastObject = content.pop()
-        if (lastObject.insert === '\n' && content.length > 0) {
+        if (lastObject && lastObject.insert === '\n' && content.length > 0) {
           return this.getLastObject(content)
         }
         return lastObject
@@ -240,7 +268,15 @@
             self.$emit('blur', self.quill)
           })
 
-          // 文本变动通知更改model
+          self.quill.on('selection-change', (range, oldRange, source) => {
+            console.log('selection-change fired range:' + JSON.stringify(range) + ', oldRange:' + JSON.stringify(oldRange) + ', source:' + source)
+          })
+
+          self.quill.on('editor-change', (eventname, ...args) => {
+            console.log('editor-change fired eventname:' + eventname + ', args:' + JSON.stringify(args))
+          })
+
+            // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
             self._content = self.quill.getContents()
             console.log('text-change被触发, delta:' + JSON.stringify(delta) + ', oldDelta:' + JSON.stringify(oldDelta) + ', content:' + JSON.stringify(self._content))
@@ -258,41 +294,63 @@
               source: source
             })
 
+            // 监听 .ql-size-small
+            if (self.isMonitorSmallSpan) {
+              var linkNodes = document.querySelectorAll('.ql-size-small')
+              var isStop = false
+              window.mui.each(linkNodes, (index, item) => {
+                if (isStop) return
+                var nowValue = item.innerText
+                if (item.hasAttribute('ql-value')) {
+                  var oldValue = item.getAttribute('ql-value')
+                  if (oldValue !== nowValue) {
+                    if (oldValue.length > nowValue.length) {
+                      // 删除操作
+                      console.log(oldValue + 'change')
+                      var reg = new RegExp('<span\\s([^<]*?)' + nowValue + '</span>')
+                      var newHtml = html.replace(reg, '')
+                      console.log('reg:' + reg.toString())
+                      console.log('旧的html:' + html)
+                      console.log('新的html:' + newHtml)
+                      if (/^@/.test(oldValue)) {
+                        console.log('fire addressAppearDelete, params:' + oldValue)
+                        self.$emit('addressAppearDelete', oldValue)
+                      }
+
+                      if (/^#/.test(oldValue)) {
+                        console.log('fire hashSymbolDelete, params:' + oldValue)
+                        self.$emit('hashSymbolDelete', oldValue)
+                      }
+
+                      self.resetHtml(newHtml)
+                      isStop = true
+                    } else {
+                      // 添加
+                      self.quill.history.undo()
+
+                      setTimeout(() => {
+                        var content = this.quill.getContents()
+                        var lastObject = this.getLastObject(content.ops)
+                        if (lastObject && lastObject.insert === oldValue) {
+                          console.log('add: insert:' + delta.ops[1].insert + ', attributes' + JSON.stringify(delta.ops[1].attributes))
+                          self.toLast(delta.ops[1].insert, delta.ops[1].attributes)
+                        }
+                      }, 200)
+
+                      isStop = true
+                    }
+                  }
+                } else {
+                  item.setAttribute('ql-value', item.innerText)
+                }
+              })
+              if (isStop) return
+            }
+
             if (delta.ops[1] && delta.ops[1].delete) {
               // 删除操作
-              // 判断删除的是否是@xxx内容，如果是, 整段删除
-              var lastObject = self.getLastObject(self._content.ops)
-              console.log('lastObject:' + JSON.stringify(lastObject))
-              console.log('lastContent:' + JSON.stringify(self._content))
-
-              if (self.isEnableAddressAppear) {
-                if (/^@/.test(lastObject.insert)) {
-                  console.log('匹配到@')
-                  let range = self.quill.getSelection(true)
-                  setTimeout(() => {
-                    self.quill.setContents(self._content, 'user')
-                    self.quill.setSelection(range.index, 'user')
-                    self.$emit('addressAppearDelete', lastObject.insert)
-                  }, 200)
-                } else {
-                  console.log('未匹配到@')
-                }
-              }
-
-              if (self.isEnableHashSymbol) {
-                if (/^#/.test(lastObject.insert)) {
-                  console.log('匹配到#')
-                  let range = self.quill.getSelection(true)
-                  setTimeout(() => {
-                    self.quill.setContents(self._content, 'user')
-                    self.quill.setSelection(range.index, 'user')
-                    self.$emit('hashSymbolDelete', lastObject.insert)
-                  }, 200)
-                } else {
-                  console.log('未匹配到#')
-                }
-              }
             } else {
+              // 添加操作
               var trimStr = text.trim()
               var lastChar = trimStr.charAt(trimStr.length - 1)
 

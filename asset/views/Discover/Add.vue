@@ -263,7 +263,7 @@
           }
           if (this.tagsName.indexOf(this.tag[i].text) === -1) {
             this.tagsName.push(this.tag[i].text)
-            this.$refs.myAddEditor.appendText('#' + this.tag[i].text, {
+            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
               'color': '#225180',
               'size': 'small'
             })
@@ -277,7 +277,7 @@
           }
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
-            this.$refs.myAddEditor.appendText('@' + this.user[num].name, {
+            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
               'color': '#42AEF9',
               'size': 'small'
             })

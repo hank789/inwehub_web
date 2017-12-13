@@ -11,6 +11,7 @@
                     :isEnableImage="false"
                     :isEnableAddressAppear="true"
                     :isEnableHashSymbol="true"
+                    :isMonitorSmallSpan="true"
 
                     @change="onEditorChange($event)"
                     @blur="onEditorBlur($event)"
@@ -92,6 +93,9 @@
       quillEditor
     },
     methods: {
+      resetHtml (html) {
+        this.$refs.myTextEditor.resetHtml(html)
+      },
       resetContent (content = []) {
         this.$refs.myTextEditor.resetContent(content)
       },
