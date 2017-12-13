@@ -55,7 +55,6 @@
 <script>
   import { apiRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
-  import detecdOS from '../utils/detecdOS'
   import errorCodes from '../stores/errorCodes'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
@@ -63,6 +62,8 @@
   import oauth from '../components/oauth/oauth'
   import { clearAllWebViewCache } from '../utils/webview'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { saveLocationInfo } from '../utils/allPlatform'
+
 
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
   const login = {
@@ -178,7 +179,8 @@
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
           window.mixpanelIdentify()
-
+          // 存储用户位置信息
+          saveLocationInfo()
           this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
         }))
       },
@@ -204,7 +206,7 @@
         }
 
         let {phone, password} = this
-        let deviceSystem = detecdOS()
+        let deviceSystem = ''
         let deviceName = ''
         let deviceModel = ''
         let deviceCode = ''

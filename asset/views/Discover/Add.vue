@@ -63,7 +63,7 @@
     <uploadImage ref="uploadImage" v-model="images"
       :isMultiple="true"
       :images="images"
-      :ImageMaximum="3"
+      :ImageMaximum="maxImageCount"
     ></uploadImage>
   </div>
 </template>
@@ -88,7 +88,7 @@
         userName: [],
         description: {},
         images: [],
-        maxImageCount: 3,
+        maxImageCount: 9,
         percentCompleted: 0,
         address: '',
         selectedAddress: '',
@@ -154,6 +154,7 @@
         this.$router.pushPlus('/home')
       },
       totags () {
+        console.error(this.description)
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
       },
@@ -255,6 +256,8 @@
         })
       },
       initData () {
+//        var description = localEvent.getLocalItem('discover_description' + this.id)
+//        this.description = description
         // 循环插入标签
         this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
         for (var i = 0; i < this.tag.length; i++) {

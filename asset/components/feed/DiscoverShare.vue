@@ -12,9 +12,9 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper textToLink" @tap.stop.prevent="toDetail(data.url)">
+    <div class="text-16-444 text-line-5 preWrapper textToLink" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
       <!--<span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span>-->
-      <span v-html="textToLink(data.feed.title)">{{data.feed.title}}</span></div>
+      <span v-html="textToLink(data.feed.title)"></span></div>
 
     <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
 
@@ -179,6 +179,13 @@
 
   .noMoreComment .container-answer{
     padding:10px 15px 10px;
+  }
+
+
+</style>
+<style>
+  #Outermost  p{
+    font-size: 16px;
   }
 </style>
 

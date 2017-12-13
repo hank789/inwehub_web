@@ -1,5 +1,6 @@
 import { getGeoPosition as getGeoPositionByPlus } from './plus'
 import { getGeoPositionByWechat } from './wechat'
+import { apiRequest } from './request'
 
 /**
  * 获取地理位置
@@ -24,6 +25,35 @@ function getGeoPosition (callback, failCallback) {
   }
 }
 
+/**
+ * 保存用户当前位置信息
+ */
+function saveLocationInfo () {
+  getGeoPosition((position) => {
+    let deviceSystem = window.getUserAppDevice()
+    let deviceName = window.getUserAppDevice()
+    let deviceModel = ''
+    let deviceCode = ''
+    if (window.mui.os.plus) {
+      deviceName = window.plus.os.name
+      deviceModel = window.plus.os.version
+      deviceCode = window.plus.device.uuid
+    }
+    apiRequest(`system/location`, {
+      device_name: deviceName,
+      device_system: deviceSystem,
+      device_model: deviceModel,
+      device_code: deviceCode,
+      current_address_name: position.addresses,
+      current_address_longitude: position.longt,
+      current_address_latitude: position.lat
+    }, false).then(res => {
+
+    })
+  })
+}
+
 export {
-  getGeoPosition
+  getGeoPosition,
+  saveLocationInfo
 }
