@@ -75,6 +75,9 @@
       appendContent (text, attribute, position = 'current') {
         console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
         // position 可选值是current, first
+
+        var appendChar = /^(@|#)/.test(text) ? ' ' : ''
+
         setTimeout(() => {
           let range = this.quill.getSelection(true)
           var positionNum = 0
@@ -84,7 +87,7 @@
           this.quill.updateContents(new Delta()
               .retain(positionNum)
               .insert(text, attribute)
-              .insert(' ', {})
+              .insert(appendChar, {})
             , 'user')
           this.quill.setSelection(range.index + text.length + 1, 'user')
         }, 100)
@@ -95,7 +98,7 @@
         console.log('lastObject:' + JSON.stringify(lastObject))
         console.log('lastContent:' + JSON.stringify(content))
 
-        if (lastObject && lastObject.insert && /^@/.test(lastObject.insert)) {
+        if (lastObject && lastObject.insert && /^(@|#)/.test(lastObject.insert)) {
           this.appendContent(' ', {})
           this.appendContent(msg, {})
         }
@@ -331,6 +334,8 @@
                       setTimeout(() => {
                         var content = this.quill.getContents()
                         var lastObject = this.getLastObject(content.ops)
+                        console.log('zzlastObject:' + JSON.stringify(lastObject))
+                        console.log('zzoldValue:' + oldValue)
                         if (lastObject && lastObject.insert === oldValue) {
                           console.log('add: insert:' + delta.ops[1].insert + ', attributes' + JSON.stringify(delta.ops[1].attributes))
                           self.toLast(delta.ops[1].insert, delta.ops[1].attributes)
