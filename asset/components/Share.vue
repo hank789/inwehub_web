@@ -228,6 +228,9 @@
                   window.mui.toast('保存失败')
                 })
               })
+            }).catch(function (error) {
+              console.error('oops, something went wrong!', error)
+              window.mui.toast(JSON.stringify(error))
             })
           }
         }
