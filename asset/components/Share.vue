@@ -59,7 +59,7 @@
     data () {
       return {
         createImaged: false,  // 是否已创建图片
-        imagePath: '_www/share.jpeg',  // 图片文件路径名称
+        imagePath: '_documents/share.jpeg',  // 图片文件路径名称
         shareImageUrl: ''
       }
     },
@@ -338,7 +338,7 @@
               return
             }
             saveImageByBase64(response.data.data.image, this.imagePath, (url) => {
-              createImageThumb(this.imagePath, '_www/share_thumb.jpeg', (thumbUrl) => {
+              createImageThumb(this.imagePath, '_documents/share_thumb.jpeg', (thumbUrl) => {
                 var data = {
                   title: '',
                   link: '',
