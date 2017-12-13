@@ -154,6 +154,7 @@
         this.$router.pushPlus('/home')
       },
       totags () {
+        console.error(this.description)
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
       },
@@ -255,6 +256,8 @@
         })
       },
       initData () {
+        var description = localEvent.getLocalItem('discover_description' + this.id)
+        this.description = description
         // 循环插入标签
         this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
         for (var i = 0; i < this.tag.length; i++) {
