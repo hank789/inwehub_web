@@ -113,8 +113,12 @@
       pay,
       uploadImage
     },
+    activated: function () {
+      this.initData()
+    },
     mounted () {
       autoTextArea()
+      this.initData()
 
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
@@ -125,12 +129,6 @@
       window.mui.init()
 
       this.textareaBlur()
-
-      //      取标签；
-      var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
-      for (var i in tag) {
-        this.tags = this.tags.concat(tag[i].value)
-      }
     },
     computed: {
       type () {
@@ -158,6 +156,15 @@
       this.check()
     },
     methods: {
+      initData () {
+        //      取标签；
+        var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
+        this.tags = []
+        for (var i in tag) {
+          this.tags = this.tags.concat(tag[i].value)
+        }
+
+      },
       uploadImage: function () {
         var textarea = window.document.getElementById('discoverTextarea')
         if (textarea) {
@@ -236,6 +243,7 @@
       clearCache () {
         var info = {}
         this.images = []
+        this.tags = []
         // 删除标签；
         localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)

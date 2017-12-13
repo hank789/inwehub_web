@@ -115,8 +115,8 @@
       },
 //      删除标签
       hashSymbolDelete (text) {
-        var name = text.substring(1, text.length)
-        console.error(name)
+        var name = text.substring(1, text.length - 1)
+//        console.error(name)
         for (var i in this.tag) {
           if (this.tag[i].text === name) {
             this.tag.splice(i, 1)
@@ -127,8 +127,8 @@
         localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
       },
       addressAppearDelete (text) {
-        var name = text.substring(1, text.length)
-        console.error(name)
+        var name = text.substring(1, text.length - 1)
+//        console.error(name)
         for (var i in this.user) {
           if (this.user[i].name === name) {
             this.user.splice(i, 1)
@@ -154,7 +154,7 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-        console.error(this.description)
+//        console.error(this.description)
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
       },

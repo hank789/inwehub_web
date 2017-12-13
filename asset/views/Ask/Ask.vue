@@ -239,6 +239,8 @@
       initData () {
         //      取标签；
         var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
+        // 返回时重新取值
+        this.tags = []
         for (var i in tag) {
           this.tags = this.tags.concat(tag[i].value)
         }
@@ -433,6 +435,7 @@
       clearCache () {
         var info = {}
         this.images = []
+        this.tags = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
