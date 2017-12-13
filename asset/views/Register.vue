@@ -71,12 +71,13 @@
 
 <script>
   import request, { createAPI, apiRequest, postRequest } from '../utils/request'
-  import detecdOS from '../utils/detecdOS'
   import localEvent from '../stores/localStorage'
   import errorCodes from '../stores/errorCodes'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { saveLocationInfo } from '../utils/allPlatform'
+
 
   // 手机号码规则
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
@@ -418,7 +419,6 @@
       // 注册
       register () {
         let {username, phone, code, password} = this
-        let deviceCode = detecdOS()
         this.isLoading = true
         this.isDisabled = true
 
@@ -472,7 +472,6 @@
           mobile: phone,
           code,
           password,
-          deviceCode,
           'registration_code': this.registrationCode
         })
           .then(response => {
@@ -519,6 +518,8 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
               window.mixpanelIdentify()
+              // 存储用户位置信息
+              saveLocationInfo()
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
             }))
           })

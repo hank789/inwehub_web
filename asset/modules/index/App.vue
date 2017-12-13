@@ -253,6 +253,10 @@
                   // 聊天信息
                   router.pushPlus('/chat')
                   break
+                case 'invite_user_register':
+                  // 邀请用户注册成功
+                  router.pushPlus('/invitation/friends')
+                  break
               }
             }
 

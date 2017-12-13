@@ -40,6 +40,7 @@
   import { NOTICE, USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import { clearAllWebViewCache } from '../../utils/webview'
+  import { saveLocationInfo } from '../../utils/allPlatform'
 
   export default {
     data: () => ({
@@ -160,7 +161,8 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
               window.mixpanelIdentify()
-
+              // 存储用户位置信息
+              saveLocationInfo()
               clearAllWebViewCache()
 
               if (window.mui.os.plus) {
