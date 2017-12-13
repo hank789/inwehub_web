@@ -1395,7 +1395,7 @@ const routes = [
     meta: {
       title: '发现',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: require('../../../views/Discover/Add.vue'),
     beforeEnter: (to, from, next) => {
