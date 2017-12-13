@@ -161,12 +161,12 @@
             return
           }
           // 消息的数字角标；
-          var moneyMessage = response.data.data.money_message.unread_count
-          var noticeMessage = response.data.data.notice_message.unread_count
-          var readhubMessage = response.data.data.readhub_message.unread_count
-          var taskMessage = response.data.data.task_message.unread_count
-          var imMessages = response.data.data.im_messages.length > 0 ? response.data.data.im_messages[0].unread_count : 0
-          this.message_total_count = moneyMessage + noticeMessage + readhubMessage + taskMessage + imMessages
+//          var moneyMessage = response.data.data.money_message.unread_count
+//          var noticeMessage = response.data.data.notice_message.unread_count
+//          var readhubMessage = response.data.data.readhub_message.unread_count
+//          var taskMessage = response.data.data.task_message.unread_count
+//          var imMessages = response.data.data.im_messages.length > 0 ? response.data.data.im_messages[0].unread_count : 0
+          this.message_total_count = response.data.data.total_unread_count
 
           // console.log(im_messages)
 
