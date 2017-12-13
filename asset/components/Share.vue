@@ -196,13 +196,16 @@
                 b.loadBase64Data(dataUrl, function () {
                   console.log('创建成功')
                 }, function () {
-                  console.log('创建失败')
+                  console.error('创建失败')
+                  window.mui.toast('创建失败')
                 })
                 b.save(this.imagePath, {
                   overwrite: true,
                   quality: 100
                 }, () => {
                   console.log('保存成功')
+                  window.mui.closeWaiting()
+
                   var data = {
                     title: '',
                     link: '',
@@ -213,7 +216,6 @@
                   Share.setData(data)
 
                   this.createImaged = true
-                  window.mui.closeWaiting()
 
                   if (callback) {
                     getLocalUrl(this.imagePath, (url) => {
@@ -222,7 +224,8 @@
                     })
                   }
                 }, () => {
-                  console.log('保存失败')
+                  console.error('保存失败')
+                  window.mui.toast('保存失败')
                 })
               })
             })
