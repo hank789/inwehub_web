@@ -52,7 +52,7 @@
                 </div>
               </div>
 
-              <div class="textBody ">
+              <div class="textBody" @tap.stop.prevent="toAvatar(item.uuid)">
                 <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>

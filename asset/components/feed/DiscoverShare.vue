@@ -186,6 +186,7 @@
 <style>
   #Outermost  p{
     font-size: 16px;
+    margin-bottom: 0;
   }
 </style>
 

@@ -20,16 +20,14 @@
             <li class="my-focus-item" v-for="(item, index) in list">
               <img :src="item.user_avatar_url"
                    @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
-              <div>
+              <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
                 <p>
                   <span class="mui-ellipsis">{{item.user_name}}</span>
                   <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
                     <use xlink:href="#icon-zhuanjiabiaoji"></use>
                   </svg>
                 </p>
-                <div class="mui-ellipsis descriptionText">
-                  <span class="descriptionText">{{item.description}}</span>
-                </div>
+                <p class="mui-ellipsis">{{item.description}}</p>
               </div>
               <p class="follows" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="!item.is_following">
                 关注Ta</p>
@@ -212,6 +210,8 @@
   }
 
   .my-focus-item div {
+    float: left;
+    width: 60%;
   }
 
   /*关注和取消*/
@@ -242,7 +242,7 @@
     overflow: hidden;
     font-family: "PingFangSC";
     font-size: 14px;
-    color: #444444;
+    color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
@@ -251,35 +251,15 @@
     color: #3c95f9;
   }
 
-  .my-focus-item div p:nth-of-type(2) span {
-    display: inline-block;
+  .my-focus-item div p:nth-of-type(2){
+    width: 100%;
     height: 14px;
-    font-family: "PingFangSC";
     font-size: 13px;
     color: #b4b4b6;
     line-height: 13px;
   }
 
-  .my-focus-item div p:nth-of-type(2) span:nth-of-type(1) {
-    display: inline-block;
-    height: 14px;
-    font-family: "PingFangSC";
-    font-size: 13px;
-    color: #b4b4b6;
-    line-height: 13px;
-    padding-right: 5px;
-  }
 
-  /*.my-focus-item div p:nth-of-type(2) span:nth-of-type(2){
-	line-height: 10px;
-}*/
-  /*.my-focus-item div p:nth-of-type(2) i{
- 	display: inline-block;
- 	width: 1px;
- 	height: 11px;
- 	background:#b4b4b6;
- 	margin-bottom: 5px;
- }*/
 
   .container {
     position: absolute;
