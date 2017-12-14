@@ -52,6 +52,9 @@
     <div class="message" id="message">
       <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
       <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-plus" @tap.stop.prevent="message()"></use>
+      </svg>
+      <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
       </svg>
     </div>
@@ -208,24 +211,27 @@
     bottom: 0;
     padding: 0 10px;
     z-index: 999;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   .message input {
-    width: 88%;
     height: 35px;
     border-radius: 5px;
     background: #ffffff;
     border: none;
+    margin-bottom: 0;
     box-shadow: 0 0 10px rgba(220, 220, 220, 1);
-    margin-top: 6px;
-    float: left;
+
   }
 
   .message svg {
-    font-size: 32px;
-    margin-top: 7px;
+    font-size: 37px;
+    margin-left: 10px;
     color: #03aef9;
-    float: right;
+
   }
   /*内容区域*/
 
