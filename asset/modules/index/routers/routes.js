@@ -1153,7 +1153,7 @@ const routes = [
     }
   },
   { // chat 客服
-    path: '/chat',
+    path: '/chat/:id',
     name: 'inform-chat',
     component: require('../../../views/Task/chat.vue'),
     meta: {
@@ -1793,12 +1793,12 @@ const routes = [
     component: require('../../../views/Exception/Error.vue')
   },
   // {
-  //  path: '/dialog',
-  //  name: 'short',
-  //  meta: {
-  //    title: 'short'
-  //  },
-  //  component: require('../../../components/Dialog.vue'),
+  //   path: '/dialog',
+  //   name: 'short',
+  //   meta: {
+  //     title: 'short'
+  //   },
+  //   component: require('../../../components/Dialog.vue')
   // },
   { // message
     path: '/*',

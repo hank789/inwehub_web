@@ -382,6 +382,13 @@
         <p>暂不能申请企业服务</p>
       </div>
     </div>
+    <!--个人名片资料完整度不足94%的弹窗-->
+    <div id="chat">
+      <div class="chat">
+        <p>您的个人资料未完善！</p>
+        <p>资料完成度94%以上可发私信</p>
+      </div>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
@@ -1066,6 +1073,23 @@
   }
 
   .Company p:nth-of-type(2) {
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+    margin-top: 3px;
+  }
+  /*聊天条件弹窗样式*/
+  .chat {
+    width: 100%;
+  }
+  .chat p:nth-of-type(1) {
+    font-size: 16px;
+    color:#444444;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .chat p:nth-of-type(2) {
     font-size: 14px;
     color: #808080;
     text-align: center;

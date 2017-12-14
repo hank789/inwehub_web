@@ -226,6 +226,19 @@ function alertDiscoverCompany (context) {
     })
   }
 }
+// 不是企业用户（申请企业服务）
+function alertChat (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('chat', {}, (html) => {
+      alertSimple(html, '前往完善', (num) => {
+        if (num.index === 0) {
+          context.$router.pushPlus('/my/info')
+        }
+      }, true)
+    })
+  }
+}
 
 export {
   alertFenhongxize,
@@ -241,5 +254,6 @@ export {
   alertAnswerRepeat,
   alertCompanyUser,
   alertCompany,
-  alertDiscoverCompany
+  alertDiscoverCompany,
+  alertChat
 }

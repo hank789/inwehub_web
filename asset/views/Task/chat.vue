@@ -14,18 +14,18 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="{contact_id:0}"
-        :nextOtherData="{contact_id:0}"
+        :prevOtherData="{contact_id:this.chatUserId}"
+        :nextOtherData="{contact_id:this.chatUserId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
-
         <ul class="user" id="myData">
           <template v-for="item in list">
             <!--客服-->
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img src="../../statics/images/service2.png" />
+                <img :src="item.avatar" v-if="chatUserId == item.user_id"/>
+                <img src="../../statics/images/service2.png" v-else/>
                 <span>
                   {{item.data.text}}
              </span>
@@ -74,10 +74,16 @@
       comment: '',
       id: getLocalUserInfo().user_id,
       avatar: getLocalUserInfo().avatar_url,
-      flag: true
+      flag: true,
+      chatUserId: ''
     }),
-    created () {},
-    computed: {},
+    created () {
+      if (this.$route.params.id) {
+        this.chatUserId = this.$route.params.id
+      }
+    },
+    computed: {
+    },
     components: {
       RefreshList
     },
