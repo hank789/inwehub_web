@@ -50,8 +50,6 @@
   }
 
   .newestList .container-image{
-    width: 108px;
-    height: 108px;
     margin-right:5px;
   }
 
