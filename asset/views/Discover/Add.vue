@@ -110,6 +110,9 @@
       Jeditor
     },
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       addressAppearFound () {
         this.$refs.myAddEditor.appendText('@', {})
       },
