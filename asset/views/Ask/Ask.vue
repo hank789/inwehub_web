@@ -30,12 +30,6 @@
         </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
-      <!--上传图片-->
-      <uploadImage ref="uploadImage" v-model="images"
-                   :isMultiple="true"
-                   :images="images"
-                   :ImageMaximum="maxImageCount"
-      ></uploadImage>
 
       <div class="fixedDiv">
         <div class="fixedContainer">
@@ -120,6 +114,14 @@
         </li>
       </ul>
     </div>
+
+    <!--上传图片-->
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="true"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+    
   </div>
 </template>
 
