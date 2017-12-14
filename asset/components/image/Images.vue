@@ -1,5 +1,5 @@
 <template>
-    <div class="container-images">
+    <div class="container-images" :class="'container-images-' + images.length">
       <div class="container-image"  v-for="(image, index) in images"><img :src="getImage(image)" :data-preview-src="image" :data-preview-group="group"/></div>
     </div>
 </template>
