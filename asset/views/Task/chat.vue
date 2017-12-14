@@ -177,7 +177,7 @@
 
           postRequest(`im/message-store`, {
             text: this.comment,
-            contact_id: 0
+            contact_id: this.chatUserId
           }).then(response => {
             var code = response.data.code
 
