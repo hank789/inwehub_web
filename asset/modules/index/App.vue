@@ -258,7 +258,7 @@
                   break
                 case 'im_message':
                   // 聊天信息
-                  router.pushPlus('/chat')
+                  router.pushPlus('/chat/' + payload.object_id)
                   break
                 case 'invite_user_register':
                   // 邀请用户注册成功
