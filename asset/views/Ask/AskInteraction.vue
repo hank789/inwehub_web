@@ -30,14 +30,6 @@
         </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
-      <!--上传图片-->
-      <uploadImage ref="uploadImage" v-model="images"
-                   :isMultiple="true"
-                   :images="images"
-                   :ImageMaximum="maxImageCount"
-      ></uploadImage>
-
-
       <div class="fixedDiv">
         <div class="fixedContainer">
           <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
@@ -70,9 +62,17 @@
 
     </div>
 
+    <!--上传图片-->
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="true"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+
     <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
          v-on:pay_success="goAsk">
     </pay>
+
 
   </div>
 </template>
