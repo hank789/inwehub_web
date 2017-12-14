@@ -32,6 +32,7 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
+  import { saveLocationInfo } from '../../utils/allPlatform'
 
   export default {
     data () {
@@ -120,6 +121,12 @@
                 }
               }
             })
+
+            // 应用从后台切换回前台事件
+            document.addEventListener('resume', () => {
+              // 存储用户位置信息
+              saveLocationInfo()
+            }, false)
 
             // 监听推送
             var noticeTo = function (payload) {

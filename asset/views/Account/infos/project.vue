@@ -35,13 +35,13 @@
               }}</span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
           </div>
         </li>
-        <li class="mui-table-view-cell">
-          <div class="mui-input-row">
-            <a href="#page_product_tags" class="mui-navigate-right mui-ellipsis" @tap="fixSelect">产品类型<span
-              class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"
-              v-if="infoProductTagsNames"></span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>
-          </div>
-        </li>
+        <!--<li class="mui-table-view-cell">-->
+          <!--<div class="mui-input-row">-->
+            <!--<a href="#page_product_tags" class="mui-navigate-right mui-ellipsis" @tap="fixSelect">产品类型<span-->
+              <!--class="mui-pull-right account-setting-field mui-ellipsis" v-text="infoProductTagsNames"-->
+              <!--v-if="infoProductTagsNames"></span><span class="mui-pull-right account-setting-field emptyFields" v-else>请选择</span></a>-->
+          <!--</div>-->
+        <!--</li>-->
         <li class="mui-table-view-cell">
           <div class="mui-input-row" @tap.stop.prevent="initDate(1)">
             <label class="mui-navigate-right">开始时间</label><label class="mui-pull-right account-setting-field"
@@ -274,10 +274,10 @@
           return
         }
 
-        if (!this.project.product_tags.length) {
-          window.mui.toast('产品类型不能为空')
-          return
-        }
+//        if (!this.project.product_tags.length) {
+//          window.mui.toast('产品类型不能为空')
+//          return
+//        }
 
         if (!this.project.begin_time) {
           window.mui.toast('开始时间不能为空')
