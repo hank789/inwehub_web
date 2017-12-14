@@ -3,7 +3,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">客服小哈</h1>
+      <h1 class="mui-title" v-if="chatUserId == 31">客服小哈</h1>
+      <h1 class="mui-title" v-else>{{name}}</h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -75,19 +76,32 @@
       id: getLocalUserInfo().user_id,
       avatar: getLocalUserInfo().avatar_url,
       flag: true,
-      chatUserId: ''
+      chatUserId: '',
+      name: ''
     }),
     created () {
-      if (this.$route.params.id) {
-        this.chatUserId = this.$route.params.id
-      }
+      this.getDetail()
     },
     computed: {
     },
     components: {
       RefreshList
     },
+    watch: {
+      '$route': 'refreshPageData'
+    },
     methods: {
+      refreshPageData () {
+        this.getDetail()
+      },
+      getDetail () {
+        if (this.$route.params.id) {
+          this.chatUserId = this.$route.params.id
+        }
+        if (this.$route.query.name) {
+          this.name = this.$route.query.name
+        }
+      },
       prevSuccessCallback () {
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {

@@ -300,6 +300,7 @@
       resume: {
         info: {
           id: '',
+          name: '',
           avatar_url: '',
           industry_tags: [],
           province: {
@@ -343,7 +344,7 @@
     methods: {
       goChat () {
         if (this.percent > 94) {
-          this.$router.pushPlus('/chat/' + this.resume.info.id)
+          this.$router.pushPlus('/chat/' + this.resume.info.id + '?name=' + this.resume.info.name)
         } else {
           alertChat(this)
         }
