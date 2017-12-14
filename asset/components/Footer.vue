@@ -172,7 +172,7 @@
 
           this.$emit('messagecountchange', this.message_total_count)
 
-          var taskCount = response.data.data.todo_tasks
+          var taskCount = response.data.data.todo_tasks + this.message_total_count
           setAppBadgeNumber(taskCount)
           this.onCountChange(taskCount)
         })
