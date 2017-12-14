@@ -50,7 +50,7 @@
   }
 
   .newestList .container-image{
-    margin-right:5px;
+    
   }
 
   .container-images .container-image:only-child {
