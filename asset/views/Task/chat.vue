@@ -56,7 +56,7 @@
 
     <!--发送消息框-->
     <div class="message" id="message">
-      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
+      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur" id="bounce"/>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
@@ -161,6 +161,8 @@
         }, 500)
       },
       uploadImage () {
+        var input = document.getElementById('bounce')
+        input.blur()
         this.$refs.uploadImage.uploadImage()
       },
       refreshPageData () {
