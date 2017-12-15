@@ -91,6 +91,20 @@
       '$route': 'refreshPageData'
     },
     methods: {
+     // for zhangzhen 推送消息
+      chat (obj) {
+        console.error(obj)
+        var item = {
+          created_at: obj.created_at,
+          data: {
+            text: obj.body.text
+          },
+          id: obj.id,
+          user_id: 0,
+          avatar: obj.avatar
+        }
+        this.list = this.list.concat(item)
+      },
       refreshPageData () {
         this.getDetail()
       },
@@ -337,6 +351,7 @@
 
   .Customerservice p:nth-of-type(2) {
     width: 100%;
+    overflow: hidden;
   }
 
   .Customerservice p:nth-of-type(2) img {
@@ -350,7 +365,7 @@
     position: relative;
     float: right;
     display: block;
-    max-width: 86%;
+    max-width: 80%;
     min-height: 35px;
     margin-right: 3%;
     border-radius: 10px;
