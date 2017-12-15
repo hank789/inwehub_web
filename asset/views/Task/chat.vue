@@ -30,8 +30,8 @@
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
-                <span v-if="item.data.image">
-                  <img :src="item.data.image" width="300" height="300"/>
+                <span v-if="item.data.img">
+                  <img :src="item.data.img" width="300" height="300"/>
                 </span>
               </p>
 
@@ -44,8 +44,8 @@
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
-                <span v-if="item.data.image">
-                  <img :src="item.data.image" width="300" height="300"/>
+                <span v-if="item.data.img">
+                  <img :src="item.data.img" width="300" height="300"/>
                 </span>
               </p>
 
@@ -112,13 +112,28 @@
             created_at: this.currentTime(),
             data: {
               text: '',
-              image: newValue[0].base64
+              img: newValue[0].base64
             },
             id: null,
             user_id: this.id,
             avatar: this.avatar
           }
           this.list.push(item)
+
+          this.images = []
+
+          postRequest(`im/message-store`, {
+            img: newValue[0].base64,
+            contact_id: this.chatUserId
+          }).then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+          })
+
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
           }, 500)
