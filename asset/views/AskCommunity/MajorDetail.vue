@@ -338,6 +338,13 @@
     margin-bottom: 0;
     padding: 13px 0;
   }
+  .iNeedAskWrapper{
+    padding:0;
+    width:100%;
+  }
+  .iNeedAskWrapper button{
+    border-radius:0;
+  }
   /*标签样式*/
   .question_tags{
     width:100%;
