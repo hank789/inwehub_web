@@ -30,8 +30,8 @@
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
-                <span v-if="item.data.img">
-                  <img :src="item.data.img" width="300" height="300"/>
+                <span v-if="item.data.img" class="chatImg">
+                  <img :src="item.data.img"/>
                 </span>
               </p>
 
@@ -44,8 +44,8 @@
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
-                <span v-if="item.data.img">
-                  <img :src="item.data.img" width="300" height="300"/>
+                <span v-if="item.data.img" class="chatImg">
+                  <img :src="item.data.img" />
                 </span>
               </p>
 
@@ -335,7 +335,7 @@
     overflow: hidden;
     /*border: 1px solid #CCCCCC;*/
   }
-
+   /*客服*/
   .consumer p:nth-of-type(1) {
     text-align: center;
     font-size: 13px;
@@ -388,7 +388,36 @@
     top: 15px;
     margin: auto;
   }
-  /*客服*/
+  .consumer p:nth-of-type(2) .chatImg{
+    width:85px;
+    height:105px;
+    padding: 0;
+  }
+  .consumer p:nth-of-type(2) .chatImg:after {
+    z-index: -1;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    /*border: 6px solid transparent;
+    border-right: 6px solid #FFFFFF;
+    border-bottom: 6px solid #FFFFFF;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left: -4px;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    top: 15px;
+    margin: auto;
+  }
+  .consumer p:nth-of-type(2) .chatImg img{
+    width:100%;
+    height:100%;
+  }
+  /*自己*/
 
   .Customerservice {
     width: 100%;
@@ -445,8 +474,34 @@
     top: 15px;
     margin: auto;
   }
-
+  .Customerservice p:nth-of-type(2) .chatImg{
+    width:85px;
+    height:105px;
+    padding: 0;
+  }
+  .Customerservice p:nth-of-type(2) .chatImg:after {
+    z-index: -1;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    right: -4px;
+    border-bottom-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+    top: 15px;
+    margin: auto;
+  }
+  .Customerservice p:nth-of-type(2) .chatImg img{
+    width:100%;
+    height:100%;
+  }
   .chatListWrapper {
     bottom: 47px;
   }
+
 </style>
