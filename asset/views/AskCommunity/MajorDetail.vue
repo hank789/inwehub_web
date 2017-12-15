@@ -22,6 +22,7 @@
                 :showModifyBtn="false"
                 @paySuccess="paySuccess"
         ></Answer>
+
         <Comment v-show="answer.content !== '' && !ask.feedback.description"
                  :answerId="answer?answer.id:0"
                  @finish="getDetail()"
@@ -34,6 +35,7 @@
                      :readOnly="true"
                      class="star"
         ></Star-Rating>
+
         <!--查看全部回答-->
         <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
           <i class="bot" v-show="ask.question.status===6"></i>
@@ -154,7 +156,6 @@
     }),
     mounted () {
       autoTextArea()
-
       this.getDetail()
     },
     components: {
@@ -172,6 +173,9 @@
       }
     },
     methods: {
+      refreshPageData () {
+        this.getDetail()
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
