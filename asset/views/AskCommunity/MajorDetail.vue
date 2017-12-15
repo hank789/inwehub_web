@@ -23,11 +23,13 @@
                 @paySuccess="paySuccess"
         ></Answer>
 
-        <Comment v-show="answer.content !== '' && !ask.feedback.description"
-                 :answerId="answer?answer.id:0"
-                 @finish="getDetail()"
-                 class="btn"
-        ></Comment>
+        <div class="buttonWrapper" v-show="answer.content !== '' && !ask.feedback.description">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                  @tap.stop.prevent="commentReal()">点击评价，分享获取分红
+
+
+          </button>
+        </div>
 
         <Star-Rating v-if="ask.feedback.description"
                      :description="ask.feedback.description"
@@ -114,6 +116,13 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
+    <Comment v-show="answer.content !== '' && !ask.feedback.description"
+             :answerId="answer?answer.id:0"
+             @finish="getDetail()"
+             ref="commentReal"
+             class="btn"
+    ></Comment>
+
   </div>
 </template>
 
@@ -124,7 +133,7 @@
   import Question from '../../components/question-detail/Question.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
+  import Comment from '../../components/question-detail/CommentNew.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import userAbility from '../../utils/userAbility'
@@ -173,6 +182,9 @@
       }
     },
     methods: {
+      commentReal () {
+        this.$refs.commentReal.comment()
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
