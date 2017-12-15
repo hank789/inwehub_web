@@ -173,9 +173,6 @@
       }
     },
     methods: {
-      refreshPageData () {
-        this.getDetail()
-      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
