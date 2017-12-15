@@ -100,7 +100,6 @@
   import { postRequest } from '../../utils/request'
   import QustionInteraction from '../../components/question-detail/QustionInteraction.vue'
   import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import RefreshList from '../../components/refresh/List.vue'
 
@@ -132,7 +131,6 @@
     components: {
       QustionInteraction,
       AnswersInteraction,
-      Comment,
       RefreshList,
       Share
     },

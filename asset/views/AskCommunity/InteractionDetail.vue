@@ -90,7 +90,6 @@
   import Question from '../../components/question-detail/QuestionInteractionDetail.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
   import { autoTextArea } from '../../utils/plus'
@@ -129,7 +128,6 @@
       Question,
       Discuss,
       Answer,
-      Comment,
       Share,
       commentTextarea
     },

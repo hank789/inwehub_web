@@ -329,12 +329,12 @@
   }
 
   .buttonWrapper {
-    padding-top: 33px;
+    padding:33px 15px 0 15px;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 0;
+    border-radius: 50px;
     margin-bottom: 0;
     padding: 13px 0;
   }
