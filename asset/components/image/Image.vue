@@ -18,6 +18,10 @@
         type: String,
         default: ''
       },
+      group: {
+        type: String,
+        default: ''
+      },
       isImagePreview: {
         type: Boolean,
         default: true

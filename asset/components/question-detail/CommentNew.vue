@@ -118,7 +118,9 @@
             return
           }
 
-          this.commentState = true
+          // this.commentState = true
+          window.mui('#commentWapper').popover('toggle')
+          this.$emit('finish')
         })
       }
     },
