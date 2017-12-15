@@ -69,6 +69,12 @@
       this.quill = null
     },
     methods: {
+      focus () {
+        this.quill.focus()
+      },
+      blur () {
+        this.quill.blur()
+      },
       resetContent (content) {
         this.quill.setContents(content)
       },

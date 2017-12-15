@@ -93,6 +93,12 @@
       quillEditor
     },
     methods: {
+      focus () {
+        this.$refs.myTextEditor.focus()
+      },
+      blur () {
+        this.$refs.myTextEditor.blur()
+      },
       resetHtml (html) {
         this.$refs.myTextEditor.resetHtml(html)
       },
