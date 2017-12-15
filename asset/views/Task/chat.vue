@@ -31,7 +31,7 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <img :src="item.data.img"/>
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100"></SingleImage>
                 </span>
               </p>
 
@@ -45,7 +45,7 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <img :src="item.data.img" />
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100"></SingleImage>
                 </span>
               </p>
 
@@ -82,6 +82,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
+  import SingleImage from '../../components/image/Image.vue'
 
   const Chat = {
     data: () => ({
@@ -102,7 +103,8 @@
     },
     components: {
       RefreshList,
-      uploadImage
+      uploadImage,
+      SingleImage
     },
     watch: {
       '$route': 'refreshPageData',
@@ -504,4 +506,9 @@
     bottom: 47px;
   }
 
+</style>
+<style>
+  .chatImg .container-image{
+    height:105px;
+  }
 </style>
