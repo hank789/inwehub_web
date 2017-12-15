@@ -36,10 +36,8 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
   if (alertConfirms.length) {
     for (var i = 0; i < alertConfirms.length; i++) {
       (function (index) {
-        if (alertConfirms[index]) {
-          alertConfirms[index].onclick = function () {
-            alertObj.close(index, '')
-          }
+        alertConfirms[index].onclick = function () {
+          alertObj.close(index, '')
         }
       })(i)
     }
@@ -109,10 +107,8 @@ function alertSky (titleHtml, contentHtml = '', iconType = '', callback = null, 
   if (alertConfirms.length) {
     for (var ii = 0; i < alertConfirms.length; ii++) {
       (function (index) {
-        if (alertConfirms[index]) {
-          alertConfirms[index].onclick = function () {
-            alertObj.close(index, '')
-          }
+        alertConfirms[index].onclick = function () {
+          alertObj.close(index, '')
         }
       })(ii)
     }
