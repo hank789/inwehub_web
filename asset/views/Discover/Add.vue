@@ -165,10 +165,7 @@
         this.$router.pushPlus('/discover/publishArticles')
       },
       uploadImage: function () {
-        var textarea = window.document.getElementById('discoverTextarea')
-        if (textarea) {
-          textarea.blur()
-        }
+        this.$refs.myAddEditor.blur()
         this.$refs.uploadImage.uploadImage()
       },
       selectAddress () {
