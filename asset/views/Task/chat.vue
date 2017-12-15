@@ -30,7 +30,7 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100"></SingleImage>
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id"></SingleImage>
                 </span>
               </p>
 
@@ -44,7 +44,7 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100"></SingleImage>
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id"></SingleImage>
                 </span>
               </p>
 
