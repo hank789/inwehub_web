@@ -27,9 +27,12 @@
               <p>
                 <img :src="item.avatar" v-if="chatUserId == item.user_id"/>
                 <img src="../../statics/images/service2.png" v-else/>
-                <span>
+                <span v-if="item.data.text">
                   {{item.data.text}}
-             </span>
+                </span>
+                <span v-if="item.data.image">
+                  <img :src="item.data.image" width="300" height="300"/>
+                </span>
               </p>
 
             </li>
@@ -38,9 +41,12 @@
               <p>{{item.created_at}}</p>
               <p>
                 <img :src="avatar" />
-                <span>
+                <span v-if="item.data.text">
                   {{item.data.text}}
-            </span>
+                </span>
+                <span v-if="item.data.image">
+                  <img :src="item.data.image" width="300" height="300"/>
+                </span>
               </p>
 
             </li>
@@ -52,14 +58,21 @@
     <!--发送消息框-->
     <div class="message" id="message">
       <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-plus" @tap.stop.prevent="message()"></use>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
+        <use xlink:href="#icon-plus"></use>
       </svg>
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
       </svg>
     </div>
     <!--发送消息框end-->
+
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="false"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+
   </div>
 </template>
 
@@ -68,6 +81,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { autoTextArea } from '../../utils/plus'
+  import uploadImage from '../../components/uploadImage'
 
   const Chat = {
     data: () => ({
@@ -77,6 +91,8 @@
       avatar: getLocalUserInfo().avatar_url,
       flag: true,
       chatUserId: '',
+      maxImageCount: 1,
+      images: [],
       name: ''
     }),
     created () {
@@ -85,10 +101,29 @@
     computed: {
     },
     components: {
-      RefreshList
+      RefreshList,
+      uploadImage
     },
     watch: {
-      '$route': 'refreshPageData'
+      '$route': 'refreshPageData',
+      images: function (newValue, oldValue) {
+        if (newValue.length) {
+          var item = {
+            created_at: this.currentTime(),
+            data: {
+              text: '',
+              image: newValue[0].base64
+            },
+            id: null,
+            user_id: this.id,
+            avatar: this.avatar
+          }
+          this.list.push(item)
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 500)
+        }
+      }
     },
     methods: {
      // for zhangzhen 推送消息
@@ -97,13 +132,17 @@
         var item = {
           created_at: obj.created_at,
           data: {
-            text: obj.body.text
+            text: obj.body.text,
+            image: obj.body.image
           },
           id: obj.id,
           user_id: 0,
           avatar: obj.avatar
         }
         this.list = this.list.concat(item)
+      },
+      uploadImage () {
+        this.$refs.uploadImage.uploadImage()
       },
       refreshPageData () {
         this.getDetail()
