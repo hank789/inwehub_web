@@ -162,15 +162,15 @@
             this.$router.pushPlus('/informbar')
             break
           case 2:
-            this.list.money_count.unread_count = 0
+            this.list.money_message.unread_count = 0
             this.$router.pushPlus('/balancebar')
             break
           case 3:
-            this.list.task_count.unread_count = 0
+            this.list.task_message.unread_count = 0
             this.$router.pushPlus('/taskbar')
             break
           case 4:
-            this.list.readhub_count.unread_count = 0
+            this.list.readhub_message.unread_count = 0
             this.$router.pushPlus('/readbar')
             break
         }
