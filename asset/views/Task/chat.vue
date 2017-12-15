@@ -25,8 +25,7 @@
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img :src="item.avatar" v-if="chatUserId == item.user_id"/>
-                <img src="../../statics/images/service2.png" v-else/>
+                <img :src="item.avatar"/>
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
@@ -145,7 +144,6 @@
     methods: {
      // for zhangzhen 推送消息
       chat (obj) {
-        console.error(obj)
         var item = {
           created_at: obj.created_at,
           data: {
@@ -156,7 +154,11 @@
           user_id: 0,
           avatar: obj.avatar
         }
-        this.list = this.list.concat(item)
+        this.list.push(item)
+
+        setTimeout(() => {
+          this.$refs.RefreshList.scrollToBottom()
+        }, 500)
       },
       uploadImage () {
         this.$refs.uploadImage.uploadImage()
