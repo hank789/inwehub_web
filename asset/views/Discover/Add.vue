@@ -218,6 +218,8 @@
           return
         }
 
+        this.html = this.html.replace(/(<p><br><\/p>)*$/, '')
+
         var data = {
           type: 'text',
           title: this.html,
