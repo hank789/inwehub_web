@@ -153,7 +153,7 @@
           created_at: obj.created_at,
           data: {
             text: obj.body.text,
-            img: obj.body.image
+            img: obj.body.img
           },
           id: obj.id,
           user_id: 0,
