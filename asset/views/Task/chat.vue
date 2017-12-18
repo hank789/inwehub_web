@@ -371,7 +371,7 @@
     position: relative;
     float: left;
     display: block;
-    max-width: 86%;
+    max-width: 80%;
     min-height: 35px;
     margin-left: 3%;
     border-radius: 10px;
