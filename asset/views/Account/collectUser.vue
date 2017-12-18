@@ -97,7 +97,7 @@
         if (!uuid) {
           return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
       },
       // 点击关注；
       collectProfessor (id, key, index) {

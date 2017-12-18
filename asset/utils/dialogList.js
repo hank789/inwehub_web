@@ -162,7 +162,7 @@ function alertMajorReplySuccess (context, credits, coins) {
   }
 }
 
-// 专业问答 评价成功弹窗；
+// 专业问答 提问者评价成功弹窗 ；
 function alertMajorCommentSuccess (context, credits, coins) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
@@ -171,6 +171,26 @@ function alertMajorCommentSuccess (context, credits, coins) {
       major_comment_coins: coins
     }, (titlehtml) => {
       dialogObj.getHtml('majoraskcomment_b', {}, (contenthtml) => {
+        alertSkyTwo(titlehtml, contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
+          if (num.index === 0) {
+            if (context.share) {
+              context.share()
+            }
+          }
+        }, true)
+      })
+    })
+  }
+}
+// 专业问答  围观者提问者评价成功弹窗 ；
+function alertMajorCommentOnlookersSuccess (context, credits, coins) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('OnlookersAskcomment_t', {
+      Onlookers_comment_credits: credits,
+      Onlookers_comment_coins: coins
+    }, (titlehtml) => {
+      dialogObj.getHtml('OnlookersAskcomment_b', {}, (contenthtml) => {
         alertSkyTwo(titlehtml, contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
           if (num.index === 0) {
             if (context.share) {
@@ -251,6 +271,7 @@ export {
   alertMajorAskSuccess,
   alertMajorReplySuccess,
   alertMajorCommentSuccess,
+  alertMajorCommentOnlookersSuccess,
   alertAnswerRepeat,
   alertCompanyUser,
   alertCompany,

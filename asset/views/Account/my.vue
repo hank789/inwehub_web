@@ -3,7 +3,7 @@
   <div>
     <div class="mui-content">
       <div class="my-top">
-        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">名片{{account_info_complete_percent}}%</div>
+        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片 {{account_info_complete_percent}}%</div>
         <div class="professor">
           <div class="my-img">
             <img :src="avatar" class="avatar" />
@@ -428,14 +428,14 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 6%;
+    top: 4%;
     height: 29px;
     border-radius: 100px 0 0 100px;
-    background: #808080;
+    background: #03aef9;
     line-height: 29px;
     color: #FFFFFF;
     font-size: 14px;
-    padding-left: 8px;
+    padding-left: 13px;
     padding-right: 15px;
     z-index: 999;
   }

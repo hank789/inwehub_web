@@ -348,7 +348,7 @@
 
     </div>
 
-    <!--专业问答的评论成功-->
+    <!--专业问答提问者的评论成功-->
     <div id="majoraskcomment_t">
       <div class="article_t">
         <p>你的评价已成功提交！</p>
@@ -359,6 +359,18 @@
       <ul class="hotAnswer_b">
         <span class="alertConfirm share">分享我的问答</span>
         <span class="ask_divided">其他人查看答案，你可从中获取分成</span>
+      </ul>
+    </div>
+    <!--专业问答围观者的评论成功-->
+    <div id="OnlookersAskcomment_t">
+      <div class="article_t">
+        <p>你的评价已成功提交！</p>
+        <p>（成长值<i>+{{options.Onlookers_comment_credits}}</i>，贡献值<i>+{{options.Onlookers_comment_coins}}</i>）</p>
+      </div>
+    </div>
+    <div id="OnlookersAskcomment_b">
+      <ul class="hotAnswer_b">
+        <span class="alertConfirm share">分享我的围观</span>
       </ul>
     </div>
 
@@ -386,7 +398,7 @@
     <div id="chat">
       <div class="chat">
         <p>您的个人资料未完善！</p>
-        <p>资料完成度94%以上可发私信</p>
+        <p>资料完成度90%可发私信</p>
       </div>
     </div>
   </div>
@@ -414,7 +426,9 @@
           major_answer_credits: '',
           major_answer_coins: '',
           major_comment_coins: '',
-          major_comment_credits: ''
+          major_comment_credits: '',
+          Onlookers_comment_coins: '',
+          Onlookers_comment_credits: ''
         }
       }
     },

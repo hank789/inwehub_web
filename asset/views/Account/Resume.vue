@@ -268,12 +268,11 @@
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage'
   import { postRequest } from '../../utils/request'
   import Share from '../../components/Share.vue'
   import { alertChat } from '../../utils/dialogList'
-
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
@@ -343,7 +342,7 @@
     },
     methods: {
       goChat () {
-        if (this.percent > 94) {
+        if (this.percent >= 90) {
           this.$router.pushPlus('/chat/' + this.resume.info.id + '?name=' + this.resume.info.name)
         } else {
           alertChat(this)
@@ -353,10 +352,12 @@
         this.$refs.shareComponent.share()
       },
       getData: function () {
+        // 获取本地的百分比
+        const currentUser = getLocalUserInfo()
+        this.percent = currentUser.account_info_complete_percent
         if (this.$route.query.goback) {
           this.canBack = true
         }
-
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
 

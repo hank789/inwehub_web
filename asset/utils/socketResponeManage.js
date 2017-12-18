@@ -5,6 +5,7 @@ import {
   expertcertification,
   alertAskCommunityInteractiveAnswer,
   alertAskCommunityQuestioningSuccess,
+  alertMajorCommentOnlookersSuccess,
   alertMajorCommentSuccess
 } from '../utils/dialogList'
 
@@ -163,7 +164,8 @@ function socketResponseManage (notification, context) {
           alertMajorReplySuccess(context, majorAnswerCredits, majorAnswerCoins)
           break
         case 'rate_answer':
-          // 问答社区评价成功的弹窗；
+          // 问答提问者社区评价成功的弹窗；
+          console.error(notification)
           // 成长值；
           var majorCommentCoins = notification.add_coins
           // 贡献值；
@@ -172,6 +174,18 @@ function socketResponseManage (notification, context) {
           context.shareoption.id = notification.source_id
           getDetailByAnswerId(notification.source_id, context)
           alertMajorCommentSuccess(context, majorCommentCredits, majorCommentCoins)
+          break
+        case 'feedback_rate_answer':
+          // 问答社区围观者评价成功的弹窗；
+          console.error(notification)
+          // 成长值；
+          var OnlookersCommentCoins = notification.add_coins
+          // 贡献值；
+          var OnlookersCommentCredits = notification.add_credits
+          // id
+          context.shareoption.id = notification.source_id
+          getDetailByAnswerId(notification.source_id, context)
+          alertMajorCommentOnlookersSuccess(context, OnlookersCommentCredits, OnlookersCommentCoins)
           break
         default:
           window.mui.toast(notification.title + ' ' + notification.body)

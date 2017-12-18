@@ -25,12 +25,12 @@
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id"></SingleImage>
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
                 </span>
               </p>
             </li>
@@ -43,7 +43,7 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id"></SingleImage>
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
                 </span>
               </p>
 
@@ -149,12 +149,11 @@
       },
      // for zhangzhen 推送消息
       chat (obj) {
-        console.error(obj)
         var item = {
           created_at: obj.created_at,
           data: {
             text: obj.body.text,
-            image: obj.body.image
+            img: obj.body.image
           },
           id: obj.id,
           user_id: 0,

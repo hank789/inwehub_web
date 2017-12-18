@@ -23,11 +23,12 @@
                 @paySuccess="paySuccess"
         ></Answer>
 
-        <div class="buttonWrapper" v-show="answer.content !== '' && !ask.feedback.description">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="commentReal()">点击评价，分享获取分红
-
-
+        <div class="buttonWrapper" v-show="answer.content !== '' && !ask.feedback.description && answer.user_id !== userId">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="commentReal()"  v-if="ask.question.user_id == userId">
+            点击评价，分享获取分红
+          </button>
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="commentReal()" v-else>
+            点击评价
           </button>
         </div>
 
@@ -140,9 +141,12 @@
   import { autoTextArea } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
+      userId: currentUser.user_id,
       ask: {
         answers: [],
         question: {
