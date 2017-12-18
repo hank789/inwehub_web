@@ -21,11 +21,11 @@
         class="chatListWrapper">
         <ul class="user" id="myData">
           <template v-for="item in list">
-            <!--客服 @tap.stop.prevent="toAvatar(uuid)"-->
+            <!--客服-->
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img :src="item.avatar"/>
+                <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
@@ -38,7 +38,7 @@
             <li class="Customerservice" v-else-if="id == item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img :src="avatar" />
+                <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
@@ -149,6 +149,7 @@
       },
      // for zhangzhen 推送消息
       chat (obj) {
+        console.error(obj)
         var item = {
           created_at: obj.created_at,
           data: {
@@ -157,7 +158,8 @@
           },
           id: obj.id,
           user_id: 0,
-          avatar: obj.avatar
+          avatar: obj.avatar,
+          uuid: obj.uuid
         }
         this.list.push(item)
 
