@@ -234,6 +234,9 @@
           case 5:
             this.$router.pushPlus('/ask/' + id, 'list-detail-page')
             break
+          case 6:
+            this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page')
+            break
         }
       },
       // 下拉刷新时的延时操作；

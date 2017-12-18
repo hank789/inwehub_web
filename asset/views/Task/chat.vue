@@ -153,7 +153,7 @@
           created_at: obj.created_at,
           data: {
             text: obj.body.text,
-            img: obj.body.image
+            img: obj.body.img
           },
           id: obj.id,
           user_id: 0,
@@ -371,7 +371,7 @@
     position: relative;
     float: left;
     display: block;
-    max-width: 86%;
+    max-width: 80%;
     min-height: 35px;
     margin-left: 3%;
     border-radius: 10px;
