@@ -1064,7 +1064,7 @@ const routes = [
     meta: {
       title: '动态',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
