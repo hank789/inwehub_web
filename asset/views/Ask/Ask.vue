@@ -481,9 +481,13 @@
           price: this.money,
           tags: this.tags,
           hide: this.hide,
-          device: device
+          device: device,
+          photos: []
         }
-
+        for (var i in this.images) {
+          var compressBase64 = this.images[i].base64
+          data.photos.push(compressBase64)
+        }
         if (this.question_type === 1) {
           window.mui('#sheet1').popover('toggle')
         }
