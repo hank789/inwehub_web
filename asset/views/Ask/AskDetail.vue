@@ -105,7 +105,10 @@
         answers: [],
         question: {
           created_at: '',
-          tags: []
+          tags: [],
+          data: {
+            img: []
+          }
         },
         feedback: {
           rate_star: 0
