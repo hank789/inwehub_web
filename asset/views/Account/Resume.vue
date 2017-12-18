@@ -245,7 +245,7 @@
            :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
 
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
-            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑
 
 
     </button>

@@ -21,7 +21,7 @@
         class="chatListWrapper">
         <ul class="user" id="myData">
           <template v-for="item in list">
-            <!--客服-->
+            <!--客服 @tap.stop.prevent="toAvatar(uuid)"-->
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
@@ -33,7 +33,6 @@
                    <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id"></SingleImage>
                 </span>
               </p>
-
             </li>
             <!--自己-->
             <li class="Customerservice" v-else-if="id == item.user_id">
@@ -142,6 +141,12 @@
       }
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
      // for zhangzhen 推送消息
       chat (obj) {
         var item = {
