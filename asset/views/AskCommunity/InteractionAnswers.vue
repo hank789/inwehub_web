@@ -110,7 +110,10 @@
         question: {
           created_at: '',
           description: '',
-          tags: []
+          tags: [],
+          data: {
+            img: []
+          }
         },
         feedback: {
           rate_star: 0
