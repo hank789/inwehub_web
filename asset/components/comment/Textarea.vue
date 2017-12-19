@@ -52,14 +52,23 @@
           window.document.addEventListener('tap', (e) => {
             console.log('document tap 事件被触发')
             // this.showTextarea = false
-            document.getElementById('commentTextarea').blur()
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.blur()
+            }
           }, false)
 
           setTimeout(() => {
-            document.getElementById('commentTextarea').focus()
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.focus()
+            }
           }, 500)
         } else {
-          document.getElementById('commentTextarea').blur()
+          var commentTextareaObj = document.getElementById('commentTextarea')
+          if (commentTextareaObj) {
+            commentTextareaObj.blur()
+          }
         }
       },
       finish () {
