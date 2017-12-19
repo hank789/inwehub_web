@@ -15,40 +15,40 @@
 
     <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}<span class="color-b4b4b6 font-12"
                                                                                    v-if="data.feed.domain"> - {{data.feed.domain}}</span>
+    </div>
 
     <div class="container-image margin-10-0-0" v-if="data.feed.img">
       <img :src="data.feed.img"/>
     </div>
 
     <div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.url)">
-        <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-pinglun1"></use>
-          </svg><span>{{data.feed.comment_number}}</span>
-        </div>
-        <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-dianzan1"></use>
-          </svg><span>{{data.feed.support_number}}</span>
-        </div>
+      <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun1"></use>
+        </svg><span>{{data.feed.comment_number}}</span>
       </div>
-      <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
-
-        <!-- 点赞和评论列表start -->
-        <SuppertAndComment
-          :supportNumber="data.feed.support_number"
-          :supportList="data.feed.supporter_list"
-          :commentNumber="data.feed.comment_number"
-          :commentList="data.feed.comments"
-          :detailUrl="data.url"
-
-          @commentIt="commentIt"
-        ></SuppertAndComment>
-
-        <!-- 点赞和评论列表end -->
+      <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg><span>{{data.feed.support_number}}</span>
       </div>
-
     </div>
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
+
+      <!-- 点赞和评论列表start -->
+      <SuppertAndComment
+        :supportNumber="data.feed.support_number"
+        :supportList="data.feed.supporter_list"
+        :commentNumber="data.feed.comment_number"
+        :commentList="data.feed.comments"
+        :detailUrl="data.url"
+
+        @commentIt="commentIt"
+      ></SuppertAndComment>
+
+      <!-- 点赞和评论列表end -->
+    </div>
+
   </div>
 </template>
 
