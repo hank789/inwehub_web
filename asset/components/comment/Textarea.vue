@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
     <div class="textareaWrapper">
         <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"
                   v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"
@@ -52,14 +52,23 @@
           window.document.addEventListener('tap', (e) => {
             console.log('document tap 事件被触发')
             // this.showTextarea = false
-            document.getElementById('commentTextarea').blur()
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.blur()
+            }
           }, false)
 
           setTimeout(() => {
-            document.getElementById('commentTextarea').focus()
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.focus()
+            }
           }, 500)
         } else {
-          document.getElementById('commentTextarea').blur()
+          var commentTextareaObj = document.getElementById('commentTextarea')
+          if (commentTextareaObj) {
+            commentTextareaObj.blur()
+          }
         }
       },
       finish () {
