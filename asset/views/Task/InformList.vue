@@ -82,7 +82,8 @@
                   <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
                   <p>
                     <span class="mui-ellipsis">{{item.name}}</span>
-                    <span class="mui-ellipsis">{{item.last_message ? item.last_message.text : ''}}</span>
+                    <span class="mui-ellipsis" v-if="item.last_message.data.img">[图片]</span>
+                    <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
                   </p>
                   <a>{{item.last_message ? item.last_message.created_at : ''}}</a>
                   <i class="bot"></i>
