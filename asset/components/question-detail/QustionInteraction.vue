@@ -94,7 +94,7 @@
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
         var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
         var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
-        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page', true, 'pop-in', 'hide', true)
+        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page-two', true, 'pop-in', 'hide', true)
       },
       setFollowStatus (status) {
         this.ask.is_followed = status

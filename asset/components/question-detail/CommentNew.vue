@@ -119,6 +119,9 @@
           }
 
           // this.commentState = true
+          this.rateStar = 5
+          this.description = ''
+
           window.mui('#commentWapper').popover('toggle')
           this.$emit('finish')
         })
@@ -159,6 +162,8 @@
       },
       answerId: function (newVal, oldVal) {
         if (newVal !== oldVal) {
+          this.rateStar = 5
+          this.description = ''
           window.mui('#commentWapper').popover('hide')
           var obj = document.querySelector('.mui-backdrop')
           if (obj) {
