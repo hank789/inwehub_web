@@ -310,7 +310,7 @@
     position: absolute;
     bottom: 0;
     padding: 0 10px;
-    z-index: 999;
+    z-index: 5;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
