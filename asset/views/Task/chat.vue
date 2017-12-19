@@ -150,7 +150,7 @@
      // for zhangzhen 推送消息
       chat (obj) {
         var item = {
-          created_at: obj.created_at,
+          created_at: '',
           data: {
             text: obj.body.text,
             img: obj.body.img
