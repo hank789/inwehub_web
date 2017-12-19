@@ -333,7 +333,7 @@
   }
 
   .buttonWrapper {
-    padding:33px 15px 0 15px;
+    padding: 5px 15px 15px 15px;
     background: #fff;
   }
 
