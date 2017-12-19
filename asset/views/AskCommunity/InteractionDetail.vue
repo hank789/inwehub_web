@@ -104,7 +104,7 @@
           description: '',
           tags: [],
           data: {
-            img:[]
+            img: []
           }
         },
         feedback: {
