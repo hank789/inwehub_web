@@ -21,13 +21,13 @@
       </div>
 
       <!--展示图片-->
-      <div class="container-images">
+      <div class="container-images" :class="'container-images-' + (images.length + 1)">
         <div class="container-image" v-for="(image, index) in images">
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
           </svg>
           <img :id="'image_' + index" :src="image.base64"/>
-        </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+        </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
       <div class="fixedDiv">
@@ -314,7 +314,10 @@
 </script>
 
 <style scoped>
-
+  .component-photograph{
+    width:61px !important;
+    height:61px !important;
+  }
 
   .askWrapper .category {
     background: #fff;
