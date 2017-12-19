@@ -205,6 +205,24 @@ function closeFullscreen () {
   })
 }
 
+/**
+ * 软键盘自动弹出
+ */
+function softInput () {
+  if (window.mui.os.android) {
+    var main = window.plus.android.runtimeMainActivity()
+    var Context = window.plus.android.importClass('android.content.Context')
+    var InputMethodManager = window.plus.android.importClass('android.view.inputmethod.InputMethodManager')
+    var imm = main.getSystemService(Context.INPUT_METHOD_SERVICE)
+    imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED)
+  } else {
+    var nativeWebview = window.plus.webview.currentWebview().nativeInstanceObject()
+    nativeWebview.plusCallMethod({
+      'setKeyboardDisplayRequiresUserAction': false
+    })
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -216,5 +234,6 @@ export {
   openVendorUrl,
   closeSplashscreen,
   openFullscreen,
-  closeFullscreen
+  closeFullscreen,
+  softInput
 }

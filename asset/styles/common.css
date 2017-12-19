@@ -551,7 +551,7 @@ input[type='submit'], .mui-btn-primary, .mui-btn-blue{
 .mint-indicator-mask {
   top: 0;
   left: 0;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   opacity: 0;
