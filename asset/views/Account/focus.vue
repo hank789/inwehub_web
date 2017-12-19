@@ -158,7 +158,6 @@
         }
       })
       this.getPrevList()
-      console.error()
     }
   }
 </script>
