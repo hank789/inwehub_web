@@ -1,7 +1,7 @@
 <template>
   <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
     <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"
                   v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"
                   autocomplete="off"></textarea>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
@@ -13,6 +13,7 @@
 
 <script>
   import { autoHeight } from '../../utils/textarea'
+  import { softInput } from '../../utils/plus'
 
   const CommentTextarea = {
     data: () => ({
@@ -21,15 +22,21 @@
       targetUsername: ''
     }),
     props: {},
+    mounted () {
+      softInput()
+    },
     methods: {
       autoTextArea (event) {
         autoHeight(event)
       },
       textareaFocus () {
-        console.log('focus')
+        window.mui.waitingBlank()
+        console.log('comment focus')
       },
       textareaBlur () {
-        console.log('blur')
+        window.mui.closeWaitingBlank()
+        console.log('comment blur')
+        this.showTextarea = false
       },
       comment (targetUsername) {
         if (targetUsername === '') {
@@ -44,12 +51,15 @@
           console.log('bind comment事件')
           window.document.addEventListener('tap', (e) => {
             console.log('document tap 事件被触发')
-            this.showTextarea = false
+            // this.showTextarea = false
+            document.getElementById('commentTextarea').blur()
           }, false)
 
           setTimeout(() => {
             document.getElementById('commentTextarea').focus()
           }, 500)
+        } else {
+          document.getElementById('commentTextarea').blur()
         }
       },
       finish () {
@@ -112,5 +122,13 @@
     color: #03aef9;
     font-size: 26px;
     bottom: 5px;
+  }
+
+  .commentShadowWrapper{
+    display: none;
+    position: absolute;
+    left:0;
+    width:100%;
+    bottom:0;
   }
 </style>
