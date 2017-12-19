@@ -33,7 +33,7 @@
             <div class="container-image margin-10-0-0" v-if="ask.img && ask.type =='link'" >
               <img :src="ask.img" />
             </div>
-            <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
+            <p class="mui-ellipsis-2" v-html="ask.title"><a v-if="ask.domain">{{ask.domain}}</a> </p>
             <p>
               <!--{{ask.created_at}}-->
               <timeago :since="timeago(ask.created_at)" :auto-update="60">
