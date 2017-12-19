@@ -16,6 +16,9 @@
     <div class="content">
       {{ ask.description }}
     </div>
+    <!--添加图片-->
+    <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data.img" :group="ask.id" v-if="ask.data.img.length > 0">
+    </Images>
 
 
     <div class="footer">
@@ -27,6 +30,8 @@
 <script type="text/javascript">
 
   import UserInfo from './UserInfo.vue'
+  import Images from '../../components/image/Images.vue'
+
 
   export default {
     data () {
@@ -34,7 +39,8 @@
       }
     },
     components: {
-      UserInfo
+      UserInfo,
+      Images
     },
     props: {
       ask: {
