@@ -241,7 +241,7 @@
       message () {
         if (this.comment) {
           var item = {
-            created_at: this.currentTime(),
+            created_at: '',
             data: {
               text: this.comment
             },
@@ -345,6 +345,7 @@
   .user li {
     width: 100%;
     overflow: hidden;
+    margin-top: 10px;
     /*border: 1px solid #CCCCCC;*/
   }
    /*客服*/
