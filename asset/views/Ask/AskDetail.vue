@@ -34,7 +34,7 @@
         </button>
       </div>
 
-      <Star-Rating v-if="ask.question.status===7"
+      <Star-Rating v-if="ask.question.status===7 && ask.feedback.description"
                    :description="ask.feedback.description"
                    :rating="ask.feedback.rate_star"
                    :readOnly="true"
