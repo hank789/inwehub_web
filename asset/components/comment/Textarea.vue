@@ -69,12 +69,15 @@
       },
       sendMessage (event) {
         event.preventDefault()
+        event.stopPropagation()
 
         if (!this.textarea.trim()) {
           return false
         }
 
         this.$emit('sendMessage', this.textarea)
+
+        document.getElementById('commentTextarea').blur()
       }
     }
   }
@@ -91,7 +94,7 @@
     min-height: 45px;
     overflow: hidden;
     padding: 5px 15px;
-    z-index: 77;
+    z-index: 10001;
   }
 
   .commentWrapper .textareaWrapper {
