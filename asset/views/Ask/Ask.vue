@@ -20,6 +20,16 @@
                     @blur="textareaBlur"></textarea>
         </div>
       </div>
+      <!--展示图片-->
+      <div class="container-images" :class="'container-images-' + (images.length + 1)">
+        <div class="container-image" v-for="(image, index) in images">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+            <use xlink:href="#icon-times1"></use>
+          </svg>
+          <img :id="'image_' + index" :src="image.base64"/>
+        </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+      </div>
+
 
       <div class="fixedDiv">
         <div class="fixedContainer">
@@ -104,6 +114,14 @@
         </li>
       </ul>
     </div>
+
+    <!--上传图片-->
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="true"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+
   </div>
 </template>
 
@@ -120,10 +138,13 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import { autoTextArea } from '../../utils/plus'
+  import uploadImage from '../../components/uploadImage'
 
   const Ask = {
     data: () => ({
       id: currentUser.user_id,
+      images: [],
+      maxImageCount: 9,
       tags: [],
       money: 88,
       payItems: [],
@@ -139,10 +160,15 @@
       descPlaceholder: '1.请精确描述输入问题详情，并等待平台专家回答' + '\n' + '2.答案每被查看一次，你和回答者可从中获取分成' + '\n' + '3.请根据问题难易程度等合理选择支付金额'
     }),
     components: {
-      pay
+      pay,
+      uploadImage
+    },
+    activated: function () {
+      this.initData()
     },
     mounted () {
       autoTextArea()
+      this.initData()
 
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
@@ -158,11 +184,7 @@
       }
 
       this.textareaBlur()
-//      取标签；
-      var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
-      for (var i in tag) {
-        this.tags = this.tags.concat(tag[i].value)
-      }
+
 //      弹窗
       var font = '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
                   '</p>' +
@@ -216,6 +238,25 @@
       this.check()
     },
     methods: {
+      initData () {
+        //      取标签；
+        var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
+        // 返回时重新取值
+        this.tags = []
+        for (var i in tag) {
+          this.tags = this.tags.concat(tag[i].value)
+        }
+      },
+      uploadImage: function () {
+        var textarea = window.document.getElementById('discoverTextarea')
+        if (textarea) {
+          textarea.blur()
+        }
+        this.$refs.uploadImage.uploadImage()
+      },
+      delImg (index) {
+        this.images.splice(index, 1)
+      },
       textareaFocus () {
         if (this.description === this.descPlaceholder) {
           this.description = ''
@@ -395,6 +436,8 @@
       },
       clearCache () {
         var info = {}
+        this.images = []
+        this.tags = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
@@ -438,9 +481,13 @@
           price: this.money,
           tags: this.tags,
           hide: this.hide,
-          device: device
+          device: device,
+          photos: []
         }
-
+        for (var i in this.images) {
+          var compressBase64 = this.images[i].base64
+          data.photos.push(compressBase64)
+        }
         if (this.question_type === 1) {
           window.mui('#sheet1').popover('toggle')
         }
@@ -487,7 +534,10 @@
 
 
 <style scoped>
-
+  .component-photograph{
+    width:61px !important;
+    height:61px !important;
+  }
 
   .askWrapper .category {
     background: #fff;
@@ -526,7 +576,7 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    height: 313px;
+    height: 202px;
     width: 100%;
     z-index: 0;
   }
@@ -837,5 +887,8 @@
     .form-ask {
       height: 220px;
     }
+  }
+  .container-images{
+    background: #F3F4F5;
   }
 </style>

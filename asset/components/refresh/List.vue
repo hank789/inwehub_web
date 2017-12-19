@@ -151,8 +151,7 @@
           var code = response.data.code
 
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
 
@@ -203,8 +202,7 @@
           var code = response.data.code
 
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
 
@@ -257,8 +255,8 @@
         postRequest(this.api, param).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
+            return
           }
 
           var list = response.data.data

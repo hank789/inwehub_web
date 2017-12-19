@@ -36,7 +36,7 @@
       <!--我的等级-->
       <div class="Grade">
         <p class="myGrades">
-          <span>我的积分</span>
+          <span>我的等级</span>
           <i class="bot"></i>
         </p>
         <div class="Member">

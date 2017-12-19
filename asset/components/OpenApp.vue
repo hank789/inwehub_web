@@ -23,18 +23,18 @@
 
     <!--微信端-->
     <div class="suspension" v-if="isWeixin">
-      <p>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">
-          <use xlink:href="#icon-guanbi"></use>
-        </svg>
-      </p>
-      <p>
+      <!--<p>-->
+        <!--<svg class= "icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">-->
+          <!--<use xlink:href="#icon-guanbi"></use>-->
+        <!--</svg>-->
+      <!--</p>-->
+      <p @tap.stop.prevent="$router.push('/home')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logotuxing"></use>
         </svg>
       </p>
-      <p>下载APP</p>
-      <p><a id="btnOpenAppWeixin" :href="url" target="_blank">立即打开</a></p>
+      <p @tap.stop.prevent="$router.push('/home')">首页</p>
+      <p><a id="btnOpenAppWeixin" :href="url" target="_blank">APP内打开</a></p>
     </div>
   </div>
 </template>
@@ -263,17 +263,17 @@
     -moz-box-shadow: 0px 3px 5px #b4b4b6;
   }
 
+  /*.suspension p:nth-of-type(1) {*/
+    /*float: left;*/
+    /*color: #b4b4b6;*/
+    /*margin-left: 23px;*/
+    /*margin-top: 15px;*/
+    /*margin-right: 20px;*/
+    /*font-size: 16px;*/
+
+  /*}*/
+
   .suspension p:nth-of-type(1) {
-    float: left;
-    color: #b4b4b6;
-    margin-left: 23px;
-    margin-top: 15px;
-    margin-right: 20px;
-    font-size: 16px;
-
-  }
-
-  .suspension p:nth-of-type(2) {
     float: left;
     width: 35px;
     height: 35px;
@@ -281,15 +281,16 @@
     background: #f3f4f6;
     margin-top: 7px;
     text-align: center;
+    margin-left: 14px;
   }
 
-  .suspension p:nth-of-type(2) svg {
+  .suspension p:nth-of-type(1) svg {
     font-size: 25px;
     margin-top: 6px;
     color: #009fe8;
   }
 
-  .suspension p:nth-of-type(3) {
+  .suspension p:nth-of-type(2) {
     float: left;
     font-size: 16px;
     color: #171616;
@@ -299,7 +300,7 @@
 
   .suspension a {
     float: right;
-    width: 76px;
+    width: 88px;
     height: 30px;
     border-radius: 4px;
     background: #3c95f9;

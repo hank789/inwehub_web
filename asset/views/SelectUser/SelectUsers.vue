@@ -51,13 +51,13 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="select active" v-if="Selected[key + '_' + index]" @tap.stop.prevent="collectProfessor(key + '_' + index, item.id)">
+              <div class="select active" v-if="Selected[key + '_' + index]" @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-check-circle"></use>
                 </svg>
 
               </div>
-              <div class="select" v-else @tap.stop.prevent="collectProfessor(key + '_' + index, item.id)">
+              <div class="select" v-else @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
               </div>
 
             </li>
@@ -103,8 +103,9 @@
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       // 点击选择；
-      collectProfessor (index, uid) {
-        var value = this.Selected[index] ? false : uid
+      collectProfessor (index, item) {
+        item.listindex = index
+        var value = this.Selected[index] ? false : item
         Vue.set(this.Selected, index, value)
         console.log(this.Selected)
         var options = []
@@ -144,9 +145,22 @@
         })
       }
     },
+    activated () {
+      this.Selected = []
+      var user = localEvent.getLocalItem('select_users' + this.userId)
+//      console.error(user)
+      for (var num = 0; num < user.length; num++) {
+        this.collectProfessor(user[num].listindex, user[num])
+      }
+    },
     watch: {},
     mounted () {
       this.getList()
+      var user = localEvent.getLocalItem('select_users' + this.userId)
+//      console.error(user)
+      for (var num = 0; num < user.length; num++) {
+        this.collectProfessor(user[num].listindex, user[num])
+      }
     },
     created () {
       console.log(this.lastList)

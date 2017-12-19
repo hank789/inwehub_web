@@ -7,82 +7,89 @@
     </header>
     <!--导航栏-->
 
-    <div class="mui-content absolute ">
+    <div class="mui-content">
       <div class="mui-scroll-wrapper">
         <div class="content">
           <div class="menu">
             <span @tap.stop.prevent="$router.replace('/task')">任务</span>
-            <span @tap.stop.prevent="">消息</span>
+            <span @tap.stop.prevent="">消息 <i></i></span>
             <div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
-            <i></i>
           </div>
-
-          <div class="mui-scroll" id="pullrefresh_informList">
-            <ul>
-              <li @tap.stop.prevent="skip(1)">
-                <img src="../../statics/images/inform1.png"/>
-                <div class="message" v-if="notice_count != 0">{{notice_count}}</div>
-                <p>
-                  <span>通知公告</span>
-                  <span class="mui-ellipsis">{{notice_message.last_message ? notice_message.last_message.data.title : ""}}</span>
-                </p>
-                <a>{{notice_message.last_message ? notice_message.last_message.created_at : ''}}</a>
-                <i class="bot"></i>
-              </li>
-              <li @tap.stop.prevent="skip(2)">
-                <img src="../../statics/images/balance1.png"/>
-                <div class="message" v-if="money_count != 0">{{money_count}}</div>
-                <p>
-                  <span>余额变动</span>
-                  <span class="mui-ellipsis">{{money_message.last_message ? money_message.last_message.data.title : ""}} </span>
-                </p>
-                <a>{{money_message.last_message ? money_message.last_message.created_at : ''}}</a>
-                <i class="bot"></i>
-              </li>
-              <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">
-                                    <img src="../../statics/images/integral1.png" />
-                                    <div class="message">99</div>
-                                    <p>
-                                       <span>积分变动</span>
-                                       <span class="mui-ellipsis">回答了一条问题增加2积分</span>
-                                    </p>
-                                    <a>16:44</a>
-                                    <i class="bot"></i>
-                                </li>-->
-              <li @tap.stop.prevent="skip(3)">
-                <img src="../../statics/images/mission1.png"/>
-                <div class="message" v-if="task_count != 0">{{task_count}}</div>
-                <p>
-                  <span>问答通知</span>
-                  <span
-                    class="mui-ellipsis">{{task_message.last_message ? task_message.last_message.data.title : ""}} </span>
-                </p>
-                <a>{{task_message.last_message ? task_message.last_message.created_at : ''}}</a>
-                <i class="bot"></i>
-              </li>
-              <li @tap.stop.prevent="skip(4)">
-                <img src="../../statics/images/read1.png"/>
-                <div class="message" v-if="readhub_count != 0">{{readhub_count}}</div>
-                <p>
-                  <span>动态通知</span>
-                  <span
-                    class="mui-ellipsis">{{readhub_message.last_message ? readhub_message.last_message.data.title : ""}}</span>
-                </p>
-                <a>{{readhub_message.last_message ? readhub_message.last_message.created_at : ''}}</a>
-                <i class="bot"></i>
-              </li>
-              <li @tap.stop.prevent="skip(5)">
-                <img :src="im_messages.avatar" class="radius"/>
-                <div class="message" v-if="im_messages_count != 0">{{im_messages_count}}</div>
-                <p>
-                  <span class="mui-ellipsis">{{im_messages.name ? im_messages.name : ""}}</span>
-                  <span class="mui-ellipsis">{{im_messages.last_message ? im_messages.last_message.text : ""}}</span>
-                </p>
-                <a>{{im_messages.last_message ? im_messages.last_message.created_at : ""}}</a>
-                <i class="bot"></i>
-              </li>
-            </ul>
-          </div>
+          <!--内容区域-->
+          <RefreshList
+            ref="RefreshList"
+            v-model="list"
+            :api="'notification/count'"
+            :prevOtherData="{}"
+            :nextOtherData="{}"
+            :isShowUpToRefreshDescription="false"
+            :autoShowEmpty="false"
+            class="listWrapper">
+              <ul>
+                <li @tap.stop.prevent="skip(1)">
+                  <img src="../../statics/images/inform1.png"/>
+                  <div class="message" v-if="list.notice_message.unread_count">{{list.notice_message.unread_count}}</div>
+                  <p>
+                    <span>通知公告</span>
+                    <span class="mui-ellipsis">{{list.notice_message.last_message ? list.notice_message.last_message.data.title : ''}}</span>
+                  </p>
+                  <a>{{list.notice_message.last_message ? list.notice_message.last_message.created_at : ''}}</a>
+                  <i class="bot"></i>
+                </li>
+                <li @tap.stop.prevent="skip(2)">
+                  <img src="../../statics/images/balance1.png"/>
+                  <div class="message" v-if="list.money_message.unread_count">{{list.money_message.unread_count}}</div>
+                  <p>
+                    <span>余额变动</span>
+                    <span class="mui-ellipsis">{{list.money_message.last_message ? list.money_message.last_message.data.title : ""}} </span>
+                  </p>
+                  <a>{{list.money_message.last_message ? list.money_message.last_message.created_at : ''}}</a>
+                  <i class="bot"></i>
+                </li>
+                <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">-->
+                      <!--<img src="../../statics/images/integral1.png" />-->
+                      <!--<div class="message">99</div>-->
+                      <!--<p>-->
+                         <!--<span>积分变动</span>-->
+                         <!--<span class="mui-ellipsis">回答了一条问题增加2积分</span>-->
+                      <!--</p>-->
+                      <!--<a>16:44</a>-->
+                      <!--<i class="bot"></i>-->
+                 <!--</li>-->
+                <li @tap.stop.prevent="skip(3)">
+                  <img src="../../statics/images/mission1.png"/>
+                  <div class="message" v-if="list.task_message.unread_count">{{list.task_message.unread_count}}</div>
+                  <p>
+                    <span>问答通知</span>
+                    <span class="mui-ellipsis">{{list.task_message.last_message ? list.task_message.last_message.data.title : ""}} </span>
+                  </p>
+                  <a>{{list.task_message.last_message ? list.task_message.last_message.created_at : ''}}</a>
+                  <i class="bot"></i>
+                </li>
+                <li @tap.stop.prevent="skip(4)">
+                  <img src="../../statics/images/read1.png"/>
+                  <div class="message" v-if="list.readhub_message.unread_count">{{list.readhub_message.unread_count}}</div>
+                  <p>
+                    <span>动态通知</span>
+                    <span class="mui-ellipsis">{{list.readhub_message.last_message ? list.readhub_message.last_message.data.title : ""}} </span>
+                  </p>
+                  <a>{{list.readhub_message.last_message ? list.readhub_message.last_message.created_at : ''}}</a>
+                  <i class="bot"></i>
+                </li>
+                <!--消息通知-->
+                <li   v-for="(item, index) in list.im_messages" @tap.stop.prevent="gochat(item)">
+                  <img :src="item.avatar" class="radius"/>
+                  <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
+                  <p>
+                    <span class="mui-ellipsis">{{item.name}}</span>
+                    <span class="mui-ellipsis" v-if="item.last_message.data.img">[图片]</span>
+                    <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
+                  </p>
+                  <a>{{item.last_message ? item.last_message.created_at : ''}}</a>
+                  <i class="bot"></i>
+                </li>
+              </ul>
+          </RefreshList>
         </div>
       </div>
     </div>
@@ -91,100 +98,86 @@
 </template>
 
 <script type="text/javascript">
-  import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
   const TaskMain = {
     data: () => ({
-      count: '',
-      notice_message: {},
-      task_message: {}, // 未读任务动态数
-      readhub_message: {}, // 未读阅读发现数
-      money_message: {}, // 未读资金变动数
-      im_messages: [], // 未读消息变动数
-      notice_count: 0,
-      task_count: 0,
-      readhub_count: 0,
-      money_count: 0,
+      list: {
+        notice_message: {
+          last_message: {
+            created_at: '',
+            data: {
+              title: ''
+            }
+          },
+          unread_count: ''
+        },
+        money_message: {
+          last_message: {
+            created_at: '',
+            data: {
+              title: ''
+            }
+          },
+          unread_count: ''
+        },
+        readhub_message: {
+          last_message: {
+            created_at: '',
+            data: {
+              title: ''
+            }
+          },
+          unread_count: ''
+        },
+        task_message: {
+          last_message: {
+            created_at: '',
+            data: {
+              title: ''
+            }
+          },
+          unread_count: ''
+        },
+        im_messages: []
+      },
       loading: true,
       total_count: 0,
       mobile: 0,
-      im_messages_count: 0
     }),
+    components: {
+      RefreshList
+    },
     methods: {
       messagecountchange (obj) {
         this.total_count = obj
 //           console.log(obj);
       },
+      gochat (item) {
+        item.unread_count = 0
+        this.$router.pushPlus('/chat/' + item.contact_id + '?name=' + item.name)
+      },
       skip (num) {
         switch (num) {
           case 1:
-            this.notice_count = 0
+            this.list.notice_message.unread_count = 0
             this.$router.pushPlus('/informbar')
             break
           case 2:
-            this.money_count = 0
+            this.list.money_message.unread_count = 0
             this.$router.pushPlus('/balancebar')
             break
           case 3:
-            this.task_count = 0
+            this.list.task_message.unread_count = 0
             this.$router.pushPlus('/taskbar')
             break
           case 4:
-            this.readhub_count = 0
+            this.list.readhub_message.unread_count = 0
             this.$router.pushPlus('/readbar')
             break
-          case 5:
-            this.im_messages_count = 0
-            this.$router.pushPlus('/chat')
-            break
         }
-      },
-      // 下拉刷新;
-      pulldownRefresh () {
-        setTimeout(() => {
-          this.getPrevList()
-        }, 1000)
-      },
-      // 下拉刷新请求的数据
-      getPrevList () {
-        postRequest(`notification/count`, {}).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-
-          this.notice_message = response.data.data.notice_message
-          this.task_message = response.data.data.task_message
-          this.readhub_message = response.data.data.readhub_message
-          this.money_message = response.data.data.money_message
-          this.im_messages = response.data.data.im_messages[0] ? response.data.data.im_messages[0] : []
-
-          this.notice_count = this.notice_message.unread_count
-          this.task_count = this.task_message.unread_count
-          this.readhub_count = this.readhub_message.unread_count
-          this.money_count = this.money_message.unread_count
-          this.im_messages_count = this.im_messages.length > 0 ? this.im_messages[0].unread_count : 0
-          this.loading = 0
-          window.mui('#pullrefresh_informList').pullRefresh().endPulldownToRefresh() // refresh completed
-        })
       }
     },
     mounted () {
-      // 请求数据；
-      window.mui.init({
-        pullRefresh: {
-          container: '#pullrefresh_informList',
-          down: {
-            contentdown: '下拉可以刷新', // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: '释放立即刷新', // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-            contentrefresh: '正在刷新...', // 可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-            callback: this.pulldownRefresh
-          }
-        }
-      })
-      this.getPrevList()
     }
   }
   export default TaskMain
@@ -255,6 +248,7 @@
     text-align: center;
     line-height: 45px;
     font-weight: 600;
+    position: relative;
   }
 
   .menu span:nth-of-type(2) {
@@ -266,7 +260,7 @@
     position: absolute;
     width: 30px;
     height: 1.8px;
-    right: 20.65%;
+    right: 42.65%;
     bottom: 0.5px;
     background: #3c95f9;
   }
@@ -289,6 +283,7 @@
     margin-top: 10px;
     float: left;
   }
+
 
   .content ul li p {
     float: left;
@@ -352,6 +347,15 @@
   }
 
   .radius {
+    border-radius: 50%;
+  }
+  /*客服头像方形*/
+  .content ul li:nth-of-type(5) img{
     border-radius: 10px;
+  }
+
+  .listWrapper{
+    top:45px;
+    bottom: 50px;
   }
 </style>

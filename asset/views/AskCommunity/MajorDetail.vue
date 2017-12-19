@@ -23,6 +23,27 @@
                 @paySuccess="paySuccess"
         ></Answer>
 
+        <div class="buttonWrapper" v-show="answer.content !== '' && !ask.feedback.description && answer.user_id !== userId">
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="commentReal()"  v-if="ask.question.user_id == userId">
+            点击评价，分享获取分红
+          </button>
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="commentReal()" v-else>
+            点击评价
+          </button>
+        </div>
+
+        <Star-Rating v-if="ask.feedback.description"
+                     :description="ask.feedback.description"
+                     :rating="ask.feedback.rate_star"
+                     :readOnly="true"
+                     class="star"
+        ></Star-Rating>
+
+        <!--查看全部回答-->
+        <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
+          <i class="bot" v-show="ask.question.status===6"></i>
+        </div>
+
 
         <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
           <div class="mui-table-view-cell">
@@ -96,6 +117,13 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
+    <Comment v-show="answer.content !== '' && !ask.feedback.description"
+             :answerId="answer?answer.id:0"
+             @finish="getDetail()"
+             ref="commentReal"
+             class="btn"
+    ></Comment>
+
   </div>
 </template>
 
@@ -106,15 +134,19 @@
   import Question from '../../components/question-detail/Question.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
+  import Comment from '../../components/question-detail/CommentNew.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import userAbility from '../../utils/userAbility'
   import { autoTextArea } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import StarRating from '../../components/question-detail/StarRating.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
+      userId: currentUser.user_id,
       ask: {
         answers: [],
         question: {
@@ -137,7 +169,6 @@
     }),
     mounted () {
       autoTextArea()
-
       this.getDetail()
     },
     components: {
@@ -146,7 +177,8 @@
       Answer,
       Comment,
       Share,
-      commentTextarea
+      commentTextarea,
+      StarRating
     },
     computed: {
       answer () {
@@ -154,6 +186,9 @@
       }
     },
     methods: {
+      commentReal () {
+        this.$refs.commentReal.comment()
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
@@ -260,7 +295,16 @@
     list-style: none;
     font-style: normal;
   }
-
+  .bot {
+    position: absolute;
+    right:15px;
+    top: 0px;
+    left:15px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
   .mui-table-view-cell:after {
     display: none;
   }
@@ -289,14 +333,21 @@
   }
 
   .buttonWrapper {
-    padding-top: 33px;
+    padding: 5px 15px 15px 15px;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 0;
+    border-radius: 50px;
     margin-bottom: 0;
     padding: 13px 0;
+  }
+  .iNeedAskWrapper{
+    padding:0;
+    width:100%;
+  }
+  .iNeedAskWrapper button{
+    border-radius:0;
   }
   /*标签样式*/
   .question_tags{
@@ -344,5 +395,28 @@
   color:#808080;
   line-height: 62px;
   margin-left: -10px;
+  }
+  /*answer*/
+  .detail-answer[data-v-852fb68e] {
+    margin-bottom: 0px;
+  }
+  /*查看回答*/
+  .see{
+    width:100%;
+    height:40px;
+    padding: 0 15px;
+    font-size:14px;
+    color:#03aef9;
+    text-align: center;
+    line-height: 40px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .btn{
+    margin-top: -15px;
+  }
+  .star{
+    margin-top: -15px;
   }
 </style>

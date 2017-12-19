@@ -1,5 +1,5 @@
 <template>
-    <div class="container-images">
+    <div class="container-images" :class="'container-images-' + images.length">
       <div class="container-image"  v-for="(image, index) in images"><img :src="getImage(image)" :data-preview-src="image" :data-preview-group="group"/></div>
     </div>
 </template>
@@ -50,9 +50,7 @@
   }
 
   .newestList .container-image{
-    width: 108px;
-    height: 108px;
-    margin-right:5px;
+    
   }
 
   .container-images .container-image:only-child {

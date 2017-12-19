@@ -7,7 +7,7 @@
 
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
-      <div class="tags" v-if="ask.question.tags">
+      <div class="tags" v-if="ask.question.tags.length">
         <p v-for="(item, index) in ask.question.tags">{{item.name}}</p>
       </div>
 
@@ -28,12 +28,13 @@
         <p>正在等待专家回答</p>
       </div>
 
-      <Comment v-show="ask.question.status===6"
-               :answerId="ask.answers[0]?ask.answers[0].id:0"
-               @finish="getDetail()"
-      ></Comment>
+      <div class="buttonWrapper" v-show="ask.question.status===6">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="commentReal()">点击评价，分享获取分红
+        </button>
+      </div>
 
-      <Star-Rating v-if="ask.question.status===7"
+      <Star-Rating v-if="ask.question.status===7 && ask.feedback.description"
                    :description="ask.feedback.description"
                    :rating="ask.feedback.rate_star"
                    :readOnly="true"
@@ -73,6 +74,12 @@
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
+    <Comment v-show="ask.question.status===6"
+             :answerId="ask.answers[0]?ask.answers[0].id:0"
+             @finish="getDetail()"
+             ref="commentReal"
+    ></Comment>
   </div>
 </template>
 
@@ -87,7 +94,7 @@
   import Statistics from '../../components/question-detail/Statistics.vue'
   import Timeline from '../../components/question-detail/Timeline.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
+  import Comment from '../../components/question-detail/CommentNew.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -98,7 +105,10 @@
         answers: [],
         question: {
           created_at: '',
-          tags: []
+          tags: [],
+          data: {
+            img: []
+          }
         },
         feedback: {
           rate_star: 0
@@ -145,6 +155,9 @@
       }
     },
     methods: {
+      commentReal () {
+        this.$refs.commentReal.comment()
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
@@ -272,5 +285,20 @@
 
   .messageWrapper{
     padding-top:10px;
+  }
+/*按钮*/
+  .buttonWrapper {
+    padding:19px 15px 0 15px;
+    background: #fff;
+  }
+
+  .buttonWrapper button {
+    border-radius: 50px;
+    margin-bottom: 0;
+    padding: 13px 0;
+  }
+  /*margin*/
+  .detail-answer{
+    margin-bottom: 0px;
   }
 </style>

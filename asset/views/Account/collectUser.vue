@@ -52,7 +52,7 @@
                 </div>
               </div>
 
-              <div class="textBody ">
+              <div class="textBody" @tap.stop.prevent="toAvatar(item.uuid)">
                 <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
@@ -97,7 +97,7 @@
         if (!uuid) {
           return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
       },
       // 点击关注；
       collectProfessor (id, key, index) {

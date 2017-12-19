@@ -14,8 +14,10 @@
 
     <div class="content">
       {{ ask.description }}
-
     </div>
+    <!--添加图片-->
+    <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data ? ask.data.img : ''" :group="ask.id" v-if="ask.data ? ask.data.img.length >0 :''">
+    </Images>
 
     <div class="answerCount">
       {{ ask.answer_num }}人回答
@@ -54,13 +56,16 @@
 
   import UserInfo from './UserInfo.vue'
   import { postRequest } from '../../utils/request'
+  import Images from '../../components/image/Images.vue'
 
   export default {
     data () {
-      return {}
+      return {
+      }
     },
     components: {
-      UserInfo
+      UserInfo,
+      Images
     },
     props: {
       ask: {
@@ -89,7 +94,7 @@
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
         var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
         var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
-        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page', true, 'pop-in', 'hide', true)
+        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page-two', true, 'pop-in', 'hide', true)
       },
       setFollowStatus (status) {
         this.ask.is_followed = status
@@ -163,5 +168,9 @@
 
   .afterHidden:after {
     display: none;
+  }
+  /*图片样式*/
+  .img-style{
+    padding: 0 15px;
   }
 </style>

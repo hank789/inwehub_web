@@ -10,8 +10,8 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2" @tap.stop.prevent="goDetial(data)">
-          {{data.title}}
+        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="data.title">
+          <!--{{data.title}}-->
         </div>
 
         <div class="PublishContainer" v-if="data.data.img">
@@ -37,7 +37,7 @@
          </svg>
         <span class="carte" style="display: none;">
           <a @tap.stop.prevent="report(data.user_id)" v-if="userId != data.owner.id">举报</a>
-          <a @tap.stop.prevent="deleterow(data.id,index)" v-else>删除</a>
+          <a @tap.stop.prevent="deleterow" v-else>删除</a>
         </span>
       </p>
       <p @tap.stop.prevent="bookmarkuBmission(data)" :class="data.is_bookmark ? 'blue':''">
@@ -112,8 +112,8 @@
       report (id) {
         this.$emit('report', id)
       },
-      deleterow (id, index) {
-        this.$emit('deleterow', id, index)
+      deleterow () {
+        this.$emit('deleterow')
       },
       toggleOptions (event) {
         if (event.target.nodeName !== 'svg') return
@@ -491,7 +491,5 @@
     color: #03aef9;
   }
 
-
-
-
 </style>
+

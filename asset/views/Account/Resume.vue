@@ -245,25 +245,34 @@
            :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
 
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
-            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare" v-show="!loading">继续编辑
+            @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑
 
 
     </button>
-    <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
-            @tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询
+    <!--<button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"-->
+            <!--@tap.stop.prevent="goAsk('/ask?id='+uuid)" v-else v-show="!loading">向Ta咨询-->
 
 
-    </button>
+    <!--</button>-->
+    <div class="bottomButton btn" v-else v-show="!loading">
+      <p @tap.stop.prevent="goChat()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-faxiaoxi"></use>
+        </svg>
+        发私信
+      </p>
+      <p @tap.stop.prevent="goAsk('/ask?id='+uuid)">向Ta咨询</p>
+    </div>
 
   </div>
 </template>
 
 <script>
-  import localEvent from '../../stores/localStorage'
   import { postRequest } from '../../utils/request'
   import Share from '../../components/Share.vue'
-
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { alertChat } from '../../utils/dialogList'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
@@ -274,6 +283,7 @@
         thumbUrl: ''
       },
       im_tokenMsg: '',
+      percent: currentUser.account_info_complete_percent,
       uuid: currentUser.uuid,
       cuuid: currentUser.uuid,
       showQrCode: false,
@@ -287,8 +297,9 @@
       isShowItemJobMore: false,
       isShowitemEduMore: false,
       resume: {
-
         info: {
+          id: '',
+          name: '',
           avatar_url: '',
           industry_tags: [],
           province: {
@@ -330,14 +341,23 @@
       })
     },
     methods: {
+      goChat () {
+        if (this.percent >= 90) {
+          this.$router.pushPlus('/chat/' + this.resume.info.id + '?name=' + this.resume.info.name)
+        } else {
+          alertChat(this)
+        }
+      },
       share: function () {
         this.$refs.shareComponent.share()
       },
       getData: function () {
+        // 获取本地的百分比
+        const currentUser = getLocalUserInfo()
+        this.percent = currentUser.account_info_complete_percent
         if (this.$route.query.goback) {
           this.canBack = true
         }
-
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
 
@@ -1095,5 +1115,40 @@
     font-size: 14px;
     color: #808080;
     margin-bottom: 12px;
+  }
+  /*向他咨询*/
+  .btn{
+    border-top:1px solid #dcdcdc;
+    width:100%;
+    height:49px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .btn P{
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn P:nth-of-type(1){
+    width:32%;
+    background:#f3f4f6;
+    font-size:14px;
+    color: #444444;
+
+  }
+  .btn P:nth-of-type(1) svg{
+    font-size: 17px;
+    color: #808080;
+    margin-right: 4px;
+    margin-top: -2px;
+  }
+  .btn P:nth-of-type(2){
+    width:68%;
+    background:#03aef9;
+    font-size:17px;
+    color: #ffffff;
   }
 </style>

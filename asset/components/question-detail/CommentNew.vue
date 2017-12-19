@@ -1,14 +1,5 @@
 <template>
   <div>
-
-    <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-              @tap.stop.prevent="comment()">点击评价，分享获取分红
-
-
-      </button>
-    </div>
-
     <div id="commentWapper" class="mui-popover mui-popover-action mui-popover-bottom">
       <div class="commentHeader">
         <button class="shutdown mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="cancelComment">关闭</button>
@@ -82,7 +73,6 @@
 
     },
     created () {
-
     },
     methods: {
       cancelComment () {
@@ -93,22 +83,7 @@
         }
       },
       comment () {
-        var obj = document.querySelector('.mui-backdrop')
-        if (obj) {
-          obj.remove()
-        }
-        setTimeout(() => {
-          window.mui('#commentWapper').popover('toggle')
-          setTimeout(() => {
-            var obj = document.querySelector('.mui-backdrop')
-            if (obj) {
-              obj.addEventListener('tap', function (e) {
-                obj.remove()
-              })
-              document.querySelector('.mui-content').appendChild(obj)
-            }
-          }, 150)
-        }, 150)
+        window.mui('#commentWapper').popover('toggle')
       },
       setRating: function (rating) {
         this.rateStar = rating
@@ -143,7 +118,12 @@
             return
           }
 
-          this.commentState = true
+          // this.commentState = true
+          this.rateStar = 5
+          this.description = ''
+
+          window.mui('#commentWapper').popover('toggle')
+          this.$emit('finish')
         })
       }
     },
@@ -178,6 +158,17 @@
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
+        }
+      },
+      answerId: function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.rateStar = 5
+          this.description = ''
+          window.mui('#commentWapper').popover('hide')
+          var obj = document.querySelector('.mui-backdrop')
+          if (obj) {
+            obj.remove()
+          }
         }
       }
     }

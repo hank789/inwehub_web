@@ -30,12 +30,36 @@
       content: String,
       value: Object,
       disabled: Boolean,
+      isMonitorAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      isMonitorSmallSpan: {
+        type: Boolean,
+        default: false
+      },
+      isEnableAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      isMonitorHashSymbol: {
+        type: Boolean,
+        default: false
+      },
+      isEnableHashSymbol: {
+        type: Boolean,
+        default: false
+      },
       options: {
         type: Object,
         required: false,
         default () {
           return {}
         }
+      },
+      isEnableImage: {
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
@@ -45,6 +69,58 @@
       this.quill = null
     },
     methods: {
+      focus () {
+        this.quill.focus()
+      },
+      blur () {
+        this.quill.blur()
+      },
+      resetContent (content) {
+        this.quill.setContents(content)
+      },
+      appendContent (text, attribute, position = 'current') {
+        console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
+        // position 可选值是current, first
+
+        var appendChar = /^(@|#)/.test(text) ? ' ' : ''
+
+        setTimeout(() => {
+          let range = this.quill.getSelection(true)
+          var positionNum = 0
+          if (position === 'current') {
+            positionNum = range.index
+          }
+          this.quill.updateContents(new Delta()
+              .retain(positionNum)
+              .insert(text, attribute)
+              .insert(appendChar, {})
+            , 'user')
+          this.quill.setSelection(range.index + text.length + 1, 'user')
+        }, 100)
+      },
+      toLast (msg = ' ', attribute = {}) {
+        var content = this.quill.getContents()
+        var lastObject = this.getLastObject(content.ops)
+        console.log('lastObject:' + JSON.stringify(lastObject))
+        console.log('lastContent:' + JSON.stringify(content))
+
+        if (lastObject && lastObject.insert && /^(@|#)/.test(lastObject.insert)) {
+          this.appendContent(' ', {})
+          this.appendContent(msg, {})
+        }
+
+        let range = this.quill.getSelection(true)
+        this.quill.setSelection(range.index, 'user')
+      },
+      resetHtml (html) {
+        let range = this.quill.getSelection(true)
+        setTimeout(() => {
+          this.$refs.editor.children[0].innerHTML = html
+          setTimeout(() => {
+            this.quill.setSelection(range.index, 'user')
+          }, 100)
+        }, 100)
+      },
       changeAvatar: function () {
         if (window.mui.os.plus) {
           var a = [{
@@ -164,6 +240,13 @@
 
         return true
       },
+      getLastObject (content) {
+        var lastObject = content.pop()
+        if (lastObject && lastObject.insert === '\n' && content.length > 0) {
+          return this.getLastObject(content)
+        }
+        return lastObject
+      },
       initialize () {
         if (this.$el) {
           // 获取选项
@@ -194,19 +277,110 @@
             self.$emit('blur', self.quill)
           })
 
-          // 文本变动通知更改model
+          self.quill.on('selection-change', (range, oldRange, source) => {
+            console.log('selection-change fired range:' + JSON.stringify(range) + ', oldRange:' + JSON.stringify(oldRange) + ', source:' + source)
+          })
+
+          self.quill.on('editor-change', (eventname, ...args) => {
+            console.log('editor-change fired eventname:' + eventname + ', args:' + JSON.stringify(args))
+          })
+
+            // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
+            self._content = self.quill.getContents()
+            console.log('text-change被触发, delta:' + JSON.stringify(delta) + ', oldDelta:' + JSON.stringify(oldDelta) + ', content:' + JSON.stringify(self._content))
+
             var html = self.$refs.editor.children[0].innerHTML
             const text = self.quill.getText()
             if (html === '<p><br></p>') html = ''
-            self._content = self.quill.getContents()
+
             self.$emit('input', self._content)
             self.$emit('change', {
               editor: self.quill,
               html: html,
               text: text,
+              obj: self._content,
               source: source
             })
+
+            // 监听 .ql-size-small
+            if (self.isMonitorSmallSpan) {
+              var linkNodes = document.querySelectorAll('.ql-size-small')
+              var isStop = false
+              window.mui.each(linkNodes, (index, item) => {
+                if (isStop) return
+                var nowValue = item.innerText
+                if (item.hasAttribute('ql-value')) {
+                  var oldValue = item.getAttribute('ql-value')
+                  if (oldValue !== nowValue) {
+                    if (oldValue.length > nowValue.length) {
+                      // 删除操作
+                      console.log(oldValue + 'change')
+                      var reg = new RegExp('<span\\s([^<]*?)' + nowValue + '</span>')
+                      var newHtml = html.replace(reg, '')
+                      console.log('reg:' + reg.toString())
+                      console.log('旧的html:' + html)
+                      console.log('新的html:' + newHtml)
+                      if (/^@/.test(oldValue)) {
+                        console.log('fire addressAppearDelete, params:' + oldValue)
+                        self.$emit('addressAppearDelete', oldValue)
+                      }
+
+                      if (/^#/.test(oldValue)) {
+                        console.log('fire hashSymbolDelete, params:' + oldValue)
+                        self.$emit('hashSymbolDelete', oldValue)
+                      }
+
+                      self.resetHtml(newHtml)
+                      isStop = true
+                    } else {
+                      // 添加
+                      self.quill.history.undo()
+
+                      setTimeout(() => {
+                        var content = this.quill.getContents()
+                        var lastObject = this.getLastObject(content.ops)
+                        console.log('zzlastObject:' + JSON.stringify(lastObject))
+                        console.log('zzoldValue:' + oldValue)
+                        if (lastObject && lastObject.insert === oldValue) {
+                          console.log('add: insert:' + delta.ops[1].insert + ', attributes' + JSON.stringify(delta.ops[1].attributes))
+                          self.toLast(delta.ops[1].insert, delta.ops[1].attributes)
+                        }
+                      }, 200)
+
+                      isStop = true
+                    }
+                  }
+                } else {
+                  item.setAttribute('ql-value', item.innerText)
+                }
+              })
+              if (isStop) return
+            }
+
+            if (delta.ops[1] && delta.ops[1].delete) {
+              // 删除操作
+            } else {
+              // 添加操作
+              var trimStr = text.trim()
+              var lastChar = trimStr.charAt(trimStr.length - 1)
+
+              if (self.isMonitorAddressAppear) {
+                if (lastChar === '@') {
+                  console.log('监测到@， 触发addressAppearFound')
+                  self.$emit('addressAppearFound')
+                  self.quill.history.undo()
+                }
+              }
+
+              if (self.isMonitorHashSymbol) {
+                if (lastChar === '#') {
+                  console.log('监测到#， 触发hashSymbolFound')
+                  self.$emit('hashSymbolFound')
+                  self.quill.history.undo()
+                }
+              }
+            }
           })
 
           // quill准备就绪
@@ -254,10 +428,12 @@
             }, 500)
           }
 
-          if (window.mui.os.plus) {
-            self.quill.getModule('toolbar').addHandler('image', imgHandlerMUI)
-          } else {
-            self.quill.getModule('toolbar').addHandler('image', imgHandler)
+          if (self.isEnableImage) {
+            if (window.mui.os.plus) {
+              self.quill.getModule('toolbar').addHandler('image', imgHandlerMUI)
+            } else {
+              self.quill.getModule('toolbar').addHandler('image', imgHandler)
+            }
           }
         }
       }

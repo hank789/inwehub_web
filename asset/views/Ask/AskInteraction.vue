@@ -20,6 +20,16 @@
         </div>
       </div>
 
+      <!--展示图片-->
+      <div class="container-images" :class="'container-images-' + (images.length + 1)">
+        <div class="container-image" v-for="(image, index) in images">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+            <use xlink:href="#icon-times1"></use>
+          </svg>
+          <img :id="'image_' + index" :src="image.base64"/>
+        </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+      </div>
+
       <div class="fixedDiv">
         <div class="fixedContainer">
           <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
@@ -52,9 +62,17 @@
 
     </div>
 
+    <!--上传图片-->
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="true"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+
     <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
          v-on:pay_success="goAsk">
     </pay>
+
 
   </div>
 </template>
@@ -70,6 +88,7 @@
   const currentUser = getLocalUserInfo()
   import localEvent from '../../stores/localStorage'
   import { autoTextArea } from '../../utils/plus'
+  import uploadImage from '../../components/uploadImage'
 
   const Ask = {
     data: () => ({
@@ -77,6 +96,8 @@
       tags: [],
       money: 0,
       payItems: [],
+      images: [],
+      maxImageCount: 9,
       uid: 0,
       description: '',
       question_type: 2,  // 提问类型，1为付费专业问答，2为免费问答互助,默认为1
@@ -89,10 +110,15 @@
       descPlaceholder: '可征集大家的意见，可在问题详情页进行回答邀请。'
     }),
     components: {
-      pay
+      pay,
+      uploadImage
+    },
+    activated: function () {
+      this.initData()
     },
     mounted () {
       autoTextArea()
+      this.initData()
 
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
@@ -103,12 +129,6 @@
       window.mui.init()
 
       this.textareaBlur()
-
-      //      取标签；
-      var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
-      for (var i in tag) {
-        this.tags = this.tags.concat(tag[i].value)
-      }
     },
     computed: {
       type () {
@@ -136,6 +156,25 @@
       this.check()
     },
     methods: {
+      initData () {
+        //      取标签；
+        var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
+        this.tags = []
+        for (var i in tag) {
+          this.tags = this.tags.concat(tag[i].value)
+        }
+
+      },
+      uploadImage: function () {
+        var textarea = window.document.getElementById('discoverTextarea')
+        if (textarea) {
+          textarea.blur()
+        }
+        this.$refs.uploadImage.uploadImage()
+      },
+      delImg (index) {
+        this.images.splice(index, 1)
+      },
       submit () {
         this.$refs.pay.pay()
       },
@@ -203,6 +242,8 @@
       },
       clearCache () {
         var info = {}
+        this.images = []
+        this.tags = []
         // 删除标签；
         localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
@@ -236,7 +277,13 @@
           price: this.money,
           tags: this.tags,
           hide: this.hide,
-          device: device
+          device: device,
+          photos: []
+        }
+
+        for (var i in this.images) {
+          var compressBase64 = this.images[i].base64
+          data.photos.push(compressBase64)
         }
 
         postRequest(`question/store`, data).then(response => {
@@ -267,7 +314,10 @@
 </script>
 
 <style scoped>
-
+  .component-photograph{
+    width:61px !important;
+    height:61px !important;
+  }
 
   .askWrapper .category {
     background: #fff;
@@ -306,7 +356,7 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    height: 313px;
+    height: 202px;
     width: 100%;
     z-index: 0;
   }
@@ -617,5 +667,8 @@
     .form-ask {
       height: 220px;
     }
+  }
+  .container-images{
+    background: #F3F4F5;
   }
 </style>

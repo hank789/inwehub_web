@@ -1,5 +1,6 @@
 import { postRequest } from './request'
 import wx from 'weixin-js-sdk'
+import router from '../modules/index/routers/index'
 
 function hideHeaderHandler (obj, type) {
   if (window.mui.os.wechat) {
@@ -32,6 +33,11 @@ function hideHeaderHandler (obj, type) {
 
 function rebootAuth (hash) {
   if (window.mui.os.wechat) {
+    if (window.isLocalEnv) {
+      router.push('/login')
+      return false
+    }
+
     if (!hash) {
       hash = window.location.hash.replace('#', '')
     }

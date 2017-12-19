@@ -72,6 +72,7 @@
   import { NOTICE, USERS_APPEND } from '../../stores/types'
   import VTooltip from 'v-tooltip'
   import { getUserInfo } from '../../utils/user'
+  import { saveLocationInfo } from '../../utils/allPlatform'
 
   Vue.use(VTooltip)
 
@@ -156,6 +157,8 @@
             cb(user)
             window.mui.closeWaiting()
             window.mixpanelIdentify()
+            // 存储用户位置信息
+            saveLocationInfo()
             if (window.mui.os.plus) {
               this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
             } else {

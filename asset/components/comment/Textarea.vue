@@ -1,7 +1,7 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
     <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @tap.stop.prevent="textareaFocus" @keydown="autoTextArea"
+        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"
                   v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"
                   autocomplete="off"></textarea>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
@@ -13,6 +13,7 @@
 
 <script>
   import { autoHeight } from '../../utils/textarea'
+  import { softInput } from '../../utils/plus'
 
   const CommentTextarea = {
     data: () => ({
@@ -21,15 +22,21 @@
       targetUsername: ''
     }),
     props: {},
+    mounted () {
+      softInput()
+    },
     methods: {
       autoTextArea (event) {
         autoHeight(event)
       },
       textareaFocus () {
-        console.log('focus')
+        window.mui.waitingBlank()
+        console.log('comment focus')
       },
       textareaBlur () {
-        console.log('blur')
+        window.mui.closeWaitingBlank()
+        console.log('comment blur')
+        this.showTextarea = false
       },
       comment (targetUsername) {
         if (targetUsername === '') {
@@ -44,12 +51,24 @@
           console.log('bind comment事件')
           window.document.addEventListener('tap', (e) => {
             console.log('document tap 事件被触发')
-            this.showTextarea = false
+            // this.showTextarea = false
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.blur()
+            }
           }, false)
 
           setTimeout(() => {
-            document.getElementById('commentTextarea').focus()
+            var commentTextareaObj = document.getElementById('commentTextarea')
+            if (commentTextareaObj) {
+              commentTextareaObj.focus()
+            }
           }, 500)
+        } else {
+          var commentTextareaObj = document.getElementById('commentTextarea')
+          if (commentTextareaObj) {
+            commentTextareaObj.blur()
+          }
         }
       },
       finish () {
@@ -59,12 +78,15 @@
       },
       sendMessage (event) {
         event.preventDefault()
+        event.stopPropagation()
 
         if (!this.textarea.trim()) {
           return false
         }
 
         this.$emit('sendMessage', this.textarea)
+
+        document.getElementById('commentTextarea').blur()
       }
     }
   }
@@ -81,7 +103,7 @@
     min-height: 45px;
     overflow: hidden;
     padding: 5px 15px;
-    z-index: 77;
+    z-index: 10001;
   }
 
   .commentWrapper .textareaWrapper {
@@ -112,5 +134,13 @@
     color: #03aef9;
     font-size: 26px;
     bottom: 5px;
+  }
+
+  .commentShadowWrapper{
+    display: none;
+    position: absolute;
+    left:0;
+    width:100%;
+    bottom:0;
   }
 </style>

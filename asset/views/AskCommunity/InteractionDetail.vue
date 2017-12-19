@@ -24,7 +24,10 @@
                 :showShoucang="true"
                 @paySuccess="paySuccess"
         ></Answer>
-
+        <!--查看全部回答-->
+        <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
+          <i class="bot"></i>
+        </div>
 
         <Discuss
           :listApi="'answer/commentList'"
@@ -87,7 +90,6 @@
   import Question from '../../components/question-detail/QuestionInteractionDetail.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import Answer from '../../components/question-detail/Answer.vue'
-  import Comment from '../../components/question-detail/Comment.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
   import { autoTextArea } from '../../utils/plus'
@@ -100,7 +102,10 @@
         question: {
           created_at: '',
           description: '',
-          tags: []
+          tags: [],
+          data: {
+            img: []
+          }
         },
         feedback: {
           rate_star: 0
@@ -126,7 +131,6 @@
       Question,
       Discuss,
       Answer,
-      Comment,
       Share,
       commentTextarea
     },
@@ -246,6 +250,16 @@
   .mui-table-view-cell:after {
     display: none;
   }
+  .bot {
+    position: absolute;
+    right:15px;
+    top: 0px;
+    left:15px;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
 
   .mui-content {
     background: #f3f4f6;
@@ -296,6 +310,22 @@
     margin-top: 9px;
     margin-left: 9px;
     font-size:12px;
+  }
+  /*查看回答*/
+  .see{
+    width:100%;
+    height:40px;
+    padding: 0 15px;
+    font-size:14px;
+    color:#03aef9;
+    text-align: center;
+    line-height: 40px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .detail-answer[data-v-852fb68e] {
+    margin-bottom: 0px;
   }
 
 </style>

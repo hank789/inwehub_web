@@ -983,7 +983,8 @@ const routes = [
     name: 'ask',
     component: require('../../../views/Ask/Ask.vue'),
     meta: {
-      title: '提问'
+      title: '提问',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -998,7 +999,8 @@ const routes = [
     name: 'ask/interaction',
     component: require('../../../views/Ask/AskInteraction.vue'),
     meta: {
-      title: '提问'
+      title: '提问',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1062,7 +1064,7 @@ const routes = [
     meta: {
       title: '动态',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1151,7 +1153,7 @@ const routes = [
     }
   },
   { // chat 客服
-    path: '/chat',
+    path: '/chat/:id',
     name: 'inform-chat',
     component: require('../../../views/Task/chat.vue'),
     meta: {
@@ -1372,6 +1374,19 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/NearbyCompany/companyDetails.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/discover/add2',
+    name: 'discover_add',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Discover/Add4.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1778,12 +1793,12 @@ const routes = [
     component: require('../../../views/Exception/Error.vue')
   },
   // {
-  //  path: '/dialog',
-  //  name: 'short',
-  //  meta: {
-  //    title: 'short'
-  //  },
-  //  component: require('../../../components/Dialog.vue'),
+  //   path: '/dialog',
+  //   name: 'short',
+  //   meta: {
+  //     title: 'short'
+  //   },
+  //   component: require('../../../components/Dialog.vue')
   // },
   { // message
     path: '/*',

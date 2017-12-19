@@ -7,12 +7,12 @@
 
     <div class="mui-content">
       <div class="component-textareaWithImage">
+
         <Jeditor
           ref="myAddEditor"
           id="discoverAddJeditor"
           v-model.trim="description"
           :rows="10"
-          :content="description"
           :descMaxLength="descMaxLength"
           :placeholder="descPlaceholder"
           @ready="onEditorReady($event)"
@@ -20,21 +20,20 @@
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
-          @hashSymbolDelete="hashSymbolDelete"
-          @addressAppearDelete="addressAppearDelete"
         ></Jeditor>
 
-        <div class="container-images" :class="'container-images-' + (images.length + 1)">
+        <div class="container-images">
           <div class="container-image" v-for="(image, index) in images">
             <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
               <use xlink:href="#icon-times1"></use>
             </svg>
             <img :id="'image_' + index" :src="image.base64"/>
-          </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+          </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
         <div class="bottomWrapper">
           <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}" v-if="false"></label><!--匿名--></span>
+          <span class="counter"><span>{{descLength}}</span><span>/</span><span>{{descMaxLength}}</span></span>
         </div>
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15">
@@ -42,9 +41,9 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">
-          <use xlink:href="#icon-icon-test1"></use>
-        </svg>
+        <!--<svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">-->
+          <!--<use xlink:href="#icon-icon-test1"></use>-->
+        <!--</svg>-->
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
           <use xlink:href="#icon-icon-test"></use>
         </svg>
@@ -60,10 +59,11 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"
-      :isMultiple="true"
+    <uploadImage ref="uploadImage"
+      v-model="images"
       :images="images"
-      :ImageMaximum="maxImageCount"
+      :isMultiple="true"
+      :ImageMaximum="3"
     ></uploadImage>
   </div>
 </template>
@@ -74,21 +74,15 @@
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
-  import Jeditor from '../../components/vue-quill/Jeditor.vue'
 
   export default {
     data () {
       return {
         id: currentUser.user_id,
-        tag: [],
         tags: [],
-        tagsName: [],
-        user: [],
-        userId: [],
-        userName: [],
-        description: {},
+        description: '',
         images: [],
-        maxImageCount: 9,
+        maxImageCount: 3,
         percentCompleted: 0,
         address: '',
         selectedAddress: '',
@@ -98,52 +92,29 @@
           longt: 0,
           lat: 0
         },
-        editorObj: null,
-        text: '',
-        html: '',
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
       }
     },
-    computed: {},
+    computed: {
+      descLength () {
+        if (this.description === this.descPlaceholder) {
+          return 0
+        }
+        return this.description.length
+      }
+    },
     components: {
-      uploadImage,
-      Jeditor
+      uploadImage
     },
     methods: {
-      refreshPageData () {
-        this.initData()
-      },
       addressAppearFound () {
-        this.$refs.myAddEditor.appendText('@', {})
-      },
-//      删除标签
-      hashSymbolDelete (text) {
-        var name = text.substring(1, text.length - 1)
-//        console.error(name)
-        for (var i in this.tag) {
-          if (this.tag[i].text === name) {
-            this.tag.splice(i, 1)
-            this.tags.splice(i, 1)
-            this.tagsName.splice(i, 1)
-          }
-        }
-        localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
-      },
-      addressAppearDelete (text) {
-        var name = text.substring(1, text.length - 1)
-//        console.error(name)
-        for (var i in this.user) {
-          if (this.user[i].name === name) {
-            this.user.splice(i, 1)
-            this.userId.splice(i, 1)
-            this.userName.splice(i, 1)
-          }
-        }
-        localEvent.setLocalItem('select_users' + this.id, this.user)
+        this.$refs.myAddEditor.appendText('@test', {
+          bold: true,
+          'color': '#ffff00',
+          link: true
+        })
       },
       onEditorChange (editor) {
-        this.html = editor.html
-        this.text = editor.text
       },
       onEditorBlur (editor) {
       },
@@ -157,7 +128,6 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-//        console.error(this.description)
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
       },
@@ -165,7 +135,10 @@
         this.$router.pushPlus('/discover/publishArticles')
       },
       uploadImage: function () {
-        this.$refs.myAddEditor.blur()
+        var textarea = window.document.getElementById('discoverTextarea')
+        if (textarea) {
+          textarea.blur()
+        }
         this.$refs.uploadImage.uploadImage()
       },
       selectAddress () {
@@ -200,33 +173,25 @@
       },
       resetData () {
         this.tags = []
-        this.tagsName = []
-        this.userId = []
-        this.userName = []
-        this.description = {}
+        this.description = ''
         this.images = []
         this.percentCompleted = 0
-        this.$refs.myAddEditor.resetContent()
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
-        localEvent.clearLocalItem('select_users' + this.id)
       },
       submit () {
-        if (!this.text) {
+        if (!this.descLength) {
           window.mui.toast('请填写分享内容')
           return
         }
 
-        this.html = this.html.replace(/(<p><br><\/p>)*$/, '')
-
         var data = {
           type: 'text',
-          title: this.html,
+          title: this.description,
           photos: [],
           category_id: '',
           tags: this.tags,
-          mentions: this.userId,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
@@ -257,36 +222,37 @@
           this.$router.push('/discover/add/success')
         })
       },
-      initData () {
-//        var description = localEvent.getLocalItem('discover_description' + this.id)
-//        this.description = description
-        // 循环插入标签
-        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-        for (var i = 0; i < this.tag.length; i++) {
-          if (this.tags.indexOf(this.tag[i].value) === -1) {
-            this.tags.push(this.tag[i].value)
-          }
-          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
-            this.tagsName.push(this.tag[i].text)
-            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
-              'color': '#225180',
-              'size': 'small'
-            })
-          }
+      textareaFocus () {
+        console.log('textareaFocus')
+        if (this.description === this.descPlaceholder) {
+          this.description = ''
         }
-        // 循环插入@人
-        this.user = localEvent.getLocalItem('select_users' + this.id)
-        for (var num = 0; num < this.user.length; num++) {
-          if (this.userId.indexOf(this.user[num].id) === -1) {
-            this.userId.push(this.user[num].id)
-          }
-          if (this.userName.indexOf(this.user[num].name) === -1) {
-            this.userName.push(this.user[num].name)
-            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-              'color': '#42AEF9',
-              'size': 'small'
-            })
-          }
+      },
+      textareaBlur () {
+        console.log('textareaBlur')
+        if (this.description === '') {
+          this.description = this.descPlaceholder
+        }
+      },
+      initData () {
+        this.textareaBlur()
+        var placeholder = localEvent.getLocalItem('discover_description' + this.id)
+        if (placeholder.length) {
+          this.description = placeholder
+        } else {
+          this.description = this.descPlaceholder
+        }
+
+        var tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i in tag) {
+          this.tags = this.tags.concat(tag[i].value)
+        }
+      }
+    },
+    watch: {
+      description: function (newDescription) {
+        if (newDescription.length > this.descMaxLength) {
+          this.description = this.description.slice(0, this.descMaxLength)
         }
       }
     },
@@ -305,6 +271,7 @@
     mounted () {
       autoTextArea()
       this.initData()
+      console.log('images:' + JSON.stringify(this.images))
     }
   }
 </script>
@@ -317,43 +284,5 @@
   .container-bottom-menus{
     position: absolute;
     left:0;
-  }
-
-  .component-photograph{
-    width:61px !important;
-    height:61px !important;
-  }
-</style>
-
-<style>
-  #discoverAddJeditor .textarea-wrapper{
-    border:none;
-    background: #f3f4f6;
-  }
-
-  #discoverAddJeditor .counter{
-    bottom:-95px;
-  }
-
-  #discoverAddJeditor .ql-editor.ql-blank::before{
-    font-style:normal;
-    font-size: 14px;
-    color: #9b9b9b;
-  }
-  #discoverAddJeditor .textarea-wrapper .quill-editor {
-    height: 230px;
-  }
-  #discoverAddJeditor .quill-editor .ql-container {
-    height: 230px;
-    font-size: 14px;
-    color: #9b9b9b;
-  }
-  #discoverAddJeditor .counter {
-    bottom: -95px;
-    font-size: 14px;
-    color: #c8c8c8;
-  }
-  #discoverAddJeditor .ql-editor .ql-size-small{
-    font-size: 16px;
   }
 </style>

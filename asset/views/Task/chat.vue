@@ -3,7 +3,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">客服小哈</h1>
+      <h1 class="mui-title" v-if="chatUserId == 31">客服小哈</h1>
+      <h1 class="mui-title" v-else>{{name}}</h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -14,32 +15,36 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="{contact_id:0}"
-        :nextOtherData="{contact_id:0}"
+        :prevOtherData="{contact_id:this.chatUserId}"
+        :nextOtherData="{contact_id:this.chatUserId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
-
         <ul class="user" id="myData">
           <template v-for="item in list">
             <!--客服-->
             <li class="consumer" v-if="id != item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img src="../../statics/images/service2.png" />
-                <span>
+                <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
+                <span v-if="item.data.text">
                   {{item.data.text}}
-             </span>
+                </span>
+                <span v-if="item.data.img" class="chatImg">
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
+                </span>
               </p>
-
             </li>
             <!--自己-->
             <li class="Customerservice" v-else-if="id == item.user_id">
               <p>{{item.created_at}}</p>
               <p>
-                <img :src="avatar" />
-                <span>
+                <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <span v-if="item.data.text">
                   {{item.data.text}}
-            </span>
+                </span>
+                <span v-if="item.data.img" class="chatImg">
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
+                </span>
               </p>
 
             </li>
@@ -50,12 +55,22 @@
 
     <!--发送消息框-->
     <div class="message" id="message">
-      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur"/>
+      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur" id="bounce"/>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
+        <use xlink:href="#icon-plus"></use>
+      </svg>
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
       </svg>
     </div>
     <!--发送消息框end-->
+
+    <uploadImage ref="uploadImage" v-model="images"
+                 :isMultiple="false"
+                 :images="images"
+                 :ImageMaximum="maxImageCount"
+    ></uploadImage>
+
   </div>
 </template>
 
@@ -64,6 +79,8 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { autoTextArea } from '../../utils/plus'
+  import uploadImage from '../../components/uploadImage'
+  import SingleImage from '../../components/image/Image.vue'
 
   const Chat = {
     data: () => ({
@@ -71,14 +88,100 @@
       comment: '',
       id: getLocalUserInfo().user_id,
       avatar: getLocalUserInfo().avatar_url,
-      flag: true
+      flag: true,
+      chatUserId: '',
+      maxImageCount: 1,
+      images: [],
+      name: ''
     }),
-    created () {},
-    computed: {},
+    created () {
+      this.getDetail()
+    },
+    computed: {
+    },
     components: {
-      RefreshList
+      RefreshList,
+      uploadImage,
+      SingleImage
+    },
+    watch: {
+      '$route': 'refreshPageData',
+      images: function (newValue, oldValue) {
+        if (newValue.length) {
+          var item = {
+            created_at: this.currentTime(),
+            data: {
+              text: '',
+              img: newValue[0].base64
+            },
+            id: null,
+            user_id: this.id,
+            avatar: this.avatar
+          }
+          this.list.push(item)
+
+          this.images = []
+
+          postRequest(`im/message-store`, {
+            img: newValue[0].base64,
+            contact_id: this.chatUserId
+          }).then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+          })
+
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 500)
+        }
+      }
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+     // for zhangzhen 推送消息
+      chat (obj) {
+        var item = {
+          created_at: '',
+          data: {
+            text: obj.body.text,
+            img: obj.body.img
+          },
+          id: obj.id,
+          user_id: 0,
+          avatar: obj.avatar,
+          uuid: obj.uuid
+        }
+        this.list.push(item)
+
+        setTimeout(() => {
+          this.$refs.RefreshList.scrollToBottom()
+        }, 500)
+      },
+      uploadImage () {
+        var input = document.getElementById('bounce')
+        input.blur()
+        this.$refs.uploadImage.uploadImage()
+      },
+      refreshPageData () {
+        this.getDetail()
+      },
+      getDetail () {
+        if (this.$route.params.id) {
+          this.chatUserId = this.$route.params.id
+        }
+        if (this.$route.query.name) {
+          this.name = this.$route.query.name
+        }
+      },
       prevSuccessCallback () {
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
@@ -138,7 +241,7 @@
       message () {
         if (this.comment) {
           var item = {
-            created_at: this.currentTime(),
+            created_at: '',
             data: {
               text: this.comment
             },
@@ -154,7 +257,7 @@
 
           postRequest(`im/message-store`, {
             text: this.comment,
-            contact_id: 0
+            contact_id: this.chatUserId
           }).then(response => {
             var code = response.data.code
 
@@ -207,25 +310,28 @@
     position: absolute;
     bottom: 0;
     padding: 0 10px;
-    z-index: 999;
+    z-index: 5;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   .message input {
-    width: 88%;
     height: 35px;
     border-radius: 5px;
     background: #ffffff;
     border: none;
+    margin-bottom: 0;
     box-shadow: 0 0 10px rgba(220, 220, 220, 1);
-    margin-top: 6px;
-    float: left;
+
   }
 
   .message svg {
-    font-size: 32px;
-    margin-top: 7px;
+    font-size: 37px;
+    margin-left: 10px;
     color: #03aef9;
-    float: right;
+
   }
   /*内容区域*/
 
@@ -239,9 +345,10 @@
   .user li {
     width: 100%;
     overflow: hidden;
+    margin-top: 10px;
     /*border: 1px solid #CCCCCC;*/
   }
-
+   /*客服*/
   .consumer p:nth-of-type(1) {
     text-align: center;
     font-size: 13px;
@@ -265,7 +372,7 @@
     position: relative;
     float: left;
     display: block;
-    max-width: 86%;
+    max-width: 80%;
     min-height: 35px;
     margin-left: 3%;
     border-radius: 10px;
@@ -294,7 +401,36 @@
     top: 15px;
     margin: auto;
   }
-  /*客服*/
+  .consumer p:nth-of-type(2) .chatImg{
+    width:85px;
+    height:105px;
+    padding: 0;
+  }
+  .consumer p:nth-of-type(2) .chatImg:after {
+    z-index: -1;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    /*border: 6px solid transparent;
+    border-right: 6px solid #FFFFFF;
+    border-bottom: 6px solid #FFFFFF;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left: -4px;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    top: 15px;
+    margin: auto;
+  }
+  .consumer p:nth-of-type(2) .chatImg img{
+    width:100%;
+    height:100%;
+  }
+  /*自己*/
 
   .Customerservice {
     width: 100%;
@@ -311,6 +447,7 @@
 
   .Customerservice p:nth-of-type(2) {
     width: 100%;
+    overflow: hidden;
   }
 
   .Customerservice p:nth-of-type(2) img {
@@ -324,7 +461,7 @@
     position: relative;
     float: right;
     display: block;
-    max-width: 86%;
+    max-width: 80%;
     min-height: 35px;
     margin-right: 3%;
     border-radius: 10px;
@@ -350,8 +487,39 @@
     top: 15px;
     margin: auto;
   }
-
+  .Customerservice p:nth-of-type(2) .chatImg{
+    width:85px;
+    height:105px;
+    padding: 0;
+  }
+  .Customerservice p:nth-of-type(2) .chatImg:after {
+    z-index: -1;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    right: -4px;
+    border-bottom-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+    top: 15px;
+    margin: auto;
+  }
+  .Customerservice p:nth-of-type(2) .chatImg img{
+    width:100%;
+    height:100%;
+  }
   .chatListWrapper {
     bottom: 47px;
+  }
+
+</style>
+<style>
+  .chatImg .container-image{
+    height:105px;
   }
 </style>
