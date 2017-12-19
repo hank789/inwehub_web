@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
     <div class="textareaWrapper">
         <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"
                   v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"
