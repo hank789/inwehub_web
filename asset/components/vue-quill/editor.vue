@@ -110,7 +110,7 @@
         }
 
         let range = this.quill.getSelection(true)
-        this.quill.setSelection(range.index, 'user')
+        this.quill.setSelection(range.index + 1, 'user')
       },
       resetHtml (html) {
         let range = this.quill.getSelection(true)
@@ -342,9 +342,11 @@
                         var lastObject = this.getLastObject(content.ops)
                         console.log('zzlastObject:' + JSON.stringify(lastObject))
                         console.log('zzoldValue:' + oldValue)
-                        if (lastObject && lastObject.insert === oldValue) {
+                        if (lastObject && lastObject.insert === oldValue && delta.ops[1] && delta.ops[1].insert) {
                           console.log('add: insert:' + delta.ops[1].insert + ', attributes' + JSON.stringify(delta.ops[1].attributes))
                           self.toLast(delta.ops[1].insert, delta.ops[1].attributes)
+                        } else {
+                          self.toLast()
                         }
                       }, 200)
 

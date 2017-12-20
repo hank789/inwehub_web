@@ -178,7 +178,7 @@ function isEnableImmersed () {
 function getImmersedHeight () {
   if (isStatusBarDebug) {
     console.log('调试模式下immersedHeight:28')
-    return 28
+    return 44
   }
 
   var status = isEnableImmersed()
@@ -200,7 +200,7 @@ function getImmersedHeight () {
 
   // iphoneX 顶部距离缩小
   if (immersed === 44) {
-    immersed = 28
+    immersed = 44
   }
 
   console.log('最终immersedHeight:' + immersed)

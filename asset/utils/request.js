@@ -32,7 +32,7 @@ export function apiRequest (url, data, showWaiting = true) {
     data.current_version = appVersion.version
   }
 
-  return addAccessToken().post(createAPI(url), data,
+  var proObj = addAccessToken().post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
@@ -50,37 +50,53 @@ export function apiRequest (url, data, showWaiting = true) {
           errMsg = errMsg + response.data.data[i] + '\n'
         }
         var s = errMsg.substring(0, errMsg.lastIndexOf('\n'))
-        window.mui.toast(s)
-        return false
+        return Promise.reject(s)
       }
 
       if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           window.mui.toast(response.data.message)
           logout()
-          return
+          return Promise.reject(response.data.message)
         }
       } else {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           rebootAuth()
-          return
+          return Promise.reject(response.data.message)
         }
       }
 
       if (code !== 1000) {
-        window.mui.toast(response.data.message)
-        return false
+        return Promise.reject(response.data.message)
       }
 
       return response.data.data
     })
-    .catch(({response: {message = '网络状况堪忧'} = {}}) => {
+    .catch(e => {
       if (showWaiting) {
         window.mui.closeWaiting()
       }
-      window.mui.toast(message)
-      return false
+
+      console.log('网络异常:' + e)
+
+      return Promise.reject(e)
     })
+
+  proObj.oldThen = proObj.then
+  proObj.then = function (success, fail) {
+    if (!fail) {
+      fail = function (errorMsg) {
+        errorMsg = errorMsg.toString()
+        if (errorMsg === 'Error: Network Error') {
+          errorMsg = '网络异常'
+        }
+        window.mui.toast(errorMsg)
+      }
+    }
+    proObj.oldThen(success, fail)
+    return proObj
+  }
+  return proObj
 }
 
 // 对后端数据进行请求；（showWaiting = true 加载gif）
@@ -101,7 +117,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
     config.onUploadProgress = options.onUploadProgress
   }
 
-  return addAccessToken().post(createAPI(url), data, config)
+  var proObj = addAccessToken().post(createAPI(url), data, config)
     .then(response => {
       if (options.onUploadProgress) {
         window.mui.closeUploadWaiting()
@@ -112,17 +128,16 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
       }
 
       var code = response.data.code
-
       if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           window.mui.toast(response.data.message)
           logout()
-          return response
+          return Promise.reject(response.data.message)
         }
       } else {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           rebootAuth()
-          return response
+          return Promise.reject(response.data.message)
         }
       }
 
@@ -137,8 +152,24 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         window.mui.closeUploadWaiting()
       }
 
-      console.log('网络异常:' + JSON.stringify(e))
+      console.log('网络异常:' + e)
 
-      return {data: {message: '网络状况堪忧', code: 0}}
+      return Promise.reject(e)
     })
+
+  proObj.oldThen = proObj.then
+  proObj.then = function (success, fail) {
+    if (!fail) {
+      fail = function (errorMsg) {
+        errorMsg = errorMsg.toString()
+        if (errorMsg === 'Error: Network Error') {
+          errorMsg = '网络异常'
+        }
+        window.mui.toast(errorMsg)
+      }
+    }
+    proObj.oldThen(success, fail)
+    return proObj
+  }
+  return proObj
 }

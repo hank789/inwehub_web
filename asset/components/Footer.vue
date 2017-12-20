@@ -233,6 +233,7 @@
     background-color: #f3f4f6;
     box-shadow: none;
     position: absolute;
+    overflow: hidden;
   }
 
   .footer-bar .mui-tab-item .mui-icon {

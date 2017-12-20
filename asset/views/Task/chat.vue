@@ -20,10 +20,10 @@
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
         <ul class="user" id="myData">
-          <template v-for="item in list">
-            <!--客服-->
-            <li class="consumer" v-if="id != item.user_id">
-              <p>{{item.created_at}}</p>
+          <template v-for="(item, index) in list">
+            <!--用户 && chatUserId == item.user_id"-->
+            <li class="consumer" v-if="id != item.user_id && chatUserId == item.user_id">
+              <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
                 <span v-if="item.data.text">
@@ -34,9 +34,9 @@
                 </span>
               </p>
             </li>
-            <!--自己-->
+            <!--自己  -->
             <li class="Customerservice" v-else-if="id == item.user_id">
-              <p>{{item.created_at}}</p>
+              <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text">
@@ -59,8 +59,8 @@
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="message()">
+        <use xlink:href="#icon-fasong" ></use>
       </svg>
     </div>
     <!--发送消息框end-->
@@ -141,6 +141,20 @@
       }
     },
     methods: {
+      showTime (prevtime, time) {
+        if (prevtime) {
+          var current = new Date(time.created_at.replace(/-/g, '/'))
+          var previous = new Date(prevtime.created_at.replace(/-/g, '/'))
+          var interval = parseInt(current - previous) / 1000 / 60
+          if (interval >= 5) {
+            return time.created_at
+          } else {
+            return ''
+          }
+        } else {
+          return time.created_at
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -150,18 +164,23 @@
      // for zhangzhen 推送消息
       chat (obj) {
         var item = {
-          created_at: '',
+          created_at: obj.created_at,
           data: {
             text: obj.body.text,
             img: obj.body.img
           },
           id: obj.id,
-          user_id: 0,
+          user_id: obj.user_id,
           avatar: obj.avatar,
-          uuid: obj.uuid
+          uuid: obj.uuid,
+          name: obj.name
         }
-        this.list.push(item)
-
+        this.name = item.name
+        if (parseInt(this.chatUserId) === item.user_id) {
+          this.list.push(item)
+        } else {
+          return false
+        }
         setTimeout(() => {
           this.$refs.RefreshList.scrollToBottom()
         }, 500)
@@ -178,11 +197,9 @@
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
         }
-        if (this.$route.query.name) {
-          this.name = this.$route.query.name
-        }
       },
       prevSuccessCallback () {
+        this.name = this.$refs.RefreshList.getResponse().data.contact.name
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
@@ -241,7 +258,7 @@
       message () {
         if (this.comment) {
           var item = {
-            created_at: '',
+            created_at: this.currentTime(),
             data: {
               text: this.comment
             },

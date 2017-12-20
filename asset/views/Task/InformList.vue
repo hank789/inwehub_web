@@ -154,7 +154,7 @@
       },
       gochat (item) {
         item.unread_count = 0
-        this.$router.pushPlus('/chat/' + item.contact_id + '?name=' + item.name)
+        this.$router.pushPlus('/chat/' + item.contact_id)
       },
       skip (num) {
         switch (num) {

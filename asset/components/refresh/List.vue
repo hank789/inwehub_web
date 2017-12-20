@@ -21,6 +21,7 @@
       return {
         loading: true,
         currentPage: 0,
+        response: null,
         list: []
       }
     },
@@ -102,6 +103,9 @@
       }
     },
     methods: {
+      getResponse () {
+        return this.response
+      },
       refreshPageData (prevOtherData) {
         this.loading = 1
         this.prevOtherData = prevOtherData
@@ -154,6 +158,8 @@
             window.mui.toast(response.data.message)
             return
           }
+
+          this.response = response.data
 
           var list = response.data.data
 
