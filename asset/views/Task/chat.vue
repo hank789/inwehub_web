@@ -94,7 +94,7 @@
       images: [],
       name: ''
     }),
-    created (createat) {
+    created () {
       this.getDetail()
     },
     computed: {
