@@ -1285,10 +1285,9 @@ ul.normal li:before {
   top:0;
 }
 
-/*.mui-bar{*/
-  /*height:auto !important;*/
-/*}*/
-
+.mui-bar{
+  position: absolute;
+}
 
 
 .hideImmersedWrapper #immersedWrapper{
