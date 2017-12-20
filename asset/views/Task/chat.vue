@@ -95,6 +95,7 @@
       name: ''
     }),
     created () {
+      this.getDetail()
     },
     computed: {
     },
@@ -190,6 +191,12 @@
         this.$refs.uploadImage.uploadImage()
       },
       refreshPageData () {
+        this.getDetail()
+      },
+      getDetail () {
+        if (this.$route.params.id) {
+          this.chatUserId = this.$route.params.id
+        }
       },
       prevSuccessCallback () {
         this.name = this.$refs.RefreshList.getResponse().data.contact.name
