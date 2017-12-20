@@ -95,7 +95,6 @@
       name: ''
     }),
     created () {
-      this.getDetail()
     },
     computed: {
     },
@@ -191,17 +190,9 @@
         this.$refs.uploadImage.uploadImage()
       },
       refreshPageData () {
-        this.getDetail()
-      },
-      getDetail () {
-        if (this.$route.params.id) {
-          this.chatUserId = this.$route.params.id
-        }
-        if (this.$route.query.name) {
-          this.name = this.$route.query.name
-        }
       },
       prevSuccessCallback () {
+        this.name = this.$refs.RefreshList.getResponse().data.contact.name
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()

@@ -343,7 +343,7 @@
     methods: {
       goChat () {
         if (this.percent >= 90) {
-          this.$router.pushPlus('/chat/' + this.resume.info.id + '?name=' + this.resume.info.name)
+          this.$router.pushPlus('/chat/' + this.resume.info.id)
         } else {
           alertChat(this)
         }
