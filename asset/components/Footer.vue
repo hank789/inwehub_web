@@ -131,12 +131,13 @@
       },
       listen () {
         var currentUser = localEvent.getLocalItem('UserLoginInfo')
-        if (currentUser.id && window.Echo && this.isSocketListened === false) {
+        var userInfo = localEvent.getLocalItem('UserInfo')
+        if (userInfo.user_id && window.Echo && this.isSocketListened === false) {
           console.log('listen notification')
           this.isSocketListened = true
           window.Echo.options.auth.headers['Authorization'] = 'Bearer ' + currentUser.token
           // 监听通知事件
-          window.Echo.channel('notification.user.' + currentUser.id)
+          window.Echo.channel('notification.user.' + userInfo.user_id)
             .notification((notification) => {
               socketResponseManage(notification, this)
             })
