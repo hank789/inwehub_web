@@ -21,8 +21,8 @@
         class="chatListWrapper">
         <ul class="user" id="myData">
           <template v-for="item in list">
-            <!--客服-->
-            <li class="consumer" v-if="id != item.user_id">
+            <!--用户 && chatUserId == item.user_id"-->
+            <li class="consumer" v-if="id != item.user_id && chatUserId == item.user_id">
               <p>{{item.created_at}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
@@ -156,12 +156,15 @@
             img: obj.body.img
           },
           id: obj.id,
-          user_id: 0,
+          user_id: obj.user_id,
           avatar: obj.avatar,
           uuid: obj.uuid
         }
-        this.list.push(item)
-
+        if (parseInt(this.chatUserId) === item.user_id) {
+          this.list.push(item)
+        } else {
+          return false
+        }
         setTimeout(() => {
           this.$refs.RefreshList.scrollToBottom()
         }, 500)
