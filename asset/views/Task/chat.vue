@@ -20,10 +20,10 @@
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
         <ul class="user" id="myData">
-          <template v-for="item in list">
+          <template v-for="(item, index) in list">
             <!--用户 && chatUserId == item.user_id"-->
             <li class="consumer" v-if="id != item.user_id && chatUserId == item.user_id">
-              <p>{{item.created_at}}</p>
+              <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
                 <span v-if="item.data.text">
@@ -34,9 +34,9 @@
                 </span>
               </p>
             </li>
-            <!--自己-->
+            <!--自己  -->
             <li class="Customerservice" v-else-if="id == item.user_id">
-              <p>{{item.created_at}}</p>
+              <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text">
@@ -59,8 +59,8 @@
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fasong" @tap.stop.prevent="message()"></use>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="message()">
+        <use xlink:href="#icon-fasong" ></use>
       </svg>
     </div>
     <!--发送消息框end-->
@@ -94,7 +94,7 @@
       images: [],
       name: ''
     }),
-    created () {
+    created (createat) {
       this.getDetail()
     },
     computed: {
@@ -141,6 +141,18 @@
       }
     },
     methods: {
+      showTime (prevtime, time) {
+        if (prevtime) {
+          var current = new Date(time.created_at.replace(/-/g, '/'))
+          var previous = new Date(prevtime.created_at.replace(/-/g, '/'))
+          var interval = parseInt(current - previous) / 1000 / 60
+          if (interval >= 5) {
+            return time
+          } else {
+            return ''
+          }
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -150,7 +162,7 @@
      // for zhangzhen 推送消息
       chat (obj) {
         var item = {
-          created_at: '',
+          created_at: obj.created_at,
           data: {
             text: obj.body.text,
             img: obj.body.img
@@ -158,8 +170,10 @@
           id: obj.id,
           user_id: obj.user_id,
           avatar: obj.avatar,
-          uuid: obj.uuid
+          uuid: obj.uuid,
+          name: obj.name
         }
+        this.name = item.name
         if (parseInt(this.chatUserId) === item.user_id) {
           this.list.push(item)
         } else {
@@ -244,7 +258,7 @@
       message () {
         if (this.comment) {
           var item = {
-            created_at: '',
+            created_at: this.currentTime(),
             data: {
               text: this.comment
             },
