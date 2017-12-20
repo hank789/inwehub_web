@@ -20,15 +20,17 @@
         </div>
       </div>
       <div class="recommendlist" >
-        <div class="quiz">
-          <p>
-            <span>热门</span>
-            <button @tap.stop.prevent="$router.pushPlus('/ask')">提问</button>
-            <i class="bot"></i>
+          <p>热门问答</p>
+          <p @tap.stop.prevent="$router.pushPlus('/ask')">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanyewenda-"></use>
+            </svg>
+            提问
+            <i>分红</i>
           </p>
-        </div>
+          <i class="bot"></i>
       </div>
-          <!--推荐问答-->
+          <!--推荐问答 -->
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -38,45 +40,83 @@
         class="listWrapper">
           <ul class="recommend_b">
             <li   v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
-              <div class="recommend_d">
+              <div class="description mui-ellipsis-3">{{item.description}}</div>
+              <div class="avatar">
                 <p>
                   <img :src="item.answer_user_avatar_url"/>
                   <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">
-                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </p>
-                <p class="mui-ellipsis">
-                  {{ item.answer_username }}
+                <p v-if="item.is_pay_for_view">查看回答</p>
+                <p v-else>1元看答案／看评论</p>
+              </div>
+              <div class="question_info">
+                <p>
+                  <span>回答者:</span> {{item.answer_username}}
+                  <i v-if="item.average_rate"></i>
+                  <span v-if="item.average_rate">{{item.average_rate}}好评</span>
+                </p>
+                <p>
+                  <span class="support_number">
+                    <svg class="icon" aria-hidden="true" >
+                    <use xlink:href="#icon-dianzan1"></use>
+                    </svg>
+                    <i v-if="item.support_number">{{item.support_number}}</i>
+                  </span>
+                  <span class="comment_number" >
+                    <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-pinglun1"></use>
+                    </svg>
+                    <i v-if="item.comment_number">{{item.comment_number}}</i>
+                  </span>
                 </p>
               </div>
-              <p class="mui-ellipsis-2">{{item.description}}</p>
-              <p class="problem_details">
-                <span v-if="item.average_rate" class="average_rate">{{item.average_rate}}好评</span>
-                <span class="support_number">
-                  <svg class="icon" aria-hidden="true" >
-                    <use xlink:href="#icon-dianzan1"></use>
-                  </svg>
-                  <i v-if="item.support_number">{{item.support_number}}</i>
-                </span>
-                <span class="comment_number" >
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-pinglun1"></use>
-                  </svg>
-                  <i v-if="item.comment_number">{{item.comment_number}}</i>
-              </span>
-              </p>
-              <p class="problem_state" v-if="!item.is_pay_for_view">1元看答案／看评论</p>
-              <p class="problem_state" v-else>查看回答</p>
-              <!--v-show="index != recommendList.length-1" -->
-              <!--点赞-->
               <div class="component-dianzanList" v-if="item.support_number">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-dianzan1"></use>
+                <use xlink:href="#icon-dianzan1"></use>
                 </svg>
                 <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>
                 <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
               </div>
-              <i class="bot"></i>
+              <!--<div class="recommend_d">-->
+                <!--<p>-->
+                  <!--<img :src="item.answer_user_avatar_url"/>-->
+                  <!--<svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">-->
+                    <!--<use xlink:href="#icon-zhuanjiabiaojishixin"></use>-->
+                  <!--</svg>-->
+                <!--</p>-->
+                <!--<p class="mui-ellipsis">-->
+                  <!--{{ item.answer_username }}-->
+                <!--</p>-->
+              <!--</div>-->
+              <!--<p class="mui-ellipsis-2">{{item.description}}</p>-->
+              <!--<p class="problem_details">-->
+                <!--<span v-if="item.average_rate" class="average_rate">{{item.average_rate}}好评</span>-->
+                <!--<span class="support_number">-->
+                  <!--<svg class="icon" aria-hidden="true" >-->
+                    <!--<use xlink:href="#icon-dianzan1"></use>-->
+                  <!--</svg>-->
+                  <!--<i v-if="item.support_number">{{item.support_number}}</i>-->
+                <!--</span>-->
+                <!--<span class="comment_number" >-->
+                  <!--<svg class="icon" aria-hidden="true">-->
+                    <!--<use xlink:href="#icon-pinglun1"></use>-->
+                  <!--</svg>-->
+                  <!--<i v-if="item.comment_number">{{item.comment_number}}</i>-->
+              <!--</span>-->
+              <!--</p>-->
+              <!--<p class="problem_state" v-if="!item.is_pay_for_view">1元看答案／看评论</p>-->
+              <!--<p class="problem_state" v-else>查看回答</p>-->
+              <!--&lt;!&ndash;v-show="index != recommendList.length-1" &ndash;&gt;-->
+              <!--&lt;!&ndash;点赞&ndash;&gt;-->
+              <!--<div class="component-dianzanList" v-if="item.support_number">-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-dianzan1"></use>-->
+                <!--</svg>-->
+                <!--<span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>-->
+                <!--<span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>-->
+              <!--</div>-->
             </li>
           </ul>
       </RefreshList>
@@ -132,9 +172,9 @@
 
   .bot {
     position: absolute;
-    right: 0;
+    right: 4%;
     bottom: 0;
-    left: 0;
+    left: 4%;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -142,48 +182,75 @@
   }
 
   /*提问样式*/
-
-  .quiz {
-    width: 92%;
+  .recommendlist {
+    width: 100%;
     height: 44px;
-    margin-left: 4%;
+    overflow: hidden;
     background: #FFFFFF;
     position: relative;
   }
-
-  .quiz span {
-    display: block;
-    font-size: 16px;
-    color: #444444;
-    line-height: 44px;
+  .recommendlist p:nth-of-type(1){
+    height:44px;
     float: left;
+    line-height: 44px;
+    font-size:16px;
+    color: #444444;
+    margin-left: 4%;
   }
-
-  .quiz button {
-    width: 65px;
-    height: 29px;
-    font-size: 14px;
-    color: #FFFFFF;
-    background: #03aef9;
+  .recommendlist p:nth-of-type(2){
+    width:81px;
+    height:34px;
+    margin-right: 4%;
+    background:#a8dff7;
+    border-radius: 4px;
     float: right;
-    margin-top: 7px;
-    border: none;
+    margin-top: 5px;
+    line-height: 34px;
+    font-size:14px;
+    color: #444444;
+    text-align: center;
+    position: relative;
+  }
+  .recommendlist p:nth-of-type(2) svg{
+    font-size: 22px;
+    margin-bottom: -4px;
+  }
+  .recommendlist p:nth-of-type(2) i{
+    position: absolute;
+    font-style: normal;
+    width: 30px;
+    height: 17px;
+    font-size: 12px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    background: #fa4975;
+    text-align: center;
+    line-height:16px;
+    top: 2.5px;
+    left: -24px;
+  }
+  .recommendlist p:nth-of-type(2) i:after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fa4975;
+    /* border: 1px solid #dcdcdc; */
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    right: -3px;
+    top: 0px;
+    bottom: 0;
+    margin: auto;
   }
 
-
-  /*推荐问答*/
-
-  .recommendlist {
-    width: 100%;
-    overflow: hidden;
-    background: #FFFFFF;
-  }
 
   /*问答列表*/
-
+.listWrapper{
+}
   .recommend_b {
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     /*height: 200px;*/
     overflow: hidden;
   }
@@ -191,128 +258,115 @@
   .recommend_b li {
     width: 100%;
     overflow: hidden;
+    position: relative;
+    background: #FFFFFF;
+    margin-bottom: 10px;
     padding: 12px 0;
+  }
+  .recommend_b li div{
+    width:92%;
+    margin-left: 4%;
+  }
+  .recommend_b li .description{
+    font-size:16px;
+    color:#444444;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    margin-top: 12px;
+    background:#f3f4f6;
+    padding: 13px 15px 15px;
+    border-radius: 4px;
+  }
+  /*.component-dianzanList*/
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
+  }
+  .component-dianzanList svg{
+    font-size:17px;
+    color: #808080;
+  }
+  .avatar{
+    height:44px;
+    margin-top: 15px;
+  }
+   .avatar p:nth-of-type(1){
+    height:44px;
+    float: left;
     position: relative;
   }
-
-  .recommend_b li > p:nth-of-type(1) {
-    font-size: 16px;
-    color: #444444;
-    margin-top: 5px;
+   .avatar p:nth-of-type(1) img{
+    width:33px;
+    height:33px;
+    border-radius: 50%;
+    margin-top: 5.5px;
+    float: left;
   }
-  .problem_details{
-    width:100%;
-    height:38px;
-    font-size: 13px;
-    line-height: 38px;
+  .avatar p:nth-of-type(1) svg{
+    position: absolute;
+    font-size: 14px;
+    bottom: 5px;
+    right: -5px;
   }
-  .problem_details .average_rate{
-    color: #b4b4b6;
-    float:left;
-  }
-  .problem_details .support_number{
-    color:#808080;
-    float: right;
-  }
-  .problem_details .support_number svg{
-    color:#808080;
-    font-size:18px;
-  }
-  .problem_details .comment_number{
-    color:#808080;
-    float: right;
-    margin-right: 30px;
-
-  }
-  .problem_details .comment_number svg{
-    color:#808080;
-    font-size:16px;
-    margin-bottom: -2px;
-  }
-  .problem_state{
-    width:100%;
+  .avatar p:nth-of-type(2){
+    width:88%;
     height:44px;
-    background: #03aef9;
+    float: right;
+    background:#03aef9;
     border-radius: 50px;
     text-align: center;
     line-height: 44px;
     font-size:16px;
     color: #f2f2f2;
   }
-
-  .recommend_d {
-    width: 100%;
-    height: 32px;
+  .question_info{
+    height:19px;
+    /*background: #cccccc;*/
+    margin-top: 12px;
+    line-height:19px;
   }
-
-  .recommend_d p {
-    float: left;
+  .question_info p:nth-of-type(1){
+   float: left;
+    font-size:13px;
+    color: #747474;
   }
-
-  .recommend_d p:nth-child(1) {
-    width: 32px;
-    height: 32px;
-    /*background: #CCCCCC;*/
-    position: relative;
+  .question_info p:nth-of-type(1) i{
+    display: inline-block;
+    width:1px;
+    height:12px;
+    background: #dbdbdb;
+    margin:0 9px -1px 9px;
   }
-
-  .recommend_d p:nth-child(1) > svg {
-    position: absolute;
-    font-size: 14px;
-    bottom: 0;
-    right: -4px;
+  .question_info p:nth-of-type(1) span:nth-of-type(1){
+    color: #b4b4b6;
   }
-
-  .recommend_d p:nth-child(1) > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  .recommend_d p:nth-child(2) {
-    /*width: 340px;*/
-    height:32px;
-    line-height: 32px;
-    margin-left:8px;
+  .question_info p:nth-of-type(2){
+    float: right;
     font-size: 13px;
     color: #808080;
   }
-
-  .recommend_d p:nth-child(2) span:nth-child(1) {
-    height: 15px;
-    margin-top: 8.5px;
-
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
+  .question_info p:nth-of-type(2) span{
+   float: right;
   }
-
-  .recommend_d p:nth-child(2) span:nth-child(2) {
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
-    color: #808080;
-    border-right: 1px solid #c8c8c8;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
+  .question_info p:nth-of-type(2) span:nth-of-type(1){
+    margin-left: 22px;
   }
-
-  .recommend_d p:nth-child(2) span:nth-child(3) {
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
+  .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
+    font-size: 18px;
     color: #808080;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 3%;
+  }
+  .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
+    font-size: 18px;
+    margin-bottom: -2px;
   }
 
 
   /*滚动区域*/
 
   .mui-content {
-    background-color: #fff;
+    background: #f3f4f6;
   }
 
 
@@ -351,15 +405,7 @@
   .listWrapper{
     top:90px;
   }
-  /*点赞样式*/
-  .component-dianzanList{
-    width:100%;
-    margin-top: 12px;
-  }
-  .component-dianzanList span{
-    font-size:13px;
-    color:#03aef9;
-  }
+
 
 
 </style>
