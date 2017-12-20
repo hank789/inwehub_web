@@ -151,6 +151,8 @@
           } else {
             return ''
           }
+        } else {
+          return time.created_at
         }
       },
       toAvatar (uuid) {
