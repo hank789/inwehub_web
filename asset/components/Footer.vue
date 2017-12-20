@@ -85,6 +85,7 @@
         isMy: false,
         showBottom: true,
         isDiscover: false,
+        isSocketListened: false,
         taskCount: 0,
         message_total_count: 0,
         shareoption: {
@@ -99,6 +100,7 @@
     },
     props: {},
     mounted () {
+      this.listen()
       // this.$refs.short.show();
       window.addEventListener('refreshData', (e) => {
         // 执行刷新
@@ -129,11 +131,13 @@
       },
       listen () {
         var currentUser = localEvent.getLocalItem('UserLoginInfo')
-        if (currentUser.id && window.Echo) {
+        var userInfo = localEvent.getLocalItem('UserInfo')
+        if (userInfo.user_id && window.Echo && this.isSocketListened === false) {
           console.log('listen notification')
+          this.isSocketListened = true
           window.Echo.options.auth.headers['Authorization'] = 'Bearer ' + currentUser.token
           // 监听通知事件
-          window.Echo.channel('notification.user.' + currentUser.id)
+          window.Echo.channel('notification.user.' + userInfo.user_id)
             .notification((notification) => {
               socketResponseManage(notification, this)
             })
@@ -221,7 +225,6 @@
       }
     },
     created () {
-      this.listen()
       var tmpArr = this.$route.path.split('/')
       var curPath = tmpArr[1] === '' ? 'home' : tmpArr[1]
       this.changeNav(curPath, this.$route.path)
