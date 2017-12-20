@@ -147,7 +147,7 @@
           var previous = new Date(prevtime.created_at.replace(/-/g, '/'))
           var interval = parseInt(current - previous) / 1000 / 60
           if (interval >= 5) {
-            return time
+            return time.created_at
           } else {
             return ''
           }
