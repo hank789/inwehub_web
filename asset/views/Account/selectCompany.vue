@@ -69,6 +69,7 @@
         coords: '',
         longt: '',
         lat: '',
+        searchRule: 1,
         page: 1,
         value: '',
         data: '',
@@ -80,6 +81,7 @@
       RefreshList
     },
     created () {
+      this.searchRule = this.$route.query.from === 'infobasic' ? 2 : 1
       getGeoPosition((position) => {
         this.dataList = {
           longitude: position.longt,
@@ -171,7 +173,8 @@
             name: newValue,
             page: this.page,
             longitude: this.longt,
-            latitude: this.lat
+            latitude: this.lat,
+            searchRule: this.searchRule
           }
           this.isShow = true
         } else {
