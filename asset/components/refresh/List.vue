@@ -174,7 +174,12 @@
 
           this.loading = false
 
-          if (list.length < 10) {
+          var perPage = 10
+          if (response.data.data.per_page) {
+            perPage = response.data.data.per_page
+          }
+
+          if (list.length < perPage) {
             if (window.mui('#refreshContainer').length) {
               window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true)
               window.mui('#refreshContainer').pullRefresh().setStopped(true)
@@ -276,7 +281,12 @@
             this.list = this.list.concat(list)
           }
 
-          if (list.length < 10) {
+          var perPage = 10
+          if (response.data.data.per_page) {
+            perPage = response.data.data.per_page
+          }
+
+          if (list.length < perPage) {
             if (window.mui('#refreshContainer').length) {
               window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
             }
