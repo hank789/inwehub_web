@@ -138,6 +138,16 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      getCompany () {
+        //     选择公司
+        if (this.$route.params.id) {
+          this.type = this.$route.params.id
+        }
+        var placeholder = localEvent.getLocalItem('job' + this.type + '_company' + this.user_id)
+        if (placeholder.length) {
+          this.job.company = placeholder
+        }
+      },
       empty () {
         //   操作成删除保存的公司
         localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
@@ -321,6 +331,8 @@
           }
 
           window.mui.toast('操作成功')
+          //   操作成删除保存的公司
+          localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -340,15 +352,10 @@
 
       next()
     },
+    activated: function () {
+      this.getCompany()
+    },
     mounted () {
-      //     选择公司
-      if (this.$route.params.id) {
-        this.type = this.$route.params.id
-      }
-      var placeholder = localEvent.getLocalItem('job' + this.type + '_company' + this.user_id)
-      if (placeholder.length) {
-        this.job.company = placeholder
-      }
     },
     computed: {
       infoIndustryTagsNames () {
