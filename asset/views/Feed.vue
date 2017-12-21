@@ -96,7 +96,10 @@
     </div>
     <div id="statusBarStyle" background="#f3f4f6" bgColor="#f3f4f6" mode="dark"></div>
 
-    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+    <commentTextarea ref="ctextarea"
+                     @sendMessage="sendMessage"
+                     @noticeUser="noticeUser"
+    ></commentTextarea>
 
   </div>
 
@@ -180,8 +183,26 @@
     },
     computed: {},
     methods: {
+      noticeUser (uuid) {
+        var noticeUser = this.commentTarget.noticeUser
+        if (!noticeUser) {
+          noticeUser = []
+          this.commentTarget.noticeUser = []
+        }
+
+        this.commentTarget.noticeUser.push(uuid)
+      },
       sendMessage (message) {
-        postRequest(`article/comment-store`, {'submission_id': this.commentTarget.submissionId, body: message, parent_id: this.commentTarget.parentId}).then(response => {
+        var noticeUser = this.commentTarget.noticeUser
+        if (!noticeUser) {
+          noticeUser = []
+        }
+        postRequest(`article/comment-store`, {
+          'submission_id': this.commentTarget.submissionId,
+          body: message,
+          parent_id: this.commentTarget.parentId,
+          mentions: noticeUser
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)

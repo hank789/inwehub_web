@@ -73,7 +73,8 @@
         }
 
         this.targetUsername = targetUsername
-        this.editorObj.root.setAttribute('data-placeholder', this.targetUsername)
+        targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
+        this.editorObj.root.setAttribute('data-placeholder', targetUsername)
 
         if (this.showTextarea) {
           console.log('bind comment事件')
@@ -92,6 +93,9 @@
       finish () {
         this.textarea = ''
         this.showTextarea = false
+      },
+      noticeUser (uid) {
+        this.$emit('noticeUser', uid)
       },
       sendMessage (event) {
         event.preventDefault()
