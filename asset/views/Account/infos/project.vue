@@ -140,7 +140,20 @@
       descMaxLength: 2000,
       buttonSaveDisabled: false
     }),
+    activated: function () {
+      this.getCompany()
+    },
     methods: {
+      getCompany () {
+        //     选择公司
+        if (this.$route.params.id) {
+          this.type = this.$route.params.id
+        }
+        var customerName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
+        if (customerName.length) {
+          this.project.customer_name = customerName
+        }
+      },
       empty () {
         // 操作成删除保存的公司
         localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
@@ -327,6 +340,8 @@
           }
 
           window.mui.toast('操作成功')
+          // 操作成删除保存的公司
+          localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -338,14 +353,6 @@
         // 执行刷新
         console.log('refresh-project')
       })
-      //     选择公司
-      if (this.$route.params.id) {
-        this.type = this.$route.params.id
-      }
-      var customerName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
-      if (customerName.length) {
-        this.project.customer_name = customerName
-      }
     },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')
