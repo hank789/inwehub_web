@@ -1,7 +1,6 @@
 <template>
   <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
     <div class="textareaWrapper">
-
         <Jeditor
           ref="myAddEditor"
           id="commentJeditor"
@@ -15,21 +14,16 @@
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           v-on:keydown.enter="sendMessage"
-          @keydown="autoTextArea"
         ></Jeditor>
 
-        <!--<textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"-->
-                  <!--v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"-->
-                  <!--autocomplete="off"></textarea>-->
-      <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
-        <use xlink:href="#icon-fasong"></use>
-      </svg>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
+          <use xlink:href="#icon-fasong"></use>
+        </svg>
     </div>
   </div>
 </template>
 
 <script>
-  import { autoHeight } from '../../utils/textarea'
   import { softInput } from '../../utils/plus'
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
 
@@ -38,7 +32,7 @@
       showTextarea: false,
       description: {},
       textarea: '',
-      descMaxLength: 1000,
+      descMaxLength: 5000,
       targetUsername: '',
       editorObj: null
     }),
@@ -54,25 +48,19 @@
         this.textarea = editor.html
       },
       onEditorBlur (editor) {
-      },
-      onEditorFocus (editor) {
-      },
-      onEditorReady (editor) {
-        this.editorObj = editor
-      },
-      autoTextArea (event) {
-        autoHeight(event)
-      },
-      textareaFocus () {
-        window.mui.waitingBlank()
-        console.log('comment focus')
-      },
-      textareaBlur () {
         window.mui.closeWaitingBlank()
         console.log('comment blur')
         this.showTextarea = false
       },
+      onEditorFocus (editor) {
+        window.mui.waitingBlank()
+        console.log('comment focus')
+      },
+      onEditorReady (editor) {
+        this.editorObj = editor
+      },
       comment (targetUsername) {
+        console.log('comment targetUsername:' + targetUsername)
         if (targetUsername === '') {
           this.showTextarea = !this.showTextarea
         } else {
@@ -80,35 +68,25 @@
         }
 
         this.targetUsername = targetUsername
+        this.editorObj.root.setAttribute('data-placeholder', this.targetUsername)
 
         if (this.showTextarea) {
           console.log('bind comment事件')
           window.document.addEventListener('tap', (e) => {
             console.log('document tap 事件被触发')
-            // this.showTextarea = false
-            var commentTextareaObj = document.getElementById('commentTextarea')
-            if (commentTextareaObj) {
-              commentTextareaObj.blur()
-            }
+            this.editorObj.blur()
           }, false)
 
           setTimeout(() => {
-            var commentTextareaObj = document.getElementById('commentTextarea')
-            if (commentTextareaObj) {
-              commentTextareaObj.focus()
-            }
+            this.editorObj.focus()
           }, 500)
         } else {
-          var commentTextareaObj = document.getElementById('commentTextarea')
-          if (commentTextareaObj) {
-            commentTextareaObj.blur()
-          }
+          this.editorObj.blur()
         }
       },
       finish () {
         this.textarea = ''
         this.showTextarea = false
-        document.querySelector('#commentTextarea').style.height = '20px'
       },
       sendMessage (event) {
         event.preventDefault()
@@ -120,7 +98,7 @@
 
         this.$emit('sendMessage', this.textarea)
 
-        document.getElementById('commentTextarea').blur()
+        this.editorObj.blur()
       }
     }
   }
