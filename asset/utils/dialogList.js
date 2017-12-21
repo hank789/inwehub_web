@@ -1,4 +1,5 @@
 import { alertSkyTwo, alertSimple, getDialogObj } from '../utils/dialog'
+import { getLocalUserInfo } from './user'
 
 function alertFenhongxize (context) {
   var dialogObj = getDialogObj(context)
@@ -248,10 +249,13 @@ function alertDiscoverCompany (context) {
 }
 // 不是企业用户（申请企业服务）
 function alertChat (context) {
+  var userInfo = getLocalUserInfo()
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
-    dialogObj.getHtml('chat', {}, (html) => {
-      alertSimple(html, '前往完善', (num) => {
+    dialogObj.getHtml('chat', {
+      percent: userInfo.account_info_complete_percent
+    }, (html) => {
+      alertSimple(html, '前往完善资料', (num) => {
         if (num.index === 0) {
           context.$router.pushPlus('/my/info')
         }

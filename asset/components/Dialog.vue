@@ -397,8 +397,8 @@
     <!--个人名片资料完整度不足94%的弹窗-->
     <div id="chat">
       <div class="chat">
-        <p>您的个人资料未完善！</p>
-        <p>资料完成度90%可发私信</p>
+        <p>资料完整才能发私信！</p>
+        <p>完整是为了对方更容易识别您，您离资料完成还差{{90 - options.percent}}%</p>
       </div>
     </div>
   </div>
@@ -428,7 +428,8 @@
           major_comment_coins: '',
           major_comment_credits: '',
           Onlookers_comment_coins: '',
-          Onlookers_comment_credits: ''
+          Onlookers_comment_credits: '',
+          percent: ''
         }
       }
     },
