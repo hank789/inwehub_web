@@ -1,3 +1,5 @@
+import router from '../modules/index/routers/index'
+
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
     console.log('download:' + uri)
@@ -161,19 +163,50 @@ function openVendorUrl (containerDiv) {
   }
   var aList = containerDiv.querySelectorAll('.vendorUrl[href^="http"]')
   for (let i = 0; i < aList.length; i++) {
-    aList[i].addEventListener('tap', function (e) {
-      this.href = this.getAttribute('href')
-      console.log('openVendorUrl : ' + this.href)
-      e.preventDefault()
-      e.stopPropagation()
-      if (window.plus) {
-        console.log('plus 打开')
-        window.plus.runtime.openURL(this.href)
-      } else {
-        console.log('window.open 打开')
-        window.open(this.href)
-      }
-    }, false)
+    if (!aList[i].hasAttribute('bindTap')) {
+      aList[i].setAttribute('bindTap', 'true')
+      aList[i].addEventListener('tap', function (e) {
+        var href = this.getAttribute('href')
+        console.log('openVendorUrl : ' + href)
+        e.preventDefault()
+        e.stopPropagation()
+        if (window.plus) {
+          console.log('plus 打开')
+          window.plus.runtime.openURL(href)
+        } else {
+          console.log('window.open 打开')
+          window.open(href)
+        }
+      }, false)
+    }
+  }
+}
+
+/**
+ * 打开app内的网页
+ */
+function openAppUrl (containerDiv) {
+  if (!containerDiv.querySelectorAll) {
+    return
+  }
+  var aList = containerDiv.querySelectorAll('.appUrl')
+  for (let i = 0; i < aList.length; i++) {
+    if (!aList[i].hasAttribute('bindTap')) {
+      aList[i].setAttribute('bindTap', 'true')
+      aList[i].addEventListener('tap', function (e) {
+        var href = this.getAttribute('href')
+        console.log('openAppUrl : ' + href)
+        e.preventDefault()
+        e.stopPropagation()
+        if (window.plus) {
+          console.log('plus 打开')
+          router.pushPlus(href)
+        } else {
+          console.log('router 打开')
+          router.push(href)
+        }
+      }, false)
+    }
   }
 }
 
@@ -237,5 +270,6 @@ export {
   closeSplashscreen,
   openFullscreen,
   closeFullscreen,
-  softInput
+  softInput,
+  openAppUrl
 }

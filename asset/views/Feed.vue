@@ -117,7 +117,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import { openVendorUrl } from '../utils/plus'
+  import { openVendorUrl, openAppUrl, autoTextArea } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -128,7 +128,6 @@
   import { getLocalUserInfo } from '../utils/user'
 
   import commentTextarea from '../components/comment/Textarea.vue'
-  import { autoTextArea } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -147,6 +146,7 @@
         var eles = this.$el.querySelectorAll('.textToLink')
         for (var i in eles) {
           openVendorUrl(eles[i])
+          openAppUrl(eles[i])
         }
       })
     },

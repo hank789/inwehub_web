@@ -567,6 +567,7 @@
 
   .mui-content {
     background-color: #fff;
+    overflow: hidden !important;
   }
 
   .mui-bar-nav ~ .mui-content {
