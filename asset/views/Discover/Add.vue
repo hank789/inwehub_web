@@ -312,6 +312,7 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
     background: #fff;
+    overflow: hidden !important;
   }
 
   .container-bottom-menus{
@@ -355,9 +356,5 @@
   }
   #discoverAddJeditor .ql-editor .ql-size-small{
     font-size: 16px;
-  }
-
-  .mui-content{
-    overflow: hidden !important;
   }
 </style>
