@@ -29,7 +29,7 @@
         v-model="list"
         v-if="dataList != null"
         :api="'location/nearbySearch'"
-        :pageMode="true"
+          :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :isShowUpToRefreshDescription="false"
@@ -79,6 +79,7 @@
     created () {
       getGeoPosition((position) => {
         this.dataList = {
+          name: this.address,
           longitude: position.longt,
           latitude: position.lat
         }
@@ -99,6 +100,14 @@
       //  点击清空输入框
       empty () {
         this.searchText = ''
+      },
+     // 获取数据
+      getData () {
+        if (this.$route.query.from === 'discover') {
+          this.address = localEvent.getLocalItem(this.$route.query.from + '_Address' + this.id)
+        } else {
+          return false
+        }
       }
     },
     watch: {
@@ -119,11 +128,7 @@
       }
     },
     mounted () {
-      if (this.$route.query.from === 'discover') {
-        this.address = localEvent.getLocalItem(this.$route.query.from + '_Address' + this.id)
-      } else {
-        return false
-      }
+      this.getData()
     },
     updated () {
     }

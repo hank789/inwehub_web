@@ -288,15 +288,16 @@
           }
         }
         // 获取地理位置
-//        var Address = localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-//        if (Address) {
-//          this.selectedAddress = Address
-//        } else {
+        var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
+        if (Address) {
+          this.selectedAddress = Address
+          localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+        } else {
           // 存入定位
           if (this.selectedAddress) {
             localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
           }
-//        }
+        }
       }
     },
     created () {
