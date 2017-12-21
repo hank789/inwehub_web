@@ -284,7 +284,8 @@
             this.userName.push(this.user[num].name)
             this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
               'color': '#42AEF9',
-              'size': 'small'
+              'size': 'small',
+              'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
             })
           }
         }
@@ -356,5 +357,9 @@
   }
   #discoverAddJeditor .ql-editor .ql-size-small{
     font-size: 16px;
+  }
+
+  #discoverAddJeditor .ql-snow .ql-editor a{
+    text-decoration: none;
   }
 </style>

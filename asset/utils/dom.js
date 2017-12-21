@@ -42,11 +42,15 @@ function textToLinkHtml (text) {
     return text
   }
 
-  if (/<a/gi.test(text)) {
+  if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /(https?:\/\/[^\s<]+)/g
-  return text.replace(re, "<span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+  var re = /\s(https?:\/\/[^\s<]+)/g
+  text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  re = /<p>(https?:\/\/[^\s<]+)/g
+  text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+  return text
 }
 
 export {

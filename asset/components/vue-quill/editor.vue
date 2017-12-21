@@ -355,6 +355,10 @@
                   }
                 } else {
                   item.setAttribute('ql-value', item.innerText)
+                  if (item.hasAttribute('target')) {
+                    item.setAttribute('target', '_self')
+                  }
+                  item.classList.add('appUrl')
                 }
               })
               if (isStop) return
