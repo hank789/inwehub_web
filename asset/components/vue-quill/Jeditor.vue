@@ -10,6 +10,7 @@
                     :options="editorOption"
                     :isEnableImage="false"
                     :isEnableAddressAppear="true"
+                    :isMonitorAddressAppear="isMonitorAddressAppear"
                     :isEnableHashSymbol="true"
                     :isMonitorSmallSpan="true"
 
@@ -69,6 +70,10 @@
       descMaxLength: {
         type: Number,
         default: 5000
+      },
+      isMonitorAddressAppear: {
+        type: Boolean,
+        default: false
       }
     },
     created () {

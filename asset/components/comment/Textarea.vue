@@ -7,12 +7,14 @@
           v-model.trim="description"
           :rows="1"
           :content="description"
+          :isMonitorAddressAppear="true"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
+          @addressAppearFound="addressAppearFound"
           v-on:keydown.enter="sendMessage"
         ></Jeditor>
 
@@ -44,6 +46,9 @@
       softInput()
     },
     methods: {
+      addressAppearFound () {
+        console.log('found @')
+      },
       onEditorChange (editor) {
         this.textarea = editor.html
       },
