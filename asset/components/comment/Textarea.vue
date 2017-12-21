@@ -129,7 +129,7 @@
 
 <style scoped="scoped">
   .commentWrapper {
-    background: #ececee;
+    background: #F3F4F5;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -195,11 +195,11 @@
     color: #9b9b9b;
   }
   #commentJeditor .textarea-wrapper .quill-editor {
-    min-height:45px;
+    min-height:35px;
     height:auto;
   }
   #commentJeditor .quill-editor .ql-container {
-    min-height: 45px;
+    min-height: 35px;
     height:auto;
     font-size: 14px;
     color: #9b9b9b;
@@ -213,5 +213,18 @@
 
   #commentJeditor .ql-snow .ql-editor a{
     text-decoration: none;
+  }
+  #commentJeditor .ql-editor {
+    box-sizing: border-box;
+    line-height: 1.42;
+    height: 100%;
+    outline: none;
+    overflow-y: auto;
+    padding: 7px 15px;
+    tab-size: 4;
+    -moz-tab-size: 4;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
 </style>
