@@ -287,6 +287,16 @@
             })
           }
         }
+        // 获取地理位置
+//        var Address = localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+//        if (Address) {
+//          this.selectedAddress = Address
+//        } else {
+          // 存入定位
+          if (this.selectedAddress) {
+            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+          }
+//        }
       }
     },
     created () {
@@ -297,10 +307,6 @@
           this.selectedAddress = this.address
         }
       })
-      // 定位
-      if (this.selectedAddress) {
-        localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-      }
     },
     activated: function () {
       this.initData()
