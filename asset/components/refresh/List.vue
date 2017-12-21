@@ -21,7 +21,9 @@
       return {
         loading: true,
         currentPage: 0,
+        perPage: 10,
         response: null,
+        disableLoadMore: false,
         list: []
       }
     },
@@ -174,12 +176,11 @@
 
           this.loading = false
 
-          var perPage = 10
           if (response.data.data.per_page) {
-            perPage = response.data.data.per_page
+            this.perPage = response.data.data.per_page
           }
 
-          if (list.length < perPage) {
+          if (list.length < this.perPage) {
             if (window.mui('#refreshContainer').length) {
               window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true)
               window.mui('#refreshContainer').pullRefresh().setStopped(true)
@@ -224,6 +225,14 @@
             this.currentPage = response.data.data.current_page
           }
 
+          if (response.data.data.per_page) {
+            this.perPage = response.data.data.per_page
+          }
+
+          if (list.length < this.perPage) {
+            this.disableLoadMore = true
+          }
+
           if (list) {
             this.list = list
           }
@@ -250,6 +259,13 @@
         }
       },
       getNextList () {
+        if (this.disableLoadMore) {
+          if (window.mui('#refreshContainer').length) {
+            window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
+          }
+          return
+        }
+
         var param = {}
         if (this.pageMode) {
           param = {
@@ -281,12 +297,11 @@
             this.list = this.list.concat(list)
           }
 
-          var perPage = 10
           if (response.data.data.per_page) {
-            perPage = response.data.data.per_page
+            this.perPage = response.data.data.per_page
           }
 
-          if (list.length < perPage) {
+          if (list.length < this.perPage) {
             if (window.mui('#refreshContainer').length) {
               window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
             }
