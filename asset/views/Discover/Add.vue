@@ -51,7 +51,7 @@
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
           <use xlink:href="#icon-lianjie"></use>
         </svg>
-        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="selectAddress">
+        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="$router.pushPlus('/nearby?from=discover')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
@@ -73,7 +73,8 @@
   import uploadImage from '../../components/uploadImage'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
 
   export default {
@@ -90,8 +91,8 @@
         images: [],
         maxImageCount: 9,
         percentCompleted: 0,
-        address: '',
-        selectedAddress: '',
+        address: '豫园',
+        selectedAddress: '豫园',
         hide: 0,
         descMaxLength: 2000,
         position: {
@@ -157,7 +158,6 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-//        console.error(this.description)
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
       },
@@ -168,30 +168,30 @@
         this.$refs.myAddEditor.blur()
         this.$refs.uploadImage.uploadImage()
       },
-      selectAddress () {
-        var userPicker = new window.mui.PopPicker()
-
-        userPicker.setData([
-          {
-            value: '1',
-            text: this.address
-          },
-          {
-            value: '2',
-            text: '不显示位置'
-          }
-        ])
-        if (this.selectedAddress === '不显示位置') {
-          userPicker.pickers[0].setSelectedValue('2')
-        } else {
-          userPicker.pickers[0].setSelectedValue('1')
-        }
-
-        userPicker.show(items => {
-          this.selectedAddress = items[0].text
-          userPicker.dispose()
-        })
-      },
+//      selectAddress () {
+//        var userPicker = new window.mui.PopPicker()
+//
+//        userPicker.setData([
+//          {
+//            value: '1',
+//            text: this.address
+//          },
+//          {
+//            value: '2',
+//            text: '不显示位置'
+//          }
+//        ])
+//        if (this.selectedAddress === '不显示位置') {
+//          userPicker.pickers[0].setSelectedValue('2')
+//        } else {
+//          userPicker.pickers[0].setSelectedValue('1')
+//        }
+//
+//        userPicker.show(items => {
+//          this.selectedAddress = items[0].text
+//          userPicker.dispose()
+//        })
+//      },
       toggleHide () {
         this.hide = !this.hide
       },
@@ -258,8 +258,6 @@
         })
       },
       initData () {
-//        var description = localEvent.getLocalItem('discover_description' + this.id)
-//        this.description = description
         // 循环插入标签
         this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
         for (var i = 0; i < this.tag.length; i++) {
@@ -298,6 +296,10 @@
           this.selectedAddress = this.address
         }
       })
+      // 定位
+      if (this.selectedAddress) {
+        localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+      }
     },
     activated: function () {
       this.initData()
