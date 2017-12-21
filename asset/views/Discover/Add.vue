@@ -91,8 +91,8 @@
         images: [],
         maxImageCount: 9,
         percentCompleted: 0,
-        address: '豫园',
-        selectedAddress: '豫园',
+        address: '',
+        selectedAddress: '',
         hide: 0,
         descMaxLength: 2000,
         position: {

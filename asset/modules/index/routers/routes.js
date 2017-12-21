@@ -1410,7 +1410,6 @@ const routes = [
     meta: {
       title: '发现',
       wechatHideHeader: true,
-      keepAlive: true
     },
     component: require('../../../views/Address/Nearby.vue'),
     beforeEnter: (to, from, next) => {
