@@ -21,7 +21,7 @@
       </div>
       <!--申请添加-->
       <div class="apply" v-if="applyIsShow">
-        <p>不显示位置</p>
+        <p @tap.stop.prevent="addAddress('不显示位置')">不显示位置</p>
         <i class="bot"></i>
       </div>
       <!--搜索列表 :class="clicked? 'blue-class':'red-class'"-->
@@ -29,7 +29,7 @@
         v-model="list"
         v-if="dataList != null"
         :api="'location/nearbySearch'"
-          :pageMode="true"
+        :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :isShowUpToRefreshDescription="false"
@@ -63,8 +63,8 @@
         loading: 1,
         isShow: false,
         coords: '',
-        longt: '121.498981',
-        lat: '31.232772',
+        longt: '',
+        lat: '',
         value: '',
         applyIsShow: true,
         data: '',
@@ -88,6 +88,7 @@
       })
     },
     methods: {
+     // 保存位置名称
       addAddress (address) {
         if (this.$route.query.from === 'discover') {
           var from = this.$route.query.from
@@ -101,7 +102,7 @@
       empty () {
         this.searchText = ''
       },
-     // 获取数据
+     // 获取数据 longt: '121.498981',lat: '31.232772',
       getData () {
         if (this.$route.query.from === 'discover') {
           this.address = localEvent.getLocalItem(this.$route.query.from + '_Address' + this.id)
