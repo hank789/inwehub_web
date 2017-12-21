@@ -35,7 +35,7 @@
         :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <ul>
-          <li  v-for="(item, index) in list">
+          <li  v-for="(item, index) in list" @tap.stop.prevent="addAddress(item.name)">
             <p :class="address === item.name ? 'blue' : ''">{{item.name}}</p>
             <p>{{item.address}}</p>
             <i class="bottom"></i>
@@ -87,6 +87,15 @@
       })
     },
     methods: {
+      addAddress (address) {
+        if (this.$route.query.from === 'discover') {
+          var from = this.$route.query.from
+          localEvent.setLocalItem(from + '_Address' + this.id, address)
+          this.$router.push('/discover/add')
+        } else {
+          return false
+        }
+      },
       //  点击清空输入框
       empty () {
         this.searchText = ''
