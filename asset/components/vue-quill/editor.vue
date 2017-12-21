@@ -259,6 +259,7 @@
             : self.defaultModules.toolbar
           self.options.placeholder = self.options.placeholder || '请填写内容 ...'
           self.options.readOnly = self.options.readOnly !== undefined ? self.options.readOnly : false
+          self.options.scrollingContainer = '.mui-content'
           self.quill = new window.Quill(self.$refs.editor, self.options)
 
           if (self.value || self.content) {

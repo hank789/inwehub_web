@@ -1,9 +1,26 @@
 <template>
   <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
     <div class="textareaWrapper">
-        <textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"
-                  v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"
-                  autocomplete="off"></textarea>
+
+        <Jeditor
+          ref="myAddEditor"
+          id="commentJeditor"
+          v-model.trim="description"
+          :rows="1"
+          :content="description"
+          :descMaxLength="descMaxLength"
+          :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
+          @ready="onEditorReady($event)"
+          @onEditorBlur="onEditorBlur"
+          @onEditorFocus="onEditorFocus"
+          @onEditorChange="onEditorChange"
+          v-on:keydown.enter="sendMessage"
+          @keydown="autoTextArea"
+        ></Jeditor>
+
+        <!--<textarea v-on:keydown.enter="sendMessage" @blur.stop.prevent="textareaBlur" @focus.stop.prevent="textareaFocus" @keydown="autoTextArea"-->
+                  <!--v-model="textarea" :placeholder="targetUsername?'回复' + targetUsername:'在此留言'" id="commentTextarea"-->
+                  <!--autocomplete="off"></textarea>-->
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
         <use xlink:href="#icon-fasong"></use>
       </svg>
@@ -14,18 +31,35 @@
 <script>
   import { autoHeight } from '../../utils/textarea'
   import { softInput } from '../../utils/plus'
+  import Jeditor from '../../components/vue-quill/Jeditor.vue'
 
   const CommentTextarea = {
     data: () => ({
       showTextarea: false,
+      description: {},
       textarea: '',
-      targetUsername: ''
+      descMaxLength: 1000,
+      targetUsername: '',
+      editorObj: null
     }),
     props: {},
+    components: {
+      Jeditor
+    },
     mounted () {
       softInput()
     },
     methods: {
+      onEditorChange (editor) {
+        this.textarea = editor.html
+      },
+      onEditorBlur (editor) {
+      },
+      onEditorFocus (editor) {
+      },
+      onEditorReady (editor) {
+        this.editorObj = editor
+      },
       autoTextArea (event) {
         autoHeight(event)
       },
@@ -142,5 +176,42 @@
     left:0;
     width:100%;
     bottom:0;
+  }
+</style>
+
+<style>
+  #commentJeditor .textarea-wrapper{
+    border:none;
+    background: none;
+    padding-bottom:0;
+  }
+
+  #commentJeditor .counter{
+    bottom:-95px;
+  }
+  #commentJeditor .ql-editor.ql-blank::before{
+    font-style:normal;
+    font-size: 14px;
+    color: #9b9b9b;
+  }
+  #commentJeditor .textarea-wrapper .quill-editor {
+    min-height:45px;
+    height:auto;
+  }
+  #commentJeditor .quill-editor .ql-container {
+    min-height: 45px;
+    height:auto;
+    font-size: 14px;
+    color: #9b9b9b;
+  }
+  #commentJeditor .counter {
+    display: none;
+  }
+  #commentJeditor .ql-editor .ql-size-small{
+    font-size: 16px;
+  }
+
+  #commentJeditor .ql-snow .ql-editor a{
+    text-decoration: none;
   }
 </style>
