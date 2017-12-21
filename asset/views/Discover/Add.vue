@@ -356,4 +356,8 @@
   #discoverAddJeditor .ql-editor .ql-size-small{
     font-size: 16px;
   }
+
+  .mui-content{
+    overflow: hidden !important;
+  }
 </style>
