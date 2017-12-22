@@ -113,6 +113,7 @@
         this.prevOtherData = prevOtherData
 
         if (this.downLoadMoreMode) {
+          this.currentPage = 0
           this.getDownLoadMoreModePrevList()
         } else {
           this.getPrevList()
