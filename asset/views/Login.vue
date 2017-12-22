@@ -233,12 +233,6 @@
 
             this.loginSuccessCallback()
           })
-          .catch(({response: {data = {}} = {}}) => {
-            this.isDisabled = false
-            const {code = 'xxxx'} = data
-            this.isLoading = false
-            window.mui.toast(errorCodes[code])
-          })
       }
     }
   }
