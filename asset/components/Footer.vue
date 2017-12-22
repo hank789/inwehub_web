@@ -14,28 +14,7 @@
           <use xlink:href="#icon-shouye1"></use>
         </svg>
       </div>
-
-      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/task')" v-if="isAsk">
-        <svg class="icon twoIcon" aria-hidden="true">
-          <use xlink:href="#icon-xiaoxi-hover"></use>
-        </svg>
-        <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
-      </div>
-
-      <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/task')" v-else>
-        <svg class="icon twoIcon" aria-hidden="true">
-          <use xlink:href="#icon-xiaoxi1"></use>
-        </svg>
-        <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
-      </div>
-
-      <div class="askWrapper">
-        <div class="askPlus" @tap.stop.prevent="show()">
-          <div class="askImgBg"></div>
-          <div class="askImg"></div>
-        </div>
-      </div>
-
+      <!--发现-->
       <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/discover')" v-if="isDiscover">
         <svg class="icon threeIcon" aria-hidden="true">
           <use xlink:href="#icon-faxian-hover"></use>
@@ -47,6 +26,28 @@
           <use xlink:href="#icon-faxian1"></use>
         </svg>
       </div>
+      <!--发现-->
+
+      <div class="askWrapper">
+        <div class="askPlus" @tap.stop.prevent="show()">
+          <div class="askImgBg"></div>
+          <div class="askImg"></div>
+        </div>
+      </div>
+      <!--消息-->
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/task')" v-if="isAsk">
+        <svg class="icon twoIcon" aria-hidden="true">
+          <use xlink:href="#icon-xiaoxi-hover"></use>
+        </svg>
+        <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
+      </div>
+      <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/task')" v-else>
+        <svg class="icon twoIcon" aria-hidden="true">
+          <use xlink:href="#icon-xiaoxi1"></use>
+        </svg>
+        <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
+      </div>
+      <!--消息-->
 
       <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/my')" v-if="isMy">
         <svg class="icon fourIcon" aria-hidden="true">
