@@ -220,4 +220,8 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+  #commentJeditor .ql-editor p {
+    position: relative;
+    color: #444444;
+  }
 </style>
