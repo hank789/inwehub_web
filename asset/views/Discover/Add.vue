@@ -111,7 +111,16 @@
       Jeditor
     },
     methods: {
+      getAddress () {
+        // 获取地理位置
+        var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
+        if (Address.toString()) {
+          this.selectedAddress = Address
+          localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+        }
+      },
       refreshPageData () {
+        this.getAddress()
         this.initData()
       },
       addressAppearFound () {
@@ -287,28 +296,12 @@
             })
           }
         }
-        // 获取地理位置
-        var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
-        if (Address.toString()) {
-          this.selectedAddress = Address
-          localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-        } else {
-          // 存入定位
-          if (this.selectedAddress) {
-            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-          }
-        }
       }
     },
     created () {
       getGeoPosition((position) => {
         if (position.addresses) {
           this.position = position
-//          this.address = '所在位置'
-//          this.selectedAddress = this.address
-//          if (this.selectedAddress) {
-//            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-//          }
         }
       })
     },
