@@ -15,7 +15,7 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="dataList"
+        :prevOtherData="{contact_id: this.chatUserId}"
         :nextOtherData="{contact_id:this.chatUserId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
@@ -197,9 +197,6 @@
       getDetail () {
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
-          this.dataList = {
-            contact_id: this.chatUserId
-          }
         }
       },
       prevSuccessCallback () {

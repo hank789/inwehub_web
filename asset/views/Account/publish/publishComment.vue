@@ -31,7 +31,7 @@
         <ul class="answer">
           <!--{{ask.origin_title}}-->
           <li v-for="(ask, index) in list" @tap.stop.prevent="goToCommentPage(ask.type, ask.comment_url)">
-            <p class="mui-ellipsis">{{ask.content}}</p>
+            <p class="mui-ellipsis" v-html="ask.content"></p>
             <p class="mui-ellipsis" v-html="ask.origin_title"></p>
             <p>
               <span>
