@@ -304,7 +304,7 @@
       getGeoPosition((position) => {
         if (position.addresses) {
           this.position = position
-          this.address = position.addresses
+//          this.address = position.addresses
           this.selectedAddress = this.address
           if (this.selectedAddress) {
             localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
