@@ -77,10 +77,10 @@
                   <i class="bot"></i>
                 </li>
                 <!--消息通知-->
-                <li   v-for="(item, index) in list.im_messages" @tap.stop.prevent="gochat(item)">
-                  <img :src="item.avatar" class="radius"/>
+                <li   v-for="(item, index) in list.im_messages">
+                  <img :src="item.avatar" class="radius" @tap.stop.prevent="toAvatar(item.contact_uuid)"/>
                   <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
-                  <p>
+                  <p @tap.stop.prevent="gochat(item)">
                     <span class="mui-ellipsis">{{item.name}}</span>
                     <span class="mui-ellipsis" v-if="item.last_message.data.img">[图片]</span>
                     <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
@@ -148,6 +148,12 @@
       RefreshList
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       messagecountchange (obj) {
         this.total_count = obj
 //           console.log(obj);
