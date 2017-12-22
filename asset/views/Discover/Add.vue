@@ -306,9 +306,6 @@
           this.position = position
           this.address = '所在位置'
           this.selectedAddress = this.address
-          if (this.selectedAddress) {
-            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
-          }
         }
       })
     },
