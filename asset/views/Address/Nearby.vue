@@ -92,7 +92,7 @@
         if (this.$route.query.from === 'discover') {
           var from = this.$route.query.from
           localEvent.setLocalItem(from + '_Address' + this.id, address)
-          this.$router.pushPlus('/discover/add')
+          window.mui.back()
         } else {
           return false
         }
