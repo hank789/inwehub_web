@@ -120,7 +120,6 @@
         }
       },
       refreshPageData () {
-        this.getAddress()
         this.initData()
       },
       addressAppearFound () {
@@ -215,6 +214,7 @@
         this.description = {}
         this.images = []
         this.percentCompleted = 0
+        this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
@@ -296,6 +296,8 @@
             })
           }
         }
+
+        this.getAddress()
       }
     },
     created () {
