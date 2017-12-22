@@ -7,7 +7,7 @@
           v-model.trim="description"
           :rows="1"
           :content="description"
-          :isMonitorAddressAppear="true"
+          :isMonitorAddressAppear="false"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
