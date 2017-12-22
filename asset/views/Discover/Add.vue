@@ -91,8 +91,8 @@
         images: [],
         maxImageCount: 9,
         percentCompleted: 0,
-        address: '',
-        selectedAddress: '',
+        address: '豫园',
+        selectedAddress: '豫园',
         hide: 0,
         descMaxLength: 2000,
         position: {
@@ -211,6 +211,7 @@
         localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('select_users' + this.id)
+        localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
         if (!this.text) {
@@ -289,7 +290,7 @@
         }
         // 获取地理位置
         var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
-        if (Address) {
+        if (Address.toString()) {
           this.selectedAddress = Address
           localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
         } else {
@@ -306,6 +307,9 @@
           this.position = position
           this.address = position.addresses
           this.selectedAddress = this.address
+          if (this.selectedAddress) {
+            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+          }
         }
       })
     },
