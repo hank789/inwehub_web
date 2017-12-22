@@ -36,6 +36,7 @@
       textarea: '',
       descMaxLength: 5000,
       targetUsername: '',
+      noticeUsers: [],
       editorObj: null
     }),
     props: {},
@@ -92,10 +93,11 @@
       },
       finish () {
         this.textarea = ''
+        this.noticeUsers = []
         this.showTextarea = false
       },
       noticeUser (uid) {
-        this.$emit('noticeUser', uid)
+        this.noticeUsers.push(uid)
       },
       sendMessage (event) {
         event.preventDefault()
@@ -105,7 +107,11 @@
           return false
         }
 
-        this.$emit('sendMessage', this.textarea)
+        var data = {
+          content: this.textarea,
+          noticeUsers: this.noticeUsers
+        }
+        this.$emit('sendMessage', data)
 
         this.editorObj.blur()
       }
