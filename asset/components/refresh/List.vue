@@ -111,7 +111,12 @@
       refreshPageData (prevOtherData) {
         this.loading = 1
         this.prevOtherData = prevOtherData
-        this.getPrevList()
+
+        if (this.downLoadMoreMode) {
+          this.getDownLoadMoreModePrevList()
+        } else {
+          this.getPrevList()
+        }
       },
       setPageData (prevOtherData) {
         this.loading = 1
