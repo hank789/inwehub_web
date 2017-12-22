@@ -217,7 +217,7 @@
     height: 100%;
     outline: none;
     overflow-y: auto;
-    padding: 7px 15px;
+    padding: 7px 25px 7px 9px;
     tab-size: 4;
     -moz-tab-size: 4;
     text-align: left;
