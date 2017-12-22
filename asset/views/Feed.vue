@@ -22,6 +22,7 @@
         :api="'feed/list'"
         :prevOtherData="{}"
         :nextOtherData="{}"
+        :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
         class="listWrapper"
