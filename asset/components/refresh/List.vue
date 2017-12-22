@@ -114,6 +114,7 @@
 
         if (this.downLoadMoreMode) {
           this.currentPage = 0
+          this.list = []
           this.getDownLoadMoreModePrevList()
         } else {
           this.getPrevList()
