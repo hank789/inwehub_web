@@ -191,11 +191,13 @@
   .answer li p:nth-of-type(1) {
     color: #444444;
     font-size: 14px;
+    max-height: 21px;
   }
   .answer li p:nth-of-type(2) {
     color:#808080;
     font-size: 12px;
     margin-top: 3px;
+    max-height: 42px;
   }
 
   .answer li p:nth-of-type(3) {
