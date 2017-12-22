@@ -1382,7 +1382,7 @@ const routes = [
   },
   {
     path: '/discover/add2',
-    name: 'discover_add',
+    name: 'discover_add2',
     meta: {
       title: '发现',
       wechatHideHeader: true,
