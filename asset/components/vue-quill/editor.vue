@@ -69,6 +69,10 @@
       this.quill = null
     },
     methods: {
+      setPlaceholder (placeholder) {
+        this.quill.root.setAttribute('data-placeholder', placeholder)
+        this.quill.root.classList.add('ql-blank')
+      },
       focus () {
         this.quill.focus()
       },
