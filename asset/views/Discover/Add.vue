@@ -91,8 +91,8 @@
         images: [],
         maxImageCount: 9,
         percentCompleted: 0,
-        address: '',
-        selectedAddress: '',
+        address: '所在位置',
+        selectedAddress: '所在位置',
         hide: 0,
         descMaxLength: 2000,
         position: {
