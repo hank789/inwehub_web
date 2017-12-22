@@ -124,13 +124,13 @@
             })
 
             // 应用从后台切换回前台事件
-            document.addEventListener('resume', () => {
+            EventObj.addEventListener('resume', function () {
               // 存储用户位置信息
               var currentUser = localEvent.getLocalItem('UserInfo')
               if (currentUser.user_id) {
                 saveLocationInfo()
               }
-            }, false)
+            })
 
             // 监听推送
             var noticeTo = function (payload) {
