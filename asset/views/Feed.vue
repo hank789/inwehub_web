@@ -22,6 +22,7 @@
         :api="'feed/list'"
         :prevOtherData="{}"
         :nextOtherData="{}"
+        :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
         class="listWrapper"
@@ -96,7 +97,9 @@
     </div>
     <div id="statusBarStyle" background="#f3f4f6" bgColor="#f3f4f6" mode="dark"></div>
 
-    <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+    <commentTextarea ref="ctextarea"
+                     @sendMessage="sendMessage"
+    ></commentTextarea>
 
   </div>
 
@@ -117,7 +120,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import { openVendorUrl } from '../utils/plus'
+  import { openVendorUrl, openAppUrl, autoTextArea } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -128,7 +131,6 @@
   import { getLocalUserInfo } from '../utils/user'
 
   import commentTextarea from '../components/comment/Textarea.vue'
-  import { autoTextArea } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -147,6 +149,7 @@
         var eles = this.$el.querySelectorAll('.textToLink')
         for (var i in eles) {
           openVendorUrl(eles[i])
+          openAppUrl(eles[i])
         }
       })
     },
@@ -181,7 +184,12 @@
     computed: {},
     methods: {
       sendMessage (message) {
-        postRequest(`article/comment-store`, {'submission_id': this.commentTarget.submissionId, body: message, parent_id: this.commentTarget.parentId}).then(response => {
+        postRequest(`article/comment-store`, {
+          'submission_id': this.commentTarget.submissionId,
+          body: message.content,
+          parent_id: this.commentTarget.parentId,
+          mentions: message.noticeUsers
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -194,7 +202,7 @@
 
           this.commentTarget.component.prependItem(
             data.id,
-            message,
+            message.content,
             data.created_at,
             this.commentTarget.parentId,
             this.commentTarget.commentList

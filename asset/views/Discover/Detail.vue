@@ -102,7 +102,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import { autoTextArea, openVendorUrl } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl, openAppUrl } from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
@@ -270,6 +270,7 @@
     updated () {
       this.$nextTick(function () {
         openVendorUrl(this.$el.querySelector('#contentWrapper'))
+        openAppUrl(this.$el.querySelector('#contentWrapper'))
       })
     },
     watch: {

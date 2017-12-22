@@ -33,6 +33,7 @@
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
   import { saveLocationInfo } from '../../utils/allPlatform'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -123,9 +124,12 @@
             })
 
             // 应用从后台切换回前台事件
-            document.addEventListener('resume', () => {
+            EventObj.addIntervalOnceEventListener('resume', () => {
               // 存储用户位置信息
-              saveLocationInfo()
+              var currentUser = localEvent.getLocalItem('UserInfo')
+              if (currentUser.user_id) {
+                saveLocationInfo()
+              }
             }, false)
 
             // 监听推送

@@ -1354,7 +1354,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 附近企业companyDetails.vue
+  { // 附近企业
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
@@ -1380,7 +1380,7 @@ const routes = [
   },
   {
     path: '/discover/add2',
-    name: 'discover_add',
+    name: 'discover_add2',
     meta: {
       title: '发现',
       wechatHideHeader: true,
@@ -1400,6 +1400,18 @@ const routes = [
       keepAlive: true
     },
     component: require('../../../views/Discover/Add.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/nearby',
+    name: 'nearby',
+    meta: {
+      title: '发现',
+      wechatHideHeader: true,
+    },
+    component: require('../../../views/Address/Nearby.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

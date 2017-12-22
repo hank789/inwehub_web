@@ -67,6 +67,9 @@
 
     },
     methods: {
+      toDetail (url) {
+        this.$router.pushPlus(url, 'list-detail-page')
+      },
       commentIt (parentId = 0, commentTargetUsername = '', list) {
         this.$emit('commentIt', parentId, commentTargetUsername, list)
       },

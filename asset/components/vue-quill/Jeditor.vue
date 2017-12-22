@@ -10,9 +10,10 @@
                     :options="editorOption"
                     :isEnableImage="false"
                     :isEnableAddressAppear="true"
+                    :isMonitorAddressAppear="isMonitorAddressAppear"
                     :isEnableHashSymbol="true"
                     :isMonitorSmallSpan="true"
-
+                    :allowBr="allowBr"
                     @change="onEditorChange($event)"
                     @blur="onEditorBlur($event)"
                     @focus="onEditorFocus($event)"
@@ -69,6 +70,14 @@
       descMaxLength: {
         type: Number,
         default: 5000
+      },
+      isMonitorAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      allowBr: {  // 是否允许换行
+        type: Boolean,
+        default: true
       }
     },
     created () {
@@ -93,6 +102,9 @@
       quillEditor
     },
     methods: {
+      setPlaceholder (placeholder) {
+        this.$refs.myTextEditor.setPlaceholder(placeholder)
+      },
       focus () {
         this.$refs.myTextEditor.focus()
       },

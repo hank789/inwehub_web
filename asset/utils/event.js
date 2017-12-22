@@ -2,6 +2,8 @@
  * 事件管理
  * @type {{events: Array, addEventListener: ((p1?:*, p2?:*)), addOnceEventListener: ((p1?:*, p2:*))}}
  */
+var prevEventTime = new Date().getTime()
+
 var EventObj = () => {
   var events = []
   var addEventListener = (name, callback) => {
@@ -28,9 +30,29 @@ var EventObj = () => {
     }
   }
 
+  var addIntervalOnceEventListener = (name, callback) => {
+    if (events[name] !== undefined) {
+      return -1
+    } else {
+      events[name] = 1
+      console.log('bindEvent: ' + name)
+      var newCallback = function () {
+        var nowEventTime = new Date().getTime()
+        console.log('event: nowEventTime:' + nowEventTime + ', prevEventTime:' + prevEventTime + ', 间隔:' + (nowEventTime - prevEventTime))
+        if ((nowEventTime - prevEventTime) < 1000) {
+          return
+        }
+        prevEventTime = new Date().getTime()
+        callback()
+      }
+      window.addEventListener(name, newCallback, false)
+    }
+  }
+
   return {
     addEventListener: addEventListener,
-    addOnceEventListener: addOnceEventListener
+    addOnceEventListener: addOnceEventListener,
+    addIntervalOnceEventListener: addIntervalOnceEventListener
   }
 }
 

@@ -148,7 +148,6 @@
     activated () {
       this.Selected = []
       var user = localEvent.getLocalItem('select_users' + this.userId)
-//      console.error(user)
       for (var num = 0; num < user.length; num++) {
         this.collectProfessor(user[num].listindex, user[num])
       }
@@ -157,7 +156,6 @@
     mounted () {
       this.getList()
       var user = localEvent.getLocalItem('select_users' + this.userId)
-//      console.error(user)
       for (var num = 0; num < user.length; num++) {
         this.collectProfessor(user[num].listindex, user[num])
       }

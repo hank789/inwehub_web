@@ -30,7 +30,7 @@
                 <p class="mui-ellipsis">{{ item.owner.name }}</p>
                 <p>{{ item.created_at.replace(/-/g, '/') }}</p>
               </div>
-              <div class="message_b textToLink" v-html="textToLink(item.content)"></div>
+              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.content)"></div>
 
               <DiscussReplay
                 v-if="item.children.length"
@@ -130,7 +130,12 @@
       },
       sendMessage (message) {
         var parentId = this.commentTarget.parentId
-        var params = Object.assign({body: message, content: message, parent_id: parentId}, this.storeParams)
+        var params = Object.assign({
+          body: message.content,
+          content: message.content,
+          parent_id: parentId,
+          mentions: message.noticeUsers
+        }, this.storeParams)
 
         postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
@@ -145,7 +150,7 @@
 
           this.prependItem(
             data.id,
-            message,
+            message.content,
             data.created_at,
             parentId
           )
@@ -299,7 +304,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 12px 0 10px 0;
+    padding: 12px 0 0px 0;
   }
 
   .message_b {

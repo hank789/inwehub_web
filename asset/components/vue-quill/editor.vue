@@ -60,6 +60,10 @@
       isEnableImage: {
         type: Boolean,
         default: true
+      },
+      allowBr: {  // 是否允许换行
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
@@ -69,6 +73,10 @@
       this.quill = null
     },
     methods: {
+      setPlaceholder (placeholder) {
+        this.quill.root.setAttribute('data-placeholder', placeholder)
+        this.quill.root.classList.add('ql-blank')
+      },
       focus () {
         this.quill.focus()
       },
@@ -259,6 +267,7 @@
             : self.defaultModules.toolbar
           self.options.placeholder = self.options.placeholder || '请填写内容 ...'
           self.options.readOnly = self.options.readOnly !== undefined ? self.options.readOnly : false
+          self.options.scrollingContainer = '.mui-content'
           self.quill = new window.Quill(self.$refs.editor, self.options)
 
           if (self.value || self.content) {
@@ -288,11 +297,22 @@
             // 文本变动通知更改model
           self.quill.on('text-change', (delta, oldDelta, source) => {
             self._content = self.quill.getContents()
-            console.log('text-change被触发, delta:' + JSON.stringify(delta) + ', oldDelta:' + JSON.stringify(oldDelta) + ', content:' + JSON.stringify(self._content))
 
             var html = self.$refs.editor.children[0].innerHTML
             const text = self.quill.getText()
             if (html === '<p><br></p>') html = ''
+
+            console.log('text-change被触发, delta:' + JSON.stringify(delta) + ', oldDelta:' + JSON.stringify(oldDelta) + ', content:' + JSON.stringify(self._content) + ', html:' + html + ', text:' + text)
+
+            if (html === '') {
+              console.log('editor: placeholder:' + self.options.placeholder)
+              self.setPlaceholder(self.options.placeholder)
+            }
+
+            // 不许换行
+            if (!self.allowBr) {
+              // ...
+            }
 
             self.$emit('input', self._content)
             self.$emit('change', {
@@ -355,6 +375,10 @@
                   }
                 } else {
                   item.setAttribute('ql-value', item.innerText)
+                  if (item.hasAttribute('target')) {
+                    item.setAttribute('target', '_self')
+                  }
+                  item.classList.add('appUrl')
                 }
               })
               if (isStop) return
@@ -366,6 +390,7 @@
               // 添加操作
               var trimStr = text.trim()
               var lastChar = trimStr.charAt(trimStr.length - 1)
+              console.log('lastChar:' + lastChar)
 
               if (self.isMonitorAddressAppear) {
                 if (lastChar === '@') {

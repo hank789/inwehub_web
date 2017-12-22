@@ -14,14 +14,19 @@
         :pageMode="true"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
+        :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <!--类别-->
+        <div class="community">
+          顾问社区<i class="bot"></i>
+        </div>
         <ul class="categoryMenu">
           <li @tap.stop.prevent="judge(1)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zhuanyewenda-"></use>
             </svg>
             <p>专业问答</p>
+            <i>分红</i>
           </li>
           <li @tap.stop.prevent="judge(2)">
             <svg class="icon" aria-hidden="true">
@@ -220,9 +225,9 @@
   }
   .bot {
     position: absolute;
-    right: 0px;
+    right:5%;
     bottom: 0;
-    left: 0px;
+    left:5%;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -238,6 +243,38 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+  }
+  .categoryMenu li:nth-of-type(1){
+   position: relative;
+  }
+  .categoryMenu li:nth-of-type(1) i{
+    position: absolute;
+    font-style: normal;
+    width: 30px;
+    height: 17px;
+    font-size: 12px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    background: #fa4975;
+    text-align: center;
+    line-height:17px;
+    top: 19px;
+    right: -7px;
+  }
+  .categoryMenu li:nth-of-type(1) i:after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fa4975;
+    /* border: 1px solid #dcdcdc; */
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left: -3px;
+    top: 0px;
+    bottom: 0;
+    margin: auto;
   }
   .categoryMenu li{
     display: flex;
@@ -372,7 +409,18 @@
   }
 .listWrapper{
   margin-top: 0px;
+  bottom: 51px;
 }
-
+/*顾问社区*/
+  .community{
+    width:100%;
+    padding:0 5%;
+    height:43px;
+    line-height: 43px;
+    font-size:16px;
+    color: #444444;
+    position:relative;
+    background: #FFFFFF;
+  }
 
 </style>

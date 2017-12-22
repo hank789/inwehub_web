@@ -24,7 +24,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate" >客户名称</label>
-            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=project' + type)"  readonly>
+            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="toselectcompany"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -105,6 +105,7 @@
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'
   import { getLocalUserInfo } from '../../../utils/user'
+  import { onceSave, onceGet } from '../../../utils/cache'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -141,6 +142,20 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      toselectcompany () {
+        onceSave(this)
+        this.$router.push('/selectCompany?from=project' + this.type)
+      },
+      getCompany () {
+        //     选择公司
+        if (this.$route.params.id) {
+          this.type = this.$route.params.id
+        }
+        var customerName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
+        if (customerName.length) {
+          this.project.customer_name = customerName
+        }
+      },
       empty () {
         // 操作成删除保存的公司
         localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
@@ -327,6 +342,8 @@
           }
 
           window.mui.toast('操作成功')
+          // 操作成删除保存的公司
+          localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -338,14 +355,8 @@
         // 执行刷新
         console.log('refresh-project')
       })
-      //     选择公司
-      if (this.$route.params.id) {
-        this.type = this.$route.params.id
-      }
-      var customerName = localEvent.getLocalItem('project' + this.type + '_company' + this.user_id)
-      if (customerName.length) {
-        this.project.customer_name = customerName
-      }
+      onceGet(this)
+      this.getCompany()
     },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')

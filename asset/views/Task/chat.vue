@@ -15,7 +15,7 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="{contact_id:this.chatUserId}"
+        :prevOtherData="{contact_id: this.chatUserId}"
         :nextOtherData="{contact_id:this.chatUserId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+//  {contact_id:this.chatUserId}
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'

@@ -27,7 +27,7 @@
         class="listWrapper">
         <ul class="answer">
           <li v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
-            <p class="mui-ellipsis-2">{{ask.description}}</p>
+            <p class="mui-ellipsis-2" >{{ask.description}}</p>
             <p>
               <span class="label" :class="'label_' + ask.status">{{ask.status_description}}</span>
               <span>{{ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>

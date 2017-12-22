@@ -12,7 +12,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">公司</label>
-            <input type="text" v-model.trim="job.company" placeholder="必填"  @tap.stop.prevent="$router.push('/selectCompany?from=job' + type)"  readonly>
+            <input type="text" v-model.trim="job.company" placeholder="必填"  @tap.stop.prevent="toselectcompany"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -104,6 +104,7 @@
   import MTextarea from '../../../components/MTextarea.vue'
   import { postRequest } from '../../../utils/request'
   import { getLocalUserInfo } from '../../../utils/user'
+  import { onceSave, onceGet } from '../../../utils/cache'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -138,6 +139,20 @@
       buttonSaveDisabled: false
     }),
     methods: {
+      toselectcompany () {
+        onceSave(this)
+        this.$router.push('/selectCompany?from=job' + this.type)
+      },
+      getCompany () {
+        //     选择公司
+        if (this.$route.params.id) {
+          this.type = this.$route.params.id
+        }
+        var placeholder = localEvent.getLocalItem('job' + this.type + '_company' + this.user_id)
+        if (placeholder.length) {
+          this.job.company = placeholder
+        }
+      },
       empty () {
         //   操作成删除保存的公司
         localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
@@ -147,6 +162,7 @@
         this.getDetail()
       },
       getDetail: function () {
+
         // showInwehubWebview();
         let id = parseInt(this.$route.params.id)
         console.log('id:' + id)
@@ -321,6 +337,8 @@
           }
 
           window.mui.toast('操作成功')
+          //   操作成删除保存的公司
+          localEvent.clearLocalItem('job' + this.type + '_company' + this.user_id)
           this.bak = ''
           this.clearData()
           window.mui.back()
@@ -339,16 +357,6 @@
       }
 
       next()
-    },
-    mounted () {
-      //     选择公司
-      if (this.$route.params.id) {
-        this.type = this.$route.params.id
-      }
-      var placeholder = localEvent.getLocalItem('job' + this.type + '_company' + this.user_id)
-      if (placeholder.length) {
-        this.job.company = placeholder
-      }
     },
     computed: {
       infoIndustryTagsNames () {
@@ -388,6 +396,10 @@
       industryTagsIndexedList,
       dPickerComponent,
       MTextarea
+    },
+    mounted () {
+      onceGet(this)
+      this.getCompany()
     },
     created () {
       this.getDetail()
