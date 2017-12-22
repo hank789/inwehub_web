@@ -91,8 +91,8 @@
         images: [],
         maxImageCount: 9,
         percentCompleted: 0,
-        address: '',
-        selectedAddress: '',
+        address: '所在位置',
+        selectedAddress: '所在位置',
         hide: 0,
         descMaxLength: 2000,
         position: {
@@ -304,8 +304,11 @@
       getGeoPosition((position) => {
         if (position.addresses) {
           this.position = position
-          this.address = '所在位置'
-          this.selectedAddress = this.address
+//          this.address = '所在位置'
+//          this.selectedAddress = this.address
+//          if (this.selectedAddress) {
+//            localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+//          }
         }
       })
     },
