@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-14-444 mui-ellipsis">{{data.feed.comment_content}}</div>
+    <div class="text-14-444 mui-ellipsis" v-html="data.feed.comment_content"></div>
     <div class="container-answer margin-5-0-0">
       <div class="container-image margin-0-0-10" v-if="data.feed.img">
         <img :src="data.feed.img"/>
