@@ -214,16 +214,15 @@
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
-        if (!this.text) {
+        var html = this.html.replace(/(<p><br><\/p>)*$/, '')
+        if (!html) {
           window.mui.toast('请填写分享内容')
           return
         }
 
-        this.html = this.html.replace(/(<p><br><\/p>)*$/, '')
-
         var data = {
           type: 'text',
-          title: this.html,
+          title: html,
           photos: [],
           category_id: '',
           tags: this.tags,

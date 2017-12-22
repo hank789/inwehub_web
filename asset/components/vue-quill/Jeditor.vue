@@ -98,6 +98,9 @@
       quillEditor
     },
     methods: {
+      setPlaceholder (placeholder) {
+        this.$refs.myTextEditor.setPlaceholder()
+      },
       focus () {
         this.$refs.myTextEditor.focus()
       },

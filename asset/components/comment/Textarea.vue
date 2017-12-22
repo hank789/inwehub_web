@@ -75,7 +75,7 @@
 
         this.targetUsername = targetUsername
         targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
-        this.editorObj.root.setAttribute('data-placeholder', targetUsername)
+        this.$refs.myAddEditor.setPlaceholder(targetUsername)
 
         if (this.showTextarea) {
           console.log('bind comment事件')
@@ -94,6 +94,7 @@
       finish () {
         this.textarea = ''
         this.noticeUsers = []
+        this.$refs.myAddEditor.resetContent()
         this.showTextarea = false
       },
       noticeUser (uid) {
@@ -103,12 +104,15 @@
         event.preventDefault()
         event.stopPropagation()
 
-        if (!this.textarea.trim()) {
+        var textarea = this.textarea
+        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
+
+        if (!textarea.trim()) {
           return false
         }
 
         var data = {
-          content: this.textarea,
+          content: textarea,
           noticeUsers: this.noticeUsers
         }
         this.$emit('sendMessage', data)
