@@ -679,8 +679,7 @@ const routes = [
     component: require('../../../views/Account/infos/job.vue'),
     meta: {
       title: '工作经历详情',
-      wechatHideHeader: true,
-      keepAlive: true
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -692,8 +691,7 @@ const routes = [
     component: require('../../../views/Account/infos/project.vue'),
     meta: {
       title: '项目经历详情',
-      wechatHideHeader: true,
-      keepAlive: true
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

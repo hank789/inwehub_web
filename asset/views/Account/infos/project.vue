@@ -24,7 +24,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate" >客户名称</label>
-            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="$router.push('/selectCompany?from=project' + type)"  readonly>
+            <input type="text" v-model.trim="project.customer_name" placeholder="必填" @tap.stop.prevent="toselectcompany"  readonly>
           </div>
         </li>
         <li class="mui-table-view-cell">
@@ -105,6 +105,7 @@
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'
   import { getLocalUserInfo } from '../../../utils/user'
+  import { onceSave, onceGet } from '../../../utils/cache'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -140,10 +141,11 @@
       descMaxLength: 2000,
       buttonSaveDisabled: false
     }),
-    activated: function () {
-      this.getCompany()
-    },
     methods: {
+      toselectcompany () {
+        onceSave(this)
+        this.$router.push('/selectCompany?from=project' + this.type)
+      },
       getCompany () {
         //     选择公司
         if (this.$route.params.id) {
@@ -353,6 +355,8 @@
         // 执行刷新
         console.log('refresh-project')
       })
+      onceGet(this)
+      this.getCompany()
     },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')
