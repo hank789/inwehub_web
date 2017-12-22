@@ -1,3 +1,6 @@
+/**
+ * 临时存储业务
+ */
 import localEvent from '../stores/localStorage'
 
 function onceSave (component) {
