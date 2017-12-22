@@ -10,6 +10,7 @@
           :isMonitorAddressAppear="true"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
+          :allowBr="false"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
@@ -74,8 +75,14 @@
         }
 
         this.targetUsername = targetUsername
-        targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
-        this.$refs.myAddEditor.setPlaceholder(targetUsername)
+
+        var textarea = this.textarea
+        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
+
+        if (!textarea.trim()) {
+          targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
+          this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        }
 
         if (this.showTextarea) {
           console.log('bind comment事件')
@@ -188,6 +195,7 @@
   }
   #commentJeditor .ql-editor.ql-blank::before{
     font-style:normal;
+    margin-top:2px;
     font-size: 14px;
     color: #9b9b9b;
   }
