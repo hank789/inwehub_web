@@ -13,6 +13,11 @@ function onceSave (component) {
   localEvent.setLocalItem('onceCache', cacheData)
 }
 
+function onceClear () {
+  console.log('onceCache:clear')
+  localEvent.clearLocalItem('onceCache')
+}
+
 function onceGet (component) {
   var url = component.$route.fullPath
   var cacheData = localEvent.getLocalItem('onceCache')
@@ -26,14 +31,10 @@ function onceGet (component) {
           component.$data[i] = cacheData.data[i]
         }
       }
+      onceClear()
     }
     return null
   }
-}
-
-function onceClear () {
-  console.log('onceCache:clear')
-  localEvent.clearLocalItem('onceCache')
 }
 
 export {
