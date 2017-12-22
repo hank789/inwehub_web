@@ -176,7 +176,6 @@
   .comment .to{
     color:#808080;
   }
-
   .noMoreComment .container-answer{
     padding:10px 15px 10px;
   }
@@ -186,6 +185,9 @@
 <style>
   #Outermost  p{
     font-size: 16px;
+    margin-bottom: 0;
+  }
+  .comment p{
     margin-bottom: 0;
   }
 </style>
