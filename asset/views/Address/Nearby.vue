@@ -79,7 +79,6 @@
     created () {
       getGeoPosition((position) => {
         this.dataList = {
-          name: this.address,
           longitude: position.longt,
           latitude: position.lat
         }

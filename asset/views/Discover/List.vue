@@ -14,6 +14,7 @@
         :pageMode="true"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
+        :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <!--类别-->
         <div class="community">
@@ -408,6 +409,7 @@
   }
 .listWrapper{
   margin-top: 0px;
+  bottom: 51px;
 }
 /*顾问社区*/
   .community{
