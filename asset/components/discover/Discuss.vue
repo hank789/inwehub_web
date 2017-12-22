@@ -130,7 +130,12 @@
       },
       sendMessage (message) {
         var parentId = this.commentTarget.parentId
-        var params = Object.assign({body: message, content: message, parent_id: parentId}, this.storeParams)
+        var params = Object.assign({
+          body: message.content,
+          content: message.content,
+          parent_id: parentId,
+          mentions: message.noticeUsers
+        }, this.storeParams)
 
         postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
@@ -145,7 +150,7 @@
 
           this.prependItem(
             data.id,
-            message,
+            message.content,
             data.created_at,
             parentId
           )

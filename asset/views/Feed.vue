@@ -99,7 +99,6 @@
 
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
-                     @noticeUser="noticeUser"
     ></commentTextarea>
 
   </div>
@@ -184,25 +183,12 @@
     },
     computed: {},
     methods: {
-      noticeUser (uuid) {
-        var noticeUser = this.commentTarget.noticeUser
-        if (!noticeUser) {
-          noticeUser = []
-          this.commentTarget.noticeUser = []
-        }
-
-        this.commentTarget.noticeUser.push(uuid)
-      },
       sendMessage (message) {
-        var noticeUser = this.commentTarget.noticeUser
-        if (!noticeUser) {
-          noticeUser = []
-        }
         postRequest(`article/comment-store`, {
           'submission_id': this.commentTarget.submissionId,
-          body: message,
+          body: message.content,
           parent_id: this.commentTarget.parentId,
-          mentions: noticeUser
+          mentions: message.noticeUsers
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -216,7 +202,7 @@
 
           this.commentTarget.component.prependItem(
             data.id,
-            message,
+            message.content,
             data.created_at,
             this.commentTarget.parentId,
             this.commentTarget.commentList
