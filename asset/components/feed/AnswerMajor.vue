@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis-2">{{data.feed.title}}</div>
+    <div class="text-16-444 mui-ellipsis-3">{{data.feed.title}}</div>
 
     <div class="options text-right">
       <div class="component-followed-question" v-if="data.feed.average_rate">{{data.feed.average_rate}}好评</div>
