@@ -311,7 +311,7 @@
 
             // 不许换行
             if (!self.allowBr) {
-              
+              // ...
             }
 
             self.$emit('input', self._content)
