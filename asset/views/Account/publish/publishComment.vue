@@ -31,8 +31,8 @@
         <ul class="answer">
           <!--{{ask.origin_title}}-->
           <li v-for="(ask, index) in list" @tap.stop.prevent="goToCommentPage(ask.type, ask.comment_url)">
-            <p class="mui-ellipsis" v-html="ask.content"></p>
-            <p class="mui-ellipsis" v-html="ask.origin_title"></p>
+            <p class="mui-ellipsis" >{{ask.content}}</p>
+            <p class="mui-ellipsis" >{{ask.origin_title}}</p>
             <p>
               <span>
                 <timeago :since="timeago(ask.created_at)" :auto-update="60">
@@ -191,13 +191,11 @@
   .answer li p:nth-of-type(1) {
     color: #444444;
     font-size: 14px;
-    max-height: 21px;
   }
   .answer li p:nth-of-type(2) {
     color:#808080;
     font-size: 12px;
     margin-top: 3px;
-    max-height: 42px;
   }
 
   .answer li p:nth-of-type(3) {
