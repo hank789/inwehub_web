@@ -807,7 +807,9 @@ input.upload-file[type=file]{
 
 .mui-poppicker {
   background-color: #fff !important;
+  position: absolute !important;
 }
+
 .mui-poppicker-body{
   border-top:1px solid #dcdcdc !important;
 }
