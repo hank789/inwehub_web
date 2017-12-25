@@ -51,12 +51,8 @@
     methods: {
     // 监听@事件
       addressAppearFound () {
-<<<<<<< HEAD
         this.disableTriggerBlur = true
-        console.log('found @')
-=======
         this.$router.pushPlus('/selectUser?from=comment')
->>>>>>> 5a6c148b2173cc6ad5afca8ccf01e00d70be46e0
       },
       onEditorChange (editor) {
         this.textarea = editor.html
