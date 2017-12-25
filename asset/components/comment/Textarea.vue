@@ -38,7 +38,8 @@
       descMaxLength: 5000,
       targetUsername: '',
       noticeUsers: [],
-      editorObj: null
+      editorObj: null,
+      commentData: [] // 评论时需要的参数
     }),
     props: {},
     components: {
@@ -67,8 +68,10 @@
       onEditorReady (editor) {
         this.editorObj = editor
       },
-      comment (targetUsername) {
+      comment (data) {
+        var targetUsername = data.targetUsername
         console.log('comment targetUsername:' + targetUsername)
+        this.commentData = data.commentData
         if (targetUsername === '') {
           this.showTextarea = !this.showTextarea
         } else {
@@ -126,7 +129,8 @@
 
         var data = {
           content: textarea,
-          noticeUsers: this.noticeUsers
+          noticeUsers: this.noticeUsers,
+          commentData: this.commentData
         }
         this.$emit('sendMessage', data)
 

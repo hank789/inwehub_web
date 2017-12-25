@@ -118,17 +118,22 @@
         this.getList()
       },
       comment (parentId, commentTargetUsername, list) {
-        this.commentTarget = {
+        var commentTarget = {
           parentId: parentId || 0,
           commentTargetUsername: commentTargetUsername || '',
           list: list
         }
-        var commentTargetName = commentTargetUsername || ''
 
         console.log('回复 parentId:' + parentId + ', commentTargetUsername' + commentTargetUsername)
-        this.$emit('comment', commentTargetName)
+
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+        this.$emit('comment', data)
       },
       sendMessage (message) {
+        this.commentTarget = message.commentData
         var parentId = this.commentTarget.parentId
         var params = Object.assign({
           body: message.content,

@@ -58,6 +58,8 @@
 <script>
 
   import { postRequest } from '../../utils/request'
+  import { softInput, autoTextArea } from '../../utils/plus'
+
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
     data () {
@@ -191,6 +193,9 @@
       },
       focus () {}
     },
+    mounted () {
+      autoTextArea()
+    },
     created () {
       this.getChannels()
     }
@@ -200,6 +205,7 @@
 <style scoped="scoped">
   .mui-content {
     background: #FFFFFF;
+    overflow: hidden !important;
   }
 
   /*清掉自带样式*/
