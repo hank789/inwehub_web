@@ -336,7 +336,7 @@
                     if (oldValue.length > nowValue.length) {
                       // 删除操作
                       console.log(oldValue + 'change')
-                      var reg = new RegExp('<span\\s([^<]*?)' + nowValue + '</span>')
+                      var reg = new RegExp('<a\\s([^<]*?)' + nowValue + '</a>')
                       var newHtml = html.replace(reg, '')
                       console.log('reg:' + reg.toString())
                       console.log('旧的html:' + html)
