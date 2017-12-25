@@ -178,15 +178,17 @@
           },
           created_at: createdAt
         }
-
+        
         if (parentId) {
           var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
-          if (parentIndex) {
+          if (parentIndex > 0) {
             if (this.commentTarget.list[parentIndex].children) {
               this.commentTarget.list[parentIndex].children.unshift(item)
             } else {
               this.commentTarget.list[parentIndex].children = [item]
             }
+          } else {
+            this.resetList()
           }
         } else {
           this.commentTarget.list.unshift(item)

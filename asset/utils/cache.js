@@ -3,25 +3,32 @@
  */
 import localEvent from '../stores/localStorage'
 
-function onceSave (component) {
+function onceSave (component, key = '', saveData = null) {
   var url = component.$route.fullPath
+  if (!saveData) {
+    saveData = component.$data
+  }
   var cacheData = {
     url,
-    data: component.$data
+    data: saveData
   }
-  console.log('onceCache:save:' + JSON.stringify(cacheData))
-  localEvent.setLocalItem('onceCache', cacheData)
+
+  var localKey = 'onceCache' + key
+  console.log('onceCache:save key:' + localKey + ', data:' + JSON.stringify(cacheData))
+  localEvent.setLocalItem(localKey, cacheData)
 }
 
-function onceClear () {
-  console.log('onceCache:clear')
-  localEvent.clearLocalItem('onceCache')
+function onceClear (key = '') {
+  console.log('onceCache:clear key:' + key)
+  var localKey = 'onceCache' + key
+  localEvent.clearLocalItem(localKey)
 }
 
-function onceGet (component) {
+function onceGet (component, key = '') {
+  var localKey = 'onceCache' + key
   var url = component.$route.fullPath
-  var cacheData = localEvent.getLocalItem('onceCache')
-  console.log('onceCache:get:' + JSON.stringify(cacheData))
+  var cacheData = localEvent.getLocalItem(localKey)
+  console.log('onceCache:get key:' + localKey + ', data:' + JSON.stringify(cacheData))
   if (cacheData.url === undefined) {
     return null
   } else {
@@ -31,7 +38,8 @@ function onceGet (component) {
           component.$data[i] = cacheData.data[i]
         }
       }
-      onceClear()
+      onceClear(key)
+      return true
     }
     return null
   }

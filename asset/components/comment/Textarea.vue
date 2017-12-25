@@ -29,29 +29,60 @@
 <script>
   import { softInput } from '../../utils/plus'
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
+  import { onceGet, onceSave } from '../../utils/cache'
 
   const CommentTextarea = {
     data: () => ({
       showTextarea: false,
       description: {},
+      cacheKey: '',
       textarea: '',
       descMaxLength: 5000,
       targetUsername: '',
       noticeUsers: [],
       editorObj: null,
+      oldList: [],
       commentData: [] // 评论时需要的参数
     }),
     props: {},
     components: {
       Jeditor
     },
+    activated () {
+      this.init()
+    },
     mounted () {
+      this.init()
       softInput()
+    },
+    created () {
+      this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
     // 监听@事件
       addressAppearFound () {
+        console.debug(this.$data)
+        onceSave(this, this.cacheKey, {
+          showTextarea: this.showTextarea,
+          description: this.description,
+          cacheKey: this.cacheKey,
+          targetUsername: this.targetUsername,
+          noticeUsers: this.noticeUsers,
+          commentData: this.commentData
+        })
+        window.mui.closeWaitingBlank()
         this.$router.pushPlus('/selectUser?from=comment')
+      },
+      init () {
+        this.oldList = this.commentData.commentList
+        var result = onceGet(this, this.cacheKey)
+        if (result) {
+          setTimeout(() => {
+            this.commentData.commentList = this.oldList
+            this.$refs.myAddEditor.resetContent(this.description)
+            this.editorObj.focus()
+          }, 500)
+        }
       },
       onEditorChange (editor) {
         this.textarea = editor.html
@@ -62,6 +93,10 @@
         this.showTextarea = false
       },
       onEditorFocus (editor) {
+        if (!this.textarea.trim()) {
+          var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
+          this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        }
         window.mui.waitingBlank()
         console.log('comment focus')
       },
@@ -83,6 +118,7 @@
         var textarea = this.textarea
         textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
 
+        console.log('comment-textarea:' + textarea)
         if (!textarea.trim()) {
           targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
           this.$refs.myAddEditor.setPlaceholder(targetUsername)

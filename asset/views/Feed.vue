@@ -138,6 +138,7 @@
     data: () => ({
       loading: false,
       list: [],
+      commentTargetComponent: null,
       is_company: currentUser.is_company
     }),
     created () {
@@ -201,7 +202,7 @@
 
           window.mui.toast(response.data.message)
 
-          commentTarget.component.prependItem(
+          this.commentTargetComponent.prependItem(
             data.id,
             message.content,
             data.created_at,
@@ -217,13 +218,13 @@
         var commentTarget = {
           submissionId: submissionId,
           parentId: parentId || 0,
-          component,
           commentList: list
         }
         var data = {
           targetUsername: commentTargetUsername || '',
           commentData: commentTarget
         }
+        this.commentTargetComponent = component
         this.$refs.ctextarea.comment(data)
       },
       alertClick (title) {
