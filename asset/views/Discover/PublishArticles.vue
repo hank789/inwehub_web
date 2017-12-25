@@ -58,7 +58,7 @@
 <script>
 
   import { postRequest } from '../../utils/request'
-  import { softInput, autoTextArea } from '../../utils/plus'
+  import { autoTextArea } from '../../utils/plus'
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
@@ -111,6 +111,13 @@
             window.mui.alert(response.data.message)
             return
           } else if (code === 1000) {
+            this.url = ''
+            this.title = ''
+            this.channel = ''
+            this.channelValue = ''
+            this.disableRegister = true
+            this.isblue = false
+            this.isShow = false
             this.$router.pushPlus('/discover/add/success')
             return
           }
