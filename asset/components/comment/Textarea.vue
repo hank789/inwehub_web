@@ -93,7 +93,8 @@
         this.showTextarea = false
       },
       onEditorFocus (editor) {
-        if (!this.textarea.trim()) {
+        if (!this.textarea.replace('<p> </p>', '').trim()) {
+          this.editorObj.setContents([{insert: ' '}])
           var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
           this.$refs.myAddEditor.setPlaceholder(targetUsername)
         }
