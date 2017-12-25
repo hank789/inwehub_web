@@ -51,7 +51,7 @@
     },
     methods: {
       textToLink (text) {
-        return textToLinkHtml(text)
+        return textToLinkHtml(' ' + text)
       },
       comment (parentId, commentTargetUsername, list) {
         this.$emit('comment', parentId, commentTargetUsername, list)

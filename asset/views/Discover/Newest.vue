@@ -54,7 +54,7 @@
                     <use xlink:href="#icon-shoucangxingxing"></use>
                   </svg>
                 </p>
-                <p @tap.stop.prevent="goDetial(hot)">
+                <p  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                   </svg>
