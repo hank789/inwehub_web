@@ -28,7 +28,7 @@
             <div class="container-image margin-10-0-0" v-if="ask.img.length" >
               <img :src="ask.img.length ? ask.img[0] : ''" />
             </div>
-            <p class="mui-ellipsis-2" v-html="ask.title"><a v-if="ask.domain">{{ask.domain}}</a> </p>
+            <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
             <p>
               <timeago :since="timeago(ask.created_at)" :auto-update="60">
                </timeago>
