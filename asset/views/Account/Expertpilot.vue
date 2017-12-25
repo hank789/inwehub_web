@@ -1,6 +1,8 @@
 <template>
+  <div>
+    <div class="bmpreplace"></div>
   <div class="mui-content absolute">
-    <header>
+    <div class="header">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <ul class="expertExplanation">
         <p  class="expertSign">
@@ -34,7 +36,7 @@
           <p>展示打造个人品牌，建立商业模式</p>
         </li>
       </ul>
-    </header>
+    </div>
     <ul class="guideExplain">
       <p class="platformExplain">如何才能成为平台认证专家？</p>
       <li>
@@ -53,6 +55,8 @@
       <p>如有疑问请联系</p>
       <p>邮箱：hi@inwehub.com/微信：hiinwe</p>
     </div>
+  </div>
+    <div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
   </div>
 </template>
 
@@ -130,14 +134,17 @@
   .mui-content{
     background: #FFFFFF;
   }
+  .bmpreplace{
+    background: #ececee;
+  }
 
-  header {
+  .header {
     width: 100%;
     height: 185px;
     background: #ececee;
   }
 
-  header a {
+  .header a {
     color: #808080;
     position: absolute;
     top: 23px;
