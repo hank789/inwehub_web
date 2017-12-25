@@ -160,7 +160,7 @@
       },
       gochat (item) {
         item.unread_count = 0
-        this.$router.pushPlus('/chat/' + item.contact_id)
+        this.$router.pushPlus('/chat/' + item.room_id)
       },
       skip (num) {
         switch (num) {
