@@ -389,6 +389,10 @@
             } else {
               // 添加操作
               var lastChar = delta.ops[1] ? delta.ops[1].insert : ''
+              var lastChar2 = delta.ops[0] && delta.ops[0].insert ? delta.ops[0].insert : ''
+              if (!lastChar && lastChar2) {
+                lastChar = lastChar2
+              }
               console.log('lastChar:' + lastChar)
 
               if (self.isMonitorAddressAppear) {
