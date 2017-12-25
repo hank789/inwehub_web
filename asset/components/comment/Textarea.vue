@@ -37,6 +37,7 @@
       textarea: '',
       descMaxLength: 5000,
       targetUsername: '',
+      disableTriggerBlur: false,
       noticeUsers: [],
       editorObj: null
     }),
@@ -49,6 +50,7 @@
     },
     methods: {
       addressAppearFound () {
+        this.disableTriggerBlur = true
         console.log('found @')
       },
       onEditorChange (editor) {
@@ -87,6 +89,9 @@
         if (this.showTextarea) {
           console.log('bind comment事件')
           window.document.addEventListener('tap', (e) => {
+            if (this.disableTriggerBlur) {
+              return
+            }
             console.log('document tap 事件被触发')
             this.editorObj.blur()
           }, false)
