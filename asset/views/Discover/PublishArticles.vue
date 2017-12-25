@@ -56,8 +56,9 @@
 </template>
 
 <script>
+
   import { postRequest } from '../../utils/request'
-  const urlReg = /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]$/
+  const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
     data () {
       return {
