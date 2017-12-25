@@ -7,7 +7,7 @@
           v-model.trim="description"
           :rows="1"
           :content="description"
-          :isMonitorAddressAppear="false"
+          :isMonitorAddressAppear="true"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
@@ -48,8 +48,9 @@
       softInput()
     },
     methods: {
+    // 监听@事件
       addressAppearFound () {
-        console.log('found @')
+        this.$router.pushPlus('/selectUser?from=comment')
       },
       onEditorChange (editor) {
         this.textarea = editor.html
@@ -104,8 +105,13 @@
         this.$refs.myAddEditor.resetContent()
         this.showTextarea = false
       },
+      // 获取添加@用户的id
       noticeUser (uid) {
         this.noticeUsers.push(uid)
+      },
+      // 获取删除@用户的id
+      delUser (uid) {
+
       },
       sendMessage (event) {
         event.preventDefault()

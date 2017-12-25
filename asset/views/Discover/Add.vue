@@ -42,7 +42,7 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">
+        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser?from=discover')">
           <use xlink:href="#icon-icon-test1"></use>
         </svg>
         <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
@@ -148,7 +148,7 @@
             this.userName.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('select_users' + this.id, this.user)
+        localEvent.setLocalItem('discover_selectUser' + this.id, this.user)
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -219,7 +219,7 @@
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
-        localEvent.clearLocalItem('select_users' + this.id)
+        localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
@@ -282,7 +282,7 @@
           }
         }
         // 循环插入@人
-        this.user = localEvent.getLocalItem('select_users' + this.id)
+        this.user = localEvent.getLocalItem('discover_selectUser' + this.id)
         for (var num = 0; num < this.user.length; num++) {
           if (this.userId.indexOf(this.user[num].id) === -1) {
             this.userId.push(this.user[num].id)

@@ -114,7 +114,11 @@
             options.push(this.Selected[i])
           }
         }
-        localEvent.setLocalItem('select_users' + this.userId, options)
+        if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
+          localEvent.setLocalItem(this.$route.query.from + '_selectUser' + this.userId, options)
+        } else {
+          return false
+        }
       },
       // 数据；
       getList () {
@@ -147,17 +151,25 @@
     },
     activated () {
       this.Selected = []
-      var user = localEvent.getLocalItem('select_users' + this.userId)
-      for (var num = 0; num < user.length; num++) {
-        this.collectProfessor(user[num].listindex, user[num])
+      if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
+        var user = localEvent.getLocalItem(this.$route.query.from + '_selectUser' + this.userId)
+        for (var num = 0; num < user.length; num++) {
+          this.collectProfessor(user[num].listindex, user[num])
+        }
+      } else {
+        return false
       }
     },
     watch: {},
     mounted () {
       this.getList()
-      var user = localEvent.getLocalItem('select_users' + this.userId)
-      for (var num = 0; num < user.length; num++) {
-        this.collectProfessor(user[num].listindex, user[num])
+      if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
+        var user = localEvent.getLocalItem(this.$route.query.from + '_selectUser' + this.userId)
+        for (var num = 0; num < user.length; num++) {
+          this.collectProfessor(user[num].listindex, user[num])
+        }
+      } else {
+        return false
       }
     },
     created () {
