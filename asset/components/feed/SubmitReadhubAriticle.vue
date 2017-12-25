@@ -21,7 +21,7 @@
       <img :src="data.feed.img"/>
     </div>
 
-    <div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.url)">
+    <div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)">
       <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun1"></use>
@@ -33,7 +33,7 @@
         </svg><span>{{data.feed.support_number}}</span>
       </div>
     </div>
-    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
 
       <!-- 点赞和评论列表start -->
       <SuppertAndComment
@@ -83,6 +83,9 @@
 
     },
     methods: {
+      toDetail (url) {
+        this.$router.pushPlus(url, 'list-detail-page')
+      },
       prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
         var userInfo = getLocalUserInfo()
