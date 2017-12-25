@@ -39,8 +39,8 @@
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
-                <span v-if="item.data.text">
-                  {{item.data.text}}
+                <span v-if="item.data.text" v-html="textToLink(item.data.text)">
+                   <!--{{item.data.text}}-->
                 </span>
                 <span v-if="item.data.img" class="chatImg">
                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
@@ -82,6 +82,8 @@
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
   import SingleImage from '../../components/image/Image.vue'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   const Chat = {
     data: () => ({
@@ -142,6 +144,10 @@
       }
     },
     methods: {
+//      转换成html
+      textToLink (text) {
+        return textToLinkHtml(' ' + text)
+      },
       showTime (prevtime, time) {
         if (prevtime) {
           var current = new Date(time.created_at.replace(/-/g, '/'))
@@ -291,6 +297,12 @@
           })
         }
       }
+    },
+    updated () {
+   // 打开第三方链接
+      this.$nextTick(function () {
+        openVendorUrl(this.$el.querySelector('#myData'))
+      })
     },
     mounted () {
       autoTextArea()

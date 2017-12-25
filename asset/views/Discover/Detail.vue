@@ -160,7 +160,7 @@
     },
     methods: {
       textToLink (text) {
-        return textToLinkHtml(text)
+        return textToLinkHtml(' ' + text)
       },
       toAvatar (uuid) {
         if (!uuid) {
