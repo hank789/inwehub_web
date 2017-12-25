@@ -178,7 +178,7 @@
           },
           created_at: createdAt
         }
-        
+
         if (parentId) {
           var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
           if (parentIndex > 0) {
@@ -311,7 +311,10 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 12px 0 0px 0;
+    padding: 12px 0 12px 0;
+  }
+  .message_detail li:nth-last-of-type(1){
+    padding: 12px 0 0 0;
   }
 
   .message_b {

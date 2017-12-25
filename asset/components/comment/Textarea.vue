@@ -30,9 +30,15 @@
   import { softInput } from '../../utils/plus'
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { onceGet, onceSave } from '../../utils/cache'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const CommentTextarea = {
     data: () => ({
+      id: currentUser.user_id,
+      user: [],
+      userName: [],
       showTextarea: false,
       description: {},
       cacheKey: '',
@@ -50,15 +56,34 @@
     },
     activated () {
       this.init()
+      this.initData()
     },
     mounted () {
       this.init()
+      this.initData()
       softInput()
+    },
+    refreshPageData () {
+      this.initData()
     },
     created () {
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+      initData () {
+        // 循环插入@人
+        this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
+        for (var num = 0; num < this.user.length; num++) {
+          if (this.userName.indexOf(this.user[num].name) === -1) {
+            this.userName.push(this.user[num].name)
+            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
+              'color': '#42AEF9',
+              'size': 'small',
+              'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
+            })
+          }
+        }
+      },
     // 监听@事件
       addressAppearFound () {
         console.debug(this.$data)
