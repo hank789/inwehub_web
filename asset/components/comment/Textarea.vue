@@ -51,7 +51,6 @@
     methods: {
     // 监听@事件
       addressAppearFound () {
-        this.disableTriggerBlur = true
         this.$router.pushPlus('/selectUser?from=comment')
       },
       onEditorChange (editor) {
@@ -90,9 +89,6 @@
         if (this.showTextarea) {
           console.log('bind comment事件')
           window.document.addEventListener('tap', (e) => {
-            if (this.disableTriggerBlur) {
-              return
-            }
             console.log('document tap 事件被触发')
             this.editorObj.blur()
           }, false)
