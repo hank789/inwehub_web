@@ -388,14 +388,13 @@
               // 删除操作
             } else {
               // 添加操作
-              var trimStr = text.trim()
-              var lastChar = trimStr.charAt(trimStr.length - 1)
+              var lastChar = delta.ops[1] ? delta.ops[1].insert : ''
               console.log('lastChar:' + lastChar)
 
               if (self.isMonitorAddressAppear) {
                 if (lastChar === '@') {
                   console.log('监测到@， 触发addressAppearFound')
-                  self.$emit('addressAppearFound')
+                  self.$emit('addressAppearFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
                 }
               }
@@ -403,7 +402,7 @@
               if (self.isMonitorHashSymbol) {
                 if (lastChar === '#') {
                   console.log('监测到#， 触发hashSymbolFound')
-                  self.$emit('hashSymbolFound')
+                  self.$emit('hashSymbolFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
                 }
               }
