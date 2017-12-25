@@ -8,6 +8,7 @@
           :rows="1"
           :content="description"
           :isMonitorAddressAppear="true"
+          :isMonitorSmallSpan="true"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
@@ -16,6 +17,7 @@
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
+          @addressAppearDelete="addressAppearDelete"
           v-on:keydown.enter="sendMessage"
         ></Jeditor>
 
@@ -70,12 +72,27 @@
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+    // 监听删除事件
+      addressAppearDelete (text) {
+        var name = text.substring(1, text.length - 1)
+//        console.error(name)
+        for (var i in this.user) {
+          if (this.user[i].name === name) {
+            this.noticeUsers.splice(i, 1)
+            this.user.splice(i, 1)
+            this.userName.splice(i, 1)
+          }
+        }
+        localEvent.setLocalItem('discover_selectUser' + this.id, this.user)
+      },
       initData () {
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
+        console.error(this.user)
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
+            this.noticeUser(this.user[num].uuid)
             this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
               'color': '#42AEF9',
               'size': 'small',
@@ -176,7 +193,12 @@
       },
       // 获取删除@用户的id
       delUser (uid) {
-
+        console.error(uid)
+        for (var i in this.noticeUsers) {
+          if (this.noticeUsers[i].uuid == uid) {
+            this.noticeUsers.splice(i, 1)
+          }
+        }
       },
       sendMessage (event) {
         event.preventDefault()
