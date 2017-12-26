@@ -9,9 +9,13 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType">
-          <span  v-if="this.tags.length">已选择</span>
+          <span  v-if="this.tags.length">修改</span>
           <span  v-else>选择</span>
         </button>
+      </div>
+
+      <div class="ask_tags" v-if="tag.length">
+        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
       </div>
 
       <div class="form form-ask">
@@ -94,6 +98,7 @@
     data: () => ({
       id: currentUser.user_id,
       tags: [],
+      tag: [],
       money: 0,
       payItems: [],
       images: [],
@@ -158,12 +163,11 @@
     methods: {
       initData () {
         //      取标签；
-        var tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
+        this.tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
         this.tags = []
-        for (var i in tag) {
-          this.tags = this.tags.concat(tag[i].value)
+        for (var i in this.tag) {
+          this.tags = this.tags.concat(this.tag[i].value)
         }
-
       },
       uploadImage: function () {
         var textarea = window.document.getElementById('discoverTextarea')
@@ -243,6 +247,7 @@
       clearCache () {
         var info = {}
         this.images = []
+        this.tag = []
         this.tags = []
         // 删除标签；
         localEvent.clearLocalItem('interaction_skill_tags' + this.id)
@@ -671,5 +676,24 @@
   }
   .container-images{
     background: #F3F4F5;
+  }
+  /*标签样式*/
+  .ask_tags{
+    width:100%;
+    background: #f3f4f6;
+    overflow: hidden;
+    padding: 0  16px 0px 7px;
+  }
+  .ask_tags p{
+    margin: 0;
+    padding: 0;
+    float: left;
+    background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
   }
 </style>
