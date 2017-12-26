@@ -169,6 +169,7 @@
         })
       },
       goAnswer () {
+        this.editorObj.blur()
         if (this.editorObj.getLength() <= 1) {
           window.mui.toast('请填写回答内容')
           return
