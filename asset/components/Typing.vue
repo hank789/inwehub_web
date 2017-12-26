@@ -57,8 +57,15 @@
           this.typers.splice(index, 1)
         }
       }
+    },
+    watch: {
+      'room_id' (newVal, oldVal) {
+        if (newVal) {
+          this.listen()
+        }
+      }
     }
-  };
+  }
 </script>
 
 
