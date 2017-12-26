@@ -15,8 +15,8 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="{contact_id: this.chatUserId}"
-        :nextOtherData="{contact_id:this.chatUserId}"
+        :prevOtherData="{contact_id: this.chatUserId, room_id: this.chatRoomId}"
+        :nextOtherData="{contact_id:this.chatUserId, room_id: this.chatRoomId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
         <ul class="user" id="myData">
@@ -79,11 +79,10 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
-  import { autoTextArea } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
   import SingleImage from '../../components/image/Image.vue'
   import { textToLinkHtml } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
 
   const Chat = {
     data: () => ({
@@ -92,7 +91,8 @@
       id: getLocalUserInfo().user_id,
       avatar: getLocalUserInfo().avatar_url,
       flag: true,
-      chatUserId: '',
+      chatRoomId: 0,
+      chatUserId: 0,
       maxImageCount: 1,
       images: [],
       name: ''
@@ -127,7 +127,8 @@
 
           postRequest(`im/message-store`, {
             img: newValue[0].base64,
-            contact_id: this.chatUserId
+            contact_id: this.chatUserId,
+            room_id: this.chatRoomId
           }).then(response => {
             var code = response.data.code
 
@@ -207,6 +208,8 @@
       },
       prevSuccessCallback () {
         this.name = this.$refs.RefreshList.getResponse().data.contact.name
+        this.chatUserId = this.$refs.RefreshList.getResponse().data.contact.id
+        this.chatRoomId = this.$refs.RefreshList.getResponse().data.room_id
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
@@ -281,7 +284,8 @@
 
           postRequest(`im/message-store`, {
             text: this.comment,
-            contact_id: this.chatUserId
+            contact_id: this.chatUserId,
+            room_id: this.chatRoomId
           }).then(response => {
             var code = response.data.code
 
