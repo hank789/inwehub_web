@@ -203,7 +203,7 @@
       },
       getDetail () {
         if (this.$route.params.id) {
-          this.chatRoomId = this.$route.params.id
+          this.chatUserId = this.$route.params.id
         }
       },
       prevSuccessCallback () {
