@@ -91,8 +91,8 @@
       id: getLocalUserInfo().user_id,
       avatar: getLocalUserInfo().avatar_url,
       flag: true,
-      chatRoomId: 0,
-      chatUserId: 0,
+      chatRoomId: '',
+      chatUserId: '',
       maxImageCount: 1,
       images: [],
       name: ''
@@ -203,9 +203,8 @@
       },
       getDetail () {
         if (this.$route.params.id) {
-          this.chatUserId = this.$route.params.id
           postRequest(`im/getWhisperRoom`, {
-            contact_id: this.chatUserId
+            contact_id: this.$route.params.id
           }).then(response => {
             var code = response.data.code
 
@@ -213,6 +212,7 @@
               window.mui.alert(response.data.message)
               return
             }
+            this.chatUserId = this.$route.params.id
             this.chatRoomId = response.data.data.room_id
           })
         }
