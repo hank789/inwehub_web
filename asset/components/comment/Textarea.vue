@@ -94,6 +94,16 @@
       initEditorData () {
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
+        // 检测删除的人
+        for (var i in this.user) {
+          for (var j in this.userName) {
+            if (this.user[i].name !== this.userName[j]) {
+              this.userName.splice(j, 1)
+              this.noticeUsers.splice(j, 1)
+            }
+          }
+        }
+
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
