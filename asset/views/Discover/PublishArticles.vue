@@ -108,6 +108,13 @@
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
+            if (code === 6101) {
+              var that = this
+              window.mui.alert('链接已存在,现在跳转原链接位置', '', ['跳转'],function (e) {
+                that.$router.pushPlus(response.data.data.exist_url)
+              })
+              return
+            }
             window.mui.alert(response.data.message)
             return
           } else if (code === 1000) {
