@@ -50,7 +50,8 @@
       noticeUsers: [],
       editorObj: null,
       oldList: [],
-      commentData: [] // 评论时需要的参数
+      commentData: [], // 评论时需要的参数
+      historyDescription: [] // 历史内容
     }),
     props: {},
     components: {
@@ -137,13 +138,28 @@
         window.mui.closeWaitingBlank()
         console.log('comment blur')
         this.showTextarea = false
+        this.historyDescription.push({
+          targetUsername: this.targetUsername,
+          description: this.description
+        })
       },
       onEditorFocus (editor) {
+        this.editorObj.setContents([{insert: ' '}])
+
         if (!this.textarea.replace('<p> </p>', '').trim()) {
           this.editorObj.setContents([{insert: ' '}])
           var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
           this.$refs.myAddEditor.setPlaceholder(targetUsername)
         }
+
+        for (var i in this.historyDescription) {
+          if (this.historyDescription[i].targetUsername === this.targetUsername) {
+            this.editorObj.setContents(this.historyDescription[i].description)
+            this.historyDescription.splice(i, 1)
+            break
+          }
+        }
+
         window.mui.waitingBlank()
         console.log('comment focus')
       },

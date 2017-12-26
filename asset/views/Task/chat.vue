@@ -204,12 +204,21 @@
       getDetail () {
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
+          postRequest(`im/getWhisperRoom`, {
+            contact_id: this.chatUserId
+          }).then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+            this.chatRoomId = response.data.data.room_id
+          })
         }
       },
       prevSuccessCallback () {
         this.name = this.$refs.RefreshList.getResponse().data.contact.name
-        this.chatUserId = this.$refs.RefreshList.getResponse().data.contact.id
-        this.chatRoomId = this.$refs.RefreshList.getResponse().data.room_id
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
