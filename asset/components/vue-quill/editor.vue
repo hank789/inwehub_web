@@ -23,7 +23,8 @@
           toolbar: [
             ['bold', 'italic', {'color': []}, {'align': []}, 'image']
           ]
-        }
+        },
+        smallSpanArr: []
       }
     },
     props: {
@@ -332,10 +333,12 @@
             // 监听 .ql-size-small
             if (self.isMonitorSmallSpan) {
               var linkNodes = document.querySelectorAll('.ql-size-small')
+              var smallSpanArr = []
               var isStop = false
               window.mui.each(linkNodes, (index, item) => {
                 if (isStop) return
                 var nowValue = item.innerText
+                smallSpanArr.push(nowValue)
                 if (item.hasAttribute('ql-value')) {
                   var oldValue = item.getAttribute('ql-value')
                   if (oldValue !== nowValue) {
@@ -387,6 +390,12 @@
                   item.classList.add('appUrl')
                 }
               })
+              if (JSON.stringify(smallSpanArr) !== JSON.stringify(this.smallSpanArr)) {
+                this.smallSpanArr = smallSpanArr
+                console.log('event:smallSpanArrChange fire, data:' + JSON.stringify(smallSpanArr))
+                self.$emit('smallSpanArrChange', smallSpanArr)
+              }
+
               if (isStop) return
             }
 
