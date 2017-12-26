@@ -74,11 +74,9 @@
     },
     methods: {
       smallSpanArrChange (arr) {
-        console.error(arr)
         for (var i in arr) {
           var val = arr[i].replace('@', '').trim()
           if (this.userName.indexOf(val) === -1) {
-            console.error(arr[i])
           }
         }
       },
@@ -102,7 +100,6 @@
         localEvent.setLocalItem('comment_selectUser' + this.id, this.user)
       },
       initEditorData () {
-        console.error('initEditorData:')
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
         // 检测删除的人
@@ -247,7 +244,6 @@
       },
       // 获取删除@用户的id
       delUser (uid) {
-        console.error(uid)
         for (var i in this.noticeUsers) {
           if (this.noticeUsers[i].uuid == uid) {
             this.noticeUsers.splice(i, 1)
