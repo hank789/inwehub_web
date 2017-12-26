@@ -51,7 +51,8 @@
       editorObj: null,
       oldList: [],
       commentData: [], // 评论时需要的参数
-      historyDescription: [] // 历史内容
+      historyDescription: [], // 历史内容
+      focusCallback: null  // 获取焦点时的回调
     }),
     props: {},
     components: {
@@ -120,15 +121,18 @@
         this.$router.pushPlus('/selectUser?from=comment')
       },
       init () {
+        console.log('init() fired')
         this.oldList = this.commentData.commentList
         var result = onceGet(this, this.cacheKey)
         if (result) {
           setTimeout(() => {
             this.commentData.commentList = this.oldList
-            this.$refs.myAddEditor.resetContent(this.description)
+            this.focusCallback = () => {
+              this.initEditorData()
+            }
+            this.editorObj.setContents(this.description)
             this.editorObj.focus()
-            this.initEditorData()
-          }, 500)
+          }, 300)
         }
       },
       onEditorChange (editor) {
@@ -143,21 +147,24 @@
           description: this.description
         })
       },
-      onEditorFocus (editor) {
-        this.editorObj.setContents([{insert: ' '}])
-
-        if (!this.textarea.replace('<p> </p>', '').trim()) {
-          this.editorObj.setContents([{insert: ' '}])
-          var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
-          this.$refs.myAddEditor.setPlaceholder(targetUsername)
-        }
-
+      getHistoryDescription () {
         for (var i in this.historyDescription) {
           if (this.historyDescription[i].targetUsername === this.targetUsername) {
             this.editorObj.setContents(this.historyDescription[i].description)
             this.historyDescription.splice(i, 1)
             break
           }
+        }
+      },
+      onEditorFocus (editor) {
+        if (!this.textarea.replace('<p> </p>', '').trim()) {
+          this.editorObj.setContents([{insert: ' '}])
+          var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
+          this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        }
+
+        if (this.focusCallback) {
+          this.focusCallback()
         }
 
         window.mui.waitingBlank()
@@ -180,6 +187,10 @@
 
         var textarea = this.textarea
         textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
+
+        this.editorObj.setContents([{insert: ' '}])
+
+        this.getHistoryDescription()
 
         console.log('comment-textarea:' + textarea)
         if (!textarea.trim()) {
