@@ -13,6 +13,7 @@
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
           @ready="onEditorReady($event)"
+          @smallSpanArrChange="smallSpanArrChange"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
@@ -72,6 +73,15 @@
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+      smallSpanArrChange (arr) {
+        console.error(arr)
+        for (var i in arr) {
+          var val = arr[i].replace('@', '').trim()
+          if (this.userName.indexOf(val) === -1) {
+            console.error(arr[i])
+          }
+        }
+      },
      // 重置数据
       resetData () {
         this.noticeUsers = []
@@ -92,18 +102,21 @@
         localEvent.setLocalItem('comment_selectUser' + this.id, this.user)
       },
       initEditorData () {
+        console.error('initEditorData:')
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
         // 检测删除的人
-        for (var i in this.user) {
-          for (var j in this.userName) {
-            if (this.user[i].name !== this.userName[j]) {
-              this.userName.splice(j, 1)
-              this.noticeUsers.splice(j, 1)
-            }
-          }
-        }
-
+//        for (var i = 0; i < this.user.length; i++) {
+//          for (var j = 0; j < this.userName.length; j++) {
+//            if (this.user[i].name !== this.userName[j]) {
+//              this.userName.splice(j, 1)
+//              this.noticeUsers.splice(j, 1)
+//              break
+//            }
+//          }
+//        }
+//        this.userName = []
+//        this.noticeUsers = []
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
