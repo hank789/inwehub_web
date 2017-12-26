@@ -3,8 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title" v-if="chatUserId == 31">客服小哈</h1>
-      <h1 class="mui-title" v-else>{{name}}</h1>
+      <h1 class="mui-title">{{name}}<typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing></h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -22,7 +21,7 @@
         <ul class="user" id="myData">
           <template v-for="(item, index) in list">
             <!--用户 && chatUserId == item.user_id"-->
-            <li class="consumer" v-if="id != item.user_id && chatUserId == item.user_id">
+            <li class="consumer" v-if="currentUser.user_id != item.user_id && chatUserId == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
@@ -30,20 +29,20 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
             </li>
             <!--自己  -->
-            <li class="Customerservice" v-else-if="id == item.user_id">
+            <li class="Customerservice" v-else-if="currentUser.user_id == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
-                <img :src="avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
                    <!--{{item.data.text}}-->
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="id + ''"></SingleImage>
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
 
@@ -55,7 +54,7 @@
 
     <!--发送消息框-->
     <div class="message" id="message">
-      <input type="text" v-model.trim="comment" @keyup="show($event)"  @focus="focus" @blur="blur" id="bounce"/>
+      <input type="text" v-model.trim="comment" v-on:keydown.enter="message($event)" @keyup="whisperFinishedTyping" @keydown="whisperTyping"  @focus="focus" @blur="blur" id="bounce"/>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
@@ -83,18 +82,20 @@
   import uploadImage from '../../components/uploadImage'
   import SingleImage from '../../components/image/Image.vue'
   import { textToLinkHtml } from '../../utils/dom'
+  import Typing from '../../components/Typing.vue'
+  import { searchText } from '../../utils/search'
 
   const Chat = {
     data: () => ({
       list: [],
       comment: '',
-      id: getLocalUserInfo().user_id,
-      avatar: getLocalUserInfo().avatar_url,
+      currentUser: getLocalUserInfo(),
       flag: true,
       chatRoomId: '',
       chatUserId: '',
       maxImageCount: 1,
       images: [],
+      isTyping: false,
       name: ''
     }),
     created () {
@@ -105,7 +106,8 @@
     components: {
       RefreshList,
       uploadImage,
-      SingleImage
+      SingleImage,
+      Typing
     },
     watch: {
       '$route': 'refreshPageData',
@@ -118,8 +120,8 @@
               img: newValue[0].base64
             },
             id: null,
-            user_id: this.id,
-            avatar: this.avatar
+            user_id: this.currentUser.user_id,
+            avatar: this.currentUser.avatar_url_url
           }
           this.list.push(item)
 
@@ -148,6 +150,36 @@
 //      转换成html
       textToLink (text) {
         return textToLinkHtml(' ' + text)
+      },
+      /**
+       * Broadcast "typing".
+       *
+       * @return void
+       */
+      whisperTyping () {
+        console.log('chat.room whisperTyping() fired roomId:' + this.chatRoomId)
+        var roomId = this.chatRoomId
+        if (this.isTyping) return
+        console.log('chat.room roomId:' + roomId)
+        window.Echo.private('chat.room.' + roomId).whisper('typing', {
+          username: this.currentUser.name
+        })
+        this.isTyping = true
+      },
+      /**
+       * Broadcast "finished-typing".
+       *
+       * @return void
+       */
+      whisperFinishedTyping () {
+        var roomId = this.chatRoomId
+        searchText('ok', () => {
+          console.log('chat.room roomId:' + roomId)
+          window.Echo.private('chat.room.' + roomId).whisper('finished-typing', {
+            username: this.currentUser.name
+          })
+          this.isTyping = false
+        })
       },
       showTime (prevtime, time) {
         if (prevtime) {
@@ -214,6 +246,7 @@
               return
             }
             this.chatRoomId = response.data.data.room_id
+            window.Echo.private('chat.room.' + this.chatRoomId)
           })
         }
       },
@@ -282,7 +315,7 @@
               text: this.comment
             },
             id: 2,
-            user_id: this.id
+            user_id: this.currentUser.user_id
           }
 
           this.list.push(item)

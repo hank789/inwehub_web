@@ -1,7 +1,7 @@
 <template>
     <span class="typing" :class="{ 'display-hidden': !typers.length }">
         <i class="text" v-if="typers.length === 1">
-            {{ typers[0] }} 正在输入
+             正在输入
         </i>
 
         <i class="text" v-if="typers.length === 2">
@@ -18,9 +18,11 @@
 <script>
   export default {
     components: {},
+    props: {
+      room_id: ''
+    },
     data () {
       return {
-        EchoChannelAddress: 'chat.' + this.$route.params.id,
         typers: []
       }
     },
@@ -33,7 +35,7 @@
     methods: {
       listen () {
         // we can't do presence channel or/and listen for private channels, if the user is a guest
-        window.Echo.private(this.EchoChannelAddress)
+        window.Echo.private('chat.room.' + this.room_id)
           .listenForWhisper('typing', (user) => {
             this.startedTyping(user.username)
           }).listenForWhisper('finished-typing', (user) => {
@@ -55,8 +57,15 @@
           this.typers.splice(index, 1)
         }
       }
+    },
+    watch: {
+      'room_id' (newVal, oldVal) {
+        if (newVal) {
+          this.listen()
+        }
+      }
     }
-  };
+  }
 </script>
 
 
@@ -73,6 +82,10 @@
     100% {
       opacity: .2;
     }
+  }
+
+  .display-hidden {
+    display: none;
   }
 
   .typing {
