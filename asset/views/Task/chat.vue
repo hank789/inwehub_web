@@ -54,7 +54,7 @@
 
     <!--发送消息框-->
     <div class="message" id="message">
-      <input type="text" v-model.trim="comment" v-on:keydown.enter="message($event)" @keyup="whisperFinishedTyping" @keydown="whisperTyping"  @focus="focus" @blur="blur" id="bounce"/>
+      <input type="text" v-model.trim="comment" v-on:keydown.enter="message($event)" @keyup="whisperFinishedTyping(chatRoomId)" @keydown="whisperTyping(chatRoomId)"  @focus="focus" @blur="blur" id="bounce"/>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
@@ -156,9 +156,9 @@
        *
        * @return void
        */
-      whisperTyping () {
+      whisperTyping (roomId) {
         if (this.isTyping) return
-        window.Echo.private('chat.room.' + this.chatRoomId).whisper('typing', {
+        window.Echo.private('chat.room.' + roomId).whisper('typing', {
           username: this.currentUser.name
         })
         this.isTyping = true
@@ -168,9 +168,9 @@
        *
        * @return void
        */
-      whisperFinishedTyping () {
+      whisperFinishedTyping (roomId) {
         searchText('ok', () => {
-          window.Echo.private('chat.room.' + this.chatRoomId).whisper('finished-typing', {
+          window.Echo.private('chat.room.' + roomId).whisper('finished-typing', {
             username: this.currentUser.name
           })
           this.isTyping = false
