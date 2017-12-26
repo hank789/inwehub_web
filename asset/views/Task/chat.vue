@@ -15,8 +15,8 @@
         :pageMode="true"
         :downLoadMoreMode="true"
         :isShowUpToRefreshDescription="false"
-        :prevOtherData="{contact_id: this.chatUserId, room_id: this.chatRoomId}"
-        :nextOtherData="{contact_id:this.chatUserId, room_id: this.chatRoomId}"
+        :prevOtherData="{room_id: this.chatRoomId}"
+        :nextOtherData="{room_id: this.chatRoomId}"
         :prevSuccessCallback="prevSuccessCallback"
         class="chatListWrapper">
         <ul class="user" id="myData">
