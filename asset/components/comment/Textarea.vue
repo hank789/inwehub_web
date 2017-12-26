@@ -58,24 +58,28 @@
     },
     activated () {
       this.init()
-      this.initData()
     },
     mounted () {
       this.init()
-      this.initData()
       softInput()
     },
     refreshPageData () {
-      this.initData()
+      this.init()
     },
     created () {
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+     // 重置数据
+      resetData () {
+        this.noticeUsers = []
+        this.user = []
+        this.userName = []
+        localEvent.clearLocalItem('comment_selectUser' + this.id)
+      },
     // 监听删除事件
       addressAppearDelete (text) {
         var name = text.substring(1, text.length - 1)
-//        console.error(name)
         for (var i in this.user) {
           if (this.user[i].name === name) {
             this.noticeUsers.splice(i, 1)
@@ -83,16 +87,15 @@
             this.userName.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_selectUser' + this.id, this.user)
+        localEvent.setLocalItem('comment_selectUser' + this.id, this.user)
       },
-      initData () {
+      initEditorData () {
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
-        console.error(this.user)
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
-            this.noticeUser(this.user[num].uuid)
+            this.noticeUser(this.user[num].id)
             this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
               'color': '#42AEF9',
               'size': 'small',
@@ -123,6 +126,7 @@
             this.commentData.commentList = this.oldList
             this.$refs.myAddEditor.resetContent(this.description)
             this.editorObj.focus()
+            this.initEditorData()
           }, 500)
         }
       },
@@ -188,8 +192,8 @@
         this.showTextarea = false
       },
       // 获取添加@用户的id
-      noticeUser (uid) {
-        this.noticeUsers.push(uid)
+      noticeUser (id) {
+        this.noticeUsers.push(id)
       },
       // 获取删除@用户的id
       delUser (uid) {
@@ -217,7 +221,7 @@
           commentData: this.commentData
         }
         this.$emit('sendMessage', data)
-
+        this.resetData()
         this.editorObj.blur()
       }
     }
