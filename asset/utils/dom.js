@@ -50,6 +50,9 @@ function textToLinkHtml (text) {
 
   re = /<p>(https?:\/\/[^\s<]+)/g
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  re = /^(https?:\/\/[^\s<]+)/
+  text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
   return text
 }
 
