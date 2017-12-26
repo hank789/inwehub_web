@@ -112,8 +112,8 @@
 //            }
 //          }
 //        }
-//        this.userName = []
-//        this.noticeUsers = []
+        this.userName = []
+        this.noticeUsers = []
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
@@ -148,6 +148,8 @@
           setTimeout(() => {
             this.commentData.commentList = this.oldList
             this.focusCallback = () => {
+              console.log('initEditorData() fired')
+              this.focusCallback = null
               this.initEditorData()
             }
             this.editorObj.setContents(this.description)
