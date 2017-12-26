@@ -37,7 +37,7 @@
             <li class="Customerservice" v-else-if="currentUser.user_id == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
-                <img :src="currentUser.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
                    <!--{{item.data.text}}-->
                 </span>
@@ -121,7 +121,7 @@
             },
             id: null,
             user_id: this.currentUser.user_id,
-            avatar: this.currentUser.avatar_url
+            avatar: this.currentUser.avatar_url_url
           }
           this.list.push(item)
 
