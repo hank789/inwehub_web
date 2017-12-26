@@ -54,7 +54,7 @@
 
     <!--发送消息框-->
     <div class="message" id="message">
-      <input type="text" v-model.trim="comment" v-on:keydown.enter="message($event)" @keyup="whisperFinishedTyping(chatRoomId)" @keydown="whisperTyping(chatRoomId)"  @focus="focus" @blur="blur" id="bounce"/>
+      <input type="text" v-model.trim="comment" v-on:keydown.enter="message($event)" @keyup="whisperFinishedTyping" @keydown="whisperTyping"  @focus="focus" @blur="blur" id="bounce"/>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="uploadImage()">
         <use xlink:href="#icon-plus"></use>
       </svg>
@@ -156,8 +156,11 @@
        *
        * @return void
        */
-      whisperTyping (roomId) {
+      whisperTyping () {
+        console.log('chat.room whisperTyping() fired roomId:' + this.chatRoomId)
+        var roomId = this.chatRoomId
         if (this.isTyping) return
+        console.log('chat.room roomId:' + roomId)
         window.Echo.private('chat.room.' + roomId).whisper('typing', {
           username: this.currentUser.name
         })
@@ -168,8 +171,10 @@
        *
        * @return void
        */
-      whisperFinishedTyping (roomId) {
+      whisperFinishedTyping () {
+        var roomId = this.chatRoomId
         searchText('ok', () => {
+          console.log('chat.room roomId:' + roomId)
           window.Echo.private('chat.room.' + roomId).whisper('finished-typing', {
             username: this.currentUser.name
           })
