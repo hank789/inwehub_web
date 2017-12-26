@@ -8,7 +8,7 @@
     </header>
     <div class="mui-content" id='contentwrapper'>
 
-      <RefreshList ref="RefreshList"
+      <RefreshList v-if="this.chatRoomId" ref="RefreshList"
         v-model="list"
         :api="'im/messages'"
         :autoShowEmpty="false"
