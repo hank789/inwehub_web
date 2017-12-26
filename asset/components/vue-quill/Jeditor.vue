@@ -102,6 +102,9 @@
       quillEditor
     },
     methods: {
+      delSmallSpan (nowValue) {
+        this.$refs.myTextEditor.delSmallSpan(nowValue)
+      },
       setPlaceholder (placeholder) {
         this.$refs.myTextEditor.setPlaceholder(placeholder)
       },

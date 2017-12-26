@@ -73,6 +73,12 @@
       this.quill = null
     },
     methods: {
+      delSmallSpan (nowValue) {
+        var html = this.$refs.editor.children[0].innerHTML
+        var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
+        var newHtml = html.replace(reg, '')
+        this.resetHtml(newHtml)
+      },
       setPlaceholder (placeholder) {
         this.quill.root.setAttribute('data-placeholder', placeholder)
         this.quill.root.classList.add('ql-blank')
@@ -336,7 +342,7 @@
                     if (oldValue.length > nowValue.length) {
                       // 删除操作
                       console.log(oldValue + 'change')
-                      var reg = new RegExp('<a\\s([^<]*?)' + nowValue + '</a>')
+                      var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
                       var newHtml = html.replace(reg, '')
                       console.log('reg:' + reg.toString())
                       console.log('旧的html:' + html)
