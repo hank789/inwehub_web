@@ -21,7 +21,7 @@
         <ul class="user" id="myData">
           <template v-for="(item, index) in list">
             <!--用户 && chatUserId == item.user_id"-->
-            <li class="consumer" v-if="currentUser.id != item.user_id && chatUserId == item.user_id">
+            <li class="consumer" v-if="currentUser.user_id != item.user_id && chatUserId == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
@@ -29,12 +29,12 @@
                   {{item.data.text}}
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.id + ''"></SingleImage>
+                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
             </li>
             <!--自己  -->
-            <li class="Customerservice" v-else-if="currentUser.id == item.user_id">
+            <li class="Customerservice" v-else-if="currentUser.user_id == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="currentUser.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
@@ -42,7 +42,7 @@
                    <!--{{item.data.text}}-->
                 </span>
                 <span v-if="item.data.img" class="chatImg">
-                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.id + ''"></SingleImage>
+                  <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
 
@@ -120,7 +120,7 @@
               img: newValue[0].base64
             },
             id: null,
-            user_id: this.currentUser.id,
+            user_id: this.currentUser.user_id,
             avatar: this.currentUser.avatar_url
           }
           this.list.push(item)
@@ -310,7 +310,7 @@
               text: this.comment
             },
             id: 2,
-            user_id: this.currentUser.id
+            user_id: this.currentUser.user_id
           }
 
           this.list.push(item)
