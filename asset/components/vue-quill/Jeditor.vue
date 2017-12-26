@@ -22,6 +22,7 @@
                     @hashSymbolFound="hashSymbolFound"
                     @addressAppearDelete="addressAppearDelete"
                     @hashSymbolDelete="hashSymbolDelete"
+                    @smallSpanArrChange="smallSpanArrChange"
       >
       </quill-editor>
 
@@ -102,6 +103,9 @@
       quillEditor
     },
     methods: {
+      smallSpanArrChange (data) {
+        this.$emit('smallSpanArrChange', data)
+      },
       delSmallSpan (nowValue) {
         this.$refs.myTextEditor.delSmallSpan(nowValue)
       },
