@@ -203,6 +203,7 @@
       },
       getDetail () {
         if (this.$route.params.id) {
+          this.chatUserId = this.$route.params.id
           postRequest(`im/getWhisperRoom`, {
             contact_id: this.$route.params.id
           }).then(response => {
@@ -212,7 +213,6 @@
               window.mui.alert(response.data.message)
               return
             }
-            this.chatUserId = this.$route.params.id
             this.chatRoomId = response.data.data.room_id
           })
         }
