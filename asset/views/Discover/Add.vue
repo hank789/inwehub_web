@@ -42,15 +42,21 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="toUser">
-          <use xlink:href="#icon-icon-test1"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
-          <use xlink:href="#icon-icon-test"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
-          <use xlink:href="#icon-lianjie"></use>
-        </svg>
+        <span @tap.stop.prevent="toUser">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test1"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="totags">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="jumpToLinkMode()">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-lianjie"></use>
+          </svg>
+        </span>
         <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei1"></use>
