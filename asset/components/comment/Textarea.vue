@@ -75,17 +75,11 @@
     },
     methods: {
       smallSpanArrChange (arr) {
+        this.currentUser = []
         for (var i in arr) {
           var val = arr[i].replace('@', '').trim()
           if (this.currentUser.indexOf(val) === -1) {
             this.currentUser.push(val)
-          }
-        }
-
-        for (var n in this.currentUser) {
-          if (this.userName.indexOf(this.currentUser[n]) === -1) {
-            console.error(this.currentUser[n])
-            this.$refs.myAddEditor.delSmallSpan('@' + this.currentUser[n] + ' ')
           }
         }
       },
@@ -125,6 +119,12 @@
                 'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
               })
             }
+          }
+        }
+       //   删除多余的html
+        for (var n in this.currentUser) {
+          if (this.userName.indexOf(this.currentUser[n]) === -1) {
+            this.$refs.myAddEditor.delSmallSpan('@' + this.currentUser[n] + ' ')
           }
         }
       },
@@ -167,6 +167,13 @@
         window.mui.closeWaitingBlank()
         console.log('comment blur')
         this.showTextarea = false
+
+        for (var i in this.historyDescription) {
+          if (this.historyDescription[i].targetUsername === this.targetUsername) {
+            this.historyDescription.splice(i, 1)
+          }
+        }
+
         this.historyDescription.push({
           targetUsername: this.targetUsername,
           description: this.description
