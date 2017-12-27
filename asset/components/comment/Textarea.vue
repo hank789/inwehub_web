@@ -42,6 +42,7 @@
       id: currentUser.user_id,
       user: [],
       userName: [],
+      currentUser: [],
       showTextarea: false,
       description: {},
       cacheKey: '',
@@ -76,7 +77,15 @@
       smallSpanArrChange (arr) {
         for (var i in arr) {
           var val = arr[i].replace('@', '').trim()
-          if (this.userName.indexOf(val) === -1) {
+          if (this.currentUser.indexOf(val) === -1) {
+            this.currentUser.push(val)
+          }
+        }
+
+        for (var n in this.currentUser) {
+          if (this.userName.indexOf(this.currentUser[n]) === -1) {
+            console.error(this.currentUser[n])
+            this.$refs.myAddEditor.delSmallSpan('@' + this.currentUser[n] + ' ')
           }
         }
       },
@@ -103,26 +112,19 @@
         // 循环插入@人
         this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
         // 检测删除的人
-//        for (var i = 0; i < this.user.length; i++) {
-//          for (var j = 0; j < this.userName.length; j++) {
-//            if (this.user[i].name !== this.userName[j]) {
-//              this.userName.splice(j, 1)
-//              this.noticeUsers.splice(j, 1)
-//              break
-//            }
-//          }
-//        }
         this.userName = []
         this.noticeUsers = []
         for (var num = 0; num < this.user.length; num++) {
           if (this.userName.indexOf(this.user[num].name) === -1) {
             this.userName.push(this.user[num].name)
             this.noticeUser(this.user[num].id)
-            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-              'color': '#42AEF9',
-              'size': 'small',
-              'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
-            })
+            if (this.currentUser.indexOf(this.user[num].name) === -1) {
+              this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
+              })
+            }
           }
         }
       },
@@ -135,7 +137,8 @@
           cacheKey: this.cacheKey,
           targetUsername: this.targetUsername,
           noticeUsers: this.noticeUsers,
-          commentData: this.commentData
+          commentData: this.commentData,
+          currentUser: this.currentUser
         })
         window.mui.closeWaitingBlank()
         this.$router.pushPlus('/selectUser?from=comment')
