@@ -122,17 +122,17 @@
           }
         }
         var deleteUser = []
-       //   删除多余的html
+       // 删除多余的html
         for (var n in this.currentUser) {
           if (this.userName.indexOf(this.currentUser[n]) === -1) {
             deleteUser.push('@' + this.currentUser[n] + ' ')
           }
         }
         console.log(deleteUser)
-//        this.$refs.myAddEditor.delSmallSpan(deleteUser)
-
+        this.$refs.myAddEditor.delSmallSpan(deleteUser)
+        deleteUser = []
       },
-    // 监听@事件
+      //  监听@事件
       addressAppearFound () {
         console.debug(this.$data)
         onceSave(this, this.cacheKey, {
