@@ -121,12 +121,16 @@
             }
           }
         }
+        var deleteUser = []
        //   删除多余的html
         for (var n in this.currentUser) {
           if (this.userName.indexOf(this.currentUser[n]) === -1) {
-            this.$refs.myAddEditor.delSmallSpan('@' + this.currentUser[n] + ' ')
+            deleteUser.push('@' + this.currentUser[n] + ' ')
           }
         }
+        console.log(deleteUser)
+//        this.$refs.myAddEditor.delSmallSpan(deleteUser)
+
       },
     // 监听@事件
       addressAppearFound () {
