@@ -17,7 +17,7 @@
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <li v-for="item in list" @tap.stop.prevent="goUrl(item.data.url)">
-              <img src="../../statics/images/inform1.png"/>
+              <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span class="mui-ellipsis">{{item.data.title}}</span>
@@ -30,7 +30,6 @@
         </div>
       </div>
     </div>
-    <!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
   </div>
 </template>
 
@@ -217,6 +216,7 @@
     width: 12.5%;
     height: 12.5%;
     float: left;
+    border-radius: 10px;
   }
 
   ul li p {
