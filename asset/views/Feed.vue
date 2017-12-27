@@ -183,6 +183,9 @@
     },
     computed: {},
     methods: {
+      refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
+      },
       sendMessage (message) {
         var commentTarget = message.commentData
 

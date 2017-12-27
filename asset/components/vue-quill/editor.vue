@@ -75,6 +75,10 @@
     },
     methods: {
       delSmallSpan (nowValues) {
+        if (nowValues.length === 0) {
+          return
+        }
+        console.log('delSmallSpans data:' + JSON.stringify(nowValues))
         var html = this.$refs.editor.children[0].innerHTML
         for (var i in nowValues) {
           var nowValue = nowValues[i]
