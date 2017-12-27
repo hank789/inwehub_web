@@ -67,13 +67,13 @@
       this.init()
       softInput()
     },
-    refreshPageData () {
-      this.init()
-    },
     created () {
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+      refreshPageData () {
+        this.init()
+      },
       smallSpanArrChange (arr) {
         this.currentUser = []
         for (var i in arr) {
