@@ -13,7 +13,7 @@
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
-    <div class="content">
+    <div class="content text-content">
       {{ ask.description }}
 
     </div>
