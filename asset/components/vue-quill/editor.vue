@@ -74,11 +74,14 @@
       this.quill = null
     },
     methods: {
-      delSmallSpan (nowValue) {
+      delSmallSpan (nowValues) {
         var html = this.$refs.editor.children[0].innerHTML
-        var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
-        var newHtml = html.replace(reg, '')
-        this.resetHtml(newHtml)
+        for (var i in nowValues) {
+          var nowValue = nowValues[i]
+          var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
+          html = html.replace(reg, '')
+        }
+        this.resetHtml(html)
       },
       setPlaceholder (placeholder) {
         this.quill.root.setAttribute('data-placeholder', placeholder)
