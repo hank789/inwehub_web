@@ -172,7 +172,7 @@ function openVendorUrl (containerDiv) {
         e.stopPropagation()
         if (window.plus) {
           console.log('plus 打开')
-          window.plus.runtime.openURL(href)
+          router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
         } else {
           console.log('window.open 打开')
           window.open(href)

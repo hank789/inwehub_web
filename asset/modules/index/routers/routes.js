@@ -1765,6 +1765,14 @@ const routes = [
     component: require('../../../views/Webview/notice.vue')
   },
   {
+    path: '/webview/vendor/:url',
+    name: 'webview-vendor',
+    meta: {
+      title: 'vendor'
+    },
+    component: require('../../../views/Webview/Vendor.vue')
+  },
+  {
     path: '/webview/article',
     name: 'webview-article',
     meta: {
