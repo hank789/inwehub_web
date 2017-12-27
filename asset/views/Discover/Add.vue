@@ -42,16 +42,22 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser?from=discover')">
-          <use xlink:href="#icon-icon-test1"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
-          <use xlink:href="#icon-icon-test"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
-          <use xlink:href="#icon-lianjie"></use>
-        </svg>
-        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="$router.pushPlus('/nearby?from=discover')">
+        <span @tap.stop.prevent="toUser">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test1"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="totags">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="jumpToLinkMode()">
+          <svg class="icon menu" aria-hidden="true" >
+            <use xlink:href="#icon-lianjie"></use>
+          </svg>
+        </span>
+        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
@@ -76,6 +82,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
+  import { onceSave, onceGet } from '../../utils/cache'
 
   export default {
     data () {
@@ -168,6 +175,15 @@
       totags () {
         localEvent.setLocalItem('discover_description' + this.id, this.description)
         this.$router.push('/selecttags?from=discover')
+      },
+      toUser () {
+        onceSave(this, null, {
+
+        })
+        this.$router.pushPlus('/selectUser?from=discover')
+      },
+      toAddress () {
+        this.$router.pushPlus('/nearby?from=discover')
       },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
