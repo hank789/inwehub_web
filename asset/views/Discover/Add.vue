@@ -330,6 +330,7 @@
       },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
+        this.resetData()
       },
       uploadImage: function () {
         this.$refs.myAddEditor.blur()
