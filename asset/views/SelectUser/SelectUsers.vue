@@ -51,15 +51,16 @@
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
 
-              <div class="select active" v-if="Selected[key + '_' + index]" @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-check-circle"></use>
-                </svg>
-
+              <div class="selectUser" v-if="Selected[key + '_' + index]" @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
+                <div class="select active" >
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-check-circle"></use>
+                  </svg>
+                </div>
               </div>
-              <div class="select" v-else @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
+              <div class="selectUser" v-else @tap.stop.prevent="collectProfessor(key + '_' + index, item)">
+                <div class="select" ></div>
               </div>
-
             </li>
           </ul>
         </div>
@@ -234,18 +235,26 @@
   .textBody {
     width: 50%;
   }
-
-  .select{
+  .selectUser{
     float: right;
+    position: relative;
+    right: 5px;
+    width: 23px;
+    height: 50px;
+  }
+  .select{
     width:23px;
     height:23px;
     border-radius: 50%;
     background: #FFFFFF;
     color: #03aef9;
     border: 1px solid #dcdcdc;
-    position: relative;
-    top: 10px;
-    margin-right: 5px;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    margin: auto;
   }
   .select.active{
     background:#FFFFFF;
