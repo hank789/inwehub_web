@@ -61,7 +61,11 @@
       this.init()
     },
     mounted () {
-      localEvent.clearLocalItem('comment_selectUser' + this.id)
+      var referer = localEvent.getLocalItem('referer')
+      if (!(referer && referer.path === '/selectUser')) {
+        localEvent.clearLocalItem('comment_selectUser' + this.id)
+      }
+
       this.init()
       softInput()
     },
