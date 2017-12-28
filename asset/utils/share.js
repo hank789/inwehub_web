@@ -20,6 +20,7 @@
  **/
 
 import { postRequest } from './request'
+import { stripTags } from './dom'
 import wx from 'weixin-js-sdk'
 
 var Share = () => {
@@ -46,9 +47,9 @@ var Share = () => {
         if (wechat.nativeClient) {
           self.context.sendHaoyou = () => {
             var data = {
-              content: self.data.content,
+              content: stripTags(self.data.content),
               href: self.data.link,
-              title: self.data.title,
+              title: stripTags(self.data.title),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneSession'}
@@ -65,9 +66,9 @@ var Share = () => {
 
           self.context.sendPengYouQuan = () => {
             wechat.send({
-              content: self.data.content,
+              content: stripTags(self.data.content),
               href: self.data.link,
-              title: pengYouQuanTitle.substr(0, 150),
+              title: stripTags(pengYouQuanTitle.substr(0, 150)),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneTimeline'}
@@ -108,8 +109,8 @@ var Share = () => {
 
       wx.ready(() => {
         wx.onMenuShareAppMessage({
-          title: self.data.title, // 分享标题
-          desc: self.data.content, // 分享描述
+          title: stripTags(self.data.title), // 分享标题
+          desc: stripTags(self.data.content), // 分享描述
           link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: self.data.imageUrl, // 分享图标
           type: self.data.type ? self.data.type : 'link', // 分享类型,music、video或link，不填默认为link
@@ -125,7 +126,7 @@ var Share = () => {
         })
 
         wx.onMenuShareTimeline({
-          title: self.data.title, // 分享标题
+          title: stripTags(self.data.title), // 分享标题
           link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: self.data.imageUrl, // 分享图标
           success: () => {

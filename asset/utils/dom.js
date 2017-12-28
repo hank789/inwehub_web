@@ -56,9 +56,14 @@ function textToLinkHtml (text) {
   return text
 }
 
+function stripTags (text) {
+  return text.replace(/<[^>]+>/g, '')
+}
+
 export {
   queryParent,
   textToLink,
-  textToLinkHtml
+  textToLinkHtml,
+  stripTags
 }
 
