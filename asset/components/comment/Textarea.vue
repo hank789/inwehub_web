@@ -104,7 +104,7 @@
           this.noticeUser(users[i].id)
           var data = {
             name: '@' + users[i].name + ' ',
-            id: users[i].id
+            id: users[i].uuid
           }
           spanUserNameAndIds.push(data)
           spanUserNames.push(data.name)
