@@ -87,6 +87,8 @@
       :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
+      :targetId="id"
+      :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>

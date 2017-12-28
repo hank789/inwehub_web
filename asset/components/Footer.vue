@@ -64,8 +64,15 @@
 
     </nav>
 
-    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :shareName="shareoption.shareName" :link="shareoption.shareUrl"
-           :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg"
+    <Share ref="FooterShareBtn"
+           :title="shareoption.shareTitle"
+           :shareName="shareoption.shareName"
+           :link="shareoption.shareUrl"
+           :content="shareoption.shareContent"
+           :imageUrl="shareoption.shareImg"
+           :thumbUrl="shareoption.shareImg"
+           :targetId="shareoption.targetId"
+           :targetType="shareoption.targetType"
            :hideShareBtn="true"></Share>
   </div>
 </template>
@@ -95,6 +102,8 @@
           shareContent: '',
           shareTitle: '',
           shareName: '',
+          targetType: '',
+          targetId: '',
           id: ''
         }
       }

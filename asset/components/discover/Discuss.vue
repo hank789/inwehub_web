@@ -197,6 +197,9 @@
       loadMore () {
         this.busy = true
         console.log('loadMore')
+        if (JSON.stringify(this.listParams) === '{}') {
+          return
+        }
         this.getList()
       },
       getList () {

@@ -130,6 +130,24 @@
               if (currentUser.user_id) {
                 saveLocationInfo()
               }
+              if (window.mui.os.ios) {
+                var notifitionConfig = window.plus.navigator.checkPermission('NOTIFITION')
+                switch (notifitionConfig) {
+                  case 'authorized':
+                    console.log('已开启推送权限')
+                    break
+                  default:
+                    console.log(notifitionConfig)
+                    var btnArray = ['下次再说', '前往设置']
+                    window.mui.confirm('检测到您未开启通知，现在前往设置？', '通知设置', btnArray, (e) => {
+                      console.log(e.index)
+                      if (e.index === 1) {
+                        window.plus.runtime.openURL('app-settings:')
+                      }
+                    })
+                    break
+                }
+              }
             }, false)
 
             // 监听推送
