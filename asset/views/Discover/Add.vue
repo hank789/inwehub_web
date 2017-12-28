@@ -320,7 +320,7 @@
       },
       totags () {
         localEvent.setLocalItem('discover_description' + this.id, this.description)
-        this.$router.push('/selecttags?from=discover')
+        this.$router.pushPlus('/selecttags?from=discover')
       },
       toUser () {
         this.$router.pushPlus('/selectUser?from=discover')
@@ -330,6 +330,7 @@
       },
       jumpToLinkMode: function () {
         this.$router.pushPlus('/discover/publishArticles')
+        this.resetData()
       },
       uploadImage: function () {
         this.$refs.myAddEditor.blur()
