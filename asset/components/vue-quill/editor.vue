@@ -269,6 +269,15 @@
         }
         return lastObject
       },
+      getSmallSpanArr () {
+        var linkNodes = this.$refs.editor.querySelectorAll('.ql-size-small')
+        var smallSpanArr = []
+        window.mui.each(linkNodes, (index, item) => {
+          var nowValue = item.innerText
+          smallSpanArr.push(nowValue)
+        })
+        return smallSpanArr
+      },
       initialize () {
         if (this.$el) {
           // 获取选项
@@ -339,7 +348,7 @@
 
             // 监听 .ql-size-small
             if (self.isMonitorSmallSpan) {
-              var linkNodes = document.querySelectorAll('.ql-size-small')
+              var linkNodes = self.$refs.editor.querySelectorAll('.ql-size-small')
               var smallSpanArr = []
               var isStop = false
               window.mui.each(linkNodes, (index, item) => {
@@ -417,8 +426,10 @@
               }
               console.log('lastChar:' + lastChar)
 
+              var noBrText = text.trim()
+              console.log('noBrText:' + noBrText)
               if (self.isMonitorAddressAppear) {
-                if (lastChar === '@') {
+                if ((lastChar === '@' && /\s@$/.test(noBrText)) || (lastChar === '@' && /^@/.test(noBrText))) {
                   console.log('监测到@， 触发addressAppearFound')
                   self.$emit('addressAppearFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
@@ -426,7 +437,7 @@
               }
 
               if (self.isMonitorHashSymbol) {
-                if (lastChar === '#') {
+                if ((lastChar === '#' && /\s#$/.test(noBrText)) || (lastChar === '#' && /^#/.test(noBrText))) {
                   console.log('监测到#， 触发hashSymbolFound')
                   self.$emit('hashSymbolFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()

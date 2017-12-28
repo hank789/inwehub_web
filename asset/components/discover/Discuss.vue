@@ -30,7 +30,7 @@
                 <p class="mui-ellipsis">{{ item.owner.name }}</p>
                 <p>{{ item.created_at.replace(/-/g, '/') }}</p>
               </div>
-              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.content)"></div>
+              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.htmlContent)"></div>
 
               <DiscussReplay
                 v-if="item.children.length"
@@ -179,8 +179,10 @@
           created_at: createdAt
         }
 
+        console.log('discuss:parentid:' + parentId)
         if (parentId) {
           var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
+          console.log('discuss:parentIndex:' + parentIndex)
           if (parentIndex > 0) {
             if (this.commentTarget.list[parentIndex].children) {
               this.commentTarget.list[parentIndex].children.unshift(item)
@@ -191,7 +193,12 @@
             this.resetList()
           }
         } else {
-          this.commentTarget.list.unshift(item)
+          console.log('discuss:commentTarget:' + JSON.stringify(this.commentTarget))
+          if (this.commentTarget.list) {
+            this.commentTarget.list.unshift(item)
+          } else {
+            this.resetList()
+          }
         }
       },
       loadMore () {

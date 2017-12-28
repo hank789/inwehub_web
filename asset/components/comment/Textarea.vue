@@ -40,9 +40,6 @@
   const CommentTextarea = {
     data: () => ({
       id: currentUser.user_id,
-      user: [],
-      userName: [],
-      currentUser: [],
       showTextarea: false,
       description: {},
       cacheKey: '',
@@ -64,6 +61,7 @@
       this.init()
     },
     mounted () {
+      localEvent.clearLocalItem('comment_selectUser' + this.id)
       this.init()
       softInput()
     },
@@ -75,63 +73,82 @@
         this.init()
       },
       smallSpanArrChange (arr) {
-        this.currentUser = []
-        for (var i in arr) {
-          var val = arr[i].replace('@', '').trim()
-          if (this.currentUser.indexOf(val) === -1) {
-            this.currentUser.push(val)
-          }
-        }
+        setTimeout(() => {
+          this.syncSelectUser()
+        }, 500)
       },
-     // 重置数据
       resetData () {
+        this.textarea = ''
         this.noticeUsers = []
-        this.user = []
-        this.userName = []
-        this.historyDescription = []
+        this.delCurrentHistoryDescription()
         localEvent.clearLocalItem('comment_selectUser' + this.id)
+        this.$refs.myAddEditor.resetContent()
+        this.showTextarea = false
       },
-    // 监听删除事件
       addressAppearDelete (text) {
-        var name = text.substring(1, text.length - 1)
-        for (var i in this.user) {
-          if (this.user[i].name === name) {
-            this.noticeUsers.splice(i, 1)
-            this.user.splice(i, 1)
-            this.userName.splice(i, 1)
+        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        for (var i in users) {
+          var name = '@' + users[i].name + ' '
+          if (name === text) {
+            this.delNoticeUser(users[i].id)
+            users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('comment_selectUser' + this.id, this.user)
+        localEvent.setLocalItem('comment_selectUser' + this.id, users)
+      },
+      getSelectUser () {
+        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        var spanUserNameAndIds = []
+        var spanUserNames = []
+        for (var i in users) {
+          this.noticeUser(users[i].id)
+          var data = {
+            name: '@' + users[i].name + ' ',
+            id: users[i].id
+          }
+          spanUserNameAndIds.push(data)
+          spanUserNames.push(data.name)
+        }
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanUserNames
+        }
+      },
+      syncSelectUser () {
+        // 循环插入@人
+        var users = this.getSelectUser()
+        var spanUserNameAndIds = users.nameAndIds
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('comment_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的用户都要添加上
+        for (var num = 0; num < spanUserNameAndIds.length; num++) {
+          var selectUserName = spanUserNameAndIds[num].name
+          var selectUserid = spanUserNameAndIds[num].id
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            this.$refs.myAddEditor.appendText(selectUserName, {
+              'color': '#42AEF9',
+              'size': 'small',
+              'link': '/share/resume/' + selectUserid + '?goback=1'
+            })
+          }
+        }
+
+        // 文本框里未选择的，都要删除
+        var deleteUser = []
+        var spanUserNames = users.names
+
+        for (var n in smallSpanArr) {
+          if (spanUserNames.indexOf(smallSpanArr[n]) === -1) {
+            deleteUser.push(smallSpanArr[n])
+          }
+        }
+        this.$refs.myAddEditor.delSmallSpan(deleteUser)
       },
       initEditorData () {
-        // 循环插入@人
-        this.user = localEvent.getLocalItem('comment_selectUser' + this.id)
-        // 检测删除的人
-        this.userName = []
-        this.noticeUsers = []
-        for (var num = 0; num < this.user.length; num++) {
-          if (this.userName.indexOf(this.user[num].name) === -1) {
-            this.userName.push(this.user[num].name)
-            this.noticeUser(this.user[num].id)
-            if (this.currentUser.indexOf(this.user[num].name) === -1) {
-              this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-                'color': '#42AEF9',
-                'size': 'small',
-                'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
-              })
-            }
-          }
-        }
-        var deleteUser = []
-       // 删除多余的html
-        for (var n in this.currentUser) {
-          if (this.userName.indexOf(this.currentUser[n]) === -1) {
-            deleteUser.push('@' + this.currentUser[n] + ' ')
-          }
-        }
-        console.log(deleteUser)
-        this.$refs.myAddEditor.delSmallSpan(deleteUser)
-        deleteUser = []
+        console.log('initEditorData() fired')
+
+        this.syncSelectUser()
       },
       //  监听@事件
       addressAppearFound () {
@@ -155,14 +172,14 @@
         if (result) {
           setTimeout(() => {
             this.commentData.commentList = this.oldList
+            this.commentData.list = null  // 临时解决方案，强制discuss刷新列表, 等待删除
             this.focusCallback = () => {
-              console.log('initEditorData() fired')
               this.focusCallback = null
               this.initEditorData()
             }
             this.editorObj.setContents(this.description)
             this.editorObj.focus()
-          }, 300)
+          }, 100)
         }
       },
       onEditorChange (editor) {
@@ -173,11 +190,17 @@
         console.log('comment blur')
         this.showTextarea = false
 
+        this.setHistoryDescription()
+      },
+      delCurrentHistoryDescription () {
         for (var i in this.historyDescription) {
           if (this.historyDescription[i].targetUsername === this.targetUsername) {
             this.historyDescription.splice(i, 1)
           }
         }
+      },
+      setHistoryDescription () {
+        this.delCurrentHistoryDescription()
 
         this.historyDescription.push({
           targetUsername: this.targetUsername,
@@ -250,21 +273,15 @@
         }
       },
       finish () {
-        this.textarea = ''
-        this.noticeUsers = []
-        this.$refs.myAddEditor.resetContent()
-        this.showTextarea = false
+        this.resetData()
       },
-      // 获取添加@用户的id
       noticeUser (id) {
         this.noticeUsers.push(id)
       },
-      // 获取删除@用户的id
-      delUser (uid) {
-        for (var i in this.noticeUsers) {
-          if (this.noticeUsers[i].uuid == uid) {
-            this.noticeUsers.splice(i, 1)
-          }
+      delNoticeUser (id) {
+        var noticeIndex = this.noticeUsers.indexOf(id)
+        if (noticeIndex > -1) {
+          this.noticeUsers.splice(noticeIndex, 1)
         }
       },
       sendMessage (event) {
@@ -284,7 +301,6 @@
           commentData: this.commentData
         }
         this.$emit('sendMessage', data)
-        this.resetData()
         this.editorObj.blur()
       }
     }

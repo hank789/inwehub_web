@@ -103,6 +103,9 @@
       quillEditor
     },
     methods: {
+      getSmallSpanArr () {
+        return this.$refs.myTextEditor.getSmallSpanArr()
+      },
       smallSpanArrChange (data) {
         this.$emit('smallSpanArrChange', data)
       },
