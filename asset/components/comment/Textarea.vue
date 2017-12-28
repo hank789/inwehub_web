@@ -280,6 +280,7 @@
         this.resetData()
       },
       noticeUser (id) {
+        this.delNoticeUser(id)
         this.noticeUsers.push(id)
       },
       delNoticeUser (id) {

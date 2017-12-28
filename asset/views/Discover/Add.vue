@@ -15,11 +15,15 @@
           :content="description"
           :descMaxLength="descMaxLength"
           :placeholder="descPlaceholder"
+          :isMonitorAddressAppear="true"
+          :isMonitorHashSymbol="true"
+          :isMonitorSmallSpan="true"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
+          @hashSymbolFound="hashSymbolFound"
           @hashSymbolDelete="hashSymbolDelete"
           @addressAppearDelete="addressAppearDelete"
           @smallSpanArrChange="smallSpanArrChange"
@@ -83,20 +87,13 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
-  import { onceSave } from '../../utils/cache'
 
   export default {
     data () {
       return {
         id: currentUser.user_id,
-        currentUser: [],
-        currentTags: [],
-        tag: [],
+        noticeUsers: [],
         tags: [],
-        tagsName: [],
-        user: [],
-        userId: [],
-        userName: [],
         description: {},
         images: [],
         maxImageCount: 9,
@@ -131,6 +128,13 @@
       this.initData()
     },
     mounted () {
+      var referer = localEvent.getLocalItem('referer')
+      if (!(referer && referer.path === '/selectUser')) {
+        localEvent.clearLocalItem('discover_selectUser' + this.id)
+      }
+      if (!(referer && referer.path === '/selecttags')) {
+        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+      }
       autoTextArea()
 //      this.initData()
     },
@@ -146,99 +150,156 @@
           localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
         }
       },
+      hashSymbolFound () {
+        this.$router.pushPlus('/selecttags?from=discover')
+      },
       addressAppearFound () {
-        this.$refs.myAddEditor.appendText('@', {})
+        this.$router.pushPlus('/selectUser?from=discover')
       },
       smallSpanArrChange (arr) {
-        console.error(arr)
-        this.currentUser = []
-        this.currentTags = []
-        for (var i in arr) {
-          if (arr[i].indexOf('@') > -1) {
-            this.currentUser.push(arr[i].replace('@', '').trim())
-          } else if (arr[i].indexOf('#') > -1) {
-            this.currentTags.push(arr[i].replace('#', '').trim())
-          }
-        }
+        setTimeout(() => {
+          this.syncSelectUser()
+          this.syncSelectTags()
+          this.syncDelete()
+        }, 1000)
       },
-     //  删除标签
+      // 删除标签
       hashSymbolDelete (text) {
-        var name = text.substring(1, text.length - 1)
-        for (var i in this.tag) {
-          if (this.tag[i].text === name) {
-            this.tag.splice(i, 1)
-            this.tags.splice(i, 1)
-            this.tagsName.splice(i, 1)
+        var tags = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i in tags) {
+          var name = '#' + tags[i].text + ' '
+          if (name === text) {
+            this.delTag(tags[i].text)
+            tags.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
+        localEvent.setLocalItem('discover_skill_tags' + this.id, tags)
       },
        //  删除用户
       addressAppearDelete (text) {
-        var name = text.substring(1, text.length - 1)
-        for (var i in this.user) {
-          if (this.user[i].name === name) {
-            this.user.splice(i, 1)
-            this.userId.splice(i, 1)
-            this.userName.splice(i, 1)
+        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        for (var i in users) {
+          var name = '@' + users[i].name + ' '
+          if (name === text) {
+            this.delNoticeUser(users[i].id)
+            users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_selectUser' + this.id, this.user)
+        localEvent.setLocalItem('discover_selectUser' + this.id, users)
       },
-      initData () {
-        // 循环插入标签
-        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-        this.tags = []
-        this.tagsName = []
-        for (var i = 0; i < this.tag.length; i++) {
-          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
-            this.tags.push(this.tag[i].value)
-            this.tagsName.push(this.tag[i].text)
+      syncSelectUser () {
+        // 循环插入@人
+        var users = this.getSelectUser()
+        var spanUserNameAndIds = users.nameAndIds
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('discover_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的用户都要添加上
+        for (var num = 0; num < spanUserNameAndIds.length; num++) {
+          var selectUserName = spanUserNameAndIds[num].name
+          var selectUserid = spanUserNameAndIds[num].id
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            this.$refs.myAddEditor.appendText(selectUserName, {
+              'color': '#42AEF9',
+              'size': 'small',
+              'link': '/share/resume/' + selectUserid + '?goback=1'
+            })
           }
-          if (this.currentTags.indexOf(this.tag[i].text) === -1) {
-            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
+        }
+      },
+      syncDelete () {
+        // 文本框里未选择的，都要删除
+        var users = this.getSelectUser()
+        var userNames = users.names
+        var tags = this.getSelectTags().names
+        var all = userNames.concat(tags)
+
+        var deleteArr = []
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        for (var n in smallSpanArr) {
+          if (all.indexOf(smallSpanArr[n]) === -1) {
+            deleteArr.push(smallSpanArr[n])
+          }
+        }
+        this.$refs.myAddEditor.delSmallSpan(deleteArr)
+      },
+      syncSelectTags () {
+        var tags = this.getSelectTags().names
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('discover_selectttag:' + JSON.stringify(tags) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的tag都要添加上
+        for (var num = 0; num < tags.length; num++) {
+          var selectUserName = tags[num]
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            this.$refs.myAddEditor.appendText(selectUserName, {
               'color': '#225180',
               'size': 'small'
             })
           }
         }
-        var deleteTags = []
-        // 删除多余的html
-        for (var m in this.currentTags) {
-          if (this.tagsName.indexOf(this.currentTags[m]) === -1) {
-            deleteTags.push('#' + this.currentTags[m] + ' ')
+      },
+      getSelectUser () {
+        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        var spanUserNameAndIds = []
+        var spanUserNames = []
+        for (var i in users) {
+          this.noticeUser(users[i].id)
+          var data = {
+            name: '@' + users[i].name + ' ',
+            id: users[i].uuid
           }
+          spanUserNameAndIds.push(data)
+          spanUserNames.push(data.name)
         }
-        console.log(deleteTags)
-        this.$refs.myAddEditor.delSmallSpan(deleteTags)
-        deleteTags = []
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanUserNames
+        }
+      },
+      getSelectTags () {
+        var users = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        var spanUserNameAndIds = []
 
-        // 循环插入@人
-        this.user = localEvent.getLocalItem('discover_selectUser' + this.id)
-        this.userId = []
-        this.userName = []
-        for (var num = 0; num < this.user.length; num++) {
-          if (this.userName.indexOf(this.user[num].name) === -1) {
-            this.userName.push(this.user[num].name)
-            this.userId.push(this.user[num].id)
-            if (this.currentUser.indexOf(this.user[num].name) === -1) {
-              this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-                'color': '#42AEF9',
-                'size': 'small',
-                'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
-              })
-            }
+        var spanNames = []
+        for (var i in users) {
+          this.addTags(users[i].value)
+          var data = {
+            name: '#' + users[i].text + ' ',
+            id: users[i].value
           }
+          spanUserNameAndIds.push(data)
+          spanNames.push(data.name)
         }
-        var deleteUser = []
-        // 删除多余的html
-        for (var n in this.currentUser) {
-          if (this.userName.indexOf(this.currentUser[n]) === -1) {
-            deleteUser.push('@' + this.currentUser[n] + ' ')
-          }
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanNames
         }
-        this.$refs.myAddEditor.delSmallSpan(deleteUser)
-        deleteUser = []
+      },
+      addTags (tag) {
+        this.delTag(tag)
+        this.tags.push(tag)
+      },
+      delTag (tag) {
+        var index = this.tags.indexOf(tag)
+        if (index > -1) {
+          this.tags.splice(index, 1)
+        }
+      },
+      noticeUser (id) {
+        this.delNoticeUser(id)
+        this.noticeUsers.push(id)
+      },
+      delNoticeUser (id) {
+        var noticeIndex = this.noticeUsers.indexOf(id)
+        if (noticeIndex > -1) {
+          this.noticeUsers.splice(noticeIndex, 1)
+        }
+      },
+      initData () {
+        this.syncSelectUser()
+        this.syncSelectTags()
+        this.syncDelete()
 
         this.getAddress()
       },
@@ -262,9 +323,6 @@
         this.$router.push('/selecttags?from=discover')
       },
       toUser () {
-        onceSave(this, null, {
-
-        })
         this.$router.pushPlus('/selectUser?from=discover')
       },
       toAddress () {
@@ -277,30 +335,6 @@
         this.$refs.myAddEditor.blur()
         this.$refs.uploadImage.uploadImage()
       },
-//      selectAddress () {
-//        var userPicker = new window.mui.PopPicker()
-//
-//        userPicker.setData([
-//          {
-//            value: '1',
-//            text: this.address
-//          },
-//          {
-//            value: '2',
-//            text: '不显示位置'
-//          }
-//        ])
-//        if (this.selectedAddress === '不显示位置') {
-//          userPicker.pickers[0].setSelectedValue('2')
-//        } else {
-//          userPicker.pickers[0].setSelectedValue('1')
-//        }
-//
-//        userPicker.show(items => {
-//          this.selectedAddress = items[0].text
-//          userPicker.dispose()
-//        })
-//      },
       toggleHide () {
         this.hide = !this.hide
       },
@@ -309,9 +343,7 @@
       },
       resetData () {
         this.tags = []
-        this.tagsName = []
-        this.userId = []
-        this.userName = []
+        this.noticeUsers = []
         this.description = {}
         this.images = []
         this.percentCompleted = 0
@@ -336,7 +368,7 @@
           photos: [],
           category_id: '',
           tags: this.tags,
-          mentions: this.userId,
+          mentions: this.noticeUsers,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.lat : ''

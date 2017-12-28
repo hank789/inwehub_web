@@ -11,6 +11,7 @@
                     :isEnableImage="false"
                     :isEnableAddressAppear="true"
                     :isMonitorAddressAppear="isMonitorAddressAppear"
+                    :isMonitorHashSymbol="isMonitorHashSymbol"
                     :isEnableHashSymbol="true"
                     :isMonitorSmallSpan="true"
                     :allowBr="allowBr"
@@ -73,6 +74,10 @@
         default: 5000
       },
       isMonitorAddressAppear: {
+        type: Boolean,
+        default: false
+      },
+      isMonitorHashSymbol: {
         type: Boolean,
         default: false
       },
