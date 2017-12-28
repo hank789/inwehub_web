@@ -153,6 +153,7 @@
         this.$refs.ctextarea.finish()
       },
       refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
         console.log('refreshPageData-zz-detail')
         this.loading = 1
         this.getDetail()
