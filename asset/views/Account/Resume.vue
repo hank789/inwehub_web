@@ -241,8 +241,16 @@
 
     </div>
 
-    <Share :title="shareOptions.title" :shareName="'名片分享'" :link="shareUrl" :hideShareBtn="true" :content="shareOptions.content"
-           :imageUrl="shareOptions.imageUrl" :thumbUrl="shareOptions.thumbUrl" ref="shareComponent"></Share>
+    <Share :title="shareOptions.title"
+           :shareName="'名片分享'"
+           :link="shareUrl"
+           :hideShareBtn="true"
+           :content="shareOptions.content"
+           :imageUrl="shareOptions.imageUrl"
+           :thumbUrl="shareOptions.thumbUrl"
+           :targetId="uuid"
+           :targetType="'resume'"
+           ref="shareComponent"></Share>
 
     <button type="button" class="bottomButton mui-btn mui-btn-block mui-btn-primary"
             @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑
