@@ -84,7 +84,7 @@
   import pay from '../../components/pay/pay.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
-  import { textToLinkHtml } from '../../utils/dom'
+  import { textToLinkHtml, addPreviewAttrForImg } from '../../utils/dom'
   import { openVendorUrl } from '../../utils/plus'
 
   export default {
@@ -159,7 +159,10 @@
         var html = editor.html
         html = textToLinkHtml(html)
         var answerContentWrapper = this.$el.querySelector('.answerContent')
+        html = addPreviewAttrForImg(html)
         answerContentWrapper.innerHTML = html
+
+        window.mui.previewImage()
 
         setTimeout(() => {
           openVendorUrl(answerContentWrapper)
