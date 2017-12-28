@@ -44,17 +44,17 @@
 
       <div class="container-bottom-menus">
         <span @tap.stop.prevent="toUser">
-          <svg class="icon menu" aria-hidden="true" >
+          <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-icon-test1"></use>
           </svg>
         </span>
         <span @tap.stop.prevent="totags">
-          <svg class="icon menu" aria-hidden="true" >
+          <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
         <span @tap.stop.prevent="jumpToLinkMode()">
-          <svg class="icon menu" aria-hidden="true" >
+          <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-lianjie"></use>
           </svg>
         </span>
@@ -379,7 +379,15 @@
 
   .container-bottom-menus{
     position: absolute;
+    padding-left: 7.5px;
     left:0;
+  }
+  .container-bottom-menus span{
+    display: block;
+    float: left;
+    padding: 0 7.5px;
+    font-size: 19px;
+    color: grey;
   }
 
   .component-photograph{

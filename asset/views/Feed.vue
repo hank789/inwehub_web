@@ -363,9 +363,12 @@
   .feedWrapper .container-avatarAndText{
     margin-bottom:10px;
   }
+  .component-iconNumber{
+    margin-left: 7.5px;
+  }
 
-  .feedWrapper .iconPenglunWrapper{
-    margin-right:15px;
+  .feedWrapper .iconPenglunWrapper {
+    margin: 0 7.5px;
   }
   .labelWrapper{
     text-align: right;
