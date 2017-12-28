@@ -88,6 +88,7 @@
         this.noticeUsers = []
         this.user = []
         this.userName = []
+        this.historyDescription = []
         localEvent.clearLocalItem('comment_selectUser' + this.id)
       },
     // 监听删除事件
