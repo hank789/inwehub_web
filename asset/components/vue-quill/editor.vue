@@ -429,7 +429,7 @@
               var noBrText = text.trim()
               console.log('noBrText:' + noBrText)
               if (self.isMonitorAddressAppear) {
-                if ((lastChar === '@' && /\s@$/.test(noBrText)) || (lastChar === '@' && /^@/.test(noBrText))) {
+                if ((lastChar === '@' && /\s@$/.test(noBrText)) || (lastChar === '@' && /^@$/.test(noBrText))) {
                   console.log('监测到@， 触发addressAppearFound')
                   self.$emit('addressAppearFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
@@ -437,7 +437,7 @@
               }
 
               if (self.isMonitorHashSymbol) {
-                if ((lastChar === '#' && /\s#$/.test(noBrText)) || (lastChar === '#' && /^#/.test(noBrText))) {
+                if ((lastChar === '#' && /\s#$/.test(noBrText)) || (lastChar === '#' && /^#$/.test(noBrText))) {
                   console.log('监测到#， 触发hashSymbolFound')
                   self.$emit('hashSymbolFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
