@@ -22,6 +22,7 @@
           @addressAppearFound="addressAppearFound"
           @hashSymbolDelete="hashSymbolDelete"
           @addressAppearDelete="addressAppearDelete"
+          @smallSpanArrChange="smallSpanArrChange"
         ></Jeditor>
 
         <div class="container-images" :class="'container-images-' + (images.length + 1)">
@@ -82,12 +83,13 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
-  import { onceSave, onceGet } from '../../utils/cache'
+  import { onceSave } from '../../utils/cache'
 
   export default {
     data () {
       return {
         id: currentUser.user_id,
+        currentUser:[],
         tag: [],
         tags: [],
         tagsName: [],
@@ -117,7 +119,24 @@
       uploadImage,
       Jeditor
     },
+    created () {
+      getGeoPosition((position) => {
+        if (position.addresses) {
+          this.position = position
+        }
+      })
+    },
+    activated: function () {
+      this.initData()
+    },
+    mounted () {
+      autoTextArea()
+//      this.initData()
+    },
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       getAddress () {
         // 获取地理位置
         var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
@@ -126,16 +145,20 @@
           localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
         }
       },
-      refreshPageData () {
-        this.initData()
-      },
       addressAppearFound () {
         this.$refs.myAddEditor.appendText('@', {})
       },
-//      删除标签
+      smallSpanArrChange (arr) {
+        this.currentUser = []
+        for (var i in arr) {
+          if (arr[i].indexOf('@') > -1) {
+            this.currentUser.push(arr[i].replace('@', '').trim())
+          }
+        }
+      },
+     //  删除标签
       hashSymbolDelete (text) {
         var name = text.substring(1, text.length - 1)
-//        console.error(name)
         for (var i in this.tag) {
           if (this.tag[i].text === name) {
             this.tag.splice(i, 1)
@@ -145,9 +168,9 @@
         }
         localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
       },
+       //  删除用户
       addressAppearDelete (text) {
         var name = text.substring(1, text.length - 1)
-//        console.error(name)
         for (var i in this.user) {
           if (this.user[i].name === name) {
             this.user.splice(i, 1)
@@ -156,6 +179,51 @@
           }
         }
         localEvent.setLocalItem('discover_selectUser' + this.id, this.user)
+      },
+      initData () {
+        // 循环插入标签
+        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i = 0; i < this.tag.length; i++) {
+          if (this.tags.indexOf(this.tag[i].value) === -1) {
+            this.tags.push(this.tag[i].value)
+          }
+          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
+            this.tagsName.push(this.tag[i].text)
+            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
+              'color': '#225180',
+              'size': 'small'
+            })
+          }
+        }
+        // 循环插入@人
+        this.user = localEvent.getLocalItem('discover_selectUser' + this.id)
+        this.userId = []
+        this.userName = []
+        for (var num = 0; num < this.user.length; num++) {
+          if (this.userName.indexOf(this.user[num].name) === -1) {
+            this.userName.push(this.user[num].name)
+            this.userId.push(this.user[num].id)
+            if (this.currentUser.indexOf(this.user[num].name) === -1) {
+              this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
+              })
+            }
+          }
+        }
+        var deleteUser = []
+        // 删除多余的html
+        for (var n in this.currentUser) {
+          if (this.userName.indexOf(this.currentUser[n]) === -1) {
+            deleteUser.push('@' + this.currentUser[n] + ' ')
+          }
+        }
+        console.log(deleteUser)
+        this.$refs.myAddEditor.delSmallSpan(deleteUser)
+        deleteUser = []
+
+        this.getAddress()
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -281,54 +349,7 @@
           this.resetData()
           this.$router.push('/discover/add/success')
         })
-      },
-      initData () {
-        // 循环插入标签
-        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-        for (var i = 0; i < this.tag.length; i++) {
-          if (this.tags.indexOf(this.tag[i].value) === -1) {
-            this.tags.push(this.tag[i].value)
-          }
-          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
-            this.tagsName.push(this.tag[i].text)
-            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
-              'color': '#225180',
-              'size': 'small'
-            })
-          }
-        }
-        // 循环插入@人
-        this.user = localEvent.getLocalItem('discover_selectUser' + this.id)
-        for (var num = 0; num < this.user.length; num++) {
-          if (this.userId.indexOf(this.user[num].id) === -1) {
-            this.userId.push(this.user[num].id)
-          }
-          if (this.userName.indexOf(this.user[num].name) === -1) {
-            this.userName.push(this.user[num].name)
-            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-              'color': '#42AEF9',
-              'size': 'small',
-              'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
-            })
-          }
-        }
-
-        this.getAddress()
       }
-    },
-    created () {
-      getGeoPosition((position) => {
-        if (position.addresses) {
-          this.position = position
-        }
-      })
-    },
-    activated: function () {
-      this.initData()
-    },
-    mounted () {
-      autoTextArea()
-      this.initData()
     }
   }
 </script>
