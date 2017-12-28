@@ -380,7 +380,7 @@
   ul .Container .information p {
     color: #808080;
     position: relative;
-
+    height: 40px;
   }
 
   /*举报和删除*/
