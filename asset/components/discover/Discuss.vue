@@ -58,7 +58,7 @@
   import Vue from 'vue'
   import DiscussReplay from '../../components/discover/DiscussReply.vue'
   import { textToLinkHtml } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
+  import { openVendorUrl, openAppUrl } from '../../utils/plus'
 
   const Discuss = {
     data: () => ({
@@ -252,6 +252,7 @@
         var eles = this.$el.querySelectorAll('.textToLink')
         for (var i in eles) {
           openVendorUrl(eles[i])
+          openAppUrl(eles[i])
         }
       })
     }
