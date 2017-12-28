@@ -7,7 +7,11 @@
     <div class="line-horizontal padding-5-0-5-0" v-if="commentNumber && supportNumber"></div>
     <div class="container-comments" :class="{'padding-0': parseInt(supportNumber) === 0}" v-if="commentNumber">
       <template v-for="(comment, index) in commentList">
-        <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, commentList)"><span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span><span  class="textToLink" v-html="textToLink(comment.content)"></span>
+        <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, commentList)">
+          <P>
+            <span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}</span>
+            <span  class="textToLink dialogue" v-html="textToLink(comment.content)"></span>
+          </P>
         </div>
 
         <DiscussReplySimple

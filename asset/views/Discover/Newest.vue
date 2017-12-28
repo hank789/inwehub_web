@@ -380,6 +380,10 @@
   ul .Container .information p {
     color: #808080;
     position: relative;
+    height:40px;
+    display: flex;
+    align-items: center;
+    padding:0 5px;
 
   }
 
@@ -389,8 +393,8 @@
     width: 50px;
     background: #575857;
     position: absolute;
-    top: 20px;
-    left: -15px;
+    top: 28px;
+    left: -13px;
     border-radius: 4px;
     z-index: 99;
   }
