@@ -195,6 +195,7 @@
       },
       refreshPageData () {
         this.getDetail()
+        this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
 
