@@ -89,7 +89,8 @@
     data () {
       return {
         id: currentUser.user_id,
-        currentUser:[],
+        currentUser: [],
+        currentTags: [],
         tag: [],
         tags: [],
         tagsName: [],
@@ -149,10 +150,14 @@
         this.$refs.myAddEditor.appendText('@', {})
       },
       smallSpanArrChange (arr) {
+        console.error(arr)
         this.currentUser = []
+        this.currentTags = []
         for (var i in arr) {
           if (arr[i].indexOf('@') > -1) {
             this.currentUser.push(arr[i].replace('@', '').trim())
+          } else if (arr[i].indexOf('#') > -1) {
+            this.currentTags.push(arr[i].replace('#', '').trim())
           }
         }
       },
@@ -183,18 +188,31 @@
       initData () {
         // 循环插入标签
         this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        this.tags = []
+        this.tagsName = []
         for (var i = 0; i < this.tag.length; i++) {
-          if (this.tags.indexOf(this.tag[i].value) === -1) {
-            this.tags.push(this.tag[i].value)
-          }
           if (this.tagsName.indexOf(this.tag[i].text) === -1) {
+            this.tags.push(this.tag[i].value)
             this.tagsName.push(this.tag[i].text)
+          }
+          if (this.currentTags.indexOf(this.tag[i].text) === -1) {
             this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
               'color': '#225180',
               'size': 'small'
             })
           }
         }
+        var deleteTags = []
+        // 删除多余的html
+        for (var m in this.currentTags) {
+          if (this.tagsName.indexOf(this.currentTags[m]) === -1) {
+            deleteTags.push('#' + this.currentTags[m] + ' ')
+          }
+        }
+        console.log(deleteTags)
+        this.$refs.myAddEditor.delSmallSpan(deleteTags)
+        deleteTags = []
+
         // 循环插入@人
         this.user = localEvent.getLocalItem('discover_selectUser' + this.id)
         this.userId = []
@@ -219,7 +237,6 @@
             deleteUser.push('@' + this.currentUser[n] + ' ')
           }
         }
-        console.log(deleteUser)
         this.$refs.myAddEditor.delSmallSpan(deleteUser)
         deleteUser = []
 
