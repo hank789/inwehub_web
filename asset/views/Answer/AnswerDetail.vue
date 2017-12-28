@@ -85,11 +85,9 @@
         @commentFinish="commentFinish"
 
         ref="discuss"
-        v-if="answer.answers[0] && answer.answers[0].content"
+        v-if="answer.answers[0] && answer.answers[0].content !== ''"
       ></Discuss>
 
-
-      <div class="mb70"></div>
     </div>
 
     <Share
