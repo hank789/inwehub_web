@@ -183,6 +183,7 @@
       shareSuccess () {},
       shareFail () {},
       refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
         this.loading = 1
         this.getData()
       },
