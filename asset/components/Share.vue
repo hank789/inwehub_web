@@ -77,10 +77,7 @@
         type: String,
         default: ''
       },
-      targetId: {
-        type: String,
-        default: ''
-      },
+      targetId: 0,
       link: {
         type: String,
         default: ''

@@ -69,10 +69,21 @@ function stripTags (text) {
   return text.replace(/<[^>]+>/g, '')
 }
 
+function addPreviewAttrForImg (html, group = '1') {
+  if (/data-preview-src/gi.test(html)) {
+    return html
+  }
+
+  var re = /<img(.*?)src="([^"]*?)"/g
+  html = html.replace(re, "<img $1 data-preview-src='$2' data-preview-group='" + group + "' src='$2'")
+  return html
+}
+
 export {
   queryParent,
   textToLink,
   textToLinkHtml,
-  stripTags
+  stripTags,
+  addPreviewAttrForImg
 }
 
