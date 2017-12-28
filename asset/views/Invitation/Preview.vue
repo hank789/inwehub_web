@@ -18,6 +18,8 @@
       :thumbUrl="shareOption.thumbUrl"
       :ImagePreview="true"
       :DomConvertImage="true"
+      :targetId="rcCode"
+      :targetType="'invite_register'"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"

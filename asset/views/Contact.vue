@@ -70,6 +70,8 @@
       :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
+      :targetId="id"
+      :targetType="'invite_answer'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>

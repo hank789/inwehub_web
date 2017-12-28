@@ -100,6 +100,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>

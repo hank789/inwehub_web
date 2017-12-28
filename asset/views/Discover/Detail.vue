@@ -87,6 +87,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="slug"
+      :targetType="'submission'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
