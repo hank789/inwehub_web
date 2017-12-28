@@ -350,9 +350,9 @@
             if (self.isMonitorSmallSpan) {
               var linkNodes = self.$refs.editor.querySelectorAll('.ql-size-small')
               var smallSpanArr = []
-              var isStop = false
-              window.mui.each(linkNodes, (index, item) => {
-                if (isStop) return
+
+              for (var index = 0; index < linkNodes.length; index++) {
+                var item = linkNodes[index]
                 var nowValue = item.innerText
                 smallSpanArr.push(nowValue)
                 if (item.hasAttribute('ql-value')) {
@@ -377,7 +377,6 @@
                       }
 
                       self.resetHtml(newHtml)
-                      isStop = true
                     } else {
                       // 添加
                       self.quill.history.undo()
@@ -394,8 +393,6 @@
                           self.toLast()
                         }
                       }, 200)
-
-                      isStop = true
                     }
                   }
                 } else {
@@ -405,14 +402,12 @@
                   }
                   item.classList.add('appUrl')
                 }
-              })
+              }
               if (JSON.stringify(smallSpanArr) !== JSON.stringify(this.smallSpanArr)) {
                 this.smallSpanArr = smallSpanArr
                 console.log('event:smallSpanArrChange fire, data:' + JSON.stringify(smallSpanArr))
                 self.$emit('smallSpanArrChange', smallSpanArr)
               }
-
-              if (isStop) return
             }
 
             if (delta.ops[1] && delta.ops[1].delete) {
