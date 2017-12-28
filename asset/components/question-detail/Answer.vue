@@ -19,8 +19,19 @@
 
 
       <div class="richText" v-show="answer.content != ''">
-        <quill-editor ref="myTextEditorRead"
-                      :options="editorOptionRead" @ready="onEditorReadyRead($event)">
+        <div class="quill-editor">
+          <div class="ql-container ql-snow">
+            <div class="ql-editor answerContent">
+            </div>
+          </div>
+        </div>
+        <quill-editor
+          class="hiddenWrapper"
+          ref="myTextEditorRead"
+          :options="editorOptionRead"
+          @ready="onEditorReadyRead($event)"
+          @change="change"
+        >
         </quill-editor>
         <div class="time">
           <p class="average_rate" v-if="answer.average_rate">{{answer.average_rate}}好评</p>
@@ -73,6 +84,8 @@
   import pay from '../../components/pay/pay.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { openVendorUrl } from '../../utils/plus'
 
   export default {
     data () {
@@ -137,20 +150,28 @@
         if (content) {
           var objs = JSON.parse(content)
           this.editorReadObj.setContents(objs)
-          if (window.mui.os.plus && this.editorOptionRead.readOnly) {
-            var aList = document.querySelectorAll('a[href^="http"]')
-            for (let i = 0; i < aList.length; i++) {
-              aList[i].addEventListener('click', function (e) {
-                e.preventDefault()
-                window.plus.runtime.openURL(this.href)
-              }, false)
-            }
-          }
         }
       }
     },
     mounted () {},
     methods: {
+      change (editor) {
+        var html = editor.html
+        html = textToLinkHtml(html)
+        var answerContentWrapper = this.$el.querySelector('.answerContent')
+        answerContentWrapper.innerHTML = html
+
+        setTimeout(() => {
+          openVendorUrl(answerContentWrapper)
+          var aList = this.$el.querySelectorAll('a[href^="http"]')
+          for (let i = 0; i < aList.length; i++) {
+            aList[i].addEventListener('click', function (e) {
+              e.preventDefault()
+              this.router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
+            }, false)
+          }
+        }, 100)
+      },
       setFollowStatus (status) {
         this.answer.is_followed = status
       },
@@ -247,5 +268,9 @@
     overflow: hidden;
     padding: 11px 15px 0 15px;
     -webkit-touch-callout: none;
+  }
+
+  .hiddenWrapper{
+    display: none;
   }
 </style>
