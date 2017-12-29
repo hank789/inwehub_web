@@ -377,8 +377,9 @@
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
-        var html = this.text.replace(/\s/g, '').trim()
-        if (!html) {
+        var html = this.html.replace(/(<p><br><\/p>)*$/, '')
+        var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
           window.mui.toast('请填写分享内容')
           return
         }
