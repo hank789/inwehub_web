@@ -151,9 +151,11 @@
         }
       },
       hashSymbolFound () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selecttags?from=discover')
       },
       addressAppearFound () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selectUser?from=discover')
       },
       smallSpanArrChange (arr) {
@@ -335,16 +337,19 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-        localEvent.setLocalItem('discover_description' + this.id, this.description)
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selecttags?from=discover')
       },
       toUser () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selectUser?from=discover')
       },
       toAddress () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/nearby?from=discover')
       },
       jumpToLinkMode: function () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/discover/publishArticles')
         this.resetData()
       },
@@ -367,7 +372,6 @@
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
-        localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
