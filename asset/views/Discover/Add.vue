@@ -151,13 +151,16 @@
         }
       },
       hashSymbolFound () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selecttags?from=discover')
       },
       addressAppearFound () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selectUser?from=discover')
       },
       smallSpanArrChange (arr) {
         setTimeout(() => {
+          console.log('smallSpanArrChange() fired')
           this.syncSelectUser()
           this.syncSelectTags()
           this.syncDelete()
@@ -311,6 +314,7 @@
         }
       },
       initData () {
+        console.log('initData() fired')
         this.syncSelectUser()
         this.syncSelectTags()
         this.syncDelete()
@@ -333,16 +337,19 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-        localEvent.setLocalItem('discover_description' + this.id, this.description)
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selecttags?from=discover')
       },
       toUser () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/selectUser?from=discover')
       },
       toAddress () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/nearby?from=discover')
       },
       jumpToLinkMode: function () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/discover/publishArticles')
         this.resetData()
       },
@@ -365,14 +372,14 @@
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
-        localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
-        var html = this.text.replace(/\s/g, '').trim()
-        if (!html) {
+        var html = this.html.replace(/(<p><br><\/p>)*$/, '')
+        var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
           window.mui.toast('请填写分享内容')
           return
         }

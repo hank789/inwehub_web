@@ -246,17 +246,14 @@ window.mui.back = function () {
     console.log('back currentWebviewId:' + currentWebview.id)
 
     if (currentWebview.id === window.plus.runtime.appid) {
-      goBack()
       window.mui.muiOldBack()
       return
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备隐藏当前webview')
-      goBack()
       currentWebview.hide()
       return
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备close当前webview')
-      goBack()
       window.mui.muiOldBack()
       currentWebview.close()
       return

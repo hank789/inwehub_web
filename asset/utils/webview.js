@@ -290,6 +290,7 @@ function showWebview () {
  * webview 回退处理函数
  */
 function goBack () {
+  console.log('goBack() fired')
   if (window.mui.os.plus) {
     var self = window.plus.webview.currentWebview()
     // 获得父页面的webview
