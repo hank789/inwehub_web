@@ -125,13 +125,15 @@ function initImmersed (context) {
   var routerView = context // document.getElementById('router-view')
 
   var firstChildren = routerView.children[0]
-  if (firstChildren.className === 'child-view') {
+  if (firstChildren && firstChildren.className === 'child-view') {
     firstChildren = firstChildren.children[0]
   }
 
   var firstBackground = getStyle(firstChildren, 'background')
 
-  console.log('#immersedWrapper firstChildrenId:' + firstChildren.id + 'firstChildrenClass:' + firstChildren.className + ', background:' + firstBackground)
+  var firstChildrenClassName = firstChildren ? firstChildren.className : ''
+
+  console.log('#immersedWrapper firstChildrenId:' + firstChildren.id + 'firstChildrenClass:' + firstChildrenClassName + ', background:' + firstBackground)
 
   var immersedWrapper = context.querySelector('#immersedWrapper')
   if (!immersedWrapper) {
