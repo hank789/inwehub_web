@@ -38,7 +38,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
   var footerTab = ['/discover', '/home', '/task', '/my']
 
   var nextUrl = ''
-  if (window.mui.os.plus && forceWebView) {
+  if (window.mui.os.plus) {
     if (!window.isLocalEnv) {
       if (window.mixpanel.track) {
         var matchedRoute = this.resolve(url)
