@@ -2,7 +2,7 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">通知</h1>
     </header>
 
@@ -97,6 +97,9 @@
     created () {
     },
     methods: {
+      empty () {
+        window.mui.back()
+      },
       messagecountchange (obj) {
         this.total_count = obj
       },
