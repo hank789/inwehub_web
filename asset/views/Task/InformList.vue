@@ -31,7 +31,7 @@
                   <div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>
                   <p>
                   <span>任务通知</span>
-                  <span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>&nbsp;|&nbsp;{{list.todo_task_message.last_message ? list.todo_task_message.last_message.status_description: ""}}</i> </span>
+                  <span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>{{list.todo_task_message.last_message ? '&nbsp;|&nbsp;' + list.todo_task_message.last_message.status_description: ""}}</i> </span>
                   </p>
                   <a>16:44</a>
                   <i class="bot"></i>
