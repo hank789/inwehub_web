@@ -257,8 +257,8 @@ window.mui.back = function () {
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备close当前webview')
       goBack()
-      currentWebview.close()
       window.mui.muiOldBack()
+      currentWebview.close()
       return
     } else {
       console.log('back 准备vue go(-1)')

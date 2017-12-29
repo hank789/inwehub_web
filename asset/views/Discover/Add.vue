@@ -205,7 +205,7 @@
               attribute: {
                 'color': '#42AEF9',
                 'size': 'small',
-                'link': '/share/resume/' + selectUserid + '?goback=1'
+                'link': 'https://m.inwehub.com/#/share/resume/' + selectUserid + '?goback=1'
               }
             })
           }

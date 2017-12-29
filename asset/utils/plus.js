@@ -196,6 +196,12 @@ function openAppUrl (containerDiv) {
       aList[i].addEventListener('tap', function (e) {
         var href = this.getAttribute('href')
         console.log('openAppUrl : ' + href)
+        if (href === 'about:blank') {
+          return
+        }
+
+        href = href.replace('https://m.inwehub.com/#', '')
+
         e.preventDefault()
         e.stopPropagation()
         if (window.plus) {
