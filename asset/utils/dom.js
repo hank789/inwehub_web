@@ -62,7 +62,14 @@ function textToLinkHtml (text) {
 
   re = /^(https?:\/\/[^\s<]+)/
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
   return text
+}
+
+function secureHtml (html) {
+  html = html.replace(/<\/?p>/g, '')
+  html = html.replace(/<br>/g, '')
+  return html
 }
 
 function stripTags (text) {
@@ -84,6 +91,7 @@ export {
   textToLink,
   textToLinkHtml,
   stripTags,
-  addPreviewAttrForImg
+  addPreviewAttrForImg,
+  secureHtml
 }
 

@@ -29,7 +29,7 @@
 <script type="text/javascript">
 
   import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
-  import { textToLinkHtml } from '../../utils/dom'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -78,7 +78,7 @@
         this.$emit('commentIt', parentId, commentTargetUsername, list)
       },
       textToLink (text) {
-        return textToLinkHtml(text)
+        return secureHtml(textToLinkHtml(text))
       },
       toResume (uuid) {
         if (!uuid) {
