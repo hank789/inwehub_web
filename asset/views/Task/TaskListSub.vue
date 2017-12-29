@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">通知</h1>
+      <h1 class="mui-title">任务通知</h1>
     </header>
 
     <div class="mui-content">
@@ -97,6 +97,9 @@
     created () {
     },
     methods: {
+      empty () {
+        window.mui.back()
+      },
       messagecountchange (obj) {
         this.total_count = obj
       },

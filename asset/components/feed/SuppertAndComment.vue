@@ -9,7 +9,7 @@
       <template v-for="(comment, index) in commentList">
         <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, commentList)">
           <P>
-            <span class="from Reply" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}<i>:</i></span>
+            <span class="from" @tap.stop.prevent="toResume(comment.owner.uuid)">{{comment.owner.name}}<i>:</i></span>
             <span  class="textToLink dialogue" v-html="textToLink(comment.content)"></span>
           </P>
         </div>
@@ -29,7 +29,7 @@
 <script type="text/javascript">
 
   import DiscussReplySimple from '../../components/discover/DiscussReplySimple.vue'
-  import { textToLinkHtml } from '../../utils/dom'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -78,7 +78,7 @@
         this.$emit('commentIt', parentId, commentTargetUsername, list)
       },
       textToLink (text) {
-        return textToLinkHtml(text)
+        return secureHtml(textToLinkHtml(text))
       },
       toResume (uuid) {
         if (!uuid) {
