@@ -190,6 +190,10 @@
   .comment p{
     margin-bottom: 0;
   }
+  .comment p i{
+    font-style: normal;
+    color: #444444;
+  }
 
 </style>
 
