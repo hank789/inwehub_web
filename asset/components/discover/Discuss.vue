@@ -30,7 +30,7 @@
                 <p class="mui-ellipsis">{{ item.owner.name }}</p>
                 <p>{{ item.created_at.replace(/-/g, '/') }}</p>
               </div>
-              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.htmlContent)"></div>
+              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.content)"></div>
 
               <DiscussReplay
                 v-if="item.children.length"
@@ -178,6 +178,7 @@
           },
           created_at: createdAt
         }
+        console.log('discuss:item:' + JSON.stringify(item))
 
         console.log('discuss:parentid:' + parentId)
         if (parentId) {
