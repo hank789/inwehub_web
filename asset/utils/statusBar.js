@@ -132,8 +132,9 @@ function initImmersed (context) {
   var firstBackground = getStyle(firstChildren, 'background')
 
   var firstChildrenClassName = firstChildren ? firstChildren.className : ''
+  var firstChildrenId = firstChildren ? firstChildren.id : ''
 
-  console.log('#immersedWrapper firstChildrenId:' + firstChildren.id + 'firstChildrenClass:' + firstChildrenClassName + ', background:' + firstBackground)
+  console.log('#immersedWrapper firstChildrenId:' + firstChildrenId + 'firstChildrenClass:' + firstChildrenClassName + ', background:' + firstBackground)
 
   var immersedWrapper = context.querySelector('#immersedWrapper')
   if (!immersedWrapper) {
