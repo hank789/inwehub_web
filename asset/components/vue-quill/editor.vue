@@ -100,6 +100,29 @@
       resetContent (content) {
         this.quill.setContents(content)
       },
+      appendContents (arr, position = 'current') {
+        console.log('run appendContent: arr:' + JSON.stringify(arr) + ', position:' + position)
+        // position 可选值是current, first
+        setTimeout(() => {
+          let range = this.quill.getSelection(true)
+          var positionNum = 0
+          if (position === 'current') {
+            positionNum = range.index
+          }
+          var delta = new Delta().retain(positionNum)
+
+          var length = 0
+          for (var i in arr) {
+            var appendChar = /^(@|#)/.test(arr[i].text) ? ' ' : ''
+            delta.insert(arr[i].text, arr[i].attribute)
+              .insert(appendChar, {})
+            length += arr[i].text.length
+          }
+
+          this.quill.updateContents(delta, 'user')
+          this.quill.setSelection(range.index + length + 1, 'user')
+        }, 100)
+      },
       appendContent (text, attribute, position = 'current') {
         console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
         // position 可选值是current, first
@@ -276,6 +299,7 @@
           var nowValue = item.innerText
           smallSpanArr.push(nowValue)
         })
+        console.log('getSmallSpanArr() return:' + JSON.stringify(smallSpanArr))
         return smallSpanArr
       },
       initialize () {
@@ -349,6 +373,7 @@
             // 监听 .ql-size-small
             if (self.isMonitorSmallSpan) {
               var linkNodes = self.$refs.editor.querySelectorAll('.ql-size-small')
+              console.log('qlSizeSmallFound length:' + linkNodes.length)
               var smallSpanArr = []
 
               for (var index = 0; index < linkNodes.length; index++) {

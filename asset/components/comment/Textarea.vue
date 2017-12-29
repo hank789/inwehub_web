@@ -126,16 +126,24 @@
         console.log('comment_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的用户都要添加上
+        var waitAddArr = []
         for (var num = 0; num < spanUserNameAndIds.length; num++) {
           var selectUserName = spanUserNameAndIds[num].name
           var selectUserid = spanUserNameAndIds[num].id
           if (smallSpanArr.indexOf(selectUserName) === -1) {
-            this.$refs.myAddEditor.appendText(selectUserName, {
-              'color': '#42AEF9',
-              'size': 'small',
-              'link': '/share/resume/' + selectUserid + '?goback=1'
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': '/share/resume/' + selectUserid + '?goback=1'
+              }
             })
           }
+        }
+
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
         }
 
         // 文本框里未选择的，都要删除

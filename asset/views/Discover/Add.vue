@@ -195,16 +195,23 @@
         console.log('discover_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的用户都要添加上
+        var waitAddArr = []
         for (var num = 0; num < spanUserNameAndIds.length; num++) {
           var selectUserName = spanUserNameAndIds[num].name
           var selectUserid = spanUserNameAndIds[num].id
           if (smallSpanArr.indexOf(selectUserName) === -1) {
-            this.$refs.myAddEditor.appendText(selectUserName, {
-              'color': '#42AEF9',
-              'size': 'small',
-              'link': '/share/resume/' + selectUserid + '?goback=1'
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': '/share/resume/' + selectUserid + '?goback=1'
+              }
             })
           }
+        }
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
         }
       },
       syncDelete () {
@@ -229,14 +236,21 @@
         console.log('discover_selectttag:' + JSON.stringify(tags) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的tag都要添加上
+        var waitAddArr = []
         for (var num = 0; num < tags.length; num++) {
           var selectUserName = tags[num]
           if (smallSpanArr.indexOf(selectUserName) === -1) {
-            this.$refs.myAddEditor.appendText(selectUserName, {
-              'color': '#225180',
-              'size': 'small'
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#225180',
+                'size': 'small'
+              }
             })
           }
+        }
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
         }
       },
       getSelectUser () {
