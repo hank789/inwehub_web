@@ -158,6 +158,7 @@
       },
       smallSpanArrChange (arr) {
         setTimeout(() => {
+          console.log('smallSpanArrChange() fired')
           this.syncSelectUser()
           this.syncSelectTags()
           this.syncDelete()
@@ -311,6 +312,7 @@
         }
       },
       initData () {
+        console.log('initData() fired')
         this.syncSelectUser()
         this.syncSelectTags()
         this.syncDelete()
