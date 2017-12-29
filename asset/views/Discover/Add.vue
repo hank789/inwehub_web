@@ -354,7 +354,9 @@
         this.resetData()
       },
       uploadImage: function () {
-        this.$refs.myAddEditor.blur()
+        setTimeout(() => {
+          this.$refs.myAddEditor.blur()
+        }, 200)
         this.$refs.uploadImage.uploadImage()
       },
       toggleHide () {
