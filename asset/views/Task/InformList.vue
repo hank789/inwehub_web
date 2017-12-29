@@ -25,7 +25,7 @@
             :autoShowEmpty="false"
             class="listWrapper">
               <ul>
-                <li @tap.stop.prevent="$router.pushPlus('/task')">
+                <li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">
                   <img src="../../statics/images/task.png" />
                   <div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>
                   <p>
@@ -35,7 +35,7 @@
                   <a>16:44</a>
                   <i class="bot"></i>
                 </li>
-                <li @tap.stop.prevent="skip(1)">
+                <li @tap.stop.prevent="skip(1)" v-if="list.notice_message.last_message">
                   <img src="../../statics/images/inform1.png"/>
                   <div class="message" v-if="list.notice_message.unread_count">{{list.notice_message.unread_count}}</div>
                   <p>
@@ -45,7 +45,7 @@
                   <a>{{list.notice_message.last_message ? list.notice_message.last_message.created_at : ''}}</a>
                   <i class="bot"></i>
                 </li>
-                <li @tap.stop.prevent="skip(2)">
+                <li @tap.stop.prevent="skip(2)" v-if="list.money_message.last_message ">
                   <img src="../../statics/images/balance1.png"/>
                   <div class="message" v-if="list.money_message.unread_count">{{list.money_message.unread_count}}</div>
                   <p>
@@ -65,7 +65,7 @@
                       <!--<a>16:44</a>-->
                       <!--<i class="bot"></i>-->
                  <!--</li>-->
-                <li @tap.stop.prevent="skip(3)">
+                <li @tap.stop.prevent="skip(3)" v-if="list.task_message.last_message">
                   <img src="../../statics/images/mission.png"/>
                   <div class="message" v-if="list.task_message.unread_count">{{list.task_message.unread_count}}</div>
                   <p>
@@ -75,7 +75,7 @@
                   <a>{{list.task_message.last_message ? list.task_message.last_message.created_at : ''}}</a>
                   <i class="bot"></i>
                 </li>
-                <li @tap.stop.prevent="skip(4)">
+                <li @tap.stop.prevent="skip(4)" v-if="list.readhub_message.last_message">
                   <img src="../../statics/images/read1.png"/>
                   <div class="message" v-if="list.readhub_message.unread_count">{{list.readhub_message.unread_count}}</div>
                   <p>

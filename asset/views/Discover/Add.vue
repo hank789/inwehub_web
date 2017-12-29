@@ -136,7 +136,6 @@
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
       }
       autoTextArea()
-//      this.initData()
     },
     methods: {
       refreshPageData () {
