@@ -44,6 +44,7 @@
       description: {},
       cacheKey: '',
       textarea: '',
+      text: '',
       descMaxLength: 5000,
       targetUsername: '',
       noticeUsers: [],
@@ -196,6 +197,7 @@
       },
       onEditorChange (editor) {
         this.textarea = editor.html
+        this.text = editor.text
       },
       onEditorBlur (editor) {
         window.mui.closeWaitingBlank()
@@ -307,6 +309,13 @@
         if (!textarea.trim()) {
           return false
         }
+
+        var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
+          return
+        }
+
+        textarea = textarea.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
 
         var data = {
           content: textarea,

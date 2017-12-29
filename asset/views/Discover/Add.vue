@@ -384,6 +384,8 @@
           return
         }
 
+        html = html.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
+
         var data = {
           type: 'text',
           title: html,
