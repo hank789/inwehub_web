@@ -172,7 +172,7 @@ function openVendorUrl (containerDiv) {
         e.stopPropagation()
         if (window.plus) {
           console.log('plus 打开')
-          window.plus.runtime.openURL(href)
+          router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
         } else {
           console.log('window.open 打开')
           window.open(href)
@@ -196,6 +196,12 @@ function openAppUrl (containerDiv) {
       aList[i].addEventListener('tap', function (e) {
         var href = this.getAttribute('href')
         console.log('openAppUrl : ' + href)
+        if (href === 'about:blank') {
+          return
+        }
+
+        href = href.replace('https://m.inwehub.com/#', '')
+
         e.preventDefault()
         e.stopPropagation()
         if (window.plus) {

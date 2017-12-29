@@ -11,6 +11,7 @@
                     :isEnableImage="false"
                     :isEnableAddressAppear="true"
                     :isMonitorAddressAppear="isMonitorAddressAppear"
+                    :isMonitorHashSymbol="isMonitorHashSymbol"
                     :isEnableHashSymbol="true"
                     :isMonitorSmallSpan="true"
                     :allowBr="allowBr"
@@ -22,6 +23,7 @@
                     @hashSymbolFound="hashSymbolFound"
                     @addressAppearDelete="addressAppearDelete"
                     @hashSymbolDelete="hashSymbolDelete"
+                    @smallSpanArrChange="smallSpanArrChange"
       >
       </quill-editor>
 
@@ -75,6 +77,10 @@
         type: Boolean,
         default: false
       },
+      isMonitorHashSymbol: {
+        type: Boolean,
+        default: false
+      },
       allowBr: {  // 是否允许换行
         type: Boolean,
         default: true
@@ -102,6 +108,15 @@
       quillEditor
     },
     methods: {
+      getSmallSpanArr () {
+        return this.$refs.myTextEditor.getSmallSpanArr()
+      },
+      smallSpanArrChange (data) {
+        this.$emit('smallSpanArrChange', data)
+      },
+      delSmallSpan (nowValue) {
+        this.$refs.myTextEditor.delSmallSpan(nowValue)
+      },
       setPlaceholder (placeholder) {
         this.$refs.myTextEditor.setPlaceholder(placeholder)
       },
@@ -125,6 +140,9 @@
       },
       appendText (text, attribute, position = 'current') {
         this.$refs.myTextEditor.appendContent(text, attribute, position)
+      },
+      appendTexts (arr, position = 'current') {
+        this.$refs.myTextEditor.appendContents(arr, position)
       },
       addressAppearFound () {
         this.$emit('addressAppearFound')

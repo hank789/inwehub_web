@@ -73,6 +73,11 @@
         type: String,
         default: 'share'
       },
+      targetType: {
+        type: String,
+        default: ''
+      },
+      targetId: 0,
       link: {
         type: String,
         default: ''
@@ -258,7 +263,9 @@
 
         postRequest(`share/wechat/success`, {
           'target': this.link,
-          'title': this.title
+          'title': this.title,
+          'target_type': this.targetType,
+          'target_id': this.targetId
         }).then(response => {
 
         })

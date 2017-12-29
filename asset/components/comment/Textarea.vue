@@ -7,15 +7,18 @@
           v-model.trim="description"
           :rows="1"
           :content="description"
-          :isMonitorAddressAppear="false"
+          :isMonitorAddressAppear="true"
+          :isMonitorSmallSpan="true"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
           @ready="onEditorReady($event)"
+          @smallSpanArrChange="smallSpanArrChange"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
+          @addressAppearDelete="addressAppearDelete"
           v-on:keydown.enter="sendMessage"
         ></Jeditor>
 
@@ -29,45 +32,227 @@
 <script>
   import { softInput } from '../../utils/plus'
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
+  import { onceGet, onceSave } from '../../utils/cache'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const CommentTextarea = {
     data: () => ({
+      id: currentUser.user_id,
       showTextarea: false,
       description: {},
+      cacheKey: '',
       textarea: '',
+      text: '',
       descMaxLength: 5000,
       targetUsername: '',
       noticeUsers: [],
-      editorObj: null
+      editorObj: null,
+      oldList: [],
+      commentData: [], // 评论时需要的参数
+      historyDescription: [], // 历史内容
+      focusCallback: null  // 获取焦点时的回调
     }),
     props: {},
     components: {
       Jeditor
     },
+    activated () {
+      this.init()
+    },
     mounted () {
+      var referer = localEvent.getLocalItem('referer')
+      if (!(referer && referer.path === '/selectUser')) {
+        localEvent.clearLocalItem('comment_selectUser' + this.id)
+      }
+
+      this.init()
       softInput()
     },
+    created () {
+      this.cacheKey = this.$route.name + '_comment_textarea'
+    },
     methods: {
+      refreshPageData () {
+        this.init()
+      },
+      smallSpanArrChange (arr) {
+        setTimeout(() => {
+          this.syncSelectUser()
+        }, 500)
+      },
+      resetData () {
+        this.textarea = ''
+        this.noticeUsers = []
+        this.delCurrentHistoryDescription()
+        localEvent.clearLocalItem('comment_selectUser' + this.id)
+        this.$refs.myAddEditor.resetContent()
+        this.showTextarea = false
+      },
+      addressAppearDelete (text) {
+        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        for (var i in users) {
+          var name = '@' + users[i].name + ' '
+          if (name === text) {
+            this.delNoticeUser(users[i].id)
+            users.splice(i, 1)
+          }
+        }
+        localEvent.setLocalItem('comment_selectUser' + this.id, users)
+      },
+      getSelectUser () {
+        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        var spanUserNameAndIds = []
+        var spanUserNames = []
+        for (var i in users) {
+          this.noticeUser(users[i].id)
+          var data = {
+            name: '@' + users[i].name + ' ',
+            id: users[i].uuid
+          }
+          spanUserNameAndIds.push(data)
+          spanUserNames.push(data.name)
+        }
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanUserNames
+        }
+      },
+      syncSelectUser () {
+        // 循环插入@人
+        var users = this.getSelectUser()
+        var spanUserNameAndIds = users.nameAndIds
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('comment_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的用户都要添加上
+        var waitAddArr = []
+        for (var num = 0; num < spanUserNameAndIds.length; num++) {
+          var selectUserName = spanUserNameAndIds[num].name
+          var selectUserid = spanUserNameAndIds[num].id
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': 'https://m.inwehub.com/#/share/resume/' + selectUserid + '?goback=1'
+              }
+            })
+          }
+        }
+
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
+        }
+
+        // 文本框里未选择的，都要删除
+        var deleteUser = []
+        var spanUserNames = users.names
+
+        for (var n in smallSpanArr) {
+          if (spanUserNames.indexOf(smallSpanArr[n]) === -1) {
+            deleteUser.push(smallSpanArr[n])
+          }
+        }
+        this.$refs.myAddEditor.delSmallSpan(deleteUser)
+      },
+      initEditorData () {
+        console.log('initEditorData() fired')
+
+        this.syncSelectUser()
+      },
+      //  监听@事件
       addressAppearFound () {
-        console.log('found @')
+        console.debug(this.$data)
+        onceSave(this, this.cacheKey, {
+          showTextarea: this.showTextarea,
+          description: this.description,
+          cacheKey: this.cacheKey,
+          targetUsername: this.targetUsername,
+          noticeUsers: this.noticeUsers,
+          commentData: this.commentData,
+          currentUser: this.currentUser
+        })
+        setTimeout(() => {
+          this.editorObj.blur()
+        }, 200)
+        this.$router.pushPlus('/selectUser?from=comment')
+      },
+      init () {
+        console.log('init() fired')
+        this.oldList = this.commentData.commentList
+        var result = onceGet(this, this.cacheKey)
+        if (result) {
+          setTimeout(() => {
+            this.commentData.commentList = this.oldList
+            this.commentData.list = null  // 临时解决方案，强制discuss刷新列表, 等待删除
+            this.focusCallback = () => {
+              this.focusCallback = null
+              this.initEditorData()
+            }
+            this.editorObj.setContents(this.description)
+            this.editorObj.focus()
+          }, 100)
+        }
       },
       onEditorChange (editor) {
         this.textarea = editor.html
+        this.text = editor.text
       },
       onEditorBlur (editor) {
         window.mui.closeWaitingBlank()
         console.log('comment blur')
         this.showTextarea = false
+
+        this.setHistoryDescription()
+      },
+      delCurrentHistoryDescription () {
+        for (var i in this.historyDescription) {
+          if (this.historyDescription[i].targetUsername === this.targetUsername) {
+            this.historyDescription.splice(i, 1)
+          }
+        }
+      },
+      setHistoryDescription () {
+        this.delCurrentHistoryDescription()
+
+        this.historyDescription.push({
+          targetUsername: this.targetUsername,
+          description: this.description
+        })
+      },
+      getHistoryDescription () {
+        for (var i in this.historyDescription) {
+          if (this.historyDescription[i].targetUsername === this.targetUsername) {
+            this.editorObj.setContents(this.historyDescription[i].description)
+            this.historyDescription.splice(i, 1)
+            break
+          }
+        }
       },
       onEditorFocus (editor) {
+        if (!this.textarea.replace('<p> </p>', '').trim()) {
+          this.editorObj.setContents([{insert: ' '}])
+          var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
+          this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        }
+
+        if (this.focusCallback) {
+          this.focusCallback()
+        }
+
         window.mui.waitingBlank()
         console.log('comment focus')
       },
       onEditorReady (editor) {
         this.editorObj = editor
       },
-      comment (targetUsername) {
+      comment (data) {
+        var targetUsername = data.targetUsername
         console.log('comment targetUsername:' + targetUsername)
+        this.commentData = data.commentData
         if (targetUsername === '') {
           this.showTextarea = !this.showTextarea
         } else {
@@ -79,6 +264,11 @@
         var textarea = this.textarea
         textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
 
+        this.editorObj.setContents([{insert: ' '}])
+
+        this.getHistoryDescription()
+
+        console.log('comment-textarea:' + textarea)
         if (!textarea.trim()) {
           targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
           this.$refs.myAddEditor.setPlaceholder(targetUsername)
@@ -99,13 +289,17 @@
         }
       },
       finish () {
-        this.textarea = ''
-        this.noticeUsers = []
-        this.$refs.myAddEditor.resetContent()
-        this.showTextarea = false
+        this.resetData()
       },
-      noticeUser (uid) {
-        this.noticeUsers.push(uid)
+      noticeUser (id) {
+        this.delNoticeUser(id)
+        this.noticeUsers.push(id)
+      },
+      delNoticeUser (id) {
+        var noticeIndex = this.noticeUsers.indexOf(id)
+        if (noticeIndex > -1) {
+          this.noticeUsers.splice(noticeIndex, 1)
+        }
       },
       sendMessage (event) {
         event.preventDefault()
@@ -118,12 +312,19 @@
           return false
         }
 
+        var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
+          return
+        }
+
+        textarea = textarea.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
+
         var data = {
           content: textarea,
-          noticeUsers: this.noticeUsers
+          noticeUsers: this.noticeUsers,
+          commentData: this.commentData
         }
         this.$emit('sendMessage', data)
-
         this.editorObj.blur()
       }
     }

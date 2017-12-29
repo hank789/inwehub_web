@@ -58,7 +58,7 @@
   import Vue from 'vue'
   import DiscussReplay from '../../components/discover/DiscussReply.vue'
   import { textToLinkHtml } from '../../utils/dom'
-  import { openVendorUrl } from '../../utils/plus'
+  import { openVendorUrl, openAppUrl } from '../../utils/plus'
 
   const Discuss = {
     data: () => ({
@@ -118,17 +118,22 @@
         this.getList()
       },
       comment (parentId, commentTargetUsername, list) {
-        this.commentTarget = {
+        var commentTarget = {
           parentId: parentId || 0,
           commentTargetUsername: commentTargetUsername || '',
           list: list
         }
-        var commentTargetName = commentTargetUsername || ''
 
         console.log('回复 parentId:' + parentId + ', commentTargetUsername' + commentTargetUsername)
-        this.$emit('comment', commentTargetName)
+
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+        this.$emit('comment', data)
       },
       sendMessage (message) {
+        this.commentTarget = message.commentData
         var parentId = this.commentTarget.parentId
         var params = Object.assign({
           body: message.content,
@@ -173,23 +178,36 @@
           },
           created_at: createdAt
         }
+        console.log('discuss:item:' + JSON.stringify(item))
 
+        console.log('discuss:parentid:' + parentId)
         if (parentId) {
           var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
-          if (parentIndex) {
+          console.log('discuss:parentIndex:' + parentIndex)
+          if (parentIndex > 0) {
             if (this.commentTarget.list[parentIndex].children) {
               this.commentTarget.list[parentIndex].children.unshift(item)
             } else {
               this.commentTarget.list[parentIndex].children = [item]
             }
+          } else {
+            this.resetList()
           }
         } else {
-          this.commentTarget.list.unshift(item)
+          console.log('discuss:commentTarget:' + JSON.stringify(this.commentTarget))
+          if (this.commentTarget.list) {
+            this.commentTarget.list.unshift(item)
+          } else {
+            this.resetList()
+          }
         }
       },
       loadMore () {
         this.busy = true
         console.log('loadMore')
+        if (JSON.stringify(this.listParams) === '{}') {
+          return
+        }
         this.getList()
       },
       getList () {
@@ -235,6 +253,7 @@
         var eles = this.$el.querySelectorAll('.textToLink')
         for (var i in eles) {
           openVendorUrl(eles[i])
+          openAppUrl(eles[i])
         }
       })
     }
@@ -304,7 +323,10 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 12px 0 0px 0;
+    padding: 12px 0 12px 0;
+  }
+  .message_detail li:nth-last-of-type(1){
+    padding: 12px 0 0 0;
   }
 
   .message_b {

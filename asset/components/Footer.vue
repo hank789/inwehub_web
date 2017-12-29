@@ -35,13 +35,13 @@
         </div>
       </div>
       <!--消息-->
-      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/task')" v-if="isAsk">
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/inform')" v-if="isAsk">
         <svg class="icon twoIcon" aria-hidden="true">
           <use xlink:href="#icon-xiaoxi-hover"></use>
         </svg>
         <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
       </div>
-      <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/task')" v-else>
+      <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/inform')" v-else>
         <svg class="icon twoIcon" aria-hidden="true">
           <use xlink:href="#icon-xiaoxi1"></use>
         </svg>
@@ -64,8 +64,15 @@
 
     </nav>
 
-    <Share ref="FooterShareBtn" :title="shareoption.shareTitle" :shareName="shareoption.shareName" :link="shareoption.shareUrl"
-           :content="shareoption.shareContent" :imageUrl="shareoption.shareImg" :thumbUrl="shareoption.shareImg"
+    <Share ref="FooterShareBtn"
+           :title="shareoption.shareTitle"
+           :shareName="shareoption.shareName"
+           :link="shareoption.shareUrl"
+           :content="shareoption.shareContent"
+           :imageUrl="shareoption.shareImg"
+           :thumbUrl="shareoption.shareImg"
+           :targetId="shareoption.targetId"
+           :targetType="shareoption.targetType"
            :hideShareBtn="true"></Share>
   </div>
 </template>
@@ -95,6 +102,8 @@
           shareContent: '',
           shareTitle: '',
           shareName: '',
+          targetType: '',
+          targetId: '',
           id: ''
         }
       }
@@ -177,7 +186,7 @@
 
           this.$emit('messagecountchange', this.message_total_count)
 
-          var taskCount = response.data.data.todo_tasks + this.message_total_count
+          var taskCount = this.message_total_count
           setAppBadgeNumber(taskCount)
           this.onCountChange(taskCount)
         })

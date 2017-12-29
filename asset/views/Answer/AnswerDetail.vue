@@ -85,11 +85,9 @@
         @commentFinish="commentFinish"
 
         ref="discuss"
-        v-if="answer.answers[0] && answer.answers[0].content"
+        v-if="answer.answers[0] && answer.answers[0].content !== ''"
       ></Discuss>
 
-
-      <div class="mb70"></div>
     </div>
 
     <Share
@@ -100,6 +98,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
@@ -183,6 +183,7 @@
       shareSuccess () {},
       shareFail () {},
       refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
         this.loading = 1
         this.getData()
       },

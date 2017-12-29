@@ -105,7 +105,7 @@ function alertSky (titleHtml, contentHtml = '', iconType = '', callback = null, 
 
   var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm')
   if (alertConfirms.length) {
-    for (var ii = 0; i < alertConfirms.length; ii++) {
+    for (var ii = 0; ii < alertConfirms.length; ii++) {
       (function (index) {
         alertConfirms[index].onclick = function () {
           alertObj.close(index, '')

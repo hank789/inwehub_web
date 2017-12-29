@@ -23,7 +23,8 @@
           toolbar: [
             ['bold', 'italic', {'color': []}, {'align': []}, 'image']
           ]
-        }
+        },
+        smallSpanArr: []
       }
     },
     props: {
@@ -73,6 +74,19 @@
       this.quill = null
     },
     methods: {
+      delSmallSpan (nowValues) {
+        if (nowValues.length === 0) {
+          return
+        }
+        console.log('delSmallSpans data:' + JSON.stringify(nowValues))
+        var html = this.$refs.editor.children[0].innerHTML
+        for (var i in nowValues) {
+          var nowValue = nowValues[i]
+          var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
+          html = html.replace(reg, '')
+        }
+        this.resetHtml(html)
+      },
       setPlaceholder (placeholder) {
         this.quill.root.setAttribute('data-placeholder', placeholder)
         this.quill.root.classList.add('ql-blank')
@@ -85,6 +99,29 @@
       },
       resetContent (content) {
         this.quill.setContents(content)
+      },
+      appendContents (arr, position = 'current') {
+        console.log('run appendContent: arr:' + JSON.stringify(arr) + ', position:' + position)
+        // position 可选值是current, first
+        setTimeout(() => {
+          let range = this.quill.getSelection(true)
+          var positionNum = 0
+          if (position === 'current') {
+            positionNum = range.index
+          }
+          var delta = new Delta().retain(positionNum)
+
+          var length = 0
+          for (var i in arr) {
+            var appendChar = /^(@|#)/.test(arr[i].text) ? ' ' : ''
+            delta.insert(arr[i].text, arr[i].attribute)
+              .insert(appendChar, {})
+            length += arr[i].text.length
+          }
+
+          this.quill.updateContents(delta, 'user')
+          this.quill.setSelection(range.index + length + 1, 'user')
+        }, 100)
       },
       appendContent (text, attribute, position = 'current') {
         console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
@@ -255,6 +292,16 @@
         }
         return lastObject
       },
+      getSmallSpanArr () {
+        var linkNodes = this.$refs.editor.querySelectorAll('.ql-size-small')
+        var smallSpanArr = []
+        window.mui.each(linkNodes, (index, item) => {
+          var nowValue = item.innerText
+          smallSpanArr.push(nowValue)
+        })
+        console.log('getSmallSpanArr() return:' + JSON.stringify(smallSpanArr))
+        return smallSpanArr
+      },
       initialize () {
         if (this.$el) {
           // 获取选项
@@ -325,18 +372,21 @@
 
             // 监听 .ql-size-small
             if (self.isMonitorSmallSpan) {
-              var linkNodes = document.querySelectorAll('.ql-size-small')
-              var isStop = false
-              window.mui.each(linkNodes, (index, item) => {
-                if (isStop) return
+              var linkNodes = self.$refs.editor.querySelectorAll('.ql-size-small')
+              console.log('qlSizeSmallFound length:' + linkNodes.length)
+              var smallSpanArr = []
+
+              for (var index = 0; index < linkNodes.length; index++) {
+                var item = linkNodes[index]
                 var nowValue = item.innerText
+                smallSpanArr.push(nowValue)
                 if (item.hasAttribute('ql-value')) {
                   var oldValue = item.getAttribute('ql-value')
                   if (oldValue !== nowValue) {
                     if (oldValue.length > nowValue.length) {
                       // 删除操作
                       console.log(oldValue + 'change')
-                      var reg = new RegExp('<span\\s([^<]*?)' + nowValue + '</span>')
+                      var reg = new RegExp('<(a|span)\\s([^<]*?)' + nowValue + '</(a|span)>')
                       var newHtml = html.replace(reg, '')
                       console.log('reg:' + reg.toString())
                       console.log('旧的html:' + html)
@@ -352,7 +402,6 @@
                       }
 
                       self.resetHtml(newHtml)
-                      isStop = true
                     } else {
                       // 添加
                       self.quill.history.undo()
@@ -369,8 +418,6 @@
                           self.toLast()
                         }
                       }, 200)
-
-                      isStop = true
                     }
                   }
                 } else {
@@ -380,30 +427,39 @@
                   }
                   item.classList.add('appUrl')
                 }
-              })
-              if (isStop) return
+              }
+              if (JSON.stringify(smallSpanArr) !== JSON.stringify(this.smallSpanArr)) {
+                this.smallSpanArr = smallSpanArr
+                console.log('event:smallSpanArrChange fire, data:' + JSON.stringify(smallSpanArr))
+                self.$emit('smallSpanArrChange', smallSpanArr)
+              }
             }
 
             if (delta.ops[1] && delta.ops[1].delete) {
               // 删除操作
             } else {
               // 添加操作
-              var trimStr = text.trim()
-              var lastChar = trimStr.charAt(trimStr.length - 1)
+              var lastChar = delta.ops[1] ? delta.ops[1].insert : ''
+              var lastChar2 = delta.ops[0] && delta.ops[0].insert ? delta.ops[0].insert : ''
+              if (!lastChar && lastChar2) {
+                lastChar = lastChar2
+              }
               console.log('lastChar:' + lastChar)
 
+              var noBrText = text.trim()
+              console.log('noBrText:' + noBrText)
               if (self.isMonitorAddressAppear) {
-                if (lastChar === '@') {
+                if ((lastChar === '@' && /\s@$/.test(noBrText)) || (lastChar === '@' && /^@$/.test(noBrText))) {
                   console.log('监测到@， 触发addressAppearFound')
-                  self.$emit('addressAppearFound')
+                  self.$emit('addressAppearFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
                 }
               }
 
               if (self.isMonitorHashSymbol) {
-                if (lastChar === '#') {
+                if ((lastChar === '#' && /\s#$/.test(noBrText)) || (lastChar === '#' && /^#$/.test(noBrText))) {
                   console.log('监测到#， 触发hashSymbolFound')
-                  self.$emit('hashSymbolFound')
+                  self.$emit('hashSymbolFound', delta.ops[0] ? delta.ops[0].retain : 0)
                   self.quill.history.undo()
                 }
               }

@@ -9,11 +9,13 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          <span  v-if="this.tags.length">已选择</span>
+          <span  v-if="this.tags.length">修改</span>
           <span  v-else>选择</span>
         </button>
       </div>
-
+      <div class="ask_tags" v-if="tag.length">
+        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
+      </div>
       <div class="form form-ask">
         <div class="textarea-wrapper">
           <textarea id="description" v-model.trim="description" @keydown.stop="enterWords" @focus="textareaFocus"
@@ -26,7 +28,7 @@
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
           </svg>
-          <img :id="'image_' + index" :src="image.base64"/>
+          <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
         </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
@@ -146,6 +148,7 @@
       images: [],
       maxImageCount: 9,
       tags: [],
+      tag: [],
       money: 88,
       payItems: [],
       uid: 0,
@@ -167,6 +170,7 @@
       this.initData()
     },
     mounted () {
+      window.mui.previewImage()
       autoTextArea()
       this.initData()
 
@@ -240,11 +244,11 @@
     methods: {
       initData () {
         //      取标签；
-        var tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
+        this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
         // 返回时重新取值
         this.tags = []
-        for (var i in tag) {
-          this.tags = this.tags.concat(tag[i].value)
+        for (var i in this.tag) {
+          this.tags = this.tags.concat(this.tag[i].value)
         }
       },
       uploadImage: function () {
@@ -438,6 +442,7 @@
         var info = {}
         this.images = []
         this.tags = []
+        this.tag = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
@@ -891,5 +896,24 @@
   }
   .container-images{
     background: #F3F4F5;
+  }
+  /*标签样式*/
+  .ask_tags{
+    width:100%;
+    background: #f3f4f6;
+    overflow: hidden;
+    padding: 0  16px 0px 7px;
+  }
+  .ask_tags p{
+    margin: 0;
+    padding: 0;
+    float: left;
+    background: #a8dff7;
+    color:#FFFFFF;
+    padding: 0px 8px;
+    border-radius:50px;
+    margin-top: 9px;
+    margin-left: 9px;
+    font-size:12px;
   }
 </style>

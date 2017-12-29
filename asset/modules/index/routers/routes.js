@@ -1079,7 +1079,7 @@ const routes = [
     name: 'inform-list',
     component: require('../../../views/Task/InformList.vue'),
     meta: {
-      title: '动态',
+      title: '通知',
       wechatHideHeader: true,
       keepAlive: true
     },
@@ -1763,6 +1763,14 @@ const routes = [
       title: 'InweHub'
     },
     component: require('../../../views/Webview/notice.vue')
+  },
+  {
+    path: '/webview/vendor/:url',
+    name: 'webview-vendor',
+    meta: {
+      title: 'vendor'
+    },
+    component: require('../../../views/Webview/Vendor.vue')
   },
   {
     path: '/webview/article',

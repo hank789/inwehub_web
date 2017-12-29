@@ -807,7 +807,9 @@ input.upload-file[type=file]{
 
 .mui-poppicker {
   background-color: #fff !important;
+  position: absolute !important;
 }
+
 .mui-poppicker-body{
   border-top:1px solid #dcdcdc !important;
 }
@@ -1305,4 +1307,12 @@ a {
 
 .mui-modal.mui-active{
   background-color: #3c3e44;
+}
+/* quill xiangqingye yangshi */
+.quillDetailWrapper p {
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.ql-tooltip{
+  display:none;
 }

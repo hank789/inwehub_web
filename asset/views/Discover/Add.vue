@@ -15,13 +15,18 @@
           :content="description"
           :descMaxLength="descMaxLength"
           :placeholder="descPlaceholder"
+          :isMonitorAddressAppear="true"
+          :isMonitorHashSymbol="true"
+          :isMonitorSmallSpan="true"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
+          @hashSymbolFound="hashSymbolFound"
           @hashSymbolDelete="hashSymbolDelete"
           @addressAppearDelete="addressAppearDelete"
+          @smallSpanArrChange="smallSpanArrChange"
         ></Jeditor>
 
         <div class="container-images" :class="'container-images-' + (images.length + 1)">
@@ -29,7 +34,7 @@
             <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
               <use xlink:href="#icon-times1"></use>
             </svg>
-            <img :id="'image_' + index" :src="image.base64"/>
+            <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
           </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
@@ -42,16 +47,22 @@
       </div>
 
       <div class="container-bottom-menus">
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/selectUser')">
-          <use xlink:href="#icon-icon-test1"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="totags">
-          <use xlink:href="#icon-icon-test"></use>
-        </svg>
-        <svg class="icon menu" aria-hidden="true" @tap.stop.prevent="jumpToLinkMode()">
-          <use xlink:href="#icon-lianjie"></use>
-        </svg>
-        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="$router.pushPlus('/nearby?from=discover')">
+        <span @tap.stop.prevent="toUser">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test1"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="totags">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-icon-test"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="jumpToLinkMode()">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-lianjie"></use>
+          </svg>
+        </span>
+        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
@@ -81,12 +92,8 @@
     data () {
       return {
         id: currentUser.user_id,
-        tag: [],
+        noticeUsers: [],
         tags: [],
-        tagsName: [],
-        user: [],
-        userId: [],
-        userName: [],
         description: {},
         images: [],
         maxImageCount: 9,
@@ -110,7 +117,31 @@
       uploadImage,
       Jeditor
     },
+    created () {
+      getGeoPosition((position) => {
+        if (position.addresses) {
+          this.position = position
+        }
+      })
+    },
+    activated: function () {
+      this.initData()
+    },
+    mounted () {
+      var referer = localEvent.getLocalItem('referer')
+      if (!(referer && referer.path === '/selectUser')) {
+        localEvent.clearLocalItem('discover_selectUser' + this.id)
+      }
+      if (!(referer && referer.path === '/selecttags')) {
+        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+      }
+      autoTextArea()
+      window.mui.previewImage()
+    },
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       getAddress () {
         // 获取地理位置
         var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
@@ -119,36 +150,176 @@
           localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
         }
       },
-      refreshPageData () {
-        this.initData()
+      hashSymbolFound () {
+        this.$refs.myAddEditor.blur()
+        this.$router.pushPlus('/selecttags?from=discover')
       },
       addressAppearFound () {
-        this.$refs.myAddEditor.appendText('@', {})
+        this.$refs.myAddEditor.blur()
+        this.$router.pushPlus('/selectUser?from=discover')
       },
-//      删除标签
+      smallSpanArrChange (arr) {
+        setTimeout(() => {
+          console.log('smallSpanArrChange() fired')
+          this.syncSelectUser()
+          this.syncSelectTags()
+          this.syncDelete()
+        }, 1000)
+      },
+      // 删除标签
       hashSymbolDelete (text) {
-        var name = text.substring(1, text.length - 1)
-//        console.error(name)
-        for (var i in this.tag) {
-          if (this.tag[i].text === name) {
-            this.tag.splice(i, 1)
-            this.tags.splice(i, 1)
-            this.tagsName.splice(i, 1)
+        var tags = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        for (var i in tags) {
+          var name = '#' + tags[i].text + ' '
+          if (name === text) {
+            this.delTag(tags[i].text)
+            tags.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_skill_tags' + this.id, this.tag)
+        localEvent.setLocalItem('discover_skill_tags' + this.id, tags)
       },
+       //  删除用户
       addressAppearDelete (text) {
-        var name = text.substring(1, text.length - 1)
-//        console.error(name)
-        for (var i in this.user) {
-          if (this.user[i].name === name) {
-            this.user.splice(i, 1)
-            this.userId.splice(i, 1)
-            this.userName.splice(i, 1)
+        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        for (var i in users) {
+          var name = '@' + users[i].name + ' '
+          if (name === text) {
+            this.delNoticeUser(users[i].id)
+            users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('select_users' + this.id, this.user)
+        localEvent.setLocalItem('discover_selectUser' + this.id, users)
+      },
+      syncSelectUser () {
+        // 循环插入@人
+        var users = this.getSelectUser()
+        var spanUserNameAndIds = users.nameAndIds
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('discover_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的用户都要添加上
+        var waitAddArr = []
+        for (var num = 0; num < spanUserNameAndIds.length; num++) {
+          var selectUserName = spanUserNameAndIds[num].name
+          var selectUserid = spanUserNameAndIds[num].id
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#42AEF9',
+                'size': 'small',
+                'link': 'https://m.inwehub.com/#/share/resume/' + selectUserid + '?goback=1'
+              }
+            })
+          }
+        }
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
+        }
+      },
+      syncDelete () {
+        // 文本框里未选择的，都要删除
+        var users = this.getSelectUser()
+        var userNames = users.names
+        var tags = this.getSelectTags().names
+        var all = userNames.concat(tags)
+
+        var deleteArr = []
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        for (var n in smallSpanArr) {
+          if (all.indexOf(smallSpanArr[n]) === -1) {
+            deleteArr.push(smallSpanArr[n])
+          }
+        }
+        this.$refs.myAddEditor.delSmallSpan(deleteArr)
+      },
+      syncSelectTags () {
+        var tags = this.getSelectTags().names
+        var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
+        console.log('discover_selectttag:' + JSON.stringify(tags) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+
+        // 已选的tag都要添加上
+        var waitAddArr = []
+        for (var num = 0; num < tags.length; num++) {
+          var selectUserName = tags[num]
+          if (smallSpanArr.indexOf(selectUserName) === -1) {
+            waitAddArr.push({
+              text: selectUserName,
+              attribute: {
+                'color': '#225180',
+                'size': 'small'
+              }
+            })
+          }
+        }
+        if (waitAddArr.length) {
+          this.$refs.myAddEditor.appendTexts(waitAddArr)
+        }
+      },
+      getSelectUser () {
+        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        var spanUserNameAndIds = []
+        var spanUserNames = []
+        for (var i in users) {
+          this.noticeUser(users[i].id)
+          var data = {
+            name: '@' + users[i].name + ' ',
+            id: users[i].uuid
+          }
+          spanUserNameAndIds.push(data)
+          spanUserNames.push(data.name)
+        }
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanUserNames
+        }
+      },
+      getSelectTags () {
+        var users = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        var spanUserNameAndIds = []
+
+        var spanNames = []
+        for (var i in users) {
+          this.addTags(users[i].value)
+          var data = {
+            name: '#' + users[i].text + ' ',
+            id: users[i].value
+          }
+          spanUserNameAndIds.push(data)
+          spanNames.push(data.name)
+        }
+        return {
+          nameAndIds: spanUserNameAndIds,
+          names: spanNames
+        }
+      },
+      addTags (tag) {
+        this.delTag(tag)
+        this.tags.push(tag)
+      },
+      delTag (tag) {
+        var index = this.tags.indexOf(tag)
+        if (index > -1) {
+          this.tags.splice(index, 1)
+        }
+      },
+      noticeUser (id) {
+        this.delNoticeUser(id)
+        this.noticeUsers.push(id)
+      },
+      delNoticeUser (id) {
+        var noticeIndex = this.noticeUsers.indexOf(id)
+        if (noticeIndex > -1) {
+          this.noticeUsers.splice(noticeIndex, 1)
+        }
+      },
+      initData () {
+        console.log('initData() fired')
+        this.syncSelectUser()
+        this.syncSelectTags()
+        this.syncDelete()
+
+        this.getAddress()
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -166,40 +337,28 @@
         this.$router.pushPlus('/home')
       },
       totags () {
-        localEvent.setLocalItem('discover_description' + this.id, this.description)
-        this.$router.push('/selecttags?from=discover')
+        this.$refs.myAddEditor.blur()
+        this.$router.pushPlus('/selecttags?from=discover')
+      },
+      toUser () {
+        this.$refs.myAddEditor.blur()
+        this.$router.pushPlus('/selectUser?from=discover')
+      },
+      toAddress () {
+        this.$refs.myAddEditor.blur()
+        this.$router.pushPlus('/nearby?from=discover')
       },
       jumpToLinkMode: function () {
+        this.$refs.myAddEditor.blur()
         this.$router.pushPlus('/discover/publishArticles')
+        this.resetData()
       },
       uploadImage: function () {
-        this.$refs.myAddEditor.blur()
+        setTimeout(() => {
+          this.$refs.myAddEditor.blur()
+        }, 200)
         this.$refs.uploadImage.uploadImage()
       },
-//      selectAddress () {
-//        var userPicker = new window.mui.PopPicker()
-//
-//        userPicker.setData([
-//          {
-//            value: '1',
-//            text: this.address
-//          },
-//          {
-//            value: '2',
-//            text: '不显示位置'
-//          }
-//        ])
-//        if (this.selectedAddress === '不显示位置') {
-//          userPicker.pickers[0].setSelectedValue('2')
-//        } else {
-//          userPicker.pickers[0].setSelectedValue('1')
-//        }
-//
-//        userPicker.show(items => {
-//          this.selectedAddress = items[0].text
-//          userPicker.dispose()
-//        })
-//      },
       toggleHide () {
         this.hide = !this.hide
       },
@@ -208,26 +367,26 @@
       },
       resetData () {
         this.tags = []
-        this.tagsName = []
-        this.userId = []
-        this.userName = []
+        this.noticeUsers = []
         this.description = {}
         this.images = []
         this.percentCompleted = 0
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
-        localEvent.clearLocalItem('discover_description' + this.id)
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
-        localEvent.clearLocalItem('select_users' + this.id)
+        localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
         var html = this.html.replace(/(<p><br><\/p>)*$/, '')
-        if (!html) {
+        var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
           window.mui.toast('请填写分享内容')
           return
         }
+
+        html = html.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
 
         var data = {
           type: 'text',
@@ -235,10 +394,10 @@
           photos: [],
           category_id: '',
           tags: this.tags,
-          mentions: this.userId,
-          current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.selectedAddress : '',
-          current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.longt : '',
-          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' ? this.position.lat : ''
+          mentions: this.noticeUsers,
+          current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.selectedAddress : '',
+          current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.longt : '',
+          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.lat : ''
         }
 
         for (var i in this.images) {
@@ -265,54 +424,7 @@
           this.resetData()
           this.$router.push('/discover/add/success')
         })
-      },
-      initData () {
-        // 循环插入标签
-        this.tag = localEvent.getLocalItem('discover_skill_tags' + this.id)
-        for (var i = 0; i < this.tag.length; i++) {
-          if (this.tags.indexOf(this.tag[i].value) === -1) {
-            this.tags.push(this.tag[i].value)
-          }
-          if (this.tagsName.indexOf(this.tag[i].text) === -1) {
-            this.tagsName.push(this.tag[i].text)
-            this.$refs.myAddEditor.appendText('#' + this.tag[i].text + ' ', {
-              'color': '#225180',
-              'size': 'small'
-            })
-          }
-        }
-        // 循环插入@人
-        this.user = localEvent.getLocalItem('select_users' + this.id)
-        for (var num = 0; num < this.user.length; num++) {
-          if (this.userId.indexOf(this.user[num].id) === -1) {
-            this.userId.push(this.user[num].id)
-          }
-          if (this.userName.indexOf(this.user[num].name) === -1) {
-            this.userName.push(this.user[num].name)
-            this.$refs.myAddEditor.appendText('@' + this.user[num].name + ' ', {
-              'color': '#42AEF9',
-              'size': 'small',
-              'link': '/share/resume/' + this.user[num].uuid + '?goback=1'
-            })
-          }
-        }
-
-        this.getAddress()
       }
-    },
-    created () {
-      getGeoPosition((position) => {
-        if (position.addresses) {
-          this.position = position
-        }
-      })
-    },
-    activated: function () {
-      this.initData()
-    },
-    mounted () {
-      autoTextArea()
-      this.initData()
     }
   }
 </script>
@@ -325,7 +437,15 @@
 
   .container-bottom-menus{
     position: absolute;
+    padding-left: 7.5px;
     left:0;
+  }
+  .container-bottom-menus span{
+    display: block;
+    float: left;
+    padding: 0 7.5px;
+    font-size: 19px;
+    color: grey;
   }
 
   .component-photograph{

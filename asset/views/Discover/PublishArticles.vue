@@ -56,8 +56,11 @@
 </template>
 
 <script>
+
   import { postRequest } from '../../utils/request'
-  const urlReg = /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]$/
+  import { autoTextArea } from '../../utils/plus'
+
+  const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
     data () {
       return {
@@ -105,9 +108,23 @@
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
+            if (code === 6101) {
+              var that = this
+              window.mui.alert('链接已存在,现在跳转原链接位置', '', ['跳转'],function (e) {
+                that.$router.pushPlus(response.data.data.exist_url)
+              })
+              return
+            }
             window.mui.alert(response.data.message)
             return
           } else if (code === 1000) {
+            this.url = ''
+            this.title = ''
+            this.channel = ''
+            this.channelValue = ''
+            this.disableRegister = true
+            this.isblue = false
+            this.isShow = false
             this.$router.pushPlus('/discover/add/success')
             return
           }
@@ -190,6 +207,9 @@
       },
       focus () {}
     },
+    mounted () {
+      autoTextArea()
+    },
     created () {
       this.getChannels()
     }
@@ -199,6 +219,7 @@
 <style scoped="scoped">
   .mui-content {
     background: #FFFFFF;
+    overflow: hidden !important;
   }
 
   /*清掉自带样式*/

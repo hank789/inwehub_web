@@ -18,7 +18,7 @@
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
       </div>
-      <div class="contentWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+      <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
         <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
         <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
@@ -87,6 +87,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="slug"
+      :targetType="'submission'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
@@ -160,7 +162,7 @@
     },
     methods: {
       textToLink (text) {
-        return textToLinkHtml(text)
+        return textToLinkHtml(' ' + text)
       },
       toAvatar (uuid) {
         if (!uuid) {
@@ -193,6 +195,7 @@
       },
       refreshPageData () {
         this.getDetail()
+        this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
 
@@ -301,7 +304,7 @@
 
   .contentWrapper{
     padding:0 15px;
-    white-space: pre-wrap !important;
+    white-space:pre-line !important;
     font-size:15px;
     color:#444;
   }
@@ -358,4 +361,10 @@
     font-size:13px;
     color:#03aef9;
   }
+  .contentWrapper span{
+    font-size: 15px;
+  }
 </style>
+
+
+

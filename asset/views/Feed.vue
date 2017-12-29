@@ -138,7 +138,7 @@
     data: () => ({
       loading: false,
       list: [],
-      commentTarget: null,
+      commentTargetComponent: null,
       is_company: currentUser.is_company
     }),
     created () {
@@ -183,11 +183,16 @@
     },
     computed: {},
     methods: {
+      refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
+      },
       sendMessage (message) {
+        var commentTarget = message.commentData
+
         postRequest(`article/comment-store`, {
-          'submission_id': this.commentTarget.submissionId,
+          'submission_id': commentTarget.submissionId,
           body: message.content,
-          parent_id: this.commentTarget.parentId,
+          parent_id: commentTarget.parentId,
           mentions: message.noticeUsers
         }).then(response => {
           var code = response.data.code
@@ -200,12 +205,12 @@
 
           window.mui.toast(response.data.message)
 
-          this.commentTarget.component.prependItem(
+          this.commentTargetComponent.prependItem(
             data.id,
             message.content,
             data.created_at,
-            this.commentTarget.parentId,
-            this.commentTarget.commentList
+            commentTarget.parentId,
+            commentTarget.commentList
           )
 
           this.$refs.ctextarea.finish()
@@ -213,14 +218,17 @@
       },
       comment (submissionId, parentId, commentTargetUsername, list, component) {
         // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
-        this.commentTarget = {
+        var commentTarget = {
           submissionId: submissionId,
           parentId: parentId || 0,
-          component,
           commentList: list
         }
-        var commentUsername = commentTargetUsername || ''
-        this.$refs.ctextarea.comment(commentUsername)
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+        this.commentTargetComponent = component
+        this.$refs.ctextarea.comment(data)
       },
       alertClick (title) {
         if (this.is_company) {
@@ -355,9 +363,12 @@
   .feedWrapper .container-avatarAndText{
     margin-bottom:10px;
   }
+  .component-iconNumber{
+    margin-left: 7.5px;
+  }
 
-  .feedWrapper .iconPenglunWrapper{
-    margin-right:15px;
+  .feedWrapper .iconPenglunWrapper {
+    margin: 0 7.5px;
   }
   .labelWrapper{
     text-align: right;
@@ -406,4 +417,5 @@
     font-size:12px;
     color:#03aef9;
   }
+
 </style>

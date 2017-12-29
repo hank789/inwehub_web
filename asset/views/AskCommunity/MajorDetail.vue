@@ -111,6 +111,8 @@
       :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
+      :targetId="id"
+      :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
@@ -203,6 +205,7 @@
         this.answer.comment_number++
       },
       refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
         console.log('refreshPageData')
         this.loading = 1
         this.getDetail()

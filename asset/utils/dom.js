@@ -28,13 +28,22 @@ function queryParent (el, classname) {
  */
 function textToLink (domEle) {
   var text = domEle.innerHTML
+  console.log('textToLink html:' + text)
 
-  if (/<a/gi.test(text)) {
-    return false
+  if (/vendorUrl/gi.test(text)) {
+    return text
   }
+  var re = /\s(https?:\/\/[^\s<]+)/g
+  text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
-  var re = /(https?:\/\/[^\s<]+)/g
-  domEle.innerHTML = text.replace(re, "<span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+  re = /<p>(https?:\/\/[^\s<]+)/g
+  text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  re = /^(https?:\/\/[^\s<]+)/
+  text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  console.log('textToLink html2:' + text)
+  domEle.innerHTML = text
 }
 
 function textToLinkHtml (text) {
@@ -50,12 +59,31 @@ function textToLinkHtml (text) {
 
   re = /<p>(https?:\/\/[^\s<]+)/g
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  re = /^(https?:\/\/[^\s<]+)/
+  text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
   return text
+}
+
+function stripTags (text) {
+  return text.replace(/<[^>]+>/g, '')
+}
+
+function addPreviewAttrForImg (html, group = '1') {
+  if (/data-preview-src/gi.test(html)) {
+    return html
+  }
+
+  var re = /<img(.*?)src="([^"]*?)"/g
+  html = html.replace(re, "<img $1 data-preview-src='$2' data-preview-group='" + group + "' src='$2'")
+  return html
 }
 
 export {
   queryParent,
   textToLink,
-  textToLinkHtml
+  textToLinkHtml,
+  stripTags,
+  addPreviewAttrForImg
 }
 

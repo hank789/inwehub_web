@@ -45,7 +45,7 @@ var EventObj = () => {
         prevEventTime = new Date().getTime()
         callback()
       }
-      window.addEventListener(name, newCallback, false)
+      window.addEventListener(name, newCallback, true)
     }
   }
 

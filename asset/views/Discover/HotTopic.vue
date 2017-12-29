@@ -52,7 +52,7 @@
                     <use xlink:href="#icon-shoucangxingxing"></use>
                   </svg>
                 </p>
-                <p @tap.stop.prevent="goDetial(hot)">
+                <p  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                   </svg>
@@ -380,7 +380,10 @@
   ul .Container .information p {
     color: #808080;
     position: relative;
-
+    height:40px;
+    display: flex;
+    align-items: center;
+    padding:0 5px;
   }
 
   /*举报和删除*/
@@ -389,8 +392,8 @@
     width: 50px;
     background: #575857;
     position: absolute;
-    top: 20px;
-    left: -15px;
+    top: 28px;
+    left: -13px;
     border-radius: 4px;
     z-index: 99;
   }

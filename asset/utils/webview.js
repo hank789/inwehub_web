@@ -290,6 +290,7 @@ function showWebview () {
  * webview 回退处理函数
  */
 function goBack () {
+  console.log('goBack() fired')
   if (window.mui.os.plus) {
     var self = window.plus.webview.currentWebview()
     // 获得父页面的webview
@@ -395,6 +396,48 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
   }
 }
 
+/**
+ * 打开第三方任意网页
+ * @param url
+ */
+function goVendorUrl (url, callback) {
+  var currentWebview = window.plus.webview.currentWebview()
+
+  var immersedHeight = getImmersedHeight()
+
+  var ws = window.mui.openWindow({
+    url: url,
+    id: 'vendor_url_open',
+    preload: false,
+    popGesture: 'hide',
+    show: {
+      autoShow: false,
+      aniShow: 'slide-in-right'
+    },
+    extras: {preload: false},
+    waiting: {
+      autoShow: false
+    },
+    styles: {
+      statusbar: {
+        background: '#3c3e44'
+      },
+      backButtonAutoControl: 'hide',
+      popGesture: 'hide',
+      top: (immersedHeight + 44) + 'px'
+    }
+  })
+
+  ws.onloaded = (event) => {
+    var title = ws.getTitle()
+    if (callback) {
+      callback(title)
+    }
+  }
+
+  currentWebview.append(ws)
+}
+
 export {
   openWebviewByUrl,
   openReadhubPage,
@@ -402,6 +445,7 @@ export {
   showWebview,
   clearAllWebViewCache,
   openWebviewByHome,
-  goThirdPartyArticle
+  goThirdPartyArticle,
+  goVendorUrl
 }
 

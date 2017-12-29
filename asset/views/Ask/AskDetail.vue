@@ -69,6 +69,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
     ></Share>
@@ -183,6 +185,7 @@
         })
       },
       refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
         this.loading = 1
         this.getDetail()
       },

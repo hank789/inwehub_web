@@ -2,7 +2,6 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">通知</h1>
     </header>
     <!--导航栏-->
@@ -10,11 +9,11 @@
     <div class="mui-content">
       <div class="mui-scroll-wrapper">
         <div class="content">
-          <div class="menu">
-            <span @tap.stop.prevent="$router.replace('/task')">任务</span>
-            <span @tap.stop.prevent="">消息 <i></i></span>
-            <div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
-          </div>
+          <!--<div class="menu">-->
+            <!--<span @tap.stop.prevent="$router.replace('/task')">任务</span>-->
+            <!--<span @tap.stop.prevent="">消息 <i></i></span>-->
+            <!--<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>-->
+          <!--</div>-->
           <!--内容区域-->
           <RefreshList
             ref="RefreshList"
@@ -26,7 +25,17 @@
             :autoShowEmpty="false"
             class="listWrapper">
               <ul>
-                <li @tap.stop.prevent="skip(1)">
+                <li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">
+                  <img src="../../statics/images/task.png" />
+                  <div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>
+                  <p>
+                  <span>任务通知</span>
+                  <span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>{{list.todo_task_message.last_message ? '&nbsp;|&nbsp;' + list.todo_task_message.last_message.status_description: ""}}</i> </span>
+                  </p>
+                  <a>16:44</a>
+                  <i class="bot"></i>
+                </li>
+                <li @tap.stop.prevent="skip(1)" v-if="list.notice_message.last_message">
                   <img src="../../statics/images/inform1.png"/>
                   <div class="message" v-if="list.notice_message.unread_count">{{list.notice_message.unread_count}}</div>
                   <p>
@@ -36,7 +45,7 @@
                   <a>{{list.notice_message.last_message ? list.notice_message.last_message.created_at : ''}}</a>
                   <i class="bot"></i>
                 </li>
-                <li @tap.stop.prevent="skip(2)">
+                <li @tap.stop.prevent="skip(2)" v-if="list.money_message.last_message ">
                   <img src="../../statics/images/balance1.png"/>
                   <div class="message" v-if="list.money_message.unread_count">{{list.money_message.unread_count}}</div>
                   <p>
@@ -56,8 +65,8 @@
                       <!--<a>16:44</a>-->
                       <!--<i class="bot"></i>-->
                  <!--</li>-->
-                <li @tap.stop.prevent="skip(3)">
-                  <img src="../../statics/images/mission1.png"/>
+                <li @tap.stop.prevent="skip(3)" v-if="list.task_message.last_message">
+                  <img src="../../statics/images/mission.png"/>
                   <div class="message" v-if="list.task_message.unread_count">{{list.task_message.unread_count}}</div>
                   <p>
                     <span>问答通知</span>
@@ -66,7 +75,7 @@
                   <a>{{list.task_message.last_message ? list.task_message.last_message.created_at : ''}}</a>
                   <i class="bot"></i>
                 </li>
-                <li @tap.stop.prevent="skip(4)">
+                <li @tap.stop.prevent="skip(4)" v-if="list.readhub_message.last_message">
                   <img src="../../statics/images/read1.png"/>
                   <div class="message" v-if="list.readhub_message.unread_count">{{list.readhub_message.unread_count}}</div>
                   <p>
@@ -102,6 +111,13 @@
   const TaskMain = {
     data: () => ({
       list: {
+        todo_task_message: {
+          last_message: {
+            status_description: '',
+            task_type_description: ''
+          },
+          unread_count: ''
+        },
         notice_message: {
           last_message: {
             created_at: '',
@@ -216,60 +232,57 @@
     list-style: none;
     font-style: normal;
   }
-
-  /*导航栏的样式*/
-
   .mui-content {
     background: #FFFFFF;
   }
+  /*导航栏的样式*/
+  /*.mui-wechat .menu {*/
+    /*width: 100%;*/
+    /*height: 45px;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*z-index: 10;*/
+    /*background: #f3f4f6;*/
+  /*}*/
 
-  .mui-wechat .menu {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    background: #f3f4f6;
-  }
+  /*.mui-wechat .content {*/
+    /*margin-top: 45px;*/
+  /*}*/
 
-  .mui-wechat .content {
-    margin-top: 45px;
-  }
+  /*.menu {*/
+    /*width: 100%;*/
+    /*height: 45px;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*z-index: 99;*/
+    /*background: #f3f4f6;*/
+  /*}*/
 
-  .menu {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    top: 0;
-    z-index: 99;
-    background: #f3f4f6;
-  }
+  /*.menu span {*/
+    /*display: inline-block;*/
+    /*width: 49%;*/
+    /*height: 100%;*/
+    /*font-size: 14px;*/
+    /*color: #444444;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+    /*font-weight: 600;*/
+    /*position: relative;*/
+  /*}*/
 
-  .menu span {
-    display: inline-block;
-    width: 49%;
-    height: 100%;
-    font-size: 14px;
-    color: #444444;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
-    position: relative;
-  }
+  /*.menu span:nth-of-type(2) {*/
+    /*color: #3c95f9;*/
+  /*}*/
 
-  .menu span:nth-of-type(2) {
-    color: #3c95f9;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 30px;
-    height: 1.8px;
-    right: 42.65%;
-    bottom: 0.5px;
-    background: #3c95f9;
-  }
+  /*.menu i {*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*width: 30px;*/
+    /*height: 1.8px;*/
+    /*right: 42.65%;*/
+    /*bottom: 0.5px;*/
+    /*background: #3c95f9;*/
+  /*}*/
 
   /*内容区域*/
   .content {
@@ -361,7 +374,6 @@
   }
 
   .listWrapper{
-    top:45px;
     bottom: 50px;
   }
 </style>
