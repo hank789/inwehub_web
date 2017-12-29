@@ -8,13 +8,13 @@
 
     <div class="mui-content">
       <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="">任务</span>
-        <span @tap.stop.prevent="$router.replace('/inform')">消息</span>
+      <!--<div class="menu">-->
+        <!--<span @tap.stop.prevent="">任务</span>-->
+        <!--<span @tap.stop.prevent="$router.replace('/inform')">消息</span>-->
 
-        <div class="menu_message" v-show="total_count != 0">{{total_count}}</div>
-        <i></i>
-      </div>
+        <!--<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>-->
+        <!--<i></i>-->
+      <!--</div>-->
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -180,49 +180,49 @@
 </script>
 
 <style scoped>
-  .mui-wechat .menu[data-v-4f45c199] {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-    top: 0;
-  }
+  /*.mui-wechat .menu[data-v-4f45c199] {*/
+    /*width: 100%;*/
+    /*height: 45px;*/
+    /*position: absolute;*/
+    /*z-index: 10;*/
+    /*background: #f3f4f6;*/
+    /*top: 0;*/
+  /*}*/
 
   /*导航栏的样式*/
 
-  .menu {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-  }
+  /*.menu {*/
+    /*width: 100%;*/
+    /*height: 45px;*/
+    /*position: absolute;*/
+    /*z-index: 10;*/
+    /*background: #f3f4f6;*/
+  /*}*/
 
-  .menu span {
-    display: inline-block;
-    width: 49%;
-    height: 100%;
-    font-size: 14px;
-    color: #444444;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
-  }
+  /*.menu span {*/
+    /*display: inline-block;*/
+    /*width: 49%;*/
+    /*height: 100%;*/
+    /*font-size: 14px;*/
+    /*color: #444444;*/
+    /*text-align: center;*/
+    /*line-height: 45px;*/
+    /*font-weight: 600;*/
+  /*}*/
 
-  .menu span:nth-of-type(1) {
-    color: #3c95f9;
-  }
+  /*.menu span:nth-of-type(1) {*/
+    /*color: #3c95f9;*/
+  /*}*/
 
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 30px;
-    height: 1.8px;
-    left: 20.55%;
-    bottom: 0.5px;
-    background: #3c95f9;
-  }
+  /*.menu i {*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*width: 30px;*/
+    /*height: 1.8px;*/
+    /*left: 20.55%;*/
+    /*bottom: 0.5px;*/
+    /*background: #3c95f9;*/
+  /*}*/
 
   .bot {
     position: absolute;
@@ -393,7 +393,6 @@
     line-height: 15px;
   }
   .listWrapper{
-    top: 45px;
     bottom: 50px;
   }
 </style>
