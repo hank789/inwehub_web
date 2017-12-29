@@ -175,7 +175,9 @@
           commentData: this.commentData,
           currentUser: this.currentUser
         })
-        window.mui.closeWaitingBlank()
+        setTimeout(() => {
+          this.editorObj.blur()
+        }, 200)
         this.$router.pushPlus('/selectUser?from=comment')
       },
       init () {
