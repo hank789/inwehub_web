@@ -1079,7 +1079,7 @@ const routes = [
     name: 'inform-list',
     component: require('../../../views/Task/InformList.vue'),
     meta: {
-      title: '动态',
+      title: '通知',
       wechatHideHeader: true,
       keepAlive: true
     },
