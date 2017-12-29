@@ -100,6 +100,29 @@
       resetContent (content) {
         this.quill.setContents(content)
       },
+      appendContents (arr, position = 'current') {
+        console.log('run appendContent: arr:' + JSON.stringify(arr) + ', position:' + position)
+        // position 可选值是current, first
+        setTimeout(() => {
+          let range = this.quill.getSelection(true)
+          var positionNum = 0
+          if (position === 'current') {
+            positionNum = range.index
+          }
+          var delta = new Delta().retain(positionNum)
+
+          var length = 0
+          for (var i in arr) {
+            var appendChar = /^(@|#)/.test(arr[i].text) ? ' ' : ''
+            delta.insert(arr[i].text, arr[i].attribute)
+              .insert(appendChar, {})
+            length += arr[i].text.length
+          }
+
+          this.quill.updateContents(delta, 'user')
+          this.quill.setSelection(range.index + length + 1, 'user')
+        }, 100)
+      },
       appendContent (text, attribute, position = 'current') {
         console.log('run appendContent: text:' + text + ', attribute:' + attribute + ', position:' + position)
         // position 可选值是current, first
@@ -276,6 +299,7 @@
           var nowValue = item.innerText
           smallSpanArr.push(nowValue)
         })
+        console.log('getSmallSpanArr() return:' + JSON.stringify(smallSpanArr))
         return smallSpanArr
       },
       initialize () {
@@ -349,10 +373,11 @@
             // 监听 .ql-size-small
             if (self.isMonitorSmallSpan) {
               var linkNodes = self.$refs.editor.querySelectorAll('.ql-size-small')
+              console.log('qlSizeSmallFound length:' + linkNodes.length)
               var smallSpanArr = []
-              var isStop = false
-              window.mui.each(linkNodes, (index, item) => {
-                if (isStop) return
+
+              for (var index = 0; index < linkNodes.length; index++) {
+                var item = linkNodes[index]
                 var nowValue = item.innerText
                 smallSpanArr.push(nowValue)
                 if (item.hasAttribute('ql-value')) {
@@ -377,7 +402,6 @@
                       }
 
                       self.resetHtml(newHtml)
-                      isStop = true
                     } else {
                       // 添加
                       self.quill.history.undo()
@@ -394,8 +418,6 @@
                           self.toLast()
                         }
                       }, 200)
-
-                      isStop = true
                     }
                   }
                 } else {
@@ -405,14 +427,12 @@
                   }
                   item.classList.add('appUrl')
                 }
-              })
+              }
               if (JSON.stringify(smallSpanArr) !== JSON.stringify(this.smallSpanArr)) {
                 this.smallSpanArr = smallSpanArr
                 console.log('event:smallSpanArrChange fire, data:' + JSON.stringify(smallSpanArr))
                 self.$emit('smallSpanArrChange', smallSpanArr)
               }
-
-              if (isStop) return
             }
 
             if (delta.ops[1] && delta.ops[1].delete) {

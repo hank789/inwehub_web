@@ -1309,8 +1309,13 @@ a {
   background-color: #3c3e44;
 }
 
+<<<<<<< HEAD
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p{
   font-size: 15px;
   margin-bottom: 0px;
+=======
+.ql-tooltip{
+  display:none;
+>>>>>>> 2342633ca26ad04992bcf33cd7513e8915929d16
 }

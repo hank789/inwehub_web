@@ -141,6 +141,9 @@
       appendText (text, attribute, position = 'current') {
         this.$refs.myTextEditor.appendContent(text, attribute, position)
       },
+      appendTexts (arr, position = 'current') {
+        this.$refs.myTextEditor.appendContents(arr, position)
+      },
       addressAppearFound () {
         this.$emit('addressAppearFound')
       },
