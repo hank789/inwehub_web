@@ -189,10 +189,14 @@
   }
   .comment p{
     margin-bottom: 0;
+    display: inline-block;
   }
   .comment p i{
     font-style: normal;
     color: #444444;
+  }
+  .container-comments .comment span.Reply{
+    float: left;
   }
 
 </style>

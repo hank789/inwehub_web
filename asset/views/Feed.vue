@@ -417,21 +417,5 @@
     font-size:12px;
     color:#03aef9;
   }
-  .container-comments .comment span.from {
-    color: #03aef9;
-    margin-right: 5px;
-    float: left;
-  }
-  /*.container-comments .comment span:nth-of-type(2) {*/
-    /*display: flex;*/
-    /*flex-direction:row;*/
-    /*flex-wrap:wrap;*/
-    /*display: inline-block;*/
-  /*}*/
-  /*.container-comments .comment {*/
-    /*margin-bottom: 5px;*/
-    /*display: flex;*/
-    /*flex-direction:row;*/
-    /*flex-wrap:wrap;*/
-  /*}*/
+
 </style>
