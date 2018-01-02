@@ -426,5 +426,6 @@
     /* word-wrap: break-word; */
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    font-size: 16px;
   }
 </style>
