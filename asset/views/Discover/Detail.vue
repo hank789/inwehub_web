@@ -24,8 +24,8 @@
 
       <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
       <div class="linkWrapper Column container-image" v-if="detail.type === 'text' && detail.data.img" @tap.stop.prevent="goArticle(detail)">
-        <template v-for="item in detail.data.img">
-          <img :src="item"/>
+        <template v-for="(image, index) in detail.data.img">
+          <img :id="'image_' + index" :src="image" :data-preview-src="image" :data-preview-group="1"/>
         </template>
       </div>
 
@@ -288,6 +288,7 @@
       this.getDetail()
     },
     mounted () {
+      window.mui.previewImage()
       autoTextArea()
     }
   }
