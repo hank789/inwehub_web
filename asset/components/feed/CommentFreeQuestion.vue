@@ -12,7 +12,7 @@
         <div class="mui-media-body">{{data.title}}</div>
       </div>
     </div>
-    <div class="text-14-444 text-line-2 textToLink" v-html="data.feed.comment_content"></div>
+    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content"></div>
     <div class="container-answer margin-10-0-0">
       <div class="color-444 font-16 text-line-2">{{data.feed.question_title}}</div>
       <div class="color-808080 font-14 margin-5-0-0 text-line-3">{{data.feed.answer_content}}</div>
@@ -53,3 +53,4 @@
     }
   }
 </script>
+
