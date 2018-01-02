@@ -4,16 +4,19 @@ import routes from './routes'
 import localEvent from '../../../stores/localStorage'
 import { openWebviewByUrl } from '../../../utils/webview'
 import { openFullscreen, closeFullscreen } from '../../../utils/plus'
+import { autoBlur } from '../../../utils/dom'
 
 // 统计用户的浏览行为;
 import ga from 'vue-ga'
 
 VueRouter.prototype.goBack = function () {
+  autoBlur()
   this.isBack = true
   window.history.go(-1)
 }
 
 VueRouter.prototype.jump = function (url) {
+  autoBlur()
   window.location.href = url
 }
 
@@ -30,10 +33,12 @@ if (!window.isLocalEnv) {
 }
 
 router.pushReadHubPage = function (url) {
+  autoBlur()
   router.pushPlus(url, 'list-detail-page')
 }
 
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', popGesture = 'hide', forceWebView = false, reload = false) {
+  autoBlur()
   console.log('pushPlus 准备打开:' + url)
   var footerTab = ['/discover', '/home', '/task', '/my']
 
@@ -101,6 +106,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
 }
 
 router.beforeEach((to, from, next) => {
+  autoBlur()
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
 

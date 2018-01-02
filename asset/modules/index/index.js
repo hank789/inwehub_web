@@ -227,8 +227,11 @@ Vue.mixin({
   }
 })
 
+import { autoBlur } from '../../utils/dom'
 window.mui.muiOldBack = window.mui.back
 window.mui.back = function () {
+  autoBlur()
+
   if (window.mui.os.plus) {
     console.log('run event back')
     var currentWebview = window.plus.webview.currentWebview()
