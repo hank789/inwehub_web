@@ -1813,6 +1813,14 @@ const routes = [
     },
     component: require('../../../views/Exception/Error.vue')
   },
+  {
+    path: '/hongbao',
+    name: 'hongbao',
+    meta: {
+      title: 'hongbao'
+    },
+    component: require('../../../views/Hongbao.vue')
+  },
   { // message
     path: '/*',
     name: '404',
