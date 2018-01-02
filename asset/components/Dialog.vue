@@ -1,5 +1,6 @@
 <template>
   <div :style="style">
+    <!--点击时间添加class -> alertConfirm-->
     <!--级别限制提示的弹窗-->
     <div id="test">
       <div class="p-level">
@@ -11,7 +12,6 @@
           <span>当前等级</span>
           <span>{{ options.level ? options.level : ''}}</span>
         </p>
-        <!--  {{ options.level?options.level:''}}-->
       </div>
     </div>
     <!-- 升级的弹窗-->
@@ -124,8 +124,6 @@
       <div id="perfectCard-b">
         <div class="perfectCard-b alertConfirm">
           查看名片并可分享
-
-
         </div>
       </div>
     </div>
@@ -170,7 +168,6 @@
           </ul>
         </div>
       </div>
-
     </div>
 
     <!-- 专家申请成功呢提示-->
@@ -184,59 +181,9 @@
       <div id="expertapplication-b">
         <div class="expertapplication-b alertConfirm">
           查看个人海报并可分享
-
-
         </div>
       </div>
     </div>
-    <!--文章发表成功-->
-    <!--<div id="article_t">
-   	  <div class="article_t">
-   	  	<p>你的文章发表成功啦！</p>
-   	  	<p>（成长值<i>+5</i>）</p>
-   	  </div>
-   </div>
-   <div id="article_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 	<p>分享文章</p>
-   	 </ul>
-   </div>-->
-    <!--文章评论分享成功-->
-    <!--<div id="articlecomment_t">
-   	  <div class="article_t">
-   	  	<p>分享成功！</p>
-   	  	<p>（成长值<i>+1</i>）</p>
-   	  </div>
-   </div>
-   <div id="articlecomment_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 </ul>
-   </div> -->
-    <!--阅读评论发表成功-->
-    <!--<div id="comment_t">
-   	  <div class="article_t">
-   	  	<p>你的评论发表成功啦！</p>
-   	  	<p>（成长值<i>+{{options.readhub_commen_credits}}</i>）</p>
-   	  </div>
-   </div>
-   <div id="comment_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 	<p>分享评论</p>
-   	 </ul>
-   </div>-->
-
     <!--互动问答答案提交成功-->
     <div id="community_t">
       <div class="article_t">
@@ -246,52 +193,9 @@
     </div>
     <div id="community_b">
       <ul class="hotAnswer_b">
-        <!--<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li class="" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
-			<p class="mui-ellipsis-2">{{item.title}}</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img :src="item.user_avatar_url"  />
-					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：{{item.user_name}}</p>
-			</div>
-			<i class="bot"></i>
-		</li>-->
         <span class="share alertConfirm">分享我的回答</span>
       </ul>
-
     </div>
-
-    <!--专业问答分享成功-->
-    <!--<div id="community_t">
-   	  <div class="article_t">
-   	  	<p>分享成功！</p>
-   	  	<p>（成长值<i>+1</i>）</p>
-   	  </div>
-   </div>
- <div id="community_b">
-	<ul class="hotAnswer_b">
-		<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li>
-			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img src="../statics/images/balance1.png" />
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：郭大红</p>
-			</div>
-			<i class="bot"></i>
-		</li>
-		<span class="share">分享我的问答</span>
-	</ul>
-
-</div>-->
 
     <!--互动问答提问成功-->
     <div id="ask_t">
@@ -302,20 +206,6 @@
     </div>
     <div id="ask_b">
       <ul class="hotAnswer_b">
-        <!--<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li class="alertConfirm" v-for="item in options.questlist" >
-			<p class="mui-ellipsis-2">{{item.title}}</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img :src="item.user_avatar_url"  />
-					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：{{item.user_name}}</p>
-			</div>
-			<i class="bot"></i>
-		</li>-->
         <span class="ask_share alertConfirm">邀请好友回答</span>
       </ul>
 
@@ -345,7 +235,6 @@
         <span class="alertConfirm share">分享我的问答</span>
         <span class="ask_divided">其他人查看答案，你可从中获取分成</span>
       </ul>
-
     </div>
 
     <!--专业问答提问者的评论成功-->
@@ -394,13 +283,61 @@
         <p>暂不能申请企业服务</p>
       </div>
     </div>
-    <!--个人名片资料完整度不足94%的弹窗-->
+    <!--个人简历 -> 聊天界面 个人名片资料完整度不足94%的弹窗-->
     <div id="chat">
       <div class="chat">
         <p>资料完整才能发私信！</p>
         <p>完整是为了对方更容易识别您，您离资料完成还差{{90 - options.percent}}%</p>
       </div>
     </div>
+    <!--签到的弹窗-->
+    <div id="signIn">
+      <div class="signIn">
+         <div class="signIn_t">
+           <img src="../statics/images/sign_title@2x.png">
+           <p>连续签到第3／7日红包奖励！漏签将清零重置！</p>
+         </div>
+         <ul class="signIn_m">
+           <li>
+            <p>第1天</p>
+            <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>第2天</p>
+             <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>
+               <img src="../statics/images/money-disabled@2x.png"/>
+             </p>
+             <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>第4天</p>
+             <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>第5天</p>
+             <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>第6天</p>
+             <p>成长贡献5</p>
+           </li>
+           <li>
+             <p>
+               <img src="../statics/images/money-disabled@2x.png"/>
+             </p>
+             <p>成长贡献5</p>
+           </li>
+         </ul>
+         <div class="signIn_b">
+           <p>累获320贡献值／220成长值（我的>我的分值）</p>
+           <p>累获42元现金红包（我的>我的红包）</p>
+         </div>
+      </div>
+    </div>
+    <!--bot-->
   </div>
 </template>
 <script type="text/javascript">
@@ -441,7 +378,6 @@
       }
     },
     methods: {
-
       getHtml (id, options, callback) {
         this.options = options
         this.$nextTick(() => {
@@ -1110,4 +1046,87 @@
     text-align: center;
     margin-top: 3px;
   }
+  /* 签到的弹窗 */
+  .signIn {
+    width:100%;
+  }
+  .signIn_t{
+    width:91%;
+    height:70px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .signIn_t img{
+    height:25px;
+  }
+  .signIn_t p{
+    font-size:14px;
+    color: #000;
+  }
+  .signIn_m{
+    width:91%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 17px 0;
+    border-bottom:1px dashed #dcdcdc;
+    border-top:1px dashed #dcdcdc;
+  }
+  .signIn_m li{
+    width:25%;
+    height:75.4px;
+    text-align: center;
+    float: left;
+    text-align: center;
+  }
+  .signIn_m li:nth-of-type(1){
+    margin-left: 12.5%;
+  }
+  .signIn_m li:nth-of-type(3){
+    margin-right: 12.5%;
+  }
+  .signIn_m li p:nth-of-type(1){
+    width:51px;
+    height:51px;
+    background:#c8c8c8;
+    border-radius: 50%;
+    border:1.5px solid #d8d8d8;
+    text-align: center;
+    line-height: 51px;
+    font-size:14px;
+    color: #808080;
+    margin: 0 auto;
+    position: relative;
+  }
+  .signIn_m li p:nth-of-type(1) img{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin: auto;
+  }
+  .signIn_m li p:nth-of-type(2){
+    font-size:12px;
+    color: #808080;
+    margin-top: 2px;
+  }
+
+
+
+
+
+
+
+  .signIn_b{
+     width:91%;
+     margin: 0 auto;
+     height:58px;
+     text-align:left;
+     font-size:14px;
+     color: #444444;
+   }
+  .signIn_b p:nth-of-type(1){
+    margin-top: 15px;
+  }
+
 </style>
