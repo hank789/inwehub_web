@@ -1,5 +1,5 @@
 <template>
-  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}">
+  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}" @tap.stop.prevent="toDetail(data.url)">
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
@@ -16,7 +16,13 @@
       <!--<span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span>-->
       <span v-html="textToLink(data.feed.title)"></span></div>
 
-    <Images class="container-images-discover padding-0 margin-10-0-0" :images="data.feed.img" :group="data.id" v-if="data.feed.img.length > 0"></Images>
+    <Images
+      class="container-images-discover padding-0 margin-10-0-0"
+      :images="data.feed.img"
+      :group="data.id"
+      v-if="data.feed.img.length > 0"
+      :isImagePreview="false"
+    ></Images>
 
     <div class="options text-right" @tap.stop.prevent="toDetail(data.url)">
       <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
