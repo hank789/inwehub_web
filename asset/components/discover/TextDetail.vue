@@ -15,7 +15,7 @@
         </div>
 
         <div class="PublishContainer" v-if="data.data.img">
-          <Images :images="data.data.img" class="newestList" :group="data.slug"></Images>
+          <Images :class="'container-images-discover'" :images="data.data.img" class="newestList" :group="data.slug"></Images>
         </div>
 
         <div class="timeContainer" @tap.stop.prevent="goDetial(data)">
