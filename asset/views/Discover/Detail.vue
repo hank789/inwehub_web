@@ -23,7 +23,7 @@
         <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-      <div class="linkWrapper Column container-image" v-if="detail.type === 'text' && detail.data.img" @tap.stop.prevent="goArticle(detail)">
+      <div class="linkWrapper Column container-image" v-if="detail.type === 'text' && detail.data.img">
         <template v-for="(image, index) in detail.data.img">
           <img :id="'image_' + index" :src="image" :data-preview-src="image" :data-preview-group="1"/>
         </template>
