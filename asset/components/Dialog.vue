@@ -299,8 +299,15 @@
          </div>
          <ul class="signIn_m">
            <li>
-            <p>第1天</p>
-            <p>成长贡献5</p>
+             <!--默认天数-->
+             <p>第1天</p>
+             <!--领取后的样式-->
+             <!--<p>-->
+               <!--<img src="../statics/images/signIn-succeed@2x.png"/>-->
+             <!--</p>-->
+              <!--点击签到-->
+             <!--<p class="click-signIn"><span>点击签到</span></p>-->
+             <p>成长贡献5</p>
            </li>
            <li>
              <p>第2天</p>
@@ -308,9 +315,12 @@
            </li>
            <li>
              <p>
-               <img src="../statics/images/money-disabled@2x.png"/>
+               <img src="../statics/images/signIn-money@2x.png"/>
              </p>
-             <p>成长贡献5</p>
+             <!--<p>-->
+               <!--<img src="../statics/images/money-disabled@2x.png"/>-->
+             <!--</p>-->
+             <p>小红包</p>
            </li>
            <li>
              <p>第4天</p>
@@ -328,7 +338,7 @@
              <p>
                <img src="../statics/images/money-disabled@2x.png"/>
              </p>
-             <p>成长贡献5</p>
+             <p>大红包</p>
            </li>
          </ul>
          <div class="signIn_b">
@@ -1109,6 +1119,14 @@
     font-size:12px;
     color: #808080;
     margin-top: 2px;
+  }
+  .signIn_m li p.click-signIn span{
+    display: inline-block;
+    width: 30px;
+    line-height: 17px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #FFFFFF;
   }
 
 
