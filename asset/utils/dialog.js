@@ -173,10 +173,50 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
   }
 }
 
+/**
+ * 按钮class .alertConfirm
+ * 关闭class .alertClose
+ * callback(index)
+ *    index 被按的.alertConfirm的顺序,0开始
+ * @param html
+ * @param callback
+ */
+function alertHtml (html, callback) {
+  var popupElement = document.createElement('div')
+  popupElement.className = 'mui-popup mui-popup-in alertHtml'
+  popupElement.innerHTML = html
+  document.body.appendChild(popupElement)
+  var element = document.createElement('div')
+  element.className = 'mui-popup-backdrop mui-active'
+  document.body.appendChild(element)
+  var alertConfirms = popupElement.querySelectorAll('.alertConfirm')
+  if (alertConfirms.length) {
+    for (var i = 0; i < alertConfirms.length; i++) {
+      (function (index) {
+        alertConfirms[index].onclick = function () {
+          callback(index)
+        }
+      })(i)
+    }
+  }
+  var alertCloses = popupElement.querySelectorAll('.alertClose')
+  if (alertCloses.length) {
+    for (var j = 0; j < alertCloses.length; j++) {
+      (function (index) {
+        alertCloses[index].onclick = function () {
+          popupElement.parentNode && popupElement.parentNode.removeChild(popupElement)
+          element.parentNode && element.parentNode.removeChild(element)
+        }
+      })(j)
+    }
+  }
+}
+
 export {
   alertZoom,
   alertSkyOne,
   alertSkyTwo,
   alertSimple,
-  getDialogObj
+  getDialogObj,
+  alertHtml
 }
