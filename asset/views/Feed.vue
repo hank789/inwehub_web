@@ -417,5 +417,15 @@
     font-size:12px;
     color:#03aef9;
   }
-
+  /*评论了互动问答内容超出两行的样式*/
+  .ellipsis p {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    /* word-wrap: break-word; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+  }
 </style>
