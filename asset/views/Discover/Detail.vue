@@ -100,6 +100,9 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
+    <canvas id="canvas" width="300" height="480">
+    </canvas>
+
   </div>
 </template>
 
@@ -146,7 +149,10 @@
           shareName: ''
         },
         isFollow: true,
-        loading: 1
+        loading: 1,
+
+        stage: null,
+        canvas: null
       }
     },
     computed: {
@@ -288,6 +294,12 @@
       this.getDetail()
     },
     mounted () {
+      this.canvas = document.getElementById('canvas')
+      this.stage = new window.createjs.Stage(this.canvas)
+      var hello = new window.createjs.Text('Hello CreateJS', '18px', 'red')
+      this.stage.addChild(hello)
+      this.stage.update()
+
       window.mui.previewImage()
       autoTextArea()
     }
