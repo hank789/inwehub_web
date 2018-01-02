@@ -27,6 +27,7 @@
             <use xlink:href="#icon-dingwei1"></use>
           </svg>
           <span>{{data.data.current_address_name}}</span>
+          <i class="bot"></i>
         </div>
 
     </div>
@@ -417,9 +418,8 @@
     line-height: 42px;
     display: flex;
     flex-direction: row;
-    /*flex-wrap: nowrap;*/
-    /*justify-content: space-between;*/
     align-items: center;
+    position: relative;
   }
 
   .timeContainer svg {
@@ -438,20 +438,16 @@
   /*图片*/
   .PublishContainer {
     width: 100%;
-    /*overflow: hidden;*/
     margin-top: 13px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    /*border:1px solid #000000;*/
   }
 
   .PublishContainer .container-image {
     width: 108px;
-    /*border:1px solid #000000;*/
-
   }
 
   .PublishContainer .container-image img {
@@ -463,36 +459,7 @@
     margin-left: 2%;
   }
 
-  #container-image {
-    width: 150px;
-    height: 226px;
-  }
 
-  /*适配*/
-  @media (min-width: 320px) {
-    .PublishContainer .container-image {
-      height: 92px;
-    }
-
-  }
-
-  @media (min-width: 375px) {
-    .PublishContainer .container-image {
-      height: 108px;
-    }
-
-  }
-
-  @media (min-width: 414px) {
-    .PublishContainer .container-image {
-      height: 108px;
-    }
-
-  }
-
-  ul .imgContainer  .information .blue {
-    color: #03aef9;
-  }
 
 </style>
 
