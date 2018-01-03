@@ -295,73 +295,53 @@
       <div class="signIn">
          <div class="signIn_t">
            <img src="../statics/images/sign_title@2x.png">
-           <p>连续签到第3／7日红包奖励！漏签将清零重置！</p>
+           <p>连续签到第{{options.signList.days}}／7日红包奖励！漏签将清零重置！</p>
          </div>
          <ul class="signIn_m">
-           <li>
+           <li v-for="(day, index) in options.signList.info">
+             <!--点击签到-->
+             <p class="click-signIn alertConfirm" v-if="options.signList.days + 1 === day.day && day.coupon_type === 0"><span>点击签到</span></p>
              <!--默认天数-->
-             <p>第1天</p>
+             <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
+             <!--默认红包样式-->
+             <p class="alertConfirm" v-else-if="day.signed === 0 && day.coupon_type != 0">
+              <img src="../statics/images/money-disabled@2x.png"/>
+             </p>
+             <!--红包-->
+             <p  v-else-if="day.signed === 1 && day.coupon_type != 0">
+              <img src="../statics/images/signIn-money@2x.png"/>
+             </p>
              <!--领取后的样式-->
-             <!--<p>-->
-               <!--<img src="../statics/images/signIn-succeed@2x.png"/>-->
-             <!--</p>-->
-              <!--点击签到-->
-             <!--<p class="click-signIn"><span>点击签到</span></p>-->
-             <p>成长贡献5</p>
-           </li>
-           <li>
-             <p>第2天</p>
-             <p>成长贡献5</p>
-           </li>
-           <li>
-             <p>
-               <img src="../statics/images/signIn-money@2x.png"/>
+             <p v-else-if="day.signed === 1 && day.coupon_type === 0">
+               <img src="../statics/images/signIn-succeed@2x.png"/>
              </p>
-             <!--<p>-->
-               <!--<img src="../statics/images/money-disabled@2x.png"/>-->
-             <!--</p>-->
-             <p>小红包</p>
-           </li>
-           <li>
-             <p>第4天</p>
-             <p>成长贡献5</p>
-           </li>
-           <li>
-             <p>第5天</p>
-             <p>成长贡献5</p>
-           </li>
-           <li>
-             <p>第6天</p>
-             <p>成长贡献5</p>
-           </li>
-           <li>
-             <p>
-               <img src="../statics/images/money-disabled@2x.png"/>
-             </p>
-             <p>大红包</p>
+             <p v-if="day.coupon_type === 2">小红包</p>
+             <p v-else-if="day.coupon_type === 3">大红包</p>
+             <p v-else>成长值{{day.credits}}</p>
+
            </li>
          </ul>
          <div class="signIn_b">
-           <p>当前成长值：432 <i>（我的>我的分值）</i></p>
-           <p>钱包余额：¥32.3 <i>（我的>我的红包）</i></p>
+           <p>当前成长值：{{options.signList.total_credits}} <i>（我的>我的分值）</i></p>
+           <p>钱包余额：¥{{options.signList.total_money}} <i>（我的>我的红包）</i></p>
          </div>
       </div>
     </div>
     <!--签到获取的成长值弹窗-->
     <div id="scoreDetail">
       <div class="scoreDetail">
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon alertClose" aria-hidden="true">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
-        <p>您已成功签到1天！</p>
-        <p>成长值<i>+5</i></p>
+        <p>您已成功签到{{options.signDaily.days}}天！</p>
+        <p>成长值<i>+{{options.signDaily.credits}}</i></p>
         <div class="scoreDetail-m">
           <p class="Prompt">
-            <b :style="'left:'+ (40-6) +'%'">343</b>
+            <b :style="'left:'+ (options.current_credits_Percent - 6) +'%'">{{options.current_credits}}</b>
           </p>
           <div class="ProgressBar">
             <div>
-              <i :style="'width:'+ 40 +'%'"></i>
+              <i :style="'width:'+ options.current_credits_Percent +'%'"></i>
             </div>
             <p class="fouce">
               <span></span>
@@ -379,7 +359,7 @@
             </p>
           </div>
         </div>
-        <p>查看分值详情</p>
+        <p class="alertConfirm">查看分值详情</p>
       </div>
     </div>
     <!--红包的金额详情-->
@@ -404,6 +384,8 @@
   </div>
 </template>
 <script type="text/javascript">
+  import { getUserLevelPercentage } from '../utils/user'
+
   export default {
     data () {
       return {
@@ -429,7 +411,21 @@
           major_comment_credits: '',
           Onlookers_comment_coins: '',
           Onlookers_comment_credits: '',
-          percent: ''
+          percent: '',
+          signList: {
+            info: [],
+            days: '',
+            total_credits: '',
+            total_coins: '',
+            total_money: ''
+          },
+          signDaily: {
+            days: '',
+            credits: '',
+            coins: '',
+            current_credits: ''
+          },
+          current_credits_Percent: getUserLevelPercentage()
         }
       }
     },
@@ -452,6 +448,8 @@
           }
         })
       }
+    },
+    mounted () {
     }
   }
 </script>
@@ -1115,8 +1113,7 @@
     width:100%;
   }
   .signIn_t{
-    width:91%;
-    height:70px;
+    width:100%;
     margin: 0 auto;
     text-align: center;
   }
@@ -1125,10 +1122,11 @@
   }
   .signIn_t p{
     font-size:14px;
-    color: #000;
+    color: #444444;
+    margin-bottom: 16px;
   }
   .signIn_m{
-    width:91%;
+    width:104%;
     margin: 0 auto;
     overflow: hidden;
     padding: 17px 0;
@@ -1174,6 +1172,10 @@
     color: #808080;
     margin-top: 2px;
   }
+  .signIn_m li p.click-signIn{
+    background: #03aef9;
+    border:1.5px solid #444444;
+  }
   .signIn_m li p.click-signIn span{
     display: inline-block;
     width: 30px;
@@ -1184,7 +1186,7 @@
   }
 
   .signIn_b{
-     width:91%;
+     width:100%;
      margin: 0 auto;
      height:58px;
      text-align:left;
@@ -1200,7 +1202,7 @@
   }
  /*签到获取的成长值弹窗*/
 .scoreDetail{
-  width:91%;
+  width:343px;
   height:240px;
   border-radius: 18px;
   background:#f93277;
@@ -1242,7 +1244,7 @@
   color: #ffffff;
   border:1px solid #fc98bb;
   border-radius: 50px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
   .scoreDetail-m{
     width:91%;
@@ -1256,7 +1258,7 @@
     height: 40px;
     margin-left: 7%;
     position: relative;
-    top:6px;
+    top:10px;
   }
   .Prompt b {
     display: block;
@@ -1293,14 +1295,14 @@
     width: 100%;
     height: 40px;
     position: absolute;
-    top:38px;
+    top:45px;
 
   }
 
   .ProgressBar > div {
     width: 86%;
     height: 2px;
-    background: #7F807F;
+    background: #fc98bb;
     margin-left: 7%;
   }
 
@@ -1360,7 +1362,7 @@
   .number span {
     display: block;
     float: left;
-    color: #dcdcdc;
+    color: #ffc2d7;
     font-size: 12px;
     position: absolute;
   }

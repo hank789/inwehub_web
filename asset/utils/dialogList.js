@@ -1,4 +1,4 @@
-import { alertSkyTwo, alertSimple, getDialogObj } from '../utils/dialog'
+import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml} from '../utils/dialog'
 import { getLocalUserInfo } from './user'
 
 function alertFenhongxize (context) {
@@ -264,6 +264,39 @@ function alertChat (context) {
   }
 }
 
+// 签到列表
+function alertSignIn (context, signList, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('signIn', {signList: signList}, (html) => {
+      alertZoom(html, callback, true)
+    })
+  }
+}
+
+// 签到领取成长值
+function alertGetCredits (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    var signDaily = {
+      days: 2,
+      credits: 10,
+      coins: 0,
+      current_credits: 1000
+    }
+    dialogObj.getHtml('scoreDetail', {signDaily: signDaily}, (html) => {
+      alertHtml(html, (num) => {
+        if (num > -1) {
+          context.$router.pushPlus('/my/Growth')
+          return true
+        }
+      })
+    })
+  }
+}
+
+// 签到领取红包
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -280,5 +313,7 @@ export {
   alertCompanyUser,
   alertCompany,
   alertDiscoverCompany,
-  alertChat
+  alertChat,
+  alertSignIn,
+  alertGetCredits
 }
