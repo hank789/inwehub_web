@@ -21,7 +21,8 @@
 
 import { postRequest } from './request'
 import { stripTags } from './dom'
-import wx from 'weixin-js-sdk'
+
+var wx = window.wx
 
 var Share = () => {
   var currentUrl = null
