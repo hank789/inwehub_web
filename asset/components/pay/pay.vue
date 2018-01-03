@@ -70,6 +70,8 @@
           if (window.__wxjs_environment === 'miniprogram') {
             // 小程序支付
             id = 'wx_lite'
+            window.mui.alert('小程序目前不支持微信支付，请<a href="https://adsolj.mlinks.cc/A0k8">点击下载App</a>访问！')
+            return
           }
         }
         // 请求支付订单
