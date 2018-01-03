@@ -190,11 +190,20 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
   element.className = 'mui-popup-backdrop mui-active'
   document.body.appendChild(element)
   var alertConfirms = popupElement.querySelectorAll('.alertConfirm')
+
+  var closeAlertHtml = () => {
+    popupElement.parentNode && popupElement.parentNode.removeChild(popupElement)
+    element.parentNode && element.parentNode.removeChild(element)
+  }
+
   if (alertConfirms.length) {
     for (var i = 0; i < alertConfirms.length; i++) {
       (function (index) {
         alertConfirms[index].onclick = function () {
-          callback(index)
+          var result = callback(index)
+          if (result) {
+            closeAlertHtml()
+          }
         }
       })(i)
     }
@@ -204,8 +213,8 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
     for (var j = 0; j < alertCloses.length; j++) {
       (function (index) {
         alertCloses[index].onclick = function () {
-          popupElement.parentNode && popupElement.parentNode.removeChild(popupElement)
-          element.parentNode && element.parentNode.removeChild(element)
+          callback(-1)
+          closeAlertHtml()
         }
       })(j)
     }
