@@ -342,9 +342,62 @@
            </li>
          </ul>
          <div class="signIn_b">
-           <p>累获320贡献值／220成长值（我的>我的分值）</p>
-           <p>累获42元现金红包（我的>我的红包）</p>
+           <p>当前成长值：432 <i>（我的>我的分值）</i></p>
+           <p>钱包余额：¥32.3 <i>（我的>我的红包）</i></p>
          </div>
+      </div>
+    </div>
+    <!--签到获取的成长值弹窗-->
+    <div id="scoreDetail">
+      <div class="scoreDetail">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+        <p>您已成功签到1天！</p>
+        <p>成长值<i>+5</i></p>
+        <div class="scoreDetail-m">
+          <p class="Prompt">
+            <b :style="'left:'+ (40-6) +'%'">343</b>
+          </p>
+          <div class="ProgressBar">
+            <div>
+              <i :style="'width:'+ 40 +'%'"></i>
+            </div>
+            <p class="fouce">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </p>
+            <p class="number">
+              <span>L1</span>
+              <span>L2</span>
+              <span>L3</span>
+              <span>L4</span>
+              <span>L5</span>
+            </p>
+          </div>
+        </div>
+        <p>查看分值详情</p>
+      </div>
+    </div>
+    <!--红包的金额详情-->
+    <div id="cashBonus">
+      <div class="cashBonus">
+        <div class="bg-cashBonus">
+          <div class="my-cash">
+            <p><span>¥</span>5</p>
+            <i></i>
+            <p>现金红包</p>
+          </div>
+          <p class="my-wallet">查看我的钱包</p>
+        </div>
+        <div class="cash-button">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanbi"></use>
+          </svg>
+        </div>
       </div>
     </div>
     <!--bot-->
@@ -419,6 +472,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    font-style: normal;
   }
 
   /*显示等级弹窗样式*/
@@ -1129,12 +1183,6 @@
     color: #FFFFFF;
   }
 
-
-
-
-
-
-
   .signIn_b{
      width:91%;
      margin: 0 auto;
@@ -1143,8 +1191,300 @@
      font-size:14px;
      color: #444444;
    }
+  .signIn_b p i{
+    font-size: 12px;
+    color: #b4b4b6;
+  }
   .signIn_b p:nth-of-type(1){
     margin-top: 15px;
+  }
+ /*签到获取的成长值弹窗*/
+.scoreDetail{
+  width:91%;
+  height:240px;
+  border-radius: 18px;
+  background:#f93277;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  padding-top: 25px;
+}
+.scoreDetail svg{
+  font-size:20px;
+  color: #ffc2d7;
+  position: absolute;
+  right:14px;
+  top:13px;
+}
+.scoreDetail p:nth-of-type(1){
+  font-size:23px;
+  color: #ffffff;
+  font-weight:500;
+}
+.scoreDetail p:nth-of-type(2){
+  font-size:16px;
+  color: #ffffff;
+  margin-top: 11px;
+  margin-bottom: 21px;
+}
+.scoreDetail p:nth-of-type(2) i{
+  font-size:27px;
+  color: #fcc816;
+}
+.scoreDetail p:nth-of-type(3){
+  width:91%;
+  height:34px;
+  text-align: center;
+  line-height: 34px;
+  margin:0 auto;
+  bottom: 25px;
+  font-size:14px;
+  color: #ffffff;
+  border:1px solid #fc98bb;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+  .scoreDetail-m{
+    width:91%;
+    height:68px;
+    margin: 0 auto;
+    border-top:1px dashed #fc98bb;
+    position: relative;
+  }
+  .Prompt {
+    width: 86%;
+    height: 40px;
+    margin-left: 7%;
+    position: relative;
+    top:6px;
+  }
+  .Prompt b {
+    display: block;
+    width: 45px;
+    padding: 0 2px;
+    height: 25px;
+    background: #03aef9;
+    text-align: center;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 25px;
+    border-radius: 8px;
+    position: absolute;
+
+  }
+
+  .Prompt b::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-right: 6px solid #03aef9;
+    border-bottom: 6px solid #03aef9;
+    position: absolute;
+    transform: rotate(45deg);
+    bottom: -2px;
+    left: 16px;
+  }
+
+  /*进度条*/
+
+  .ProgressBar {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top:38px;
+
+  }
+
+  .ProgressBar > div {
+    width: 86%;
+    height: 2px;
+    background: #7F807F;
+    margin-left: 7%;
+  }
+
+  .ProgressBar > div i {
+    display: block;
+    width: 25%;
+    height: 2px;
+    background: #03aef9;
+  }
+
+  .fouce {
+    width: 86%;
+    height: 2px;
+    left: 7%;
+    /*background: #007AFF;*/
+    top: -1px;
+    position: absolute;
+  }
+
+  .fouce span {
+    display: block;
+    float: left;
+    width: 4px;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .fouce span:nth-of-type(1) {
+    left: 0;
+  }
+
+  .fouce span:nth-of-type(2) {
+    left: 25%;
+  }
+
+  .fouce span:nth-of-type(3) {
+    left: 50%;
+  }
+
+  .fouce span:nth-of-type(4) {
+    left: 75%;
+  }
+
+  .fouce span:nth-of-type(5) {
+    left: 100%;
+  }
+
+  .number {
+    width: 86%;
+    height: 20px;
+    left: 7%;
+    position: absolute;
+  }
+
+  .number span {
+    display: block;
+    float: left;
+    color: #dcdcdc;
+    font-size: 12px;
+    position: absolute;
+  }
+
+  .number span:nth-of-type(1) {
+    left: 0;
+  }
+
+  .number span:nth-of-type(2) {
+    left: 24%;
+  }
+
+  .number span:nth-of-type(3) {
+    left: 49%;
+  }
+
+  .number span:nth-of-type(4) {
+    left: 74%;
+  }
+
+  .number span:nth-of-type(5) {
+    left: 99%;
+  }
+  /*红包的金额详情*/
+  .cashBonus{
+    width:100%;
+    height:360px;
+    border:1px solid #000000;
+    position: relative;
+  }
+  .bg-cashBonus{
+    width:100%;
+    height: 306px;
+    border:1px solid #000000;
+    position: relative;
+  }
+  .my-cash{
+    width:58%;
+    height:105px;
+    border:1px solid #000000;
+    position: absolute;
+    left:0;
+    right:0;
+    top:42px;
+    margin:auto;
+  }
+  .my-cash i{
+    position: absolute;
+    width: 100%;
+    height:1.5px;
+    background: #808080;
+    left:0;
+    right:0;
+    top:0px;
+    bottom: 0;
+    margin:auto;
+  }
+  .my-cash p{
+    width:100%;
+    height:52px;
+    text-align: center;
+    line-height:52px;
+    color: #444444;
+  }
+  .my-cash p:nth-of-type(1){
+    font-size:64px;
+    font-weight: 500;
+  }
+  .my-cash p:nth-of-type(1) span{
+    font-size: 24px;
+    font-weight: 500;
+    position: relative;
+    top: -30px;
+  }
+  .my-cash p:nth-of-type(2){
+   font-size: 16px;
+   font-weight: 500;
+  }
+
+
+
+
+
+
+
+
+.my-wallet{
+  width:88%;
+  height:34px;
+  border:1px solid #fc98bb;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 34px;
+  font-size:14px;
+  color: #fdd6e3;
+  position: absolute;
+  left:0;
+  right:0;
+  bottom: 36px;
+  margin:auto;
+}
+  .cash-button{
+    width:29px;
+    height:29px;
+    border-radius:50%;
+    background: #808080;
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+  }
+  .cash-button svg{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    color: #FFFFFF;
+    font-size:20px;
+    margin:auto;
+  }
+  .my-wallet{
+
   }
 
 </style>
