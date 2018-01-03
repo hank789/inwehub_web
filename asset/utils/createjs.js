@@ -1,4 +1,11 @@
-function init (canvas, stage, domOverlayContainer, animContainer, lib) {
+function select (canvas, ClassName) {
+  var exportRoot = new ClassName()
+  var stage = new window.createjs.Stage(canvas)
+  stage.addChild(exportRoot)
+  return stage
+}
+
+function run (canvas, stage, domOverlayContainer, animContainer, lib) {
   var fnStartAnimation = () => {
     window.createjs.Ticker.setFPS(lib.properties.fps)
     window.createjs.Ticker.addEventListener('tick', stage)
@@ -51,6 +58,7 @@ function init (canvas, stage, domOverlayContainer, animContainer, lib) {
 }
 
 export {
-  init
+  select,
+  run
 }
 

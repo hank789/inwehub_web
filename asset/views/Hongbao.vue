@@ -10,13 +10,11 @@
   </div>
 </template>
 <script>
-  import { init } from '../utils/createjs.js'
+  import { run, select } from '../utils/createjs.js'
   import { alertHtml } from '../utils/dialog'
   export default {
     data () {
       return {
-        stage: null,
-        canvas: null
       }
     },
     computed: {},
@@ -28,13 +26,11 @@
       alertHtml(html, (index) => {
       }, 'animationContainerWrapper')
       setTimeout(() => {
-        this.canvas = document.getElementById('canvas')
-        this.stage = new window.createjs.Stage(this.canvas)
+        var canvas = document.getElementById('canvas')
         var domOverlayContainer = document.getElementById('domOverlayContainer')
         var animContainer = document.getElementById('animationContainer')
-        var exportRoot = new window.lib.红包()
-        this.stage.addChild(exportRoot)
-        init(this.canvas, this.stage, domOverlayContainer, animContainer, window.lib)
+        var stage = select(canvas, window.lib.红包)
+        run(canvas, stage, domOverlayContainer, animContainer, window.lib)
       }, 400)
     }
   }
