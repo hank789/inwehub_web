@@ -130,6 +130,10 @@
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
       },
       bindShare () {
+        if (window.__wxjs_environment === 'miniprogram') {
+          this.hideShareBtn = true
+          return
+        }
         var data = {
           title: this.title.substr(0, 50),
           link: this.link + '&isShare=1',
