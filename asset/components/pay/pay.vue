@@ -67,6 +67,10 @@
           appid = navigator.userAgent
           // 公众号支付
           id = 'wx_pub'
+          if (window.__wxjs_environment === 'miniprogram') {
+            // 小程序支付
+            id = 'wx_lite'
+          }
         }
         // 请求支付订单
         apiRequest(`pay/request`, {
@@ -105,6 +109,31 @@
                       window.mui.alert('支付失败，请稍后再试！')
                     }
                   }
+                )
+              } else if (id === 'wx_lite') {
+                // 微信小程序支付
+                window.wx.requestPayment({
+                  'timeStamp': responseData.order_info.timeStamp,
+                  'nonceStr': responseData.order_info.nonceStr,
+                  'package': responseData.order_info.package,
+                  'signType': responseData.order_info.signType,
+                  'paySign': responseData.order_info.paySign,
+                  'success': (res) => {
+                    this.pay_waiting = null
+                    if (res.errMsg === 'requestPayment:ok') {
+                      // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                      this.$emit('pay_success', responseData.order_id, this.pay_object_type)
+                    } else if (res.errMsg === 'requestPayment:fail cancel') {
+                      window.mui.alert('您已取消支付！')
+                    } else {
+                      window.alert(JSON.stringify(res))
+                      window.mui.alert('支付失败，请稍后再试！')
+                    }
+                  },
+                  'fail': (res) => {
+                    window.alert(JSON.stringify(res))
+                    window.mui.alert('支付失败，请稍后再试！')
+                  }}
                 )
               } else {
                 this.requestPay(id, responseData)
