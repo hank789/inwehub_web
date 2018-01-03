@@ -1,6 +1,6 @@
-function init (canvas, stage, domOverlayContainer, animContainer) {
+function init (canvas, stage, domOverlayContainer, animContainer, lib) {
   var fnStartAnimation = () => {
-    window.createjs.Ticker.setFPS(window.lib.properties.fps)
+    window.createjs.Ticker.setFPS(lib.properties.fps)
     window.createjs.Ticker.addEventListener('tick', stage)
   }
   // Code to support hidpi screens and responsive scaling.
@@ -10,8 +10,8 @@ function init (canvas, stage, domOverlayContainer, animContainer) {
     var lastS = 1
 
     var resizeCanvas = () => {
-      var w = window.lib.properties.width
-      var h = window.lib.properties.height
+      var w = lib.properties.width
+      var h = lib.properties.height
       var iw = window.innerWidth
       var ih = window.innerHeight
       var pRatio = window.devicePixelRatio || 1
