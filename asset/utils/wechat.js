@@ -1,6 +1,7 @@
 import { postRequest } from './request'
-import wx from 'weixin-js-sdk'
 import router from '../modules/index/routers/index'
+
+var wx = window.wx
 
 function hideHeaderHandler (obj, type) {
   if (window.mui.os.wechat) {
