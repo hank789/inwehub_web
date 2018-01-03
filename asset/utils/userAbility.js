@@ -267,10 +267,12 @@ var UserAbility = () => {
             return
           }
           // 请求成功
+          console.error(response.data.data.coupon_type)
           if (response.data.data.coupon_type === 0) {
           // 积分奖励弹窗
             var signDaily = response.data.data
-            alertGetCredits(this, signDaily)
+            console.error(signDaily)
+            alertGetCredits(context, signDaily)
           } else {
           // 红包请求
             postRequest('activity/getCoupon', {}).then(response => {
@@ -290,6 +292,8 @@ var UserAbility = () => {
       })
     })
   }
+
+
 
   return {
     canDo: canDo,

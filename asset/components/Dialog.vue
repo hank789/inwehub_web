@@ -337,7 +337,7 @@
         <p>成长值<i>+{{options.signDaily.credits}}</i></p>
         <div class="scoreDetail-m">
           <p class="Prompt">
-            <b :style="'left:'+ (options.current_credits_Percent - 6) +'%'">{{options.current_credits}}</b>
+            <b :style="'left:'+ (options.current_credits_Percent - 6) +'%'">{{options.signDaily.current_credits}}</b>
           </p>
           <div class="ProgressBar">
             <div>
@@ -381,6 +381,7 @@
       </div>
     </div>
     <!--bot-->
+
   </div>
 </template>
 <script type="text/javascript">
