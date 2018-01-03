@@ -138,6 +138,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import { alertGetCredits } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -291,6 +292,8 @@
       this.initData()
     },
     mounted () {
+      alertGetCredits(this)
+//      userAbility.signIGift(this)
 //      console.error(this.$route.params.id ? this.$route.params.id : '0')
     }
   }
@@ -437,7 +440,7 @@
     font-size: 14px;
     padding-left: 13px;
     padding-right: 15px;
-    z-index: 999;
+    z-index: 9;
   }
   /**********邀请我的好友***************/
 
