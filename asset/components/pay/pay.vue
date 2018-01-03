@@ -102,7 +102,8 @@
                     } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
                       window.mui.alert('您已取消支付！')
                     } else {
-                      Raven.captureException(JSON.stringify(res))
+                      window.mui.alert(JSON.stringify(res))
+                      Raven.captureException(res)
                       window.mui.alert('支付失败，请稍后再试！')
                     }
                   }
