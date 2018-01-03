@@ -111,7 +111,10 @@
       },
       check () {
         if (!window.mui.os.plus) {
-          if (window.mui.os.wechat) {
+          if (window.__wxjs_environment === 'miniprogram') {
+            this.isWeixin = false
+            this.isH5 = false
+          } else if (window.mui.os.wechat) {
             this.isWeixin = true
             document.body.classList.add('openAppWechat')
           } else {
