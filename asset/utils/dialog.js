@@ -177,7 +177,7 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
  * 按钮class .alertConfirm
  * 关闭class .alertClose
  * callback(index)
- *    index 被按的.alertConfirm的顺序,0开始
+ *    index 被按的.alertConfirm的顺序,0开始, -1 表示.alertClose被点击
  * @param html
  * @param callback
  */
