@@ -1316,3 +1316,8 @@ a {
 .ql-tooltip{
   display:none;
 }
+
+.alertHtml{
+  width:auto !important;
+  min-width: 270px;
+}
