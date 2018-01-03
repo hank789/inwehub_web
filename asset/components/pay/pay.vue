@@ -67,6 +67,10 @@
           appid = navigator.userAgent
           // 公众号支付
           id = 'wx_pub'
+          if (window.__wxjs_environment === 'miniprogram') {
+            // 小程序支付
+            id = 'wx_lite'
+          }
         }
         // 请求支付订单
         apiRequest(`pay/request`, {
@@ -102,8 +106,6 @@
                     } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
                       window.mui.alert('您已取消支付！')
                     } else {
-                      window.mui.alert(JSON.stringify(res))
-                      Raven.captureException(res)
                       window.mui.alert('支付失败，请稍后再试！')
                     }
                   }
@@ -124,12 +126,12 @@
                     } else if (res.errMsg === 'requestPayment:fail cancel') {
                       window.mui.alert('您已取消支付！')
                     } else {
-                      Raven.captureException(JSON.stringify(res))
+                      window.alert(JSON.stringify(res))
                       window.mui.alert('支付失败，请稍后再试！')
                     }
                   },
                   'fail': (res) => {
-                    Raven.captureException(JSON.stringify(res))
+                    window.alert(JSON.stringify(res))
                     window.mui.alert('支付失败，请稍后再试！')
                   }}
                 )
