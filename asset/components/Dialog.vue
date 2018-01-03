@@ -438,7 +438,7 @@
     },
     methods: {
       getHtml (id, options, callback) {
-        this.options = options
+        this.options = Object.assign(this.options, options)
         this.$nextTick(() => {
           var obj = document.getElementById(id)
           if (obj) {
