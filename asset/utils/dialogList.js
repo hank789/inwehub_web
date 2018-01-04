@@ -271,7 +271,7 @@ function alertSignIn (context, signList, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('signIn', {signList: signList}, (html) => {
-      alertZoom(html, callback, true)
+      alertZoom(html, callback, true, 'alertSignInContainerWrapper')
     })
   }
 }

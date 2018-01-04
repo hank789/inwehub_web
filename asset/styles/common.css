@@ -1321,3 +1321,9 @@ a {
   width:auto !important;
   min-width: 270px;
 }
+
+/*签到列表的弹窗大小*/
+.alertSignInContainerWrapper{
+  width:343px;
+  height: 473px;
+}
