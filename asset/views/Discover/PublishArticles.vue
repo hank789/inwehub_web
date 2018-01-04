@@ -75,6 +75,7 @@
       }
     },
     watch: {
+      '$route': 'refreshPageData',
       url: function (newValue, oldValue) {
         if (newValue) {
           this.isShow = true
@@ -91,6 +92,9 @@
       }
     },
     methods: {
+      refreshPageData () {
+        this.quickUrl()
+      },
       click () {
         this.channel = ''
       },
@@ -205,18 +209,21 @@
           userPicker.dispose()
         })
       },
-      focus () {}
+      focus () {},
+      quickUrl () {
+        if (this.$route.query.url) {
+          this.url = this.$route.query.url
+          this.channel = '观点洞见'
+          this.channelValue = 39
+          this.getUrl()
+        }
+      }
     },
     mounted () {
       autoTextArea()
     },
     created () {
-      if (this.$route.query.url) {
-        this.url = this.$route.query.url
-        this.channel = '观点洞见'
-        this.channelValue = 39
-        this.getUrl()
-      }
+      this.quickUrl()
       this.getChannels()
     }
   }
