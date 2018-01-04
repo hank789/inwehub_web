@@ -78,6 +78,16 @@
       toClip (path, index = 0) {
         window.mui('.info-choose').popover('toggle')
 
+        var imgInfo = {
+          name: 'demo',
+          size: '1',
+          index: index,
+          base64: '',
+          isNew: true
+        }
+
+        this.images.push(imgInfo)
+
         var t = this
         window.plus.zip.compressImage({
           src: path,
@@ -96,13 +106,12 @@
             var bitmap = new window.plus.nativeObj.Bitmap('test')
             bitmap.load(newurl, function () {
               var base64 = bitmap.toBase64Data()
-              var imgInfo = {
-                name: 'demo',
-                size: '1',
-                base64: base64,
-                isNew: true
+              for (var imgI = 0; imgI < t.images.length; imgI++) {
+                if (t.images[imgI].index === index) {
+                  t.images[imgI].base64 = base64
+                  break
+                }
               }
-              t.images.push(imgInfo)
               t.$emit('input', t.images)
             }, function (e) {
               console.log('加载图片失败：' + JSON.stringify(e))
