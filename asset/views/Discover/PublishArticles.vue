@@ -145,11 +145,10 @@
             var code = response.data.code
             // 如果请求不成功提示信息 并且返回上一页；
             if (code === 6102) {
-              window.mui.alert(response.data.message)
+              window.mui.toast(response.data.message)
               return
             } else if (code !== 1000) {
-              window.mui.alert(response.data.message)
-              window.mui.back()
+              window.mui.toast(response.data.message)
               return
             }
             if (response.data.data) {
