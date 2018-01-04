@@ -70,17 +70,24 @@ function checkClipbord () {
     return
   }
 
-  var clipbordText = localEvent.getLocalItem('clipbordTextDone')
-  if (clipbordText === text) {
+  var clipbordTextDone = localEvent.getLocalItem('clipbordTextDone')
+  if (clipbordTextDone === text) {
     return
   }
+
+  localEvent.setLocalItem('clipbordTextDone', text)
 
   var matchs = text.match(urlReg)
   var firstMatch = matchs[0]
   window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['确定', '取消'], e => {
-    localEvent.setLocalItem('clipbordTextDone', text)
     if (e.index === 0) {
-      router.pushPlus('/discover/publishArticles?url=' + encodeURIComponent(firstMatch))
+      router.pushPlus(
+        '/discover/publishArticles?url=' + encodeURIComponent(firstMatch),
+        'publishArticles',
+        true,
+        'pop-in',
+        'close'
+      )
     }
   }, 'div')
 }
