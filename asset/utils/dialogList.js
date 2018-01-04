@@ -271,7 +271,7 @@ function alertSignIn (context, signList, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('signIn', {signList: signList}, (html) => {
-      alertZoom(html, callback, true)
+      alertZoom(html, callback, true, 'alertSignInContainerWrapper')
     })
   }
 }
@@ -292,14 +292,14 @@ function alertGetCredits (context, signDaily) {
 }
 
 // 签到领取红包
-function alertGetCoupon (context,Coupon) {
+function alertGetCoupon (context, Coupon) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('animationContainerTop', {Coupon: Coupon}, (html) => {
     //
       alertHtml(html, (index) => {
         if (index === 0) {
-          this.$router.pushPlus('/my/Finance')
+          context.$router.pushPlus('/my/Finance')
           return true
         }
       }, 'animationContainerWrapper')

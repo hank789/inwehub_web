@@ -300,16 +300,20 @@
          <ul class="signIn_m">
            <li v-for="(day, index) in options.signList.info">
              <!--点击签到-->
-             <p class="click-signIn alertConfirm" v-if="options.signList.days + 1 === day.day && day.coupon_type === 0"><span>点击签到</span></p>
+             <p class="click-signIn alertConfirm" v-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>
              <!--默认天数-->
              <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
+             <!--点击签到红包-->
+             <p  class="alertConfirm"  v-else-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">
+               <img src="../statics/images/signIn-money@2x.png"/>
+             </p>
              <!--默认红包样式-->
-             <p class="alertConfirm" v-else-if="day.signed === 0 && day.coupon_type != 0">
+             <p  v-else-if="day.signed === 0 && day.coupon_type != 0">
               <img src="../statics/images/money-disabled@2x.png"/>
              </p>
-             <!--红包-->
+             <!--红包领取后的样式-->
              <p  v-else-if="day.signed === 1 && day.coupon_type != 0">
-              <img src="../statics/images/signIn-money@2x.png"/>
+               <img src="../statics/images/getCoupon@2x.png"/>
              </p>
              <!--领取后的样式-->
              <p v-else-if="day.signed === 1 && day.coupon_type === 0">
@@ -1186,7 +1190,7 @@
     margin-top: 2px;
   }
   .signIn_m li p.click-signIn{
-    background: #03aef9;
+    background:rgb(252,200,22);
     border:1.5px solid #444444;
   }
   .signIn_m li p.click-signIn span{
