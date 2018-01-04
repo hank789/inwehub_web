@@ -292,8 +292,8 @@
       this.initData()
     },
     mounted () {
-//      alertGetCoupon(this)
-//      console.error(this.$route.params.id ? this.$route.params.id : '0')
+      // 每日签到
+      userAbility.signIGift(this)
     }
   }
 </script>

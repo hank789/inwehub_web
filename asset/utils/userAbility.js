@@ -296,7 +296,6 @@ var UserAbility = () => {
                       window.mui.toast(response.data.data.tip)
                     })
                   }
-                  console.error(response.data.data.coupon_type)
                 })
               }
             })
