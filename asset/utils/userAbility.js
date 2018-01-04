@@ -255,7 +255,7 @@ var UserAbility = () => {
     var tody = new Date()
     var isTody = tody.getFullYear() + '-' + (tody.getMonth() + 1) + '-' + tody.getDate()
     var day = parseInt(localEvent.getLocalItem('day' + mobile).value)
-    if (!day) {
+    if (day !== isTody) {
       postRequest('activity/sign/dailyInfo', {}).then(response => {
         var code = response.data.code
         if (code !== 1000) {
