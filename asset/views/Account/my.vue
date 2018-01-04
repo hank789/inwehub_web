@@ -293,7 +293,6 @@
     },
     mounted () {
 //      alertGetCoupon(this)
-        userAbility.signIGift(this)
 //      console.error(this.$route.params.id ? this.$route.params.id : '0')
     }
   }

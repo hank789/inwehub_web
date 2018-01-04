@@ -179,6 +179,8 @@
     mounted () {
       // 新手任务
       userAbility.newbieTask(this)
+      // 每日签到
+      userAbility.signIGift(this)
       autoTextArea()
     },
     computed: {},
