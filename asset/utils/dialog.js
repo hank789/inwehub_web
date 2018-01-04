@@ -2,10 +2,13 @@
  * 拿着放大镜的小蛤弹窗(如升级提示弹窗)
  * 确定class .alertConfirm   .alertConfirm  callback(index, value)
  */
-function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true) {
+function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true, className = '') {
   var alertObj = window.mui.alert(contentHtml, ' ', null, callback, 'div')
   window.mui('.mui-popup-in')[0].style.display = 'none'
   window.mui('.mui-popup-in')[0].classList.add('alertZoom')
+  if (className) {
+    window.mui('.mui-popup-in')[0].classList.add(className)
+  }
 
   var titlePre = document.createElement('div')
   titlePre.className = 'titlePre'
