@@ -126,7 +126,7 @@
             // 应用从后台切换回前台事件
             EventObj.addIntervalOnceEventListener('resume', () => {
               // 每日签到
-              userAbility.signIGift(this)
+              userAbility.signIGift(self)
               // 剪贴板
               checkClipbord()
               // 存储用户位置信息
