@@ -211,6 +211,12 @@
       autoTextArea()
     },
     created () {
+      if (this.$route.query.url) {
+        this.url = this.$route.query.url
+        this.channel = '观点洞见'
+        this.channelValue = 39
+        this.getUrl()
+      }
       this.getChannels()
     }
   }
