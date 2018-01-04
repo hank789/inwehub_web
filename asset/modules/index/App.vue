@@ -32,7 +32,7 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
-  import { saveLocationInfo } from '../../utils/allPlatform'
+  import { saveLocationInfo, checkClipbord } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
 
   export default {
@@ -125,6 +125,9 @@
 
             // 应用从后台切换回前台事件
             EventObj.addIntervalOnceEventListener('resume', () => {
+              // 剪贴板
+              checkClipbord()
+
               // 存储用户位置信息
               var currentUser = localEvent.getLocalItem('UserInfo')
               if (currentUser.user_id) {

@@ -184,6 +184,7 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
 function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in alertHtml') {
   var popupElement = document.createElement('div')
   popupElement.className = wrapperClassName
+  popupElement.id = wrapperClassName
   popupElement.innerHTML = html
   document.body.appendChild(popupElement)
   var element = document.createElement('div')

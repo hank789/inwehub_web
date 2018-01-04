@@ -4,6 +4,7 @@ import routes from './routes'
 import localEvent from '../../../stores/localStorage'
 import { openWebviewByUrl } from '../../../utils/webview'
 import { openFullscreen, closeFullscreen } from '../../../utils/plus'
+import { checkClipbord } from '../../../utils/allPlatform'
 import { autoBlur } from '../../../utils/dom'
 
 // 统计用户的浏览行为;
@@ -109,6 +110,8 @@ router.beforeEach((to, from, next) => {
   autoBlur()
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
+
+  checkClipbord()
 
   if (from.path === 'login') {
     openFullscreen()

@@ -47,9 +47,9 @@
       }, 'animationContainerWrapper')
 
       setTimeout(() => {
-        var canvas = document.getElementById('canvas')
-        var domOverlayContainer = document.getElementById('domOverlayContainer')
-        var animContainer = document.getElementById('animationContainer')
+        var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
+        var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
+        var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
         var stage = select(canvas, window.lib.红包)
         run(canvas, stage, domOverlayContainer, animContainer, window.lib)
         var apper = document.getElementById('my-cash')
