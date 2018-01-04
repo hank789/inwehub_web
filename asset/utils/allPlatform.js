@@ -65,7 +65,7 @@ function checkClipbord () {
     return
   }
 
-  var urlReg = /[a-zA-z]+:\/\/[^\s]*/g
+  var urlReg = /[a-zA-z]+:\/\/[^\s"']*/g
   if (!urlReg.test(text)) {
     return
   }
