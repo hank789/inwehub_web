@@ -275,15 +275,9 @@ function alertSignIn (context, signList, callback) {
 }
 
 // 签到领取成长值
-function alertGetCredits (context) {
+function alertGetCredits (context, signDaily) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
-    var signDaily = {
-      days: 2,
-      credits: 10,
-      coins: 0,
-      current_credits: 1000
-    }
     dialogObj.getHtml('scoreDetail', {signDaily: signDaily}, (html) => {
       alertHtml(html, (num) => {
         if (num > -1) {
