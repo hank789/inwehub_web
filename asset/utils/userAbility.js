@@ -13,7 +13,7 @@ import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
 import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj} from '../utils/dialog'
 import {postRequest} from '../utils/request'
-import { alertSignIn, alertGetCredits } from '../utils/dialogList'
+import { alertSignIn, alertGetCredits,alertGetCoupon } from '../utils/dialogList'
 
 var UserAbility = () => {
   /**
@@ -259,36 +259,39 @@ var UserAbility = () => {
       }
       var infoList = response.data.data
       alertSignIn(context, infoList, (num) => {
-        postRequest('activity/sign/daily', {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          // 请求成功
-          console.error(response.data.data.coupon_type)
-          if (response.data.data.coupon_type === 0) {
-          // 积分奖励弹窗
-            var signDaily = response.data.data
-            console.error(signDaily)
-            alertGetCredits(context, signDaily)
-          } else {
-          // 红包请求
-            postRequest('activity/getCoupon', {}).then(response => {
-              var code = response.data.code
-              if (code !== 1000) {
-                window.mui.alert(response.data.message)
-                window.mui.back()
-              }
-            // 红包弹窗
-            // 领取成功提示
-              window.mui.toast(response.data.data.tip)
-
-            })
-          }
-          console.error(response.data.data.coupon_type)
-        })
+        if (num.index >= 0) {
+          postRequest('activity/sign/daily', {}).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            // 请求成功
+            console.error(response.data.data.coupon_type)
+            if (response.data.data.coupon_type === 0) {
+              // 积分奖励弹窗
+              var signDaily = response.data.data
+              console.error(signDaily)
+              alertGetCredits(context, signDaily)
+            } else {
+              // 红包请求
+              postRequest('activity/getCoupon', {coupon_type: response.data.data.coupon_type}).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                }
+                // 红包弹窗
+                var Coupon = response.data.data
+                alertGetCoupon(context, Coupon)
+                // 领取成功提示
+                window.mui.toast(response.data.data.tip)
+              })
+            }
+            console.error(response.data.data.coupon_type)
+          })
+      }
       })
     })
   }

@@ -138,7 +138,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { alertGetCredits } from '../../utils/dialogList'
+  import { alertGetCoupon } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -292,8 +292,8 @@
       this.initData()
     },
     mounted () {
-      alertGetCredits(this)
-//      userAbility.signIGift(this)
+//      alertGetCoupon(this)
+        userAbility.signIGift(this)
 //      console.error(this.$route.params.id ? this.$route.params.id : '0')
     }
   }

@@ -59,7 +59,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   #animationContainer {
     position:absolute;
     margin:auto;
@@ -82,9 +82,8 @@
     position: absolute;
     left:0;
     right:0;
-    bottom:-50px;
+    top:50%;
     margin:auto;
-    display: none;
   }
   .cash-button svg{
     position: absolute;

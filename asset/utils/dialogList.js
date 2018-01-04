@@ -1,5 +1,7 @@
-import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml} from '../utils/dialog'
+
+import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml } from '../utils/dialog'
 import { getLocalUserInfo } from './user'
+import { run, select } from '../utils/createjs.js'
 
 function alertFenhongxize (context) {
   var dialogObj = getDialogObj(context)
@@ -290,6 +292,36 @@ function alertGetCredits (context, signDaily) {
 }
 
 // 签到领取红包
+function alertGetCoupon (context,Coupon) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('animationContainerTop', {Coupon: Coupon}, (html) => {
+    //
+      alertHtml(html, (index) => {
+        if (index === 0) {
+          this.$router.pushPlus('/my/Finance')
+          return true
+        }
+      }, 'animationContainerWrapper')
+      setTimeout(() => {
+        var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
+        var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
+        var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
+        var stage = select(canvas, window.lib.红包)
+        run(canvas, stage, domOverlayContainer, animContainer, window.lib)
+        var apper = document.getElementById('animationContainerWrapper').querySelector('#my-cash')
+        var wallet = document.getElementById('animationContainerWrapper').querySelector('#my-wallet')
+        setTimeout(() => {
+          apper.style.opacity = '1'
+        }, 1500)
+        setTimeout(() => {
+          wallet.style.opacity = '1'
+        }, 1000)
+      }, 400)
+    //
+    })
+  }
+}
 
 export {
   alertFenhongxize,
@@ -309,5 +341,6 @@ export {
   alertDiscoverCompany,
   alertChat,
   alertSignIn,
-  alertGetCredits
+  alertGetCredits,
+  alertGetCoupon
 }
