@@ -10,7 +10,6 @@
 import { getLocalUserInfo } from '../utils/user'
 import router from '../modules/index/routers/index'
 import { alertSimple, getDialogObj } from '../utils/dialog'
-import { postRequest } from '../utils/request'
 
 var UserAbilityCheck = () => {
   /**

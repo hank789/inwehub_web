@@ -55,7 +55,6 @@
 <script>
   import { apiRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
-  import errorCodes from '../stores/errorCodes'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
   import { rebootAuth } from '../utils/wechat'

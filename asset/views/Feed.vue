@@ -131,7 +131,6 @@
   import { getLocalUserInfo } from '../utils/user'
   import { saveLocationInfo } from '../utils/allPlatform'
 
-
   import commentTextarea from '../components/comment/Textarea.vue'
 
   const currentUser = getLocalUserInfo()

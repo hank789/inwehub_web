@@ -93,7 +93,7 @@ Vue.use(TimeAgo, {
   }
 })
 
-import { showWebview, clearAllWebViewCache, goBack } from '../../utils/webview'
+import { showWebview, clearAllWebViewCache } from '../../utils/webview'
 import localEvent from '../../stores/localStorage'
 
 window.showInwehubWebview = showWebview

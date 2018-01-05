@@ -162,7 +162,6 @@
         this.getDetail()
       },
       getDetail: function () {
-
         // showInwehubWebview();
         let id = parseInt(this.$route.params.id)
         console.log('id:' + id)

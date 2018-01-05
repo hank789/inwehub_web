@@ -30,7 +30,6 @@
   import UserInfo from './UserInfo.vue'
   import Images from '../../components/image/Images.vue'
 
-
   export default {
     data () {
       return {

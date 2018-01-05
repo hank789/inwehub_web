@@ -70,7 +70,7 @@
           if (window.__wxjs_environment === 'miniprogram') {
             // 小程序支付
             id = 'wx_lite'
-            window.mui.confirm('小程序目前不支持微信支付，请点击下载App访问！', '提示', ['下次再说', '前往下载'], (e)=> {
+            window.mui.confirm('小程序目前不支持微信支付，请点击下载App访问！', '提示', ['下次再说', '前往下载'], (e) => {
               if (e.index === 1) {
                 window.location.href = 'https://adsolj.mlinks.cc/' + process.env.DEEP_LINK_KEY
               }

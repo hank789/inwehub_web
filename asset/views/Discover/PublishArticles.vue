@@ -114,7 +114,7 @@
           if (code !== 1000) {
             if (code === 6101) {
               var that = this
-              window.mui.alert('链接已存在,现在跳转原链接位置', '', ['跳转'],function (e) {
+              window.mui.alert('链接已存在,现在跳转原链接位置', '', ['跳转'], function (e) {
                 that.$router.pushPlus(response.data.data.exist_url)
               })
               return

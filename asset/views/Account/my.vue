@@ -138,7 +138,6 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { alertGetCoupon } from '../../utils/dialogList'
 
   export default {
     data () {
