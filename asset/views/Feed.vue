@@ -129,6 +129,8 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
   import { getLocalUserInfo } from '../utils/user'
+  import { saveLocationInfo } from '../utils/allPlatform'
+
 
   import commentTextarea from '../components/comment/Textarea.vue'
 
@@ -182,6 +184,7 @@
       // 每日签到
       userAbility.signIGift(this)
       autoTextArea()
+      saveLocationInfo()
     },
     computed: {},
     methods: {

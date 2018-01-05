@@ -178,7 +178,7 @@
         setTimeout(() => {
           this.editorObj.blur()
         }, 200)
-        this.$router.pushPlus('/selectUser?from=comment')
+        this.$router.pushPlus('/selectUser?from=comment', 'backAndClose')
       },
       init () {
         console.log('init() fired')

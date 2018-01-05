@@ -156,7 +156,7 @@
       },
       addressAppearFound () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selectUser?from=discover')
+        this.$router.pushPlus('/selectUser?from=discover', 'backAndClose')
       },
       smallSpanArrChange (arr) {
         setTimeout(() => {
@@ -342,7 +342,7 @@
       },
       toUser () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selectUser?from=discover')
+        this.$router.pushPlus('/selectUser?from=discover', 'backAndClose', true, 'pop-in', 'close', true)
       },
       toAddress () {
         this.$refs.myAddEditor.blur()

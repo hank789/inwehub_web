@@ -1546,7 +1546,7 @@ const routes = [
     meta: {
       title: '选择用户',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: require('../../../views/SelectUser/SelectUsers.vue'),
     beforeEnter: (to, from, next) => {
