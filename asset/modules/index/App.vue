@@ -109,7 +109,16 @@
           document.addEventListener('go_to_target_page', (event) => {
             var url = event.detail.url
             console.log('go_to_target_page:' + url)
-            router.replace(url)
+
+            var ws = window.plus.webview.currentWebview()
+
+            router.replace(url, () => {
+              window.mui.fire(ws, 'autoHeight', true)
+              window.mui.fire(ws, 'refreshPageData', true)
+            }, () => {
+              window.mui.fire(ws, 'autoHeight', true)
+              window.mui.fire(ws, 'refreshPageData', true)
+            })
           })
           // 只在主页面监听一次
           if (ws.id === window.plus.runtime.appid) {

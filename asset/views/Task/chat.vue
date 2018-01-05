@@ -245,7 +245,11 @@
               window.mui.alert(response.data.message)
               return
             }
-            this.chatRoomId = response.data.data.room_id
+            var roomId = response.data.data.room_id
+            if (roomId === this.chatRoomId) {
+              this.$refs.RefreshList.refreshPageData({room_id: roomId})
+            }
+            this.chatRoomId = roomId
             window.Echo.private('chat.room.' + this.chatRoomId)
           })
         }
