@@ -15,7 +15,6 @@
       {{ realname }}
 
 
-
       <div class="detail" v-if="isShowPositionAndCompany">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
