@@ -283,16 +283,9 @@
         }))
       }
     },
-    created () {
-      // showInwehubWebview();
-    },
     activated: function () {
       console.log('activated')
       this.initData()
-    },
-    mounted () {
-      // 每日签到
-      userAbility.signIGift(this)
     }
   }
 </script>
