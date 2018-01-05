@@ -25,7 +25,7 @@
         <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
       <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-      <div class="linkWrapper Column container-image" v-if="detail.type === 'text' && detail.data.img">
+      <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
         <template v-for="(image, index) in detail.data.img">
           <img class="discover_img" :id="'image_' + index" :src="image" :data-preview-src="image" :data-preview-group="1"/>
         </template>
@@ -398,14 +398,16 @@
   .contentWrapper span{
     font-size: 15px;
   }
-  .Column.container-image{
+  .Column{
+    width: 100%;
     height:max-content;
   }
-  .container-image .discover_img{
+  .Column .discover_img{
+    width:100%;
     border-radius: 4px;
     margin-bottom: 5px;
   }
-  .container-image img:nth-last-child(1){
+  .Column img:nth-last-child(1){
     margin-bottom: 0;
   }
   /*删除按钮*/
