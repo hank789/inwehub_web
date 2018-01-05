@@ -2,10 +2,13 @@
  * 拿着放大镜的小蛤弹窗(如升级提示弹窗)
  * 确定class .alertConfirm   .alertConfirm  callback(index, value)
  */
-function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true) {
+function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true, className = '') {
   var alertObj = window.mui.alert(contentHtml, ' ', null, callback, 'div')
   window.mui('.mui-popup-in')[0].style.display = 'none'
   window.mui('.mui-popup-in')[0].classList.add('alertZoom')
+  if (className) {
+    window.mui('.mui-popup-in')[0].classList.add(className)
+  }
 
   var titlePre = document.createElement('div')
   titlePre.className = 'titlePre'
@@ -173,10 +176,60 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
   }
 }
 
+/**
+ * 按钮class .alertConfirm
+ * 关闭class .alertClose
+ * callback(index)
+ *    index 被按的.alertConfirm的顺序,0开始, -1 表示.alertClose被点击
+ * @param html
+ * @param callback
+ */
+function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in alertHtml') {
+  var popupElement = document.createElement('div')
+  popupElement.className = wrapperClassName
+  popupElement.id = wrapperClassName
+  popupElement.innerHTML = html
+  document.body.appendChild(popupElement)
+  var element = document.createElement('div')
+  element.className = 'mui-popup-backdrop mui-active'
+  document.body.appendChild(element)
+  var alertConfirms = popupElement.querySelectorAll('.alertConfirm')
+
+  var closeAlertHtml = () => {
+    popupElement.parentNode && popupElement.parentNode.removeChild(popupElement)
+    element.parentNode && element.parentNode.removeChild(element)
+  }
+
+  if (alertConfirms.length) {
+    for (var i = 0; i < alertConfirms.length; i++) {
+      (function (index) {
+        alertConfirms[index].onclick = function () {
+          var result = callback(index)
+          if (result) {
+            closeAlertHtml()
+          }
+        }
+      })(i)
+    }
+  }
+  var alertCloses = popupElement.querySelectorAll('.alertClose')
+  if (alertCloses.length) {
+    for (var j = 0; j < alertCloses.length; j++) {
+      (function (index) {
+        alertCloses[index].onclick = function () {
+          callback(-1)
+          closeAlertHtml()
+        }
+      })(j)
+    }
+  }
+}
+
 export {
   alertZoom,
   alertSkyOne,
   alertSkyTwo,
   alertSimple,
-  getDialogObj
+  getDialogObj,
+  alertHtml
 }

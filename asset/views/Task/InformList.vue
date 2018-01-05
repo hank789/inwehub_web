@@ -158,7 +158,7 @@
       },
       loading: true,
       total_count: 0,
-      mobile: 0,
+      mobile: 0
     }),
     components: {
       RefreshList

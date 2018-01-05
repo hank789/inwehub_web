@@ -32,7 +32,7 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
-  import { saveLocationInfo } from '../../utils/allPlatform'
+  import { saveLocationInfo, checkClipbord } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
 
   export default {
@@ -109,7 +109,16 @@
           document.addEventListener('go_to_target_page', (event) => {
             var url = event.detail.url
             console.log('go_to_target_page:' + url)
-            router.replace(url)
+
+            var ws = window.plus.webview.currentWebview()
+
+            router.replace(url, () => {
+              window.mui.fire(ws, 'autoHeight', true)
+              window.mui.fire(ws, 'refreshPageData', true)
+            }, () => {
+              window.mui.fire(ws, 'autoHeight', true)
+              window.mui.fire(ws, 'refreshPageData', true)
+            })
           })
           // 只在主页面监听一次
           if (ws.id === window.plus.runtime.appid) {
@@ -125,6 +134,10 @@
 
             // 应用从后台切换回前台事件
             EventObj.addIntervalOnceEventListener('resume', () => {
+              // 每日签到
+              userAbility.signIGift(self)
+              // 剪贴板
+              checkClipbord()
               // 存储用户位置信息
               var currentUser = localEvent.getLocalItem('UserInfo')
               if (currentUser.user_id) {

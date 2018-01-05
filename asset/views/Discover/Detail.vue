@@ -17,12 +17,19 @@
           :isExpert="detail.owner.is_expert?1:0"
           @setFollowStatus="setFollowStatus"
         ></UserInfo>
+        <!--删除按钮-->
+        <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">删除</div>
       </div>
       <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
         <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
         <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
-      <Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>
+      <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
+      <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+        <template v-for="(image, index) in detail.data.img">
+          <img class="discover_img" :id="'image_' + index" :src="image" :data-preview-src="image" :data-preview-group="1"/>
+        </template>
+      </div>
 
       <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img" @tap.stop.prevent="goArticle(detail)" >
         <img :src="detail.data.img"/>
@@ -94,7 +101,6 @@
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
-
   </div>
 </template>
 
@@ -116,16 +122,19 @@
   export default {
     data () {
       return {
+        userId: currentUser.user_id,
         name: currentUser.name,
         uuid: currentUser.uuid,
         slug: '',
         noback: false,
         detail: {
           owner: {
+            id: '',
             uuid: '',
             avatar: '',
             username: ''
           },
+          id: 0,
           supporter_list: [],
           data: {
             img: ''
@@ -161,6 +170,30 @@
       commentTextarea
     },
     methods: {
+      // 删除
+      deleterow (id) {
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
+          if (e.index === 1) {
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              if (response.data.data) {
+                window.mui.back()
+                window.mui.toast('删除成功')
+              }
+            })
+          }
+        })
+      },
       textToLink (text) {
         return textToLinkHtml(' ' + text)
       },
@@ -283,6 +316,7 @@
       this.getDetail()
     },
     mounted () {
+      window.mui.previewImage()
       autoTextArea()
     }
   }
@@ -364,7 +398,31 @@
   .contentWrapper span{
     font-size: 15px;
   }
+  .Column{
+    width: 100%;
+    height:max-content;
+  }
+  .Column .discover_img{
+    width:100%;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+  .Column img:nth-last-child(1){
+    margin-bottom: 0;
+  }
+  /*删除按钮*/
+  .discover_datail_dalete{
+    width:57px;
+    height:19px;
+    border:1px solid #444444;
+    text-align: center;
+    line-height: 17px;
+    font-size:13px;
+    color: #444444;
+    border-radius: 50px;
+    position: absolute;
+    right:16px;
+    top: 16px;
+  }
 </style>
-
-
 

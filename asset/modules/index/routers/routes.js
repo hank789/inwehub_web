@@ -1409,7 +1409,7 @@ const routes = [
     name: 'nearby',
     meta: {
       title: '发现',
-      wechatHideHeader: true,
+      wechatHideHeader: true
     },
     component: require('../../../views/Address/Nearby.vue'),
     beforeEnter: (to, from, next) => {
@@ -1546,7 +1546,7 @@ const routes = [
     meta: {
       title: '选择用户',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: require('../../../views/SelectUser/SelectUsers.vue'),
     beforeEnter: (to, from, next) => {
@@ -1796,6 +1796,7 @@ const routes = [
     },
     component: require('../../../views/Webview/registerForm.vue')
   },
+  // app内的弹窗样式
   {
     path: '/dialog/list',
     name: 'dialog-list',
@@ -1812,14 +1813,14 @@ const routes = [
     },
     component: require('../../../views/Exception/Error.vue')
   },
-  // {
-  //   path: '/dialog',
-  //   name: 'short',
-  //   meta: {
-  //     title: 'short'
-  //   },
-  //   component: require('../../../components/Dialog.vue')
-  // },
+  {
+    path: '/hongbao',
+    name: 'hongbao',
+    meta: {
+      title: 'hongbao'
+    },
+    component: require('../../../views/Hongbao.vue')
+  },
   { // message
     path: '/*',
     name: '404',

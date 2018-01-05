@@ -283,15 +283,9 @@
         }))
       }
     },
-    created () {
-      // showInwehubWebview();
-    },
     activated: function () {
       console.log('activated')
       this.initData()
-    },
-    mounted () {
-//      console.error(this.$route.params.id ? this.$route.params.id : '0')
     }
   }
 </script>
@@ -437,7 +431,7 @@
     font-size: 14px;
     padding-left: 13px;
     padding-right: 15px;
-    z-index: 999;
+    z-index: 9;
   }
   /**********邀请我的好友***************/
 

@@ -1,5 +1,7 @@
-import { alertSkyTwo, alertSimple, getDialogObj } from '../utils/dialog'
+
+import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml } from '../utils/dialog'
 import { getLocalUserInfo } from './user'
+import { run, select } from '../utils/createjs.js'
 
 function alertFenhongxize (context) {
   var dialogObj = getDialogObj(context)
@@ -264,6 +266,63 @@ function alertChat (context) {
   }
 }
 
+// 签到列表
+function alertSignIn (context, signList, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('signIn', {signList: signList}, (html) => {
+      alertZoom(html, callback, true, 'alertSignInContainerWrapper')
+    })
+  }
+}
+
+// 签到领取成长值
+function alertGetCredits (context, signDaily) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('scoreDetail', {signDaily: signDaily}, (html) => {
+      alertHtml(html, (num) => {
+        if (num > -1) {
+          context.$router.pushPlus('/my/Growth')
+          return true
+        }
+      })
+    })
+  }
+}
+
+// 签到领取红包
+function alertGetCoupon (context, Coupon) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('animationContainerTop', {Coupon: Coupon}, (html) => {
+    //
+      alertHtml(html, (index) => {
+        if (index === 0) {
+          context.$router.pushPlus('/my/Finance')
+          return true
+        }
+      }, 'animationContainerWrapper')
+      setTimeout(() => {
+        var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
+        var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
+        var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
+        var stage = select(canvas, window.lib.红包)
+        run(canvas, stage, domOverlayContainer, animContainer, window.lib)
+        var apper = document.getElementById('animationContainerWrapper').querySelector('#my-cash')
+        var wallet = document.getElementById('animationContainerWrapper').querySelector('#my-wallet')
+        setTimeout(() => {
+          apper.style.opacity = '1'
+        }, 1500)
+        setTimeout(() => {
+          wallet.style.opacity = '1'
+        }, 1000)
+      }, 400)
+    //
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -280,5 +339,8 @@ export {
   alertCompanyUser,
   alertCompany,
   alertDiscoverCompany,
-  alertChat
+  alertChat,
+  alertSignIn,
+  alertGetCredits,
+  alertGetCoupon
 }

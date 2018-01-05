@@ -1,5 +1,6 @@
 <template>
   <div :style="style">
+    <!--点击时间添加class -> alertConfirm-->
     <!--级别限制提示的弹窗-->
     <div id="test">
       <div class="p-level">
@@ -11,7 +12,6 @@
           <span>当前等级</span>
           <span>{{ options.level ? options.level : ''}}</span>
         </p>
-        <!--  {{ options.level?options.level:''}}-->
       </div>
     </div>
     <!-- 升级的弹窗-->
@@ -124,8 +124,6 @@
       <div id="perfectCard-b">
         <div class="perfectCard-b alertConfirm">
           查看名片并可分享
-
-
         </div>
       </div>
     </div>
@@ -170,7 +168,6 @@
           </ul>
         </div>
       </div>
-
     </div>
 
     <!-- 专家申请成功呢提示-->
@@ -184,59 +181,9 @@
       <div id="expertapplication-b">
         <div class="expertapplication-b alertConfirm">
           查看个人海报并可分享
-
-
         </div>
       </div>
     </div>
-    <!--文章发表成功-->
-    <!--<div id="article_t">
-   	  <div class="article_t">
-   	  	<p>你的文章发表成功啦！</p>
-   	  	<p>（成长值<i>+5</i>）</p>
-   	  </div>
-   </div>
-   <div id="article_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 	<p>分享文章</p>
-   	 </ul>
-   </div>-->
-    <!--文章评论分享成功-->
-    <!--<div id="articlecomment_t">
-   	  <div class="article_t">
-   	  	<p>分享成功！</p>
-   	  	<p>（成长值<i>+1</i>）</p>
-   	  </div>
-   </div>
-   <div id="articlecomment_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 </ul>
-   </div> -->
-    <!--阅读评论发表成功-->
-    <!--<div id="comment_t">
-   	  <div class="article_t">
-   	  	<p>你的评论发表成功啦！</p>
-   	  	<p>（成长值<i>+{{options.readhub_commen_credits}}</i>）</p>
-   	  </div>
-   </div>
-   <div id="comment_b">
-   	 <ul class="article_b">
-   	 	<span>相关阅读推荐</span>
-   	 	<li>大咖在此，SAP物料里的弯弯绕</li>
-   	 	<li>InweHub诚意推荐《顾问周刊》</li>
-   	 	<li>噩梦，那些刺痛PP顾问们的物料单位</li>
-   	 	<p>分享评论</p>
-   	 </ul>
-   </div>-->
-
     <!--互动问答答案提交成功-->
     <div id="community_t">
       <div class="article_t">
@@ -246,52 +193,9 @@
     </div>
     <div id="community_b">
       <ul class="hotAnswer_b">
-        <!--<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li class="" v-for="item in options.answerlist" @tap.stop.prevent="toMajorDetail(item.id)">
-			<p class="mui-ellipsis-2">{{item.title}}</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img :src="item.user_avatar_url"  />
-					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：{{item.user_name}}</p>
-			</div>
-			<i class="bot"></i>
-		</li>-->
         <span class="share alertConfirm">分享我的回答</span>
       </ul>
-
     </div>
-
-    <!--专业问答分享成功-->
-    <!--<div id="community_t">
-   	  <div class="article_t">
-   	  	<p>分享成功！</p>
-   	  	<p>（成长值<i>+1</i>）</p>
-   	  </div>
-   </div>
- <div id="community_b">
-	<ul class="hotAnswer_b">
-		<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li>
-			<p class="mui-ellipsis-2">MIX2给了小米多少抗衡苹果的勇气！？小米在11号抢在iPhone前面一天发布.</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img src="../statics/images/balance1.png" />
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：郭大红</p>
-			</div>
-			<i class="bot"></i>
-		</li>
-		<span class="share">分享我的问答</span>
-	</ul>
-
-</div>-->
 
     <!--互动问答提问成功-->
     <div id="ask_t">
@@ -302,20 +206,6 @@
     </div>
     <div id="ask_b">
       <ul class="hotAnswer_b">
-        <!--<p class="hotAnswer_recommend">相关问答推荐</p>
-		<li class="alertConfirm" v-for="item in options.questlist" >
-			<p class="mui-ellipsis-2">{{item.title}}</p>
-			<div class="hotAnswer_d">
-				<p>
-					<img :src="item.user_avatar_url"  />
-					<svg class="icon" aria-hidden="true"  v-if="item.is_expert == '1'">
-						<use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-					</svg>
-				</p>
-				<p>回答者：{{item.user_name}}</p>
-			</div>
-			<i class="bot"></i>
-		</li>-->
         <span class="ask_share alertConfirm">邀请好友回答</span>
       </ul>
 
@@ -345,7 +235,6 @@
         <span class="alertConfirm share">分享我的问答</span>
         <span class="ask_divided">其他人查看答案，你可从中获取分成</span>
       </ul>
-
     </div>
 
     <!--专业问答提问者的评论成功-->
@@ -394,16 +283,123 @@
         <p>暂不能申请企业服务</p>
       </div>
     </div>
-    <!--个人名片资料完整度不足94%的弹窗-->
+    <!--个人简历 -> 聊天界面 个人名片资料完整度不足94%的弹窗-->
     <div id="chat">
       <div class="chat">
         <p>资料完整才能发私信！</p>
         <p>完整是为了对方更容易识别您，您离资料完成还差{{90 - options.percent}}%</p>
       </div>
     </div>
+    <!--签到的弹窗-->
+    <div id="signIn">
+      <div class="signIn">
+         <div class="signIn_t">
+           <img src="../statics/images/sign_title@2x.png">
+           <p>连续签到将获现金红包，漏签将清零重置！</p>
+         </div>
+         <ul class="signIn_m">
+           <li v-for="(day, index) in options.signList.info">
+             <!--点击签到-->
+             <p class="click-signIn alertConfirm" v-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>
+             <!--默认天数-->
+             <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
+             <!--点击签到红包-->
+             <p  class="alertConfirm"  v-else-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">
+               <img src="../statics/images/signIn-money@2x.png"/>
+             </p>
+             <!--默认红包样式-->
+             <p  v-else-if="day.signed === 0 && day.coupon_type != 0">
+              <img src="../statics/images/money-disabled@2x.png"/>
+             </p>
+             <!--红包领取后的样式-->
+             <p  v-else-if="day.signed === 1 && day.coupon_type != 0">
+               <img src="../statics/images/getCoupon@2x.png"/>
+             </p>
+             <!--领取后的样式-->
+             <p v-else-if="day.signed === 1 && day.coupon_type === 0">
+               <img src="../statics/images/signIn-succeed@2x.png"/>
+             </p>
+             <p v-if="day.signed === 1">已领取</p>
+             <p v-else-if="day.coupon_type === 2">小红包</p>
+             <p v-else-if="day.coupon_type === 3">大红包</p>
+             <p v-else>成长值{{day.credits}}</p>
+
+           </li>
+         </ul>
+         <div class="signIn_b">
+           <p>当前成长值：{{options.signList.total_credits}} <i>（我的>我的分值）</i></p>
+           <p>钱包余额：¥{{options.signList.total_money}} <i>（我的>我的红包）</i></p>
+         </div>
+      </div>
+    </div>
+    <!--签到获取的成长值弹窗-->
+    <div id="scoreDetail">
+      <div class="scoreDetail">
+        <svg class="icon alertClose" aria-hidden="true">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+        <p>您已成功签到{{options.signDaily.days}}天！</p>
+        <p>成长值<i>+{{options.signDaily.credits}}</i></p>
+        <div class="scoreDetail-m">
+          <p class="Prompt">
+            <b :style="'left:'+ (options.current_credits_Percent - 6) +'%'">{{options.signDaily.current_credits}}</b>
+          </p>
+          <div class="ProgressBar">
+            <div>
+              <i :style="'width:'+ options.current_credits_Percent +'%'"></i>
+            </div>
+            <p class="fouce">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </p>
+            <p class="number">
+              <span>L1</span>
+              <span>L2</span>
+              <span>L3</span>
+              <span>L4</span>
+              <span>L5</span>
+            </p>
+          </div>
+        </div>
+        <p class="alertConfirm">查看分值详情</p>
+      </div>
+    </div>
+    <!--红包的金额详情-->
+    <div id="animationContainerTop" style="width:293px; height:336px">
+      <div id="animationContainer" style="width:293px; height:336px">
+        <canvas id="canvas" width="293" height="336"></canvas>
+        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:293px; height:336px; position: absolute; left: 0px; top: 0px; display: block;">
+        </div>
+        <!--红包详情-->
+        <div class="my-cash" id="my-cash">
+          <p><span>¥</span>{{options.Coupon.coupon_value}}</p>
+          <i></i>
+          <p v-if="options.Coupon.coupon_value_type === 1">现金红包</p>
+          <p v-if="options.Coupon.coupon_value_type === 2">成长值红包</p>
+          <p v-if="options.Coupon.coupon_value_type === 3">贡献值红包</p>
+
+        </div>
+        <!--跳转按钮-->
+        <p class="my-wallet alertConfirm" id="my-wallet">查看我的钱包</p>
+        <!---->
+      </div>
+      <!--关闭按钮-->
+      <div class="cash-button alertClose">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-guanbi"></use>
+        </svg>
+      </div>
+    </div>
+    <!--bot-->
+
   </div>
 </template>
 <script type="text/javascript">
+  import { getUserLevelPercentage } from '../utils/user'
+
   export default {
     data () {
       return {
@@ -429,7 +425,25 @@
           major_comment_credits: '',
           Onlookers_comment_coins: '',
           Onlookers_comment_credits: '',
-          percent: ''
+          percent: '',
+          signList: {
+            info: [],
+            days: '',
+            total_credits: '',
+            total_coins: '',
+            total_money: ''
+          },
+          signDaily: {
+            days: '',
+            credits: '',
+            coins: '',
+            current_credits: ''
+          },
+          current_credits_Percent: getUserLevelPercentage(),
+          Coupon: {
+            coupon_value: '',
+            coupon_value_type: ''
+          }
         }
       }
     },
@@ -441,9 +455,8 @@
       }
     },
     methods: {
-
       getHtml (id, options, callback) {
-        this.options = options
+        this.options = Object.assign(this.options, options)
         this.$nextTick(() => {
           var obj = document.getElementById(id)
           if (obj) {
@@ -453,6 +466,8 @@
           }
         })
       }
+    },
+    mounted () {
     }
   }
 </script>
@@ -473,6 +488,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    font-style: normal;
   }
 
   /*显示等级弹窗样式*/
@@ -1109,5 +1125,385 @@
     color: #808080;
     text-align: center;
     margin-top: 3px;
+  }
+  /* 签到的弹窗 */
+  .signIn {
+    width:100%;
+  }
+  .signIn_t{
+    width:100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .signIn_t img{
+    height:25px;
+  }
+  .signIn_t p{
+    font-size:14px;
+    color: #444444;
+    margin-bottom: 16px;
+  }
+  .signIn_m{
+    width:104%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 17px 0;
+    border-bottom:1px dashed #dcdcdc;
+    border-top:1px dashed #dcdcdc;
+  }
+  .signIn_m li{
+    width:25%;
+    height:75.4px;
+    text-align: center;
+    float: left;
+    text-align: center;
+  }
+  .signIn_m li:nth-of-type(1){
+    margin-left: 12.5%;
+  }
+  .signIn_m li:nth-of-type(3){
+    margin-right: 12.5%;
+  }
+  .signIn_m li p:nth-of-type(1){
+    width:51px;
+    height:51px;
+    background:#c8c8c8;
+    border-radius: 50%;
+    border:1.5px solid #d8d8d8;
+    text-align: center;
+    line-height: 51px;
+    font-size:14px;
+    color: #808080;
+    margin: 0 auto;
+    position: relative;
+  }
+  .signIn_m li p:nth-of-type(1) img{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin: auto;
+  }
+  .signIn_m li p:nth-of-type(2){
+    font-size:12px;
+    color: #808080;
+    margin-top: 2px;
+  }
+  .signIn_m li p.click-signIn{
+    background:rgb(252,200,22);
+    border:1.5px solid #444444;
+  }
+  .signIn_m li p.click-signIn span{
+    display: inline-block;
+    width: 30px;
+    line-height: 17px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #FFFFFF;
+  }
+
+  .signIn_b{
+     width:100%;
+     margin: 0 auto;
+     height:58px;
+     text-align:left;
+     font-size:14px;
+     color: #444444;
+   }
+  .signIn_b p i{
+    font-size: 12px;
+    color: #b4b4b6;
+  }
+  .signIn_b p:nth-of-type(1){
+    margin-top: 15px;
+  }
+ /*签到获取的成长值弹窗*/
+.scoreDetail{
+  width:343px;
+  height:240px;
+  border-radius: 18px;
+  background:#f93277;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  padding-top: 25px;
+}
+.scoreDetail svg{
+  font-size:20px;
+  color: #ffc2d7;
+  position: absolute;
+  right:14px;
+  top:13px;
+}
+.scoreDetail p:nth-of-type(1){
+  font-size:23px;
+  color: #ffffff;
+  font-weight:500;
+}
+.scoreDetail p:nth-of-type(2){
+  font-size:16px;
+  color: #ffffff;
+  margin-top: 11px;
+  margin-bottom: 21px;
+}
+.scoreDetail p:nth-of-type(2) i{
+  font-size:27px;
+  color: #fcc816;
+}
+.scoreDetail p:nth-of-type(3){
+  width:91%;
+  height:34px;
+  text-align: center;
+  line-height: 34px;
+  margin:0 auto;
+  bottom: 25px;
+  font-size:14px;
+  color: #ffffff;
+  border:1px solid #fc98bb;
+  border-radius: 50px;
+  margin-top: 15px;
+}
+  .scoreDetail-m{
+    width:91%;
+    height:68px;
+    margin: 0 auto;
+    border-top:1px dashed #fc98bb;
+    position: relative;
+  }
+  .Prompt {
+    width: 86%;
+    height: 40px;
+    margin-left: 7%;
+    position: relative;
+    top:10px;
+  }
+  .Prompt b {
+    display: block;
+    width: 45px;
+    padding: 0 2px;
+    height: 25px;
+    background: #03aef9;
+    text-align: center;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 25px;
+    border-radius: 8px;
+    position: absolute;
+
+  }
+
+  .Prompt b::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-right: 6px solid #03aef9;
+    border-bottom: 6px solid #03aef9;
+    position: absolute;
+    transform: rotate(45deg);
+    bottom: -2px;
+    left: 16px;
+  }
+
+  /*进度条*/
+
+  .ProgressBar {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top:45px;
+
+  }
+
+  .ProgressBar > div {
+    width: 86%;
+    height: 2px;
+    background: #fc98bb;
+    margin-left: 7%;
+  }
+
+  .ProgressBar > div i {
+    display: block;
+    width: 25%;
+    height: 2px;
+    background: #03aef9;
+  }
+
+  .fouce {
+    width: 86%;
+    height: 2px;
+    left: 7%;
+    /*background: #007AFF;*/
+    top: -1px;
+    position: absolute;
+  }
+
+  .fouce span {
+    display: block;
+    float: left;
+    width: 4px;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .fouce span:nth-of-type(1) {
+    left: 0;
+  }
+
+  .fouce span:nth-of-type(2) {
+    left: 25%;
+  }
+
+  .fouce span:nth-of-type(3) {
+    left: 50%;
+  }
+
+  .fouce span:nth-of-type(4) {
+    left: 75%;
+  }
+
+  .fouce span:nth-of-type(5) {
+    left: 100%;
+  }
+
+  .number {
+    width: 86%;
+    height: 20px;
+    left: 7%;
+    position: absolute;
+  }
+
+  .number span {
+    display: block;
+    float: left;
+    color: #ffc2d7;
+    font-size: 12px;
+    position: absolute;
+  }
+
+  .number span:nth-of-type(1) {
+    left: 0;
+  }
+
+  .number span:nth-of-type(2) {
+    left: 24%;
+  }
+
+  .number span:nth-of-type(3) {
+    left: 49%;
+  }
+
+  .number span:nth-of-type(4) {
+    left: 74%;
+  }
+
+  .number span:nth-of-type(5) {
+    left: 99%;
+  }
+  /*红包的金额详情*/
+  #animationContainer {
+    position:absolute;
+    margin:auto;
+    left:0;right:0;
+    top:0;bottom:0;
+    z-index: 999;
+  }
+
+  .animationContainerWrapper{
+    position:absolute;
+    left:0;right:0;
+    top:0;bottom:0;
+    z-index: 10000;
+  }
+  /*关闭按钮*/
+  .cash-button{
+    width:29px;
+    height:29px;
+    border-radius:50%;
+    background: #808080;
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:50%;
+    margin:auto;
+    z-index: 999;
+    -webkit-transform: translate(0px,210px);
+    -moz-transform:translate(0px,210px);
+    transform: translate(0px,210px);
+  }
+  .cash-button svg{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    color: #FFFFFF;
+    font-size:20px;
+    margin:auto;
+  }
+  /*跳转按钮*/
+  .my-wallet{
+    width:88%;
+    height:34px;
+    border:1px solid #fc98bb;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 34px;
+    font-size:14px;
+    color: #fdd6e3;
+    position: absolute;
+    left:0;
+    right:0;
+    bottom: 55px;
+    margin:auto;
+    opacity: 0;
+  }
+  /*红包详情*/
+  .my-cash{
+    width:58%;
+    height:125px;
+    position: absolute;
+    left:0;
+    right:0;
+    top: 60px;
+    margin:auto;
+    opacity: 0;
+  }
+  .my-cash i{
+    position: absolute;
+    width: 100%;
+    height:1.5px;
+    background: #808080;
+    left:0;
+    right:0;
+    top:0px;
+    bottom: 0;
+    margin:auto;
+  }
+  .my-cash p{
+    width:100%;
+    height:52px;
+    text-align: center;
+    line-height:52px;
+    color: #444444;
+  }
+  .my-cash p:nth-of-type(1){
+    font-size:64px;
+    font-weight: 500;
+  }
+  .my-cash p:nth-of-type(1) span{
+    font-size: 24px;
+    font-weight: 500;
+    position: relative;
+    top: -30px;
+  }
+  .my-cash p:nth-of-type(2){
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
   }
 </style>

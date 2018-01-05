@@ -1,6 +1,8 @@
-import { getGeoPosition as getGeoPositionByPlus } from './plus'
+import { getGeoPosition as getGeoPositionByPlus, getClipbordText } from './plus'
 import { getGeoPositionByWechat } from './wechat'
 import { apiRequest } from './request'
+import localEvent from '../stores/localStorage'
+import router from '../modules/index/routers/index'
 
 /**
  * 获取地理位置
@@ -53,7 +55,45 @@ function saveLocationInfo () {
   })
 }
 
+/**
+ * 剪切板数据处理
+ */
+function checkClipbord () {
+  var text = getClipbordText()
+
+  if (!text) {
+    return
+  }
+
+  var urlReg = /[a-zA-z]+:\/\/[^\s"']*/g
+  if (!urlReg.test(text)) {
+    return
+  }
+
+  var clipbordTextDone = localEvent.getLocalItem('clipbordTextDone')
+  if (clipbordTextDone === text) {
+    return
+  }
+
+  localEvent.setLocalItem('clipbordTextDone', text)
+
+  var matchs = text.match(urlReg)
+  var firstMatch = matchs[0]
+  window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['确定', '取消'], e => {
+    if (e.index === 0) {
+      router.pushPlus(
+        '/discover/publishArticles?url=' + encodeURIComponent(firstMatch),
+        'publishArticles',
+        true,
+        'pop-in',
+        'close'
+      )
+    }
+  }, 'div')
+}
+
 export {
   getGeoPosition,
-  saveLocationInfo
+  saveLocationInfo,
+  checkClipbord
 }

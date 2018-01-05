@@ -264,6 +264,33 @@ function softInput () {
   })
 }
 
+/**
+ * 获取剪切板内容
+ * @returns {*|string}
+ */
+function getClipbordText () {
+  if (!window.plus) return
+
+  var value = ''
+
+  if (window.mui.os.android) {
+    var Context = window.plus.android.importClass('android.content.Context')
+    var main = window.plus.android.runtimeMainActivity()
+    var clip = main.getSystemService(Context.CLIPBOARD_SERVICE)
+    value = window.plus.android.invoke(clip, 'getText')
+  } else {
+    var UIPasteboard = window.plus.ios.importClass('UIPasteboard')
+    var generalPasteboard = UIPasteboard.generalPasteboard()
+    // 设置/获取文本内容:
+    // generalPasteboard.setValueforPasteboardType("testValue", "public.utf8-plain-text");
+    // TODO 应用在后台的时候获取剪切版数据被系统限制了，只有在app内才能访问接口
+    value = generalPasteboard.plusCallMethod({valueForPasteboardType: 'public.utf8-plain-text'})
+  }
+
+  console.log('剪切板数据：' + value)
+  return value || ''
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -277,5 +304,6 @@ export {
   openFullscreen,
   closeFullscreen,
   softInput,
-  openAppUrl
+  openAppUrl,
+  getClipbordText
 }

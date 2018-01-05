@@ -11,7 +11,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
 
     var preloadBackClose = true
-    if (id === url) {
+    if (id === url || id === 'backAndClose') {
       // 非特殊页面返回时关闭webview
       preloadBackClose = false
       popGesture = 'close'

@@ -55,7 +55,6 @@
 <script>
   import { apiRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
-  import errorCodes from '../stores/errorCodes'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
   import { rebootAuth } from '../utils/wechat'
@@ -64,7 +63,8 @@
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
 
-  const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
+//  const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
+  const phoneReg = /^[0-9]+$/
   const login = {
     data: () => ({
       phone: '', // 手机号码

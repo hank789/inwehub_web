@@ -12,9 +12,7 @@
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
-    <div class="content text-content">
-      {{ ask.description }}
-    </div>
+    <div class="content text-content">{{ ask.description }}</div>
     <!--添加图片-->
     <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data ? ask.data.img : ''" :group="ask.id" v-if="ask.data ? ask.data.img.length >0 :''">
     </Images>
@@ -90,11 +88,12 @@
     },
     methods: {
       toContact () {
-        var description = encodeURIComponent(this.ask.description.replace(/\s/g, ''))
+        var description = encodeURIComponent(this.ask.description.replace(/\s/g, '').substr(0, 200))
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
         var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
         var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
-        this.$router.pushPlus('/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum, 'list-detail-page-two', true, 'pop-in', 'hide', true)
+        var url = '/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
+        this.$router.pushPlus(url, 'backAndClose', true, 'pop-in', 'close', true)
       },
       setFollowStatus (status) {
         this.ask.is_followed = status

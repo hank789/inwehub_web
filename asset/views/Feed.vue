@@ -129,6 +129,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
   import { getLocalUserInfo } from '../utils/user'
+  import { saveLocationInfo } from '../utils/allPlatform'
 
   import commentTextarea from '../components/comment/Textarea.vue'
 
@@ -179,7 +180,10 @@
     mounted () {
       // 新手任务
       userAbility.newbieTask(this)
+      // 每日签到
+      userAbility.signIGift(this)
       autoTextArea()
+      saveLocationInfo()
     },
     computed: {},
     methods: {
@@ -417,5 +421,15 @@
     font-size:12px;
     color:#03aef9;
   }
-
+  /*评论了互动问答内容超出两行的样式*/
+  .ellipsis p {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    /* word-wrap: break-word; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+  }
 </style>

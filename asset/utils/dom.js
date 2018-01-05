@@ -86,12 +86,19 @@ function addPreviewAttrForImg (html, group = '1') {
   return html
 }
 
+function autoBlur () {
+  if (document.activeElement) {
+    document.activeElement.blur()
+  }
+}
+
 export {
   queryParent,
   textToLink,
   textToLinkHtml,
   stripTags,
   addPreviewAttrForImg,
-  secureHtml
+  secureHtml,
+  autoBlur
 }
 

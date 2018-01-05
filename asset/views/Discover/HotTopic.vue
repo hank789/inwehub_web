@@ -447,7 +447,7 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 12px 16px 0 16px;
+    padding: 12px 15px 0 15px;
     margin-bottom: 10px;
   }
 
