@@ -134,7 +134,7 @@
             avatar: '',
             username: ''
           },
-          id: '',
+          id: 0,
           supporter_list: [],
           data: {
             img: ''
