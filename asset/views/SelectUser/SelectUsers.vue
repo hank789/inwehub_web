@@ -8,27 +8,41 @@
     </header>
 
     <!--导航栏-->
-
-
     <div class="mui-content">
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
 
         <div slot="header" class="indexHeader">
-          <div class="searchWrapper">
+          <div class="searchWrapper" v-if="!apperClose">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
             <input type="text" placeholder="输入用户名" v-model.trim="search">
+          </div>
+          <!--确定搜索框-->
+          <div class="searchContainer" v-if="apperClose">
+            <p>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-sousuo"></use>
+              </svg>
+              <input type="text" placeholder="输入用户名" v-model.trim="search"/>
+              <span @tap.stop.prevent="empty()" v-if="search">
+                 <svg class="icon" aria-hidden="true">
+                   <use xlink:href="#icon-guanbi"></use>
+                 </svg>
+               </span>
+            </p>
+            <p @tap.stop.prevent="submitInfo()">确定</p>
           </div>
 
           <div class="notFound">
             找不到成员？<span>添加新的关注</span>
           </div>
-
         </div>
+
 
         <div class="indexTitle">
           已关注的成员
-
-
         </div>
 
         <div class="groupWrapper">
@@ -79,6 +93,7 @@
   export default {
     data () {
       return {
+        apperClose: false,
         id: 0,
         search: '',
         username: '',
@@ -97,6 +112,12 @@
       Contact
     },
     methods: {
+      submitInfo () {
+        window.mui.back()
+      },
+      empty () {
+        this.search = ''
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -114,6 +135,12 @@
           if (this.Selected[i]) {
             options.push(this.Selected[i])
           }
+        }
+//       判断是否有带确定的输入框出现
+        if (options.length) {
+          this.apperClose = true
+        } else {
+          this.apperClose = false
         }
         if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
           localEvent.setLocalItem(this.$route.query.from + '_selectUser' + this.userId, options)
@@ -195,16 +222,23 @@
   /*搜索区域*/
 
   .indexHeader {
-    background-color: #FFFFFF;
+    background-color: #f3f4f6;
     padding: 10px 15px;
     .searchWrapper {
+      svg{
+        position: absolute;
+        left: 25px;
+        top: 20px;
+        color: #c8c8c8;
+      }
       input {
-        height: 34px;
+        height: 35px;
         font-size: 14px;
         border-radius: 50px;
         background: #fff;
         border: 1px solid #dcdcdc;
         margin-bottom: 5px;
+        padding-left: 30px;
         &::placeholder {
           color: #c8c8c8;
         }
@@ -271,5 +305,74 @@
     right:0;
     bottom: 0;
     margin: auto;
+  }
+  /*搜索有确定按钮的*/
+  .searchContainer{
+    width:100%;
+    height:35px;
+    background:#f3f4f6;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-bottom: 5px;
+  }
+  .searchContainer p:nth-of-type(1){
+    width: 80%;
+    height:34px;
+    background: #FFFFFF;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /*justify-content:space-between;*/
+    align-items:center;
+    padding:0 12px;
+  }
+  .searchContainer p:nth-of-type(2){
+    width:17%;
+    height:34px;
+    background:#03aef9;
+    border-radius:50px;
+    text-align: center;
+    line-height: 34px;
+    font-size:14px;
+    color: #FFFFFF;
+  }
+  .searchContainer input{
+    width:85%;
+    height:100%;
+    margin: 0;
+    border:none;
+    padding: 0;
+    padding-left: 0;
+    font-size:14px;
+    color:#444444;
+    float: left;
+    margin-left: 10px;
+  }
+  .searchContainer p svg{
+    color:#c8c8c8;
+    font-size: 17px;
+  }
+  .searchContainer span{
+    width:18px;
+    height:18px;
+    background: #c8c8c8;
+    border-radius: 50%;
+    position: relative;
+    float:right;
+  }
+  .searchContainer span svg{
+    color: #FFFFFF;
+    position: absolute;
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+  }
+  input::-webkit-input-placeholder { /*WebKit browsers*/
+    color:#c8c8c8;
+    font-size: 14px;
   }
 </style>

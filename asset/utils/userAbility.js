@@ -255,7 +255,7 @@ var UserAbility = () => {
     if (mobile) {
       var tody = new Date()
       var isTody = tody.getFullYear() + '-' + (tody.getMonth() + 1) + '-' + tody.getDate()
-      var day = localEvent.getLocalItem('day' + mobile).value
+      var day = localEvent.getLocalItem('sign_day_' + mobile).value
       if (day !== isTody) {
         postRequest('activity/sign/dailyInfo', {}).then(response => {
           var code = response.data.code
@@ -276,7 +276,7 @@ var UserAbility = () => {
                     return
                   }
                   // 签到请求成功
-                  localEvent.setLocalItem('day' + mobile, {value: isTody})
+                  localEvent.setLocalItem('sign_day_' + mobile, {value: isTody})
                   if (response.data.data.coupon_type === 0) {
                     // 积分奖励弹窗
                     var signDaily = response.data.data
