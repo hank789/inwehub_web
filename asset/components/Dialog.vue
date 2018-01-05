@@ -295,7 +295,7 @@
       <div class="signIn">
          <div class="signIn_t">
            <img src="../statics/images/sign_title@2x.png">
-           <p>连续签到第{{options.signList.days}}／7日红包奖励！漏签将清零重置！</p>
+           <p>连续签到将获现金红包，漏签将清零重置！</p>
          </div>
          <ul class="signIn_m">
            <li v-for="(day, index) in options.signList.info">
@@ -319,7 +319,8 @@
              <p v-else-if="day.signed === 1 && day.coupon_type === 0">
                <img src="../statics/images/signIn-succeed@2x.png"/>
              </p>
-             <p v-if="day.coupon_type === 2">小红包</p>
+             <p v-if="day.signed === 1">已领取</p>
+             <p v-else-if="day.coupon_type === 2">小红包</p>
              <p v-else-if="day.coupon_type === 3">大红包</p>
              <p v-else>成长值{{day.credits}}</p>
 
