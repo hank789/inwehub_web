@@ -52,21 +52,25 @@
             <p>附近企业</p>
           </li>
         </ul>
-        <ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>
+        <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
           <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
              <div class="container-image">
                <img :src="recommend.data ? recommend.data.img:''"  />
-               <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
-               <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
-               <p class="container_type blue" v-if="recommend.read_type == '3'">互动提问</p>
-               <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
-               <p class="container_type blue" v-if="recommend.read_type == '6'">互动回答</p>
-               <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
              </div>
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
-            <p class="recommend_time">{{recommend.created_at}}</p>
+            <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
+            <div class="recommend_datail">
+              <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+              <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
+              <p class="container_type blue" v-if="recommend.read_type == '3'">互动提问</p>
+              <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+              <p class="container_type blue" v-if="recommend.read_type == '6'">互动回答</p>
+
+              <p class="answer-fouce">3人回答<i></i>34关注</p>
+              <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
+            </div>
           </li>
         </ul>
       </RefreshList>
@@ -80,7 +84,6 @@
   import RefreshList from '../../components/refresh/List.vue'
   import userAbility from '../../utils/userAbility'
   import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
-  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
   const currentUser = localEvent.getLocalItem('UserInfo')
@@ -103,28 +106,28 @@
     props: {},
     watch: {},
     methods: {
-      alertClick (title) {
-        if (this.is_company) {
-          alertCompanyUser(this, () => {
-            postRequest(`company/applyService`, {
-              service_title: title
-            }).then(response => {
-              var code = response.data.code
-              // 如果请求不成功提示信息 并且返回上一页；
-              if (code !== 1000) {
-                window.mui.alert(response.data.message)
-                window.mui.back()
-                return
-              }
-              if (response.data.data) {
-                window.mui.toast(response.data.data.tips)
-              }
-            })
-          })
-        } else {
-          alertDiscoverCompany(this)
-        }
-      },
+//      alertClick (title) {
+//        if (this.is_company) {
+//          alertCompanyUser(this, () => {
+//            postRequest(`company/applyService`, {
+//              service_title: title
+//            }).then(response => {
+//              var code = response.data.code
+//              // 如果请求不成功提示信息 并且返回上一页；
+//              if (code !== 1000) {
+//                window.mui.alert(response.data.message)
+//                window.mui.back()
+//                return
+//              }
+//              if (response.data.data) {
+//                window.mui.toast(response.data.data.tips)
+//              }
+//            })
+//          })
+//        } else {
+//          alertDiscoverCompany(this)
+//        }
+//      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -307,7 +310,7 @@
   }
   .recommend li{
     width:100%;
-    padding:15px 4% 0 4%;
+    padding:15px 4% 13px 4%;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;
@@ -321,16 +324,14 @@
      position: relative;
   }
   .recommend li .container_type{
-    position: absolute;
-    top:15.5px;
-    left:0;
-    width: 68.5px;
-    height:23px;
-    opacity: 0.7;
-    border-radius:0 50px 50px 0;
+    width: 64px;
+    height:20px;
+    float: left;
+    border-radius:0 50px 0px 0;
     text-align: center;
-    line-height: 23px;
+    line-height: 20px;
     color: #FFFFFF;
+    font-size: 12px;
   }
   /*颜色*/
   .recommend li .blue{
@@ -351,16 +352,6 @@
     line-height: 20px;
 
   }
-  .recommend_time{
-    width:100%;
-    height:34.5px;
-    background:#FFFFFF;
-    font-size:12px;
-    color:#b4b4b6;
-    text-align: right;
-    line-height:34.5px;
-  }
-
 /*swiper*/
   .container-item{
     background: #FFFFFF;
@@ -422,4 +413,26 @@
     background: #FFFFFF;
   }
 
+  /*底部的详情*/
+  .recommend_datail{
+    width:100%;
+    height:20px;
+    margin-top: 9px;
+  }
+/*回答 关注*/
+.answer-fouce{
+  float: right;
+  font-size:12px;
+  color: #235280;
+}
+  .answer-fouce i{
+    margin: 0;
+    display: inline-block;
+    width:1px;
+    height:12px;
+    background: #dbdbdb;
+    margin: 0 9px -3px 9px;
+
+
+  }
 </style>
