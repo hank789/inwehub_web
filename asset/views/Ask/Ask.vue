@@ -118,9 +118,9 @@
     </div>
 
     <!--上传图片-->
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
                  :isMultiple="true"
-                 :images="images"
+                 @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
@@ -242,6 +242,11 @@
       this.check()
     },
     methods: {
+      uploadImageSuccess (images) {
+        for (var i = 0; i < images.length; i++) {
+          this.images.push(images[i])
+        }
+      },
       initData () {
         //      取标签；
         this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)

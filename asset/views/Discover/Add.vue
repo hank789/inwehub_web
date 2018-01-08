@@ -71,9 +71,9 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
       :isMultiple="true"
-      :images="images"
+      @success="uploadImageSuccess"
       :ImageMaximum="maxImageCount"
     ></uploadImage>
   </div>
@@ -139,6 +139,11 @@
       window.mui.previewImage()
     },
     methods: {
+      uploadImageSuccess (images) {
+        for (var i = 0; i < images.length; i++) {
+          this.images.push(images[i])
+        }
+      },
       refreshPageData () {
         this.initData()
       },

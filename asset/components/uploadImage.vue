@@ -21,18 +21,15 @@
   export default {
     data () {
       return {
+        images: [],
+        selectImgCount: 0,
+        finishImgCount: 0
       }
     },
     props: {
       isMultiple: {
         type: Boolean,
         default: false
-      },
-      images: {
-        type: Array,
-        default: () => {
-          return []
-        }
       },
       ImageMaximum: {
         type: Number,
@@ -43,6 +40,9 @@
     },
     methods: {
       uploadImage: function () {
+        this.images = []
+        this.selectImgCount = 0
+        this.finishImgCount = 0
         if (window.mui.os.plus) {
           this.show()
         } else {
@@ -68,6 +68,7 @@
         var t = this
         var c = window.plus.camera.getCamera()
         c.captureImage(function (e) {
+          t.selectImgCount = 1
           t.toClip(e)
         }, function (s) {
           console.log('error' + s)
@@ -109,24 +110,31 @@
               for (var imgI = 0; imgI < t.images.length; imgI++) {
                 if (t.images[imgI].index === index) {
                   t.images[imgI].base64 = base64
+                  t.finishImgCount++
                   break
                 }
               }
-              t.$emit('input', t.images)
+              if (t.finishImgCount === t.selectImgCount) {
+                t.$emit('success', t.images)
+              }
             }, function (e) {
+              t.finishImgCount++
               console.log('加载图片失败：' + JSON.stringify(e))
             })
           }, function (error) {
+            t.finishImgCount++
             console.error(error.message)
           })
       },
       galleryImg: function () {
         window.plus.gallery.pick((a) => {
           if (this.isMultiple) {
-            for (var i in a.files) {
+            this.selectImgCount = a.files.length
+            for (var i = 0; i < a.files.length; i++) {
               this.toClip(a.files[i], i)
             }
           } else {
+            this.selectImgCount = 1
             this.toClip(a)
           }
         }, function (a) {
