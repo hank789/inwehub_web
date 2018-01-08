@@ -9,47 +9,42 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="freeQuestion">专业问答</div>
+        <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
       </div>
     </div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.question_title}}</div>
 
-    <div class="buttonWrapper">
-      <button class="mui-btn mui-btn-block mui-btn-primary" v-if="!data.feed.is_pay_for_view">1元看答案／看评论</button>
-      <button class="mui-btn mui-btn-block mui-btn-primary" v-else>查看回答</button>
+
+    <div class="freeQuestion-container comment-container">
+      <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
+      <div class="freeQuestion-upvote">回答好评率96%</div>
     </div>
 
-    <!--点赞 关注问题-->
-    <div class="question_info">
-      <p>
-        <span>回答者:</span> {{data.feed.answer_user_name}}
-        <i v-if="data.feed.average_rate"></i>
-        <span v-if="data.feed.average_rate">{{data.feed.average_rate}}好评</span>
-      </p>
-      <p>
-        <span class="support_number">
-          <svg class="icon" aria-hidden="true" >
-          <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          <i v-if="data.feed.support_number">{{data.feed.support_number}}</i>
-        </span>
-        <span class="comment_number" >
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-          </svg>
-          <i v-if="data.feed.comment_number">{{data.feed.comment_number}}</i>
-        </span>
-      </p>
+    <div class="container-answer margin-10-0-0">
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect">#供应链#</div>{{data.feed.question_title}}</div>
+      <div class="interval top-10">承诺时间24h<i></i>相应时间24h <div class="question-money"><i></i>￥: 88</div></div>
     </div>
 
-    <div class="component-dianzanList" v-if="data.feed.support_number">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-dianzan1"></use>
-      </svg>
-      <span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span>
-      <span v-if="data.feed.support_number > data.feed.supporter_list.length">等{{data.feed.support_number}}人</span>
+    <div class="freeQuestion-container">
+      <div class="freeQuestion-allAnswer bg-blue major-upvote" v-if="!data.feed.is_pay_for_view">1元看答案/看评论</div>
+      <div class="freeQuestion-allAnswer major-upvote  bg-blue" v-else>查看回答</div>
+      <div class="freeQuestion-upvote">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zan"></use>
+        </svg>
+        {{data.feed.support_number}}
+      </div>
+      <div class="freeQuestion-comment">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun"></use>
+        </svg>
+        {{data.feed.comment_number}}
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -86,61 +81,23 @@
 </script>
 
 <style scoped>
-
-  .buttonWrapper{
-    margin-top:15px;
+/*回答者样式*/
+  .comment-container{
+    height:41px;
+    line-height: 19px;
+    padding:10px 0 12px 0;
   }
-  .component-dianzanList{
-    height: 43px;
-    background: #f3f4f6;
-    border-radius: 4px;
-    line-height: 43px;
-    padding-left: 15px;
-    margin-top: 13px;
-  }
-
-  /*回答者*/
-  .question_info{
-    height:19px;
-    /*background: #cccccc;*/
-    margin-top: 12px;
-    line-height:19px;
-  }
-  .question_info p:nth-of-type(1){
+  .question-answer{
     float: left;
     font-size:13px;
-    color: #747474;
-  }
-  .question_info p:nth-of-type(1) i{
-    display: inline-block;
-    width:1px;
-    height:12px;
-    background: #dbdbdb;
-    margin:0 9px -1px 9px;
-  }
-  .question_info p:nth-of-type(1) span:nth-of-type(1){
-    color: #b4b4b6;
-  }
-  .question_info p:nth-of-type(2){
-    float: right;
-    font-size: 13px;
     color: #808080;
   }
-  .question_info p:nth-of-type(2) span{
-    float: right;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 22px;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 18px;
-    color: #808080;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 18px;
-    margin-bottom: -2px;
-  }
-  .question_info p:nth-of-type(2) i{
+  .question-answer i{
+    color: #03aef9;
     font-style: normal;
+  }
+  /*一元看答案*/
+  .major-upvote{
+    width:134px;
   }
 </style>
