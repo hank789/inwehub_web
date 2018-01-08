@@ -221,7 +221,8 @@ function getUserLevelPercentage () {
     1000,
     5000,
     50000,
-    100000
+    500000,
+    5000000
   ]
   var userInfo = getLocalUserInfo()
   var userCredits = userInfo.user_credits

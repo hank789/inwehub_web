@@ -79,8 +79,8 @@ function checkClipbord () {
 
   var matchs = text.match(urlReg)
   var firstMatch = matchs[0]
-  window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['确定', '取消'], e => {
-    if (e.index === 0) {
+  window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['取消', '确定'], e => {
+    if (e.index === 1) {
       router.pushPlus(
         '/discover/publishArticles?url=' + encodeURIComponent(firstMatch),
         'publishArticles',
