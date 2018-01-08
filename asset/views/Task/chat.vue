@@ -66,7 +66,6 @@
 
     <uploadImage ref="uploadImage" v-model="images"
                  :isMultiple="false"
-                 :images="images"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
@@ -113,6 +112,10 @@
       '$route': 'refreshPageData',
       images: function (newValue, oldValue) {
         if (newValue.length) {
+          if (!newValue[0].base64) {
+            return
+          }
+
           var item = {
             created_at: this.currentTime(),
             data: {
