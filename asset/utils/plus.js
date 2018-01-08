@@ -116,7 +116,7 @@ function getGeoPosition (callback, failCallback) {
       console.log('获取到定位信息: ' + JSON.stringify(info))
       callback(info)
     }, (e) => {
-      console.log('获取位置信息失败: ' + e.message)
+      console.log('获取位置信息失败: ' + JSON.stringify(e))
       if (failCallback) {
         failCallback(e.message)
       }
@@ -291,6 +291,38 @@ function getClipbordText () {
   return value || ''
 }
 
+/**
+ * 检查定位权限
+ */
+function checkPermissionLocation (successCallback, failCallback) {
+  if (window.mui.os.ios) {
+    var permission = window.plus.navigator.checkPermission('LOCATION')
+    switch (permission) {
+      case 'authorized':
+        successCallback(permission)
+        break
+      default:
+        failCallback(permission)
+        break
+    }
+  }
+}
+
+/**
+ * 跳转到系统位置设置信息页
+ */
+function toSettingSystemLocation () {
+  if (window.mui.os.ios) {
+    window.plus.runtime.openURL('app-settings:')
+  } else if (window.mui.os.android) {
+    var main = window.plus.android.runtimeMainActivity() // 获取activity
+    var Intent = window.plus.android.importClass('android.content.Intent')
+    var Settings = window.plus.android.importClass('android.provider.Settings')
+    var intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) // 可设置表中所有Action字段
+    main.startActivity(intent)
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -305,5 +337,7 @@ export {
   closeFullscreen,
   softInput,
   openAppUrl,
-  getClipbordText
+  getClipbordText,
+  toSettingSystemLocation,
+  checkPermissionLocation
 }
