@@ -19,11 +19,12 @@
       <!---->
     </div>
     <div class="text-16-444 mui-ellipsis-2">{{data.feed.title}}</div>
-    <div class="labelWrapper"><span class="font-12 color-b4b4b6 line-vertical">回答{{data.feed.answer_num}}</span><span
-      class="font-12 color-03aef9">关注问题{{data.feed.follow_num}}</span></div>
-    <div class="answer-list mui-ellipsis" v-if="data.feed.answer_num">
-      回答者：<span v-for="item in data.feed.answer_user_list">{{item.name}}<i>,</i></span>
-    </div>
+    <!--<div class="labelWrapper"><span class="font-12 color-b4b4b6 line-vertical">回答{{data.feed.answer_num}}</span><span-->
+      <!--class="font-12 color-03aef9">关注问题{{data.feed.follow_num}}</span></div>-->
+    <!--<div class="answer-list mui-ellipsis" v-if="data.feed.answer_num">-->
+      <!--回答者：<span v-for="item in data.feed.answer_user_list">{{item.name}}<i>,</i></span>-->
+    <!--</div>-->
+    <div class="interval fllow-bot">{{data.feed.answer_num}}人回答<i></i>{{data.feed.follow_num}}关注</div>
     <Invitation></Invitation>
   </div>
 </template>
