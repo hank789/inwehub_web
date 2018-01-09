@@ -77,6 +77,7 @@
       RefreshList
     },
     created () {
+
       getGeoPosition((position) => {
         this.dataList = {
           longitude: position.longt,

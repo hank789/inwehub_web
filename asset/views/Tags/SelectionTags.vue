@@ -66,7 +66,6 @@
     methods: {
       Obtain () {
         var that = this
-
         var btnArray = ['取消', '确定']
         window.mui.prompt('', '标签名称', '输入标签名称', btnArray, function (e) {
           if (e.index === 1) {

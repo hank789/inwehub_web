@@ -36,7 +36,7 @@
             </div>
             <p>动态分享</p>
           </li>
-          <li @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
+          <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
             <div class="discover-round">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-huodongjiyu"></use>
