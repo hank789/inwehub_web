@@ -100,8 +100,6 @@
         window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
           if (e.index === 1) {
             toSettingSystemLocation()
-          } else {
-            window.mui.back()
           }
         })
         //
