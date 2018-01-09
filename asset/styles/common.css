@@ -1330,6 +1330,7 @@ a {
 /*专业和互动 顶的样式*/
 .freeQuestion-content{
   float: left;
+  line-height: 17px;
 }
 .freeQuestion{
   width:60px;
@@ -1341,7 +1342,6 @@ a {
   color: #235280;
   text-align: center;
   line-height: 18px;
-  margin-top: 7px;
   margin-left: 5px;
 }
 .freeQuestion—support{
@@ -1370,7 +1370,6 @@ a {
 .freeQuestion—delete{
   float: right;
   color: #808080;
-  margin-top: 9px;
 }
 /*背景色公共的间隔*/
 .interval{
@@ -1393,11 +1392,19 @@ a {
   border-bottom: 1px solid #dcdcdc;
 }
 
-
 .mui-popup{
   position: absolute !important;
 }
 
-.mui-popup-backdrop{
+.mui-popup-backdrop {
   position: absolute !important;
+}
+
+/*feed 时间*/
+.freeQuestion-time{
+  position: absolute;
+  left: 55px;
+  top: 19px;
+  font-size: 12px;
+  color: #b4b4b6;
 }

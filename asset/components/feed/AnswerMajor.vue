@@ -11,9 +11,10 @@
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
         <div class="freeQuestion">专业问答</div>
-        <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
+        <svg class="icon freeQuestion—delete" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
+        <div class="freeQuestion-time">2018-3-3</div>
       </div>
     </div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.title}}</div>
