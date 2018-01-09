@@ -68,6 +68,7 @@
         var t = this
         var c = window.plus.camera.getCamera()
         c.captureImage(function (e) {
+          window.mui('.info-choose').popover('toggle')
           t.selectImgCount = 1
           t.toClip(e)
         }, function (s) {
@@ -77,8 +78,6 @@
         })
       },
       toClip (path, index = 0) {
-        window.mui('.info-choose').popover('toggle')
-
         var imgInfo = {
           name: 'demo',
           size: '1',
@@ -128,6 +127,7 @@
       },
       galleryImg: function () {
         window.plus.gallery.pick((a) => {
+          window.mui('.info-choose').popover('toggle')
           if (this.isMultiple) {
             this.selectImgCount = a.files.length
             for (var i = 0; i < a.files.length; i++) {
