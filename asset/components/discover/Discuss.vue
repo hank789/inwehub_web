@@ -124,12 +124,13 @@
           list: list
         }
 
-        console.log('回复 parentId:' + parentId + ', commentTargetUsername' + commentTargetUsername)
-
         var data = {
           targetUsername: commentTargetUsername || '',
           commentData: commentTarget
         }
+
+        console.log('回复 data:' + JSON.stringify(data))
+
         this.$emit('comment', data)
       },
       sendMessage (message) {
