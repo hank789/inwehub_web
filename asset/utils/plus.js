@@ -295,8 +295,11 @@ function getClipbordText () {
  * 检查定位权限
  */
 function checkPermissionLocation (successCallback, failCallback) {
+  if (!window.plus) return
+
   if (window.mui.os.ios) {
     var permission = window.plus.navigator.checkPermission('LOCATION')
+    console.log('location_permission:' + permission)
     switch (permission) {
       case 'authorized':
         successCallback(permission)
@@ -312,6 +315,9 @@ function checkPermissionLocation (successCallback, failCallback) {
  * 跳转到系统位置设置信息页
  */
 function toSettingSystemLocation () {
+
+  if (!window.plus) return
+  
   if (window.mui.os.ios) {
     window.plus.runtime.openURL('app-settings:')
   } else if (window.mui.os.android) {
