@@ -65,13 +65,13 @@
             <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
             <div class="recommend_datail">
               <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
-              <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
-              <p class="container_type blue" v-if="recommend.read_type == '3'">互动提问</p>
-              <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
-              <p class="container_type blue" v-if="recommend.read_type == '6'">互动回答</p>
-
-              <p class="answer-fouce">3人回答<i></i>34关注</p>
-              <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
+              <p class="container_type blue"  v-else-if="recommend.read_type == '2'">专业问答</p>
+              <p class="container_type blue"  v-else-if="recommend.read_type == '3'">互动提问</p>
+              <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+              <p class="container_type blue"  v-else-if="recommend.read_type == '6'">互动回答</p>
+              <p class="answer-fouce" v-if="recommend.read_type == '3'">{{recommend.data.answer_number}}人回答<i></i>{{recommend.data.follower_number}}关注</p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}%</span></p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '6' || recommend.read_type == '1'">{{recommend.data.comment_number}}评论<i></i>{{recommend.data.support_number}}赞</p>
             </div>
           </li>
         </ul>
