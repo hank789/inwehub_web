@@ -1392,3 +1392,12 @@ a {
   padding: 12px 0;
   border-bottom: 1px solid #dcdcdc;
 }
+
+
+.mui-popup{
+  position: absolute !important;
+}
+
+.mui-popup-backdrop{
+  position: absolute !important;
+}
