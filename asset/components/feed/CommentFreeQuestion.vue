@@ -14,6 +14,7 @@
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
+        <div class="freeQuestion-time">2018-3-3</div>
       </div>
     </div>
     <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content"></div>
