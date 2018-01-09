@@ -16,42 +16,44 @@
         :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <!--类别-->
-        <div class="community">
-          顾问社区<i class="bot"></i>
-        </div>
+        <div class="discover-container">
+        <div class="community">顾问社区</div>
         <ul class="categoryMenu">
           <li @tap.stop.prevent="judge(1)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanyewenda-"></use>
-            </svg>
-            <p>专业问答</p>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhuanyewenda-"></use>
+              </svg>
+            </div>
+            <p>问答社区</p>
             <i>分红</i>
           </li>
-          <li @tap.stop.prevent="judge(2)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-hudongwenda-"></use>
-            </svg>
-            <p>互动问答</p>
-          </li>
           <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-tijiaowenzhang1"></use>
-            </svg>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tijiaowenzhang1"></use>
+              </svg>
+            </div>
             <p>动态分享</p>
           </li>
           <li @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-huodongjiyu"></use>
-            </svg>
-            <p>活动机遇</p>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-huodongjiyu"></use>
+              </svg>
+            </div>
+            <p>企业服务</p>
           </li>
           <li @tap.stop.prevent="judge(5)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fujinqiye1"></use>
-            </svg>
-            <p>附近企业</p>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-fujinqiye1"></use>
+              </svg>
+            </div>
+            <p>附近发现</p>
           </li>
         </ul>
+        </div>
         <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
@@ -235,19 +237,29 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  .discover-container{
+    background: #FFFFFF;
+  }
 
 /*菜单栏*/
   .categoryMenu{
     width:100%;
-    height:92px;
+    height:100px;
     background: #FFFFFF;
-    padding: 0 4%;
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
   }
+
+  .categoryMenu li{
+    display: flex;
+    flex-direction:column ;
+    justify-content:center;
+    align-items:center;
+    flex:1;
+  }
   .categoryMenu li:nth-of-type(1){
-   position: relative;
+    position: relative;
   }
   .categoryMenu li:nth-of-type(1) i{
     position: absolute;
@@ -260,8 +272,8 @@
     background: #fa4975;
     text-align: center;
     line-height:17px;
-    top: 19px;
-    right: -7px;
+    top: 22px;
+    right: 0px;
   }
   .categoryMenu li:nth-of-type(1) i:after {
     content: "";
@@ -278,12 +290,19 @@
     bottom: 0;
     margin: auto;
   }
-  .categoryMenu li{
+  .categoryMenu li .discover-round{
+    width:53px;
+    height:53px;
+    /*background: #03aef9;*/
+    border-radius: 50%;
     display: flex;
     flex-direction:column ;
     justify-content:center;
     align-items:center;
-    flex:1;
+    background: -webkit-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* 标准的语法 */
   }
   .categoryMenu li svg{
     font-size:30px;
@@ -405,11 +424,10 @@
   .community{
     width:100%;
     padding:0 5%;
-    height:43px;
+    height:33px;
     line-height: 43px;
     font-size:16px;
     color: #444444;
-    position:relative;
     background: #FFFFFF;
   }
 
