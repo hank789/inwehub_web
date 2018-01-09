@@ -1392,6 +1392,14 @@ a {
   border-bottom: 1px solid #dcdcdc;
 }
 
+.mui-popup{
+  position: absolute !important;
+}
+
+.mui-popup-backdrop {
+  position: absolute !important;
+}
+
 /*feed 时间*/
 .freeQuestion-time{
   position: absolute;
