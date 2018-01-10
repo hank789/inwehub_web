@@ -86,14 +86,29 @@
             </div>
           </li>
           <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div><label>支付方式</label><label
-                class="mui-pull-right account-setting-field apple-icon ">
-                <svg class="icon mui-icon" aria-hidden="true">
-                  <use :xlink:href="getMethodIcon()"></use>
-                </svg>
-              </label></div>
+            <!--<div class="mui-input-row">-->
+              <!--<div><label>支付方式</label><label-->
+                <!--class="mui-pull-right account-setting-field apple-icon ">-->
+                <!--<svg class="icon mui-icon" aria-hidden="true">-->
+                  <!--<use :xlink:href="getMethodIcon()"></use>-->
+                <!--</svg>-->
+              <!--</label></div>-->
+            <!--</div>-->
+            <div class="pay-choice">支付方式</div>
+            <div class="pay-swallet"><p><i></i></p>钱包支付（余额72元）</div>
+            <div class="pay-ios">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-apple"></use>
+              </svg>
+              苹果支付
             </div>
+            <div class="pay-weChat">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-wechat"></use>
+              </svg>
+              微信支付
+            </div>
+
           </li>
         </ul>
 
@@ -473,6 +488,81 @@
 
 
 <style scoped>
+  /*支付方式样式*/
+  .pay-choice{
+    margin:0;
+    text-align: left;
+    font-size: 16px;
+    color: #9b9b9b;
+  }
+  .pay-swallet{
+    margin:0;
+    text-align: left;
+    font-size: 14px;
+    color: #808080;
+    margin-top: 12px;
+  }
+  .pay-swallet p{
+    width:16px;
+    height:16px;
+    border-radius: 9px;
+    border:1px solid #c8c8c8;
+    float: left;
+    margin-top: 1.3px;
+    margin-right: 6px;
+    position: relative;
+  }
+  .pay-swallet p i{
+    width:6px;
+    height:6px;
+    border-radius: 9px;
+    background:#03aef9;
+    display: block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin:auto;
+  }
+  .pay-ios{
+    margin:0;
+    text-align: left;
+    font-size: 14px;
+    color: #03aef9;
+    margin-top: 19px;
+    width:167px;
+    height:44px;
+    border:1px solid #03aef9;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 44px;
+  }
+  .pay-ios svg{
+    color: #808080;
+    font-size: 17px;
+    margin-bottom: 1px;
+    margin-right: -3px;
+  }
+  .pay-weChat{
+    margin:0;
+    text-align: left;
+    font-size: 14px;
+    color: #03aef9;
+    margin-top: 19px;
+    width:167px;
+    height:44px;
+    border:1px solid #03aef9;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 44px;
+  }
+  .pay-weChat svg{
+    color: #808080;
+    font-size: 20px;
+    margin-bottom: -1px;
+    margin-right: -2px;
+  }
   .component-photograph{
     width:61px !important;
     height:61px !important;
