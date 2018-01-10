@@ -26,7 +26,7 @@
             <!--</label></div>-->
             <!--</div>-->
             <div class="pay-choice">支付方式</div>
-            <div class="pay-swallet" v-if="userTotalMoney > 0" @tap.stop.prevent="selectPayMethod('wallet')"><p><i v-show="useWalletPay"></i></p>钱包支付（余额{{ userTotalMoney }}元）</div>
+            <div class="pay-swallet" v-if="userTotalMoney > 0" @tap.stop.prevent="selectPayMethod('wallet')"><p><i v-show="useWalletPay"></i></p>钱包支付（{{useWalletPayDesc}}）</div>
             <div class="pay-ios" :class="{active: payMethod === 'appleiap'}" v-show="getSupportPayMethods() === 'apple'" @tap.stop.prevent="selectPayMethod('appleiap')">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-apple"></use>
@@ -104,6 +104,13 @@
       })
     },
     computed: {
+      useWalletPayDesc () {
+        var desc = '余额' + this.userTotalMoney + '元'
+        if (this.userTotalMoney < this.pay_money) {
+          desc += ', 剩余还需支付' + (parseFloat(this.pay_money - this.userTotalMoney).toFixed(2)) + '元'
+        }
+        return desc
+      },
       getSelectMoneyMethod () {
         for (var i in this.payItems) {
           var item = this.payItems[i]
@@ -169,6 +176,7 @@
         }
       },
       showSelectMoney () {
+        this.setPayMethod()
         window.mui('#sheet1').popover('toggle')
       },
       getAppId () {
@@ -206,7 +214,7 @@
       },
       setPayMethod () {
         if (!this.payMethod) {
-          if (this.userTotalMoney > this.pay_money) {
+          if (this.userTotalMoney > 0) {
             this.payMethod = 'wx_pub'
             this.useWalletPay = 1
           } else {
@@ -239,8 +247,6 @@
           window.mui.toast('支付金额有误！')
           return
         }
-
-        this.setPayMethod()
 
         if (!this.payMethod) {
           window.mui.toast('请选择支付方式！')
@@ -389,9 +395,7 @@
         })
       }
     },
-    updated () {
-      this.setPayMethod()
-    },
+    updated () {},
     mounted () {
       if (window.mui.os.plus) {
         window.mui.plusReady(() => {
