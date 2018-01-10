@@ -17,7 +17,7 @@ function searchText (text, callback) {
 
   searchTimer = setTimeout(() => {
     console.log('search:' + text)
-    callback()
+    callback(text)
   }, 1000)
 }
 

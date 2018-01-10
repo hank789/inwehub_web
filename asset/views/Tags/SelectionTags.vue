@@ -115,7 +115,7 @@
         // 判断是否为空；
         postRequest('tags/load', {
           tag_type: 5,
-          word: text ? text : '',
+          word: text,
           sort: this.sort
         }).then(response => {
           var code = response.data.code
@@ -129,13 +129,15 @@
             for (var i = 0; i < this.list.length; i++) {
               this.tagName.push(this.list[i].text)
             }
-            if (text) {
-              if (this.tagName.indexOf(text) === -1) {
-                var obj = {
-                  text: text
-                }
-                this.list.unshift(obj)
+          }
+
+          var searchText = text.trim()
+          if (searchText.trim()) {
+            if (this.tagName.indexOf(searchText) === -1) {
+              var obj = {
+                text: searchText
               }
+              this.list.unshift(obj)
             }
           }
           this.loading = 0
@@ -150,9 +152,9 @@
           this.sort = 1
           this.search()
         }
-        searchText(newValue, () => {
+        searchText(newValue, (text) => {
           this.sort = 0
-          this.search(newValue)
+          this.search(text)
         })
       }
     },
