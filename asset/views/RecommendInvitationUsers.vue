@@ -218,9 +218,6 @@
     margin: auto;
   }
   /*列表区域*/
-  .listWrapper{
-    top:88px;
-  }
   .my-focus {
     margin: 0;
     padding: 0;
@@ -309,7 +306,7 @@
   }
 
 
-
+/*无数据的显示样式*/
   .container {
     position: absolute;
     top: 50%;

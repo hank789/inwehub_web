@@ -31,6 +31,8 @@
           :isFollowAsked="ask.is_followed_question?true:false"
           @setFollowAskStatus="setFollowAskStatus"
         ></QustionInteraction>
+         <!--邀请列表-->
+        <InvitationList :ask="ask.question"></InvitationList>
 
         <div class="river"></div>
 
@@ -69,11 +71,8 @@
         <div class="buttonWrapper iNeedAskWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
             我也要提问
-
-
           </button>
         </div>
-
       </RefreshList>
 
 
@@ -102,6 +101,7 @@
   import { postRequest } from '../../utils/request'
   import QustionInteraction from '../../components/question-detail/QustionInteraction.vue'
   import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue'
+  import InvitationList from '../../components/question-detail/InvitationList.vue'
   import Share from '../../components/Share.vue'
   import RefreshList from '../../components/refresh/List.vue'
 
@@ -137,7 +137,8 @@
       QustionInteraction,
       AnswersInteraction,
       RefreshList,
-      Share
+      Share,
+      InvitationList
     },
     computed: {
       answer () {
