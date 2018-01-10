@@ -5,7 +5,7 @@
       <h1 class="mui-title">邀请用户</h1>
     </header>
     <div class="mui-content">
-      <div class="invitation-fouce-user">
+      <div class="invitation-fouce-user" @tap.stop.prevent='toContact()'>
         邀请我关注的好友
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -19,33 +19,40 @@
           换一批
         </p>
         <i></i>
-        <p>
+        <p @tap.stop.prevent="allInvitation()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yijianyaoqinghuida"></use>
           </svg>
           一键邀请
         </p>
       </div>
-        <ul class="my-focus">
-          <li class="my-focus-item" v-for="(item, index) in list">
-            <div class="avatar">
-              <img :src="item.avatar_url"
-                   @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
-              <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
-                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-              </svg>
-            </div>
-            <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
-              <p>
-                <span class="mui-ellipsis">{{item.name}}</span>
-              </p>
-              <p class="mui-ellipsis">{{item.description}}</p>
-            </div>
-            <p class="follows"  v-if="item.is_invited">已邀请</p>
-            <p class="follows bgblue" @tap.stop.prevent="choose(item,index)" v-else>邀请</p>
-            <i class="bot"></i>
-          </li>
-        </ul>
+      <div class="container"  v-if="!this.list.length && !loading">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zanwushuju"></use>
+        </svg>
+        <p>暂时还没有数据呀～</p>
+      </div>
+
+      <ul class="my-focus">
+        <li class="my-focus-item" v-for="(item, index) in list">
+          <div class="avatar">
+            <img :src="item.avatar_url"
+                 @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
+            <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
+            <p>
+              <span class="mui-ellipsis">{{item.name}}</span>
+            </p>
+            <p class="mui-ellipsis">{{item.description}}</p>
+          </div>
+          <p class="follows"  v-if="item.is_invited">已邀请</p>
+          <p class="follows bgblue" @tap.stop.prevent="choose(item.id,index)" v-else>邀请</p>
+          <i class="bot"></i>
+        </li>
+      </ul>
 
     </div>
   </div>
@@ -58,7 +65,9 @@
     data: () => ({
       list: [],
       question_id: '',
-      page: 1
+      page: 1,
+      loading: 1,
+      invitation_user_id: []
     }),
     created () {
       this.question_id = this.$route.params.id
@@ -70,6 +79,24 @@
       RefreshList
     },
     methods: {
+      allInvitation () {
+        this.invitation_user_id = []
+        for (var index in this.list) {
+          this.invitation_user_id.push(this.list[index].id)
+        }
+        if (this.invitation_user_id.length) {
+          this.choose(this.invitation_user_id, 2)
+          this.change()
+        }
+      },
+      toContact () {
+        var description = encodeURIComponent(this.$route.query.title.replace(/\s/g, '').substr(0, 200))
+        var username = encodeURIComponent(this.$route.query.username.replace(/\s/g, ''))
+        var answerNum = this.$route.query.answernum ? this.$route.query.answernum : 0
+        var followedNum = this.$route.query.followednum ? this.$route.query.followednum : 0
+        var url = '/contact/' + this.question_id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
+        this.$router.pushPlus(url, 'backAndClose', true, 'pop-in', 'close', true)
+      },
       getdata () {
         postRequest('question/recommendInviterList', {
           question_id: this.question_id,
@@ -82,12 +109,13 @@
             return
           }
           this.list = response.data.data
+          this.loading = 0
         })
       },
-      choose (item, index) {
+      choose (id, index) {
         postRequest(`question/inviteAnswer`, {
           question_id: this.question_id,
-          user_id: item.id
+          user_id: id
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -95,7 +123,11 @@
             window.mui.back()
             return
           }
-          this.list[index].is_invited = 1
+          if (index === 0) {
+            this.list[index].is_invited = 1
+          } else {
+            window.mui.toast('一键邀请成功')
+          }
         })
       },
       change () {
@@ -169,6 +201,10 @@
     color: #235280;
     line-height: 44px;
     float: left;
+  }
+  .invitation-recommend p svg{
+    font-size: 20px;
+    margin-bottom: -2px;
   }
   .invitation-recommend i{
     width:1px;
@@ -276,7 +312,7 @@
 
   .container {
     position: absolute;
-    top: 500%;
+    top: 50%;
     left: 36%;
   }
 
