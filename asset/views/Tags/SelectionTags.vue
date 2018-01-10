@@ -19,7 +19,7 @@
           </svg>
         </li>
       </ul>
-      <div class="gray" v-if="skill_tags.length"></div>
+      <div class="gray"></div>
 
       <div class="addLable">
         <p>添加标签</p>
@@ -93,7 +93,7 @@
       addSkillTag (val, text) {
         var index = getIndexByIdArray(this.skill_tags, val)
         if (index >= 0) {
-          window.mui.toast('已经添加')
+          window.mui.toast('重复添加')
         } else {
           var list = {
             id: val,
@@ -103,8 +103,7 @@
 //          选中的标签添加到数组中
           if (this.skill_tags.length < 20) {
             this.skill_tags.push(list)
-//            window.mui.toast('添加成功')
-            window.mui.toast(this.skill_tags.length)
+            window.mui.toast('添加成功')
           } else {
             window.mui.toast('最多添加20个标签')
           }
@@ -137,7 +136,11 @@
               var obj = {
                 text: searchText
               }
-              this.list.unshift(obj)
+              if (this.list[0].value) {
+                this.list.unshift(obj)
+              } else {
+                this.list[0].text = searchText
+              }
             }
           }
           this.loading = 0
@@ -150,18 +153,21 @@
         // 当无搜索内容时候
 //          this.list = []
           this.sort = 1
-          this.search()
+          setTimeout(() => {
+            this.search()
+          }, 1100)
+          return
         }
+        this.sort = 0
         searchText(newValue, (text) => {
-          this.sort = 0
-          this.search(text)
+          this.search(newValue)
         })
       }
     },
     mounted () {
      // 默认加载热门标签
       this.sort = 1
-      this.search(' ')
+      this.search()
       if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
         this.skill_tags = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id)
         this.selectNum = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id).length
@@ -210,7 +216,6 @@
   .myLabel div {
     font-size: 13px;
     margin-top: 15px;
-    margin-bottom: 4px;
     color: #808080;
     margin-left: 10px;
   }
