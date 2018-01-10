@@ -18,7 +18,7 @@
       </div>
       <div class="form form-ask">
         <div class="textarea-wrapper">
-          <textarea id="description" v-model.trim="description" @keydown.stop="enterWords" @focus="textareaFocus"
+          <textarea id="description" v-model.trim="description" @focus="textareaFocus"
                     @blur="textareaBlur"></textarea>
         </div>
       </div>
@@ -51,7 +51,7 @@
 
         <div class="help">
           <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-          <div class="item" v-show="question_type === 1" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
+          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
 
 
           <div class="button-wrapper">
@@ -135,7 +135,6 @@
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
-  import { alertSimple, getDialogObj } from '../../utils/dialog'
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -153,12 +152,10 @@
       payItems: [],
       uid: 0,
       description: '',
-      question_type: 1,  // 提问类型，1为付费专业问答，2为免费问答互助,默认为1
       selectOther: false,
       hide: 0,
       descMaxLength: 1000,
       isShowMoneyDev: false,
-      test: 0,
       pay_object_type: 'ask',
       descPlaceholder: '1.请精确描述输入问题详情，并等待平台专家回答' + '\n' + '2.答案每被查看一次，你和回答者可从中获取分成' + '\n' + '3.请根据问题难易程度等合理选择支付金额'
     }),
@@ -176,20 +173,9 @@
 
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
-      window.addEventListener('refreshData', function (e) {
-        // 执行刷新
-        console.log('refresh-ask')
-      })
-      window.mui.init()
-
-      // 付费专业问答-介绍弹窗
-      if (this.question_type === 1) {
-        this.helpWrapper()
-      }
-
       this.textareaBlur()
 
-//      弹窗
+      // 弹窗
       var font = '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
                   '</p>' +
                   '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
@@ -214,21 +200,10 @@
       }
     },
     created () {
-      // showInwehubWebview();
       if (this.$route.query.id) {
         var id = this.$route.query.id
         if (id) {
           this.uid = id
-        }
-      }
-
-      if (this.$route.query.question_type) {
-        var questionType = parseInt(this.$route.query.question_type)
-        if (questionType) {
-          this.question_type = questionType
-          if (this.question_type === 2) {
-            this.descPlaceholder = '可征集大家的意见，可在问题详情页进行回答邀请。'
-          }
         }
       }
 
@@ -242,13 +217,16 @@
       this.check()
     },
     methods: {
+      refreshPageData () {
+        this.initData()
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
         }
       },
       initData () {
-        //      取标签；
+        // 取标签；
         this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
         // 返回时重新取值
         this.tags = []
@@ -281,21 +259,6 @@
       },
       toAskCommunity () {
         userAbility.jumpToAskCommunity(this)
-      },
-      helpWrapper () {
-        var showHelpWrapper = localEvent.getLocalItem('showHelpWrapper')
-        if (typeof showHelpWrapper.closed === 'undefined') {
-          var dialogObj = getDialogObj(this)
-          if (dialogObj) {
-            dialogObj.getHtml('helpWrapper', {}, (html) => {
-              alertSimple(html, '确定', (num) => {
-                if (num.index <= 0) {
-                  localEvent.setLocalItem('showHelpWrapper', {closed: true})
-                }
-              }, true)
-            })
-          }
-        }
       },
       fenhongxize () {
         alertFenhongxize(this)
@@ -331,20 +294,6 @@
           window.mui('#expert').popover('toggle')
         }
       },
-      enterWords (event) {
-//        var key = event.key;
-//        var code = event.keyCode;
-//
-//        if (code == 13) {
-//          if (window.event) {
-//            window.event.returnValue = false;
-//          } else {
-//            event.preventDefault();//for firefox
-//          }
-//        }
-//
-//        return false;
-      },
       cancelAsk () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
@@ -354,7 +303,7 @@
         }
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
-            //      删除标签；
+            // 删除标签；
             this.clearCache()
             setTimeout(() => {
               window.mui.back()
@@ -365,22 +314,13 @@
       showMoney () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-//        if (!this.tags.length) {
-//          window.mui.toast('请选择问题分类')
-//          return
-//        }
 
         if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
           return
         }
 
-        // 互动问答
-        if (this.question_type === 2) {
-          this.goAsk(0, null)
-        } else {
-          window.mui('#sheet1').popover('toggle')
-        }
+        window.mui('#sheet1').popover('toggle')
       },
       selectMoney (money) {
         if (!money) {
@@ -453,10 +393,6 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-//        if (!this.tags.length) {
-//          window.mui.toast('请选择问题分类')
-//          return
-//        }
 
         if (!this.money) {
           window.mui.toast('请选择提问金额')
@@ -485,7 +421,7 @@
 
         var data = {
           order_id: orderId,
-          question_type: this.question_type,
+          question_type: 1,
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
@@ -498,9 +434,8 @@
           var compressBase64 = this.images[i].base64
           data.photos.push(compressBase64)
         }
-        if (this.question_type === 1) {
-          window.mui('#sheet1').popover('toggle')
-        }
+
+        window.mui('#sheet1').popover('toggle')
 
         postRequest(`question/store`, data).then(response => {
           var code = response.data.code
@@ -515,11 +450,7 @@
           var id = result.id
           var timeend = result.waiting_second ? result.waiting_second : 15
 
-          if (this.question_type === 1) {
-            this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
-          } else {
-            this.$router.replace({path: '/ask/' + id})
-          }
+          this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
         })
       }
     },
@@ -528,8 +459,6 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
         }
-
-        // this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
         const askDetail = /^[0-9]+$/
