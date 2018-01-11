@@ -9,7 +9,7 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          <span  v-if="this.tags.length">修改</span>
+          <span  v-if="tags.length || newTags.length">修改</span>
           <span  v-else>选择</span>
         </button>
       </div>
@@ -104,6 +104,7 @@
       images: [],
       maxImageCount: 9,
       tags: [],
+      newTags: [],
       tag: [],
       money: 88,
       payItems: [],
@@ -178,8 +179,15 @@
         this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
         // 返回时重新取值
         this.tags = []
+        this.newTags = []
         for (var i in this.tag) {
-          this.tags = this.tags.concat(this.tag[i].value)
+          if (typeof (this.tag[i].value) === 'string') {
+            if (this.newTags.indexOf(this.tag[i].value) === -1) {
+              this.newTags.push(this.tag[i].value)
+            }
+          } else {
+            this.tags.push(this.tag[i].value)
+          }
         }
       },
       uploadImage: function () {
@@ -300,6 +308,7 @@
         this.images = []
         this.tags = []
         this.tag = []
+        this.newTags = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
@@ -338,6 +347,7 @@
           description: this.description,
           price: this.money,
           tags: this.tags,
+          new_tags: this.newTags,
           hide: this.hide,
           device: device,
           photos: []
