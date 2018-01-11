@@ -16,7 +16,7 @@
                 class="mui-pull-right account-setting-field">¥ {{pay_money}}.00</label></div>
             </div>
           </li>
-          <li class="mui-table-view-cell">
+          <li class="mui-table-view-cell padding-left-6">
             <!--<div class="mui-input-row">-->
             <!--<div><label>支付方式</label><label-->
             <!--class="mui-pull-right account-setting-field apple-icon ">-->
@@ -479,6 +479,7 @@
     text-align: left;
     font-size: 16px;
     color: #9b9b9b;
+    padding-left: 5px;
   }
   .pay-swallet{
     margin:0;
@@ -486,6 +487,7 @@
     font-size: 14px;
     color: #808080;
     margin-top: 12px;
+    padding-left: 5px;
   }
   .pay-swallet p{
     width:16px;
@@ -520,6 +522,7 @@
     border-radius: 4px;
     text-align: center;
     line-height: 44px;
+    margin-left: 5px;
   }
   .pay-ios.active{
     color: #03aef9;
@@ -530,6 +533,7 @@
     font-size: 17px;
     margin-bottom: 1px;
     margin-right: -3px;
+    padding-left: 5px;
   }
   .pay-weChat{
     margin:0;
@@ -541,6 +545,7 @@
     border-radius: 4px;
     text-align: center;
     line-height: 44px;
+    margin-left: 5px;
   }
   .pay-weChat.active{
     color: #03aef9;
