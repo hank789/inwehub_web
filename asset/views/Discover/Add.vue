@@ -177,7 +177,7 @@
         for (var i in tags) {
           var name = '#' + tags[i].text + ' '
           if (name === text) {
-            this.delTag(tags[i].text)
+            this.delTag(tags[i].value)
             tags.splice(i, 1)
           }
         }
