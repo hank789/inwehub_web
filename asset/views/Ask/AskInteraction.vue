@@ -99,6 +99,7 @@
       id: currentUser.user_id,
       tags: [],
       tag: [],
+      newTags: [],
       money: 0,
       payItems: [],
       images: [],
@@ -168,11 +169,18 @@
         }
       },
       initData () {
-        //      取标签；
+        // 取标签；
         this.tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
         this.tags = []
+        this.newTags = []
         for (var i in this.tag) {
-          this.tags = this.tags.concat(this.tag[i].value)
+          if (typeof (this.tag[i].value) === 'string') {
+            if (this.newTags.indexOf(this.tag[i].value) === -1) {
+              this.newTags.push(this.tag[i].value)
+            }
+          } else {
+            this.tags.push(this.tag[i].value)
+          }
         }
       },
       uploadImage: function () {
