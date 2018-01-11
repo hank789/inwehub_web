@@ -256,12 +256,15 @@
         return id
       },
       pay () {
+        console.log('pay() fired')
         if (this.pay_waiting) {
+          console.log('pay_waiting is true')
           return
         }
 
         var checkResult = this.checkEnv()
         if (!checkResult) {
+          console.log('支付环境不允许提交支付')
           return
         }
 
