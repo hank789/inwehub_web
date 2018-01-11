@@ -145,8 +145,7 @@
       selectMoney (money) {
         if (!money) return
 
-        this.pay_money = money
-        this.$emit('payMoneyChange', this.pay_money)
+        this.$emit('payMoneyChange', money)
         window.mui('#expert').popover('toggle')
         this.showSelectMoney()
       },
@@ -167,7 +166,8 @@
             var vIndex = b.index - 1
 
             if (this.payItems[vIndex]) {
-              this.pay_money = this.payItems[vIndex].value
+              var money = this.payItems[vIndex].value
+              this.$emit('payMoneyChange', money)
             }
           })
         } else {
