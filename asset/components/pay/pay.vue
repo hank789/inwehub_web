@@ -43,7 +43,7 @@
         </ul>
         <div class="button-wrapper">
           <div id="pay_content">
-            <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="pay()">
+            <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="payConfirmCheck()">
               {{ btnText ? btnText : '确认支付'}}
     </div>
           </div>
@@ -223,6 +223,24 @@
           }
         }
       },
+      payConfirmCheck () { // 支付前检查
+        if (this.useWalletPay) {
+          if (this.userTotalMoney >= this.pay_money) {
+            document.getElementById('sheet1').style.zIndex = 998
+            window.mui.alert('将使用您账户余额' + this.userTotalMoney + '元中的' + this.pay_money + '元进行支付，点击确定进行支付。', null, '确定', () => {
+              document.getElementById('sheet1').style.zIndex = 999
+              this.pay()
+            })
+          } else if (this.userTotalMoney < this.pay_money) {
+            document.getElementById('sheet1').style.zIndex = 998
+            var differ = parseFloat(this.pay_money - this.userTotalMoney).toFixed(2)
+            window.mui.alert('您的账户余额' + this.userTotalMoney + '元不够支付金额，点击确定将使用微信支付剩余' + differ + '元。', null, '确定', () => {
+              document.getElementById('sheet1').style.zIndex = 999
+              this.pay()
+            })
+          }
+        }
+      },
       getPayChannel () {
         var id = ''
         if (window.mui.os.ios && this.iapPay && window.mui.os.plus) {
@@ -234,6 +252,8 @@
         return id
       },
       pay () {
+        window.mui('#sheet1').popover('hide')
+
         if (this.pay_waiting) {
           return
         }
