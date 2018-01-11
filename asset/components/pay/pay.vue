@@ -79,6 +79,7 @@
         wechatPay: false,
         aliPay: false,
         iapPay: false,
+        pay_money: this.pay_money_parent,
         userTotalMoney: null,  // 用户金额
         payMethod: null, // 支付方式
         useWalletPay: 0 // 是否使用余额支付，0不使用余额支付，1使用余额支付，默认0
@@ -88,7 +89,7 @@
       'payItems',
       'pay_object_type',
       'pay_object_id',
-      'pay_money',
+      'pay_money_parent',
       'btnText'
     ],
     components: {},

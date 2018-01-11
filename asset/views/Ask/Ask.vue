@@ -76,7 +76,7 @@
       :payItems="payItems"
       :pay_object_type="'ask'"
       :pay_object_id="0"
-      :pay_money="money"
+      :pay_money_parent="money"
       @pay_success="goAsk"
     >
     </pay>
