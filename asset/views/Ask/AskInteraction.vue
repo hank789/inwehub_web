@@ -73,7 +73,7 @@
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
-    <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
+    <pay v-show="false" :payItems="[]" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
          v-on:pay_success="goAsk">
     </pay>
 
@@ -194,6 +194,7 @@
         this.images.splice(index, 1)
       },
       submit () {
+        this.$refs.pay.setPayMethod()
         this.$refs.pay.pay()
       },
       textareaFocus () {
