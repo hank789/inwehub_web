@@ -23,7 +23,7 @@
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
       :isAppear="isAppear"
-      :url="data.url"
+      :question_id="data.feed.question_id"
       :username="data.user.name"
       :title="data.feed.title"
       :answer_num="data.feed.answer_num"
