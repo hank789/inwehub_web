@@ -61,7 +61,7 @@
             ></SubmitReadhubAriticle>
 
             <!--x关注了互动问答-->
-            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
+            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
 
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
