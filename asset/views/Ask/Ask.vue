@@ -76,8 +76,9 @@
       :payItems="payItems"
       :pay_object_type="'ask'"
       :pay_object_id="0"
-      :pay_money_parent="money"
+      :pay_money="money"
       @pay_success="goAsk"
+      @payMoneyChange="payMoneyChange"
     >
     </pay>
 
@@ -137,7 +138,7 @@
                   '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
                   '专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。' +
                   '</p>'
-      window.mui.alert(font, '什么是专业问答？', function () {}, 'div')
+      window.mui.alert(font, '什么是专业问答？', '确定', function () {}, 'div')
     },
     computed: {
       type () {
@@ -165,6 +166,9 @@
       this.check()
     },
     methods: {
+      payMoneyChange (money) {
+        this.money = money
+      },
       refreshPageData () {
         this.initData()
       },
@@ -305,7 +309,6 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-
         if (!this.money) {
           window.mui.toast('请选择提问金额')
           return
@@ -346,8 +349,6 @@
           var compressBase64 = this.images[i].base64
           data.photos.push(compressBase64)
         }
-
-        window.mui('#sheet1').popover('toggle')
 
         postRequest(`question/store`, data).then(response => {
           var code = response.data.code
