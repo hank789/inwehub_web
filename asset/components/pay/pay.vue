@@ -27,7 +27,7 @@
             <!--</div>-->
             <div class="pay-choice">支付方式</div>
             <div class="pay-swallet" v-if="userTotalMoney > 0" @tap.stop.prevent="selectPayMethod('wallet')"><p><i v-show="useWalletPay"></i></p>钱包支付（{{useWalletPayDesc}}）</div>
-            <div class="pay-ios" :class="{active: payMethod === 'appleiap'}" v-show="getSupportPayMethods() === 'apple'" @tap.stop.prevent="selectPayMethod('appleiap')">
+            <div class="pay-ios" :class="{active: payMethod === 'appleiap' && !useWalletPay}" v-show="getSupportPayMethods() === 'apple'" @tap.stop.prevent="selectPayMethod('appleiap')">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-apple"></use>
               </svg>
@@ -79,7 +79,6 @@
         wechatPay: false,
         aliPay: false,
         iapPay: false,
-        pay_money: this.pay_money_parent,
         userTotalMoney: null,  // 用户金额
         payMethod: null, // 支付方式
         useWalletPay: 0 // 是否使用余额支付，0不使用余额支付，1使用余额支付，默认0
@@ -89,7 +88,7 @@
       'payItems',
       'pay_object_type',
       'pay_object_id',
-      'pay_money_parent',
+      'pay_money',
       'btnText'
     ],
     components: {},
@@ -131,7 +130,11 @@
       selectPayMethod (method) {
         switch (method) {
           case 'wallet':
-            this.payMethod = 'wx_pub'
+            if (this.userTotalMoney >= this.pay_money) {
+              this.payMethod = this.getPayChannel()
+            } else {
+              this.payMethod = 'wx_pub'
+            }
             this.useWalletPay = 1
             break
           default:
@@ -140,16 +143,10 @@
         }
       },
       selectMoney (money) {
-        if (!money) {
-          this.selectOther = true
-          this.pay_money = 88
-        } else {
-          this.selectOther = false
-          this.pay_money = money
-        }
+        if (!money) return
 
+        this.$emit('payMoneyChange', money)
         window.mui('#expert').popover('toggle')
-
         this.showSelectMoney()
       },
       selectPayItems () {
@@ -169,7 +166,8 @@
             var vIndex = b.index - 1
 
             if (this.payItems[vIndex]) {
-              this.pay_money = this.payItems[vIndex].value
+              var money = this.payItems[vIndex].value
+              this.$emit('payMoneyChange', money)
             }
           })
         } else {
@@ -216,10 +214,15 @@
       setPayMethod () {
         if (!this.payMethod) {
           if (this.userTotalMoney > 0) {
-            this.payMethod = 'wx_pub'
+            if (this.userTotalMoney >= this.pay_money) {
+              this.payMethod = this.getPayChannel()
+            } else {
+              this.payMethod = 'wx_pub'
+            }
             this.useWalletPay = 1
           } else {
             this.payMethod = this.getPayChannel()
+            this.useWalletPay = 0
           }
         }
       },
@@ -230,36 +233,38 @@
             window.mui.alert('将使用您账户余额' + this.userTotalMoney + '元中的' + this.pay_money + '元进行支付，点击确定进行支付。', null, '确定', () => {
               document.getElementById('sheet1').style.zIndex = 999
               this.pay()
-            })
+            }, 'div')
           } else if (this.userTotalMoney < this.pay_money) {
             document.getElementById('sheet1').style.zIndex = 998
             var differ = parseFloat(this.pay_money - this.userTotalMoney).toFixed(2)
             window.mui.alert('您的账户余额' + this.userTotalMoney + '元不够支付金额，点击确定将使用微信支付剩余' + differ + '元。', null, '确定', () => {
               document.getElementById('sheet1').style.zIndex = 999
               this.pay()
-            })
+            }, 'div')
           }
+        } else {
+          this.pay()
         }
       },
       getPayChannel () {
         var id = ''
         if (window.mui.os.ios && this.iapPay && window.mui.os.plus) {
           id = 'appleiap'
-          window.mui.waiting()
         } else {
           id = 'wx_pub'
         }
         return id
       },
       pay () {
-        window.mui('#sheet1').popover('hide')
-
+        console.log('pay() fired')
         if (this.pay_waiting) {
+          console.log('pay_waiting is true')
           return
         }
 
         var checkResult = this.checkEnv()
         if (!checkResult) {
+          console.log('支付环境不允许提交支付')
           return
         }
 
@@ -284,19 +289,17 @@
           pay_object_type: this.pay_object_type,
           pay_object_id: this.pay_object_id,
           use_wallet_pay: this.useWalletPay
-        }, false).then(responseData => {
+        }, true).then(responseData => {
           if (responseData !== false) {
+            window.mui('#sheet1').popover('hide')
+
             var isDebug = responseData.debug
             // 如果是1，则表示绕过支付
             if (isDebug === 1) {
               this.pay_waiting = null
-              if (payChannel === 'appleiap') {
-                window.mui.closeWaiting()
-              }
               this.$emit('pay_success', responseData.order_id, this.pay_object_type)
             } else {
               if (payChannel === 'appleiap') {
-                window.mui.closeWaiting()
                 this.requestIapOrder(responseData)
               } else if (payChannel === 'wx_pub') {
                 var wxOrderInfo = JSON.parse(responseData.order_info)
