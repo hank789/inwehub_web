@@ -42,10 +42,11 @@
       <div class="needMoneyWrapper" v-show="answer.content == ''">
         <div class="buttonWrapper">
 
-          <pay :btnText="money+'元看答案'" :pay_object_type="pay_object_type" :pay_object_id="answer.id" :pay_money="money"
-               v-on:pay_success="paySuccess">
-
-          </pay>
+          <div class="button-wrapper">
+            <div id="pay_content">
+              <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toPay()">1元看答案</div>
+            </div>
+          </div>
         </div>
         <div class="desc">用于鼓励提问者与回答者</div>
         <div class="time">
@@ -82,7 +83,6 @@
   import { quillEditor } from '../../components/vue-quill'
   import Statistics from './Statistics.vue'
   import pay from '../../components/pay/pay.vue'
-  import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import { textToLinkHtml, addPreviewAttrForImg } from '../../utils/dom'
   import { openVendorUrl } from '../../utils/plus'
@@ -99,11 +99,9 @@
           readOnly: true
         },
         editorReadObj: {},
-        money: 1,
         curUid: user.user_id,
         uuid: user.uuid,
-        name: user.name,
-        pay_object_type: 'view_answer'
+        name: user.name
       }
     },
     components: {
@@ -145,8 +143,8 @@
     created () {
     },
     watch: {
-      'answer' (newVal, oldVal) {
-        var content = newVal.content
+      'answer.content' (newVal, oldVal) {
+        var content = newVal
         if (content) {
           var objs = JSON.parse(content)
           this.editorReadObj.setContents(objs)
@@ -155,6 +153,9 @@
     },
     mounted () {},
     methods: {
+      toPay () {
+        this.$emit('toPay')
+      },
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)
@@ -177,27 +178,6 @@
       },
       setFollowStatus (status) {
         this.answer.is_followed = status
-      },
-      paySuccess (orderId) {
-        postRequest(`answer/payforview`, {
-          order_id: orderId,
-          answer_id: this.answer.id,
-          device: 1
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          var content = response.data.data.content
-
-          if (content) {
-            var objs = JSON.parse(content)
-            this.editorReadObj.setContents(objs)
-            this.$emit('paySuccess', content)
-          }
-        })
       },
       onEditorReadyRead (editor) {
         this.editorReadObj = editor

@@ -6,7 +6,7 @@
         <ul class="mui-table-view">
           <li class="mui-table-view-cell">
             <div class="mui-input-row">
-              <div @tap.stop.prevent="selectPayItems" class="mui-navigate-right"><label>付费选项</label><label
+              <div @tap.stop.prevent="selectPayItems" class="mui-navigate-right" :class="{noRightArrow: payItems.length === 1}"><label>付费选项</label><label
                 class="mui-pull-right account-setting-field">{{ getSelectMoneyMethod }}</label></div>
             </div>
           </li>
@@ -143,13 +143,15 @@
         }
       },
       selectMoney (money) {
-        if (!money) return
-
-        this.$emit('payMoneyChange', money)
+        if (money) {
+          this.$emit('payMoneyChange', money)
+        }
         window.mui('#expert').popover('toggle')
         this.showSelectMoney()
       },
       selectPayItems () {
+        if (this.payItems.length === 1) return
+
         if (window.mui.os.plus) {
           var options = []
           window.mui.each(this.payItems, function (index, item) {
@@ -699,5 +701,9 @@
   .mui-input-row label {
     padding-left: 5px;
     text-align: left;
+  }
+
+  .noRightArrow:after{
+    display: none;
   }
 </style>
