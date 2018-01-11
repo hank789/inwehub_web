@@ -1,7 +1,7 @@
 <template>
   <div class="freeQuestion-container">
-    <div class="freeQuestion-fouce" v-if="is_followed_question">已关注</div>
-    <div class="freeQuestion-fouce blue" v-else>关注问题</div>
+    <div class="freeQuestion-fouce" v-if="is_followed_question" @tap.stop.prevent="collectAsk()">已关注</div>
+    <div class="freeQuestion-fouce blue" @tap.stop.prevent="collectAsk()"  v-else>关注问题</div>
 
 
     <div class="freeQuestion-allAnswer bg-blue" @tap.stop.prevent="toContact()" >一键邀请回答</div>
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script type="text/javascript">
-
+  import { postRequest } from '../../utils/request'
   export default {
     data () {
       return {}
@@ -34,9 +34,9 @@
         type: Boolean,
         default: Boolean
       },
-      url: {
-        type: String,
-        default: String
+      question_id: {
+        type: Number,
+        default: Number
       },
       username: {
         type: String,
@@ -62,12 +62,30 @@
 
     },
     methods: {
+      collectAsk () {
+        if (!this.question_id) {
+          return
+        }
+
+        postRequest(`follow/question`, {
+          id: this.question_id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          this.is_followed_question = response.data.data.type === 'follow' ? 1 : 0
+
+        })
+      },
       toContact () {
         var description = encodeURIComponent(this.title.replace(/\s/g, '').substr(0, 200))
         var username = encodeURIComponent(this.username.replace(/\s/g, ''))
         var answerNum = this.answer_num ? this.answer_num : 0
         var followedNum = this.follow_num ? this.follow_num : 0
-        var url = this.url + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
+        var url = '/RecommendInvitation/' + this.question_id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
         this.$router.pushPlus(url, 'backAndClose', true, 'pop-in', 'close', true)
       },
       toResume (uuid) {
