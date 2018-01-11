@@ -93,15 +93,7 @@
     ],
     components: {},
     created () {
-      apiRequest(`pay/config`, {}).then(responseData => {
-        if (responseData === false) {
-          return
-        }
-        this.wechatPay = responseData.pay_method_weixin
-        this.aliPay = responseData.pay_method_ali
-        this.iapPay = responseData.pay_method_iap
-        this.userTotalMoney = responseData.user_total_money
-      })
+      this.getPayConfig(() => {})
     },
     computed: {
       useWalletPayDesc () {
@@ -121,6 +113,21 @@
       }
     },
     methods: {
+      getPayConfig (callback) {
+        apiRequest(`pay/config`, {}).then(responseData => {
+          if (responseData === false) {
+            return
+          }
+          this.wechatPay = responseData.pay_method_weixin
+          this.aliPay = responseData.pay_method_ali
+          this.iapPay = responseData.pay_method_iap
+          this.userTotalMoney = responseData.user_total_money
+
+          if (callback) {
+            callback()
+          }
+        })
+      },
       getSupportPayMethods () {
         if (window.mui.os.plus && window.mui.os.ios) {
           return 'apple'
@@ -177,8 +184,10 @@
         }
       },
       showSelectMoney () {
-        this.setPayMethod()
-        window.mui('#sheet1').popover('toggle')
+        this.getPayConfig(() => {
+          this.setPayMethod()
+          window.mui('#sheet1').popover('toggle')
+        })
       },
       getAppId () {
         var appid = ''
