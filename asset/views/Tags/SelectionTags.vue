@@ -14,7 +14,7 @@
         </div>
         <li v-for="(item, index) in skill_tags" v-if="skill_tags.length">
           {{item.text}}
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.text)">
             <use xlink:href="#icon-times--"></use>
           </svg>
         </li>
@@ -31,7 +31,7 @@
         </div>
         <ul>
           <!--搜素到的标签名 -->
-          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item.value,item.text)">
+          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
             {{item.text}}
             <i class="bot"></i>
           </li>
@@ -67,9 +67,9 @@
     },
     methods: {
       // 删除擅长标签；
-      delSkillTag (val) {
+      delSkillTag (text) {
         for (var i in this.skill_tags) {
-          if (this.skill_tags[i].value === val) {
+          if (this.skill_tags[i].text === text) {
             this.skill_tags.splice(i, 1)
           }
         }
@@ -90,15 +90,15 @@
         }
       },
       // 添加擅长标签；
-      addSkillTag (val, text) {
-        var index = getIndexByIdArray(this.skill_tags, val)
+      addSkillTag (item) {
+        var index = getIndexByIdArray(this.skill_tags, item.value)
         if (index >= 0) {
           window.mui.toast('重复添加')
         } else {
           var list = {
-            id: val,
-            value: val,
-            text: text
+            id: item.value,
+            value: item.value,
+            text: item.text
           }
 //          选中的标签添加到数组中
           if (this.skill_tags.length < 20) {
@@ -129,17 +129,20 @@
               this.tagName.push(this.list[i].text)
             }
           }
+          if (!text) return
 
           var searchText = text.trim()
-          if (searchText.trim()) {
+          if (searchText) {
             if (this.tagName.indexOf(searchText) === -1) {
               var obj = {
-                text: searchText
+                text: searchText,
+                value: searchText
               }
-              if (this.list[0].value) {
+              if (typeof (this.list[0].value) === 'string') {
                 this.list.unshift(obj)
               } else {
                 this.list[0].text = searchText
+                this.list[0].value = searchText
               }
             }
           }
