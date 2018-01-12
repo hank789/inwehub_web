@@ -9,13 +9,16 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业回答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
-        <div class="freeQuestion-time">2018-3-3</div>
+        <div class="freeQuestion-time">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          </timeago>
+        </div>
       </div>
     </div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
@@ -74,6 +77,12 @@
     mounted () {
     },
     methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       support () {
         var data = {
           id: this.data.feed.answer_id
