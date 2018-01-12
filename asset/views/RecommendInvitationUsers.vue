@@ -140,9 +140,9 @@
     },
     updated () {
      // 数据加载完之后
-      if (this.$route.query.from && this.$route.query.from === 'feed') {
-        this.allInvitation()
-      }
+//      if (this.$route.query.from && this.$route.query.from === 'feed') {
+//        this.allInvitation()
+//      }
     }
   }
   export default PublishAnswers
