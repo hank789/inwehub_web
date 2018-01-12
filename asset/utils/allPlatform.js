@@ -1,4 +1,4 @@
-import { getGeoPosition as getGeoPositionByPlus, getClipbordText } from './plus'
+import { getGeoPosition as getGeoPositionByPlus, getClipbordText, checkPermission, toSettingSystem } from './plus'
 import { getGeoPositionByWechat } from './wechat'
 import { apiRequest } from './request'
 import localEvent from '../stores/localStorage'
@@ -92,8 +92,31 @@ function checkClipbord () {
   }, 'div')
 }
 
+/**
+ * 提醒用户去开启通知权限
+ */
+function noticeOpenNotifitionPermission () {
+  var currentUser = localEvent.getLocalItem('UserInfo')
+  checkPermission('NOTIFITION', () => {}, () => {
+    var date = new Date()
+    var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    var prevDay = localEvent.getLocalItem('notification_day_' + currentUser.user_id).value
+    if (prevDay !== today) {
+      var btnArray = ['下次再说', '前往设置']
+      window.mui.confirm('检测到您未开启通知，现在前往设置？', '通知设置', btnArray, (e) => {
+        if (e.index === 1) {
+          toSettingSystem('NOTIFITION')
+        } else {
+          localEvent.setLocalItem('notification_day_' + currentUser.user_id, today)
+        }
+      })
+    }
+  })
+}
+
 export {
   getGeoPosition,
   saveLocationInfo,
-  checkClipbord
+  checkClipbord,
+  noticeOpenNotifitionPermission
 }

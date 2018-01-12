@@ -32,7 +32,7 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import userAbility from '../../utils/userAbility'
   import MessageComponent from '../../components/Message.vue'
-  import { saveLocationInfo, checkClipbord } from '../../utils/allPlatform'
+  import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
 
   export default {
@@ -144,29 +144,7 @@
                 saveLocationInfo()
               }
               if (window.mui.os.ios) {
-                var notifitionConfig = window.plus.navigator.checkPermission('NOTIFITION')
-                switch (notifitionConfig) {
-                  case 'authorized':
-                    console.log('已开启推送权限')
-                    break
-                  default:
-                    console.log(notifitionConfig)
-                    var today = new Date()
-                    var isToday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-                    var settingNotification = localEvent.getLocalItem('notification_day_' + currentUser.user_id).value
-                    if (settingNotification !== isToday) {
-                      var btnArray = ['下次再说', '前往设置']
-                      window.mui.confirm('检测到您未开启通知，现在前往设置？', '通知设置', btnArray, (e) => {
-                        console.log(e.index)
-                        if (e.index === 1) {
-                          window.plus.runtime.openURL('app-settings:')
-                        } else {
-                          localEvent.setLocalItem('notification_day_' + currentUser.user_id, {value: isToday})
-                        }
-                      })
-                    }
-                    break
-                }
+                noticeOpenNotifitionPermission()
               }
             }, false)
 
