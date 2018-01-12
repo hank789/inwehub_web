@@ -34,6 +34,7 @@
   import MessageComponent from '../../components/Message.vue'
   import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
+  import { alertNoticeOpenNotifitionPermission } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -144,7 +145,7 @@
                 saveLocationInfo()
               }
               if (window.mui.os.ios) {
-                noticeOpenNotifitionPermission()
+                noticeOpenNotifitionPermission(self)
               }
             }, false)
 

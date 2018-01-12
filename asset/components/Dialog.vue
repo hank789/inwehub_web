@@ -1522,7 +1522,7 @@
   }
   /*开启通知*/
   .openNotice{
-    width:80%;
+    width:100%;
     height:270px;
     background: #FFFFFF;
     border-radius:18px;
