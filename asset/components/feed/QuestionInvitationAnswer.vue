@@ -133,7 +133,7 @@
     border-radius: 50px;
     text-align: center;
     line-height: 30px;
-    font-size:14px;
+    font-size:12px;
     color: #FFFFFF;
     background: #9e9e9e;
     margin-left: 8px;

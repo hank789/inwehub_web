@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3">{{data.feed.content}}</div>
+    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.content}}</div>
 
 
     <div class="container-answer margin-10-0-0">
