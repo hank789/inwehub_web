@@ -9,7 +9,7 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType">
-          <span  v-if="this.tags.length">修改</span>
+          <span  v-if="this.tags.length || this.newTags.length">修改</span>
           <span  v-else>选择</span>
         </button>
       </div>
@@ -264,6 +264,7 @@
         this.images = []
         this.tag = []
         this.tags = []
+        this.newTags = []
         // 删除标签；
         localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
@@ -296,6 +297,7 @@
           description: this.description,
           price: this.money,
           tags: this.tags,
+          new_tags: this.newTags,
           hide: this.hide,
           device: device,
           photos: []
