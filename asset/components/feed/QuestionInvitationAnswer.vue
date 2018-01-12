@@ -91,7 +91,7 @@
         var username = encodeURIComponent(this.username.replace(/\s/g, ''))
         var answerNum = this.answer_num ? this.answer_num : 0
         var followedNum = this.follow_num ? this.follow_num : 0
-        var url = '/RecommendInvitation/' + this.question_id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
+        var url = '/RecommendInvitation/' + this.question_id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum + '&from=feed'
         this.$router.pushPlus(url, 'backAndClose', true, 'pop-in', 'close', true)
       },
       toResume (uuid) {

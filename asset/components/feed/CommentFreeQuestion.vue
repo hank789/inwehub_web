@@ -49,7 +49,7 @@
       :isAppear="isAppear"
       :question_id="data.feed.question_id"
       :username="data.user.name"
-      :title="data.feed.title"
+      :title="data.feed.question_title"
       :answer_num="data.feed.question_answer_num"
       :follow_num="data.feed.follow_question_num"
     ></Invitation>
