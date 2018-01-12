@@ -113,7 +113,6 @@
         })
       },
       choose (id, index) {
-        console.error(index)
         postRequest(`question/inviteAnswer`, {
           question_id: this.question_id,
           user_id: id
