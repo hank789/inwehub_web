@@ -9,7 +9,7 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/interactions')">互动问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
@@ -21,7 +21,7 @@
     <div class="text-16-444 text-line-3">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 margin-5-0-0 text-line-5">{{data.feed.question_title}}</div>
+      <div class="color-808080 font-14 margin-5-0-0 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
       <div class="interval">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.support_number}}关注</div>
     </div>
 

@@ -9,7 +9,7 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
         <div class="freeQuestion">互动问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
@@ -19,7 +19,7 @@
       </div>
       <!---->
     </div>
-    <div class="text-16-444 mui-ellipsis-2">{{data.feed.title}}</div>
+    <div class="text-16-444 text-line-5"><div class="tagSelect font-16" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.title}}</div>
     <div class="interval fllow-bot">{{data.feed.answer_num}}人回答<i></i>{{data.feed.follow_num}}关注</div>
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
