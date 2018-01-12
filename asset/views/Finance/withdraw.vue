@@ -162,7 +162,7 @@
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            if (code === 404) {
+            if (code === 4012 || code === 4013) {
               this.$refs.password.fail(response.data.message)
               return
             }
