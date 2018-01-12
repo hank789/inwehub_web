@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="component-comment-reply" v-for="(child, childIndex) in children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="comment(child.id, child.owner.name, children)">
+    <div class="component-comment-reply" v-for="(child, childIndex) in children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="clickComment(child, children)">
       <DiscussReplay
         v-if="child.children.length"
         :children="child.children"
         :parentOwnerName="child.owner.name"
         :isShow="isShow"
-        @comment="comment"
+        @comment="clickComment"
       ></DiscussReplay>
 
       <div class="who"><span class="from">{{ child.owner.name }}</span>
@@ -56,9 +56,12 @@
       textToLink (text) {
         return textToLinkHtml(text)
       },
-      comment (parentId, commentTargetUsername, list) {
-        this.$emit('comment', parentId, commentTargetUsername, list)
-      }
+      clickComment (comment, children) {
+        this.$emit('comment', comment, children)
+      } // ,
+//      comment (parentId, commentTargetUsername, list) {
+//        this.$emit('comment', parentId, commentTargetUsername, list)
+//      }
     }
   }
   export default Discuss
