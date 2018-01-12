@@ -311,7 +311,7 @@ function checkPermission (type, successCallback, failCallback) {
 
   if (window.mui.os.ios) {
     var permission = window.plus.navigator.checkPermission(permissionName)
-    console.log('permissionQueryResult:' + permission)
+    console.log('permissionQueryResult type:' + type + ' , permission:' + permission)
     switch (permission) {
       case 'authorized':
         successCallback(permission)
@@ -329,24 +329,25 @@ function checkPermission (type, successCallback, failCallback) {
 function toSettingSystem (type) {
   if (!window.plus) return
 
-  var intent = null
-  switch (type) {
-    case 'LOCATION':
-      intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-      break
-    case 'NOTIFITION':
-      intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS)
-      break
-    default:
-      throw new Error('toSettingSystem type 不支持')
-  }
-
   if (window.mui.os.ios) {
     window.plus.runtime.openURL('app-settings:')
   } else if (window.mui.os.android) {
     var main = window.plus.android.runtimeMainActivity() // 获取activity
     var Intent = window.plus.android.importClass('android.content.Intent')
     var Settings = window.plus.android.importClass('android.provider.Settings')
+
+    var intent = null
+    switch (type) {
+      case 'LOCATION':
+        intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+        break
+      case 'NOTIFITION':
+        intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS)
+        break
+      default:
+        throw new Error('toSettingSystem type 不支持')
+    }
+
     main.startActivity(intent)
   }
 }
