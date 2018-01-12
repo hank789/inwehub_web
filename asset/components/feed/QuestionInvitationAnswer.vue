@@ -127,7 +127,7 @@
   }
   .freeQuestion-allAnswer{
     float: left;
-    width: 104px;
+    width: 134px;
     height:31px;
     border:1px solid #9e9e9e;
     border-radius: 50px;
@@ -146,6 +146,7 @@
     float: right;
     color: #808080;
     font-size:13px;
+    margin-top: 3px;
   }
   .freeQuestion-upvote svg{
     font-size:19px;
@@ -155,6 +156,7 @@
     margin-right: 30px;
     color: #808080;
     font-size:13px;
+    margin-top: 3px;
   }
   .freeQuestion-comment svg{
     font-size:19px;

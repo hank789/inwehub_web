@@ -23,7 +23,7 @@
       <!---->
     </div>
     <div class="text-16-444 text-line-5"><div class="tagSelect font-16" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.title}}</div>
-    <div class="interval fllow-bot">{{data.feed.answer_num}}人回答<i></i>{{data.feed.follow_num}}关注</div>
+    <div class="interval fllow-bot">{{data.feed.answer_num}}人回答<i></i>{{data.feed.follow_num}}人关注</div>
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
       :isAppear="isAppear"

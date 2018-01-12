@@ -25,7 +25,7 @@
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 margin-5-0-0 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.support_number}}关注</div>
+      <div class="interval">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.support_number}}人关注</div>
     </div>
 
     <Invitation

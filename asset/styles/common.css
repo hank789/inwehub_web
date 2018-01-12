@@ -1375,7 +1375,7 @@ a {
   font-size:12px;
   color: #b4b4b6;
 }
-.interval i{
+.interval>i{
   display: inline-block;
   width: 1px;
   height:12px;
