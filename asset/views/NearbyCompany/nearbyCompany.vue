@@ -59,7 +59,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
-  import { checkPermissionLocation, toSettingSystemLocation } from '../../utils/plus'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
   import RefreshList from '../../components/refresh/List.vue'
 
   export default {
@@ -85,7 +85,7 @@
       RefreshList
     },
     created () {
-      checkPermissionLocation(() => {
+      checkPermission('LOCATION', () => {
         this.isLocation = true
        //  获取全线成功的回调
         getGeoPosition((position) => {
@@ -101,7 +101,7 @@
         var btnArray = ['取消', '去设置']
         window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
           if (e.index === 1) {
-            toSettingSystemLocation()
+            toSettingSystem('LOCATION')
           } else {
             window.mui.back()
           }

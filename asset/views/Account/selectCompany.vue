@@ -56,7 +56,7 @@
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
-  import { checkPermissionLocation, toSettingSystemLocation } from '../../utils/plus'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
@@ -83,7 +83,7 @@
       RefreshList
     },
     created () {
-      checkPermissionLocation(() => {
+      checkPermission('LOCATION', () => {
         this.isLocation = true
         this.searchRule = this.$route.query.from === 'infobasic' ? 2 : 1
         getGeoPosition((position) => {
@@ -99,7 +99,7 @@
         var btnArray = ['取消', '去设置']
         window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
           if (e.index === 1) {
-            toSettingSystemLocation()
+            toSettingSystem('LOCATION')
           }
         })
         //

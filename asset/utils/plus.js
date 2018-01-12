@@ -294,12 +294,24 @@ function getClipbordText () {
 /**
  * 检查定位权限
  */
-function checkPermissionLocation (successCallback, failCallback) {
+function checkPermission (type, successCallback, failCallback) {
   if (!window.plus) return
 
+  var permissionName = ''
+  switch (type) {
+    case 'LOCATION':
+      permissionName = 'LOCATION'
+      break
+    case 'NOTIFITION':
+      permissionName = 'NOTIFITION'
+      break
+    default:
+      throw new Error('checkPermission type 不支持')
+  }
+
   if (window.mui.os.ios) {
-    var permission = window.plus.navigator.checkPermission('LOCATION')
-    console.log('location_permission:' + permission)
+    var permission = window.plus.navigator.checkPermission(permissionName)
+    console.log('permissionQueryResult:' + permission)
     switch (permission) {
       case 'authorized':
         successCallback(permission)
@@ -314,15 +326,27 @@ function checkPermissionLocation (successCallback, failCallback) {
 /**
  * 跳转到系统位置设置信息页
  */
-function toSettingSystemLocation () {
+function toSettingSystem (type) {
   if (!window.plus) return
+
+  var intent = null
+  switch (type) {
+    case 'LOCATION':
+      intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+      break
+    case 'NOTIFITION':
+      intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS)
+      break
+    default:
+      throw new Error('toSettingSystem type 不支持')
+  }
+
   if (window.mui.os.ios) {
     window.plus.runtime.openURL('app-settings:')
   } else if (window.mui.os.android) {
     var main = window.plus.android.runtimeMainActivity() // 获取activity
     var Intent = window.plus.android.importClass('android.content.Intent')
     var Settings = window.plus.android.importClass('android.provider.Settings')
-    var intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) // 可设置表中所有Action字段
     main.startActivity(intent)
   }
 }
@@ -342,6 +366,6 @@ export {
   softInput,
   openAppUrl,
   getClipbordText,
-  toSettingSystemLocation,
-  checkPermissionLocation
+  toSettingSystem,
+  checkPermission
 }
