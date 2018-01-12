@@ -27,7 +27,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" v-model="searchText" />
+          <input type="text" v-model="searchText" maxlength="15"/>
         </div>
         <ul>
           <!--搜素到的标签名 -->
