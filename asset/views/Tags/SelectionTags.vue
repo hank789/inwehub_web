@@ -138,7 +138,7 @@
                 text: searchText,
                 value: searchText
               }
-              if (typeof (this.list[0].value) === 'string') {
+              if (typeof (this.list[0].value) !== 'string') {
                 this.list.unshift(obj)
               } else {
                 this.list[0].text = searchText

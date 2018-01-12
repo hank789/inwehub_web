@@ -335,7 +335,7 @@
     margin-bottom: 10px;
     margin-left: 4%;
     border-radius: 4px;
-    border: 1px solid #cccccc;
+    box-shadow: 0px 0px 7px 2px #ececee;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
@@ -347,7 +347,7 @@
     width: 64px;
     height:20px;
     float: left;
-    border-radius:0 50px 0px 0;
+    border-radius:0 18px 18px 0;
     text-align: center;
     line-height: 20px;
     color: #FFFFFF;
