@@ -35,8 +35,8 @@
     </div>
 
     <div class="freeQuestion-container">
-      <div class="freeQuestion-allAnswer major-upvote  bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
-      <div class="freeQuestion-allAnswer bg-blue major-upvote" v-else>1元看答案/看评论</div>
+      <div class="freeQuestion-allAnswer   bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
+      <div class="freeQuestion-allAnswer bg-blue " v-else>1元围观</div>
       <div class="freeQuestion-upvote">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -106,9 +106,5 @@
   .question-answer i{
     color: #03aef9;
     font-style: normal;
-  }
-  /*一元看答案*/
-  .major-upvote{
-    width:134px;
   }
 </style>

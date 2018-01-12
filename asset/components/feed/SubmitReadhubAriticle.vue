@@ -25,19 +25,34 @@
       <img :src="data.feed.img"/>
     </div>
 
-    <div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)">
-      <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun"></use>
-        </svg><span>{{data.feed.comment_number}}</span>
-      </div>
-      <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
+    <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+      <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
-        </svg><span>{{data.feed.support_number}}</span>
+        </svg>
+        {{data.feed.support_number}}
+      </div>
+      <div class="freeQuestion-comment" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun"></use>
+        </svg>
+        {{data.feed.comment_number}}
       </div>
     </div>
-    <div class="container-answer margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
+
+    <!--<div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)">-->
+      <!--<div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-pinglun"></use>-->
+        <!--</svg><span>{{data.feed.comment_number}}</span>-->
+      <!--</div>-->
+      <!--<div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-zan"></use>-->
+        <!--</svg><span>{{data.feed.support_number}}</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="container-answer" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
 
       <!-- 点赞和评论列表start -->
       <SuppertAndComment

@@ -25,13 +25,13 @@
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
+      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
 
     <div class="freeQuestion-container">
-      <div class="freeQuestion-allAnswer major-upvote  bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
-      <div class="freeQuestion-allAnswer bg-blue major-upvote" v-else>1元看答案/看评论</div>
+      <div class="freeQuestion-allAnswer   bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
+      <div class="freeQuestion-allAnswer bg-blue" v-else>1元围观</div>
       <div class="freeQuestion-upvote">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>

@@ -4,7 +4,7 @@
     <div class="freeQuestion-fouce blue" @tap.stop.prevent="collectAsk()"  v-else>关注问题</div>
 
 
-    <div class="freeQuestion-allAnswer bg-blue" @tap.stop.prevent="toContact()" >一键邀请回答</div>
+    <div class="freeQuestion-allAnswer bg-blue" @tap.stop.prevent="toContact()" >一键邀请</div>
     <div class="freeQuestion-upvote" v-if="isAppear">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-zan"></use>
@@ -127,7 +127,7 @@
   }
   .freeQuestion-allAnswer{
     float: left;
-    width: 134px;
+    width: 76px;
     height:31px;
     border:1px solid #9e9e9e;
     border-radius: 50px;
