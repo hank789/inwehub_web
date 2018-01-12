@@ -10,24 +10,25 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
-        <div class="freeQuestion">专业问答</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
+        <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">2018-3-3</div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis-3">{{data.feed.title}}</div>
+    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 text-line-5"><div class="tagSelect">#供应链#</div>{{data.feed.title}}</div>
-      <div class="interval top-10">承诺时间24h<i></i>相应时间24h <div class="question-money"><i></i>￥: 88</div></div>
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>相应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
 
     <div class="freeQuestion-container">
-      <div class="freeQuestion-allAnswer bg-blue major-upvote" v-if="!data.feed.is_pay_for_view">1元看答案/看评论</div>
-      <div class="freeQuestion-allAnswer major-upvote  bg-blue" v-else>查看回答</div>
+      <div class="freeQuestion-allAnswer major-upvote  bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
+      <div class="freeQuestion-allAnswer bg-blue major-upvote" v-else>1元看答案/看评论</div>
       <div class="freeQuestion-upvote">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
