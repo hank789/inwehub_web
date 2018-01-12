@@ -1,25 +1,56 @@
 <template>
-  <div>
-    <div class="Withdrawals">
-      <div class="Withdrawals-title">
-        <p>取消</p>
-        <p>提现</p>
-        <i class="bot"></i>
-      </div>
-
-      <div class="inputWrapper input-blue" >
-        <svg class="icon svg-gray" aria-hidden="true">
-          <use xlink:href="#icon-mima"></use>
-        </svg>
-        <input type="password" v-model.trim="password" placeholder="请输入登录密码" @focus="focus" @blur="blur"
-               @tap.stop.prevent="entryPassword"/>
-      </div>
-      <p class="forget-password"><span>密码输入错误，今天您还可以输入2次</span>忘记密码？</p>
-
-      <button class="button-blue">确认提现</button>
+  <div id="Withdrawals" class="Withdrawals">
+    <div class="Withdrawals-title">
+      <p>取消</p>
+      <p>提现</p>
+      <i class="bot"></i>
     </div>
+
+    <div class="inputWrapper" :class="{'input-blue': password}">
+      <svg class="icon" :class="{'svg-gray': password}" aria-hidden="true">
+        <use xlink:href="#icon-mima"></use>
+      </svg>
+      <input type="password" v-model.trim="password" placeholder="请输入登录密码" @focus="focus" @blur="blur"/>
+    </div>
+    <p class="forget-password"><span v-if="errorMesg">{{errorMesg}}</span>忘记密码？</p>
+
+    <button :class="{'button-blue': password.length >= 6}" @tap.stop.prevent="submit">确认提现</button>
   </div>
 </template>
+
+<script type="text/javascript">
+  export default {
+    data () {
+      return {
+        password: '',
+        errorMesg: ''
+      }
+    },
+    components: {},
+    props: {
+
+    },
+    created () {
+    },
+    watch: {},
+    mounted () {
+    },
+    methods: {
+      submit () {
+        this.$emit('submitPassword', this.password)
+      },
+      requirePassword () {
+        window.mui('#Withdrawals').popover('toggle')
+      },
+      focus () {
+
+      },
+      blur () {
+
+      }
+    }
+  }
+</script>
 
 <style scoped="scoped">
   ul,li,div,p,span,i,a,button{
@@ -38,11 +69,14 @@
     background-color: #c8c7cc;
   }
   .Withdrawals{
+    display: none;
     width:100%;
     height:215px;
     background: #FFFFFF;
     border: 1px solid #cccccc;
-    position: relative;
+    position: absolute;
+    z-index:999;
+    bottom:0;
   }
   .Withdrawals-title{
     width:100%;
