@@ -85,7 +85,7 @@
           this.invitation_user_id.push(this.list[index].id)
         }
         if (this.invitation_user_id.length) {
-          this.choose(this.invitation_user_id, 2)
+          this.choose(this.invitation_user_id,-1)
           this.change()
         }
       },
