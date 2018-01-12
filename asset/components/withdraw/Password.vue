@@ -1,24 +1,28 @@
 <template>
-  <div id="Withdrawals" class="Withdrawals">
-    <div class="Withdrawals-title">
-      <p>取消</p>
-      <p>提现</p>
-      <i class="bot"></i>
-    </div>
+  <div>
+    <div id="Withdrawals" class="Withdrawals mui-popover mui-popover-action mui-popover-bottom">
+      <div class="Withdrawals-title">
+        <p @tap.stop.prevent="hide()">取消</p>
+        <p>提现</p>
+        <i class="bot"></i>
+      </div>
 
-    <div class="inputWrapper" :class="{'input-blue': password}">
-      <svg class="icon" :class="{'svg-gray': password}" aria-hidden="true">
-        <use xlink:href="#icon-mima"></use>
-      </svg>
-      <input type="password" v-model.trim="password" placeholder="请输入登录密码" @focus="focus" @blur="blur"/>
-    </div>
-    <p class="forget-password"><span v-if="errorMesg">{{errorMesg}}</span>忘记密码？</p>
+      <div class="inputWrapper" :class="{'input-blue': password}">
+        <svg class="icon" :class="{'svg-gray': password}" aria-hidden="true">
+          <use xlink:href="#icon-mima"></use>
+        </svg>
+        <input type="password" v-model.trim="password" placeholder="请输入登录密码" @focus="focus" @blur="blur"/>
+      </div>
+      <p class="forget-password"><span class="error" v-if="errorMesg">{{errorMesg}}</span><span @tap.stop.prevent="toFindPassword()">忘记密码？</span></p>
 
-    <button :class="{'button-blue': password.length >= 6}" @tap.stop.prevent="submit">确认提现</button>
+      <button :class="{'button-blue': password.length >= 6}" @tap.stop.prevent="submit">确认提现</button>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import userAbility from '../../utils/userAbility'
+
   export default {
     data () {
       return {
@@ -36,8 +40,26 @@
     mounted () {
     },
     methods: {
+      toFindPassword () {
+        userAbility.logout(this, () => {
+          window.mui('#Withdrawals').popover('toggle')
+          this.$router.pushPlus('/findpassword')
+        })
+      },
+      hide () {
+        window.mui('#Withdrawals').popover('hide')
+      },
       submit () {
         this.$emit('submitPassword', this.password)
+      },
+      success () {
+        this.hide()
+        this.password = ''
+        this.errorMesg = ''
+      },
+      fail (msg) {
+        this.errorMesg = msg
+        window.mui('#Withdrawals').popover('show')
       },
       requirePassword () {
         window.mui('#Withdrawals').popover('toggle')
@@ -115,7 +137,7 @@
     color: #235280;
     padding-top: 13px;
   }
-  .forget-password span{
+  .forget-password .error{
     font-size:12px;
     color: #fa4975;
     float: left;
@@ -193,5 +215,12 @@
   }
   .inputWrapper.input-blue{
     border-color: #03aef9;;
+  }
+
+  #Withdrawals{
+    background: #fff;
+    position: absolute;
+    z-index:999;
+    display: none;
   }
 </style>
