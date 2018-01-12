@@ -9,7 +9,12 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body">{{data.title}}</div>
+        <div class="mui-media-body">{{data.title}}
+          <div class="freeQuestion-time">
+            <timeago :since="timeago(data.created_at)" :auto-update="60">
+            </timeago>
+          </div>
+        </div>
       </div>
     </div>
     <div class="text-16-444 text-line-5 preWrapper textToLink" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
@@ -93,6 +98,12 @@
 
     },
     methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       textToLink (text) {
         return secureHtml(textToLinkHtml(text))
       },
