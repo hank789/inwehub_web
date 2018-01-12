@@ -96,20 +96,34 @@ function checkClipbord () {
  * 提醒用户去开启通知权限
  */
 function noticeOpenNotifitionPermission () {
+  console.log('noticeOpenNotifitionPermission fired')
   var currentUser = localEvent.getLocalItem('UserInfo')
-  checkPermission('NOTIFITION', () => {}, () => {
+  checkPermission('NOTIFITION', () => {}, (result) => {
+    console.log('noticeOpenNotifitionPermission fail:' + result)
     var date = new Date()
     var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    var prevDay = localEvent.getLocalItem('notification_day_' + currentUser.user_id).value
-    if (prevDay !== today) {
+    var prevDay = localEvent.getLocalItem('notification_day_' + currentUser.user_id)
+    console.log('prevDay:' + JSON.stringify(prevDay))
+    var notice = () => {
       var btnArray = ['下次再说', '前往设置']
       window.mui.confirm('检测到您未开启通知，现在前往设置？', '通知设置', btnArray, (e) => {
         if (e.index === 1) {
           toSettingSystem('NOTIFITION')
-        } else {
-          localEvent.setLocalItem('notification_day_' + currentUser.user_id, today)
         }
       })
+
+      localEvent.setLocalItem('notification_day_' + currentUser.user_id, {value: today, isStop: 0})
+    }
+
+    if (prevDay.isStop === undefined) { // 第一次提醒
+      notice()
+      return
+    } else if (prevDay.isStop === 0 && prevDay.value !== today) {
+      notice()  // 下次提醒
+      return
+    } else if (prevDay.isStop) {
+      // 永不提醒
+      return
     }
   })
 }
