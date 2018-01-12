@@ -151,7 +151,7 @@
               this.payMethod = this.getPayChannel()
             } else {
               if (window.mui.os.plus) {
-                this.payMethod = 'wxapp'
+                this.payMethod = 'wxpay'
               } else {
                 this.payMethod = 'wx_pub'
               }
@@ -243,7 +243,7 @@
               this.payMethod = this.getPayChannel()
             } else {
               if (window.mui.os.plus) {
-                this.payMethod = 'wxapp'
+                this.payMethod = 'wxpay'
               } else {
                 this.payMethod = 'wx_pub'
               }
