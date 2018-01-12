@@ -42,6 +42,7 @@
       ref="password"
       @submitPassword="submitPassword"
     ></password>
+
   </div>
 </template>
 
@@ -124,6 +125,7 @@
     methods: {
       submitPassword (password) {
         this.password = password
+        this.submitWithdraw()
       },
       bindSuccess () {
         this.getWallet()
@@ -149,14 +151,26 @@
           return
         }
 
-        // this.$refs.password.requirePassword()
+        if (!this.password) {
+          this.$refs.password.requirePassword()
+          return
+        }
 
-        postRequest(`withdraw/request`, {amount: this.withdrawMoney}).then(response => {
+        postRequest(`withdraw/request`, {
+          amount: this.withdrawMoney,
+          password: this.password
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
+            if (code === 4012 || code === 4013) {
+              this.$refs.password.fail(response.data.message)
+              return
+            }
             window.mui.alert(response.data.message)
             return
           }
+
+          this.$refs.password.success()
 
           this.$router.push('/paySuccess?account=' + this.bindWeixinNickname + '&money=' + this.withdrawMoney)
         })
