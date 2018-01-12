@@ -323,6 +323,18 @@ function alertGetCoupon (context, Coupon) {
   }
 }
 
+/**
+ * 通知用户开推送通知权限
+  */
+function alertNoticeOpenNotifitionPermission (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('openNotice', {}, (html) => {
+      alertHtml(html, callback)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -342,5 +354,6 @@ export {
   alertChat,
   alertSignIn,
   alertGetCredits,
-  alertGetCoupon
+  alertGetCoupon,
+  alertNoticeOpenNotifitionPermission
 }
