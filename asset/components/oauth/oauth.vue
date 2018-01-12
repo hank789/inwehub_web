@@ -110,7 +110,7 @@
 
                 // 如果返回token有值，则登陆成功，如果为null，走注册流程
                 var token = response.data.data.token
-
+                console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)
                 self.$emit('success', token, auth.authResult.openid)
               })
             }, function (e) {
