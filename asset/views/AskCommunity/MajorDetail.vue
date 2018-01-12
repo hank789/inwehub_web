@@ -131,7 +131,7 @@
       :payItems="[
           {
             default: true,
-            text: '1元看答案',
+            text: '1元围观',
             value: 1
           }
         ]"
