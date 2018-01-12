@@ -9,7 +9,7 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          <span  v-if="this.tags.length">修改</span>
+          <span  v-if="tags.length || newTags.length">修改</span>
           <span  v-else>选择</span>
         </button>
       </div>
@@ -18,7 +18,7 @@
       </div>
       <div class="form form-ask">
         <div class="textarea-wrapper">
-          <textarea id="description" v-model.trim="description" @keydown.stop="enterWords" @focus="textareaFocus"
+          <textarea id="description" v-model.trim="description" @focus="textareaFocus"
                     @blur="textareaBlur"></textarea>
         </div>
       </div>
@@ -43,15 +43,12 @@
         <div class="button-wrapper" v-show="!isShowMoneyDev">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
             提好问题了
-
-
-
           </button>
         </div>
 
         <div class="help">
           <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-          <div class="item" v-show="question_type === 1" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
+          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
 
 
           <div class="button-wrapper">
@@ -63,66 +60,27 @@
           </div>
         </div>
       </div>
-
     </div>
 
 
-    <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
-      <div class="selectMoney">
-
-        <div class="title">您若问的用心，我将答的精彩</div>
-
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div @tap.stop.prevent="selectMajor2" class="mui-navigate-right"><label>付费选项</label><label
-                class="mui-pull-right account-setting-field">{{ getSelectMoneyMethod }}</label></div>
-            </div>
-          </li>
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div><label>支付金额</label><label
-                class="mui-pull-right account-setting-field">¥ {{money}}.00</label></div>
-            </div>
-          </li>
-          <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-              <div><label>支付方式</label><label
-                class="mui-pull-right account-setting-field apple-icon ">
-                <svg class="icon mui-icon" aria-hidden="true">
-                  <use :xlink:href="getMethodIcon()"></use>
-                </svg>
-              </label></div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="button-wrapper">
-          <pay :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money" v-on:pay_success="goAsk">
-          </pay>
-        </div>
-      </div>
-    </div>
-
-    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell" v-for="(item, index) in payItems">
-          <a @tap.stop.prevent="selectMoney(item.value)">{{ item.text }}</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="selectMajor2()"><b>取消</b></a>
-        </li>
-      </ul>
-    </div>
 
     <!--上传图片-->
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
                  :isMultiple="true"
-                 :images="images"
+                 @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
+
+    <pay
+      ref="pay"
+      :payItems="payItems"
+      :pay_object_type="'ask'"
+      :pay_object_id="0"
+      :pay_money="money"
+      @pay_success="goAsk"
+      @payMoneyChange="payMoneyChange"
+    >
+    </pay>
 
   </div>
 </template>
@@ -135,7 +93,6 @@
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
-  import { alertSimple, getDialogObj } from '../../utils/dialog'
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -148,18 +105,16 @@
       images: [],
       maxImageCount: 9,
       tags: [],
+      newTags: [],
       tag: [],
       money: 88,
       payItems: [],
       uid: 0,
       description: '',
-      question_type: 1,  // 提问类型，1为付费专业问答，2为免费问答互助,默认为1
       selectOther: false,
       hide: 0,
       descMaxLength: 1000,
       isShowMoneyDev: false,
-      test: 0,
-      pay_object_type: 'ask',
       descPlaceholder: '1.请精确描述输入问题详情，并等待平台专家回答' + '\n' + '2.答案每被查看一次，你和回答者可从中获取分成' + '\n' + '3.请根据问题难易程度等合理选择支付金额'
     }),
     components: {
@@ -176,26 +131,15 @@
 
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
-      window.addEventListener('refreshData', function (e) {
-        // 执行刷新
-        console.log('refresh-ask')
-      })
-      window.mui.init()
-
-      // 付费专业问答-介绍弹窗
-      if (this.question_type === 1) {
-        this.helpWrapper()
-      }
-
       this.textareaBlur()
 
-//      弹窗
+      // 弹窗
       var font = '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
                   '</p>' +
                   '<p style="text-align: left; font-size:14px; color: #444444;  margin-top:15px;">' +
                   '专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。' +
                   '</p>'
-      window.mui.alert(font, '什么是专业问答？', function () {}, 'div')
+      window.mui.alert(font, '什么是专业问答？', '确定', function () {}, 'div')
     },
     computed: {
       type () {
@@ -203,32 +147,13 @@
       },
       descLength () {
         return this.description.length
-      },
-      getSelectMoneyMethod () {
-        for (var i in this.payItems) {
-          var item = this.payItems[i]
-          if (this.money === item.value) {
-            return item.text.replace(/（.*?）/, '')
-          }
-        }
       }
     },
     created () {
-      // showInwehubWebview();
       if (this.$route.query.id) {
         var id = this.$route.query.id
         if (id) {
           this.uid = id
-        }
-      }
-
-      if (this.$route.query.question_type) {
-        var questionType = parseInt(this.$route.query.question_type)
-        if (questionType) {
-          this.question_type = questionType
-          if (this.question_type === 2) {
-            this.descPlaceholder = '可征集大家的意见，可在问题详情页进行回答邀请。'
-          }
         }
       }
 
@@ -242,13 +167,31 @@
       this.check()
     },
     methods: {
+      payMoneyChange (money) {
+        this.money = money
+      },
+      refreshPageData () {
+        this.initData()
+      },
+      uploadImageSuccess (images) {
+        for (var i = 0; i < images.length; i++) {
+          this.images.push(images[i])
+        }
+      },
       initData () {
-        //      取标签；
+        // 取标签；
         this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
         // 返回时重新取值
         this.tags = []
+        this.newTags = []
         for (var i in this.tag) {
-          this.tags = this.tags.concat(this.tag[i].value)
+          if (typeof (this.tag[i].value) === 'string') {
+            if (this.newTags.indexOf(this.tag[i].value) === -1) {
+              this.newTags.push(this.tag[i].value)
+            }
+          } else {
+            this.tags.push(this.tag[i].value)
+          }
         }
       },
       uploadImage: function () {
@@ -277,21 +220,6 @@
       toAskCommunity () {
         userAbility.jumpToAskCommunity(this)
       },
-      helpWrapper () {
-        var showHelpWrapper = localEvent.getLocalItem('showHelpWrapper')
-        if (typeof showHelpWrapper.closed === 'undefined') {
-          var dialogObj = getDialogObj(this)
-          if (dialogObj) {
-            dialogObj.getHtml('helpWrapper', {}, (html) => {
-              alertSimple(html, '确定', (num) => {
-                if (num.index <= 0) {
-                  localEvent.setLocalItem('showHelpWrapper', {closed: true})
-                }
-              }, true)
-            })
-          }
-        }
-      },
       fenhongxize () {
         alertFenhongxize(this)
       },
@@ -302,44 +230,6 @@
 
         return '#icon-wechat'
       },
-      selectMajor2 () {
-        if (window.mui.os.plus) {
-          var options = []
-          window.mui.each(this.payItems, function (index, item) {
-            options.push({
-              title: item.text
-            })
-          })
-
-          var a = options
-          window.plus.nativeUI.actionSheet({
-            cancel: '取消',
-            buttons: a
-          }, (b) => {
-            var vIndex = b.index - 1
-
-            if (this.payItems[vIndex]) {
-              this.money = this.payItems[vIndex].value
-            }
-          })
-        } else {
-          window.mui('#expert').popover('toggle')
-        }
-      },
-      enterWords (event) {
-//        var key = event.key;
-//        var code = event.keyCode;
-//
-//        if (code == 13) {
-//          if (window.event) {
-//            window.event.returnValue = false;
-//          } else {
-//            event.preventDefault();//for firefox
-//          }
-//        }
-//
-//        return false;
-      },
       cancelAsk () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
@@ -349,7 +239,7 @@
         }
         window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
           if (e.index === 0) {
-            //      删除标签；
+            // 删除标签；
             this.clearCache()
             setTimeout(() => {
               window.mui.back()
@@ -360,34 +250,13 @@
       showMoney () {
         var inputElem = document.querySelector('textarea')
         inputElem.blur()
-//        if (!this.tags.length) {
-//          window.mui.toast('请选择问题分类')
-//          return
-//        }
 
         if (!this.description || this.description === this.descPlaceholder) {
           window.mui.toast('请填写提问内容')
           return
         }
 
-        // 互动问答
-        if (this.question_type === 2) {
-          this.goAsk(0, null)
-        } else {
-          window.mui('#sheet1').popover('toggle')
-        }
-      },
-      selectMoney (money) {
-        if (!money) {
-          this.selectOther = true
-          this.money = 88
-        } else {
-          this.selectOther = false
-          this.money = money
-        }
-
-        this.selectMajor2()
-        this.showMoney()
+        this.$refs.pay.showSelectMoney()
       },
       speech () {
         var options = {}
@@ -443,16 +312,12 @@
         this.images = []
         this.tags = []
         this.tag = []
+        this.newTags = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-//        if (!this.tags.length) {
-//          window.mui.toast('请选择问题分类')
-//          return
-//        }
-
         if (!this.money) {
           window.mui.toast('请选择提问金额')
           return
@@ -480,11 +345,12 @@
 
         var data = {
           order_id: orderId,
-          question_type: this.question_type,
+          question_type: 1,
           answer_uuid: this.uid,
           description: this.description,
           price: this.money,
           tags: this.tags,
+          new_tags: this.newTags,
           hide: this.hide,
           device: device,
           photos: []
@@ -492,9 +358,6 @@
         for (var i in this.images) {
           var compressBase64 = this.images[i].base64
           data.photos.push(compressBase64)
-        }
-        if (this.question_type === 1) {
-          window.mui('#sheet1').popover('toggle')
         }
 
         postRequest(`question/store`, data).then(response => {
@@ -510,11 +373,7 @@
           var id = result.id
           var timeend = result.waiting_second ? result.waiting_second : 15
 
-          if (this.question_type === 1) {
-            this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
-          } else {
-            this.$router.replace({path: '/ask/' + id})
-          }
+          this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
         })
       }
     },
@@ -523,8 +382,6 @@
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
         }
-
-        // this.description = this.description.replace("\n", "");
       },
       money: function (newMoney) {
         const askDetail = /^[0-9]+$/
@@ -596,54 +453,6 @@
     color: #9b9b9b;
   }
 
-  .selectMoney {
-    background: #fff;
-  }
-
-  .selectMoney .category span.active, .form-ask .select span.active {
-    border: 1px solid #4990E2;
-    color: #4990E2;
-  }
-
-  .selectMoney .category span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
-    width: 30%;
-    display: inline-block;
-    height: 32px;
-    margin: 0 3px 10px;
-    text-align: center;
-    line-height: 32px;
-    position: relative;
-  }
-
-  .selectMoney .help {
-    margin: 30px 0;
-  }
-
-  .form-ask .select span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
-    padding: 0 10px;
-    display: inline-block;
-    height: 32px;
-    margin-right: 6px;
-    margin-bottom: 10px;
-    text-align: center;
-    line-height: 32px;
-    position: relative;
-  }
-
-  .selectMoney .category span input {
-    display: inline-block;
-    position: relative;
-    border: none;
-    height: 90%;
-    margin-top: -4px;
-    width: 90%;
-    text-align: center;
-  }
-
   .form-ask .button-wrapper {
     margin-top: 15px;
     padding: 0 80px
@@ -664,41 +473,6 @@
 
   .mui-bar .mui-btn-nav.mui-pull-left {
     margin-left: 5px;
-  }
-
-  .selectMoney {
-    text-align: center;
-    padding: 0 15px 15px 15px;
-  }
-
-  .selectMoney .payDesc {
-    position: relative;
-    font-size: 14px;
-  }
-
-  .selectMoney .payDesc {
-    font-size: 14px;
-    height: 40px;
-    line-height: 40px;
-    color: #999;
-  }
-
-  .selectMoney .button-wrapper {
-    margin: 20px 0 10px;
-    padding: 0 30px;
-  }
-
-  .selectMoney .payDesc .dash {
-    position: relative;
-    top: -4px;
-    margin: 0 5px;
-    display: inline-block;
-    border-top: 1px solid #999;
-    width: 45px;
-  }
-
-  .selectMoney .payDesc .mui-icon {
-    margin-right: 5px;
   }
 
   .fixedContainer {
@@ -766,77 +540,6 @@
     color: #f2f2f2;
     border-radius: 5px;
     border: 1px solid #03aef9;
-  }
-
-  .mui-popover .mui-table-view {
-    background: none !important;
-    margin-top: 0 !important;
-    border-radius: 0 !important;
-    color: rgba(155, 155, 155, 100) !important;
-  }
-
-  #expert.mui-popover .mui-table-view {
-    background: #fff !important;
-    border-radius: 5px !important;
-    color: #4990E2 !important;
-  }
-
-  #expert.mui-popover .mui-table-view-cell {
-    padding: 13px 15px;
-  }
-
-  .selectMoney .title {
-    padding: 22px 0;
-    margin: 0 8px;
-    text-align: center;
-    position: relative;
-  }
-
-  .selectMoney .title:after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    content: '';
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #c8c7cc;
-  }
-
-  .selectMoney .mui-table-view-cell {
-    padding: 10px 0;
-  }
-
-  .selectMoney .mui-pull-right {
-    float: right !important;
-    padding-right: 35px;
-
-    color: rgba(74, 144, 226, 100) !important;
-    text-align: right;
-  }
-
-  .selectMoney .mui-icon {
-    color: rgba(138, 138, 138, 100);
-    opacity: 0.67;
-    font-size: 24px;
-  }
-
-  .selectMoney .apple-icon {
-    padding: 8px 35px 0 0;
-  }
-
-  .mui-popover .mui-table-view .mui-table-view-cell:last-child, .mui-popover .mui-table-view .mui-table-view-cell:last-child > a:not(.mui-btn) {
-    border-radius: 0 !important;
-  }
-
-  .mui-table-view-cell:after {
-    left: 0 !important;
-  }
-
-  .mui-input-row label {
-    padding-left: 5px;
-    text-align: left;
   }
 
   .help {

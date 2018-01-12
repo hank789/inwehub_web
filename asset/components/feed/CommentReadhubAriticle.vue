@@ -9,7 +9,11 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="freeQuestion-time">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          </timeago>
+        </div>
       </div>
     </div>
     <div class="text-14-444 mui-ellipsis" v-html="data.feed.comment_content"></div>
@@ -48,6 +52,12 @@
 
     },
     methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       toResume (uuid) {
         if (!uuid) {
           return false

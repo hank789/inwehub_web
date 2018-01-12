@@ -64,9 +64,9 @@
     </div>
     <!--发送消息框end-->
 
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
                  :isMultiple="false"
-                 :images="images"
+                 @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
@@ -110,14 +110,20 @@
       Typing
     },
     watch: {
-      '$route': 'refreshPageData',
-      images: function (newValue, oldValue) {
-        if (newValue.length) {
+      '$route': 'refreshPageData'
+    },
+    methods: {
+      uploadImageSuccess (images) {
+        if (images.length) {
+          if (!images[0].base64) {
+            return
+          }
+
           var item = {
             created_at: this.currentTime(),
             data: {
               text: '',
-              img: newValue[0].base64
+              img: images[0].base64
             },
             id: null,
             user_id: this.currentUser.user_id,
@@ -128,7 +134,7 @@
           this.images = []
 
           postRequest(`im/message-store`, {
-            img: newValue[0].base64,
+            img: images[0].base64,
             contact_id: this.chatUserId,
             room_id: this.chatRoomId
           }).then(response => {
@@ -144,9 +150,7 @@
             this.$refs.RefreshList.scrollToBottom()
           }, 500)
         }
-      }
-    },
-    methods: {
+      },
 //      转换成html
       textToLink (text) {
         return textToLinkHtml(' ' + text)

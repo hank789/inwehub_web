@@ -38,12 +38,18 @@
 
     </div>
 
+    <password
+      ref="password"
+      @submitPassword="submitPassword"
+    ></password>
+
   </div>
 </template>
 
 <script>
   import { postRequest } from '../../utils/request'
   import oauth from '../../components/oauth/oauth.vue'
+  import password from '../../components/withdraw/Password.vue'
 
   export default {
     data: () => ({
@@ -58,7 +64,8 @@
       bindWeixinNickname: '', // 绑定微信昵称,
       withdraw_day_remain: '--',
       isDisabled: true,
-      warning: ''
+      warning: '',
+      password: ''   // 提现密码
     }),
     created () {
       this.getWallet()
@@ -89,7 +96,8 @@
       }
     },
     components: {
-      oauth
+      oauth,
+      password
     },
     watch: {
       withdrawMoney: function (newMoney, oldMoney) {
@@ -115,6 +123,10 @@
       }
     },
     methods: {
+      submitPassword (password) {
+        this.password = password
+        this.submitWithdraw()
+      },
       bindSuccess () {
         this.getWallet()
       },
@@ -133,17 +145,32 @@
           window.mui.toast('请正确填写提现金额')
           return
         }
+
         if (this.withdrawMoney > this.totalMoeny) {
           window.mui.toast('提现金额不能大于账户余额')
           return
         }
-        postRequest(`withdraw/request`, {amount: this.withdrawMoney}).then(response => {
+
+        if (!this.password) {
+          this.$refs.password.requirePassword()
+          return
+        }
+
+        postRequest(`withdraw/request`, {
+          amount: this.withdrawMoney,
+          password: this.password
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
+            if (code === 4012 || code === 4013) {
+              this.$refs.password.fail(response.data.message)
+              return
+            }
             window.mui.alert(response.data.message)
             return
           }
-          // mui.toast(response.data.data.tips);
+
+          this.$refs.password.success()
 
           this.$router.push('/paySuccess?account=' + this.bindWeixinNickname + '&money=' + this.withdrawMoney)
         })

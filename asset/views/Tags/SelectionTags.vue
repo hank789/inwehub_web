@@ -6,16 +6,20 @@
     </header>
 
     <div class="mui-content absolute">
-      <ul class="myLabel" v-if="skill_tags.length">
-        <p>标签</p>
-        <li v-for="(item, index) in skill_tags">
+      <ul class="myLabel" >
+        <div>
+          <p>标签（{{selectNum}}／20） </p>
+          <p>让机遇更精准匹配，让内容更容易检索 </p>
+          <button @tap.stop.prevent="keepTags()">确认保存</button>
+        </div>
+        <li v-for="(item, index) in skill_tags" v-if="skill_tags.length">
           {{item.text}}
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.text)">
             <use xlink:href="#icon-times--"></use>
           </svg>
         </li>
       </ul>
-      <div class="gray" v-if="skill_tags.length"></div>
+      <div class="gray"></div>
 
       <div class="addLable">
         <p>添加标签</p>
@@ -23,16 +27,11 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" v-model="searchText" />
+          <input type="text" v-model="searchText" maxlength="15"/>
         </div>
         <ul>
-          <li>
-            <p>搜不到?</p>
-            <p @tap.stop.prevent="Obtain()">申请添加</p>
-            <i class="bot"></i>
-          </li>
           <!--搜素到的标签名 -->
-          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item.value,item.text)">
+          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
             {{item.text}}
             <i class="bot"></i>
           </li>
@@ -60,62 +59,63 @@
         list: [],
         skill_tags: [],
         tags: [],
-        id: currentUser.user_id
+        id: currentUser.user_id,
+        sort: 1,
+        selectNum: 0,
+        tagName: []
       }
     },
     methods: {
-      Obtain () {
-        var that = this
-
-        var btnArray = ['取消', '确定']
-        window.mui.prompt('', '标签名称', '输入标签名称', btnArray, function (e) {
-          if (e.index === 1) {
-            // 申请添加擅长标签；
-            if (e.value) {
-              that.applySkillTag(e.value)
-            }
-          }
-        }, 'div')
-      },
       // 删除擅长标签；
-      delSkillTag (val) {
+      delSkillTag (text) {
         for (var i in this.skill_tags) {
-          if (this.skill_tags[i].value === val) {
+          if (this.skill_tags[i].text === text) {
             this.skill_tags.splice(i, 1)
           }
         }
+//        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+//          localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+//          window.mui.toast('删除成功')
+//        } else {
+//          return false
+//        }
+      },
+      keepTags () {
         if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
           localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
-          window.mui.toast('删除成功')
+          window.mui.back()
+          return
         } else {
           return false
         }
       },
       // 添加擅长标签；
-      addSkillTag (val, text) {
-        var index = getIndexByIdArray(this.skill_tags, val)
+      addSkillTag (item) {
+        var index = getIndexByIdArray(this.skill_tags, item.value)
         if (index >= 0) {
-          window.mui.toast('已经添加')
+          window.mui.toast('重复添加')
         } else {
           var list = {
-            id: val,
-            value: val,
-            text: text
+            id: item.value,
+            value: item.value,
+            text: item.text
           }
-          this.skill_tags.push(list)
-          if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
-            localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
+//          选中的标签添加到数组中
+          if (this.skill_tags.length < 20) {
+            this.skill_tags.push(list)
             window.mui.toast('添加成功')
-            return
           } else {
-            return false
+            window.mui.toast('最多添加20个标签')
           }
         }
       },
-      // 申请添加擅长标签；
-      applySkillTag (text) {
-        postRequest('system/applySkillTag', {
-          tag_name: text
+      // 搜索标签列表；
+      search (text, sort) {
+        // 判断是否为空；
+        postRequest('tags/load', {
+          tag_type: 5,
+          word: text,
+          sort: this.sort
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -123,47 +123,57 @@
             window.mui.back()
             return
           }
-          window.mui.toast('申请提交成功')
+          if (response.data.data.tags.length > 0) {
+            this.list = response.data.data.tags
+            for (var i = 0; i < this.list.length; i++) {
+              this.tagName.push(this.list[i].text)
+            }
+          }
+          if (!text) return
+
+          var searchText = text.trim()
+          if (searchText) {
+            if (this.tagName.indexOf(searchText) === -1) {
+              var obj = {
+                text: searchText,
+                value: searchText
+              }
+              if (typeof (this.list[0].value) !== 'string') {
+                this.list.unshift(obj)
+              } else {
+                this.list[0].text = searchText
+                this.list[0].value = searchText
+              }
+            }
+          }
           this.loading = 0
         })
-      },
-      // 搜索标签列表；
-      search (text) {
-        // 判断是否为空；
-        if (text) {
-          postRequest('tags/load', {
-            tag_type: 5,
-            word: text
-          }).then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.alert(response.data.message)
-              window.mui.back()
-              return
-            }
-            if (response.data.data.tags.length > 0) {
-              this.list = response.data.data.tags
-            }
-            this.loading = 0
-          })
-        } else {
-          this.list = []
-        }
       }
     },
     watch: {
       searchText: function (newValue) {
         if (!newValue) {
-          this.list = []
+        // 当无搜索内容时候
+//          this.list = []
+          this.sort = 1
+          setTimeout(() => {
+            this.search()
+          }, 1100)
+          return
         }
-        searchText(newValue, () => {
+        this.sort = 0
+        searchText(newValue, (text) => {
           this.search(newValue)
         })
       }
     },
     mounted () {
+     // 默认加载热门标签
+      this.sort = 1
+      this.search()
       if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
         this.skill_tags = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id)
+        this.selectNum = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id).length
       } else {
         return false
       }
@@ -203,14 +213,26 @@
     overflow: hidden;
     background: #FFFFFF;
     padding: 0 4% 15px 2%;
+    position: relative;
   }
 
-  .myLabel p {
+  .myLabel div {
     font-size: 13px;
     margin-top: 15px;
-    margin-bottom: 4px;
     color: #808080;
     margin-left: 10px;
+  }
+  .myLabel button{
+    width:75px;
+    height:30px;
+    background: #03aef9;
+    font-size: 14px;
+    color: #FFFFFF;
+    border-color: #03aef9;
+    position: absolute;
+    right:4%;
+    top:15px;
+    padding: 0;
   }
 
   .myLabel li {
@@ -292,22 +314,6 @@
     color: #808080;
   }
 
-  .addLable ul li:nth-of-type(1) p:nth-of-type(1) {
-    float: left;
-    color: #03aef9;
-  }
-
-  .addLable ul li:nth-of-type(1) p:nth-of-type(2) {
-    width: 86px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 100px;
-    text-align: center;
-    line-height: 27px;
-    margin-top: 8.5px;
-    float: right;
-    color: #03aef9;
-  }
   /*按钮的color*/
 
   .mui-popup-buttons span..mui-popup-buttons span.mui-popup-button {

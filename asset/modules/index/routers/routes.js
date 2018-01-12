@@ -174,6 +174,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 邀请用户
+    path: '/RecommendInvitation/:id',
+    name: 'contact',
+    meta: {
+      title: '邀请用户',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/RecommendInvitationUsers.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 邀请回答
     path: '/contact/:id',
     name: 'contact',

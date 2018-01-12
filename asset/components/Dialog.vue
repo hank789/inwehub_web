@@ -393,6 +393,20 @@
         </svg>
       </div>
     </div>
+
+    <!--开启通知-->
+    <div id="openNotice">
+      <div class="openNotice">
+        <p>现在开启通知，不错过任何一次可能的平台合作机会呦~</p>
+        <p>“设置”-“通知”-开启InweHub</p>
+        <ul>
+          <li class="alertConfirm">现在开启</li>
+          <li class="alertConfirm">不再提醒</li>
+          <li class="alertConfirm">稍后提醒</li>
+        </ul>
+      </div>
+    </div>
+
     <!--bot-->
 
   </div>
@@ -1505,5 +1519,35 @@
     font-size: 16px;
     font-weight: 500;
     margin-top: 10px;
+  }
+  /*开启通知*/
+  .openNotice{
+    width:100%;
+    height:270px;
+    background: #FFFFFF;
+    border-radius:18px;
+    padding-top: 31px;
+  }
+  .openNotice p:nth-of-type(1){
+    font-size: 16px;
+    line-height: 24px;
+    color: #444444;
+    padding: 0 18px 0 18px;
+    margin-bottom: 7px;
+  }
+  .openNotice p:nth-of-type(2){
+    font-size: 13px;
+    color: #808080;
+    padding: 0 18px 0 18px;
+    margin-bottom: 32px;
+  }
+  .openNotice ul li{
+    width:100%;
+    height:43px;
+    text-align: center;
+    line-height: 43px;
+    font-size: 16px;
+    color: #03aef9;
+    border-top:0.5px solid #dcdcdc;
   }
 </style>

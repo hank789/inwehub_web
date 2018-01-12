@@ -50,6 +50,7 @@
 <script>
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -70,20 +71,35 @@
         data: '',
         distance: '',
         dataList: null,
-        address: ''
+        address: '',
+        isLocation: false
       }
     },
     components: {
       RefreshList
     },
     created () {
-      getGeoPosition((position) => {
-        this.dataList = {
-          longitude: position.longt,
-          latitude: position.lat
-        }
-        this.longt = position.longt
-        this.lat = position.lat
+      checkPermission('LOCATION', () => {
+        this.isLocation = true
+        getGeoPosition((position) => {
+          this.dataList = {
+            longitude: position.longt,
+            latitude: position.lat
+          }
+          this.longt = position.longt
+          this.lat = position.lat
+        })
+      }, () => {
+        // 获取权限失败的回调
+        var btnArray = ['取消', '去设置']
+        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+          if (e.index === 1) {
+            toSettingSystem('LOCATION')
+          } else {
+            window.mui.back()
+          }
+        })
+        //
       })
     },
     methods: {
@@ -112,7 +128,7 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue) {
+        if (newValue && this.isLocation) {
           this.value = newValue
           this.dataList = {
             name: newValue,

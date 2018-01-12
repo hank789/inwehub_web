@@ -26,9 +26,6 @@
 
         <div class="indexTitle">
           已关注的成员
-
-
-
         </div>
 
         <div class="groupWrapper">

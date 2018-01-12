@@ -16,57 +16,63 @@
         :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <!--类别-->
-        <div class="community">
-          顾问社区<i class="bot"></i>
-        </div>
+        <div class="discover-container">
+        <div class="community">顾问社区</div>
         <ul class="categoryMenu">
           <li @tap.stop.prevent="judge(1)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanyewenda-"></use>
-            </svg>
-            <p>专业问答</p>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhuanyewenda-"></use>
+              </svg>
+            </div>
+            <p>问答社区</p>
             <i>分红</i>
           </li>
-          <li @tap.stop.prevent="judge(2)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-hudongwenda-"></use>
-            </svg>
-            <p>互动问答</p>
-          </li>
           <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-tijiaowenzhang1"></use>
-            </svg>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tijiaowenzhang1"></use>
+              </svg>
+            </div>
             <p>动态分享</p>
           </li>
-          <li @tap.stop.prevent="$router.pushPlus('/home/ActiveList')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-huodongjiyu"></use>
-            </svg>
-            <p>活动机遇</p>
+          <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-huodongjiyu"></use>
+              </svg>
+            </div>
+            <p>企业服务</p>
           </li>
           <li @tap.stop.prevent="judge(5)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fujinqiye1"></use>
-            </svg>
-            <p>附近企业</p>
+            <div class="discover-round">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-fujinqiye1"></use>
+              </svg>
+            </div>
+            <p>附近发现</p>
           </li>
         </ul>
-        <ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>
+        </div>
+        <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
           <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
              <div class="container-image">
                <img :src="recommend.data ? recommend.data.img:''"  />
-               <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
-               <p class="container_type blue" v-if="recommend.read_type == '2'">专业问答</p>
-               <p class="container_type blue" v-if="recommend.read_type == '3'">互动提问</p>
-               <p class="container_type pink" v-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
-               <p class="container_type blue" v-if="recommend.read_type == '6'">互动回答</p>
-               <!--<p class="container_type blue" v-if="recommend.read_type == '5'">互动提问</p>-->
              </div>
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
-            <p class="recommend_time">{{recommend.created_at}}</p>
+            <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
+            <div class="recommend_datail">
+              <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+              <p class="container_type blue"  v-else-if="recommend.read_type == '2'">专业问答</p>
+              <p class="container_type blue"  v-else-if="recommend.read_type == '3'">互动提问</p>
+              <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
+              <p class="container_type blue"  v-else-if="recommend.read_type == '6'">互动回答</p>
+              <p class="answer-fouce" v-if="recommend.read_type == '3'">{{recommend.data.answer_number}}人回答<i></i>{{recommend.data.follower_number}}关注</p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}%</span></p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '6' || recommend.read_type == '1'">{{recommend.data.comment_number}}评论<i></i>{{recommend.data.support_number}}赞</p>
+            </div>
           </li>
         </ul>
       </RefreshList>
@@ -80,7 +86,6 @@
   import RefreshList from '../../components/refresh/List.vue'
   import userAbility from '../../utils/userAbility'
   import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
-  import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
   const currentUser = localEvent.getLocalItem('UserInfo')
@@ -103,28 +108,28 @@
     props: {},
     watch: {},
     methods: {
-      alertClick (title) {
-        if (this.is_company) {
-          alertCompanyUser(this, () => {
-            postRequest(`company/applyService`, {
-              service_title: title
-            }).then(response => {
-              var code = response.data.code
-              // 如果请求不成功提示信息 并且返回上一页；
-              if (code !== 1000) {
-                window.mui.alert(response.data.message)
-                window.mui.back()
-                return
-              }
-              if (response.data.data) {
-                window.mui.toast(response.data.data.tips)
-              }
-            })
-          })
-        } else {
-          alertDiscoverCompany(this)
-        }
-      },
+//      alertClick (title) {
+//        if (this.is_company) {
+//          alertCompanyUser(this, () => {
+//            postRequest(`company/applyService`, {
+//              service_title: title
+//            }).then(response => {
+//              var code = response.data.code
+//              // 如果请求不成功提示信息 并且返回上一页；
+//              if (code !== 1000) {
+//                window.mui.alert(response.data.message)
+//                window.mui.back()
+//                return
+//              }
+//              if (response.data.data) {
+//                window.mui.toast(response.data.data.tips)
+//              }
+//            })
+//          })
+//        } else {
+//          alertDiscoverCompany(this)
+//        }
+//      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -232,19 +237,29 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  .discover-container{
+    background: #FFFFFF;
+  }
 
 /*菜单栏*/
   .categoryMenu{
     width:100%;
-    height:92px;
+    height:100px;
     background: #FFFFFF;
-    padding: 0 4%;
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
   }
+
+  .categoryMenu li{
+    display: flex;
+    flex-direction:column ;
+    justify-content:center;
+    align-items:center;
+    flex:1;
+  }
   .categoryMenu li:nth-of-type(1){
-   position: relative;
+    position: relative;
   }
   .categoryMenu li:nth-of-type(1) i{
     position: absolute;
@@ -257,8 +272,8 @@
     background: #fa4975;
     text-align: center;
     line-height:17px;
-    top: 19px;
-    right: -7px;
+    top: 22px;
+    right: 0px;
   }
   .categoryMenu li:nth-of-type(1) i:after {
     content: "";
@@ -275,12 +290,19 @@
     bottom: 0;
     margin: auto;
   }
-  .categoryMenu li{
+  .categoryMenu li .discover-round{
+    width:53px;
+    height:53px;
+    /*background: #03aef9;*/
+    border-radius: 50%;
     display: flex;
     flex-direction:column ;
     justify-content:center;
     align-items:center;
-    flex:1;
+    background: -webkit-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* 标准的语法 */
   }
   .categoryMenu li svg{
     font-size:30px;
@@ -293,7 +315,7 @@
 /*列表*/
   .recommend{
     width:100%;
-    background: #f3f4f6;
+    background: #FFFFFF;
     overflow: hidden;
   }
   .recommend_title{
@@ -306,13 +328,14 @@
     background: #FFFFFF;
   }
   .recommend li{
-    width:100%;
-    padding:15px 4% 0 4%;
+    width:92%;
+    padding:15px 0 13px 0;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;
-
-
+    margin-left: 4%;
+    border-radius: 4px;
+    box-shadow: 0px 0px 7px 2px #ececee;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
@@ -321,16 +344,14 @@
      position: relative;
   }
   .recommend li .container_type{
-    position: absolute;
-    top:15.5px;
-    left:0;
-    width: 68.5px;
-    height:23px;
-    opacity: 0.7;
-    border-radius:0 50px 50px 0;
+    width: 64px;
+    height:20px;
+    float: left;
+    border-radius:0 18px 18px 0;
     text-align: center;
-    line-height: 23px;
+    line-height: 20px;
     color: #FFFFFF;
+    font-size: 12px;
   }
   /*颜色*/
   .recommend li .blue{
@@ -345,22 +366,13 @@
 
   /**/
   .recommend_content{
-    margin-top: 20px;
+    margin-top: 12px;
     color:#444444;
     font-size:15px;
     line-height: 20px;
+    padding: 0 15px;
 
   }
-  .recommend_time{
-    width:100%;
-    height:34.5px;
-    background:#FFFFFF;
-    font-size:12px;
-    color:#b4b4b6;
-    text-align: right;
-    line-height:34.5px;
-  }
-
 /*swiper*/
   .container-item{
     background: #FFFFFF;
@@ -414,12 +426,34 @@
   .community{
     width:100%;
     padding:0 5%;
-    height:43px;
+    height:33px;
     line-height: 43px;
     font-size:16px;
     color: #444444;
-    position:relative;
     background: #FFFFFF;
   }
 
+  /*底部的详情*/
+  .recommend_datail{
+    width:100%;
+    height:20px;
+    margin-top: 9px;
+  }
+/*回答 关注*/
+.answer-fouce{
+  float: right;
+  font-size:12px;
+  color: #235280;
+  padding-right: 15px;
+}
+  .answer-fouce i{
+    margin: 0;
+    display: inline-block;
+    width:1px;
+    height:12px;
+    background: #dbdbdb;
+    margin: 0 9px -3px 9px;
+
+
+  }
 </style>

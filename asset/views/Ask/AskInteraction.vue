@@ -9,7 +9,7 @@
 
       <div class="category"><span class="tip">问题分类</span>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType">
-          <span  v-if="this.tags.length">修改</span>
+          <span  v-if="this.tags.length || this.newTags.length">修改</span>
           <span  v-else>选择</span>
         </button>
       </div>
@@ -67,13 +67,13 @@
     </div>
 
     <!--上传图片-->
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
                  :isMultiple="true"
-                 :images="images"
+                 @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
-    <pay v-show="false" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
+    <pay v-show="false" :payItems="[]" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
          v-on:pay_success="goAsk">
     </pay>
 
@@ -99,6 +99,7 @@
       id: currentUser.user_id,
       tags: [],
       tag: [],
+      newTags: [],
       money: 0,
       payItems: [],
       images: [],
@@ -162,12 +163,24 @@
       this.check()
     },
     methods: {
+      uploadImageSuccess (images) {
+        for (var i = 0; i < images.length; i++) {
+          this.images.push(images[i])
+        }
+      },
       initData () {
-        //      取标签；
+        // 取标签；
         this.tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
         this.tags = []
+        this.newTags = []
         for (var i in this.tag) {
-          this.tags = this.tags.concat(this.tag[i].value)
+          if (typeof (this.tag[i].value) === 'string') {
+            if (this.newTags.indexOf(this.tag[i].value) === -1) {
+              this.newTags.push(this.tag[i].value)
+            }
+          } else {
+            this.tags.push(this.tag[i].value)
+          }
         }
       },
       uploadImage: function () {
@@ -181,6 +194,7 @@
         this.images.splice(index, 1)
       },
       submit () {
+        this.$refs.pay.setPayMethod()
         this.$refs.pay.pay()
       },
       textareaFocus () {
@@ -250,6 +264,7 @@
         this.images = []
         this.tag = []
         this.tags = []
+        this.newTags = []
         // 删除标签；
         localEvent.clearLocalItem('interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
@@ -282,6 +297,7 @@
           description: this.description,
           price: this.money,
           tags: this.tags,
+          new_tags: this.newTags,
           hide: this.hide,
           device: device,
           photos: []

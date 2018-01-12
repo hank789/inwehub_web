@@ -92,7 +92,7 @@
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))
         var answerNum = this.ask.answer_num ? this.ask.answer_num : 0
         var followedNum = this.ask.follow_num ? this.ask.follow_num : 0
-        var url = '/contact/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
+        var url = '/RecommendInvitation/' + this.ask.id + '?username=' + username + '&title=' + description + '&answernum=' + answerNum + '&followednum=' + followedNum
         this.$router.pushPlus(url, 'backAndClose', true, 'pop-in', 'close', true)
       },
       setFollowStatus (status) {

@@ -71,9 +71,9 @@
       </div>
     </div>
 
-    <uploadImage ref="uploadImage" v-model="images"
+    <uploadImage ref="uploadImage"
       :isMultiple="true"
-      :images="images"
+      @success="uploadImageSuccess"
       :ImageMaximum="maxImageCount"
     ></uploadImage>
   </div>
@@ -87,6 +87,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
+  import {getIndexByIdArray} from '../../utils/array'
 
   export default {
     data () {
@@ -96,6 +97,7 @@
         tags: [],
         description: {},
         images: [],
+        newTags: [],
         maxImageCount: 9,
         percentCompleted: 0,
         address: '所在位置',
@@ -139,6 +141,11 @@
       window.mui.previewImage()
     },
     methods: {
+      uploadImageSuccess (images) {
+        for (var i = 0; i < images.length; i++) {
+          this.images.push(images[i])
+        }
+      },
       refreshPageData () {
         this.initData()
       },
@@ -172,7 +179,8 @@
         for (var i in tags) {
           var name = '#' + tags[i].text + ' '
           if (name === text) {
-            this.delTag(tags[i].text)
+            this.delTag(tags[i].value)
+            this.delNewTag(tags[i].text)
             tags.splice(i, 1)
           }
         }
@@ -294,6 +302,13 @@
         }
       },
       addTags (tag) {
+        // 判断是否是字符串
+        if (typeof (tag) === 'string') {
+          if (this.newTags.indexOf(tag) === -1) {
+            this.newTags.push(tag)
+          }
+          return
+        }
         this.delTag(tag)
         this.tags.push(tag)
       },
@@ -301,6 +316,12 @@
         var index = this.tags.indexOf(tag)
         if (index > -1) {
           this.tags.splice(index, 1)
+        }
+      },
+      delNewTag (tag) {
+        var index = this.newTags.indexOf(tag)
+        if (index > -1) {
+          this.newTags.splice(index, 1)
         }
       },
       noticeUser (id) {
@@ -367,6 +388,7 @@
       },
       resetData () {
         this.tags = []
+        this.newTags = []
         this.noticeUsers = []
         this.description = {}
         this.images = []
@@ -394,6 +416,7 @@
           photos: [],
           category_id: '',
           tags: this.tags,
+          new_tags: this.newTags,
           mentions: this.noticeUsers,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.longt : '',

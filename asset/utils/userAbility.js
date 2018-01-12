@@ -14,6 +14,7 @@ import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj} from '../utils/dialog'
 import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon } from '../utils/dialogList'
+import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
 
 var UserAbility = () => {
   /**
@@ -304,6 +305,49 @@ var UserAbility = () => {
       }
     }
   }
+
+  /**
+   * 用户退出登录
+   */
+  var logout = (context, callback) => {
+    if (window.mui.os.plus) {
+      window.mui.plusReady(() => {
+        var deviceInfo = window.plus.push.getClientInfo()
+        postRequest(`auth/logout`, {
+          client_id: deviceInfo.clientid,
+          device_token: deviceInfo.token,
+          appid: deviceInfo.appid,
+          appkey: deviceInfo.appkey,
+          device_type: window.plus.os.name === 'iOS' ? 2 : 1
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          localEvent.clearLocalItem('UserLoginInfo')
+          localEvent.clearLocalItem('UserInfo')
+          context.$store.dispatch(ASKS_LIST_APPEND, {})
+          context.$store.dispatch(ANSWERS_LIST_APPEND, {})
+          context.$store.dispatch(TASK_LIST_APPEND, {})
+
+          if (callback) {
+            callback()
+          }
+        })
+      })
+    } else {
+      localEvent.clearLocalItem('UserLoginInfo')
+      localEvent.clearLocalItem('UserInfo')
+      context.$store.dispatch(ASKS_LIST_APPEND, {})
+      context.$store.dispatch(ANSWERS_LIST_APPEND, {})
+      context.$store.dispatch(TASK_LIST_APPEND, {})
+      if (callback) {
+        callback()
+      }
+    }
+  }
+
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -317,7 +361,8 @@ var UserAbility = () => {
     upgradeLevel: upgradeLevel,
     newbieTask: newbieTask,
     jumpJudgeGrade: jumpJudgeGrade,
-    signIGift: signIGift
+    signIGift: signIGift,
+    logout: logout
   }
 }
 

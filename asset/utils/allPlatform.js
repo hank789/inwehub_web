@@ -1,7 +1,8 @@
-import { getGeoPosition as getGeoPositionByPlus, getClipbordText } from './plus'
+import { getGeoPosition as getGeoPositionByPlus, getClipbordText, checkPermission, toSettingSystem } from './plus'
 import { getGeoPositionByWechat } from './wechat'
 import { apiRequest } from './request'
 import localEvent from '../stores/localStorage'
+import { alertNoticeOpenNotifitionPermission } from './dialogList'
 import router from '../modules/index/routers/index'
 
 /**
@@ -79,8 +80,8 @@ function checkClipbord () {
 
   var matchs = text.match(urlReg)
   var firstMatch = matchs[0]
-  window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['确定', '取消'], e => {
-    if (e.index === 0) {
+  window.mui.confirm('检测到您剪切板中有链接，是否分享？', '文章分享', ['取消', '确定'], e => {
+    if (e.index === 1) {
       router.pushPlus(
         '/discover/publishArticles?url=' + encodeURIComponent(firstMatch),
         'publishArticles',
@@ -92,8 +93,62 @@ function checkClipbord () {
   }, 'div')
 }
 
+/**
+ * 提醒用户去开启通知权限
+ */
+function noticeOpenNotifitionPermission (context) {
+  console.log('noticeOpenNotifitionPermission fired')
+  var currentUser = localEvent.getLocalItem('UserInfo')
+  checkPermission('NOTIFITION', () => {}, (result) => {
+    console.log('noticeOpenNotifitionPermission fail:' + result)
+    var date = new Date()
+    var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    var prevDay = localEvent.getLocalItem('notification_day_' + currentUser.user_id)
+    console.log('prevDay:' + JSON.stringify(prevDay))
+    var isStop = 0
+    var notice = () => {
+      // var btnArray = ['下次再说', '前往设置']
+      console.log('准备探矿')
+      alertNoticeOpenNotifitionPermission(context, (index) => {
+        switch (index) {
+          case 0:
+            toSettingSystem('NOTIFITION')
+            break
+          case 1:
+            isStop = 1
+            break
+          case 2:
+            break
+          default:
+        }
+        localEvent.setLocalItem('notification_day_' + currentUser.user_id, {value: today, isStop: isStop})
+        return true
+      })
+      localEvent.setLocalItem('notification_day_' + currentUser.user_id, {value: today, isStop: isStop})
+    }
+
+    if (prevDay.isStop === undefined) { // 第一次提醒
+      console.log('第一次提醒')
+      notice()
+      return
+    } else if (prevDay.isStop === 0 && prevDay.value !== today) {
+      console.log('下次提醒')
+      notice()  // 下次提醒
+      return
+    } else if (prevDay.isStop) {
+      console.log('永不提醒')
+      // 永不提醒
+      return
+    } else {
+      console.log('今天已提醒')
+      // 今天已提醒
+    }
+  })
+}
+
 export {
   getGeoPosition,
   saveLocationInfo,
-  checkClipbord
+  checkClipbord,
+  noticeOpenNotifitionPermission
 }

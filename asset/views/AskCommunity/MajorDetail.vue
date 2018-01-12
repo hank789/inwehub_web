@@ -20,7 +20,7 @@
                 :needMoney="true"
                 :isFollow="true"
                 :showModifyBtn="false"
-                @paySuccess="paySuccess"
+                @toPay="toPay"
         ></Answer>
 
         <div class="buttonWrapper" v-show="answer.content !== '' && !ask.feedback.description && answer.user_id !== userId">
@@ -126,6 +126,22 @@
              class="btn"
     ></Comment>
 
+    <pay
+      ref="pay"
+      :payItems="[
+          {
+            default: true,
+            text: '1元围观',
+            value: 1
+          }
+        ]"
+      :pay_object_type="'view_answer'"
+      :pay_object_id="answer.id"
+      :pay_money="1"
+      @pay_success="paySuccess"
+    >
+    </pay>
+
   </div>
 </template>
 
@@ -144,6 +160,8 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import { getLocalUserInfo } from '../../utils/user'
+  import pay from '../../components/pay/pay.vue'
+  import Vue from 'vue'
   const currentUser = getLocalUserInfo()
 
   const AskDetail = {
@@ -180,7 +198,8 @@
       Comment,
       Share,
       commentTextarea,
-      StarRating
+      StarRating,
+      pay
     },
     computed: {
       answer () {
@@ -188,6 +207,9 @@
       }
     },
     methods: {
+      toPay () {
+        this.$refs.pay.showSelectMoney()
+      },
       commentReal () {
         this.$refs.commentReal.comment()
       },
@@ -215,8 +237,23 @@
       },
       shareFail () {
       },
-      paySuccess (content) {
-        this.ask.answers[0].content = content
+      paySuccess (orderId) {
+        postRequest(`answer/payforview`, {
+          order_id: orderId,
+          answer_id: this.answer.id,
+          device: 1
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          var content = response.data.data.content
+          if (content) {
+            Vue.set(this.ask.answers[0], 'content', content)
+          }
+        })
       },
       downRefresh (callback) {
         this.getDetail(() => {

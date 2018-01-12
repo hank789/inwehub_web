@@ -9,45 +9,41 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body">{{data.title}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业回答', "")}}</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
+        <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
+        <svg class="icon freeQuestion—delete" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+        <div class="freeQuestion-time">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          </timeago>
+        </div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis-3">{{data.feed.title}}</div>
+    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
 
-    <div class="buttonWrapper">
-      <button class="mui-btn mui-btn-block mui-btn-primary" v-if="!data.feed.is_pay_for_view">1元看答案／看评论</button>
-      <button class="mui-btn mui-btn-block mui-btn-primary" v-else>查看回答</button>
+    <div class="container-answer margin-10-0-0">
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
 
-    <div class="question_info">
-      <p>
-        <span>回答者:</span> {{data.user.name}}
-        <i v-if="data.feed.average_rate"></i>
-        <span v-if="data.feed.average_rate">{{data.feed.average_rate}}好评</span>
-      </p>
-      <p>
-        <span class="support_number">
-          <svg class="icon" aria-hidden="true" >
-          <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          <i v-if="data.feed.support_number">{{data.feed.support_number}}</i>
-        </span>
-        <span class="comment_number" >
-          <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-          </svg>
-          <i v-if="data.feed.comment_number">{{data.feed.comment_number}}</i>
-        </span>
-      </p>
-    </div>
-
-    <div class="component-dianzanList" v-if="data.feed.support_number">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-dianzan1"></use>
-      </svg>
-      <span v-for="(item, index) in data.feed.supporter_list" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span>
-      <span v-if="data.feed.support_number > data.feed.supporter_list.length">等{{data.feed.support_number}}人</span>
+    <div class="freeQuestion-container">
+      <div class="freeQuestion-allAnswer margin-left-0 bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
+      <div class="freeQuestion-allAnswer margin-left-0 bg-blue" v-else>1元围观</div>
+      <div class="freeQuestion-upvote">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zan"></use>
+        </svg>
+        {{data.feed.support_number}}
+      </div>
+      <div class="freeQuestion-comment">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun"></use>
+        </svg>
+        {{data.feed.comment_number}}
+      </div>
     </div>
 
   </div>
@@ -81,6 +77,12 @@
     mounted () {
     },
     methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       support () {
         var data = {
           id: this.data.feed.answer_id
@@ -121,62 +123,34 @@
   }
 </script>
 
-<style scoped>
-
-  .buttonWrapper{
-    margin-top:10px;
-  }
-  .component-dianzanList{
-    height: 43px;
-    background: #f3f4f6;
-    border-radius: 4px;
-    line-height: 43px;
-    padding-left: 15px;
-    margin-top: 13px;
-  }
-
-  /*回答者*/
-  .question_info{
+<style>
+  .question-money{
+    float: right;
     height:19px;
-    /*background: #cccccc;*/
-    margin-top: 12px;
-    line-height:19px;
+    background: #a8dff7;
+    border-radius: 4px;
+    font-size:12px;
+    color: #235280;
+    line-height: 19px;
+    padding: 0 13px 0 3px;
   }
-  .question_info p:nth-of-type(1){
-    float: left;
-    font-size:13px;
-    color: #747474;
-  }
-  .question_info p:nth-of-type(1) i{
+  .question-money i{
+    margin: 0;
     display: inline-block;
-    width:1px;
-    height:12px;
-    background: #dbdbdb;
-    margin:0 9px -1px 9px;
+    width:4px;
+    height:4px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    margin-bottom: 1.6px;
   }
-  .question_info p:nth-of-type(1) span:nth-of-type(1){
-    color: #b4b4b6;
+  .tagSelect{
+    display: inline-block;
+    font-size:14px;
+    color: #235280;
+    margin-right:5px;
   }
-  .question_info p:nth-of-type(2){
-    float: right;
-    font-size: 13px;
-    color: #808080;
+  .top-10{
+    margin-top: 10px;
   }
-  .question_info p:nth-of-type(2) span{
-    float: right;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 22px;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 18px;
-    color: #808080;
-  }
-  .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 18px;
-    margin-bottom: -2px;
-  }
-  .question_info p:nth-of-type(2) i{
-    font-style: normal;
-  }
+
 </style>
