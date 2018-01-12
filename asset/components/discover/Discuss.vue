@@ -117,10 +117,10 @@
     computed: {},
     methods: {
       clickComment (comment, list) {
-        var commentUid = comment.owner.id
+        var commentUid = comment.owner.uuid
         var userInfo = getLocalUserInfo()
-        var uid = userInfo.user_id
-        if (commentUid === uid) {
+        var uuid = userInfo.uuid
+        if (commentUid === uuid) {
           this.delComment(comment, list)
         } else {
           this.comment(comment.id, comment.owner.name, list)
