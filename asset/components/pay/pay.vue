@@ -33,7 +33,13 @@
               </svg>
               苹果支付
             </div>
-            <div class="pay-weChat" :class="{active: payMethod === 'wx_pub' && !useWalletPay}" v-show="getSupportPayMethods() === 'wechat'" @tap.stop.prevent="selectPayMethod('wx_pub')">
+            <div class="pay-weChat" :class="{active: payMethod === 'wx_pub' && !useWalletPay}" v-show="getSupportPayMethods() === 'wechat-public'" @tap.stop.prevent="selectPayMethod('wx_pub')">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-wechat"></use>
+              </svg>
+              微信支付
+            </div>
+            <div class="pay-weChat" :class="{active: payMethod === 'wxpay' && !useWalletPay}" v-show="getSupportPayMethods() === 'wechat'" @tap.stop.prevent="selectPayMethod('wxpay')">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-wechat"></use>
               </svg>
@@ -129,10 +135,14 @@
         })
       },
       getSupportPayMethods () {
-        if (window.mui.os.plus && window.mui.os.ios) {
-          return 'apple'
+        if (window.mui.os.plus) {
+          if (window.mui.os.ios) {
+            return 'apple'
+          } else {
+            return 'wechat'
+          }
         }
-        return 'wechat'
+        return 'wechat-public'
       },
       selectPayMethod (method) {
         switch (method) {
@@ -140,7 +150,11 @@
             if (this.userTotalMoney >= this.pay_money) {
               this.payMethod = this.getPayChannel()
             } else {
-              this.payMethod = 'wx_pub'
+              if (window.mui.os.plus) {
+                this.payMethod = 'wxapp'
+              } else {
+                this.payMethod = 'wx_pub'
+              }
             }
             this.useWalletPay = 1
             break
@@ -228,7 +242,11 @@
             if (this.userTotalMoney >= this.pay_money) {
               this.payMethod = this.getPayChannel()
             } else {
-              this.payMethod = 'wx_pub'
+              if (window.mui.os.plus) {
+                this.payMethod = 'wxapp'
+              } else {
+                this.payMethod = 'wx_pub'
+              }
             }
             this.useWalletPay = 1
           } else {
@@ -259,11 +277,16 @@
       },
       getPayChannel () {
         var id = ''
-        if (window.mui.os.ios && this.iapPay && window.mui.os.plus) {
-          id = 'appleiap'
+        if (window.mui.os.plus) {
+          if (window.mui.os.ios && this.iapPay) {
+            id = 'appleiap'
+          } else {
+            id = 'wxpay'
+          }
         } else {
           id = 'wx_pub'
         }
+
         return id
       },
       pay () {
