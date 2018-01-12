@@ -27,12 +27,12 @@
     <div class="options text-right" @tap.stop.prevent="toDetail(data.url)">
       <div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
+          <use xlink:href="#icon-pinglun"></use>
         </svg><span>{{data.feed.comment_number}}</span>
       </div>
       <div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
+          <use xlink:href="#icon-zan"></use>
         </svg><span>{{data.feed.support_number}}</span>
       </div>
     </div>

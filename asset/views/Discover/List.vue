@@ -335,7 +335,7 @@
     margin-bottom: 10px;
     margin-left: 4%;
     border-radius: 4px;
-    border: 1px solid #cccccc;
+    box-shadow: 0px 0px 7px 2px #dedede;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
