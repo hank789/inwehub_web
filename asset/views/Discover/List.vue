@@ -315,7 +315,7 @@
 /*列表*/
   .recommend{
     width:100%;
-    background: #f3f4f6;
+    background: #FFFFFF;
     overflow: hidden;
   }
   .recommend_title{
@@ -328,13 +328,14 @@
     background: #FFFFFF;
   }
   .recommend li{
-    width:100%;
-    padding:15px 4% 13px 4%;
+    width:92%;
+    padding:15px 0 13px 0;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;
-
-
+    margin-left: 4%;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
@@ -365,10 +366,11 @@
 
   /**/
   .recommend_content{
-    margin-top: 20px;
+    margin-top: 12px;
     color:#444444;
     font-size:15px;
     line-height: 20px;
+    padding: 0 15px;
 
   }
 /*swiper*/
@@ -442,6 +444,7 @@
   float: right;
   font-size:12px;
   color: #235280;
+  padding-right: 15px;
 }
   .answer-fouce i{
     margin: 0;
