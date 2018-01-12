@@ -9,13 +9,13 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-zan"></use>
       </svg>
-      23
+      {{support_number}}
     </div>
     <div class="freeQuestion-comment" v-if="isAppear">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-pinglun"></use>
       </svg>
-      23
+      {{comment_num}}
     </div>
   </div>
 </template>
@@ -53,6 +53,14 @@
       follow_num: {
         type: Number,
         default: Number
+      },
+      comment_num: {
+        type: Number,
+        default: Number
+      },
+      support_number: {
+        type: Number,
+        default: Number
       }
     },
     created () {
@@ -75,9 +83,7 @@
             window.mui.alert(response.data.message)
             return
           }
-
           this.is_followed_question = response.data.data.type === 'follow' ? 1 : 0
-
         })
       },
       toContact () {

@@ -11,7 +11,7 @@
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
         <div class="freeQuestion">互动问答</div>
-        <div class="freeQuestion—support"><i></i>顶</div>
+        <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
@@ -20,13 +20,16 @@
       <!---->
     </div>
     <div class="text-16-444 mui-ellipsis-2">{{data.feed.title}}</div>
-    <!--<div class="labelWrapper"><span class="font-12 color-b4b4b6 line-vertical">回答{{data.feed.answer_num}}</span><span-->
-      <!--class="font-12 color-03aef9">关注问题{{data.feed.follow_num}}</span></div>-->
-    <!--<div class="answer-list mui-ellipsis" v-if="data.feed.answer_num">-->
-      <!--回答者：<span v-for="item in data.feed.answer_user_list">{{item.name}}<i>,</i></span>-->
-    <!--</div>-->
     <div class="interval fllow-bot">{{data.feed.answer_num}}人回答<i></i>{{data.feed.follow_num}}关注</div>
-    <Invitation></Invitation>
+    <Invitation
+      :is_followed_question ="data.feed.is_followed_question"
+      :isAppear="isAppear"
+      :question_id="data.feed.question_id"
+      :username="data.user.name"
+      :title="data.feed.title"
+      :answer_num="data.feed.answer_num"
+      :follow_num="data.feed.follow_num"
+    ></Invitation>
   </div>
 </template>
 
@@ -38,7 +41,9 @@
 
   export default {
     data () {
-      return {}
+      return {
+        isAppear: false
+      }
     },
     components: {
       Avatar,
