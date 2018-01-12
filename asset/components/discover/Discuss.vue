@@ -19,7 +19,7 @@
       <div class="listWrapper" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <ul class="message_detail">
-            <li v-for="(item, index) in list" @tap.stop.prevent="comment(item.id, item.owner.name, list)" :key="index">
+            <li v-for="(item, index) in list" @tap.stop.prevent="clickComment(item, list)" :key="index">
               <div class="message_t">
                 <p @tap.stop.prevent="toResume(item.owner.uuid)">
                   <img :src="item.owner.avatar"/>
@@ -37,7 +37,7 @@
                 :children="item.children"
                 :parentOwnerName="item.owner.name"
                 :isShow="!!item.moreReply"
-                @comment="comment"
+                @comment="clickComment"
               ></DiscussReplay>
 
               <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
@@ -48,6 +48,22 @@
         </div>
       </div>
     </div>
+
+    <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action">
+      <!-- 可选择菜单 -->
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="doDelComment">删除我的回复</a>
+        </li>
+      </ul>
+      <!-- 取消菜单 -->
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="hideDelComment"><b>取消</b></a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -66,6 +82,8 @@
       busy: false,
       showList: true,
       commentTarget: null,
+      delCommentId: 0,
+      delList: null,
       page: 1,
       list: []
     }),
@@ -98,6 +116,53 @@
     },
     computed: {},
     methods: {
+      clickComment (comment, list) {
+        var commentUid = comment.owner.id
+        var userInfo = getLocalUserInfo()
+        var uid = userInfo.user_id
+        if (commentUid === uid) {
+          this.delComment(comment, list)
+        } else {
+          this.comment(comment.id, comment.owner.name, list)
+        }
+      },
+      doDelComment () {
+        postRequest('article/destroy-comment', {
+          id: this.delCommentId
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          var index = getIndexByIdArray(this.delList, this.delCommentId)
+          if (index) {
+            this.delList = this.delList.splice(index, 1)
+          }
+          this.hideDelComment()
+        })
+      },
+      hideDelComment () {
+        var del = document.getElementById('sheet_comment_del')
+        if (del) {
+          window.mui('#sheet_comment_del').popover('hide')
+        }
+      },
+      delComment (comment, list) {
+        this.delCommentId = comment.id
+        this.delList = list
+        var del = document.getElementById('sheet_comment_del')
+        if (del) {
+          window.mui('#sheet_comment_del').popover('toggle')
+        } else {
+          var ele = document.getElementById('sheet1')
+          ele.id = 'sheet_comment_del'
+          document.body.appendChild(ele)
+          setTimeout(() => {
+            window.mui('#sheet_comment_del').popover('toggle')
+          }, 100)
+        }
+      },
       textToLink (text) {
         return textToLinkHtml(text)
       },
@@ -455,5 +520,10 @@
 
   .moreReply{
     margin-top:5px;
+  }
+
+  #sheet_comment_del li {
+    color:#4990E2 !important;
+    padding:13px 15px;
   }
 </style>
