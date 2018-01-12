@@ -113,6 +113,7 @@
         })
       },
       choose (id, index) {
+        console.error(index)
         postRequest(`question/inviteAnswer`, {
           question_id: this.question_id,
           user_id: id
@@ -123,7 +124,7 @@
             window.mui.back()
             return
           }
-          if (index === 0) {
+          if (index >= 0) {
             this.list[index].is_invited = 1
           } else {
             window.mui.toast('一键邀请成功')

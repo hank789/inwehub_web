@@ -30,8 +30,8 @@
 
 
     <div class="freeQuestion-container">
-      <div class="freeQuestion-allAnswer   bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
-      <div class="freeQuestion-allAnswer bg-blue" v-else>1元围观</div>
+      <div class="freeQuestion-allAnswer margin-left-0 bg-blue" v-if="data.feed.is_pay_for_view">查看回答</div>
+      <div class="freeQuestion-allAnswer margin-left-0 bg-blue" v-else>1元围观</div>
       <div class="freeQuestion-upvote">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
