@@ -28,11 +28,11 @@
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
       :isAppear="isAppear"
-      :question_id="data.feed.answer_id"
+      :question_id="data.feed.question_id"
       :username="data.user.name"
       :title="data.feed.question_title"
-      :answer_num="data.feed.question_answer_num"
-      :follow_num="data.feed.follow_question_num"
+      :answer_num="data.feed.answer_num"
+      :follow_num="data.feed.follow_num"
       :comment_num="data.feed.comment_num"
       :support_number="data.feed.support_number"
     ></Invitation>
