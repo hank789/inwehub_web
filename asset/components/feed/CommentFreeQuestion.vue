@@ -24,7 +24,7 @@
 
     <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.answer_content}}</div>
 
-    <div class="freeQuestion-container comment-container">
+    <div class="freeQuestion-container comment-container margin-bottom-13">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
       <div class="freeQuestion-upvote">
         <svg class="icon" aria-hidden="true">

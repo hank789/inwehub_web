@@ -52,7 +52,7 @@
         <!--</svg><span>{{data.feed.support_number}}</span>-->
       <!--</div>-->
     <!--</div>-->
-    <div class="container-answer" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
+    <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
 
       <!-- 点赞和评论列表start -->
       <SuppertAndComment

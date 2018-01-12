@@ -106,8 +106,8 @@
 <style>
   .freeQuestion-container{
     width:100%;
-    height:51px;
-    padding: 10px 0;
+    height:42px;
+    padding-top:10px;
     line-height: 30px;
   }
   .freeQuestion-fouce{
@@ -118,7 +118,7 @@
     border-radius: 50px;
     text-align: center;
     line-height: 30px;
-    font-size:14px;
+    font-size:12px;
     color: #9e9e9e;
   }
   .freeQuestion-fouce.blue{
