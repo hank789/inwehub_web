@@ -85,7 +85,7 @@
 .comment-container{
   height:19px;
   line-height: 19px;
-  padding: 0;
+  padding: 0 2px;
 }
 .question-answer{
   float: left;

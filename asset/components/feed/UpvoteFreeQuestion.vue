@@ -10,51 +10,48 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
-        <div class="freeQuestion">互动问答</div>
-        <div class="freeQuestion—support"><i></i>顶</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/interactions')">互动问答</div>
+        <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">2018-3-3</div>
       </div>
     </div>
-    <div class="text-16-444 text-line-2">{{data.feed.question_title}}</div>
-    <div class="text-14-808080 text-line-3 margin-10-0-0">{{data.feed.answer_content}}</div>
-    <!--<div class="container-answer">-->
-      <!--<div class="color-444 font-16 mui-ellipsis">{{data.feed.question_title}}</div>-->
-      <!--<div class="text-14-808080 margin-5-0-0 mui-ellipsis-2">{{data.feed.answer_content}}</div>-->
-      <!--<div class="color-808080 margin-5-0-0 font-13">回答者：{{data.feed.answer_user_name}}</div>-->
-    <!--</div>-->
-    <!--点赞 关注问题-->
-    <div class="options text-right">
-      <div class="component-followed-question blue" v-if="data.feed.is_followed_question">已关注{{data.feed.follow_question_num}}</div>
-      <div class="component-followed-question blue" v-else>关注问题{{data.feed.follow_question_num}}</div>
-      <div class="component-iconNumber iconPenglunWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-        </svg><span>{{data.feed.comment_number}}</span>
-      </div>
-      <div class="component-iconNumber">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg><span>{{data.feed.support_number}}</span>
-      </div>
+    <div class="text-16-444 text-line-3">{{data.feed.answer_content}}</div>
+
+    <div class="container-answer margin-10-0-0">
+      <div class="color-808080 font-14 margin-5-0-0 text-line-5">{{data.feed.question_title}}</div>
+      <div class="interval">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.support_number}}关注</div>
     </div>
+
+    <Invitation
+      :is_followed_question ="data.feed.is_followed_question"
+      :isAppear="isAppear"
+      :question_id="data.feed.answer_id"
+      :username="data.user.name"
+      :title="data.feed.question_title"
+      :answer_num="data.feed.question_answer_num"
+      :follow_num="data.feed.follow_question_num"
+      :comment_num="data.feed.comment_num"
+      :support_number="data.feed.support_number"
+    ></Invitation>
 
   </div>
 </template>
 
 <script type="text/javascript">
   import Avatar from '../../components/image/Avatar.vue'
-
+  import Invitation from '../../components/feed/QuestionInvitationAnswer.vue'
   export default {
     data () {
       return {
-
+        isAppear: true
       }
     },
     components: {
-      Avatar
+      Avatar,
+      Invitation
     },
     props: {
       data: {
