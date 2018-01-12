@@ -15,7 +15,10 @@
         <svg class="icon freeQuestion—delete" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
-        <div class="freeQuestion-time">2018-3-3</div>
+        <div class="freeQuestion-time">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          </timeago>
+        </div>
       </div>
     </div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
@@ -74,6 +77,12 @@
     mounted () {
     },
     methods: {
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       support () {
         var data = {
           id: this.data.feed.answer_id
