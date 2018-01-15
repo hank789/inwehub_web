@@ -8,7 +8,9 @@
     <div class="mui-content pay-success" v-show="!loading">
 
       <div class="status">
-        <i class="mui-icon iconfont icon-success"></i>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-check-circle"></use>
+        </svg>
         <br/>
         <span>提交成功</span>
       </div>
@@ -131,7 +133,7 @@
     margin-right: 7px;
   }
 
-  .pay-success .status .mui-icon {
+  .pay-success .status svg {
     font-size: 100px;
     margin-bottom: 20px;
   }
