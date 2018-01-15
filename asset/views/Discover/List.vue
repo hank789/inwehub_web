@@ -329,7 +329,7 @@
   }
   .recommend li{
     width:92%;
-    padding:15px 0 13px 0;
+    padding:0px 0 13px 0;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;
