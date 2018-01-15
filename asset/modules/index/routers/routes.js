@@ -1833,6 +1833,14 @@ const routes = [
     },
     component: require('../../../views/Hongbao.vue')
   },
+  {
+    path: '/mask',
+    name: 'mask',
+    meta: {
+      title: 'mask'
+    },
+    component: require('../../../components/ShortTcut.vue')
+  },
   { // message
     path: '/*',
     name: '404',
