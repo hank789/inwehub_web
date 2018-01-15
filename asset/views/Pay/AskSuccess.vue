@@ -6,7 +6,10 @@
 
     <div class="mui-content pay-success absolute">
       <div class="status">
-        <i class="mui-icon iconfont icon-success"></i>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-check-circle"></use>
+        </svg>
+
         <br/>
         <span>支付成功</span>
       </div>
@@ -105,7 +108,7 @@
     color: #417505;
   }
 
-  .pay-success .status .mui-icon {
+  .pay-success .status svg {
     font-size: 100px;
     margin-bottom: 20px;
   }

@@ -57,7 +57,6 @@ import './../../styles/common.css'
 import './../../styles/feed.min.css'
 import './../../styles/immersed.css'
 import './../../styles/mui.picker.all.css'
-import './../../styles/iconfont.css'
 import './../../styles/percircle.css'
 import './../../styles/imagePreview.css'
 

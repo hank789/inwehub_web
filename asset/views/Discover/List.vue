@@ -70,7 +70,7 @@
               <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '6'">互动回答</p>
               <p class="answer-fouce" v-if="recommend.read_type == '3'">{{recommend.data.answer_number}}人回答<i></i>{{recommend.data.follower_number}}关注</p>
-              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}%</span></p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}</span></p>
               <p class="answer-fouce" v-else-if="recommend.read_type == '6' || recommend.read_type == '1'">{{recommend.data.comment_number}}评论<i></i>{{recommend.data.support_number}}赞</p>
             </div>
           </li>
@@ -329,7 +329,7 @@
   }
   .recommend li{
     width:92%;
-    padding:15px 0 13px 0;
+    padding:0px 0 13px 0;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;

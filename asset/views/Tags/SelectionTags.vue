@@ -32,7 +32,7 @@
         <ul>
           <!--搜素到的标签名 -->
           <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
-            {{item.text}}
+            {{item.text}}<span v-if="index === 0 && typeof(item.value) === 'string'">  (新标签)</span>
             <i class="bot"></i>
           </li>
 
