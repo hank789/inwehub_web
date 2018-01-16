@@ -30,6 +30,7 @@ if (typeof (isLocalEnv) === 'undefined') {
 }
 
 if (typeof window.isLocalEnv === 'undefined') {
+  require('../../js/mixpanel')
   console.log('in raven')
   var sentryUrl = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478'
   if (process.env.NODE_ENV === 'production') {
