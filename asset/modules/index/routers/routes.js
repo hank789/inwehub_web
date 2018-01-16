@@ -176,7 +176,7 @@ const routes = [
   },
   { // 邀请用户
     path: '/RecommendInvitation/:id',
-    name: 'contact',
+    name: 'recommendInvitation',
     meta: {
       title: '邀请用户',
       wechatHideHeader: true
@@ -438,6 +438,54 @@ const routes = [
     component: require('../../../views/Discover/Detail.vue'),
     meta: {
       title: '发现',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 邀请榜；
+    path: '/invitationList',
+    name: 'invitation-list',
+    component: require('../../../views/Activity/InvitationList.vue'),
+    meta: {
+      title: '邀请榜',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 成长榜；
+    path: '/creditsList',
+    name: 'credit-list',
+    component: require('../../../views/Activity/CreditsList.vue'),
+    meta: {
+      title: '成长榜',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 贡献榜；
+    path: '/cionsList',
+    name: 'cions-list',
+    component: require('../../../views/Activity/CionsList.vue'),
+    meta: {
+      title: '贡献榜',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {

@@ -17,43 +17,56 @@
         class="listWrapper">
         <!--类别-->
         <div class="discover-container">
-        <div class="community">顾问社区</div>
-        <ul class="categoryMenu">
-          <li @tap.stop.prevent="judge(1)">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanyewenda-"></use>
-              </svg>
-            </div>
-            <p>问答社区</p>
-            <i>分红</i>
-          </li>
-          <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tijiaowenzhang1"></use>
-              </svg>
-            </div>
-            <p>动态分享</p>
-          </li>
-          <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-huodongjiyu"></use>
-              </svg>
-            </div>
-            <p>企业服务</p>
-          </li>
-          <li @tap.stop.prevent="judge(5)">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-fujinqiye1"></use>
-              </svg>
-            </div>
-            <p>附近发现</p>
-          </li>
-        </ul>
+          <div class="community">顾问社区</div>
+          <ul class="categoryMenu">
+            <li @tap.stop.prevent="judge(1)">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-zhuanyewenda-"></use>
+                </svg>
+              </div>
+              <p>问答社区</p>
+              <i>分红</i>
+            </li>
+            <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tijiaowenzhang1"></use>
+                </svg>
+              </div>
+              <p>动态分享</p>
+            </li>
+            <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-huodongjiyu"></use>
+                </svg>
+              </div>
+              <p>企业服务</p>
+            </li>
+            <li @tap.stop.prevent="judge(5)">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fujinqiye1"></use>
+                </svg>
+              </div>
+              <p>附近发现</p>
+            </li>
+          </ul>
         </div>
+
+
+        <div class="mostInvitations"  >
+          <div class="invitation"><span>王程</span>邀请<i>220</i>人</div>
+          <div class="credits-cions">贡献值<i>22000</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>22000</i></div>
+          <div class="InvitationList" @tap.stop.prevent="$router.pushPlus('/cionsList')">
+            <img src="../../statics/images/discover-invitation-list2x.png" />
+          </div>
+          <img src="../../statics/images/goldmedal@2x.png" class="Medal"/>
+        </div>
+
+
+
         <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
@@ -248,7 +261,6 @@
     background: #FFFFFF;
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
   }
 
   .categoryMenu li{
@@ -455,5 +467,63 @@
     margin: 0 9px -3px 9px;
 
 
+  }
+
+  /*榜单*/
+  .mostInvitations{
+    width:92%;
+    height:60px;
+    background: #fdc707;
+    margin: 7px 4%;
+    border-radius: 12px;
+    padding-left: 15px;
+    padding-top: 8px;
+    position: relative;
+  }
+  .mostInvitations .Medal{
+    width: 32px;
+    position: absolute;
+    right:18px;
+    top:0;
+  }
+  .invitation{
+    font-size:12px;
+    color: #8e4c02;
+  }
+  .invitation span{
+    font-size:16px;
+    font-weight:500;
+    color: #8e4c02;
+    margin-right: 2px;
+  }
+  .invitation i{
+    font-size:12px;
+    color:#235280;
+  }
+  .credits-cions{
+    font-size:12px;
+    color: #8e4c02;
+  }
+  .credits-cions i{
+    color: #235280;
+  }
+  .InvitationList{
+    position: absolute;
+    width:92px;
+    height:34px;
+    border:1px solid #fde07d;
+    border-radius: 13px;
+    font-size: 14px;
+    color: #b56102;
+    line-height: 34px;
+    text-align: center;
+    right: 56px;
+    top: 13px;
+    box-shadow:0px 0px 2px rgba(81, 55, 7, 0.5) inset;
+    text-shadow: 0 0 1px rgb(238,134,16);
+  }
+  .InvitationList img{
+    height:20px;
+    margin-top: 6px;
   }
 </style>
