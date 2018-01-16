@@ -19,6 +19,10 @@ var config = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require("./manifest.json")
+    }),
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
@@ -41,7 +45,7 @@ Object.keys(entris).forEach(function(entry) {
     new HtmlWebpackPlugin({
       chunks: ['vendor', entry],
       filename: entry + '.html',
-      template: 'index.html',
+      template: 'index_dev.html',
       inject: true
     })
   )

@@ -26,7 +26,7 @@
           </div>
 
         </div>
-        <div class="my-news" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
+        <div v-if="show_my_wallet" class="my-news" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
           <i>Hot</i>
           <span>邀请我的好友</span>
           <p><a>5%</a>返现等你拿</p>
@@ -279,6 +279,9 @@
           this.name = user.info.name
           this.title = user.info.title
           this.show_my_wallet = user.info.show_my_wallet
+          if (window.mui.os.plus && window.mui.os.android) {
+            this.show_my_wallet = true
+          }
           userAbility.newbieTask(this)
         }))
       }
