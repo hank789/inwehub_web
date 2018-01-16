@@ -279,6 +279,9 @@
           this.name = user.info.name
           this.title = user.info.title
           this.show_my_wallet = user.info.show_my_wallet
+          if (window.mui.os.plus && window.mui.os.android) {
+            this.show_my_wallet = true
+          }
           userAbility.newbieTask(this)
         }))
       }
