@@ -227,7 +227,7 @@
     right: 0;
     margin: auto;
     bottom: 130px;
-    animation: myfirst 0.3s infinite;
+    animation: myfirst 0.2s infinite;
     animation-iteration-count: 1;
   }
 
@@ -250,7 +250,7 @@
     width:100%;
     height:90px;
     position: absolute;
-    bottom: -250px;
+    bottom: -380px;
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
