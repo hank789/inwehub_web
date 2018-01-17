@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.answer_content}}</div>
+    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 margin-5-0-0 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>

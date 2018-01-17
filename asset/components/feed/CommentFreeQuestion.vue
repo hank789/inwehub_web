@@ -20,9 +20,9 @@
         </div>
       </div>
     </div>
-    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content"></div>
+    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
-    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.answer_content}}</div>
+    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
 
     <div class="freeQuestion-container comment-container margin-bottom-13">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
