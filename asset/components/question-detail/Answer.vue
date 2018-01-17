@@ -159,6 +159,10 @@
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)
+
+        html = html.replace('<a href="', "<span class='vendorUrl text-content' href=\"")
+        html = html.replace('</a>', '</span>')
+
         var answerContentWrapper = this.$el.querySelector('.answerContent')
         html = addPreviewAttrForImg(html)
         answerContentWrapper.innerHTML = html
