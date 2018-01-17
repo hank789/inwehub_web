@@ -14,7 +14,7 @@
       </div>
       <template v-if="!loading && first">
         <div class="ranking">
-          <div class="See">邀请好友</div>
+          <div class="See" @tap.stop.prevent="$router.pushPlus('/invitation/index')">邀请好友</div>
           <img src="../../statics/images/invitationlist@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
             <li>
