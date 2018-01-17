@@ -98,7 +98,7 @@
         setTimeout(() => {
           switch (num) {
             case 1:
-              window.mui.toast('正在开发中........')
+              this.$router.pushPlus('/unansweredquestions')
               break
             case 2:
               this.$router.pushPlus('/discover')

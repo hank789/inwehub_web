@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">活动与机遇</h1>
+      <h1 class="mui-title">标签详情</h1>
     </header>
     <div class="mui-content absolute">
     <div class="tag-title">

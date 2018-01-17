@@ -1474,6 +1474,15 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // protocol/register
+    path: '/unansweredquestions',
+    name: 'unansweredquestions',
+    meta: {
+      title: '待您回答',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/UnansweredQuestions.vue')
+  },
   {
     path: '/discover/add2',
     name: 'discover_add2',
