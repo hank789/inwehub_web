@@ -12,132 +12,78 @@
         <span @tap.stop.prevent="$router.replace('/creditsList')">成长榜</span>
         <span @tap.stop.prevent="">邀请榜 <i></i></span>
       </div>
+      <template v-if="!loading && first">
+        <div class="ranking">
+          <div class="See">邀请好友</div>
+          <img src="../../statics/images/invitationlist@2x.png" class="ranking-title"/>
+          <ul class="ranking-content">
+            <li>
+              <div class="avatar-container">
+                <p class="avatar">
+                  <img :src="third.user_avatar_url" @tap.stop.prevent="toAvatar(third.uuid)"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/blue-3@2x.png">
+                  <span>No.{{third.rank}}</span>
+                </p>
+              </div>
+              <p>{{third.user_name}}</p>
+              <p class="cions">贡献值<i>{{third.coins}}</i></p>
+              <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+            <li>
+              <div class="avatar-container">
+                <p class="avatar big-avatar">
+                  <img :src="first.user_avatar_url"  @tap.stop.prevent="toAvatar(first.uuid)"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/red-1@2x.png">
+                  <span>No.{{first.rank}}</span>
+                </p>
+              </div>
+              <p>{{first.user_name}}</p>
+              <p class="cions">贡献值<i>{{first.coins}}</i></p>
+              <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+            <li>
+              <div class="avatar-container">
+                <p class="avatar">
+                  <img :src="second.user_avatar_url" @tap.stop.prevent="toAvatar(second.uuid)"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/yellow-1@2x.png">
+                  <span>No.{{second.rank}}</span>
+                </p>
+              </div>
+              <p>{{second.user_name}}</p>
+              <p class="cions">贡献值<i>{{second.coins}}</i></p>
+              <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+          </ul>
+        </div>
 
-      <div class="ranking">
-        <div class="See">邀请好友</div>
-        <img src="../../statics/images/invitationlist@2x.png" class="ranking-title"/>
-        <ul class="ranking-content">
-          <li>
-            <div class="avatar-container">
-              <p class="avatar">
-                <img src="../../statics/images/guide_01.png"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/blue-3@2x.png">
-                <span>No.3</span>
-              </p>
+        <ul class="cions-list">
+          <li v-for="(item, index) in list">
+            <div class="cions-num">
+              <p>No.</p>
+              <p>{{item.rank}}</p>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
-          </li>
-          <li>
-            <div class="avatar-container">
-              <p class="avatar big-avatar">
-                <img src="../../statics/images/guide_01.png"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/red-1@2x.png">
-                <span>No.1</span>
-              </p>
+            <div class="cions-avatar">
+              <img :src="item.user_avatar_url"/>
+              <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
-          </li>
-          <li>
-            <div class="avatar-container">
-              <p class="avatar">
-                <img src="../../statics/images/guide_01.png"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/yellow-1@2x.png">
-                <span>No.2</span>
-              </p>
+            <div class="detail">
+              <p>{{item.user_name}}</p>
+              <p>贡献值<i>{{item.coins}}</i></p>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
+            <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
+            <i class="bot"></i>
           </li>
         </ul>
-      </div>
-
-      <ul class="cions-list">
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-      </ul>
-
-
+      </template>
+      <Empty v-if="!loading && list.length === 0"></Empty>
     </div>
   </div>
 </template>
@@ -159,6 +105,12 @@
       Empty
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
       // 点击关注；
       collectProfessor (uuid, index) {
         postRequest(`follow/user`, {
@@ -195,7 +147,7 @@
         })
       },
       getData () {
-        postRequest(`rank/userContribution`, {}).then(response => {
+        postRequest(`rank/userInvitation`, {}).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {

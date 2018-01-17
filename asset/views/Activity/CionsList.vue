@@ -20,7 +20,7 @@
             <li>
               <div class="avatar-container">
                 <p class="avatar">
-                  <img :src="third.user_avatar_url"/>
+                  <img :src="third.user_avatar_url" @tap.stop.prevent="toAvatar(third.uuid)"/>
                 </p>
                 <p class="banner">
                   <img src="../../statics/images/blue-3@2x.png">
@@ -34,7 +34,7 @@
             <li>
               <div class="avatar-container">
                 <p class="avatar big-avatar">
-                  <img :src="first.user_avatar_url"/>
+                  <img :src="first.user_avatar_url"  @tap.stop.prevent="toAvatar(first.uuid)"/>
                 </p>
                 <p class="banner">
                   <img src="../../statics/images/red-1@2x.png">
@@ -48,7 +48,7 @@
             <li>
               <div class="avatar-container">
                 <p class="avatar">
-                  <img :src="second.user_avatar_url"/>
+                  <img :src="second.user_avatar_url" @tap.stop.prevent="toAvatar(second.uuid)"/>
                 </p>
                 <p class="banner">
                   <img src="../../statics/images/yellow-1@2x.png">
@@ -69,7 +69,7 @@
               <p>{{item.rank}}</p>
             </div>
             <div class="cions-avatar">
-              <img :src="item.user_avatar_url"/>
+              <img :src="item.user_avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
               <svg class="icon" aria-hidden="true" v-if="item.is_expert">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
@@ -105,6 +105,12 @@
       Empty
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
       // 点击关注；
       collectProfessor (uuid, index) {
         postRequest(`follow/user`, {
