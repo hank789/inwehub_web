@@ -87,7 +87,6 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
-  import {getIndexByIdArray} from '../../utils/array'
 
   export default {
     data () {

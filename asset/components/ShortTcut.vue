@@ -89,10 +89,8 @@
     </p>
   </div>
 </template>
-<!--/project/basic  /ask /my/pilot  /discover?redirect_url=%2Fsubmit-->
 <script type="text/javascript">
   import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js'
-  import userAbility from '../utils/userAbility'
 
   export default {
     methods: {
@@ -130,22 +128,12 @@
         this.hide()
       },
       show () {
+        console.log('ShortCut: show')
         document.getElementById('short_all').style.display = 'inline'
-        // 发现页处理
-//        if (window.mui.os.plus) {
-//          if (this.$route.path.match(/discover/)) {
-//            var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-//            if (inwehubEmbedWebview) {
-//              inwehubEmbedWebview.hide()
-//            }
-//          }
-//        }
-
         setStatusBarBackgroundAndStyle('#D8D9DC', 'light')
       },
       hide () {
-        // document.getElementById("short_all").style.display="none";
-        console.log('hide')
+        console.log('ShortCut: hide')
         document.getElementById('down').setAttribute('class', 'end')
         setTimeout(function () {
           document.getElementById('short_all').style.display = 'none'
@@ -153,18 +141,6 @@
         }, 300)
 
         autoHeight()
-
-        // 发现页处理
-//        if (window.mui.os.plus) {
-//          if (this.$route.path.match(/discover/)) {
-//            setTimeout(() => {
-//              var inwehubEmbedWebview = window.plus.webview.getWebviewById('inwehub_embed')
-//              if (inwehubEmbedWebview) {
-//                inwehubEmbedWebview.show()
-//              }
-//            }, 100)
-//          }
-//        }
       }
     },
     mounted () {
