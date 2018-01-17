@@ -104,6 +104,7 @@
   import InvitationList from '../../components/question-detail/InvitationList.vue'
   import Share from '../../components/Share.vue'
   import RefreshList from '../../components/refresh/List.vue'
+  import { openVendorUrl } from '../../utils/plus'
 
   const AskDetail = {
     data: () => ({
@@ -226,6 +227,14 @@
           successCallback()
         })
       }
+    },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
+      })
     },
     watch: {
       '$route': 'refreshPageData'

@@ -94,7 +94,7 @@
   import Answer from '../../components/question-detail/Answer.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
-  import { autoTextArea } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
 
   const AskDetail = {
@@ -140,6 +140,14 @@
       answer () {
         return this.ask.answer ? this.ask.answer : {}
       }
+    },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
+      })
     },
     methods: {
       sendMessage (message) {
