@@ -34,7 +34,7 @@ function hideHeaderHandler (obj, type) {
 
 function rebootAuth (hash) {
   if (window.mui.os.wechat) {
-    if (window.isLocalEnv) {
+    if (process.env.NODE_ENV === 'development') {
       router.push('/login')
       return false
     }
