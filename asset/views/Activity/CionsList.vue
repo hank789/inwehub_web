@@ -13,77 +13,77 @@
         <span @tap.stop.prevent="$router.replace('/invitationList')">邀请榜</span>
       </div>
      <template v-if="!loading && first">
-      <div class="ranking">
-        <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的贡献值</div>
-        <img src="../../statics/images/cionslist@2x.png" class="ranking-title"/>
-        <ul class="ranking-content">
-          <li>
-            <div class="avatar-container">
-              <p class="avatar">
-                <img :src="third.user_avatar_url"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/blue-3@2x.png">
-                <span>No.{{third.rank}}</span>
-              </p>
+        <div class="ranking">
+          <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的贡献值</div>
+          <img src="../../statics/images/cionslist@2x.png" class="ranking-title"/>
+          <ul class="ranking-content">
+            <li>
+              <div class="avatar-container">
+                <p class="avatar">
+                  <img :src="third.user_avatar_url"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/blue-3@2x.png">
+                  <span>No.{{third.rank}}</span>
+                </p>
+              </div>
+              <p>{{third.user_name}}</p>
+              <p class="cions">贡献值<i>{{third.coins}}</i></p>
+              <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+            <li>
+              <div class="avatar-container">
+                <p class="avatar big-avatar">
+                  <img :src="first.user_avatar_url"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/red-1@2x.png">
+                  <span>No.{{first.rank}}</span>
+                </p>
+              </div>
+              <p>{{first.user_name}}</p>
+              <p class="cions">贡献值<i>{{first.coins}}</i></p>
+              <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+            <li>
+              <div class="avatar-container">
+                <p class="avatar">
+                  <img :src="second.user_avatar_url"/>
+                </p>
+                <p class="banner">
+                  <img src="../../statics/images/yellow-1@2x.png">
+                  <span>No.{{second.rank}}</span>
+                </p>
+              </div>
+              <p>{{second.user_name}}</p>
+              <p class="cions">贡献值<i>{{second.coins}}</i></p>
+              <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="cions-list">
+          <li v-for="(item, index) in list">
+            <div class="cions-num">
+              <p>No.</p>
+              <p>{{item.rank}}</p>
             </div>
-            <p>{{third.user_name}}</p>
-            <p class="cions">贡献值<i>{{third.coins}}</i></p>
-            <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
-          </li>
-          <li>
-            <div class="avatar-container">
-              <p class="avatar big-avatar">
-                <img :src="first.user_avatar_url"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/red-1@2x.png">
-                <span>No.{{first.rank}}</span>
-              </p>
+            <div class="cions-avatar">
+              <img :src="item.user_avatar_url"/>
+              <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
             </div>
-            <p>{{first.user_name}}</p>
-            <p class="cions">贡献值<i>{{first.coins}}</i></p>
-            <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
-          </li>
-          <li>
-            <div class="avatar-container">
-              <p class="avatar">
-                <img :src="second.user_avatar_url"/>
-              </p>
-              <p class="banner">
-                <img src="../../statics/images/yellow-1@2x.png">
-                <span>No.{{second.rank}}</span>
-              </p>
+            <div class="detail">
+              <p>{{item.user_name}}</p>
+              <p>贡献值<i>{{item.coins}}</i></p>
             </div>
-            <p>{{second.user_name}}</p>
-            <p class="cions">贡献值<i>{{second.coins}}</i></p>
-            <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
+            <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
+            <i class="bot"></i>
           </li>
         </ul>
-      </div>
-
-      <ul class="cions-list">
-        <li v-for="(item, index) in list">
-          <div class="cions-num">
-            <p>No.</p>
-            <p>{{item.rank}}</p>
-          </div>
-          <div class="cions-avatar">
-            <img :src="item.user_avatar_url"/>
-            <svg class="icon" aria-hidden="true" v-if="item.is_expert">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>{{item.user_name}}</p>
-            <p>贡献值<i>{{item.coins}}</i></p>
-          </div>
-          <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
-          <i class="bot"></i>
-        </li>
-      </ul>
      </template>
-      <Empty v-if="!loading && list.length === 0"></Empty>
+     <Empty v-if="!loading && list.length === 0"></Empty>
     </div>
   </div>
 </template>

@@ -141,7 +141,86 @@
     </div>
   </div>
 </template>
+<script>
+  import { postRequest } from '../../utils/request'
+  import Empty from '../../components/Empty.vue'
 
+  export default {
+    data () {
+      return {
+        loading: 1,
+        first: null,
+        second: null,
+        third: null,
+        list: []
+      }
+    },
+    components: {
+      Empty
+    },
+    methods: {
+      // 点击关注；
+      collectProfessor (uuid, index) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      collect (uuid, item) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            item.is_followed = 0
+          } else {
+            item.is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      getData () {
+        postRequest(`rank/userContribution`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          this.loading = 0
+          if (response.data.data.length >= 0) {
+            this.isAppear = response.data.data.length
+            this.first = response.data.data[0]
+            this.second = response.data.data[1]
+            this.third = response.data.data[2]
+            this.list = response.data.data.slice(3)
+          }
+        })
+      }
+    },
+    mounted () {
+      this.getData()
+    },
+    updated () {}
+  }
+</script>
 <style scoped>
   .bot {
     position: absolute;
