@@ -1,8 +1,8 @@
 {
-  "name": "plus-component-web",
+  "name": "intervapp_web",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "boxshadow <idafoo@sina.com>",
+  "description": "inwehub",
+  "author": "inwehub",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
