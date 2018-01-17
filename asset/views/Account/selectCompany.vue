@@ -181,7 +181,7 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue && this.isLocation) {
+        if (newValue) {
           this.value = newValue
           this.dataList = {
             name: newValue,
