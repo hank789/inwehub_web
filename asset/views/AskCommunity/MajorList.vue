@@ -35,8 +35,9 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/majorList'"
-        :prevOtherData="{tag_id :0}"
-        :nextOtherData="{tag_id :0}"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode = true
         class="listWrapper">
           <ul class="recommend_b">
             <li   v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">

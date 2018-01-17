@@ -25,6 +25,7 @@
         :api="'question/commonList'"
         :prevOtherData="data"
         :nextOtherData="{}"
+        :pageMode = true
         class="listWrapper"
       >
         <div class="recommendlist">
@@ -78,7 +79,7 @@
       list: [],
       isShow: 0,
       data: {
-        tag_id: 0
+        page: 1
       }
     }),
     components: {
@@ -92,9 +93,9 @@
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       showNewest () {
-        var tagid = this.data.tag_id === 0 ? '' : 0
+        var page = this.data.page === 1 ? '' : 1
         this.data = {
-          tag_id: tagid
+          page: page
         }
       },
       toDetail (id) {
@@ -264,7 +265,7 @@
     width: 100%;
     height: 68px;
     padding: 0;
-    z-index: 999;
+    z-index: 99;
     /*border: 1px solid #cccccc;*/
   }
   .propose{
