@@ -26,31 +26,56 @@
       <span @tap.stop.prevent="$router.replace('/tagsusers')">用户</span>
       <i class="bot"></i>
     </div>
-      <!--内容区域-->
+      <!--推荐问答 -->
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'tags/questions'"
-        :prevOtherData="{tag_id:2}"
-        :nextOtherData="{tag_id:2}"
-        :pageMode= true
-        :list="list"
+        :api="'question/majorList'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode = true
         class="listWrapper">
-      <ul class="cions-list">
-        <li  v-for="(item, index) in list">
-          <div class="cions-avatar">
-            <img :src="item.question_type ===1 ?item.answer_user_avatar_url : item.question_user_avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
-            <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert || item.question_user_is_expert">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+      <ul class="recommend_b">
+        <li   v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
+          <div class="description mui-ellipsis-3">{{item.description}}</div>
+          <div class="avatar">
+            <p>
+              <img :src="item.answer_user_avatar_url"/>
+              <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
+            </p>
+            <p v-if="item.is_pay_for_view">查看回答</p>
+            <p v-else>1元看答案／看评论</p>
+          </div>
+          <div class="question_info">
+            <p>
+              <span>回答者:</span> {{item.answer_username}}
+              <i v-if="item.average_rate"></i>
+              <span v-if="item.average_rate">{{item.average_rate}}好评</span>
+            </p>
+            <p>
+                  <span class="support_number">
+                    <svg class="icon" aria-hidden="true" >
+                    <use xlink:href="#icon-dianzan1"></use>
+                    </svg>
+                    <i v-if="item.support_number">{{item.support_number}}</i>
+                  </span>
+              <span class="comment_number" >
+                    <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-pinglun1"></use>
+                    </svg>
+                    <i v-if="item.comment_number">{{item.comment_number}}</i>
+                  </span>
+            </p>
+          </div>
+          <div class="component-dianzanList" v-if="item.support_number">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dianzan1"></use>
             </svg>
+            <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>
+            <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
           </div>
-          <div class="detail">
-            <p>{{item.question_type ===1 ? item.answer_username : item.question_username}}</p>
-            <p class="mui-ellipsis">{{item.description}}</p>
-          </div>
-          <div class="fouce grey" v-if="item.is_followed_question === 1">已关注</div>
-          <div class="fouce" v-else-if="item.is_followed_question === 0">关注</div>
-          <i class="bot"></i>
         </li>
       </ul>
       </RefreshList>
@@ -224,114 +249,125 @@
     top: 28px;
   }
 
-  /*list*/
-
-
-  /*关注和取消*/
-
-  .my-focus-item .follows {
-    position: absolute;
-    width: 62px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
-    text-align: center;
-    line-height: 27px;
-    right: 0;
-    top: 18px;
-    font-size: 14px;
-    color: #03aef9;
+  /*问答列表*/
+  .listWrapper{
   }
-
-  .my-focus-item .bgblue {
-    background: #03aef9;
-    color: #FFFFFF;
-  }
-
-  .my-focus-item div p:nth-of-type(1) span {
-    display: inline-block;
-    max-width: 126px;
-    height: 20px;
-    overflow: hidden;
-    font-family: "PingFangSC";
-    font-size: 14px;
-    color: #565656;
-  }
-
-  .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
-    color: #3c95f9;
-  }
-
-  .my-focus-item div p:nth-of-type(2){
+  .recommend_b {
     width: 100%;
-    height: 14px;
-    font-size: 13px;
-    color: #b4b4b6;
-    line-height: 13px;
-  }
-  /*列表区域*/
-  .cions-list{
-    width:100%;
+    /*height: 200px;*/
     overflow: hidden;
-    padding: 0 4%;
+    background: #f3f4f6;
   }
-  .cions-list li{
+
+  .recommend_b li {
+    width: 100%;
+    overflow: hidden;
     position: relative;
-    height:64px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    padding: 12px 0 15px 0;
   }
-  .cions-list li div{
+  .recommend_b li div{
+    width:92%;
+    margin-left: 4%;
+  }
+  .recommend_b li .description{
+    font-size:16px;
+    color:#444444;
+  }
+  /*点赞样式*/
+  .component-dianzanList{
+    width:100%;
+    margin-top: 12px;
+    background:#f3f4f6;
+    padding: 13px 15px 15px;
+    border-radius: 4px;
+  }
+  /*.component-dianzanList*/
+  .component-dianzanList span{
+    font-size:13px;
+    color:#03aef9;
+  }
+  .component-dianzanList svg{
+    font-size:17px;
+    color: #808080;
+  }
+  .avatar{
+    height:44px;
+    margin-top: 15px;
+  }
+  .avatar p:nth-of-type(1){
+    height:44px;
+    float: left;
+    position: relative;
+  }
+  .avatar p:nth-of-type(1) img{
+    width:33px;
+    height:33px;
+    border-radius: 50%;
+    margin-top: 5.5px;
     float: left;
   }
-  .cions-list li .cions-avatar{
-    position: relative;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background: #cccccc;
-    margin-top: 10px;
-  }
-  .cions-list li .cions-avatar img{
-    width:44px;
-    height:44px;
-    border-radius:50%;
-  }
-  .cions-list li .cions-avatar svg{
+  .avatar p:nth-of-type(1) svg{
     position: absolute;
-    font-size: 20px;
+    font-size: 14px;
+    bottom: 5px;
     right: -5px;
-    bottom: -2px;
   }
-  .cions-list li .detail{
-    margin-top: 14px;
-    font-size:14px;
-    color: #444444;
-    margin-left: 8px;
-  }
-  .cions-list li .detail p:nth-of-type(2){
-    width:200px;
-    font-size:12px;
-    color: #b4b4b6;
-    margin-top: -2px;
-  }
-  .cions-list li .fouce{
-    width:61px;
-    height:27px;
-    border: 1px solid #03aef9;
+  .avatar p:nth-of-type(2){
+    width:88%;
+    height:44px;
+    float: right;
+    background:#03aef9;
     border-radius: 50px;
     text-align: center;
-    line-height: 25px;
-    font-size:14px;
-    color: #03aef9;
-    margin-top: 18.5px;
-    float: right;
-
+    line-height: 44px;
+    font-size:16px;
+    color: #f2f2f2;
   }
-  .cions-list li .grey{
+  .question_info{
+    height:19px;
+    /*background: #cccccc;*/
+    margin-top: 12px;
+    line-height:19px;
+  }
+  .question_info p:nth-of-type(1){
+    float: left;
+    font-size:13px;
+    color: #747474;
+  }
+  .question_info p:nth-of-type(1) i{
+    display: inline-block;
+    width:1px;
+    height:12px;
+    background: #dbdbdb;
+    margin:0 9px -1px 9px;
+  }
+  .question_info p:nth-of-type(1) span:nth-of-type(1){
     color: #b4b4b6;
-    border: 1px solid #b4b4b6;
   }
+  .question_info p:nth-of-type(2){
+    float: right;
+    font-size: 13px;
+    color: #808080;
+  }
+  .question_info p:nth-of-type(2) span{
+    float: right;
+  }
+  .question_info p:nth-of-type(2) span:nth-of-type(1){
+    margin-left: 22px;
+  }
+  .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
+    font-size: 18px;
+    color: #808080;
+  }
+  .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
+    font-size: 18px;
+    margin-bottom: -2px;
+  }
+
+
+
   /***媒体查询*****/
 
   @media screen and (min-width: 320px) {
