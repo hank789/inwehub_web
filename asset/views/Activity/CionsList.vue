@@ -12,7 +12,7 @@
         <span @tap.stop.prevent="$router.replace('/creditsList')">成长榜</span>
         <span @tap.stop.prevent="$router.replace('/invitationList')">邀请榜</span>
       </div>
-
+     <template v-if="!loading && first">
       <div class="ranking">
         <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的贡献值</div>
         <img src="../../statics/images/cionslist@2x.png" class="ranking-title"/>
@@ -20,127 +20,156 @@
           <li>
             <div class="avatar-container">
               <p class="avatar">
-                <img src="../../statics/images/guide_01.png"/>
+                <img :src="third.user_avatar_url"/>
               </p>
               <p class="banner">
                 <img src="../../statics/images/blue-3@2x.png">
-                <span>No.3</span>
+                <span>No.{{third.rank}}</span>
               </p>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
+            <p>{{third.user_name}}</p>
+            <p class="cions">贡献值<i>{{third.coins}}</i></p>
+            <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
           </li>
           <li>
             <div class="avatar-container">
               <p class="avatar big-avatar">
-                <img src="../../statics/images/guide_01.png"/>
+                <img :src="first.user_avatar_url"/>
               </p>
               <p class="banner">
                 <img src="../../statics/images/red-1@2x.png">
-                <span>No.1</span>
+                <span>No.{{first.rank}}</span>
               </p>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
+            <p>{{first.user_name}}</p>
+            <p class="cions">贡献值<i>{{first.coins}}</i></p>
+            <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
           </li>
           <li>
             <div class="avatar-container">
               <p class="avatar">
-                <img src="../../statics/images/guide_01.png"/>
+                <img :src="second.user_avatar_url"/>
               </p>
               <p class="banner">
                 <img src="../../statics/images/yellow-1@2x.png">
-                <span>No.2</span>
+                <span>No.{{second.rank}}</span>
               </p>
             </div>
-            <p>武浩</p>
-            <p class="cions">贡献值<i>30400</i></p>
-            <p>关注Ta</p>
+            <p>{{second.user_name}}</p>
+            <p class="cions">贡献值<i>{{second.coins}}</i></p>
+            <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
           </li>
         </ul>
       </div>
 
       <ul class="cions-list">
-        <li>
+        <li v-for="(item, index) in list">
           <div class="cions-num">
             <p>No.</p>
-            <p>4</p>
+            <p>{{item.rank}}</p>
           </div>
           <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
+            <img :src="item.user_avatar_url"/>
+            <svg class="icon" aria-hidden="true" v-if="item.is_expert">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
           </div>
           <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
+            <p>{{item.user_name}}</p>
+            <p>贡献值<i>{{item.coins}}</i></p>
           </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-num">
-            <p>No.</p>
-            <p>4</p>
-          </div>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>王程</p>
-            <p>贡献值<i>20000</i></p>
-          </div>
-          <div class="fouce">关注</div>
+          <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
           <i class="bot"></i>
         </li>
       </ul>
-
-
+     </template>
+      <Empty v-if="!loading && list.length === 0"></Empty>
     </div>
   </div>
 </template>
+<script>
+  import { postRequest } from '../../utils/request'
+  import Empty from '../../components/Empty.vue'
+
+  export default {
+    data () {
+      return {
+        loading: 1,
+        first: null,
+        second: null,
+        third: null,
+        list: []
+      }
+    },
+    components: {
+      Empty
+    },
+    methods: {
+      // 点击关注；
+      collectProfessor (uuid, index) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      collect (uuid, item) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            item.is_followed = 0
+          } else {
+            item.is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      getData () {
+        postRequest(`rank/userContribution`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+
+          this.loading = 0
+          if (response.data.data.length >= 0) {
+            this.isAppear = response.data.data.length
+            this.first = response.data.data[0]
+            this.second = response.data.data[1]
+            this.third = response.data.data[2]
+            this.list = response.data.data.slice(3)
+          }
+        })
+      }
+    },
+    mounted () {
+      this.getData()
+    },
+    updated () {}
+  }
+</script>
+
+
+
 
 <style scoped>
   /*清掉自带样式*/
@@ -319,7 +348,10 @@
     color: #03aef9;
     margin-top: 7px;
   }
-
+  .ranking-content li p:nth-of-type(3).grey{
+    color: #b4b4b6;
+    border: 1px solid #b4b4b6;
+  }
   /*列表区域*/
   .cions-list{
     width:100%;
@@ -390,6 +422,10 @@
     margin-top: 18.5px;
     float: right;
 
+  }
+  .cions-list li .grey{
+    color: #b4b4b6;
+    border: 1px solid #b4b4b6;
   }
 
   /***媒体查询*****/

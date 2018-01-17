@@ -57,14 +57,13 @@
 
 
         <div class="mostInvitations"  >
-          <div class="invitation"><span>王程</span>邀请<i>220</i>人</div>
-          <div class="credits-cions">贡献值<i>22000</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>22000</i></div>
+          <div class="invitation"><span>{{invitationList.user_name}}</span>邀请<i>{{invitationList.invited_users}}</i>人</div>
+          <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>{{invitationList.user_credits}}</i></div>
           <div class="InvitationList" @tap.stop.prevent="$router.pushPlus('/cionsList')">
             <img src="../../statics/images/discover-invitation-list2x.png" />
           </div>
           <img src="../../statics/images/goldmedal@2x.png" class="Medal"/>
         </div>
-
 
 
         <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
@@ -109,6 +108,7 @@
         swiperOption: {},
         servicesList: [],
         list: [],
+        invitationList: [],
         is_company: currentUser.is_company
       }
     },
@@ -143,6 +143,20 @@
 //          alertDiscoverCompany(this)
 //        }
 //      },
+      getInvitation () {
+        postRequest(`rank/userInfo`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            this.invitationList = response.data.data
+          }
+        })
+      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -213,12 +227,10 @@
         }
       }
     },
-    mounted () {},
-    updated () {
-//      console.error(this.list)
-//      /EnrollmentStatus/11   活动机遇
-
-    }
+    mounted () {
+      this.getInvitation()
+    },
+    updated () {}
   }
 </script>
 <style scoped="scoped">

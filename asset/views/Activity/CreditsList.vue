@@ -319,6 +319,11 @@
     color: #03aef9;
     margin-top: 7px;
   }
+  .ranking-content li p:nth-of-type(3).grey{
+    color: #b4b4b6;
+    border: 1px solid #b4b4b6;
+  }
+
 
   /*列表区域*/
   .cions-list{
@@ -390,6 +395,11 @@
     margin-top: 18.5px;
     float: right;
   }
+  .cions-list li .grey{
+    color: #b4b4b6;
+    border: 1px solid #b4b4b6;
+  }
+
   /***媒体查询*****/
 
   @media screen and (min-width: 320px) {
