@@ -58,7 +58,7 @@
             isNew: true
           }
           this.images.push(imgInfo)
-          this.$emit('input', this.images)
+          this.$emit('success', this.images)
         })
       },
       show () {
@@ -141,7 +141,8 @@
         }, {
           filter: 'image',
           multiple: this.isMultiple,
-          maximum: this.ImageMaximum
+          maximum: this.ImageMaximum,
+          system: false
         })
       }
     }

@@ -12,7 +12,7 @@
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
-    <div class="content text-content">{{ ask.description }}</div>
+    <div class="content text-content textToLink" v-html="getDesc()"></div>
     <!--添加图片-->
     <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data ? ask.data.img : ''" :group="ask.id" v-if="ask.data ? ask.data.img.length >0 :''">
     </Images>
@@ -55,6 +55,7 @@
   import UserInfo from './UserInfo.vue'
   import { postRequest } from '../../utils/request'
   import Images from '../../components/image/Images.vue'
+  import { textToLinkHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -87,6 +88,9 @@
 
     },
     methods: {
+      getDesc () {
+        return textToLinkHtml(this.ask.description)
+      },
       toContact () {
         var description = encodeURIComponent(this.ask.description.replace(/\s/g, '').substr(0, 200))
         var username = encodeURIComponent(this.ask.user_name.replace(/\s/g, ''))

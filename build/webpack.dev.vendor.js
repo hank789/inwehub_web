@@ -2,6 +2,8 @@ const webpack = require('webpack');
 var path = require('path')
 var utils = require('./utils')
 var vueLoaderConfig = require('./vue-loader.conf')
+var config = require('../config')
+var merge = require('webpack-merge')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -21,6 +23,8 @@ const vendors = [
   'vue-infinite-scroll',
   'vue-qrcode-component',
   'vue-router',
+  'swiper',
+  'vue-awesome-swiper',
   'vue-timeago',
   'vue-wechat-title',
   'vue2-countdown',
@@ -97,5 +101,10 @@ var webpackConfig = {
   ],
 };
 
+var config = merge(webpackConfig, {
+  module: {
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
+  }
+})
 
-module.exports = webpackConfig;
+module.exports = config;

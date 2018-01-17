@@ -68,7 +68,7 @@
     <uploadImage ref="uploadImage"
                  :isMultiple="true"
                  @success="uploadImageSuccess"
-                 :ImageMaximum="maxImageCount"
+                 :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
 
     <pay
@@ -429,6 +429,9 @@
 
   .mui-content {
     background-color: #fff;
+  }
+
+  .mui-ios .mui-content{
     overflow: hidden !important;
   }
 
