@@ -560,6 +560,42 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 标签问答
+    path: '/tagsquestions',
+    name: 'tagsquestions',
+    meta: {
+      title: '标签详情',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsQuestions.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签动态
+    path: '/tagssubmissions',
+    name: 'tagssubmissions',
+    meta: {
+      title: '标签详情',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsSubmissions.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签用户
+    path: '/tagsusers',
+    name: 'tagsusers',
+    meta: {
+      title: '标签详情',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsUsers.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的报名 活动
     path: '/my/Discount',
     name: 'my-Discount',
