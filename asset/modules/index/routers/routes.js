@@ -597,10 +597,10 @@ const routes = [
     }
   },
   { // 标签问答
-    path: '/tagsquestions',
-    name: 'tagsquestions',
+    path: '/tag/detail/questions',
+    name: 'tag_detail_questions',
     meta: {
-      title: '标签详情',
+      title: '标签详情-问答',
       wechatHideHeader: true
     },
     component: require('../../../views/Tags/TagsQuestions.vue'),
@@ -609,10 +609,10 @@ const routes = [
     }
   },
   { // 标签动态
-    path: '/tagssubmissions',
-    name: 'tagssubmissions',
+    path: '/tag/detail/discover',
+    name: 'tag_detail_discover',
     meta: {
-      title: '标签详情',
+      title: '标签详情-动态',
       wechatHideHeader: true
     },
     component: require('../../../views/Tags/TagsSubmissions.vue'),
@@ -621,10 +621,10 @@ const routes = [
     }
   },
   { // 标签用户
-    path: '/tagsusers',
-    name: 'tagsusers',
+    path: '/tag/detail/users',
+    name: 'tag_detail_users',
     meta: {
-      title: '标签详情',
+      title: '标签详情-用户',
       wechatHideHeader: true
     },
     component: require('../../../views/Tags/TagsUsers.vue'),
