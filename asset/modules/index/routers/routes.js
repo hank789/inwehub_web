@@ -597,7 +597,7 @@ const routes = [
     }
   },
   { // 标签问答
-    path: '/tag/detail/questions',
+    path: '/tag/detail/:tag/questions',
     name: 'tag_detail_questions',
     meta: {
       title: '标签详情-问答',
@@ -609,7 +609,7 @@ const routes = [
     }
   },
   { // 标签动态
-    path: '/tag/detail/discover',
+    path: '/tag/detail/:tag/discover',
     name: 'tag_detail_discover',
     meta: {
       title: '标签详情-动态',
@@ -621,7 +621,7 @@ const routes = [
     }
   },
   { // 标签用户
-    path: '/tag/detail/users',
+    path: '/tag/detail/:tag/users',
     name: 'tag_detail_users',
     meta: {
       title: '标签详情-用户',
