@@ -104,6 +104,7 @@
           if (this.skill_tags.length < 20) {
             this.skill_tags.push(list)
             window.mui.toast('添加成功')
+            this.searchText = ''
           } else {
             window.mui.toast('最多添加20个标签')
           }
@@ -119,8 +120,7 @@
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
           if (response.data.data.tags.length > 0) {
