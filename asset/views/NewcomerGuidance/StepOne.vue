@@ -5,7 +5,7 @@
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
-        <div class="next-step" @tap.stop.prevent="$router.push('/userGuide/steptwo')">下一步</div>
+        <div class="next-step" @tap.stop.prevent="submit()">下一步</div>
         <div class="invitation-text">
           <p>关注您感兴趣的标签</p>
           <p>我们会推荐您相关的内容</p>
@@ -50,6 +50,18 @@
     methods: {
       changeClass (item) {
         Vue.set(item, 'checked', !item.checked)
+      },
+      submit () {
+        postRequest('follow/batchTags', {
+          ids: this.selectTags
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.$router.replace('/userGuide/steptwo')
+        })
       },
       getData () {
         postRequest('tags/load', {
