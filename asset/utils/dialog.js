@@ -1,9 +1,63 @@
+window.dialogQueue = []
+
+/**
+ * 是否已有弹窗
+ */
+function isHaveAlert (callback) {
+  var alert = document.querySelector('.mui-popup-in')
+  if (alert) {
+    // 已有弹窗，推入队
+    window.dialogQueue.push(callback)
+    return true
+  }
+  return false
+}
+
+/**
+ * 继续弹窗
+ */
+function continueAlert () {
+  if (window.dialogQueue.length) {
+    var callback = window.dialogQueue.shift()
+    console.log(callback)
+    if (callback) {
+      callback()
+    }
+  }
+}
+
+/**
+ * 包裹callback
+ * @param param
+ * @param callback
+ * @returns {newcallback}
+ */
+function wrapperCallback(callback) {
+  var newcallback = function (param) {
+    callback(param)
+    setTimeout(() => {
+      continueAlert()
+    }, 1000)
+  }
+  return newcallback
+}
+
 /**
  * 拿着放大镜的小蛤弹窗(如升级提示弹窗)
  * 确定class .alertConfirm   .alertConfirm  callback(index, value)
  */
 function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback = null, close = true, className = '') {
-  var alertObj = window.mui.alert(contentHtml, ' ', null, callback, 'div')
+  // queue start
+  var newcallback = wrapperCallback(callback)
+  var isHasAlert = isHaveAlert(() => {
+    alertZoom(contentHtml, newcallback, close, className)
+  })
+  if (isHasAlert) {
+    return
+  }
+  // queue end
+
+  var alertObj = window.mui.alert(contentHtml, ' ', null, newcallback, 'div')
   window.mui('.mui-popup-in')[0].style.display = 'none'
   window.mui('.mui-popup-in')[0].classList.add('alertZoom')
   if (className) {
@@ -71,7 +125,17 @@ function getDialogObj (context) {
  * 确定class .alertConfirm
  */
 function alertSky (titleHtml, contentHtml = '', iconType = '', callback = null, close = true, classname = 'alertSkyTwo') {
-  var alertObj = window.mui.alert(contentHtml, ' ', null, callback, 'div')
+  // queue start
+  var newcallback = wrapperCallback(callback)
+  var isHasAlert = isHaveAlert(() => {
+    alertSky(titleHtml, contentHtml, iconType, newcallback, close, classname)
+  })
+  if (isHasAlert) {
+    return
+  }
+  // queue end
+
+  var alertObj = window.mui.alert(contentHtml, ' ', null, newcallback, 'div')
   window.mui('.mui-popup-in')[0].style.display = 'none'
   for (var i in classname) {
     window.mui('.mui-popup-in')[0].classList.add(classname[i])
@@ -150,7 +214,17 @@ function alertSkyTwo (titleHtml = '', contentHtml = '', iconType = '', callback 
  * @param close
  */
 function alertSimple (contentHtml = '', btnString = '确定', callback = null, close = true) {
-  var alertObj = window.mui.alert(contentHtml, ' ', btnString, callback, 'div')
+  // queue start
+  var newcallback = wrapperCallback(callback)
+  var isHasAlert = isHaveAlert(() => {
+    alertSimple(contentHtml, btnString, newcallback, close)
+  })
+  if (isHasAlert) {
+    return
+  }
+  // queue end
+
+  var alertObj = window.mui.alert(contentHtml, ' ', btnString, newcallback, 'div')
   window.mui('.mui-popup-in')[0].style.display = 'none'
   window.mui('.mui-popup-in')[0].classList.add('alertSimple')
 
@@ -185,6 +259,16 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
  * @param callback
  */
 function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in alertHtml') {
+  // queue start
+  var newcallback = wrapperCallback(callback)
+  var isHasAlert = isHaveAlert(() => {
+    alertHtml(html, newcallback, wrapperClassName)
+  })
+  if (isHasAlert) {
+    return
+  }
+  // queue end
+
   var popupElement = document.createElement('div')
   popupElement.className = wrapperClassName
   popupElement.id = wrapperClassName
@@ -204,7 +288,7 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
     for (var i = 0; i < alertConfirms.length; i++) {
       (function (index) {
         alertConfirms[index].onclick = function () {
-          var result = callback(index)
+          var result = newcallback(index)
           if (result) {
             closeAlertHtml()
           }
@@ -217,7 +301,7 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
     for (var j = 0; j < alertCloses.length; j++) {
       (function (index) {
         alertCloses[index].onclick = function () {
-          callback(-1)
+          newcallback(-1)
           closeAlertHtml()
         }
       })(j)
@@ -231,5 +315,6 @@ export {
   alertSkyTwo,
   alertSimple,
   getDialogObj,
-  alertHtml
+  alertHtml,
+  isHaveAlert
 }
