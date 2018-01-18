@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
@@ -18,6 +19,8 @@
         <li v-for="(item,index) in list" @click="changeClass(item)"  :class="item.checked ? 'bg-blue' : '' ">{{item.text}}</li>
       </ul>
     </div>
+
+    <div id="statusBarStyle" mode="dark"></div>
   </div>
 </template>
 <script>

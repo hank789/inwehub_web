@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
@@ -40,6 +41,7 @@
 
 
     </div>
+    <div id="statusBarStyle" mode="dark"></div>
   </div>
 </template>
 <script>
