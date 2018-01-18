@@ -5,25 +5,73 @@
       <h1 class="mui-title">待您回答</h1>
     </header>
     <div class="mui-content absolute">
-      <div class="title">
-        <p>根据您的擅长推荐以下问答</p>
-        <p>换一批</p>
-      </div>
-     <ul>
-       <li>
-         <p>1.</p>
-         <p class="mui-ellipsis-3">
-           <span>#供应链#</span>咨询顾问迎接新年的到来有什么独特的方式？对于2018年应该有怎样的期待和愿望？
-           为了愿景的达成，许愿、努力、烧香...佛，怎样才是正确的姿势？如果选择拜佛，哪里的佛更靠谱一点？怎样才是正确的姿势？如果...
-           佛更靠谱一点
-         </p>
-         <p>3人回答  |  34关注</p>
-         <i class="bot"></i>
-       </li>
-     </ul>
+        <div class="title" v-if="this.tag.length">
+          <p>根据您的擅长推荐以下问答</p>
+          <p @tap.stop.prevent="change()">换一批</p>
+        </div>
+        <div class="title" v-else>
+          <p>完善擅长标签即为您定向推荐问答</p>
+          <p @tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长</p>
+        </div>
+        <ul  v-if="list.length">
+          <li v-for="(item,index) in list">
+            <p>{{index+1}}.</p>
+            <p class="mui-ellipsis-3"><span v-for="tag in item.tags">#{{tag.name}}#</span>{{item.title}}</p>
+            <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
+            <i class="bot"></i>
+          </li>
+        </ul>
+      <Empty v-else></Empty>
     </div>
   </div>
 </template>
+<script>
+  import { postRequest } from '../utils/request'
+  import Empty from '../components/Empty.vue'
+
+  export default {
+    data: () => ({
+      list: [],
+      tag: [],
+      page: 1,
+      loading: 1,
+    }),
+    created () {
+    },
+    computed: {
+    },
+    components: {
+      Empty
+    },
+    methods: {
+      getdata () {
+        postRequest('question/recommendUser', {
+          page: this.page
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          this.tag = response.data.data.user_skill_tags
+          this.list = response.data.data.data
+          this.loading = 0
+        })
+      },
+      change () {
+        this.page += 1
+        this.getdata()
+      }
+    },
+    mounted () {
+      this.getdata()
+    },
+    updated () {
+    }
+  }
+
+</script>
 
 <style scoped>
   /*清掉自带样式*/
@@ -75,14 +123,13 @@
 
   ul{
     width:100%;
-    padding:12px 0 0 0;
     overflow: hidden;
   }
   ul li{
     width:87%;
     margin-left: 9%;
     position: relative;
-    padding-bottom: 12px;
+    padding:12px 0 12px 0;
   }
   ul li p:nth-of-type(1){
   position: absolute;

@@ -104,7 +104,7 @@
               this.$router.pushPlus('/discover')
               break
             case 3:
-              window.mui.toast('正在开发中........')
+              this.$router.pushPlus('/selectionrecommend')
               break
             case 4:
               this.$router.pushPlus('/my/Discount')
