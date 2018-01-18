@@ -17,7 +17,7 @@
                 style="width:92%; height:144px; margin-left: 4%; background:#fcc816; border-radius:14px; position: relative; padding-top:40px">
           <span style="display:block; font-size:36px; color:#444444; font-weight: 600; text-align: center; ">{{inviterName}}向你发送了特权～
           </span>
-                <span style="display:block; font-size:28px; color:#444444; text-align: center;  margin-top:25px">邀请好友注册立享5%现金分红</span>
+                <span style="display:block; font-size:28px; color:#444444; text-align: center;  margin-top:25px">受邀注册可获随机现金奖励-可用于付费围观等</span>
                 <i
                   style="content: ''; display: block; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid #fcc816; position: absolute; -webkit-transform: rotate(0deg); transform: rotate(0deg); left: 0px; right: 0; top: -10px; margin: auto;"></i>
               </div>

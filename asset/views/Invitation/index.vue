@@ -32,7 +32,7 @@
       <!--邀请说明-->
       <div class="invitationNote">
         <p>被邀请好友可享注册大礼包</p>
-        <p>（首次专业提问1元等特权）</p>
+        <p>（现金奖励-可用于付费围观等）</p>
         <p>点击呼朋唤友并分享链接，既是同意 <u @tap.stop.prevent="$router.pushPlus('/protocol/invitation')">邀请活动规则</u></p>
       </div>
     </div>
