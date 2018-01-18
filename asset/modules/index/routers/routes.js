@@ -143,7 +143,8 @@ const routes = [
     name: 'userGuide-stepone',
     meta: {
       title: '新人引导第三步',
-      wechatHideHeader: false
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: require('../../../views/NewcomerGuidance/StepThree.vue'),
     beforeEnter: (to, from, next) => {
