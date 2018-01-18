@@ -23,7 +23,7 @@
             <li>距离我< {{datailList.distance_format}}</li>
             <li>{{datailList.name}}</li>
             <li>
-              <span v-for="(item, index) in datailList.tags">{{item}} <i></i></span>
+              <span v-for="(item, index) in datailList.tags" @tap.stop.prevent="toTagDetail(item)">{{item}} <i></i></span>
             </li>
             <li>{{datailList.address_detail}}</li>
           </ul>
@@ -73,6 +73,8 @@
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
+
   const currentUser = getLocalUserInfo()
   export default {
     data () {
@@ -100,6 +102,9 @@
       })
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       refreshPageData () {
         this.id = this.$route.params.id
         this.companyInfo()

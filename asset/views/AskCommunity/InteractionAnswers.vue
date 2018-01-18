@@ -21,7 +21,7 @@
         :autoShowEmpty="false"
       >
         <div class="question_tags"  v-if="ask.question.tags.length">
-          <p v-for="(tag, index) in ask.question.tags">{{tag.name}}</p>
+          <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
         </div>
 
         <QustionInteraction
@@ -105,6 +105,7 @@
   import Share from '../../components/Share.vue'
   import RefreshList from '../../components/refresh/List.vue'
   import { openVendorUrl } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
 
   const AskDetail = {
     data: () => ({
@@ -150,6 +151,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       toAsk () {
         this.$router.pushPlus('/ask/interaction')
       },

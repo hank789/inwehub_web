@@ -30,7 +30,7 @@
     </div>
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
       <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
@@ -55,6 +55,7 @@
 
 <script type="text/javascript">
   import Avatar from '../../components/image/Avatar.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -75,6 +76,9 @@
 
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()

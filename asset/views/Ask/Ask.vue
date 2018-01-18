@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="ask_tags" v-if="tag.length">
-        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
+        <p v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</p>
       </div>
       <div class="form form-ask">
         <div class="textarea-wrapper">
@@ -99,6 +99,7 @@
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
 
+
   const Ask = {
     data: () => ({
       id: currentUser.user_id,
@@ -167,6 +168,9 @@
       this.check()
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       payMoneyChange (money) {
         this.money = money
       },

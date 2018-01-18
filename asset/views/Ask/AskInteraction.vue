@@ -15,7 +15,7 @@
       </div>
 
       <div class="ask_tags" v-if="tag.length">
-        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
+        <p v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</p>
       </div>
 
       <div class="form form-ask">
@@ -163,6 +163,9 @@
       this.check()
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
@@ -370,7 +373,7 @@
   .mui-content {
     background-color: #fff;
   }
-  
+
   .mui-ios .mui-content{
     overflow: hidden !important;
   }

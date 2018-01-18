@@ -8,7 +8,7 @@
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
       <div class="tags" v-if="ask.question.tags.length">
-        <p v-for="(item, index) in ask.question.tags">{{item.name}}</p>
+        <p v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</p>
       </div>
 
       <Question
@@ -100,6 +100,7 @@
   import Share from '../../components/Share.vue'
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import userAbility from '../../utils/userAbility'
 
   const AskDetail = {
     data: () => ({
@@ -157,6 +158,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       commentReal () {
         this.$refs.commentReal.comment()
       },

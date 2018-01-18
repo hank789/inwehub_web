@@ -8,7 +8,7 @@
     <div class="mui-content absolute">
       <ul class="myLabel" v-if="skill_tags.length">
         <p>擅长标签</p>
-        <li v-for="(item, index) in skill_tags">
+        <li v-for="(item, index) in skill_tags" @tap.stop.prevent="toTagDetail(item.text)">
           {{item.text}}
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">
             <use xlink:href="#icon-times--"></use>
@@ -48,6 +48,7 @@
 <script>
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -60,6 +61,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       Obtain () {
         var that = this
 

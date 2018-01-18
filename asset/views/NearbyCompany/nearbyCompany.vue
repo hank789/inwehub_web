@@ -43,7 +43,7 @@
               <div class="container-info">
                 <p>{{item.name}}</p>
                 <p class="mui-ellipsis">
-                  <span  v-for="(tags, index) in item.tags"> {{tags}} <i></i></span>
+                  <span  v-for="(tags, index) in item.tags" @tap.stop.prevent="toTagDetail(tags)"> {{tags}} <i></i></span>
                 </p>
                 <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}</span></p>
               </div>
@@ -61,6 +61,7 @@
   import { getGeoPosition } from '../../utils/allPlatform'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -110,6 +111,9 @@
       })
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       getDistance (num) {
         console.log('num:' + num)
         num = parseFloat(num.substring(0, num.length - 1))

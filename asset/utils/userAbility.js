@@ -348,7 +348,14 @@ var UserAbility = () => {
     }
   }
 
-
+  /**
+   * 跳转到标签详情页
+   * @param tag
+   */
+  var jumpToTagDetail = (tag) => {
+    tag = encodeURIComponent(tag)
+    router.pushPlus('/tag/detail/' + tag + '/questions')
+  }
 
   return {
     canDo: canDo,
@@ -364,7 +371,8 @@ var UserAbility = () => {
     newbieTask: newbieTask,
     jumpJudgeGrade: jumpJudgeGrade,
     signIGift: signIGift,
-    logout: logout
+    logout: logout,
+    jumpToTagDetail
   }
 }
 
