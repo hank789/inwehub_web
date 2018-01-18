@@ -5,55 +5,20 @@
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
-        <div class="next-step" @tap.stop.prevent="$router.push('/userGuide/stepthree')">下一步</div>
+        <div class="next-step" @tap.stop.prevent="$router.push('/userGuide/steptwo')">下一步</div>
         <div class="invitation-text">
-          <p>关注您感兴趣的人</p>
-          <p>关注Ta在平台上的动态</p>
+          <p>关注您感兴趣的标签</p>
+          <p>我们会推荐您相关的内容</p>
         </div>
       </div>
 
-      <div class="invitation-recommend">
-        <p @tap.stop.prevent="change()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shuaxin"></use>
-          </svg>
-          换一批
-        </p>
-        <i></i>
-        <p @tap.stop.prevent="allInvitation()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-yijianyaoqinghuida"></use>
-          </svg>
-          一键关注
-        </p>
-      </div>
-      <div class="container"  v-if="!this.list.length && !loading">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-zanwushuju"></use>
-        </svg>
-        <p>暂时还没有数据呀～</p>
-      </div>
-
-      <ul class="my-focus">
-        <li class="my-focus-item" v-for="(item, index) in list">
-          <div class="avatar">
-            <img :src="item.avatar_url"
-                 @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
-            <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
-            <p>
-              <span class="mui-ellipsis">{{item.name}}</span>
-            </p>
-            <p class="mui-ellipsis">{{item.description}}</p>
-          </div>
-          <p class="follows"  v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item.id,index)">已关注</p>
-          <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item.id,index)" v-else>关注</p>
-          <i class="bot"></i>
-        </li>
+      <div class="tag-title">热门标签</div>
+      <ul>
+        <li class="bg-blue">企业IT战略规划与ITSP</li>
+        <li>高科技</li>
+        <li>电网咨询</li>
       </ul>
+
 
     </div>
   </div>
@@ -62,7 +27,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
 
-  const PublishAnswers = {
+  export default {
     data: () => ({
       list: [],
       question_id: '',
@@ -136,16 +101,10 @@
       }
     },
     mounted () {
-      this.getdata()
     },
     updated () {
-      // 数据加载完之后
-//      if (this.$route.query.from && this.$route.query.from === 'feed') {
-//        this.allInvitation()
-//      }
     }
   }
-  export default PublishAnswers
 
 </script>
 <style scoped>
@@ -218,149 +177,30 @@
     font-size:20px;
     color: #323232;
   }
-  /*换一批&&一键邀请*/
-  .invitation-recommend{
-    width:100%;
-    height:44px;
-    border-bottom: 1px solid #dcdcdc;
-    background: #FFFFFF;
-    position: relative;
+  /*tag*/
+.tag-title{
+  font-size:13px;
+  color: #808080;
+  margin:20px 0 0 4%;
+
+}
+  ul{
+    width:92%;
+    margin-left: 1.5%;
   }
-  .invitation-recommend p{
-    width:50%;
-    height:44px;
-    text-align: center;
-    font-size:14px;
-    color: #235280;
-    line-height: 44px;
+  ul li{
     float: left;
-  }
-  .invitation-recommend p svg{
-    font-size: 20px;
-    margin-bottom: -2px;
-  }
-  .invitation-recommend i{
-    width:1px;
-    height:19px;
-    background: #dcdcdc;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left:0;
-    right: 0;
-    margin: auto;
-  }
-  /*列表区域*/
-  .my-focus {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    padding-left: 17px;
-    padding-right: 17px;
-  }
-
-  .my-focus-item {
-    width: 100%;
-    height: 63px;
-    list-style: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: relative;
-  }
-  .my-focus-item div.avatar {
-    width: 44px;
-    height: 44px;
-    float: left;
-    margin-right: 8px;
-    position: relative;
-  }
-  .my-focus-item img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-
-  }
-  .my-focus-item svg {
-    color: #fcc816;
-    font-size:15px;
-    position: absolute;
-    right:0;
-    bottom: 0;
-  }
-
-  .my-focus-item div {
-    float: left;
-    width: 60%;
-  }
-
-  /*关注和取消*/
-
-  .my-focus-item .follows {
-    position: absolute;
-    width: 62px;
-    height: 27px;
-    border-radius: 50px;
-    text-align: center;
-    line-height: 27px;
-    right: 0;
-    top: 18px;
+    border:1px solid #dcdcdc;
     font-size: 14px;
-    color: #b4b4b6;
-    background: #dcdcdc;
+    color: #444444;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 9px 0 0 10px;
   }
-
-  .my-focus-item .bgblue {
+  ul li.bg-blue{
     background: #03aef9;
+    border:1px solid #03aef9;
     color: #FFFFFF;
   }
 
-  .my-focus-item div p:nth-of-type(1) span {
-    display: inline-block;
-    max-width: 126px;
-    height: 20px;
-    overflow: hidden;
-    font-family: "PingFangSC";
-    font-size: 14px;
-    color: #565656;
-  }
-
-  .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
-    color: #3c95f9;
-  }
-
-  .my-focus-item div p:nth-of-type(2){
-    width: 100%;
-    height: 14px;
-    font-size: 13px;
-    color: #b4b4b6;
-    line-height: 13px;
-  }
-
-
-  /*无数据的显示样式*/
-  .container {
-    position: absolute;
-    top: 50%;
-    left: 36%;
-  }
-
-  .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
-  }
-
-  .container p {
-    font-family: "PingFangSC";
-    font-size: 12px;
-    color: #c8c8c8;
-  }
-
-  .descriptionText {
-    width:60%;
-    font-size: 13px;
-    color: #b4b4b6;
-  }
 </style>
