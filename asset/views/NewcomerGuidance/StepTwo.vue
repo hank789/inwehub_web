@@ -38,7 +38,7 @@
         <li class="my-focus-item" v-for="(item, index) in list">
           <div class="avatar">
             <img :src="item.avatar_url"
-                 @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
+                 @tap.stop.prevent="toAvatar(item.uuid)"/>
             <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
@@ -79,6 +79,12 @@
       RefreshList
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
       allInvitation () {
         this.invitation_user_id = []
         for (var index in this.list) {
