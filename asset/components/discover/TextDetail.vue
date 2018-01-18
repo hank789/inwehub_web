@@ -10,7 +10,7 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="data.title.replace(/^\s+|\s+$/g, '')">
+        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="textToLink(data.title)">
           <!--{{data.title}}-->
         </div>
 
@@ -66,6 +66,7 @@
   import Images from '../../components/image/Images.vue'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import { goThirdPartyArticle } from '../../utils/webview'
 
   export default {
@@ -87,6 +88,9 @@
 
     },
     methods: {
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false

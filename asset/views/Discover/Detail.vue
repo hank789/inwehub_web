@@ -114,7 +114,7 @@
   import Share from '../../components/Share.vue'
   import { getTextDiscoverDetail } from '../../utils/shareTemplate'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLinkHtml } from '../../utils/dom'
+  import { textToLinkHtml, transferTagToLink } from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -195,7 +195,7 @@
         })
       },
       textToLink (text) {
-        return textToLinkHtml(' ' + text)
+        return transferTagToLink(textToLinkHtml(' ' + text))
       },
       toAvatar (uuid) {
         if (!uuid) {

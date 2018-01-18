@@ -83,7 +83,7 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import { textToLinkHtml, secureHtml } from '../../utils/dom'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import SuppertAndComment from './SuppertAndComment.vue'
 
   const currentUser = getLocalUserInfo()
@@ -117,7 +117,7 @@
         return newDate
       },
       textToLink (text) {
-        return secureHtml(textToLinkHtml(text))
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
       },
       prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
