@@ -52,6 +52,11 @@
         Vue.set(item, 'checked', !item.checked)
       },
       submit () {
+        if (this.selectTags.length === 0) {
+          this.$router.replace('/userGuide/steptwo')
+          return
+        }
+
         postRequest('follow/batchTags', {
           ids: this.selectTags
         }).then(response => {
