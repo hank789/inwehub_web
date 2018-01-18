@@ -14,10 +14,10 @@
         </div>
         <div class="privilege_share">
           <span>{{ inviterName }}向你发送了特权～</span>
-          <span>邀请好友注册立享5%现金分红</span>
+          <span>受邀注册可获随机现金奖励-可用于付费围观等</span>
         </div>
         <div class="privilege_verification">
-          <p class="verification_t">（首次登陆可获1元提问特权）</p>
+          <!--<p class="verification_t">（首次登陆可获1元提问特权）</p>-->
           <ul>
             <li>
               <svg class="icon" aria-hidden="true">
