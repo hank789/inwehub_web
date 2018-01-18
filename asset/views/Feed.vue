@@ -281,21 +281,19 @@
         if (item.feed_type === 7) item.url += '?goback=1'
 
         switch (item.feed_type) {
-          case 1:
           case 2:
+          case 9:
+          case 12:
             this.$router.pushPlus('/askCommunity/interaction/answers/' + item.feed.question_id, 'list-detail-page')
             break
+          case 1:
           case 3:
           case 4:
           case 6:
           case 7:
           case 8:
-          case 9:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.feed.question_id, 'list-detail-page')
-            break
           case 11:
-          case 12:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.feed.question_id, 'list-detail-page')
+            this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 10:
             this.$router.pushPlus(item.url, 'list-detail-page')
