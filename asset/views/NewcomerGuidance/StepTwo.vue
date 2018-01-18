@@ -134,11 +134,7 @@
             window.mui.alert(response.data.message)
             return
           }
-
-//          if (response.data.data.unfollow) {
           this.list[index].is_followed = !this.list[index].is_followed
-//          }
-
           window.mui.toast(response.data.data.tip)
         })
       }

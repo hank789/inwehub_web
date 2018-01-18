@@ -7,32 +7,31 @@
     <div class="mui-content absolute">
     <div class="tag-title">
        <div class="tag-l">
-         <img src="../../statics/images/guide_01.png">
+         <img :src="tagDetail.logo">
        </div>
        <div class="tag-r">
         <p>
-          <span>供应链</span>
-          <span class="grey">关注</span>
+          <span>{{tagDetail.name}}</span>
+          <span class="grey" v-if="tagDetail.followers" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>
+          <span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>
         </p>
-        <p class="mui-ellipsis-3">供应链的概念是从扩大的生产概念发展而来，现代管理教育对供应链的定义为“供应链是围绕核心企业，通过对商流、信息流、物流...
-          资金控制，从采购原材料开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商（零售商，批发商等）直到最终用户所连成的整体功能网链结构”。
-          中文名 供应链 外文名 Supply Chain</p>
+        <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
        </div>
     </div>
     <!--导航栏-->
     <div class="menu">
       <span @tap.stop.prevent="">问答  <i></i></span>
-      <span @tap.stop.prevent="$router.replace('/tagssubmissions')">动态</span>
-      <span @tap.stop.prevent="$router.replace('/tagsusers')">用户</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/discover')">动态</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/users')">用户</span>
       <i class="bot"></i>
     </div>
       <!--推荐问答 -->
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'question/majorList'"
-        :prevOtherData="{}"
-        :nextOtherData="{}"
+        :api="'tags/questions'"
+        :prevOtherData="{tag_name:tagName}"
+        :nextOtherData="{tag_name:tagName}"
         :pageMode = true
         class="listWrapper">
       <ul class="recommend_b">
@@ -77,6 +76,7 @@
             <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
           </div>
         </li>
+        <!--encodeURIComponent(tag)-->
       </ul>
       </RefreshList>
 
@@ -86,63 +86,57 @@
 <script>
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-  import Empty from '../../components/Empty.vue'
 
   export default {
     data () {
       return {
+        tagName: '',
         loading: 1,
-        list: []
+        list: [],
+        tagDetail: {}
       }
     },
     components: {
-      Empty,
       RefreshList
     },
+    created () {
+      if (this.$route.params.tag) {
+        this.tagName = this.$route.params.tag
+      }
+    },
     methods: {
-      toAvatar (uuid) {
-        if (!uuid) {
-          return false
-        }
-        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      toDetail (id) {
+        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
-      // 点击关注；
-      collectProfessor (uuid, index) {
-        postRequest(`follow/user`, {
-          id: uuid
+      getTagInfo () {
+        postRequest('tags/tagInfo', {
+          tag_name: this.tagName
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
+            window.mui.toast(response.data.message)
             return
           }
-          if (response.data.data.type === 'unfollow') {
-            this.list[index].is_followed = 0
-          } else {
-            this.list[index].is_followed = 1
-          }
-          window.mui.toast(response.data.data.tip)
+          this.tagDetail = response.data.data
+          this.loading = 0
         })
       },
-      collect (uuid, item) {
-        postRequest(`follow/user`, {
-          id: uuid
+      collectTag (id) {
+        postRequest(`follow/tag`, {
+          id: id
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          if (response.data.data.type === 'unfollow') {
-            item.is_followed = 0
-          } else {
-            item.is_followed = 1
-          }
+          this.tagDetail.followers = !this.tagDetail.followers
           window.mui.toast(response.data.data.tip)
         })
       }
     },
     mounted () {
+      this.getTagInfo()
     },
     updated () {}
   }

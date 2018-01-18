@@ -7,33 +7,32 @@
     <div class="mui-content absolute">
       <div class="tag-title">
         <div class="tag-l">
-          <img src="../../statics/images/guide_01.png">
+          <img :src="tagDetail.logo">
         </div>
         <div class="tag-r">
           <p>
-            <span>供应链</span>
-            <span class="grey">关注</span>
+            <span>{{tagDetail.name}}</span>
+            <span class="grey" v-if="tagDetail.followers" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>
+            <span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>
           </p>
-          <p class="mui-ellipsis-3">供应链的概念是从扩大的生产概念发展而来，现代管理教育对供应链的定义为“供应链是围绕核心企业，通过对商流、信息流、物流...
-            资金控制，从采购原材料开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商（零售商，批发商等）直到最终用户所连成的整体功能网链结构”。
-            中文名 供应链 外文名 Supply Chain</p>
+          <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
         </div>
       </div>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/tagsquestions')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/questions')">问答</span>
         <span @tap.stop.prevent=" ">动态 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/tagsusers')">用户 </span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/users')">用户 </span>
         <i class="bot"></i>
       </div>
       <!--内容区域-->
       <!--滚动区域-->
       <RefreshList
         v-model="list"
-        :api="'article/list'"
+        :api="'tags/submissions'"
         :pageMode="true"
-        :prevOtherData="{sort:'hot', page: 1}"
-        :nextOtherData="{sort:'hot'}"
+        :prevOtherData="{tag_name:tagName, page: 1}"
+        :nextOtherData="{tag_name:tagName}"
         class="listWrapper">
         <ul>
           <template v-for="(hot, index) in list">
@@ -107,10 +106,15 @@
 
   const PublishAnswers = {
     data: () => ({
+      tagName: '',
       list: [],
-      userId: currentUser.user_id
+      userId: currentUser.user_id,
+      tagDetail: {}
     }),
     created () {
+      if (this.$route.params.tag) {
+        this.tagName = this.$route.params.tag
+      }
     },
     computed: {},
     components: {
@@ -231,9 +235,36 @@
             }
           }
         })
+      },
+      getTagInfo () {
+        postRequest('tags/tagInfo', {
+          tag_name: this.tagName
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.tagDetail = response.data.data
+          this.loading = 0
+        })
+      },
+      collectTag (id) {
+        postRequest(`follow/tag`, {
+          id: id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.tagDetail.followers = !this.tagDetail.followers
+          window.mui.toast(response.data.data.tip)
+        })
       }
     },
     mounted () {
+      this.getTagInfo()
       document.addEventListener('tap', () => {
 
       })
@@ -606,7 +637,7 @@
 
   }
 
-  ul .Container .information p.blue {
+  ul .imgContainer .information p.blue {
     color: #03aef9;
   }
 
