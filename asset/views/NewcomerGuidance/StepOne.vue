@@ -17,14 +17,13 @@
         <!--<li class="bg-blue">企业IT战略规划与ITSP</li>-->
         <li v-for="(item,index) in list" @click="changeClass(item)"  :class="item.checked ? 'bg-blue' : '' ">{{item.text}}</li>
       </ul>
-
-
     </div>
   </div>
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import Vue from 'vue'
 
   export default {
     data: () => ({
@@ -35,40 +34,24 @@
     created () {
     },
     computed: {
-
+      selectTags () {
+        var tags = []
+        window.mui.each(this.list, function (index, item) {
+          if (item.checked) {
+            tags.push(item.value)
+          }
+        })
+        return tags
+      }
     },
     components: {
       RefreshList
     },
     methods: {
       changeClass (item) {
-        if (typeof item.checked === 'undefined') {
-          item.checked = true
-        } else {
-          item.checked = !item.checked
-        }
+        Vue.set(item, 'checked', !item.checked)
       },
-      allInvitation () {
-        this.invitation_user_id = []
-        for (var index in this.list) {
-          this.invitation_user_id.push(this.list[index].id)
-        }
-        if (this.invitation_user_id.length) {
-          postRequest('follow/batchUser', {
-            ids: this.invitation_user_id
-          }).then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.alert(response.data.message)
-              window.mui.back()
-              return
-            }
-            this.change()
-            window.mui.toast('一键关注成功')
-          })
-        }
-      },
-      getdata () {
+      getData () {
         postRequest('tags/load', {
           tag_type: 5,
           sort: 1,
@@ -76,40 +59,16 @@
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
           this.list = response.data.data.tags
           this.loading = 0
         })
-      },
-      change () {
-        this.page += 1
-        this.getdata()
-      },
-      collectProfessor (id, index) {
-        postRequest(`follow/user`, {
-          id: id
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-//          if (response.data.data.unfollow) {
-          this.list[index].is_followed = !this.list[index].is_followed
-//          }
-
-          window.mui.toast(response.data.data.tip)
-        })
       }
     },
     mounted () {
-      this.getdata()
-    },
-    updated () {
+      this.getData()
     }
   }
 
