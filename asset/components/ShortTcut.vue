@@ -101,13 +101,13 @@
               this.$router.pushPlus('/unansweredquestions')
               break
             case 2:
-              this.$router.pushPlus('/discover')
+              this.$router.pushPlus('/selectionrecommend')
               break
             case 3:
-              window.mui.toast('正在开发中........')
+              this.$router.pushPlus('/cionsList')
               break
             case 4:
-              this.$router.pushPlus('/my/Discount')
+              this.$router.pushPlus('/home/ActiveList')
               break
             case 5:
               this.$router.pushPlus('/ask')
