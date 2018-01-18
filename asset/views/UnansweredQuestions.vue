@@ -14,7 +14,7 @@
           <p @tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长</p>
         </div>
         <ul  v-if="list.length">
-          <li v-for="(item,index) in list">
+          <li v-for="(item,index) in list" @tap.stop.prevent="skip(item.question_type,item.id)">
             <p>{{index+1}}.</p>
             <p class="mui-ellipsis-3"><span v-for="tag in item.tags">#{{tag.name}}#</span>{{item.title}}</p>
             <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
@@ -44,6 +44,16 @@
       Empty
     },
     methods: {
+      skip (type, id) {
+        switch (type) {
+          case 1:
+            this.$router.pushPlus('/askCommunity/major/' + id)
+            break
+          case 2:
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + id)
+            break
+        }
+      },
       getdata () {
         postRequest('question/recommendUser', {
           page: this.page
