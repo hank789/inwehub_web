@@ -114,6 +114,42 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 新人引导第一步
+    path: '/userGuide/stepone',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第一步',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepOne.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 新人引导第二步
+    path: '/userGuide/steptwo',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第二步',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepTwo.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 新人引导第三步
+    path: '/userGuide/stepthree',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第三步',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepThree.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 问答社区-专业问答
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',

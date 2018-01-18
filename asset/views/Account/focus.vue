@@ -55,7 +55,6 @@
       RefreshList
     },
     methods: {
-
       collectProfessor (id, index) {
         postRequest(`follow/user`, {
           id: id
