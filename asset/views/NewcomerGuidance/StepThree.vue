@@ -28,7 +28,7 @@
         </p>
       </div>
       <ul v-if="list.length">
-        <li v-for="(item,index) in list">
+        <li v-for="(item,index) in list" @tap.stop.prevent="skip(item.question_type,item.id)">
           <p class="mui-ellipsis-3"><span v-for=" tag in item.tags">#{{tag.name}}#</span>{{item.title}}</p>
           <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
           <div class="focus grey" v-if="item.is_followed_question" @tap.stop.prevent="collectQuestion(item.id,index)">已关注</div>
@@ -65,6 +65,16 @@
       Empty
     },
     methods: {
+      skip (type, id) {
+        switch (type) {
+          case 1:
+            this.$router.pushPlus('/askCommunity/major/' + id)
+            break
+          case 2:
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + id)
+            break
+        }
+      },
       allInvitation () {
         this.followed_question_id = []
         for (var index in this.list) {
@@ -230,7 +240,6 @@
  /*内容*/
   ul{
     width:100%;
-    padding:12px 0 0 0;
     overflow: hidden;
     position: relative;
   }
@@ -238,7 +247,7 @@
     width:92%;
     margin-left: 4%;
     position: relative;
-    padding-bottom: 15px;
+    padding:12px 0 15px 0;
   }
   ul li p:nth-of-type(1){
     font-size: 16px;
