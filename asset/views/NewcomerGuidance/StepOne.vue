@@ -14,9 +14,8 @@
 
       <div class="tag-title">热门标签</div>
       <ul>
-        <li class="bg-blue">企业IT战略规划与ITSP</li>
-        <li>高科技</li>
-        <li>电网咨询</li>
+        <!--<li class="bg-blue">企业IT战略规划与ITSP</li>-->
+        <li v-for="(item,index) in list" @click="changeClass(item)"  :class="item.checked ? 'bg-blue' : '' ">{{item.text}}</li>
       </ul>
 
 
@@ -30,10 +29,8 @@
   export default {
     data: () => ({
       list: [],
-      question_id: '',
       page: 1,
-      loading: 1,
-      invitation_user_id: []
+      loading: 1
     }),
     created () {
     },
@@ -44,6 +41,13 @@
       RefreshList
     },
     methods: {
+      changeClass (item) {
+        if (typeof item.checked === 'undefined') {
+          item.checked = true
+        } else {
+          item.checked = !item.checked
+        }
+      },
       allInvitation () {
         this.invitation_user_id = []
         for (var index in this.list) {
@@ -65,8 +69,10 @@
         }
       },
       getdata () {
-        postRequest('follow/recommendUserList', {
-          page: this.page
+        postRequest('tags/load', {
+          tag_type: 5,
+          sort: 1,
+          limit: 20
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -74,7 +80,7 @@
             window.mui.back()
             return
           }
-          this.list = response.data.data
+          this.list = response.data.data.tags
           this.loading = 0
         })
       },
@@ -101,6 +107,7 @@
       }
     },
     mounted () {
+      this.getdata()
     },
     updated () {
     }
