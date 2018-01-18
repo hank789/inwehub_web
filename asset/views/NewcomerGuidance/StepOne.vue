@@ -52,18 +52,21 @@
         Vue.set(item, 'checked', !item.checked)
       },
       submit () {
-        if (this.selectTags.length) {
-          postRequest('follow/batchTags', {
-            ids: this.selectTags
-          }).then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.toast(response.data.message)
-              return
-            }
-          })
+        if (this.selectTags.length === 0) {
+          this.$router.replace('/userGuide/steptwo')
+          return
         }
-        this.$router.replace('/userGuide/steptwo')
+
+        postRequest('follow/batchTags', {
+          ids: this.selectTags
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.$router.replace('/userGuide/steptwo')
+        })
       },
       getData () {
         postRequest('tags/load', {

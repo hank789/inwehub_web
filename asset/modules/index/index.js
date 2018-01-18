@@ -35,6 +35,8 @@ if (process.env.NODE_ENV !== 'development') {
     .config(sentryUrl)
     .addPlugin(RavenVue, Vue)
     .install()
+} else {
+  window.mixpanel = {}
 }
 var infiniteScroll = require('vue-infinite-scroll')
 Vue.use(infiniteScroll)
