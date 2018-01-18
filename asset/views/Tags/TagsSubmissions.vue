@@ -637,9 +637,7 @@
 
   }
 
-  ul .imgContainer .information p.blue {
-    color: #03aef9;
-  }
+
 
 
   /***媒体查询*****/

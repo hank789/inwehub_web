@@ -296,6 +296,9 @@
     align-items: center;
     padding:0 5px;
   }
+  ul .imgContainer .information p.blue {
+    color: #03aef9;
+  }
 
   /*举报和删除*/
   .information p:nth-of-type(1) span {
