@@ -1510,7 +1510,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // protocol/register
+  { // 待答问题
     path: '/unansweredquestions',
     name: 'unansweredquestions',
     meta: {
@@ -1518,6 +1518,15 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/UnansweredQuestions.vue')
+  },
+  { // 精华推荐
+    path: '/selectionrecommend',
+    name: 'selection-recommend',
+    meta: {
+      title: '精华推荐',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/SelectionRecommend.vue')
   },
   {
     path: '/discover/add2',
