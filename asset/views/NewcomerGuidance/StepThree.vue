@@ -27,19 +27,16 @@
           一键关注
         </p>
       </div>
-      <ul>
-        <li>
-          <p class="mui-ellipsis-3">
-            <span>#供应链#</span>咨询顾问迎接新年的到来有什么独特的方式？对于2018年应该有怎样的期待和愿望？
-            为了愿景的达成，许愿、努力、烧香...佛，怎样才是正确的姿势？如果选择拜佛，哪里的佛更靠谱一点？怎样才是正确的姿势？如果...
-            佛更靠谱一点
-          </p>
-          <p>3人回答  |  34关注</p>
-          <div class="focus">关注</div>
+      <ul v-if="list.length">
+        <li v-for="(item,index) in list">
+          <p class="mui-ellipsis-3"><span v-for=" tag in item.tags">#{{tag.name}}#</span>{{item.title}}</p>
+          <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
+          <div class="focus grey" v-if="item.is_followed_question" @tap.stop.prevent="collectQuestion(item.id,index)">已关注</div>
+          <div class="focus" v-else @tap.stop.prevent="collectQuestion(item.id,index)">关注</div>
           <i class="bot"></i>
         </li>
       </ul>
-
+      <Empty v-else></Empty>
 
 
     </div>
@@ -48,6 +45,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import Empty from '../../components/Empty.vue'
 
   export default {
     data: () => ({
@@ -55,7 +53,7 @@
       question_id: '',
       page: 1,
       loading: 1,
-      invitation_user_id: []
+      followed_question_id: []
     }),
     created () {
     },
@@ -63,17 +61,18 @@
 
     },
     components: {
-      RefreshList
+      RefreshList,
+      Empty
     },
     methods: {
       allInvitation () {
-        this.invitation_user_id = []
+        this.followed_question_id = []
         for (var index in this.list) {
-          this.invitation_user_id.push(this.list[index].id)
+          this.followed_question_id.push(this.list[index].id)
         }
-        if (this.invitation_user_id.length) {
-          postRequest('follow/batchUser', {
-            ids: this.invitation_user_id
+        if (this.followed_question_id.length) {
+          postRequest('follow/batchQuestions', {
+            ids: this.followed_question_id
           }).then(response => {
             var code = response.data.code
             if (code !== 1000) {
@@ -87,7 +86,7 @@
         }
       },
       getdata () {
-        postRequest('follow/recommendUserList', {
+        postRequest('question/recommendUser', {
           page: this.page
         }).then(response => {
           var code = response.data.code
@@ -96,7 +95,7 @@
             window.mui.back()
             return
           }
-          this.list = response.data.data
+          this.list = response.data.data.data
           this.loading = 0
         })
       },
@@ -104,8 +103,8 @@
         this.page += 1
         this.getdata()
       },
-      collectProfessor (id, index) {
-        postRequest(`follow/user`, {
+      collectQuestion (id, index) {
+        postRequest(`follow/question`, {
           id: id
         }).then(response => {
           var code = response.data.code
@@ -113,16 +112,13 @@
             window.mui.alert(response.data.message)
             return
           }
-
-//          if (response.data.data.unfollow) {
-          this.list[index].is_followed = !this.list[index].is_followed
-//          }
-
+          this.list[index].is_followed_question = !this.list[index].is_followed_question
           window.mui.toast(response.data.data.tip)
         })
       }
     },
     mounted () {
+      this.getdata()
     },
     updated () {
     }
@@ -249,6 +245,10 @@
     color: #444444;
     line-height: 21px;
   }
+  ul li p:nth-of-type(1) span{
+    color: rgb(35,82,128);
+    margin-right: 6px;
+  }
   ul li p:nth-of-type(2){
     font-size: 12px;
     color:#b4b4b6;
@@ -266,5 +266,9 @@
     position: absolute;
     bottom: 9.5px;
     right: 4%;
+  }
+  ul li .grey{
+    background: #dcdcdc;
+    color: #b4b4b6;
   }
 </style>
