@@ -28,7 +28,7 @@
                            style="border-radius: 10px; border:9px solid #FFFFFF; float: left;"></qr-code>
                   <div style="float:right; margin-top:50px;">
                     <span style="display: block; font-size:30px; color: #ffffff;">扫描前往领取特权</span>
-                    <span style="display: block; font-size:24px; color: #ffffff; margin-top: 20px">（首次登陆1元提问）</span>
+                    <span style="display: block; font-size:24px; color: #ffffff; margin-top: 20px">（随机现金奖励）</span>
                   </div>
                 </div>
               </div>
