@@ -8,7 +8,8 @@
     <div class="mui-content absolute">
       <ul class="myLabel" >
         <div>
-          <p>标签（{{selectNum}}／20） </p>
+          <!--{{selectNum}}-->
+          <p>标签（{{skill_tags.length}}／20） </p>
           <p>让机遇更精准匹配，让内容更容易检索 </p>
           <button @tap.stop.prevent="keepTags()">确认保存</button>
         </div>
