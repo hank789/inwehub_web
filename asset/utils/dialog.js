@@ -1,15 +1,34 @@
 window.dialogQueue = []
+window.dialogHtmlQueue = []
+window.dialogCurrentHtml = ''
 
 /**
  * 是否已有弹窗
  */
-function isHaveAlert (callback) {
+function isHaveAlert (callback, html) {
+  html = html.replace(/[\n\s]+/g, '')
+
   var alert = document.querySelector('.mui-popup-in')
   if (alert) {
-    // 已有弹窗，推入队
+    // 防止重复
+    if (html === window.dialogCurrentHtml) {
+      console.log('发现与当前弹窗重发，自动忽略')
+      return true
+    }
+    for (var i = 0; i < window.dialogHtmlQueue.length; i++) {
+      if (window.dialogHtmlQueue[i] === html) {
+        console.log('发现历史重发弹窗，自动忽略')
+        return true
+      }
+    }
+
+    // 推入队
+    console.log('发现当前有弹窗，自动入队')
+    window.dialogHtmlQueue.push(html)
     window.dialogQueue.push(callback)
     return true
   }
+  window.dialogCurrentHtml = html
   return false
 }
 
@@ -32,7 +51,7 @@ function continueAlert () {
  * @param callback
  * @returns {newcallback}
  */
-function wrapperCallback(callback) {
+function wrapperCallback (callback) {
   var newcallback = function (param) {
     callback(param)
     setTimeout(() => {
@@ -51,7 +70,7 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
   var newcallback = wrapperCallback(callback)
   var isHasAlert = isHaveAlert(() => {
     alertZoom(contentHtml, newcallback, close, className)
-  })
+  }, contentHtml)
   if (isHasAlert) {
     return
   }
@@ -129,7 +148,7 @@ function alertSky (titleHtml, contentHtml = '', iconType = '', callback = null, 
   var newcallback = wrapperCallback(callback)
   var isHasAlert = isHaveAlert(() => {
     alertSky(titleHtml, contentHtml, iconType, newcallback, close, classname)
-  })
+  }, contentHtml)
   if (isHasAlert) {
     return
   }
@@ -218,7 +237,7 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
   var newcallback = wrapperCallback(callback)
   var isHasAlert = isHaveAlert(() => {
     alertSimple(contentHtml, btnString, newcallback, close)
-  })
+  }, contentHtml)
   if (isHasAlert) {
     return
   }
@@ -263,7 +282,7 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
   var newcallback = wrapperCallback(callback)
   var isHasAlert = isHaveAlert(() => {
     alertHtml(html, newcallback, wrapperClassName)
-  })
+  }, html)
   if (isHasAlert) {
     return
   }
