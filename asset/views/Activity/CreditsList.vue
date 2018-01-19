@@ -29,7 +29,7 @@
                 </p>
               </div>
               <p>{{third.user_name}}</p>
-              <p class="cions">贡献值<i>{{third.coins}}</i></p>
+              <p class="cions">成长值<i>{{third.credits}}</i></p>
               <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -43,7 +43,7 @@
                 </p>
               </div>
               <p>{{first.user_name}}</p>
-              <p class="cions">贡献值<i>{{first.coins}}</i></p>
+              <p class="cions">成长值<i>{{first.credits}}</i></p>
               <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -57,7 +57,7 @@
                 </p>
               </div>
               <p>{{second.user_name}}</p>
-              <p class="cions">贡献值<i>{{second.coins}}</i></p>
+              <p class="cions">成长值<i>{{second.credits}}</i></p>
               <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
           </ul>
@@ -77,7 +77,7 @@
             </div>
             <div class="detail">
               <p>{{item.user_name}}</p>
-              <p>贡献值<i>{{item.coins}}</i></p>
+              <p>成长值<i>{{item.credits}}</i></p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
@@ -226,6 +226,9 @@
     border-radius: 50px;
     background:#03aef9;
     top: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   /*排名的展示样式*/
   .ranking{
