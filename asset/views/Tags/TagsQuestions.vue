@@ -40,47 +40,58 @@
         :pageMode = true
         class="listWrapper">
       <ul class="recommend_b">
-        <li   v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
-          <div class="description mui-ellipsis-3">{{item.description}}</div>
-          <div class="avatar">
-            <p>
-              <img :src="item.answer_user_avatar_url"/>
-              <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">
-                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-              </svg>
-            </p>
-            <p v-if="item.is_pay_for_view">查看回答</p>
-            <p v-else>1元看答案／看评论</p>
-          </div>
-          <div class="question_info">
-            <p>
-              <span>回答者:</span> {{item.answer_username}}
+        <template v-for="(item, index) in list">
+          <li v-if="item.question_type === 1" @tap.stop.prevent="toDetail(item)">
+            <div class="description mui-ellipsis-3">{{item.description}}</div>
+            <div class="avatar">
+              <p>
+                <img :src="item.answer_user_avatar_url"/>
+                <svg class="icon" aria-hidden="true" v-if="item.answer_user_is_expert">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
+              </p>
+              <p v-if="item.is_pay_for_view">查看回答</p>
+              <p v-else>1元看答案／看评论</p>
+            </div>
+            <div class="question_info">
+              <p>
+                <span>回答者:</span> {{item.answer_username}}
               <i v-if="item.average_rate"></i>
-              <span v-if="item.average_rate">{{item.average_rate}}好评</span>
-            </p>
-            <p>
+                <span v-if="item.average_rate">{{item.average_rate}}好评</span>
+              </p>
+              <p>
                   <span class="support_number">
                     <svg class="icon" aria-hidden="true" >
                     <use xlink:href="#icon-dianzan1"></use>
                     </svg>
                     <i v-if="item.support_number">{{item.support_number}}</i>
                   </span>
-              <span class="comment_number" >
+                <span class="comment_number" >
                     <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                     </svg>
                     <i v-if="item.comment_number">{{item.comment_number}}</i>
                   </span>
-            </p>
-          </div>
-          <div class="component-dianzanList" v-if="item.support_number">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dianzan1"></use>
-            </svg>
-            <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>
-            <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
-          </div>
-        </li>
+              </p>
+            </div>
+            <div class="component-dianzanList" v-if="item.support_number">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dianzan1"></use>
+              </svg>
+              <span  v-for="(supporter, index) in item.supporter_list">{{supporter.name}}</span>
+              <span v-if="item.support_number > item.supporter_list.length">等{{item.support_number}}人</span>
+            </div>
+          </li>
+
+          <li class="mui-table-view-cell hudongWrapper" v-if="item.question_type === 2" @tap.stop.prevent="toDetail(item)">
+            <div class="second mui-ellipsis-2">{{ item.description }}</div>
+            <div class="three">{{ item.answer_num }}人回答<span class="split"></span><span :class="{isFollowed:item.is_followed_question?false:true}">关注问题{{item.follow_num}}</span></div>
+            <div class="respondent mui-ellipsis" v-if="item.answer_num">
+              回答者：<span  v-for="(answer, index) in item.answer_user_list" @tap.stop.prevent="toAvatar(answer.uuid)">{{answer.name}}<i>,</i></span>
+              <i v-if="item.answer_num >  item.answer_user_list.length">等{{item.answer_num}}人</i>
+            </div>
+          </li>
+        </template>
         <!--encodeURIComponent(tag)-->
       </ul>
       </RefreshList>
@@ -110,8 +121,12 @@
       }
     },
     methods: {
-      toDetail (id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        } else {
+          this.$router.pushPlus('/askCommunity/major/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        }
       },
       getTagInfo () {
         postRequest('tags/tagInfo', {
@@ -407,5 +422,53 @@
   }
   .listWrapper{
     top:177px;
+  }
+
+  .hudongWrapper .three {
+    font-size: 12px;
+    color: #b4b4b6;
+    padding-top: 5px;
+    text-align: right;
+  }
+
+  .hudongWrapper .split {
+    position: relative;
+    top: 3px;
+    margin: 0 10px;
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    background: #c8c8c8;
+    transform: scaleX(.5);
+  }
+
+  .hudongWrapper .isFollowed{
+    color:#03aef9;
+  }
+
+  /*回答者的样式*/
+  .hudongWrapper .respondent{
+    width:100%;
+    padding: 12px 15px;
+    background: #f3f4f6;
+    font-size:13px;
+    color:rgb(128,128,128);
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+  .hudongWrapper .respondent span{
+    color: #03aef9;
+  }
+  .hudongWrapper .respondent i{
+    color:rgb(146,146,146);
+    margin-right: 5px;
+  }
+  .hudongWrapper .respondent span:nth-last-of-type(1) i{
+    display: none;
+  }
+  .hudongWrapper .respondent i{
+    font-size:13px;
+    color:rgb(128,128,128);
+    font-style: normal;
   }
 </style>
