@@ -56,10 +56,10 @@
         </div>
 
 
-        <div class="mostInvitations"  v-if="invitationList.show_rank">
+        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/cionsList')">
           <div class="invitation"><span>{{invitationList.user_name}}</span>邀请<i>{{invitationList.invited_users}}</i>人</div>
           <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>{{invitationList.user_credits}}</i></div>
-          <div class="InvitationList" @tap.stop.prevent="$router.pushPlus('/cionsList')">
+          <div class="InvitationList" >
             <img src="../../statics/images/discover-invitation-list2x.png" />
           </div>
           <img src="../../statics/images/goldmedal@2x.png" class="Medal"/>

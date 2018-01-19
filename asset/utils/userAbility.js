@@ -251,6 +251,23 @@ var UserAbility = () => {
       })
     }
   }
+  // 受邀红包样式
+  var InvitationCoupon = (context) => {
+    // 红包请求
+    postRequest('activity/getCoupon', {coupon_type: 4}).then(response => {
+      var code = response.data.code
+      if (code !== 1000) {
+        window.mui.alert(response.data.message)
+        window.mui.back()
+      }
+      // 红包弹窗
+      var Coupon = response.data.data
+      alertGetCoupon(context, Coupon)
+      // 领取成功提示
+      window.mui.toast(response.data.data.tip)
+    })
+  }
+
   // 签到列表
   var signIGift = (context) => {
     var userInfo = getLocalUserInfo()
@@ -374,7 +391,8 @@ var UserAbility = () => {
     jumpJudgeGrade: jumpJudgeGrade,
     signIGift: signIGift,
     logout: logout,
-    jumpToTagDetail
+    jumpToTagDetail: jumpToTagDetail,
+    InvitationCoupon: InvitationCoupon
   }
 }
 

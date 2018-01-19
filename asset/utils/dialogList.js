@@ -299,8 +299,17 @@ function alertGetCoupon (context, Coupon) {
     //
       alertHtml(html, (index) => {
         if (index === 0) {
-          context.$router.pushPlus('/my/Finance')
-          return true
+          if (Coupon.coupon_type === 4) {
+            setTimeout(() => {
+              context.$router.pushPlus('/askCommunity/majors')
+            }, 1000)
+            return true
+          } else {
+            setTimeout(() => {
+              context.$router.pushPlus('/my/Finance')
+            }, 1000)
+            return true
+          }
         }
       }, 'animationContainerWrapper')
       setTimeout(() => {
