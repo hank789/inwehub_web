@@ -69,7 +69,7 @@
               <p>{{item.rank}}</p>
             </div>
             <div class="cions-avatar">
-              <img :src="item.user_avatar_url"/>
+              <img :src="item.user_avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
               <svg class="icon" aria-hidden="true" v-if="item.is_expert">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
