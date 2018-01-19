@@ -32,8 +32,13 @@
         </div>
         <ul>
           <!--搜素到的标签名 -->
-          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
-            {{item.text}}<span v-if="index === 0 && typeof(item.value) === 'string'">  (新标签)</span>
+          <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
+            {{list[0].text}}<span>  (新标签)</span>
+            <i class="bot"></i>
+          </li>
+
+          <li v-else="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
+            {{item.text}}
             <i class="bot"></i>
           </li>
 
@@ -64,6 +69,14 @@
         sort: 1,
         selectNum: 0,
         tagName: []
+      }
+    },
+    computed: {
+      isNewTag () {
+        if (this.list[0] && typeof (this.list[0].value) === 'string') {
+          return true
+        }
+        return false
       }
     },
     methods: {
@@ -317,7 +330,7 @@
 
   /*按钮的color*/
 
-  .mui-popup-buttons span..mui-popup-buttons span.mui-popup-button {
+  .mui-popup-buttons span.mui-popup-buttons span.mui-popup-button {
     color: #808080;
   }
 </style>
