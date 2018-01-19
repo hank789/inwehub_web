@@ -9,7 +9,7 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动回答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/interactions')">互动问答</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>
@@ -22,23 +22,24 @@
     </div>
     <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
-    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
-
     <div class="freeQuestion-container comment-container margin-bottom-13">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
-      <div class="freeQuestion-upvote">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-zan"></use>
-        </svg>
-        {{data.feed.support_number}}
-      </div>
-      <div class="freeQuestion-comment">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun"></use>
-        </svg>
-        {{data.feed.comment_num}}
-      </div>
+      <!--<div class="freeQuestion-upvote">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-zan"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.support_number}}-->
+      <!--</div>-->
+      <!--<div class="freeQuestion-comment">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-pinglun"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.comment_num}}-->
+      <!--</div>-->
     </div>
+
+
+    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 margin-5-0-0 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>

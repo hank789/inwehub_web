@@ -15,6 +15,19 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
+      <!--导航栏-->
+      <div class="menu">
+        <span @tap.stop.prevent="$router.replace('')">关注</span>
+        <span class="bold" @tap.stop.prevent="$router.replace('')">全部<i></i></span>
+        <span @tap.stop.prevent="">问答</span>
+        <span @tap.stop.prevent="">分享</span>
+        <span @tap.stop.prevent="">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+          </svg>
+        </span>
+        <i class="bot"></i>
+      </div>
 
       <RefreshList
         ref="RefreshList"
@@ -338,11 +351,55 @@
 </script>
 
 <style lang="less" scoped>
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+  /*菜单*/
+  .menu{
+    width:100%;
+    height:39px;
+    background: #FFFFFF;
+    font-size:14px;
+    color: #444444;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+  }
+  .menu span{
+    position:relative;
+  }
+  .menu span.bold{
+    font-weight: 500;
+  }
+  .menu span  i{
+    position:absolute;
+    width:28px;
+    height:1.5px;
+    border-radius: 50px;
+    background:#03aef9;
+    top: 28.4px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .menu span svg{
+    font-size: 25px;
+  }
+
   .mui-content{
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 0;
+    top: 39px;
     bottom: 50px;
   }
 
@@ -440,4 +497,6 @@
     -webkit-box-orient: vertical;
     font-size: 16px;
   }
+
+
 </style>
