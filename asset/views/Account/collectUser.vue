@@ -7,15 +7,16 @@
       <h1 class="mui-title">我的关注</h1>
     </header>
 
-    <!--导航栏-->
 
 
     <div class="mui-content">
+      <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="">关注的用户 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/collectQuestion')">关注的问题</span>
-
+        <span @tap.stop.prevent="">用户<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
       </div>
+
 
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
@@ -159,39 +160,31 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 45px;
-    z-index: 10;
+  .menu{
+    width:100%;
+    height:39px;
     background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 50%;
-    height: 100%;
-    float: left;
-    font-size: 14px;
+    font-size:14px;
     color: #444444;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
-
-  .menu span:nth-of-type(1) {
-    color: #3c95f9;
-    position: relative;
+  .menu span:nth-of-type(1){
+    position:relative;
+    color: #03aef9;
   }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 73px;
-    height: 1.5px;
-    left: 30%;
-    bottom: 0.5px;
-    background: #3c95f9;
+  .menu span:nth-of-type(1) i{
+    position:absolute;
+    width:27px;
+    height:1.5px;
+    border-radius: 50px;
+    background:#03aef9;
+    top: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 
   /**/
