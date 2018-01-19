@@ -21,7 +21,7 @@
         <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
         <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
         <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
-        <span @tap.stop.prevent="">
+        <span  @tap.stop.prevent="judge()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhaoguwenyuanshi"></use>
           </svg>
@@ -210,6 +210,27 @@
       }
     },
     methods: {
+      judge () {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: 5
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          console.error(response.data.data)
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              this.$router.pushPlus('/nearbyCompany')
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
       chooseType (type) {
         this.search_type = type
         this.search_type = type
