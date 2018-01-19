@@ -277,11 +277,14 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
  * @param html
  * @param callback
  */
-function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in alertHtml') {
+function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in alertHtml', showCallback) {
   // queue start
   var newcallback = wrapperCallback(callback)
   var isHasAlert = isHaveAlert(() => {
     alertHtml(html, newcallback, wrapperClassName)
+    if (showCallback) {
+      showCallback()
+    }
   }, html)
   if (isHasAlert) {
     return
@@ -325,6 +328,10 @@ function alertHtml (html, callback, wrapperClassName = 'mui-popup mui-popup-in a
         }
       })(j)
     }
+  }
+
+  if (showCallback) {
+    showCallback()
   }
 }
 

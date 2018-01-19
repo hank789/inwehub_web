@@ -307,22 +307,23 @@ function alertGetCoupon (context, Coupon) {
             return true
           }
         }
-      }, 'animationContainerWrapper')
-      setTimeout(() => {
-        var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
-        var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
-        var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
-        var stage = select(canvas, window.lib.红包)
-        run(canvas, stage, domOverlayContainer, animContainer, window.lib)
-        var apper = document.getElementById('animationContainerWrapper').querySelector('#my-cash')
-        var wallet = document.getElementById('animationContainerWrapper').querySelector('#my-wallet')
+      }, 'animationContainerWrapper', () => {
         setTimeout(() => {
-          apper.style.opacity = '1'
-        }, 1500)
-        setTimeout(() => {
-          wallet.style.opacity = '1'
-        }, 1000)
-      }, 400)
+          var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
+          var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
+          var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
+          var stage = select(canvas, window.lib.红包)
+          run(canvas, stage, domOverlayContainer, animContainer, window.lib)
+          var apper = document.getElementById('animationContainerWrapper').querySelector('#my-cash')
+          var wallet = document.getElementById('animationContainerWrapper').querySelector('#my-wallet')
+          setTimeout(() => {
+            apper.style.opacity = '1'
+          }, 1500)
+          setTimeout(() => {
+            wallet.style.opacity = '1'
+          }, 1000)
+        }, 400)
+      })
     //
     })
   }
