@@ -17,10 +17,10 @@
     <div class="mui-content feedWrapper" v-show="!loading">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('')">关注</span>
-        <span class="bold" @tap.stop.prevent="$router.replace('')">全部<i></i></span>
-        <span @tap.stop.prevent="">问答</span>
-        <span @tap.stop.prevent="">分享</span>
+        <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
+        <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
+        <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
+        <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
         <span @tap.stop.prevent="">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhaoguwenyuanshi"></use>
@@ -33,8 +33,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'feed/list'"
-        :prevOtherData="{}"
-        :nextOtherData="{}"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
@@ -155,7 +155,8 @@
       list: [],
       commentTargetComponent: null,
       is_company: currentUser.is_company,
-      emptyDescription: '暂无您关注的内容'
+      emptyDescription: '暂无您关注的内容',
+      search_type: 2
     }),
     created () {
       this.getHomeData()
@@ -200,8 +201,19 @@
       autoTextArea()
       saveLocationInfo()
     },
-    computed: {},
+    computed: {
+      prevOtherData () {
+        return {search_type: this.search_type}
+      },
+      nextOtherData () {
+        return {search_type: this.search_type}
+      }
+    },
     methods: {
+      chooseType (type) {
+        this.search_type = type
+        this.search_type = type
+      },
       refreshPageData () {
         this.$refs.ctextarea.refreshPageData()
       },
