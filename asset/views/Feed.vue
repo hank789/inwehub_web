@@ -191,7 +191,9 @@
       commentTextarea
     },
     activated: function () {
-
+      if (this.$route.query.refresh) {
+        this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+      }
     },
     mounted () {
       // 新手任务

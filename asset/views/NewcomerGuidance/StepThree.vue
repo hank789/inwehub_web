@@ -69,7 +69,7 @@
     methods: {
       close () {
         if (this.$route.query.from === 'feed') {
-          window.mui.back()
+          this.$router.pushPlus('/home?refresh=1')
         } else {
           this.$router.pushPlus('/my')
         }
