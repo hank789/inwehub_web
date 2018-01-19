@@ -46,8 +46,8 @@
 
         <template v-for="(item, index) in list">
 
-          <Swiper v-if="index===2"></Swiper>
-          <ServiceRecommendation v-if="index===15" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
+          <Swiper v-if="index===2 && search_type === 2"></Swiper>
+          <ServiceRecommendation v-if="index===15 && search_type === 2" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
 
 
           <div v-if="item.feed_type === 5 && item.feed.domain === ''">
