@@ -24,7 +24,7 @@
         :pageMode="true"
         class="listWrapper">
         <ul>
-          <li class="tag-title" v-for="(item, index) in list">
+          <li class="tag-title" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.tag_name)">
             <div class="tag-l" v-if="item.tag_logo">
               <img :src="item.tag_logo">
             </div>
@@ -51,6 +51,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
 
   const PublishAnswers = {
     data: () => ({
@@ -63,6 +64,9 @@
       RefreshList
     },
     methods: {
+      toDetail (text) {
+        userAbility.jumpToTagDetail(text)
+      }
     },
     mounted () {
     },

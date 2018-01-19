@@ -3,7 +3,7 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close()">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
         <div class="next-step" @tap.stop.prevent="submit()">下一步</div>
@@ -51,12 +51,19 @@
       RefreshList
     },
     methods: {
+      close () {
+        if (this.$route.query.from === 'feed') {
+          window.mui.back()
+        } else {
+          this.$router.pushPlus('/my')
+        }
+      },
       changeClass (item) {
         Vue.set(item, 'checked', !item.checked)
       },
       submit () {
         if (this.selectTags.length === 0) {
-          this.$router.replace('/userGuide/steptwo')
+          this.$router.replace('/userGuide/steptwo?from=' + this.$route.query.from)
           return
         }
 
@@ -68,7 +75,7 @@
             window.mui.toast(response.data.message)
             return
           }
-          this.$router.replace('/userGuide/steptwo')
+          this.$router.replace('/userGuide/steptwo?from=' + this.$route.query.from)
         })
       },
       getData () {

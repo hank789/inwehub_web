@@ -3,10 +3,10 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close()">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
-        <div class="next-step" @tap.stop.prevent="$router.push('/userGuide/stepthree')">下一步</div>
+        <div class="next-step" @tap.stop.prevent="toNext()">下一步</div>
         <div class="invitation-text">
           <p>关注您感兴趣的人</p>
           <p>关注Ta在平台上的动态</p>
@@ -81,6 +81,16 @@
       RefreshList
     },
     methods: {
+      toNext () {
+        this.$router.replace('/userGuide/stepthree?from=' + this.$route.query.from)
+      },
+      close () {
+        if (this.$route.query.from === 'feed') {
+          window.mui.back()
+        } else {
+          this.$router.pushPlus('/my')
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false

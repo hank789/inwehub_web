@@ -6,7 +6,7 @@
     <div class="description">{{description}}</div>
 
     <div class="buttonWrapper" v-if="description === '暂无您关注的内容'">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/userGuide/steptwo')">去关注</button>
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">去关注</button>
     </div>
   </div>
 </template>

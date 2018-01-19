@@ -84,6 +84,8 @@
         </ul>
       </template>
       <Empty v-if="!loading && list.length === 0"></Empty>
+
+      <div v-if="!loading && list.length !== 0" class="desc">如邀请用户数相同，则贡献值和等级高的用户 排名优先</div>
     </div>
   </div>
 </template>
@@ -462,5 +464,12 @@
     .ranking-content li:nth-of-type(2){
       width:130px;
     }
+  }
+
+  .desc{
+    font-size:13px;
+    color:#808080;
+    padding-left:4%;
+    margin-top:10px;
   }
 </style>

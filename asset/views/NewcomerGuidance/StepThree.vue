@@ -3,10 +3,10 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.push('/my')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close()">
           <use xlink:href="#icon-guanbi"></use>
         </svg>
-        <div class="next-step" @tap.stop.prevent="$router.push('/my')">完成</div>
+        <div class="next-step" @tap.stop.prevent="close()">完成</div>
         <div class="invitation-text">
           <p>关注几个互动问答</p>
           <p>参考更多用户的解答</p>
@@ -67,6 +67,13 @@
       Empty
     },
     methods: {
+      close () {
+        if (this.$route.query.from === 'feed') {
+          window.mui.back()
+        } else {
+          this.$router.pushPlus('/my')
+        }
+      },
       skip (type, id) {
         switch (type) {
           case 1:
