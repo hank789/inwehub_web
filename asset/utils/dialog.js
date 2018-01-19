@@ -53,10 +53,10 @@ function continueAlert () {
  */
 function wrapperCallback (callback) {
   var newcallback = function (param) {
-    callback(param)
     setTimeout(() => {
       continueAlert()
     }, 1000)
+    return callback(param)
   }
   return newcallback
 }
