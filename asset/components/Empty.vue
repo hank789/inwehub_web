@@ -4,6 +4,10 @@
       <use xlink:href="#icon-zanwushuju"></use>
     </svg>
     <div class="description">{{description}}</div>
+
+    <div class="buttonWrapper" v-if="description === '暂无您关注的内容'">
+      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/userGuide/steptwo')">去关注</button>
+    </div>
   </div>
 </template>
 
@@ -35,5 +39,18 @@
       font-size: 12px;
       color: #c8c8c8;
     }
+  }
+
+  .buttonWrapper{
+    text-align: center;
+    margin-top:20px;
+  }
+
+  .mui-btn{
+    display: inline-block;
+    padding:10px 32px;
+    font-size:16px;
+    width:auto;
+    border-radius: 50px;
   }
 </style>

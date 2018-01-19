@@ -2,7 +2,9 @@
   <div class="mui-scroll-wrapper" :class="{hideUpToRefreshDescription:!isShowUpToRefreshDescription}"
        id="refreshContainer" v-show="!loading">
     <div class="mui-scroll">
-      <Empty v-if="nothing===1 && autoShowEmpty"></Empty>
+      <Empty v-if="nothing===1 && autoShowEmpty"
+        :description="emptyDescription"
+      ></Empty>
       <div class="listWrapper" id="listWrapper" v-else>
         <slot></slot>
       </div>
@@ -28,6 +30,10 @@
       }
     },
     props: {
+      emptyDescription: {  // 空描述
+        type: String,
+        default: '暂时还没有数据呀～'
+      },
       isShowUpToRefreshDescription: {  // 是否显示上拉刷新的提示区域
         type: Boolean,
         default: true

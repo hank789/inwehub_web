@@ -25,6 +25,7 @@
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
+        :emptyDescription="emptyDescription"
         class="listWrapper"
       >
 
@@ -140,7 +141,8 @@
       loading: false,
       list: [],
       commentTargetComponent: null,
-      is_company: currentUser.is_company
+      is_company: currentUser.is_company,
+      emptyDescription: '暂无您关注的内容'
     }),
     created () {
       this.getHomeData()
