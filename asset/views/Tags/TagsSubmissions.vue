@@ -6,8 +6,13 @@
     </header>
     <div class="mui-content absolute">
       <div class="tag-title">
-        <div class="tag-l">
+        <div class="tag-l" v-if="tagDetail.logo">
           <img :src="tagDetail.logo">
+        </div>
+        <div class="tag-l bg-grey" v-else>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+          </svg>
         </div>
         <div class="tag-r">
           <p>
@@ -323,6 +328,21 @@
     width: 100%;
     height:100%;
     border-radius: 4px;
+  }
+  .tag-l.bg-grey{
+    background: #ececee;
+    border-radius: 4px;
+    position: relative;
+  }
+  .tag-l.bg-grey svg{
+    color: #c8c8c8;
+    font-size: 50px;
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom: 0;
+    margin:auto;
   }
   .tag-r{
     height:92px;
