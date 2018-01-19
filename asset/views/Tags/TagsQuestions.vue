@@ -26,8 +26,8 @@
     <!--导航栏-->
     <div class="menu">
       <span @tap.stop.prevent="">问答  <i></i></span>
-      <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/discover')">动态</span>
-      <span @tap.stop.prevent="$router.replace('/tag/detail/' + tagName + '/users')">用户</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">动态</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users')">用户</span>
       <i class="bot"></i>
     </div>
       <!--推荐问答 -->
