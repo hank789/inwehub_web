@@ -262,6 +262,9 @@
     border-radius: 50px;
     background:#03aef9;
     top: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 
   /*问答列表*/

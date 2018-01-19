@@ -300,14 +300,10 @@ function alertGetCoupon (context, Coupon) {
       alertHtml(html, (index) => {
         if (index === 0) {
           if (Coupon.coupon_type === 4) {
-            setTimeout(() => {
-              context.$router.pushPlus('/askCommunity/majors')
-            }, 1000)
+            context.$router.pushPlus('/askCommunity/majors')
             return true
           } else {
-            setTimeout(() => {
-              context.$router.pushPlus('/my/Finance')
-            }, 1000)
+            context.$router.pushPlus('/my/Finance')
             return true
           }
         }
