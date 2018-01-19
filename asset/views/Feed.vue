@@ -156,7 +156,7 @@
       commentTargetComponent: null,
       is_company: currentUser.is_company,
       emptyDescription: '暂无您关注的内容',
-      search_type: 2
+      search_type: 1
     }),
     created () {
       this.getHomeData()
