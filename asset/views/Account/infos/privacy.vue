@@ -3,7 +3,6 @@
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">隐私设置</h1>
-      <!--<a class="mui-icon myicon myicon-share mui-pull-right"></a>-->
     </header>
 
     <div class="mui-content" v-show="!loading">

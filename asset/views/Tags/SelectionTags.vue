@@ -8,7 +8,8 @@
     <div class="mui-content absolute">
       <ul class="myLabel" >
         <div>
-          <p>标签（{{selectNum}}／20） </p>
+          <!--{{selectNum}}-->
+          <p>标签（{{skill_tags.length}}／20） </p>
           <p>让机遇更精准匹配，让内容更容易检索 </p>
           <button @tap.stop.prevent="keepTags()">确认保存</button>
         </div>
@@ -31,9 +32,14 @@
         </div>
         <ul>
           <!--搜素到的标签名 -->
-          <li v-if="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
-            {{item.text}}
+          <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
+            {{list[0].text}}<span>  (新标签)</span>
             <i class="bot"></i>
+          </li>
+
+          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)" v-if="!(isNewTag && index === 0)">
+              {{item.text}}
+              <i class="bot"></i>
           </li>
 
         </ul>
@@ -63,6 +69,14 @@
         sort: 1,
         selectNum: 0,
         tagName: []
+      }
+    },
+    computed: {
+      isNewTag () {
+        if (this.list[0] && typeof (this.list[0].value) === 'string') {
+          return true
+        }
+        return false
       }
     },
     methods: {
@@ -104,6 +118,7 @@
           if (this.skill_tags.length < 20) {
             this.skill_tags.push(list)
             window.mui.toast('添加成功')
+            this.searchText = ''
           } else {
             window.mui.toast('最多添加20个标签')
           }
@@ -119,8 +134,7 @@
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
           if (response.data.data.tags.length > 0) {
@@ -316,7 +330,7 @@
 
   /*按钮的color*/
 
-  .mui-popup-buttons span..mui-popup-buttons span.mui-popup-button {
+  .mui-popup-buttons span.mui-popup-buttons span.mui-popup-button {
     color: #808080;
   }
 </style>

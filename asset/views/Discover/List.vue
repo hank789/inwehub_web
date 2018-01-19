@@ -17,43 +17,55 @@
         class="listWrapper">
         <!--类别-->
         <div class="discover-container">
-        <div class="community">顾问社区</div>
-        <ul class="categoryMenu">
-          <li @tap.stop.prevent="judge(1)">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanyewenda-"></use>
-              </svg>
-            </div>
-            <p>问答社区</p>
-            <i>分红</i>
-          </li>
-          <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tijiaowenzhang1"></use>
-              </svg>
-            </div>
-            <p>动态分享</p>
-          </li>
-          <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-huodongjiyu"></use>
-              </svg>
-            </div>
-            <p>企业服务</p>
-          </li>
-          <li @tap.stop.prevent="judge(5)">
-            <div class="discover-round">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-fujinqiye1"></use>
-              </svg>
-            </div>
-            <p>附近发现</p>
-          </li>
-        </ul>
+          <ul class="categoryMenu">
+            <li @tap.stop.prevent="judge(1)">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-zhuanyewenda-"></use>
+                </svg>
+              </div>
+              <p>问答社区</p>
+              <i>分红</i>
+            </li>
+            <li @tap.stop.prevent="$router.pushPlus('/discover/hottopic')">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tijiaowenzhang1"></use>
+                </svg>
+              </div>
+              <p>动态分享</p>
+            </li>
+            <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-huodongjiyu"></use>
+                </svg>
+              </div>
+              <p>企业服务</p>
+            </li>
+            <li @tap.stop.prevent="judge(5)">
+              <div class="discover-round">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fujinqiye1"></use>
+                </svg>
+              </div>
+              <p>附近发现</p>
+            </li>
+          </ul>
         </div>
+
+
+        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/cionsList')">
+          <div class="invitation"><span>{{invitationList.user_name}}</span>邀请<i>{{invitationList.invited_users}}</i>人</div>
+          <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>{{invitationList.user_credits}}</i></div>
+          <div class="InvitationList" >
+            <img src="../../statics/images/discover-invitation-list2x.png" />
+          </div>
+          <img src="../../statics/images/goldmedal@2x.png" class="Medal"/>
+        </div>
+        <div class="grey" v-else></div>
+
+
         <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
           <p class="recommend_title">精选推荐</p>
@@ -70,7 +82,7 @@
               <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '6'">互动回答</p>
               <p class="answer-fouce" v-if="recommend.read_type == '3'">{{recommend.data.answer_number}}人回答<i></i>{{recommend.data.follower_number}}关注</p>
-              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}%</span></p>
+              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}</span></p>
               <p class="answer-fouce" v-else-if="recommend.read_type == '6' || recommend.read_type == '1'">{{recommend.data.comment_number}}评论<i></i>{{recommend.data.support_number}}赞</p>
             </div>
           </li>
@@ -96,6 +108,7 @@
         swiperOption: {},
         servicesList: [],
         list: [],
+        invitationList: [],
         is_company: currentUser.is_company
       }
     },
@@ -130,6 +143,20 @@
 //          alertDiscoverCompany(this)
 //        }
 //      },
+      getInvitation () {
+        postRequest(`rank/userInfo`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            this.invitationList = response.data.data
+          }
+        })
+      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -200,12 +227,10 @@
         }
       }
     },
-    mounted () {},
-    updated () {
-//      console.error(this.list)
-//      /EnrollmentStatus/11   活动机遇
-
-    }
+    mounted () {
+      this.getInvitation()
+    },
+    updated () {}
   }
 </script>
 <style scoped="scoped">
@@ -248,7 +273,6 @@
     background: #FFFFFF;
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
   }
 
   .categoryMenu li{
@@ -329,7 +353,7 @@
   }
   .recommend li{
     width:92%;
-    padding:15px 0 13px 0;
+    padding:0px 0 13px 0;
     overflow: hidden;
     background: #FFFFFF;
     margin-bottom: 10px;
@@ -455,5 +479,67 @@
     margin: 0 9px -3px 9px;
 
 
+  }
+
+  /*榜单*/
+  .mostInvitations{
+    width:92%;
+    height:60px;
+    background: #fdc707;
+    margin: 7px 4%;
+    border-radius: 12px;
+    padding-left: 15px;
+    padding-top: 8px;
+    position: relative;
+  }
+  .mostInvitations .Medal{
+    width: 32px;
+    position: absolute;
+    right:18px;
+    top:0;
+  }
+  .invitation{
+    font-size:12px;
+    color: #8e4c02;
+  }
+  .invitation span{
+    font-size:16px;
+    font-weight:500;
+    color: #8e4c02;
+    margin-right: 2px;
+  }
+  .invitation i{
+    font-size:12px;
+    color:#235280;
+  }
+  .credits-cions{
+    font-size:12px;
+    color: #8e4c02;
+  }
+  .credits-cions i{
+    color: #235280;
+  }
+  .InvitationList{
+    position: absolute;
+    width:92px;
+    height:34px;
+    border:1px solid #fde07d;
+    border-radius: 13px;
+    font-size: 14px;
+    color: #b56102;
+    line-height: 34px;
+    text-align: center;
+    right: 56px;
+    top: 13px;
+    box-shadow:0px 0px 2px rgba(81, 55, 7, 0.5) inset;
+    text-shadow: 0 0 1px rgb(238,134,16);
+  }
+  .InvitationList img{
+    height:20px;
+    margin-top: 6px;
+  }
+  .grey{
+    width:100%;
+    height:10px;
   }
 </style>

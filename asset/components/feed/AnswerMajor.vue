@@ -9,7 +9,7 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业回答', "")}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业问答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true">
@@ -24,8 +24,8 @@
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="interval margin-top-6">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
 
@@ -54,6 +54,7 @@
 
   import Avatar from '../../components/image/Avatar.vue'
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
   // import { getLocalUserInfo } from '../../utils/user'
 
   // const currentUser = getLocalUserInfo()
@@ -77,6 +78,9 @@
     mounted () {
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()

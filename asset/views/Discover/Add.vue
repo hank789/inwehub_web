@@ -42,39 +42,39 @@
           <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}" v-if="false"></label><!--匿名--></span>
         </div>
       </div>
-      <div class="component-button-5-03aef9 button-wrapper padding-20-15">
+      <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
       </div>
+    </div>
 
-      <div class="container-bottom-menus">
+    <div class="container-bottom-menus">
         <span @tap.stop.prevent="toUser">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-icon-test1"></use>
           </svg>
         </span>
-        <span @tap.stop.prevent="totags">
+      <span @tap.stop.prevent="totags">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
-        <span @tap.stop.prevent="jumpToLinkMode()">
+      <span @tap.stop.prevent="jumpToLinkMode()">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-lianjie"></use>
           </svg>
         </span>
-        <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-dingwei1"></use>
-          </svg>
-          {{selectedAddress}}
-      </div>
-      </div>
+      <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dingwei1"></use>
+        </svg>
+        {{selectedAddress}}
+        </div>
     </div>
 
     <uploadImage ref="uploadImage"
       :isMultiple="true"
       @success="uploadImageSuccess"
-      :ImageMaximum="maxImageCount"
+      :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
   </div>
 </template>
@@ -87,7 +87,6 @@
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
-  import {getIndexByIdArray} from '../../utils/array'
 
   export default {
     data () {
@@ -455,6 +454,9 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
     background: #fff;
+  }
+
+  .mui-ios .mui-content{
     overflow: hidden !important;
   }
 
@@ -511,5 +513,9 @@
 
   #discoverAddJeditor .ql-snow .ql-editor a{
     text-decoration: none;
+  }
+
+  #button-wrapper{
+    padding-bottom:64px !important;
   }
 </style>

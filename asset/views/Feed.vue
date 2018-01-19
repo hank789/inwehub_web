@@ -15,16 +15,30 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
+      <!--导航栏-->
+      <div class="menu">
+        <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
+        <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
+        <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
+        <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
+        <span  @tap.stop.prevent="judge()">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+          </svg>
+        </span>
+        <i class="bot"></i>
+      </div>
 
       <RefreshList
         ref="RefreshList"
         v-model="list"
         :api="'feed/list'"
-        :prevOtherData="{}"
-        :nextOtherData="{}"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
+        :emptyDescription="emptyDescription"
         class="listWrapper"
       >
 
@@ -32,8 +46,8 @@
 
         <template v-for="(item, index) in list">
 
-          <Swiper v-if="index===2"></Swiper>
-          <ServiceRecommendation v-if="index===15" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
+          <Swiper v-if="index===2 && search_type === 2"></Swiper>
+          <ServiceRecommendation v-if="index===15 && search_type === 2" :isShow="true" :key="'feed-swiper'"  @alertClick="alertClick"></ServiceRecommendation>
 
 
           <div v-if="item.feed_type === 5 && item.feed.domain === ''">
@@ -140,7 +154,9 @@
       loading: false,
       list: [],
       commentTargetComponent: null,
-      is_company: currentUser.is_company
+      is_company: currentUser.is_company,
+      emptyDescription: '暂无您关注的内容',
+      search_type: 1
     }),
     created () {
       this.getHomeData()
@@ -175,7 +191,9 @@
       commentTextarea
     },
     activated: function () {
-
+      if (this.$route.query.refresh) {
+        this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+      }
     },
     mounted () {
       // 新手任务
@@ -185,8 +203,40 @@
       autoTextArea()
       saveLocationInfo()
     },
-    computed: {},
+    computed: {
+      prevOtherData () {
+        return {search_type: this.search_type}
+      },
+      nextOtherData () {
+        return {search_type: this.search_type}
+      }
+    },
     methods: {
+      judge () {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: 5
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          console.error(response.data.data)
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              this.$router.pushPlus('/nearbyCompany')
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
+      chooseType (type) {
+        this.search_type = type
+        this.search_type = type
+      },
       refreshPageData () {
         this.$refs.ctextarea.refreshPageData()
       },
@@ -275,22 +325,28 @@
             window.mui.toast(response.data.message)
             return
           }
+        // 是否弹受邀红包
+          if (response.data.data.invitation_coupon.show) {
+            userAbility.InvitationCoupon(this)
+          }
         })
       },
       toDetail (item) {
         if (item.feed_type === 7) item.url += '?goback=1'
 
         switch (item.feed_type) {
-          case 1:
           case 2:
+          case 9:
+          case 12:
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.feed.question_id, 'list-detail-page')
+            break
+          case 1:
           case 3:
           case 4:
           case 6:
           case 7:
           case 8:
-          case 9:
           case 11:
-          case 12:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 10:
@@ -330,11 +386,55 @@
 </script>
 
 <style lang="less" scoped>
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+  /*菜单*/
+  .menu{
+    width:100%;
+    height:39px;
+    background: #FFFFFF;
+    font-size:14px;
+    color: #444444;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+  }
+  .menu span{
+    position:relative;
+  }
+  .menu span.bold{
+    font-weight: 500;
+  }
+  .menu span  i{
+    position:absolute;
+    width:28px;
+    height:1.5px;
+    border-radius: 50px;
+    background:#03aef9;
+    top: 28.4px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .menu span svg{
+    font-size: 25px;
+  }
+
   .mui-content{
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 0;
+    top: 39px;
     bottom: 50px;
   }
 
@@ -432,4 +532,6 @@
     -webkit-box-orient: vertical;
     font-size: 16px;
   }
+
+
 </style>

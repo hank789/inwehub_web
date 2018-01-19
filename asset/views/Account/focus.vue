@@ -6,16 +6,13 @@
       <h1 class="mui-title" v-else>关注Ta的</h1>
     </header>
     <div class="mui-content absolute">
-      <div class="mui-scroll-wrapper task-list" id="pullrefresh">
-        <div class="mui-scroll">
-
-          <div class="container" v-if="!this.list.length && !loading">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zanwushuju"></use>
-            </svg>
-            <p>暂时还没有数据呀～</p>
-          </div>
-
+      <RefreshList
+        v-model="list"
+        :api="'follow_my/users'"
+        :pageMode="true"
+        :prevOtherData="{uuid: this.$route.params.id}"
+        :nextOtherData="{uuid: this.$route.params.id}"
+        class="listWrapper">
           <ul class="my-focus">
             <li class="my-focus-item" v-for="(item, index) in list">
               <img :src="item.user_avatar_url"
@@ -35,13 +32,12 @@
               <i class="bot"></i>
             </li>
           </ul>
-        </div>
-      </div>
+      </RefreshList>
     </div>
-
   </div>
 </template>
 <script>
+  import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
@@ -55,55 +51,10 @@
         uuid: currentUser.uuid
       }
     },
+    components: {
+      RefreshList
+    },
     methods: {
-      initData () {
-        this.pulldownRefresh()
-      },
-      pulldownRefresh () {
-        setTimeout(() => {
-          this.getPrevList()
-        }, 1000)
-      },
-      pullupRefresh () {
-        setTimeout(() => {
-          this.getNextList()
-        }, 1000)
-      },
-      getPrevList () {
-        postRequest('follow_my/users', {
-          uuid: this.$route.params.id
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.length > 0) {
-            this.list = response.data.data
-          }
-          this.loading = 0
-          window.mui('#pullrefresh').pullRefresh().endPulldownToRefresh() // refresh completed
-        })
-      },
-      getNextList () {
-        postRequest('follow_my/users', {
-          bottom_id: this.bottomId,
-          uuid: this.$route.params.id
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.length > 0) {
-            this.list = this.list.concat(response.data.data)
-          }
-          this.loading = 0
-          window.mui('#pullrefresh').pullRefresh().endPullupToRefresh(false)
-        })
-      },
       collectProfessor (id, index) {
         postRequest(`follow/user`, {
           id: id
@@ -138,26 +89,6 @@
       // showInwehubWebview();
     },
     mounted () {
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-collect')
-        this.initData()
-      })
-      window.mui.init({
-        pullRefresh: {
-          container: '#pullrefresh',
-          down: {
-            callback: this.pulldownRefresh
-          },
-          up: {
-            contentdown: '下拉可以刷新',
-            contentover: '释放立即刷新',
-            contentrefresh: '正在刷新...',
-            callback: this.pullupRefresh
-          }
-        }
-      })
-      this.getPrevList()
     }
   }
 </script>

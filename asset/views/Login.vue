@@ -99,7 +99,7 @@
     },
     beforeRouteEnter (to, from, next) {
       if (window.mui.os.wechat) {
-        if (window.isLocalEnv) {
+        if (process.env.NODE_ENV === 'development') {
           next()
           return
         }

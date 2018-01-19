@@ -9,7 +9,7 @@
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
       <div class="tags" v-if="answer.question.tags.length">
-        <p v-for="(item, index) in answer.question.tags">{{item.name}}</p>
+        <p v-for="(item, index) in answer.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</p>
       </div>
 
       <Question
@@ -120,6 +120,7 @@
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import { alertAnswerRepeat } from '../../utils/dialogList'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import userAbility from '../../utils/userAbility'
 
   import CountDown from 'vue2-countdown'
 
@@ -165,6 +166,9 @@
     mounted () {
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },

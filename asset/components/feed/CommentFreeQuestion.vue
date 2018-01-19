@@ -9,7 +9,7 @@
             </svg>
           </div>
         </div>
-        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
+        <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动回答', "")}}{{data.feed.answer_user_name}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/interactions')">互动问答</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>
@@ -20,29 +20,30 @@
         </div>
       </div>
     </div>
-    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content"></div>
+    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
-    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.answer_content}}</div>
-
-    <div class="freeQuestion-container comment-container margin-bottom-13">
+    <div class="freeQuestion-container comment-container ">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
-      <div class="freeQuestion-upvote">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-zan"></use>
-        </svg>
-        {{data.feed.support_number}}
-      </div>
-      <div class="freeQuestion-comment">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun"></use>
-        </svg>
-        {{data.feed.comment_num}}
-      </div>
+      <!--<div class="freeQuestion-upvote">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-zan"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.support_number}}-->
+      <!--</div>-->
+      <!--<div class="freeQuestion-comment">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-pinglun"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.comment_num}}-->
+      <!--</div>-->
     </div>
 
+
+    <div class="mui-ellipsis-3 answer-content" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
+
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 margin-5-0-0 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
+      <div class="color-808080 font-14  text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="interval margin-top-6">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
     </div>
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
@@ -60,6 +61,7 @@
 
   import Avatar from '../../components/image/Avatar.vue'
   import Invitation from '../../components/feed/QuestionInvitationAnswer.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -83,6 +85,9 @@
 
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -103,7 +108,7 @@
 .comment-container{
   height:19px;
   line-height: 19px;
-  padding: 0 2px;
+  padding: 0 0px;
 }
 .question-answer{
   float: left;
@@ -120,7 +125,7 @@
   color: #444444;
   line-height: 21px;
   margin-bottom: 14px;
-  margin-top: 13px;
+  margin-top: 3px;
 }
 
 

@@ -27,9 +27,8 @@ const router = new VueRouter({
   routes
 })
 
-if (!window.isLocalEnv) {
+if (process.env.NODE_ENV !== 'development') {
   const gaCode = process.env.GA_CODE
-
   ga(router, gaCode)
 }
 
@@ -45,7 +44,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
 
   var nextUrl = ''
   if (window.mui.os.plus) {
-    if (!window.isLocalEnv) {
+    if (process.env.NODE_ENV !== 'development') {
       if (window.mixpanel.track) {
         var matchedRoute = this.resolve(url)
         var mixpanelEvent = 'inwehub:'

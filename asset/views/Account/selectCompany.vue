@@ -38,7 +38,7 @@
             <div class="container-info">
               <p>{{item.name}}</p>
               <p class="mui-ellipsis">
-                <span  v-for="(tags, index) in item.tags"> {{tags}} <i></i></span>
+                <span  v-for="(tags, index) in item.tags" @tap.stop.prevent="toTagDetail(tags)"> {{tags}} <i></i></span>
               </p>
               <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}</span></p>
             </div>
@@ -57,6 +57,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
@@ -106,6 +107,9 @@
       })
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       back () {
         this.$router.go(-1)
       },

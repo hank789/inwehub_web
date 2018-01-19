@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="ask_tags" v-if="tag.length">
-        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
+        <p v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</p>
       </div>
       <div class="form form-ask">
         <div class="textarea-wrapper">
@@ -68,7 +68,7 @@
     <uploadImage ref="uploadImage"
                  :isMultiple="true"
                  @success="uploadImageSuccess"
-                 :ImageMaximum="maxImageCount"
+                 :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
 
     <pay
@@ -98,6 +98,7 @@
   const currentUser = getLocalUserInfo()
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
+
 
   const Ask = {
     data: () => ({
@@ -167,6 +168,9 @@
       this.check()
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       payMoneyChange (money) {
         this.money = money
       },
@@ -429,6 +433,9 @@
 
   .mui-content {
     background-color: #fff;
+  }
+
+  .mui-ios .mui-content{
     overflow: hidden !important;
   }
 

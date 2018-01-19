@@ -15,7 +15,7 @@
       </div>
 
       <div class="ask_tags" v-if="tag.length">
-        <p v-for="(tagName, index) in tag">{{tagName.text}}</p>
+        <p v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</p>
       </div>
 
       <div class="form form-ask">
@@ -70,7 +70,7 @@
     <uploadImage ref="uploadImage"
                  :isMultiple="true"
                  @success="uploadImageSuccess"
-                 :ImageMaximum="maxImageCount"
+                 :ImageMaximum="maxImageCount - - this.images.length"
     ></uploadImage>
 
     <pay v-show="false" :payItems="[]" ref="pay" :pay_object_type="pay_object_type" :pay_object_id="0" :pay_money="money"
@@ -163,6 +163,9 @@
       this.check()
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
@@ -369,8 +372,12 @@
 
   .mui-content {
     background-color: #fff;
+  }
+
+  .mui-ios .mui-content{
     overflow: hidden !important;
   }
+
 
   .mui-bar-nav ~ .mui-content {
     padding-top: 0;

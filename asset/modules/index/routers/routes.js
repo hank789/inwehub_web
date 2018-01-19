@@ -114,6 +114,43 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 新人引导第一步
+    path: '/userGuide/stepone',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第一步',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepOne.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 新人引导第二步
+    path: '/userGuide/steptwo',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第二步',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepTwo.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 新人引导第三步
+    path: '/userGuide/stepthree',
+    name: 'userGuide-stepone',
+    meta: {
+      title: '新人引导第三步',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/NewcomerGuidance/StepThree.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 问答社区-专业问答
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
@@ -176,7 +213,7 @@ const routes = [
   },
   { // 邀请用户
     path: '/RecommendInvitation/:id',
-    name: 'contact',
+    name: 'recommendInvitation',
     meta: {
       title: '邀请用户',
       wechatHideHeader: true
@@ -448,6 +485,54 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 邀请榜；
+    path: '/invitationList',
+    name: 'invitation-list',
+    component: require('../../../views/Activity/InvitationList.vue'),
+    meta: {
+      title: '邀请榜',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 成长榜；
+    path: '/creditsList',
+    name: 'credit-list',
+    component: require('../../../views/Activity/CreditsList.vue'),
+    meta: {
+      title: '成长榜',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 贡献榜；
+    path: '/cionsList',
+    name: 'cions-list',
+    component: require('../../../views/Activity/CionsList.vue'),
+    meta: {
+      title: '贡献榜',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // 检查版本更新
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的
     path: '/my',
     name: 'my',
@@ -508,6 +593,42 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/Tags/SelectionTags.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签问答
+    path: '/tag/detail/:tag/questions',
+    name: 'tag_detail_questions',
+    meta: {
+      title: '标签详情-问答',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsQuestions.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签动态
+    path: '/tag/detail/:tag/discover',
+    name: 'tag_detail_discover',
+    meta: {
+      title: '标签详情-动态',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsSubmissions.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签用户
+    path: '/tag/detail/:tag/users',
+    name: 'tag_detail_users',
+    meta: {
+      title: '标签详情-用户',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Tags/TagsUsers.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1390,6 +1511,24 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 待答问题
+    path: '/unansweredquestions',
+    name: 'unansweredquestions',
+    meta: {
+      title: '待您回答',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/UnansweredQuestions.vue')
+  },
+  { // 精华推荐
+    path: '/selectionrecommend',
+    name: 'selection-recommend',
+    meta: {
+      title: '精华推荐',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/SelectionRecommend.vue')
+  },
   {
     path: '/discover/add2',
     name: 'discover_add2',
@@ -1574,6 +1713,19 @@ const routes = [
       keepAlive: true
     },
     component: require('../../../views/Account/collectUser.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover detail
+    path: '/collectTags',
+    name: 'my-collectTags',
+    meta: {
+      title: '我的关注',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Account/collectTags.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1832,6 +1984,14 @@ const routes = [
       title: 'hongbao'
     },
     component: require('../../../views/Hongbao.vue')
+  },
+  {
+    path: '/mask',
+    name: 'mask',
+    meta: {
+      title: 'mask'
+    },
+    component: require('../../../components/ShortTcut.vue')
   },
   { // message
     path: '/*',

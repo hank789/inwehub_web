@@ -21,12 +21,12 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id)">{{data.feed.content}}</div>
+    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.content}}</div>
 
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags">#{{item.name}}#</div>{{data.feed.title}}</div>
-      <div class="interval">{{data.feed.answer_number}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
+      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.title}}</div>
+      <div class="interval margin-top-6">{{data.feed.answer_number}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
     </div>
     <Invitation
       :is_followed_question ="data.feed.is_followed_question"
@@ -46,6 +46,7 @@
 <script type="text/javascript">
   import Avatar from '../../components/image/Avatar.vue'
   import Invitation from '../../components/feed/QuestionInvitationAnswer.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -70,6 +71,9 @@
     },
     methods: {
       // 时间处理；
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))

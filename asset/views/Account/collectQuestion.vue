@@ -8,10 +8,11 @@
 
     <!--组件-->
     <div class="mui-content">
-      <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/collectUser')">关注的用户</span>
-        <span @tap.stop.prevent="">关注的问题  <i></i></span>
+        <span @tap.stop.prevent="$router.replace('/collectUser')">用户</span>
+        <span @tap.stop.prevent="$router.replace('')">问答<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
+        <i class="bot"></i>
       </div>
       <!--内容区域-->
       <RefreshList
@@ -20,6 +21,7 @@
         :api="'followed/questions'"
         :prevOtherData="{}"
         :nextOtherData="{}"
+        :pageMode="true"
         class="listWrapper">
         <ul class="answer">
           <li v-for="(questions, index) in list" @tap.stop.prevent="toDetail(questions)">
@@ -86,40 +88,31 @@
   }
 
   /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 50%;
-    height: 100%;
-    float: left;
-    font-size: 14px;
+  .menu{
+    width:100%;
+    height:39px;
+    font-size:14px;
     color: #444444;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(2) {
-    color: #3c95f9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     position: relative;
   }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 73px;
-    height: 1.5px;
-    left: 30%;
-    bottom: 0.5px;
-    background: #3c95f9;
+  .menu span:nth-of-type(2){
+    position:relative;
+    color: #03aef9;
+  }
+  .menu span:nth-of-type(2) i{
+    position:absolute;
+    width:27px;
+    height:1.5px;
+    border-radius: 50px;
+    background:#03aef9;
+    top: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 
   .bot {

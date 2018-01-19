@@ -90,6 +90,7 @@
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import { goThirdPartyArticle } from '../../utils/webview'
+  import { openVendorUrl, openAppUrl } from '../../utils/plus'
 
   const PublishAnswers = {
     data: () => ({
@@ -102,6 +103,12 @@
     components: {
       RefreshList,
       TextDetail
+    },
+    updated () {
+      this.$nextTick(function () {
+        openVendorUrl(this.$el.querySelector('.textContainer'))
+        openAppUrl(this.$el.querySelector('.textContainer'))
+      })
     },
     methods: {
       goDetial (hot) {
@@ -223,9 +230,6 @@
       document.addEventListener('tap', () => {
 
       })
-    },
-    updated () {
-
     }
   }
   export default PublishAnswers

@@ -1,3 +1,5 @@
+console.log('当前环境(process.env.NODE_ENV):' + process.env.NODE_ENV)
+
 import '../../js/mui'
 import '../../js/mui.zoom'
 import '../../js/mui.previewimage'
@@ -22,14 +24,8 @@ import App from './App'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 
-if (typeof (isLocalEnv) === 'undefined') {
-  window.isLocalEnv = false
-} else {
-  console.log('isLocalEnv')
-  window.isLocalEnv = true
-}
-
-if (typeof window.isLocalEnv === 'undefined') {
+if (process.env.NODE_ENV !== 'development') {
+  require('../../js/mixpanel')
   console.log('in raven')
   var sentryUrl = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478'
   if (process.env.NODE_ENV === 'production') {
@@ -39,6 +35,8 @@ if (typeof window.isLocalEnv === 'undefined') {
     .config(sentryUrl)
     .addPlugin(RavenVue, Vue)
     .install()
+} else {
+  window.mixpanel = {}
 }
 var infiniteScroll = require('vue-infinite-scroll')
 Vue.use(infiniteScroll)
@@ -57,7 +55,6 @@ import './../../styles/common.css'
 import './../../styles/feed.min.css'
 import './../../styles/immersed.css'
 import './../../styles/mui.picker.all.css'
-import './../../styles/iconfont.css'
 import './../../styles/percircle.css'
 import './../../styles/imagePreview.css'
 

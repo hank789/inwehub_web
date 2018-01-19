@@ -7,7 +7,7 @@
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
       <div class="question_tags"  v-if="ask.question.tags.length">
-        <p v-for="(tag, index) in ask.question.tags">{{tag.name}}</p>
+        <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
       </div>
       <div>
         <Question
@@ -94,8 +94,9 @@
   import Answer from '../../components/question-detail/Answer.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
-  import { autoTextArea } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import userAbility from '../../utils/userAbility'
 
   const AskDetail = {
     data: () => ({
@@ -141,7 +142,18 @@
         return this.ask.answer ? this.ask.answer : {}
       }
     },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textToLink')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+        }
+      })
+    },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
