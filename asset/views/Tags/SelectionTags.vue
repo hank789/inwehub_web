@@ -37,9 +37,9 @@
             <i class="bot"></i>
           </li>
 
-          <li v-else="list.length" v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
-            {{item.text}}
-            <i class="bot"></i>
+          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)" v-if="!(isNewTag && index === 0)">
+              {{item.text}}
+              <i class="bot"></i>
           </li>
 
         </ul>
