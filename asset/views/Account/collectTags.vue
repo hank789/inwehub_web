@@ -15,37 +15,34 @@
         <i class="bot"></i>
       </div>
       <!--内容区域-->
-      <!--<RefreshList-->
-        <!--ref="RefreshList"-->
-        <!--v-model="list"-->
-        <!--:api="'followed/questions'"-->
-        <!--:prevOtherData="{}"-->
-        <!--:nextOtherData="{}"-->
-        <!--class="listWrapper">-->
-      <!--</RefreshList>-->
-
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'followed/tags'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode="true"
+        class="listWrapper">
         <ul>
-          <li class="tag-title">
-            <div class="tag-l">
-              <img src="../../statics/images/guide_01.png">
+          <li class="tag-title" v-for="(item, index) in list">
+            <div class="tag-l" v-if="item.tag_logo">
+              <img :src="item.tag_logo">
             </div>
-            <!--<div class="tag-l bg-grey">-->
-              <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-biaozhunlogoshangxiayise"></use>-->
-              <!--</svg>-->
-            <!--</div>-->
+            <div class="tag-l bg-grey" v-else>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+              </svg>
+            </div>
             <div class="tag-r">
               <p>
-                <span>供应链</span>
+                <span>{{item.tag_name}}</span>
               </p>
-              <p class="mui-ellipsis-3">供应链的概念是从扩大的生产概念发展而来，现代管理教育对供应链的定义为“供应链是围绕核心企业，通过对商流、信息流、物流...
-                资金
-                控制，从采购原材料开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商（零售商，批发商等）直到最终用户所连成的整体功能网链结构”。
-                中文名 供应链 外文名 Supply Chain</p>
+              <p class="mui-ellipsis-3">{{item.tag_summary}}</p>
             </div>
             <i class="bott"></i>
           </li>
         </ul>
+      </RefreshList>
     </div>
     <!---->
 
@@ -54,6 +51,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+
   const PublishAnswers = {
     data: () => ({
       list: []
