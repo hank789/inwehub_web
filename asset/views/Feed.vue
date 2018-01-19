@@ -275,6 +275,10 @@
             window.mui.toast(response.data.message)
             return
           }
+        // 是否弹受邀红包
+          if (response.data.data.invitation_coupon.show) {
+            userAbility.InvitationCoupon(this)
+          }
         })
       },
       toDetail (item) {

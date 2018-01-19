@@ -377,13 +377,20 @@
         <div class="my-cash" id="my-cash">
           <p><span>¥</span>{{options.Coupon.coupon_value}}</p>
           <i></i>
-          <p v-if="options.Coupon.coupon_value_type === 1">现金红包</p>
-          <p v-if="options.Coupon.coupon_value_type === 2">成长值红包</p>
-          <p v-if="options.Coupon.coupon_value_type === 3">贡献值红包</p>
+          <div class="home_invitation"  v-if="options.Coupon.coupon_type === 4">
+            <p>{{options.Coupon.coupon_description}}</p>
+            <p>受邀注册红包</p>
+          </div>
+          <p v-else-if="options.Coupon.coupon_value_type === 1">现金红包</p>
+          <p v-else-if="options.Coupon.coupon_value_type === 2">成长值红包</p>
+          <p v-else-if="options.Coupon.coupon_value_type === 3">贡献值红包</p>
+
+
 
         </div>
         <!--跳转按钮-->
-        <p class="my-wallet alertConfirm" id="my-wallet">查看我的钱包</p>
+        <p class="my-wallet alertConfirm" id="my-wallet" v-if="options.Coupon.coupon_type === 4">前往付费围观专业回答</p>
+        <p class="my-wallet alertConfirm" id="my-wallet" v-else>查看我的钱包</p>
         <!---->
       </div>
       <!--关闭按钮-->
@@ -456,7 +463,8 @@
           current_credits_Percent: getUserLevelPercentage(),
           Coupon: {
             coupon_value: '',
-            coupon_value_type: ''
+            coupon_value_type: '',
+            coupon_description: ''
           }
         }
       }
@@ -1519,6 +1527,19 @@
     font-size: 16px;
     font-weight: 500;
     margin-top: 10px;
+  }
+
+  .home_invitation p:nth-of-type(1){
+    font-size:16px;
+    color: #444444;
+    font-weight: 500;
+  }
+  .home_invitation p:nth-of-type(2){
+    font-size: 12px;
+    color: #444444;
+    font-weight: normal;
+    margin-top: -6px;
+    line-height: 0;
   }
   /*开启通知*/
   .openNotice{
