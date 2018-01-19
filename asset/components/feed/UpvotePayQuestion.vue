@@ -21,17 +21,21 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
-
 
     <div class="freeQuestion-container comment-container">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
       <div class="freeQuestion-upvote" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
     </div>
 
+
+    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
+
+
+
+
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval top-10">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
+      <div class="interval margin-top-6">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
     <div class="freeQuestion-container">
@@ -98,9 +102,8 @@
 <style scoped>
 /*回答者样式*/
   .comment-container{
-    height:41px;
-    line-height: 19px;
-    padding:10px 0 12px 0;
+    height: 30px;
+    padding: 0;
   }
   .question-answer{
     float: left;
