@@ -17,7 +17,6 @@
         class="listWrapper">
         <!--类别-->
         <div class="discover-container">
-          <div class="community">顾问社区</div>
           <ul class="categoryMenu">
             <li @tap.stop.prevent="judge(1)">
               <div class="discover-round">
