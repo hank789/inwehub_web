@@ -1718,6 +1718,19 @@ const routes = [
     }
   },
   { // discover detail
+    path: '/collectTags',
+    name: 'my-collectTags',
+    meta: {
+      title: '我的关注',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: require('../../../views/Account/collectTags.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // discover detail
     path: '/collectQuestion',
     name: 'my-collect-question',
     meta: {
