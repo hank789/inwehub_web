@@ -20,6 +20,7 @@
         :api="'followed/questions'"
         :prevOtherData="{}"
         :nextOtherData="{}"
+        :pageMode="true"
         class="listWrapper">
         <ul class="answer">
           <li v-for="(questions, index) in list" @tap.stop.prevent="toDetail(questions)">
