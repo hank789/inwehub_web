@@ -12,6 +12,7 @@
         <span @tap.stop.prevent="$router.replace('/collectUser')">用户</span>
         <span @tap.stop.prevent="$router.replace('')">问答<i></i></span>
         <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
+        <i class="bot"></i>
       </div>
       <!--内容区域-->
       <RefreshList
@@ -90,13 +91,13 @@
   .menu{
     width:100%;
     height:39px;
-    background: #f3f4f6;
     font-size:14px;
     color: #444444;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: relative;
   }
   .menu span:nth-of-type(2){
     position:relative;
