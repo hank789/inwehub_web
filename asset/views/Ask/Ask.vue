@@ -99,7 +99,6 @@
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
 
-
   const Ask = {
     data: () => ({
       id: currentUser.user_id,

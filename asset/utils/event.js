@@ -16,6 +16,15 @@ var EventObj = () => {
     }
   }
 
+  var addLastEventListener = (name, callback) => {
+    console.log('addLastEventListener: ' + name)
+    var listener = function (e) {
+      return callback(e)
+    }
+    window.removeEventListener(name, listener, false)
+    window.addEventListener(name, listener, false)
+  }
+
   var addOnceEventListener = (name, callback) => {
     if (events[name]) {
       return -1
@@ -52,7 +61,8 @@ var EventObj = () => {
   return {
     addEventListener: addEventListener,
     addOnceEventListener: addOnceEventListener,
-    addIntervalOnceEventListener: addIntervalOnceEventListener
+    addIntervalOnceEventListener: addIntervalOnceEventListener,
+    addLastEventListener: addLastEventListener
   }
 }
 

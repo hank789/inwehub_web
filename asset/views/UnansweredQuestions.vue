@@ -34,7 +34,7 @@
       list: [],
       tag: [],
       page: 1,
-      loading: 1,
+      loading: 1
     }),
     created () {
     },
