@@ -352,6 +352,35 @@ function toSettingSystem (type) {
   }
 }
 
+/**
+ * 设置当前webivew最新url到additionalHttpHeaders
+ */
+function setWebviewNewUrl () {
+  if (!window.plus) return
+  window.mui.plusReady(function () {
+    var currentWebview = window.plus.webview.currentWebview()
+    var index = window.location.href.indexOf('#')
+    if (index !== -1) {
+      var url = window.location.href.slice(index + 1)
+      console.log('bindCurrentUrl:' + url)
+      currentWebview.setStyle({
+        additionalHttpHeaders: {
+          url: url
+        }
+      })
+    }
+  })
+}
+
+function getWebviewNewUrl () {
+  var index = window.location.href.indexOf('#')
+  if (index !== -1) {
+    var url = window.location.href.slice(index + 1)
+    return url
+  }
+  return false
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -368,5 +397,7 @@ export {
   openAppUrl,
   getClipbordText,
   toSettingSystem,
-  checkPermission
+  checkPermission,
+  setWebviewNewUrl,
+  getWebviewNewUrl
 }
