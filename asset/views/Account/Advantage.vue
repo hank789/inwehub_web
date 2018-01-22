@@ -109,8 +109,8 @@
 
           if (response.data.data.info.skill_tags.length >= 0) {
             var skillTags = response.data.data.info.skill_tags
-            this.oldAddTags = skillTags
-            this.skill_tags = skillTags
+            this.oldAddTags = skillTags.clone()
+            this.skill_tags = skillTags.clone()
           }
           this.loading = 0
         })
