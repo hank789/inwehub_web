@@ -223,7 +223,6 @@
             window.mui.back()
             return
           }
-          console.error(response.data.data)
           if (response.data.data) {
             if (response.data.data.is_valid) {
               this.$router.pushPlus('/nearbyCompany')
