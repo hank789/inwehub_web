@@ -106,7 +106,7 @@
         <div class="skilled">
           <p>Ta的擅长</p>
           <template v-for="(industry, index) in resume.info.skill_tags">
-            <span>{{industry.text}}</span>
+            <span @tap.stop.prevent="toTagDetail(industry.text)">{{industry.text}}</span>
           </template>
           <i class="bot"></i>
         </div>
@@ -280,6 +280,7 @@
   import Share from '../../components/Share.vue'
   import { alertChat } from '../../utils/dialogList'
   import { getLocalUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -349,6 +350,9 @@
       })
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       goChat () {
         if (this.percent >= 90) {
           this.$router.pushPlus('/chat/' + this.resume.info.id)
