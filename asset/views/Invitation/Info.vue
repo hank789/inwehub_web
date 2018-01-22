@@ -85,9 +85,10 @@
       this.redirect = data.redirect
       this.rcCode = data.rcCode
 
+      var self = this
       if (window.mui.os.plus) {
         window.mui.plusReady(function () {
-          this.device_code = window.plus.device.uuid
+          self.device_code = window.plus.device.uuid
         })
       }
     },
@@ -296,7 +297,7 @@
     font-size: 14px;
   }
 
-  
+
 
   ul button {
     width: 100%;

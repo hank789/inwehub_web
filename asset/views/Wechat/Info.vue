@@ -85,9 +85,10 @@
       this.openid = data.openid
       this.redirect = data.redirect
 
+      var self = this
       if (window.mui.os.plus) {
         window.mui.plusReady(function () {
-          this.device_code = window.plus.device.uuid
+          self.device_code = window.plus.device.uuid
         })
       }
     },
