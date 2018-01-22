@@ -91,6 +91,8 @@
 </template>
 <script type="text/javascript">
   import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js'
+  import userAbility from '../utils/userAbility'
+  import { postRequest } from '../utils/request'
 
   export default {
     methods: {
@@ -107,7 +109,26 @@
               this.$router.pushPlus('/cionsList')
               break
             case 4:
-              this.$router.pushPlus('/home/ActiveList')
+//              项目与机遇的等级判断
+              postRequest(`auth/checkUserLevel`, {
+                permission_type: 4
+              }).then(response => {
+                var code = response.data.code
+                // 如果请求不成功提示信息 并且返回上一页；
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                console.error(response.data.data)
+                if (response.data.data) {
+                  if (response.data.data.is_valid) {
+                    this.$router.pushPlus('/home/ActiveList')
+                  } else {
+                    userAbility.jumpJudgeGrade(this)
+                  }
+                }
+              })
               break
             case 5:
               this.$router.pushPlus('/ask')
