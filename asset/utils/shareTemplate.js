@@ -5,7 +5,8 @@ var whiteLogo = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
  * url: /askCommunity/major/221
  */
 function getAskCommunityMajorDetail (questionId, questionDescription, answerUsername) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/major/' + questionId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/major/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/major/' + questionId
 
   return {
     title: '专业问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -22,7 +23,8 @@ function getAskCommunityMajorDetail (questionId, questionDescription, answerUser
  * url: /askCommunity/interaction/356
  */
 function getAskCommunityInteractionDetail (answerId, questionDescription, answerUsername) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/' + answerId
 
   return {
     title: '问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -31,6 +33,23 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
     imageUrl: whiteLogo,
     thumbUrl: whiteLogo,
     shareName: '互动问答回复分享'
+  }
+}
+
+/**
+ * 互动问答回答列表页-微信分享模版
+ */
+function getAskCommunityInteractionAnswers (questionId, description, answerNum, followNum) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+
+  return {
+    title: '问答|' + description,
+    link: link,
+    content: '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '互动问答分享'
   }
 }
 
@@ -100,5 +119,6 @@ export {
   getAskCommunityInteractionDetail,
   getInvitation,
   getDiscoverDetail,
-  getTextDiscoverDetail
+  getTextDiscoverDetail,
+  getAskCommunityInteractionAnswers
 }

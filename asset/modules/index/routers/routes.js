@@ -170,10 +170,7 @@ const routes = [
       title: '问答社区-专业问答详情',
       wechatHideHeader: false
     },
-    component: require('../../../views/AskCommunity/MajorDetail.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/AskCommunity/MajorDetail.vue')
   },
   { // 问答社区-互动回答
     path: '/askCommunity/interactions',
@@ -194,10 +191,7 @@ const routes = [
       title: '问答社区-互动回答-回答列表',
       wechatHideHeader: false
     },
-    component: require('../../../views/AskCommunity/InteractionAnswers.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/AskCommunity/InteractionAnswers.vue')
   },
   { // 问答社区-互动回答-问答详情；
     path: '/askCommunity/interaction/:id',
@@ -206,10 +200,7 @@ const routes = [
       title: '问答社区-互动问答详情',
       wechatHideHeader: false
     },
-    component: require('../../../views/AskCommunity/InteractionDetail.vue'),
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
+    component: require('../../../views/AskCommunity/InteractionDetail.vue')
   },
   { // 邀请用户
     path: '/RecommendInvitation/:id',
