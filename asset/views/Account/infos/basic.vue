@@ -85,6 +85,7 @@
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import { getUserInfo } from '../../../utils/user'
   import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue'
+  import { selectCityThreeLevel } from '../../../utils/select'
 
   export default {
     data: () => ({
@@ -235,28 +236,89 @@
         })
       },
       selectWorkerCity (isShow) {
-        var cityPicker = new window.mui.PopPicker({
-          layer: 2
-        })
-        cityPicker.setData(cityData)
+//        var cityPicker = new window.mui.PopPicker({
+//          layer: 2
+//        })
+//        cityPicker.setData(cityData)
+//
+//        if (this.user.info) {
+//          cityPicker.pickers[0].setSelectedValue(this.user.info.province.key, 0, () => {
+//            cityPicker.pickers[1].setSelectedValue(this.user.info.city.key, 0, () => {
+//              // let cityPickerSelectedProvince = cityPicker.pickers[0].getSelectedText();
+//              // let cityPickerSelectedCity = cityPicker.pickers[1].getSelectedText();
+//            })
+//          })
+//        }
+//
+//        cityPicker.show(items => {
+//          this.user.info.province = items[0].value
+//          this.user.info.city = items[1].value
+//          this.work_city = items[0].text + ' ' + items[1].text
+//          this.newItemChange = ''
+//          this.submitInfo()
+//
+//          cityPicker.dispose()
+//        })
 
-        if (this.user.info) {
-          cityPicker.pickers[0].setSelectedValue(this.user.info.province.key, 0, () => {
-            cityPicker.pickers[1].setSelectedValue(this.user.info.city.key, 0, () => {
-              // let cityPickerSelectedProvince = cityPicker.pickers[0].getSelectedText();
-              // let cityPickerSelectedCity = cityPicker.pickers[1].getSelectedText();
-            })
-          })
-        }
 
-        cityPicker.show(items => {
-          this.user.info.province = items[0].value
-          this.user.info.city = items[1].value
-          this.work_city = items[0].text + ' ' + items[1].text
-          this.newItemChange = ''
-          this.submitInfo()
 
-          cityPicker.dispose()
+        var newCityData = [
+          {
+            value: '1',
+            text: '中国',
+            children: cityData
+          },
+          {
+            value: '2',
+            text: '海外',
+            children: []
+          }
+        ]
+
+        var defaultValues = null
+        // 三联组件
+        selectCityThreeLevel(defaultValues, newCityData, (items) => {
+          var obj = {
+            value: items[2].value ? items[2].value : items[0].value,
+            text: items[2].text ? items[1].text + ' ' + items[2].text : items[0].text
+          }
+          if (obj.value === '2') {
+            window.mui.prompt('输入海外地点', '', ' ', ['确定', '取消'], (e) => {
+              if (e.index === 0) {
+                if (e.value) {
+                  obj = {
+                    value: e.value,
+                    text: e.value
+                  }
+                  console.log(items)
+                  console.log(e.value)
+                  this.user.info.province = {
+                    key: items[0].text,
+                    name: items[0].text
+                  }
+                  this.user.info.city = {
+                    key: e.value,
+                    name: e.value
+                  }
+                  this.work_city = e.value
+                  this.newItemChange = ''
+                  this.submitInfo()
+                }
+              }
+            }, 'div')
+          } else {
+            this.user.info.province = {
+              key: items[1].value,
+              name: items[1].text
+            }
+            this.user.info.city = {
+              key: items[2].value,
+              name: items[2].text
+            }
+            this.work_city = obj.text
+            this.newItemChange = ''
+            this.submitInfo()
+          }
         })
       },
       getUserInfo () {

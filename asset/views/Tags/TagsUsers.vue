@@ -17,7 +17,7 @@
         <div class="tag-r">
           <p>
             <span>{{tagDetail.name}}</span>
-            <span class="grey" v-if="tagDetail.followers" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>
+            <span class="grey" v-if="tagDetail.is_followed" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>
             <span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>
           </p>
           <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
@@ -130,7 +130,7 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.tagDetail.followers = !this.tagDetail.followers
+          this.tagDetail.is_followed = !this.tagDetail.is_followed
           window.mui.toast(response.data.data.tip)
         })
       }
