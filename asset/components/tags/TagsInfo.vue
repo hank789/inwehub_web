@@ -20,10 +20,14 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         tagDetail: {}
       }
     },
@@ -47,6 +51,9 @@
           }
           this.tagDetail = response.data.data
           this.loading = 0
+         // 储存状态
+          localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
+          localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
         })
       },
       collectTag (id) {
@@ -59,12 +66,20 @@
             return
           }
           this.tagDetail.is_followed = !this.tagDetail.is_followed
+          this.getTagInfo()
           window.mui.toast(response.data.data.tip)
         })
       }
     },
     mounted () {
-      this.getTagInfo()
+      var tagsStatus = localEvent.getLocalItem('tagsInfo_status' + this.id)
+      var name = localEvent.getLocalItem('tagsInfo_name' + this.id)
+    // 判断是否请求
+      if (name === this.tagName) {
+        this.tagDetail = tagsStatus
+      } else {
+        this.getTagInfo()
+      }
     },
     updated () {}
   }
