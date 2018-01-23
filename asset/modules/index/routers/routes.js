@@ -473,7 +473,7 @@ const routes = [
       window.mui.plusReady(function () {
         checkUpdate()
       })
-      requestAuth(to, from, next)
+      next()
     }
   },
   { // 邀请榜；

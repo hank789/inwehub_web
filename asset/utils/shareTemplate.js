@@ -73,7 +73,8 @@ function getInvitation (username, rcCode) {
  * 发现详情-模版
  */
 function getDiscoverDetail (pathUrl, title, imgUrl) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -98,7 +99,8 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
 function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
 
   if (!imgUrl) {
     imgUrl = whiteLogo
