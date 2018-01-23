@@ -226,9 +226,7 @@
       }
     },
     mounted () {
-      this.getTagInfo()
       document.addEventListener('tap', () => {
-
       })
     },
     updated () {

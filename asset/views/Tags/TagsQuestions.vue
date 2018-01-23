@@ -158,7 +158,6 @@
       }
     },
     mounted () {
-      this.getTagInfo()
     },
     updated () {}
   }
