@@ -320,6 +320,8 @@ function checkPermission (type, successCallback, failCallback) {
         failCallback(permission)
         break
     }
+  } else if (window.mui.os.android) {
+    successCallback(permissionName)
   }
 }
 
