@@ -114,11 +114,34 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
   }
 }
 
+/**
+ * 邀请回答详情页分享
+ * @param questionId
+ * @param description
+ * @param answernum
+ * @param followednum
+ * @returns {{title: string, link: *, content: (*|String), imageUrl: *, thumbUrl: string, shareName: string}}
+ */
+function getInviteAnswerDetail (questionId, description, answernum, followednum) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+
+  return {
+    title: '邀您回答|' + description,
+    link: link,
+    content: '诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '邀请回答分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
   getInvitation,
   getDiscoverDetail,
   getTextDiscoverDetail,
-  getAskCommunityInteractionAnswers
+  getAskCommunityInteractionAnswers,
+  getInviteAnswerDetail
 }
