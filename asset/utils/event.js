@@ -16,11 +16,8 @@ var EventObj = () => {
     }
   }
 
-  var addLastEventListener = (name, callback) => {
+  var addLastEventListener = (name, listener) => {
     console.log('addLastEventListener: ' + name)
-    var listener = function (e) {
-      return callback(e)
-    }
     window.removeEventListener(name, listener, false)
     window.addEventListener(name, listener, false)
   }
