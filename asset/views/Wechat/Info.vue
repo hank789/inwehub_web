@@ -167,7 +167,7 @@
               clearAllWebViewCache()
 
               if (window.mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
               } else {
                 this.$router.replace(this.redirect)
               }
