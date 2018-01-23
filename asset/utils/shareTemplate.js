@@ -5,7 +5,8 @@ var whiteLogo = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
  * url: /askCommunity/major/221
  */
 function getAskCommunityMajorDetail (questionId, questionDescription, answerUsername) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/major/' + questionId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/major/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/major/' + questionId
 
   return {
     title: '专业问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -22,7 +23,8 @@ function getAskCommunityMajorDetail (questionId, questionDescription, answerUser
  * url: /askCommunity/interaction/356
  */
 function getAskCommunityInteractionDetail (answerId, questionDescription, answerUsername) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/' + answerId
 
   return {
     title: '问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -31,6 +33,23 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
     imageUrl: whiteLogo,
     thumbUrl: whiteLogo,
     shareName: '互动问答回复分享'
+  }
+}
+
+/**
+ * 互动问答回答列表页-微信分享模版
+ */
+function getAskCommunityInteractionAnswers (questionId, description, answerNum, followNum) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+
+  return {
+    title: '问答|' + description,
+    link: link,
+    content: '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '互动问答分享'
   }
 }
 
@@ -54,7 +73,8 @@ function getInvitation (username, rcCode) {
  * 发现详情-模版
  */
 function getDiscoverDetail (pathUrl, title, imgUrl) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -79,7 +99,8 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
 function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -95,10 +116,48 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
   }
 }
 
+/**
+ * 邀请回答详情页分享
+ * @param questionId
+ * @param description
+ * @param answernum
+ * @param followednum
+ * @returns {{title: string, link: *, content: (*|String), imageUrl: *, thumbUrl: string, shareName: string}}
+ */
+function getInviteAnswerDetail (questionId, description, answernum, followednum) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+
+  return {
+    title: '邀您回答|' + description,
+    link: link,
+    content: '诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '邀请回答分享'
+  }
+}
+
+function getResumeDetail (realname, companyName, avatarUrl) {
+  var link = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
+
+  return {
+    title: 'InweHub名片 | ' + realname + '：' + companyName + '|' + '咨询顾问的专属身份认证@InweHub',
+    link: link,
+    content: '咨询顾问的专属身份认证@InweHub\n' + companyName,
+    imageUrl: avatarUrl,
+    thumbUrl: avatarUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '名片分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
   getInvitation,
   getDiscoverDetail,
-  getTextDiscoverDetail
+  getTextDiscoverDetail,
+  getAskCommunityInteractionAnswers,
+  getInviteAnswerDetail,
+  getResumeDetail
 }

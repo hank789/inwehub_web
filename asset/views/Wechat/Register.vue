@@ -160,7 +160,7 @@
             // 存储用户位置信息
             saveLocationInfo()
             if (window.mui.os.plus) {
-              this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+              this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
             } else {
               this.$router.replace({path: this.redirect})
             }
@@ -307,7 +307,7 @@
               cb(user)
               window.mixpanelIdentify()
               if (window.mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
               } else {
                 this.$router.replace({path: this.redirect})
               }

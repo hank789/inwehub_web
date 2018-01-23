@@ -106,6 +106,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { openVendorUrl } from '../../utils/plus'
   import userAbility from '../../utils/userAbility'
+  import { getAskCommunityInteractionAnswers } from '../../utils/shareTemplate'
 
   const AskDetail = {
     data: () => ({
@@ -133,7 +134,6 @@
       loading: true
     }),
     mounted () {
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
     },
     components: {
       QustionInteraction,
@@ -217,17 +217,17 @@
 
           this.loading = 0
 
-          this.shareTitle = '问答|' + this.ask.question.description
+          var shareOptions = getAskCommunityInteractionAnswers(
+            this.id,
+            this.ask.question.description,
+            this.ask.question.answer_num,
+            this.ask.question.follow_num
+          )
 
-          var currentUrl = '/askCommunity/interaction/answers/' + this.id
-          this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl
-
-          var answerNum = this.ask.question.answer_num
-
-          var followNum = this.ask.question.follow_num
-
-          this.shareContent = '已有' + answerNum + '个回答、' + followNum + '个关注，点击前往查看详情或参与回答互动'
-
+          this.shareTitle = shareOptions.title
+          this.shareUrl = shareOptions.link
+          this.shareContent = shareOptions.content
+          this.shareImg = shareOptions.imageUrl
           successCallback()
         })
       }

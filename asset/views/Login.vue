@@ -180,7 +180,7 @@
           window.mixpanelIdentify()
           // 存储用户位置信息
           saveLocationInfo()
-          this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+          this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
         }))
       },
       submit () {

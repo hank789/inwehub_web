@@ -61,10 +61,10 @@
     <Share
       ref="ShareBtn"
       :hideShareBtn="true"
-      :title="'邀您回答|' + title"
-      :shareName="'邀请回答分享'"
+      :title="shareTitle"
+      :shareName="shareName"
       :link="shareUrl"
-      :content="'诚挚的邀请您前往参与回答和互动，已有' + answernum + '个回答、' + followednum + '个关注'"
+      :content="shareContent"
       :imageUrl="shareImg"
       :thumbUrl="shareImg"
       :targetId="id"
@@ -80,6 +80,7 @@
   import Contact from './../components/contact/Index.vue'
   import { postRequest } from '../utils/request'
   import Share from '../components/Share.vue'
+  import { getInviteAnswerDetail } from '../utils/shareTemplate'
 
   export default {
     data () {
@@ -89,6 +90,9 @@
         username: '',
         shareUrl: '',
         shareImg: '',
+        shareTitle: '',
+        shareName: '',
+        shareContent: '',
         answernum: 0,
         followednum: 0,
         title: '',
@@ -149,9 +153,18 @@
         this.answernum = this.$route.query.answernum
         this.followednum = this.$route.query.followednum
 
-        var currentUrl = '/askCommunity/interaction/answers/' + this.id
-        this.shareUrl = process.env.API_ROOT + 'wechat/oauth?redirect=' + currentUrl
-        this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
+        var shareOptions = getInviteAnswerDetail(
+          this.id,
+          this.title,
+          this.answernum,
+          this.followednum
+        )
+
+        this.shareUrl = shareOptions.link
+        this.shareImg = shareOptions.imageUrl
+        this.shareContent = shareOptions.shareContent
+        this.shareName = shareOptions.shareName
+        this.shareTitle = shareOptions.title
 
         this.getList(this.id)
       },

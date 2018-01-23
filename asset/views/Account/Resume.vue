@@ -242,7 +242,7 @@
     </div>
 
     <Share :title="shareOptions.title"
-           :shareName="'名片分享'"
+           :shareName="shareOptions.shareName"
            :link="shareUrl"
            :hideShareBtn="true"
            :content="shareOptions.content"
@@ -281,11 +281,13 @@
   import { alertChat } from '../../utils/dialogList'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import { getResumeDetail } from '../../utils/shareTemplate'
   const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
       shareOptions: {
+        shareName: '',
         title: '',
         content: '',
         imageUrl: '',
@@ -428,11 +430,17 @@
         dtask.start()
       },
       bindWechatShare () {
-        this.shareOptions.title = 'InweHub名片 | ' + this.resume.info.name + '：' + this.resume.info.company + '|' + '咨询顾问的专属身份认证@InweHub'
-        this.shareOptions.content = '咨询顾问的专属身份认证@InweHub\n' + this.resume.info.company
-        this.shareOptions.imageUrl = this.resume.info.avatar_url
-        this.shareOptions.thumbUrl = this.resume.info.avatar_url + '?x-oss-process=image/resize,h_100,w_100'
-        this.shareUrl = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
+        var shareOptions = getResumeDetail(
+          this.resume.info.name,
+          this.resume.info.company,
+          this.resume.info.avatar_url
+        )
+        this.shareOptions.title = shareOptions.title
+        this.shareOptions.content = shareOptions.content
+        this.shareOptions.imageUrl = shareOptions.imageUrl
+        this.shareOptions.thumbUrl = shareOptions.thumbUrl
+        this.shareOptions.shareName = shareOptions.shareName
+        this.shareUrl = shareOptions.link
       },
       showJobMore (event) {
         if (!this.cuuid) {
