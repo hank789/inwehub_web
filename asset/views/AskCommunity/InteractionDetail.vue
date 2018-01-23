@@ -57,14 +57,6 @@
         </div>
       </div>
 
-      <div class="buttonWrapper iNeedAskWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id)">
-          返回查看全部回答
-
-
-        </button>
-      </div>
     </div>
 
     <Share
@@ -284,6 +276,7 @@
     margin-top: 10px;
     font-size: 14px;
     background: #fff;
+    padding-bottom: 38px;
   }
 
   .help .title {
@@ -300,16 +293,7 @@
     color: #03aef9;
   }
 
-  .buttonWrapper {
-    padding-top: 33px;
-    background: #fff;
-  }
 
-  .buttonWrapper button {
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 13px 0;
-  }
   /*标签样式*/
   .question_tags{
     width:100%;

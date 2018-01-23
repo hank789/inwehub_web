@@ -18,9 +18,9 @@
     </Images>
 
     <div class="answerCount">
-      {{ ask.answer_num }}人回答
-      <span v-if="isFollowAsked" @tap.stop.prevent="collectAsk()">已关注{{ask.follow_num}}</span>
-      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.follow_num}}</span>
+      {{ ask.question_answer_num }}人回答
+      <span v-if="isFollowAsked" @tap.stop.prevent="collectAsk()">已关注{{ask.question_follow_num}}</span>
+      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.question_follow_num}}</span>
     </div>
 
     <div class="mui-row">
@@ -120,9 +120,9 @@
 
           window.mui.toast(response.data.data.tip)
           if (isFollowed) {
-            this.ask.follow_num++
+            this.ask.question_follow_num++
           } else {
-            this.ask.follow_num--
+            this.ask.question_follow_num--
           }
           this.$emit('setFollowAskStatus', isFollowed)
         })

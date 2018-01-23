@@ -108,40 +108,22 @@
           }
 
           if (response.data.data.info.skill_tags.length >= 0) {
-            var skillTags = response.data.data.info.skill_tags
-            this.oldAddTags = skillTags.clone()
-            this.skill_tags = skillTags.clone()
+            this.skill_tags = response.data.data.info.skill_tags
           }
           this.loading = 0
         })
       },
       // 删除擅长标签；
       delSkillTag (val) {
-      // 判断是否存在
-        if (this.isupload) {
-          postRequest('profile/delSkillTag', {
-            tags: [val]
-          }).then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.alert(response.data.message)
-              window.mui.back()
-              return
-            }
-            this.skillTags()
-            window.mui.toast('删除成功')
-          })
+        var num = getIndexByIdArray(this.skill_tags, val)
+        this.skill_tags.splice(num, 1)
+        if (typeof (val) === 'number') {
+          var m = this.TagValue.indexOf(val)
+          this.TagValue.splice(m, 1)
+          window.mui.toast('删除成功')
         } else {
-          var num = getIndexByIdArray(this.skill_tags, val)
-          this.skill_tags.splice(num, 1)
-          if (typeof (val) === 'number') {
-            var m = this.TagValue.indexOf(val)
-            this.TagValue.splice(m, 1)
-            window.mui.toast('删除成功')
-          } else {
-            var index = this.newTagName.indexOf(val)
-            this.newTagName.splice(index, 1)
-          }
+          var index = this.newTagName.indexOf(val)
+          this.newTagName.splice(index, 1)
         }
       },
       // 添加擅长标签；
