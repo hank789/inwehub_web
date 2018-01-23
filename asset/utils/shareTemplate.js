@@ -136,6 +136,19 @@ function getInviteAnswerDetail (questionId, description, answernum, followednum)
   }
 }
 
+function getResumeDetail (realname, companyName, avatarUrl) {
+  var link = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
+
+  return {
+    title: 'InweHub名片 | ' + realname + '：' + companyName + '|' + '咨询顾问的专属身份认证@InweHub',
+    link: link,
+    content: '咨询顾问的专属身份认证@InweHub\n' + companyName,
+    imageUrl: avatarUrl,
+    thumbUrl: avatarUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '名片分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -143,5 +156,6 @@ export {
   getDiscoverDetail,
   getTextDiscoverDetail,
   getAskCommunityInteractionAnswers,
-  getInviteAnswerDetail
+  getInviteAnswerDetail,
+  getResumeDetail
 }
