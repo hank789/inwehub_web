@@ -117,11 +117,12 @@
 
             router.replace(url, () => {
               window.mui.fire(ws, 'autoHeight', true)
-              // window.mui.fire(ws, 'refreshPageData', true)
               setWebviewNewUrl()
             }, () => {
               window.mui.fire(ws, 'autoHeight', true)
-              // window.mui.fire(ws, 'refreshPageData', true)
+              if (currentUrl === url) {
+                window.mui.fire(ws, 'refreshPageData', true)
+              }
               setWebviewNewUrl()
             })
           })
