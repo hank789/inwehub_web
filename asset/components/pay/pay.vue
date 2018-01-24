@@ -313,6 +313,13 @@
           return
         }
 
+        if (this.payMethod === 'wx_pub') {
+          if (!window.WeixinJSBridge) {
+            window.mui.toast('请使用App或微信公众号内支付！')
+            return
+          }
+        }
+
         this.pay_waiting = 'waiting'
         var payChannel = this.payMethod
         // 请求支付订单
