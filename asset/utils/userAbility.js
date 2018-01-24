@@ -200,7 +200,6 @@ var UserAbility = () => {
   var newbieTask = (context, id) => {
     var userInfo = getLocalUserInfo()
     var mobile = userInfo.phone
-    // console.log(userInfo)
     var num = parseInt(localEvent.getLocalItem('num' + mobile).value)
     if (num !== 1) {
       // if (!userInfo.newbie_unfinish_tasks.ask) {
