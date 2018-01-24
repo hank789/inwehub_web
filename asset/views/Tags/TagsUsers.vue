@@ -35,8 +35,8 @@
               <p>{{item.name}}</p>
               <p class="mui-ellipsis">{{item.description}}</p>
             </div>
-            <div class="fouce grey" v-if="item.is_followed">已关注</div>
-            <div class="fouce" v-else>关注</div>
+            <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed">已关注</div>
+            <div class="fouce" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注</div>
             <i class="bot"></i>
           </li>
         </ul>
