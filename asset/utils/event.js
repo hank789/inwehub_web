@@ -18,8 +18,19 @@ var EventObj = () => {
 
   var addLastEventListener = (name, listener) => {
     console.log('addLastEventListener: ' + name)
-    window.removeEventListener(name, listener, false)
-    window.addEventListener(name, listener, false)
+
+    if (typeof window.lastEventListener === 'undefined') {
+      window.lastEventListener = []
+    }
+
+    if (window.lastEventListener[name]) {
+      window.removeEventListener(name, window.lastEventListener[name], false)
+    }
+
+    window.lastEventListener[name] = function (event) {
+      listener(event)
+    }
+    window.addEventListener(name, window.lastEventListener[name], false)
   }
 
   var addOnceEventListener = (name, callback) => {
