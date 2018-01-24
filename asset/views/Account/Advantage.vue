@@ -13,7 +13,7 @@
           <p>让机遇更精准匹配，让内容更容易检索 </p>
           <button @tap.stop.prevent="keepTags()">确认保存</button>
         </div>
-        <li v-for="(item, index) in skill_tags" v-if="skill_tags.length">
+        <li v-for="(item, index) in skill_tags" v-if="skill_tags.length" @tap.stop.prevent="toTagDetail(item.text)">
           {{item.text}}
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delSkillTag(item.value)">
             <use xlink:href="#icon-times--"></use>
@@ -55,6 +55,7 @@
   import { postRequest } from '../../utils/request'
   import {getIndexByIdArray} from '../../utils/array'
   import localEvent from '../../stores/localStorage'
+  import userAbility from '../../utils/userAbility'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
@@ -83,6 +84,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       // 保存擅长标签；
       keepTags () {
         postRequest('profile/addSkillTag', {
