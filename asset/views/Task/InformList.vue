@@ -9,11 +9,6 @@
     <div class="mui-content">
       <div class="mui-scroll-wrapper">
         <div class="content">
-          <!--<div class="menu">-->
-            <!--<span @tap.stop.prevent="$router.replace('/task')">任务</span>-->
-            <!--<span @tap.stop.prevent="">消息 <i></i></span>-->
-            <!--<div class="menu_message" v-show="total_count != 0">{{total_count}}</div>-->
-          <!--</div>-->
           <!--内容区域-->
           <RefreshList
             ref="RefreshList"
@@ -25,16 +20,23 @@
             :autoShowEmpty="false"
             class="listWrapper">
               <ul>
-                <li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">
-                  <img src="../../statics/images/task.png" />
-                  <div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>
+                <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')">
                   <p>
-                  <span>任务通知</span>
-                  <span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>{{list.todo_task_message.last_message ? '&nbsp;|&nbsp;' + list.todo_task_message.last_message.status_description: ""}}</i> </span>
+                    <img src="../../statics/images/notice_img@2x.png"  class="notice_l"/>
+                    <img  src="../../statics/images/notice_text@2x.png" class="notice_r"/>
                   </p>
-                  <a>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.created_at : ''}}</a>
-                  <i class="bot"></i>
-                </li>
+                  <p  :class="list.todo_task_message.unread_count? '':'grey'">{{list.todo_task_message.unread_count}}</p>
+                </div>
+                <!--<li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">-->
+                  <!--<img src="../../statics/images/task.png" />-->
+                  <!--<div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>-->
+                  <!--<p>-->
+                  <!--<span>任务通知</span>-->
+                  <!--<span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>{{list.todo_task_message.last_message ? '&nbsp;|&nbsp;' + list.todo_task_message.last_message.status_description: ""}}</i> </span>-->
+                  <!--</p>-->
+                  <!--<a>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.created_at : ''}}</a>-->
+                  <!--<i class="bot"></i>-->
+                <!--</li>-->
                 <li @tap.stop.prevent="skip(1)" v-if="list.notice_message.last_message">
                   <img src="../../statics/images/inform1.png"/>
                   <div class="message" v-if="list.notice_message.unread_count">{{list.notice_message.unread_count}}</div>
@@ -235,55 +237,6 @@
   .mui-content {
     background: #FFFFFF;
   }
-  /*导航栏的样式*/
-  /*.mui-wechat .menu {*/
-    /*width: 100%;*/
-    /*height: 45px;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*z-index: 10;*/
-    /*background: #f3f4f6;*/
-  /*}*/
-
-  /*.mui-wechat .content {*/
-    /*margin-top: 45px;*/
-  /*}*/
-
-  /*.menu {*/
-    /*width: 100%;*/
-    /*height: 45px;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*z-index: 99;*/
-    /*background: #f3f4f6;*/
-  /*}*/
-
-  /*.menu span {*/
-    /*display: inline-block;*/
-    /*width: 49%;*/
-    /*height: 100%;*/
-    /*font-size: 14px;*/
-    /*color: #444444;*/
-    /*text-align: center;*/
-    /*line-height: 45px;*/
-    /*font-weight: 600;*/
-    /*position: relative;*/
-  /*}*/
-
-  /*.menu span:nth-of-type(2) {*/
-    /*color: #3c95f9;*/
-  /*}*/
-
-  /*.menu i {*/
-    /*display: block;*/
-    /*position: absolute;*/
-    /*width: 30px;*/
-    /*height: 1.8px;*/
-    /*right: 42.65%;*/
-    /*bottom: 0.5px;*/
-    /*background: #3c95f9;*/
-  /*}*/
-
   /*内容区域*/
   .content {
     margin-top: 45px;
@@ -376,4 +329,86 @@
   .listWrapper{
     bottom: 50px;
   }
+
+  /*待完成任务*/
+  .notice{
+    width:100%;
+    height:44px;
+    margin-top: 7.5px;
+    padding: 0 16px;
+  }
+  .notice p:nth-of-type(1){
+    width: 83%;
+    height:100%;
+    background:#dcdcdc;
+    border-radius: 4px 0 0px 4px;
+    float: left;
+    position: relative;
+    z-index: 9;
+  }
+  .notice p:nth-of-type(1) .notice_l{
+    position: absolute;
+    left:10%;
+    height:100%;
+  }
+  .notice p:nth-of-type(1) .notice_r{
+    height:15px;
+    position: absolute;
+    right:8%;
+    top:0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .notice p:nth-of-type(1):after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #dcdcdc;
+     /*border: 1px solid #000000;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    right: -4px;
+    top: 0px;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .notice p:nth-of-type(2){
+    float: right;
+    width: 16%;
+    height:100%;
+    background:#f03c69;
+    text-align: center;
+    line-height: 44px;
+    font-size:19px;
+    color: #FFFFFF;
+    font-weight:500;
+    border-radius:  0 4px 4px 0;
+    position: relative;
+  }
+  .notice p:nth-of-type(2).grey{
+    background: #c8c8c8;
+  }
+  .notice p:nth-of-type(2):after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #FFFFFF;
+    /*border: 1px solid #000000;*/
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left: -5px;
+    top: 0px;
+    bottom: 0;
+    margin: auto;
+  }
+
+
 </style>
