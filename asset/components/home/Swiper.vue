@@ -47,8 +47,13 @@
   export default {
     data () {
       return {
-        recommend_experts: [],
-        swiperOption: {}
+        swiperOption: {
+          pagination: '.swiper-pagination',
+          slidesPerView: 3,
+          spaceBetween: 10,
+          onTap: this.swipperClick
+        },
+        recommend_experts: []
       }
     },
     components: {
@@ -58,13 +63,14 @@
     },
     props: {},
     created () {
+//      swiperOption: {}
+//      this.swiperOption = {
+//        pagination: '.swiper-pagination',
+//        slidesPerView: 3,
+//        spaceBetween: 10,
+//        onTap: this.swipperClick
+//      }
       this.getHomeData()
-      this.swiperOption = {
-        pagination: '.swiper-pagination',
-        slidesPerView: 3,
-        spaceBetween: 10,
-        onTap: this.swipperClick
-      }
     },
     watch: {},
     mounted () {
@@ -148,6 +154,7 @@
     border-radius: 4px;
     border:0.2px solid #dcdcdc;
     box-shadow: 0 0 5px #ececee;
+    margin-right: 10px;
   }
 
   #home-card img {
