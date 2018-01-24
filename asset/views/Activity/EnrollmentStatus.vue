@@ -43,7 +43,7 @@
 
         <!--留言--> <!--v-if="list.status =='3' || list.status =='4' "-->
         <div style="position: relative;width:100%; min-height: 530px;" v-show="list.status =='3' || list.status =='4' ">
-          <div class="mui-scroll-wrapper" id="pullrefresh">
+          <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
               <ul class="message">
                 <li v-for="item in cont">
