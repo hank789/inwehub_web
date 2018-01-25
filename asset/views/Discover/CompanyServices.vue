@@ -58,7 +58,6 @@
       }
     },
     mounted () {
-//      console.error(this.is_company)
     },
     updated () {
     }

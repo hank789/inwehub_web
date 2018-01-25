@@ -6,10 +6,10 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
-      <div class="question_tags"  v-if="ask.question.tags.length">
-          <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
-      </div>
       <div>
+        <div class="question_tags"  v-if="ask.question.tags.length">
+          <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
+        </div>
         <Question
           :ask="ask.question"
           :isFollow="true"
