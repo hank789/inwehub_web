@@ -6,6 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
+      <div>
       <div class="mui-table-view detail-discover">
         <UserInfo
           :uuid="detail.owner.uuid"
@@ -102,6 +103,7 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
   </div>
+  </div>
 </template>
 
 <script>
@@ -118,6 +120,7 @@
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import { pageRefresh } from '../../utils/allPlatform'
 
   export default {
     data () {
@@ -316,6 +319,9 @@
       this.getDetail()
     },
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
       window.mui.previewImage()
       autoTextArea()
     }
