@@ -64,7 +64,7 @@
         ></Statistics>
       </div>
       <!--点赞-->
-      <div class="component-dianzanList" v-if="detail.supporter_list ? detail.supporter_list.length:0">
+      <div class="component-dianzanList" v-if="detail.upvotes">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
