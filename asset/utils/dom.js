@@ -95,6 +95,8 @@ function autoBlur () {
 function transferTagToLink (html) {
   var href = 'https://m.inwehub.com/#/tag/detail/$2/questions'
   html = html.replace(/<span class="ql-size-small" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
+
+  html = html.replace(/<span class="ql-size-small appUrl" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
   return html
 }
 
