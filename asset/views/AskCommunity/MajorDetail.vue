@@ -161,6 +161,7 @@
   import StarRating from '../../components/question-detail/StarRating.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import pay from '../../components/pay/pay.vue'
+  import { pageRefresh } from '../../utils/allPlatform'
   import Vue from 'vue'
 
   const currentUser = getLocalUserInfo()
@@ -189,6 +190,10 @@
       loading: true
     }),
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
+
       autoTextArea()
       this.getDetail()
     },

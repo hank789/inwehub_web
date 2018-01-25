@@ -383,6 +383,37 @@ function getWebviewNewUrl () {
   return false
 }
 
+/**
+ * 打开webview下拉刷新功能
+ */
+function openWebviewRefresh (callback) {
+  if (!window.plus) return
+  console.log('openWebviewRefresh() fired')
+
+  var ws = window.plus.webview.currentWebview()
+  ws.setPullToRefresh({
+    support: true,
+    style: 'circle',
+    height: '50px',
+    range: '50px',
+    contentdown: {
+      caption: '下拉可以刷新'
+    },
+    contentover: {
+      caption: '释放立即刷新'
+    },
+    contentrefresh: {
+      caption: '正在刷新...'
+    }
+  }, () => {
+    console.log('openWebviewRefresh() event fired')
+    setTimeout(() => {
+      ws.endPullToRefresh()
+    }, 1000)
+    callback()
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -401,5 +432,6 @@ export {
   toSettingSystem,
   checkPermission,
   setWebviewNewUrl,
-  getWebviewNewUrl
+  getWebviewNewUrl,
+  openWebviewRefresh
 }

@@ -146,9 +146,37 @@ function noticeOpenNotifitionPermission (context) {
   })
 }
 
+/**
+ * 页面整体刷新
+ * @param context
+ * @param refreshCallback
+ */
+function pageRefresh (context, refreshCallback) {
+  var container = context.$el.querySelector('.mui-content')
+  window.mui.init({
+    pullRefresh: {
+      container: container, // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+      down: {
+        auto: false, // 可选,默认false.首次加载自动上拉刷新一次
+        callback: () => {
+          refreshCallback()
+          window.mui(container).pullRefresh().endPulldownToRefresh()
+
+          setTimeout(() => {
+            if (window.mui(container).length) {
+              window.mui(container).pullRefresh().refresh(true)
+            }
+          }, 1000)
+        }
+      }
+    }
+  })
+}
+
 export {
   getGeoPosition,
   saveLocationInfo,
   checkClipbord,
-  noticeOpenNotifitionPermission
+  noticeOpenNotifitionPermission,
+  pageRefresh
 }
