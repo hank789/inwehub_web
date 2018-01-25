@@ -92,6 +92,7 @@
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import { goThirdPartyArticle } from '../../utils/webview'
+  import { openVendorUrl, openAppUrl } from '../../utils/plus'
 
   const PublishAnswers = {
     data: () => ({
@@ -226,6 +227,13 @@
 
     },
     updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textContainer')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+          openAppUrl(eles[i])
+        }
+      })
     }
   }
   export default PublishAnswers
