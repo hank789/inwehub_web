@@ -309,13 +309,18 @@ function alertGetCoupon (context, Coupon) {
         }
       }, 'animationContainerWrapper', () => {
         setTimeout(() => {
-          var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
-          var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
-          var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
+          var containerWrapper = document.getElementById('animationContainerWrapper')
+          if (!containerWrapper) {
+            return
+          }
+
+          var canvas = containerWrapper.querySelector('#canvas')
+          var domOverlayContainer = containerWrapper.querySelector('#domOverlayContainer')
+          var animContainer = containerWrapper.querySelector('#animationContainer')
           var stage = select(canvas, window.lib.红包)
           run(canvas, stage, domOverlayContainer, animContainer, window.lib)
-          var apper = document.getElementById('animationContainerWrapper').querySelector('#my-cash')
-          var wallet = document.getElementById('animationContainerWrapper').querySelector('#my-wallet')
+          var apper = containerWrapper.querySelector('#my-cash')
+          var wallet = containerWrapper.querySelector('#my-wallet')
           setTimeout(() => {
             apper.style.opacity = '1'
           }, 1500)
