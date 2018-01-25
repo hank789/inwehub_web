@@ -202,10 +202,10 @@ var UserAbility = () => {
     var mobile = userInfo.phone
     var num = parseInt(localEvent.getLocalItem('num' + mobile).value)
     if (num !== 1) {
-      // if (!userInfo.newbie_unfinish_tasks.ask) {
-      context.$router.pushPlus('/userGuide/stepone')
-      localEvent.setLocalItem('num' + mobile, {value: '1'})
-      // }
+      if (userInfo.newbie_unfinish_tasks.show_guide) {
+        context.$router.pushPlus('/userGuide/stepone')
+        localEvent.setLocalItem('num' + mobile, {value: '1'})
+      }
     }
   }
 

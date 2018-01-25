@@ -64,6 +64,13 @@
     },
     props: {},
     created () {
+//      swiperOption: {}
+//      this.swiperOption = {
+//        pagination: '.swiper-pagination',
+//        slidesPerView: 3,
+//        spaceBetween: 10,
+//        onTap: this.swipperClick
+//      }
       this.getHomeData()
     },
     watch: {},
