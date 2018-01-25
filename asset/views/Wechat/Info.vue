@@ -87,8 +87,10 @@
 
       var self = this
       if (window.mui.os.plus) {
-        window.mui.plusReady(function () {
-          self.device_code = window.plus.device.uuid
+        window.mui.plusReady(() => {
+          if (window.plus) {
+            self.device_code = window.plus.device.uuid
+          }
         })
       }
     },
