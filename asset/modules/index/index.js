@@ -12,6 +12,8 @@ import TimeAgo from 'vue-timeago'
 
 import router from './routers/index'
 
+require('swiper/dist/css/swiper.css')
+
 // import VueLazyloadImg from 'vue-lazyload-img';
 // import VueLazyload from 'vue-lazyload';
 
