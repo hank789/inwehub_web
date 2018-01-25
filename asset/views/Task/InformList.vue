@@ -20,12 +20,13 @@
             :autoShowEmpty="false"
             class="listWrapper">
               <ul>
-                <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')">
+                <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.unread_count">
                   <p>
                     <img src="../../statics/images/notice_img@2x.png"  class="notice_l"/>
+                    <span>({{list.todo_task_message.unread_count}})</span>
                     <img  src="../../statics/images/notice_text@2x.png" class="notice_r"/>
                   </p>
-                  <p  :class="list.todo_task_message.unread_count? '':'grey'">{{list.todo_task_message.unread_count}}</p>
+                  <p>前往完成</p>
                 </div>
                 <!--<li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">-->
                   <!--<img src="../../statics/images/task.png" />-->
@@ -338,7 +339,7 @@
     padding: 0 16px;
   }
   .notice p:nth-of-type(1){
-    width: 83%;
+    width: 72%;
     height:100%;
     background:#dcdcdc;
     border-radius: 4px 0 0px 4px;
@@ -347,19 +348,26 @@
     z-index: 9;
   }
   .notice p:nth-of-type(1) .notice_l{
-    position: absolute;
-    left:10%;
+    float: left;
     height:100%;
   }
   .notice p:nth-of-type(1) .notice_r{
     height:15px;
-    position: absolute;
-    right:8%;
-    top:0;
-    bottom: 0;
-    margin: auto;
-  }
+    float: right;
+    margin-left: 7%;
+    margin-top: 14.5px;
 
+  }
+  .notice p:nth-of-type(1) span{
+    display: block;
+    height: 100%;
+    float: right;
+    margin-right: 5%;
+    margin-left: 2%;
+    line-height: 43px;
+    font-size: 16px;
+    color: #235280;
+  }
   .notice p:nth-of-type(1):after {
     content: "";
     display: block;
@@ -367,7 +375,6 @@
     height: 10px;
     border-radius: 2px;
     background: #dcdcdc;
-     /*border: 1px solid #000000;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
@@ -379,19 +386,16 @@
 
   .notice p:nth-of-type(2){
     float: right;
-    width: 16%;
+    width: 27%;
     height:100%;
     background:#f03c69;
     text-align: center;
     line-height: 44px;
-    font-size:19px;
+    font-size:16px;
     color: #FFFFFF;
     font-weight:500;
     border-radius:  0 4px 4px 0;
     position: relative;
-  }
-  .notice p:nth-of-type(2).grey{
-    background: #c8c8c8;
   }
   .notice p:nth-of-type(2):after {
     content: "";
