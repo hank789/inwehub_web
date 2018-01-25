@@ -26,7 +26,7 @@
     "swiper": "^3.4.2",
     "v-tooltip": "^2.0.0-beta.5",
     "vue": "^2.2.1",
-    "vue-awesome-swiper": "^2.3.8",
+    "vue-awesome-swiper": "^2.6.7",
     "vue-ga": "^1.0.0",
     "vue-infinite-scroll": "^2.0.1",
     "vue-qrcode": "github:xkeshi/vue-qrcode",

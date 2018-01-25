@@ -233,6 +233,7 @@
         })
       },
       chooseType (type) {
+        this.list = []
         this.search_type = type
         this.search_type = type
       },
