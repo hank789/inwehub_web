@@ -89,6 +89,7 @@
   import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
+  import { pageRefresh } from '../../utils/allPlatform'
 
   const AskDetail = {
     data: () => ({
@@ -116,6 +117,9 @@
       loading: true
     }),
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
       autoTextArea()
