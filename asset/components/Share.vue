@@ -135,9 +135,9 @@
           return
         }
         var data = {
-          title: this.title.substr(0, 50),
+          title: this.title,
           link: this.link + '&isShare=1',
-          content: this.content.substr(0, 150),
+          content: this.content,
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl
         }
