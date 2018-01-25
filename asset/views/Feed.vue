@@ -77,9 +77,6 @@
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
 
-            <!--x关注了互动问答-->
-            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
-
             <!--x关注了新的朋友-->
             <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
 
