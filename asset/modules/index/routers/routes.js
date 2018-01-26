@@ -1482,7 +1482,7 @@ const routes = [
     path: '/nearbyPeople',
     name: 'nearby-people',
     meta: {
-      title: '附近的人',
+      title: '附近发现',
       wechatHideHeader: true
     },
     component: require('../../../views/Nearby/nearbyPeople.vue'),
@@ -1494,10 +1494,22 @@ const routes = [
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
-      title: '附近企业',
+      title: '附近发现',
       wechatHideHeader: true
     },
     component: require('../../../views/Nearby/nearbyCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近发现地图详情页
+    path: '/nearbyPeople/MapDetail',
+    name: 'nearby-map-detail',
+    meta: {
+      title: '附近发现',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Nearby/nearbyPeopleMapDetail.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

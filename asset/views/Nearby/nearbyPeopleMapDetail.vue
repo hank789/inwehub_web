@@ -11,12 +11,42 @@
           <p>附近的人</p>
           <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近的公司</p>
         </div>
-        <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/nearbyPeople/MapDetail')">
-          <use xlink:href="#icon-ditu"></use>
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyPeople')">
+          <use xlink:href="#icon-shaixuan"></use>
         </svg>
       </div>
-
+      <div class="map">
+        <img src="../../statics/images/guide_01.png" />
+      </div>
       <ul class="cions-list">
+        <li>
+          <div class="cions-avatar">
+            <img src="../../statics/images/guide_01.png"/>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="detail">
+            <p>丁冉<i>（< 200m）</i></p>
+            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
+          </div>
+          <div class="fouce blue">关注Ta</div>
+          <i class="bot"></i>
+        </li>
+        <li>
+          <div class="cions-avatar">
+            <img src="../../statics/images/guide_01.png"/>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="detail">
+            <p>丁冉<i>（< 200m）</i></p>
+            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
+          </div>
+          <div class="fouce blue">关注Ta</div>
+          <i class="bot"></i>
+        </li>
         <li>
           <div class="cions-avatar">
             <img src="../../statics/images/guide_01.png"/>
@@ -33,6 +63,8 @@
         </li>
       </ul>
 
+
+
     </div>
   </div>
 </template>
@@ -40,7 +72,7 @@
 
 </script>
 
-<style scoped="scoped">
+<style scoped>
   ul,
   li,
   p,
@@ -103,6 +135,16 @@
     font-size: 25px;
     color: #fefefe;
   }
+  /*地图*/
+  .map{
+    width:100%;
+    overflow: hidden;
+  }
+  .map img{
+    width:100%;
+    height:auto;
+  }
+
   /*列表区域*/
   .cions-list{
     width:100%;

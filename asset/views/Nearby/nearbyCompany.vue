@@ -11,6 +11,9 @@
            <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
            <p>附近的公司</p>
          </div>
+          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('')">
+            <use xlink:href="#icon-ditu"></use>
+          </svg>
       </div>
 
       <!--搜索框-->
@@ -410,5 +413,11 @@
   .menu .switch p:nth-of-type(2){
     background:#808080;
     border-radius: 0 50px 50px 0;
+  }
+  .menu svg{
+    position: absolute;
+    right:3%;
+    font-size: 25px;
+    color: #fefefe;
   }
 </style>
