@@ -77,9 +77,6 @@
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
 
-            <!--x关注了互动问答-->
-            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item"></FllowFreeQuestion>
-
             <!--x关注了新的朋友-->
             <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
 
@@ -223,7 +220,6 @@
             window.mui.back()
             return
           }
-          console.error(response.data.data)
           if (response.data.data) {
             if (response.data.data.is_valid) {
               this.$router.pushPlus('/nearbyCompany')
@@ -234,6 +230,7 @@
         })
       },
       chooseType (type) {
+        this.list = []
         this.search_type = type
         this.search_type = type
       },
@@ -338,8 +335,6 @@
           case 2:
           case 9:
           case 12:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + item.feed.question_id, 'list-detail-page')
-            break
           case 1:
           case 3:
           case 4:

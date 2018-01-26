@@ -5,13 +5,9 @@
       <h1 class="mui-title">待您回答</h1>
     </header>
     <div class="mui-content absolute">
-        <div class="title" v-if="this.tag.length">
-          <p>根据您的擅长推荐以下问答</p>
+        <div class="title">
+          <p>根据您的擅长和关注推荐以下问答</p>
           <p @tap.stop.prevent="change()">换一批</p>
-        </div>
-        <div class="title" v-else>
-          <p>完善擅长标签即为您定向推荐问答</p>
-          <p @tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长</p>
         </div>
         <ul  v-if="list.length">
           <li v-for="(item,index) in list" @tap.stop.prevent="skip(item.question_type,item.id)">
@@ -22,6 +18,7 @@
           </li>
         </ul>
       <Empty v-else></Empty>
+      <div class="tags" @tap.stop.prevent="$router.pushPlus('/my/advantage')">丰富我的擅长</div>
     </div>
   </div>
 </template>
@@ -34,7 +31,7 @@
       list: [],
       tag: [],
       page: 1,
-      loading: 1,
+      loading: 1
     }),
     created () {
     },
@@ -161,5 +158,16 @@
     font-size: 12px;
     color:#808080;
     margin-top: 3px;
+  }
+  .tags{
+    width:100%;
+    height:44px;
+    background:#f3f4f6;
+    text-align: center;
+    line-height: 44px;
+    font-size:15px;
+    color: #03aef9;
+    position: fixed;
+    bottom: 0;
   }
 </style>

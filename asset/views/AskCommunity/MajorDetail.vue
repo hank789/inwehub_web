@@ -6,17 +6,18 @@
     </header>
 
     <div id="majorDetail" class="mui-content absolute" v-show="!loading">
-      <div class="question_tags"  v-if="ask.question.tags.length">
-          <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
-      </div>
       <div>
+        <div class="question_tags"  v-if="ask.question.tags.length">
+          <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
+        </div>
         <Question
           :ask="ask.question"
           :isFollow="true"
         ></Question>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
-                :answer="answer"
+                :answer="ask.answers[0]"
+                :questionId="ask.question.id"
                 :needMoney="true"
                 :isFollow="true"
                 :showModifyBtn="false"
@@ -161,6 +162,7 @@
   import StarRating from '../../components/question-detail/StarRating.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import pay from '../../components/pay/pay.vue'
+  import { pageRefresh } from '../../utils/allPlatform'
   import Vue from 'vue'
 
   const currentUser = getLocalUserInfo()
@@ -189,6 +191,10 @@
       loading: true
     }),
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
+
       autoTextArea()
       this.getDetail()
     },

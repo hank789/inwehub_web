@@ -26,7 +26,8 @@
         perPage: 10,
         response: null,
         disableLoadMore: false,
-        list: []
+        list: [],
+        localPrevOtherData: this.prevOtherData
       }
     },
     props: {
@@ -116,7 +117,7 @@
       },
       refreshPageData (prevOtherData) {
         this.loading = 1
-        this.prevOtherData = prevOtherData
+        this.localPrevOtherData = prevOtherData
 
         if (this.downLoadMoreMode) {
           this.currentPage = 0
@@ -128,7 +129,7 @@
       },
       setPageData (prevOtherData) {
         this.loading = 1
-        this.prevOtherData = prevOtherData
+        this.localPrevOtherData = prevOtherData
         this.getPrevList()
       },
       scrollToTop () {
@@ -162,7 +163,7 @@
           }
         }
 
-        param = Object.assign(param, this.prevOtherData)
+        param = Object.assign(param, this.localPrevOtherData)
 
         console.log('getDownLoadMoreModePrevList 额外的参数:' + JSON.stringify(param))
 
@@ -219,7 +220,7 @@
         } else {
           param = {}
         }
-        param = Object.assign(param, this.prevOtherData)
+        param = Object.assign(param, this.localPrevOtherData)
 
         console.log('getPrevList 额外的参数:' + JSON.stringify(param))
 
@@ -358,6 +359,7 @@
       },
       prevOtherData: function (newValue, oldValue) {
         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+          this.localPrevOtherData = newValue
           this.refreshPageData(newValue)
         }
       }

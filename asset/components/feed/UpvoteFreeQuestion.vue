@@ -23,9 +23,9 @@
     </div>
     <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.answer_content}}</div>
 
-    <div class="container-answer margin-10-0-0">
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
       <div class="color-808080 font-14  text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
-      <div class="interval margin-top-6">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.support_number}}人关注</div>
+      <div class="interval margin-top-6">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
     </div>
 
     <Invitation
@@ -34,8 +34,8 @@
       :question_id="data.feed.question_id"
       :username="data.user.name"
       :title="data.feed.question_title"
-      :answer_num="data.feed.answer_num"
-      :follow_num="data.feed.follow_num"
+      :answer_num="data.feed.question_answer_num"
+      :follow_num="data.feed.follow_question_num"
       :comment_num="data.feed.comment_num"
       :support_number="data.feed.support_number"
     ></Invitation>

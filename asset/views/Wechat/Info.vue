@@ -85,9 +85,12 @@
       this.openid = data.openid
       this.redirect = data.redirect
 
+      var self = this
       if (window.mui.os.plus) {
-        window.mui.plusReady(function () {
-          this.device_code = window.plus.device.uuid
+        window.mui.plusReady(() => {
+          if (window.plus) {
+            self.device_code = window.plus.device.uuid
+          }
         })
       }
     },
@@ -166,7 +169,7 @@
               clearAllWebViewCache()
 
               if (window.mui.os.plus) {
-                this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
               } else {
                 this.$router.replace(this.redirect)
               }

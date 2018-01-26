@@ -87,12 +87,6 @@
             this.skill_tags.splice(i, 1)
           }
         }
-//        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
-//          localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
-//          window.mui.toast('删除成功')
-//        } else {
-//          return false
-//        }
       },
       keepTags () {
         if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {

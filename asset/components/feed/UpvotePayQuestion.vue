@@ -28,10 +28,7 @@
     </div>
 
 
-    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
-
-
-
+    <div class="text-16-444 mui-ellipsis-3 answerMajorContent">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
@@ -113,5 +110,8 @@
   .question-answer i{
     color: #03aef9;
     font-style: normal;
+  }
+  .answerMajorContent{
+    width:100%;
   }
 </style>

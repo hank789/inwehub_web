@@ -34,6 +34,7 @@
   import MessageComponent from '../../components/Message.vue'
   import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
+  import { setWebviewNewUrl, getWebviewNewUrl } from '../../utils/plus'
 
   export default {
     data () {
@@ -111,13 +112,18 @@
             console.log('go_to_target_page:' + url)
 
             var ws = window.plus.webview.currentWebview()
+            var currentUrl = getWebviewNewUrl()
+            console.log('go_to_target_page currentUrl:' + currentUrl + ', url:' + url)
 
             router.replace(url, () => {
               window.mui.fire(ws, 'autoHeight', true)
-              window.mui.fire(ws, 'refreshPageData', true)
+              setWebviewNewUrl()
             }, () => {
               window.mui.fire(ws, 'autoHeight', true)
-              window.mui.fire(ws, 'refreshPageData', true)
+              if (currentUrl === url) {
+                window.mui.fire(ws, 'refreshPageData', true)
+              }
+              setWebviewNewUrl()
             })
           })
           // 只在主页面监听一次
@@ -203,6 +209,7 @@
                   // 用户关注通知
                   router.pushPlus('/share/resume/' + payload.object_id + '?goback=1')
                   break
+                case 'readhub_submission_upvoted':
                 case 'readhub_new_submission':
                 case 'readhub_comment_replied':
                   // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf

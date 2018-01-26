@@ -320,6 +320,8 @@ function checkPermission (type, successCallback, failCallback) {
         failCallback(permission)
         break
     }
+  } else if (window.mui.os.android) {
+    successCallback(permissionName)
   }
 }
 
@@ -352,6 +354,66 @@ function toSettingSystem (type) {
   }
 }
 
+/**
+ * 设置当前webivew最新url到additionalHttpHeaders
+ */
+function setWebviewNewUrl () {
+  if (!window.plus) return
+  window.mui.plusReady(function () {
+    var currentWebview = window.plus.webview.currentWebview()
+    var index = window.location.href.indexOf('#')
+    if (index !== -1) {
+      var url = window.location.href.slice(index + 1)
+      console.log('bindCurrentUrl:' + url)
+      currentWebview.setStyle({
+        additionalHttpHeaders: {
+          url: url
+        }
+      })
+    }
+  })
+}
+
+function getWebviewNewUrl () {
+  var index = window.location.href.indexOf('#')
+  if (index !== -1) {
+    var url = window.location.href.slice(index + 1)
+    return url
+  }
+  return false
+}
+
+/**
+ * 打开webview下拉刷新功能
+ */
+function openWebviewRefresh (callback) {
+  if (!window.plus) return
+  console.log('openWebviewRefresh() fired')
+
+  var ws = window.plus.webview.currentWebview()
+  ws.setPullToRefresh({
+    support: true,
+    style: 'circle',
+    height: '50px',
+    range: '50px',
+    contentdown: {
+      caption: '下拉可以刷新'
+    },
+    contentover: {
+      caption: '释放立即刷新'
+    },
+    contentrefresh: {
+      caption: '正在刷新...'
+    }
+  }, () => {
+    console.log('openWebviewRefresh() event fired')
+    setTimeout(() => {
+      ws.endPullToRefresh()
+    }, 1000)
+    callback()
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -368,5 +430,8 @@ export {
   openAppUrl,
   getClipbordText,
   toSettingSystem,
-  checkPermission
+  checkPermission,
+  setWebviewNewUrl,
+  getWebviewNewUrl,
+  openWebviewRefresh
 }

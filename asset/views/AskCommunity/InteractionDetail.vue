@@ -42,29 +42,21 @@
           v-if="ask.answer && ask.answer.content"
         ></Discuss>
 
-      </div>
+        <div class="help">
+          <div class="title">
+            什么是互动问答？
 
-      <div class="help">
-        <div class="title">
-          什么是互动问答？
-
+          </div>
+          <div class="body">
+            InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a
+            @tap.stop.prevent="toSeeHelp()">问答规范</a>。
+          </div>
         </div>
-        <div class="body">
-          InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a
-          @tap.stop.prevent="toSeeHelp()">问答规范</a>。
 
-
-        </div>
       </div>
 
-      <div class="buttonWrapper iNeedAskWrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.question.id)">
-          返回查看全部回答
 
 
-        </button>
-      </div>
     </div>
 
     <Share
@@ -97,6 +89,7 @@
   import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
+  import { pageRefresh } from '../../utils/allPlatform'
 
   const AskDetail = {
     data: () => ({
@@ -124,6 +117,9 @@
       loading: true
     }),
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
       this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
       autoTextArea()
@@ -284,6 +280,7 @@
     margin-top: 10px;
     font-size: 14px;
     background: #fff;
+    padding-bottom: 38px;
   }
 
   .help .title {
@@ -300,16 +297,7 @@
     color: #03aef9;
   }
 
-  .buttonWrapper {
-    padding-top: 33px;
-    background: #fff;
-  }
 
-  .buttonWrapper button {
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 13px 0;
-  }
   /*标签样式*/
   .question_tags{
     width:100%;

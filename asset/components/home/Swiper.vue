@@ -1,8 +1,8 @@
 <template>
   <!--人物推荐-->
-  <div class="container-item" v-if="recommend_experts.length">
+  <div class="container-item" v-show="!loading">
     <div class="title">推荐专家<span class="more" @tap.stop.prevent="more()">更多</span></div>
-    <swiper :options="swiperOption" id="home-recommend">
+    <swiper :options="swiperOption" id="home-recommend" ref="mySwiper">
       <swiper-slide id="home-card" :class="experts.uuid" v-for="(experts, index) in recommend_experts" :key="index"
                     :uuid="experts.uuid" :index="index">
         <div class="home_avatar">
@@ -48,7 +48,13 @@
     data () {
       return {
         recommend_experts: [],
-        swiperOption: {}
+        swiperOption: {
+          pagination: '.swiper-pagination',
+          slidesPerView: 3,
+          spaceBetween: 10,
+          onTap: this.swipperClick
+        },
+        loading: 1
       }
     },
     components: {
@@ -59,16 +65,22 @@
     props: {},
     created () {
       this.getHomeData()
-      this.swiperOption = {
-        pagination: '.swiper-pagination',
-        slidesPerView: 3,
-        spaceBetween: 10,
-        onTap: this.swipperClick
-      }
     },
     watch: {},
     mounted () {
-
+    },
+    computed: {
+      swiper () {
+        return this.$refs.mySwiper.swiper
+      }
+    },
+    updated () {
+      var that = this
+      this.$nextTick(() => {
+        if (that.$refs.mySwiper.swiper) {
+          that.$refs.mySwiper.swiper.update(true)
+        }
+      })
     },
     methods: {
       collectProfessor: function (uuid, index) {
@@ -121,6 +133,7 @@
             return
           }
           this.recommend_experts = response.data.data.recommend_experts
+          this.loading = 0
         })
       }
     }

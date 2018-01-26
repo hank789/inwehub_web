@@ -48,9 +48,9 @@ var Share = () => {
         if (wechat.nativeClient) {
           self.context.sendHaoyou = () => {
             var data = {
-              content: stripTags(self.data.content),
+              content: stripTags(self.data.content).substr(0, 150),
               href: self.data.link,
-              title: stripTags(self.data.title),
+              title: stripTags(self.data.title).substr(0, 150),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneSession'}
@@ -67,9 +67,9 @@ var Share = () => {
 
           self.context.sendPengYouQuan = () => {
             wechat.send({
-              content: stripTags(self.data.content),
+              content: stripTags(self.data.content).substr(0, 150),
               href: self.data.link,
-              title: stripTags(pengYouQuanTitle.substr(0, 150)),
+              title: stripTags(pengYouQuanTitle).substr(0, 150),
               pictures: [self.data.imageUrl],
               thumbs: [self.data.thumbUrl],
               extra: {scene: 'WXSceneTimeline'}

@@ -117,7 +117,9 @@
       },
       answer: {
         type: Object,
-        default: {}
+        default: function () {
+          return {}
+        }
       },
       isFollow: {
         type: Boolean,
@@ -151,7 +153,13 @@
         }
       }
     },
-    mounted () {},
+    mounted () {
+      if (this.answer && this.answer.content) {
+        var content = this.answer.content
+        var objs = JSON.parse(content)
+        this.editorReadObj.setContents(objs)
+      }
+    },
     methods: {
       toPay () {
         this.$emit('toPay')
@@ -165,6 +173,7 @@
 
         var answerContentWrapper = this.$el.querySelector('.answerContent')
         html = addPreviewAttrForImg(html)
+        html = html.replace(/(<p><br><\/p>)*$/, '')
         answerContentWrapper.innerHTML = html
 
         window.mui.previewImage()

@@ -1,7 +1,7 @@
 
-function getIndexByIdArray (arr, id) {
+function getIndexByIdArray (arr, value, key = 'id') {
   for (var i in arr) {
-    if (arr[i].id === id) {
+    if (arr[i][key] === value) {
       return i
     }
   }

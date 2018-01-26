@@ -128,7 +128,7 @@
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       modify () {
-        this.$router.pushPlus('/realAnswer/' + this.questionId + '/' + this.answerId, 'list-detail-page-realAnswer-once', true, 'pop-in', 'close', true)
+        this.$router.pushPlus('/realAnswer/' + this.questionId + '/' + this.answerId, 'backAndClose')
       },
       collect () {
         var data = {

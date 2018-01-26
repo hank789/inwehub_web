@@ -105,9 +105,12 @@
       TextDetail
     },
     updated () {
-      this.$nextTick(function () {
-        openVendorUrl(this.$el.querySelector('.textContainer'))
-        openAppUrl(this.$el.querySelector('.textContainer'))
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textContainer')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+          openAppUrl(eles[i])
+        }
       })
     },
     methods: {

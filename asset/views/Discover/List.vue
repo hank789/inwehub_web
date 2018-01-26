@@ -168,7 +168,6 @@
             window.mui.back()
             return
           }
-//          console.error(response.data.data.is_valid)
           if (response.data.data) {
             if (response.data.data.is_valid) {
               switch (type) {

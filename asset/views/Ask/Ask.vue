@@ -99,7 +99,6 @@
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
 
-
   const Ask = {
     data: () => ({
       id: currentUser.user_id,
@@ -318,6 +317,7 @@
         this.tag = []
         this.newTags = []
         localEvent.clearLocalItem('ask_skill_tags' + this.id)
+        this.description = ''
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },

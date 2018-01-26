@@ -20,7 +20,7 @@
          <div class="my-detail">
               <span @tap.stop.prevent="$router.pushPlus('/my/Growth', 'list-detail-page')">等级详情 ></span>
               <i></i>
-              <span @tap.stop.prevent="$router.pushPlus('/my/advantage', 'list-detail-page')">我的擅长 ></span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/advantage', 'backAndClose')">我的擅长 ></span>
 
             </div>
           </div>

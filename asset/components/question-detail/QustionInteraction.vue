@@ -18,9 +18,9 @@
     </Images>
 
     <div class="answerCount">
-      {{ ask.answer_num }}人回答
-      <span v-if="isFollowAsked" @tap.stop.prevent="collectAsk()">已关注{{ask.follow_num}}</span>
-      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.follow_num}}</span>
+      {{ ask.question_answer_num }}人回答
+      <span v-if="isFollowAsked" @tap.stop.prevent="collectAsk()">已关注{{ask.question_follow_num}}</span>
+      <span @tap.stop.prevent="collectAsk()" v-else>关注问题{{ask.question_follow_num}}</span>
     </div>
 
     <div class="mui-row">
@@ -33,7 +33,7 @@
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer-once',true,'pop-in','close',true)">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
           参与回答
 
         </button>
@@ -120,9 +120,9 @@
 
           window.mui.toast(response.data.data.tip)
           if (isFollowed) {
-            this.ask.follow_num++
+            this.ask.question_follow_num++
           } else {
-            this.ask.follow_num--
+            this.ask.question_follow_num--
           }
           this.$emit('setFollowAskStatus', isFollowed)
         })

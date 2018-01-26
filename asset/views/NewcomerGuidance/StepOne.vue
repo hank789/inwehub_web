@@ -15,7 +15,6 @@
 
       <div class="tag-title">热门标签</div>
       <ul>
-        <!--<li class="bg-blue">企业IT战略规划与ITSP</li>-->
         <li v-for="(item,index) in list" @click="changeClass(item)"  :class="item.checked ? 'bg-blue' : '' ">{{item.text}}</li>
       </ul>
     </div>

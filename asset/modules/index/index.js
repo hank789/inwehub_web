@@ -12,6 +12,8 @@ import TimeAgo from 'vue-timeago'
 
 import router from './routers/index'
 
+require('swiper/dist/css/swiper.css')
+
 // import VueLazyloadImg from 'vue-lazyload-img';
 // import VueLazyload from 'vue-lazyload';
 
@@ -160,6 +162,9 @@ import { scrollToTop } from '../../utils/scrollToTop'
 import EventObj from '../../utils/event'
 
 import { toast } from '../../utils/toast'
+
+import { setWebviewNewUrl } from '../../utils/plus'
+
 window.mui.toast = toast
 
 Vue.mixin({
@@ -182,19 +187,21 @@ Vue.mixin({
     console.log('global mounted函数 被调用')
 
     // 调节状态栏高度方法
-    EventObj.addEventListener('autoHeight', (e) => {
+    EventObj.addLastEventListener('autoHeight', (e) => {
       console.log('calledEvent: autoHeight')
       autoHeight()
     })
 
     // 刷行数据方法
-    EventObj.addEventListener('refreshPageData', (e) => {
-      console.log('calledEvent: refreshPageData')
-      if (this.refreshPageData) {
-        console.log('calledMethod: refreshPageData')
-        this.refreshPageData()
-      }
-    })
+    if (this.refreshPageData) {
+      EventObj.addLastEventListener('refreshPageData', (e) => {
+        console.log('calledEvent: refreshPageData')
+        if (this.refreshPageData) {
+          console.log('calledMethod: refreshPageData')
+          this.refreshPageData()
+        }
+      })
+    }
 
     autoHeight(this.$el)
     hideHeaderHandler(this, 'mounted')
@@ -205,20 +212,7 @@ Vue.mixin({
     if (this.$parent && this.$parent.$el && this.$parent.$el.id === 'app') {
       console.log('global created函数 被调用')
 
-      window.mui.plusReady(function () {
-        var currentWebview = window.plus.webview.currentWebview()
-        var index = window.location.href.indexOf('#')
-        if (index !== -1) {
-          var url = window.location.href.slice(index + 1)
-          console.log('bindCurrentUrl:' + url)
-          currentWebview.setStyle({
-            additionalHttpHeaders: {
-              url: url
-            }
-          })
-        }
-      })
-
+      setWebviewNewUrl()
       showWebview()
     }
   }

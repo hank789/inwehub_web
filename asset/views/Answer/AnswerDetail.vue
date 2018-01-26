@@ -41,7 +41,7 @@
 
         <div class="button-wrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                  @tap.stop.prevent="$router.push('/realAnswer/'+id)">添加回答内容
+                  @tap.stop.prevent="toAnswer()">添加回答内容
 
 
           </button>
@@ -166,6 +166,9 @@
     mounted () {
     },
     methods: {
+      toAnswer () {
+        this.$router.pushPlus('/realAnswer/' + this.id, 'backAndClose')
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },

@@ -6,6 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
+      <div>
       <div class="mui-table-view detail-discover">
         <UserInfo
           :uuid="detail.owner.uuid"
@@ -64,11 +65,11 @@
         ></Statistics>
       </div>
       <!--点赞-->
-      <div class="component-dianzanList" v-if="detail.supporter_list ? detail.supporter_list.length:0">
+      <div class="component-dianzanList" v-if="detail.upvotes">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dianzan1"></use>
         </svg>
-        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.supporter_list.length}}人
+        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
       </div>
       <!--灰色部分-->
       <div class="river"></div>
@@ -83,7 +84,7 @@
         @commentFinish="commentFinish"
         ref="discuss"
       ></Discuss>
-
+        </div>
     </div>
 
     <Share
@@ -118,6 +119,7 @@
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import { pageRefresh } from '../../utils/allPlatform'
 
   export default {
     data () {
@@ -316,6 +318,9 @@
       this.getDetail()
     },
     mounted () {
+      pageRefresh(this, () => {
+        this.refreshPageData()
+      })
       window.mui.previewImage()
       autoTextArea()
     }

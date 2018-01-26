@@ -16,6 +16,23 @@ var EventObj = () => {
     }
   }
 
+  var addLastEventListener = (name, listener) => {
+    console.log('addLastEventListener: ' + name)
+
+    if (typeof window.lastEventListener === 'undefined') {
+      window.lastEventListener = []
+    }
+
+    if (window.lastEventListener[name]) {
+      window.removeEventListener(name, window.lastEventListener[name], false)
+    }
+
+    window.lastEventListener[name] = function (event) {
+      listener(event)
+    }
+    window.addEventListener(name, window.lastEventListener[name], false)
+  }
+
   var addOnceEventListener = (name, callback) => {
     if (events[name]) {
       return -1
@@ -52,7 +69,8 @@ var EventObj = () => {
   return {
     addEventListener: addEventListener,
     addOnceEventListener: addOnceEventListener,
-    addIntervalOnceEventListener: addIntervalOnceEventListener
+    addIntervalOnceEventListener: addIntervalOnceEventListener,
+    addLastEventListener: addLastEventListener
   }
 }
 

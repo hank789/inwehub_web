@@ -95,7 +95,41 @@ function autoBlur () {
 function transferTagToLink (html) {
   var href = 'https://m.inwehub.com/#/tag/detail/$2/questions'
   html = html.replace(/<span class="ql-size-small" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
+
+  html = html.replace(/<span class="ql-size-small appUrl" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
   return html
+}
+
+function dragDownElement (elem, callback) {
+  var startY
+  var moveY
+  var startScreenY
+
+  var oldTop = elem.style.top
+
+  elem.addEventListener('touchstart', (e) => {
+    var touch = e.touches[0]
+    startY = touch.pageY
+    startScreenY = touch.screenY
+  })
+
+  elem.addEventListener('touchmove', (e) => {
+    e.stopPropagation()
+
+    var touch = e.touches[0]
+    moveY = touch.pageY - startY
+
+    if (moveY > 0 && moveY < 100 && startScreenY < 300) {
+      elem.style.top = moveY + 'px'
+    }
+  })
+
+  elem.addEventListener('touchend', (e) => {
+    if (moveY > 100 && startScreenY < 300) {
+      elem.style.top = oldTop
+      callback(moveY + ':' + startScreenY)
+    }
+  })
 }
 
 export {
@@ -106,6 +140,7 @@ export {
   addPreviewAttrForImg,
   secureHtml,
   autoBlur,
-  transferTagToLink
+  transferTagToLink,
+  dragDownElement
 }
 
