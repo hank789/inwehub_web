@@ -5,13 +5,13 @@
 
 
     <div class="freeQuestion-allAnswer bg-blue" @tap.stop.prevent="toContact()" >一键邀请</div>
-    <div class="freeQuestion-upvote" v-if="isAppear">
+    <div class="freeQuestion-upvote" v-if="isAppear" >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-zan"></use>
       </svg>
       {{support_number}}
     </div>
-    <div class="freeQuestion-comment" v-if="isAppear">
+    <div class="freeQuestion-comment" v-if="isAppear" >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-pinglun"></use>
       </svg>
