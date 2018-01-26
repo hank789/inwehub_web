@@ -108,12 +108,14 @@ function dragDownElement (elem, callback) {
   var oldTop = elem.style.top
 
   elem.addEventListener('touchstart', (e) => {
+    e.stopPropagation()
     var touch = e.touches[0]
     startY = touch.pageY
     startScreenY = touch.screenY
   })
 
   elem.addEventListener('touchmove', (e) => {
+    e.stopPropagation()
     var touch = e.touches[0]
     moveY = touch.pageY - startY
 
@@ -123,8 +125,9 @@ function dragDownElement (elem, callback) {
   })
 
   elem.addEventListener('touchend', (e) => {
-    elem.style.top = oldTop
+    e.stopPropagation()
     if (moveY > 100 && startScreenY < 300) {
+      elem.style.top = oldTop
       callback(moveY + ':' + startScreenY)
     }
   })
