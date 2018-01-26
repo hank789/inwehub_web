@@ -165,6 +165,7 @@
 
         var answerContentWrapper = this.$el.querySelector('.answerContent')
         html = addPreviewAttrForImg(html)
+        html = html.replace(/(<p><br><\/p>)*$/, '')
         answerContentWrapper.innerHTML = html
 
         window.mui.previewImage()
