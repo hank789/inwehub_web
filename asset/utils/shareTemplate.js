@@ -74,7 +74,7 @@ function getInvitation (username, rcCode) {
  */
 function getDiscoverDetail (pathUrl, title, imgUrl) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -100,7 +100,7 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  */
 function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
 
   if (!imgUrl) {
     imgUrl = whiteLogo
