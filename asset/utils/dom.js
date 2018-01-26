@@ -100,6 +100,37 @@ function transferTagToLink (html) {
   return html
 }
 
+function dragDownElement (elem, callback) {
+  var startY
+  var moveY
+  var startScreenY
+
+  var oldTop = elem.style.top
+
+  elem.addEventListener('touchstart', (e) => {
+    console.dir(e)
+    var touch = e.touches[0]
+    startY = touch.pageY
+    startScreenY = touch.screenY
+  })
+
+  elem.addEventListener('touchmove', (e) => {
+    var touch = e.touches[0]
+    moveY = touch.pageY - startY
+
+    if (moveY > 0 && moveY < 100 && startScreenY < 300) {
+      elem.style.top = moveY + 'px'
+    }
+  })
+
+  elem.addEventListener('touchend', (e) => {
+    elem.style.top = oldTop
+    if (moveY > 100 && startScreenY < 300) {
+      callback(moveY + ':' + startScreenY)
+    }
+  })
+}
+
 export {
   queryParent,
   textToLink,
@@ -108,6 +139,7 @@ export {
   addPreviewAttrForImg,
   secureHtml,
   autoBlur,
-  transferTagToLink
+  transferTagToLink,
+  dragDownElement
 }
 

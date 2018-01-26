@@ -4,6 +4,7 @@ import { apiRequest } from './request'
 import localEvent from '../stores/localStorage'
 import { alertNoticeOpenNotifitionPermission } from './dialogList'
 import router from '../modules/index/routers/index'
+import { dragDownElement } from './dom'
 
 /**
  * 获取地理位置
@@ -153,19 +154,24 @@ function noticeOpenNotifitionPermission (context) {
  */
 function pageRefresh (context, refreshCallback) {
   var container = context.$el.querySelector('.mui-content')
-  container.classList.add('hideUpToRefreshDescription')
-  window.mui.init({
-    pullRefresh: {
-      container: container, // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-      down: {
-        auto: false, // 可选,默认false.首次加载自动上拉刷新一次
-        callback: () => {
-          refreshCallback()
-          window.mui(container).pullRefresh().endPulldownToRefresh()
-        }
-      }
-    }
+
+  dragDownElement(container, (moveY) => {
+    console.warn('moveY:' + moveY)
+    refreshCallback()
   })
+  // container.classList.add('hideUpToRefreshDescription')
+  // window.mui.init({
+  //   pullRefresh: {
+  //     container: container, // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+  //     down: {
+  //       auto: false, // 可选,默认false.首次加载自动上拉刷新一次
+  //       callback: () => {
+  //         refreshCallback()
+  //         window.mui(container).pullRefresh().endPulldownToRefresh()
+  //       }
+  //     }
+  //   }
+  // })
 }
 
 export {
