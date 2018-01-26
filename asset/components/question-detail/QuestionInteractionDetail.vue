@@ -34,14 +34,14 @@
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.id)">
           直接参与回答
 
         </button>
       </div>
     </div>
 
-
+<!--@tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">-->
 
   </div>
 </template>
