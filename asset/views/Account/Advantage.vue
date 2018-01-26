@@ -99,6 +99,7 @@
             return
           }
           window.mui.toast('保存成功')
+          window.mui.back()
         })
       },
       // 我的擅长列表；
