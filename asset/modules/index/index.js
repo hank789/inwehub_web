@@ -193,13 +193,15 @@ Vue.mixin({
     })
 
     // 刷行数据方法
-    EventObj.addLastEventListener('refreshPageData', (e) => {
-      console.log('calledEvent: refreshPageData')
-      if (this.refreshPageData) {
-        console.log('calledMethod: refreshPageData')
-        this.refreshPageData()
-      }
-    })
+    if (this.refreshPageData) {
+      EventObj.addLastEventListener('refreshPageData', (e) => {
+        console.log('calledEvent: refreshPageData')
+        if (this.refreshPageData) {
+          console.log('calledMethod: refreshPageData')
+          this.refreshPageData()
+        }
+      })
+    }
 
     autoHeight(this.$el)
     hideHeaderHandler(this, 'mounted')
