@@ -115,6 +115,9 @@
           if (response.data.data.info.skill_tags.length >= 0) {
             this.skill_tags = response.data.data.info.skill_tags
           }
+          for (var i = 0; i < this.skill_tags.length; i++) {
+            this.TagValue.push(this.skill_tags[i].value)
+          }
           this.loading = 0
         })
       },
@@ -125,7 +128,6 @@
         if (typeof (val) === 'number') {
           var m = this.TagValue.indexOf(val)
           this.TagValue.splice(m, 1)
-          window.mui.toast('删除成功')
         } else {
           var index = this.newTagName.indexOf(val)
           this.newTagName.splice(index, 1)
@@ -146,7 +148,7 @@
 //          选中的标签添加到数组中
           if (this.skill_tags.length < 20) {
             this.skill_tags.push(list)
-         // 筛选新标签
+             // 筛选新标签
             if (typeof (list.value) === 'string') {
               this.newTagName.push(list.value)
             } else {
