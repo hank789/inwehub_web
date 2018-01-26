@@ -84,7 +84,7 @@
         @commentFinish="commentFinish"
         ref="discuss"
       ></Discuss>
-
+        </div>
     </div>
 
     <Share
@@ -102,7 +102,6 @@
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
-  </div>
   </div>
 </template>
 
