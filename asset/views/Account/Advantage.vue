@@ -128,7 +128,6 @@
         if (typeof (val) === 'number') {
           var m = this.TagValue.indexOf(val)
           this.TagValue.splice(m, 1)
-          window.mui.toast('删除成功')
         } else {
           var index = this.newTagName.indexOf(val)
           this.newTagName.splice(index, 1)
