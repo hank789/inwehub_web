@@ -220,8 +220,8 @@
           var shareOptions = getAskCommunityInteractionAnswers(
             this.id,
             this.ask.question.description,
-            this.ask.question.answer_num,
-            this.ask.question.follow_num
+            this.ask.question.question_answer_num,
+            this.ask.question.question_follow_num
           )
 
           this.shareTitle = shareOptions.title
