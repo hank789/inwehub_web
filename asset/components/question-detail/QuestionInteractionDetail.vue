@@ -32,10 +32,17 @@
 
         </button>
       </div>
-      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2">
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!ask.current_user_answer_id">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.id)">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
           直接参与回答
+
+        </button>
+      </div>
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')">
+          查看我的回答
 
         </button>
       </div>
