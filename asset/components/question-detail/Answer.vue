@@ -117,7 +117,9 @@
       },
       answer: {
         type: Object,
-        default: {}
+        default: function () {
+          return {}
+        }
       },
       isFollow: {
         type: Boolean,
