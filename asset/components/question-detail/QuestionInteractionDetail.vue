@@ -34,7 +34,7 @@
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'list-detail-page-realAnswer-once',true,'pop-in','close',true)">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
           直接参与回答
 
         </button>

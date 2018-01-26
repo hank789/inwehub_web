@@ -167,7 +167,7 @@
     },
     methods: {
       toAnswer () {
-        this.$router.pushPlus('/realAnswer/' + this.id, 'list-detail-page-realAnswer-once', true, 'pop-in', 'close', true)
+        this.$router.pushPlus('/realAnswer/' + this.id, 'backAndClose')
       },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
