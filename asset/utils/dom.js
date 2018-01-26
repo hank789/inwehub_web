@@ -108,7 +108,6 @@ function dragDownElement (elem, callback) {
   var oldTop = elem.style.top
 
   elem.addEventListener('touchstart', (e) => {
-    console.dir(e)
     var touch = e.touches[0]
     startY = touch.pageY
     startScreenY = touch.screenY
