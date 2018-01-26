@@ -138,8 +138,8 @@ function getInviteAnswerDetail (questionId, description, answernum, followednum)
   }
 }
 
-function getResumeDetail (realname, companyName, avatarUrl) {
-  var link = process.env.H5_ROOT + '/?#/share/resume/' + this.uuid + '?time=' + (new Date().getTime())
+function getResumeDetail (uuid, realname, companyName, avatarUrl) {
+  var link = process.env.H5_ROOT + '/#/share/resume/' + uuid + '?time=' + (new Date().getTime())
 
   return {
     title: 'InweHub名片 | ' + realname + '：' + companyName + '|' + '咨询顾问的专属身份认证@InweHub',

@@ -431,6 +431,7 @@
       },
       bindWechatShare () {
         var shareOptions = getResumeDetail(
+          this.uuid,
           this.resume.info.name,
           this.resume.info.company,
           this.resume.info.avatar_url
