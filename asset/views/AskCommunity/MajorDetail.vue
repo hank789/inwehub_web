@@ -16,7 +16,8 @@
         ></Question>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
-                :answer="answer"
+                :answer="ask.answers[0]"
+                :questionId="ask.question.id"
                 :needMoney="true"
                 :isFollow="true"
                 :showModifyBtn="false"

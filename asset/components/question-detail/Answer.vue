@@ -151,7 +151,13 @@
         }
       }
     },
-    mounted () {},
+    mounted () {
+      if (this.answer && this.answer.content) {
+        var content = this.answer.content
+        var objs = JSON.parse(content)
+        this.editorReadObj.setContents(objs)
+      }
+    },
     methods: {
       toPay () {
         this.$emit('toPay')
