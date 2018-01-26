@@ -114,6 +114,8 @@ function dragDownElement (elem, callback) {
   })
 
   elem.addEventListener('touchmove', (e) => {
+    e.stopPropagation()
+
     var touch = e.touches[0]
     moveY = touch.pageY - startY
 
