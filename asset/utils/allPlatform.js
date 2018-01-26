@@ -153,6 +153,7 @@ function noticeOpenNotifitionPermission (context) {
  */
 function pageRefresh (context, refreshCallback) {
   var container = context.$el.querySelector('.mui-content')
+  container.classList.add('hideUpToRefreshDescription')
   window.mui.init({
     pullRefresh: {
       container: container, // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -161,12 +162,6 @@ function pageRefresh (context, refreshCallback) {
         callback: () => {
           refreshCallback()
           window.mui(container).pullRefresh().endPulldownToRefresh()
-
-          setTimeout(() => {
-            if (window.mui(container).length) {
-              window.mui(container).pullRefresh().refresh(true)
-            }
-          }, 1000)
         }
       }
     }
