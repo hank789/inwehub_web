@@ -21,10 +21,10 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3" @tap.stop.prevent="$router.pushPlus(data.url)">{{data.feed.content}}</div>
+    <div class="text-16-444 text-line-3">{{data.feed.content}}</div>
 
 
-    <div class="container-answer margin-10-0-0">
+    <div class="container-answer margin-10-0-0"  @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
       <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.title}}</div>
       <div class="interval margin-top-6">{{data.feed.answer_number}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
     </div>
