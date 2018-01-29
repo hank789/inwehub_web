@@ -1671,6 +1671,42 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 推送设置
+    path: '/push/setting',
+    name: '/push-setting',
+    meta: {
+      title: '推送设置',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSetting.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的关注
+    path: '/push/setting/follow',
+    name: 'push-setting-follow',
+    meta: {
+      title: '我的关注',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSettingFollow.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 与我有关
+    path: '/push/setting/aboutme',
+    name: 'push-setting-aboutme',
+    meta: {
+      title: '与我有关',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSettingAboutMe.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // seekingCooperation
     path: '/seekingCooperation',
     name: 'seekingCooperation',
