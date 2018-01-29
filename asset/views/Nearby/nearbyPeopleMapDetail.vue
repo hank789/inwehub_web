@@ -9,7 +9,7 @@
       <div class="menu">
         <div class="switch">
           <p>附近的人</p>
-          <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近的公司</p>
+          <p @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">附近的公司</p>
         </div>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyPeople')">
           <use xlink:href="#icon-shaixuan"></use>
@@ -19,6 +19,49 @@
         <img src="../../statics/images/guide_01.png" />
       </div>
       <ul class="cions-list">
+        <div class="userArea">共有<a>8</a>名用户在当前区域 <i></i></div>
+        <li>
+          <div class="cions-avatar">
+            <img src="../../statics/images/guide_01.png"/>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="detail">
+            <p>丁冉<i>（< 200m）</i></p>
+            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
+          </div>
+          <div class="fouce blue">关注Ta</div>
+          <i class="bot"></i>
+        </li>
+        <li>
+          <div class="cions-avatar">
+            <img src="../../statics/images/guide_01.png"/>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="detail">
+            <p>丁冉<i>（< 200m）</i></p>
+            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
+          </div>
+          <div class="fouce blue">关注Ta</div>
+          <i class="bot"></i>
+        </li>
+        <li>
+          <div class="cions-avatar">
+            <img src="../../statics/images/guide_01.png"/>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="detail">
+            <p>丁冉<i>（< 200m）</i></p>
+            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
+          </div>
+          <div class="fouce blue">关注Ta</div>
+          <i class="bot"></i>
+        </li>
         <li>
           <div class="cions-avatar">
             <img src="../../statics/images/guide_01.png"/>
@@ -88,9 +131,9 @@
 
   .bot {
     position: absolute;
-    right: 0;
+    right: 4%;
     bottom: 0;
-    left: 0;
+    left: 4%;
     height: 1px;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -147,12 +190,50 @@
 
   /*列表区域*/
   .cions-list{
-    width:100%;
+    width: 100%;
     overflow: hidden;
-    padding: 0 4%;
+    z-index: 10;
+    position: absolute;
+    top: 240px;
+    background: #ffff;
   }
+  .userArea{
+    width:100%;
+    height:56px;
+    font-size: 15px;
+    color: #3c3e44;
+    text-align: center;
+    line-height: 56px;
+    position: relative;
+  }
+  .userArea:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+  }
+  .userArea i{
+    display: block;
+    width:34px;
+    height:2px;
+    background: #808080;
+    position: absolute;
+    top:10px;
+    left:0;
+    right:0;
+    margin: auto;
+  }
+
+
+
   .cions-list li{
     position: relative;
+    padding: 0 4%;
     height:64px;
   }
   .cions-list li div{
