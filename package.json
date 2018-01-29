@@ -20,7 +20,7 @@
     "less-loader": "^3.0.0",
     "quill": "^1.2.6",
     "quilljs-renderer": "0.0.8",
-    "raven-js": "^3.14.2",
+    "raven-js": "^3.22.1",
     "sortablejs": "^1.6.0",
     "svgo": "^0.7.2",
     "swiper": "^3.4.2",
