@@ -62,7 +62,7 @@
         :supportList="data.feed.supporter_list"
         :commentNumber="data.feed.comment_number"
         :commentList="data.feed.comments"
-        :detailUrl="data.url"
+        :detailUrl="data.feed.comment_url"
         @commentIt="commentIt"
       ></SuppertAndComment>
 
