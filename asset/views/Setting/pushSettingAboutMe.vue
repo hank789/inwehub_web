@@ -53,10 +53,129 @@
     </div>
   </div>
 </template>
-
 <script>
+  import { postRequest } from '../../utils/request'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
-</script>
+  export default {
+    data () {
+      return {
+        upvoted: 1,
+        followed: 1,
+        mentioned: 1,
+        commented: 1,
+        invited: 1,
+        chatted: 1,
+        show: 1
+      }
+    },
+    components: {
+    },
+    methods: {
+      // 应用从后台切换回前台事件
+      refreshResumeData () {
+        this.checkPermission()
+      },
+     // 获取推送信息
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.upvoted = response.data.data.push_rel_mine_upvoted
+          this.followed = response.data.data.push_rel_mine_followed
+          this.mentioned = response.data.data.push_rel_mine_mentioned
+          this.commented = response.data.data.push_rel_mine_commented
+          this.invited = response.data.data.push_rel_mine_invited
+          this.chatted = response.data.data.push_rel_mine_chatted
+        })
+      },
+      openNotification (type) {
+        if (this.show) {
+          if (type === 'new_user') {
+            switch (this.new_user) {
+              case 0:
+                this.new_user = 1
+                break
+              case 1:
+                this.new_user = 0
+                break
+            }
+          } else {
+            switch (this.new_answered) {
+              case 0:
+                this.new_answered = 1
+                break
+              case 1:
+                this.new_answered = 0
+                break
+            }
+          }
+          this.updateNotification()
+        } else {
+          this.show = 0
+          this.upvoted = 0
+          this.followed = 0
+          this.mentioned = 0
+          this.commented = 0
+          this.invited = 0
+          this.chatted = 0
+          toSettingSystem('NOTIFITION')
+        }
+      },
+      // 检查权限
+      checkPermission () {
+        checkPermission('NOTIFITION', () => {
+          //  成功的回调
+          this.show = 1
+          this.getNotification()
+        }, (result) => {
+          //  失败的回调
+          this.show = 0
+          this.upvoted = 0
+          this.followed = 0
+          this.mentioned = 0
+          this.commented = 0
+          this.invited = 0
+          this.chatted = 0
+          // 去系统开启通知
+          toSettingSystem('NOTIFITION')
+        })
+      },
+      // 设置权限
+      updateNotification () {
+        postRequest(`notification/push/update`, {
+          push_rel_mine_upvoted: this.upvoted,
+          push_rel_mine_followed: this.followed,
+          push_rel_mine_mentioned: this.mentioned,
+          push_rel_mine_commented: this.commented,
+          push_rel_mine_invited: this.invited,
+          push_rel_mine_chatted: this.chatted
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.upvoted = response.data.data.push_rel_mine_upvoted
+          this.followed = response.data.data.push_rel_mine_followed
+          this.mentioned = response.data.data.push_rel_mine_mentioned
+          this.commented = response.data.data.push_rel_mine_commented
+          this.invited = response.data.data.push_rel_mine_invited
+          this.chatted = response.data.data.push_rel_mine_chatted
+        })
+      }
+    },
+    created () {
+    },
+    mounted () {
+      this.checkPermission()
+      this.getNotification()
+    }
+  }
+  </script>
 
 <style scoped>
   /*清掉自带样式*/
