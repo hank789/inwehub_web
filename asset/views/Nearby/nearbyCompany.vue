@@ -2,9 +2,20 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">附近企业</h1>
+      <h1 class="mui-title">附近发现</h1>
     </header>
     <div class="mui-content">
+      <!--导航栏-->
+      <div class="menu">
+         <div class="switch">
+           <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
+           <p>附近的公司</p>
+         </div>
+          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/nearbyCompany/MapDetail')">
+            <use xlink:href="#icon-ditu"></use>
+          </svg>
+      </div>
+
       <!--搜索框-->
      <div class="searchContainer">
        <p>
@@ -235,8 +246,6 @@
     height:54px;
     background:#f3f4f6;
     padding-top: 10px;
-    position: absolute;
-    top:0;
   }
   .searchContainer p{
     width:92%;
@@ -290,8 +299,6 @@
   height:45px;
   padding: 0 4%;
   line-height: 45px;
-  position: absolute;
-  top:54px;
   }
   .apply p:nth-of-type(1){
     float: left;
@@ -377,5 +384,40 @@
   .listWrapper{
     top:99px;
   }
-
+ /*导航栏*/
+  .menu{
+    width: 100%;
+    height:50px;
+    background:#3c3e44;
+    position: relative;
+  }
+  .menu .switch{
+    width:210px;
+    height:34px;
+    border:1px solid #808080;
+    border-radius: 50px;
+    position: absolute;
+    left: 0;
+    right:0;
+    margin: auto;
+  }
+  .menu .switch p{
+    width:50%;
+    height:100%;
+    font-size: 14px;
+    color: #fefefe;
+    float: left;
+    text-align: center;
+    line-height: 34px;
+  }
+  .menu .switch p:nth-of-type(2){
+    background:#808080;
+    border-radius: 0 50px 50px 0;
+  }
+  .menu svg{
+    position: absolute;
+    right:3%;
+    font-size: 25px;
+    color: #fefefe;
+  }
 </style>
