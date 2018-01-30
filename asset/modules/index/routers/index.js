@@ -78,7 +78,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
         nextUrl = url
       } else {
         if (process.env.NODE_ENV === 'development') {
-          nextUrl = url
+          nextUrl = 'index.html#' + url // location.protocol + '//' + window.location.host + '/' + 'index.html#' + url
         } else {
           nextUrl = '/public/index.html#' + url
         }
