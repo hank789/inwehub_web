@@ -152,6 +152,11 @@
               if (window.mui.os.ios) {
                 noticeOpenNotifitionPermission(self)
               }
+
+              //resume callback
+              if (self.$refs.routerView.hasOwnProperty('refreshResumeData')) {
+                self.$refs.routerView.refreshResumeData()
+              }
             }, false)
 
             // 监听推送
