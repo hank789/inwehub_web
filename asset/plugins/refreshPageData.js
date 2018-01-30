@@ -7,11 +7,6 @@ import { showWebview } from '../utils/webview'
 
 export default {
   install: function (Vue, options) {
-    Vue.myGlobalMethod = function () {
-      // 逻辑...
-    }
-
-    // 3. 注入组件
     Vue.mixin({
       activated () {
         if (!this.$el || this.$el.id !== 'router-view') {
@@ -28,8 +23,6 @@ export default {
         if (!this.$el || this.$el.id !== 'router-view') {
           return
         }
-
-        this.myMethod()
 
         console.log('global mounted函数 被调用')
 
@@ -64,10 +57,5 @@ export default {
         }
       }
     })
-
-    // 4. 添加实例方法
-    Vue.prototype.myMethod = function (methodOptions) {
-      console.error('myMethod')
-    }
   }
 }
