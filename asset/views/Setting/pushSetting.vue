@@ -9,7 +9,7 @@
        <div class="notice_t">
          <div class="system">
            开启系统通知
-           <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
+           <div class="mui-switch mui-switch-blue  mui-switch-mini"  :class="show ? 'mui-active': 'mui-disabled' ">
              <div class="mui-switch-handle"></div>
            </div>
            <i class="bot"></i>
@@ -61,12 +61,16 @@
       return {
         disturb: 0,
         system_notify: 1,
-        show: 1
+        show: 0
       }
     },
     components: {
     },
     methods: {
+      // 应用从后台切换回前台事件
+      refreshResumeData () {
+        this.checkPermission()
+      },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
           var code = response.data.code
@@ -79,16 +83,46 @@
         })
       },
       openDisturb (type) {
-        console.error(type)
         if (this.show) {
-          if (this.type === 1) {
-            this.type = 0
+          if (type === 'disturb') {
+            switch (this.disturb) {
+              case 0:
+                this.disturb = 1
+                break
+              case 1:
+                this.disturb = 0
+                break
+            }
           } else {
-            this.type = 1
+            switch (this.system_notify) {
+              case 0:
+                this.system_notify = 1
+                break
+              case 1:
+                this.system_notify = 0
+                break
+            }
           }
         } else {
+          this.system_notify = 0
+          this.disturb = 0
           toSettingSystem('NOTIFITION')
         }
+      },
+      // 检查权限
+      checkPermission () {
+        checkPermission('NOTIFITION', () => {
+          //  成功的回调
+          this.show = 1
+          this.getNotification()
+        }, (result) => {
+          //  失败的回调
+          this.show = 0
+          this.system_notify = 0
+          this.disturb = 0
+          // 去系统开启通知
+          toSettingSystem('NOTIFITION')
+        })
       }
     },
     computed: {
@@ -96,23 +130,7 @@
     created () {
     },
     mounted () {
-      // 应用从后台切换回前台事件
-      window.addEventListener('resume', () => {
-
-      })
-
-      checkPermission('NOTIFITION', () => {
-      //  成功的回调
-        this.show = 1
-        this.getNotification()
-      }, (result) => {
-      //  失败的回调
-        this.show = 0
-        this.system_notify = 0
-        this.disturb = 0
-     // 去系统开启通知
-        toSettingSystem('NOTIFITION')
-      })
+      this.checkPermission()
     }
   }
 </script>
