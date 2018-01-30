@@ -103,6 +103,7 @@
                 break
             }
           }
+          this.updateNotification()
         } else {
           this.system_notify = 0
           this.disturb = 0
@@ -122,6 +123,21 @@
           this.disturb = 0
           // 去系统开启通知
           toSettingSystem('NOTIFITION')
+        })
+      },
+     // 设置权限
+      updateNotification () {
+        postRequest(`notification/push/update`, {
+          push_system_notify: this.system_notify,
+          push_do_not_disturb: this.disturb
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.disturb = response.data.data.push_do_not_disturb
+          this.system_notify = response.data.data.push_system_notify
         })
       }
     },
