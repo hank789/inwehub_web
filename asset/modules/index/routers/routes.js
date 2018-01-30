@@ -1478,14 +1478,50 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 附近的人
+    path: '/nearbyPeople',
+    name: 'nearby-people',
+    meta: {
+      title: '附近发现',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Nearby/nearbyPeople.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 附近企业
     path: '/nearbyCompany',
     name: 'nearbyCompany',
     meta: {
-      title: '附近企业',
+      title: '附近发现',
       wechatHideHeader: true
     },
-    component: require('../../../views/NearbyCompany/nearbyCompany.vue'),
+    component: require('../../../views/Nearby/nearbyCompany.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近发现的人地图详情页
+    path: '/nearbyPeople/MapDetail',
+    name: 'nearby-map-detail',
+    meta: {
+      title: '附近发现',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Nearby/nearbyPeopleMapDetail.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近发现的公司地图详情页
+    path: '/nearbyCompany/MapDetail',
+    name: 'nearby-map-detail',
+    meta: {
+      title: '附近发现',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Nearby/nearbyCompanyMapDetail.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1497,7 +1533,7 @@ const routes = [
       title: '企业详情',
       wechatHideHeader: true
     },
-    component: require('../../../views/NearbyCompany/companyDetails.vue'),
+    component: require('../../../views/Nearby/companyDetails.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1631,6 +1667,42 @@ const routes = [
       wechatHideHeader: true
     },
     component: require('../../../views/About.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 推送设置
+    path: '/push/setting',
+    name: '/push-setting',
+    meta: {
+      title: '推送设置',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSetting.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的关注
+    path: '/push/setting/follow',
+    name: 'push-setting-follow',
+    meta: {
+      title: '我的关注',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSettingFollow.vue'),
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 与我有关
+    path: '/push/setting/aboutme',
+    name: 'push-setting-aboutme',
+    meta: {
+      title: '与我有关',
+      wechatHideHeader: true
+    },
+    component: require('../../../views/Setting/pushSettingAboutMe.vue'),
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
