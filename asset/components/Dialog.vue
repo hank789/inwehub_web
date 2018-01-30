@@ -390,7 +390,7 @@
         </div>
         <!--跳转按钮-->
         <p class="my-wallet alertConfirm" id="my-wallet" v-if="options.Coupon.coupon_type === 4">前往付费围观专业回答</p>
-        <p class="my-wallet alertConfirm" id="my-wallet" v-else>查看我的钱包</p>
+        <p class="my-wallet alertConfirm" id="my-wallet" v-else>前往付费围观专业回答</p>
         <!---->
       </div>
       <!--关闭按钮-->
@@ -1471,12 +1471,12 @@
   .my-wallet{
     width:88%;
     height:34px;
-    border:1px solid #fc98bb;
+    background: #fcc816;
     border-radius: 50px;
     text-align: center;
     line-height: 34px;
     font-size:14px;
-    color: #fdd6e3;
+    color: #444444;
     position: absolute;
     left:0;
     right:0;

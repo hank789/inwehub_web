@@ -303,7 +303,7 @@ function alertGetCoupon (context, Coupon) {
             context.$router.pushPlus('/askCommunity/majors')
             return true
           } else {
-            context.$router.pushPlus('/my/Finance')
+            context.$router.pushPlus('/askCommunity/majors')
             return true
           }
         }

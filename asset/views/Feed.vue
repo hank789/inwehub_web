@@ -193,6 +193,7 @@
       }
     },
     mounted () {
+      userAbility.InvitationCoupon(this)
       // 新手任务
       userAbility.newbieTask(this)
       // 每日签到
