@@ -205,9 +205,6 @@
           case '/my':
             this.isMy = true
             break
-          case '/task':
-            this.isAsk = true
-            break
           case '/discover':
             this.isDiscover = true
             break
