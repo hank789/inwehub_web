@@ -35,7 +35,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         shotUrl = url.slice(urlIndex + 1)
       }
 
-      console.log('openWebviewByUrl:current_webview_url:' + currentWebviewUrl + ', shortUrl' + shotUrl)
+      console.log('openWebviewByUrl:current_webview_url:' + currentWebviewUrl + ', shortUrl:' + shotUrl)
 
       if (currentWebviewUrl !== shotUrl || bindHttpUrl !== shotUrl) {
         console.log('openWebviewByUrl:load:' + url)
