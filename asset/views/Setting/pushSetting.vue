@@ -5,11 +5,11 @@
       <h1 class="mui-title">设置</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
        <div class="notice_t">
          <div class="system">
            开启系统通知
-           <div class="mui-switch mui-switch-blue  mui-switch-mini"  :class="show ? 'mui-active': 'mui-disabled' ">
+           <div class="mui-switch mui-switch-blue  mui-switch-mini"  :class="notices.all ? 'mui-active': 'mui-disabled'" @tap.stop.prevent="openDisturb('all')">
              <div class="mui-switch-handle"></div>
            </div>
            <i class="bot"></i>
@@ -21,7 +21,7 @@
         <ul class="notice_m">
           <li>
             活动通知及系统公告
-            <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="system_notify ? 'mui-active': '' " @tap.stop.prevent="openDisturb('system_notify')">
+            <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="notices.system_notify ? 'mui-active': '' " @tap.stop.prevent="openDisturb('system_notify')">
               <div class="mui-switch-handle"></div>
             </div>
             <i class="bot"></i>
@@ -44,7 +44,7 @@
       <div class="grey"></div>
       <div class="notice_b">
         免打扰<span>（22:00-07:30自动关闭推送）</span>
-        <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="disturb ? 'mui-active': '' " @tap.stop.prevent="openDisturb('disturb')">
+        <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="notices.disturb ? 'mui-active': '' " @tap.stop.prevent="openDisturb('disturb')">
           <div class="mui-switch-handle"></div>
         </div>
         <i class="bot"></i>
@@ -55,21 +55,32 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import Vue from 'vue'
 
   export default {
     data () {
       return {
-        disturb: 0,
-        system_notify: 1,
-        show: 0
+        loading: 1,
+        isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        notices: {
+          all: 1,
+          disturb: 0,
+          system_notify: 0
+        }
       }
     },
     components: {
     },
     methods: {
-      // 应用从后台切换回前台事件
       refreshResumeData () {
         this.checkPermission()
+      },
+      closeAll () {
+        this.notices = {
+          all: 0,
+          disturb: 0,
+          system_notify: 0
+        }
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
@@ -78,66 +89,46 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.disturb = response.data.data.push_do_not_disturb
-          this.system_notify = response.data.data.push_system_notify
+          this.loading = 0
+          this.notices.disturb = response.data.data.push_do_not_disturb
+          this.notices.system_notify = response.data.data.push_system_notify
         })
       },
       openDisturb (type) {
-        if (this.show) {
-          if (type === 'disturb') {
-            switch (this.disturb) {
-              case 0:
-                this.disturb = 1
-                break
-              case 1:
-                this.disturb = 0
-                break
-            }
-          } else {
-            switch (this.system_notify) {
-              case 0:
-                this.system_notify = 1
-                break
-              case 1:
-                this.system_notify = 0
-                break
-            }
-          }
+        if (type === 'all' && this.notices.all) {
+          this.closeAll()
           this.updateNotification()
         } else {
-          this.system_notify = 0
-          this.disturb = 0
-          toSettingSystem('NOTIFITION')
+          var value = this.notices[type] ? 0 : 1
+          if (value && this.isOpenNotification === 0) {
+            // todo 显示confirm 提示用户去开启通知权限
+          }
+          Vue.set(this.notices, type, value)
+          this.updateNotification()
         }
       },
-      // 检查权限
       checkPermission () {
         checkPermission('NOTIFITION', () => {
-          //  成功的回调
-          this.show = 1
-          this.getNotification()
+          this.notices.all = 1
+          this.isOpenNotification = 1
         }, (result) => {
-          //  失败的回调
-          this.show = 0
-          this.system_notify = 0
-          this.disturb = 0
-          // 去系统开启通知
-          toSettingSystem('NOTIFITION')
+          this.notices.all = 0
+          this.isOpenNotification = 0
+          this.closeAll()
         })
       },
-     // 设置权限
       updateNotification () {
         postRequest(`notification/push/update`, {
-          push_system_notify: this.system_notify,
-          push_do_not_disturb: this.disturb
+          push_system_notify: this.notices.system_notify,
+          push_do_not_disturb: this.notices.disturb
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          this.disturb = response.data.data.push_do_not_disturb
-          this.system_notify = response.data.data.push_system_notify
+          this.notices.disturb = response.data.data.push_do_not_disturb
+          this.notices.system_notify = response.data.data.push_system_notify
         })
       }
     },
@@ -146,6 +137,7 @@
     created () {
     },
     mounted () {
+      this.getNotification()
       this.checkPermission()
     }
   }
