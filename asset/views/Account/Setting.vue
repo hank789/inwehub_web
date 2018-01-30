@@ -8,7 +8,6 @@
     </header>
 
     <div class="mui-content">
-
       <ul>
         <li>
           <p>绑定微信</p>

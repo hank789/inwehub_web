@@ -21,7 +21,7 @@
         <ul class="notice_m">
           <li>
             活动通知及系统公告
-            <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
+            <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="system_notify ? 'mui-active': '' " @tap.stop.prevent="openDisturb('system_notify')">
               <div class="mui-switch-handle"></div>
             </div>
             <i class="bot"></i>
@@ -44,7 +44,7 @@
       <div class="grey"></div>
       <div class="notice_b">
         免打扰<span>（22:00-07:30自动关闭推送）</span>
-        <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
+        <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="disturb ? 'mui-active': '' " @tap.stop.prevent="openDisturb('disturb')">
           <div class="mui-switch-handle"></div>
         </div>
         <i class="bot"></i>
@@ -52,14 +52,72 @@
     </div>
   </div>
 </template>
-
 <script>
+  import { postRequest } from '../../utils/request'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
+  export default {
+    data () {
+      return {
+        disturb: 0,
+        system_notify: 1,
+        show: 1
+      }
+    },
+    components: {
+    },
+    methods: {
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.disturb = response.data.data.push_do_not_disturb
+          this.system_notify = response.data.data.push_system_notify
+        })
+      },
+      openDisturb (type) {
+        console.error(type)
+        if (this.show) {
+          if (this.type === 1) {
+            this.type = 0
+          } else {
+            this.type = 1
+          }
+        } else {
+          toSettingSystem('NOTIFITION')
+        }
+      }
+    },
+    computed: {
+    },
+    created () {
+    },
+    mounted () {
+      // 应用从后台切换回前台事件
+      window.addEventListener('resume', () => {
+
+      })
+
+      checkPermission('NOTIFITION', () => {
+      //  成功的回调
+        this.show = 1
+        this.getNotification()
+      }, (result) => {
+      //  失败的回调
+        this.show = 0
+        this.system_notify = 0
+        this.disturb = 0
+     // 去系统开启通知
+        toSettingSystem('NOTIFITION')
+      })
+    }
+  }
 </script>
 
 <style scoped>
-
-  /*清掉自带样式*/
 
   div,
   p,
