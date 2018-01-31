@@ -43,6 +43,9 @@ function saveLocationInfo () {
       deviceModel = window.plus.os.version
       deviceCode = window.plus.device.uuid
     }
+
+    localEvent.setLocalItem('location', position)
+
     apiRequest(`system/location`, {
       device_name: deviceName,
       device_system: deviceSystem,
