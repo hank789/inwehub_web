@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">精选推荐</h1>
+      <h1 class="mui-title">Ta的专栏</h1>
     </header>
 
     <div class="mui-content">
@@ -18,9 +18,7 @@
         class="listWrapper">
         <!--类别-->
 
-        <!--<ServiceRecommendation @alertClick="alertClick"></ServiceRecommendation>-->
         <ul class="recommend">
-          <p class="recommend_title">精选推荐</p>
           <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
             <div class="container-image">
               <img :src="recommend.data ? recommend.data.img:''"  />
@@ -46,12 +44,12 @@
 </template>
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { postRequest } from '../utils/request'
-  import RefreshList from '../components/refresh/List.vue'
-  import userAbility from '../utils/userAbility'
-  import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import localEvent from '../stores/localStorage'
-  import { goThirdPartyArticle } from '../utils/webview'
+  import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
+  import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
+  import localEvent from '../../stores/localStorage'
+  import { goThirdPartyArticle } from '../../utils/webview'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
@@ -180,7 +178,7 @@
     font-style: normal;
   }
   .mui-content{
-    background: #f3f4f6;
+    background: #fff;
   }
 
   /*列表*/
@@ -188,15 +186,6 @@
     width:100%;
     background: #FFFFFF;
     overflow: hidden;
-  }
-  .recommend_title{
-    width:100%;
-    padding: 0 4%;
-    height:44px;
-    font-size:16px;
-    color: #444444;
-    line-height: 44px;
-    background: #FFFFFF;
   }
   .recommend li{
     width:92%;
@@ -274,6 +263,7 @@
   }
   .listWrapper{
     margin-top: 0px;
+    padding-top: 10px;
   }
 
   /*底部的详情*/

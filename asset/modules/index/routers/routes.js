@@ -745,6 +745,30 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // Ta的专栏；
+    path: '/dynamic/list',
+    name: 'dynamic_list',
+    component: require('../../../views/Account/DynamicList.vue'),
+    meta: {
+      title: 'Ta的专栏',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // Ta的动态；
+    path: '/article/list',
+    name: 'article_list',
+    component: require('../../../views/Account/ArticleList.vue'),
+    meta: {
+      title: 'Ta的动态',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 个人信息
     path: '/my/info',
     name: 'my-info',
