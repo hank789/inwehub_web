@@ -241,6 +241,7 @@
       },
       refreshPageData () {
         if (this.$route.query.refresh) {
+          this.$route.query.refresh = false
           this.$refs.RefreshList.refreshPageData(this.prevOtherData)
         }
         this.$refs.ctextarea.refreshPageData()
