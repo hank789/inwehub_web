@@ -16,7 +16,7 @@
         </svg>
       </div>
       <div class="map">
-        <img src="../../statics/images/guide_01.png" />
+        <div id="allmap"></div>
       </div>
       <ul>
         <div class="userArea">共有<a>8</a>名用户在当前区域 <i></i></div>
@@ -64,7 +64,7 @@
     },
     methods: {
       // 申请添加擅长标签；
-      getData () {
+      getData() {
         postRequest('company/nearbySearch', {
           page: this.page,
           longitude: this.long,
@@ -88,9 +88,39 @@
           this.page++
         })
       },
-      loadMore () {
+      loadMore() {
         this.busy = true
         this.getData()
+      },
+      getMap() {
+        // 百度地图API功能
+        var map = new window.BMap.Map('allmap')
+        var point = new window.BMap.Point(this.long, this.lat)
+        map.centerAndZoom(point, 15)
+        var opts = {
+          position: point,    // 指定文本标注所在的地理位置
+          offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
+        }
+        // 绘制公司名称
+        for (var i = 0; i < this.list.length; i++) {
+          var label = new window.BMap.Label(this.list[i].address_province, opts)  // 创建文本标注对象
+          label.setStyle({
+            border: 'none',
+            background: 'none',
+            color: '#ffffff',
+            fontSize: '15px',
+            height: '20px',
+            lineHeight: '20px',
+            fontFamily: '微软雅黑'
+          })
+          // 绘制公司位置
+          var circle = new window.BMap.Circle(
+            point,
+            200,
+            {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
+          map.addOverlay(circle)
+          map.addOverlay(label)
+        }
       }
     },
     mounted () {
@@ -103,6 +133,7 @@
       if (location.longitude) {
         this.long = location.longitude
         this.lat = location.latitude
+        this.getMap()
 //        this.getData()
 //        console.error(location.longitude)
       } else {
@@ -118,9 +149,7 @@
     },
     updated () {
     }
-
   }
-
 </script>
 
 <style scoped>
@@ -199,6 +228,7 @@
   /*地图*/
   .map{
     width:100%;
+    height:200px;
     overflow: hidden;
   }
   .map img{
@@ -248,8 +278,6 @@
     bottom: 0;
     background: #ffff;
     height: 450px;
-  }
-  ul .container{
   }
   ul li{
     width:100%;
@@ -310,5 +338,13 @@
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
     font-size: 14px;
+  }
+
+  #allmap {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
   }
 </style>
