@@ -26,7 +26,7 @@
       <img :src="data.feed.img"/>
     </div>
 
-    <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+    <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
