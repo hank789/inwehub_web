@@ -152,7 +152,7 @@
       list: [],
       commentTargetComponent: null,
       is_company: currentUser.is_company,
-      emptyDescription: '暂无您关注的内容',
+      emptyDescription: '暂无您关注的用户的动态',
       search_type: 1
     }),
     created () {
@@ -230,6 +230,11 @@
         })
       },
       chooseType (type) {
+        if (type === 1) {
+          this.emptyDescription = '暂无您关注的用户的动态'
+        } else {
+          this.emptyDescription = '暂无您关注的内容'
+        }
         this.list = []
         this.search_type = type
         this.search_type = type
