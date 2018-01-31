@@ -13,7 +13,7 @@
       <div class="menu">
         <span @tap.stop.prevent="">回答  <i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
-        <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">动态</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">分享</span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
       </div>
       <!--内容区域-->

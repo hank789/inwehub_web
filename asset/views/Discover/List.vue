@@ -33,7 +33,7 @@
                   <use xlink:href="#icon-tijiaowenzhang1"></use>
                 </svg>
               </div>
-              <p>动态分享</p>
+              <p>文章分享</p>
             </li>
             <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
               <div class="discover-round">
@@ -76,7 +76,7 @@
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
             <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
             <div class="recommend_datail">
-              <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+              <p class="container_type yellow" v-if="recommend.read_type == '1'">文章分享</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '2'">专业问答</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '3'">互动提问</p>
               <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>

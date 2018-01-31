@@ -122,7 +122,7 @@
           </p>
           <a></a>
           <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
-            动态 <span>{{ resume.info.submission_count }}</span>
+            分享 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
           <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
