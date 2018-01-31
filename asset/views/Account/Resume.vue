@@ -131,7 +131,7 @@
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <div class="dynamic"  @tap.stop.prevent="$router.pushPlus('/dynamic/list')">
+        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list')">
           <p>Ta的动态 <i>74</i></p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -139,7 +139,7 @@
           <i class="bot"></i>
         </div>
         <!--Ta的专栏-->
-        <div class="specialColumn">
+        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list')">
           <p>Ta的专栏 </p>
           <p>文章<span>54</span><i></i></p>
           <p>评论<span>33</span><i></i></p>
