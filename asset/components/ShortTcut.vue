@@ -78,7 +78,7 @@
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
           </p>
-          <span class="aside_l">动态</span>
+          <span class="aside_l">分享</span>
         </li>
       </ul>
     </div>
