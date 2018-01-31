@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="text-14-444 ellipsis textToLink" v-html="data.feed.comment_content" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
+    <div class="text-14-444 ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
     <div class="freeQuestion-container comment-container ">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
@@ -50,6 +50,7 @@
   import Avatar from '../../components/image/Avatar.vue'
   import Invitation from '../../components/feed/QuestionInvitationAnswer.vue'
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -73,6 +74,9 @@
 
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
