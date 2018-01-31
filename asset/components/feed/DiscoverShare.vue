@@ -11,7 +11,7 @@
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          <timeago :since="timeago(data.created_at)">
           </timeago>
         </div>
       </div>
