@@ -200,6 +200,7 @@
 
         switch (fullPath) {
           case '/home':
+          case '/home?refresh=1':
             this.isHome = true
             break
           case '/my':
