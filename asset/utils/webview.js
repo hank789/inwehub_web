@@ -7,6 +7,9 @@ function getIdByUrl (url, id) {
   if (id === 'backAndClose') {
     console.log('getIdByUrl: id:backAndClose')
     return 'backAndClose'
+  } else if (id === window.plus.runtime.appid) {
+    console.log('getIdByUrl: id:' + id)
+    return id
   } else if (/\/[0-9]+$/.test(url)) {
     var newId = url
     newId = newId.replace(/[^a-z]+/g, '')
