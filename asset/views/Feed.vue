@@ -240,6 +240,9 @@
         this.search_type = type
       },
       refreshPageData () {
+        if (this.$route.query.refresh) {
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+        }
         this.$refs.ctextarea.refreshPageData()
       },
       sendMessage (message) {
