@@ -250,7 +250,6 @@
     height: 450px;
   }
   ul .container{
-    max-height: 390px;
   }
   ul li{
     width:100%;
