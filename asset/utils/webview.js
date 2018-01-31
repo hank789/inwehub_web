@@ -3,13 +3,27 @@ import router from '../modules/index/routers/index'
 import { getDiscoverDetail } from './shareTemplate'
 import { getIndexPath } from './plus'
 
+function getIdByUrl (url, id) {
+  if (id === 'backAndClose') {
+    console.log('getIdByUrl: id:backAndClose')
+    return 'backAndClose'
+  } else if (/\/[0-9]+$/.test(url)) {
+    var newId = url
+    newId = newId.replace(/[^a-z]+/g, '')
+    console.log('getIdByUrl-id:' + newId)
+    return newId
+  }
+  console.log('getIdByUrl: id:' + url)
+  return url
+}
+
 /**
  * 打开webview
  */
 function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
-
+    id = getIdByUrl(url, id)
     var preloadBackClose = true
     if (id === url || id === 'backAndClose') {
       // 非特殊页面返回时关闭webview
