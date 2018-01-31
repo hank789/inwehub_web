@@ -20,92 +20,106 @@
       </div>
       <ul>
         <div class="userArea">共有<a>8</a>名用户在当前区域 <i></i></div>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
+              <li v-for="item in list">
+                <div class="container-image">
+                  <img :src="item.logo"/>
+                </div>
+                <div class="container-info">
+                  <p>{{item.address_province}}</p>
+                  <p class="mui-ellipsis">
+                    <span v-for="tag in item.tags"> {{tag}} <i></i></span>
+                  </p>
+                  <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}m</span></p>
+                </div>
+                <i class="bot"></i>
+              </li>
+            </div>
           </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span> 标签 <i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span> 标签 <i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span> 标签 <i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span> 标签 <i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span>标签<i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="container-image">
-            <img src="../../statics/images/guide_01.png"/>
-          </div>
-          <div class="container-info">
-            <p>丁冉</p>
-            <p class="mui-ellipsis">
-              <span> 标签 <i></i></span>
-            </p>
-            <p><span>上海市闵行区</span> <span>< 400m</span></p>
-          </div>
-          <i class="bot"></i>
-        </li>
+        </div>
       </ul>
-
-
-
     </div>
   </div>
 </template>
 <script>
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  import { toSettingSystem } from '../../utils/plus'
+  const currentUser = getLocalUserInfo()
+  export default {
+    data () {
+      return {
+        busy: false,
+        user_id: currentUser.user_id,
+        long: '',
+        lat: '',
+        list: [],
+        page: 1
+      }
+    },
+    created () {
+    },
+    methods: {
+      // 申请添加擅长标签；
+      getData () {
+        postRequest('company/nearbySearch', {
+          page: this.page,
+          longitude: this.long,
+          latitude: this.lat
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.data.length > 0) {
+            this.list = this.list.concat(response.data.data.data)
+          }
+
+          if (response.data.data.data.length < 10) {
+            this.busy = true
+          } else {
+            this.busy = false
+          }
+          this.page++
+        })
+      },
+      loadMore () {
+        this.busy = true
+        this.getData()
+      }
+    },
+    mounted () {
+      window.mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005
+        // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      })
+      var location = localEvent.getLocalItem('location' + this.user_id)
+      // 判断是否有经纬度
+      if (location.longitude) {
+        this.long = location.longitude
+        this.lat = location.latitude
+//        this.getData()
+//        console.error(location.longitude)
+      } else {
+        var btnArray = ['取消', '去设置']
+        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+          if (e.index === 1) {
+            toSettingSystem('LOCATION')
+          } else {
+            window.mui.back()
+          }
+        })
+      }
+    },
+    updated () {
+    }
+
+  }
 
 </script>
 
@@ -121,6 +135,16 @@
     padding: 0;
     list-style: none;
     font-style: normal;
+  }
+
+  .mui-scroll-wrapper {
+    position: absolute;
+    z-index: 2;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
   }
 
   .bot {
@@ -221,8 +245,12 @@
     overflow: hidden;
     z-index: 10;
     position: absolute;
-    top: 240px;
+    bottom: 0;
     background: #ffff;
+    height: 450px;
+  }
+  ul .container{
+    max-height: 390px;
   }
   ul li{
     width:100%;

@@ -31,15 +31,14 @@
        </p>
      </div>
       <!--申请添加-->
-      <div class="apply" v-if="applyIsShow">
-        <p>搜不到？</p>
-        <p @tap.stop.prevent="Obtain()">申请添加 </p>
-        <i class="bot"></i>
-      </div>
-      <!--搜索列表-->
+      <!--<div class="apply" v-if="applyIsShow">-->
+        <!--<p>搜不到？</p>-->
+        <!--<p @tap.stop.prevent="Obtain()">申请添加 </p>-->
+        <!--<i class="bot"></i>-->
+      <!--</div>-->
+      <!--搜索列表 v-if="dataList != null"-->
       <RefreshList
         v-model="list"
-        v-if="dataList != null"
         :api="'company/nearbySearch'"
         :pageMode="true"
         :prevOtherData="dataList"
@@ -73,17 +72,21 @@
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import RefreshList from '../../components/refresh/List.vue'
   import userAbility from '../../utils/userAbility'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        user_id: currentUser.user_id,
         list: [],
         searchText: '',
         loading: 1,
         isShow: false,
         coords: '',
-        longt: '',
-        lat: '',
+        longt: 121.4936901919479,
+        lat: 31.23576356859009,
         page: 1,
         value: '',
         applyIsShow: true,
@@ -97,39 +100,46 @@
       RefreshList
     },
     created () {
-      checkPermission('LOCATION', () => {
-        this.isLocation = true
-       //  获取权限成功的回调
-        getGeoPosition((position) => {
-          this.dataList = {
-            longitude: position.longt,
-            latitude: position.lat
-          }
-          this.longt = position.longt
-          this.lat = position.lat
-        }, () => {
-          // 获取位置失败的回调
-          var btnArray = ['取消', '去设置']
-          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-            if (e.index === 1) {
-              toSettingSystem('LOCATION')
-            } else {
-              window.mui.back()
-            }
-          })
-        })
-      }, () => {
-      // 获取权限失败的回调
-        var btnArray = ['取消', '去设置']
-        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-          if (e.index === 1) {
-            toSettingSystem('LOCATION')
-          } else {
-            window.mui.back()
-          }
-        })
-      //
-      })
+      this.dataList = {
+        longitude: 121.4936901919479,
+        latitude: 31.23576356859009
+      }
+      if (this.dataList.longitude) {
+        localEvent.setLocalItem('location' + this.user_id, this.dataList)
+      }
+//      checkPermission('LOCATION', () => {
+//        this.isLocation = true
+//       //  获取权限成功的回调
+//        getGeoPosition((position) => {
+//          this.dataList = {
+//            longitude: position.longt,
+//            latitude: position.lat
+//          }
+//          this.longt = position.longt
+//          this.lat = position.lat
+//        }, () => {
+//          // 获取位置失败的回调
+//          var btnArray = ['取消', '去设置']
+//          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+//            if (e.index === 1) {
+//              toSettingSystem('LOCATION')
+//            } else {
+//              window.mui.back()
+//            }
+//          })
+//        })
+//      }, () => {
+//      // 获取权限失败的回调
+//        var btnArray = ['取消', '去设置']
+//        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+//          if (e.index === 1) {
+//            toSettingSystem('LOCATION')
+//          } else {
+//            window.mui.back()
+//          }
+//        })
+//      //
+//      })
     },
     methods: {
       toTagDetail (name) {
@@ -256,7 +266,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    /*justify-content:space-between;*/
     align-items:center;
     padding:0 12px;
   }
@@ -294,29 +303,29 @@
     margin:auto;
   }
   /*申请添加*/
-.apply{
-  width:100%;
-  height:45px;
-  padding: 0 4%;
-  line-height: 45px;
-  }
-  .apply p:nth-of-type(1){
-    float: left;
-    font-size:14px;
-    color:#03aef9;
-  }
-  .apply p:nth-of-type(2){
-    float: right;
-    width:86px;
-    height:27px;
-    border-radius: 50px;
-    border:1px solid #03aef9;
-    font-size:14px;
-    color:#03aef9;
-    text-align: center;
-    line-height: 25px;
-    margin-top: 9px;
-  }
+/*.apply{*/
+  /*width:100%;*/
+  /*height:45px;*/
+  /*padding: 0 4%;*/
+  /*line-height: 45px;*/
+  /*}*/
+  /*.apply p:nth-of-type(1){*/
+    /*float: left;*/
+    /*font-size:14px;*/
+    /*color:#03aef9;*/
+  /*}*/
+  /*.apply p:nth-of-type(2){*/
+    /*float: right;*/
+    /*width:86px;*/
+    /*height:27px;*/
+    /*border-radius: 50px;*/
+    /*border:1px solid #03aef9;*/
+    /*font-size:14px;*/
+    /*color:#03aef9;*/
+    /*text-align: center;*/
+    /*line-height: 25px;*/
+    /*margin-top: 9px;*/
+  /*}*/
   ul{
     width:100%;
     padding: 0 4%;
