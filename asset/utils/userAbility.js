@@ -231,8 +231,8 @@ var UserAbility = () => {
     postRequest('activity/getCoupon', {coupon_type: 4}).then(response => {
       var code = response.data.code
       if (code !== 1000) {
-        window.mui.alert(response.data.message)
-        window.mui.back()
+        window.mui.toast(response.data.message)
+        return
       }
       // 红包弹窗
       var Coupon = response.data.data
@@ -280,8 +280,8 @@ var UserAbility = () => {
                     postRequest('activity/getCoupon', {coupon_type: response.data.data.coupon_type}).then(response => {
                       var code = response.data.code
                       if (code !== 1000) {
-                        window.mui.alert(response.data.message)
-                        window.mui.back()
+                        window.mui.toast(response.data.message)
+                        return
                       }
                       // 红包弹窗
                       var Coupon = response.data.data
