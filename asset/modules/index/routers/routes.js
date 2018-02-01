@@ -465,7 +465,7 @@ const routes = [
     name: 'discover_detail',
     component: require('../../../views/Discover/Detail.vue'),
     meta: {
-      title: '发现',
+      title: '分享',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
