@@ -131,7 +131,7 @@
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id' + resume.info.id )">
+        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
           <p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -139,7 +139,7 @@
           <i class="bot"></i>
         </div>
         <!--Ta的专栏-->
-        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id' + resume.info.id )">
+        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
           <p>Ta的专栏 </p>
           <p>文章<span>{{ resume.info.article_count }}</span><i></i></p>
           <p>评论<span>{{ resume.info.article_comment_count }}</span><i></i></p>
@@ -321,7 +321,7 @@
       isShowitemEduMore: false,
       resume: {
         info: {
-          id: '',
+          uuid: '',
           name: '',
           avatar_url: '',
           feed_count: '',

@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">Ta的动态</h1>
+      <h1 class="mui-title">{{user_uuid == uuid ? '我的动态' : 'Ta的动态'}}</h1>
     </header>
 
     <div class="mui-content">
@@ -10,8 +10,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'feed/list'"
-        :prevOtherData="{search_type: 3}"
-        :nextOtherData="{search_type: 3}"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
@@ -79,11 +79,16 @@
   import UpvotePayQuestion from '../../components/feed/UpvotePayQuestion'
   import UpvoteFreeQuestion from '../../components/feed/UpvoteFreeQuestion'
   import UpvoteReadhubAriticle from '../../components/feed/UpvoteReadhubAriticle'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
   export default {
     data () {
       return {
         list: [],
         emptyDescription: '暂无您关注的内容',
+        dataList: {},
+        uuid: currentUser.uuid,
+        user_uuid: ''
       }
     },
     components: {
@@ -101,8 +106,15 @@
       UpvoteFreeQuestion,
       UpvoteReadhubAriticle
     },
-    props: {},
-    watch: {},
+    created () {
+      if (this.$route.query.id) {
+        this.dataList = {
+          search_type: 5,
+          uuid: this.$route.query.id
+        }
+        this.user_uuid = this.$route.query.id
+      }
+    },
     methods: {
       toDetail (item) {
         if (item.feed_type === 7) item.url += '?goback=1'
@@ -153,6 +165,7 @@
       }
     },
     mounted () {
+      console.error(currentUser.uuid)
     },
     updated () {}
   }
