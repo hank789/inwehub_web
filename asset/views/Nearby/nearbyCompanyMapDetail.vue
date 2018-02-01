@@ -19,7 +19,7 @@
         <div id="allmap"></div>
       </div>
       <ul  :style="'bottom:'+ bot +'%'">
-        <div class="userArea" @tap.stop.prevent="change">共有<a>8</a>名用户在当前区域 <i></i></div>
+        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>名用户在当前区域 <i></i></div>
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
             <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
@@ -52,20 +52,21 @@
   export default {
     data () {
       return {
-        bot: -50,
+        bot: -51,
         busy: false,
         user_id: currentUser.user_id,
         long: '',
         lat: '',
         list: [],
-        page: 1
+        page: 1,
+        total: 0
       }
     },
     created () {
     },
     methods: {
       change () {
-        this.bot === -50 ? this.bot = 0 : this.bot = -50
+        this.bot === -51 ? this.bot = 0 : this.bot = -51
       },
       // 获取数据
       getData () {
@@ -82,6 +83,7 @@
           }
           if (response.data.data.data.length > 0) {
             this.list = this.list.concat(response.data.data.data)
+            this.total = response.data.data.total
           }
 
           if (response.data.data.data.length < 10) {
@@ -101,10 +103,7 @@
         var map = new window.BMap.Map('allmap')
         var point = new window.BMap.Point(this.long, this.lat)
         map.centerAndZoom(point, 15)
-        var opts = {
-          position: point,    // 指定文本标注所在的地理位置
-          offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
-        }
+
         var a = [
           {
             address_province: '张三',
@@ -115,15 +114,14 @@
             address_province: '浦江镇',
             longitude: 121.525655,
             latitude: 31.09229
-          },
-          {
-            address_province: '上海站',
-            longitude: 121.525655,
-            latitude: 31.09226
           }
         ]
         // 绘制公司名称
         for (var i = 0; i < a.length; i++) {
+          var opts = {
+            position: new window.BMap.Point(a[i].longitude, a[i].latitude),    // 指定文本标注所在的地理位置
+            offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
+          }
           var label = new window.BMap.Label(a[i].address_province, opts)  // 创建文本标注对象
           label.setStyle({
             border: 'none',
