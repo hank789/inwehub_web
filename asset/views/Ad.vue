@@ -7,9 +7,10 @@
 </template>
 
 <script>
-  import { closeFullscreen } from '../utils/plus'
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
   export default {
     created () {
+      openFullscreen()
     },
     methods: {
       toHome () {
