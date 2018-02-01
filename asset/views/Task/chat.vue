@@ -460,6 +460,7 @@
     text-align: left;
     background: #FFFFFF;
     padding: 7px;
+    word-wrap:break-word;
   }
 
   .consumer p:nth-of-type(2) span:after {
@@ -549,6 +550,7 @@
     text-align: left;
     background: #FFFFFF;
     padding: 7px;
+    word-wrap: break-word;
   }
 
   .Customerservice p:nth-of-type(2) span:after {
