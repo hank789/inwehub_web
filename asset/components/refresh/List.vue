@@ -253,9 +253,8 @@
 
           this.loading = false
           if (window.mui('#refreshContainer').length) {
-            window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
-
             setTimeout(() => {
+              window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
               if (window.mui('#refreshContainer').length) {
                 window.mui('#refreshContainer').pullRefresh().refresh(true)
               }
