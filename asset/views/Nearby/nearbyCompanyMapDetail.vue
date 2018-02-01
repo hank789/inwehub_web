@@ -52,7 +52,7 @@
   export default {
     data () {
       return {
-        bot: -51,
+        bot: -52,
         busy: false,
         user_id: currentUser.user_id,
         long: '',
@@ -66,7 +66,7 @@
     },
     methods: {
       change () {
-        this.bot === -51 ? this.bot = 0 : this.bot = -51
+        this.bot === -52 ? this.bot = 0 : this.bot = -52
       },
       // 获取数据
       getData () {
@@ -104,25 +104,19 @@
         var point = new window.BMap.Point(this.long, this.lat)
         map.centerAndZoom(point, 15)
 
-        var a = [
-          {
-            address_province: '张三',
-            longitude: 121.525655,
-            latitude: 31.08229
-          },
-          {
-            address_province: '浦江镇',
-            longitude: 121.525655,
-            latitude: 31.09229
-          }
-        ]
-        // 绘制公司名称
-        for (var i = 0; i < a.length; i++) {
+        // 标注
+//        var arr = [
+//          {x: 121.483964, y: 31.242127, name: '张1'},
+//          {x: 121.483015, y: 31.244067, name: '张2'},
+//          {x: 121.47969907478, y: 31.227760260672, name: '张3'},
+//        ]
+        for (var j = 0; j < this.list.length; j++) {
+          var labelPoint = new window.BMap.Point(this.list[j].longitude, this.list[j].latitude)
           var opts = {
-            position: new window.BMap.Point(a[i].longitude, a[i].latitude),    // 指定文本标注所在的地理位置
+            position: labelPoint,    // 指定文本标注所在的地理位置
             offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
           }
-          var label = new window.BMap.Label(a[i].address_province, opts)  // 创建文本标注对象
+          var label = new window.BMap.Label(this.list[j].name, opts)  // 创建文本标注对象
           label.setStyle({
             border: 'none',
             background: 'none',
@@ -132,14 +126,59 @@
             lineHeight: '20px',
             fontFamily: '微软雅黑'
           })
-          // 绘制公司位置  longitude  latitude
+          map.addOverlay(label)
+
           var circle = new window.BMap.Circle(
-          new window.BMap.Point(a[i].longitude, a[i].latitude),
+            labelPoint,
             200,
             {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
+
           map.addOverlay(circle)
-          map.addOverlay(label)
         }
+
+
+
+//        console.log(this.long, this.lat)
+//        // 百度地图API功能
+//        var map = new window.BMap.Map('allmap')
+//        var point = new window.BMap.Point(this.long, this.lat)
+//        map.centerAndZoom(point, 15)
+//        var a = [
+//          {
+//            address_province: '张三',
+//            longitude: 121.525655,
+//            latitude: 31.08229
+//          },
+//          {
+//            address_province: '浦江镇',
+//            longitude: 121.525655,
+//            latitude: 31.09229
+//          }
+//        ]
+        // 绘制公司名称
+//        for (var i = 0; i < this.list.length; i++) {
+//          var opts = {
+//            position: new window.BMap.Point(this.list[i].longitude, this.list[i].latitude),    // 指定文本标注所在的地理位置
+//            offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
+//          }
+//          var label = new window.BMap.Label(this.list[i].address_province, opts)  // 创建文本标注对象
+//          label.setStyle({
+//            border: 'none',
+//            background: 'none',
+//            color: '#ffffff',
+//            fontSize: '15px',
+//            height: '20px',
+//            lineHeight: '20px',
+//            fontFamily: '微软雅黑'
+//          })
+//          // 绘制公司位置  longitude  latitude
+//          var circle = new window.BMap.Circle(
+//          new window.BMap.Point(this.list[i].longitude, this.list[i].latitude),
+//            200,
+//            {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
+//          map.addOverlay(circle)
+//          map.addOverlay(label)
+//        }
       }
     },
     mounted () {

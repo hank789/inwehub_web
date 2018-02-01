@@ -101,8 +101,8 @@
     },
     created () {
       this.dataList = {
-        longitude: 121.525655,
-        latitude: 31.08229
+        longitude: 121.4936901919479,
+        latitude: 31.23576356859009
       }
       if (this.dataList.longitude) {
         localEvent.setLocalItem('location' + this.user_id, this.dataList)
