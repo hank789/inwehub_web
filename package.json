@@ -32,6 +32,7 @@
     "vue-qrcode": "github:xkeshi/vue-qrcode",
     "vue-qrcode-component": "^2.1.1",
     "vue-router": "^2.2.0",
+    "vue-switches": "^2.0.1",
     "vue-timeago": "^3.3.0",
     "vue-wechat-title": "^2.0.0",
     "vue2-countdown": "^1.0.7",
