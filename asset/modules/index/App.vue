@@ -156,7 +156,7 @@
                 noticeOpenNotifitionPermission(self)
               }
 
-              //resume callback
+              // resume callback
               if (self.$refs.routerView.hasOwnProperty('refreshResumeData')) {
                 self.$refs.routerView.refreshResumeData()
               }
