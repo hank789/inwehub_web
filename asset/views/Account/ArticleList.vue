@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">Ta的专栏</h1>
+      <h1 class="mui-title">{{user_uuid == uuid ? '我的专栏' : 'Ta的专栏'}}</h1>
     </header>
 
     <div class="mui-content">
@@ -10,30 +10,21 @@
       <!--列表-->
       <RefreshList
         v-model="list"
-        :api="'recommendRead'"
+        :api="'article/user'"
         :pageMode="true"
-        :prevOtherData="{page: 1}"
-        :nextOtherData="{}"
-        :isShowUpToRefreshDescription="false"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
         class="listWrapper">
         <!--类别-->
 
         <ul class="recommend">
-          <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
+          <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend)">
             <div class="container-image">
               <img :src="recommend.data ? recommend.data.img:''"  />
             </div>
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
-            <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
             <div class="recommend_datail">
-              <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
-              <p class="container_type blue"  v-else-if="recommend.read_type == '2'">专业问答</p>
-              <p class="container_type blue"  v-else-if="recommend.read_type == '3'">互动提问</p>
-              <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
-              <p class="container_type blue"  v-else-if="recommend.read_type == '6'">互动回答</p>
-              <p class="answer-fouce" v-if="recommend.read_type == '3'">{{recommend.data.answer_number}}人回答<i></i>{{recommend.data.follower_number}}关注</p>
-              <p class="answer-fouce" v-else-if="recommend.read_type == '2'">￥: {{recommend.data.price}}<i v-if="recommend.data.average_rate"></i><span v-if="recommend.data.average_rate">好评率{{recommend.data.average_rate}}</span></p>
-              <p class="answer-fouce" v-else-if="recommend.read_type == '6' || recommend.read_type == '1'">{{recommend.data.comment_number}}评论<i></i>{{recommend.data.support_number}}赞</p>
+              <p class="answer-fouce">{{recommend.comments_number}}评论<i></i>{{recommend.upvotes}}赞</p>
             </div>
           </li>
         </ul>
@@ -43,14 +34,12 @@
   </div>
 </template>
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import userAbility from '../../utils/userAbility'
-  import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
-  import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
@@ -59,17 +48,23 @@
         servicesList: [],
         list: [],
         invitationList: [],
-        is_company: currentUser.is_company
+        is_company: currentUser.is_company,
+        uuid: currentUser.uuid,
+        user_uuid: '',
+        dataList: {}
+      }
+    },
+    created () {
+      if (this.$route.query.id) {
+        this.dataList = {
+          uuid: this.$route.query.id
+        }
+        this.user_uuid = this.$route.query.id
       }
     },
     components: {
-      swiper,
-      swiperSlide,
-      RefreshList,
-      ServiceRecommendation
+      RefreshList
     },
-    props: {},
-    watch: {},
     methods: {
       getInvitation () {
         postRequest(`rank/userInfo`, {}).then(response => {
@@ -120,38 +115,21 @@
           }
         })
       },
-      goDetial (type, recommend) {
-        switch (type) {
-          case 1:
-            if (recommend.data.type === 'link') {
-              goThirdPartyArticle(
-                recommend.data.url,
-                recommend.source_id,
-                recommend.data.title,
-                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
-                recommend.data.img
-              )
-            } else {
-              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
-            }
+      goDetial (hot) {
+        switch (hot.type) {
+          case 'text':
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
             break
-          case 2:
-            this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
-            break
-          case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
-            break
-          case 4:
-            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
-            break
-          case 5:
-            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
-            break
-          case 6:
-            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+          case 'link':
+            goThirdPartyArticle(
+              hot.data.url,
+              hot.id,
+              hot.title,
+              '/c/' + hot.category_id + '/' + hot.slug,
+              hot.data.img
+            )
             break
           default:
-
         }
       }
     },
