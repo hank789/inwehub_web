@@ -38,7 +38,7 @@
             <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
               <div class="discover-round">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-huodongjiyu"></use>
+                  <use xlink:href="#icon-fujinqiye1"></use>
                 </svg>
               </div>
               <p>企业服务</p>
@@ -46,7 +46,7 @@
             <li @tap.stop.prevent="judge(5)">
               <div class="discover-round">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-fujinqiye1"></use>
+                  <use xlink:href="#icon-zhaoguwenyuanshi"></use>
                 </svg>
               </div>
               <p>附近发现</p>
