@@ -99,7 +99,6 @@
             return
           }
 
-          console.log(response.data)
           if (response.data.data.data.length > 0) {
             this.list = response.data.data.data
             this.data = response.data.data
