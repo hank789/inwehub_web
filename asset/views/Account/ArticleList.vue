@@ -44,11 +44,7 @@
   export default {
     data () {
       return {
-        swiperOption: {},
-        servicesList: [],
         list: [],
-        invitationList: [],
-        is_company: currentUser.is_company,
         uuid: currentUser.uuid,
         user_uuid: '',
         dataList: {}
@@ -66,55 +62,6 @@
       RefreshList
     },
     methods: {
-      getInvitation () {
-        postRequest(`rank/userInfo`, {}).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            this.invitationList = response.data.data
-          }
-        })
-      },
-      judge (type) {
-        postRequest(`auth/checkUserLevel`, {
-          permission_type: type
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-//          console.error(response.data.data.is_valid)
-          if (response.data.data) {
-            if (response.data.data.is_valid) {
-              switch (type) {
-                case 1:
-                  this.$router.pushPlus('/askCommunity/majors')
-                  break
-                case 2:
-                  this.$router.pushPlus('/askCommunity/interactions')
-                  break
-//                case 4:
-//                  this.$router.pushPlus('my/Discount')
-//                  break
-                case 5:
-                  this.$router.pushPlus('/nearbyCompany')
-                  break
-                default:
-              }
-            } else {
-              userAbility.jumpJudgeGrade(this)
-            }
-          }
-        })
-      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
@@ -134,7 +81,6 @@
       }
     },
     mounted () {
-      this.getInvitation()
     },
     updated () {}
   }
