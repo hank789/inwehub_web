@@ -15,30 +15,135 @@
           <use xlink:href="#icon-ditu"></use>
         </svg>
       </div>
-
-      <ul class="cions-list">
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-      </ul>
-
+      <!--搜索列表-->
+      <RefreshList
+        v-if="dataList != null"
+        v-model="list"
+        :api="'location/nearbyUser'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        :isShowUpToRefreshDescription="false"
+        class="listWrapper">
+          <ul class="cions-list">
+            <li v-for="(item, index) in list">
+              <div class="cions-avatar" @tap.stop.prevent="toAvatar(item.uuid)">
+                <img :src="item.avatar" />
+                <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
+              </div>
+              <div class="detail">
+                <p>{{item.name}}<i>（< {{item.distance}}m）</i></p>
+                <p class="mui-ellipsis">{{item.description}}</p>
+              </div>
+              <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>
+              <i class="bot"></i>
+            </li>
+          </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 <script>
+  import { postRequest } from '../../utils/request'
+  import { getGeoPosition } from '../../utils/allPlatform'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
+  export default {
+    data () {
+      return {
+        user_id: currentUser.user_id,
+        list: [],
+        loading: 1,
+        longt: 121.4936901919479,
+        lat: 31.23576356859009,
+        page: 1,
+        dataList: null,
+      }
+    },
+    components: {
+      RefreshList
+    },
+    created () {
+      this.dataList = {
+        longitude: 121.4936901919479,
+        latitude: 31.23576356859009
+      }
+      if (this.dataList.longitude) {
+        localEvent.setLocalItem('location' + this.user_id, this.dataList)
+      }
+//      checkPermission('LOCATION', () => {
+//       //  获取权限成功的回调
+//        getGeoPosition((position) => {
+//          this.dataList = {
+//            longitude: position.longt,
+//            latitude: position.lat
+//          }
+//          this.longt = position.longt
+//          this.lat = position.lat
+//        }, () => {
+//          // 获取位置失败的回调
+//          var btnArray = ['取消', '去设置']
+//          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+//            if (e.index === 1) {
+//              toSettingSystem('LOCATION')
+//            } else {
+//              window.mui.back()
+//            }
+//          })
+//        })
+//      }, () => {
+//      // 获取权限失败的回调
+//        var btnArray = ['取消', '去设置']
+//        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+//          if (e.index === 1) {
+//            toSettingSystem('LOCATION')
+//          } else {
+//            window.mui.back()
+//          }
+//        })
+//      //
+//      })
+    },
+    methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
+      // 点击关注；
+      collectProfessor (uuid, index) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      }
+    },
+    mounted () {
+    },
+    updated () {
+    }
+  }
 </script>
+
 
 <style scoped="scoped">
   ul,
@@ -53,7 +158,15 @@
     list-style: none;
     font-style: normal;
   }
-
+  .mui-scroll-wrapper {
+    position: absolute;
+    z-index: 2;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+  }
   .bot {
     position: absolute;
     right: 0;
@@ -169,5 +282,8 @@
     color: #03aef9;
     border: 1px solid #03aef9;
     background: #ffffff;
+  }
+  .listWrapper{
+    top:50px;
   }
 </style>

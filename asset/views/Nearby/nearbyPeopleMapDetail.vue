@@ -8,111 +8,194 @@
       <!--导航栏-->
       <div class="menu">
         <div class="switch">
-          <p>附近的人</p>
-          <p @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">附近的公司</p>
+          <p @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">附近的人</p>
+          <p >附近的公司</p>
         </div>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyPeople')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
           <use xlink:href="#icon-shaixuan"></use>
         </svg>
       </div>
       <div class="map">
-        <img src="../../statics/images/guide_01.png" />
+        <div id="allmap"></div>
       </div>
-      <ul class="cions-list">
-        <div class="userArea">共有<a>8</a>名用户在当前区域 <i></i></div>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
+      <ul  :style="'bottom:'+ bot +'%'" class="cions-list">
+        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>名用户在当前区域 <i></i></div>
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
+              <li v-for="(item, index) in list" >
+                <div class="cions-avatar" @tap.stop.prevent="toAvatar(item.uuid)">
+                  <img :src="item.avatar" />
+                  <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+                <div class="detail">
+                  <p>{{item.name}}<i>（< {{item.distance}}m）</i></p>
+                  <p class="mui-ellipsis">{{item.description}}</p>
+                </div>
+                <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>
+                <i class="bot"></i>
+              </li>
+            </div>
           </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
-        <li>
-          <div class="cions-avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="detail">
-            <p>丁冉<i>（< 200m）</i></p>
-            <p class="mui-ellipsis">显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名显示个人签名</p>
-          </div>
-          <div class="fouce blue">关注Ta</div>
-          <i class="bot"></i>
-        </li>
+        </div>
       </ul>
-
-
-
     </div>
   </div>
 </template>
 <script>
+  import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  import { toSettingSystem } from '../../utils/plus'
+  const currentUser = getLocalUserInfo()
+  export default {
+    data () {
+      return {
+        bot: -52,
+        busy: false,
+        user_id: currentUser.user_id,
+        long: '',
+        lat: '',
+        list: [],
+        page: 1,
+        map: null,
+        total: 0
+      }
+    },
+    created () {
+    },
+    methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
+      // 点击关注；
+      collectProfessor (uuid, index) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      change () {
+        this.bot === -52 ? this.bot = 0 : this.bot = -52
+      },
+      // 获取数据
+      getData () {
+        postRequest('location/nearbyUser', {
+          page: this.page,
+          longitude: this.long,
+          latitude: this.lat
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.data.length > 0) {
+            this.renderMapList(response.data.data.data)
+            this.list = this.list.concat(response.data.data.data)
+            this.total = response.data.data.total
+          }
 
+          if (response.data.data.data.length < 10) {
+            this.busy = true
+          } else {
+            this.busy = false
+          }
+          this.page++
+        })
+      },
+      loadMore () {
+        this.busy = true
+        this.getData()
+      },
+      renderMapList (list) {
+        // 标注
+//        var arr = [
+//          {x: 121.483964, y: 31.242127, name: '张1'},
+//          {x: 121.483015, y: 31.244067, name: '张2'},
+//          {x: 121.47969907478, y: 31.227760260672, name: '张3'},
+//        ]
+        for (var j = 0; j < list.length; j++) {
+          var labelPoint = new window.BMap.Point(list[j].longitude, list[j].latitude)
+          var opts = {
+            position: labelPoint,    // 指定文本标注所在的地理位置
+            offset: new window.BMap.Size(-10, -15)    // 设置文本偏移量
+          }
+          var label = new window.BMap.Label(list[j].name.substring(0,1), opts)  // 创建文本标注对象
+          label.setStyle({
+            border: '#03aef9',
+            background: '#03aef9',
+            color: '#ffffff',
+            fontSize: '15px',
+            height: '20px',
+            lineHeight: '20px',
+            fontFamily: '微软雅黑',
+            padding: '3.5px'
+          })
+          this.map.addOverlay(label)
+
+          var circle = new window.BMap.Circle(
+            labelPoint,
+            200,
+            {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0, fillOpacity: 0}) // 创建圆
+
+          this.map.addOverlay(circle)
+        }
+      },
+      getMap () {
+        // 百度地图API功能
+        var map = new window.BMap.Map('allmap', {minZoom: 15, maxZoom: 15})
+        this.map = map
+        var point = new window.BMap.Point(this.long, this.lat)
+        map.centerAndZoom(point, 15)
+      }
+    },
+    mounted () {
+      window.mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005
+        // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      })
+      var location = localEvent.getLocalItem('location' + this.user_id)
+      // 判断是否有经纬度
+      if (location.longitude) {
+        this.long = location.longitude
+        this.lat = location.latitude
+        this.getMap()
+      } else {
+        // 默认的定位
+        this.long = 121.4936901919479
+        this.lat = 31.23576356859009
+        this.getMap()
+        var btnArray = ['取消', '去设置']
+        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+          if (e.index === 1) {
+            toSettingSystem('LOCATION')
+          } else {
+            window.mui.back()
+          }
+        })
+      }
+    },
+    updated () {
+    }
+  }
 </script>
 
 <style scoped>
@@ -128,6 +211,15 @@
     list-style: none;
     font-style: normal;
   }
+  .mui-scroll-wrapper {
+    position: absolute;
+    z-index: 2;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+  }
 
   .bot {
     position: absolute;
@@ -141,6 +233,7 @@
   }
   .mui-content{
     background: #ffffff;
+    overflow: hidden;
   }
   /*导航栏*/
   .menu{
@@ -181,22 +274,18 @@
   /*地图*/
   .map{
     width:100%;
+    height:100%;
     overflow: hidden;
   }
-  .map img{
-    width:100%;
-    height:auto;
+  #allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
   }
 
   /*列表区域*/
-  .cions-list{
-    width: 100%;
-    overflow: hidden;
-    z-index: 10;
-    position: absolute;
-    top: 240px;
-    background: #ffff;
-  }
   .userArea{
     width:100%;
     height:56px;
@@ -228,6 +317,17 @@
     right:0;
     margin: auto;
   }
+
+
+  ul{
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
+    position: absolute;
+    background: #ffff;
+    height: 60%;
+  }
+
 
 
 

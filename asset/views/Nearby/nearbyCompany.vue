@@ -30,14 +30,9 @@
          </span>
        </p>
      </div>
-      <!--申请添加-->
-      <!--<div class="apply" v-if="applyIsShow">-->
-        <!--<p>搜不到？</p>-->
-        <!--<p @tap.stop.prevent="Obtain()">申请添加 </p>-->
-        <!--<i class="bot"></i>-->
-      <!--</div>-->
-      <!--搜索列表 v-if="dataList != null"-->
+      <!--搜索列表-->
       <RefreshList
+        v-if="dataList != null"
         v-model="list"
         :api="'company/nearbySearch'"
         :pageMode="true"
