@@ -39,9 +39,12 @@ const routes = [
             })
           })
         } else {
-          closeSplashscreen()
-          next({
-            path: '/home'
+          window.mui.plusReady(function () {
+            openFullscreen()
+            closeSplashscreen()
+            next({
+              path: '/ad'
+            })
           })
         }
       } else {
