@@ -1,14 +1,22 @@
 <template>
   <div>
-    <div class="time" @tap.stop.prevent="$router.replace('/home')">
+    <div class="time" @tap.stop.prevent="toHome">
         <span id="micTime">3</span>s 跳过
     </div>
   </div>
 </template>
 
 <script>
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
   export default {
     created () {
+      openFullscreen()
+    },
+    methods: {
+      toHome () {
+        closeFullscreen()
+        this.$router.replace('/home')
+      }
     },
     mounted () {
       var endTime = 3  // 倒计时时间
@@ -26,7 +34,7 @@
         setTime()
         if (endTime < 0) {
           clearInterval(intervalObj)
-          this.$router.replace('/home')
+          this.toHome()
         }
       }, 1000)
     }
