@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="time">
+    <div class="time" @tap.stop.prevent="$router.replace('/home')">
         <span id="micTime">3</span>s 跳过
     </div>
   </div>
@@ -13,15 +13,20 @@
     mounted () {
       var endTime = 3  // 倒计时时间
       function setTime () {
-        document.getElementById('micTime').innerHTML = endTime.toString()
+        if (endTime < 0) {
+          return
+        }
+        if (document.getElementById('micTime')) {
+          document.getElementById('micTime').innerHTML = endTime.toString()
+        }
       }
       setTime()
       var intervalObj = setInterval(() => {
         endTime--
         setTime()
-        if (endTime <= 0) {
+        if (endTime < 0) {
           clearInterval(intervalObj)
-          window.location.href = 'index.html'
+          this.$router.replace('/home')
         }
       }, 1000)
     }
