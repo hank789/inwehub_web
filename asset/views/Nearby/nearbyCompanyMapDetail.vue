@@ -59,6 +59,7 @@
         lat: '',
         list: [],
         page: 1,
+        map: null,
         total: 0
       }
     },
@@ -82,6 +83,7 @@
             return
           }
           if (response.data.data.data.length > 0) {
+            this.renderMapList(response.data.data.data)
             this.list = this.list.concat(response.data.data.data)
             this.total = response.data.data.total
           }
@@ -98,25 +100,21 @@
         this.busy = true
         this.getData()
       },
-      getMap () {
-        // 百度地图API功能
-        var map = new window.BMap.Map('allmap')
-        var point = new window.BMap.Point(this.long, this.lat)
-        map.centerAndZoom(point, 15)
-
+      renderMapList (list) {
         // 标注
 //        var arr = [
 //          {x: 121.483964, y: 31.242127, name: '张1'},
 //          {x: 121.483015, y: 31.244067, name: '张2'},
 //          {x: 121.47969907478, y: 31.227760260672, name: '张3'},
 //        ]
-        for (var j = 0; j < this.list.length; j++) {
-          var labelPoint = new window.BMap.Point(this.list[j].longitude, this.list[j].latitude)
+        for (var j = 0; j < list.length; j++) {
+          console.warn('item:' + JSON.stringify(list[j]))
+          var labelPoint = new window.BMap.Point(list[j].longitude, list[j].latitude)
           var opts = {
             position: labelPoint,    // 指定文本标注所在的地理位置
             offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
           }
-          var label = new window.BMap.Label(this.list[j].name, opts)  // 创建文本标注对象
+          var label = new window.BMap.Label(list[j].name, opts)  // 创建文本标注对象
           label.setStyle({
             border: 'none',
             background: 'none',
@@ -126,17 +124,22 @@
             lineHeight: '20px',
             fontFamily: '微软雅黑'
           })
-          map.addOverlay(label)
+          this.map.addOverlay(label)
 
           var circle = new window.BMap.Circle(
             labelPoint,
             200,
             {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
 
-          map.addOverlay(circle)
+          this.map.addOverlay(circle)
         }
-
-
+      },
+      getMap () {
+        // 百度地图API功能
+        var map = new window.BMap.Map('allmap')
+        this.map = map
+        var point = new window.BMap.Point(this.long, this.lat)
+        map.centerAndZoom(point, 15)
 
 //        console.log(this.long, this.lat)
 //        // 百度地图API功能
