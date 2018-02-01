@@ -18,12 +18,12 @@
       <div class="map">
         <div id="allmap"></div>
       </div>
-      <ul>
-        <div class="userArea">共有<a>8</a>名用户在当前区域 <i></i></div>
+      <ul  :style="'bottom:'+ bot +'%'">
+        <div class="userArea" @tap.stop.prevent="change">共有<a>8</a>名用户在当前区域 <i></i></div>
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
             <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
-              <li v-for="item in list">
+              <li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
                 <div class="container-image">
                   <img :src="item.logo"/>
                 </div>
@@ -52,6 +52,7 @@
   export default {
     data () {
       return {
+        bot: -50,
         busy: false,
         user_id: currentUser.user_id,
         long: '',
@@ -63,8 +64,11 @@
     created () {
     },
     methods: {
-      // 申请添加擅长标签；
-      getData() {
+      change () {
+        this.bot === -50 ? this.bot = 0 : this.bot = -50
+      },
+      // 获取数据
+      getData () {
         postRequest('company/nearbySearch', {
           page: this.page,
           longitude: this.long,
@@ -88,11 +92,11 @@
           this.page++
         })
       },
-      loadMore() {
+      loadMore () {
         this.busy = true
         this.getData()
       },
-      getMap() {
+      getMap () {
         // 百度地图API功能
         var map = new window.BMap.Map('allmap')
         var point = new window.BMap.Point(this.long, this.lat)
@@ -101,9 +105,26 @@
           position: point,    // 指定文本标注所在的地理位置
           offset: new window.BMap.Size(-15, -10)    // 设置文本偏移量
         }
+        var a = [
+          {
+            address_province: '张三',
+            longitude: 121.525655,
+            latitude: 31.08229
+          },
+          {
+            address_province: '浦江镇',
+            longitude: 121.525655,
+            latitude: 31.09229
+          },
+          {
+            address_province: '上海站',
+            longitude: 121.525655,
+            latitude: 31.09226
+          }
+        ]
         // 绘制公司名称
-        for (var i = 0; i < this.list.length; i++) {
-          var label = new window.BMap.Label(this.list[i].address_province, opts)  // 创建文本标注对象
+        for (var i = 0; i < a.length; i++) {
+          var label = new window.BMap.Label(a[i].address_province, opts)  // 创建文本标注对象
           label.setStyle({
             border: 'none',
             background: 'none',
@@ -113,9 +134,9 @@
             lineHeight: '20px',
             fontFamily: '微软雅黑'
           })
-          // 绘制公司位置
+          // 绘制公司位置  longitude  latitude
           var circle = new window.BMap.Circle(
-            point,
+          new window.BMap.Point(a[i].longitude, a[i].latitude),
             200,
             {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
           map.addOverlay(circle)
@@ -134,9 +155,11 @@
         this.long = location.longitude
         this.lat = location.latitude
         this.getMap()
-//        this.getData()
-//        console.error(location.longitude)
       } else {
+        // 默认的定位
+        this.long = 121.4936901919479
+        this.lat = 31.23576356859009
+        this.getMap()
         var btnArray = ['取消', '去设置']
         window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
           if (e.index === 1) {
@@ -188,6 +211,7 @@
   }
   .mui-content{
     background: #ffffff;
+    overflow: hidden;
   }
   /*导航栏*/
   .menu{
@@ -228,12 +252,15 @@
   /*地图*/
   .map{
     width:100%;
-    height:200px;
+    height:100%;
     overflow: hidden;
   }
-  .map img{
-    width:100%;
-    height:auto;
+  #allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
   }
 
   /*列表区域*/
@@ -275,9 +302,8 @@
     overflow: hidden;
     z-index: 10;
     position: absolute;
-    bottom: 0;
     background: #ffff;
-    height: 450px;
+    height: 60%;
   }
   ul li{
     width:100%;
@@ -340,11 +366,5 @@
     font-size: 14px;
   }
 
-  #allmap {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    margin: 0;
-    font-family: "微软雅黑";
-  }
+
 </style>
