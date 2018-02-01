@@ -21,7 +21,7 @@
         <ul class="notice_m">
           <li>
             活动通知及系统公告
-            <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="notices.system_notify ? 'mui-active': '' " @tap.stop.prevent="openDisturb('system_notify')">
+            <div class="mui-switch mui-switch-blue  mui-switch-mini" :class="notices.system_notify ? 'mui-active': 'mui-disabled' " @tap.stop.prevent="openDisturb('system_notify')">
               <div class="mui-switch-handle"></div>
             </div>
             <i class="bot"></i>
@@ -81,6 +81,7 @@
           disturb: 0,
           system_notify: 0
         }
+
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
