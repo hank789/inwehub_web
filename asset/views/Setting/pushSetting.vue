@@ -15,7 +15,6 @@
         <p>你可能错过重要的活动机会推荐，点击前往“设置”开启通知</p>
       </div>
       <div class="grey"></div>
-
       <ul class="notice_m">
         <li>
           活动通知及系统公告
@@ -39,6 +38,7 @@
           <i class="bot"></i>
         </li>
       </ul>
+
       <div class="grey"></div>
       <div class="notice_b">
         免打扰<span>（22:00-07:30自动关闭推送）</span>
@@ -78,6 +78,7 @@
           disturb: 0,
           system_notify: 0
         }
+
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {

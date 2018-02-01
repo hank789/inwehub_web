@@ -131,19 +131,19 @@
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list')">
-          <p>Ta的动态 <i>74</i></p>
+        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
+          <p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </div>
         <!--Ta的专栏-->
-        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list')">
+        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
           <p>Ta的专栏 </p>
-          <p>文章<span>54</span><i></i></p>
-          <p>评论<span>33</span><i></i></p>
-          <p>赞306  </p>
+          <p>文章<span>{{ resume.info.article_count }}</span><i></i></p>
+          <p>评论<span>{{ resume.info.article_comment_count }}</span><i></i></p>
+          <p>赞{{ resume.info.article_upvote_count }}  </p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -321,9 +321,13 @@
       isShowitemEduMore: false,
       resume: {
         info: {
-          id: '',
+          uuid: '',
           name: '',
           avatar_url: '',
+          feed_count: '',
+          article_count: '',
+          article_comment_count: '',
+          article_upvote_count: '',
           industry_tags: [],
           province: {
             key: '',
