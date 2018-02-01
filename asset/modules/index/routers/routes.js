@@ -260,7 +260,8 @@ const routes = [
       title: '找回密码'
     },
     beforeEnter: (to, from, next) => {
-      CanNotGetInWhenLogged(to, from, next)
+      // CanNotGetInWhenLogged(to, from, next)
+      next()
     }
   },
   { // 邀请好友；
