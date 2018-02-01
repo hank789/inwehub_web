@@ -69,7 +69,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-inwehubzuoyou"></use>
           </svg>
-          <p>for android V1.12</p>
+          <p>{{ appVersion }}</p>
         </div>
 
         <div class="text">
