@@ -108,7 +108,6 @@
 //          {x: 121.47969907478, y: 31.227760260672, name: '张3'},
 //        ]
         for (var j = 0; j < list.length; j++) {
-          console.warn('item:' + JSON.stringify(list[j]))
           var labelPoint = new window.BMap.Point(list[j].longitude, list[j].latitude)
           var opts = {
             position: labelPoint,    // 指定文本标注所在的地理位置
