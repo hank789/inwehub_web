@@ -2074,6 +2074,14 @@ const routes = [
     component: require('../../../views/Hongbao.vue')
   },
   {
+    path: '/ad',
+    name: 'ad',
+    meta: {
+      title: 'ad'
+    },
+    component: require('../../../views/Ad.vue')
+  },
+  {
     path: '/mask',
     name: 'mask',
     meta: {
