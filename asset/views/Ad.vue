@@ -3,6 +3,8 @@
     <div class="time" @tap.stop.prevent="toHome">
         <span id="micTime">3</span>s 跳过
     </div>
+    <img src="../statics/images/time_m@2x.png" class="time_m">
+    <img src="../statics/images/time_b@2x.png" class="time_b"/>
   </div>
 </template>
 
@@ -54,5 +56,19 @@
     position: absolute;
     top: 20px;
     right: 16px;
+  }
+  .time_m{
+    position: absolute;
+    width:75px;
+    top:25%;
+    left:0;
+    right:0;
+    margin: auto;
+
+  }
+  .time_b{
+    position: fixed;
+    width:100%;
+    bottom: 0;
   }
 </style>
