@@ -21,24 +21,24 @@
       }
     },
     mounted () {
-//      var endTime = 3  // 倒计时时间
-//      function setTime () {
-//        if (endTime < 0) {
-//          return
-//        }
-//        if (document.getElementById('micTime')) {
-//          document.getElementById('micTime').innerHTML = endTime.toString()
-//        }
-//      }
-//      setTime()
-//      var intervalObj = setInterval(() => {
-//        endTime--
-//        setTime()
-//        if (endTime < 0) {
-//          clearInterval(intervalObj)
-//          this.toHome()
-//        }
-//      }, 1000)
+      var endTime = 3  // 倒计时时间
+      function setTime () {
+        if (endTime < 0) {
+          return
+        }
+        if (document.getElementById('micTime')) {
+          document.getElementById('micTime').innerHTML = endTime.toString()
+        }
+      }
+      setTime()
+      var intervalObj = setInterval(() => {
+        endTime--
+        setTime()
+        if (endTime < 0) {
+          clearInterval(intervalObj)
+          this.toHome()
+        }
+      }, 1000)
     }
   }
 </script>
