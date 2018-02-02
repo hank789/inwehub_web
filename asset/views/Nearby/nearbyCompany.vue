@@ -38,7 +38,6 @@
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
-        :isShowUpToRefreshDescription="false"
         class="listWrapper">
           <ul>
             <li  v-for="(item, index) in list" @tap.stop.prevent="judge(item)" >
