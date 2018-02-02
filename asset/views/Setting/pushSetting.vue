@@ -51,6 +51,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import EventObj from '../../utils/event'
   import Switches from 'vue-switches'
 
   export default {
@@ -69,6 +70,7 @@
     },
     methods: {
       refreshResumeData () {
+        console.error('111324342')
         this.checkPermission()
       },
       closeAll () {
@@ -137,8 +139,12 @@
       }
     },
     computed: {},
-    created () {},
+    created () {
+    },
     mounted () {
+      EventObj.addIntervalOnceEventListener('resume', () => {
+        this.refreshResumeData()
+      })
       this.getNotification()
       this.checkPermission()
     },
