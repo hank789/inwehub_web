@@ -8,14 +8,14 @@
     <div class="mui-content">
       <div class="notice_t">
         <!--v-if="!notices.all"-->
-        <div class="system" >
+        <div class="system" v-if="isOpenNotification === 0">
           开启系统通知
           <Switches v-model="notices.all" type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </div>
         <p>你可能错过重要的活动机会推荐，点击前往“设置”开启通知</p>
       </div>
-      <div class="grey" v-if="!notices.all"></div>
+      <div class="grey"  v-if="isOpenNotification === 0"></div>
       <ul class="notice_m">
         <li>
           活动通知及系统公告
@@ -70,7 +70,6 @@
     },
     methods: {
       refreshResumeData () {
-        console.error('111324342')
         this.checkPermission()
       },
       closeAll () {
@@ -145,7 +144,6 @@
       EventObj.addIntervalOnceEventListener('resume', () => {
         this.refreshResumeData()
       })
-      this.getNotification()
       this.checkPermission()
     },
     watch: {
