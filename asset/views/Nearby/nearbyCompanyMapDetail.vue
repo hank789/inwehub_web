@@ -291,7 +291,7 @@
     overflow: hidden;
     z-index: 10;
     position: absolute;
-    background: #ffff;
+    background: #ffffff;
     height: 60%;
   }
   ul li{

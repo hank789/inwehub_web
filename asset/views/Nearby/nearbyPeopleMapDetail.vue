@@ -294,13 +294,9 @@
     overflow: hidden;
     z-index: 10;
     position: absolute;
-    background: #ffff;
+    background:#ffffff;
     height: 60%;
   }
-
-
-
-
   .cions-list li{
     position: relative;
     padding: 0 4%;
