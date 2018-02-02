@@ -152,34 +152,22 @@
     },
     watch: {
       'notices.upvoted': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('upvoted')
-        }
       },
       'notices.followed': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('followed')
-        }
       },
       'notices.mentioned': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('mentioned')
-        }
       },
       'notices.commented': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('commented')
-        }
       },
       'notices.invited': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('invited')
-        }
       },
       'notices.chatted': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
           this.openNotification('chatted')
-        }
       }
     },
     mounted () {

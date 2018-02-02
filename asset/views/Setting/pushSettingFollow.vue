@@ -114,14 +114,10 @@
     },
     watch: {
       'notices.new_user': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
-          this.openNotification('new_user')
-        }
+        this.openNotification('new_user')
       },
       'notices.new_answered': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
-          this.openNotification('new_answered')
-        }
+        this.openNotification('new_answered')
       }
     },
     created () {
