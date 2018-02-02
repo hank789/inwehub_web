@@ -11,9 +11,14 @@
       <ul>
         <li>
           <p>绑定微信</p>
-          <svg class="icon" aria-hidden="true">
+          <span class="name" v-if="isBindWeixin">
+             {{bindWeixinNickname}}
+             <oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="''" ></oauth>
+          </span>
+          <svg class="icon" aria-hidden="true" v-else>
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
+
           <i class="bot"></i>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/findpassword')">
@@ -85,13 +90,16 @@
 <script>
   import localEvent from '../../stores/localStorage'
   import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../../stores/types'
-  import { apiRequest } from '../../utils/request'
+  import oauth from '../../components/oauth/oauth.vue'
+  import { postRequest, apiRequest } from '../../utils/request'
 
   export default {
     data () {
       const currentUser = localEvent.getLocalItem('UserInfo')
 
       return {
+        bindWeixinNickname: '', // 绑定微信名称
+        isBindWeixin: 0, // 是否绑定微信
         appVersion: '',
         im_tokenMsg: '',
         name: currentUser.name,
@@ -102,6 +110,9 @@
         ios_market_url: '',
         android_market_url: ''
       }
+    },
+    components: {
+      oauth
     },
     created () {
       var obj = localEvent.getLocalItem('app_version')
@@ -115,6 +126,22 @@
       // showInwehubWebview();
     },
     methods: {
+      bindSuccess () {
+        this.getWallet()
+      },
+      getWallet () {
+        postRequest(`account/wallet`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          var data = response.data.data
+          this.isBindWeixin = data.is_bind_weixin
+          this.bindWeixinNickname = data.bind_weixin_nickname
+        })
+      },
       isWeiXin () {
         var ua = window.navigator.userAgent.toLowerCase()
 
@@ -234,6 +261,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+  ul li .name{
+    font-size:14px;
+    color: #444444;
   }
   button{
     margin-top: 20px;
