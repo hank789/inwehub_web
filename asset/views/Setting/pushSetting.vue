@@ -111,7 +111,6 @@
           }
           this.updateNotification()
         }
-
       },
       checkPermission () {
         checkPermission('NOTIFITION', () => {
@@ -151,13 +150,21 @@
     },
     watch: {
       'notices.all': function (newValue, oldValue) {
-        this.openDisturb('all')
+        if (this.isOpenNotification === 1) {
+          this.openDisturb('all')
+        } else {
+          this.closeAll()
+        }
       },
       'notices.disturb': function (newValue, oldValue) {
-        this.openDisturb('disturb')
+        if (this.isOpenNotification === 1) {
+          this.openDisturb('disturb')
+        }
       },
       'notices.system_notify': function (newValue, oldValue) {
-        this.openDisturb('system_notify')
+        if (this.isOpenNotification === 1) {
+          this.openDisturb('system_notify')
+        }
       }
     }
   }
