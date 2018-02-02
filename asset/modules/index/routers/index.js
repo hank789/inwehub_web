@@ -109,8 +109,9 @@ router.beforeEach((to, from, next) => {
   autoBlur()
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
-
-  checkClipbord()
+  if (to.path !== '/ad' && to.path !== '/') {
+    checkClipbord()
+  }
 
   if (from.path === 'login') {
     openFullscreen()
