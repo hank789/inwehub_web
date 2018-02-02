@@ -123,7 +123,7 @@
     created () {
     },
     mounted () {
-      this.getNotification()
+      this.checkPermission()
     }
   }
 </script>

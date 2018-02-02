@@ -23,7 +23,6 @@
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/push/setting/aboutme')">
           与我有关
-
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -118,6 +117,7 @@
         checkPermission('NOTIFITION', () => {
           this.notices.all = 1
           this.isOpenNotification = 1
+          this.getNotification()
         }, (result) => {
           this.notices.all = 0
           this.isOpenNotification = 0
@@ -147,7 +147,6 @@
       }, false)
     },
     mounted () {
-      this.getNotification()
       this.checkPermission()
     },
     watch: {

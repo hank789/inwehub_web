@@ -172,7 +172,7 @@
     },
     mounted () {
       this.checkPermission()
-      this.getNotification()
+
     }
   }
   </script>
