@@ -19,11 +19,11 @@
         <div id="allmap"></div>
       </div>
       <ul  :style="'bottom:'+ bot +'%'">
-        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>名用户在当前区域 <i></i></div>
+        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>家相关公司在当前区域 <i></i></div>
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
             <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
-              <li v-for="item in list" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
+              <li v-for="item in list" @tap.stop.prevent="judge(item)">
                 <div class="container-image">
                   <img :src="item.logo"/>
                 </div>
@@ -49,6 +49,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { toSettingSystem } from '../../utils/plus'
   import { renderMapList as renderMapListMy } from '../../utils/map'
+  import userAbility from '../../utils/userAbility'
   const currentUser = getLocalUserInfo()
   export default {
     data () {
@@ -67,6 +68,26 @@
     created () {
     },
     methods: {
+      judge (item) {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: 5
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              this.$router.pushPlus('/companyDetails/' + item.id)
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
       change () {
         this.bot === -52 ? this.bot = 0 : this.bot = -52
       },

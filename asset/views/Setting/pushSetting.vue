@@ -7,14 +7,14 @@
 
     <div class="mui-content" v-show="!loading">
       <div class="notice_t">
-        <div class="system">
+        <div class="system" v-if="!notices.all">
           开启系统通知
           <Switches v-model="notices.all" type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </div>
         <p>你可能错过重要的活动机会推荐，点击前往“设置”开启通知</p>
       </div>
-      <div class="grey"></div>
+      <div class="grey" v-if="!notices.all"></div>
       <ul class="notice_m">
         <li>
           活动通知及系统公告
@@ -50,7 +50,7 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
-  import { checkPermission,toSettingSystem } from '../../utils/plus'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
   import Switches from 'vue-switches'
 
   export default {
@@ -79,7 +79,6 @@
           system_notify: 0
         }
         this.isOpenNotification = 0
-
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
@@ -103,7 +102,7 @@
             //  todo 显示confirm 提示用户去开启通知权限
             this.notices[type] = 0
             var btnArray = ['取消', '去设置']
-            window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+            window.mui.confirm('现在开启通知，不错过任何一次可能的平台合作机会呦~。', '开启通知', btnArray, (e) => {
               if (e.index === 1) {
                 toSettingSystem('NOTIFITION')
               } else {
@@ -112,7 +111,6 @@
             })
 //            window.mui.toast('前往“设置”开启通知')
           }
-          console.error(this.notices.all)
         }
         this.updateNotification()
       },

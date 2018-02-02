@@ -41,7 +41,7 @@
         :isShowUpToRefreshDescription="false"
         class="listWrapper">
           <ul>
-            <li  v-for="(item, index) in list" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)" >
+            <li  v-for="(item, index) in list" @tap.stop.prevent="judge(item)" >
               <div class="container-image">
                  <img :src="item.logo"/>
               </div>
@@ -80,8 +80,8 @@
         loading: 1,
         isShow: false,
         coords: '',
-        longt: 121.4936901919479,
-        lat: 31.23576356859009,
+        longt: '',
+        lat: '',
         page: 1,
         value: '',
         applyIsShow: true,
@@ -95,48 +95,77 @@
       RefreshList
     },
     created () {
-      this.dataList = {
-        longitude: 121.4936901919479,
-        latitude: 31.23576356859009
-      }
-      if (this.dataList.longitude) {
-        localEvent.setLocalItem('location' + this.user_id, this.dataList)
-      }
-//      checkPermission('LOCATION', () => {
-//        this.isLocation = true
-//       //  获取权限成功的回调
-//        getGeoPosition((position) => {
-//          this.dataList = {
-//            longitude: position.longt,
-//            latitude: position.lat
-//          }
-//          this.longt = position.longt
-//          this.lat = position.lat
-//        }, () => {
-//          // 获取位置失败的回调
-//          var btnArray = ['取消', '去设置']
-//          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-//            if (e.index === 1) {
-//              toSettingSystem('LOCATION')
-//            } else {
-//              window.mui.back()
-//            }
-//          })
-//        })
-//      }, () => {
-//      // 获取权限失败的回调
-//        var btnArray = ['取消', '去设置']
-//        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-//          if (e.index === 1) {
-//            toSettingSystem('LOCATION')
-//          } else {
-//            window.mui.back()
-//          }
-//        })
-//      //
-//      })
+//      初始化测试代码
+//      longt: 121.4936901919479,
+//        lat: 31.23576356859009,
+//      测试代码
+//      this.dataList = {
+//        longitude: 121.4936901919479,
+//        latitude: 31.23576356859009
+//      }
+//      if (this.dataList.longitude) {
+//        localEvent.setLocalItem('location' + this.user_id, this.dataList)
+//      }
+
+      checkPermission('LOCATION', () => {
+        this.isLocation = true
+       //  获取权限成功的回调
+        getGeoPosition((position) => {
+          this.dataList = {
+            longitude: position.longt,
+            latitude: position.lat
+          }
+          this.longt = position.longt
+          this.lat = position.lat
+//          获取到位置进行保存
+          if (this.dataList.longitude) {
+            localEvent.setLocalItem('location' + this.user_id, this.dataList)
+          }
+        }, () => {
+          // 获取位置失败的回调
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('LOCATION')
+            } else {
+              window.mui.back()
+            }
+          })
+        })
+      }, () => {
+      // 获取权限失败的回调
+        var btnArray = ['取消', '去设置']
+        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+          if (e.index === 1) {
+            toSettingSystem('LOCATION')
+          } else {
+            window.mui.back()
+          }
+        })
+      //
+      })
     },
     methods: {
+      judge (item) {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: 5
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              this.$router.pushPlus('/companyDetails/' + item.id)
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },

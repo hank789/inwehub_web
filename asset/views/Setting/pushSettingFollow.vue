@@ -9,16 +9,11 @@
       <ul class="notice">
         <li>
           关注的用户有新动态
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  " :class="new_user ? 'mui-active': '' " @tap.stop.prevent="openNotification('new_user')">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches  v-model="notices.new_user"   type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
-        </li>
         <li>
           关注的问题有新回答
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  " :class="new_answered ? 'mui-active': '' " @tap.stop.prevent="openNotification('new_answered')">
-            <div class="mui-switch-handle"></div>
-          </div>
+        <Switches v-model="notices.new_answered"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
       </ul>
@@ -29,21 +24,33 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import Switches from 'vue-switches'
 
   export default {
     data () {
       return {
-        new_user: 1,
-        new_answered: 1,
-        show: 1
+        loading: 1,
+        isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        notices: {
+          new_user: 1,
+          new_answered: 1
+        }
       }
     },
     components: {
+      Switches
     },
     methods: {
       // 应用从后台切换回前台事件
       refreshResumeData () {
         this.checkPermission()
+      },
+      closeAll () {
+        this.notices = {
+          new_user: 0,
+          new_answered: 0
+        }
+        this.isOpenNotification = 0
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
@@ -52,49 +59,39 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.new_user = response.data.data.push_my_user_new_activity
-          this.new_answered = response.data.data.push_my_question_new_answered
+          this.notices.new_user = response.data.data.push_my_user_new_activity
+          this.notices.new_answered = response.data.data.push_my_question_new_answered
+          console.log(this.notices.new_user, this.notices.new_answered)
         })
       },
       openNotification (type) {
-        if (this.show) {
-          if (type === 'new_user') {
-            switch (this.new_user) {
-              case 0:
-                this.new_user = 1
-                break
-              case 1:
-                this.new_user = 0
-                break
+        console.log(type)
+        var value = this.notices[type]
+        if (value && this.isOpenNotification === 0) {
+          //  todo 显示confirm 提示用户去开启通知权限
+          this.notices[type] = 0
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('现在开启通知，不错过任何一次可能的平台合作机会呦~。', '开启通知', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('NOTIFITION')
+            } else {
+              window.mui.back()
             }
-          } else {
-            switch (this.new_answered) {
-              case 0:
-                this.new_answered = 1
-                break
-              case 1:
-                this.new_answered = 0
-                break
-            }
-          }
-          this.updateNotification()
+          })
         } else {
-          this.new_user = 0
-          this.new_answered = 0
-          toSettingSystem('NOTIFITION')
+          this.updateNotification()
         }
       },
       // 检查权限
       checkPermission () {
         checkPermission('NOTIFITION', () => {
           //  成功的回调
-          this.show = 1
+          this.isOpenNotification = 1
           this.getNotification()
         }, (result) => {
           //  失败的回调
-          this.show = 0
-          this.new_user = 0
-          this.new_answered = 0
+          this.isOpenNotification = 0
+          this.closeAll()
           // 去系统开启通知
           toSettingSystem('NOTIFITION')
         })
@@ -102,23 +99,31 @@
       // 设置权限
       updateNotification () {
         postRequest(`notification/push/update`, {
-          push_my_user_new_activity: this.new_user,
-          push_my_question_new_answered: this.new_answered
+          push_my_user_new_activity: this.notices.new_user ? 1 : 0,
+          push_my_question_new_answered: this.notices.new_answered ? 1 : 0
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          this.new_user = response.data.data.push_my_user_new_activity
-          this.new_answered = response.data.data.push_my_question_new_answered
+          this.notices.new_user = response.data.data.push_my_user_new_activity
+          this.notices.new_answered = response.data.data.push_my_question_new_answered
         })
+      }
+    },
+    watch: {
+      'notices.new_user': function (newValue, oldValue) {
+        this.openNotification('new_user')
+      },
+      'notices.new_answered': function (newValue, oldValue) {
+        this.openNotification('new_answered')
       }
     },
     created () {
     },
     mounted () {
-      this.checkPermission()
+      this.getNotification()
     }
   }
 </script>
@@ -165,12 +170,8 @@
     color: #444444;
     position: relative;
   }
-  .notice li .mui-switch{
+  .vue-switcher {
     float: right;
-    margin-top:7px;
-  }
-  .mui-switch-blue.mui-active {
-    border: 2px solid #03aef9;
-    background-color: #03aef9;
+    top: 17px;
   }
 </style>
