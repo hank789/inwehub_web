@@ -9,7 +9,7 @@
       <div class="menu">
         <div class="switch">
           <p @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">附近的人</p>
-          <p >附近的公司</p>
+          <p @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">附近的公司</p>
         </div>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
           <use xlink:href="#icon-shaixuan"></use>
@@ -49,6 +49,7 @@
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   import { toSettingSystem } from '../../utils/plus'
+  import { renderMapList as renderMapListMy } from '../../utils/map'
   const currentUser = getLocalUserInfo()
   export default {
     data () {
@@ -126,42 +127,11 @@
         this.getData()
       },
       renderMapList (list) {
-        // 标注
-//        var arr = [
-//          {x: 121.483964, y: 31.242127, name: '张1'},
-//          {x: 121.483015, y: 31.244067, name: '张2'},
-//          {x: 121.47969907478, y: 31.227760260672, name: '张3'},
-//        ]
-        for (var j = 0; j < list.length; j++) {
-          var labelPoint = new window.BMap.Point(list[j].longitude, list[j].latitude)
-          var opts = {
-            position: labelPoint,    // 指定文本标注所在的地理位置
-            offset: new window.BMap.Size(-10, -15)    // 设置文本偏移量
-          }
-          var label = new window.BMap.Label(list[j].name.substring(0,1), opts)  // 创建文本标注对象
-          label.setStyle({
-            border: '#03aef9',
-            background: '#03aef9',
-            color: '#ffffff',
-            fontSize: '15px',
-            height: '20px',
-            lineHeight: '20px',
-            fontFamily: '微软雅黑',
-            padding: '3.5px'
-          })
-          this.map.addOverlay(label)
-
-          var circle = new window.BMap.Circle(
-            labelPoint,
-            200,
-            {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0, fillOpacity: 0}) // 创建圆
-
-          this.map.addOverlay(circle)
-        }
+        renderMapListMy(list, this.map)
       },
       getMap () {
         // 百度地图API功能
-        var map = new window.BMap.Map('allmap', {minZoom: 15, maxZoom: 15})
+        var map = new window.BMap.Map('allmap')
         this.map = map
         var point = new window.BMap.Point(this.long, this.lat)
         map.centerAndZoom(point, 15)
