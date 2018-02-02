@@ -130,11 +130,23 @@
         renderMapListMy(list, this.map)
       },
       getMap () {
-        // 百度地图API功能
-        var map = new window.BMap.Map('allmap')
-        this.map = map
-        var point = new window.BMap.Point(this.long, this.lat)
-        map.centerAndZoom(point, 15)
+        //   防止安卓获取成功为空
+        if (/^[0-9.]+$/.test(this.long) && /^[0-9.]+$/.test(this.lat)) {
+          // 百度地图API功能
+          var map = new window.BMap.Map('allmap')
+          this.map = map
+          var point = new window.BMap.Point(this.long, this.lat)
+          map.centerAndZoom(point, 15)
+        } else {
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('LOCATION')
+            } else {
+              window.mui.back()
+            }
+          })
+        }
       }
     },
     mounted () {
