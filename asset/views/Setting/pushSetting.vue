@@ -5,7 +5,7 @@
       <h1 class="mui-title">设置</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content">
       <div class="notice_t">
         <div class="system" v-if="!notices.all">
           开启系统通知
@@ -55,7 +55,6 @@
   export default {
     data () {
       return {
-        loading: 1,
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
         notices: {
           all: 1,
@@ -86,7 +85,6 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.loading = 0
           this.notices.disturb = response.data.data.push_do_not_disturb
           this.notices.system_notify = response.data.data.push_system_notify
         })
