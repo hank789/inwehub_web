@@ -4,7 +4,7 @@ function renderMapList (list, map) {
     var opts = {
       position: labelPoint    // 指定文本标注所在的地理位置
     }
-    var labelName = list[j].name.substring(0, 1)
+    var labelName = list[j].name
     labelName = labelName.replace(/\s+/g, '')
     labelName = labelName.replace(/（/g, '')
     labelName = labelName.replace(/）/g, '')
