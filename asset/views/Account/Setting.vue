@@ -206,6 +206,7 @@
       }
     },
     mounted () {
+      this.bindSuccess()
       window.mui('.mui-switch')['switch']()
       window.addEventListener('refreshData', (e) => {
         // 执行刷新
