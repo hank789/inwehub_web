@@ -143,15 +143,23 @@
 
             // 应用从后台切换回前台事件
             EventObj.addIntervalOnceEventListener('resume', () => {
-              // 每日签到
-              userAbility.signIGift(self)
-              // 剪贴板
-              checkClipbord()
               // 存储用户位置信息
               var currentUser = localEvent.getLocalItem('UserInfo')
               if (currentUser.user_id) {
                 saveLocationInfo()
               }
+
+              var routerFullPath = self.$router.currentRoute.fullPath
+              console.log('routerFullPath:' + routerFullPath)
+              if (routerFullPath === '/ad') {
+                return
+              }
+
+              // 每日签到
+              userAbility.signIGift(self)
+              // 剪贴板
+              checkClipbord()
+
               if (window.mui.os.ios) {
                 noticeOpenNotifitionPermission(self)
               }

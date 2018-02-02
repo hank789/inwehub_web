@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="time" @tap.stop.prevent="toHome">
-        <span id="micTime">3</span>s 跳过
+    <div class="mui-content">
+      <div style="background-color: #f3f4f6"></div>
+      <div class="time" @tap.stop.prevent="toHome">
+          <span id="micTime">3</span>s 跳过
+      </div>
+      <img src="../statics/images/time_m@2x.png" class="time_m">
+      <img src="../statics/images/time_b@2x.png" class="time_b"/>
     </div>
-    <img src="../statics/images/time_m@2x.png" class="time_m">
-    <img src="../statics/images/time_b@2x.png" class="time_b"/>
   </div>
 </template>
 
@@ -44,6 +47,9 @@
 </script>
 
 <style scoped="scoped">
+  .mui-content{
+    background-color: #f3f4f6;
+  }
   .time {
     width: 83px;
     height: 34px;
@@ -70,5 +76,8 @@
     position: fixed;
     width:100%;
     bottom: 0;
+  }
+  .immersed20 .time{
+    top:0;
   }
 </style>
