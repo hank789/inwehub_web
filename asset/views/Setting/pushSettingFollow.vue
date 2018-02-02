@@ -78,6 +78,8 @@
               window.mui.back()
             }
           })
+        } else {
+          this.updateNotification()
         }
       },
       // 检查权限
@@ -97,8 +99,8 @@
       // 设置权限
       updateNotification () {
         postRequest(`notification/push/update`, {
-          push_my_user_new_activity: this.notices.new_user,
-          push_my_question_new_answered: this.notices.new_answered
+          push_my_user_new_activity: this.notices.new_user ? 1 : 0,
+          push_my_question_new_answered: this.notices.new_answered ? 1 : 0
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {

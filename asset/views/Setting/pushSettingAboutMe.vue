@@ -9,44 +9,32 @@
       <ul class="notice">
         <li>
           赞了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches v-model="notices.upvoted"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
         <li>
           关注了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches v-model="notices.followed"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
         <li>
           提到了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches v-model="notices.mentioned"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
         <li>
           回复了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches  v-model="notices.commented"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
         <li>
           邀请了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches v-model="notices.invited"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
         <li>
           私聊了我
-          <div class="mui-switch mui-switch-blue  mui-switch-mini  mui-active">
-            <div class="mui-switch-handle"></div>
-          </div>
+          <Switches  v-model="notices.chatted"  type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </li>
       </ul>
@@ -56,25 +44,41 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import Switches from 'vue-switches'
 
   export default {
     data () {
       return {
-        upvoted: 1,
-        followed: 1,
-        mentioned: 1,
-        commented: 1,
-        invited: 1,
-        chatted: 1,
-        show: 1
+        loading: 1,
+        isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        notices: {
+          upvoted: 1,
+          followed: 1,
+          mentioned: 1,
+          commented: 1,
+          invited: 1,
+          chatted: 1
+        }
       }
     },
     components: {
+      Switches
     },
     methods: {
       // 应用从后台切换回前台事件
       refreshResumeData () {
         this.checkPermission()
+      },
+      closeAll () {
+        this.notices = {
+          upvoted: 0,
+          followed: 0,
+          mentioned: 0,
+          commented: 0,
+          invited: 0,
+          chatted: 0
+        }
+        this.isOpenNotification = 0
       },
      // 获取推送信息
       getNotification () {
@@ -84,62 +88,40 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.upvoted = response.data.data.push_rel_mine_upvoted
-          this.followed = response.data.data.push_rel_mine_followed
-          this.mentioned = response.data.data.push_rel_mine_mentioned
-          this.commented = response.data.data.push_rel_mine_commented
-          this.invited = response.data.data.push_rel_mine_invited
-          this.chatted = response.data.data.push_rel_mine_chatted
+          this.notices.upvoted = response.data.data.push_rel_mine_upvoted
+          this.notices.followed = response.data.data.push_rel_mine_followed
+          this.notices.mentioned = response.data.data.push_rel_mine_mentioned
+          this.notices.commented = response.data.data.push_rel_mine_commented
+          this.notices.invited = response.data.data.push_rel_mine_invited
+          this.notices.chatted = response.data.data.push_rel_mine_chatted
         })
       },
       openNotification (type) {
-        if (this.show) {
-          if (type === 'new_user') {
-            switch (this.new_user) {
-              case 0:
-                this.new_user = 1
-                break
-              case 1:
-                this.new_user = 0
-                break
+        var value = this.notices[type]
+        if (value && this.isOpenNotification === 0) {
+          //  todo 显示confirm 提示用户去开启通知权限
+          this.notices[type] = 0
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('现在开启通知，不错过任何一次可能的平台合作机会呦~。', '开启通知', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('NOTIFITION')
+            } else {
+              window.mui.back()
             }
-          } else {
-            switch (this.new_answered) {
-              case 0:
-                this.new_answered = 1
-                break
-              case 1:
-                this.new_answered = 0
-                break
-            }
-          }
-          this.updateNotification()
+          })
         } else {
-          this.show = 0
-          this.upvoted = 0
-          this.followed = 0
-          this.mentioned = 0
-          this.commented = 0
-          this.invited = 0
-          this.chatted = 0
-          toSettingSystem('NOTIFITION')
+          this.updateNotification()
         }
       },
       // 检查权限
       checkPermission () {
         checkPermission('NOTIFITION', () => {
           //  成功的回调
-          this.show = 1
+          this.isOpenNotification = 1
           this.getNotification()
         }, (result) => {
           //  失败的回调
-          this.show = 0
-          this.upvoted = 0
-          this.followed = 0
-          this.mentioned = 0
-          this.commented = 0
-          this.invited = 0
-          this.chatted = 0
+          this.closeAll()
           // 去系统开启通知
           toSettingSystem('NOTIFITION')
         })
@@ -147,28 +129,46 @@
       // 设置权限
       updateNotification () {
         postRequest(`notification/push/update`, {
-          push_rel_mine_upvoted: this.upvoted,
-          push_rel_mine_followed: this.followed,
-          push_rel_mine_mentioned: this.mentioned,
-          push_rel_mine_commented: this.commented,
-          push_rel_mine_invited: this.invited,
-          push_rel_mine_chatted: this.chatted
+          push_rel_mine_upvoted: this.notices.upvoted ? 1 : 0,
+          push_rel_mine_followed: this.notices.followed ? 1 : 0,
+          push_rel_mine_mentioned: this.notices.mentioned ? 1 : 0,
+          push_rel_mine_commented: this.notices.commented ? 1 : 0,
+          push_rel_mine_invited: this.notices.invited ? 1 : 0,
+          push_rel_mine_chatted: this.notices.chatted ? 1 : 0
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          this.upvoted = response.data.data.push_rel_mine_upvoted
-          this.followed = response.data.data.push_rel_mine_followed
-          this.mentioned = response.data.data.push_rel_mine_mentioned
-          this.commented = response.data.data.push_rel_mine_commented
-          this.invited = response.data.data.push_rel_mine_invited
-          this.chatted = response.data.data.push_rel_mine_chatted
+          this.notices.upvoted = response.data.data.push_rel_mine_upvoted
+          this.notices.followed = response.data.data.push_rel_mine_followed
+          this.notices.mentioned = response.data.data.push_rel_mine_mentioned
+          this.notices.commented = response.data.data.push_rel_mine_commented
+          this.notices.invited = response.data.data.push_rel_mine_invited
+          this.notices.chatted = response.data.data.push_rel_mine_chatted
         })
       }
     },
-    created () {
+    watch: {
+      'notices.upvoted': function (newValue, oldValue) {
+        this.openNotification('upvoted')
+      },
+      'notices.followed': function (newValue, oldValue) {
+        this.openNotification('followed')
+      },
+      'notices.mentioned': function (newValue, oldValue) {
+        this.openNotification('mentioned')
+      },
+      'notices.commented': function (newValue, oldValue) {
+        this.openNotification('commented')
+      },
+      'notices.invited': function (newValue, oldValue) {
+        this.openNotification('invited')
+      },
+      'notices.chatted': function (newValue, oldValue) {
+        this.openNotification('chatted')
+      }
     },
     mounted () {
       this.checkPermission()
@@ -221,12 +221,8 @@
     position: relative;
   }
 
-  .notice li .mui-switch{
+  .vue-switcher {
     float: right;
-    margin-top:7px;
+    top: 17px;
   }
-  .mui-switch-blue.mui-active {
-      border: 2px solid #03aef9;
-      background-color: #03aef9;
-    }
 </style>
