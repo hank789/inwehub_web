@@ -60,7 +60,7 @@
     font-size: 14px;
     color: #ffffff;
     position: absolute;
-    top: 20px;
+    top: 40px;
     right: 16px;
   }
   .time_m{
