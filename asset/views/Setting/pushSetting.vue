@@ -140,12 +140,7 @@
       }
     },
     computed: {},
-    created () {
-      // 从设置页面返回到app内页，再次检查下权限
-      document.addEventListener('newintent', () => {
-        this.checkPermission()
-      }, false)
-    },
+    created () {},
     mounted () {
       this.getNotification()
       this.checkPermission()
