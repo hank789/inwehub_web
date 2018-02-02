@@ -172,7 +172,6 @@
     },
     mounted () {
       this.checkPermission()
-
     }
   }
   </script>

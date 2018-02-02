@@ -7,7 +7,8 @@
 
     <div class="mui-content">
       <div class="notice_t">
-        <div class="system" v-if="!notices.all">
+        <!--v-if="!notices.all"-->
+        <div class="system" >
           开启系统通知
           <Switches v-model="notices.all" type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
@@ -92,7 +93,6 @@
       openDisturb (type) {
         if (type === 'all' && !this.notices.all) {
           this.closeAll()
-          this.updateNotification()
         } else {
           var value = this.notices[type]
           if (value && this.isOpenNotification === 0) {
@@ -106,10 +106,10 @@
                 window.mui.back()
               }
             })
-//            window.mui.toast('前往“设置”开启通知')
           }
+          this.updateNotification()
         }
-        this.updateNotification()
+
       },
       checkPermission () {
         checkPermission('NOTIFITION', () => {
@@ -140,6 +140,7 @@
     computed: {},
     created () {},
     mounted () {
+      this.getNotification()
       this.checkPermission()
     },
     watch: {
