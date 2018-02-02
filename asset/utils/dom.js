@@ -103,31 +103,32 @@ function transferTagToLink (html) {
 function dragDownElement (elem, callback) {
   var startY
   var moveY
-  var startScreenY
+  var scrollTop
 
   var oldTop = elem.style.top
 
   elem.addEventListener('touchstart', (e) => {
     var touch = e.touches[0]
     startY = touch.pageY
-    startScreenY = touch.screenY
+    scrollTop = elem.scrollTop
   })
 
-  elem.addEventListener('touchmove', (e) => {
+  elem.addEventListener('touchmove', function (e) {
     e.stopPropagation()
-
     var touch = e.touches[0]
     moveY = touch.pageY - startY
 
-    if (moveY > 0 && moveY < 100 && startScreenY < 300) {
+    if (moveY > 0 && moveY < 100 && scrollTop === 0) {
+      e.preventDefault()
       elem.style.top = moveY + 'px'
     }
-  })
+  }, true)
 
   elem.addEventListener('touchend', (e) => {
-    if (moveY > 100 && startScreenY < 300) {
+    if (moveY > 100 && scrollTop === 0) {
       elem.style.top = oldTop
-      callback(moveY + ':' + startScreenY)
+      callback(moveY + ':' + scrollTop)
+      moveY = 0
     }
   })
 }

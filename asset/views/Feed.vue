@@ -210,24 +210,7 @@
     },
     methods: {
       judge () {
-        postRequest(`auth/checkUserLevel`, {
-          permission_type: 5
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.is_valid) {
-              this.$router.pushPlus('/nearbyCompany')
-            } else {
-              userAbility.jumpJudgeGrade(this)
-            }
-          }
-        })
+        this.$router.pushPlus('/nearbyCompany')
       },
       chooseType (type) {
         if (type === 1) {

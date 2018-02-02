@@ -43,7 +43,7 @@
               </div>
               <p>企业服务</p>
             </li>
-            <li @tap.stop.prevent="judge(5)">
+            <li @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
               <div class="discover-round">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-zhaoguwenyuanshi"></use>
@@ -176,14 +176,6 @@
                   break
                 case 2:
                   this.$router.pushPlus('/askCommunity/interactions')
-                  break
-//                case 4:
-//                  this.$router.pushPlus('my/Discount')
-//                  break
-                case 5:
-                  this.$router.pushPlus('/nearbyCompany')
-                  break
-                default:
               }
             } else {
               userAbility.jumpJudgeGrade(this)
