@@ -146,8 +146,6 @@
       'notices.all': function (newValue, oldValue) {
         if (this.isOpenNotification === 1) {
           this.openDisturb('all')
-        } else {
-          this.closeAll()
         }
       },
       'notices.disturb': function (newValue, oldValue) {
