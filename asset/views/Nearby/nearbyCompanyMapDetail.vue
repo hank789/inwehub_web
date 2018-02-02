@@ -19,7 +19,7 @@
         <div id="allmap"></div>
       </div>
       <ul  :style="'bottom:'+ bot +'%'">
-        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>名用户在当前区域 <i></i></div>
+        <div class="userArea" @tap.stop.prevent="change">共有<a>{{total}}</a>家相关公司在当前区域 <i></i></div>
         <div class="mui-scroll-wrapper">
           <div class="mui-scroll">
             <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="container">
