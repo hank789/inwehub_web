@@ -50,7 +50,7 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { checkPermission as checkPermissionMy, toSettingSystem } from '../../utils/plus'
   import EventObj from '../../utils/event'
   import Switches from 'vue-switches'
 
@@ -70,7 +70,7 @@
     },
     methods: {
       refreshResumeData () {
-        this.checkPermission()
+        this.checkPermissionSelf()
       },
       closeAll () {
         this.notices = {
@@ -111,8 +111,8 @@
           this.updateNotification()
         }
       },
-      checkPermission () {
-        checkPermission('NOTIFITION', () => {
+      checkPermissionSelf () {
+        checkPermissionMy('NOTIFITION', () => {
           this.notices.all = 1
           this.isOpenNotification = 1
           this.getNotification()
@@ -144,23 +144,17 @@
       EventObj.addIntervalOnceEventListener('resume', () => {
         this.refreshResumeData()
       })
-      this.checkPermission()
+      this.checkPermissionSelf()
     },
     watch: {
       'notices.all': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
-          this.openDisturb('all')
-        }
+        this.openDisturb('all')
       },
       'notices.disturb': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
-          this.openDisturb('disturb')
-        }
+        this.openDisturb('disturb')
       },
       'notices.system_notify': function (newValue, oldValue) {
-        if (this.isOpenNotification === 1) {
-          this.openDisturb('system_notify')
-        }
+        this.openDisturb('system_notify')
       }
     }
   }
