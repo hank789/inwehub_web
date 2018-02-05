@@ -27,7 +27,7 @@
 
 
         <div class="ranking">
-          <img src="../../statics/images/invitationlist@2x.png" class="ranking-title"/>
+          <img src="../../statics/images/upvotesList@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
             <li>
               <div class="avatar-container">
