@@ -390,7 +390,7 @@
         </div>
         <!--跳转按钮-->
         <p class="my-wallet alertConfirm" id="my-wallet" v-if="options.Coupon.coupon_type === 4">前往付费围观专业回答</p>
-        <p class="my-wallet alertConfirm" id="my-wallet" v-else>前往付费围观专业回答</p>
+        <p class="my-wallet alertConfirm" id=" my-wallet" v-else>前往付费围观专业回答</p>
         <!---->
       </div>
       <!--关闭按钮-->

@@ -220,6 +220,8 @@
     height:50px;
     background:#3c3e44;
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .menu .switch{
     width:210px;
