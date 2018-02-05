@@ -33,7 +33,7 @@ function textToLink (domEle) {
   if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /(https?:\/\/[^\s<]+)/g
+  var re = /\s(https?:\/\/[^\s<]+)/g
   text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
   re = /<p>(https?:\/\/[^\s<]+)/g
@@ -54,7 +54,7 @@ function textToLinkHtml (text) {
   if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /(https?:\/\/[^\s<]+)/g
+  var re = /\s(https?:\/\/[^\s<]+)/g
   text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
   re = /<p>(https?:\/\/[^\s<]+)/g
