@@ -11,7 +11,7 @@
            <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
            <p>附近的公司</p>
          </div>
-          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/nearbyCompany/MapDetail')">
+          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">
             <use xlink:href="#icon-ditu"></use>
           </svg>
       </div>
