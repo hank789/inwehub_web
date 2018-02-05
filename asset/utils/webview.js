@@ -168,8 +168,9 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     webview.loadURL(url)
   }
   webview.onloaded = function (event) {
-    plusWaiting.close()
-    plusWaiting = null
+    if (plusWaiting) {
+      plusWaiting.close()
+    }
     webview.show()
   }
   currentWebview.append(webview)
