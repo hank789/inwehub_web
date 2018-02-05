@@ -413,7 +413,17 @@
         </ul>
       </div>
     </div>
+    <!--抽奖弹窗-->
+    <div id="luckDraw">
+      <div class="luckDraw">
+        <p class="qualification">恭喜您获得抽奖资格!</p>
+        <div class="search">扫码或搜索hiinwe添加小哈微信，截此页图给小哈，由小哈邀请加入抽奖群。</div>
 
+        <div class="wechat">
+        </div>
+        <div class="waiting">入群后点击抽奖链接，并等待开奖。</div>
+      </div>
+    </div>
     <!--bot-->
 
   </div>
@@ -1570,5 +1580,46 @@
     font-size: 16px;
     color: #03aef9;
     border-top:0.5px solid #dcdcdc;
+  }
+  /*抽奖弹窗*/
+  .luckDraw{
+    width:100%;
+    height:420px;
+    border:1px solid #000000;
+    padding: 0 15px;
+  }
+  .luckDraw .qualification{
+    text-align: center;
+    font-size:19px;
+    color: #03aef9;
+    font-weight: 500;
+    margin-top: 31px;
+  }
+  .luckDraw .search{
+    margin-top: 14px;
+    font-size: 14px;
+    color: #808080;
+  }
+  .luckDraw .wechat{
+    width:112px;
+    height:122px;
+    border-radius: 4px;
+    border: 1px solid #979797;
+    margin: 0 auto;
+    margin-top: 23px;
+  }
+  .luckDraw .wechat img{
+    width: 100%;
+    height:100%;
+  }
+
+
+
+
+  .luckDraw  .waiting{
+    margin-top: 12px;
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
   }
 </style>
