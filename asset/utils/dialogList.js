@@ -366,5 +366,5 @@ export {
   alertSignIn,
   alertGetCredits,
   alertGetCoupon,
-  alertNoticeOpenNotifitionPermission
+  alertNoticeOpenNotifitionPermission,
 }

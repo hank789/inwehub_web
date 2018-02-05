@@ -11,7 +11,7 @@
 import localEvent from '../stores/localStorage'
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
 import router from '../modules/index/routers/index'
-import {alertZoom, alertSimple, getDialogObj} from '../utils/dialog'
+import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
@@ -340,6 +340,19 @@ var UserAbility = () => {
       }
     }
   }
+  // 抽奖弹窗
+  var luckDraw = (context, invitation) => {
+    console.log(invitation)
+    var dialogObj = getDialogObj(context)
+    if (dialogObj) {
+      dialogObj.getHtml('luckDraw', {invitation: invitation}, (html) => {
+        alertHtml(html, (num) => {
+          document.querySelector('.mui-content').style.position = 'relative'
+          return true
+        }, 'mui-popup mui-popup-in alertluckDraw')
+      })
+    }
+  }
 
   /**
    * 跳转到标签详情页
@@ -366,7 +379,8 @@ var UserAbility = () => {
     signIGift: signIGift,
     logout: logout,
     jumpToTagDetail: jumpToTagDetail,
-    InvitationCoupon: InvitationCoupon
+    InvitationCoupon: InvitationCoupon,
+    luckDraw: luckDraw
   }
 }
 

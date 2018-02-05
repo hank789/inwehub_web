@@ -31,7 +31,8 @@
         <span>2.2018.2.1-2018.2.28期间累计邀请8人及以上，</span>
         <span>即可获得抽奖资格，月底抽取iphoneX。</span>
         <span>已邀请<i>{{invited_users}}</i>人</span>
-        <p class="luckDraw" :class="invited_users >=8 ? red : ''">抽奖</p>
+        <p class="luckDraw" v-if="invited_users < 8"  >抽奖</p>
+        <p class="luckDraw red" @tap.stop.prevent="luckDraw()" v-else>抽奖</p>
       </div>
       <!--邀请说明-->
       <div class="invitationNote">
@@ -65,6 +66,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
 
   const Index = {
     data: () => ({
@@ -74,7 +76,8 @@
         link: '',
         content: '',
         imageUrl: '',
-        thumbUrl: ''
+        thumbUrl: '',
+        invitation: {}
       },
       invitedUsersCount: '--',
       rewardMoney: '--',
@@ -90,6 +93,10 @@
     },
     computed: {},
     methods: {
+      luckDraw () {
+        document.querySelector('.mui-content').style.position = 'absolute'
+        userAbility.luckDraw(this, this.invitation)
+      },
       // 警告框
       warn () {
         var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
@@ -121,7 +128,8 @@
               window.mui.toast(response.data.message)
               return
             }
-            this.invitedUsersCount = response.data.data.invited_users
+            this.invitation = response.data.data
+            this.invitedUsersCount = response.data.data.current_month_invited_users
             this.rewardMoney = response.data.data.reward_money
             this.invited_users = response.data.data.invited_users
           })
