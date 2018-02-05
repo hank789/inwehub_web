@@ -21,7 +21,7 @@
       var arr = [
         {x: 121.483964, y: 31.242127, name: '张1张1张1张1张1张1'},
         {x: 121.483015, y: 31.244067, name: '张2'},
-        {x: 121.47969907478, y: 31.227760260672, name: '张3'},
+        {x: 121.47969907478, y: 31.227760260672, name: '张3'}
       ]
       for (var j = 0; j < arr.length; j++) {
         var labelPoint = new window.BMap.Point(arr[j].x, arr[j].y)
