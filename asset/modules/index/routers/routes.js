@@ -496,23 +496,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 成长榜；
-    path: '/creditsList',
-    name: 'credit-list',
-    component: require('../../../views/Activity/CreditsList.vue'),
-    meta: {
-      title: '成长榜',
-      keepAlive: false
-    },
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
-  },
-  { // 贡献榜；
+  { // 本月获赞榜；
     path: '/cionsList',
     name: 'cions-list',
     component: require('../../../views/Activity/CionsList.vue'),

@@ -9,8 +9,7 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="">贡献榜<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/creditsList')">成长榜</span>
-        <span @tap.stop.prevent="$router.replace('/invitationList')">邀请榜</span>
+        <span @tap.stop.prevent="$router.replace('/invitationList')">本月获赞榜</span>
       </div>
      <template v-if="!loading && first">
         <div class="ranking">

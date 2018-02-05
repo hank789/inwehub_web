@@ -9,12 +9,24 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/cionsList')">贡献榜</span>
-        <span @tap.stop.prevent="$router.replace('/creditsList')">成长榜</span>
-        <span @tap.stop.prevent="">邀请榜 <i></i></span>
+        <span @tap.stop.prevent="">本月获赞榜 <i></i></span>
       </div>
       <template v-if="!loading && first">
+        <div class="title_invitation">
+          <div class="cions-avatar">
+            <img :src="invitationList.user_avatar" @tap.stop.prevent="toAvatar(invitationList.user_uuid)"/>
+            <svg class="icon" aria-hidden="true" v-if="invitationList.is_expert">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <p>{{invitationList.user_name}}</p>
+          <div class="See">本月获赞{{invitationList.current_month_user_upvotes}}次 </div>
+          <i class="bott"></i>
+        </div>
+
+
+
         <div class="ranking">
-          <div class="See" @tap.stop.prevent="$router.pushPlus('/invitation/index')">邀请好友</div>
           <img src="../../statics/images/invitationlist@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
             <li>
@@ -28,7 +40,7 @@
                 </p>
               </div>
               <p>{{third.user_name}}</p>
-              <p class="cions">邀请{{third.invited_users}}人</p>
+              <p class="cions">获赞数{{third.upvotes}}人</p>
               <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -42,7 +54,7 @@
                 </p>
               </div>
               <p>{{first.user_name}}</p>
-              <p class="cions">邀请{{first.invited_users}}人</p>
+              <p class="cions">获赞数{{first.upvotes}}人</p>
               <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -56,7 +68,7 @@
                 </p>
               </div>
               <p>{{second.user_name}}</p>
-              <p class="cions">邀请{{second.invited_users}}人</p>
+              <p class="cions">获赞数{{second.upvotes}}人</p>
               <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
           </ul>
@@ -76,7 +88,7 @@
             </div>
             <div class="detail">
               <p>{{item.user_name}}</p>
-              <p>邀请{{item.invited_users}}人</p>
+              <p>获赞数{{item.upvotes}}人</p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
@@ -100,7 +112,8 @@
         first: null,
         second: null,
         third: null,
-        list: []
+        list: [],
+        invitationList: {}
       }
     },
     components: {
@@ -149,7 +162,7 @@
         })
       },
       getData () {
-        postRequest(`rank/userInvitation`, {}).then(response => {
+        postRequest(`rank/userUpvotes`, {}).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
@@ -167,10 +180,25 @@
             this.list = response.data.data.slice(3)
           }
         })
+      },
+      getInvitation () {
+        postRequest(`rank/userInfo`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            this.invitationList = response.data.data
+          }
+        })
       }
     },
     mounted () {
       this.getData()
+      this.getInvitation()
     },
     updated () {}
   }
@@ -185,6 +213,16 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
+  }
+  .bott {
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+    left:4%;
+    height: 1px;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c58a0c;
   }
   /*清掉自带样式*/
 
@@ -215,13 +253,13 @@
     justify-content: space-around;
     align-items: center;
   }
-  .menu span:nth-of-type(3){
+  .menu span:nth-of-type(2){
     position:relative;
     color: #03aef9;
   }
-  .menu span:nth-of-type(3) i{
+  .menu span:nth-of-type(2) i{
     position:absolute;
-    width:42px;
+    width:70px;
     height:1.5px;
     border-radius: 50px;
     background:#03aef9;
@@ -230,6 +268,55 @@
     right: 0;
     margin: auto;
 
+  }
+  /*title_invitation*/
+  .title_invitation{
+    width:100%;
+    height:57px;
+    background: #fcc816;
+    position: relative;
+
+  }
+  .title_invitation .cions-avatar{
+    float: left;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #cccccc;
+    left: 4%;
+    top: 6.5px;
+  }
+  .title_invitation .cions-avatar img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+  .title_invitation .cions-avatar svg{
+    position: absolute;
+    font-size: 20px;
+    right: -5px;
+    bottom: -2px;
+  }
+  .title_invitation p{
+    height:100%;
+    float: left;
+    line-height: 57px;
+    font-size: 16px;
+    color: #8e4c02;
+    font-weight: 500;
+    margin-left: 24px;
+  }
+  .title_invitation .See{
+    position: absolute;
+    right: 0;
+    top: 15px;
+    display: inline-block;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 50px 0 0 50px;
+    padding: 3.5px 7px 3.5px 8px;
+    background: linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40));
   }
   /*排名的展示样式*/
   .ranking{
