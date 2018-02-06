@@ -81,13 +81,13 @@
       </RefreshList>
       <!--活动标签-->
       <div class="activity_tags">
-        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('提建议') + '/questions')">
+        <p @tap.stop.prevent='addTag()'>
           <img src="../../statics/images/tag_detail_suggest@2x.png"/>
         </p>
-        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('谈工作') + '/questions')">
+        <p @tap.stop.prevent='addTag()'>
           <img src="../../statics/images/tag_detail_work@2x.png"/>
         </p>
-        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('贺新春') + '/questions')">
+        <p @tap.stop.prevent="addTag()">
           <img src="../../statics/images/tag_detail_newyewr@2x.png"/>
         </p>
       </div>
@@ -107,7 +107,8 @@
     data: () => ({
       tagName: '',
       list: [],
-      userId: currentUser.user_id
+      userId: currentUser.user_id,
+      activity_tags: []
     }),
     created () {
       if (this.$route.params.tag) {
@@ -239,9 +240,25 @@
             }
           }
         })
+      },
+      // 获取活动标签
+      getTag () {
+        postRequest(`tags/getThreeAc`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.length > 0) {
+            this.activity_tags = response.data.data
+          }
+        })
       }
     },
     mounted () {
+      this.getTag()
       document.addEventListener('tap', () => {
       })
     },
