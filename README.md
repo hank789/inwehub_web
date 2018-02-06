@@ -8,8 +8,14 @@ npm run dev
 ### 测试环境
 npm run test
 
+### 测试环境-wechat
+npm run test-browser
+
 ### 生产环境
 npm run build
+
+### 生产环境-wechat
+npm run build-browser
 
 ### 代码规范监测
 npm run lint
