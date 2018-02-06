@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="mui-content">
-      <div style="background:#564ba7"></div>
+    <div class="mui-content" v-if="isShow">
+      <div style="background-color: #fff"></div>
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
       </div>
@@ -17,20 +17,42 @@
 </template>
 
 <script>
-  import { openFullscreen } from '../utils/plus'
+  import { postRequest } from '../utils/request'
+  import { openFullscreen, closeFullscreen } from '../utils/plus'
   export default {
+    data: () => ({
+      isShow: 0
+    }),
     created () {
       openFullscreen()
     },
     methods: {
       toHome () {
+        closeFullscreen()
         this.$router.replace('/home')
+      },
+      getBoot_guide () {
+        postRequest(`system/boot_guide`, {}, false).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          // 是否显示启动页面
+          if (response.data.data.show_guide) {
+            this.isShow = response.data.data.show_guide
+          } else {
+            this.isShow = response.data.data.show_guide
+            this.$router.replace('/home')
+          }
+        })
       }
     },
     mounted () {
+      this.getBoot_guide()
       var endTime = 3  // 倒计时时间
       function setTime () {
-        if (endTime < 0) {
+        if (endTime < 1) {
           return
         }
         if (document.getElementById('micTime')) {
@@ -41,7 +63,7 @@
       var intervalObj = setInterval(() => {
         endTime--
         setTime()
-        if (endTime < 0) {
+        if (endTime < 1) {
           clearInterval(intervalObj)
           this.toHome()
         }
