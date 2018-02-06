@@ -79,7 +79,18 @@
           </template>
         </ul>
       </RefreshList>
-
+      <!--活动标签-->
+      <div class="activity_tags">
+        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('提建议') + '/questions')">
+          <img src="../../statics/images/tag_detail_suggest@2x.png"/>
+        </p>
+        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('谈工作') + '/questions')">
+          <img src="../../statics/images/tag_detail_work@2x.png"/>
+        </p>
+        <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('贺新春') + '/questions')">
+          <img src="../../statics/images/tag_detail_newyewr@2x.png"/>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -110,6 +121,11 @@
       TagsInfo
     },
     methods: {
+//      refreshPageData () {
+//        if (this.$route.params.tag) {
+//          this.tagName = this.$route.params.tag
+//        }
+//      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
@@ -558,5 +574,26 @@
 
   .listWrapper{
     top:177px;
+  }
+  /*活动标签*/
+  .activity_tags{
+    width:114px;
+    overflow: hidden;
+    position: absolute;
+    right: 4%;
+    bottom: 30px;
+    z-index: 2;
+  }
+  .activity_tags p{
+    width:114px;
+    height: 44px;
+    margin-top: 10px;
+    background: #cccccc;
+    border-radius: 50px;
+  }
+  .activity_tags p img{
+    width:100%;
+    height: 100%;
+    border-radius: 50px;
   }
 </style>
