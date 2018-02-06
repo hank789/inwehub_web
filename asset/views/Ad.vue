@@ -5,8 +5,13 @@
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
       </div>
-      <img src="../statics/images/time_m@2x.png" class="time_m">
-      <img src="../statics/images/time_b@2x.png" class="time_b"/>
+      <div class="time_t"></div>
+      <div class="time_b">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-inwehubzuoyou"></use>
+        </svg>
+        <p>最具品质的咨询顾问社区</p>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +31,7 @@
     mounted () {
       var endTime = 3  // 倒计时时间
       function setTime () {
-        if (endTime < 0) {
+        if (endTime < 1) {
           return
         }
         if (document.getElementById('micTime')) {
@@ -37,7 +42,7 @@
       var intervalObj = setInterval(() => {
         endTime--
         setTime()
-        if (endTime < 0) {
+        if (endTime < 1) {
           clearInterval(intervalObj)
           this.toHome()
         }
@@ -63,19 +68,36 @@
     top: 40px;
     right: 16px;
   }
-  .time_m{
-    position: absolute;
-    width:75px;
-    top:25%;
-    left:0;
-    right:0;
-    margin: auto;
-
+  .time_t{
+    width: 100%;
+    height: 80%;
+    background: url("../statics/images/time@2x.png");
+    background-size: cover;
+    background-position: center;
   }
   .time_b{
-    position: fixed;
     width:100%;
-    bottom: 0;
+    height:20%;
+    text-align: center;
+    position: relative;
+  }
+  .time_b svg{
+    font-size: 120px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:-25px;
+    margin: auto;
+  }
+  .time_b p{
+    text-align: center;
+    font-size: 14px;
+    color: #747576;
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   .immersed20 .time{
     top:0;
