@@ -434,7 +434,7 @@
         <div class="search">扫码或搜索hiinwe添加小哈微信，截此页图给小哈，由小哈邀请加入抽奖群。</div>
 
         <div class="wechat">
-          <img src="../statics/images/wechat@2x.png" />
+          <img src="../statics/images/dialog-wechat@2x.png" />
         </div>
         <div class="waiting">入群后点击抽奖链接，并等待开奖。</div>
         <p class="btn alertClose">确定</p>
