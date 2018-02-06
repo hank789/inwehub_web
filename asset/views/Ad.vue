@@ -41,6 +41,24 @@
           // 是否显示启动页面
           if (response.data.data.show_guide) {
             this.isShow = response.data.data.show_guide
+            var endTime = 3  // 倒计时时间
+            function setTime () {
+              if (endTime < 1) {
+                return
+              }
+              if (document.getElementById('micTime')) {
+                document.getElementById('micTime').innerHTML = endTime.toString()
+              }
+            }
+            setTime()
+            var intervalObj = setInterval(() => {
+              endTime--
+              setTime()
+              if (endTime < 1) {
+                clearInterval(intervalObj)
+                this.toHome()
+              }
+            }, 1000)
           } else {
             this.isShow = response.data.data.show_guide
             this.$router.replace('/home')
@@ -50,24 +68,6 @@
     },
     mounted () {
       this.getBoot_guide()
-      var endTime = 3  // 倒计时时间
-      function setTime () {
-        if (endTime < 1) {
-          return
-        }
-        if (document.getElementById('micTime')) {
-          document.getElementById('micTime').innerHTML = endTime.toString()
-        }
-      }
-      setTime()
-      var intervalObj = setInterval(() => {
-        endTime--
-        setTime()
-        if (endTime < 1) {
-          clearInterval(intervalObj)
-          this.toHome()
-        }
-      }, 1000)
     }
   }
 </script>
