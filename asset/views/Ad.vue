@@ -86,7 +86,7 @@
     font-size: 14px;
     color: #ffffff;
     position: absolute;
-    top: 40px;
+    top: 60px;
     right: 16px;
   }
   .time_t{
