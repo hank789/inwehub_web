@@ -42,7 +42,7 @@
           if (response.data.data.show_guide) {
             this.isShow = response.data.data.show_guide
             var endTime = 3  // 倒计时时间
-            function setTime () {
+            var setTime = () => {
               if (endTime < 1) {
                 return
               }
@@ -61,7 +61,7 @@
             }, 1000)
           } else {
             this.isShow = response.data.data.show_guide
-            this.$router.replace('/home')
+            this.toHome()
           }
         })
       }
@@ -88,7 +88,7 @@
     font-size: 14px;
     color: #ffffff;
     position: absolute;
-    top: 60px;
+    top: 20px;
     right: 16px;
   }
   .time_t{
@@ -123,6 +123,6 @@
     margin: auto;
   }
   .immersed20 .time{
-    top:0;
+    top:40px;
   }
 </style>
