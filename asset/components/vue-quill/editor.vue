@@ -446,6 +446,12 @@
               }
               console.log('lastChar:' + lastChar)
 
+              if (!this.allowBr) {
+                if (lastChar === '\n') {
+                  self.quill.history.undo()
+                }
+              }
+
               var noBrText = text.trim()
               console.log('noBrText:' + noBrText)
               if (self.isMonitorAddressAppear) {

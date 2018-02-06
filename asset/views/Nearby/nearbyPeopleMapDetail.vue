@@ -9,9 +9,9 @@
       <div class="menu">
         <div class="switch">
           <p @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">附近的人</p>
-          <p @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">附近的公司</p>
+          <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近的公司</p>
         </div>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
+        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/nearbyPeople')">
           <use xlink:href="#icon-shaixuan"></use>
         </svg>
       </div>
@@ -223,6 +223,8 @@
     height:50px;
     background:#3c3e44;
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .menu .switch{
     width:210px;

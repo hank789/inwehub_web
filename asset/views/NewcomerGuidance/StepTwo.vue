@@ -144,7 +144,12 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.list[index].is_followed = !this.list[index].is_followed
+          console.log(response.data.data.type)
+          if (response.data.data.type === 'follow') {
+            this.list[index].is_followed = 1
+          } else {
+            this.list[index].is_followed = 0
+          }
           window.mui.toast(response.data.data.tip)
         })
       }

@@ -33,7 +33,7 @@ function textToLink (domEle) {
   if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /\s(https?:\/\/[^\s<]+)/g
+  var re = /[^"'](https?:\/\/[^\s<]+)/g
   text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
   re = /<p>(https?:\/\/[^\s<]+)/g
@@ -54,7 +54,7 @@ function textToLinkHtml (text) {
   if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /\s(https?:\/\/[^\s<]+)/g
+  var re = /[^"'](https?:\/\/[^\s<]+)/g
   text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
   re = /<p>(https?:\/\/[^\s<]+)/g
@@ -105,12 +105,17 @@ function dragDownElement (elem, callback) {
   var moveY
   var scrollTop
 
+  // var div = document.createElement('div')
+  // div.style.position = 'absolute'
+  // div.style.width = '100%'
+
   var oldTop = elem.style.top
 
   elem.addEventListener('touchstart', (e) => {
     var touch = e.touches[0]
     startY = touch.pageY
     scrollTop = elem.scrollTop
+    // div.style.top = 0
   })
 
   elem.addEventListener('touchmove', function (e) {

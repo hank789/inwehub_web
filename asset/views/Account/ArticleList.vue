@@ -34,9 +34,7 @@
   </div>
 </template>
 <script>
-  import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-  import userAbility from '../../utils/userAbility'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()

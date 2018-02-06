@@ -12,6 +12,8 @@ var entris = require('./entris')
 
 var env = config.build.env
 
+env.NODE_ENV_TYPE = process.env.NODE_ENV_TYPE
+
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({

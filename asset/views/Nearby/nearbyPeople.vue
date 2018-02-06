@@ -11,7 +11,7 @@
           <p>附近的人</p>
           <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近的公司</p>
         </div>
-        <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/nearbyPeople/MapDetail')">
+        <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">
           <use xlink:href="#icon-ditu"></use>
         </svg>
       </div>
@@ -48,9 +48,8 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { toSettingSystem } from '../../utils/plus'
   import RefreshList from '../../components/refresh/List.vue'
-  import userAbility from '../../utils/userAbility'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -64,40 +63,27 @@
         longt: '',
         lat: '',
         page: 1,
-        dataList: null,
+        dataList: null
       }
     },
     components: {
       RefreshList
     },
     created () {
-//      初始化的测试代码
-//      longt: 121.4936901919479,
-//        lat: 31.23576356859009,
-//      测试代码
-//      this.dataList = {
-//        longitude: 121.4936901919479,
-//        latitude: 31.23576356859009
-//      }
-//      if (this.dataList.longitude) {
-//        localEvent.setLocalItem('location' + this.user_id, this.dataList)
-//      }
-
-      checkPermission('LOCATION', () => {
-       //  获取权限成功的回调
-        getGeoPosition((position) => {
-          this.dataList = {
-            longitude: position.longt,
-            latitude: position.lat
-          }
-          this.longt = position.longt
-          this.lat = position.lat
-         //  获取到位置进行保存
-          if (this.dataList.longitude) {
-            localEvent.setLocalItem('location' + this.user_id, this.dataList)
-          }
-        }, () => {
-          // 获取位置失败的回调
+      getGeoPosition((position) => {
+        this.dataList = {
+          longitude: position.longt,
+          latitude: position.lat
+        }
+        this.longt = position.longt
+        this.lat = position.lat
+        //  获取到位置进行保存
+        if (this.dataList.longitude) {
+          localEvent.setLocalItem('location' + this.user_id, this.dataList)
+        }
+      }, () => {
+        // 获取位置失败的回调
+        if (window.mui.os.plus) {
           var btnArray = ['取消', '去设置']
           window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
             if (e.index === 1) {
@@ -106,18 +92,9 @@
               window.mui.back()
             }
           })
-        })
-      }, () => {
-      // 获取权限失败的回调
-        var btnArray = ['取消', '去设置']
-        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-          if (e.index === 1) {
-            toSettingSystem('LOCATION')
-          } else {
-            window.mui.back()
-          }
-        })
-      //
+        } else if (window.mui.os.wechat) {
+          window.mui.toast('请开启定位服务，以启用地址定位或发现附近的企业和个人。')
+        }
       })
     },
     methods: {
@@ -195,6 +172,8 @@
     height:50px;
     background:#3c3e44;
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .menu .switch{
     width:210px;

@@ -52,7 +52,8 @@
       oldList: [],
       commentData: [], // 评论时需要的参数
       historyDescription: [], // 历史内容
-      focusCallback: null  // 获取焦点时的回调
+      focusCallback: null,  // 获取焦点时的回调
+      allowBr: false
     }),
     props: {},
     components: {
