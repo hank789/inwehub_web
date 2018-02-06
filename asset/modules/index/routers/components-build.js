@@ -32,7 +32,6 @@ import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
 import DiscoverList from '../../../views/Discover/List.vue'
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
 import ActivityInvitationList from '../../../views/Activity/InvitationList.vue'
-import ActivityCreditsList from '../../../views/Activity/CreditsList.vue'
 import ActivityCionsList from '../../../views/Activity/CionsList.vue'
 import Accountmy from '../../../views/Account/my.vue'
 import AccountCollected from '../../../views/Account/Collected.vue'
@@ -199,7 +198,6 @@ export {
   DiscoverList,
   DiscoverDetail,
   ActivityInvitationList,
-  ActivityCreditsList,
   ActivityCionsList,
   Accountmy,
   AccountCollected,
