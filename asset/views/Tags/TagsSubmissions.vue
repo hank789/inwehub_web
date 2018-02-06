@@ -81,13 +81,13 @@
       </RefreshList>
       <!--活动标签-->
       <div class="activity_tags">
-        <p @tap.stop.prevent='addTag()'>
+        <p @tap.stop.prevent='addTag(2)'>
           <img src="../../statics/images/tag_detail_suggest@2x.png"/>
         </p>
-        <p @tap.stop.prevent='addTag()'>
+        <p @tap.stop.prevent='addTag(1)'>
           <img src="../../statics/images/tag_detail_work@2x.png"/>
         </p>
-        <p @tap.stop.prevent="addTag()">
+        <p @tap.stop.prevent="addTag(0)">
           <img src="../../statics/images/tag_detail_newyewr@2x.png"/>
         </p>
       </div>
@@ -251,10 +251,16 @@
             window.mui.back()
             return
           }
-          if (response.data.data.length > 0) {
-            this.activity_tags = response.data.data
+          if (response.data.data.tags.length > 0) {
+            this.activity_tags = response.data.data.tags
           }
         })
+      },
+      addTag (num) {
+        var arr = []
+        arr.push(this.activity_tags[num])
+        localEvent.setLocalItem('discover_skill_tags' + this.userId, arr)
+        this.$router.pushPlus('/discover/add')
       }
     },
     mounted () {
