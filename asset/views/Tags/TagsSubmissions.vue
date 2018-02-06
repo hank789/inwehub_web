@@ -9,7 +9,7 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions')">问答</span>
-        <span @tap.stop.prevent=" ">动态 <i></i></span>
+        <span @tap.stop.prevent=" ">分享 <i></i></span>
         <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users')">用户 </span>
         <i class="bot"></i>
       </div>
@@ -79,7 +79,18 @@
           </template>
         </ul>
       </RefreshList>
-
+      <!--活动标签-->
+      <div class="activity_tags">
+        <p @tap.stop.prevent='addTag(2)'>
+          <img src="../../statics/images/tag_detail_suggest@2x.png"/>
+        </p>
+        <p @tap.stop.prevent='addTag(1)'>
+          <img src="../../statics/images/tag_detail_work@2x.png"/>
+        </p>
+        <p @tap.stop.prevent="addTag(0)">
+          <img src="../../statics/images/tag_detail_newyewr@2x.png"/>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -96,7 +107,8 @@
     data: () => ({
       tagName: '',
       list: [],
-      userId: currentUser.user_id
+      userId: currentUser.user_id,
+      activity_tags: []
     }),
     created () {
       if (this.$route.params.tag) {
@@ -110,6 +122,11 @@
       TagsInfo
     },
     methods: {
+//      refreshPageData () {
+//        if (this.$route.params.tag) {
+//          this.tagName = this.$route.params.tag
+//        }
+//      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
@@ -223,9 +240,31 @@
             }
           }
         })
+      },
+      // 获取活动标签
+      getTag () {
+        postRequest(`tags/getThreeAc`, {}).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.tags.length > 0) {
+            this.activity_tags = response.data.data.tags
+          }
+        })
+      },
+      addTag (num) {
+        var arr = []
+        arr.push(this.activity_tags[num])
+        localEvent.setLocalItem('discover_skill_tags' + this.userId, arr)
+        this.$router.pushPlus('/discover/add')
       }
     },
     mounted () {
+      this.getTag()
       document.addEventListener('tap', () => {
       })
     },
@@ -558,5 +597,26 @@
 
   .listWrapper{
     top:177px;
+  }
+  /*活动标签*/
+  .activity_tags{
+    width:114px;
+    overflow: hidden;
+    position: absolute;
+    right: 4%;
+    bottom: 30px;
+    z-index: 2;
+  }
+  .activity_tags p{
+    width:114px;
+    height: 44px;
+    margin-top: 10px;
+    background: #cccccc;
+    border-radius: 50px;
+  }
+  .activity_tags p img{
+    width:100%;
+    height: 100%;
+    border-radius: 50px;
   }
 </style>

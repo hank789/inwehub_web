@@ -5,29 +5,11 @@
       <h1 class="mui-title">标签详情</h1>
     </header>
     <div class="mui-content absolute">
-    <!--<div class="tag-title">-->
-       <!--<div class="tag-l" v-if="tagDetail.logo">-->
-         <!--<img :src="tagDetail.logo">-->
-       <!--</div>-->
-      <!--<div class="tag-l bg-grey" v-else>-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-biaozhunlogoshangxiayise"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-       <!--<div class="tag-r">-->
-        <!--<p>-->
-          <!--<span>{{tagDetail.name}}</span>-->
-          <!--<span class="grey" v-if="tagDetail.is_followed" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>-->
-          <!--<span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>-->
-        <!--</p>-->
-        <!--<p class="mui-ellipsis-3">{{tagDetail.summary}}</p>-->
-       <!--</div>-->
-    <!--</div>-->
       <TagsInfo :tagName = tagName></TagsInfo>
     <!--导航栏-->
     <div class="menu">
       <span @tap.stop.prevent="">问答  <i></i></span>
-      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">动态</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">分享</span>
       <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users')">用户</span>
       <i class="bot"></i>
     </div>
@@ -156,6 +138,9 @@
           window.mui.toast(response.data.data.tip)
         })
       }
+    },
+    watch: {
+      '$route': 'refreshPageData'
     },
     mounted () {
     },
@@ -394,4 +379,6 @@
     color:rgb(128,128,128);
     font-style: normal;
   }
+
+
 </style>

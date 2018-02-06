@@ -15,6 +15,18 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
+      <!--标签活动-->
+      <div class="tag">
+         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('贺新春') + '/questions')">
+           <img src="../statics/images/feed_newyear@2x.png"/>
+         </p>
+         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('谈工作') + '/questions')">
+           <img src="../statics/images/feed_work@2x.png"/>
+         </p>
+         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('提建议') + '/questions')">
+           <img src="../statics/images/feed_suggest@2x.png"/>
+         </p>
+      </div>
       <!--导航栏-->
       <div class="menu">
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
@@ -394,7 +406,8 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 49px;
   }
   .menu span{
     position:relative;
@@ -421,7 +434,7 @@
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 39px;
+    top: 88px;
     bottom: 50px;
   }
 
@@ -518,6 +531,31 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size: 16px;
+  }
+  /*标签活动*/
+  .tag{
+    width:100%;
+    height:49px;
+    background: #f3f4f6;
+    padding: 0 15px;
+    position: absolute;
+    top:0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tag p{
+    width:32%;
+    height:39px;
+    margin-bottom: 0;
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .tag p img{
+    width: 100%;
+    height:100%;
+    border-radius: 4px;
   }
 
 
