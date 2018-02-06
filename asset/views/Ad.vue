@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mui-content">
-      <div style="background-color: #fff"></div>
+      <div style="background:#564ba7"></div>
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
       </div>
@@ -17,14 +17,13 @@
 </template>
 
 <script>
-  import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { openFullscreen } from '../utils/plus'
   export default {
     created () {
       openFullscreen()
     },
     methods: {
       toHome () {
-        closeFullscreen()
         this.$router.replace('/home')
       }
     },
@@ -54,6 +53,8 @@
 <style scoped="scoped">
   .mui-content{
     background-color: #f3f4f6;
+    top:0 !important;
+    z-index:2;
   }
   .time {
     width: 83px;
