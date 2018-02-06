@@ -101,15 +101,16 @@ if (config.test.bundleAnalyzerReport) {
 }
 
 Object.keys(entris).forEach(function(entry) {
-  var template = 'public/' + entry + '.html'
+  var template = 'index.html'
 
   if (process.env.NODE_ENV_TYPE === '"browser"') {
-    template = 'public/' + entry + '_browser.html'
+    template = 'index_browser.html'
   }
+  console.log('template:' + template)
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     chunks: [ 'manifest', 'vendor', entry ],
-    filename: template,
-    template: 'index.html',
+    filename: 'public/' + entry + '.html',
+    template: template,
     inject: true,
     minify: {
       //removeComments: true,
