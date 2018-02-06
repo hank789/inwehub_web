@@ -133,8 +133,13 @@
       if (!(referer && referer.path === '/selectUser')) {
         localEvent.clearLocalItem('discover_selectUser' + this.id)
       }
-      if (!(referer && referer.path === '/selecttags')) {
-        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+
+      if (referer) {
+        if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
+            // ...
+        } else {
+          localEvent.clearLocalItem('discover_skill_tags' + this.id)
+        }
       }
       autoTextArea()
       window.mui.previewImage()

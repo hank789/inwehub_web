@@ -260,7 +260,7 @@
         var arr = []
         arr.push(this.activity_tags[num])
         localEvent.setLocalItem('discover_skill_tags' + this.userId, arr)
-        this.$router.pushPlus('/discover/add')
+        this.$router.pushPlus('/discover/add?from=selecttags')
       }
     },
     mounted () {

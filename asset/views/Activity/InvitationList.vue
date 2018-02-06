@@ -40,7 +40,7 @@
                 </p>
               </div>
               <p>{{third.user_name}}</p>
-              <p class="cions">获赞数{{third.upvotes}}</p>
+              <p class="cions">获赞数<i>{{third.upvotes}}</i></p>
               <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -54,7 +54,7 @@
                 </p>
               </div>
               <p>{{first.user_name}}</p>
-              <p class="cions">获赞数{{first.upvotes}}</p>
+              <p class="cions">获赞数<i>{{first.upvotes}}</i></p>
               <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -68,7 +68,7 @@
                 </p>
               </div>
               <p>{{second.user_name}}</p>
-              <p class="cions">获赞数{{second.upvotes}}</p>
+              <p class="cions">获赞数<i>{{second.upvotes}}</i></p>
               <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
           </ul>
@@ -88,7 +88,7 @@
             </div>
             <div class="detail">
               <p>{{item.user_name}}</p>
-              <p>获赞数{{item.upvotes}}</p>
+              <p>获赞数<i>{{item.upvotes}}</i></p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
