@@ -80,7 +80,7 @@
         </ul>
       </RefreshList>
       <!--活动标签-->
-      <div class="activity_tags">
+      <div class="activity_tags" v-if="activity_tags.length">
         <p @tap.stop.prevent='addTag(2)'>
           <img src="../../statics/images/tag_detail_suggest@2x.png"/>
         </p>

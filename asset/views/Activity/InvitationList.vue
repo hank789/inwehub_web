@@ -97,7 +97,7 @@
       </template>
       <Empty v-if="!loading && list.length === 0"></Empty>
 
-      <div v-if="!loading && list.length !== 0" class="desc">如邀请用户数相同，则贡献值和等级高的用户 排名优先</div>
+      <div v-if="!loading && list.length !== 0" class="desc">如邀请用户数相同，则贡献值和等级高的用户排名优先</div>
     </div>
   </div>
 </template>
