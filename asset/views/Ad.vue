@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mui-content">
-      <div style="background-color: #f3f4f6"></div>
+      <div style="background-color: #fff"></div>
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
       </div>
@@ -31,7 +31,7 @@
     mounted () {
       var endTime = 3  // 倒计时时间
       function setTime () {
-        if (endTime < 1) {
+        if (endTime < 0) {
           return
         }
         if (document.getElementById('micTime')) {
@@ -42,7 +42,7 @@
       var intervalObj = setInterval(() => {
         endTime--
         setTime()
-        if (endTime < 1) {
+        if (endTime < 0) {
           clearInterval(intervalObj)
           this.toHome()
         }

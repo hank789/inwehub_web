@@ -17,13 +17,13 @@
     <div class="mui-content feedWrapper" v-show="!loading">
       <!--标签活动-->
       <div class="tag">
-         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('贺新春') + '/questions')">
+         <p @tap.stop.prevent="toTagDetail('贺新春')">
            <img src="../statics/images/feed_newyear@2x.png"/>
          </p>
-         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('谈工作') + '/questions')">
+         <p @tap.stop.prevent="toTagDetail('谈工作')">
            <img src="../statics/images/feed_work@2x.png"/>
          </p>
-         <p @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent('提建议') + '/questions')">
+         <p @tap.stop.prevent="toTagDetail('提建议')">
            <img src="../statics/images/feed_suggest@2x.png"/>
          </p>
       </div>
@@ -221,6 +221,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       judge () {
         this.$router.pushPlus('/nearbyCompany')
       },
