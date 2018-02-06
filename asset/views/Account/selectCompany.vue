@@ -56,7 +56,7 @@
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { toSettingSystem } from '../../utils/plus'
   import userAbility from '../../utils/userAbility'
   const currentUser = localEvent.getLocalItem('UserInfo')
 

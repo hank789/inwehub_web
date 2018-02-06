@@ -50,7 +50,7 @@
 <script>
   import { getGeoPosition } from '../../utils/allPlatform'
   import RefreshList from '../../components/refresh/List.vue'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { toSettingSystem } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()

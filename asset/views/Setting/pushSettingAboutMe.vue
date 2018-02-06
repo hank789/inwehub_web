@@ -152,22 +152,22 @@
     },
     watch: {
       'notices.upvoted': function (newValue, oldValue) {
-          this.openNotification('upvoted')
+        this.openNotification('upvoted')
       },
       'notices.followed': function (newValue, oldValue) {
-          this.openNotification('followed')
+        this.openNotification('followed')
       },
       'notices.mentioned': function (newValue, oldValue) {
-          this.openNotification('mentioned')
+        this.openNotification('mentioned')
       },
       'notices.commented': function (newValue, oldValue) {
-          this.openNotification('commented')
+        this.openNotification('commented')
       },
       'notices.invited': function (newValue, oldValue) {
-          this.openNotification('invited')
+        this.openNotification('invited')
       },
       'notices.chatted': function (newValue, oldValue) {
-          this.openNotification('chatted')
+        this.openNotification('chatted')
       }
     },
     mounted () {
