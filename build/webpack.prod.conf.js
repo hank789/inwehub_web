@@ -104,7 +104,7 @@ if (config.build.bundleAnalyzerReport) {
 
 Object.keys(entris).forEach(function(entry) {
   var template = 'public/' + entry + '.html'
-  if (process.env.NODE_ENV_TYPE === 'browser') {
+  if (process.env.NODE_ENV_TYPE === '"browser"') {
     template = 'public/' + entry + '_browser.html'
   }
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
