@@ -44,7 +44,7 @@ function saveLocationInfo () {
       deviceCode = window.plus.device.uuid
     }
     var iosPushNoticeOpen = -1
-    if (window.mui.os.ios) {
+    if (window.mui.os.plus && window.mui.os.ios) {
       var permission = window.plus.navigator.checkPermission('NOTIFITION')
       switch (permission) {
         case 'authorized':
