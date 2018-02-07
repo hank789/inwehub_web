@@ -12,7 +12,10 @@
         <ul  v-if="list.length">
           <li v-for="(item,index) in list" @tap.stop.prevent="skip(item.question_type,item.id)">
             <p>{{index+1}}.</p>
-            <p class="mui-ellipsis-3"><span v-for="tag in item.tags">#{{tag.name}}#</span>{{item.title}}</p>
+            <p>
+              <span v-if="item.tags.length"><i v-for="tag in item.tags">{{tag.name}}</i></span>
+              <span class="mui-ellipsis-3">{{item.title}}</span>
+            </p>
             <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
             <i class="bot"></i>
           </li>
@@ -150,9 +153,18 @@
     color: #444444;
     line-height: 21px;
   }
-  ul li p:nth-of-type(2) span{
-    color: rgb(35,82,128);
-    margin-right: 6px;
+  ul li p:nth-of-type(2) span:nth-of-type(1){
+    display: block;
+  }
+  ul li p:nth-of-type(2) span:nth-of-type(1) i{
+    display: inline-block;
+    font-size: 12px;
+    color: #9e9e9e;
+    margin-bottom: 4px;
+    margin-right: 9px;
+    background: #ececee;
+    border-radius: 50px;
+    padding:0px 10px;
   }
   ul li p:nth-of-type(3){
     font-size: 12px;

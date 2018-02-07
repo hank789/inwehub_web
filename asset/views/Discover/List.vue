@@ -55,7 +55,7 @@
         </div>
 
 
-        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/cionsList')">
+        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/invitationList')">
           <div class="invitation"><span>{{invitationList.user_name}}</span>本月邀请<i>{{invitationList.current_month_invited_users}}</i>人</div>
           <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;本月获赞<i>{{invitationList.current_month_user_upvotes}}</i></div>
           <div class="InvitationList" >
