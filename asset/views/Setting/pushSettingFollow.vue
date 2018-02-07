@@ -5,7 +5,7 @@
       <h1 class="mui-title">我的关注</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <ul class="notice">
         <li>
           关注的用户有新动态
@@ -61,7 +61,8 @@
           }
           this.notices.new_user = response.data.data.push_my_user_new_activity
           this.notices.new_answered = response.data.data.push_my_question_new_answered
-          console.log(this.notices.new_user, this.notices.new_answered)
+//           console.log(this.notices.new_user, this.notices.new_answered)
+          this.loading = 0
         })
       },
       openNotification (type) {
@@ -92,6 +93,7 @@
           //  失败的回调
           this.isOpenNotification = 0
           this.closeAll()
+          this.loading = 0
           // 去系统开启通知
 //          toSettingSystem('NOTIFITION')
         })
