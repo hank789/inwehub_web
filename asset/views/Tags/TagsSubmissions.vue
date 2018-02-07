@@ -81,13 +81,13 @@
       </RefreshList>
       <!--活动标签-->
       <div class="activity_tags" v-if="activity_tags.length">
-        <p @tap.stop.prevent='addTag(2)'>
+        <p @tap.stop.prevent='addTag(2)' v-if="tagName == activity_tags[2].text" >
           <img src="../../statics/images/tag_detail_suggest@2x.png"/>
         </p>
-        <p @tap.stop.prevent='addTag(1)'>
+        <p @tap.stop.prevent='addTag(1)' v-if="tagName == activity_tags[1].text">
           <img src="../../statics/images/tag_detail_work@2x.png"/>
         </p>
-        <p @tap.stop.prevent="addTag(0)">
+        <p @tap.stop.prevent="addTag(0)" v-if="tagName == activity_tags[0].text">
           <img src="../../statics/images/tag_detail_newyewr@2x.png"/>
         </p>
       </div>
@@ -264,6 +264,7 @@
       }
     },
     mounted () {
+
       this.getTag()
       document.addEventListener('tap', () => {
       })
