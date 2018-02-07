@@ -105,7 +105,7 @@
         </li>
 
         <li @tap.stop.prevent="$router.pushPlus('/feedback/advise', 'list-detail-page')">
-          <span>反馈帮助</span>
+          <span>反馈建议</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
