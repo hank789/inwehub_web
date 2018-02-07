@@ -13,7 +13,7 @@
           <p>绑定微信</p>
           <span class="name" v-if="isBindWeixin">
              {{bindWeixinNickname}}
-             <oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="''" ></oauth>
+             <oauth class="wechatBind" @success="bindSuccess" :content="''" ></oauth>
           </span>
           <svg class="icon" aria-hidden="true" v-else>
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -28,7 +28,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/push/setting')" class="mui-wechat-hidden">
+        <li @tap.stop.prevent="$router.pushPlus('/push/setting')"  class="mui-wechat-hidden">
           <p>推送设置</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -263,10 +263,10 @@
     justify-content: space-between;
     align-items: center;
   }
-  ul li .name{
-    font-size:14px;
-    color: #444444;
-  }
+  /*ul li .name{*/
+    /*font-size:14px;*/
+    /*color: #444444;*/
+  /*}*/
   button{
     margin-top: 20px;
     width:92%;
@@ -304,6 +304,9 @@
   .text p{
     font-size: 14px;
     color: #b4b4b6;
+  }
+  .mui-plus-hidden, .mui-wechat-hidden {
+    display: flex !important;
   }
   /*适配*/
   @media (min-width:320px) {
