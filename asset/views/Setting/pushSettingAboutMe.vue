@@ -5,7 +5,7 @@
       <h1 class="mui-title">与我有关</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <ul class="notice">
         <li>
           赞了我
@@ -94,6 +94,7 @@
           this.notices.commented = response.data.data.push_rel_mine_commented
           this.notices.invited = response.data.data.push_rel_mine_invited
           this.notices.chatted = response.data.data.push_rel_mine_chatted
+          this.loading = 0
         })
       },
       openNotification (type) {
@@ -122,6 +123,7 @@
         }, (result) => {
           //  失败的回调
           this.closeAll()
+          this.loading = 0
           // 去系统开启通知
 //          toSettingSystem('NOTIFITION')
         })
