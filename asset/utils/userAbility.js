@@ -359,8 +359,12 @@ var UserAbility = () => {
    * @param tag
    */
   var jumpToTagDetail = (tag) => {
-    tag = encodeURIComponent(tag)
-    router.pushPlus('/tag/detail/' + tag + '/questions')
+    var newTag = encodeURIComponent(tag)
+    if (['贺新春', '提建议', '谈工作'].indexOf(tag) >= 0) {
+      router.pushPlus('/tag/detail/' + newTag + '/discover')
+    } else {
+      router.pushPlus('/tag/detail/' + newTag + '/questions')
+    }
   }
 
   return {
