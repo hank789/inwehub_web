@@ -307,7 +307,7 @@ function getClipbordText () {
  * 检查定位权限
  */
 function checkPermission (type, successCallback, failCallback) {
-  if (!window.plus) return
+  if (!window.mui.os.plus) return
 
   var permissionName = ''
   switch (type) {

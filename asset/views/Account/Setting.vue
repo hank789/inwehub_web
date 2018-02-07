@@ -9,7 +9,7 @@
 
     <div class="mui-content">
       <ul>
-        <li>
+        <li class="mui-wechat-hidden">
           <p>绑定微信</p>
           <span class="name" v-if="isBindWeixin">
              {{bindWeixinNickname}}
@@ -28,7 +28,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/push/setting')">
+        <li @tap.stop.prevent="$router.pushPlus('/push/setting')" class="mui-wechat-hidden">
           <p>推送设置</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
