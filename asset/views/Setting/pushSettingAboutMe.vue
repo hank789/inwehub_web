@@ -123,7 +123,7 @@
           //  失败的回调
           this.closeAll()
           // 去系统开启通知
-          toSettingSystem('NOTIFITION')
+//          toSettingSystem('NOTIFITION')
         })
       },
       // 设置权限

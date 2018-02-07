@@ -31,7 +31,6 @@
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/push/setting/follow')">
           我的关注
-
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -104,7 +103,8 @@
               if (e.index === 1) {
                 toSettingSystem('NOTIFITION')
               } else {
-                window.mui.back()
+           // 点击取消
+           //  window.mui.back()
               }
             })
           }

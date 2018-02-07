@@ -93,7 +93,7 @@
           this.isOpenNotification = 0
           this.closeAll()
           // 去系统开启通知
-          toSettingSystem('NOTIFITION')
+//          toSettingSystem('NOTIFITION')
         })
       },
       // 设置权限
