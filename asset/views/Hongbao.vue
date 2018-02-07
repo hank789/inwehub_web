@@ -1,157 +1,69 @@
 <template>
   <div>
-    <div id="testWrapper">
-      <div id="animationContainer" style="width:293px; height:336px">
-        <canvas id="canvas" width="293" height="336"></canvas>
-        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:293px; height:336px; position: absolute; left: 0px; top: 0px; display: block;">
-        </div>
-        <!--红包详情-->
-        <div class="my-cash" id="my-cash">
-          <p><span>¥</span>5</p>
-          <i></i>
-          <p>现金红包</p>
-        </div>
-        <!--跳转按钮-->
-        <p class="my-wallet alertConfirm">查看我的钱包</p>
-        <!--关闭按钮-->
-        <div class="cash-button alertClose">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-guanbi"></use>
-          </svg>
-        </div>
-        <!---->
-
-      </div>
-    </div>
+    <div class="map" id="allmap"></div>
   </div>
 </template>
 <script>
-  import { run, select } from '../utils/createjs.js'
-  import { alertHtml } from '../utils/dialog'
   export default {
     data () {
-      return {
-      }
+      return {}
     },
     computed: {},
     components: {},
     methods: {},
     mounted () {
-      var html = document.getElementById('testWrapper').innerHTML
-      document.getElementById('testWrapper').innerHTML = ''
-      alertHtml(html, (index) => {
-        if (index === 0) {
-          this.$router.pushPlus('/my/Finance')
-          return true
-        }
-      }, 'animationContainerWrapper')
+      // 百度地图API功能
+      var map = new window.BMap.Map('allmap')
+      var point = new window.BMap.Point(121.4936901919479, 31.23576356859009)
+      map.centerAndZoom(point, 15)
 
-      setTimeout(() => {
-        var canvas = document.getElementById('animationContainerWrapper').querySelector('#canvas')
-        var domOverlayContainer = document.getElementById('animationContainerWrapper').querySelector('#domOverlayContainer')
-        var animContainer = document.getElementById('animationContainerWrapper').querySelector('#animationContainer')
-        var stage = select(canvas, window.lib.红包)
-        run(canvas, stage, domOverlayContainer, animContainer, window.lib)
-        var apper = document.getElementById('my-cash')
-        console.error(apper.currentStyle)
-      }, 400)
+      // 标注
+      var arr = [
+        {x: 121.483964, y: 31.242127, name: '张1张1张1张1张1张1'},
+        {x: 121.483015, y: 31.244067, name: '张2'},
+        {x: 121.47969907478, y: 31.227760260672, name: '张3'}
+      ]
+      for (var j = 0; j < arr.length; j++) {
+        var labelPoint = new window.BMap.Point(arr[j].x, arr[j].y)
+        var opts = {
+          position: labelPoint    // 指定文本标注所在的地理位置
+        }
+        var label = new window.BMap.Label(arr[j].name, opts)  // 创建文本标注对象
+        label.setStyle({
+          display: 'inline-block',
+          border: '1px solid #fff',
+          borderRadius: '50%',
+          background: '#03aef9',
+          color: '#ffffff',
+          fontSize: '14px',
+          padding: '0',
+          opacity: '0.9',
+          height: '54px',
+          width: '54px',
+          textAlign: 'center',
+          overflow: 'hidden',
+          lineHeight: '52px',
+          fontFamily: '微软雅黑'
+        })
+        map.addOverlay(label)
+
+//        var circle = new window.BMap.Circle(
+//          labelPoint,
+//          200,
+//          {strokeColor: '#fff', fillColor: '#03aef9', strokeWeight: 2, strokeOpacity: 0.5}) // 创建圆
+//
+//        map.addOverlay(circle)
+      }
     }
   }
 </script>
 
 <style scoped>
-  #animationContainer {
-    position:absolute;
-    margin:auto;
-    left:0;right:0;
-    top:0;bottom:0;
-  }
-
-  .animationContainerWrapper{
-    position:absolute;
-    left:0;right:0;
-    top:0;bottom:0;
-    z-index: 10000;
-  }
-  /*关闭按钮*/
-  .cash-button{
-    width:29px;
-    height:29px;
-    border-radius:50%;
-    background: #808080;
-    position: absolute;
-    left:0;
-    right:0;
-    top:50%;
-    margin:auto;
-  }
-  .cash-button svg{
-    position: absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    color: #FFFFFF;
-    font-size:20px;
-    margin:auto;
-  }
-  /*跳转按钮*/
-  .my-wallet{
-    width:88%;
-    height:34px;
-    border:1px solid #fc98bb;
-    border-radius: 50px;
-    text-align: center;
-    line-height: 34px;
-    font-size:14px;
-    color: #fdd6e3;
-    position: absolute;
-    left:0;
-    right:0;
-    bottom: 55px;
-    margin:auto;
-  }
-  /*红包详情*/
-  .my-cash{
-    width:58%;
-    height:105px;
-    position: absolute;
-    left:0;
-    right:0;
-    top: 60px;
-    margin:auto;
-  }
-  .my-cash i{
-    position: absolute;
+  body, html, #allmap {
     width: 100%;
-    height:1.5px;
-    background: #808080;
-    left:0;
-    right:0;
-    top:0px;
-    bottom: 0;
-    margin:auto;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
   }
-  .my-cash p{
-    width:100%;
-    height:52px;
-    text-align: center;
-    line-height:52px;
-    color: #444444;
-  }
-  .my-cash p:nth-of-type(1){
-    font-size:64px;
-    font-weight: 500;
-  }
-  .my-cash p:nth-of-type(1) span{
-    font-size: 24px;
-    font-weight: 500;
-    position: relative;
-    top: -30px;
-  }
-  .my-cash p:nth-of-type(2){
-    font-size: 16px;
-    font-weight: 500;
-  }
-  /**/
 </style>

@@ -43,6 +43,21 @@ function saveLocationInfo () {
       deviceModel = window.plus.os.version
       deviceCode = window.plus.device.uuid
     }
+    var iosPushNoticeOpen = -1
+    if (window.mui.os.ios) {
+      var permission = window.plus.navigator.checkPermission('NOTIFITION')
+      switch (permission) {
+        case 'authorized':
+          iosPushNoticeOpen = 1
+          break
+        default:
+          iosPushNoticeOpen = 0
+          break
+      }
+    }
+
+    localEvent.setLocalItem('location', position)
+
     apiRequest(`system/location`, {
       device_name: deviceName,
       device_system: deviceSystem,
@@ -50,7 +65,8 @@ function saveLocationInfo () {
       device_code: deviceCode,
       current_address_name: position.addresses,
       current_address_longitude: position.longt,
-      current_address_latitude: position.lat
+      current_address_latitude: position.lat,
+      ios_push_notify: iosPushNoticeOpen
     }, false).then(res => {
 
     })

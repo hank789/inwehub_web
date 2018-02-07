@@ -78,7 +78,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
         nextUrl = url
       } else {
         if (process.env.NODE_ENV === 'development') {
-          nextUrl = location.protocol + '//' + window.location.host + '/' + 'index.html#' + url
+          nextUrl = 'index.html#' + url // location.protocol + '//' + window.location.host + '/' + 'index.html#' + url
         } else {
           nextUrl = '/public/index.html#' + url
         }
@@ -109,8 +109,9 @@ router.beforeEach((to, from, next) => {
   autoBlur()
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
-
-  checkClipbord()
+  if (to.path !== '/ad' && to.path !== '/') {
+    checkClipbord()
+  }
 
   if (from.path === 'login') {
     openFullscreen()

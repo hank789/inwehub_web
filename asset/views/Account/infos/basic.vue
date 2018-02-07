@@ -259,9 +259,6 @@
 //
 //          cityPicker.dispose()
 //        })
-
-
-
         var newCityData = [
           {
             value: '1',

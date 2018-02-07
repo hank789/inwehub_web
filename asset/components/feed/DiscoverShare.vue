@@ -10,8 +10,9 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
+        <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          <timeago :since="timeago(data.created_at)">
           </timeago>
         </div>
       </div>
@@ -62,7 +63,7 @@
         :supportList="data.feed.supporter_list"
         :commentNumber="data.feed.comment_number"
         :commentList="data.feed.comments"
-        :detailUrl="data.url"
+        :detailUrl="data.feed.comment_url"
         @commentIt="commentIt"
       ></SuppertAndComment>
 

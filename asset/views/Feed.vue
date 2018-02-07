@@ -15,6 +15,18 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
+      <!--标签活动-->
+      <div class="tag">
+         <p @tap.stop.prevent="toTagDetail('贺新春')">
+           <img src="../statics/images/feed_newyear@2x.png"/>
+         </p>
+         <p @tap.stop.prevent="toTagDetail('谈工作')">
+           <img src="../statics/images/feed_work@2x.png"/>
+         </p>
+         <p @tap.stop.prevent="toTagDetail('提建议')">
+           <img src="../statics/images/feed_suggest@2x.png"/>
+         </p>
+      </div>
       <!--导航栏-->
       <div class="menu">
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
@@ -152,7 +164,7 @@
       list: [],
       commentTargetComponent: null,
       is_company: currentUser.is_company,
-      emptyDescription: '暂无您关注的内容',
+      emptyDescription: '暂无您关注的用户的动态',
       search_type: 1
     }),
     created () {
@@ -209,32 +221,27 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       judge () {
-        postRequest(`auth/checkUserLevel`, {
-          permission_type: 5
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.is_valid) {
-              this.$router.pushPlus('/nearbyCompany')
-            } else {
-              userAbility.jumpJudgeGrade(this)
-            }
-          }
-        })
+        this.$router.pushPlus('/nearbyCompany')
       },
       chooseType (type) {
+        if (type === 1) {
+          this.emptyDescription = '暂无您关注的用户的动态'
+        } else {
+          this.emptyDescription = '暂无您关注的内容'
+        }
         this.list = []
         this.search_type = type
         this.search_type = type
       },
       refreshPageData () {
+        if (this.$route.query.refresh) {
+          this.$route.query.refresh = false
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+        }
         this.$refs.ctextarea.refreshPageData()
       },
       sendMessage (message) {
@@ -402,7 +409,8 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 49px;
   }
   .menu span{
     position:relative;
@@ -429,7 +437,7 @@
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 39px;
+    top: 88px;
     bottom: 50px;
   }
 
@@ -526,6 +534,31 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size: 16px;
+  }
+  /*标签活动*/
+  .tag{
+    width:100%;
+    height:49px;
+    background: #f3f4f6;
+    padding: 0 15px;
+    position: absolute;
+    top:0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tag p{
+    width:32%;
+    height:39px;
+    margin-bottom: 0;
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .tag p img{
+    width: 100%;
+    height:100%;
+    border-radius: 4px;
   }
 
 

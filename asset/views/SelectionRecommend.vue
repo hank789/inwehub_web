@@ -274,7 +274,6 @@
   }
   .listWrapper{
     margin-top: 0px;
-    bottom: 51px;
   }
 
   /*底部的详情*/

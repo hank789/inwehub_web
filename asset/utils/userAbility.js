@@ -11,7 +11,7 @@
 import localEvent from '../stores/localStorage'
 import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
 import router from '../modules/index/routers/index'
-import {alertZoom, alertSimple, getDialogObj} from '../utils/dialog'
+import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
@@ -231,8 +231,8 @@ var UserAbility = () => {
     postRequest('activity/getCoupon', {coupon_type: 4}).then(response => {
       var code = response.data.code
       if (code !== 1000) {
-        window.mui.alert(response.data.message)
-        window.mui.back()
+        window.mui.toast(response.data.message)
+        return
       }
       // 红包弹窗
       var Coupon = response.data.data
@@ -280,8 +280,8 @@ var UserAbility = () => {
                     postRequest('activity/getCoupon', {coupon_type: response.data.data.coupon_type}).then(response => {
                       var code = response.data.code
                       if (code !== 1000) {
-                        window.mui.alert(response.data.message)
-                        window.mui.back()
+                        window.mui.toast(response.data.message)
+                        return
                       }
                       // 红包弹窗
                       var Coupon = response.data.data
@@ -340,14 +340,31 @@ var UserAbility = () => {
       }
     }
   }
+  // 抽奖弹窗
+  var luckDraw = (context, invitation) => {
+    console.log(invitation)
+    var dialogObj = getDialogObj(context)
+    if (dialogObj) {
+      dialogObj.getHtml('luckDraw', {invitation: invitation}, (html) => {
+        alertHtml(html, (num) => {
+          document.querySelector('.mui-content').style.position = 'relative'
+          return true
+        }, 'mui-popup mui-popup-in alertluckDraw')
+      })
+    }
+  }
 
   /**
    * 跳转到标签详情页
    * @param tag
    */
   var jumpToTagDetail = (tag) => {
-    tag = encodeURIComponent(tag)
-    router.pushPlus('/tag/detail/' + tag + '/questions')
+    var newTag = encodeURIComponent(tag)
+    if (['贺新春', '提建议', '谈工作'].indexOf(tag) >= 0) {
+      router.pushPlus('/tag/detail/' + newTag + '/discover')
+    } else {
+      router.pushPlus('/tag/detail/' + newTag + '/questions')
+    }
   }
 
   return {
@@ -366,7 +383,8 @@ var UserAbility = () => {
     signIGift: signIGift,
     logout: logout,
     jumpToTagDetail: jumpToTagDetail,
-    InvitationCoupon: InvitationCoupon
+    InvitationCoupon: InvitationCoupon,
+    luckDraw: luckDraw
   }
 }
 

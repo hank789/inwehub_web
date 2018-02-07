@@ -18,7 +18,7 @@
               <use xlink:href="#icon-faxuqiu"></use>
             </svg>
           </p>
-          <span class="aside_l">待答问题</span>
+          <span class="aside_l">待您回答</span>
         </li>
         <li @tap.stop.prevent="skip(2)">
           <p>
@@ -78,7 +78,7 @@
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
           </p>
-          <span class="aside_l">动态</span>
+          <span class="aside_l">分享</span>
         </li>
       </ul>
     </div>

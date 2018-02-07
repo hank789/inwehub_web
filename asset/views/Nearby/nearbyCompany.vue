@@ -2,9 +2,20 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">附近企业</h1>
+      <h1 class="mui-title">附近发现</h1>
     </header>
     <div class="mui-content">
+      <!--导航栏-->
+      <div class="menu">
+         <div class="switch">
+           <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
+           <p>附近的公司</p>
+         </div>
+          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">
+            <use xlink:href="#icon-ditu"></use>
+          </svg>
+      </div>
+
       <!--搜索框-->
      <div class="searchContainer">
        <p>
@@ -19,24 +30,17 @@
          </span>
        </p>
      </div>
-      <!--申请添加-->
-      <div class="apply" v-if="applyIsShow">
-        <p>搜不到？</p>
-        <p @tap.stop.prevent="Obtain()">申请添加 </p>
-        <i class="bot"></i>
-      </div>
       <!--搜索列表-->
       <RefreshList
-        v-model="list"
         v-if="dataList != null"
+        v-model="list"
         :api="'company/nearbySearch'"
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
-        :isShowUpToRefreshDescription="false"
         class="listWrapper">
           <ul>
-            <li  v-for="(item, index) in list" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)" >
+            <li  v-for="(item, index) in list" @tap.stop.prevent="judge(item)" >
               <div class="container-image">
                  <img :src="item.logo"/>
               </div>
@@ -59,13 +63,17 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getGeoPosition } from '../../utils/allPlatform'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { toSettingSystem } from '../../utils/plus'
   import RefreshList from '../../components/refresh/List.vue'
   import userAbility from '../../utils/userAbility'
+  import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        user_id: currentUser.user_id,
         list: [],
         searchText: '',
         loading: 1,
@@ -86,18 +94,19 @@
       RefreshList
     },
     created () {
-      checkPermission('LOCATION', () => {
-        this.isLocation = true
-       //  获取权限成功的回调
-        getGeoPosition((position) => {
-          this.dataList = {
-            longitude: position.longt,
-            latitude: position.lat
-          }
-          this.longt = position.longt
-          this.lat = position.lat
-        }, () => {
-          // 获取位置失败的回调
+      this.isLocation = true
+      getGeoPosition((position) => {
+        this.dataList = {
+          longitude: position.longt,
+          latitude: position.lat
+        }
+        this.longt = position.longt
+        this.lat = position.lat
+        if (this.dataList.longitude) {
+          localEvent.setLocalItem('location' + this.user_id, this.dataList)
+        }
+      }, () => {
+        if (window.mui.os.plus) {
           var btnArray = ['取消', '去设置']
           window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
             if (e.index === 1) {
@@ -106,21 +115,32 @@
               window.mui.back()
             }
           })
-        })
-      }, () => {
-      // 获取权限失败的回调
-        var btnArray = ['取消', '去设置']
-        window.mui.confirm('请在设置中打开定位服务，以启用地址定位或发现附近的企业和个人。', '无法启用定位模式', btnArray, (e) => {
-          if (e.index === 1) {
-            toSettingSystem('LOCATION')
-          } else {
-            window.mui.back()
-          }
-        })
-      //
+        } else if (window.mui.os.wechat) {
+          window.mui.toast('请开启定位服务，以启用地址定位或发现附近的企业和个人。')
+        }
       })
     },
     methods: {
+      judge (item) {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: 5
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              this.$router.pushPlus('/companyDetails/' + item.id)
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
@@ -235,8 +255,6 @@
     height:54px;
     background:#f3f4f6;
     padding-top: 10px;
-    position: absolute;
-    top:0;
   }
   .searchContainer p{
     width:92%;
@@ -247,7 +265,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    /*justify-content:space-between;*/
     align-items:center;
     padding:0 12px;
   }
@@ -285,31 +302,29 @@
     margin:auto;
   }
   /*申请添加*/
-.apply{
-  width:100%;
-  height:45px;
-  padding: 0 4%;
-  line-height: 45px;
-  position: absolute;
-  top:54px;
-  }
-  .apply p:nth-of-type(1){
-    float: left;
-    font-size:14px;
-    color:#03aef9;
-  }
-  .apply p:nth-of-type(2){
-    float: right;
-    width:86px;
-    height:27px;
-    border-radius: 50px;
-    border:1px solid #03aef9;
-    font-size:14px;
-    color:#03aef9;
-    text-align: center;
-    line-height: 25px;
-    margin-top: 9px;
-  }
+/*.apply{*/
+  /*width:100%;*/
+  /*height:45px;*/
+  /*padding: 0 4%;*/
+  /*line-height: 45px;*/
+  /*}*/
+  /*.apply p:nth-of-type(1){*/
+    /*float: left;*/
+    /*font-size:14px;*/
+    /*color:#03aef9;*/
+  /*}*/
+  /*.apply p:nth-of-type(2){*/
+    /*float: right;*/
+    /*width:86px;*/
+    /*height:27px;*/
+    /*border-radius: 50px;*/
+    /*border:1px solid #03aef9;*/
+    /*font-size:14px;*/
+    /*color:#03aef9;*/
+    /*text-align: center;*/
+    /*line-height: 25px;*/
+    /*margin-top: 9px;*/
+  /*}*/
   ul{
     width:100%;
     padding: 0 4%;
@@ -377,5 +392,42 @@
   .listWrapper{
     top:99px;
   }
-
+ /*导航栏*/
+  .menu{
+    width: 100%;
+    height:50px;
+    background:#3c3e44;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .menu .switch{
+    width:210px;
+    height:34px;
+    border:1px solid #808080;
+    border-radius: 50px;
+    position: absolute;
+    left: 0;
+    right:0;
+    margin: auto;
+  }
+  .menu .switch p{
+    width:50%;
+    height:100%;
+    font-size: 14px;
+    color: #fefefe;
+    float: left;
+    text-align: center;
+    line-height: 34px;
+  }
+  .menu .switch p:nth-of-type(2){
+    background:#808080;
+    border-radius: 0 50px 50px 0;
+  }
+  .menu svg{
+    position: absolute;
+    right:3%;
+    font-size: 25px;
+    color: #fefefe;
+  }
 </style>

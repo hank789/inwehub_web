@@ -32,7 +32,7 @@ function checkUpdate () {
                   } else {
                     window.plus.runtime.quit()
                   }
-                }, inf.title, ['立即下载', '暂不下载', '取消'])
+                }, inf.name, ['立即下载', '暂不下载', '取消'])
               }, 'com.tencent.android.qqdownloader')
             } else if ((isIosForce === 2 && window.mui.os.ios) || (isAndroidForce === 2 && window.mui.os.android)) {
               // 什么都不做

@@ -3,13 +3,30 @@ import router from '../modules/index/routers/index'
 import { getDiscoverDetail } from './shareTemplate'
 import { getIndexPath } from './plus'
 
+function getIdByUrl (url, id) {
+  if (id === 'backAndClose') {
+    console.log('getIdByUrl: id:backAndClose')
+    return 'backAndClose'
+  } else if (id === window.plus.runtime.appid) {
+    console.log('getIdByUrl: id:' + id)
+    return id
+  } else if (/\/[0-9]+$/.test(url)) {
+    var newId = url
+    newId = newId.replace(/[^a-z]+/g, '')
+    console.log('getIdByUrl-id:' + newId)
+    return newId
+  }
+  console.log('getIdByUrl: id:' + url)
+  return url
+}
+
 /**
  * 打开webview
  */
 function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
-
+    id = getIdByUrl(url, id)
     var preloadBackClose = true
     if (id === url || id === 'backAndClose') {
       // 非特殊页面返回时关闭webview
@@ -35,7 +52,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         shotUrl = url.slice(urlIndex + 1)
       }
 
-      console.log('openWebviewByUrl:current_webview_url:' + currentWebviewUrl + ', shortUrl' + shotUrl)
+      console.log('openWebviewByUrl:current_webview_url:' + currentWebviewUrl + ', shortUrl:' + shotUrl)
 
       if (currentWebviewUrl !== shotUrl || bindHttpUrl !== shotUrl) {
         console.log('openWebviewByUrl:load:' + url)
@@ -145,8 +162,16 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       bounce: 'vertical'
     }
   })
+  webview.hide()
+  var plusWaiting = window.plus.nativeUI.showWaiting()
   if (webview.getURL() !== url) {
     webview.loadURL(url)
+  }
+  webview.onloaded = function (event) {
+    if (plusWaiting) {
+      plusWaiting.close()
+    }
+    webview.show()
   }
   currentWebview.append(webview)
 

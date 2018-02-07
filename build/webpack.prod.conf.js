@@ -12,6 +12,8 @@ var entris = require('./entris')
 
 var env = config.build.env
 
+env.NODE_ENV_TYPE = process.env.NODE_ENV_TYPE
+
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -101,10 +103,15 @@ if (config.build.bundleAnalyzerReport) {
 }
 
 Object.keys(entris).forEach(function(entry) {
+  var template = 'index.html'
+
+  if (process.env.NODE_ENV_TYPE === '"browser"') {
+    template = 'index_browser.html'
+  }
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     chunks: [ 'manifest', 'vendor', entry ],
     filename: 'public/' + entry + '.html',
-    template: 'index.html',
+    template: template,
     inject: true,
     minify: {
       // removeComments: true,

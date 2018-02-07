@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!noback"></a>
-      <h1 class="mui-title">动态</h1>
+      <h1 class="mui-title">分享</h1>
     </header>
 
     <div class="mui-content" v-show="!loading">

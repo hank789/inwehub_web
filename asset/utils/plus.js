@@ -170,15 +170,24 @@ function openVendorUrl (containerDiv) {
         console.log('openVendorUrl : ' + href)
         e.preventDefault()
         e.stopPropagation()
-        if (window.plus) {
-          console.log('plus 打开')
-          router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
+        if (/https:\/\/m\.inwehub\.com/.test(href)) {
+          openAppUrlByUrl(href)
         } else {
-          console.log('window.open 打开')
-          window.open(href)
+          openVendorUrlByUrl(href)
         }
       }, false)
     }
+  }
+}
+
+function openVendorUrlByUrl (url) {
+  var href = url
+  if (window.plus) {
+    console.log('plus 打开')
+    router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
+  } else {
+    console.log('window.open 打开')
+    window.open(href)
   }
 }
 
@@ -196,23 +205,26 @@ function openAppUrl (containerDiv) {
       aList[i].addEventListener('tap', function (e) {
         var href = this.getAttribute('href')
         console.log('openAppUrl : ' + href)
-        if (href === 'about:blank') {
-          return
-        }
-
-        href = href.replace('https://m.inwehub.com/#', '')
-
         e.preventDefault()
         e.stopPropagation()
-        if (window.plus) {
-          console.log('plus 打开')
-          router.pushPlus(href)
-        } else {
-          console.log('router 打开')
-          router.push(href)
-        }
+        openAppUrlByUrl(href)
       }, false)
     }
+  }
+}
+
+function openAppUrlByUrl (url) {
+  var href = url
+  if (href === 'about:blank') {
+    return
+  }
+  href = href.replace('https://m.inwehub.com/#', '')
+  if (window.plus) {
+    console.log('plus 打开')
+    router.pushPlus(href)
+  } else {
+    console.log('router 打开')
+    router.push(href)
   }
 }
 
@@ -433,5 +445,7 @@ export {
   checkPermission,
   setWebviewNewUrl,
   getWebviewNewUrl,
-  openWebviewRefresh
+  openWebviewRefresh,
+  openAppUrlByUrl,
+  openVendorUrlByUrl
 }

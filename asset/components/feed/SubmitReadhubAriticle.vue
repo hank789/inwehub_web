@@ -12,7 +12,7 @@
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)" :auto-update="60">
+          <timeago :since="timeago(data.created_at)">
           </timeago>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <img :src="data.feed.img"/>
     </div>
 
-    <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+    <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -61,7 +61,7 @@
         :supportList="data.feed.supporter_list"
         :commentNumber="data.feed.comment_number"
         :commentList="data.feed.comments"
-        :detailUrl="data.url"
+        :detailUrl="data.feed.comment_url"
 
         @commentIt="commentIt"
       ></SuppertAndComment>

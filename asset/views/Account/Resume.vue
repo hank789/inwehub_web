@@ -122,7 +122,7 @@
           </p>
           <a></a>
           <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
-            动态 <span>{{ resume.info.submission_count }}</span>
+            分享 <span>{{ resume.info.submission_count }}</span>
           </p>
           <a></a>
           <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
@@ -131,13 +131,25 @@
           <i class="bot"></i>
         </div>
         <!--个人动态-->
-        <!--<div class="dynamic">-->
-          <!--<p>Ta的动态</p>-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
-          <!--</svg>-->
-          <!--<i class="bot"></i>-->
-        <!--</div>-->
+        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
+          <p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </div>
+        <!--Ta的专栏-->
+        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
+          <p>Ta的专栏 </p>
+          <p>文章<span>{{ resume.info.article_count }}</span><i></i></p>
+          <p>评论<span>{{ resume.info.article_comment_count }}</span><i></i></p>
+          <p>赞{{ resume.info.article_upvote_count }}  </p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+        </div>
+        <!--grey-->
+        <div class="grey"></div>
         <!--个人简介-->
         <div class="description">
           <p>个人简介</p>
@@ -309,9 +321,13 @@
       isShowitemEduMore: false,
       resume: {
         info: {
-          id: '',
+          uuid: '',
           name: '',
           avatar_url: '',
+          feed_count: '',
+          article_count: '',
+          article_comment_count: '',
+          article_upvote_count: '',
           industry_tags: [],
           province: {
             key: '',
@@ -1101,12 +1117,49 @@
       float: left;
       font-size: 14px;
       color: #808080;
+      i{
+        font-weight: 500;
+        color:#444444;
+      }
     }
     svg {
       float: right;
       font-size: 15px;
       color: #808080;
     }
+  }
+   /*Ta的专栏*/
+  .specialColumn{
+    overflow: hidden;
+    padding: 12px 14px;
+    position: relative;
+  }
+  .specialColumn p {
+    float: left;
+    font-size:12px;
+    color: #b4b4b6;
+
+  }
+  .specialColumn p span{
+    color: rgb(128,128,128);
+  }
+  .specialColumn p i{
+    display: inline-block;
+    width:1px;
+    height:10px;
+    background:#c8c8c8;
+    margin:0  5px -1px 5px;
+
+  }
+  .specialColumn svg{
+    float: right;
+    font-size: 15px;
+    color: #808080;
+  }
+  .specialColumn p:nth-of-type(1){
+     font-size:14px;
+     color: #808080;
+     margin-right: 5px;
   }
 
   /*擅长*/
@@ -1171,5 +1224,10 @@
     background:#03aef9;
     font-size:17px;
     color: #ffffff;
+  }
+  .grey{
+    width:100%;
+    height:10px;
+    background: #F3F4F5;
   }
 </style>

@@ -390,7 +390,7 @@
         </div>
         <!--跳转按钮-->
         <p class="my-wallet alertConfirm" id="my-wallet" v-if="options.Coupon.coupon_type === 4">前往付费围观专业回答</p>
-        <p class="my-wallet alertConfirm" id="my-wallet" v-else>查看我的钱包</p>
+        <p class="my-wallet alertConfirm" id=" my-wallet" v-else>前往付费围观专业回答</p>
         <!---->
       </div>
       <!--关闭按钮-->
@@ -413,7 +413,33 @@
         </ul>
       </div>
     </div>
+    <!--抽奖弹窗-->
+    <div id="luckDraw">
+      <div class="luckDraw">
+        <p class="qualification">恭喜您获得抽奖资格!</p>
 
+        <div class="title_invitation">
+          <div class="cions-avatar">
+            <img :src="options.invitation.user_avatar" @tap.stop.prevent="toAvatar(invitationList.user_uuid)"/>
+            <svg class="icon" aria-hidden="true" v-if="options.invitation.user_is_expert">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="text">
+            <p>{{ options.invitation.user_name}}<i></i>本月已邀请{{ options.invitation.current_month_invited_users}}人</p>
+            <p>手机号：{{ options.invitation.user_mobile}}</p>
+          </div>
+        </div>
+
+        <div class="search">扫码或搜索hiinwe添加小哈微信，截此页图给小哈，由小哈邀请加入抽奖群。</div>
+
+        <div class="wechat">
+          <img src="../statics/images/dialog-wechat@2x.png" />
+        </div>
+        <div class="waiting">入群后点击抽奖链接，并等待开奖。</div>
+        <p class="btn alertClose">确定</p>
+      </div>
+    </div>
     <!--bot-->
 
   </div>
@@ -465,6 +491,13 @@
             coupon_value: '',
             coupon_value_type: '',
             coupon_description: ''
+          },
+          invitation: {
+            user_name: '',
+            user_mobile: '',
+            user_is_expert: '',
+            user_avatar: '',
+            current_month_invited_users: ''
           }
         }
       }
@@ -1471,12 +1504,12 @@
   .my-wallet{
     width:88%;
     height:34px;
-    border:1px solid #fc98bb;
+    background: #fcc816;
     border-radius: 50px;
     text-align: center;
     line-height: 34px;
     font-size:14px;
-    color: #fdd6e3;
+    color: #444444;
     position: absolute;
     left:0;
     right:0;
@@ -1571,4 +1604,104 @@
     color: #03aef9;
     border-top:0.5px solid #dcdcdc;
   }
+  /*抽奖弹窗*/
+  .luckDraw{
+    width:100%;
+    height:420px;
+    border-radius:18px;
+    background: #ffffff;
+    padding-top: 31px;
+  }
+  .luckDraw .qualification{
+    text-align: center;
+    font-size:19px;
+    color: #03aef9;
+    font-weight: 500;
+  }
+
+  .luckDraw .title_invitation{
+    width:100%;
+    height:44px;
+    margin-top: 15px;
+    position: relative;
+    padding: 0 15px;
+  }
+  .luckDraw  .title_invitation .cions-avatar{
+    float: left;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #cccccc;
+  }
+  .luckDraw  .title_invitation .cions-avatar img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+  .luckDraw  .title_invitation .cions-avatar svg{
+    position: absolute;
+    font-size: 20px;
+    right: -5px;
+    bottom: -2px;
+  }
+  .luckDraw  .text{
+    margin-left: 10px;
+    float: left;
+  }
+  .luckDraw  .text p:nth-of-type(1){
+    font-size: 14px;
+    color: #444444;
+    font-weight: 500;
+  }
+  .luckDraw  .text p:nth-of-type(1) i{
+    display: inline-block;
+    width:1px;
+    height:12px;
+    background: #b4b4b6;
+    margin:0 5px -1px 5px;
+  }
+  .luckDraw  .text p:nth-of-type(2){
+    font-size: 12px;
+    color: #444444;
+    margin-left: -4px;
+  }
+ /**/
+  .luckDraw .search{
+    margin-top: 14px;
+    font-size: 14px;
+    color: #808080;
+    padding: 0 15px;
+  }
+  .luckDraw .wechat{
+    width:112px;
+    height:122px;
+    border-radius: 4px;
+    border: 1px solid #979797;
+    margin: 0 auto;
+    margin-top: 23px;
+  }
+  .luckDraw .wechat img{
+    width: 100%;
+    height:100%;
+  }
+
+  .luckDraw  .waiting{
+    margin-top: 12px;
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+  }
+  .luckDraw  .btn{
+    width:100%;
+    margin-top: 20px;
+    height:53px;
+    line-height: 53px;
+    text-align: center;
+    font-size: 16px;
+    color: #03aef9;
+    border-top:1px solid #dcdcdc;
+  }
+
+
 </style>

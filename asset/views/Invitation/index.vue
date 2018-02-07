@@ -11,7 +11,7 @@
 
       <div class="invitation-information">
         <li @tap.stop.prevent="$router.pushPlus('/invitation/friends')">
-          <p>{{invitedUsersCount}}位</p>
+          <p>{{invited_users}}位</p>
           <p>已成功邀请</p>
           <span>查看</span>
         </li>
@@ -22,12 +22,17 @@
       </div>
       <!--呼朋唤友-->
       <div class="contactFriends">
-        <span>即可获得好友平台支付或收益5%分红</span>
-        <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
         <div class="contactBtn">
           <p @tap.stop.prevent="share()">呼朋唤友</p>
           <img src="../../statics/images/money@3x.png"/>
         </div>
+        <span>1即可获得好友平台支付或收益5%分红</span>
+        <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
+        <span>2.2018.2.1-2018.2.28期间累计邀请8人及以上，</span>
+        <span>即可获得抽奖资格，月底抽取iphoneX。</span>
+        <span>已邀请<i>{{invitedUsersCount}}</i>人</span>
+        <p class="luckDraw" v-if="invitedUsersCount < 8"  >抽奖</p>
+        <p class="luckDraw red" @tap.stop.prevent="luckDraw()" v-else>抽奖</p>
       </div>
       <!--邀请说明-->
       <div class="invitationNote">
@@ -61,6 +66,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
 
   const Index = {
     data: () => ({
@@ -70,12 +76,14 @@
         link: '',
         content: '',
         imageUrl: '',
-        thumbUrl: ''
+        thumbUrl: '',
+        invitation: {}
       },
-      invitedUsersCount: '--',
+      invitedUsersCount: 0,
       rewardMoney: '--',
       rcCode: '',
       id: 0,
+      invited_users: '--',
       loading: true
     }),
     mounted () {
@@ -85,6 +93,10 @@
     },
     computed: {},
     methods: {
+      luckDraw () {
+        document.querySelector('.mui-content').style.position = 'absolute'
+        userAbility.luckDraw(this, this.invitation)
+      },
       // 警告框
       warn () {
         var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
@@ -116,8 +128,10 @@
               window.mui.toast(response.data.message)
               return
             }
-            this.invitedUsersCount = response.data.data.invited_users
+            this.invitation = response.data.data
+            this.invitedUsersCount = response.data.data.current_month_invited_users
             this.rewardMoney = response.data.data.reward_money
+            this.invited_users = response.data.data.invited_users
           })
       },
       share () {
@@ -282,9 +296,9 @@
 
   .contactFriends {
     width: 95%;
-    height: 85px;
+    height: 224px;
     border: 1px solid #b4b4b6;
-    border-radius: 85px;
+    border-radius: 4px;
     margin-left: 2.5%;
     margin-top: 40px;
     position: relative;
@@ -299,7 +313,7 @@
 
   .contactFriends span:nth-of-type(1) {
     color: #444444;
-    margin-top: 29px;
+    margin-top: 35px;
 
   }
 
@@ -307,7 +321,34 @@
     color: #03aef9;
     margin-top: 4px;
   }
-
+  .contactFriends span:nth-of-type(3) {
+    color: #444444;
+    margin-top: 14px;
+  }
+  .contactFriends span:nth-of-type(5) {
+    color: #808080;
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  .contactFriends span:nth-of-type(5) i{
+    font-style: normal;
+    color: #03aef9;
+  }
+  .contactFriends .luckDraw{
+    width:62px;
+    height:27px;
+    background: #dcdcdc;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 27px;
+    margin: 0 auto;
+    font-size:14px;
+    color: #b4b4b6;
+  }
+  .luckDraw.red{
+    background: #fa4975;
+    color: #ffffff;
+  }
   .contactBtn {
     position: absolute;
     width: 150px;

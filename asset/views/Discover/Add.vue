@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
-      <h1 class="mui-title">发布动态</h1>
+      <h1 class="mui-title">分享</h1>
     </header>
 
     <div class="mui-content">
@@ -133,8 +133,13 @@
       if (!(referer && referer.path === '/selectUser')) {
         localEvent.clearLocalItem('discover_selectUser' + this.id)
       }
-      if (!(referer && referer.path === '/selecttags')) {
-        localEvent.clearLocalItem('discover_skill_tags' + this.id)
+
+      if (referer) {
+        if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
+            // ...
+        } else {
+          localEvent.clearLocalItem('discover_skill_tags' + this.id)
+        }
       }
       autoTextArea()
       window.mui.previewImage()

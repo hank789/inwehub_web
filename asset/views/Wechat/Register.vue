@@ -3,10 +3,18 @@
   <div class="register" v-show="!loading">
 
 
-    <div class="logo">
+    <!--<div class="logo">-->
+      <!--<svg class="icon" aria-hidden="true">-->
+        <!--<use xlink:href="#icon-logo"></use>-->
+      <!--</svg>-->
+    <!--</div>-->
+
+    <div class="register_logo">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-logo"></use>
+        <use xlink:href="#icon-inwehubzuoyou"></use>
       </svg>
+      <p>最具品质的咨询顾问社区</p>
+      <p>长见识 / 解疑惑／寻合作／树形象／得收益</p>
     </div>
 
     <div class="inputWrapper" v-if="isNeedRegistrationCode">
@@ -43,10 +51,6 @@
     <div class="buttonWrapper">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
               @click.prevent="register">确认
-
-
-
-
       </button>
     </div>
 
@@ -342,6 +346,7 @@
   .inputWrapper {
     margin: 0 33px 22px;
     position: relative;
+    top: 145px;
 
   }
 
@@ -396,7 +401,7 @@
   }
 
   .register {
-    background: #f3f4f6;
+    background: #ffffff;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -413,6 +418,7 @@
 
   .buttonWrapper button {
     border-radius: 5px;
+    top:135px;
 
     &:disabled {
       background: #dcdcdc;
@@ -427,6 +433,29 @@
     color: #3c95f9;
     text-align: center;
   }
-
+/*register_logo*/
+  .register_logo{
+    width:100%;
+    height:120px;
+    background: #f3f4f6;
+    position: absolute;
+    top:0;
+    padding-left: 38px;
+  }
+  .register_logo svg{
+    font-size: 140px;
+    position: absolute;
+    top: -34px;
+  }
+  .register_logo p{
+    margin:0;
+    padding:0;
+    font-size: 14px;
+    color: #444444;
+  }
+  .register_logo p:nth-of-type(1){
+     font-weight: 600;
+     margin-top: 59px;
+  }
 
 </style>

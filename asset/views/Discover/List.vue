@@ -33,20 +33,20 @@
                   <use xlink:href="#icon-tijiaowenzhang1"></use>
                 </svg>
               </div>
-              <p>动态分享</p>
+              <p>文章分享</p>
             </li>
             <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
               <div class="discover-round">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-huodongjiyu"></use>
+                  <use xlink:href="#icon-fujinqiye1"></use>
                 </svg>
               </div>
               <p>企业服务</p>
             </li>
-            <li @tap.stop.prevent="judge(5)">
+            <li @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
               <div class="discover-round">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-fujinqiye1"></use>
+                  <use xlink:href="#icon-zhaoguwenyuanshi"></use>
                 </svg>
               </div>
               <p>附近发现</p>
@@ -55,9 +55,9 @@
         </div>
 
 
-        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/cionsList')">
-          <div class="invitation"><span>{{invitationList.user_name}}</span>邀请<i>{{invitationList.invited_users}}</i>人</div>
-          <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;成长值<i>{{invitationList.user_credits}}</i></div>
+        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/invitationList')">
+          <div class="invitation"><span>{{invitationList.user_name}}</span>本月邀请<i>{{invitationList.current_month_invited_users}}</i>人</div>
+          <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;本月获赞<i>{{invitationList.current_month_user_upvotes}}</i></div>
           <div class="InvitationList" >
             <img src="../../statics/images/discover-invitation-list2x.png" />
           </div>
@@ -76,7 +76,7 @@
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
             <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
             <div class="recommend_datail">
-              <p class="container_type yellow" v-if="recommend.read_type == '1'">动态分享</p>
+              <p class="container_type yellow" v-if="recommend.read_type == '1'">文章分享</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '2'">专业问答</p>
               <p class="container_type blue"  v-else-if="recommend.read_type == '3'">互动提问</p>
               <p class="container_type pink"  v-else-if="recommend.read_type == '4' || recommend.read_type == '5'">活动机遇</p>
@@ -176,14 +176,6 @@
                   break
                 case 2:
                   this.$router.pushPlus('/askCommunity/interactions')
-                  break
-//                case 4:
-//                  this.$router.pushPlus('my/Discount')
-//                  break
-                case 5:
-                  this.$router.pushPlus('/nearbyCompany')
-                  break
-                default:
               }
             } else {
               userAbility.jumpJudgeGrade(this)

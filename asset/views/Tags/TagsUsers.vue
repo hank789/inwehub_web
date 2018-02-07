@@ -9,7 +9,7 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions')">问答</span>
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">动态</span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">分享</span>
         <span @tap.stop.prevent="">用户 <i></i></span>
         <i class="bot"></i>
       </div>
