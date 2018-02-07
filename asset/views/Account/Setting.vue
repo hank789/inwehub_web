@@ -13,7 +13,7 @@
           <p>绑定微信</p>
           <span class="name" v-if="isBindWeixin">
              {{bindWeixinNickname}}
-             <oauth class="wechatBind mui-navigate-right" @success="bindSuccess" :content="''" ></oauth>
+             <oauth class="wechatBind" @success="bindSuccess" :content="''" ></oauth>
           </span>
           <svg class="icon" aria-hidden="true" v-else>
             <use xlink:href="#icon-chakangengduojiantou"></use>
