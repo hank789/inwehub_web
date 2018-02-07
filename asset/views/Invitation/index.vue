@@ -11,7 +11,7 @@
 
       <div class="invitation-information">
         <li @tap.stop.prevent="$router.pushPlus('/invitation/friends')">
-          <p>{{invitedUsersCount}}位</p>
+          <p>{{invited_users}}位</p>
           <p>已成功邀请</p>
           <span>查看</span>
         </li>
@@ -30,8 +30,8 @@
         <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
         <span>2.2018.2.1-2018.2.28期间累计邀请8人及以上，</span>
         <span>即可获得抽奖资格，月底抽取iphoneX。</span>
-        <span>已邀请<i>{{invited_users}}</i>人</span>
-        <p class="luckDraw" v-if="invited_users < 8"  >抽奖</p>
+        <span>已邀请<i>{{invitedUsersCount}}</i>人</span>
+        <p class="luckDraw" v-if="invitedUsersCount < 8"  >抽奖</p>
         <p class="luckDraw red" @tap.stop.prevent="luckDraw()" v-else>抽奖</p>
       </div>
       <!--邀请说明-->
@@ -79,11 +79,11 @@
         thumbUrl: '',
         invitation: {}
       },
-      invitedUsersCount: '--',
+      invitedUsersCount: 0,
       rewardMoney: '--',
       rcCode: '',
       id: 0,
-      invited_users: 0,
+      invited_users: '--',
       loading: true
     }),
     mounted () {
