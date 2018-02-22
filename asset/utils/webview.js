@@ -81,10 +81,10 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         },
         extras: {preload: preloadBackClose},
         waiting: {
-          autoShow: false
+          autoShow: true
         }
       })
-      console.log('openWindow url:' + url + ', popGesture: ' + popGesture)
+      console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
       if (reload) {
         webview.loadURL(url)
       }
@@ -281,6 +281,8 @@ function showWebview () {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
       if (self.custom_preload === false || self.custom_preload === undefined) {
+        // 关闭等待框
+        window.plus.nativeUI.closeWaiting()
         self.show()
       }
       if (window.mui.os.ios) {

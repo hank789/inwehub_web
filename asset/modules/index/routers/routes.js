@@ -129,7 +129,7 @@ const routes = [
   },
   { // 新人引导第二步
     path: '/userGuide/steptwo',
-    name: 'userGuide-stepone',
+    name: 'userGuide-steptwo',
     meta: {
       title: '新人引导第二步',
       wechatHideHeader: true
@@ -141,7 +141,7 @@ const routes = [
   },
   { // 新人引导第三步
     path: '/userGuide/stepthree',
-    name: 'userGuide-stepone',
+    name: 'userGuide-stepthree',
     meta: {
       title: '新人引导第三步',
       wechatHideHeader: true,
@@ -1514,7 +1514,7 @@ const routes = [
   },
   { // 附近发现的人地图详情页
     path: '/nearbyPeople/MapDetail',
-    name: 'nearby-map-detail',
+    name: 'nearby-map-people-detail',
     meta: {
       title: '附近发现',
       wechatHideHeader: true
@@ -1526,7 +1526,7 @@ const routes = [
   },
   { // 附近发现的公司地图详情页
     path: '/nearbyCompany/MapDetail',
-    name: 'nearby-map-detail',
+    name: 'nearby-map-company-detail',
     meta: {
       title: '附近发现',
       wechatHideHeader: true
