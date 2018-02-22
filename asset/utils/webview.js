@@ -23,7 +23,7 @@ function getIdByUrl (url, id) {
 /**
  * 打开webview
  */
-function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGesture = 'hide', reload = false) {
+function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
     id = getIdByUrl(url, id)
@@ -81,10 +81,10 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         },
         extras: {preload: preloadBackClose},
         waiting: {
-          autoShow: false
+          autoShow: true
         }
       })
-      console.log('openWindow url:' + url + ', popGesture: ' + popGesture)
+      console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
       if (reload) {
         webview.loadURL(url)
       }
@@ -281,6 +281,8 @@ function showWebview () {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
       if (self.custom_preload === false || self.custom_preload === undefined) {
+        // 关闭等待框
+        window.plus.nativeUI.closeWaiting()
         self.show()
       }
       if (window.mui.os.ios) {
@@ -397,7 +399,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
         createNew: false,
         show: {
           autoShow: true,
-          aniShow: 'pop-in'
+          aniShow: 'slide-in-right'
         },
         styles: {
           popGesture: 'hide'
