@@ -23,7 +23,7 @@ function getIdByUrl (url, id) {
 /**
  * 打开webview
  */
-function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGesture = 'hide', reload = false) {
+function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
     id = getIdByUrl(url, id)
@@ -397,7 +397,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
         createNew: false,
         show: {
           autoShow: true,
-          aniShow: 'pop-in'
+          aniShow: 'slide-in-right'
         },
         styles: {
           popGesture: 'hide'
