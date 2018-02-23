@@ -59,6 +59,7 @@
 
   import { postRequest } from '../../utils/request'
   import { autoTextArea } from '../../utils/plus'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
@@ -73,6 +74,9 @@
         disableRegister: true,
         isblue: false
       }
+    },
+    components: {
+      popPickerComponent
     },
     watch: {
       '$route': 'refreshPageData',
