@@ -6,9 +6,6 @@
 </template>
 
 <script>
-  require('quill/dist/quill.snow.css')
-  require('quill/dist/quill.bubble.css')
-  require('quill/dist/quill.core.css')
   import Delta from 'quill-delta'
 
   if (!window.Quill) {

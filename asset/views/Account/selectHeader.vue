@@ -10,8 +10,6 @@
 
 <script>
   /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "crop" }] */
-
-  import '../../styles/cropper.min.css'
   import '../../js/cropper.min'
   import localEvent from '../../stores/localStorage'
   import { createAPI } from '../../utils/request'

@@ -52,6 +52,10 @@ Vue.component('star-rating', StarRating)
 window.loading_gif = loadingGif
 
 // mui的插件；
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import 'quill/dist/quill.core.css'
+import './../../styles/cropper.min.css'
 import './../../styles/mui.css'
 import './../../styles/common.css'
 import './../../styles/feed.min.css'

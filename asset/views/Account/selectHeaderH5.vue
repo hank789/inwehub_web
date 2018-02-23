@@ -14,7 +14,6 @@
 </template>
 
 <script>
-  import '../../styles/cropper.min.css'
   import '../../js/cropper.min'
   import localEvent from '../../stores/localStorage'
   import { postRequest } from '../../utils/request'
