@@ -121,6 +121,7 @@
   import { alertAnswerRepeat } from '../../utils/dialogList'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   import CountDown from 'vue2-countdown'
 
@@ -160,7 +161,8 @@
       Answer,
       Discuss,
       Share,
-      commentTextarea
+      commentTextarea,
+      popPickerComponent
     },
     computed: {},
     mounted () {

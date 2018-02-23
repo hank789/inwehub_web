@@ -190,6 +190,7 @@
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   export default {
     data () {
@@ -252,7 +253,8 @@
       }
     },
     components: {
-      industryTagsIndexedList
+      industryTagsIndexedList,
+      popPickerComponent
     },
     methods: {
       selectCompanyWorkers () {

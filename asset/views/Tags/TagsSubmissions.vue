@@ -264,7 +264,6 @@
       }
     },
     mounted () {
-
       this.getTag()
       document.addEventListener('tap', () => {
       })
@@ -278,7 +277,6 @@
 
 <style scoped>
   /*清掉自带样式*/
-
   div,
   p,
   span,
