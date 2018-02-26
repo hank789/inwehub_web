@@ -316,6 +316,7 @@
     justify-content: space-around;
     align-items: center;
     position: relative;
+    top:6.4rem;
   }
   .menu span:nth-of-type(2){
     position:relative;
@@ -595,7 +596,8 @@
 
 
   .listWrapper{
-    top:17.7rem;
+    /*top:17.7rem;*/
+    top:23.6rem;
   }
   /*活动标签*/
   .activity_tags{
