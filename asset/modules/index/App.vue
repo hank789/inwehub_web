@@ -35,6 +35,7 @@
   import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from '../../utils/allPlatform'
   import localEvent from '../../stores/localStorage'
   import { setWebviewNewUrl, getWebviewNewUrl } from '../../utils/plus'
+  import { apiRequest } from '../../utils/request'
 
   export default {
     data () {
@@ -139,6 +140,17 @@
                   self.$refs.routerView.initData()
                 }
               }
+            })
+            // 存储设备信息
+            var deviceInfo = window.plus.push.getClientInfo()
+            apiRequest(`system/device`, {
+              client_id: deviceInfo.clientid,
+              device_token: deviceInfo.token,
+              appid: deviceInfo.appid,
+              appkey: deviceInfo.appkey,
+              device_type: window.plus.os.name === 'iOS' ? 2 : 1
+            }, false).then(res => {
+
             })
 
             // 应用从后台切换回前台事件

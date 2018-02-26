@@ -501,18 +501,6 @@
             // mui.toast("注册成功！");
             localEvent.setLocalItem('UserLoginInfo', response.data.data)
             this.isLoading = false
-            // 存储设备信息
-            if (window.mui.os.plus) {
-              var deviceInfo = window.plus.push.getClientInfo()
-              apiRequest(`system/device`, {
-                client_id: deviceInfo.clientid,
-                device_token: deviceInfo.token,
-                appid: deviceInfo.appid,
-                appkey: deviceInfo.appkey,
-                device_type: window.plus.os.name === 'iOS' ? 2 : 1
-              }, false).then(res => {
-              })
-            }
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
