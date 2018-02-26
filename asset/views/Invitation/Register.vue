@@ -768,14 +768,14 @@
   }
 
  /* 适配*/
-  @media (min-width: 32rem) {
+  @media (min-width: 320px) {
    .privilege_verification ul li:nth-of-type(1):after {
       right: 40%;
    }
 
   }
 
-  @media (min-width: 37.5rem) {
+  @media (min-width: 375px) {
     .privilege_verification ul li:nth-of-type(1):after {
 
          right: 36%;
@@ -783,7 +783,7 @@
 
   }
 
-  @media (min-width: 41.4rem) {
+  @media (min-width: 414px) {
    .privilege_verification ul li:nth-of-type(1):after {
         right: 34%;
    }

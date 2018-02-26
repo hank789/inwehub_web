@@ -411,17 +411,17 @@
     bottom: 4.6rem;
   }
   /*适配*/
-  @media (min-width:32rem) {
+  @media (min-width:320px) {
     .Relevant_detail {
       width:57%;
     }
   }
-  @media (min-width:37.5rem) {
+  @media (min-width:375px) {
     .Relevant_detail {
       width:66%;
     }
   }
-  @media (min-width:41.4rem) {
+  @media (min-width:414px) {
     .Relevant_detail {
       width:70%;
     }

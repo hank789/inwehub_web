@@ -414,20 +414,20 @@
     margin: auto;
   }
   /*适配*/
-  @media (min-width: 32rem) {
+  @media (min-width: 320px) {
     .notice p:nth-of-type(1) .notice_l{
       width:45%;
       margin-right: 0;
     }
   }
 
-  @media (min-width: 37.5rem) {
+  @media (min-width: 375px) {
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }
   }
 
-  @media (min-width: 41.4rem) {
+  @media (min-width: 414px) {
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }

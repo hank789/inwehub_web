@@ -455,13 +455,13 @@
     background-color: #fff;
   }
 
-  @media (min-device-width: 41.4rem) and (max-device-width: 73.6rem) and (-webkit-min-device-pixel-ratio: 3) {
+  @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     .part2 .progressBar {
       width: 16rem !important;
     }
   }
 
-  @media (min-device-width: 37.5rem) and (max-device-width: 66.7rem) and (-webkit-min-device-pixel-ratio: 2) {
+  @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .part2 .progressBar {
       width: 16rem !important;
     }
