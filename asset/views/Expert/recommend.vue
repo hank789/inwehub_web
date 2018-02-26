@@ -94,6 +94,7 @@
   import localEvent from '../../stores/localStorage'
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
   import MTextarea from '../../components/MTextarea.vue'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   export default {
     data: () => ({
@@ -343,7 +344,8 @@
     },
     components: {
       industryTagsIndexedList,
-      MTextarea
+      MTextarea,
+      popPickerComponent
     }
   }
 

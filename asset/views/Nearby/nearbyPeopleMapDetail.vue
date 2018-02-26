@@ -31,7 +31,7 @@
                   </svg>
                 </div>
                 <div class="detail">
-                  <p>{{item.name}}<i>（< {{item.distance}}m）</i></p>
+                  <p>{{item.name}}<i>（< {{item.distance_format}}m）</i></p>
                   <p class="mui-ellipsis">{{item.description}}</p>
                 </div>
                 <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>

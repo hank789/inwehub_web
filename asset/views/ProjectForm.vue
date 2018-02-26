@@ -66,6 +66,7 @@
   import { postRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import cityData from '../components/city/city.data'
+  import popPickerComponent from '../components/picker/poppicker.vue'
 
   export default {
     data: () => ({
@@ -246,6 +247,9 @@
       next()
     },
     mounted () {
+    },
+    components: {
+      popPickerComponent
     },
     computed: {
       descLength () {
