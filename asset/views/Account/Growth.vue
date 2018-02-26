@@ -430,7 +430,7 @@
   .growth p:nth-child(1) {
     width: 9.4rem;
     height: 9.4rem;
-    border: 1.0.5rem solid #03aef9;
+    border: 0.15rem solid #03aef9;
     border-radius: 50%;
     position: absolute;
     left: 0;
@@ -494,7 +494,7 @@
   .contribution p:nth-child(1) {
     width: 9.4rem;
     height: 9.4rem;
-    border: 1.0.5rem solid #fa4975;
+    border: 0.15rem solid #fa4975;
     border-radius: 50%;
     position: absolute;
     left: 0;

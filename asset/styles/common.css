@@ -2,6 +2,7 @@
 html {
   font-size: 62.5%;
 }
+
 body{
   font-family: PingFang-SC-Regular, sans-serif;
   -webkit-tap-highlight-color: transparent;
@@ -1390,7 +1391,7 @@ a {
 /*公共的间隔有下划线*/
 .fllow-bot{
   padding: 1.2rem 0;
-  border-bottom: 0.0.5rem solid #dcdcdc;
+  border-bottom: 0.05rem solid #dcdcdc;
 }
 .mui-popup{
   position: absolute !important;

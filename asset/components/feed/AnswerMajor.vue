@@ -146,7 +146,7 @@
     height:0.4rem;
     border-radius: 50%;
     background: #FFFFFF;
-    margin-bottom: 1.0.6rem;
+    margin-bottom: 0.16rem;
   }
   .tagSelect{
     display: inline-block;

@@ -159,7 +159,7 @@
     padding-top: 1rem;
     position: relative;
     border-radius: 0.4rem;
-    border:0.0.2rem solid #dcdcdc;
+    border:0.02rem solid #dcdcdc;
     box-shadow: 0 0 0.5rem #ececee;
   }
 
@@ -197,7 +197,7 @@
   #home-card span:nth-of-type(1) svg {
     font-size: 2rem;
     color: #03aef9;
-    margin-bottom: 2.0.5rem;
+    margin-bottom: 0.25rem;
     margin-left: -0.3rem;
   }
 
@@ -212,7 +212,7 @@
     height: 2.4rem;
     line-height: 2.2rem;
     border-radius: 5rem;
-    border: 0.0.5rem solid #03aef9;
+    border: 0.05rem solid #03aef9;
     margin-left: 15%;
     margin-top: 0.6rem;
     font-size: 1.4rem;
@@ -235,13 +235,13 @@
   /*查看更多专家样式*/
 
   .moreExperts {
-    width: 118.33.3rem;
+    width: 11.83rem;
     margin-right: 1rem;
     height: 14.8rem;
     background:#FFFFFF;
     border-radius: 0.4rem;
     position: relative;
-    border: 0.0.2rem solid #dcdcdc;
+    border: 0.02rem solid #dcdcdc;
     box-shadow: 0 0 0.5rem #ececee;
   }
 

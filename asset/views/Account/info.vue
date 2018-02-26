@@ -347,7 +347,7 @@
     height: 1.2rem;
     border-radius: 5rem;
     overflow: hidden;
-    border: 0.0.5rem solid rgb(3, 174, 249);
+    border: 0.05rem solid rgb(3, 174, 249);
     margin-bottom: -0.2rem;
   }
 

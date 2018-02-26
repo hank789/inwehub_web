@@ -148,7 +148,7 @@
     text-align: center;
     line-height: 3rem;
     font-weight: 500;
-    border: 1.0.5rem solid #c2cddc;
+    border: 0.15rem solid #c2cddc;
     top: 2rem;
   }
 

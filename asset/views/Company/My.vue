@@ -298,7 +298,7 @@
   .avatar {
     position: absolute;
     left: 50%;
-    margin-left: -34.0.5rem;
+    margin-left: -3.45rem;
 
     z-index: 9;
     color: #ffffff;

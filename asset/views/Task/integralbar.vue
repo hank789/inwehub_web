@@ -128,7 +128,7 @@
     height: 23.8rem;
     background: #f3f4f6;
     margin-top: 1.1rem;
-    border: 0.0.5rem solid #dcdcdc;
+    border: 0.05rem solid #dcdcdc;
     border-radius: 0.5rem;
     padding: 1.2rem 1.5rem;
   }

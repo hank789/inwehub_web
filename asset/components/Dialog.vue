@@ -615,7 +615,7 @@
   .upgrade_t {
     width: 100%;
     height: 6.5rem;
-    border-bottom: 0.0.5rem dashed #DCDCDC;
+    border-bottom: 0.05rem dashed #DCDCDC;
   }
 
   .upgrade_t p:nth-of-type(1) {
@@ -658,7 +658,7 @@
     /*height: 9.5rem;*/
     overflow: hidden;
     text-align: center;
-    border-bottom: 0.0.5rem solid #DCDCDC;
+    border-bottom: 0.05rem solid #DCDCDC;
   }
 
   .upgrade_b > p {
@@ -731,7 +731,7 @@
     width: 100%;
     height: 7.7rem;
     text-align: center;
-    border-bottom: 0.0.5rem solid #DCDCDC;
+    border-bottom: 0.05rem solid #DCDCDC;
     padding-top: 1.7rem;
   }
 
@@ -781,7 +781,7 @@
     font-size: 1.4rem;
     color: #808080;
     text-align: center;
-    margin-top: 7.0.5rem;
+    margin-top: 0.75rem;
   }
 
   .perfectCard-t p:nth-child(2) i {
@@ -917,7 +917,7 @@
     font-size: 1.4rem;
     color: #808080;
     text-align: center;
-    margin-top: 7.0.5rem;
+    margin-top: 0.75rem;
   }
 
   .expertapplication-t p:nth-child(2) i {
@@ -1028,7 +1028,7 @@
   .hotAnswer_d {
     width: 100%;
     height: 3.2rem;
-    margin-top: 4.0.5rem;
+    margin-top: 0.45rem;
   }
 
   .hotAnswer_d p {
@@ -1208,7 +1208,7 @@
   }
   .signIn_m li{
     width:25%;
-    height:75.0.4rem;
+    height:7.54rem;
     text-align: center;
     float: left;
     text-align: center;
@@ -1224,7 +1224,7 @@
     height:5.1rem;
     background:#c8c8c8;
     border-radius: 50%;
-    border:1.0.5rem solid #d8d8d8;
+    border:0.15rem solid #d8d8d8;
     text-align: center;
     line-height: 5.1rem;
     font-size:1.4rem;
@@ -1247,7 +1247,7 @@
   }
   .signIn_m li p.click-signIn{
     background:rgb(252,200,22);
-    border:1.0.5rem solid #444444;
+    border:0.15rem solid #444444;
   }
   .signIn_m li p.click-signIn span{
     display: inline-block;
@@ -1531,7 +1531,7 @@
   .my-cash i{
     position: absolute;
     width: 100%;
-    height:1.0.5rem;
+    height:0.15rem;
     background: #808080;
     left:0;
     right:0;
@@ -1602,7 +1602,7 @@
     line-height: 4.3rem;
     font-size: 1.6rem;
     color: #03aef9;
-    border-top:0.0.5rem solid #dcdcdc;
+    border-top:0.05rem solid #dcdcdc;
   }
   /*抽奖弹窗*/
   .luckDraw{

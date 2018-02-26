@@ -253,9 +253,9 @@
     display: block;
     position: absolute;
     width: 3rem;
-    height: 1.0.8rem;
+    height: 0.18rem;
     left: 71%;
-    bottom: 0.0.5rem;
+    bottom: 0.05rem;
     background: #03aef9;
   }
 
@@ -427,7 +427,7 @@
     background: #FFFFFF;
     border-radius: 5rem;
     position: fixed;
-    bottom: 20.0.5rem;
+    bottom: 2.05rem;
     right:1.5rem;
     z-index: 999;
   }
@@ -437,7 +437,7 @@
     font-size:1.4rem;
     color: #444444;
     line-height:1.5rem;
-    margin-top: 10.0.5rem;
+    margin-top: 1.05rem;
     margin-left: 1.9rem;
   }
   .cooperation p:nth-of-type(2){

@@ -273,7 +273,7 @@
   .down-title i{
     display: block;
     width: 85%;
-    height: 0.0.5rem;
+    height: 0.05rem;
     background: #dcdcdc;
     position: absolute;
     left: 3.7rem;

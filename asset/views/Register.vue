@@ -673,7 +673,7 @@
     color: #3c95f9;
     position: absolute;
     right: 0.2rem;
-    top: 4.0.2rem;
+    top: 0.42rem;
     border: 0.1rem solid #3c95f9;
     border-radius: 0.5rem;
     padding: 0.3rem 1.4rem;

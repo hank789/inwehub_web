@@ -245,7 +245,7 @@
           &:nth-child(1) {
             display: inline-block;
             max-width: 18rem;
-            height: 22.0.5rem;
+            height: 2.25rem;
             font-family: "PingFangSC";
             font-size: 1.6rem;
             color: #444444;
@@ -309,9 +309,9 @@
 
       }
       &:nth-child(3) {
-        margin-top: 15.0.5rem;
+        margin-top: 1.55rem;
         width: 100%;
-        height: 16.0.5rem;
+        height: 1.65rem;
         font-family: "PingFangSC";
         font-size: 1.2rem;
         color: #b4b4b6;

@@ -155,7 +155,7 @@
     font-size: 1.8rem;
     color: #ffffff;
     position: absolute;
-    top: 291.0.5rem;
+    top: 29.15rem;
     left: 0;
     right: 0;
     margin: auto;

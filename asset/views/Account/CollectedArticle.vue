@@ -121,9 +121,9 @@
     display: block;
     position: absolute;
     width: 2.7rem;
-    height: 1.0.5rem;
+    height: 0.15rem;
     left: 42.5%;
-    bottom: 0.0.5rem;
+    bottom: 0.05rem;
     background: #3c95f9;
   }
 

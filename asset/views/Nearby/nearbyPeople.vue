@@ -262,7 +262,7 @@
     line-height: 2.7rem;
     font-size:1.4rem;
     color: #ffffff;
-    margin-top: 18.0.5rem;
+    margin-top: 1.85rem;
     float: right;
 
   }

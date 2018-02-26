@@ -679,7 +679,7 @@
     border-radius: 0.5rem;
     position: relative;
     z-index: 5;
-    top: 3.0.5rem;
+    top: 0.35rem;
     left: 0.5rem;
   }
 
@@ -857,7 +857,7 @@
   #home-card span:nth-of-type(1) svg {
     font-size: 2rem;
     color: #03aef9;
-    margin-bottom: 2.0.5rem;
+    margin-bottom: 0.25rem;
     margin-left: -0.3rem;
   }
 
@@ -871,7 +871,7 @@
     width: 70%;
     height: 2.4rem;
     border-radius: 5rem;
-    border: 0.0.5rem solid #03aef9;
+    border: 0.05rem solid #03aef9;
     margin-left: 15%;
     margin-top: 0.6rem;
     font-family: "PingFangSC";
@@ -895,7 +895,7 @@
   /*查看更多专家样式*/
 
   .moreExperts {
-    width: 118.33.3rem;
+    width: 11.83rem;
     margin-right: 1rem;
     margin-top: 1.1rem;
     height: 14.8rem;
@@ -1083,7 +1083,7 @@
   .hotAnswer_d {
     width: 100%;
     height: 3.2rem;
-    margin-top: 4.0.5rem;
+    margin-top: 0.45rem;
   }
 
   .hotAnswer_d p {
@@ -1120,7 +1120,7 @@
 
   .hotAnswer_d p:nth-child(2) span:nth-child(1) {
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     text-align: center;
@@ -1130,7 +1130,7 @@
 
   .hotAnswer_d p:nth-child(2) span:nth-child(2) {
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     border-right: 0.1rem solid #c8c8c8;
@@ -1141,7 +1141,7 @@
 
   .hotAnswer_d p:nth-child(2) span:nth-child(3) {
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     text-align: center;
@@ -1241,7 +1241,7 @@
   .home-laud > svg {
     font-size: 1.7rem;
     color: #b4b4b6;
-    margin-bottom: 1.0.5rem;
+    margin-bottom: 0.15rem;
   }
 
   .home-laud > i {

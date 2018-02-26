@@ -279,7 +279,7 @@
 <style scoped>
   .projectPreviewCard {
     background: #b4b4b6;
-    height: 196.0.5rem;
+    height: 19.65rem;
     text-align: center;
     color: #fff;
   }
@@ -302,12 +302,12 @@
     position: absolute;
     left: 50%;
     margin-top: 1.3rem;
-    margin-left: -36.0.5rem;
+    margin-left: -3.65rem;
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 73.0.5rem;
-    width: 73.0.5rem;
+    height: 7.35rem;
+    width: 7.35rem;
     font-size: 2rem;
     text-align: center;
     border-radius: 50%;

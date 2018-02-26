@@ -523,7 +523,7 @@
     right: 1.5rem;
     bottom: 0;
     left: 1.5rem;
-    height: 0.0.6rem;
+    height: 0.06rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);

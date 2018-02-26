@@ -11,7 +11,7 @@
                    style="height:4.8rem; margin-top: 2rem; margin-left: 1.7rem"/>
               <div style="width: 100%; height:18.3rem;  position: relative;">
                 <img id="shareAvatar" :src="inviterAvatar"
-                     style="width:137.0.5rem; height: 137.0.5rem; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 0.2rem solid #DBDCDB;">
+                     style="width:13.75rem; height: 13.75rem; border-radius: 50%; position: absolute; left: 0; right:0; top: 0; bottom: 0; margin: auto; border: 0.2rem solid #DBDCDB;">
               </div>
               <div
                 style="width:92%; height:14.4rem; margin-left: 4%; background:#fcc816; border-radius:1.4rem; position: relative; padding-top:4rem">

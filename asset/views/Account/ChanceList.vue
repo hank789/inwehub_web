@@ -249,9 +249,9 @@
     display: block;
     position: absolute;
     width: 3rem;
-    height: 1.0.8rem;
+    height: 0.18rem;
     left: 71%;
-    bottom: 0.0.5rem;
+    bottom: 0.05rem;
     background: #03aef9;
   }
 

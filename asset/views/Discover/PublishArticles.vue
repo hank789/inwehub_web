@@ -305,7 +305,7 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-    padding-top: 17.0.5rem;
+    padding-top: 1.75rem;
   }
 
   .concreteContent li {

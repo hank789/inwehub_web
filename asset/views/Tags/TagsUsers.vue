@@ -149,7 +149,7 @@
   .menu span:nth-of-type(3) i{
     position:absolute;
     width:2.7rem;
-    height:1.0.5rem;
+    height:0.15rem;
     border-radius: 5rem;
     background:#03aef9;
     top: 2.8rem;
@@ -258,7 +258,7 @@
     line-height: 2.5rem;
     font-size:1.4rem;
     color: #03aef9;
-    margin-top: 18.0.5rem;
+    margin-top: 1.85rem;
     float: right;
 
   }

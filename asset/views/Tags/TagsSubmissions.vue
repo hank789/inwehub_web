@@ -324,7 +324,7 @@
   .menu span:nth-of-type(2) i{
     position:absolute;
     width:2.7rem;
-    height:1.0.5rem;
+    height:0.15rem;
     border-radius: 5rem;
     background:#03aef9;
     top: 2.8rem;

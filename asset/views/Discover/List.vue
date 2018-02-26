@@ -395,9 +395,9 @@
   }
   .container-item .title{
     width:100%;
-    height:42.0.5rem;
+    height:4.25rem;
     padding: 0 4%;
-    line-height: 42.0.5rem;
+    line-height: 4.25rem;
   }
   .container-item .title p:nth-of-type(1){
     float: left;

@@ -329,7 +329,7 @@
   .askWrapper .askPlus .askImgBg {
     position: absolute;
     left: 50%;
-    margin-left: -26.0.5rem;
+    margin-left: -2.65rem;
     width: 5.3rem;
     height: 5.3rem;
     background: #f3f4f6;

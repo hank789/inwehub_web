@@ -282,7 +282,7 @@
     line-height: 2.5rem;
     border-radius: 5rem;
     position: absolute;
-    bottom: 9.0.5rem;
+    bottom: 0.95rem;
     right: 4%;
   }
   ul li .grey{

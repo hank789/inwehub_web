@@ -223,7 +223,7 @@
   .menu span:nth-of-type(1) i{
     position:absolute;
     width:4.2rem;
-    height:1.0.5rem;
+    height:0.15rem;
     border-radius: 5rem;
     background:#03aef9;
     top: 2.8rem;
@@ -249,12 +249,12 @@
   .See{
     position: absolute;
     right: 0;
-    top:20.0.5rem;
+    top:2.05rem;
     display: inline-block;
     font-size: 1.4rem;
     color: #ffffff;
     border-radius: 5rem 0 0 5rem;
-    padding: 3.0.5rem 0.7rem 3.0.5rem 0.8rem;
+    padding: 0.35rem 0.7rem 0.35rem 0.8rem;
     background: -webkit-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Firefox 3.6 - 15 */
@@ -262,9 +262,9 @@
   }
   .ranking-content{
     width:100%;
-    height:175.0.5rem;
+    height:17.55rem;
     position: absolute;
-    top:68.0.5rem;
+    top:6.85rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -282,16 +282,16 @@
     box-shadow: 0rem 0.2rem 0.4rem #ececee;
   }
   .ranking-content li:nth-of-type(2){
-    height:175.0.5rem;
+    height:17.55rem;
     margin: 0 2.5%;
     margin-top: 0;
   }
   .ranking-content li .avatar-container{
-    margin:10.0.5rem 0 0.6rem 0;
+    margin:1.05rem 0 0.6rem 0;
     position: relative;
   }
   .ranking-content li:nth-of-type(2) .avatar-container{
-    margin:15.0.5rem 0 0.6rem 0;
+    margin:1.55rem 0 0.6rem 0;
   }
   .ranking-content li .avatar-container .avatar{
     width:5rem;
@@ -427,7 +427,7 @@
     line-height: 2.5rem;
     font-size:1.4rem;
     color: #03aef9;
-    margin-top: 18.0.5rem;
+    margin-top: 1.85rem;
     float: right;
 
   }

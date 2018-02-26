@@ -224,7 +224,7 @@
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(2) {
-    margin-top: 0.0.5rem;
+    margin-top: 0.05rem;
   }
 
   .suspend a {
@@ -237,7 +237,7 @@
     line-height: 3rem;
     color: #FFFFFF;
     margin-top: 1.2rem;
-    margin-right: 10.0.5rem;
+    margin-right: 1.05rem;
   }
 
   /*微信端*/

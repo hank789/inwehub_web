@@ -90,7 +90,7 @@
     position: relative;
     font-size:1rem;
     color:#03aef9;
-    left: -1.0.2rem;
+    left: -0.12rem;
     text-align: center;
   }
 

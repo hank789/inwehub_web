@@ -372,7 +372,7 @@
     width: 9rem;
     height: 9rem;
     border-radius: 50%;
-    border:4.0.5rem solid #767a80;
+    border:0.45rem solid #767a80;
     opacity: 0.2;
     position: absolute;
     top: 0;
@@ -629,7 +629,7 @@
     /*width: 35%;*/
     padding:0 1rem;
     height: 3rem;
-    border: 0.0.5rem solid #808080;
+    border: 0.05rem solid #808080;
     border-radius: 0.5rem;
     font-size: 1.4rem;
     color: #ffffff;

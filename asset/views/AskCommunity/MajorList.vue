@@ -227,7 +227,7 @@
     background: #fa4975;
     text-align: center;
     line-height:1.6rem;
-    top: 2.0.5rem;
+    top: 0.25rem;
     left: -2.4rem;
   }
   .recommendlist p:nth-of-type(2) i:after {
@@ -302,7 +302,7 @@
     width:3.3rem;
     height:3.3rem;
     border-radius: 50%;
-    margin-top: 5.0.5rem;
+    margin-top: 0.55rem;
     float: left;
   }
   .avatar p:nth-of-type(1) svg{

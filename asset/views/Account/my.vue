@@ -346,7 +346,7 @@
   }
   .professor .avatar {
     width: 6.9rem;
-    height: 68.0.5rem;
+    height: 6.85rem;
     border-radius: 50%;
     margin-top: 2.5rem;
 
@@ -372,7 +372,7 @@
     font-size: 1.8rem;
     font-weight: 600;
     color: #444444;
-    margin-right: 1.0.5rem;
+    margin-right: 0.15rem;
     margin-bottom: -0.4rem;
   }
 

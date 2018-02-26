@@ -421,10 +421,10 @@
   .menu span  i{
     position:absolute;
     width:2.8rem;
-    height:1.0.5rem;
+    height:0.15rem;
     border-radius: 5rem;
     background:#03aef9;
-    top: 28.0.4rem;
+    top: 2.84rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -471,11 +471,11 @@
     margin-bottom:1rem;
   }
   .component-iconNumber{
-    margin-left: 7.0.5rem;
+    margin-left: 0.75rem;
   }
 
   .feedWrapper .iconPenglunWrapper {
-    margin: 0 7.0.5rem;
+    margin: 0 0.75rem;
   }
   .labelWrapper{
     text-align: right;

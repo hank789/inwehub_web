@@ -335,7 +335,7 @@
   .notice{
     width:100%;
     height:4.4rem;
-    margin-top: 7.0.5rem;
+    margin-top: 0.75rem;
     padding: 0 1.6rem;
   }
   .notice p:nth-of-type(1){
@@ -355,7 +355,7 @@
     height:1.5rem;
     float: right;
 
-    margin-top: 14.0.5rem;
+    margin-top: 1.45rem;
 
   }
   .notice p:nth-of-type(1) span{

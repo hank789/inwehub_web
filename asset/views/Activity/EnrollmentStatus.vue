@@ -256,7 +256,7 @@
     height: 5.7rem;
     /*background: #CCCCCC;*/
     margin-top: 0.8rem;
-    border-bottom: 0.0.5rem solid #DCDCDC;
+    border-bottom: 0.05rem solid #DCDCDC;
   }
 
   .enroll-text p:nth-of-type(1) {
@@ -330,7 +330,7 @@
     width: 100%;
     height: 4.2rem;
     border-radius: 0.5rem;
-    border: 0.0.5rem solid #DCDCDC;
+    border: 0.05rem solid #DCDCDC;
   }
 
   .feedback input {
@@ -381,7 +381,7 @@
   .message li {
     margin-top: 1rem;
     overflow: hidden;
-    border-bottom: 0.0.5rem solid #DCDCDC;
+    border-bottom: 0.05rem solid #DCDCDC;
   }
 
   .message p:nth-of-type(1) {

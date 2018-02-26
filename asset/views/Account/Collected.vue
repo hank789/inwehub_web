@@ -128,9 +128,9 @@
     display: block;
     position: absolute;
     width: 2.7rem;
-    height: 1.0.5rem;
+    height: 0.15rem;
     left: 42%;
-    bottom: 0.0.5rem;
+    bottom: 0.05rem;
     background: #3c95f9;
   }
 
@@ -195,7 +195,7 @@
   .hotAnswer_d p:nth-child(2) {
     width: 32%;
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     margin-left:1rem;
@@ -205,7 +205,7 @@
   .hotAnswer_d p:nth-child(3) {
     width: 21%;
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     border-right: 0.1rem solid #c8c8c8;
@@ -216,7 +216,7 @@
   .hotAnswer_d p:nth-child(4) {
     width: 37.5%;
     height: 1.5rem;
-    margin-top: 8.0.5rem;
+    margin-top: 0.85rem;
     font-size: 1.3rem;
     color: #808080;
     text-align: center;

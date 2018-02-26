@@ -525,7 +525,7 @@
     border-radius: 0.9rem;
     border:0.1rem solid #c8c8c8;
     float: left;
-    margin-top: 1.0.3rem;
+    margin-top: 0.13rem;
     margin-right: 0.6rem;
     position: relative;
   }

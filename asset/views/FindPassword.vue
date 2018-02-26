@@ -407,7 +407,7 @@
     color: #444;
     position: absolute;
     right: 0.2rem;
-    top: 4.0.5rem;
+    top: 0.45rem;
     border: 0.1rem solid #dcdcdc;
     border-radius: 0.5rem;
     padding: 0.3rem 1.4rem;

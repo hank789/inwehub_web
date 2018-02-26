@@ -467,13 +467,13 @@
 
   .container-bottom-menus{
     position: absolute;
-    padding-left: 7.0.5rem;
+    padding-left: 0.75rem;
     left:0;
   }
   .container-bottom-menus span{
     display: block;
     float: left;
-    padding: 0 7.0.5rem;
+    padding: 0 0.75rem;
     font-size: 1.9rem;
     color: grey;
   }

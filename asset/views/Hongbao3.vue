@@ -124,7 +124,7 @@
   .my-cash i{
     position: absolute;
     width: 100%;
-    height:1.0.5rem;
+    height:0.15rem;
     background: #808080;
     left:0;
     right:0;

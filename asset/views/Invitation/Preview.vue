@@ -122,7 +122,7 @@
   /*　邀请成功的信息部分*/
   .invitation-information {
     width: 100%;
-    height: 88.0.5rem;
+    height: 8.85rem;
     /*border: 0.1rem solid #cccccc;*/
     background: #FFFFFF;
     margin-top: 0.5rem;
@@ -235,7 +235,7 @@
 
   /*邀请说明*/
   .invitationNote {
-    margin-top: 20.0.5rem;
+    margin-top: 2.05rem;
     margin-bottom: 8rem;
     text-align: center;
     overflow: hidden;
