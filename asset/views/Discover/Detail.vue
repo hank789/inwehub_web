@@ -342,33 +342,33 @@
   }
 
   .contentWrapper{
-    padding:0 15px;
+    padding:0 1.5rem;
     white-space:pre-line !important;
-    font-size:15px;
+    font-size:1.5rem;
     color:#444;
   }
   .contentWrapper .tags{
     color:rgb(33,77,120);
-    margin-right: 6px;
+    margin-right: 0.6rem;
   }
   .newestList{
-    padding:10px 15px 0;
+    padding:1rem 1.5rem 0;
     background: #fff;
   }
 
   .linkWrapper {
-    padding:10px 15px;
+    padding:1rem 1.5rem;
   }
 
   .timeContainer {
     width: 100%;
-    font-size: 12px;
-    padding:0 15px;
+    font-size: 1.2rem;
+    padding:0 1.5rem;
     background: #fff;
   }
 
   .timeContainer svg {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #b4b4b6;
   }
 
@@ -389,19 +389,19 @@
   }
 
   .statisticsWrapper{
-    padding:0 15px 15px;
+    padding:0 1.5rem 1.5rem;
   }
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    padding: 0 15px 30px 15px;
+    padding: 0 1.5rem 3rem 1.5rem;
   }
   .component-dianzanList span{
-    font-size:13px;
+    font-size:1.3rem;
     color:#03aef9;
   }
   .contentWrapper span{
-    font-size: 15px;
+    font-size: 1.5rem;
   }
   .Column{
     width: 100%;
@@ -409,25 +409,25 @@
   }
   .Column .discover_img{
     width:100%;
-    border-radius: 4px;
-    margin-bottom: 5px;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
   }
   .Column img:nth-last-child(1){
     margin-bottom: 0;
   }
   /*删除按钮*/
   .discover_datail_dalete{
-    width:57px;
-    height:19px;
-    border:1px solid #444444;
+    width:5.7rem;
+    height:1.9rem;
+    border:0.1rem solid #444444;
     text-align: center;
-    line-height: 17px;
-    font-size:13px;
+    line-height: 1.7rem;
+    font-size:1.3rem;
     color: #444444;
-    border-radius: 50px;
+    border-radius: 5rem;
     position: absolute;
-    right:16px;
-    top: 16px;
+    right:1.6rem;
+    top: 1.6rem;
   }
 </style>
 

@@ -192,17 +192,17 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .indexHeader {
     background-color: #f3f4f6;
-    padding: 10px 15px;
+    padding: 1rem 1.5rem;
 
     .searchWrapper {
 
       input {
-        height: 34px;
-        font-size: 14px;
-        border-radius: 50px;
+        height: 3.4rem;
+        font-size: 1.4rem;
+        border-radius: 5rem;
         background: #fff;
-        border: 1px solid #dcdcdc;
-        margin-bottom: 5px;
+        border: 0.1rem solid #dcdcdc;
+        margin-bottom: 0.5rem;
 
         &::placeholder {
           color: #c8c8c8;
@@ -211,7 +211,7 @@
     }
 
     .notFound {
-      font-size: 13px;
+      font-size: 1.3rem;
       color: #808080;
 
       span {
@@ -222,10 +222,10 @@
 
   .indexTitle {
     background: #ececee;
-    font-size: 13px;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 15px;
+    font-size: 1.3rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1.5rem;
     color: #808080;
   }
 

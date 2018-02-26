@@ -88,20 +88,20 @@
     width: 100%;
     background: #444;
     color: #fff;
-    padding: 20px;
+    padding: 2rem;
     z-index: 999;
-    font-size: 13px;
+    font-size: 1.3rem;
   }
 
   .message:after {
-    bottom: 10px;
-    border-radius: 1px;
+    bottom: 1rem;
+    border-radius: 0.1rem;
     left: 50%;
-    margin-left: -17px;
+    margin-left: -1.7rem;
     position: absolute;
     content: ' ';
-    width: 34px;
-    height: 2px;
+    width: 3.4rem;
+    height: 0.2rem;
     background: #d8d8d8;
   }
 

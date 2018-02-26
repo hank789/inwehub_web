@@ -151,7 +151,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -166,14 +166,14 @@
   }
   .notice li{
     width:100%;
-    height:44px;
-    line-height: 44px;
-    font-size: 14px;
+    height:4.4rem;
+    line-height: 4.4rem;
+    font-size: 1.4rem;
     color: #444444;
     position: relative;
   }
   .vue-switcher {
     float: right;
-    top: 17px;
+    top: 1.7rem;
   }
 </style>

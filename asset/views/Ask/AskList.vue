@@ -269,12 +269,12 @@
 <style scoped>
 
   .list-ask {
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 16px;
+    line-height: 5rem;
+    font-size: 1.6rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -284,12 +284,12 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 50px;
-    right: 10px;
+    width: 5rem;
+    right: 1rem;
     bottom: 0;
     left: 50%;
-    margin-left: -25px;
-    height: 5px;
+    margin-left: -2.5rem;
+    height: 0.5rem;
     z-index: 999;
     content: '';
     -webkit-transform: scaleY(.5);
@@ -302,26 +302,26 @@
 
   .list-ask .list-ask-item {
     position: relative;
-    line-height: 40px;
+    line-height: 4rem;
   }
 
   .list-ask .list-ask-item .title {
-    line-height: 28px;
+    line-height: 2.8rem;
   }
 
   .list-ask .list-ask-item .mui-media-body {
-    padding-left: 10px;
-    line-height: 24px;
-    margin: 5px 0 0;
+    padding-left: 1rem;
+    line-height: 2.4rem;
+    margin: 0.5rem 0 0;
     color: #9B9B9B;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .list-ask .list-ask-item .time {
     color: #9B9B9B;
-    font-size: 12px;
+    font-size: 1.2rem;
     float: right;
-    margin-right: 10px;
+    margin-right: 1rem;
   }
 
   .list-ask .username {
@@ -330,9 +330,9 @@
 
   .list-ask .list-ask-item .amount {
     position: absolute;
-    right: 10px;
+    right: 1rem;
     color: #ff9800;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .list-ask .list-ask-item .amount b {
@@ -344,13 +344,13 @@
   }
 
   .list-ask .site-desc {
-    padding-left: 10px;
-    line-height: 22px;
+    padding-left: 1rem;
+    line-height: 2.2rem;
     color: #101010;
   }
 
   .list-ask .site-desc .mui-icon {
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .list-ask .avatar {
@@ -358,10 +358,10 @@
     color: #ffffff;
     float: left;
     display: inline-block;
-    margin-top: 3px;
-    height: 50px;
-    width: 50px;
-    font-size: 20px;
+    margin-top: 0.3rem;
+    height: 5rem;
+    width: 5rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -391,28 +391,28 @@
   }
 
   .list-ask .mui-table-view-cell {
-    padding: 11px 8px;
+    padding: 1.1rem 0.8rem;
   }
 
   .list-ask .mui-table-view-cell > a:not(.mui-btn) {
-    margin: -11px -8px;
+    margin: -1.1rem -0.8rem;
   }
 
   .list-ask p {
-    margin-left: 20px;
+    margin-left: 2rem;
   }
 
   .buttons {
-    margin-top: 10px;
-    padding: 0 30px;
+    margin-top: 1rem;
+    padding: 0 3rem;
   }
 
   .mui-control-content {
     position: absolute;
     width: 100%;
-    bottom: 0px;
-    right: 0px;
-    top: 88px;
+    bottom: 0rem;
+    right: 0rem;
+    top: 8.8rem;
   }
 
   .menu {
@@ -425,8 +425,8 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 14px;
+    line-height: 5rem;
+    font-size: 1.4rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -437,11 +437,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 28px;
+    width: 2.8rem;
     bottom: 0;
     left: 50%;
-    margin-left: -14px;
-    height: 2px;
+    margin-left: -1.4rem;
+    height: 0.2rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -466,15 +466,15 @@
   .label {
     display: inline-block;
     background: #fcc816;
-    border-radius: 50px;
+    border-radius: 5rem;
     color: #fff;
-    line-height: 20px;
-    padding: 0 9px;
+    line-height: 2rem;
+    padding: 0 0.9rem;
   }
 
   .mui-table-view-cell:after {
-    height: 1px !important;
-    left: 15px;
-    right: 15px;
+    height: 0.1rem !important;
+    left: 1.5rem;
+    right: 1.5rem;
   }
 </style>

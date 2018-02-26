@@ -99,22 +99,22 @@
       },
       // 警告框
       warn () {
-        var title = '<p style="font-size:16px; color: ##444444; margin-bottom:15px">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: rgb(68,68,68); margin: 0;">' +
+        var title = '<p style="font-size:1.6rem; color: ##444444; margin-bottom:1.5rem">' + '获取收益说明' + '</p>'
+        var font = '<p style="text-align: left; font-size:1.4rem; color: rgb(68,68,68); margin: 0;">' +
           '支付（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0; ">' +
+          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0; ">' +
           '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
-          '<p style="text-align: left; font-size:14px; rgb(68,68,68); margin: 0;">' +
+          '<p style="text-align: left; font-size:1.4rem; rgb(68,68,68); margin: 0;">' +
           '支付（企业）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0;">' +
+          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0;">' +
           '服务购买 项目结款 实施费用 咨询费用 合作费用' + '</p>' +
-          '<p style="text-align: left; font-size:14px; rgb(68,68,68); margin-top: 20px; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:1.4rem; rgb(68,68,68); margin-top: 2rem; margin-bottom: 0">' +
           '收益（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin: 0;">' +
+          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0;">' +
           '解答收益 围观收益 服务收益 项目收益 实施收益 咨询收益 合作收益 任务收益' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin-top: 20px; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin-top: 2rem; margin-bottom: 0">' +
           '*个人分成奖励累积超过5万元，平台可能会代征缴个税，5万元以下请自行主动申报' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color:rgb(128,128,128); margin-top: 20px; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin-top: 2rem; margin-bottom: 0">' +
           '*为相应配合国家税务总局，平台会根据相关部分要求，向其提供个人收益分红记录。' + '</p>'
 
         // var btnArray = ['取消', '确认'];
@@ -168,7 +168,7 @@
 
   .Invitation_t {
     width: 100%;
-    /*height:322px;*/
+    /*height:32.2rem;*/
     background: #FFFFFF url("../../statics/images/invitation-bg@2x.png") no-repeat;
     background-size: 100% 90%;
     position: relative;
@@ -176,9 +176,9 @@
 
   .Invitation_img {
     width: 95%;
-    /*height:270px;*/
+    /*height:27rem;*/
     position: absolute;
-    bottom: 0px;
+    bottom: 0rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -192,63 +192,63 @@
 
   @keyframes mymove {
     0% {
-      bottom: 0px;
+      bottom: 0rem;
     }
     50% {
-      bottom: 5px;
+      bottom: 0.5rem;
     }
     100% {
-      bottom: 0px;
+      bottom: 0rem;
     }
   }
 
   @-moz-keyframes mymove /* Firefox */
   {
     0% {
-      bottom: 0px;
+      bottom: 0rem;
     }
     50% {
-      bottom: 5px;
+      bottom: 0.5rem;
     }
     100% {
-      bottom: 0px;
+      bottom: 0rem;
     }
   }
 
   @-webkit-keyframes mymove /* Safari and Chrome */
   {
     0% {
-      bottom: 0px;
+      bottom: 0rem;
     }
     50% {
-      bottom: 5px;
+      bottom: 0.5rem;
     }
     100% {
-      bottom: 0px;
+      bottom: 0rem;
     }
   }
 
   @-o-keyframes mymove /* Opera */
   {
     0% {
-      bottom: 0px;
+      bottom: 0rem;
     }
     50% {
-      bottom: 5px;
+      bottom: 0.5rem;
     }
     100% {
-      bottom: 0px;
+      bottom: 0rem;
     }
   }
 
   /*　邀请成功的信息部分*/
   .invitation-information {
     width: 100%;
-    height: 88.5px;
-    /*border: 1px solid #cccccc;*/
+    height: 88.0.5rem;
+    /*border: 0.1rem solid #cccccc;*/
     background: #FFFFFF;
-    margin:10px 0;
-    padding: 0px 25px;
+    margin:1rem 0;
+    padding: 0rem 2.5rem;
   }
 
   .invitation-information li:nth-of-type(1) {
@@ -270,20 +270,20 @@
   }
 
   .invitation-information li p:nth-of-type(1) {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #444444;
-    margin-top: 22px;
+    margin-top: 2.2rem;
     text-align: center;
   }
 
   .invitation-information li p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     text-align: center;
   }
 
   .invitation-information li span {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #FFFFFF;
     position: absolute;
     right: 0;
@@ -296,53 +296,53 @@
 
   .contactFriends {
     width: 95%;
-    height: 224px;
-    border: 1px solid #b4b4b6;
-    border-radius: 4px;
+    height: 22.4rem;
+    border: 0.1rem solid #b4b4b6;
+    border-radius: 0.4rem;
     margin-left: 2.5%;
-    margin-top: 40px;
+    margin-top: 4rem;
     position: relative;
   }
 
   .contactFriends span {
     display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
 
   }
 
   .contactFriends span:nth-of-type(1) {
     color: #444444;
-    margin-top: 35px;
+    margin-top: 3.5rem;
 
   }
 
   .contactFriends span:nth-of-type(2) {
     color: #03aef9;
-    margin-top: 4px;
+    margin-top: 0.4rem;
   }
   .contactFriends span:nth-of-type(3) {
     color: #444444;
-    margin-top: 14px;
+    margin-top: 1.4rem;
   }
   .contactFriends span:nth-of-type(5) {
     color: #808080;
-    margin-top: 4px;
-    margin-bottom: 12px;
+    margin-top: 0.4rem;
+    margin-bottom: 1.2rem;
   }
   .contactFriends span:nth-of-type(5) i{
     font-style: normal;
     color: #03aef9;
   }
   .contactFriends .luckDraw{
-    width:62px;
-    height:27px;
+    width:6.2rem;
+    height:2.7rem;
     background: #dcdcdc;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 27px;
+    line-height: 2.7rem;
     margin: 0 auto;
-    font-size:14px;
+    font-size:1.4rem;
     color: #b4b4b6;
   }
   .luckDraw.red{
@@ -351,9 +351,9 @@
   }
   .contactBtn {
     position: absolute;
-    width: 150px;
-    height: 53px;
-    top: -30px;
+    width: 15rem;
+    height: 5.3rem;
+    top: -3rem;
     left: 0;
     right: 0;
     margin: auto
@@ -365,11 +365,11 @@
     width: 100%;
     height: 100%;
     background: #03aef9;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 53px;
+    line-height: 5.3rem;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 500;
     z-index: 999;
     position: absolute;
@@ -486,53 +486,53 @@
 
 
   .contactBtn img {
-    width: 41px;
-    height: 29px;
+    width: 4.1rem;
+    height: 2.9rem;
     position: absolute;
-    left: -15px;
-    top: 23px;
+    left: -1.5rem;
+    top: 2.3rem;
   }
 
   /*邀请说明*/
   .invitationNote {
-    margin-top: 20.5px;
-    margin-bottom: 80px;
+    margin-top: 20.0.5rem;
+    margin-bottom: 8rem;
     text-align: center;
     overflow: hidden;
   }
 
   .invitationNote p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #444444;
 
   }
 
   .invitationNote p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
 
   }
 
   .invitationNote p:nth-of-type(3) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
-    margin-top: 23px;
+    margin-top: 2.3rem;
 
   }
 
   .invitationNote p:nth-of-type(3) u {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: rgb(68, 68, 68);
   }
 
   /* 适配*/
-  @media (min-width: 320px) {
+  @media (min-width: 32rem) {
     .Invitation_img {
-      height: 240px;
+      height: 24rem;
     }
 
     .Invitation_t {
-      height: 280px;
+      height: 28rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -545,13 +545,13 @@
 
   }
 
-  @media (min-width: 375px) {
+  @media (min-width: 37.5rem) {
     .Invitation_img {
-      height: 280px;
+      height: 28rem;
     }
 
     .Invitation_t {
-      height: 320px;
+      height: 32rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -564,13 +564,13 @@
 
   }
 
-  @media (min-width: 414px) {
+  @media (min-width: 41.4rem) {
     .Invitation_img {
-      height: 300px;
+      height: 30rem;
     }
 
     .Invitation_t {
-      height: 350px;
+      height: 35rem;
     }
 
     .invitation-information li:nth-of-type(1) {

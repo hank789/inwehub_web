@@ -49,6 +49,6 @@
   }
 
   .content {
-    padding: 10px 15px;
+    padding: 1rem 1.5rem;
   }
 </style>

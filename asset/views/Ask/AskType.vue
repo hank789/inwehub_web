@@ -16,7 +16,7 @@
             </template>
           </div>
         </div>
-        <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
+        <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 0.1rem solid #c8c7cc;">
           <div :id="index" class="mui-control-content" :class="{'mui-active':index === 0}"
                v-for="(item, index) in types">
             <div class="emptyChildren mui-table-view" v-if="!item.children.length">
@@ -115,7 +115,7 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
+    line-height: 5rem;
     width: 100%;
   }
 
@@ -124,7 +124,7 @@
   }
 
   .emptyChildren {
-    padding: 30px;
+    padding: 3rem;
     background: #fff;
     text-align: center;
   }

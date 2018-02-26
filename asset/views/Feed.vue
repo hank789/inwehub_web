@@ -393,7 +393,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -401,16 +401,16 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:39px;
+    height:3.9rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:1.4rem;
     color: #444444;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    top: 49px;
+    top: 4.9rem;
   }
   .menu span{
     position:relative;
@@ -420,40 +420,40 @@
   }
   .menu span  i{
     position:absolute;
-    width:28px;
-    height:1.5px;
-    border-radius: 50px;
+    width:2.8rem;
+    height:1.0.5rem;
+    border-radius: 5rem;
     background:#03aef9;
-    top: 28.4px;
+    top: 28.0.4rem;
     left: 0;
     right: 0;
     margin: auto;
   }
   .menu span svg{
-    font-size: 25px;
+    font-size: 2.5rem;
   }
 
   .mui-content{
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 88px;
-    bottom: 50px;
+    top: 8.8rem;
+    bottom: 5rem;
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {
-    top: 42px;
+    top: 4.2rem;
   }
 
   .rightWrapper {
     position: absolute;
-    padding:12px;
-    right: 3px;
+    padding:1.2rem;
+    right: 0.3rem;
     bottom: 0;
   }
 
   .rightWrapper .icon {
-    font-size: 17px;
+    font-size: 1.7rem;
   }
 
   .mui-content {
@@ -461,21 +461,21 @@
   }
 
   .headerWrapper{
-    height:45px;
+    height:4.5rem;
     overflow: hidden;
   }
 </style>
 
 <style>
   .feedWrapper .container-avatarAndText{
-    margin-bottom:10px;
+    margin-bottom:1rem;
   }
   .component-iconNumber{
-    margin-left: 7.5px;
+    margin-left: 7.0.5rem;
   }
 
   .feedWrapper .iconPenglunWrapper {
-    margin: 0 7.5px;
+    margin: 0 7.0.5rem;
   }
   .labelWrapper{
     text-align: right;
@@ -483,45 +483,45 @@
   /*回答者列表*/
   .answer-list{
     width:100%;
-    height:43px;
+    height:4.3rem;
     background:#f3f4f6;
-    border-radius: 4px;
-    line-height: 43px;
-    padding: 0 15px;
-    font-size:13px;
+    border-radius: 0.4rem;
+    line-height: 4.3rem;
+    padding: 0 1.5rem;
+    font-size:1.3rem;
     color: rgb(128,128,128);
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
   .answer-list span{
     color:#03aef9;
   }
   .answer-list span i{
     color: rgb(146,146,146);
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
   .answer-list span:nth-last-of-type(1) i{
     display: none;
   }
   /*标签*/
   .tags{
-    font-size:16px;
+    font-size:1.6rem;
     color:rgb(35,82,128);
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
   /*关注数 点赞的间距*/
   .options{
-    margin-top: 9px;
+    margin-top: 0.9rem;
   }
   /*好评率*/
   .feedWrapper .component-followed-question{
     float: left;
-    font-size:13px;
+    font-size:1.3rem;
     color:#b4b4b6;
   }
   /*关注数*/
   .feedWrapper .blue{
     float: left;
-    font-size:12px;
+    font-size:1.2rem;
     color:#03aef9;
   }
   /*评论了互动问答内容超出两行的样式*/
@@ -533,14 +533,14 @@
     /* word-wrap: break-word; */
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
   /*标签活动*/
   .tag{
     width:100%;
-    height:49px;
+    height:4.9rem;
     background: #f3f4f6;
-    padding: 0 15px;
+    padding: 0 1.5rem;
     position: absolute;
     top:0;
     display: flex;
@@ -550,15 +550,15 @@
   }
   .tag p{
     width:32%;
-    height:39px;
+    height:3.9rem;
     margin-bottom: 0;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     background: #ffffff;
   }
   .tag p img{
     width: 100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
 
 

@@ -176,7 +176,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -185,63 +185,63 @@
   /*提问样式*/
   .recommendlist {
     width: 100%;
-    height: 44px;
+    height: 4.4rem;
     overflow: hidden;
     background: #FFFFFF;
     position: relative;
   }
   .recommendlist p:nth-of-type(1){
-    height:44px;
+    height:4.4rem;
     float: left;
-    line-height: 44px;
-    font-size:16px;
+    line-height: 4.4rem;
+    font-size:1.6rem;
     color: #444444;
     margin-left: 4%;
   }
   .recommendlist p:nth-of-type(2){
-    width:81px;
-    height:34px;
+    width:8.1rem;
+    height:3.4rem;
     margin-right: 4%;
     background:#a8dff7;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     float: right;
-    margin-top: 5px;
-    line-height: 34px;
-    font-size:14px;
+    margin-top: 0.5rem;
+    line-height: 3.4rem;
+    font-size:1.4rem;
     color: #444444;
     text-align: center;
     position: relative;
   }
   .recommendlist p:nth-of-type(2) svg{
-    font-size: 22px;
-    margin-bottom: -4px;
+    font-size: 2.2rem;
+    margin-bottom: -0.4rem;
   }
   .recommendlist p:nth-of-type(2) i{
     position: absolute;
     font-style: normal;
-    width: 30px;
-    height: 17px;
-    font-size: 12px;
+    width: 3rem;
+    height: 1.7rem;
+    font-size: 1.2rem;
     color: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     background: #fa4975;
     text-align: center;
-    line-height:16px;
-    top: 2.5px;
-    left: -24px;
+    line-height:1.6rem;
+    top: 2.0.5rem;
+    left: -2.4rem;
   }
   .recommendlist p:nth-of-type(2) i:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #fa4975;
-    /* border: 1px solid #dcdcdc; */
+    /* border: 0.1rem solid #dcdcdc; */
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -3px;
-    top: 0px;
+    right: -0.3rem;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }
@@ -252,7 +252,7 @@
 }
   .recommend_b {
     width: 100%;
-    /*height: 200px;*/
+    /*height: 20rem;*/
     overflow: hidden;
   }
 
@@ -261,106 +261,106 @@
     overflow: hidden;
     position: relative;
     background: #FFFFFF;
-    margin-bottom: 10px;
-    padding: 12px 0;
+    margin-bottom: 1rem;
+    padding: 1.2rem 0;
   }
   .recommend_b li div{
     width:92%;
     margin-left: 4%;
   }
   .recommend_b li .description{
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
   }
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    margin-top: 12px;
+    margin-top: 1.2rem;
     background:#f3f4f6;
-    padding: 13px 15px 15px;
-    border-radius: 4px;
+    padding: 1.3rem 1.5rem 1.5rem;
+    border-radius: 0.4rem;
   }
   /*.component-dianzanList*/
   .component-dianzanList span{
-    font-size:13px;
+    font-size:1.3rem;
     color:#03aef9;
   }
   .component-dianzanList svg{
-    font-size:17px;
+    font-size:1.7rem;
     color: #808080;
   }
   .avatar{
-    height:44px;
-    margin-top: 15px;
+    height:4.4rem;
+    margin-top: 1.5rem;
   }
    .avatar p:nth-of-type(1){
-    height:44px;
+    height:4.4rem;
     float: left;
     position: relative;
   }
    .avatar p:nth-of-type(1) img{
-    width:33px;
-    height:33px;
+    width:3.3rem;
+    height:3.3rem;
     border-radius: 50%;
-    margin-top: 5.5px;
+    margin-top: 5.0.5rem;
     float: left;
   }
   .avatar p:nth-of-type(1) svg{
     position: absolute;
-    font-size: 14px;
-    bottom: 5px;
-    right: -5px;
+    font-size: 1.4rem;
+    bottom: 0.5rem;
+    right: -0.5rem;
   }
   .avatar p:nth-of-type(2){
     width:88%;
-    height:44px;
+    height:4.4rem;
     float: right;
     background:#03aef9;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 44px;
-    font-size:16px;
+    line-height: 4.4rem;
+    font-size:1.6rem;
     color: #f2f2f2;
   }
   .question_info{
-    height:19px;
+    height:1.9rem;
     /*background: #cccccc;*/
-    margin-top: 12px;
-    line-height:19px;
+    margin-top: 1.2rem;
+    line-height:1.9rem;
   }
   .question_info p:nth-of-type(1){
    float: left;
-    font-size:13px;
+    font-size:1.3rem;
     color: #747474;
   }
   .question_info p:nth-of-type(1) i{
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.1rem;
+    height:1.2rem;
     background: #dbdbdb;
-    margin:0 9px -1px 9px;
+    margin:0 0.9rem -0.1rem 0.9rem;
   }
   .question_info p:nth-of-type(1) span:nth-of-type(1){
     color: #b4b4b6;
   }
   .question_info p:nth-of-type(2){
     float: right;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span{
    float: right;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 22px;
+    margin-left: 2.2rem;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 18px;
-    margin-bottom: -2px;
+    font-size: 1.8rem;
+    margin-bottom: -0.2rem;
   }
 
 
@@ -378,12 +378,12 @@
   }
 
   .list-empty .menu {
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 45px;
-    font-size: 14px;
+    line-height: 4.5rem;
+    font-size: 1.4rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -394,17 +394,17 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 56px;
+    width: 5.6rem;
     bottom: 0;
     left: 50%;
-    margin-left: -28px;
-    height: 2px;
+    margin-left: -2.8rem;
+    height: 0.2rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
   }
   .listWrapper{
-    top:90px;
+    top:9rem;
   }
 
 

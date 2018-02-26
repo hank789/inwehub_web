@@ -114,24 +114,24 @@
 
 <style scoped>
   .form-realAnswer {
-    padding: 0 20px;
+    padding: 0 2rem;
   }
 
   .form-realAnswer textarea {
-    margin-top: 20px;
+    margin-top: 2rem;
     width: 100%;
-    height: 200px;
-    border: 1px solid #efefef;
+    height: 20rem;
+    border: 0.1rem solid #efefef;
   }
 
   .form-realAnswer .title {
-    margin-top: 30px;
-    height: 32px;
+    margin-top: 3rem;
+    height: 3.2rem;
   }
 
   .form-realAnswer .button-wrapper {
-    margin-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .mui-content {
@@ -144,8 +144,8 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 10px;
-    bottom: 30px;
+    right: 1rem;
+    bottom: 3rem;
     color: #999;
   }
 </style>

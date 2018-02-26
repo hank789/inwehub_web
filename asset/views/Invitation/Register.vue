@@ -349,30 +349,30 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height: 602px;
+    height: 60.2rem;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
 
   }
 
   .privilege_T svg {
-    font-size: 77px;
-    margin-left: 16px;
+    font-size: 7.7rem;
+    margin-left: 1.6rem;
   }
 
   /*用户头像部分*/
   .privilege_avatar {
     width: 100%;
-    height: 93px;
+    height: 9.3rem;
     position: relative;
-    top: -25px;
-    /*border:1px solid #000000;*/
+    top: -2.5rem;
+    /*border:0.1rem solid #000000;*/
   }
 
   .outermost {
-    width: 90px;
-    height: 90px;
+    width: 9rem;
+    height: 9rem;
     border-radius: 50%;
-    border:4.5px solid #767a80;
+    border:4.0.5rem solid #767a80;
     opacity: 0.2;
     position: absolute;
     top: 0;
@@ -430,9 +430,9 @@
 
 
   .innermost {
-    width: 80px;
-    height: 80px;
-    border: 4px solid #757A7F;
+    width: 8rem;
+    height: 8rem;
+    border: 0.4rem solid #757A7F;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -489,9 +489,9 @@
   }
 
   .privilege_avatar img {
-    width: 73px;
-    height: 73px;
-    border: 2px solid #A0A7AC;
+    width: 7.3rem;
+    height: 7.3rem;
+    border: 0.2rem solid #A0A7AC;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -506,15 +506,15 @@
   .privilege_share {
     width: 92%;
     margin-left: 4%;
-    height: 60px;
+    height: 6rem;
     background: #fcc816;
-    border-radius: 14px;
+    border-radius: 1.4rem;
     text-align: center;
-    padding-top: 10px;
-    margin-top: -10px;
+    padding-top: 1rem;
+    margin-top: -1rem;
     position: relative;
 
-    /*border:1px solid #000000;*/
+    /*border:0.1rem solid #000000;*/
   }
 
   .privilege_share:after {
@@ -522,29 +522,29 @@
     display: block;
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fcc816;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-bottom: 1rem solid #fcc816;
     position: absolute;
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
-    left: 0px;
+    left: 0rem;
     right: 0;
-    top: -9px;
+    top: -0.9rem;
     margin: auto;
 
   }
 
   .privilege_share span:nth-of-type(1) {
     display: block;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #444444;
     font-weight: 600;
   }
 
   .privilege_share span:nth-of-type(2) {
     display: block;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
   }
 
@@ -552,20 +552,20 @@
   .privilege_verification {
     width: 80%;
     margin-left: 10%;
-    height: 237px;
-    margin-top: 25px;
+    height: 23.7rem;
+    margin-top: 2.5rem;
     position: relative;
-    /*border:1px solid #000000;*/
+    /*border:0.1rem solid #000000;*/
   }
 
   .verification_t {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #FFFFFF;
   }
 
   .verification_b {
     text-align: center;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #b4b4b6;
     position: absolute;
     bottom: 0;
@@ -580,14 +580,14 @@
   }
 
   .privilege_verification ul li {
-    height: 30px;
+    height: 3rem;
     position: relative;
   }
 
   .privilege_verification ul li svg {
-    font-size: 22px;
+    font-size: 2.2rem;
     color: #c8c8c8;
-    margin-left: 5px;
+    margin-left: 0.5rem;
     float: left;
   }
 
@@ -597,60 +597,60 @@
     float: left;
     background: #595D60;
     border: none;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #FFFFFF;
-    margin-left: -3px;
+    margin-left: -0.3rem;
   }
 
   .privilege_verification ul li input::-webkit-input-placeholder {
     color: #b4b4b6;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 18- */
     color: #b4b4b6;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 19+ */
     color: #b4b4b6;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 19+ */
     color: #b4b4b6;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .privilege_verification ul li span {
     /*width: 35%;*/
-    padding:0 10px;
-    height: 30px;
-    border: 0.5px solid #808080;
-    border-radius: 5px;
-    font-size: 14px;
+    padding:0 1rem;
+    height: 3rem;
+    border: 0.0.5rem solid #808080;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
     color: #ffffff;
     text-align: center;
-    line-height: 30px;
+    line-height: 3rem;
     float: right;
-    margin-right: 2px;
+    margin-right: 0.2rem;
   }
 
   .privilege_verification ul li:nth-of-type(1) {
-    margin-top: 17px;
-    /*border:1px solid #000000;*/
+    margin-top: 1.7rem;
+    /*border:0.1rem solid #000000;*/
   }
 
   .privilege_verification ul li:nth-of-type(2) {
-    margin-top: 28px;
-    /*border:1px solid #000000;*/
+    margin-top: 2.8rem;
+    /*border:0.1rem solid #000000;*/
   }
 
   .privilege_verification ul li:nth-of-type(2) svg {
-    font-size: 23px;
+    font-size: 2.3rem;
   }
 
   .privilege_verification ul li:nth-of-type(2) input {
@@ -660,9 +660,9 @@
   .privilege_verification ul li:nth-of-type(1):after {
     position: absolute;
     /*right: 34%;*/
-    bottom: 3px;
+    bottom: 0.3rem;
     left: 2%;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -671,10 +671,10 @@
 
   .privilege_verification ul li:nth-of-type(2):after {
     position: absolute;
-    right: 0px;
-    bottom: 3px;
+    right: 0rem;
+    bottom: 0.3rem;
     left: 2%;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -682,18 +682,18 @@
   }
 
   .privilege_verification ul li:nth-of-type(3) {
-    margin-top: 30px;
-    height: 53px;
+    margin-top: 3rem;
+    height: 5.3rem;
 
   }
 
   .privilege_verification ul li:nth-of-type(3) button {
-    width: 150px;
-    height: 53px;
+    width: 15rem;
+    height: 5.3rem;
     background: #03aef9;
-    border-radius: 100px;
+    border-radius: 10rem;
     border-color: #03aef9;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #FFFFFF;
     position: absolute;
     left: 0;
@@ -703,8 +703,8 @@
   }
 
   .privilege_verification ul li:nth-of-type(3) img {
-    width: 41px;
-    height: 29px;
+    width: 4.1rem;
+    height: 2.9rem;
     position: absolute;
     left: 66%;
     top: 37%;
@@ -713,13 +713,13 @@
   /*信息部分*/
   .privilege_B {
     width: 100%;
-    padding-bottom: 25px;
+    padding-bottom: 2.5rem;
     position: relative;
-    margin-top: 38px;
+    margin-top: 3.8rem;
   }
 
   .privilege_B p:nth-of-type(1) {
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #444444;
     text-align: center;
     font-weight: 600;
@@ -727,32 +727,32 @@
   }
 
   .privilege_B p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
     text-align: center;
-    margin-top: 8px;
-    margin-bottom: 22px;
+    margin-top: 0.8rem;
+    margin-bottom: 2.2rem;
 
   }
 
   .privilege_B p:nth-of-type(3) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     text-align: center;
-    margin-top: 16px;
+    margin-top: 1.6rem;
 
   }
 
   .privilege_B div {
     width: 100%;
-    height: 347px;
+    height: 34.7rem;
     position: relative;
 
   }
 
   .privilege_B div img {
-    width: 253px;
-    height: 347px;
+    width: 25.3rem;
+    height: 34.7rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -762,20 +762,20 @@
 
   .verification_bg {
     width: 100%;
-    height: 121px;
+    height: 12.1rem;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }
 
  /* 适配*/
-  @media (min-width: 320px) {
+  @media (min-width: 32rem) {
    .privilege_verification ul li:nth-of-type(1):after {
       right: 40%;
    }
 
   }
 
-  @media (min-width: 375px) {
+  @media (min-width: 37.5rem) {
     .privilege_verification ul li:nth-of-type(1):after {
 
          right: 36%;
@@ -783,7 +783,7 @@
 
   }
 
-  @media (min-width: 414px) {
+  @media (min-width: 41.4rem) {
    .privilege_verification ul li:nth-of-type(1):after {
         right: 34%;
    }

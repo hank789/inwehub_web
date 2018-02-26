@@ -421,7 +421,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 4rem;
   }
 
   .mui-input-row a {
@@ -429,7 +429,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-input-row a {
@@ -437,7 +437,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-table-view-cell {
@@ -446,7 +446,7 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 10px;
+    padding: 1rem;
   }
 
   .mui-table-view-cell .mui-navigate-right,
@@ -457,9 +457,9 @@
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 20rem;
+    right: 4rem;
+    height: 3.2rem;
     color: #3f3f3f;
     padding-right: 0;
   }
@@ -467,19 +467,19 @@
   /**/
 
   .account_item_title {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
     color: #a6a6a6;
-    font-size: 14px;
-    margin-left: 14px;
+    font-size: 1.4rem;
+    margin-left: 1.4rem;
   }
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 0.6px;
+    left: 1.5rem;
+    height: 0.0.6rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -488,10 +488,10 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -500,13 +500,13 @@
 
   .mui-input-row {
     position: relative;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .mui-content > .mui-table-view:first-child {
-    margin-top: 15px;
+    margin-top: 1.5rem;
     background: #fefefe;
-    margin-top: 0px;
+    margin-top: 0rem;
   }
 
   .mui-content {
@@ -517,19 +517,19 @@
 
   .options {
     width: 100%;
-    height: 41px;
-    margin-top: 20px;
-    padding: 0 15px;
+    height: 4.1rem;
+    margin-top: 2rem;
+    padding: 0 1.5rem;
   }
 
   .options a {
     display: block;
-    width: 115px;
-    height: 38px;
-    font-size: 16px;
+    width: 11.5rem;
+    height: 3.8rem;
+    font-size: 1.6rem;
     text-align: center;
-    line-height: 38px;
-    border-radius: 50px;
+    line-height: 3.8rem;
+    border-radius: 5rem;
   }
 
   .options a:nth-of-type(1) {

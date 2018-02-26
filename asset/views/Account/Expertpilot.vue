@@ -140,57 +140,57 @@
 
   .header {
     width: 100%;
-    height: 185px;
+    height: 18.5rem;
     background: #ececee;
   }
 
   .header a {
     color: #808080;
     position: absolute;
-    top: 23px;
-    left: 16px;
+    top: 2.3rem;
+    left: 1.6rem;
   }
   .expertExplanation {
     width: 100%;
-    height: 185px;
-    padding-top: 43px;
+    height: 18.5rem;
+    padding-top: 4.3rem;
   }
   .expertSign{
     text-align: center;
   }
    .expertSign span{
     width: 100%;
-    font-size: 20px;
+    font-size: 2rem;
     color:#444444;
     font-weight: 500;
-    margin-top: 43px;
+    margin-top: 4.3rem;
   }
    .expertSign svg{
-    font-size: 28px;
+    font-size: 2.8rem;
     color: #fcc816;
-    margin-bottom: -3px;
+    margin-bottom: -0.3rem;
   }
   .expertExplanation li{
      text-align: center;
-     margin-top: 7px;
+     margin-top: 0.7rem;
      overflow: hidden;
   }
   .expertExplanation li:nth-of-type(1){
-    margin-top: 18px;
+    margin-top: 1.8rem;
   }
   .expertExplanation li p:nth-of-type(1){
-    width:18px;
-    height:18px;
+    width:1.8rem;
+    height:1.8rem;
     background: #FFFFFF;
-    border:1px solid #dcdcdc;
+    border:0.1rem solid #dcdcdc;
     display: inline-block;
-    margin-bottom: -4px;
+    margin-bottom: -0.4rem;
     position: relative;
-    right:10px;
+    right:1rem;
   }
   .expertExplanation li p:nth-of-type(1) svg{
       color:#03aef9;
-      font-size: 15px;
+      font-size: 1.5rem;
       position: absolute;
       left:0;
       right:0;
@@ -200,69 +200,69 @@
   }
   .expertExplanation li p:nth-of-type(2){
     display: inline-block;
-    font-size:14px;
+    font-size:1.4rem;
     color:#323232;
   }
 
   /*内容区域*/
   .guideExplain{
-    margin-top: 30px;
+    margin-top: 3rem;
     padding: 0 8.8%;
   }
   .platformExplain{
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
     text-align: center;
-    margin-bottom: 26px;
+    margin-bottom: 2.6rem;
   }
   .guideExplain li p:nth-of-type(1){
-    font-size:14px;
+    font-size:1.4rem;
     color:#444444;
-    line-height: 20px;
+    line-height: 2rem;
   }
   .guideExplain li p:nth-of-type(1) i{
     display: inline-block;
-    width:6px;
-    height:6px;
+    width:0.6rem;
+    height:0.6rem;
     background:#808080;
     border-radius: 50%;
-    margin-bottom: 3px;
-    margin-right: 8px;;
+    margin-bottom: 0.3rem;
+    margin-right: 0.8rem;;
   }
   .guideExplain li:nth-of-type(2){
-    margin-top: 23px;
+    margin-top: 2.3rem;
   }
   .guideExplain li p:nth-of-type(2){
-    font-size:12px;
+    font-size:1.2rem;
     color:#808080;
-    line-height: 18px;
-    margin-top: 5px;
+    line-height: 1.8rem;
+    margin-top: 0.5rem;
   }
 
   /*联系我们*/
   .contact {
     width: 100%;
     text-align: center;
-    margin-top:12px;
+    margin-top:1.2rem;
   }
 
   .contact p {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
-    line-height: 17px;
+    line-height: 1.7rem;
   }
 
   .home-apply {
     width: 91%;
-    height: 41px;
+    height: 4.1rem;
     margin-left: 4.5%;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background: #03aef9;
     text-align: center;
-    line-height: 41px;
+    line-height: 4.1rem;
     color: #f2f2f2;
-    font-size: 16px;
-    margin-top:37px;
+    font-size: 1.6rem;
+    margin-top:3.7rem;
 
   }
 </style>

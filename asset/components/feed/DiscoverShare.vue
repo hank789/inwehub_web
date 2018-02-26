@@ -207,14 +207,14 @@
     color:#808080;
   }
   .noMoreComment .container-answer{
-    padding:10px 15px 10px;
+    padding:1rem 1.5rem 1rem;
   }
 
 
 </style>
 <style>
   #Outermost  p{
-    font-size: 16px;
+    font-size: 1.6rem;
     margin-bottom: 0;
   }
   .comment p{

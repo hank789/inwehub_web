@@ -431,17 +431,17 @@
 
 
   .buttons {
-    padding-top: 5px;
+    padding-top: 0.5rem;
     background: #fff;
   }
 
   .buttons .mui-col-sm-6 {
-    padding: 15px;
+    padding: 1.5rem;
   }
 
   .timeEnd {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .timeEnd .countDown {
@@ -450,8 +450,8 @@
   }
 
   .form-realAnswer {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     background: #fff;
     position: relative;
   }
@@ -463,7 +463,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #c8c7cc;
@@ -472,28 +472,28 @@
   .form-realAnswer textarea {
     background: none;
     width: 100%;
-    height: 200px;
+    height: 20rem;
     border: none;
   }
 
   .form-realAnswer .title {
-    margin-left: 10px;
-    height: 32px;
+    margin-left: 1rem;
+    height: 3.2rem;
   }
 
   .form-realAnswer .button-wrapper {
-    padding: 0 15px 0;
+    padding: 0 1.5rem 0;
   }
 
   .form-realAnswer .time {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #fa4975;
-    padding-left: 15px;
+    padding-left: 1.5rem;
   }
 
   .form-realAnswer .time b {
     font-weight: normal;
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
   .mui-table-view-cell:after {
@@ -506,25 +506,25 @@
 
   .time div {
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 0.5rem;
   }
 /*标签*/
   .tags{
     width:100%;
     overflow: hidden;
-    padding:0 16px 10px 9px;
+    padding:0 1.6rem 1rem 0.9rem;
   }
   .tags p{
     float: left;
     margin: 0;
     padding: 0;
-    margin-left: 7px;
-    margin-top: 10px;
+    margin-left: 0.7rem;
+    margin-top: 1rem;
     background:#a8dff7;
     color: #FFFFFF;
-    border-radius: 50px;
-    font-size: 12px;
-    padding: 0 8px;
+    border-radius: 5rem;
+    font-size: 1.2rem;
+    padding: 0 0.8rem;
   }
 
 </style>

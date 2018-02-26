@@ -177,8 +177,8 @@
     background: #ffffff;
     position: relative;
     .Logo {
-      width: 205px;
-      height: 122px;
+      width: 20.5rem;
+      height: 12.2rem;
       position: absolute;
       left: 0;
       right: 0;
@@ -186,21 +186,21 @@
       bottom: 0;
       margin: auto;
       svg {
-        width: 90px;
-        height: 65px;
+        width: 9rem;
+        height: 6.5rem;
         display: block;
         margin: 0 auto;
 
       }
       p {
-        width: 205px;
-        height: 24px;
+        width: 20.5rem;
+        height: 2.4rem;
         font-family: "PingFangSC";
-        font-size: 14px;
-        line-height: 24px;
+        font-size: 1.4rem;
+        line-height: 2.4rem;
         text-align: center;
         color: #808080;
-        margin-top: 12px;
+        margin-top: 1.2rem;
       }
     }
   }
@@ -235,85 +235,85 @@
   .projectList1 {
     width: 100%;
     background: #ffffff;
-    padding: 17px 16px 16px 16px;
-    margin-bottom: 10px;
+    padding: 1.7rem 1.6rem 1.6rem 1.6rem;
+    margin-bottom: 1rem;
     position: relative;
     li {
       &:nth-child(1) {
-        width: 309px;
+        width: 30.9rem;
         span {
           &:nth-child(1) {
             display: inline-block;
-            max-width: 180px;
-            height: 22.5px;
+            max-width: 18rem;
+            height: 22.0.5rem;
             font-family: "PingFangSC";
-            font-size: 16px;
+            font-size: 1.6rem;
             color: #444444;
-            margin-bottom: -6px;
+            margin-bottom: -0.6rem;
           }
           &:nth-child(2) {
-            height: 20px;
-            border-radius: 50px;
+            height: 2rem;
+            border-radius: 5rem;
             font-family: "PingFangSC";
-            font-size: 11px;
+            font-size: 1.1rem;
             text-align: center;
             color: #ffffff;
-            padding: 2px 11px 3px 10px;
-            margin-left: 8px;
-            margin-bottom: 2px;
+            padding: 0.2rem 1.1rem 0.3rem 1rem;
+            margin-left: 0.8rem;
+            margin-bottom: 0.2rem;
           }
         }
         svg {
           position: absolute;
-          top: 20px;
-          right: 16px;
-          width: 16px;
-          height: 17px;
+          top: 2rem;
+          right: 1.6rem;
+          width: 1.6rem;
+          height: 1.7rem;
           color: #03aef9;
         }
       }
       &:nth-child(2) {
-        margin-top: 10px;
+        margin-top: 1rem;
         width: 100%;
-        height: 14px;
+        height: 1.4rem;
         span {
           &:nth-child(1) {
             display: inline-block;
-            max-width: 130px;
-            height: 20px;
+            max-width: 13rem;
+            height: 2rem;
             font-family: ".PingFangSC";
             color: #808080;
-            font-size: 14px;
+            font-size: 1.4rem;
           }
           &:nth-child(2) {
             display: inline-block;
-            width: 1px;
-            height: 14px;
+            width: 0.1rem;
+            height: 1.4rem;
             background: #c8c8c8;
-            margin-left: 8px;
-            margin-right: 8px;
-            margin-bottom: 2px;
+            margin-left: 0.8rem;
+            margin-right: 0.8rem;
+            margin-bottom: 0.2rem;
 
           }
           &:nth-child(3) {
             display: inline-block;
-            max-width: 130px;
-            height: 20px;
+            max-width: 13rem;
+            height: 2rem;
             font-family: ".PingFangSC";
             color: #808080;
             color: #808080;
-            font-size: 14px;
+            font-size: 1.4rem;
           }
 
         }
 
       }
       &:nth-child(3) {
-        margin-top: 15.5px;
+        margin-top: 15.0.5rem;
         width: 100%;
-        height: 16.5px;
+        height: 16.0.5rem;
         font-family: "PingFangSC";
-        font-size: 12px;
+        font-size: 1.2rem;
         color: #b4b4b6;
       }
     }

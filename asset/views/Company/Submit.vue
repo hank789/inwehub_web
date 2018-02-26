@@ -468,14 +468,14 @@
 
 <style>
   .mui-popup-title {
-    font-size: 16px !important;
+    font-size: 1.6rem !important;
     color: #444 !important;
     font-weight: normal !important;
   }
 
   .mui-popup-button {
     color: #03aef9 !important;
-    font-size: 16px !important;
+    font-size: 1.6rem !important;
     font-weight: normal !important;
   }
 
@@ -493,38 +493,38 @@
 
 <style scoped="scoped">
   .title {
-    padding: 17px 16px;
+    padding: 1.7rem 1.6rem;
     color: #444;
     background: #fff;
     font-weight: bold;
   }
 
   .buttonWrapper {
-    padding: 20px 16px;
+    padding: 2rem 1.6rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    margin-top: 10px;
-    border-radius: 5px;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.1rem solid #03aef9;
   }
 
   .companyForm {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .companyForm:before {
-    left: 16px;
+    left: 1.6rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 1.6rem;
   }
 
   .companyForm:after {
-    left: 16px;
+    left: 1.6rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 1.6rem;
   }
 
   .companyForm label {
@@ -536,18 +536,18 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 1.4rem;
     padding-right: 0;
 
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 5px 15px;
+    padding: 0.5rem 1.5rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 16px;
-    right: 16px;
+    left: 1.6rem;
+    right: 1.6rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -556,13 +556,13 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 1rem;
     color: #c8c8c8;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 
   .companyForm .unit {
-    padding: 10px 0;
+    padding: 1rem 0;
     float: right;
   }
 
@@ -583,7 +583,7 @@
 
   .companyForm .inputUnit {
     width: 55% !important;
-    padding: 10px;
+    padding: 1rem;
   }
 
   .companyForm .textRight {
@@ -594,30 +594,30 @@
   .selected {
     display: inline-block;
     color: #03aef9;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
-    padding: 4px 10px 3px;
-    font-size: 14px;
-    margin: 7px 7px 0 0;
+    border: 0.1rem solid #03aef9;
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.3rem;
+    font-size: 1.4rem;
+    margin: 0.7rem 0.7rem 0 0;
   }
 
   .selected .icon {
     color: #c8c8c8;
-    font-size: 11px;
-    margin-left: 7px;
+    font-size: 1.1rem;
+    margin-left: 0.7rem;
     position: relative;
-    top: -1px;
+    top: -0.1rem;
   }
 
   .river {
-    height: 10px;
+    height: 1rem;
     background: #ececee;
   }
 
   .radioWrapper {
     display: inline-block;
-    padding: 11px 0 11px 25px;
-    margin-left: 18px;
+    padding: 1.1rem 0 1.1rem 2.5rem;
+    margin-left: 1.8rem;
   }
 
   .radioWrapper:first-child {
@@ -626,14 +626,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 11px;
+    top: 1.1rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
-    left: 0px;
+    left: 0rem;
     color: #c8c8c8;
-    font-size: 20px;
+    font-size: 2rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -646,7 +646,7 @@
 
   .validMode {
     color: #808080;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .validMode b {
@@ -655,7 +655,7 @@
   }
 
   .validMode .radioWrapper input[type='radio'] {
-    top: 14px;
+    top: 1.4rem;
   }
 
   .validMode .noZhichi {

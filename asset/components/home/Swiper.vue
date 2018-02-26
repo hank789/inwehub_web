@@ -143,29 +143,29 @@
   /*人物推荐*/
   #home-recommend {
     width: 100%;
-    height: 157px;
+    height: 15.7rem;
     background: #FFFFFF;
     padding-left: 4%;
   }
 
   #home-recommend div:nth-of-type(1) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
-/*box-shadow: 0 0 10px #f3f4f6;*/
+/*box-shadow: 0 0 1rem #f3f4f6;*/
   #home-card {
-    width: 114px;
-    height: 148px;
+    width: 11.4rem;
+    height: 14.8rem;
     background:#FFFFFF;
-    padding-top: 10px;
+    padding-top: 1rem;
     position: relative;
-    border-radius: 4px;
-    border:0.2px solid #dcdcdc;
-    box-shadow: 0 0 5px #ececee;
+    border-radius: 0.4rem;
+    border:0.0.2rem solid #dcdcdc;
+    box-shadow: 0 0 0.5rem #ececee;
   }
 
   #home-card img {
-    width: 50px;
-    height: 50px;
+    width: 5rem;
+    height: 5rem;
     display: block;
     border-radius: 50%;
     margin: 0 auto;
@@ -174,31 +174,31 @@
   #home-card span {
     display: block;
     text-align: center;
-    font-size: 12px;
-    padding: 0 4px;
+    font-size: 1.2rem;
+    padding: 0 0.4rem;
   }
 
   #home-card span:nth-of-type(1) i {
     display: inline-block;
-    max-width: 70px;
-    height: 20px;
+    max-width: 7rem;
+    height: 2rem;
     font-style: normal;
   }
 
   #home-card span:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #444444;
-    margin-top: 2px;
+    margin-top: 0.2rem;
   }
 
   #home-card span:nth-of-type(1) svg {
-    font-size: 20px;
+    font-size: 2rem;
     color: #03aef9;
-    margin-bottom: 2.5px;
-    margin-left: -3px;
+    margin-bottom: 2.0.5rem;
+    margin-left: -0.3rem;
   }
 
   .home-card span:nth-of-type(2) {
@@ -209,40 +209,40 @@
 
   #home-card span:nth-of-type(3) {
     width: 70%;
-    height: 24px;
-    line-height: 22px;
-    border-radius: 50px;
-    border: 0.5px solid #03aef9;
+    height: 2.4rem;
+    line-height: 2.2rem;
+    border-radius: 5rem;
+    border: 0.0.5rem solid #03aef9;
     margin-left: 15%;
-    margin-top: 6px;
-    font-size: 14px;
+    margin-top: 0.6rem;
+    font-size: 1.4rem;
     text-align: center;
     color: #03aef9;
   }
 
   #home-card p {
     position: absolute;
-    top: 0px;
-    /*right: 0px;*/
-    width: 28px;
+    top: 0rem;
+    /*right: 0rem;*/
+    width: 2.8rem;
     text-align: center;
     background: url("../../statics/images/fill_1@2x.png") no-repeat;
     background-size: 100% 100%;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #ffffff;
   }
 
   /*查看更多专家样式*/
 
   .moreExperts {
-    width: 118.333px;
-    margin-right: 10px;
-    height: 148px;
+    width: 118.33.3rem;
+    margin-right: 1rem;
+    height: 14.8rem;
     background:#FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     position: relative;
-    border: 0.2px solid #dcdcdc;
-    box-shadow: 0 0 5px #ececee;
+    border: 0.0.2rem solid #dcdcdc;
+    box-shadow: 0 0 0.5rem #ececee;
   }
 
   .moreExperts > div {
@@ -256,16 +256,16 @@
 
   .moreExperts > div > span {
     display: inline-block;
-    border: 1px solid #b4b4b6;
-    width: 50px;
-    height: 50px;
+    border: 0.1rem solid #b4b4b6;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     margin-left: 25%;
     position: relative;
   }
 
   .moreExperts > div svg {
-    font-size: 30px;
+    font-size: 3rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -279,32 +279,32 @@
   .moreExperts > div p {
     text-align: center;
     color: #444444;
-    font-size: 12px;
-    margin-top: 2px;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
     margin-bottom: 0;
   }
   .moreExperts > div p:nth-of-type(2){
-    margin-top:-5px;
+    margin-top:-0.5rem;
   }
 
   .container-item {
     padding-right: 0;
     padding-left: 0;
-    padding-bottom: 10px;
-    padding-top: 5px;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
   }
 
   .title {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #444;
-    padding-left: 15px;
-    padding-bottom: 5px;
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .title .more {
     float: right;
-    margin-right: 15px;
-    font-size: 13px;
+    margin-right: 1.5rem;
+    font-size: 1.3rem;
     color: #03aef9;
   }
 
@@ -317,23 +317,23 @@
     position: relative;
   }
   .home_avatar svg{
-    font-size:20px;
+    font-size:2rem;
     position: absolute;
     bottom: 0;
     right: 25%;
   }
   /* 适配*/
-  @media (min-width: 320px) {
+  @media (min-width: 32rem) {
     #home-card p {
       right: 0;
     }
   }
-  @media (min-width: 375px) {
+  @media (min-width: 37.5rem) {
     #home-card p {
       right: 4%;
     }
   }
-  @media (min-width: 414px) {
+  @media (min-width: 41.4rem) {
     #home-card p {
       right: 4%;
     }

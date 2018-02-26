@@ -1,9 +1,9 @@
 <template>
   <div>
     <div id="testWrapper">
-      <div id="animationContainer" style="width:293px; height:336px">
+      <div id="animationContainer" style="width:29.3rem; height:33.6rem">
         <canvas id="canvas" width="293" height="336"></canvas>
-        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:293px; height:336px; position: absolute; left: 0px; top: 0px; display: block;">
+        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:29.3rem; height:33.6rem; position: absolute; left: 0rem; top: 0rem; display: block;">
         </div>
         <!--红包详情-->
         <div class="my-cash" id="my-cash">
@@ -75,8 +75,8 @@
   }
   /*关闭按钮*/
   .cash-button{
-    width:29px;
-    height:29px;
+    width:2.9rem;
+    height:2.9rem;
     border-radius:50%;
     background: #808080;
     position: absolute;
@@ -92,65 +92,65 @@
     top:0;
     bottom:0;
     color: #FFFFFF;
-    font-size:20px;
+    font-size:2rem;
     margin:auto;
   }
   /*跳转按钮*/
   .my-wallet{
     width:88%;
-    height:34px;
-    border:1px solid #fc98bb;
-    border-radius: 50px;
+    height:3.4rem;
+    border:0.1rem solid #fc98bb;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 34px;
-    font-size:14px;
+    line-height: 3.4rem;
+    font-size:1.4rem;
     color: #fdd6e3;
     position: absolute;
     left:0;
     right:0;
-    bottom: 55px;
+    bottom: 5.5rem;
     margin:auto;
   }
   /*红包详情*/
   .my-cash{
     width:58%;
-    height:105px;
+    height:10.5rem;
     position: absolute;
     left:0;
     right:0;
-    top: 60px;
+    top: 6rem;
     margin:auto;
   }
   .my-cash i{
     position: absolute;
     width: 100%;
-    height:1.5px;
+    height:1.0.5rem;
     background: #808080;
     left:0;
     right:0;
-    top:0px;
+    top:0rem;
     bottom: 0;
     margin:auto;
   }
   .my-cash p{
     width:100%;
-    height:52px;
+    height:5.2rem;
     text-align: center;
-    line-height:52px;
+    line-height:5.2rem;
     color: #444444;
   }
   .my-cash p:nth-of-type(1){
-    font-size:64px;
+    font-size:6.4rem;
     font-weight: 500;
   }
   .my-cash p:nth-of-type(1) span{
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 500;
     position: relative;
-    top: -30px;
+    top: -3rem;
   }
   .my-cash p:nth-of-type(2){
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
   }
   /**/

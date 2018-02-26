@@ -93,7 +93,7 @@
                 popGesture: 'none',
                 top: ImmersedHeight + 'px',
                 dock: 'top',
-                bottom: '50px',
+                bottom: '5rem',
                 bounce: 'none'
               })
               ws.append(inwehubEmbedWebview)

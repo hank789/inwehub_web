@@ -125,9 +125,9 @@
 <style lang="less"  scoped="scoped">
 
   .detail-ask {
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
     margin-top:0 !important;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 
   .detail-ask:before {
@@ -135,19 +135,19 @@
   }
 
   .detail-ask:after {
-    left: 15px;
-    right: 15px;
+    left: 1.5rem;
+    right: 1.5rem;
   }
 
   .detail-ask .mui-media-body .timeAgo {
     color: #999;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 10px;
-    right: 15px;
+    bottom: 1rem;
+    right: 1.5rem;
     color: #ff9800;
   }
 
@@ -156,15 +156,15 @@
   }
 
   .content{
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
   }
 
   .footer{
-    padding: 9px 15px 17px;
-    font-size:12px;
+    padding: 0.9rem 1.5rem 1.7rem;
+    font-size:1.2rem;
   }
 
   .footer .amount{
@@ -172,25 +172,25 @@
   }
 
   .footer .timeAgo{
-    margin-left: 4px;
+    margin-left: 0.4rem;
     color:#03aef9;
   }
   .mui-row{
-    height:40px;
+    height:4rem;
   }
   .buttonWrapper {
 
     &.buttonWrapper-1 {
-       padding: 0 7px 0 15px;
+       padding: 0 0.7rem 0 1.5rem;
      }
 
     &.buttonWrapper-2 {
-       padding: 0 15px 0 7px;
+       padding: 0 1.5rem 0 0.7rem;
      }
 
     .mui-btn-warning {
       background-color: #fcc816;
-      border: 1px solid #fcc816;
+      border: 0.1rem solid #fcc816;
     }
   }
 
@@ -199,7 +199,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0px;
+    height: 0rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);

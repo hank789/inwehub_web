@@ -96,63 +96,63 @@
     background: #ececee;
 
     width: 100%;
-    height: 129px;
+    height: 12.9rem;
     text-align: center;
   }
 
   .basic .info {
     position: absolute;
     left: 50%;
-    margin-left: -102px;
-    top: 33px;
+    margin-left: -10.2rem;
+    top: 3.3rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 1.3rem;
   }
 
   .basic a {
     position: absolute;
     color: #444444;
-    font-size: 30px;
-    top: 16px;
-    left: 7px;
+    font-size: 3rem;
+    top: 1.6rem;
+    left: 0.7rem;
   }
 
   .basic .info .img {
-    width: 204px;
-    height: 77px;
+    width: 20.4rem;
+    height: 7.7rem;
     background-image: url(../../statics/images/askcoupon@2x.png);
     background-size: contain;
   }
 
   .freeAsk .text div {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #444;
   }
 
   .freeAsk .text div span {
     color: #03aef9;
-    margin-left: 5px;
-    font-size: 14px;
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
   }
 
   .freeAskWrapper {
-    margin-top: 20px;
+    margin-top: 2rem;
     width: 100%;
-    height: 48px;
+    height: 4.8rem;
   }
 
   .freeAsk {
     position: absolute;
-    left: 25px;
-    right: 15px;
+    left: 2.5rem;
+    right: 1.5rem;
   }
 
   .freeAsk .icon {
     position: absolute;
-    width: 35px;
-    left: -8px;
-    top: -5px;
-    height: 48px;
+    width: 3.5rem;
+    left: -0.8rem;
+    top: -0.5rem;
+    height: 4.8rem;
     display: inline-block;
     background-image: url("../../statics/images/icon_xiaoha@2x.png");
     background-repeat: no-repeat;
@@ -162,12 +162,12 @@
 
   .freeAsk .text {
     background: #dcdcdc;
-    border: 1px #dcdcdc solid;
-    border-radius: 50px;
-    font-size: 14px;
-    line-height: 14px;
+    border: 0.1rem #dcdcdc solid;
+    border-radius: 5rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
     color: #323232;
-    padding: 13px 0px 13px 35px;
+    padding: 1.3rem 0rem 1.3rem 3.5rem;
 
   }
 
@@ -176,33 +176,33 @@
   }
 
   .mui-navigate-right:after {
-    right: 10px;
-    font-size: 22px;
+    right: 1rem;
+    font-size: 2.2rem;
   }
 
   .buttonWrapper {
-    margin-top: 10px;
-    height: 50px;
-    padding: 0 15px;
+    margin-top: 1rem;
+    height: 5rem;
+    padding: 0 1.5rem;
   }
 
   .buttonWrapper button {
-    margin-top: 10px;
-    border-radius: 50px;
+    margin-top: 1rem;
+    border-radius: 5rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.1rem solid #03aef9;
   }
 
   .content {
     background: #fff;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #808080;
-    padding: 25px 10px 20px 32px;
+    padding: 2.5rem 1rem 2rem 3.2rem;
   }
 
   .content h5 {
     position: relative;
-    margin-top: 30px;
+    margin-top: 3rem;
   }
 
   .content h5:first-child {
@@ -225,38 +225,38 @@
 
   .content h5:before {
     position: absolute;
-    left: -16px;
-    top: 5px;
+    left: -1.6rem;
+    top: 0.5rem;
     content: "";
     display: inline-block;
     background: #03aef9;
-    width: 5px;
-    height: 5px;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 0.1rem solid #03aef9;
+    border-radius: 0.5rem;
   }
 
   .warning {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
-    padding: 15px 0 5px 0;
+    padding: 1.5rem 0 0.5rem 0;
   }
 
   .bottomNav {
     width: 100%;
-    height: 147px;
+    height: 14.7rem;
   }
 
   .fixedWrapper {
     position: fixed;
     width: 100%;
-    height: 147px;
+    height: 14.7rem;
     bottom: 0;
     background: #efeff4;
 
   }
 
   .cover {
-    top: -3px !important;
+    top: -0.3rem !important;
   }
 </style>

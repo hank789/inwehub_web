@@ -185,44 +185,44 @@
 
 <style scoped>
   .form-ask-refuse {
-    padding: 0 5px;
+    padding: 0 0.5rem;
   }
 
   .form-ask-refuse textarea {
-    margin-top: 15px;
+    margin-top: 1.5rem;
     width: 100%;
-    height: 138px;
+    height: 13.8rem;
     border: none;
   }
 
   .form-ask-refuse .title {
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 1rem;
+    margin-left: 1rem;
     color: #8b8b8b;
-    height: 32px;
+    height: 3.2rem;
   }
 
   .form-ask-refuse .category {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
   }
 
   .form-ask-refuse .category span.active {
-    border: 1px solid #4a90e2;
+    border: 0.1rem solid #4a90e2;
     color: #4a90e2;
   }
 
   .form-ask-refuse .category span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
-    padding: 0 15px;
+    border: 0.1rem solid #b6b6b6;
+    border-radius: 0.5rem;
+    padding: 0 1.5rem;
     display: inline-block;
-    height: 32px;
+    height: 3.2rem;
     background: #fff;
-    font-size: 14px;
-    margin: 5px 6px;
+    font-size: 1.4rem;
+    margin: 0.5rem 0.6rem;
     text-align: center;
     color: #333;
-    line-height: 32px;
+    line-height: 3.2rem;
     position: relative;
   }
 
@@ -231,7 +231,7 @@
     position: relative;
     border: none;
     height: 90%;
-    margin-top: -4px;
+    margin-top: -0.4rem;
     width: 90%;
     text-align: center;
   }
@@ -241,16 +241,16 @@
   }
 
   .form-ask-refuse .button-wrapper {
-    margin-top: 15px;
-    padding: 0 50px;
+    margin-top: 1.5rem;
+    padding: 0 5rem;
   }
 
   .textarea-wrapper {
     position: relative;
     background: #fff;
-    padding-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    padding-bottom: 2rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #bbbbbb;
   }
 
   .textarea-wrapper textarea {
@@ -260,9 +260,9 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 10px;
-    font-size: 12px;
-    bottom: 2px;
+    right: 1rem;
+    font-size: 1.2rem;
+    bottom: 0.2rem;
     color: #999;
   }
 

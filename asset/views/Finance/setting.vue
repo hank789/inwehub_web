@@ -84,7 +84,7 @@
   }
 
   .mui-content > .mui-table-view:first-child {
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 
   .mui-input-row textarea {
@@ -93,7 +93,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 4rem;
   }
 
   .mui-input-row a {
@@ -101,7 +101,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-input-row a {
@@ -109,11 +109,11 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-table-view-cell {
-    padding: 5px 0;
+    padding: 0.5rem 0;
   }
 
   .mui-table-view-cell .mui-navigate-right, .mui-table-view-cell .mui-navigate {
@@ -123,9 +123,9 @@
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 20rem;
+    right: 4rem;
+    height: 3.2rem;
     color: #3f3f3f;
     padding-right: 0;
   }

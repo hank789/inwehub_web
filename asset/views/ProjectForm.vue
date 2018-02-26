@@ -282,7 +282,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 4rem;
   }
 
   .mui-input-row a {
@@ -290,7 +290,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-input-row a {
@@ -298,7 +298,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .mui-table-view-cell {
@@ -306,20 +306,20 @@
   }
 
   .textarea-wrapper {
-    margin: 0 5px;
+    margin: 0 0.5rem;
     height: 100%;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #bbbbbb;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
-    font-size: 12px;
-    bottom: 2px;
+    right: 0.4rem;
+    font-size: 1.2rem;
+    bottom: 0.2rem;
     color: #b0b0b0;
   }
 
@@ -331,7 +331,7 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 10px;
+    padding: 1rem;
   }
 
   .mui-table-view-cell .mui-navigate-right, .mui-table-view-cell .mui-navigate {
@@ -343,17 +343,17 @@
   }
 
   .account_item_title {
-    padding: 5px;
+    padding: 0.5rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 20rem;
+    right: 4rem;
+    height: 3.2rem;
     color: #3f3f3f;
     padding-right: 0;
   }

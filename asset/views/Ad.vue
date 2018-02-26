@@ -79,17 +79,17 @@
     z-index:2;
   }
   .time {
-    width: 83px;
-    height: 34px;
+    width: 8.3rem;
+    height: 3.4rem;
     background: rgba(68, 68, 68, 0.68);
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 34px;
-    font-size: 14px;
+    line-height: 3.4rem;
+    font-size: 1.4rem;
     color: #ffffff;
     position: absolute;
-    top: 20px;
-    right: 16px;
+    top: 2rem;
+    right: 1.6rem;
   }
   .time_t{
     width: 100%;
@@ -105,24 +105,24 @@
     position: relative;
   }
   .time_b svg{
-    font-size: 120px;
+    font-size: 12rem;
     position: absolute;
     left: 0;
     right: 0;
-    top:-25px;
+    top:-2.5rem;
     margin: auto;
   }
   .time_b p{
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #747576;
     position: absolute;
-    top: 55px;
+    top: 5.5rem;
     left: 0;
     right: 0;
     margin: auto;
   }
   .immersed20 .time{
-    top:40px;
+    top:4rem;
   }
 </style>

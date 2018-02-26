@@ -42,7 +42,7 @@
         </div>
 
         <!--留言--> <!--v-if="list.status =='3' || list.status =='4' "-->
-        <div style="position: relative;width:100%; min-height: 530px;" v-show="list.status =='3' || list.status =='4' ">
+        <div style="position: relative;width:100%; min-height: 53rem;" v-show="list.status =='3' || list.status =='4' ">
           <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
               <ul class="message">
@@ -228,7 +228,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -243,117 +243,117 @@
   .enroll {
     width: 100%;
     /*height: 100%;*/
-    padding: 15px 16px 16px 16px;
+    padding: 1.5rem 1.6rem 1.6rem 1.6rem;
     background: #FEFFFE;
   }
 
   /*.enroll img{
   	width: 100%;
-  	height: 143px;
+  	height: 14.3rem;
   }*/
   .enroll-text {
     width: 100%;
-    height: 57px;
+    height: 5.7rem;
     /*background: #CCCCCC;*/
-    margin-top: 8px;
-    border-bottom: 0.5px solid #DCDCDC;
+    margin-top: 0.8rem;
+    border-bottom: 0.0.5rem solid #DCDCDC;
   }
 
   .enroll-text p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
     font-weight: 500;
 
   }
 
   .enroll-text p:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #b4b4b6;
-    margin-top: 3px;
+    margin-top: 0.3rem;
 
   }
 
   .btn {
     width: 100%;
-    padding: 15px 16px 1px 16px;
+    padding: 1.5rem 1.6rem 0.1rem 1.6rem;
     background: #FEFFFE;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 
   .blue {
     width: 100%;
-    height: 44px;
+    height: 4.4rem;
     background: #03aef9;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     border: none;
   }
 
   .yellow {
     width: 100%;
-    height: 44px;
+    height: 4.4rem;
     background: #fcc816;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     border: none;
   }
 
   .gray {
     width: 100%;
-    height: 44px;
+    height: 4.4rem;
     background: #b4b4b6;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     border: none;
   }
 
   .feedback {
     width: 100%;
-    min-height: 80px;
-    padding: 15px 16px 15px 16px;
+    min-height: 8rem;
+    padding: 1.5rem 1.6rem 1.5rem 1.6rem;
     background: #FEFFFE;
-    margin-top: 10px;
+    margin-top: 1rem;
     border: none;
 
   }
 
   .send {
     width: 100%;
-    height: 42px;
-    border-radius: 5px;
-    border: 0.5px solid #DCDCDC;
+    height: 4.2rem;
+    border-radius: 0.5rem;
+    border: 0.0.5rem solid #DCDCDC;
   }
 
   .feedback input {
     width: 80%;
-    height: 40px;
+    height: 4rem;
     float: left;
-    font-size: 14px;
+    font-size: 1.4rem;
     border: none;
   }
 
   .feedback svg {
-    font-size: 30px;
+    font-size: 3rem;
     float: right;
-    margin-right: 10px;
-    margin-top: 5px;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
     color: #03aef9;
   }
 
   .text {
     width: 100%;
-    border: 1px solid #DCDCDC;
-    margin-top: 16px;
-    padding: 5px 8px;
+    border: 0.1rem solid #DCDCDC;
+    margin-top: 1.6rem;
+    padding: 0.5rem 0.8rem;
     word-wrap: break-word;
     overflow-x: hidden;
   }
@@ -361,12 +361,12 @@
   .back {
     width: 100%;
     background: #FFFFFF;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     text-align: center;
-    padding: 20px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding: 2rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
   }
 
@@ -374,14 +374,14 @@
   .message {
     width: 100%;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 1rem;
     /*background: #CCCCCC;*/
   }
 
   .message li {
-    margin-top: 10px;
+    margin-top: 1rem;
     overflow: hidden;
-    border-bottom: 0.5px solid #DCDCDC;
+    border-bottom: 0.0.5rem solid #DCDCDC;
   }
 
   .message p:nth-of-type(1) {
@@ -394,7 +394,7 @@
     width: 50%;
     float: left;
     text-align: left;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #03aef9;
   }
 
@@ -402,42 +402,42 @@
     width: 50%;
     float: left;
     text-align: right;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 
   .message p:nth-of-type(2) {
     width: 100%;
-    font-size: 13px;
-    margin-bottom: 5px;
-    margin-top: 3px;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.3rem;
     color: #444444;
 
   }
 
   /***媒体查询*****/
 
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 32rem) {
     .enroll img {
       width: 100%;
-      height: 133px;
-      border-radius: 4px;
+      height: 13.3rem;
+      border-radius: 0.4rem;
     }
   }
 
-  @media screen and (min-width: 375px) {
+  @media screen and (min-width: 37.5rem) {
     .enroll img {
       width: 100%;
-      height: 145px;
-      border-radius: 4px;
+      height: 14.5rem;
+      border-radius: 0.4rem;
     }
   }
 
-  @media screen and (min-width: 414px) {
+  @media screen and (min-width: 41.4rem) {
     .enroll img {
       width: 100%;
-      height: 172px;
-      border-radius: 4px;
+      height: 17.2rem;
+      border-radius: 0.4rem;
     }
   }
 </style>

@@ -103,7 +103,7 @@
 
   .Invitation_t {
     width: 100%;
-    /*height:322px;*/
+    /*height:32.2rem;*/
     background: #FFFFFF url("../../statics/images/invitation-bg@2x.png") no-repeat;
     background-size: 100% 100%;
     position: relative;
@@ -111,7 +111,7 @@
 
   .Invitation_img {
     width: 95%;
-    /*height:270px;*/
+    /*height:27rem;*/
     position: absolute;
     bottom: 0;
     left: 0;
@@ -122,11 +122,11 @@
   /*　邀请成功的信息部分*/
   .invitation-information {
     width: 100%;
-    height: 88.5px;
-    /*border: 1px solid #cccccc;*/
+    height: 88.0.5rem;
+    /*border: 0.1rem solid #cccccc;*/
     background: #FFFFFF;
-    margin-top: 5px;
-    padding: 0px 25px;
+    margin-top: 0.5rem;
+    padding: 0rem 2.5rem;
   }
 
   .invitation-information li:nth-of-type(1) {
@@ -148,20 +148,20 @@
   }
 
   .invitation-information li p:nth-of-type(1) {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #444444;
-    margin-top: 22px;
+    margin-top: 2.2rem;
     text-align: center;
   }
 
   .invitation-information li p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     text-align: center;
   }
 
   .invitation-information li span {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #FFFFFF;
     position: absolute;
     right: 0;
@@ -174,37 +174,37 @@
 
   .contactFriends {
     width: 95%;
-    height: 85px;
-    border: 1px solid #b4b4b6;
-    border-radius: 85px;
+    height: 8.5rem;
+    border: 0.1rem solid #b4b4b6;
+    border-radius: 8.5rem;
     margin-left: 2.5%;
-    margin-top: 40px;
+    margin-top: 4rem;
     position: relative;
   }
 
   .contactFriends span {
     display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
 
   }
 
   .contactFriends span:nth-of-type(1) {
     color: #444444;
-    margin-top: 29px;
+    margin-top: 2.9rem;
 
   }
 
   .contactFriends span:nth-of-type(2) {
     color: #03aef9;
-    margin-top: 4px;
+    margin-top: 0.4rem;
   }
 
   .contactBtn {
     position: absolute;
-    width: 150px;
-    height: 53px;
-    top: -30px;
+    width: 15rem;
+    height: 5.3rem;
+    top: -3rem;
     left: 0;
     right: 0;
     margin: auto
@@ -215,64 +215,64 @@
     width: 100%;
     height: 100%;
     background: #03aef9;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 53px;
+    line-height: 5.3rem;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 500;
     z-index: 999;
     position: absolute;
   }
 
   .contactBtn img {
-    width: 41px;
-    height: 29px;
+    width: 4.1rem;
+    height: 2.9rem;
     position: absolute;
-    left: -15px;
-    top: 23px;
+    left: -1.5rem;
+    top: 2.3rem;
   }
 
   /*邀请说明*/
   .invitationNote {
-    margin-top: 20.5px;
-    margin-bottom: 80px;
+    margin-top: 20.0.5rem;
+    margin-bottom: 8rem;
     text-align: center;
     overflow: hidden;
   }
 
   .invitationNote p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #444444;
 
   }
 
   .invitationNote p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
 
   }
 
   .invitationNote p:nth-of-type(3) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
-    margin-top: 23px;
+    margin-top: 2.3rem;
 
   }
 
   .invitationNote p:nth-of-type(3) u {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: rgb(68, 68, 68);
   }
 
   /* 适配*/
-  @media (min-width: 320px) {
+  @media (min-width: 32rem) {
     .Invitation_img {
-      height: 230px;
+      height: 23rem;
     }
 
     .Invitation_t {
-      height: 280px;
+      height: 28rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -285,9 +285,9 @@
 
   }
 
-  @media (min-width: 375px) {
+  @media (min-width: 37.5rem) {
     .Invitation_img {
-      height: 270px;
+      height: 27rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -300,13 +300,13 @@
 
   }
 
-  @media (min-width: 414px) {
+  @media (min-width: 41.4rem) {
     .Invitation_img {
-      height: 280px;
+      height: 28rem;
     }
 
     .Invitation_t {
-      height: 350px;
+      height: 35rem;
     }
 
     .invitation-information li:nth-of-type(1) {

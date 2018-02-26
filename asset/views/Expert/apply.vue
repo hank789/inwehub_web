@@ -234,25 +234,25 @@
 <style scoped>
   .professorCard {
     background: #f3f4f6;
-    height: 131px;
+    height: 13.1rem;
   }
 
   .professorCard .header {
     position: relative;
-    height: 92px;
+    height: 9.2rem;
   }
 
   .professorCard .header .avatar {
     position: absolute;
     left: 50%;
-    top: 11px;
-    margin-left: -34.5px;
+    top: 1.1rem;
+    margin-left: -34.0.5rem;
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 69px;
-    width: 69px;
-    font-size: 20px;
+    height: 6.9rem;
+    width: 6.9rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -285,22 +285,22 @@
   .professorCard .header .icon {
     position: absolute;
     left: 50%;
-    margin-left: 11px;
-    font-size: 27px;
+    margin-left: 1.1rem;
+    font-size: 2.7rem;
     color: #808080;
-    top: 59px;
+    top: 5.9rem;
     z-index: 9;
   }
 
   .professorCard .title {
-    padding: 3px 0;
+    padding: 0.3rem 0;
     color: #808080;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-align: center;
   }
 
   .companyForm {
-    font-size: 14px;
+    font-size: 1.4rem;
     margin-top: 0;
   }
 
@@ -309,9 +309,9 @@
   }
 
   .companyForm:after {
-    left: 16px;
+    left: 1.6rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 1.6rem;
   }
 
   .companyForm label {
@@ -330,7 +330,7 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 1.4rem;
     padding-right: 0;
   }
 
@@ -339,7 +339,7 @@
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 1px 15px;
+    padding: 0.1rem 1.5rem;
   }
 
   .companyForm .mui-table-view-cell.noBorder:after {
@@ -347,8 +347,8 @@
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 16px;
-    right: 16px;
+    left: 1.6rem;
+    right: 1.6rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
   }
@@ -356,19 +356,19 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 1rem;
     color: #c8c8c8;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 
   .companyForm .unit {
-    padding: 10px 0;
+    padding: 1rem 0;
     float: right;
   }
 
   .companyForm .inputUnit {
-    padding: 10px;
-    margin-right: 17px;
+    padding: 1rem;
+    margin-right: 1.7rem;
   }
 
   .companyForm .textRight {
@@ -379,30 +379,30 @@
   .companyForm .inputOnlyText {
     width: 61% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 1.4rem;
     float: right;
     border: 0;
-    padding: 10px 0;
-    height: 40px;
-    line-height: 21px;
+    padding: 1rem 0;
+    height: 4rem;
+    line-height: 2.1rem;
     color: #c8c8c8;
   }
 
   .textarea-wrapper {
-    margin: 46px 0 0;
-    height: 164px;
+    margin: 4.6rem 0 0;
+    height: 16.4rem;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #dcdcdc;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #dcdcdc;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 7px;
-    font-size: 14px;
-    bottom: 5px;
+    right: 0.7rem;
+    font-size: 1.4rem;
+    bottom: 0.5rem;
     color: #c8c8c8;
   }
 
@@ -415,8 +415,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 11px 0 11px 25px;
-    margin-left: 18px;
+    padding: 1.1rem 0 1.1rem 2.5rem;
+    margin-left: 1.8rem;
   }
 
   .radioWrapper:first-child {
@@ -425,14 +425,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 11px;
+    top: 1.1rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
-    left: 0px;
+    left: 0rem;
     color: #c8c8c8;
-    font-size: 20px;
+    font-size: 2rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -440,12 +440,12 @@
   }
 
   .river {
-    height: 10px;
+    height: 1rem;
     background: #f3f4f6;
   }
 
   .formTitle {
-    padding: 11px 16px;
+    padding: 1.1rem 1.6rem;
     color: #444;
     background: #fff;
   }
@@ -457,21 +457,21 @@
   .titleBottomForm:before {
     display: block;
     background-color: #dcdcdc;
-    left: 15px;
-    right: 15px;
+    left: 1.5rem;
+    right: 1.5rem;
   }
 
   .buttonWrapper {
-    padding: 6px 16px 30px;
+    padding: 0.6rem 1.6rem 3rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    margin-top: 10px;
-    border-radius: 5px;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
-    padding: 10px 0;
+    border: 0.1rem solid #03aef9;
+    padding: 1rem 0;
   }
 
   .noBottomBorder:after {

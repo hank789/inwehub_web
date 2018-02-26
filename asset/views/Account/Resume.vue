@@ -536,14 +536,14 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .bot {
     position: absolute;
-    right: 14px;
+    right: 1.4rem;
     bottom: 0;
-    left: 14px;
-    height: 1px;
+    left: 1.4rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     /*background-color: rgb(220, 220, 220);*/
-    border: 1px dashed #dcdcdc;
+    border: 0.1rem dashed #dcdcdc;
   }
 
   /***************清除自带样式*****************/
@@ -565,33 +565,33 @@
     background-color: #3c3e44;
     text-align: center;
     position: relative;
-    height: 78px;
+    height: 7.8rem;
   }
 
   .erweimaWrapper {
     position: absolute;
-    left: 16px;
+    left: 1.6rem;
     background: #444;
-    margin-top: 8px;
+    margin-top: 0.8rem;
     width: 81%;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     z-index: 77;
     text-align: center;
-    padding-bottom: 18px;
+    padding-bottom: 1.8rem;
     .header {
       position: relative;
-      height: 92px;
+      height: 9.2rem;
       .avatar {
         position: absolute;
         left: 50%;
-        margin-top: 15px;
-        margin-left: -34.5px;
+        margin-top: 1.5rem;
+        margin-left: -34.0.5rem;
         z-index: 9;
         color: #ffffff;
         display: inline-block;
-        height: 69px;
-        width: 69px;
-        font-size: 20px;
+        height: 6.9rem;
+        width: 6.9rem;
+        font-size: 2rem;
         text-align: center;
         border-radius: 50%;
         vertical-align: top;
@@ -620,62 +620,62 @@
       }
     }
     .realname {
-      margin-top: 20px;
+      margin-top: 2rem;
       color: #fff;
-      font-size: 14px;
+      font-size: 1.4rem;
       font-weight: bold;
       span {
         position: relative;
-        right: -3px;
+        right: -0.3rem;
       }
       .icon {
         vertical-align: top;
-        font-size: 20px;
+        font-size: 2rem;
         color: #3c95f9;
       }
     }
     .erweimaSplite {
-      margin-top: -30px;
+      margin-top: -3rem;
       span {
         display: inline-block;
-        width: 62px;
-        margin: 0 3px;
-        border-bottom: 1px solid #808080;
+        width: 6.2rem;
+        margin: 0 0.3rem;
+        border-bottom: 0.1rem solid #808080;
       }
       .icon {
         color: #252525;
-        font-size: 50px;
+        font-size: 5rem;
         position: relative;
-        top: 17px;
+        top: 1.7rem;
       }
     }
     .qRCode {
-      margin-top: 10px;
+      margin-top: 1rem;
       position: relative;
       text-align: center;
-      height: 190px;
+      height: 19rem;
       div {
         position: absolute;
         left: 50%;
-        margin-left: -95px;
-        width: 190px;
-        height: 190px;
-        border-radius: 4px;
+        margin-left: -9.5rem;
+        width: 19rem;
+        height: 19rem;
+        border-radius: 0.4rem;
         background: #fff;
-        padding: 10px;
+        padding: 1rem;
         img {
-          width: 170px;
-          height: 170px;
-          margin-top: 10px !important;
-          border-radius: 4px;
+          width: 17rem;
+          height: 17rem;
+          margin-top: 1rem !important;
+          border-radius: 0.4rem;
         }
       }
     }
     .qRhelp {
-      margin-top: 8px;
+      margin-top: 0.8rem;
       text-align: center;
       color: #fff;
-      font-size: 13px;
+      font-size: 1.3rem;
     }
   }
 
@@ -683,39 +683,39 @@
   .basic {
     background: #fff;
     .description {
-      font-size: 14px;
+      font-size: 1.4rem;
       color: #808080;
-      padding: 11px 14px 13px;
-      line-height: 24px;
+      padding: 1.1rem 1.4rem 1.3rem;
+      line-height: 2.4rem;
       div {
         display: block;
-        font-size: 13px;
+        font-size: 1.3rem;
         color: #444444;
-        line-height: 25px;
+        line-height: 2.5rem;
       }
     }
   }
 
   .separate {
     display: inline-block;
-    height: 10px;
-    margin: 0 8px;
-    border-left: 1px solid #c8c8c8;
+    height: 1rem;
+    margin: 0 0.8rem;
+    border-left: 0.1rem solid #c8c8c8;
   }
 
   .cardWrapper {
-    margin-top: -69px;
-    padding: 0 16px;
+    margin-top: -6.9rem;
+    padding: 0 1.6rem;
     width: 100%;
     .card {
-      border-radius: 4px;
+      border-radius: 0.4rem;
       background: #ececee;
       width: 100%;
       position: relative;
-      padding-bottom: 15px;
+      padding-bottom: 1.5rem;
       .erweima {
-        width: 55px;
-        height: 51px;
+        width: 5.5rem;
+        height: 5.1rem;
         img {
           width: 100%;
           height: 100%;
@@ -724,51 +724,51 @@
       /*关注*/
       .collect {
         position: absolute;
-        font-size: 14px;
-        right: 55px;
-        top: 14px;
+        font-size: 1.4rem;
+        right: 5.5rem;
+        top: 1.4rem;
         color: #444444;
-        border: 1px solid #b4b4b6;
-        border-radius: 50px;
-        padding: 2px 8px;
+        border: 0.1rem solid #b4b4b6;
+        border-radius: 5rem;
+        padding: 0.2rem 0.8rem;
         &.active {
           color: #FFFFFF;
-          border: 1px solid #03aef9;
+          border: 0.1rem solid #03aef9;
           background: #03aef9;
         }
       }
       /*名片*/
       .Card {
         position: absolute;
-        right: 55px;
-        top: 54px;
-        border: 1px solid #b4b4b6;
-        border-radius: 50px;
-        padding: 2px 16px;
+        right: 5.5rem;
+        top: 5.4rem;
+        border: 0.1rem solid #b4b4b6;
+        border-radius: 5rem;
+        padding: 0.2rem 1.6rem;
         color: #444444;
-        font-size: 14px;
+        font-size: 1.4rem;
 
       }
       .share {
         position: absolute;
-        font-size: 24px;
-        right: 19px;
-        top: 14px;
+        font-size: 2.4rem;
+        right: 1.9rem;
+        top: 1.4rem;
         color: #808080;
       }
       .header {
-        height: 92px;
-        margin-top: -20px;
+        height: 9.2rem;
+        margin-top: -2rem;
         .avatar {
           position: absolute;
           left: 50%;
-          margin-left: -46px;
+          margin-left: -4.6rem;
           z-index: 9;
           color: #ffffff;
           display: inline-block;
-          height: 92px;
-          width: 92px;
-          font-size: 20px;
+          height: 9.2rem;
+          width: 9.2rem;
+          font-size: 2rem;
           text-align: center;
           border-radius: 50%;
           vertical-align: top;
@@ -797,27 +797,27 @@
         }
       }
       .detail {
-        margin-top: 10px;
+        margin-top: 1rem;
         text-align: center;
         .realname {
           font-weight: bold;
           span {
             position: relative;
-            right: -3px;
+            right: -0.3rem;
           }
           .icon {
             vertical-align: bottom;
-            font-size: 22px;
+            font-size: 2.2rem;
             color: #3c95f9;
           }
         }
         .counter {
           width: 91%;
           margin-left: 4.5%;
-          padding-top: 12px;
-          margin-top: 12px;
-          border-top: 1px dashed #dcdcdc;
-          font-size: 13px;
+          padding-top: 1.2rem;
+          margin-top: 1.2rem;
+          border-top: 0.1rem dashed #dcdcdc;
+          font-size: 1.3rem;
           color: #444444;
           b {
             color:rgb(250,73,117);
@@ -826,20 +826,20 @@
         }
         .item {
           color: #808080;
-          font-size: 13px;
-          margin: 7px 7px 2px 7px;
+          font-size: 1.3rem;
+          margin: 0.7rem 0.7rem 0.2rem 0.7rem;
           .icon {
             color: #b4b4b6;
-            font-size: 16px;
+            font-size: 1.6rem;
           }
           &.industry span {
-            border: 1px solid #c8c8c8;
+            border: 0.1rem solid #c8c8c8;
             display: inline-block;
-            border-radius: 50px;
+            border-radius: 5rem;
             color: #808080;
-            font-size: 12px;
-            padding: 0 7px;
-            margin: 0 2px 8px;
+            font-size: 1.2rem;
+            padding: 0 0.7rem;
+            margin: 0 0.2rem 0.8rem;
           }
         }
       }
@@ -848,25 +848,25 @@
 
   h5 {
     margin: 0;
-    padding: 11px 0;
+    padding: 1.1rem 0;
     background: #f3f4f6;
     width: 100%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #313131;
     text-align: center;
   }
 
   .list {
     background: #fff;
-    padding: 0 10px 0 30px;
+    padding: 0 1rem 0 3rem;
     position: relative;
     &:before {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 2rem;
+      left: 2rem;
       content: '';
-      width: 1px;
-      bottom: 12px;
+      width: 0.1rem;
+      bottom: 1.2rem;
       background-color: #ececee;
     }
     .itemJobMore,
@@ -876,13 +876,13 @@
     }
     .item {
       position: relative;
-      padding: 10px 0 10px 5px;
+      padding: 1rem 0 1rem 0.5rem;
       &:after {
         position: absolute;
         right: 0;
         bottom: 0;
         left: 0;
-        height: 1px;
+        height: 0.1rem;
         content: '';
         -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
@@ -893,77 +893,77 @@
       }
       .others {
         color: #b4b4b6;
-        font-size: 13px;
+        font-size: 1.3rem;
         .other {
           display: -webkit-box;
           overflow: hidden;
           .title {
-            margin-left: -8px;
-            width: 80px;
+            margin-left: -0.8rem;
+            width: 8rem;
           }
           .content {
-            padding-right: 70px;
+            padding-right: 7rem;
           }
         }
       }
       .time {
         position: relative;
-        font-size: 14px;
-        margin-top: 2px;
+        font-size: 1.4rem;
+        margin-top: 0.2rem;
         color: #3c95f9;
       }
       .time:before {
         position: absolute;
-        left: -18px;
-        top: 5px;
+        left: -1.8rem;
+        top: 0.5rem;
         content: '';
-        width: 8px;
-        height: 8px;
+        width: 0.8rem;
+        height: 0.8rem;
         background: #3c95f9;
-        border-radius: 4px;
+        border-radius: 0.4rem;
       }
       .company {
-        font-size: 14px;
+        font-size: 1.4rem;
         color: #444;
-        margin: 5px 0;
+        margin: 0.5rem 0;
       }
       .description {
         color: #808080;
-        font-size: 13px;
-        margin-top: 6px;
-        line-height: 24px;
+        font-size: 1.3rem;
+        margin-top: 0.6rem;
+        line-height: 2.4rem;
         -webkit-transition: all 3s;
-        margin-bottom: 30px;
+        margin-bottom: 3rem;
         height: auto;
         white-space: pre-wrap;
         &.hide {
-          height: 69px;
+          height: 6.9rem;
         }
       }
       .toggle {
         position: absolute;
         right: 0;
-        bottom: 10px;
-        font-size: 13px;
-        margin-right: 5px;
+        bottom: 1rem;
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
         color: #3c95f9;
         &.show:before {
           border: none;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-top: 10px solid #d8d8d8;
+          border-left: 0.6rem solid transparent;
+          border-right: 0.6rem solid transparent;
+          border-top: 1rem solid #d8d8d8;
         }
         &:before {
           position: absolute;
-          left: -19px;
-          top: 5px;
+          left: -1.9rem;
+          top: 0.5rem;
           width: 0;
           height: 0;
           content: '';
           border: none;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-bottom: 10px solid #d8d8d8;
+          border-left: 0.6rem solid transparent;
+          border-right: 0.6rem solid transparent;
+          border-bottom: 1rem solid #d8d8d8;
         }
       }
     }
@@ -971,26 +971,26 @@
 
   button {
     border-radius: 0;
-    padding: 12px 0;
-    height: 48px;
+    padding: 1.2rem 0;
+    height: 4.8rem;
     margin: 0;
-    font-size: 17px;
+    font-size: 1.7rem;
   }
 
   .shareWrapper {
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 14px;
-      padding: 12px 0;
+      font-size: 1.4rem;
+      padding: 1.2rem 0;
     }
     .more {
       background: #fff;
-      padding: 10px;
+      padding: 1rem;
       .single {
-        width: 55px;
-        height: 55px;
-        margin: 0 10px;
+        width: 5.5rem;
+        height: 5.5rem;
+        margin: 0 1rem;
         display: inline-block;
         img {
           width: 100%;
@@ -1001,15 +1001,15 @@
   }
 
   .noPublic {
-    margin: 20px 0 0;
+    margin: 2rem 0 0;
     background: #fff;
     text-align: center;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #b4b4b6;
-    padding-bottom: 30px;
-    padding-top: 20px;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
     .icon {
-      font-size: 50px;
+      font-size: 5rem;
       color: #f3f4f6;
     }
   }
@@ -1021,14 +1021,14 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 70px;
+      right: 1.5rem;
+      top: 1rem;
+      font-size: 7rem;
     }
   }
 
   .vueWrapper {
-    padding-bottom: 48px;
+    padding-bottom: 4.8rem;
   }
 
   .bottomButton {
@@ -1040,48 +1040,48 @@
 
   .seeMoreWrapper {
     background: #fff;
-    padding-bottom: 30px;
-    margin-top: -2px;
+    padding-bottom: 3rem;
+    margin-top: -0.2rem;
     z-index: 5;
     position: relative;
     .seeMore {
-      font-size: 14px;
+      font-size: 1.4rem;
       color: #3c95f9;
       text-align: center;
-      padding: 9px 0 8px;
+      padding: 0.9rem 0 0.8rem;
       background: #fff;
-      border: 1px solid #dcdcdc;
-      border-radius: 4px;
-      margin: 0 20px;
+      border: 0.1rem solid #dcdcdc;
+      border-radius: 0.4rem;
+      margin: 0 2rem;
     }
   }
 
   /***********评论和回复************/
 
   .news {
-    padding: 12px 14px;
+    padding: 1.2rem 1.4rem;
     overflow: hidden;
     position: relative;
   }
 
   .news div {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
-    margin-bottom: 8px;
+    margin-bottom: 0.8rem;
   }
 
   .news a {
     display: inline-block;
     float: left;
-    width: 1px;
-    height: 11px;
-    border-right: 1px solid #c8c8c8;
-    margin: 5px 22px 0 22px;
+    width: 0.1rem;
+    height: 1.1rem;
+    border-right: 0.1rem solid #c8c8c8;
+    margin: 0.5rem 2.2rem 0 2.2rem;
   }
 
   .news p {
     float: left;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
     text-align: center;
   }
@@ -1091,7 +1091,7 @@
   }
 
   .news p span {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
     font-weight: 500;
   }
@@ -1105,17 +1105,17 @@
   }*/
 
   .resumeWrapper {
-    bottom: 48px;
+    bottom: 4.8rem;
   }
 
   /*动态*/
   .dynamic {
     overflow: hidden;
-    padding: 12px 14px;
+    padding: 1.2rem 1.4rem;
     position: relative;
     p {
       float: left;
-      font-size: 14px;
+      font-size: 1.4rem;
       color: #808080;
       i{
         font-weight: 500;
@@ -1124,19 +1124,19 @@
     }
     svg {
       float: right;
-      font-size: 15px;
+      font-size: 1.5rem;
       color: #808080;
     }
   }
    /*Ta的专栏*/
   .specialColumn{
     overflow: hidden;
-    padding: 12px 14px;
+    padding: 1.2rem 1.4rem;
     position: relative;
   }
   .specialColumn p {
     float: left;
-    font-size:12px;
+    font-size:1.2rem;
     color: #b4b4b6;
 
   }
@@ -1145,26 +1145,26 @@
   }
   .specialColumn p i{
     display: inline-block;
-    width:1px;
-    height:10px;
+    width:0.1rem;
+    height:1rem;
     background:#c8c8c8;
-    margin:0  5px -1px 5px;
+    margin:0  0.5rem -0.1rem 0.5rem;
 
   }
   .specialColumn svg{
     float: right;
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #808080;
   }
   .specialColumn p:nth-of-type(1){
-     font-size:14px;
+     font-size:1.4rem;
      color: #808080;
-     margin-right: 5px;
+     margin-right: 0.5rem;
   }
 
   /*擅长*/
   .skilled {
-    padding: 12px 14px 17px 14px;
+    padding: 1.2rem 1.4rem 1.7rem 1.4rem;
     overflow: hidden;
     position: relative;
 
@@ -1173,28 +1173,28 @@
   .skilled span {
     float: left;
     background: #ececee;
-    border-radius: 50px;
-    padding: 4px 11px;
-    font-size: 12px;
+    border-radius: 5rem;
+    padding: 0.4rem 1.1rem;
+    font-size: 1.2rem;
     color: #444444;
-    margin-left:8px;
-    margin-bottom: 6px;
+    margin-left:0.8rem;
+    margin-bottom: 0.6rem;
   }
 
   /*.skilled span:nth-of-type(1) {*/
-    /*margin-left: 0px;*/
+    /*margin-left: 0rem;*/
   /*}*/
 
   .skilled p {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
-    margin-bottom: 12px;
+    margin-bottom: 1.2rem;
   }
   /*向他咨询*/
   .btn{
-    border-top:1px solid #dcdcdc;
+    border-top:0.1rem solid #dcdcdc;
     width:100%;
-    height:49px;
+    height:4.9rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1209,25 +1209,25 @@
   .btn P:nth-of-type(1){
     width:32%;
     background:#f3f4f6;
-    font-size:14px;
+    font-size:1.4rem;
     color: #444444;
 
   }
   .btn P:nth-of-type(1) svg{
-    font-size: 17px;
+    font-size: 1.7rem;
     color: #808080;
-    margin-right: 4px;
-    margin-top: -2px;
+    margin-right: 0.4rem;
+    margin-top: -0.2rem;
   }
   .btn P:nth-of-type(2){
     width:68%;
     background:#03aef9;
-    font-size:17px;
+    font-size:1.7rem;
     color: #ffffff;
   }
   .grey{
     width:100%;
-    height:10px;
+    height:1rem;
     background: #F3F4F5;
   }
 </style>

@@ -347,10 +347,10 @@
   }
   .bot {
     position: absolute;
-    right:15px;
-    top: 0px;
-    left:15px;
-    height: 1px;
+    right:1.5rem;
+    top: 0rem;
+    left:1.5rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -364,17 +364,17 @@
   }
 
   .help {
-    font-size: 14px;
+    font-size: 1.4rem;
     background: #fff;
   }
 
   .help .title {
-    padding: 15px 15px 10px;
+    padding: 1.5rem 1.5rem 1rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 15px;
+    padding: 0 1.5rem;
     color: #808080;
   }
 
@@ -383,14 +383,14 @@
   }
 
   .buttonWrapper {
-    padding: 5px 15px 15px 15px;
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 50px;
+    border-radius: 5rem;
     margin-bottom: 0;
-    padding: 13px 0;
+    padding: 1.3rem 0;
   }
   .iNeedAskWrapper{
     padding:0;
@@ -403,70 +403,70 @@
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  16px 8px 7px;
+    padding: 0  1.6rem 0.8rem 0.7rem;
   }
   .question_tags p{
     float: left;
      background: #a8dff7;
     color:#FFFFFF;
-    padding: 0px 8px;
-    border-radius:50px;
-    margin-top: 9px;
-    margin-left: 9px;
-    font-size:12px;
+    padding: 0rem 0.8rem;
+    border-radius:5rem;
+    margin-top: 0.9rem;
+    margin-left: 0.9rem;
+    font-size:1.2rem;
   }
   /*返回问答社区*/
 .back{
   width:100%;
-  height:62px;
+  height:6.2rem;
   text-align: center;
-  line-height: 62px;
+  line-height: 6.2rem;
   background: url("../../statics/images/Community.png") no-repeat;
   background-size: cover;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 .back span:nth-of-type(1){
-  font-size:15px;
+  font-size:1.5rem;
   color:#444444;
-  line-height: 62px;
+  line-height: 6.2rem;
 }
 .back span:nth-of-type(2){
-  font-size:12px;
+  font-size:1.2rem;
   color:#808080;
-  line-height: 62px;
+  line-height: 6.2rem;
 }
 .back svg:nth-of-type(1){
-  font-size:12px;
+  font-size:1.2rem;
   color:#808080;
-  line-height: 62px;
+  line-height: 6.2rem;
 }
 .back svg:nth-of-type(2){
-  font-size:12px;
+  font-size:1.2rem;
   color:#808080;
-  line-height: 62px;
-  margin-left: -10px;
+  line-height: 6.2rem;
+  margin-left: -1rem;
   }
   /*answer*/
   .detail-answer[data-v-852fb68e] {
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
   /*查看回答*/
   .see{
     width:100%;
-    height:40px;
-    padding: 0 15px;
-    font-size:14px;
+    height:4rem;
+    padding: 0 1.5rem;
+    font-size:1.4rem;
     color:#03aef9;
     text-align: center;
-    line-height: 40px;
+    line-height: 4rem;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     position: relative;
   }
   .btn{
-    margin-top: -15px;
+    margin-top: -1.5rem;
   }
   .star{
-    margin-top: -15px;
+    margin-top: -1.5rem;
   }
 </style>

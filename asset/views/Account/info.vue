@@ -147,10 +147,10 @@
       },
       // 警告框
       warn () {
-        var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+        var font = '<p style="text-align: left; color: #444444; margin-bottom:2rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
           '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>'
-        var title = '<p style="font-size:16px; margin-bottom:15px">' +
-          '<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
+        var title = '<p style="font-size:1.6rem; margin-bottom:1.5rem">' +
+          '<svg class="icon" aria-hidden="true" style="font-size:1.8rem; color:#fcc816; margin-right:0.2rem; margin-bottom:-0.1rem">' +
           '<use xlink:href="#icon-jinggao"></use>' +
           '</svg>' +
           '警告说明 ' +
@@ -217,10 +217,10 @@
   }
 
   .mui-bar .myicon {
-    width: 16px;
-    height: 16px;
-    right: 8px;
-    top: 8px;
+    width: 1.6rem;
+    height: 1.6rem;
+    right: 0.8rem;
+    top: 0.8rem;
   }
 
   p,
@@ -231,7 +231,7 @@
 
   .info-professor {
     width: 100%;
-    padding: 20px 15px 0px 16px;
+    padding: 2rem 1.5rem 0rem 1.6rem;
     background: #F3F4F6;
     text-align: center;
     position: relative;
@@ -239,144 +239,144 @@
 
   .info-look {
     position: absolute;
-    top: 20px;
-    right: 15px;
+    top: 2rem;
+    right: 1.5rem;
   }
 
   .info-look svg {
-    font-size: 24px;
+    font-size: 2.4rem;
     color: rgb(3, 174, 249);
-    margin-bottom: -2px;
+    margin-bottom: -0.2rem;
   }
 
   .info-look span {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(1) img {
-    width: 69px;
-    height: 69px;
+    width: 6.9rem;
+    height: 6.9rem;
     border-radius: 50%;
   }
 
   .info-professor p:nth-of-type(1) span {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 1.8rem;
+    height: 1.8rem;
     border-radius: 50%;
     background: #FFFFFF;
-    margin-left: -18px;
-    margin-bottom: 6px;
+    margin-left: -1.8rem;
+    margin-bottom: 0.6rem;
     position: relative;
   }
 
   .info-professor p:nth-of-type(1) span svg {
-    font-size: 25px;
+    font-size: 2.5rem;
     color: #808080;
     position: absolute;
-    left: -4px;
-    top: -3px;
+    left: -0.4rem;
+    top: -0.3rem;
   }
 
   .info-professor p:nth-of-type(2) {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 
   .info-professor p:nth-of-type(2) span {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(2) svg {
-    font-size: 20px;
+    font-size: 2rem;
     color: rgb(3, 174, 249);
-    margin-bottom: -2px;
+    margin-bottom: -0.2rem;
   }
 
   .info-professor p:nth-of-type(3) {
-    margin-top: 7px;
+    margin-top: 0.7rem;
   }
 
   .info-professor p:nth-of-type(3) span {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(3) i {
     display: inline-block;
-    width: 1px;
-    height: 13px;
+    width: 0.1rem;
+    height: 1.3rem;
     background: #c8c8c8;
-    margin: 0 3px -2px 3px;
+    margin: 0 0.3rem -0.2rem 0.3rem;
   }
 
   .info-professor p:nth-of-type(4) {
-    margin-top: 7px;
+    margin-top: 0.7rem;
   }
 
   .info-professor p:nth-of-type(5) {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 
   .info-professor p:nth-of-type(4),
   .info-professor p:nth-of-type(5) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
   }
 
   .info-progresbar {
     width: 100%;
-    height: 50px;
-    padding: 10px 17px 0 16px;
+    height: 5rem;
+    padding: 1rem 1.7rem 0 1.6rem;
     background: #F3F4F6;
   }
 
   .info-progresbar svg {
     float: right;
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #fcc816;
-    margin-left: 0px;
-    margin-top: 4px;
+    margin-left: 0rem;
+    margin-top: 0.4rem;
   }
 
   .info-progresbar .info-progress {
     display: inline-block;
     width: 80%;
-    height: 12px;
-    border-radius: 50px;
+    height: 1.2rem;
+    border-radius: 5rem;
     overflow: hidden;
-    border: 0.5px solid rgb(3, 174, 249);
-    margin-bottom: -2px;
+    border: 0.0.5rem solid rgb(3, 174, 249);
+    margin-bottom: -0.2rem;
   }
 
   .info-progresbar .info-progress > i {
     display: inline-block;
     font-style: normal;
-    margin-bottom: 8px;
-    margin-left: -14px;
-    height: 12px;
+    margin-bottom: 0.8rem;
+    margin-left: -1.4rem;
+    height: 1.2rem;
     background: rgb(3, 174, 249);
   }
 
   .info-progresbar .info-text {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
   }
 
   .paizhao {
     width: 100%;
-    height: 100px;
+    height: 10rem;
     background: #FFFFFF;
-    padding: 19px 12px 0 12px;
-    font-size: 12px;
+    padding: 1.9rem 1.2rem 0 1.2rem;
+    font-size: 1.2rem;
     color: rgb(128, 128, 128);
   }
 
   .part3 .desc {
-    margin-left: 40px;
-    font-size: 12px;
+    margin-left: 4rem;
+    font-size: 1.2rem;
   }
 
   .part3 .important {
@@ -385,37 +385,37 @@
 
   .info-choose {
     width: 100%;
-    height: 95px;
+    height: 9.5rem;
     background: #FFFFFF;
     position: absolute;
     bottom: 0;
-    padding-top: 13px;
-    padding-left: 39px;
+    padding-top: 1.3rem;
+    padding-left: 3.9rem;
     z-index: 999;
     display: none;
   }
 
   .info-choose p {
-    width: 45px;
-    height: 71px;
+    width: 4.5rem;
+    height: 7.1rem;
     float: left;
   }
 
   .info-choose p:nth-of-type(2) {
-    margin-left: 36px;
+    margin-left: 3.6rem;
   }
 
   .info-choose p svg {
-    font-size: 48px;
+    font-size: 4.8rem;
     color: rgb(220, 220, 220);
   }
 
   .info-choose p span {
     display: block;
-    margin-left: 10px;
-    margin-top: 2px;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 1.3rem;
   }
 
   #mui-popover-action {
@@ -424,10 +424,10 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 16px;
+    right: 1.6rem;
     bottom: 0;
-    left: 14px;
-    height: 1px;
+    left: 1.4rem;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -436,10 +436,10 @@
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 16px;
+    right: 1.6rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
   }
 
@@ -448,22 +448,22 @@
     top: 0;
     right: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #fff;
   }
 
-  @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media (min-device-width: 41.4rem) and (max-device-width: 73.6rem) and (-webkit-min-device-pixel-ratio: 3) {
     .part2 .progressBar {
-      width: 160px !important;
+      width: 16rem !important;
     }
   }
 
-  @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  @media (min-device-width: 37.5rem) and (max-device-width: 66.7rem) and (-webkit-min-device-pixel-ratio: 2) {
     .part2 .progressBar {
-      width: 160px !important;
+      width: 16rem !important;
     }
   }
 </style>

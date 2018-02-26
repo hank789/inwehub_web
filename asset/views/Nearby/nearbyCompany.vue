@@ -230,7 +230,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -240,7 +240,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -252,21 +252,21 @@
   /*搜索框*/
   .searchContainer{
     width:100%;
-    height:54px;
+    height:5.4rem;
     background:#f3f4f6;
-    padding-top: 10px;
+    padding-top: 1rem;
   }
   .searchContainer p{
     width:92%;
-    height:34px;
+    height:3.4rem;
     background: #FFFFFF;
-    border-radius: 50px;
+    border-radius: 5rem;
     margin-left: 4%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items:center;
-    padding:0 12px;
+    padding:0 1.2rem;
   }
   .searchContainer input{
     width:85%;
@@ -275,18 +275,18 @@
     border:none;
     padding: 0;
     padding-left: 0;
-    font-size:14px;
+    font-size:1.4rem;
     color:#444444;
     float: left;
-    margin-left: 10px;
+    margin-left: 1rem;
   }
   .searchContainer p svg{
     color:#c8c8c8;
-    font-size: 17px;
+    font-size: 1.7rem;
   }
   .searchContainer span{
-    width:18px;
-    height:18px;
+    width:1.8rem;
+    height:1.8rem;
     background: #c8c8c8;
     border-radius: 50%;
     position: relative;
@@ -304,26 +304,26 @@
   /*申请添加*/
 /*.apply{*/
   /*width:100%;*/
-  /*height:45px;*/
+  /*height:4.5rem;*/
   /*padding: 0 4%;*/
-  /*line-height: 45px;*/
+  /*line-height: 4.5rem;*/
   /*}*/
   /*.apply p:nth-of-type(1){*/
     /*float: left;*/
-    /*font-size:14px;*/
+    /*font-size:1.4rem;*/
     /*color:#03aef9;*/
   /*}*/
   /*.apply p:nth-of-type(2){*/
     /*float: right;*/
-    /*width:86px;*/
-    /*height:27px;*/
-    /*border-radius: 50px;*/
-    /*border:1px solid #03aef9;*/
-    /*font-size:14px;*/
+    /*width:8.6rem;*/
+    /*height:2.7rem;*/
+    /*border-radius: 5rem;*/
+    /*border:0.1rem solid #03aef9;*/
+    /*font-size:1.4rem;*/
     /*color:#03aef9;*/
     /*text-align: center;*/
-    /*line-height: 25px;*/
-    /*margin-top: 9px;*/
+    /*line-height: 2.5rem;*/
+    /*margin-top: 0.9rem;*/
   /*}*/
   ul{
     width:100%;
@@ -332,7 +332,7 @@
   }
   ul li{
     width:100%;
-    height:89px;
+    height:8.9rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -341,23 +341,23 @@
     position: relative;
   }
   ul li .container-image{
-    width:42px;
-    height:42px;
+    width:4.2rem;
+    height:4.2rem;
   }
   .container-info{
     width: 85%;
     height:100%;
-    margin-left: 10px;
+    margin-left: 1rem;
   }
   .container-info p:nth-of-type(1){
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
-    margin-top: 13px;
+    margin-top: 1.3rem;
   }
   .container-info p:nth-of-type(2){
-    font-size:14px;
+    font-size:1.4rem;
     color: #808080;
-    margin:1px 0;
+    margin:0.1rem 0;
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -369,16 +369,16 @@
   }
   .container-info p:nth-of-type(2) span i{
     display: inline-block;
-    width:1px;
-    height:13px;
+    width:0.1rem;
+    height:1.3rem;
     background:#dcdcdc;
-    margin: 0 5px;
+    margin: 0 0.5rem;
   }
   .container-info p:nth-of-type(2) span:nth-last-child(1) i{
     display: none;
   }
   .container-info p:nth-of-type(3){
-    font-size:14px;
+    font-size:1.4rem;
     color: #808080;
     display: flex;
     flex-direction: row;
@@ -387,25 +387,25 @@
 
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
   .listWrapper{
-    top:99px;
+    top:9.9rem;
   }
  /*导航栏*/
   .menu{
     width: 100%;
-    height:50px;
+    height:5rem;
     background:#3c3e44;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:210px;
-    height:34px;
-    border:1px solid #808080;
-    border-radius: 50px;
+    width:21rem;
+    height:3.4rem;
+    border:0.1rem solid #808080;
+    border-radius: 5rem;
     position: absolute;
     left: 0;
     right:0;
@@ -414,20 +414,20 @@
   .menu .switch p{
     width:50%;
     height:100%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #fefefe;
     float: left;
     text-align: center;
-    line-height: 34px;
+    line-height: 3.4rem;
   }
   .menu .switch p:nth-of-type(2){
     background:#808080;
-    border-radius: 0 50px 50px 0;
+    border-radius: 0 5rem 5rem 0;
   }
   .menu svg{
     position: absolute;
     right:3%;
-    font-size: 25px;
+    font-size: 2.5rem;
     color: #fefefe;
   }
 </style>

@@ -167,7 +167,7 @@
   }
 
   .mui-bar-nav ~ .mui-content.absolute {
-    top: 44px;
+    top: 4.4rem;
     background: #fff;
   }
 
@@ -176,7 +176,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -185,26 +185,26 @@
   .hotAnswer_b {
     width: 90%;
     margin-left: 5%;
-    /*height: 200px;*/
+    /*height: 20rem;*/
     overflow: hidden;
   }
 
   .hotAnswer_b li {
     width: 100%;
-    height: 74px;
+    height: 7.4rem;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    margin-top: 12px;
-    font-size: 16px;
+    margin-top: 1.2rem;
+    font-size: 1.6rem;
     color: #444444;
   }
 
   .hotAnswer_d {
     width: 100%;
-    height: 32px;
-    margin-top: 8px;
+    height: 3.2rem;
+    margin-top: 0.8rem;
   }
 
   .hotAnswer_d p {
@@ -213,16 +213,16 @@
 
   .hotAnswer_d p:nth-child(1) {
     width: 9.5%;
-    height: 32px;
+    height: 3.2rem;
     /*background: #CCCCCC;*/
     position: relative;
   }
 
   .hotAnswer_d p:nth-child(1) > svg {
     position: absolute;
-    font-size: 14px;
+    font-size: 1.4rem;
     bottom: 0;
-    right: -4px;
+    right: -0.4rem;
   }
 
   .hotAnswer_d p:nth-child(1) > img {
@@ -233,33 +233,33 @@
 
   .hotAnswer_d p:nth-child(2) {
     width: 32%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
+    height: 1.5rem;
+    margin-top: 8.0.5rem;
+    font-size: 1.3rem;
     color: #808080;
     text-align: center;
-    line-height: 15px;
+    line-height: 1.5rem;
   }
 
   .hotAnswer_d p:nth-child(3) {
     width: 21%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
+    height: 1.5rem;
+    margin-top: 8.0.5rem;
+    font-size: 1.3rem;
     color: #808080;
-    border-right: 1px solid #c8c8c8;
+    border-right: 0.1rem solid #c8c8c8;
     text-align: center;
-    line-height: 15px;
+    line-height: 1.5rem;
   }
 
   .hotAnswer_d p:nth-child(4) {
     width: 37.5%;
-    height: 15px;
-    margin-top: 8.5px;
-    font-size: 13px;
+    height: 1.5rem;
+    margin-top: 8.0.5rem;
+    font-size: 1.3rem;
     color: #808080;
     text-align: center;
-    line-height: 15px;
+    line-height: 1.5rem;
   }
 
   /*无数据的样式 */
@@ -271,13 +271,13 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 6rem;
+    margin-left: 2.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 </style>

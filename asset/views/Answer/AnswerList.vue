@@ -239,30 +239,30 @@
 
 <style scoped>
   .list-answer {
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   .list-answer .list-answer-item {
     position: relative;
-    line-height: 40px;
+    line-height: 4rem;
   }
 
   .list-answer .list-answer-item .title {
-    line-height: 28px;
+    line-height: 2.8rem;
   }
 
   .list-answer .list-answer-item .mui-media-body {
-    padding-left: 10px;
-    line-height: 21px;
-    font-size: 12px;
+    padding-left: 1rem;
+    line-height: 2.1rem;
+    font-size: 1.2rem;
     color: #9B9B9B;
   }
 
   .list-answer .list-answer-item .time {
     color: #9B9B9B;
-    font-size: 12px;
+    font-size: 1.2rem;
     float: right;
-    margin-right: 10px;
+    margin-right: 1rem;
   }
 
   .list-answer .username {
@@ -271,9 +271,9 @@
 
   .list-answer .list-answer-item .amount {
     position: absolute;
-    right: 10px;
+    right: 1rem;
     color: #ff9800;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .list-answer .list-answer-item .amount b {
@@ -282,22 +282,22 @@
   }
 
   .list-answer .person {
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 
   .list-answer .site-desc {
-    padding-left: 10px;
-    line-height: 22px;
+    padding-left: 1rem;
+    line-height: 2.2rem;
     color: #101010;
   }
 
   .list-answer .site-descSub {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #4A4A4A;
   }
 
   .list-answer .site-desc .mui-icon {
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .list-answer .avatar {
@@ -306,9 +306,9 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 50px;
-    width: 50px;
-    font-size: 20px;
+    height: 5rem;
+    width: 5rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -338,15 +338,15 @@
   }
 
   .list-answer .mui-table-view-cell {
-    padding: 11px 8px;
+    padding: 1.1rem 0.8rem;
   }
 
   .list-answer .mui-table-view-cell > a:not(.mui-btn) {
-    margin: -11px -8px;
+    margin: -1.1rem -0.8rem;
   }
 
   .list-answer p {
-    margin-left: 20px;
+    margin-left: 2rem;
   }
 
   .list-answer .person {
@@ -359,12 +359,12 @@
   }
 
   .list-empty .menu {
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 14px;
+    line-height: 5rem;
+    font-size: 1.4rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -375,11 +375,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 28px;
+    width: 2.8rem;
     bottom: 0;
     left: 50%;
-    margin-left: -14px;
-    height: 2px;
+    margin-left: -1.4rem;
+    height: 0.2rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -399,19 +399,19 @@
 
   .mui-table-view:after {
     border: none;
-    left: 18px;
-    right: 18px;
+    left: 1.8rem;
+    right: 1.8rem;
   }
 
   .label {
     display: inline-block;
     background: #fcc816;
-    border-radius: 50px;
+    border-radius: 5rem;
     color: #fff;
-    padding: 0 9px;
+    padding: 0 0.9rem;
   }
 
   .emptyListWrapper {
-    padding-top: 0px;
+    padding-top: 0rem;
   }
 </style>

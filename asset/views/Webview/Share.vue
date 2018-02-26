@@ -188,7 +188,7 @@
 
 
   .mui-content {
-    padding: 200px;
+    padding: 20rem;
     text-align: center;
   }
 
@@ -196,16 +196,16 @@
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 14px;
-      padding: 12px 0;
+      font-size: 1.4rem;
+      padding: 1.2rem 0;
     }
     .more {
       background: #fff;
-      padding: 10px;
+      padding: 1rem;
       .single {
-        width: 55px;
-        height: 55px;
-        margin: 0 10px;
+        width: 5.5rem;
+        height: 5.5rem;
+        margin: 0 1rem;
         display: inline-block;
         img {
           width: 100%;
@@ -222,9 +222,9 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 70px;
+      right: 1.5rem;
+      top: 1rem;
+      font-size: 7rem;
     }
   }
 

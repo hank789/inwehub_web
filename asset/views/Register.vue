@@ -233,11 +233,11 @@
       // 弹窗；
       warm (content, point, callback) {
         var title =
-          '<svg class="icon colse" aria-hidden="true" style="font-size:18px; color:#808080; position: absolute; right:8px; top:8px;" id="warmClosealert">' +
+          '<svg class="icon colse" aria-hidden="true" style="font-size:1.8rem; color:#808080; position: absolute; right:0.8rem; top:0.8rem;" id="warmClosealert">' +
           '<use xlink:href="#icon-guanbi"></use>' +
           '</svg>'
 
-        var cont = '<p style="font-size:16px; margin-bottom:15px" >' +
+        var cont = '<p style="font-size:1.6rem; margin-bottom:1.5rem" >' +
           point +
           '</p>'
 
@@ -578,7 +578,7 @@
   /*协议*/
   .protocol {
     color: rgb(128, 128, 128);
-    font-size: 12px;
+    font-size: 1.2rem;
     width: 80%;
     margin-left: 10%;
     text-align: left;
@@ -591,20 +591,20 @@
 
   /*登录*/
   .button, .mui-btn {
-    border-radius: 5px;
+    border-radius: 0.5rem;
     width: 80%;
     margin-left: 10%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 
   }
 
   button {
-    border-radius: 5px;
+    border-radius: 0.5rem;
 
     &:disabled {
       background: #dcdcdc;
-      border: 1px solid #dcdcdc;
+      border: 0.1rem solid #dcdcdc;
       color: #b4b4b6;
 
     }
@@ -612,7 +612,7 @@
 
   /*邀请码*/
   .help {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #3c95f9;
     text-align: center;
 
@@ -623,32 +623,32 @@
   .leftNav {
 
     position: absolute;
-    left: 12px;
-    top: 15px;
-    font-size: 20px;
+    left: 1.2rem;
+    top: 1.5rem;
+    font-size: 2rem;
     color: #808080;
   }
 
   /*图标*/
   .logo {
 
-    font-size: 110px;
-    margin: 40px 0 45px;
+    font-size: 11rem;
+    margin: 4rem 0 4.5rem;
 
   }
 
   /*输入框的内容*/
   .inputWrapper .icon {
     position: absolute;
-    top: 5px;
-    font-size: 22px;
+    top: 0.5rem;
+    font-size: 2.2rem;
     color: #c8c8c8;
     left: 0;
 
   }
 
   .inputWrapper {
-    margin: 0 33px 22px;
+    margin: 0 3.3rem 2.2rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -669,27 +669,27 @@
   /*验证码*/
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #3c95f9;
     position: absolute;
-    right: 2px;
-    top: 4.2px;
-    border: 1px solid #3c95f9;
-    border-radius: 5px;
-    padding: 3px 14px;
+    right: 0.2rem;
+    top: 4.0.2rem;
+    border: 0.1rem solid #3c95f9;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1.4rem;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 1px solid #dcdcdc;
+    border: 0.1rem solid #dcdcdc;
     color: #444;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 3px;
+    bottom: 0.3rem;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -700,11 +700,11 @@
     color: #444;
     border: none;
     margin: 0;
-    font-size: 14px;
+    font-size: 1.4rem;
     background: none;
     display: inline-block;
-    height: 36px;
-    margin-left: 15px;
+    height: 3.6rem;
+    margin-left: 1.5rem;
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -728,11 +728,11 @@
     color: #444;
     border: none;
     margin: 0;
-    font-size: 14px;
+    font-size: 1.4rem;
     background: none;
     display: inline-block;
-    height: 36px;
-    margin-left: 12px;
+    height: 3.6rem;
+    margin-left: 1.2rem;
     /*background: #ccc;*/
     width: 60%;
     margin-right: 40%;
@@ -741,9 +741,9 @@
   .half:after {
     position: absolute;
     right: 36%;
-    bottom: 3px;
+    bottom: 0.3rem;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -753,24 +753,24 @@
   /*2 3图标大小的微调*/
   .inputWrapper:nth-of-type(3) .icon {
     position: absolute;
-    top: 3px;
-    font-size: 25px;
+    top: 0.3rem;
+    font-size: 2.5rem;
     /*color: #c8c8c8;*/
     left: 0;
   }
 
   .inputWrapper:nth-of-type(4) .icon {
     position: absolute;
-    top: 3px;
-    font-size: 25px;
+    top: 0.3rem;
+    font-size: 2.5rem;
     /*color: #c8c8c8;*/
     left: 0;
   }
 
   .inputWrapper:nth-of-type(5) .icon {
     position: absolute;
-    top: 5px;
-    font-size: 20px;
+    top: 0.5rem;
+    font-size: 2rem;
     /*color: #c8c8c8;*/
     left: 0;
   }

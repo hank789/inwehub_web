@@ -147,7 +147,7 @@
   .mui-scroll-wrapper {
     position: absolute;
     z-index: 2;
-    top: 56px;
+    top: 5.6rem;
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -158,7 +158,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -169,17 +169,17 @@
   /*导航栏*/
   .menu{
     width: 100%;
-    height:50px;
+    height:5rem;
     background:#3c3e44;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:210px;
-    height:34px;
-    border:1px solid #808080;
-    border-radius: 50px;
+    width:21rem;
+    height:3.4rem;
+    border:0.1rem solid #808080;
+    border-radius: 5rem;
     position: absolute;
     left: 0;
     right:0;
@@ -188,20 +188,20 @@
   .menu .switch p{
     width:50%;
     height:100%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #fefefe;
     float: left;
     text-align: center;
-    line-height: 34px;
+    line-height: 3.4rem;
   }
   .menu .switch p:nth-of-type(1){
     background:#808080;
-    border-radius: 50px  0  0 50px;
+    border-radius: 5rem  0  0 5rem;
   }
   .menu svg{
     position: absolute;
     right:3%;
-    font-size: 25px;
+    font-size: 2.5rem;
     color: #fefefe;
   }
   /*列表区域*/
@@ -212,66 +212,66 @@
   }
   .cions-list li{
     position: relative;
-    height:64px;
+    height:6.4rem;
   }
   .cions-list li div{
     float: left;
   }
   .cions-list li .cions-avatar{
     position: relative;
-    width:44px;
-    height:44px;
+    width:4.4rem;
+    height:4.4rem;
     border-radius:50%;
     background: #cccccc;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
   .cions-list li .cions-avatar img{
-    width:44px;
-    height:44px;
+    width:4.4rem;
+    height:4.4rem;
     border-radius:50%;
   }
   .cions-list li .cions-avatar svg{
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: -2px;
+    font-size: 2rem;
+    right: -0.5rem;
+    bottom: -0.2rem;
   }
   .cions-list li .detail{
     width:60%;
     overflow: hidden;
-    margin-top: 14px;
-    font-size:14px;
+    margin-top: 1.4rem;
+    font-size:1.4rem;
     color: #444444;
-    margin-left: 8px;
+    margin-left: 0.8rem;
   }
   .cions-list li .detail p:nth-of-type(1) i{
-    font-size:12px;
+    font-size:1.2rem;
     color: #808080;
   }
   .cions-list li .detail p:nth-of-type(2){
-    font-size:12px;
+    font-size:1.2rem;
     color: #b4b4b6;
-    margin-top: -2px;
+    margin-top: -0.2rem;
   }
   .cions-list li .fouce{
-    width:61px;
-    height:27px;
+    width:6.1rem;
+    height:2.7rem;
     background: #03aef9;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 27px;
-    font-size:14px;
+    line-height: 2.7rem;
+    font-size:1.4rem;
     color: #ffffff;
-    margin-top: 18.5px;
+    margin-top: 18.0.5rem;
     float: right;
 
   }
   .cions-list li .blue{
     color: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.1rem solid #03aef9;
     background: #ffffff;
   }
   .listWrapper{
-    top:50px;
+    top:5rem;
   }
 </style>

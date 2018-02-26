@@ -99,12 +99,12 @@
 <style scoped>
 /*回答者样式*/
   .comment-container{
-    height: 30px;
+    height: 3rem;
     padding: 0;
   }
   .question-answer{
     float: left;
-    font-size:13px;
+    font-size:1.3rem;
     color: #808080;
   }
   .question-answer i{

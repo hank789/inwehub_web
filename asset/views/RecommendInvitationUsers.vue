@@ -163,8 +163,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -175,43 +175,43 @@
   /*邀请好友*/
   .invitation-fouce-user{
     width:100%;
-    height:44px;
+    height:4.4rem;
     background: #f3f4f6;
     padding: 0 4%;
-    line-height: 44px;
-    font-size:14px;
+    line-height: 4.4rem;
+    font-size:1.4rem;
     color: #444444;
   }
   .invitation-fouce-user svg{
     float: right;
     color: #808080;
-    margin-top: 15px;
+    margin-top: 1.5rem;
   }
   /*换一批&&一键邀请*/
   .invitation-recommend{
     width:100%;
-    height:44px;
-    border-top: 1px solid #dcdcdc;
-    border-bottom: 1px solid #dcdcdc;
+    height:4.4rem;
+    border-top: 0.1rem solid #dcdcdc;
+    border-bottom: 0.1rem solid #dcdcdc;
     background: #FFFFFF;
     position: relative;
   }
   .invitation-recommend p{
     width:50%;
-    height:44px;
+    height:4.4rem;
     text-align: center;
-    font-size:14px;
+    font-size:1.4rem;
     color: #235280;
-    line-height: 44px;
+    line-height: 4.4rem;
     float: left;
   }
   .invitation-recommend p svg{
-    font-size: 20px;
-    margin-bottom: -2px;
+    font-size: 2rem;
+    margin-bottom: -0.2rem;
   }
   .invitation-recommend i{
-    width:1px;
-    height:19px;
+    width:0.1rem;
+    height:1.9rem;
     background: #dcdcdc;
     position: absolute;
     top:0;
@@ -225,34 +225,34 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
   }
 
   .my-focus-item {
     width: 100%;
-    height: 63px;
+    height: 6.3rem;
     list-style: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     position: relative;
   }
   .my-focus-item div.avatar {
-    width: 44px;
-    height: 44px;
+    width: 4.4rem;
+    height: 4.4rem;
     float: left;
-    margin-right: 8px;
+    margin-right: 0.8rem;
     position: relative;
   }
   .my-focus-item img {
-    width: 44px;
-    height: 44px;
+    width: 4.4rem;
+    height: 4.4rem;
     border-radius: 50%;
 
   }
   .my-focus-item svg {
     color: #fcc816;
-    font-size:15px;
+    font-size:1.5rem;
     position: absolute;
     right:0;
     bottom: 0;
@@ -267,15 +267,15 @@
 
   .my-focus-item .follows {
     position: absolute;
-    width: 62px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width: 6.2rem;
+    height: 2.7rem;
+    border: 0.1rem solid #03aef9;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 27px;
+    line-height: 2.7rem;
     right: 0;
-    top: 18px;
-    font-size: 14px;
+    top: 1.8rem;
+    font-size: 1.4rem;
     color: #03aef9;
   }
 
@@ -286,26 +286,26 @@
 
   .my-focus-item div p:nth-of-type(1) span {
     display: inline-block;
-    max-width: 126px;
-    height: 20px;
+    max-width: 12.6rem;
+    height: 2rem;
     overflow: hidden;
     font-family: "PingFangSC";
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
     color: #3c95f9;
   }
 
   .my-focus-item div p:nth-of-type(2){
     width: 100%;
-    height: 14px;
-    font-size: 13px;
+    height: 1.4rem;
+    font-size: 1.3rem;
     color: #b4b4b6;
-    line-height: 13px;
+    line-height: 1.3rem;
   }
 
 
@@ -317,20 +317,20 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 6rem;
+    margin-left: 2.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .container p {
     font-family: "PingFangSC";
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 
   .descriptionText {
     width:60%;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #b4b4b6;
   }
 </style>

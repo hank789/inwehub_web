@@ -111,13 +111,13 @@
   }
   .recommend li{
     width:92%;
-    padding:0px 0 13px 0;
+    padding:0rem 0 1.3rem 0;
     overflow: hidden;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     margin-left: 4%;
-    border-radius: 4px;
-    box-shadow: 0px 0px 7px 2px #ececee;
+    border-radius: 0.4rem;
+    box-shadow: 0rem 0rem 0.7rem 0.2rem #ececee;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
@@ -126,14 +126,14 @@
     position: relative;
   }
   .recommend li .container_type{
-    width: 64px;
-    height:20px;
+    width: 6.4rem;
+    height:2rem;
     float: left;
-    border-radius:0 18px 18px 0;
+    border-radius:0 1.8rem 1.8rem 0;
     text-align: center;
-    line-height: 20px;
+    line-height: 2rem;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
   /*颜色*/
   .recommend li .blue{
@@ -148,66 +148,66 @@
 
   /**/
   .recommend_content{
-    margin-top: 12px;
+    margin-top: 1.2rem;
     color:#444444;
-    font-size:15px;
-    line-height: 20px;
-    padding: 0 15px;
+    font-size:1.5rem;
+    line-height: 2rem;
+    padding: 0 1.5rem;
 
   }
   .container-item .title{
     width:100%;
-    height:42.5px;
+    height:42.0.5rem;
     padding: 0 4%;
-    line-height: 42.5px;
+    line-height: 42.0.5rem;
   }
   .container-item .title p:nth-of-type(1){
     float: left;
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
 
   }
   .container-item .title p:nth-of-type(2){
     float: right;
-    font-size:13px;
+    font-size:1.3rem;
     color:#03aef9;
 
   }
 
 
   #home-recommend div:nth-of-type(1) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
   #home-card img{
     width:100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   .listWrapper{
-    margin-top: 0px;
-    padding-top: 10px;
+    margin-top: 0rem;
+    padding-top: 1rem;
   }
 
   /*底部的详情*/
   .recommend_datail{
     width:100%;
-    height:20px;
-    margin-top: 9px;
+    height:2rem;
+    margin-top: 0.9rem;
   }
   /*回答 关注*/
   .answer-fouce{
     float: right;
-    font-size:12px;
+    font-size:1.2rem;
     color: #235280;
-    padding-right: 15px;
+    padding-right: 1.5rem;
   }
   .answer-fouce i{
     margin: 0;
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.1rem;
+    height:1.2rem;
     background: #dbdbdb;
-    margin: 0 9px -3px 9px;
+    margin: 0 0.9rem -0.3rem 0.9rem;
 
 
   }
@@ -215,36 +215,36 @@
   /*榜单*/
   .mostInvitations{
     width:92%;
-    height:60px;
+    height:6rem;
     background: #fdc707;
-    margin: 7px 4%;
-    border-radius: 12px;
-    padding-left: 15px;
-    padding-top: 8px;
+    margin: 0.7rem 4%;
+    border-radius: 1.2rem;
+    padding-left: 1.5rem;
+    padding-top: 0.8rem;
     position: relative;
   }
   .mostInvitations .Medal{
-    width: 32px;
+    width: 3.2rem;
     position: absolute;
-    right:18px;
+    right:1.8rem;
     top:0;
   }
   .invitation{
-    font-size:12px;
+    font-size:1.2rem;
     color: #8e4c02;
   }
   .invitation span{
-    font-size:16px;
+    font-size:1.6rem;
     font-weight:500;
     color: #8e4c02;
-    margin-right: 2px;
+    margin-right: 0.2rem;
   }
   .invitation i{
-    font-size:12px;
+    font-size:1.2rem;
     color:#235280;
   }
   .credits-cions{
-    font-size:12px;
+    font-size:1.2rem;
     color: #8e4c02;
   }
   .credits-cions i{
@@ -252,21 +252,21 @@
   }
   .InvitationList{
     position: absolute;
-    width:92px;
-    height:34px;
-    border:1px solid #fde07d;
-    border-radius: 13px;
-    font-size: 14px;
+    width:9.2rem;
+    height:3.4rem;
+    border:0.1rem solid #fde07d;
+    border-radius: 1.3rem;
+    font-size: 1.4rem;
     color: #b56102;
-    line-height: 34px;
+    line-height: 3.4rem;
     text-align: center;
-    right: 56px;
-    top: 13px;
-    box-shadow:0px 0px 2px rgba(81, 55, 7, 0.5) inset;
-    text-shadow: 0 0 1px rgb(238,134,16);
+    right: 5.6rem;
+    top: 1.3rem;
+    box-shadow:0rem 0rem 0.2rem rgba(81, 55, 7, 0.5) inset;
+    text-shadow: 0 0 0.1rem rgb(238,134,16);
   }
   .InvitationList img{
-    height:20px;
-    margin-top: 6px;
+    height:2rem;
+    margin-top: 0.6rem;
   }
 </style>

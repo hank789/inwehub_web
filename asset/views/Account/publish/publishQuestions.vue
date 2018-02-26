@@ -86,7 +86,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 45px;
+    height: 4.5rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -100,7 +100,7 @@
 
   .menu {
     width: 100%;
-    height: 45px;
+    height: 4.5rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -111,10 +111,10 @@
     width: 25%;
     height: 100%;
     float: left;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
     text-align: center;
-    line-height: 45px;
+    line-height: 4.5rem;
     font-weight: 600;
   }
 
@@ -126,21 +126,21 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 27px;
-    height: 1.5px;
+    width: 2.7rem;
+    height: 1.0.5rem;
     left:0;
     right:0;
-    bottom: 0.5px;
+    bottom: 0.0.5rem;
     margin:auto;
     background: #3c95f9;
   }
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -171,36 +171,36 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 14px 0 13px 0;
+    padding: 1.4rem 0 1.3rem 0;
     position: relative;
   }
 
   .answer li p:nth-of-type(2) {
     color: #444444;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .answer li p:nth-of-type(2) {
     overflow: hidden;
-    margin-top: 6px;
+    margin-top: 0.6rem;
 
   }
 
   .label {
     float: left;
-    width: 50px;
-    height: 17px;
-    line-height: 17px;
-    border-radius: 50px;
+    width: 5rem;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    border-radius: 5rem;
     background: #fcc816;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 1.2rem;
     text-align: center;
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(2) {
     float: right;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #b4b4b6;
   }
   /*状态的颜色*/
@@ -212,6 +212,6 @@
    background: #c8c8c8;
  }
   .listWrapper{
-    top: 45px;
+    top: 4.5rem;
   }
 </style>

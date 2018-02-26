@@ -15,7 +15,7 @@
 
 <style scoped>
 .developing{
-  padding:20px;
+  padding:2rem;
   text-align: center;
 }
 </style>

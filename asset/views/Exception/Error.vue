@@ -44,15 +44,15 @@
 
   header {
     width: 100%;
-    height: 44px;
+    height: 4.4rem;
     background: #f3f4f6;
     text-align: center;
   }
 
   header svg {
-    font-size: 80px;
+    font-size: 8rem;
     color: #3c3e44;
-    margin-top: -13px;
+    margin-top: -1.3rem;
   }
 
   .mui-content {
@@ -61,7 +61,7 @@
 
   .cont {
     width: 100%;
-    height: 100px;
+    height: 10rem;
     /*background: #CCCCCC;*/
     position: absolute;
     top: 0;
@@ -70,7 +70,7 @@
   }
 
   .cont svg {
-    font-size: 60px;
+    font-size: 6rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -79,8 +79,8 @@
 
   .cont p {
 
-    margin-top: 70px;
-    font-size: 14px;
+    margin-top: 7rem;
+    font-size: 1.4rem;
     color: #B4B4B6;
     text-align: center;
 
@@ -88,15 +88,15 @@
 
   .refresh {
     width: 100%;
-    height: 50px;
-    /*border: 1px solid #CCCCCC;*/
+    height: 5rem;
+    /*border: 0.1rem solid #CCCCCC;*/
     position: fixed;
-    bottom: 30px;
+    bottom: 3rem;
   }
 
   .refresh svg {
     color: #03aef9;
-    font-size: 26px;
+    font-size: 2.6rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -105,8 +105,8 @@
 
   .refresh p {
 
-    margin-top: 30px;
-    font-size: 14px;
+    margin-top: 3rem;
+    font-size: 1.4rem;
     color: #B4B4B6;
     text-align: center;
 

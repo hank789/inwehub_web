@@ -6,10 +6,10 @@
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
       </div>
       <swiper :options="swiperOption" class="home-recommend">
-        <swiper-slide style="width: 220px;" :title="item.title" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+        <swiper-slide style="width: 22rem;" :title="item.title" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url_slide"/>
         </swiper-slide>
-        <swiper-slide  style="width: 220px;" class="service" v-if="isShow ? isShow : 0">
+        <swiper-slide  style="width: 22rem;" class="service" v-if="isShow ? isShow : 0">
            <p @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">我也可以提供服务</p>
            <p>如您或您的公司希望在InweHub展示业务开展合作，点此申请。</p>
         </swiper-slide>
@@ -109,26 +109,26 @@
   }
   .container-item .title{
     width:100%;
-    height:42.5px;
+    height:42.0.5rem;
     padding: 0 4%;
-    line-height: 42.5px;
+    line-height: 42.0.5rem;
   }
   .container-item .title p:nth-of-type(1){
     float: left;
-    font-size:16px;
+    font-size:1.6rem;
     color:#444444;
 
   }
   .container-item .title p:nth-of-type(2){
     float: right;
-    font-size:13px;
+    font-size:1.3rem;
     color:#03aef9;
 
   }
 
   .home-recommend {
     width: 100%;
-    height: 172px;
+    height: 17.2rem;
     padding-left:4%;
     background: #FFFFFF;
   }
@@ -137,24 +137,24 @@
     bottom: 0;
     left: 0;
     content: '';
-    height: 10px;
+    height: 1rem;
     background-color: #f3f4f6;
     width: 100%;
   }
 
   .home-recommend div:nth-of-type(1) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
   .home-card {
-    height: 147px;
+    height: 14.7rem;
     background: #ececee;
     position: relative;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   .home-card img{
     width:100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
 
   .container-item:after {
@@ -162,33 +162,33 @@
     bottom: 0;
     left: 0;
     content: '';
-    height: 0px;
+    height: 0rem;
     background-color: #97d7fb;
     width: 100%;
   }
   /* 合作*/
   .service{
     background: #03aef9;
-    height:147px;
-     border-radius:4px;
+    height:14.7rem;
+     border-radius:0.4rem;
   }
   .service p:nth-of-type(1){
-    width:142px;
-    height:35px;
-    border: 1.5px solid #c2cddc;
-    font-size:14px;
+    width:14.2rem;
+    height:3.5rem;
+    border: 1.0.5rem solid #c2cddc;
+    font-size:1.4rem;
     color:#FFFFFF;
     text-align: center;
-    line-height: 35px;
+    line-height: 3.5rem;
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 13px;
+    margin-top: 3rem;
+    margin-bottom: 1.3rem;
   }
   .service p:nth-of-type(2){
-    font-size:13px;
+    font-size:1.3rem;
     color:#FFFFFF;
     text-align: center;
-    line-height:18px;
+    line-height:1.8rem;
     margin: 0 8%;
   }
 </style>

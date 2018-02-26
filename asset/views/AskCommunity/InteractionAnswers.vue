@@ -277,17 +277,17 @@
 
   .help {
 
-    font-size: 14px;
+    font-size: 1.4rem;
     background: #fff;
   }
 
   .help .title {
-    padding: 15px 15px 10px;
+    padding: 1.5rem 1.5rem 1rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 15px;
+    padding: 0 1.5rem;
     color: #808080;
   }
 
@@ -296,61 +296,61 @@
   }
 
   .buttonWrapper {
-    padding-top: 33px;
+    padding-top: 3.3rem;
     background: #fff;
   }
 
   .buttonWrapper button {
     border-radius: 0;
     margin-bottom: 0;
-    padding: 13px 0;
+    padding: 1.3rem 0;
   }
   /*标签样式*/
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  16px 8px 7px;
+    padding: 0  1.6rem 0.8rem 0.7rem;
   }
   .question_tags p{
     float: left;
     background: #a8dff7;
     color:#FFFFFF;
-    padding: 0px 8px;
-    border-radius:50px;
-    margin-top: 9px;
-    margin-left: 9px;
-    font-size:12px;
+    padding: 0rem 0.8rem;
+    border-radius:5rem;
+    margin-top: 0.9rem;
+    margin-left: 0.9rem;
+    font-size:1.2rem;
   }
   /*返回问答社区*/
   .back{
     width:100%;
-    height:62px;
+    height:6.2rem;
     text-align: center;
-    line-height: 62px;
+    line-height: 6.2rem;
     background: url("../../statics/images/Community.png") no-repeat;
     background-size: cover;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
   .back span:nth-of-type(1){
-    font-size:15px;
+    font-size:1.5rem;
     color:#444444;
-    line-height: 62px;
+    line-height: 6.2rem;
   }
   .back span:nth-of-type(2){
-    font-size:12px;
+    font-size:1.2rem;
     color:#808080;
-    line-height: 62px;
+    line-height: 6.2rem;
   }
   .back svg:nth-of-type(1){
-    font-size:12px;
+    font-size:1.2rem;
     color:#808080;
-    line-height: 62px;
+    line-height: 6.2rem;
   }
   .back svg:nth-of-type(2){
-    font-size:12px;
+    font-size:1.2rem;
     color:#808080;
-    line-height: 62px;
-    margin-left: -10px;
+    line-height: 6.2rem;
+    margin-left: -1rem;
   }
 
 </style>

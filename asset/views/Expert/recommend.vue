@@ -351,13 +351,13 @@
 
 <style scoped>
   .professor .title {
-    height: 40px;
-    margin-left: 10px;
-    line-height: 40px;
+    height: 4rem;
+    margin-left: 1rem;
+    line-height: 4rem;
   }
 
   .professor li {
-    padding: 5px 0;
+    padding: 0.5rem 0;
   }
 
   .professor li input {
@@ -366,17 +366,17 @@
 
   .professor .year {
     position: absolute;
-    right: 35px;
-    top: 10px
+    right: 3.5rem;
+    top: 1rem
   }
 
   .professor .link {
     display: inline-block;
     float: right;
     width: 65%;
-    height: 40px;
-    line-height: 37px;
-    padding-right: 30px;
+    height: 4rem;
+    line-height: 3.7rem;
+    padding-right: 3rem;
   }
 
   .mui-table-view-cell {
@@ -386,56 +386,56 @@
   .expert-setting-field {
     position: absolute;
     text-align: right;
-    font-size: 12px;
-    width: 200px;
-    right: 40px;
+    font-size: 1.2rem;
+    width: 20rem;
+    right: 4rem;
     color: #3f51b5;
   }
 
   .account_item_title {
-    padding: 5px;
+    padding: 0.5rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .button-wrapper {
-    padding: 0 50px;
+    padding: 0 5rem;
   }
 
   .image-list {
     width: 100%;
-    /*height: 85px;*/
+    /*height: 8.5rem;*/
     background-size: cover;
-    padding: 10px;
+    padding: 1rem;
     overflow: hidden;
   }
 
   .image-item {
-    width: 65px;
-    height: 65px;
+    width: 6.5rem;
+    height: 6.5rem;
     /* background-image: url(../images/iconfont-tianjia.png); */
     background-size: 100% 100%;
     display: inline-block;
     position: relative;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: solid 1px #e8e8e8;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: solid 0.1rem #e8e8e8;
     vertical-align: top;
   }
 
   .image-item .mui-icon {
-    font-size: 40px;
+    font-size: 4rem;
     position: absolute;
-    top: 11px;
-    left: 11px;
+    top: 1.1rem;
+    left: 1.1rem;
     color: #ccc;
   }
 
   .image-item .file {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 0rem;
+    top: 0rem;
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -445,17 +445,17 @@
   .image-item .image-close {
     position: absolute;
     display: inline-block;
-    right: -6px;
-    top: -6px;
-    width: 20px;
-    height: 20px;
+    right: -0.6rem;
+    top: -0.6rem;
+    width: 2rem;
+    height: 2rem;
     text-align: center;
-    line-height: 20px;
-    border-radius: 12px;
+    line-height: 2rem;
+    border-radius: 1.2rem;
     background-color: #FF5053;
     color: #f3f3f3;
-    border: solid 1px #FF5053;
-    font-size: 9px;
+    border: solid 0.1rem #FF5053;
+    font-size: 0.9rem;
     font-weight: 200;
     z-index: 1;
   }
@@ -467,7 +467,7 @@
   .image-item .image-up:after {
     font-family: "微软雅黑";
     content: '+';
-    font-size: 60px;
+    font-size: 6rem;
   }
 
 

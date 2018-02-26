@@ -63,19 +63,19 @@
 
 <style scoped>
   .textarea-wrapper {
-    margin: 0 5px;
+    margin: 0 0.5rem;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #bbbbbb;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
-    font-size: 12px;
-    bottom: 0px;
+    right: 0.4rem;
+    font-size: 1.2rem;
+    bottom: 0rem;
     color: #b0b0b0;
   }
 

@@ -507,32 +507,32 @@
   .pay-choice{
     margin:0;
     text-align: left;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #9b9b9b;
-    padding-left: 5px;
+    padding-left: 0.5rem;
   }
   .pay-swallet{
     margin:0;
     text-align: left;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
-    margin-top: 12px;
-    padding-left: 5px;
+    margin-top: 1.2rem;
+    padding-left: 0.5rem;
   }
   .pay-swallet p{
-    width:16px;
-    height:16px;
-    border-radius: 9px;
-    border:1px solid #c8c8c8;
+    width:1.6rem;
+    height:1.6rem;
+    border-radius: 0.9rem;
+    border:0.1rem solid #c8c8c8;
     float: left;
-    margin-top: 1.3px;
-    margin-right: 6px;
+    margin-top: 1.0.3rem;
+    margin-right: 0.6rem;
     position: relative;
   }
   .pay-swallet p i{
-    width:6px;
-    height:6px;
-    border-radius: 9px;
+    width:0.6rem;
+    height:0.6rem;
+    border-radius: 0.9rem;
     background:#03aef9;
     display: block;
     position: absolute;
@@ -544,54 +544,54 @@
   }
   .pay-ios{
     margin:0;
-    font-size: 14px;
-    margin-top: 19px;
-    width:167px;
-    height:44px;
-    border:1px solid #c8c7cc;
-    border-radius: 4px;
+    font-size: 1.4rem;
+    margin-top: 1.9rem;
+    width:16.7rem;
+    height:4.4rem;
+    border:0.1rem solid #c8c7cc;
+    border-radius: 0.4rem;
     text-align: center;
-    line-height: 44px;
-    margin-left: 5px;
+    line-height: 4.4rem;
+    margin-left: 0.5rem;
   }
   .pay-ios.active{
     color: #03aef9;
-    border:1px solid #03aef9;
+    border:0.1rem solid #03aef9;
   }
   .pay-ios svg{
     color: #808080;
-    font-size: 17px;
-    margin-bottom: 1px;
-    margin-right: -3px;
-    padding-left: 5px;
+    font-size: 1.7rem;
+    margin-bottom: 0.1rem;
+    margin-right: -0.3rem;
+    padding-left: 0.5rem;
   }
   .pay-weChat{
     margin:0;
-    font-size: 14px;
-    margin-top: 19px;
-    width:167px;
-    height:44px;
-    border:1px solid #c8c7cc;
-    border-radius: 4px;
+    font-size: 1.4rem;
+    margin-top: 1.9rem;
+    width:16.7rem;
+    height:4.4rem;
+    border:0.1rem solid #c8c7cc;
+    border-radius: 0.4rem;
     text-align: center;
-    line-height: 44px;
-    margin-left: 5px;
+    line-height: 4.4rem;
+    margin-left: 0.5rem;
   }
   .pay-weChat.active{
     color: #03aef9;
-    border:1px solid #03aef9;
+    border:0.1rem solid #03aef9;
   }
 
   .pay-weChat svg{
     color: #808080;
-    font-size: 20px;
-    margin-bottom: -1px;
-    margin-right: -2px;
+    font-size: 2rem;
+    margin-bottom: -0.1rem;
+    margin-right: -0.2rem;
   }
 
   .selectMoney .title {
-    padding: 22px 0;
-    margin: 0 8px;
+    padding: 2.2rem 0;
+    margin: 0 0.8rem;
     text-align: center;
     position: relative;
   }
@@ -601,7 +601,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -609,12 +609,12 @@
   }
 
   .selectMoney .mui-table-view-cell {
-    padding: 10px 0;
+    padding: 1rem 0;
   }
 
   .selectMoney .mui-pull-right {
     float: right !important;
-    padding-right: 35px;
+    padding-right: 3.5rem;
 
     color: rgba(74, 144, 226, 100) !important;
     text-align: right;
@@ -623,11 +623,11 @@
   .selectMoney .mui-icon {
     color: rgba(138, 138, 138, 100);
     opacity: 0.67;
-    font-size: 24px;
+    font-size: 2.4rem;
   }
 
   .selectMoney .apple-icon {
-    padding: 8px 35px 0 0;
+    padding: 0.8rem 3.5rem 0 0;
   }
 
   .selectMoney {
@@ -637,36 +637,36 @@
 
 
   .selectMoney .category span.active, .form-ask .select span.active {
-    border: 1px solid #4990E2;
+    border: 0.1rem solid #4990E2;
     color: #4990E2;
   }
 
   .selectMoney .category span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
+    border: 0.1rem solid #b6b6b6;
+    border-radius: 0.5rem;
     width: 30%;
     display: inline-block;
-    height: 32px;
-    margin: 0 3px 10px;
+    height: 3.2rem;
+    margin: 0 0.3rem 1rem;
     text-align: center;
-    line-height: 32px;
+    line-height: 3.2rem;
     position: relative;
   }
 
   .selectMoney .help {
-    margin: 30px 0;
+    margin: 3rem 0;
   }
 
   .form-ask .select span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
-    padding: 0 10px;
+    border: 0.1rem solid #b6b6b6;
+    border-radius: 0.5rem;
+    padding: 0 1rem;
     display: inline-block;
-    height: 32px;
-    margin-right: 6px;
-    margin-bottom: 10px;
+    height: 3.2rem;
+    margin-right: 0.6rem;
+    margin-bottom: 1rem;
     text-align: center;
-    line-height: 32px;
+    line-height: 3.2rem;
     position: relative;
   }
 
@@ -675,44 +675,44 @@
     position: relative;
     border: none;
     height: 90%;
-    margin-top: -4px;
+    margin-top: -0.4rem;
     width: 90%;
     text-align: center;
   }
 
   .selectMoney {
     text-align: center;
-    padding: 0 15px 15px 15px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
   }
 
   .selectMoney .payDesc {
     position: relative;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .selectMoney .payDesc {
-    font-size: 14px;
-    height: 40px;
-    line-height: 40px;
+    font-size: 1.4rem;
+    height: 4rem;
+    line-height: 4rem;
     color: #999;
   }
 
   .selectMoney .button-wrapper {
-    margin: 20px 0 10px;
-    padding: 0 30px;
+    margin: 2rem 0 1rem;
+    padding: 0 3rem;
   }
 
   .selectMoney .payDesc .dash {
     position: relative;
-    top: -4px;
-    margin: 0 5px;
+    top: -0.4rem;
+    margin: 0 0.5rem;
     display: inline-block;
-    border-top: 1px solid #999;
-    width: 45px;
+    border-top: 0.1rem solid #999;
+    width: 4.5rem;
   }
 
   .selectMoney .payDesc .mui-icon {
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
 
@@ -725,12 +725,12 @@
 
   #expert.mui-popover .mui-table-view {
     background: #fff !important;
-    border-radius: 5px !important;
+    border-radius: 0.5rem !important;
     color: #4990E2 !important;
   }
 
   #expert.mui-popover .mui-table-view-cell {
-    padding: 13px 15px;
+    padding: 1.3rem 1.5rem;
   }
 
 
@@ -743,7 +743,7 @@
   }
 
   .mui-input-row label {
-    padding-left: 5px;
+    padding-left: 0.5rem;
     text-align: left;
   }
 

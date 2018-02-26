@@ -208,99 +208,99 @@
     background-color: #3c3e44;
     text-align: center;
     position: relative;
-    height: 136px;
+    height: 13.6rem;
 
   }
 
   .professor .title {
-    padding-top: 30px;
-    font-size: 20px;
+    padding-top: 3rem;
+    font-size: 2rem;
     color: #fff;
     font-weight: bolder;
   }
 
   .professor .titleSub {
-    padding-top: 5px;
-    font-size: 14px;
+    padding-top: 0.5rem;
+    font-size: 1.4rem;
     color: #fff;
     font-weight: bolder;
   }
 
   .empty {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 3rem;
   }
 
   .empty .myicon {
-    width: 125px;
-    height: 106px;
+    width: 12.5rem;
+    height: 10.6rem;
   }
 
   .empty .title {
     color: #9B9B9B;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 1.4rem;
+    margin-top: 1rem;
   }
 
   .askDetail {
     position: absolute;
-    bottom: 100px;
+    bottom: 10rem;
     left: 50%;
-    margin-left: -84px;
+    margin-left: -8.4rem;
   }
 
   .askDetail .titleSub {
     color: #9B9B9B;
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
   }
 
   .askDetail {
-    height: 67px;
+    height: 6.7rem;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   .askDetail .buttonAsk {
     position: relative;
     background: #4990E2;
     display: inline-block;
-    width: 125px;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
+    width: 12.5rem;
+    height: 3.7rem;
+    font-size: 1.4rem;
+    line-height: 3.7rem;
     text-align: center;
-    border-radius: 50px;
-    padding-left: 20px;
+    border-radius: 5rem;
+    padding-left: 2rem;
 
     color: #fff;
   }
 
   .askDetail .buttonAsk span {
     position: absolute;
-    font-size: 30px;
-    left: 20px;
-    top: -4px;
+    font-size: 3rem;
+    left: 2rem;
+    top: -0.4rem;
   }
 
   .mui-bar .myicon {
-    width: 18px;
-    height: 18px;
-    left: 10px;
-    top: 12px;
+    width: 1.8rem;
+    height: 1.8rem;
+    left: 1rem;
+    top: 1.2rem;
   }
 
   .list {
     position: absolute;
-    top: 140px;
+    top: 14rem;
   }
 
   .list .item {
-    margin: 0 50px 10px;
-    padding-bottom: 15px;
+    margin: 0 5rem 1rem;
+    padding-bottom: 1.5rem;
     color: #4A4A4A;
-    border-radius: 5px;
-    border: 1px solid #9F9F9F;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #9F9F9F;
     background: #fff;
   }
 
@@ -309,15 +309,15 @@
   }
 
   .list .item .time {
-    font-size: 12px;
+    font-size: 1.2rem;
 
-    padding: 15px 15px 0;
+    padding: 1.5rem 1.5rem 0;
     position: relative;
   }
 
   .list .item .title {
-    font-size: 20px;
-    padding: 15px;
+    font-size: 2rem;
+    padding: 1.5rem;
     position: relative;
   }
 
@@ -327,7 +327,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
@@ -336,45 +336,45 @@
   }
 
   .list .item .desc {
-    padding: 15px 15px 0;
-    line-height: 20px;
-    font-size: 14px;
+    padding: 1.5rem 1.5rem 0;
+    line-height: 2rem;
+    font-size: 1.4rem;
   }
 
   .mui-navigate-right:after {
     font-weight: bolder;
-    font-size: 22px;
-    right: 18px;
-    top: 24px;
+    font-size: 2.2rem;
+    right: 1.8rem;
+    top: 2.4rem;
   }
 
   .buttonWrapper {
     position: fixed;
-    bottom: 70px;
+    bottom: 7rem;
     left: 50%;
     z-index: 997;
-    margin-left: -62px;
+    margin-left: -6.2rem;
   }
 
   .buttonWrapper .buttonAsk {
     position: relative;
     background: #4990E2;
     display: inline-block;
-    width: 125px;
-    height: 37px;
-    font-size: 14px;
-    line-height: 37px;
+    width: 12.5rem;
+    height: 3.7rem;
+    font-size: 1.4rem;
+    line-height: 3.7rem;
     text-align: center;
-    border-radius: 50px;
-    padding-left: 20px;
+    border-radius: 5rem;
+    padding-left: 2rem;
 
     color: #fff;
   }
 
   .buttonWrapper .buttonAsk span {
     position: absolute;
-    font-size: 30px;
-    left: 20px;
-    top: -4px;
+    font-size: 3rem;
+    left: 2rem;
+    top: -0.4rem;
   }
 </style>

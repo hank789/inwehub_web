@@ -122,73 +122,73 @@
 
   .intro {
     width: 100%;
-    height: 60px;
+    height: 6rem;
     position: relative;
   }
 
   .intro .slider {
     width: 100%;
-    height: 60px;
+    height: 6rem;
   }
 
   .intro .slider p:nth-of-type(1) {
     width: 100%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
   }
 
   .intro .slider p:nth-of-type(2) {
     width: 100%;
-    height: 13px;
-    line-height: 13px;
-    margin-top: 5px;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    margin-top: 0.5rem;
   }
 
   .intro .slider p:nth-of-type(2) span {
     display: block;
     float: left;
-    max-width: 135px;
-    height: 13px;
-    font-size: 13px;
+    max-width: 13.5rem;
+    height: 1.3rem;
+    font-size: 1.3rem;
     color: #808080;
   }
 
   .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
-    border-right: 1px solid rgb(220, 220, 220);
-    padding-right: 5px;
-    margin-right: 5px;
+    border-right: 0.1rem solid rgb(220, 220, 220);
+    padding-right: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   /*.intro .slider p:nth-of-type(2) i {
         display: inline-block;
-        width: 1px;
-        height: 11px;
-        margin: 0 3px -1px 3px;
+        width: 0.1rem;
+        height: 1.1rem;
+        margin: 0 0.3rem -0.1rem 0.3rem;
         background: rgb(220, 220, 220);
     }*/
 
   .intro svg {
     position: absolute;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: rgb(3, 174, 249);
-    top: 13px;
-    right: 15px;
+    top: 1.3rem;
+    right: 1.5rem;
   }
 
   .add {
-    width: 64px;
-    height: 64px;
+    width: 6.4rem;
+    height: 6.4rem;
     border-radius: 50%;
     background: rgb(3, 174, 249);
     position: absolute;
     left: 41%;
-    bottom: 21px;
+    bottom: 2.1rem;
     text-align: center;
-    line-height: 64px;
+    line-height: 6.4rem;
   }
 
   .add svg {
-    font-size: 22px;
+    font-size: 2.2rem;
     color: #FFFFFF;
   }
 
@@ -198,28 +198,28 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
     background: #f2f2f2;
   }
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
     background: #f2f2f2;
   }
 
   .box-shadow-3 {
-    -webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-    -moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-    box-shadow: 0 0 5px rgba(3, 174, 249, .8);
+    -webkit-box-shadow: 0 0 0.5rem rgba(3, 174, 249, .8);
+    -moz-box-shadow: 0 0 0.5rem rgba(3, 174, 249, .8);
+    box-shadow: 0 0 0.5rem rgba(3, 174, 249, .8);
   }
 
   .container {
@@ -229,14 +229,14 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 6rem;
+    margin-left: 2.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .container p {
 
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 </style>

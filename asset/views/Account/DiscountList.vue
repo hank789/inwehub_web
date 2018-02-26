@@ -191,7 +191,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -199,7 +199,7 @@
 
   .mui-wechat .menu[data-v-4f45c199] {
     width: 100%;
-    height: 45px;
+    height: 4.5rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -207,7 +207,7 @@
   }
 
   .mui-content.absolute .menu ~ #pullrefresh {
-    top: 45px;
+    top: 4.5rem;
   }
 
   .mui-content.absolute {
@@ -218,7 +218,7 @@
 
   .menu {
     width: 100%;
-    height: 45px;
+    height: 4.5rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -228,10 +228,10 @@
     display: inline-block;
     width: 49%;
     height: 100%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
     text-align: center;
-    line-height: 45px;
+    line-height: 4.5rem;
     font-weight: 600;
   }
 
@@ -242,26 +242,26 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 30px;
-    height: 1.8px;
+    width: 3rem;
+    height: 1.0.8rem;
     left: 20.5%;
-    bottom: 0.5px;
+    bottom: 0.0.5rem;
     background: #03aef9;
   }
 
   /*滚动区域*/
   ul {
     width: 100%;
-    /*height: 227px;*/
+    /*height: 22.7rem;*/
     overflow: hidden;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
 
   }
 
   /*ul li{
         width: 92%;
-        height: 227px;
+        height: 22.7rem;
         position:relative;
         left: 0;
         right: 0;
@@ -270,70 +270,70 @@
     }
     ul li img{
         width: 100%;
-        height: 143px;
-        margin-top: 15px;
+        height: 14.3rem;
+        margin-top: 1.5rem;
     }*/
   ul li p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   ul li p:nth-of-type(2) {
     width: 100%;
-    height: 19px;
-    margin-top: 4px;
+    height: 1.9rem;
+    margin-top: 0.4rem;
   }
 
   ul li p:nth-of-type(2) span:nth-child(1) {
     display: block;
     color: #b4b4b6;
-    font-size: 12px;
-    line-height: 19px;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
     float: left;
 
   }
 
   ul li p:nth-of-type(2) span.blue {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 7.5rem;
+    height: 1.9rem;
     float: right;
     background: #03aef9;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 1.9rem;
+    border-radius: 5rem;
+    padding: 0 0.8rem;
   }
 
   ul li p:nth-of-type(2) span.yellow {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 7.5rem;
+    height: 1.9rem;
     float: right;
     background: #fcc816;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 1.9rem;
+    border-radius: 5rem;
+    padding: 0 0.8rem;
   }
 
   ul li p:nth-of-type(2) span.gray {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 7.5rem;
+    height: 1.9rem;
     float: right;
     background: #b4b4b6;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 1.9rem;
+    border-radius: 5rem;
+    padding: 0 0.8rem;
   }
 
   /*无数据的样式 */
@@ -345,22 +345,22 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 6rem;
+    margin-left: 2.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 
   /***媒体查询*****/
 
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 32rem) {
     ul li {
       width: 92%;
-      height: 217px;
+      height: 21.7rem;
       position: relative;
       left: 0;
       right: 0;
@@ -369,16 +369,16 @@
 
     ul li img {
       width: 100%;
-      height: 133px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 13.3rem;
+      margin-top: 1.5rem;
+      border-radius: 0.4rem;
     }
   }
 
-  @media screen and (min-width: 375px) {
+  @media screen and (min-width: 37.5rem) {
     ul li {
       width: 92%;
-      height: 227px;
+      height: 22.7rem;
       position: relative;
       left: 0;
       right: 0;
@@ -387,16 +387,16 @@
 
     ul li img {
       width: 100%;
-      height: 145px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 14.5rem;
+      margin-top: 1.5rem;
+      border-radius: 0.4rem;
     }
   }
 
-  @media screen and (min-width: 414px) {
+  @media screen and (min-width: 41.4rem) {
     ul li {
       width: 92%;
-      height: 256px;
+      height: 25.6rem;
       position: relative;
       left: 0;
       right: 0;
@@ -405,9 +405,9 @@
 
     ul li img {
       width: 100%;
-      height: 172px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 17.2rem;
+      margin-top: 1.5rem;
+      border-radius: 0.4rem;
     }
   }
 

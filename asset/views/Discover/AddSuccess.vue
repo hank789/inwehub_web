@@ -54,39 +54,39 @@
     background:#f3f4f6;
   }
   .publishSuccessfully{
-    /*border:1px solid #000000;*/
-    width:238px;
-    height:320px;
+    /*border:0.1rem solid #000000;*/
+    width:23.8rem;
+    height:32rem;
     overflow: hidden;
     position: absolute;
-    top:100px;
+    top:10rem;
     left:0;
     right:0;
     margin: auto;
     text-align: center;
   }
   .publishSuccessfully svg{
-    font-size:124px;
+    font-size:12.4rem;
     color:#dcdcdc;
 
   }
   .publishSuccessfully p:nth-of-type(1){
-    font-size:20px;
+    font-size:2rem;
     color:#323232;
-    margin-top: 46px;
+    margin-top: 4.6rem;
   }
   .publishSuccessfully p:nth-of-type(2){
-    font-size:14px;
+    font-size:1.4rem;
     color:#808080;
-    margin-top:12px;
+    margin-top:1.2rem;
   }
   .publishSuccessfully button{
-    width:115px;
-    height:44px;
+    width:11.5rem;
+    height:4.4rem;
     background:#03aef9;
-    font-size:16px;
+    font-size:1.6rem;
     color:#FFFFFF;
-    margin-top:47px;
+    margin-top:4.7rem;
     border: none;
   }
 </style>

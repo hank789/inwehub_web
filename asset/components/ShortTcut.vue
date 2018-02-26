@@ -192,13 +192,13 @@
 
   #short_all .turn {
     position: absolute;
-    bottom: 14px;
+    bottom: 1.4rem;
     left: 44.2%;
-    font-size: 17px;
+    font-size: 1.7rem;
     color: #808080;
     animation: rote 0.5s infinite;
     animation-iteration-count: 1;
-    padding: 0 12px;
+    padding: 0 1.2rem;
   }
 
   @keyframes rote {
@@ -212,7 +212,7 @@
 
   ul {
     width:100%;
-    height:90px;
+    height:9rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -222,7 +222,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 130px;
+    bottom: 13rem;
     animation: myfirst 0.2s infinite;
     animation-iteration-count: 1;
   }
@@ -244,39 +244,39 @@
 
   .end {
     width:100%;
-    height:90px;
+    height:9rem;
     position: absolute;
-    bottom: -380px;
+    bottom: -38rem;
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
 
   @keyframes myend {
     from {
-      bottom: 110px;
+      bottom: 11rem;
       opacity: 0.7;
     }
     to {
-      bottom: -140px;
+      bottom: -14rem;
       opacity: 1;
     }
   }
  /*内容区域*/
   .down-title{
     width:90%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     position: absolute;
     left: 8%;
-    bottom: 230px;
+    bottom: 23rem;
   }
   .down-title i{
     display: block;
     width: 85%;
-    height: 0.5px;
+    height: 0.0.5rem;
     background: #dcdcdc;
     position: absolute;
-    left: 37px;
+    left: 3.7rem;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -287,13 +287,13 @@
   ul li{
     display: flex;
     flex-direction:column;
-    width: 60px;
-    height:90px;
+    width: 6rem;
+    height:9rem;
     align-items: center;
   }
   ul li p{
-    width:60px;
-    height:60px;
+    width:6rem;
+    height:6rem;
     background:#b4b4b6;
     border-radius: 50%;
     display: flex;
@@ -301,18 +301,18 @@
     align-items: center;
   }
   ul li p svg{
-    font-size: 35px;
+    font-size: 3.5rem;
   }
   ul li span{
-   font-size: 14px;
+   font-size: 1.4rem;
     color: #444444;
-    margin-top: 9px;
+    margin-top: 0.9rem;
   }
   .down-title.find-title{
-    bottom: 380px;
+    bottom: 38rem;
   }
   ul.find{
-    bottom: 280px;
+    bottom: 28rem;
   }
   ul li p.-yellow{
     background: #fcc816;
@@ -324,32 +324,32 @@
   ul li.bonus p i {
     position: absolute;
     font-style: normal;
-    width: 30px;
-    height: 17px;
-    font-size: 12px;
+    width: 3rem;
+    height: 1.7rem;
+    font-size: 1.2rem;
     color: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     background: #fa4975;
     text-align: center;
-    line-height: 17px;
-    top: 3px;
-    right: -18px;
+    line-height: 1.7rem;
+    top: 0.3rem;
+    right: -1.8rem;
   }
 
   ul li.bonus p i:after{
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #fa4975;
-    /*border: 1px solid #dcdcdc;*/
+    /*border: 0.1rem solid #dcdcdc;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -3px;
+    left: -0.3rem;
     /*border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;*/
-    top: 0px;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }

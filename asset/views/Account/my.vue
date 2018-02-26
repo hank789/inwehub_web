@@ -180,10 +180,10 @@
     methods: {
       // 警告框
       wran () {
-        var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+        var font = '<p style="text-align: left; color: #444444; margin-bottom:2rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
           '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>'
-        var title = '<p style="font-size:16px; margin-bottom:15px">' +
-          '<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
+        var title = '<p style="font-size:1.6rem; margin-bottom:1.5rem">' +
+          '<svg class="icon" aria-hidden="true" style="font-size:1.8rem; color:#fcc816; margin-right:0.2rem; margin-bottom:-0.1rem">' +
           '<use xlink:href="#icon-jinggao"></use>' +
           '</svg>' +
           '警告说明 ' +
@@ -309,8 +309,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -318,10 +318,10 @@
 
   .bott {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -337,7 +337,7 @@
 
   .professor {
     width: 100%;
-    height: 120px;
+    height: 12rem;
   }
   .professor .my-img{
     /*width: 21%;*/
@@ -345,57 +345,57 @@
     float: left;
   }
   .professor .avatar {
-    width: 69px;
-    height: 68.5px;
+    width: 6.9rem;
+    height: 68.0.5rem;
     border-radius: 50%;
-    margin-top: 25px;
+    margin-top: 2.5rem;
 
   }
 
   .my-personal {
     /*width: 79%;*/
-    height: 69px;
-    margin-top: 25px;
+    height: 6.9rem;
+    margin-top: 2.5rem;
     float: left;
   }
 
   .my-personal .my-info {
     width: 100%;
-    height: 30px;
-    margin-top: 9px;
+    height: 3rem;
+    margin-top: 0.9rem;
     position: relative;
   }
 
   .my-personal .my-info span:nth-of-type(1) {
     display: inline-block;
-    max-width: 72px;
-    font-size: 18px;
+    max-width: 7.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
     color: #444444;
-    margin-right: 1.5px;
-    margin-bottom: -4px;
+    margin-right: 1.0.5rem;
+    margin-bottom: -0.4rem;
   }
 
   .my-personal .my-info p:nth-of-type(1) {
-    width: 19px;
-    height: 18px;
+    width: 1.9rem;
+    height: 1.8rem;
     display: inline-block;
     position: relative;
-    top: -3px;
+    top: -0.3rem;
     font-style: normal;
-    line-height: 15px;
-    font-size: 10px;
+    line-height: 1.5rem;
+    font-size: 1rem;
     color: #FFFFFF;
     text-align: center;
     background: url("../../statics/images/rank.png") no-repeat;
-    background-size: 19px 18px;
+    background-size: 1.9rem 1.8rem;
     background-position: top;
   }
 
   .my-personal .my-info svg:nth-of-type(1) {
-    font-size: 26px;
-    margin-bottom: -4px;
-    margin-left: -3px;
+    font-size: 2.6rem;
+    margin-bottom: -0.4rem;
+    margin-left: -0.3rem;
     color: rgb(3, 174, 249);
     position: relative;
   }
@@ -403,22 +403,22 @@
 
   .my-personal .my-detail {
     width: 100%;
-    height: 30px;
+    height: 3rem;
   }
 
   .my-detail span {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #444444;
   }
 
   .my-detail i {
     display: inline-block;
-    width: 1px;
-    height: 12px;
+    width: 0.1rem;
+    height: 1.2rem;
     background: #DCDCDC;
-    margin-left: 9px;
-    margin-right: 9px;
-    margin-bottom: -2px;
+    margin-left: 0.9rem;
+    margin-right: 0.9rem;
+    margin-bottom: -0.2rem;
   }
   /**********名片***************/
 
@@ -426,44 +426,44 @@
     position: absolute;
     right: 0;
     top: 4%;
-    height: 29px;
-    border-radius: 100px 0 0 100px;
+    height: 2.9rem;
+    border-radius: 10rem 0 0 10rem;
     background: #03aef9;
-    line-height: 29px;
+    line-height: 2.9rem;
     color: #FFFFFF;
-    font-size: 14px;
-    padding-left: 13px;
-    padding-right: 15px;
+    font-size: 1.4rem;
+    padding-left: 1.3rem;
+    padding-right: 1.5rem;
     z-index: 9;
   }
   /**********邀请我的好友***************/
 
   .my-news {
     width: 100%;
-    height: 41px;
-    border-radius: 4px;
+    height: 4.1rem;
+    border-radius: 0.4rem;
     background:url(../../statics/images/mask@3x.png) no-repeat;
     background-size:100% 100%;
-    -webkit-box-shadow: 0 0 10px rgb(243, 244, 246);
-    -moz-box-shadow: 0 0 10px rgb(243, 244, 246);
-    box-shadow: 0 0 10px rgb(243, 244, 246);
+    -webkit-box-shadow: 0 0 1rem rgb(243, 244, 246);
+    -moz-box-shadow: 0 0 1rem rgb(243, 244, 246);
+    box-shadow: 0 0 1rem rgb(243, 244, 246);
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
 
   .my-news i {
     font-style: normal;
     display: inline-block;
-    width: 30px;
-    height: 17px;
+    width: 3rem;
+    height: 1.7rem;
     background: #E95D8C;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 17px;
-    border-radius: 4px;
-    margin-left: 19px;
-    margin-right: 10px;
+    line-height: 1.7rem;
+    border-radius: 0.4rem;
+    margin-left: 1.9rem;
+    margin-right: 1rem;
     position: relative;
     /*渐变*/
     background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
@@ -472,43 +472,43 @@
   .my-news i:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: rgb(253, 128, 173);
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -2px;
-    top: 0px;
+    right: -0.2rem;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }
 
   .my-news span {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
-    line-height: 41px;
+    line-height: 4.1rem;
   }
   .my-news p{
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #444444;
     position: absolute;
     top: 0;
     bottom: 0;
-    right:35px;
-    line-height:41px;
+    right:3.5rem;
+    line-height:4.1rem;
   }
   .my-news p a{
     color:rgb(250,73,117);
-    font-style: 12px;
-    letter-spacing:2px;
+    font-style: 1.2rem;
+    letter-spacing:0.2rem;
   }
 
   .my-news svg {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -516,7 +516,7 @@
 
   .gray {
     width: 100%;
-    height: 10px;
+    height: 1rem;
     background: #F3F4F5;
   }
   /*中间的发布认证*/
@@ -524,9 +524,9 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 72px;
-    padding-left: 15px;
-    padding-right: 15px;
+    height: 7.2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     background: #FFFFFF;
     position: relative;
   }
@@ -540,24 +540,24 @@
   }
 
   .part2 li svg {
-    font-size: 24px;
-    margin-top: 10px;
+    font-size: 2.4rem;
+    margin-top: 1rem;
   }
 
   .part2 li span {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #808080;
     display: block;
-    margin-top: 7px;
+    margin-top: 0.7rem;
   }
   /*part3认证*/
 
   .part3 {
     list-style: none;
     width: 100%;
-    height: 73px;
-    padding-left: 15px;
-    padding-right: 15px;
+    height: 7.3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     background: #FFFFFF;
     position: relative;
   }
@@ -572,23 +572,23 @@
 
   .part3 li p:nth-of-type(1) {
     display: inline-block;
-    height: 19px;
-    font-size: 13px;
+    height: 1.9rem;
+    font-size: 1.3rem;
     text-align: center;
     color: #ffffff;
-    line-height: 19px;
+    line-height: 1.9rem;
     background: #fcc816;
-    border-radius: 100px;
-    margin-top: 12px;
-    padding: 0 5px 0 5px;
+    border-radius: 10rem;
+    margin-top: 1.2rem;
+    padding: 0 0.5rem 0 0.5rem;
   }
 
   .part3 li p:nth-of-type(2) {
     text-align: center;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #808080;
     position: absolute;
-    top: 40px;
+    top: 4rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -596,7 +596,7 @@
 
   .part3 li:nth-of-type(1) p {
     background: #FFF;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #808080;
     position: absolute;
     left: 0;
@@ -610,14 +610,14 @@
     display: inline-block;
     width: 0;
     height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid #dcdcdc;
+    border-top: 0.8rem solid transparent;
+    border-bottom: 0.6rem solid transparent;
+    border-left: 0.6rem solid #dcdcdc;
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
-    margin-left: 6px;
+    margin-left: 0.6rem;
   }
   /*底部*/
 
@@ -627,21 +627,21 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-bottom: 79px;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    margin-bottom: 7.9rem;
   }
 
   .my-option li {
     width: 100%;
-    height: 44px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    height: 4.4rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
     position: relative;
   }
 
   .my-option li span {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444444;
   }
 
@@ -650,7 +650,7 @@
   }
 
   .mui-popup-inner {
-    padding: 23px 15px 1px 15px;
+    padding: 2.3rem 1.5rem 0.1rem 1.5rem;
   }
 
   .mui-content {
@@ -659,7 +659,7 @@
 
   /*container-image */
    /* 适配*/
-@media (min-width: 320px) {
+@media (min-width: 32rem) {
   .professor .my-img{
     width: 26%;
     }
@@ -668,7 +668,7 @@
     }
 
 }
-@media (min-width: 375px) {
+@media (min-width: 37.5rem) {
    .professor .my-img{
     width: 23%;
     }
@@ -677,7 +677,7 @@
     }
 
 }
-@media (min-width: 414px) {
+@media (min-width: 41.4rem) {
     .professor .my-img{
      width: 21%;
     }

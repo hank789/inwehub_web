@@ -94,10 +94,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -106,19 +106,19 @@
   ul {
     width: 100%;
     overflow: hidden;
-    padding: 0px 16px;
+    padding: 0rem 1.6rem;
   }
 
   ul li {
     width: 100%;
-    height: 64px;
+    height: 6.4rem;
     position: relative;
   }
 
   .avatar {
-    width: 44px;
-    height: 44px;
-    margin-top: 10px;
+    width: 4.4rem;
+    height: 4.4rem;
+    margin-top: 1rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -132,35 +132,35 @@
 
   .avatar svg {
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: 0px;
+    font-size: 2rem;
+    right: -0.5rem;
+    bottom: 0rem;
   }
 
   .information {
     float: left;
-    margin-top: 11px;
-    margin-left: 8px;
+    margin-top: 1.1rem;
+    margin-left: 0.8rem;
   }
 
   .information p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #565656;
   }
 
   .information p:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #b4b4b6;
   }
 
   .profit {
     float: right;
-    margin-top: 11px;
-    margin-right: 10px;
+    margin-top: 1.1rem;
+    margin-right: 1rem;
   }
 
   .profit p {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #808080;
   }
 

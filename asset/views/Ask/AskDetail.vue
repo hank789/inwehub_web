@@ -254,19 +254,19 @@
   .detail-answer-wait {
     width: 100%;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     text-align: center;
-    padding: 20px 0;
+    padding: 2rem 0;
   }
 
   .detail-answer-wait svg {
-    font-size: 50px;
+    font-size: 5rem;
 
   }
 
   .detail-answer-wait p {
     width: 100%;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #c8c8c8;
     text-align: center;
 
@@ -275,37 +275,37 @@
   .tags{
     width:100%;
     overflow: hidden;
-    padding:0 16px 10px 9px;
+    padding:0 1.6rem 1rem 0.9rem;
   }
   .tags p{
     float: left;
     margin: 0;
     padding: 0;
-    margin-left: 7px;
-    margin-top: 10px;
+    margin-left: 0.7rem;
+    margin-top: 1rem;
     background:#a8dff7;
     color: #FFFFFF;
-    border-radius: 50px;
-    font-size: 12px;
-    padding: 0 8px;
+    border-radius: 5rem;
+    font-size: 1.2rem;
+    padding: 0 0.8rem;
   }
 
   .messageWrapper{
-    padding-top:10px;
+    padding-top:1rem;
   }
 /*按钮*/
   .buttonWrapper {
-    padding:19px 15px 0 15px;
+    padding:1.9rem 1.5rem 0 1.5rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 50px;
+    border-radius: 5rem;
     margin-bottom: 0;
-    padding: 13px 0;
+    padding: 1.3rem 0;
   }
   /*margin*/
   .detail-answer{
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
 </style>

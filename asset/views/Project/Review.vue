@@ -279,7 +279,7 @@
 <style scoped>
   .projectPreviewCard {
     background: #b4b4b6;
-    height: 196.5px;
+    height: 196.0.5rem;
     text-align: center;
     color: #fff;
   }
@@ -288,27 +288,27 @@
     position: absolute;
     z-index: 777;
     color: #fff;
-    font-size: 30px;
-    top: 12px;
-    left: 6px;
+    font-size: 3rem;
+    top: 1.2rem;
+    left: 0.6rem;
   }
 
   .projectPreviewCard .header {
     position: relative;
-    height: 92px;
+    height: 9.2rem;
   }
 
   .projectPreviewCard .header .avatar {
     position: absolute;
     left: 50%;
-    margin-top: 13px;
-    margin-left: -36.5px;
+    margin-top: 1.3rem;
+    margin-left: -36.0.5rem;
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 73.5px;
-    width: 73.5px;
-    font-size: 20px;
+    height: 73.0.5rem;
+    width: 73.0.5rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -339,39 +339,39 @@
   }
 
   .projectPreviewCard .title {
-    margin-top: 20px;
-    font-size: 17px;
+    margin-top: 2rem;
+    font-size: 1.7rem;
   }
 
   .projectPreviewCard .titleSub {
-    font-size: 14px;
-    margin: 3px 0;
+    font-size: 1.4rem;
+    margin: 0.3rem 0;
   }
 
   .projectPreviewCard .state {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .projectPreviewCard i.separate {
     display: inline-block;
     position: relative;
-    top: 2px;
-    height: 14px;
-    margin: 0 8px;
-    border-left: 1px solid #c8c8c8;
+    top: 0.2rem;
+    height: 1.4rem;
+    margin: 0 0.8rem;
+    border-left: 0.1rem solid #c8c8c8;
   }
 
   .section {
     background: #fff;
-    margin-top: 10px;
-    padding: 0 16px 9px;
+    margin-top: 1rem;
+    padding: 0 1.6rem 0.9rem;
   }
 
   .section h5 {
     position: relative;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #444;
-    padding: 19px 0;
+    padding: 1.9rem 0;
   }
 
   .section h5:after {
@@ -379,7 +379,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -387,72 +387,72 @@
   }
 
   .section .contentWrapper {
-    margin-top: 15px;
+    margin-top: 1.5rem;
   }
 
   .section .contentWrapper .toggle {
     position: relative;
-    font-size: 13px;
-    height: 8px;
+    font-size: 1.3rem;
+    height: 0.8rem;
   }
 
   .section .contentWrapper .toggle.show:after {
     border: none;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid #d8d8d8;
+    border-left: 0.6rem solid transparent;
+    border-right: 0.6rem solid transparent;
+    border-top: 1rem solid #d8d8d8;
   }
 
   .section .contentWrapper .toggle:after {
     position: absolute;
     right: 0;
-    top: -6px;
+    top: -0.6rem;
     width: 0;
     height: 0;
     content: '';
     border: none;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 10px solid #d8d8d8;
+    border-left: 0.6rem solid transparent;
+    border-right: 0.6rem solid transparent;
+    border-bottom: 1rem solid #d8d8d8;
   }
 
   .section .contentWrapper .nav {
-    margin: 20px 0 14px;
+    margin: 2rem 0 1.4rem;
     background: #f3f4f6;
     text-align: center;
   }
 
   .section .contentWrapper .nav .navWrapper {
-    height: 90px;
+    height: 9rem;
     position: relative;
     background: #f3f4f6;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
   }
 
   .section .contentWrapper .nav .navWrapper .line {
     position: absolute;
     left: 50%;
-    top: 10px;
-    bottom: 10px;
-    width: 1px;
+    top: 1rem;
+    bottom: 1rem;
+    width: 0.1rem;
     background: #dcdcdc;
   }
 
   .section .contentWrapper .nav .row1 {
-    margin-top: 25px;
+    margin-top: 2.5rem;
     color: #444;
-    font-size: 20px;
+    font-size: 2rem;
   }
 
   .section .contentWrapper .nav .row2 {
-    margin-top: 5px;
+    margin-top: 0.5rem;
     color: #808080;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .section .contentWrapper .nav .row2 span {
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .section .contentWrapper table {
@@ -460,41 +460,41 @@
   }
 
   .section .contentWrapper table td {
-    padding: 5px 0;
+    padding: 0.5rem 0;
     vertical-align: top;
   }
 
   .section .contentWrapper table .tdTitle {
     color: #808080;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .section .contentWrapper table .tdContent {
     text-align: left;
     color: #444;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .section .contentWrapper .selectedWrapper .selected {
     display: inline-block;
     color: #03aef9;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
-    padding: 4px 10px 3px;
-    font-size: 14px;
-    margin: 5px 14px 0 0;
+    border: 0.1rem solid #03aef9;
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.3rem;
+    font-size: 1.4rem;
+    margin: 0.5rem 1.4rem 0 0;
   }
 
   .section .contentWrapper .description {
     color: #444;
-    font-size: 14px;
-    line-height: 24px;
-    margin-top: 15px;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    margin-top: 1.5rem;
   }
 
   .section .contentWrapper .requirement {
-    margin-top: 20px;
-    font-size: 14px;
+    margin-top: 2rem;
+    font-size: 1.4rem;
     color: #444;
   }
 
@@ -505,67 +505,67 @@
   }
 
   .section .contentWrapper .requirement .icon.one {
-    font-size: 25px;
+    font-size: 2.5rem;
     position: relative;
     top: 0;
   }
 
   .section .contentWrapper .requirement .icon.two {
-    font-size: 18px;
-    margin-left: 15px;
+    font-size: 1.8rem;
+    margin-left: 1.5rem;
   }
 
   .section .contentWrapper .item {
     position: relative;
-    padding-left: 70px;
-    margin: 10px 0;
+    padding-left: 7rem;
+    margin: 1rem 0;
   }
 
   .section .contentWrapper .item .title {
     color: #808080;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
     position: absolute;
     left: 0;
   }
 
   .section .contentWrapper .item .content {
-    font-size: 13px;
-    line-height: 24px;
+    font-size: 1.3rem;
+    line-height: 2.4rem;
     color: #444;
   }
 
   .section .contentWrapper .item .content-5 {
-    padding-left: 12px;
+    padding-left: 1.2rem;
   }
 
   .section .contentWrapper .item .li {
     position: relative;
-    padding-left: 11px;
-    margin-bottom: 8px;
+    padding-left: 1.1rem;
+    margin-bottom: 0.8rem;
   }
 
   .section .contentWrapper .item .li:before {
     position: absolute;
-    left: -4px;
-    top: 10px;
+    left: -0.4rem;
+    top: 1rem;
     background: #03aef9;
     content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 0.3rem;
   }
 
   .section .contentWrapper .files {
-    padding-top: 5px;
+    padding-top: 0.5rem;
   }
 
   .section .contentWrapper .files img {
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    width: 58px;
-    height: 58px;
-    margin-right: 15px;
+    border: 0.1rem solid #e5e5e5;
+    border-radius: 0.4rem;
+    width: 5.8rem;
+    height: 5.8rem;
+    margin-right: 1.5rem;
   }
 
   .section .contentWrapper .requirement .icon:first-child {

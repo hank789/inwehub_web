@@ -385,11 +385,11 @@
 
   .message {
     width: 100%;
-    height: 47px;
+    height: 4.7rem;
     background: #ececee;
     position: absolute;
     bottom: 0;
-    padding: 0 10px;
+    padding: 0 1rem;
     z-index: 5;
     display: flex;
     flex-direction: row;
@@ -398,18 +398,18 @@
   }
 
   .message input {
-    height: 35px;
-    border-radius: 5px;
+    height: 3.5rem;
+    border-radius: 0.5rem;
     background: #ffffff;
     border: none;
     margin-bottom: 0;
-    box-shadow: 0 0 10px rgba(220, 220, 220, 1);
+    box-shadow: 0 0 1rem rgba(220, 220, 220, 1);
 
   }
 
   .message svg {
-    font-size: 37px;
-    margin-left: 10px;
+    font-size: 3.7rem;
+    margin-left: 1rem;
     color: #03aef9;
 
   }
@@ -425,15 +425,15 @@
   .user li {
     width: 100%;
     overflow: hidden;
-    margin-top: 10px;
-    /*border: 1px solid #CCCCCC;*/
+    margin-top: 1rem;
+    /*border: 0.1rem solid #CCCCCC;*/
   }
    /*客服*/
   .consumer p:nth-of-type(1) {
     text-align: center;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #b4b4b6;
-    line-height: 46px;
+    line-height: 4.6rem;
   }
 
   .consumer p:nth-of-type(2) {
@@ -442,10 +442,10 @@
   }
 
   .consumer p:nth-of-type(2) img {
-    width: 42px;
-    height: 42px;
+    width: 4.2rem;
+    height: 4.2rem;
     float: left;
-    border-radius: 8px;
+    border-radius: 0.8rem;
   }
 
   .consumer p:nth-of-type(2) span {
@@ -453,58 +453,58 @@
     float: left;
     display: block;
     max-width: 80%;
-    min-height: 35px;
+    min-height: 3.5rem;
     margin-left: 3%;
-    border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border-radius: 1rem;
+    border: 0.1rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 7px;
+    padding: 0.7rem;
     word-wrap:break-word;
   }
 
   .consumer p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
-    /*border: 6px solid transparent;
-    border-right: 6px solid #FFFFFF;
-    border-bottom: 6px solid #FFFFFF;*/
+    border: 0.1rem solid #dcdcdc;
+    /*border: 0.6rem solid transparent;
+    border-right: 0.6rem solid #FFFFFF;
+    border-bottom: 0.6rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -4px;
+    left: -0.4rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 15px;
+    top: 1.5rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg{
-    width:85px;
-    height:105px;
+    width:8.5rem;
+    height:10.5rem;
     padding: 0;
   }
   .consumer p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
-    /*border: 6px solid transparent;
-    border-right: 6px solid #FFFFFF;
-    border-bottom: 6px solid #FFFFFF;*/
+    border: 0.1rem solid #dcdcdc;
+    /*border: 0.6rem solid transparent;
+    border-right: 0.6rem solid #FFFFFF;
+    border-bottom: 0.6rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -4px;
+    left: -0.4rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 15px;
+    top: 1.5rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg img{
@@ -521,9 +521,9 @@
   .Customerservice p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #b4b4b6;
-    line-height: 46px;
+    line-height: 4.6rem;
   }
 
   .Customerservice p:nth-of-type(2) {
@@ -532,10 +532,10 @@
   }
 
   .Customerservice p:nth-of-type(2) img {
-    width: 42px;
-    height: 42px;
+    width: 4.2rem;
+    height: 4.2rem;
     float: right;
-    border-radius: 8px;
+    border-radius: 0.8rem;
   }
 
   .Customerservice p:nth-of-type(2) span {
@@ -543,52 +543,52 @@
     float: right;
     display: block;
     max-width: 80%;
-    min-height: 35px;
+    min-height: 3.5rem;
     margin-right: 3%;
-    border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border-radius: 1rem;
+    border: 0.1rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 7px;
+    padding: 0.7rem;
     word-wrap: break-word;
   }
 
   .Customerservice p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
+    border: 0.1rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -4px;
+    right: -0.4rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 15px;
+    top: 1.5rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg{
-    width:85px;
-    height:105px;
+    width:8.5rem;
+    height:10.5rem;
     padding: 0;
   }
   .Customerservice p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
+    border: 0.1rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -4px;
+    right: -0.4rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 15px;
+    top: 1.5rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg img{
@@ -596,12 +596,12 @@
     height:100%;
   }
   .chatListWrapper {
-    bottom: 47px;
+    bottom: 4.7rem;
   }
 
 </style>
 <style>
   .chatImg .container-image{
-    height:105px;
+    height:10.5rem;
   }
 </style>

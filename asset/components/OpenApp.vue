@@ -163,8 +163,8 @@
   /*手机端*/
   .suspend {
     width: 100%;
-    height: 54px;
-    /* border-radius:4px;*/
+    height: 5.4rem;
+    /* border-radius:0.4rem;*/
     background: #252525;
     position: fixed;
     opacity: 0.9;
@@ -174,144 +174,144 @@
 
   .suspend p:nth-of-type(1) {
     float: left;
-    margin-left: 23px;
-    width: 30px;
-    height: 47px;
-    margin-top: 7px;
+    margin-left: 2.3rem;
+    width: 3rem;
+    height: 4.7rem;
+    margin-top: 0.7rem;
 
   }
 
   .suspend p:nth-of-type(1) svg {
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #FFFFFF;
-    margin-top: 12px;
+    margin-top: 1.2rem;
   }
 
   .suspend p:nth-of-type(2) {
     float: left;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1.2rem;
     background: #F3F4F6;
-    margin-top: 7px;
+    margin-top: 0.7rem;
 
     text-align: center;
   }
 
   .suspend p:nth-of-type(2) > svg {
-    font-size: 34px;
-    margin-top: 6px;
+    font-size: 3.4rem;
+    margin-top: 0.6rem;
     color: #009fe8;
   }
 
   .suspend p:nth-of-type(3) {
-    width: 96px;
-    height: 47px;
-    margin-top: 7px;
-    margin-left: 10px;
-    /* padding-top: 5px;*/
+    width: 9.6rem;
+    height: 4.7rem;
+    margin-top: 0.7rem;
+    margin-left: 1rem;
+    /* padding-top: 0.5rem;*/
     float: left;
   }
 
   .suspend p:nth-of-type(3) > span {
     display: block;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(1) {
-    font-size: 16px
+    font-size: 1.6rem
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(2) {
-    margin-top: 0.5px;
+    margin-top: 0.0.5rem;
   }
 
   .suspend a {
     float: right;
-    width: 76px;
-    height: 30px;
-    border-radius: 4px;
+    width: 7.6rem;
+    height: 3rem;
+    border-radius: 0.4rem;
     background: #3c95f9;
     text-align: center;
-    line-height: 30px;
+    line-height: 3rem;
     color: #FFFFFF;
-    margin-top: 12px;
-    margin-right: 10.5px;
+    margin-top: 1.2rem;
+    margin-right: 10.0.5rem;
   }
 
   /*微信端*/
   .mui-wechat .suspension {
     width: 100%;
-    height: 49px;
+    height: 4.9rem;
     position: fixed;
     opacity: 0.9;
-    top: 0px;
+    top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0px 3px 5px #b4b4b6;
-    -webkit-box-shadow: 0px 3px 5px #b4b4b6;
-    -moz-box-shadow: 0px 3px 5px #b4b4b6;
+    box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
   }
 
   .suspension {
     width: 100%;
-    height: 49px;
+    height: 4.9rem;
     position: absolute;
-    top: 44px;
+    top: 4.4rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0px 3px 5px #b4b4b6;
-    -webkit-box-shadow: 0px 3px 5px #b4b4b6;
-    -moz-box-shadow: 0px 3px 5px #b4b4b6;
+    box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
   }
 
   /*.suspension p:nth-of-type(1) {*/
     /*float: left;*/
     /*color: #b4b4b6;*/
-    /*margin-left: 23px;*/
-    /*margin-top: 15px;*/
-    /*margin-right: 20px;*/
-    /*font-size: 16px;*/
+    /*margin-left: 2.3rem;*/
+    /*margin-top: 1.5rem;*/
+    /*margin-right: 2rem;*/
+    /*font-size: 1.6rem;*/
 
   /*}*/
 
   .suspension p:nth-of-type(1) {
     float: left;
-    width: 35px;
-    height: 35px;
-    border-radius: 9px;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.9rem;
     background: #f3f4f6;
-    margin-top: 7px;
+    margin-top: 0.7rem;
     text-align: center;
-    margin-left: 14px;
+    margin-left: 1.4rem;
   }
 
   .suspension p:nth-of-type(1) svg {
-    font-size: 25px;
-    margin-top: 6px;
+    font-size: 2.5rem;
+    margin-top: 0.6rem;
     color: #009fe8;
   }
 
   .suspension p:nth-of-type(2) {
     float: left;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #171616;
-    margin-top: 14px;
-    margin-left: 10px;
+    margin-top: 1.4rem;
+    margin-left: 1rem;
   }
 
   .suspension a {
     float: right;
-    width: 88px;
-    height: 30px;
-    border-radius: 4px;
+    width: 8.8rem;
+    height: 3rem;
+    border-radius: 0.4rem;
     background: #3c95f9;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 30px;
-    margin-top: 10px;
-    margin-right: 14px;
+    line-height: 3rem;
+    margin-top: 1rem;
+    margin-right: 1.4rem;
   }
 </style>

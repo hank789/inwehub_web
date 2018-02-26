@@ -158,7 +158,7 @@
 <style scoped>
 
   .list{
-    margin-top:10px;
+    margin-top:1rem;
   }
   .item .first .title {
     color: #101010;
@@ -175,8 +175,8 @@
   }
 
   .item .second {
-    margin-top:5px;
-    font-size: 12px;
+    margin-top:0.5rem;
+    font-size: 1.2rem;
     color: #101010;
   }
 
@@ -187,15 +187,15 @@
 
   .type {
     color: #8c8c8c;
-    height: 30px;
-    padding-left: 10px;
-    line-height: 30px;
+    height: 3rem;
+    padding-left: 1rem;
+    line-height: 3rem;
   }
 
   .empty {
     background: #fff;
     text-align: center;
-    margin-top: 10px !important;
+    margin-top: 1rem !important;
   }
 
   .status {

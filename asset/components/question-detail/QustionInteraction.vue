@@ -138,33 +138,33 @@
     margin-top: 0 !important;
 
     .content {
-      padding: 0 15px;
+      padding: 0 1.5rem;
     }
 
     .answerCount {
       color: #b4b4b6;
-      font-size: 12px;
-      padding: 5px 15px 15px;
+      font-size: 1.2rem;
+      padding: 0.5rem 1.5rem 1.5rem;
 
       span {
         color: #03aef9;
-        margin-left: 5px;
+        margin-left: 0.5rem;
       }
     }
 
     .buttonWrapper {
 
       &.buttonWrapper-1 {
-        padding: 0 7px 0 15px;
+        padding: 0 0.7rem 0 1.5rem;
       }
 
       &.buttonWrapper-2 {
-        padding: 0 15px 0 7px;
+        padding: 0 1.5rem 0 0.7rem;
       }
 
       .mui-btn-warning {
         background-color: #fcc816;
-        border: 1px solid #fcc816;
+        border: 0.1rem solid #fcc816;
       }
     }
   }
@@ -174,6 +174,6 @@
   }
   /*图片样式*/
   .img-style{
-    padding: 0 15px;
+    padding: 0 1.5rem;
   }
 </style>

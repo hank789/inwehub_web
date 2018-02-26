@@ -121,7 +121,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -132,9 +132,9 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:39px;
+    height:3.9rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:1.4rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -148,11 +148,11 @@
   }
   .menu span:nth-of-type(3) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:2.7rem;
+    height:1.0.5rem;
+    border-radius: 5rem;
     background:#03aef9;
-    top: 28px;
+    top: 2.8rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -165,15 +165,15 @@
 
   .my-focus-item .follows {
     position: absolute;
-    width: 62px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width: 6.2rem;
+    height: 2.7rem;
+    border: 0.1rem solid #03aef9;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 27px;
+    line-height: 2.7rem;
     right: 0;
-    top: 18px;
-    font-size: 14px;
+    top: 1.8rem;
+    font-size: 1.4rem;
     color: #03aef9;
   }
 
@@ -184,26 +184,26 @@
 
   .my-focus-item div p:nth-of-type(1) span {
     display: inline-block;
-    max-width: 126px;
-    height: 20px;
+    max-width: 12.6rem;
+    height: 2rem;
     overflow: hidden;
     font-family: "PingFangSC";
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
     color: #3c95f9;
   }
 
   .my-focus-item div p:nth-of-type(2){
     width: 100%;
-    height: 14px;
-    font-size: 13px;
+    height: 1.4rem;
+    font-size: 1.3rem;
     color: #b4b4b6;
-    line-height: 13px;
+    line-height: 1.3rem;
   }
   /*列表区域*/
   .cions-list{
@@ -213,60 +213,60 @@
   }
   .cions-list li{
     position: relative;
-    height:64px;
+    height:6.4rem;
   }
   .cions-list li div{
     float: left;
   }
   .cions-list li .cions-avatar{
     position: relative;
-    width:44px;
-    height:44px;
+    width:4.4rem;
+    height:4.4rem;
     border-radius:50%;
     background: #cccccc;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
   .cions-list li .cions-avatar img{
-    width:44px;
-    height:44px;
+    width:4.4rem;
+    height:4.4rem;
     border-radius:50%;
   }
   .cions-list li .cions-avatar svg{
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: -2px;
+    font-size: 2rem;
+    right: -0.5rem;
+    bottom: -0.2rem;
   }
   .cions-list li .detail{
-    margin-top: 14px;
-    font-size:14px;
+    margin-top: 1.4rem;
+    font-size:1.4rem;
     color: #444444;
-    margin-left: 8px;
+    margin-left: 0.8rem;
   }
   .cions-list li .detail p:nth-of-type(2){
-    width:200px;
-    font-size:12px;
+    width:20rem;
+    font-size:1.2rem;
     color: #b4b4b6;
-    margin-top: -2px;
+    margin-top: -0.2rem;
   }
   .cions-list li .fouce{
-    width:61px;
-    height:27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width:6.1rem;
+    height:2.7rem;
+    border: 0.1rem solid #03aef9;
+    border-radius: 5rem;
     text-align: center;
-    line-height: 25px;
-    font-size:14px;
+    line-height: 2.5rem;
+    font-size:1.4rem;
     color: #03aef9;
-    margin-top: 18.5px;
+    margin-top: 18.0.5rem;
     float: right;
 
   }
   .cions-list li .grey{
     color: #b4b4b6;
-    border: 1px solid #b4b4b6;
+    border: 0.1rem solid #b4b4b6;
   }
   .listWrapper{
-    top:177px;
+    top:17.7rem;
   }
 </style>

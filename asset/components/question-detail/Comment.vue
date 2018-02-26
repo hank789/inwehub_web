@@ -186,7 +186,7 @@
 
 <style scoped="scoped">
   .buttonWrapper {
-    padding: 15px;
+    padding: 1.5rem;
     background: #fff;
   }
 
@@ -197,66 +197,66 @@
   .form-realAnswer {
     position: relative;
     background: #fff;
-    padding: 20px 0;
+    padding: 2rem 0;
     text-align: center;
   }
 
   .commentHeader .shutdown {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 12px;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1.2rem;
   }
 
   .form-realAnswer .star-rating {
     float: none;
     position: relative;
     left: 50%;
-    margin-top: 10px;
-    margin-left: -115px;
+    margin-top: 1rem;
+    margin-left: -11.5rem;
   }
 
   .starRating span {
-    margin: 0 5px;
+    margin: 0 0.5rem;
   }
 
   .form-realAnswer .submit {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
   }
 
   .form-realAnswer textarea {
-    margin-top: 20px;
+    margin-top: 2rem;
     width: 100%;
-    height: 138px;
+    height: 13.8rem;
     border: none;
-    padding: 10px 15px 0;
+    padding: 1rem 1.5rem 0;
   }
 
   .form-realAnswer .title {
-    margin-top: -10px;
-    font-size: 12px;
+    margin-top: -1rem;
+    font-size: 1.2rem;
     color: #ff9800;
-    height: 32px;
+    height: 3.2rem;
   }
 
   .form-realAnswer .button-wrapper {
-    margin-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .successWrapper {
     text-align: center;
-    padding: 20px 0;
+    padding: 2rem 0;
   }
 
   .successWrapper .mui-icon {
-    font-size: 90px;
+    font-size: 9rem;
     color: #19ac18;
   }
 
   .successWrapper .sTitle {
-    margin-top: 20px;
+    margin-top: 2rem;
   }
 
   .mui-content > .mui-table-view:first-child {
@@ -265,8 +265,8 @@
 
   .commentHeader {
     background-color: #eee;
-    height: 41px;
-    line-height: 41px;
+    height: 4.1rem;
+    line-height: 4.1rem;
     text-align: center;
     position: relative;
   }
@@ -276,7 +276,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -284,7 +284,7 @@
   }
 
   .commentDesc {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #999;
   }
 

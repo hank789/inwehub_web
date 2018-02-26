@@ -204,8 +204,8 @@
 <style scoped>
 
   .withdraw {
-    margin: 10px 0;
-    font-size: 14px;
+    margin: 1rem 0;
+    font-size: 1.4rem;
     background: #fff;
     position: relative;
   }
@@ -216,7 +216,7 @@
 
   .withdraw .wechatBind {
     float: right;
-    margin-right: 18px;
+    margin-right: 1.8rem;
     color: #4990E2;
   }
 
@@ -225,7 +225,7 @@
     right: 0;
     top: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -237,7 +237,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -245,7 +245,7 @@
   }
 
   .title {
-    padding: 15px;
+    padding: 1.5rem;
     position: relative;
   }
 
@@ -253,8 +253,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 30px;
-    height: 1px;
+    left: 3rem;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -262,18 +262,18 @@
   }
 
   .title span {
-    margin-left: 10px;
+    margin-left: 1rem;
   }
 
   .tip {
-    margin-top: 15px;
-    padding-left: 15px;
+    margin-top: 1.5rem;
+    padding-left: 1.5rem;
   }
 
   .textArea {
-    margin: 30px 0 0 15px;
+    margin: 3rem 0 0 1.5rem;
     padding-left: 0;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     position: relative;
 
   }
@@ -282,8 +282,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -292,8 +292,8 @@
 
   .unit {
     color: #37A18E;
-    font-size: 24px;
-    margin-left: -2px;
+    font-size: 2.4rem;
+    margin-left: -0.2rem;
   }
 
   .amount {
@@ -304,36 +304,36 @@
 
   .amount input {
     border: none;
-    font-size: 40px;
+    font-size: 4rem;
     padding: 0;
     margin: 0;
-    height: 50px;
+    height: 5rem;
     text-align: left;
   }
 
   .balance {
-    padding: 15px 0 15px 15px;
-    font-size: 14px;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    font-size: 1.4rem;
     color: #757575;
   }
 
   .balance span {
     color: #4990E2;
     float: right;
-    margin-right: 30px;
-    font-size: 14px;
+    margin-right: 3rem;
+    font-size: 1.4rem;
   }
 
   .button-wrapper {
-    padding: 0 50px;
-    margin-top: 20px;
+    padding: 0 5rem;
+    margin-top: 2rem;
   }
 
   .help {
-    margin-top: 20px;
+    margin-top: 2rem;
     color: #9B9B9B;
-    line-height: 25px;
-    font-size: 14px;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
     text-align: center;
   }
 
@@ -343,8 +343,8 @@
 
   .unFinish {
     color: #9B9B9B;
-    margin-left: 15px;
-    font-size: 14px;
+    margin-left: 1.5rem;
+    font-size: 1.4rem;
   }
 
 </style>

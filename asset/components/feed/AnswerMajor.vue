@@ -131,38 +131,38 @@
 <style>
   .question-money{
     float: right;
-    height:19px;
+    height:1.9rem;
     background: #a8dff7;
-    border-radius: 4px;
-    font-size:12px;
+    border-radius: 0.4rem;
+    font-size:1.2rem;
     color: #235280;
-    line-height: 19px;
-    padding: 0 13px 0 3px;
+    line-height: 1.9rem;
+    padding: 0 1.3rem 0 0.3rem;
   }
   .question-money i{
     margin: 0;
     display: inline-block;
-    width:4px;
-    height:4px;
+    width:0.4rem;
+    height:0.4rem;
     border-radius: 50%;
     background: #FFFFFF;
-    margin-bottom: 1.6px;
+    margin-bottom: 1.0.6rem;
   }
   .tagSelect{
     display: inline-block;
-    font-size:14px;
+    font-size:1.4rem;
     color: #235280;
-    margin-right:5px;
+    margin-right:0.5rem;
   }
   .top-10{
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 
 </style>
 <style scoped>
 .average_rate{
-  font-size: 12px;
+  font-size: 1.2rem;
   color: #b4b4b6;
-  margin-bottom: 6px;
+  margin-bottom: 0.6rem;
 }
 </style>

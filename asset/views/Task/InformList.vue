@@ -211,10 +211,10 @@
 <style scoped="scoped">
   .bot {
     position: absolute;
-    right: 16px;
+    right: 1.6rem;
     bottom: 0;
-    left: 16px;
-    height: 1px;
+    left: 1.6rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -240,41 +240,41 @@
   }
   /*内容区域*/
   .content {
-    margin-top: 45px;
+    margin-top: 4.5rem;
   }
 
   .content ul li {
     width: 100%;
-    height: 60px;
-    padding: 0 16px;
+    height: 6rem;
+    padding: 0 1.6rem;
     position: relative;
   }
 
   .content ul li img {
-    width: 42px;
-    height: 42px;
-    margin-top: 10px;
+    width: 4.2rem;
+    height: 4.2rem;
+    margin-top: 1rem;
     float: left;
   }
 
 
   .content ul li p {
     float: left;
-    margin-top: 10px;
-    margin-left: 12px;
+    margin-top: 1rem;
+    margin-left: 1.2rem;
   }
 
   .content ul li a {
     position: absolute;
-    top: 10px;
-    right: 16px;
-    font-size: 12px;
+    top: 1rem;
+    right: 1.6rem;
+    font-size: 1.2rem;
     color: #c8c8c8;
   }
 
   .content ul li p span:nth-of-type(1) {
     display: block;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #444444;
   }
 
@@ -285,38 +285,38 @@
   .content ul li p span:nth-of-type(2) {
     display: block;
     width: 100%;
-    height: 18px;
-    font-size: 13px;
+    height: 1.8rem;
+    font-size: 1.3rem;
     color: #808080;
   }
 
   .message {
     position: absolute;
-    font-size: 11px;
+    font-size: 1.1rem;
     color: #ffffff;
-    min-width: 18px;
-    height: 18px;
+    min-width: 1.8rem;
+    height: 1.8rem;
     background: #f03c69;
     border-radius: 50%;
     text-align: center;
-    line-height: 18px;
-    left: 45px;
-    top: 5px;
+    line-height: 1.8rem;
+    left: 4.5rem;
+    top: 0.5rem;
   }
 
   .menu_message {
     position: absolute;
     left: 79%;
-    top: 8px;
+    top: 0.8rem;
     background: #f03c69;
-    font-size: 11px;
+    font-size: 1.1rem;
     text-align: center;
     color: #fff;
-    padding: 0px 3px;
-    min-width: 15px;
-    min-height: 15px;
-    border-radius: 15px;
-    line-height: 15px;
+    padding: 0rem 0.3rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border-radius: 1.5rem;
+    line-height: 1.5rem;
   }
 
   .radius {
@@ -324,25 +324,25 @@
   }
   /*客服头像方形*/
   .content ul li:nth-of-type(5) img{
-    border-radius: 10px;
+    border-radius: 1rem;
   }
 
   .listWrapper{
-    bottom: 50px;
+    bottom: 5rem;
   }
 
   /*待完成任务*/
   .notice{
     width:100%;
-    height:44px;
-    margin-top: 7.5px;
-    padding: 0 16px;
+    height:4.4rem;
+    margin-top: 7.0.5rem;
+    padding: 0 1.6rem;
   }
   .notice p:nth-of-type(1){
     width: 72%;
     height:100%;
     background:#dcdcdc;
-    border-radius: 4px 0 0px 4px;
+    border-radius: 0.4rem 0 0rem 0.4rem;
     float: left;
     position: relative;
     z-index: 9;
@@ -352,10 +352,10 @@
     height:100%;
   }
   .notice p:nth-of-type(1) .notice_r{
-    height:15px;
+    height:1.5rem;
     float: right;
 
-    margin-top: 14.5px;
+    margin-top: 14.0.5rem;
 
   }
   .notice p:nth-of-type(1) span{
@@ -364,22 +364,22 @@
     float: right;
     margin-right: 4%;
     margin-left: 1%;
-    line-height: 43px;
-    font-size: 16px;
+    line-height: 4.3rem;
+    font-size: 1.6rem;
     color: #235280;
   }
   .notice p:nth-of-type(1):after {
     content: "";
     display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.2rem;
     background: #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -4px;
-    top: 0px;
+    right: -0.4rem;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }
@@ -390,44 +390,44 @@
     height:100%;
     background:#f03c69;
     text-align: center;
-    line-height: 44px;
-    font-size:16px;
+    line-height: 4.4rem;
+    font-size:1.6rem;
     color: #FFFFFF;
     font-weight:500;
-    border-radius:  0 4px 4px 0;
+    border-radius:  0 0.4rem 0.4rem 0;
     position: relative;
   }
   .notice p:nth-of-type(2):after {
     content: "";
     display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.2rem;
     background: #FFFFFF;
-    /*border: 1px solid #000000;*/
+    /*border: 0.1rem solid #000000;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -5px;
-    top: 0px;
+    left: -0.5rem;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }
   /*适配*/
-  @media (min-width: 320px) {
+  @media (min-width: 32rem) {
     .notice p:nth-of-type(1) .notice_l{
       width:45%;
       margin-right: 0;
     }
   }
 
-  @media (min-width: 375px) {
+  @media (min-width: 37.5rem) {
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }
   }
 
-  @media (min-width: 414px) {
+  @media (min-width: 41.4rem) {
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }

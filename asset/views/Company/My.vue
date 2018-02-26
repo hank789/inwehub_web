@@ -172,25 +172,25 @@
   }
 
   .basic .header {
-    height: 80px;
-    margin-top: 20px;
+    height: 8rem;
+    margin-top: 2rem;
   }
 
   .basic .separate {
     display: inline-block;
     position: relative;
-    top: 2px;
-    height: 14px;
-    width: 1px;
-    margin: 0 5px;
-    border-left: 1px solid #c8c8c8;
+    top: 0.2rem;
+    height: 1.4rem;
+    width: 0.1rem;
+    margin: 0 0.5rem;
+    border-left: 0.1rem solid #c8c8c8;
   }
 
   .basic {
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
     background: #fff;
-    padding: 0 15px;
+    padding: 0 1.5rem;
   }
 
   .basic .realname {
@@ -199,32 +199,32 @@
   }
 
   .basic .company {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #444;
     font-weight: 500;
-    margin: 8px 0 8px;
+    margin: 0.8rem 0 0.8rem;
   }
 
   .basic .authentication {
     color: #444;
-    margin-bottom: 11px;
+    margin-bottom: 1.1rem;
   }
 
   .basic .authentication .icon {
     color: #03aef9;
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
   .basic .buttonWrapper {
     padding: 0 35%;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 
   .basic .buttonWrapper .mui-btn-primary {
     background: #03aef9;
-    border: 1px solid #03aef9;
-    padding: 6px 0;
-    font-size: 14px;
+    border: 0.1rem solid #03aef9;
+    padding: 0.6rem 0;
+    font-size: 1.4rem;
   }
 
   .basic .line {
@@ -236,7 +236,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -245,7 +245,7 @@
 
   .basic .infos {
     text-align: left;
-    padding: 15px 0;
+    padding: 1.5rem 0;
   }
 
   .basic .infos span {
@@ -253,32 +253,32 @@
   }
 
   .basic .infos .info {
-    padding: 5px 0;
+    padding: 0.5rem 0;
   }
 
   .river {
-    height: 10px;
+    height: 1rem;
     background: #ececee;
   }
 
   .nav {
-    padding: 20px 16px;
+    padding: 2rem 1.6rem;
 
   }
 
   .nav .navWrapper {
     position: relative;
     background: #f3f4f6;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
   }
 
   .nav .navWrapper .line {
     position: absolute;
     left: 50%;
-    top: 10px;
-    bottom: 10px;
-    width: 1px;
+    top: 1rem;
+    bottom: 1rem;
+    width: 0.1rem;
     background: #dcdcdc;
   }
 
@@ -286,26 +286,26 @@
     display: inline-block;
     text-align: center;
     width: 50%;
-    padding: 20px 0 17px;
+    padding: 2rem 0 1.7rem;
   }
 
   .nav .navWrapper .item .icon {
-    font-size: 30px;
+    font-size: 3rem;
     color: #03aef9;
-    margin-bottom: 3px;
+    margin-bottom: 0.3rem;
   }
 
   .avatar {
     position: absolute;
     left: 50%;
-    margin-left: -34.5px;
+    margin-left: -34.0.5rem;
 
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 69px;
-    width: 69px;
-    font-size: 20px;
+    height: 6.9rem;
+    width: 6.9rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -342,23 +342,23 @@
 
   .more a {
     display: inline-block;
-    padding: 10px 15px 13px;
-    font-size: 14px;
+    padding: 1rem 1.5rem 1.3rem;
+    font-size: 1.4rem;
     color: #808080;
     width: 100%;
   }
 
   .more a:after {
-    font-size: 22px;
-    right: 8px;
+    font-size: 2.2rem;
+    right: 0.8rem;
   }
 
   .more:after {
     position: absolute;
-    right: 15px;
+    right: 1.5rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 1.5rem;
+    height: 0.1rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -366,7 +366,7 @@
   }
 
   .moreWrapper {
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     background: #fff;
   }
 </style>

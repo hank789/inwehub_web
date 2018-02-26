@@ -117,7 +117,7 @@
 
 <style scoped="scoped">
   .imageWrapper {
-    height: 300px;
-    margin-bottom: 15px;
+    height: 30rem;
+    margin-bottom: 1.5rem;
   }
 </style>

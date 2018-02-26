@@ -114,10 +114,10 @@
   /*svg*/
 
   .succcess {
-    font-size: 95px;
+    font-size: 9.5rem;
     color: #c8c8c8;
     position: absolute;
-    top: 79px;
+    top: 7.9rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -125,7 +125,7 @@
 
   .succcess_text {
     position: absolute;
-    top: 208px;
+    top: 20.8rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -133,29 +133,29 @@
 
   .succcess_text p:nth-of-type(1) {
     text-align: center;
-    font-size: 25px;
+    font-size: 2.5rem;
     color: #444444;
     font-weight: 500;
   }
 
   .succcess_text p:nth-of-type(2) {
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #808080;
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   /*button*/
   button {
-    width: 150px;
-    height: 53px;
+    width: 15rem;
+    height: 5.3rem;
     background: #03aef9;
-    border-radius: 50px;
+    border-radius: 5rem;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #ffffff;
     position: absolute;
-    top: 291.5px;
+    top: 291.0.5rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -163,16 +163,16 @@
   }
 
   .succcess_share {
-    width: 162px;
-    height: 31px;
-    border-radius: 50px;
-    border: 1px solid #979797;
+    width: 16.2rem;
+    height: 3.1rem;
+    border-radius: 5rem;
+    border: 0.1rem solid #979797;
     text-align: center;
-    line-height: 31px;
-    font-size: 14px;
+    line-height: 3.1rem;
+    font-size: 1.4rem;
     color: #444444;
     position: absolute;
-    bottom: 103px;
+    bottom: 10.3rem;
     left: 0;
     right: 0;
     margin: auto;

@@ -236,10 +236,10 @@
   .answerRichText.blur .form-realAnswer {
     overflow: hidden;
     position: absolute;
-    top:5px;
-    bottom:5px;
-    left:5px;
-    right:5px;
+    top:0.5rem;
+    bottom:0.5rem;
+    left:0.5rem;
+    right:0.5rem;
   }
 
   .answerRichText.blur .form-realAnswer > div {
@@ -256,8 +256,8 @@
   .answerRichText.blur .quill-editor {
     position: absolute;
     width:100%;
-    top:41px;
-    bottom:21px;
+    top:4.1rem;
+    bottom:2.1rem;
     height:auto;
   }
 

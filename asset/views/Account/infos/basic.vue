@@ -639,9 +639,9 @@
 </script>
 <style scoped>
   .account_item_title {
-    padding: 5px;
+    padding: 0.5rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .mui-navbar {
@@ -649,7 +649,7 @@
     right: 0;
     left: 0;
     z-index: 10;
-    height: 44px;
+    height: 4.4rem;
     background-color: #f7f7f8;
   }
 
@@ -684,7 +684,7 @@
     position: absolute;
     right: 100%;
     top: 0;
-    width: 16px;
+    width: 1.6rem;
     height: 100%;
     z-index: -1;
     content: '';
@@ -714,7 +714,7 @@
   }
 
   .mui-page .mui-table-view:last-child {
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
   }
 
   .mui-table-view-cell .mui-navigate-right,
@@ -724,7 +724,7 @@
 
   .mui-table-view-divider {
     background-color: #efeff4;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .mui-table-view-divider:before,
@@ -733,7 +733,7 @@
   }
 
   .head {
-    height: 40px;
+    height: 4rem;
   }
 
   .mui-ios .mui-navbar .mui-bar .mui-title {
@@ -743,9 +743,9 @@
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 20rem;
+    right: 4rem;
+    height: 3.2rem;
     color: #3f3f3f;
     padding-right: 0;
   }
@@ -760,7 +760,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 4rem;
   }
 
   .mui-input-row a {
@@ -768,18 +768,18 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 1.1rem 1.5rem;
   }
 
   .avatar {
     z-index: 9;
     color: #ffffff;
     position: absolute;
-    height: 110px;
-    width: 110px;
-    right: 30px;
-    top: 20px;
-    font-size: 20px;
+    height: 11rem;
+    width: 11rem;
+    right: 3rem;
+    top: 2rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -809,13 +809,13 @@
   }
 
   .personCard {
-    margin-top: 15px;
+    margin-top: 1.5rem;
     position: relative;
     width: 100%;
-    padding-right: 0px;
-    height: 154px;
+    padding-right: 0rem;
+    height: 15.4rem;
     background: #fff;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #555;
     font-weight: bold;
   }
@@ -825,24 +825,24 @@
   }
 
   .personCard .mui-icon {
-    font-size: 24px;
+    font-size: 2.4rem;
     position: absolute;
-    left: 160px;
-    top: 30px;
+    left: 16rem;
+    top: 3rem;
   }
 
   .personCard .title {
-    margin-top: 25px;
+    margin-top: 2.5rem;
   }
 
   .personCard .titleSub {
-    margin-top: 25px;
+    margin-top: 2.5rem;
   }
 
   .personCard .titleSub span {
     color: #3f51b5;
-    font-size: 22px;
-    margin-left: 15px;
+    font-size: 2.2rem;
+    margin-left: 1.5rem;
   }
 
   .mui-pageSub .mui-table-view-cell {
@@ -850,20 +850,20 @@
   }
 
   .textarea-wrapper {
-    margin: 0 5px;
+    margin: 0 0.5rem;
     height: 100%;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #bbbbbb;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
-    font-size: 12px;
-    bottom: 2px;
+    right: 0.4rem;
+    font-size: 1.2rem;
+    bottom: 0.2rem;
     color: #b0b0b0;
   }
 
@@ -875,11 +875,11 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 10px;
+    padding: 1rem;
   }
 
   .mui-bar .save {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .no-empty {
@@ -888,9 +888,9 @@
 
   .iplus {
     color: #007aff;;
-    font-size: 16px;
+    font-size: 1.6rem;
     vertical-align: text-top;
-    margin-right: 10px;
+    margin-right: 1rem;
   }
 
   .emptyFields {
@@ -898,7 +898,7 @@
   }
 
   .titleSubSub {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #999;
   }
 

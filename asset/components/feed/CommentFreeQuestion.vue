@@ -98,13 +98,13 @@
 <style scoped>
   /*回答者详情*/
 .comment-container{
-  height:19px;
-  line-height: 19px;
-  padding: 0 0px;
+  height:1.9rem;
+  line-height: 1.9rem;
+  padding: 0 0rem;
 }
 .question-answer{
   float: left;
-  font-size:13px;
+  font-size:1.3rem;
   color: #808080;
 }
 .question-answer i{
@@ -113,11 +113,11 @@
   }
 /*回答者的内容*/
 .answer-content{
-  font-size:16px;
+  font-size:1.6rem;
   color: #444444;
-  line-height: 21px;
-  margin-bottom: 14px;
-  margin-top: 3px;
+  line-height: 2.1rem;
+  margin-bottom: 1.4rem;
+  margin-top: 0.3rem;
 }
 
 

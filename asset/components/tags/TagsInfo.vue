@@ -87,7 +87,7 @@
 <style scoped>
   .tag-title{
     width:100%;
-    height:133px;
+    height:13.3rem;
     background: #f3f4f6;
     padding: 0 4%;
     display: flex;
@@ -95,22 +95,22 @@
     align-items: center;
   }
   .tag-l{
-    width:92px;
-    height:92px;
+    width:9.2rem;
+    height:9.2rem;
   }
   .tag-l img{
     width: 100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   .tag-l.bg-grey{
     background: #ececee;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     position: relative;
   }
   .tag-l.bg-grey svg{
     color: #c8c8c8;
-    font-size: 50px;
+    font-size: 5rem;
     position: absolute;
     left:0;
     right:0;
@@ -120,23 +120,23 @@
   }
 
   .tag-r{
-    height:92px;
-    margin-left: 10px;
+    height:9.2rem;
+    margin-left: 1rem;
   }
   .tag-r p:nth-of-type(1){
-    font-size:18px;
+    font-size:1.8rem;
     color: #444444;
     font-weight:500;
   }
   .tag-r p:nth-of-type(1) span:nth-of-type(2){
     float: right;
-    width:62px;
-    height:27px;
+    width:6.2rem;
+    height:2.7rem;
     background: #a8dff7;
     text-align: center;
-    line-height: 26px;
-    border-radius: 4px;
-    font-size:14px;
+    line-height: 2.6rem;
+    border-radius: 0.4rem;
+    font-size:1.4rem;
     color: #235280;
   }
   .tag-r p:nth-of-type(1) span:nth-of-type(2).grey{
@@ -144,23 +144,23 @@
     background: #dcdcdc;
   }
   .tag-r p:nth-of-type(2){
-    margin-top: 11px;
+    margin-top: 1.1rem;
   }
   /***媒体查询*****/
 
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 32rem) {
     .tag-r {
       width: 70%;
     }
   }
 
-  @media screen and (min-width: 375px) {
+  @media screen and (min-width: 37.5rem) {
     .tag-r {
       width: 70%;
     }
   }
 
-  @media screen and (min-width: 414px) {
+  @media screen and (min-width: 41.4rem) {
     .tag-r {
       width: 73%;
     }

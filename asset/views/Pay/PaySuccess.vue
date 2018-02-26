@@ -75,18 +75,18 @@
 
 <style lang="less" scoped>
   .mui-bar .myicon {
-    left: 10px;
-    top: 12px;
+    left: 1rem;
+    top: 1.2rem;
   }
 
   .pay-success {
     text-align: center;
-    padding: 15px 0;
+    padding: 1.5rem 0;
   }
 
   .pay-success .status {
-    margin-top: 100px;
-    font-size: 20px;
+    margin-top: 10rem;
+    font-size: 2rem;
     color: #19ac18;
   }
 
@@ -95,19 +95,19 @@
   }
 
   .pay-success .status svg {
-    font-size: 100px;
-    margin-bottom: 20px;
+    font-size: 10rem;
+    margin-bottom: 2rem;
   }
 
   .buttons button {
-    margin: 0 15px;
-    padding: 8px 30px;
+    margin: 0 1.5rem;
+    padding: 0.8rem 3rem;
   }
 
   .info {
-    margin: 50px 0;
+    margin: 5rem 0;
     background: #fff;
-    padding: 15px;
+    padding: 1.5rem;
     text-align: left;
     position: relative;
 
@@ -117,7 +117,7 @@
       right: 0;
       top: 0;
       left: 0;
-      height: 1px;
+      height: 0.1rem;
       content: '';
       -webkit-transform: scaleY(.5);
       transform: scaleY(.5);
@@ -131,7 +131,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      height: 1px;
+      height: 0.1rem;
       content: '';
       -webkit-transform: scaleY(.5);
       transform: scaleY(.5);
@@ -141,15 +141,15 @@
 
     .item {
 
-      height: 40px;
-      line-height: 40px;
+      height: 4rem;
+      line-height: 4rem;
 
       label {
         color: #9B9B9B;
       }
 
       span {
-        max-width: 150px;
+        max-width: 15rem;
         float: right;
       }
     }

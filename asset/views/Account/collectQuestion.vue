@@ -76,7 +76,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 45px;
+    height: 4.5rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -90,8 +90,8 @@
   /*导航栏的样式*/
   .menu{
     width:100%;
-    height:39px;
-    font-size:14px;
+    height:3.9rem;
+    font-size:1.4rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -105,11 +105,11 @@
   }
   .menu span:nth-of-type(2) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:2.7rem;
+    height:1.0.5rem;
+    border-radius: 5rem;
     background:#03aef9;
-    top: 28px;
+    top: 2.8rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -117,10 +117,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.1rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -153,47 +153,47 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 15px 0 13px 0;
+    padding: 1.5rem 0 1.3rem 0;
     position: relative;
   }
 
   .answer li div {
-    margin-bottom: 12px;
+    margin-bottom: 1.2rem;
   }
 
   .answer li p:nth-of-type(1) {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #444444;
 
   }
 
   .answer li p:nth-of-type(2) {
-    margin-top: 6px;
+    margin-top: 0.6rem;
 
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(1) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #b4b4b6;
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #03aef9;
 
   }
 
   .answer li p:nth-of-type(2) a {
     display: inline-block;
-    width: 1px;
-    height: 12px;
+    width: 0.1rem;
+    height: 1.2rem;
     background: #DCDCDC;
-    margin: 0 9px -2px 7px;
+    margin: 0 0.9rem -0.2rem 0.7rem;
 
   }
 
   /*listWrapper*/
   .listWrapper {
-    top: 45px;
+    top: 4.5rem;
   }
 </style>

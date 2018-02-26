@@ -156,22 +156,22 @@
 
   .freeAskWrapper {
     position: relative;
-    height: 48px;
-    margin-top: 12px;
+    height: 4.8rem;
+    margin-top: 1.2rem;
   }
 
   .freeAsk {
     position: absolute;
-    left: 15px;
-    right: 15px;
+    left: 1.5rem;
+    right: 1.5rem;
   }
 
   .freeAsk .icon {
     position: absolute;
-    width: 35px;
-    left: -8px;
-    top: -5px;
-    height: 48px;
+    width: 3.5rem;
+    left: -0.8rem;
+    top: -0.5rem;
+    height: 4.8rem;
     display: inline-block;
     background-image: url("../../statics/images/icon_xiaoha@2x.png");
     background-repeat: no-repeat;
@@ -181,12 +181,12 @@
 
   .freeAsk .text {
     background: #dcdcdc;
-    border: 1px #dcdcdc solid;
-    border-radius: 50px;
-    font-size: 14px;
-    line-height: 14px;
+    border: 0.1rem #dcdcdc solid;
+    border-radius: 5rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
     color: #323232;
-    padding: 13px 0px 13px 35px;
+    padding: 1.3rem 0rem 1.3rem 3.5rem;
   }
 
   .freeAsk .text div {
@@ -196,22 +196,22 @@
   .freeAskGet {
     position: fixed;
     top: 50%;
-    margin-top: -181px;
-    left: 10px;
-    right: 10px;
+    margin-top: -18.1rem;
+    left: 1rem;
+    right: 1rem;
     background: url("../../statics/images/freeAskGet@2x.png") no-repeat center;
     background-size: contain;
-    height: 262px;
+    height: 26.2rem;
     z-index: 999;
   }
 
   .freeAskGetButton {
     position: fixed;
     top: 50%;
-    margin: -70px 0 0 -100px;
+    margin: -7rem 0 0 -10rem;
     left: 50%;
-    width: 150px;
-    height: 70px;
+    width: 15rem;
+    height: 7rem;
     z-index: 1000;
   }
 
@@ -219,11 +219,11 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -195px 0 0 -50px;
+    margin: -19.5rem 0 0 -5rem;
     background: url("../../statics/images/xiaoha-welcome@2x.png") no-repeat center;
     background-size: contain;
-    width: 100px;
-    height: 150px;
+    width: 10rem;
+    height: 15rem;
     z-index: 999;
   }
 
@@ -231,11 +231,11 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -45px 0 0 -146px;
+    margin: -4.5rem 0 0 -14.6rem;
     background: url("../../statics/images/getSuccess@2x.png") no-repeat center;
     background-size: contain;
-    width: 292px;
-    height: 91px;
+    width: 29.2rem;
+    height: 9.1rem;
     z-index: 999;
   }
 
@@ -243,12 +243,12 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: 94px 0 0 -19px;
+    margin: 9.4rem 0 0 -1.9rem;
     z-index: 999;
   }
 
   #freeAskSuccessTemplate .close .icon {
-    font-size: 38px;
+    font-size: 3.8rem;
     color: #b4b4b6;
   }
 </style>

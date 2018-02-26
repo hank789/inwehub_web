@@ -248,8 +248,8 @@
   }
 
   .footer-bar .mui-tab-item .mui-icon {
-    width: 26px;
-    height: 26px;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 
   .footer-bar .mui-tab-item {
@@ -259,17 +259,17 @@
   .footer-bar .mui-active div {
     position: absolute;
     width: 100%;
-    bottom: 5px;
+    bottom: 0.5rem;
   }
 
   .footer-bar .mui-active .myicon-point-hover {
-    width: 3px;
-    height: 3px;
-    top: 4px;
+    width: 0.3rem;
+    height: 0.3rem;
+    top: 0.4rem;
   }
 
   .oneIcon {
-    font-size: 23px;
+    font-size: 2.3rem;
   }
 
   .twoIcon {
@@ -277,7 +277,7 @@
   }
 
   .twoIcon {
-    font-size: 23px;
+    font-size: 2.3rem;
   }
 
   .twoIcon ~ .mui-badge {
@@ -285,19 +285,19 @@
     display: inline-block;
     background: #fa4975;
     color: #fff;
-    padding: 0px 3px;
-    min-width: 15px;
-    min-height: 15px;
-    border-radius: 15px;
-    line-height: 15px;
+    padding: 0rem 0.3rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border-radius: 1.5rem;
+    line-height: 1.5rem;
   }
 
   .threeIcon {
-    font-size: 27px;
+    font-size: 2.7rem;
   }
 
   .fourIcon {
-    font-size: 24px;
+    font-size: 2.4rem;
   }
 
   .askWrapper {
@@ -309,39 +309,39 @@
 
   .askWrapper .askPlus {
     position: relative;
-    top: 1px;
+    top: 0.1rem;
     width: 100%;
     text-align: center;
-    border-radius: 53px;
+    border-radius: 5.3rem;
   }
 
   .askWrapper .askPlus .askImg {
     position: absolute;
-    top: 6px;
+    top: 0.6rem;
     left: 50%;
-    margin-left: -20px;
-    width: 40px;
-    height: 40px;
+    margin-left: -2rem;
+    width: 4rem;
+    height: 4rem;
     background: url("../statics/images/home_ask_btn@2x.png") no-repeat;
-    background-size: 35px 35px;
+    background-size: 3.5rem 3.5rem;
   }
 
   .askWrapper .askPlus .askImgBg {
     position: absolute;
     left: 50%;
-    margin-left: -26.5px;
-    width: 53px;
-    height: 53px;
+    margin-left: -26.0.5rem;
+    width: 5.3rem;
+    height: 5.3rem;
     background: #f3f4f6;
-    border-radius: 53px;
+    border-radius: 5.3rem;
   }
 
   .askWrapper .title {
     position: absolute;
     width: 100%;
-    bottom: 5px;
+    bottom: 0.5rem;
     color: #808080;
-    font-size: 12px;
+    font-size: 1.2rem;
     text-align: center;
   }
 
@@ -349,12 +349,12 @@
     position: absolute;
     content: '';
     background: #03aef9;
-    width: 4px;
-    height: 4px;
-    bottom: 8px;
+    width: 0.4rem;
+    height: 0.4rem;
+    bottom: 0.8rem;
     left: 50%;
-    margin-left: -2px;
-    border-radius: 2px;
+    margin-left: -0.2rem;
+    border-radius: 0.2rem;
   }
 
   .taskWrapper {

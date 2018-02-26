@@ -131,11 +131,11 @@
 <style scoped>
 
   .component-comment {
-    height: 44px;
-    line-height: 44px;
+    height: 4.4rem;
+    line-height: 4.4rem;
     overflow: hidden;
     background: #f3f4f6;
-    padding: 0 20px 0 0;
+    padding: 0 2rem 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -146,11 +146,11 @@
     color: gray;
   }
   .component-comment .item span {
-    font-size: 12px;
+    font-size: 1.2rem;
   }
   .component-comment .item .icon {
     color: gray;
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
   .component-comment .item.active {
     color: #03aef9;
@@ -161,17 +161,17 @@
   .component-comment .item.btn-1 {
     background: #03aef9;
     color: #fff;
-    width: 146px;
-    height: 44px;
-    font-size: 15px;
+    width: 14.6rem;
+    height: 4.4rem;
+    font-size: 1.5rem;
   }
   .component-comment .item.btn-1 span {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
   .component-comment .item.btn-1 .icon {
-    font-size: 17px;
+    font-size: 1.7rem;
     color: #fff;
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
 </style>
