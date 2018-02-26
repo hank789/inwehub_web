@@ -158,6 +158,22 @@
         window.mui.back()
       },
       loginSuccessCallback () {
+        // 存储设备信息
+        window.mui.plusReady(function () {
+          if (window.mui.os.plus) {
+            var deviceInfo = window.plus.push.getClientInfo()
+            apiRequest(`system/device`, {
+              client_id: deviceInfo.clientid,
+              device_token: deviceInfo.token,
+              appid: deviceInfo.appid,
+              appkey: deviceInfo.appkey,
+              device_type: window.plus.os.name === 'iOS' ? 2 : 1
+            }, false).then(res => {
+
+            })
+          }
+        })
+
         // 获取用户信息
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
