@@ -316,7 +316,6 @@
     justify-content: space-around;
     align-items: center;
     position: relative;
-    top:6.4rem;
   }
   .menu span:nth-of-type(2){
     position:relative;
