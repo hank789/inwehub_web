@@ -187,7 +187,7 @@
     display: inline-block;
   }
 
-  @media screen and (max-width: 37rem) {
+  @media screen and (max-width: 370px) {
     .index-bar .index-bar-item {
       line-height: 1.4rem;
     }

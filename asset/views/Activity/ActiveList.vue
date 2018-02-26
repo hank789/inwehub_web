@@ -363,7 +363,7 @@
 
   /***媒体查询*****/
 
-  @media screen and (min-width: 32rem) {
+  @media screen and (min-width: 320px) {
     ul li {
       width: 92%;
       height: 21.7rem;
@@ -381,7 +381,7 @@
     }
   }
 
-  @media screen and (min-width: 37.5rem) {
+  @media screen and (min-width: 375px) {
     ul li {
       width: 92%;
       height: 22.7rem;
@@ -400,7 +400,7 @@
     }
   }
 
-  @media screen and (min-width: 41.4rem) {
+  @media screen and (min-width: 414px) {
     ul li {
       width: 92%;
       height: 25.6rem;

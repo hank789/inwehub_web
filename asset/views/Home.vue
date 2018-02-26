@@ -1279,7 +1279,7 @@
   /***媒体查询*****/
   /***媒体查询*****/
 
-  @media screen and (min-width: 32rem) {
+  @media screen and (min-width: 320px) {
     .activity {
       height: 13.3rem;
     }
@@ -1294,7 +1294,7 @@
 
   }
 
-  @media screen and (min-width: 37.5rem) {
+  @media screen and (min-width: 375px) {
     .activity {
       height: 15.7rem;
     }
@@ -1308,7 +1308,7 @@
     }
   }
 
-  @media screen and (min-width: 41.4rem) {
+  @media screen and (min-width: 414px) {
     .activity {
       height: 17.2rem;
     }

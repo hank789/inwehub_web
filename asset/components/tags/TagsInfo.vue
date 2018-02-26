@@ -148,19 +148,19 @@
   }
   /***媒体查询*****/
 
-  @media screen and (min-width: 32rem) {
+  @media screen and (min-width: 320px) {
     .tag-r {
       width: 70%;
     }
   }
 
-  @media screen and (min-width: 37.5rem) {
+  @media screen and (min-width: 375px) {
     .tag-r {
       width: 70%;
     }
   }
 
-  @media screen and (min-width: 41.4rem) {
+  @media screen and (min-width: 414px) {
     .tag-r {
       width: 73%;
     }
