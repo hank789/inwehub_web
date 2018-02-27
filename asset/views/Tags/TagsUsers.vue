@@ -267,6 +267,6 @@
     border: 0.1rem solid #b4b4b6;
   }
   .listWrapper{
-    top:17.7rem;
+    top:23.6rem;
   }
 </style>

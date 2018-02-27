@@ -42,6 +42,7 @@ const TagsSelectionTags = () => import(/* webpackChunkName: "TagsSelectionTags" 
 const TagsTagsQuestions = () => import(/* webpackChunkName: "TagsTagsQuestions" */ '../../../views/Tags/TagsQuestions.vue')
 const TagsTagsSubmissions = () => import(/* webpackChunkName: "TagsTagsSubmissions" */ '../../../views/Tags/TagsSubmissions.vue')
 const TagsTagsUsers = () => import(/* webpackChunkName: "TagsTagsUsers" */ '../../../views/Tags/TagsUsers.vue')
+const TagsTagFocusMembers = () => import(/* webpackChunkName: "TagsTagsUsers" */ '../../../views/Tags/TagFocusMembers.vue')
 const AccountDiscountList = () => import(/* webpackChunkName: "AccountDiscountList" */ '../../../views/Account/DiscountList.vue')
 const AccountChanceList = () => import(/* webpackChunkName: "AccountChanceList" */ '../../../views/Account/ChanceList.vue')
 const AccountGrowth = () => import(/* webpackChunkName: "AccountGrowth" */ '../../../views/Account/Growth.vue')
@@ -208,6 +209,7 @@ export {
   TagsTagsQuestions,
   TagsTagsSubmissions,
   TagsTagsUsers,
+  TagsTagFocusMembers,
   AccountDiscountList,
   AccountChanceList,
   AccountGrowth,
