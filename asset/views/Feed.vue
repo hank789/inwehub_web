@@ -155,6 +155,7 @@
   import { saveLocationInfo } from '../utils/allPlatform'
 
   import commentTextarea from '../components/comment/Textarea.vue'
+  import { AppInit } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -211,6 +212,8 @@
       userAbility.signIGift(this)
       autoTextArea()
       saveLocationInfo()
+
+      AppInit(this)
     },
     computed: {
       prevOtherData () {
