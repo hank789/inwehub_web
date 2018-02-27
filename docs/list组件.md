@@ -16,6 +16,9 @@
 
     第三部:循环list即可
 
+    可选
+       . 获取完整的响应数据
+          object this.$refs.RefreshList.getResponse(void)
 
 ##列表组件参数
 

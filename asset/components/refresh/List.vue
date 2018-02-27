@@ -232,6 +232,8 @@
             return
           }
 
+          this.response = response.data
+
           var list = response.data.data
 
           if (this.pageMode) {
@@ -298,6 +300,8 @@
             window.mui.toast(response.data.message)
             return
           }
+
+          this.response = response.data
 
           var list = response.data.data
 

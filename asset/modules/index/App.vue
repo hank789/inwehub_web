@@ -28,6 +28,7 @@
   import OpenAppComponent from '../../components/OpenApp.vue'
   import inwehubDialog from '../../components/Dialog.vue'
   import MessageComponent from '../../components/Message.vue'
+  import { initDocRem } from '../../utils/dom'
 
   export default {
     data () {
@@ -88,6 +89,8 @@
         // mixpanel
         window.mixpanelIdentify()
       }
+
+      initDocRem()
 
       var routerFullPath = this.$router.currentRoute.fullPath
       console.log('routerFullPath:' + routerFullPath)

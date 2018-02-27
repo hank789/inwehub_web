@@ -138,6 +138,27 @@ function dragDownElement (elem, callback) {
   })
 }
 
+function setRemUnit () {
+  var docEl = document.documentElement
+  var rem = docEl.clientWidth / 10
+  docEl.style.fontSize = rem + 'px'
+  var dpr = window.devicePixelRatio || 1
+  document.body.classList.add('w' + docEl.clientWidth + '-' + dpr)
+}
+
+/**
+ * 设置rem
+ */
+function initDocRem () {
+  setRemUnit()
+  window.addEventListener('resize', setRemUnit)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      setRemUnit()
+    }
+  })
+}
+
 export {
   queryParent,
   textToLink,
@@ -147,6 +168,7 @@ export {
   secureHtml,
   autoBlur,
   transferTagToLink,
-  dragDownElement
+  dragDownElement,
+  initDocRem
 }
 
