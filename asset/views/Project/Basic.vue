@@ -302,44 +302,44 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .schedule {
     width: 25%;
-    height: 0.3rem;
+    height: 0.08rem;
     background: #03aef9;
   }
 
   .basic {
-    height: 15rem;
+    height: 4rem;
     position: relative;
     text-align: center;
   }
 
   .basic .title {
     position: relative;
-    top: 5rem;
-    font-size: 2rem;
+    top: 1.333rem;
+    font-size: 0.533rem;
     color: #444;
   }
 
   .basic .titleSub {
     position: relative;
-    top: 5.5rem;
-    font-size: 1.4rem;
+    top: 1.466rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .companyForm {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .companyForm:before {
-    left: 1.6rem;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 1.6rem;
+    right: 0.426rem;
   }
 
   .companyForm:after {
-    left: 1.6rem;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 1.6rem;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -351,17 +351,17 @@
   .companyForm input {
     width: 69% !important;
     text-align: right;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     padding-right: 0;
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 0.6rem 1.5rem;
+    padding: 0.16rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 1.6rem;
-    right: 1.6rem;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -370,13 +370,13 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 1rem;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 1rem 0;
+    padding: 0.266rem 0;
     float: right;
   }
 
@@ -393,20 +393,20 @@
 
   .textarea-wrapper {
 
-    margin: 4.6rem 0 0;
-    height: 16.4rem;
+    margin: 1.226rem 0 0;
+    height: 4.373rem;
     position: relative;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #dcdcdc;
     background: #fff;
-    padding-bottom: 2rem;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 0.7rem;
-    font-size: 1.4rem;
-    bottom: 0.5rem;
+    right: 0.186rem;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
     color: #c8c8c8;
   }
 
@@ -422,8 +422,8 @@
   }
 
   .companyForm .inputUnit {
-    padding: 1rem;
-    margin-right: 1.7rem;
+    padding: 0.266rem;
+    margin-right: 0.453rem;
   }
 
   .companyForm .textRight {
@@ -433,8 +433,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 1.1rem 0 1.1rem 2.5rem;
-    margin-left: 1.8rem;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -443,14 +443,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 1.1rem;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
     left: 0rem;
     color: #c8c8c8;
-    font-size: 2rem;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -462,67 +462,67 @@
   }
 
   .fileSelect {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #c8c8c8;
     background: #fff;
-    padding: 1.1rem 1.5rem;
+    padding: 0.293rem 0.4rem;
     position: relative;
   }
 
   .fileSelect .icon {
     position: absolute;
-    right: 1.6rem;
+    right: 0.426rem;
     color: #03aef9;
-    font-size: 2.2rem;
+    font-size: 0.586rem;
   }
 
   .fileList {
-    padding: 0 1.5rem 0;
+    padding: 0 0.4rem 0;
     background: #fff;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .fileList .item {
     position: relative;
-    width: 6.1rem;
-    height: 6.1rem;
-    margin-right: 0.6rem;
+    width: 1.626rem;
+    height: 1.626rem;
+    margin-right: 0.16rem;
     background-color: #e3e3e3;
-    border-radius: 0.5rem;
+    border-radius: 0.133rem;
     display: inline-block;
   }
 
   .fileList .item img {
-    border-radius: 0.5rem;
+    border-radius: 0.133rem;
     width: 100%;
     height: 100%;
   }
 
   .fileList .icon {
     position: absolute;
-    right: -0.4rem;
-    top: -0.4rem;
-    font-size: 1.8rem;
+    right: -0.106rem;
+    top: -0.106rem;
+    font-size: 0.48rem;
     color: #808080;
   }
 
   .buttonWrapper {
-    padding: 0.7rem 1.6rem 3rem;
+    padding: 0.186rem 0.426rem 0.8rem;
     background: #fff;
     text-align: center;
   }
 
   .buttonWrapper button {
     display: inline-block;
-    width: 11.5rem;
-    margin-top: 1rem;
+    width: 3.066rem;
+    margin-top: 0.266rem;
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .buttonWrapper button:disabled {
     background: #dcdcdc;
-    border: 0.1rem solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #b4b4b6;
     opacity: 1;
   }

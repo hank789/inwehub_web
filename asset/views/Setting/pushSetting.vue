@@ -180,7 +180,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -192,7 +192,7 @@
 
   .grey {
     width: 100%;
-    height: 1rem;
+    height: 0.266rem;
     background: #F3F4F5;
   }
 
@@ -204,24 +204,24 @@
 
   .notice_t p {
     width: 100%;
-    height: 4.4rem;
-    line-height: 4.4rem;
-    font-size: 1.2rem;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    font-size: 0.32rem;
     color: #03aef9;
   }
 
   .system {
     width: 100%;
-    height: 4.4rem;
-    line-height: 4.4rem;
-    font-size: 1.4rem;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    font-size: 0.373rem;
     color: #444444;
     position: relative;
   }
 
   .system .mui-switch {
     float: right;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
 
   .notice_m {
@@ -232,30 +232,30 @@
 
   .notice_m li {
     width: 100%;
-    height: 4.4rem;
-    line-height: 4.4rem;
-    font-size: 1.4rem;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    font-size: 0.373rem;
     color: #444444;
     position: relative;
   }
 
   .notice_m li svg {
-    /*font-size: 1.4rem;*/
+    /*font-size: 0.373rem;*/
     float: right;
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
     color: #808080;
   }
 
   .notice_m li .mui-switch {
     float: right;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
 
   .notice_b {
     width: 100%;
-    height: 4.4rem;
-    line-height: 4.4rem;
-    font-size: 1.4rem;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    font-size: 0.373rem;
 
     padding: 0 4%;
     position: relative;
@@ -271,12 +271,12 @@
 
   .notice_b .mui-switch {
     float: right;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
 
   .vue-switcher{
     float: right;
-    top: 1.7rem;
+    top: 0.453rem;
   }
 </style>
 <style>

@@ -263,10 +263,10 @@
   }
   .bot {
     position: absolute;
-    right:1.5rem;
+    right:0.4rem;
     top: 0rem;
-    left:1.5rem;
-    height: 0.1rem;
+    left:0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -277,19 +277,19 @@
   }
 
   .help {
-    margin-top: 1rem;
-    font-size: 1.4rem;
+    margin-top: 0.266rem;
+    font-size: 0.373rem;
     background: #fff;
-    padding-bottom: 3.8rem;
+    padding-bottom: 1.013rem;
   }
 
   .help .title {
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 0.4rem 0.4rem 0.266rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -302,29 +302,29 @@
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  1.6rem 0.8rem 0.7rem;
+    padding: 0  0.426rem 0.213rem 0.186rem;
   }
   .question_tags p{
     float: left;
     background: #a8dff7;
     color:#FFFFFF;
-    padding: 0rem 0.8rem;
-    border-radius:5rem;
-    margin-top: 0.9rem;
-    margin-left: 0.9rem;
-    font-size:1.2rem;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
   /*查看回答*/
   .see{
     width:100%;
-    height:4rem;
-    padding: 0 1.5rem;
-    font-size:1.4rem;
+    height:1.066rem;
+    padding: 0 0.4rem;
+    font-size:0.373rem;
     color:#03aef9;
     text-align: center;
-    line-height: 4rem;
+    line-height: 1.066rem;
     background: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
     position: relative;
   }
   .detail-answer[data-v-852fb68e] {

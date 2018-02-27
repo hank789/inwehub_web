@@ -271,7 +271,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 4rem;
+    padding-right: 1.066rem;
   }
 
   .mui-input-row a {
@@ -279,7 +279,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 1.1rem 1.5rem;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-input-row a {
@@ -287,7 +287,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 1.1rem 1.5rem;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-table-view-cell {
@@ -296,7 +296,7 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 1rem;
+    padding: 0.266rem;
   }
 
   .mui-table-view-cell .mui-navigate-right,
@@ -305,17 +305,17 @@
   }
 
   .account_item_title {
-    padding: 0.5rem;
+    padding: 0.133rem;
     color: #a6a6a6;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
 
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 20rem;
-    right: 4rem;
-    height: 3.2rem;
+    width: 5.333rem;
+    right: 1.066rem;
+    height: 0.853rem;
     color: #3f3f3f;
     padding-right: 0;
   }
@@ -323,19 +323,19 @@
   /**/
 
   .account_item_title {
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
+    padding-top: 0.213rem;
+    padding-bottom: 0.213rem;
     color: #a6a6a6;
-    font-size: 1.4rem;
-    margin-left: 1rem;
+    font-size: 0.373rem;
+    margin-left: 0.266rem;
   }
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     bottom: 0;
-    left: 1.5rem;
-    height: 0.06rem;
+    left: 0.4rem;
+    height: 0.016rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -344,10 +344,10 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     bottom: 0;
-    left: 1.5rem;
-    height: 0.1rem;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -356,11 +356,11 @@
 
   .mui-input-row {
     position: relative;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .mui-content > .mui-table-view:first-child {
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
     background: #fefefe;
     margin-top: 0rem;
   }
@@ -373,19 +373,19 @@
 
   .options {
     width: 100%;
-    height: 4.1rem;
-    margin-top: 2rem;
-    padding: 0 1.5rem;
+    height: 1.093rem;
+    margin-top: 0.533rem;
+    padding: 0 0.4rem;
   }
 
   .options a {
     display: block;
-    width: 11.5rem;
-    height: 3.8rem;
-    font-size: 1.6rem;
+    width: 3.066rem;
+    height: 1.013rem;
+    font-size: 0.426rem;
     text-align: center;
-    line-height: 3.8rem;
-    border-radius: 5rem;
+    line-height: 1.013rem;
+    border-radius: 1.333rem;
   }
 
   .options a:nth-of-type(1) {

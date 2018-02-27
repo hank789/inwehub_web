@@ -22,7 +22,7 @@
           url: '#/task/list',
           id: '#/task/list',
           styles: {
-            top: '4.5rem',
+            top: '1.2rem',
             bottom: '0rem'
           }
         }]
@@ -42,12 +42,12 @@
 
 <style scoped>
   .task-list {
-    line-height: 3.3rem;
-    margin-top: 1.5rem;
+    line-height: 0.88rem;
+    margin-top: 0.4rem;
   }
 
   .task-list .mui-table-view-chevron .mui-table-view-cell {
-    padding-right: 0.5rem;
+    padding-right: 0.133rem;
   }
 
   .task-list .time {
@@ -57,7 +57,7 @@
 
   .task-list .link a {
     color: #8f8f94;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .task-list .type {

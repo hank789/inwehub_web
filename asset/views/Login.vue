@@ -254,17 +254,17 @@
   /*图标*/
   .logo {
 
-    font-size: 11rem;
-    margin: 11rem 0 7.5rem;
+    font-size: 2.933rem;
+    margin: 2.933rem 0 2rem;
 
   }
 
   /*忘记密码和账号*/
   .apply {
     width: 100%;
-    height: 3rem;
+    height: 0.8rem;
     position: relative;
-    top: -2.2rem;
+    top: -0.586rem;
 
   }
 
@@ -272,7 +272,7 @@
     width: 80%;
     height: 100%;
     position: absolute;
-    top: 1.5rem;
+    top: 0.4rem;
     bottom: 0;
     left: 0;
     right: 0;
@@ -283,7 +283,7 @@
 
   .apply > div > span {
     color: #3c95f9;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .apply > div > span:nth-of-type(1) {
@@ -302,26 +302,26 @@
 
   /*登录*/
   .button, .mui-btn {
-    border-radius: 0.5rem;
+    border-radius: 0.133rem;
     color: #f2f2f2;
     width: 80%;
     margin-left: 10%;
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
     background: #3C95F9;
   }
 
   /*输入框的内容*/
   .inputWrapper .icon {
     position: absolute;
-    top: 0.5rem;
-    font-size: 2.2rem;
+    top: 0.133rem;
+    font-size: 0.586rem;
     color: #c8c8c8;
     left: 0;
 
   }
 
   .inputWrapper {
-    margin: 0 3.3rem 2.2rem;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -341,27 +341,27 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #3c95f9;
     position: absolute;
-    right: 0.2rem;
-    top: 0.6rem;
-    border: 0.1rem solid #3c95f9;
-    border-radius: 0.5rem;
-    padding: 0.3rem 1.4rem;
+    right: 0.053rem;
+    top: 0.16rem;
+    border: 0.026rem solid #3c95f9;
+    border-radius: 0.133rem;
+    padding: 0.08rem 0.373rem;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 0.1rem solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #c8c8c8;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 0.3rem;
+    bottom: 0.08rem;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -372,12 +372,12 @@
     color: #444;
     border: none;
     margin: 0;
-    /*padding: 0 0 0 3.6rem;*/
-    font-size: 1.4rem;
+    /*padding: 0 0 0 0.96rem;*/
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
-    height: 3.6rem;
-    margin-left: 1.5rem;
+    height: 0.96rem;
+    margin-left: 0.4rem;
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -398,32 +398,32 @@
 
   .inputWrapper:nth-of-type(2) .icon {
     position: absolute;
-    top: 0.5rem;
-    font-size: 2rem;
+    top: 0.133rem;
+    font-size: 0.533rem;
     /*color: #c8c8c8;*/
     left: 0;
   }
 
   .wechatWrapper {
     position: absolute;
-    bottom: 3.2rem;
+    bottom: 0.853rem;
     left: 50%;
-    margin-left: -5.7rem;
-    font-size: 1.4rem;
+    margin-left: -1.52rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .myicon {
     display: inline-block;
-    width: 2.6rem;
-    height: 2.1rem;
+    width: 0.693rem;
+    height: 0.56rem;
     position: relative;
-    top: 0.7rem;
+    top: 0.186rem;
   }
 
   .mui-content {
     background-color: #f3f4f6;
-    min-height: 56.8rem;
+    min-height: 15.146rem;
   }
 </style>
 

@@ -261,7 +261,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -270,15 +270,15 @@
   /*分享文章*/
   .ShareArticles {
     width: 100%;
-    height: 15rem;
+    height: 4rem;
     background: #ececee;
-    /*border:0.1rem solid #000000;*/
+    /*border:0.026rem solid #000000;*/
     position: relative;
   }
 
   .ShareArticles p {
     width: 100%;
-    height: 5rem;
+    height: 1.333rem;
     text-align: center;
     position: absolute;
     top: 0;
@@ -288,16 +288,16 @@
 
   .ShareArticles p span:nth-of-type(1) {
     display: block;
-    font-size: 2rem;
+    font-size: 0.533rem;
     color: #444444;
-    line-height: 2rem;
+    line-height: 0.533rem;
   }
 
   .ShareArticles p span:nth-of-type(2) {
     display: block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 0.8rem;
+    margin-top: 0.213rem;
   }
 
   /*内容*/
@@ -305,89 +305,89 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-    padding-top: 1.75rem;
+    padding-top: 0.466rem;
   }
 
   .concreteContent li {
     width: 92%;
-    height: 4.3rem;
+    height: 1.146rem;
     margin-left: 4%;
     position: relative;
-    line-height: 4.3rem;
+    line-height: 1.146rem;
   }
 
   .address p, .title p {
     float: left;
     color: #808080;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .address input {
     width: 80%;
-    height: 4.2rem;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
-    padding-left:1.5rem;
+    padding-left:0.4rem;
     border: none;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: right;
   }
 
   .title .longContainer {
     width: 80%;
-    height: 4.2rem;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
     border: none;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
 
   }
 
   .title .shortContainer {
     width: 80%;
-    height: 4.2rem;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
     border: none;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .title .shortContainer input {
     width: 74%;
-    height: 4.2rem;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
-    padding-left: 1.5rem;
+    padding-left: 0.4rem;
     border: none;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: right;
   }
 
   .title .shortContainer span {
     float: right;
-    height: 1.9rem;
+    height: 0.506rem;
     color: #FFFFFF;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     background: #03aef9;
     text-align: center;
-    line-height: 1.8rem;
-    border-radius: 5rem;
-    padding: 0 0.5rem;
-    margin-top: 1.2rem;
+    line-height: 0.48rem;
+    border-radius: 1.333rem;
+    padding: 0 0.133rem;
+    margin-top: 0.32rem;
 
   }
 
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color: #c8c8c8;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     text-align: right;
   }
 
@@ -395,14 +395,14 @@
   .channel p:nth-of-type(1) {
     float: left;
     color: #808080;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .channel input {
     width: 50%;
     float: right;
     color: #c8c8c8;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     border: none;
     text-align: right;
     color: #444444;
@@ -410,31 +410,31 @@
 
   .channel svg {
     color: #c8c8c8;
-    font-size: 1.7rem;
-    margin-top: 1.3rem;
+    font-size: 0.453rem;
+    margin-top: 0.346rem;
     float: right;
   }
 
   /*封面*/
   .concreteContent .coverMap {
-    height: 16.6rem;
+    height: 4.426rem;
   }
 
   .container-image {
     width: 100%;
-    height: 12.3rem;
+    height: 3.28rem;
   }
 
   .coverMap p {
     float: left;
     color: #808080;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .coverMap svg {
     color: #c8c8c8;
-    font-size: 1.7rem;
-    margin-top: 1.3rem;
+    font-size: 0.453rem;
+    margin-top: 0.346rem;
     float: right;
   }
 
@@ -442,14 +442,14 @@
   .submit {
     width: 92%;
     margin-left: 4%;
-    height: 4.4rem;
-    border-radius: 0.5rem;
+    height: 1.173rem;
+    border-radius: 0.133rem;
     background: #dcdcdc;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #b4b4b6;
     border: none;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
   }
 
   .blue {

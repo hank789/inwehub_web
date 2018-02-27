@@ -163,8 +163,8 @@
   /*导航栏的样式*/
   .menu{
     width:100%;
-    height:3.9rem;
-    font-size:1.4rem;
+    height:1.04rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -178,11 +178,11 @@
   }
   .menu span:nth-of-type(1) i{
     position:absolute;
-    width:2.7rem;
-    height:0.15rem;
-    border-radius: 5rem;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 2.8rem;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -195,7 +195,7 @@
     right: 0;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -205,22 +205,22 @@
 
   .indexHeader {
     background-color: #FFFFFF;
-    padding: 1rem 1.5rem;
+    padding: 0.266rem 0.4rem;
     .searchWrapper {
       input {
-        height: 3.4rem;
-        font-size: 1.4rem;
-        border-radius: 5rem;
+        height: 0.906rem;
+        font-size: 0.373rem;
+        border-radius: 1.333rem;
         background: #fff;
-        border: 0.1rem solid #dcdcdc;
-        margin-bottom: 0.5rem;
+        border: 0.026rem solid #dcdcdc;
+        margin-bottom: 0.133rem;
         &::placeholder {
           color: #c8c8c8;
         }
       }
     }
     .notFound {
-      font-size: 1.3rem;
+      font-size: 0.346rem;
       color: #808080;
       span {
         color: #03aef9;
@@ -230,10 +230,10 @@
 
   .indexTitle {
     background: #ececee;
-    font-size: 1.3rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    padding: 0 1.5rem;
+    font-size: 0.346rem;
+    height: 0.666rem;
+    line-height: 0.666rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 

@@ -192,13 +192,13 @@
 
   #short_all .turn {
     position: absolute;
-    bottom: 1.4rem;
+    bottom: 0.373rem;
     left: 44.2%;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
     color: #808080;
     animation: rote 0.5s infinite;
     animation-iteration-count: 1;
-    padding: 0 1.2rem;
+    padding: 0 0.32rem;
   }
 
   @keyframes rote {
@@ -212,7 +212,7 @@
 
   ul {
     width:100%;
-    height:9rem;
+    height:2.4rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -222,7 +222,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 13rem;
+    bottom: 3.466rem;
     animation: myfirst 0.2s infinite;
     animation-iteration-count: 1;
   }
@@ -244,39 +244,39 @@
 
   .end {
     width:100%;
-    height:9rem;
+    height:2.4rem;
     position: absolute;
-    bottom: -38rem;
+    bottom: -10.133rem;
     animation: myend 0.1s infinite;
     animation-iteration-count: 1;
   }
 
   @keyframes myend {
     from {
-      bottom: 11rem;
+      bottom: 2.933rem;
       opacity: 0.7;
     }
     to {
-      bottom: -14rem;
+      bottom: -3.733rem;
       opacity: 1;
     }
   }
  /*内容区域*/
   .down-title{
     width:90%;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     position: absolute;
     left: 8%;
-    bottom: 23rem;
+    bottom: 6.133rem;
   }
   .down-title i{
     display: block;
     width: 85%;
-    height: 0.05rem;
+    height: 0.013rem;
     background: #dcdcdc;
     position: absolute;
-    left: 3.7rem;
+    left: 0.986rem;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -287,13 +287,13 @@
   ul li{
     display: flex;
     flex-direction:column;
-    width: 6rem;
-    height:9rem;
+    width: 1.6rem;
+    height:2.4rem;
     align-items: center;
   }
   ul li p{
-    width:6rem;
-    height:6rem;
+    width:1.6rem;
+    height:1.6rem;
     background:#b4b4b6;
     border-radius: 50%;
     display: flex;
@@ -301,18 +301,18 @@
     align-items: center;
   }
   ul li p svg{
-    font-size: 3.5rem;
+    font-size: 0.933rem;
   }
   ul li span{
-   font-size: 1.4rem;
+   font-size: 0.373rem;
     color: #444444;
-    margin-top: 0.9rem;
+    margin-top: 0.24rem;
   }
   .down-title.find-title{
-    bottom: 38rem;
+    bottom: 10.133rem;
   }
   ul.find{
-    bottom: 28rem;
+    bottom: 7.466rem;
   }
   ul li p.-yellow{
     background: #fcc816;
@@ -324,29 +324,29 @@
   ul li.bonus p i {
     position: absolute;
     font-style: normal;
-    width: 3rem;
-    height: 1.7rem;
-    font-size: 1.2rem;
+    width: 0.8rem;
+    height: 0.453rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     background: #fa4975;
     text-align: center;
-    line-height: 1.7rem;
-    top: 0.3rem;
-    right: -1.8rem;
+    line-height: 0.453rem;
+    top: 0.08rem;
+    right: -0.48rem;
   }
 
   ul li.bonus p i:after{
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #fa4975;
-    /*border: 0.1rem solid #dcdcdc;*/
+    /*border: 0.026rem solid #dcdcdc;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -0.3rem;
+    left: -0.08rem;
     /*border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;*/
     top: 0rem;

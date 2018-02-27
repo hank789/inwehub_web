@@ -296,7 +296,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -307,9 +307,9 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:3.9rem;
+    height:1.04rem;
     background: #FFFFFF;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -323,11 +323,11 @@
   }
   .menu span:nth-of-type(2) i{
     position:absolute;
-    width:2.7rem;
-    height:0.15rem;
-    border-radius: 5rem;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 2.8rem;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -344,45 +344,45 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 1.2rem 1.6rem 0 1.6rem;
-    margin-bottom: 1rem;
+    padding: 0.32rem 0.426rem 0 0.426rem;
+    margin-bottom: 0.266rem;
 
   }
 
   ul .Container p:nth-of-type(1) {
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #444444;
-    line-height: 2rem;
+    line-height: 0.533rem;
   }
 
   ul .Container p:nth-of-type(1) i {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(180, 180, 182);
   }
 
   ul .Container .container-image {
-    height: 12.4rem;
-    margin-top: 1.3rem;
+    height: 3.306rem;
+    margin-top: 0.346rem;
   }
 
   ul .Container p.timer {
     width: 100%;
-    height: 4.4rem;
-    font-size: 1.2rem;
+    height: 1.173rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    line-height: 4.4rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
   ul .Container p.timer a {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(128, 128, 128);
   }
 
   .information {
     width: 100%;
-    height: 4rem;
-    padding: 0 1.7rem;
+    height: 1.066rem;
+    padding: 0 0.453rem;
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
@@ -394,21 +394,21 @@
   ul .Container .information p {
     color: #808080;
     position: relative;
-    height:4rem;
+    height:1.066rem;
     display: flex;
     align-items: center;
-    padding:0 0.5rem;
+    padding:0 0.133rem;
   }
 
   /*举报和删除*/
   .information p:nth-of-type(1) span {
     display: block;
-    width: 5rem;
+    width: 1.333rem;
     background: #575857;
     position: absolute;
-    top: 2.8rem;
-    left: -1.3rem;
-    border-radius: 0.4rem;
+    top: 0.746rem;
+    left: -0.346rem;
+    border-radius: 0.106rem;
     z-index: 99;
   }
 
@@ -417,12 +417,12 @@
     display: block;
     width: 0;
     height: 0;
-    border: 0.5rem solid transparent;
-    border-top: 0.5rem solid #575857;
-    border-left: 0.5rem solid #575857;
+    border: 0.133rem solid transparent;
+    border-top: 0.133rem solid #575857;
+    border-left: 0.133rem solid #575857;
     transform: rotate(45deg);
     position: absolute;
-    top: -0.2rem;
+    top: -0.053rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -432,28 +432,28 @@
   .information p:nth-of-type(1) span a {
     display: block;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
-    padding: 0.3rem 0;
+    padding: 0.08rem 0;
   }
 
   .information p svg {
-    font-size: 1.7rem;
+    font-size: 0.453rem;
   }
 
   .information p:nth-of-type(2) svg {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .information p:nth-of-type(3) svg {
-    font-size: 1.7rem;
-    margin-right: 0.3rem;
+    font-size: 0.453rem;
+    margin-right: 0.08rem;
 
   }
 
   .information p:nth-of-type(4) svg {
-    font-size: 1.7rem;
-    margin-right: 0.3rem;
+    font-size: 0.453rem;
+    margin-right: 0.08rem;
   }
 
   /*带定位和图片的样式*/
@@ -461,8 +461,8 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 1.2rem 1.5rem 0 1.5rem;
-    margin-bottom: 1rem;
+    padding: 0.32rem 0.4rem 0 0.4rem;
+    margin-bottom: 0.266rem;
   }
 
   .imgContainer:after {
@@ -470,19 +470,19 @@
     bottom: 0;
     left: 0;
     content: '';
-    height: 1rem;
+    height: 0.266rem;
     background-color: #f3f4f6;
     width: 100%;
   }
 
   .imgContainer .avatar {
     width: 100%;
-    height: 3.4rem;
+    height: 0.906rem;
   }
 
   .avatar p:nth-of-type(1) {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: 0.906rem;
+    height: 0.906rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -490,9 +490,9 @@
 
   .avatar p:nth-of-type(1) svg {
     position: absolute;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
     bottom: 0;
-    right: -0.6rem;
+    right: -0.16rem;
   }
 
   .avatar p:nth-of-type(1) img {
@@ -502,31 +502,31 @@
   }
 
   .avatar p:nth-of-type(2) {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
-    line-height: 3.4rem;
-    margin-left: 0.8rem;
+    line-height: 0.906rem;
+    margin-left: 0.213rem;
     float: left;
   }
 
   .textContainer {
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #444444;
-    line-height: 2rem;
-    margin-top: 0.6rem;
+    line-height: 0.533rem;
+    margin-top: 0.16rem;
   }
 
   .timeContainer {
     width: 100%;
-    height: 4.2rem;
-    font-size: 1.2rem;
-    line-height: 4.2rem;
+    height: 1.12rem;
+    font-size: 0.32rem;
+    line-height: 1.12rem;
 
   }
 
   .timeContainer svg {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
@@ -542,18 +542,18 @@
   .PublishContainer {
     width: 100%;
     overflow: hidden;
-    margin-top: 1.3rem;
+    margin-top: 0.346rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    /*border:0.1rem solid #000000;*/
+    /*border:0.026rem solid #000000;*/
   }
 
   .PublishContainer .container-image {
-    width: 10.8rem;
-    /*border:0.1rem solid #000000;*/
+    width: 2.88rem;
+    /*border:0.026rem solid #000000;*/
 
   }
 
@@ -567,56 +567,55 @@
   }
 
   #container-image {
-    width: 15rem;
-    height: 22.6rem;
+    width: 4rem;
+    height: 6.026rem;
   }
 
   /*适配*/
   @media (min-width: 320px) {
     .PublishContainer .container-image {
-      height: 9.2rem;
+      height: 2.453rem;
     }
 
   }
 
   @media (min-width: 375px) {
     .PublishContainer .container-image {
-      height: 10.8rem;
+      height: 2.88rem;
     }
 
   }
 
   @media (min-width: 414px) {
     .PublishContainer .container-image {
-      height: 10.8rem;
+      height: 2.88rem;
     }
 
   }
 
 
   .listWrapper{
-    /*top:17.7rem;*/
-    top:23.6rem;
+    top:6.29rem;
   }
   /*活动标签*/
   .activity_tags{
-    width:11.4rem;
+    width:3.04rem;
     overflow: hidden;
     position: absolute;
     right: 4%;
-    bottom: 3rem;
+    bottom: 0.8rem;
     z-index: 2;
   }
   .activity_tags p{
-    width:11.4rem;
-    height: 4.4rem;
-    margin-top: 1rem;
+    width:3.04rem;
+    height: 1.173rem;
+    margin-top: 0.266rem;
     background: #cccccc;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
   }
   .activity_tags p img{
     width:100%;
     height: 100%;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
   }
 </style>

@@ -204,8 +204,8 @@
 <style scoped>
 
   .withdraw {
-    margin: 1rem 0;
-    font-size: 1.4rem;
+    margin: 0.266rem 0;
+    font-size: 0.373rem;
     background: #fff;
     position: relative;
   }
@@ -216,7 +216,7 @@
 
   .withdraw .wechatBind {
     float: right;
-    margin-right: 1.8rem;
+    margin-right: 0.48rem;
     color: #4990E2;
   }
 
@@ -225,7 +225,7 @@
     right: 0;
     top: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -237,7 +237,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -245,7 +245,7 @@
   }
 
   .title {
-    padding: 1.5rem;
+    padding: 0.4rem;
     position: relative;
   }
 
@@ -253,8 +253,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 3rem;
-    height: 0.1rem;
+    left: 0.8rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -262,18 +262,18 @@
   }
 
   .title span {
-    margin-left: 1rem;
+    margin-left: 0.266rem;
   }
 
   .tip {
-    margin-top: 1.5rem;
-    padding-left: 1.5rem;
+    margin-top: 0.4rem;
+    padding-left: 0.4rem;
   }
 
   .textArea {
-    margin: 3rem 0 0 1.5rem;
+    margin: 0.8rem 0 0 0.4rem;
     padding-left: 0;
-    padding-bottom: 1rem;
+    padding-bottom: 0.266rem;
     position: relative;
 
   }
@@ -282,8 +282,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 1.5rem;
-    height: 0.1rem;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -292,8 +292,8 @@
 
   .unit {
     color: #37A18E;
-    font-size: 2.4rem;
-    margin-left: -0.2rem;
+    font-size: 0.64rem;
+    margin-left: -0.053rem;
   }
 
   .amount {
@@ -304,36 +304,36 @@
 
   .amount input {
     border: none;
-    font-size: 4rem;
+    font-size: 1.066rem;
     padding: 0;
     margin: 0;
-    height: 5rem;
+    height: 1.333rem;
     text-align: left;
   }
 
   .balance {
-    padding: 1.5rem 0 1.5rem 1.5rem;
-    font-size: 1.4rem;
+    padding: 0.4rem 0 0.4rem 0.4rem;
+    font-size: 0.373rem;
     color: #757575;
   }
 
   .balance span {
     color: #4990E2;
     float: right;
-    margin-right: 3rem;
-    font-size: 1.4rem;
+    margin-right: 0.8rem;
+    font-size: 0.373rem;
   }
 
   .button-wrapper {
-    padding: 0 5rem;
-    margin-top: 2rem;
+    padding: 0 1.333rem;
+    margin-top: 0.533rem;
   }
 
   .help {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
     color: #9B9B9B;
-    line-height: 2.5rem;
-    font-size: 1.4rem;
+    line-height: 0.666rem;
+    font-size: 0.373rem;
     text-align: center;
   }
 
@@ -343,8 +343,8 @@
 
   .unFinish {
     color: #9B9B9B;
-    margin-left: 1.5rem;
-    font-size: 1.4rem;
+    margin-left: 0.4rem;
+    font-size: 0.373rem;
   }
 
 </style>

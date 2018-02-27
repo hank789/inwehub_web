@@ -11,23 +11,23 @@
   z-index: 10;
 }
 .mui-preview-header {
-  height: 4.4rem;
+  height: 1.173rem;
   top: 0;
 }
 .mui-preview-footer {
-  height: 5rem;
+  height: 1.333rem;
   bottom: 0rem;
 }
 .mui-preview-header .mui-preview-indicator {
   display: block;
-  line-height: 2.5rem;
+  line-height: 0.666rem;
   color: #fff;
   text-align: center;
-  margin: 1.5rem auto 0.4rem;
-  width: 7rem;
+  margin: 0.4rem auto 0.106rem;
+  width: 1.866rem;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 1.2rem;
-  font-size: 1.6rem;
+  border-radius: 0.32rem;
+  font-size: 0.426rem;
 }
 .mui-preview-image {
   display: none;
@@ -104,10 +104,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -2.5rem;
-  margin-top: -2.5rem;
-  height: 5rem;
-  width: 5rem;
+  margin-left: -0.666rem;
+  margin-top: -0.666rem;
+  height: 1.333rem;
+  width: 1.333rem;
 }
 .mui-preview-image img.mui-transitioning {
   -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;

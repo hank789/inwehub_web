@@ -209,7 +209,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -219,7 +219,7 @@
     right: 4%;
     bottom: 0;
     left:4%;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #c58a0c;
@@ -244,9 +244,9 @@
   }
   .menu{
     width:100%;
-    height:3.9rem;
+    height:1.04rem;
     background: #f3f4f6;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -259,11 +259,11 @@
   }
   .menu span:nth-of-type(2) i{
     position:absolute;
-    width:7rem;
-    height:0.15rem;
-    border-radius: 5rem;
+    width:1.866rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 2.8rem;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -272,7 +272,7 @@
   /*title_invitation*/
   .title_invitation{
     width:100%;
-    height:5.7rem;
+    height:1.52rem;
     background: #fcc816;
     position: relative;
 
@@ -280,55 +280,55 @@
   .title_invitation .cions-avatar{
     float: left;
     position: relative;
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
     background: #cccccc;
     left: 4%;
-    top: 0.65rem;
+    top: 0.173rem;
   }
   .title_invitation .cions-avatar img{
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
   }
   .title_invitation .cions-avatar svg{
     position: absolute;
-    font-size: 2rem;
-    right: -0.5rem;
-    bottom: -0.2rem;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .title_invitation p{
     height:100%;
     float: left;
-    line-height: 5.7rem;
-    font-size: 1.6rem;
+    line-height: 1.52rem;
+    font-size: 0.426rem;
     color: #8e4c02;
     font-weight: 500;
-    margin-left: 2.4rem;
+    margin-left: 0.64rem;
   }
   .title_invitation .See{
     position: absolute;
     right: 0;
-    top: 1.5rem;
+    top: 0.4rem;
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #ffffff;
-    border-radius: 5rem 0 0 5rem;
-    padding: 0.35rem 0.7rem 0.35rem 0.8rem;
+    border-radius: 1.333rem 0 0 1.333rem;
+    padding: 0.093rem 0.186rem 0.093rem 0.213rem;
     background: linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40));
   }
   /*排名的展示样式*/
   .ranking{
     width:100%;
-    height:26.4rem;
+    height:7.04rem;
     background: #fcc816;
     position: relative;
   }
   .ranking-title{
-    height:4.3rem;
+    height:1.146rem;
     position: absolute;
-    top:1.4rem;
+    top:0.373rem;
     left:0;
     right: 0;
     margin: auto;
@@ -336,12 +336,12 @@
   .See{
     position: absolute;
     right: 0;
-    top:2.05rem;
+    top:0.546rem;
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #ffffff;
-    border-radius: 5rem 0 0 5rem;
-    padding: 0.35rem 0.7rem 0.35rem 0.8rem;
+    border-radius: 1.333rem 0 0 1.333rem;
+    padding: 0.093rem 0.186rem 0.093rem 0.213rem;
     background: -webkit-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient( rgb(243, 130, 1), rgb(252, 153, 40)); /* Firefox 3.6 - 15 */
@@ -349,45 +349,45 @@
   }
   .ranking-content{
     width:100%;
-    height:17.55rem;
+    height:4.68rem;
     position: absolute;
-    top:6.85rem;
+    top:1.826rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 0 4%;
   }
   .ranking-content li{
-    height:15.6rem;
-    border:0.1rem solid #ee8610;
+    height:4.16rem;
+    border:0.026rem solid #ee8610;
     background: #ececee;
-    margin-top: 0.5rem;
-    border-radius:0.4rem;
+    margin-top: 0.133rem;
+    border-radius:0.106rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0rem 0.2rem 0.4rem #ececee;
+    box-shadow: 0rem 0.053rem 0.106rem #ececee;
   }
   .ranking-content li:nth-of-type(2){
-    height:17.55rem;
+    height:4.68rem;
     margin: 0 2.5%;
     margin-top: 0;
   }
   .ranking-content li .avatar-container{
-    margin:1.05rem 0 0.6rem 0;
+    margin:0.28rem 0 0.16rem 0;
     position: relative;
   }
   .ranking-content li:nth-of-type(2) .avatar-container{
-    margin:1.55rem 0 0.6rem 0;
+    margin:0.413rem 0 0.16rem 0;
   }
   .ranking-content li .avatar-container .avatar{
-    width:5rem;
-    height:5rem;
+    width:1.333rem;
+    height:1.333rem;
     border-radius:50%;
   }
   .ranking-content li:nth-of-type(2) .avatar-container .avatar{
-    width:6rem;
-    height:6rem;
+    width:1.6rem;
+    height:1.6rem;
     border-radius:50%;
   }
   .ranking-content li .avatar-container .avatar img{
@@ -396,56 +396,56 @@
     border-radius:50%;
   }
   .ranking-content li .avatar-container .banner{
-    width: 6.6rem;
+    width: 1.76rem;
     position: absolute;
-    left: -0.8rem;
-    bottom: -1rem;
-    font-size: 1.1rem;
+    left: -0.213rem;
+    bottom: -0.266rem;
+    font-size: 0.293rem;
     color: #444444;
     text-align: center;
   }
   .ranking-content li:nth-of-type(2) .avatar-container .banner{
-    width: 7.6rem;
+    width: 2.026rem;
 
   }
   .ranking-content li .avatar-container .banner span{
     position: absolute;
-    top: 0.2rem;
+    top: 0.053rem;
     left: 0;
     right: 0;
     margin: auto;
-    line-height: 2.5rem;
+    line-height: 0.666rem;
   }
   .ranking-content li:nth-of-type(2) .avatar-container .banner span{
-    line-height: 3rem;
+    line-height: 0.8rem;
   }
 
   .ranking-content li p:nth-of-type(1){
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     font-weight:600;
   }
   .ranking-content li .cions{
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(68, 68, 68);
   }
   .ranking-content li .cions i{
     color: #235280;
   }
   .ranking-content li p:nth-of-type(3){
-    width:8.2rem;
-    height:2.4rem;
-    border-radius:5rem;
-    border:0.1rem solid #03aef9;
+    width:2.186rem;
+    height:0.64rem;
+    border-radius:1.333rem;
+    border:0.026rem solid #03aef9;
     text-align: center;
-    line-height: 2.2rem;
-    font-size: 1.2rem;
+    line-height: 0.586rem;
+    font-size: 0.32rem;
     color: #03aef9;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
   .ranking-content li p:nth-of-type(3).grey{
     color: #b4b4b6;
-    border: 0.1rem solid #b4b4b6;
+    border: 0.026rem solid #b4b4b6;
   }
 
   /*列表区域*/
@@ -456,107 +456,107 @@
   }
   .cions-list li{
     position: relative;
-    height:6.4rem;
+    height:1.706rem;
   }
   .cions-list li div{
     float: left;
   }
   .cions-list li .cions-num{
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #c8c8c8;
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
   }
   .cions-list li .cions-num p:nth-of-type(2){
-    font-size:1.8rem;
+    font-size:0.48rem;
     font-weight:500;
     color: #235280;
-    margin-top: -0.5rem;
+    margin-top: -0.133rem;
   }
   .cions-list li .cions-avatar{
     position: relative;
-    width:4.4rem;
-    height:4.4rem;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
     background: #cccccc;
-    margin-top: 1rem;
-    margin-left: 1.5rem;
+    margin-top: 0.266rem;
+    margin-left: 0.4rem;
   }
   .cions-list li .cions-avatar img{
-    width:4.4rem;
-    height:4.4rem;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
   }
   .cions-list li .cions-avatar svg{
     position: absolute;
-    font-size: 2rem;
-    right: -0.5rem;
-    bottom: -0.2rem;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .cions-list li .detail{
-    margin-top: 1.4rem;
-    font-size:1.4rem;
+    margin-top: 0.373rem;
+    font-size:0.373rem;
     color: #444444;
-    margin-left: 0.8rem;
+    margin-left: 0.213rem;
   }
   .cions-list li .detail p:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: rgb(128, 128, 128);
-    margin-top: -0.2rem;
+    margin-top: -0.053rem;
   }
   .cions-list li .detail p:nth-of-type(2) i{
     color: #235280;
   }
   .cions-list li .fouce{
-    width:6.1rem;
-    height:2.7rem;
-    border: 0.1rem solid #03aef9;
-    border-radius: 5rem;
+    width:1.626rem;
+    height:0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 2.5rem;
-    font-size:1.4rem;
+    line-height: 0.666rem;
+    font-size:0.373rem;
     color: #03aef9;
-    margin-top: 1.85rem;
+    margin-top: 0.493rem;
     float: right;
 
   }
   .cions-list li .grey{
     color: #b4b4b6;
-    border: 0.1rem solid #b4b4b6;
+    border: 0.026rem solid #b4b4b6;
   }
 
   /***媒体查询*****/
 
   @media screen and (min-width: 320px) {
     .ranking-content li{
-      width:10.2rem;
+      width:2.72rem;
     }
     .ranking-content li:nth-of-type(2){
-      width:12rem;
+      width:3.2rem;
     }
   }
 
   @media screen and (min-width: 375px) {
     .ranking-content li{
-      width:10.2rem;
+      width:2.72rem;
     }
     .ranking-content li:nth-of-type(2){
-      width:12rem;
+      width:3.2rem;
     }
   }
 
   @media screen and (min-width: 414px) {
     .ranking-content li{
-      width:11.2rem;
+      width:2.986rem;
     }
     .ranking-content li:nth-of-type(2){
-      width:13rem;
+      width:3.466rem;
     }
   }
 
   .desc{
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#808080;
     padding-left:4%;
-    margin-top:1rem;
+    margin-top:0.266rem;
   }
 </style>

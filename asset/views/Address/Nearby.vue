@@ -170,7 +170,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -180,7 +180,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -192,24 +192,24 @@
   /*搜索框*/
   .searchContainer{
     width:100%;
-    height:5.4rem;
+    height:1.44rem;
     background:#f3f4f6;
-    padding-top: 1rem;
+    padding-top: 0.266rem;
     position: absolute;
     top:0;
   }
   .searchContainer p{
     width:92%;
-    height:3.4rem;
+    height:0.906rem;
     background: #FFFFFF;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     margin-left: 4%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     /*justify-content:space-between;*/
     align-items:center;
-    padding:0 1.2rem;
+    padding:0 0.32rem;
   }
   .searchContainer input{
     width:85%;
@@ -218,18 +218,18 @@
     border:none;
     padding: 0;
     padding-left: 0;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#444444;
     float: left;
-    margin-left: 1rem;
+    margin-left: 0.266rem;
   }
   .searchContainer p svg{
     color:#c8c8c8;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
   }
   .searchContainer span{
-    width:1.8rem;
-    height:1.8rem;
+    width:0.48rem;
+    height:0.48rem;
     background: #c8c8c8;
     border-radius: 50%;
     position: relative;
@@ -247,15 +247,15 @@
   /*申请添加*/
   .apply{
     width:100%;
-    height:4.4rem;
+    height:1.173rem;
     padding: 0 4%;
-    line-height: 4.4rem;
+    line-height: 1.173rem;
     position: absolute;
-    top:5.4rem;
+    top:1.44rem;
   }
   .apply p:nth-of-type(1){
     float: left;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#235280;
   }
   ul{
@@ -265,16 +265,16 @@
   }
   ul li{
     width:100%;
-    height:5.9rem;
-    padding: 0.9rem 0 1.2rem;
+    height:1.573rem;
+    padding: 0.24rem 0 0.32rem;
     position: relative;
   }
   ul li p:nth-of-type(1){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
   }
   ul li p:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #808080;
   }
   /*选中的颜色*/
@@ -282,7 +282,7 @@
     color: #03aef9;
   }
   .listWrapper{
-    top:9.9rem;
+    top:2.64rem;
   }
 
 </style>

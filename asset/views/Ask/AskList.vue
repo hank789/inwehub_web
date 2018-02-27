@@ -269,12 +269,12 @@
 <style scoped>
 
   .list-ask {
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 5rem;
-    font-size: 1.6rem;
+    line-height: 1.333rem;
+    font-size: 0.426rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -284,12 +284,12 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 5rem;
-    right: 1rem;
+    width: 1.333rem;
+    right: 0.266rem;
     bottom: 0;
     left: 50%;
-    margin-left: -2.5rem;
-    height: 0.5rem;
+    margin-left: -0.666rem;
+    height: 0.133rem;
     z-index: 999;
     content: '';
     -webkit-transform: scaleY(.5);
@@ -302,26 +302,26 @@
 
   .list-ask .list-ask-item {
     position: relative;
-    line-height: 4rem;
+    line-height: 1.066rem;
   }
 
   .list-ask .list-ask-item .title {
-    line-height: 2.8rem;
+    line-height: 0.746rem;
   }
 
   .list-ask .list-ask-item .mui-media-body {
-    padding-left: 1rem;
-    line-height: 2.4rem;
-    margin: 0.5rem 0 0;
+    padding-left: 0.266rem;
+    line-height: 0.64rem;
+    margin: 0.133rem 0 0;
     color: #9B9B9B;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
 
   .list-ask .list-ask-item .time {
     color: #9B9B9B;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     float: right;
-    margin-right: 1rem;
+    margin-right: 0.266rem;
   }
 
   .list-ask .username {
@@ -330,9 +330,9 @@
 
   .list-ask .list-ask-item .amount {
     position: absolute;
-    right: 1rem;
+    right: 0.266rem;
     color: #ff9800;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   .list-ask .list-ask-item .amount b {
@@ -344,13 +344,13 @@
   }
 
   .list-ask .site-desc {
-    padding-left: 1rem;
-    line-height: 2.2rem;
+    padding-left: 0.266rem;
+    line-height: 0.586rem;
     color: #101010;
   }
 
   .list-ask .site-desc .mui-icon {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   .list-ask .avatar {
@@ -358,10 +358,10 @@
     color: #ffffff;
     float: left;
     display: inline-block;
-    margin-top: 0.3rem;
-    height: 5rem;
-    width: 5rem;
-    font-size: 2rem;
+    margin-top: 0.08rem;
+    height: 1.333rem;
+    width: 1.333rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -391,20 +391,20 @@
   }
 
   .list-ask .mui-table-view-cell {
-    padding: 1.1rem 0.8rem;
+    padding: 0.293rem 0.213rem;
   }
 
   .list-ask .mui-table-view-cell > a:not(.mui-btn) {
-    margin: -1.1rem -0.8rem;
+    margin: -0.293rem -0.213rem;
   }
 
   .list-ask p {
-    margin-left: 2rem;
+    margin-left: 0.533rem;
   }
 
   .buttons {
-    margin-top: 1rem;
-    padding: 0 3rem;
+    margin-top: 0.266rem;
+    padding: 0 0.8rem;
   }
 
   .mui-control-content {
@@ -412,7 +412,7 @@
     width: 100%;
     bottom: 0rem;
     right: 0rem;
-    top: 8.8rem;
+    top: 2.346rem;
   }
 
   .menu {
@@ -425,8 +425,8 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 5rem;
-    font-size: 1.4rem;
+    line-height: 1.333rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -437,11 +437,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 2.8rem;
+    width: 0.746rem;
     bottom: 0;
     left: 50%;
-    margin-left: -1.4rem;
-    height: 0.2rem;
+    margin-left: -0.373rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -466,15 +466,15 @@
   .label {
     display: inline-block;
     background: #fcc816;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     color: #fff;
-    line-height: 2rem;
-    padding: 0 0.9rem;
+    line-height: 0.533rem;
+    padding: 0 0.24rem;
   }
 
   .mui-table-view-cell:after {
-    height: 0.1rem !important;
-    left: 1.5rem;
-    right: 1.5rem;
+    height: 0.026rem !important;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 </style>

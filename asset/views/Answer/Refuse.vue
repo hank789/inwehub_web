@@ -185,44 +185,44 @@
 
 <style scoped>
   .form-ask-refuse {
-    padding: 0 0.5rem;
+    padding: 0 0.133rem;
   }
 
   .form-ask-refuse textarea {
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
     width: 100%;
-    height: 13.8rem;
+    height: 3.68rem;
     border: none;
   }
 
   .form-ask-refuse .title {
-    margin-top: 1rem;
-    margin-left: 1rem;
+    margin-top: 0.266rem;
+    margin-left: 0.266rem;
     color: #8b8b8b;
-    height: 3.2rem;
+    height: 0.853rem;
   }
 
   .form-ask-refuse .category {
-    padding: 1rem 2rem;
+    padding: 0.266rem 0.533rem;
   }
 
   .form-ask-refuse .category span.active {
-    border: 0.1rem solid #4a90e2;
+    border: 0.026rem solid #4a90e2;
     color: #4a90e2;
   }
 
   .form-ask-refuse .category span {
-    border: 0.1rem solid #b6b6b6;
-    border-radius: 0.5rem;
-    padding: 0 1.5rem;
+    border: 0.026rem solid #b6b6b6;
+    border-radius: 0.133rem;
+    padding: 0 0.4rem;
     display: inline-block;
-    height: 3.2rem;
+    height: 0.853rem;
     background: #fff;
-    font-size: 1.4rem;
-    margin: 0.5rem 0.6rem;
+    font-size: 0.373rem;
+    margin: 0.133rem 0.16rem;
     text-align: center;
     color: #333;
-    line-height: 3.2rem;
+    line-height: 0.853rem;
     position: relative;
   }
 
@@ -231,7 +231,7 @@
     position: relative;
     border: none;
     height: 90%;
-    margin-top: -0.4rem;
+    margin-top: -0.106rem;
     width: 90%;
     text-align: center;
   }
@@ -241,16 +241,16 @@
   }
 
   .form-ask-refuse .button-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 5rem;
+    margin-top: 0.4rem;
+    padding: 0 1.333rem;
   }
 
   .textarea-wrapper {
     position: relative;
     background: #fff;
-    padding-bottom: 2rem;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #bbbbbb;
+    padding-bottom: 0.533rem;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #bbbbbb;
   }
 
   .textarea-wrapper textarea {
@@ -260,9 +260,9 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 1rem;
-    font-size: 1.2rem;
-    bottom: 0.2rem;
+    right: 0.266rem;
+    font-size: 0.32rem;
+    bottom: 0.053rem;
     color: #999;
   }
 

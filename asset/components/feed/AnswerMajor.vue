@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="average_rate" v-if="data.feed.average_rate" >回答好评率{{data.feed.average_rate}}</div>
+    <div class="average_rate">回答好评率{{data.feed.average_rate}}</div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
@@ -131,38 +131,38 @@
 <style>
   .question-money{
     float: right;
-    height:1.9rem;
+    height:0.506rem;
     background: #a8dff7;
-    border-radius: 0.4rem;
-    font-size:1.2rem;
+    border-radius: 0.106rem;
+    font-size:0.32rem;
     color: #235280;
-    line-height: 1.9rem;
-    padding: 0 1.3rem 0 0.3rem;
+    line-height: 0.506rem;
+    padding: 0 0.346rem 0 0.08rem;
   }
   .question-money i{
     margin: 0;
     display: inline-block;
-    width:0.4rem;
-    height:0.4rem;
+    width:0.106rem;
+    height:0.106rem;
     border-radius: 50%;
     background: #FFFFFF;
-    margin-bottom: 0.16rem;
+    margin-bottom: 0.042rem;
   }
   .tagSelect{
     display: inline-block;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #235280;
-    margin-right:0.5rem;
+    margin-right:0.133rem;
   }
   .top-10{
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
 
 </style>
 <style scoped>
 .average_rate{
-  font-size: 1.2rem;
+  font-size: 0.32rem;
   color: #b4b4b6;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.16rem;
 }
 </style>

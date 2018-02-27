@@ -349,30 +349,30 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height: 60.2rem;
+    height: 16.053rem;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
 
   }
 
   .privilege_T svg {
-    font-size: 7.7rem;
-    margin-left: 1.6rem;
+    font-size: 2.053rem;
+    margin-left: 0.426rem;
   }
 
   /*用户头像部分*/
   .privilege_avatar {
     width: 100%;
-    height: 9.3rem;
+    height: 2.48rem;
     position: relative;
-    top: -2.5rem;
-    /*border:0.1rem solid #000000;*/
+    top: -0.666rem;
+    /*border:0.026rem solid #000000;*/
   }
 
   .outermost {
-    width: 9rem;
-    height: 9rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
-    border:0.45rem solid #767a80;
+    border:0.12rem solid #767a80;
     opacity: 0.2;
     position: absolute;
     top: 0;
@@ -430,9 +430,9 @@
 
 
   .innermost {
-    width: 8rem;
-    height: 8rem;
-    border: 0.4rem solid #757A7F;
+    width: 2.133rem;
+    height: 2.133rem;
+    border: 0.106rem solid #757A7F;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -489,9 +489,9 @@
   }
 
   .privilege_avatar img {
-    width: 7.3rem;
-    height: 7.3rem;
-    border: 0.2rem solid #A0A7AC;
+    width: 1.946rem;
+    height: 1.946rem;
+    border: 0.053rem solid #A0A7AC;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -506,15 +506,15 @@
   .privilege_share {
     width: 92%;
     margin-left: 4%;
-    height: 6rem;
+    height: 1.6rem;
     background: #fcc816;
-    border-radius: 1.4rem;
+    border-radius: 0.373rem;
     text-align: center;
-    padding-top: 1rem;
-    margin-top: -1rem;
+    padding-top: 0.266rem;
+    margin-top: -0.266rem;
     position: relative;
 
-    /*border:0.1rem solid #000000;*/
+    /*border:0.026rem solid #000000;*/
   }
 
   .privilege_share:after {
@@ -522,29 +522,29 @@
     display: block;
     width: 0;
     height: 0;
-    border-left: 1rem solid transparent;
-    border-right: 1rem solid transparent;
-    border-bottom: 1rem solid #fcc816;
+    border-left: 0.266rem solid transparent;
+    border-right: 0.266rem solid transparent;
+    border-bottom: 0.266rem solid #fcc816;
     position: absolute;
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
     left: 0rem;
     right: 0;
-    top: -0.9rem;
+    top: -0.24rem;
     margin: auto;
 
   }
 
   .privilege_share span:nth-of-type(1) {
     display: block;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #444444;
     font-weight: 600;
   }
 
   .privilege_share span:nth-of-type(2) {
     display: block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
@@ -552,20 +552,20 @@
   .privilege_verification {
     width: 80%;
     margin-left: 10%;
-    height: 23.7rem;
-    margin-top: 2.5rem;
+    height: 6.32rem;
+    margin-top: 0.666rem;
     position: relative;
-    /*border:0.1rem solid #000000;*/
+    /*border:0.026rem solid #000000;*/
   }
 
   .verification_t {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #FFFFFF;
   }
 
   .verification_b {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
     position: absolute;
     bottom: 0;
@@ -580,14 +580,14 @@
   }
 
   .privilege_verification ul li {
-    height: 3rem;
+    height: 0.8rem;
     position: relative;
   }
 
   .privilege_verification ul li svg {
-    font-size: 2.2rem;
+    font-size: 0.586rem;
     color: #c8c8c8;
-    margin-left: 0.5rem;
+    margin-left: 0.133rem;
     float: left;
   }
 
@@ -597,60 +597,60 @@
     float: left;
     background: #595D60;
     border: none;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #FFFFFF;
-    margin-left: -0.3rem;
+    margin-left: -0.08rem;
   }
 
   .privilege_verification ul li input::-webkit-input-placeholder {
     color: #b4b4b6;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 18- */
     color: #b4b4b6;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 19+ */
     color: #b4b4b6;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .privilege_verification ul li input::-moz-placeholder {
     /* Firefox 19+ */
     color: #b4b4b6;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .privilege_verification ul li span {
     /*width: 35%;*/
-    padding:0 1rem;
-    height: 3rem;
-    border: 0.05rem solid #808080;
-    border-radius: 0.5rem;
-    font-size: 1.4rem;
+    padding:0 0.266rem;
+    height: 0.8rem;
+    border: 0.013rem solid #808080;
+    border-radius: 0.133rem;
+    font-size: 0.373rem;
     color: #ffffff;
     text-align: center;
-    line-height: 3rem;
+    line-height: 0.8rem;
     float: right;
-    margin-right: 0.2rem;
+    margin-right: 0.053rem;
   }
 
   .privilege_verification ul li:nth-of-type(1) {
-    margin-top: 1.7rem;
-    /*border:0.1rem solid #000000;*/
+    margin-top: 0.453rem;
+    /*border:0.026rem solid #000000;*/
   }
 
   .privilege_verification ul li:nth-of-type(2) {
-    margin-top: 2.8rem;
-    /*border:0.1rem solid #000000;*/
+    margin-top: 0.746rem;
+    /*border:0.026rem solid #000000;*/
   }
 
   .privilege_verification ul li:nth-of-type(2) svg {
-    font-size: 2.3rem;
+    font-size: 0.613rem;
   }
 
   .privilege_verification ul li:nth-of-type(2) input {
@@ -660,9 +660,9 @@
   .privilege_verification ul li:nth-of-type(1):after {
     position: absolute;
     /*right: 34%;*/
-    bottom: 0.3rem;
+    bottom: 0.08rem;
     left: 2%;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -672,9 +672,9 @@
   .privilege_verification ul li:nth-of-type(2):after {
     position: absolute;
     right: 0rem;
-    bottom: 0.3rem;
+    bottom: 0.08rem;
     left: 2%;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -682,18 +682,18 @@
   }
 
   .privilege_verification ul li:nth-of-type(3) {
-    margin-top: 3rem;
-    height: 5.3rem;
+    margin-top: 0.8rem;
+    height: 1.413rem;
 
   }
 
   .privilege_verification ul li:nth-of-type(3) button {
-    width: 15rem;
-    height: 5.3rem;
+    width: 4rem;
+    height: 1.413rem;
     background: #03aef9;
-    border-radius: 10rem;
+    border-radius: 2.666rem;
     border-color: #03aef9;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #FFFFFF;
     position: absolute;
     left: 0;
@@ -703,8 +703,8 @@
   }
 
   .privilege_verification ul li:nth-of-type(3) img {
-    width: 4.1rem;
-    height: 2.9rem;
+    width: 1.093rem;
+    height: 0.773rem;
     position: absolute;
     left: 66%;
     top: 37%;
@@ -713,13 +713,13 @@
   /*信息部分*/
   .privilege_B {
     width: 100%;
-    padding-bottom: 2.5rem;
+    padding-bottom: 0.666rem;
     position: relative;
-    margin-top: 3.8rem;
+    margin-top: 1.013rem;
   }
 
   .privilege_B p:nth-of-type(1) {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #444444;
     text-align: center;
     font-weight: 600;
@@ -727,32 +727,32 @@
   }
 
   .privilege_B p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    margin-top: 0.8rem;
-    margin-bottom: 2.2rem;
+    margin-top: 0.213rem;
+    margin-bottom: 0.586rem;
 
   }
 
   .privilege_B p:nth-of-type(3) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 1.6rem;
+    margin-top: 0.426rem;
 
   }
 
   .privilege_B div {
     width: 100%;
-    height: 34.7rem;
+    height: 9.253rem;
     position: relative;
 
   }
 
   .privilege_B div img {
-    width: 25.3rem;
-    height: 34.7rem;
+    width: 6.746rem;
+    height: 9.253rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -762,7 +762,7 @@
 
   .verification_bg {
     width: 100%;
-    height: 12.1rem;
+    height: 3.226rem;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }

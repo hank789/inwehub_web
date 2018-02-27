@@ -177,8 +177,8 @@
     background: #ffffff;
     position: relative;
     .Logo {
-      width: 20.5rem;
-      height: 12.2rem;
+      width: 5.466rem;
+      height: 3.253rem;
       position: absolute;
       left: 0;
       right: 0;
@@ -186,21 +186,21 @@
       bottom: 0;
       margin: auto;
       svg {
-        width: 9rem;
-        height: 6.5rem;
+        width: 2.4rem;
+        height: 1.733rem;
         display: block;
         margin: 0 auto;
 
       }
       p {
-        width: 20.5rem;
-        height: 2.4rem;
+        width: 5.466rem;
+        height: 0.64rem;
         font-family: "PingFangSC";
-        font-size: 1.4rem;
-        line-height: 2.4rem;
+        font-size: 0.373rem;
+        line-height: 0.64rem;
         text-align: center;
         color: #808080;
-        margin-top: 1.2rem;
+        margin-top: 0.32rem;
       }
     }
   }
@@ -235,85 +235,85 @@
   .projectList1 {
     width: 100%;
     background: #ffffff;
-    padding: 1.7rem 1.6rem 1.6rem 1.6rem;
-    margin-bottom: 1rem;
+    padding: 0.453rem 0.426rem 0.426rem 0.426rem;
+    margin-bottom: 0.266rem;
     position: relative;
     li {
       &:nth-child(1) {
-        width: 30.9rem;
+        width: 8.24rem;
         span {
           &:nth-child(1) {
             display: inline-block;
-            max-width: 18rem;
-            height: 2.25rem;
+            max-width: 4.8rem;
+            height: 0.6rem;
             font-family: "PingFangSC";
-            font-size: 1.6rem;
+            font-size: 0.426rem;
             color: #444444;
-            margin-bottom: -0.6rem;
+            margin-bottom: -0.16rem;
           }
           &:nth-child(2) {
-            height: 2rem;
-            border-radius: 5rem;
+            height: 0.533rem;
+            border-radius: 1.333rem;
             font-family: "PingFangSC";
-            font-size: 1.1rem;
+            font-size: 0.293rem;
             text-align: center;
             color: #ffffff;
-            padding: 0.2rem 1.1rem 0.3rem 1rem;
-            margin-left: 0.8rem;
-            margin-bottom: 0.2rem;
+            padding: 0.053rem 0.293rem 0.08rem 0.266rem;
+            margin-left: 0.213rem;
+            margin-bottom: 0.053rem;
           }
         }
         svg {
           position: absolute;
-          top: 2rem;
-          right: 1.6rem;
-          width: 1.6rem;
-          height: 1.7rem;
+          top: 0.533rem;
+          right: 0.426rem;
+          width: 0.426rem;
+          height: 0.453rem;
           color: #03aef9;
         }
       }
       &:nth-child(2) {
-        margin-top: 1rem;
+        margin-top: 0.266rem;
         width: 100%;
-        height: 1.4rem;
+        height: 0.373rem;
         span {
           &:nth-child(1) {
             display: inline-block;
-            max-width: 13rem;
-            height: 2rem;
+            max-width: 3.466rem;
+            height: 0.533rem;
             font-family: ".PingFangSC";
             color: #808080;
-            font-size: 1.4rem;
+            font-size: 0.373rem;
           }
           &:nth-child(2) {
             display: inline-block;
-            width: 0.1rem;
-            height: 1.4rem;
+            width: 0.026rem;
+            height: 0.373rem;
             background: #c8c8c8;
-            margin-left: 0.8rem;
-            margin-right: 0.8rem;
-            margin-bottom: 0.2rem;
+            margin-left: 0.213rem;
+            margin-right: 0.213rem;
+            margin-bottom: 0.053rem;
 
           }
           &:nth-child(3) {
             display: inline-block;
-            max-width: 13rem;
-            height: 2rem;
+            max-width: 3.466rem;
+            height: 0.533rem;
             font-family: ".PingFangSC";
             color: #808080;
             color: #808080;
-            font-size: 1.4rem;
+            font-size: 0.373rem;
           }
 
         }
 
       }
       &:nth-child(3) {
-        margin-top: 1.55rem;
+        margin-top: 0.413rem;
         width: 100%;
-        height: 1.65rem;
+        height: 0.44rem;
         font-family: "PingFangSC";
-        font-size: 1.2rem;
+        font-size: 0.32rem;
         color: #b4b4b6;
       }
     }

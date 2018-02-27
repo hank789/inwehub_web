@@ -118,9 +118,9 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 4.3rem;
-    width: 4.3rem;
-    font-size: 2rem;
+    height: 1.146rem;
+    width: 1.146rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -150,13 +150,13 @@
   }
 
   .mui-media-body {
-    padding-left: 1rem;
+    padding-left: 0.266rem;
   }
   .mui-table-view-cell:after {
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 1.5rem;
+    left: 0.4rem;
     height: 0rem;
   }
 
@@ -169,35 +169,35 @@
 
   .mui-table-view li{
     background: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
   }
   .mui-table-view:before {
     display: none;
   }
 
   .detail {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
   }
 
   .first {
-    height: 5rem;
+    height: 1.333rem;
   }
 
   .three {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    padding-top: 0.5rem;
+    padding-top: 0.133rem;
     text-align: right;
   }
 
   .split {
     position: relative;
-    top: 0.3rem;
-    margin: 0 1rem;
+    top: 0.08rem;
+    margin: 0 0.266rem;
     display: inline-block;
-    width: 0.1rem;
-    height: 1.3rem;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
@@ -212,8 +212,8 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 4.5rem;
-    font-size: 1.4rem;
+    line-height: 1.2rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -224,11 +224,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 5.6rem;
+    width: 1.493rem;
     bottom: 0;
     left: 50%;
-    margin-left: -2.8rem;
-    height: 0.2rem;
+    margin-left: -0.746rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -239,43 +239,43 @@
   }
 
   #refreshContainer {
-    top: 4.5rem;
+    top: 1.2rem;
   }
 
   .container {
     text-align: center;
-    padding: 2rem;
+    padding: 0.533rem;
   }
 
   .container svg {
-    font-size: 6rem;
+    font-size: 1.6rem;
 
   }
 
   .container p {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
   /* fixed样式*/
 
   .button-wrapper {
     position: fixed;
-    bottom:2.7rem;
-    right:1.4rem;
+    bottom:0.72rem;
+    right:0.373rem;
     width: 100%;
-    height: 6.8rem;
+    height: 1.813rem;
     padding: 0;
     z-index: 99;
-    /*border: 0.1rem solid #cccccc;*/
+    /*border: 0.026rem solid #cccccc;*/
   }
   .propose{
-    width:8.4rem;
-    height:3.4rem;
+    width:2.24rem;
+    height:0.906rem;
     background:#03aef9;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     color: #FFFFFF;
     position: absolute;
-    right:9rem;
+    right:2.4rem;
     bottom: 0;
     margin: 0;
     padding: 0;
@@ -285,34 +285,34 @@
     align-items:center;
   }
   .propose svg{
-    font-size:1.8rem;
-    line-height:3.4rem;
-    margin-right: 0.5rem;
+    font-size:0.48rem;
+    line-height:0.906rem;
+    margin-right: 0.133rem;
   }
   .select{
-    width:8.4rem;
-    height:6.8rem;
+    width:2.24rem;
+    height:1.813rem;
     background: #FFFFFF;
-    border:0.1rem solid #dcdcdc;
+    border:0.026rem solid #dcdcdc;
     position: absolute;
     bottom: 0;
     right: 0;
-    border-radius:1rem;
+    border-radius:0.266rem;
   }
   .newest{
-    width:8.5rem;
-    height:3.4rem;
+    width:2.266rem;
+    height:0.906rem;
     background: #FFFFFF;
     position:absolute;
     bottom: -0rem;
-    right:-0.1rem;
-    border-radius: 5rem;
+    right:-0.026rem;
+    border-radius: 1.333rem;
   }
   .newest p{
-    width:8.4rem;
-    height:3.4rem;
+    width:2.24rem;
+    height:0.906rem;
     background:#03aef9;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     color: #FFFFFF;
     position: absolute;
     bottom: 0;
@@ -324,15 +324,15 @@
     align-items:center;
   }
   .newest p svg{
-    font-size:1.8rem;
-    line-height:3.4rem;
-    margin-right: 0.5rem;
+    font-size:0.48rem;
+    line-height:0.906rem;
+    margin-right: 0.133rem;
   }
   .hot{
-    width:8.4rem;
-    height:3.4rem;
-    font-size: 1.5rem;
-    border-radius: 5rem;
+    width:2.24rem;
+    height:0.906rem;
+    font-size: 0.4rem;
+    border-radius: 1.333rem;
     color: #808080;
     position: absolute;
     top:0;
@@ -342,30 +342,30 @@
     align-items:center;
     margin: 0;
     padding: 0;
-    padding-right: 1.2rem;
+    padding-right: 0.32rem;
   }
 /*回答者的样式*/
   .respondent{
     width:100%;
-    padding: 1.2rem 1.5rem;
+    padding: 0.32rem 0.4rem;
     background: #f3f4f6;
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:rgb(128,128,128);
-    border-radius: 0.4rem;
-    margin-top: 1.2rem;
+    border-radius: 0.106rem;
+    margin-top: 0.32rem;
   }
   .respondent span{
     color: #03aef9;
   }
   .respondent i{
     color:rgb(146,146,146);
-    margin-right: 0.5rem;
+    margin-right: 0.133rem;
   }
   .respondent span:nth-last-of-type(1) i{
     display: none;
   }
   .respondent i{
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:rgb(128,128,128);
     font-style: normal;
   }
@@ -374,6 +374,6 @@
   }
 
   .second{
-    font-size:1.6rem;
+    font-size:0.426rem;
   }
 </style>

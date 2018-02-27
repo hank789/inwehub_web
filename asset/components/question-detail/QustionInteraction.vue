@@ -138,33 +138,33 @@
     margin-top: 0 !important;
 
     .content {
-      padding: 0 1.5rem;
+      padding: 0 0.4rem;
     }
 
     .answerCount {
       color: #b4b4b6;
-      font-size: 1.2rem;
-      padding: 0.5rem 1.5rem 1.5rem;
+      font-size: 0.32rem;
+      padding: 0.133rem 0.4rem 0.4rem;
 
       span {
         color: #03aef9;
-        margin-left: 0.5rem;
+        margin-left: 0.133rem;
       }
     }
 
     .buttonWrapper {
 
       &.buttonWrapper-1 {
-        padding: 0 0.7rem 0 1.5rem;
+        padding: 0 0.186rem 0 0.4rem;
       }
 
       &.buttonWrapper-2 {
-        padding: 0 1.5rem 0 0.7rem;
+        padding: 0 0.4rem 0 0.186rem;
       }
 
       .mui-btn-warning {
         background-color: #fcc816;
-        border: 0.1rem solid #fcc816;
+        border: 0.026rem solid #fcc816;
       }
     }
   }
@@ -174,6 +174,6 @@
   }
   /*图片样式*/
   .img-style{
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
   }
 </style>

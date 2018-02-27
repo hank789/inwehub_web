@@ -140,57 +140,57 @@
 
   .header {
     width: 100%;
-    height: 18.5rem;
+    height: 4.933rem;
     background: #ececee;
   }
 
   .header a {
     color: #808080;
     position: absolute;
-    top: 2.3rem;
-    left: 1.6rem;
+    top: 0.613rem;
+    left: 0.426rem;
   }
   .expertExplanation {
     width: 100%;
-    height: 18.5rem;
-    padding-top: 4.3rem;
+    height: 4.933rem;
+    padding-top: 1.146rem;
   }
   .expertSign{
     text-align: center;
   }
    .expertSign span{
     width: 100%;
-    font-size: 2rem;
+    font-size: 0.533rem;
     color:#444444;
     font-weight: 500;
-    margin-top: 4.3rem;
+    margin-top: 1.146rem;
   }
    .expertSign svg{
-    font-size: 2.8rem;
+    font-size: 0.746rem;
     color: #fcc816;
-    margin-bottom: -0.3rem;
+    margin-bottom: -0.08rem;
   }
   .expertExplanation li{
      text-align: center;
-     margin-top: 0.7rem;
+     margin-top: 0.186rem;
      overflow: hidden;
   }
   .expertExplanation li:nth-of-type(1){
-    margin-top: 1.8rem;
+    margin-top: 0.48rem;
   }
   .expertExplanation li p:nth-of-type(1){
-    width:1.8rem;
-    height:1.8rem;
+    width:0.48rem;
+    height:0.48rem;
     background: #FFFFFF;
-    border:0.1rem solid #dcdcdc;
+    border:0.026rem solid #dcdcdc;
     display: inline-block;
-    margin-bottom: -0.4rem;
+    margin-bottom: -0.106rem;
     position: relative;
-    right:1rem;
+    right:0.266rem;
   }
   .expertExplanation li p:nth-of-type(1) svg{
       color:#03aef9;
-      font-size: 1.5rem;
+      font-size: 0.4rem;
       position: absolute;
       left:0;
       right:0;
@@ -200,69 +200,69 @@
   }
   .expertExplanation li p:nth-of-type(2){
     display: inline-block;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#323232;
   }
 
   /*内容区域*/
   .guideExplain{
-    margin-top: 3rem;
+    margin-top: 0.8rem;
     padding: 0 8.8%;
   }
   .platformExplain{
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
     text-align: center;
-    margin-bottom: 2.6rem;
+    margin-bottom: 0.693rem;
   }
   .guideExplain li p:nth-of-type(1){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#444444;
-    line-height: 2rem;
+    line-height: 0.533rem;
   }
   .guideExplain li p:nth-of-type(1) i{
     display: inline-block;
-    width:0.6rem;
-    height:0.6rem;
+    width:0.16rem;
+    height:0.16rem;
     background:#808080;
     border-radius: 50%;
-    margin-bottom: 0.3rem;
-    margin-right: 0.8rem;;
+    margin-bottom: 0.08rem;
+    margin-right: 0.213rem;;
   }
   .guideExplain li:nth-of-type(2){
-    margin-top: 2.3rem;
+    margin-top: 0.613rem;
   }
   .guideExplain li p:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:#808080;
-    line-height: 1.8rem;
-    margin-top: 0.5rem;
+    line-height: 0.48rem;
+    margin-top: 0.133rem;
   }
 
   /*联系我们*/
   .contact {
     width: 100%;
     text-align: center;
-    margin-top:1.2rem;
+    margin-top:0.32rem;
   }
 
   .contact p {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
-    line-height: 1.7rem;
+    line-height: 0.453rem;
   }
 
   .home-apply {
     width: 91%;
-    height: 4.1rem;
+    height: 1.093rem;
     margin-left: 4.5%;
-    border-radius: 0.5rem;
+    border-radius: 0.133rem;
     background: #03aef9;
     text-align: center;
-    line-height: 4.1rem;
+    line-height: 1.093rem;
     color: #f2f2f2;
-    font-size: 1.6rem;
-    margin-top:3.7rem;
+    font-size: 0.426rem;
+    margin-top:0.986rem;
 
   }
 </style>

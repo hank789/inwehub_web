@@ -121,9 +121,9 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 4.5rem;
-    width: 4.5rem;
-    font-size: 2rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -153,8 +153,8 @@
   }
 
   .mui-media-body {
-    padding-left: 1rem;
-    min-height: 2.5rem;
+    padding-left: 0.266rem;
+    min-height: 0.666rem;
   }
 
   .mui-table-view-cell:after {
@@ -162,29 +162,29 @@
   }
 
   .detail {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
   }
 
   .split {
     position: relative;
-    top: 0.3rem;
-    margin: 0 0.4rem;
+    top: 0.08rem;
+    margin: 0 0.106rem;
     display: inline-block;
-    width: 0.1rem;
-    height: 1.3rem;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
 
   .followButton {
     display: inline-block;
-    border: 0.1rem solid #03aef9;
-    line-height: 1.7rem;
-    border-radius: 5rem;
-    font-size: 1.3rem;
+    border: 0.026rem solid #03aef9;
+    line-height: 0.453rem;
+    border-radius: 1.333rem;
+    font-size: 0.346rem;
     color: #03aef9;
-    padding: 0.1rem 1.5rem;
+    padding: 0.026rem 0.4rem;
   }
 
   .followButton.active {
@@ -208,14 +208,14 @@
 
   .avatarInner .icon {
     position: absolute;
-    right: -0.6rem;
-    bottom: -0.1rem;
-    font-size: 2.4rem;
+    right: -0.16rem;
+    bottom: -0.026rem;
+    font-size: 0.64rem;
     color: #03aef9;
   }
 
   .userInfoWrapper {
-    padding: 1.5rem;
+    padding: 0.4rem;
   }
 
 </style>

@@ -100,7 +100,7 @@
 <style lang="less" scoped>
   .answersWrapper {
     .content {
-      padding: 0 1.5rem;
+      padding: 0 0.4rem;
     }
 
     .item {
@@ -108,18 +108,18 @@
     }
 
     .itemFooter {
-      padding: 0.9rem 1.5rem 1.3rem;
+      padding: 0.24rem 0.4rem 0.346rem;
 
       .iconWrapper {
         display: inline-block;
         color: #808080;
-        font-size: 1.3rem;
-        margin-right: 0.5rem;
+        font-size: 0.346rem;
+        margin-right: 0.133rem;
       }
 
       .time {
         float: right;
-        font-size: 1.3rem;
+        font-size: 0.346rem;
         color: #c8c8c8;
         text-align: right;
       }

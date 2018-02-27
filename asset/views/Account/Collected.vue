@@ -101,7 +101,7 @@
 
   .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -112,10 +112,10 @@
     width: 50%;
     height: 100%;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    line-height: 4.5rem;
+    line-height: 1.2rem;
     font-weight: 600;
   }
 
@@ -127,45 +127,45 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 2.7rem;
-    height: 0.15rem;
+    width: 0.72rem;
+    height: 0.04rem;
     left: 42%;
-    bottom: 0.05rem;
+    bottom: 0.013rem;
     background: #3c95f9;
   }
 
 
   .bot {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     bottom: 0;
-    left:1.5rem;
-    height: 0.1rem;
+    left:0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
 
   .hotAnswer_b {
-    /*height: 20rem;*/
+    /*height: 5.333rem;*/
     overflow: hidden;
   }
 
   .hotAnswer_b li {
     width: 100%;
-    padding:1.5rem 1.5rem;
+    padding:0.4rem 0.4rem;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    margin-top: 1.2rem;
-    font-size: 1.6rem;
+    margin-top: 0.32rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .hotAnswer_d {
     width: 100%;
-    height: 3.2rem;
+    height: 0.853rem;
   }
 
   .hotAnswer_d p {
@@ -173,17 +173,17 @@
   }
 
   .hotAnswer_d p:nth-child(1) {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 0.853rem;
+    height: 0.853rem;
     /*background: #CCCCCC;*/
     position: relative;
   }
 
   .hotAnswer_d p:nth-child(1) > svg {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     bottom: 0;
-    right: -0.4rem;
+    right: -0.106rem;
   }
 
   .hotAnswer_d p:nth-child(1) > img {
@@ -194,33 +194,33 @@
 
   .hotAnswer_d p:nth-child(2) {
     width: 32%;
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
-    margin-left:1rem;
-    line-height: 1.5rem;
+    margin-left:0.266rem;
+    line-height: 0.4rem;
   }
 
   .hotAnswer_d p:nth-child(3) {
     width: 21%;
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
-    border-right: 0.1rem solid #c8c8c8;
+    border-right: 0.026rem solid #c8c8c8;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 0.4rem;
   }
 
   .hotAnswer_d p:nth-child(4) {
     width: 37.5%;
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 0.4rem;
   }
 
   /*无数据的样式 */
@@ -232,27 +232,27 @@
   }
 
   .container svg {
-    font-size: 6rem;
-    margin-left: 2.3rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 
   .title{
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444;
   }
   .titleSub{
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#808080;
-    padding:0.5rem 0 0;
+    padding:0.133rem 0 0;
   }
 
   .listWrapper{
-    top: 4.5rem;
+    top: 1.2rem;
   }
 </style>

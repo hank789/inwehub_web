@@ -137,25 +137,25 @@
 
   .title {
     color: #aba9ab;
-    height: 4rem;
-    line-height: 4rem;
-    padding-left: 1rem;
+    height: 1.066rem;
+    line-height: 1.066rem;
+    padding-left: 0.266rem;
   }
 
   .feedback {
   }
 
   .feedback textarea {
-    height: 20rem;
+    height: 5.333rem;
   }
 
   .textarea-wrapper {
     position: relative;
-    margin: 0 0.5rem;
+    margin: 0 0.133rem;
     background: #fff;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #bbbbbb;
-    padding-bottom: 2rem;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #bbbbbb;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper textarea {
@@ -166,13 +166,13 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 1rem;
-    bottom: 0.2rem;
+    right: 0.266rem;
+    bottom: 0.053rem;
     color: #999;
   }
 
   .button-wrapper {
-    margin-top: 4rem;
-    padding: 0 5rem;
+    margin-top: 1.066rem;
+    padding: 0 1.333rem;
   }
 </style>

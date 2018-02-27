@@ -202,55 +202,55 @@
 
 
   .item {
-    line-height: 2rem;
+    line-height: 0.533rem;
     color: #b4b4b6;
   }
 
   .item span {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     position: relative;
-    top: -0.3rem;
+    top: -0.08rem;
   }
 
   .item .iconWrapper {
     display: inline-block;
-    border: 0.1rem solid #dcdcdc;
-    width: 4.2rem;
-    height: 4.2rem;
+    border: 0.026rem solid #dcdcdc;
+    width: 1.12rem;
+    height: 1.12rem;
     border-radius: 50%;
     text-align: center;
-    line-height: 4.2rem;
-    font-size: 2.4rem;
+    line-height: 1.12rem;
+    font-size: 0.64rem;
 
   }
 
   .item.active .iconWrapper {
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .item:nth-child(1) .iconWrapper {
-    font-size: 2rem;
+    font-size: 0.533rem;
   }
 
   .item:nth-child(2) .iconWrapper {
-    font-size: 2.4rem;
+    font-size: 0.64rem;
   }
 
   .item:nth-child(2) .iconWrapper.showcangWrapper {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .item:nth-child(2) .iconWrapper.showcangWrapper .icon {
     position: relative;
-    top: -0.1rem;
+    top: -0.026rem;
   }
 
   .item:nth-child(3) .iconWrapper {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .modifyWrapper {
-    font-size: 1.6rem !important;
+    font-size: 0.426rem !important;
   }
 
   .modifyWrapper .icon {
@@ -259,7 +259,7 @@
   }
 
   .statistics {
-    padding: 2rem 0 1rem 0;
+    padding: 0.533rem 0 0.266rem 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -267,7 +267,7 @@
 
   .dianzanWrapper .icon {
     position: relative;
-    top: -0.1rem;
+    top: -0.026rem;
   }
 
   .active {
@@ -276,13 +276,13 @@
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    padding: 0 1.5rem 1.4rem 1.5rem;
+    padding: 0 0.4rem 0.373rem 0.4rem;
     background: #FFFFFF;
-    margin-top: 0.8rem;
+    margin-top: 0.213rem;
     position: relative;
   }
   .component-dianzanList span:nth-of-type(1){
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#03aef9;
   }
 

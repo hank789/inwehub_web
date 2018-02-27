@@ -113,40 +113,40 @@
 
 <style scoped>
   .mui-bar .myicon {
-    left: 1rem;
-    top: 1.2rem;
+    left: 0.266rem;
+    top: 0.32rem;
   }
 
   .pay-success {
     text-align: center;
-    padding: 1.5rem;
+    padding: 0.4rem;
   }
 
   .pay-success .status {
-    margin-top: 10rem;
-    font-size: 2rem;
+    margin-top: 2.666rem;
+    font-size: 0.533rem;
     color: #19ac18;
   }
 
   .pay-success .status span {
     color: #417505;
-    margin-right: 0.7rem;
+    margin-right: 0.186rem;
   }
 
   .pay-success .status svg {
-    font-size: 10rem;
-    margin-bottom: 2rem;
+    font-size: 2.666rem;
+    margin-bottom: 0.533rem;
   }
 
   .desc {
-    margin: 5rem 0;
+    margin: 1.333rem 0;
     color: #4a4a4a;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .buttons button {
-    margin: 0 1.5rem;
-    padding: 0.8rem 3rem;
+    margin: 0 0.4rem;
+    padding: 0.213rem 0.8rem;
   }
 
 

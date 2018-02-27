@@ -154,7 +154,7 @@
   }
 
   .rating-text {
-    margin-top: 0.7rem;
-    margin-left: 0.7rem;
+    margin-top: 0.186rem;
+    margin-left: 0.186rem;
   }
 </style>

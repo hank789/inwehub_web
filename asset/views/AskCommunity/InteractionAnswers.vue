@@ -277,17 +277,17 @@
 
   .help {
 
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     background: #fff;
   }
 
   .help .title {
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 0.4rem 0.4rem 0.266rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -296,61 +296,61 @@
   }
 
   .buttonWrapper {
-    padding-top: 3.3rem;
+    padding-top: 0.88rem;
     background: #fff;
   }
 
   .buttonWrapper button {
     border-radius: 0;
     margin-bottom: 0;
-    padding: 1.3rem 0;
+    padding: 0.346rem 0;
   }
   /*标签样式*/
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  1.6rem 0.8rem 0.7rem;
+    padding: 0  0.426rem 0.213rem 0.186rem;
   }
   .question_tags p{
     float: left;
     background: #a8dff7;
     color:#FFFFFF;
-    padding: 0rem 0.8rem;
-    border-radius:5rem;
-    margin-top: 0.9rem;
-    margin-left: 0.9rem;
-    font-size:1.2rem;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
   /*返回问答社区*/
   .back{
     width:100%;
-    height:6.2rem;
+    height:1.653rem;
     text-align: center;
-    line-height: 6.2rem;
+    line-height: 1.653rem;
     background: url("../../statics/images/Community.png") no-repeat;
     background-size: cover;
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
   .back span:nth-of-type(1){
-    font-size:1.5rem;
+    font-size:0.4rem;
     color:#444444;
-    line-height: 6.2rem;
+    line-height: 1.653rem;
   }
   .back span:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:#808080;
-    line-height: 6.2rem;
+    line-height: 1.653rem;
   }
   .back svg:nth-of-type(1){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:#808080;
-    line-height: 6.2rem;
+    line-height: 1.653rem;
   }
   .back svg:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:#808080;
-    line-height: 6.2rem;
-    margin-left: -1rem;
+    line-height: 1.653rem;
+    margin-left: -0.266rem;
   }
 
 </style>

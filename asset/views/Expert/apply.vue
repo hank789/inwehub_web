@@ -234,25 +234,25 @@
 <style scoped>
   .professorCard {
     background: #f3f4f6;
-    height: 13.1rem;
+    height: 3.493rem;
   }
 
   .professorCard .header {
     position: relative;
-    height: 9.2rem;
+    height: 2.453rem;
   }
 
   .professorCard .header .avatar {
     position: absolute;
     left: 50%;
-    top: 1.1rem;
-    margin-left: -3.45rem;
+    top: 0.293rem;
+    margin-left: -0.92rem;
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 6.9rem;
-    width: 6.9rem;
-    font-size: 2rem;
+    height: 1.84rem;
+    width: 1.84rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -285,22 +285,22 @@
   .professorCard .header .icon {
     position: absolute;
     left: 50%;
-    margin-left: 1.1rem;
-    font-size: 2.7rem;
+    margin-left: 0.293rem;
+    font-size: 0.72rem;
     color: #808080;
-    top: 5.9rem;
+    top: 1.573rem;
     z-index: 9;
   }
 
   .professorCard .title {
-    padding: 0.3rem 0;
+    padding: 0.08rem 0;
     color: #808080;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     text-align: center;
   }
 
   .companyForm {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     margin-top: 0;
   }
 
@@ -309,9 +309,9 @@
   }
 
   .companyForm:after {
-    left: 1.6rem;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 1.6rem;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -330,7 +330,7 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     padding-right: 0;
   }
 
@@ -339,7 +339,7 @@
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 0.1rem 1.5rem;
+    padding: 0.026rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell.noBorder:after {
@@ -347,8 +347,8 @@
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 1.6rem;
-    right: 1.6rem;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
   }
@@ -356,19 +356,19 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 1rem;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 1rem 0;
+    padding: 0.266rem 0;
     float: right;
   }
 
   .companyForm .inputUnit {
-    padding: 1rem;
-    margin-right: 1.7rem;
+    padding: 0.266rem;
+    margin-right: 0.453rem;
   }
 
   .companyForm .textRight {
@@ -379,30 +379,30 @@
   .companyForm .inputOnlyText {
     width: 61% !important;
     text-align: right;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     float: right;
     border: 0;
-    padding: 1rem 0;
-    height: 4rem;
-    line-height: 2.1rem;
+    padding: 0.266rem 0;
+    height: 1.066rem;
+    line-height: 0.56rem;
     color: #c8c8c8;
   }
 
   .textarea-wrapper {
-    margin: 4.6rem 0 0;
-    height: 16.4rem;
+    margin: 1.226rem 0 0;
+    height: 4.373rem;
     position: relative;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #dcdcdc;
     background: #fff;
-    padding-bottom: 2rem;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 0.7rem;
-    font-size: 1.4rem;
-    bottom: 0.5rem;
+    right: 0.186rem;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
     color: #c8c8c8;
   }
 
@@ -415,8 +415,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 1.1rem 0 1.1rem 2.5rem;
-    margin-left: 1.8rem;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -425,14 +425,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 1.1rem;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
     left: 0rem;
     color: #c8c8c8;
-    font-size: 2rem;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -440,12 +440,12 @@
   }
 
   .river {
-    height: 1rem;
+    height: 0.266rem;
     background: #f3f4f6;
   }
 
   .formTitle {
-    padding: 1.1rem 1.6rem;
+    padding: 0.293rem 0.426rem;
     color: #444;
     background: #fff;
   }
@@ -457,21 +457,21 @@
   .titleBottomForm:before {
     display: block;
     background-color: #dcdcdc;
-    left: 1.5rem;
-    right: 1.5rem;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 
   .buttonWrapper {
-    padding: 0.6rem 1.6rem 3rem;
+    padding: 0.16rem 0.426rem 0.8rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    margin-top: 1rem;
-    border-radius: 0.5rem;
+    margin-top: 0.266rem;
+    border-radius: 0.133rem;
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
-    padding: 1rem 0;
+    border: 0.026rem solid #03aef9;
+    padding: 0.266rem 0;
   }
 
   .noBottomBorder:after {

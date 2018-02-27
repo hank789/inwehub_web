@@ -97,7 +97,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -106,19 +106,19 @@
   ul {
     width: 100%;
     overflow: hidden;
-    padding: 0rem 1.6rem;
+    padding: 0rem 0.426rem;
   }
 
   ul li {
     width: 100%;
-    height: 6.4rem;
+    height: 1.706rem;
     position: relative;
   }
 
   .avatar {
-    width: 4.4rem;
-    height: 4.4rem;
-    margin-top: 1rem;
+    width: 1.173rem;
+    height: 1.173rem;
+    margin-top: 0.266rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -132,35 +132,35 @@
 
   .avatar svg {
     position: absolute;
-    font-size: 2rem;
-    right: -0.5rem;
+    font-size: 0.533rem;
+    right: -0.133rem;
     bottom: 0rem;
   }
 
   .information {
     float: left;
-    margin-top: 1.1rem;
-    margin-left: 0.8rem;
+    margin-top: 0.293rem;
+    margin-left: 0.213rem;
   }
 
   .information p:nth-of-type(1) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #565656;
   }
 
   .information p:nth-of-type(2) {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
   .profit {
     float: right;
-    margin-top: 1.1rem;
-    margin-right: 1rem;
+    margin-top: 0.293rem;
+    margin-right: 0.266rem;
   }
 
   .profit p {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
   }
 

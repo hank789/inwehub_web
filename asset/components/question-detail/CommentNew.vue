@@ -177,7 +177,7 @@
 
 <style scoped="scoped">
   .buttonWrapper {
-    padding: 1.5rem;
+    padding: 0.4rem;
     background: #fff;
   }
 
@@ -188,66 +188,66 @@
   .form-realAnswer {
     position: relative;
     background: #fff;
-    padding: 2rem 0;
+    padding: 0.533rem 0;
     text-align: center;
   }
 
   .commentHeader .shutdown {
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    font-size: 1.2rem;
+    top: 0.133rem;
+    left: 0.133rem;
+    font-size: 0.32rem;
   }
 
   .form-realAnswer .star-rating {
     float: none;
     position: relative;
     left: 50%;
-    margin-top: 1rem;
-    margin-left: -11.5rem;
+    margin-top: 0.266rem;
+    margin-left: -3.066rem;
   }
 
   .starRating span {
-    margin: 0 0.5rem;
+    margin: 0 0.133rem;
   }
 
   .form-realAnswer .submit {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.32rem;
+    padding: 0.133rem 0.266rem;
   }
 
   .form-realAnswer textarea {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
     width: 100%;
-    height: 13.8rem;
+    height: 3.68rem;
     border: none;
-    padding: 1rem 1.5rem 0;
+    padding: 0.266rem 0.4rem 0;
   }
 
   .form-realAnswer .title {
-    margin-top: -1rem;
-    font-size: 1.2rem;
+    margin-top: -0.266rem;
+    font-size: 0.32rem;
     color: #ff9800;
-    height: 3.2rem;
+    height: 0.853rem;
   }
 
   .form-realAnswer .button-wrapper {
-    margin-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    margin-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
 
   .successWrapper {
     text-align: center;
-    padding: 2rem 0;
+    padding: 0.533rem 0;
   }
 
   .successWrapper .mui-icon {
-    font-size: 9rem;
+    font-size: 2.4rem;
     color: #19ac18;
   }
 
   .successWrapper .sTitle {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .mui-content > .mui-table-view:first-child {
@@ -256,8 +256,8 @@
 
   .commentHeader {
     background-color: #eee;
-    height: 4.1rem;
-    line-height: 4.1rem;
+    height: 1.093rem;
+    line-height: 1.093rem;
     text-align: center;
     position: relative;
   }
@@ -267,7 +267,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -275,7 +275,7 @@
   }
 
   .commentDesc {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #999;
   }
 

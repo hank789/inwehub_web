@@ -536,14 +536,14 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .bot {
     position: absolute;
-    right: 1.4rem;
+    right: 0.373rem;
     bottom: 0;
-    left: 1.4rem;
-    height: 0.1rem;
+    left: 0.373rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     /*background-color: rgb(220, 220, 220);*/
-    border: 0.1rem dashed #dcdcdc;
+    border: 0.026rem dashed #dcdcdc;
   }
 
   /***************清除自带样式*****************/
@@ -565,33 +565,33 @@
     background-color: #3c3e44;
     text-align: center;
     position: relative;
-    height: 7.8rem;
+    height: 2.08rem;
   }
 
   .erweimaWrapper {
     position: absolute;
-    left: 1.6rem;
+    left: 0.426rem;
     background: #444;
-    margin-top: 0.8rem;
+    margin-top: 0.213rem;
     width: 81%;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     z-index: 77;
     text-align: center;
-    padding-bottom: 1.8rem;
+    padding-bottom: 0.48rem;
     .header {
       position: relative;
-      height: 9.2rem;
+      height: 2.453rem;
       .avatar {
         position: absolute;
         left: 50%;
-        margin-top: 1.5rem;
-        margin-left: -3.45rem;
+        margin-top: 0.4rem;
+        margin-left: -0.92rem;
         z-index: 9;
         color: #ffffff;
         display: inline-block;
-        height: 6.9rem;
-        width: 6.9rem;
-        font-size: 2rem;
+        height: 1.84rem;
+        width: 1.84rem;
+        font-size: 0.533rem;
         text-align: center;
         border-radius: 50%;
         vertical-align: top;
@@ -620,62 +620,62 @@
       }
     }
     .realname {
-      margin-top: 2rem;
+      margin-top: 0.533rem;
       color: #fff;
-      font-size: 1.4rem;
+      font-size: 0.373rem;
       font-weight: bold;
       span {
         position: relative;
-        right: -0.3rem;
+        right: -0.08rem;
       }
       .icon {
         vertical-align: top;
-        font-size: 2rem;
+        font-size: 0.533rem;
         color: #3c95f9;
       }
     }
     .erweimaSplite {
-      margin-top: -3rem;
+      margin-top: -0.8rem;
       span {
         display: inline-block;
-        width: 6.2rem;
-        margin: 0 0.3rem;
-        border-bottom: 0.1rem solid #808080;
+        width: 1.653rem;
+        margin: 0 0.08rem;
+        border-bottom: 0.026rem solid #808080;
       }
       .icon {
         color: #252525;
-        font-size: 5rem;
+        font-size: 1.333rem;
         position: relative;
-        top: 1.7rem;
+        top: 0.453rem;
       }
     }
     .qRCode {
-      margin-top: 1rem;
+      margin-top: 0.266rem;
       position: relative;
       text-align: center;
-      height: 19rem;
+      height: 5.066rem;
       div {
         position: absolute;
         left: 50%;
-        margin-left: -9.5rem;
-        width: 19rem;
-        height: 19rem;
-        border-radius: 0.4rem;
+        margin-left: -2.533rem;
+        width: 5.066rem;
+        height: 5.066rem;
+        border-radius: 0.106rem;
         background: #fff;
-        padding: 1rem;
+        padding: 0.266rem;
         img {
-          width: 17rem;
-          height: 17rem;
-          margin-top: 1rem !important;
-          border-radius: 0.4rem;
+          width: 4.533rem;
+          height: 4.533rem;
+          margin-top: 0.266rem !important;
+          border-radius: 0.106rem;
         }
       }
     }
     .qRhelp {
-      margin-top: 0.8rem;
+      margin-top: 0.213rem;
       text-align: center;
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 0.346rem;
     }
   }
 
@@ -683,39 +683,39 @@
   .basic {
     background: #fff;
     .description {
-      font-size: 1.4rem;
+      font-size: 0.373rem;
       color: #808080;
-      padding: 1.1rem 1.4rem 1.3rem;
-      line-height: 2.4rem;
+      padding: 0.293rem 0.373rem 0.346rem;
+      line-height: 0.64rem;
       div {
         display: block;
-        font-size: 1.3rem;
+        font-size: 0.346rem;
         color: #444444;
-        line-height: 2.5rem;
+        line-height: 0.666rem;
       }
     }
   }
 
   .separate {
     display: inline-block;
-    height: 1rem;
-    margin: 0 0.8rem;
-    border-left: 0.1rem solid #c8c8c8;
+    height: 0.266rem;
+    margin: 0 0.213rem;
+    border-left: 0.026rem solid #c8c8c8;
   }
 
   .cardWrapper {
-    margin-top: -6.9rem;
-    padding: 0 1.6rem;
+    margin-top: -1.84rem;
+    padding: 0 0.426rem;
     width: 100%;
     .card {
-      border-radius: 0.4rem;
+      border-radius: 0.106rem;
       background: #ececee;
       width: 100%;
       position: relative;
-      padding-bottom: 1.5rem;
+      padding-bottom: 0.4rem;
       .erweima {
-        width: 5.5rem;
-        height: 5.1rem;
+        width: 1.466rem;
+        height: 1.36rem;
         img {
           width: 100%;
           height: 100%;
@@ -724,51 +724,51 @@
       /*关注*/
       .collect {
         position: absolute;
-        font-size: 1.4rem;
-        right: 5.5rem;
-        top: 1.4rem;
+        font-size: 0.373rem;
+        right: 1.466rem;
+        top: 0.373rem;
         color: #444444;
-        border: 0.1rem solid #b4b4b6;
-        border-radius: 5rem;
-        padding: 0.2rem 0.8rem;
+        border: 0.026rem solid #b4b4b6;
+        border-radius: 1.333rem;
+        padding: 0.053rem 0.213rem;
         &.active {
           color: #FFFFFF;
-          border: 0.1rem solid #03aef9;
+          border: 0.026rem solid #03aef9;
           background: #03aef9;
         }
       }
       /*名片*/
       .Card {
         position: absolute;
-        right: 5.5rem;
-        top: 5.4rem;
-        border: 0.1rem solid #b4b4b6;
-        border-radius: 5rem;
-        padding: 0.2rem 1.6rem;
+        right: 1.466rem;
+        top: 1.44rem;
+        border: 0.026rem solid #b4b4b6;
+        border-radius: 1.333rem;
+        padding: 0.053rem 0.426rem;
         color: #444444;
-        font-size: 1.4rem;
+        font-size: 0.373rem;
 
       }
       .share {
         position: absolute;
-        font-size: 2.4rem;
-        right: 1.9rem;
-        top: 1.4rem;
+        font-size: 0.64rem;
+        right: 0.506rem;
+        top: 0.373rem;
         color: #808080;
       }
       .header {
-        height: 9.2rem;
-        margin-top: -2rem;
+        height: 2.453rem;
+        margin-top: -0.533rem;
         .avatar {
           position: absolute;
           left: 50%;
-          margin-left: -4.6rem;
+          margin-left: -1.226rem;
           z-index: 9;
           color: #ffffff;
           display: inline-block;
-          height: 9.2rem;
-          width: 9.2rem;
-          font-size: 2rem;
+          height: 2.453rem;
+          width: 2.453rem;
+          font-size: 0.533rem;
           text-align: center;
           border-radius: 50%;
           vertical-align: top;
@@ -797,27 +797,27 @@
         }
       }
       .detail {
-        margin-top: 1rem;
+        margin-top: 0.266rem;
         text-align: center;
         .realname {
           font-weight: bold;
           span {
             position: relative;
-            right: -0.3rem;
+            right: -0.08rem;
           }
           .icon {
             vertical-align: bottom;
-            font-size: 2.2rem;
+            font-size: 0.586rem;
             color: #3c95f9;
           }
         }
         .counter {
           width: 91%;
           margin-left: 4.5%;
-          padding-top: 1.2rem;
-          margin-top: 1.2rem;
-          border-top: 0.1rem dashed #dcdcdc;
-          font-size: 1.3rem;
+          padding-top: 0.32rem;
+          margin-top: 0.32rem;
+          border-top: 0.026rem dashed #dcdcdc;
+          font-size: 0.346rem;
           color: #444444;
           b {
             color:rgb(250,73,117);
@@ -826,20 +826,20 @@
         }
         .item {
           color: #808080;
-          font-size: 1.3rem;
-          margin: 0.7rem 0.7rem 0.2rem 0.7rem;
+          font-size: 0.346rem;
+          margin: 0.186rem 0.186rem 0.053rem 0.186rem;
           .icon {
             color: #b4b4b6;
-            font-size: 1.6rem;
+            font-size: 0.426rem;
           }
           &.industry span {
-            border: 0.1rem solid #c8c8c8;
+            border: 0.026rem solid #c8c8c8;
             display: inline-block;
-            border-radius: 5rem;
+            border-radius: 1.333rem;
             color: #808080;
-            font-size: 1.2rem;
-            padding: 0 0.7rem;
-            margin: 0 0.2rem 0.8rem;
+            font-size: 0.32rem;
+            padding: 0 0.186rem;
+            margin: 0 0.053rem 0.213rem;
           }
         }
       }
@@ -848,25 +848,25 @@
 
   h5 {
     margin: 0;
-    padding: 1.1rem 0;
+    padding: 0.293rem 0;
     background: #f3f4f6;
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #313131;
     text-align: center;
   }
 
   .list {
     background: #fff;
-    padding: 0 1rem 0 3rem;
+    padding: 0 0.266rem 0 0.8rem;
     position: relative;
     &:before {
       position: absolute;
-      top: 2rem;
-      left: 2rem;
+      top: 0.533rem;
+      left: 0.533rem;
       content: '';
-      width: 0.1rem;
-      bottom: 1.2rem;
+      width: 0.026rem;
+      bottom: 0.32rem;
       background-color: #ececee;
     }
     .itemJobMore,
@@ -876,13 +876,13 @@
     }
     .item {
       position: relative;
-      padding: 1rem 0 1rem 0.5rem;
+      padding: 0.266rem 0 0.266rem 0.133rem;
       &:after {
         position: absolute;
         right: 0;
         bottom: 0;
         left: 0;
-        height: 0.1rem;
+        height: 0.026rem;
         content: '';
         -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
@@ -893,77 +893,77 @@
       }
       .others {
         color: #b4b4b6;
-        font-size: 1.3rem;
+        font-size: 0.346rem;
         .other {
           display: -webkit-box;
           overflow: hidden;
           .title {
-            margin-left: -0.8rem;
-            width: 8rem;
+            margin-left: -0.213rem;
+            width: 2.133rem;
           }
           .content {
-            padding-right: 7rem;
+            padding-right: 1.866rem;
           }
         }
       }
       .time {
         position: relative;
-        font-size: 1.4rem;
-        margin-top: 0.2rem;
+        font-size: 0.373rem;
+        margin-top: 0.053rem;
         color: #3c95f9;
       }
       .time:before {
         position: absolute;
-        left: -1.8rem;
-        top: 0.5rem;
+        left: -0.48rem;
+        top: 0.133rem;
         content: '';
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 0.213rem;
+        height: 0.213rem;
         background: #3c95f9;
-        border-radius: 0.4rem;
+        border-radius: 0.106rem;
       }
       .company {
-        font-size: 1.4rem;
+        font-size: 0.373rem;
         color: #444;
-        margin: 0.5rem 0;
+        margin: 0.133rem 0;
       }
       .description {
         color: #808080;
-        font-size: 1.3rem;
-        margin-top: 0.6rem;
-        line-height: 2.4rem;
+        font-size: 0.346rem;
+        margin-top: 0.16rem;
+        line-height: 0.64rem;
         -webkit-transition: all 3s;
-        margin-bottom: 3rem;
+        margin-bottom: 0.8rem;
         height: auto;
         white-space: pre-wrap;
         &.hide {
-          height: 6.9rem;
+          height: 1.84rem;
         }
       }
       .toggle {
         position: absolute;
         right: 0;
-        bottom: 1rem;
-        font-size: 1.3rem;
-        margin-right: 0.5rem;
+        bottom: 0.266rem;
+        font-size: 0.346rem;
+        margin-right: 0.133rem;
         color: #3c95f9;
         &.show:before {
           border: none;
-          border-left: 0.6rem solid transparent;
-          border-right: 0.6rem solid transparent;
-          border-top: 1rem solid #d8d8d8;
+          border-left: 0.16rem solid transparent;
+          border-right: 0.16rem solid transparent;
+          border-top: 0.266rem solid #d8d8d8;
         }
         &:before {
           position: absolute;
-          left: -1.9rem;
-          top: 0.5rem;
+          left: -0.506rem;
+          top: 0.133rem;
           width: 0;
           height: 0;
           content: '';
           border: none;
-          border-left: 0.6rem solid transparent;
-          border-right: 0.6rem solid transparent;
-          border-bottom: 1rem solid #d8d8d8;
+          border-left: 0.16rem solid transparent;
+          border-right: 0.16rem solid transparent;
+          border-bottom: 0.266rem solid #d8d8d8;
         }
       }
     }
@@ -971,26 +971,26 @@
 
   button {
     border-radius: 0;
-    padding: 1.2rem 0;
-    height: 4.8rem;
+    padding: 0.32rem 0;
+    height: 1.28rem;
     margin: 0;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
   }
 
   .shareWrapper {
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 1.4rem;
-      padding: 1.2rem 0;
+      font-size: 0.373rem;
+      padding: 0.32rem 0;
     }
     .more {
       background: #fff;
-      padding: 1rem;
+      padding: 0.266rem;
       .single {
-        width: 5.5rem;
-        height: 5.5rem;
-        margin: 0 1rem;
+        width: 1.466rem;
+        height: 1.466rem;
+        margin: 0 0.266rem;
         display: inline-block;
         img {
           width: 100%;
@@ -1001,15 +1001,15 @@
   }
 
   .noPublic {
-    margin: 2rem 0 0;
+    margin: 0.533rem 0 0;
     background: #fff;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    padding-bottom: 3rem;
-    padding-top: 2rem;
+    padding-bottom: 0.8rem;
+    padding-top: 0.533rem;
     .icon {
-      font-size: 5rem;
+      font-size: 1.333rem;
       color: #f3f4f6;
     }
   }
@@ -1021,14 +1021,14 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 1.5rem;
-      top: 1rem;
-      font-size: 7rem;
+      right: 0.4rem;
+      top: 0.266rem;
+      font-size: 1.866rem;
     }
   }
 
   .vueWrapper {
-    padding-bottom: 4.8rem;
+    padding-bottom: 1.28rem;
   }
 
   .bottomButton {
@@ -1040,48 +1040,48 @@
 
   .seeMoreWrapper {
     background: #fff;
-    padding-bottom: 3rem;
-    margin-top: -0.2rem;
+    padding-bottom: 0.8rem;
+    margin-top: -0.053rem;
     z-index: 5;
     position: relative;
     .seeMore {
-      font-size: 1.4rem;
+      font-size: 0.373rem;
       color: #3c95f9;
       text-align: center;
-      padding: 0.9rem 0 0.8rem;
+      padding: 0.24rem 0 0.213rem;
       background: #fff;
-      border: 0.1rem solid #dcdcdc;
-      border-radius: 0.4rem;
-      margin: 0 2rem;
+      border: 0.026rem solid #dcdcdc;
+      border-radius: 0.106rem;
+      margin: 0 0.533rem;
     }
   }
 
   /***********评论和回复************/
 
   .news {
-    padding: 1.2rem 1.4rem;
+    padding: 0.32rem 0.373rem;
     overflow: hidden;
     position: relative;
   }
 
   .news div {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.213rem;
   }
 
   .news a {
     display: inline-block;
     float: left;
-    width: 0.1rem;
-    height: 1.1rem;
-    border-right: 0.1rem solid #c8c8c8;
-    margin: 0.5rem 2.2rem 0 2.2rem;
+    width: 0.026rem;
+    height: 0.293rem;
+    border-right: 0.026rem solid #c8c8c8;
+    margin: 0.133rem 0.586rem 0 0.586rem;
   }
 
   .news p {
     float: left;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
     text-align: center;
   }
@@ -1091,7 +1091,7 @@
   }
 
   .news p span {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     font-weight: 500;
   }
@@ -1105,17 +1105,17 @@
   }*/
 
   .resumeWrapper {
-    bottom: 4.8rem;
+    bottom: 1.28rem;
   }
 
   /*动态*/
   .dynamic {
     overflow: hidden;
-    padding: 1.2rem 1.4rem;
+    padding: 0.32rem 0.373rem;
     position: relative;
     p {
       float: left;
-      font-size: 1.4rem;
+      font-size: 0.373rem;
       color: #808080;
       i{
         font-weight: 500;
@@ -1124,19 +1124,19 @@
     }
     svg {
       float: right;
-      font-size: 1.5rem;
+      font-size: 0.4rem;
       color: #808080;
     }
   }
    /*Ta的专栏*/
   .specialColumn{
     overflow: hidden;
-    padding: 1.2rem 1.4rem;
+    padding: 0.32rem 0.373rem;
     position: relative;
   }
   .specialColumn p {
     float: left;
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #b4b4b6;
 
   }
@@ -1145,26 +1145,26 @@
   }
   .specialColumn p i{
     display: inline-block;
-    width:0.1rem;
-    height:1rem;
+    width:0.026rem;
+    height:0.266rem;
     background:#c8c8c8;
-    margin:0  0.5rem -0.1rem 0.5rem;
+    margin:0  0.133rem -0.026rem 0.133rem;
 
   }
   .specialColumn svg{
     float: right;
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #808080;
   }
   .specialColumn p:nth-of-type(1){
-     font-size:1.4rem;
+     font-size:0.373rem;
      color: #808080;
-     margin-right: 0.5rem;
+     margin-right: 0.133rem;
   }
 
   /*擅长*/
   .skilled {
-    padding: 1.2rem 1.4rem 1.7rem 1.4rem;
+    padding: 0.32rem 0.373rem 0.453rem 0.373rem;
     overflow: hidden;
     position: relative;
 
@@ -1173,12 +1173,12 @@
   .skilled span {
     float: left;
     background: #ececee;
-    border-radius: 5rem;
-    padding: 0.4rem 1.1rem;
-    font-size: 1.2rem;
+    border-radius: 1.333rem;
+    padding: 0.106rem 0.293rem;
+    font-size: 0.32rem;
     color: #444444;
-    margin-left:0.8rem;
-    margin-bottom: 0.6rem;
+    margin-left:0.213rem;
+    margin-bottom: 0.16rem;
   }
 
   /*.skilled span:nth-of-type(1) {*/
@@ -1186,15 +1186,15 @@
   /*}*/
 
   .skilled p {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.32rem;
   }
   /*向他咨询*/
   .btn{
-    border-top:0.1rem solid #dcdcdc;
+    border-top:0.026rem solid #dcdcdc;
     width:100%;
-    height:4.9rem;
+    height:1.306rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1209,25 +1209,25 @@
   .btn P:nth-of-type(1){
     width:32%;
     background:#f3f4f6;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
 
   }
   .btn P:nth-of-type(1) svg{
-    font-size: 1.7rem;
+    font-size: 0.453rem;
     color: #808080;
-    margin-right: 0.4rem;
-    margin-top: -0.2rem;
+    margin-right: 0.106rem;
+    margin-top: -0.053rem;
   }
   .btn P:nth-of-type(2){
     width:68%;
     background:#03aef9;
-    font-size:1.7rem;
+    font-size:0.453rem;
     color: #ffffff;
   }
   .grey{
     width:100%;
-    height:1rem;
+    height:0.266rem;
     background: #F3F4F5;
   }
 </style>

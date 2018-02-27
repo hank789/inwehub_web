@@ -101,7 +101,7 @@
       right: 0;
       bottom: 0;
       left: 0rem;
-      height: 0.1rem;
+      height: 0.026rem;
       -webkit-transform: scaleY(.5);
       transform: scaleY(.5);
       background-color: rgb(220, 220, 220);
@@ -109,18 +109,18 @@
    /*列表的头部*/
     .invitation-title{
       width:100%;
-      height: 4.4rem;
+      height: 1.173rem;
       background: #FFFFFF;
       position: relative;
-      line-height: 4.4rem;
+      line-height: 1.173rem;
     }
     .invitation-title span:nth-of-type(1){
-      font-size: 1.6rem;
+      font-size: 0.426rem;
       float: left;
       color: #444444;
     }
     .invitation-title span:nth-of-type(2){
-      font-size: 1.4rem;
+      font-size: 0.373rem;
       float: right;
       color: #03aef9;
     }
@@ -129,36 +129,36 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    padding-left: 1.7rem;
-    padding-right: 1.7rem;
+    padding-left: 0.453rem;
+    padding-right: 0.453rem;
     background: #FFFFFF;
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
 
   .my-focus-item {
     width: 100%;
-    height: 6.3rem;
+    height: 1.68rem;
     list-style: none;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.266rem;
+    padding-bottom: 0.266rem;
     position: relative;
   }
   .my-focus-item div.avatar {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     float: left;
-    margin-right: 0.8rem;
+    margin-right: 0.213rem;
     position: relative;
   }
   .my-focus-item img {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
 
   }
   .my-focus-item svg {
     color: #fcc816;
-    font-size:1.5rem;
+    font-size:0.4rem;
     position: absolute;
     right:0;
     bottom: 0;
@@ -173,15 +173,15 @@
 
   .my-focus-item .follows {
     position: absolute;
-    width: 6.2rem;
-    height: 2.7rem;
-    border: 0.1rem solid #03aef9;
-    border-radius: 5rem;
+    width: 1.653rem;
+    height: 0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 2.7rem;
+    line-height: 0.72rem;
     right: 0;
-    top: 1.8rem;
-    font-size: 1.4rem;
+    top: 0.48rem;
+    font-size: 0.373rem;
     color: #03aef9;
   }
 
@@ -192,25 +192,25 @@
 
   .my-focus-item div p:nth-of-type(1) span {
     display: inline-block;
-    max-width: 12.6rem;
-    height: 2rem;
+    max-width: 3.36rem;
+    height: 0.533rem;
     overflow: hidden;
     font-family: "PingFangSC";
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 2rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.533rem;
+    margin-bottom: 0.053rem;
     color: #3c95f9;
   }
 
   .my-focus-item div p:nth-of-type(2){
     width: 100%;
-    height: 1.4rem;
-    font-size: 1.3rem;
+    height: 0.373rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 1.3rem;
+    line-height: 0.346rem;
   }
 </style>

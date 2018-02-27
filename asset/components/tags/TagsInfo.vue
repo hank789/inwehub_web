@@ -130,7 +130,7 @@
   }
   .tag-title{
     width:100%;
-    height:13.3rem;
+    height:3.546rem;
     background: #f3f4f6;
     padding: 2.1rem 4% 1.4rem 4%;
     /*padding: 0 4%;*/
@@ -139,22 +139,22 @@
     align-items: center;
   }
   .tag-l{
-    width:9.2rem;
-    height:9.2rem;
+    width:2.453rem;
+    height:2.453rem;
   }
   .tag-l img{
     width: 100%;
     height:100%;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
   .tag-l.bg-grey{
     background: #ececee;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     position: relative;
   }
   .tag-l.bg-grey svg{
     color: #c8c8c8;
-    font-size: 5rem;
+    font-size: 1.333rem;
     position: absolute;
     left:0;
     right:0;
@@ -164,23 +164,23 @@
   }
 
   .tag-r{
-    height:9.2rem;
-    margin-left: 1rem;
+    height:2.453rem;
+    margin-left: 0.266rem;
   }
   .tag-r p:nth-of-type(1){
-    font-size:1.8rem;
+    font-size:0.48rem;
     color: #444444;
     font-weight:500;
   }
   .tag-r p:nth-of-type(1) span:nth-of-type(2){
     float: right;
-    width:6.2rem;
-    height:2.7rem;
+    width:1.653rem;
+    height:0.72rem;
     background: #a8dff7;
     text-align: center;
-    line-height: 2.6rem;
-    border-radius: 0.4rem;
-    font-size:1.4rem;
+    line-height: 0.693rem;
+    border-radius: 0.106rem;
+    font-size:0.373rem;
     color: #235280;
   }
   .tag-r p:nth-of-type(1) span:nth-of-type(2).grey{
@@ -188,7 +188,7 @@
     background: #dcdcdc;
   }
   .tag-r p:nth-of-type(2){
-    margin-top: 1.1rem;
+    margin-top: 0.293rem;
   }
   /*关注成员*/
   .tag-focus{

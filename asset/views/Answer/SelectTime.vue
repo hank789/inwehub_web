@@ -184,6 +184,6 @@
 <style scoped>
 
   .wait-answer .title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.4rem;
   }
 </style>
