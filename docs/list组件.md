@@ -78,7 +78,9 @@
           type: Boolean, 默认false
           false时传top_id, bottom_it给接口
           true时传page给接口
-
+      . this.$refs.RefreshList.getResponse()
+          :prevSuccessCallback="prevSuccessCallback
+          获取全部数据
 
 
 

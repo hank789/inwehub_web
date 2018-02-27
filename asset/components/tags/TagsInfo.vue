@@ -18,7 +18,7 @@
         <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
       </div>
     </div>
-    <div class="tag-focus">
+    <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + tagDetail.name)">
       <div class="tag-people">
         <p class="number"><span>12</span>  /关注</p>
         <div class="tag-avatar">
@@ -193,43 +193,43 @@
   /*关注成员*/
   .tag-focus{
     width:100%;
-    height:6.4rem;
+    height: 64px;
     background: #f3f4f6;
   }
   .tag-people{
     width:92%;
     height: 100%;
     margin-left: 4%;
-    border-top:0.1rem solid #dcdcdc;
+    border-top:1px solid #dcdcdc;
   }
   .tag-people .number{
     float: left;
-    margin-top: 1.8rem;
-    font-size: 1.1rem;
+    margin-top: 18px;
+    font-size: 11px;
     color: #b4b4b6;
   }
   .tag-people .number span{
-    font-size: 2.3rem;
+    font-size: 23px;
     color: #444444;
     font-weight: bold;
     letter-spacing: 0;
   }
   .tag-avatar{
     width:70%;
-    height: 3.2rem;
-    margin-top: 1.5rem;
+    height: 32px;
+    margin-top: 15px;
     /*background: #ffffff;*/
     float: right;
-    border-left: 0.1rem solid #dcdcdc;
-    padding:0 0.4rem 0 1.5rem;
+    border-left: 1px solid #dcdcdc;
+    padding:0 4px 0 15px;
     overflow: hidden;
     position: relative;
   }
   .tag-avatar  img{
-    width:3.2rem;
-    height:3.2rem;
+    width:32px;
+    height:32px;
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: 5px;
 
   }
   .tag-avatar  svg{
