@@ -15,7 +15,7 @@
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
