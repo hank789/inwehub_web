@@ -155,6 +155,7 @@
   import { saveLocationInfo } from '../utils/allPlatform'
 
   import commentTextarea from '../components/comment/Textarea.vue'
+  import { AppInit } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
@@ -205,12 +206,15 @@
       }
     },
     mounted () {
+      console.oldLog(this)
       // 新手任务
       userAbility.newbieTask(this)
       // 每日签到
       userAbility.signIGift(this)
       autoTextArea()
       saveLocationInfo()
+
+      AppInit(this)
     },
     computed: {
       prevOtherData () {
