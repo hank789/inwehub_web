@@ -119,7 +119,7 @@ function openReadhubPage (url) {
   })
   window.mui.fire(webview, 'go_to_target_page', {url: url})
   setTimeout(() => {
-    webview.show()
+    webview.show('slide-in-right', 300)
   }, 100)
 }
 
@@ -171,7 +171,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     if (plusWaiting) {
       plusWaiting.close()
     }
-    webview.show()
+    webview.show('slide-in-right', 300)
   }
   currentWebview.append(webview)
 
@@ -283,7 +283,7 @@ function showWebview () {
       if (self.custom_preload === false || self.custom_preload === undefined) {
         // 关闭等待框
         window.plus.nativeUI.closeWaiting()
-        self.show()
+        self.show('slide-in-right', 300)
       }
       if (window.mui.os.ios) {
         console.log('bind event popGesture')
