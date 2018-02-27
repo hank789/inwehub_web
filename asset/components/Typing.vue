@@ -89,7 +89,7 @@
   }
 
   .typing {
-    margin-top: -2.6rem;
+    margin-top: -0.693rem;
     color: #717577;
   }
 
@@ -104,7 +104,7 @@
   }
 
   .dots {
-    font-size: 3rem;
+    font-size: 0.8rem;
   }
 
   .typing span {
@@ -123,6 +123,6 @@
   }
 
   .typing .text {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
 </style>

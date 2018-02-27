@@ -76,16 +76,16 @@
 
 <style scoped>
   .component-follow .icon {
-    margin-left: -1.1rem !important;
-    margin-top: -1rem !important;
-    font-size: 2.1rem !important;
+    margin-left: -0.293rem !important;
+    margin-top: -0.266rem !important;
+    font-size: 0.56rem !important;
     z-index: 9 !important;
     color: #dcdcdc !important;
     background-color: #fff;
   }
 
   .middle-width {
-    width: 11.3rem;
+    width: 3.013rem;
   }
 
   .left{
@@ -97,26 +97,26 @@
   }
 
   .left .avatar{
-    width:4.4rem;
-    height:4.4rem;
+    width:1.173rem;
+    height:1.173rem;
   }
 
   .right .avatar{
-    width:4.4rem;
-    height:4.4rem;
+    width:1.173rem;
+    height:1.173rem;
   }
 
   .container-avatarAndText{
-    height:4.4rem;
-    line-height: 4.4rem;
+    height:1.173rem;
+    line-height: 1.173rem;
     margin-bottom:0 !important;
   }
 
   .middle-width{
-    height:4.4rem;
+    height:1.173rem;
   }
 
   .middle-width .component-follow{
-    height:4.4rem;
+    height:1.173rem;
   }
 </style>

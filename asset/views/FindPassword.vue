@@ -357,8 +357,8 @@
 
   .logo {
 
-    font-size: 11rem;
-    margin: 11rem 0 7.5rem;
+    font-size: 2.933rem;
+    margin: 2.933rem 0 2rem;
 
   }
 
@@ -366,24 +366,24 @@
   .leftNav {
 
     position: absolute;
-    left: 1.2rem;
-    top: 1.5rem;
-    font-size: 2rem;
+    left: 0.32rem;
+    top: 0.4rem;
+    font-size: 0.533rem;
     color: #808080;
   }
 
   /*输入框的内容*/
   .inputWrapper .icon {
     position: absolute;
-    top: 0.5rem;
-    font-size: 2.2rem;
+    top: 0.133rem;
+    font-size: 0.586rem;
     color: #c8c8c8;
     left: 0;
 
   }
 
   .inputWrapper {
-    margin: 0 3.3rem 2.2rem;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -403,27 +403,27 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444;
     position: absolute;
-    right: 0.2rem;
-    top: 0.45rem;
-    border: 0.1rem solid #dcdcdc;
-    border-radius: 0.5rem;
-    padding: 0.3rem 1.4rem;
+    right: 0.053rem;
+    top: 0.12rem;
+    border: 0.026rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    padding: 0.08rem 0.373rem;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 0.1rem solid #3c95f9;
+    border: 0.026rem solid #3c95f9;
     color: #3c95f9;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 0.3rem;
+    bottom: 0.08rem;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -434,12 +434,12 @@
     color: #444;
     border: none;
     margin: 0;
-    /*padding: 0 0 0 3.6rem;*/
-    font-size: 1.4rem;
+    /*padding: 0 0 0 0.96rem;*/
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
-    height: 3.6rem;
-    margin-left: 1.5rem;
+    height: 0.96rem;
+    margin-left: 0.4rem;
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -460,19 +460,19 @@
 
   /*登录*/
   .button, .mui-btn {
-    border-radius: 0.5rem;
+    border-radius: 0.133rem;
     color: #f2f2f2;
     width: 80%;
     margin-left: 10%;
-    margin-top: 3rem;
+    margin-top: 0.8rem;
     background: #3C95F9;
   }
 
   /*2 3图标大小的微调*/
   .inputWrapper:nth-of-type(2) .icon {
     position: absolute;
-    top: 0.5rem;
-    font-size: 2.5rem;
+    top: 0.133rem;
+    font-size: 0.666rem;
     /*color: #c8c8c8;*/
 
     left: 0;
@@ -480,8 +480,8 @@
 
   .inputWrapper:nth-of-type(3) .icon {
     position: absolute;
-    top: 0.5rem;
-    font-size: 2.1rem;
+    top: 0.133rem;
+    font-size: 0.56rem;
     /*color: #c8c8c8;*/
     left: 0;
   }
@@ -491,11 +491,11 @@
     color: #444;
     border: none;
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
-    height: 3.6rem;
-    margin-left: 1.2rem;
+    height: 0.96rem;
+    margin-left: 0.32rem;
     /*background: #ccc; */
     width: 60%;
     margin-right: 40%;
@@ -504,9 +504,9 @@
   .half:after {
     position: absolute;
     right: 36%;
-    bottom: 0.3rem;
+    bottom: 0.08rem;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);

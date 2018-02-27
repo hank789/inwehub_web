@@ -229,7 +229,7 @@
 
 <style scoped="scoped">
   .detail-answer {
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
   }
 
   .detail-answer:before {
@@ -239,8 +239,8 @@
   .detail-answer .time {
     width:100%;
     overflow: hidden;
-    font-size: 1.2rem;
-    margin-top: 1.3rem;
+    font-size: 0.32rem;
+    margin-top: 0.346rem;
     color: #b4b4b6;
   }
   .detail-answer .average_rate{
@@ -257,12 +257,12 @@
   .needMoneyWrapper .desc {
     color: #b4b4b6;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
   .mui-table-view-cell {
     position: relative;
     overflow: hidden;
-    padding: 1.1rem 1.5rem 0 1.5rem;
+    padding: 0.293rem 0.4rem 0 0.4rem;
     -webkit-touch-callout: none;
   }
 

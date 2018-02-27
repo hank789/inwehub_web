@@ -230,7 +230,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -240,7 +240,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -252,21 +252,21 @@
   /*搜索框*/
   .searchContainer{
     width:100%;
-    height:5.4rem;
+    height:1.44rem;
     background:#f3f4f6;
-    padding-top: 1rem;
+    padding-top: 0.266rem;
   }
   .searchContainer p{
     width:92%;
-    height:3.4rem;
+    height:0.906rem;
     background: #FFFFFF;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     margin-left: 4%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items:center;
-    padding:0 1.2rem;
+    padding:0 0.32rem;
   }
   .searchContainer input{
     width:85%;
@@ -275,18 +275,18 @@
     border:none;
     padding: 0;
     padding-left: 0;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#444444;
     float: left;
-    margin-left: 1rem;
+    margin-left: 0.266rem;
   }
   .searchContainer p svg{
     color:#c8c8c8;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
   }
   .searchContainer span{
-    width:1.8rem;
-    height:1.8rem;
+    width:0.48rem;
+    height:0.48rem;
     background: #c8c8c8;
     border-radius: 50%;
     position: relative;
@@ -304,26 +304,26 @@
   /*申请添加*/
 /*.apply{*/
   /*width:100%;*/
-  /*height:4.5rem;*/
+  /*height:1.2rem;*/
   /*padding: 0 4%;*/
-  /*line-height: 4.5rem;*/
+  /*line-height: 1.2rem;*/
   /*}*/
   /*.apply p:nth-of-type(1){*/
     /*float: left;*/
-    /*font-size:1.4rem;*/
+    /*font-size:0.373rem;*/
     /*color:#03aef9;*/
   /*}*/
   /*.apply p:nth-of-type(2){*/
     /*float: right;*/
-    /*width:8.6rem;*/
-    /*height:2.7rem;*/
-    /*border-radius: 5rem;*/
-    /*border:0.1rem solid #03aef9;*/
-    /*font-size:1.4rem;*/
+    /*width:2.293rem;*/
+    /*height:0.72rem;*/
+    /*border-radius: 1.333rem;*/
+    /*border:0.026rem solid #03aef9;*/
+    /*font-size:0.373rem;*/
     /*color:#03aef9;*/
     /*text-align: center;*/
-    /*line-height: 2.5rem;*/
-    /*margin-top: 0.9rem;*/
+    /*line-height: 0.666rem;*/
+    /*margin-top: 0.24rem;*/
   /*}*/
   ul{
     width:100%;
@@ -332,7 +332,7 @@
   }
   ul li{
     width:100%;
-    height:8.9rem;
+    height:2.373rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -341,23 +341,23 @@
     position: relative;
   }
   ul li .container-image{
-    width:4.2rem;
-    height:4.2rem;
+    width:1.12rem;
+    height:1.12rem;
   }
   .container-info{
     width: 85%;
     height:100%;
-    margin-left: 1rem;
+    margin-left: 0.266rem;
   }
   .container-info p:nth-of-type(1){
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
-    margin-top: 1.3rem;
+    margin-top: 0.346rem;
   }
   .container-info p:nth-of-type(2){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #808080;
-    margin:0.1rem 0;
+    margin:0.026rem 0;
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -369,16 +369,16 @@
   }
   .container-info p:nth-of-type(2) span i{
     display: inline-block;
-    width:0.1rem;
-    height:1.3rem;
+    width:0.026rem;
+    height:0.346rem;
     background:#dcdcdc;
-    margin: 0 0.5rem;
+    margin: 0 0.133rem;
   }
   .container-info p:nth-of-type(2) span:nth-last-child(1) i{
     display: none;
   }
   .container-info p:nth-of-type(3){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #808080;
     display: flex;
     flex-direction: row;
@@ -387,25 +387,25 @@
 
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
   .listWrapper{
-    top:9.9rem;
+    top:2.64rem;
   }
  /*导航栏*/
   .menu{
     width: 100%;
-    height:5rem;
+    height:1.333rem;
     background:#3c3e44;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:21rem;
-    height:3.4rem;
-    border:0.1rem solid #808080;
-    border-radius: 5rem;
+    width:5.6rem;
+    height:0.906rem;
+    border:0.026rem solid #808080;
+    border-radius: 1.333rem;
     position: absolute;
     left: 0;
     right:0;
@@ -414,20 +414,20 @@
   .menu .switch p{
     width:50%;
     height:100%;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #fefefe;
     float: left;
     text-align: center;
-    line-height: 3.4rem;
+    line-height: 0.906rem;
   }
   .menu .switch p:nth-of-type(2){
     background:#808080;
-    border-radius: 0 5rem 5rem 0;
+    border-radius: 0 1.333rem 1.333rem 0;
   }
   .menu svg{
     position: absolute;
     right:3%;
-    font-size: 2.5rem;
+    font-size: 0.666rem;
     color: #fefefe;
   }
 </style>

@@ -239,30 +239,30 @@
 
 <style scoped>
   .list-answer {
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
   }
 
   .list-answer .list-answer-item {
     position: relative;
-    line-height: 4rem;
+    line-height: 1.066rem;
   }
 
   .list-answer .list-answer-item .title {
-    line-height: 2.8rem;
+    line-height: 0.746rem;
   }
 
   .list-answer .list-answer-item .mui-media-body {
-    padding-left: 1rem;
-    line-height: 2.1rem;
-    font-size: 1.2rem;
+    padding-left: 0.266rem;
+    line-height: 0.56rem;
+    font-size: 0.32rem;
     color: #9B9B9B;
   }
 
   .list-answer .list-answer-item .time {
     color: #9B9B9B;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     float: right;
-    margin-right: 1rem;
+    margin-right: 0.266rem;
   }
 
   .list-answer .username {
@@ -271,9 +271,9 @@
 
   .list-answer .list-answer-item .amount {
     position: absolute;
-    right: 1rem;
+    right: 0.266rem;
     color: #ff9800;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   .list-answer .list-answer-item .amount b {
@@ -282,22 +282,22 @@
   }
 
   .list-answer .person {
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
 
   .list-answer .site-desc {
-    padding-left: 1rem;
-    line-height: 2.2rem;
+    padding-left: 0.266rem;
+    line-height: 0.586rem;
     color: #101010;
   }
 
   .list-answer .site-descSub {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #4A4A4A;
   }
 
   .list-answer .site-desc .mui-icon {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   .list-answer .avatar {
@@ -306,9 +306,9 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 5rem;
-    width: 5rem;
-    font-size: 2rem;
+    height: 1.333rem;
+    width: 1.333rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -338,15 +338,15 @@
   }
 
   .list-answer .mui-table-view-cell {
-    padding: 1.1rem 0.8rem;
+    padding: 0.293rem 0.213rem;
   }
 
   .list-answer .mui-table-view-cell > a:not(.mui-btn) {
-    margin: -1.1rem -0.8rem;
+    margin: -0.293rem -0.213rem;
   }
 
   .list-answer p {
-    margin-left: 2rem;
+    margin-left: 0.533rem;
   }
 
   .list-answer .person {
@@ -363,8 +363,8 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 5rem;
-    font-size: 1.4rem;
+    line-height: 1.333rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -375,11 +375,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 2.8rem;
+    width: 0.746rem;
     bottom: 0;
     left: 50%;
-    margin-left: -1.4rem;
-    height: 0.2rem;
+    margin-left: -0.373rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -399,16 +399,16 @@
 
   .mui-table-view:after {
     border: none;
-    left: 1.8rem;
-    right: 1.8rem;
+    left: 0.48rem;
+    right: 0.48rem;
   }
 
   .label {
     display: inline-block;
     background: #fcc816;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     color: #fff;
-    padding: 0 0.9rem;
+    padding: 0 0.24rem;
   }
 
   .emptyListWrapper {

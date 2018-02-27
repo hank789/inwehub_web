@@ -165,16 +165,16 @@
     right:  0;
     bottom: 0;
     left:  0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
   .title {
     color: #aba9ab;
-    height: 4rem;
-    line-height: 4rem;
-    padding-left: 1.5rem;
+    height: 1.066rem;
+    line-height: 1.066rem;
+    padding-left: 0.4rem;
     position: relative;
   }
 
@@ -182,7 +182,7 @@
   }
 
   .feedback textarea {
-    height: 20rem;
+    height: 5.333rem;
     background: red;
   }
 
@@ -191,22 +191,22 @@
     width: 100%;
     margin:0;
     background: #f3f4f6;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #cccccc;
-    padding-bottom: 2rem;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #cccccc;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper textarea {
     padding-bottom: 0;
     margin-bottom: 0;
-    border:0.1rem solid #cccccc;
+    border:0.026rem solid #cccccc;
 
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 1rem;
-    bottom: 0.2rem;
+    right: 0.266rem;
+    bottom: 0.053rem;
     color: #999;
   }
 
@@ -218,29 +218,29 @@
 /* 提交*/
  button{
     width:92%;
-    border-radius:0.5rem;
+    border-radius:0.133rem;
     margin:auto;
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
   /*合作类型*/
   .cooperation_type{
     width:100%;
-    padding: 0.5rem 1.5rem 1rem 0rem;
+    padding: 0.133rem 0.4rem 0.266rem 0rem;
     overflow: hidden;
   }
   .cooperation_type li{
-    width:8.6rem;
-    height:3.4rem;
-    padding: 1rem 1.1rem;
+    width:2.293rem;
+    height:0.906rem;
+    padding: 0.266rem 0.293rem;
     background: #ececee;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     float: left;
     text-align: center;
     color: #808080;
-    font-size:1.4rem;
-    margin-left: 1.5rem;
-    margin-top: 1rem;
-    line-height: 1.4rem;
+    font-size:0.373rem;
+    margin-left: 0.4rem;
+    margin-top: 0.266rem;
+    line-height: 0.373rem;
   }
   /* 点击的颜色*/
   .cooperation_type .presentActive{

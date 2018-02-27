@@ -200,7 +200,7 @@
     right:  0;
     bottom: 0;
     left:  0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -210,7 +210,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -221,16 +221,16 @@
   overflow: hidden;
   background:#ececee;
   position: relative;
-  padding-bottom: 2.4rem;
+  padding-bottom: 0.64rem;
 }
 .gray{
   width:100%;
-  height:1.4rem;
+  height:0.373rem;
   background:#3c3e44;
 }
 .companyDetail .company_image{
-  width:9.2rem;
-  height:9.2rem;
+  width:2.453rem;
+  height:2.453rem;
   position: absolute;
   left:0;
   right:0;
@@ -240,31 +240,31 @@
 .companyDetail .company_image img{
   width:100%;
   height:100%;
-  border-radius: 0.4rem;
+  border-radius: 0.106rem;
 }
 .information{
   width:100%;
   overflow: hidden;
-  padding-top: 1.3rem;
+  padding-top: 0.346rem;
 }
 .information li:nth-of-type(1){
   text-align: right;
-  font-size:1.2rem;
+  font-size:0.32rem;
   color:#808080;
-  margin-right: 1.5rem;
+  margin-right: 0.4rem;
 }
 .information li:nth-of-type(2){
   text-align: center;
-  font-size:1.6rem;
+  font-size:0.426rem;
   color:#444444;
-  margin-top:6.1rem;
+  margin-top:1.626rem;
 }
 .information li:nth-of-type(3){
   text-align: center;
-  font-size:1.4rem;
+  font-size:0.373rem;
   color:#808080;
-  margin-top:0.8rem;
-  padding: 0 1.5rem;
+  margin-top:0.213rem;
+  padding: 0 0.4rem;
   display: flex;
   flex-direction: row;
   align-items:center;
@@ -272,7 +272,7 @@
   flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span {
-  height:2.1rem;
+  height:0.56rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -280,19 +280,19 @@
 }
 .information li:nth-of-type(3) span i{
   display: inline-block;
-  width:0.1rem;
-  height:1.3rem;
+  width:0.026rem;
+  height:0.346rem;
   background: #dcdcdc;
-  margin: 0 0.6rem;
+  margin: 0 0.16rem;
 }
   .information li:nth-of-type(3) span:nth-last-child(1) i{
     display: none;
   }
 .information li:nth-of-type(4){
   text-align: center;
-  font-size:1.2rem;
+  font-size:0.32rem;
   color:#808080;
-  margin-top:0.2rem;
+  margin-top:0.053rem;
 }
   /*相关人员*/
   .Relevant{
@@ -302,11 +302,11 @@
   }
   .Relevant_title{
     width:100%;
-    height:4.5rem;
+    height:1.2rem;
     position: relative;
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
-    line-height: 4.5rem;
+    line-height: 1.2rem;
     padding: 0 4%;
   }
   .Relevant_list{
@@ -315,7 +315,7 @@
   }
   .Relevant_list li{
     width:100%;
-    height:6.4rem;
+    height:1.706rem;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -324,8 +324,8 @@
     flex-wrap:nowrap;
   }
   .Relevant_avatar{
-    width:4.4rem;
-    height:4.4rem;
+    width:1.173rem;
+    height:1.173rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -337,67 +337,67 @@
   }
   .Relevant_avatar svg{
    position: absolute;
-    font-size:1.7rem;
+    font-size:0.453rem;
     bottom: 0;
-    right:-0.2rem;
+    right:-0.053rem;
   }
   /*详细的信息*/
   .Relevant_detail{
     /*width:65%;*/
     height:100%;
-    margin-left: 0.7rem;
+    margin-left: 0.186rem;
   }
   .Relevant_detail p:nth-of-type(1){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color:#565656;
-    margin-top: 1.2rem;
+    margin-top: 0.32rem;
     display: flex;
     flex-direction: row;
     align-items:center;
   }
   .Relevant_detail p:nth-of-type(1) span{
-      width:1.6rem;
-      height:1.5rem;
+      width:0.426rem;
+      height:0.4rem;
       background: url("../../statics/images/rank.png") no-repeat;
       background-size: 100% 100%;
       color:#FFFFFF;
-      font-size:1rem;
-      line-height: 1.3rem;
-      margin-left: 0.3rem;
+      font-size:0.266rem;
+      line-height: 0.346rem;
+      margin-left: 0.08rem;
       display: flex;
       flex-direction: row;
       justify-content:center;
   }
   .Relevant_detail p:nth-of-type(2){
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#b4b4b6;
     width:90%;
   }
   /*关注*/
   .Relevant_follow{
-    width: 6.4rem;
-    height: 2.7rem;
+    width: 1.706rem;
+    height: 0.72rem;
     background: #03aef9;
     color: #FFFFFF;
-    line-height:2.7rem;
-    border-radius: 5rem;
+    line-height:0.72rem;
+    border-radius: 1.333rem;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
   .Relevant_empty{
-    width: 6.4rem;
-    height: 2.7rem;
-    border:0.1rem solid #03aef9;
+    width: 1.706rem;
+    height: 0.72rem;
+    border:0.026rem solid #03aef9;
     color:#03aef9;
-    line-height:2.7rem;
-    border-radius: 5rem;
+    line-height:0.72rem;
+    border-radius: 1.333rem;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
   button{
     width:100%;
-    height:4.6rem;
-    font-size:1.7rem;
+    height:1.226rem;
+    font-size:0.453rem;
     color: #FFFFFF;
     text-align: center;
     background:#03aef9;
@@ -408,7 +408,7 @@
     border:none;
   }
   .listWrapper{
-    bottom: 4.6rem;
+    bottom: 1.226rem;
   }
   /*适配*/
   @media (min-width:320px) {

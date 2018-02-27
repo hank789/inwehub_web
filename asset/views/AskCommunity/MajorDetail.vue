@@ -347,10 +347,10 @@
   }
   .bot {
     position: absolute;
-    right:1.5rem;
+    right:0.4rem;
     top: 0rem;
-    left:1.5rem;
-    height: 0.1rem;
+    left:0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -364,17 +364,17 @@
   }
 
   .help {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     background: #fff;
   }
 
   .help .title {
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 0.4rem 0.4rem 0.266rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -383,14 +383,14 @@
   }
 
   .buttonWrapper {
-    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+    padding: 0.133rem 0.4rem 0.4rem 0.4rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     margin-bottom: 0;
-    padding: 1.3rem 0;
+    padding: 0.346rem 0;
   }
   .iNeedAskWrapper{
     padding:0;
@@ -403,48 +403,48 @@
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  1.6rem 0.8rem 0.7rem;
+    padding: 0  0.426rem 0.213rem 0.186rem;
   }
   .question_tags p{
     float: left;
      background: #a8dff7;
     color:#FFFFFF;
-    padding: 0rem 0.8rem;
-    border-radius:5rem;
-    margin-top: 0.9rem;
-    margin-left: 0.9rem;
-    font-size:1.2rem;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
   /*返回问答社区*/
 .back{
   width:100%;
-  height:6.2rem;
+  height:1.653rem;
   text-align: center;
-  line-height: 6.2rem;
+  line-height: 1.653rem;
   background: url("../../statics/images/Community.png") no-repeat;
   background-size: cover;
-  margin-top: 1rem;
+  margin-top: 0.266rem;
 }
 .back span:nth-of-type(1){
-  font-size:1.5rem;
+  font-size:0.4rem;
   color:#444444;
-  line-height: 6.2rem;
+  line-height: 1.653rem;
 }
 .back span:nth-of-type(2){
-  font-size:1.2rem;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 6.2rem;
+  line-height: 1.653rem;
 }
 .back svg:nth-of-type(1){
-  font-size:1.2rem;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 6.2rem;
+  line-height: 1.653rem;
 }
 .back svg:nth-of-type(2){
-  font-size:1.2rem;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 6.2rem;
-  margin-left: -1rem;
+  line-height: 1.653rem;
+  margin-left: -0.266rem;
   }
   /*answer*/
   .detail-answer[data-v-852fb68e] {
@@ -453,20 +453,20 @@
   /*查看回答*/
   .see{
     width:100%;
-    height:4rem;
-    padding: 0 1.5rem;
-    font-size:1.4rem;
+    height:1.066rem;
+    padding: 0 0.4rem;
+    font-size:0.373rem;
     color:#03aef9;
     text-align: center;
-    line-height: 4rem;
+    line-height: 1.066rem;
     background: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
     position: relative;
   }
   .btn{
-    margin-top: -1.5rem;
+    margin-top: -0.4rem;
   }
   .star{
-    margin-top: -1.5rem;
+    margin-top: -0.4rem;
   }
 </style>

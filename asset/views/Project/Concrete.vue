@@ -507,7 +507,7 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .schedule {
     width: 25%;
-    height: 0.3rem;
+    height: 0.08rem;
     background: #03aef9;
   }
 
@@ -516,39 +516,39 @@
   }
 
   .basic {
-    height: 15rem;
+    height: 4rem;
     position: relative;
     text-align: center;
   }
 
   .basic .title {
     position: relative;
-    top: 5rem;
-    font-size: 2rem;
+    top: 1.333rem;
+    font-size: 0.533rem;
     color: #444;
   }
 
   .basic .titleSub {
     position: relative;
-    top: 5.5rem;
-    font-size: 1.4rem;
+    top: 1.466rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .companyForm {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .companyForm:before {
-    left: 1.6rem;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 1.6rem;
+    right: 0.426rem;
   }
 
   .companyForm:after {
-    left: 1.6rem;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 1.6rem;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -560,18 +560,18 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     padding-right: 0;
 
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 0.6rem 1.5rem;
+    padding: 0.16rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 1.6rem;
-    right: 1.6rem;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -580,15 +580,15 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 1rem;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 1rem 0;
+    padding: 0.266rem 0;
     float: right;
-    margin-left: -1.5rem;
+    margin-left: -0.4rem;
   }
 
   .companyForm label {
@@ -607,8 +607,8 @@
   }
 
   .companyForm .inputUnit {
-    padding: 1rem;
-    margin-right: 1.5rem;
+    padding: 0.266rem;
+    margin-right: 0.4rem;
   }
 
   .companyForm .textRight {
@@ -618,8 +618,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 1.1rem 0 1.1rem 2.5rem;
-    margin-left: 1.8rem;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -628,14 +628,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 1.1rem;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
     left: 0rem;
     color: #c8c8c8;
-    font-size: 2rem;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -647,53 +647,53 @@
   }
 
   .fileSelect {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #c8c8c8;
     background: #fff;
-    padding: 1.5rem;
+    padding: 0.4rem;
     position: relative;
   }
 
   .fileSelect .icon {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     color: #03aef9;
-    font-size: 2.2rem;
+    font-size: 0.586rem;
   }
 
   .fileList {
-    padding: 0 1.5rem 3rem;
+    padding: 0 0.4rem 0.8rem;
     background: #fff;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .fileList .item {
-    padding: 0.5rem 0;
+    padding: 0.133rem 0;
   }
 
   .fileList .icon {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #c8c8c8;
-    margin-right: 1rem;
+    margin-right: 0.266rem;
   }
 
   .buttonWrapper {
-    padding: 1.4rem 1.6rem 3rem;
+    padding: 0.373rem 0.426rem 0.8rem;
     background: #fff;
     text-align: center;
   }
 
   .buttonWrapper button {
     display: inline-block;
-    width: 11.5rem;
-    margin-top: 1rem;
+    width: 3.066rem;
+    margin-top: 0.266rem;
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .buttonWrapper button:disabled {
     background: #dcdcdc;
-    border: 0.1rem solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #b4b4b6;
     opacity: 1;
   }
@@ -701,19 +701,19 @@
   .selected {
     display: inline-block;
     color: #03aef9;
-    border: 0.1rem solid #03aef9;
-    border-radius: 0.5rem;
-    padding: 0.4rem 1rem 0.3rem;
-    font-size: 1.4rem;
-    margin: 0.5rem 0.7rem 0 0;
+    border: 0.026rem solid #03aef9;
+    border-radius: 0.133rem;
+    padding: 0.106rem 0.266rem 0.08rem;
+    font-size: 0.373rem;
+    margin: 0.133rem 0.186rem 0 0;
   }
 
   .selected .icon {
     color: #c8c8c8;
-    font-size: 1.1rem;
-    margin-left: 0.7rem;
+    font-size: 0.293rem;
+    margin-left: 0.186rem;
     position: relative;
-    top: -0.1rem;
+    top: -0.026rem;
   }
 
 

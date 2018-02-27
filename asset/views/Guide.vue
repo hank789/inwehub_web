@@ -80,11 +80,11 @@
 <style scoped="scoped">
   #close {
     position: absolute;
-    width: 15.6rem;
+    width: 4.16rem;
     left: 50%;
-    margin-left: -8rem;
+    margin-left: -2.133rem;
     bottom: 15%;
-    padding: 1rem;
+    padding: 0.266rem;
     color: #03aef9;
     border-color: #03aef9;
   }
@@ -96,20 +96,20 @@
   }
 
   .item-logo a {
-    width: 20rem;
-    height: 20rem;
+    width: 5.333rem;
+    height: 5.333rem;
     display: block;
-    border: 0.1rem solid #FFFFFF;
+    border: 0.026rem solid #FFFFFF;
     border-color: rgba(255, 255, 255, 0.5);
     text-align: center;
-    line-height: 20rem;
+    line-height: 5.333rem;
     border-radius: 50%;
-    font-size: 4rem;
+    font-size: 1.066rem;
     color: #fff;
     position: absolute;
     top: 15%;
     left: 50%;
-    margin-left: -10rem;
+    margin-left: -2.666rem;
   }
 
   .animate {
@@ -123,15 +123,15 @@
 
   .animate h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0.533rem;
   }
 
   .animate li {
     width: 50%;
-    height: 3rem;
-    line-height: 3rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
     list-style: none;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     text-align: right;
   }
 
@@ -173,21 +173,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(0, -300rem, 0);
-      transform: translate3d(0, -300rem, 0);
+      -webkit-transform: translate3d(0, -80rem, 0);
+      transform: translate3d(0, -80rem, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(0, 2.5rem, 0);
-      transform: translate3d(0, 2.5rem, 0);
+      -webkit-transform: translate3d(0, 0.666rem, 0);
+      transform: translate3d(0, 0.666rem, 0);
     }
     75% {
-      -webkit-transform: translate3d(0, -0.5rem, 0);
-      transform: translate3d(0, -0.5rem, 0);
+      -webkit-transform: translate3d(0, -0.133rem, 0);
+      transform: translate3d(0, -0.133rem, 0);
     }
     90% {
-      -webkit-transform: translate3d(0, 0.3rem, 0);
-      transform: translate3d(0, 0.3rem, 0);
+      -webkit-transform: translate3d(0, 0.08rem, 0);
+      transform: translate3d(0, 0.08rem, 0);
     }
     100% {
       -webkit-transform: none;
@@ -202,21 +202,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(-300rem, 0, 0);
-      transform: translate3d(-300rem, 0, 0);
+      -webkit-transform: translate3d(-80rem, 0, 0);
+      transform: translate3d(-80rem, 0, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(2.5rem, 0, 0);
-      transform: translate3d(2.5rem, 0, 0);
+      -webkit-transform: translate3d(0.666rem, 0, 0);
+      transform: translate3d(0.666rem, 0, 0);
     }
     75% {
-      -webkit-transform: translate3d(-1rem, 0, 0);
-      transform: translate3d(-1rem, 0, 0);
+      -webkit-transform: translate3d(-0.266rem, 0, 0);
+      transform: translate3d(-0.266rem, 0, 0);
     }
     90% {
-      -webkit-transform: translate3d(0.5rem, 0, 0);
-      transform: translate3d(0.5rem, 0, 0);
+      -webkit-transform: translate3d(0.133rem, 0, 0);
+      transform: translate3d(0.133rem, 0, 0);
     }
     100% {
       -webkit-transform: none;
@@ -231,21 +231,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(300rem, 0, 0);
-      transform: translate3d(300rem, 0, 0);
+      -webkit-transform: translate3d(80rem, 0, 0);
+      transform: translate3d(80rem, 0, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(-2.5rem, 0, 0);
-      transform: translate3d(-2.5rem, 0, 0);
+      -webkit-transform: translate3d(-0.666rem, 0, 0);
+      transform: translate3d(-0.666rem, 0, 0);
     }
     75% {
-      -webkit-transform: translate3d(1rem, 0, 0);
-      transform: translate3d(1rem, 0, 0);
+      -webkit-transform: translate3d(0.266rem, 0, 0);
+      transform: translate3d(0.266rem, 0, 0);
     }
     90% {
-      -webkit-transform: translate3d(-0.5rem, 0, 0);
-      transform: translate3d(-0.5rem, 0, 0);
+      -webkit-transform: translate3d(-0.133rem, 0, 0);
+      transform: translate3d(-0.133rem, 0, 0);
     }
     100% {
       -webkit-transform: none;
@@ -256,9 +256,9 @@
   .mui-slider-indicator .mui-indicator {
     background: #dcdcdc;
     box-shadow: none;
-    width: 0.9rem;
-    height: 0.9rem;
-    margin: 0.1rem 0.1rem;
+    width: 0.24rem;
+    height: 0.24rem;
+    margin: 0.026rem 0.026rem;
   }
 
   .mui-slider-indicator .mui-active.mui-indicator {
@@ -266,7 +266,7 @@
   }
 
   .mui-slider-indicator {
-    bottom: 3.9rem;
+    bottom: 1.04rem;
   }
 
   .guide {
@@ -296,12 +296,12 @@
   }
 
   .guide-4 .logo {
-    margin-left: -11.7rem;
+    margin-left: -3.12rem;
     position: absolute;
     left: 50%;
     top: 20%;
-    width: 23.4rem;
-    height: 13.3rem;
+    width: 6.24rem;
+    height: 3.546rem;
     background-image: url(../statics/images/guide_05.png);
     background-color: #f2fbfe;
     background-size: 92%;
@@ -310,11 +310,11 @@
   }
 
   .guide-4 .logo .title {
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #323436;
     text-align: center;
     position: absolute;
-    bottom: 0.7rem;
+    bottom: 0.186rem;
     width: 100%;
   }
 </style>

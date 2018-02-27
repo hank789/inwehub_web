@@ -99,22 +99,22 @@
       },
       // 警告框
       warn () {
-        var title = '<p style="font-size:1.6rem; color: ##444444; margin-bottom:1.5rem">' + '获取收益说明' + '</p>'
-        var font = '<p style="text-align: left; font-size:1.4rem; color: rgb(68,68,68); margin: 0;">' +
+        var title = '<p style="font-size:0.426rem; color: ##444444; margin-bottom:0.4rem">' + '获取收益说明' + '</p>'
+        var font = '<p style="text-align: left; font-size:0.373rem; color: rgb(68,68,68); margin: 0;">' +
           '支付（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0; ">' +
+          '<p style="text-align: left; font-size:0.373rem; color:rgb(128,128,128); margin: 0; ">' +
           '咨询费用 内容围观 有偿服务 会员购买 ' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; rgb(68,68,68); margin: 0;">' +
+          '<p style="text-align: left; font-size:0.373rem; rgb(68,68,68); margin: 0;">' +
           '支付（企业）：' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0;">' +
+          '<p style="text-align: left; font-size:0.373rem; color:rgb(128,128,128); margin: 0;">' +
           '服务购买 项目结款 实施费用 咨询费用 合作费用' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; rgb(68,68,68); margin-top: 2rem; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:0.373rem; rgb(68,68,68); margin-top: 0.533rem; margin-bottom: 0">' +
           '收益（个人）：' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin: 0;">' +
+          '<p style="text-align: left; font-size:0.373rem; color:rgb(128,128,128); margin: 0;">' +
           '解答收益 围观收益 服务收益 项目收益 实施收益 咨询收益 合作收益 任务收益' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin-top: 2rem; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:0.373rem; color:rgb(128,128,128); margin-top: 0.533rem; margin-bottom: 0">' +
           '*个人分成奖励累积超过5万元，平台可能会代征缴个税，5万元以下请自行主动申报' + '</p>' +
-          '<p style="text-align: left; font-size:1.4rem; color:rgb(128,128,128); margin-top: 2rem; margin-bottom: 0">' +
+          '<p style="text-align: left; font-size:0.373rem; color:rgb(128,128,128); margin-top: 0.533rem; margin-bottom: 0">' +
           '*为相应配合国家税务总局，平台会根据相关部分要求，向其提供个人收益分红记录。' + '</p>'
 
         // var btnArray = ['取消', '确认'];
@@ -168,7 +168,7 @@
 
   .Invitation_t {
     width: 100%;
-    /*height:32.2rem;*/
+    /*height:8.586rem;*/
     background: #FFFFFF url("../../statics/images/invitation-bg@2x.png") no-repeat;
     background-size: 100% 90%;
     position: relative;
@@ -176,7 +176,7 @@
 
   .Invitation_img {
     width: 95%;
-    /*height:27rem;*/
+    /*height:7.2rem;*/
     position: absolute;
     bottom: 0rem;
     left: 0;
@@ -195,7 +195,7 @@
       bottom: 0rem;
     }
     50% {
-      bottom: 0.5rem;
+      bottom: 0.133rem;
     }
     100% {
       bottom: 0rem;
@@ -208,7 +208,7 @@
       bottom: 0rem;
     }
     50% {
-      bottom: 0.5rem;
+      bottom: 0.133rem;
     }
     100% {
       bottom: 0rem;
@@ -221,7 +221,7 @@
       bottom: 0rem;
     }
     50% {
-      bottom: 0.5rem;
+      bottom: 0.133rem;
     }
     100% {
       bottom: 0rem;
@@ -234,7 +234,7 @@
       bottom: 0rem;
     }
     50% {
-      bottom: 0.5rem;
+      bottom: 0.133rem;
     }
     100% {
       bottom: 0rem;
@@ -244,11 +244,11 @@
   /*　邀请成功的信息部分*/
   .invitation-information {
     width: 100%;
-    height: 8.85rem;
-    /*border: 0.1rem solid #cccccc;*/
+    height: 2.36rem;
+    /*border: 0.026rem solid #cccccc;*/
     background: #FFFFFF;
-    margin:1rem 0;
-    padding: 0rem 2.5rem;
+    margin:0.266rem 0;
+    padding: 0rem 0.666rem;
   }
 
   .invitation-information li:nth-of-type(1) {
@@ -270,20 +270,20 @@
   }
 
   .invitation-information li p:nth-of-type(1) {
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #444444;
-    margin-top: 2.2rem;
+    margin-top: 0.586rem;
     text-align: center;
   }
 
   .invitation-information li p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
   }
 
   .invitation-information li span {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
     position: absolute;
     right: 0;
@@ -296,53 +296,53 @@
 
   .contactFriends {
     width: 95%;
-    height: 22.4rem;
-    border: 0.1rem solid #b4b4b6;
-    border-radius: 0.4rem;
+    height: 5.973rem;
+    border: 0.026rem solid #b4b4b6;
+    border-radius: 0.106rem;
     margin-left: 2.5%;
-    margin-top: 4rem;
+    margin-top: 1.066rem;
     position: relative;
   }
 
   .contactFriends span {
     display: block;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
 
   }
 
   .contactFriends span:nth-of-type(1) {
     color: #444444;
-    margin-top: 3.5rem;
+    margin-top: 0.933rem;
 
   }
 
   .contactFriends span:nth-of-type(2) {
     color: #03aef9;
-    margin-top: 0.4rem;
+    margin-top: 0.106rem;
   }
   .contactFriends span:nth-of-type(3) {
     color: #444444;
-    margin-top: 1.4rem;
+    margin-top: 0.373rem;
   }
   .contactFriends span:nth-of-type(5) {
     color: #808080;
-    margin-top: 0.4rem;
-    margin-bottom: 1.2rem;
+    margin-top: 0.106rem;
+    margin-bottom: 0.32rem;
   }
   .contactFriends span:nth-of-type(5) i{
     font-style: normal;
     color: #03aef9;
   }
   .contactFriends .luckDraw{
-    width:6.2rem;
-    height:2.7rem;
+    width:1.653rem;
+    height:0.72rem;
     background: #dcdcdc;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 2.7rem;
+    line-height: 0.72rem;
     margin: 0 auto;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #b4b4b6;
   }
   .luckDraw.red{
@@ -351,9 +351,9 @@
   }
   .contactBtn {
     position: absolute;
-    width: 15rem;
-    height: 5.3rem;
-    top: -3rem;
+    width: 4rem;
+    height: 1.413rem;
+    top: -0.8rem;
     left: 0;
     right: 0;
     margin: auto
@@ -365,11 +365,11 @@
     width: 100%;
     height: 100%;
     background: #03aef9;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 5.3rem;
+    line-height: 1.413rem;
     color: #FFFFFF;
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     font-weight: 500;
     z-index: 999;
     position: absolute;
@@ -486,53 +486,53 @@
 
 
   .contactBtn img {
-    width: 4.1rem;
-    height: 2.9rem;
+    width: 1.093rem;
+    height: 0.773rem;
     position: absolute;
-    left: -1.5rem;
-    top: 2.3rem;
+    left: -0.4rem;
+    top: 0.613rem;
   }
 
   /*邀请说明*/
   .invitationNote {
-    margin-top: 2.05rem;
-    margin-bottom: 8rem;
+    margin-top: 0.546rem;
+    margin-bottom: 2.133rem;
     text-align: center;
     overflow: hidden;
   }
 
   .invitationNote p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
 
   }
 
   .invitationNote p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
 
   }
 
   .invitationNote p:nth-of-type(3) {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
-    margin-top: 2.3rem;
+    margin-top: 0.613rem;
 
   }
 
   .invitationNote p:nth-of-type(3) u {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(68, 68, 68);
   }
 
   /* 适配*/
   @media (min-width: 320px) {
     .Invitation_img {
-      height: 24rem;
+      height: 6.4rem;
     }
 
     .Invitation_t {
-      height: 28rem;
+      height: 7.466rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -547,11 +547,11 @@
 
   @media (min-width: 375px) {
     .Invitation_img {
-      height: 28rem;
+      height: 7.466rem;
     }
 
     .Invitation_t {
-      height: 32rem;
+      height: 8.533rem;
     }
 
     .invitation-information li:nth-of-type(1) {
@@ -566,11 +566,11 @@
 
   @media (min-width: 414px) {
     .Invitation_img {
-      height: 30rem;
+      height: 8rem;
     }
 
     .Invitation_t {
-      height: 35rem;
+      height: 9.333rem;
     }
 
     .invitation-information li:nth-of-type(1) {

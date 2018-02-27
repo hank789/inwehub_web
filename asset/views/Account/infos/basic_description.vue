@@ -80,6 +80,6 @@
   }
 
   .descriptionWrapper {
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
   }
 </style>

@@ -163,8 +163,8 @@
   /*手机端*/
   .suspend {
     width: 100%;
-    height: 5.4rem;
-    /* border-radius:0.4rem;*/
+    height: 1.44rem;
+    /* border-radius:0.106rem;*/
     background: #252525;
     position: fixed;
     opacity: 0.9;
@@ -174,144 +174,144 @@
 
   .suspend p:nth-of-type(1) {
     float: left;
-    margin-left: 2.3rem;
-    width: 3rem;
-    height: 4.7rem;
-    margin-top: 0.7rem;
+    margin-left: 0.613rem;
+    width: 0.8rem;
+    height: 1.253rem;
+    margin-top: 0.186rem;
 
   }
 
   .suspend p:nth-of-type(1) svg {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #FFFFFF;
-    margin-top: 1.2rem;
+    margin-top: 0.32rem;
   }
 
   .suspend p:nth-of-type(2) {
     float: left;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 1.2rem;
+    width: 1.066rem;
+    height: 1.066rem;
+    border-radius: 0.32rem;
     background: #F3F4F6;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
 
     text-align: center;
   }
 
   .suspend p:nth-of-type(2) > svg {
-    font-size: 3.4rem;
-    margin-top: 0.6rem;
+    font-size: 0.906rem;
+    margin-top: 0.16rem;
     color: #009fe8;
   }
 
   .suspend p:nth-of-type(3) {
-    width: 9.6rem;
-    height: 4.7rem;
-    margin-top: 0.7rem;
-    margin-left: 1rem;
-    /* padding-top: 0.5rem;*/
+    width: 2.56rem;
+    height: 1.253rem;
+    margin-top: 0.186rem;
+    margin-left: 0.266rem;
+    /* padding-top: 0.133rem;*/
     float: left;
   }
 
   .suspend p:nth-of-type(3) > span {
     display: block;
     color: #FFFFFF;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(1) {
-    font-size: 1.6rem
+    font-size: 0.426rem
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(2) {
-    margin-top: 0.05rem;
+    margin-top: 0.013rem;
   }
 
   .suspend a {
     float: right;
-    width: 7.6rem;
-    height: 3rem;
-    border-radius: 0.4rem;
+    width: 2.026rem;
+    height: 0.8rem;
+    border-radius: 0.106rem;
     background: #3c95f9;
     text-align: center;
-    line-height: 3rem;
+    line-height: 0.8rem;
     color: #FFFFFF;
-    margin-top: 1.2rem;
-    margin-right: 1.05rem;
+    margin-top: 0.32rem;
+    margin-right: 0.28rem;
   }
 
   /*微信端*/
   .mui-wechat .suspension {
     width: 100%;
-    height: 4.9rem;
+    height: 1.306rem;
     position: fixed;
     opacity: 0.9;
     top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
-    -webkit-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
-    -moz-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
 
   .suspension {
     width: 100%;
-    height: 4.9rem;
+    height: 1.306rem;
     position: absolute;
-    top: 4.4rem;
+    top: 1.173rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
-    -webkit-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
-    -moz-box-shadow: 0rem 0.3rem 0.5rem #b4b4b6;
+    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
 
   /*.suspension p:nth-of-type(1) {*/
     /*float: left;*/
     /*color: #b4b4b6;*/
-    /*margin-left: 2.3rem;*/
-    /*margin-top: 1.5rem;*/
-    /*margin-right: 2rem;*/
-    /*font-size: 1.6rem;*/
+    /*margin-left: 0.613rem;*/
+    /*margin-top: 0.4rem;*/
+    /*margin-right: 0.533rem;*/
+    /*font-size: 0.426rem;*/
 
   /*}*/
 
   .suspension p:nth-of-type(1) {
     float: left;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 0.9rem;
+    width: 0.933rem;
+    height: 0.933rem;
+    border-radius: 0.24rem;
     background: #f3f4f6;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
     text-align: center;
-    margin-left: 1.4rem;
+    margin-left: 0.373rem;
   }
 
   .suspension p:nth-of-type(1) svg {
-    font-size: 2.5rem;
-    margin-top: 0.6rem;
+    font-size: 0.666rem;
+    margin-top: 0.16rem;
     color: #009fe8;
   }
 
   .suspension p:nth-of-type(2) {
     float: left;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #171616;
-    margin-top: 1.4rem;
-    margin-left: 1rem;
+    margin-top: 0.373rem;
+    margin-left: 0.266rem;
   }
 
   .suspension a {
     float: right;
-    width: 8.8rem;
-    height: 3rem;
-    border-radius: 0.4rem;
+    width: 2.346rem;
+    height: 0.8rem;
+    border-radius: 0.106rem;
     background: #3c95f9;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 3rem;
-    margin-top: 1rem;
-    margin-right: 1.4rem;
+    line-height: 0.8rem;
+    margin-top: 0.266rem;
+    margin-right: 0.373rem;
   }
 </style>

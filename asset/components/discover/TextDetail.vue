@@ -143,7 +143,7 @@
 <style scoped>
   .mui-wechat .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -158,22 +158,22 @@
 
   .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
-    padding: 0 1.7rem;
-    border-bottom: 0.1rem solid #dcdcdc;
+    padding: 0 0.453rem;
+    border-bottom: 0.026rem solid #dcdcdc;
   }
 
   .menu span {
     display: block;
     height: 100%;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    line-height: 4.5rem;
+    line-height: 1.2rem;
     font-weight: 600;
   }
 
@@ -182,23 +182,23 @@
   }
 
   .menu span:nth-of-type(2) {
-    margin-left: 3.4rem;
+    margin-left: 0.906rem;
   }
 
   .menu svg {
     float: right;
-    ont-size: 1.8rem;
+    ont-size: 0.48rem;
     color: #03aef9;
-    margin-top: 1.3rem;
+    margin-top: 0.346rem;
   }
 
   .menu i {
     display: block;
     position: absolute;
-    width: 2.7rem;
-    height: 0.15rem;
+    width: 0.72rem;
+    height: 0.04rem;
     left: 0%;
-    bottom: 0.05rem;
+    bottom: 0.013rem;
     background: #03aef9;
   }
 
@@ -207,7 +207,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -234,52 +234,52 @@
     width: 100%;
     overflow: hidden;
     background: #F3F4F5;
-    margin-top: 4.5rem;
+    margin-top: 1.2rem;
   }
 
   ul .Container {
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 1.2rem 1.6rem 0 1.6rem;
-    margin-bottom: 1rem;
+    padding: 0.32rem 0.426rem 0 0.426rem;
+    margin-bottom: 0.266rem;
 
   }
 
   ul .Container p:nth-of-type(1) {
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #444444;
-    line-height: 2rem;
+    line-height: 0.533rem;
   }
 
   ul .Container p:nth-of-type(1) i {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(180, 180, 182);
   }
 
   ul .Container .container-image {
-    height: 12.4rem;
-    margin-top: 1.3rem;
+    height: 3.306rem;
+    margin-top: 0.346rem;
   }
 
   ul .Container p.timer {
     width: 100%;
-    height: 4.4rem;
-    font-size: 1.2rem;
+    height: 1.173rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    line-height: 4.4rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
   ul .Container p.timer a {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: rgb(128, 128, 128);
   }
 
   .information {
     width: 100%;
-    height: 4rem;
-    padding: 0 1.7rem;
+    height: 1.066rem;
+    padding: 0 0.453rem;
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
@@ -291,10 +291,10 @@
   ul .imgContainer .information p {
     color: #808080;
     position: relative;
-    height:4rem;
+    height:1.066rem;
     display: flex;
     align-items: center;
-    padding:0 0.5rem;
+    padding:0 0.133rem;
   }
   ul .imgContainer .information p.blue {
     color: #03aef9;
@@ -303,12 +303,12 @@
   /*举报和删除*/
   .information p:nth-of-type(1) span {
     display: block;
-    width: 5rem;
+    width: 1.333rem;
     background: #575857;
     position: absolute;
-    top: 2.8rem;
-    left: -1.3rem;
-    border-radius: 0.4rem;
+    top: 0.746rem;
+    left: -0.346rem;
+    border-radius: 0.106rem;
     z-index: 99;
   }
 
@@ -317,12 +317,12 @@
     display: block;
     width: 0;
     height: 0;
-    border: 0.5rem solid transparent;
-    border-top: 0.5rem solid #575857;
-    border-left: 0.5rem solid #575857;
+    border: 0.133rem solid transparent;
+    border-top: 0.133rem solid #575857;
+    border-left: 0.133rem solid #575857;
     transform: rotate(45deg);
     position: absolute;
-    top: -0.2rem;
+    top: -0.053rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -332,28 +332,28 @@
   .information p:nth-of-type(1) span a {
     display: block;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
-    padding: 0.3rem 0;
+    padding: 0.08rem 0;
   }
 
   .information p svg {
-    font-size: 1.7rem;
+    font-size: 0.453rem;
   }
 
   .information p:nth-of-type(2) svg {
-    font-size: 1.8rem;
+    font-size: 0.48rem;
   }
 
   .information p:nth-of-type(3) svg {
-    font-size: 1.7rem;
-    margin-right: 0.3rem;
+    font-size: 0.453rem;
+    margin-right: 0.08rem;
 
   }
 
   .information p:nth-of-type(4) svg {
-    font-size: 1.7rem;
-    margin-right: 0.3rem;
+    font-size: 0.453rem;
+    margin-right: 0.08rem;
   }
 
 
@@ -362,8 +362,8 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 1.2rem 1.6rem 0 1.6rem;
-    margin-bottom: 1rem;
+    padding: 0.32rem 0.426rem 0 0.426rem;
+    margin-bottom: 0.266rem;
   }
 
   .imgContainer:after {
@@ -371,19 +371,19 @@
     bottom: 0;
     left: 0;
     content: '';
-    height: 1rem;
+    height: 0.266rem;
     background-color: #f3f4f6;
     width: 100%;
   }
 
   .imgContainer .avatar {
     width: 100%;
-    height: 3.4rem;
+    height: 0.906rem;
   }
 
   .avatar p:nth-of-type(1) {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: 0.906rem;
+    height: 0.906rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -391,9 +391,9 @@
 
   .avatar p:nth-of-type(1) svg {
     position: absolute;
-    font-size: 1.7rem;
+    font-size: 0.453rem;
     bottom: 0;
-    right: -0.6rem;
+    right: -0.16rem;
   }
 
   .avatar p:nth-of-type(1) img {
@@ -403,26 +403,26 @@
   }
 
   .avatar p:nth-of-type(2) {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
-    line-height: 3.4rem;
-    margin-left: 0.8rem;
+    line-height: 0.906rem;
+    margin-left: 0.213rem;
     float: left;
   }
 
   .textContainer {
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 0.4rem;
     color: #444444;
-    line-height: 2rem;
-    margin-top: 0.6rem;
+    line-height: 0.533rem;
+    margin-top: 0.16rem;
   }
 
   .timeContainer {
     width: 100%;
-    height: 4.2rem;
-    font-size: 1.2rem;
-    line-height: 4.2rem;
+    height: 1.12rem;
+    font-size: 0.32rem;
+    line-height: 1.12rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -430,7 +430,7 @@
   }
 
   .timeContainer svg {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
@@ -445,7 +445,7 @@
   /*图片*/
   .PublishContainer {
     width: 100%;
-    margin-top: 1.3rem;
+    margin-top: 0.346rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -454,7 +454,7 @@
   }
 
   .PublishContainer .container-image {
-    width: 10.8rem;
+    width: 2.88rem;
   }
 
   .PublishContainer .container-image img {

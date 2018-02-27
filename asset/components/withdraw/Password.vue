@@ -84,7 +84,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -93,52 +93,52 @@
   .Withdrawals{
     display: none;
     width:100%;
-    height:21.5rem;
+    height:5.733rem;
     background: #FFFFFF;
-    border: 0.1rem solid #cccccc;
+    border: 0.026rem solid #cccccc;
     position: absolute;
     z-index:999;
     bottom:0;
   }
   .Withdrawals-title{
     width:100%;
-    height:4.4rem;
-    line-height: 4.4rem;
+    height:1.173rem;
+    line-height: 1.173rem;
     position: relative;
   }
   .Withdrawals-title p:nth-of-type(1){
     position: absolute;
-    font-size:1.6rem;
+    font-size:0.426rem;
     color: #808080;
-    padding: 0 1.1rem;
+    padding: 0 0.293rem;
   }
   .Withdrawals-title p:nth-of-type(2){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #808080;
     text-align: center;
   }
 
   button{
     width:91%;
-    height:4.4rem;
+    height:1.173rem;
     border:none;
     background:#dcdcdc;
-    font-size:1.6rem;
+    font-size:0.426rem;
     color: #b4b4b6;
     position: absolute;
     left: 4.5%;
-    bottom: 2rem;
+    bottom: 0.533rem;
   }
 
   .forget-password{
     padding: 0 10%;
     text-align: right;
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #235280;
-    padding-top: 1.3rem;
+    padding-top: 0.346rem;
   }
   .forget-password .error{
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #fa4975;
     float: left;
   }
@@ -146,19 +146,19 @@
 
 
   .inputWrapper {
-    margin: 0 3.3rem 2.2rem;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
-    top: 3rem;
-    border-bottom:0.1rem solid #dcdcdc;
+    top: 0.8rem;
+    border-bottom:0.026rem solid #dcdcdc;
   }
   /*.inputWrapper:after {*/
     /*position: absolute;*/
     /*right: 0;*/
-    /*bottom: 0.3rem;*/
+    /*bottom: 0.08rem;*/
     /*left: 0;*/
-    /*height: 0.1rem;*/
+    /*height: 0.026rem;*/
     /*content: '';*/
     /*-webkit-transform: scaleY(0.5);*/
     /*transform: scaleY(0.5);*/
@@ -167,8 +167,8 @@
 
   .inputWrapper .icon {
     position: absolute;
-    top: 0.6rem;
-    font-size: 2rem;
+    top: 0.16rem;
+    font-size: 0.533rem;
     color: #c8c8c8;
     left: 0;
   }
@@ -177,32 +177,32 @@
     color: #444;
     border: none;
     margin: 0;
-    /*padding: 0 0 0 3.6rem;*/
-    font-size: 1.4rem;
+    /*padding: 0 0 0 0.96rem;*/
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
-    height: 3.6rem;
-    margin-left: 1.5rem;
-    margin-bottom: -0.5rem;
+    height: 0.96rem;
+    margin-left: 0.4rem;
+    margin-bottom: -0.133rem;
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
   input:-moz-placeholder, textarea:-moz-placeholder {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
   input::-moz-placeholder, textarea::-moz-placeholder {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
   input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
   /*颜色class*/

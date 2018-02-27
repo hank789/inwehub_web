@@ -80,7 +80,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -94,7 +94,7 @@
 
   .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -105,10 +105,10 @@
     width: 50%;
     height: 100%;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    line-height: 4.5rem;
+    line-height: 1.2rem;
     font-weight: 600;
   }
 
@@ -120,10 +120,10 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 2.7rem;
-    height: 0.15rem;
+    width: 0.72rem;
+    height: 0.04rem;
     left: 42.5%;
-    bottom: 0.05rem;
+    bottom: 0.013rem;
     background: #3c95f9;
   }
 
@@ -132,7 +132,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -163,29 +163,29 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 1.5rem 0 1.3rem 0;
+    padding: 0.4rem 0 0.346rem 0;
     position: relative;
   }
    .answer li div{
-     margin-bottom: 1.2rem;
+     margin-bottom: 0.32rem;
    }
   .answer li p:nth-of-type(1){
-    font-size:1.5rem;
+    font-size:0.4rem;
     color:#444444;
 
 
   }
   .answer li p:nth-of-type(1) a{
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:rgb(180,180,182);
 
   }
    .answer li p:nth-of-type(2){
-      font-size:1.2rem;
+      font-size:0.32rem;
       color:#b4b4b6;
   }
   .answer li p:nth-of-type(2) a{
-    font-size:1.2rem;
+    font-size:0.32rem;
     color:rgb(128,128,182);
   }
 
@@ -200,7 +200,7 @@
  }
 
   .listWrapper{
-    top: 4.5rem;
+    top: 1.2rem;
   }
   /*container-image margin-10-0-0*/
 </style>

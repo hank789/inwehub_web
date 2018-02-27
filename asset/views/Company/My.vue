@@ -172,25 +172,25 @@
   }
 
   .basic .header {
-    height: 8rem;
-    margin-top: 2rem;
+    height: 2.133rem;
+    margin-top: 0.533rem;
   }
 
   .basic .separate {
     display: inline-block;
     position: relative;
-    top: 0.2rem;
-    height: 1.4rem;
-    width: 0.1rem;
-    margin: 0 0.5rem;
-    border-left: 0.1rem solid #c8c8c8;
+    top: 0.053rem;
+    height: 0.373rem;
+    width: 0.026rem;
+    margin: 0 0.133rem;
+    border-left: 0.026rem solid #c8c8c8;
   }
 
   .basic {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     background: #fff;
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
   }
 
   .basic .realname {
@@ -199,32 +199,32 @@
   }
 
   .basic .company {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444;
     font-weight: 500;
-    margin: 0.8rem 0 0.8rem;
+    margin: 0.213rem 0 0.213rem;
   }
 
   .basic .authentication {
     color: #444;
-    margin-bottom: 1.1rem;
+    margin-bottom: 0.293rem;
   }
 
   .basic .authentication .icon {
     color: #03aef9;
-    margin-right: 0.5rem;
+    margin-right: 0.133rem;
   }
 
   .basic .buttonWrapper {
     padding: 0 35%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.4rem;
   }
 
   .basic .buttonWrapper .mui-btn-primary {
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
-    padding: 0.6rem 0;
-    font-size: 1.4rem;
+    border: 0.026rem solid #03aef9;
+    padding: 0.16rem 0;
+    font-size: 0.373rem;
   }
 
   .basic .line {
@@ -236,7 +236,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -245,7 +245,7 @@
 
   .basic .infos {
     text-align: left;
-    padding: 1.5rem 0;
+    padding: 0.4rem 0;
   }
 
   .basic .infos span {
@@ -253,32 +253,32 @@
   }
 
   .basic .infos .info {
-    padding: 0.5rem 0;
+    padding: 0.133rem 0;
   }
 
   .river {
-    height: 1rem;
+    height: 0.266rem;
     background: #ececee;
   }
 
   .nav {
-    padding: 2rem 1.6rem;
+    padding: 0.533rem 0.426rem;
 
   }
 
   .nav .navWrapper {
     position: relative;
     background: #f3f4f6;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .nav .navWrapper .line {
     position: absolute;
     left: 50%;
-    top: 1rem;
-    bottom: 1rem;
-    width: 0.1rem;
+    top: 0.266rem;
+    bottom: 0.266rem;
+    width: 0.026rem;
     background: #dcdcdc;
   }
 
@@ -286,26 +286,26 @@
     display: inline-block;
     text-align: center;
     width: 50%;
-    padding: 2rem 0 1.7rem;
+    padding: 0.533rem 0 0.453rem;
   }
 
   .nav .navWrapper .item .icon {
-    font-size: 3rem;
+    font-size: 0.8rem;
     color: #03aef9;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.08rem;
   }
 
   .avatar {
     position: absolute;
     left: 50%;
-    margin-left: -3.45rem;
+    margin-left: -0.92rem;
 
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 6.9rem;
-    width: 6.9rem;
-    font-size: 2rem;
+    height: 1.84rem;
+    width: 1.84rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -342,23 +342,23 @@
 
   .more a {
     display: inline-block;
-    padding: 1rem 1.5rem 1.3rem;
-    font-size: 1.4rem;
+    padding: 0.266rem 0.4rem 0.346rem;
+    font-size: 0.373rem;
     color: #808080;
     width: 100%;
   }
 
   .more a:after {
-    font-size: 2.2rem;
-    right: 0.8rem;
+    font-size: 0.586rem;
+    right: 0.213rem;
   }
 
   .more:after {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     bottom: 0;
-    left: 1.5rem;
-    height: 0.1rem;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -366,7 +366,7 @@
   }
 
   .moreWrapper {
-    padding-bottom: 1rem;
+    padding-bottom: 0.266rem;
     background: #fff;
   }
 </style>

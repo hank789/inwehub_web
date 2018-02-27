@@ -68,7 +68,7 @@
 <style scoped="scoped">
 
   .detail-ask {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.133rem;
     margin-top: 0 !important;
   }
 
@@ -77,19 +77,19 @@
   }
 
   .detail-ask:after {
-    left: 1.5rem;
-    right: 1.5rem;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 
   .detail-ask .mui-media-body .timeAgo {
     color: #999;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
+    bottom: 0.266rem;
+    right: 0.4rem;
     color: #ff9800;
   }
 
@@ -98,15 +98,15 @@
   }
 
   .content {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
   }
 
   .footer {
-    padding: 1rem 1.5rem;
-    font-size: 1.2rem;
+    padding: 0.266rem 0.4rem;
+    font-size: 0.32rem;
   }
 
   .footer .amount {

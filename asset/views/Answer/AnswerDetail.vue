@@ -433,17 +433,17 @@
 
 
   .buttons {
-    padding-top: 0.5rem;
+    padding-top: 0.133rem;
     background: #fff;
   }
 
   .buttons .mui-col-sm-6 {
-    padding: 1.5rem;
+    padding: 0.4rem;
   }
 
   .timeEnd {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
   }
 
   .timeEnd .countDown {
@@ -452,8 +452,8 @@
   }
 
   .form-realAnswer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 0.533rem;
+    padding-bottom: 0.533rem;
     background: #fff;
     position: relative;
   }
@@ -465,7 +465,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #c8c7cc;
@@ -474,28 +474,28 @@
   .form-realAnswer textarea {
     background: none;
     width: 100%;
-    height: 20rem;
+    height: 5.333rem;
     border: none;
   }
 
   .form-realAnswer .title {
-    margin-left: 1rem;
-    height: 3.2rem;
+    margin-left: 0.266rem;
+    height: 0.853rem;
   }
 
   .form-realAnswer .button-wrapper {
-    padding: 0 1.5rem 0;
+    padding: 0 0.4rem 0;
   }
 
   .form-realAnswer .time {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #fa4975;
-    padding-left: 1.5rem;
+    padding-left: 0.4rem;
   }
 
   .form-realAnswer .time b {
     font-weight: normal;
-    margin-right: 0.5rem;
+    margin-right: 0.133rem;
   }
 
   .mui-table-view-cell:after {
@@ -508,25 +508,25 @@
 
   .time div {
     display: inline-block;
-    margin-left: 0.5rem;
+    margin-left: 0.133rem;
   }
 /*标签*/
   .tags{
     width:100%;
     overflow: hidden;
-    padding:0 1.6rem 1rem 0.9rem;
+    padding:0 0.426rem 0.266rem 0.24rem;
   }
   .tags p{
     float: left;
     margin: 0;
     padding: 0;
-    margin-left: 0.7rem;
-    margin-top: 1rem;
+    margin-left: 0.186rem;
+    margin-top: 0.266rem;
     background:#a8dff7;
     color: #FFFFFF;
-    border-radius: 5rem;
-    font-size: 1.2rem;
-    padding: 0 0.8rem;
+    border-radius: 1.333rem;
+    font-size: 0.32rem;
+    padding: 0 0.213rem;
   }
 
 </style>

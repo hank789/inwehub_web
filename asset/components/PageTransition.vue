@@ -37,12 +37,12 @@
   }
   .my-slide-left-enter, .my-slide-right-leave-active {
     opacity: 0;
-    -webkit-transform: translate(0, 5rem);
-    transform: translate(0, 5rem);
+    -webkit-transform: translate(0, 1.333rem);
+    transform: translate(0, 1.333rem);
   }
   .my-slide-left-leave-active, .my-slide-right-enter {
     opacity: 0;
-    -webkit-transform: translate(0, -5rem);
-    transform: translate(0, -5rem);
+    -webkit-transform: translate(0, -1.333rem);
+    transform: translate(0, -1.333rem);
   }
 </style>

@@ -115,7 +115,7 @@
     right: 0;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -126,9 +126,9 @@
   /*邀请的头部*/
   .invitation-title{
     width:100%;
-    height:13.2rem;
+    height:3.52rem;
     background: #f3f4f6;
-    padding: 0 1.7rem;
+    padding: 0 0.453rem;
     text-align: center;
     position: relative;
     display: flex;
@@ -137,43 +137,43 @@
   }
   .invitation-title svg{
     color: #b4b4b6;
-    font-size: 2.5rem;
+    font-size: 0.666rem;
     position: absolute;
-    left:1.7rem;
-    top:2rem;
+    left:0.453rem;
+    top:0.533rem;
   }
   .invitation-title .next-step{
-    width:7.5rem;
-    height:3.4rem;
-    line-height: 3.2rem;
-    border: 0.1rem solid #03aef9;
-    border-radius: 5rem;
-    font-size:1.4rem;
+    width:2rem;
+    height:0.906rem;
+    line-height: 0.853rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
+    font-size:0.373rem;
     color:#03aef9;
     position: absolute;
-    right:1.7rem;
-    top:1.6rem;
+    right:0.453rem;
+    top:0.426rem;
   }
   .invitation-title .invitation-text{
     position: absolute;
-    top:5.9rem;
+    top:1.573rem;
     text-align: left;
     display: flex;
     flex-direction: column;
   }
   .invitation-text p:nth-of-type(1){
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #808080;
   }
   .invitation-text p:nth-of-type(2){
-    font-size:2rem;
+    font-size:0.533rem;
     color: #323232;
   }
   /*tag*/
 .tag-title{
-  font-size:1.3rem;
+  font-size:0.346rem;
   color: #808080;
-  margin:2rem 0 0 4%;
+  margin:0.533rem 0 0 4%;
 
 }
   ul{
@@ -182,16 +182,16 @@
   }
   ul li{
     float: left;
-    border:0.1rem solid #dcdcdc;
-    font-size: 1.4rem;
+    border:0.026rem solid #dcdcdc;
+    font-size: 0.373rem;
     color: #444444;
-    border-radius: 0.4rem;
-    padding: 0.5rem 1rem;
-    margin: 0.9rem 0 0 1rem;
+    border-radius: 0.106rem;
+    padding: 0.133rem 0.266rem;
+    margin: 0.24rem 0 0 0.266rem;
   }
   ul li.bg-blue{
     background: #03aef9;
-    border:0.1rem solid #03aef9;
+    border:0.026rem solid #03aef9;
     color: #FFFFFF;
   }
 

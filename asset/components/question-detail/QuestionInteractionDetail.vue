@@ -125,9 +125,9 @@
 <style lang="less"  scoped="scoped">
 
   .detail-ask {
-    padding-bottom: 2rem;
+    padding-bottom: 0.533rem;
     margin-top:0 !important;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
   }
 
   .detail-ask:before {
@@ -135,19 +135,19 @@
   }
 
   .detail-ask:after {
-    left: 1.5rem;
-    right: 1.5rem;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 
   .detail-ask .mui-media-body .timeAgo {
     color: #999;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
+    bottom: 0.266rem;
+    right: 0.4rem;
     color: #ff9800;
   }
 
@@ -156,15 +156,15 @@
   }
 
   .content{
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
-    padding-left:1.5rem;
-    padding-right:1.5rem;
+    padding-left:0.4rem;
+    padding-right:0.4rem;
   }
 
   .footer{
-    padding: 0.9rem 1.5rem 1.7rem;
-    font-size:1.2rem;
+    padding: 0.24rem 0.4rem 0.453rem;
+    font-size:0.32rem;
   }
 
   .footer .amount{
@@ -172,25 +172,25 @@
   }
 
   .footer .timeAgo{
-    margin-left: 0.4rem;
+    margin-left: 0.106rem;
     color:#03aef9;
   }
   .mui-row{
-    height:4rem;
+    height:1.066rem;
   }
   .buttonWrapper {
 
     &.buttonWrapper-1 {
-       padding: 0 0.7rem 0 1.5rem;
+       padding: 0 0.186rem 0 0.4rem;
      }
 
     &.buttonWrapper-2 {
-       padding: 0 1.5rem 0 0.7rem;
+       padding: 0 0.4rem 0 0.186rem;
      }
 
     .mui-btn-warning {
       background-color: #fcc816;
-      border: 0.1rem solid #fcc816;
+      border: 0.026rem solid #fcc816;
     }
   }
 

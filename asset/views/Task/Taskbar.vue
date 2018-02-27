@@ -166,10 +166,10 @@
 <style scoped>
   .bot {
     position: absolute;
-    right: 1.6rem;
+    right: 0.426rem;
     bottom: 0;
-    left: 1.6rem;
-    height: 0.1rem;
+    left: 0.426rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -205,7 +205,7 @@
 
   ul li {
     position: relative;
-    padding: 1rem 1.6rem 0rem 1.6rem;
+    padding: 0.266rem 0.426rem 0rem 0.426rem;
     overflow: hidden;
   }
 
@@ -224,39 +224,39 @@
 
   ul li p span {
     display: block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.16rem;
     width: 100%;
   }
 
   ul li p span:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   ul li p span:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   ul li p .third {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: rgb(68, 68, 68);
     font-weight: 500;
   }
 
   ul li p .third i {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #3c95f9;
   }
 
   ul li p .fourth {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
   .message {
-    width: 0.7rem;
-    height: 0.7rem;
+    width: 0.186rem;
+    height: 0.186rem;
     background: #f03c69;
     border-radius: 50%;
     position: absolute;
@@ -273,13 +273,13 @@
   }
 
   .container svg {
-    font-size: 6rem;
-    margin-left: 2.3rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 </style>

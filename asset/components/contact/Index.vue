@@ -139,28 +139,28 @@
   }
 
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell {
-    padding-left: 1.5rem;
+    padding-left: 0.4rem;
     color: #000000;
     position: relative;
     background-color: #ffffff;
   }
 
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell.index-bar-cell-head {
-    font-size: 1.3rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    padding-left: 1.5rem;
+    font-size: 0.346rem;
+    height: 0.666rem;
+    line-height: 0.666rem;
+    padding-left: 0.4rem;
     background-color: #f5f5f5;
   }
 
   .index-bar {
     position: fixed;
     right: 0;
-    top: 16rem;
+    top: 4.266rem;
     z-index: 12;
-    width: 2.3rem;
+    width: 0.613rem;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 1rem;
+    font-size: 0.266rem;
     color: #316ccb;
   }
 
@@ -181,21 +181,21 @@
 
   .index-bar .index-bar-item {
     color: #444;
-    line-height: 1.7rem;
-    font-size: 1.2rem;
+    line-height: 0.453rem;
+    font-size: 0.32rem;
     text-align: center;
     display: inline-block;
   }
 
   @media screen and (max-width: 370px) {
     .index-bar .index-bar-item {
-      line-height: 1.4rem;
+      line-height: 0.373rem;
     }
   }
 
   .groupWrapper {
     background: #fff;
-    padding-right: 3rem;
+    padding-right: 0.8rem;
     overflow-y: scroll;
   }
 
@@ -212,9 +212,9 @@
     color: #ffffff;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 4.4rem;
-    width: 4.4rem;
-    font-size: 2rem;
+    height: 1.173rem;
+    width: 1.173rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -246,22 +246,22 @@
 
   .avatarInner .icon {
     position: absolute;
-    right: -0.6rem;
-    bottom: -0.1rem;
-    font-size: 2.4rem;
+    right: -0.16rem;
+    bottom: -0.026rem;
+    font-size: 0.64rem;
     color: #03aef9;
   }
 
   .tap-active {
-    font-size: 1.4rem;
-    padding: 1rem 0 0.4rem;
+    font-size: 0.373rem;
+    padding: 0.266rem 0 0.106rem;
   }
 
   .textBody {
     position: absolute;
-    top: 1.2rem;
-    right: 6.8rem;
-    left: 6.8rem;
+    top: 0.32rem;
+    right: 1.813rem;
+    left: 1.813rem;
     vertical-align: top;
     color: #565656;
   }
@@ -273,12 +273,12 @@
   .ibutton {
     float: right;
     color: #03aef9;
-    border-radius: 5rem;
-    border: 0.1rem solid #03aef9;
-    padding: 0 1.5rem;
+    border-radius: 1.333rem;
+    border: 0.026rem solid #03aef9;
+    padding: 0 0.4rem;
     position: relative;
-    top: 1rem;
-    margin-right: 0.5rem;
+    top: 0.266rem;
+    margin-right: 0.133rem;
   }
 
   .ibutton.active {

@@ -78,7 +78,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -107,16 +107,16 @@
   }
 
   #pullrefresh {
-    margin-top: 4.4rem;
+    margin-top: 1.173rem;
   }
 
   /*主体部分样式*/
 
   ul {
     width: 100%;
-    height: 27.7rem;
-    padding: 0rem 1.6rem 0 1.6rem;
-    margin-top: 1.1rem;
+    height: 7.386rem;
+    padding: 0rem 0.426rem 0 0.426rem;
+    margin-top: 0.293rem;
   }
 
   ul p {
@@ -125,12 +125,12 @@
 
   ul li {
     width: 100%;
-    height: 23.8rem;
+    height: 6.346rem;
     background: #f3f4f6;
-    margin-top: 1.1rem;
-    border: 0.05rem solid #dcdcdc;
-    border-radius: 0.5rem;
-    padding: 1.2rem 1.5rem;
+    margin-top: 0.293rem;
+    border: 0.013rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    padding: 0.32rem 0.4rem;
   }
 
   ul li p {
@@ -139,22 +139,22 @@
 
   ul li p:nth-of-type(1) {
     width: 100%;
-    height: 11rem;
+    height: 2.933rem;
   }
 
   .check {
     width: 100%;
-    height: 2rem;
+    height: 0.533rem;
   }
 
   .check i:nth-of-type(1) {
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .check i:nth-of-type(2) {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
     float: right;
   }
@@ -164,34 +164,34 @@
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(2) {
-    margin-top: 2.3rem;
-    font-size: 2.3rem;
+    margin-top: 0.613rem;
+    font-size: 0.613rem;
     color: #444444;
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(3) {
-    margin-top: 0.5rem;
-    font-size: 1.4rem;
+    margin-top: 0.133rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   /*ul li p:nth-of-type(1) span:nth-of-type(2) i{
-  font-size: 2.8rem;
+  font-size: 0.746rem;
   color: #444444;
-  margin-bottom: 2rem;
+  margin-bottom: 0.533rem;
 }*/
 
   ul li p:nth-of-type(2) {
     width: 100%;
-    height: 7.6rem;
+    height: 2.026rem;
   }
 
   ul li p:nth-of-type(2) span:nth-of-type(1) {
-    margin-top: 1.4rem;
+    margin-top: 0.373rem;
   }
 
   ul li p:nth-of-type(2) span:nth-of-type(2) {
-    margin-top: 0.6rem;
+    margin-top: 0.16rem;
   }
 
   ul li p:nth-of-type(2) span {
@@ -208,7 +208,7 @@
 
   ul li p:nth-of-type(3) {
     width: 100%;
-    height: 3rem;
+    height: 0.8rem;
   }
 
   ul li p:nth-of-type(3) span {
@@ -221,15 +221,15 @@
 
   ul li p:nth-of-type(3) span {
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 0.9rem;
+    margin-top: 0.24rem;
   }
 
   ul li p:nth-of-type(3) svg {
     float: right;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
-    margin-top: 1.4rem;
+    margin-top: 0.373rem;
   }
 </style>

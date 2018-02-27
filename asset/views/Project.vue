@@ -208,99 +208,99 @@
     background-color: #3c3e44;
     text-align: center;
     position: relative;
-    height: 13.6rem;
+    height: 3.626rem;
 
   }
 
   .professor .title {
-    padding-top: 3rem;
-    font-size: 2rem;
+    padding-top: 0.8rem;
+    font-size: 0.533rem;
     color: #fff;
     font-weight: bolder;
   }
 
   .professor .titleSub {
-    padding-top: 0.5rem;
-    font-size: 1.4rem;
+    padding-top: 0.133rem;
+    font-size: 0.373rem;
     color: #fff;
     font-weight: bolder;
   }
 
   .empty {
     text-align: center;
-    padding-top: 3rem;
+    padding-top: 0.8rem;
   }
 
   .empty .myicon {
-    width: 12.5rem;
-    height: 10.6rem;
+    width: 3.333rem;
+    height: 2.826rem;
   }
 
   .empty .title {
     color: #9B9B9B;
-    font-size: 1.4rem;
-    margin-top: 1rem;
+    font-size: 0.373rem;
+    margin-top: 0.266rem;
   }
 
   .askDetail {
     position: absolute;
-    bottom: 10rem;
+    bottom: 2.666rem;
     left: 50%;
-    margin-left: -8.4rem;
+    margin-left: -2.24rem;
   }
 
   .askDetail .titleSub {
     color: #9B9B9B;
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
+    font-size: 0.373rem;
+    margin-bottom: 0.533rem;
   }
 
   .askDetail {
-    height: 6.7rem;
+    height: 1.786rem;
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
   }
 
   .askDetail .buttonAsk {
     position: relative;
     background: #4990E2;
     display: inline-block;
-    width: 12.5rem;
-    height: 3.7rem;
-    font-size: 1.4rem;
-    line-height: 3.7rem;
+    width: 3.333rem;
+    height: 0.986rem;
+    font-size: 0.373rem;
+    line-height: 0.986rem;
     text-align: center;
-    border-radius: 5rem;
-    padding-left: 2rem;
+    border-radius: 1.333rem;
+    padding-left: 0.533rem;
 
     color: #fff;
   }
 
   .askDetail .buttonAsk span {
     position: absolute;
-    font-size: 3rem;
-    left: 2rem;
-    top: -0.4rem;
+    font-size: 0.8rem;
+    left: 0.533rem;
+    top: -0.106rem;
   }
 
   .mui-bar .myicon {
-    width: 1.8rem;
-    height: 1.8rem;
-    left: 1rem;
-    top: 1.2rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    left: 0.266rem;
+    top: 0.32rem;
   }
 
   .list {
     position: absolute;
-    top: 14rem;
+    top: 3.733rem;
   }
 
   .list .item {
-    margin: 0 5rem 1rem;
-    padding-bottom: 1.5rem;
+    margin: 0 1.333rem 0.266rem;
+    padding-bottom: 0.4rem;
     color: #4A4A4A;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #9F9F9F;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #9F9F9F;
     background: #fff;
   }
 
@@ -309,15 +309,15 @@
   }
 
   .list .item .time {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
 
-    padding: 1.5rem 1.5rem 0;
+    padding: 0.4rem 0.4rem 0;
     position: relative;
   }
 
   .list .item .title {
-    font-size: 2rem;
-    padding: 1.5rem;
+    font-size: 0.533rem;
+    padding: 0.4rem;
     position: relative;
   }
 
@@ -327,7 +327,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
@@ -336,45 +336,45 @@
   }
 
   .list .item .desc {
-    padding: 1.5rem 1.5rem 0;
-    line-height: 2rem;
-    font-size: 1.4rem;
+    padding: 0.4rem 0.4rem 0;
+    line-height: 0.533rem;
+    font-size: 0.373rem;
   }
 
   .mui-navigate-right:after {
     font-weight: bolder;
-    font-size: 2.2rem;
-    right: 1.8rem;
-    top: 2.4rem;
+    font-size: 0.586rem;
+    right: 0.48rem;
+    top: 0.64rem;
   }
 
   .buttonWrapper {
     position: fixed;
-    bottom: 7rem;
+    bottom: 1.866rem;
     left: 50%;
     z-index: 997;
-    margin-left: -6.2rem;
+    margin-left: -1.653rem;
   }
 
   .buttonWrapper .buttonAsk {
     position: relative;
     background: #4990E2;
     display: inline-block;
-    width: 12.5rem;
-    height: 3.7rem;
-    font-size: 1.4rem;
-    line-height: 3.7rem;
+    width: 3.333rem;
+    height: 0.986rem;
+    font-size: 0.373rem;
+    line-height: 0.986rem;
     text-align: center;
-    border-radius: 5rem;
-    padding-left: 2rem;
+    border-radius: 1.333rem;
+    padding-left: 0.533rem;
 
     color: #fff;
   }
 
   .buttonWrapper .buttonAsk span {
     position: absolute;
-    font-size: 3rem;
-    left: 2rem;
-    top: -0.4rem;
+    font-size: 0.8rem;
+    left: 0.533rem;
+    top: -0.106rem;
   }
 </style>

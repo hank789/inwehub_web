@@ -92,39 +92,39 @@
 <style scoped="scoped">
   .info-choose {
     width: 100%;
-    height: 9.5rem;
+    height: 2.533rem;
     background: #FFFFFF;
     position: absolute;
     bottom: 0;
-    padding-top: 1.3rem;
-    padding-left: 3.9rem;
+    padding-top: 0.346rem;
+    padding-left: 1.04rem;
     z-index: 999;
     display: none;
 
   }
 
   .info-choose p {
-    width: 4.5rem;
-    height: 7.1rem;
+    width: 1.2rem;
+    height: 1.893rem;
     float: left;
 
   }
 
   .info-choose p:nth-of-type(2) {
-    margin-left: 3.6rem;
+    margin-left: 0.96rem;
   }
 
   .info-choose p svg {
-    font-size: 4.8rem;
+    font-size: 1.28rem;
     color: rgb(220, 220, 220);
   }
 
   .info-choose p span {
     display: block;
-    margin-left: 1rem;
-    margin-top: 0.2rem;
+    margin-left: 0.266rem;
+    margin-top: 0.053rem;
     color: #808080;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
 
   }
 </style>

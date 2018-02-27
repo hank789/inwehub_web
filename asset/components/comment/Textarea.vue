@@ -340,27 +340,27 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    min-height: 4.5rem;
+    min-height: 1.2rem;
     overflow: hidden;
-    padding: 0.5rem 1.5rem;
+    padding: 0.133rem 0.4rem;
     z-index: 10001;
   }
 
   .commentWrapper .textareaWrapper {
     position: relative;
     background: #fff;
-    border-radius: 0.5rem;
-    min-height: 3.5rem;
+    border-radius: 0.133rem;
+    min-height: 0.933rem;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 2rem;
-    margin: 0.6rem 0 0;
-    padding: 0 3.1rem 0 0.5rem;
-    font-size: 1.4rem;
+    height: 0.533rem;
+    margin: 0.16rem 0 0;
+    padding: 0 0.826rem 0 0.133rem;
+    font-size: 0.373rem;
 
   }
 
@@ -370,10 +370,10 @@
 
   .commentWrapper .icon {
     position: absolute;
-    right: 0.5rem;
+    right: 0.133rem;
     color: #03aef9;
-    font-size: 2.6rem;
-    bottom: 0.5rem;
+    font-size: 0.693rem;
+    bottom: 0.133rem;
   }
 
   .commentShadowWrapper{
@@ -393,29 +393,29 @@
   }
 
   #commentJeditor .counter{
-    bottom:-9.5rem;
+    bottom:-2.533rem;
   }
   #commentJeditor .ql-editor.ql-blank::before{
     font-style:normal;
-    margin-top:0.2rem;
-    font-size: 1.4rem;
+    margin-top:0.053rem;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #commentJeditor .textarea-wrapper .quill-editor {
-    min-height:3.5rem;
+    min-height:0.933rem;
     height:auto;
   }
   #commentJeditor .quill-editor .ql-container {
-    min-height: 3.5rem;
+    min-height: 0.933rem;
     height:auto;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #commentJeditor .counter {
     display: none;
   }
   #commentJeditor .ql-editor .ql-size-small{
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   #commentJeditor .ql-snow .ql-editor a{
@@ -427,7 +427,7 @@
     height: 100%;
     outline: none;
     overflow-y: auto;
-    padding: 0.7rem 2.5rem 0.7rem 0.9rem;
+    padding: 0.186rem 0.666rem 0.186rem 0.24rem;
     tab-size: 4;
     -moz-tab-size: 4;
     text-align: left;

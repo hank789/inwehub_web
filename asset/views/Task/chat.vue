@@ -385,11 +385,11 @@
 
   .message {
     width: 100%;
-    height: 4.7rem;
+    height: 1.253rem;
     background: #ececee;
     position: absolute;
     bottom: 0;
-    padding: 0 1rem;
+    padding: 0 0.266rem;
     z-index: 5;
     display: flex;
     flex-direction: row;
@@ -398,18 +398,18 @@
   }
 
   .message input {
-    height: 3.5rem;
-    border-radius: 0.5rem;
+    height: 0.933rem;
+    border-radius: 0.133rem;
     background: #ffffff;
     border: none;
     margin-bottom: 0;
-    box-shadow: 0 0 1rem rgba(220, 220, 220, 1);
+    box-shadow: 0 0 0.266rem rgba(220, 220, 220, 1);
 
   }
 
   .message svg {
-    font-size: 3.7rem;
-    margin-left: 1rem;
+    font-size: 0.986rem;
+    margin-left: 0.266rem;
     color: #03aef9;
 
   }
@@ -425,15 +425,15 @@
   .user li {
     width: 100%;
     overflow: hidden;
-    margin-top: 1rem;
-    /*border: 0.1rem solid #CCCCCC;*/
+    margin-top: 0.266rem;
+    /*border: 0.026rem solid #CCCCCC;*/
   }
    /*客服*/
   .consumer p:nth-of-type(1) {
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 4.6rem;
+    line-height: 1.226rem;
   }
 
   .consumer p:nth-of-type(2) {
@@ -442,10 +442,10 @@
   }
 
   .consumer p:nth-of-type(2) img {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 1.12rem;
+    height: 1.12rem;
     float: left;
-    border-radius: 0.8rem;
+    border-radius: 0.213rem;
   }
 
   .consumer p:nth-of-type(2) span {
@@ -453,58 +453,58 @@
     float: left;
     display: block;
     max-width: 80%;
-    min-height: 3.5rem;
+    min-height: 0.933rem;
     margin-left: 3%;
-    border-radius: 1rem;
-    border: 0.1rem solid #dcdcdc;
+    border-radius: 0.266rem;
+    border: 0.026rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 0.7rem;
+    padding: 0.186rem;
     word-wrap:break-word;
   }
 
   .consumer p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 0.1rem solid #dcdcdc;
-    /*border: 0.6rem solid transparent;
-    border-right: 0.6rem solid #FFFFFF;
-    border-bottom: 0.6rem solid #FFFFFF;*/
+    border: 0.026rem solid #dcdcdc;
+    /*border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #FFFFFF;
+    border-bottom: 0.16rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -0.4rem;
+    left: -0.106rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 1.5rem;
+    top: 0.4rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg{
-    width:8.5rem;
-    height:10.5rem;
+    width:2.266rem;
+    height:2.8rem;
     padding: 0;
   }
   .consumer p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 0.1rem solid #dcdcdc;
-    /*border: 0.6rem solid transparent;
-    border-right: 0.6rem solid #FFFFFF;
-    border-bottom: 0.6rem solid #FFFFFF;*/
+    border: 0.026rem solid #dcdcdc;
+    /*border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #FFFFFF;
+    border-bottom: 0.16rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -0.4rem;
+    left: -0.106rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 1.5rem;
+    top: 0.4rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg img{
@@ -521,9 +521,9 @@
   .Customerservice p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 4.6rem;
+    line-height: 1.226rem;
   }
 
   .Customerservice p:nth-of-type(2) {
@@ -532,10 +532,10 @@
   }
 
   .Customerservice p:nth-of-type(2) img {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 1.12rem;
+    height: 1.12rem;
     float: right;
-    border-radius: 0.8rem;
+    border-radius: 0.213rem;
   }
 
   .Customerservice p:nth-of-type(2) span {
@@ -543,52 +543,52 @@
     float: right;
     display: block;
     max-width: 80%;
-    min-height: 3.5rem;
+    min-height: 0.933rem;
     margin-right: 3%;
-    border-radius: 1rem;
-    border: 0.1rem solid #dcdcdc;
+    border-radius: 0.266rem;
+    border: 0.026rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 0.7rem;
+    padding: 0.186rem;
     word-wrap: break-word;
   }
 
   .Customerservice p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 0.1rem solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -0.4rem;
+    right: -0.106rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 1.5rem;
+    top: 0.4rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg{
-    width:8.5rem;
-    height:10.5rem;
+    width:2.266rem;
+    height:2.8rem;
     padding: 0;
   }
   .Customerservice p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 0.1rem solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -0.4rem;
+    right: -0.106rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 1.5rem;
+    top: 0.4rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg img{
@@ -596,12 +596,12 @@
     height:100%;
   }
   .chatListWrapper {
-    bottom: 4.7rem;
+    bottom: 1.253rem;
   }
 
 </style>
 <style>
   .chatImg .container-image{
-    height:10.5rem;
+    height:2.8rem;
   }
 </style>

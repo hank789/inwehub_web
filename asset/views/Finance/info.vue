@@ -96,24 +96,24 @@
 <style scoped>
   .myMoney {
     background: #3c3e44;
-    height: 13.6rem;
+    height: 3.626rem;
     color: #fff;
-    padding: 2rem 3rem;
+    padding: 0.533rem 0.8rem;
   }
 
   .myMoney .title {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .myMoney span {
-    font-size: 2.4rem;
-    margin-right: 1rem;
+    font-size: 0.64rem;
+    margin-right: 0.266rem;
     font-weight: normal;
   }
 
   .myMoney .money {
-    margin-top: 3rem;
-    font-size: 4.4rem;
+    margin-top: 0.8rem;
+    font-size: 1.173rem;
     font-weight: 200;
   }
 
@@ -123,30 +123,30 @@
 
   .menus .menu-item {
     text-align: center;
-    height: 9.2rem;
+    height: 2.453rem;
     background: #fff;
     display: inline-block;
   }
 
   .menus .menu-item .myicon {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
     display: inline-block;
-    width: 3rem;
-    height: 2.1rem;
+    width: 0.8rem;
+    height: 0.56rem;
   }
 
   .menus .menu-item .title {
     display: inline-block;
-    font-size: 1.4rem;
-    margin-top: 1rem;
+    font-size: 0.373rem;
+    margin-top: 0.266rem;
   }
 
   .menus .menu-splite {
     position: absolute;
-    width: 0.1rem;
-    height: 6.6rem;
+    width: 0.026rem;
+    height: 1.76rem;
     background-color: #D9D9D9;
-    top: 1.3rem;
+    top: 0.346rem;
     left: 50%;
 
     -webkit-transform: scaleX(.5);

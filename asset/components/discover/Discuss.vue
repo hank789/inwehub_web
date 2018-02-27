@@ -345,7 +345,7 @@
     right: 0;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -355,29 +355,29 @@
     width: 100%;
     background: #FFFFFF;
     overflow: hidden;
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 0.4rem 0.4rem 0.4rem;
   }
 
   .message_title {
     width: 100%;
-    height: 4.4rem;
+    height: 1.173rem;
     position: relative;
-    line-height: 4.4rem;
+    line-height: 1.173rem;
 
   }
 
   .message_title p {
     float: left;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
 
   }
 
   .message_title svg {
     float: right;
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     color: #03aef9;
-    margin-top: 1.2rem;
+    margin-top: 0.32rem;
   }
 
   .message_detail {
@@ -389,56 +389,56 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 1.2rem 0 1.2rem 0;
+    padding: 0.32rem 0 0.32rem 0;
   }
   .message_detail li:nth-last-of-type(1){
-    padding: 1.2rem 0 0 0;
+    padding: 0.32rem 0 0 0;
   }
 
   .message_b {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
 
   .message_t {
     width: 100%;
-    height: 3.2rem;
+    height: 0.853rem;
   }
 
   .message_t p:nth-child(1) {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 0.853rem;
+    height: 0.853rem;
     float: left;
     position: relative;
   }
 
   .message_t p:nth-child(1) img {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 0.853rem;
+    height: 0.853rem;
     border-radius: 50%;
   }
 
   .message_t p:nth-child(1) svg {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #03aef9;
     position: absolute;
     bottom: 0;
-    right: -0.5rem;
+    right: -0.133rem;
   }
 
   .message_t p:nth-child(2) {
     float: left;
-    margin-left: 1rem;
-    height: 3.2rem;
-    line-height: 3.2rem;
+    margin-left: 0.266rem;
+    height: 0.853rem;
+    line-height: 0.853rem;
   }
 
   .message_t p:nth-child(3) {
     float: right;
     height:100%;
-    line-height: 3.2rem;
-    font-size: 1.3rem;
+    line-height: 0.853rem;
+    font-size: 0.346rem;
     color: #c8c8c8;
   }
 
@@ -455,27 +455,27 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    min-height: 4.5rem;
+    min-height: 1.2rem;
     overflow: hidden;
-    padding: 0.5rem 1.5rem;
+    padding: 0.133rem 0.4rem;
     z-index: 77;
   }
 
   .commentWrapper .textareaWrapper {
     position: relative;
     background: #fff;
-    border-radius: 0.5rem;
-    min-height: 3.5rem;
+    border-radius: 0.133rem;
+    min-height: 0.933rem;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 2rem;
-    margin: 0.6rem 0 0;
-    padding: 0 3.1rem 0 0.5rem;
-    font-size: 1.4rem;
+    height: 0.533rem;
+    margin: 0.16rem 0 0;
+    padding: 0 0.826rem 0 0.133rem;
+    font-size: 0.373rem;
 
   }
 
@@ -485,10 +485,10 @@
 
   .commentWrapper .icon {
     position: absolute;
-    right: 0.5rem;
+    right: 0.133rem;
     color: #03aef9;
-    font-size: 2.6rem;
-    bottom: 0.5rem;
+    font-size: 0.693rem;
+    bottom: 0.133rem;
   }
 
   .empty {
@@ -498,32 +498,32 @@
   .empty {
     width: 100%;
     background: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
     text-align: center;
-    padding: 2rem 0;
+    padding: 0.533rem 0;
   }
 
   .empty .icon {
-    font-size: 5rem;
+    font-size: 1.333rem;
   }
 
   .empty p {
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #c8c8c8;
     text-align: center;
   }
 
   .component-comment-reply{
-    margin-top:0.5rem;
+    margin-top:0.133rem;
   }
 
   .moreReply{
-    margin-top:0.5rem;
+    margin-top:0.133rem;
   }
 
   #sheet_comment_del li {
     color:#4990E2 !important;
-    padding:1.3rem 1.5rem;
+    padding:0.346rem 0.4rem;
   }
 </style>

@@ -96,63 +96,63 @@
     background: #ececee;
 
     width: 100%;
-    height: 12.9rem;
+    height: 3.44rem;
     text-align: center;
   }
 
   .basic .info {
     position: absolute;
     left: 50%;
-    margin-left: -10.2rem;
-    top: 3.3rem;
+    margin-left: -2.72rem;
+    top: 0.88rem;
     color: #808080;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
   }
 
   .basic a {
     position: absolute;
     color: #444444;
-    font-size: 3rem;
-    top: 1.6rem;
-    left: 0.7rem;
+    font-size: 0.8rem;
+    top: 0.426rem;
+    left: 0.186rem;
   }
 
   .basic .info .img {
-    width: 20.4rem;
-    height: 7.7rem;
+    width: 5.44rem;
+    height: 2.053rem;
     background-image: url(../../statics/images/askcoupon@2x.png);
     background-size: contain;
   }
 
   .freeAsk .text div {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #444;
   }
 
   .freeAsk .text div span {
     color: #03aef9;
-    margin-left: 0.5rem;
-    font-size: 1.4rem;
+    margin-left: 0.133rem;
+    font-size: 0.373rem;
   }
 
   .freeAskWrapper {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
     width: 100%;
-    height: 4.8rem;
+    height: 1.28rem;
   }
 
   .freeAsk {
     position: absolute;
-    left: 2.5rem;
-    right: 1.5rem;
+    left: 0.666rem;
+    right: 0.4rem;
   }
 
   .freeAsk .icon {
     position: absolute;
-    width: 3.5rem;
-    left: -0.8rem;
-    top: -0.5rem;
-    height: 4.8rem;
+    width: 0.933rem;
+    left: -0.213rem;
+    top: -0.133rem;
+    height: 1.28rem;
     display: inline-block;
     background-image: url("../../statics/images/icon_xiaoha@2x.png");
     background-repeat: no-repeat;
@@ -162,12 +162,12 @@
 
   .freeAsk .text {
     background: #dcdcdc;
-    border: 0.1rem #dcdcdc solid;
-    border-radius: 5rem;
-    font-size: 1.4rem;
-    line-height: 1.4rem;
+    border: 0.026rem #dcdcdc solid;
+    border-radius: 1.333rem;
+    font-size: 0.373rem;
+    line-height: 0.373rem;
     color: #323232;
-    padding: 1.3rem 0rem 1.3rem 3.5rem;
+    padding: 0.346rem 0rem 0.346rem 0.933rem;
 
   }
 
@@ -176,33 +176,33 @@
   }
 
   .mui-navigate-right:after {
-    right: 1rem;
-    font-size: 2.2rem;
+    right: 0.266rem;
+    font-size: 0.586rem;
   }
 
   .buttonWrapper {
-    margin-top: 1rem;
-    height: 5rem;
-    padding: 0 1.5rem;
+    margin-top: 0.266rem;
+    height: 1.333rem;
+    padding: 0 0.4rem;
   }
 
   .buttonWrapper button {
-    margin-top: 1rem;
-    border-radius: 5rem;
+    margin-top: 0.266rem;
+    border-radius: 1.333rem;
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .content {
     background: #fff;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
-    padding: 2.5rem 1rem 2rem 3.2rem;
+    padding: 0.666rem 0.266rem 0.533rem 0.853rem;
   }
 
   .content h5 {
     position: relative;
-    margin-top: 3rem;
+    margin-top: 0.8rem;
   }
 
   .content h5:first-child {
@@ -225,38 +225,38 @@
 
   .content h5:before {
     position: absolute;
-    left: -1.6rem;
-    top: 0.5rem;
+    left: -0.426rem;
+    top: 0.133rem;
     content: "";
     display: inline-block;
     background: #03aef9;
-    width: 0.5rem;
-    height: 0.5rem;
-    border: 0.1rem solid #03aef9;
-    border-radius: 0.5rem;
+    width: 0.133rem;
+    height: 0.133rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 0.133rem;
   }
 
   .warning {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
-    padding: 1.5rem 0 0.5rem 0;
+    padding: 0.4rem 0 0.133rem 0;
   }
 
   .bottomNav {
     width: 100%;
-    height: 14.7rem;
+    height: 3.92rem;
   }
 
   .fixedWrapper {
     position: fixed;
     width: 100%;
-    height: 14.7rem;
+    height: 3.92rem;
     bottom: 0;
     background: #efeff4;
 
   }
 
   .cover {
-    top: -0.3rem !important;
+    top: -0.08rem !important;
   }
 </style>

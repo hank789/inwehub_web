@@ -176,7 +176,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -185,62 +185,62 @@
   /*提问样式*/
   .recommendlist {
     width: 100%;
-    height: 4.4rem;
+    height: 1.173rem;
     overflow: hidden;
     background: #FFFFFF;
     position: relative;
   }
   .recommendlist p:nth-of-type(1){
-    height:4.4rem;
+    height:1.173rem;
     float: left;
-    line-height: 4.4rem;
-    font-size:1.6rem;
+    line-height: 1.173rem;
+    font-size:0.426rem;
     color: #444444;
     margin-left: 4%;
   }
   .recommendlist p:nth-of-type(2){
-    width:8.1rem;
-    height:3.4rem;
+    width:2.16rem;
+    height:0.906rem;
     margin-right: 4%;
     background:#a8dff7;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     float: right;
-    margin-top: 0.5rem;
-    line-height: 3.4rem;
-    font-size:1.4rem;
+    margin-top: 0.133rem;
+    line-height: 0.906rem;
+    font-size:0.373rem;
     color: #444444;
     text-align: center;
     position: relative;
   }
   .recommendlist p:nth-of-type(2) svg{
-    font-size: 2.2rem;
-    margin-bottom: -0.4rem;
+    font-size: 0.586rem;
+    margin-bottom: -0.106rem;
   }
   .recommendlist p:nth-of-type(2) i{
     position: absolute;
     font-style: normal;
-    width: 3rem;
-    height: 1.7rem;
-    font-size: 1.2rem;
+    width: 0.8rem;
+    height: 0.453rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     background: #fa4975;
     text-align: center;
-    line-height:1.6rem;
-    top: 0.25rem;
-    left: -2.4rem;
+    line-height:0.426rem;
+    top: 0.066rem;
+    left: -0.64rem;
   }
   .recommendlist p:nth-of-type(2) i:after {
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #fa4975;
-    /* border: 0.1rem solid #dcdcdc; */
+    /* border: 0.026rem solid #dcdcdc; */
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -0.3rem;
+    right: -0.08rem;
     top: 0rem;
     bottom: 0;
     margin: auto;
@@ -252,7 +252,7 @@
 }
   .recommend_b {
     width: 100%;
-    /*height: 20rem;*/
+    /*height: 5.333rem;*/
     overflow: hidden;
   }
 
@@ -261,106 +261,106 @@
     overflow: hidden;
     position: relative;
     background: #FFFFFF;
-    margin-bottom: 1rem;
-    padding: 1.2rem 0;
+    margin-bottom: 0.266rem;
+    padding: 0.32rem 0;
   }
   .recommend_b li div{
     width:92%;
     margin-left: 4%;
   }
   .recommend_b li .description{
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
   }
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    margin-top: 1.2rem;
+    margin-top: 0.32rem;
     background:#f3f4f6;
-    padding: 1.3rem 1.5rem 1.5rem;
-    border-radius: 0.4rem;
+    padding: 0.346rem 0.4rem 0.4rem;
+    border-radius: 0.106rem;
   }
   /*.component-dianzanList*/
   .component-dianzanList span{
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#03aef9;
   }
   .component-dianzanList svg{
-    font-size:1.7rem;
+    font-size:0.453rem;
     color: #808080;
   }
   .avatar{
-    height:4.4rem;
-    margin-top: 1.5rem;
+    height:1.173rem;
+    margin-top: 0.4rem;
   }
    .avatar p:nth-of-type(1){
-    height:4.4rem;
+    height:1.173rem;
     float: left;
     position: relative;
   }
    .avatar p:nth-of-type(1) img{
-    width:3.3rem;
-    height:3.3rem;
+    width:0.88rem;
+    height:0.88rem;
     border-radius: 50%;
-    margin-top: 0.55rem;
+    margin-top: 0.146rem;
     float: left;
   }
   .avatar p:nth-of-type(1) svg{
     position: absolute;
-    font-size: 1.4rem;
-    bottom: 0.5rem;
-    right: -0.5rem;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
+    right: -0.133rem;
   }
   .avatar p:nth-of-type(2){
     width:88%;
-    height:4.4rem;
+    height:1.173rem;
     float: right;
     background:#03aef9;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 4.4rem;
-    font-size:1.6rem;
+    line-height: 1.173rem;
+    font-size:0.426rem;
     color: #f2f2f2;
   }
   .question_info{
-    height:1.9rem;
+    height:0.506rem;
     /*background: #cccccc;*/
-    margin-top: 1.2rem;
-    line-height:1.9rem;
+    margin-top: 0.32rem;
+    line-height:0.506rem;
   }
   .question_info p:nth-of-type(1){
    float: left;
-    font-size:1.3rem;
+    font-size:0.346rem;
     color: #747474;
   }
   .question_info p:nth-of-type(1) i{
     display: inline-block;
-    width:0.1rem;
-    height:1.2rem;
+    width:0.026rem;
+    height:0.32rem;
     background: #dbdbdb;
-    margin:0 0.9rem -0.1rem 0.9rem;
+    margin:0 0.24rem -0.026rem 0.24rem;
   }
   .question_info p:nth-of-type(1) span:nth-of-type(1){
     color: #b4b4b6;
   }
   .question_info p:nth-of-type(2){
     float: right;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span{
    float: right;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 2.2rem;
+    margin-left: 0.586rem;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 1.8rem;
-    margin-bottom: -0.2rem;
+    font-size: 0.48rem;
+    margin-bottom: -0.053rem;
   }
 
 
@@ -382,8 +382,8 @@
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 4.5rem;
-    font-size: 1.4rem;
+    line-height: 1.2rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -394,17 +394,17 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 5.6rem;
+    width: 1.493rem;
     bottom: 0;
     left: 50%;
-    margin-left: -2.8rem;
-    height: 0.2rem;
+    margin-left: -0.746rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
   }
   .listWrapper{
-    top:9rem;
+    top:2.4rem;
   }
 
 

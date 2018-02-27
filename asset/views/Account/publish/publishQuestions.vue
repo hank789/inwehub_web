@@ -86,7 +86,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -100,7 +100,7 @@
 
   .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -111,10 +111,10 @@
     width: 25%;
     height: 100%;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    line-height: 4.5rem;
+    line-height: 1.2rem;
     font-weight: 600;
   }
 
@@ -126,11 +126,11 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 2.7rem;
-    height: 0.15rem;
+    width: 0.72rem;
+    height: 0.04rem;
     left:0;
     right:0;
-    bottom: 0.05rem;
+    bottom: 0.013rem;
     margin:auto;
     background: #3c95f9;
   }
@@ -140,7 +140,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -171,36 +171,36 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 1.4rem 0 1.3rem 0;
+    padding: 0.373rem 0 0.346rem 0;
     position: relative;
   }
 
   .answer li p:nth-of-type(2) {
     color: #444444;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   .answer li p:nth-of-type(2) {
     overflow: hidden;
-    margin-top: 0.6rem;
+    margin-top: 0.16rem;
 
   }
 
   .label {
     float: left;
-    width: 5rem;
-    height: 1.7rem;
-    line-height: 1.7rem;
-    border-radius: 5rem;
+    width: 1.333rem;
+    height: 0.453rem;
+    line-height: 0.453rem;
+    border-radius: 1.333rem;
     background: #fcc816;
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     text-align: center;
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(2) {
     float: right;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
   /*状态的颜色*/
@@ -212,6 +212,6 @@
    background: #c8c8c8;
  }
   .listWrapper{
-    top: 4.5rem;
+    top: 1.2rem;
   }
 </style>

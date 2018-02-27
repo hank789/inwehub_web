@@ -6,10 +6,10 @@
         <p class="more" @tap.stop.prevent="$router.pushPlus('/discover/company/services')">查看全部</p>
       </div>
       <swiper :options="swiperOption" class="home-recommend">
-        <swiper-slide style="width: 22rem;" :title="item.title" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+        <swiper-slide style="width: 5.866rem;" :title="item.title" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
           <img :src="item.img_url_slide"/>
         </swiper-slide>
-        <swiper-slide  style="width: 22rem;" class="service" v-if="isShow ? isShow : 0">
+        <swiper-slide  style="width: 5.866rem;" class="service" v-if="isShow ? isShow : 0">
            <p @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">我也可以提供服务</p>
            <p>如您或您的公司希望在InweHub展示业务开展合作，点此申请。</p>
         </swiper-slide>
@@ -109,26 +109,26 @@
   }
   .container-item .title{
     width:100%;
-    height:4.25rem;
+    height:1.133rem;
     padding: 0 4%;
-    line-height: 4.25rem;
+    line-height: 1.133rem;
   }
   .container-item .title p:nth-of-type(1){
     float: left;
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
 
   }
   .container-item .title p:nth-of-type(2){
     float: right;
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#03aef9;
 
   }
 
   .home-recommend {
     width: 100%;
-    height: 17.2rem;
+    height: 4.586rem;
     padding-left:4%;
     background: #FFFFFF;
   }
@@ -137,7 +137,7 @@
     bottom: 0;
     left: 0;
     content: '';
-    height: 1rem;
+    height: 0.266rem;
     background-color: #f3f4f6;
     width: 100%;
   }
@@ -146,15 +146,15 @@
     margin-left: 0rem;
   }
   .home-card {
-    height: 14.7rem;
+    height: 3.92rem;
     background: #ececee;
     position: relative;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
   .home-card img{
     width:100%;
     height:100%;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
 
   .container-item:after {
@@ -169,26 +169,26 @@
   /* 合作*/
   .service{
     background: #03aef9;
-    height:14.7rem;
-     border-radius:0.4rem;
+    height:3.92rem;
+     border-radius:0.106rem;
   }
   .service p:nth-of-type(1){
-    width:14.2rem;
-    height:3.5rem;
-    border: 0.15rem solid #c2cddc;
-    font-size:1.4rem;
+    width:3.786rem;
+    height:0.933rem;
+    border: 0.04rem solid #c2cddc;
+    font-size:0.373rem;
     color:#FFFFFF;
     text-align: center;
-    line-height: 3.5rem;
+    line-height: 0.933rem;
     margin: auto;
-    margin-top: 3rem;
-    margin-bottom: 1.3rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.346rem;
   }
   .service p:nth-of-type(2){
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#FFFFFF;
     text-align: center;
-    line-height:1.8rem;
+    line-height:0.48rem;
     margin: 0 8%;
   }
 </style>

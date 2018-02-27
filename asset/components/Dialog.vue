@@ -368,10 +368,10 @@
       </div>
     </div>
     <!--红包的金额详情-->
-    <div id="animationContainerTop" style="width:29.3rem; height:33.6rem">
-      <div id="animationContainer" style="width:29.3rem; height:33.6rem">
+    <div id="animationContainerTop" style="width:7.813rem; height:8.96rem">
+      <div id="animationContainer" style="width:7.813rem; height:8.96rem">
         <canvas id="canvas" width="293" height="336"></canvas>
-        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:29.3rem; height:33.6rem; position: absolute; left: 0rem; top: 0rem; display: block;">
+        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:7.813rem; height:8.96rem; position: absolute; left: 0rem; top: 0rem; display: block;">
         </div>
         <!--红包详情-->
         <div class="my-cash" id="my-cash">
@@ -529,9 +529,9 @@
 
 <style scoped="scoped">
   #test {
-    width: 24rem;
-    height: 11rem;
-    border: 0.1rem solid #007AFF;
+    width: 6.4rem;
+    height: 2.933rem;
+    border: 0.026rem solid #007AFF;
   }
 
   ul,
@@ -549,31 +549,31 @@
   /*显示等级弹窗样式*/
 
   .p-level {
-    width: 24rem;
-    height: 11rem;
+    width: 6.4rem;
+    height: 2.933rem;
     /*background: #CCCCCC;*/
     text-align: center;
   }
 
   .p-level > svg {
-    font-size: 5rem;
+    font-size: 1.333rem;
   }
 
   .p-level > p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
-    margin-top: 1rem;
+    margin-top: 0.266rem;
     width: 100%;
-    height: 2rem;
+    height: 0.533rem;
     text-align: center;
-    line-height: 2rem;
+    line-height: 0.533rem;
   }
 
   .p-level > p:nth-of-type(2) {
     width: 36%;
     margin-left: 32%;
-    height: 2rem;
-    margin-top: 0.3rem;
+    height: 0.533rem;
+    margin-top: 0.08rem;
     /*background: #CCCCCC;*/
   }
 
@@ -582,7 +582,7 @@
     width: 80%;
     height: 100%;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
@@ -593,40 +593,40 @@
     height: 100%;
     background: url(../statics/images/rank.png) no-repeat;
     background-size: 100%;
-    margin-top: 0.2rem;
+    margin-top: 0.053rem;
     text-align: center;
-    line-height: 1.2rem;
+    line-height: 0.32rem;
     color: #FFFFFF;
   }
 
   /*升级的弹窗*/
 
   #p-upgrade {
-    width: 24rem;
-    /*height: 16rem;*/
-    border: 0.1rem solid #009689;
+    width: 6.4rem;
+    /*height: 4.266rem;*/
+    border: 0.026rem solid #009689;
   }
 
   .p-upgrade {
-    width: 24rem;
-    /*height: 16rem;*/
+    width: 6.4rem;
+    /*height: 4.266rem;*/
   }
 
   .upgrade_t {
     width: 100%;
-    height: 6.5rem;
-    border-bottom: 0.05rem dashed #DCDCDC;
+    height: 1.733rem;
+    border-bottom: 0.013rem dashed #DCDCDC;
   }
 
   .upgrade_t p:nth-of-type(1) {
     width: 60%;
     margin-left: 20%;
-    height: 2.1rem;
+    height: 0.56rem;
   }
 
   .upgrade_t p:nth-of-type(1) span:nth-of-type(1) {
     color: #03aef9;
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     float: left;
     width: 85%;
     /*background: #007AFF;*/
@@ -639,7 +639,7 @@
     background-size: 100%;
     float: left;
     text-align: center;
-    line-height: 1.8rem;
+    line-height: 0.48rem;
     color: #FFFFFF;
   }
 
@@ -647,141 +647,141 @@
     width: 50%;
     margin-left: 20%;
     text-align: center;
-    line-height: 1.8rem;
-    margin-top: 0.3rem;
-    font-size: 1.4rem;
+    line-height: 0.48rem;
+    margin-top: 0.08rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .upgrade_b {
     width: 100%;
-    /*height: 9.5rem;*/
+    /*height: 2.533rem;*/
     overflow: hidden;
     text-align: center;
-    border-bottom: 0.05rem solid #DCDCDC;
+    border-bottom: 0.013rem solid #DCDCDC;
   }
 
   .upgrade_b > p {
     width: 27%;
-    height: 10rem;
+    height: 2.666rem;
     float: left;
     margin-left: 4.75%;
   }
 
   .upgrade_b > p svg {
-    font-size: 4rem;
+    font-size: 1.066rem;
     color: #fcc916;
-    margin-top: 1.8rem;
+    margin-top: 0.48rem;
   }
 
   .upgrade_b > p span {
     display: block;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #444444;
   }
 
   .upgrade_btn {
     width: 100%;
-    height: 5rem;
+    height: 1.333rem;
     /*background: #CCCCCC;*/
     text-align: center;
-    line-height: 5rem;
+    line-height: 1.333rem;
     color: #03aef9;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   /*领取新手任务*/
 
   #p-task {
-    width: 24.5rem;
-    height: 32rem;
+    width: 6.533rem;
+    height: 8.533rem;
   }
 
   .p-task {
-    width: 24.5rem;
-    height: 32rem;
-    border: 0.1rem solid #ffffff;
+    width: 6.533rem;
+    height: 8.533rem;
+    border: 0.026rem solid #ffffff;
   }
 
   .task_t {
     width: 100%;
-    height: 4.9rem;
+    height: 1.306rem;
   }
 
   .task_t p:nth-of-type(1) {
     color: #03aef9;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     font-weight: 500;
     text-align: center;
   }
 
   .task_t p:nth-of-type(2) {
     color: #808080;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     text-align: center;
   }
 
   .task_b {
     width: 100%;
-    height: 23.1rem;
+    height: 6.16rem;
     margin: 0;
   }
 
   .task_b li {
     width: 100%;
-    height: 7.7rem;
+    height: 2.053rem;
     text-align: center;
-    border-bottom: 0.05rem solid #DCDCDC;
-    padding-top: 1.7rem;
+    border-bottom: 0.013rem solid #DCDCDC;
+    padding-top: 0.453rem;
   }
 
   .task_b li p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .task_b li p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .task_btn {
     width: 100%;
-    height: 5rem;
+    height: 1.333rem;
     /*background: #CCCCCC;*/
     text-align: center;
-    line-height: 5rem;
+    line-height: 1.333rem;
     color: #03aef9;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
   }
 
   /*完善名片提示*/
 
   #perfectCard-t {
-    width: 24rem;
-    height: 11.7rem;
+    width: 6.4rem;
+    height: 3.12rem;
   }
 
   .perfectCard-t {
-    width: 25rem;
-    height: 10rem;
-    /*border: 0.1rem solid #DCDCDC;*/
+    width: 6.666rem;
+    height: 2.666rem;
+    /*border: 0.026rem solid #DCDCDC;*/
   }
 
   .perfectCard-t p:nth-child(1) {
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 3.1rem;
+    margin-top: 0.826rem;
   }
 
   .perfectCard-t p:nth-child(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 0.75rem;
+    margin-top: 0.2rem;
   }
 
   .perfectCard-t p:nth-child(2) i {
@@ -790,56 +790,56 @@
   }
 
   #perfectCard-b {
-    width: 24rem;
-    height: 5.4rem;
+    width: 6.4rem;
+    height: 1.44rem;
     /*background: #CCCCCC;*/
   }
 
   .perfectCard-b {
-    width: 24rem;
-    height: 5.4rem;
-    font-size: 1.6rem;
+    width: 6.4rem;
+    height: 1.44rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 5.4rem;
+    line-height: 1.44rem;
   }
 
   .fenhongxize .title {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444;
   }
 
   .fenhongxize .desc {
-    margin-top: 2rem;
-    font-size: 1.4rem;
-    line-height: 2.1rem;
+    margin-top: 0.533rem;
+    font-size: 0.373rem;
+    line-height: 0.56rem;
     color: #808080;
   }
 
   .fenhongxize ul {
-    padding: 0 0 0 2rem;
-    margin: 0.8rem 0 0;
+    padding: 0 0 0 0.533rem;
+    margin: 0.213rem 0 0;
   }
 
   .fenhongxize ul li.item {
     position: relative;
     list-style: none;
-    font-size: 1.4rem;
-    padding: 0.8rem 0;
+    font-size: 0.373rem;
+    padding: 0.213rem 0;
     color: #808080;
   }
 
   .fenhongxize ul li.item:before {
     content: '';
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
     position: absolute;
     border-radius: 50%;
-    width: 0.3rem;
-    height: 0.3rem;
-    left: -1.4rem;
-    top: 1.6rem;
+    width: 0.08rem;
+    height: 0.08rem;
+    left: -0.373rem;
+    top: 0.426rem;
   }
 
   .helpWrapper {
@@ -848,38 +848,38 @@
   }
 
   .helpWrapper .title {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     text-align: center;
     color: #444;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.4rem;
   }
 
   .helpWrapper .desc {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444;
   }
 
   .helpWrapper .desc-1 {
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .boxWrapper {
-    border: 0.1rem solid blue;
+    border: 0.026rem solid blue;
   }
 
   .askCommunityDetailShare_title {
     text-align: center;
-    margin-top: 1.7rem;
+    margin-top: 0.453rem;
   }
 
   .askCommunityDetailShare_title .title {
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     color: #444;
   }
 
   .askCommunityDetailShare_title .titleSub {
-    margin-top: 1rem;
-    font-size: 1.4rem;
+    margin-top: 0.266rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
@@ -888,7 +888,7 @@
   }
 
   .askCommunityDetailShare_body .title {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
@@ -896,28 +896,28 @@
   /*完善名片提示*/
 
   #expertapplication-t {
-    width: 24rem;
-    height: 11.7rem;
-    border: 0.1rem solid #DCDCDC;
+    width: 6.4rem;
+    height: 3.12rem;
+    border: 0.026rem solid #DCDCDC;
   }
 
   .expertapplication-t {
-    width: 25rem;
-    height: 10rem;
+    width: 6.666rem;
+    height: 2.666rem;
   }
 
   .expertapplication-t p:nth-child(1) {
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 3.1rem;
+    margin-top: 0.826rem;
   }
 
   .expertapplication-t p:nth-child(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 0.75rem;
+    margin-top: 0.2rem;
   }
 
   .expertapplication-t p:nth-child(2) i {
@@ -926,83 +926,83 @@
   }
 
   #expertapplication-b {
-    width: 24rem;
-    height: 5.4rem;
+    width: 6.4rem;
+    height: 1.44rem;
     /*background: #CCCCCC;*/
   }
 
   .expertapplication-b {
-    width: 24rem;
-    height: 5.4rem;
-    font-size: 1.6rem;
+    width: 6.4rem;
+    height: 1.44rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 5.4rem;
+    line-height: 1.44rem;
   }
 
   /*文章*/
 
   .article_t {
-    /*width: 24rem;*/
-    /*height: 10rem;*/
-    /* border: 0.1rem solid #CCCCCC;*/
-    margin-top: 2rem;
+    /*width: 6.4rem;*/
+    /*height: 2.666rem;*/
+    /* border: 0.026rem solid #CCCCCC;*/
+    margin-top: 0.533rem;
   }
 
   .article_t p:nth-child(1) {
-    font-size: 1.9rem;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
   }
 
   .article_t p:nth-child(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 0.8rem;
+    margin-top: 0.213rem;
     text-align: center;
   }
 
   .article_t p:nth-child(2) i {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #03aef9;
     font-style: normal;
   }
 
   .article_b li {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.32rem;
     position: relative;
-    margin-left: 1.3rem;
+    margin-left: 0.346rem;
   }
 
   .article_b span {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 1.5rem;
-    margin-bottom: 1.2rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.32rem;
     display: block;
   }
 
   .article_b li:before {
     content: '';
     background: #03aef9;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
     position: absolute;
     border-radius: 50%;
-    width: 0.3rem;
-    height: 0.3rem;
-    top: 0.8rem;
-    left: -1rem;
+    width: 0.08rem;
+    height: 0.08rem;
+    top: 0.213rem;
+    left: -0.266rem;
   }
 
   .article_b p {
     color: #03aef9;
-    font-size: 1.6rem;
-    border-top: 0.1rem solid #dcdcdc;
+    font-size: 0.426rem;
+    border-top: 0.026rem solid #dcdcdc;
     text-align: center;
-    padding-top: 1.5rem;
+    padding-top: 0.4rem;
     padding-bottom: 0rem;
   }
 
@@ -1016,19 +1016,19 @@
   .hotAnswer_b li {
     width: 100%;
     overflow: hidden;
-    padding: 1.2rem 0;
+    padding: 0.32rem 0;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .hotAnswer_d {
     width: 100%;
-    height: 3.2rem;
-    margin-top: 0.45rem;
+    height: 0.853rem;
+    margin-top: 0.12rem;
   }
 
   .hotAnswer_d p {
@@ -1036,17 +1036,17 @@
   }
 
   .hotAnswer_d p:nth-child(1) {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 0.853rem;
+    height: 0.853rem;
     /*background: #CCCCCC;*/
     position: relative;
   }
 
   .hotAnswer_d p:nth-child(1) > svg {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     bottom: 0;
-    right: -0.4rem;
+    right: -0.106rem;
   }
 
   .hotAnswer_d p:nth-child(1) > img {
@@ -1056,33 +1056,33 @@
   }
 
   .hotAnswer_d p:nth-child(2) {
-    /*width: 34rem;*/
-    height: 1.8rem;
-    margin-top: 0.9rem;
-    line-height: 1.8rem;
-    font-size: 1.3rem;
+    /*width: 9.066rem;*/
+    height: 0.48rem;
+    margin-top: 0.24rem;
+    line-height: 0.48rem;
+    font-size: 0.346rem;
     color: #808080;
     /*background: #CCCCCC;*/
-    margin-left: 0.8rem;
+    margin-left: 0.213rem;
   }
 
   .hotAnswer_recommend {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
-    /*margin-top: 1.5rem;*/
+    /*margin-top: 0.4rem;*/
   }
 
   .hotAnswer_b .share {
     display: block;
     width: 100%;
-    height: 4rem;
+    height: 1.066rem;
     background: #03aef9;
-    border-radius: 0.4rem;
-    font-size: 1.6rem;
+    border-radius: 0.106rem;
+    font-size: 0.426rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 4rem;
-    margin-top: 0.5rem;
+    line-height: 1.066rem;
+    margin-top: 0.133rem;
   }
 
   /*提问成功*/
@@ -1090,22 +1090,22 @@
   .hotAnswer_b .ask_share {
     display: block;
     width: 100%;
-    height: 4rem;
-    font-size: 1.6rem;
+    height: 1.066rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 4rem;
-    margin-top: 0.5rem;
+    line-height: 1.066rem;
+    margin-top: 0.133rem;
   }
 
   .hotAnswer_b .ask_divided {
     display: block;
     width: 100%;
-    height: 3rem;
-    font-size: 1.3rem;
+    height: 0.8rem;
+    font-size: 0.346rem;
     color: #808080;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
 
   /*
@@ -1117,16 +1117,16 @@
   }
 
   .AnswerRepeat p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
     text-align: center;
   }
 
   .AnswerRepeat p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
   }
 /* 是企业用户判读*/
 
@@ -1134,17 +1134,17 @@
     width: 100%;
   }
   .CompanyUser p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .CompanyUser p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 0.3rem;
+    margin-top: 0.08rem;
   }
   /* 不是企业用户判读*/
 
@@ -1152,34 +1152,34 @@
     width: 100%;
   }
   .Company p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .Company p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 0.3rem;
+    margin-top: 0.08rem;
   }
   /*聊天条件弹窗样式*/
   .chat {
     width: 100%;
   }
   .chat p:nth-of-type(1) {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .chat p:nth-of-type(2) {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 0.3rem;
+    margin-top: 0.08rem;
   }
   /* 签到的弹窗 */
   .signIn {
@@ -1191,24 +1191,24 @@
     text-align: center;
   }
   .signIn_t img{
-    height:2.5rem;
+    height:0.666rem;
   }
   .signIn_t p{
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
-    margin-bottom: 1.6rem;
+    margin-bottom: 0.426rem;
   }
   .signIn_m{
     width:104%;
     margin: 0 auto;
     overflow: hidden;
-    padding: 1.7rem 0;
-    border-bottom:0.1rem dashed #dcdcdc;
-    border-top:0.1rem dashed #dcdcdc;
+    padding: 0.453rem 0;
+    border-bottom:0.026rem dashed #dcdcdc;
+    border-top:0.026rem dashed #dcdcdc;
   }
   .signIn_m li{
     width:25%;
-    height:7.54rem;
+    height:2.01rem;
     text-align: center;
     float: left;
     text-align: center;
@@ -1220,14 +1220,14 @@
     margin-right: 12.5%;
   }
   .signIn_m li p:nth-of-type(1){
-    width:5.1rem;
-    height:5.1rem;
+    width:1.36rem;
+    height:1.36rem;
     background:#c8c8c8;
     border-radius: 50%;
-    border:0.15rem solid #d8d8d8;
+    border:0.04rem solid #d8d8d8;
     text-align: center;
-    line-height: 5.1rem;
-    font-size:1.4rem;
+    line-height: 1.36rem;
+    font-size:0.373rem;
     color: #808080;
     margin: 0 auto;
     position: relative;
@@ -1241,109 +1241,109 @@
     margin: auto;
   }
   .signIn_m li p:nth-of-type(2){
-    font-size:1.2rem;
+    font-size:0.32rem;
     color: #808080;
-    margin-top: 0.2rem;
+    margin-top: 0.053rem;
   }
   .signIn_m li p.click-signIn{
     background:rgb(252,200,22);
-    border:0.15rem solid #444444;
+    border:0.04rem solid #444444;
   }
   .signIn_m li p.click-signIn span{
     display: inline-block;
-    width: 3rem;
-    line-height: 1.7rem;
-    margin-top: 0.8rem;
-    font-size: 1.3rem;
+    width: 0.8rem;
+    line-height: 0.453rem;
+    margin-top: 0.213rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
   }
 
   .signIn_b{
      width:100%;
      margin: 0 auto;
-     height:5.8rem;
+     height:1.546rem;
      text-align:left;
-     font-size:1.4rem;
+     font-size:0.373rem;
      color: #444444;
    }
   .signIn_b p i{
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
   .signIn_b p:nth-of-type(1){
-    margin-top: 1.5rem;
+    margin-top: 0.4rem;
   }
  /*签到获取的成长值弹窗*/
 .scoreDetail{
-  width:34.3rem;
-  height:24rem;
-  border-radius: 1.8rem;
+  width:9.146rem;
+  height:6.4rem;
+  border-radius: 0.48rem;
   background:#f93277;
   text-align: center;
   margin: auto;
   position: relative;
-  padding-top: 2.5rem;
+  padding-top: 0.666rem;
 }
 .scoreDetail svg{
-  font-size:2rem;
+  font-size:0.533rem;
   color: #ffc2d7;
   position: absolute;
-  right:1.4rem;
-  top:1.3rem;
+  right:0.373rem;
+  top:0.346rem;
 }
 .scoreDetail p:nth-of-type(1){
-  font-size:2.3rem;
+  font-size:0.613rem;
   color: #ffffff;
   font-weight:500;
 }
 .scoreDetail p:nth-of-type(2){
-  font-size:1.6rem;
+  font-size:0.426rem;
   color: #ffffff;
-  margin-top: 1.1rem;
-  margin-bottom: 2.1rem;
+  margin-top: 0.293rem;
+  margin-bottom: 0.56rem;
 }
 .scoreDetail p:nth-of-type(2) i{
-  font-size:2.7rem;
+  font-size:0.72rem;
   color: #fcc816;
 }
 .scoreDetail p:nth-of-type(3){
   width:91%;
-  height:3.4rem;
+  height:0.906rem;
   text-align: center;
-  line-height: 3.4rem;
+  line-height: 0.906rem;
   margin:0 auto;
-  bottom: 2.5rem;
-  font-size:1.4rem;
+  bottom: 0.666rem;
+  font-size:0.373rem;
   color: #ffffff;
-  border:0.1rem solid #fc98bb;
-  border-radius: 5rem;
-  margin-top: 1.5rem;
+  border:0.026rem solid #fc98bb;
+  border-radius: 1.333rem;
+  margin-top: 0.4rem;
 }
   .scoreDetail-m{
     width:91%;
-    height:6.8rem;
+    height:1.813rem;
     margin: 0 auto;
-    border-top:0.1rem dashed #fc98bb;
+    border-top:0.026rem dashed #fc98bb;
     position: relative;
   }
   .Prompt {
     width: 86%;
-    height: 4rem;
+    height: 1.066rem;
     margin-left: 7%;
     position: relative;
-    top:1rem;
+    top:0.266rem;
   }
   .Prompt b {
     display: block;
-    width: 4.5rem;
-    padding: 0 0.2rem;
-    height: 2.5rem;
+    width: 1.2rem;
+    padding: 0 0.053rem;
+    height: 0.666rem;
     background: #03aef9;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    line-height: 2.5rem;
-    border-radius: 0.8rem;
+    line-height: 0.666rem;
+    border-radius: 0.213rem;
     position: absolute;
 
   }
@@ -1353,28 +1353,28 @@
     display: block;
     width: 0;
     height: 0;
-    border: 0.6rem solid transparent;
-    border-right: 0.6rem solid #03aef9;
-    border-bottom: 0.6rem solid #03aef9;
+    border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #03aef9;
+    border-bottom: 0.16rem solid #03aef9;
     position: absolute;
     transform: rotate(45deg);
-    bottom: -0.2rem;
-    left: 1.6rem;
+    bottom: -0.053rem;
+    left: 0.426rem;
   }
 
   /*进度条*/
 
   .ProgressBar {
     width: 100%;
-    height: 4rem;
+    height: 1.066rem;
     position: absolute;
-    top:4.5rem;
+    top:1.2rem;
 
   }
 
   .ProgressBar > div {
     width: 86%;
-    height: 0.2rem;
+    height: 0.053rem;
     background: #fc98bb;
     margin-left: 7%;
   }
@@ -1382,24 +1382,24 @@
   .ProgressBar > div i {
     display: block;
     width: 25%;
-    height: 0.2rem;
+    height: 0.053rem;
     background: #03aef9;
   }
 
   .fouce {
     width: 86%;
-    height: 0.2rem;
+    height: 0.053rem;
     left: 7%;
     /*background: #007AFF;*/
-    top: -0.1rem;
+    top: -0.026rem;
     position: absolute;
   }
 
   .fouce span {
     display: block;
     float: left;
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.106rem;
+    height: 0.106rem;
     background: #FFFFFF;
     border-radius: 50%;
     position: absolute;
@@ -1427,7 +1427,7 @@
 
   .number {
     width: 86%;
-    height: 2rem;
+    height: 0.533rem;
     left: 7%;
     position: absolute;
   }
@@ -1436,7 +1436,7 @@
     display: block;
     float: left;
     color: #ffc2d7;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     position: absolute;
   }
 
@@ -1476,8 +1476,8 @@
   }
   /*关闭按钮*/
   .cash-button{
-    width:2.9rem;
-    height:2.9rem;
+    width:0.773rem;
+    height:0.773rem;
     border-radius:50%;
     background: #808080;
     position: absolute;
@@ -1486,9 +1486,9 @@
     bottom:50%;
     margin:auto;
     z-index: 999;
-    -webkit-transform: translate(0rem,21rem);
-    -moz-transform:translate(0rem,21rem);
-    transform: translate(0rem,21rem);
+    -webkit-transform: translate(0rem,5.6rem);
+    -moz-transform:translate(0rem,5.6rem);
+    transform: translate(0rem,5.6rem);
   }
   .cash-button svg{
     position: absolute;
@@ -1497,41 +1497,41 @@
     top:0;
     bottom:0;
     color: #FFFFFF;
-    font-size:2rem;
+    font-size:0.533rem;
     margin:auto;
   }
   /*跳转按钮*/
   .my-wallet{
     width:88%;
-    height:3.4rem;
+    height:0.906rem;
     background: #fcc816;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 3.4rem;
-    font-size:1.4rem;
+    line-height: 0.906rem;
+    font-size:0.373rem;
     color: #444444;
     position: absolute;
     left:0;
     right:0;
-    bottom: 5.5rem;
+    bottom: 1.466rem;
     margin:auto;
     opacity: 0;
   }
   /*红包详情*/
   .my-cash{
     width:58%;
-    height:12.5rem;
+    height:3.333rem;
     position: absolute;
     left:0;
     right:0;
-    top: 6rem;
+    top: 1.6rem;
     margin:auto;
     opacity: 0;
   }
   .my-cash i{
     position: absolute;
     width: 100%;
-    height:0.15rem;
+    height:0.04rem;
     background: #808080;
     left:0;
     right:0;
@@ -1541,145 +1541,145 @@
   }
   .my-cash p{
     width:100%;
-    height:5.2rem;
+    height:1.386rem;
     text-align: center;
-    line-height:5.2rem;
+    line-height:1.386rem;
     color: #444444;
   }
   .my-cash p:nth-of-type(1){
-    font-size:6.4rem;
+    font-size:1.706rem;
     font-weight: 500;
   }
   .my-cash p:nth-of-type(1) span{
-    font-size: 2.4rem;
+    font-size: 0.64rem;
     font-weight: 500;
     position: relative;
-    top: -3rem;
+    top: -0.8rem;
   }
   .my-cash p:nth-of-type(2){
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     font-weight: 500;
-    margin-top: 1rem;
+    margin-top: 0.266rem;
   }
 
   .home_invitation p:nth-of-type(1){
-    font-size:1.6rem;
+    font-size:0.426rem;
     color: #444444;
     font-weight: 500;
   }
   .home_invitation p:nth-of-type(2){
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #444444;
     font-weight: normal;
-    margin-top: -0.6rem;
+    margin-top: -0.16rem;
     line-height: 0;
   }
   /*开启通知*/
   .openNotice{
     width:100%;
-    height:27rem;
+    height:7.2rem;
     background: #FFFFFF;
-    border-radius:1.8rem;
-    padding-top: 3.1rem;
+    border-radius:0.48rem;
+    padding-top: 0.826rem;
   }
   .openNotice p:nth-of-type(1){
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+    font-size: 0.426rem;
+    line-height: 0.64rem;
     color: #444444;
-    padding: 0 1.8rem 0 1.8rem;
-    margin-bottom: 0.7rem;
+    padding: 0 0.48rem 0 0.48rem;
+    margin-bottom: 0.186rem;
   }
   .openNotice p:nth-of-type(2){
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
-    padding: 0 1.8rem 0 1.8rem;
-    margin-bottom: 3.2rem;
+    padding: 0 0.48rem 0 0.48rem;
+    margin-bottom: 0.853rem;
   }
   .openNotice ul li{
     width:100%;
-    height:4.3rem;
+    height:1.146rem;
     text-align: center;
-    line-height: 4.3rem;
-    font-size: 1.6rem;
+    line-height: 1.146rem;
+    font-size: 0.426rem;
     color: #03aef9;
-    border-top:0.05rem solid #dcdcdc;
+    border-top:0.013rem solid #dcdcdc;
   }
   /*抽奖弹窗*/
   .luckDraw{
     width:100%;
-    height:42rem;
-    border-radius:1.8rem;
+    height:11.2rem;
+    border-radius:0.48rem;
     background: #ffffff;
-    padding-top: 3.1rem;
+    padding-top: 0.826rem;
   }
   .luckDraw .qualification{
     text-align: center;
-    font-size:1.9rem;
+    font-size:0.506rem;
     color: #03aef9;
     font-weight: 500;
   }
 
   .luckDraw .title_invitation{
     width:100%;
-    height:4.4rem;
-    margin-top: 1.5rem;
+    height:1.173rem;
+    margin-top: 0.4rem;
     position: relative;
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
   }
   .luckDraw  .title_invitation .cions-avatar{
     float: left;
     position: relative;
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
     background: #cccccc;
   }
   .luckDraw  .title_invitation .cions-avatar img{
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
   }
   .luckDraw  .title_invitation .cions-avatar svg{
     position: absolute;
-    font-size: 2rem;
-    right: -0.5rem;
-    bottom: -0.2rem;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .luckDraw  .text{
-    margin-left: 1rem;
+    margin-left: 0.266rem;
     float: left;
   }
   .luckDraw  .text p:nth-of-type(1){
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
     font-weight: 500;
   }
   .luckDraw  .text p:nth-of-type(1) i{
     display: inline-block;
-    width:0.1rem;
-    height:1.2rem;
+    width:0.026rem;
+    height:0.32rem;
     background: #b4b4b6;
-    margin:0 0.5rem -0.1rem 0.5rem;
+    margin:0 0.133rem -0.026rem 0.133rem;
   }
   .luckDraw  .text p:nth-of-type(2){
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #444444;
-    margin-left: -0.4rem;
+    margin-left: -0.106rem;
   }
  /**/
   .luckDraw .search{
-    margin-top: 1.4rem;
-    font-size: 1.4rem;
+    margin-top: 0.373rem;
+    font-size: 0.373rem;
     color: #808080;
-    padding: 0 1.5rem;
+    padding: 0 0.4rem;
   }
   .luckDraw .wechat{
-    width:11.2rem;
-    height:12.2rem;
-    border-radius: 0.4rem;
-    border: 0.1rem solid #979797;
+    width:2.986rem;
+    height:3.253rem;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #979797;
     margin: 0 auto;
-    margin-top: 2.3rem;
+    margin-top: 0.613rem;
   }
   .luckDraw .wechat img{
     width: 100%;
@@ -1687,20 +1687,20 @@
   }
 
   .luckDraw  .waiting{
-    margin-top: 1.2rem;
-    font-size: 1.4rem;
+    margin-top: 0.32rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
   }
   .luckDraw  .btn{
     width:100%;
-    margin-top: 2rem;
-    height:5.3rem;
-    line-height: 5.3rem;
+    margin-top: 0.533rem;
+    height:1.413rem;
+    line-height: 1.413rem;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #03aef9;
-    border-top:0.1rem solid #dcdcdc;
+    border-top:0.026rem solid #dcdcdc;
   }
 
 

@@ -571,7 +571,7 @@
     right: 0;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -581,21 +581,21 @@
 
   header {
     width: 100%;
-    height: 4.4rem;
+    height: 1.173rem;
     background: #f3f4f6;
     text-align: center;
   }
 
   header svg {
-    font-size: 8rem;
+    font-size: 2.133rem;
     color: #3c3e44;
-    margin-top: -1.3rem;
+    margin-top: -0.346rem;
   }
 
   /*轮播样式*/
 
   #slider img {
-    height: 13.6rem;
+    height: 3.626rem;
     width: 100%;
   }
 
@@ -603,8 +603,8 @@
 
   .home-expert {
     width: 100%;
-    height: 4.4rem;
-    margin-bottom: 1rem;
+    height: 1.173rem;
+    margin-bottom: 0.266rem;
     background: #FFFFFF;
     position: relative;
   }
@@ -618,15 +618,15 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 0.1rem;
-    height: 2rem;
+    width: 0.026rem;
+    height: 0.533rem;
     background: #DCDCDC;
   }
 
   .home-expert div {
     width: 49%;
-    height: 4.4rem;
-    line-height: 4.4rem;
+    height: 1.173rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
@@ -640,47 +640,47 @@
 
   .home-expert div p {
     /*width:65%;*/
-    height: 2.5rem;
+    height: 0.666rem;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto;
-    line-height: 2.5rem;
+    line-height: 0.666rem;
   }
 
   .home-expert div p svg {
     display: block;
     float: left;
-    font-size: 2.5rem;
-    margin-bottom: -0.4rem;
+    font-size: 0.666rem;
+    margin-bottom: -0.106rem;
   }
 
   .home-expert div p span {
     display: block;
     float: left;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
-    margin-left: 0.3rem;
+    margin-left: 0.08rem;
   }
 
   .home-expert div p b {
     display: block;
     float: left;
-    width: 3rem;
-    padding: 0 0.2rem;
-    height: 1.8rem;
+    width: 0.8rem;
+    padding: 0 0.053rem;
+    height: 0.48rem;
     background: #F8C732;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    line-height: 1.8rem;
-    border-radius: 0.5rem;
+    line-height: 0.48rem;
+    border-radius: 0.133rem;
     position: relative;
     z-index: 5;
-    top: 0.35rem;
-    left: 0.5rem;
+    top: 0.093rem;
+    left: 0.133rem;
   }
 
   .home-expert div p b::after {
@@ -688,12 +688,12 @@
     display: block;
     width: 0;
     height: 0;
-    border: 0.6rem solid transparent;
-    border-right: 0.6rem solid #F8C732;
-    border-bottom: 0.6rem solid #F8C732;
+    border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #F8C732;
+    border-bottom: 0.16rem solid #F8C732;
     position: absolute;
     transform: rotate(135deg);
-    left: -0.1rem;
+    left: -0.026rem;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -704,22 +704,22 @@
 
   .freeAskWrapper {
     position: relative;
-    height: 4.8rem;
-    margin-top: 1.2rem;
+    height: 1.28rem;
+    margin-top: 0.32rem;
   }
 
   .freeAsk {
     position: absolute;
-    left: 1.5rem;
-    right: 1.5rem;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 
   .freeAsk .icon {
     position: absolute;
-    width: 3.5rem;
-    left: -0.8rem;
-    top: -0.5rem;
-    height: 4.8rem;
+    width: 0.933rem;
+    left: -0.213rem;
+    top: -0.133rem;
+    height: 1.28rem;
     display: inline-block;
     background-image: url("../statics/images/icon_xiaoha@2x.png");
     background-repeat: no-repeat;
@@ -729,12 +729,12 @@
 
   .freeAsk .text {
     background: #dcdcdc;
-    border: 0.1rem #dcdcdc solid;
-    border-radius: 5rem;
-    font-size: 1.4rem;
-    line-height: 1.4rem;
+    border: 0.026rem #dcdcdc solid;
+    border-radius: 1.333rem;
+    font-size: 0.373rem;
+    line-height: 0.373rem;
     color: #323232;
-    padding: 1.3rem 0rem 1.3rem 3.5rem;
+    padding: 0.346rem 0rem 0.346rem 0.933rem;
   }
 
   .freeAsk .text div {
@@ -744,22 +744,22 @@
   .freeAskGet {
     position: fixed;
     top: 50%;
-    margin-top: -18.1rem;
-    left: 1rem;
-    right: 1rem;
+    margin-top: -4.826rem;
+    left: 0.266rem;
+    right: 0.266rem;
     background: url("../statics/images/freeAskGet@2x.png") no-repeat center;
     background-size: contain;
-    height: 26.2rem;
+    height: 6.986rem;
     z-index: 999;
   }
 
   .freeAskGetButton {
     position: fixed;
     top: 50%;
-    margin: -7rem 0 0 -10rem;
+    margin: -1.866rem 0 0 -2.666rem;
     left: 50%;
-    width: 15rem;
-    height: 7rem;
+    width: 4rem;
+    height: 1.866rem;
     z-index: 1000;
   }
 
@@ -767,11 +767,11 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -19.5rem 0 0 -5rem;
+    margin: -5.2rem 0 0 -1.333rem;
     background: url("../statics/images/xiaoha-welcome@2x.png") no-repeat center;
     background-size: contain;
-    width: 10rem;
-    height: 15rem;
+    width: 2.666rem;
+    height: 4rem;
     z-index: 999;
   }
 
@@ -779,11 +779,11 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -4.5rem 0 0 -14.6rem;
+    margin: -1.2rem 0 0 -3.893rem;
     background: url("../statics/images/getSuccess@2x.png") no-repeat center;
     background-size: contain;
-    width: 29.2rem;
-    height: 9.1rem;
+    width: 7.786rem;
+    height: 2.426rem;
     z-index: 999;
   }
 
@@ -791,12 +791,12 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: 9.4rem 0 0 -1.9rem;
+    margin: 2.506rem 0 0 -0.506rem;
     z-index: 999;
   }
 
   #freeAskSuccessTemplate .close .icon {
-    font-size: 3.8rem;
+    font-size: 1.013rem;
     color: #b4b4b6;
   }
 
@@ -804,9 +804,9 @@
 
   #home-recommend {
     width: 100%;
-    height: 17rem;
+    height: 4.533rem;
     background: #FFFFFF;
-    margin-top: 0.5rem;
+    margin-top: 0.133rem;
   }
 
   #home-recommend div:nth-of-type(1) {
@@ -814,18 +814,18 @@
   }
 
   #home-card {
-    width: 11.4rem;
-    height: 14.8rem;
+    width: 3.04rem;
+    height: 3.946rem;
     background: #ececee;
-    margin-top: 1.1rem;
-    padding-top: 1rem;
+    margin-top: 0.293rem;
+    padding-top: 0.266rem;
     position: relative;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
 
   #home-card img {
-    width: 5rem;
-    height: 5rem;
+    width: 1.333rem;
+    height: 1.333rem;
     display: block;
     border-radius: 50%;
     margin: 0 auto;
@@ -834,31 +834,31 @@
   #home-card span {
     display: block;
     text-align: center;
-    font-size: 1.2rem;
-    padding: 0 0.4rem;
+    font-size: 0.32rem;
+    padding: 0 0.106rem;
   }
 
   #home-card span:nth-of-type(1) i {
     display: inline-block;
-    max-width: 7rem;
-    height: 2rem;
+    max-width: 1.866rem;
+    height: 0.533rem;
     font-style: normal;
   }
 
   #home-card span:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     font-weight: 600;
     color: #444444;
-    margin-top: 0.2rem;
+    margin-top: 0.053rem;
   }
 
   #home-card span:nth-of-type(1) svg {
-    font-size: 2rem;
+    font-size: 0.533rem;
     color: #03aef9;
-    margin-bottom: 0.25rem;
-    margin-left: -0.3rem;
+    margin-bottom: 0.066rem;
+    margin-left: -0.08rem;
   }
 
   .home-card span:nth-of-type(2) {
@@ -869,13 +869,13 @@
 
   #home-card span:nth-of-type(3) {
     width: 70%;
-    height: 2.4rem;
-    border-radius: 5rem;
-    border: 0.05rem solid #03aef9;
+    height: 0.64rem;
+    border-radius: 1.333rem;
+    border: 0.013rem solid #03aef9;
     margin-left: 15%;
-    margin-top: 0.6rem;
+    margin-top: 0.16rem;
     font-family: "PingFangSC";
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     text-align: center;
     color: #03aef9;
   }
@@ -884,23 +884,23 @@
     position: absolute;
     top: 0rem;
     right: 0rem;
-    width: 2.8rem;
+    width: 0.746rem;
     text-align: center;
     background: url("../statics/images/fill_1@2x.png") no-repeat;
     background-size: 100% 100%;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #ffffff;
   }
 
   /*查看更多专家样式*/
 
   .moreExperts {
-    width: 11.83rem;
-    margin-right: 1rem;
-    margin-top: 1.1rem;
-    height: 14.8rem;
+    width: 3.155rem;
+    margin-right: 0.266rem;
+    margin-top: 0.293rem;
+    height: 3.946rem;
     background: #ececee;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     position: relative;
   }
 
@@ -915,16 +915,16 @@
 
   .moreExperts > div > span {
     display: inline-block;
-    border: 0.1rem solid #b4b4b6;
-    width: 5rem;
-    height: 5rem;
+    border: 0.026rem solid #b4b4b6;
+    width: 1.333rem;
+    height: 1.333rem;
     border-radius: 50%;
     margin-left: 25%;
     position: relative;
   }
 
   .moreExperts > div svg {
-    font-size: 3rem;
+    font-size: 0.8rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -938,15 +938,15 @@
   .moreExperts > div p {
     text-align: center;
     color: #444444;
-    font-size: 1.2rem;
-    margin-top: 0.2rem;
+    font-size: 0.32rem;
+    margin-top: 0.053rem;
   }
 
   /*活动*/
   .activity {
     width: 100%;
-    /*height: 15.7rem;*/
-    padding: 1.1rem 4%;
+    /*height: 4.186rem;*/
+    padding: 0.293rem 4%;
     background: #ececee;
   }
 
@@ -956,7 +956,7 @@
     background: #C8C7CC;
     float: left;
     position: relative;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     overflow: hidden;
   }
 
@@ -967,16 +967,16 @@
   }
 
   .weeklyActivity > p {
-    width: 3.7rem;
-    height: 1.8rem;
+    width: 0.986rem;
+    height: 0.48rem;
     background: #444444;
     opacity: 0.7;
     text-align: center;
-    line-height: 1.8rem;
+    line-height: 0.48rem;
     color: #FFFFFF;
-    border-radius: 0 5rem 5rem 0;
-    font-size: 1.2rem;
-    margin-top: 1.4rem;
+    border-radius: 0 1.333rem 1.333rem 0;
+    font-size: 0.32rem;
+    margin-top: 0.373rem;
   }
 
   .opportunities {
@@ -993,7 +993,7 @@
     background: #009FE8;
     float: left;
     position: relative;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
 
   .latestWeekly {
@@ -1003,21 +1003,21 @@
     background: #C8C8C8;
     float: left;
     position: relative;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
 
   .newcomers > p,
   .latestWeekly > p {
-    width: 3.7rem;
-    height: 1.8rem;
+    width: 0.986rem;
+    height: 0.48rem;
     background: #444444;
     opacity: 0.7;
     text-align: center;
-    line-height: 1.8rem;
+    line-height: 0.48rem;
     color: #FFFFFF;
-    border-radius: 0 5rem 5rem 0;
-    font-size: 1.2rem;
-    margin-top: 1.2rem;
+    border-radius: 0 1.333rem 1.333rem 0;
+    font-size: 0.32rem;
+    margin-top: 0.32rem;
   }
 
   .newcomers > img,
@@ -1025,65 +1025,65 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
 
   /*热门回答*/
 
   .hotAnswer {
     width: 100%;
-    /* height: 24.4rem;*/
+    /* height: 6.506rem;*/
     overflow: hidden;
-    margin-bottom: 1rem;
+    margin-bottom: 0.266rem;
     background: #FFFFFF;
   }
 
   .hotAnswer_t {
     width: 90%;
     margin-left: 5%;
-    height: 4.4rem;
+    height: 1.173rem;
     position: relative;
   }
 
   .hotAnswer_t p:nth-of-type(1) {
     float: left;
 
-    line-height: 4.4rem;
-    font-size: 1.6rem;
+    line-height: 1.173rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .hotAnswer_t p:nth-of-type(2) {
     float: right;
 
-    line-height: 4.4rem;
-    font-size: 1.4rem;
+    line-height: 1.173rem;
+    font-size: 0.373rem;
     color: #03aef9;
   }
 
   .hotAnswer_b {
     width: 90%;
     margin-left: 5%;
-    /*height: 20rem;*/
+    /*height: 5.333rem;*/
     overflow: hidden;
   }
 
   .hotAnswer_b li {
     width: 100%;
     overflow: hidden;
-    padding: 1.2rem 0;
+    padding: 0.32rem 0;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .hotAnswer_d {
     width: 100%;
-    height: 3.2rem;
-    margin-top: 0.45rem;
+    height: 0.853rem;
+    margin-top: 0.12rem;
   }
 
   .hotAnswer_d p {
@@ -1091,17 +1091,17 @@
   }
 
   .hotAnswer_d p:nth-child(1) {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 0.853rem;
+    height: 0.853rem;
     /*background: #CCCCCC;*/
     position: relative;
   }
 
   .hotAnswer_d p:nth-child(1) > svg {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     bottom: 0;
-    right: -0.4rem;
+    right: -0.106rem;
   }
 
   .hotAnswer_d p:nth-child(1) > img {
@@ -1111,41 +1111,41 @@
   }
 
   .hotAnswer_d p:nth-child(2) {
-    /*width: 34rem;*/
-    height: 1.8rem;
-    margin-top: 0.9rem;
-    line-height: 1.8rem;
+    /*width: 9.066rem;*/
+    height: 0.48rem;
+    margin-top: 0.24rem;
+    line-height: 0.48rem;
     /*background: #CCCCCC;*/
   }
 
   .hotAnswer_d p:nth-child(2) span:nth-child(1) {
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 0.4rem;
     padding: 0 3%;
   }
 
   .hotAnswer_d p:nth-child(2) span:nth-child(2) {
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
-    border-right: 0.1rem solid #c8c8c8;
+    border-right: 0.026rem solid #c8c8c8;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 0.4rem;
     padding: 0 3%;
   }
 
   .hotAnswer_d p:nth-child(2) span:nth-child(3) {
-    height: 1.5rem;
-    margin-top: 0.85rem;
-    font-size: 1.3rem;
+    height: 0.4rem;
+    margin-top: 0.226rem;
+    font-size: 0.346rem;
     color: #808080;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 0.4rem;
     padding: 0 3%;
   }
 
@@ -1158,22 +1158,22 @@
 
   .reader-upper {
     width: 90%;
-    height: 5rem;
+    height: 1.333rem;
     margin-left: 5%;
     position: relative;
   }
 
   .reader-upper span:nth-of-type(1) {
     float: left;
-    line-height: 5rem;
-    font-size: 1.6rem;
+    line-height: 1.333rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .reader-upper span:nth-of-type(2) {
     float: right;
-    line-height: 5rem;
-    font-size: 1.3rem;
+    line-height: 1.333rem;
+    font-size: 0.346rem;
     color: #03aef9;
   }
 
@@ -1183,7 +1183,7 @@
 
   .home-reading ul li {
     width: 90%;
-    height: 12.5rem;
+    height: 3.333rem;
     margin-left: 5%;
     position: relative;
   }
@@ -1203,34 +1203,34 @@
 
   .home-reading ul li img {
     width: 35%;
-    height: 8rem;
+    height: 2.133rem;
     float: left;
-    margin-top: 2.1rem;
-    border-radius: 0.4rem;
+    margin-top: 0.56rem;
+    border-radius: 0.106rem;
   }
 
   .home-reading ul li div {
     float: left;
     width: 63%;
     margin-left: 2%;
-    margin-top: 2.1rem;
+    margin-top: 0.56rem;
   }
 
   .home-reading ul li div p:nth-of-type(1) {
-    height: 4.2rem;
-    font-size: 1.4rem;
+    height: 1.12rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .home-reading ul li div p:nth-of-type(2) {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
-    margin-top: 2rem;
+    margin-top: 0.533rem;
   }
 
   .home-time {
     float: left;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
@@ -1239,23 +1239,23 @@
   }
 
   .home-laud > svg {
-    font-size: 1.7rem;
+    font-size: 0.453rem;
     color: #b4b4b6;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.04rem;
   }
 
   .home-laud > i {
-    font-size: 2rem;
-    font-size: 1.3rem;
+    font-size: 0.533rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
     font-style: normal;
   }
 
   .home-bot {
     width: 100%;
-    height: 14rem;
+    height: 3.733rem;
     background: #FFFFFF;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     text-align: center;
     color: #c8c8c8;
   }
@@ -1266,9 +1266,9 @@
 
   .mui-slider-indicator .mui-indicator {
     display: inline-block;
-    width: 0.6rem;
-    height: 0.6rem;
-    margin: 0.1rem 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
+    margin: 0.026rem 0.16rem;
     cursor: pointer;
     border-radius: 50%;
     background: #d8d8d8;
@@ -1281,7 +1281,7 @@
 
   @media screen and (min-width: 320px) {
     .activity {
-      height: 13.3rem;
+      height: 3.546rem;
     }
 
     .home-expert div p {
@@ -1289,14 +1289,14 @@
     }
 
     .hotAnswer_d p:nth-child(2) {
-      width: 25.6rem;
+      width: 6.826rem;
     }
 
   }
 
   @media screen and (min-width: 375px) {
     .activity {
-      height: 15.7rem;
+      height: 4.186rem;
     }
 
     .home-expert div p {
@@ -1304,13 +1304,13 @@
     }
 
     .hotAnswer_d p:nth-child(2) {
-      width: 30.5rem;
+      width: 8.133rem;
     }
   }
 
   @media screen and (min-width: 414px) {
     .activity {
-      height: 17.2rem;
+      height: 4.586rem;
     }
 
     .home-expert div p {
@@ -1318,7 +1318,7 @@
     }
 
     .hotAnswer_d p:nth-child(2) {
-      width: 34rem;
+      width: 9.066rem;
     }
 
   }

@@ -134,9 +134,9 @@
       this.textareaBlur()
 
       // 弹窗
-      var font = '<p style="text-align: left; font-size:1.4rem; color: #444444;  margin-top:1.5rem;">' +
+      var font = '<p style="text-align: left; font-size:0.373rem; color: #444444;  margin-top:0.4rem;">' +
                   '</p>' +
-                  '<p style="text-align: left; font-size:1.4rem; color: #444444;  margin-top:1.5rem;">' +
+                  '<p style="text-align: left; font-size:0.373rem; color: #444444;  margin-top:0.4rem;">' +
                   '专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。' +
                   '</p>'
       window.mui.alert(font, '什么是专业问答？', '确定', function () {}, 'div')
@@ -401,30 +401,30 @@
 
 <style scoped>
   .component-photograph{
-    width:6.1rem !important;
-    height:6.1rem !important;
+    width:1.626rem !important;
+    height:1.626rem !important;
   }
 
   .askWrapper .category {
     background: #fff;
-    padding: 1.5rem 1.7rem;
+    padding: 0.4rem 0.453rem;
     position: relative;
   }
 
   .askWrapper .category .tip {
-    font-size: 1.6rem;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .askWrapper .category button {
     position: absolute;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
     background-color: #03aef9;
     width: auto;
-    font-size: 1.4rem;
-    padding: 0.4rem 1.7rem;
-    right: 1rem;
-    top: 1.2rem;
+    font-size: 0.373rem;
+    padding: 0.106rem 0.453rem;
+    right: 0.266rem;
+    top: 0.32rem;
   }
 
   .mui-content > .mui-table-view:first-child {
@@ -446,7 +446,7 @@
   .form-ask {
     padding-top: 0;
     background: #fff;
-    height: 20.2rem;
+    height: 5.386rem;
     width: 100%;
     z-index: 0;
   }
@@ -456,13 +456,13 @@
     height: 100%;
     border: none;
     margin: 0;
-    padding: 1rem 1.7rem;
+    padding: 0.266rem 0.453rem;
     color: #9b9b9b;
   }
 
   .form-ask .button-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 8rem
+    margin-top: 0.4rem;
+    padding: 0 2.133rem
   }
 
   .textarea-wrapper {
@@ -479,13 +479,13 @@
   }
 
   .mui-bar .mui-btn-nav.mui-pull-left {
-    margin-left: 0.5rem;
+    margin-left: 0.133rem;
   }
 
   .fixedContainer {
     position: relative;
     background: #f3f4f6;
-    padding: 0.5rem 1rem;
+    padding: 0.133rem 0.266rem;
   }
 
   .fixedContainer .counter {
@@ -496,112 +496,112 @@
   .fixedContainer .niming {
     color: #808080;
     position: relative;
-    font-size: 1.4rem;
-    padding-left: 0.9rem;
+    font-size: 0.373rem;
+    padding-left: 0.24rem;
   }
 
   .fixedContainer .niming input {
     position: absolute;
-    top: 0.4rem;
+    top: 0.106rem;
     left: 0;
     vertical-align: bottom;
   }
 
   .fixedDiv .title {
-    margin: 1rem 0;
+    margin: 0.266rem 0;
     text-align: center;
     color: #8b8b8b;
-    height: 3.2rem;
+    height: 0.853rem;
   }
 
   .fixedDiv {
-    padding-bottom: 1rem;
+    padding-bottom: 0.266rem;
     background-color: #fff;
     width: 100%;
   }
 
   .fixedDiv .select span {
-    border: 0.1rem solid #b6b6b6;
-    border-radius: 0.5rem;
-    padding: 0 1rem;
+    border: 0.026rem solid #b6b6b6;
+    border-radius: 0.133rem;
+    padding: 0 0.266rem;
     display: inline-block;
-    height: 3.2rem;
-    margin-right: 0.6rem;
-    margin-bottom: 1rem;
+    height: 0.853rem;
+    margin-right: 0.16rem;
+    margin-bottom: 0.266rem;
     text-align: center;
-    line-height: 3.2rem;
+    line-height: 0.853rem;
     position: relative;
   }
 
   .fixedDiv .select span.active {
-    border: 0.1rem solid #4a90e2;
+    border: 0.026rem solid #4a90e2;
   }
 
   .fixedDiv .button-wrapper {
-    margin-top: 1.5rem;
-    padding: 0 1.5rem;
+    margin-top: 0.4rem;
+    padding: 0 0.4rem;
   }
 
   .fixedDiv .button-wrapper button {
     background: #03aef9;
     color: #f2f2f2;
-    border-radius: 0.5rem;
-    border: 0.1rem solid #03aef9;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #03aef9;
   }
 
   .help {
     color: #03aef9;
-    font-size: 1.4rem;
-    padding: 0 1.5rem;
+    font-size: 0.373rem;
+    padding: 0 0.4rem;
 
   }
 
   .help .item {
-    padding: 1rem 0 0;
+    padding: 0.266rem 0 0;
   }
 
   .help .button-wrapper {
-    margin-top: 4.6rem;
-    padding: 0 7.5rem;
+    margin-top: 1.226rem;
+    padding: 0 2rem;
   }
 
   .help .button-wrapper button {
-    border-radius: 5rem;
-    border: 0.1rem solid #dcdcdc;
+    border-radius: 1.333rem;
+    border: 0.026rem solid #dcdcdc;
     background: #fff;
     color: #444;
-    padding: 0.5rem 0;
+    padding: 0.133rem 0;
   }
 
   .nimingCheckbox {
     display: inline-block;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 0.426rem;
+    height: 0.426rem;
     position: relative;
-    border: 0.1rem solid #c8c8c8;
+    border: 0.026rem solid #c8c8c8;
     border-radius: 50%;
-    top: 0.3rem;
-    right: 0.5rem;
+    top: 0.08rem;
+    right: 0.133rem;
   }
 
   .nimingCheckbox.active:after {
     content: ' ';
     display: inline-block;
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.106rem;
+    height: 0.106rem;
     position: absolute;
-    border: 0.1rem solid #03aef9;
+    border: 0.026rem solid #03aef9;
     background-color: #03aef9;
     border-radius: 50%;
     left: 50%;
-    margin-left: -0.3rem;
+    margin-left: -0.08rem;
     top: 50%;
-    margin-top: -0.3rem;
+    margin-top: -0.08rem;
   }
 
   @media screen and (max-width: 374px) {
     .form-ask {
-      height: 22rem;
+      height: 5.866rem;
     }
   }
   .container-images{
@@ -612,7 +612,7 @@
     width:100%;
     background: #f3f4f6;
     overflow: hidden;
-    padding: 0  1.6rem 0rem 0.7rem;
+    padding: 0  0.426rem 0rem 0.186rem;
   }
   .ask_tags p{
     margin: 0;
@@ -620,10 +620,10 @@
     float: left;
     background: #a8dff7;
     color:#FFFFFF;
-    padding: 0rem 0.8rem;
-    border-radius:5rem;
-    margin-top: 0.9rem;
-    margin-left: 0.9rem;
-    font-size:1.2rem;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
 </style>

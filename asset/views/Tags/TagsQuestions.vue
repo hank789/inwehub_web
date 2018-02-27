@@ -176,7 +176,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -188,9 +188,9 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:3.9rem;
+    height:1.04rem;
     background: #FFFFFF;
-    font-size:1.4rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -204,11 +204,11 @@
   }
   .menu span:nth-of-type(1) i{
     position:absolute;
-    width:2.7rem;
-    height:0.15rem;
-    border-radius: 5rem;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 2.8rem;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -219,7 +219,7 @@
   }
   .recommend_b {
     width: 100%;
-    /*height: 20rem;*/
+    /*height: 5.333rem;*/
     overflow: hidden;
     background: #f3f4f6;
   }
@@ -229,129 +229,129 @@
     overflow: hidden;
     position: relative;
     background: #FFFFFF;
-    margin-bottom: 1rem;
-    padding: 1.2rem 0 1.5rem 0;
+    margin-bottom: 0.266rem;
+    padding: 0.32rem 0 0.4rem 0;
   }
   .recommend_b li div{
     width:92%;
     margin-left: 4%;
   }
   .recommend_b li .description{
-    font-size:1.6rem;
+    font-size:0.426rem;
     color:#444444;
   }
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    margin-top: 1.2rem;
+    margin-top: 0.32rem;
     background:#f3f4f6;
-    padding: 1.3rem 1.5rem 1.5rem;
-    border-radius: 0.4rem;
+    padding: 0.346rem 0.4rem 0.4rem;
+    border-radius: 0.106rem;
   }
   /*.component-dianzanList*/
   .component-dianzanList span{
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:#03aef9;
   }
   .component-dianzanList svg{
-    font-size:1.7rem;
+    font-size:0.453rem;
     color: #808080;
   }
   .avatar{
-    height:4.4rem;
-    margin-top: 1.5rem;
+    height:1.173rem;
+    margin-top: 0.4rem;
   }
   .avatar p:nth-of-type(1){
-    height:4.4rem;
+    height:1.173rem;
     float: left;
     position: relative;
   }
   .avatar p:nth-of-type(1) img{
-    width:3.3rem;
-    height:3.3rem;
+    width:0.88rem;
+    height:0.88rem;
     border-radius: 50%;
-    margin-top: 0.55rem;
+    margin-top: 0.146rem;
     float: left;
   }
   .avatar p:nth-of-type(1) svg{
     position: absolute;
-    font-size: 1.4rem;
-    bottom: 0.5rem;
-    right: -0.5rem;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
+    right: -0.133rem;
   }
   .avatar p:nth-of-type(2){
     width:88%;
-    height:4.4rem;
+    height:1.173rem;
     float: right;
     background:#03aef9;
-    border-radius: 5rem;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 4.4rem;
-    font-size:1.6rem;
+    line-height: 1.173rem;
+    font-size:0.426rem;
     color: #f2f2f2;
   }
   .question_info{
-    height:1.9rem;
+    height:0.506rem;
     /*background: #cccccc;*/
-    margin-top: 1.2rem;
-    line-height:1.9rem;
+    margin-top: 0.32rem;
+    line-height:0.506rem;
   }
   .question_info p:nth-of-type(1){
     float: left;
-    font-size:1.3rem;
+    font-size:0.346rem;
     color: #747474;
   }
   .question_info p:nth-of-type(1) i{
     display: inline-block;
-    width:0.1rem;
-    height:1.2rem;
+    width:0.026rem;
+    height:0.32rem;
     background: #dbdbdb;
-    margin:0 0.9rem -0.1rem 0.9rem;
+    margin:0 0.24rem -0.026rem 0.24rem;
   }
   .question_info p:nth-of-type(1) span:nth-of-type(1){
     color: #b4b4b6;
   }
   .question_info p:nth-of-type(2){
     float: right;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span{
     float: right;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 2.2rem;
+    margin-left: 0.586rem;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 1.8rem;
+    font-size: 0.48rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 1.8rem;
-    margin-bottom: -0.2rem;
+    font-size: 0.48rem;
+    margin-bottom: -0.053rem;
   }
 
 
 
 
   .listWrapper{
-    top:17.7rem;
+    top:4.72rem;
   }
 
   .hudongWrapper .three {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    padding-top: 0.5rem;
+    padding-top: 0.133rem;
     text-align: right;
   }
 
   .hudongWrapper .split {
     position: relative;
-    top: 0.3rem;
-    margin: 0 1rem;
+    top: 0.08rem;
+    margin: 0 0.266rem;
     display: inline-block;
-    width: 0.1rem;
-    height: 1.3rem;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
@@ -363,25 +363,25 @@
   /*回答者的样式*/
   .hudongWrapper .respondent{
     width:100%;
-    padding: 1.2rem 1.5rem;
+    padding: 0.32rem 0.4rem;
     background: #f3f4f6;
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:rgb(128,128,128);
-    border-radius: 0.4rem;
-    margin-top: 1.2rem;
+    border-radius: 0.106rem;
+    margin-top: 0.32rem;
   }
   .hudongWrapper .respondent span{
     color: #03aef9;
   }
   .hudongWrapper .respondent i{
     color:rgb(146,146,146);
-    margin-right: 0.5rem;
+    margin-right: 0.133rem;
   }
   .hudongWrapper .respondent span:nth-last-of-type(1) i{
     display: none;
   }
   .hudongWrapper .respondent i{
-    font-size:1.3rem;
+    font-size:0.346rem;
     color:rgb(128,128,128);
     font-style: normal;
   }

@@ -372,22 +372,22 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .shareBtn {
     position: fixed;
-    right: 1rem;
-    top: 1rem;
+    right: 0.266rem;
+    top: 0.266rem;
     z-index: 11;
     color: #fff;
   }
 
   .resumeWrapper .shareBtn {
     position: absolute;
-    top: 2.4rem !important;
-    font-size: 2.2rem;
-    right: 3.1rem;
+    top: 0.64rem !important;
+    font-size: 0.586rem;
+    right: 0.826rem;
     color: #808080;
   }
 
   .mui-content {
-    padding: 20rem;
+    padding: 5.333rem;
     text-align: center;
   }
 
@@ -397,16 +397,16 @@
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 1.4rem;
-      padding: 1.2rem 0;
+      font-size: 0.373rem;
+      padding: 0.32rem 0;
     }
     .more {
       background: #fff;
-      padding: 1rem;
+      padding: 0.266rem;
       .single {
-        width: 5.5rem;
-        height: 5.5rem;
-        margin: 0 1rem;
+        width: 1.466rem;
+        height: 1.466rem;
+        margin: 0 0.266rem;
         display: inline-block;
         img {
           width: 100%;
@@ -423,9 +423,9 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 1.5rem;
-      top: 1rem;
-      font-size: 7rem;
+      right: 0.4rem;
+      top: 0.266rem;
+      font-size: 1.866rem;
     }
   }
 

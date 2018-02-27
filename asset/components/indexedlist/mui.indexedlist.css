@@ -1,7 +1,7 @@
 .mui-indexed-list {
 	position: relative;
-	border-top: solid 0.1rem #e3e3e3;
-	border-bottom: solid 0.1rem #e3e3e3;
+	border-top: solid 0.026rem #e3e3e3;
+	border-bottom: solid 0.026rem #e3e3e3;
 	overflow: hidden;
 	background-color: #fafafa;
 	cursor: default;
@@ -25,36 +25,36 @@
 	display: block;
 }
 .mui-indexed-list-empty-alert {
-	padding: 3rem 1.5rem;
+	padding: 0.8rem 0.4rem;
 	text-align: center;
 	color: #ccc;
-	padding-right: 4.5rem;
+	padding-right: 1.2rem;
 }
 .mui-ios .mui-indexed-list-inner {
-	width: calc(100% + 1rem);
+	width: calc(100% + 0.266rem);
 }
 .mui-indexed-list-group,
 .mui-indexed-list-item {
-	padding-right: 4.5rem;
+	padding-right: 1.2rem;
 }
 .mui-ios .mui-indexed-list-group,
 .mui-ios .mui-indexed-list-item,
 .mui-ios .mui-indexed-list-empty-alert {
-	padding-right: 5.5rem;
+	padding-right: 1.466rem;
 }
 .mui-indexed-list-group {
 	background-color: #f7f7f7;
 }
 .mui-indexed-list-group {
-	padding-top: 0.3rem;
-	padding-bottom: 0.3rem;
+	padding-top: 0.08rem;
+	padding-bottom: 0.08rem;
 }
 .mui-indexed-list-search {
-	border-bottom: solid 0.1rem #e3e3e3;
+	border-bottom: solid 0.026rem #e3e3e3;
 	z-index: 15;
 }
 .mui-indexed-list-search.mui-search:before {
-	margin-top: -1rem;
+	margin-top: -0.266rem;
 }
 .mui-indexed-list-search input {
 	border-radius: 0rem;
@@ -62,7 +62,7 @@
 	background-color: #fafafa;
 }
 .mui-indexed-list-bar {
-	width: 2.3rem;
+	width: 0.613rem;
 	background-color: lightgrey;
 	position: absolute;
 	height: 100%;
@@ -73,10 +73,10 @@
 .mui-indexed-list-bar a {
 	display: block;
 	text-align: center;
-	font-size: 1.1rem;
+	font-size: 0.293rem;
 	padding: 0rem;
 	margin: 0rem;
-	line-height: 1.5rem;
+	line-height: 0.4rem;
 	color: #aaa;
 }
 .mui-indexed-list-bar.active {
@@ -92,16 +92,16 @@
 	position: absolute;
 	z-index: 20;
 	background-color: rgba(0, 0, 0, 0.5);
-	width: 8rem;
-	height: 8rem;
+	width: 2.133rem;
+	height: 2.133rem;
 	left: 50%;
 	top: 50%;
-	margin-left: -4rem;
-	margin-top: -4rem;
-	border-radius: 4rem;
+	margin-left: -1.066rem;
+	margin-top: -1.066rem;
+	border-radius: 1.066rem;
 	text-align: center;
-	line-height: 8rem;
-	font-size: 3.5rem;
+	line-height: 2.133rem;
+	font-size: 0.933rem;
 	color: #fff;
 	display: none;
 	-webkit-transition: .2s;

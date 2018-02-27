@@ -49,25 +49,25 @@
 
 <style scoped="scoped">
   .detail-ask-timeline {
-    padding-bottom: 1rem;
+    padding-bottom: 0.266rem;
   }
 
   .timeline .timage .mui-icon {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 0.613rem;
+    height: 0.613rem;
     color: #4990E2;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     position: relative;
     z-index: 777;
   }
 
   .timeline time {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
   }
 
   .timeline {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
 
   /*timeline*/
@@ -76,21 +76,21 @@
     clear: both;
     width: 100%;
     position: relative;
-    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    padding: 0.133rem 0.266rem 0.133rem 0.4rem;
   }
 
   .nearsite-message .timage {
     float: left;
-    margin-top: 2.1rem;
-    width: 2.4rem;
-    height: 2.4rem;
-    border: 0.1rem solid #DCDCDC;
+    margin-top: 0.56rem;
+    width: 0.64rem;
+    height: 0.64rem;
+    border: 0.026rem solid #DCDCDC;
     background: #FFFFFF;
     border-radius: 50%;
     position: relative;
-    font-size:1rem;
+    font-size:0.266rem;
     color:#03aef9;
-    left: -0.12rem;
+    left: -0.032rem;
     text-align: center;
   }
 
@@ -107,13 +107,13 @@
   .nearsite-message .desc {
     float: left;
     background: #fff;
-    margin: 0 1rem 0rem 1rem;
-    padding: 1rem 0 0 1rem;
-    border-radius: 0.7rem;
+    margin: 0 0.266rem 0rem 0.266rem;
+    padding: 0.266rem 0 0 0.266rem;
+    border-radius: 0.186rem;
     width: 85%;
     position: relative;
-    min-height: 2rem;
-    font-size: 1.3rem;
+    min-height: 0.533rem;
+    font-size: 0.346rem;
   }
 
   .nearsite-message .desc img {
@@ -125,8 +125,8 @@
     position: absolute;
     height: 100%;
     background-color: #a2a2a2;
-    left: -2.2rem;
-    top: 3rem;
+    left: -0.586rem;
+    top: 0.8rem;
     z-index: 0;
   }
 
@@ -137,19 +137,19 @@
   .nearsite-message .triangle {
     height: 0rem;
     width: 0rem;
-    border-width: 0.8rem;
+    border-width: 0.213rem;
     border-style: solid;
     position: absolute;
-    top: 0.6rem;
+    top: 0.16rem;
     border-color: transparent #fff transparent transparent;
-    left: -1.6rem;
+    left: -0.426rem;
   }
 
   .vertbar {
-    width: 0.1rem;
-    height: 7.4rem;
+    width: 0.026rem;
+    height: 1.973rem;
     background-color: #a2a2a2;
-    margin: -4.1rem 2.5rem -3.8rem;
+    margin: -1.093rem 0.666rem -1.013rem;
 
   }
 
@@ -164,8 +164,8 @@
 
   .time {
     position: absolute;
-    right: 1rem;
-    top: 1.5rem;
+    right: 0.266rem;
+    top: 0.4rem;
     color: #b4b4b6;
   }
 

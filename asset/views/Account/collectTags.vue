@@ -79,7 +79,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 4.5rem;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -93,8 +93,8 @@
   /*导航栏的样式*/
   .menu{
     width:100%;
-    height:3.9rem;
-    font-size:1.4rem;
+    height:1.04rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -108,11 +108,11 @@
   }
   .menu span:nth-of-type(3) i{
     position:absolute;
-    width:2.7rem;
-    height:0.15rem;
-    border-radius: 5rem;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 2.8rem;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -123,7 +123,7 @@
     right: 0rem;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -133,7 +133,7 @@
      right: 4%;
      bottom: 0;
      left: 4%;
-     height: 0.1rem;
+     height: 0.026rem;
      -webkit-transform: scaleY(.5);
      transform: scaleY(.5);
      background-color: rgb(220, 220, 220);
@@ -158,7 +158,7 @@
   /*滚动区域*/
   .tag-title{
     width:100%;
-    height:13.3rem;
+    height:3.546rem;
     padding: 0 4%;
     display: flex;
     flex-direction: row;
@@ -166,22 +166,22 @@
     position: relative;
   }
   .tag-l{
-    width:9.2rem;
-    height:9.2rem;
+    width:2.453rem;
+    height:2.453rem;
   }
   .tag-l img{
     width: 100%;
     height:100%;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
   }
   .tag-l.bg-grey{
     background: #ececee;
-    border-radius: 0.4rem;
+    border-radius: 0.106rem;
     position: relative;
   }
   .tag-l.bg-grey svg{
     color: #c8c8c8;
-    font-size: 5rem;
+    font-size: 1.333rem;
     position: absolute;
     left:0;
     right:0;
@@ -191,20 +191,20 @@
   }
 
   .tag-r{
-    height:9.2rem;
-    margin-left: 1rem;
+    height:2.453rem;
+    margin-left: 0.266rem;
   }
   .tag-r p:nth-of-type(1){
-    font-size:1.8rem;
+    font-size:0.48rem;
     color: #444444;
     font-weight:500;
   }
 
   .tag-r p:nth-of-type(2){
-    margin-top: 1.1rem;
-    font-size: 1.2rem;
+    margin-top: 0.293rem;
+    font-size: 0.32rem;
     color: #808080;
-    line-height: 1.8rem;
+    line-height: 0.48rem;
   }
   /***媒体查询*****/
 
@@ -226,11 +226,11 @@
     }
   }
   .listWrapper{
-    top:17.7rem;
+    top:4.72rem;
   }
 
   /*listWrapper*/
   .listWrapper {
-    top: 4.5rem;
+    top: 1.2rem;
   }
 </style>

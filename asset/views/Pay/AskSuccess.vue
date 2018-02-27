@@ -95,12 +95,12 @@
 <style scoped>
   .pay-success {
     text-align: center;
-    padding: 1.5rem;
+    padding: 0.4rem;
   }
 
   .pay-success .status {
-    margin-top: 10rem;
-    font-size: 2rem;
+    margin-top: 2.666rem;
+    font-size: 0.533rem;
     color: #19ac18;
   }
 
@@ -109,29 +109,29 @@
   }
 
   .pay-success .status svg {
-    font-size: 10rem;
-    margin-bottom: 2rem;
+    font-size: 2.666rem;
+    margin-bottom: 0.533rem;
   }
 
   .pay-success .title {
-    font-size: 2.2rem;
-    margin: 3rem 0 4rem;
+    font-size: 0.586rem;
+    margin: 0.8rem 0 1.066rem;
   }
 
   .pay-success .important {
-    margin-top: 4rem;
+    margin-top: 1.066rem;
     color: #4a4a4a;
-    font-size: 1.4rem;
+    font-size: 0.373rem;
   }
 
   .pay-success .time {
-    margin: 3rem 0;
+    margin: 0.8rem 0;
   }
 
   .pay-success .time span {
-    font-size: 2.2rem;
+    font-size: 0.586rem;
     color: orange;
-    margin: 0 0.5rem;
+    margin: 0 0.133rem;
   }
 
 

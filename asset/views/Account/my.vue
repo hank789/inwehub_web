@@ -180,10 +180,10 @@
     methods: {
       // 警告框
       wran () {
-        var font = '<p style="text-align: left; color: #444444; margin-bottom:2rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+        var font = '<p style="text-align: left; color: #444444; margin-bottom:0.533rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
           '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>'
-        var title = '<p style="font-size:1.6rem; margin-bottom:1.5rem">' +
-          '<svg class="icon" aria-hidden="true" style="font-size:1.8rem; color:#fcc816; margin-right:0.2rem; margin-bottom:-0.1rem">' +
+        var title = '<p style="font-size:0.426rem; margin-bottom:0.4rem">' +
+          '<svg class="icon" aria-hidden="true" style="font-size:0.48rem; color:#fcc816; margin-right:0.053rem; margin-bottom:-0.026rem">' +
           '<use xlink:href="#icon-jinggao"></use>' +
           '</svg>' +
           '警告说明 ' +
@@ -310,7 +310,7 @@
     right: 0;
     bottom: 0;
     left: 0rem;
-    height: 0.1rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -318,10 +318,10 @@
 
   .bott {
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     bottom: 0;
-    left: 1.5rem;
-    height: 0.1rem;
+    left: 0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -337,7 +337,7 @@
 
   .professor {
     width: 100%;
-    height: 12rem;
+    height: 3.2rem;
   }
   .professor .my-img{
     /*width: 21%;*/
@@ -345,57 +345,57 @@
     float: left;
   }
   .professor .avatar {
-    width: 6.9rem;
-    height: 6.85rem;
+    width: 1.84rem;
+    height: 1.826rem;
     border-radius: 50%;
-    margin-top: 2.5rem;
+    margin-top: 0.666rem;
 
   }
 
   .my-personal {
     /*width: 79%;*/
-    height: 6.9rem;
-    margin-top: 2.5rem;
+    height: 1.84rem;
+    margin-top: 0.666rem;
     float: left;
   }
 
   .my-personal .my-info {
     width: 100%;
-    height: 3rem;
-    margin-top: 0.9rem;
+    height: 0.8rem;
+    margin-top: 0.24rem;
     position: relative;
   }
 
   .my-personal .my-info span:nth-of-type(1) {
     display: inline-block;
-    max-width: 7.2rem;
-    font-size: 1.8rem;
+    max-width: 1.92rem;
+    font-size: 0.48rem;
     font-weight: 600;
     color: #444444;
-    margin-right: 0.15rem;
-    margin-bottom: -0.4rem;
+    margin-right: 0.04rem;
+    margin-bottom: -0.106rem;
   }
 
   .my-personal .my-info p:nth-of-type(1) {
-    width: 1.9rem;
-    height: 1.8rem;
+    width: 0.506rem;
+    height: 0.48rem;
     display: inline-block;
     position: relative;
-    top: -0.3rem;
+    top: -0.08rem;
     font-style: normal;
-    line-height: 1.5rem;
-    font-size: 1rem;
+    line-height: 0.4rem;
+    font-size: 0.266rem;
     color: #FFFFFF;
     text-align: center;
     background: url("../../statics/images/rank.png") no-repeat;
-    background-size: 1.9rem 1.8rem;
+    background-size: 0.506rem 0.48rem;
     background-position: top;
   }
 
   .my-personal .my-info svg:nth-of-type(1) {
-    font-size: 2.6rem;
-    margin-bottom: -0.4rem;
-    margin-left: -0.3rem;
+    font-size: 0.693rem;
+    margin-bottom: -0.106rem;
+    margin-left: -0.08rem;
     color: rgb(3, 174, 249);
     position: relative;
   }
@@ -403,22 +403,22 @@
 
   .my-personal .my-detail {
     width: 100%;
-    height: 3rem;
+    height: 0.8rem;
   }
 
   .my-detail span {
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #444444;
   }
 
   .my-detail i {
     display: inline-block;
-    width: 0.1rem;
-    height: 1.2rem;
+    width: 0.026rem;
+    height: 0.32rem;
     background: #DCDCDC;
-    margin-left: 0.9rem;
-    margin-right: 0.9rem;
-    margin-bottom: -0.2rem;
+    margin-left: 0.24rem;
+    margin-right: 0.24rem;
+    margin-bottom: -0.053rem;
   }
   /**********名片***************/
 
@@ -426,44 +426,44 @@
     position: absolute;
     right: 0;
     top: 4%;
-    height: 2.9rem;
-    border-radius: 10rem 0 0 10rem;
+    height: 0.773rem;
+    border-radius: 2.666rem 0 0 2.666rem;
     background: #03aef9;
-    line-height: 2.9rem;
+    line-height: 0.773rem;
     color: #FFFFFF;
-    font-size: 1.4rem;
-    padding-left: 1.3rem;
-    padding-right: 1.5rem;
+    font-size: 0.373rem;
+    padding-left: 0.346rem;
+    padding-right: 0.4rem;
     z-index: 9;
   }
   /**********邀请我的好友***************/
 
   .my-news {
     width: 100%;
-    height: 4.1rem;
-    border-radius: 0.4rem;
+    height: 1.093rem;
+    border-radius: 0.106rem;
     background:url(../../statics/images/mask@3x.png) no-repeat;
     background-size:100% 100%;
-    -webkit-box-shadow: 0 0 1rem rgb(243, 244, 246);
-    -moz-box-shadow: 0 0 1rem rgb(243, 244, 246);
-    box-shadow: 0 0 1rem rgb(243, 244, 246);
+    -webkit-box-shadow: 0 0 0.266rem rgb(243, 244, 246);
+    -moz-box-shadow: 0 0 0.266rem rgb(243, 244, 246);
+    box-shadow: 0 0 0.266rem rgb(243, 244, 246);
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 0.533rem;
   }
 
   .my-news i {
     font-style: normal;
     display: inline-block;
-    width: 3rem;
-    height: 1.7rem;
+    width: 0.8rem;
+    height: 0.453rem;
     background: #E95D8C;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 1.7rem;
-    border-radius: 0.4rem;
-    margin-left: 1.9rem;
-    margin-right: 1rem;
+    line-height: 0.453rem;
+    border-radius: 0.106rem;
+    margin-left: 0.506rem;
+    margin-right: 0.266rem;
     position: relative;
     /*渐变*/
     background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
@@ -472,43 +472,43 @@
   .my-news i:after {
     content: "";
     display: block;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.16rem;
+    height: 0.16rem;
     background: rgb(253, 128, 173);
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -0.2rem;
+    right: -0.053rem;
     top: 0rem;
     bottom: 0;
     margin: auto;
   }
 
   .my-news span {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
-    line-height: 4.1rem;
+    line-height: 1.093rem;
   }
   .my-news p{
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #444444;
     position: absolute;
     top: 0;
     bottom: 0;
-    right:3.5rem;
-    line-height:4.1rem;
+    right:0.933rem;
+    line-height:1.093rem;
   }
   .my-news p a{
     color:rgb(250,73,117);
-    font-style: 1.2rem;
-    letter-spacing:0.2rem;
+    font-style: 0.32rem;
+    letter-spacing:0.053rem;
   }
 
   .my-news svg {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #808080;
     position: absolute;
-    right: 1.5rem;
+    right: 0.4rem;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -516,7 +516,7 @@
 
   .gray {
     width: 100%;
-    height: 1rem;
+    height: 0.266rem;
     background: #F3F4F5;
   }
   /*中间的发布认证*/
@@ -524,9 +524,9 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 7.2rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    height: 1.92rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
     background: #FFFFFF;
     position: relative;
   }
@@ -540,24 +540,24 @@
   }
 
   .part2 li svg {
-    font-size: 2.4rem;
-    margin-top: 1rem;
+    font-size: 0.64rem;
+    margin-top: 0.266rem;
   }
 
   .part2 li span {
-    font-size: 1.2rem;
+    font-size: 0.32rem;
     color: #808080;
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 0.186rem;
   }
   /*part3认证*/
 
   .part3 {
     list-style: none;
     width: 100%;
-    height: 7.3rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    height: 1.946rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
     background: #FFFFFF;
     position: relative;
   }
@@ -572,23 +572,23 @@
 
   .part3 li p:nth-of-type(1) {
     display: inline-block;
-    height: 1.9rem;
-    font-size: 1.3rem;
+    height: 0.506rem;
+    font-size: 0.346rem;
     text-align: center;
     color: #ffffff;
-    line-height: 1.9rem;
+    line-height: 0.506rem;
     background: #fcc816;
-    border-radius: 10rem;
-    margin-top: 1.2rem;
-    padding: 0 0.5rem 0 0.5rem;
+    border-radius: 2.666rem;
+    margin-top: 0.32rem;
+    padding: 0 0.133rem 0 0.133rem;
   }
 
   .part3 li p:nth-of-type(2) {
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
     position: absolute;
-    top: 4rem;
+    top: 1.066rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -596,7 +596,7 @@
 
   .part3 li:nth-of-type(1) p {
     background: #FFF;
-    font-size: 1.3rem;
+    font-size: 0.346rem;
     color: #808080;
     position: absolute;
     left: 0;
@@ -610,14 +610,14 @@
     display: inline-block;
     width: 0;
     height: 0;
-    border-top: 0.8rem solid transparent;
-    border-bottom: 0.6rem solid transparent;
-    border-left: 0.6rem solid #dcdcdc;
+    border-top: 0.213rem solid transparent;
+    border-bottom: 0.16rem solid transparent;
+    border-left: 0.16rem solid #dcdcdc;
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
-    margin-left: 0.6rem;
+    margin-left: 0.16rem;
   }
   /*底部*/
 
@@ -627,21 +627,21 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    padding-left: 1.6rem;
-    padding-right: 1.6rem;
-    margin-bottom: 7.9rem;
+    padding-left: 0.426rem;
+    padding-right: 0.426rem;
+    margin-bottom: 2.106rem;
   }
 
   .my-option li {
     width: 100%;
-    height: 4.4rem;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    height: 1.173rem;
+    padding-top: 0.32rem;
+    padding-bottom: 0.32rem;
     position: relative;
   }
 
   .my-option li span {
-    font-size: 1.4rem;
+    font-size: 0.373rem;
     color: #444444;
   }
 
@@ -650,7 +650,7 @@
   }
 
   .mui-popup-inner {
-    padding: 2.3rem 1.5rem 0.1rem 1.5rem;
+    padding: 0.613rem 0.4rem 0.026rem 0.4rem;
   }
 
   .mui-content {

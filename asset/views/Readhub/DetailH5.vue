@@ -2,7 +2,7 @@
   <div>
     <iframe v-show="show" id="show-iframe" @load="loaded" frameborder=0  name="showHere" scrolling=auto></iframe>
 
-    <iframe id="readhub-footer" class="footer" height="4.4rem" width="100%"></iframe>
+    <iframe id="readhub-footer" class="footer" height="1.173rem" width="100%"></iframe>
 
     <div class="toComment" @tap.stop.prevent="toDetail()"></div>
   </div>
@@ -62,7 +62,7 @@
 
   .toComment {
     width: 30%;
-    height: 4.4rem;
+    height: 1.173rem;
     position: fixed;
     z-index: 100;
     bottom: 0;
