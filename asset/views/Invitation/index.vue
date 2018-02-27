@@ -526,7 +526,7 @@
   }
 
   /* 适配*/
-  @media (min-width: 32rem) {
+  @media (min-width: 320px) {
     .Invitation_img {
       height: 24rem;
     }
@@ -545,7 +545,7 @@
 
   }
 
-  @media (min-width: 37.5rem) {
+  @media (min-width: 375px) {
     .Invitation_img {
       height: 28rem;
     }
@@ -564,7 +564,7 @@
 
   }
 
-  @media (min-width: 41.4rem) {
+  @media (min-width: 414px) {
     .Invitation_img {
       height: 30rem;
     }

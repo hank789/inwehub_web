@@ -438,7 +438,7 @@
 
   /***媒体查询*****/
 
-  @media screen and (min-width: 32rem) {
+  @media screen and (min-width: 320px) {
     .ranking-content li{
       width:10.2rem;
     }
@@ -447,7 +447,7 @@
     }
   }
 
-  @media screen and (min-width: 37.5rem) {
+  @media screen and (min-width: 375px) {
     .ranking-content li{
       width:10.2rem;
     }
@@ -456,7 +456,7 @@
     }
   }
 
-  @media screen and (min-width: 41.4rem) {
+  @media screen and (min-width: 414px) {
     .ranking-content li{
       width:11.2rem;
     }

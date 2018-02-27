@@ -599,7 +599,7 @@
     margin-top: -0.3rem;
   }
 
-  @media screen and (max-width: 37.4rem) {
+  @media screen and (max-width: 374px) {
     .form-ask {
       height: 22rem;
     }

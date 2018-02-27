@@ -318,17 +318,17 @@
     /*display: flex !important;*/
   /*}*/
   /*适配*/
-  @media (min-width:32rem) {
+  @media (min-width:320px) {
     .text{
       margin-top: 1rem;
     }
   }
-  @media (min-width:37.5rem) {
+  @media (min-width:375px) {
     .text{
       margin-top: 6.8rem;
     }
   }
-  @media (min-width:41.4rem) {
+  @media (min-width:414px) {
     .text{
       margin-top: 6.8rem;
     }

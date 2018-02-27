@@ -659,7 +659,7 @@
 
   /*container-image */
    /* 适配*/
-@media (min-width: 32rem) {
+@media (min-width: 320px) {
   .professor .my-img{
     width: 26%;
     }
@@ -668,7 +668,7 @@
     }
 
 }
-@media (min-width: 37.5rem) {
+@media (min-width: 375px) {
    .professor .my-img{
     width: 23%;
     }
@@ -677,7 +677,7 @@
     }
 
 }
-@media (min-width: 41.4rem) {
+@media (min-width: 414px) {
     .professor .my-img{
      width: 21%;
     }

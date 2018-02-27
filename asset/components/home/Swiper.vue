@@ -323,17 +323,17 @@
     right: 25%;
   }
   /* 适配*/
-  @media (min-width: 32rem) {
+  @media (min-width: 320px) {
     #home-card p {
       right: 0;
     }
   }
-  @media (min-width: 37.5rem) {
+  @media (min-width: 375px) {
     #home-card p {
       right: 4%;
     }
   }
-  @media (min-width: 41.4rem) {
+  @media (min-width: 414px) {
     #home-card p {
       right: 4%;
     }

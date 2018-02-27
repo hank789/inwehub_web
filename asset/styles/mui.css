@@ -657,7 +657,7 @@ p
     width: 8.33333333%;
 }
 
-@media (min-width: 40rem)
+@media (min-width: 400px)
 {
     .mui-col-sm-12
     {

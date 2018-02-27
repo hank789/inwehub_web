@@ -565,21 +565,21 @@
   }
 
   /*适配*/
-  @media (min-width: 32rem) {
+  @media (min-width: 320px) {
     .PublishContainer .container-image {
       height: 9.2rem;
     }
 
   }
 
-  @media (min-width: 37.5rem) {
+  @media (min-width: 375px) {
     .PublishContainer .container-image {
       height: 10.8rem;
     }
 
   }
 
-  @media (min-width: 41.4rem) {
+  @media (min-width: 414px) {
     .PublishContainer .container-image {
       height: 10.8rem;
     }

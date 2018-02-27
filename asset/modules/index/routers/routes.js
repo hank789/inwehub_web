@@ -57,7 +57,7 @@ const routes = [
     path: '/home',
     name: 'home',
     meta: {
-      title: 'Inwehub',
+      title: 'InweHub',
       wechatHideHeader: true,
       keepAlive: true
     },
@@ -70,7 +70,7 @@ const routes = [
     path: '/feed',
     name: 'feed',
     meta: {
-      title: 'Inwehub',
+      title: 'InweHub',
       wechatHideHeader: true,
       keepAlive: false
     },
