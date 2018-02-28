@@ -18,7 +18,7 @@
 
 <script>
   import { postRequest } from '../utils/request'
-  import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { openFullscreen, closeFullscreen, closeSplashscreen } from '../utils/plus'
   export default {
     data: () => ({
       isShow: 0
@@ -38,8 +38,13 @@
             window.mui.toast(response.data.message)
             return
           }
+
+          closeSplashscreen()
+
           // 是否显示启动页面
           if (response.data.data.show_guide) {
+            openFullscreen()
+
             this.isShow = response.data.data.show_guide
             var endTime = 3  // 倒计时时间
             var setTime = () => {

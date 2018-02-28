@@ -38,8 +38,6 @@ const routes = [
           })
         } else {
           window.mui.plusReady(function () {
-            openFullscreen()
-            closeSplashscreen()
             next({
               path: '/ad'
             })

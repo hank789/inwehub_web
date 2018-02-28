@@ -141,8 +141,8 @@ function dragDownElement (elem, callback) {
 function setRemUnit () {
   var docEl = document.documentElement
   var rem = docEl.clientWidth / 10
-  if (rem > 54) {
-    rem = 54
+  if (rem > 41.4) {
+    rem = 41.4
   }
   docEl.style.fontSize = rem + 'px'
   var dpr = window.devicePixelRatio || 1
