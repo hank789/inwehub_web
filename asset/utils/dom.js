@@ -44,6 +44,7 @@ function textToLink (domEle) {
 
   console.log('textToLink html2:' + text)
   domEle.innerHTML = text
+  // 进行正则匹配 和 替换
 }
 
 function textToLinkHtml (text) {
