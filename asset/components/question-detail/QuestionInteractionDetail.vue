@@ -32,18 +32,22 @@
 
         </button>
       </div>
-      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!ask.current_user_answer_id">
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+          @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')" >
+          查看我的回答
+        </button>
+      </div>
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id === 0">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
           直接参与回答
-
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')">
-          查看我的回答
-
+                @tap.stop.prevent="modify()">
+          修改我的回答
         </button>
       </div>
     </div>
@@ -69,6 +73,10 @@
       Images
     },
     props: {
+      answerId: {
+        type: Number,
+        default: 0
+      },
       ask: {
         type: Object,
         default: {}
@@ -82,10 +90,11 @@
         default: false
       }
     },
-    created () {
-
-    },
+    created () {},
     methods: {
+      modify () {
+        this.$router.pushPlus('/realAnswer/' + this.ask.id + '/' + this.ask.current_user_answer_id, 'backAndClose')
+      },
       collectAsk: function () {
         if (!this.ask.id) {
           return
@@ -118,6 +127,9 @@
       },
       getHtml (id, options, callback) {
       }
+    },
+    mounted () {
+
     }
   }
 </script>
