@@ -30,7 +30,7 @@
           </svg>
           <span></span>
         </div>
-        <div class="qRCode">
+        <div class="qRCode qRCode-resume">
           <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
         </div>
         <div class="qRhelp">

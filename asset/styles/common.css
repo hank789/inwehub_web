@@ -1433,3 +1433,10 @@ a {
 .alertluckDraw {
   width: 80%;
 }
+
+
+.qRCode-resume div img{
+  width: 4.533rem;
+  height: 4.533rem;
+  border-radius: 0.106rem;
+}
