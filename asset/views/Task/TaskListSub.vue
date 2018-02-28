@@ -396,6 +396,5 @@
     line-height: 0.4rem;
   }
   .listWrapper{
-    bottom: 1.333rem;
   }
 </style>
