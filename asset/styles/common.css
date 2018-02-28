@@ -915,7 +915,9 @@ input.upload-file[type=file]{
 .mui-content{
   position: absolute;
   top:0;
-  width:100%;
+  width: 10rem;
+  left:50%;
+  margin-left:-5rem !important;
   bottom:0;
   padding-top:0;
   overflow: scroll;
