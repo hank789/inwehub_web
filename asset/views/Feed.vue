@@ -143,7 +143,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import { openVendorUrl, openAppUrl, autoTextArea } from '../utils/plus'
+  import { openVendorUrl, openAppUrl, autoTextArea, AppInit } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -155,7 +155,6 @@
   import { saveLocationInfo } from '../utils/allPlatform'
 
   import commentTextarea from '../components/comment/Textarea.vue'
-  import { AppInit } from '../utils/plus'
 
   const currentUser = getLocalUserInfo()
 
