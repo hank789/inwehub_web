@@ -15,18 +15,18 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
-      <!--标签活动-->
-      <div class="tag">
-         <p @tap.stop.prevent="toTagDetail('贺新春')">
-           <img src="../statics/images/feed_newyear@2x.png"/>
-         </p>
-         <p @tap.stop.prevent="toTagDetail('谈工作')">
-           <img src="../statics/images/feed_work@2x.png"/>
-         </p>
-         <p @tap.stop.prevent="toTagDetail('提建议')">
-           <img src="../statics/images/feed_suggest@2x.png"/>
-         </p>
-      </div>
+      <!--&lt;!&ndash;标签活动&ndash;&gt;-->
+      <!--<div class="tag">-->
+         <!--<p @tap.stop.prevent="toTagDetail('贺新春')">-->
+           <!--<img src="../statics/images/feed_newyear@2x.png"/>-->
+         <!--</p>-->
+         <!--<p @tap.stop.prevent="toTagDetail('谈工作')">-->
+           <!--<img src="../statics/images/feed_work@2x.png"/>-->
+         <!--</p>-->
+         <!--<p @tap.stop.prevent="toTagDetail('提建议')">-->
+           <!--<img src="../statics/images/feed_suggest@2x.png"/>-->
+         <!--</p>-->
+      <!--</div>-->
       <!--导航栏-->
       <div class="menu">
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
@@ -223,9 +223,10 @@
       }
     },
     methods: {
-      toTagDetail (name) {
-        userAbility.jumpToTagDetail(name)
-      },
+//     // 标签
+//      toTagDetail (name) {
+//        userAbility.jumpToTagDetail(name)
+//      },
       judge () {
         this.$router.pushPlus('/nearbyCompany')
       },
@@ -412,7 +413,6 @@
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    top: 1.306rem;
   }
   .menu span{
     position:relative;
@@ -439,7 +439,7 @@
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 2.346rem;
+    top: 1.04rem;
     bottom: 1.333rem;
   }
 
@@ -537,31 +537,31 @@
     -webkit-box-orient: vertical;
     font-size: 0.426rem;
   }
-  /*标签活动*/
-  .tag{
-    width:100%;
-    height:1.306rem;
-    background: #f3f4f6;
-    padding: 0 0.4rem;
-    position: absolute;
-    top:0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .tag p{
-    width:32%;
-    height:1.04rem;
-    margin-bottom: 0;
-    border-radius: 0.106rem;
-    background: #ffffff;
-  }
-  .tag p img{
-    width: 100%;
-    height:100%;
-    border-radius: 0.106rem;
-  }
+  /*!*标签活动*!*/
+  /*.tag{*/
+    /*width:100%;*/
+    /*height:1.306rem;*/
+    /*background: #f3f4f6;*/
+    /*padding: 0 0.4rem;*/
+    /*position: absolute;*/
+    /*top:0;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+  /*}*/
+  /*.tag p{*/
+    /*width:32%;*/
+    /*height:1.04rem;*/
+    /*margin-bottom: 0;*/
+    /*border-radius: 0.106rem;*/
+    /*background: #ffffff;*/
+  /*}*/
+  /*.tag p img{*/
+    /*width: 100%;*/
+    /*height:100%;*/
+    /*border-radius: 0.106rem;*/
+  /*}*/
 
 
 </style>
