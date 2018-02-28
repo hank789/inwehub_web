@@ -311,6 +311,24 @@ function getClipbordText () {
 }
 
 /**
+ * 设置剪切板内容
+ */
+function setClipboardText (text) {
+  if (!window.plus) return
+
+  if (window.mui.os.android) {
+    var Context = window.plus.android.importClass('android.content.Context')
+    var main = window.plus.android.runtimeMainActivity()
+    var clip = main.getSystemService(Context.CLIPBOARD_SERVICE)
+    window.plus.android.invoke(clip, text)
+  } else if (window.mui.os.ios) {
+    var UIPasteboard = window.plus.ios.importClass('UIPasteboard')
+    var generalPasteboard = UIPasteboard.generalPasteboard()
+    generalPasteboard.setValueforPasteboardType(text, 'public.utf8-plain-text')
+  }
+}
+
+/**
  * 检查定位权限
  */
 function checkPermission (type, successCallback, failCallback) {
@@ -749,5 +767,6 @@ export {
   openAppUrlByUrl,
   openVendorUrlByUrl,
   AppInit,
-  AppPageInit
+  AppPageInit,
+  setClipboardText
 }
