@@ -29,6 +29,7 @@
   import inwehubDialog from '../../components/Dialog.vue'
   import MessageComponent from '../../components/Message.vue'
   import { initDocRem } from '../../utils/dom'
+  import { AppPageInit } from '../../utils/plus'
 
   export default {
     data () {
@@ -91,12 +92,7 @@
       }
 
       initDocRem()
-
-      var routerFullPath = this.$router.currentRoute.fullPath
-      console.log('routerFullPath:' + routerFullPath)
-      if (routerFullPath === '/ad') {
-        return
-      }
+      AppPageInit()
     }
   }
 </script>

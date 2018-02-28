@@ -434,19 +434,19 @@ function openWebviewRefresh (callback) {
 }
 
 /**
- * 打开app运行一次的代码
+ * app,webview新打开的页面都运行一次的代码
+ * @param context
  * @constructor
  */
-function AppInit (context) {
+function AppPageInit (context) {
+  console.log('AppPageInit(context) fired')
   window.mui.plusReady(function () {
-    console.log('AppInit() fired')
-    if (window.mui.os.plus) {
-      window.mui.init({
-        swipeBack: true, // 启用右滑关闭功能
-        beforeback: goBack
-      })
+    window.mui.init({
+      swipeBack: true, // 启用右滑关闭功能
+      beforeback: goBack
+    })
 
-      var ws = window.plus.webview.currentWebview()
+    if (window.mui.os.plus) {
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
@@ -470,6 +470,19 @@ function AppInit (context) {
           setWebviewNewUrl()
         })
       })
+    }
+  })
+}
+
+/**
+ * 打开app运行一次的代码
+ * @constructor
+ */
+function AppInit (context) {
+  window.mui.plusReady(function () {
+    console.log('AppInit(context) fired')
+    if (window.mui.os.plus) {
+      var ws = window.plus.webview.currentWebview()
 
       // 只在主页面监听一次
       if (ws.id === window.plus.runtime.appid) {
@@ -709,11 +722,6 @@ function AppInit (context) {
           }
         }, false)
       }
-    } else {
-      window.mui.init({
-        swipeBack: true, // 启用右滑关闭功能
-        beforeback: goBack
-      })
     }
   })
 }
@@ -740,5 +748,6 @@ export {
   openWebviewRefresh,
   openAppUrlByUrl,
   openVendorUrlByUrl,
-  AppInit
+  AppInit,
+  AppPageInit
 }
