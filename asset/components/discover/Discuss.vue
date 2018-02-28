@@ -42,7 +42,7 @@
 
               <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
 
-              <i class="bot" v-show="list.length-1 !== index"></i>
+              <!--<i class="bot" v-show="list.length-1 !== index"></i>-->
             </li>
           </ul>
         </div>
@@ -390,9 +390,11 @@
     overflow: hidden;
     position: relative;
     padding: 0.32rem 0 0.32rem 0;
+    border-bottom: 0.026rem solid #dcdcdc;
   }
   .message_detail li:nth-last-of-type(1){
     padding: 0.32rem 0 0 0;
+    border-bottom: none;
   }
 
   .message_b {
