@@ -13,6 +13,7 @@
         <Question
           :ask="ask.question"
           :isFollow="true"
+          :answerId="id"
         ></Question>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
@@ -94,7 +95,9 @@
   const AskDetail = {
     data: () => ({
       ask: {
-        answers: [],
+        answers: {
+          user_id: ''
+        },
         question: {
           created_at: '',
           description: '',
