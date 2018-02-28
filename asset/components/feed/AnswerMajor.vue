@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="average_rate">回答好评率{{data.feed.average_rate}}</div>
+    <div class="average_rate" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
     <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
 
     <div class="container-answer margin-10-0-0">
