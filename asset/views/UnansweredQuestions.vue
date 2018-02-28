@@ -13,7 +13,7 @@
           <li v-for="(item,index) in list" @tap.stop.prevent="skip(item.question_type,item.id)">
             <p>{{index+1}}.</p>
             <p>
-              <span v-if="item.tags.length"><i v-for="tag in item.tags">{{tag.name}}</i></span>
+              <span v-if="item.tags.length"><i v-for="tag in item.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</i></span>
               <span class="mui-ellipsis-3">{{item.title}}</span>
             </p>
             <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
@@ -28,6 +28,7 @@
 <script>
   import { postRequest } from '../utils/request'
   import Empty from '../components/Empty.vue'
+  import userAbility from '../utils/userAbility'
 
   export default {
     data: () => ({
@@ -44,6 +45,9 @@
       Empty
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       skip (type, id) {
         switch (type) {
           case 1:
