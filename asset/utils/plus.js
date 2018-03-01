@@ -320,7 +320,7 @@ function setClipboardText (text) {
     var Context = window.plus.android.importClass('android.content.Context')
     var main = window.plus.android.runtimeMainActivity()
     var clip = main.getSystemService(Context.CLIPBOARD_SERVICE)
-    window.plus.android.invoke(clip, text)
+    window.plus.android.invoke(clip, 'setText', text)
   } else if (window.mui.os.ios) {
     var UIPasteboard = window.plus.ios.importClass('UIPasteboard')
     var generalPasteboard = UIPasteboard.generalPasteboard()
