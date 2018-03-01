@@ -47,10 +47,11 @@
 
 
         <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
-          <div class="mui-table-view-cell">
-            暂无回答
-
-
+          <div class="mui-table-view-cell major_answer" >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
+            </svg>
+            <p>暂无回答</p>
           </div>
         </div>
 
@@ -446,9 +447,35 @@
   line-height: 1.653rem;
   margin-left: -0.266rem;
   }
-  /*answer*/
-  .detail-answer[data-v-852fb68e] {
+  /*暂无回答*/
+  .detail-answer {
     margin-bottom: 0rem;
+    width:100%;
+    height:3.32rem;
+    position: relative;
+  }
+  .major_answer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.64rem;
+    color: #c8c8c8;
+  }
+  .major_answer svg{
+    font-size: 1.33rem
+  }
+  .mui-table-view:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+     height: 0rem;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
   }
   /*查看回答*/
   .see{
@@ -469,4 +496,5 @@
   .star{
     margin-top: -0.4rem;
   }
+
 </style>
