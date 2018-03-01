@@ -134,7 +134,7 @@
       getEndTime (task) {
         var deadline = task.deadline
         if (deadline) {
-          return Date.parse(deadline.replace(/-/g, '／')) / 1000
+          return Date.parse(deadline.replace(/-/g, '/')) / 1000
         }
         return null
       },
