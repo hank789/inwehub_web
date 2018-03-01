@@ -451,11 +451,10 @@
   .detail-answer {
     margin-bottom: 0rem;
     width:100%;
-    height:3.32rem;
     position: relative;
   }
   .major_answer{
-    height: 100%;
+    height:3.32rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
