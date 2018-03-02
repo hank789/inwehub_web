@@ -353,7 +353,10 @@
     updated () {
    // 打开第三方链接
       this.$nextTick(function () {
-        openVendorUrl(this.$el.querySelector('#myData'))
+        var myData = this.$el.querySelector('#myData')
+        if (myData) {
+          openVendorUrl(myData)
+        }
       })
     },
     mounted () {
