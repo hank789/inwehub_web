@@ -91,9 +91,30 @@ function getGeoPositionByWechat (callback, failCallback) {
   })
 }
 
+/**
+ * 设置剪切板内容
+ * @param text
+ */
+function setClipboardText (text) {
+  var currentFocus = document.activeElement
+  var input = document.createElement('input')
+  input.id = 'clipboardBmpInput'
+  input.style.position = 'absolute'
+  input.style.left = '-100px'
+  input.type = 'text'
+  input.defaultValue = text
+  document.body.appendChild(input)
+  var inputText = document.getElementById('clipboardBmpInput')
+  inputText.focus()
+  inputText.setSelectionRange(0, inputText.value.length)
+  document.execCommand('copy', true)
+  currentFocus.focus()
+}
+
 export {
   hideHeaderHandler,
   rebootAuth,
   callWechat,
-  getGeoPositionByWechat
+  getGeoPositionByWechat,
+  setClipboardText
 }

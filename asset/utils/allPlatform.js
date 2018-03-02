@@ -1,5 +1,5 @@
-import { getGeoPosition as getGeoPositionByPlus, getClipbordText, checkPermission, toSettingSystem } from './plus'
-import { getGeoPositionByWechat } from './wechat'
+import { getGeoPosition as getGeoPositionByPlus, getClipbordText, checkPermission, toSettingSystem, setClipboardText as setClipboardTextByPlus } from './plus'
+import { getGeoPositionByWechat, setClipboardText as setClipboardTextByWechat } from './wechat'
 import { apiRequest } from './request'
 import localEvent from '../stores/localStorage'
 import { alertNoticeOpenNotifitionPermission } from './dialogList'
@@ -190,10 +190,23 @@ function pageRefresh (context, refreshCallback) {
   // })
 }
 
+/**
+ * setClipboardText
+ * @param text
+ */
+function setClipboardText (text) {
+  if (window.mui.os.plus) {
+    setClipboardTextByPlus(text)
+  } else {
+    setClipboardTextByWechat(text)
+  }
+}
+
 export {
   getGeoPosition,
   saveLocationInfo,
   checkClipbord,
   noticeOpenNotifitionPermission,
-  pageRefresh
+  pageRefresh,
+  setClipboardText
 }
