@@ -21,7 +21,7 @@
           <img src="../statics/images/sendFriend@2x.png"/>
           <p>私信好友</p>
         </div>
-        <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
+        <div class="single" @tap.stop.prevent="shareToCopyLink()">
           <img src="../statics/images/copyLink@3x.png"/>
           <p>复制链接</p>
         </div>
@@ -61,6 +61,8 @@
 <script type="text/javascript">
 
   import Share from '../utils/share'
+  import { setClipboardText } from '../utils/plus'
+
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
   import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
@@ -134,6 +136,10 @@
     },
 
     methods: {
+      shareToCopyLink () {
+        setClipboardText(this.link)
+        window.mui.toast('已复制')
+      },
       shareToChat () {
         window.mui('#shareWrapper').popover('toggle')
         this.$router.pushPlus('/collectUser?from=all')
