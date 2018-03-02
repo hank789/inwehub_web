@@ -5,7 +5,7 @@
       <h1 class="mui-title">专业问答</h1>
     </header>
 
-    <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+    <div id="majorDetail" class="mui-content absolute">
       <div>
         <div class="question_tags"  v-if="ask.question.tags.length">
           <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
