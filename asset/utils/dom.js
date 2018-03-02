@@ -57,7 +57,7 @@ function textToLinkHtml (text) {
   }
 
   var re = /\[(.*?)\]\((.*?)\)/g
-  text = text.replace(re, '<span target="_blank" class="vendorUrl text-content visualLink" href="$2" bindtap="true">链接：$1</span>')
+  text = text.replace(re, '<span target="_blank" class="vendorUrl text-content visualLink" href="$2">链接：$1</span>')
 
   re = /([^"'])(https?:\/\/[^\s<]+)/g
   text = text.replace(re, "$1 <span target='_blank' class='vendorUrl text-content' href='$2'>$2</span>")
