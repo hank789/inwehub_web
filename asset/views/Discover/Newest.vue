@@ -54,7 +54,7 @@
                     <use xlink:href="#icon-shoucangxingxing"></use>
                   </svg>
                 </p>
-                <p  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
+                <p  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug, 'list-detail-page')">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun1"></use>
                   </svg>
@@ -110,7 +110,7 @@
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
-            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
             break
           case 'link':
             goThirdPartyArticle(
