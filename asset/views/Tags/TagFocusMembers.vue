@@ -5,12 +5,6 @@
       <h1 class="mui-title">关注成员</h1>
     </header>
     <div class="mui-content absolute">
-      <div class="tag-switch">
-        <p @tap.stop.prevent="reducePage()"></p>
-        <span>{{current_page}}/20</span>
-        <p @tap.stop.prevent="addPage()"></p>
-        <i class="bot"></i>
-      </div>
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
@@ -99,22 +93,6 @@
       prevSuccessCallback () {
         this.current_page = this.$refs.RefreshList.getResponse().data.current_page
       },
-      reducePage () {
-        if (this.current_page !== 1) {
-          this.current_page -= 1
-          this.dataList = {
-            page: this.current_page,
-            tag_name: this.tagName
-          }
-        }
-      },
-      addPage () {
-        this.current_page += 1
-        this.dataList = {
-          page: this.current_page,
-          tag_name: this.tagName
-        }
-      },
       // 一键关注
       allInvitation () {
 //        this.invitation_user_id = []
@@ -173,31 +151,6 @@
   }
   .mui-content{
     background: #FFFFFF;
-  }
-  /*切换*/
-  .tag-switch{
-    width:100%;
-    height:1.07rem;
-    padding: 0 4%;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .tag-switch p:nth-of-type(1){
-    width: 0;
-    height: 0;
-    border-top: 7px solid transparent;
-    border-right: 8px solid #b4b4b6;
-    border-bottom: 7px solid transparent;
-  }
-  .tag-switch p:nth-of-type(2){
-    width: 0;
-    height: 0;
-    border-top: 7px solid transparent;
-    border-left:  8px solid #b4b4b6;
-    border-bottom: 7px solid transparent;
   }
   /*列表区域*/
   .cions-list{
@@ -261,7 +214,6 @@
     border: 0.026rem solid #b4b4b6;
   }
   .listWrapper{
-    top:1.07rem;
     bottom: 1.173rem;
   }
   /*一键关注*/

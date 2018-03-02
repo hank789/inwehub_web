@@ -20,14 +20,11 @@
     </div>
     <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + tagDetail.name)">
       <div class="tag-people">
-        <p class="number"><span>12</span>  /关注</p>
+        <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
         <div class="tag-avatar">
-           <img src="../../statics/images/guide_01.png" />
-           <img src="../../statics/images/guide_01.png" />
-           <img src="../../statics/images/guide_01.png" />
-           <img src="../../statics/images/guide_01.png" />
-           <img src="../../statics/images/guide_01.png" />
-           <img src="../../statics/images/guide_01.png" />
+          <template  v-for="(item, index) in tagDetail.followed_users">
+            <img :src="item.avatar" />
+          </template>
            <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
            </svg>
@@ -67,6 +64,7 @@
             window.mui.toast(response.data.message)
             return
           }
+//          followed_users  followers
           this.tagDetail = response.data.data
           this.loading = 0
          // 储存状态
