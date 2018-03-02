@@ -84,6 +84,7 @@
   import { textToLinkHtml } from '../../utils/dom'
   import Typing from '../../components/Typing.vue'
   import { searchText } from '../../utils/search'
+  import localEvent from '../../stores/localStorage'
 
   const Chat = {
     data: () => ({
@@ -327,7 +328,8 @@
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
           }, 500)
-
+          //  清空
+          localEvent.clearLocalItem('share')
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: this.chatUserId,
@@ -355,6 +357,11 @@
       })
     },
     mounted () {
+      // 保存链接
+      var a = localEvent.getLocalItem('share')
+      if (a) {
+        this.comment = a
+      }
       autoTextArea()
     }
   }
