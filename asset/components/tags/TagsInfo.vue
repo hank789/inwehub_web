@@ -191,43 +191,43 @@
   /*关注成员*/
   .tag-focus{
     width:100%;
-    height: 64px;
+    height: 1.706rem;
     background: #f3f4f6;
   }
   .tag-people{
     width:92%;
     height: 100%;
     margin-left: 4%;
-    border-top:1px solid #dcdcdc;
+    border-top:0.026rem solid #dcdcdc;
   }
   .tag-people .number{
     float: left;
-    margin-top: 18px;
-    font-size: 11px;
+    margin-top: 0.48rem;
+    font-size: 0.293rem;
     color: #b4b4b6;
   }
   .tag-people .number span{
-    font-size: 23px;
+    font-size: 0.613rem;
     color: #444444;
     font-weight: bold;
     letter-spacing: 0;
   }
   .tag-avatar{
     width:70%;
-    height: 32px;
-    margin-top: 15px;
+    height: 0.853rem;
+    margin-top: 0.4rem;
     /*background: #ffffff;*/
     float: right;
-    border-left: 1px solid #dcdcdc;
-    padding:0 4px 0 15px;
+    border-left: 0.026rem solid #dcdcdc;
+    padding:0 0.106rem 0 0.4rem;
     overflow: hidden;
     position: relative;
   }
   .tag-avatar  img{
-    width:32px;
-    height:32px;
+    width:0.853rem;
+    height:0.853rem;
     border-radius: 50%;
-    margin-right: 5px;
+    margin-right: 0.133rem;
 
   }
   .tag-avatar  svg{

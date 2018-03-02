@@ -447,7 +447,7 @@
           height: 1.25rem;
         }
         p{
-          font-size: 12px;
+          font-size: 0.32rem;
           color: #b4b4b6;
           text-align: center;
         }
