@@ -438,13 +438,12 @@
       background: #fff;
       padding: 0.266rem;
       .single {
-        width: 1.25rem;
         height: 1.866rem;
-        margin: 0 0.266rem;
         display: inline-block;
         img {
-          width: 100%;
+          width: 1.25rem;
           height: 1.25rem;
+          margin: 0 0.266rem;
         }
         p{
           font-size: 0.32rem;
