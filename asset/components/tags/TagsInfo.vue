@@ -20,7 +20,7 @@
     </div>
     <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + tagDetail.name)" v-if="tagDetail.followers">
       <div class="tag-people">
-        <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
+        <p class="number"><span>{{number}}</span>  /关注</p>
         <div class="tag-avatar">
           <template  v-for="(item, index) in tagNumber">
             <img :src="item.avatar" />
@@ -69,15 +69,13 @@
 //          followed_users  followers
           this.tagDetail = response.data.data
           this.tagNumber = response.data.data.followers
+          this.number = response.data.data.followers
           this.loading = 0
          // 储存状态
           localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
           localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
          // 储存人数
-<<<<<<< Updated upstream
-          localEvent.setLocalItem('tagsInfo_number' + this.id, response.data.data.followers)
-=======
-          localEvent.setLocalItem('tagsInfo_number' + this.id, this.tagNumber)
+          localEvent.setLocalItem('tagsInfo_number' + this.id, this.number)
         })
       },
       getTagNumber () {
@@ -93,8 +91,7 @@
           this.number = response.data.data.followers
           this.loading = 0
           // 储存人数
-          localEvent.setLocalItem('tagsInfo_number' + this.id, this.tagNumber)
->>>>>>> Stashed changes
+          localEvent.setLocalItem('tagsInfo_number' + this.id, this.number)
         })
       },
       collectTag (id) {
