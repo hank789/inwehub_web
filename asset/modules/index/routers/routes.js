@@ -188,7 +188,7 @@ const routes = [
     name: 'ask-interaction',
     meta: {
       title: '问答社区-互动回答-回答列表',
-      wechatHideHeader: false
+      wechatHideHeader: true
     },
     component: componets.AskCommunityInteractionAnswers
   },
@@ -466,7 +466,8 @@ const routes = [
     component: componets.DiscoverDetail,
     meta: {
       title: '分享',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1780,8 +1781,8 @@ const routes = [
     name: 'my-collect-user',
     meta: {
       title: '我的关注',
-      wechatHideHeader: true,
-      keepAlive: true
+      wechatHideHeader: true
+      // keepAlive: true
     },
     component: componets.AccountcollectUser,
     beforeEnter: (to, from, next) => {

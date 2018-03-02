@@ -4,14 +4,14 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的关注</h1>
+      <h1 class="mui-title">{{type?'私信好友':'我的关注'}}</h1>
     </header>
 
 
 
     <div class="mui-content">
       <!--导航栏-->
-      <div class="menu">
+      <div class="menu" v-if="!type">
         <span @tap.stop.prevent="">用户<i></i></span>
         <span @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
         <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
@@ -43,7 +43,7 @@
           <ul v-for="(list, key) in lastList" class="index-bar-group">
             <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
             <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active"
-                :class="{bottomBorder:index !== list.length-1  }">
+                :class="{bottomBorder:index !== list.length-1  }" @tap.stop.prevent="toChat(item.id)">
 
               <div class="avatar">
                 <div class="avatarInner" @tap.stop.prevent="">
@@ -54,7 +54,7 @@
                 </div>
               </div>
 
-              <div class="textBody" @tap.stop.prevent="toAvatar(item.uuid)">
+              <div class="textBody">
                 <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
@@ -88,13 +88,19 @@
         followednum: 0,
         title: '',
         list: [],
-        lastList: []
+        lastList: [],
+        type: ''
       }
     },
     components: {
       Contact
     },
     methods: {
+      toChat (id) {
+        if (this.type) {
+          this.$router.pushPlus('/chat/' + id)
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -154,7 +160,7 @@
       this.getList()
     },
     created () {
-      console.log(this.lastList)
+      this.type = this.$route.query.from
     }
   }
 </script>

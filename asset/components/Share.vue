@@ -11,9 +11,19 @@
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
+          <p>微信好友</p>
         </div>
         <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
+          <p>朋友圈</p>
+        </div>
+        <div class="single" @tap.stop.prevent="shareToChat()">
+          <img src="../statics/images/sendFriend@2x.png"/>
+          <p>私信好友</p>
+        </div>
+        <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
+          <img src="../statics/images/copyLink@3x.png"/>
+          <p>复制链接</p>
         </div>
         <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
@@ -54,6 +64,7 @@
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
   import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
+  import localEvent from '../stores/localStorage'
 
   export default {
     data () {
@@ -123,6 +134,12 @@
     },
 
     methods: {
+      shareToChat () {
+        window.mui('#shareWrapper').popover('toggle')
+        this.$router.pushPlus('/collectUser?from=all')
+        // 保存链接
+        localEvent.setLocalItem('share', this.link)
+      },
       isShowSharePng () {
         if (window.mui.os.wechat) {
           return false
@@ -404,13 +421,18 @@
       background: #fff;
       padding: 0.266rem;
       .single {
-        width: 1.466rem;
-        height: 1.466rem;
+        width: 1.25rem;
+        height: 1.866rem;
         margin: 0 0.266rem;
         display: inline-block;
         img {
           width: 100%;
-          height: 100%;
+          height: 1.25rem;
+        }
+        p{
+          font-size: 12px;
+          color: #b4b4b6;
+          text-align: center;
         }
       }
     }
