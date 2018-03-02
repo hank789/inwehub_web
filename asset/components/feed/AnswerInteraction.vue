@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3" v-html="textToLink(data.feed.content)"></div>
+    <div class="text-16-444 text-line-3 textToLink" v-html="textToLink(data.feed.content)"></div>
 
 
     <div class="container-answer margin-10-0-0"  @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
