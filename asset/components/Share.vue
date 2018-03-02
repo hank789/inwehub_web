@@ -7,7 +7,10 @@
     </a>
 
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
-      <div class="title">分享到</div>
+      <div class="title">
+        <span  @tap.stop.prevent="cancelShare()">取消</span>
+        分享到
+      </div>
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
@@ -62,7 +65,6 @@
 
   import Share from '../utils/share'
   import { setClipboardText } from '../utils/plus'
-
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
   import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
@@ -136,6 +138,9 @@
     },
 
     methods: {
+      cancelShare () {
+        window.mui('#shareWrapper').popover('toggle')
+      },
       shareToCopyLink () {
         setClipboardText(this.link)
         window.mui.toast('已复制')
@@ -416,12 +421,18 @@
 
   .shareWrapper {
     text-align: left;
-
     .title {
       background: #ececee;
       text-align: center;
       font-size: 0.373rem;
       padding: 0.32rem 0;
+      position: relative;
+      color: #808080;
+      span{
+        position: absolute;
+        left:0.586rem;
+        font-size: 0.4rem;
+      }
     }
     .more {
       background: #fff;
