@@ -9,7 +9,7 @@
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'tags/users'"
+        :api="'followed/tagUsers'"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :pageMode= true
@@ -28,8 +28,8 @@
               <p>{{item.name}}</p>
               <p class="mui-ellipsis">{{item.description}}</p>
             </div>
-            <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed">已关注</div>
-            <div class="fouce" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else>关注</div>
+            <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed && item.user_id != id">已关注</div>
+            <div class="fouce" @tap.stop.prevent="collectProfessor(item.uuid,index)" v-else-if="!item.is_followed && item.user_id != id">关注</div>
             <i class="bot"></i>
           </li>
         </ul>
@@ -42,10 +42,13 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         tagName: '',
         loading: 1,
         list: [],
@@ -95,28 +98,31 @@
       },
       // 一键关注
       allInvitation () {
-//        this.invitation_user_id = []
-//        for (var index in this.list) {
-//          this.invitation_user_id.push(this.list[index].id)
-//        }
-//        if (this.invitation_user_id.length) {
-//          postRequest('follow/batchUser', {
-//            ids: this.invitation_user_id
-//          }).then(response => {
-//            var code = response.data.code
-//            if (code !== 1000) {
-//              window.mui.alert(response.data.message)
-//              window.mui.back()
-//              return
-//            }
-//            this.change()
-//            window.mui.toast('一键关注成功')
-//          })
-//        }
-        window.mui.toast('一键关注成功')
+        this.invitation_user_id = []
+        for (var index in this.list) {
+          this.invitation_user_id.push(this.list[index].user_id)
+        }
+        if (this.invitation_user_id.length) {
+          postRequest('follow/batchUser', {
+            ids: this.invitation_user_id
+          }).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              window.mui.back()
+              return
+            }
+            this.dataList = {
+              page: this.current_page++,
+              tag_name: this.tagName
+            }
+            window.mui.toast('一键关注成功')
+          })
+        }
       }
     },
     mounted () {
+      console.error()
     },
     updated () {}
   }
