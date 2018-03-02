@@ -215,8 +215,6 @@
   }
 
   /*问答列表*/
-  .listWrapper{
-  }
   .recommend_b {
     width: 100%;
     /*height: 5.333rem;*/
@@ -335,7 +333,7 @@
 
 
   .listWrapper{
-    top:4.72rem;
+    top:6.29rem;
   }
 
   .hudongWrapper .three {

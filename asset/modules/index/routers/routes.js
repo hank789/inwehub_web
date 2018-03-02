@@ -608,6 +608,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 标签详情-关注成员
+    path: '/tag/FocusMembers',
+    name: 'tag_FocusMembers',
+    meta: {
+      title: '关注成员',
+      wechatHideHeader: true
+    },
+    component: componets.TagsTagFocusMembers,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的报名 活动
     path: '/my/Discount',
     name: 'my-Discount',

@@ -2,15 +2,13 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">标签详情</h1>
+      <h1 class="mui-title">关注成员</h1>
     </header>
     <div class="mui-content absolute">
-      <TagsInfo :tagName = tagName></TagsInfo>
-      <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions')">问答</span>
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">分享</span>
-        <span @tap.stop.prevent="">用户 <i></i></span>
+      <div class="tag-switch">
+        <p @tap.stop.prevent="reducePage()"></p>
+        <span>{{current_page}}/20</span>
+        <p @tap.stop.prevent="addPage()"></p>
         <i class="bot"></i>
       </div>
       <!--内容区域-->
@@ -18,10 +16,11 @@
         ref="RefreshList"
         v-model="list"
         :api="'tags/users'"
-        :prevOtherData="{tag_name:tagName}"
-        :nextOtherData="{tag_name:tagName}"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
         :pageMode= true
         :list="list"
+        :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
         <ul class="cions-list">
           <li  v-for="(item, index) in list">
@@ -41,7 +40,7 @@
           </li>
         </ul>
       </RefreshList>
-
+      <div class="focusAll"  @tap.stop.prevent="allInvitation()">一键关注</div>
     </div>
   </div>
 </template>
@@ -55,7 +54,9 @@
       return {
         tagName: '',
         loading: 1,
-        list: []
+        list: [],
+        current_page: 1,
+        dataList: null
       }
     },
     components: {
@@ -63,8 +64,11 @@
       TagsInfo
     },
     created () {
-      if (this.$route.params.tag) {
-        this.tagName = this.$route.params.tag
+      if (this.$route.query.tagname) {
+        this.tagName = this.$route.query.tagname
+      }
+      this.dataList = {
+        tag_name: this.tagName
       }
     },
     methods: {
@@ -91,6 +95,47 @@
           }
           window.mui.toast(response.data.data.tip)
         })
+      },
+      prevSuccessCallback () {
+        this.current_page = this.$refs.RefreshList.getResponse().data.current_page
+      },
+      reducePage () {
+        if (this.current_page !== 1) {
+          this.current_page -= 1
+          this.dataList = {
+            page: this.current_page,
+            tag_name: this.tagName
+          }
+        }
+      },
+      addPage () {
+        this.current_page += 1
+        this.dataList = {
+          page: this.current_page,
+          tag_name: this.tagName
+        }
+      },
+      // 一键关注
+      allInvitation () {
+//        this.invitation_user_id = []
+//        for (var index in this.list) {
+//          this.invitation_user_id.push(this.list[index].id)
+//        }
+//        if (this.invitation_user_id.length) {
+//          postRequest('follow/batchUser', {
+//            ids: this.invitation_user_id
+//          }).then(response => {
+//            var code = response.data.code
+//            if (code !== 1000) {
+//              window.mui.alert(response.data.message)
+//              window.mui.back()
+//              return
+//            }
+//            this.change()
+//            window.mui.toast('一键关注成功')
+//          })
+//        }
+        window.mui.toast('一键关注成功')
       }
     },
     mounted () {
@@ -99,9 +144,9 @@
   }
 </script>
 
+
 <style scoped>
   /*清掉自带样式*/
-
   div,
   p,
   span,
@@ -129,81 +174,30 @@
   .mui-content{
     background: #FFFFFF;
   }
-  /*菜单*/
-  .menu{
+  /*切换*/
+  .tag-switch{
     width:100%;
-    height:1.04rem;
-    background: #FFFFFF;
-    font-size:0.373rem;
-    color: #444444;
+    height:1.07rem;
+    padding: 0 4%;
+    position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
   }
-  .menu span:nth-of-type(3){
-    position:relative;
-    color: #03aef9;
+  .tag-switch p:nth-of-type(1){
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 8px solid #b4b4b6;
+    border-bottom: 7px solid transparent;
   }
-  .menu span:nth-of-type(3) i{
-    position:absolute;
-    width:0.72rem;
-    height:0.04rem;
-    border-radius: 1.333rem;
-    background:#03aef9;
-    top: 0.746rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  /*list*/
-
-
-  /*关注和取消*/
-
-  .my-focus-item .follows {
-    position: absolute;
-    width: 1.653rem;
-    height: 0.72rem;
-    border: 0.026rem solid #03aef9;
-    border-radius: 1.333rem;
-    text-align: center;
-    line-height: 0.72rem;
-    right: 0;
-    top: 0.48rem;
-    font-size: 0.373rem;
-    color: #03aef9;
-  }
-
-  .my-focus-item .bgblue {
-    background: #03aef9;
-    color: #FFFFFF;
-  }
-
-  .my-focus-item div p:nth-of-type(1) span {
-    display: inline-block;
-    max-width: 3.36rem;
-    height: 0.533rem;
-    overflow: hidden;
-    font-family: "PingFangSC";
-    font-size: 0.373rem;
-    color: #565656;
-  }
-
-  .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 0.533rem;
-    margin-bottom: 0.053rem;
-    color: #3c95f9;
-  }
-
-  .my-focus-item div p:nth-of-type(2){
-    width: 100%;
-    height: 0.373rem;
-    font-size: 0.346rem;
-    color: #b4b4b6;
-    line-height: 0.346rem;
+  .tag-switch p:nth-of-type(2){
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left:  8px solid #b4b4b6;
+    border-bottom: 7px solid transparent;
   }
   /*列表区域*/
   .cions-list{
@@ -267,6 +261,19 @@
     border: 0.026rem solid #b4b4b6;
   }
   .listWrapper{
-    top:6.29rem;
+    top:1.07rem;
+    bottom: 1.173rem;
+  }
+  /*一键关注*/
+  .focusAll{
+    width:100%;
+    height: 1.173rem;
+    background: #03aef9;
+    text-align: center;
+    line-height: 1.173rem;
+    font-size: 0.426rem;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
   }
 </style>

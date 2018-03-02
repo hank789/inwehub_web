@@ -595,7 +595,7 @@
 
 
   .listWrapper{
-    top:4.72rem;
+    top:6.29rem;
   }
   /*活动标签*/
   .activity_tags{
