@@ -1474,6 +1474,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // time
+    path: '/time',
+    name: 'time',
+    meta: {
+      title: '时间优化'
+    },
+    component: componets.time,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   // { // discover
   //   path: '/discover',
   //   name: 'discover',

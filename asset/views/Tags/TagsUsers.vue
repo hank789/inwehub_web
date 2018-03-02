@@ -68,7 +68,7 @@
       TagsInfo
     },
     created () {
-      this.top = localEvent.getLocalItem('tagsInfo_name' + this.user_id) > 0 ? 6.29 : 4.584
+      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
@@ -100,6 +100,7 @@
       }
     },
     mounted () {
+      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
     },
     updated () {}
   }

@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <div class="mui-content">
       <div class="my-top">

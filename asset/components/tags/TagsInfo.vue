@@ -22,7 +22,7 @@
       <div class="tag-people">
         <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
         <div class="tag-avatar">
-          <template  v-for="(item, index) in tagDetail.followed_users">
+          <template  v-for="(item, index) in tagNumber">
             <img :src="item.avatar" />
           </template>
            <svg class="icon" aria-hidden="true">
@@ -43,7 +43,9 @@
     data () {
       return {
         id: currentUser.user_id,
-        tagDetail: {}
+        tagDetail: {},
+        tagNumber: [],
+        number: ''
       }
     },
     created () {
@@ -66,12 +68,33 @@
           }
 //          followed_users  followers
           this.tagDetail = response.data.data
+          this.tagNumber = response.data.data.followers
           this.loading = 0
          // 储存状态
           localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
           localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
          // 储存人数
+<<<<<<< Updated upstream
           localEvent.setLocalItem('tagsInfo_number' + this.id, response.data.data.followers)
+=======
+          localEvent.setLocalItem('tagsInfo_number' + this.id, this.tagNumber)
+        })
+      },
+      getTagNumber () {
+        postRequest('tags/tagInfo', {
+          tag_name: this.tagName
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.tagNumber = response.data.data.followed_users
+          this.number = response.data.data.followers
+          this.loading = 0
+          // 储存人数
+          localEvent.setLocalItem('tagsInfo_number' + this.id, this.tagNumber)
+>>>>>>> Stashed changes
         })
       },
       collectTag (id) {
@@ -95,6 +118,7 @@
     // 判断是否请求
       if (name === this.tagName) {
         this.tagDetail = tagsStatus
+        this.getTagNumber()
       } else {
         this.getTagInfo()
       }

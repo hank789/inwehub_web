@@ -105,7 +105,8 @@
       TagsInfo
     },
     created () {
-      this.top = localEvent.getLocalItem('tagsInfo_name' + this.user_id) > 0 ? 6.29 : 4.584
+      console.error(localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0, localEvent.getLocalItem('tagsInfo_number' + this.userId))
+      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
@@ -155,6 +156,7 @@
       '$route': 'refreshPageData'
     },
     mounted () {
+      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
     },
     updated () {}
   }

@@ -5,7 +5,7 @@
 
       <div class="mui-tab-item mui-active" v-if="isHome">
         <svg class="icon oneIcon" aria-hidden="true">
-          <use xlink:href="#icon-shouye-hover"></use>
+          <use xlink:href="#icon-shouye-h over"></use>
         </svg>
       </div>
 
