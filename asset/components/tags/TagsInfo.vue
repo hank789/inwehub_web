@@ -70,6 +70,8 @@
          // 储存状态
           localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
           localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
+         // 储存人数
+          localEvent.setLocalItem('tagsInfo_number' + this.id, response.data.data.followers)
         })
       },
       collectTag (id) {

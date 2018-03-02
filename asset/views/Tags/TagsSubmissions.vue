@@ -20,7 +20,9 @@
         :pageMode="true"
         :prevOtherData="{tag_name:tagName, page: 1}"
         :nextOtherData="{tag_name:tagName}"
-        class="listWrapper">
+        class="listWrapper"
+        :style="'top:'+ top +'rem'"
+        >
         <ul>
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
@@ -105,12 +107,14 @@
 
   const PublishAnswers = {
     data: () => ({
+      top: 4.584,
       tagName: '',
       list: [],
       userId: currentUser.user_id,
       activity_tags: []
     }),
     created () {
+      this.top = localEvent.getLocalItem('tagsInfo_name' + this.user_id) > 0 ? 6.29 : 4.584
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
@@ -594,9 +598,6 @@
   }
 
 
-  .listWrapper{
-    top:6.29rem;
-  }
   /*活动标签*/
   .activity_tags{
     width:3.04rem;

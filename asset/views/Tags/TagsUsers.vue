@@ -22,7 +22,9 @@
         :nextOtherData="{tag_name:tagName}"
         :pageMode= true
         :list="list"
-        class="listWrapper">
+        class="listWrapper"
+        :style="'top:'+ top +'rem'"
+      >
         <ul class="cions-list">
           <li  v-for="(item, index) in list">
             <div class="cions-avatar">
@@ -49,13 +51,16 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
-
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
   export default {
     data () {
       return {
+        userId: currentUser.user_id,
         tagName: '',
         loading: 1,
-        list: []
+        list: [],
+        top: 4.584
       }
     },
     components: {
@@ -63,6 +68,7 @@
       TagsInfo
     },
     created () {
+      this.top = localEvent.getLocalItem('tagsInfo_name' + this.user_id) > 0 ? 6.29 : 4.584
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
@@ -265,8 +271,5 @@
   .cions-list li .grey{
     color: #b4b4b6;
     border: 0.026rem solid #b4b4b6;
-  }
-  .listWrapper{
-    top:6.29rem;
   }
 </style>
