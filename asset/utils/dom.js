@@ -44,7 +44,6 @@ function textToLink (domEle) {
 
   console.log('textToLink html2:' + text)
   domEle.innerHTML = text
-  // 进行正则匹配 和 替换
 }
 
 function textToLinkHtml (text) {
@@ -67,7 +66,10 @@ function textToLinkHtml (text) {
 
   re = /^(https?:\/\/[^\s<]+)/
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
-
+  // 进行正则匹配 和 替换
+  // console.error(text)
+  // 'ldfjsldfj(dsfasjfj3124123)'.match(/\((.+)\)/g);
+  // console.log(RegExp.$1); // dsfasjfj3124123
   return text
 }
 
