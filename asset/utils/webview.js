@@ -2,6 +2,7 @@ import { setStatusBarBackgroundAndStyle, getImmersedHeight } from './statusBar'
 import router from '../modules/index/routers/index'
 import { getDiscoverDetail } from './shareTemplate'
 import { getIndexPath } from './plus'
+import localEvent from '../stores/localStorage'
 
 function getIdByUrl (url, id) {
   if (id === 'backAndClose') {
@@ -59,6 +60,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         if (/^http/.test(url)) {
           currentWebview.loadURL(url)
         } else {
+          saveCurrentWebviewId(id)
           window.mui.fire(currentWebview, 'go_to_target_page', {url: shotUrl})
         }
       }
@@ -68,6 +70,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         // mui.fire(current_webview, 'refreshPageData', false);
       }, 150)
     } else {
+      saveCurrentWebviewId(id)
       var webview = window.mui.openWindow({
         url: url,
         id: id,
@@ -290,7 +293,7 @@ function showWebview () {
         self.addEventListener('popGesture', (e) => {
           console.log('run in event popGesture')
           if (e.type === 'end' && e.result === true) {
-            var parentWebview = self.opener()
+            var parentWebview = getPrevWebview() // self.opener()
             if (parentWebview) {
               console.log('calledEvent: popGesture：' + parentWebview.getURL())
 
@@ -463,6 +466,25 @@ function goVendorUrl (url, callback) {
   }
 
   currentWebview.append(ws)
+}
+
+/**
+ * 保存当前webviewid
+ */
+function saveCurrentWebviewId (futureId) {
+  window.mui.plusReady(() => {
+    var currentWebview = window.plus.webview.currentWebview()
+    if (currentWebview.id !== futureId) {
+      localEvent.setLocalItem('webview_referer_id', {id: currentWebview.id})
+    }
+  })
+}
+
+function getPrevWebview () {
+  var options = localEvent.getLocalItem('webview_referer_id')
+  if (options && options.id) {
+    return window.plus.webview.getWebviewById(options.id)
+  }
 }
 
 export {
