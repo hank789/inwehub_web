@@ -114,8 +114,8 @@
       var name = localEvent.getLocalItem('tagsInfo_name' + this.id)
     // 判断是否请求
       if (name === this.tagName) {
-        this.tagDetail = tagsStatus
         this.getTagNumber()
+        this.tagDetail = tagsStatus
       } else {
         this.getTagInfo()
       }
