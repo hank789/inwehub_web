@@ -29,7 +29,7 @@ function getIdByUrl (url, id) {
 function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
-    id = getIdByUrl(url, id)
+    // id = getIdByUrl(url, id)
     var preloadBackClose = true
     if (id === url || id === 'backAndClose') {
       // 非特殊页面返回时关闭webview
