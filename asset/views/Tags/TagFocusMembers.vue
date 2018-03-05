@@ -19,13 +19,13 @@
         <ul class="cions-list">
           <li  v-for="(item, index) in list">
             <div class="cions-avatar">
-              <img :src="item.avatar_url"  @tap.stop.prevent="toAvatar(item.uuid)"/>
+              <img :src="item.user_avatar_url"  @tap.stop.prevent="toAvatar(item.uuid)"/>
               <svg class="icon" aria-hidden="true" v-if="item.is_expert">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
             </div>
             <div class="detail">
-              <p>{{item.name}}</p>
+              <p>{{item.user_name}}</p>
               <p class="mui-ellipsis">{{item.description}}</p>
             </div>
             <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed && item.user_id != id">已关注</div>
