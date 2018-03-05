@@ -102,7 +102,12 @@
       allInvitation () {
         this.invitation_user_id = []
         for (var index in this.list) {
-          this.invitation_user_id.push(this.list[index].user_id)
+          if (this.list[index].is_followed !== 1) {
+            this.invitation_user_id.push(this.list[index].user_id)
+          }
+        }
+        for (var i in this.list) {
+          this.list[i].is_followed = 1
         }
         if (this.invitation_user_id.length) {
           postRequest('follow/batchUser', {
@@ -114,13 +119,14 @@
               window.mui.back()
               return
             }
-            this.current_page += 1
-            if (this.current_page > 1) {
-              this.dataList = {
-                page: this.current_page,
-                tag_name: this.tagName
-              }
-            }
+
+//            this.current_page += 1
+//            if (this.current_page > 1) {
+//                this.dataList = {
+//                  page: this.current_page,
+//                  tag_name: this.tagName
+//                }
+//            }
             window.mui.toast('一键关注成功')
           })
         }

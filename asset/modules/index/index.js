@@ -96,7 +96,7 @@ Vue.use(TimeAgo, {
   }
 })
 
-import { showWebview, clearAllWebViewCache } from '../../utils/webview'
+import { showWebview, clearAllWebViewCache, getPrevWebview } from '../../utils/webview'
 import localEvent from '../../stores/localStorage'
 
 import refreshPageData from '../../plugins/refreshPageData'
@@ -175,6 +175,7 @@ window.mui.back = function () {
       'inwehub_notice_view',
       'list-detail-page',
       'list-detail-page-two',
+      'list-detail-page-three',
       'readhub_submission_webview'
     ]
 
@@ -190,6 +191,16 @@ window.mui.back = function () {
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备隐藏当前webview')
       currentWebview.hide()
+      // 获得父页面的webview
+      var parentWebview = getPrevWebview() // self.opener()
+      if (parentWebview) {
+        // 触发父页面的自定义事件(refresh),从而进行刷新
+        window.mui.fire(parentWebview, 'refreshData')
+        // 触发父页面的自定义事件(refresh),从而进行刷新
+        window.mui.fire(parentWebview, 'refreshPageData', {childId: currentWebview.id})
+        // 子页面也刷新数据
+        // window.mui.fire(currentWebview, 'refreshData')
+      }
       return
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备close当前webview')
