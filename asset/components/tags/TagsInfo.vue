@@ -22,7 +22,7 @@
       <div class="tag-people">
         <p class="number"><span>{{number}}</span>  /关注</p>
         <div class="tag-avatar">
-          <template  v-for="(item, index) in tagNumber">
+          <template  v-for="(item, index) in tagUsers">
             <img :src="item.avatar" />
           </template>
            <svg class="icon" aria-hidden="true">
@@ -44,7 +44,7 @@
       return {
         id: currentUser.user_id,
         tagDetail: {},
-        tagNumber: [],
+        tagUsers: [],
         number: ''
       }
     },
@@ -68,7 +68,7 @@
           }
 //          followed_users  followers
           this.tagDetail = response.data.data
-          this.tagNumber = response.data.data.followers
+          this.tagUsers = response.data.data.followed_users
           this.number = response.data.data.followers
           this.loading = 0
          // 储存状态
@@ -87,7 +87,7 @@
             window.mui.toast(response.data.message)
             return
           }
-          this.tagNumber = response.data.data.followed_users
+          this.tagUsers = response.data.data.followed_users
           this.number = response.data.data.followers
           this.loading = 0
           // 储存人数
