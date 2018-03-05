@@ -1440,3 +1440,57 @@ a {
   height: 4.533rem;
   border-radius: 0.106rem;
 }
+
+
+/* iphone-plus 适配底部 */
+.w414-3 #Footer .mui-bar-tab{
+  height:50px !important;
+}
+
+.w414-3 #Footer .mui-bar-tab .mui-tab-item{
+  height:50px !important;
+}
+
+.w414-3 #Footer .oneIcon{
+  font-size:23px !important;
+}
+
+.w414-3 #Footer .twoIcon{
+  font-size:23px !important;
+}
+
+.w414-3 #Footer .threeIcon{
+  font-size:27px !important;
+}
+
+.w414-3 #Footer .fourIcon{
+  font-size:24px !important;
+}
+
+.w414-3 .listWrapper{
+  bottom:50px !important;
+}
+
+.w414-3 #Footer .mui-bar-tab .mui-tab-item.mui-active:before{
+  width: 4px;
+  height: 4px;
+  bottom: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+}
+
+.w414-3 #Footer .askWrapper .askPlus .askImgBg{
+  margin-left: -26.5px;
+  width: 53px;
+  height: 53px;
+  border-radius: 53px;
+}
+
+.w414-3 #Footer .askWrapper .askPlus .askImg{
+  top: 6px;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  background-size: 35px 35px;
+}
+/* iphone-plus 适配底部 end */

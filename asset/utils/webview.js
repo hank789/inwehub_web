@@ -16,6 +16,8 @@ function getIdByUrl (url, id) {
     newId = newId.replace(/[^a-z]+/g, '')
     console.log('getIdByUrl-id:' + newId)
     return newId
+  } else if (/\/c\/.*?\/.*?/.test(url)) {
+    return 'discover_detail'
   }
   console.log('getIdByUrl: id:' + url)
   return url
@@ -88,6 +90,28 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         }
       })
       console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
+      console.log('bind event popGesture')
+      webview.addEventListener('popGesture', (e) => {
+        console.log('run in event popGesture')
+        if (e.type === 'end' && e.result === true) {
+          var parentWebview = getPrevWebview() // self.opener()
+          if (parentWebview) {
+            console.log('calledEvent: popGesture：' + parentWebview.id)
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshData', {childId: webview.id})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshPageData', {childId: webview.id})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+
+            window.mui.fire(parentWebview, 'autoHeight', {childId: webview.id})
+          }
+        }
+      }, false)
       if (reload) {
         webview.loadURL(url)
       }
@@ -287,30 +311,6 @@ function showWebview () {
         // 关闭等待框
         window.plus.nativeUI.closeWaiting()
         self.show('slide-in-right', 300)
-      }
-      if (window.mui.os.ios) {
-        console.log('bind event popGesture')
-        self.addEventListener('popGesture', (e) => {
-          console.log('run in event popGesture')
-          if (e.type === 'end' && e.result === true) {
-            var parentWebview = getPrevWebview() // self.opener()
-            if (parentWebview) {
-              console.log('calledEvent: popGesture：' + parentWebview.getURL())
-
-              // 触发父页面的自定义事件(refresh),从而进行刷新
-              window.mui.fire(parentWebview, 'refreshData', {childId: self.id})
-              // 刷新当前页数据
-              // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
-
-              // 触发父页面的自定义事件(refresh),从而进行刷新
-              window.mui.fire(parentWebview, 'refreshPageData', {childId: self.id})
-              // 刷新当前页数据
-              // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
-
-              window.mui.fire(parentWebview, 'autoHeight', {childId: self.id})
-            }
-          }
-        }, false)
       }
     })
   }
