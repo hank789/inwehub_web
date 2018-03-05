@@ -25,7 +25,6 @@
         :nextOtherData="{tag_name:tagName}"
         :pageMode = true
         class="listWrapper"
-        :style="'top:'+ top +'rem'"
       >
       <ul class="recommend_b">
         <template v-for="(item, index) in list">
@@ -109,7 +108,6 @@
       TagsInfo
     },
     created () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
@@ -160,7 +158,6 @@
       '$route': 'refreshPageData'
     },
     mounted () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
     },
     updated () {}
   }
@@ -390,5 +387,12 @@
     font-style: normal;
   }
 
+  .listWrapper{
+    top:4.584rem;
+  }
+
+  .hasFollowers .listWrapper{
+    top: 6.29rem;
+  }
 
 </style>

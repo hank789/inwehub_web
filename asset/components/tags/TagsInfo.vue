@@ -105,7 +105,13 @@
         console.log('请求')
       }
     },
-    updated () {}
+    updated () {
+      this.$nextTick(() => {
+        if (this.tagDetail.followers) {
+          document.querySelector('.mui-content').classList.add('hasFollowers')
+        }
+      })
+    }
   }
 </script>
 <style scoped>
