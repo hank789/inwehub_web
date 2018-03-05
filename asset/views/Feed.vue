@@ -443,6 +443,10 @@
     bottom: 1.333rem;
   }
 
+  .w414-3 .listWrapper{
+    bottom:50px !important;
+  }
+
   .activityWrapper.unIsGetted ~ .listWrapper {
     top: 1.12rem;
   }
