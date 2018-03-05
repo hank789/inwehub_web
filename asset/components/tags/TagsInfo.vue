@@ -20,9 +20,9 @@
     </div>
     <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + tagDetail.name)" v-if="tagDetail.followers">
       <div class="tag-people">
-        <p class="number"><span>{{number}}</span>  /关注</p>
+        <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
         <div class="tag-avatar">
-          <template  v-for="(item, index) in tagNumber">
+          <template  v-for="(item, index) in tagDetail.followed_users">
             <img :src="item.avatar" />
           </template>
            <svg class="icon" aria-hidden="true">
@@ -44,7 +44,6 @@
       return {
         id: currentUser.user_id,
         tagDetail: {},
-        tagUsers: [],
         number: ''
       }
     },
@@ -52,6 +51,10 @@
     },
     props: {
       tagName: {
+        type: String,
+        default: ''
+      },
+      type: {
         type: String,
         default: ''
       }
@@ -66,31 +69,13 @@
             window.mui.toast(response.data.message)
             return
           }
-//          followed_users  followers
           this.tagDetail = response.data.data
-          this.tagUsers = response.data.data.followed_users
           this.number = response.data.data.followers
           this.loading = 0
          // 储存状态
           localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
           localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
          // 储存人数
-          localEvent.setLocalItem('tagsInfo_number' + this.id, this.number)
-        })
-      },
-      getTagNumber () {
-        postRequest('tags/tagInfo', {
-          tag_name: this.tagName
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-          this.tagUsers = response.data.data.followed_users
-          this.number = response.data.data.followers
-          this.loading = 0
-          // 储存人数
           localEvent.setLocalItem('tagsInfo_number' + this.id, this.number)
         })
       },
@@ -111,13 +96,13 @@
     },
     mounted () {
       var tagsStatus = localEvent.getLocalItem('tagsInfo_status' + this.id)
-      var name = localEvent.getLocalItem('tagsInfo_name' + this.id)
     // 判断是否请求
-      if (name === this.tagName) {
-        this.getTagNumber()
+      if (this.type === 'tag') {
         this.tagDetail = tagsStatus
+        console.log('不请求')
       } else {
         this.getTagInfo()
+        console.log('请求')
       }
     },
     updated () {}
