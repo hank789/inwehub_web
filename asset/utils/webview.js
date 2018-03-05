@@ -495,6 +495,7 @@ export {
   clearAllWebViewCache,
   openWebviewByHome,
   goThirdPartyArticle,
-  goVendorUrl
+  goVendorUrl,
+  getPrevWebview
 }
 
