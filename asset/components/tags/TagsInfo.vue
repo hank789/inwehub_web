@@ -22,7 +22,7 @@
       <div class="tag-people">
         <p class="number"><span>{{number}}</span>  /关注</p>
         <div class="tag-avatar">
-          <template  v-for="(item, index) in tagNumber">
+          <template  v-for="(item, index) in tagUsers">
             <img :src="item.avatar" />
           </template>
            <svg class="icon" aria-hidden="true">
