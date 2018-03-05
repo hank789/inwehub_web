@@ -18,7 +18,7 @@
         <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
       </div>
     </div>
-    <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + tagDetail.name)" v-if="tagDetail.followers">
+    <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + encodeURIComponent(tagDetail.name))" v-if="tagDetail.followers">
       <div class="tag-people">
         <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
         <div class="tag-avatar">
@@ -84,8 +84,11 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.tagDetail.is_followed = !this.tagDetail.is_followed
-          this.getTagInfo()
+          if (response.data.data.type === 'unfollow') {
+            this.tagDetail.is_followed = 0
+          } else {
+            this.tagDetail.is_followed = 1
+          }
           window.mui.toast(response.data.data.tip)
         })
       }
