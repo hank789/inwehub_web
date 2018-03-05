@@ -437,6 +437,11 @@
   margin-top: 0rem;
   bottom: 1.36rem;
 }
+
+.w414-3 .listWrapper{
+  bottom:50px !important;
+}
+
 /*顾问社区*/
   .community{
     width:100%;

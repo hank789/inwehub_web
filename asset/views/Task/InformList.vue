@@ -331,6 +331,10 @@
     bottom: 1.333rem;
   }
 
+  .w414-3 .listWrapper{
+    bottom:50px !important;
+  }
+
   /*待完成任务*/
   .notice{
     width:100%;
