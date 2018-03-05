@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="text-14-444 ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
+    <div class="text-14-444 font ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
     <div class="freeQuestion-container comment-container ">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
@@ -96,6 +96,9 @@
   }
 </script>
 <style scoped>
+  .font{
+    font-size: 0.426rem;
+  }
   /*回答者详情*/
 .comment-container{
   height:0.506rem;
