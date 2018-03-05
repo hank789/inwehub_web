@@ -24,7 +24,6 @@
         :prevOtherData="{tag_name:tagName, page: 1}"
         :nextOtherData="{tag_name:tagName}"
         class="listWrapper"
-        :style="'top:'+ top +'rem'"
         >
         <ul>
           <template v-for="(hot, index) in list">
@@ -110,7 +109,6 @@
 
   const PublishAnswers = {
     data: () => ({
-      top: 4.584,
       tagName: '',
       list: [],
       userId: currentUser.user_id,
@@ -118,7 +116,6 @@
       type: ''
     }),
     created () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
@@ -131,11 +128,6 @@
       TagsInfo
     },
     methods: {
-//      refreshPageData () {
-//        if (this.$route.params.tag) {
-//          this.tagName = this.$route.params.tag
-//        }
-//      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
@@ -273,7 +265,6 @@
       }
     },
     mounted () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       this.getTag()
       document.addEventListener('tap', () => {
       })
@@ -624,5 +615,13 @@
     width:100%;
     height: 100%;
     border-radius: 1.333rem;
+  }
+
+  .listWrapper{
+    top:4.584rem;
+  }
+
+  .hasFollowers .listWrapper{
+    top: 6.29rem;
   }
 </style>

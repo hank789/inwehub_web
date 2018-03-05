@@ -99,7 +99,6 @@
         tagName: '',
         loading: 1,
         list: [],
-        top: 4.584,
         type: ''
       }
     },

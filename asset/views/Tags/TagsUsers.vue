@@ -26,7 +26,6 @@
         :pageMode= true
         :list="list"
         class="listWrapper"
-        :style="'top:'+ top +'rem'"
       >
         <ul class="cions-list">
           <li  v-for="(item, index) in list">
@@ -63,7 +62,6 @@
         tagName: '',
         loading: 1,
         list: [],
-        top: 4.584,
         type: ''
       }
     },
@@ -72,7 +70,6 @@
       TagsInfo
     },
     created () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
       this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
@@ -105,7 +102,6 @@
       }
     },
     mounted () {
-      this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
     },
     updated () {}
   }
@@ -277,5 +273,13 @@
   .cions-list li .grey{
     color: #b4b4b6;
     border: 0.026rem solid #b4b4b6;
+  }
+
+  .listWrapper{
+    top:4.584rem;
+  }
+
+  .hasFollowers .listWrapper{
+    top: 6.29rem;
   }
 </style>

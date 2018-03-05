@@ -43,8 +43,7 @@
     data () {
       return {
         id: currentUser.user_id,
-        tagDetail: {},
-        number: ''
+        tagDetail: {}
       }
     },
     created () {
@@ -70,13 +69,10 @@
             return
           }
           this.tagDetail = response.data.data
-          this.number = response.data.data.followers
           this.loading = 0
          // 储存状态
           localEvent.setLocalItem('tagsInfo_status' + this.id, response.data.data)
           localEvent.setLocalItem('tagsInfo_name' + this.id, response.data.data.name)
-         // 储存人数
-          localEvent.setLocalItem('tagsInfo_number' + this.id, this.number)
         })
       },
       collectTag (id) {
