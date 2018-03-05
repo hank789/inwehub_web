@@ -175,6 +175,7 @@ window.mui.back = function () {
       'inwehub_notice_view',
       'list-detail-page',
       'list-detail-page-two',
+      'list-detail-page-three',
       'readhub_submission_webview'
     ]
 
