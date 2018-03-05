@@ -64,8 +64,10 @@
       if (this.$route.query.tagname) {
         this.tagName = this.$route.query.tagname
       }
-      this.dataList = {
-        tag_name: this.tagName
+      if (this.current_page === 1) {
+        this.dataList = {
+          tag_name: this.tagName
+        }
       }
     },
     methods: {
@@ -112,9 +114,12 @@
               window.mui.back()
               return
             }
-            this.dataList = {
-              page: this.current_page++,
-              tag_name: this.tagName
+            this.current_page += 1
+            if (this.current_page > 1) {
+              this.dataList = {
+                page: this.current_page,
+                tag_name: this.tagName
+              }
             }
             window.mui.toast('一键关注成功')
           })
@@ -122,7 +127,6 @@
       }
     },
     mounted () {
-      console.error()
     },
     updated () {}
   }
