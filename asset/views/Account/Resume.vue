@@ -141,9 +141,9 @@
         <!--Ta的专栏-->
         <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
           <p>Ta的专栏 </p>
-          <p>文章<span>{{ resume.info.article_count }}</span><i></i></p>
-          <p>评论<span>{{ resume.info.article_comment_count }}</span><i></i></p>
-          <p>赞{{ resume.info.article_upvote_count }}  </p>
+          <p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>
+          <p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>
+          <p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
