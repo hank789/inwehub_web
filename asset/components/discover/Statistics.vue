@@ -127,64 +127,64 @@
 <style scoped="scoped">
 
   .item {
-    line-height: 20px;
+    line-height: 0.533rem;
     color: #b4b4b6;
   }
 
   .item span {
-    font-size: 14px;
+    font-size: 0.373rem;
     position: relative;
-    top: -3px;
+    top: -0.08rem;
   }
 
   .item .iconWrapper {
     display: inline-block;
-    border: 1px solid #dcdcdc;
-    width: 42px;
-    height: 42px;
+    border: 0.026rem solid #dcdcdc;
+    width: 1.12rem;
+    height: 1.12rem;
     border-radius: 50%;
     text-align: center;
-    line-height: 42px;
-    font-size: 24px;
+    line-height: 1.12rem;
+    font-size: 0.64rem;
 
   }
 
   .item.active .iconWrapper {
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .item:nth-child(1) .iconWrapper {
-    font-size: 20px;
+    font-size: 0.533rem;
   }
 
   .item:nth-child(2) .iconWrapper {
-    font-size: 24px;
+    font-size: 0.64rem;
   }
 
   .item:nth-child(2) .iconWrapper.showcangWrapper {
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .item:nth-child(2) .iconWrapper.showcangWrapper .icon {
     position: relative;
-    top: -1px;
+    top: -0.026rem;
   }
 
   .item:nth-child(3) .iconWrapper {
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .modifyWrapper {
-    font-size: 16px !important;
+    font-size: 0.426rem !important;
   }
 
   .modifyWrapper .icon {
     position: relative;
-    top: 0px;
+    top: 0rem;
   }
 
   .statistics {
-    padding: 20px 0 10px 0;
+    padding: 0.533rem 0 0.266rem 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -192,7 +192,7 @@
 
   .dianzanWrapper .icon {
     position: relative;
-    top: -1px;
+    top: -0.026rem;
   }
 
   .active {

@@ -328,25 +328,25 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .logo {
-    margin: 42px 0 38px;
+    margin: 1.12rem 0 1.013rem;
     text-align: center;
   }
 
   .logo .icon {
-    font-size: 125px;
+    font-size: 3.333rem;
   }
 
   .inputWrapper .icon {
     position: absolute;
-    top: 4px;
-    font-size: 24px;
+    top: 0.106rem;
+    font-size: 0.64rem;
     color: #c8c8c8;
   }
 
   .inputWrapper {
-    margin: 0 33px 22px;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
-    top: 145px;
+    top: 3.866rem;
 
   }
 
@@ -363,27 +363,27 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #3c95f9;
     position: absolute;
-    right: 2px;
-    top: 6px;
-    border: 1px solid #3c95f9;
-    border-radius: 5px;
-    padding: 3px 14px;
+    right: 0.053rem;
+    top: 0.16rem;
+    border: 0.026rem solid #3c95f9;
+    border-radius: 0.133rem;
+    padding: 0.08rem 0.373rem;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #c8c8c8;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 3px;
+    bottom: 0.08rem;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -394,8 +394,8 @@
     color: #444;
     border: none;
     margin: 0;
-    padding: 0 0 0 36px;
-    font-size: 14px;
+    padding: 0 0 0 0.96rem;
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
   }
@@ -409,7 +409,7 @@
   }
 
   .buttonWrapper {
-    margin: 40px 36px 16px;
+    margin: 1.066rem 0.96rem 0.426rem;
   }
 
   ::-webkit-input-placeholder {
@@ -417,45 +417,45 @@
   }
 
   .buttonWrapper button {
-    border-radius: 5px;
-    top:135px;
+    border-radius: 0.133rem;
+    top:3.6rem;
 
     &:disabled {
       background: #dcdcdc;
-      border: 1px solid #dcdcdc;
+      border: 0.026rem solid #dcdcdc;
       color: #b4b4b6;
 
     }
   }
 
   .help {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #3c95f9;
     text-align: center;
   }
 /*register_logo*/
   .register_logo{
     width:100%;
-    height:120px;
+    height:3.2rem;
     background: #f3f4f6;
     position: absolute;
     top:0;
-    padding-left: 38px;
+    padding-left: 1.013rem;
   }
   .register_logo svg{
-    font-size: 140px;
+    font-size: 3.733rem;
     position: absolute;
-    top: -34px;
+    top: -0.906rem;
   }
   .register_logo p{
     margin:0;
     padding:0;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
   .register_logo p:nth-of-type(1){
      font-weight: 600;
-     margin-top: 59px;
+     margin-top: 1.573rem;
   }
 
 </style>

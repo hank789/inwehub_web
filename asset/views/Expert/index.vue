@@ -70,13 +70,13 @@
 <style scoped>
 
   .mui-table-view {
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 
   .myinfo li {
     color: #101010;
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 0.346rem;
+    padding-bottom: 0.346rem;
   }
 
   .myinfo > .mui-table-view:first-child {
@@ -84,18 +84,18 @@
   }
 
   .my-header p {
-    margin-top: 5px;
+    margin-top: 0.133rem;
     color: #fff;
-    font-size: 16px;
+    font-size: 0.426rem;
     font-weight: bold;
   }
 
   .expert-setting-field {
     position: absolute;
     text-align: right;
-    font-size: 12px;
-    width: 200px;
-    right: 40px;
+    font-size: 0.32rem;
+    width: 5.333rem;
+    right: 1.066rem;
     color: #3f51b5;
   }
 

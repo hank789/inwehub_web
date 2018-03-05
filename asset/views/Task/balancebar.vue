@@ -181,10 +181,10 @@
 <style scoped>
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -209,11 +209,11 @@
   /*滚动区域*/
 
   .mui-bar-nav ~ .mui-content {
-    padding-top: 0px;
+    padding-top: 0rem;
   }
 
   .mui-wechat #pullrefresh {
-    margin-top: 0px;
+    margin-top: 0rem;
   }
 
   .mui-content {
@@ -224,8 +224,8 @@
 
   ul {
     width: 100%;
-    padding: 0px 16px 0 16px;
-    margin-top: 11px;
+    padding: 0rem 0.426rem 0 0.426rem;
+    margin-top: 0.293rem;
   }
 
   ul p {
@@ -236,46 +236,46 @@
   ul li {
     width: 100%;
     background: #f3f4f6;
-    margin-top: 20px;
-    border: 0.5px solid #dcdcdc;
-    border-radius: 5px;
-    padding: 12px 15px;
+    margin-top: 0.533rem;
+    border: 0.013rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    padding: 0.32rem 0.4rem;
   }
 
   ul li p:nth-of-type(1) {
     width: 100%;
-    height: 110px;
+    height: 2.933rem;
   }
 
   ul li p:nth-of-type(1) .check {
     display: inline-block;
     width: 100%;
-    height: 20px;
+    height: 0.533rem;
   }
 
   .check i:nth-of-type(1) {
     float: left;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .check i:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
     float: right;
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(2) {
     display: block;
-    margin-top: 23px;
-    font-size: 23px;
+    margin-top: 0.613rem;
+    font-size: 0.613rem;
     color: #444444;
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(3) {
     display: block;
-    margin-top: 5px;
-    font-size: 14px;
+    margin-top: 0.133rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
@@ -289,36 +289,36 @@
     text-align: left;
     display: block;
     color: rgb(128, 128, 128);
-    height: 28px;
-    line-height: 25px;
+    height: 0.746rem;
+    line-height: 0.666rem;
   }
 
   ul li p:nth-of-type(2) span:last-of-type {
     /*width: 100%;
-        height: 35px;
-        line-height: 20px;*/
+        height: 0.933rem;
+        line-height: 0.533rem;*/
   }
 
   ul li p:nth-of-type(2) span:nth-child {
     width: 100%;
-    height: 22px;
+    height: 0.586rem;
   }
 
   ul li p:nth-of-type(3) {
     width: 100%;
-    height: 25px;
+    height: 0.666rem;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   ul li p:nth-of-type(3) span {
     float: left;
-    line-height: 35px;
+    line-height: 0.933rem;
   }
 
   ul li p:nth-of-type(3) svg {
     float: right;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   /*无数据的样式 */
@@ -330,13 +330,13 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 </style>

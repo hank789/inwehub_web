@@ -4,14 +4,14 @@
 
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的关注</h1>
+      <h1 class="mui-title">{{type?'私信好友':'我的关注'}}</h1>
     </header>
 
 
 
     <div class="mui-content">
       <!--导航栏-->
-      <div class="menu">
+      <div class="menu" v-if="!type">
         <span @tap.stop.prevent="">用户<i></i></span>
         <span @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
         <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
@@ -43,7 +43,7 @@
           <ul v-for="(list, key) in lastList" class="index-bar-group">
             <li :id="key" class="index-bar-cell index-bar-cell-head">{{key}}</li>
             <li v-for="(item, index) in list" :key="index" :data-raw="item.raw" class="index-bar-cell tap-active"
-                :class="{bottomBorder:index !== list.length-1  }">
+                :class="{bottomBorder:index !== list.length-1  }" @tap.stop.prevent="toChat(item.id)">
 
               <div class="avatar">
                 <div class="avatarInner" @tap.stop.prevent="">
@@ -54,7 +54,7 @@
                 </div>
               </div>
 
-              <div class="textBody" @tap.stop.prevent="toAvatar(item.uuid)">
+              <div class="textBody">
                 <div class="name mui-ellipsis">{{item.name}} &nbsp;</div>
                 <div class="desc mui-ellipsis">{{item.description}} &nbsp;</div>
               </div>
@@ -88,13 +88,19 @@
         followednum: 0,
         title: '',
         list: [],
-        lastList: []
+        lastList: [],
+        type: ''
       }
     },
     components: {
       Contact
     },
     methods: {
+      toChat (id) {
+        if (this.type) {
+          this.$router.pushPlus('/chat/' + id)
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -154,7 +160,7 @@
       this.getList()
     },
     created () {
-      console.log(this.lastList)
+      this.type = this.$route.query.from
     }
   }
 </script>
@@ -163,8 +169,8 @@
   /*导航栏的样式*/
   .menu{
     width:100%;
-    height:39px;
-    font-size:14px;
+    height:1.04rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -178,11 +184,11 @@
   }
   .menu span:nth-of-type(1) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 28px;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -194,8 +200,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -205,22 +211,22 @@
 
   .indexHeader {
     background-color: #FFFFFF;
-    padding: 10px 15px;
+    padding: 0.266rem 0.4rem;
     .searchWrapper {
       input {
-        height: 34px;
-        font-size: 14px;
-        border-radius: 50px;
+        height: 0.906rem;
+        font-size: 0.373rem;
+        border-radius: 1.333rem;
         background: #fff;
-        border: 1px solid #dcdcdc;
-        margin-bottom: 5px;
+        border: 0.026rem solid #dcdcdc;
+        margin-bottom: 0.133rem;
         &::placeholder {
           color: #c8c8c8;
         }
       }
     }
     .notFound {
-      font-size: 13px;
+      font-size: 0.346rem;
       color: #808080;
       span {
         color: #03aef9;
@@ -230,10 +236,10 @@
 
   .indexTitle {
     background: #ececee;
-    font-size: 13px;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 15px;
+    font-size: 0.346rem;
+    height: 0.666rem;
+    line-height: 0.666rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 

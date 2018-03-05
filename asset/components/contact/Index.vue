@@ -139,28 +139,28 @@
   }
 
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell {
-    padding-left: 15px;
+    padding-left: 0.4rem;
     color: #000000;
     position: relative;
     background-color: #ffffff;
   }
 
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group .index-bar-cell.index-bar-cell-head {
-    font-size: 13px;
-    height: 25px;
-    line-height: 25px;
-    padding-left: 15px;
+    font-size: 0.346rem;
+    height: 0.666rem;
+    line-height: 0.666rem;
+    padding-left: 0.4rem;
     background-color: #f5f5f5;
   }
 
   .index-bar {
     position: fixed;
     right: 0;
-    top: 160px;
+    top: 4.266rem;
     z-index: 12;
-    width: 23px;
+    width: 0.613rem;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 0.266rem;
     color: #316ccb;
   }
 
@@ -181,21 +181,21 @@
 
   .index-bar .index-bar-item {
     color: #444;
-    line-height: 17px;
-    font-size: 12px;
+    line-height: 0.453rem;
+    font-size: 0.32rem;
     text-align: center;
     display: inline-block;
   }
 
   @media screen and (max-width: 370px) {
     .index-bar .index-bar-item {
-      line-height: 14px;
+      line-height: 0.373rem;
     }
   }
 
   .groupWrapper {
     background: #fff;
-    padding-right: 30px;
+    padding-right: 0.8rem;
     overflow-y: scroll;
   }
 
@@ -212,9 +212,9 @@
     color: #ffffff;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 44px;
-    width: 44px;
-    font-size: 20px;
+    height: 1.173rem;
+    width: 1.173rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -246,22 +246,22 @@
 
   .avatarInner .icon {
     position: absolute;
-    right: -6px;
-    bottom: -1px;
-    font-size: 24px;
+    right: -0.16rem;
+    bottom: -0.026rem;
+    font-size: 0.64rem;
     color: #03aef9;
   }
 
   .tap-active {
-    font-size: 14px;
-    padding: 10px 0 4px;
+    font-size: 0.373rem;
+    padding: 0.266rem 0 0.106rem;
   }
 
   .textBody {
     position: absolute;
-    top: 12px;
-    right: 68px;
-    left: 68px;
+    top: 0.32rem;
+    right: 1.813rem;
+    left: 1.813rem;
     vertical-align: top;
     color: #565656;
   }
@@ -273,12 +273,12 @@
   .ibutton {
     float: right;
     color: #03aef9;
-    border-radius: 50px;
-    border: 1px solid #03aef9;
-    padding: 0 15px;
+    border-radius: 1.333rem;
+    border: 0.026rem solid #03aef9;
+    padding: 0 0.4rem;
     position: relative;
-    top: 10px;
-    margin-right: 5px;
+    top: 0.266rem;
+    margin-right: 0.133rem;
   }
 
   .ibutton.active {

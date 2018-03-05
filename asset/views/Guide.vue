@@ -80,11 +80,11 @@
 <style scoped="scoped">
   #close {
     position: absolute;
-    width: 156px;
+    width: 4.16rem;
     left: 50%;
-    margin-left: -80px;
+    margin-left: -2.133rem;
     bottom: 15%;
-    padding: 10px;
+    padding: 0.266rem;
     color: #03aef9;
     border-color: #03aef9;
   }
@@ -96,20 +96,20 @@
   }
 
   .item-logo a {
-    width: 200px;
-    height: 200px;
+    width: 5.333rem;
+    height: 5.333rem;
     display: block;
-    border: 1px solid #FFFFFF;
+    border: 0.026rem solid #FFFFFF;
     border-color: rgba(255, 255, 255, 0.5);
     text-align: center;
-    line-height: 200px;
+    line-height: 5.333rem;
     border-radius: 50%;
-    font-size: 40px;
+    font-size: 1.066rem;
     color: #fff;
     position: absolute;
     top: 15%;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -2.666rem;
   }
 
   .animate {
@@ -123,15 +123,15 @@
 
   .animate h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0.533rem;
   }
 
   .animate li {
     width: 50%;
-    height: 30px;
-    line-height: 30px;
+    height: 0.8rem;
+    line-height: 0.8rem;
     list-style: none;
-    font-size: 16px;
+    font-size: 0.426rem;
     text-align: right;
   }
 
@@ -173,21 +173,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(0, -3000px, 0);
-      transform: translate3d(0, -3000px, 0);
+      -webkit-transform: translate3d(0, -80rem, 0);
+      transform: translate3d(0, -80rem, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(0, 25px, 0);
-      transform: translate3d(0, 25px, 0);
+      -webkit-transform: translate3d(0, 0.666rem, 0);
+      transform: translate3d(0, 0.666rem, 0);
     }
     75% {
-      -webkit-transform: translate3d(0, -5px, 0);
-      transform: translate3d(0, -5px, 0);
+      -webkit-transform: translate3d(0, -0.133rem, 0);
+      transform: translate3d(0, -0.133rem, 0);
     }
     90% {
-      -webkit-transform: translate3d(0, 3px, 0);
-      transform: translate3d(0, 3px, 0);
+      -webkit-transform: translate3d(0, 0.08rem, 0);
+      transform: translate3d(0, 0.08rem, 0);
     }
     100% {
       -webkit-transform: none;
@@ -202,21 +202,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(-3000px, 0, 0);
-      transform: translate3d(-3000px, 0, 0);
+      -webkit-transform: translate3d(-80rem, 0, 0);
+      transform: translate3d(-80rem, 0, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(25px, 0, 0);
-      transform: translate3d(25px, 0, 0);
+      -webkit-transform: translate3d(0.666rem, 0, 0);
+      transform: translate3d(0.666rem, 0, 0);
     }
     75% {
-      -webkit-transform: translate3d(-10px, 0, 0);
-      transform: translate3d(-10px, 0, 0);
+      -webkit-transform: translate3d(-0.266rem, 0, 0);
+      transform: translate3d(-0.266rem, 0, 0);
     }
     90% {
-      -webkit-transform: translate3d(5px, 0, 0);
-      transform: translate3d(5px, 0, 0);
+      -webkit-transform: translate3d(0.133rem, 0, 0);
+      transform: translate3d(0.133rem, 0, 0);
     }
     100% {
       -webkit-transform: none;
@@ -231,21 +231,21 @@
     }
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(3000px, 0, 0);
-      transform: translate3d(3000px, 0, 0);
+      -webkit-transform: translate3d(80rem, 0, 0);
+      transform: translate3d(80rem, 0, 0);
     }
     60% {
       opacity: 1;
-      -webkit-transform: translate3d(-25px, 0, 0);
-      transform: translate3d(-25px, 0, 0);
+      -webkit-transform: translate3d(-0.666rem, 0, 0);
+      transform: translate3d(-0.666rem, 0, 0);
     }
     75% {
-      -webkit-transform: translate3d(10px, 0, 0);
-      transform: translate3d(10px, 0, 0);
+      -webkit-transform: translate3d(0.266rem, 0, 0);
+      transform: translate3d(0.266rem, 0, 0);
     }
     90% {
-      -webkit-transform: translate3d(-5px, 0, 0);
-      transform: translate3d(-5px, 0, 0);
+      -webkit-transform: translate3d(-0.133rem, 0, 0);
+      transform: translate3d(-0.133rem, 0, 0);
     }
     100% {
       -webkit-transform: none;
@@ -256,9 +256,9 @@
   .mui-slider-indicator .mui-indicator {
     background: #dcdcdc;
     box-shadow: none;
-    width: 9px;
-    height: 9px;
-    margin: 1px 1px;
+    width: 0.24rem;
+    height: 0.24rem;
+    margin: 0.026rem 0.026rem;
   }
 
   .mui-slider-indicator .mui-active.mui-indicator {
@@ -266,7 +266,7 @@
   }
 
   .mui-slider-indicator {
-    bottom: 39px;
+    bottom: 1.04rem;
   }
 
   .guide {
@@ -296,12 +296,12 @@
   }
 
   .guide-4 .logo {
-    margin-left: -117px;
+    margin-left: -3.12rem;
     position: absolute;
     left: 50%;
     top: 20%;
-    width: 234px;
-    height: 133px;
+    width: 6.24rem;
+    height: 3.546rem;
     background-image: url(../statics/images/guide_05.png);
     background-color: #f2fbfe;
     background-size: 92%;
@@ -310,11 +310,11 @@
   }
 
   .guide-4 .logo .title {
-    font-size: 15px;
+    font-size: 0.4rem;
     color: #323436;
     text-align: center;
     position: absolute;
-    bottom: 7px;
+    bottom: 0.186rem;
     width: 100%;
   }
 </style>

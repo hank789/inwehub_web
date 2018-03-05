@@ -2,6 +2,7 @@ import { setStatusBarBackgroundAndStyle, getImmersedHeight } from './statusBar'
 import router from '../modules/index/routers/index'
 import { getDiscoverDetail } from './shareTemplate'
 import { getIndexPath } from './plus'
+import localEvent from '../stores/localStorage'
 
 function getIdByUrl (url, id) {
   if (id === 'backAndClose') {
@@ -15,6 +16,8 @@ function getIdByUrl (url, id) {
     newId = newId.replace(/[^a-z]+/g, '')
     console.log('getIdByUrl-id:' + newId)
     return newId
+  } else if (/\/c\/.*?\/.*?/.test(url)) {
+    return 'discover_detail'
   }
   console.log('getIdByUrl: id:' + url)
   return url
@@ -23,10 +26,10 @@ function getIdByUrl (url, id) {
 /**
  * 打开webview
  */
-function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGesture = 'hide', reload = false) {
+function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', reload = false) {
   window.mui.plusReady(function () {
     console.log('calledMethod: openWebviewByUrl, url:' + url + ', id:' + id)
-    id = getIdByUrl(url, id)
+    // id = getIdByUrl(url, id)
     var preloadBackClose = true
     if (id === url || id === 'backAndClose') {
       // 非特殊页面返回时关闭webview
@@ -59,6 +62,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         if (/^http/.test(url)) {
           currentWebview.loadURL(url)
         } else {
+          saveCurrentWebviewId(id)
           window.mui.fire(currentWebview, 'go_to_target_page', {url: shotUrl})
         }
       }
@@ -68,6 +72,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         // mui.fire(current_webview, 'refreshPageData', false);
       }, 150)
     } else {
+      saveCurrentWebviewId(id)
       var webview = window.mui.openWindow({
         url: url,
         id: id,
@@ -81,10 +86,32 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'pop-in', popGest
         },
         extras: {preload: preloadBackClose},
         waiting: {
-          autoShow: false
+          autoShow: true
         }
       })
-      console.log('openWindow url:' + url + ', popGesture: ' + popGesture)
+      console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
+      console.log('bind event popGesture')
+      webview.addEventListener('popGesture', (e) => {
+        console.log('run in event popGesture')
+        if (e.type === 'end' && e.result === true) {
+          var parentWebview = getPrevWebview() // self.opener()
+          if (parentWebview) {
+            console.log('calledEvent: popGesture：' + parentWebview.id)
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshData', {childId: webview.id})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshPageData', {childId: webview.id})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+
+            window.mui.fire(parentWebview, 'autoHeight', {childId: webview.id})
+          }
+        }
+      }, false)
       if (reload) {
         webview.loadURL(url)
       }
@@ -119,7 +146,7 @@ function openReadhubPage (url) {
   })
   window.mui.fire(webview, 'go_to_target_page', {url: url})
   setTimeout(() => {
-    webview.show()
+    webview.show('slide-in-right', 300)
   }, 100)
 }
 
@@ -171,7 +198,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     if (plusWaiting) {
       plusWaiting.close()
     }
-    webview.show()
+    webview.show('slide-in-right', 300)
   }
   currentWebview.append(webview)
 
@@ -281,31 +308,9 @@ function showWebview () {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
       if (self.custom_preload === false || self.custom_preload === undefined) {
-        self.show()
-      }
-      if (window.mui.os.ios) {
-        console.log('bind event popGesture')
-        self.addEventListener('popGesture', (e) => {
-          console.log('run in event popGesture')
-          if (e.type === 'end' && e.result === true) {
-            var parentWebview = self.opener()
-            if (parentWebview) {
-              console.log('calledEvent: popGesture：' + parentWebview.getURL())
-
-              // 触发父页面的自定义事件(refresh),从而进行刷新
-              window.mui.fire(parentWebview, 'refreshData', {childId: self.id})
-              // 刷新当前页数据
-              // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
-
-              // 触发父页面的自定义事件(refresh),从而进行刷新
-              window.mui.fire(parentWebview, 'refreshPageData', {childId: self.id})
-              // 刷新当前页数据
-              // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
-
-              window.mui.fire(parentWebview, 'autoHeight', {childId: self.id})
-            }
-          }
-        }, false)
+        // 关闭等待框
+        window.plus.nativeUI.closeWaiting()
+        self.show('slide-in-right', 300)
       }
     })
   }
@@ -319,7 +324,7 @@ function goBack () {
   if (window.mui.os.plus) {
     var self = window.plus.webview.currentWebview()
     // 获得父页面的webview
-    var parentWebview = self.opener()
+    var parentWebview = getPrevWebview() // self.opener()
     if (parentWebview) {
       // 触发父页面的自定义事件(refresh),从而进行刷新
       window.mui.fire(parentWebview, 'refreshData')
@@ -397,7 +402,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
         createNew: false,
         show: {
           autoShow: true,
-          aniShow: 'pop-in'
+          aniShow: 'slide-in-right'
         },
         styles: {
           popGesture: 'hide'
@@ -463,6 +468,25 @@ function goVendorUrl (url, callback) {
   currentWebview.append(ws)
 }
 
+/**
+ * 保存当前webviewid
+ */
+function saveCurrentWebviewId (futureId) {
+  window.mui.plusReady(() => {
+    var currentWebview = window.plus.webview.currentWebview()
+    if (currentWebview.id !== futureId) {
+      localEvent.setLocalItem('webview_referer_id', {id: currentWebview.id})
+    }
+  })
+}
+
+function getPrevWebview () {
+  var options = localEvent.getLocalItem('webview_referer_id')
+  if (options && options.id) {
+    return window.plus.webview.getWebviewById(options.id)
+  }
+}
+
 export {
   openWebviewByUrl,
   openReadhubPage,
@@ -471,6 +495,7 @@ export {
   clearAllWebViewCache,
   openWebviewByHome,
   goThirdPartyArticle,
-  goVendorUrl
+  goVendorUrl,
+  getPrevWebview
 }
 

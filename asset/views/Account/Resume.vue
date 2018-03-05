@@ -30,7 +30,7 @@
           </svg>
           <span></span>
         </div>
-        <div class="qRCode">
+        <div class="qRCode qRCode-resume">
           <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
         </div>
         <div class="qRhelp">
@@ -141,9 +141,9 @@
         <!--Ta的专栏-->
         <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
           <p>Ta的专栏 </p>
-          <p>文章<span>{{ resume.info.article_count }}</span><i></i></p>
-          <p>评论<span>{{ resume.info.article_comment_count }}</span><i></i></p>
-          <p>赞{{ resume.info.article_upvote_count }}  </p>
+          <p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>
+          <p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>
+          <p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -536,14 +536,14 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .bot {
     position: absolute;
-    right: 14px;
+    right: 0.373rem;
     bottom: 0;
-    left: 14px;
-    height: 1px;
+    left: 0.373rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     /*background-color: rgb(220, 220, 220);*/
-    border: 1px dashed #dcdcdc;
+    border: 0.026rem dashed #dcdcdc;
   }
 
   /***************清除自带样式*****************/
@@ -565,33 +565,33 @@
     background-color: #3c3e44;
     text-align: center;
     position: relative;
-    height: 78px;
+    height: 2.08rem;
   }
 
   .erweimaWrapper {
     position: absolute;
-    left: 16px;
+    left: 0.426rem;
     background: #444;
-    margin-top: 8px;
+    margin-top: 0.213rem;
     width: 81%;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     z-index: 77;
     text-align: center;
-    padding-bottom: 18px;
+    padding-bottom: 0.48rem;
     .header {
       position: relative;
-      height: 92px;
+      height: 2.453rem;
       .avatar {
         position: absolute;
         left: 50%;
-        margin-top: 15px;
-        margin-left: -34.5px;
+        margin-top: 0.4rem;
+        margin-left: -0.92rem;
         z-index: 9;
         color: #ffffff;
         display: inline-block;
-        height: 69px;
-        width: 69px;
-        font-size: 20px;
+        height: 1.84rem;
+        width: 1.84rem;
+        font-size: 0.533rem;
         text-align: center;
         border-radius: 50%;
         vertical-align: top;
@@ -620,62 +620,62 @@
       }
     }
     .realname {
-      margin-top: 20px;
+      margin-top: 0.533rem;
       color: #fff;
-      font-size: 14px;
+      font-size: 0.373rem;
       font-weight: bold;
       span {
         position: relative;
-        right: -3px;
+        right: -0.08rem;
       }
       .icon {
         vertical-align: top;
-        font-size: 20px;
+        font-size: 0.533rem;
         color: #3c95f9;
       }
     }
     .erweimaSplite {
-      margin-top: -30px;
+      margin-top: -0.8rem;
       span {
         display: inline-block;
-        width: 62px;
-        margin: 0 3px;
-        border-bottom: 1px solid #808080;
+        width: 1.653rem;
+        margin: 0 0.08rem;
+        border-bottom: 0.026rem solid #808080;
       }
       .icon {
         color: #252525;
-        font-size: 50px;
+        font-size: 1.333rem;
         position: relative;
-        top: 17px;
+        top: 0.453rem;
       }
     }
     .qRCode {
-      margin-top: 10px;
+      margin-top: 0.266rem;
       position: relative;
       text-align: center;
-      height: 190px;
+      height: 5.066rem;
       div {
         position: absolute;
         left: 50%;
-        margin-left: -95px;
-        width: 190px;
-        height: 190px;
-        border-radius: 4px;
+        margin-left: -2.533rem;
+        width: 5.066rem;
+        height: 5.066rem;
+        border-radius: 0.106rem;
         background: #fff;
-        padding: 10px;
+        padding: 0.266rem;
         img {
-          width: 170px;
-          height: 170px;
-          margin-top: 10px !important;
-          border-radius: 4px;
+          width: 4.533rem;
+          height: 4.533rem;
+          margin-top: 0.266rem !important;
+          border-radius: 0.106rem;
         }
       }
     }
     .qRhelp {
-      margin-top: 8px;
+      margin-top: 0.213rem;
       text-align: center;
       color: #fff;
-      font-size: 13px;
+      font-size: 0.346rem;
     }
   }
 
@@ -683,39 +683,39 @@
   .basic {
     background: #fff;
     .description {
-      font-size: 14px;
+      font-size: 0.373rem;
       color: #808080;
-      padding: 11px 14px 13px;
-      line-height: 24px;
+      padding: 0.293rem 0.373rem 0.346rem;
+      line-height: 0.64rem;
       div {
         display: block;
-        font-size: 13px;
+        font-size: 0.346rem;
         color: #444444;
-        line-height: 25px;
+        line-height: 0.666rem;
       }
     }
   }
 
   .separate {
     display: inline-block;
-    height: 10px;
-    margin: 0 8px;
-    border-left: 1px solid #c8c8c8;
+    height: 0.266rem;
+    margin: 0 0.213rem;
+    border-left: 0.026rem solid #c8c8c8;
   }
 
   .cardWrapper {
-    margin-top: -69px;
-    padding: 0 16px;
+    margin-top: -1.84rem;
+    padding: 0 0.426rem;
     width: 100%;
     .card {
-      border-radius: 4px;
+      border-radius: 0.106rem;
       background: #ececee;
       width: 100%;
       position: relative;
-      padding-bottom: 15px;
+      padding-bottom: 0.4rem;
       .erweima {
-        width: 55px;
-        height: 51px;
+        width: 1.466rem;
+        height: 1.36rem;
         img {
           width: 100%;
           height: 100%;
@@ -724,51 +724,51 @@
       /*关注*/
       .collect {
         position: absolute;
-        font-size: 14px;
-        right: 55px;
-        top: 14px;
+        font-size: 0.373rem;
+        right: 1.466rem;
+        top: 0.373rem;
         color: #444444;
-        border: 1px solid #b4b4b6;
-        border-radius: 50px;
-        padding: 2px 8px;
+        border: 0.026rem solid #b4b4b6;
+        border-radius: 1.333rem;
+        padding: 0.053rem 0.213rem;
         &.active {
           color: #FFFFFF;
-          border: 1px solid #03aef9;
+          border: 0.026rem solid #03aef9;
           background: #03aef9;
         }
       }
       /*名片*/
       .Card {
         position: absolute;
-        right: 55px;
-        top: 54px;
-        border: 1px solid #b4b4b6;
-        border-radius: 50px;
-        padding: 2px 16px;
+        right: 1.466rem;
+        top: 1.44rem;
+        border: 0.026rem solid #b4b4b6;
+        border-radius: 1.333rem;
+        padding: 0.053rem 0.426rem;
         color: #444444;
-        font-size: 14px;
+        font-size: 0.373rem;
 
       }
       .share {
         position: absolute;
-        font-size: 24px;
-        right: 19px;
-        top: 14px;
+        font-size: 0.64rem;
+        right: 0.506rem;
+        top: 0.373rem;
         color: #808080;
       }
       .header {
-        height: 92px;
-        margin-top: -20px;
+        height: 2.453rem;
+        margin-top: -0.533rem;
         .avatar {
           position: absolute;
           left: 50%;
-          margin-left: -46px;
+          margin-left: -1.226rem;
           z-index: 9;
           color: #ffffff;
           display: inline-block;
-          height: 92px;
-          width: 92px;
-          font-size: 20px;
+          height: 2.453rem;
+          width: 2.453rem;
+          font-size: 0.533rem;
           text-align: center;
           border-radius: 50%;
           vertical-align: top;
@@ -797,27 +797,27 @@
         }
       }
       .detail {
-        margin-top: 10px;
+        margin-top: 0.266rem;
         text-align: center;
         .realname {
           font-weight: bold;
           span {
             position: relative;
-            right: -3px;
+            right: -0.08rem;
           }
           .icon {
             vertical-align: bottom;
-            font-size: 22px;
+            font-size: 0.586rem;
             color: #3c95f9;
           }
         }
         .counter {
           width: 91%;
           margin-left: 4.5%;
-          padding-top: 12px;
-          margin-top: 12px;
-          border-top: 1px dashed #dcdcdc;
-          font-size: 13px;
+          padding-top: 0.32rem;
+          margin-top: 0.32rem;
+          border-top: 0.026rem dashed #dcdcdc;
+          font-size: 0.346rem;
           color: #444444;
           b {
             color:rgb(250,73,117);
@@ -826,20 +826,20 @@
         }
         .item {
           color: #808080;
-          font-size: 13px;
-          margin: 7px 7px 2px 7px;
+          font-size: 0.346rem;
+          margin: 0.186rem 0.186rem 0.053rem 0.186rem;
           .icon {
             color: #b4b4b6;
-            font-size: 16px;
+            font-size: 0.426rem;
           }
           &.industry span {
-            border: 1px solid #c8c8c8;
+            border: 0.026rem solid #c8c8c8;
             display: inline-block;
-            border-radius: 50px;
+            border-radius: 1.333rem;
             color: #808080;
-            font-size: 12px;
-            padding: 0 7px;
-            margin: 0 2px 8px;
+            font-size: 0.32rem;
+            padding: 0 0.186rem;
+            margin: 0 0.053rem 0.213rem;
           }
         }
       }
@@ -848,25 +848,25 @@
 
   h5 {
     margin: 0;
-    padding: 11px 0;
+    padding: 0.293rem 0;
     background: #f3f4f6;
     width: 100%;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #313131;
     text-align: center;
   }
 
   .list {
     background: #fff;
-    padding: 0 10px 0 30px;
+    padding: 0 0.266rem 0 0.8rem;
     position: relative;
     &:before {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 0.533rem;
+      left: 0.533rem;
       content: '';
-      width: 1px;
-      bottom: 12px;
+      width: 0.026rem;
+      bottom: 0.32rem;
       background-color: #ececee;
     }
     .itemJobMore,
@@ -876,13 +876,13 @@
     }
     .item {
       position: relative;
-      padding: 10px 0 10px 5px;
+      padding: 0.266rem 0 0.266rem 0.133rem;
       &:after {
         position: absolute;
         right: 0;
         bottom: 0;
         left: 0;
-        height: 1px;
+        height: 0.026rem;
         content: '';
         -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
@@ -893,77 +893,77 @@
       }
       .others {
         color: #b4b4b6;
-        font-size: 13px;
+        font-size: 0.346rem;
         .other {
           display: -webkit-box;
           overflow: hidden;
           .title {
-            margin-left: -8px;
-            width: 80px;
+            margin-left: -0.213rem;
+            width: 2.133rem;
           }
           .content {
-            padding-right: 70px;
+            padding-right: 1.866rem;
           }
         }
       }
       .time {
         position: relative;
-        font-size: 14px;
-        margin-top: 2px;
+        font-size: 0.373rem;
+        margin-top: 0.053rem;
         color: #3c95f9;
       }
       .time:before {
         position: absolute;
-        left: -18px;
-        top: 5px;
+        left: -0.48rem;
+        top: 0.133rem;
         content: '';
-        width: 8px;
-        height: 8px;
+        width: 0.213rem;
+        height: 0.213rem;
         background: #3c95f9;
-        border-radius: 4px;
+        border-radius: 0.106rem;
       }
       .company {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #444;
-        margin: 5px 0;
+        margin: 0.133rem 0;
       }
       .description {
         color: #808080;
-        font-size: 13px;
-        margin-top: 6px;
-        line-height: 24px;
+        font-size: 0.346rem;
+        margin-top: 0.16rem;
+        line-height: 0.64rem;
         -webkit-transition: all 3s;
-        margin-bottom: 30px;
+        margin-bottom: 0.8rem;
         height: auto;
         white-space: pre-wrap;
         &.hide {
-          height: 69px;
+          height: 1.84rem;
         }
       }
       .toggle {
         position: absolute;
         right: 0;
-        bottom: 10px;
-        font-size: 13px;
-        margin-right: 5px;
+        bottom: 0.266rem;
+        font-size: 0.346rem;
+        margin-right: 0.133rem;
         color: #3c95f9;
         &.show:before {
           border: none;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-top: 10px solid #d8d8d8;
+          border-left: 0.16rem solid transparent;
+          border-right: 0.16rem solid transparent;
+          border-top: 0.266rem solid #d8d8d8;
         }
         &:before {
           position: absolute;
-          left: -19px;
-          top: 5px;
+          left: -0.506rem;
+          top: 0.133rem;
           width: 0;
           height: 0;
           content: '';
           border: none;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-bottom: 10px solid #d8d8d8;
+          border-left: 0.16rem solid transparent;
+          border-right: 0.16rem solid transparent;
+          border-bottom: 0.266rem solid #d8d8d8;
         }
       }
     }
@@ -971,26 +971,26 @@
 
   button {
     border-radius: 0;
-    padding: 12px 0;
-    height: 48px;
+    padding: 0.32rem 0;
+    height: 1.28rem;
     margin: 0;
-    font-size: 17px;
+    font-size: 0.453rem;
   }
 
   .shareWrapper {
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 14px;
-      padding: 12px 0;
+      font-size: 0.373rem;
+      padding: 0.32rem 0;
     }
     .more {
       background: #fff;
-      padding: 10px;
+      padding: 0.266rem;
       .single {
-        width: 55px;
-        height: 55px;
-        margin: 0 10px;
+        width: 1.466rem;
+        height: 1.466rem;
+        margin: 0 0.266rem;
         display: inline-block;
         img {
           width: 100%;
@@ -1001,15 +1001,15 @@
   }
 
   .noPublic {
-    margin: 20px 0 0;
+    margin: 0.533rem 0 0;
     background: #fff;
     text-align: center;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    padding-bottom: 30px;
-    padding-top: 20px;
+    padding-bottom: 0.8rem;
+    padding-top: 0.533rem;
     .icon {
-      font-size: 50px;
+      font-size: 1.333rem;
       color: #f3f4f6;
     }
   }
@@ -1021,14 +1021,14 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 70px;
+      right: 0.4rem;
+      top: 0.266rem;
+      font-size: 1.866rem;
     }
   }
 
   .vueWrapper {
-    padding-bottom: 48px;
+    padding-bottom: 1.28rem;
   }
 
   .bottomButton {
@@ -1040,48 +1040,48 @@
 
   .seeMoreWrapper {
     background: #fff;
-    padding-bottom: 30px;
-    margin-top: -2px;
+    padding-bottom: 0.8rem;
+    margin-top: -0.053rem;
     z-index: 5;
     position: relative;
     .seeMore {
-      font-size: 14px;
+      font-size: 0.373rem;
       color: #3c95f9;
       text-align: center;
-      padding: 9px 0 8px;
+      padding: 0.24rem 0 0.213rem;
       background: #fff;
-      border: 1px solid #dcdcdc;
-      border-radius: 4px;
-      margin: 0 20px;
+      border: 0.026rem solid #dcdcdc;
+      border-radius: 0.106rem;
+      margin: 0 0.533rem;
     }
   }
 
   /***********评论和回复************/
 
   .news {
-    padding: 12px 14px;
+    padding: 0.32rem 0.373rem;
     overflow: hidden;
     position: relative;
   }
 
   .news div {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-bottom: 8px;
+    margin-bottom: 0.213rem;
   }
 
   .news a {
     display: inline-block;
     float: left;
-    width: 1px;
-    height: 11px;
-    border-right: 1px solid #c8c8c8;
-    margin: 5px 22px 0 22px;
+    width: 0.026rem;
+    height: 0.293rem;
+    border-right: 0.026rem solid #c8c8c8;
+    margin: 0.133rem 0.586rem 0 0.586rem;
   }
 
   .news p {
     float: left;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
     text-align: center;
   }
@@ -1091,7 +1091,7 @@
   }
 
   .news p span {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     font-weight: 500;
   }
@@ -1105,17 +1105,17 @@
   }*/
 
   .resumeWrapper {
-    bottom: 48px;
+    bottom: 1.28rem;
   }
 
   /*动态*/
   .dynamic {
     overflow: hidden;
-    padding: 12px 14px;
+    padding: 0.32rem 0.373rem;
     position: relative;
     p {
       float: left;
-      font-size: 14px;
+      font-size: 0.373rem;
       color: #808080;
       i{
         font-weight: 500;
@@ -1124,19 +1124,19 @@
     }
     svg {
       float: right;
-      font-size: 15px;
+      font-size: 0.4rem;
       color: #808080;
     }
   }
    /*Ta的专栏*/
   .specialColumn{
     overflow: hidden;
-    padding: 12px 14px;
+    padding: 0.32rem 0.373rem;
     position: relative;
   }
   .specialColumn p {
     float: left;
-    font-size:12px;
+    font-size:0.32rem;
     color: #b4b4b6;
 
   }
@@ -1145,26 +1145,26 @@
   }
   .specialColumn p i{
     display: inline-block;
-    width:1px;
-    height:10px;
+    width:0.026rem;
+    height:0.266rem;
     background:#c8c8c8;
-    margin:0  5px -1px 5px;
+    margin:0  0.133rem -0.026rem 0.133rem;
 
   }
   .specialColumn svg{
     float: right;
-    font-size: 15px;
+    font-size: 0.4rem;
     color: #808080;
   }
   .specialColumn p:nth-of-type(1){
-     font-size:14px;
+     font-size:0.373rem;
      color: #808080;
-     margin-right: 5px;
+     margin-right: 0.133rem;
   }
 
   /*擅长*/
   .skilled {
-    padding: 12px 14px 17px 14px;
+    padding: 0.32rem 0.373rem 0.453rem 0.373rem;
     overflow: hidden;
     position: relative;
 
@@ -1173,28 +1173,28 @@
   .skilled span {
     float: left;
     background: #ececee;
-    border-radius: 50px;
-    padding: 4px 11px;
-    font-size: 12px;
+    border-radius: 1.333rem;
+    padding: 0.106rem 0.293rem;
+    font-size: 0.32rem;
     color: #444444;
-    margin-left:8px;
-    margin-bottom: 6px;
+    margin-left:0.213rem;
+    margin-bottom: 0.16rem;
   }
 
   /*.skilled span:nth-of-type(1) {*/
-    /*margin-left: 0px;*/
+    /*margin-left: 0rem;*/
   /*}*/
 
   .skilled p {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
   }
   /*向他咨询*/
   .btn{
-    border-top:1px solid #dcdcdc;
+    border-top:0.026rem solid #dcdcdc;
     width:100%;
-    height:49px;
+    height:1.306rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1209,25 +1209,25 @@
   .btn P:nth-of-type(1){
     width:32%;
     background:#f3f4f6;
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
 
   }
   .btn P:nth-of-type(1) svg{
-    font-size: 17px;
+    font-size: 0.453rem;
     color: #808080;
-    margin-right: 4px;
-    margin-top: -2px;
+    margin-right: 0.106rem;
+    margin-top: -0.053rem;
   }
   .btn P:nth-of-type(2){
     width:68%;
     background:#03aef9;
-    font-size:17px;
+    font-size:0.453rem;
     color: #ffffff;
   }
   .grey{
     width:100%;
-    height:10px;
+    height:0.266rem;
     background: #F3F4F5;
   }
 </style>

@@ -197,13 +197,13 @@
 
   .inputWrapper .icon {
     position: absolute;
-    top: 4px;
-    font-size: 24px;
+    top: 0.106rem;
+    font-size: 0.64rem;
     color: #c8c8c8;
   }
 
   .inputWrapper {
-    margin: 0 33px 22px;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
 
   }
@@ -221,22 +221,22 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #3c95f9;
     position: absolute;
-    right: 2px;
-    top: 6px;
-    border: 1px solid #3c95f9;
-    border-radius: 5px;
-    padding: 3px 14px;
+    right: 0.053rem;
+    top: 0.16rem;
+    border: 0.026rem solid #3c95f9;
+    border-radius: 0.133rem;
+    padding: 0.08rem 0.373rem;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 3px;
+    bottom: 0.08rem;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -247,8 +247,8 @@
     color: #444;
     border: none;
     margin: 0;
-    padding: 0 0 0 36px;
-    font-size: 14px;
+    padding: 0 0 0 0.96rem;
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
   }
@@ -257,7 +257,7 @@
     background: #f3f4f6;
     position: absolute;
 
-    padding-top: 30px;
+    padding-top: 0.8rem;
 
     top: 0;
     bottom: 0;
@@ -265,7 +265,7 @@
   }
 
   .buttonWrapper {
-    margin: 40px 36px 16px;
+    margin: 1.066rem 0.96rem 0.426rem;
   }
 
   ::-webkit-input-placeholder {
@@ -273,18 +273,18 @@
   }
 
   .buttonWrapper button {
-    border-radius: 5px;
+    border-radius: 0.133rem;
 
     &:disabled {
       background: #dcdcdc;
-      border: 1px solid #dcdcdc;
+      border: 0.026rem solid #dcdcdc;
       color: #b4b4b6;
 
     }
   }
 
   .help {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
 

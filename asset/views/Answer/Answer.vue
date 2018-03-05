@@ -229,17 +229,16 @@
 <style>
   .answerRichText.blur {
     position: absolute;
-    top:0;
     bottom:0;
   }
 
   .answerRichText.blur .form-realAnswer {
     overflow: hidden;
     position: absolute;
-    top:5px;
-    bottom:5px;
-    left:5px;
-    right:5px;
+    top:0.133rem;
+    bottom:0.133rem;
+    left:0.133rem;
+    right:0.133rem;
   }
 
   .answerRichText.blur .form-realAnswer > div {
@@ -256,8 +255,8 @@
   .answerRichText.blur .quill-editor {
     position: absolute;
     width:100%;
-    top:41px;
-    bottom:21px;
+    top:1.093rem;
+    bottom:0.56rem;
     height:auto;
   }
 

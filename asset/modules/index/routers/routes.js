@@ -38,8 +38,6 @@ const routes = [
           })
         } else {
           window.mui.plusReady(function () {
-            openFullscreen()
-            closeSplashscreen()
             next({
               path: '/ad'
             })
@@ -57,7 +55,7 @@ const routes = [
     path: '/home',
     name: 'home',
     meta: {
-      title: 'Inwehub',
+      title: 'InweHub',
       wechatHideHeader: true,
       keepAlive: true
     },
@@ -70,7 +68,7 @@ const routes = [
     path: '/feed',
     name: 'feed',
     meta: {
-      title: 'Inwehub',
+      title: 'InweHub',
       wechatHideHeader: true,
       keepAlive: false
     },
@@ -129,7 +127,7 @@ const routes = [
   },
   { // 新人引导第二步
     path: '/userGuide/steptwo',
-    name: 'userGuide-stepone',
+    name: 'userGuide-steptwo',
     meta: {
       title: '新人引导第二步',
       wechatHideHeader: true
@@ -141,7 +139,7 @@ const routes = [
   },
   { // 新人引导第三步
     path: '/userGuide/stepthree',
-    name: 'userGuide-stepone',
+    name: 'userGuide-stepthree',
     meta: {
       title: '新人引导第三步',
       wechatHideHeader: true,
@@ -190,7 +188,7 @@ const routes = [
     name: 'ask-interaction',
     meta: {
       title: '问答社区-互动回答-回答列表',
-      wechatHideHeader: false
+      wechatHideHeader: true
     },
     component: componets.AskCommunityInteractionAnswers
   },
@@ -468,7 +466,8 @@ const routes = [
     component: componets.DiscoverDetail,
     meta: {
       title: '分享',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -606,6 +605,18 @@ const routes = [
       wechatHideHeader: true
     },
     component: componets.TagsTagsUsers,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 标签详情-关注成员
+    path: '/tag/FocusMembers',
+    name: 'tag_FocusMembers',
+    meta: {
+      title: '关注成员',
+      wechatHideHeader: true
+    },
+    component: componets.TagsTagFocusMembers,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -1463,6 +1474,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // time
+    path: '/time',
+    name: 'time',
+    meta: {
+      title: '时间优化'
+    },
+    component: componets.time,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   // { // discover
   //   path: '/discover',
   //   name: 'discover',
@@ -1514,7 +1536,7 @@ const routes = [
   },
   { // 附近发现的人地图详情页
     path: '/nearbyPeople/MapDetail',
-    name: 'nearby-map-detail',
+    name: 'nearby-map-people-detail',
     meta: {
       title: '附近发现',
       wechatHideHeader: true
@@ -1526,7 +1548,7 @@ const routes = [
   },
   { // 附近发现的公司地图详情页
     path: '/nearbyCompany/MapDetail',
-    name: 'nearby-map-detail',
+    name: 'nearby-map-company-detail',
     meta: {
       title: '附近发现',
       wechatHideHeader: true
@@ -1782,8 +1804,8 @@ const routes = [
     name: 'my-collect-user',
     meta: {
       title: '我的关注',
-      wechatHideHeader: true,
-      keepAlive: true
+      wechatHideHeader: true
+      // keepAlive: true
     },
     component: componets.AccountcollectUser,
     beforeEnter: (to, from, next) => {

@@ -5,11 +5,14 @@
       <h1 class="mui-title">标签详情</h1>
     </header>
     <div class="mui-content absolute">
-      <TagsInfo :tagName = tagName></TagsInfo>
+      <TagsInfo
+        :tagName = tagName
+        :type = type
+      ></TagsInfo>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions')">问答</span>
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">分享</span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions?from=tag')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover?from=tag')">分享</span>
         <span @tap.stop.prevent="">用户 <i></i></span>
         <i class="bot"></i>
       </div>
@@ -22,7 +25,8 @@
         :nextOtherData="{tag_name:tagName}"
         :pageMode= true
         :list="list"
-        class="listWrapper">
+        class="listWrapper"
+      >
         <ul class="cions-list">
           <li  v-for="(item, index) in list">
             <div class="cions-avatar">
@@ -49,13 +53,16 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
-
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
   export default {
     data () {
       return {
+        userId: currentUser.user_id,
         tagName: '',
         loading: 1,
-        list: []
+        list: [],
+        type: ''
       }
     },
     components: {
@@ -63,6 +70,7 @@
       TagsInfo
     },
     created () {
+      this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
@@ -121,7 +129,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -132,9 +140,9 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:39px;
+    height:1.04rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -148,11 +156,11 @@
   }
   .menu span:nth-of-type(3) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 28px;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -165,15 +173,15 @@
 
   .my-focus-item .follows {
     position: absolute;
-    width: 62px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width: 1.653rem;
+    height: 0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 27px;
+    line-height: 0.72rem;
     right: 0;
-    top: 18px;
-    font-size: 14px;
+    top: 0.48rem;
+    font-size: 0.373rem;
     color: #03aef9;
   }
 
@@ -184,26 +192,26 @@
 
   .my-focus-item div p:nth-of-type(1) span {
     display: inline-block;
-    max-width: 126px;
-    height: 20px;
+    max-width: 3.36rem;
+    height: 0.533rem;
     overflow: hidden;
     font-family: "PingFangSC";
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 0.533rem;
+    margin-bottom: 0.053rem;
     color: #3c95f9;
   }
 
   .my-focus-item div p:nth-of-type(2){
     width: 100%;
-    height: 14px;
-    font-size: 13px;
+    height: 0.373rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 13px;
+    line-height: 0.346rem;
   }
   /*列表区域*/
   .cions-list{
@@ -213,60 +221,65 @@
   }
   .cions-list li{
     position: relative;
-    height:64px;
+    height:1.706rem;
   }
   .cions-list li div{
     float: left;
   }
   .cions-list li .cions-avatar{
     position: relative;
-    width:44px;
-    height:44px;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
     background: #cccccc;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
   .cions-list li .cions-avatar img{
-    width:44px;
-    height:44px;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
   }
   .cions-list li .cions-avatar svg{
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: -2px;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .cions-list li .detail{
-    margin-top: 14px;
-    font-size:14px;
+    margin-top: 0.373rem;
+    font-size:0.373rem;
     color: #444444;
-    margin-left: 8px;
+    margin-left: 0.213rem;
   }
   .cions-list li .detail p:nth-of-type(2){
-    width:200px;
-    font-size:12px;
+    width:5.333rem;
+    font-size:0.32rem;
     color: #b4b4b6;
-    margin-top: -2px;
+    margin-top: -0.053rem;
   }
   .cions-list li .fouce{
-    width:61px;
-    height:27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width:1.626rem;
+    height:0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 25px;
-    font-size:14px;
+    line-height: 0.666rem;
+    font-size:0.373rem;
     color: #03aef9;
-    margin-top: 18.5px;
+    margin-top: 0.493rem;
     float: right;
 
   }
   .cions-list li .grey{
     color: #b4b4b6;
-    border: 1px solid #b4b4b6;
+    border: 0.026rem solid #b4b4b6;
   }
+
   .listWrapper{
-    top:177px;
+    top:4.584rem;
+  }
+
+  .hasFollowers .listWrapper{
+    top: 6.29rem;
   }
 </style>

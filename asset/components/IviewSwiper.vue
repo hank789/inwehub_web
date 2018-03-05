@@ -91,7 +91,7 @@
       align-items: center;
     }
     .swiper-pagination-bullets {
-      top: 15px;
+      top: 0.4rem;
       bottom: initial !important;
       .swiper-pagination-bullet {
         background-color: #aaa;

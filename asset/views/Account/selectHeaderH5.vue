@@ -14,7 +14,6 @@
 </template>
 
 <script>
-  import '../../styles/cropper.min.css'
   import '../../js/cropper.min'
   import localEvent from '../../stores/localStorage'
   import { postRequest } from '../../utils/request'
@@ -118,7 +117,7 @@
 
 <style scoped="scoped">
   .imageWrapper {
-    height: 300px;
-    margin-bottom: 15px;
+    height: 8rem;
+    margin-bottom: 0.4rem;
   }
 </style>

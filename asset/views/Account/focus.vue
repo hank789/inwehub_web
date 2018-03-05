@@ -98,8 +98,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -118,24 +118,24 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 0.453rem;
+    padding-right: 0.453rem;
   }
 
   .my-focus-item {
     width: 100%;
-    height: 63px;
+    height: 1.68rem;
     list-style: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0.266rem;
+    padding-bottom: 0.266rem;
     position: relative;
   }
 
   .my-focus-item img {
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 0.213rem;
     float: left;
   }
 
@@ -148,15 +148,15 @@
 
   .my-focus-item .follows {
     position: absolute;
-    width: 62px;
-    height: 27px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
+    width: 1.653rem;
+    height: 0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 27px;
+    line-height: 0.72rem;
     right: 0;
-    top: 18px;
-    font-size: 14px;
+    top: 0.48rem;
+    font-size: 0.373rem;
     color: #03aef9;
   }
 
@@ -167,26 +167,26 @@
 
   .my-focus-item div p:nth-of-type(1) span {
     display: inline-block;
-    max-width: 126px;
-    height: 20px;
+    max-width: 3.36rem;
+    height: 0.533rem;
     overflow: hidden;
     font-family: "PingFangSC";
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #565656;
   }
 
   .my-focus-item div p:nth-of-type(1) svg {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 0.533rem;
+    margin-bottom: 0.053rem;
     color: #3c95f9;
   }
 
   .my-focus-item div p:nth-of-type(2){
     width: 100%;
-    height: 14px;
-    font-size: 13px;
+    height: 0.373rem;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 13px;
+    line-height: 0.346rem;
   }
 
 
@@ -198,20 +198,20 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
     font-family: "PingFangSC";
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 
   .descriptionText {
     width:60%;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #b4b4b6;
   }
 </style>

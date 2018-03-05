@@ -124,78 +124,78 @@
 
   .intro {
     width: 100%;
-    height: 60px;
+    height: 1.6rem;
     position: relative;
   }
 
   .intro .slider {
     width: 100%;
-    height: 60px;
+    height: 1.6rem;
   }
 
   .intro .slider p:nth-of-type(1) {
     width: 100%;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .intro .slider p:nth-of-type(2) {
     width: 100%;
-    height: 13px;
-    line-height: 13px;
-    margin-top: 5px;
+    height: 0.346rem;
+    line-height: 0.346rem;
+    margin-top: 0.133rem;
   }
 
   .intro .slider p:nth-of-type(2) span {
     display: block;
     float: left;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
-    height: 13px;
-    font-size: 13px;
+    height: 0.346rem;
+    font-size: 0.346rem;
     color: #808080;
   }
 
   .intro .slider p:nth-of-type(2) span:nth-of-type(1) {
-    max-width: 128px;
+    max-width: 3.413rem;
   }
 
   .intro .slider p:nth-of-type(2) span:nth-of-type(2) {
-    max-width: 128px;
-    border-right: 1px solid rgb(220, 220, 220);
-    border-left: 1px solid rgb(220, 220, 220);
-    margin-right: 5px;
-    margin-left: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
+    max-width: 3.413rem;
+    border-right: 0.026rem solid rgb(220, 220, 220);
+    border-left: 0.026rem solid rgb(220, 220, 220);
+    margin-right: 0.133rem;
+    margin-left: 0.133rem;
+    padding-right: 0.133rem;
+    padding-left: 0.133rem;
   }
 
   .intro .slider p:nth-of-type(2) span:nth-of-type(3) {
-    max-width: 28px;
+    max-width: 0.746rem;
   }
 
   .intro svg {
     position: absolute;
-    font-size: 18px;
+    font-size: 0.48rem;
     color: rgb(3, 174, 249);
-    top: 13px;
-    right: 15px;
+    top: 0.346rem;
+    right: 0.4rem;
   }
 
   .add {
-    width: 64px;
-    height: 64px;
+    width: 1.706rem;
+    height: 1.706rem;
     border-radius: 50%;
     background: rgb(3, 174, 249);
     position: absolute;
     left: 41%;
-    bottom: 21px;
+    bottom: 0.56rem;
     text-align: center;
-    line-height: 64px;
+    line-height: 1.706rem;
   }
 
   .add svg {
-    font-size: 22px;
+    font-size: 0.586rem;
     color: #FFFFFF;
   }
 
@@ -205,28 +205,28 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 15px;
+    right: 0.4rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     background: #f2f2f2;
   }
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 15px;
+    right: 0.4rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     background: #f2f2f2;
   }
 
   .box-shadow-3 {
-    -webkit-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-    -moz-box-shadow: 0 0 5px rgba(3, 174, 249, .8);
-    box-shadow: 0 0 5px rgba(3, 174, 249, .8);
+    -webkit-box-shadow: 0 0 0.133rem rgba(3, 174, 249, .8);
+    -moz-box-shadow: 0 0 0.133rem rgba(3, 174, 249, .8);
+    box-shadow: 0 0 0.133rem rgba(3, 174, 249, .8);
   }
 
   .container {
@@ -236,14 +236,14 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
 
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 </style>

@@ -302,44 +302,44 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .schedule {
     width: 25%;
-    height: 3px;
+    height: 0.08rem;
     background: #03aef9;
   }
 
   .basic {
-    height: 150px;
+    height: 4rem;
     position: relative;
     text-align: center;
   }
 
   .basic .title {
     position: relative;
-    top: 50px;
-    font-size: 20px;
+    top: 1.333rem;
+    font-size: 0.533rem;
     color: #444;
   }
 
   .basic .titleSub {
     position: relative;
-    top: 55px;
-    font-size: 14px;
+    top: 1.466rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .companyForm {
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .companyForm:before {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm:after {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -351,17 +351,17 @@
   .companyForm input {
     width: 69% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 0.373rem;
     padding-right: 0;
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 6px 15px;
+    padding: 0.16rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 16px;
-    right: 16px;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -370,13 +370,13 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 10px 0;
+    padding: 0.266rem 0;
     float: right;
   }
 
@@ -393,20 +393,20 @@
 
   .textarea-wrapper {
 
-    margin: 46px 0 0;
-    height: 164px;
+    margin: 1.226rem 0 0;
+    height: 4.373rem;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #dcdcdc;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #dcdcdc;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 7px;
-    font-size: 14px;
-    bottom: 5px;
+    right: 0.186rem;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
     color: #c8c8c8;
   }
 
@@ -422,8 +422,8 @@
   }
 
   .companyForm .inputUnit {
-    padding: 10px;
-    margin-right: 17px;
+    padding: 0.266rem;
+    margin-right: 0.453rem;
   }
 
   .companyForm .textRight {
@@ -433,8 +433,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 11px 0 11px 25px;
-    margin-left: 18px;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -443,14 +443,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 11px;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
-    left: 0px;
+    left: 0rem;
     color: #c8c8c8;
-    font-size: 20px;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -462,67 +462,67 @@
   }
 
   .fileSelect {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #c8c8c8;
     background: #fff;
-    padding: 11px 15px;
+    padding: 0.293rem 0.4rem;
     position: relative;
   }
 
   .fileSelect .icon {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     color: #03aef9;
-    font-size: 22px;
+    font-size: 0.586rem;
   }
 
   .fileList {
-    padding: 0 15px 0;
+    padding: 0 0.4rem 0;
     background: #fff;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .fileList .item {
     position: relative;
-    width: 61px;
-    height: 61px;
-    margin-right: 6px;
+    width: 1.626rem;
+    height: 1.626rem;
+    margin-right: 0.16rem;
     background-color: #e3e3e3;
-    border-radius: 5px;
+    border-radius: 0.133rem;
     display: inline-block;
   }
 
   .fileList .item img {
-    border-radius: 5px;
+    border-radius: 0.133rem;
     width: 100%;
     height: 100%;
   }
 
   .fileList .icon {
     position: absolute;
-    right: -4px;
-    top: -4px;
-    font-size: 18px;
+    right: -0.106rem;
+    top: -0.106rem;
+    font-size: 0.48rem;
     color: #808080;
   }
 
   .buttonWrapper {
-    padding: 7px 16px 30px;
+    padding: 0.186rem 0.426rem 0.8rem;
     background: #fff;
     text-align: center;
   }
 
   .buttonWrapper button {
     display: inline-block;
-    width: 115px;
-    margin-top: 10px;
+    width: 3.066rem;
+    margin-top: 0.266rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .buttonWrapper button:disabled {
     background: #dcdcdc;
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #b4b4b6;
     opacity: 1;
   }

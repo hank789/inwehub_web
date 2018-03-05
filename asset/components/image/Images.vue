@@ -54,9 +54,9 @@
   }
 
   .container-images .container-image:only-child {
-    width: 226px !important;
+    width: 6.026rem !important;
     height: auto !important;
-    max-width: 226px !important;
-    max-height: 226px !important;
+    max-width: 6.026rem !important;
+    max-height: 6.026rem !important;
   }
 </style>

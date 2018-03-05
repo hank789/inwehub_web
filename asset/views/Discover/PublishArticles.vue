@@ -59,6 +59,7 @@
 
   import { postRequest } from '../../utils/request'
   import { autoTextArea } from '../../utils/plus'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
@@ -73,6 +74,9 @@
         disableRegister: true,
         isblue: false
       }
+    },
+    components: {
+      popPickerComponent
     },
     watch: {
       '$route': 'refreshPageData',
@@ -254,10 +258,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -266,15 +270,15 @@
   /*分享文章*/
   .ShareArticles {
     width: 100%;
-    height: 150px;
+    height: 4rem;
     background: #ececee;
-    /*border:1px solid #000000;*/
+    /*border:0.026rem solid #000000;*/
     position: relative;
   }
 
   .ShareArticles p {
     width: 100%;
-    height: 50px;
+    height: 1.333rem;
     text-align: center;
     position: absolute;
     top: 0;
@@ -284,16 +288,16 @@
 
   .ShareArticles p span:nth-of-type(1) {
     display: block;
-    font-size: 20px;
+    font-size: 0.533rem;
     color: #444444;
-    line-height: 20px;
+    line-height: 0.533rem;
   }
 
   .ShareArticles p span:nth-of-type(2) {
     display: block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 8px;
+    margin-top: 0.213rem;
   }
 
   /*内容*/
@@ -301,89 +305,89 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-    padding-top: 17.5px;
+    padding-top: 0.466rem;
   }
 
   .concreteContent li {
     width: 92%;
-    height: 43px;
+    height: 1.146rem;
     margin-left: 4%;
     position: relative;
-    line-height: 43px;
+    line-height: 1.146rem;
   }
 
   .address p, .title p {
     float: left;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .address input {
     width: 80%;
-    height: 42px;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
-    padding-left:15px;
+    padding-left:0.4rem;
     border: none;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     text-align: right;
   }
 
   .title .longContainer {
     width: 80%;
-    height: 42px;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
     border: none;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
 
   }
 
   .title .shortContainer {
     width: 80%;
-    height: 42px;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
     border: none;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .title .shortContainer input {
     width: 74%;
-    height: 42px;
+    height: 1.12rem;
     float: left;
     margin-bottom: 0;
     padding-right: 0;
-    padding-left: 15px;
+    padding-left: 0.4rem;
     border: none;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     text-align: right;
   }
 
   .title .shortContainer span {
     float: right;
-    height: 19px;
+    height: 0.506rem;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.32rem;
     background: #03aef9;
     text-align: center;
-    line-height: 18px;
-    border-radius: 50px;
-    padding: 0 5px;
-    margin-top: 12px;
+    line-height: 0.48rem;
+    border-radius: 1.333rem;
+    padding: 0 0.133rem;
+    margin-top: 0.32rem;
 
   }
 
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color: #c8c8c8;
-    font-size: 14px;
+    font-size: 0.373rem;
     text-align: right;
   }
 
@@ -391,14 +395,14 @@
   .channel p:nth-of-type(1) {
     float: left;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .channel input {
     width: 50%;
     float: right;
     color: #c8c8c8;
-    font-size: 14px;
+    font-size: 0.373rem;
     border: none;
     text-align: right;
     color: #444444;
@@ -406,31 +410,31 @@
 
   .channel svg {
     color: #c8c8c8;
-    font-size: 17px;
-    margin-top: 13px;
+    font-size: 0.453rem;
+    margin-top: 0.346rem;
     float: right;
   }
 
   /*封面*/
   .concreteContent .coverMap {
-    height: 166px;
+    height: 4.426rem;
   }
 
   .container-image {
     width: 100%;
-    height: 123px;
+    height: 3.28rem;
   }
 
   .coverMap p {
     float: left;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .coverMap svg {
     color: #c8c8c8;
-    font-size: 17px;
-    margin-top: 13px;
+    font-size: 0.453rem;
+    margin-top: 0.346rem;
     float: right;
   }
 
@@ -438,14 +442,14 @@
   .submit {
     width: 92%;
     margin-left: 4%;
-    height: 44px;
-    border-radius: 5px;
+    height: 1.173rem;
+    border-radius: 0.133rem;
     background: #dcdcdc;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #b4b4b6;
     border: none;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
   }
 
   .blue {

@@ -5,7 +5,7 @@
       <h1 class="mui-title">互动问答</h1>
     </header>
 
-    <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+    <div id="majorDetail" class="mui-content absolute">
       <div class="question_tags"  v-if="ask.question.tags.length">
         <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
       </div>
@@ -13,6 +13,7 @@
         <Question
           :ask="ask.question"
           :isFollow="true"
+          :answerId="id"
         ></Question>
 
         <Answer v-show="ask.question.status==6||ask.question.status==7"
@@ -94,7 +95,9 @@
   const AskDetail = {
     data: () => ({
       ask: {
-        answers: [],
+        answers: {
+          user_id: ''
+        },
         question: {
           created_at: '',
           description: '',
@@ -263,10 +266,10 @@
   }
   .bot {
     position: absolute;
-    right:15px;
-    top: 0px;
-    left:15px;
-    height: 1px;
+    right:0.4rem;
+    top: 0rem;
+    left:0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -277,19 +280,19 @@
   }
 
   .help {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 0.266rem;
+    font-size: 0.373rem;
     background: #fff;
-    padding-bottom: 38px;
+    padding-bottom: 1.013rem;
   }
 
   .help .title {
-    padding: 15px 15px 10px;
+    padding: 0.4rem 0.4rem 0.266rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 15px;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -302,33 +305,33 @@
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  16px 8px 7px;
+    padding: 0  0.426rem 0.213rem 0.186rem;
   }
   .question_tags p{
     float: left;
     background: #a8dff7;
     color:#FFFFFF;
-    padding: 0px 8px;
-    border-radius:50px;
-    margin-top: 9px;
-    margin-left: 9px;
-    font-size:12px;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
   /*查看回答*/
   .see{
     width:100%;
-    height:40px;
-    padding: 0 15px;
-    font-size:14px;
+    height:1.066rem;
+    padding: 0 0.4rem;
+    font-size:0.373rem;
     color:#03aef9;
     text-align: center;
-    line-height: 40px;
+    line-height: 1.066rem;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
     position: relative;
   }
   .detail-answer[data-v-852fb68e] {
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
 
 </style>

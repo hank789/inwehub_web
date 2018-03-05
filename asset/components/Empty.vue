@@ -29,28 +29,28 @@
 
 <style lang="less" scoped>
   .emptyWrapper {
-    padding: 30px 0;
-    font-size: 50px;
+    padding: 0.8rem 0;
+    font-size: 1.333rem;
     text-align: center;
     color: #dcdcdc;
 
     .description {
-      margin-top: 5px;
-      font-size: 12px;
+      margin-top: 0.133rem;
+      font-size: 0.32rem;
       color: #c8c8c8;
     }
   }
 
   .buttonWrapper{
     text-align: center;
-    margin-top:20px;
+    margin-top:0.533rem;
   }
 
   .mui-btn{
     display: inline-block;
-    padding:10px 32px;
-    font-size:16px;
+    padding:0.266rem 0.853rem;
+    font-size:0.426rem;
     width:auto;
-    border-radius: 50px;
+    border-radius: 1.333rem;
   }
 </style>

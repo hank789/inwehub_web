@@ -143,29 +143,29 @@
   /*人物推荐*/
   #home-recommend {
     width: 100%;
-    height: 157px;
+    height: 4.186rem;
     background: #FFFFFF;
     padding-left: 4%;
   }
 
   #home-recommend div:nth-of-type(1) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
-/*box-shadow: 0 0 10px #f3f4f6;*/
+/*box-shadow: 0 0 0.266rem #f3f4f6;*/
   #home-card {
-    width: 114px;
-    height: 148px;
+    width: 3.04rem;
+    height: 3.946rem;
     background:#FFFFFF;
-    padding-top: 10px;
+    padding-top: 0.266rem;
     position: relative;
-    border-radius: 4px;
-    border:0.2px solid #dcdcdc;
-    box-shadow: 0 0 5px #ececee;
+    border-radius: 0.106rem;
+    border:0.005rem solid #dcdcdc;
+    box-shadow: 0 0 0.133rem #ececee;
   }
 
   #home-card img {
-    width: 50px;
-    height: 50px;
+    width: 1.333rem;
+    height: 1.333rem;
     display: block;
     border-radius: 50%;
     margin: 0 auto;
@@ -174,31 +174,31 @@
   #home-card span {
     display: block;
     text-align: center;
-    font-size: 12px;
-    padding: 0 4px;
+    font-size: 0.32rem;
+    padding: 0 0.106rem;
   }
 
   #home-card span:nth-of-type(1) i {
     display: inline-block;
-    max-width: 70px;
-    height: 20px;
+    max-width: 1.866rem;
+    height: 0.533rem;
     font-style: normal;
   }
 
   #home-card span:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
     font-weight: 600;
     color: #444444;
-    margin-top: 2px;
+    margin-top: 0.053rem;
   }
 
   #home-card span:nth-of-type(1) svg {
-    font-size: 20px;
+    font-size: 0.533rem;
     color: #03aef9;
-    margin-bottom: 2.5px;
-    margin-left: -3px;
+    margin-bottom: 0.066rem;
+    margin-left: -0.08rem;
   }
 
   .home-card span:nth-of-type(2) {
@@ -209,40 +209,40 @@
 
   #home-card span:nth-of-type(3) {
     width: 70%;
-    height: 24px;
-    line-height: 22px;
-    border-radius: 50px;
-    border: 0.5px solid #03aef9;
+    height: 0.64rem;
+    line-height: 0.586rem;
+    border-radius: 1.333rem;
+    border: 0.013rem solid #03aef9;
     margin-left: 15%;
-    margin-top: 6px;
-    font-size: 14px;
+    margin-top: 0.16rem;
+    font-size: 0.373rem;
     text-align: center;
     color: #03aef9;
   }
 
   #home-card p {
     position: absolute;
-    top: 0px;
-    /*right: 0px;*/
-    width: 28px;
+    top: 0rem;
+    /*right: 0rem;*/
+    width: 0.746rem;
     text-align: center;
     background: url("../../statics/images/fill_1@2x.png") no-repeat;
     background-size: 100% 100%;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #ffffff;
   }
 
   /*查看更多专家样式*/
 
   .moreExperts {
-    width: 118.333px;
-    margin-right: 10px;
-    height: 148px;
+    width: 3.155rem;
+    margin-right: 0.266rem;
+    height: 3.946rem;
     background:#FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     position: relative;
-    border: 0.2px solid #dcdcdc;
-    box-shadow: 0 0 5px #ececee;
+    border: 0.005rem solid #dcdcdc;
+    box-shadow: 0 0 0.133rem #ececee;
   }
 
   .moreExperts > div {
@@ -256,16 +256,16 @@
 
   .moreExperts > div > span {
     display: inline-block;
-    border: 1px solid #b4b4b6;
-    width: 50px;
-    height: 50px;
+    border: 0.026rem solid #b4b4b6;
+    width: 1.333rem;
+    height: 1.333rem;
     border-radius: 50%;
     margin-left: 25%;
     position: relative;
   }
 
   .moreExperts > div svg {
-    font-size: 30px;
+    font-size: 0.8rem;
     position: absolute;
     left: 0;
     right: 0;
@@ -279,32 +279,32 @@
   .moreExperts > div p {
     text-align: center;
     color: #444444;
-    font-size: 12px;
-    margin-top: 2px;
+    font-size: 0.32rem;
+    margin-top: 0.053rem;
     margin-bottom: 0;
   }
   .moreExperts > div p:nth-of-type(2){
-    margin-top:-5px;
+    margin-top:-0.133rem;
   }
 
   .container-item {
     padding-right: 0;
     padding-left: 0;
-    padding-bottom: 10px;
-    padding-top: 5px;
+    padding-bottom: 0.266rem;
+    padding-top: 0.133rem;
   }
 
   .title {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #444;
-    padding-left: 15px;
-    padding-bottom: 5px;
+    padding-left: 0.4rem;
+    padding-bottom: 0.133rem;
   }
 
   .title .more {
     float: right;
-    margin-right: 15px;
-    font-size: 13px;
+    margin-right: 0.4rem;
+    font-size: 0.346rem;
     color: #03aef9;
   }
 
@@ -317,7 +317,7 @@
     position: relative;
   }
   .home_avatar svg{
-    font-size:20px;
+    font-size:0.533rem;
     position: absolute;
     bottom: 0;
     right: 25%;

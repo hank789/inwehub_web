@@ -254,17 +254,17 @@
   /*图标*/
   .logo {
 
-    font-size: 110px;
-    margin: 110px 0 75px;
+    font-size: 2.933rem;
+    margin: 2.933rem 0 2rem;
 
   }
 
   /*忘记密码和账号*/
   .apply {
     width: 100%;
-    height: 30px;
+    height: 0.8rem;
     position: relative;
-    top: -22px;
+    top: -0.586rem;
 
   }
 
@@ -272,7 +272,7 @@
     width: 80%;
     height: 100%;
     position: absolute;
-    top: 15px;
+    top: 0.4rem;
     bottom: 0;
     left: 0;
     right: 0;
@@ -283,7 +283,7 @@
 
   .apply > div > span {
     color: #3c95f9;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .apply > div > span:nth-of-type(1) {
@@ -302,26 +302,26 @@
 
   /*登录*/
   .button, .mui-btn {
-    border-radius: 5px;
+    border-radius: 0.133rem;
     color: #f2f2f2;
     width: 80%;
     margin-left: 10%;
-    margin-top: 5px;
+    margin-top: 0.133rem;
     background: #3C95F9;
   }
 
   /*输入框的内容*/
   .inputWrapper .icon {
     position: absolute;
-    top: 5px;
-    font-size: 22px;
+    top: 0.133rem;
+    font-size: 0.586rem;
     color: #c8c8c8;
     left: 0;
 
   }
 
   .inputWrapper {
-    margin: 0 33px 22px;
+    margin: 0 0.88rem 0.586rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -341,27 +341,27 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #3c95f9;
     position: absolute;
-    right: 2px;
-    top: 6px;
-    border: 1px solid #3c95f9;
-    border-radius: 5px;
-    padding: 3px 14px;
+    right: 0.053rem;
+    top: 0.16rem;
+    border: 0.026rem solid #3c95f9;
+    border-radius: 0.133rem;
+    padding: 0.08rem 0.373rem;
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     color: #c8c8c8;
   }
 
   .inputWrapper:after {
     position: absolute;
     right: 0;
-    bottom: 3px;
+    bottom: 0.08rem;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -372,12 +372,12 @@
     color: #444;
     border: none;
     margin: 0;
-    /*padding: 0 0 0 36px;*/
-    font-size: 14px;
+    /*padding: 0 0 0 0.96rem;*/
+    font-size: 0.373rem;
     background: none;
     display: inline-block;
-    height: 36px;
-    margin-left: 15px;
+    height: 0.96rem;
+    margin-left: 0.4rem;
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -398,32 +398,32 @@
 
   .inputWrapper:nth-of-type(2) .icon {
     position: absolute;
-    top: 5px;
-    font-size: 20px;
+    top: 0.133rem;
+    font-size: 0.533rem;
     /*color: #c8c8c8;*/
     left: 0;
   }
 
   .wechatWrapper {
     position: absolute;
-    bottom: 32px;
+    bottom: 0.853rem;
     left: 50%;
-    margin-left: -57px;
-    font-size: 14px;
+    margin-left: -1.52rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .myicon {
     display: inline-block;
-    width: 26px;
-    height: 21px;
+    width: 0.693rem;
+    height: 0.56rem;
     position: relative;
-    top: 7px;
+    top: 0.186rem;
   }
 
   .mui-content {
     background-color: #f3f4f6;
-    min-height: 568px;
+    min-height: 15.146rem;
   }
 </style>
 

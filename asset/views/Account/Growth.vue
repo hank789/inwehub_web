@@ -330,16 +330,16 @@
       },
       // 警告框
       warn () {
-        var title = '<p style="font-size:16px; margin-bottom:15px">' + '获取积分提升等级解锁特权' + '</p>'
-        var font = '<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' +
-          '<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">' + '</i>' +
+        var title = '<p style="font-size:0.426rem; margin-bottom:0.4rem">' + '获取积分提升等级解锁特权' + '</p>'
+        var font = '<p style="text-align: left; font-size:0.373rem; color: #808080; margin-bottom:0.4rem">' +
+          '<i style="display:inline-block; width:0.106rem; height:0.106rem; background:#03aef9; border-radius:50%; margin-bottom: 0.106rem; margin-right: 0.133rem;">' + '</i>' +
           '积极参与平台活动任务，可有效累积成长与贡献值，提升等级解锁新特权。' +
           '</p>' +
-          '<p style="text-align: left; font-size:14px; color: #808080; margin-bottom:15px">' +
-          '<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">' + '</i>' +
+          '<p style="text-align: left; font-size:0.373rem; color: #808080; margin-bottom:0.4rem">' +
+          '<i style="display:inline-block; width:0.106rem; height:0.106rem; background:#03aef9; border-radius:50%; margin-bottom: 0.106rem; margin-right: 0.133rem;">' + '</i>' +
           '常见获取积分的手段有：每日登陆并维护个人资料，完成新手任务，提交文章参与评论互动，积极提问回答问题，认证平台专家，报名活动，对接企业项目需求等。' + '</p>' +
-          '<p style="text-align: left; font-size:14px; color: #808080;">' +
-          '<i style="display:inline-block; width:4px; height:4px; background:#03aef9; border-radius:50%; margin-bottom: 4px; margin-right: 5px;">' + '</i>' +
+          '<p style="text-align: left; font-size:0.373rem; color: #808080;">' +
+          '<i style="display:inline-block; width:0.106rem; height:0.106rem; background:#03aef9; border-radius:50%; margin-bottom: 0.106rem; margin-right: 0.133rem;">' + '</i>' +
           '用户每次可获取的平台成长和贡献值，一般按照以上顺序及贡献程度依次增加。' + '</p>'
 
         // var btnArray = ['取消', '确认'];
@@ -379,7 +379,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -387,217 +387,217 @@
 
   .mui-content.absolute {
     background: #FEFFFE;
-    padding: 0px 16px 0 16px;
+    padding: 0rem 0.426rem 0 0.426rem;
   }
 
   /*页面内容*/
   .integral {
     width: 100%;
-    height: 240px;
+    height: 6.4rem;
     /*background: #CCCCCC;*/
   }
 
   /*积分*/
   .GetPoints {
     width: 100%;
-    height: 44px;
-    line-height: 44px;
+    height: 1.173rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
   .GetPoints span:nth-child(1) {
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
     font-weight: 500;
   }
 
   .GetPoints span:nth-child(2) {
     float: right;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #03aef9;
   }
 
   /* 成长值*/
   .growth {
     width: 50%;
-    height: 196px;
+    height: 5.226rem;
     float: left;
     position: relative;
     /*background: #CCCCCC;*/
   }
 
   .growth p:nth-child(1) {
-    width: 94px;
-    height: 94px;
-    border: 1.5px solid #03aef9;
+    width: 2.506rem;
+    height: 2.506rem;
+    border: 0.04rem solid #03aef9;
     border-radius: 50%;
     position: absolute;
     left: 0;
     right: 0;
-    top: 20px;
+    top: 0.533rem;
     margin: auto;
   }
 
   .growth p:nth-child(1) span:nth-child(1) {
     display: block;
     color: #03aef9;
-    font-size: 25px;
-    margin-top: 21px;
+    font-size: 0.666rem;
+    margin-top: 0.56rem;
     text-align: center;
   }
 
   .growth p:nth-child(1) span:nth-child(2) {
     display: block;
     color: #444444;
-    font-size: 16px;
-    margin-top: 3px;
+    font-size: 0.426rem;
+    margin-top: 0.08rem;
     text-align: center;
     font-weight: 500;
   }
 
   .growth p:nth-child(2) {
-    margin-top: 135px;
+    margin-top: 3.6rem;
     text-align: center;
     position: relative;
   }
 
   .growth p:nth-child(2) i {
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background-color: #03aef9;
     border-radius: 50%;
     position: absolute;
-    top: 5px;
+    top: 0.133rem;
 
   }
 
   .growth p:nth-child(2) span {
     display: inline-block;
-    width: 140px;
+    width: 3.733rem;
     text-align: left;
-    margin-left: 10px;
+    margin-left: 0.266rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 0.346rem;
   }
 
   /*贡献值*/
   .contribution {
     width: 50%;
-    height: 196px;
+    height: 5.226rem;
     float: right;
     position: relative;
 
   }
 
   .contribution p:nth-child(1) {
-    width: 94px;
-    height: 94px;
-    border: 1.5px solid #fa4975;
+    width: 2.506rem;
+    height: 2.506rem;
+    border: 0.04rem solid #fa4975;
     border-radius: 50%;
     position: absolute;
     left: 0;
     right: 0;
-    top: 20px;
+    top: 0.533rem;
     margin: auto;
   }
 
   .contribution p:nth-child(1) span:nth-child(1) {
     display: block;
     color: #fa4975;
-    font-size: 25px;
-    margin-top: 21px;
+    font-size: 0.666rem;
+    margin-top: 0.56rem;
     text-align: center;
   }
 
   .contribution p:nth-child(1) span:nth-child(2) {
     display: block;
     color: #444444;
-    font-size: 16px;
-    margin-top: 3px;
+    font-size: 0.426rem;
+    margin-top: 0.08rem;
     text-align: center;
     font-weight: 500;
   }
 
   .contribution p:nth-child(2) {
-    margin-top: 135px;
+    margin-top: 3.6rem;
     text-align: center;
     position: relative;
   }
 
   .contribution p:nth-child(2) i {
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background-color: #fa4975;
     border-radius: 50%;
     position: absolute;
-    top: 5px;
+    top: 0.133rem;
 
   }
 
   .contribution p:nth-child(2) span {
     display: inline-block;
-    width: 140px;
+    width: 3.733rem;
     text-align: left;
-    margin-left: 10px;
+    margin-left: 0.266rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 0.346rem;
   }
 
   /*等级*/
   .Grade {
     width: 100%;
-    height: 290px;
+    height: 7.733rem;
     /*background: #CCCCCC;*/
   }
 
   .myGrades {
     width: 100%;
-    height: 44px;
-    line-height: 44px;
+    height: 1.173rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
   .myGrades span {
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
     font-weight: 500;
   }
 
   .Member {
     width: 100%;
-    height: 185px;
+    height: 4.933rem;
     background: url(../../statics/images/Grade.png) no-repeat;
     background-size: cover;
-    margin-top: 20px;
-    border-radius: 4px;
+    margin-top: 0.533rem;
+    border-radius: 0.106rem;
   }
 
   .Member > p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 20px;
+    font-size: 0.533rem;
     color: #dcdcdc;
     font-weight: 500;
-    height: 50px;
-    line-height: 75px;
+    height: 1.333rem;
+    line-height: 2rem;
   }
 
   .Member > p:nth-of-type(2) {
     width: 100%;
     text-align: center;
     color: #DCDCDC;
-    font-size: 12px;
-    margin-top: 3px;
+    font-size: 0.32rem;
+    margin-top: 0.08rem;
   }
 
   .Prompt {
     width: 86%;
-    height: 40px;
-    top: 20px;
+    height: 1.066rem;
+    top: 0.533rem;
     margin-left: 7%;
     /*background: #CCCCCC;*/
     position: relative;
@@ -607,8 +607,8 @@
 
   .ProgressBar {
     width: 100%;
-    height: 40px;
-    margin-top: 6px;
+    height: 1.066rem;
+    margin-top: 0.16rem;
     position: relative;
     /*background: #CCCCCC;*/
 
@@ -616,33 +616,33 @@
 
   .ProgressBar > div {
     width: 86%;
-    height: 2px;
+    height: 0.053rem;
     background: #7F807F;
     margin-left: 7%;
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 
   .ProgressBar > div i {
     display: block;
     width: 25%;
-    height: 2px;
+    height: 0.053rem;
     background: #03aef9;
   }
 
   .fouce {
     width: 86%;
-    height: 2px;
+    height: 0.053rem;
     left: 7%;
     /*background: #007AFF;*/
-    top: -1px;
+    top: -0.026rem;
     position: absolute;
   }
 
   .fouce span {
     display: block;
     float: left;
-    width: 4px;
-    height: 4px;
+    width: 0.106rem;
+    height: 0.106rem;
     background: #FFFFFF;
     border-radius: 50%;
     position: absolute;
@@ -670,10 +670,10 @@
 
   .number {
     width: 86%;
-    height: 20px;
+    height: 0.533rem;
     left: 7%;
     /*background: #007AFF;*/
-    top: 6px;
+    top: 0.16rem;
     position: absolute;
   }
 
@@ -681,7 +681,7 @@
     display: block;
     float: left;
     color: #dcdcdc;
-    font-size: 12px;
+    font-size: 0.32rem;
     position: absolute;
   }
 
@@ -708,20 +708,20 @@
   /*特权*/
   .privilege {
     width: 100%;
-    min-height: 600px;
+    min-height: 16rem;
     /*background: #CCCCCC;*/
   }
 
   .myprivilege {
     width: 100%;
-    height: 44px;
-    line-height: 44px;
+    height: 1.173rem;
+    line-height: 1.173rem;
     position: relative;
   }
 
   .myprivilege span {
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
     font-weight: 500;
   }
@@ -729,27 +729,27 @@
   /*等级*/
   .power {
     width: 100%;
-    /*min-height:150px;*/
+    /*min-height:4rem;*/
     /*background: #C8C7CC;*/
-    margin-top: 18px
+    margin-top: 0.48rem
   }
 
   .power p {
     width: 100%;
     overflow: hidden;
-    margin-bottom: 5px;
+    margin-bottom: 0.133rem;
   }
 
   .power p span:nth-of-type(1) {
     display: block;
     float: left;
     width: 5.5%;
-    height: 21px;
-    line-height: 16px;
+    height: 0.56rem;
+    line-height: 0.426rem;
     background: url(../../statics/images/grading.png) no-repeat;
     background-size: 100%;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #FFFFFF;
   }
 
@@ -757,49 +757,49 @@
     display: block;
     float: left;
     width: 80%;
-    font-size: 13px;
+    font-size: 0.346rem;
     font-weight: 500;
     color: #444444;
     margin-left: 2%;
-    margin-top: -1px;
+    margin-top: -0.026rem;
   }
 
   .powerdetail {
     width: 97%;
-    border-left: 1px solid #03aef9;
+    border-left: 0.026rem solid #03aef9;
     margin-left: 2.5%;
     overflow: hidden;
   }
 
   .powerdetail li {
     width: 32%;
-    height: 120px;
+    height: 3.2rem;
     float: left;
     text-align: center;
   }
 
   .powerdetail li svg {
-    font-size: 40px;
+    font-size: 1.066rem;
     color: #DCDCDC;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   .powerdetail li p:nth-of-type(1) {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
-    margin-top: 7px;
+    margin-top: 0.186rem;
   }
 
   .powerdetail li p:nth-of-type(2) {
     width: 70%;
-    height: 30px;
-    line-height: 30px;
+    height: 0.8rem;
+    line-height: 0.8rem;
     margin-left: 15%;
-    border-radius: 4px;
-    border: 1px solid #DCDCDC;
-    font-size: 14px;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #DCDCDC;
+    font-size: 0.373rem;
     color: #444444;
-    margin-top: 7px;
+    margin-top: 0.186rem;
     position: relative;
   }
 
@@ -812,18 +812,18 @@
   /****积分说明*****/
   .instruction {
     width: 100%;
-    height: 135px;
-    border-top: 1px solid #DCDCDC;
+    height: 3.6rem;
+    border-top: 0.026rem solid #DCDCDC;
   }
 
   .instruction p {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
 
   }
 
   .instruction p:nth-of-type(1) {
-    margin-top: 17px;
+    margin-top: 0.453rem;
   }
 
   /*动态添加的样式*/
@@ -833,14 +833,14 @@
 
   .powerdetail li p.text_blue {
     width: 70%;
-    height: 30px;
-    line-height: 30px;
+    height: 0.8rem;
+    line-height: 0.8rem;
     margin-left: 15%;
-    border-radius: 4px;
-    border: 1px solid #03aef9;
-    font-size: 14px;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #03aef9;
+    font-size: 0.373rem;
     color: #03aef9;
-    margin-top: 7px;
+    margin-top: 0.186rem;
 
   }
 
@@ -851,14 +851,14 @@
 
   .powerdetail li p.text_yellow {
     width: 70%;
-    height: 30px;
-    line-height: 30px;
+    height: 0.8rem;
+    line-height: 0.8rem;
     margin-left: 15%;
-    border-radius: 4px;
-    border: 1px solid #fcc816;
-    font-size: 14px;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #fcc816;
+    font-size: 0.373rem;
     color: #fcc816;
-    margin-top: 7px;
+    margin-top: 0.186rem;
 
   }
 
@@ -870,15 +870,15 @@
 
   b {
     display: block;
-    width: 45px;
-    padding: 0 2px;
-    height: 25px;
+    width: 1.2rem;
+    padding: 0 0.053rem;
+    height: 0.666rem;
     background: #03aef9;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    line-height: 25px;
-    border-radius: 8px;
+    line-height: 0.666rem;
+    border-radius: 0.213rem;
     position: absolute;
 
   }
@@ -888,40 +888,40 @@
     display: block;
     width: 0;
     height: 0;
-    border: 6px solid transparent;
-    border-right: 6px solid #03aef9;
-    border-bottom: 6px solid #03aef9;
+    border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #03aef9;
+    border-bottom: 0.16rem solid #03aef9;
     position: absolute;
     transform: rotate(45deg);
-    bottom: -2px;
-    left: 16px;
+    bottom: -0.053rem;
+    left: 0.426rem;
   }
   /*商品的通用样式*/
   .commodity{
     width:32%;
-    height:120px;
+    height:3.2rem;
     /*background:#e3e3e3;*/
   }
   .commodity img{
-    width: 37px;
-    height: 40px;
-    margin-top:5px;
+    width: 0.986rem;
+    height: 1.066rem;
+    margin-top:0.133rem;
 }
   .commodity .case{
-    width: 26px;
+    width: 0.693rem;
 
   }
   .commodity .iphone{
-    width: 50px;
+    width: 1.333rem;
 
   }
   .commodity p:nth-of-type(2) i:nth-of-type(1) {
   display: block;
-  font-size: 12px;
+  font-size: 0.32rem;
   color: #444444;
   text-align: center;
   position: absolute;
-  bottom: 5px;
+  bottom: 0.133rem;
   left: 0;
   right: 0;
   margin: auto;
@@ -930,11 +930,11 @@
 
   .commodity p:nth-of-type(2) i:nth-of-type(2) {
   display: block;
-  font-size: 12px;
+  font-size: 0.32rem;
   color: #444444;
   text-align: center;
   position: absolute;
-  top: 5px;
+  top: 0.133rem;
   left: 0;
   right: 0;
   margin: auto;

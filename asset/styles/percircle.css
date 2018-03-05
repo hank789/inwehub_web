@@ -4,12 +4,12 @@
 
 .pie, .c100 .bar, .c100.p51 .fill, .c100.p52 .fill, .c100.p53 .fill, .c100.p54 .fill, .c100.p55 .fill, .c100.p56 .fill, .c100.p57 .fill, .c100.p58 .fill, .c100.p59 .fill, .c100.p60 .fill, .c100.p61 .fill, .c100.p62 .fill, .c100.p63 .fill, .c100.p64 .fill, .c100.p65 .fill, .c100.p66 .fill, .c100.p67 .fill, .c100.p68 .fill, .c100.p69 .fill, .c100.p70 .fill, .c100.p71 .fill, .c100.p72 .fill, .c100.p73 .fill, .c100.p74 .fill, .c100.p75 .fill, .c100.p76 .fill, .c100.p77 .fill, .c100.p78 .fill, .c100.p79 .fill, .c100.p80 .fill, .c100.p81 .fill, .c100.p82 .fill, .c100.p83 .fill, .c100.p84 .fill, .c100.p85 .fill, .c100.p86 .fill, .c100.p87 .fill, .c100.p88 .fill, .c100.p89 .fill, .c100.p90 .fill, .c100.p91 .fill, .c100.p92 .fill, .c100.p93 .fill, .c100.p94 .fill, .c100.p95 .fill, .c100.p96 .fill, .c100.p97 .fill, .c100.p98 .fill, .c100.p99 .fill, .c100.p100 .fill {
   position: absolute;
-  border: 2px solid #03aef9;
+  border: 0.053rem solid #03aef9;
   left:0;
   top:0;
-  width: 60px;
-  height: 60px;
-  clip: rect(0px, 33px, 65px, 0);
+  width: 1.6rem;
+  height: 1.6rem;
+  clip: rect(0rem, 0.88rem, 1.733rem, 0);
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -23,11 +23,11 @@
 }
 
 .c100 .fill {
-  clip: rect(0px, 33px, 65px, 0) !important;
+  clip: rect(0rem, 0.88rem, 1.733rem, 0) !important;
 }
 
 .c100.p0 .bar{
-  clip: rect(0px, 32px, 64px, 0) !important;
+  clip: rect(0rem, 0.853rem, 1.706rem, 0) !important;
 }
 
 .pie-fill, .c100.p51 .bar:after, .c100.p51 .fill, .c100.p52 .bar:after, .c100.p52 .fill, .c100.p53 .bar:after, .c100.p53 .fill, .c100.p54 .bar:after, .c100.p54 .fill, .c100.p55 .bar:after, .c100.p55 .fill, .c100.p56 .bar:after, .c100.p56 .fill, .c100.p57 .bar:after, .c100.p57 .fill, .c100.p58 .bar:after, .c100.p58 .fill, .c100.p59 .bar:after, .c100.p59 .fill, .c100.p60 .bar:after, .c100.p60 .fill, .c100.p61 .bar:after, .c100.p61 .fill, .c100.p62 .bar:after, .c100.p62 .fill, .c100.p63 .bar:after, .c100.p63 .fill, .c100.p64 .bar:after, .c100.p64 .fill, .c100.p65 .bar:after, .c100.p65 .fill, .c100.p66 .bar:after, .c100.p66 .fill, .c100.p67 .bar:after, .c100.p67 .fill, .c100.p68 .bar:after, .c100.p68 .fill, .c100.p69 .bar:after, .c100.p69 .fill, .c100.p70 .bar:after, .c100.p70 .fill, .c100.p71 .bar:after, .c100.p71 .fill, .c100.p72 .bar:after, .c100.p72 .fill, .c100.p73 .bar:after, .c100.p73 .fill, .c100.p74 .bar:after, .c100.p74 .fill, .c100.p75 .bar:after, .c100.p75 .fill, .c100.p76 .bar:after, .c100.p76 .fill, .c100.p77 .bar:after, .c100.p77 .fill, .c100.p78 .bar:after, .c100.p78 .fill, .c100.p79 .bar:after, .c100.p79 .fill, .c100.p80 .bar:after, .c100.p80 .fill, .c100.p81 .bar:after, .c100.p81 .fill, .c100.p82 .bar:after, .c100.p82 .fill, .c100.p83 .bar:after, .c100.p83 .fill, .c100.p84 .bar:after, .c100.p84 .fill, .c100.p85 .bar:after, .c100.p85 .fill, .c100.p86 .bar:after, .c100.p86 .fill, .c100.p87 .bar:after, .c100.p87 .fill, .c100.p88 .bar:after, .c100.p88 .fill, .c100.p89 .bar:after, .c100.p89 .fill, .c100.p90 .bar:after, .c100.p90 .fill, .c100.p91 .bar:after, .c100.p91 .fill, .c100.p92 .bar:after, .c100.p92 .fill, .c100.p93 .bar:after, .c100.p93 .fill, .c100.p94 .bar:after, .c100.p94 .fill, .c100.p95 .bar:after, .c100.p95 .fill, .c100.p96 .bar:after, .c100.p96 .fill, .c100.p97 .bar:after, .c100.p97 .fill, .c100.p98 .bar:after, .c100.p98 .fill, .c100.p99 .bar:after, .c100.p99 .fill, .c100.p100 .bar:after, .c100.p100 .fill {
@@ -41,9 +41,9 @@
 .c100 {
   z-index: 999;
   position: relative;
-  font-size: 100px;
-  width: 64px;
-  height: 64px;
+  font-size: 2.666rem;
+  width: 1.706rem;
+  height: 1.706rem;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -69,8 +69,8 @@
   z-index: 1;
   left: 0;
   top: 50%;
-  margin-top:-10px;
-  font-size: 14px;
+  margin-top:-0.266rem;
+  font-size: 0.373rem;
   color: #fff;
   display: block;
   text-align: center;
@@ -90,10 +90,10 @@
 }
 .c100:after {
   position: absolute;
-  left:2px;
-  top:2px;
-  width: 60px;
-  height: 60px;
+  left:0.053rem;
+  top:0.053rem;
+  width: 1.6rem;
+  height: 1.6rem;
   display: block;
   content: " ";
   -webkit-border-radius: 50%;
@@ -117,9 +117,9 @@
 }
 .c100 .slice {
   position: absolute;
-  width: 64px;
-  height: 64px;
-  clip: rect(0px, 64px, 64px, 32px);
+  width: 1.706rem;
+  height: 1.706rem;
+  clip: rect(0rem, 1.706rem, 1.706rem, 0.853rem);
 }
 .uploadLoading{
   position: fixed;
@@ -133,8 +133,8 @@
 .uploadLoading #bluecircle{
   top:50%;
   left:50%;
-  margin-left:-32px;
-  margin-top:-32px;
+  margin-left:-0.853rem;
+  margin-top:-0.853rem;
 }
 
 .uploadLoading .mask{

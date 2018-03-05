@@ -185,44 +185,44 @@
 
 <style scoped>
   .form-ask-refuse {
-    padding: 0 5px;
+    padding: 0 0.133rem;
   }
 
   .form-ask-refuse textarea {
-    margin-top: 15px;
+    margin-top: 0.4rem;
     width: 100%;
-    height: 138px;
+    height: 3.68rem;
     border: none;
   }
 
   .form-ask-refuse .title {
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 0.266rem;
+    margin-left: 0.266rem;
     color: #8b8b8b;
-    height: 32px;
+    height: 0.853rem;
   }
 
   .form-ask-refuse .category {
-    padding: 10px 20px;
+    padding: 0.266rem 0.533rem;
   }
 
   .form-ask-refuse .category span.active {
-    border: 1px solid #4a90e2;
+    border: 0.026rem solid #4a90e2;
     color: #4a90e2;
   }
 
   .form-ask-refuse .category span {
-    border: 1px solid #b6b6b6;
-    border-radius: 5px;
-    padding: 0 15px;
+    border: 0.026rem solid #b6b6b6;
+    border-radius: 0.133rem;
+    padding: 0 0.4rem;
     display: inline-block;
-    height: 32px;
+    height: 0.853rem;
     background: #fff;
-    font-size: 14px;
-    margin: 5px 6px;
+    font-size: 0.373rem;
+    margin: 0.133rem 0.16rem;
     text-align: center;
     color: #333;
-    line-height: 32px;
+    line-height: 0.853rem;
     position: relative;
   }
 
@@ -231,7 +231,7 @@
     position: relative;
     border: none;
     height: 90%;
-    margin-top: -4px;
+    margin-top: -0.106rem;
     width: 90%;
     text-align: center;
   }
@@ -241,16 +241,16 @@
   }
 
   .form-ask-refuse .button-wrapper {
-    margin-top: 15px;
-    padding: 0 50px;
+    margin-top: 0.4rem;
+    padding: 0 1.333rem;
   }
 
   .textarea-wrapper {
     position: relative;
     background: #fff;
-    padding-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    padding-bottom: 0.533rem;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #bbbbbb;
   }
 
   .textarea-wrapper textarea {
@@ -260,9 +260,9 @@
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 10px;
-    font-size: 12px;
-    bottom: 2px;
+    right: 0.266rem;
+    font-size: 0.32rem;
+    bottom: 0.053rem;
     color: #999;
   }
 

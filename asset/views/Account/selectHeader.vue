@@ -10,8 +10,6 @@
 
 <script>
   /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "crop" }] */
-
-  import '../../styles/cropper.min.css'
   import '../../js/cropper.min'
   import localEvent from '../../stores/localStorage'
   import { createAPI } from '../../utils/request'
@@ -117,8 +115,8 @@
               src: '_doc/user_avatar.jpg', // src在这里是第一步Url里的src。也就是本地路径
               dst: '_doc/user_avatar.jpg',
               overwrite: true,
-              width: '200px',
-              height: '200px'
+              width: '5.333rem',
+              height: '5.333rem'
             },
             function (e) {
               t.upload(e.target)
@@ -139,7 +137,7 @@
 
 <style scoped="scoped">
   .imageWrapper {
-    height: 300px;
-    margin-bottom: 15px;
+    height: 8rem;
+    margin-bottom: 0.4rem;
   }
 </style>

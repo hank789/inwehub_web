@@ -41,6 +41,7 @@ import TagsSelectionTags from '../../../views/Tags/SelectionTags.vue'
 import TagsTagsQuestions from '../../../views/Tags/TagsQuestions.vue'
 import TagsTagsSubmissions from '../../../views/Tags/TagsSubmissions.vue'
 import TagsTagsUsers from '../../../views/Tags/TagsUsers.vue'
+import TagsTagFocusMembers from '../../../views/Tags/TagFocusMembers.vue'
 import AccountDiscountList from '../../../views/Account/DiscountList.vue'
 import AccountChanceList from '../../../views/Account/ChanceList.vue'
 import AccountGrowth from '../../../views/Account/Growth.vue'
@@ -162,7 +163,7 @@ import Hongbao from '../../../views/Hongbao.vue'
 import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
-
+import time from '../../../components/time.vue'
 export {
   Login,
   Register,
@@ -207,6 +208,7 @@ export {
   TagsTagsQuestions,
   TagsTagsSubmissions,
   TagsTagsUsers,
+  TagsTagFocusMembers,
   AccountDiscountList,
   AccountChanceList,
   AccountGrowth,
@@ -327,5 +329,6 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  time
 }

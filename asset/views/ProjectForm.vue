@@ -66,6 +66,7 @@
   import { postRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import cityData from '../components/city/city.data'
+  import popPickerComponent from '../components/picker/poppicker.vue'
 
   export default {
     data: () => ({
@@ -247,6 +248,9 @@
     },
     mounted () {
     },
+    components: {
+      popPickerComponent
+    },
     computed: {
       descLength () {
         if (this.description) {
@@ -282,7 +286,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 1.066rem;
   }
 
   .mui-input-row a {
@@ -290,7 +294,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-input-row a {
@@ -298,7 +302,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-table-view-cell {
@@ -306,20 +310,20 @@
   }
 
   .textarea-wrapper {
-    margin: 0 5px;
+    margin: 0 0.133rem;
     height: 100%;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #bbbbbb;
     background: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 4px;
-    font-size: 12px;
-    bottom: 2px;
+    right: 0.106rem;
+    font-size: 0.32rem;
+    bottom: 0.053rem;
     color: #b0b0b0;
   }
 
@@ -331,7 +335,7 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 10px;
+    padding: 0.266rem;
   }
 
   .mui-table-view-cell .mui-navigate-right, .mui-table-view-cell .mui-navigate {
@@ -343,17 +347,17 @@
   }
 
   .account_item_title {
-    padding: 5px;
+    padding: 0.133rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 5.333rem;
+    right: 1.066rem;
+    height: 0.853rem;
     color: #3f3f3f;
     padding-right: 0;
   }

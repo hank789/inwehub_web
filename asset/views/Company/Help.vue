@@ -83,31 +83,31 @@
     background: #ececee;
 
     width:100%;
-    height:129px;
+    height:3.44rem;
     text-align: center;
   }
 
   .basic h5{
-    font-size:20px;
+    font-size:0.533rem;
     color:#444;
-    margin-bottom: 3px;
+    margin-bottom: 0.08rem;
   }
 
   .basic .info{
     position: absolute;
     left:50%;
-    margin-left:-50px;
-    top:43px;
+    margin-left:-1.333rem;
+    top:1.146rem;
     color:#808080;
-    font-size:13px;
+    font-size:0.346rem;
   }
 
   .basic a{
     position: absolute;
     color:#444444;
-    font-size:30px;
-    top:16px;
-    left:7px;
+    font-size:0.8rem;
+    top:0.426rem;
+    left:0.186rem;
   }
 
   .mixed .item div{
@@ -116,56 +116,56 @@
   }
 
   .mixed .item h5{
-    font-size:17px;
+    font-size:0.453rem;
     color:#444;
-    margin-bottom: 3px;
+    margin-bottom: 0.08rem;
   }
 
   .mixed .item .text{
-    font-size:13px;
+    font-size:0.346rem;
     color:#808080;
   }
 
 
   .mixed .item-1 .iconWrapper{
-    margin:30px 6px 30px 40px;
-    padding:30px;
-    width:80px;
-    height: 89px;
+    margin:0.8rem 0.16rem 0.8rem 1.066rem;
+    padding:0.8rem;
+    width:2.133rem;
+    height: 2.373rem;
     background: url(../../statics/images/illustration3@2x.png) no-repeat;
     background-size: contain;
   }
 
   .mixed .item-2 .iconWrapper{
-    margin-top:19px;
-    margin-right:42px;
-    padding:30px;
-    width:80px;
-    height: 89px;
+    margin-top:0.506rem;
+    margin-right:1.12rem;
+    padding:0.8rem;
+    width:2.133rem;
+    height: 2.373rem;
     background: url(../../statics/images/illustration2@2x.png) no-repeat;
     background-size: contain;
   }
 
   .mixed .item-3 .iconWrapper{
-    margin:29px 7px 30px 40px;
-    padding:30px;
-    width:80px;
-    height: 89px;
+    margin:0.773rem 0.186rem 0.8rem 1.066rem;
+    padding:0.8rem;
+    width:2.133rem;
+    height: 2.373rem;
     background: url(../../statics/images/illustration@2x.png) no-repeat;
     background-size: contain;
   }
 
   .mixed .item-1 .text{
-    margin-top:65px;
+    margin-top:1.733rem;
   }
 
   .mixed .item-2 .text{
-    margin-top:38px;
-    margin-right: 10px;
+    margin-top:1.013rem;
+    margin-right: 0.266rem;
   }
 
   .mixed .item-3 .text{
-    margin-top:70px;
+    margin-top:1.866rem;
   }
 
   .mixed .item-2{
@@ -173,15 +173,15 @@
   }
 
   .buttonWrapper{
-    margin-top:20px;
-    padding:0 16px 10px;
+    margin-top:0.533rem;
+    padding:0 0.426rem 0.266rem;
     background: #fff;
   }
 
   .buttonWrapper button{
-    margin-top:10px;
-    border-radius: 5px;
+    margin-top:0.266rem;
+    border-radius: 0.133rem;
     background: #03aef9;
-    border:1px solid #03aef9;
+    border:0.026rem solid #03aef9;
   }
 </style>

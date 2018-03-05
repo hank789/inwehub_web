@@ -242,10 +242,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -259,105 +259,105 @@
     width: 100%;
     overflow: hidden;
     background: #FFFFFF;
-    padding: 0 4% 15px 2%;
+    padding: 0 4% 0.4rem 2%;
     position: relative;
   }
 
   .myLabel div {
-    font-size: 13px;
-    margin-top: 15px;
+    font-size: 0.346rem;
+    margin-top: 0.4rem;
     color: #808080;
-    margin-left: 10px;
+    margin-left: 0.266rem;
   }
   .myLabel button{
-    width:75px;
-    height:30px;
+    width:2rem;
+    height:0.8rem;
     background: #03aef9;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #FFFFFF;
     border-color: #03aef9;
     position: absolute;
     right:4%;
-    top:15px;
+    top:0.4rem;
     padding: 0;
   }
 
   .myLabel li {
     display: inline-block;
     background: #f3f4f6;
-    border: 8px;
-    border-radius: 4px;
-    padding: 5px 12px 5px 10px;
-    margin-top: 10px;
-    margin-left: 10px;
+    border: 0.213rem;
+    border-radius: 0.106rem;
+    padding: 0.133rem 0.32rem 0.133rem 0.266rem;
+    margin-top: 0.266rem;
+    margin-left: 0.266rem;
     color:#4c4c4c;
   }
 
   .myLabel li svg {
-    font-size: 10px;
+    font-size: 0.266rem;
     color: #c8c8c8;
-    margin-bottom: 2px;
-    margin-left: 5px;
+    margin-bottom: 0.053rem;
+    margin-left: 0.133rem;
   }
 
   .gray {
     width: 100%;
-    height: 10px;
+    height: 0.266rem;
     background: #f3f4f6;
   }
 
   .addLable {
     width: 100%;
     background: #FFFFFF;
-    padding: 15px 4% 0 4%;
+    padding: 0.4rem 4% 0 4%;
   }
 
   .addLable p {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
   }
 
   .search {
     width: 100%;
-    height: 38px;
-    margin-top: 9px;
+    height: 1.013rem;
+    margin-top: 0.24rem;
     background: #F3F4F5;
-    border-radius: 100px;
+    border-radius: 2.666rem;
   }
 
   .search svg {
-    font-size: 17px;
+    font-size: 0.453rem;
     color: #c8c8c8;
-    margin-top: 9px;
-    margin-left: 16px;
-    /*margin-right: 5px;*/
+    margin-top: 0.24rem;
+    margin-left: 0.426rem;
+    /*margin-right: 0.133rem;*/
     float: left;
   }
 
   .search input {
     background: #F3F4F5;
     width: 80%;
-    height: 35px;
-    margin-top: 2px;
+    height: 0.933rem;
+    margin-top: 0.053rem;
     float: left;
     border: none;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .addLable ul {
     width: 100%;
     overflow: hidden;
-    margin-top: 22px;
+    margin-top: 0.586rem;
   }
 
   .addLable ul li {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     position: relative;
     text-align: left;
-    line-height: 44px;
-    font-size: 14px;
+    line-height: 1.173rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 

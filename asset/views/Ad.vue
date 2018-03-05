@@ -18,7 +18,7 @@
 
 <script>
   import { postRequest } from '../utils/request'
-  import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { openFullscreen, closeFullscreen, closeSplashscreen } from '../utils/plus'
   export default {
     data: () => ({
       isShow: 0
@@ -38,8 +38,13 @@
             window.mui.toast(response.data.message)
             return
           }
+
+          closeSplashscreen()
+
           // 是否显示启动页面
           if (response.data.data.show_guide) {
+            openFullscreen()
+
             this.isShow = response.data.data.show_guide
             var endTime = 3  // 倒计时时间
             var setTime = () => {
@@ -79,17 +84,17 @@
     z-index:2;
   }
   .time {
-    width: 83px;
-    height: 34px;
+    width: 2.213rem;
+    height: 0.906rem;
     background: rgba(68, 68, 68, 0.68);
-    border-radius: 50px;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 34px;
-    font-size: 14px;
+    line-height: 0.906rem;
+    font-size: 0.373rem;
     color: #ffffff;
     position: absolute;
-    top: 20px;
-    right: 16px;
+    top: 0.533rem;
+    right: 0.426rem;
   }
   .time_t{
     width: 100%;
@@ -105,24 +110,24 @@
     position: relative;
   }
   .time_b svg{
-    font-size: 120px;
+    font-size: 3.2rem;
     position: absolute;
     left: 0;
     right: 0;
-    top:-25px;
+    top:-0.666rem;
     margin: auto;
   }
   .time_b p{
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #747576;
     position: absolute;
-    top: 55px;
+    top: 1.466rem;
     left: 0;
     right: 0;
     margin: auto;
   }
   .immersed20 .time{
-    top:40px;
+    top:1.066rem;
   }
 </style>

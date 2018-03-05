@@ -15,18 +15,18 @@
     </header>
 
     <div class="mui-content feedWrapper" v-show="!loading">
-      <!--标签活动-->
-      <div class="tag">
-         <p @tap.stop.prevent="toTagDetail('贺新春')">
-           <img src="../statics/images/feed_newyear@2x.png"/>
-         </p>
-         <p @tap.stop.prevent="toTagDetail('谈工作')">
-           <img src="../statics/images/feed_work@2x.png"/>
-         </p>
-         <p @tap.stop.prevent="toTagDetail('提建议')">
-           <img src="../statics/images/feed_suggest@2x.png"/>
-         </p>
-      </div>
+      <!--&lt;!&ndash;标签活动&ndash;&gt;-->
+      <!--<div class="tag">-->
+         <!--<p @tap.stop.prevent="toTagDetail('贺新春')">-->
+           <!--<img src="../statics/images/feed_newyear@2x.png"/>-->
+         <!--</p>-->
+         <!--<p @tap.stop.prevent="toTagDetail('谈工作')">-->
+           <!--<img src="../statics/images/feed_work@2x.png"/>-->
+         <!--</p>-->
+         <!--<p @tap.stop.prevent="toTagDetail('提建议')">-->
+           <!--<img src="../statics/images/feed_suggest@2x.png"/>-->
+         <!--</p>-->
+      <!--</div>-->
       <!--导航栏-->
       <div class="menu">
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
@@ -143,7 +143,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import { openVendorUrl, openAppUrl, autoTextArea } from '../utils/plus'
+  import { openVendorUrl, openAppUrl, autoTextArea, AppInit } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -211,6 +211,8 @@
       userAbility.signIGift(this)
       autoTextArea()
       saveLocationInfo()
+
+      AppInit(this)
     },
     computed: {
       prevOtherData () {
@@ -221,9 +223,10 @@
       }
     },
     methods: {
-      toTagDetail (name) {
-        userAbility.jumpToTagDetail(name)
-      },
+//     // 标签
+//      toTagDetail (name) {
+//        userAbility.jumpToTagDetail(name)
+//      },
       judge () {
         this.$router.pushPlus('/nearbyCompany')
       },
@@ -393,7 +396,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -401,16 +404,15 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:39px;
+    height:1.04rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    top: 49px;
   }
   .menu span{
     position:relative;
@@ -420,40 +422,44 @@
   }
   .menu span  i{
     position:absolute;
-    width:28px;
-    height:1.5px;
-    border-radius: 50px;
+    width:0.746rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 28.4px;
+    top: 0.757rem;
     left: 0;
     right: 0;
     margin: auto;
   }
   .menu span svg{
-    font-size: 25px;
+    font-size: 0.666rem;
   }
 
   .mui-content{
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 88px;
-    bottom: 50px;
+    top: 1.04rem;
+    bottom: 1.333rem;
+  }
+
+  .w414-3 .listWrapper{
+    bottom:50px !important;
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {
-    top: 42px;
+    top: 1.12rem;
   }
 
   .rightWrapper {
     position: absolute;
-    padding:12px;
-    right: 3px;
+    padding:0.32rem;
+    right: 0.08rem;
     bottom: 0;
   }
 
   .rightWrapper .icon {
-    font-size: 17px;
+    font-size: 0.453rem;
   }
 
   .mui-content {
@@ -461,21 +467,21 @@
   }
 
   .headerWrapper{
-    height:45px;
+    height:1.2rem;
     overflow: hidden;
   }
 </style>
 
 <style>
   .feedWrapper .container-avatarAndText{
-    margin-bottom:10px;
+    margin-bottom:0.266rem;
   }
   .component-iconNumber{
-    margin-left: 7.5px;
+    margin-left: 0.2rem;
   }
 
   .feedWrapper .iconPenglunWrapper {
-    margin: 0 7.5px;
+    margin: 0 0.2rem;
   }
   .labelWrapper{
     text-align: right;
@@ -483,45 +489,45 @@
   /*回答者列表*/
   .answer-list{
     width:100%;
-    height:43px;
+    height:1.146rem;
     background:#f3f4f6;
-    border-radius: 4px;
-    line-height: 43px;
-    padding: 0 15px;
-    font-size:13px;
+    border-radius: 0.106rem;
+    line-height: 1.146rem;
+    padding: 0 0.4rem;
+    font-size:0.346rem;
     color: rgb(128,128,128);
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
   .answer-list span{
     color:#03aef9;
   }
   .answer-list span i{
     color: rgb(146,146,146);
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   .answer-list span:nth-last-of-type(1) i{
     display: none;
   }
   /*标签*/
   .tags{
-    font-size:16px;
+    font-size:0.426rem;
     color:rgb(35,82,128);
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   /*关注数 点赞的间距*/
   .options{
-    margin-top: 9px;
+    margin-top: 0.24rem;
   }
   /*好评率*/
   .feedWrapper .component-followed-question{
     float: left;
-    font-size:13px;
+    font-size:0.346rem;
     color:#b4b4b6;
   }
   /*关注数*/
   .feedWrapper .blue{
     float: left;
-    font-size:12px;
+    font-size:0.32rem;
     color:#03aef9;
   }
   /*评论了互动问答内容超出两行的样式*/
@@ -533,33 +539,33 @@
     /* word-wrap: break-word; */
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 16px;
+    font-size: 0.426rem;
   }
-  /*标签活动*/
-  .tag{
-    width:100%;
-    height:49px;
-    background: #f3f4f6;
-    padding: 0 15px;
-    position: absolute;
-    top:0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .tag p{
-    width:32%;
-    height:39px;
-    margin-bottom: 0;
-    border-radius: 4px;
-    background: #ffffff;
-  }
-  .tag p img{
-    width: 100%;
-    height:100%;
-    border-radius: 4px;
-  }
+  /*!*标签活动*!*/
+  /*.tag{*/
+    /*width:100%;*/
+    /*height:1.306rem;*/
+    /*background: #f3f4f6;*/
+    /*padding: 0 0.4rem;*/
+    /*position: absolute;*/
+    /*top:0;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+  /*}*/
+  /*.tag p{*/
+    /*width:32%;*/
+    /*height:1.04rem;*/
+    /*margin-bottom: 0;*/
+    /*border-radius: 0.106rem;*/
+    /*background: #ffffff;*/
+  /*}*/
+  /*.tag p img{*/
+    /*width: 100%;*/
+    /*height:100%;*/
+    /*border-radius: 0.106rem;*/
+  /*}*/
 
 
 </style>

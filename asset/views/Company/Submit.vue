@@ -190,6 +190,7 @@
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   export default {
     data () {
@@ -252,7 +253,8 @@
       }
     },
     components: {
-      industryTagsIndexedList
+      industryTagsIndexedList,
+      popPickerComponent
     },
     methods: {
       selectCompanyWorkers () {
@@ -468,14 +470,14 @@
 
 <style>
   .mui-popup-title {
-    font-size: 16px !important;
+    font-size: 0.426rem !important;
     color: #444 !important;
     font-weight: normal !important;
   }
 
   .mui-popup-button {
     color: #03aef9 !important;
-    font-size: 16px !important;
+    font-size: 0.426rem !important;
     font-weight: normal !important;
   }
 
@@ -493,38 +495,38 @@
 
 <style scoped="scoped">
   .title {
-    padding: 17px 16px;
+    padding: 0.453rem 0.426rem;
     color: #444;
     background: #fff;
     font-weight: bold;
   }
 
   .buttonWrapper {
-    padding: 20px 16px;
+    padding: 0.533rem 0.426rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    margin-top: 10px;
-    border-radius: 5px;
+    margin-top: 0.266rem;
+    border-radius: 0.133rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .companyForm {
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .companyForm:before {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm:after {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -536,18 +538,18 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 0.373rem;
     padding-right: 0;
 
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 5px 15px;
+    padding: 0.133rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 16px;
-    right: 16px;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -556,13 +558,13 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 10px 0;
+    padding: 0.266rem 0;
     float: right;
   }
 
@@ -583,7 +585,7 @@
 
   .companyForm .inputUnit {
     width: 55% !important;
-    padding: 10px;
+    padding: 0.266rem;
   }
 
   .companyForm .textRight {
@@ -594,30 +596,30 @@
   .selected {
     display: inline-block;
     color: #03aef9;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
-    padding: 4px 10px 3px;
-    font-size: 14px;
-    margin: 7px 7px 0 0;
+    border: 0.026rem solid #03aef9;
+    border-radius: 0.133rem;
+    padding: 0.106rem 0.266rem 0.08rem;
+    font-size: 0.373rem;
+    margin: 0.186rem 0.186rem 0 0;
   }
 
   .selected .icon {
     color: #c8c8c8;
-    font-size: 11px;
-    margin-left: 7px;
+    font-size: 0.293rem;
+    margin-left: 0.186rem;
     position: relative;
-    top: -1px;
+    top: -0.026rem;
   }
 
   .river {
-    height: 10px;
+    height: 0.266rem;
     background: #ececee;
   }
 
   .radioWrapper {
     display: inline-block;
-    padding: 11px 0 11px 25px;
-    margin-left: 18px;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -626,14 +628,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 11px;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
-    left: 0px;
+    left: 0rem;
     color: #c8c8c8;
-    font-size: 20px;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -646,7 +648,7 @@
 
   .validMode {
     color: #808080;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .validMode b {
@@ -655,7 +657,7 @@
   }
 
   .validMode .radioWrapper input[type='radio'] {
-    top: 14px;
+    top: 0.373rem;
   }
 
   .validMode .noZhichi {

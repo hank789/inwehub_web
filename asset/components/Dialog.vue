@@ -368,10 +368,10 @@
       </div>
     </div>
     <!--红包的金额详情-->
-    <div id="animationContainerTop" style="width:293px; height:336px">
-      <div id="animationContainer" style="width:293px; height:336px">
+    <div id="animationContainerTop" style="width:7.813rem; height:8.96rem">
+      <div id="animationContainer" style="width:7.813rem; height:8.96rem">
         <canvas id="canvas" width="293" height="336"></canvas>
-        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:293px; height:336px; position: absolute; left: 0px; top: 0px; display: block;">
+        <div id="domOverlayContainer" style="pointer-events:none; overflow:hidden; width:7.813rem; height:8.96rem; position: absolute; left: 0rem; top: 0rem; display: block;">
         </div>
         <!--红包详情-->
         <div class="my-cash" id="my-cash">
@@ -529,9 +529,9 @@
 
 <style scoped="scoped">
   #test {
-    width: 240px;
-    height: 110px;
-    border: 1px solid #007AFF;
+    width: 6.4rem;
+    height: 2.933rem;
+    border: 0.026rem solid #007AFF;
   }
 
   ul,
@@ -549,31 +549,31 @@
   /*显示等级弹窗样式*/
 
   .p-level {
-    width: 240px;
-    height: 110px;
+    width: 6.4rem;
+    height: 2.933rem;
     /*background: #CCCCCC;*/
     text-align: center;
   }
 
   .p-level > svg {
-    font-size: 50px;
+    font-size: 1.333rem;
   }
 
   .p-level > p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
-    margin-top: 10px;
+    margin-top: 0.266rem;
     width: 100%;
-    height: 20px;
+    height: 0.533rem;
     text-align: center;
-    line-height: 20px;
+    line-height: 0.533rem;
   }
 
   .p-level > p:nth-of-type(2) {
     width: 36%;
     margin-left: 32%;
-    height: 20px;
-    margin-top: 3px;
+    height: 0.533rem;
+    margin-top: 0.08rem;
     /*background: #CCCCCC;*/
   }
 
@@ -582,7 +582,7 @@
     width: 80%;
     height: 100%;
     float: left;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
 
@@ -593,40 +593,40 @@
     height: 100%;
     background: url(../statics/images/rank.png) no-repeat;
     background-size: 100%;
-    margin-top: 2px;
+    margin-top: 0.053rem;
     text-align: center;
-    line-height: 12px;
+    line-height: 0.32rem;
     color: #FFFFFF;
   }
 
   /*升级的弹窗*/
 
   #p-upgrade {
-    width: 240px;
-    /*height: 160px;*/
-    border: 1px solid #009689;
+    width: 6.4rem;
+    /*height: 4.266rem;*/
+    border: 0.026rem solid #009689;
   }
 
   .p-upgrade {
-    width: 240px;
-    /*height: 160px;*/
+    width: 6.4rem;
+    /*height: 4.266rem;*/
   }
 
   .upgrade_t {
     width: 100%;
-    height: 65px;
-    border-bottom: 0.5px dashed #DCDCDC;
+    height: 1.733rem;
+    border-bottom: 0.013rem dashed #DCDCDC;
   }
 
   .upgrade_t p:nth-of-type(1) {
     width: 60%;
     margin-left: 20%;
-    height: 21px;
+    height: 0.56rem;
   }
 
   .upgrade_t p:nth-of-type(1) span:nth-of-type(1) {
     color: #03aef9;
-    font-size: 19px;
+    font-size: 0.506rem;
     float: left;
     width: 85%;
     /*background: #007AFF;*/
@@ -639,7 +639,7 @@
     background-size: 100%;
     float: left;
     text-align: center;
-    line-height: 18px;
+    line-height: 0.48rem;
     color: #FFFFFF;
   }
 
@@ -647,141 +647,141 @@
     width: 50%;
     margin-left: 20%;
     text-align: center;
-    line-height: 18px;
-    margin-top: 3px;
-    font-size: 14px;
+    line-height: 0.48rem;
+    margin-top: 0.08rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .upgrade_b {
     width: 100%;
-    /*height: 95px;*/
+    /*height: 2.533rem;*/
     overflow: hidden;
     text-align: center;
-    border-bottom: 0.5px solid #DCDCDC;
+    border-bottom: 0.013rem solid #DCDCDC;
   }
 
   .upgrade_b > p {
     width: 27%;
-    height: 100px;
+    height: 2.666rem;
     float: left;
     margin-left: 4.75%;
   }
 
   .upgrade_b > p svg {
-    font-size: 40px;
+    font-size: 1.066rem;
     color: #fcc916;
-    margin-top: 18px;
+    margin-top: 0.48rem;
   }
 
   .upgrade_b > p span {
     display: block;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #444444;
   }
 
   .upgrade_btn {
     width: 100%;
-    height: 50px;
+    height: 1.333rem;
     /*background: #CCCCCC;*/
     text-align: center;
-    line-height: 50px;
+    line-height: 1.333rem;
     color: #03aef9;
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   /*领取新手任务*/
 
   #p-task {
-    width: 245px;
-    height: 320px;
+    width: 6.533rem;
+    height: 8.533rem;
   }
 
   .p-task {
-    width: 245px;
-    height: 320px;
-    border: 1px solid #ffffff;
+    width: 6.533rem;
+    height: 8.533rem;
+    border: 0.026rem solid #ffffff;
   }
 
   .task_t {
     width: 100%;
-    height: 49px;
+    height: 1.306rem;
   }
 
   .task_t p:nth-of-type(1) {
     color: #03aef9;
-    font-size: 16px;
+    font-size: 0.426rem;
     font-weight: 500;
     text-align: center;
   }
 
   .task_t p:nth-of-type(2) {
     color: #808080;
-    font-size: 12px;
+    font-size: 0.32rem;
     text-align: center;
   }
 
   .task_b {
     width: 100%;
-    height: 231px;
+    height: 6.16rem;
     margin: 0;
   }
 
   .task_b li {
     width: 100%;
-    height: 77px;
+    height: 2.053rem;
     text-align: center;
-    border-bottom: 0.5px solid #DCDCDC;
-    padding-top: 17px;
+    border-bottom: 0.013rem solid #DCDCDC;
+    padding-top: 0.453rem;
   }
 
   .task_b li p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   .task_b li p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .task_btn {
     width: 100%;
-    height: 50px;
+    height: 1.333rem;
     /*background: #CCCCCC;*/
     text-align: center;
-    line-height: 50px;
+    line-height: 1.333rem;
     color: #03aef9;
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   /*完善名片提示*/
 
   #perfectCard-t {
-    width: 240px;
-    height: 117px;
+    width: 6.4rem;
+    height: 3.12rem;
   }
 
   .perfectCard-t {
-    width: 250px;
-    height: 100px;
-    /*border: 1px solid #DCDCDC;*/
+    width: 6.666rem;
+    height: 2.666rem;
+    /*border: 0.026rem solid #DCDCDC;*/
   }
 
   .perfectCard-t p:nth-child(1) {
-    font-size: 19px;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 31px;
+    margin-top: 0.826rem;
   }
 
   .perfectCard-t p:nth-child(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 7.5px;
+    margin-top: 0.2rem;
   }
 
   .perfectCard-t p:nth-child(2) i {
@@ -790,56 +790,56 @@
   }
 
   #perfectCard-b {
-    width: 240px;
-    height: 54px;
+    width: 6.4rem;
+    height: 1.44rem;
     /*background: #CCCCCC;*/
   }
 
   .perfectCard-b {
-    width: 240px;
-    height: 54px;
-    font-size: 16px;
+    width: 6.4rem;
+    height: 1.44rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 54px;
+    line-height: 1.44rem;
   }
 
   .fenhongxize .title {
     text-align: center;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444;
   }
 
   .fenhongxize .desc {
-    margin-top: 20px;
-    font-size: 14px;
-    line-height: 21px;
+    margin-top: 0.533rem;
+    font-size: 0.373rem;
+    line-height: 0.56rem;
     color: #808080;
   }
 
   .fenhongxize ul {
-    padding: 0 0 0 20px;
-    margin: 8px 0 0;
+    padding: 0 0 0 0.533rem;
+    margin: 0.213rem 0 0;
   }
 
   .fenhongxize ul li.item {
     position: relative;
     list-style: none;
-    font-size: 14px;
-    padding: 8px 0;
+    font-size: 0.373rem;
+    padding: 0.213rem 0;
     color: #808080;
   }
 
   .fenhongxize ul li.item:before {
     content: '';
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
     position: absolute;
     border-radius: 50%;
-    width: 3px;
-    height: 3px;
-    left: -14px;
-    top: 16px;
+    width: 0.08rem;
+    height: 0.08rem;
+    left: -0.373rem;
+    top: 0.426rem;
   }
 
   .helpWrapper {
@@ -848,38 +848,38 @@
   }
 
   .helpWrapper .title {
-    font-size: 16px;
+    font-size: 0.426rem;
     text-align: center;
     color: #444;
-    margin-bottom: 15px;
+    margin-bottom: 0.4rem;
   }
 
   .helpWrapper .desc {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444;
   }
 
   .helpWrapper .desc-1 {
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   .boxWrapper {
-    border: 1px solid blue;
+    border: 0.026rem solid blue;
   }
 
   .askCommunityDetailShare_title {
     text-align: center;
-    margin-top: 17px;
+    margin-top: 0.453rem;
   }
 
   .askCommunityDetailShare_title .title {
-    font-size: 19px;
+    font-size: 0.506rem;
     color: #444;
   }
 
   .askCommunityDetailShare_title .titleSub {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 0.266rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
@@ -888,7 +888,7 @@
   }
 
   .askCommunityDetailShare_body .title {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
   }
 
@@ -896,28 +896,28 @@
   /*完善名片提示*/
 
   #expertapplication-t {
-    width: 240px;
-    height: 117px;
-    border: 1px solid #DCDCDC;
+    width: 6.4rem;
+    height: 3.12rem;
+    border: 0.026rem solid #DCDCDC;
   }
 
   .expertapplication-t {
-    width: 250px;
-    height: 100px;
+    width: 6.666rem;
+    height: 2.666rem;
   }
 
   .expertapplication-t p:nth-child(1) {
-    font-size: 19px;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 31px;
+    margin-top: 0.826rem;
   }
 
   .expertapplication-t p:nth-child(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 7.5px;
+    margin-top: 0.2rem;
   }
 
   .expertapplication-t p:nth-child(2) i {
@@ -926,84 +926,84 @@
   }
 
   #expertapplication-b {
-    width: 240px;
-    height: 54px;
+    width: 6.4rem;
+    height: 1.44rem;
     /*background: #CCCCCC;*/
   }
 
   .expertapplication-b {
-    width: 240px;
-    height: 54px;
-    font-size: 16px;
+    width: 6.4rem;
+    height: 1.44rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 54px;
+    line-height: 1.44rem;
   }
 
   /*文章*/
 
   .article_t {
-    /*width: 240px;*/
-    /*height: 100px;*/
-    /* border: 1px solid #CCCCCC;*/
-    margin-top: 20px;
+    /*width: 6.4rem;*/
+    /*height: 2.666rem;*/
+    /* border: 0.026rem solid #CCCCCC;*/
+    margin-top: 0.533rem;
   }
 
   .article_t p:nth-child(1) {
-    font-size: 19px;
+    font-size: 0.506rem;
     color: #444444;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 
   .article_t p:nth-child(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 8px;
+    margin-top: 0.213rem;
     text-align: center;
   }
 
   .article_t p:nth-child(2) i {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #03aef9;
     font-style: normal;
   }
 
   .article_b li {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
     position: relative;
-    margin-left: 13px;
+    margin-left: 0.346rem;
   }
 
   .article_b span {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 15px;
-    margin-bottom: 12px;
+    margin-top: 0.4rem;
+    margin-bottom: 0.32rem;
     display: block;
   }
 
   .article_b li:before {
     content: '';
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
     position: absolute;
     border-radius: 50%;
-    width: 3px;
-    height: 3px;
-    top: 8px;
-    left: -10px;
+    width: 0.08rem;
+    height: 0.08rem;
+    top: 0.213rem;
+    left: -0.266rem;
   }
 
   .article_b p {
     color: #03aef9;
-    font-size: 16px;
-    border-top: 1px solid #dcdcdc;
+    font-size: 0.426rem;
+    border-top: 0.026rem solid #dcdcdc;
     text-align: center;
-    padding-top: 15px;
-    padding-bottom: 0px;
+    padding-top: 0.4rem;
+    padding-bottom: 0rem;
   }
 
   /*互动问答答案提交成功*/
@@ -1016,19 +1016,19 @@
   .hotAnswer_b li {
     width: 100%;
     overflow: hidden;
-    padding: 12px 0;
+    padding: 0.32rem 0;
     position: relative;
   }
 
   .hotAnswer_b li > p {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .hotAnswer_d {
     width: 100%;
-    height: 32px;
-    margin-top: 4.5px;
+    height: 0.853rem;
+    margin-top: 0.12rem;
   }
 
   .hotAnswer_d p {
@@ -1036,17 +1036,17 @@
   }
 
   .hotAnswer_d p:nth-child(1) {
-    width: 32px;
-    height: 32px;
+    width: 0.853rem;
+    height: 0.853rem;
     /*background: #CCCCCC;*/
     position: relative;
   }
 
   .hotAnswer_d p:nth-child(1) > svg {
     position: absolute;
-    font-size: 14px;
+    font-size: 0.373rem;
     bottom: 0;
-    right: -4px;
+    right: -0.106rem;
   }
 
   .hotAnswer_d p:nth-child(1) > img {
@@ -1056,33 +1056,33 @@
   }
 
   .hotAnswer_d p:nth-child(2) {
-    /*width: 340px;*/
-    height: 18px;
-    margin-top: 9px;
-    line-height: 18px;
-    font-size: 13px;
+    /*width: 9.066rem;*/
+    height: 0.48rem;
+    margin-top: 0.24rem;
+    line-height: 0.48rem;
+    font-size: 0.346rem;
     color: #808080;
     /*background: #CCCCCC;*/
-    margin-left: 8px;
+    margin-left: 0.213rem;
   }
 
   .hotAnswer_recommend {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    /*margin-top: 15px;*/
+    /*margin-top: 0.4rem;*/
   }
 
   .hotAnswer_b .share {
     display: block;
     width: 100%;
-    height: 40px;
+    height: 1.066rem;
     background: #03aef9;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 0.106rem;
+    font-size: 0.426rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 40px;
-    margin-top: 5px;
+    line-height: 1.066rem;
+    margin-top: 0.133rem;
   }
 
   /*提问成功*/
@@ -1090,22 +1090,22 @@
   .hotAnswer_b .ask_share {
     display: block;
     width: 100%;
-    height: 40px;
-    font-size: 16px;
+    height: 1.066rem;
+    font-size: 0.426rem;
     color: #03aef9;
     text-align: center;
-    line-height: 40px;
-    margin-top: 5px;
+    line-height: 1.066rem;
+    margin-top: 0.133rem;
   }
 
   .hotAnswer_b .ask_divided {
     display: block;
     width: 100%;
-    height: 30px;
-    font-size: 13px;
+    height: 0.8rem;
+    font-size: 0.346rem;
     color: #808080;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   /*
@@ -1117,16 +1117,16 @@
   }
 
   .AnswerRepeat p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
     text-align: center;
   }
 
   .AnswerRepeat p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 /* 是企业用户判读*/
 
@@ -1134,17 +1134,17 @@
     width: 100%;
   }
   .CompanyUser p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   .CompanyUser p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 0.08rem;
   }
   /* 不是企业用户判读*/
 
@@ -1152,34 +1152,34 @@
     width: 100%;
   }
   .Company p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   .Company p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 0.08rem;
   }
   /*聊天条件弹窗样式*/
   .chat {
     width: 100%;
   }
   .chat p:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color:#444444;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   .chat p:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 0.08rem;
   }
   /* 签到的弹窗 */
   .signIn {
@@ -1191,24 +1191,24 @@
     text-align: center;
   }
   .signIn_t img{
-    height:25px;
+    height:0.666rem;
   }
   .signIn_t p{
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
-    margin-bottom: 16px;
+    margin-bottom: 0.426rem;
   }
   .signIn_m{
     width:104%;
     margin: 0 auto;
     overflow: hidden;
-    padding: 17px 0;
-    border-bottom:1px dashed #dcdcdc;
-    border-top:1px dashed #dcdcdc;
+    padding: 0.453rem 0;
+    border-bottom:0.026rem dashed #dcdcdc;
+    border-top:0.026rem dashed #dcdcdc;
   }
   .signIn_m li{
     width:25%;
-    height:75.4px;
+    height:2.01rem;
     text-align: center;
     float: left;
     text-align: center;
@@ -1220,14 +1220,14 @@
     margin-right: 12.5%;
   }
   .signIn_m li p:nth-of-type(1){
-    width:51px;
-    height:51px;
+    width:1.36rem;
+    height:1.36rem;
     background:#c8c8c8;
     border-radius: 50%;
-    border:1.5px solid #d8d8d8;
+    border:0.04rem solid #d8d8d8;
     text-align: center;
-    line-height: 51px;
-    font-size:14px;
+    line-height: 1.36rem;
+    font-size:0.373rem;
     color: #808080;
     margin: 0 auto;
     position: relative;
@@ -1241,109 +1241,109 @@
     margin: auto;
   }
   .signIn_m li p:nth-of-type(2){
-    font-size:12px;
+    font-size:0.32rem;
     color: #808080;
-    margin-top: 2px;
+    margin-top: 0.053rem;
   }
   .signIn_m li p.click-signIn{
     background:rgb(252,200,22);
-    border:1.5px solid #444444;
+    border:0.04rem solid #444444;
   }
   .signIn_m li p.click-signIn span{
     display: inline-block;
-    width: 30px;
-    line-height: 17px;
-    margin-top: 8px;
-    font-size: 13px;
+    width: 0.8rem;
+    line-height: 0.453rem;
+    margin-top: 0.213rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
   }
 
   .signIn_b{
      width:100%;
      margin: 0 auto;
-     height:58px;
+     height:1.546rem;
      text-align:left;
-     font-size:14px;
+     font-size:0.373rem;
      color: #444444;
    }
   .signIn_b p i{
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
   .signIn_b p:nth-of-type(1){
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
  /*签到获取的成长值弹窗*/
 .scoreDetail{
-  width:343px;
-  height:240px;
-  border-radius: 18px;
+  width:9.146rem;
+  height:6.4rem;
+  border-radius: 0.48rem;
   background:#f93277;
   text-align: center;
   margin: auto;
   position: relative;
-  padding-top: 25px;
+  padding-top: 0.666rem;
 }
 .scoreDetail svg{
-  font-size:20px;
+  font-size:0.533rem;
   color: #ffc2d7;
   position: absolute;
-  right:14px;
-  top:13px;
+  right:0.373rem;
+  top:0.346rem;
 }
 .scoreDetail p:nth-of-type(1){
-  font-size:23px;
+  font-size:0.613rem;
   color: #ffffff;
   font-weight:500;
 }
 .scoreDetail p:nth-of-type(2){
-  font-size:16px;
+  font-size:0.426rem;
   color: #ffffff;
-  margin-top: 11px;
-  margin-bottom: 21px;
+  margin-top: 0.293rem;
+  margin-bottom: 0.56rem;
 }
 .scoreDetail p:nth-of-type(2) i{
-  font-size:27px;
+  font-size:0.72rem;
   color: #fcc816;
 }
 .scoreDetail p:nth-of-type(3){
   width:91%;
-  height:34px;
+  height:0.906rem;
   text-align: center;
-  line-height: 34px;
+  line-height: 0.906rem;
   margin:0 auto;
-  bottom: 25px;
-  font-size:14px;
+  bottom: 0.666rem;
+  font-size:0.373rem;
   color: #ffffff;
-  border:1px solid #fc98bb;
-  border-radius: 50px;
-  margin-top: 15px;
+  border:0.026rem solid #fc98bb;
+  border-radius: 1.333rem;
+  margin-top: 0.4rem;
 }
   .scoreDetail-m{
     width:91%;
-    height:68px;
+    height:1.813rem;
     margin: 0 auto;
-    border-top:1px dashed #fc98bb;
+    border-top:0.026rem dashed #fc98bb;
     position: relative;
   }
   .Prompt {
     width: 86%;
-    height: 40px;
+    height: 1.066rem;
     margin-left: 7%;
     position: relative;
-    top:10px;
+    top:0.266rem;
   }
   .Prompt b {
     display: block;
-    width: 45px;
-    padding: 0 2px;
-    height: 25px;
+    width: 1.2rem;
+    padding: 0 0.053rem;
+    height: 0.666rem;
     background: #03aef9;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    line-height: 25px;
-    border-radius: 8px;
+    line-height: 0.666rem;
+    border-radius: 0.213rem;
     position: absolute;
 
   }
@@ -1353,28 +1353,28 @@
     display: block;
     width: 0;
     height: 0;
-    border: 6px solid transparent;
-    border-right: 6px solid #03aef9;
-    border-bottom: 6px solid #03aef9;
+    border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #03aef9;
+    border-bottom: 0.16rem solid #03aef9;
     position: absolute;
     transform: rotate(45deg);
-    bottom: -2px;
-    left: 16px;
+    bottom: -0.053rem;
+    left: 0.426rem;
   }
 
   /*进度条*/
 
   .ProgressBar {
     width: 100%;
-    height: 40px;
+    height: 1.066rem;
     position: absolute;
-    top:45px;
+    top:1.2rem;
 
   }
 
   .ProgressBar > div {
     width: 86%;
-    height: 2px;
+    height: 0.053rem;
     background: #fc98bb;
     margin-left: 7%;
   }
@@ -1382,24 +1382,24 @@
   .ProgressBar > div i {
     display: block;
     width: 25%;
-    height: 2px;
+    height: 0.053rem;
     background: #03aef9;
   }
 
   .fouce {
     width: 86%;
-    height: 2px;
+    height: 0.053rem;
     left: 7%;
     /*background: #007AFF;*/
-    top: -1px;
+    top: -0.026rem;
     position: absolute;
   }
 
   .fouce span {
     display: block;
     float: left;
-    width: 4px;
-    height: 4px;
+    width: 0.106rem;
+    height: 0.106rem;
     background: #FFFFFF;
     border-radius: 50%;
     position: absolute;
@@ -1427,7 +1427,7 @@
 
   .number {
     width: 86%;
-    height: 20px;
+    height: 0.533rem;
     left: 7%;
     position: absolute;
   }
@@ -1436,7 +1436,7 @@
     display: block;
     float: left;
     color: #ffc2d7;
-    font-size: 12px;
+    font-size: 0.32rem;
     position: absolute;
   }
 
@@ -1476,8 +1476,8 @@
   }
   /*关闭按钮*/
   .cash-button{
-    width:29px;
-    height:29px;
+    width:0.773rem;
+    height:0.773rem;
     border-radius:50%;
     background: #808080;
     position: absolute;
@@ -1486,9 +1486,9 @@
     bottom:50%;
     margin:auto;
     z-index: 999;
-    -webkit-transform: translate(0px,210px);
-    -moz-transform:translate(0px,210px);
-    transform: translate(0px,210px);
+    -webkit-transform: translate(0rem,5.6rem);
+    -moz-transform:translate(0rem,5.6rem);
+    transform: translate(0rem,5.6rem);
   }
   .cash-button svg{
     position: absolute;
@@ -1497,189 +1497,189 @@
     top:0;
     bottom:0;
     color: #FFFFFF;
-    font-size:20px;
+    font-size:0.533rem;
     margin:auto;
   }
   /*跳转按钮*/
   .my-wallet{
     width:88%;
-    height:34px;
+    height:0.906rem;
     background: #fcc816;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 34px;
-    font-size:14px;
+    line-height: 0.906rem;
+    font-size:0.373rem;
     color: #444444;
     position: absolute;
     left:0;
     right:0;
-    bottom: 55px;
+    bottom: 1.466rem;
     margin:auto;
     opacity: 0;
   }
   /*红包详情*/
   .my-cash{
     width:58%;
-    height:125px;
+    height:3.333rem;
     position: absolute;
     left:0;
     right:0;
-    top: 60px;
+    top: 1.6rem;
     margin:auto;
     opacity: 0;
   }
   .my-cash i{
     position: absolute;
     width: 100%;
-    height:1.5px;
+    height:0.04rem;
     background: #808080;
     left:0;
     right:0;
-    top:0px;
+    top:0rem;
     bottom: 0;
     margin:auto;
   }
   .my-cash p{
     width:100%;
-    height:52px;
+    height:1.386rem;
     text-align: center;
-    line-height:52px;
+    line-height:1.386rem;
     color: #444444;
   }
   .my-cash p:nth-of-type(1){
-    font-size:64px;
+    font-size:1.706rem;
     font-weight: 500;
   }
   .my-cash p:nth-of-type(1) span{
-    font-size: 24px;
+    font-size: 0.64rem;
     font-weight: 500;
     position: relative;
-    top: -30px;
+    top: -0.8rem;
   }
   .my-cash p:nth-of-type(2){
-    font-size: 16px;
+    font-size: 0.426rem;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   .home_invitation p:nth-of-type(1){
-    font-size:16px;
+    font-size:0.426rem;
     color: #444444;
     font-weight: 500;
   }
   .home_invitation p:nth-of-type(2){
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #444444;
     font-weight: normal;
-    margin-top: -6px;
+    margin-top: -0.16rem;
     line-height: 0;
   }
   /*开启通知*/
   .openNotice{
     width:100%;
-    height:270px;
+    height:7.2rem;
     background: #FFFFFF;
-    border-radius:18px;
-    padding-top: 31px;
+    border-radius:0.48rem;
+    padding-top: 0.826rem;
   }
   .openNotice p:nth-of-type(1){
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 0.426rem;
+    line-height: 0.64rem;
     color: #444444;
-    padding: 0 18px 0 18px;
-    margin-bottom: 7px;
+    padding: 0 0.48rem 0 0.48rem;
+    margin-bottom: 0.186rem;
   }
   .openNotice p:nth-of-type(2){
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
-    padding: 0 18px 0 18px;
-    margin-bottom: 32px;
+    padding: 0 0.48rem 0 0.48rem;
+    margin-bottom: 0.853rem;
   }
   .openNotice ul li{
     width:100%;
-    height:43px;
+    height:1.146rem;
     text-align: center;
-    line-height: 43px;
-    font-size: 16px;
+    line-height: 1.146rem;
+    font-size: 0.426rem;
     color: #03aef9;
-    border-top:0.5px solid #dcdcdc;
+    border-top:0.013rem solid #dcdcdc;
   }
   /*抽奖弹窗*/
   .luckDraw{
     width:100%;
-    height:420px;
-    border-radius:18px;
+    height:11.2rem;
+    border-radius:0.48rem;
     background: #ffffff;
-    padding-top: 31px;
+    padding-top: 0.826rem;
   }
   .luckDraw .qualification{
     text-align: center;
-    font-size:19px;
+    font-size:0.506rem;
     color: #03aef9;
     font-weight: 500;
   }
 
   .luckDraw .title_invitation{
     width:100%;
-    height:44px;
-    margin-top: 15px;
+    height:1.173rem;
+    margin-top: 0.4rem;
     position: relative;
-    padding: 0 15px;
+    padding: 0 0.4rem;
   }
   .luckDraw  .title_invitation .cions-avatar{
     float: left;
     position: relative;
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
     background: #cccccc;
   }
   .luckDraw  .title_invitation .cions-avatar img{
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%;
   }
   .luckDraw  .title_invitation .cions-avatar svg{
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: -2px;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .luckDraw  .text{
-    margin-left: 10px;
+    margin-left: 0.266rem;
     float: left;
   }
   .luckDraw  .text p:nth-of-type(1){
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     font-weight: 500;
   }
   .luckDraw  .text p:nth-of-type(1) i{
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.026rem;
+    height:0.32rem;
     background: #b4b4b6;
-    margin:0 5px -1px 5px;
+    margin:0 0.133rem -0.026rem 0.133rem;
   }
   .luckDraw  .text p:nth-of-type(2){
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #444444;
-    margin-left: -4px;
+    margin-left: -0.106rem;
   }
  /**/
   .luckDraw .search{
-    margin-top: 14px;
-    font-size: 14px;
+    margin-top: 0.373rem;
+    font-size: 0.373rem;
     color: #808080;
-    padding: 0 15px;
+    padding: 0 0.4rem;
   }
   .luckDraw .wechat{
-    width:112px;
-    height:122px;
-    border-radius: 4px;
-    border: 1px solid #979797;
+    width:2.986rem;
+    height:3.253rem;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #979797;
     margin: 0 auto;
-    margin-top: 23px;
+    margin-top: 0.613rem;
   }
   .luckDraw .wechat img{
     width: 100%;
@@ -1687,20 +1687,20 @@
   }
 
   .luckDraw  .waiting{
-    margin-top: 12px;
-    font-size: 14px;
+    margin-top: 0.32rem;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
   }
   .luckDraw  .btn{
     width:100%;
-    margin-top: 20px;
-    height:53px;
-    line-height: 53px;
+    margin-top: 0.533rem;
+    height:1.413rem;
+    line-height: 1.413rem;
     text-align: center;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #03aef9;
-    border-top:1px solid #dcdcdc;
+    border-top:0.026rem solid #dcdcdc;
   }
 
 

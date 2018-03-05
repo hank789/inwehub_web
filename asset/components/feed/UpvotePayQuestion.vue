@@ -16,7 +16,7 @@
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
@@ -99,12 +99,12 @@
 <style scoped>
 /*回答者样式*/
   .comment-container{
-    height: 30px;
+    height: 0.8rem;
     padding: 0;
   }
   .question-answer{
     float: left;
-    font-size:13px;
+    font-size:0.346rem;
     color: #808080;
   }
   .question-answer i{

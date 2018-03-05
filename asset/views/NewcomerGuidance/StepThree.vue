@@ -159,8 +159,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -171,9 +171,9 @@
   /*邀请的头部*/
   .invitation-title{
     width:100%;
-    height:132px;
+    height:3.52rem;
     background: #f3f4f6;
-    padding: 0 17px;
+    padding: 0 0.453rem;
     text-align: center;
     position: relative;
     display: flex;
@@ -182,62 +182,62 @@
   }
   .invitation-title svg{
     color: #b4b4b6;
-    font-size: 25px;
+    font-size: 0.666rem;
     position: absolute;
-    left:17px;
-    top:20px;
+    left:0.453rem;
+    top:0.533rem;
   }
   .invitation-title .next-step{
-    width:75px;
-    height:34px;
-    line-height: 32px;
-    border: 1px solid #03aef9;
-    border-radius: 50px;
-    font-size:14px;
+    width:2rem;
+    height:0.906rem;
+    line-height: 0.853rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
+    font-size:0.373rem;
     color:#03aef9;
     position: absolute;
-    right:17px;
-    top:16px;
+    right:0.453rem;
+    top:0.426rem;
   }
   .invitation-title .invitation-text{
     position: absolute;
-    top:59px;
+    top:1.573rem;
     text-align: left;
     display: flex;
     flex-direction: column;
   }
   .invitation-text p:nth-of-type(1){
-    font-size:14px;
+    font-size:0.373rem;
     color: #808080;
   }
   .invitation-text p:nth-of-type(2){
-    font-size:20px;
+    font-size:0.533rem;
     color: #323232;
   }
   /*换一批&&一键邀请*/
   .invitation-recommend{
     width:100%;
-    height:44px;
-    border-bottom: 1px solid #dcdcdc;
+    height:1.173rem;
+    border-bottom: 0.026rem solid #dcdcdc;
     background: #FFFFFF;
     position: relative;
   }
   .invitation-recommend p{
     width:50%;
-    height:44px;
+    height:1.173rem;
     text-align: center;
-    font-size:14px;
+    font-size:0.373rem;
     color: #235280;
-    line-height: 44px;
+    line-height: 1.173rem;
     float: left;
   }
   .invitation-recommend p svg{
-    font-size: 20px;
-    margin-bottom: -2px;
+    font-size: 0.533rem;
+    margin-bottom: -0.053rem;
   }
   .invitation-recommend i{
-    width:1px;
-    height:19px;
+    width:0.026rem;
+    height:0.506rem;
     background: #dcdcdc;
     position: absolute;
     top:0;
@@ -256,33 +256,33 @@
     width:92%;
     margin-left: 4%;
     position: relative;
-    padding:12px 0 15px 0;
+    padding:0.32rem 0 0.4rem 0;
   }
   ul li p:nth-of-type(1){
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
-    line-height: 21px;
+    line-height: 0.56rem;
   }
   ul li p:nth-of-type(1) span{
     color: rgb(35,82,128);
-    margin-right: 6px;
+    margin-right: 0.16rem;
   }
   ul li p:nth-of-type(2){
-    font-size: 12px;
+    font-size: 0.32rem;
     color:#b4b4b6;
-    margin-top: 3px;
+    margin-top: 0.08rem;
   }
   ul li .focus{
-    width:62px;
+    width:1.653rem;
     height:27x;
     background: #03aef9;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #ffffff;
     text-align: center;
-    line-height: 25px;
-    border-radius: 50px;
+    line-height: 0.666rem;
+    border-radius: 1.333rem;
     position: absolute;
-    bottom: 9.5px;
+    bottom: 0.253rem;
     right: 4%;
   }
   ul li .grey{

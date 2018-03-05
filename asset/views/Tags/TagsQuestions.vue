@@ -5,12 +5,15 @@
       <h1 class="mui-title">标签详情</h1>
     </header>
     <div class="mui-content absolute">
-      <TagsInfo :tagName = tagName></TagsInfo>
+      <TagsInfo
+        :tagName = tagName
+        :type = type
+      ></TagsInfo>
     <!--导航栏-->
     <div class="menu">
       <span @tap.stop.prevent="">问答  <i></i></span>
-      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover')">分享</span>
-      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users')">用户</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/discover?from=tag')">分享</span>
+      <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users?from=tag')">用户</span>
       <i class="bot"></i>
     </div>
       <!--推荐问答 -->
@@ -21,7 +24,8 @@
         :prevOtherData="{tag_name:tagName}"
         :nextOtherData="{tag_name:tagName}"
         :pageMode = true
-        class="listWrapper">
+        class="listWrapper"
+      >
       <ul class="recommend_b">
         <template v-for="(item, index) in list">
           <li v-if="item.question_type === 1" @tap.stop.prevent="toDetail(item)">
@@ -86,13 +90,16 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
-
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
   export default {
     data () {
       return {
+        userId: currentUser.user_id,
         tagName: '',
         loading: 1,
-        list: []
+        list: [],
+        type: ''
       }
     },
     components: {
@@ -100,11 +107,18 @@
       TagsInfo
     },
     created () {
+      this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
       toDetail (item) {
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
@@ -150,7 +164,6 @@
 
 <style scoped>
   /*清掉自带样式*/
-
   div,
   p,
   span,
@@ -170,7 +183,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -182,9 +195,9 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:39px;
+    height:1.04rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -198,22 +211,20 @@
   }
   .menu span:nth-of-type(1) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 28px;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
   }
 
   /*问答列表*/
-  .listWrapper{
-  }
   .recommend_b {
     width: 100%;
-    /*height: 200px;*/
+    /*height: 5.333rem;*/
     overflow: hidden;
     background: #f3f4f6;
   }
@@ -223,129 +234,124 @@
     overflow: hidden;
     position: relative;
     background: #FFFFFF;
-    margin-bottom: 10px;
-    padding: 12px 0 15px 0;
+    margin-bottom: 0.266rem;
+    padding: 0.32rem 0 0.4rem 0;
   }
   .recommend_b li div{
     width:92%;
     margin-left: 4%;
   }
   .recommend_b li .description{
-    font-size:16px;
+    font-size:0.426rem;
     color:#444444;
   }
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    margin-top: 12px;
+    margin-top: 0.32rem;
     background:#f3f4f6;
-    padding: 13px 15px 15px;
-    border-radius: 4px;
+    padding: 0.346rem 0.4rem 0.4rem;
+    border-radius: 0.106rem;
   }
   /*.component-dianzanList*/
   .component-dianzanList span{
-    font-size:13px;
+    font-size:0.346rem;
     color:#03aef9;
   }
   .component-dianzanList svg{
-    font-size:17px;
+    font-size:0.453rem;
     color: #808080;
   }
   .avatar{
-    height:44px;
-    margin-top: 15px;
+    height:1.173rem;
+    margin-top: 0.4rem;
   }
   .avatar p:nth-of-type(1){
-    height:44px;
+    height:1.173rem;
     float: left;
     position: relative;
   }
   .avatar p:nth-of-type(1) img{
-    width:33px;
-    height:33px;
+    width:0.88rem;
+    height:0.88rem;
     border-radius: 50%;
-    margin-top: 5.5px;
+    margin-top: 0.146rem;
     float: left;
   }
   .avatar p:nth-of-type(1) svg{
     position: absolute;
-    font-size: 14px;
-    bottom: 5px;
-    right: -5px;
+    font-size: 0.373rem;
+    bottom: 0.133rem;
+    right: -0.133rem;
   }
   .avatar p:nth-of-type(2){
     width:88%;
-    height:44px;
+    height:1.173rem;
     float: right;
     background:#03aef9;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 44px;
-    font-size:16px;
+    line-height: 1.173rem;
+    font-size:0.426rem;
     color: #f2f2f2;
   }
   .question_info{
-    height:19px;
+    height:0.506rem;
     /*background: #cccccc;*/
-    margin-top: 12px;
-    line-height:19px;
+    margin-top: 0.32rem;
+    line-height:0.506rem;
   }
   .question_info p:nth-of-type(1){
     float: left;
-    font-size:13px;
+    font-size:0.346rem;
     color: #747474;
   }
   .question_info p:nth-of-type(1) i{
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.026rem;
+    height:0.32rem;
     background: #dbdbdb;
-    margin:0 9px -1px 9px;
+    margin:0 0.24rem -0.026rem 0.24rem;
   }
   .question_info p:nth-of-type(1) span:nth-of-type(1){
     color: #b4b4b6;
   }
   .question_info p:nth-of-type(2){
     float: right;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span{
     float: right;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1){
-    margin-left: 22px;
+    margin-left: 0.586rem;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(1) svg{
-    font-size: 18px;
+    font-size: 0.48rem;
     color: #808080;
   }
   .question_info p:nth-of-type(2) span:nth-of-type(2) svg{
-    font-size: 18px;
-    margin-bottom: -2px;
+    font-size: 0.48rem;
+    margin-bottom: -0.053rem;
   }
 
 
-
-
-  .listWrapper{
-    top:177px;
-  }
 
   .hudongWrapper .three {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    padding-top: 5px;
+    padding-top: 0.133rem;
     text-align: right;
   }
 
   .hudongWrapper .split {
     position: relative;
-    top: 3px;
-    margin: 0 10px;
+    top: 0.08rem;
+    margin: 0 0.266rem;
     display: inline-block;
-    width: 1px;
-    height: 13px;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
@@ -357,28 +363,35 @@
   /*回答者的样式*/
   .hudongWrapper .respondent{
     width:100%;
-    padding: 12px 15px;
+    padding: 0.32rem 0.4rem;
     background: #f3f4f6;
-    font-size:13px;
+    font-size:0.346rem;
     color:rgb(128,128,128);
-    border-radius: 4px;
-    margin-top: 12px;
+    border-radius: 0.106rem;
+    margin-top: 0.32rem;
   }
   .hudongWrapper .respondent span{
     color: #03aef9;
   }
   .hudongWrapper .respondent i{
     color:rgb(146,146,146);
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   .hudongWrapper .respondent span:nth-last-of-type(1) i{
     display: none;
   }
   .hudongWrapper .respondent i{
-    font-size:13px;
+    font-size:0.346rem;
     color:rgb(128,128,128);
     font-style: normal;
   }
 
+  .listWrapper{
+    top:4.584rem;
+  }
+
+  .hasFollowers .listWrapper{
+    top: 6.29rem;
+  }
 
 </style>

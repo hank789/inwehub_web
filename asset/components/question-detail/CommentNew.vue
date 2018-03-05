@@ -177,7 +177,7 @@
 
 <style scoped="scoped">
   .buttonWrapper {
-    padding: 15px;
+    padding: 0.4rem;
     background: #fff;
   }
 
@@ -188,66 +188,66 @@
   .form-realAnswer {
     position: relative;
     background: #fff;
-    padding: 20px 0;
+    padding: 0.533rem 0;
     text-align: center;
   }
 
   .commentHeader .shutdown {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 12px;
+    top: 0.133rem;
+    left: 0.133rem;
+    font-size: 0.32rem;
   }
 
   .form-realAnswer .star-rating {
     float: none;
     position: relative;
     left: 50%;
-    margin-top: 10px;
-    margin-left: -115px;
+    margin-top: 0.266rem;
+    margin-left: -3.066rem;
   }
 
   .starRating span {
-    margin: 0 5px;
+    margin: 0 0.133rem;
   }
 
   .form-realAnswer .submit {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 0.32rem;
+    padding: 0.133rem 0.266rem;
   }
 
   .form-realAnswer textarea {
-    margin-top: 20px;
+    margin-top: 0.533rem;
     width: 100%;
-    height: 138px;
+    height: 3.68rem;
     border: none;
-    padding: 10px 15px 0;
+    padding: 0.266rem 0.4rem 0;
   }
 
   .form-realAnswer .title {
-    margin-top: -10px;
-    font-size: 12px;
+    margin-top: -0.266rem;
+    font-size: 0.32rem;
     color: #ff9800;
-    height: 32px;
+    height: 0.853rem;
   }
 
   .form-realAnswer .button-wrapper {
-    margin-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
 
   .successWrapper {
     text-align: center;
-    padding: 20px 0;
+    padding: 0.533rem 0;
   }
 
   .successWrapper .mui-icon {
-    font-size: 90px;
+    font-size: 2.4rem;
     color: #19ac18;
   }
 
   .successWrapper .sTitle {
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   .mui-content > .mui-table-view:first-child {
@@ -256,8 +256,8 @@
 
   .commentHeader {
     background-color: #eee;
-    height: 41px;
-    line-height: 41px;
+    height: 1.093rem;
+    line-height: 1.093rem;
     text-align: center;
     position: relative;
   }
@@ -267,7 +267,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -275,7 +275,7 @@
   }
 
   .commentDesc {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #999;
   }
 

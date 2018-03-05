@@ -206,44 +206,44 @@
 
   .schedule {
     width: 25%;
-    height: 3px;
+    height: 0.08rem;
     background: #03aef9;
   }
 
   .basic {
-    height: 150px;
+    height: 4rem;
     position: relative;
     text-align: center;
   }
 
   .basic .title {
     position: relative;
-    top: 50px;
-    font-size: 20px;
+    top: 1.333rem;
+    font-size: 0.533rem;
     color: #444;
   }
 
   .basic .titleSub {
     position: relative;
-    top: 55px;
-    font-size: 14px;
+    top: 1.466rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .companyForm {
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .companyForm:before {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm:after {
-    left: 16px;
+    left: 0.426rem;
     background-color: #dcdcdc;
-    right: 16px;
+    right: 0.426rem;
   }
 
   .companyForm label {
@@ -255,18 +255,18 @@
   .companyForm input {
     width: 61% !important;
     text-align: right;
-    font-size: 14px;
+    font-size: 0.373rem;
     padding-right: 0;
 
   }
 
   .companyForm .mui-table-view-cell {
-    padding: 6px 15px;
+    padding: 0.16rem 0.4rem;
   }
 
   .companyForm .mui-table-view-cell:after {
-    left: 16px;
-    right: 16px;
+    left: 0.426rem;
+    right: 0.426rem;
     background-color: #dcdcdc;
     transform: scaleY(0.5);
 
@@ -275,13 +275,13 @@
   .companyForm .mui-table-view-cell .modify {
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 0.266rem;
     color: #c8c8c8;
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .companyForm .unit {
-    padding: 10px 0;
+    padding: 0.266rem 0;
     float: right;
   }
 
@@ -301,8 +301,8 @@
   }
 
   .companyForm .inputUnit {
-    padding: 10px;
-    margin-right: 15px;
+    padding: 0.266rem;
+    margin-right: 0.4rem;
   }
 
   .companyForm .textRight {
@@ -312,8 +312,8 @@
 
   .radioWrapper {
     display: inline-block;
-    padding: 11px 0 11px 25px;
-    margin-left: 18px;
+    padding: 0.293rem 0 0.293rem 0.666rem;
+    margin-left: 0.48rem;
   }
 
   .radioWrapper:first-child {
@@ -322,14 +322,14 @@
 
   .radioWrapper input[type='radio'] {
     left: 0;
-    top: 11px;
+    top: 0.293rem;
   }
 
   .radioWrapper input[type='radio']:before {
     position: absolute;
-    left: 0px;
+    left: 0rem;
     color: #c8c8c8;
-    font-size: 20px;
+    font-size: 0.533rem;
   }
 
   .radioWrapper input[type='radio']:checked:before {
@@ -341,19 +341,19 @@
   }
 
   .fileSelect {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     background: #fff;
-    padding: 11px 0;
+    padding: 0.293rem 0;
     position: relative;
   }
 
   .fileSelect .icon {
     position: absolute;
-    right: 1px;
+    right: 0.026rem;
     color: #03aef9;
-    top: 9px;
-    font-size: 22px;
+    top: 0.24rem;
+    font-size: 0.586rem;
   }
 
   .fileSelect .option {
@@ -361,28 +361,28 @@
   }
 
   .fileList {
-    padding: 0 15px 0 0;
+    padding: 0 0.4rem 0 0;
     background: #fff;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .fileList .item {
     position: relative;
-    line-height: 22px;
-    padding: 1px 0 10px 25px;
+    line-height: 0.586rem;
+    padding: 0.026rem 0 0.266rem 0.666rem;
     color: #808080;
   }
 
   .fileList .icon {
     position: absolute;
     left: 0;
-    top: 4px;
-    font-size: 16px;
+    top: 0.106rem;
+    font-size: 0.426rem;
     color: #c8c8c8;
   }
 
   .buttonWrapper {
-    padding: 14px 16px 30px;
+    padding: 0.373rem 0.426rem 0.8rem;
     background: #fff;
     text-align: right;
   }
@@ -390,47 +390,47 @@
   .buttonWrapper button {
     position: relative;
     display: inline-block;
-    width: 115px;
-    margin-top: 10px;
+    width: 3.066rem;
+    margin-top: 0.266rem;
     background: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
   }
 
   .buttonWrapper button .icon {
     color: #03aef9;
-    font-size: 26px;
+    font-size: 0.693rem;
     position: absolute;
-    top: 6px;
-    left: 21px;
-    margin-right: 5px;
+    top: 0.16rem;
+    left: 0.56rem;
+    margin-right: 0.133rem;
     vertical-align: top;
   }
 
   .buttonWrapper button.preview {
     background: #ececee;
-    border: 1px solid #ececee;
+    border: 0.026rem solid #ececee;
     color: #03aef9;
     opacity: 1;
     float: left;
   }
 
   .buttonWrapper button.preview span {
-    margin-left: 24px;
+    margin-left: 0.64rem;
   }
 
   .selected {
     display: inline-block;
     color: #03aef9;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
-    padding: 4px 10px 3px;
-    font-size: 14px;
-    margin: 7px 7px 0 0;
+    border: 0.026rem solid #03aef9;
+    border-radius: 0.133rem;
+    padding: 0.106rem 0.266rem 0.08rem;
+    font-size: 0.373rem;
+    margin: 0.186rem 0.186rem 0 0;
   }
 
   .selected .icon {
     color: #c8c8c8;
-    font-size: 11px;
-    margin-left: 7px;
+    font-size: 0.293rem;
+    margin-left: 0.186rem;
   }
 </style>

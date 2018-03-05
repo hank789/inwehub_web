@@ -196,7 +196,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -204,7 +204,7 @@
 
   .mui-wechat .menu[data-v-4f45c199] {
     width: 100%;
-    height: 45px;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -212,7 +212,7 @@
   }
 
   .mui-content.absolute .menu ~ #pullrefresh {
-    top: 45px;
+    top: 1.2rem;
   }
 
   .mui-content.absolute {
@@ -223,7 +223,7 @@
 
   .menu {
     width: 100%;
-    height: 45px;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -233,10 +233,10 @@
     display: inline-block;
     width: 49%;
     height: 100%;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     text-align: center;
-    line-height: 45px;
+    line-height: 1.2rem;
     font-weight: 600;
   }
 
@@ -248,10 +248,10 @@
   .menu i {
     display: block;
     position: absolute;
-    width: 30px;
-    height: 1.8px;
+    width: 0.8rem;
+    height: 0.048rem;
     left: 71%;
-    bottom: 0.5px;
+    bottom: 0.013rem;
     background: #03aef9;
   }
 
@@ -259,14 +259,14 @@
   ul {
     width: 100%;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 0.533rem;
     overflow: hidden;
 
   }
 
   /*ul li{
         width: 92%;
-        height: 227px;
+        height: 6.053rem;
         position: relative;
         left: 0;
         right: 0;
@@ -275,70 +275,70 @@
     }
     ul li img{
         width: 100%;
-        height: 143px;
-        margin-top: 15px;
+        height: 3.813rem;
+        margin-top: 0.4rem;
     }*/
   ul li p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
 
   ul li p:nth-of-type(2) {
     width: 100%;
-    height: 19px;
-    margin-top: 4px;
+    height: 0.506rem;
+    margin-top: 0.106rem;
   }
 
   ul li p:nth-of-type(2) span:nth-child(1) {
     display: block;
     color: #b4b4b6;
-    font-size: 12px;
-    line-height: 19px;
+    font-size: 0.32rem;
+    line-height: 0.506rem;
     float: left;
 
   }
 
   ul li p:nth-of-type(2) span.blue {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 2rem;
+    height: 0.506rem;
     float: right;
     background: #03aef9;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 0.373rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 0.506rem;
+    border-radius: 1.333rem;
+    padding: 0 0.213rem;
   }
 
   ul li p:nth-of-type(2) span.yellow {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 2rem;
+    height: 0.506rem;
     float: right;
     background: #fcc816;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 0.373rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 0.506rem;
+    border-radius: 1.333rem;
+    padding: 0 0.213rem;
   }
 
   ul li p:nth-of-type(2) span.gray {
     display: block;
-    width: 75px;
-    height: 19px;
+    width: 2rem;
+    height: 0.506rem;
     float: right;
     background: #b4b4b6;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 0.373rem;
     text-align: center;
-    line-height: 19px;
-    border-radius: 50px;
-    padding: 0 8px;
+    line-height: 0.506rem;
+    border-radius: 1.333rem;
+    padding: 0 0.213rem;
   }
 
   /*无数据的样式 */
@@ -350,13 +350,13 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 
@@ -365,7 +365,7 @@
   @media screen and (min-width: 320px) {
     ul li {
       width: 92%;
-      height: 217px;
+      height: 5.786rem;
       position: relative;
       left: 0;
       right: 0;
@@ -374,16 +374,16 @@
 
     ul li img {
       width: 100%;
-      height: 133px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 3.546rem;
+      margin-top: 0.4rem;
+      border-radius: 0.106rem;
     }
   }
 
   @media screen and (min-width: 375px) {
     ul li {
       width: 92%;
-      height: 227px;
+      height: 6.053rem;
       position: relative;
       left: 0;
       right: 0;
@@ -392,16 +392,16 @@
 
     ul li img {
       width: 100%;
-      height: 145px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 3.866rem;
+      margin-top: 0.4rem;
+      border-radius: 0.106rem;
     }
   }
 
   @media screen and (min-width: 414px) {
     ul li {
       width: 92%;
-      height: 256px;
+      height: 6.826rem;
       position: relative;
       left: 0;
       right: 0;
@@ -410,9 +410,9 @@
 
     ul li img {
       width: 100%;
-      height: 172px;
-      margin-top: 15px;
-      border-radius: 4px;
+      height: 4.586rem;
+      margin-top: 0.4rem;
+      border-radius: 0.106rem;
     }
   }
 

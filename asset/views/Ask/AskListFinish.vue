@@ -274,17 +274,17 @@
 
 <style scoped>
   .list-ask {
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
 
   .mui-bar-nav ~ .menu {
-    margin-top: 44px;
+    margin-top: 1.173rem;
     position: relative;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 16px;
+    line-height: 1.333rem;
+    font-size: 0.426rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -294,12 +294,12 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 50px;
-    right: 10px;
+    width: 1.333rem;
+    right: 0.266rem;
     bottom: 0;
     left: 50%;
-    margin-left: -25px;
-    height: 5px;
+    margin-left: -0.666rem;
+    height: 0.133rem;
     z-index: 999;
     content: '';
     -webkit-transform: scaleY(.5);
@@ -313,26 +313,26 @@
 
   .list-ask .list-ask-item {
     position: relative;
-    line-height: 40px;
+    line-height: 1.066rem;
   }
 
   .list-ask .list-ask-item .title {
-    line-height: 28px;
+    line-height: 0.746rem;
   }
 
   .list-ask .list-ask-item .mui-media-body {
-    padding-left: 10px;
-    line-height: 24px;
-    margin: 5px 0 0;
+    padding-left: 0.266rem;
+    line-height: 0.64rem;
+    margin: 0.133rem 0 0;
     color: #9B9B9B;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .list-ask .list-ask-item .time {
     color: #9B9B9B;
-    font-size: 12px;
+    font-size: 0.32rem;
     float: right;
-    margin-right: 10px;
+    margin-right: 0.266rem;
   }
 
   .list-ask .username {
@@ -341,9 +341,9 @@
 
   .list-ask .list-ask-item .amount {
     position: absolute;
-    right: 10px;
+    right: 0.266rem;
     color: #ff9800;
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   .list-ask .list-ask-item .amount b {
@@ -355,13 +355,13 @@
   }
 
   .list-ask .site-desc {
-    padding-left: 10px;
-    line-height: 22px;
+    padding-left: 0.266rem;
+    line-height: 0.586rem;
     color: #101010;
   }
 
   .list-ask .site-desc .mui-icon {
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   .list-ask .avatar {
@@ -369,10 +369,10 @@
     color: #ffffff;
     float: left;
     display: inline-block;
-    margin-top: 3px;
-    height: 50px;
-    width: 50px;
-    font-size: 20px;
+    margin-top: 0.08rem;
+    height: 1.333rem;
+    width: 1.333rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -402,28 +402,28 @@
   }
 
   .list-ask .mui-table-view-cell {
-    padding: 11px 8px;
+    padding: 0.293rem 0.213rem;
   }
 
   .list-ask .mui-table-view-cell > a:not(.mui-btn) {
-    margin: -11px -8px;
+    margin: -0.293rem -0.213rem;
   }
 
   .list-ask p {
-    margin-left: 20px;
+    margin-left: 0.533rem;
   }
 
   .buttons {
-    margin-top: 10px;
-    padding: 0 30px;
+    margin-top: 0.266rem;
+    padding: 0 0.8rem;
   }
 
   .mui-control-content {
     position: absolute;
     width: 100%;
-    bottom: 0px;
-    right: 0px;
-    top: 88px;
+    bottom: 0rem;
+    right: 0rem;
+    top: 2.346rem;
   }
 
   .mui-segmented-control {
@@ -436,12 +436,12 @@
   }
 
   .list-empty .menu {
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 50px;
-    font-size: 14px;
+    line-height: 1.333rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -452,11 +452,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 28px;
+    width: 0.746rem;
     bottom: 0;
     left: 50%;
-    margin-left: -14px;
-    height: 2px;
+    margin-left: -0.373rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -476,21 +476,21 @@
 
   .mui-table-view:after {
     border: none;
-    left: 18px;
-    right: 18px;
+    left: 0.48rem;
+    right: 0.48rem;
   }
 
   .label {
     display: inline-block;
     background: #fcc816;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     color: #fff;
-    line-height: 20px;
-    padding: 0 9px;
+    line-height: 0.533rem;
+    padding: 0 0.24rem;
   }
 
   .list-empty .menu {
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
 
   .label.label_7 {

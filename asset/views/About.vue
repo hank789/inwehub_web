@@ -40,6 +40,6 @@
 <style scoped>
   .mui-content {
     background: #fff;
-    padding-bottom: 15px;
+    padding-bottom: 0.4rem;
   }
 </style>

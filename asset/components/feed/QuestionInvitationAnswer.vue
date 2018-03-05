@@ -106,60 +106,60 @@
 <style>
   .freeQuestion-container{
     width:100%;
-    height:42px;
-    padding-top:10px;
-    line-height: 30px;
+    height:1.12rem;
+    padding-top:0.266rem;
+    line-height: 0.8rem;
   }
   .freeQuestion-fouce{
     float: left;
-    width: 76px;
-    height:31px;
-    border:1px solid #9e9e9e;
-    border-radius: 50px;
+    width: 2.026rem;
+    height:0.826rem;
+    border:0.026rem solid #9e9e9e;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 30px;
-    font-size:12px;
+    line-height: 0.8rem;
+    font-size:0.32rem;
     color: #9e9e9e;
   }
   .freeQuestion-fouce.blue{
-    border:1px solid #03aef9;
+    border:0.026rem solid #03aef9;
     color: #03aef9;
   }
   .freeQuestion-allAnswer{
     float: left;
-    width: 76px;
-    height:31px;
-    border:1px solid #9e9e9e;
-    border-radius: 50px;
+    width: 2.026rem;
+    height:0.826rem;
+    border:0.026rem solid #9e9e9e;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 30px;
-    font-size:12px;
+    line-height: 0.8rem;
+    font-size:0.32rem;
     color: #FFFFFF;
     background: #9e9e9e;
-    margin-left: 8px;
+    margin-left: 0.213rem;
   }
   .freeQuestion-allAnswer.bg-blue{
-    border:1px solid #03aef9;
+    border:0.026rem solid #03aef9;
     background: #03aef9;
   }
   .freeQuestion-upvote{
     float: right;
     color: #808080;
-    font-size:13px;
-    margin-top: 3px;
+    font-size:0.346rem;
+    margin-top: 0.08rem;
   }
   .freeQuestion-upvote svg{
-    font-size:19px;
+    font-size:0.506rem;
   }
   .freeQuestion-comment{
     float: right;
-    margin-right: 30px;
+    margin-right: 0.8rem;
     color: #808080;
-    font-size:13px;
-    margin-top: 3px;
+    font-size:0.346rem;
+    margin-top: 0.08rem;
   }
   .freeQuestion-comment svg{
-    font-size:19px;
+    font-size:0.506rem;
   }
 </style>
 

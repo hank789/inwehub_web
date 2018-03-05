@@ -15,12 +15,12 @@
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
     </div>
-    <div class="text-14-444 ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
+    <div class="text-14-444 font ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
     <div class="freeQuestion-container comment-container ">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
@@ -96,15 +96,18 @@
   }
 </script>
 <style scoped>
+  .font{
+    font-size: 0.426rem;
+  }
   /*回答者详情*/
 .comment-container{
-  height:19px;
-  line-height: 19px;
-  padding: 0 0px;
+  height:0.506rem;
+  line-height: 0.506rem;
+  padding: 0 0rem;
 }
 .question-answer{
   float: left;
-  font-size:13px;
+  font-size:0.346rem;
   color: #808080;
 }
 .question-answer i{
@@ -113,11 +116,11 @@
   }
 /*回答者的内容*/
 .answer-content{
-  font-size:16px;
+  font-size:0.426rem;
   color: #444444;
-  line-height: 21px;
-  margin-bottom: 14px;
-  margin-top: 3px;
+  line-height: 0.56rem;
+  margin-bottom: 0.373rem;
+  margin-top: 0.08rem;
 }
 
 

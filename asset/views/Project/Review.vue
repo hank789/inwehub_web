@@ -279,7 +279,7 @@
 <style scoped>
   .projectPreviewCard {
     background: #b4b4b6;
-    height: 196.5px;
+    height: 5.24rem;
     text-align: center;
     color: #fff;
   }
@@ -288,27 +288,27 @@
     position: absolute;
     z-index: 777;
     color: #fff;
-    font-size: 30px;
-    top: 12px;
-    left: 6px;
+    font-size: 0.8rem;
+    top: 0.32rem;
+    left: 0.16rem;
   }
 
   .projectPreviewCard .header {
     position: relative;
-    height: 92px;
+    height: 2.453rem;
   }
 
   .projectPreviewCard .header .avatar {
     position: absolute;
     left: 50%;
-    margin-top: 13px;
-    margin-left: -36.5px;
+    margin-top: 0.346rem;
+    margin-left: -0.973rem;
     z-index: 9;
     color: #ffffff;
     display: inline-block;
-    height: 73.5px;
-    width: 73.5px;
-    font-size: 20px;
+    height: 1.96rem;
+    width: 1.96rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
     vertical-align: top;
@@ -339,39 +339,39 @@
   }
 
   .projectPreviewCard .title {
-    margin-top: 20px;
-    font-size: 17px;
+    margin-top: 0.533rem;
+    font-size: 0.453rem;
   }
 
   .projectPreviewCard .titleSub {
-    font-size: 14px;
-    margin: 3px 0;
+    font-size: 0.373rem;
+    margin: 0.08rem 0;
   }
 
   .projectPreviewCard .state {
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .projectPreviewCard i.separate {
     display: inline-block;
     position: relative;
-    top: 2px;
-    height: 14px;
-    margin: 0 8px;
-    border-left: 1px solid #c8c8c8;
+    top: 0.053rem;
+    height: 0.373rem;
+    margin: 0 0.213rem;
+    border-left: 0.026rem solid #c8c8c8;
   }
 
   .section {
     background: #fff;
-    margin-top: 10px;
-    padding: 0 16px 9px;
+    margin-top: 0.266rem;
+    padding: 0 0.426rem 0.24rem;
   }
 
   .section h5 {
     position: relative;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444;
-    padding: 19px 0;
+    padding: 0.506rem 0;
   }
 
   .section h5:after {
@@ -379,7 +379,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -387,72 +387,72 @@
   }
 
   .section .contentWrapper {
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 
   .section .contentWrapper .toggle {
     position: relative;
-    font-size: 13px;
-    height: 8px;
+    font-size: 0.346rem;
+    height: 0.213rem;
   }
 
   .section .contentWrapper .toggle.show:after {
     border: none;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid #d8d8d8;
+    border-left: 0.16rem solid transparent;
+    border-right: 0.16rem solid transparent;
+    border-top: 0.266rem solid #d8d8d8;
   }
 
   .section .contentWrapper .toggle:after {
     position: absolute;
     right: 0;
-    top: -6px;
+    top: -0.16rem;
     width: 0;
     height: 0;
     content: '';
     border: none;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 10px solid #d8d8d8;
+    border-left: 0.16rem solid transparent;
+    border-right: 0.16rem solid transparent;
+    border-bottom: 0.266rem solid #d8d8d8;
   }
 
   .section .contentWrapper .nav {
-    margin: 20px 0 14px;
+    margin: 0.533rem 0 0.373rem;
     background: #f3f4f6;
     text-align: center;
   }
 
   .section .contentWrapper .nav .navWrapper {
-    height: 90px;
+    height: 2.4rem;
     position: relative;
     background: #f3f4f6;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   .section .contentWrapper .nav .navWrapper .line {
     position: absolute;
     left: 50%;
-    top: 10px;
-    bottom: 10px;
-    width: 1px;
+    top: 0.266rem;
+    bottom: 0.266rem;
+    width: 0.026rem;
     background: #dcdcdc;
   }
 
   .section .contentWrapper .nav .row1 {
-    margin-top: 25px;
+    margin-top: 0.666rem;
     color: #444;
-    font-size: 20px;
+    font-size: 0.533rem;
   }
 
   .section .contentWrapper .nav .row2 {
-    margin-top: 5px;
+    margin-top: 0.133rem;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .section .contentWrapper .nav .row2 span {
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .section .contentWrapper table {
@@ -460,41 +460,41 @@
   }
 
   .section .contentWrapper table td {
-    padding: 5px 0;
+    padding: 0.133rem 0;
     vertical-align: top;
   }
 
   .section .contentWrapper table .tdTitle {
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .section .contentWrapper table .tdContent {
     text-align: left;
     color: #444;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .section .contentWrapper .selectedWrapper .selected {
     display: inline-block;
     color: #03aef9;
-    border: 1px solid #03aef9;
-    border-radius: 5px;
-    padding: 4px 10px 3px;
-    font-size: 14px;
-    margin: 5px 14px 0 0;
+    border: 0.026rem solid #03aef9;
+    border-radius: 0.133rem;
+    padding: 0.106rem 0.266rem 0.08rem;
+    font-size: 0.373rem;
+    margin: 0.133rem 0.373rem 0 0;
   }
 
   .section .contentWrapper .description {
     color: #444;
-    font-size: 14px;
-    line-height: 24px;
-    margin-top: 15px;
+    font-size: 0.373rem;
+    line-height: 0.64rem;
+    margin-top: 0.4rem;
   }
 
   .section .contentWrapper .requirement {
-    margin-top: 20px;
-    font-size: 14px;
+    margin-top: 0.533rem;
+    font-size: 0.373rem;
     color: #444;
   }
 
@@ -505,67 +505,67 @@
   }
 
   .section .contentWrapper .requirement .icon.one {
-    font-size: 25px;
+    font-size: 0.666rem;
     position: relative;
     top: 0;
   }
 
   .section .contentWrapper .requirement .icon.two {
-    font-size: 18px;
-    margin-left: 15px;
+    font-size: 0.48rem;
+    margin-left: 0.4rem;
   }
 
   .section .contentWrapper .item {
     position: relative;
-    padding-left: 70px;
-    margin: 10px 0;
+    padding-left: 1.866rem;
+    margin: 0.266rem 0;
   }
 
   .section .contentWrapper .item .title {
     color: #808080;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 0.373rem;
+    line-height: 0.64rem;
     position: absolute;
     left: 0;
   }
 
   .section .contentWrapper .item .content {
-    font-size: 13px;
-    line-height: 24px;
+    font-size: 0.346rem;
+    line-height: 0.64rem;
     color: #444;
   }
 
   .section .contentWrapper .item .content-5 {
-    padding-left: 12px;
+    padding-left: 0.32rem;
   }
 
   .section .contentWrapper .item .li {
     position: relative;
-    padding-left: 11px;
-    margin-bottom: 8px;
+    padding-left: 0.293rem;
+    margin-bottom: 0.213rem;
   }
 
   .section .contentWrapper .item .li:before {
     position: absolute;
-    left: -4px;
-    top: 10px;
+    left: -0.106rem;
+    top: 0.266rem;
     background: #03aef9;
     content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
+    width: 0.16rem;
+    height: 0.16rem;
+    border-radius: 0.08rem;
   }
 
   .section .contentWrapper .files {
-    padding-top: 5px;
+    padding-top: 0.133rem;
   }
 
   .section .contentWrapper .files img {
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    width: 58px;
-    height: 58px;
-    margin-right: 15px;
+    border: 0.026rem solid #e5e5e5;
+    border-radius: 0.106rem;
+    width: 1.546rem;
+    height: 1.546rem;
+    margin-right: 0.4rem;
   }
 
   .section .contentWrapper .requirement .icon:first-child {

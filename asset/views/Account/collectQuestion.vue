@@ -76,7 +76,7 @@
 <style scoped="scoped">
   .mui-wechat .menu {
     width: 100%;
-    height: 45px;
+    height: 1.2rem;
     position: absolute;
     z-index: 10;
     background: #f3f4f6;
@@ -90,8 +90,8 @@
   /*导航栏的样式*/
   .menu{
     width:100%;
-    height:39px;
-    font-size:14px;
+    height:1.04rem;
+    font-size:0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -105,11 +105,11 @@
   }
   .menu span:nth-of-type(2) i{
     position:absolute;
-    width:27px;
-    height:1.5px;
-    border-radius: 50px;
+    width:0.72rem;
+    height:0.04rem;
+    border-radius: 1.333rem;
     background:#03aef9;
-    top: 28px;
+    top: 0.746rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -117,10 +117,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -153,47 +153,47 @@
   .answer li {
     width: 100%;
     overflow: hidden;
-    padding: 15px 0 13px 0;
+    padding: 0.4rem 0 0.346rem 0;
     position: relative;
   }
 
   .answer li div {
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
   }
 
   .answer li p:nth-of-type(1) {
-    font-size: 15px;
+    font-size: 0.4rem;
     color: #444444;
 
   }
 
   .answer li p:nth-of-type(2) {
-    margin-top: 6px;
+    margin-top: 0.16rem;
 
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(1) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
   .answer li p:nth-of-type(2) span:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #03aef9;
 
   }
 
   .answer li p:nth-of-type(2) a {
     display: inline-block;
-    width: 1px;
-    height: 12px;
+    width: 0.026rem;
+    height: 0.32rem;
     background: #DCDCDC;
-    margin: 0 9px -2px 7px;
+    margin: 0 0.24rem -0.053rem 0.186rem;
 
   }
 
   /*listWrapper*/
   .listWrapper {
-    top: 45px;
+    top: 1.2rem;
   }
 </style>

@@ -93,7 +93,7 @@
           src: path,
           dst: '_doc/image_compressed_' + index + '.jpg',
           overwrite: true,
-          // width: '1024px',
+          // width: '27.306rem',
           quality: 100},
           function (event) {
             var newurl = window.plus.io.convertLocalFileSystemURL(event.target)
@@ -152,39 +152,39 @@
 <style scoped="scoped">
   .info-choose {
     width: 100%;
-    height: 95px;
+    height: 2.533rem;
     background: #fff !important;
     position: absolute;
     bottom: 0;
-    padding-top: 13px;
-    padding-left: 39px;
+    padding-top: 0.346rem;
+    padding-left: 1.04rem;
     z-index: 999;
     display: none;
 
   }
 
   .info-choose p {
-    width: 45px;
-    height: 71px;
+    width: 1.2rem;
+    height: 1.893rem;
     float: left;
 
   }
 
   .info-choose p:nth-of-type(2) {
-    margin-left: 36px;
+    margin-left: 0.96rem;
   }
 
   .info-choose p svg {
-    font-size: 48px;
+    font-size: 1.28rem;
     color: rgb(220, 220, 220);
   }
 
   .info-choose p span {
     display: block;
-    margin-left: 10px;
-    margin-top: 2px;
+    margin-left: 0.266rem;
+    margin-top: 0.053rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 0.346rem;
 
   }
 </style>

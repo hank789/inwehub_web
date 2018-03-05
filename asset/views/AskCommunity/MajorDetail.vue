@@ -5,7 +5,7 @@
       <h1 class="mui-title">专业问答</h1>
     </header>
 
-    <div id="majorDetail" class="mui-content absolute" v-show="!loading">
+    <div id="majorDetail" class="mui-content absolute">
       <div>
         <div class="question_tags"  v-if="ask.question.tags.length">
           <p v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</p>
@@ -47,10 +47,11 @@
 
 
         <div class="mui-table-view detail-answer" v-show="ask.question.status!=6&&ask.question.status!=7">
-          <div class="mui-table-view-cell">
-            暂无回答
-
-
+          <div class="mui-table-view-cell major_answer" >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
+            </svg>
+            <p>暂无回答</p>
           </div>
         </div>
 
@@ -347,10 +348,10 @@
   }
   .bot {
     position: absolute;
-    right:15px;
-    top: 0px;
-    left:15px;
-    height: 1px;
+    right:0.4rem;
+    top: 0rem;
+    left:0.4rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -364,17 +365,17 @@
   }
 
   .help {
-    font-size: 14px;
+    font-size: 0.373rem;
     background: #fff;
   }
 
   .help .title {
-    padding: 15px 15px 10px;
+    padding: 0.4rem 0.4rem 0.266rem;
     color: #444;
   }
 
   .help .body {
-    padding: 0 15px;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -383,14 +384,14 @@
   }
 
   .buttonWrapper {
-    padding: 5px 15px 15px 15px;
+    padding: 0.133rem 0.4rem 0.4rem 0.4rem;
     background: #fff;
   }
 
   .buttonWrapper button {
-    border-radius: 50px;
+    border-radius: 1.333rem;
     margin-bottom: 0;
-    padding: 13px 0;
+    padding: 0.346rem 0;
   }
   .iNeedAskWrapper{
     padding:0;
@@ -403,70 +404,96 @@
   .question_tags{
     width:100%;
     overflow: hidden;
-    padding: 0  16px 8px 7px;
+    padding: 0  0.426rem 0.213rem 0.186rem;
   }
   .question_tags p{
     float: left;
      background: #a8dff7;
     color:#FFFFFF;
-    padding: 0px 8px;
-    border-radius:50px;
-    margin-top: 9px;
-    margin-left: 9px;
-    font-size:12px;
+    padding: 0rem 0.213rem;
+    border-radius:1.333rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
+    font-size:0.32rem;
   }
   /*返回问答社区*/
 .back{
   width:100%;
-  height:62px;
+  height:1.653rem;
   text-align: center;
-  line-height: 62px;
+  line-height: 1.653rem;
   background: url("../../statics/images/Community.png") no-repeat;
   background-size: cover;
-  margin-top: 10px;
+  margin-top: 0.266rem;
 }
 .back span:nth-of-type(1){
-  font-size:15px;
+  font-size:0.4rem;
   color:#444444;
-  line-height: 62px;
+  line-height: 1.653rem;
 }
 .back span:nth-of-type(2){
-  font-size:12px;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 62px;
+  line-height: 1.653rem;
 }
 .back svg:nth-of-type(1){
-  font-size:12px;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 62px;
+  line-height: 1.653rem;
 }
 .back svg:nth-of-type(2){
-  font-size:12px;
+  font-size:0.32rem;
   color:#808080;
-  line-height: 62px;
-  margin-left: -10px;
+  line-height: 1.653rem;
+  margin-left: -0.266rem;
   }
-  /*answer*/
-  .detail-answer[data-v-852fb68e] {
-    margin-bottom: 0px;
+  /*暂无回答*/
+  .detail-answer {
+    margin-bottom: 0rem;
+    width:100%;
+    position: relative;
+  }
+  .major_answer{
+    height:3.32rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.64rem;
+    color: #c8c8c8;
+  }
+  .major_answer svg{
+    font-size: 1.33rem
+  }
+  .mui-table-view:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+     height: 0rem;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
   }
   /*查看回答*/
   .see{
     width:100%;
-    height:40px;
-    padding: 0 15px;
-    font-size:14px;
+    height:1.066rem;
+    padding: 0 0.4rem;
+    font-size:0.373rem;
     color:#03aef9;
     text-align: center;
-    line-height: 40px;
+    line-height: 1.066rem;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
     position: relative;
   }
   .btn{
-    margin-top: -15px;
+    margin-top: -0.4rem;
   }
   .star{
-    margin-top: -15px;
+    margin-top: -0.4rem;
   }
+
 </style>

@@ -16,12 +16,12 @@
           <use xlink:href="#icon-gengduo"></use>
         </svg>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-3">{{data.feed.content}}</div>
+    <div class="text-16-444 text-line-3 textToLink" v-html="textToLink(data.feed.content)"></div>
 
 
     <div class="container-answer margin-10-0-0"  @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
@@ -47,6 +47,7 @@
   import Avatar from '../../components/image/Avatar.vue'
   import Invitation from '../../components/feed/QuestionInvitationAnswer.vue'
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -70,6 +71,9 @@
     mounted () {
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       // 时间处理；
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)

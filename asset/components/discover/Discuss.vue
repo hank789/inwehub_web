@@ -42,7 +42,7 @@
 
               <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
 
-              <i class="bot" v-show="list.length-1 !== index"></i>
+              <!--<i class="bot" v-show="list.length-1 !== index"></i>-->
             </li>
           </ul>
         </div>
@@ -344,8 +344,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -355,29 +355,29 @@
     width: 100%;
     background: #FFFFFF;
     overflow: hidden;
-    padding: 0 15px 15px 15px;
+    padding: 0 0.4rem 0.4rem 0.4rem;
   }
 
   .message_title {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     position: relative;
-    line-height: 44px;
+    line-height: 1.173rem;
 
   }
 
   .message_title p {
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
 
   }
 
   .message_title svg {
     float: right;
-    font-size: 19px;
+    font-size: 0.506rem;
     color: #03aef9;
-    margin-top: 12px;
+    margin-top: 0.32rem;
   }
 
   .message_detail {
@@ -389,56 +389,58 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 12px 0 12px 0;
+    padding: 0.32rem 0 0.32rem 0;
+    border-bottom: 0.026rem solid #dcdcdc;
   }
   .message_detail li:nth-last-of-type(1){
-    padding: 12px 0 0 0;
+    padding: 0.32rem 0 0 0;
+    border-bottom: none;
   }
 
   .message_b {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
-    margin-top: 7px;
+    margin-top: 0.186rem;
   }
 
   .message_t {
     width: 100%;
-    height: 32px;
+    height: 0.853rem;
   }
 
   .message_t p:nth-child(1) {
-    width: 32px;
-    height: 32px;
+    width: 0.853rem;
+    height: 0.853rem;
     float: left;
     position: relative;
   }
 
   .message_t p:nth-child(1) img {
-    width: 32px;
-    height: 32px;
+    width: 0.853rem;
+    height: 0.853rem;
     border-radius: 50%;
   }
 
   .message_t p:nth-child(1) svg {
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #03aef9;
     position: absolute;
     bottom: 0;
-    right: -5px;
+    right: -0.133rem;
   }
 
   .message_t p:nth-child(2) {
     float: left;
-    margin-left: 10px;
-    height: 32px;
-    line-height: 32px;
+    margin-left: 0.266rem;
+    height: 0.853rem;
+    line-height: 0.853rem;
   }
 
   .message_t p:nth-child(3) {
     float: right;
     height:100%;
-    line-height: 32px;
-    font-size: 13px;
+    line-height: 0.853rem;
+    font-size: 0.346rem;
     color: #c8c8c8;
   }
 
@@ -455,27 +457,27 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    min-height: 45px;
+    min-height: 1.2rem;
     overflow: hidden;
-    padding: 5px 15px;
+    padding: 0.133rem 0.4rem;
     z-index: 77;
   }
 
   .commentWrapper .textareaWrapper {
     position: relative;
     background: #fff;
-    border-radius: 5px;
-    min-height: 35px;
+    border-radius: 0.133rem;
+    min-height: 0.933rem;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 20px;
-    margin: 6px 0 0;
-    padding: 0 31px 0 5px;
-    font-size: 14px;
+    height: 0.533rem;
+    margin: 0.16rem 0 0;
+    padding: 0 0.826rem 0 0.133rem;
+    font-size: 0.373rem;
 
   }
 
@@ -485,10 +487,10 @@
 
   .commentWrapper .icon {
     position: absolute;
-    right: 5px;
+    right: 0.133rem;
     color: #03aef9;
-    font-size: 26px;
-    bottom: 5px;
+    font-size: 0.693rem;
+    bottom: 0.133rem;
   }
 
   .empty {
@@ -498,32 +500,32 @@
   .empty {
     width: 100%;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
     text-align: center;
-    padding: 20px 0;
+    padding: 0.533rem 0;
   }
 
   .empty .icon {
-    font-size: 50px;
+    font-size: 1.333rem;
   }
 
   .empty p {
     width: 100%;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
     text-align: center;
   }
 
   .component-comment-reply{
-    margin-top:5px;
+    margin-top:0.133rem;
   }
 
   .moreReply{
-    margin-top:5px;
+    margin-top:0.133rem;
   }
 
   #sheet_comment_del li {
     color:#4990E2 !important;
-    padding:13px 15px;
+    padding:0.346rem 0.4rem;
   }
 </style>

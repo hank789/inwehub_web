@@ -212,8 +212,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -223,29 +223,29 @@
 
   .indexHeader {
     background-color: #f3f4f6;
-    padding: 10px 15px;
+    padding: 0.266rem 0.4rem;
     .searchWrapper {
       svg{
         position: absolute;
-        left: 25px;
-        top: 20px;
+        left: 0.666rem;
+        top: 0.533rem;
         color: #c8c8c8;
       }
       input {
-        height: 35px;
-        font-size: 14px;
-        border-radius: 50px;
+        height: 0.933rem;
+        font-size: 0.373rem;
+        border-radius: 1.333rem;
         background: #fff;
-        border: 1px solid #dcdcdc;
-        margin-bottom: 5px;
-        padding-left: 30px;
+        border: 0.026rem solid #dcdcdc;
+        margin-bottom: 0.133rem;
+        padding-left: 0.8rem;
         &::placeholder {
           color: #c8c8c8;
         }
       }
     }
     .notFound {
-      font-size: 13px;
+      font-size: 0.346rem;
       color: #808080;
       span {
         color: #03aef9;
@@ -255,10 +255,10 @@
 
   .indexTitle {
     background: #ececee;
-    font-size: 13px;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 15px;
+    font-size: 0.346rem;
+    height: 0.666rem;
+    line-height: 0.666rem;
+    padding: 0 0.4rem;
     color: #808080;
   }
 
@@ -272,17 +272,17 @@
   .selectUser{
     float: right;
     position: relative;
-    right: 5px;
-    width: 23px;
-    height: 50px;
+    right: 0.133rem;
+    width: 0.613rem;
+    height: 1.333rem;
   }
   .select{
-    width:23px;
-    height:23px;
+    width:0.613rem;
+    height:0.613rem;
     border-radius: 50%;
     background: #FFFFFF;
     color: #03aef9;
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     position: absolute;
     top:0;
     left:0;
@@ -292,12 +292,12 @@
   }
   .select.active{
     background:#FFFFFF;
-    border: 1px solid #FFFFFF;
+    border: 0.026rem solid #FFFFFF;
 
 
   }
   .select.active svg{
-    font-size:23px;
+    font-size:0.613rem;
     position: absolute;
     color:#03aef9;
     top:0;
@@ -309,33 +309,33 @@
   /*搜索有确定按钮的*/
   .searchContainer{
     width:100%;
-    height:35px;
+    height:0.933rem;
     background:#f3f4f6;
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    margin-bottom: 5px;
+    margin-bottom: 0.133rem;
   }
   .searchContainer p:nth-of-type(1){
     width: 80%;
-    height:34px;
+    height:0.906rem;
     background: #FFFFFF;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     /*justify-content:space-between;*/
     align-items:center;
-    padding:0 12px;
+    padding:0 0.32rem;
   }
   .searchContainer p:nth-of-type(2){
     width:17%;
-    height:34px;
+    height:0.906rem;
     background:#03aef9;
-    border-radius:50px;
+    border-radius:1.333rem;
     text-align: center;
-    line-height: 34px;
-    font-size:14px;
+    line-height: 0.906rem;
+    font-size:0.373rem;
     color: #FFFFFF;
   }
   .searchContainer input{
@@ -345,18 +345,18 @@
     border:none;
     padding: 0;
     padding-left: 0;
-    font-size:14px;
+    font-size:0.373rem;
     color:#444444;
     float: left;
-    margin-left: 10px;
+    margin-left: 0.266rem;
   }
   .searchContainer p svg{
     color:#c8c8c8;
-    font-size: 17px;
+    font-size: 0.453rem;
   }
   .searchContainer span{
-    width:18px;
-    height:18px;
+    width:0.48rem;
+    height:0.48rem;
     background: #c8c8c8;
     border-radius: 50%;
     position: relative;
@@ -373,6 +373,6 @@
   }
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 </style>

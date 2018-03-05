@@ -33,6 +33,7 @@
   import { NOTICE } from '../../stores/types'
   import { postRequest } from '../../utils/request'
   import dPickerComponent from '../../components/picker/date-picker.vue'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   const SelectTime = {
     data: () => ({
@@ -172,7 +173,8 @@
       }
     },
     components: {
-      dPickerComponent
+      dPickerComponent,
+      popPickerComponent
     }
   }
   export default SelectTime
@@ -182,6 +184,6 @@
 <style scoped>
 
   .wait-answer .title {
-    margin-bottom: 15px;
+    margin-bottom: 0.4rem;
   }
 </style>

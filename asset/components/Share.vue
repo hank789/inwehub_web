@@ -7,13 +7,26 @@
     </a>
 
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
-      <div class="title">分享到</div>
+      <div class="title">
+        <span  @tap.stop.prevent="cancelShare()">取消</span>
+        分享到
+      </div>
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
+          <p>微信好友</p>
         </div>
         <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
+          <p>朋友圈</p>
+        </div>
+        <div class="single" @tap.stop.prevent="shareToChat()">
+          <img src="../statics/images/sendFriend@2x.png"/>
+          <p>私信好友</p>
+        </div>
+        <div class="single" @tap.stop.prevent="shareToCopyLink()">
+          <img src="../statics/images/copyLink@3x.png"/>
+          <p>复制链接</p>
         </div>
         <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
@@ -51,9 +64,11 @@
 <script type="text/javascript">
 
   import Share from '../utils/share'
+  import { setClipboardText } from '../utils/plus'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
   import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
+  import localEvent from '../stores/localStorage'
 
   export default {
     data () {
@@ -123,6 +138,19 @@
     },
 
     methods: {
+      cancelShare () {
+        window.mui('#shareWrapper').popover('toggle')
+      },
+      shareToCopyLink () {
+        setClipboardText(this.link)
+        window.mui.toast('已复制')
+      },
+      shareToChat () {
+        window.mui('#shareWrapper').popover('toggle')
+        this.$router.pushPlus('/collectUser?from=all')
+        // 保存链接
+        localEvent.setLocalItem('share', this.link)
+      },
       isShowSharePng () {
         if (window.mui.os.wechat) {
           return false
@@ -372,45 +400,55 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .shareBtn {
     position: fixed;
-    right: 10px;
-    top: 10px;
+    right: 0.266rem;
+    top: 0.266rem;
     z-index: 11;
     color: #fff;
   }
 
   .resumeWrapper .shareBtn {
     position: absolute;
-    top: 24px !important;
-    font-size: 22px;
-    right: 31px;
+    top: 0.64rem !important;
+    font-size: 0.586rem;
+    right: 0.826rem;
     color: #808080;
   }
 
   .mui-content {
-    padding: 200px;
+    padding: 5.333rem;
     text-align: center;
   }
 
   .shareWrapper {
     text-align: left;
-
     .title {
       background: #ececee;
       text-align: center;
-      font-size: 14px;
-      padding: 12px 0;
+      font-size: 0.373rem;
+      padding: 0.32rem 0;
+      position: relative;
+      color: #808080;
+      span{
+        position: absolute;
+        left:0.586rem;
+        font-size: 0.4rem;
+      }
     }
     .more {
       background: #fff;
-      padding: 10px;
+      padding: 0.266rem;
       .single {
-        width: 55px;
-        height: 55px;
-        margin: 0 10px;
+        height: 1.866rem;
         display: inline-block;
         img {
-          width: 100%;
-          height: 100%;
+          width: 1.25rem;
+          height: 1.25rem;
+          margin: 0 0.266rem;
+        }
+        p{
+          font-size: 0.32rem;
+          color: #b4b4b6;
+          text-align: center;
         }
       }
     }
@@ -423,9 +461,9 @@
     .icon {
       color: #fff;
       position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 70px;
+      right: 0.4rem;
+      top: 0.266rem;
+      font-size: 1.866rem;
     }
   }
 

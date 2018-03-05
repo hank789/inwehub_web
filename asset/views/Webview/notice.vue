@@ -21,7 +21,7 @@
     methods: {
       load_article (url) {
         var ws = window.plus.webview.currentWebview()
-        var topoffset = '44px'
+        var topoffset = '1.173rem'
         if (window.plus.navigator.isImmersedStatusbar()) { // 兼容immersed状态栏模式
           topoffset = (Math.round(window.plus.navigator.getStatusbarHeight()) + 44) + 'px'
         }
@@ -37,7 +37,7 @@
             cachemode: 'noCache',
             popGesture: 'hide',
             top: topoffset,
-            bottom: '0px',
+            bottom: '0rem',
             position: 'dock',
             dock: 'bottom',
             bounce: 'vertical'

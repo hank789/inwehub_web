@@ -42,6 +42,7 @@ const TagsSelectionTags = () => import(/* webpackChunkName: "TagsSelectionTags" 
 const TagsTagsQuestions = () => import(/* webpackChunkName: "TagsTagsQuestions" */ '../../../views/Tags/TagsQuestions.vue')
 const TagsTagsSubmissions = () => import(/* webpackChunkName: "TagsTagsSubmissions" */ '../../../views/Tags/TagsSubmissions.vue')
 const TagsTagsUsers = () => import(/* webpackChunkName: "TagsTagsUsers" */ '../../../views/Tags/TagsUsers.vue')
+const TagsTagFocusMembers = () => import(/* webpackChunkName: "TagsTagsUsers" */ '../../../views/Tags/TagFocusMembers.vue')
 const AccountDiscountList = () => import(/* webpackChunkName: "AccountDiscountList" */ '../../../views/Account/DiscountList.vue')
 const AccountChanceList = () => import(/* webpackChunkName: "AccountChanceList" */ '../../../views/Account/ChanceList.vue')
 const AccountGrowth = () => import(/* webpackChunkName: "AccountGrowth" */ '../../../views/Account/Growth.vue')
@@ -163,6 +164,7 @@ const Hongbao = () => import(/* webpackChunkName: "Hongbao" */ '../../../views/H
 const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
+const time = () => import(/* webpackChunkName: "time" */ '../../../components/time.vue')
 
 export {
   Login,
@@ -208,6 +210,7 @@ export {
   TagsTagsQuestions,
   TagsTagsSubmissions,
   TagsTagsUsers,
+  TagsTagFocusMembers,
   AccountDiscountList,
   AccountChanceList,
   AccountGrowth,
@@ -328,5 +331,6 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  time
 }

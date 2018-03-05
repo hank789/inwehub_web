@@ -459,7 +459,7 @@
 
   .mui-input-row input {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 1.066rem;
   }
 
   .mui-input-row a {
@@ -467,7 +467,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-input-row a {
@@ -475,7 +475,7 @@
     line-height: 1.1;
     float: left;
     width: 35%;
-    padding: 11px 15px;
+    padding: 0.293rem 0.4rem;
   }
 
   .mui-table-view-cell {
@@ -484,7 +484,7 @@
 
   .deleteWrapper {
     text-align: right;
-    padding: 10px;
+    padding: 0.266rem;
   }
 
   .mui-table-view-cell .mui-navigate-right,
@@ -493,17 +493,17 @@
   }
 
   .account_item_title {
-    padding: 5px;
+    padding: 0.133rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .account-setting-field {
     position: absolute;
     text-align: right;
-    width: 200px;
-    right: 40px;
-    height: 32px;
+    width: 5.333rem;
+    right: 1.066rem;
+    height: 0.853rem;
     color: #3f3f3f;
     padding-right: 0;
   }
@@ -511,19 +511,19 @@
   /**/
 
   .account_item_title {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 0.213rem;
+    padding-bottom: 0.213rem;
     color: #a6a6a6;
-    font-size: 14px;
-    margin-left: 10px;
+    font-size: 0.373rem;
+    margin-left: 0.266rem;
   }
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 15px;
+    right: 0.4rem;
     bottom: 0;
-    left: 15px;
-    height: 0.6px;
+    left: 0.4rem;
+    height: 0.016rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -532,10 +532,10 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 15px;
+    right: 0.4rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -544,30 +544,30 @@
 
   .mui-input-row {
     position: relative;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .textarea-wrapper[data-v-c8d6295a] {
-    margin: 0 15px 0 14px;
+    margin: 0 0.4rem 0 0.373rem;
     height: 100%;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #dcdcdc;
-    padding-bottom: 20px;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #dcdcdc;
+    padding-bottom: 0.533rem;
     background: #FEFEFE;
   }
 
   .textarea-wrapper textarea {
-    font-size: 14px;
+    font-size: 0.373rem;
     height: 100%;
-    padding: 5px 10px;
+    padding: 0.133rem 0.266rem;
     background: #fefefe;
   }
 
   .mui-content > .mui-table-view:first-child {
-    margin-top: 15px;
+    margin-top: 0.4rem;
     background: #fefefe;
-    margin-top: 0px;
+    margin-top: 0rem;
   }
 
   .mui-content {
@@ -578,19 +578,19 @@
 
   .options {
     width: 100%;
-    height: 41px;
-    margin-top: 20px;
-    padding: 0 15px;
+    height: 1.093rem;
+    margin-top: 0.533rem;
+    padding: 0 0.4rem;
   }
 
   .options a {
     display: block;
-    width: 115px;
-    height: 38px;
-    font-size: 16px;
+    width: 3.066rem;
+    height: 1.013rem;
+    font-size: 0.426rem;
     text-align: center;
-    line-height: 38px;
-    border-radius: 50px;
+    line-height: 1.013rem;
+    border-radius: 1.333rem;
   }
 
   .options a:nth-of-type(1) {

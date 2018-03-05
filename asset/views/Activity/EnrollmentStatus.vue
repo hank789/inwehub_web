@@ -42,7 +42,7 @@
         </div>
 
         <!--留言--> <!--v-if="list.status =='3' || list.status =='4' "-->
-        <div style="position: relative;width:100%; min-height: 530px;" v-show="list.status =='3' || list.status =='4' ">
+        <div style="position: relative;width:100%; min-height: 14.133rem;" v-show="list.status =='3' || list.status =='4' ">
           <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
               <ul class="message">
@@ -228,7 +228,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -243,117 +243,117 @@
   .enroll {
     width: 100%;
     /*height: 100%;*/
-    padding: 15px 16px 16px 16px;
+    padding: 0.4rem 0.426rem 0.426rem 0.426rem;
     background: #FEFFFE;
   }
 
   /*.enroll img{
   	width: 100%;
-  	height: 143px;
+  	height: 3.813rem;
   }*/
   .enroll-text {
     width: 100%;
-    height: 57px;
+    height: 1.52rem;
     /*background: #CCCCCC;*/
-    margin-top: 8px;
-    border-bottom: 0.5px solid #DCDCDC;
+    margin-top: 0.213rem;
+    border-bottom: 0.013rem solid #DCDCDC;
   }
 
   .enroll-text p:nth-of-type(1) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     font-weight: 500;
 
   }
 
   .enroll-text p:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    margin-top: 3px;
+    margin-top: 0.08rem;
 
   }
 
   .btn {
     width: 100%;
-    padding: 15px 16px 1px 16px;
+    padding: 0.4rem 0.426rem 0.026rem 0.426rem;
     background: #FEFFFE;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   .blue {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     background: #03aef9;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 0.426rem;
+    border-radius: 0.133rem;
+    margin-bottom: 0.4rem;
     text-align: center;
     border: none;
   }
 
   .yellow {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     background: #fcc816;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 0.426rem;
+    border-radius: 0.133rem;
+    margin-bottom: 0.4rem;
     text-align: center;
     border: none;
   }
 
   .gray {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     background: #b4b4b6;
     color: #FFFFFF;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    font-size: 0.426rem;
+    border-radius: 0.133rem;
+    margin-bottom: 0.4rem;
     text-align: center;
     border: none;
   }
 
   .feedback {
     width: 100%;
-    min-height: 80px;
-    padding: 15px 16px 15px 16px;
+    min-height: 2.133rem;
+    padding: 0.4rem 0.426rem 0.4rem 0.426rem;
     background: #FEFFFE;
-    margin-top: 10px;
+    margin-top: 0.266rem;
     border: none;
 
   }
 
   .send {
     width: 100%;
-    height: 42px;
-    border-radius: 5px;
-    border: 0.5px solid #DCDCDC;
+    height: 1.12rem;
+    border-radius: 0.133rem;
+    border: 0.013rem solid #DCDCDC;
   }
 
   .feedback input {
     width: 80%;
-    height: 40px;
+    height: 1.066rem;
     float: left;
-    font-size: 14px;
+    font-size: 0.373rem;
     border: none;
   }
 
   .feedback svg {
-    font-size: 30px;
+    font-size: 0.8rem;
     float: right;
-    margin-right: 10px;
-    margin-top: 5px;
+    margin-right: 0.266rem;
+    margin-top: 0.133rem;
     color: #03aef9;
   }
 
   .text {
     width: 100%;
-    border: 1px solid #DCDCDC;
-    margin-top: 16px;
-    padding: 5px 8px;
+    border: 0.026rem solid #DCDCDC;
+    margin-top: 0.426rem;
+    padding: 0.133rem 0.213rem;
     word-wrap: break-word;
     overflow-x: hidden;
   }
@@ -361,12 +361,12 @@
   .back {
     width: 100%;
     background: #FFFFFF;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
     text-align: center;
-    padding: 20px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding: 0.533rem 0.266rem;
+    margin-top: 0.266rem;
+    margin-bottom: 0.266rem;
 
   }
 
@@ -374,14 +374,14 @@
   .message {
     width: 100%;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 0.266rem;
     /*background: #CCCCCC;*/
   }
 
   .message li {
-    margin-top: 10px;
+    margin-top: 0.266rem;
     overflow: hidden;
-    border-bottom: 0.5px solid #DCDCDC;
+    border-bottom: 0.013rem solid #DCDCDC;
   }
 
   .message p:nth-of-type(1) {
@@ -394,7 +394,7 @@
     width: 50%;
     float: left;
     text-align: left;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #03aef9;
   }
 
@@ -402,15 +402,15 @@
     width: 50%;
     float: left;
     text-align: right;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 
   .message p:nth-of-type(2) {
     width: 100%;
-    font-size: 13px;
-    margin-bottom: 5px;
-    margin-top: 3px;
+    font-size: 0.346rem;
+    margin-bottom: 0.133rem;
+    margin-top: 0.08rem;
     color: #444444;
 
   }
@@ -420,24 +420,24 @@
   @media screen and (min-width: 320px) {
     .enroll img {
       width: 100%;
-      height: 133px;
-      border-radius: 4px;
+      height: 3.546rem;
+      border-radius: 0.106rem;
     }
   }
 
   @media screen and (min-width: 375px) {
     .enroll img {
       width: 100%;
-      height: 145px;
-      border-radius: 4px;
+      height: 3.866rem;
+      border-radius: 0.106rem;
     }
   }
 
   @media screen and (min-width: 414px) {
     .enroll img {
       width: 100%;
-      height: 172px;
-      border-radius: 4px;
+      height: 4.586rem;
+      border-radius: 0.106rem;
     }
   }
 </style>

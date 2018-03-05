@@ -163,8 +163,8 @@
   /*手机端*/
   .suspend {
     width: 100%;
-    height: 54px;
-    /* border-radius:4px;*/
+    height: 1.44rem;
+    /* border-radius:0.106rem;*/
     background: #252525;
     position: fixed;
     opacity: 0.9;
@@ -174,144 +174,144 @@
 
   .suspend p:nth-of-type(1) {
     float: left;
-    margin-left: 23px;
-    width: 30px;
-    height: 47px;
-    margin-top: 7px;
+    margin-left: 0.613rem;
+    width: 0.8rem;
+    height: 1.253rem;
+    margin-top: 0.186rem;
 
   }
 
   .suspend p:nth-of-type(1) svg {
-    font-size: 18px;
+    font-size: 0.48rem;
     color: #FFFFFF;
-    margin-top: 12px;
+    margin-top: 0.32rem;
   }
 
   .suspend p:nth-of-type(2) {
     float: left;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 1.066rem;
+    height: 1.066rem;
+    border-radius: 0.32rem;
     background: #F3F4F6;
-    margin-top: 7px;
+    margin-top: 0.186rem;
 
     text-align: center;
   }
 
   .suspend p:nth-of-type(2) > svg {
-    font-size: 34px;
-    margin-top: 6px;
+    font-size: 0.906rem;
+    margin-top: 0.16rem;
     color: #009fe8;
   }
 
   .suspend p:nth-of-type(3) {
-    width: 96px;
-    height: 47px;
-    margin-top: 7px;
-    margin-left: 10px;
-    /* padding-top: 5px;*/
+    width: 2.56rem;
+    height: 1.253rem;
+    margin-top: 0.186rem;
+    margin-left: 0.266rem;
+    /* padding-top: 0.133rem;*/
     float: left;
   }
 
   .suspend p:nth-of-type(3) > span {
     display: block;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(1) {
-    font-size: 16px
+    font-size: 0.426rem
   }
 
   .suspend p:nth-of-type(3) > span:nth-of-type(2) {
-    margin-top: 0.5px;
+    margin-top: 0.013rem;
   }
 
   .suspend a {
     float: right;
-    width: 76px;
-    height: 30px;
-    border-radius: 4px;
+    width: 2.026rem;
+    height: 0.8rem;
+    border-radius: 0.106rem;
     background: #3c95f9;
     text-align: center;
-    line-height: 30px;
+    line-height: 0.8rem;
     color: #FFFFFF;
-    margin-top: 12px;
-    margin-right: 10.5px;
+    margin-top: 0.32rem;
+    margin-right: 0.28rem;
   }
 
   /*微信端*/
   .mui-wechat .suspension {
     width: 100%;
-    height: 49px;
+    height: 1.306rem;
     position: fixed;
     opacity: 0.9;
-    top: 0px;
+    top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0px 3px 5px #b4b4b6;
-    -webkit-box-shadow: 0px 3px 5px #b4b4b6;
-    -moz-box-shadow: 0px 3px 5px #b4b4b6;
+    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
 
   .suspension {
     width: 100%;
-    height: 49px;
+    height: 1.306rem;
     position: absolute;
-    top: 44px;
+    top: 1.173rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0px 3px 5px #b4b4b6;
-    -webkit-box-shadow: 0px 3px 5px #b4b4b6;
-    -moz-box-shadow: 0px 3px 5px #b4b4b6;
+    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
 
   /*.suspension p:nth-of-type(1) {*/
     /*float: left;*/
     /*color: #b4b4b6;*/
-    /*margin-left: 23px;*/
-    /*margin-top: 15px;*/
-    /*margin-right: 20px;*/
-    /*font-size: 16px;*/
+    /*margin-left: 0.613rem;*/
+    /*margin-top: 0.4rem;*/
+    /*margin-right: 0.533rem;*/
+    /*font-size: 0.426rem;*/
 
   /*}*/
 
   .suspension p:nth-of-type(1) {
     float: left;
-    width: 35px;
-    height: 35px;
-    border-radius: 9px;
+    width: 0.933rem;
+    height: 0.933rem;
+    border-radius: 0.24rem;
     background: #f3f4f6;
-    margin-top: 7px;
+    margin-top: 0.186rem;
     text-align: center;
-    margin-left: 14px;
+    margin-left: 0.373rem;
   }
 
   .suspension p:nth-of-type(1) svg {
-    font-size: 25px;
-    margin-top: 6px;
+    font-size: 0.666rem;
+    margin-top: 0.16rem;
     color: #009fe8;
   }
 
   .suspension p:nth-of-type(2) {
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #171616;
-    margin-top: 14px;
-    margin-left: 10px;
+    margin-top: 0.373rem;
+    margin-left: 0.266rem;
   }
 
   .suspension a {
     float: right;
-    width: 88px;
-    height: 30px;
-    border-radius: 4px;
+    width: 2.346rem;
+    height: 0.8rem;
+    border-radius: 0.106rem;
     background: #3c95f9;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #FFFFFF;
     text-align: center;
-    line-height: 30px;
-    margin-top: 10px;
-    margin-right: 14px;
+    line-height: 0.8rem;
+    margin-top: 0.266rem;
+    margin-right: 0.373rem;
   }
 </style>

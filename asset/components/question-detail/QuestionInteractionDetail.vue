@@ -32,18 +32,22 @@
 
         </button>
       </div>
-      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!ask.current_user_answer_id">
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
+          @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')" >
+          查看我的回答
+        </button>
+      </div>
+      <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id === 0">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
           直接参与回答
-
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')">
-          查看我的回答
-
+                @tap.stop.prevent="modify()">
+          修改我的回答
         </button>
       </div>
     </div>
@@ -69,6 +73,10 @@
       Images
     },
     props: {
+      answerId: {
+        type: Number,
+        default: 0
+      },
       ask: {
         type: Object,
         default: {}
@@ -82,10 +90,11 @@
         default: false
       }
     },
-    created () {
-
-    },
+    created () {},
     methods: {
+      modify () {
+        this.$router.pushPlus('/realAnswer/' + this.ask.id + '/' + this.ask.current_user_answer_id, 'backAndClose')
+      },
       collectAsk: function () {
         if (!this.ask.id) {
           return
@@ -118,6 +127,9 @@
       },
       getHtml (id, options, callback) {
       }
+    },
+    mounted () {
+
     }
   }
 </script>
@@ -125,9 +137,9 @@
 <style lang="less"  scoped="scoped">
 
   .detail-ask {
-    padding-bottom: 20px;
+    padding-bottom: 0.533rem;
     margin-top:0 !important;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
 
   .detail-ask:before {
@@ -135,19 +147,19 @@
   }
 
   .detail-ask:after {
-    left: 15px;
-    right: 15px;
+    left: 0.4rem;
+    right: 0.4rem;
   }
 
   .detail-ask .mui-media-body .timeAgo {
     color: #999;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .detail-ask .mui-media-body .amount {
     position: absolute;
-    bottom: 10px;
-    right: 15px;
+    bottom: 0.266rem;
+    right: 0.4rem;
     color: #ff9800;
   }
 
@@ -156,15 +168,15 @@
   }
 
   .content{
-    font-size:16px;
+    font-size:0.426rem;
     color:#444444;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left:0.4rem;
+    padding-right:0.4rem;
   }
 
   .footer{
-    padding: 9px 15px 17px;
-    font-size:12px;
+    padding: 0.24rem 0.4rem 0.453rem;
+    font-size:0.32rem;
   }
 
   .footer .amount{
@@ -172,25 +184,25 @@
   }
 
   .footer .timeAgo{
-    margin-left: 4px;
+    margin-left: 0.106rem;
     color:#03aef9;
   }
   .mui-row{
-    height:40px;
+    height:1.066rem;
   }
   .buttonWrapper {
 
     &.buttonWrapper-1 {
-       padding: 0 7px 0 15px;
+       padding: 0 0.186rem 0 0.4rem;
      }
 
     &.buttonWrapper-2 {
-       padding: 0 15px 0 7px;
+       padding: 0 0.4rem 0 0.186rem;
      }
 
     .mui-btn-warning {
       background-color: #fcc816;
-      border: 1px solid #fcc816;
+      border: 0.026rem solid #fcc816;
     }
   }
 
@@ -199,7 +211,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 0px;
+    height: 0rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);

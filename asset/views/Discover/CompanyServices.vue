@@ -86,10 +86,10 @@
 
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #dcdcdc;
@@ -103,33 +103,33 @@
 
   .services_container li:nth-last-child(1) .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #FFFFFF;
   }
 
   .container-image {
-    padding: 15px 0;
-    height: 158px;
-    border-radius: 4px;
+    padding: 0.4rem 0;
+    height: 4.213rem;
+    border-radius: 0.106rem;
     position: relative;
   }
   .container-image img{
-    box-shadow: 0 0 6px #f3f4f6;
+    box-shadow: 0 0 0.16rem #f3f4f6;
   }
 
   /*申请企业服务*/
   .apply {
     width: 100%;
-    height: 126px;
+    height: 3.36rem;
     background: url("../../statics/images/company_services_list.png") no-repeat;
     background-size: 100% 100%;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 0.4rem;
     position: relative;
   }
 
@@ -141,29 +141,29 @@
   }
 
   .apply p:nth-of-type(1) {
-    width: 160px;
-    height: 35px;
-    font-size: 16px;
+    width: 4.266rem;
+    height: 0.933rem;
+    font-size: 0.426rem;
     color: #ffffff;
     text-align: center;
-    line-height: 30px;
+    line-height: 0.8rem;
     font-weight: 500;
-    border: 1.5px solid #c2cddc;
-    top: 20px;
+    border: 0.04rem solid #c2cddc;
+    top: 0.533rem;
   }
 
   .apply p:nth-of-type(2) {
-    top: 68px;
-    line-height: 18px;
-    font-size: 13px;
+    top: 1.813rem;
+    line-height: 0.48rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
 
   }
 
   .apply p:nth-of-type(3) {
-    top: 89px;
-    line-height: 18px;
-    font-size: 13px;
+    top: 2.373rem;
+    line-height: 0.48rem;
+    font-size: 0.346rem;
     color: #FFFFFF;
   }
 

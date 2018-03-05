@@ -118,9 +118,9 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 43px;
-    width: 43px;
-    font-size: 20px;
+    height: 1.146rem;
+    width: 1.146rem;
+    font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
   }
@@ -150,14 +150,14 @@
   }
 
   .mui-media-body {
-    padding-left: 10px;
+    padding-left: 0.266rem;
   }
   .mui-table-view-cell:after {
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 15px;
-    height: 0px;
+    left: 0.4rem;
+    height: 0rem;
   }
 
   .mui-table-view:after {
@@ -169,35 +169,35 @@
 
   .mui-table-view li{
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
   .mui-table-view:before {
     display: none;
   }
 
   .detail {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
   }
 
   .first {
-    height: 50px;
+    height: 1.333rem;
   }
 
   .three {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
-    padding-top: 5px;
+    padding-top: 0.133rem;
     text-align: right;
   }
 
   .split {
     position: relative;
-    top: 3px;
-    margin: 0 10px;
+    top: 0.08rem;
+    margin: 0 0.266rem;
     display: inline-block;
-    width: 1px;
-    height: 13px;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
     transform: scaleX(.5);
   }
@@ -208,12 +208,12 @@
   }
 
   .list-empty .menu {
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
   }
 
   .mui-segmented-control .mui-control-item {
-    line-height: 45px;
-    font-size: 14px;
+    line-height: 1.2rem;
+    font-size: 0.373rem;
   }
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
@@ -224,11 +224,11 @@
 
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after {
     position: absolute;
-    width: 56px;
+    width: 1.493rem;
     bottom: 0;
     left: 50%;
-    margin-left: -28px;
-    height: 2px;
+    margin-left: -0.746rem;
+    height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
@@ -239,43 +239,43 @@
   }
 
   #refreshContainer {
-    top: 45px;
+    top: 1.2rem;
   }
 
   .container {
     text-align: center;
-    padding: 20px;
+    padding: 0.533rem;
   }
 
   .container svg {
-    font-size: 60px;
+    font-size: 1.6rem;
 
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
   /* fixed样式*/
 
   .button-wrapper {
     position: fixed;
-    bottom:27px;
-    right:14px;
+    bottom:0.72rem;
+    right:0.373rem;
     width: 100%;
-    height: 68px;
+    height: 1.813rem;
     padding: 0;
     z-index: 99;
-    /*border: 1px solid #cccccc;*/
+    /*border: 0.026rem solid #cccccc;*/
   }
   .propose{
-    width:84px;
-    height:34px;
+    width:2.24rem;
+    height:0.906rem;
     background:#03aef9;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     color: #FFFFFF;
     position: absolute;
-    right:90px;
+    right:2.4rem;
     bottom: 0;
     margin: 0;
     padding: 0;
@@ -285,34 +285,34 @@
     align-items:center;
   }
   .propose svg{
-    font-size:18px;
-    line-height:34px;
-    margin-right: 5px;
+    font-size:0.48rem;
+    line-height:0.906rem;
+    margin-right: 0.133rem;
   }
   .select{
-    width:84px;
-    height:68px;
+    width:2.24rem;
+    height:1.813rem;
     background: #FFFFFF;
-    border:1px solid #dcdcdc;
+    border:0.026rem solid #dcdcdc;
     position: absolute;
     bottom: 0;
     right: 0;
-    border-radius:10px;
+    border-radius:0.266rem;
   }
   .newest{
-    width:85px;
-    height:34px;
+    width:2.266rem;
+    height:0.906rem;
     background: #FFFFFF;
     position:absolute;
-    bottom: -0px;
-    right:-1px;
-    border-radius: 50px;
+    bottom: -0rem;
+    right:-0.026rem;
+    border-radius: 1.333rem;
   }
   .newest p{
-    width:84px;
-    height:34px;
+    width:2.24rem;
+    height:0.906rem;
     background:#03aef9;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     color: #FFFFFF;
     position: absolute;
     bottom: 0;
@@ -324,15 +324,15 @@
     align-items:center;
   }
   .newest p svg{
-    font-size:18px;
-    line-height:34px;
-    margin-right: 5px;
+    font-size:0.48rem;
+    line-height:0.906rem;
+    margin-right: 0.133rem;
   }
   .hot{
-    width:84px;
-    height:34px;
-    font-size: 15px;
-    border-radius: 50px;
+    width:2.24rem;
+    height:0.906rem;
+    font-size: 0.4rem;
+    border-radius: 1.333rem;
     color: #808080;
     position: absolute;
     top:0;
@@ -342,30 +342,30 @@
     align-items:center;
     margin: 0;
     padding: 0;
-    padding-right: 12px;
+    padding-right: 0.32rem;
   }
 /*回答者的样式*/
   .respondent{
     width:100%;
-    padding: 12px 15px;
+    padding: 0.32rem 0.4rem;
     background: #f3f4f6;
-    font-size:13px;
+    font-size:0.346rem;
     color:rgb(128,128,128);
-    border-radius: 4px;
-    margin-top: 12px;
+    border-radius: 0.106rem;
+    margin-top: 0.32rem;
   }
   .respondent span{
     color: #03aef9;
   }
   .respondent i{
     color:rgb(146,146,146);
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   .respondent span:nth-last-of-type(1) i{
     display: none;
   }
   .respondent i{
-    font-size:13px;
+    font-size:0.346rem;
     color:rgb(128,128,128);
     font-style: normal;
   }
@@ -374,6 +374,6 @@
   }
 
   .second{
-    font-size:16px;
+    font-size:0.426rem;
   }
 </style>

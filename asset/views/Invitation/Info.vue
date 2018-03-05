@@ -213,17 +213,17 @@
 
   .share_t {
     width: 100%;
-    height:237px;
+    height:6.32rem;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
     position: relative;
   }
 
   .share_t svg {
-    font-size: 110px;
+    font-size: 2.933rem;
     position: absolute;
     left: 0;
     right: 0;
-    top:44px;
+    top:1.173rem;
     margin: auto;
 
   }
@@ -232,7 +232,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 105px;
+    height: 2.8rem;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }
@@ -240,82 +240,82 @@
   ul {
     width: 80%;
     margin-left: 10%;
-    height: 242px;
-    padding-top: 42px;
+    height: 6.453rem;
+    padding-top: 1.12rem;
   }
 
   ul li {
     width: 100%;
-    height: 28px;
+    height: 0.746rem;
 
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 0.026rem solid #dcdcdc;
   }
 
   ul li:nth-of-type(2) {
-    margin-top: 30px;
+    margin-top: 0.8rem;
   }
 
   ul li svg {
-    font-size: 22px;
+    font-size: 0.586rem;
     color: #b4b4b6;
     float: left;
-    margin-right: -3px;
+    margin-right: -0.08rem;
   }
 
   ul li:nth-of-type(2) svg {
-    font-size: 25px;
+    font-size: 0.666rem;
   }
 
   ul li input {
     width: 80%;
-    height: 26px;
+    height: 0.693rem;
     float: left;
     background: #EBECED;
     border: none;
-    padding: 10px 5px;
-    margin-left: 5px;
+    padding: 0.266rem 0.133rem;
+    margin-left: 0.133rem;
   }
 
   input::-webkit-input-placeholder {
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   input::-moz-placeholder {
     /* Firefox 18- */
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   input::-moz-placeholder {
     /* Firefox 19+ */
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   input::-moz-placeholder {
     /* Firefox 19+ */
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
 
 
   ul button {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     background: #03aef9;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #FFFFFF;
     border-radius: 0;
-    margin-top: 35px;
-    border-radius: 5px;
+    margin-top: 0.933rem;
+    border-radius: 0.133rem;
   }
 
   ul p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: rgb(60, 149, 249);
-    margin-top: 18px;
+    margin-top: 0.48rem;
     color:rgb(128,128,128);
   }
 

@@ -31,18 +31,18 @@
         var label = new window.BMap.Label(arr[j].name, opts)  // 创建文本标注对象
         label.setStyle({
           display: 'inline-block',
-          border: '1px solid #fff',
+          border: '0.026rem solid #fff',
           borderRadius: '50%',
           background: '#03aef9',
           color: '#ffffff',
-          fontSize: '14px',
+          fontSize: '0.373rem',
           padding: '0',
           opacity: '0.9',
-          height: '54px',
-          width: '54px',
+          height: '1.44rem',
+          width: '1.44rem',
           textAlign: 'center',
           overflow: 'hidden',
-          lineHeight: '52px',
+          lineHeight: '1.386rem',
           fontFamily: '微软雅黑'
         })
         map.addOverlay(label)

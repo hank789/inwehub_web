@@ -37,7 +37,7 @@ router.pushReadHubPage = function (url) {
   router.pushPlus(url, 'list-detail-page')
 }
 
-router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', popGesture = 'hide', forceWebView = false, reload = false) {
+router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', forceWebView = false, reload = false) {
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
   var footerTab = ['/discover', '/home', '/inform', '/my']
@@ -96,6 +96,10 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'pop-in', p
       // 判断是否是详情页面, 详情页面id为list-detail-page
       if (urlSplit[urlSplit.length - 1] > 0) {
         id = 'list-detail-page'
+        var currentWebview = window.plus.webview.currentWebview()
+        if (currentWebview.id === id) {
+          id = 'list-detail-page-three'
+        }
       }
     }
     openWebviewByUrl(id, nextUrl, autoShow, aniShow, popGesture, reload)

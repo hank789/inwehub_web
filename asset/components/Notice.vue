@@ -27,22 +27,22 @@
 
 <style lang="scss" module>
   .content {
-    padding: 10px 15px;
+    padding: 0.266rem 0.4rem;
     background: #fff;
-    border-radius: 10px;
-    font-size: 14px;
+    border-radius: 0.266rem;
+    font-size: 0.373rem;
 
   }
   .success {
     color: #59b6d7;
     &:before {
-      font-size: 18px;
+      font-size: 0.48rem;
     }
   }
   .error {
     color: red;
     &:before {
-      font-size: 18px;
+      font-size: 0.48rem;
     }
   }
   .notice {

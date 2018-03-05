@@ -68,46 +68,46 @@
   }
 
   .mui-content h5 {
-    margin-top: 50px;
-    font-size: 20px;
+    margin-top: 1.333rem;
+    font-size: 0.533rem;
     color: #323232;
   }
 
   .mui-content .h5e {
-    margin-top: 7px;
-    font-size: 20px;
+    margin-top: 0.186rem;
+    font-size: 0.533rem;
     color: #808080;
     font-weight: normal;
   }
 
   .mui-content .tip {
-    margin: 17px 0 15px;
+    margin: 0.453rem 0 0.4rem;
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .basic {
     position: relative;
     width: 100%;
-    height: 129px;
+    height: 3.44rem;
     text-align: center;
   }
 
   .basic a {
     position: absolute;
     color: #b4b4b6;
-    font-size: 30px;
-    top: 17px;
-    left: 6px;
+    font-size: 0.8rem;
+    top: 0.453rem;
+    left: 0.16rem;
   }
 
   .iconWrapper {
     text-align: center;
-    padding-top: 13px;
+    padding-top: 0.346rem;
   }
 
   .iconWrapper .icon {
-    font-size: 124px;
+    font-size: 3.306rem;
     color: #dcdcdc;
   }
 
@@ -117,20 +117,20 @@
 
   .flow {
     display: inline-block;
-    height: 21px;
+    height: 0.56rem;
     background: url("../../statics/images/flow@2x.png") no-repeat;
     background-size: cover;
-    width: 312px;
+    width: 8.32rem;
   }
 
   .flowWrapper .fText {
     position: relative;
     display: inline-block;
-    width: 312px;
-    font-size: 12px;
+    width: 8.32rem;
+    font-size: 0.32rem;
     color: #808080;
-    height: 22px;
-    top: -4px;
+    height: 0.586rem;
+    top: -0.106rem;
 
   }
 
@@ -141,12 +141,12 @@
 
   .fText .f2 {
     position: absolute;
-    left: 71px;
+    left: 1.893rem;
   }
 
   .fText .f3 {
     position: absolute;
-    right: 72px;
+    right: 1.92rem;
   }
 
   .fText .f4 {
@@ -155,6 +155,6 @@
   }
 
   .cover {
-    bottom: 0px !important;
+    bottom: 0rem !important;
   }
 </style>

@@ -340,27 +340,27 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    min-height: 45px;
+    min-height: 1.2rem;
     overflow: hidden;
-    padding: 5px 15px;
+    padding: 0.133rem 0.4rem;
     z-index: 10001;
   }
 
   .commentWrapper .textareaWrapper {
     position: relative;
     background: #fff;
-    border-radius: 5px;
-    min-height: 35px;
+    border-radius: 0.133rem;
+    min-height: 0.933rem;
   }
 
   .commentWrapper textarea {
     border: none;
     display: inline-block;
     width: 100%;
-    height: 20px;
-    margin: 6px 0 0;
-    padding: 0 31px 0 5px;
-    font-size: 14px;
+    height: 0.533rem;
+    margin: 0.16rem 0 0;
+    padding: 0 0.826rem 0 0.133rem;
+    font-size: 0.373rem;
 
   }
 
@@ -370,10 +370,10 @@
 
   .commentWrapper .icon {
     position: absolute;
-    right: 5px;
+    right: 0.133rem;
     color: #03aef9;
-    font-size: 26px;
-    bottom: 5px;
+    font-size: 0.693rem;
+    bottom: 0.133rem;
   }
 
   .commentShadowWrapper{
@@ -393,29 +393,29 @@
   }
 
   #commentJeditor .counter{
-    bottom:-95px;
+    bottom:-2.533rem;
   }
   #commentJeditor .ql-editor.ql-blank::before{
     font-style:normal;
-    margin-top:2px;
-    font-size: 14px;
+    margin-top:0.053rem;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #commentJeditor .textarea-wrapper .quill-editor {
-    min-height:35px;
+    min-height:0.933rem;
     height:auto;
   }
   #commentJeditor .quill-editor .ql-container {
-    min-height: 35px;
+    min-height: 0.933rem;
     height:auto;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #commentJeditor .counter {
     display: none;
   }
   #commentJeditor .ql-editor .ql-size-small{
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   #commentJeditor .ql-snow .ql-editor a{
@@ -427,7 +427,7 @@
     height: 100%;
     outline: none;
     overflow-y: auto;
-    padding: 7px 25px 7px 9px;
+    padding: 0.186rem 0.666rem 0.186rem 0.24rem;
     tab-size: 4;
     -moz-tab-size: 4;
     text-align: left;

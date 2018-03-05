@@ -126,9 +126,9 @@
   .mui-table-view-cell {
     .icon {
       position: absolute;
-      top: 7px;
-      right: 15px;
-      font-size: 29px;
+      top: 0.186rem;
+      right: 0.4rem;
+      font-size: 0.773rem;
 
       &.active {
         color: #3c95f9;

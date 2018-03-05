@@ -168,10 +168,10 @@
 <style scoped>
   .bot {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     bottom: 0;
-    left: 16px;
-    height: 1px;
+    left: 0.426rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -196,7 +196,7 @@
   /*滚动区域*/
 
   .mui-wechat #pullrefresh {
-    margin-top: 0px;
+    margin-top: 0rem;
   }
 
   .mui-content {
@@ -207,7 +207,7 @@
 
   ul li {
     position: relative;
-    padding: 10px 16px 10px 16px;
+    padding: 0.266rem 0.426rem 0.266rem 0.426rem;
     overflow: hidden;
   }
 
@@ -216,7 +216,7 @@
     width: 12.5%;
     height: 12.5%;
     float: left;
-    border-radius: 10px;
+    border-radius: 0.266rem;
   }
 
   ul li p {
@@ -227,24 +227,24 @@
 
   ul li p span {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0.133rem;
     width: 100%;
   }
 
   ul li p span:nth-of-type(1) {
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   ul li p span:nth-of-type(2) {
-    margin-bottom: 0px;
-    font-size: 12px;
+    margin-bottom: 0rem;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
   .message {
-    width: 7px;
-    height: 7px;
+    width: 0.186rem;
+    height: 0.186rem;
     background: #f03c69;
     border-radius: 50%;
     position: absolute;
@@ -261,13 +261,13 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 </style>

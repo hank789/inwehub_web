@@ -203,26 +203,26 @@
 
 <style scoped>
   .textarea-wrapper {
-    padding: 0 0 20px;
+    padding: 0 0 0.533rem;
     position: relative;
-    border-radius: 5px;
-    border: 1px solid #bbbbbb;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #bbbbbb;
     background: #fff;
-    margin: 0 5px;
+    margin: 0 0.133rem;
 
   }
 
   .textarea-wrapper textarea {
     margin: 0;
-    padding-top: 10px;
+    padding-top: 0.266rem;
     padding-bottom: 0;
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 10px;
-    bottom: 2px;
-    font-size: 12px;
+    right: 0.266rem;
+    bottom: 0.053rem;
+    font-size: 0.32rem;
     color: #999;
   }
 

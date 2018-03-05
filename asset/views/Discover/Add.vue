@@ -467,20 +467,20 @@
 
   .container-bottom-menus{
     position: absolute;
-    padding-left: 7.5px;
+    padding-left: 0.2rem;
     left:0;
   }
   .container-bottom-menus span{
     display: block;
     float: left;
-    padding: 0 7.5px;
-    font-size: 19px;
+    padding: 0 0.2rem;
+    font-size: 0.506rem;
     color: grey;
   }
 
   .component-photograph{
-    width:61px !important;
-    height:61px !important;
+    width:1.626rem !important;
+    height:1.626rem !important;
   }
 </style>
 
@@ -491,29 +491,29 @@
   }
 
   #discoverAddJeditor .counter{
-    bottom:-95px;
+    bottom:-2.533rem;
   }
 
   #discoverAddJeditor .ql-editor.ql-blank::before{
     font-style:normal;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #discoverAddJeditor .textarea-wrapper .quill-editor {
-    height: 230px;
+    height: 6.133rem;
   }
   #discoverAddJeditor .quill-editor .ql-container {
-    height: 230px;
-    font-size: 14px;
+    height: 6.133rem;
+    font-size: 0.373rem;
     color: #9b9b9b;
   }
   #discoverAddJeditor .counter {
-    bottom: -95px;
-    font-size: 14px;
+    bottom: -2.533rem;
+    font-size: 0.373rem;
     color: #c8c8c8;
   }
   #discoverAddJeditor .ql-editor .ql-size-small{
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   #discoverAddJeditor .ql-snow .ql-editor a{
@@ -521,6 +521,6 @@
   }
 
   #button-wrapper{
-    padding-bottom:64px !important;
+    padding-bottom:1.706rem !important;
   }
 </style>

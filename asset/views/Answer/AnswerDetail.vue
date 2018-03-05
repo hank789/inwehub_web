@@ -121,6 +121,7 @@
   import { alertAnswerRepeat } from '../../utils/dialogList'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   import CountDown from 'vue2-countdown'
 
@@ -160,7 +161,8 @@
       Answer,
       Discuss,
       Share,
-      commentTextarea
+      commentTextarea,
+      popPickerComponent
     },
     computed: {},
     mounted () {
@@ -431,17 +433,17 @@
 
 
   .buttons {
-    padding-top: 5px;
+    padding-top: 0.133rem;
     background: #fff;
   }
 
   .buttons .mui-col-sm-6 {
-    padding: 15px;
+    padding: 0.4rem;
   }
 
   .timeEnd {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
   }
 
   .timeEnd .countDown {
@@ -450,8 +452,8 @@
   }
 
   .form-realAnswer {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 0.533rem;
+    padding-bottom: 0.533rem;
     background: #fff;
     position: relative;
   }
@@ -463,7 +465,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: #c8c7cc;
@@ -472,28 +474,28 @@
   .form-realAnswer textarea {
     background: none;
     width: 100%;
-    height: 200px;
+    height: 5.333rem;
     border: none;
   }
 
   .form-realAnswer .title {
-    margin-left: 10px;
-    height: 32px;
+    margin-left: 0.266rem;
+    height: 0.853rem;
   }
 
   .form-realAnswer .button-wrapper {
-    padding: 0 15px 0;
+    padding: 0 0.4rem 0;
   }
 
   .form-realAnswer .time {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #fa4975;
-    padding-left: 15px;
+    padding-left: 0.4rem;
   }
 
   .form-realAnswer .time b {
     font-weight: normal;
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
 
   .mui-table-view-cell:after {
@@ -506,25 +508,25 @@
 
   .time div {
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 0.133rem;
   }
 /*标签*/
   .tags{
     width:100%;
     overflow: hidden;
-    padding:0 16px 10px 9px;
+    padding:0 0.426rem 0.266rem 0.24rem;
   }
   .tags p{
     float: left;
     margin: 0;
     padding: 0;
-    margin-left: 7px;
-    margin-top: 10px;
+    margin-left: 0.186rem;
+    margin-top: 0.266rem;
     background:#a8dff7;
     color: #FFFFFF;
-    border-radius: 50px;
-    font-size: 12px;
-    padding: 0 8px;
+    border-radius: 1.333rem;
+    font-size: 0.32rem;
+    padding: 0 0.213rem;
   }
 
 </style>

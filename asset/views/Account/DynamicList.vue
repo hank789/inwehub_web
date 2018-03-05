@@ -20,7 +20,14 @@
       >
         <template v-for="(item, index) in list">
           <div @tap.stop.prevent="toDetail(item)">
-
+            <div v-if="item.feed_type === 5 && item.feed.domain === ''">
+              <!--x发布了发现-->
+              <DiscoverShare
+                :data="item"
+                ref="discoverShare"
+                @comment="comment"
+              ></DiscoverShare>
+            </div>
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 
@@ -67,6 +74,7 @@
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import AnswerMajor from '../../components/feed/AnswerMajor'
   import AnswerInteraction from '../../components/feed/AnswerInteraction'
   import CreateFreeQuestion from '../../components/feed/CreateFreeQuestion'
@@ -93,6 +101,7 @@
     },
     components: {
       RefreshList,
+      DiscoverShare,
       AnswerMajor,
       AnswerInteraction,
       CreateFreeQuestion,
@@ -116,6 +125,20 @@
       }
     },
     methods: {
+      comment (submissionId, parentId, commentTargetUsername, list, component) {
+        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
+        var commentTarget = {
+          submissionId: submissionId,
+          parentId: parentId || 0,
+          commentList: list
+        }
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+        this.commentTargetComponent = component
+        this.$refs.ctextarea.comment(data)
+      },
       toDetail (item) {
         if (item.feed_type === 7) item.url += '?goback=1'
 

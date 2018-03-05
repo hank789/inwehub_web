@@ -193,7 +193,7 @@
   .mui-scroll-wrapper {
     position: absolute;
     z-index: 2;
-    top: 56px;
+    top: 1.493rem;
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -205,7 +205,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -217,17 +217,17 @@
   /*导航栏*/
   .menu{
     width: 100%;
-    height:50px;
+    height:1.333rem;
     background:#3c3e44;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:210px;
-    height:34px;
-    border:1px solid #808080;
-    border-radius: 50px;
+    width:5.6rem;
+    height:0.906rem;
+    border:0.026rem solid #808080;
+    border-radius: 1.333rem;
     position: absolute;
     left: 0;
     right:0;
@@ -236,20 +236,20 @@
   .menu .switch p{
     width:50%;
     height:100%;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #fefefe;
     float: left;
     text-align: center;
-    line-height: 34px;
+    line-height: 0.906rem;
   }
   .menu .switch p:nth-of-type(2){
     background:#808080;
-    border-radius: 0 50px 50px 0;
+    border-radius: 0 1.333rem 1.333rem 0;
   }
   .menu svg{
     position: absolute;
     right:3%;
-    font-size: 25px;
+    font-size: 0.666rem;
     color: #fefefe;
   }
   /*地图*/
@@ -269,11 +269,11 @@
   /*列表区域*/
   .userArea{
     width:100%;
-    height:56px;
-    font-size: 15px;
+    height:1.493rem;
+    font-size: 0.4rem;
     color: #3c3e44;
     text-align: center;
-    line-height: 56px;
+    line-height: 1.493rem;
     position: relative;
   }
   .userArea:after {
@@ -281,7 +281,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -289,11 +289,11 @@
   }
   .userArea i{
     display: block;
-    width:34px;
-    height:2px;
+    width:0.906rem;
+    height:0.053rem;
     background: #808080;
     position: absolute;
-    top:10px;
+    top:0.266rem;
     left:0;
     right:0;
     margin: auto;
@@ -310,7 +310,7 @@
   }
   ul li{
     width:100%;
-    height:89px;
+    height:2.373rem;
     padding: 0 4%;
     display: flex;
     flex-direction: row;
@@ -320,23 +320,23 @@
     position: relative;
   }
   ul li .container-image{
-    width:42px;
-    height:42px;
+    width:1.12rem;
+    height:1.12rem;
   }
   .container-info{
     width: 85%;
     height:100%;
-    margin-left: 10px;
+    margin-left: 0.266rem;
   }
   .container-info p:nth-of-type(1){
-    font-size:16px;
+    font-size:0.426rem;
     color:#444444;
-    margin-top: 13px;
+    margin-top: 0.346rem;
   }
   .container-info p:nth-of-type(2){
-    font-size:14px;
+    font-size:0.373rem;
     color: #808080;
-    margin:1px 0;
+    margin:0.026rem 0;
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -348,16 +348,16 @@
   }
   .container-info p:nth-of-type(2) span i{
     display: inline-block;
-    width:1px;
-    height:13px;
+    width:0.026rem;
+    height:0.346rem;
     background:#dcdcdc;
-    margin: 0 5px;
+    margin: 0 0.133rem;
   }
   .container-info p:nth-of-type(2) span:nth-last-child(1) i{
     display: none;
   }
   .container-info p:nth-of-type(3){
-    font-size:14px;
+    font-size:0.373rem;
     color: #808080;
     display: flex;
     flex-direction: row;
@@ -366,7 +366,7 @@
 
   input::-webkit-input-placeholder { /*WebKit browsers*/
     color:#c8c8c8;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
 

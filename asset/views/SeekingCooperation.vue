@@ -165,16 +165,16 @@
     right:  0;
     bottom: 0;
     left:  0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
   .title {
     color: #aba9ab;
-    height: 40px;
-    line-height: 40px;
-    padding-left: 15px;
+    height: 1.066rem;
+    line-height: 1.066rem;
+    padding-left: 0.4rem;
     position: relative;
   }
 
@@ -182,7 +182,7 @@
   }
 
   .feedback textarea {
-    height: 200px;
+    height: 5.333rem;
     background: red;
   }
 
@@ -191,22 +191,22 @@
     width: 100%;
     margin:0;
     background: #f3f4f6;
-    border-radius: 5px;
-    border: 1px solid #cccccc;
-    padding-bottom: 20px;
+    border-radius: 0.133rem;
+    border: 0.026rem solid #cccccc;
+    padding-bottom: 0.533rem;
   }
 
   .textarea-wrapper textarea {
     padding-bottom: 0;
     margin-bottom: 0;
-    border:1px solid #cccccc;
+    border:0.026rem solid #cccccc;
 
   }
 
   .textarea-wrapper .counter {
     position: absolute;
-    right: 10px;
-    bottom: 2px;
+    right: 0.266rem;
+    bottom: 0.053rem;
     color: #999;
   }
 
@@ -218,29 +218,29 @@
 /* 提交*/
  button{
     width:92%;
-    border-radius:5px;
+    border-radius:0.133rem;
     margin:auto;
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
   /*合作类型*/
   .cooperation_type{
     width:100%;
-    padding: 5px 15px 10px 0px;
+    padding: 0.133rem 0.4rem 0.266rem 0rem;
     overflow: hidden;
   }
   .cooperation_type li{
-    width:86px;
-    height:34px;
-    padding: 10px 11px;
+    width:2.293rem;
+    height:0.906rem;
+    padding: 0.266rem 0.293rem;
     background: #ececee;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     float: left;
     text-align: center;
     color: #808080;
-    font-size:14px;
-    margin-left: 15px;
-    margin-top: 10px;
-    line-height: 14px;
+    font-size:0.373rem;
+    margin-left: 0.4rem;
+    margin-top: 0.266rem;
+    line-height: 0.373rem;
   }
   /* 点击的颜色*/
   .cooperation_type .presentActive{

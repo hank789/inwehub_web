@@ -18,14 +18,8 @@
         @setFollowStatus="setFollowStatus"
       ></UserInfo>
 
-      <div class="content mui-ellipsis-3">
-        {{item.content ? item.content : '[图片]'}}
-
-
-
-
-
-
+      <div class="content mui-ellipsis-3 textToLink" v-html="item.content ? textToLink(item.content) : '[图片]'">
+        <!--{{item.content ? item.content : '[图片]'}}-->
       </div>
 
       <div class="itemFooter">
@@ -64,6 +58,7 @@
 <script type="text/javascript">
   import UserInfo from './UserInfo.vue'
   import Empty from './../Empty.vue'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -87,6 +82,9 @@
     mounted () {
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       setFollowStatus () {
 
       },
@@ -100,7 +98,7 @@
 <style lang="less" scoped>
   .answersWrapper {
     .content {
-      padding: 0 15px;
+      padding: 0 0.4rem;
     }
 
     .item {
@@ -108,18 +106,18 @@
     }
 
     .itemFooter {
-      padding: 9px 15px 13px;
+      padding: 0.24rem 0.4rem 0.346rem;
 
       .iconWrapper {
         display: inline-block;
         color: #808080;
-        font-size: 13px;
-        margin-right: 5px;
+        font-size: 0.346rem;
+        margin-right: 0.133rem;
       }
 
       .time {
         float: right;
-        font-size: 13px;
+        font-size: 0.346rem;
         color: #c8c8c8;
         text-align: right;
       }

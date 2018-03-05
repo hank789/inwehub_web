@@ -75,10 +75,10 @@
 <style scoped>
   .bot {
     position: absolute;
-    right: 0px;
+    right: 0rem;
     bottom: 0;
-    left: 0px;
-    height: 1px;
+    left: 0rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -103,20 +103,20 @@
   /*滚动区域*/
 
   .mui-wechat #pullrefresh {
-    margin-top: 0px;
+    margin-top: 0rem;
   }
 
   #pullrefresh {
-    margin-top: 44px;
+    margin-top: 1.173rem;
   }
 
   /*主体部分样式*/
 
   ul {
     width: 100%;
-    height: 277px;
-    padding: 0px 16px 0 16px;
-    margin-top: 11px;
+    height: 7.386rem;
+    padding: 0rem 0.426rem 0 0.426rem;
+    margin-top: 0.293rem;
   }
 
   ul p {
@@ -125,12 +125,12 @@
 
   ul li {
     width: 100%;
-    height: 238px;
+    height: 6.346rem;
     background: #f3f4f6;
-    margin-top: 11px;
-    border: 0.5px solid #dcdcdc;
-    border-radius: 5px;
-    padding: 12px 15px;
+    margin-top: 0.293rem;
+    border: 0.013rem solid #dcdcdc;
+    border-radius: 0.133rem;
+    padding: 0.32rem 0.4rem;
   }
 
   ul li p {
@@ -139,22 +139,22 @@
 
   ul li p:nth-of-type(1) {
     width: 100%;
-    height: 110px;
+    height: 2.933rem;
   }
 
   .check {
     width: 100%;
-    height: 20px;
+    height: 0.533rem;
   }
 
   .check i:nth-of-type(1) {
     float: left;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .check i:nth-of-type(2) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
     float: right;
   }
@@ -164,34 +164,34 @@
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(2) {
-    margin-top: 23px;
-    font-size: 23px;
+    margin-top: 0.613rem;
+    font-size: 0.613rem;
     color: #444444;
   }
 
   ul li p:nth-of-type(1) span:nth-of-type(3) {
-    margin-top: 5px;
-    font-size: 14px;
+    margin-top: 0.133rem;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   /*ul li p:nth-of-type(1) span:nth-of-type(2) i{
-  font-size: 28px;
+  font-size: 0.746rem;
   color: #444444;
-  margin-bottom: 20px;
+  margin-bottom: 0.533rem;
 }*/
 
   ul li p:nth-of-type(2) {
     width: 100%;
-    height: 76px;
+    height: 2.026rem;
   }
 
   ul li p:nth-of-type(2) span:nth-of-type(1) {
-    margin-top: 14px;
+    margin-top: 0.373rem;
   }
 
   ul li p:nth-of-type(2) span:nth-of-type(2) {
-    margin-top: 6px;
+    margin-top: 0.16rem;
   }
 
   ul li p:nth-of-type(2) span {
@@ -208,7 +208,7 @@
 
   ul li p:nth-of-type(3) {
     width: 100%;
-    height: 30px;
+    height: 0.8rem;
   }
 
   ul li p:nth-of-type(3) span {
@@ -221,15 +221,15 @@
 
   ul li p:nth-of-type(3) span {
     float: left;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    margin-top: 9px;
+    margin-top: 0.24rem;
   }
 
   ul li p:nth-of-type(3) svg {
     float: right;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
-    margin-top: 14px;
+    margin-top: 0.373rem;
   }
 </style>

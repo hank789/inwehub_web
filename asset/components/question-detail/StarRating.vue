@@ -50,15 +50,15 @@
 
   .detail-comment-result .ratingNum {
     position: absolute;
-    right: 10px;
-    top: 20px;
+    right: 0.266rem;
+    top: 0.533rem;
     color: #fcc816;
-    font-size: 18px;
+    font-size: 0.48rem;
   }
 
   .mui-table-view:after {
-    left: 15px;
-    right: 15px;
+    left: 0.4rem;
+    right: 0.4rem;
     background-color: #dcdcdc;
   }
 
@@ -72,8 +72,8 @@
 
   .mui-table-view-cell {
     color: #444;
-    font-size: 14px;
-    padding: 20px 15px 17px 15px;
+    font-size: 0.373rem;
+    padding: 0.533rem 0.4rem 0.453rem 0.4rem;
   }
 
 

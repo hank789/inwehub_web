@@ -84,6 +84,7 @@
   import { textToLinkHtml } from '../../utils/dom'
   import Typing from '../../components/Typing.vue'
   import { searchText } from '../../utils/search'
+  import localEvent from '../../stores/localStorage'
 
   const Chat = {
     data: () => ({
@@ -327,7 +328,8 @@
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
           }, 500)
-
+          //  清空
+          localEvent.clearLocalItem('share')
           postRequest(`im/message-store`, {
             text: this.comment,
             contact_id: this.chatUserId,
@@ -351,10 +353,18 @@
     updated () {
    // 打开第三方链接
       this.$nextTick(function () {
-        openVendorUrl(this.$el.querySelector('#myData'))
+        var myData = this.$el.querySelector('#myData')
+        if (myData) {
+          openVendorUrl(myData)
+        }
       })
     },
     mounted () {
+      // 保存链接
+      var a = localEvent.getLocalItem('share')
+      if (a) {
+        this.comment = a
+      }
       autoTextArea()
     }
   }
@@ -385,11 +395,11 @@
 
   .message {
     width: 100%;
-    height: 47px;
+    height: 1.253rem;
     background: #ececee;
     position: absolute;
     bottom: 0;
-    padding: 0 10px;
+    padding: 0 0.266rem;
     z-index: 5;
     display: flex;
     flex-direction: row;
@@ -398,18 +408,18 @@
   }
 
   .message input {
-    height: 35px;
-    border-radius: 5px;
+    height: 0.933rem;
+    border-radius: 0.133rem;
     background: #ffffff;
     border: none;
     margin-bottom: 0;
-    box-shadow: 0 0 10px rgba(220, 220, 220, 1);
+    box-shadow: 0 0 0.266rem rgba(220, 220, 220, 1);
 
   }
 
   .message svg {
-    font-size: 37px;
-    margin-left: 10px;
+    font-size: 0.986rem;
+    margin-left: 0.266rem;
     color: #03aef9;
 
   }
@@ -425,15 +435,15 @@
   .user li {
     width: 100%;
     overflow: hidden;
-    margin-top: 10px;
-    /*border: 1px solid #CCCCCC;*/
+    margin-top: 0.266rem;
+    /*border: 0.026rem solid #CCCCCC;*/
   }
    /*客服*/
   .consumer p:nth-of-type(1) {
     text-align: center;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 46px;
+    line-height: 1.226rem;
   }
 
   .consumer p:nth-of-type(2) {
@@ -442,10 +452,10 @@
   }
 
   .consumer p:nth-of-type(2) img {
-    width: 42px;
-    height: 42px;
+    width: 1.12rem;
+    height: 1.12rem;
     float: left;
-    border-radius: 8px;
+    border-radius: 0.213rem;
   }
 
   .consumer p:nth-of-type(2) span {
@@ -453,58 +463,58 @@
     float: left;
     display: block;
     max-width: 80%;
-    min-height: 35px;
+    min-height: 0.933rem;
     margin-left: 3%;
-    border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border-radius: 0.266rem;
+    border: 0.026rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 7px;
+    padding: 0.186rem;
     word-wrap:break-word;
   }
 
   .consumer p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
-    /*border: 6px solid transparent;
-    border-right: 6px solid #FFFFFF;
-    border-bottom: 6px solid #FFFFFF;*/
+    border: 0.026rem solid #dcdcdc;
+    /*border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #FFFFFF;
+    border-bottom: 0.16rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -4px;
+    left: -0.106rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 15px;
+    top: 0.4rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg{
-    width:85px;
-    height:105px;
+    width:2.266rem;
+    height:2.8rem;
     padding: 0;
   }
   .consumer p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
-    /*border: 6px solid transparent;
-    border-right: 6px solid #FFFFFF;
-    border-bottom: 6px solid #FFFFFF;*/
+    border: 0.026rem solid #dcdcdc;
+    /*border: 0.16rem solid transparent;
+    border-right: 0.16rem solid #FFFFFF;
+    border-bottom: 0.16rem solid #FFFFFF;*/
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -4px;
+    left: -0.106rem;
     border-top-color: #FFFFFF;
     border-left-color: #FFFFFF;
-    top: 15px;
+    top: 0.4rem;
     margin: auto;
   }
   .consumer p:nth-of-type(2) .chatImg img{
@@ -521,9 +531,9 @@
   .Customerservice p:nth-of-type(1) {
     width: 100%;
     text-align: center;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #b4b4b6;
-    line-height: 46px;
+    line-height: 1.226rem;
   }
 
   .Customerservice p:nth-of-type(2) {
@@ -532,10 +542,10 @@
   }
 
   .Customerservice p:nth-of-type(2) img {
-    width: 42px;
-    height: 42px;
+    width: 1.12rem;
+    height: 1.12rem;
     float: right;
-    border-radius: 8px;
+    border-radius: 0.213rem;
   }
 
   .Customerservice p:nth-of-type(2) span {
@@ -543,52 +553,52 @@
     float: right;
     display: block;
     max-width: 80%;
-    min-height: 35px;
+    min-height: 0.933rem;
     margin-right: 3%;
-    border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border-radius: 0.266rem;
+    border: 0.026rem solid #dcdcdc;
     text-align: left;
     background: #FFFFFF;
-    padding: 7px;
+    padding: 0.186rem;
     word-wrap: break-word;
   }
 
   .Customerservice p:nth-of-type(2) span:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -4px;
+    right: -0.106rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 15px;
+    top: 0.4rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg{
-    width:85px;
-    height:105px;
+    width:2.266rem;
+    height:2.8rem;
     padding: 0;
   }
   .Customerservice p:nth-of-type(2) .chatImg:after {
     z-index: -1;
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #FFFFFF;
-    border: 1px solid #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    right: -4px;
+    right: -0.106rem;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
-    top: 15px;
+    top: 0.4rem;
     margin: auto;
   }
   .Customerservice p:nth-of-type(2) .chatImg img{
@@ -596,12 +606,12 @@
     height:100%;
   }
   .chatListWrapper {
-    bottom: 47px;
+    bottom: 1.253rem;
   }
 
 </style>
 <style>
   .chatImg .container-image{
-    height:105px;
+    height:2.8rem;
   }
 </style>

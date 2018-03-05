@@ -200,7 +200,7 @@
     right:  0;
     bottom: 0;
     left:  0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -210,7 +210,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -221,50 +221,50 @@
   overflow: hidden;
   background:#ececee;
   position: relative;
-  padding-bottom: 24px;
+  padding-bottom: 0.64rem;
 }
 .gray{
   width:100%;
-  height:14px;
+  height:0.373rem;
   background:#3c3e44;
 }
 .companyDetail .company_image{
-  width:92px;
-  height:92px;
+  width:2.453rem;
+  height:2.453rem;
   position: absolute;
   left:0;
   right:0;
-  top:0px;
+  top:0rem;
   margin: auto;
 }
 .companyDetail .company_image img{
   width:100%;
   height:100%;
-  border-radius: 4px;
+  border-radius: 0.106rem;
 }
 .information{
   width:100%;
   overflow: hidden;
-  padding-top: 13px;
+  padding-top: 0.346rem;
 }
 .information li:nth-of-type(1){
   text-align: right;
-  font-size:12px;
+  font-size:0.32rem;
   color:#808080;
-  margin-right: 15px;
+  margin-right: 0.4rem;
 }
 .information li:nth-of-type(2){
   text-align: center;
-  font-size:16px;
+  font-size:0.426rem;
   color:#444444;
-  margin-top:61px;
+  margin-top:1.626rem;
 }
 .information li:nth-of-type(3){
   text-align: center;
-  font-size:14px;
+  font-size:0.373rem;
   color:#808080;
-  margin-top:8px;
-  padding: 0 15px;
+  margin-top:0.213rem;
+  padding: 0 0.4rem;
   display: flex;
   flex-direction: row;
   align-items:center;
@@ -272,7 +272,7 @@
   flex-wrap:wrap;
 }
 .information li:nth-of-type(3) span {
-  height:21px;
+  height:0.56rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -280,19 +280,19 @@
 }
 .information li:nth-of-type(3) span i{
   display: inline-block;
-  width:1px;
-  height:13px;
+  width:0.026rem;
+  height:0.346rem;
   background: #dcdcdc;
-  margin: 0 6px;
+  margin: 0 0.16rem;
 }
   .information li:nth-of-type(3) span:nth-last-child(1) i{
     display: none;
   }
 .information li:nth-of-type(4){
   text-align: center;
-  font-size:12px;
+  font-size:0.32rem;
   color:#808080;
-  margin-top:2px;
+  margin-top:0.053rem;
 }
   /*相关人员*/
   .Relevant{
@@ -302,11 +302,11 @@
   }
   .Relevant_title{
     width:100%;
-    height:45px;
+    height:1.2rem;
     position: relative;
-    font-size:16px;
+    font-size:0.426rem;
     color:#444444;
-    line-height: 45px;
+    line-height: 1.2rem;
     padding: 0 4%;
   }
   .Relevant_list{
@@ -315,7 +315,7 @@
   }
   .Relevant_list li{
     width:100%;
-    height:64px;
+    height:1.706rem;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -324,8 +324,8 @@
     flex-wrap:nowrap;
   }
   .Relevant_avatar{
-    width:44px;
-    height:44px;
+    width:1.173rem;
+    height:1.173rem;
     border-radius: 50%;
     float: left;
     position: relative;
@@ -337,67 +337,67 @@
   }
   .Relevant_avatar svg{
    position: absolute;
-    font-size:17px;
+    font-size:0.453rem;
     bottom: 0;
-    right:-2px;
+    right:-0.053rem;
   }
   /*详细的信息*/
   .Relevant_detail{
     /*width:65%;*/
     height:100%;
-    margin-left: 7px;
+    margin-left: 0.186rem;
   }
   .Relevant_detail p:nth-of-type(1){
-    font-size:14px;
+    font-size:0.373rem;
     color:#565656;
-    margin-top: 12px;
+    margin-top: 0.32rem;
     display: flex;
     flex-direction: row;
     align-items:center;
   }
   .Relevant_detail p:nth-of-type(1) span{
-      width:16px;
-      height:15px;
+      width:0.426rem;
+      height:0.4rem;
       background: url("../../statics/images/rank.png") no-repeat;
       background-size: 100% 100%;
       color:#FFFFFF;
-      font-size:10px;
-      line-height: 13px;
-      margin-left: 3px;
+      font-size:0.266rem;
+      line-height: 0.346rem;
+      margin-left: 0.08rem;
       display: flex;
       flex-direction: row;
       justify-content:center;
   }
   .Relevant_detail p:nth-of-type(2){
-    font-size:13px;
+    font-size:0.346rem;
     color:#b4b4b6;
     width:90%;
   }
   /*关注*/
   .Relevant_follow{
-    width: 64px;
-    height: 27px;
+    width: 1.706rem;
+    height: 0.72rem;
     background: #03aef9;
     color: #FFFFFF;
-    line-height:27px;
-    border-radius: 50px;
+    line-height:0.72rem;
+    border-radius: 1.333rem;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
   .Relevant_empty{
-    width: 64px;
-    height: 27px;
-    border:1px solid #03aef9;
+    width: 1.706rem;
+    height: 0.72rem;
+    border:0.026rem solid #03aef9;
     color:#03aef9;
-    line-height:27px;
-    border-radius: 50px;
+    line-height:0.72rem;
+    border-radius: 1.333rem;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
   button{
     width:100%;
-    height:46px;
-    font-size:17px;
+    height:1.226rem;
+    font-size:0.453rem;
     color: #FFFFFF;
     text-align: center;
     background:#03aef9;
@@ -408,7 +408,7 @@
     border:none;
   }
   .listWrapper{
-    bottom: 46px;
+    bottom: 1.226rem;
   }
   /*适配*/
   @media (min-width:320px) {

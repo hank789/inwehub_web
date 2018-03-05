@@ -31,7 +31,7 @@
                   </svg>
                 </div>
                 <div class="detail">
-                  <p>{{item.name}}<i>（< {{item.distance}}m）</i></p>
+                  <p>{{item.name}}<i>（< {{item.distance_format}}m）</i></p>
                   <p class="mui-ellipsis">{{item.description}}</p>
                 </div>
                 <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>
@@ -196,7 +196,7 @@
   .mui-scroll-wrapper {
     position: absolute;
     z-index: 2;
-    top: 56px;
+    top: 1.493rem;
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -208,7 +208,7 @@
     right: 4%;
     bottom: 0;
     left: 4%;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -220,17 +220,17 @@
   /*导航栏*/
   .menu{
     width: 100%;
-    height:50px;
+    height:1.333rem;
     background:#3c3e44;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:210px;
-    height:34px;
-    border:1px solid #808080;
-    border-radius: 50px;
+    width:5.6rem;
+    height:0.906rem;
+    border:0.026rem solid #808080;
+    border-radius: 1.333rem;
     position: absolute;
     left: 0;
     right:0;
@@ -239,20 +239,20 @@
   .menu .switch p{
     width:50%;
     height:100%;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #fefefe;
     float: left;
     text-align: center;
-    line-height: 34px;
+    line-height: 0.906rem;
   }
   .menu .switch p:nth-of-type(1){
     background:#808080;
-    border-radius: 50px  0  0 50px;
+    border-radius: 1.333rem  0  0 1.333rem;
   }
   .menu svg{
     position: absolute;
     right:3%;
-    font-size: 25px;
+    font-size: 0.666rem;
     color: #fefefe;
   }
   /*地图*/
@@ -272,11 +272,11 @@
   /*列表区域*/
   .userArea{
     width:100%;
-    height:56px;
-    font-size: 15px;
+    height:1.493rem;
+    font-size: 0.4rem;
     color: #3c3e44;
     text-align: center;
-    line-height: 56px;
+    line-height: 1.493rem;
     position: relative;
   }
   .userArea:after {
@@ -284,7 +284,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -292,11 +292,11 @@
   }
   .userArea i{
     display: block;
-    width:34px;
-    height:2px;
+    width:0.906rem;
+    height:0.053rem;
     background: #808080;
     position: absolute;
-    top:10px;
+    top:0.266rem;
     left:0;
     right:0;
     margin: auto;
@@ -314,63 +314,63 @@
   .cions-list li{
     position: relative;
     padding: 0 4%;
-    height:64px;
+    height:1.706rem;
   }
   .cions-list li div{
     float: left;
   }
   .cions-list li .cions-avatar{
     position: relative;
-    width:44px;
-    height:44px;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
     background: #cccccc;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
   .cions-list li .cions-avatar img{
-    width:44px;
-    height:44px;
+    width:1.173rem;
+    height:1.173rem;
     border-radius:50%;
   }
   .cions-list li .cions-avatar svg{
     position: absolute;
-    font-size: 20px;
-    right: -5px;
-    bottom: -2px;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
   }
   .cions-list li .detail{
     width:60%;
     overflow: hidden;
-    margin-top: 14px;
-    font-size:14px;
+    margin-top: 0.373rem;
+    font-size:0.373rem;
     color: #444444;
-    margin-left: 8px;
+    margin-left: 0.213rem;
   }
   .cions-list li .detail p:nth-of-type(1) i{
-    font-size:12px;
+    font-size:0.32rem;
     color: #808080;
   }
   .cions-list li .detail p:nth-of-type(2){
-    font-size:12px;
+    font-size:0.32rem;
     color: #b4b4b6;
-    margin-top: -2px;
+    margin-top: -0.053rem;
   }
   .cions-list li .fouce{
-    width:61px;
-    height:27px;
+    width:1.626rem;
+    height:0.72rem;
     background: #03aef9;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 27px;
-    font-size:14px;
+    line-height: 0.72rem;
+    font-size:0.373rem;
     color: #ffffff;
-    margin-top: 18.5px;
+    margin-top: 0.493rem;
     float: right;
 
   }
   .cions-list li .blue{
     color: #03aef9;
-    border: 1px solid #03aef9;
+    border: 0.026rem solid #03aef9;
     background: #ffffff;
   }
 </style>

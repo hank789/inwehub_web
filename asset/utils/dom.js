@@ -54,15 +54,22 @@ function textToLinkHtml (text) {
   if (/vendorUrl/gi.test(text)) {
     return text
   }
-  var re = /[^"'](https?:\/\/[^\s<]+)/g
-  text = text.replace(re, " <span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
+
+  var re = /\[(.*?)\]\((.*?)\)/g
+  text = text.replace(re, '<span target="_blank" class="vendorUrl text-content visualLink" href="$2">链接：$1</span>')
+
+  re = /([^"'])(https?:\/\/[^\s<]+)/g
+  text = text.replace(re, "$1 <span target='_blank' class='vendorUrl text-content' href='$2'>$2</span>")
 
   re = /<p>(https?:\/\/[^\s<]+)/g
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
 
   re = /^(https?:\/\/[^\s<]+)/
   text = text.replace(re, "<p><span target='_blank' class='vendorUrl text-content' href='$1'>$1</span>")
-
+  // 进行正则匹配 和 替换
+  // console.error(text)
+  // 'ldfjsldfj(dsfasjfj3124123)'.match(/\((.+)\)/g);
+  // console.log(RegExp.$1); // dsfasjfj3124123
   return text
 }
 
@@ -138,6 +145,30 @@ function dragDownElement (elem, callback) {
   })
 }
 
+function setRemUnit () {
+  var docEl = document.documentElement
+  var rem = docEl.clientWidth / 10
+  if (rem > 41.4) {
+    rem = 41.4
+  }
+  docEl.style.fontSize = rem + 'px'
+  var dpr = window.devicePixelRatio || 1
+  document.body.classList.add('w' + docEl.clientWidth + '-' + dpr)
+}
+
+/**
+ * 设置rem
+ */
+function initDocRem () {
+  setRemUnit()
+  window.addEventListener('resize', setRemUnit)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      setRemUnit()
+    }
+  })
+}
+
 export {
   queryParent,
   textToLink,
@@ -147,6 +178,7 @@ export {
   secureHtml,
   autoBlur,
   transferTagToLink,
-  dragDownElement
+  dragDownElement,
+  initDocRem
 }
 

@@ -12,7 +12,7 @@
         <div class="mui-media-body freeQuestion-content">{{data.title}}</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <div class="freeQuestion-time">
-          <timeago :since="timeago(data.created_at)">
+          <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
@@ -207,14 +207,14 @@
     color:#808080;
   }
   .noMoreComment .container-answer{
-    padding:10px 15px 10px;
+    padding:0.266rem 0.4rem 0.266rem;
   }
 
 
 </style>
 <style>
   #Outermost  p{
-    font-size: 16px;
+    font-size: 0.426rem;
     margin-bottom: 0;
   }
   .comment p{

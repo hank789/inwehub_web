@@ -134,7 +134,7 @@
       getEndTime (task) {
         var deadline = task.deadline
         if (deadline) {
-          return Date.parse(deadline.replace(/-/g, '／')) / 1000
+          return Date.parse(deadline.replace(/-/g, '/')) / 1000
         }
         return null
       },
@@ -185,7 +185,7 @@
 <style scoped>
   /*.mui-wechat .menu[data-v-4f45c199] {*/
     /*width: 100%;*/
-    /*height: 45px;*/
+    /*height: 1.2rem;*/
     /*position: absolute;*/
     /*z-index: 10;*/
     /*background: #f3f4f6;*/
@@ -196,7 +196,7 @@
 
   /*.menu {*/
     /*width: 100%;*/
-    /*height: 45px;*/
+    /*height: 1.2rem;*/
     /*position: absolute;*/
     /*z-index: 10;*/
     /*background: #f3f4f6;*/
@@ -206,10 +206,10 @@
     /*display: inline-block;*/
     /*width: 49%;*/
     /*height: 100%;*/
-    /*font-size: 14px;*/
+    /*font-size: 0.373rem;*/
     /*color: #444444;*/
     /*text-align: center;*/
-    /*line-height: 45px;*/
+    /*line-height: 1.2rem;*/
     /*font-weight: 600;*/
   /*}*/
 
@@ -220,19 +220,19 @@
   /*.menu i {*/
     /*display: block;*/
     /*position: absolute;*/
-    /*width: 30px;*/
-    /*height: 1.8px;*/
+    /*width: 0.8rem;*/
+    /*height: 0.048rem;*/
     /*left: 20.55%;*/
-    /*bottom: 0.5px;*/
+    /*bottom: 0.013rem;*/
     /*background: #3c95f9;*/
   /*}*/
 
   .bot {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     bottom: 0;
-    left: 16px;
-    height: 1px;
+    left: 0.426rem;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -257,8 +257,8 @@
   /*滚动区域*/
 
   .mui-content .menu ~ #pullrefresh {
-    top:45px;
-    bottom: 41px;
+    top:1.2rem;
+    bottom: 1.093rem;
   }
 
   .mui-content {
@@ -269,7 +269,7 @@
 
   ul li {
     position: relative;
-    padding: 10px 16px 0px 16px;
+    padding: 0.266rem 0.426rem 0rem 0.426rem;
     overflow: hidden;
   }
 
@@ -287,7 +287,7 @@
     /*background: #CCCCCC;*/
     float: left;
     color: #03aef9;
-    font-size: 42px;
+    font-size: 1.12rem;
   }
 
   ul li p {
@@ -298,7 +298,7 @@
 
   ul li p span {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 0.16rem;
     width: 100%;
   }
 
@@ -310,29 +310,29 @@
   ul li p span:nth-of-type(1) a {
     display: block;
     float: left;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
   }
 
   ul li p span:nth-of-type(1) a:nth-of-type(1) {
 
-    padding-right: 5px;
+    padding-right: 0.133rem;
   }
 
   ul li p span:nth-of-type(1) a.level {
-    font-size: 12px;
-    padding: 4px 5px;
+    font-size: 0.32rem;
+    padding: 0.106rem 0.133rem;
     color: #FFFFFF;
-    margin-left: 8px;
+    margin-left: 0.213rem;
   }
 
   ul li p span:nth-of-type(2) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
   }
 
   ul li p span:nth-of-type(3) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
   }
 
@@ -341,8 +341,8 @@
   }
 
   .message {
-    width: 7px;
-    height: 7px;
+    width: 0.186rem;
+    height: 0.186rem;
     background: #f03c69;
     border-radius: 50%;
     position: absolute;
@@ -359,22 +359,22 @@
   }
 
   .container svg {
-    font-size: 60px;
-    margin-left: 23px;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-left: 0.613rem;
+    margin-bottom: 0.213rem;
   }
 
   .container p {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #c8c8c8;
   }
 
   .list-empty {
-    top: 89px !important;
+    top: 2.373rem !important;
   }
 
   .list-empty .list-ask-item {
-    padding: 10px 0;
+    padding: 0.266rem 0;
   }
 
   .list-empty .list-ask-item:after{
@@ -384,18 +384,17 @@
   .menu_message {
     position: absolute;
     left: 79%;
-    top: 8px;
+    top: 0.213rem;
     background: #f03c69;
-    font-size: 11px;
+    font-size: 0.293rem;
     text-align: center;
     color: #fff;
-    padding: 0px 3px;
-    min-width: 15px;
-    min-height: 15px;
-    border-radius: 15px;
-    line-height: 15px;
+    padding: 0rem 0.08rem;
+    min-width: 0.4rem;
+    min-height: 0.4rem;
+    border-radius: 0.4rem;
+    line-height: 0.4rem;
   }
   .listWrapper{
-    bottom: 50px;
   }
 </style>

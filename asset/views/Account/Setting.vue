@@ -240,7 +240,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -256,9 +256,9 @@
    }
   ul li{
     width:100%;
-    height: 44px;
+    height: 1.173rem;
     position: relative;
-    line-height: 44px;
+    line-height: 1.173rem;
     /*display: flex;*/
     /*flex-direction: row;*/
     /*justify-content: space-between;*/
@@ -269,25 +269,25 @@
   }
   ul li svg{
     float: right;
-    margin-top: 14px;
+    margin-top: 0.373rem;
   }
   ul li .name{
     float: right;
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
   }
   button{
-    margin-top: 20px;
+    margin-top: 0.533rem;
     width:92%;
-    height:44px;
+    height:1.173rem;
     margin-left: 4%;
-    border-radius: 5px;
+    border-radius: 0.133rem;
   }
   .foot{
     width:100%;
     overflow: hidden;
     position: absolute;
-    bottom: 29px;
+    bottom: 0.773rem;
 
   }
   .logo{
@@ -296,13 +296,13 @@
     text-align: center;
   }
   .logo svg{
-    font-size: 150px;
-    margin-top: -30px;
+    font-size: 4rem;
+    margin-top: -0.8rem;
   }
   .logo p{
-    font-size:14px;
+    font-size:0.373rem;
     color: #444444;
-    margin-top: -50px;
+    margin-top: -1.333rem;
   }
   .text{
     width:100%;
@@ -311,7 +311,7 @@
 
   }
   .text p{
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #b4b4b6;
   }
   /*.mui-plus-hidden, .mui-wechat-hidden {*/
@@ -320,17 +320,17 @@
   /*适配*/
   @media (min-width:320px) {
     .text{
-      margin-top: 10px;
+      margin-top: 0.266rem;
     }
   }
   @media (min-width:375px) {
     .text{
-      margin-top: 68px;
+      margin-top: 1.813rem;
     }
   }
   @media (min-width:414px) {
     .text{
-      margin-top: 68px;
+      margin-top: 1.813rem;
     }
   }
 </style>

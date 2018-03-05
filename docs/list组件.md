@@ -16,6 +16,9 @@
 
     第三部:循环list即可
 
+    可选
+       . 获取完整的响应数据
+          object this.$refs.RefreshList.getResponse(void)
 
 ##列表组件参数
 
@@ -75,7 +78,9 @@
           type: Boolean, 默认false
           false时传top_id, bottom_it给接口
           true时传page给接口
-
+      . this.$refs.RefreshList.getResponse()
+          :prevSuccessCallback="prevSuccessCallback
+          获取全部数据
 
 
 

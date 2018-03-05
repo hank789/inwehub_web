@@ -5,6 +5,8 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var entris = require('./entris')
 
 // add hot-reload related code to entry chunks
@@ -21,6 +23,15 @@ var config = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    new ExtractTextPlugin({
+      filename: utils.assetsPath('css/[name].[chunkhash].css')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      sourceMap: true
+    }),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require("./manifest.json")

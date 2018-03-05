@@ -248,7 +248,7 @@
     right:5%;
     bottom: 0;
     left:5%;
-    height: 1px;
+    height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
@@ -260,7 +260,7 @@
 /*菜单栏*/
   .categoryMenu{
     width:100%;
-    height:100px;
+    height:2.666rem;
     background: #FFFFFF;
     display: flex;
     flex-direction: row;
@@ -279,35 +279,35 @@
   .categoryMenu li:nth-of-type(1) i{
     position: absolute;
     font-style: normal;
-    width: 30px;
-    height: 17px;
-    font-size: 12px;
+    width: 0.8rem;
+    height: 0.453rem;
+    font-size: 0.32rem;
     color: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     background: #fa4975;
     text-align: center;
-    line-height:17px;
-    top: 22px;
-    right: 0px;
+    line-height:0.453rem;
+    top: 0.586rem;
+    right: 0rem;
   }
   .categoryMenu li:nth-of-type(1) i:after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 0.16rem;
+    height: 0.16rem;
     background: #fa4975;
-    /* border: 1px solid #dcdcdc; */
+    /* border: 0.026rem solid #dcdcdc; */
     position: absolute;
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
-    left: -3px;
-    top: 0px;
+    left: -0.08rem;
+    top: 0rem;
     bottom: 0;
     margin: auto;
   }
   .categoryMenu li .discover-round{
-    width:53px;
-    height:53px;
+    width:1.413rem;
+    height:1.413rem;
     /*background: #03aef9;*/
     border-radius: 50%;
     display: flex;
@@ -320,12 +320,12 @@
     background: linear-gradient(rgb(89, 195, 253), rgb(113, 210, 253)); /* 标准的语法 */
   }
   .categoryMenu li svg{
-    font-size:30px;
+    font-size:0.8rem;
   }
   .categoryMenu li p{
-    font-size:13px;
+    font-size:0.346rem;
     color: #808080;
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
 /*列表*/
   .recommend{
@@ -336,21 +336,21 @@
   .recommend_title{
     width:100%;
     padding: 0 4%;
-    height:44px;
-    font-size:16px;
+    height:1.173rem;
+    font-size:0.426rem;
     color: #444444;
-    line-height: 44px;
+    line-height: 1.173rem;
     background: #FFFFFF;
   }
   .recommend li{
     width:92%;
-    padding:0px 0 13px 0;
+    padding:0rem 0 0.346rem 0;
     overflow: hidden;
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
     margin-left: 4%;
-    border-radius: 4px;
-    box-shadow: 0px 0px 7px 2px #ececee;
+    border-radius: 0.106rem;
+    box-shadow: 0rem 0rem 0.186rem 0.053rem #ececee;
   }
   .recommend li:nth-of-type(1){
     padding-top: 0;
@@ -359,14 +359,14 @@
      position: relative;
   }
   .recommend li .container_type{
-    width: 64px;
-    height:20px;
+    width: 1.706rem;
+    height:0.533rem;
     float: left;
-    border-radius:0 18px 18px 0;
+    border-radius:0 0.48rem 0.48rem 0;
     text-align: center;
-    line-height: 20px;
+    line-height: 0.533rem;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
   /*颜色*/
   .recommend li .blue{
@@ -381,69 +381,74 @@
 
   /**/
   .recommend_content{
-    margin-top: 12px;
+    margin-top: 0.32rem;
     color:#444444;
-    font-size:15px;
-    line-height: 20px;
-    padding: 0 15px;
+    font-size:0.4rem;
+    line-height: 0.533rem;
+    padding: 0 0.4rem;
 
   }
 /*swiper*/
   .container-item{
     background: #FFFFFF;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
   .container-item .title{
     width:100%;
-    height:42.5px;
+    height:1.133rem;
     padding: 0 4%;
-    line-height: 42.5px;
+    line-height: 1.133rem;
   }
   .container-item .title p:nth-of-type(1){
     float: left;
-    font-size:16px;
+    font-size:0.426rem;
     color:#444444;
 
   }
   .container-item .title p:nth-of-type(2){
     float: right;
-    font-size:13px;
+    font-size:0.346rem;
     color:#03aef9;
 
   }
 
   #home-recommend {
     width: 100%;
-    height: 162px;
+    height: 4.32rem;
     padding-left:4%;
     background: #FFFFFF;
   }
 
   #home-recommend div:nth-of-type(1) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
    #home-card {
-    height: 147px;
+    height: 3.92rem;
     background: #ececee;
     position: relative;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
   #home-card img{
     width:100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
 .listWrapper{
-  margin-top: 0px;
-  bottom: 51px;
+  margin-top: 0rem;
+  bottom: 1.36rem;
 }
+
+.w414-3 .listWrapper{
+  bottom:50px !important;
+}
+
 /*顾问社区*/
   .community{
     width:100%;
     padding:0 5%;
-    height:33px;
-    line-height: 43px;
-    font-size:16px;
+    height:0.88rem;
+    line-height: 1.146rem;
+    font-size:0.426rem;
     color: #444444;
     background: #FFFFFF;
   }
@@ -451,23 +456,23 @@
   /*底部的详情*/
   .recommend_datail{
     width:100%;
-    height:20px;
-    margin-top: 9px;
+    height:0.533rem;
+    margin-top: 0.24rem;
   }
 /*回答 关注*/
 .answer-fouce{
   float: right;
-  font-size:12px;
+  font-size:0.32rem;
   color: #235280;
-  padding-right: 15px;
+  padding-right: 0.4rem;
 }
   .answer-fouce i{
     margin: 0;
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.026rem;
+    height:0.32rem;
     background: #dbdbdb;
-    margin: 0 9px -3px 9px;
+    margin: 0 0.24rem -0.08rem 0.24rem;
 
 
   }
@@ -475,36 +480,36 @@
   /*榜单*/
   .mostInvitations{
     width:92%;
-    height:60px;
+    height:1.6rem;
     background: #fdc707;
-    margin: 7px 4%;
-    border-radius: 12px;
-    padding-left: 15px;
-    padding-top: 8px;
+    margin: 0.186rem 4%;
+    border-radius: 0.32rem;
+    padding-left: 0.4rem;
+    padding-top: 0.213rem;
     position: relative;
   }
   .mostInvitations .Medal{
-    width: 32px;
+    width: 0.853rem;
     position: absolute;
-    right:18px;
+    right:0.48rem;
     top:0;
   }
   .invitation{
-    font-size:12px;
+    font-size:0.32rem;
     color: #8e4c02;
   }
   .invitation span{
-    font-size:16px;
+    font-size:0.426rem;
     font-weight:500;
     color: #8e4c02;
-    margin-right: 2px;
+    margin-right: 0.053rem;
   }
   .invitation i{
-    font-size:12px;
+    font-size:0.32rem;
     color:#235280;
   }
   .credits-cions{
-    font-size:12px;
+    font-size:0.32rem;
     color: #8e4c02;
   }
   .credits-cions i{
@@ -512,25 +517,25 @@
   }
   .InvitationList{
     position: absolute;
-    width:92px;
-    height:34px;
-    border:1px solid #fde07d;
-    border-radius: 13px;
-    font-size: 14px;
+    width:2.453rem;
+    height:0.906rem;
+    border:0.026rem solid #fde07d;
+    border-radius: 0.346rem;
+    font-size: 0.373rem;
     color: #b56102;
-    line-height: 34px;
+    line-height: 0.906rem;
     text-align: center;
-    right: 56px;
-    top: 13px;
-    box-shadow:0px 0px 2px rgba(81, 55, 7, 0.5) inset;
-    text-shadow: 0 0 1px rgb(238,134,16);
+    right: 1.493rem;
+    top: 0.346rem;
+    box-shadow:0rem 0rem 0.053rem rgba(81, 55, 7, 0.5) inset;
+    text-shadow: 0 0 0.026rem rgb(238,134,16);
   }
   .InvitationList img{
-    height:20px;
-    margin-top: 6px;
+    height:0.533rem;
+    margin-top: 0.16rem;
   }
   .grey{
     width:100%;
-    height:10px;
+    height:0.266rem;
   }
 </style>

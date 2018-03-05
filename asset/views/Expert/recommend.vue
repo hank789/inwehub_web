@@ -94,6 +94,7 @@
   import localEvent from '../../stores/localStorage'
   import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
   import MTextarea from '../../components/MTextarea.vue'
+  import popPickerComponent from '../../components/picker/poppicker.vue'
 
   export default {
     data: () => ({
@@ -343,7 +344,8 @@
     },
     components: {
       industryTagsIndexedList,
-      MTextarea
+      MTextarea,
+      popPickerComponent
     }
   }
 
@@ -351,13 +353,13 @@
 
 <style scoped>
   .professor .title {
-    height: 40px;
-    margin-left: 10px;
-    line-height: 40px;
+    height: 1.066rem;
+    margin-left: 0.266rem;
+    line-height: 1.066rem;
   }
 
   .professor li {
-    padding: 5px 0;
+    padding: 0.133rem 0;
   }
 
   .professor li input {
@@ -366,17 +368,17 @@
 
   .professor .year {
     position: absolute;
-    right: 35px;
-    top: 10px
+    right: 0.933rem;
+    top: 0.266rem
   }
 
   .professor .link {
     display: inline-block;
     float: right;
     width: 65%;
-    height: 40px;
-    line-height: 37px;
-    padding-right: 30px;
+    height: 1.066rem;
+    line-height: 0.986rem;
+    padding-right: 0.8rem;
   }
 
   .mui-table-view-cell {
@@ -386,56 +388,56 @@
   .expert-setting-field {
     position: absolute;
     text-align: right;
-    font-size: 12px;
-    width: 200px;
-    right: 40px;
+    font-size: 0.32rem;
+    width: 5.333rem;
+    right: 1.066rem;
     color: #3f51b5;
   }
 
   .account_item_title {
-    padding: 5px;
+    padding: 0.133rem;
     color: #a6a6a6;
-    font-size: 12px;
+    font-size: 0.32rem;
   }
 
   .button-wrapper {
-    padding: 0 50px;
+    padding: 0 1.333rem;
   }
 
   .image-list {
     width: 100%;
-    /*height: 85px;*/
+    /*height: 2.266rem;*/
     background-size: cover;
-    padding: 10px;
+    padding: 0.266rem;
     overflow: hidden;
   }
 
   .image-item {
-    width: 65px;
-    height: 65px;
+    width: 1.733rem;
+    height: 1.733rem;
     /* background-image: url(../images/iconfont-tianjia.png); */
     background-size: 100% 100%;
     display: inline-block;
     position: relative;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: solid 1px #e8e8e8;
+    border-radius: 0.133rem;
+    margin-right: 0.266rem;
+    margin-bottom: 0.266rem;
+    border: solid 0.026rem #e8e8e8;
     vertical-align: top;
   }
 
   .image-item .mui-icon {
-    font-size: 40px;
+    font-size: 1.066rem;
     position: absolute;
-    top: 11px;
-    left: 11px;
+    top: 0.293rem;
+    left: 0.293rem;
     color: #ccc;
   }
 
   .image-item .file {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 0rem;
+    top: 0rem;
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -445,17 +447,17 @@
   .image-item .image-close {
     position: absolute;
     display: inline-block;
-    right: -6px;
-    top: -6px;
-    width: 20px;
-    height: 20px;
+    right: -0.16rem;
+    top: -0.16rem;
+    width: 0.533rem;
+    height: 0.533rem;
     text-align: center;
-    line-height: 20px;
-    border-radius: 12px;
+    line-height: 0.533rem;
+    border-radius: 0.32rem;
     background-color: #FF5053;
     color: #f3f3f3;
-    border: solid 1px #FF5053;
-    font-size: 9px;
+    border: solid 0.026rem #FF5053;
+    font-size: 0.24rem;
     font-weight: 200;
     z-index: 1;
   }
@@ -467,7 +469,7 @@
   .image-item .image-up:after {
     font-family: "微软雅黑";
     content: '+';
-    font-size: 60px;
+    font-size: 1.6rem;
   }
 
 

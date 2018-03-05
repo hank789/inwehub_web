@@ -147,10 +147,10 @@
       },
       // 警告框
       warn () {
-        var font = '<p style="text-align: left; color: #444444; margin-bottom:20px">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
+        var font = '<p style="text-align: left; color: #444444; margin-bottom:0.533rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
           '<p style="text-align: left; color: #444444;">' + '平台对所有个人信息绝对保密，不会提供给任何第三方。' + '</p>'
-        var title = '<p style="font-size:16px; margin-bottom:15px">' +
-          '<svg class="icon" aria-hidden="true" style="font-size:18px; color:#fcc816; margin-right:2px; margin-bottom:-1px">' +
+        var title = '<p style="font-size:0.426rem; margin-bottom:0.4rem">' +
+          '<svg class="icon" aria-hidden="true" style="font-size:0.48rem; color:#fcc816; margin-right:0.053rem; margin-bottom:-0.026rem">' +
           '<use xlink:href="#icon-jinggao"></use>' +
           '</svg>' +
           '警告说明 ' +
@@ -217,10 +217,10 @@
   }
 
   .mui-bar .myicon {
-    width: 16px;
-    height: 16px;
-    right: 8px;
-    top: 8px;
+    width: 0.426rem;
+    height: 0.426rem;
+    right: 0.213rem;
+    top: 0.213rem;
   }
 
   p,
@@ -231,7 +231,7 @@
 
   .info-professor {
     width: 100%;
-    padding: 20px 15px 0px 16px;
+    padding: 0.533rem 0.4rem 0rem 0.426rem;
     background: #F3F4F6;
     text-align: center;
     position: relative;
@@ -239,144 +239,144 @@
 
   .info-look {
     position: absolute;
-    top: 20px;
-    right: 15px;
+    top: 0.533rem;
+    right: 0.4rem;
   }
 
   .info-look svg {
-    font-size: 24px;
+    font-size: 0.64rem;
     color: rgb(3, 174, 249);
-    margin-bottom: -2px;
+    margin-bottom: -0.053rem;
   }
 
   .info-look span {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(1) img {
-    width: 69px;
-    height: 69px;
+    width: 1.84rem;
+    height: 1.84rem;
     border-radius: 50%;
   }
 
   .info-professor p:nth-of-type(1) span {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 0.48rem;
+    height: 0.48rem;
     border-radius: 50%;
     background: #FFFFFF;
-    margin-left: -18px;
-    margin-bottom: 6px;
+    margin-left: -0.48rem;
+    margin-bottom: 0.16rem;
     position: relative;
   }
 
   .info-professor p:nth-of-type(1) span svg {
-    font-size: 25px;
+    font-size: 0.666rem;
     color: #808080;
     position: absolute;
-    left: -4px;
-    top: -3px;
+    left: -0.106rem;
+    top: -0.08rem;
   }
 
   .info-professor p:nth-of-type(2) {
-    margin-top: 6px;
+    margin-top: 0.16rem;
   }
 
   .info-professor p:nth-of-type(2) span {
-    font-size: 16px;
+    font-size: 0.426rem;
     font-weight: 600;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(2) svg {
-    font-size: 20px;
+    font-size: 0.533rem;
     color: rgb(3, 174, 249);
-    margin-bottom: -2px;
+    margin-bottom: -0.053rem;
   }
 
   .info-professor p:nth-of-type(3) {
-    margin-top: 7px;
+    margin-top: 0.186rem;
   }
 
   .info-professor p:nth-of-type(3) span {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #444444;
   }
 
   .info-professor p:nth-of-type(3) i {
     display: inline-block;
-    width: 1px;
-    height: 13px;
+    width: 0.026rem;
+    height: 0.346rem;
     background: #c8c8c8;
-    margin: 0 3px -2px 3px;
+    margin: 0 0.08rem -0.053rem 0.08rem;
   }
 
   .info-professor p:nth-of-type(4) {
-    margin-top: 7px;
+    margin-top: 0.186rem;
   }
 
   .info-professor p:nth-of-type(5) {
-    margin-top: 6px;
+    margin-top: 0.16rem;
   }
 
   .info-professor p:nth-of-type(4),
   .info-professor p:nth-of-type(5) {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
   }
 
   .info-progresbar {
     width: 100%;
-    height: 50px;
-    padding: 10px 17px 0 16px;
+    height: 1.333rem;
+    padding: 0.266rem 0.453rem 0 0.426rem;
     background: #F3F4F6;
   }
 
   .info-progresbar svg {
     float: right;
-    font-size: 15px;
+    font-size: 0.4rem;
     color: #fcc816;
-    margin-left: 0px;
-    margin-top: 4px;
+    margin-left: 0rem;
+    margin-top: 0.106rem;
   }
 
   .info-progresbar .info-progress {
     display: inline-block;
     width: 80%;
-    height: 12px;
-    border-radius: 50px;
+    height: 0.32rem;
+    border-radius: 1.333rem;
     overflow: hidden;
-    border: 0.5px solid rgb(3, 174, 249);
-    margin-bottom: -2px;
+    border: 0.013rem solid rgb(3, 174, 249);
+    margin-bottom: -0.053rem;
   }
 
   .info-progresbar .info-progress > i {
     display: inline-block;
     font-style: normal;
-    margin-bottom: 8px;
-    margin-left: -14px;
-    height: 12px;
+    margin-bottom: 0.213rem;
+    margin-left: -0.373rem;
+    height: 0.32rem;
     background: rgb(3, 174, 249);
   }
 
   .info-progresbar .info-text {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
   }
 
   .paizhao {
     width: 100%;
-    height: 100px;
+    height: 2.666rem;
     background: #FFFFFF;
-    padding: 19px 12px 0 12px;
-    font-size: 12px;
+    padding: 0.506rem 0.32rem 0 0.32rem;
+    font-size: 0.32rem;
     color: rgb(128, 128, 128);
   }
 
   .part3 .desc {
-    margin-left: 40px;
-    font-size: 12px;
+    margin-left: 1.066rem;
+    font-size: 0.32rem;
   }
 
   .part3 .important {
@@ -385,37 +385,37 @@
 
   .info-choose {
     width: 100%;
-    height: 95px;
+    height: 2.533rem;
     background: #FFFFFF;
     position: absolute;
     bottom: 0;
-    padding-top: 13px;
-    padding-left: 39px;
+    padding-top: 0.346rem;
+    padding-left: 1.04rem;
     z-index: 999;
     display: none;
   }
 
   .info-choose p {
-    width: 45px;
-    height: 71px;
+    width: 1.2rem;
+    height: 1.893rem;
     float: left;
   }
 
   .info-choose p:nth-of-type(2) {
-    margin-left: 36px;
+    margin-left: 0.96rem;
   }
 
   .info-choose p svg {
-    font-size: 48px;
+    font-size: 1.28rem;
     color: rgb(220, 220, 220);
   }
 
   .info-choose p span {
     display: block;
-    margin-left: 10px;
-    margin-top: 2px;
+    margin-left: 0.266rem;
+    margin-top: 0.053rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 0.346rem;
   }
 
   #mui-popover-action {
@@ -424,10 +424,10 @@
 
   .mui-table-view:after {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     bottom: 0;
-    left: 14px;
-    height: 1px;
+    left: 0.373rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -436,10 +436,10 @@
 
   .mui-table-view-cell:after {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     bottom: 0;
-    left: 15px;
-    height: 1px;
+    left: 0.4rem;
+    height: 0.026rem;
     content: '';
   }
 
@@ -448,7 +448,7 @@
     top: 0;
     right: 0;
     left: 0;
-    height: 1px;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
@@ -457,13 +457,13 @@
 
   @media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     .part2 .progressBar {
-      width: 160px !important;
+      width: 4.266rem !important;
     }
   }
 
   @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .part2 .progressBar {
-      width: 160px !important;
+      width: 4.266rem !important;
     }
   }
 </style>
