@@ -229,7 +229,6 @@
 <style>
   .answerRichText.blur {
     position: absolute;
-    top:0;
     bottom:0;
   }
 
