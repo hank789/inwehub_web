@@ -5,12 +5,15 @@
       <h1 class="mui-title">标签详情</h1>
     </header>
     <div class="mui-content absolute">
-      <TagsInfo :tagName = tagName></TagsInfo>
+      <TagsInfo
+        :tagName = tagName
+        :type = type
+      ></TagsInfo>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/questions?from=tag')">问答</span>
         <span @tap.stop.prevent=" ">分享 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users')">用户 </span>
+        <span @tap.stop.prevent="$router.replace('/tag/detail/' + encodeURIComponent(tagName) + '/users?from=tag')">用户 </span>
         <i class="bot"></i>
       </div>
       <!--内容区域-->
@@ -111,10 +114,12 @@
       tagName: '',
       list: [],
       userId: currentUser.user_id,
-      activity_tags: []
+      activity_tags: [],
+      type: ''
     }),
     created () {
       this.top = localEvent.getLocalItem('tagsInfo_number' + this.userId) > 0 ? 6.29 : 4.584
+      this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
       }
