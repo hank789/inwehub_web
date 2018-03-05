@@ -84,8 +84,11 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.tagDetail.is_followed = !this.tagDetail.is_followed
-          this.getTagInfo()
+          if (response.data.data.type === 'unfollow') {
+            this.tagDetail.is_followed = 0
+          } else {
+            this.tagDetail.is_followed = 1
+          }
           window.mui.toast(response.data.data.tip)
         })
       }
