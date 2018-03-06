@@ -46,8 +46,7 @@
                     <span class="mui-ellipsis">{{list.notice_message.last_message ? list.notice_message.last_message.data.title : ''}}</span>
                   </p>
                   <a>
-                    <Timer :time="list.notice_message.last_message ? list.notice_message.last_message.created_at : ''" >
-                    </Timer>
+                    {{timeago(list.notice_message.last_message ? list.notice_message.last_message.created_at : '')}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -59,8 +58,7 @@
                     <span class="mui-ellipsis">{{list.money_message.last_message ? list.money_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    <Timer :time="list.money_message.last_message ? list.money_message.last_message.created_at : ''" >
-                    </Timer>
+                    {{timeago(list.money_message.last_message ? list.money_message.last_message.created_at : '')}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -82,8 +80,7 @@
                     <span class="mui-ellipsis">{{list.task_message.last_message ? list.task_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    <Timer :time="list.task_message.last_message ? list.task_message.last_message.created_at : ''" >
-                    </Timer>
+                    {{timeago(list.task_message.last_message ? list.task_message.last_message.created_at : '')}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -95,8 +92,7 @@
                     <span class="mui-ellipsis">{{list.readhub_message.last_message ? list.readhub_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    <Timer :time="list.readhub_message.last_message ? list.readhub_message.last_message.created_at : ''" >
-                    </Timer>
+                    {{timeago(list.readhub_message.last_message ? list.readhub_message.last_message.created_at : '')}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -110,8 +106,7 @@
                     <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
                   </p>
                   <a>
-                    <Timer :time="item.last_message ? item.last_message.created_at : ''" >
-                    </Timer>
+                    {{timeago(item.last_message ? item.last_message.created_at : '')}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -126,7 +121,6 @@
 
 <script type="text/javascript">
   import RefreshList from '../../components/refresh/List.vue'
-  import Timer from '../../components/time.vue'
 
   const TaskMain = {
     data: () => ({
@@ -181,8 +175,7 @@
       mobile: 0
     }),
     components: {
-      RefreshList,
-      Timer
+      RefreshList
     },
     methods: {
       toAvatar (uuid) {

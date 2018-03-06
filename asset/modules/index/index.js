@@ -9,6 +9,8 @@ import Vue from 'vue'
 import VueWechatTitle from 'vue-wechat-title'
 // vue 使用时间的插件；
 import TimeAgo from 'vue-timeago'
+import timeago from '../../utils/timeComponent'
+Vue.use(timeago)
 
 import router from './routers/index'
 
