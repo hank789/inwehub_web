@@ -154,7 +154,7 @@ const routes = [
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
-      title: '问答社区-专业问答',
+      title: '问答社区',
       wechatHideHeader: true
     },
     component: componets.AskCommunityMajorList,
