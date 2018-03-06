@@ -9,6 +9,8 @@ import Vue from 'vue'
 import VueWechatTitle from 'vue-wechat-title'
 // vue 使用时间的插件；
 import TimeAgo from 'vue-timeago'
+import timeago from '../../utils/timeComponent'
+Vue.use(timeago)
 
 import router from './routers/index'
 
@@ -28,6 +30,7 @@ import RavenVue from 'raven-js/plugins/vue'
 
 if (process.env.NODE_ENV !== 'development') {
   require('../../js/mixpanel')
+  require('../../js/growingio')
   console.log('in raven')
   var sentryUrl = 'https://6cd9e4811e7f4ade86ff3d4a18b28e19@sentry.io/167478'
   if (process.env.NODE_ENV === 'production') {
@@ -40,6 +43,7 @@ if (process.env.NODE_ENV !== 'development') {
 } else {
   window.mixpanel = {}
 }
+
 var infiniteScroll = require('vue-infinite-scroll')
 Vue.use(infiniteScroll)
 
