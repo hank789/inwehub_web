@@ -154,7 +154,7 @@ const routes = [
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
-      title: '问答社区-专业问答',
+      title: '问答社区',
       wechatHideHeader: true
     },
     component: componets.AskCommunityMajorList,
@@ -1474,17 +1474,17 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // time
-    path: '/time',
-    name: 'time',
-    meta: {
-      title: '时间优化'
-    },
-    component: componets.time,
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
+  // { // time
+  //   path: '/time',
+  //   name: 'time',
+  //   meta: {
+  //     title: '时间优化'
+  //   },
+  //   component: componets.time,
+  //   beforeEnter: (to, from, next) => {
+  //     requestAuth(to, from, next)
+  //   }
+  // },
   // { // discover
   //   path: '/discover',
   //   name: 'discover',
