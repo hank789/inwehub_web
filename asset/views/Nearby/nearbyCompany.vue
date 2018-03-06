@@ -7,10 +7,10 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-         <div class="switch">
-           <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
-           <p>附近的公司</p>
-         </div>
+        <div class="switch">
+          <p @tap.stop.prevent="$router.replace('/nearbyPeople')">附近的人</p>
+          <p>附近公司<i></i></p>
+        </div>
           <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">
             <use xlink:href="#icon-ditu"></use>
           </svg>
@@ -253,13 +253,13 @@
   .searchContainer{
     width:100%;
     height:1.44rem;
-    background:#f3f4f6;
+    background:#ffffff;
     padding-top: 0.266rem;
   }
   .searchContainer p{
     width:92%;
     height:0.906rem;
-    background: #FFFFFF;
+    background: #f3f4f6;
     border-radius: 1.333rem;
     margin-left: 4%;
     display: flex;
@@ -279,6 +279,7 @@
     color:#444444;
     float: left;
     margin-left: 0.266rem;
+    background: #f3f4f6;
   }
   .searchContainer p svg{
     color:#c8c8c8;
@@ -395,39 +396,51 @@
  /*导航栏*/
   .menu{
     width: 100%;
-    height:1.333rem;
-    background:#3c3e44;
+    height: 1.2rem;
+    background:#fefefe;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:5.6rem;
-    height:0.906rem;
-    border:0.026rem solid #808080;
-    border-radius: 1.333rem;
-    position: absolute;
-    left: 0;
-    right:0;
-    margin: auto;
+    float: left;
+    width:4.173rem;
+    height: 100%;
+    margin-left:4%;
+    overflow: hidden;
+    position: relative;
   }
   .menu .switch p{
-    width:50%;
-    height:100%;
-    font-size: 0.373rem;
-    color: #fefefe;
+    display: inline-block;
+    line-height: 1.2rem;
+    font-size:0.426rem;
+    color: #444444;
     float: left;
-    text-align: center;
-    line-height: 0.906rem;
+    text-align: left;
   }
   .menu .switch p:nth-of-type(2){
-    background:#808080;
-    border-radius: 0 1.333rem 1.333rem 0;
+    display: inline-block;
+    tfloat: right;
+    margin-left: 0.76rem;
+    color: #444444;
+    font-weight: 500;
+    position: relative;
+  }
+  .menu .switch p:nth-of-type(2):after {
+    position: absolute;
+    width:1.706rem;
+    bottom: 0;
+    left: 50%;
+    margin-left: -0.86rem;
+    height: 0.053rem;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
   }
   .menu svg{
     position: absolute;
     right:3%;
     font-size: 0.666rem;
-    color: #fefefe;
+    color: #444444;
   }
 </style>

@@ -217,40 +217,52 @@
   /*导航栏*/
   .menu{
     width: 100%;
-    height:1.333rem;
-    background:#3c3e44;
+    height: 1.2rem;
+    background:#fefefe;
     position: relative;
     display: flex;
     align-items: center;
   }
   .menu .switch{
-    width:5.6rem;
-    height:0.906rem;
-    border:0.026rem solid #808080;
-    border-radius: 1.333rem;
-    position: absolute;
-    left: 0;
-    right:0;
-    margin: auto;
+    float: left;
+    width:4.173rem;
+    height: 100%;
+    margin-left:4%;
+    overflow: hidden;
+    position: relative;
   }
   .menu .switch p{
-    width:50%;
-    height:100%;
-    font-size: 0.373rem;
-    color: #fefefe;
+    display: inline-block;
+    line-height: 1.2rem;
+    font-size:0.426rem;
+    color: #444444;
     float: left;
-    text-align: center;
-    line-height: 0.906rem;
+    text-align: left;
   }
   .menu .switch p:nth-of-type(2){
-    background:#808080;
-    border-radius: 0 1.333rem 1.333rem 0;
+    display: inline-block;
+    tfloat: right;
+    margin-left: 0.76rem;
+    color: #444444;
+    font-weight: 500;
+    position: relative;
+  }
+  .menu .switch p:nth-of-type(2):after {
+    position: absolute;
+    width:1.706rem;
+    bottom: 0;
+    left: 50%;
+    margin-left: -0.86rem;
+    height: 0.053rem;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
   }
   .menu svg{
     position: absolute;
     right:3%;
     font-size: 0.666rem;
-    color: #fefefe;
+    color: #444444;
   }
   /*地图*/
   .map{
