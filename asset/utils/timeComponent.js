@@ -15,6 +15,8 @@ export default{
         return createtime
       }
 
+      createtime = createtime.replace(/-/g, '/')
+
       // 转化为毫秒数
       var timer = new Date(createtime).getTime()
       // 当前的毫秒数
