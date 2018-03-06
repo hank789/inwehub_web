@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
-      <p v-for="(item, index) in time">
-        {{getDateDiff(item)}}
-      </p>
-    </div>
+    {{transFormDates(time)}}
   </div>
 </template>
 
@@ -12,89 +8,70 @@
   export default {
     data () {
       return {
-        time: [
-          '2018-03-05 17:48:25',
-          '2018-03-04 17:48:25',
-          '2018-03-03 17:48:25',
-          '2018-03-01 14:03:00',
-          '2018-03-01 00:00:00',
-          '2018-02-28 08:00:00',
-          '2018-02-22 08:00:00'
-        ],
-        timeNow: '',
-        publishTime: '',
         date: '',
-        d_days: '',
-        d_hours: '',
-        d_minutes: '',
-        d_seconds: ''
+        Year: '',
+        Month: '',
+        Data: '',
+        Hours: '',
+        Minutes: '',
+        Seconds: ''
+      }
+    },
+    props: {
+      time: {
+        type: String,
+        default: ''
       }
     },
     computed: {
     },
     methods: {
-      getDateDiff (dateStr) {
-//        this.publishTime = this.getDateTimeStamp(dateStr) / 1000
-//        this.timeNow = parseInt(new Date().getTime() / 1000)
-//        this.date = new Date(this.publishTime * 1000)
-//        var Y = this.date.getFullYear()
-//        var M = this.date.getMonth() + 1
-//        var D = this.date.getDate()
-//        var H = this.date.getHours()
-//        var m = this.date.getMinutes()
-//        var s = this.date.getSeconds()
-//        // 小于10的在前面补0
-//        if (M < 10) {
-//          M = '0' + M
-//        }
-//        if (D < 10) {
-//          D = '0' + D
-//        }
-//        if (H < 10) {
-//          H = '0' + H
-//        }
-//        if (m < 10) {
-//          m = '0' + m
-//        }
-//        if (s < 10) {
-//          s = '0' + s
-//        }
-//        var d = this.timeNow - this.publishTime
-//       // 计算天数
-//        this.d_days = parseInt(d / 86400)
-//        this.d_hours = parseInt(d / 3600)
-//        this.d_minutes = parseInt(d / 60)
-//        this.d_seconds = parseInt(d)
-//        if (this.d_days < 0) {
-//          return H + ':' + m
-//        } else if (this.d_days >= 0 && this.d_days < 1) {
-//          return '昨天' + H + ':' + m
-//        } else if (this.d_days >= 1 && this.d_days < 2) {
-//          return '前天' + H + ':' + m
-//        } else {
-//          return Y + '-' + M + '-' + D + ' ' + H + ':' + m
-//        }
-//        //  原始代码
-//        if (this.d_days > 0 && this.d_days < 3) {
-//          return this.d_days + '天前'
-//        } else if (this.d_days <= 0 && this.d_hours > 0) {
-//          return this.d_hours + '小时前'
-//        } else if (this.d_hours <= 0 && this.d_minutes > 0) {
-//          return this.d_minutes + '分钟前'
-//        } else if (this.thisd_seconds < 60) {
-//          if (this.d_seconds <= 0) {
-//            return '刚刚'
-//          } else {
-//            return this.d_seconds + '秒前'
-//          }
-//        } else if (this.d_days >= 3 && this.d_days < 30) {
-//          return M + '-' + D + ' ' + H + ':' + m
-//        } else if (this.d_days >= 30) {
-//          return Y + '-' + M + '-' + D + ' ' + H + ':' + m
-//        }
+      changeFormat (t) {
+        t -= 0
+        if (t < 10) {
+          return ('0' + t)
+        } else {
+          return (t + '')
+        }
       },
-      getDateTimeStamp (dateStr) {
-        return Date.parse(dateStr.replace(/-/gi, '/'))
+      transFormDates (time) {
+        // 转化为毫秒数
+        var timer = new Date(time).getTime()
+        // 当前的毫秒数
+        var dataNow = new Date().getTime()
+        // 当天的零点时间戳
+        var timeStamp = new Date(new Date().setHours(0, 0, 0, 0)).getTime()
+        timer += ''
+        if (timer.length === 10) {
+          timer -= 0
+          timer *= 1000
+        } else {
+          timer -= 0
+        }
+        // 转化为标准格式
+        this.date = new Date(time)
+        // 年
+        this.Year = this.date.getFullYear()
+        // 月
+        this.Month = this.date.getMonth() + 1
+        // 日
+        this.Data = this.date.getDate()
+        // 时
+        this.Hours = this.changeFormat(this.date.getHours())
+        // 分
+        this.Minutes = this.changeFormat(this.date.getMinutes())
+        // 秒
+        this.Seconds = this.changeFormat(this.date.getSeconds())
+
+        if (timer >= timeStamp && timer < dataNow) {
+          return this.Hours + ':' + this.Minutes + ':' + this.Seconds
+        } else if (timer < timeStamp && timer >= timeStamp - 86400000) {
+          return '昨天' + this.Hours + ':' + this.Minutes + ':' + this.Seconds
+        } else if (timer < timeStamp - 86400 && timer >= timeStamp - 86400000 * 2) {
+          return '前天' + this.Hours + ':' + this.Minutes + ':' + this.Seconds
+        } else if (timer < timeStamp - 86400000 * 2) {
+          return this.Year + '-' + this.Month + '-' + this.Data + ' ' + this.Hours + ':' + this.Minutes + ':' + this.Seconds
+        }
       }
     },
     watch: {
