@@ -226,7 +226,7 @@
 .gray{
   width:100%;
   height:0.373rem;
-  background:#3c3e44;
+  background:#ececee;
 }
 .companyDetail .company_image{
   width:2.453rem;

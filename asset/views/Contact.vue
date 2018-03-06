@@ -191,7 +191,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .indexHeader {
-    background-color: #f3f4f6;
+    background-color: #ffffff;
     padding: 0.266rem 0.4rem;
 
     .searchWrapper {
@@ -200,10 +200,9 @@
         height: 0.906rem;
         font-size: 0.373rem;
         border-radius: 1.333rem;
-        background: #fff;
         border: 0.026rem solid #dcdcdc;
         margin-bottom: 0.133rem;
-
+        background: #f3f4f6;
         &::placeholder {
           color: #c8c8c8;
         }
@@ -232,4 +231,9 @@
   .mui-content {
     background: #fff;
   }
+
+
+  /*.companyForm input::placeholder {
+    color: #c8c8c8;
+  }*/
 </style>

@@ -366,12 +366,12 @@ a.mailLink{
 
 
 .mui-bar-dark, .mui-bar-nav{
-  background-color:#3c3e44;
+  background-color:#ffffff;
   box-shadow:none;
 }
 
 .mui-bar-dark .mui-title, .mui-bar-nav .mui-title{
-  color:#fff;
+  color:#3c3e44;
   font-size:0.48rem;
 }
 

@@ -403,7 +403,7 @@
     right: 0.266rem;
     top: 0.266rem;
     z-index: 11;
-    color: #fff;
+    color: #3c3e44;
   }
 
   .resumeWrapper .shareBtn {

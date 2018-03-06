@@ -244,7 +244,7 @@
     height: 1.2rem;
     position: absolute;
     z-index: 10;
-    background: #f3f4f6;
+    background: #ffffff;
     top: 0;
   }
 
@@ -259,7 +259,7 @@
     height: 1.2rem;
     position: absolute;
     z-index: 10;
-    background: #f3f4f6;
+    background: #ffffff;
     padding: 0 0.453rem;
     border-bottom: 0.026rem solid #dcdcdc;
   }

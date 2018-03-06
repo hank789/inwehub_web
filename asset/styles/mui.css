@@ -5329,6 +5329,7 @@ body > .mui-progressbar
 .mui-icon-back:before, .mui-icon-left-nav:before
 {
     content: '\e471';
+    color: #3c3e44;
 }
 
 .mui-icon-checkmarkempty:before
