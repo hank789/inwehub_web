@@ -1237,7 +1237,7 @@ const routes = [
     name: 'inform-task',
     component: componets.TaskTaskbar,
     meta: {
-      title: '任务动态',
+      title: '问答通知',
       wechatHideHeader: true,
       keepAlive: true
     },
@@ -1245,12 +1245,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // readbar 阅读发现
+  { // readbar 动态通知
     path: '/readbar',
     name: 'inform-read',
     component: componets.Taskreadbar,
     meta: {
-      title: '阅读发现',
+      title: '动态通知',
       wechatHideHeader: true,
       keepAlive: true
     },
