@@ -21,28 +21,6 @@
             <AskCommunityListItem
               :list=list>
             </AskCommunityListItem>
-            <!--<ul>-->
-              <!--<li v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id,item.question_type)">-->
-                <!--<div class="ask-tags">-->
-                  <!--<p v-for="(tag, index) in item.tags" @tap.stop.prevent="toTagDetail(tag.name)"> {{tag.name}}</p>-->
-                <!--</div>-->
-                <!--<div class="ask-container">-->
-                  <!--{{item.description}}-->
-                <!--</div>-->
-                <!--<div class="tag-detail">-->
-                  <!--<div class="ask-comment" v-if="item.question_type === 1"><a></a>1元看答案/评论</div>-->
-                  <!--<p v-if="item.question_type === 1">{{item.comment_number}}评论<i></i></p>-->
-
-                  <!--<p v-if="item.question_type === 1">{{item.support_number}}赞<i></i></p>-->
-
-                  <!--<p v-if="item.question_type === 1">回答好评率{{item.average_rate}}</p>-->
-
-                  <!--<p v-if="item.question_type === 2">{{item.answer_number}}人回答<i></i></p>-->
-
-                  <!--<p v-if="item.question_type === 2">{{item.follow_number}}关注</p>-->
-                <!--</div>-->
-              <!--</li>-->
-            <!--</ul>-->
           </RefreshList>
           <div>
             <div class="quiz"  @tap.stop.prevent="$router.pushPlus('/ask')">
