@@ -16,12 +16,13 @@
             :pageMode = true
             :prevOtherData="{page: 1}"
             :nextOtherData="{}"
-            class="listWrapper">
+            class="listWrapper"
+          >
             <ul>
-              <li v-for="(item, index) in list">
-                <!--<div class="ask-tags">-->
-                  <!--<p> v-for="(tag, index) in item.tags"{{tag.name}}</p>-->
-                <!--</div>-->
+              <li v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id,item.question_type)">
+                <div class="ask-tags">
+                  <p v-for="(tag, index) in item.tags"> {{tag.name}}</p>
+                </div>
                 <div class="ask-container">
                   {{item.description}}
                 </div>
@@ -40,6 +41,15 @@
               </li>
             </ul>
           </RefreshList>
+          <div>
+            <div class="quiz"  @tap.stop.prevent="$router.pushPlus('/ask')">
+              <i>分红</i>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhuanyewenda-"></use>
+              </svg>
+              提问
+            </div>
+          </div>
         </div>
       </div>
 
@@ -51,7 +61,8 @@
 
   const MajorList = {
     data: () => ({
-      list: []
+      list: [],
+      tags: []
     }),
     computed: {
     },
@@ -60,8 +71,12 @@
       AnswerMajor
     },
     methods: {
-      toDetail (id) {
-        this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+      toDetail (id, type) {
+        if (type === 1) {
+          this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        } else {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        }
       },
       selectType (typeText) {
         this.$router.push('/ask/type?type=majorlist')
@@ -105,7 +120,6 @@
   /*滚动区域*/
   .mui-content {
     background: #ffffff;
-  }
   ul{
     width:100%;
     overflow: hidden;
@@ -180,6 +194,56 @@
 
       }
     }
+  }
+  .quiz{
+    position: fixed;
+    z-index: 9;
+    width:190px;
+    height:44px;
+    border-radius: 50px;
+    background: #03aef9;
+    bottom: 15px;
+    left:0;
+    right:0;
+    margin: auto;
+    text-align: center;
+    line-height:44px;
+    font-size: 16px;
+    color: #ffffff;
+    svg{
+      font-size: 25px;
+      margin-bottom: -4px;
+    }
+    i{
+      position: absolute;
+      font-style: normal;
+      width: 0.8rem;
+      height: 0.453rem;
+      font-size: 0.32rem;
+      color: #FFFFFF;
+      border-radius: 0.106rem;
+      background: #fa4975;
+      text-align: center;
+      line-height: 0.453rem;
+      top: 10px;
+      left: 24px;
+        &::after {
+        content: "";
+        display: block;
+        width: 0.16rem;
+        height: 0.16rem;
+        background: #fa4975;
+        /* border: 0.026rem solid #dcdcdc; */
+        position: absolute;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+        right: -0.08rem;
+        top: 0rem;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+  }
   }
 
 
