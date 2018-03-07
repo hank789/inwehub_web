@@ -7,6 +7,6 @@ module.exports = {
     sourceMap: isProduction
       ? config.build.productionSourceMap
       : config.dev.cssSourceMap,
-    extract: true
+    extract: isProduction
   })
 }
