@@ -2,15 +2,19 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
-      <h1 class="mui-title">发起提问</h1>
+      <h1 class="mui-title">提问</h1>
     </header>
 
     <div class="mui-content absolute askWrapper">
 
-      <div class="category"><span class="tip">问题分类</span>
+      <div class="category">
+        <div class="switch">
+          <p >付费问答 <i></i></p>
+          <p @tap.stop.prevent="$router.replace('/ask/interaction')">互动问答</p>
+        </div>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          <span  v-if="tags.length || newTags.length">修改</span>
-          <span  v-else>选择</span>
+          <span  v-if="tags.length || newTags.length">修改分类</span>
+          <span  v-else>问题分类</span>
         </button>
       </div>
       <div class="ask_tags" v-if="tag.length">
@@ -407,14 +411,55 @@
 
   .askWrapper .category {
     background: #fff;
-    padding: 0.4rem 0.453rem;
+    /*padding: 0.4rem 0.453rem;*/
+    height:1.173rem;
     position: relative;
   }
-
-  .askWrapper .category .tip {
-    font-size: 0.426rem;
-    color: #444444;
+  /*切换*/
+  /*.askWrapper .category .tip {*/
+    /*font-size: 0.426rem;*/
+    /*color: #444444;*/
+  /*}*/
+  .askWrapper .category .switch{
+    float: left;
+    width:4.173rem;
+    height: 100%;
+    margin-left:4%;
+    overflow: hidden;
+    position: relative;
   }
+  .askWrapper .category .switch p{
+    display: inline-block;
+    height:1.173rem;
+    line-height: 1.173rem;
+    font-size:0.426rem;
+    color: #444444;
+    float: left;
+    text-align: left;
+  }
+  .askWrapper .category .switch p:nth-of-type(2){
+    display: inline-block;
+    tfloat: right;
+    margin-left: 0.76rem;
+    color: #444444;
+    position: relative;
+  }
+  .askWrapper .category .switch p:nth-of-type(1){
+    font-weight: 500;
+    position: relative;
+  }
+  .askWrapper .category .switch p:nth-of-type(1):after {
+    position: absolute;
+    width:1.706rem;
+    bottom: 0;
+    left: 50%;
+    margin-left: -0.9rem;
+    height: 0.053rem;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
+  }
+
 
   .askWrapper .category button {
     position: absolute;
@@ -422,9 +467,10 @@
     background-color: #03aef9;
     width: auto;
     font-size: 0.373rem;
-    padding: 0.106rem 0.453rem;
+    padding: 0rem 0.453rem;
+    height: 0.906rem;
     right: 0.266rem;
-    top: 0.32rem;
+    top: 0.09rem;
   }
 
   .mui-content > .mui-table-view:first-child {
