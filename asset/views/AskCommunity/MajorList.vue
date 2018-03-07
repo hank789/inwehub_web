@@ -21,7 +21,7 @@
             <ul>
               <li v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id,item.question_type)">
                 <div class="ask-tags">
-                  <p v-for="(tag, index) in item.tags"> {{tag.name}}</p>
+                  <p v-for="(tag, index) in item.tags" @tap.stop.prevent="toTagDetail(tag.name)"> {{tag.name}}</p>
                 </div>
                 <div class="ask-container">
                   {{item.description}}
@@ -58,6 +58,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import AnswerMajor from '../../components/feed/AnswerMajor'
+  import userAbility from '../../utils/userAbility'
 
   const MajorList = {
     data: () => ({
@@ -71,6 +72,10 @@
       AnswerMajor
     },
     methods: {
+      // 标签
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       toDetail (id, type) {
         if (type === 1) {
           this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
