@@ -1232,7 +1232,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // taskbar 任务动态
+  { // taskbar 问答通知
     path: '/taskbar',
     name: 'inform-task',
     component: componets.TaskTaskbar,
