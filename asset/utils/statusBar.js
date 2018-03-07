@@ -1,36 +1,36 @@
-var defaultBgColor = '#3c3e44'
-var defaultMode = 'light'
-var defaultBackground = ''
+// var defaultBgColor = '#3c3e44'
+// var defaultMode = 'light'
+// var defaultBackground = ''
 
-var bgColor = null
-var mode = null
-var background = null
+// var bgColor = null
+// var mode = null
+// var background = null
 var isStatusBarDebug = false
 
 function setStatusBarBackgroundAndStyle (baColor, style) {
-  window.mui.plusReady(function () {
-    if (window.mui.os.plus) {
-      var ss = window.plus.navigator.getStatusBarBackground()
-      var statusBarStyle = window.plus.navigator.getStatusBarStyle()
-
-      console.log('当前状态栏: bacolor:' + ss + ', style:' + statusBarStyle)
-
-      if (ss !== baColor) {
-        console.log('设置' + ss + '=>statusBgcolor:' + baColor)
-        window.plus.navigator.setStatusBarBackground(baColor)
-      }
-
-      if (style === 'light' && statusBarStyle !== 'UIStatusBarStyleBlackTranslucent') {
-        console.log('设置' + statusBarStyle + '=>statusBarStyle:' + style)
-        window.plus.navigator.setStatusBarStyle(style)
-      }
-
-      if (style === 'dark' && statusBarStyle !== 'UIStatusBarStyleDefault') {
-        console.log('设置' + statusBarStyle + '=>statusBarStyle:' + style)
-        window.plus.navigator.setStatusBarStyle(style)
-      }
-    }
-  })
+  // window.mui.plusReady(function () {
+  //   if (window.mui.os.plus) {
+  //     var ss = window.plus.navigator.getStatusBarBackground()
+  //     var statusBarStyle = window.plus.navigator.getStatusBarStyle()
+  //
+  //     console.log('当前状态栏: bacolor:' + ss + ', style:' + statusBarStyle)
+  //
+  //     if (ss !== baColor) {
+  //       console.log('设置' + ss + '=>statusBgcolor:' + baColor)
+  //       window.plus.navigator.setStatusBarBackground(baColor)
+  //     }
+  //
+  //     if (style === 'light' && statusBarStyle !== 'UIStatusBarStyleBlackTranslucent') {
+  //       console.log('设置' + statusBarStyle + '=>statusBarStyle:' + style)
+  //       window.plus.navigator.setStatusBarStyle(style)
+  //     }
+  //
+  //     if (style === 'dark' && statusBarStyle !== 'UIStatusBarStyleDefault') {
+  //       console.log('设置' + statusBarStyle + '=>statusBarStyle:' + style)
+  //       window.plus.navigator.setStatusBarStyle(style)
+  //     }
+  //   }
+  // })
 }
 
 function getStatusBarBackgroundAndStyle (callback) {
@@ -42,61 +42,61 @@ function getStatusBarBackgroundAndStyle (callback) {
 }
 
 function setStatusBarStyle (style) {
-  window.mui.plusReady(function () {
-    if (window.mui.os.plus) {
-      console.log('statusBarStyle:' + style)
-      window.plus.navigator.setStatusBarStyle(style)
-    }
-  })
+  // window.mui.plusReady(function () {
+  //   if (window.mui.os.plus) {
+  //     console.log('statusBarStyle:' + style)
+  //     window.plus.navigator.setStatusBarStyle(style)
+  //   }
+  // })
 }
 
 /**
  * 获取页面配置
  */
-function getPageConfig (context) {
-  bgColor = null
-  mode = null
-  background = null
-
-  var statusBarStyleElement = context.querySelector('#statusBarStyle')
-
-  if (statusBarStyleElement) {
-    bgColor = statusBarStyleElement.getAttribute('bgColor')
-    mode = statusBarStyleElement.getAttribute('mode')
-    background = statusBarStyleElement.getAttribute('background')
-
-    console.log('监测到#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background)
-  } else {
-    console.log('未监测到#statusBarStyle')
-  }
-}
+// function getPageConfig (context) {
+//   bgColor = null
+//   mode = null
+//   background = null
+//
+//   var statusBarStyleElement = context.querySelector('#statusBarStyle')
+//
+//   if (statusBarStyleElement) {
+//     bgColor = statusBarStyleElement.getAttribute('bgColor')
+//     mode = statusBarStyleElement.getAttribute('mode')
+//     background = statusBarStyleElement.getAttribute('background')
+//
+//     console.log('监测到#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background)
+//   } else {
+//     console.log('未监测到#statusBarStyle')
+//   }
+// }
 
 function autoStatusBar (context) {
-  if (!context) {
-    context = document.getElementById('router-view')
-  }
-
-  getPageConfig(context)
-
-  bgColor = bgColor || defaultBgColor
-  mode = mode || defaultMode
-  background = background || defaultBackground
-
-  console.log('准备设置#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background)
-
-  if (bgColor && mode) {
-    setStatusBarBackgroundAndStyle(bgColor, mode)
-  } else if (mode) {
-    setStatusBarStyle(mode)
-  }
-
-  if (background) {
-    document.body.style.background = background
-  } else {
-    document.body.style.background = ''
-  }
-
-  console.log('bodyBackground:' + background)
+  // if (!context) {
+  //   context = document.getElementById('router-view')
+  // }
+  //
+  // getPageConfig(context)
+  //
+  // bgColor = bgColor || defaultBgColor
+  // mode = mode || defaultMode
+  // background = background || defaultBackground
+  //
+  // console.log('准备设置#statusBarStyle: bgColor:' + bgColor + ',mode:' + mode + ',background:' + background)
+  //
+  // if (bgColor && mode) {
+  //   setStatusBarBackgroundAndStyle(bgColor, mode)
+  // } else if (mode) {
+  //   setStatusBarStyle(mode)
+  // }
+  //
+  // if (background) {
+  //   document.body.style.background = background
+  // } else {
+  //   document.body.style.background = ''
+  // }
+  //
+  // console.log('bodyBackground:' + background)
 }
 
 /**
