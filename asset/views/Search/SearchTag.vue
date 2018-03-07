@@ -6,8 +6,8 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" />
-          <svg class="icon" aria-hidden="true">
+          <input type="text" placeholder="" v-model.trim="searchText"/>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
@@ -21,23 +21,77 @@
         <span @tap.stop.prevent="$router.replace('/searchUser')">用户</span>
         <i class="bot"></i>
       </div>
+      <!--搜索列表-->
+      <RefreshList
+        v-if="dataList != null"
+        v-model="list"
+        :api="'search/tag'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        class="listWrapper">
+        <ul>
+          <!--搜素到的标签名 -->
+          <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
+            {{list[0].text}}<span>  (新标签)</span>
+            <i class="bot"></i>
+          </li>
+
+          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
+            {{item.name}}
+            <i class="bot"></i>
+          </li>
+
+        </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import RefreshList from '../../components/refresh/List.vue'
   export default {
     data () {
-      return {}
+      return {
+        searchText: '',
+        isShow: false,
+        dataList: null,
+        list: []
+      }
+    },
+    computed: {
+      isNewTag () {
+        if (this.list[0] && typeof (this.list[0].value) === 'string') {
+          return true
+        }
+        return false
+      }
     },
     components: {
+      RefreshList
     },
     created () {
     },
-    watch: {},
+    watch: {
+      searchText: function (newValue) {
+        console.error(newValue)
+        if (newValue) {
+          this.dataList = {
+            search_word: newValue
+          }
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
+      }
+    },
     mounted () {
     },
     methods: {
+      //  点击清空输入框
+      empty () {
+        this.searchText = ''
+      }
     }
   }
 </script>
@@ -70,6 +124,10 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
+    background: #ffffff;
+    .listWrapper{
+      top: 60px;
+    }
     .search{
       width:100%;
       height:44px;
@@ -157,6 +215,21 @@
       }
     }
     /**/
+    ul {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 0.586rem;
+      li {
+        width: 92%;
+        margin-left: 4%;
+        height: 1.173rem;
+        position: relative;
+        text-align: left;
+        line-height: 1.173rem;
+        font-size: 0.373rem;
+        color: #808080;
+      }
+    }
   }
 
 </style>

@@ -6,8 +6,8 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" />
-          <svg class="icon" aria-hidden="true">
+          <input type="text" placeholder=""  v-model.trim="searchText"/>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
@@ -21,23 +21,95 @@
         <span @tap.stop.prevent="">用户<i></i></span>
         <i class="bot"></i>
       </div>
+      <RefreshList
+        v-if="dataList != null"
+        v-model="list"
+        :api="'search/user'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        class="listWrapper">
+        <ul class="cions-list" >
+          <li v-for="(item, index) in list">
+            <div class="cions-avatar">
+              <img :src="item.user_avatar_url"  @tap.stop.prevent="toAvatar(item.uuid)"/>
+              <svg class="icon" aria-hidden="true" v-if="item.is_expert">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
+            </div>
+            <div class="detail">
+              <p>{{item.user_name}}</p>
+              <p>{{item.description}}<i></i></p>
+            </div>
+            <div class="fouce" :class="item.is_followed?'grey':''"   @tap.stop.prevent='collectProfessor(item.uuid,inde)'>{{item.is_followed ? '已关注' : '关注'}}</div>
+            <i class="bot"></i>
+          </li>
+        </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
   export default {
     data () {
-      return {}
+      return {
+        searchText: '',
+        isShow: false,
+        dataList: null,
+        list: []
+      }
     },
     components: {
+      RefreshList
     },
     created () {
     },
-    watch: {},
+    watch: {
+      searchText: function (newValue) {
+        if (newValue) {
+          this.dataList = {
+            search_word: newValue
+          }
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
+      }
+    },
     mounted () {
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
+      // 点击关注；
+      collectProfessor (uuid, index) {
+        postRequest(`follow/user`, {
+          id: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unfollow') {
+            this.list[index].is_followed = 0
+          } else {
+            this.list[index].is_followed = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      //  点击清空输入框
+      empty () {
+        this.searchText = ''
+      }
     }
   }
 </script>
@@ -70,6 +142,7 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
+    background: #ffffff;
     .search{
       width:100%;
       height:44px;
@@ -159,4 +232,69 @@
     /**/
   }
 
+
+
+  /*列表区域*/
+  .cions-list{
+    width:100%;
+    overflow: hidden;
+    padding: 0 4%;
+  }
+  .cions-list li{
+    position: relative;
+    height:1.706rem;
+  }
+  .cions-list li div{
+    float: left;
+  }
+  .cions-list li .cions-avatar{
+    position: relative;
+    width:1.173rem;
+    height:1.173rem;
+    border-radius:50%;
+    background: #cccccc;
+    margin-top: 0.266rem;
+  }
+  .cions-list li .cions-avatar img{
+    width:1.173rem;
+    height:1.173rem;
+    border-radius:50%;
+  }
+  .cions-list li .cions-avatar svg{
+    position: absolute;
+    font-size: 0.533rem;
+    right: -0.133rem;
+    bottom: -0.053rem;
+  }
+  .cions-list li .detail{
+    margin-top: 0.373rem;
+    font-size:0.373rem;
+    color: #444444;
+    margin-left: 0.213rem;
+  }
+  .cions-list li .detail p:nth-of-type(2){
+    font-size:0.32rem;
+    color: rgb(128, 128, 128);
+    margin-top: -0.053rem;
+  }
+  .cions-list li .detail p:nth-of-type(2) i{
+    color: #235280;
+  }
+  .cions-list li .fouce{
+    width:1.626rem;
+    height:0.72rem;
+    border: 0.026rem solid #03aef9;
+    border-radius: 1.333rem;
+    text-align: center;
+    line-height: 0.666rem;
+    font-size:0.373rem;
+    color: #03aef9;
+    margin-top: 0.493rem;
+    float: right;
+
+  }
+  .cions-list li .grey{
+    color: #b4b4b6;
+    border: 0.026rem solid #b4b4b6;
+  }
 </style>

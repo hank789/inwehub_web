@@ -123,6 +123,7 @@
           }
         }
         .ask-container{
+          word-break: break-all;
           font-size: 16px;
           color: #444444;
           line-height: 22px;

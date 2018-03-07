@@ -6,8 +6,8 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="" />
-         <svg class="icon" aria-hidden="true">
+         <input type="text" placeholder="" v-model.trim="searchText"/>
+         <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
            <use xlink:href="#icon-times1"></use>
          </svg>
        </p>
@@ -21,23 +21,64 @@
       <span @tap.stop.prevent="$router.replace('/searchUser')">用户</span>
       <i class="bot"></i>
     </div>
+    <!--搜索列表-->
+    <RefreshList
+      v-if="dataList != null"
+      v-model="list"
+      :api="'search/question'"
+      :pageMode="true"
+      :prevOtherData="dataList"
+      :nextOtherData="dataList"
+      class="listWrapper">
+      <AskCommunityListItem
+        :list=list>
+      </AskCommunityListItem>
+
+    </RefreshList>
   </div>
 </div>
 </template>
 
+
 <script type="text/javascript">
+  import RefreshList from '../../components/refresh/List.vue'
+  import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
+
   export default {
     data () {
-      return {}
+      return {
+        searchText: '',
+        dataList: null,
+        list: [],
+        isShow: false
+      }
     },
     components: {
+      RefreshList,
+      AskCommunityListItem
     },
     created () {
     },
-    watch: {},
+    watch: {
+      searchText: function (newValue) {
+        if (newValue) {
+          this.dataList = {
+            search_word: newValue
+          }
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
+      }
+    },
     mounted () {
     },
     methods: {
+
+      //  点击清空输入框
+      empty () {
+        this.searchText = ''
+      }
     }
   }
 </script>
@@ -70,6 +111,10 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
+    background: #ffffff;
+    .listWrapper{
+      top: 88px;
+    }
     .search{
       width:100%;
       height:44px;
