@@ -1,29 +1,34 @@
 <template>
   <div>
-    <header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">
-      <div class="headerWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-logowenzi"></use>
-        </svg>
+    <!--<header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">-->
+      <!--<div class="headerWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-logowenzi"></use>-->
+        <!--</svg>-->
 
-        <div class="rightWrapper" @tap.stop.prevent="toAddArticle()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-plus--"></use>
-          </svg>
-        </div>
-      </div>
-    </header>
+        <!--<div class="rightWrapper" @tap.stop.prevent="toAddArticle()">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-plus&#45;&#45;"></use>-->
+          <!--</svg>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</header>-->
 
     <div class="mui-content feedWrapper" v-show="!loading">
       <!--导航栏-->
       <div class="menu">
+        <span  @tap.stop.prevent="judge()">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+          </svg>
+        </span>
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
         <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
         <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
         <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
-        <span  @tap.stop.prevent="judge()">
+        <span  @tap.stop.prevent="$router.pushPlus('/searchQuestion')">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+            <use xlink:href="#icon-sousuo"></use>
           </svg>
         </span>
         <i class="bot"></i>
@@ -415,8 +420,11 @@
     right: 0;
     margin: auto;
   }
-  .menu span svg{
-    font-size: 0.666rem;
+  .menu span:nth-of-type(1) svg{
+    font-size: 0.66rem;
+  }
+  .menu span:nth-last-of-type(1) svg{
+    font-size: 0.533rem;
   }
 
   .mui-content{

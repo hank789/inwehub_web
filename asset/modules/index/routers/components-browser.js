@@ -3,6 +3,11 @@ const Register = () => import(/* webpackChunkName: "Register" */ '../../../views
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
 const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/404.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
+const SearchSearchQuestion = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchQuestion.vue')
+const SearchSearchSubmission = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchSubmission.vue')
+const SearchSearchTag = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchTag.vue')
+const SearchSearchUser = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchUser.vue')
+
 const ActivityActiveList = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Activity/ActiveList.vue')
 const ActivityOpportunityList = () => import(/* webpackChunkName: "ActivityOpportunityList" */ '../../../views/Activity/OpportunityList.vue')
 const ActivityEnrollmentStatus = () => import(/* webpackChunkName: "ActivityEnrollmentStatus" */ '../../../views/Activity/EnrollmentStatus.vue')
@@ -171,6 +176,10 @@ export {
   FindPassword,
   Home,
   Feed,
+  SearchSearchQuestion,
+  SearchSearchSubmission,
+  SearchSearchTag,
+  SearchSearchUser,
   ActivityActiveList,
   ActivityOpportunityList,
   ActivityEnrollmentStatus,

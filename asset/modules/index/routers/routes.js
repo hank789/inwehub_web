@@ -77,6 +77,54 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // feed搜索 问答
+    path: '/searchQuestion',
+    name: 'search-queation',
+    meta: {
+      title: '搜索问答',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchQuestion,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 分享
+    path: '/searchSubmission',
+    name: 'search-submission',
+    meta: {
+      title: '搜索分享',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchSubmission,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 标签
+    path: '/searchTag',
+    name: 'search-tag',
+    meta: {
+      title: '搜索标签',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchTag,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 用户
+    path: '/searchUser',
+    name: 'search-user',
+    meta: {
+      title: '搜索用户',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchUser,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 首页活动列表页
     path: '/home/ActiveList',
     name: 'activity-list',
