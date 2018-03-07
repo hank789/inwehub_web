@@ -23,9 +23,9 @@ var config = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
-    new ExtractTextPlugin({
-      filename: utils.assetsPath('css/[name].[chunkhash].css')
-    }),
+    // new ExtractTextPlugin({
+    //   filename: utils.assetsPath('css/[name].[chunkhash].css')
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
