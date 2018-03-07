@@ -77,6 +77,54 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // feed搜索 问答
+    path: '/searchQuestion',
+    name: 'search-queation',
+    meta: {
+      title: '搜索问答',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchQuestion,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 分享
+    path: '/searchSubmission',
+    name: 'search-submission',
+    meta: {
+      title: '搜索分享',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchSubmission,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 标签
+    path: '/searchTag',
+    name: 'search-tag',
+    meta: {
+      title: '搜索标签',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchTag,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // feed搜索 用户
+    path: '/searchUser',
+    name: 'search-user',
+    meta: {
+      title: '搜索用户',
+      wechatHideHeader: true
+    },
+    component: componets.SearchSearchUser,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 首页活动列表页
     path: '/home/ActiveList',
     name: 'activity-list',
@@ -150,7 +198,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 问答社区-专业问答
+  { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
@@ -170,18 +218,6 @@ const routes = [
       wechatHideHeader: false
     },
     component: componets.AskCommunityMajorDetail
-  },
-  { // 问答社区-互动回答
-    path: '/askCommunity/interactions',
-    name: 'askCommunity-interaction-list',
-    meta: {
-      title: '问答社区-互动回答',
-      wechatHideHeader: true
-    },
-    component: componets.AskCommunityInteractionList,
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
   },
   { // 问答社区-互动回答-回答列表；
     path: '/askCommunity/interaction/answers/:id',
@@ -1232,12 +1268,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // taskbar 任务动态
+  { // taskbar 问答通知
     path: '/taskbar',
     name: 'inform-task',
     component: componets.TaskTaskbar,
     meta: {
-      title: '任务动态',
+      title: '问答通知',
       wechatHideHeader: true,
       keepAlive: true
     },
@@ -1245,12 +1281,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // readbar 阅读发现
+  { // readbar 动态通知
     path: '/readbar',
     name: 'inform-read',
     component: componets.Taskreadbar,
     meta: {
-      title: '阅读发现',
+      title: '动态通知',
       wechatHideHeader: true,
       keepAlive: true
     },

@@ -25,7 +25,7 @@
                 <span class="mui-ellipsis">{{item.data.body}}</span>
                 <span class="mui-ellipsis" v-if="item.data.extra_body">{{item.data.extra_body}}</span>
               </p>
-              <div class="reader_time">{{item.created_at}}</div>
+              <div class="reader_time">{{timeago(item.created_at)}}</div>
               <i class="bot"></i>
             </li>
 

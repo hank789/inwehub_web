@@ -48,9 +48,9 @@ export default{
       if (timer >= timeStamp && timer < dataNow) {
         return Hours + ':' + Minutes + ':' + Seconds
       } else if (timer < timeStamp && timer >= timeStamp - 86400000) {
-        return '昨天' + Hours + ':' + Minutes + ':' + Seconds
+        return '昨天' + ' ' + Hours + ':' + Minutes + ':' + Seconds
       } else if (timer < timeStamp - 86400 && timer >= timeStamp - 86400000 * 2) {
-        return '前天' + Hours + ':' + Minutes + ':' + Seconds
+        return '前天' + ' ' + Hours + ':' + Minutes + ':' + Seconds
       } else if (timer < timeStamp - 86400000 * 2) {
         return Year + '-' + Month + '-' + Data + ' ' + Hours + ':' + Minutes + ':' + Seconds
       }
