@@ -39,7 +39,6 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
-  import userAbility from '../../utils/userAbility'
 
   const MajorList = {
     data: () => ({
@@ -53,20 +52,6 @@
       AskCommunityListItem
     },
     methods: {
-      // 标签
-      toTagDetail (name) {
-        userAbility.jumpToTagDetail(name)
-      },
-      toDetail (id, type) {
-        if (type === 1) {
-          this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
-        } else {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
-        }
-      },
-      selectType (typeText) {
-        this.$router.push('/ask/type?type=majorlist')
-      }
     },
     mounted () {
     }
