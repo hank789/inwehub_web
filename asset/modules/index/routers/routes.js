@@ -198,7 +198,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 问答社区-专业问答
+  { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
@@ -218,18 +218,6 @@ const routes = [
       wechatHideHeader: false
     },
     component: componets.AskCommunityMajorDetail
-  },
-  { // 问答社区-互动回答
-    path: '/askCommunity/interactions',
-    name: 'askCommunity-interaction-list',
-    meta: {
-      title: '问答社区-互动回答',
-      wechatHideHeader: true
-    },
-    component: componets.AskCommunityInteractionList,
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
   },
   { // 问答社区-互动回答-回答列表；
     path: '/askCommunity/interaction/answers/:id',

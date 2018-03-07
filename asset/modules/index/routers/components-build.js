@@ -16,7 +16,6 @@ import NewcomerGuidanceStepThree from '../../../views/NewcomerGuidance/StepThree
 import InvitationFriends from '../../../views/Invitation/Friends.vue'
 import AskCommunityMajorList from '../../../views/AskCommunity/MajorList.vue'
 import AskCommunityMajorDetail from '../../../views/AskCommunity/MajorDetail.vue'
-import AskCommunityInteractionList from '../../../views/AskCommunity/InteractionList.vue'
 import AskCommunityInteractionAnswers from '../../../views/AskCommunity/InteractionAnswers.vue'
 import AskCommunityInteractionDetail from '../../../views/AskCommunity/InteractionDetail.vue'
 import RecommendInvitationUsers from '../../../views/RecommendInvitationUsers.vue'
@@ -187,7 +186,6 @@ export {
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
-  AskCommunityInteractionList,
   AskCommunityInteractionAnswers,
   AskCommunityInteractionDetail,
   RecommendInvitationUsers,

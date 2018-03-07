@@ -18,7 +18,6 @@ const NewcomerGuidanceStepThree = () => import(/* webpackChunkName: "NewcomerGui
 const InvitationFriends = () => import(/* webpackChunkName: "InvitationFriends" */ '../../../views/Invitation/Friends.vue')
 const AskCommunityMajorList = () => import(/* webpackChunkName: "AskCommunityMajorList" */ '../../../views/AskCommunity/MajorList.vue')
 const AskCommunityMajorDetail = () => import(/* webpackChunkName: "AskCommunityMajorDetail" */ '../../../views/AskCommunity/MajorDetail.vue')
-const AskCommunityInteractionList = () => import(/* webpackChunkName: "AskCommunityInteractionList" */ '../../../views/AskCommunity/InteractionList.vue')
 const AskCommunityInteractionAnswers = () => import(/* webpackChunkName: "AskCommunityInteractionAnswers" */ '../../../views/AskCommunity/InteractionAnswers.vue')
 const AskCommunityInteractionDetail = () => import(/* webpackChunkName: "AskCommunityInteractionDetail" */ '../../../views/AskCommunity/InteractionDetail.vue')
 const RecommendInvitationUsers = () => import(/* webpackChunkName: "RecommendInvitationUsers" */ '../../../views/RecommendInvitationUsers.vue')
@@ -189,7 +188,6 @@ export {
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
-  AskCommunityInteractionList,
   AskCommunityInteractionAnswers,
   AskCommunityInteractionDetail,
   RecommendInvitationUsers,
