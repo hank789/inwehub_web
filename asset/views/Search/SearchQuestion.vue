@@ -88,7 +88,8 @@
     },
     methods: {
       back () {
-        this.$router.go(-1)
+        window.mui.back()
+        return
       },
       //  点击清空输入框
       empty () {

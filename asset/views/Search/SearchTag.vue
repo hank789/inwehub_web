@@ -98,7 +98,8 @@
     },
     methods: {
       back () {
-        this.$router.go(-1)
+        window.mui.back()
+        return
       },
       // 文字高亮
       getHighlight (content) {
