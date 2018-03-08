@@ -7,10 +7,8 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <div class="switch">
-          <p>附近的人</p>
-          <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近公司</p>
-        </div>
+        <p>附近的人</p>
+        <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近公司</p>
         <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">
           <use xlink:href="#icon-ditu"></use>
         </svg>
@@ -167,50 +165,39 @@
     background: #ffffff;
   }
   /*导航栏*/
+  /*导航栏*/
   .menu{
     width: 100%;
     height: 1.2rem;
     background:#fefefe;
     position: relative;
-    display: flex;
-    align-items: center;
+    padding-left: 4%;
   }
-  .menu .switch{
-    float: left;
-    width:4.173rem;
-    height: 100%;
-    margin-left:4%;
-    overflow: hidden;
-    position: relative;
-  }
-  .menu .switch p{
+  .menu  p{
     display: inline-block;
     line-height: 1.2rem;
     font-size:0.426rem;
     color: #444444;
-    float: left;
     text-align: left;
   }
-  .menu .switch p:nth-of-type(2){
+  .menu  p:nth-of-type(1){
     display: inline-block;
-    float: right;
-    margin-left: 0.76rem;
     color: #444444;
-  }
-  .menu .switch p:nth-of-type(1){
     font-weight: 500;
     position: relative;
   }
-  .menu .switch p:nth-of-type(1):after {
+  .menu  p:nth-of-type(1):after {
     position: absolute;
     width:1.706rem;
     bottom: 0;
-    left: 50%;
-    margin-left: -0.9rem;
+    left: 0;
     height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
+  }
+  .menu  p:nth-of-type(2){
+    margin-left: 0.8rem;
   }
   .menu svg{
     position: absolute;

@@ -8,10 +8,8 @@
     <div class="mui-content absolute askWrapper">
 
       <div class="category">
-        <div class="switch">
           <p >付费问答 <i></i></p>
           <p @tap.stop.prevent="$router.replace('/ask/interaction')">互动问答</p>
-        </div>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
           <span  v-if="tags.length || newTags.length">修改分类</span>
           <span  v-else>问题分类</span>
@@ -408,56 +406,39 @@
     width:1.626rem !important;
     height:1.626rem !important;
   }
-
+  /*导航栏*/
   .askWrapper .category {
     background: #fff;
     /*padding: 0.4rem 0.453rem;*/
     height:1.173rem;
     position: relative;
+    padding-left: 4%;
   }
-  /*切换*/
-  /*.askWrapper .category .tip {*/
-    /*font-size: 0.426rem;*/
-    /*color: #444444;*/
-  /*}*/
-  .askWrapper .category .switch{
-    float: left;
-    width:4.173rem;
-    height: 100%;
-    margin-left:4%;
-    overflow: hidden;
-    position: relative;
-  }
-  .askWrapper .category .switch p{
+  .askWrapper .category  p{
     display: inline-block;
-    height:1.173rem;
-    line-height: 1.173rem;
+    line-height: 1.2rem;
     font-size:0.426rem;
     color: #444444;
-    float: left;
     text-align: left;
   }
-  .askWrapper .category .switch p:nth-of-type(2){
+  .askWrapper .category  p:nth-of-type(1){
     display: inline-block;
-    tfloat: right;
-    margin-left: 0.76rem;
     color: #444444;
-    position: relative;
-  }
-  .askWrapper .category .switch p:nth-of-type(1){
     font-weight: 500;
     position: relative;
   }
-  .askWrapper .category .switch p:nth-of-type(1):after {
+  .askWrapper .category p:nth-of-type(1):after {
     position: absolute;
     width:1.706rem;
     bottom: 0;
-    left: 50%;
-    margin-left: -0.9rem;
+    left: 0;
     height: 0.053rem;
     z-index: 999;
     content: '';
     background-color: #009FE8;
+  }
+  .askWrapper .category  p:nth-of-type(2){
+    margin-left: 0.8rem;
   }
 
 
