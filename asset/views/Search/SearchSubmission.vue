@@ -77,7 +77,9 @@
             </li>
             <!--带图片的样式-->
             <li class="imgContainer" v-else-if="hot.type === 'text'">
-              <TextDetail :data="hot" @downvoteComment="downvoteComment"
+              <TextDetail :data="hot"
+                          @downvoteComment="downvoteComment"
+                          :searchText="searchText"
                           @bookmarkuBmission="bookmarkuBmission"
                           @report="report"
                           @deleterow="deleterow(hot.id, index)"

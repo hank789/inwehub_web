@@ -10,7 +10,8 @@
           </p>
           <p>{{data.owner.username}}发布了分享</p>
         </div>
-        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="textToLink(data.title)">
+
+        <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="searchText ? getHighlight(data.title) : textToLink(data.title)" >
           <!--{{data.title}}-->
         </div>
 
@@ -82,12 +83,23 @@
       data: {
         type: Object,
         default: {}
+      },
+      searchText: {
+        type: String,
+        default: ''
       }
     },
     created () {
 
     },
     methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var text = this.textToLink(content)
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = text.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
       textToLink (text) {
         return transferTagToLink(secureHtml(textToLinkHtml(text)))
       },
