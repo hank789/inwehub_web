@@ -101,13 +101,15 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-  import localEvent from '../../stores/localStorage'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
         userId: currentUser.user_id,
+        user_level: currentUser.user_level,
         searchText: '',
         isShow: false,
         dataList: null,
@@ -122,15 +124,19 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue) {
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
-            }
-          })
-          this.isShow = true
+        if (this.user_level >= 3) {
+          if (newValue) {
+            searchText(newValue, (text) => {
+              this.dataList = {
+                search_word: newValue
+              }
+            })
+            this.isShow = true
+          } else {
+            this.isShow = false
+          }
         } else {
-          this.isShow = false
+          userAbility.jumpJudgeGrade(this)
         }
       }
     },

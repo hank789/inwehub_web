@@ -46,10 +46,14 @@
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
+  import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        user_level: currentUser.user_level,
         searchText: '',
         dataList: null,
         list: [],
@@ -64,15 +68,19 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue) {
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
-            }
-          })
-          this.isShow = true
+        if (this.user_level >= 3) {
+          if (newValue) {
+            searchText(newValue, (text) => {
+              this.dataList = {
+                search_word: newValue
+              }
+            })
+            this.isShow = true
+          } else {
+            this.isShow = false
+          }
         } else {
-          this.isShow = false
+          userAbility.jumpJudgeGrade(this)
         }
       }
     },

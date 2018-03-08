@@ -54,9 +54,14 @@
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
+
   export default {
     data () {
       return {
+        user_level: currentUser.user_level,
         searchText: '',
         isShow: false,
         dataList: null,
@@ -70,16 +75,20 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue) {
-          // 做延时处理
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
-            }
-          })
-          this.isShow = true
+        if (this.user_level >= 3) {
+          if (newValue) {
+            // 做延时处理
+            searchText(newValue, (text) => {
+              this.dataList = {
+                search_word: newValue
+              }
+            })
+            this.isShow = true
+          } else {
+            this.isShow = false
+          }
         } else {
-          this.isShow = false
+          userAbility.jumpJudgeGrade(this)
         }
       }
     },

@@ -43,12 +43,15 @@
 </template>
 
 <script type="text/javascript">
-  import userAbility from '../../utils/userAbility'
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
   export default {
     data () {
       return {
+        user_level: currentUser.user_level,
         searchText: '',
         isShow: false,
         dataList: null,
@@ -71,17 +74,21 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (newValue) {
-         // 搜索进行延时操作
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
-            }
-          })
-         // 清空输入框的显隐
-          this.isShow = true
+        if (this.user_level >= 3) {
+          if (newValue) {
+            // 搜索进行延时操作
+            searchText(newValue, (text) => {
+              this.dataList = {
+                search_word: newValue
+              }
+            })
+            // 清空输入框的显隐
+            this.isShow = true
+          } else {
+            this.isShow = false
+          }
         } else {
-          this.isShow = false
+          userAbility.jumpJudgeGrade(this)
         }
       }
     },
