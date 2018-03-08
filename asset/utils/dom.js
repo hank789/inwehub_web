@@ -100,10 +100,20 @@ function autoBlur () {
 }
 
 function transferTagToLink (html) {
-  var href = 'https://m.inwehub.com/#/tag/detail/$2/questions'
+  var href = 'https://m.inwehub.com/#/tag/detail/#inwehub-tag#$2#inwehub-tag#/questions'
   html = html.replace(/<span class="ql-size-small" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
 
   html = html.replace(/<span class="ql-size-small appUrl" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
+
+  var matches = html.match(/#inwehub-tag#(.*?)#inwehub-tag#/g)
+  if (matches) {
+    for (var i in matches) {
+      var tag = matches[i].replace(/#inwehub-tag#/g, '')
+      tag = encodeURIComponent(tag)
+      html = html.replace(matches[i], tag)
+    }
+  }
+
   return html
 }
 
