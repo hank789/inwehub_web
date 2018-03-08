@@ -41,7 +41,7 @@
               <p>{{item.user_name}}</p>
               <p>{{item.description}}<i></i></p>
             </div>
-            <div class="fouce" :class="item.is_followed?'grey':''"   @tap.stop.prevent='collectProfessor(item.uuid,inde)'>{{item.is_followed ? '已关注' : '关注'}}</div>
+            <div class="fouce" :class="item.is_followed?'grey':''"   @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
           </li>
         </ul>
@@ -51,6 +51,7 @@
 </template>
 
 <script type="text/javascript">
+  import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   export default {
@@ -70,9 +71,12 @@
     watch: {
       searchText: function (newValue) {
         if (newValue) {
-          this.dataList = {
-            search_word: newValue
-          }
+          // 做延时处理
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
           this.isShow = true
         } else {
           this.isShow = false
@@ -142,6 +146,9 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
+    .listWrapper{
+      top:80px;
+    }
     background: #ffffff;
     .search{
       width:100%;

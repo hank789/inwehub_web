@@ -93,6 +93,7 @@
 </template>
 
 <script type="text/javascript">
+  import { searchText } from '../../utils/search'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import { postRequest } from '../../utils/request'
@@ -116,9 +117,11 @@
     watch: {
       searchText: function (newValue) {
         if (newValue) {
-          this.dataList = {
-            search_word: newValue
-          }
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
           this.isShow = true
         } else {
           this.isShow = false

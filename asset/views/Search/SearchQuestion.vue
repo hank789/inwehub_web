@@ -41,6 +41,7 @@
 
 
 <script type="text/javascript">
+  import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
 
@@ -62,9 +63,11 @@
     watch: {
       searchText: function (newValue) {
         if (newValue) {
-          this.dataList = {
-            search_word: newValue
-          }
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
           this.isShow = true
         } else {
           this.isShow = false

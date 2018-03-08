@@ -49,6 +49,7 @@
 </template>
 
 <script type="text/javascript">
+  import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   export default {
     data () {
@@ -56,7 +57,8 @@
         searchText: '',
         isShow: false,
         dataList: null,
-        list: []
+        list: [],
+        tagName: []
       }
     },
     computed: {
@@ -74,11 +76,14 @@
     },
     watch: {
       searchText: function (newValue) {
-        console.error(newValue)
         if (newValue) {
-          this.dataList = {
-            search_word: newValue
-          }
+         // 搜索进行延时操作
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
+         // 清空输入框的显隐
           this.isShow = true
         } else {
           this.isShow = false
@@ -86,6 +91,8 @@
       }
     },
     mounted () {
+    },
+    updated () {
     },
     methods: {
       //  点击清空输入框
