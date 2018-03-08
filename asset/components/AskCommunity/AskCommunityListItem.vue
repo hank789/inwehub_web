@@ -34,7 +34,6 @@
 
   const MajorList = {
     data: () => ({
-      list: [],
       tags: []
     }),
     computed: {
