@@ -2,10 +2,10 @@
   <div>
 
     <header class="mui-bar mui-bar-nav mui-bar-top">
-      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back" @tap.stop.prevent="cancelAnswer">取消</a>
+      <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back dark" @tap.stop.prevent="cancelAnswer">取消</a>
       <h1 class="mui-title">回答</h1>
       <a @tap.stop.prevent="goAnswer"
-         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</a>
+         class="mui-btn mui-btn-blue mui-btn-link mui-pull-right dark">发布</a>
     </header>
 
     <div class="mui-content answerRichText blur">
@@ -266,5 +266,14 @@
     width:100%;
     height:auto;
     bottom:0;
+  }
+
+</style>
+<style scoped>
+  .mui-content{
+    background: #ffffff;
+  }
+  .mui-bar .mui-btn.mui-pull-right,.mui-bar .mui-btn-nav.mui-pull-left{
+    color: #3c3e44;
   }
 </style>
