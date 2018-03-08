@@ -177,7 +177,7 @@
               width:1px;
               height:10px;
               background: #dbdbdb;
-              margin: 7px 0px 0 9px;
+              margin: 7px 0px 1px 9px;
             }
           }
 
