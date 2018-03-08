@@ -105,7 +105,7 @@ function transferTagToLink (html) {
 
   html = html.replace(/<span class="ql-size-small appUrl" ([^>]+)>#([^<]+)\s<\/span>/g, '<span class="ql-size-small appUrl" href="' + href + '" $1>#$2 </span>')
 
-  var matches = html.match(/#inwehub-tag#(.*?)#inwehub-tag#/)
+  var matches = html.match(/#inwehub-tag#(.*?)#inwehub-tag#/g)
   if (matches) {
     for (var i in matches) {
       var tag = matches[i].replace(/#inwehub-tag#/g, '')
