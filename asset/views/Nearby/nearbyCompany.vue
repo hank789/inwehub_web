@@ -424,14 +424,13 @@
     margin-left: 0.76rem;
     color: #444444;
     font-weight: 500;
-    position: relative;
   }
   .menu .switch p:nth-of-type(2):after {
     position: absolute;
     width:1.706rem;
     bottom: 0;
     left: 50%;
-    margin-left: -0.86rem;
+    margin-left:13px;
     height: 0.053rem;
     z-index: 999;
     content: '';

@@ -110,7 +110,7 @@
   /*滚动区域*/
     ul{
       width:100%;
-      overflow: hidden;
+      height: 100%;
       background: #f3f4f6;
       li{
         width:100%;

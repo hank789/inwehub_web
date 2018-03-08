@@ -91,7 +91,6 @@
   /*滚动区域*/
   .mui-content {
     background: #ffffff;
-    height:100%;
   .quiz{
     position: fixed;
     z-index: 9;
