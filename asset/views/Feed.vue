@@ -405,6 +405,7 @@
   }
   .menu span{
     position:relative;
+    margin-bottom: -0.293rem;
   }
   .menu span.bold{
     font-weight: 500;
@@ -415,7 +416,7 @@
     height:0.04rem;
     border-radius: 1.333rem;
     background:#03aef9;
-    top: 0.79rem;
+    top: 0.67rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -431,7 +432,7 @@
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 1.386rem;
     bottom: 1.333rem;
   }
 

@@ -35,7 +35,7 @@
         </quill-editor>
         <div class="time">
           <p class="average_rate" v-if="answer.average_rate">{{answer.average_rate}}好评</p>
-          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}} 著作权归作者所有 </p>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
         <div class="desc">用于鼓励提问者与回答者</div>
         <div class="time">
           <p v-if="answer.average_rate" class="average_rate">{{answer.average_rate}}好评</p>
-          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}}</p>
+          <p class="created_at">{{answer.created_at ? answer.created_at.split(' ')[0].replace(/-/g, '/') : ''}} 著作权归作者所有 </p>
         </div>
       </div>
 
