@@ -393,7 +393,7 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:1.04rem;
+    height: 1.173rem;
     background: #FFFFFF;
     font-size:0.373rem;
     color: #444444;
@@ -415,7 +415,7 @@
     height:0.04rem;
     border-radius: 1.333rem;
     background:#03aef9;
-    top: 0.757rem;
+    top: 0.79rem;
     left: 0;
     right: 0;
     margin: auto;
