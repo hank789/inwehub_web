@@ -11,7 +11,7 @@
            <use xlink:href="#icon-times1"></use>
          </svg>
        </p>
-       <p>取消</p>
+       <p @tap.stop.prevent="back()">取消</p>
      </div>
     <!--导航栏-->
     <div class="menu">
@@ -79,6 +79,9 @@
     mounted () {
     },
     methods: {
+      back () {
+        this.$router.go(-1)
+      },
       //  点击清空输入框
       empty () {
         this.searchText = ''

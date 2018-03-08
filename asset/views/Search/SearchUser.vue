@@ -11,7 +11,7 @@
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
-        <p>取消</p>
+        <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
       <div class="menu">
@@ -86,6 +86,9 @@
     mounted () {
     },
     methods: {
+      back () {
+        this.$router.go(-1)
+      },
       // 文字高亮
       getHighlight (content) {
         var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
