@@ -116,68 +116,68 @@
         width:100%;
         overflow: hidden;
         background: #ffffff;
-        margin-bottom: 10px;
-        padding: 16px 4% 13px 4%;
+        margin-bottom: 0.266rem;
+        padding: 0.426rem 4% 0.346rem 4%;
         .ask-tags{
           width:100%;
           overflow: hidden;
           p{
             float: left;
-            font-size:12px;
+            font-size:0.32rem;
             background: #ececee;
             color: #9e9e9e;
-            margin-right: 8px;
-            border-radius:50px;
+            margin-right: 0.213rem;
+            border-radius:1.333rem;
             padding: 0rem 0.213rem;
-            margin-bottom: 6px;
+            margin-bottom: 0.16rem;
           }
         }
         .ask-container{
           word-break: break-all;
-          font-size: 16px;
+          font-size: 0.426rem;
           color: #444444;
-          line-height: 22px;
+          line-height: 0.586rem;
         }
         .tag-detail{
           .ask-comment{
-            width:103px;
-            height:19px;
-            border-radius:4px;
+            width:2.746rem;
+            height:0.506rem;
+            border-radius:0.106rem;
             background: #a8dff7;
-            font-size:12px;
+            font-size:0.32rem;
             color: #235280;
             float: left;
             text-align: center;
-            line-height:19px;
-            margin-top: 2px;
-            margin-right: 10px;
+            line-height:0.506rem;
+            margin-top: 0.053rem;
+            margin-right: 0.266rem;
             position: relative;
             a{
               position: absolute;
               display: block;
-              width:4px;
-              height:4px;
+              width:0.106rem;
+              height:0.106rem;
               background: #ffffff;
               border-radius: 50%;
-              top: 8px;
-              left: 3px;
+              top: 0.213rem;
+              left: 0.08rem;
             }
           }
           width:100%;
-          height:20px;
-          margin-top: 5px;
+          height:0.533rem;
+          margin-top: 0.133rem;
           p{
             float: left;
-            font-size: 12px;
+            font-size: 0.32rem;
             color: #808080;
-            margin-right: 9px;
+            margin-right: 0.24rem;
             i{
               display: block;
               float: right;
-              width:1px;
-              height:10px;
+              width:0.026rem;
+              height:0.266rem;
               background: #dbdbdb;
-              margin: 7px 0px 1px 9px;
+              margin: 0.186rem 0rem 0.026rem 0.24rem;
             }
           }
 

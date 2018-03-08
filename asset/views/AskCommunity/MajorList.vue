@@ -94,21 +94,21 @@
   .quiz{
     position: fixed;
     z-index: 9;
-    width:190px;
-    height:44px;
-    border-radius: 50px;
+    width:5.066rem;
+    height:1.173rem;
+    border-radius: 1.333rem;
     background: #03aef9;
-    bottom: 15px;
+    bottom: 0.4rem;
     left:0;
     right:0;
     margin: auto;
     text-align: center;
-    line-height:44px;
-    font-size: 16px;
+    line-height:1.173rem;
+    font-size: 0.426rem;
     color: #ffffff;
     svg{
-      font-size: 25px;
-      margin-bottom: -4px;
+      font-size: 0.666rem;
+      margin-bottom: -0.106rem;
     }
     i{
       position: absolute;
@@ -121,8 +121,8 @@
       background: #fa4975;
       text-align: center;
       line-height: 0.453rem;
-      top: 10px;
-      left: 24px;
+      top: 0.266rem;
+      left: 0.64rem;
         &::after {
         content: "";
         display: block;

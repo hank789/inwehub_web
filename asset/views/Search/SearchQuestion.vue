@@ -128,11 +128,11 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 88px;
+      top: 2.346rem;
     }
     .search{
       width:100%;
-      height:44px;
+      height:1.173rem;
       background: #ffffff;
       padding: 0 4%;
       display: flex;
@@ -142,45 +142,45 @@
       p{
         &:nth-of-type(1){
           width:75%;
-          height:34px;
-          border-radius: 50px;
+          height:0.906rem;
+          border-radius: 1.333rem;
           background: #f3f4f6;
-          border:1px solid #dcdcdc;
+          border:0.026rem solid #dcdcdc;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          padding: 0 10px;
+          padding: 0 0.266rem;
           svg{
             color: #c8c8c8;
             &:nth-of-type(1){
-              font-size: 18px;
-              margin-right: 10px;
+              font-size: 0.48rem;
+              margin-right: 0.266rem;
             }
             &:nth-of-type(2){
-              margin-left: 10px;
-              font-size: 20px;
+              margin-left: 0.266rem;
+              font-size: 0.533rem;
             }
           }
           input{
             margin: 0;
             padding: 0;
-            height:32px;
+            height:0.853rem;
             border: none;
             background: #f3f4f6;
-            font-size: 14px;
+            font-size: 0.373rem;
             color: #444444;
           }
         }
         &:nth-of-type(2){
-          width:66px;
-          height:34px;
+          width:1.76rem;
+          height:0.906rem;
           background: #03aef9;
-          border-radius: 50px;
-          font-size: 14px;
+          border-radius: 1.333rem;
+          font-size: 0.373rem;
           color: #ffffff;
           text-align: center;
-          line-height: 34px;
+          line-height: 0.906rem;
         }
       }
     }
@@ -198,14 +198,14 @@
       position: relative;
       span{
         &:nth-of-type(1){
-          font-size: 14px;
+          font-size: 0.373rem;
           position:relative;
           color: #444444;
           font-weight: 500;
         i{
           position:absolute;
           width:0.72rem;
-          height:2px;
+          height:0.053rem;
           border-radius: 1.333rem;
           background:#03aef9;
           top: 0.746rem;
