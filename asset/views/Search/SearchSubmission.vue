@@ -33,7 +33,7 @@
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
               <div @tap.stop.prevent="goDetial(hot)" >
-                <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+                <p><a v-html="getHighlight(hot.data.title)"></a><i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img :src="hot.data.img">
                 </p>
@@ -99,9 +99,13 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
+  import localEvent from '../../stores/localStorage'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+
   export default {
     data () {
       return {
+        userId: currentUser.user_id,
         searchText: '',
         isShow: false,
         dataList: null,
@@ -130,7 +134,22 @@
     },
     mounted () {
     },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textContainer')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+          openAppUrl(eles[i])
+        }
+      })
+    },
     methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':

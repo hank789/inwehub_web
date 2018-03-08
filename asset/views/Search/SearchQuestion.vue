@@ -31,7 +31,9 @@
       :nextOtherData="dataList"
       class="listWrapper">
       <AskCommunityListItem
-        :list=list>
+        :list= "list"
+        :searchText = "searchText"
+      >
       </AskCommunityListItem>
 
     </RefreshList>
@@ -77,7 +79,6 @@
     mounted () {
     },
     methods: {
-
       //  点击清空输入框
       empty () {
         this.searchText = ''

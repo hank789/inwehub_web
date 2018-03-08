@@ -38,7 +38,7 @@
               </svg>
             </div>
             <div class="detail">
-              <p>{{item.user_name}}</p>
+              <p v-html="getHighlight(item.user_name)"></p>
               <p>{{item.description}}<i></i></p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"   @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
@@ -86,6 +86,12 @@
     mounted () {
     },
     methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false

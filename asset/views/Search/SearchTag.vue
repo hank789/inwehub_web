@@ -31,14 +31,8 @@
         :nextOtherData="dataList"
         class="listWrapper">
         <ul>
-          <!--搜素到的标签名 -->
-          <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
-            {{list[0].text}}<span>  (新标签)</span>
-            <i class="bot"></i>
-          </li>
-
-          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
-            {{item.name}}
+          <li v-for="(item, index) in list"  @tap.stop.prevent="toTagDetail(item.name)">
+            <p v-html="getHighlight(item.name)"></p>
             <i class="bot"></i>
           </li>
 
@@ -49,6 +43,7 @@
 </template>
 
 <script type="text/javascript">
+  import userAbility from '../../utils/userAbility'
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   export default {
@@ -95,6 +90,16 @@
     updated () {
     },
     methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
+      // 标签
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       //  点击清空输入框
       empty () {
         this.searchText = ''

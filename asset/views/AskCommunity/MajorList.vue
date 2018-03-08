@@ -19,7 +19,7 @@
             class="listWrapper"
           >
             <AskCommunityListItem
-              :list=list>
+              :list= "list">
             </AskCommunityListItem>
           </RefreshList>
           <div>
