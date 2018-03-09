@@ -46,7 +46,7 @@
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
-  import userAbility from '../../utils/userAbility'
+//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   import { softInput } from '../../utils/plus'
   const currentUser = getLocalUserInfo()
@@ -73,7 +73,7 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (this.user_level >= 3) {
+//        if (this.user_level >= 3) {
           if (newValue) {
             searchText(newValue, (text) => {
               this.dataList = {
@@ -84,9 +84,9 @@
           } else {
             this.isShow = false
           }
-        } else {
-          userAbility.jumpJudgeGrade(this)
-        }
+//        } else {
+//          userAbility.jumpJudgeGrade(this)
+//        }
       }
     },
     mounted () {

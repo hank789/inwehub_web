@@ -45,7 +45,7 @@
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
-  import userAbility from '../../utils/userAbility'
+//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   export default {
@@ -78,7 +78,7 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (this.user_level >= 3) {
+//        if (this.user_level >= 3) {
           if (newValue) {
             // 搜索进行延时操作
             searchText(newValue, (text) => {
@@ -91,9 +91,9 @@
           } else {
             this.isShow = false
           }
-        } else {
-          userAbility.jumpJudgeGrade(this)
-        }
+//        } else {
+//          userAbility.jumpJudgeGrade(this)
+//        }
       }
     },
     mounted () {

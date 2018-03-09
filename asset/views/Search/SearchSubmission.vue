@@ -101,7 +101,7 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-  import userAbility from '../../utils/userAbility'
+//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
 
@@ -128,7 +128,7 @@
     },
     watch: {
       searchText: function (newValue) {
-        if (this.user_level >= 3) {
+//        if (this.user_level >= 3) {
           if (newValue) {
             searchText(newValue, (text) => {
               this.dataList = {
@@ -139,9 +139,9 @@
           } else {
             this.isShow = false
           }
-        } else {
-          userAbility.jumpJudgeGrade(this)
-        }
+//        } else {
+//          userAbility.jumpJudgeGrade(this)
+//        }
       }
     },
     mounted () {
