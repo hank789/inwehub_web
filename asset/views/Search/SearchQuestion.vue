@@ -176,8 +176,7 @@
             }
           }
           input{
-            margin: 0;
-            padding: 0;
+            margin-top: 0.4rem;
             height:0.853rem;
             border: none;
             background: #f3f4f6;
@@ -206,10 +205,13 @@
       color: #444444;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
       position: relative;
       span{
+        display: flex;
+        width:25%;
+        height:100%;
+        justify-content: center;
+        align-items: center;
         &:nth-of-type(1){
           font-size: 0.373rem;
           position:relative;
@@ -221,9 +223,9 @@
           height:0.053rem;
           border-radius: 1.333rem;
           background:#03aef9;
-          top: 0.746rem;
           left: 0;
           right: 0;
+          bottom: 0;
           margin: auto;
         }
       }
