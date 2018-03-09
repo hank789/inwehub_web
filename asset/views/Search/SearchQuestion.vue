@@ -168,7 +168,6 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
-              margin-right: 0.266rem;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
