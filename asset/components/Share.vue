@@ -337,6 +337,8 @@
             this.hide()
           })
         }, 150)
+
+        this.$emit('share')
       },
       shareImage () {
         if (this.link) {
@@ -364,7 +366,7 @@
         })
       },
       hide () {
-
+        this.$emit('hide')
       },
       getImageByServer (callback) {
         var node = document.getElementById(this.DomConvertImageId)
