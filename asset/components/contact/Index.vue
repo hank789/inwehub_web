@@ -272,18 +272,21 @@
 
   .ibutton {
     float: right;
-    color: #03aef9;
     border-radius: 1.333rem;
-    border: 0.026rem solid #03aef9;
-    padding: 0 0.4rem;
+    width: 1.64rem;
+    height: 0.72rem;
+    text-align: center;
+    line-height: 0.72rem;
     position: relative;
     top: 0.266rem;
     margin-right: 0.133rem;
+    background: #03aef9;
+    color: #fff;
   }
 
   .ibutton.active {
-    background: #03aef9;
-    color: #fff;
+    background: #dcdcdc;
+    color: #b4b4b6;
   }
 
 </style>

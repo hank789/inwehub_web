@@ -7,10 +7,12 @@
 
     <div class="mui-content absolute askWrapper">
 
-      <div class="category"><span class="tip">问题分类</span>
+      <div class="category">
+        <p @tap.stop.prevent="$router.replace('/ask')">付费问答</p>
+        <p>互动问答<i></i></p>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType">
-          <span  v-if="this.tags.length || this.newTags.length">修改</span>
-          <span  v-else>选择</span>
+          <span  v-if="this.tags.length || this.newTags.length">修改分类</span>
+          <span  v-else>问题分类</span>
         </button>
       </div>
 
@@ -344,15 +346,37 @@
     height:1.626rem !important;
   }
 
+  /*导航栏*/
   .askWrapper .category {
     background: #fff;
-    padding: 0.4rem 0.453rem;
+    /*padding: 0.4rem 0.453rem;*/
+    height:1.173rem;
+    position: relative;
+    padding-left: 4%;
+  }
+  .askWrapper .category  p{
+    display: inline-block;
+    line-height: 1.2rem;
+    font-size:0.426rem;
+    color: #444444;
+    text-align: left;
+  }
+  .askWrapper .category  p:nth-of-type(2){
+    display: inline-block;
+    margin-left: 0.8rem;
+    color: #444444;
+    font-weight: 500;
     position: relative;
   }
-
-  .askWrapper .category .tip {
-    font-size: 0.426rem;
-    color: #444444;
+  .askWrapper .category p:nth-of-type(2):after {
+    position: absolute;
+    width:1.706rem;
+    bottom: 0;
+    left: 0;
+    height: 0.053rem;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
   }
 
   .askWrapper .category button {
@@ -361,9 +385,10 @@
     background-color: #03aef9;
     width: auto;
     font-size: 0.373rem;
-    padding: 0.106rem 0.453rem;
+    padding: 0rem 0.453rem;
+    height: 0.906rem;
     right: 0.266rem;
-    top: 0.32rem;
+    top: 0.09rem;
   }
 
   .mui-content > .mui-table-view:first-child {

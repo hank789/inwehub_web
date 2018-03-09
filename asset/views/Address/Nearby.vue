@@ -11,7 +11,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="输入公司名称"  v-model.trim="searchText"/>
+          <input type="text" placeholder="搜索附近位置"  v-model.trim="searchText"/>
           <span v-if="isShow"  @tap.stop.prevent="empty()">
            <svg class="icon" aria-hidden="true">
              <use xlink:href="#icon-guanbi"></use>
@@ -193,7 +193,7 @@
   .searchContainer{
     width:100%;
     height:1.44rem;
-    background:#f3f4f6;
+    background:#ffffff;
     padding-top: 0.266rem;
     position: absolute;
     top:0;
@@ -201,7 +201,7 @@
   .searchContainer p{
     width:92%;
     height:0.906rem;
-    background: #FFFFFF;
+    background: #f3f4f6;
     border-radius: 1.333rem;
     margin-left: 4%;
     display: flex;
@@ -222,6 +222,10 @@
     color:#444444;
     float: left;
     margin-left: 0.266rem;
+    background: #f3f4f6;
+  }
+  .searchContainer input::placeholder{
+    color: #c8c8c8;
   }
   .searchContainer p svg{
     color:#c8c8c8;

@@ -405,6 +405,7 @@
     width:100%;
     overflow: hidden;
     padding: 0  0.426rem 0.213rem 0.186rem;
+    background: #ffffff;
   }
   .question_tags p{
     float: left;

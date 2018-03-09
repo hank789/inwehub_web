@@ -6,6 +6,7 @@ import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from 
 import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { apiRequest } from './request'
+import { checkUpdate } from './updateVersion'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
@@ -534,6 +535,8 @@ function AppInit (context) {
           if (currentUser.user_id) {
             saveLocationInfo()
           }
+          // 检查版本更新
+          checkUpdate()
 
           var routerFullPath = context.$router.currentRoute.fullPath
           console.log('routerFullPath:' + routerFullPath)

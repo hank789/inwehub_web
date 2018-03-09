@@ -562,7 +562,7 @@
   }
 
   .professor {
-    background-color: #3c3e44;
+    background-color: #ffffff;
     text-align: center;
     position: relative;
     height: 2.08rem;

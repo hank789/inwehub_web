@@ -1,34 +1,39 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">文章分享</h1>
-    </header>
-
-    <div class="mui-content" @tap="hideAllOptions()">
+    <div class="mui-content">
+      <div class="search">
+        <p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-sousuo"></use>
+          </svg>
+          <input type="text" placeholder=""   v-model.trim="searchText" />
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
+            <use xlink:href="#icon-times1"></use>
+          </svg>
+        </p>
+        <p @tap.stop.prevent="back()">取消</p>
+      </div>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/discover/hottopic')">热门 </span>
-        <span @tap.stop.prevent="">最新 <i></i></span>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/discover/add')">
-          <use xlink:href="#icon-xiugai"></use>
-        </svg>
-
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
+        <span @tap.stop.prevent="">分享<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/searchTag?text=' + searchText)">标签</span>
+        <span @tap.stop.prevent="$router.replace('/searchUser?text=' + searchText)">用户</span>
+        <i class="bot"></i>
       </div>
-      <!--滚动区域-->
-      <!--内容区域-->
       <RefreshList
+        v-if="dataList != null"
         v-model="list"
-        :api="'article/list'"
+        :api="'search/submission'"
         :pageMode="true"
-        :prevOtherData="{sort:'new'}"
-        :nextOtherData="{sort:'new'}"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
         class="listWrapper">
         <ul>
           <template v-for="(hot, index) in list">
-            <li class="Container" v-if="hot.type === 'link'"  >
-              <div @tap.stop.prevent="goDetial(hot)">
-                <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+            <li class="Container" v-if="hot.type === 'link'" >
+              <div @tap.stop.prevent="goDetial(hot)" >
+                <p><a v-html="getHighlight(hot.data.title)"></a><i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img :src="hot.data.img">
                 </p>
@@ -45,8 +50,8 @@
                     <use xlink:href="#icon-gengduo"></use>
                   </svg>
                   <span class="carte" style="display: none;">
-                     <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
-                     <a @tap.stop.prevent="deleterow(hot.id,index)" v-else>删除</a>
+                    <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
+                    <a @tap.stop.prevent="deleterow(hot.id,index)" v-else>删除</a>
                   </span>
                 </p>
                 <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
@@ -71,42 +76,96 @@
               </div>
             </li>
             <!--带图片的样式-->
-            <li class="imgContainer" v-else-if="hot.type === 'text'" @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug)">
-              <TextDetail :data="hot" @downvoteComment="downvoteComment"
+            <li class="imgContainer" v-else-if="hot.type === 'text'">
+              <TextDetail :data="hot"
+                          @downvoteComment="downvoteComment"
+                          :searchText="searchText"
                           @bookmarkuBmission="bookmarkuBmission"
                           @report="report"
-                          @deleterow="deleterow"
+                          @deleterow="deleterow(hot.id, index)"
               ></TextDetail>
 
             </li>
           </template>
         </ul>
+
       </RefreshList>
     </div>
   </div>
 </template>
-<script>
-  import RefreshList from '../../components/refresh/List.vue'
-  import { postRequest } from '../../utils/request'
-  import TextDetail from '../../components/discover/TextDetail'
-  import localEvent from '../../stores/localStorage'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+
+<script type="text/javascript">
+  import { searchText } from '../../utils/search'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
+  import { postRequest } from '../../utils/request'
+  import RefreshList from '../../components/refresh/List.vue'
+  import TextDetail from '../../components/discover/TextDetail'
+  import userAbility from '../../utils/userAbility'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
-  const PublishAnswers = {
-    data: () => ({
-      list: [],
-      userId: currentUser.user_id
-    }),
-    created () {
+  export default {
+    data () {
+      return {
+        userId: currentUser.user_id,
+        user_level: currentUser.user_level,
+        searchText: '',
+        isShow: false,
+        dataList: null,
+        list: []
+      }
     },
-    computed: {},
     components: {
       RefreshList,
       TextDetail
     },
+    created () {
+      var text = this.$route.query.text
+      if (text) {
+        this.searchText = text
+      }
+    },
+    watch: {
+      searchText: function (newValue) {
+        if (this.user_level >= 3) {
+          if (newValue) {
+            searchText(newValue, (text) => {
+              this.dataList = {
+                search_word: newValue
+              }
+            })
+            this.isShow = true
+          } else {
+            this.isShow = false
+          }
+        } else {
+          userAbility.jumpJudgeGrade(this)
+        }
+      }
+    },
+    mounted () {
+    },
+    updated () {
+      this.$nextTick(() => {
+        var eles = this.$el.querySelectorAll('.textContainer')
+        for (var i in eles) {
+          openVendorUrl(eles[i])
+          openAppUrl(eles[i])
+        }
+      })
+    },
     methods: {
+      back () {
+        window.mui.back()
+        return
+      },
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
@@ -149,8 +208,7 @@
       deleterow (id, index) {
         var btnArray = ['取消', '确定']
         var list = this.list
-        var that = this
-        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
             // 进行删除
             postRequest(`article/destroy-submission`, {
@@ -165,7 +223,7 @@
               }
               if (response.data.data) {
                 list.splice(index, 1)
-                that.hideAllOptions()
+                this.hideAllOptions()
                 window.mui.toast('删除成功')
               }
             })
@@ -221,96 +279,16 @@
             }
           }
         })
+      },
+      //  点击清空输入框
+      empty () {
+        this.searchText = ''
       }
-    },
-    mounted () {
-
-    },
-    updated () {
-      this.$nextTick(() => {
-        var eles = this.$el.querySelectorAll('.textContainer')
-        for (var i in eles) {
-          openVendorUrl(eles[i])
-          openAppUrl(eles[i])
-        }
-      })
     }
   }
-  export default PublishAnswers
 </script>
-<style scoped>
-  .mui-wechat .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #ffffff;
-    top: 0;
-  }
 
-  .mui-content {
-    background: #F3F4F5;
-  }
-
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #ffffff;
-    padding: 0 0.453rem;
-    border-bottom: 0.026rem solid #dcdcdc;
-  }
-
-  .menu span {
-    display: block;
-    height: 100%;
-    float: left;
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(2) {
-    position: relative;
-  }
-
-  .menu span:nth-of-type(2) {
-    margin-left: 0.906rem;
-  }
-
-  .menu svg {
-    float: right;
-    ont-size: 0.48rem;
-    color: #03aef9;
-    margin-top: 0.346rem;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 0.72rem;
-    height: 0.04rem;
-    left: 0%;
-    bottom: 0.013rem;
-    background: #03aef9;
-  }
-
-  .bot {
-    position: absolute;
-    right: 0rem;
-    bottom: 0;
-    left: 0rem;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-
+<style lang="less" scoped>
   /*清掉自带样式*/
 
   div,
@@ -326,6 +304,113 @@
     list-style: none;
     font-style: normal;
   }
+
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+  .mui-content{
+    .listWrapper{
+      top: 2.2rem;
+    }
+    background: #ffffff;
+    .search{
+      width:100%;
+      height:1.173rem;
+      background: #ffffff;
+      padding: 0 4%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      p{
+        &:nth-of-type(1){
+          width:75%;
+          height:0.906rem;
+          border-radius: 1.333rem;
+          background: #f3f4f6;
+          border:0.026rem solid #dcdcdc;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 0.266rem;
+          svg{
+            color: #c8c8c8;
+            &:nth-of-type(1){
+              font-size: 0.48rem;
+            }
+            &:nth-of-type(2){
+              margin-left: 0.266rem;
+              font-size: 0.533rem;
+            }
+          }
+          input{
+            margin-top: 0.4rem;
+            height:0.853rem;
+            border: none;
+            background: #f3f4f6;
+            font-size: 0.373rem;
+            color: #444444;
+          }
+        }
+        &:nth-of-type(2){
+          width:1.76rem;
+          height:0.906rem;
+          background: #03aef9;
+          border-radius: 1.333rem;
+          font-size: 0.373rem;
+          color: #ffffff;
+          text-align: center;
+          line-height: 0.906rem;
+        }
+      }
+    }
+    /*导航栏的样式*/
+    .menu{
+      width:100%;
+      height:1.04rem;
+      background: #ffffff;
+      font-size:0.373rem;
+      color: #444444;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      span{
+        display: flex;
+        width:25%;
+        height:100%;
+        justify-content: center;
+        align-items: center;
+        &:nth-of-type(2){
+          font-size: 0.373rem;
+          position:relative;
+          color: #444444;
+          font-weight: 500;
+          i{
+            position:absolute;
+            width:0.72rem;
+            height:0.053rem;
+            border-radius: 1.333rem;
+            background:#03aef9;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+          }
+        }
+      }
+    }
+    /**/
+  }
+
+
 
   /*滚动区域*/
   ul {
@@ -392,7 +477,6 @@
     display: flex;
     align-items: center;
     padding:0 0.133rem;
-
   }
 
   /*举报和删除*/
@@ -456,7 +540,7 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 0.32rem 0.426rem 0 0.426rem;
+    padding: 0.32rem 0.4rem 0 0.4rem;
     margin-bottom: 0.266rem;
   }
 
@@ -592,7 +676,5 @@
     color: #03aef9;
   }
 
-  .listWrapper {
-    margin-top: 1.2rem;
-  }
+
 </style>

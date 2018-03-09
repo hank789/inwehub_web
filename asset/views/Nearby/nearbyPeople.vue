@@ -7,10 +7,8 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <div class="switch">
-          <p>附近的人</p>
-          <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近的公司</p>
-        </div>
+        <p>附近的人</p>
+        <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近公司</p>
         <svg class="icon" aria-hidden="true"  @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">
           <use xlink:href="#icon-ditu"></use>
         </svg>
@@ -167,42 +165,45 @@
     background: #ffffff;
   }
   /*导航栏*/
+  /*导航栏*/
   .menu{
     width: 100%;
-    height:1.333rem;
-    background:#3c3e44;
+    height: 1.2rem;
+    background:#fefefe;
     position: relative;
-    display: flex;
-    align-items: center;
+    padding-left: 4%;
   }
-  .menu .switch{
-    width:5.6rem;
-    height:0.906rem;
-    border:0.026rem solid #808080;
-    border-radius: 1.333rem;
+  .menu  p{
+    display: inline-block;
+    line-height: 1.2rem;
+    font-size:0.426rem;
+    color: #444444;
+    text-align: left;
+  }
+  .menu  p:nth-of-type(1){
+    display: inline-block;
+    color: #444444;
+    font-weight: 500;
+    position: relative;
+  }
+  .menu  p:nth-of-type(1):after {
     position: absolute;
+    width:1.706rem;
+    bottom: 0;
     left: 0;
-    right:0;
-    margin: auto;
+    height: 0.053rem;
+    z-index: 999;
+    content: '';
+    background-color: #009FE8;
   }
-  .menu .switch p{
-    width:50%;
-    height:100%;
-    font-size: 0.373rem;
-    color: #fefefe;
-    float: left;
-    text-align: center;
-    line-height: 0.906rem;
-  }
-  .menu .switch p:nth-of-type(1){
-    background:#808080;
-    border-radius: 1.333rem  0  0 1.333rem;
+  .menu  p:nth-of-type(2){
+    margin-left: 0.8rem;
   }
   .menu svg{
     position: absolute;
     right:3%;
     font-size: 0.666rem;
-    color: #fefefe;
+    color: #444444;
   }
   /*列表区域*/
   .cions-list{

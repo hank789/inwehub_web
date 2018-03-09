@@ -3,51 +3,47 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">{{ title }}</h1>
-
-      <a class="mui-icon mui-pull-right" @tap.stop.prevent="share()">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-fenxiang"></use>
-        </svg>
-      </a>
-
     </header>
 
     <div class="mui-content">
-
     </div>
 
-    <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
-      <div class="title">分享到</div>
-      <div class="more">
-        <div class="single" id="wechatShareBtn" @tap.stop.prevent="shareToHaoyou()">
-          <img src="../../statics/images/wechat_2x.png"/>
-        </div>
-        <div class="single" id="wechatShareBtn2" @tap.stop.prevent="shareToPengyouQuan()">
-          <img src="../../statics/images/pengyouquan.png"/>
-        </div>
-      </div>
-    </div>
 
-    <div id="shareShowWrapper" class="mui-popover mui-popover-action mui-popover-top"
-         @tap.stop.prevent="toggleShareNav()">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-dianzheli"></use>
-      </svg>
-    </div>
+    <Share
+      :title="shareOption.title"
+      :shareName="shareOption.shareName"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'vendorArticleShare'"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @share="share"
+      @hide="hide"
+    ></Share>
 
   </div>
 </template>
 
 
 <script>
-  import Share from '../../utils/share'
-  import { postRequest } from '../../utils/request'
   import { getImmersedHeight } from '../../utils/statusBar'
+  import Share from '../../components/Share.vue'
 
   export default {
     data: () => ({
       title: '',
-      link: ''
+      id: 0,
+      shareOption: {
+        title: '',
+        link: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: '',
+        shareName: ''
+      }
     }),
     created () {
 
@@ -55,88 +51,11 @@
     methods: {
       initWebview (pageTile, shareTitle, shareLink, shareContent, shareImageUrl, shareThumbUrl) {
         this.title = pageTile
-        this.link = shareLink
-        var data = {}
-        if (window.mui.os.plus) {
-          data = {
-            title: shareTitle,
-            link: shareLink,
-            content: shareContent,
-            imageUrl: shareImageUrl,
-            thumbUrl: shareThumbUrl
-          }
-
-          Share.bindShare(
-            this,
-            data,
-            this.successCallback,
-            this.failCallback
-          )
-        } else {
-          data = {
-            title: 'test',
-            link: 'test',
-            content: 'test',
-            imageUrl: 'test',
-            thumbUrl: 'test'
-          }
-
-          Share.bindShare(
-            this,
-            data,
-            this.successCallback,
-            this.failCallback
-          )
-        }
-      },
-      toggleShareNav () {
-        window.mui('#shareShowWrapper').popover('toggle')
-      },
-      shareToHaoyou () {
-        this.sendHaoyou()
-        if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
-        } else {
-          window.mui('#shareWrapper').popover('toggle')
-          window.mui('#shareShowWrapper').popover('toggle')
-        }
-        this.hide()
-      },
-      shareToPengyouQuan () {
-        this.sendPengYouQuan()
-        if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
-        } else {
-          window.mui('#shareWrapper').popover('toggle')
-          window.mui('#shareShowWrapper').popover('toggle')
-        }
-        this.hide()
-      },
-      successCallback () {
-        postRequest(`share/wechat/success`, {
-          'target': this.link,
-          'title': this.title
-        }).then(response => {
-
-        })
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-          // mixpanel
-          window.mixpanel.track(
-            'inwehub:share:success',
-            {
-              'app': 'inwehub',
-              'user_device': window.getUserAppDevice(),
-              'page': this.link,
-              'page_name': 'share',
-              'page_title': this.title,
-              'referrer_page': ''
-            }
-          )
-        }
-      },
-      failCallback (error) {
-        console.log(JSON.stringify(error))
-        window.mui.toast('分享失败')
+        this.shareOption.title = shareTitle
+        this.shareOption.link = shareLink
+        this.shareOption.content = shareContent
+        this.shareOption.imageUrl = shareImageUrl
+        this.shareOption.thumbUrl = shareThumbUrl
       },
       share () {
         if (window.mui.os.plus) {
@@ -147,11 +66,15 @@
               zindex: 999,
               opacity: 0.97
             })
+
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
+            footerWebview.setStyle({
+              opacity: 0
+            })
           })
         }
 
         setTimeout(() => {
-          window.mui('#shareWrapper').popover('toggle')
           window.mui('body').on('tap', '.mui-backdrop', () => {
             this.hide()
           })
@@ -166,11 +89,21 @@
               height: (immersedHeight + 44) + 'px',
               opacity: 1
             })
+
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
+            footerWebview.setStyle({
+              opacity: 1
+            })
           })
         }
-      }
+      },
+      shareSuccess () {},
+      shareFail () {}
     },
     computed: {},
+    components: {
+      Share
+    },
     watch: {},
     mounted () {
       document.addEventListener('load_inwehub_article_share', (event) => {
@@ -227,6 +160,4 @@
       font-size: 1.866rem;
     }
   }
-
-
 </style>

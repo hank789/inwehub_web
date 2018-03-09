@@ -4,6 +4,10 @@ import FindPassword from '../../../views/FindPassword.vue'
 import Home from '../../../views/404.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
+import SearchSearchQuestion from '../../../views/Search/SearchQuestion.vue'
+import SearchSearchSubmission from '../../../views/Search/SearchSubmission.vue'
+import SearchSearchTag from '../../../views/Search/SearchTag.vue'
+import SearchSearchUser from '../../../views/Search/SearchUser.vue'
 import ActivityOpportunityList from '../../../views/Activity/OpportunityList.vue'
 import ActivityEnrollmentStatus from '../../../views/Activity/EnrollmentStatus.vue'
 import NewcomerGuidanceStepOne from '../../../views/NewcomerGuidance/StepOne.vue'
@@ -12,7 +16,6 @@ import NewcomerGuidanceStepThree from '../../../views/NewcomerGuidance/StepThree
 import InvitationFriends from '../../../views/Invitation/Friends.vue'
 import AskCommunityMajorList from '../../../views/AskCommunity/MajorList.vue'
 import AskCommunityMajorDetail from '../../../views/AskCommunity/MajorDetail.vue'
-import AskCommunityInteractionList from '../../../views/AskCommunity/InteractionList.vue'
 import AskCommunityInteractionAnswers from '../../../views/AskCommunity/InteractionAnswers.vue'
 import AskCommunityInteractionDetail from '../../../views/AskCommunity/InteractionDetail.vue'
 import RecommendInvitationUsers from '../../../views/RecommendInvitationUsers.vue'
@@ -163,13 +166,17 @@ import Hongbao from '../../../views/Hongbao.vue'
 import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
-import time from '../../../components/time.vue'
+
 export {
   Login,
   Register,
   FindPassword,
   Home,
   Feed,
+  SearchSearchQuestion,
+  SearchSearchSubmission,
+  SearchSearchTag,
+  SearchSearchUser,
   ActivityActiveList,
   ActivityOpportunityList,
   ActivityEnrollmentStatus,
@@ -179,7 +186,6 @@ export {
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
-  AskCommunityInteractionList,
   AskCommunityInteractionAnswers,
   AskCommunityInteractionDetail,
   RecommendInvitationUsers,
@@ -329,6 +335,5 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404,
-  time
+  Page404
 }

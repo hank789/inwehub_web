@@ -13,7 +13,7 @@
           <Switches v-model="notices.all" type-bold="true" theme="custom" color="blue"></Switches>
           <i class="bot"></i>
         </div>
-        <p>你可能错过重要的活动机会推荐，点击前往“设置”开启通知</p>
+        <p v-if="isOpenNotification === 0">你可能错过重要的活动机会推荐，点击前往“设置”开启通知</p>
       </div>
       <div class="grey"  v-if="isOpenNotification === 0"></div>
       <ul class="notice_m">
@@ -57,6 +57,7 @@
     data () {
       return {
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        isNotificationPermission: -1, // -1， 未知, 1 yes 0 no
         notices: {
           all: 1,
           disturb: 0,
@@ -115,10 +116,12 @@
         checkPermissionMy('NOTIFITION', () => {
           this.notices.all = 1
           this.isOpenNotification = 1
+          this.isNotificationPermission = 1
           this.getNotification()
         }, (result) => {
           this.notices.all = 0
           this.isOpenNotification = 0
+          this.isNotificationPermission = 0
           this.closeAll()
         })
       },

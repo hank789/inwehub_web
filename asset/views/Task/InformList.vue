@@ -45,7 +45,9 @@
                     <span>通知公告</span>
                     <span class="mui-ellipsis">{{list.notice_message.last_message ? list.notice_message.last_message.data.title : ''}}</span>
                   </p>
-                  <a>{{list.notice_message.last_message ? list.notice_message.last_message.created_at : ''}}</a>
+                  <a>
+                    {{timeago(list.notice_message.last_message ? list.notice_message.last_message.created_at : '')}}
+                  </a>
                   <i class="bot"></i>
                 </li>
                 <li @tap.stop.prevent="skip(2)" v-if="list.money_message.last_message ">
@@ -55,7 +57,9 @@
                     <span>余额变动</span>
                     <span class="mui-ellipsis">{{list.money_message.last_message ? list.money_message.last_message.data.title : ""}} </span>
                   </p>
-                  <a>{{list.money_message.last_message ? list.money_message.last_message.created_at : ''}}</a>
+                  <a>
+                    {{timeago(list.money_message.last_message ? list.money_message.last_message.created_at : '')}}
+                  </a>
                   <i class="bot"></i>
                 </li>
                 <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">-->
@@ -75,7 +79,9 @@
                     <span>问答通知</span>
                     <span class="mui-ellipsis">{{list.task_message.last_message ? list.task_message.last_message.data.title : ""}} </span>
                   </p>
-                  <a>{{list.task_message.last_message ? list.task_message.last_message.created_at : ''}}</a>
+                  <a>
+                    {{timeago(list.task_message.last_message ? list.task_message.last_message.created_at : '')}}
+                  </a>
                   <i class="bot"></i>
                 </li>
                 <li @tap.stop.prevent="skip(4)" v-if="list.readhub_message.last_message">
@@ -85,7 +91,9 @@
                     <span>动态通知</span>
                     <span class="mui-ellipsis">{{list.readhub_message.last_message ? list.readhub_message.last_message.data.title : ""}} </span>
                   </p>
-                  <a>{{list.readhub_message.last_message ? list.readhub_message.last_message.created_at : ''}}</a>
+                  <a>
+                    {{timeago(list.readhub_message.last_message ? list.readhub_message.last_message.created_at : '')}}
+                  </a>
                   <i class="bot"></i>
                 </li>
                 <!--消息通知-->
@@ -97,7 +105,9 @@
                     <span class="mui-ellipsis" v-if="item.last_message.data.img">[图片]</span>
                     <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
                   </p>
-                  <a>{{item.last_message ? item.last_message.created_at : ''}}</a>
+                  <a>
+                    {{timeago(item.last_message ? item.last_message.created_at : '')}}
+                  </a>
                   <i class="bot"></i>
                 </li>
               </ul>
@@ -111,6 +121,7 @@
 
 <script type="text/javascript">
   import RefreshList from '../../components/refresh/List.vue'
+
   const TaskMain = {
     data: () => ({
       list: {
@@ -175,7 +186,6 @@
       },
       messagecountchange (obj) {
         this.total_count = obj
-//           console.log(obj);
       },
       gochat (item) {
         item.unread_count = 0

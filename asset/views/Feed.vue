@@ -1,41 +1,34 @@
 <template>
   <div>
-    <header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">
-      <div class="headerWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-logowenzi"></use>
-        </svg>
+    <!--<header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">-->
+      <!--<div class="headerWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-logowenzi"></use>-->
+        <!--</svg>-->
 
-        <div class="rightWrapper" @tap.stop.prevent="toAddArticle()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-plus--"></use>
-          </svg>
-        </div>
-      </div>
-    </header>
+        <!--<div class="rightWrapper" @tap.stop.prevent="toAddArticle()">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-plus&#45;&#45;"></use>-->
+          <!--</svg>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</header>-->
 
     <div class="mui-content feedWrapper" v-show="!loading">
-      <!--&lt;!&ndash;标签活动&ndash;&gt;-->
-      <!--<div class="tag">-->
-         <!--<p @tap.stop.prevent="toTagDetail('贺新春')">-->
-           <!--<img src="../statics/images/feed_newyear@2x.png"/>-->
-         <!--</p>-->
-         <!--<p @tap.stop.prevent="toTagDetail('谈工作')">-->
-           <!--<img src="../statics/images/feed_work@2x.png"/>-->
-         <!--</p>-->
-         <!--<p @tap.stop.prevent="toTagDetail('提建议')">-->
-           <!--<img src="../statics/images/feed_suggest@2x.png"/>-->
-         <!--</p>-->
-      <!--</div>-->
       <!--导航栏-->
       <div class="menu">
+        <span  @tap.stop.prevent="judge()">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+          </svg>
+        </span>
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">关注<i v-if="search_type === 1"></i></span>
         <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
         <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
         <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
-        <span  @tap.stop.prevent="judge()">
+        <span  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhaoguwenyuanshi"></use>
+            <use xlink:href="#icon-sousuo"></use>
           </svg>
         </span>
         <i class="bot"></i>
@@ -223,10 +216,6 @@
       }
     },
     methods: {
-//     // 标签
-//      toTagDetail (name) {
-//        userAbility.jumpToTagDetail(name)
-//      },
       judge () {
         this.$router.pushPlus('/nearbyCompany')
       },
@@ -404,7 +393,7 @@
   /*菜单*/
   .menu{
     width:100%;
-    height:1.04rem;
+    height: 1.173rem;
     background: #FFFFFF;
     font-size:0.373rem;
     color: #444444;
@@ -416,6 +405,7 @@
   }
   .menu span{
     position:relative;
+    margin-bottom: -0.293rem;
   }
   .menu span.bold{
     font-weight: 500;
@@ -426,20 +416,23 @@
     height:0.04rem;
     border-radius: 1.333rem;
     background:#03aef9;
-    top: 0.757rem;
+    top: 0.67rem;
     left: 0;
     right: 0;
     margin: auto;
   }
-  .menu span svg{
-    font-size: 0.666rem;
+  .menu span:nth-of-type(1) svg{
+    font-size: 0.66rem;
+  }
+  .menu span:nth-last-of-type(1) svg{
+    font-size: 0.533rem;
   }
 
   .mui-content{
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 1.2rem;
     bottom: 1.333rem;
   }
 
@@ -541,31 +534,7 @@
     -webkit-box-orient: vertical;
     font-size: 0.426rem;
   }
-  /*!*标签活动*!*/
-  /*.tag{*/
-    /*width:100%;*/
-    /*height:1.306rem;*/
-    /*background: #f3f4f6;*/
-    /*padding: 0 0.4rem;*/
-    /*position: absolute;*/
-    /*top:0;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*align-items: center;*/
-    /*justify-content: space-between;*/
-  /*}*/
-  /*.tag p{*/
-    /*width:32%;*/
-    /*height:1.04rem;*/
-    /*margin-bottom: 0;*/
-    /*border-radius: 0.106rem;*/
-    /*background: #ffffff;*/
-  /*}*/
-  /*.tag p img{*/
-    /*width: 100%;*/
-    /*height:100%;*/
-    /*border-radius: 0.106rem;*/
-  /*}*/
+
 
 
 </style>

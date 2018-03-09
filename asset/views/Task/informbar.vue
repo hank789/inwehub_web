@@ -21,7 +21,7 @@
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span class="mui-ellipsis">{{item.data.title}}</span>
-                <span>{{item.created_at}}</span>
+                <span>{{timeago(item.created_at)}}</span>
               </p>
               <i class="bot"></i>
             </li>

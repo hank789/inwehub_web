@@ -109,6 +109,8 @@
   float: left;
   font-size:0.346rem;
   color: #808080;
+  letter-spacing:0.026rem;
+  margin-top: 0.08rem;
 }
 .question-answer i{
     color: #03aef9;
@@ -121,6 +123,7 @@
   line-height: 0.56rem;
   margin-bottom: 0.373rem;
   margin-top: 0.08rem;
+  letter-spacing:0.026rem;
 }
 
 

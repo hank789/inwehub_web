@@ -3,6 +3,11 @@ const Register = () => import(/* webpackChunkName: "Register" */ '../../../views
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
 const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/404.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
+const SearchSearchQuestion = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchQuestion.vue')
+const SearchSearchSubmission = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchSubmission.vue')
+const SearchSearchTag = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchTag.vue')
+const SearchSearchUser = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchUser.vue')
+
 const ActivityActiveList = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Activity/ActiveList.vue')
 const ActivityOpportunityList = () => import(/* webpackChunkName: "ActivityOpportunityList" */ '../../../views/Activity/OpportunityList.vue')
 const ActivityEnrollmentStatus = () => import(/* webpackChunkName: "ActivityEnrollmentStatus" */ '../../../views/Activity/EnrollmentStatus.vue')
@@ -13,7 +18,6 @@ const NewcomerGuidanceStepThree = () => import(/* webpackChunkName: "NewcomerGui
 const InvitationFriends = () => import(/* webpackChunkName: "InvitationFriends" */ '../../../views/Invitation/Friends.vue')
 const AskCommunityMajorList = () => import(/* webpackChunkName: "AskCommunityMajorList" */ '../../../views/AskCommunity/MajorList.vue')
 const AskCommunityMajorDetail = () => import(/* webpackChunkName: "AskCommunityMajorDetail" */ '../../../views/AskCommunity/MajorDetail.vue')
-const AskCommunityInteractionList = () => import(/* webpackChunkName: "AskCommunityInteractionList" */ '../../../views/AskCommunity/InteractionList.vue')
 const AskCommunityInteractionAnswers = () => import(/* webpackChunkName: "AskCommunityInteractionAnswers" */ '../../../views/AskCommunity/InteractionAnswers.vue')
 const AskCommunityInteractionDetail = () => import(/* webpackChunkName: "AskCommunityInteractionDetail" */ '../../../views/AskCommunity/InteractionDetail.vue')
 const RecommendInvitationUsers = () => import(/* webpackChunkName: "RecommendInvitationUsers" */ '../../../views/RecommendInvitationUsers.vue')
@@ -164,7 +168,6 @@ const Hongbao = () => import(/* webpackChunkName: "Hongbao" */ '../../../views/H
 const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
-const time = () => import(/* webpackChunkName: "time" */ '../../../components/time.vue')
 
 export {
   Login,
@@ -172,6 +175,10 @@ export {
   FindPassword,
   Home,
   Feed,
+  SearchSearchQuestion,
+  SearchSearchSubmission,
+  SearchSearchTag,
+  SearchSearchUser,
   ActivityActiveList,
   ActivityOpportunityList,
   ActivityEnrollmentStatus,
@@ -181,7 +188,6 @@ export {
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
-  AskCommunityInteractionList,
   AskCommunityInteractionAnswers,
   AskCommunityInteractionDetail,
   RecommendInvitationUsers,
@@ -331,6 +337,5 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404,
-  time
+  Page404
 }

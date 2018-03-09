@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="average_rate" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
-    <div class="text-16-444 mui-ellipsis-3">{{data.feed.answer_content}}</div>
+    <div class="text-16-444 mui-ellipsis-3 textToLink" v-html="textToLink(data.feed.answer_content)"></div>
 
     <div class="container-answer margin-10-0-0">
       <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
@@ -56,6 +56,7 @@
   import Avatar from '../../components/image/Avatar.vue'
   import { postRequest } from '../../utils/request'
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   // import { getLocalUserInfo } from '../../utils/user'
 
   // const currentUser = getLocalUserInfo()
@@ -79,6 +80,9 @@
     mounted () {
     },
     methods: {
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
@@ -136,7 +140,7 @@
     border-radius: 0.106rem;
     font-size:0.32rem;
     color: #235280;
-    line-height: 0.506rem;
+    line-height: 0.55rem;
     padding: 0 0.346rem 0 0.08rem;
   }
   .question-money i{
