@@ -53,6 +53,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import { apiRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import { getUserInfo } from '../utils/user'
@@ -62,6 +63,8 @@
   import { clearAllWebViewCache } from '../utils/webview'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
+  import VTooltip from 'v-tooltip'
+  Vue.use(VTooltip)
 
 //  const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
   const phoneReg = /^[0-9]+$/

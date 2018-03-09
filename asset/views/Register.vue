@@ -77,6 +77,9 @@
   import { USERS_APPEND } from '../stores/types'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
+  import Vue from 'vue'
+  import VTooltip from 'v-tooltip'
+  Vue.use(VTooltip)
 
   // 手机号码规则
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
