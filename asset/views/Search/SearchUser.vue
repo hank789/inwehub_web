@@ -39,7 +39,7 @@
             </div>
             <div class="detail">
               <p v-html="getHighlight(item.user_name)"></p>
-              <p>{{item.description}}<i></i></p>
+              <p class="mui-ellipsis">{{item.description}}<i></i></p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"   @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
@@ -236,10 +236,13 @@
       color: #444444;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
       position: relative;
       span{
+        display: flex;
+        width:25%;
+        height:100%;
+        justify-content: center;
+        align-items: center;
         &:nth-of-type(4){
           font-size: 0.373rem;
           position:relative;
@@ -251,9 +254,9 @@
             height:0.053rem;
             border-radius: 1.333rem;
             background:#03aef9;
-            top: 0.746rem;
             left: 0;
             right: 0;
+            bottom: 0;
             margin: auto;
           }
         }
@@ -297,6 +300,7 @@
     bottom: -0.053rem;
   }
   .cions-list li .detail{
+    width: 60%;
     margin-top: 0.373rem;
     font-size:0.373rem;
     color: #444444;
