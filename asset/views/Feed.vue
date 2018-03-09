@@ -26,7 +26,7 @@
         <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">全部<i v-if="search_type === 2"></i></span>
         <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">问答<i v-if="search_type === 3"></i></span>
         <span :class="{bold: search_type === 4}" @tap.stop.prevent="chooseType(4)">分享<i v-if="search_type === 4"></i></span>
-        <span  @tap.stop.prevent="$router.pushPlus('/searchQuestion')">
+        <span  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>

@@ -126,10 +126,6 @@
         })
       },
       updateNotification () {
-        if (this.isNotificationPermission !== 1) {
-          return
-        }
-        
         postRequest(`notification/push/update`, {
           push_system_notify: this.notices.system_notify ? 1 : 0,
           push_do_not_disturb: this.notices.disturb ? 1 : 0
