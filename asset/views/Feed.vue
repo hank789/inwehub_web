@@ -432,7 +432,7 @@
     background: #f3f4f6;
   }
   .listWrapper {
-    top: 1.35rem;
+    top: 1.2rem;
     bottom: 1.333rem;
   }
 
