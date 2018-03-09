@@ -36,6 +36,7 @@ function rebootAuth (hash) {
   if (window.mui.os.wechat) {
     var userAgent = window.navigator.userAgent
     if (userAgent.match(/WindowsWechat/)) {
+      router.push('/login')
       return false
     }
 
