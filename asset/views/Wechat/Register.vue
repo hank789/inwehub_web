@@ -185,7 +185,7 @@
               status: false
             })
           })
-          this.$router.back()
+          window.mui.toast('出错了：未找到openid')
           return
         }
         this.openid = openid
