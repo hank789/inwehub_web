@@ -136,7 +136,7 @@
     border-radius: 0.106rem;
     font-size:0.32rem;
     color: #235280;
-    line-height: 0.506rem;
+    line-height: 0.55rem;
     padding: 0 0.346rem 0 0.08rem;
   }
   .question-money i{
