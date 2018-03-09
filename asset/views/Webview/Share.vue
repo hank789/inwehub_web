@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">{{ title }}</h1>
 
-      <a class="mui-icon mui-pull-right" @tap.stop.prevent="share()">
+      <a class="mui-icon mui-pull-right" id="dark" @tap.stop.prevent="share()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fenxiang"></use>
         </svg>
@@ -227,6 +227,8 @@
       font-size: 1.866rem;
     }
   }
-
+#dark{
+  color: #3c3e44;
+}
 
 </style>
