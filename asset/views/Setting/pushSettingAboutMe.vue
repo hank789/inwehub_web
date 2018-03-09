@@ -51,6 +51,7 @@
       return {
         loading: 1,
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        isNotificationPermission: -1, // -1， 未知, 1 yes 0 no
         notices: {
           upvoted: 1,
           followed: 1,
@@ -117,10 +118,14 @@
       // 检查权限
       checkPermission () {
         checkPermission('NOTIFITION', () => {
+          console.log('有通知权限:')
           //  成功的回调
           this.isOpenNotification = 1
+          this.isNotificationPermission = 1
           this.getNotification()
         }, (result) => {
+          console.log('没有通知权限:')
+          this.isNotificationPermission = 0
           //  失败的回调
           this.closeAll()
           this.loading = 0
@@ -130,6 +135,10 @@
       },
       // 设置权限
       updateNotification () {
+        if (this.isNotificationPermission !== 1) {
+          return
+        }
+
         postRequest(`notification/push/update`, {
           push_rel_mine_upvoted: this.notices.upvoted ? 1 : 0,
           push_rel_mine_followed: this.notices.followed ? 1 : 0,
