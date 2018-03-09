@@ -147,6 +147,7 @@
       },
       shareToChat () {
         window.mui('#shareWrapper').popover('toggle')
+        this.hide()
         this.$router.pushPlus('/collectUser?from=all')
         // 保存链接
         localEvent.setLocalItem('share', this.link)
@@ -337,6 +338,8 @@
             this.hide()
           })
         }, 150)
+
+        this.$emit('share')
       },
       shareImage () {
         if (this.link) {
@@ -364,7 +367,7 @@
         })
       },
       hide () {
-
+        this.$emit('hide')
       },
       getImageByServer (callback) {
         var node = document.getElementById(this.DomConvertImageId)
