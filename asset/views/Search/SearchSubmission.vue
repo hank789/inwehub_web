@@ -15,10 +15,10 @@
       </div>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/searchQuestion')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="">分享<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/searchTag')">标签</span>
-        <span @tap.stop.prevent="$router.replace('/searchUser')">用户</span>
+        <span @tap.stop.prevent="$router.replace('/searchTag?text=' + searchText)">标签</span>
+        <span @tap.stop.prevent="$router.replace('/searchUser?text=' + searchText)">用户</span>
         <i class="bot"></i>
       </div>
       <RefreshList
@@ -121,6 +121,10 @@
       TextDetail
     },
     created () {
+      var text = this.$route.query.text
+      if (text) {
+        this.searchText = text
+      }
     },
     watch: {
       searchText: function (newValue) {

@@ -15,9 +15,9 @@
       </div>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/searchQuestion')">问答<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/searchSubmission')">分享</span>
-        <span @tap.stop.prevent="$router.replace('/searchTag')">标签</span>
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
+        <span @tap.stop.prevent="$router.replace('/searchTag?text=' + searchText)">标签</span>
         <span @tap.stop.prevent="">用户<i></i></span>
         <i class="bot"></i>
       </div>
@@ -72,6 +72,10 @@
       RefreshList
     },
     created () {
+      var text = this.$route.query.text
+      if (text) {
+        this.searchText = text
+      }
     },
     watch: {
       searchText: function (newValue) {
