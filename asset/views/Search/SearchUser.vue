@@ -206,8 +206,7 @@
             }
           }
           input{
-            margin: 0;
-            padding: 0;
+            margin-top: 0.4rem;
             height:0.853rem;
             border: none;
             background: #f3f4f6;
