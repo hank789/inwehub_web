@@ -57,6 +57,7 @@
     data () {
       return {
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        isNotificationPermission: -1, // -1， 未知, 1 yes 0 no
         notices: {
           all: 1,
           disturb: 0,
@@ -115,14 +116,20 @@
         checkPermissionMy('NOTIFITION', () => {
           this.notices.all = 1
           this.isOpenNotification = 1
+          this.isNotificationPermission = 1
           this.getNotification()
         }, (result) => {
           this.notices.all = 0
           this.isOpenNotification = 0
+          this.isNotificationPermission = 0
           this.closeAll()
         })
       },
       updateNotification () {
+        if (this.isNotificationPermission !== 1) {
+          return
+        }
+        
         postRequest(`notification/push/update`, {
           push_system_notify: this.notices.system_notify ? 1 : 0,
           push_do_not_disturb: this.notices.disturb ? 1 : 0
