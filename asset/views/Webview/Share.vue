@@ -66,6 +66,11 @@
               zindex: 999,
               opacity: 0.97
             })
+
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
+            footerWebview.setStyle({
+              opacity: 0
+            })
           })
         }
 
@@ -82,6 +87,11 @@
             var currentWebview = window.plus.webview.currentWebview()
             currentWebview.setStyle({
               height: (immersedHeight + 44) + 'px',
+              opacity: 1
+            })
+
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
+            footerWebview.setStyle({
               opacity: 1
             })
           })
