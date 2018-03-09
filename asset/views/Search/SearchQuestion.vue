@@ -6,7 +6,7 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="" v-model.trim="searchText"/>
+         <input type="text" id="searchText" v-model.trim="searchText"/>
          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
            <use xlink:href="#icon-times1"></use>
          </svg>
@@ -48,6 +48,7 @@
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
   import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
+  import { softInput } from '../../utils/plus'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -85,6 +86,13 @@
       }
     },
     mounted () {
+      softInput()
+      var searchText = this.$el.querySelector('#searchText')
+      if (searchText) {
+        setTimeout(() => {
+          searchText.focus()
+        }, 800)
+      }
     },
     methods: {
       back () {
