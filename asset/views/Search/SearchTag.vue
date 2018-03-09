@@ -153,7 +153,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 1.6rem;
+      top: 2.2rem;
     }
     .search{
       width:100%;
@@ -247,7 +247,6 @@
     ul {
       width: 100%;
       overflow: hidden;
-      margin-top: 0.586rem;
       li {
         width: 92%;
         margin-left: 4%;
