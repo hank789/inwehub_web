@@ -143,7 +143,7 @@
     width:100%;
     height:3.546rem;
     background: #f3f4f6;
-    padding: 2.1rem 4% 1.4rem 4%;
+    padding: 1.5rem 4% 1.4rem 4%;
     /*padding: 0 4%;*/
     display: flex;
     flex-direction: row;
