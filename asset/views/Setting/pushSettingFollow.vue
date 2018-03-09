@@ -31,6 +31,7 @@
       return {
         loading: 1,
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        isNotificationPermission: -1, // -1， 未知, 1 yes 0 no
         notices: {
           new_user: 1,
           new_answered: 1
@@ -88,10 +89,12 @@
         checkPermission('NOTIFITION', () => {
           //  成功的回调
           this.isOpenNotification = 1
+          this.isNotificationPermission = 1
           this.getNotification()
         }, (result) => {
           //  失败的回调
           this.isOpenNotification = 0
+          this.isNotificationPermission = 0
           this.closeAll()
           this.loading = 0
           // 去系统开启通知
@@ -100,6 +103,10 @@
       },
       // 设置权限
       updateNotification () {
+        if (this.isNotificationPermission !== 1) {
+          return
+        }
+
         postRequest(`notification/push/update`, {
           push_my_user_new_activity: this.notices.new_user ? 1 : 0,
           push_my_question_new_answered: this.notices.new_answered ? 1 : 0
