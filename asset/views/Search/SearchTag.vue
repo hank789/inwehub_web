@@ -45,7 +45,7 @@
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
-//  import userAbility from '../../utils/userAbility'
+  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   export default {
