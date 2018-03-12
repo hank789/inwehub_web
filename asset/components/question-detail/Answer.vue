@@ -168,8 +168,8 @@
         var html = editor.html
         html = textToLinkHtml(html)
 
-        html = html.replace('<a href="', "<span class='vendorUrl text-content' href=\"")
-        html = html.replace('</a>', '</span>')
+        html = html.replace(/<a href="/g, "<span class='vendorUrl text-content' href=\"")
+        html = html.replace(/<\/a>/g, '</span>')
 
         var answerContentWrapper = this.$el.querySelector('.answerContent')
         html = addPreviewAttrForImg(html)
@@ -178,13 +178,15 @@
 
         window.mui.previewImage()
 
+        var that = this
+
         setTimeout(() => {
           openVendorUrl(answerContentWrapper)
           var aList = this.$el.querySelectorAll('a[href^="http"]')
           for (let i = 0; i < aList.length; i++) {
             aList[i].addEventListener('click', function (e) {
               e.preventDefault()
-              this.router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
+              that.$router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
             }, false)
           }
         }, 100)
