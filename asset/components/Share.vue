@@ -64,10 +64,9 @@
 <script type="text/javascript">
 
   import Share from '../utils/share'
-  import { setClipboardText } from '../utils/plus'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {
@@ -159,10 +158,10 @@
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
       },
       bindShare () {
-        if (window.__wxjs_environment === 'miniprogram') {
+        if (this.$router.currentRoute.meta.wechatHideHeader) {
           this.hideShareBtn = true
-          return
         }
+
         var data = {
           title: this.title,
           link: this.link + '&isShare=1',
