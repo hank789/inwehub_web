@@ -1,67 +1,64 @@
 <template>
+  <div class="mui-content">
+    <div class="register" v-show="!loading">
+      <!--<div class="logo">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-logo"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
 
-  <div class="register" v-show="!loading">
+      <div class="register_logo">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-inwehubzuoyou"></use>
+        </svg>
+        <p>最具品质的咨询顾问社区</p>
+        <p>长见识 / 解疑惑／寻合作／树形象／得收益</p>
+      </div>
+
+      <div class="inputWrapper" v-if="isNeedRegistrationCode">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yaoqingma"></use>
+        </svg>
+        <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略"
+               name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"
+               v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
+      </div>
+
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoujihao"></use>
+        </svg>
+        <input class="text" ref="phone" pattern="\d*" type="text" @focus="focus" @blur="blur" maxlength="11"
+               placeholder="输入手机号"
+               name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
+               v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
 
 
-    <!--<div class="logo">-->
-      <!--<svg class="icon" aria-hidden="true">-->
-        <!--<use xlink:href="#icon-logo"></use>-->
-      <!--</svg>-->
-    <!--</div>-->
+        <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
+        <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
+      </div>
 
-    <div class="register_logo">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-inwehubzuoyou"></use>
-      </svg>
-      <p>最具品质的咨询顾问社区</p>
-      <p>长见识 / 解疑惑／寻合作／树形象／得收益</p>
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yanzhengma"></use>
+        </svg>
+        <input class="text" ref="code" v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" type="text"
+               @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
+      </div>
+
+      <div class="buttonWrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
+                @click.prevent="register">确认
+        </button>
+      </div>
+
+
+      <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
+        我没有邀请码？
+
+
+      </div>
     </div>
-
-    <div class="inputWrapper" v-if="isNeedRegistrationCode">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-yaoqingma"></use>
-      </svg>
-      <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur" placeholder="请输入邀请码 已注册用户可忽略"
-             name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"
-             v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
-    </div>
-
-    <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-shoujihao"></use>
-      </svg>
-      <input class="text" ref="phone" pattern="\d*" type="text" @focus="focus" @blur="blur" maxlength="11"
-             placeholder="输入手机号"
-             name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
-             v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
-
-
-      <span class="getYzm disabled" @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
-      <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
-    </div>
-
-    <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-yanzhengma"></use>
-      </svg>
-      <input class="text" ref="code" v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" type="text"
-             @focus="focus" @blur="blur" placeholder="输入验证码" name="code" v-model.trim.num="code" autocomplete="off"/>
-    </div>
-
-    <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
-              @click.prevent="register">确认
-      </button>
-    </div>
-
-
-    <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
-      我没有邀请码？
-
-
-    </div>
-
-
   </div>
 </template>
 

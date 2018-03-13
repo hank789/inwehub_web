@@ -1,34 +1,36 @@
 <template>
-  <div class="info">
+  <div class="mui-content">
+    <div class="info">
 
-    <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-denglu"></use>
-      </svg>
-      <input class="text" type="text" @focus="focus" @blur="blur" placeholder="填写您的真实姓名" name="realname"
-             v-model.trim.num="realname" autocomplete="off"/>
-    </div>
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-denglu"></use>
+        </svg>
+        <input class="text" type="text" @focus="focus" @blur="blur" placeholder="填写您的真实姓名" name="realname"
+               v-model.trim.num="realname" autocomplete="off"/>
+      </div>
 
-    <div class="inputWrapper">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-mima"></use>
-      </svg>
-      <input class="text" ref="password" type="password" @focus="focus" @blur="blur" placeholder="填写您的登陆密码"
-             name="password"
-             v-model.trim.num="password" autocomplete="off"/>
-    </div>
-
-
-    <div class="buttonWrapper">
-      <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
-              @click.prevent="register">确认
+      <div class="inputWrapper">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-mima"></use>
+        </svg>
+        <input class="text" ref="password" type="password" @focus="focus" @blur="blur" placeholder="填写您的登陆密码"
+               name="password"
+               v-model.trim.num="password" autocomplete="off"/>
+      </div>
 
 
-      </button>
-    </div>
+      <div class="buttonWrapper">
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
+                @click.prevent="register">确认
 
-    <div class="help">
-      注册即同意 <a href="javascript:void(0)" @tap.stop.prevent="$router.push('/protocol/register')">《用户注册服务协议》</a>
+
+        </button>
+      </div>
+
+      <div class="help">
+        注册即同意 <a href="javascript:void(0)" @tap.stop.prevent="$router.push('/protocol/register')">《用户注册服务协议》</a>
+      </div>
     </div>
   </div>
 </template>
