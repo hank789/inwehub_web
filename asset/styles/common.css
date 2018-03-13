@@ -1490,3 +1490,11 @@ a {
   background-size: 35px 35px;
 }
 /* iphone-plus 适配底部 end */
+
+.mui-bar-dark .mui-btn-link, .mui-bar-nav .mui-btn-link{
+  color:#3c3e44 !important;
+}
+
+.mui-bar-dark .mui-icon, .mui-bar-nav .mui-icon {
+  color:#3c3e44 !important;
+}

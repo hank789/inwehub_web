@@ -465,6 +465,8 @@ function AppPageInit (context) {
       beforeback: goBack
     })
 
+    lockOrientation('portrait-primary')
+
     if (window.mui.os.plus) {
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
@@ -747,6 +749,16 @@ function AppInit (context) {
   })
 }
 
+/**
+ * 锁定屏幕方向
+ * @param orientation
+ */
+function lockOrientation (orientation) {
+  window.mui.plusReady(function () {
+    window.plus.screen.lockOrientation(orientation)
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -771,5 +783,6 @@ export {
   openVendorUrlByUrl,
   AppInit,
   AppPageInit,
-  setClipboardText
+  setClipboardText,
+  lockOrientation
 }

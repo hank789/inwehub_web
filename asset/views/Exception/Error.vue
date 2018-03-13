@@ -13,11 +13,11 @@
           <use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
         </svg>
         <!--<p>这可能是你手机的问题！不是bug！！</p>-->
-        <p>你的网络异常！</p>
+        <p>{{error}}</p>
 
       </div>
 
-      <div class="refresh">
+      <div class="refresh" @tap.stop.prevent="refresh">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-shuaxin"></use>
         </svg>
@@ -27,6 +27,25 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      error: '您的网络异常！'
+    }),
+    methods: {
+      refresh () {
+        window.mui.back()
+      }
+    },
+    created () {
+      if (this.$route.query.msg) {
+        this.error = this.$route.query.msg
+      }
+    }
+  }
+</script>
+
 <style lang="less" scoped>
   div,
   span,

@@ -68,6 +68,8 @@
             this.isShow = response.data.data.show_guide
             this.toHome()
           }
+        }).catch(e => {
+          this.$router.push('/exception')
         })
       }
     },
