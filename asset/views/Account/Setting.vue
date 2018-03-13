@@ -13,11 +13,14 @@
           <p>绑定微信</p>
           <span class="name" v-if="isBindWeixin">
              {{bindWeixinNickname}}
-             <oauth class="wechatBind" @success="bindSuccess" :content="''" ></oauth>
           </span>
-          <svg class="icon" aria-hidden="true" v-else>
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
+          <span v-else class="name">
+            <oauth class="wechatBind" @success="bindSuccess" :content="'前往绑定'" ></oauth>
+          </span>
+
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+          <!--</svg>-->
 
           <i class="bot"></i>
         </li>
@@ -126,6 +129,9 @@
       // showInwehubWebview();
     },
     methods: {
+      refreshPageData () {
+        this.bindSuccess()
+      },
       bindSuccess () {
         this.getWallet()
       },
