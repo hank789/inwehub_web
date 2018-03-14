@@ -158,7 +158,7 @@
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
       },
       bindShare () {
-        if (this.$router.currentRoute.meta.wechatHideHeader) {
+        if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
           this.hideShareBtn = true
         }
 
