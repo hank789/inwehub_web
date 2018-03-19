@@ -308,10 +308,6 @@ const routes = [
     },
     component: componets.InvitationFriends,
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -351,10 +347,6 @@ const routes = [
     },
     component: componets.Invitationindex,
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -367,10 +359,6 @@ const routes = [
     },
     component: componets.InvitationSuccess,
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -383,10 +371,6 @@ const routes = [
     },
     component: componets.InvitationPreview,
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -408,10 +392,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -440,10 +420,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -456,10 +432,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -472,10 +444,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -506,10 +474,6 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       next()
     }
   },
@@ -522,10 +486,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -538,10 +498,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -691,10 +647,6 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -707,10 +659,6 @@ const routes = [
       keepAlive: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -1367,10 +1315,6 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -1395,10 +1339,6 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
@@ -1411,10 +1351,6 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },

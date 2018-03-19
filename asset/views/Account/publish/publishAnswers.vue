@@ -69,7 +69,11 @@
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/' + item.id)
         } else {
-          this.$router.pushPlus('/answer/' + item.question_id)
+          if (this.isUuid === this.$route.params.id) {
+            this.$router.pushPlus('/answer/' + item.question_id)
+          } else {
+            this.$router.pushPlus('/askCommunity/major/' + item.question_id)
+          }
         }
       }
     },
