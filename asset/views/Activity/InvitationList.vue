@@ -436,16 +436,16 @@
     width:2.186rem;
     height:0.64rem;
     border-radius:1.333rem;
-    border:0.026rem solid #03aef9;
+    background:  #03aef9;
     text-align: center;
     line-height: 0.586rem;
     font-size: 0.32rem;
-    color: #03aef9;
+    color: #ffffff;
     margin-top: 0.186rem;
   }
   .ranking-content li p:nth-of-type(3).grey{
     color: #b4b4b6;
-    border: 0.026rem solid #b4b4b6;
+    background: #dbdbdb;
   }
 
   /*列表区域*/
@@ -509,19 +509,19 @@
   .cions-list li .fouce{
     width:1.626rem;
     height:0.72rem;
-    border: 0.026rem solid #03aef9;
+    background: #03aef9;
     border-radius: 1.333rem;
     text-align: center;
-    line-height: 0.666rem;
+    line-height: 0.72rem;
     font-size:0.373rem;
-    color: #03aef9;
+    color: #ffffff;
     margin-top: 0.493rem;
     float: right;
 
   }
   .cions-list li .grey{
     color: #b4b4b6;
-    border: 0.026rem solid #b4b4b6;
+    background: #dbdcdb;
   }
 
   /***媒体查询*****/

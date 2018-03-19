@@ -35,7 +35,7 @@
                 <p>{{item.name}}<i>（< {{item.distance_format}}m）</i></p>
                 <p class="mui-ellipsis">{{item.description}}</p>
               </div>
-              <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>
+              <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已关注' : '关注Ta' }}</div>
               <i class="bot"></i>
             </li>
           </ul>
@@ -268,9 +268,8 @@
 
   }
   .cions-list li .blue{
-    color: #03aef9;
-    border: 0.026rem solid #03aef9;
-    background: #ffffff;
+    color: #b4b4b6;
+    background: #dcdcdc;
   }
   .listWrapper{
     top:1.333rem;

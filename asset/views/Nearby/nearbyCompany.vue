@@ -43,7 +43,7 @@
                  <img :src="item.logo"/>
               </div>
               <div class="container-info">
-                <p>{{item.name}}</p>
+                <p class="mui-ellipsis">{{item.name}}</p>
                 <p class="mui-ellipsis">
                   <span  v-for="(tags, index) in item.tags" @tap.stop.prevent="toTagDetail(tags)"> {{tags}} <i></i></span>
                 </p>

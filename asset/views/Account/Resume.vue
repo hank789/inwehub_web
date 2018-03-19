@@ -727,14 +727,13 @@
         font-size: 0.373rem;
         right: 1.466rem;
         top: 0.373rem;
-        color: #444444;
-        border: 0.026rem solid #b4b4b6;
+        color: #ffffff;
+        background: #03aef9;
         border-radius: 1.333rem;
         padding: 0.053rem 0.213rem;
         &.active {
-          color: #FFFFFF;
-          border: 0.026rem solid #03aef9;
-          background: #03aef9;
+          background: #dbdbdb;
+          color: #b4b4b6;
         }
       }
       /*名片*/
