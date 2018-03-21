@@ -326,6 +326,20 @@
           commentData: this.commentData
         }
         this.$emit('sendMessage', data)
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:comment:success',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
         this.editorObj.blur()
       }
     }

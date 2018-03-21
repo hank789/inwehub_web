@@ -249,6 +249,20 @@
             this.timer()
 
             window.mui.toast('验证码发送成功')
+            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              // mixpanel
+              window.mixpanel.track(
+                'inwehub:register:sendPhoneCode',
+                {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': 'register-invitation',
+                  'page_name': 'register-invitation',
+                  'page_title': '发送邀请注册验证码',
+                  'referrer_page': ''
+                }
+              )
+            }
           })
           .catch(({response: {data = {}} = {}}) => {
             this.isCanGetCode = true

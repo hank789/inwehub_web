@@ -560,8 +560,8 @@ function AppInit (context) {
         var noticeTo = function (payload) {
           if (window.mixpanel.track) {
             window.mixpanel.track(
-              'inwehub:push:click:' + payload.object_type,
-              {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': payload.object_id, 'page_title': '打开推送'}
+              'inwehub:push:click',
+              {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': payload.object_id, 'page_name': payload.object_type, 'page_title': '打开推送'}
             )
           }
           switch (payload.object_type) {
