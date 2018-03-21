@@ -150,19 +150,19 @@
     position: absolute;
     width: 1.653rem;
     height: 0.72rem;
-    border: 0.026rem solid #03aef9;
+    background: #03aef9;
     border-radius: 1.333rem;
     text-align: center;
     line-height: 0.72rem;
     right: 0;
     top: 0.48rem;
     font-size: 0.373rem;
-    color: #03aef9;
+    color: #ffffff;
   }
 
   .my-focus-item .bgblue {
-    background: #03aef9;
-    color: #FFFFFF;
+    background: #dbdbdb;
+    color: #b4b4b6;
   }
 
   .my-focus-item div p:nth-of-type(1) span {

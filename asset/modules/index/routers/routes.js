@@ -489,7 +489,7 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 本月获赞榜；
+  { // 本月贡献榜
     path: '/cionsList',
     name: 'cions-list',
     component: componets.ActivityCionsList,
