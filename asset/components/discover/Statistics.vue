@@ -91,6 +91,20 @@
           } else {
             this.$emit('collectNumAdd')
           }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:bookmark:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.isCollected ? 'cancel' : 'bookmark',
+                'referrer_page': ''
+              }
+            )
+          }
 
           this.$emit('setCollectStatus', response.data.data.type)
 
@@ -113,6 +127,21 @@
             this.$emit('supportNumDesc')
           } else {
             this.$emit('supportNumAdd')
+          }
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.isCollected ? 'cancel' : 'support',
+                'referrer_page': ''
+              }
+            )
           }
 
           this.$emit('setSupportStatus', response.data.data.type)

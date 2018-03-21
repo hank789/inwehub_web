@@ -260,12 +260,39 @@
           if (code !== 1000) {
             // 回答过的；
             if (code === 3003) {
-              console.error('store')
               alertAnswerRepeat(this)
+              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                // mixpanel
+                window.mixpanel.track(
+                  'inwehub:answer:confirm:robbed',
+                  {
+                    'app': 'inwehub',
+                    'user_device': window.getUserAppDevice(),
+                    'page': this.$route.fullPath,
+                    'page_name': this.$route.name,
+                    'page_title': this.$route.meta.title,
+                    'referrer_page': ''
+                  }
+                )
+              }
             }
             window.mui.toast(response.data.message)
 
             return
+          }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:answer:confirm:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.$route.fullPath,
+                'page_name': this.$route.name,
+                'page_title': this.$route.meta.title,
+                'referrer_page': ''
+              }
+            )
           }
 
           if (time !== '0000') {

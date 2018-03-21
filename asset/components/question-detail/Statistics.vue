@@ -170,6 +170,20 @@
           } else {
             this.$emit('supportNumAdd')
           }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.answerId,
+                'page_name': 'answer',
+                'page_title': this.isSupported ? 'cancel' : 'support',
+                'referrer_page': ''
+              }
+            )
+          }
 
           this.$emit('setSupportStatus', response.data.data.type)
 

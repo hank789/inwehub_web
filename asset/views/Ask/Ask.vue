@@ -378,6 +378,20 @@
           var result = response.data.data
           var id = result.id
           var timeend = result.waiting_second ? result.waiting_second : 15
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:ask:store:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.$route.fullPath,
+                'page_name': this.$route.name,
+                'page_title': this.$route.meta.title,
+                'referrer_page': ''
+              }
+            )
+          }
 
           this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
         })

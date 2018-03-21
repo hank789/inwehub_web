@@ -139,10 +139,38 @@
     methods: {
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:cancel',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       shareToCopyLink () {
         setClipboardText(this.link)
         window.mui.toast('已复制')
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:copyLink',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       shareToChat () {
         window.mui('#shareWrapper').popover('toggle')
@@ -150,6 +178,20 @@
         this.$router.pushPlus('/collectUser?from=all')
         // 保存链接
         localEvent.setLocalItem('share', this.link)
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:shareToChat',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       isShowSharePng () {
         if (window.mui.os.wechat) {
@@ -158,7 +200,7 @@
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
       },
       bindShare () {
-        if (this.$router.currentRoute.meta.wechatHideHeader) {
+        if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
           this.hideShareBtn = true
         }
 
@@ -192,6 +234,20 @@
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:shareToHaoyou',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       shareToPengyouQuan () {
         if (this.sendPengYouQuan) {
@@ -204,6 +260,20 @@
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:shareToPengyouQuan',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       createImage (callback) {
         if (!window.mui.os.plus) {
@@ -308,9 +378,9 @@
             {
               'app': 'inwehub',
               'user_device': window.getUserAppDevice(),
-              'page': this.link,
-              'page_name': this.shareName,
-              'page_title': this.title,
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
               'referrer_page': ''
             }
           )
@@ -339,6 +409,20 @@
         }, 150)
 
         this.$emit('share')
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:show',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
       },
       shareImage () {
         if (this.link) {

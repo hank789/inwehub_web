@@ -7,8 +7,8 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <p @tap.stop.prevent="$router.replace('/nearbyPeople/MapDetail')">附近的人</p>
-        <p @tap.stop.prevent="$router.replace('/nearbyCompany')">附近公司</p>
+        <p>附近的人</p>
+        <p @tap.stop.prevent="$router.replace('/nearbyCompany/MapDetail')">附近公司</p>
         <svg class="icon" aria-hidden="true" @tap.stop.prevent="$router.replace('/nearbyPeople')">
           <use xlink:href="#icon-shaixuan"></use>
         </svg>
@@ -32,7 +32,7 @@
                   <p>{{item.name}}<i>（< {{item.distance_format}}m）</i></p>
                   <p class="mui-ellipsis">{{item.description}}</p>
                 </div>
-                <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已互关' : '关注Ta' }}</div>
+                <div class="fouce " :class="item.is_followed ? 'blue' : ''" @tap.stop.prevent="collectProfessor(item.uuid, index)">{{item.is_followed ? '已关注' : '关注Ta' }}</div>
                 <i class="bot"></i>
               </li>
             </div>
@@ -369,8 +369,7 @@
 
   }
   .cions-list li .blue{
-    color: #03aef9;
-    border: 0.026rem solid #03aef9;
-    background: #ffffff;
+    color: #b4b4b6;
+    background: #dcdcdc;
   }
 </style>
