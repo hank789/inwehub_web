@@ -166,6 +166,20 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
               window.mixpanelIdentify()
+              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                // mixpanel
+                window.mixpanel.track(
+                  'inwehub:register:success',
+                  {
+                    'app': 'inwehub',
+                    'user_device': window.getUserAppDevice(),
+                    'page': 'register-wechat',
+                    'page_name': 'register-wechat',
+                    'page_title': '注册成功',
+                    'referrer_page': ''
+                  }
+                )
+              }
               // 存储用户位置信息
               saveLocationInfo()
               clearAllWebViewCache()
