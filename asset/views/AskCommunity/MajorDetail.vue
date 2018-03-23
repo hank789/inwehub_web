@@ -471,7 +471,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-     height: 0rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
