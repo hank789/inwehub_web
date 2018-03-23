@@ -142,11 +142,14 @@
 
         window.mui.showUploadWaiting()
         var url = ''
+        var mixPanelEvent = ''
         if (this.answerId) {
           url = 'answer/update'
+          mixPanelEvent = 'inwehub:answer:update:success'
           data.answer_id = this.answerId
         } else {
           url = 'answer/store'
+          mixPanelEvent = 'inwehub:answer:store:success'
         }
         postRequest(url, data, false, options).then(response => {
           var code = response.data.code
@@ -163,6 +166,21 @@
             })
           } else {
             this.$store.dispatch(RICHTEXT_ANSWER_SET, {content: '', id: this.id})
+          }
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              mixPanelEvent,
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.$route.fullPath,
+                'page_name': this.$route.name,
+                'page_title': this.$route.meta.title,
+                'referrer_page': ''
+              }
+            )
           }
 
           window.mui.back()

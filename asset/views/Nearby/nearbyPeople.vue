@@ -268,9 +268,8 @@
 
   }
   .cions-list li .blue{
-    color: #03aef9;
-    border: 0.026rem solid #03aef9;
-    background: #ffffff;
+    color: #b4b4b6;
+    background: #dcdcdc;
   }
   .listWrapper{
     top:1.333rem;

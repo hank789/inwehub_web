@@ -165,7 +165,20 @@
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
               window.mixpanelIdentify()
-
+              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                // mixpanel
+                window.mixpanel.track(
+                  'inwehub:register:success',
+                  {
+                    'app': 'inwehub',
+                    'user_device': window.getUserAppDevice(),
+                    'page': 'register-invitation',
+                    'page_name': 'register-invitation',
+                    'page_title': '邀请注册成功',
+                    'referrer_page': ''
+                  }
+                )
+              }
               clearAllWebViewCache()
 
               if (window.mui.os.plus) {

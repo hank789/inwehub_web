@@ -377,8 +377,8 @@
   .Relevant_follow{
     width: 1.706rem;
     height: 0.72rem;
-    background: #03aef9;
-    color: #FFFFFF;
+    background: #bdbdbd;
+    color: #b4b4b6;
     line-height:0.72rem;
     border-radius: 1.333rem;
     text-align: center;
@@ -387,8 +387,8 @@
   .Relevant_empty{
     width: 1.706rem;
     height: 0.72rem;
-    border:0.026rem solid #03aef9;
-    color:#03aef9;
+    background: #03aef9;
+    color:#ffffff;
     line-height:0.72rem;
     border-radius: 1.333rem;
     text-align: center;
