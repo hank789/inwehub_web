@@ -290,7 +290,6 @@
 <script>
   import { postRequest } from '../../utils/request'
   import Share from '../../components/Share.vue'
-  import { alertChat } from '../../utils/dialogList'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
   import { getResumeDetail } from '../../utils/shareTemplate'
@@ -372,11 +371,7 @@
         userAbility.jumpToTagDetail(name)
       },
       goChat () {
-        if (this.percent >= 90) {
-          this.$router.pushPlus('/chat/' + this.resume.info.id)
-        } else {
-          alertChat(this)
-        }
+        userAbility.jumpToChat(this.resume.info.id, this)
       },
       share: function () {
         this.$refs.shareComponent.share()
