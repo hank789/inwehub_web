@@ -68,7 +68,7 @@
 <style scoped="scoped">
 
   .detail-ask {
-    padding-bottom: 0.133rem;
+    padding-bottom: 5px;
     margin-top: 0 !important;
   }
 
