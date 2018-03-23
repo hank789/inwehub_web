@@ -290,6 +290,20 @@ var UserAbility = () => {
                       window.mui.toast(response.data.data.tip)
                     })
                   }
+                  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                    // mixpanel
+                    window.mixpanel.track(
+                      'inwehub:activity:sign_daily',
+                      {
+                        'app': 'inwehub',
+                        'user_device': window.getUserAppDevice(),
+                        'page': 'sign_daily',
+                        'page_name': 'sign_daily',
+                        'page_title': '签到有礼',
+                        'referrer_page': ''
+                      }
+                    )
+                  }
                 })
               }
             })
