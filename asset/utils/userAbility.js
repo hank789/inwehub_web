@@ -13,7 +13,7 @@ import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
 import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
-import { alertSignIn, alertGetCredits, alertGetCoupon } from '../utils/dialogList'
+import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
 
 var UserAbility = () => {
@@ -381,6 +381,19 @@ var UserAbility = () => {
     }
   }
 
+  /**
+   * 跳转到聊天页
+   */
+  var jumpToChat = (resumeId, context) => {
+    const currentUser = getLocalUserInfo()
+    var percent = currentUser.account_info_complete_percent
+    if (percent >= 90) {
+      context.$router.pushPlus('/chat/' + resumeId)
+    } else {
+      alertChat(context)
+    }
+  }
+
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -398,7 +411,8 @@ var UserAbility = () => {
     logout: logout,
     jumpToTagDetail: jumpToTagDetail,
     InvitationCoupon: InvitationCoupon,
-    luckDraw: luckDraw
+    luckDraw: luckDraw,
+    jumpToChat: jumpToChat
   }
 }
 
