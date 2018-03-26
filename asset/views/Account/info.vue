@@ -86,9 +86,8 @@
       </div>
 
       <div class="paizhao">
-        填写嫌麻烦，可发送简历到
-                <a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码" style="color: rgb( 3,174,249);">hi@inwehub.com</a> ,小哈帮您维护！
-
+        您也可以在电脑上填写简历，请访问 https://inwehub.com
+        <a class="mailLink" style="color: rgb( 3,174,249);"></a>
       </div>
 
 
@@ -372,6 +371,7 @@
     padding: 0.506rem 0.32rem 0 0.32rem;
     font-size: 0.32rem;
     color: rgb(128, 128, 128);
+    word-break: break-all;
   }
 
   .part3 .desc {
