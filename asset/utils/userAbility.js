@@ -250,66 +250,66 @@ var UserAbility = () => {
       var tody = new Date()
       var isTody = tody.getFullYear() + '-' + (tody.getMonth() + 1) + '-' + tody.getDate()
       var day = localEvent.getLocalItem('sign_day_' + mobile).value
-      if (day !== isTody) {
-        postRequest('activity/sign/dailyInfo', {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.current_day_signed === 0) {
-            var infoList = response.data.data
-            alertSignIn(context, infoList, (num) => {
-              if (num.index >= 0) {
-                postRequest('activity/sign/daily', {}).then(response => {
-                  var code = response.data.code
-                  if (code !== 1000) {
-                    window.mui.alert(response.data.message)
-                    window.mui.back()
-                    return
-                  }
-                  // 签到请求成功
-                  localEvent.setLocalItem('sign_day_' + mobile, {value: isTody})
-                  if (response.data.data.coupon_type === 0) {
-                    // 积分奖励弹窗
-                    var signDaily = response.data.data
-                    alertGetCredits(context, signDaily)
-                  } else {
-                    // 红包请求
-                    postRequest('activity/getCoupon', {coupon_type: response.data.data.coupon_type}).then(response => {
-                      var code = response.data.code
-                      if (code !== 1000) {
-                        window.mui.toast(response.data.message)
-                        return
-                      }
-                      // 红包弹窗
-                      var Coupon = response.data.data
-                      alertGetCoupon(context, Coupon)
-                      // 领取成功提示
-                      window.mui.toast(response.data.data.tip)
-                    })
-                  }
-                  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-                    // mixpanel
-                    window.mixpanel.track(
-                      'inwehub:activity:sign_daily',
-                      {
-                        'app': 'inwehub',
-                        'user_device': window.getUserAppDevice(),
-                        'page': 'sign_daily',
-                        'page_name': 'sign_daily',
-                        'page_title': '签到有礼',
-                        'referrer_page': ''
-                      }
-                    )
-                  }
-                })
-              }
-            })
+      // if (day !== isTody) {
+      postRequest('activity/sign/dailyInfo', {}).then(response => {
+        var code = response.data.code
+        if (code !== 1000) {
+          window.mui.alert(response.data.message)
+          window.mui.back()
+          return
+        }
+        var infoList = response.data.data
+        alertSignIn(context, infoList, (num) => {
+          if (day !== isTody) {
+            if (num.index >= 0) {
+              postRequest('activity/sign/daily', {}).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                // 签到请求成功
+                localEvent.setLocalItem('sign_day_' + mobile, {value: isTody})
+                if (response.data.data.coupon_type === 0) {
+                  // 积分奖励弹窗
+                  var signDaily = response.data.data
+                  alertGetCredits(context, signDaily)
+                } else {
+                  // 红包请求
+                  postRequest('activity/getCoupon', {coupon_type: response.data.data.coupon_type}).then(response => {
+                    var code = response.data.code
+                    if (code !== 1000) {
+                      window.mui.toast(response.data.message)
+                      return
+                    }
+                    // 红包弹窗
+                    var Coupon = response.data.data
+                    alertGetCoupon(context, Coupon)
+                    // 领取成功提示
+                    window.mui.toast(response.data.data.tip)
+                  })
+                }
+                if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                  // mixpanel
+                  window.mixpanel.track(
+                    'inwehub:activity:sign_daily',
+                    {
+                      'app': 'inwehub',
+                      'user_device': window.getUserAppDevice(),
+                      'page': 'sign_daily',
+                      'page_name': 'sign_daily',
+                      'page_title': '签到有礼',
+                      'referrer_page': ''
+                    }
+                  )
+                }
+              })
+            }
           }
         })
-      }
+      })
+      // }
     }
   }
 
