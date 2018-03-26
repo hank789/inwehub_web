@@ -537,6 +537,20 @@ function AppInit (context) {
           if (currentUser.user_id) {
             saveLocationInfo()
           }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:app:resume',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': 'resume',
+                'page_name': 'resume',
+                'page_title': 'app唤起',
+                'referrer_page': ''
+              }
+            )
+          }
           // 检查版本更新
           checkUpdate()
 
