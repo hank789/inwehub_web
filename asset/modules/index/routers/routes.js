@@ -404,10 +404,6 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
       requestAuth(to, from, next)
     }
   },
