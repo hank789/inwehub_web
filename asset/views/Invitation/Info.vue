@@ -164,7 +164,6 @@
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
-              window.mixpanelIdentify()
               if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
                 // mixpanel
                 window.mixpanel.track(
