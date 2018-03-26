@@ -8,13 +8,20 @@
 
 
     <div class="mui-content absolute">
+          <!--提问-->
+           <div class="ask" @tap.stop.prevent="$router.pushPlus('/ask')">
+             <div class="ask_img">
+               <i>分红</i>
+               <span>我要提问</span>
+             </div>
+           </div>
           <!--推荐问答 -->
           <RefreshList
             ref="RefreshList"
             v-model="list"
             :api="'question/list'"
             :pageMode = true
-            :prevOtherData="{page: 1}"
+            :prevOtherData="dataList"
             :nextOtherData="{}"
             class="listWrapper"
           >
@@ -22,15 +29,9 @@
               :list= "list">
             </AskCommunityListItem>
           </RefreshList>
-          <div>
-            <div class="quiz"  @tap.stop.prevent="$router.pushPlus('/ask')">
-              <i>分红</i>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanyewenda-"></use>
-              </svg>
-              提问
-            </div>
-          </div>
+         <div class="switch"  @tap.stop.prevent="orderBy()">
+           {{sort === 2 ? '最热' : '最新'}}
+         </div>
         </div>
       </div>
 
@@ -43,15 +44,34 @@
   const MajorList = {
     data: () => ({
       list: [],
-      tags: []
+      tags: [],
+      sort: 1,
+      dataList: {}
     }),
     computed: {
+    },
+    created () {
+      this.dataList = {
+        page: 1,
+        order_by: this.sort
+      }
     },
     components: {
       RefreshList,
       AskCommunityListItem
     },
     methods: {
+      orderBy () {
+        if (this.sort === 1) {
+          this.sort = 2
+        } else {
+          this.sort = 1
+        }
+        this.dataList = {
+          page: 1,
+          order_by: this.sort
+        }
+      }
     },
     mounted () {
     }
@@ -91,55 +111,74 @@
   /*滚动区域*/
   .mui-content {
     background: #ffffff;
-  .quiz{
-    position: fixed;
-    z-index: 9;
-    width:5.066rem;
-    height:1.173rem;
-    border-radius: 1.333rem;
-    background: #03aef9;
-    bottom: 0.4rem;
-    left:0;
-    right:0;
-    margin: auto;
-    text-align: center;
-    line-height:1.173rem;
-    font-size: 0.426rem;
-    color: #ffffff;
-    svg{
-      font-size: 0.666rem;
-      margin-bottom: -0.106rem;
-    }
-    i{
-      position: absolute;
-      font-style: normal;
-      width: 0.8rem;
-      height: 0.453rem;
-      font-size: 0.32rem;
-      color: #FFFFFF;
-      border-radius: 0.106rem;
-      background: #fa4975;
-      text-align: center;
-      line-height: 0.453rem;
-      top: 0.266rem;
-      left: 0.64rem;
-        &::after {
-        content: "";
-        display: block;
-        width: 0.16rem;
-        height: 0.16rem;
-        background: #fa4975;
-        /* border: 0.026rem solid #dcdcdc; */
-        position: absolute;
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
-        right: -0.08rem;
-        top: 0rem;
-        bottom: 0;
-        margin: auto;
+    .ask{
+      width:100%;
+      height:0.906rem;
+      padding: 0 4%;
+      .ask_img{
+        width:100%;
+        height:100%;
+        background: #cccccc;
+        position: relative;
+        background: url("../../statics/images/askCommunity_bg@3x.png") no-repeat;
+        background-size: cover;
+        span{
+          position: absolute;
+          font-size: 0.373rem;
+          color: #444444;
+          left: 1.6rem;
+          line-height: 0.96rem;
+        }
+        i{
+          display: inline-block;
+          font-style: normal;
+          width: 0.8rem;
+          height: 0.453rem;
+          font-size: 0.32rem;
+          color: #FFFFFF;
+          border-radius: 0.106rem;
+          background: #fa4975;
+          text-align: center;
+          line-height: 0.453rem;
+          position: absolute;
+          top: 0.24rem;
+          left: 0.53rem;
+          &::after {
+            content: "";
+            display: block;
+            width: 0.16rem;
+            height: 0.16rem;
+            background: #fa4975;
+            position: absolute;
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+            right: -0.08rem;
+            top: 0rem;
+            bottom: 0;
+            margin: auto;
+          }
+        }
       }
     }
-  }
+    .listWrapper{
+      top:0.906rem
+    }
+    .switch{
+      position: fixed;
+      width:74px;
+      height:34px;
+      text-align: center;
+      line-height:34px;
+      background: #444444;
+      box-shadow: 0px 1px 10px 0px rgba(205,215,220,0.5);
+      opacity:0.85;
+      border-radius:50px;
+      font-size:15px;
+      color: #FFFFFF;
+      bottom: 20px;
+      right:16px;
+      z-index: 9;
+    }
   }
 
 
