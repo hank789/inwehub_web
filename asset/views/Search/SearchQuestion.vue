@@ -37,7 +37,9 @@
       </AskCommunityListItem>
 
 
-      <div slot="emptyBottom">sdfdsfsdfsdf</div>
+      <div slot="emptyBottom">
+        <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/ask')">提问</div>
+      </div>
 
     </RefreshList>
 
