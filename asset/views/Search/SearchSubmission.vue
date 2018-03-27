@@ -88,7 +88,9 @@
             </li>
           </template>
         </ul>
-
+        <div slot="emptyBottom">
+          <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>
+        </div>
       </RefreshList>
     </div>
   </div>
@@ -316,10 +318,22 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
+    background: #ffffff;
     .listWrapper{
       top: 2.2rem;
     }
-    background: #ffffff;
+    .question_ask{
+      width: 115px;
+      height: 41px;
+      background: #03AEF9;
+      border-radius: 50px;
+      font-size: 16px;
+      color: #ffffff;
+      text-align: center;
+      line-height: 41px;
+      margin: 0 auto;
+      margin-top: 6px;
+    }
     .search{
       width:100%;
       height:1.173rem;
