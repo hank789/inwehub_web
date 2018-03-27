@@ -207,19 +207,20 @@
     position: relative;
     padding: 0.266rem 0.426rem 0rem 0.426rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   ul li img {
-    width: 11%;
-    height: 11%;
+    width: 32px;
+    height: 32px;
     border-radius: 25%;
-    float: left;
   }
 
   ul li p {
     margin-left: 3%;
     width: 86%;
-    float: left;
   }
 
   ul li p span {
