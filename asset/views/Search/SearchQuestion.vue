@@ -37,9 +37,8 @@
       </AskCommunityListItem>
 
       <div slot="emptyBotttom">
-          
+        sdfdsfdsfs
       </div>
-
     </RefreshList>
 
   </div>
@@ -147,6 +146,18 @@
     background: #ffffff;
     .listWrapper{
       top: 2.2rem;
+    }
+    .question_ask{
+      width: 115px;
+      height: 41px;
+      background: #03AEF9;
+      border-radius: 50px;
+      font-size: 16px;
+      color: #ffffff;
+      text-align: center;
+      line-height: 41px;
+      margin: 0 auto;
+      margin-top: 6px;
     }
     .search{
       width:100%;

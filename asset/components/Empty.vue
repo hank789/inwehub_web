@@ -5,12 +5,13 @@
     </svg>
     <div class="description">{{description}}</div>
 
-    <slot name="emptyBotttom"></slot>
+    <slot name="emptyBotttom">
+
+    </slot>
 
     <div class="buttonWrapper" v-if="description === '暂无您关注的用户的动态'">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">去关注</button>
     </div>
-    <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/ask')">提问</div>
   </div>
 </template>
 
@@ -56,21 +57,5 @@
     width:auto;
     border-radius: 1.333rem;
   }
-  .question_ask{
-    width: 115px;
-    height: 41px;
-    background: #03AEF9;
-    border-radius: 50px;
-    font-size: 16px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 41px;
-    margin: 0 auto;
-    margin-top: 6px;
-    /*position: absolute;*/
-    /*top: 165px;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*margin: auto;*/
-  }
+
 </style>
