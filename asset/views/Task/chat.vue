@@ -46,7 +46,6 @@
               <p>
                 <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
-                   <!--{{item.data.text}}-->
                 </span>
                 <span v-if="item.data.img" class="chatImg">
                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
@@ -159,7 +158,7 @@
           }, 500)
         }
       },
-//      转换成html
+      // 转换成html
       textToLink (text) {
         return textToLinkHtml(' ' + text)
       },
