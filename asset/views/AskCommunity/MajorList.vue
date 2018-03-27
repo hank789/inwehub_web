@@ -30,6 +30,9 @@
             </AskCommunityListItem>
           </RefreshList>
          <div class="switch"  @tap.stop.prevent="orderBy()">
+           <svg class="icon" aria-hidden="true">
+             <use xlink:href="#icon-shaixuanpaixu_"></use>
+           </svg>
            {{sort === 2 ? '最热' : '最新'}}
          </div>
         </div>
@@ -167,8 +170,6 @@
       position: fixed;
       width:74px;
       height:34px;
-      text-align: center;
-      line-height:34px;
       background: #444444;
       box-shadow: 0px 1px 10px 0px rgba(205,215,220,0.5);
       opacity:0.85;
@@ -178,6 +179,14 @@
       bottom: 20px;
       right:16px;
       z-index: 9;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      svg{
+        font-size: 17px;
+        margin-right: 3px;
+      }
     }
   }
 
