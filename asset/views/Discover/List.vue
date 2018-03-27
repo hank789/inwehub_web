@@ -175,7 +175,7 @@
                   this.$router.pushPlus('/askCommunity/majors')
                   break
                 case 2:
-                  this.$router.pushPlus('/askCommunity/interactions')
+                  this.$router.pushPlus('/askCommunity/majors')
               }
             } else {
               userAbility.jumpJudgeGrade(this)

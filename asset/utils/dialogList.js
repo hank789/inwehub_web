@@ -23,7 +23,7 @@ function alertAnswerRepeat (context) {
     dialogObj.getHtml('AnswerRepeat', {}, (html) => {
       alertSimple(html, '去互动问答看看', (num) => {
         if (num.index === 0) {
-          context.$router.pushPlus('/askCommunity/interactions')
+          context.$router.pushPlus('/askCommunity/majors')
         }
       }, true)
     })
