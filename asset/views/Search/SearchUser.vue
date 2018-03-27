@@ -288,27 +288,27 @@
       padding: 0 4%;
       li{
         width:100%;
-        height:44px;
+        height:1.173rem;
         position: relative;
-        line-height: 44px;
+        line-height: 1.173rem;
         span{
-          font-size:15px;
+          font-size:0.4rem;
           color: #235280;
           &:nth-of-type(2){
-            font-size:13px;
+            font-size:0.346rem;
             color: #808080;
           }
         }
         i.space{
           display: inline-block;
-          width:1px;
-          height:10.5px;
+          width:0.026rem;
+          height:0.28rem;
           background: #DCDCDC;
-          margin:0 6px;
+          margin:0 0.16rem;
         }
         svg{
           float: right;
-          margin-top: 14px;
+          margin-top: 0.373rem;
         }
       }
     }

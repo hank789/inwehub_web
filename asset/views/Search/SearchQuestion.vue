@@ -150,16 +150,16 @@
       top: 2.2rem;
     }
     .question_ask{
-      width: 115px;
-      height: 41px;
+      width: 3.066rem;
+      height: 1.093rem;
       background: #03AEF9;
-      border-radius: 50px;
-      font-size: 16px;
+      border-radius: 1.333rem;
+      font-size: 0.426rem;
       color: #ffffff;
       text-align: center;
-      line-height: 41px;
+      line-height: 1.093rem;
       margin: 0 auto;
-      margin-top: 6px;
+      margin-top: 0.16rem;
     }
     .search{
       width:100%;
