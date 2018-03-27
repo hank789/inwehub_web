@@ -8,7 +8,7 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/cionsList')">贡献榜</span>
+        <span @tap.stop.prevent="$router.replace('/cionsList')">本月成长榜</span>
         <span @tap.stop.prevent="">本月获赞榜 <i></i></span>
       </div>
       <template v-if="!loading && first">
