@@ -168,24 +168,24 @@
     }
     .switch{
       position: fixed;
-      width:74px;
-      height:34px;
+      width:1.973rem;
+      height:0.906rem;
       background: #444444;
-      box-shadow: 0px 1px 10px 0px rgba(205,215,220,0.5);
+      box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,0.5);
       opacity:0.85;
-      border-radius:50px;
-      font-size:15px;
+      border-radius:1.333rem;
+      font-size:0.4rem;
       color: #FFFFFF;
-      bottom: 20px;
-      right:16px;
+      bottom: 0.533rem;
+      right:0.426rem;
       z-index: 9;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       svg{
-        font-size: 17px;
-        margin-right: 3px;
+        font-size: 0.453rem;
+        margin-right: 0.08rem;
       }
     }
   }

@@ -629,11 +629,11 @@
   }
   .hint p:nth-of-type(2){
     background: #ECECEE;
-    border-radius:4px;
+    border-radius:0.106rem;
     color: #808080;
-    font-size: 12px;
-    line-height: 17px;
-    padding: 8px 15px;
+    font-size: 0.32rem;
+    line-height: 0.453rem;
+    padding: 0.213rem 0.4rem;
   }
 
 </style>

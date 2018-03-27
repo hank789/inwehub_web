@@ -213,8 +213,8 @@
   }
 
   ul li img {
-    width: 32px;
-    height: 32px;
+    width: 0.853rem;
+    height: 0.853rem;
     border-radius: 25%;
   }
 

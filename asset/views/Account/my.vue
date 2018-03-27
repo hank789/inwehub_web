@@ -512,15 +512,15 @@
     font-size: 0.373rem;
     border-radius: 0.213rem;
     color: #03AEF9;
-    border:1.5px solid #65D2F2;
+    border:0.04rem solid #65D2F2;
     position: relative;
   }
   .my-signIn i{
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 12px solid #65D2F2;
-    border-right: 12px solid transparent;
+    border-top: 0.32rem solid #65D2F2;
+    border-right: 0.32rem solid transparent;
     left:0;
     top:0;
   }
