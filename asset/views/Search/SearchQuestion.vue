@@ -36,9 +36,9 @@
       >
       </AskCommunityListItem>
 
-      <div slot="emptyBotttom">
-        sdfdsfdsfs
-      </div>
+
+      <div slot="emptyBottom">sdfdsfsdfsdf</div>
+
     </RefreshList>
 
   </div>
