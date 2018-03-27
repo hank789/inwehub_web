@@ -4,7 +4,7 @@
       <use xlink:href="#icon-zanwushuju"></use>
     </svg>
     <div class="description">{{description}}</div>
-
+    
     <slot name="emptyBottom"></slot>
 
     <div class="buttonWrapper" v-if="description === '暂无您关注的用户的动态'">
@@ -55,4 +55,5 @@
     width:auto;
     border-radius: 1.333rem;
   }
+
 </style>
