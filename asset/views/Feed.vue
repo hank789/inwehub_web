@@ -202,7 +202,6 @@
       userAbility.newbieTask(this)
       autoTextArea()
       saveLocationInfo()
-
       AppInit(this)
     },
     computed: {
