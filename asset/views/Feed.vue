@@ -435,7 +435,7 @@
   }
 
   .w414-3 .listWrapper{
-    bottom:50px !important;
+    bottom:50px !important; /* px不转换 */
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {
