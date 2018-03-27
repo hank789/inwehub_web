@@ -35,7 +35,7 @@
     }),
     methods: {
       refresh () {
-        window.mui.back()
+        this.$router.push('/ad')
       }
     },
     created () {
