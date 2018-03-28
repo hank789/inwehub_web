@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="textarea-wrapper">
-
       <div id="toolbar">
         <button class="ql-image"></button>
       </div>
@@ -15,8 +14,6 @@
                     @focus="onEditorFocus($event)"
                     @ready="onEditorReady($event)">
       </quill-editor>
-
-
       <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
     </div>
   </div>
@@ -54,8 +51,6 @@
           imageImport: false
         }
       },
-      timeInterVal: false,
-      iosAutoSaveTime: 10, // 隔几秒自动保存
       editorObj: {},
       sortable: null
     }),
@@ -99,10 +94,12 @@
       quillEditor
     },
     methods: {
+      nowSave () {
+        var contents = this.description
+        this.saveCacheContent(contents)
+      },
       onEditorChange (editor) {
-        if (!(window.mui.os.plus && window.mui.os.ios)) {
-          this.storeContent(editor.editor.getContents())
-        }
+        this.saveCacheContent(editor.editor.getContents())
 
         this.descLength = editor.editor.getLength() - 1
 
@@ -155,7 +152,7 @@
           }
         })
       },
-      storeContent (content) {
+      saveCacheContent (content) {
         for (var i in content.ops) {
           if (content.ops[i].insert.hasOwnProperty('image')) {
             if (/drag/.test(content.ops[i].insert.image)) {
@@ -163,7 +160,7 @@
             }
           }
         }
-        console.log('storeContent:' + (new Date()).getTime())
+        console.log('saveCacheContent:' + (new Date()).getTime())
         if (window.mui.os.plus && window.mui.os.ios) {
           window.mui.plusReady(() => {
             window.plus.storage.setItem(this.id, JSON.stringify(content))
@@ -180,27 +177,9 @@
         // console.log('editor focus!', editor)
         this.$emit('onEditorFocus', editor)
       },
-      nowSave () {
-        var contents = this.description
-        this.storeContent(contents)
-      },
       refreshPageData () {
         console.log('newid' + this.id)
         this.initDefaultValue()
-      },
-      autoSave () {
-        setTimeout(() => {
-          if (this._isDestroyed) {
-            return
-          }
-
-          var nowTime = (new Date()).getTime()
-
-          console.log('最新时间:' + nowTime / 1000)
-
-          this.nowSave()
-          this.autoSave()
-        }, this.iosAutoSaveTime * 1000)
       },
       initDefaultValue () {
         if (window.mui.os.plus && window.mui.os.ios) {
@@ -216,10 +195,6 @@
             }
 
             this.editorObj.setContents(contents)
-            if (!this.timeInterVal) {
-              this.timeInterVal = true
-              this.autoSave()
-            }
           })
         } else {
           var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
