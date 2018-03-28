@@ -561,7 +561,7 @@ function AppInit (context) {
           }
 
           // 每日签到
-          userAbility.signIGift(context)
+          // userAbility.signIGift(context)
           // 剪贴板
           checkClipbord()
 
