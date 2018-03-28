@@ -215,7 +215,7 @@ function getAnswerCache (key, succssCallback, context) {
       if (contents) {
         contents = JSON.parse(contents)
       } else {
-        contents = []
+        contents = null
       }
 
       succssCallback(contents)

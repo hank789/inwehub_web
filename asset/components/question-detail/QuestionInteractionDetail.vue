@@ -94,7 +94,8 @@
     },
     updated () {
       getAnswerCache('answer' + this.ask.id + '-' + this.answerId, (contents) => {
-        if (contents !== []) {
+        console.log('answerCacheContents:' + contents)
+        if (contents) {
           this.modifyText = '修改我的回答(草稿)'
         } else {
           this.modifyText = '修改我的回答'

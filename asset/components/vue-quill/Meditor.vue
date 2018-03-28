@@ -175,6 +175,9 @@
       },
       initDefaultValue () {
         getAnswerCache(this.id, (contents) => {
+          if (!contents) {
+            contents = []
+          }
           this.editorObj.setContents(contents)
         }, this)
       },

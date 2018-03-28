@@ -160,7 +160,7 @@
 
           window.mui.toast(response.data.message)
 
-          delAnswerCache(this.id, this)
+          delAnswerCache(this.meditorId, this)
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
