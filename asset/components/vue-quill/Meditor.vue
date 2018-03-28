@@ -30,9 +30,8 @@
   import { quillEditor } from '../../components/vue-quill'
 
   import iconDrag from '../../statics/images/icon-drag.png'
-  import { RICHTEXT_ANSWER_SET } from '../../stores/types'
-  import { getIndexByIdArray } from '../../utils/array'
   import { autoTextArea } from '../../utils/plus'
+  import { getAnswerCache, setAnswerCache } from '../../utils/allPlatform'
 
   export default {
     data: () => ({
@@ -160,14 +159,7 @@
             }
           }
         }
-        console.log('saveCacheContent:' + (new Date()).getTime())
-        if (window.mui.os.plus && window.mui.os.ios) {
-          window.mui.plusReady(() => {
-            window.plus.storage.setItem(this.id, JSON.stringify(content))
-          })
-        } else {
-          this.$store.dispatch(RICHTEXT_ANSWER_SET, {content: content, id: this.id})
-        }
+        setAnswerCache(this.id, content, this)
       },
       onEditorBlur (editor) {
         // console.log('editor blur!', editor)
@@ -182,34 +174,9 @@
         this.initDefaultValue()
       },
       initDefaultValue () {
-        if (window.mui.os.plus && window.mui.os.ios) {
-          window.mui.plusReady(() => {
-            var contents = window.plus.storage.getItem(this.id)
-
-            if (contents) {
-              console.log('restore contents:')
-              contents = JSON.parse(contents)
-            } else {
-              contents = []
-              console.log('restore contents:')
-            }
-
-            this.editorObj.setContents(contents)
-          })
-        } else {
-          var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
-          if (index > -1) {
-            var contents = this.$store.state.richText.answer[index].content
-
-            if (contents) {
-              console.log('restore contents:')
-            } else {
-              contents = []
-            }
-
-            this.editorObj.setContents(contents)
-          }
-        }
+        getAnswerCache(this.id, (contents) => {
+          this.editorObj.setContents(contents)
+        }, this)
       },
       onEditorReady (editor) {
         this.editorObj = editor

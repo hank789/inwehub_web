@@ -25,6 +25,7 @@
   import { RICHTEXT_ANSWER_SET } from '../../stores/types'
   import { postRequest } from '../../utils/request'
   import Meditor from '../../components/vue-quill/Meditor.vue'
+  import { delAnswerCache } from '../../utils/allPlatform'
 
   const Answer = {
     data: () => ({
@@ -160,13 +161,7 @@
 
           window.mui.toast(response.data.message)
 
-          if (window.mui.os.plus && window.mui.os.ios) {
-            window.mui.plusReady(() => {
-              window.plus.storage.setItem(this.id, '')
-            })
-          } else {
-            this.$store.dispatch(RICHTEXT_ANSWER_SET, {content: '', id: this.id})
-          }
+          delAnswerCache(this.id, this)
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
