@@ -22,7 +22,6 @@
 </template>
 
 <script>
-  import { RICHTEXT_ANSWER_SET } from '../../stores/types'
   import { postRequest } from '../../utils/request'
   import Meditor from '../../components/vue-quill/Meditor.vue'
   import { delAnswerCache } from '../../utils/allPlatform'

@@ -47,7 +47,7 @@
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="modify()">
-          修改我的回答
+          {{ modifyText }}
         </button>
       </div>
     </div>
@@ -62,10 +62,12 @@
   import Images from '../../components/image/Images.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import { postRequest } from '../../utils/request'
+  import { getAnswerCache } from '../../utils/allPlatform'
 
   export default {
     data () {
       return {
+        modifyText: '修改我的回答'
       }
     },
     components: {
@@ -89,6 +91,15 @@
         type: Boolean,
         default: false
       }
+    },
+    updated () {
+      getAnswerCache('answer' + this.ask.id + '-' + this.answerId, (contents) => {
+        if (contents !== []) {
+          this.modifyText = '修改我的回答(草稿)'
+        } else {
+          this.modifyText = '修改我的回答'
+        }
+      }, this)
     },
     created () {},
     methods: {
