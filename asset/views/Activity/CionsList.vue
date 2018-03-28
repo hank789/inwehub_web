@@ -13,8 +13,8 @@
       </div>
      <template v-if="!loading && first">
         <div class="ranking">
-          <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的贡献值</div>
-          <img src="../../statics/images/cionslist@2x.png" class="ranking-title"/>
+          <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的成长值</div>
+          <img src="../../statics/images/creditslist@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
             <li>
               <div class="avatar-container">
