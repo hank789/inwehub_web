@@ -5,6 +5,8 @@ import localEvent from '../stores/localStorage'
 import { alertNoticeOpenNotifitionPermission } from './dialogList'
 import router from '../modules/index/routers/index'
 import { dragDownElement } from './dom'
+import { getIndexByIdArray } from './array'
+import { RICHTEXT_ANSWER_SET } from '../stores/types'
 
 /**
  * 获取地理位置
@@ -202,11 +204,75 @@ function setClipboardText (text) {
   }
 }
 
+/**
+ * 获取回答缓存
+ */
+function getAnswerCache (key, succssCallback, context) {
+  if (window.mui.os.plus && window.mui.os.ios) {
+    window.mui.plusReady(() => {
+      var contents = window.plus.storage.getItem(key)
+
+      if (contents) {
+        contents = JSON.parse(contents)
+      } else {
+        contents = []
+      }
+
+      succssCallback(contents)
+    })
+  } else {
+    var index = getIndexByIdArray(context.$store.state.richText.answer, key)
+    if (index > -1) {
+      var contents = context.$store.state.richText.answer[index].content
+
+      if (contents) {
+        console.log('restore contents:')
+      } else {
+        contents = []
+      }
+      succssCallback(contents)
+    }
+  }
+}
+
+/**
+ * 设置回答缓存
+ * @param key
+ * @param content
+ * @param context
+ */
+function setAnswerCache (key, content, context) {
+  console.log('saveCacheContent:' + (new Date()).getTime())
+  if (window.mui.os.plus && window.mui.os.ios) {
+    window.mui.plusReady(() => {
+      window.plus.storage.setItem(key, JSON.stringify(content))
+    })
+  } else {
+    context.$store.dispatch(RICHTEXT_ANSWER_SET, {content: content, id: key})
+  }
+}
+
+/**
+ * 删除回答缓存
+ */
+function delAnswerCache (key, context) {
+  if (window.mui.os.plus && window.mui.os.ios) {
+    window.mui.plusReady(() => {
+      window.plus.storage.setItem(key, '')
+    })
+  } else {
+    context.$store.dispatch(RICHTEXT_ANSWER_SET, {content: '', id: key})
+  }
+}
+
 export {
   getGeoPosition,
   saveLocationInfo,
   checkClipbord,
   noticeOpenNotifitionPermission,
   pageRefresh,
-  setClipboardText
+  setClipboardText,
+  getAnswerCache,
+  setAnswerCache,
+  delAnswerCache
 }

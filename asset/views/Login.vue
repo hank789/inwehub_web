@@ -180,7 +180,7 @@
         // 获取用户信息
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-          window.mixpanelIdentify()
+          window.mixpanelIdentify(true)
           // 存储用户位置信息
           saveLocationInfo()
           this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)

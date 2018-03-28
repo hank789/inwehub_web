@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="textarea-wrapper">
-
       <div id="toolbar">
         <button class="ql-image"></button>
       </div>
@@ -15,8 +14,6 @@
                     @focus="onEditorFocus($event)"
                     @ready="onEditorReady($event)">
       </quill-editor>
-
-
       <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
     </div>
   </div>
@@ -33,9 +30,8 @@
   import { quillEditor } from '../../components/vue-quill'
 
   import iconDrag from '../../statics/images/icon-drag.png'
-  import { RICHTEXT_ANSWER_SET } from '../../stores/types'
-  import { getIndexByIdArray } from '../../utils/array'
   import { autoTextArea } from '../../utils/plus'
+  import { getAnswerCache, setAnswerCache } from '../../utils/allPlatform'
 
   export default {
     data: () => ({
@@ -54,8 +50,6 @@
           imageImport: false
         }
       },
-      timeInterVal: false,
-      iosAutoSaveTime: 10, // 隔几秒自动保存
       editorObj: {},
       sortable: null
     }),
@@ -99,10 +93,12 @@
       quillEditor
     },
     methods: {
+      nowSave () {
+        var contents = this.description
+        this.saveCacheContent(contents)
+      },
       onEditorChange (editor) {
-        if (!(window.mui.os.plus && window.mui.os.ios)) {
-          this.storeContent(editor.editor.getContents())
-        }
+        this.saveCacheContent(editor.editor.getContents())
 
         this.descLength = editor.editor.getLength() - 1
 
@@ -155,7 +151,7 @@
           }
         })
       },
-      storeContent (content) {
+      saveCacheContent (content) {
         for (var i in content.ops) {
           if (content.ops[i].insert.hasOwnProperty('image')) {
             if (/drag/.test(content.ops[i].insert.image)) {
@@ -163,14 +159,7 @@
             }
           }
         }
-        console.log('storeContent:' + (new Date()).getTime())
-        if (window.mui.os.plus && window.mui.os.ios) {
-          window.mui.plusReady(() => {
-            window.plus.storage.setItem(this.id, JSON.stringify(content))
-          })
-        } else {
-          this.$store.dispatch(RICHTEXT_ANSWER_SET, {content: content, id: this.id})
-        }
+        setAnswerCache(this.id, content, this)
       },
       onEditorBlur (editor) {
         // console.log('editor blur!', editor)
@@ -180,61 +169,14 @@
         // console.log('editor focus!', editor)
         this.$emit('onEditorFocus', editor)
       },
-      nowSave () {
-        var contents = this.description
-        this.storeContent(contents)
-      },
       refreshPageData () {
         console.log('newid' + this.id)
         this.initDefaultValue()
       },
-      autoSave () {
-        setTimeout(() => {
-          if (this._isDestroyed) {
-            return
-          }
-
-          var nowTime = (new Date()).getTime()
-
-          console.log('最新时间:' + nowTime / 1000)
-
-          this.nowSave()
-          this.autoSave()
-        }, this.iosAutoSaveTime * 1000)
-      },
       initDefaultValue () {
-        if (window.mui.os.plus && window.mui.os.ios) {
-          window.mui.plusReady(() => {
-            var contents = window.plus.storage.getItem(this.id)
-
-            if (contents) {
-              console.log('restore contents:')
-              contents = JSON.parse(contents)
-            } else {
-              contents = []
-              console.log('restore contents:')
-            }
-
-            this.editorObj.setContents(contents)
-            if (!this.timeInterVal) {
-              this.timeInterVal = true
-              this.autoSave()
-            }
-          })
-        } else {
-          var index = getIndexByIdArray(this.$store.state.richText.answer, this.id)
-          if (index > -1) {
-            var contents = this.$store.state.richText.answer[index].content
-
-            if (contents) {
-              console.log('restore contents:')
-            } else {
-              contents = []
-            }
-
-            this.editorObj.setContents(contents)
-          }
-        }
+        getAnswerCache(this.id, (contents) => {
+          this.editorObj.setContents(contents)
+        }, this)
       },
       onEditorReady (editor) {
         this.editorObj = editor
