@@ -127,22 +127,43 @@ window.getUserAppDevice = function () {
   }
 }
 
-window.mixpanelIdentify = function () {
+window.mixpanelIdentify = function (alias = false) {
   if (process.env.NODE_ENV === 'production') {
     // mixpanel
     var appVersion = localEvent.getLocalItem('app_version')
     var currentUser = localEvent.getLocalItem('UserInfo')
     if (currentUser.user_id) {
-      window.mixpanel.identify(currentUser.user_id)
-      window.mixpanel.people.set({
-        'email': currentUser.email,
-        'app_version': appVersion.version,
-        'gender': currentUser.gender,
-        'phone': currentUser.phone,
-        'name': currentUser.name,
-        'avatar': currentUser.avatar_url
-      })
+      var distinctId = window.mixpanel.get_distinct_id()
+      if (alias && distinctId && distinctId.length >= 10) {
+        window.mixpanel.alias(currentUser.user_id)
+      } else {
+        window.mixpanel.identify(currentUser.user_id)
+        window.mixpanel.people.set({
+          'email': currentUser.email,
+          'app_version': appVersion.version,
+          'gender': currentUser.gender,
+          'phone': currentUser.phone,
+          'name': currentUser.name,
+          'avatar': currentUser.avatar_url
+        })
+      }
     }
+  }
+}
+window.trackMixpanelEvent = function (eventName, page, pageName, pageTitle, referrerPage = '') {
+  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+    // mixpanel
+    window.mixpanel.track(
+      'inwehub:' + eventName,
+      {
+        'app': 'inwehub',
+        'user_device': window.getUserAppDevice(),
+        'page': page,
+        'page_name': pageName,
+        'page_title': pageTitle,
+        'referrer_page': referrerPage
+      }
+    )
   }
 }
 

@@ -177,6 +177,7 @@
                     'referrer_page': ''
                   }
                 )
+                window.mixpanelIdentify(true)
               }
               clearAllWebViewCache()
 
