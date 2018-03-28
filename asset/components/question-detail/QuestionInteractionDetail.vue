@@ -41,7 +41,7 @@
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id === 0">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
-          直接参与回答
+          {{ toAnswerText }}
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else>
@@ -67,7 +67,8 @@
   export default {
     data () {
       return {
-        modifyText: '修改我的回答'
+        modifyText: '修改我的回答',
+        toAnswerText: '直接参与回答'
       }
     },
     components: {
@@ -93,12 +94,14 @@
       }
     },
     updated () {
-      getAnswerCache('answer' + this.ask.id + '-' + this.answerId, (contents) => {
+      getAnswerCache('answer' + this.ask.id + '-' + this.ask.current_user_answer_id, (contents) => {
         console.log('answerCacheContents:' + contents)
         if (contents) {
           this.modifyText = '修改我的回答(草稿)'
+          this.toAnswerText = '直接参与回答(草稿)'
         } else {
           this.modifyText = '修改我的回答'
+          this.toAnswerText = '直接参与回答'
         }
       }, this)
     },

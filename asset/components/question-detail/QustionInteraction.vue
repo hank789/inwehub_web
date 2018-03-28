@@ -34,7 +34,7 @@
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="!myAnswerId">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
                 @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
-          参与回答
+          {{ toAnswerText }}
 
         </button>
       </div>
@@ -56,10 +56,12 @@
   import { postRequest } from '../../utils/request'
   import Images from '../../components/image/Images.vue'
   import { textToLinkHtml } from '../../utils/dom'
+  import { getAnswerCache } from '../../utils/allPlatform'
 
   export default {
     data () {
       return {
+        toAnswerText: '参与回答'
       }
     },
     components: {
@@ -86,6 +88,16 @@
     },
     created () {
 
+    },
+    updated () {
+      getAnswerCache('answer' + this.ask.id + '-' + this.myAnswerId, (contents) => {
+        console.log('answerCacheContents:' + contents)
+        if (contents) {
+          this.toAnswerText = '参与回答(草稿)'
+        } else {
+          this.toAnswerText = '参与回答'
+        }
+      }, this)
     },
     methods: {
       getDesc () {

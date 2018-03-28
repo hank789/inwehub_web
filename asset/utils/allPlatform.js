@@ -208,6 +208,7 @@ function setClipboardText (text) {
  * 获取回答缓存
  */
 function getAnswerCache (key, succssCallback, context) {
+  console.log('getAnswerCache.key:' + key)
   if (window.mui.os.plus && window.mui.os.ios) {
     window.mui.plusReady(() => {
       var contents = window.plus.storage.getItem(key)
@@ -228,7 +229,7 @@ function getAnswerCache (key, succssCallback, context) {
       if (contents) {
         console.log('restore contents:')
       } else {
-        contents = []
+        contents = null
       }
       succssCallback(contents)
     }
@@ -256,6 +257,7 @@ function setAnswerCache (key, content, context) {
  * 删除回答缓存
  */
 function delAnswerCache (key, context) {
+  console.log('delAnswerCache.key:' + key)
   if (window.mui.os.plus && window.mui.os.ios) {
     window.mui.plusReady(() => {
       window.plus.storage.setItem(key, '')
