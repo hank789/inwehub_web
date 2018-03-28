@@ -21,6 +21,15 @@
         <span @tap.stop.prevent="$router.replace('/searchUser?text=' + searchText)">用户</span>
         <i class="bot"></i>
       </div>
+      <ul class="pilot">
+        <li @tap.stop.prevent="$router.pushPlus('/discover/add')">
+          <span>直接去提问</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+        </li>
+        <p></p>
+      </ul>
       <RefreshList
         v-if="dataList != null"
         v-model="list"
@@ -88,9 +97,9 @@
             </li>
           </template>
         </ul>
-        <div slot="emptyBottom">
-          <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>
-        </div>
+        <!--<div slot="emptyBottom">-->
+          <!--<div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>-->
+        <!--</div>-->
       </RefreshList>
     </div>
   </div>
@@ -320,19 +329,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 2.2rem;
-    }
-    .question_ask{
-      width: 3.066rem;
-      height: 1.093rem;
-      background: #03AEF9;
-      border-radius: 1.333rem;
-      font-size: 0.426rem;
-      color: #ffffff;
-      text-align: center;
-      line-height: 1.093rem;
-      margin: 0 auto;
-      margin-top: 0.16rem;
+      top: 3.630rem;
     }
     .search{
       width:100%;
@@ -419,6 +416,32 @@
             margin: auto;
           }
         }
+      }
+    }
+    /*引导*/
+    .pilot{
+      width: 100%;
+      overflow: hidden;
+      li{
+        width:100%;
+        padding: 0 4%;
+        height:1.173rem;
+        position: relative;
+        line-height: 1.173rem;
+        background: #fff;
+        span{
+          font-size:0.4rem;
+          color: #235280;
+        }
+        svg{
+          float: right;
+          margin-top: 0.373rem;
+        }
+      }
+      p{
+        width:100%;
+        height:10px;
+        background: #f3f4f6;
       }
     }
     /**/
