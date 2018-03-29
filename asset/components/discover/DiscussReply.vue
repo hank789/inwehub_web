@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="component-comment-reply" v-for="(child, childIndex) in children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="clickComment(child, children)">
+
+      <div class="who"><span class="from">{{ child.owner.name }}</span>
+        <div class="triangle-right triangle-right-6"></div><span class="to">{{ parentOwnerName }}</span>
+        <div class="time">{{ child.created_at.replace(/-/g, '/') }}</div>
+      </div>
+      <div class="text textToLink" v-html="textToLink(child.content)"></div>
+
       <DiscussReplay
         v-if="child.children.length"
         :children="child.children"
@@ -8,12 +15,6 @@
         :isShow="isShow"
         @comment="clickComment"
       ></DiscussReplay>
-
-      <div class="who"><span class="from">{{ child.owner.name }}</span>
-        <div class="triangle-right triangle-right-6"></div><span class="to">{{ parentOwnerName }}</span>
-        <div class="time">{{ child.created_at.replace(/-/g, '/') }}</div>
-      </div>
-      <div class="text textToLink" v-html="textToLink(child.content)"></div>
     </div>
   </div>
 </template>

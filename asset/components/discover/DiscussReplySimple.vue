@@ -2,6 +2,8 @@
   <div>
     <div class="comment text-line-5" v-for="(child, index) in children" @tap.stop.prevent="comment(child.id, child.owner.name, children)" :key="child.id">
 
+      <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ parentOwnerName }}</span> <span class="textToLink" v-html="textToLink(child.content)"></span>
+
       <DiscussReplaySimple
         v-if="child.children.length"
         :children="child.children"
@@ -9,8 +11,6 @@
         :isShow="isShow"
         @comment="comment"
       ></DiscussReplaySimple>
-
-      <span class="from">{{ child.owner.name }}</span> <div class="triangle-right triangle-right-6"></div> <span class="to">{{ parentOwnerName }}</span> <span class="textToLink" v-html="textToLink(child.content)"></span>
     </div>
   </div>
 </template>
