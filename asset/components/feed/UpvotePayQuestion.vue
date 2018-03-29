@@ -28,10 +28,13 @@
     </div>
 
 
-    <div class="text-16-444 mui-ellipsis-3 answerMajorContent">{{data.feed.answer_content}}</div>
+    <div class="text-16-444 mui-ellipsis-3 answerMajorContent" v-html="textToLink(data.feed.answer_content)"></div>
 
     <div class="container-answer margin-10-0-0">
-      <div class="color-808080 font-14 text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
+      <div class="color-808080 font-14 text-line-5">
+        <div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>
+        <span v-html="textToLink(data.feed.question_title)"></span>
+      </div>
       <div class="interval margin-top-6">承诺时间{{data.feed.answer_promise_time}}<i></i>响应时间{{data.feed.answer_response_time}} <div class="question-money"><i></i>￥: {{data.feed.question_price}}</div></div>
     </div>
 
@@ -57,6 +60,7 @@
 <script type="text/javascript">
   import Avatar from '../../components/image/Avatar.vue'
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
 
   export default {
     data () {
@@ -77,6 +81,9 @@
 
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
