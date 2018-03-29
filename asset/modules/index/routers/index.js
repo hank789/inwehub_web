@@ -142,6 +142,13 @@ router.afterEach((to, from) => {
       'page_title': to.meta.title,
       'referrer_page': from.fullPath
     }
+    var fromEvent = {
+      'app': 'inwehub',
+      'user_device': window.getUserAppDevice(),
+      'page': from.fullPath,
+      'page_name': from.name,
+      'page_title': from.meta.title
+    }
     baseEvent = Object.assign(baseEvent, to.query)
     window.mixpanel.track(
       mixpanelEvent,
@@ -149,7 +156,7 @@ router.afterEach((to, from) => {
     )
     window.mixpanel.track(
       'inwehub:analysis:router:count',
-      baseEvent
+      Object.assign(fromEvent, from.query)
     )
     window.mixpanel.time_event('inwehub:analysis:router:count')
   }
