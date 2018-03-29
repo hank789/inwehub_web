@@ -514,13 +514,14 @@
     color: #03AEF9;
     border:0.04rem solid #65D2F2;
     position: relative;
+    overflow: hidden;
   }
   .my-signIn i{
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 0.32rem solid #65D2F2;
-    border-right: 0.32rem solid transparent;
+    border-top: 0.4rem solid #65D2F2;
+    border-right: 0.4rem solid transparent;
     left:0;
     top:0;
   }
