@@ -2,7 +2,7 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="back()"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">{{name}}<typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing></h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
@@ -127,11 +127,6 @@
       '$route': 'refreshPageData'
     },
     methods: {
-      back () {
-        //  清空
-        localEvent.clearLocalItem('share')
-        window.mui.back()
-      },
       uploadImageSuccess (images) {
         if (images.length) {
           if (!images[0].base64) {
