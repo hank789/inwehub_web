@@ -31,7 +31,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/pilot')">
+        <li  @tap.stop.prevent="toApply()">
           <span>成为认证专家</span>
           <i class="space"></i>
           <span>申请平台认证，优先匹配资源</span>
@@ -75,7 +75,7 @@
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-//  import userAbility from '../../utils/userAbility'
+  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
 
@@ -120,6 +120,10 @@
     mounted () {
     },
     methods: {
+      // 认证专家；
+      toApply () {
+        userAbility.jumpToApplyProfessor(this)
+      },
       back () {
         window.mui.back()
         return
