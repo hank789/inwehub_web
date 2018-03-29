@@ -26,7 +26,7 @@
                   <img :src="item.logo"/>
                 </div>
                 <div class="container-info">
-                  <p>{{item.address_province}}</p>
+                  <p class="mui-ellipsis">{{item.name}}</p>
                   <p class="mui-ellipsis">
                     <span v-for="tag in item.tags"> {{tag}} <i></i></span>
                   </p>
