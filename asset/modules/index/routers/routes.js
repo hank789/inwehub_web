@@ -474,9 +474,9 @@ const routes = [
     }
   },
   { // 本月获赞榜
-    path: '/invitationList',
-    name: 'invitation-list',
-    component: componets.ActivityInvitationList,
+    path: '/UpvotesList',
+    name: 'Upvotes-list',
+    component: componets.ActivityUpvotesList,
     meta: {
       title: '本月获赞榜',
       keepAlive: false
@@ -486,9 +486,9 @@ const routes = [
     }
   },
   { // 本月贡献榜
-    path: '/cionsList',
-    name: 'cions-list',
-    component: componets.ActivityCionsList,
+    path: '/growthList',
+    name: 'growth-list',
+    component: componets.ActivityGrowthList,
     meta: {
       title: '本月成长榜',
       keepAlive: false
