@@ -474,9 +474,9 @@ const routes = [
     }
   },
   { // 本月获赞榜
-    path: '/invitationList',
-    name: 'invitation-list',
-    component: componets.ActivityInvitationList,
+    path: '/UpvotesList',
+    name: 'Upvotes-list',
+    component: componets.ActivityUpvotesList,
     meta: {
       title: '本月获赞榜',
       keepAlive: false

@@ -36,7 +36,7 @@ const DiscoverPublishArticles = () => import(/* webpackChunkName: "DiscoverPubli
 const DiscoverAddSuccess = () => import(/* webpackChunkName: "DiscoverAddSuccess" */ '../../../views/Discover/AddSuccess.vue')
 const DiscoverList = () => import(/* webpackChunkName: "DiscoverList" */ '../../../views/Discover/List.vue')
 const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '../../../views/Discover/Detail.vue')
-const ActivityInvitationList = () => import(/* webpackChunkName: "ActivityInvitationList" */ '../../../views/Activity/InvitationList.vue')
+const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
 const ActivityGrowthList = () => import(/* webpackChunkName: "ActivityGrowthList" */ '../../../views/Activity/GrowthList.vue')
 const Accountmy = () => import(/* webpackChunkName: "Accountmy" */ '../../../views/Account/my.vue')
 const AccountCollected = () => import(/* webpackChunkName: "AccountCollected" */ '../../../views/Account/Collected.vue')
@@ -206,7 +206,7 @@ export {
   DiscoverAddSuccess,
   DiscoverList,
   DiscoverDetail,
-  ActivityInvitationList,
+  ActivityUpvotesList,
   ActivityGrowthList,
   Accountmy,
   AccountCollected,

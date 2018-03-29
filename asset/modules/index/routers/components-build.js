@@ -34,7 +34,7 @@ import DiscoverPublishArticles from '../../../views/Discover/PublishArticles.vue
 import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
 import DiscoverList from '../../../views/Discover/List.vue'
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
-import ActivityInvitationList from '../../../views/Activity/InvitationList.vue'
+import ActivityUpvotesList from '../../../views/Activity/UpvotesLIist.vue'
 import ActivityGrowthList from '../../../views/Activity/GrowthList.vue'
 import Accountmy from '../../../views/Account/my.vue'
 import AccountCollected from '../../../views/Account/Collected.vue'
@@ -204,7 +204,7 @@ export {
   DiscoverAddSuccess,
   DiscoverList,
   DiscoverDetail,
-  ActivityInvitationList,
+  ActivityUpvotesList,
   ActivityGrowthList,
   Accountmy,
   AccountCollected,
