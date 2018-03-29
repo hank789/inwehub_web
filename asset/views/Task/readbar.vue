@@ -22,8 +22,8 @@
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span class="mui-ellipsis">{{item.data.title}}</span>
-                <span class="mui-ellipsis">{{item.data.body}}</span>
-                <span class="mui-ellipsis" v-if="item.data.extra_body">{{item.data.extra_body}}</span>
+                <span class="mui-ellipsis" v-html="textToLink(item.data.body)"></span>
+                <span class="mui-ellipsis" v-if="item.data.extra_body"></span>
               </p>
               <div class="reader_time">{{timeago(item.created_at)}}</div>
               <i class="bot"></i>
@@ -40,6 +40,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
   const Readbar = {
     data: () => ({
       list: '',
@@ -67,6 +68,9 @@
       }
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       // 下拉刷新;
       pulldownRefresh () {
         setTimeout(() => {
@@ -212,15 +216,15 @@
   }
 
   ul li img {
-    width: 12%;
-    height: 12%;
+    width: 1.12rem;
+    height: 1.12rem;
     border-radius: 50%;
     float: left;
   }
 
   ul li p {
     margin-left: 2%;
-    width: 86%;
+    width: 81%;
     float: left;
   }
 
