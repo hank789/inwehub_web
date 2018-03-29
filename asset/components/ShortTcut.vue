@@ -106,7 +106,7 @@
               this.$router.pushPlus('/selectionrecommend')
               break
             case 3:
-              this.$router.pushPlus('/cionsList')
+              this.$router.pushPlus('/growthList')
               break
             case 4:
 //              项目与机遇的等级判断

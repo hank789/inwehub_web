@@ -486,9 +486,9 @@ const routes = [
     }
   },
   { // 本月贡献榜
-    path: '/cionsList',
-    name: 'cions-list',
-    component: componets.ActivityCionsList,
+    path: '/growthList',
+    name: 'growth-list',
+    component: componets.ActivityGrowthList,
     meta: {
       title: '本月成长榜',
       keepAlive: false
