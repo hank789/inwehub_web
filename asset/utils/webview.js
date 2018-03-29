@@ -189,12 +189,15 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       bounce: 'vertical'
     }
   })
-  webview.hide()
-  var plusWaiting = window.plus.nativeUI.showWaiting()
+
+  console.log('bodyWebviewUrl:' + webview.getURL())
   if (webview.getURL() !== url) {
+    webview.hide()
+    var plusWaiting = window.plus.nativeUI.showWaiting()
     webview.loadURL(url)
   }
   webview.onloaded = function (event) {
+    console.log('webivew-body-onloaded')
     if (plusWaiting) {
       plusWaiting.close()
     }
