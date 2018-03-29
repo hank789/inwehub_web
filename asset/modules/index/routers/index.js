@@ -147,6 +147,10 @@ router.afterEach((to, from) => {
       mixpanelEvent,
       baseEvent
     )
+    window.mixpanel.track(
+      'inwehub:analysis:router:count',
+      baseEvent
+    )
   }
 })
 
