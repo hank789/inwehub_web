@@ -86,8 +86,10 @@
       </div>
 
       <div class="paizhao">
-        您也可以在电脑上填写简历，请访问 https://inwehub.com
-        <a class="mailLink" style="color: rgb( 3,174,249);"></a>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-diannao"></use>
+        </svg>
+       访问 https://inwehub.com，电脑填写更便捷！
       </div>
 
 
@@ -365,13 +367,21 @@
   }
 
   .paizhao {
-    width: 100%;
-    height: 2.666rem;
+    width: 92%;
+    height: 44px;
+    margin-left: 4%;
+    border:1px solid rgb(220, 220, 220);
+    text-align:center;
+    line-height:44px;
     background: #FFFFFF;
-    padding: 0.506rem 0.32rem 0 0.32rem;
     font-size: 0.32rem;
     color: rgb(128, 128, 128);
     word-break: break-all;
+    border-radius: 4px;
+  }
+  .paizhao svg{
+    font-size: 20px;
+    color: rgb(128, 128, 128);
   }
 
   .part3 .desc {
