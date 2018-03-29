@@ -163,7 +163,6 @@
       },
       // 保存搜素的公司名称
       submit (name) {
-        console.log(this.$route)
         if (this.$route.query.from === 'infobasic') {
           postRequest('profile/update', {
             company: name
