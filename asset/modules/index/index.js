@@ -141,15 +141,15 @@ window.mixpanelIdentify = function (alias = false) {
         }
       } else {
         window.mixpanel.identify(currentUser.user_id)
-        window.mixpanel.people.set({
-          'email': currentUser.email,
-          'app_version': appVersion.version,
-          'gender': currentUser.gender,
-          'phone': currentUser.phone,
-          'name': currentUser.name,
-          'avatar': currentUser.avatar_url
-        })
       }
+      window.mixpanel.people.set({
+        'email': currentUser.email,
+        'app_version': appVersion.version,
+        'gender': currentUser.gender,
+        'phone': currentUser.phone,
+        'name': currentUser.name,
+        'avatar': currentUser.avatar_url
+      })
     }
   }
 }
