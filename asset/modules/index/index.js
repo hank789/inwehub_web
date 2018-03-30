@@ -17,7 +17,7 @@ import router from './routers/index'
 require('swiper/dist/css/swiper.css')
 
 // import VueLazyloadImg from 'vue-lazyload-img';
-// import VueLazyload from 'vue-lazyload';
+import VueLazyload from 'vue-lazyload';
 
 // vuex 状态管理器；
 import store from './../../stores/store'
@@ -69,10 +69,11 @@ import './../../styles/imagePreview.css'
 import './../../js/iconfont.js'
 
 Vue.use(VueWechatTitle)
-// Vue.use(VueLazyload, {
-//   loading: loading_img,
-//   try: 3
-// });
+
+Vue.use(VueLazyload, {
+  loading: '',
+  try: 3
+})
 
 import { bindWaitting } from '../../utils/waiting'
 bindWaitting(window.mui)
