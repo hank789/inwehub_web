@@ -215,6 +215,9 @@
     flex-direction: row;
     justify-content: space-between;
   }
+  ul li:nth-last-of-type(1) i{
+    display: none;
+  }
 
   ul li img {
     width: 0.853rem;
