@@ -210,7 +210,9 @@
     padding: 0.266rem 0.426rem 0.266rem 0.426rem;
     overflow: hidden;
   }
-
+  ul li:nth-last-of-type(1) i{
+    display: none;
+  }
   ul li img {
     display: block;
     width: 12.5%;
