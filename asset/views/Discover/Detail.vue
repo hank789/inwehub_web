@@ -28,7 +28,7 @@
       <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
       <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
         <template v-for="(image, index) in detail.data.img">
-          <img class="discover_img" :id="'image_' + index" :src="image" :data-preview-src="image" :data-preview-group="1"/>
+          <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image" :data-preview-group="1"/>
         </template>
       </div>
 

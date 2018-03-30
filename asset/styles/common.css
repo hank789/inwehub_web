@@ -1498,3 +1498,7 @@ a {
 .mui-bar-dark .mui-icon, .mui-bar-nav .mui-icon {
   color:#3c3e44 !important;
 }
+
+.lazyImg[lazy=loading] {
+   background: #f6f6f6;
+}
