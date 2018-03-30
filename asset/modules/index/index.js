@@ -148,7 +148,8 @@ window.mixpanelIdentify = function (alias = false) {
         'gender': currentUser.gender,
         'phone': currentUser.phone,
         'name': currentUser.name,
-        'avatar': currentUser.avatar_url
+        'avatar': currentUser.avatar_url,
+        'user_id': currentUser.user_id
       })
     }
   }
