@@ -28,7 +28,7 @@
               <div @tap.stop.prevent="goDetial(hot)" >
                 <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
-                  <img :src="hot.data.img">
+                  <img class="lazyImg" v-lazy="hot.data.img">
                 </p>
                 <p class="timer">
                   <timeago :since="timeago(hot.created_at)" :auto-update="60">
