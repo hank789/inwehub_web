@@ -89,7 +89,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-diannao"></use>
         </svg>
-       访问 https://inwehub.com，电脑填写更便捷！
+       访问 www.inwehub.com，电脑填写更便捷！
       </div>
 
 
