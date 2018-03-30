@@ -330,8 +330,4 @@
     margin-bottom: 0.266rem;
     position: relative;
   }
-  .detail-answer[data-v-852fb68e] {
-    margin-bottom: 0rem;
-  }
-
 </style>
