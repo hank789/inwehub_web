@@ -299,7 +299,9 @@
     font-size: 0.346rem;
     color: #808080;
   }
-
+  .content ul li:nth-last-of-type(1) i{
+    display: none;
+  }
   .message {
     position: absolute;
     font-size: 0.293rem;
