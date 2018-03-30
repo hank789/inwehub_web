@@ -63,6 +63,20 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
             'page_title': matchedRoute.route.meta.title
           }
         )
+        var currentRoute = this.history.current
+        if (currentRoute && currentRoute.name) {
+          window.mixpanel.track(
+            'inwehub:analysis:router:count',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': currentRoute.fullPath,
+              'page_name': currentRoute.name,
+              'page_title': currentRoute.meta.title
+            }
+          )
+        }
+        window.mixpanel.time_event('inwehub:analysis:router:count')
       }
       if (window.ga) {
         window.ga('set', 'page', url)
