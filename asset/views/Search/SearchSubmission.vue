@@ -23,7 +23,7 @@
       </div>
       <ul class="pilot">
         <li @tap.stop.prevent="$router.pushPlus('/discover/add')">
-          <span>直接去提问</span>
+          <span>直接发分享</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
