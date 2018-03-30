@@ -17,7 +17,7 @@ import router from './routers/index'
 require('swiper/dist/css/swiper.css')
 
 // import VueLazyloadImg from 'vue-lazyload-img';
-import VueLazyload from 'vue-lazyload';
+import VueLazyload from 'vue-lazyload'
 
 // vuex 状态管理器；
 import store from './../../stores/store'
@@ -141,15 +141,16 @@ window.mixpanelIdentify = function (alias = false) {
         }
       } else {
         window.mixpanel.identify(currentUser.user_id)
-        window.mixpanel.people.set({
-          'email': currentUser.email,
-          'app_version': appVersion.version,
-          'gender': currentUser.gender,
-          'phone': currentUser.phone,
-          'name': currentUser.name,
-          'avatar': currentUser.avatar_url
-        })
       }
+      window.mixpanel.people.set({
+        'email': currentUser.email,
+        'app_version': appVersion.version,
+        'gender': currentUser.gender,
+        'phone': currentUser.phone,
+        'name': currentUser.name,
+        'avatar': currentUser.avatar_url,
+        'user_id': currentUser.user_id
+      })
     }
   }
 }
