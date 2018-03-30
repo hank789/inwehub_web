@@ -134,9 +134,11 @@ window.mixpanelIdentify = function (alias = false) {
     var appVersion = localEvent.getLocalItem('app_version')
     var currentUser = localEvent.getLocalItem('UserInfo')
     if (currentUser.user_id) {
-      var distinctId = window.mixpanel.get_distinct_id()
-      if (alias && distinctId && distinctId.length >= 10) {
-        window.mixpanel.alias(currentUser.user_id)
+      if (alias) {
+        var distinctId = window.mixpanel.get_distinct_id()
+        if (distinctId && distinctId.length >= 10) {
+          window.mixpanel.alias(currentUser.user_id)
+        }
       } else {
         window.mixpanel.identify(currentUser.user_id)
         window.mixpanel.people.set({
