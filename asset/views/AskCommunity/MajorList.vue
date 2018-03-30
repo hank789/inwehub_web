@@ -33,7 +33,7 @@
            <svg class="icon" aria-hidden="true">
              <use xlink:href="#icon-shaixuanpaixu_"></use>
            </svg>
-           {{sort === 2 ? '最热' : '最新'}}
+           {{sort === 2 ? '最新' : '最热'}}
          </div>
         </div>
       </div>

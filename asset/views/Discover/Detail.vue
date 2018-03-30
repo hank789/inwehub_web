@@ -229,6 +229,7 @@
         )
       },
       refreshPageData () {
+        this.loading = 1
         this.getDetail()
         this.$refs.ctextarea.refreshPageData()
       },
