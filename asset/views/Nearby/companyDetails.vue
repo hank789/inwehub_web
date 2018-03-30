@@ -377,7 +377,7 @@
   .Relevant_follow{
     width: 1.706rem;
     height: 0.72rem;
-    background: #bdbdbd;
+    background: #dcdcdc;
     color: #b4b4b6;
     line-height:0.72rem;
     border-radius: 1.333rem;

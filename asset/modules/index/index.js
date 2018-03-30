@@ -17,7 +17,7 @@ import router from './routers/index'
 require('swiper/dist/css/swiper.css')
 
 // import VueLazyloadImg from 'vue-lazyload-img';
-// import VueLazyload from 'vue-lazyload';
+import VueLazyload from 'vue-lazyload';
 
 // vuex 状态管理器；
 import store from './../../stores/store'
@@ -69,10 +69,11 @@ import './../../styles/imagePreview.css'
 import './../../js/iconfont.js'
 
 Vue.use(VueWechatTitle)
-// Vue.use(VueLazyload, {
-//   loading: loading_img,
-//   try: 3
-// });
+
+Vue.use(VueLazyload, {
+  loading: '',
+  try: 3
+})
 
 import { bindWaitting } from '../../utils/waiting'
 bindWaitting(window.mui)
@@ -127,22 +128,43 @@ window.getUserAppDevice = function () {
   }
 }
 
-window.mixpanelIdentify = function () {
+window.mixpanelIdentify = function (alias = false) {
   if (process.env.NODE_ENV === 'production') {
     // mixpanel
     var appVersion = localEvent.getLocalItem('app_version')
     var currentUser = localEvent.getLocalItem('UserInfo')
     if (currentUser.user_id) {
-      window.mixpanel.identify(currentUser.user_id)
-      window.mixpanel.people.set({
-        'email': currentUser.email,
-        'app_version': appVersion.version,
-        'gender': currentUser.gender,
-        'phone': currentUser.phone,
-        'name': currentUser.name,
-        'avatar': currentUser.avatar_url
-      })
+      var distinctId = window.mixpanel.get_distinct_id()
+      if (alias && distinctId && distinctId.length >= 10) {
+        window.mixpanel.alias(currentUser.user_id)
+      } else {
+        window.mixpanel.identify(currentUser.user_id)
+        window.mixpanel.people.set({
+          'email': currentUser.email,
+          'app_version': appVersion.version,
+          'gender': currentUser.gender,
+          'phone': currentUser.phone,
+          'name': currentUser.name,
+          'avatar': currentUser.avatar_url
+        })
+      }
     }
+  }
+}
+window.trackMixpanelEvent = function (eventName, page, pageName, pageTitle, referrerPage = '') {
+  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+    // mixpanel
+    window.mixpanel.track(
+      'inwehub:' + eventName,
+      {
+        'app': 'inwehub',
+        'user_device': window.getUserAppDevice(),
+        'page': page,
+        'page_name': pageName,
+        'page_title': pageTitle,
+        'referrer_page': referrerPage
+      }
+    )
   }
 }
 

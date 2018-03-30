@@ -8,13 +8,13 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="">贡献榜<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/invitationList')">本月获赞榜</span>
+        <span @tap.stop.prevent="">本月成长榜<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/UpvotesList')">本月获赞榜</span>
       </div>
      <template v-if="!loading && first">
         <div class="ranking">
-          <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的贡献值</div>
-          <img src="../../statics/images/cionslist@2x.png" class="ranking-title"/>
+          <div class="See" @tap.stop.prevent="$router.pushPlus('/my/Growth')">我的成长值</div>
+          <img src="../../statics/images/creditslist@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
             <li>
               <div class="avatar-container">
@@ -27,7 +27,7 @@
                 </p>
               </div>
               <p>{{third.user_name}}</p>
-              <p class="cions">贡献值<i>{{third.coins}}</i></p>
+              <p class="cions">成长值<i>{{third.credits}}</i></p>
               <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -41,7 +41,7 @@
                 </p>
               </div>
               <p>{{first.user_name}}</p>
-              <p class="cions">贡献值<i>{{first.coins}}</i></p>
+              <p class="cions">成长值<i>{{first.credits}}</i></p>
               <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
             <li>
@@ -55,7 +55,7 @@
                 </p>
               </div>
               <p>{{second.user_name}}</p>
-              <p class="cions">贡献值<i>{{second.coins}}</i></p>
+              <p class="cions">成长值<i>{{second.credits}}</i></p>
               <p :class="second.is_followed?'grey':''" @tap.stop.prevent='collect(second.uuid,second)'>{{second.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
           </ul>
@@ -75,7 +75,7 @@
             </div>
             <div class="detail">
               <p>{{item.user_name}}</p>
-              <p>贡献值<i>{{item.coins}}</i></p>
+              <p>成长值<i>{{item.credits}}</i></p>
             </div>
             <div class="fouce" :class="item.is_followed?'grey':''"  @tap.stop.prevent='collectProfessor(item.uuid,index)'>{{item.is_followed ? '已关注' : '关注'}}</div>
             <i class="bot"></i>
@@ -146,7 +146,7 @@
         })
       },
       getData () {
-        postRequest(`rank/userContribution`, {}).then(response => {
+        postRequest(`rank/userGrowth`, {}).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
@@ -222,7 +222,7 @@
   }
   .menu span:nth-of-type(1) i{
     position:absolute;
-    width:1.12rem;
+    width: 1.866rem;
     height:0.04rem;
     border-radius: 1.333rem;
     background:#03aef9;

@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
-        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/interactions')">互动问答</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">互动问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
           <use xlink:href="#icon-gengduo"></use>

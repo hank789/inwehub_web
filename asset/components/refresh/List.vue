@@ -4,7 +4,7 @@
     <div class="mui-scroll">
       <Empty v-if="nothing===1 && autoShowEmpty"
         :description="emptyDescription"
-      ></Empty>
+      ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
       <div class="listWrapper" id="listWrapper" v-else>
         <slot></slot>
       </div>

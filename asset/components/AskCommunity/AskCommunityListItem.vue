@@ -8,7 +8,7 @@
             </div>
             <div class="ask-container" >
               <p :class="item.question_type === 1 ? 'text-line-5' : 'text-line-3'" v-if="searchText" v-html="getHighlight(item.description)"></p>
-              <p :class="item.question_type === 1 ? 'text-line-5' : 'text-line-3'" v-else>{{item.description}}</p>
+              <p :class="item.question_type === 1 ? 'text-line-5' : 'text-line-3'" v-else v-html="textToLink(item.description)"></p>
             </div>
             <div class="tag-detail">
               <div class="ask-comment" v-if="item.question_type === 1"><a></a>1元看答案/评论</div>
@@ -31,6 +31,7 @@
 
 <script>
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml } from '../../utils/dom'
 
   const MajorList = {
     data: () => ({
@@ -51,11 +52,15 @@
       }
     },
     methods: {
+      // 转换成html
+      textToLink (text) {
+        return textToLinkHtml(' ' + text)
+      },
       // 文字高亮
       getHighlight (content) {
         var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
         var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
-        return newstr
+        return this.textToLink(newstr)
       },
       // 标签
       toTagDetail (name) {

@@ -4,7 +4,7 @@
       <div class="my-top">
         <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片 {{account_info_complete_percent}}%</div>
         <div class="professor">
-          <div class="my-img">
+          <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
           </div>
 
@@ -25,14 +25,23 @@
           </div>
 
         </div>
-        <div v-if="show_my_wallet" class="my-news" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
-          <i>Hot</i>
-          <span>邀请我的好友</span>
-          <p><a>5%</a>返现等你拿</p>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
+
+        <!--邀请活动-->
+        <div class="my-activity">
+          <div v-if="show_my_wallet" class="my-news" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
+            <i>返现</i>
+            <span>邀请我的好友</span>
+            <p><a>5%</a>返现等你拿</p>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-chakangengduojiantou"></use>
+            </svg>
+          </div>
+          <div class="my-signIn"  @tap.stop.prevent="toSignIGift()">
+            <i></i>
+            签到
+          </div>
         </div>
+
 
       </div>
       <!--灰色-->
@@ -84,10 +93,9 @@
       </ul>
       <!--gray-->
       <div class="gray"></div>
-
+      <!--列表内容-->
       <ul class="my-option">
         <li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
-
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -95,14 +103,12 @@
           <i class="bot"></i>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
-
           <span>我的报名</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
-
         <li @tap.stop.prevent="$router.pushPlus('/feedback/advise', 'list-detail-page')">
           <span>反馈建议</span>
           <svg class="icon" aria-hidden="true">
@@ -110,13 +116,6 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <!--<li >
-          <span>我的福利</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <i class="bot"></i>
-        </li>-->
         <li @tap.stop.prevent="$router.pushPlus('/setting', 'list-detail-page')">
           <span>设置</span>
           <svg class="icon" aria-hidden="true">
@@ -177,6 +176,11 @@
       }
     },
     methods: {
+      // 签到
+      // 每日签到
+      toSignIGift () {
+        userAbility.signIGift(this)
+      },
       // 警告框
       wran () {
         var font = '<p style="text-align: left; color: #444444; margin-bottom:0.533rem">' + '为保证每位用户信息都真实有效，请务必如实填写。如发现不实，首次将给予警告，第二次将永久封号。' + '</p>' +
@@ -202,32 +206,12 @@
         }
       },
       // 认证专家跳转判断；
-      toApprove (status) {
+      toApprove () {
         this.$router.pushPlus('/company/my?back=/my')
-        //        switch(status) {
-        //          case 2:
-        //            this.$router.pushPlus('/company/my?back=/my');
-        //            break;
-        //          default:
-        //            this.$router.pushPlus('/company/submit');
-        //
-        //        }
       },
       // 认证专家；
-      toApply (expertStatus) {
+      toApply () {
         userAbility.jumpToApplyProfessor(this)
-        //        switch (parseInt(expertStatus)) {
-        //              case 0:
-        //              case 3:
-        //                  this.$router.push('/my/pilot');
-        //                break;
-        //              case 2:
-        //                mui.toast('您已经是专家');
-        //                break;
-        //              case 1:
-        //                this.$router.push('/expert/apply/success?type=0');
-        //                break;
-        //            }
       },
       getNumbers: function (number) {
         var html = ''
@@ -288,6 +272,8 @@
     activated: function () {
       console.log('activated')
       this.initData()
+    },
+    mounted () {
     }
   }
 </script>
@@ -436,11 +422,14 @@
     z-index: 9;
   }
   /**********邀请我的好友***************/
-
+   .my-activity{
+     width:100%;
+     overflow: hidden;
+   }
   .my-news {
-    width: 100%;
+    width: 82%;
     height: 1.093rem;
-    border-radius: 0.106rem;
+    border-radius: 0.213rem;
     background:url(../../statics/images/mask@3x.png) no-repeat;
     background-size:100% 100%;
     -webkit-box-shadow: 0 0 0.266rem rgb(243, 244, 246);
@@ -448,6 +437,7 @@
     box-shadow: 0 0 0.266rem rgb(243, 244, 246);
     position: relative;
     margin-bottom: 0.533rem;
+    float: left;
   }
 
   .my-news i {
@@ -461,7 +451,7 @@
     text-align: center;
     line-height: 0.453rem;
     border-radius: 0.106rem;
-    margin-left: 0.506rem;
+    margin-left: 0.3rem;
     margin-right: 0.266rem;
     position: relative;
     /*渐变*/
@@ -511,6 +501,29 @@
     top: 0;
     bottom: 0;
     margin: auto;
+  }
+  .my-signIn{
+    margin-left: 2%;
+    float: right;
+    width:16%;
+    height: 1.093rem;
+    text-align: center;
+    line-height: 1.093rem;
+    font-size: 0.373rem;
+    border-radius: 0.213rem;
+    color: #03AEF9;
+    border:0.04rem solid #65D2F2;
+    position: relative;
+    overflow: hidden;
+  }
+  .my-signIn i{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 0.4rem solid #65D2F2;
+    border-right: 0.4rem solid transparent;
+    left:0;
+    top:0;
   }
 
   .gray {

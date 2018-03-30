@@ -27,7 +27,6 @@
         ></Answer>
         <!--查看全部回答-->
         <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
-          <i class="bot"></i>
         </div>
 
         <Discuss
@@ -328,10 +327,5 @@
     line-height: 1.066rem;
     background: #FFFFFF;
     margin-bottom: 0.266rem;
-    position: relative;
   }
-  .detail-answer[data-v-852fb68e] {
-    margin-bottom: 0rem;
-  }
-
 </style>

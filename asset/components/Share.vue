@@ -203,10 +203,20 @@
         if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
           this.hideShareBtn = true
         }
-
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        var fromUser = 0
+        if (currentUser.user_id) {
+          fromUser = currentUser.user_id
+        }
+        var shareParams = 'isShare=1&fromUser=' + fromUser
+        if (this.link.indexOf('?') < 0) {
+          shareParams = '?' + shareParams
+        } else {
+          shareParams = '&' + shareParams
+        }
         var data = {
           title: this.title,
-          link: this.link + '&isShare=1',
+          link: this.link + shareParams,
           content: this.content,
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl

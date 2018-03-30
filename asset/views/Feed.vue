@@ -200,11 +200,8 @@
     mounted () {
       // 新手任务
       userAbility.newbieTask(this)
-      // 每日签到
-      userAbility.signIGift(this)
       autoTextArea()
       saveLocationInfo()
-
       AppInit(this)
     },
     computed: {
@@ -437,7 +434,7 @@
   }
 
   .w414-3 .listWrapper{
-    bottom:50px !important;
+    bottom:50px !important; /* px不转换 */
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {

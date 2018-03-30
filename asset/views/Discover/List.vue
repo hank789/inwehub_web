@@ -55,9 +55,9 @@
         </div>
 
 
-        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/invitationList')">
+        <div class="mostInvitations"  v-if="invitationList.show_rank" @tap.stop.prevent="$router.pushPlus('/UpvotesList')">
           <div class="invitation"><span>{{invitationList.user_name}}</span>本月邀请<i>{{invitationList.current_month_invited_users}}</i>人</div>
-          <div class="credits-cions">贡献值<i>{{invitationList.user_coins}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;本月获赞<i>{{invitationList.current_month_user_upvotes}}</i></div>
+          <div class="credits-cions">成长值<i>{{invitationList.user_credits}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;本月获赞<i>{{invitationList.current_month_user_upvotes}}</i></div>
           <div class="InvitationList" >
             <img src="../../statics/images/discover-invitation-list2x.png" />
           </div>
@@ -175,7 +175,7 @@
                   this.$router.pushPlus('/askCommunity/majors')
                   break
                 case 2:
-                  this.$router.pushPlus('/askCommunity/interactions')
+                  this.$router.pushPlus('/askCommunity/majors')
               }
             } else {
               userAbility.jumpJudgeGrade(this)
@@ -439,7 +439,7 @@
 }
 
 .w414-3 .listWrapper{
-  bottom:50px !important;
+  bottom:50px !important; /* px不转换 */
 }
 
 /*顾问社区*/

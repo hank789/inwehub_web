@@ -32,20 +32,33 @@
                    <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
+              <!--未关注的权限提示-->
+              <!--<div  class="hint" v-if="index === -1">-->
+                <!--<p>34344343434</p>-->
+                <!--<p>-->
+                  <!--由于对方没有关注你，你只能发送3条消息，需对方关注或回复后才能恢复正常聊天-->
+                <!--</p>-->
+              <!--</div>-->
             </li>
+
             <!--自己  -->
             <li class="Customerservice" v-else-if="currentUser.user_id == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
-                   <!--{{item.data.text}}-->
                 </span>
                 <span v-if="item.data.img" class="chatImg">
                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
-
+              <!--未关注的权限提示-->
+              <!--<div  class="hint" >-->
+                <!--<p>34344343434</p>-->
+                <!--<p>-->
+                  <!--由于对方没有关注你，你只能发送3条消息，需对方关注或回复后才能恢复正常聊天-->
+                <!--</p>-->
+              <!--</div>-->
             </li>
           </template>
         </ul>
@@ -152,7 +165,7 @@
           }, 500)
         }
       },
-//      转换成html
+      // 转换成html
       textToLink (text) {
         return textToLinkHtml(' ' + text)
       },
@@ -607,6 +620,27 @@
   }
   .chatListWrapper {
     bottom: 1.253rem;
+  }
+  /*权限提示样式*/
+  .hint{
+    width: 96%;
+    margin-left: 2%;
+    overflow: hidden;
+  }
+  .hint p:nth-of-type(1){
+    width: 100%;
+    text-align: center;
+    font-size: 0.346rem;
+    color: #b4b4b6;
+    line-height: 1.226rem;
+  }
+  .hint p:nth-of-type(2){
+    background: #ECECEE;
+    border-radius:0.106rem;
+    color: #808080;
+    font-size: 0.32rem;
+    line-height: 0.453rem;
+    padding: 0.213rem 0.4rem;
   }
 
 </style>

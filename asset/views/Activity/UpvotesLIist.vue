@@ -8,7 +8,7 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/cionsList')">贡献榜</span>
+        <span @tap.stop.prevent="$router.replace('/growthList')">本月成长榜</span>
         <span @tap.stop.prevent="">本月获赞榜 <i></i></span>
       </div>
       <template v-if="!loading && first">
@@ -97,7 +97,7 @@
       </template>
       <Empty v-if="!loading && list.length === 0"></Empty>
 
-      <div v-if="!loading && list.length !== 0" class="desc">如邀请用户数相同，则贡献值和等级高的用户排名优先</div>
+      <div v-if="!loading && list.length !== 0" class="desc">如邀请数相同，则贡献值和等级高的用户排名优先</div>
     </div>
   </div>
 </template>

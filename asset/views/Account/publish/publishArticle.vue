@@ -33,7 +33,7 @@
             <div class="container-image margin-10-0-0" v-if="ask.img && ask.type =='link'" >
               <img :src="ask.img" />
             </div>
-            <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
+            <p class="mui-ellipsis-2"><span  v-html="textToLink(ask.title)"></span><a v-if="ask.domain">{{ask.domain}}</a> </p>
             <p>
               <!--{{ask.created_at}}-->
               <timeago :since="timeago(ask.created_at)" :auto-update="60">
@@ -54,6 +54,7 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import { textToLinkHtml, secureHtml } from '../../../utils/dom'
   import Images from '../../../components/image/Images.vue'
   import { goThirdPartyArticle } from '../../../utils/webview'
   import localEvent from '../../../stores/localStorage'
@@ -78,6 +79,9 @@
       Images
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()

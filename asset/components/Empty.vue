@@ -4,6 +4,8 @@
       <use xlink:href="#icon-zanwushuju"></use>
     </svg>
     <div class="description">{{description}}</div>
+    
+    <slot name="emptyBottom"></slot>
 
     <div class="buttonWrapper" v-if="description === '暂无您关注的用户的动态'">
       <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">去关注</button>
@@ -53,4 +55,5 @@
     width:auto;
     border-radius: 1.333rem;
   }
+
 </style>

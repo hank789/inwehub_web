@@ -86,9 +86,10 @@
       </div>
 
       <div class="paizhao">
-        填写嫌麻烦，可发送简历到
-                <a class="mailLink" href="mailto:hi@inwehub.com?subject=简历维护：用户姓名+注册手机号码" style="color: rgb( 3,174,249);">hi@inwehub.com</a> ,小哈帮您维护！
-
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-diannao"></use>
+        </svg>
+       访问 www.inwehub.com，电脑填写更便捷！
       </div>
 
 
@@ -366,11 +367,20 @@
   }
 
   .paizhao {
-    width: 100%;
-    height: 2.666rem;
+    width: 92%;
+    height: 44px;
+    margin-left: 4%;
+    border:1px solid rgb(220, 220, 220);
+    text-align:center;
+    line-height:44px;
     background: #FFFFFF;
-    padding: 0.506rem 0.32rem 0 0.32rem;
     font-size: 0.32rem;
+    color: rgb(128, 128, 128);
+    word-break: break-all;
+    border-radius: 4px;
+  }
+  .paizhao svg{
+    font-size: 20px;
     color: rgb(128, 128, 128);
   }
 

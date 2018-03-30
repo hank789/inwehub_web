@@ -159,7 +159,7 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             cb(user)
             window.mui.closeWaiting()
-            window.mixpanelIdentify()
+            window.mixpanelIdentify(true)
             // 存储用户位置信息
             saveLocationInfo()
             if (window.mui.os.plus) {
@@ -322,7 +322,7 @@
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
-              window.mixpanelIdentify()
+              window.mixpanelIdentify(true)
               if (window.mui.os.plus) {
                 this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
               } else {

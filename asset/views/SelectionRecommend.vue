@@ -106,7 +106,7 @@
                   this.$router.pushPlus('/askCommunity/majors')
                   break
                 case 2:
-                  this.$router.pushPlus('/askCommunity/interactions')
+                  this.$router.pushPlus('/askCommunity/majors')
                   break
 //                case 4:
 //                  this.$router.pushPlus('my/Discount')

@@ -3,7 +3,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="back()"></a>
       <h1 class="mui-title">{{type?'私信好友':'我的关注'}}</h1>
     </header>
 
@@ -75,6 +75,7 @@
 <script>
   import Contact from '../../components/contact/Index.vue'
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -96,6 +97,11 @@
       Contact
     },
     methods: {
+      back () {
+        //  清空
+        localEvent.clearLocalItem('share')
+        window.mui.back()
+      },
       toChat (id) {
         if (this.type) {
           this.$router.pushPlus('/chat/' + id)

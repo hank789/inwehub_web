@@ -21,6 +21,27 @@
         <span @tap.stop.prevent="">用户<i></i></span>
         <i class="bot"></i>
       </div>
+      <ul class="pilot">
+        <li @tap.stop.prevent="$router.pushPlus('/seekingCooperation?name=searchUser')">
+          <span>委托寻找顾问</span>
+          <i class="space"></i>
+          <span>提出您的需求，平台精准对接</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
+        <li  @tap.stop.prevent="toApply()">
+          <span>成为认证专家</span>
+          <i class="space"></i>
+          <span>申请平台认证，优先匹配资源</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
+      </ul>
+
       <RefreshList
         v-if="dataList != null"
         v-model="list"
@@ -54,7 +75,7 @@
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-//  import userAbility from '../../utils/userAbility'
+  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
 
@@ -99,6 +120,10 @@
     mounted () {
     },
     methods: {
+      // 认证专家；
+      toApply () {
+        userAbility.jumpToApplyProfessor(this)
+      },
       back () {
         window.mui.back()
         return
@@ -170,7 +195,7 @@
   }
   .mui-content{
     .listWrapper{
-      top:2.2rem;
+      top:4.5rem;
     }
     background: #ffffff;
     .search{
@@ -257,6 +282,37 @@
             bottom: 0;
             margin: auto;
           }
+        }
+      }
+    }
+    /*引导*/
+    .pilot{
+      width: 100%;
+      overflow: hidden;
+      padding: 0 4%;
+      li{
+        width:100%;
+        height:1.173rem;
+        position: relative;
+        line-height: 1.173rem;
+        span{
+          font-size:0.4rem;
+          color: #235280;
+          &:nth-of-type(2){
+            font-size:0.346rem;
+            color: #808080;
+          }
+        }
+        i.space{
+          display: inline-block;
+          width:0.026rem;
+          height:0.28rem;
+          background: #DCDCDC;
+          margin:0 0.16rem;
+        }
+        svg{
+          float: right;
+          margin-top: 0.373rem;
         }
       }
     }

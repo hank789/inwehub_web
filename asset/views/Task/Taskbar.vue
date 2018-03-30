@@ -22,7 +22,7 @@
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span class="mui-ellipsis">{{item.data.title}}</span>
-                <span class="mui-ellipsis">{{item.data.body}}</span>
+                <span class="mui-ellipsis" v-html="textToLink(item.data.body)"></span>
                 <span class="mui-ellipsis third" v-if="item.data.extra_body"><i>{{item.data.extra_body}}</i></span>
                 <span class="fourth">{{timeago(item.created_at)}}</span>
               </p>
@@ -40,6 +40,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
   const Taskbar = {
     data: () => ({
       list: [],
@@ -67,6 +68,9 @@
       }
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       // 下拉刷新;
       pulldownRefresh () {
         setTimeout(() => {
@@ -207,19 +211,20 @@
     position: relative;
     padding: 0.266rem 0.426rem 0rem 0.426rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   ul li img {
-    width: 11%;
-    height: 11%;
+    width: 0.853rem;
+    height: 0.853rem;
     border-radius: 25%;
-    float: left;
   }
 
   ul li p {
     margin-left: 3%;
     width: 86%;
-    float: left;
   }
 
   ul li p span {

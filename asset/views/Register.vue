@@ -546,6 +546,7 @@
                     'referrer_page': ''
                   }
                 )
+                window.mixpanelIdentify(true)
               }
               // 存储用户位置信息
               saveLocationInfo()

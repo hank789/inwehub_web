@@ -38,6 +38,7 @@
           {name: '机遇发布'},
           {name: '活动展示'},
           {name: '专家推荐'},
+          {name: '寻找顾问 '},
           {name: '其他'}
       ],
       description: '',
@@ -54,7 +55,12 @@
       MTextarea
     },
     created () {
-
+      if (this.$route.query.name) {
+        this.intergerOn = 4
+        this.placeholdercontent = '请清晰简单的描述您需要寻找的顾问类型/年限/擅长方向等。 \n' +
+          '\n' +
+          '收到您的合作申请后，我们会尽快与您取得联系，您也可以添加客服小哈微信hiinwe直接沟通。'
+      }
     },
     watch: {
       '$route': 'refreshPageData'
@@ -84,6 +90,11 @@
               '如您推荐的专家最终成功入驻，您将获得邀请分红及贡献值奖励兑换礼品。'
             break
           case 4:
+            this.placeholdercontent = '请清晰简单的描述您需要寻找的顾问类型/年限/擅长方向等。 \n' +
+              '\n' +
+              '收到您的合作申请后，我们会尽快与您取得联系，您也可以添加客服小哈微信hiinwe直接沟通。'
+            break
+          case 5:
             this.placeholdercontent = '请清晰简单的描述您需要寻求的其他合作的类型。\n' +
               '\n' +
               '收到您的申请提交后，我们会尽快与您取得联系并沟通详细信息。'
