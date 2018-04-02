@@ -304,7 +304,7 @@
              <!--默认天数-->
              <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
              <!--点击签到红包-->
-             <p  class="alertConfirm"  v-else-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">
+             <p  class="alertConfirm"  v-else-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">
                <img src="../statics/images/signIn-money@2x.png"/>
              </p>
              <!--默认红包样式-->
