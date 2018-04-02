@@ -23,7 +23,7 @@
           <p class="recommend_title">精选推荐</p>
           <li v-for="(recommend, index) in list"  @tap.stop.prevent="goDetial(recommend.read_type,recommend)">
             <div class="container-image">
-              <img :src="recommend.data ? recommend.data.img:''"  />
+              <img  class="lazyImg" v-lazy="recommend.data ? recommend.data.img:''" />
             </div>
             <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
             <!--<p class="recommend_time">{{recommend.created_at}}</p>-->
