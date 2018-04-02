@@ -298,33 +298,72 @@
            <p>连续签到将获现金红包，漏签将清零重置！</p>
          </div>
          <ul class="signIn_m">
+           <!--<li v-for="(day, index) in options.signList.info">-->
+             <!--&lt;!&ndash;点击签到&ndash;&gt;-->
+             <!--<p class="click-signIn alertConfirm" v-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>-->
+             <!--&lt;!&ndash;默认天数&ndash;&gt;-->
+             <!--<p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>-->
+             <!--&lt;!&ndash;点击签到红包&ndash;&gt;-->
+             <!--<p  class="alertConfirm"  v-else-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">-->
+               <!--<img src="../statics/images/signIn-money@2x.png"/>-->
+             <!--</p>-->
+             <!--&lt;!&ndash;默认红包样式&ndash;&gt;-->
+             <!--<p  v-else-if="day.signed === 0 && day.coupon_type != 0">-->
+              <!--<img src="../statics/images/money-disabled@2x.png"/>-->
+             <!--</p>-->
+             <!--&lt;!&ndash;红包领取后的样式&ndash;&gt;-->
+             <!--<p  v-else-if="day.signed === 1 && day.coupon_type != 0">-->
+               <!--<img src="../statics/images/getCoupon@2x.png"/>-->
+             <!--</p>-->
+             <!--&lt;!&ndash;领取后的样式&ndash;&gt;-->
+             <!--<p v-else-if="day.signed === 1 && day.coupon_type === 0">-->
+               <!--<img src="../statics/images/signIn-succeed@2x.png"/>-->
+             <!--</p>-->
+             <!--<p v-if="day.signed === 1">已领取</p>-->
+             <!--<p v-else-if="day.coupon_type === 2">小红包</p>-->
+             <!--<p v-else-if="day.coupon_type === 3">大红包</p>-->
+             <!--<p v-else>成长值{{day.credits}}</p>-->
+           <!--</li>-->
            <li v-for="(day, index) in options.signList.info">
-             <!--点击签到-->
-             <p class="click-signIn alertConfirm" v-if="(options.signList.days === 0 ? 1 : options.signList.days) === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>
-             <!--默认天数-->
-             <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
-             <!--点击签到红包-->
-             <p  class="alertConfirm"  v-else-if="options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">
-               <img src="../statics/images/signIn-money@2x.png"/>
-             </p>
-             <!--默认红包样式-->
-             <p  v-else-if="day.signed === 0 && day.coupon_type != 0">
-              <img src="../statics/images/money-disabled@2x.png"/>
-             </p>
-             <!--红包领取后的样式-->
-             <p  v-else-if="day.signed === 1 && day.coupon_type != 0">
-               <img src="../statics/images/getCoupon@2x.png"/>
-             </p>
-             <!--领取后的样式-->
-             <p v-else-if="day.signed === 1 && day.coupon_type === 0">
-               <img src="../statics/images/signIn-succeed@2x.png"/>
-             </p>
-             <p v-if="day.signed === 1">已领取</p>
-             <p v-else-if="day.coupon_type === 2">小红包</p>
-             <p v-else-if="day.coupon_type === 3">大红包</p>
-             <p v-else>成长值{{day.credits}}</p>
+             <!--已经签到-->
+              <template v-if="day.signed">
+                <!--红包领取的样式-->
+                <p  v-if="day.coupon_type != 0">
+                  <img src="../statics/images/getCoupon@2x.png"/>
+                </p>
+                <!--成长值取后的样式-->
+                <p v-else>
+                  <img src="../statics/images/signIn-succeed@2x.png"/>
+                </p>
+                <p>已领取</p>
+              </template>
+             <!--未签到-->
+             <template v-else>
+               <!--红包样式-->
+               <template   v-if="day.coupon_type">
+                 <!--点击签到红包-->
+                 <p  class="alertConfirm"  v-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day">
+                   <img src="../statics/images/signIn-money@2x.png"/>
+                 </p>
+                 <!--默认红包样式-->
+                 <p v-else>
+                   <img src="../statics/images/money-disabled@2x.png"/>
+                 </p>
+                 <p v-if="day.coupon_type === 2">小红包</p>
+                 <p v-else-if="day.coupon_type === 3">大红包</p>
+               </template>
+               <!--成长值样式-->
+               <template v-else>
 
+                 <!--点击签到-->
+                 <p class="click-signIn alertConfirm" v-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day "><span>点击签到</span></p>
+                 <!--默认成长值天数-->
+                 <p v-else>第{{day.day}}天</p>
+                 <p>成长值{{day.credits}}</p>
+               </template>
+             </template>
            </li>
+
          </ul>
          <div class="signIn_b">
            <p>当前成长值：{{options.signList.total_credits}} <i>（我的>我的分值）</i></p>

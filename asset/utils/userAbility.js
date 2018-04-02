@@ -247,6 +247,7 @@ var UserAbility = () => {
     var userInfo = getLocalUserInfo()
     var mobile = userInfo.phone
     if (mobile) {
+      // localEvent.setLocalItem('sign_day_' + mobile, {value: '2018-4-1'})
       var tody = new Date()
       var isTody = tody.getFullYear() + '-' + (tody.getMonth() + 1) + '-' + tody.getDate()
       var day = localEvent.getLocalItem('sign_day_' + mobile).value

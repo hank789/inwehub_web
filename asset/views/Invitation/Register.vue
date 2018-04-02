@@ -169,7 +169,7 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             cb(user)
             window.mui.closeWaiting()
-            window.mixpanelIdentify(true)
+            window.mixpanelIdentify()
             if (window.mui.os.plus) {
               this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
             } else {
@@ -331,7 +331,7 @@
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
-              window.mixpanelIdentify(true)
+              window.mixpanelIdentify()
               if (window.mui.os.plus) {
                 this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
               } else {
