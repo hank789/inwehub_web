@@ -295,12 +295,12 @@
       <div class="signIn">
          <div class="signIn_t">
            <img src="../statics/images/sign_title@2x.png">
-           <p>连续签到将获现金红包，漏签将清零重置！</p>
+           <p>连续签到将获现金红包，漏签将清零重置！{{options.signList.current_day_signed}}</p>
          </div>
          <ul class="signIn_m">
            <li v-for="(day, index) in options.signList.info">
              <!--点击签到-->
-             <p class="click-signIn alertConfirm" v-if="(options.signList.days === 0 ? 1 : options.signList.days) === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>
+             <p class="click-signIn alertConfirm" v-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>
              <!--默认天数-->
              <p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>
              <!--点击签到红包-->
