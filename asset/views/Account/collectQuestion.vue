@@ -25,7 +25,7 @@
         class="listWrapper">
         <ul class="answer">
           <li v-for="(questions, index) in list" @tap.stop.prevent="toDetail(questions)">
-            <p class="mui-ellipsis-2">{{questions.description}}</p>
+            <p class="mui-ellipsis-2"  v-html="textToLink(questions.description)"></p>
             <p>
               <span>回答{{questions.answer_num}}</span>
               <a></a>
@@ -45,6 +45,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -56,6 +57,9 @@
       RefreshList
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       toDetail (item) {
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/answers/' + item.question_id)
