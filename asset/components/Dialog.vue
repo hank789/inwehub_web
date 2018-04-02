@@ -295,7 +295,7 @@
       <div class="signIn">
          <div class="signIn_t">
            <img src="../statics/images/sign_title@2x.png">
-           <p>连续签到将获现金红包，漏签将清零重置！{{options.signList.current_day_signed}}</p>
+           <p>连续签到将获现金红包，漏签将清零重置！</p>
          </div>
          <ul class="signIn_m">
            <li v-for="(day, index) in options.signList.info">
