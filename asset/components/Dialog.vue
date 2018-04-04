@@ -298,32 +298,6 @@
            <p>连续签到将获现金红包，漏签将清零重置！</p>
          </div>
          <ul class="signIn_m">
-           <!--<li v-for="(day, index) in options.signList.info">-->
-             <!--&lt;!&ndash;点击签到&ndash;&gt;-->
-             <!--<p class="click-signIn alertConfirm" v-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type === 0"><span>点击签到</span></p>-->
-             <!--&lt;!&ndash;默认天数&ndash;&gt;-->
-             <!--<p v-else-if="day.signed === 0 && day.coupon_type === 0">第{{day.day}}天</p>-->
-             <!--&lt;!&ndash;点击签到红包&ndash;&gt;-->
-             <!--<p  class="alertConfirm"  v-else-if="options.signList.current_day_signed !== 1 && options.signList.days + 1 === day.day && day.signed === 0 && day.coupon_type != 0">-->
-               <!--<img src="../statics/images/signIn-money@2x.png"/>-->
-             <!--</p>-->
-             <!--&lt;!&ndash;默认红包样式&ndash;&gt;-->
-             <!--<p  v-else-if="day.signed === 0 && day.coupon_type != 0">-->
-              <!--<img src="../statics/images/money-disabled@2x.png"/>-->
-             <!--</p>-->
-             <!--&lt;!&ndash;红包领取后的样式&ndash;&gt;-->
-             <!--<p  v-else-if="day.signed === 1 && day.coupon_type != 0">-->
-               <!--<img src="../statics/images/getCoupon@2x.png"/>-->
-             <!--</p>-->
-             <!--&lt;!&ndash;领取后的样式&ndash;&gt;-->
-             <!--<p v-else-if="day.signed === 1 && day.coupon_type === 0">-->
-               <!--<img src="../statics/images/signIn-succeed@2x.png"/>-->
-             <!--</p>-->
-             <!--<p v-if="day.signed === 1">已领取</p>-->
-             <!--<p v-else-if="day.coupon_type === 2">小红包</p>-->
-             <!--<p v-else-if="day.coupon_type === 3">大红包</p>-->
-             <!--<p v-else>成长值{{day.credits}}</p>-->
-           <!--</li>-->
            <li v-for="(day, index) in options.signList.info">
              <!--已经签到-->
               <template v-if="day.signed">
