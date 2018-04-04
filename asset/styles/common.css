@@ -1500,5 +1500,12 @@ a {
 }
 
 .lazyImg[lazy=loading] {
-   background: #f6f6f6;
+  background-color: #f6f6f6;
+  background-image: url("../statics/images/loading.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.lazyImg[lazy=error] {
+  background-color: #f6f6f6;
 }
