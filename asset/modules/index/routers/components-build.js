@@ -1,7 +1,6 @@
 const Login = require('../../../views/Login.vue')
 import Register from '../../../views/Register.vue'
 import FindPassword from '../../../views/FindPassword.vue'
-import Home from '../../../views/404.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
 import SearchSearchQuestion from '../../../views/Search/SearchQuestion.vue'
@@ -171,7 +170,6 @@ export {
   Login,
   Register,
   FindPassword,
-  Home,
   Feed,
   SearchSearchQuestion,
   SearchSearchSubmission,

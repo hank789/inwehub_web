@@ -1,7 +1,6 @@
 const Login = () => import(/* webpackChunkName: "login" */ '../../../views/Login.vue')
 const Register = () => import(/* webpackChunkName: "Register" */ '../../../views/Register.vue')
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
-const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/404.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
 const SearchSearchQuestion = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchQuestion.vue')
 const SearchSearchSubmission = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchSubmission.vue')
@@ -173,7 +172,6 @@ export {
   Login,
   Register,
   FindPassword,
-  Home,
   Feed,
   SearchSearchQuestion,
   SearchSearchSubmission,

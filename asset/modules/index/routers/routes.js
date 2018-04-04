@@ -16,7 +16,7 @@ import { closeSplashscreen, openFullscreen } from '../../../utils/plus'
 const routes = [
   {
     path: '/',
-    component: componets.Home,
+    component: componets.Page404,
     name: 'land-home',
     meta: {
       title: '主页'
