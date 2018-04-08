@@ -11,7 +11,7 @@
           <!--{{selectNum}}-->
           <p>标签（{{skill_tags.length}}／20） </p>
           <p>让机遇更精准匹配，让内容更容易检索 </p>
-          <button @tap.stop.prevent="keepTags()">确认保存</button>
+          <button @tap.stop.prevent="keepTags()" v-if="skill_tags.length">确认保存</button>
         </div>
         <li v-for="(item, index) in skill_tags" v-if="skill_tags.length">
           {{item.text}}
@@ -30,19 +30,26 @@
           </svg>
           <input type="text" v-model="searchText" maxlength="15"/>
         </div>
-        <ul>
+
+        <ul class="hotTags"  v-if="sort">
+          <p>热门标签</p>
+          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
+            {{item.text}}
+          </li>
+        </ul>
+
+        <ul class="tags"  v-else>
           <!--搜素到的标签名 -->
           <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
             {{list[0].text}}<span>  (新标签)</span>
             <i class="bot"></i>
           </li>
-
           <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)" v-if="!(isNewTag && index === 0)">
               {{item.text}}
               <i class="bot"></i>
           </li>
-
         </ul>
+
 
       </div>
 
@@ -239,7 +246,7 @@
     border-color: #03aef9;
     position: absolute;
     right:4%;
-    top:0.4rem;
+    top:0.7rem;
     padding: 0;
   }
 
@@ -306,13 +313,13 @@
     color: #444444;
   }
 
-  .addLable ul {
+  .addLable .tags {
     width: 100%;
     overflow: hidden;
     margin-top: 0.586rem;
   }
 
-  .addLable ul li {
+  .addLable .tags li {
     width: 100%;
     height: 1.173rem;
     position: relative;
@@ -326,5 +333,27 @@
 
   .mui-popup-buttons span.mui-popup-buttons span.mui-popup-button {
     color: #808080;
+  }
+
+  /*热门标签的样式*/
+  .hotTags{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0.586rem;
+  }
+  .hotTags p{
+    font-size: 0.346rem;
+    color:rgba(128,128,128,1);
+    margin-bottom: 10px;
+  }
+  .hotTags li{
+    font-size:14px;
+    color:rgba(68,68,68,1);
+    padding: 5px 10px;
+    border:1px solid RGBA(220, 220, 220, 1);
+    border-radius: 4px;
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
 </style>
