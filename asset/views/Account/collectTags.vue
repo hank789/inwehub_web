@@ -43,6 +43,7 @@
           </li>
         </ul>
       </RefreshList>
+      <!--<div class="superinduce" @tap.stop.prevent="$router.pushPlus('/my/advantage')">新的关注</div>-->
     </div>
     <!---->
 
@@ -232,5 +233,21 @@
   /*listWrapper*/
   .listWrapper {
     top: 1.2rem;
+  }
+  .superinduce{
+    width:3.04rem;
+    height:1.173rem;
+    background:rgba(3,174,249,1);
+    color: #ffffff;
+    font-size: 0.426rem;
+    border-radius: 1.333rem;
+    text-align: center;
+    line-height:1.173rem;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0.4rem;
+    margin: auto;
+    z-index: 3;
   }
 </style>
