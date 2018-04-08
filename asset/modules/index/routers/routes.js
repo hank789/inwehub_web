@@ -59,7 +59,7 @@ const routes = [
       wechatHideHeader: true,
       keepAlive: true
     },
-    component: componets.Feed,
+    component: componets.Home,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

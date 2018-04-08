@@ -3,6 +3,7 @@ import Register from '../../../views/Register.vue'
 import FindPassword from '../../../views/FindPassword.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
+import Home from '../../../views/Home.vue'
 import SearchSearchQuestion from '../../../views/Search/SearchQuestion.vue'
 import SearchSearchSubmission from '../../../views/Search/SearchSubmission.vue'
 import SearchSearchTag from '../../../views/Search/SearchTag.vue'
@@ -171,6 +172,7 @@ export {
   Register,
   FindPassword,
   Feed,
+  Home,
   SearchSearchQuestion,
   SearchSearchSubmission,
   SearchSearchTag,
