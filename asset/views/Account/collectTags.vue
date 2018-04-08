@@ -24,7 +24,7 @@
         :pageMode="true"
         class="listWrapper">
         <ul>
-          <li class="tag-title" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.tag_name)">
+          <li class="tag-title" v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.text)">
             <div class="tag-l" v-if="item.tag_logo">
               <img :src="item.tag_logo">
             </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="tag-r">
               <p>
-                <span>{{item.tag_name}}</span>
+                <span>{{item.text}}</span>
               </p>
               <p class="mui-ellipsis-3">{{item.tag_summary}}</p>
             </div>
@@ -43,7 +43,7 @@
           </li>
         </ul>
       </RefreshList>
-      <!--<div class="superinduce" @tap.stop.prevent="$router.pushPlus('/my/advantage')">新的关注</div>-->
+      <div class="superinduce" @tap.stop.prevent="$router.pushPlus('/my/advantage?form=collectTags')">新的关注</div>
     </div>
     <!---->
 
