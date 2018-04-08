@@ -41,7 +41,6 @@
   import localEvent from '../../stores/localStorage'
   import { NOTICE, USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
-  import { clearAllWebViewCache } from '../../utils/webview'
   import { saveLocationInfo } from '../../utils/allPlatform'
 
   export default {
@@ -182,7 +181,6 @@
               }
               // 存储用户位置信息
               saveLocationInfo()
-              clearAllWebViewCache()
 
               if (window.mui.os.plus) {
                 this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)

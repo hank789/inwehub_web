@@ -181,6 +181,7 @@
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
           window.mixpanelIdentify()
+          clearAllWebViewCache()
           // 存储用户位置信息
           saveLocationInfo()
           this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
@@ -232,7 +233,6 @@
               return
             }
             localEvent.setLocalItem('UserLoginInfo', response)
-            clearAllWebViewCache()
 
             this.loginSuccessCallback()
           })

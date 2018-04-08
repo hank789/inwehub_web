@@ -38,7 +38,6 @@
   import localEvent from '../../stores/localStorage'
   import { NOTICE, USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
-  import { clearAllWebViewCache } from '../../utils/webview'
 
   export default {
     data: () => ({
@@ -179,7 +178,6 @@
                 )
                 window.mixpanelIdentify(true)
               }
-              clearAllWebViewCache()
 
               if (window.mui.os.plus) {
                 this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
