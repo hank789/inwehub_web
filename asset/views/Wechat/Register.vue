@@ -154,8 +154,6 @@
           }
           localEvent.setLocalItem('UserLoginInfo', data)
 
-          window.clearAllWebViewCache()
-
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             cb(user)
             window.mui.closeWaiting()

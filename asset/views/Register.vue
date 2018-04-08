@@ -509,7 +509,6 @@
               window.mui.toast(response.data.message)
               return
             }
-            window.clearAllWebViewCache()
 
             localEvent.clearLocalItem('CacheRegister')
             this.isRegisterSuccess = true
