@@ -6,7 +6,7 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" id="searchText" v-model.trim="searchText"/>
+         <input  type="text" id="searchText" v-model.trim="searchText"/>
          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
            <use xlink:href="#icon-times1"></use>
          </svg>
@@ -105,7 +105,6 @@
       }
     },
     mounted () {
-      softInput()
       var searchText = this.$el.querySelector('#searchText')
       if (searchText) {
         setTimeout(() => {
