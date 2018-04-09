@@ -1,9 +1,24 @@
 <template>
   <div>
     <div class="mui-content absolute">
+      <!--search-->
+      <div class="search">
+        <div class="search-l">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-kefu"></use>
+          </svg>
+          <p>客服</p>
+        </div>
+        <div class="search-r">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-sousuo"></use>
+          </svg>
+          <p>搜内容、问答、圈子</p>
+        </div>
+      </div>
       <!--轮播-->
       <swiper :options="swiperOption" class="swiper">
-        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide></swiper-slide>
         <swiper-slide>Slide 2</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 4</swiper-slide>
@@ -81,7 +96,8 @@
       return {
         swiperOption: {
           pagination: {
-            el: '.swiper-pagination'
+            el: '.swiper-pagination',
+            clickable :true
           }
         },
       }
@@ -140,9 +156,55 @@
   .mui-content{
     background: #ffffff;
   }
-
+  /*search*/
+  .search{
+    width:92%;
+    height:34px;
+    margin-left: 4%;
+    position: absolute;
+    top:8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search-l{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .search-l svg{
+    font-size:25px;
+    color: rgba(255,255,255,1);
+  }
+  .search-l p{
+    font-size:10px;
+    color: rgba(255,255,255,1);
+    line-height: 14px;
+    margin-bottom: 5px;
+  }
+  .search-r{
+    width: 57%;
+    height:100%;
+    background:rgba(255,255,255,1);
+    opacity:0.9477;
+    border-radius: 50px;
+    font-size: 14px;
+    color:rgba(200,200,200,1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .search-r svg{
+    font-size: 17px;
+    color: rgba(68,68,68,1);
+    margin-left: 16px;
+    margin-right: 6px;
+  }
   .swiper{
     height:200px;
+    background: #cccccc;
   }
   .categoryMenu{
     width:100%;
@@ -256,3 +318,44 @@
     background: #F3F4F5;
   }
 </style>
+
+<!--<form class="mui-input-group search" >-->
+  <!--<div class="mui-input-row">-->
+    <!--<svg class="icon" aria-hidden="true">-->
+      <!--<use xlink:href="#icon-sousuo"></use>-->
+    <!--</svg>-->
+    <!--<input type="text" class="mui-input-clear" placeholder="搜内容、问答、圈子">-->
+  <!--</div>-->
+<!--</form>-->
+<!--.mui-input-group{-->
+<!--width:57%;-->
+<!--height:34px;-->
+<!--position: absolute;-->
+<!--top: 8px;-->
+<!--right: 4%;-->
+<!--z-index: 2;-->
+<!--background: #ffffff;-->
+<!--opacity:0.9477;-->
+<!--border-radius: 50px ;-->
+<!--}-->
+<!--.mui-input-group input{-->
+<!--width:83%;-->
+<!--height:34px;-->
+<!--line-height: 34px;-->
+<!--padding: 0 30px 0 0;-->
+<!--font-size:14px;-->
+<!--color:rgba(68,68,68,1);-->
+<!--}-->
+<!--.mui-input-group svg{-->
+<!--font-size: 17px;-->
+<!--color:rgba(68,68,68,1);-->
+<!--margin-left: 16px;-->
+<!--}-->
+<!--<style>-->
+  <!--.search .mui-input-row .mui-input-clear ~ .mui-icon-clear{-->
+    <!--width:30px;-->
+    <!--height: 30px;-->
+    <!--top: 13%;-->
+    <!--text-align: left;-->
+  <!--}-->
+<!--</style>-->
