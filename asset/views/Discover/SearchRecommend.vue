@@ -123,13 +123,15 @@
   import { goThirdPartyArticle } from '../../utils/webview'
   import { alertCompanyUser, alertDiscoverCompany } from '../../utils/dialogList'
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
         list: [],
-        emptyDescription: '暂无您关注的内容'
-
+        emptyDescription: '暂无您关注的内容',
+        is_company: currentUser.is_company,
       }
     },
     components: {

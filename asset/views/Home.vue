@@ -92,6 +92,9 @@
 <script>
   import {postRequest, apiRequest} from '../utils/request'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import userAbility from '../utils/userAbility'
+  import { autoTextArea, AppInit } from '../utils/plus'
+  import { saveLocationInfo } from '../utils/allPlatform'
   const Home = {
     data () {
       return {
@@ -104,7 +107,7 @@
       }
     },
     created () {
-
+      this.getHomeData()
     },
     components: {
       swiper,
@@ -113,16 +116,30 @@
     // 缓存；
     activated: function () {
     },
-    mounted () {
-//      var gallery = window.mui('.mui-slider')
-//      gallery.slider({
-//        interval: 5000 // 自动轮播周期，若为0则不自动播放，默认为0；
-//      })
-    },
     computed: {
     },
     methods: {
-    }
+      getHomeData () {
+        postRequest(`home`, {}, false).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          // 是否弹受邀红包
+          if (response.data.data.invitation_coupon.show) {
+            userAbility.InvitationCoupon(this)
+          }
+        })
+      }
+    },
+    mounted () {
+      // 新手任务
+      userAbility.newbieTask(this)
+      autoTextArea()
+      saveLocationInfo()
+      AppInit(this)
+    },
   }
   export default Home
 </script>
