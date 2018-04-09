@@ -1,25 +1,20 @@
 <template>
   <div>
     <div class="mui-content absolute">
-        <!--轮播-->
-      <div class="mui-slider">
-        <div class="mui-slider-group mui-slider-loop">
-          <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://pic1.win4000.com/wallpaper/e/58a54c0ad8c0f.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="http://pic1.win4000.com/wallpaper/e/58a54c016800e.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"> <img src="http://pic1.win4000.com/wallpaper/e/58a54c0548163.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"> <img src="http://pic1.win4000.com/wallpaper/e/58a54c0d70aa8.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"> <img src="http://pic1.win4000.com/wallpaper/e/58a54c0ad8c0f.jpg" /></a></div>
-          <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://pic1.win4000.com/wallpaper/e/58a54c016800e.jpg" /></a></div>
-        </div>
-        <div class="mui-slider-indicator">
-          <div class="mui-indicator mui-active"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
-        </div>
-      </div>
+      <!--轮播-->
+      <swiper :options="swiperOption" class="swiper">
+        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 4</swiper-slide>
+        <swiper-slide>Slide 5</swiper-slide>
+        <swiper-slide>Slide 6</swiper-slide>
+        <swiper-slide>Slide 7</swiper-slide>
+        <swiper-slide>Slide 8</swiper-slide>
+        <swiper-slide>Slide 9</swiper-slide>
+        <swiper-slide>Slide 10</swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
       <!--功能列表-->
       <ul class="categoryMenu">
        <li>
@@ -80,13 +75,23 @@
 </template>
 <script>
   import {postRequest, apiRequest} from '../utils/request'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   const Home = {
-    data: () => ({
-    }),
+    data () {
+      return {
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        },
+      }
+    },
     created () {
 
     },
     components: {
+      swiper,
+      swiperSlide
     },
     // 缓存；
     activated: function () {
@@ -134,6 +139,10 @@
   }
   .mui-content{
     background: #ffffff;
+  }
+
+  .swiper{
+    height:200px;
   }
   .categoryMenu{
     width:100%;
