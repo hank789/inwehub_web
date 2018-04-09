@@ -64,7 +64,6 @@
             ></DiscoverShare>
           </div>
           <div @tap.stop.prevent="toDetail(item)" v-else>
-
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 

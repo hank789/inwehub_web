@@ -34,7 +34,10 @@ const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */
 const DiscoverNewest = () => import(/* webpackChunkName: "DiscoverNewest" */ '../../../views/Discover/Newest.vue')
 const DiscoverPublishArticles = () => import(/* webpackChunkName: "DiscoverPublishArticles" */ '../../../views/Discover/PublishArticles.vue')
 const DiscoverAddSuccess = () => import(/* webpackChunkName: "DiscoverAddSuccess" */ '../../../views/Discover/AddSuccess.vue')
-const DiscoverList = () => import(/* webpackChunkName: "DiscoverList" */ '../../../views/Discover/List.vue')
+const DiscoverList = () => import(/* webpackChunkName: "SearchFollow" */ '../../../views/Discover/List.vue')
+const DiscoverSearchFollow = () => import(/* webpackChunkName: "DiscoverSearchFollow" */ '../../../views/Discover/SearchFollow.vue')
+const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Discover/SearchGroup.vue')
+const DiscoverSearchRecommend = () => import(/* webpackChunkName: "DiscoverSearchRecommend" */ '../../../views/Discover/SearchRecommend.vue')
 const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '../../../views/Discover/Detail.vue')
 const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
 const ActivityGrowthList = () => import(/* webpackChunkName: "ActivityGrowthList" */ '../../../views/Activity/GrowthList.vue')
@@ -205,6 +208,9 @@ export {
   DiscoverPublishArticles,
   DiscoverAddSuccess,
   DiscoverList,
+  DiscoverSearchFollow,
+  DiscoverSearchGroup,
+  DiscoverSearchRecommend,
   DiscoverDetail,
   ActivityUpvotesList,
   ActivityGrowthList,

@@ -461,6 +461,45 @@ const routes = [
     }
   },
   {
+    path: '/searchFollow',
+    name: 'discover_follow',
+    component: componets.DiscoverSearchFollow,
+    meta: {
+      title: '发现',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  {
+    path: '/searchGroup',
+    name: 'discover_group',
+    component: componets.DiscoverSearchGroup,
+    meta: {
+      title: '发现',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  {
+    path: '/searchRecommend',
+    name: 'discover_recommend',
+    component: componets.DiscoverSearchRecommend,
+    meta: {
+      title: '发现',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  {
     path: '/c/:category_id/:slug',
     name: 'discover_detail',
     component: componets.DiscoverDetail,

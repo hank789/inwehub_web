@@ -33,6 +33,12 @@ import DiscoverNewest from '../../../views/Discover/Newest.vue'
 import DiscoverPublishArticles from '../../../views/Discover/PublishArticles.vue'
 import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
 import DiscoverList from '../../../views/Discover/List.vue'
+import DiscoverSearchFollow from '../../../views/Discover/SearchFollow.vue'
+import DiscoverSearchGroup from '../../../views/Discover/SearchGroup.vue'
+import DiscoverSearchRecommend from '../../../views/Discover/SearchRecommend.vue'
+
+
+
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
 import ActivityUpvotesList from '../../../views/Activity/UpvotesLIist.vue'
 import ActivityGrowthList from '../../../views/Activity/GrowthList.vue'
@@ -203,6 +209,9 @@ export {
   DiscoverPublishArticles,
   DiscoverAddSuccess,
   DiscoverList,
+  DiscoverSearchFollow,
+  DiscoverSearchGroup,
+  DiscoverSearchRecommend,
   DiscoverDetail,
   ActivityUpvotesList,
   ActivityGrowthList,
