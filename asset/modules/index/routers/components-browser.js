@@ -29,6 +29,10 @@ const Invitationindex = () => import(/* webpackChunkName: "Invitationindex" */ '
 const InvitationSuccess = () => import(/* webpackChunkName: "InvitationSuccess" */ '../../../views/Invitation/Success.vue')
 const InvitationPreview = () => import(/* webpackChunkName: "InvitationPreview" */ '../../../views/Invitation/Preview.vue')
 const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '../../../views/Invitation/Image.vue')
+const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Groups/List.vue')
+const GroupsApply = () => import(/* webpackChunkName: "GroupsApply" */ '../../../views/Groups/Apply.vue')
+const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Groups/Detail.vue')
+
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
 const DiscoverNewest = () => import(/* webpackChunkName: "DiscoverNewest" */ '../../../views/Discover/Newest.vue')
@@ -202,6 +206,9 @@ export {
   InvitationSuccess,
   InvitationPreview,
   InvitationImage,
+  GroupsList,
+  GroupsDetail,
+  GroupsApply,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

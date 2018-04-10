@@ -27,6 +27,10 @@ import Invitationindex from '../../../views/Invitation/index.vue'
 import InvitationSuccess from '../../../views/Invitation/Success.vue'
 import InvitationPreview from '../../../views/Invitation/Preview.vue'
 import InvitationImage from '../../../views/Invitation/Image.vue'
+import GroupsList from '../../../views/Groups/List.vue'
+import GroupsApply from '../../../views/Groups/Apply.vue'
+import GroupsDetail from '../../../views/Groups/Detail.vue'
+
 import DiscoverCompanyServices from '../../../views/Discover/CompanyServices.vue'
 import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
 import DiscoverNewest from '../../../views/Discover/Newest.vue'
@@ -36,9 +40,6 @@ import DiscoverList from '../../../views/Discover/List.vue'
 import DiscoverSearchFollow from '../../../views/Discover/SearchFollow.vue'
 import DiscoverSearchGroup from '../../../views/Discover/SearchGroup.vue'
 import DiscoverSearchRecommend from '../../../views/Discover/SearchRecommend.vue'
-
-
-
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
 import ActivityUpvotesList from '../../../views/Activity/UpvotesLIist.vue'
 import ActivityGrowthList from '../../../views/Activity/GrowthList.vue'
@@ -203,6 +204,9 @@ export {
   InvitationSuccess,
   InvitationPreview,
   InvitationImage,
+  GroupsList,
+  GroupsApply,
+  GroupsDetail,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,
