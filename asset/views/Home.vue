@@ -18,19 +18,23 @@
         </div>
       </div>
       <!--轮播-->
-      <swiper :options="swiperOption" class="swiper">
-        <swiper-slide></swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
-        <swiper-slide>Slide 10</swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
+      <div id="slider" class="mui-slider mui-fullscreen">
+        <div class="mui-slider-group  mui-slider-loop">
+          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://img4.imgtn.bdimg.com/it/u=4030994974,1460597878&fm=200&gp=0.jpg" /></a></div>
+          <div class="mui-slider-item"><a href="#"><img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" /></a></div>
+          <div class="mui-slider-item"><a href="#"><img src="http://img0.imgtn.bdimg.com/it/u=3349114606,1031631726&fm=27&gp=0.jpg" /></a></div>
+          <div class="mui-slider-item"><a href="#"><img src="http://img0.imgtn.bdimg.com/it/u=3482806277,687126973&fm=27&gp=0.jpg" /></a></div>
+          <div class="mui-slider-item"><a href="#"><img src="http://img4.imgtn.bdimg.com/it/u=4030994974,1460597878&fm=200&gp=0.jpg" /></a></div>
+          <!--支持循环，需要重复图片节点-->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" /></a></div>
+        </div>
+        <div class="home mui-slider-indicator">
+          <div class="mui-indicator mui-active"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+        </div>
+      </div>
       <!--功能列表-->
       <ul class="categoryMenu">
        <li>
@@ -91,27 +95,18 @@
 </template>
 <script>
   import {postRequest, apiRequest} from '../utils/request'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import userAbility from '../utils/userAbility'
   import { autoTextArea, AppInit } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
   const Home = {
     data () {
       return {
-        swiperOption: {
-          pagination: {
-            el: '.swiper-pagination',
-            clickable :true
-          }
-        },
       }
     },
     created () {
       this.getHomeData()
     },
     components: {
-      swiper,
-      swiperSlide
     },
     // 缓存；
     activated: function () {
@@ -134,6 +129,10 @@
       }
     },
     mounted () {
+      // 轮播
+      window.mui('.mui-slider').slider({
+        interval: 5000
+      })
       // 新手任务
       userAbility.newbieTask(this)
       autoTextArea()
@@ -221,9 +220,10 @@
     margin-left: 16px;
     margin-right: 6px;
   }
-  .swiper{
+  #slider{
     height:200px;
     background: #cccccc;
+    position: relative;
   }
   .categoryMenu{
     width:100%;
@@ -350,6 +350,26 @@
     min-height: 0.4rem;
     border-radius: 0.4rem;
     line-height: 0.4rem;
+  }
+  .home.mui-slider-indicator{
+    text-align: right;
+    padding-right: 4%;
+  }
+  .home.mui-slider-indicator .mui-indicator{
+    width: 6px;
+    height: 6px;
+    margin: 0.026rem 5px;
+    background: rgba(216,216,216,1);
+    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(1216,216,216, .7);
+     box-shadow: 0 0 0.026rem 0.026rem rgba(216,216,216, .7);
+  }
+  .home.mui-slider-indicator .mui-active.mui-indicator{
+    width: 12px;
+    height:6px;
+    background:rgba(3,174,249,1);
+    border-radius: 50px;
+    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
+    box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
   }
 </style>
 
