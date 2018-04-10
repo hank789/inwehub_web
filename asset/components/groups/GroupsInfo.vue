@@ -87,9 +87,9 @@
   }
   .bot {
     position: absolute;
-    right:5%;
+    right:0;
     bottom: 0;
-    left:5%;
+    left:0;
     height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
