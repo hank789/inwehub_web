@@ -221,6 +221,7 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin-top: 8px;
   }
   .tag-avatar .avatar{
     width: 85%;

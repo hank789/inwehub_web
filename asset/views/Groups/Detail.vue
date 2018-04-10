@@ -26,7 +26,11 @@
         :list="list"
         class="listWrapper"
       >
-
+        <div v-for="(item, index) in list" class="groups-list">
+          <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+                                 @comment="comment"
+          ></SubmitReadhubAriticle>
+        </div>
       </RefreshList>
 
 
@@ -37,6 +41,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
+  import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
   export default {
     data () {
       return {
@@ -54,7 +59,8 @@
     },
     components: {
       RefreshList,
-      GroupsInfo
+      GroupsInfo,
+      SubmitReadhubAriticle
     },
     props: {},
     watch: {},
@@ -72,8 +78,6 @@
 
 <style scoped="scoped">
   /*清掉自带样式*/
-
-  div,
   p,
   span,
   i,
@@ -137,5 +141,8 @@
     left: 0;
     right: 0;
     margin: auto;
+  }
+  .groups-list{
+
   }
 </style>
