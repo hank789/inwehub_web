@@ -205,7 +205,7 @@
     height:34px;
     margin-left: 4%;
     position: absolute;
-    top:8px;
+    top:2px;
     z-index: 2;
     display: flex;
     flex-direction: row;
