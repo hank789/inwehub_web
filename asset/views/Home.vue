@@ -61,7 +61,7 @@
           </svg>
           <p>服务</p>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/seekingCooperation?name=searchUser')">
+        <li @tap.stop.prevent="$router.pushPlus('/seekingCooperation')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xunhezuo"></use>
           </svg>
