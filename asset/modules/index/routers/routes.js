@@ -383,6 +383,42 @@ const routes = [
     },
     component: componets.InvitationImage
   },
+  { // 圈子；
+    path: '/groups',
+    name: 'groups-list',
+    component: componets.GroupsList,
+    meta: {
+      title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子；
+    path: '/groupsApply',
+    name: 'apply-groups',
+    component: componets.GroupsApply,
+    meta: {
+      title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子；
+    path: '/groups/detail',
+    name: 'groups-detail',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 发现_企业服务列表；
     path: '/discover/company/services',
     name: 'discover_companyServices',
