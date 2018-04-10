@@ -37,7 +37,7 @@
       </div>
       <!--功能列表-->
       <ul class="categoryMenu">
-       <li>
+       <li  @tap.stop.prevent="judge(1)">
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-zhuanyewenda-"></use>
          </svg>
@@ -49,19 +49,19 @@
           </svg>
           <p>圈子</p>
         </li>
-        <li>
+        <li @tap.stop.prevent="$router.pushPlus('/nearbyCompany')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhaoguwenyuanshi"></use>
           </svg>
           <p>附近</p>
         </li>
-        <li>
+        <li @tap.stop.prevent="$router.pushPlus('/discover/company/services')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-fujinqiye1"></use>
           </svg>
           <p>服务</p>
         </li>
-        <li>
+        <li @tap.stop.prevent="$router.pushPlus('/seekingCooperation?name=searchUser')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xunhezuo"></use>
           </svg>
@@ -114,6 +114,32 @@
     computed: {
     },
     methods: {
+      judge (type) {
+        postRequest(`auth/checkUserLevel`, {
+          permission_type: type
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data) {
+            if (response.data.data.is_valid) {
+              switch (type) {
+                case 1:
+                  this.$router.pushPlus('/askCommunity/majors')
+                  break
+                case 2:
+                  this.$router.pushPlus('/askCommunity/majors')
+              }
+            } else {
+              userAbility.jumpJudgeGrade(this)
+            }
+          }
+        })
+      },
       getHomeData () {
         postRequest(`home`, {}, false).then(response => {
           var code = response.data.code
