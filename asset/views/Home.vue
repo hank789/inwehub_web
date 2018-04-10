@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="firstElement"></div>
     <div class="mui-content absolute">
       <!--search-->
       <div class="search">
@@ -172,8 +173,11 @@
 <style lang="less" scoped>
   .mui-content {
     overflow-y: auto;
+    top:0 !important;
   }
-
+  .firstElement{
+    background: transparent;
+  }
   div,
   span,
   p,
