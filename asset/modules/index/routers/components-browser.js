@@ -32,6 +32,7 @@ const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '
 const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Groups/List.vue')
 const GroupsApply = () => import(/* webpackChunkName: "GroupsApply" */ '../../../views/Groups/Apply.vue')
 const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Groups/Detail.vue')
+const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Groups/Add.vue')
 
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
@@ -208,6 +209,7 @@ export {
   InvitationImage,
   GroupsList,
   GroupsDetail,
+  GroupsAdd,
   GroupsApply,
   DiscoverCompanyServices,
   DiscoverHotTopic,

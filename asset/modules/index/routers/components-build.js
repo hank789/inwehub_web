@@ -30,6 +30,8 @@ import InvitationImage from '../../../views/Invitation/Image.vue'
 import GroupsList from '../../../views/Groups/List.vue'
 import GroupsApply from '../../../views/Groups/Apply.vue'
 import GroupsDetail from '../../../views/Groups/Detail.vue'
+import GroupsAdd from '../../../views/Groups/Add.vue'
+
 
 import DiscoverCompanyServices from '../../../views/Discover/CompanyServices.vue'
 import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
@@ -207,6 +209,7 @@ export {
   GroupsList,
   GroupsApply,
   GroupsDetail,
+  GroupsAdd,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

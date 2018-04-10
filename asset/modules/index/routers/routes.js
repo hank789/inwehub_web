@@ -396,6 +396,18 @@ const routes = [
     }
   },
   { // 圈子；
+    path: '/groups/add',
+    name: 'groups-add',
+    component: componets.GroupsAdd,
+    meta: {
+      title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子；
     path: '/groupsApply',
     name: 'apply-groups',
     component: componets.GroupsApply,
