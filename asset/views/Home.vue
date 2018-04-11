@@ -44,7 +44,7 @@
          </svg>
         <p>问答</p>
        </li>
-        <li>
+        <li  @tap.stop.prevent="$router.pushPlus('/groups')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodequanzi-shouye"></use>
           </svg>
