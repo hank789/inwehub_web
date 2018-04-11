@@ -58,7 +58,7 @@
   import TextDetail from '../../components/discover/TextDetail'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../../utils/request'
-  import  groups from '../../components/groups/RecommendGroups.vue'
+  import groups from '../../components/groups/RecommendGroups.vue'
   export default {
     data () {
       return {

@@ -9,17 +9,27 @@
       <div class="new-groups">
           <p>创建新的圈子</p>
       </div>
+      <!--我的圈子-->
+      <groups></groups>
+      <!--推荐的圈子-->
+      <groups></groups>
+      <!--全部圈子-->
+      <div class="group">
 
+      </div>
     </div>
   </div>
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import groups from '../../components/groups/RecommendGroups.vue'
   export default {
     data () {
       return {}
     },
     components: {
+      RefreshList,
+      groups
     },
     props: {},
     watch: {},
@@ -75,6 +85,8 @@
    align-items: center;
    background: url("../../statics/images/my-groups@3x.png");
    background-size: 100% 100%;
+   position: absolute;
+   top:0;
   }
 </style>
 
