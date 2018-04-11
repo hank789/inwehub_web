@@ -34,6 +34,10 @@ const GroupsApply = () => import(/* webpackChunkName: "GroupsApply" */ '../../..
 const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Group/Detail.vue')
 const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Group/Add.vue')
 
+const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
+
+const GroupsMy = () => import(/* webpackChunkName: "GroupsMy" */ '../../../views/Group/My.vue')
+
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
 const DiscoverNewest = () => import(/* webpackChunkName: "DiscoverNewest" */ '../../../views/Discover/Newest.vue')
@@ -41,7 +45,7 @@ const DiscoverPublishArticles = () => import(/* webpackChunkName: "DiscoverPubli
 const DiscoverAddSuccess = () => import(/* webpackChunkName: "DiscoverAddSuccess" */ '../../../views/Discover/AddSuccess.vue')
 const DiscoverList = () => import(/* webpackChunkName: "SearchFollow" */ '../../../views/Discover/List.vue')
 const DiscoverSearchFollow = () => import(/* webpackChunkName: "DiscoverSearchFollow" */ '../../../views/Discover/SearchFollow.vue')
-const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Discover/SearchGroup.vue')
+const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Group/Discover.vue')
 const DiscoverSearchRecommend = () => import(/* webpackChunkName: "DiscoverSearchRecommend" */ '../../../views/Discover/SearchRecommend.vue')
 const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '../../../views/Discover/Detail.vue')
 const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
@@ -211,6 +215,8 @@ export {
   GroupsDetail,
   GroupsAdd,
   GroupsApply,
+  GroupsSetting,
+  GroupsMy,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

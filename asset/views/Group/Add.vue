@@ -42,9 +42,6 @@
     },
     methods: {
       uploadImage: function () {
-        setTimeout(() => {
-          this.$refs.myAddEditor.blur()
-        }, 200)
         this.$refs.uploadImage.uploadImage()
       },
       uploadImageSuccess (images) {
@@ -54,8 +51,7 @@
       },
       delImg (index) {
         this.images.splice(index, 1)
-      },
-
+      }
     }
   }
 </script>

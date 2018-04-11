@@ -12,15 +12,14 @@
         <p>圈子介绍<i class="bot"></i></p>
         <p>供应链的概念是从扩大的生产(Extended Production)概念发展而来，对供应链的定义为“供应链是围绕核心企业，从配套零件开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商直到最终用户所连成的整体功能网链结构”。</p>
       </div>
-
       <div class="join wait">加入圈子/入圈审核中</div>
-
     </div>
   </div>
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
+
   export default {
     data () {
       return {}
