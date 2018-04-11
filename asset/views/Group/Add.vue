@@ -102,7 +102,7 @@
         var data = {
           name: this.name,
           description: this.description,
-          logo: this.images,
+          logo: this.images[0].base64,
           public: this.hide ? 1 : 0
         }
         postRequest(`group/store`, data).then(response => {
@@ -111,7 +111,6 @@
             window.mui.alert(response.data.message)
             return
           }
-          
         })
       },
       toggleHide () {
