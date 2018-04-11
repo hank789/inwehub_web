@@ -3,25 +3,62 @@
     <img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" />
     <div class="group-right">
       <div class="unread"></div>
-      <div class="join">加入</div>
+      <div class="join grey" v-if="description && list.is_joined === 1">已{{description}}</div>
+      <div class="join grey" v-else-if="description && list.is_joined === -1"  @tap.stop.prevent="goJoin(list.id)">{{description}}</div>
       <p>
-        <span class="-group-name">供应链</span>
+        <span class="-group-name">{{search ? getHighlight(list.name) : list.name}}</span>
       </p>
-      <p class="text-line-2 text">供应链的概念是从扩大的生产概念发展而来，现代管理教育对供应链的定义为“供应链是围绕核心企业，通过对商流、信息流、物流... 资金 控制，从采购原材料开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商（零售商，批发商等）直到最终用户所连成的整体功能网链结构”。 中文名 供应链 外文名 Supply Chain</p>
+      <p class="text-line-2 text">{{list.description}}</p>
       <p class="-group-info">
-              <span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-simi"></use>
-                </svg>
-                私密
-              </span>
-        <span><i>23</i>/人气</span>
-        <span><i>23</i>/分享</span>
+        <span v-if="!list.public">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-simi"></use>
+          </svg>
+          私密
+        </span>
+        <span><i>{{list.subscribers}}</i>/人气</span>
+        <span><i>{{list.articles}}</i>/分享</span>
       </p>
     </div>
     <i class="bot"></i>
   </div>
 </template>
+<script>
+  export default {
+    data () {
+      return {}
+    },
+    props: {
+      list: {
+        type: Object,
+        default: {}
+      },
+      description: {
+        type: String,
+        default: ''
+      },
+      search: {
+        type: Boolean,
+        default: false
+      }
+    },
+    created () {},
+    watch: {},
+    methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
+      goJoin (id) {
+        this.$emit('goJoin', id)
+      }
+    },
+    mounted () {},
+    updated () {}
+  }
+</script>
 <style scoped>
   /*清掉自带样式*/
 
@@ -126,6 +163,11 @@
     position: absolute;
     top: 15px;
     right: 0;
+  }
+  .join.grey{
+    border:1px solid #C8C8C8;
+    color: #B4B4B6;
+
   }
   .unread{
     width:8px;

@@ -15,18 +15,18 @@
       </div>
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="">分享<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/searchTag?text=' + searchText)">标签</span>
-        <span @tap.stop.prevent="$router.replace('/searchUser?text=' + searchText)">用户</span>
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
+        <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <i class="bot"></i>
       </div>
       <ul class="pilot">
         <li @tap.stop.prevent="$router.pushPlus('/discover/add')">
-          <span>直接发分享</span>
+          <span>我有相关分享</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
+          <span>发分享</span>
         </li>
         <p></p>
       </ul>
@@ -395,11 +395,11 @@
       position: relative;
       span{
         display: flex;
-        width:25%;
+        width:33%;
         height:100%;
         justify-content: center;
         align-items: center;
-        &:nth-of-type(2){
+        &:nth-of-type(1){
           font-size: 0.373rem;
           position:relative;
           color: #444444;
@@ -430,8 +430,15 @@
         line-height: 1.173rem;
         background: #fff;
         span{
-          font-size:0.4rem;
-          color: #235280;
+          font-size:13px;
+          color: #808080;
+          &:nth-of-type(2){
+            font-size:15px;
+            font-weight: 500;
+            color: #235280;
+            float: right;
+            margin-right: 14px;
+          }
         }
         svg{
           float: right;
