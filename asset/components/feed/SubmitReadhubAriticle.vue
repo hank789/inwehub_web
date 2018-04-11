@@ -27,6 +27,9 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
+      <svg class="icon more" aria-hidden="true" v-if="show">
+        <use xlink:href="#icon-gengduo"></use>
+      </svg>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -94,6 +97,10 @@
       data: {
         type: Object,
         default: {}
+      },
+      show: {
+        type: Boolean,
+        default: false
       }
     },
     created () {
@@ -182,3 +189,9 @@
     }
   }
 </script>
+<style scoped>
+  .more{
+    color: #808080;
+    margin-left: 2px;
+  }
+</style>

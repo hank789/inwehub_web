@@ -18,7 +18,7 @@
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'feed/list'"
+        :api="'group/submissionList'"
         :prevOtherData="prevOtherData"
         :nextOtherData="nextOtherData"
         :pageMode = "true"
@@ -28,11 +28,21 @@
       >
         <div v-for="(item, index) in list" class="groups-list">
           <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+                                 :show = 'true'
                                  @comment="comment"
           ></SubmitReadhubAriticle>
         </div>
       </RefreshList>
 
+    <div class="invitation">
+      <p>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-tijiaowenzhang1"></use>
+        </svg>
+        发分享
+      </p>
+      <p>邀请加入</p>
+    </div>
 
     </div>
   </div>
@@ -158,5 +168,39 @@
   }
   .groups-list{
 
+  }
+  .invitation{
+    width:100%;
+    height:50px;
+    background: #ffffff;
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #DCDCDC;
+  }
+  .invitation p{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color:rgba(128,128,128,1);
+  }
+  .invitation p:nth-of-type(1){
+    width:65%;
+    height: 100%;
+  }
+  .invitation p:nth-of-type(1) svg{
+    font-size: 24px;
+    margin-right: 9px;
+  }
+  .invitation p:nth-of-type(2){
+    width:35%;
+    height: 100%;
+    font-size: 16px;
+    color:rgba(255,255,255,1);
+    background:rgba(3,174,249,1);
   }
 </style>
