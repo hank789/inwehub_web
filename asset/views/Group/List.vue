@@ -104,7 +104,7 @@
   }
  .group-container{
    width:92%;
-   margin-left: 4%r;
+   margin-left: 4%;
    overflow: hidden;
  }
 
