@@ -67,7 +67,7 @@
           </svg>
           <span>我的收藏</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/groups')">
+        <li @tap.stop.prevent="$router.pushPlus('')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-wodequanzi"></use>
           </svg>
