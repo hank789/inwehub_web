@@ -38,7 +38,7 @@
       </div>
 
 
-     <button @tap.stop.prevent="submit()">开始创建</button>
+     <button @tap.stop.prevent="submit()" :class="apply ? 'grey' :''">{{apply ? '正在审核':'开始创建'}}</button>
     </div>
 
     <uploadImage ref="uploadImage"
@@ -59,7 +59,8 @@
         description: '',
         name: '',
         descMaxLength: 1000,
-        hide: 1
+        hide: 1,
+        apply: 0
       }
     },
     computed: {
@@ -84,34 +85,39 @@
     },
     methods: {
       submit () {
-        if (!this.images.length) {
-          window.mui.toast('请选择图片')
-          return
-        }
-        if (!this.name.length) {
-          window.mui.toast('请输入圈子名称')
-          return
-        } else if (this.name.length > 9) {
-          window.mui.toast('圈子名称9个字以内')
-          return
-        }
-        if (!this.description.length) {
-          window.mui.toast('请输入圈子描述')
-          return
-        }
-        var data = {
-          name: this.name,
-          description: this.description,
-          logo: this.images[0].base64,
-          public: this.hide ? 1 : 0
-        }
-        postRequest(`group/store`, data).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
+        if (!this.apply) {
+          if (!this.images.length) {
+            window.mui.toast('请选择图片')
             return
           }
-        })
+          if (!this.name.length) {
+            window.mui.toast('请输入圈子名称')
+            return
+          } else if (this.name.length > 9) {
+            window.mui.toast('圈子名称9个字以内')
+            return
+          }
+          if (!this.description.length) {
+            window.mui.toast('请输入圈子描述')
+            return
+          }
+          var data = {
+            name: this.name,
+            description: this.description,
+            logo: this.images[0].base64,
+            public: this.hide ? 1 : 0
+          }
+          postRequest(`group/store`, data).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+            if (response.data.data.id) {
+              this.apply = 1
+            }
+          })
+        }
       },
       toggleHide () {
         this.hide = !this.hide
@@ -312,5 +318,9 @@
     right:0;
     bottom: 15px;
     margin: auto;
+  }
+  button.grey{
+    background:rgba(220,220,220,1);
+    color: #B4B4B6;
   }
 </style>
