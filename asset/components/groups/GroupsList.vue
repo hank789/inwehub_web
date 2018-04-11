@@ -2,6 +2,7 @@
   <div class="-group">
     <img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" />
     <div class="group-right">
+      <div class="unread"></div>
       <div class="join">加入</div>
       <p>
         <span class="-group-name">供应链</span>
@@ -122,6 +123,15 @@
     color: #03AEF9;
     padding:0px 10px;
     border-radius: 4px;
+    position: absolute;
+    top: 15px;
+    right: 0;
+  }
+  .unread{
+    width:8px;
+    height:8px;
+    background: #FA4975;
+    border-radius: 50%;
     position: absolute;
     top: 15px;
     right: 0;
