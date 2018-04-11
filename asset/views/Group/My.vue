@@ -10,6 +10,7 @@
         <i class="bot"></i>
       </groupsList>
     </div>
+   <div class="more">加入更多圈子</div>
   </div>
   </div>
 </template>
@@ -65,5 +66,12 @@
     width:92%;
     margin-left: 4%;
     overflow: hidden;
+  }
+  .more{
+    width:100%;
+    text-align: center;
+    font-size: 14px;
+    color: #03AEF9;
+    margin-top: 11px;
   }
 </style>
