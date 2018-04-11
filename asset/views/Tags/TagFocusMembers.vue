@@ -9,7 +9,7 @@
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'followed/tagUsers'"
+        :api="url"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :pageMode= true
@@ -34,7 +34,7 @@
           </li>
         </ul>
       </RefreshList>
-      <div class="focusAll"  @tap.stop.prevent="allInvitation()">一键关注</div>
+      <div class="focusAll"  @tap.stop.prevent="allInvitation()" v-if="tagName">一键关注</div>
     </div>
   </div>
 </template>
@@ -48,8 +48,10 @@
   export default {
     data () {
       return {
+        url: 'followed/tagUsers',
         id: currentUser.user_id,
         tagName: '',
+        groupsId: '',
         loading: 1,
         list: [],
         current_page: 1,
@@ -62,11 +64,22 @@
     },
     created () {
       if (this.$route.query.tagname) {
+        if (this.current_page === 1) {
+          this.dataList = {
+            tag_name: this.tagName
+          }
+        }
         this.tagName = this.$route.query.tagname
-      }
-      if (this.current_page === 1) {
+        this.url = 'followed/tagUsers'
         this.dataList = {
           tag_name: this.tagName
+        }
+      } else if (this.$route.query.id) {
+        this.url = 'group/members'
+        this.groupsId = this.$route.query.id
+        this.dataList = {
+          id: this.groupsId,
+          type: 2
         }
       }
     },

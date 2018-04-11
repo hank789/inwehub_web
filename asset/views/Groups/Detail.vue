@@ -68,6 +68,20 @@
       chooseType (type) {
         this.list = []
         this.search_type = type
+      },
+      comment (submissionId, parentId, commentTargetUsername, list, component) {
+        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
+        var commentTarget = {
+          submissionId: submissionId,
+          parentId: parentId || 0,
+          commentList: list
+        }
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+        this.commentTargetComponent = component
+        this.$refs.ctextarea.comment(data)
       }
     },
     mounted () {

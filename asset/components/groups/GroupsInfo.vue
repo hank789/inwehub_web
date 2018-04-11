@@ -32,7 +32,7 @@
           <span><i>12</i>/人气</span>
           <span><i>12</i>/分享</span>
         </p>
-        <div class="tag-avatar">
+        <div class="tag-avatar" @tap.stop.prevent="$router.push('/tag/FocusMembers?id=1')">
           <div class="avatar">
             <img src="../../statics/images/guide_01.png"/>
             <img src="../../statics/images/guide_01.png"/>
