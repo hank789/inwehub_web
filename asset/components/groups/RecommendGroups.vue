@@ -2,8 +2,14 @@
   <div class="container-item swiper" v-if="!loading">
     <div class="title">
       <p>推荐</p>
+      <p>更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend">
+      <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+        <img :src='item.img_url_slide'/>
+        <p>供应链</p>
+        <i></i>
+      </swiper-slide>
       <swiper-slide  style="width: 78px;">
         <div class="service">
           <svg class="icon" aria-hidden="true">
@@ -11,10 +17,6 @@
           </svg>
         </div>
         <p class="addtitle">更多圈子</p>
-      </swiper-slide>
-      <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
-        <img :src='item.img_url_slide'/>
-        <p>供应链</p>
       </swiper-slide>
     </swiper>
   </div>
@@ -102,11 +104,26 @@
     color:rgba(68,68,68,1);
     font-weight: 500;
   }
+  .container-item .title p:nth-of-type(2){
+    float: right;
+    font-size:14px;
+    color:#03AEF9;
+  }
   .home-recommend {
     width: 100%;
     height: 123px;
     padding-left:4%;
     background: #FFFFFF;
+  }
+  .home-recommend i{
+    position: absolute;
+    top:5px;
+    right:5px;
+    display: block;
+    width:8px;
+    height:8px;
+    background: #FA4975;
+    border-radius: 50%;
   }
   .home-recommend:after{
     position: absolute;

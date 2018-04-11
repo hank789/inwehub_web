@@ -8,7 +8,7 @@
             <use xlink:href="#icon-kefu"></use>
           </svg>
           <p>客服</p>
-          <span class="mui-badge">34</span>
+          <i></i>
         </div>
         <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
@@ -221,8 +221,17 @@
     line-height: 14px;
     margin-bottom: 5px;
   }
+  .search-l i{
+    width:8px;
+    height:8px;
+    background: #FA4975;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    right: -10px;
+  }
   .search-r{
-    width: 57%;
+    width: 77%;
     height:100%;
     background:rgba(243,244,246,1);
     opacity:0.9477;
@@ -232,6 +241,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
   }
   .search-r svg{
     font-size: 17px;

@@ -9,7 +9,7 @@
             <use xlink:href="#icon-kefu"></use>
           </svg>
           <p>客服</p>
-          <span class="mui-badge">34</span>
+          <i></i>
         </div>
         <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
@@ -232,8 +232,17 @@
     line-height: 14px;
     margin-bottom: 5px;
   }
+  .search-l i{
+    width:8px;
+    height:8px;
+    background: #FA4975;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    right: -10px;
+  }
   .search-r{
-    width: 57%;
+    width: 77%;
     height:100%;
     background:rgba(255,255,255,1);
     opacity:0.9477;
@@ -250,6 +259,7 @@
     margin-left: 16px;
     margin-right: 6px;
   }
+
   #slider{
     height:200px;
     background: #cccccc;
