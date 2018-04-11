@@ -111,7 +111,7 @@
               this.$router.pushPlus('/unansweredquestions')
               break
             case 2:
-              this.$router.pushPlus('/selectionrecommend')
+              this.$router.pushPlus('/group/recommend')
               break
             case 3:
               this.$router.pushPlus('/growthList')
