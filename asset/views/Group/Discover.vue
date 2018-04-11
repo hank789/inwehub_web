@@ -287,7 +287,7 @@
   .imgContainer{
     width: 100%;
     background: #FFFFFF;
-    padding: 0.32rem 0.426rem 0 0.426rem;
+    padding: 0.32rem 0.4rem 0 0.4rem;
     margin-bottom: 0.266rem;
   }
   .listWrapper{
