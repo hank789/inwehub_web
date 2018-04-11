@@ -6,14 +6,14 @@
     </header>
     <div class="mui-content">
 
-      <div class="container-images" :class="'container-images-' + (images.length + 1)">
-        <div class="container-image" v-for="(image, index) in images">
+        <div class="groupImageWrapper" v-if="images.length">
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
           </svg>
-          <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-        </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
-      </div>
+          <img :id="'image_' + index" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
+        </div>
+
+         <div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
 
     </div>
     <uploadImage ref="uploadImage"
@@ -29,7 +29,7 @@
     data () {
       return {
         images: [],
-        maxImageCount: 9,
+        maxImageCount: 1
       }
     },
     components: {
@@ -59,5 +59,14 @@
   .mui-content{
     background: #fff;
   }
+  .groupImageWrapper img{
+    width:1.626rem;
+    height:1.626rem;
+  }
 
+
+  .component-photograph{
+    width:1.626rem !important;
+    height:1.626rem !important;
+  }
 </style>

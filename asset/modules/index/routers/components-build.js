@@ -127,7 +127,7 @@ import NearbynearbyPeopleMapDetail from '../../../views/Nearby/nearbyPeopleMapDe
 import NearbynearbyCompanyMapDetail from '../../../views/Nearby/nearbyCompanyMapDetail.vue'
 import NearbycompanyDetails from '../../../views/Nearby/companyDetails.vue'
 import UnansweredQuestions from '../../../views/UnansweredQuestions.vue'
-import SelectionRecommend from '../../../views/SelectionRecommend.vue'
+import SelectionRecommend from '../../../views/Group/Recommend.vue'
 import DiscoverAdd4 from '../../../views/Discover/Add4.vue'
 import DiscoverAdd from '../../../views/Discover/Add.vue'
 import AddressNearby from '../../../views/Address/Nearby.vue'

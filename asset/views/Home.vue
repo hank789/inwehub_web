@@ -88,7 +88,7 @@
           </div>
           <i class="bot"></i>
         </li>
-        <div class="more"  @tap.stop.prevent="$router.push('/selectionrecommend')">更多精选推荐</div>
+        <div class="more"  @tap.stop.prevent="$router.push('/group/recommend')">更多精选推荐</div>
       </ul>
       <!---->
     </div>
