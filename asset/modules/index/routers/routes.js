@@ -383,9 +383,9 @@ const routes = [
     },
     component: componets.InvitationImage
   },
-  { // 圈子；
+  {
     path: '/groups',
-    name: 'groups-list',
+    name: 'group-list',
     component: componets.GroupsList,
     meta: {
       title: '圈子',
@@ -395,9 +395,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groups/add',
-    name: 'groups-add',
+  {
+    path: '/group/add',
+    name: 'group-add',
     component: componets.GroupsAdd,
     meta: {
       title: '圈子',
@@ -407,9 +407,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groupsApply',
-    name: 'apply-groups',
+  { // 圈子申请；
+    path: '/group/apply',
+    name: 'group-apply',
     component: componets.GroupsApply,
     meta: {
       title: '圈子',
@@ -419,12 +419,36 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groups/detail',
-    name: 'groups-detail',
+  {
+    path: '/group/detail/:id',
+    name: 'group-detail',
     component: componets.GroupsDetail,
     meta: {
       title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子成员
+    path: '/group/:id/users',
+    name: 'group-users',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈子成员',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈主设置
+    path: '/group/:id/setting',
+    name: 'group-setting',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈主设置',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
