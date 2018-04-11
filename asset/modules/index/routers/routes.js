@@ -384,7 +384,7 @@ const routes = [
     component: componets.InvitationImage
   },
   {
-    path: '/group',
+    path: '/groups',
     name: 'group-list',
     component: componets.GroupsList,
     meta: {
@@ -420,11 +420,35 @@ const routes = [
     }
   },
   {
-    path: '/group/detail',
+    path: '/group/detail/:id',
     name: 'group-detail',
     component: componets.GroupsDetail,
     meta: {
       title: '圈子',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子成员
+    path: '/group/:id/users',
+    name: 'group-users',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈子成员',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈主设置
+    path: '/group/:id/setting',
+    name: 'group-setting',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈主设置',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
