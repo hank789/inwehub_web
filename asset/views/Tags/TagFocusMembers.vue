@@ -25,7 +25,7 @@
               </svg>
             </div>
             <div class="detail">
-              <p>{{item.user_name}}</p>
+              <p>{{item.user_name}}<span v-if="index === 0 && groupsId"><i></i>圈主</span></p>
               <p class="mui-ellipsis">{{item.description}}</p>
             </div>
             <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed && item.user_id != id">已关注</div>
@@ -218,6 +218,39 @@
     font-size:0.373rem;
     color: #444444;
     margin-left: 0.213rem;
+  }
+  .cions-list li .detail p:nth-of-type(1){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .cions-list li .detail p:nth-of-type(1) span{
+    width: 38px;
+    height: 18px;
+    background: rgba(168, 223, 247, 1);
+    border-radius: 6px;
+    font-size: 12px;
+    color: rgba(35,82,128,1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 6px;
+  }
+
+  .cions-list li .detail p:nth-of-type(1) span i{
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ffffff;
+    margin: 0 3px;
   }
   .cions-list li .detail p:nth-of-type(2){
     width:5.333rem;
