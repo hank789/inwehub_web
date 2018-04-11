@@ -1,12 +1,13 @@
 <template>
   <div class="-group">
-    <img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" />
+    <img :src="list.logo" />
     <div class="group-right">
-      <div class="unread"></div>
+      <div class="unread" v-if="list.unread_count"></div>
       <div class="join grey" v-if="description && list.is_joined === 1">已{{description}}</div>
       <div class="join grey" v-else-if="description && list.is_joined === -1"  @tap.stop.prevent="goJoin(list.id)">{{description}}</div>
       <p>
-        <span class="-group-name">{{search ? getHighlight(list.name) : list.name}}</span>
+        <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
+        <span class="-group-name" v-else>{{list.name}}</span>
       </p>
       <p class="text-line-2 text">{{list.description}}</p>
       <p class="-group-info">
@@ -40,6 +41,10 @@
       search: {
         type: Boolean,
         default: false
+      },
+      searchText: {
+        type: String,
+        default: ''
       }
     },
     created () {},

@@ -38,9 +38,10 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         class="listWrapper">
-          <div class="group-container" v-for="(index, item) in list">
+          <div class="group-container" v-for="(item, index) in list">
             <groupsList  class="big"
                          :list="item"
+                         :searchText="searchText"
                          :description="'加入'"
                          :search = 'true'
                          @goJoin="goJoin"

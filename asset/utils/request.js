@@ -5,6 +5,7 @@ import { rebootAuth } from '../utils/wechat'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
+// const api = 'http://10.105.21.148:8088/' + `api`
 
 // Export a method to create the requested address.
 export const createRequestURI = PATH => `${baseURL}/${PATH}`
