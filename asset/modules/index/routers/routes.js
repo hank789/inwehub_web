@@ -383,9 +383,9 @@ const routes = [
     },
     component: componets.InvitationImage
   },
-  { // 圈子；
-    path: '/groups',
-    name: 'groups-list',
+  {
+    path: '/group',
+    name: 'group-list',
     component: componets.GroupsList,
     meta: {
       title: '圈子',
@@ -395,9 +395,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groups/add',
-    name: 'groups-add',
+  {
+    path: '/group/add',
+    name: 'group-add',
     component: componets.GroupsAdd,
     meta: {
       title: '圈子',
@@ -407,9 +407,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groupsApply',
-    name: 'apply-groups',
+  { // 圈子申请；
+    path: '/group/apply',
+    name: 'group-apply',
     component: componets.GroupsApply,
     meta: {
       title: '圈子',
@@ -419,9 +419,9 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子；
-    path: '/groups/detail',
-    name: 'groups-detail',
+  {
+    path: '/group/detail',
+    name: 'group-detail',
     component: componets.GroupsDetail,
     meta: {
       title: '圈子',
