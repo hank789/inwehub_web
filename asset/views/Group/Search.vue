@@ -41,7 +41,7 @@
           <div class="group-container" v-for="(index, item) in list">
             <groupsList  class="big"
                          :list="item"
-                         :description="加入"
+                         :description="'加入'"
                          :search = 'true'
                          @goJoin="goJoin"
             ></groupsList>
