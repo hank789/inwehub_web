@@ -29,10 +29,14 @@ const Invitationindex = () => import(/* webpackChunkName: "Invitationindex" */ '
 const InvitationSuccess = () => import(/* webpackChunkName: "InvitationSuccess" */ '../../../views/Invitation/Success.vue')
 const InvitationPreview = () => import(/* webpackChunkName: "InvitationPreview" */ '../../../views/Invitation/Preview.vue')
 const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '../../../views/Invitation/Image.vue')
-const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Groups/List.vue')
-const GroupsApply = () => import(/* webpackChunkName: "GroupsApply" */ '../../../views/Groups/Apply.vue')
-const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Groups/Detail.vue')
-const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Groups/Add.vue')
+const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Group/List.vue')
+const GroupsApply = () => import(/* webpackChunkName: "GroupsApply" */ '../../../views/Group/Apply.vue')
+const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Group/Detail.vue')
+const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Group/Add.vue')
+
+const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
+
+const GroupsMy = () => import(/* webpackChunkName: "GroupsMy" */ '../../../views/Group/My.vue')
 
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
@@ -41,7 +45,7 @@ const DiscoverPublishArticles = () => import(/* webpackChunkName: "DiscoverPubli
 const DiscoverAddSuccess = () => import(/* webpackChunkName: "DiscoverAddSuccess" */ '../../../views/Discover/AddSuccess.vue')
 const DiscoverList = () => import(/* webpackChunkName: "SearchFollow" */ '../../../views/Discover/List.vue')
 const DiscoverSearchFollow = () => import(/* webpackChunkName: "DiscoverSearchFollow" */ '../../../views/Discover/SearchFollow.vue')
-const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Discover/SearchGroup.vue')
+const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Group/Discover.vue')
 const DiscoverSearchRecommend = () => import(/* webpackChunkName: "DiscoverSearchRecommend" */ '../../../views/Discover/SearchRecommend.vue')
 const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '../../../views/Discover/Detail.vue')
 const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
@@ -211,6 +215,8 @@ export {
   GroupsDetail,
   GroupsAdd,
   GroupsApply,
+  GroupsSetting,
+  GroupsMy,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

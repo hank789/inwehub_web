@@ -446,9 +446,21 @@ const routes = [
   { // 圈主设置
     path: '/group/:id/setting',
     name: 'group-setting',
-    component: componets.GroupsDetail,
+    component: componets.GroupsSetting,
     meta: {
       title: '圈主设置',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的圈子
+    path: '/group/my',
+    name: 'group-my',
+    component: componets.GroupsMy,
+    meta: {
+      title: '我的圈子',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {

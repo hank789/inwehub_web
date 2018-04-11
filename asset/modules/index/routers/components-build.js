@@ -27,12 +27,12 @@ import Invitationindex from '../../../views/Invitation/index.vue'
 import InvitationSuccess from '../../../views/Invitation/Success.vue'
 import InvitationPreview from '../../../views/Invitation/Preview.vue'
 import InvitationImage from '../../../views/Invitation/Image.vue'
-import GroupsList from '../../../views/Groups/List.vue'
-import GroupsApply from '../../../views/Groups/Apply.vue'
-import GroupsDetail from '../../../views/Groups/Detail.vue'
-import GroupsAdd from '../../../views/Groups/Add.vue'
-
-
+import GroupsList from '../../../views/Group/List.vue'
+import GroupsApply from '../../../views/Group/Apply.vue'
+import GroupsDetail from '../../../views/Group/Detail.vue'
+import GroupsAdd from '../../../views/Group/Add.vue'
+import GroupsSetting from '../../../views/Group/Setting.vue'
+import GroupsMy from '../../../views/Group/My.vue'
 import DiscoverCompanyServices from '../../../views/Discover/CompanyServices.vue'
 import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
 import DiscoverNewest from '../../../views/Discover/Newest.vue'
@@ -40,7 +40,7 @@ import DiscoverPublishArticles from '../../../views/Discover/PublishArticles.vue
 import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
 import DiscoverList from '../../../views/Discover/List.vue'
 import DiscoverSearchFollow from '../../../views/Discover/SearchFollow.vue'
-import DiscoverSearchGroup from '../../../views/Discover/SearchGroup.vue'
+import DiscoverSearchGroup from '../../../views/Group/Discover.vue'
 import DiscoverSearchRecommend from '../../../views/Discover/SearchRecommend.vue'
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
 import ActivityUpvotesList from '../../../views/Activity/UpvotesLIist.vue'
@@ -210,6 +210,8 @@ export {
   GroupsApply,
   GroupsDetail,
   GroupsAdd,
+  GroupsSetting,
+  GroupsMy,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,
