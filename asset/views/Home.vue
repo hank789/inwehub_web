@@ -221,6 +221,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    justify-content: center;
   }
   .search-l svg{
     font-size:25px;
