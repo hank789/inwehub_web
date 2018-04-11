@@ -37,6 +37,7 @@ const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../vie
 const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
 
 const GroupsMy = () => import(/* webpackChunkName: "GroupsMy" */ '../../../views/Group/My.vue')
+const GroupsSearch = () => import(/* webpackChunkName: "GroupsSearch" */ '../../../views/Group/Search.vue')
 
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
@@ -217,6 +218,7 @@ export {
   GroupsApply,
   GroupsSetting,
   GroupsMy,
+  GroupsSearch,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

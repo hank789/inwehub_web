@@ -467,6 +467,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 圈子搜索
+    path: '/group/search',
+    name: 'group-search',
+    component: componets.GroupsSearch,
+    meta: {
+      title: '圈子搜索',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 发现_企业服务列表；
     path: '/discover/company/services',
     name: 'discover_companyServices',
