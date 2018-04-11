@@ -88,7 +88,7 @@
           </div>
           <i class="bot"></i>
         </li>
-        <div class="more">更多精选推荐</div>
+        <div class="more"  @tap.stop.prevent="$router.push('/selectionrecommend')">更多精选推荐</div>
       </ul>
       <!---->
     </div>
@@ -379,19 +379,6 @@
   }
 </style>
 <style>
-  .search-l  .mui-badge{
-    position: absolute;
-    top: 3px;
-    right: -108%;
-    display: inline-block;
-    background: #fa4975;
-    color: #fff;
-    padding: 0rem 0.08rem;
-    min-width: 0.4rem;
-    min-height: 0.4rem;
-    border-radius: 0.4rem;
-    line-height: 0.4rem;
-  }
   .home.mui-slider-indicator{
     text-align: right;
     padding-right: 4%;
