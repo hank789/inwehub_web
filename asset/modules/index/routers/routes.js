@@ -408,7 +408,7 @@ const routes = [
     }
   },
   { // 圈子申请；
-    path: '/group/apply',
+    path: '/group/apply/:id',
     name: 'group-apply',
     component: componets.GroupsApply,
     meta: {

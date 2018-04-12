@@ -1,22 +1,22 @@
 <template>
   <div class="container-item swiper" v-if="!loading">
     <div class="title">
-      <p>推荐</p>
-      <p>更多</p>
+      <p>我的</p>
+      <p @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
-    <swiper :options="swiperOption" class="home-recommend">
+    <swiper :options="swiperOption" class="home-recommend" >
       <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
-        <img :src='item.img_url_slide'/>
-        <p>供应链</p>
-        <i></i>
+        <img :src='item.logo'  @tap.stop.prevent="toDetail(item.is_joined, item.id)" />
+        <p class="mui-ellipsis">{{item.name}}</p>
+        <i v-if="item.unread_count"></i>
       </swiper-slide>
       <swiper-slide  style="width: 78px;">
-        <div class="service">
+        <div class="service" @tap.stop.prevent="$router.pushPlus('/groups')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
           </svg>
         </div>
-        <p class="addtitle">更多圈子</p>
+        <p class="addtitle">加入新圈子</p>
       </swiper-slide>
     </swiper>
   </div>
@@ -45,8 +45,15 @@
     props: {},
     watch: {},
     methods: {
+      toDetail (isJoin, id) {
+        if (isJoin) {
+          this.$router.pushPlus('/group/detail/' + id)
+        } else {
+          this.$router.pushPlus('/group/apply/' + id)
+        }
+      },
       companyServices () {
-        postRequest(`company/services`, {
+        postRequest(`group/mine`, {
           page: 1
         }).then(response => {
           var code = response.data.code
