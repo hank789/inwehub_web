@@ -16,7 +16,7 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
-          <div class="group-container">
+          <div class="group-container" @tap.stop.prevent="selectItem(item)">
             <groupsList class="big" :list="item">
               <i class="bot"></i>
             </groupsList>
@@ -30,10 +30,12 @@
 <script>
   import groupsList from '../../components/groups/GroupsList.vue'
   import RefreshList from '../../components/refresh/List.vue'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
       return {
+        from: null,
         list: []
       }
     },
@@ -42,11 +44,23 @@
       groupsList
     },
     props: {},
-    watch: {},
     methods: {
-      getData () {
-
+      selectItem (item) {
+        if (!this.from) {
+          return
+        }
+        localEvent.setLocalItem('selectedGroup', item)
+        window.mui.back()
+      },
+      refreshPageData () {
+        this.from = this.$route.query.from
       }
+    },
+    created () {
+      this.refreshPageData()
+    },
+    watch: {
+      '$route': 'refreshPageData'
     },
     mounted () {
     },

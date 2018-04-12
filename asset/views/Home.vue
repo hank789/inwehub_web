@@ -223,11 +223,15 @@
         })
       }
     },
-    mounted () {
-      // 轮播
-      window.mui('.mui-slider').slider({
-        interval: 5000
+    updated () {
+      this.$nextTick(() => {
+        // 轮播
+        window.mui('.mui-slider').slider({
+          interval: 5000
+        })
       })
+    },
+    mounted () {
       // 新手任务
       userAbility.newbieTask(this)
       autoTextArea()
