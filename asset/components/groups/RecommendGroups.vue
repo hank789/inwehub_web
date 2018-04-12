@@ -160,6 +160,7 @@
     width:100%;
     height:100%;
     border-radius: 0.106rem;
+    object-fit: cover;
   }
 
   .container-item:after {

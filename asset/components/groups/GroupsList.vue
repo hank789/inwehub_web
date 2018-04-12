@@ -1,6 +1,8 @@
 <template>
   <div class="-group">
-    <img :src="list.logo" />
+    <div class="logo">
+      <img :src="list.logo" />
+    </div>
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
       <div class="join grey" v-if="description && list.is_joined === 1">已{{description}}</div>
@@ -107,20 +109,23 @@
     flex-direction: row;
     justify-content: space-between;
   }
-  .big img{
+  .big .logo{
     width:92px;
     height:92px;
-  }
-  .small img{
-    width:44px;
-    height:44px;
-  }
-  .-group img{
-    border-radius: 4px;
     margin-right: 10px;
   }
+  .small .logo{
+    width:44px;
+    height:44px;
+    margin-right: 10px;
+  }
+  .-group .logo img{
+    width:100%;
+    height:100%;
+    border-radius: 4px;
+    object-fit: cover;
+  }
   .group-right{
-    width: 90%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -184,5 +189,26 @@
     position: absolute;
     top: 15px;
     right: 0;
+  }
+
+  /* 适配*/
+  @media (min-width: 320px) {
+    .group-right {
+      width: 65%;
+    }
+  }
+
+  @media (min-width: 375px) {
+
+    .group-right {
+      width: 70%;
+    }
+  }
+
+  @media (min-width: 414px) {
+    .group-right{
+      width: 73%;
+    }
+
   }
 </style>
