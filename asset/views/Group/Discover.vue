@@ -34,7 +34,7 @@
         :nextOtherData="{sort:'hot'}"
         class="listWrapper">
         <!--swiper滑动-->
-        <groups></groups>
+        <groups :isShow = "true"></groups>
         <ul>
           <template v-for="(hot, index) in list">
             <!--带图片的样式-->

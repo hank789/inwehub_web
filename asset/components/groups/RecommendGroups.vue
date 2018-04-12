@@ -2,7 +2,7 @@
   <div class="container-item swiper" v-if="!loading">
     <div class="title">
       <p>我的</p>
-      <p @tap.stop.prevent="$router.pushPlus('/group/my')">更多</p>
+      <p v-if="isShow" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
       <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
@@ -10,13 +10,13 @@
         <p class="mui-ellipsis">{{item.name}}</p>
         <i v-if="item.unread_count"></i>
       </swiper-slide>
-      <swiper-slide  style="width: 78px;">
-        <div class="service" @tap.stop.prevent="$router.pushPlus('/group/add')">
+      <swiper-slide  style="width: 78px;" v-if="isShow">
+        <div class="service" @tap.stop.prevent="$router.pushPlus('/groups')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
           </svg>
         </div>
-        <p class="addtitle" @tap.stop.prevent="$router.pushPlus('/group/add')">加入新圈子</p>
+        <p class="addtitle" @tap.stop.prevent="$router.pushPlus('/groups')">加入新圈子</p>
       </swiper-slide>
     </swiper>
   </div>
@@ -42,7 +42,12 @@
       swiper,
       swiperSlide
     },
-    props: {},
+    props: {
+      isShow: {
+        type: Boolean,
+        default: false
+      }
+    },
     watch: {},
     methods: {
       toDetail (isJoin, id) {
