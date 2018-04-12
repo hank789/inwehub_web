@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">圈子</h1>
     </header>
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content" v-if="!loading">
       <!--圈子详情-->
       <GroupsInfo
         :detail="detail"
@@ -94,11 +94,7 @@
           }
 
           this.detail = response.data.data
-          if (this.detail.is_joined === 3 || this.detail.is_joined === 1) {
-            this.$router.pushPlus('/group/detail/' + this.detail.id)
-          } else {
-            this.loading = 0
-          }
+          this.loading = 0
         })
       },
       chooseType (type) {
