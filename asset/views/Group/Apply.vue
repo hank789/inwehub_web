@@ -59,7 +59,6 @@
           window.mui.back()
           return
         }
-
         postRequest(`group/detail`, {id: this.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {

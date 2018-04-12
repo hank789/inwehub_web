@@ -4,9 +4,11 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">圈子</h1>
     </header>
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <!--圈子详情-->
-      <GroupsInfo></GroupsInfo>
+      <GroupsInfo
+        :detail="detail"
+      ></GroupsInfo>
       <div class="gray"></div>
       <!--导航栏-->
       <div class="menu">
@@ -52,11 +54,14 @@
   import RefreshList from '../../components/refresh/List.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
+  import { postRequest } from '../../utils/request'
   export default {
     data () {
       return {
         list: [],
-        search_type: 1
+        search_type: 1,
+        detail: null,
+        loading: 1
       }
     },
     computed: {
@@ -75,6 +80,27 @@
     props: {},
     watch: {},
     methods: {
+      getData () {
+        this.id = parseInt(this.$route.params.id)
+        if (!this.id) {
+          window.mui.back()
+          return
+        }
+        postRequest(`group/detail`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.detail = response.data.data
+          if (this.detail.is_joined === 3 || this.detail.is_joined === 1) {
+            this.$router.pushPlus('/group/detail/' + this.detail.id)
+          } else {
+            this.loading = 0
+          }
+        })
+      },
       chooseType (type) {
         this.list = []
         this.search_type = type
@@ -95,6 +121,7 @@
       }
     },
     mounted () {
+      this.getData()
     },
     updated () {}
   }
@@ -132,9 +159,6 @@
     height:10px;
     background: #f3f4f6;
   }
-  .listWrapper[data-v-25ee4214] {
-    top: 226px;
-  }
   /*菜单*/
   .menu{
     width:100%;
@@ -147,6 +171,7 @@
     justify-content: space-around;
     align-items: center;
     position: absolute;
+    top: 178px;
   }
   .menu span{
     position:relative;
@@ -202,5 +227,8 @@
     font-size: 16px;
     color:rgba(255,255,255,1);
     background:rgba(3,174,249,1);
+  }
+  .listWrapper{
+    top: 226px;
   }
 </style>
