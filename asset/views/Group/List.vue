@@ -6,7 +6,9 @@
     </header>
 
     <div class="mui-content">
-
+      <div class="new-groups">
+        <p>创建新的圈子</p>
+      </div>
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -16,10 +18,6 @@
         :pageMode = true
         class="listWrapper"
       >
-
-        <div class="new-groups">
-            <p>创建新的圈子</p>
-        </div>
         <!--我的圈子-->
         <groups></groups>
         <!--全部圈子-->
@@ -129,5 +127,8 @@
    margin-left: 4%;
    overflow: hidden;
  }
+  .listWrapper{
+    top:35px;
+  }
 </style>
 
