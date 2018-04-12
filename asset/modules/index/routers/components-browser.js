@@ -132,7 +132,7 @@ const NearbynearbyPeopleMapDetail = () => import(/* webpackChunkName: "Nearbynea
 const NearbynearbyCompanyMapDetail = () => import(/* webpackChunkName: "NearbynearbyCompanyMapDetail" */ '../../../views/Nearby/nearbyCompanyMapDetail.vue')
 const NearbycompanyDetails = () => import(/* webpackChunkName: "NearbycompanyDetails" */ '../../../views/Nearby/companyDetails.vue')
 const UnansweredQuestions = () => import(/* webpackChunkName: "UnansweredQuestions" */ '../../../views/UnansweredQuestions.vue')
-const SelectionRecommend = () => import(/* webpackChunkName: "SelectionRecommend" */ '../../../views/Group/Recommend.vue')
+const SelectionRecommend = () => import(/* webpackChunkName: "SelectionRecommend" */ '../../../views/Recommend.vue')
 const DiscoverAdd4 = () => import(/* webpackChunkName: "DiscoverAdd4" */ '../../../views/Discover/Add4.vue')
 const DiscoverAdd = () => import(/* webpackChunkName: "DiscoverAdd" */ '../../../views/Discover/Add.vue')
 const AddressNearby = () => import(/* webpackChunkName: "AddressNearby" */ '../../../views/Address/Nearby.vue')

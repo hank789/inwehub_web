@@ -1683,8 +1683,8 @@ const routes = [
     component: componets.UnansweredQuestions
   },
   { // 精华推荐
-    path: '/group/recommend',
-    name: 'group-recommend',
+    path: '/recommends',
+    name: 'recommends',
     meta: {
       title: '精华推荐',
       wechatHideHeader: true

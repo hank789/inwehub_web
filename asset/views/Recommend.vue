@@ -6,37 +6,70 @@
     </header>
 
     <div class="mui-content">
-      <ul class="recommend">
-        <li>
-          <img src="http://pic1.win4000.com/wallpaper/e/58a54c0ad8c0f.jpg" />
-          <div class="text-content">
-            <p class="text-line-3">
-              <span>专业问答</span>
-              那些刺痛PP顾问们的物料单位与规格的
-            </p>
-            <p class="information">
-              <span>88浏览<i></i></span>
-              <span>88点赞<i></i></span>
-              <span>好评率96%</span>
-            </p>
-          </div>
-          <i class="bot"></i>
-        </li>
-      </ul>
+
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'recommendRead'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode = true
+        class="listWrapper"
+      >
+          <ul class="recommend">
+            <template v-for="(item, index) in list">
+            <li>
+              <img :src="item.data.img" />
+              <div class="text-content">
+                <p class="text-line-3">
+                  <span>{{ typeDesc(item.read_type) }}</span>
+                  {{ item.data.title }}
+                </p>
+                <p class="information">
+                  <span>88浏览<i></i></span>
+                  <span>88点赞<i></i></span>
+                  <span>好评率96%</span>
+                </p>
+              </div>
+              <i class="bot"></i>
+            </li>
+            </template>
+          </ul>
+      </RefreshList>
     </div>
   </div>
 </template>
 <script>
+  import RefreshList from '../components/refresh/List.vue'
+
   export default {
     data () {
       return {
+        list: []
       }
     },
     components: {
+      RefreshList
     },
     props: {},
     watch: {},
     methods: {
+      typeDesc (type) {
+        switch (type) {
+          case 1:
+            return '发现分享'
+          case 2:
+            return '专业问答'
+          case 3:
+            return '互动问答'
+          case 4:
+            return '活动'
+          case 5:
+            return '项目机遇'
+          case 6:
+            return '互动问答回复'
+        }
+      }
     },
     mounted () {
     },

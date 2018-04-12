@@ -4,38 +4,87 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">圈子</h1>
     </header>
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
     <!--圈子详情-->
-     <GroupsInfo></GroupsInfo>
+     <GroupsInfo
+      :detail="detail"
+     ></GroupsInfo>
       <div class="gray"></div>
       <div class="group-text">
         <p>圈子介绍<i class="bot"></i></p>
-        <p>供应链的概念是从扩大的生产(Extended Production)概念发展而来，对供应链的定义为“供应链是围绕核心企业，从配套零件开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商直到最终用户所连成的整体功能网链结构”。</p>
+        <p>{{ detail.description }}</p>
       </div>
-      <div class="join wait">加入圈子/入圈审核中</div>
+      <div class="join" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+      <div class="join wait" v-if="detail.is_joined === 0">入圈审核中</div>
+      <div class="join wait" v-if="detail.is_joined === 2">审核不通过</div>
     </div>
   </div>
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
-      return {}
+      return {
+        id: null,
+        loading: 1,
+        detail: null
+      }
     },
     components: {
       RefreshList,
       GroupsInfo
     },
-    props: {},
-    watch: {},
     methods: {
+      refreshPageData () {
+        this.loading = 1
+        this.getData()
+      },
+      joinIn () {
+        postRequest(`group/join`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
 
+          this.detail.is_joined = 0
+        })
+      },
+      getData () {
+        this.id = parseInt(this.$route.params.id)
+        if (!this.id) {
+          window.mui.back()
+          return
+        }
+
+        postRequest(`group/detail`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.detail = response.data.data
+          if (this.detail.is_joined === 3 || this.detail.is_joined === 1) {
+            this.$router.pushPlus('/group/detail/' + this.detail.id)
+          } else {
+            this.loading = 0
+          }
+        })
+      }
     },
     mounted () {
     },
-    updated () {}
+    updated () {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
+    created () {
+      this.getData()
+    }
   }
 </script>
 
