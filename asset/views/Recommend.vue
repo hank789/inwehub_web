@@ -54,6 +54,39 @@
     props: {},
     watch: {},
     methods: {
+      goDetial (type, recommend) {
+        switch (type) {
+          case 1:
+            if (recommend.data.type === 'link') {
+//              goThirdPartyArticle(
+//                recommend.data.url,
+//                recommend.source_id,
+//                recommend.data.title,
+//                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
+//                recommend.data.img
+//              )
+            } else {
+              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
+            }
+            break
+          case 2:
+            this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
+            break
+          case 3:
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
+            break
+          case 4:
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
+            break
+          case 5:
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
+            break
+          case 6:
+            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+            break
+          default:
+        }
+      },
       typeDesc (type) {
         switch (type) {
           case 1:
