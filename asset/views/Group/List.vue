@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+
   import RefreshList from '../../components/refresh/List.vue'
   import groups from '../../components/groups/RecommendGroups.vue'
   import groupsList from '../../components/groups/GroupsList.vue'

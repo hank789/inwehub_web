@@ -73,21 +73,32 @@
       <!--精选推荐-->
       <ul class="recommend">
         <p class="title">精选推荐</p>
-        <li>
-          <img src="http://pic1.win4000.com/wallpaper/e/58a54c0ad8c0f.jpg" />
-          <div class="text-content">
-            <p class="text-line-3">
-              <span>专业问答</span>
-              那些刺痛PP顾问们的物料单位与规格的问题们的物料单位与规格的问题
-            </p>
-            <p class="information">
-              <span>88浏览<i></i></span>
-              <span>88点赞<i></i></span>
-              <span>好评率96%</span>
-            </p>
-          </div>
-          <i class="bot"></i>
-        </li>
+        <template v-for="(item, index) in list">
+          <li  @tap.stop.prevent="goDetial(item.read_type,item)">
+            <img :src="item.data.img" />
+            <div class="text-content">
+              <p class="text-line-3">
+                <span v-if="item.read_type === 1">发现分享</span>
+                <span v-else-if="item.read_type === 2">专业问答</span>
+                <span v-else-if="item.read_type === 3">互动提问</span>
+                <span v-else-if="item.read_type === 6">互动回答</span>
+                {{item.data.title}}
+              </p>
+              <p class="information">
+                <span>{{item.data.view_number}}浏览<i></i></span>
+                <span v-if="item.read_type === 1 || item.read_type === 2 || item.read_type === 6">{{item.data.support_number
+                  }}点赞<i></i></span>
+                <span v-else-if="item.read_type === 3">88{{item.data.answer_number}}回答<i></i></span>
+
+                <span v-if="item.read_type === 1 || item.read_type === 6">{{item.data.comment_number}}评论</span>
+                <span v-else-if="item.read_type === 2">好评率{{item.data.average_rate
+                  }}</span>
+                <span v-else-if="item.read_type === 3">{{item.data.follower_number}}关注</span>
+              </p>
+            </div>
+            <i class="bot"></i>
+          </li>
+        </template>
         <div class="more"  @tap.stop.prevent="$router.push('/group/recommend')">更多精选推荐</div>
       </ul>
       <!---->
@@ -95,13 +106,15 @@
   </div>
 </template>
 <script>
-  import {postRequest, apiRequest} from '../utils/request'
+  import { goThirdPartyArticle } from '../utils/webview'
+  import { postRequest } from '../utils/request'
   import userAbility from '../utils/userAbility'
   import { autoTextArea, AppInit } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
   const Home = {
     data () {
       return {
+        list: []
       }
     },
     created () {
@@ -115,6 +128,40 @@
     computed: {
     },
     methods: {
+      goDetial (type, recommend) {
+        switch (type) {
+          case 1:
+            if (recommend.data.type === 'link') {
+              goThirdPartyArticle(
+                recommend.data.url,
+                recommend.source_id,
+                recommend.data.title,
+                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
+                recommend.data.img
+              )
+            } else {
+              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
+            }
+            break
+          case 2:
+            this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
+            break
+          case 3:
+            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
+            break
+          case 4:
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
+            break
+          case 5:
+            this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
+            break
+          case 6:
+            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+            break
+          default:
+
+        }
+      },
       judge (type) {
         postRequest(`auth/checkUserLevel`, {
           permission_type: type
@@ -141,6 +188,16 @@
           }
         })
       },
+      getData () {
+        postRequest(`recommendRead`, {}, false).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.list = response.data.data.data.slice(0, 5)
+        })
+      },
       getHomeData () {
         postRequest(`home`, {}, false).then(response => {
           var code = response.data.code
@@ -165,7 +222,8 @@
       autoTextArea()
       saveLocationInfo()
       AppInit(this)
-    },
+      this.getData()
+    }
   }
   export default Home
 </script>
@@ -294,6 +352,7 @@
   /*精选推荐*/
   .recommend{
     width:100%;
+    height: 680px;
     overflow: hidden;
     background: #ffffff;
     display: flex;
@@ -325,6 +384,7 @@
     object-fit: cover;
   }
   .recommend li .text-content{
+    width:70%;
     height:81px;
     margin-left: 15px;
     display: flex;
