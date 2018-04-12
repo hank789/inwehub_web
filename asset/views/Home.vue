@@ -322,6 +322,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
   }
   .search-r svg{
     font-size: 17px;
