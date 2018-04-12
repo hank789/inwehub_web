@@ -75,7 +75,10 @@
         <p class="title">精选推荐</p>
         <template v-for="(item, index) in list">
           <li  @tap.stop.prevent="goDetial(item.read_type,item)">
-            <img :src="item.data.img" />
+            <div class="logo">
+              <img :src="item.data.img" />
+            </div>
+
             <div class="text-content">
               <p class="text-line-3">
                 <span v-if="item.read_type === 1">发现分享</span>
@@ -99,7 +102,7 @@
             <i class="bot"></i>
           </li>
         </template>
-        <div class="more"  @tap.stop.prevent="$router.push('/group/recommend')">更多精选推荐</div>
+        <div class="more"  @tap.stop.prevent="$router.push('/recommends')">更多精选推荐</div>
       </ul>
       <!---->
     </div>
@@ -377,9 +380,13 @@
     align-items: center;
     position: relative;
   }
-  .recommend li img{
+  .recommend li .logo{
     width:121px;
     height:81px;
+  }
+  .recommend li img{
+    width:100%;
+    height:100%;
     border-radius:4px;
     object-fit: cover;
   }

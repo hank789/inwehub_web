@@ -19,7 +19,9 @@
           <ul class="recommend">
             <template v-for="(item, index) in list">
             <li @tap.stop.prevent="goDetial(item.read_type, item)">
-              <img :src="item.data.img" />
+              <div class="logo">
+                <img :src="item.data.img" />
+              </div>
               <div class="text-content">
                 <p class="text-line-3">
                   <span>{{ typeDesc(item.read_type) }}</span>
@@ -157,13 +159,18 @@
     align-items: center;
     position: relative;
   }
-  .recommend li img{
+  .recommend li .logo{
     width:121px;
     height:81px;
+  }
+  .recommend li img{
+    width:100%;
+    height:100%;
     border-radius:4px;
     object-fit: cover;
   }
   .recommend li .text-content{
+    width:70%;
     height:81px;
     margin-left: 15px;
     display: flex;

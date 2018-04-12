@@ -97,6 +97,7 @@
     object-fit: cover;
   }
   .recommend li .text-content{
+    width: 70%;
     height:81px;
     margin-left: 15px;
     display: flex;
