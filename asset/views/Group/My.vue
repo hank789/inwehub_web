@@ -23,6 +23,11 @@
           </div>
         </template>
         <div class="more" @tap.stop.prevent="$router.push('/groups')">加入更多圈子</div>
+
+      <div slot="emptyBottom">
+        <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/groups')">加入圈子</div>
+      </div>
+
       </RefreshList>
   </div>
   </div>
@@ -107,5 +112,17 @@
     font-size: 14px;
     color: #03AEF9;
     margin-top: 11px;
+  }
+  .question_ask{
+    width:115px;
+    height:41px;
+    background: #03AEF9;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 41px;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: auto;
+    margin-top: 17px;
   }
 </style>
