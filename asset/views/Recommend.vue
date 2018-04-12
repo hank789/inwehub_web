@@ -18,7 +18,7 @@
       >
           <ul class="recommend">
             <template v-for="(item, index) in list">
-            <li>
+            <li @tap.stop.prevent="goDetial(item.read_type, item)">
               <img :src="item.data.img" />
               <div class="text-content">
                 <p class="text-line-3">
@@ -26,9 +26,9 @@
                   {{ item.data.title }}
                 </p>
                 <p class="information">
-                  <span>88浏览<i></i></span>
-                  <span>88点赞<i></i></span>
-                  <span>好评率96%</span>
+                  <span>{{item.data.view_number}}浏览<i></i></span>
+                  <span>{{item.data.support_number}}点赞<i></i></span>
+                  <span>{{item.data.comment_number}}评论</span>
                 </p>
               </div>
               <i class="bot"></i>
@@ -41,6 +41,7 @@
 </template>
 <script>
   import RefreshList from '../components/refresh/List.vue'
+  import { goThirdPartyArticle } from '../utils/webview'
 
   export default {
     data () {
@@ -58,13 +59,13 @@
         switch (type) {
           case 1:
             if (recommend.data.type === 'link') {
-//              goThirdPartyArticle(
-//                recommend.data.url,
-//                recommend.source_id,
-//                recommend.data.title,
-//                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
-//                recommend.data.img
-//              )
+              goThirdPartyArticle(
+                recommend.data.url,
+                recommend.source_id,
+                recommend.data.title,
+                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
+                recommend.data.img
+              )
             } else {
               this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
             }
