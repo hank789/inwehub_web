@@ -7,17 +7,17 @@
     <div class="mui-content">
     <div class="imagesContainer">
         <div class="groupImageWrapper" v-if="images.length">
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg()">
             <use xlink:href="#icon-times1"></use>
           </svg>
-          <img :id="'image_' + index" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
+          <img :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
         </div>
         <div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
         <div class="address">
           <p>圈子名称</p>
-          <input type="text" placeholder="圈子名称9个字以内" v-model.trim="name"/>
+          <input type="text" placeholder="圈子名称9个字以内" v-model.trim="name" maxlength="9"/>
           <i class="bot"></i>
         </div>
        <div class="groups-content">
@@ -31,14 +31,14 @@
        </div>
 
       <div class="fixedContainer">
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
-                                                                     :class="{'active':hide}"></label>公开</span>
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
-                                                                     :class="{'active':!hide}"></label>秘密<i>（内容仅入圈成员可看）</i></span>
+          <span class="niming" @tap.stop.prevent="selectType(1)"><label class="nimingCheckbox"
+                                                                     :class="{'active':type}"></label>公开</span>
+          <span class="niming" @tap.stop.prevent="selectType(0)"><label class="nimingCheckbox"
+                                                                     :class="{'active':!type}"></label>秘密<i>（内容仅入圈成员可看）</i></span>
       </div>
 
 
-     <button @tap.stop.prevent="submit()" :class="apply ? 'grey' :''">{{apply ? '正在审核':'开始创建'}}</button>
+     <button @tap.stop.prevent="submit()">开始创建</button>
     </div>
 
     <uploadImage ref="uploadImage"
@@ -59,12 +59,11 @@
         description: '',
         name: '',
         descMaxLength: 1000,
-        hide: 1,
-        apply: 0
+        type: 1  // 1 public  0 私密
       }
     },
     computed: {
-      descLength() {
+      descLength () {
         return this.description.length
       }
     },
@@ -74,7 +73,6 @@
     created () {
     },
     mounted () {
-
     },
     watch: {
       description: function (newDescription) {
@@ -85,42 +83,45 @@
     },
     methods: {
       submit () {
-        if (!this.apply) {
-          if (!this.images.length) {
-            window.mui.toast('请选择图片')
-            return
-          }
-          if (!this.name.length) {
-            window.mui.toast('请输入圈子名称')
-            return
-          } else if (this.name.length > 9) {
-            window.mui.toast('圈子名称9个字以内')
-            return
-          }
-          if (!this.description.length) {
-            window.mui.toast('请输入圈子描述')
-            return
-          }
-          var data = {
-            name: this.name,
-            description: this.description,
-            logo: this.images[0].base64,
-            public: this.hide ? 1 : 0
-          }
-          postRequest(`group/store`, data).then(response => {
-            var code = response.data.code
-            if (code !== 1000) {
-              window.mui.alert(response.data.message)
-              return
-            }
-            if (response.data.data.id) {
-              this.apply = 1
-            }
-          })
+        if (!this.images.length) {
+          window.mui.toast('请选择图片')
+          return
         }
+
+        if (!this.name.length) {
+          window.mui.toast('请输入圈子名称')
+          return
+        }
+
+        if (this.name.length > 9) {
+          window.mui.toast('圈子名称9个字以内')
+          return
+        }
+
+        if (!this.description.length) {
+          window.mui.toast('请输入圈子描述')
+          return
+        }
+
+        var data = {
+          name: this.name,
+          description: this.description,
+          logo: this.images[0].base64,
+          public: this.type === 1 ? 1 : 0
+        }
+
+        postRequest(`group/store`, data).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.$router.replace('/group/my')
+        })
       },
-      toggleHide () {
-        this.hide = !this.hide
+      selectType (type) {
+        this.type = type
       },
       uploadImage: function () {
         this.$refs.uploadImage.uploadImage()
@@ -130,8 +131,8 @@
           this.images.push(images[i])
         }
       },
-      delImg (index) {
-        this.images.splice(index, 1)
+      delImg () {
+        this.images = []
       }
     }
   }
