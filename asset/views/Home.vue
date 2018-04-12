@@ -19,15 +19,20 @@
         </div>
       </div>
       <!--轮播-->
-      <div id="slider" class="mui-slider mui-fullscreen">
+      <div id="slider" class="mui-slider mui-fullscreen" v-if="notices.length">
         <div class="mui-slider-group  mui-slider-loop">
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://img4.imgtn.bdimg.com/it/u=4030994974,1460597878&fm=200&gp=0.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="http://img0.imgtn.bdimg.com/it/u=3349114606,1031631726&fm=27&gp=0.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="http://img0.imgtn.bdimg.com/it/u=3482806277,687126973&fm=27&gp=0.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="http://img4.imgtn.bdimg.com/it/u=4030994974,1460597878&fm=200&gp=0.jpg" /></a></div>
+          <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
+            <a href="#"><img :src="notices[notices.length-1].img_url"></a>
+          </div>
+          <div class="mui-slider-item" v-for="(notice, index) in notices">
+            <a href="#"><img :src="notice.img_url"></a>
+          </div>
           <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="http://img5.imgtn.bdimg.com/it/u=2348549693,626845470&fm=27&gp=0.jpg" /></a></div>
+          <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+          <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
+            <a href="#"><img :src="notices[0].img_url" /></a>
+          </div>
         </div>
         <div class="home mui-slider-indicator">
           <div class="mui-indicator mui-active"></div>
@@ -117,7 +122,8 @@
   const Home = {
     data () {
       return {
-        list: []
+        list: [],
+        notices: []
       }
     },
     created () {
@@ -208,6 +214,7 @@
             window.mui.toast(response.data.message)
             return
           }
+          this.notices = response.data.data.notices
           // 是否弹受邀红包
           if (response.data.data.invitation_coupon.show) {
             userAbility.InvitationCoupon(this)
