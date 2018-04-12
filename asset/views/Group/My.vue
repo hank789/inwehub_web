@@ -5,28 +5,48 @@
       <h1 class="mui-title">我的圈子</h1>
     </header>
     <div class="mui-content">
-    <div class="group-container" >
-      <groupsList class="big">
-        <i class="bot"></i>
-      </groupsList>
-    </div>
-   <div class="more">加入更多圈子</div>
+
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'group/mine'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode = true
+        class="listWrapper"
+      >
+        <template v-for="(item, index) in list">
+          <div class="group-container">
+            <groupsList class="big" :list="item">
+              <i class="bot"></i>
+            </groupsList>
+          </div>
+        </template>
+        <div class="more" @tap.stop.prevent="$router.push('/groups')">加入更多圈子</div>
+      </RefreshList>
   </div>
   </div>
 </template>
 <script>
   import groupsList from '../../components/groups/GroupsList.vue'
+  import RefreshList from '../../components/refresh/List.vue'
+
   export default {
     data () {
-      return {}
+      return {
+        list: []
+      }
     },
     components: {
+      RefreshList,
       groupsList
     },
     props: {},
     watch: {},
     methods: {
+      getData () {
 
+      }
     },
     mounted () {
     },
