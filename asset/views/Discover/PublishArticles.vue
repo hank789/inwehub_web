@@ -6,6 +6,15 @@
     </header>
 
     <div class="mui-content">
+      <div class="category">
+        <p>文章</p>
+        <p @tap.stop.prevent="$router.replace('/discover/add')">分享</p>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
+          <span v-if="this.selectedGroup">{{this.selectedGroup.name}}</span>
+          <span v-else>选择圈子</span>
+        </button>
+      </div>
+
       <div class="ShareArticles">
         <p>
           <span>分享你发现的好文</span>
@@ -60,6 +69,7 @@
   import { postRequest } from '../../utils/request'
   import { autoTextArea } from '../../utils/plus'
   import popPickerComponent from '../../components/picker/poppicker.vue'
+  import localEvent from '../../stores/localStorage'
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
@@ -72,7 +82,8 @@
         isShow: false,
         channelValue: '',
         disableRegister: true,
-        isblue: false
+        isblue: false,
+        selectedGroup: null
       }
     },
     components: {
@@ -96,13 +107,25 @@
       }
     },
     methods: {
+      readGroup () {
+        this.selectedGroup = localEvent.getLocalItem('selectedGroup')
+      },
+      selectGroup () {
+        this.$router.pushPlus('/group/my?from=discover_add')
+      },
       refreshPageData () {
+        this.readGroup()
         this.quickUrl()
       },
       click () {
         this.channel = ''
       },
       goPublish () {
+        if (!this.selectedGroup) {
+          window.mui.toast('请选择圈子')
+          return
+        }
+
         postRequest(`article/store`, {
           type: 'link',
           title: this.title,
@@ -111,7 +134,8 @@
           photos: '',
           current_address_name: '',
           current_address_longitude: '',
-          current_address_latitude: ''
+          current_address_latitude: '',
+          group_id: this.selectedGroup.id
         }).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
@@ -164,6 +188,12 @@
 //    (https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]
       // 判断否有值（改变button按钮的状态来改变颜色）；
       checkValid () {
+        if (!this.selectedGroup) {
+          this.disableRegister = true
+          this.isblue = false
+          return false
+        }
+
         // 地址；
         if (!this.url) {
           this.disableRegister = true
@@ -226,11 +256,61 @@
       autoTextArea()
     },
     created () {
+      this.readGroup()
       this.quickUrl()
       this.getChannels()
     }
   }
 </script>
+
+<style lang="less" rel="stylesheet/less" scoped>
+  .category {
+    background: #fff;
+    /*padding: 0.4rem 0.453rem;*/
+    height:1.173rem;
+    position: relative;
+    padding-left: 4%;
+
+    p{
+      display: inline-block;
+      line-height: 1.2rem;
+      font-size:0.426rem;
+      color: #444444;
+      text-align: left;
+
+      &:nth-of-type(1){
+        display: inline-block;
+        margin-right: 0.8rem;
+        color: #444444;
+        font-weight: 500;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          width:1.706rem;
+          bottom: 0;
+          left: 0;
+          height: 0.053rem;
+          z-index: 999;
+          content: '';
+          background-color: #009FE8;
+        }
+      }
+    }
+
+    button {
+      position: absolute;
+      border: 0.026rem solid #03aef9;
+      background-color: #03aef9;
+      width: auto;
+      font-size: 0.373rem;
+      padding: 0rem 0.453rem;
+      height: 0.906rem;
+      right: 0.266rem;
+      top: 0.09rem;
+    }
+  }
+</style>
 
 <style scoped="scoped">
   .mui-content {

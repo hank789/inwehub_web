@@ -6,6 +6,16 @@
     </header>
 
     <div class="mui-content">
+
+      <div class="category">
+        <p @tap.stop.prevent="$router.replace('/discover/publishArticles')">文章</p>
+        <p>分享<i></i></p>
+        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
+          <span v-if="this.selectedGroup">{{this.selectedGroup.name}}</span>
+          <span v-else>选择圈子</span>
+        </button>
+      </div>
+
       <div class="component-textareaWithImage">
         <Jeditor
           ref="myAddEditor"
@@ -110,7 +120,8 @@
         editorObj: null,
         text: '',
         html: '',
-        descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…'
+        descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…',
+        selectedGroup: null
       }
     },
     computed: {},
@@ -124,6 +135,7 @@
           this.position = position
         }
       })
+      this.readGroup()
     },
     activated: function () {
       this.initData()
@@ -145,6 +157,12 @@
       window.mui.previewImage()
     },
     methods: {
+      readGroup () {
+        this.selectedGroup = localEvent.getLocalItem('selectedGroup')
+      },
+      selectGroup () {
+        this.$router.pushPlus('/group/my?from=discover_add')
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
@@ -345,6 +363,7 @@
         this.syncDelete()
 
         this.getAddress()
+        this.readGroup()
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -405,6 +424,11 @@
         localEvent.clearLocalItem('discover_Address' + this.id)
       },
       submit () {
+        if (!this.selectedGroup) {
+          window.mui.toast('请选择圈子')
+          return
+        }
+
         var html = this.html.replace(/(<p><br><\/p>)*$/, '')
         var text = this.text.replace(/\s/g, '').trim()
         if (!text) {
@@ -424,7 +448,8 @@
           mentions: this.noticeUsers,
           current_address_name: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.selectedAddress : '',
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.longt : '',
-          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.lat : ''
+          current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.lat : '',
+          group_id: this.selectedGroup.id
         }
 
         for (var i in this.images) {
@@ -457,6 +482,54 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .category {
+    background: #fff;
+    /*padding: 0.4rem 0.453rem;*/
+    height:1.173rem;
+    position: relative;
+    padding-left: 4%;
+
+    p{
+      display: inline-block;
+      line-height: 1.2rem;
+      font-size:0.426rem;
+      color: #444444;
+      text-align: left;
+
+      &:nth-of-type(2){
+        display: inline-block;
+        margin-left: 0.8rem;
+        color: #444444;
+        font-weight: 500;
+        position: relative;
+
+
+        &:after {
+          position: absolute;
+          width:1.706rem;
+          bottom: 0;
+          left: 0;
+          height: 0.053rem;
+          z-index: 999;
+          content: '';
+          background-color: #009FE8;
+        }
+      }
+    }
+
+    button {
+      position: absolute;
+      border: 0.026rem solid #03aef9;
+      background-color: #03aef9;
+      width: auto;
+      font-size: 0.373rem;
+      padding: 0rem 0.453rem;
+      height: 0.906rem;
+      right: 0.266rem;
+      top: 0.09rem;
+    }
+  }
+
   .mui-content{
     background: #fff;
   }
