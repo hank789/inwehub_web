@@ -13,11 +13,26 @@
       <groups></groups>
       <!--全部圈子-->
       <div class="group-title">全部</div>
-      <div class="group-container" >
-        <groupsList class="big">
-          <i class="bot"></i>
-        </groupsList>
-      </div>
+
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'group/recommend'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :pageMode = true
+        class="listWrapper"
+      >
+        <template v-for="(item, index) in list">
+
+          <div class="group-container">
+            <groupsList class="big" :list="item">
+              <i class="bot"></i>
+            </groupsList>
+          </div>
+
+        </template>
+      </RefreshList>
 
     </div>
   </div>
@@ -26,9 +41,12 @@
   import RefreshList from '../../components/refresh/List.vue'
   import groups from '../../components/groups/RecommendGroups.vue'
   import groupsList from '../../components/groups/GroupsList.vue'
+
   export default {
     data () {
-      return {}
+      return {
+        list: []
+      }
     },
     components: {
       RefreshList,
