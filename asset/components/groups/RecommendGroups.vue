@@ -1,5 +1,5 @@
 <template>
-  <div class="container-item swiper" v-if="!loading">
+  <div class="container-item swiper" v-if="!loading && apper">
     <div class="title">
       <p>我的</p>
       <p v-if="isShow" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
@@ -28,8 +28,9 @@
   export default {
     data () {
       return {
-        List: [],
+        servicesList: [],
         loading: 1,
+        apper: 0,
         swiperOption: {
           pagination: '.swiper-pagination',
           slidesPerView: 'auto',
@@ -44,6 +45,10 @@
     },
     props: {
       isShow: {
+        type: Boolean,
+        default: false
+      },
+      isApper: {
         type: Boolean,
         default: false
       }
@@ -73,6 +78,11 @@
             setTimeout(() => {
               this.loading = 0
             }, 300)
+          }
+          if (this.isApper && !this.servicesList.length) {
+            this.apper = 0
+          } else {
+            this.apper = 1
           }
         })
       }
