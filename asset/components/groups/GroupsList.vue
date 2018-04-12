@@ -32,7 +32,9 @@
     props: {
       list: {
         type: Object,
-        default: {}
+        default: () => {
+          return {}
+        }
       },
       description: {
         type: String,
