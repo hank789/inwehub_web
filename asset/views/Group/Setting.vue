@@ -5,33 +5,81 @@
          <h1 class="mui-title">圈住设置</h1>
        </header>
        <div class="mui-content absolute">
-         <div class="apply">
-           入圈申请
-           <i class="bot"></i>
-         </div>
-         <ul class="cions-list">
-           <li>
-             <div class="cions-avatar">
-               <img src="../../statics/images/guide_01.png"/>
-               <svg class="icon" aria-hidden="true">
-                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-               </svg>
-             </div>
-             <div class="detail">
-               <p>丁冉</p>
-               <p>1小时</p>
-             </div>
-             <div class="fouce " >通过</div>
-             <div class="fouce space">拒绝</div>
-             <!--<div class="fouce grey" >已通过</div>-->
+         <RefreshList
+           ref="RefreshList"
+           v-model="list"
+           :api="'group/members'"
+           :prevOtherData="{id: id, type: 3}"
+           :nextOtherData="{id: id, type: 3}"
+           :pageMode = true
+           class="listWrapper"
+         >
+           <div class="apply">
+             入圈申请
              <i class="bot"></i>
-           </li>
-         </ul>
+           </div>
+           <ul class="cions-list">
+             <template v-for="(item, index) in list">
+               <li>
+                 <div class="cions-avatar">
+                   <img :src="item.avatar_url"/>
+                   <svg class="icon" aria-hidden="true">
+                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                   </svg>
+                 </div>
+                 <div class="detail">
+                   <p>{{item.name}}</p>
+                   <p></p>
+                 </div>
+                 <div class="fouce" v-if="item.audit_status === 0">通过</div>
+                 <div class="fouce space" v-if="item.audit_status === 0">拒绝</div>
+                 <div class="fouce grey" v-if="item.audit_status === 1">已通过</div>
+                 <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
+                 <i class="bot"></i>
+               </li>
+             </template>
+           </ul>
+         </RefreshList>
        </div>
    </div>
 </template>
 
 <script>
+  import RefreshList from '../../components/refresh/List.vue'
+
+  export default {
+    data () {
+      return {
+        id: null,
+        list: []
+      }
+    },
+    components: {
+      RefreshList
+    },
+    props: {},
+    methods: {
+      refreshPageData () {
+        this.getData()
+      },
+      getData () {
+        this.id = parseInt(this.$route.params.id)
+        if (!this.id) {
+          window.mui.back()
+          return
+        }
+      }
+    },
+    mounted () {
+    },
+    updated () {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
+    created () {
+      this.getData()
+    }
+  }
 
 </script>
 <style scoped>
