@@ -2,15 +2,15 @@
    <div>
        <header class="mui-bar mui-bar-nav">
          <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-         <h1 class="mui-title">圈住设置</h1>
+         <h1 class="mui-title">圈主设置</h1>
        </header>
        <div class="mui-content absolute">
          <RefreshList
            ref="RefreshList"
            v-model="list"
            :api="'group/members'"
-           :prevOtherData="{id: id, type: 3}"
-           :nextOtherData="{id: id, type: 3}"
+           :prevOtherData="{id: id}"
+           :nextOtherData="{id: id}"
            :pageMode = true
            class="listWrapper"
          >
@@ -21,18 +21,18 @@
            <ul class="cions-list">
              <template v-for="(item, index) in list">
                <li>
-                 <div class="cions-avatar">
-                   <img :src="item.avatar_url"/>
-                   <svg class="icon" aria-hidden="true">
+                 <div class="cions-avatar" @tap.stop.prevent="toResume(item)">
+                   <img :src="item.user_avatar_url"/>
+                   <svg class="icon" aria-hidden="true" v-if="item.is_expert">
                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                    </svg>
                  </div>
                  <div class="detail">
-                   <p>{{item.name}}</p>
-                   <p></p>
+                   <p>{{item.user_name}}</p>
+                   <p>{{item.created_at}}</p>
                  </div>
-                 <div class="fouce" v-if="item.audit_status === 0">通过</div>
-                 <div class="fouce space" v-if="item.audit_status === 0">拒绝</div>
+                 <div class="fouce" v-if="item.audit_status === 0" @tap.stop.prevent="pass(item)">通过</div>
+                 <div class="fouce space" v-if="item.audit_status === 0" @tap.stop.prevent="noPass(item)">拒绝</div>
                  <div class="fouce grey" v-if="item.audit_status === 1">已通过</div>
                  <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
                  <i class="bot"></i>
@@ -46,6 +46,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
@@ -59,6 +60,41 @@
     },
     props: {},
     methods: {
+      toResume (item) {
+        this.$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      pass (item) {
+        postRequest('auth/group/joinAgree', {
+          id: this.id,
+          user_id: item.user_id
+        })
+          .then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+
+            item.audit_status = 1
+          })
+      },
+      noPass (item) {
+        postRequest('auth/group/joinReject', {
+          id: this.id,
+          user_id: item.user_id
+        })
+          .then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+
+            item.audit_status = 2
+          })
+      },
       refreshPageData () {
         this.getData()
       },
