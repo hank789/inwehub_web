@@ -28,7 +28,7 @@
 
         <template v-for="(item, index) in list">
 
-          <div class="group-container">
+          <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
             <groupsList class="big" :list="item">
               <i class="bot"></i>
             </groupsList>
