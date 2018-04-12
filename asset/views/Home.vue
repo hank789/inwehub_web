@@ -35,10 +35,11 @@
           </div>
         </div>
         <div class="home mui-slider-indicator">
-          <div class="mui-indicator mui-active"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
+          <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in notices"></div>
+          <!--<div class="mui-indicator mui-active"></div>-->
+          <!--<div class="mui-indicator"></div>-->
+          <!--<div class="mui-indicator"></div>-->
+          <!--<div class="mui-indicator"></div>-->
         </div>
       </div>
       <!--功能列表-->
