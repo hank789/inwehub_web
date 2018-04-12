@@ -2,8 +2,8 @@
   <div>
     <div class="groups-title">
       <div class="groups-left">
-        <img src="../../statics/images/guide_01.png"/>
-        <p>丁冉</p>
+        <img :src="detail.owner.avatar"/>
+        <p>{{detail.owner.name}}</p>
         <p><i></i>圈主</p>
       </div>
       <svg class="icon" aria-hidden="true">
@@ -13,7 +13,7 @@
     </div>
     <div class="tag-title">
       <div class="tag-l" >
-        <img src="../../statics/images/guide_01.png">
+        <img :src="detail.logo">
       </div>
       <!--<div class="tag-l bg-grey">-->
       <!--<svg class="icon" aria-hidden="true">-->
@@ -21,22 +21,22 @@
       <!--</svg>-->
       <!--</div>-->
       <div class="tag-r">
-        <p>供应链</p>
+        <p>{{detail.name}}</p>
         <p class="tag-info">
-            <span>
+            <span v-if="!detail.public">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-simi"></use>
              </svg>
               私密
             </span>
-          <span><i>12</i>/人气</span>
-          <span><i>12</i>/分享</span>
+          <span><i>{{detail.subscribers}}</i>/人气</span>
+          <span><i>{{detail.articles}}</i>/分享</span>
         </p>
         <div class="tag-avatar" @tap.stop.prevent="$router.push('/tag/FocusMembers?id=1')">
           <div class="avatar">
-            <img src="../../statics/images/guide_01.png"/>
-            <img src="../../statics/images/guide_01.png"/>
-            <img src="../../statics/images/guide_01.png"/>
+            <template v-for="(item, index) in detail.members">
+              <img :src="item.avatar"/>
+            </template>
           </div>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -55,7 +55,14 @@
     },
     components: {
     },
-    props: {},
+    props: {
+      detail: {
+        type: Object,
+        default: () => {
+          return {}
+        }
+      }
+    },
     watch: {},
     methods: {
 

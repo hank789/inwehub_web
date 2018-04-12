@@ -432,7 +432,7 @@ const routes = [
     }
   },
   { // 圈子成员
-    path: '/group/:id/users',
+    path: '/group/users/:id',
     name: 'group-users',
     component: componets.GroupsDetail,
     meta: {
@@ -444,7 +444,7 @@ const routes = [
     }
   },
   { // 圈主设置
-    path: '/group/:id/setting',
+    path: '/group/setting/:id',
     name: 'group-setting',
     component: componets.GroupsSetting,
     meta: {
@@ -1683,8 +1683,8 @@ const routes = [
     component: componets.UnansweredQuestions
   },
   { // 精华推荐
-    path: '/group/recommend',
-    name: 'group-recommend',
+    path: '/recommends',
+    name: 'recommends',
     meta: {
       title: '精华推荐',
       wechatHideHeader: true

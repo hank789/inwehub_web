@@ -6,13 +6,6 @@
     </header>
 
     <div class="mui-content">
-      <div class="new-groups">
-          <p>创建新的圈子</p>
-      </div>
-      <!--我的圈子-->
-      <groups></groups>
-      <!--全部圈子-->
-      <div class="group-title">全部</div>
 
       <RefreshList
         ref="RefreshList"
@@ -23,9 +16,19 @@
         :pageMode = true
         class="listWrapper"
       >
+
+        <div class="new-groups">
+            <p>创建新的圈子</p>
+        </div>
+        <!--我的圈子-->
+        <groups></groups>
+        <!--全部圈子-->
+        <div class="group-title">全部</div>
+
+
         <template v-for="(item, index) in list">
 
-          <div class="group-container">
+          <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
             <groupsList class="big" :list="item">
               <i class="bot"></i>
             </groupsList>
@@ -125,9 +128,6 @@
    width:92%;
    margin-left: 4%;
    overflow: hidden;
- }
- .listWrapper{
-   top:191px;
  }
 </style>
 
