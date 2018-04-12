@@ -26,7 +26,10 @@
 
         <template v-for="(item, index) in list">
           <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
-            <groupsList class="big" :list="item" :description = "'加入'">
+            <groupsList class="big"
+                        :list="item"
+                        @goJoin="goJoin"
+                        :description = "'加入'">
               <i class="bot"></i>
             </groupsList>
           </div>
@@ -57,7 +60,10 @@
     props: {},
     watch: {},
     methods: {
-
+      goJoin (id) {
+        console.log(id)
+        this.$router.pushPlus('/group/apply/' + id)
+      }
     },
     mounted () {
     },

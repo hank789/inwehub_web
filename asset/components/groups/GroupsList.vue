@@ -5,8 +5,11 @@
     </div>
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
-      <div class="join grey" v-if="description && list.is_joined === 1">已{{description}}</div>
-      <div class="join grey" v-else-if="description && list.is_joined === -1"  @tap.stop.prevent="goJoin(list.id)">{{description}}</div>
+      <template v-if="description">
+        <div class="join" v-if="list.is_joined === 1 || list.is_joined === 3"  @tap.stop.prevent="goJoin(list.id)">{{description}}</div>
+        <div class="join grey" v-else>已{{description}}</div>
+      </template>
+
       <p>
         <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
         <span class="-group-name" v-else>{{list.name}}</span>
@@ -170,7 +173,8 @@
     border:1px solid #03AEF9;
     font-size: 14px;
     color: #03AEF9;
-    padding:0px 10px;
+    width: 64px;
+    text-align: center;
     border-radius: 4px;
     position: absolute;
     top: 15px;
