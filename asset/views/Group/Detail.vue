@@ -39,13 +39,13 @@
       </RefreshList>
 
     <div class="invitation">
-      <p>
+      <p @tap.stop.prevent="$router.pushPlus('/discover/add')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-tijiaowenzhang1"></use>
         </svg>
         发分享
       </p>
-      <p>邀请加入</p>
+      <p @tap.stop.prevent="joinShare">邀请加入</p>
     </div>
 
     </div>
@@ -64,6 +64,22 @@
       @selectedItem="selectedItem"
     ></Options>
 
+    <Share
+      ref="share"
+      v-if="!loading"
+      :title="shareOption.title"
+      :shareName="shareOption.shareName"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'group'"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @share="share"
+    ></Share>
+
   </div>
 </template>
 
@@ -75,14 +91,26 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
+  import Share from '../../components/Share.vue'
+  import { getGroupDetail } from '../../utils/shareTemplate'
+
   export default {
     data () {
       return {
+        id: null,
         list: [],
         search_type: 1,
         detail: null,
         loading: 1,
-        itemOptions: []
+        itemOptions: [],
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: '',
+          shareName: ''
+        }
       }
     },
     computed: {
@@ -97,11 +125,25 @@
       RefreshList,
       GroupsInfo,
       SubmitReadhubAriticle,
-      Options
+      Options,
+      Share
     },
     props: {},
     watch: {},
     methods: {
+      share () {
+        this.shareOption.title = this.shareOption.title.replace('邀您加入', '')
+      },
+      joinShare () {
+        this.shareOption.title = '邀您加入' + this.shareOption.title
+        this.$refs.share.share()
+      },
+      shareSuccess () {
+
+      },
+      shareFail () {
+
+      },
       isShowItemOption (item) {
         if (getLocalUserId() === item.user.id) {
           // 文章是我写的
@@ -138,12 +180,24 @@
             })
             break
           case '加精':
-            this.addGood(item)
+            this.addGood(item, () => {
+              this.$refs.itemOptions.toggle()
+            })
             break
         }
       },
-      addGood (item) {
+      addGood (item, callback) {
         // todo 接后台接口
+        postRequest(`group/setSubmissionRecommend`, {submission_id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          window.mui.toast('操作成功')
+          callback()
+        })
       },
       allOptions () {
         if (this.detail.is_joined === 3) {
@@ -166,6 +220,15 @@
           }
 
           this.detail = response.data.data
+
+          this.shareOption = getGroupDetail(
+            this.id,
+            this.detail.name,
+            this.detail.owner.name,
+            this.detail.subscribers,
+            this.detail.logo
+          )
+
           this.loading = 0
         })
       },
