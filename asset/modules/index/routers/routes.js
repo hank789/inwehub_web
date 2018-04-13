@@ -407,18 +407,6 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子申请；
-    path: '/group/apply/:id',
-    name: 'group-apply',
-    component: componets.GroupsApply,
-    meta: {
-      title: '圈子',
-      keepAlive: false
-    },
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
   {
     path: '/group/detail/:id',
     name: 'group-detail',

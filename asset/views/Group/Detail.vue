@@ -11,43 +11,62 @@
         @allOptions="allOptions"
       ></GroupsInfo>
       <div class="gray"></div>
-      <!--导航栏-->
-      <div class="menu">
-        <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i v-if="search_type === 1"></i></span>
-        <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i v-if="search_type === 2"></i></span>
-        <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i v-if="search_type === 3"></i></span>
-        <i class="bot"></i>
-      </div>
-      <RefreshList
-        ref="RefreshList"
-        v-model="list"
-        :api="'group/submissionList'"
-        :prevOtherData="prevOtherData"
-        :nextOtherData="nextOtherData"
-        :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
-        :list="list"
-        class="listWrapper"
-      >
-        <div v-for="(item, index) in list" class="groups-list">
-          <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                 :show = 'true'
-                                 @comment="comment"
-                                 @showItemOptions="showItemOptions"
-          ></SubmitReadhubAriticle>
+
+
+      <!--可以浏览-->
+      <div v-if="isInGroup">
+        <div class="menu">
+          <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+            v-if="search_type === 1"></i></span>
+          <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
+            v-if="search_type === 2"></i></span>
+          <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+            v-if="search_type === 3"></i></span>
+          <i class="bot"></i>
         </div>
-      </RefreshList>
+        <RefreshList
+          ref="RefreshList"
+          v-model="list"
+          :api="'group/submissionList'"
+          :prevOtherData="prevOtherData"
+          :nextOtherData="nextOtherData"
+          :pageMode="true"
+          :isShowUpToRefreshDescription="false"
+          :list="list"
+          class="listWrapper"
+        >
+          <div v-for="(item, index) in list" class="groups-list">
+            <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+                                   :show='true'
+                                   @comment="comment"
+                                   @showItemOptions="showItemOptions"
+            ></SubmitReadhubAriticle>
+          </div>
+        </RefreshList>
 
-    <div class="invitation">
-      <p @tap.stop.prevent="$router.pushPlus('/discover/add')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-tijiaowenzhang1"></use>
-        </svg>
-        发分享
-      </p>
-      <p @tap.stop.prevent="joinShare">邀请加入</p>
-    </div>
+        <div class="invitation">
+          <p @tap.stop.prevent="$router.pushPlus('/discover/add')">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tijiaowenzhang1"></use>
+            </svg>
+            发分享
 
+          </p>
+          <p @tap.stop.prevent="joinShare">邀请加入</p>
+        </div>
+      </div>
+
+
+      <!--不可以浏览-->
+      <div v-else>
+        <div class="group-text">
+          <p>圈子介绍<i class="bot"></i></p>
+          <p>{{ detail.description }}</p>
+        </div>
+        <div class="join" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+        <div class="join wait" v-if="detail.is_joined === 0">入圈审核中</div>
+        <div class="join wait" v-if="detail.is_joined === 2">审核不通过</div>
+      </div>
     </div>
 
     <Options
@@ -110,7 +129,8 @@
           imageUrl: '',
           thumbUrl: '',
           shareName: ''
-        }
+        },
+        isInGroup: false
       }
     },
     computed: {
@@ -129,8 +149,25 @@
       Share
     },
     props: {},
-    watch: {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
     methods: {
+      refreshPageData () {
+        this.loading = 1
+        this.getData()
+      },
+      joinIn () {
+        postRequest(`group/join`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.detail.is_joined = 0
+        })
+      },
       share () {
         this.shareOption.title = this.shareOption.title.replace('邀您加入', '')
       },
@@ -221,6 +258,12 @@
 
           this.detail = response.data.data
 
+          if (this.detail.is_joined === 1 || this.detail.is_joined === 3) {
+            this.isInGroup = true
+          } else {
+            this.isInGroup = false
+          }
+
           this.shareOption = getGroupDetail(
             this.id,
             this.detail.name,
@@ -308,30 +351,34 @@
     list-style: none;
     font-style: normal;
   }
-  .mui-content{
+
+  .mui-content {
     background: #ffffff;
   }
+
   .bot {
     position: absolute;
-    right:0;
+    right: 0;
     bottom: 0;
-    left:0;
+    left: 0;
     height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  .gray{
-    width:100%;
-    height:10px;
+
+  .gray {
+    width: 100%;
+    height: 10px;
     background: #f3f4f6;
   }
+
   /*菜单*/
-  .menu{
-    width:100%;
+  .menu {
+    width: 100%;
     height: 1.173rem;
     background: #FFFFFF;
-    font-size:0.373rem;
+    font-size: 0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
@@ -340,30 +387,35 @@
     position: absolute;
     top: 178px;
   }
-  .menu span{
-    position:relative;
+
+  .menu span {
+    position: relative;
     margin-bottom: -0.293rem;
   }
-  .menu span.bold{
+
+  .menu span.bold {
     font-weight: 500;
   }
-  .menu span  i{
-    position:absolute;
-    width:0.746rem;
-    height:0.04rem;
+
+  .menu span i {
+    position: absolute;
+    width: 0.746rem;
+    height: 0.04rem;
     border-radius: 1.333rem;
-    background:#03aef9;
+    background: #03aef9;
     top: 0.67rem;
     left: 0;
     right: 0;
     margin: auto;
   }
-  .groups-list{
+
+  .groups-list {
 
   }
-  .invitation{
-    width:100%;
-    height:50px;
+
+  .invitation {
+    width: 100%;
+    height: 50px;
     background: #ffffff;
     position: fixed;
     bottom: 0;
@@ -372,32 +424,80 @@
     align-items: center;
     border-top: 1px solid #DCDCDC;
   }
-  .invitation p{
+
+  .invitation p {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    color:rgba(128,128,128,1);
+    color: rgba(128, 128, 128, 1);
   }
-  .invitation p:nth-of-type(1){
-    width:65%;
+
+  .invitation p:nth-of-type(1) {
+    width: 65%;
     height: 100%;
   }
-  .invitation p:nth-of-type(1) svg{
+
+  .invitation p:nth-of-type(1) svg {
     font-size: 24px;
     margin-right: 9px;
   }
-  .invitation p:nth-of-type(2){
-    width:35%;
+
+  .invitation p:nth-of-type(2) {
+    width: 35%;
     height: 100%;
     font-size: 16px;
-    color:rgba(255,255,255,1);
-    background:rgba(3,174,249,1);
-  }
-  .listWrapper{
-    top: 226px;
+    color: rgba(255, 255, 255, 1);
+    background: rgba(3, 174, 249, 1);
   }
 
+  .listWrapper {
+    top: 226px;
+  }
+  .group-text{
+    width:92%;
+    margin-left: 4%;
+    overflow: hidden;
+  }
+  .group-text p:nth-of-type(1){
+    width:100%;
+    height:43px;
+    position: relative;
+    font-size: 16px;
+    color:rgba(68,68,68,1);
+    font-weight: 500;
+    line-height: 43px;
+  }
+  .group-text p:nth-of-type(2){
+    width:100%;
+    margin-top: 14px;
+    position: relative;
+    font-size: 16px;
+    color:rgba(68,68,68,1);
+    line-height: 20px;
+  }
+  .join{
+    width:92%;
+    height:44px;
+    position: fixed;
+    right:0;
+    left:0;
+    bottom: 15px;
+    margin: auto;
+    background:rgba(3,174,249,1);
+    box-shadow: 0px 1px 10px 0px rgba(205,215,220,1);
+    border-radius: 50px ;
+    text-align: center;
+    line-height: 44px;
+    font-size: 16px;
+    color:rgba(255,255,255,1);
+    font-weight: 500;
+  }
+  .join.wait{
+    background:rgba(220,220,220,1);
+    box-shadow: 0px 1px 10px 0px rgba(205,215,220,1);
+    color:rgba(180,180,182,1);
+  }
 
 </style>
