@@ -6,7 +6,7 @@
         <p>{{detail.owner.name}}</p>
         <p><i></i>圈主</p>
       </div>
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="allOptions">
         <use xlink:href="#icon-gengduo"></use>
       </svg>
       <i class="bot"></i>
@@ -66,7 +66,9 @@
     },
     watch: {},
     methods: {
-
+      allOptions () {
+        this.$emit('allOptions')
+      }
     },
     mounted () {
     },

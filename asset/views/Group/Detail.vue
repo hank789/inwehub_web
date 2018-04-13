@@ -8,12 +8,13 @@
       <!--圈子详情-->
       <GroupsInfo
         :detail="detail"
+        @allOptions="allOptions"
       ></GroupsInfo>
       <div class="gray"></div>
       <!--导航栏-->
       <div class="menu">
         <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i v-if="search_type === 1"></i></span>
-        <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈住<i v-if="search_type === 2"></i></span>
+        <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i v-if="search_type === 2"></i></span>
         <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i v-if="search_type === 3"></i></span>
         <i class="bot"></i>
       </div>
@@ -47,6 +48,20 @@
     </div>
 
     </div>
+
+
+    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
+      <div class="allOptions">
+        <div class="mui-poppicker-header">
+          <button class="mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="allOptions">取消</button>
+          <div class="mui-poppicker-clear"></div>
+        </div>
+        <div class="mui-poppicker-body">
+          <div class="option">退出</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -80,6 +95,13 @@
     props: {},
     watch: {},
     methods: {
+      allOptions () {
+        if (this.detail.is_joined === 3) {
+          this.$router.pushPlus('/group/setting/' + this.id)
+        } else {
+          window.mui('#expert').popover('toggle')
+        }
+      },
       getData () {
         this.id = parseInt(this.$route.params.id)
         if (!this.id) {
@@ -95,6 +117,17 @@
 
           this.detail = response.data.data
           this.loading = 0
+        })
+      },
+      quit () {
+        postRequest(`group/quit`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.$router.pushPlus('/groups')
         })
       },
       chooseType (type) {
@@ -226,5 +259,18 @@
   }
   .listWrapper{
     top: 226px;
+  }
+
+  .allOptions{
+    background:#fff;
+  }
+  .allOptions .mui-poppicker-body{
+    height:auto;
+  }
+  .allOptions .option{
+    text-align: center;
+    color:#444;
+    height:0.96rem;
+    line-height: 0.96rem;
   }
 </style>
