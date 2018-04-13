@@ -377,16 +377,12 @@
         this.editorObj = editor
       },
       empty () {
-        if (!this.html && !this.selectedGroup.name && !this.images.length) {
+        this.resetData()
+        if (this.$route.query.from) {
+          this.$router.pushPlus(this.$route.query.from)
+        } else {
           this.$router.pushPlus('/home')
-          return
         }
-        window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
-          if (e.index === 0) {
-            this.resetData()
-            this.$router.pushPlus('/home')
-          }
-        }, 'div')
       },
       totags () {
         this.$refs.myAddEditor.blur()

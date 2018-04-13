@@ -47,7 +47,7 @@
         </RefreshList>
 
         <div class="invitation">
-          <p @tap.stop.prevent="$router.pushPlus('/discover/add')">
+          <p @tap.stop.prevent="$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + id))">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
