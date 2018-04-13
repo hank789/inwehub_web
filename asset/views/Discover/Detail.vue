@@ -65,7 +65,7 @@
           <img :src="detail.data.img"/>
         </div>
         <!--是否加入圈子/group/detail/:id-->
-        <div class="groups" v-if="detail.group.is_joined !== 1 || detail.group.is_joined !== 3"
+        <div class="groups" v-if="detail.group.is_joined < 0"
              @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
         </div>
 
