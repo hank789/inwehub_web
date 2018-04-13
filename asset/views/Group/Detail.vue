@@ -6,24 +6,8 @@
     </header>
     <div class="mui-content" v-if="!loading">
       <!--圈子详情-->
-      <GroupsInfo
-        :detail="detail"
-        @allOptions="allOptions"
-      ></GroupsInfo>
-      <div class="gray"></div>
-
-
       <!--可以浏览-->
       <div v-if="isInGroup">
-        <div class="menu">
-          <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
-            v-if="search_type === 1"></i></span>
-          <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
-            v-if="search_type === 2"></i></span>
-          <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
-            v-if="search_type === 3"></i></span>
-          <i class="bot"></i>
-        </div>
         <RefreshList
           ref="RefreshList"
           v-model="list"
@@ -35,6 +19,23 @@
           :list="list"
           class="listWrapper"
         >
+
+        <GroupsInfo
+          :detail="detail"
+          @allOptions="allOptions"
+        ></GroupsInfo>
+        <div class="gray"></div>
+
+        <div class="menu">
+          <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+            v-if="search_type === 1"></i></span>
+          <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
+            v-if="search_type === 2"></i></span>
+          <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+            v-if="search_type === 3"></i></span>
+          <i class="bot"></i>
+        </div>
+
           <div v-for="(item, index) in list" class="groups-list">
             <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
                                    :show='true'
@@ -59,6 +60,12 @@
 
       <!--不可以浏览-->
       <div v-else>
+        <GroupsInfo
+          :detail="detail"
+          @allOptions="allOptions"
+        ></GroupsInfo>
+        <div class="gray"></div>
+
         <div class="group-text">
           <p>圈子介绍<i class="bot"></i></p>
           <p>{{ detail.description }}</p>
@@ -451,10 +458,7 @@
     color: rgba(255, 255, 255, 1);
     background: rgba(3, 174, 249, 1);
   }
-
-  .listWrapper {
-    top: 226px;
-  }
+  
   .group-text{
     width:92%;
     margin-left: 4%;
