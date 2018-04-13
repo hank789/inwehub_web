@@ -55,6 +55,7 @@
     methods: {
       selectItem (item) {
         if (!this.from) {
+          this.$router.pushPlus('/group/detail/' + item.id)
           return
         }
         localEvent.setLocalItem('selectedGroup' + this.id, item)
