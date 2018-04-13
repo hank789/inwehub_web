@@ -171,6 +171,7 @@
           }
           if (this.detail.public) {
             this.detail.is_joined = 1
+            this.isInGroup = 1
           } else {
             this.detail.is_joined = 0
           }
