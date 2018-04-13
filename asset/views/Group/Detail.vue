@@ -16,6 +16,7 @@
           :nextOtherData="nextOtherData"
           :pageMode="true"
           :isShowUpToRefreshDescription="false"
+          :autoShowEmpty="false"
           :list="list"
           class="listWrapper"
         >
