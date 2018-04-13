@@ -416,7 +416,7 @@ const routes = [
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next()
     }
   },
   { // 圈子成员
