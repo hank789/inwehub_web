@@ -2,14 +2,14 @@
   <div>
     <div class="mui-content absolute">
       <!--search-->
-      <!--search-->
+      <!--search/chat/72-->
       <div class="search mui-preview-header">
-        <div class="search-l">
+        <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kefu"></use>
           </svg>
           <p>客服</p>
-          <i></i>
+          <i v-if="unread_count"></i>
         </div>
         <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
@@ -137,7 +137,9 @@
     data () {
       return {
         list: [],
-        notices: []
+        notices: [],
+        contact_id: '',
+        unread_count: 0
       }
     },
     created () {
@@ -151,6 +153,13 @@
     computed: {
     },
     methods: {
+      messagecountchange (obj) {
+        console.log(obj.contact_id)
+        if (obj.contact_id) {
+          this.contact_id = obj.contact_id
+          this.unread_count = obj.unread_count
+        }
+      },
       goLink: function (url) {
         console.log(url)
         if (/http/.test(url)) {

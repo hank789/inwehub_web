@@ -3,12 +3,12 @@
     <div class="mui-content">
       <!--search-->
       <div class="search">
-        <div class="search-l">
+        <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kefu"></use>
           </svg>
           <p>客服</p>
-          <i></i>
+          <i v-if="unread_count"></i>
         </div>
         <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
@@ -71,7 +71,9 @@
           pagination: '.swiper-pagination',
           slidesPerView: 'auto',
           spaceBetween: 10,
-          onTap: this.swipperClick
+          onTap: this.swipperClick,
+          contact_id: '',
+          unread_count: 0
         }
       }
     },
@@ -85,6 +87,13 @@
     props: {},
     watch: {},
     methods: {
+      messagecountchange (obj) {
+        console.log(obj.contact_id)
+        if (obj.contact_id) {
+          this.contact_id = obj.contact_id
+          this.unread_count = obj.unread_count
+        }
+      },
       report (id) {
         var that = this
         var btnArray = ['取消', '确定']

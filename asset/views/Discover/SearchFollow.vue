@@ -3,12 +3,12 @@
     <div class="mui-content feedWrapper">
       <!--search-->
       <div class="search">
-        <div class="search-l">
+        <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kefu"></use>
           </svg>
           <p>客服</p>
-          <i></i>
+          <i v-if="unread_count"></i>
         </div>
         <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <svg class="icon" aria-hidden="true">
@@ -122,8 +122,9 @@
     data () {
       return {
         list: [],
-        emptyDescription: '暂无您关注的用户的动态'
-
+        emptyDescription: '暂无您关注的用户的动态',
+        contact_id: '',
+        unread_count: 0
       }
     },
     components: {
@@ -151,6 +152,13 @@
       }
     },
     methods: {
+      messagecountchange (obj) {
+        console.log(obj.contact_id)
+        if (obj.contact_id) {
+          this.contact_id = obj.contact_id
+          this.unread_count = obj.unread_count
+        }
+      },
       comment (submissionId, parentId, commentTargetUsername, list, component) {
         // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
         var commentTarget = {
