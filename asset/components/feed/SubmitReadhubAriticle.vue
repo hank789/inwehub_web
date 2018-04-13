@@ -27,7 +27,7 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
-      <svg class="icon more" aria-hidden="true" v-if="show">
+      <svg class="icon more" aria-hidden="true" v-if="show" @tap.stop.prevent="showItemOptions">
         <use xlink:href="#icon-gengduo"></use>
       </svg>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
@@ -110,6 +110,9 @@
 
     },
     methods: {
+      showItemOptions () {
+        this.$emit('showItemOptions', this.data)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
