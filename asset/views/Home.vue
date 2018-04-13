@@ -154,7 +154,6 @@
     },
     methods: {
       messagecountchange (obj) {
-        console.log(obj.contact_id)
         if (obj.contact_id) {
           this.contact_id = obj.contact_id
           this.unread_count = obj.unread_count
