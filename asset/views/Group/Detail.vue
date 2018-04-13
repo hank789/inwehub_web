@@ -458,7 +458,7 @@
     color: rgba(255, 255, 255, 1);
     background: rgba(3, 174, 249, 1);
   }
-  
+
   .group-text{
     width:92%;
     margin-left: 4%;

@@ -14,6 +14,7 @@
         :prevOtherData="{}"
         :nextOtherData="{}"
         :pageMode = true
+        :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper"
       >
           <ul class="recommend">
@@ -39,24 +40,62 @@
           </ul>
       </RefreshList>
     </div>
+
+    <Share
+      ref="share"
+      v-if="!loading"
+      :title="shareOption.title"
+      :shareName="shareOption.shareName"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'recommends'"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></Share>
+
   </div>
 </template>
 <script>
   import RefreshList from '../components/refresh/List.vue'
   import { goThirdPartyArticle } from '../utils/webview'
+  import Share from '../components/Share.vue'
+  import { getRecommends } from '../utils/shareTemplate'
 
   export default {
     data () {
       return {
-        list: []
+        id: 0,
+        list: [],
+        loading: 1,
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: '',
+          shareName: ''
+        }
       }
     },
     components: {
-      RefreshList
+      RefreshList,
+      Share
     },
     props: {},
     watch: {},
     methods: {
+      prevSuccessCallback () {
+        this.loading = 0
+        this.shareOption = getRecommends(0)
+      },
+      shareSuccess () {
+      },
+      shareFail () {
+
+      },
       goDetial (type, recommend) {
         switch (type) {
           case 1:
