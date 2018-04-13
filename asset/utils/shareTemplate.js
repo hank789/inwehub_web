@@ -159,12 +159,29 @@ function getGroupDetail (id, title, username, userCount, logo) {
   var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
 
   return {
-    title: 'InweHub圈子：' + title + '- 最具品质的咨询顾问社区',
+    title: 'InweHub圈子：' + title + '-最具品质的咨询顾问社区',
     link: link,
     content: username + '创建，已有' + userCount + '人加入 | 点击查看加入',
     imageUrl: logo,
     thumbUrl: logo + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '圈子分享'
+  }
+}
+
+/**
+ * 精选推荐页-微信分享模版
+ * url: /recommends
+ */
+function getRecommends (count) {
+  var link = process.env.H5_ROOT + '/#' + '/recommends'
+
+  return {
+    title: 'InweHub精选推荐-最具品质的咨询顾问社区',
+    link: link,
+    content: '点击查看',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '精选推荐'
   }
 }
 
@@ -177,5 +194,6 @@ export {
   getAskCommunityInteractionAnswers,
   getInviteAnswerDetail,
   getResumeDetail,
-  getGroupDetail
+  getGroupDetail,
+  getRecommends
 }
