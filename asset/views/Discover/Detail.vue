@@ -6,86 +6,138 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div>
-      <div class="mui-table-view detail-discover">
-        <UserInfo
-          :uuid="detail.owner.uuid"
-          :avatar="detail.owner.avatar"
-          :realname="detail.owner.name"
-          :isFollow="isFollow"
-          :isFollowed="detail.is_followed_author?true:false"
-          :isShowPositionAndCompany="false"
-          :isExpert="detail.owner.is_expert?1:0"
-          @setFollowStatus="setFollowStatus"
-        ></UserInfo>
-        <!--删除按钮-->
-        <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">删除</div>
-      </div>
-      <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-        <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
-        <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
-      <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-      <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
-        <template v-for="(image, index) in detail.data.img">
-          <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image" :data-preview-group="1"/>
-        </template>
+      <!--私密的样式-->
+      <!--圈子信息-->
+      <div v-if="!detail.group.public">
+      <div class="groupsCenter">
+      <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-zanwushuju"></use>
+      </svg>
+      <p>私密圈子内容加入后可阅读</p>
+      <p @tap.stop.prevent="$router.pushPlus('/groups')">去加入</p>
+      </div>
+      <div class="riverBot"></div>
+      <div class="groupsBot">
+      <groups-list class="small"
+      :list="detail.group"
+      :type="'small'"
+      :joinDescription="'进圈'"
+      @goJoin="goJoin"
+      ></groups-list>
+      </div>
       </div>
 
-      <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img" @tap.stop.prevent="goArticle(detail)" >
-        <img :src="detail.data.img"/>
-      </div>
 
-      <div class="timeContainer">
-        <span>
+
+      <div v-else>
+        <div class="mui-table-view detail-discover">
+          <UserInfo
+            :uuid="detail.owner.uuid"
+            :avatar="detail.owner.avatar"
+            :realname="detail.owner.name"
+            :isFollow="isFollow"
+            :isFollowed="detail.is_followed_author?true:false"
+            :isShowPositionAndCompany="false"
+            :isExpert="detail.owner.is_expert?1:0"
+            @setFollowStatus="setFollowStatus"
+          ></UserInfo>
+          <!--删除按钮-->
+          <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
+            删除
+          </div>
+        </div>
+        <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+          <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
+          <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+        </div>
+
+        <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
+        <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+          <template v-for="(image, index) in detail.data.img">
+            <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                 :data-preview-group="1"/>
+          </template>
+        </div>
+
+        <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
+             @tap.stop.prevent="goArticle(detail)">
+          <img :src="detail.data.img"/>
+        </div>
+        <!--是否加入圈子/group/detail/:id-->
+        <div class="groups" v-if="!detail.group.is_joined === 1 || !detail.group.is_joined === 3"
+             @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
+        </div>
+
+        <div class="timeContainer">
+          <span>{{detail.views}}浏览</span>
+          <span>
           <timeago :since="timeago(detail.created_at)" :auto-update="60">
           </timeago>
         </span>
-        <svg class="icon" aria-hidden="true" v-show="detail.data.current_address_name">
-          <use xlink:href="#icon-dingwei1"></use>
-        </svg>
-        <span>{{detail.data.current_address_name}}</span>
-      </div>
-
-      <div class="statisticsWrapper">
-        <Statistics
-          :id="detail.id"
-          :commentNum="detail.comments_number"
-          :isCommented="!!detail.is_commented"
-          :supportNum="detail.upvotes"
-          :isSupported="!!detail.is_upvoted"
-          :collectNum="detail.bookmarks"
-          :isCollected="!!detail.is_bookmark"
-          @supportNumDesc="supportNumDesc"
-          @supportNumAdd="supportNumAdd"
-          @setSupportStatus="setSupportStatus"
-          @collectNumDesc="collectNumDesc"
-          @collectNumAdd="collectNumAdd"
-          @setCollectStatus="setCollectStatus"
-        ></Statistics>
-      </div>
-      <!--点赞-->
-      <div class="component-dianzanList" v-if="detail.upvotes">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg>
-        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
-      </div>
-      <!--灰色部分-->
-      <div class="river"></div>
-      <!--评论部分-->
-      <Discuss
-        v-if="detail.slug"
-        :listApi="'article/comments'"
-        :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
-        :storeApi="'article/comment-store'"
-        :storeParams="{'submission_id': detail.id}"
-        @comment="comment"
-        @commentFinish="commentFinish"
-        ref="discuss"
-      ></Discuss>
+          <span>著作权归作者所有</span>
         </div>
+        <div class="address" v-show="detail.data.current_address_name">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingwei1"></use>
+          </svg>
+          <span>{{detail.data.current_address_name}}</span>
+        </div>
+
+        <div class="statisticsWrapper">
+          <Statistics
+            :id="detail.id"
+            :commentNum="detail.comments_number"
+            :isCommented="!!detail.is_commented"
+            :supportNum="detail.upvotes"
+            :isSupported="!!detail.is_upvoted"
+            :collectNum="detail.bookmarks"
+            :isCollected="!!detail.is_bookmark"
+            @supportNumDesc="supportNumDesc"
+            @supportNumAdd="supportNumAdd"
+            @setSupportStatus="setSupportStatus"
+            @collectNumDesc="collectNumDesc"
+            @collectNumAdd="collectNumAdd"
+            @setCollectStatus="setCollectStatus"
+          ></Statistics>
+        </div>
+        <!--灰色部分-->
+        <div class="river"></div>
+        <!--圈子信息-->
+        <div class="groupsList">
+          <groups-list class="small"
+                       :list="detail.group"
+                       :type="'small'"
+                       :joinDescription="'进圈'"
+                       @goJoin="goJoin"
+          ></groups-list>
+        </div>
+        <!--灰色部分-->
+        <div class="river"></div>
+        <!--点赞-->
+        <div class="component-dianzanList" v-if="detail.upvotes">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dianzan1"></use>
+          </svg>
+          <span v-for="(item, index) in detail.supporter_list"
+                @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
+        </div>
+        <!--灰色部分-->
+        <div class="river"></div>
+        <!--评论部分-->
+        <Discuss
+          v-if="detail.slug"
+          :listApi="'article/comments'"
+          :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+          :storeApi="'article/comment-store'"
+          :storeParams="{'submission_id': detail.id}"
+          @comment="comment"
+          @commentFinish="commentFinish"
+          ref="discuss"
+        ></Discuss>
+      </div>
     </div>
+
 
     <Share
       ref="ShareBtn"
@@ -106,23 +158,25 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
+  import {postRequest} from '../../utils/request'
   import UserInfo from './../../components/question-detail/UserInfo.vue'
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import { autoTextArea, openVendorUrl, openAppUrl } from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
-  import { getTextDiscoverDetail } from '../../utils/shareTemplate'
-  import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLinkHtml, transferTagToLink } from '../../utils/dom'
+  import {getTextDiscoverDetail} from '../../utils/shareTemplate'
+  import {goThirdPartyArticle} from '../../utils/webview'
+  import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
+
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
-  import { pageRefresh } from '../../utils/allPlatform'
+  import {pageRefresh} from '../../utils/allPlatform'
+  import groupsList from '../../components/groups/GroupsList.vue'
 
   export default {
-    data () {
+    data() {
       return {
         userId: currentUser.user_id,
         name: currentUser.name,
@@ -130,6 +184,11 @@
         slug: '',
         noback: false,
         detail: {
+          group: {
+            is_joined: '',
+            id: '',
+            public: ''
+          },
           owner: {
             id: '',
             uuid: '',
@@ -156,7 +215,7 @@
       }
     },
     computed: {
-      descLength () {
+      descLength() {
         if (this.description === this.descPlaceholder) {
           return 0
         }
@@ -169,11 +228,15 @@
       Statistics,
       Discuss,
       Share,
-      commentTextarea
+      commentTextarea,
+      groupsList
     },
     methods: {
+      goJoin(id) {
+        this.$router.pushPlus('/group/detail/' + id)
+      },
       // 删除
-      deleterow (id) {
+      deleterow(id) {
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -196,22 +259,22 @@
           }
         })
       },
-      textToLink (text) {
+      textToLink(text) {
         return transferTagToLink(textToLinkHtml(' ' + text))
       },
-      toAvatar (uuid) {
+      toAvatar(uuid) {
         if (!uuid) {
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      sendMessage (message) {
+      sendMessage(message) {
         this.$refs.discuss.sendMessage(message)
       },
-      comment (commentTargetName) {
+      comment(commentTargetName) {
         this.$refs.ctextarea.comment(commentTargetName)
       },
-      commentFinish () {
+      commentFinish() {
         this.commentNumAdd()
         this.$refs.ctextarea.finish()
       },
@@ -228,18 +291,18 @@
           detail.data.img
         )
       },
-      refreshPageData () {
+      refreshPageData() {
         this.loading = 1
         this.detail.data.img = []
         this.getDetail()
         this.$refs.ctextarea.refreshPageData()
       },
-      shareSuccess () {
+      shareSuccess() {
 
       },
-      shareFail () {
+      shareFail() {
       },
-      timeago (time) {
+      timeago(time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
@@ -267,11 +330,11 @@
           this.loading = 0
         })
       },
-      setFollowStatus (status) {
+      setFollowStatus(status) {
         this.detail.is_followed_author = status
       },
 //      点赞
-      supportNumAdd () {
+      supportNumAdd() {
         this.detail.upvotes++
         var support = {
           name: this.name,
@@ -280,7 +343,7 @@
         this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
 //      取消点赞
-      supportNumDesc () {
+      supportNumDesc() {
         this.detail.upvotes--
         for (var i in this.detail.supporter_list) {
           if (this.detail.supporter_list[i].uuid === this.uuid) {
@@ -288,26 +351,26 @@
           }
         }
       },
-      commentNumAdd () {
+      commentNumAdd() {
         this.detail.comments_number++
       },
-      commentNumDesc () {
+      commentNumDesc() {
         this.detail.comments_number--
       },
-      setSupportStatus (type) {
+      setSupportStatus(type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
       },
-      collectNumAdd () {
+      collectNumAdd() {
         this.detail.bookmarks++
       },
-      collectNumDesc () {
+      collectNumDesc() {
         this.detail.bookmarks--
       },
-      setCollectStatus (type) {
+      setCollectStatus(type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       }
     },
-    updated () {
+    updated() {
       this.$nextTick(function () {
         openVendorUrl(this.$el.querySelector('#contentWrapper'))
         openAppUrl(this.$el.querySelector('#contentWrapper'))
@@ -316,10 +379,10 @@
     watch: {
       '$route': 'refreshPageData'
     },
-    created () {
+    created() {
       this.getDetail()
     },
-    mounted () {
+    mounted() {
       pageRefresh(this, () => {
         this.refreshPageData()
       })
@@ -343,93 +406,173 @@
     display: none;
   }
 
-  .contentWrapper{
-    padding:0 0.4rem;
-    white-space:pre-line !important;
-    font-size:0.4rem;
-    color:#444;
+  .contentWrapper {
+    padding: 0 0.4rem;
+    white-space: pre-line !important;
+    font-size: 0.4rem;
+    color: #444;
   }
-  .contentWrapper .tags{
-    color:rgb(33,77,120);
+
+  .contentWrapper .tags {
+    color: rgb(33, 77, 120);
     margin-right: 0.16rem;
   }
-  .newestList{
-    padding:0.266rem 0.4rem 0;
+
+  .newestList {
+    padding: 0.266rem 0.4rem 0;
     background: #fff;
   }
 
   .linkWrapper {
-    padding:0.266rem 0.4rem;
+    padding: 0.266rem 0.4rem;
   }
 
   .timeContainer {
     width: 100%;
-    font-size: 0.32rem;
-    padding:0 0.4rem;
+    font-size: 12px;
+    color: #B4B4B6;
+    padding: 0 0.4rem;
     background: #fff;
   }
 
-  .timeContainer svg {
-    font-size: 0.373rem;
-    color: #b4b4b6;
+  .timeContainer span:nth-of-type(3) {
+    float: right;
   }
 
-  .timeContainer span:nth-of-type(1) {
-    color: #b4b4b6;
-  }
-
-  .timeContainer span:nth-of-type(2) {
+  .address {
+    width: 100%;
+    padding: 0 0.4rem;
+    background: #fff;
+    font-size: 12px;
     color: #808080;
+    margin-top: -4px;
   }
 
-  .statistics{
+  .statistics {
     background: #fff;
   }
 
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 
-  .statisticsWrapper{
-    padding:0 0.4rem 0.4rem;
+  .statisticsWrapper {
+    padding: 0 0.4rem 0.4rem;
   }
+
   /*点赞样式*/
-  .component-dianzanList{
-    width:100%;
-    padding: 0 0.4rem 0.8rem 0.4rem;
+  .component-dianzanList {
+    width: 100%;
+    padding: 13px 0.4rem;
   }
-  .component-dianzanList span{
-    font-size:0.346rem;
-    color:#03aef9;
+
+  .component-dianzanList span {
+    font-size: 0.346rem;
+    color: #03aef9;
   }
-  .contentWrapper span{
+
+  .contentWrapper span {
     font-size: 0.4rem;
   }
-  .Column{
+
+  .Column {
     width: 100%;
-    height:max-content;
+    height: max-content;
   }
-  .Column .discover_img{
-    width:100%;
+
+  .Column .discover_img {
+    width: 100%;
     border-radius: 0.106rem;
     margin-bottom: 0.133rem;
   }
-  .Column img:nth-last-child(1){
+
+  .Column img:nth-last-child(1) {
     margin-bottom: 0;
   }
+
   /*删除按钮*/
-  .discover_datail_dalete{
-    width:1.52rem;
-    height:0.506rem;
-    border:0.026rem solid #444444;
+  .discover_datail_dalete {
+    width: 1.52rem;
+    height: 0.506rem;
+    border: 0.026rem solid #444444;
     text-align: center;
     line-height: 0.453rem;
-    font-size:0.346rem;
+    font-size: 0.346rem;
     color: #444444;
     border-radius: 1.333rem;
     position: absolute;
-    right:0.426rem;
+    right: 0.426rem;
     top: 0.426rem;
+  }
+
+  .groups {
+    width: 92%;
+    margin-left: 4%;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 4px;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 13px;
+    font-size: 14px;
+    color: #03AEF9;
+  }
+
+  .groupsList {
+    width: 92%;
+    margin-left: 4%;
+    padding-bottom: 10px;
+  }
+
+  .groupsBot {
+    width: 92%;
+    margin-left: 4%;
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .riverBot {
+    width: 100%;
+    height: 10px;
+    position: fixed;
+    bottom: 67px;
+    background: #f3f4f6;
+  }
+
+  .groupsCenter {
+    width: 200px;
+    height: 160px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+  }
+
+  .groupsCenter svg {
+   font-size: 70px;
+  }
+
+  .groupsCenter p:nth-of-type(1) {
+    font-size: 12px;
+    color: #C8C8C8;
+    text-align: center;
+    margin-top: 7px;
+    margin-bottom: 21px;
+  }
+  .groupsCenter p:nth-of-type(2) {
+    width:115px;
+    height:41px;
+    line-height:41px;
+    background:#03AEF9;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-align: center;
+    margin: auto;
   }
 </style>
 
