@@ -62,6 +62,13 @@
         <use xlink:href="#icon-dingwei1"></use>
       </svg>{{data.feed.current_address_name}}
     </div>
+    <!--圈子信息-->
+    <groups-list class="small"
+                 :list="data.feed.group"
+                 :type="'small'"
+                 :joinDescription="'进圈'"
+                 @goJoin="goJoin"
+    ></groups-list>
   </div>
 </template>
 
@@ -74,6 +81,7 @@
   import { getIndexByIdArray } from '../../utils/array'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import SuppertAndComment from './SuppertAndComment.vue'
+  import groupsList from '../groups/GroupsList.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -84,7 +92,8 @@
     components: {
       Images,
       Avatar,
-      SuppertAndComment
+      SuppertAndComment,
+      groupsList
     },
     props: {
       data: {
@@ -99,6 +108,9 @@
 
     },
     methods: {
+      goJoin (id) {
+        this.$router.pushPlus('/group/detail/' + id)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
