@@ -169,8 +169,11 @@
             window.mui.toast(response.data.message)
             return
           }
-
-          this.detail.is_joined = 0
+          if (this.detail.public) {
+            this.detail.is_joined = 1
+          } else {
+            this.detail.is_joined = 0
+          }
         })
       },
       share () {
