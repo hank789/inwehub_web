@@ -6,8 +6,8 @@
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
       <template v-if="description">
-        <div class="join" v-if="list.is_joined === 1 || list.is_joined === 3"  @tap.stop.prevent="goJoin(list.id)">{{description}}</div>
-        <div class="join grey" v-else>已{{description}}</div>
+        <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >已{{description}}</div>
+        <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-else>{{description}}</div>
       </template>
 
       <p>

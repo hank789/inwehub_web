@@ -43,21 +43,7 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-
-    <!--<div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)">-->
-      <!--<div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-pinglun"></use>-->
-        <!--</svg><span>{{data.feed.comment_number}}</span>-->
-      <!--</div>-->
-      <!--<div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-zan"></use>-->
-        <!--</svg><span>{{data.feed.support_number}}</span>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
-
       <!-- 点赞和评论列表start -->
       <SuppertAndComment
         :supportNumber="data.feed.support_number"
@@ -65,13 +51,11 @@
         :commentNumber="data.feed.comment_number"
         :commentList="data.feed.comments"
         :detailUrl="data.feed.comment_url"
-
         @commentIt="commentIt"
       ></SuppertAndComment>
-
+      <!--圈子信息-->
       <!-- 点赞和评论列表end -->
     </div>
-
   </div>
 </template>
 
@@ -82,6 +66,7 @@
   import { postRequest } from '../../utils/request'
   import { getIndexByIdArray } from '../../utils/array'
   import { getLocalUserInfo } from '../../utils/user'
+  import groupsList from '../groups/GroupsList.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -91,7 +76,8 @@
     },
     components: {
       Avatar,
-      SuppertAndComment
+      SuppertAndComment,
+      groupsList
     },
     props: {
       data: {
