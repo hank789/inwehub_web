@@ -36,10 +36,13 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         from: null,
         list: []
       }
@@ -54,7 +57,7 @@
         if (!this.from) {
           return
         }
-        localEvent.setLocalItem('selectedGroup', item)
+        localEvent.setLocalItem('selectedGroup' + this.id, item)
         window.mui.back()
       },
       refreshPageData () {

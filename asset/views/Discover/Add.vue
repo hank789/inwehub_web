@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
-      <h1 class="mui-title">分享</h1>
+      <h1 class="mui-title">发布动态</h1>
     </header>
 
     <div class="mui-content">
@@ -11,7 +11,7 @@
         <p @tap.stop.prevent="$router.replace('/discover/publishArticles')">文章</p>
         <p>分享<i></i></p>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="this.selectedGroup">{{this.selectedGroup.name}}</span>
+          <span v-if="selectedGroup.name">{{selectedGroup.name}}</span>
           <span v-else>选择圈子</span>
         </button>
       </div>
@@ -158,7 +158,7 @@
     },
     methods: {
       readGroup () {
-        this.selectedGroup = localEvent.getLocalItem('selectedGroup')
+        this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
       selectGroup () {
         this.$router.pushPlus('/group/my?from=discover_add')
@@ -377,8 +377,16 @@
         this.editorObj = editor
       },
       empty () {
-        this.resetData()
-        this.$router.pushPlus('/home')
+        if (!this.html && !this.selectedGroup.name && !this.images.length) {
+          this.$router.pushPlus('/home')
+          return
+        }
+        window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
+          if (e.index === 0) {
+            this.resetData()
+            this.$router.pushPlus('/home')
+          }
+        }, 'div')
       },
       totags () {
         this.$refs.myAddEditor.blur()
@@ -422,6 +430,7 @@
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
+        localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
         if (!this.selectedGroup) {
@@ -506,7 +515,8 @@
 
         &:after {
           position: absolute;
-          width:1.706rem;
+          width: 32px;
+
           bottom: 0;
           left: 0;
           height: 0.053rem;

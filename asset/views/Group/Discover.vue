@@ -35,6 +35,10 @@
         class="listWrapper">
         <!--swiper滑动-->
         <groups :isShow = "true"></groups>
+        <div class="title">
+          大家都在看
+          <i class="bot"></i>
+        </div>
         <ul>
           <template v-for="(hot, index) in list">
             <!--带图片的样式-->
@@ -280,6 +284,16 @@
     left: 0;
     right: 0;
     margin: auto;
+  }
+  .title{
+    width:92%;
+    height:44px;
+    margin-left: 4%;
+    position: relative;
+    font-size: 16px;
+    color: #444444;
+    font-weight: 500;
+    line-height: 44px;
   }
   ul{
     background: #F3F4F5;

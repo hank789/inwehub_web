@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
       <h1 class="mui-title">发布动态</h1>
     </header>
 
@@ -10,7 +10,7 @@
         <p>文章</p>
         <p @tap.stop.prevent="$router.replace('/discover/add')">分享</p>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="this.selectedGroup">{{this.selectedGroup.name}}</span>
+          <span v-if="selectedGroup.name">{{selectedGroup.name}}</span>
           <span v-else>选择圈子</span>
         </button>
       </div>
@@ -70,11 +70,14 @@
   import { autoTextArea } from '../../utils/plus'
   import popPickerComponent from '../../components/picker/poppicker.vue'
   import localEvent from '../../stores/localStorage'
+  import { getLocalUserInfo } from '../../utils/user'
+  const currentUser = getLocalUserInfo()
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         channels: [],
         url: '',
         title: '',
@@ -107,8 +110,20 @@
       }
     },
     methods: {
+      cancelAsk () {
+        if (!this.channelValue && !this.title && !this.url && !this.selectedGroup.name) {
+          window.mui.back()
+          return
+        }
+        window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
+          if (e.index === 0) {
+            localEvent.clearLocalItem('selectedGroup' + this.id)
+            window.mui.back()
+          }
+        }, 'div')
+      },
       readGroup () {
-        this.selectedGroup = localEvent.getLocalItem('selectedGroup')
+        this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
       selectGroup () {
         this.$router.pushPlus('/group/my?from=discover_add')
@@ -287,7 +302,7 @@
 
         &:after {
           position: absolute;
-          width:1.706rem;
+          width:32px;
           bottom: 0;
           left: 0;
           height: 0.053rem;
