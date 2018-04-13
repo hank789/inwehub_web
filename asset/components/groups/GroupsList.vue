@@ -9,12 +9,12 @@
         <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >已{{description}}</div>
         <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-else>{{description}}</div>
       </template>
-
+      <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-if="joinDescription">{{joinDescription}}</div>
       <p>
         <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
         <span class="-group-name" v-else>{{list.name}}</span>
       </p>
-      <p class="text-line-2 text">{{list.description}}</p>
+      <p class="text-line-2 text" v-if="!type">{{list.description}}</p>
       <p class="-group-info">
         <span v-if="!list.public">
           <svg class="icon" aria-hidden="true">
@@ -26,7 +26,8 @@
         <span><i>{{list.articles}}</i>/分享</span>
       </p>
     </div>
-    <i class="bot"></i>
+    <i class="top" v-if="type"></i>
+    <i class="bot" v-else></i>
   </div>
 </template>
 <script>
@@ -45,11 +46,19 @@
         type: String,
         default: ''
       },
+      joinDescription: {
+        type: String,
+        default: ''
+      },
       search: {
         type: Boolean,
         default: false
       },
       searchText: {
+        type: String,
+        default: ''
+      },
+      type: {
         type: String,
         default: ''
       }
@@ -97,13 +106,24 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  .top {
+    position: absolute;
+    right:0;
+    top: 0;
+    left:0;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
   /*圈子*/
   .big.-group{
     padding: 15px 0;
     position: relative;
   }
   .small.-group{
-    padding: 10px 0;
+    padding-top:10px;
+    position: relative;
   }
   .-group{
     width:100%;
@@ -197,21 +217,29 @@
 
   /* 适配*/
   @media (min-width: 320px) {
-    .group-right {
+    .big .group-right {
       width: 65%;
+    }
+    .small .group-right {
+      width: 80%;
     }
   }
 
   @media (min-width: 375px) {
-
-    .group-right {
+    .big .group-right {
       width: 70%;
+    }
+    .small .group-right {
+      width: 83%;
     }
   }
 
   @media (min-width: 414px) {
-    .group-right{
+    .big .group-right{
       width: 73%;
+    }
+    .small .group-right{
+      width: 85%;
     }
 
   }

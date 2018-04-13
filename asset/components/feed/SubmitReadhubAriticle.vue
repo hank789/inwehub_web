@@ -53,9 +53,15 @@
         :detailUrl="data.feed.comment_url"
         @commentIt="commentIt"
       ></SuppertAndComment>
-      <!--圈子信息-->
       <!-- 点赞和评论列表end -->
     </div>
+    <!--圈子信息-->
+    <groups-list class="small"
+                 :list="data.feed.group"
+                 :type="'small'"
+                 :joinDescription="'进圈'"
+                 @goJoin="goJoin"
+    ></groups-list>
   </div>
 </template>
 
@@ -96,6 +102,9 @@
 
     },
     methods: {
+      goJoin (id) {
+        this.$router.pushPlus('/group/detail/' + id)
+      },
       showItemOptions () {
         this.$emit('showItemOptions', this.data)
       },

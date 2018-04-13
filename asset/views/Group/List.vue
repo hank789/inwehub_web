@@ -61,7 +61,6 @@
     watch: {},
     methods: {
       goJoin (id) {
-        console.log(id)
         this.$router.pushPlus('/group/detail/' + id)
       }
     },
