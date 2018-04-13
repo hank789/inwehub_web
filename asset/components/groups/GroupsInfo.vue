@@ -6,7 +6,7 @@
         <p>{{detail.owner.name}}</p>
         <p><i></i>圈主</p>
       </div>
-      <svg class="icon" aria-hidden="true" @tap.stop.prevent="allOptions">
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="allOptions" v-if="this.detail.is_joined === 1 || this.detail.is_joined === 3">
         <use xlink:href="#icon-gengduo"></use>
       </svg>
       <i class="bot"></i>

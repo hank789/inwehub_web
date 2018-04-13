@@ -62,7 +62,7 @@
     methods: {
       goJoin (id) {
         console.log(id)
-        this.$router.pushPlus('/group/apply/' + id)
+        this.$router.pushPlus('/group/detail/' + id)
       }
     },
     mounted () {

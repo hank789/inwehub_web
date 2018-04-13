@@ -6,7 +6,7 @@
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
       <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
-        <img :src='item.logo'  @tap.stop.prevent="toDetail(item.is_joined, item.id)" />
+        <img :src='item.logo'  @tap.stop.prevent="toDetail(item)" />
         <p class="mui-ellipsis">{{item.name}}</p>
         <i v-if="item.unread_count"></i>
       </swiper-slide>
@@ -55,12 +55,8 @@
     },
     watch: {},
     methods: {
-      toDetail (isJoin, id) {
-        if (isJoin) {
-          this.$router.pushPlus('/group/detail/' + id)
-        } else {
-          this.$router.pushPlus('/group/apply/' + id)
-        }
+      toDetail (item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
       },
       companyServices () {
         postRequest(`group/mine`, {

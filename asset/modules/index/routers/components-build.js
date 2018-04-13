@@ -28,7 +28,6 @@ import InvitationSuccess from '../../../views/Invitation/Success.vue'
 import InvitationPreview from '../../../views/Invitation/Preview.vue'
 import InvitationImage from '../../../views/Invitation/Image.vue'
 import GroupsList from '../../../views/Group/List.vue'
-import GroupsApply from '../../../views/Group/Apply.vue'
 import GroupsDetail from '../../../views/Group/Detail.vue'
 import GroupsAdd from '../../../views/Group/Add.vue'
 import GroupsSetting from '../../../views/Group/Setting.vue'
@@ -208,7 +207,6 @@ export {
   InvitationPreview,
   InvitationImage,
   GroupsList,
-  GroupsApply,
   GroupsDetail,
   GroupsAdd,
   GroupsSetting,

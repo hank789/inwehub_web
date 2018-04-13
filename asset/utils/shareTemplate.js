@@ -151,6 +151,23 @@ function getResumeDetail (uuid, realname, companyName, avatarUrl) {
   }
 }
 
+/**
+ * 圈子详情页-微信分享模版
+ * url: /group/detail/221
+ */
+function getGroupDetail (id, title, username, userCount, logo) {
+  var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
+
+  return {
+    title: 'InweHub圈子：' + title + '- 最具品质的咨询顾问社区',
+    link: link,
+    content: username + '创建，已有' + userCount + '人加入 | 点击查看加入',
+    imageUrl: logo,
+    thumbUrl: logo + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '圈子分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -159,5 +176,6 @@ export {
   getTextDiscoverDetail,
   getAskCommunityInteractionAnswers,
   getInviteAnswerDetail,
-  getResumeDetail
+  getResumeDetail,
+  getGroupDetail
 }
