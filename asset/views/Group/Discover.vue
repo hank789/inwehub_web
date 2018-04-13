@@ -72,9 +72,9 @@
           slidesPerView: 'auto',
           spaceBetween: 10,
           onTap: this.swipperClick,
-          contact_id: '',
-          unread_count: 0
-        }
+        },
+        contact_id: '',
+        unread_count: 0
       }
     },
     components: {
@@ -88,7 +88,6 @@
     watch: {},
     methods: {
       messagecountchange (obj) {
-        console.log(obj.contact_id)
         if (obj.contact_id) {
           this.contact_id = obj.contact_id
           this.unread_count = obj.unread_count
