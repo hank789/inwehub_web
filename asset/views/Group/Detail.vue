@@ -33,6 +33,7 @@
           <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
                                  :show = 'true'
                                  @comment="comment"
+                                 @showItemOptions="showItemOptions"
           ></SubmitReadhubAriticle>
         </div>
       </RefreshList>
@@ -49,34 +50,39 @@
 
     </div>
 
+    <Options
+      ref="allOptions"
+      :id="'allOptions'"
+      :options="['退出']"
+      @selectedItem="selectedItem"
+    ></Options>
 
-    <div id="expert" class="mui-popover mui-popover-action mui-popover-bottom">
-      <div class="allOptions">
-        <div class="mui-poppicker-header">
-          <button class="mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="allOptions">取消</button>
-          <div class="mui-poppicker-clear"></div>
-        </div>
-        <div class="mui-poppicker-body">
-          <div class="option">退出</div>
-        </div>
-      </div>
-    </div>
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="itemOptions"
+      @selectedItem="selectedItem"
+    ></Options>
 
   </div>
 </template>
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import Options from '../../components/Options.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
   import { postRequest } from '../../utils/request'
+  import { getLocalUserId } from '../../utils/user'
+  import { getIndexByIdArray } from '../../utils/array'
   export default {
     data () {
       return {
         list: [],
         search_type: 1,
         detail: null,
-        loading: 1
+        loading: 1,
+        itemOptions: []
       }
     },
     computed: {
@@ -90,16 +96,60 @@
     components: {
       RefreshList,
       GroupsInfo,
-      SubmitReadhubAriticle
+      SubmitReadhubAriticle,
+      Options
     },
     props: {},
     watch: {},
     methods: {
+      isShowItemOption (item) {
+        if (getLocalUserId() === item.user.id) {
+          // 文章是我写的
+          return true
+        } else {
+          // 文章不是我写的， 但我是圈主
+          if (this.detail.is_joined === 3) {
+            return true
+          }
+        }
+        return false
+      },
+      showItemOptions (item) {
+        if (getLocalUserId() === item.user.id) {
+          this.itemOptions = [
+            '删除'
+          ]
+        } else {
+          this.itemOptions = [
+            '加精'
+          ]
+        }
+
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case '退出':
+            this.quit()
+            break
+          case '删除':
+            this.del(item, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '加精':
+            this.addGood(item)
+            break
+        }
+      },
+      addGood (item) {
+        // todo 接后台接口
+      },
       allOptions () {
         if (this.detail.is_joined === 3) {
           this.$router.pushPlus('/group/setting/' + this.id)
         } else {
-          window.mui('#expert').popover('toggle')
+          this.$refs.allOptions.toggle()
         }
       },
       getData () {
@@ -117,6 +167,31 @@
 
           this.detail = response.data.data
           this.loading = 0
+        })
+      },
+      del (item, callback) {
+        var btnArray = ['取消', '确定']
+        var list = this.list
+        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: item.id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                return
+              }
+              if (response.data.data) {
+                var index = getIndexByIdArray(this.list, item.id)
+                list.splice(index, 1)
+                callback()
+                window.mui.toast('删除成功')
+              }
+            })
+          }
         })
       },
       quit () {
@@ -261,16 +336,5 @@
     top: 226px;
   }
 
-  .allOptions{
-    background:#fff;
-  }
-  .allOptions .mui-poppicker-body{
-    height:auto;
-  }
-  .allOptions .option{
-    text-align: center;
-    color:#444;
-    height:0.96rem;
-    line-height: 0.96rem;
-  }
+
 </style>
