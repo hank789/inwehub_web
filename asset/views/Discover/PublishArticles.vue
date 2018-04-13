@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">发布动态</h1>
     </header>
 
@@ -110,18 +110,6 @@
       }
     },
     methods: {
-      cancelAsk () {
-        if (!this.channelValue && !this.title && !this.url && !this.selectedGroup.name) {
-          window.mui.back()
-          return
-        }
-        window.mui.confirm('退出此处编辑？', null, ['确定', '取消'], e => {
-          if (e.index === 0) {
-            localEvent.clearLocalItem('selectedGroup' + this.id)
-            window.mui.back()
-          }
-        }, 'div')
-      },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
