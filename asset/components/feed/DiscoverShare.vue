@@ -105,7 +105,6 @@
     },
     watch: {},
     mounted () {
-
     },
     methods: {
       goJoin (id) {

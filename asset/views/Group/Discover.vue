@@ -42,7 +42,7 @@
         <ul>
           <template v-for="(hot, index) in list">
             <!--带图片的样式-->
-            <li class="imgContainer" v-if="hot.type === 'text'">
+            <li class="imgContainer group-bot" v-if="hot.type === 'text'">
               <TextDetail :data="hot" @downvoteComment="downvoteComment"
                           @bookmarkuBmission="bookmarkuBmission"
                           @report="report"
@@ -307,6 +307,9 @@
   .listWrapper{
     top: 90px;
     bottom: 50px;
+  }
+  .group-bot{
+    padding-bottom: 10px;
   }
 
 </style>
