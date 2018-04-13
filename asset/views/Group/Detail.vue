@@ -25,7 +25,6 @@
           @allOptions="allOptions"
         ></GroupsInfo>
         <div class="gray"></div>
-
         <div class="menu">
           <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
             v-if="search_type === 1"></i></span>
@@ -35,7 +34,6 @@
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
-
           <div  class="groups-list">
             <template v-for="(item, index) in list">
               <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
@@ -46,7 +44,6 @@
             </template>
           </div>
         </RefreshList>
-
         <div class="invitation">
           <p @tap.stop.prevent="$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + id))">
             <svg class="icon" aria-hidden="true">

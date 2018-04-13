@@ -707,6 +707,18 @@ function AppInit (context) {
               // 邀请用户注册成功
               router.pushPlus('/invitation/friends')
               break
+            case 'group_member_apply':
+              // 申请加入圈子通知
+              router.pushPlus('/group/detail/' + payload.object_id)
+              break
+            case 'group_member_join':
+              // 成功加入圈子
+              router.pushPlus('/group/detail/' + payload.object_id)
+              break
+            case 'group_audit_result':
+              // 圈子审核结果
+              router.pushPlus('/group/detail/' + payload.object_id)
+              break
           }
         }
 
