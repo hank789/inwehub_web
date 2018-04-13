@@ -314,11 +314,8 @@
     font-size: 16px;
     color: #FFFFFF;
     line-height: 44px;
-    position: fixed;
-    left:0;
-    right:0;
-    bottom: 15px;
-    margin: auto;
+    margin-left: 4%;
+    margin-top: 20px;
   }
   button.grey{
     background:rgba(220,220,220,1);
