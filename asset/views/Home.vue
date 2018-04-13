@@ -2,7 +2,8 @@
   <div>
     <div class="mui-content absolute">
       <!--search-->
-      <div class="search">
+      <!--search-->
+      <div class="search mui-preview-header">
         <div class="search-l">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kefu"></use>
@@ -17,6 +18,21 @@
           <p>搜内容、问答、圈子</p>
         </div>
       </div>
+      <!--<div class="search">-->
+        <!--<div class="search-l">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-kefu"></use>-->
+          <!--</svg>-->
+          <!--<p>客服</p>-->
+          <!--<i></i>-->
+        <!--</div>-->
+        <!--<div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-sousuo"></use>-->
+          <!--</svg>-->
+          <!--<p>搜内容、问答、圈子</p>-->
+        <!--</div>-->
+      <!--</div>-->
       <!--轮播-->
       <div id="slider" class="mui-slider mui-fullscreen" v-if="notices.length">
         <div class="mui-slider-group  mui-slider-loop">
@@ -269,13 +285,69 @@
     background: #ffffff;
   }
   /*search*/
+  /*.search{*/
+    /*width:92%;*/
+    /*height:34px;*/
+    /*margin-left: 4%;*/
+    /*position: absolute;*/
+    /*top:2px;*/
+    /*z-index: 2;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+  /*}*/
+  /*.search-l{*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*position: relative;*/
+    /*justify-content: center;*/
+  /*}*/
+  /*.search-l svg{*/
+    /*font-size:25px;*/
+    /*color: rgba(255,255,255,1);*/
+  /*}*/
+  /*.search-l p{*/
+    /*font-size:10px;*/
+    /*color: rgba(255,255,255,1);*/
+    /*line-height: 14px;*/
+    /*margin-bottom: 5px;*/
+  /*}*/
+  /*.search-l i{*/
+    /*width:8px;*/
+    /*height:8px;*/
+    /*background: #FA4975;*/
+    /*border-radius: 50%;*/
+    /*position: absolute;*/
+    /*top: 6px;*/
+    /*right: -10px;*/
+  /*}*/
+  /*.search-r{*/
+    /*width: 77%;*/
+    /*height:100%;*/
+    /*background:rgba(255,255,255,1);*/
+    /*opacity:0.9477;*/
+    /*border-radius: 50px;*/
+    /*font-size: 14px;*/
+    /*color:rgba(200,200,200,1);*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+  /*}*/
+  /*.search-r svg{*/
+    /*font-size: 17px;*/
+    /*color: rgba(68,68,68,1);*/
+    /*margin-left: 16px;*/
+    /*margin-right: 6px;*/
+  /*}*/
+  /*search*/
   .search{
     width:92%;
     height:34px;
-    margin-left: 4%;
-    position: absolute;
-    top:2px;
-    z-index: 2;
+    margin-top: 8px;
+    margin:8px 0  8px 4%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -286,15 +358,14 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    justify-content: center;
   }
   .search-l svg{
     font-size:25px;
-    color: rgba(255,255,255,1);
+    color: rgba(200,200,200,1);
   }
   .search-l p{
     font-size:10px;
-    color: rgba(255,255,255,1);
+    color: rgba(128,128,128,1);
     line-height: 14px;
     margin-bottom: 5px;
   }
@@ -307,14 +378,15 @@
     top: 6px;
     right: -10px;
   }
+
   .search-r{
     width: 77%;
     height:100%;
-    background:rgba(255,255,255,1);
+    background:rgba(243,244,246,1);
     opacity:0.9477;
     border-radius: 50px;
     font-size: 14px;
-    color:rgba(200,200,200,1);
+    color:rgba(128,128,128,1);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -331,6 +403,7 @@
     height:200px;
     background: #cccccc;
     position: relative;
+    top: 50px;
   }
   .categoryMenu{
     width:100%;
@@ -340,6 +413,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    margin-top: 50px;
   }
   .categoryMenu li{
     height:100%;

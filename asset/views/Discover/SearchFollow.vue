@@ -355,7 +355,6 @@
     margin-right: 6px;
   }
   /*菜单*/
-  /*菜单*/
   .menu{
     width:100%;
     height: 1.173rem;
