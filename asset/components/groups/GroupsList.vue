@@ -1,5 +1,5 @@
 <template>
-  <div class="-group">
+  <div class="-group" v-if="list.logo">
     <div class="logo">
       <img :src="list.logo" />
     </div>

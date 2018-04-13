@@ -19,7 +19,6 @@
           :list="list"
           class="listWrapper"
         >
-
         <GroupsInfo
           :detail="detail"
           @allOptions="allOptions"
@@ -36,12 +35,14 @@
           <i class="bot"></i>
         </div>
 
-          <div v-for="(item, index) in list" class="groups-list">
-            <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                   :show='true'
-                                   @comment="comment"
-                                   @showItemOptions="showItemOptions"
-            ></SubmitReadhubAriticle>
+          <div  class="groups-list">
+            <template v-for="(item, index) in list">
+              <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+                                     :show='true'
+                                     @comment="comment"
+                                     @showItemOptions="showItemOptions"
+              ></SubmitReadhubAriticle>
+            </template>
           </div>
         </RefreshList>
 
@@ -51,7 +52,6 @@
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
             发分享
-
           </p>
           <p @tap.stop.prevent="joinShare">邀请加入</p>
         </div>
@@ -68,7 +68,7 @@
 
         <div class="group-text">
           <p>圈子介绍<i class="bot"></i></p>
-          <p>{{ detail.description }}</p>
+          <p>{{ detail.description}}</p>
         </div>
         <div class="join" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
         <div class="join wait" v-if="detail.is_joined === 0">入圈审核中</div>
@@ -417,7 +417,7 @@
   }
 
   .groups-list {
-
+    margin-top: 49px;
   }
 
   .invitation {
