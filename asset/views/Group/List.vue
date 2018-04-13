@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="new-groups">
+      <div class="new-groups" @tap.stop.prevent="$router.pushPlus('/group/add')">
         <p>创建新的圈子</p>
       </div>
       <RefreshList
