@@ -63,7 +63,7 @@
       </svg>{{data.feed.current_address_name}}
     </div>
     <!--圈子信息-->
-    <groups-list class="small"
+    <groups-list class="small groups"
                  :list="data.feed.group"
                  :type="'small'"
                  :joinDescription="'进圈'"
@@ -208,7 +208,9 @@
   .noMoreComment .container-answer{
     padding:0.266rem 0.4rem 0.266rem;
   }
-
+  .groups{
+    margin-top: 10px;
+  }
 
 </style>
 <style>
