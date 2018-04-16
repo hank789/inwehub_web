@@ -116,6 +116,9 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  .detail i.top{
+    display: none;
+  }
   /*圈子*/
   .big.-group{
     padding: 0.4rem 0;

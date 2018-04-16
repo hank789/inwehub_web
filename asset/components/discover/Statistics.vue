@@ -92,6 +92,7 @@
           var code = response.data.code
           if (code === 6108) {
             userAbility.alertGroups(this, this.groupId)
+            return
           } else if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
@@ -129,6 +130,7 @@
           var code = response.data.code
           if (code === 6108) {
             userAbility.alertGroups(this, this.groupId)
+            return
           } else if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
