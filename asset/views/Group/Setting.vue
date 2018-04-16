@@ -9,8 +9,8 @@
            ref="RefreshList"
            v-model="list"
            :api="'group/members'"
-           :prevOtherData="{id: id}"
-           :nextOtherData="{id: id}"
+           :prevOtherData="{id: id, type: 1}"
+           :nextOtherData="{id: id, type: 1}"
            :pageMode = true
            class="listWrapper"
          >
