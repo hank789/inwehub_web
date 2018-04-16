@@ -66,8 +66,6 @@
     <groups-list class="small groups"
                  :list="data.feed.group"
                  :type="'small'"
-                 :joinDescription="'进圈'"
-                 @goJoin="goJoin"
     ></groups-list>
   </div>
 </template>
@@ -107,9 +105,6 @@
     mounted () {
     },
     methods: {
-      goJoin (id) {
-        this.$router.pushPlus('/group/detail/' + id)
-      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()

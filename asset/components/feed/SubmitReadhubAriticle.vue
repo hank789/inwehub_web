@@ -59,7 +59,6 @@
     <groups-list class="small groups"
                  :list="data.feed.group"
                  :type="'small'"
-                 :joinDescription="'进圈'"
                  @goJoin="goJoin"
     ></groups-list>
   </div>

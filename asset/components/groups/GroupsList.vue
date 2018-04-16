@@ -1,5 +1,5 @@
 <template>
-  <div class="-group" v-if="list.id">
+  <div class="-group" v-if="list.id" @tap.stop.prevent="$router.pushPlus('/group/detail/' + list.id)">
     <div class="logo">
       <img :src="list.logo" />
     </div>
@@ -41,10 +41,6 @@
         default: () => {
           return {}
         }
-      },
-      description: {
-        type: String,
-        default: ''
       },
       joinDescription: {
         type: String,
@@ -166,7 +162,6 @@
   }
   .-group-name{
     display: block;
-    width:60%;
     font-weight: 500;
     color: #444444;
   }
