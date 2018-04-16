@@ -3,10 +3,10 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <h1 class="mui-title">通知</h1>
-      <a class="mui-icon mui-pull-right" @tap.stop.prevent="notification()">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-gou"></use>
-      </svg>
+      <a class="mui-icon mui-pull-right" @tap.stop.prevent="allRead()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gou"></use>
+        </svg>
       </a>
     </header>
     <!--导航栏-->
@@ -121,11 +121,20 @@
       </div>
     </div>
     <!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
+
+    <Options
+      ref="allOptions"
+      :id="'allOptions'"
+      :options="['全部标记为已读']"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
 <script type="text/javascript">
   import { postRequest } from '../../utils/request'
+  import Options from '../../components/Options.vue'
   import RefreshList from '../../components/refresh/List.vue'
 
   const TaskMain = {
@@ -181,9 +190,21 @@
       mobile: 0
     }),
     components: {
-      RefreshList
+      RefreshList,
+      Options
     },
     methods: {
+      allRead () {
+        this.$refs.allOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case '全部标记为已读':
+            this.notification()
+            this.$refs.allOptions.toggle()
+            break
+        }
+      },
       notification () {
         postRequest(`notification/mark_as_read`, {
           notification_type: 0
