@@ -75,6 +75,7 @@
   import DiscussReplay from '../../components/discover/DiscussReply.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
 
   const Discuss = {
     data: () => ({
@@ -88,6 +89,14 @@
       list: []
     }),
     props: {
+      groupId: {
+        type: Number,
+        default: 0
+      },
+      is_joined: {
+        type: Number,
+        default: 1
+      },
       listApi: {
         type: String,
         default: ''
@@ -183,6 +192,10 @@
         this.getList()
       },
       comment (parentId, commentTargetUsername, list) {
+        if (this.is_joined === -1) {
+          userAbility.alertGroups(this, this.groupId)
+          return
+        }
         var commentTarget = {
           parentId: parentId || 0,
           commentTargetUsername: commentTargetUsername || '',

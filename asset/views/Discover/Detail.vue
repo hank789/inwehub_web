@@ -134,6 +134,8 @@
         <!--评论部分-->
         <Discuss
           v-if="detail.slug"
+          :groupId = detail.group.id
+          :is_joined = detail.group.is_joined
           :listApi="'article/comments'"
           :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
           :storeApi="'article/comment-store'"
@@ -311,7 +313,7 @@
         this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
-
+        console.log(aaaaaa)
       },
       shareFail () {
       },
