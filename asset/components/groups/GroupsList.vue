@@ -1,5 +1,5 @@
 <template>
-  <div class="-group" v-if="list.id" @tap.stop.prevent="$router.pushPlus('/group/detail/' + list.id)">
+  <div class="-group" v-if="list.id">
     <div class="logo">
       <img :src="list.logo" />
     </div>

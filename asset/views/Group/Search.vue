@@ -121,6 +121,8 @@
             return
           }
           window.mui.toast(response.data.message)
+          // 请求成功后跳转详情页面
+          this.$router.pushPlus('/group/detail/' + id)
         })
       },
       //  点击清空输入框
