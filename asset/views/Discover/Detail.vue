@@ -382,6 +382,7 @@
       },
       shotContentHeight () {
         if (this.detail.group.is_joined !== -1) {
+          this.showAllContentWrapper()
           return
         }
 
