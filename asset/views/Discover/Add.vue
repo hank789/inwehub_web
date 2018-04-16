@@ -429,7 +429,7 @@
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
-        if (!this.selectedGroup) {
+        if (!this.selectedGroup.id) {
           window.mui.toast('请选择圈子')
           return
         }
