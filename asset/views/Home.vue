@@ -3,7 +3,7 @@
     <div class="mui-content absolute">
       <!--search-->
       <!--search/chat/72-->
-      <div class="search mui-preview-header">
+      <div class="search">
         <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kefu"></use>
