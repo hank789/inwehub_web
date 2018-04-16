@@ -26,10 +26,10 @@
 
         <template v-for="(item, index) in list">
           <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
-            <groupsList class="big"
+            <groupsList class="big groupsList"
                         :list="item"
                         @goJoin="goJoin"
-                        :description = "'加入'">
+                        :description = "'已加入'">
               <i class="bot"></i>
             </groupsList>
           </div>
