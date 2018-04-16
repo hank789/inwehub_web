@@ -91,6 +91,8 @@
 
         <div class="statisticsWrapper">
           <Statistics
+            :groupId = detail.group.id
+            :is_joined = detail.group.is_joined
             :id="detail.id"
             :commentNum="detail.comments_number"
             :isCommented="!!detail.is_commented"
@@ -132,6 +134,8 @@
         <!--评论部分-->
         <Discuss
           v-if="detail.slug"
+          :groupId = detail.group.id
+          :is_joined = detail.group.is_joined
           :listApi="'article/comments'"
           :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
           :storeApi="'article/comment-store'"
@@ -309,7 +313,7 @@
         this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
-
+        console.log(aaaaaa)
       },
       shareFail () {
       },
@@ -382,6 +386,7 @@
       },
       shotContentHeight () {
         if (this.detail.group.is_joined !== -1) {
+          this.showAllContentWrapper()
           return
         }
 
