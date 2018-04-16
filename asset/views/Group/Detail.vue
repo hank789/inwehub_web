@@ -77,9 +77,9 @@
           <p>圈子介绍<i class="bot"></i></p>
           <p>{{ detail.description}}</p>
         </div>
-        <div class="join" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
-        <div class="join wait" v-if="detail.is_joined === 0">入圈审核中</div>
-        <div class="join wait" v-if="detail.is_joined === 2">审核不通过</div>
+        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+        <div class="join wait" v-if="detail.audit_status === 0">入圈审核中</div>
+        <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
       </div>
     </div>
 
@@ -276,8 +276,12 @@
 
           this.detail = response.data.data
 
-          if (this.detail.is_joined === 1 || this.detail.is_joined === 3) {
-            this.isInGroup = true
+          if (this.detail.audit_status === 1) {
+            if (this.detail.is_joined === 1 || this.detail.is_joined === 3) {
+              this.isInGroup = true
+            } else {
+              this.isInGroup = false
+            }
           } else {
             this.isInGroup = false
           }
