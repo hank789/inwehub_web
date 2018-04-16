@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <h1 class="mui-title">通知</h1>
-      <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="notification()">
+      <a class="mui-icon mui-pull-right" @tap.stop.prevent="notification()">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-gou"></use>
       </svg>
