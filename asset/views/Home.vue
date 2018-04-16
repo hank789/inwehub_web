@@ -18,21 +18,6 @@
           <p>搜内容、问答、圈子</p>
         </div>
       </div>
-      <!--<div class="search">-->
-        <!--<div class="search-l">-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-kefu"></use>-->
-          <!--</svg>-->
-          <!--<p>客服</p>-->
-          <!--<i></i>-->
-        <!--</div>-->
-        <!--<div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-sousuo"></use>-->
-          <!--</svg>-->
-          <!--<p>搜内容、问答、圈子</p>-->
-        <!--</div>-->
-      <!--</div>-->
       <!--轮播-->
       <div id="slider" class="mui-slider mui-fullscreen" v-if="notices.length">
         <div class="mui-slider-group  mui-slider-loop">
@@ -41,7 +26,7 @@
             <a href="#"><img :src="notices[notices.length-1].img_url"></a>
           </div>
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a href="#" @tap.stop.prevent="goLink(notices.url)" target="_blank"><img :src="notice.img_url"></a>
+            <a href="#" @tap.stop.prevent="goLink(notice.url)" target="_blank"><img :src="notice.img_url"></a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
@@ -160,46 +145,45 @@
         }
       },
       goLink: function (url) {
-        console.log(url)
-//        if (/http/.test(url)) {
-//          if (window.mui.os.plus) {
-//            if (window.mixpanel.track) {
-//              window.mixpanel.track(
-//                'inwehub:notice_detail', {
-//                  'app': 'inwehub',
-//                  'user_device': window.getUserAppDevice(),
-//                  'page': url,
-//                  'page_title': '首页轮播文章'
-//                }
-//              )
-//            }
-//            var noticeWs = window.mui.openWindow({
-//              url: '/public/index.html#/webview/notice',
-//              id: 'inwehub_notice_view',
-//              preload: false, // 一定要为false
-//              createNew: false,
-//              show: {
-//                autoShow: true,
-//                aniShow: 'pop-in'
-//              },
-//              styles: {
-//                popGesture: 'hide'
-//              },
-//              waiting: {
-//                autoShow: false
-//              },
-//              extras: {
-//                preload: true,
-//                article_url: url
-//              }
-//            })
-//            window.mui.fire(noticeWs, 'load_article', {article_url: url})
-//          } else {
-//            window.location.href = url
-//          }
-//        } else {
-//          this.$router.pushPlus(url)
-//        }
+        if (/http/.test(url)) {
+          if (window.mui.os.plus) {
+            if (window.mixpanel.track) {
+              window.mixpanel.track(
+                'inwehub:notice_detail', {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': url,
+                  'page_title': '首页轮播文章'
+                }
+              )
+            }
+            var noticeWs = window.mui.openWindow({
+              url: '/public/index.html#/webview/notice',
+              id: 'inwehub_notice_view',
+              preload: false, // 一定要为false
+              createNew: false,
+              show: {
+                autoShow: true,
+                aniShow: 'pop-in'
+              },
+              styles: {
+                popGesture: 'hide'
+              },
+              waiting: {
+                autoShow: false
+              },
+              extras: {
+                preload: true,
+                article_url: url
+              }
+            })
+            window.mui.fire(noticeWs, 'load_article', {article_url: url})
+          } else {
+            window.location.href = url
+          }
+        } else {
+          this.$router.pushPlus(url)
+        }
       },
       goDetial (type, recommend) {
         switch (type) {

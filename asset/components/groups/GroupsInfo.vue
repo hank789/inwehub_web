@@ -237,6 +237,7 @@
     width: 85%;
     height:100%;
     overflow: hidden;
+    margin-top: 7.5px;
   }
   .tag-avatar .avatar img{
     width:0.533rem;
