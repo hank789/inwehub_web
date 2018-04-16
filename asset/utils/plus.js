@@ -709,7 +709,7 @@ function AppInit (context) {
               break
             case 'group_member_apply':
               // 申请加入圈子通知
-              router.pushPlus('/group/detail/' + payload.object_id)
+              router.pushPlus('/group/setting/' + payload.object_id)
               break
             case 'group_member_join':
               // 成功加入圈子
