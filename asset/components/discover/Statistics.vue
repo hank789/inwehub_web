@@ -35,6 +35,7 @@
 <script type="text/javascript">
 
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -42,6 +43,14 @@
     },
     components: {},
     props: {
+      is_joined: {
+        type: Number,
+        default: -1
+      },
+      groupId: {
+        type: Number,
+        default: 0
+      },
       commentNum: {
         type: Number,
         default: 0
@@ -81,11 +90,12 @@
 
         postRequest(`article/bookmark-submission`, data).then(response => {
           var code = response.data.code
-          if (code !== 1000) {
+          if (code === 6108) {
+            userAbility.alertGroups(this, this.groupId)
+          } else if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-
           if (this.isCollected) {
             this.$emit('collectNumDesc')
           } else {
@@ -115,14 +125,14 @@
         var data = {
           submission_id: this.id
         }
-
         postRequest(`article/upvote-submission`, data).then(response => {
           var code = response.data.code
-          if (code !== 1000) {
+          if (code === 6108) {
+            userAbility.alertGroups(this, this.groupId)
+          } else if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-
           if (this.isSupported) {
             this.$emit('supportNumDesc')
           } else {

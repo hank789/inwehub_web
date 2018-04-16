@@ -91,6 +91,8 @@
 
         <div class="statisticsWrapper">
           <Statistics
+            :groupId = detail.group.id
+            :is_joined = detail.group.is_joined
             :id="detail.id"
             :commentNum="detail.comments_number"
             :isCommented="!!detail.is_commented"

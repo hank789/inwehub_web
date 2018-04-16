@@ -225,6 +225,19 @@ var UserAbility = () => {
       })
     }
   }
+  // 圈子弹窗
+  var alertGroups = (context,id) => {
+    var dialog = getDialogObj(context)
+    if (dialog) {
+      dialog.getHtml('groups', {}, (html) => {
+        alertSimple(html, '加入圈子', (num) => {
+          if (num.index === 0) {
+            router.pushPlus('/group/detail/' + id)
+          }
+        }, true)
+      })
+    }
+  }
   // 受邀红包样式
   var InvitationCoupon = (context) => {
     // 红包请求
@@ -413,7 +426,8 @@ var UserAbility = () => {
     jumpToTagDetail: jumpToTagDetail,
     InvitationCoupon: InvitationCoupon,
     luckDraw: luckDraw,
-    jumpToChat: jumpToChat
+    jumpToChat: jumpToChat,
+    alertGroups: alertGroups
   }
 }
 

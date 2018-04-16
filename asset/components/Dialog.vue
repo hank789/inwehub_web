@@ -1,6 +1,13 @@
 <template>
   <div :style="style">
     <!--点击时间添加class -> alertConfirm-->
+    <div id="groups">
+      <div class="groups">
+         <p>请先加入圈子！</p>
+         <p>即可点赞、收藏、分享、看更多圈子内容</p>
+      </div>
+    </div>
+
     <!--级别限制提示的弹窗-->
     <div id="test">
       <div class="p-level">
@@ -541,6 +548,20 @@
 </script>
 
 <style scoped="scoped">
+  .groups{
+    width: 105%;
+    margin-left: -2%;
+    text-align: center;
+  }
+  .groups p:nth-of-type(1){
+    font-size:16px;
+    color:rgba(68,68,68,1);
+    margin-top: 31px;
+  }
+  .groups p:nth-of-type(2){
+    font-size:14px;
+    color:rgba(128,128,128,1);
+  }
   #test {
     width: 6.4rem;
     height: 2.933rem;
