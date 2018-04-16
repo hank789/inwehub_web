@@ -193,6 +193,6 @@
     margin-left: 2px;
   }
   .groups{
-    margin-top: 10px;
+    margin-top: 15px;
   }
 </style>
