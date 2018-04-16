@@ -11,7 +11,7 @@
         <p @tap.stop.prevent="$router.replace('/discover/publishArticles')">文章</p>
         <p>分享<i></i></p>
         <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="selectedGroup.name">{{selectedGroup.name}}</span>
+          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</span>
           <span v-else>选择圈子</span>
         </button>
       </div>
