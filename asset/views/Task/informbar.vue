@@ -17,7 +17,7 @@
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <template  v-for="item in list">
-            <li v-if="item.type == 'App\\Notifications\\GroupAuditResult'" @tap.stop.prevent="goUrl(item.data.url)">
+            <li v-if="item.type == 'App\\Notifications\\GroupAuditResult' || item.type == 'App\\Notifications\\NewGroupMemberJoin' || item.type == 'App\\Notifications\\NewGroupMemberApply'" @tap.stop.prevent="goUrl(item.data.url)">
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
