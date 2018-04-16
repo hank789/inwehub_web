@@ -56,7 +56,7 @@
       <!-- 点赞和评论列表end -->
     </div>
     <!--圈子信息-->
-    <groups-list class="small"
+    <groups-list class="small groups"
                  :list="data.feed.group"
                  :type="'small'"
                  :joinDescription="'进圈'"
@@ -191,5 +191,8 @@
   .more{
     color: #808080;
     margin-left: 2px;
+  }
+  .groups{
+    margin-top: 15px;
   }
 </style>

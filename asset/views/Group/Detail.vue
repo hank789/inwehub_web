@@ -43,6 +43,15 @@
               ></SubmitReadhubAriticle>
             </template>
           </div>
+          <!--为空的提示-->
+          <div class="Nothing" v-if="!list.length">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zanwushuju"></use>
+            </svg>
+            <p>暂无数据</p>
+          </div>
+
+          <!---->
         </RefreshList>
         <div class="invitation">
           <p @tap.stop.prevent="$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + id))">
@@ -509,5 +518,20 @@
     box-shadow: 0px 1px 10px 0px rgba(205,215,220,1);
     color:rgba(180,180,182,1);
   }
-
+  .Nothing{
+    width: 211px;
+    height: 200px;
+    position: absolute;
+    font-size: 12px;
+    color: rgba(200,200,200,1);
+    left: 0;
+    right: 0;
+    top: 300px;
+    text-align: center;
+    margin: auto;
+  }
+  .Nothing svg{
+    font-size: 60px;
+    margin-bottom: 5px;
+  }
 </style>
