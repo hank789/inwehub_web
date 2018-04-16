@@ -78,8 +78,11 @@
           <p>{{ detail.description}}</p>
         </div>
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
-        <div class="join wait" v-if="detail.audit_status === 0">入圈审核中</div>
+
+        <div class="join wait" v-if="detail.audit_status === 0">圈子审核中</div>
         <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
+        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
+        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 2">审核不通过</div>
       </div>
     </div>
 
@@ -347,7 +350,6 @@
         })
       },
       chooseType (type) {
-        this.list = []
         this.search_type = type
       },
       comment (submissionId, parentId, commentTargetUsername, list, component) {
