@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">发布动态</h1>
+      <h1 class="mui-title">发布</h1>
     </header>
 
     <div class="mui-content">
@@ -36,15 +36,15 @@
           <input type="text" placeholder="输入文章标题" v-model.trim="title" class="longContainer" v-else/>
           <i class="bot"></i>
         </li>
-        <li class="channel">
-          <P>选择频道</P>
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!channel">
-            <use xlink:href="#icon-shuru"></use>
-          </svg>
-          <input type="text" v-model.trim="channel"  @tap.stop.prevent="click()"  v-else/>
+        <!--<li class="channel">-->
+          <!--<P>选择频道</P>-->
+          <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!channel">-->
+            <!--<use xlink:href="#icon-shuru"></use>-->
+          <!--</svg>-->
+          <!--<input type="text" v-model.trim="channel"  @tap.stop.prevent="click()"  v-else/>-->
 
-          <i class="bot"></i>
-        </li>
+          <!--<i class="bot"></i>-->
+        <!--</li>-->
         <!--<li class="coverMap">-->
         <!--<p>封面图片</p>-->
         <!--<svg class="icon" aria-hidden="true">-->
@@ -133,7 +133,7 @@
           type: 'link',
           title: this.title,
           url: this.url,
-          category_id: this.channelValue,
+//          category_id: this.channelValue,
           photos: '',
           current_address_name: '',
           current_address_longitude: '',
@@ -210,11 +210,11 @@
           return false
         }
         // 频道；
-        if (!this.channel) {
-          this.disableRegister = true
-          this.isblue = false
-          return false
-        }
+//        if (!this.channel) {
+//          this.disableRegister = true
+//          this.isblue = false
+//          return false
+//        }
 
         this.disableRegister = false
         this.isblue = true
