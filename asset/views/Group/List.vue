@@ -101,12 +101,12 @@
  .new-groups{
    width:92%;
    margin-left: 4%;
-   height:34px;
+   height:0.906rem;
    background:#cccccc;
-   font-size: 14px;
+   font-size: 0.373rem;
    color:rgba(68,68,68,1);
-   line-height:34px;
-   padding: 0 15px;
+   line-height:0.906rem;
+   padding: 0 0.4rem;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
@@ -118,11 +118,11 @@
   }
   .group-title{
     width:100%;
-    height:30px;
+    height:0.8rem;
     align-items: center;
-    line-height: 30px;
+    line-height: 0.8rem;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
     padding-left:4%;
   }
@@ -132,7 +132,7 @@
    overflow: hidden;
  }
   .listWrapper{
-    top:35px;
+    top:0.933rem;
   }
 </style>
 

@@ -107,7 +107,7 @@
   }
   .groups-title{
     width:100%;
-    height:45px;
+    height:1.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -115,7 +115,7 @@
     position: relative;
   }
   .groups-title svg{
-    font-size: 17px;
+    font-size: 0.453rem;
     color:rgba(128,128,128,1);
     margin-right: 4%;
 
@@ -127,22 +127,22 @@
     margin-left: 4%;
   }
   .groups-left img{
-    width:20px;
-    height:20px;
+    width:0.533rem;
+    height:0.533rem;
     border-radius: 50%;
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   .groups-left p:nth-of-type(1){
-    font-size:14px;
+    font-size:0.373rem;
     color:rgba(86,86,86,1);
-    margin-right: 7px;
+    margin-right: 0.186rem;
   }
   .groups-left p:nth-of-type(2) {
-    width: 38px;
-    height: 18px;
+    width: 1.013rem;
+    height: 0.48rem;
     background: rgba(168, 223, 247, 1);
-    border-radius: 6px;
-    font-size: 12px;
+    border-radius: 0.16rem;
+    font-size: 0.32rem;
     color: rgba(35,82,128,1);
     display: flex;
     flex-direction: row;
@@ -150,15 +150,15 @@
   }
   .groups-left p:nth-of-type(2) i{
     display: inline-block;
-    width:3px;
-    height:3px;
+    width:0.08rem;
+    height:0.08rem;
     border-radius: 50%;
     background: #ffffff;
-    margin: 0 3px;
+    margin: 0 0.08rem;
   }
   .tag-title{
     width:100%;
-    height:123px;
+    height:3.28rem;
     background: #ffffff;
     padding: 1.5rem 4% 1.4rem 4%;
     /*padding: 0 4%;*/
@@ -167,8 +167,8 @@
     align-items: center;
   }
   .tag-l{
-    width:92px;
-    height:92px;
+    width:2.453rem;
+    height:2.453rem;
   }
   .tag-l img{
     width: 100%;
@@ -192,46 +192,46 @@
   }
 
   .tag-r{
-    height:92px;
+    height:2.453rem;
     margin-left: 0.266rem;
   }
   .tag-r p:nth-of-type(1){
-    font-size:18px;
+    font-size:0.48rem;
     color: rgba(68,68,68,1);
     font-weight:500;
-    margin-bottom: 8px;
+    margin-bottom: 0.213rem;
   }
   .tag-info{
     width:100%;
-    font-size: 12px;
+    font-size: 0.32rem;
     color:rgba(180,180,182,1);
     display: flex;
     flex-direction: row;
     align-items: center;
   }
   .tag-info span{
-    margin-right: 13px;
+    margin-right: 0.346rem;
   }
   .tag-info span svg{
-    font-size: 13px;
+    font-size: 0.346rem;
     color:rgba(180,180,182,1);
   }
   .tag-info span i{
-    font-size: 14px;
+    font-size: 0.373rem;
     font-weight: 500;
     color: rgba(3,174,249,1);
   }
   .tag-avatar{
     width:100%;
-    height:37px;
-    border:1px solid rgba(220, 220, 220, 1);
-    border-radius: 50px;
+    height:0.986rem;
+    border:0.026rem solid rgba(220, 220, 220, 1);
+    border-radius: 1.333rem;
     padding: 0 4%;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 0.213rem;
   }
   .tag-avatar .avatar{
     width: 85%;
@@ -239,14 +239,14 @@
     overflow: hidden;
   }
   .tag-avatar .avatar img{
-    width:20px;
-    height:20px;
+    width:0.533rem;
+    height:0.533rem;
     border-radius: 50%;
     margin-right: 2%;
-    margin-bottom: -8px;
+    margin-bottom: -0.213rem;
   }
   .tag-avatar svg{
-    margin-right:13px;
+    margin-right:0.346rem;
     color: #808080;
   }
   /***媒体查询*****/

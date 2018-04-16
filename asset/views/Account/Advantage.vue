@@ -412,16 +412,16 @@
   .hotTags p{
     font-size: 0.346rem;
     color:rgba(128,128,128,1);
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
   .hotTags li{
-    font-size:14px;
+    font-size:0.373rem;
     color:rgba(68,68,68,1);
-    padding: 5px 10px;
-    border:1px solid RGBA(220, 220, 220, 1);
-    border-radius: 4px;
+    padding: 0.133rem 0.266rem;
+    border:0.026rem solid RGBA(220, 220, 220, 1);
+    border-radius: 0.106rem;
     float: left;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin-bottom: 0.266rem;
+    margin-right: 0.266rem;
   }
 </style>

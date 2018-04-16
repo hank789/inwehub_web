@@ -5,12 +5,12 @@
       <p v-if="isShow" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
-      <swiper-slide style="width: 78px;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+      <swiper-slide style="width: 2.08rem;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
         <img :src='item.logo'  @tap.stop.prevent="toDetail(item)" />
         <p class="mui-ellipsis">{{item.name}}</p>
         <i v-if="item.unread_count"></i>
       </swiper-slide>
-      <swiper-slide  style="width: 78px;" v-if="isShow">
+      <swiper-slide  style="width: 2.08rem;" v-if="isShow">
         <div class="service" @tap.stop.prevent="$router.pushPlus('/groups')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
@@ -118,28 +118,28 @@
   }
   .container-item .title p{
     float: left;
-    font-size:16px;
+    font-size:0.426rem;
     color:rgba(68,68,68,1);
     font-weight: 500;
   }
   .container-item .title p:nth-of-type(2){
     float: right;
-    font-size:14px;
+    font-size:0.373rem;
     color:#03AEF9;
   }
   .home-recommend {
     width: 100%;
-    height: 123px;
+    height: 3.28rem;
     padding-left:4%;
     background: #FFFFFF;
   }
   .home-recommend i{
     position: absolute;
-    top:5px;
-    right:5px;
+    top:0.133rem;
+    right:0.133rem;
     display: block;
-    width:8px;
-    height:8px;
+    width:0.213rem;
+    height:0.213rem;
     background: #FA4975;
     border-radius: 50%;
   }
@@ -157,7 +157,7 @@
     margin-left: 0rem;
   }
   .home-card {
-    height: 78px;
+    height: 2.08rem;
     background: #ececee;
     position: relative;
     border-radius: 0.106rem;
@@ -179,20 +179,20 @@
     width: 100%;
   }
   .home-card p{
-    font-size: 12px;
+    font-size: 0.32rem;
     color:rgba(128,128,128,1);
-    margin-top: -4px;
+    margin-top: -0.106rem;
   }
   /* 合作*/
   .service{
     background: #ffffff;
-    height:78px;
+    height:2.08rem;
     border-radius:0.106rem;
-    border: 1px solid RGBA(220, 220, 220, 1);
+    border: 0.026rem solid RGBA(220, 220, 220, 1);
     position: relative;
   }
   .addtitle{
-    font-size: 12px;
+    font-size: 0.32rem;
     color:rgba(128,128,128,1);
   }
   .service svg{
@@ -202,7 +202,7 @@
     bottom: 0;
     right: 0;
     margin: auto;
-    font-size: 25px;
+    font-size: 0.666rem;
     color:rgba(3,174,249,1);
   }
 </style>

@@ -475,8 +475,8 @@
     }
   }
   header svg{
-     font-size: 20px;
-     margin-bottom: 10px;
+     font-size: 0.533rem;
+     margin-bottom: 0.266rem;
   }
 
 </style>

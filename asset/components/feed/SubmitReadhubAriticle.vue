@@ -190,9 +190,9 @@
 <style scoped>
   .more{
     color: #808080;
-    margin-left: 2px;
+    margin-left: 0.053rem;
   }
   .groups{
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 </style>

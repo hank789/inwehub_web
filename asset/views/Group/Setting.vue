@@ -149,10 +149,10 @@
   }
   .apply{
     width:92%;
-    height:44px;
+    height:1.173rem;
     margin-left: 4%;
-    line-height: 44px;
-    font-size: 16px;
+    line-height: 1.173rem;
+    font-size: 0.426rem;
     color: #444444;
     font-weight: 500;
     position: relative;
@@ -225,6 +225,6 @@
     background: #dbdcdb;
   }
   .space{
-    margin-right: 10px;
+    margin-right: 0.266rem;
   }
 </style>

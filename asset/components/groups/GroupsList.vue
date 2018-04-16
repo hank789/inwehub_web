@@ -118,11 +118,11 @@
   }
   /*圈子*/
   .big.-group{
-    padding: 15px 0;
+    padding: 0.4rem 0;
     position: relative;
   }
   .small.-group{
-    padding-top:10px;
+    padding-top:0.266rem;
     position: relative;
   }
   .-group{
@@ -133,19 +133,19 @@
     justify-content: space-between;
   }
   .big .logo{
-    width:92px;
-    height:92px;
-    margin-right: 10px;
+    width:2.453rem;
+    height:2.453rem;
+    margin-right: 0.266rem;
   }
   .small .logo{
-    width:44px;
-    height:44px;
-    margin-right: 10px;
+    width:1.173rem;
+    height:1.173rem;
+    margin-right: 0.266rem;
   }
   .-group .logo img{
     width:100%;
     height:100%;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     object-fit: cover;
   }
   .group-right{
@@ -156,62 +156,62 @@
   }
   /*/*/
   .big .-group-name{
-    font-size: 18px;
+    font-size: 0.48rem;
   }
   .small .-group-name{
-    font-size: 14px;
+    font-size: 0.373rem;
   }
   .-group-name{
     font-weight: 500;
     color: #444444;
   }
   .group-right .text{
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
-    margin-top: 8px;
-    line-height: 16px;
+    margin-top: 0.213rem;
+    line-height: 0.426rem;
   }
   .big .-group-info{
-    margin-top: 8px;
+    margin-top: 0.213rem;
   }
   .small .-group-info{
-    margin-top: 1px;
+    margin-top: 0.026rem;
   }
   .-group-info{
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #B4B4B6;
   }
   .-group-info span{
-    margin-right: 9px;
+    margin-right: 0.24rem;
   }
   .-group-info span i{
-    font-size: 14px;
+    font-size: 0.373rem;
     color:#808080;
     font-weight: bold;
   }
   .join{
-    border:1px solid #03AEF9;
-    font-size: 14px;
+    border:0.026rem solid #03AEF9;
+    font-size: 0.373rem;
     color: #03AEF9;
-    width: 64px;
+    width: 1.706rem;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     position: absolute;
-    top: 15px;
+    top: 0.4rem;
     right: 0;
   }
   .join.grey{
-    border:1px solid #C8C8C8;
+    border:0.026rem solid #C8C8C8;
     color: #B4B4B6;
 
   }
   .unread{
-    width:8px;
-    height:8px;
+    width:0.213rem;
+    height:0.213rem;
     background: #FA4975;
     border-radius: 50%;
     position: absolute;
-    top: 15px;
+    top: 0.4rem;
     right: 0;
   }
 

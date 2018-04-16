@@ -256,14 +256,14 @@
         line-height: 1.173rem;
         background: #fff;
         span{
-          font-size:13px;
+          font-size:0.346rem;
           color: #808080;
           &.go{
-            font-size:15px;
+            font-size:0.4rem;
             font-weight: 500;
             color: #235280;
             float: right;
-            margin-right: 14px;
+            margin-right: 0.373rem;
           }
         }
         svg{
@@ -273,7 +273,7 @@
       }
       p{
         width:100%;
-        height:10px;
+        height:0.266rem;
         background: #f3f4f6;
       }
     }

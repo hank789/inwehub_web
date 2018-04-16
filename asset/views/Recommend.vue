@@ -191,7 +191,7 @@
   }
   .recommend li{
     width: 92%;
-    height:110px;
+    height:2.933rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -199,35 +199,35 @@
     position: relative;
   }
   .recommend li .logo{
-    width:121px;
-    height:81px;
+    width:3.226rem;
+    height:2.16rem;
   }
   .recommend li img{
     width:100%;
     height:100%;
-    border-radius:4px;
+    border-radius:0.106rem;
     object-fit: cover;
   }
   .recommend li .text-content{
     width:70%;
-    height:81px;
-    margin-left: 15px;
+    height:2.16rem;
+    margin-left: 0.4rem;
     display: flex;
     flex-direction: column;
   }
   .text-content p:nth-of-type(1){
-    font-size: 14px;
+    font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
     font-weight: 500;
-    line-height: 20px;
+    line-height: 0.533rem;
   }
   .text-content p:nth-of-type(1) span{
     display: inline-block;
-    font-size: 10px;
+    font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
     background:rgba(236,236,238,1);
-    padding: 1px 5px;
-    border-radius:4px;
+    padding: 0.026rem 0.133rem;
+    border-radius:0.106rem;
   }
   .information{
     width:100%;
@@ -235,15 +235,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
   }
   .information i{
     display: inline-block;
-    width:1px;
-    height:12px;
+    width:0.026rem;
+    height:0.32rem;
     background:RGBA(219, 219, 219, 1);
-    margin: 0 10px;
-    margin-bottom: -3px;
+    margin: 0 0.266rem;
+    margin-bottom: -0.08rem;
   }
 </style>

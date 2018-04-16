@@ -209,7 +209,7 @@
     padding:0.266rem 0.4rem 0.266rem;
   }
   .groups{
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
 
 </style>

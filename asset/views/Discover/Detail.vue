@@ -455,7 +455,7 @@
 
   .timeContainer {
     width: 100%;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #B4B4B6;
     padding: 0 0.4rem;
     background: #fff;
@@ -469,9 +469,9 @@
     width: 100%;
     padding: 0 0.4rem;
     background: #fff;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
-    margin-top: -4px;
+    margin-top: -0.106rem;
   }
 
   .statistics {
@@ -489,7 +489,7 @@
   /*点赞样式*/
   .component-dianzanList {
     width: 100%;
-    padding: 13px 0.4rem;
+    padding: 0.346rem 0.4rem;
   }
 
   .component-dianzanList span {
@@ -535,40 +535,40 @@
     width: 92%;
     margin-left: 4%;
     text-align: center;
-    height: 34px;
-    line-height: 34px;
-    border-radius: 4px;
-    border: 1px solid #DCDCDC;
-    margin-bottom: 13px;
-    font-size: 14px;
+    height: 0.906rem;
+    line-height: 0.906rem;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #DCDCDC;
+    margin-bottom: 0.346rem;
+    font-size: 0.373rem;
     color: #03AEF9;
   }
 
   .groupsList {
     width: 92%;
     margin-left: 4%;
-    padding-bottom: 10px;
+    padding-bottom: 0.266rem;
   }
 
   .groupsBot {
     width: 92%;
     margin-left: 4%;
-    padding-bottom: 10px;
+    padding-bottom: 0.266rem;
     position: fixed;
     bottom: 0;
   }
 
   .riverBot {
     width: 100%;
-    height: 10px;
+    height: 0.266rem;
     position: fixed;
-    bottom: 67px;
+    bottom: 1.786rem;
     background: #f3f4f6;
   }
 
   .groupsCenter {
-    width: 200px;
-    height: 160px;
+    width: 5.333rem;
+    height: 4.266rem;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -579,33 +579,33 @@
   }
 
   .groupsCenter svg {
-   font-size: 70px;
+   font-size: 1.866rem;
   }
 
   .groupsCenter p:nth-of-type(1) {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #C8C8C8;
     text-align: center;
-    margin-top: 7px;
-    margin-bottom: 21px;
+    margin-top: 0.186rem;
+    margin-bottom: 0.56rem;
   }
   .groupsCenter p:nth-of-type(2) {
-    width:115px;
-    height:41px;
-    line-height:41px;
+    width:3.066rem;
+    height:1.093rem;
+    line-height:1.093rem;
     background:#03AEF9;
-    border-radius: 50px;
-    font-size: 16px;
+    border-radius: 1.333rem;
+    font-size: 0.426rem;
     color: #FFFFFF;
     text-align: center;
     margin: auto;
   }
 
   .shortContentWrapper{
-    max-height:300px;
+    max-height:8rem;
     overflow: hidden;
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
 </style>
 

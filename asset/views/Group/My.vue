@@ -113,20 +113,20 @@
   .more{
     width:100%;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #03AEF9;
-    margin-top: 11px;
+    margin-top: 0.293rem;
   }
   .question_ask{
-    width:115px;
-    height:41px;
+    width:3.066rem;
+    height:1.093rem;
     background: #03AEF9;
-    border-radius: 50px;
+    border-radius: 1.333rem;
     text-align: center;
-    line-height: 41px;
-    font-size: 16px;
+    line-height: 1.093rem;
+    font-size: 0.426rem;
     color: #FFFFFF;
     margin: auto;
-    margin-top: 17px;
+    margin-top: 0.453rem;
   }
 </style>

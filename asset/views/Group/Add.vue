@@ -200,7 +200,7 @@
     margin-left: 4%;
     position: relative;
     line-height: 1.146rem;
-    margin-top: 28px;
+    margin-top: 0.746rem;
   }
 
   .address p {
@@ -226,7 +226,7 @@
     width: 92%;
     overflow: hidden;
     margin-left: 4%;
-    margin-top: 10px;
+    margin-top: 0.266rem;
     position: relative;
   }
 
@@ -241,34 +241,34 @@
   }
 
   .textarea-wrapper {
-    height: 200px;
+    height: 5.333rem;
     background: #ffffff;
-    margin-top: 13px;
-    border: 1px solid #DCDCDC;
-    border-radius: 5px;
+    margin-top: 0.346rem;
+    border: 0.026rem solid #DCDCDC;
+    border-radius: 0.133rem;
   }
 
   .textarea-wrapper textarea {
     background: #ffffff;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
-    height: 164px;
+    height: 4.373rem;
     border: none;
   }
 
   .counter {
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #C8C8C8;
     position: absolute;
-    bottom: 6px;
-    right: 10px;
+    bottom: 0.16rem;
+    right: 0.266rem;
   }
 
   .fixedContainer {
     position: relative;
     background: #ffff;
     padding: 0.133rem 0.3rem;
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
 
   .fixedContainer .counter {
@@ -279,14 +279,14 @@
   .fixedContainer .niming {
     color: #444444;
     position: relative;
-    font-size: 14px;
+    font-size: 0.373rem;
     padding-left: 0.24rem;
-    margin-right: 30px;
+    margin-right: 0.8rem;
   }
 
   .fixedContainer .niming i {
     color: #808080;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 
   .fixedContainer .niming input {
@@ -298,8 +298,8 @@
 
   .nimingCheckbox {
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: 0.426rem;
+    height: 0.426rem;
     position: relative;
     border: 0.026rem solid #c8c8c8;
     border-radius: 50%;
@@ -324,14 +324,14 @@
 
   button {
     width: 92%;
-    height: 44px;
-    border-radius: 50px;
+    height: 1.173rem;
+    border-radius: 1.333rem;
     background: #03AEF9;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #FFFFFF;
-    line-height: 44px;
+    line-height: 1.173rem;
     margin-left: 4%;
-    margin-top: 20px;
+    margin-top: 0.533rem;
   }
 
   button.grey {

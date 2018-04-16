@@ -225,11 +225,11 @@
     align-items: center;
   }
   .cions-list li .detail p:nth-of-type(1) span{
-    width: 38px;
-    height: 18px;
+    width: 1.013rem;
+    height: 0.48rem;
     background: rgba(168, 223, 247, 1);
-    border-radius: 6px;
-    font-size: 12px;
+    border-radius: 0.16rem;
+    font-size: 0.32rem;
     color: rgba(35,82,128,1);
     display: -webkit-box;
     display: -ms-flexbox;
@@ -241,16 +241,16 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-left: 6px;
+    margin-left: 0.16rem;
   }
 
   .cions-list li .detail p:nth-of-type(1) span i{
     display: inline-block;
-    width: 3px;
-    height: 3px;
+    width: 0.08rem;
+    height: 0.08rem;
     border-radius: 50%;
     background: #ffffff;
-    margin: 0 3px;
+    margin: 0 0.08rem;
   }
   .cions-list li .detail p:nth-of-type(2){
     width:5.333rem;

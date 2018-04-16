@@ -342,9 +342,9 @@
   /*search*/
   .search{
     width:92%;
-    height:34px;
+    height:0.906rem;
     margin-left: 4%;
-    margin-top: 8px;
+    margin-top: 0.213rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -357,23 +357,23 @@
     position: relative;
   }
   .search-l svg{
-    font-size:25px;
+    font-size:0.666rem;
     color: rgba(200,200,200,1);
   }
   .search-l p{
-    font-size:10px;
+    font-size:0.266rem;
     color: rgba(128,128,128,1);
-    line-height: 14px;
-    margin-bottom: 5px;
+    line-height: 0.373rem;
+    margin-bottom: 0.133rem;
   }
   .search-l i{
-    width:8px;
-    height:8px;
+    width:0.213rem;
+    height:0.213rem;
     background: #FA4975;
     border-radius: 50%;
     position: absolute;
-    top: 6px;
-    right: -10px;
+    top: 0.16rem;
+    right: -0.266rem;
   }
 
   .search-r{
@@ -381,8 +381,8 @@
     height:100%;
     background:rgba(243,244,246,1);
     opacity:0.9477;
-    border-radius: 50px;
-    font-size: 14px;
+    border-radius: 1.333rem;
+    font-size: 0.373rem;
     color:rgba(128,128,128,1);
     display: flex;
     flex-direction: row;
@@ -390,10 +390,10 @@
     justify-content: center;
   }
   .search-r svg{
-    font-size: 17px;
+    font-size: 0.453rem;
     color: rgba(68,68,68,1);
-    margin-left: 16px;
-    margin-right: 6px;
+    margin-left: 0.426rem;
+    margin-right: 0.16rem;
   }
   /*菜单*/
   /*菜单*/
@@ -401,7 +401,7 @@
     width:100%;
     height: 1.173rem;
     background: #FFFFFF;
-    font-size:14px;
+    font-size:0.373rem;
     color:rgba(68,68,68,1);
     display: flex;
     flex-direction: row;
@@ -428,7 +428,7 @@
     margin: auto;
   }
   .listWrapper{
-    top:91px;
-    bottom: 50px;
+    top:2.426rem;
+    bottom: 1.333rem;
   }
 </style>

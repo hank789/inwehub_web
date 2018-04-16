@@ -290,7 +290,7 @@
 
         &:after {
           position: absolute;
-          width:32px;
+          width:0.853rem;
           bottom: 0;
           left: 0;
           height: 0.053rem;

@@ -391,7 +391,7 @@
 
   .gray {
     width: 100%;
-    height: 10px;
+    height: 0.266rem;
     background: #f3f4f6;
   }
 
@@ -407,7 +407,7 @@
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    top: 178px;
+    top: 4.746rem;
   }
 
   .menu span {
@@ -432,19 +432,19 @@
   }
 
   .groups-list {
-    margin-top: 49px;
+    margin-top: 1.306rem;
   }
 
   .invitation {
     width: 100%;
-    height: 50px;
+    height: 1.333rem;
     background: #ffffff;
     position: fixed;
     bottom: 0;
     z-index: 2;
     display: flex;
     align-items: center;
-    border-top: 1px solid #DCDCDC;
+    border-top: 0.026rem solid #DCDCDC;
   }
 
   .invitation p {
@@ -452,7 +452,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 0.346rem;
     color: rgba(128, 128, 128, 1);
   }
 
@@ -462,14 +462,14 @@
   }
 
   .invitation p:nth-of-type(1) svg {
-    font-size: 24px;
-    margin-right: 9px;
+    font-size: 0.64rem;
+    margin-right: 0.24rem;
   }
 
   .invitation p:nth-of-type(2) {
     width: 35%;
     height: 100%;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: rgba(255, 255, 255, 1);
     background: rgba(3, 174, 249, 1);
   }
@@ -481,57 +481,57 @@
   }
   .group-text p:nth-of-type(1){
     width:100%;
-    height:43px;
+    height:1.146rem;
     position: relative;
-    font-size: 16px;
+    font-size: 0.426rem;
     color:rgba(68,68,68,1);
     font-weight: 500;
-    line-height: 43px;
+    line-height: 1.146rem;
   }
   .group-text p:nth-of-type(2){
     width:100%;
-    margin-top: 14px;
+    margin-top: 0.373rem;
     position: relative;
-    font-size: 16px;
+    font-size: 0.426rem;
     color:rgba(68,68,68,1);
-    line-height: 20px;
+    line-height: 0.533rem;
   }
   .join{
     width:92%;
-    height:44px;
+    height:1.173rem;
     position: fixed;
     right:0;
     left:0;
-    bottom: 15px;
+    bottom: 0.4rem;
     margin: auto;
     background:rgba(3,174,249,1);
-    box-shadow: 0px 1px 10px 0px rgba(205,215,220,1);
-    border-radius: 50px ;
+    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
+    border-radius: 1.333rem ;
     text-align: center;
-    line-height: 44px;
-    font-size: 16px;
+    line-height: 1.173rem;
+    font-size: 0.426rem;
     color:rgba(255,255,255,1);
     font-weight: 500;
   }
   .join.wait{
     background:rgba(220,220,220,1);
-    box-shadow: 0px 1px 10px 0px rgba(205,215,220,1);
+    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
     color:rgba(180,180,182,1);
   }
   .Nothing{
-    width: 211px;
-    height: 200px;
+    width: 5.626rem;
+    height: 5.333rem;
     position: absolute;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: rgba(200,200,200,1);
     left: 0;
     right: 0;
-    top: 300px;
+    top: 8rem;
     text-align: center;
     margin: auto;
   }
   .Nothing svg{
-    font-size: 60px;
-    margin-bottom: 5px;
+    font-size: 1.6rem;
+    margin-bottom: 0.133rem;
   }
 </style>
