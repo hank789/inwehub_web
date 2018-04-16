@@ -54,7 +54,7 @@
           <!---->
         </RefreshList>
         <div class="invitation">
-          <p @tap.stop.prevent="$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + id))">
+          <p @tap.stop.prevent="toDiscoverAdd">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
@@ -126,6 +126,7 @@
   import { getIndexByIdArray } from '../../utils/array'
   import Share from '../../components/Share.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -167,6 +168,13 @@
       '$route': 'refreshPageData'
     },
     methods: {
+      toDiscoverAdd () {
+        localEvent.setLocalItem('selectedGroup' + getLocalUserId(), {
+          id: this.id,
+          name: this.detail.name
+        })
+        this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
+      },
       refreshPageData () {
         this.loading = 1
         this.getData()
@@ -271,6 +279,7 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
+            this.$router.replace('/groups')
             return
           }
 
