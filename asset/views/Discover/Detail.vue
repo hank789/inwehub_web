@@ -47,23 +47,28 @@
             删除
           </div>
         </div>
-        <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-          <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
-          <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+
+        <div class="discoverContentWrapper">
+          <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+            <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
+            <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+          </div>
+
+          <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
+          <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+            <template v-for="(image, index) in detail.data.img">
+              <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                   :data-preview-group="1"/>
+            </template>
+          </div>
+
+          <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
+               @tap.stop.prevent="goArticle(detail)">
+            <img :src="detail.data.img"/>
+          </div>
         </div>
 
-        <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-        <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
-          <template v-for="(image, index) in detail.data.img">
-            <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
-                 :data-preview-group="1"/>
-          </template>
-        </div>
 
-        <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
-             @tap.stop.prevent="goArticle(detail)">
-          <img :src="detail.data.img"/>
-        </div>
         <!--是否加入圈子/group/detail/:id-->
         <div class="groups" v-if="detail.group.is_joined < 0"
              @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
@@ -176,7 +181,7 @@
   import groupsList from '../../components/groups/GroupsList.vue'
 
   export default {
-    data() {
+    data () {
       return {
         userId: currentUser.user_id,
         name: currentUser.name,
@@ -215,7 +220,7 @@
       }
     },
     computed: {
-      descLength() {
+      descLength () {
         if (this.description === this.descPlaceholder) {
           return 0
         }
@@ -232,11 +237,17 @@
       groupsList
     },
     methods: {
-      goJoin(id) {
+      showAllContentWrapper () {
+        var contentWrapper = document.querySelector('.discoverContentWrapper')
+        if (contentWrapper) {
+          contentWrapper.classList.remove('shortContentWrapper')
+        }
+      },
+      goJoin (id) {
         this.$router.pushPlus('/group/detail/' + id)
       },
       // 删除
-      deleterow(id) {
+      deleterow (id) {
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -259,22 +270,22 @@
           }
         })
       },
-      textToLink(text) {
+      textToLink (text) {
         return transferTagToLink(textToLinkHtml(' ' + text))
       },
-      toAvatar(uuid) {
+      toAvatar (uuid) {
         if (!uuid) {
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      sendMessage(message) {
+      sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
-      comment(commentTargetName) {
+      comment (commentTargetName) {
         this.$refs.ctextarea.comment(commentTargetName)
       },
-      commentFinish() {
+      commentFinish () {
         this.commentNumAdd()
         this.$refs.ctextarea.finish()
       },
@@ -291,18 +302,18 @@
           detail.data.img
         )
       },
-      refreshPageData() {
+      refreshPageData () {
         this.loading = 1
         this.detail.data.img = []
         this.getDetail()
         this.$refs.ctextarea.refreshPageData()
       },
-      shareSuccess() {
+      shareSuccess () {
 
       },
-      shareFail() {
+      shareFail () {
       },
-      timeago(time) {
+      timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
@@ -330,11 +341,11 @@
           this.loading = 0
         })
       },
-      setFollowStatus(status) {
+      setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
 //      点赞
-      supportNumAdd() {
+      supportNumAdd () {
         this.detail.upvotes++
         var support = {
           name: this.name,
@@ -343,7 +354,7 @@
         this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
 //      取消点赞
-      supportNumDesc() {
+      supportNumDesc () {
         this.detail.upvotes--
         for (var i in this.detail.supporter_list) {
           if (this.detail.supporter_list[i].uuid === this.uuid) {
@@ -351,27 +362,42 @@
           }
         }
       },
-      commentNumAdd() {
+      commentNumAdd () {
         this.detail.comments_number++
       },
-      commentNumDesc() {
+      commentNumDesc () {
         this.detail.comments_number--
       },
-      setSupportStatus(type) {
+      setSupportStatus (type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
       },
-      collectNumAdd() {
+      collectNumAdd () {
         this.detail.bookmarks++
       },
-      collectNumDesc() {
+      collectNumDesc () {
         this.detail.bookmarks--
       },
-      setCollectStatus(type) {
+      setCollectStatus (type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
+      },
+      shotContentHeight () {
+        if (this.detail.group.is_joined !== -1) {
+          return
+        }
+
+        var contentWrapper = document.querySelector('.discoverContentWrapper')
+        console.warn('contentWrapperHeight:' + contentWrapper.offsetHeight)
+        if (contentWrapper && contentWrapper.offsetHeight > 300) {
+          contentWrapper.classList.add('shortContentWrapper')
+        }
       }
     },
-    updated() {
+    updated () {
       this.$nextTick(function () {
+        setTimeout(() => {
+          this.shotContentHeight()
+        }, 200)
+
         openVendorUrl(this.$el.querySelector('#contentWrapper'))
         openAppUrl(this.$el.querySelector('#contentWrapper'))
       })
@@ -379,10 +405,10 @@
     watch: {
       '$route': 'refreshPageData'
     },
-    created() {
+    created () {
       this.getDetail()
     },
-    mounted() {
+    mounted () {
       pageRefresh(this, () => {
         this.refreshPageData()
       })
@@ -573,6 +599,13 @@
     color: #FFFFFF;
     text-align: center;
     margin: auto;
+  }
+
+  .shortContentWrapper{
+    max-height:300px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
   }
 </style>
 

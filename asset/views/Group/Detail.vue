@@ -317,6 +317,10 @@
             return
           }
 
+          if (this.detail.is_joined !== 3) {
+            this.$refs.allOptions.toggle()
+          }
+
           this.$router.pushPlus('/groups')
         })
       },
