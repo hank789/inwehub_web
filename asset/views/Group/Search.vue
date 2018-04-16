@@ -45,6 +45,7 @@
                          :description="'加入'"
                          :search = 'true'
                          @goJoin="goJoin"
+                         @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)"
             ></groupsList>
           </div>
         <!--&lt;!&ndash;<div slot="emptyBottom">&ndash;&gt;-->
