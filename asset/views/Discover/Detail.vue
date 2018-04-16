@@ -22,8 +22,6 @@
       <groups-list class="small"
       :list="detail.group"
       :type="'small'"
-      :joinDescription="'进圈'"
-      @goJoin="goJoin"
       ></groups-list>
       </div>
       </div>
@@ -115,8 +113,6 @@
           <groups-list class="small detail"
                        :list="detail.group"
                        :type="'small'"
-                       :joinDescription="'进圈'"
-                       @goJoin="goJoin"
           ></groups-list>
         </div>
         <!--灰色部分-->

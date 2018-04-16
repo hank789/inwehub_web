@@ -16,7 +16,18 @@
 
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
-            <li v-for="item in list" @tap.stop.prevent="goUrl(item.data.url)">
+            <template  v-for="item in list">
+            <li v-if="item.type == 'App\\Notifications\\GroupAuditResult' || item.type == 'App\\Notifications\\NewGroupMemberJoin' || item.type == 'App\\Notifications\\NewGroupMemberApply'" @tap.stop.prevent="goUrl(item.data.url)">
+              <img :src="item.data.avatar"/>
+              <div class="message" v-if="item.read_at == null"></div>
+              <p>
+                <span class="mui-ellipsis text">{{item.data.title}}</span>
+                <span class="mui-ellipsis">{{item.data.body}}</span>
+              </p>
+              <div class="time">{{timeago(item.created_at)}}</div>
+              <i class="bot"></i>
+            </li>
+            <li v-else @tap.stop.prevent="goUrl(item.data.url)">
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
@@ -25,6 +36,7 @@
               </p>
               <i class="bot"></i>
             </li>
+            </template>
           </ul>
 
         </div>
@@ -215,15 +227,15 @@
   }
   ul li img {
     display: block;
-    width: 12.5%;
-    height: 12.5%;
+    width:42px;
+    height: 42px;
     float: left;
     border-radius: 0.266rem;
   }
 
   ul li p {
     margin-left: 3%;
-    width: 84%;
+    width: 82%;
     float: left;
   }
 
@@ -243,7 +255,9 @@
     font-size: 0.32rem;
     color: #b4b4b6;
   }
-
+  ul li p span.text{
+    width:60%;
+  }
   .message {
     width: 0.186rem;
     height: 0.186rem;
@@ -271,5 +285,14 @@
   .container p {
     font-size: 0.32rem;
     color: #c8c8c8;
+  }
+
+  .time{
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    right: 0.426rem;
+    font-size: 12px;
+    color: rgba(180,180,182,1);
   }
 </style>

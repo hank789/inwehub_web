@@ -1,15 +1,13 @@
 <template>
-  <div class="-group" v-if="list.id">
+  <div class="-group" v-if="list.id" @tap.stop.prevent="$router.pushPlus('/group/detail/' + list.id)">
     <div class="logo">
       <img :src="list.logo" />
     </div>
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
       <template v-if="description">
-        <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >已{{description}}</div>
-        <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-else>{{description}}</div>
+        <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >{{description}}</div>
       </template>
-      <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-if="joinDescription">{{joinDescription}}</div>
       <p>
         <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
         <span class="-group-name text-line-1" v-else>{{list.name}}</span>
@@ -43,10 +41,6 @@
         }
       },
       description: {
-        type: String,
-        default: ''
-      },
-      joinDescription: {
         type: String,
         default: ''
       },
@@ -164,9 +158,11 @@
   .small .-group-name{
     font-size: 0.373rem;
   }
+  .groupsList .-group-name{
+    width:70%;
+  }
   .-group-name{
     display: block;
-    width:60%;
     font-weight: 500;
     color: #444444;
   }

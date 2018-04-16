@@ -42,10 +42,7 @@
             <groupsList  class="big"
                          :list="item"
                          :searchText="searchText"
-                         :description="'加入'"
                          :search = 'true'
-                         @goJoin="goJoin"
-                         @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)"
             ></groupsList>
           </div>
         <!--&lt;!&ndash;<div slot="emptyBottom">&ndash;&gt;-->
@@ -112,19 +109,6 @@
       back () {
         window.mui.back()
         return
-      },
-     //  加入圈子；
-      goJoin (id) {
-        postRequest(`group/join`, {id: id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-          window.mui.toast(response.data.message)
-          // 请求成功后跳转详情页面
-          this.$router.pushPlus('/group/detail/' + id)
-        })
       },
       //  点击清空输入框
       empty () {

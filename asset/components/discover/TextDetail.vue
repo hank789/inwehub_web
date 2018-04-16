@@ -63,8 +63,6 @@
     <groups-list class="small"
                  :list="data.group"
                  :type="'small'"
-                 :joinDescription="'进圈'"
-                 @goJoin="goJoin"
     ></groups-list>
   </div>
 </template>
@@ -101,9 +99,6 @@
 
     },
     methods: {
-      goJoin (id) {
-        this.$router.pushPlus('/group/detail/' + id)
-      },
       // 文字高亮
       getHighlight (content) {
         var text = this.textToLink(content)
