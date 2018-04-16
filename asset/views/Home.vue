@@ -121,7 +121,7 @@
             <i class="bot"></i>
           </li>
         </template>
-        <div class="more"  @tap.stop.prevent="$router.push('/recommends')">更多精选推荐</div>
+        <div class="more"  @tap.stop.prevent="$router.pushPlus('/recommends')">更多精选推荐</div>
       </ul>
       <!---->
     </div>

@@ -15,13 +15,13 @@
         </svg>
       </div>
       <!--发现-->
-      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/searchFollow')" v-if="isDiscover">
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/discover')" v-if="isDiscover">
         <svg class="icon threeIcon" aria-hidden="true">
           <use xlink:href="#icon-faxian-hover"></use>
         </svg>
       </div>
 
-      <div class="mui-tab-item" @tap.stop.prevent="$router.push('/searchFollow')" v-else>
+      <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" v-else>
         <svg class="icon threeIcon" aria-hidden="true">
           <use xlink:href="#icon-faxian1"></use>
         </svg>
@@ -203,13 +203,13 @@
           case '/my':
             this.isMy = true
             break
-          case '/searchFollow':
+          case '/discover':
             this.isDiscover = true
             break
-          case '/searchGroup':
+          case '/discoverGroup':
             this.isDiscover = true
             break
-          case '/searchRecommend':
+          case '/discoverRecommend':
             this.isDiscover = true
             break
           case '/inform':
