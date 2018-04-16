@@ -785,6 +785,14 @@ function lockOrientation (orientation) {
   })
 }
 
+function openUrlByUrl (href) {
+  if (/https:\/\/m\.inwehub\.com/.test(href)) {
+    openAppUrlByUrl(href)
+  } else {
+    openVendorUrlByUrl(href)
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -810,5 +818,6 @@ export {
   AppInit,
   AppPageInit,
   setClipboardText,
-  lockOrientation
+  lockOrientation,
+  openUrlByUrl
 }
