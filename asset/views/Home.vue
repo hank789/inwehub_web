@@ -41,12 +41,12 @@
             <a href="#"><img :src="notices[notices.length-1].img_url"></a>
           </div>
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a href="#"><img :src="notice.img_url"></a>
+            <a href="#" @tap.stop.prevent="goLink(notices.url)" target="_blank"><img :src="notice.img_url"></a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
-            <a href="#" @tap.stop.prevent="goLink(notices.img_url)" target="_blank">
+            <a href="#" >
               <img :src="notices[0].img_url" />
             </a>
           </div>
@@ -161,45 +161,45 @@
       },
       goLink: function (url) {
         console.log(url)
-        if (/http/.test(url)) {
-          if (window.mui.os.plus) {
-            if (window.mixpanel.track) {
-              window.mixpanel.track(
-                'inwehub:notice_detail', {
-                  'app': 'inwehub',
-                  'user_device': window.getUserAppDevice(),
-                  'page': url,
-                  'page_title': '首页轮播文章'
-                }
-              )
-            }
-            var noticeWs = window.mui.openWindow({
-              url: '/public/index.html#/webview/notice',
-              id: 'inwehub_notice_view',
-              preload: false, // 一定要为false
-              createNew: false,
-              show: {
-                autoShow: true,
-                aniShow: 'pop-in'
-              },
-              styles: {
-                popGesture: 'hide'
-              },
-              waiting: {
-                autoShow: false
-              },
-              extras: {
-                preload: true,
-                article_url: url
-              }
-            })
-            window.mui.fire(noticeWs, 'load_article', {article_url: url})
-          } else {
-            window.location.href = url
-          }
-        } else {
-          this.$router.pushPlus(url)
-        }
+//        if (/http/.test(url)) {
+//          if (window.mui.os.plus) {
+//            if (window.mixpanel.track) {
+//              window.mixpanel.track(
+//                'inwehub:notice_detail', {
+//                  'app': 'inwehub',
+//                  'user_device': window.getUserAppDevice(),
+//                  'page': url,
+//                  'page_title': '首页轮播文章'
+//                }
+//              )
+//            }
+//            var noticeWs = window.mui.openWindow({
+//              url: '/public/index.html#/webview/notice',
+//              id: 'inwehub_notice_view',
+//              preload: false, // 一定要为false
+//              createNew: false,
+//              show: {
+//                autoShow: true,
+//                aniShow: 'pop-in'
+//              },
+//              styles: {
+//                popGesture: 'hide'
+//              },
+//              waiting: {
+//                autoShow: false
+//              },
+//              extras: {
+//                preload: true,
+//                article_url: url
+//              }
+//            })
+//            window.mui.fire(noticeWs, 'load_article', {article_url: url})
+//          } else {
+//            window.location.href = url
+//          }
+//        } else {
+//          this.$router.pushPlus(url)
+//        }
       },
       goDetial (type, recommend) {
         switch (type) {
