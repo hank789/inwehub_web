@@ -21,7 +21,7 @@
       <!--</svg>-->
       <!--</div>-->
       <div class="tag-r">
-        <p>{{detail.name}}</p>
+        <p class="text-line-1">{{detail.name}}</p>
         <p class="tag-info">
             <span v-if="!detail.public">
               <svg class="icon" aria-hidden="true">

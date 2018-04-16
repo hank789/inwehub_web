@@ -45,6 +45,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import groups from '../../components/groups/RecommendGroups.vue'
   import groupsList from '../../components/groups/GroupsList.vue'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
@@ -61,7 +62,16 @@
     watch: {},
     methods: {
       goJoin (id) {
-        this.$router.pushPlus('/group/detail/' + id)
+        postRequest(`group/join`, {id: id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          window.mui.toast(response.data.message)
+          // 请求成功后跳转详情页面
+          this.$router.pushPlus('/group/detail/' + id)
+        })
       }
     },
     mounted () {
