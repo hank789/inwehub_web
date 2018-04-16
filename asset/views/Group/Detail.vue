@@ -86,7 +86,7 @@
     <Options
       ref="allOptions"
       :id="'allOptions'"
-      :options="['退出']"
+      :options="['退出圈子']"
       @selectedItem="selectedItem"
     ></Options>
 
@@ -226,7 +226,7 @@
       },
       selectedItem (item) {
         switch (item) {
-          case '退出':
+          case '退出圈子':
             this.quit()
             break
           case '删除':
