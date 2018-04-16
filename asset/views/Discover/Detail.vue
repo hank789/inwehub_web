@@ -112,7 +112,7 @@
         <div class="river"></div>
         <!--圈子信息-->
         <div class="groupsList">
-          <groups-list class="small"
+          <groups-list class="small detail"
                        :list="detail.group"
                        :type="'small'"
                        :joinDescription="'进圈'"
@@ -313,7 +313,6 @@
         this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
-        console.log(aaaaaa)
       },
       shareFail () {
       },
