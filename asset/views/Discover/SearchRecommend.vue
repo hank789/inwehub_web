@@ -20,8 +20,8 @@
       <!--菜单-->
       <!--导航栏-->
       <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/searchFollow')">关注</span>
-        <span @tap.stop.prevent="$router.replace('/searchGroup')">圈子</span>
+        <span @tap.stop.prevent="$router.replace('/discover')">关注</span>
+        <span @tap.stop.prevent="$router.replace('/discoverGroup')">圈子</span>
         <span class="bold">推荐<i></i></span>
         <i class="bot"></i>
       </div>

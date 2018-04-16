@@ -527,43 +527,26 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 发现；
+  {
     path: '/discover',
     name: 'discover',
-    component: componets.DiscoverList,
+    component: componets.DiscoverSearchFollow,
     meta: {
       title: '发现',
       keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
-  },
-  {
-    path: '/searchFollow',
-    name: 'discover_follow',
-    component: componets.DiscoverSearchFollow,
-    meta: {
-      title: '发现',
-      keepAlive: false,
-      wechatHideHeader: true
-    },
-    beforeEnter: (to, from, next) => {
       next()
     }
   },
   {
-    path: '/searchGroup',
+    path: '/discoverGroup',
     name: 'discover_group',
     component: componets.DiscoverSearchGroup,
     meta: {
-      title: '发现',
-      keepAlive: false,
+      title: '圈子',
+      keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
@@ -571,12 +554,12 @@ const routes = [
     }
   },
   {
-    path: '/searchRecommend',
+    path: '/discoverRecommend',
     name: 'discover_recommend',
     component: componets.DiscoverSearchRecommend,
     meta: {
-      title: '发现',
-      keepAlive: false,
+      title: '推荐',
+      keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
