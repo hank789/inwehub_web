@@ -451,7 +451,6 @@
     height:5.333rem;
     background: #cccccc;
     position: relative;
-    top: 1.333rem;
   }
   .categoryMenu{
     width:100%;
@@ -461,7 +460,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    margin-top: 1.333rem;
   }
   .categoryMenu li{
     height:100%;
