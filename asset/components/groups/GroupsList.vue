@@ -12,7 +12,7 @@
       <div class="join" @tap.stop.prevent="goJoin(list.id)"  v-if="joinDescription">{{joinDescription}}</div>
       <p>
         <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
-        <span class="-group-name" v-else>{{list.name}}</span>
+        <span class="-group-name text-line-1" v-else>{{list.name}}</span>
       </p>
       <p class="text-line-2 text" v-if="!type">{{list.description}}</p>
       <p class="-group-info">
@@ -162,6 +162,8 @@
     font-size: 0.373rem;
   }
   .-group-name{
+    display: block;
+    width:60%;
     font-weight: 500;
     color: #444444;
   }
