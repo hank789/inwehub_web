@@ -21,8 +21,8 @@
       <!--导航栏-->
       <div class="menu">
         <span class="bold">关注<i></i></span>
-        <span @tap.stop.prevent="$router.replace('searchGroup')">圈子</span>
-        <span @tap.stop.prevent="$router.replace('/searchRecommend')">推荐</span>
+        <span @tap.stop.prevent="$router.replace('/discoverGroup')">圈子</span>
+        <span @tap.stop.prevent="$router.replace('/discoverRecommend')">推荐</span>
         <i class="bot"></i>
       </div>
       <!--列表-->
