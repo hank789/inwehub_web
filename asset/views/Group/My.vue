@@ -16,7 +16,7 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
-          <div class="group-container" @tap.stop.prevent="selectItem(item)">
+          <div class="group-container" @tap.stop.prevent="selectItem(item)" v-if="isShowItem(item)">
             <groupsList class="big" :list="item">
               <i class="bot"></i>
             </groupsList>
@@ -53,6 +53,16 @@
     },
     props: {},
     methods: {
+      isShowItem (item) {
+        if (!this.from) {
+          return true
+        } else {
+          if (item.audit_status === 1) {
+            return true
+          }
+          return false
+        }
+      },
       selectItem (item) {
         if (!this.from) {
           this.$router.pushPlus('/group/detail/' + item.id)
