@@ -346,7 +346,7 @@
             this.$refs.allOptions.toggle()
           }
 
-          this.$router.pushPlus('/groups')
+          this.refreshPageData()
         })
       },
       chooseType (type) {
