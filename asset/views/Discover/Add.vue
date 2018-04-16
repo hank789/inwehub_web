@@ -426,11 +426,11 @@
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
-        localEvent.clearLocalItem('selectedGroup' + this.id)
+//        localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
         if (!this.selectedGroup.id) {
-          window.mui.toast('请选择圈子')
+          window.mui.toast('别忘了选择圈子后再发布！')
           return
         }
 
