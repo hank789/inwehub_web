@@ -125,7 +125,7 @@
       },
       goPublish () {
         if (!this.selectedGroup) {
-          window.mui.toast('请选择圈子')
+          window.mui.toast('别忘了选择圈子后再发布！')
           return
         }
 
