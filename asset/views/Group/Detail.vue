@@ -17,6 +17,7 @@
           :pageMode="true"
           :isShowUpToRefreshDescription="false"
           :autoShowEmpty="false"
+          :isLoadingByRefresh="false"
           :list="list"
           class="listWrapper"
         >

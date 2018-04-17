@@ -87,10 +87,13 @@
         type: String,
         default: '没有更多数据了'
       },
-
       pageMode: {
         type: Boolean,
         default: false
+      },
+      isLoadingByRefresh: {
+        type: Boolean,
+        default: true
       }
     },
     components: {
@@ -116,7 +119,10 @@
         return this.response
       },
       refreshPageData (prevOtherData) {
-        this.loading = 1
+        if (this.isLoadingByRefresh) {
+          this.loading = 1
+        }
+
         this.localPrevOtherData = prevOtherData
 
         if (this.downLoadMoreMode) {

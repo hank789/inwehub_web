@@ -101,6 +101,8 @@
   import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js'
   import userAbility from '../utils/userAbility'
   import { postRequest } from '../utils/request'
+  import localEvent from '../stores/localStorage'
+  import { getLocalUserId } from '../utils/user'
 
   export default {
     methods: {
@@ -147,6 +149,7 @@
               this.$router.pushPlus('/discover/publishArticles')
               break
             case 8:
+              localEvent.clearLocalItem('selectedGroup' + getLocalUserId())
               this.$router.pushPlus('/discover/add')
               break
 
