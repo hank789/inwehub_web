@@ -1,5 +1,5 @@
 <template>
-  <div class="-group" v-if="list.id" @tap.stop.prevent="$router.pushPlus('/group/detail/' + list.id)">
+  <div class="-group" v-if="list.id" @tap="toDetail(list)">
     <div class="logo">
       <img :src="list.logo" />
     </div>
@@ -55,11 +55,22 @@
       type: {
         type: String,
         default: ''
+      },
+      tapNothing: {
+        type: Boolean,
+        default: false
       }
     },
     created () {},
     watch: {},
     methods: {
+      toDetail (item) {
+        if (this.tapNothing) {
+          return
+        }
+
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
       // 文字高亮
       getHighlight (content) {
         var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配

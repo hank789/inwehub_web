@@ -17,7 +17,7 @@
       >
         <template v-for="(item, index) in list">
           <div class="group-container" @tap.stop.prevent="selectItem(item)" v-if="isShowItem(item)">
-            <groupsList class="big" :list="item">
+            <groupsList class="big" :list="item" :tapNothing="true">
               <i class="bot"></i>
             </groupsList>
           </div>
