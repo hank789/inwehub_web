@@ -320,7 +320,7 @@
       showQrCode: false,
       isShare: false,
       canBack: false,
-      loading: true,
+      loading: 1,
       shareUrl: '',
       wechatConfig: {},
       downloadHeader: false,
