@@ -1,7 +1,7 @@
 <template>
   <div class="container-item swiper" v-if="!loading && apper">
     <div class="title">
-      <p>我的</p>
+      <p>{{title}}</p>
       <p v-if="isShowMore" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
@@ -56,6 +56,10 @@
       isShowMore: {
         type: Boolean,
         default: false
+      },
+      title: {
+        type: String,
+        default: ''
       }
     },
     watch: {},

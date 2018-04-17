@@ -38,6 +38,7 @@
           :groupsList="groupsList"
           :loading="loading"
           :isShowMore = "true"
+          :title = "'我的'"
         ></groups>
         <!---->
         <div class="title">

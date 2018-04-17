@@ -24,6 +24,7 @@
           :groupsList="groupsList"
           :loading="loading"
           :apper="apper"
+          :title = "'我的'"
         ></groups>
         <!--全部圈子-->
         <div class="group-title">全部</div>
