@@ -241,8 +241,8 @@
   }
   ul li img {
     display: block;
-    width:42px;
-    height: 42px;
+    width:1.12rem;
+    height: 1.12rem;
     float: left;
     border-radius: 0.266rem;
   }
@@ -304,9 +304,9 @@
   .time{
     display: inline-block;
     position: absolute;
-    top: 8px;
+    top: 0.213rem;
     right: 0.426rem;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: rgba(180,180,182,1);
   }
 </style>

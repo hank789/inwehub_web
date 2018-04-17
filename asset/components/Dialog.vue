@@ -554,12 +554,12 @@
     text-align: center;
   }
   .groups p:nth-of-type(1){
-    font-size:16px;
+    font-size:0.426rem;
     color:rgba(68,68,68,1);
-    margin-top: 31px;
+    margin-top: 0.826rem;
   }
   .groups p:nth-of-type(2){
-    font-size:14px;
+    font-size:0.373rem;
     color:rgba(128,128,128,1);
   }
   #test {

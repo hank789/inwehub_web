@@ -227,6 +227,7 @@ function openAppUrlByUrl (url) {
     return
   }
   href = href.replace(process.env.H5_ROOT + '/#', '')
+  href = href.replace('https://m.inwehub.com/#', '')
   if (window.plus) {
     console.log('plus 打开')
     router.pushPlus(href)

@@ -1169,7 +1169,7 @@
 
   /*擅长*/
   .skilled {
-    padding: 0.32rem 0.373rem 10px 0.373rem;
+    padding: 0.32rem 0.373rem 0.266rem 0.373rem;
     overflow: hidden;
     position: relative;
 
@@ -1177,13 +1177,13 @@
   .skilled .tags{
     float: left;
     margin-right: 0.213rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.133rem;
   }
   .skilled .tags span{
     float: left;
     background: #ececee;
     border-radius: 1.333rem;
-    padding: 0 10px;
+    padding: 0 0.266rem;
     font-size: 0.32rem;
     color: #444444;
   }
