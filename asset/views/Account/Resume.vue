@@ -412,7 +412,6 @@
           }
           this.resume = response.data.data
           this.apper = this.resume.groups.length
-          console.error(response.data.data)
           this.loading = 0
           this.bindWechatShare()
         })
