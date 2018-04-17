@@ -37,10 +37,22 @@
         </div>
           <div  class="groups-list">
             <template v-for="(item, index) in list">
-              <SubmitReadhubAriticle v-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
+              <div v-if="item.feed_type === 5 && item.feed.domain === ''">
+                <!--x发布了发现-->
+                <DiscoverShare
+                  :data="item"
+                  :show='true'
+                  ref="discoverShare"
+                  @comment="comment"
+                  @showItemOptions="showItemOptions"
+                ></DiscoverShare>
+              </div>
+
+              <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
                                      :show='true'
                                      @comment="comment"
                                      @showItemOptions="showItemOptions"
+                                     @tap.stop.prevent="toDetail(item)"
               ></SubmitReadhubAriticle>
             </template>
           </div>
@@ -125,6 +137,7 @@
   import Options from '../../components/Options.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
+  import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
@@ -135,6 +148,7 @@
   export default {
     data () {
       return {
+        groupsId: '',
         id: null,
         list: [],
         search_type: 1,
@@ -152,12 +166,17 @@
         isInGroup: false
       }
     },
+    created () {
+      if (this.$route.params.id) {
+        this.groupsId = this.$route.params.id
+      }
+    },
     computed: {
       prevOtherData () {
-        return {id: 1, type: this.search_type}
+        return {id: this.groupsId, type: this.search_type}
       },
       nextOtherData () {
-        return {id: 1, type: this.search_type}
+        return {id: this.groupsId, type: this.search_type}
       }
     },
     components: {
@@ -165,13 +184,34 @@
       GroupsInfo,
       SubmitReadhubAriticle,
       Options,
-      Share
+      Share,
+      DiscoverShare
     },
     props: {},
     watch: {
       '$route': 'refreshPageData'
     },
     methods: {
+      toDetail (item) {
+        switch (item.feed_type) {
+          case 5:
+            if (item.feed_type === 5 && item.feed.domain === '') {
+              // ...
+            } else {
+              var linkArticle = {
+                view_url: item.url,
+                id: item.feed.submission_id,
+                title: item.feed.title,
+                comment_url: item.feed.comment_url,
+                img_url: item.feed.img
+              }
+              this.goArticle(linkArticle)
+            }
+            break
+          default:
+            break
+        }
+      },
       toDiscoverAdd () {
         localEvent.setLocalItem('selectedGroup' + getLocalUserId(), {
           id: this.id,
@@ -549,5 +589,8 @@
   .Nothing svg{
     font-size: 1.6rem;
     margin-bottom: 0.133rem;
+  }
+  .listWrapper{
+    bottom: 1.333rem;
   }
 </style>

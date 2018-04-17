@@ -1,5 +1,5 @@
 <template>
-  <div class="-group" v-if="list.id" @tap="toDetail(list)">
+  <div class="-group" v-if="list !== null" @tap="toDetail(list)">
     <div class="logo">
       <img :src="list.logo" />
     </div>

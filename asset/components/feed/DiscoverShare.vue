@@ -30,6 +30,9 @@
     ></Images>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+      <svg class="icon more" aria-hidden="true" v-if="show" @tap.stop.prevent="showItemOptions">
+        <use xlink:href="#icon-gengduo"></use>
+      </svg>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -97,6 +100,10 @@
       data: {
         type: Object,
         default: {}
+      },
+      show: {
+        type: Boolean,
+        default: false
       }
     },
     created () {
@@ -105,6 +112,9 @@
     mounted () {
     },
     methods: {
+      showItemOptions () {
+        this.$emit('showItemOptions', this.data)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -206,7 +216,10 @@
   .groups{
     margin-top: 0.4rem;
   }
-
+  .more{
+    color: #808080;
+    margin-left: 0.053rem;
+  }
 </style>
 <style>
   #Outermost  p{
