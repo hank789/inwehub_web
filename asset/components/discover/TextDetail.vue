@@ -63,6 +63,7 @@
     <groups-list class="small"
                  :list="data.group"
                  :type="'small'"
+                 v-if="data.group !== null"
     ></groups-list>
   </div>
 </template>

@@ -47,7 +47,7 @@
               @comment="comment"
             ></DiscoverShare>
             <!--圈子信息-->
-            <div class="followGroups">
+            <div class="followGroups" v-if="item.feed.group !== null">
               <div class="follow-content">
                 <groups-list class="small groups"
                              :list="item.feed.group"
@@ -72,7 +72,7 @@
                                      @comment="comment"
               ></SubmitReadhubAriticle>
               <!--圈子信息-->
-              <div class="followGroups">
+              <div class="followGroups" v-if="item.feed.group !== null">
                 <div class="follow-content">
                   <groups-list class="small groups"
                                :list="item.feed.group"
@@ -94,7 +94,19 @@
             <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
 
             <!--x评论了文章-->
-            <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
+            <div v-else-if="item.feed_type === 10">
+              <CommentReadhubAriticle  :data="item"></CommentReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups" v-if="item.feed.group !== null">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
+
 
             <!--x赞了专业回答-->
             <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
@@ -103,7 +115,19 @@
             <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
 
             <!--x赞了文章-->
-            <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
+            <div v-else-if="item.feed_type === 13">
+              <UpvoteReadhubAriticle  :data="item"></UpvoteReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups" v-if="item.feed.group !== null">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
+
 
           </div>
         </template>

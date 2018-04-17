@@ -95,6 +95,7 @@
               <groups-list class="small"
                            :list="hot.group"
                            :type="'small'"
+                           v-if="hot.group !== null"
               ></groups-list>
             </li>
             <!--带图片的样式-->

@@ -109,7 +109,7 @@
         <!--灰色部分-->
         <div class="river"></div>
         <!--圈子信息-->
-        <div class="groupsList">
+        <div class="groupsList"  v-if="detail.group !== null">
           <groups-list class="small detail"
                        :list="detail.group"
                        :type="'small'"

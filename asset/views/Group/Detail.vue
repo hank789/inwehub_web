@@ -147,12 +147,10 @@
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import commentTextarea from '../../components/comment/Textarea.vue'
-
-
+  import { goThirdPartyArticle } from '../../utils/webview'
   export default {
     data () {
       return {
-        groupsId: '',
         id: null,
         list: [],
         search_type: 1,
@@ -171,16 +169,13 @@
       }
     },
     created () {
-      if (this.$route.params.id) {
-        this.groupsId = this.$route.params.id
-      }
     },
     computed: {
       prevOtherData () {
-        return {id: this.groupsId, type: this.search_type}
+        return {id: this.id, type: this.search_type}
       },
       nextOtherData () {
-        return {id: this.groupsId, type: this.search_type}
+        return {id: this.id, type: this.search_type}
       }
     },
     components: {
@@ -190,7 +185,6 @@
       Options,
       Share,
       DiscoverShare,
-      Share,
       commentTextarea
     },
     props: {},
@@ -227,6 +221,15 @@
 
           this.$refs.ctextarea.finish()
         })
+      },
+      goArticle: function (article) {
+        goThirdPartyArticle(
+          article.view_url,
+          article.id,
+          article.title,
+          article.comment_url,
+          article.img_url
+        )
       },
       toDetail (item) {
         switch (item.feed_type) {
