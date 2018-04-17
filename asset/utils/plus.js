@@ -226,7 +226,7 @@ function openAppUrlByUrl (url) {
   if (href === 'about:blank') {
     return
   }
-  href = href.replace('https://m.inwehub.com/#', '')
+  href = href.replace(process.env.H5_ROOT + '/#', '')
   if (window.plus) {
     console.log('plus 打开')
     router.pushPlus(href)
@@ -786,7 +786,7 @@ function lockOrientation (orientation) {
 }
 
 function openUrlByUrl (href) {
-  if (/https:\/\/m\.inwehub\.com/.test(href)) {
+  if (href.indexOf(process.env.H5_ROOT) >= 0) {
     openAppUrlByUrl(href)
   } else {
     openVendorUrlByUrl(href)
