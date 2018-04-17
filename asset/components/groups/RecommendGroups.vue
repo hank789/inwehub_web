@@ -1,7 +1,7 @@
 <template>
   <div class="container-item swiper" v-if="!loading && apper">
     <div class="title">
-      <p>{{title}}</p>
+      <p class="resumeTitle">{{title}}</p>
       <p v-if="isShowMore" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
@@ -110,6 +110,10 @@
     float: right;
     font-size:0.373rem;
     color:#03AEF9;
+  }
+  .resume p.resumeTitle{
+    font-size: 14px;
+    color:rgba(128,128,128,1);
   }
   .home-recommend {
     width: 100%;
