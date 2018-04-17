@@ -112,7 +112,7 @@
     color:#03AEF9;
   }
   .resume p.resumeTitle{
-    font-size: 14px;
+    font-size: 0.373rem;
     color:rgba(128,128,128,1);
   }
   .home-recommend {
