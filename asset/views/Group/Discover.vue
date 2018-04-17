@@ -34,7 +34,12 @@
         :nextOtherData="{sort:'hot'}"
         class="listWrapper">
         <!--swiper滑动-->
-        <groups :isShow = "true"></groups>
+        <groups
+          :groupsList="groupsList"
+          :loading="loading"
+          :isShowMore = "true"
+        ></groups>
+        <!---->
         <div class="title">
           大家都在看
           <i class="bot"></i>
@@ -67,6 +72,8 @@
     data () {
       return {
         list: [],
+        groupsList: [],
+        loading: 1,
         swiperOption: {
           pagination: '.swiper-pagination',
           slidesPerView: 'auto',
@@ -87,6 +94,25 @@
     props: {},
     watch: {},
     methods: {
+      getGroups () {
+        postRequest(`group/mine`, {
+          page: 1
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.data) {
+            this.groupsList = response.data.data.data
+            setTimeout(() => {
+              this.loading = 0
+            }, 300)
+          }
+        })
+      },
       messagecountchange (obj) {
         if (obj.contact_id) {
           this.contact_id = obj.contact_id
@@ -174,6 +200,7 @@
       }
     },
     mounted () {
+      this.getGroups()
     },
     updated () {
     }

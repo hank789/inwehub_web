@@ -19,7 +19,12 @@
         class="listWrapper"
       >
         <!--我的圈子-->
-        <groups :isApper='true'></groups>
+        <!--swiper滑动-->
+        <groups
+          :groupsList="groupsList"
+          :loading="loading"
+          :apper="apper"
+        ></groups>
         <!--全部圈子-->
         <div class="group-title">全部</div>
 
@@ -50,7 +55,10 @@
   export default {
     data () {
       return {
-        list: []
+        list: [],
+        loading: 1,
+        groupsList: [],
+        apper: 0
       }
     },
     components: {
@@ -61,6 +69,26 @@
     props: {},
     watch: {},
     methods: {
+      getGroups () {
+        postRequest(`group/mine`, {
+          page: 1
+        }).then(response => {
+          var code = response.data.code
+          // 如果请求不成功提示信息 并且返回上一页；
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          if (response.data.data.data) {
+            this.groupsList = response.data.data.data
+            this.apper = this.groupsList.length
+            setTimeout(() => {
+              this.loading = 0
+            }, 300)
+          }
+        })
+      },
       goJoin (id) {
         postRequest(`group/join`, {id: id}).then(response => {
           var code = response.data.code
@@ -75,6 +103,7 @@
       }
     },
     mounted () {
+      this.getGroups()
     },
     updated () {}
   }

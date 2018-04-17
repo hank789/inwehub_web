@@ -2,15 +2,15 @@
   <div class="container-item swiper" v-if="!loading && apper">
     <div class="title">
       <p>我的</p>
-      <p v-if="isShow" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
+      <p v-if="isShowMore" @tap.stop.prevent="$router.pushPlus('/groups')">更多</p>
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
-      <swiper-slide style="width: 2.08rem;;" class="home-card" :key="item.id" v-for="(item, index) in servicesList">
+      <swiper-slide style="width: 2.08rem;" class="home-card" :key="item.id" v-for="(item, index) in groupsList">
         <img :src='item.logo'  @tap.stop.prevent="toDetail(item)" />
         <p class="mui-ellipsis">{{item.name}}</p>
         <i v-if="item.unread_count"></i>
       </swiper-slide>
-      <swiper-slide  style="width: 2.08rem;" v-if="isShow">
+      <swiper-slide  style="width: 2.08rem;" v-if="isShowMore">
         <div class="service" @tap.stop.prevent="$router.pushPlus('/groups')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
@@ -28,9 +28,6 @@
   export default {
     data () {
       return {
-        servicesList: [],
-        loading: 1,
-        apper: 0,
         swiperOption: {
           pagination: '.swiper-pagination',
           slidesPerView: 'auto',
@@ -44,11 +41,19 @@
       swiperSlide
     },
     props: {
-      isShow: {
-        type: Boolean,
-        default: false
+      groupsList: {
+        type: Array,
+        default: []
       },
-      isApper: {
+      loading: {
+        type: Number,
+        default: 1
+      },
+      apper: {
+        type: Number,
+        default: 1
+      },
+      isShowMore: {
         type: Boolean,
         default: false
       }
@@ -57,34 +62,9 @@
     methods: {
       toDetail (item) {
         this.$router.pushPlus('/group/detail/' + item.id)
-      },
-      companyServices () {
-        postRequest(`group/mine`, {
-          page: 1
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.data) {
-            this.servicesList = response.data.data.data
-            setTimeout(() => {
-              this.loading = 0
-            }, 300)
-          }
-          if (this.isApper && !this.servicesList.length) {
-            this.apper = 0
-          } else {
-            this.apper = 1
-          }
-        })
       }
     },
     mounted () {
-      this.companyServices()
     },
     updated () {
     }

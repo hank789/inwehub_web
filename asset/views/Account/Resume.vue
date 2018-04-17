@@ -35,8 +35,6 @@
         </div>
         <div class="qRhelp">
           扫一扫试试?
-
-
         </div>
       </div>
 
@@ -148,6 +146,8 @@
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
         </div>
+        <!--Ta的圈子-->
+
         <!--grey-->
         <div class="grey"></div>
         <!--个人简介-->
