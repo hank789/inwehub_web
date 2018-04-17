@@ -148,8 +148,6 @@
   import localEvent from '../../stores/localStorage'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
-
-
   export default {
     data () {
       return {

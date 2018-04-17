@@ -47,7 +47,7 @@
               @comment="comment"
             ></DiscoverShare>
             <!--圈子信息-->
-            <div class="followGroups">
+            <div class="followGroups" v-if="item.feed.group !== null">
               <div class="follow-content">
                 <groups-list class="small groups"
                              :list="item.feed.group"
@@ -72,7 +72,7 @@
                                      @comment="comment"
               ></SubmitReadhubAriticle>
               <!--圈子信息-->
-              <div class="followGroups">
+              <div class="followGroups" v-if="item.feed.group !== null">
                 <div class="follow-content">
                   <groups-list class="small groups"
                                :list="item.feed.group"
@@ -97,7 +97,7 @@
             <div v-else-if="item.feed_type === 10">
               <CommentReadhubAriticle  :data="item"></CommentReadhubAriticle>
               <!--圈子信息-->
-              <div class="followGroups">
+              <div class="followGroups" v-if="item.feed.group !== null">
                 <div class="follow-content">
                   <groups-list class="small groups"
                                :list="item.feed.group"
@@ -118,7 +118,7 @@
             <div v-else-if="item.feed_type === 13">
               <UpvoteReadhubAriticle  :data="item"></UpvoteReadhubAriticle>
               <!--圈子信息-->
-              <div class="followGroups">
+              <div class="followGroups" v-if="item.feed.group !== null">
                 <div class="follow-content">
                   <groups-list class="small groups"
                                :list="item.feed.group"
