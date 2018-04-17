@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
     </header>
 
@@ -110,6 +110,13 @@
       }
     },
     methods: {
+      empty () {
+        this.resetData()
+        window.mui.back()
+      },
+      resetData () {
+        localEvent.clearLocalItem('selectedGroup' + this.id)
+      },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
@@ -161,6 +168,7 @@
             this.isblue = false
             this.isShow = false
             this.$router.pushPlus('/discover/add/success')
+            this.resetData()
             return
           }
         })
