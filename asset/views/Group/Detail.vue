@@ -128,7 +128,9 @@
       @fail="shareFail"
       @share="share"
     ></Share>
-
+    <commentTextarea ref="ctextarea"
+                     @sendMessage="sendMessage"
+    ></commentTextarea>
   </div>
 </template>
 
@@ -144,6 +146,8 @@
   import Share from '../../components/Share.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
+  import commentTextarea from '../../components/comment/Textarea.vue'
+
 
   export default {
     data () {
@@ -185,13 +189,45 @@
       SubmitReadhubAriticle,
       Options,
       Share,
-      DiscoverShare
+      DiscoverShare,
+      Share,
+      commentTextarea
     },
     props: {},
     watch: {
       '$route': 'refreshPageData'
     },
     methods: {
+      sendMessage (message) {
+        var commentTarget = message.commentData
+
+        postRequest(`article/comment-store`, {
+          'submission_id': commentTarget.submissionId,
+          body: message.content,
+          parent_id: commentTarget.parentId,
+          mentions: message.noticeUsers
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          var data = response.data.data
+
+          window.mui.toast(response.data.message)
+
+          this.commentTargetComponent.prependItem(
+            data.id,
+            message.content,
+            data.created_at,
+            commentTarget.parentId,
+            commentTarget.commentList
+          )
+
+          this.$refs.ctextarea.finish()
+        })
+      },
       toDetail (item) {
         switch (item.feed_type) {
           case 5:
