@@ -389,7 +389,8 @@ const routes = [
     component: componets.GroupsList,
     meta: {
       title: '圈子',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -400,8 +401,9 @@ const routes = [
     name: 'group-add',
     component: componets.GroupsAdd,
     meta: {
-      title: '圈子',
-      keepAlive: false
+      title: '创建圈子',
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -413,7 +415,8 @@ const routes = [
     component: componets.GroupsDetail,
     meta: {
       title: '圈子',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       next()
@@ -437,7 +440,8 @@ const routes = [
     component: componets.GroupsSetting,
     meta: {
       title: '圈主设置',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -449,7 +453,8 @@ const routes = [
     component: componets.GroupsMy,
     meta: {
       title: '我的圈子',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
