@@ -2,7 +2,7 @@
    <div>
        <header class="mui-bar mui-bar-nav">
          <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-         <h1 class="mui-title">圈主设置</h1>
+         <h1 class="mui-title">圈子设置</h1>
        </header>
        <div class="mui-content absolute">
          <RefreshList
@@ -64,7 +64,7 @@
         this.$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       pass (item) {
-        postRequest('auth/group/joinAgree', {
+        postRequest('group/joinAgree', {
           id: this.id,
           user_id: item.user_id
         })
@@ -80,7 +80,7 @@
           })
       },
       noPass (item) {
-        postRequest('auth/group/joinReject', {
+        postRequest('group/joinReject', {
           id: this.id,
           user_id: item.user_id
         })

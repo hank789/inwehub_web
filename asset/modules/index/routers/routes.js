@@ -434,12 +434,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈主设置
+  { // 圈子设置
     path: '/group/setting/:id',
     name: 'group-setting',
     component: componets.GroupsSetting,
     meta: {
-      title: '圈主设置',
+      title: '圈子设置',
       keepAlive: false,
       wechatHideHeader: true
     },
