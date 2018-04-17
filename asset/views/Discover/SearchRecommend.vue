@@ -49,7 +49,17 @@
               ref="discoverShare"
               @comment="comment"
             ></DiscoverShare>
+            <!--圈子信息-->
+            <div class="followGroups">
+              <div class="follow-content">
+                <groups-list class="small groups"
+                             :list="item.feed.group"
+                             :type="'small'"
+                ></groups-list>
+              </div>
+            </div>
           </div>
+
           <div @tap.stop.prevent="toDetail(item)" v-else>
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
@@ -61,9 +71,21 @@
             <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
             <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                   @comment="comment"
-            ></SubmitReadhubAriticle>
+            <div  v-else-if="item.feed_type === 5 && item.feed.domain !== ''">
+              <SubmitReadhubAriticle :data="item"
+                                     @comment="comment"
+              ></SubmitReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
+
 
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
@@ -78,7 +100,19 @@
             <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
 
             <!--x评论了文章-->
-            <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
+            <div v-else-if="item.feed_type === 10">
+              <CommentReadhubAriticle  :data="item"></CommentReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
+
 
             <!--x赞了专业回答-->
             <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
@@ -87,7 +121,19 @@
             <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
 
             <!--x赞了文章-->
-            <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
+            <div v-else-if="item.feed_type === 13">
+              <UpvoteReadhubAriticle  :data="item"></UpvoteReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
+
 
           </div>
         </template>
@@ -125,6 +171,7 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
+  import groupsList from '../../components/groups/GroupsList.vue'
 
   export default {
     data () {
@@ -153,7 +200,8 @@
       DiscoverShare,
       commentTextarea,
       Swiper,
-      ServiceRecommendation
+      ServiceRecommendation,
+      groupsList
     },
     props: {},
     watch: {},
@@ -430,5 +478,25 @@
   .listWrapper{
     top:2.426rem;
     bottom: 1.333rem;
+  }
+  .followGroups{
+    width: 100%;
+    background: #ffffff;
+    margin-top: -10px;
+    position: relative;
+    height: 74px;
+  }
+  .followGroups:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    height: .267rem;
+    background-color: #f3f4f6;
+    width: 100%;
+  }
+  .followGroups .follow-content{
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
   }
 </style>
