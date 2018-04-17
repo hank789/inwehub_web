@@ -42,6 +42,14 @@
                                      @comment="comment"
                                      @showItemOptions="showItemOptions"
               ></SubmitReadhubAriticle>
+
+              <DiscoverShare
+                v-if="item.feed_type === 5 && item.feed.domain === ''"
+                :data="item"
+                ref="discoverShare"
+                @comment="comment"
+              ></DiscoverShare>
+
             </template>
           </div>
           <!--为空的提示-->
@@ -117,6 +125,10 @@
       @share="share"
     ></Share>
 
+    <commentTextarea ref="ctextarea"
+                     @sendMessage="sendMessage"
+    ></commentTextarea>
+
   </div>
 </template>
 
@@ -125,12 +137,14 @@
   import Options from '../../components/Options.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
+  import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import Share from '../../components/Share.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
+  import commentTextarea from '../../components/comment/Textarea.vue'
 
   export default {
     data () {
@@ -154,10 +168,10 @@
     },
     computed: {
       prevOtherData () {
-        return {id: 1, type: this.search_type}
+        return {id: this.id, type: this.search_type}
       },
       nextOtherData () {
-        return {id: 1, type: this.search_type}
+        return {id: this.id, type: this.search_type}
       }
     },
     components: {
@@ -165,7 +179,9 @@
       GroupsInfo,
       SubmitReadhubAriticle,
       Options,
-      Share
+      Share,
+      DiscoverShare,
+      commentTextarea
     },
     props: {},
     watch: {
@@ -352,6 +368,36 @@
       },
       chooseType (type) {
         this.search_type = type
+      },
+      sendMessage (message) {
+        var commentTarget = message.commentData
+
+        postRequest(`article/comment-store`, {
+          'submission_id': commentTarget.submissionId,
+          body: message.content,
+          parent_id: commentTarget.parentId,
+          mentions: message.noticeUsers
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          var data = response.data.data
+
+          window.mui.toast(response.data.message)
+
+          this.commentTargetComponent.prependItem(
+            data.id,
+            message.content,
+            data.created_at,
+            commentTarget.parentId,
+            commentTarget.commentList
+          )
+
+          this.$refs.ctextarea.finish()
+        })
       },
       comment (submissionId, parentId, commentTargetUsername, list, component) {
         // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
@@ -549,5 +595,8 @@
   .Nothing svg{
     font-size: 1.6rem;
     margin-bottom: 0.133rem;
+  }
+  .listWrapper{
+    bottom:50px;
   }
 </style>
