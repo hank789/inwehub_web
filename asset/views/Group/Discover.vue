@@ -49,7 +49,7 @@
 
         <ul>
           <template v-for="(hot, index) in list">
-            <li class="Container group-bot" v-if="hot.type === 'link'" >
+            <li class="Container" v-if="hot.type === 'link'" >
               <div @tap.stop.prevent="goDetial(hot)" >
                 <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
@@ -89,9 +89,13 @@
                     <use xlink:href="#icon-dianzan1"></use>
                   </svg>
                   {{hot.upvotes}}
-
                 </p>
               </div>
+              <!--圈子信息-->
+              <groups-list class="small"
+                           :list="hot.group"
+                           :type="'small'"
+              ></groups-list>
             </li>
             <!--带图片的样式-->
             <li class="imgContainer group-bot" v-else-if="hot.type === 'text'">
@@ -100,7 +104,6 @@
                           @report="report"
                           @deleterow="deleterow(hot.id, index)"
               ></TextDetail>
-
             </li>
           </template>
         </ul>
@@ -131,6 +134,7 @@
   import groups from '../../components/groups/RecommendGroups.vue'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
+  import groupsList from '../../components/groups/GroupsList.vue'
 
   export default {
     data () {
@@ -154,7 +158,8 @@
       swiperSlide,
       RefreshList,
       TextDetail,
-      groups
+      groups,
+      groupsList
     },
     props: {},
     watch: {},
@@ -420,7 +425,7 @@
     width: 100%;
     /*overflow: hidden;*/
     background: #FFFFFF;
-    padding: 0.32rem 0.426rem 0 0.426rem;
+    padding: 0.32rem 0.426rem 0.266rem 0.426rem;
     margin-bottom: 0.266rem;
 
   }
