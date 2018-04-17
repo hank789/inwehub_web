@@ -17,7 +17,7 @@
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <template  v-for="item in list">
-            <li v-if="item.type == 'App\\Notifications\\GroupAuditResult' || item.type == 'App\\Notifications\\NewGroupMemberJoin' || item.type == 'App\\Notifications\\NewGroupMemberApply'" @tap.stop.prevent="goUrl(item.data.url)">
+            <li v-if="typeDesc(item.type)" @tap.stop.prevent="goUrl(item.data.url)">
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
@@ -74,6 +74,20 @@
       }
     },
     methods: {
+      typeDesc (type) {
+        switch (type) {
+          case 'App\\Notifications\\GroupAuditResult':
+            return 1
+          case 'App\\Notifications\\NewGroupMemberJoin':
+            return 1
+          case 'App\\Notifications\\NewGroupMemberApply':
+            return 1
+          case 'App\\Notifications\\GroupMemberApplyResult':
+            return 1
+          default:
+            return 0
+        }
+      },
       // 下拉刷新;
       pulldownRefresh () {
         setTimeout(() => {
