@@ -1,5 +1,6 @@
 <template>
-  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}" @tap.stop.prevent="toDetail(data.url)">
+  <div class='container-item'  @tap.stop.prevent="toDetail(data.url)">
+  <div :class="{noMoreComment: data.feed.comment_number <= 8}" >
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
@@ -65,11 +66,7 @@
         <use xlink:href="#icon-dingwei1"></use>
       </svg>{{data.feed.current_address_name}}
     </div>
-    <!--圈子信息-->
-    <groups-list class="small groups"
-                 :list="data.feed.group"
-                 :type="'small'"
-    ></groups-list>
+  </div>
   </div>
 </template>
 
@@ -82,7 +79,6 @@
   import { getIndexByIdArray } from '../../utils/array'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import SuppertAndComment from './SuppertAndComment.vue'
-  import groupsList from '../groups/GroupsList.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -94,7 +90,6 @@
       Images,
       Avatar,
       SuppertAndComment,
-      groupsList
     },
     props: {
       data: {

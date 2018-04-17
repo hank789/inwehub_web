@@ -46,6 +46,15 @@
               ref="discoverShare"
               @comment="comment"
             ></DiscoverShare>
+            <!--圈子信息-->
+            <div class="followGroups">
+              <div class="follow-content">
+                <groups-list class="small groups"
+                             :list="item.feed.group"
+                             :type="'small'"
+                ></groups-list>
+              </div>
+            </div>
           </div>
           <div @tap.stop.prevent="toDetail(item)" v-else>
             <!--x回答了专业问答-->
@@ -58,10 +67,20 @@
             <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
 
             <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                   @comment="comment"
-            ></SubmitReadhubAriticle>
-
+            <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''">
+              <SubmitReadhubAriticle  :data="item"
+                                     @comment="comment"
+              ></SubmitReadhubAriticle>
+              <!--圈子信息-->
+              <div class="followGroups">
+                <div class="follow-content">
+                  <groups-list class="small groups"
+                               :list="item.feed.group"
+                               :type="'small'"
+                  ></groups-list>
+                </div>
+              </div>
+            </div>
             <!--x关注了互动问答-->
             <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
 
@@ -113,6 +132,7 @@
   import UpvoteReadhubAriticle from '../../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
+  import groupsList from '../../components/groups/GroupsList.vue'
 
   import RefreshList from '../../components/refresh/List.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
@@ -142,7 +162,8 @@
       UpvoteFreeQuestion,
       UpvoteReadhubAriticle,
       DiscoverShare,
-      commentTextarea
+      commentTextarea,
+      groupsList
     },
     props: {},
     watch: {},
@@ -403,7 +424,26 @@
   .activityWrapper.unIsGetted ~ .listWrapper {
     top: 1.12rem;
   }
-
+  .followGroups{
+    width: 100%;
+    background: #ffffff;
+    margin-top: -10px;
+    position: relative;
+    height: 74px;
+  }
+  .followGroups:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    height: .267rem;
+    background-color: #f3f4f6;
+    width: 100%;
+  }
+  .followGroups .follow-content{
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
 </style>
 <style>
   .feedWrapper .container-avatarAndText{

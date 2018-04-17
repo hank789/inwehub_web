@@ -55,12 +55,6 @@
       ></SuppertAndComment>
       <!-- 点赞和评论列表end -->
     </div>
-    <!--圈子信息-->
-    <groups-list class="small groups"
-                 :list="data.feed.group"
-                 :type="'small'"
-                 @goJoin="goJoin"
-    ></groups-list>
   </div>
 </template>
 
@@ -71,7 +65,6 @@
   import { postRequest } from '../../utils/request'
   import { getIndexByIdArray } from '../../utils/array'
   import { getLocalUserInfo } from '../../utils/user'
-  import groupsList from '../groups/GroupsList.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -81,8 +74,7 @@
     },
     components: {
       Avatar,
-      SuppertAndComment,
-      groupsList
+      SuppertAndComment
     },
     props: {
       data: {

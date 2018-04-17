@@ -139,6 +139,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: #ffffff;
   }
   .big .logo{
     width:2.453rem;
