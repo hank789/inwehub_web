@@ -95,7 +95,6 @@
                 <span>被赞</span>  <b>{{ resume.info.supports }}</b>
                 <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
                 <i class="separate"></i>{{ resume.info.total_score }}
-
               </div>
             </div>
           </div>
@@ -104,7 +103,7 @@
         <div class="skilled">
           <p>Ta的擅长</p>
           <template v-for="(industry, index) in resume.info.skill_tags">
-            <span @tap.stop.prevent="toTagDetail(industry.text)">{{industry.text}}</span>
+            <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
           </template>
           <i class="bot"></i>
         </div>
@@ -145,8 +144,16 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
+          <i class="bot"></i>
         </div>
         <!--Ta的圈子-->
+        <groups
+          class="resume"
+          :groupsList="resume.groups"
+          :loading="loading"
+          :apper="apper"
+          :title = "'Ta的圈子'"
+        ></groups>
 
         <!--grey-->
         <div class="grey"></div>
@@ -288,6 +295,7 @@
 </template>
 
 <script>
+  import groups from '../../components/groups/RecommendGroups.vue'
   import { postRequest } from '../../utils/request'
   import Share from '../../components/Share.vue'
   import { getLocalUserInfo } from '../../utils/user'
@@ -297,6 +305,7 @@
 
   export default {
     data: () => ({
+      apper: 1,
       shareOptions: {
         shareName: '',
         title: '',
@@ -311,7 +320,7 @@
       showQrCode: false,
       isShare: false,
       canBack: false,
-      loading: true,
+      loading: 1,
       shareUrl: '',
       wechatConfig: {},
       downloadHeader: false,
@@ -319,6 +328,7 @@
       isShowItemJobMore: false,
       isShowitemEduMore: false,
       resume: {
+        groups: [],
         info: {
           uuid: '',
           name: '',
@@ -349,7 +359,8 @@
       }
     }),
     components: {
-      Share
+      Share,
+      groups
     },
     watch: {
       '$route' () {
@@ -399,8 +410,8 @@
             window.mui.toast(response.data.message)
             return
           }
-
           this.resume = response.data.data
+          this.apper = this.resume.groups.length
           this.loading = 0
           this.bindWechatShare()
         })
@@ -1158,26 +1169,24 @@
 
   /*擅长*/
   .skilled {
-    padding: 0.32rem 0.373rem 0.453rem 0.373rem;
+    padding: 0.32rem 0.373rem 10px 0.373rem;
     overflow: hidden;
     position: relative;
 
   }
-
-  .skilled span {
+  .skilled .tags{
+    float: left;
+    margin-right: 0.213rem;
+    margin-bottom: 5px;
+  }
+  .skilled .tags span{
     float: left;
     background: #ececee;
     border-radius: 1.333rem;
-    padding: 0.106rem 0.293rem;
+    padding: 0 10px;
     font-size: 0.32rem;
     color: #444444;
-    margin-left:0.213rem;
-    margin-bottom: 0.16rem;
   }
-
-  /*.skilled span:nth-of-type(1) {*/
-    /*margin-left: 0rem;*/
-  /*}*/
 
   .skilled p {
     font-size: 0.373rem;
