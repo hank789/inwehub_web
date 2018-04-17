@@ -142,7 +142,7 @@
           case 5:
             return '项目机遇'
           case 6:
-            return '互动问答回复'
+            return '互动回答'
         }
       }
     },

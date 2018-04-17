@@ -426,7 +426,7 @@
         localEvent.clearLocalItem('discover_skill_tags' + this.id)
         localEvent.clearLocalItem('discover_selectUser' + this.id)
         localEvent.clearLocalItem('discover_Address' + this.id)
-//        localEvent.clearLocalItem('selectedGroup' + this.id)
+        localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
         if (!this.selectedGroup.id) {

@@ -474,7 +474,7 @@
     color: RGBA(68, 68, 68, 1);
     font-weight: 500;
     line-height: 0.533rem;
-    height: 1.733rem;
+    height: 1.7rem;
   }
   .text-content p:nth-of-type(1) span{
     display: inline-block;
