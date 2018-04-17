@@ -281,6 +281,8 @@
       }
     },
     mounted () {
+    },
+    activated: function () {
       this.getGroups()
     },
     updated () {
