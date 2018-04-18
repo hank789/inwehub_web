@@ -160,7 +160,7 @@ function getGroupDetail (id, title, username, userCount, logo) {
   var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
 
   return {
-    title: 'InweHub圈子：' + title + '-最具品质的咨询顾问社区',
+    title: '邀您加入InweHub圈子：' + title + '-最具品质的咨询顾问社区',
     link: link,
     content: username + '创建，已有' + userCount + '人加入 | 点击查看加入',
     imageUrl: logo,
