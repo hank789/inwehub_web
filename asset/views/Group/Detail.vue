@@ -88,7 +88,7 @@
 
         <div class="group-text">
           <p>圈子介绍<i class="bot"></i></p>
-          <p>{{ detail.description}}</p>
+          <p class="text-content">{{ detail.description }}</p>
         </div>
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
 
