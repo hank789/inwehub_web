@@ -135,7 +135,7 @@
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
           <p>私密圈子内容加入后可阅读</p>
-          <p @tap.stop.prevent="$router.pushPlus('/groups')">去加入</p>
+          <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
         </div>
         <div class="riverBot"></div>
         <div class="groupsBot">
