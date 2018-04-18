@@ -452,7 +452,7 @@
     text-align: left;
     font-size: 0.426rem;
     color: rgba(68,68,68,1);
-    font-weight: 500;
+    font-weight: 700;
   }
   .recommend li{
     width: 100%;
@@ -483,7 +483,7 @@
   .text-content .content_t{
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 0.533rem;
     max-height: 1.7rem;
   }
