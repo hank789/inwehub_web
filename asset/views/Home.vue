@@ -88,7 +88,7 @@
                 <span>{{ typeDesc(item.read_type) }}</span>
                 {{item.data.title}}
               </div>
-              <p class="information">
+              <div class="information">
                 <span>{{item.data.view_number}}浏览<i></i></span>
                 <span v-if="item.read_type === 1 || item.read_type === 2 || item.read_type === 6">{{item.data.support_number
                   }}点赞<i></i></span>
@@ -98,7 +98,7 @@
                 <span v-else-if="item.read_type === 2">好评率{{item.data.average_rate
                   }}</span>
                 <span v-else-if="item.read_type === 3">{{item.data.follower_number}}关注</span>
-              </p>
+              </div>
             </div>
             <i class="bot"></i>
           </li>
@@ -436,6 +436,7 @@
   /*精选推荐*/
   .recommend{
     width:100%;
+    padding: 0 16px;
     height: 18.133rem;
     overflow: hidden;
     background: #ffffff;
@@ -451,19 +452,18 @@
     text-align: left;
     font-size: 0.426rem;
     color: rgba(68,68,68,1);
-    font-weight: 500;
+    font-weight: 700;
   }
   .recommend li{
-    width: 92%;
-    padding: 0.4rem 0;
+    width: 100%;
+    padding: 15px 0;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     position: relative;
   }
   .recommend li .logo{
-    width:3.226rem;
+    width: 121px;
     height:2.16rem;
   }
   .recommend li img{
@@ -473,9 +473,9 @@
     object-fit: cover;
   }
   .recommend li .text-content{
-    width:70%;
+    width:212px;
     height:2.16rem;
-    margin-left: 0.4rem;
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -483,7 +483,7 @@
   .text-content .content_t{
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 0.533rem;
     max-height: 1.7rem;
   }
@@ -500,10 +500,10 @@
   }
   .information{
     width:100%;
+    line-height: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    align-items: center;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
     position: absolute;
