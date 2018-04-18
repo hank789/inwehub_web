@@ -41,7 +41,7 @@
                 <!--x发布了发现-->
                 <DiscoverShare
                   :data="item"
-                  :show='true'
+                  :show='isShowItemOption(item)'
                   ref="discoverShare"
                   @comment="comment"
                   @showItemOptions="showItemOptions"
@@ -49,7 +49,7 @@
               </div>
               <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''"  @tap.stop.prevent="toDetail(item)">
                 <SubmitReadhubAriticle :data="item"
-                                       :show='true'
+                                       :show='isShowItemOption(item)'
                                        @comment="comment"
                                        @showItemOptions="showItemOptions"
                 ></SubmitReadhubAriticle>
@@ -297,12 +297,13 @@
         if (getLocalUserId() === item.user.id) {
           // 文章是我写的
           return true
-        } else {
-          // 文章不是我写的， 但我是圈主
-          if (this.detail.is_joined === 3) {
-            return true
-          }
         }
+
+        // 我是圈主
+        if (this.detail.is_joined === 3) {
+          return true
+        }
+
         return false
       },
       showItemOptions (item) {
@@ -310,10 +311,10 @@
           this.itemOptions = [
             '删除'
           ]
-        } else {
-          this.itemOptions = [
-            '加精'
-          ]
+        }
+
+        if (this.detail.is_joined === 3) {
+          this.itemOptions.push('加精')
         }
 
         this.$refs.itemOptions.toggle()
@@ -496,14 +497,14 @@
   /*菜单*/
   .menu {
     width: 100%;
-    height: 39px;
+    height: 1.04rem;
     background: #FFFFFF;
     font-size: 0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    line-height: 39px;
+    line-height: 1.04rem;
     position: absolute;
     top: 4.746rem;
   }
@@ -520,7 +521,7 @@
     height: 0.04rem;
     border-radius: 1.333rem;
     background: #03aef9;
-    top: 37px;
+    top: 0.986rem;
     left: 0;
     right: 0;
     margin: auto;

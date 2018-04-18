@@ -561,7 +561,7 @@
   .groups p:nth-of-type(2){
     font-size:0.373rem;
     color:rgba(128,128,128,1);
-    padding-top:5px;
+    padding-top:0.133rem;
   }
   #test {
     width: 6.4rem;

@@ -177,7 +177,7 @@
   }
   .groupImageWrapper{
     position: relative;
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
   .groupImageWrapper svg{
     position: absolute;
@@ -187,7 +187,7 @@
   .groupImageWrapper img {
     width: 1.626rem;
     height: 1.626rem;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
 
   .component-photograph {
@@ -201,7 +201,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
 
   .address {

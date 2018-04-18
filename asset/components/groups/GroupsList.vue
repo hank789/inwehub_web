@@ -235,7 +235,7 @@
   }
   .arrow{
     position: absolute;
-    top: 25px;
+    top: 0.666rem;
     right: 0;
   }
 

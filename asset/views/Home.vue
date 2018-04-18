@@ -403,7 +403,7 @@
   }
 
   #slider{
-    height:136px;
+    height:3.626rem;
     background: #cccccc;
     position: relative;
   }
@@ -415,7 +415,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 32px;
+    padding: 0 0.853rem;
   }
   .categoryMenu li{
     height:100%;
@@ -445,7 +445,7 @@
   }
   .title{
     width:100%;
-    line-height: 16px;
+    line-height: 0.426rem;
     padding-left: 4%;
     margin-top: 0.293rem;
     text-align: left;
@@ -455,7 +455,7 @@
   }
   .recommend li{
     width: 92%;
-    padding: 15px 0;
+    padding: 0.4rem 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -495,7 +495,7 @@
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
     background:rgba(236,236,238,1);
-    padding: 1px 5px;
+    padding: 0.026rem 0.133rem;
     border-radius:0.106rem;
   }
   .information{
