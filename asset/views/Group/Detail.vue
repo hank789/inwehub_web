@@ -47,13 +47,13 @@
                   @showItemOptions="showItemOptions"
                 ></DiscoverShare>
               </div>
-
-              <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                     :show='true'
-                                     @comment="comment"
-                                     @showItemOptions="showItemOptions"
-                                     @tap.stop.prevent="toDetail(item)"
-              ></SubmitReadhubAriticle>
+              <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''"  @tap.stop.prevent="toDetail(item)">
+                <SubmitReadhubAriticle :data="item"
+                                       :show='true'
+                                       @comment="comment"
+                                       @showItemOptions="showItemOptions"
+                ></SubmitReadhubAriticle>
+              </div>
             </template>
           </div>
           <!--为空的提示-->
