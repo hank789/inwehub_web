@@ -1658,11 +1658,11 @@ const routes = [
     },
     component: componets.UnansweredQuestions
   },
-  { // 精华推荐
+  { // 精选推荐
     path: '/recommends',
     name: 'recommends',
     meta: {
-      title: '精华推荐',
+      title: '精选推荐',
       wechatHideHeader: true
     },
     component: componets.SelectionRecommend
