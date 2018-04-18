@@ -8,6 +8,9 @@
       <template v-if="description">
         <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >{{description}}</div>
       </template>
+      <svg class="icon arrow" aria-hidden="true">
+        <use xlink:href="#icon-chakangengduojiantou"></use>
+      </svg>
       <p>
         <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
         <span class="-group-name text-line-1" v-else>{{list.name}}</span>
@@ -225,6 +228,14 @@
     border-radius: 50%;
     position: absolute;
     top: 0.4rem;
+    right: 0;
+  }
+  .big .arrow{
+    display: none;
+  }
+  .arrow{
+    position: absolute;
+    top: 25px;
     right: 0;
   }
 
