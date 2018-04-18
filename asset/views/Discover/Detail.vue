@@ -277,7 +277,7 @@
         this.$router.pushPlus('/group/detail/' + id)
       },
       // 删除
-      deleterow(id) {
+      deleterow (id) {
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -309,13 +309,13 @@
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      sendMessage(message) {
+      sendMessage (message) {
         this.$refs.discuss.sendMessage(message)
       },
-      comment(commentTargetName) {
+      comment (commentTargetName) {
         this.$refs.ctextarea.comment(commentTargetName)
       },
-      commentFinish() {
+      commentFinish () {
         this.commentNumAdd()
         this.$refs.ctextarea.finish()
       },
@@ -370,11 +370,11 @@
           this.loading = 0
         })
       },
-      setFollowStatus(status) {
+      setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
 //      点赞
-      supportNumAdd() {
+      supportNumAdd () {
         this.detail.upvotes++
         var support = {
           name: this.name,
@@ -383,7 +383,7 @@
         this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
 //      取消点赞
-      supportNumDesc() {
+      supportNumDesc () {
         this.detail.upvotes--
         for (var i in this.detail.supporter_list) {
           if (this.detail.supporter_list[i].uuid === this.uuid) {
@@ -391,25 +391,25 @@
           }
         }
       },
-      commentNumAdd() {
+      commentNumAdd () {
         this.detail.comments_number++
       },
-      commentNumDesc() {
+      commentNumDesc () {
         this.detail.comments_number--
       },
-      setSupportStatus(type) {
+      setSupportStatus (type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
       },
-      collectNumAdd() {
+      collectNumAdd () {
         this.detail.bookmarks++
       },
-      collectNumDesc() {
+      collectNumDesc () {
         this.detail.bookmarks--
       },
-      setCollectStatus(type) {
+      setCollectStatus (type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       },
-      shotContentHeight() {
+      shotContentHeight () {
         if (this.detail.group.is_joined !== -1) {
           this.showAllContentWrapper()
           return
@@ -422,7 +422,7 @@
         }
       }
     },
-    updated() {
+    updated () {
       this.$nextTick(function () {
         setTimeout(() => {
           this.shotContentHeight()
@@ -435,10 +435,10 @@
     watch: {
       '$route': 'refreshPageData'
     },
-    created() {
+    created () {
       this.getDetail()
     },
-    mounted() {
+    mounted () {
       pageRefresh(this, () => {
         this.refreshPageData()
       })
