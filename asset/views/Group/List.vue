@@ -70,6 +70,9 @@
     props: {},
     watch: {},
     methods: {
+      refreshPageData () {
+        this.getGroups()
+      },
       getGroups () {
         postRequest(`group/mine`, {
           page: 1
