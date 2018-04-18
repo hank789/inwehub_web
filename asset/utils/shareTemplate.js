@@ -81,9 +81,9 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
   }
 
   return {
-    title: 'InweHub发现 | ' + title,
+    title: '' + title + '-最具品质的咨询顾问社区',
     link: link,
-    content: '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？',
+    content: '来自Inwehub圈子，点击查看更多热度分享。',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '文章分享'
@@ -96,9 +96,10 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  * @param title
  * @param imgUrl
  * @param username
+ * @param groupName
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
-function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
+function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
   var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
 
@@ -107,9 +108,9 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
   }
 
   return {
-    title: '分享 ' + username + ' 的InweHub动态',
+    title: title + '- 最具品质的咨询顾问社区', // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: title,
+    content: '来自InweHub「' + groupName + '」' + username + '的发布',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '动态分享'

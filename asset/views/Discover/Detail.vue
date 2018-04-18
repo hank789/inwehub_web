@@ -365,7 +365,7 @@
 
           this.detail = response.data.data
 
-          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
 
           this.loading = 0
         })
