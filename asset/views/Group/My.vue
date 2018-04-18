@@ -15,7 +15,7 @@
         :pageMode = true
         class="listWrapper"
       >
-        <template v-for="(item, index) in list">
+        <template v-for="(item, index) in list" v-if="list.length">
           <div class="group-container" @tap.stop.prevent="selectItem(item)" v-if="isShowItem(item)">
             <groupsList class="big" :list="item" :tapNothing="true">
               <i class="bot"></i>
