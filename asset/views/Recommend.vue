@@ -30,8 +30,14 @@
                 </p>
                 <p class="information">
                   <span>{{item.data.view_number}}浏览<i></i></span>
-                  <span>{{item.data.support_number}}点赞<i></i></span>
-                  <span>{{item.data.comment_number}}评论</span>
+                  <span v-if="item.read_type === 1 || item.read_type === 2 || item.read_type === 6">{{item.data.support_number
+                    }}点赞<i></i></span>
+                  <span v-else-if="item.read_type === 3">{{item.data.answer_number}}回答<i></i></span>
+
+                  <span v-if="item.read_type === 1 || item.read_type === 6">{{item.data.comment_number}}评论</span>
+                  <span v-else-if="item.read_type === 2">好评率{{item.data.average_rate
+                    }}</span>
+                  <span v-else-if="item.read_type === 3">{{item.data.follower_number}}关注</span>
                 </p>
               </div>
               <i class="bot"></i>
