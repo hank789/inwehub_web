@@ -136,6 +136,7 @@
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import groupsList from '../../components/groups/GroupsList.vue'
+  import { goThirdPartyArticle } from '../../utils/webview'
 
   export default {
     data () {
@@ -165,6 +166,23 @@
     props: {},
     watch: {},
     methods: {
+      goDetial (hot) {
+        switch (hot.type) {
+          case 'text':
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
+            break
+          case 'link':
+            goThirdPartyArticle(
+              hot.data.url,
+              hot.id,
+              hot.title,
+              '/c/' + hot.category_id + '/' + hot.slug,
+              hot.data.img
+            )
+            break
+          default:
+        }
+      },
       toggleOptions (event) {
         if (event.target.nodeName !== 'svg') return
         var target = event.target.nextElementSibling

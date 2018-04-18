@@ -394,7 +394,7 @@
   }
 
   #slider{
-    height:5.333rem;
+    height:136px;
     background: #cccccc;
     position: relative;
   }
@@ -405,7 +405,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 32px;
   }
   .categoryMenu li{
     height:100%;
@@ -444,7 +445,7 @@
   }
   .recommend li{
     width: 92%;
-    height:2.933rem;
+    padding: 15px 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -526,8 +527,8 @@
     height: 0.16rem;
     margin: 0.026rem 0.133rem;
     background: rgba(216,216,216,1);
-    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(1216,216,216, .7);
-     box-shadow: 0 0 0.026rem 0.026rem rgba(216,216,216, .7);
+    -webkit-box-shadow: 0 0 0 0 rgba(1216,216,216, .7);
+     box-shadow: 0 0 0 0 rgba(216,216,216, .7);
   }
   .home.mui-slider-indicator .mui-active.mui-indicator{
     width: 0.32rem;
