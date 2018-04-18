@@ -126,7 +126,7 @@
       :targetType="'group'"
       @success="shareSuccess"
       @fail="shareFail"
-      @share="share"
+      @shareBtnClick="shareBtnClick"
     ></Share>
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
@@ -277,7 +277,7 @@
           }
         })
       },
-      share () {
+      shareBtnClick () {
         this.shareOption.title = this.shareOption.title.replace('邀您加入', '')
       },
       joinShare () {

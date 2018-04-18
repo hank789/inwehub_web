@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="share()" v-if="!hideShareBtn">
+    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-fenxiang"></use>
       </svg>
@@ -400,6 +400,10 @@
         this.$emit('fail', error)
         console.log(JSON.stringify(error))
         window.mui.toast('分享失败')
+      },
+      shareBtnClick () {
+        this.$emit('shareBtnClick')
+        this.share()
       },
       share () {
         if (this.ImagePreview) {
