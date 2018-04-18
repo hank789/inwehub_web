@@ -500,10 +500,10 @@
   }
   .information{
     width:100%;
+    line-height: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    align-items: center;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
     position: absolute;
