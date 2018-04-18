@@ -85,10 +85,7 @@
 
             <div class="text-content">
               <div class="content_t mui-ellipsis-3">
-                <span v-if="item.read_type === 1">发现分享</span>
-                <span v-else-if="item.read_type === 2">专业问答</span>
-                <span v-else-if="item.read_type === 3">互动提问</span>
-                <span v-else-if="item.read_type === 6">互动回答</span>
+                <span>{{ typeDesc(item.read_type) }}</span>
                 {{item.data.title}}
               </div>
               <p class="information">
@@ -138,6 +135,18 @@
     computed: {
     },
     methods: {
+      typeDesc (type) {
+        switch (type) {
+          case 1:
+            return '发现分享'
+          case 2:
+            return '专业问答'
+          case 3:
+            return '互动问答'
+          case 6:
+            return '互动回答'
+        }
+      },
       messagecountchange (obj) {
         if (obj.contact_id) {
           this.contact_id = obj.contact_id

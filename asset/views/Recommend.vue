@@ -143,10 +143,6 @@
             return '专业问答'
           case 3:
             return '互动问答'
-          case 4:
-            return '活动'
-          case 5:
-            return '项目机遇'
           case 6:
             return '互动回答'
         }
