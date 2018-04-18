@@ -22,7 +22,7 @@
     </div>
     <ul class="pilot">
       <li @tap.stop.prevent="$router.pushPlus('/ask')">
-        <!--<span v-if="searchText">在＃{{searchText}}＃标签下提问</span>-->
+        <span>搜不到结果？</span>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-chakangengduojiantou"></use>
         </svg>
