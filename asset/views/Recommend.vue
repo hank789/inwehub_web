@@ -244,6 +244,6 @@
     height:0.32rem;
     background:RGBA(219, 219, 219, 1);
     margin: 0 0.266rem;
-    margin-bottom: -0.08rem;
+    margin-bottom: -0.05rem;
   }
 </style>
