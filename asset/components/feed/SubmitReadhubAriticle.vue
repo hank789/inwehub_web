@@ -65,6 +65,7 @@
   import { postRequest } from '../../utils/request'
   import { getIndexByIdArray } from '../../utils/array'
   import { getLocalUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
 
   const currentUser = getLocalUserInfo()
 
@@ -146,6 +147,12 @@
 
         postRequest(`article/upvote-submission`, data).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return

@@ -106,6 +106,7 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import { goThirdPartyArticle } from '../../utils/webview'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
+  import userAbility from '../../utils/userAbility'
 
   const PublishAnswers = {
     data: () => ({
@@ -204,7 +205,12 @@
           submission_id: hot.id
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
@@ -227,7 +233,12 @@
           id: hot.id
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()

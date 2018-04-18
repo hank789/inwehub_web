@@ -4,7 +4,7 @@
     <div id="groups">
       <div class="groups">
          <p>请先加入圈子！</p>
-         <p>即可点赞、收藏、分享、看更多圈子内容</p>
+         <p>即可点赞、收藏、评论、看更多圈子内容</p>
       </div>
     </div>
 
@@ -561,6 +561,7 @@
   .groups p:nth-of-type(2){
     font-size:0.373rem;
     color:rgba(128,128,128,1);
+    padding-top:5px;
   }
   #test {
     width: 6.4rem;
