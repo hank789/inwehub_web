@@ -451,9 +451,9 @@
   .followGroups{
     width: 100%;
     background: #ffffff;
-    margin-top: -10px;
+    margin-top: -0.266rem;
     position: relative;
-    height: 74px;
+    height: 1.973rem;
   }
   .followGroups:after {
     position: absolute;
