@@ -488,39 +488,35 @@
   /*菜单*/
   .menu {
     width: 100%;
-    height: 1.173rem;
+    height: 39px;
     background: #FFFFFF;
     font-size: 0.373rem;
     color: #444444;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    line-height: 39px;
     position: absolute;
     top: 4.746rem;
   }
-
   .menu span {
     position: relative;
     margin-bottom: -0.293rem;
   }
-
   .menu span.bold {
     font-weight: 500;
   }
-
   .menu span i {
     position: absolute;
     width: 0.746rem;
     height: 0.04rem;
     border-radius: 1.333rem;
     background: #03aef9;
-    top: 0.67rem;
+    top: 37px;
     left: 0;
     right: 0;
     margin: auto;
   }
-
   .groups-list {
     margin-top: 1.306rem;
   }

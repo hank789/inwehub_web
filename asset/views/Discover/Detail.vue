@@ -7,28 +7,9 @@
 
     <div class="mui-content" v-show="!loading">
 
-      <!--私密的样式-->
-      <!--圈子信息-->
-      <div v-if="!detail.group.public">
-      <div class="groupsCenter">
-      <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-zanwushuju"></use>
-      </svg>
-      <p>私密圈子内容加入后可阅读</p>
-      <p @tap.stop.prevent="$router.pushPlus('/groups')">去加入</p>
-      </div>
-      <div class="riverBot"></div>
-      <div class="groupsBot">
-      <groups-list class="small"
-      :list="detail.group"
-      :type="'small'"
-      ></groups-list>
-      </div>
-      </div>
 
 
-
-      <div v-else>
+      <div v-if="isShow(detail.group.public, detail.group.is_joined)">
         <div class="mui-table-view detail-discover">
           <UserInfo
             :uuid="detail.owner.uuid"
@@ -68,7 +49,7 @@
 
 
         <!--是否加入圈子/group/detail/:id-->
-        <div class="groups" v-if="detail.group.is_joined < 0"
+        <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
              @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
         </div>
 
@@ -89,8 +70,8 @@
 
         <div class="statisticsWrapper">
           <Statistics
-            :groupId = detail.group.id
-            :is_joined = detail.group.is_joined
+            :groupId=detail.group.id
+            :is_joined=detail.group.is_joined
             :id="detail.id"
             :commentNum="detail.comments_number"
             :isCommented="!!detail.is_commented"
@@ -109,7 +90,7 @@
         <!--灰色部分-->
         <div class="river"></div>
         <!--圈子信息-->
-        <div class="groupsList"  v-if="detail.group !== null">
+        <div class="groupsList" v-if="detail.group !== null">
           <groups-list class="small detail"
                        :list="detail.group"
                        :type="'small'"
@@ -130,8 +111,8 @@
         <!--评论部分-->
         <Discuss
           v-if="detail.slug"
-          :groupId = detail.group.id
-          :is_joined = detail.group.is_joined
+          :groupId=detail.group.id
+          :is_joined=detail.group.is_joined
           :listApi="'article/comments'"
           :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
           :storeApi="'article/comment-store'"
@@ -140,6 +121,29 @@
           @commentFinish="commentFinish"
           ref="discuss"
         ></Discuss>
+      </div>
+
+
+
+
+
+      <!--私密的样式-->
+      <!--圈子信息-->
+      <div v-else>
+        <div class="groupsCenter">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <p>私密圈子内容加入后可阅读</p>
+          <p @tap.stop.prevent="$router.pushPlus('/groups')">去加入</p>
+        </div>
+        <div class="riverBot"></div>
+        <div class="groupsBot">
+          <groups-list class="small detail"
+                       :list="detail.group"
+                       :type="'small'"
+          ></groups-list>
+        </div>
       </div>
     </div>
 
@@ -237,6 +241,32 @@
       groupsList
     },
     methods: {
+      typeDesc (type) {
+        switch (type) {
+          case -1:
+            return true
+          case 0:
+            return true
+          case 1:
+            return false
+          case 2:
+            return true
+          case 3:
+            return false
+        }
+      },
+      isShow (ispublic, type) {
+        //  公开的都展示
+        if (ispublic) {
+          return true
+        } else {
+          if (type === 1 || type === 3) {
+            return true
+          } else {
+            return false
+          }
+        }
+      },
       showAllContentWrapper () {
         var contentWrapper = document.querySelector('.discoverContentWrapper')
         if (contentWrapper) {
@@ -247,7 +277,7 @@
         this.$router.pushPlus('/group/detail/' + id)
       },
       // 删除
-      deleterow (id) {
+      deleterow(id) {
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -279,13 +309,13 @@
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
-      sendMessage (message) {
+      sendMessage(message) {
         this.$refs.discuss.sendMessage(message)
       },
-      comment (commentTargetName) {
+      comment(commentTargetName) {
         this.$refs.ctextarea.comment(commentTargetName)
       },
-      commentFinish () {
+      commentFinish() {
         this.commentNumAdd()
         this.$refs.ctextarea.finish()
       },
@@ -340,11 +370,11 @@
           this.loading = 0
         })
       },
-      setFollowStatus (status) {
+      setFollowStatus(status) {
         this.detail.is_followed_author = status
       },
 //      点赞
-      supportNumAdd () {
+      supportNumAdd() {
         this.detail.upvotes++
         var support = {
           name: this.name,
@@ -353,7 +383,7 @@
         this.detail.supporter_list = this.detail.supporter_list.concat(support)
       },
 //      取消点赞
-      supportNumDesc () {
+      supportNumDesc() {
         this.detail.upvotes--
         for (var i in this.detail.supporter_list) {
           if (this.detail.supporter_list[i].uuid === this.uuid) {
@@ -361,25 +391,25 @@
           }
         }
       },
-      commentNumAdd () {
+      commentNumAdd() {
         this.detail.comments_number++
       },
-      commentNumDesc () {
+      commentNumDesc() {
         this.detail.comments_number--
       },
-      setSupportStatus (type) {
+      setSupportStatus(type) {
         this.detail.is_upvoted = type === 'upvote' ? 1 : 0
       },
-      collectNumAdd () {
+      collectNumAdd() {
         this.detail.bookmarks++
       },
-      collectNumDesc () {
+      collectNumDesc() {
         this.detail.bookmarks--
       },
-      setCollectStatus (type) {
+      setCollectStatus(type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       },
-      shotContentHeight () {
+      shotContentHeight() {
         if (this.detail.group.is_joined !== -1) {
           this.showAllContentWrapper()
           return
@@ -392,7 +422,7 @@
         }
       }
     },
-    updated () {
+    updated() {
       this.$nextTick(function () {
         setTimeout(() => {
           this.shotContentHeight()
@@ -405,10 +435,10 @@
     watch: {
       '$route': 'refreshPageData'
     },
-    created () {
+    created() {
       this.getDetail()
     },
-    mounted () {
+    mounted() {
       pageRefresh(this, () => {
         this.refreshPageData()
       })
@@ -562,7 +592,7 @@
     width: 100%;
     height: 0.266rem;
     position: fixed;
-    bottom: 1.786rem;
+    bottom: 1.78rem;
     background: #f3f4f6;
   }
 
@@ -579,7 +609,7 @@
   }
 
   .groupsCenter svg {
-   font-size: 1.866rem;
+    font-size: 1.866rem;
   }
 
   .groupsCenter p:nth-of-type(1) {
@@ -589,11 +619,12 @@
     margin-top: 0.186rem;
     margin-bottom: 0.56rem;
   }
+
   .groupsCenter p:nth-of-type(2) {
-    width:3.066rem;
-    height:1.093rem;
-    line-height:1.093rem;
-    background:#03AEF9;
+    width: 3.066rem;
+    height: 1.093rem;
+    line-height: 1.093rem;
+    background: #03AEF9;
     border-radius: 1.333rem;
     font-size: 0.426rem;
     color: #FFFFFF;
@@ -601,8 +632,8 @@
     margin: auto;
   }
 
-  .shortContentWrapper{
-    max-height:8rem;
+  .shortContentWrapper {
+    max-height: 8rem;
     overflow: hidden;
     position: relative;
     margin-bottom: 0.266rem;
