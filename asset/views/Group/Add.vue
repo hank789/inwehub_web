@@ -175,10 +175,19 @@
   .mui-content {
     background: #fff;
   }
-
+  .groupImageWrapper{
+    position: relative;
+    margin-top: 5px;
+  }
+  .groupImageWrapper svg{
+    position: absolute;
+    top:-0.133rem;
+    right:-0.133rem;
+  }
   .groupImageWrapper img {
     width: 1.626rem;
     height: 1.626rem;
+    border-radius: 4px;
   }
 
   .component-photograph {
@@ -192,6 +201,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 10px;
   }
 
   .address {
