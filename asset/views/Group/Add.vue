@@ -122,7 +122,7 @@
             return
           }
 
-          this.$router.replace('/group/my')
+          this.$router.replace('/group/detail/' + response.data.data.id)
         })
       },
       selectType (type) {
