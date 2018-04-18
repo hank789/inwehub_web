@@ -89,14 +89,6 @@
       list: []
     }),
     props: {
-      groupId: {
-        type: Number,
-        default: 0
-      },
-      is_joined: {
-        type: Number,
-        default: 1
-      },
       listApi: {
         type: String,
         default: ''
@@ -192,10 +184,6 @@
         this.getList()
       },
       comment (parentId, commentTargetUsername, list) {
-        if (this.is_joined === -1) {
-          userAbility.alertGroups(this, this.groupId)
-          return
-        }
         var commentTarget = {
           parentId: parentId || 0,
           commentTargetUsername: commentTargetUsername || '',
@@ -223,6 +211,12 @@
 
         postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
