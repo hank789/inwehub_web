@@ -10,7 +10,7 @@
       <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="">问答  <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/my/collectedArticle')">动态</span>
+        <span @tap.stop.prevent="$router.replace('/my/collectedArticle')">分享</span>
 
       </div>
 
