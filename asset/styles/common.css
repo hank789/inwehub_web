@@ -14,6 +14,10 @@ body{
   /*background: transparent !important;*/
 }
 
+.font-family-medium{
+  font-family: PingFangSC-Medium, sans-serif;
+}
+
 .quill-editor{
   -webkit-user-select:auto;
 }

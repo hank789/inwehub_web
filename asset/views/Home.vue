@@ -75,7 +75,7 @@
       </ul>
       <div class="gray"></div>
       <!--精选推荐-->
-      <div class="title">精选推荐</div>
+      <div class="title font-family-medium">精选推荐</div>
       <ul class="recommend">
         <template v-for="(item, index) in list">
           <li  @tap.stop.prevent="goDetial(item.read_type,item)">
@@ -85,8 +85,8 @@
 
             <div class="text-content">
               <div class="content_t mui-ellipsis-3">
-                <span>{{ typeDesc(item.read_type) }}</span>
-                {{item.data.title}}
+                <span class="label">{{ typeDesc(item.read_type) }}</span>
+                <span class="font-family-medium">{{item.data.title}}</span>
               </div>
               <div class="information">
                 <span>{{item.data.view_number}}浏览<i></i></span>
@@ -498,7 +498,7 @@
   .recommend li .text-content  .container{
     display: inline;
   }
-  .text-content .content_t span{
+  .text-content .content_t span.label{
     display: inline-block;
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
