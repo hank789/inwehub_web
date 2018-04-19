@@ -19,7 +19,7 @@
         </div>
       </div>
       <!--轮播-->
-      <div id="slider" class="mui-slider mui-fullscreen" v-if="notices.length">
+      <div id="slider" class="mui-slider" v-if="notices.length">
         <div class="mui-slider-group  mui-slider-loop">
           <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
