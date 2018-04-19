@@ -187,7 +187,6 @@
   .recommend{
     width:100%;
     padding: 0 0.426rem;
-    height: 18.133rem;
     overflow: hidden;
     background: #ffffff;
     display: flex;
