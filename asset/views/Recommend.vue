@@ -253,8 +253,12 @@
     flex-direction: row;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
+<<<<<<< HEAD
     position: absolute;
     bottom: 0;
+=======
+    margin-top: 0.293rem;
+>>>>>>> aab7b95542621409113b69b5d437714489ee5e6d
   }
   .information i{
     display: inline-block;
