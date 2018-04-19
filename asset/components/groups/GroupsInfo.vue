@@ -165,15 +165,12 @@
     width:100%;
     height:3.28rem;
     background: #ffffff;
-    padding: 1.5rem 4% 1.4rem 4%;
-    /*padding: 0 4%;*/
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    padding: 0.266rem 0.4rem 0.48rem 0.586rem;
   }
   .tag-l{
     width:2.453rem;
     height:2.453rem;
+    float: left;
   }
   .tag-l img{
     width: 100%;
@@ -197,8 +194,10 @@
   }
 
   .tag-r{
-    height:2.453rem;
-    margin-left: 0.266rem;
+    width: 6.346rem;
+    height: 2.453rem;
+    margin-left: 0.2rem;
+    float: left;
   }
   .tag-r p:nth-of-type(1){
     font-size:0.48rem;
@@ -252,24 +251,5 @@
   .tag-avatar svg{
     margin-right:0.346rem;
     color: #808080;
-  }
-  /***媒体查询*****/
-
-  @media screen and (min-width: 320px) {
-    .tag-r {
-      width: 70%;
-    }
-  }
-
-  @media screen and (min-width: 375px) {
-    .tag-r {
-      width: 70%;
-    }
-  }
-
-  @media screen and (min-width: 414px) {
-    .tag-r {
-      width: 73%;
-    }
   }
 </style>
