@@ -223,7 +223,7 @@
   }
   .tag-info span i{
     font-size: 0.373rem;
-    font-weight: 500;
+    font-weight: bold;
     color: rgba(3,174,249,1);
   }
   .tag-avatar{

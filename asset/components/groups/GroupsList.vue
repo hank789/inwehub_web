@@ -164,7 +164,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    position: relative;
   }
   /*/*/
   .big .-group-name{
@@ -185,7 +185,7 @@
   .group-right .text{
     font-size: 0.32rem;
     color: #808080;
-    margin-top: 0.213rem;
+    margin-top: 11px;
     line-height: 0.426rem;
   }
   .big .-group-info{
@@ -197,6 +197,9 @@
   .-group-info{
     font-size: 0.32rem;
     color: #B4B4B6;
+    position: absolute;
+    bottom: 0;
+    line-height: 0.32rem;
   }
   .-group-info span{
     margin-right: 0.24rem;
