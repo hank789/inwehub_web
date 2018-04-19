@@ -24,7 +24,7 @@
                 <img :src="item.data.img" />
               </div>
               <div class="text-content">
-                <p class="text-line-3">
+                <p class="mui-ellipsis-3">
                   <span class="label">{{ typeDesc(item.read_type) }}</span>
                   <span class="font-family-medium">{{item.data.title }}</span>
                 </p>
