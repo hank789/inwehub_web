@@ -204,6 +204,9 @@
     font-size: 0.373rem;
     color:#808080;
   }
+  .-group-info span svg{
+    margin-bottom: 1px;
+  }
   .join{
     border:0.026rem solid #03AEF9;
     font-size: 0.373rem;
