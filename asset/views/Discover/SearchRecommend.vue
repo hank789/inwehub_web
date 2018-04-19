@@ -138,11 +138,13 @@
           </div>
         </template>
       </RefreshList>
-      <commentTextarea ref="ctextarea"
-                       @sendMessage="sendMessage"
-      ></commentTextarea>
+
       <!---->
     </div>
+    <commentTextarea ref="ctextarea"
+                     @sendMessage="sendMessage"
+    ></commentTextarea>
+
   </div>
 </template>
 
