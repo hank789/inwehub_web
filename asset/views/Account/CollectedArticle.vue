@@ -12,7 +12,7 @@
        <!--导航栏-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答  </span>
-        <span>动态 <i></i></span>
+        <span>分享 <i></i></span>
 
       </div>
       <!--内容区域-->
@@ -26,7 +26,7 @@
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="$router.pushReadHubPage(ask.comment_url)">
             <div class="container-image margin-10-0-0" v-if="ask.img.length" >
-              <img :src="ask.img.length ? ask.img[0] : ''" />
+              <img class="lazyImg" v-lazy="ask.img.length ? ask.img[0] : ''" />
             </div>
             <p class="mui-ellipsis-2">{{ask.title}}<a v-if="ask.domain">{{ask.domain}}</a> </p>
             <p>

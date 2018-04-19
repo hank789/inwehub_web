@@ -64,7 +64,6 @@
             ></DiscoverShare>
           </div>
           <div @tap.stop.prevent="toDetail(item)" v-else>
-
             <!--x回答了专业问答-->
             <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
 
@@ -243,6 +242,12 @@
           mentions: message.noticeUsers
         }).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return

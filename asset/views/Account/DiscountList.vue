@@ -26,7 +26,7 @@
           <!---->
           <ul>
             <li v-for="item in list" @tap.stop.prevent="skip(item.id)">
-              <img :src="item.image_url"/>
+              <img class="lazyImg" v-lazy="item.image_url"/>
               <p>{{item.title}}</p>
               <p>
                 <span>{{item.created_at}} </span>

@@ -27,7 +27,7 @@
             <input type="text" placeholder="输入用户名" v-model.trim="search">
           </div>
 
-          <div class="notFound">
+          <div class="notFound" @tap.stop.prevent="$router.pushPlus('/growthList')">
             找不到成员？<span>添加新的关注</span>
           </div>
 

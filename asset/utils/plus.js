@@ -226,6 +226,7 @@ function openAppUrlByUrl (url) {
   if (href === 'about:blank') {
     return
   }
+  href = href.replace(process.env.H5_ROOT + '/#', '')
   href = href.replace('https://m.inwehub.com/#', '')
   if (window.plus) {
     console.log('plus 打开')
@@ -707,6 +708,18 @@ function AppInit (context) {
               // 邀请用户注册成功
               router.pushPlus('/invitation/friends')
               break
+            case 'group_member_apply':
+              // 申请加入圈子通知
+              router.pushPlus('/group/setting/' + payload.object_id)
+              break
+            case 'group_member_join':
+              // 成功加入圈子
+              router.pushPlus('/group/detail/' + payload.object_id)
+              break
+            case 'group_audit_result':
+              // 圈子审核结果
+              router.pushPlus('/group/detail/' + payload.object_id)
+              break
           }
         }
 
@@ -773,6 +786,14 @@ function lockOrientation (orientation) {
   })
 }
 
+function openUrlByUrl (href) {
+  if (href.indexOf(process.env.H5_ROOT) >= 0) {
+    openAppUrlByUrl(href)
+  } else {
+    openVendorUrlByUrl(href)
+  }
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -798,5 +819,6 @@ export {
   AppInit,
   AppPageInit,
   setClipboardText,
-  lockOrientation
+  lockOrientation,
+  openUrlByUrl
 }

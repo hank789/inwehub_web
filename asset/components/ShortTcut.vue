@@ -10,75 +10,83 @@
     <!--</div>-->
 
     <div id="down">
-      <div class="down-title find-title">寻找<i></i></div>
-      <ul class="find">
+      <!--<div class="down-title find-title">寻找<i></i></div>-->
+      <!--<ul class="find">-->
+        <!--<li @tap.stop.prevent="skip(1)">-->
+          <!--<p>-->
+            <!--<svg class="icon" aria-hidden="true" >-->
+              <!--<use xlink:href="#icon-faxuqiu"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span class="aside_l">待您回答</span>-->
+        <!--</li>-->
+        <!--<li @tap.stop.prevent="skip(2)">-->
+          <!--<p>-->
+            <!--<svg class="icon" aria-hidden="true" >-->
+              <!--<use xlink:href="#icon-jinghuatuijian"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span>精华推荐</span>-->
+        <!--</li>-->
+        <!--<li @tap.stop.prevent="skip(3)">-->
+          <!--<p>-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-bangdan"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span class="aside_r">用户榜单</span>-->
+        <!--</li>-->
+        <!--<li @tap.stop.prevent="skip(4)">-->
+          <!--<p>-->
+            <!--<svg class="icon" aria-hidden="true" >-->
+              <!--<use xlink:href="#icon-xiangmujiyu1"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span class="aside_l">项目机遇</span>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<div class="down-title">添加<i></i></div>-->
+      <ul>
         <li @tap.stop.prevent="skip(1)">
           <p>
             <svg class="icon" aria-hidden="true" >
               <use xlink:href="#icon-faxuqiu"></use>
             </svg>
           </p>
-          <span class="aside_l">待您回答</span>
+          <span class="aside_l">待回答</span>
         </li>
-        <li @tap.stop.prevent="skip(2)">
-          <p>
-            <svg class="icon" aria-hidden="true" >
-              <use xlink:href="#icon-jinghuatuijian"></use>
-            </svg>
-          </p>
-          <span>精华推荐</span>
-        </li>
-        <li @tap.stop.prevent="skip(3)">
-          <p>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-bangdan"></use>
-            </svg>
-          </p>
-          <span class="aside_r">用户榜单</span>
-        </li>
-        <li @tap.stop.prevent="skip(4)">
-          <p>
-            <svg class="icon" aria-hidden="true" >
-              <use xlink:href="#icon-xiangmujiyu1"></use>
-            </svg>
-          </p>
-          <span class="aside_l">项目机遇</span>
-        </li>
-      </ul>
-      <div class="down-title">添加<i></i></div>
-      <ul>
-        <li class="bonus" @tap.stop.prevent="skip(5)">
-          <p class="-yellow">
-            <i>分红</i>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanyewenda-"></use>
-            </svg>
-          </p>
-          <span class="aside_l">付费问</span>
-        </li>
+        <!--<li class="bonus" @tap.stop.prevent="skip(5)">-->
+          <!--<p class="-yellow">-->
+            <!--<i>分红</i>-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-zhuanyewenda-"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span class="aside_l">付费问</span>-->
+        <!--</li>-->
         <li @tap.stop.prevent="skip(6)">
           <p class="-yellow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-hudongwenda-"></use>
             </svg>
           </p>
-          <span>提问</span>
+          <span>提问题</span>
         </li>
-        <li @tap.stop.prevent="skip(7)">
-          <p  class="-yellow">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-wenzhang"></use>
-            </svg>
-          </p>
-          <span class="aside_r">文章</span>
-        </li>
+        <!--<li @tap.stop.prevent="skip(7)">-->
+          <!--<p  class="-yellow">-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-wenzhang"></use>-->
+            <!--</svg>-->
+          <!--</p>-->
+          <!--<span class="aside_r">文章</span>-->
+        <!--</li>-->
         <li @tap.stop.prevent="skip(8)">
           <p  class="-yellow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tijiaowenzhang1"></use>
             </svg>
           </p>
-          <span class="aside_l">分享</span>
+          <span class="aside_l">发分享</span>
         </li>
       </ul>
     </div>
@@ -93,6 +101,8 @@
   import { setStatusBarBackgroundAndStyle, autoHeight } from '../utils/statusBar.js'
   import userAbility from '../utils/userAbility'
   import { postRequest } from '../utils/request'
+  import localEvent from '../stores/localStorage'
+  import { getLocalUserId } from '../utils/user'
 
   export default {
     methods: {
@@ -103,7 +113,7 @@
               this.$router.pushPlus('/unansweredquestions')
               break
             case 2:
-              this.$router.pushPlus('/selectionrecommend')
+              this.$router.pushPlus('/group/recommend')
               break
             case 3:
               this.$router.pushPlus('/growthList')
@@ -139,6 +149,7 @@
               this.$router.pushPlus('/discover/publishArticles')
               break
             case 8:
+              localEvent.clearLocalItem('selectedGroup' + getLocalUserId())
               this.$router.pushPlus('/discover/add')
               break
 
@@ -211,13 +222,12 @@
   }
 
   ul {
-    width:100%;
+    width: 60%;
     height:2.4rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding: 0 8%;
     position: absolute;
     left: 0;
     right: 0;
@@ -229,7 +239,7 @@
 
   @keyframes myfirst {
     from {
-      width:100%;
+      width:60%;
       padding: 0 8%;
       opacity: 0.6;
     }

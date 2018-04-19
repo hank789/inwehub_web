@@ -27,6 +27,11 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
+      <div class="more" v-if="show" @tap.stop.prevent="showItemOptions">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -40,21 +45,7 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-
-    <!--<div class="options text-right margin-10-0-0" @tap.stop.prevent="toDetail(data.feed.comment_url)">-->
-      <!--<div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-pinglun"></use>-->
-        <!--</svg><span>{{data.feed.comment_number}}</span>-->
-      <!--</div>-->
-      <!--<div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-zan"></use>-->
-        <!--</svg><span>{{data.feed.support_number}}</span>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
-
+    <div class="container-answer margin-top-10 padding-space" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
       <!-- 点赞和评论列表start -->
       <SuppertAndComment
         :supportNumber="data.feed.support_number"
@@ -62,13 +53,10 @@
         :commentNumber="data.feed.comment_number"
         :commentList="data.feed.comments"
         :detailUrl="data.feed.comment_url"
-
         @commentIt="commentIt"
       ></SuppertAndComment>
-
       <!-- 点赞和评论列表end -->
     </div>
-
   </div>
 </template>
 
@@ -79,6 +67,7 @@
   import { postRequest } from '../../utils/request'
   import { getIndexByIdArray } from '../../utils/array'
   import { getLocalUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
 
   const currentUser = getLocalUserInfo()
 
@@ -94,6 +83,10 @@
       data: {
         type: Object,
         default: {}
+      },
+      show: {
+        type: Boolean,
+        default: false
       }
     },
     created () {
@@ -103,6 +96,12 @@
 
     },
     methods: {
+      goJoin (id) {
+        this.$router.pushPlus('/group/detail/' + id)
+      },
+      showItemOptions () {
+        this.$emit('showItemOptions', this.data)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -150,6 +149,12 @@
 
         postRequest(`article/upvote-submission`, data).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this.$parent, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
@@ -182,3 +187,17 @@
     }
   }
 </script>
+<style scoped>
+  .more{
+    color: #808080;
+    margin-left: 0.053rem;
+    float: left;
+    padding-right: 0.4rem;
+  }
+  .groups{
+    margin-top: 0.4rem;
+  }
+  .padding-space{
+    padding: 0.4rem 0.4rem 0.25rem 0.4rem;
+  }
+</style>

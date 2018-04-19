@@ -499,6 +499,7 @@ export {
   openWebviewByHome,
   goThirdPartyArticle,
   goVendorUrl,
-  getPrevWebview
+  getPrevWebview,
+  getIdByUrl
 }
 

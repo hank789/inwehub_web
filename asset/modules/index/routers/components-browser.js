@@ -1,8 +1,8 @@
 const Login = () => import(/* webpackChunkName: "login" */ '../../../views/Login.vue')
 const Register = () => import(/* webpackChunkName: "Register" */ '../../../views/Register.vue')
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
-const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/404.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
+const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/Home.vue')
 const SearchSearchQuestion = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchQuestion.vue')
 const SearchSearchSubmission = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchSubmission.vue')
 const SearchSearchTag = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchTag.vue')
@@ -29,12 +29,24 @@ const Invitationindex = () => import(/* webpackChunkName: "Invitationindex" */ '
 const InvitationSuccess = () => import(/* webpackChunkName: "InvitationSuccess" */ '../../../views/Invitation/Success.vue')
 const InvitationPreview = () => import(/* webpackChunkName: "InvitationPreview" */ '../../../views/Invitation/Preview.vue')
 const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '../../../views/Invitation/Image.vue')
+const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Group/List.vue')
+const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Group/Detail.vue')
+const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Group/Add.vue')
+
+const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
+
+const GroupsMy = () => import(/* webpackChunkName: "GroupsMy" */ '../../../views/Group/My.vue')
+const GroupsSearch = () => import(/* webpackChunkName: "GroupsSearch" */ '../../../views/Group/Search.vue')
+
 const DiscoverCompanyServices = () => import(/* webpackChunkName: "DiscoverCompanyServices" */ '../../../views/Discover/CompanyServices.vue')
 const DiscoverHotTopic = () => import(/* webpackChunkName: "DiscoverHotTopic" */ '../../../views/Discover/HotTopic.vue')
 const DiscoverNewest = () => import(/* webpackChunkName: "DiscoverNewest" */ '../../../views/Discover/Newest.vue')
 const DiscoverPublishArticles = () => import(/* webpackChunkName: "DiscoverPublishArticles" */ '../../../views/Discover/PublishArticles.vue')
 const DiscoverAddSuccess = () => import(/* webpackChunkName: "DiscoverAddSuccess" */ '../../../views/Discover/AddSuccess.vue')
-const DiscoverList = () => import(/* webpackChunkName: "DiscoverList" */ '../../../views/Discover/List.vue')
+const DiscoverList = () => import(/* webpackChunkName: "SearchFollow" */ '../../../views/Discover/List.vue')
+const DiscoverSearchFollow = () => import(/* webpackChunkName: "DiscoverSearchFollow" */ '../../../views/Discover/SearchFollow.vue')
+const DiscoverSearchGroup = () => import(/* webpackChunkName: "DiscoverSearchGroup" */ '../../../views/Group/Discover.vue')
+const DiscoverSearchRecommend = () => import(/* webpackChunkName: "DiscoverSearchRecommend" */ '../../../views/Discover/SearchRecommend.vue')
 const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '../../../views/Discover/Detail.vue')
 const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
 const ActivityGrowthList = () => import(/* webpackChunkName: "ActivityGrowthList" */ '../../../views/Activity/GrowthList.vue')
@@ -119,7 +131,7 @@ const NearbynearbyPeopleMapDetail = () => import(/* webpackChunkName: "Nearbynea
 const NearbynearbyCompanyMapDetail = () => import(/* webpackChunkName: "NearbynearbyCompanyMapDetail" */ '../../../views/Nearby/nearbyCompanyMapDetail.vue')
 const NearbycompanyDetails = () => import(/* webpackChunkName: "NearbycompanyDetails" */ '../../../views/Nearby/companyDetails.vue')
 const UnansweredQuestions = () => import(/* webpackChunkName: "UnansweredQuestions" */ '../../../views/UnansweredQuestions.vue')
-const SelectionRecommend = () => import(/* webpackChunkName: "SelectionRecommend" */ '../../../views/SelectionRecommend.vue')
+const SelectionRecommend = () => import(/* webpackChunkName: "SelectionRecommend" */ '../../../views/Recommend.vue')
 const DiscoverAdd4 = () => import(/* webpackChunkName: "DiscoverAdd4" */ '../../../views/Discover/Add4.vue')
 const DiscoverAdd = () => import(/* webpackChunkName: "DiscoverAdd" */ '../../../views/Discover/Add.vue')
 const AddressNearby = () => import(/* webpackChunkName: "AddressNearby" */ '../../../views/Address/Nearby.vue')
@@ -173,8 +185,8 @@ export {
   Login,
   Register,
   FindPassword,
-  Home,
   Feed,
+  Home,
   SearchSearchQuestion,
   SearchSearchSubmission,
   SearchSearchTag,
@@ -199,12 +211,21 @@ export {
   InvitationSuccess,
   InvitationPreview,
   InvitationImage,
+  GroupsList,
+  GroupsDetail,
+  GroupsAdd,
+  GroupsSetting,
+  GroupsMy,
+  GroupsSearch,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,
   DiscoverPublishArticles,
   DiscoverAddSuccess,
   DiscoverList,
+  DiscoverSearchFollow,
+  DiscoverSearchGroup,
+  DiscoverSearchRecommend,
   DiscoverDetail,
   ActivityUpvotesList,
   ActivityGrowthList,

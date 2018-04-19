@@ -67,6 +67,12 @@
           </svg>
           <span>我的收藏</span>
         </li>
+        <li @tap.stop.prevent="$router.pushPlus('/group/my')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wodequanzi"></use>
+          </svg>
+          <span>我的圈子</span>
+        </li>
         <i class="bott"></i>
       </ul>
       <!--part3认证-->
@@ -545,7 +551,7 @@
 
   .part2 li {
     float: left;
-    width: 33%;
+    width: 25%;
     height: 100%;
     text-align: center;
     position: relative;

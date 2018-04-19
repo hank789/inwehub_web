@@ -193,6 +193,17 @@ function getLocalUserInfo () {
 }
 
 /**
+ * 获取本地用户id
+ */
+function getLocalUserId () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.user_id) {
+    return userInfo.user_id
+  }
+  return null
+}
+
+/**
  * 是否通过企业认证
  */
 function isCompanyStatus () {
@@ -246,5 +257,6 @@ export {
   followingUser,
   isCompanyStatus,
   getLocalUserInfo,
-  getUserLevelPercentage
+  getUserLevelPercentage,
+  getLocalUserId
 }

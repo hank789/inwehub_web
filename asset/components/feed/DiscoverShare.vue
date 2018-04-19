@@ -1,5 +1,6 @@
 <template>
-  <div class="container-item" :class="{noMoreComment: data.feed.comment_number <= 8}" @tap.stop.prevent="toDetail(data.url)">
+  <div class='container-item'  @tap.stop.prevent="toDetail(data.url)">
+  <div :class="{noMoreComment: data.feed.comment_number <= 8}" >
     <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
@@ -17,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper textToLink" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
+    <div class="text-16-444 text-line-5 preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
       <!--<span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span>-->
       <span v-html="textToLink(data.feed.title)"></span></div>
 
@@ -30,6 +31,11 @@
     ></Images>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+      <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -43,18 +49,6 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-    <!--<div class="options text-right" @tap.stop.prevent="toDetail(data.url)">-->
-      <!--<div class="component-iconNumber iconPenglunWrapper" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-pinglun"></use>-->
-        <!--</svg><span>{{data.feed.comment_number}}</span>-->
-      <!--</div>-->
-      <!--<div class="component-iconNumber" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-zan"></use>-->
-        <!--</svg><span>{{data.feed.support_number}}</span>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
 
       <!-- 点赞和评论列表start -->
@@ -75,6 +69,7 @@
       </svg>{{data.feed.current_address_name}}
     </div>
   </div>
+  </div>
 </template>
 
 <script type="text/javascript">
@@ -86,6 +81,7 @@
   import { getIndexByIdArray } from '../../utils/array'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import SuppertAndComment from './SuppertAndComment.vue'
+  import userAbility from '../../utils/userAbility'
 
   const currentUser = getLocalUserInfo()
 
@@ -102,15 +98,21 @@
       data: {
         type: Object,
         default: {}
+      },
+      show: {
+        type: Boolean,
+        default: false
       }
     },
     created () {
     },
     watch: {},
     mounted () {
-
     },
     methods: {
+      showItemOptions () {
+        this.$emit('showItemOptions', this.data)
+      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
@@ -158,6 +160,12 @@
 
         postRequest(`article/upvote-submission`, data).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this.$parent, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
@@ -195,6 +203,9 @@
 </script>
 
 <style scoped>
+  .margin-t{
+    margin-top: 0.26rem;
+  }
   .preWrapper{
     white-space: pre-wrap !important;
   }
@@ -209,8 +220,15 @@
   .noMoreComment .container-answer{
     padding:0.266rem 0.4rem 0.266rem;
   }
-
-
+  .groups{
+    margin-top: 0.4rem;
+  }
+  .more{
+    color: #808080;
+    margin-left: 0.053rem;
+    float: left;
+    padding-right: 0.4rem;
+  }
 </style>
 <style>
   #Outermost  p{

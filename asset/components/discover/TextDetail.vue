@@ -12,7 +12,6 @@
         </div>
 
         <div class="textContainer mui-ellipsis-2" id="Outermost" @tap.stop.prevent="goDetial(data)" v-html="searchText ? getHighlight(data.title) : textToLink(data.title)" >
-          <!--{{data.title}}-->
         </div>
 
         <div class="PublishContainer" v-if="data.data.img">
@@ -60,6 +59,12 @@
         {{data.upvotes}}
       </p>
     </div>
+    <!--圈子信息-->
+    <groups-list class="small"
+                 :list="data.group"
+                 :type="'small'"
+                 v-if="data.group !== null"
+    ></groups-list>
   </div>
 </template>
 <script type="text/javascript">
@@ -69,6 +74,7 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import { goThirdPartyArticle } from '../../utils/webview'
+  import groupsList from '../groups/GroupsList.vue'
 
   export default {
     data () {
@@ -77,7 +83,8 @@
       }
     },
     components: {
-      Images
+      Images,
+      groupsList
     },
     props: {
       data: {

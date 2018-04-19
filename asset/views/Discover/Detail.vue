@@ -6,86 +6,145 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div>
-      <div class="mui-table-view detail-discover">
-        <UserInfo
-          :uuid="detail.owner.uuid"
-          :avatar="detail.owner.avatar"
-          :realname="detail.owner.name"
-          :isFollow="isFollow"
-          :isFollowed="detail.is_followed_author?true:false"
-          :isShowPositionAndCompany="false"
-          :isExpert="detail.owner.is_expert?1:0"
-          @setFollowStatus="setFollowStatus"
-        ></UserInfo>
-        <!--删除按钮-->
-        <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">删除</div>
-      </div>
-      <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-        <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
-        <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span></div>
 
-      <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-      <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
-        <template v-for="(image, index) in detail.data.img">
-          <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image" :data-preview-group="1"/>
-        </template>
-      </div>
 
-      <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img" @tap.stop.prevent="goArticle(detail)" >
-        <img :src="detail.data.img"/>
-      </div>
 
-      <div class="timeContainer">
-        <span>
+      <div v-if="isShow(detail.group.public, detail.group.is_joined)">
+        <div class="mui-table-view detail-discover">
+          <UserInfo
+            :uuid="detail.owner.uuid"
+            :avatar="detail.owner.avatar"
+            :realname="detail.owner.name"
+            :isFollow="isFollow"
+            :isFollowed="detail.is_followed_author?true:false"
+            :isShowPositionAndCompany="false"
+            :isExpert="detail.owner.is_expert?1:0"
+            @setFollowStatus="setFollowStatus"
+          ></UserInfo>
+          <!--删除按钮-->
+          <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
+            删除
+          </div>
+        </div>
+
+        <div class="discoverContentWrapper">
+          <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+            <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
+            <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+          </div>
+
+          <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
+          <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+            <template v-for="(image, index) in detail.data.img">
+              <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                   :data-preview-group="1"/>
+            </template>
+          </div>
+
+          <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
+               @tap.stop.prevent="goArticle(detail)">
+            <img class="lazyImg" v-lazy="detail.data.img"/>
+          </div>
+        </div>
+
+
+        <!--是否加入圈子/group/detail/:id-->
+        <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
+             @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
+        </div>
+
+        <div class="timeContainer">
+          <span>{{detail.views}}浏览</span>
+          <span>
           <timeago :since="timeago(detail.created_at)" :auto-update="60">
           </timeago>
         </span>
-        <svg class="icon" aria-hidden="true" v-show="detail.data.current_address_name">
-          <use xlink:href="#icon-dingwei1"></use>
-        </svg>
-        <span>{{detail.data.current_address_name}}</span>
+          <span>著作权归作者所有</span>
+        </div>
+        <div class="address" v-show="detail.data.current_address_name">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingwei1"></use>
+          </svg>
+          <span>{{detail.data.current_address_name}}</span>
+        </div>
+
+        <div class="statisticsWrapper">
+          <Statistics
+            :groupId=detail.group.id
+            :is_joined=detail.group.is_joined
+            :id="detail.id"
+            :commentNum="detail.comments_number"
+            :isCommented="!!detail.is_commented"
+            :supportNum="detail.upvotes"
+            :isSupported="!!detail.is_upvoted"
+            :collectNum="detail.bookmarks"
+            :isCollected="!!detail.is_bookmark"
+            @supportNumDesc="supportNumDesc"
+            @supportNumAdd="supportNumAdd"
+            @setSupportStatus="setSupportStatus"
+            @collectNumDesc="collectNumDesc"
+            @collectNumAdd="collectNumAdd"
+            @setCollectStatus="setCollectStatus"
+          ></Statistics>
+        </div>
+        <!--灰色部分-->
+        <div class="river"></div>
+        <!--圈子信息-->
+        <div class="groupsList" v-if="detail.group !== null">
+          <groups-list class="small detail"
+                       :list="detail.group"
+                       :type="'small'"
+          ></groups-list>
+        </div>
+        <!--灰色部分-->
+        <div class="river" v-if="detail.supporter_list.length"></div>
+        <!--点赞-->
+        <div class="component-dianzanList" v-if="detail.upvotes">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dianzan1"></use>
+          </svg>
+          <span v-for="(item, index) in detail.supporter_list"
+                @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
+        </div>
+        <!--灰色部分-->
+        <div class="river"></div>
+        <!--评论部分-->
+        <Discuss
+          v-if="detail.slug"
+          :listApi="'article/comments'"
+          :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+          :storeApi="'article/comment-store'"
+          :storeParams="{'submission_id': detail.id}"
+          @comment="comment"
+          @commentFinish="commentFinish"
+          ref="discuss"
+        ></Discuss>
       </div>
 
-      <div class="statisticsWrapper">
-        <Statistics
-          :id="detail.id"
-          :commentNum="detail.comments_number"
-          :isCommented="!!detail.is_commented"
-          :supportNum="detail.upvotes"
-          :isSupported="!!detail.is_upvoted"
-          :collectNum="detail.bookmarks"
-          :isCollected="!!detail.is_bookmark"
-          @supportNumDesc="supportNumDesc"
-          @supportNumAdd="supportNumAdd"
-          @setSupportStatus="setSupportStatus"
-          @collectNumDesc="collectNumDesc"
-          @collectNumAdd="collectNumAdd"
-          @setCollectStatus="setCollectStatus"
-        ></Statistics>
-      </div>
-      <!--点赞-->
-      <div class="component-dianzanList" v-if="detail.upvotes">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg>
-        <span v-for="(item, index) in detail.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
-      </div>
-      <!--灰色部分-->
-      <div class="river"></div>
-      <!--评论部分-->
-      <Discuss
-        v-if="detail.slug"
-        :listApi="'article/comments'"
-        :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
-        :storeApi="'article/comment-store'"
-        :storeParams="{'submission_id': detail.id}"
-        @comment="comment"
-        @commentFinish="commentFinish"
-        ref="discuss"
-      ></Discuss>
+
+
+
+
+      <!--私密的样式-->
+      <!--圈子信息-->
+      <div v-else>
+        <div class="groupsCenter">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <p>私密圈子内容加入后可阅读</p>
+          <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
         </div>
+        <div class="riverBot"></div>
+        <div class="groupsBot">
+          <groups-list class="small detail"
+                       :list="detail.group"
+                       :type="'small'"
+          ></groups-list>
+        </div>
+      </div>
     </div>
+
 
     <Share
       ref="ShareBtn"
@@ -106,20 +165,22 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
+  import {postRequest} from '../../utils/request'
   import UserInfo from './../../components/question-detail/UserInfo.vue'
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import { autoTextArea, openVendorUrl, openAppUrl } from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
-  import { getTextDiscoverDetail } from '../../utils/shareTemplate'
-  import { goThirdPartyArticle } from '../../utils/webview'
-  import { textToLinkHtml, transferTagToLink } from '../../utils/dom'
+  import {getTextDiscoverDetail} from '../../utils/shareTemplate'
+  import {goThirdPartyArticle} from '../../utils/webview'
+  import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
+
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
-  import { pageRefresh } from '../../utils/allPlatform'
+  import {pageRefresh} from '../../utils/allPlatform'
+  import groupsList from '../../components/groups/GroupsList.vue'
 
   export default {
     data () {
@@ -130,6 +191,11 @@
         slug: '',
         noback: false,
         detail: {
+          group: {
+            is_joined: '',
+            id: '',
+            public: ''
+          },
           owner: {
             id: '',
             uuid: '',
@@ -169,9 +235,45 @@
       Statistics,
       Discuss,
       Share,
-      commentTextarea
+      commentTextarea,
+      groupsList
     },
     methods: {
+      typeDesc (type) {
+        switch (type) {
+          case -1:
+            return true
+          case 0:
+            return true
+          case 1:
+            return false
+          case 2:
+            return true
+          case 3:
+            return false
+        }
+      },
+      isShow (ispublic, type) {
+        //  公开的都展示
+        if (ispublic) {
+          return true
+        } else {
+          if (type === 1 || type === 3) {
+            return true
+          } else {
+            return false
+          }
+        }
+      },
+      showAllContentWrapper () {
+        var contentWrapper = document.querySelector('.discoverContentWrapper')
+        if (contentWrapper) {
+          contentWrapper.classList.remove('shortContentWrapper')
+        }
+      },
+      goJoin (id) {
+        this.$router.pushPlus('/group/detail/' + id)
+      },
       // 删除
       deleterow (id) {
         var btnArray = ['取消', '确定']
@@ -235,7 +337,6 @@
         this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
-
       },
       shareFail () {
       },
@@ -257,12 +358,13 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
+            window.mui.back()
             return
           }
 
           this.detail = response.data.data
 
-          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
 
           this.loading = 0
         })
@@ -305,10 +407,26 @@
       },
       setCollectStatus (type) {
         this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
+      },
+      shotContentHeight () {
+        if (this.detail.group.is_joined !== -1) {
+          this.showAllContentWrapper()
+          return
+        }
+
+        var contentWrapper = document.querySelector('.discoverContentWrapper')
+        console.warn('contentWrapperHeight:' + contentWrapper.offsetHeight)
+        if (contentWrapper && contentWrapper.offsetHeight > 300) {
+          contentWrapper.classList.add('shortContentWrapper')
+        }
       }
     },
     updated () {
       this.$nextTick(function () {
+        setTimeout(() => {
+          this.shotContentHeight()
+        }, 200)
+
         openVendorUrl(this.$el.querySelector('#contentWrapper'))
         openAppUrl(this.$el.querySelector('#contentWrapper'))
       })
@@ -343,93 +461,181 @@
     display: none;
   }
 
-  .contentWrapper{
-    padding:0 0.4rem;
-    white-space:pre-line !important;
-    font-size:0.4rem;
-    color:#444;
+  .contentWrapper {
+    padding: 0 0.4rem;
+    white-space: pre-line !important;
+    font-size: 0.4rem;
+    color: #444;
   }
-  .contentWrapper .tags{
-    color:rgb(33,77,120);
+
+  .contentWrapper .tags {
+    color: rgb(33, 77, 120);
     margin-right: 0.16rem;
   }
-  .newestList{
-    padding:0.266rem 0.4rem 0;
+
+  .newestList {
+    padding: 0.266rem 0.4rem 0;
     background: #fff;
   }
 
   .linkWrapper {
-    padding:0.266rem 0.4rem;
+    padding: 0.266rem 0.4rem;
   }
 
   .timeContainer {
     width: 100%;
     font-size: 0.32rem;
-    padding:0 0.4rem;
+    color: #B4B4B6;
+    padding: 0 0.4rem;
     background: #fff;
   }
 
-  .timeContainer svg {
-    font-size: 0.373rem;
-    color: #b4b4b6;
+  .timeContainer span:nth-of-type(3) {
+    float: right;
   }
 
-  .timeContainer span:nth-of-type(1) {
-    color: #b4b4b6;
-  }
-
-  .timeContainer span:nth-of-type(2) {
+  .address {
+    width: 100%;
+    padding: 0 0.4rem;
+    background: #fff;
+    font-size: 0.32rem;
     color: #808080;
+    margin-top: -0.106rem;
   }
 
-  .statistics{
+  .statistics {
     background: #fff;
   }
 
-  .mui-content{
+  .mui-content {
     background: #fff;
   }
 
-  .statisticsWrapper{
-    padding:0 0.4rem 0.4rem;
+  .statisticsWrapper {
+    padding: 0 0.4rem 0.4rem;
   }
+
   /*点赞样式*/
-  .component-dianzanList{
-    width:100%;
-    padding: 0 0.4rem 0.8rem 0.4rem;
+  .component-dianzanList {
+    width: 100%;
+    padding: 0.346rem 0.4rem;
   }
-  .component-dianzanList span{
-    font-size:0.346rem;
-    color:#03aef9;
+
+  .component-dianzanList span {
+    font-size: 0.346rem;
+    color: #03aef9;
   }
-  .contentWrapper span{
+
+  .contentWrapper span {
     font-size: 0.4rem;
   }
-  .Column{
+
+  .Column {
     width: 100%;
-    height:max-content;
+    height: max-content;
   }
-  .Column .discover_img{
-    width:100%;
+
+  .Column .discover_img {
+    width: 100%;
     border-radius: 0.106rem;
     margin-bottom: 0.133rem;
   }
-  .Column img:nth-last-child(1){
+
+  .Column img:nth-last-child(1) {
     margin-bottom: 0;
   }
+
   /*删除按钮*/
-  .discover_datail_dalete{
-    width:1.52rem;
-    height:0.506rem;
-    border:0.026rem solid #444444;
+  .discover_datail_dalete {
+    width: 1.52rem;
+    height: 0.506rem;
+    border: 0.026rem solid #444444;
     text-align: center;
     line-height: 0.453rem;
-    font-size:0.346rem;
+    font-size: 0.346rem;
     color: #444444;
     border-radius: 1.333rem;
     position: absolute;
-    right:0.426rem;
+    right: 0.426rem;
     top: 0.426rem;
+  }
+
+  .groups {
+    width: 92%;
+    margin-left: 4%;
+    text-align: center;
+    height: 0.906rem;
+    line-height: 0.906rem;
+    border-radius: 0.106rem;
+    border: 0.026rem solid #DCDCDC;
+    margin-bottom: 0.346rem;
+    font-size: 0.373rem;
+    color: #03AEF9;
+  }
+
+  .groupsList {
+    width: 92%;
+    margin-left: 4%;
+    padding-bottom: 0.266rem;
+  }
+
+  .groupsBot {
+    width: 92%;
+    margin-left: 4%;
+    padding-bottom: 0.266rem;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .riverBot {
+    width: 100%;
+    height: 0.266rem;
+    position: fixed;
+    bottom: 1.78rem;
+    background: #f3f4f6;
+  }
+
+  .groupsCenter {
+    width: 5.333rem;
+    height: 4.266rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+  }
+
+  .groupsCenter svg {
+    font-size: 1.866rem;
+  }
+
+  .groupsCenter p:nth-of-type(1) {
+    font-size: 0.32rem;
+    color: #C8C8C8;
+    text-align: center;
+    margin-top: 0.186rem;
+    margin-bottom: 0.56rem;
+  }
+
+  .groupsCenter p:nth-of-type(2) {
+    width: 3.066rem;
+    height: 1.093rem;
+    line-height: 1.093rem;
+    background: #03AEF9;
+    border-radius: 1.333rem;
+    font-size: 0.426rem;
+    color: #FFFFFF;
+    text-align: center;
+    margin: auto;
+  }
+
+  .shortContentWrapper {
+    max-height: 8rem;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0.266rem;
   }
 </style>
 

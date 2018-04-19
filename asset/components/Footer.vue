@@ -27,7 +27,6 @@
         </svg>
       </div>
       <!--发现-->
-
       <div class="askWrapper">
         <div class="askPlus" @tap.stop.prevent="show()">
           <div class="askImgBg"></div>
@@ -179,12 +178,10 @@
 //          var noticeMessage = response.data.data.notice_message.unread_count
 //          var readhubMessage = response.data.data.readhub_message.unread_count
 //          var taskMessage = response.data.data.task_message.unread_count
-//          var imMessages = response.data.data.im_messages.length > 0 ? response.data.data.im_messages[0].unread_count : 0
+          var imMessages = response.data.data.im_messages.length > 0 ? response.data.data.im_messages[0] : {}
           this.message_total_count = response.data.data.total_unread_count
 
-          // console.log(im_messages)
-
-          this.$emit('messagecountchange', this.message_total_count)
+          this.$emit('messagecountchange', imMessages)
 
           var taskCount = this.message_total_count
           setAppBadgeNumber(taskCount)
@@ -207,6 +204,12 @@
             this.isMy = true
             break
           case '/discover':
+            this.isDiscover = true
+            break
+          case '/discoverGroup':
+            this.isDiscover = true
+            break
+          case '/discoverRecommend':
             this.isDiscover = true
             break
           case '/inform':

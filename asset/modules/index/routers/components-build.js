@@ -1,9 +1,9 @@
 const Login = require('../../../views/Login.vue')
 import Register from '../../../views/Register.vue'
 import FindPassword from '../../../views/FindPassword.vue'
-import Home from '../../../views/404.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
+import Home from '../../../views/Home.vue'
 import SearchSearchQuestion from '../../../views/Search/SearchQuestion.vue'
 import SearchSearchSubmission from '../../../views/Search/SearchSubmission.vue'
 import SearchSearchTag from '../../../views/Search/SearchTag.vue'
@@ -27,12 +27,21 @@ import Invitationindex from '../../../views/Invitation/index.vue'
 import InvitationSuccess from '../../../views/Invitation/Success.vue'
 import InvitationPreview from '../../../views/Invitation/Preview.vue'
 import InvitationImage from '../../../views/Invitation/Image.vue'
+import GroupsList from '../../../views/Group/List.vue'
+import GroupsDetail from '../../../views/Group/Detail.vue'
+import GroupsAdd from '../../../views/Group/Add.vue'
+import GroupsSetting from '../../../views/Group/Setting.vue'
+import GroupsMy from '../../../views/Group/My.vue'
+import GroupsSearch from '../../../views/Group/Search.vue'
 import DiscoverCompanyServices from '../../../views/Discover/CompanyServices.vue'
 import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
 import DiscoverNewest from '../../../views/Discover/Newest.vue'
 import DiscoverPublishArticles from '../../../views/Discover/PublishArticles.vue'
 import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
 import DiscoverList from '../../../views/Discover/List.vue'
+import DiscoverSearchFollow from '../../../views/Discover/SearchFollow.vue'
+import DiscoverSearchGroup from '../../../views/Group/Discover.vue'
+import DiscoverSearchRecommend from '../../../views/Discover/SearchRecommend.vue'
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
 import ActivityUpvotesList from '../../../views/Activity/UpvotesLIist.vue'
 import ActivityGrowthList from '../../../views/Activity/GrowthList.vue'
@@ -117,7 +126,7 @@ import NearbynearbyPeopleMapDetail from '../../../views/Nearby/nearbyPeopleMapDe
 import NearbynearbyCompanyMapDetail from '../../../views/Nearby/nearbyCompanyMapDetail.vue'
 import NearbycompanyDetails from '../../../views/Nearby/companyDetails.vue'
 import UnansweredQuestions from '../../../views/UnansweredQuestions.vue'
-import SelectionRecommend from '../../../views/SelectionRecommend.vue'
+import SelectionRecommend from '../../../views/Recommend.vue'
 import DiscoverAdd4 from '../../../views/Discover/Add4.vue'
 import DiscoverAdd from '../../../views/Discover/Add.vue'
 import AddressNearby from '../../../views/Address/Nearby.vue'
@@ -171,8 +180,8 @@ export {
   Login,
   Register,
   FindPassword,
-  Home,
   Feed,
+  Home,
   SearchSearchQuestion,
   SearchSearchSubmission,
   SearchSearchTag,
@@ -197,12 +206,21 @@ export {
   InvitationSuccess,
   InvitationPreview,
   InvitationImage,
+  GroupsList,
+  GroupsDetail,
+  GroupsAdd,
+  GroupsSetting,
+  GroupsMy,
+  GroupsSearch,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,
   DiscoverPublishArticles,
   DiscoverAddSuccess,
   DiscoverList,
+  DiscoverSearchFollow,
+  DiscoverSearchGroup,
+  DiscoverSearchRecommend,
   DiscoverDetail,
   ActivityUpvotesList,
   ActivityGrowthList,

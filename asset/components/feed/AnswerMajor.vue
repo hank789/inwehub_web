@@ -12,16 +12,13 @@
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业问答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
-        <svg class="icon freeQuestion—delete" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
         <div class="freeQuestion-time">
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
       </div>
     </div>
-    <div class="average_rate" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
+    <div class="average_rate margin-10-0-0" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
     <div class="text-16-444 mui-ellipsis-3 textToLink" v-html="textToLink(data.feed.answer_content)"></div>
 
     <div class="container-answer margin-10-0-0">

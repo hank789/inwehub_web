@@ -12,9 +12,6 @@
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('专业回答', "")}}</div>
         <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">专业问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
-        <svg class="icon freeQuestion—delete" aria-hidden="true" v-if="data.user.is_expert === 1">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
         <div class="freeQuestion-time">
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
@@ -22,7 +19,7 @@
       </div>
     </div>
 
-    <div class="freeQuestion-container comment-container">
+    <div class="freeQuestion-container comment-container margin-t">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
       <div class="freeQuestion-upvote" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
     </div>
@@ -120,5 +117,8 @@
   }
   .answerMajorContent{
     width:100%;
+  }
+  .margin-t{
+    margin-top: 0.1rem;
   }
 </style>

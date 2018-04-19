@@ -2,16 +2,16 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的擅长</h1>
+      <h1 class="mui-title">{{type? '关注标签' : '我的擅长'}}</h1>
     </header>
 
     <div class="mui-content absolute">
       <ul class="myLabel" >
         <div>
           <!--{{selectNum}}-->
-          <p>标签（{{skill_tags.length}}／20） </p>
-          <p>让机遇更精准匹配，让内容更容易检索 </p>
-          <button @tap.stop.prevent="keepTags()">确认保存</button>
+          <p>关注您感兴趣的标签</p>
+          <p>我们会推荐您相关的内容</p>
+          <button @tap.stop.prevent="keepTags()" v-if="skill_tags.length">确认保存</button>
         </div>
         <li v-for="(item, index) in skill_tags" v-if="skill_tags.length" @tap.stop.prevent="toTagDetail(item.text)">
           {{item.text}}
@@ -23,14 +23,22 @@
       <div class="gray"></div>
 
       <div class="addLable">
-        <p>添加标签</p>
+        <p>搜索标签</p>
         <div class="search">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
           <input type="text" v-model="searchText" maxlength="15"/>
         </div>
-        <ul>
+
+        <ul class="hotTags"  v-if="sort">
+          <p>热门标签</p>
+          <li v-for="(item, index) in list" @tap.stop.prevent="addSkillTag(item)">
+            {{item.text}}
+          </li>
+        </ul>
+
+        <ul class="tags" v-else>
           <!--搜素到的标签名 -->
           <li  v-if="isNewTag" @tap.stop.prevent="addSkillTag(list[0])">
             {{list[0].text}}<span>  (新标签)</span>
@@ -41,8 +49,8 @@
             {{item.text}}
             <i class="bot"></i>
           </li>
-
         </ul>
+
 
       </div>
 
@@ -72,7 +80,8 @@
         newTagName: [],
         TagValue: [],
         oldAddTags: [],
-        isupload: 1
+        isupload: 1,
+        type: 0
       }
     },
     computed: {
@@ -83,16 +92,34 @@
         return false
       }
     },
+    created () {
+      if (this.$route.query.form) {
+        this.type = 1
+      } else {
+        this.type = 0
+      }
+    },
     methods: {
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
       // 保存擅长标签；
       keepTags () {
-        postRequest('profile/addSkillTag', {
-          tags: this.TagValue,
-          new_tags: this.newTagName
-        }).then(response => {
+        if (this.type) {
+          // 关注标签
+          var url = 'follow/batchTags'
+          var data = {
+            'ids': this.TagValue
+          }
+        } else {
+          // 我的擅长
+          url = 'profile/addSkillTag'
+          data = {
+            'tags': this.TagValue,
+            'new_tags': this.newTagName
+          }
+        }
+        postRequest(url, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -104,15 +131,24 @@
       },
       // 我的擅长列表；
       skillTags () {
-        postRequest('profile/info', {}).then(response => {
+        if (this.type) {
+          var url = 'followed/tags'
+          var data = {'perPage': 100}
+        } else {
+          url = 'profile/info'
+          data = {}
+        }
+        postRequest(url, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
             return
           }
-
-          if (response.data.data.info.skill_tags.length >= 0) {
+          if (this.type && response.data.data.data.length >= 0) {
+            this.skill_tags = response.data.data.data
+          }
+          if (!this.type && response.data.data.info.skill_tags.length >= 0) {
             this.skill_tags = response.data.data.info.skill_tags
           }
           for (var i = 0; i < this.skill_tags.length; i++) {
@@ -123,7 +159,8 @@
       },
       // 删除擅长标签；
       delSkillTag (val) {
-        var num = getIndexByIdArray(this.skill_tags, val)
+        var num = getIndexByIdArray(this.skill_tags, val, 'value')
+        console.log(num)
         this.skill_tags.splice(num, 1)
         if (typeof (val) === 'number') {
           var m = this.TagValue.indexOf(val)
@@ -154,7 +191,6 @@
             } else {
               this.TagValue.push(list.value)
             }
-
             window.mui.toast('添加成功')
             this.searchText = ''
           } else {
@@ -185,7 +221,7 @@
 
           var searchText = text.trim()
           if (searchText) {
-            if (this.tagName.indexOf(searchText) === -1) {
+            if (this.tagName.indexOf(searchText) === -1 && !this.type) {
               var obj = {
                 text: searchText,
                 value: searchText
@@ -278,7 +314,7 @@
     border-color: #03aef9;
     position: absolute;
     right:4%;
-    top:0.4rem;
+    top:0.7rem;
     padding: 0;
   }
 
@@ -345,13 +381,13 @@
     color: #444444;
   }
 
-  .addLable ul {
+  .addLable .tags {
     width: 100%;
     overflow: hidden;
     margin-top: 0.586rem;
   }
 
-  .addLable ul li {
+  .addLable .tags li {
     width: 100%;
     height: 1.173rem;
     position: relative;
@@ -365,5 +401,27 @@
 
   .mui-popup-buttons span.mui-popup-buttons span.mui-popup-button {
     color: #808080;
+  }
+
+  /*热门标签的样式*/
+  .hotTags{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0.586rem;
+  }
+  .hotTags p{
+    font-size: 0.346rem;
+    color:rgba(128,128,128,1);
+    margin-bottom: 0.266rem;
+  }
+  .hotTags li{
+    font-size:0.373rem;
+    color:rgba(68,68,68,1);
+    padding: 0.133rem 0.266rem;
+    border:0.026rem solid RGBA(220, 220, 220, 1);
+    border-radius: 0.106rem;
+    float: left;
+    margin-bottom: 0.266rem;
+    margin-right: 0.266rem;
   }
 </style>

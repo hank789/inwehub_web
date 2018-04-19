@@ -16,7 +16,7 @@ import { closeSplashscreen, openFullscreen } from '../../../utils/plus'
 const routes = [
   {
     path: '/',
-    component: componets.Home,
+    component: componets.Page404,
     name: 'land-home',
     meta: {
       title: '主页'
@@ -59,7 +59,7 @@ const routes = [
       wechatHideHeader: true,
       keepAlive: true
     },
-    component: componets.Feed,
+    component: componets.Home,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -383,6 +383,95 @@ const routes = [
     },
     component: componets.InvitationImage
   },
+  {
+    path: '/groups',
+    name: 'group-list',
+    component: componets.GroupsList,
+    meta: {
+      title: '圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/group/add',
+    name: 'group-add',
+    component: componets.GroupsAdd,
+    meta: {
+      title: '创建圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/group/detail/:id',
+    name: 'group-detail',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  { // 圈子成员
+    path: '/group/users/:id',
+    name: 'group-users',
+    component: componets.GroupsDetail,
+    meta: {
+      title: '圈子成员',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子设置
+    path: '/group/setting/:id',
+    name: 'group-setting',
+    component: componets.GroupsSetting,
+    meta: {
+      title: '圈子设置',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的圈子
+    path: '/group/my',
+    name: 'group-my',
+    component: componets.GroupsMy,
+    meta: {
+      title: '我的圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 圈子搜索
+    path: '/group/search',
+    name: 'group-search',
+    component: componets.GroupsSearch,
+    meta: {
+      title: '圈子搜索',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 发现_企业服务列表；
     path: '/discover/company/services',
     name: 'discover_companyServices',
@@ -400,7 +489,7 @@ const routes = [
     name: 'discover_hottopic',
     component: componets.DiscoverHotTopic,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -412,7 +501,7 @@ const routes = [
     name: 'discover_newest',
     component: componets.DiscoverNewest,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -424,8 +513,8 @@ const routes = [
     name: 'discover_publishArticles',
     component: componets.DiscoverPublishArticles,
     meta: {
-      title: '发现',
-      keepAlive: false
+      title: '发布',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -436,28 +525,50 @@ const routes = [
     name: 'discover_publishSuccessfully',
     component: componets.DiscoverAddSuccess,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
   },
-  { // 发现；
+  {
     path: '/discover',
     name: 'discover',
-    component: componets.DiscoverList,
+    component: componets.DiscoverSearchFollow,
     meta: {
       title: '发现',
       keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
+      next()
+    }
+  },
+  {
+    path: '/discoverGroup',
+    name: 'discover_group',
+    component: componets.DiscoverSearchGroup,
+    meta: {
+      title: '圈子',
+      keepAlive: true,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
+  },
+  {
+    path: '/discoverRecommend',
+    name: 'discover_recommend',
+    component: componets.DiscoverSearchRecommend,
+    meta: {
+      title: '推荐',
+      keepAlive: true,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
     }
   },
   {
@@ -1547,11 +1658,11 @@ const routes = [
     },
     component: componets.UnansweredQuestions
   },
-  { // 精华推荐
-    path: '/selectionrecommend',
-    name: 'selection-recommend',
+  { // 精选推荐
+    path: '/recommends',
+    name: 'recommends',
     meta: {
-      title: '精华推荐',
+      title: '精选推荐',
       wechatHideHeader: true
     },
     component: componets.SelectionRecommend
@@ -1573,7 +1684,7 @@ const routes = [
     path: '/discover/add',
     name: 'discover_add',
     meta: {
-      title: '发现',
+      title: '发布',
       wechatHideHeader: true,
       keepAlive: true
     },

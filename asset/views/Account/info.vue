@@ -368,19 +368,19 @@
 
   .paizhao {
     width: 92%;
-    height: 44px;
+    height: 1.173rem;
     margin-left: 4%;
-    border:1px solid rgb(220, 220, 220);
+    border:0.026rem solid rgb(220, 220, 220);
     text-align:center;
-    line-height:44px;
+    line-height:1.173rem;
     background: #FFFFFF;
     font-size: 0.32rem;
     color: rgb(128, 128, 128);
     word-break: break-all;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
   .paizhao svg{
-    font-size: 20px;
+    font-size: 0.533rem;
     color: rgb(128, 128, 128);
   }
 

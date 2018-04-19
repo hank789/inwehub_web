@@ -25,7 +25,7 @@
         class="listWrapper">
         <ul class="answer">
           <li v-for="(questions, index) in list" @tap.stop.prevent="toDetail(questions)">
-            <p class="mui-ellipsis-2">{{questions.description}}</p>
+            <p class="mui-ellipsis-2"  v-html="textToLink(questions.description)"></p>
             <p>
               <span>回答{{questions.answer_num}}</span>
               <a></a>
@@ -35,7 +35,7 @@
           </li>
         </ul>
       </RefreshList>
-
+       <div class="superinduce" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">新的关注</div>
       <!---->
     </div>
     <!---->
@@ -45,6 +45,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import { textToLinkHtml, secureHtml } from '../../utils/dom'
   const PublishAnswers = {
     data: () => ({
       list: []
@@ -56,6 +57,9 @@
       RefreshList
     },
     methods: {
+      textToLink (text) {
+        return secureHtml(textToLinkHtml(text))
+      },
       toDetail (item) {
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/answers/' + item.question_id)
@@ -195,5 +199,21 @@
   /*listWrapper*/
   .listWrapper {
     top: 1.2rem;
+  }
+  .superinduce{
+    width:3.04rem;
+    height:1.173rem;
+    background:rgba(3,174,249,1);
+    color: #ffffff;
+    font-size: 0.426rem;
+    border-radius: 1.333rem;
+    text-align: center;
+    line-height:1.173rem;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0.4rem;
+    margin: auto;
+    z-index: 3;
   }
 </style>

@@ -2,14 +2,14 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">关注成员</h1>
+      <h1 class="mui-title">{{tagName ? '关注成员' : '圈子成员'}}</h1>
     </header>
     <div class="mui-content absolute">
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'followed/tagUsers'"
+        :api="url"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :pageMode= true
@@ -25,7 +25,7 @@
               </svg>
             </div>
             <div class="detail">
-              <p>{{item.user_name}}</p>
+              <p>{{item.user_name}}<span v-if="index === 0 && groupsId"><i></i>圈主</span></p>
               <p class="mui-ellipsis">{{item.description}}</p>
             </div>
             <div class="fouce grey"  @tap.stop.prevent="collectProfessor(item.uuid,index)" v-if="item.is_followed && item.user_id != id">已关注</div>
@@ -34,7 +34,7 @@
           </li>
         </ul>
       </RefreshList>
-      <div class="focusAll"  @tap.stop.prevent="allInvitation()">一键关注</div>
+      <div class="focusAll"  @tap.stop.prevent="allInvitation()" v-if="tagName">一键关注</div>
     </div>
   </div>
 </template>
@@ -48,8 +48,10 @@
   export default {
     data () {
       return {
+        url: 'followed/tagUsers',
         id: currentUser.user_id,
         tagName: '',
+        groupsId: '',
         loading: 1,
         list: [],
         current_page: 1,
@@ -62,11 +64,22 @@
     },
     created () {
       if (this.$route.query.tagname) {
+        if (this.current_page === 1) {
+          this.dataList = {
+            tag_name: this.tagName
+          }
+        }
         this.tagName = this.$route.query.tagname
-      }
-      if (this.current_page === 1) {
+        this.url = 'followed/tagUsers'
         this.dataList = {
           tag_name: this.tagName
+        }
+      } else if (this.$route.query.id) {
+        this.url = 'group/members'
+        this.groupsId = this.$route.query.id
+        this.dataList = {
+          id: this.groupsId,
+          type: 2
         }
       }
     },
@@ -205,6 +218,39 @@
     font-size:0.373rem;
     color: #444444;
     margin-left: 0.213rem;
+  }
+  .cions-list li .detail p:nth-of-type(1){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .cions-list li .detail p:nth-of-type(1) span{
+    width: 1.013rem;
+    height: 0.48rem;
+    background: rgba(168, 223, 247, 1);
+    border-radius: 0.16rem;
+    font-size: 0.32rem;
+    color: rgba(35,82,128,1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 0.16rem;
+  }
+
+  .cions-list li .detail p:nth-of-type(1) span i{
+    display: inline-block;
+    width: 0.08rem;
+    height: 0.08rem;
+    border-radius: 50%;
+    background: #ffffff;
+    margin: 0 0.08rem;
   }
   .cions-list li .detail p:nth-of-type(2){
     width:5.333rem;

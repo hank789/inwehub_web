@@ -60,7 +60,7 @@ function getInvitation (username, rcCode) {
   var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
-    title: username + '邀请您加入InweHub',
+    title: username + '邀请您加入InweHub' + '-最具品质的咨询顾问社区',
     link: link,
     content: '受邀特权与福利，点击领取 >',
     imageUrl: whiteLogo,
@@ -81,9 +81,9 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
   }
 
   return {
-    title: 'InweHub发现 | ' + title,
+    title: '' + title,
     link: link,
-    content: '来自「 频道」，这里有特别的评论，点击去看看或者参与互动？',
+    content: '来自Inwehub圈子，点击查看更多热度分享。',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '文章分享'
@@ -96,9 +96,10 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  * @param title
  * @param imgUrl
  * @param username
+ * @param groupName
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
-function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
+function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
   var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
 
@@ -107,9 +108,9 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username) {
   }
 
   return {
-    title: '分享 ' + username + ' 的InweHub动态',
+    title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: title,
+    content: '来自InweHub「' + groupName + '」' + username + '的发布',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '动态分享'
@@ -151,6 +152,40 @@ function getResumeDetail (uuid, realname, companyName, avatarUrl) {
   }
 }
 
+/**
+ * 圈子详情页-微信分享模版
+ * url: /group/detail/221
+ */
+function getGroupDetail (id, title, username, userCount, logo) {
+  var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
+
+  return {
+    title: '邀您加入InweHub圈子：' + title,
+    link: link,
+    content: username + '创建，已有' + userCount + '人加入 | 点击查看加入',
+    imageUrl: logo,
+    thumbUrl: logo + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '圈子分享'
+  }
+}
+
+/**
+ * 精选推荐页-微信分享模版
+ * url: /recommends
+ */
+function getRecommends (count) {
+  var link = process.env.H5_ROOT + '/#' + '/recommends'
+
+  return {
+    title: 'InweHub精选推荐-最具品质的咨询顾问社区',
+    link: link,
+    content: '点击查看',
+    imageUrl: whiteLogo,
+    thumbUrl: whiteLogo,
+    shareName: '精选推荐'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -159,5 +194,7 @@ export {
   getTextDiscoverDetail,
   getAskCommunityInteractionAnswers,
   getInviteAnswerDetail,
-  getResumeDetail
+  getResumeDetail,
+  getGroupDetail,
+  getRecommends
 }

@@ -43,6 +43,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
+        autoprefixer: false,
         safe: true
       }
     }),

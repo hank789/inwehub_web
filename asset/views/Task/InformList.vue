@@ -3,6 +3,11 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <h1 class="mui-title">通知</h1>
+      <a class="mui-icon mui-pull-right" @tap.stop.prevent="allRead()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gou"></use>
+        </svg>
+      </a>
     </header>
     <!--导航栏-->
 
@@ -116,10 +121,20 @@
       </div>
     </div>
     <!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
+
+    <Options
+      ref="allOptions"
+      :id="'allOptions'"
+      :options="['全部标记为已读']"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
 <script type="text/javascript">
+  import { postRequest } from '../../utils/request'
+  import Options from '../../components/Options.vue'
   import RefreshList from '../../components/refresh/List.vue'
 
   const TaskMain = {
@@ -175,9 +190,41 @@
       mobile: 0
     }),
     components: {
-      RefreshList
+      RefreshList,
+      Options
     },
     methods: {
+      allRead () {
+        this.$refs.allOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case '全部标记为已读':
+            this.notification()
+            this.$refs.allOptions.toggle()
+            break
+        }
+      },
+      notification () {
+        postRequest(`notification/mark_as_read`, {
+          notification_type: 0
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          this.list.money_message.unread_count = 0
+          this.list.notice_message.unread_count = 0
+          this.list.readhub_message.unread_count = 0
+          this.list.task_message.unread_count = 0
+          for (var i = 0; i < this.list.im_messages.length; i++) {
+            this.list.im_messages[1].unread_count = 0
+          }
+          window.mui.toast('标记为已读')
+        })
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -447,6 +494,10 @@
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }
+  }
+  header svg{
+     font-size: 0.533rem;
+     margin-bottom: 0.266rem;
   }
 
 </style>

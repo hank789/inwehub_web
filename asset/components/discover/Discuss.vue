@@ -75,6 +75,7 @@
   import DiscussReplay from '../../components/discover/DiscussReply.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
 
   const Discuss = {
     data: () => ({
@@ -210,6 +211,12 @@
 
         postRequest(this.storeApi, params).then(response => {
           var code = response.data.code
+
+          if (code === 6108) {
+            userAbility.alertGroups(this.$parent, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return

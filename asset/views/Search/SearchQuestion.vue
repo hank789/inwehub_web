@@ -6,7 +6,7 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" id="searchText" v-model.trim="searchText"/>
+         <input  type="text" id="searchText" v-model.trim="searchText"/>
          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
            <use xlink:href="#icon-times1"></use>
          </svg>
@@ -15,18 +15,18 @@
      </div>
     <!--导航栏-->
     <div class="menu">
-      <span @tap.stop.prevent="">问答<i></i></span>
       <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
-      <span @tap.stop.prevent="$router.replace('/searchTag?text=' + searchText)">标签</span>
-      <span @tap.stop.prevent="$router.replace('/searchUser?text=' + searchText)">用户</span>
+      <span @tap.stop.prevent="">问答<i></i></span>
+      <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
       <i class="bot"></i>
     </div>
     <ul class="pilot">
       <li @tap.stop.prevent="$router.pushPlus('/ask')">
-        <span>直接去提问</span>
+        <span>搜不到结果？</span>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-chakangengduojiantou"></use>
         </svg>
+        <span class="go">去提问</span>
       </li>
       <p></p>
     </ul>
@@ -61,9 +61,7 @@
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
-//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
-  import { softInput } from '../../utils/plus'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -89,23 +87,22 @@
     watch: {
       searchText: function (newValue) {
 //        if (this.user_level >= 3) {
-          if (newValue) {
-            searchText(newValue, (text) => {
-              this.dataList = {
-                search_word: newValue
-              }
-            })
-            this.isShow = true
-          } else {
-            this.isShow = false
-          }
+        if (newValue) {
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
 //        }
       }
     },
     mounted () {
-      softInput()
       var searchText = this.$el.querySelector('#searchText')
       if (searchText) {
         setTimeout(() => {
@@ -222,11 +219,11 @@
       position: relative;
       span{
         display: flex;
-        width:25%;
+        width:33%;
         height:100%;
         justify-content: center;
         align-items: center;
-        &:nth-of-type(1){
+        &:nth-of-type(2){
           font-size: 0.373rem;
           position:relative;
           color: #444444;
@@ -257,8 +254,15 @@
         line-height: 1.173rem;
         background: #fff;
         span{
-          font-size:0.4rem;
-          color: #235280;
+          font-size:0.346rem;
+          color: #808080;
+          &.go{
+            font-size:0.4rem;
+            font-weight: 500;
+            color: #235280;
+            float: right;
+            margin-right: 0.373rem;
+          }
         }
         svg{
           float: right;
@@ -267,11 +271,10 @@
       }
       p{
         width:100%;
-        height:10px;
+        height:0.266rem;
         background: #f3f4f6;
       }
     }
-    /**/
     /**/
   }
 

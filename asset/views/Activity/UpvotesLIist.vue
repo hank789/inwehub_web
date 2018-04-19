@@ -12,24 +12,24 @@
         <span @tap.stop.prevent="">本月获赞榜 <i></i></span>
       </div>
       <template v-if="!loading && first">
-        <div class="title_invitation">
-          <div class="cions-avatar">
-            <img :src="invitationList.user_avatar" @tap.stop.prevent="toAvatar(invitationList.user_uuid)"/>
-            <svg class="icon" aria-hidden="true" v-if="invitationList.is_expert">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <p>{{invitationList.user_name}}</p>
-          <div class="See">本月获赞{{invitationList.current_month_user_upvotes}}次 </div>
-          <i class="bott"></i>
-        </div>
+        <!--<div class="title_invitation">-->
+          <!--<div class="cions-avatar">-->
+            <!--<img :src="invitationList.user_avatar" @tap.stop.prevent="toAvatar(invitationList.user_uuid)"/>-->
+            <!--<svg class="icon" aria-hidden="true" v-if="invitationList.is_expert">-->
+              <!--<use xlink:href="#icon-zhuanjiabiaojishixin"></use>-->
+            <!--</svg>-->
+          <!--</div>-->
+          <!--<p>{{invitationList.user_name}}</p>-->
+          <!--<div class="See">本月获赞{{invitationList.current_month_user_upvotes}}次 </div>-->
+          <!--<i class="bott"></i>-->
+        <!--</div>-->
 
 
 
         <div class="ranking">
           <img src="../../statics/images/upvotesList@2x.png" class="ranking-title"/>
           <ul class="ranking-content">
-            <li>
+            <li v-if="third">
               <div class="avatar-container">
                 <p class="avatar">
                   <img :src="third.user_avatar_url" @tap.stop.prevent="toAvatar(third.uuid)"/>
@@ -43,7 +43,7 @@
               <p class="cions">获赞数<i>{{third.upvotes}}</i></p>
               <p :class="third.is_followed?'grey':''" @tap.stop.prevent='collect(third.uuid,third)'>{{third.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
-            <li>
+            <li v-if="first">
               <div class="avatar-container">
                 <p class="avatar big-avatar">
                   <img :src="first.user_avatar_url"  @tap.stop.prevent="toAvatar(first.uuid)"/>
@@ -57,7 +57,7 @@
               <p class="cions">获赞数<i>{{first.upvotes}}</i></p>
               <p :class="first.is_followed?'grey':''" @tap.stop.prevent='collect(first.uuid,first)'>{{first.is_followed ? '已关注' : '关注Ta'}}</p>
             </li>
-            <li>
+            <li v-if="second">
               <div class="avatar-container">
                 <p class="avatar">
                   <img :src="second.user_avatar_url" @tap.stop.prevent="toAvatar(second.uuid)"/>

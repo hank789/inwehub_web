@@ -28,7 +28,7 @@
               <div @tap.stop.prevent="goDetial(hot)" >
                 <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
-                  <img :src="hot.data.img">
+                  <img class="lazyImg" v-lazy="hot.data.img">
                 </p>
                 <p class="timer">
                   <timeago :since="timeago(hot.created_at)" :auto-update="60">
@@ -91,6 +91,7 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
 
   const PublishAnswers = {
     data: () => ({
@@ -190,7 +191,12 @@
           submission_id: hot.id
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
@@ -213,7 +219,12 @@
           id: hot.id
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
+
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          }
+
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
