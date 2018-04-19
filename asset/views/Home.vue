@@ -403,9 +403,14 @@
   }
 
   #slider{
+    width:343px;
     height:3.626rem;
     background: #cccccc;
     position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 8px;
   }
   .categoryMenu{
     width:100%;
@@ -452,7 +457,7 @@
     text-align: left;
     font-size: 0.426rem;
     color: rgba(68,68,68,1);
-    font-weight: 700;
+    font-weight: 600;
   }
   .recommend li{
     width: 100%;
@@ -486,7 +491,7 @@
   .text-content .content_t{
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 0.533rem;
     max-height: 1.7rem;
   }
@@ -498,8 +503,9 @@
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
     background:rgba(236,236,238,1);
-    padding: 0.026rem 0.133rem;
+    padding: 0rem 0.133rem;
     border-radius:0.106rem;
+    font-weight: normal;
   }
   .information{
     width:100%;
@@ -554,7 +560,7 @@
     background:rgba(3,174,249,1);
     border-radius: 1.333rem;
     -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
-    box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
+    box-shadow: 0 0 0 0 rgba(3,174,249, .7);
   }
 </style>
 
