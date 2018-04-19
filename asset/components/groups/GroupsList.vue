@@ -255,7 +255,7 @@
     font-weight: normal;
     position: relative;
     top: -0.053rem;
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
   /* 适配*/
   @media (min-width: 320px) {
