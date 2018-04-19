@@ -28,7 +28,7 @@
                   <span class="label">{{ typeDesc(item.read_type) }}</span>
                   <span class="font-family-medium">{{item.data.title }}</span>
                 </div>
-                <p class="information">
+                <div class="information">
                   <span>{{item.data.view_number}}浏览<i></i></span>
                   <span v-if="item.read_type === 1 || item.read_type === 2 || item.read_type === 6">{{item.data.support_number
                     }}点赞<i></i></span>
@@ -38,7 +38,7 @@
                   <span v-else-if="item.read_type === 2">好评率{{item.data.average_rate
                     }}</span>
                   <span v-else-if="item.read_type === 3">{{item.data.follower_number}}关注</span>
-                </p>
+                </div>
               </div>
               <i class="bot"></i>
             </li>
