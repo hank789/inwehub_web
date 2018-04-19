@@ -252,7 +252,7 @@
     flex-direction: row;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
-    margin-top: 11px;
+    margin-top: 0.293rem;
   }
   .information i{
     display: inline-block;
