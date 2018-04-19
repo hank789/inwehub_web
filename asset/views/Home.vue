@@ -353,11 +353,11 @@
     width: 100%;
     overflow: hidden;
     position: absolute;
-    top: 44px;
+    top: 1.173rem;
   }
   .search{
     width: 100%;
-    height: 52px;
+    height: 1.386rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -366,7 +366,7 @@
     top: 0;
     z-index: 2;
     background: #ffffff;
-    padding: 0 16px;
+    padding: 0 0.426rem;
   }
   .search-l{
     display: flex;
@@ -396,7 +396,7 @@
 
   .search-r{
     width: 77%;
-    height: 34px;
+    height: 0.906rem;
     background:rgba(243,244,246,1);
     opacity:0.9477;
     border-radius: 1.333rem;
@@ -509,8 +509,8 @@
     display: inline;
   }
   .text-content .content_t span.label{
-    height:15px;
-    line-height: 16px;
+    height:0.4rem;
+    line-height: 0.426rem;
     display: inline-block;
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
@@ -519,7 +519,7 @@
     border-radius:0.106rem;
     font-weight: normal;
     position: relative;
-    top: -1px;
+    top: -0.026rem;
   }
   .information{
     width:100%;
