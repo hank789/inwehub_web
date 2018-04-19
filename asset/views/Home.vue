@@ -355,6 +355,9 @@
     position: absolute;
     top: 1.173rem;
   }
+  .mui-wechat  .search{
+    top: 54px;
+  }
   .search{
     width: 100%;
     height: 1.386rem;
