@@ -61,9 +61,7 @@
   import { searchText } from '../../utils/search'
   import RefreshList from '../../components/refresh/List.vue'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
-//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
-  import { softInput } from '../../utils/plus'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -89,16 +87,16 @@
     watch: {
       searchText: function (newValue) {
 //        if (this.user_level >= 3) {
-          if (newValue) {
-            searchText(newValue, (text) => {
-              this.dataList = {
-                search_word: newValue
-              }
-            })
-            this.isShow = true
-          } else {
-            this.isShow = false
-          }
+        if (newValue) {
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
 //        }

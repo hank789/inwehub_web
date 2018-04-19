@@ -55,7 +55,6 @@
 
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
-  import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   //  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'

@@ -90,7 +90,7 @@
     components: {
       Images,
       Avatar,
-      SuppertAndComment,
+      SuppertAndComment
     },
     props: {
       data: {

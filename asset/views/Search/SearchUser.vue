@@ -101,17 +101,17 @@
     watch: {
       searchText: function (newValue) {
 //        if (this.user_level >= 3) {
-          if (newValue) {
-            // 做延时处理
-            searchText(newValue, (text) => {
-              this.dataList = {
-                search_word: newValue
-              }
-            })
-            this.isShow = true
-          } else {
-            this.isShow = false
-          }
+        if (newValue) {
+          // 做延时处理
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
 //        }

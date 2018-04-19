@@ -226,7 +226,7 @@ var UserAbility = () => {
     }
   }
   // 圈子弹窗
-  var alertGroups = (context,id) => {
+  var alertGroups = (context, id) => {
     var dialog = getDialogObj(context)
     if (dialog) {
       dialog.getHtml('groups', {}, (html) => {
