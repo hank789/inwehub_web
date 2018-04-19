@@ -177,6 +177,7 @@
     width:70%;
   }
   .-group-name{
+    width:90%;
     display: block;
     font-weight: 500;
     color: #444444;

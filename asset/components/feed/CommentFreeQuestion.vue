@@ -22,7 +22,7 @@
     </div>
     <div class="text-14-444 font ellipsis textToLink" v-html="textToLink(data.feed.comment_content)" @tap.stop.prevent="$router.pushPlus(data.url)"></div>
 
-    <div class="freeQuestion-container comment-container ">
+    <div class="freeQuestion-container comment-container margin-t">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
     </div>
 
@@ -128,7 +128,9 @@
   margin-top: 0.08rem;
   letter-spacing:0.026rem;
 }
-
+.margin-t{
+  margin: 5px 0 8px 0px;
+}
 
 </style>
 

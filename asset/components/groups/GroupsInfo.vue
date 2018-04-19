@@ -6,9 +6,11 @@
         <p>{{detail.owner.name}}</p>
         <p><i></i>圈主</p>
       </div>
-      <svg class="icon" aria-hidden="true" @tap.stop.prevent="allOptions" v-if="this.detail.is_joined === 1 || this.detail.is_joined === 3">
-        <use xlink:href="#icon-gengduo"></use>
-      </svg>
+      <div class="tag" @tap.stop.prevent="allOptions">
+        <svg class="icon" aria-hidden="true"  v-if="this.detail.is_joined === 1 || this.detail.is_joined === 3">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+      </div>
       <i class="bot"></i>
     </div>
     <div class="tag-title">
@@ -114,10 +116,13 @@
     align-items: center;
     position: relative;
   }
+  .groups-title .tag{
+    padding: 5px 4% 5px 5px;
+  }
   .groups-title svg{
     font-size: 0.453rem;
     color:rgba(128,128,128,1);
-    margin-right: 4%;
+
 
   }
   .groups-left{

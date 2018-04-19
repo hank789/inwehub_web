@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 text-line-5 preWrapper textToLink" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
+    <div class="text-16-444 text-line-5 preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
       <!--<span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span>-->
       <span v-html="textToLink(data.feed.title)"></span></div>
 
@@ -31,9 +31,11 @@
     ></Images>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
-      <svg class="icon more" aria-hidden="true" v-if="show" @tap.stop.prevent="showItemOptions">
-        <use xlink:href="#icon-gengduo"></use>
-      </svg>
+      <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -201,6 +203,9 @@
 </script>
 
 <style scoped>
+  .margin-t{
+    margin-top: 0.26rem;
+  }
   .preWrapper{
     white-space: pre-wrap !important;
   }
@@ -221,6 +226,8 @@
   .more{
     color: #808080;
     margin-left: 0.053rem;
+    float: left;
+    padding-right: 15px;
   }
 </style>
 <style>

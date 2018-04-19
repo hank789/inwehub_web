@@ -485,7 +485,7 @@
     margin: auto;
   }
   .listWrapper{
-    top:2.426rem;
+    top:2.3rem;
     bottom: 1.333rem;
   }
   .followGroups{

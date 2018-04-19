@@ -726,7 +726,7 @@
     margin-bottom: 0.266rem;
   }
   .listWrapper{
-    top: 2.4rem;
+    top: 2.3rem;
     bottom: 1.333rem;
   }
   .group-bot{

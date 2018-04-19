@@ -27,9 +27,11 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
-      <svg class="icon more" aria-hidden="true" v-if="show" @tap.stop.prevent="showItemOptions">
-        <use xlink:href="#icon-gengduo"></use>
-      </svg>
+      <div class="more" v-if="show" @tap.stop.prevent="showItemOptions">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
+      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -43,7 +45,7 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-    <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
+    <div class="container-answer margin-top-10 padding-space" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
       <!-- 点赞和评论列表start -->
       <SuppertAndComment
         :supportNumber="data.feed.support_number"
@@ -189,8 +191,13 @@
   .more{
     color: #808080;
     margin-left: 0.053rem;
+    float: left;
+    padding-right: 15px;
   }
   .groups{
     margin-top: 0.4rem;
+  }
+  .padding-space{
+    padding: 0.4rem 0.4rem 0.25rem 0.4rem;
   }
 </style>

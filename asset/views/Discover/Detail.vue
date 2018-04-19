@@ -97,7 +97,7 @@
           ></groups-list>
         </div>
         <!--灰色部分-->
-        <div class="river"></div>
+        <div class="river" v-if="detail.supporter_list.length"></div>
         <!--点赞-->
         <div class="component-dianzanList" v-if="detail.upvotes">
           <svg class="icon" aria-hidden="true">
