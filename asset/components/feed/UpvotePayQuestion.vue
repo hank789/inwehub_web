@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="freeQuestion-container comment-container">
+    <div class="freeQuestion-container comment-container margin-t">
       <div class="question-answer">回答者<i>{{data.feed.answer_user_name}}</i></div>
       <div class="freeQuestion-upvote" v-if="data.feed.average_rate">回答好评率{{data.feed.average_rate}}</div>
     </div>
@@ -117,5 +117,8 @@
   }
   .answerMajorContent{
     width:100%;
+  }
+  .margin-t{
+    margin-top: 0.1rem;
   }
 </style>
