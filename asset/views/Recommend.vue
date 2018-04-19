@@ -221,6 +221,7 @@
     margin-left: 0.4rem;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .text-content .content_t{
     font-size: 0.373rem;
@@ -252,7 +253,8 @@
     flex-direction: row;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
-    margin-top: 11px;
+    position: absolute;
+    bottom: 0;
   }
   .information i{
     display: inline-block;
