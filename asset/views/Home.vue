@@ -457,7 +457,6 @@
     text-align: left;
     font-size: 0.426rem;
     color: rgba(68,68,68,1);
-    font-weight: 500;
   }
   .recommend li{
     width: 100%;
@@ -491,7 +490,6 @@
   .text-content .content_t{
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
-    font-weight: 500;
     line-height: 0.533rem;
     max-height: 1.7rem;
   }
@@ -499,6 +497,8 @@
     display: inline;
   }
   .text-content .content_t span.label{
+    height:15px;
+    line-height: 16px;
     display: inline-block;
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
@@ -506,6 +506,8 @@
     padding: 0rem 0.133rem;
     border-radius:0.106rem;
     font-weight: normal;
+    position: relative;
+    top: -1px;
   }
   .information{
     width:100%;
@@ -530,7 +532,6 @@
     width:100%;
     text-align: center;
     font-size: 0.373rem;
-    font-width:500;
     margin-top: 0.293rem;
     color:rgba(3,174,249,1);
     line-height:0.533rem;

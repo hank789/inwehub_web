@@ -27,11 +27,11 @@
         ></GroupsInfo>
         <div class="gray"></div>
         <div class="menu">
-          <span :class="{bold: search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+          <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
             v-if="search_type === 1"></i></span>
-          <span :class="{bold: search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
+          <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
             v-if="search_type === 2"></i></span>
-          <span :class="{bold: search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
@@ -87,7 +87,7 @@
         <div class="gray"></div>
 
         <div class="group-text">
-          <p>圈子介绍<i class="bot"></i></p>
+          <p class="font-family-medium">圈子介绍<i class="bot"></i></p>
           <p class="text-content">{{ detail.description }}</p>
         </div>
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
@@ -581,7 +581,6 @@
     position: relative;
     font-size: 0.426rem;
     color:rgba(68,68,68,1);
-    font-weight: 500;
     line-height: 1.146rem;
   }
   .group-text p:nth-of-type(2){

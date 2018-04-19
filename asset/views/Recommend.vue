@@ -25,8 +25,8 @@
               </div>
               <div class="text-content">
                 <p class="text-line-3">
-                  <span>{{ typeDesc(item.read_type) }}</span>
-                  {{ item.data.title }}
+                  <span class="label">{{ typeDesc(item.read_type) }}</span>
+                  <span class="font-family-medium">{{item.data.title }}</span>
                 </p>
                 <p class="information">
                   <span>{{item.data.view_number}}浏览<i></i></span>
@@ -185,6 +185,8 @@
   /*精选推荐*/
   .recommend{
     width:100%;
+    padding: 0 0.426rem;
+    height: 18.133rem;
     overflow: hidden;
     background: #ffffff;
     display: flex;
@@ -192,13 +194,15 @@
     align-items: center;
   }
   .recommend li{
-    width: 92%;
-    height:2.933rem;
+    width: 100%;
+    padding: 0.4rem 0;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     position: relative;
+  }
+  .recommend li:nth-of-type(1) {
+    padding-top: 0.32rem;
   }
   .recommend li .logo{
     width:3.226rem;
@@ -211,25 +215,35 @@
     object-fit: cover;
   }
   .recommend li .text-content{
-    width:70%;
-    height:2.16rem;
+    width: 5.653rem;
+    height: 2.16rem;
     margin-left: 0.4rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    position: relative;
   }
   .text-content p:nth-of-type(1){
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
-    font-weight: 500;
     line-height: 0.533rem;
   }
-  .text-content p:nth-of-type(1) span{
+  .text-content p:nth-of-type(1) .label{
+    height:15px;
+    line-height: 16px;
     display: inline-block;
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
     background:rgba(236,236,238,1);
-    padding: 0.026rem 0.133rem;
+    padding: 0rem 0.133rem;
     border-radius:0.106rem;
+    font-weight: normal;
+    position: relative;
+    top: -1px;
   }
   .information{
     width:100%;

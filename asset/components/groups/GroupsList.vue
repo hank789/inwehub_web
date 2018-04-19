@@ -12,8 +12,8 @@
         <use xlink:href="#icon-chakangengduojiantou"></use>
       </svg>
       <p>
-        <span class="-group-name" v-html="getHighlight(list.name)" v-if="search"></span>
-        <span class="-group-name text-line-1" v-else>{{list.name}}</span>
+        <span class="-group-name font-family-medium" v-html="getHighlight(list.name)" v-if="search"></span>
+        <span class="-group-name font-family-medium text-line-1" v-else>{{list.name}}</span>
       </p>
       <p class="text-line-2 text" v-if="!type">{{list.description}}</p>
       <p class="-group-info">
@@ -23,8 +23,8 @@
           </svg>
           私密
         </span>
-        <span><i>{{list.subscribers}}</i>/人气</span>
-        <span><i>{{list.articles}}</i>/分享</span>
+        <span><i class="font-family-medium">{{list.subscribers}}</i>/人气</span>
+        <span><i class="font-family-medium">{{list.articles}}</i>/分享</span>
       </p>
     </div>
     <i class="top" v-if="type"></i>
@@ -179,7 +179,6 @@
   .-group-name{
     width:90%;
     display: block;
-    font-weight: 500;
     color: #444444;
   }
   .group-right .text{
@@ -207,7 +206,6 @@
   .-group-info span i{
     font-size: 0.373rem;
     color:#808080;
-    font-weight: bold;
   }
   .join{
     border:0.026rem solid #03AEF9;

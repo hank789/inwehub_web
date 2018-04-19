@@ -27,7 +27,7 @@
           :title = "'我的'"
         ></groups>
         <!--全部圈子-->
-        <div class="group-title">全部</div>
+        <div class="group-title font-family-medium">全部</div>
 
 
         <template v-for="(item, index) in list">
@@ -160,13 +160,9 @@
    top:0;
   }
   .group-title{
-    width:100%;
-    height:0.8rem;
-    align-items: center;
-    line-height: 0.8rem;
-    font-weight: 500;
     font-size: 0.426rem;
     color: #444444;
+    padding-top: 12px;
     padding-left:4%;
   }
  .group-container{

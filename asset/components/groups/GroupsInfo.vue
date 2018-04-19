@@ -23,7 +23,7 @@
       <!--</svg>-->
       <!--</div>-->
       <div class="tag-r">
-        <p class="text-line-1">{{detail.name}}</p>
+        <p class="text-line-1 font-family-medium">{{detail.name}}</p>
         <p class="tag-info">
             <span v-if="!detail.public">
               <svg class="icon" aria-hidden="true">
@@ -31,8 +31,8 @@
              </svg>
               私密
             </span>
-          <span><i>{{detail.subscribers}}</i>/人气</span>
-          <span><i>{{detail.articles}}</i>/分享</span>
+          <span><i class="font-family-medium">{{detail.subscribers}}</i>/人气</span>
+          <span><i class="font-family-medium">{{detail.articles}}</i>/分享</span>
         </p>
         <div class="tag-avatar" @tap.stop.prevent="$router.push('/tag/FocusMembers?id=' + detail.id)" v-if="detail.members.length">
           <div class="avatar">
@@ -203,7 +203,6 @@
   .tag-r p:nth-of-type(1){
     font-size:0.48rem;
     color: rgba(68,68,68,1);
-    font-weight:500;
     margin-bottom: 0.213rem;
   }
   .tag-info{
@@ -223,7 +222,6 @@
   }
   .tag-info span i{
     font-size: 0.373rem;
-    font-weight: bold;
     color: rgba(3,174,249,1);
   }
   .tag-avatar{

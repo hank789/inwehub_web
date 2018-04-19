@@ -20,7 +20,7 @@
       <!--菜单-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/discover')">关注</span>
-        <span class="bold">圈子<i></i></span>
+        <span class="font-family-medium">圈子<i></i></span>
         <span @tap.stop.prevent="$router.replace('/discoverRecommend')">推荐</span>
         <i class="bot"></i>
       </div>
@@ -41,7 +41,7 @@
           :title = "'我的'"
         ></groups>
         <!---->
-        <div class="title">
+        <div class="title font-family-medium">
           大家都在看
           <i class="bot"></i>
         </div>
@@ -430,9 +430,7 @@
     border-radius: 1.333rem;
     background:#03aef9;
     top: 0.67rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+    left: -1px;
   }
   .title{
     width:92%;
@@ -441,7 +439,6 @@
     position: relative;
     font-size: 0.426rem;
     color: #444444;
-    font-weight: 500;
     line-height: 1.173rem;
   }
 

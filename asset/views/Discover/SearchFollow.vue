@@ -20,7 +20,7 @@
       <!--菜单-->
       <!--导航栏-->
       <div class="menu">
-        <span class="bold">关注<i></i></span>
+        <span class="font-family-medium">关注<i></i></span>
         <span @tap.stop.prevent="$router.replace('/discoverGroup')">圈子</span>
         <span @tap.stop.prevent="$router.replace('/discoverRecommend')">推荐</span>
         <i class="bot"></i>
@@ -442,9 +442,7 @@
     border-radius: 1.333rem;
     background:#03aef9;
     top: 0.67rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+    left: 0px;
   }
   .listWrapper{
     top:2.3rem;
