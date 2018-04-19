@@ -308,6 +308,7 @@
         return false
       },
       showItemOptions (item) {
+        this.itemOptions = []
         this.itemOptionsObj = item
         if (getLocalUserId() === item.user.id) {
           this.itemOptions = [
