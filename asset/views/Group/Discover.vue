@@ -58,7 +58,6 @@
                 <p class="timer">
                   <timeago :since="timeago(hot.created_at)" :auto-update="60">
                   </timeago>
-                  <a>#{{hot.category_name}}</a>
                   <i class="bot"></i>
                 </p>
               </div>
