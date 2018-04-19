@@ -56,7 +56,7 @@
   .allOptions .option{
     text-align: center;
     color:#444;
-    height:1.1rem;
-    line-height: 1.1rem;
+    height:1.173rem;
+    line-height: 1.173rem;
   }
 </style>

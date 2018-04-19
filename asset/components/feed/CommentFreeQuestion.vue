@@ -129,7 +129,7 @@
   letter-spacing:0.026rem;
 }
 .margin-t{
-  margin: 5px 0 8px 0px;
+  margin: 0.133rem 0 0.213rem 0rem;
 }
 
 </style>
