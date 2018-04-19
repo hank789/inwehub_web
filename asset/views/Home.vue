@@ -436,7 +436,7 @@
   /*精选推荐*/
   .recommend{
     width:100%;
-    padding: 0 16px;
+    padding: 0 0.426rem;
     height: 18.133rem;
     overflow: hidden;
     background: #ffffff;
@@ -456,14 +456,14 @@
   }
   .recommend li{
     width: 100%;
-    padding: 15px 0;
+    padding: 0.4rem 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     position: relative;
   }
   .recommend li .logo{
-    width: 121px;
+    width: 3.226rem;
     height:2.16rem;
   }
   .recommend li img{
@@ -473,9 +473,9 @@
     object-fit: cover;
   }
   .recommend li .text-content{
-    width:212px;
+    width:5.653rem;
     height:2.16rem;
-    margin-left: 15px;
+    margin-left: 0.4rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -500,7 +500,7 @@
   }
   .information{
     width:100%;
-    line-height: 12px;
+    line-height: 0.32rem;
     overflow: hidden;
     display: flex;
     flex-direction: row;
