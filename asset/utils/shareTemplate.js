@@ -60,7 +60,7 @@ function getInvitation (username, rcCode) {
   var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
-    title: username + '邀请您加入InweHub',
+    title: username + '邀请您加入InweHub' + '- 最具品质的咨询顾问社区',
     link: link,
     content: '受邀特权与福利，点击领取 >',
     imageUrl: whiteLogo,
@@ -81,7 +81,7 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
   }
 
   return {
-    title: '' + title + '-最具品质的咨询顾问社区',
+    title: '' + title,
     link: link,
     content: '来自Inwehub圈子，点击查看更多热度分享。',
     imageUrl: imgUrl,
@@ -108,7 +108,7 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
   }
 
   return {
-    title: title + '- 最具品质的咨询顾问社区', // '分享 ' + username + ' 的InweHub动态',
+    title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
     content: '来自InweHub「' + groupName + '」' + username + '的发布',
     imageUrl: imgUrl,
@@ -160,7 +160,7 @@ function getGroupDetail (id, title, username, userCount, logo) {
   var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
 
   return {
-    title: '邀您加入InweHub圈子：' + title + '-最具品质的咨询顾问社区',
+    title: '邀您加入InweHub圈子：' + title,
     link: link,
     content: username + '创建，已有' + userCount + '人加入 | 点击查看加入',
     imageUrl: logo,
