@@ -125,16 +125,19 @@
       }
     },
     created () {
-      this.getHomeData()
+      this.refreshPageData()
     },
-    components: {
-    },
-    // 缓存；
+    components: {},
     activated: function () {
+      this.refreshPageData()
     },
     computed: {
     },
     methods: {
+      refreshPageData () {
+        this.getData()
+        this.getHomeData()
+      },
       typeDesc (type) {
         switch (type) {
           case 1:
@@ -195,7 +198,6 @@
           permission_type: type
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
@@ -255,7 +257,6 @@
       autoTextArea()
       saveLocationInfo()
       AppInit(this)
-      this.getData()
     }
   }
   export default Home
