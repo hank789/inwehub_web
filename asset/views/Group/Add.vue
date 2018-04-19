@@ -342,6 +342,7 @@
     line-height: 1.173rem;
     margin-left: 4%;
     margin-top: 0.533rem;
+    border:none;
   }
 
   button.grey {
