@@ -17,16 +17,17 @@
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper"
       >
-          <ul class="recommend">
-            <template v-for="(item, index) in list">
-            <li @tap.stop.prevent="goDetial(item.read_type, item)">
+        <ul class="recommend">
+          <template v-for="(item, index) in list">
+            <li  @tap.stop.prevent="goDetial(item.read_type,item)">
               <div class="logo">
                 <img :src="item.data.img" />
               </div>
+
               <div class="text-content">
                 <div class="content_t mui-ellipsis-3">
                   <span class="label">{{ typeDesc(item.read_type) }}</span>
-                  <span class="font-family-medium">{{item.data.title }}</span>
+                  <span class="font-family-medium">{{item.data.title}}</span>
                 </div>
                 <div class="information">
                   <span>{{item.data.view_number}}浏览<i></i></span>
@@ -42,8 +43,8 @@
               </div>
               <i class="bot"></i>
             </li>
-            </template>
-          </ul>
+          </template>
+        </ul>
       </RefreshList>
     </div>
 
@@ -201,11 +202,11 @@
     align-items: center;
     position: relative;
   }
-  .recommend li:nth-of-type(1) {
+  .recommend li:nth-of-type(1){
     padding-top: 0.32rem;
   }
   .recommend li .logo{
-    width:3.226rem;
+    width: 3.226rem;
     height:2.16rem;
   }
   .recommend li img{
@@ -215,17 +216,11 @@
     object-fit: cover;
   }
   .recommend li .text-content{
-    width: 5.653rem;
-    height: 2.16rem;
+    width:5.653rem;
+    height:2.16rem;
     margin-left: 0.4rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    position: relative;
   }
   .text-content .content_t{
     font-size: 0.373rem;
@@ -233,7 +228,10 @@
     line-height: 0.533rem;
     max-height: 1.7rem;
   }
-  .text-content .content_t .label{
+  .recommend li .text-content  .container{
+    display: inline;
+  }
+  .text-content .content_t span.label{
     height:0.4rem;
     line-height: 0.426rem;
     display: inline-block;
@@ -248,12 +246,13 @@
   }
   .information{
     width:100%;
+    line-height: 0.32rem;
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    align-items: center;
     font-size: 0.32rem;
     color: RGBA(128, 128, 128, 1);
+    margin-top: 11px;
   }
   .information i{
     display: inline-block;
