@@ -49,15 +49,6 @@
               ref="discoverShare"
               @comment="comment"
             ></DiscoverShare>
-            <!--圈子信息-->
-            <div class="followGroups" v-if="item.feed.group !== null">
-              <div class="follow-content">
-                <groups-list class="small groups"
-                             :list="item.feed.group"
-                             :type="'small'"
-                ></groups-list>
-              </div>
-            </div>
           </div>
 
           <div @tap.stop.prevent="toDetail(item)" v-else>
@@ -75,15 +66,6 @@
               <SubmitReadhubAriticle :data="item"
                                      @comment="comment"
               ></SubmitReadhubAriticle>
-              <!--圈子信息-->
-              <div class="followGroups" v-if="item.feed.group !== null">
-                <div class="follow-content">
-                  <groups-list class="small groups"
-                               :list="item.feed.group"
-                               :type="'small'"
-                  ></groups-list>
-                </div>
-              </div>
             </div>
 
 
@@ -102,15 +84,6 @@
             <!--x评论了文章-->
             <div v-else-if="item.feed_type === 10">
               <CommentReadhubAriticle  :data="item"></CommentReadhubAriticle>
-              <!--圈子信息-->
-              <div class="followGroups" v-if="item.feed.group !== null">
-                <div class="follow-content">
-                  <groups-list class="small groups"
-                               :list="item.feed.group"
-                               :type="'small'"
-                  ></groups-list>
-                </div>
-              </div>
             </div>
 
 
@@ -123,18 +96,16 @@
             <!--x赞了文章-->
             <div v-else-if="item.feed_type === 13">
               <UpvoteReadhubAriticle  :data="item"></UpvoteReadhubAriticle>
-              <!--圈子信息-->
-              <div class="followGroups" v-if="item.feed.group !== null">
-                <div class="follow-content">
-                  <groups-list class="small groups"
-                               :list="item.feed.group"
-                               :type="'small'"
-                  ></groups-list>
-                </div>
-              </div>
             </div>
-
-
+          </div>
+          <!--圈子信息-->
+          <div class="followGroups" v-if="item.feed.group">
+            <div class="follow-content">
+              <groups-list class="small groups"
+                           :list="item.feed.group"
+                           :type="'small'"
+              ></groups-list>
+            </div>
           </div>
         </template>
       </RefreshList>
