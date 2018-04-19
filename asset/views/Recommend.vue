@@ -21,7 +21,7 @@
           <template v-for="(item, index) in list">
             <li  @tap.stop.prevent="goDetial(item.read_type,item)">
               <div class="logo">
-                <img :src="item.data.img" />
+                <img class="lazyImg" v-lazy="item.data.img"/>
               </div>
 
               <div class="text-content">
