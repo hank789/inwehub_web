@@ -227,7 +227,7 @@
     color: #808080;
     margin-left: 0.053rem;
     float: left;
-    padding-right: 15px;
+    padding-right: 0.4rem;
   }
 </style>
 <style>

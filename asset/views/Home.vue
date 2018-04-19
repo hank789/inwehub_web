@@ -125,16 +125,19 @@
       }
     },
     created () {
-      this.getHomeData()
+      this.refreshPageData()
     },
-    components: {
-    },
-    // 缓存；
+    components: {},
     activated: function () {
+      this.refreshPageData()
     },
     computed: {
     },
     methods: {
+      refreshPageData () {
+        this.getData()
+        this.getHomeData()
+      },
       typeDesc (type) {
         switch (type) {
           case 1:
@@ -195,7 +198,6 @@
           permission_type: type
         }).then(response => {
           var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             window.mui.back()
@@ -255,7 +257,6 @@
       autoTextArea()
       saveLocationInfo()
       AppInit(this)
-      this.getData()
     }
   }
   export default Home
@@ -403,14 +404,14 @@
   }
 
   #slider{
-    width:343px;
     height:3.626rem;
     background: #cccccc;
     position: relative;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border-radius: 8px;
+  }
+  #slider .mui-slider-item img{
+    height:3.626rem;
+    width:100%;
+    object-fit: cover;
   }
   .categoryMenu{
     width:100%;
@@ -540,6 +541,10 @@
     width:100%;
     height:0.266rem;
     background: #F3F4F5;
+  }
+  .mui-slider-item{
+    height:3.626rem !important;
+    overflow: hidden;
   }
 </style>
 <style>

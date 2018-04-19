@@ -184,7 +184,7 @@
   .group-right .text{
     font-size: 0.32rem;
     color: #808080;
-    margin-top: 11px;
+    margin-top: 0.293rem;
     line-height: 0.426rem;
   }
   .big .-group-info{

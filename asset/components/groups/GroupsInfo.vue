@@ -117,7 +117,7 @@
     position: relative;
   }
   .groups-title .tag{
-    padding: 5px 4% 5px 5px;
+    padding: 0.133rem 4% 0.133rem 0.133rem;
   }
   .groups-title svg{
     font-size: 0.453rem;
