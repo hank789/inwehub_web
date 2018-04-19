@@ -26,13 +26,13 @@
           :apper="apper"
           :title = "'我的'"
         ></groups>
-        <!--全部圈子-->
+        <!--全部圈子 .groupsList-->
         <div class="group-title font-family-medium">全部</div>
 
 
         <template v-for="(item, index) in list">
           <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
-            <groupsList class="big groupsList"
+            <groupsList class="big"
                         :list="item"
                         @goJoin="goJoin"
                         :description = "'已加入'">

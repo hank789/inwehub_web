@@ -5,16 +5,13 @@
     </div>
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
-      <template v-if="description">
-        <div class="join grey" v-if="list.is_joined === 1 || list.is_joined === 3" >{{description}}</div>
-      </template>
       <svg class="icon arrow" aria-hidden="true">
         <use xlink:href="#icon-chakangengduojiantou"></use>
       </svg>
-      <p>
-        <span class="-group-name font-family-medium" v-html="getHighlight(list.name)" v-if="search"></span>
-        <span class="-group-name font-family-medium text-line-1" v-else>{{list.name}}</span>
-      </p>
+      <div>
+        <div class="-group-name font-family-medium" v-html="getHighlight(list.name)" v-if="search"></div>
+        <div class="-group-name font-family-medium text-line-1" v-else> <template v-if="description"><span class="label" v-if="list.is_joined === 1 || list.is_joined === 3">已加</span></template>{{list.name}}</div>
+      </div>
       <p class="text-line-2 text" v-if="!type">{{list.description}}</p>
       <p class="-group-info">
         <span v-if="!list.public">
@@ -240,7 +237,20 @@
     top: 0.666rem;
     right: 0;
   }
-
+  .label{
+    width: 30px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    display: inline-block;
+    font-size: 0.266rem;
+    color: RGBA(128, 128, 128, 1);
+    background:rgba(236,236,238,1);
+    border-radius:0.106rem;
+    font-weight: normal;
+    position: relative;
+    top: -2px;
+  }
   /* 适配*/
   @media (min-width: 320px) {
     .big .group-right {
