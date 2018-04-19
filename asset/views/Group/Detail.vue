@@ -158,6 +158,7 @@
         detail: null,
         loading: 1,
         itemOptions: [],
+        itemOptionsObj: null,
         shareOption: {
           title: '',
           link: '',
@@ -307,6 +308,7 @@
         return false
       },
       showItemOptions (item) {
+        this.itemOptionsObj = item
         if (getLocalUserId() === item.user.id) {
           this.itemOptions = [
             '删除'
@@ -325,20 +327,19 @@
             this.quit()
             break
           case '删除':
-            this.del(item, () => {
+            this.del(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
             })
             break
           case '加精':
-            this.addGood(item, () => {
+            this.addGood(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
             })
             break
         }
       },
       addGood (item, callback) {
-        // todo 接后台接口
-        postRequest(`group/setSubmissionRecommend`, {submission_id: this.id}).then(response => {
+        postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -409,7 +410,7 @@
                 return
               }
               if (response.data.data) {
-                var index = getIndexByIdArray(this.list, item.id)
+                var index = getIndexByIdArray(list, item.id)
                 list.splice(index, 1)
                 callback()
                 window.mui.toast('删除成功')
