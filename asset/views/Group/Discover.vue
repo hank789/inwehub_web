@@ -430,7 +430,7 @@
     border-radius: 1.333rem;
     background:#03aef9;
     top: 0.67rem;
-    left: -1px;
+    left: -0.026rem;
   }
   .title{
     width:92%;

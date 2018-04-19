@@ -162,7 +162,7 @@
   .group-title{
     font-size: 0.426rem;
     color: #444444;
-    padding-top: 12px;
+    padding-top: 0.32rem;
     padding-left:4%;
   }
  .group-container{

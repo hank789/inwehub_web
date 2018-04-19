@@ -451,7 +451,7 @@
     border-radius: 1.333rem;
     background:#03aef9;
     top: 0.67rem;
-    left: 0px;
+    left: 0rem;
   }
   .listWrapper{
     top:2.3rem;

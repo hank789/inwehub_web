@@ -238,10 +238,10 @@
     right: 0;
   }
   .label{
-    width: 30px;
-    height: 15px;
+    width: 0.8rem;
+    height: 0.4rem;
     text-align: center;
-    line-height: 15px;
+    line-height: 0.4rem;
     display: inline-block;
     font-size: 0.266rem;
     color: RGBA(128, 128, 128, 1);
@@ -249,7 +249,7 @@
     border-radius:0.106rem;
     font-weight: normal;
     position: relative;
-    top: -2px;
+    top: -0.053rem;
   }
   /* 适配*/
   @media (min-width: 320px) {
