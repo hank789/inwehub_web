@@ -43,7 +43,7 @@
 
           <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
                @tap.stop.prevent="goArticle(detail)">
-            <img :src="detail.data.img"/>
+            <img class="lazyImg" v-lazy="detail.data.img"/>
           </div>
         </div>
 

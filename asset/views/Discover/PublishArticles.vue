@@ -131,7 +131,7 @@
         this.channel = ''
       },
       goPublish () {
-        if (!this.selectedGroup) {
+        if (!this.selectedGroup.id) {
           window.mui.toast('别忘了选择圈子后再发布！')
           return
         }
@@ -167,8 +167,9 @@
             this.disableRegister = true
             this.isblue = false
             this.isShow = false
-            this.$router.pushPlus('/discover/add/success')
             this.resetData()
+            window.mui.toast('发布成功！')
+            this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
             return
           }
         })
