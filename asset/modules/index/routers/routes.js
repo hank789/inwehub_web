@@ -489,7 +489,7 @@ const routes = [
     name: 'discover_hottopic',
     component: componets.DiscoverHotTopic,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -501,7 +501,7 @@ const routes = [
     name: 'discover_newest',
     component: componets.DiscoverNewest,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -513,8 +513,8 @@ const routes = [
     name: 'discover_publishArticles',
     component: componets.DiscoverPublishArticles,
     meta: {
-      title: '发现',
-      keepAlive: false
+      title: '发布',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -525,7 +525,7 @@ const routes = [
     name: 'discover_publishSuccessfully',
     component: componets.DiscoverAddSuccess,
     meta: {
-      title: '发现',
+      title: '发布',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -1684,7 +1684,7 @@ const routes = [
     path: '/discover/add',
     name: 'discover_add',
     meta: {
-      title: '发现',
+      title: '发布',
       wechatHideHeader: true,
       keepAlive: true
     },

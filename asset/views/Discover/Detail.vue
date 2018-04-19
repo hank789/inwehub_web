@@ -43,7 +43,7 @@
 
           <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
                @tap.stop.prevent="goArticle(detail)">
-            <img :src="detail.data.img"/>
+            <img class="lazyImg" v-lazy="detail.data.img"/>
           </div>
         </div>
 
@@ -358,6 +358,7 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
+            window.mui.back()
             return
           }
 

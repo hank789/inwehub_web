@@ -474,12 +474,12 @@
         postRequest(`article/store`, data, false, options).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
+            window.mui.toast(response.data.message)
             return
           }
-
+          window.mui.toast('发布成功！')
           this.resetData()
-          this.$router.push('/discover/add/success')
+          this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
         })
       }
     }
