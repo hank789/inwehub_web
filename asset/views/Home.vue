@@ -18,6 +18,7 @@
           <p>搜内容、问答、圈子</p>
         </div>
       </div>
+      <div class="home-b">
       <!--轮播-->
       <div id="slider" class="mui-slider" v-if="notices.length">
         <div class="mui-slider-group  mui-slider-loop">
@@ -106,6 +107,7 @@
         <div class="more"  @tap.stop.prevent="$router.pushPlus('/recommends')">更多精选推荐</div>
       </ul>
       <!---->
+      </div>
     </div>
   </div>
 </template>
@@ -347,15 +349,24 @@
     /*margin-right: 0.16rem;*/
   /*}*/
   /*search*/
+  .home-b{
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+  }
   .search{
-    width:92%;
-    height:0.906rem;
-    margin-top: 0.213rem;
-    margin:0.213rem 0  0.213rem 4%;
+    width: 100%;
+    height: 52px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background: #ffffff;
+    padding: 0 16px;
   }
   .search-l{
     display: flex;
@@ -385,7 +396,7 @@
 
   .search-r{
     width: 77%;
-    height:100%;
+    height: 34px;
     background:rgba(243,244,246,1);
     opacity:0.9477;
     border-radius: 1.333rem;
