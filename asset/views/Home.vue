@@ -1,23 +1,25 @@
 <template>
   <div>
+
+    <div class="search mui-bar-nav">
+      <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-kefu"></use>
+        </svg>
+        <p>客服</p>
+        <i v-if="unread_count"></i>
+      </div>
+      <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>
+        <p>搜内容、问答、圈子</p>
+      </div>
+    </div>
+
     <div class="mui-content absolute">
       <!--search-->
       <!--search/chat/72-->
-      <div class="search">
-        <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-kefu"></use>
-          </svg>
-          <p>客服</p>
-          <i v-if="unread_count"></i>
-        </div>
-        <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-sousuo"></use>
-          </svg>
-          <p>搜内容、问答、圈子</p>
-        </div>
-      </div>
       <div class="home-b">
       <!--轮播-->
       <div id="slider" class="mui-slider" v-if="notices.length">
@@ -353,7 +355,7 @@
     width: 100%;
     overflow: hidden;
     position: absolute;
-    top: 1.173rem;
+    top:0.213rem;
   }
   .mui-wechat  .search{
     top: 1.306rem;
