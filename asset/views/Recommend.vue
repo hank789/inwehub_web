@@ -24,10 +24,10 @@
                 <img :src="item.data.img" />
               </div>
               <div class="text-content">
-                <p class="mui-ellipsis-3">
+                <div class="content_t mui-ellipsis-3">
                   <span class="label">{{ typeDesc(item.read_type) }}</span>
                   <span class="font-family-medium">{{item.data.title }}</span>
-                </p>
+                </div>
                 <p class="information">
                   <span>{{item.data.view_number}}浏览<i></i></span>
                   <span v-if="item.read_type === 1 || item.read_type === 2 || item.read_type === 6">{{item.data.support_number
@@ -227,12 +227,13 @@
     flex-direction: column;
     position: relative;
   }
-  .text-content p:nth-of-type(1){
+  .text-content .content_t{
     font-size: 0.373rem;
     color: RGBA(68, 68, 68, 1);
     line-height: 0.533rem;
+    max-height: 1.7rem;
   }
-  .text-content p:nth-of-type(1) .label{
+  .text-content .content_t .label{
     height:0.4rem;
     line-height: 0.426rem;
     display: inline-block;
