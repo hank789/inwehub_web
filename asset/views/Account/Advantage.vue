@@ -109,7 +109,7 @@
           // 关注标签
           var url = 'follow/batchTags'
           var data = {
-            'ids' :  this.TagValue
+            'ids': this.TagValue
           }
         } else {
           // 我的擅长
@@ -133,7 +133,7 @@
       skillTags () {
         if (this.type) {
           var url = 'followed/tags'
-          var data = {'perPage' : 100}
+          var data = {'perPage': 100}
         } else {
           url = 'profile/info'
           data = {}

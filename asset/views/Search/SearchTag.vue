@@ -79,18 +79,18 @@
     watch: {
       searchText: function (newValue) {
 //        if (this.user_level >= 3) {
-          if (newValue) {
-            // 搜索进行延时操作
-            searchText(newValue, (text) => {
-              this.dataList = {
-                search_word: newValue
-              }
-            })
-            // 清空输入框的显隐
-            this.isShow = true
-          } else {
-            this.isShow = false
-          }
+        if (newValue) {
+          // 搜索进行延时操作
+          searchText(newValue, (text) => {
+            this.dataList = {
+              search_word: newValue
+            }
+          })
+          // 清空输入框的显隐
+          this.isShow = true
+        } else {
+          this.isShow = false
+        }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
 //        }

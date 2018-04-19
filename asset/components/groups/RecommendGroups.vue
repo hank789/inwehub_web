@@ -24,7 +24,6 @@
 
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { postRequest } from '../../utils/request'
   export default {
     data () {
       return {
