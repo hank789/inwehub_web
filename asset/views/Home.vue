@@ -368,7 +368,6 @@
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    top: 0;
     z-index: 2;
     background: #ffffff;
     padding: 0 0.426rem;
