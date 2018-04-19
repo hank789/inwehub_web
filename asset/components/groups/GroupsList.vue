@@ -205,7 +205,7 @@
     color:#808080;
   }
   .-group-info span svg{
-    margin-bottom: 1px;
+    margin-bottom: 0.026rem;
   }
   .join{
     border:0.026rem solid #03AEF9;
