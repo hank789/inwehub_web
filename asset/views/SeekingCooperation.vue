@@ -6,7 +6,7 @@
       <h1 class="mui-title">寻求合作</h1>
     </header>
 
-    <div class="mui-content absolute">
+    <div class="mui-content mui-content-fixed">
       <div class="feedback">
         <div class="title">
           合作类型
@@ -31,6 +31,7 @@
   import { NOTICE } from '../stores/types'
   import { createAPI, addAccessToken } from '../utils/request'
   import MTextarea from '../components/MTextarea.vue'
+  import { autoTextArea } from '../utils/plus'
 
   const Feedback = {
     data: () => ({
@@ -151,6 +152,7 @@
       }
     },
     mounted () {
+      autoTextArea()
     }
   }
   export default Feedback
