@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div class="mui-content searchSubmission">
       <div class="search">
         <p>
           <svg class="icon" aria-hidden="true">
@@ -730,6 +730,10 @@
   ul .Container .information p.blue {
     color: #03aef9;
   }
+</style>
 
-
+<style>
+  .searchSubmission .small.-group{
+    padding-bottom:0.266rem;
+  }
 </style>
