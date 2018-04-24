@@ -35,6 +35,8 @@ const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../vie
 
 const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
 
+const GroupsUser = () => import(/* webpackChunkName: "GroupsUser" */ '../../../views/Group/User.vue')
+
 const GroupsMy = () => import(/* webpackChunkName: "GroupsMy" */ '../../../views/Group/My.vue')
 const GroupsSearch = () => import(/* webpackChunkName: "GroupsSearch" */ '../../../views/Group/Search.vue')
 
@@ -215,6 +217,7 @@ export {
   GroupsDetail,
   GroupsAdd,
   GroupsSetting,
+  GroupsUser,
   GroupsMy,
   GroupsSearch,
   DiscoverCompanyServices,
