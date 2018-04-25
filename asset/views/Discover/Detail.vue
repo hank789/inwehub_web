@@ -636,6 +636,16 @@
     overflow: hidden;
     position: relative;
     margin-bottom: 0.266rem;
+
+    &:after{
+      position: absolute;
+      bottom:0;
+      content:'';
+      height:62.5px;
+      width:100%;
+      background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,1));
+    }
   }
+
 </style>
 

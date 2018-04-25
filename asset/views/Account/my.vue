@@ -495,7 +495,6 @@
   }
   .my-news p a{
     color:rgb(250,73,117);
-    font-style: 0.32rem;
     letter-spacing:0.053rem;
   }
 
