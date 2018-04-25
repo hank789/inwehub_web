@@ -7,6 +7,7 @@
 
 <script>
   import { openWebviewByHome } from '../../utils/webview'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data: () => ({
@@ -23,6 +24,19 @@
     },
     watch: {},
     mounted () {
+      document.addEventListener('alertDialog', (event) => {
+        if (event.detail.group_id) {
+          var bodyWebview = window.plus.webview.getWebviewById('inwehub_article_body')
+          bodyWebview.setStyle({
+            opacity: 0
+          })
+          userAbility.alertGroups(this, event.detail.group_id, () => {
+            bodyWebview.setStyle({
+              opacity: 1
+            })
+          })
+        }
+      })
       document.addEventListener('load_article', (event) => {
         this.load_article(event.detail.article_id, event.detail.article_url, event.detail.article_comment_url, event.detail.article_title, event.detail.article_img_url)
       })

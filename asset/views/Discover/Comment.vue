@@ -27,7 +27,6 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -60,7 +59,10 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
+            var bodyWebview = window.plus.webview.getWebviewById('inwehub_article_view')
+            window.mui.fire(bodyWebview, 'alertDialog', {
+              group_id: response.data.data.group_id
+            })
             return
           }
 
@@ -88,7 +90,10 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
+            var bodyWebview = window.plus.webview.getWebviewById('inwehub_article_view')
+            window.mui.fire(bodyWebview, 'alertDialog', {
+              group_id: response.data.data.group_id
+            })
             return
           }
 
