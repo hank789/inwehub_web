@@ -1,14 +1,22 @@
 <template>
   <div :id="id" class="mui-popover mui-popover-action mui-popover-bottom">
-    <div class="allOptions">
-      <div class="mui-poppicker-header">
-        <button class="mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="toggle">取消</button>
-        <div class="mui-poppicker-clear"></div>
-      </div>
-      <div class="mui-poppicker-body" v-for="(item, index) in options">
-        <div class="option" @tap.stop.prevent="selectItem(item)">{{item}}</div>
-      </div>
-    </div>
+    <ul class="mui-table-view">
+      <li class="mui-table-view-cell" v-for="(item, index) in options" @tap.stop.prevent="selectItem(item)">{{item}}</li>
+    </ul>
+
+    <ul class="mui-table-view">
+      <li class="mui-table-view-cell" @tap.stop.prevent="toggle">取消</li>
+    </ul>
+
+    <!--<div class="allOptions">-->
+      <!--<div class="mui-poppicker-header">-->
+        <!--<button class="mui-btn mui-poppicker-btn-cancel" @tap.stop.prevent="toggle">取消</button>-->
+        <!--<div class="mui-poppicker-clear"></div>-->
+      <!--</div>-->
+      <!--<div class="mui-poppicker-body" v-for="(item, index) in options">-->
+        <!--<div class="option" @tap.stop.prevent="selectItem(item)">{{item}}</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
