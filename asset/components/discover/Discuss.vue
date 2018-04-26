@@ -117,6 +117,9 @@
     },
     computed: {},
     methods: {
+      rootComment () {
+        this.comment(0, '', this.list)
+      },
       clickComment (comment, list) {
         var commentUid = comment.owner.uuid
         var userInfo = getLocalUserInfo()
@@ -141,6 +144,7 @@
             this.delList = this.delList.splice(index, 1)
           }
           this.hideDelComment()
+          this.$emit('delCommentSuccess')
         })
       },
       hideDelComment () {
