@@ -1578,3 +1578,7 @@ a {
 .mui-ios .mui-content.mui-content-fixed{
   overflow: hidden !important;
 }
+
+.mui-ellipsis-2{
+  word-break:break-all;
+}

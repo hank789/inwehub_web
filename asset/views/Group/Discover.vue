@@ -36,7 +36,7 @@
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
               <div @tap.stop.prevent="goDetial(hot)" >
-                <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+                <p>{{hot.data.title}}<i> - {{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img class="lazyImg" v-lazy="hot.data.img">
                 </p>
@@ -395,6 +395,7 @@
     font-size: 0.4rem;
     color: #444444;
     line-height: 0.533rem;
+    word-break: break-all;
   }
 
   ul .Container p:nth-of-type(1) i {
