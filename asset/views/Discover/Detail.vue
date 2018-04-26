@@ -212,7 +212,7 @@
             icon: '#icon-pinglun',
             text: '评论',
             number: this.detail.comments_number,
-            disable: this.detail.is_commented,
+            disable: false,
             isLight: false
           },
           {
