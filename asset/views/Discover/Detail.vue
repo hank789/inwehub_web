@@ -213,6 +213,7 @@
             text: '评论',
             number: this.detail.comments_number,
             disable: false,
+            rightLine: true,
             isLight: false
           },
           {
@@ -220,6 +221,7 @@
             text: '收藏',
             number: this.detail.bookmarks,
             disable: this.detail.is_bookmark,
+            rightLine: true,
             isLight: false
           },
           {
@@ -227,6 +229,7 @@
             text: '点赞',
             number: this.detail.upvotes,
             disable: this.detail.is_upvoted,
+            rightLine: false,
             isLight: false
           },
           {
@@ -234,6 +237,7 @@
             text: '分享',
             number: 0,
             disable: false,
+            rightLine: false,
             isLight: true
           }
         ]
@@ -582,7 +586,7 @@
     width: 100%;
     font-size: 0.32rem;
     color: #B4B4B6;
-    padding: 0 0.4rem 12.5px;
+    padding: 0 0.4rem 0.333rem;
     background: #fff;
   }
 
@@ -604,7 +608,7 @@
   }
 
   .mui-content {
-    bottom:50px;
+    bottom:1.333rem;
     background: #fff;
   }
 
@@ -738,7 +742,7 @@
       position: absolute;
       bottom:0;
       content:'';
-      height:62.5px;
+      height:1.666rem;
       width:100%;
       background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,1));
     }

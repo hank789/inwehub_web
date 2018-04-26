@@ -9,7 +9,7 @@
         </div>
         <div class="desc">{{item.text}}{{item.number?item.number:''}}</div>
       </div>
-      <div class="line-vertical" v-if="options.length !== index + 1"></div>
+      <div class="line-vertical" v-if="item.rightLine"></div>
     </template>
   </div>
 </template>
@@ -18,10 +18,13 @@
   /**
    * options: [
    *  {
-   *    icon: "#icon-shoucang-xiao",
-   *    text: "评论2",
-   *    isLight: true // 是否突出显示
-   *  }
+        icon: '#icon-pinglun',
+        text: '评论',
+        number: this.detail.comments_number,
+        disable: false,
+        rightLine: true,
+        isLight: false
+      },
    * ]
    */
   export default {
@@ -47,10 +50,10 @@
 
 <style>
   .menu-footer {
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
-    height: 50px;
+    height: 1.333rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -61,8 +64,8 @@
   .menu-footer:before {
     position: absolute;
     width: 100%;
-    top: -0.5px;
-    height: 1px;
+    top: -0.013rem;
+    height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -70,10 +73,10 @@
   }
   .menu-footer .line-vertical {
     position: relative;
-    width: 1px;
-    height: 24px;
+    width: 0.026rem;
+    height: 0.64rem;
     top: 50%;
-    margin-top: -12px;
+    margin-top: -0.32rem;
     -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
     background-color: #dcdcdc;
@@ -93,18 +96,18 @@
     color: #C8C8C8;
   }
   .menu-footer .menu .iconWrapper {
-    margin-top: 7px;
+    margin-top: 0.186rem;
   }
   .menu-footer .menu .iconWrapper svg {
-    font-size: 19px;
-    line-height: 19px;
+    font-size: 0.506rem;
+    line-height: 0.506rem;
   }
   .menu-footer .menu .desc {
     position: absolute;
     width: 100%;
-    top: 31px;
-    font-size: 11px;
-    line-height: 11px;
+    top: 0.826rem;
+    font-size: 0.293rem;
+    line-height: 0.293rem;
     color: #808080;
   }
   .menu-footer .menu.noRightBorder:after {
