@@ -40,23 +40,9 @@
 
           ref="discuss"
           v-if="ask.answer && ask.answer.content"
+          @delCommentSuccess="delCommentSuccess"
         ></Discuss>
-
-        <div class="help">
-          <div class="title">
-            什么是互动问答？
-
-          </div>
-          <div class="body">
-            InweHub致力于营造高品质的顾问专业交流社区，通过互动问答方式解决企业和顾问疑惑，促进行业交流。点击参与回答可直接回答问题，点击关注问题可收到后续更新通知，提问请遵守相关<a
-            @tap.stop.prevent="toSeeHelp()">问答规范</a>。
-          </div>
-        </div>
-
       </div>
-
-
-
     </div>
 
     <Share
@@ -70,9 +56,15 @@
       :targetType="'answer'"
       @success="shareSuccess"
       @fail="shareFail"
+      ref="ShareBtn"
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+    ></FooterMenu>
 
   </div>
 </template>
@@ -90,6 +82,9 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
   import { pageRefresh } from '../../utils/allPlatform'
+  import FooterMenu from '../../components/FooterMenu.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  var user = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
@@ -116,7 +111,9 @@
       shareTitle: '',
       shareName: '',
       id: 0,
-      loading: true
+      loading: true,
+      uuid: user.uuid,
+      name: user.name
     }),
     mounted () {
       pageRefresh(this, () => {
@@ -133,11 +130,48 @@
       Discuss,
       Answer,
       Share,
-      commentTextarea
+      commentTextarea,
+      FooterMenu
     },
     computed: {
       answer () {
         return this.ask.answer ? this.ask.answer : {}
+      },
+      footerMenus () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.loading ? 0 : this.ask.answer.comments_number,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            number: this.loading ? 0 : this.ask.answer.collect_num,
+            disable: this.loading ? 0 : this.ask.answer.is_collected,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-zan',
+            text: '点赞',
+            number: this.loading ? 0 : this.ask.answer.support_number,
+            disable: this.loading ? 0 : this.ask.answer.is_supported,
+            rightLine: false,
+            isLight: false
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          }
+        ]
       }
     },
     updated () {
@@ -231,6 +265,84 @@
 
           successCallback()
         })
+      },
+      footerMenuClickedItem (item) {
+        switch (item.icon) {
+          case this.footerMenus[0].icon:
+            // 评论
+            this.$refs.discuss.rootComment()
+            break
+          case this.footerMenus[1].icon:
+            // 收藏
+            this.collect()
+            break
+          case this.footerMenus[2].icon:
+            // 点赞
+            this.support()
+            break
+          case this.footerMenus[3].icon:
+            // 分享
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
+      collect () {
+        var data = {
+          id: this.ask.answer.id
+        }
+
+        postRequest(`collect/answer`, data).then(response => {
+          var code = response.data.code
+
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          if (response.data.data.type === 'uncollect') {
+            this.ask.answer.collect_num--
+            this.ask.answer.is_collected = 0
+          } else {
+            this.ask.answer.collect_num++
+            this.ask.answer.is_collected = 1
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      support () {
+        var data = {
+          id: this.ask.answer.id
+        }
+        postRequest(`support/answer`, data).then(response => {
+          var code = response.data.code
+
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          if (response.data.data.type === 'unsupport') {
+            this.ask.answer.support_number--
+            this.ask.answer.is_supported = 0
+            for (var i in this.ask.answer.supporter_list) {
+              if (this.ask.answer.supporter_list[i].uuid === this.uuid) {
+                this.ask.answer.supporter_list.splice(i, 1)
+              }
+            }
+          } else {
+            this.ask.answer.support_number++
+            this.ask.answer.is_supported = 1
+            var support = {
+              name: this.name,
+              uuid: this.uuid
+            }
+            this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      delCommentSuccess () {
+        this.ask.answer.comments_number--
       }
     },
     watch: {
@@ -276,6 +388,7 @@
 
   .mui-content {
     background: #f3f4f6;
+    bottom:1.333rem;
   }
 
   .help {
