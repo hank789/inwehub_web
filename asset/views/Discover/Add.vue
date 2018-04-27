@@ -112,7 +112,7 @@
         address: '所在位置',
         selectedAddress: '所在位置',
         hide: 0,
-        descMaxLength: 2000,
+        descMaxLength: 5000,
         position: {
           longt: 0,
           lat: 0
