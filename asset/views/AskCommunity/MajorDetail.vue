@@ -470,6 +470,7 @@
   }
   .iNeedAskWrapper{
     width:100%;
+    padding:0.133rem 0;
   }
   .iNeedAskWrapper button{
     border-radius:0;

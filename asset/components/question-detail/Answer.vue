@@ -55,25 +55,25 @@
         </div>
       </div>
 
-      <!--<Statistics-->
-        <!--:answerList="answer"-->
-        <!--:answerId="answer.id"-->
-        <!--:commentNum="answer.comment_number"-->
-        <!--:seeNum="answer.view_number"-->
-        <!--:supportNum="answer.support_number"-->
-        <!--:isSupported="answer.is_supported?true:false"-->
-        <!--:showShoucang="showShoucang"-->
-        <!--:collectNum="answer.collect_num"-->
-        <!--:isCollected="answer.is_collected?true:false"-->
-        <!--:questionId="questionId"-->
-        <!--:showModifyBtn="showModifyBtn && answer.user_id === curUid?true:false"-->
-        <!--@supportNumDesc="supportNumDesc"-->
-        <!--@supportNumAdd="supportNumAdd"-->
-        <!--@setSupportStatus="setSupportStatus"-->
-        <!--@collectNumDesc="collectNumDesc"-->
-        <!--@collectNumAdd="collectNumAdd"-->
-        <!--@setCollectStatus="setCollectStatus"-->
-      <!--&gt;</Statistics>-->
+      <Statistics
+        :answerList="answer"
+        :answerId="answer.id"
+        :commentNum="answer.comment_number"
+        :seeNum="answer.view_number"
+        :supportNum="answer.support_number"
+        :isSupported="answer.is_supported?true:false"
+        :showShoucang="showShoucang"
+        :collectNum="answer.collect_num"
+        :isCollected="answer.is_collected?true:false"
+        :questionId="questionId"
+        :showModifyBtn="showModifyBtn && answer.user_id === curUid?true:false"
+        @supportNumDesc="supportNumDesc"
+        @supportNumAdd="supportNumAdd"
+        @setSupportStatus="setSupportStatus"
+        @collectNumDesc="collectNumDesc"
+        @collectNumAdd="collectNumAdd"
+        @setCollectStatus="setCollectStatus"
+      ></Statistics>
     </div>
   </div>
 </template>
@@ -81,7 +81,7 @@
 <script type="text/javascript">
   import UserInfo from './UserInfo.vue'
   import { quillEditor } from '../../components/vue-quill'
-  // import Statistics from './Statistics.vue'
+  import Statistics from './Statistics.vue'
   import pay from '../../components/pay/pay.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { textToLinkHtml, addPreviewAttrForImg } from '../../utils/dom'
@@ -107,7 +107,7 @@
     components: {
       UserInfo,
       quillEditor,
-      // Statistics,
+      Statistics,
       pay
     },
     props: {
@@ -232,6 +232,7 @@
 <style scoped="scoped">
   .detail-answer {
     margin-bottom: 0.266rem;
+    padding-bottom:0.333rem;
   }
 
   .detail-answer:before {
@@ -243,7 +244,6 @@
     overflow: hidden;
     font-size: 0.32rem;
     margin-top: 0.346rem;
-    padding-bottom:0.333rem;
     color: #b4b4b6;
   }
   .detail-answer .average_rate{

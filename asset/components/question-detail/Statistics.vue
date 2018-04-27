@@ -1,55 +1,55 @@
 <template>
   <div>
-  <div class="statistics">
-    <div class="item">
-      <div class="iconWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-        </svg>
-      </div>
+  <!--<div class="statistics">-->
+    <!--<div class="item">-->
+      <!--<div class="iconWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-pinglun1"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
 
-      <span>{{ commentNum }}</span>
-    </div>
-
-
-    <div class="item active" v-if="showModifyBtn" @tap.stop.prevent="modify()">
-      <div class="iconWrapper modifyWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-xiugai"></use>
-        </svg>
-      </div>
-      <span>修改</span>
-    </div>
+      <!--<span>{{ commentNum }}</span>-->
+    <!--</div>-->
 
 
-    <div class="item" :class="{active:isCollected}" @tap.stop.prevent="collect()" v-else-if="showShoucang">
-      <div class="iconWrapper showcangWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-        </svg>
-      </div>
-      <span>{{ collectNum }}</span>
-    </div>
-
-    <div class="item" v-else>
-      <div class="iconWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gongkai"></use>
-        </svg>
-      </div>
-      <span>{{ seeNum }}</span>
-    </div>
+    <!--<div class="item active" v-if="showModifyBtn" @tap.stop.prevent="modify()">-->
+      <!--<div class="iconWrapper modifyWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-xiugai"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<span>修改</span>-->
+    <!--</div>-->
 
 
-    <div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">
-      <div class="iconWrapper dianzanWrapper">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg>
-      </div>
-      <span>{{ supportNum }}</span>
-    </div>
-  </div>
+    <!--<div class="item" :class="{active:isCollected}" @tap.stop.prevent="collect()" v-else-if="showShoucang">-->
+      <!--<div class="iconWrapper showcangWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-shoucangxingxing"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<span>{{ collectNum }}</span>-->
+    <!--</div>-->
+
+    <!--<div class="item" v-else>-->
+      <!--<div class="iconWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-gongkai"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<span>{{ seeNum }}</span>-->
+    <!--</div>-->
+
+
+    <!--<div class="item" :class="{active:isSupported}" @tap.stop.prevent="support()">-->
+      <!--<div class="iconWrapper dianzanWrapper">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-dianzan1"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<span>{{ supportNum }}</span>-->
+    <!--</div>-->
+  <!--</div>-->
     <!--&lt;!&ndash;点赞 supporter_list  v-if="detail.supporter_list ? detail.supporter_list.length:0"&ndash;&gt;-->
     <div class="component-dianzanList" v-if="supportNum">
       <svg class="icon" aria-hidden="true">
@@ -290,7 +290,6 @@
   /*点赞样式*/
   .component-dianzanList{
     width:100%;
-    padding: 0 0.4rem 0.373rem 0.4rem;
     background: #FFFFFF;
     margin-top: 0.213rem;
     position: relative;
