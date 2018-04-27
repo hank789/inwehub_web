@@ -186,6 +186,20 @@
               }
             }
           }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.data.feed.is_upvoted ? 'support' : 'cancel',
+                'referrer_page': ''
+              }
+            )
+          }
           window.mui.toast(response.data.message)
         })
       },

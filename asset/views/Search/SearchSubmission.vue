@@ -273,6 +273,20 @@
               hot.is_upvoted = 0
               hot.upvotes -= 1
             }
+            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              // mixpanel
+              window.mixpanel.track(
+                'inwehub:support:success',
+                {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': this.id,
+                  'page_name': 'submission',
+                  'page_title': hot.is_upvoted ? 'support' : 'cancel',
+                  'referrer_page': ''
+                }
+              )
+            }
           }
         })
       },
