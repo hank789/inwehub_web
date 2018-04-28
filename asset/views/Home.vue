@@ -118,7 +118,7 @@
         <div class="line-river-big"></div>
         <div class="component-title-home">
           <div class="left">问答推荐</div>
-          <div class="right" @tap.stop.prevent="getRecommends()">
+          <div class="right" @tap.stop.prevent="clickGetRecommends()">
                 <svg class="icon" :class="{move1: this.recommendLoading}" aria-hidden="true">
                   <use xlink:href="#icon-shuaxin"></use>
                 </svg>换一换
@@ -149,6 +149,8 @@
   import top1 from '../statics/images/top1@3x.png'
   import top2 from '../statics/images/top2@3x.png'
   import top3 from '../statics/images/top3@3x.png'
+  import sessionStorageEvent from '../stores/sessionStorage'
+  import { alertSimple } from '../utils/dialog'
 
   const Home = {
     data () {
@@ -313,6 +315,18 @@
           }
         })
 
+        this.getRecommends()
+      },
+      clickGetRecommends () {
+        var isShowToWodeshanchang = sessionStorageEvent.getLocalItem('showToWodeshanchang')
+        if (!isShowToWodeshanchang.show) {
+          sessionStorageEvent.setLocalItem('showToWodeshanchang', {show: true})
+          alertSimple('<div style="text-align: center">丰富“我的擅长”，推荐更精准！</div>', '前往', (num) => {
+            if (num.index === 0) {
+              this.$router.pushPlus('/my/advantage')
+            }
+          }, true)
+        }
         this.getRecommends()
       },
       getRecommends () {
