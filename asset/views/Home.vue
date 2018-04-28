@@ -153,7 +153,7 @@
   import top1 from '../statics/images/top1@3x.png'
   import top2 from '../statics/images/top2@3x.png'
   import top3 from '../statics/images/top3@3x.png'
-  import sessionStorageEvent from '../stores/sessionStorage'
+  import sessionStorageEvent from '../stores/localStorage'
   import { alertSimple } from '../utils/dialog'
 
   const Home = {
