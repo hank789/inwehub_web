@@ -60,6 +60,8 @@
           <p>合作</p>
         </li>
       </ul>
+      <div class="line-river" v-if="invitation_coupon.show"></div>
+      <div class="component-noticeBar" v-if="invitation_coupon.show"><span>您的圈子有新动态！</span></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="title font-family-medium">精选推荐</div>
@@ -87,12 +89,52 @@
                 <span v-else-if="item.read_type === 3">{{item.data.follower_number}}关注</span>
               </div>
             </div>
-            <i class="bot"></i>
+            <i class="bot" v-if="list.length-1 !== index"></i>
           </li>
         </template>
-        <div class="more"  @tap.stop.prevent="$router.pushPlus('/recommends')">更多精选推荐</div>
+        <!--<div class="more"  @tap.stop.prevent="$router.pushPlus('/recommends')">更多精选推荐</div>-->
       </ul>
-      <!---->
+
+        <div class="line-river-big"></div>
+        <div class="component-title-home">
+          <div class="left">人气圈子TOP3</div>
+          <div class="right" @tap.stop.prevent="$router.pushPlus('/groups')">更多</div>
+        </div>
+        <div class="line-river"></div>
+        <template v-for="(item, index) in hot_groups">
+          <div class="component-item-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
+            <div class="leftD">
+              <img class="lazyImg" v-lazy="item.logo"></img>
+            </div>
+            <div class="rightD">
+              <div class="line1 text-line-1"><img :src="top(index)"/>{{item.name}}</div>
+              <div class="line2 text-line-2">{{item.description}}</div>
+              <div class="line3"><img :src="item.owner.avatar" @tap.stop.prevent="toAvatar(item.owner.uuid)"/><span class="group-user">{{item.owner.name}}</span><span class="line-pole"></span><span class="group-number">{{item.scores}}</span><span class="desc">/今日人气</span></div>
+            </div>
+          </div>
+          <div class="line-river" v-if="recommendAsks.length-1 !== index"></div>
+        </template>
+
+        <div class="line-river-big"></div>
+        <div class="component-title-home">
+          <div class="left">问答推荐</div>
+          <div class="right" @tap.stop.prevent="getRecommends()">
+                <svg class="icon" :class="{move1: this.recommendLoading}" aria-hidden="true">
+                  <use xlink:href="#icon-shuaxin"></use>
+                </svg>换一换
+          </div>
+        </div>
+        <div class="line-river"></div>
+        <template v-for="(item, index) in recommendAsks" @tap.stop.prevent="toDetail(item)">
+          <div class="component-item-ask-recommand">
+            <div class="line1">
+              <label v-for="(tag, tagIndex) in item.tags">{{tag.name}}</label>
+            </div>
+            <div class="line2 text-line-3">{{item.title}}</div>
+            <div class="line3"><span class="guanzhu">{{item.follow_number}}关注</span><span class="line-pole" v-if="item.answer_number"></span><span class="users"><img :src="answerUsers.avatar" v-for="(answerUsers, answerUsersIndex) in item.answer_users"></span><span class="huida" v-if="item.answer_number">等{{item.answer_number}}人回答</span></div>
+          </div>
+          <div class="line-river" v-if="recommendAsks.length-1 !== index"></div>
+        </template>
       </div>
     </div>
   </div>
@@ -104,14 +146,26 @@
   import { autoTextArea, AppInit, openUrlByUrl } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
   import HomeSearch from '../components/search/Home'
+  import top1 from '../statics/images/top1@3x.png'
+  import top2 from '../statics/images/top2@3x.png'
+  import top3 from '../statics/images/top3@3x.png'
 
   const Home = {
     data () {
       return {
         list: [],
         notices: [],
+        hot_groups: [],
         contact_id: '',
-        unread_count: 0
+        unread_count: 0,
+        top1: top1,
+        top2: top2,
+        top3: top3,
+        recommendAsks: [],
+        recommendLoading: 0,
+        invitation_coupon: {
+          show: false
+        }
       }
     },
     created () {
@@ -123,9 +177,31 @@
     activated: function () {
       this.refreshPageData()
     },
-    computed: {
-    },
+    computed: {},
     methods: {
+      toDetail (item) {
+        if (item.question_type === 2) {
+          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
+        } else {
+          this.$router.pushPlus('/ask/' + item.id)
+        }
+      },
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+      },
+      top (index) {
+        switch (index) {
+          case 0:
+            return this.top1
+          case 1:
+            return this.top2
+          case 2:
+            return this.top3
+        }
+      },
       refreshPageData () {
         this.getData()
         this.getHomeData()
@@ -228,10 +304,28 @@
             return
           }
           this.notices = response.data.data.notices
+          this.hot_groups = response.data.data.hot_groups
+          this.invitation_coupon = response.data.data.invitation_coupon
           // 是否弹受邀红包
           if (response.data.data.invitation_coupon.show) {
             userAbility.InvitationCoupon(this)
           }
+        })
+
+        this.getRecommends()
+      },
+      getRecommends () {
+        this.recommendLoading = 1
+        postRequest(`question/recommendUser`, {perPage: 3}, false).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          setTimeout(() => {
+            this.recommendLoading = 0
+          }, 1000)
+          this.recommendAsks = response.data.data.data
         })
       }
     },
@@ -279,6 +373,7 @@
   }
   .mui-content{
     background: #ffffff;
+    bottom:1.333rem;
   }
   /*search*/
   /*.search{*/
@@ -386,7 +481,6 @@
   .recommend{
     width:100%;
     padding: 0 0.426rem;
-    height: 18.133rem;
     overflow: hidden;
     background: #ffffff;
     display: flex;
@@ -488,6 +582,211 @@
   .mui-slider-item{
     height:3.626rem !important;
     overflow: hidden;
+  }
+
+
+  .line-river {
+    height: 1px;
+    position: relative;
+  }
+  .line-river:after {
+    content: '';
+    position: absolute;
+    background: #dcdcdc;
+    height: 1px;
+    left: 0.413rem;
+    right: 0.413rem;
+    transform:scaleY(0.6);
+    -webkit-transform: scaleY(0.6);
+  }
+  .line-river-big {
+    height: 0.266rem;
+    position: relative;
+    background: #F3F4F6;
+  }
+  .component-noticeBar {
+    position: relative;
+    background: url(../statics/images/laba@3x.png) no-repeat;
+    background-size: 0.546rem;
+    background-position: 0.413rem 0.266rem;
+    font-size: 0.373rem;
+    height: 1.04rem;
+    line-height: 1.04rem;
+    color: #444;
+  }
+  .component-noticeBar span {
+    margin-left: 1.146rem;
+  }
+  .component-title-home {
+    height: 1.173rem;
+    line-height: 1.173rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0 0.413rem;
+  }
+  .component-title-home .left {
+    font-family: PingFangSC-Medium;
+    font-size: 0.426rem;
+    color: #444;
+  }
+  .component-title-home .right {
+    color: #03AEF9;
+    font-size: 0.373rem;
+  }
+  .component-title-home .right svg {
+    font-size: 0.493rem;
+    vertical-align: text-bottom;
+    margin-right: 0.186rem;
+    position: relative;
+    top:-1px;
+  }
+  .component-item-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.386rem 0.426rem;
+    position: relative;
+  }
+  .component-item-group .leftD {
+    width: 2.453rem;
+    height: 2.44rem;
+  }
+  .component-item-group .leftD img {
+    width: inherit;
+    height: inherit;
+    border-radius: 0.066rem;
+  }
+  .component-item-group .rightD {
+    padding:0 0.28rem;
+    position: relative;
+    flex-grow:2;
+    overflow:hidden;
+  }
+  .component-item-group .rightD .line1 {
+    font-family: PingFangSC-Medium;
+    font-size: 0.373rem;
+  }
+  .component-item-group .rightD .line1 img {
+    width: 0.533rem;
+    vertical-align: text-top;
+    margin-right: 0.133rem;
+  }
+  .component-item-group .rightD .line2 {
+    padding-top: 0.133rem;
+    color: #808080;
+    line-height: 0.44rem;
+    font-size: 0.32rem;
+  }
+  .component-item-group .rightD .line3 {
+    position: absolute;
+    bottom: 0;
+  }
+  .component-item-group .rightD .line3 img {
+    width: 0.533rem;
+    height: 0.533rem;
+    border-radius: 50%;
+    vertical-align: text-bottom;
+    margin-right: 0.133rem;
+  }
+  .component-item-group .rightD .line3 .group-user {
+    font-size: 0.32rem;
+    color: #444;
+  }
+  .component-item-group .rightD .line3 .line-pole {
+    display: inline-block;
+    width: 0.026rem;
+    height: 0.293rem;
+    background: #dcdcdc;
+    margin: 0 0.24rem;
+    position: relative;
+    top: 0.026rem;
+  }
+  .component-item-group .rightD .line3 .group-number {
+    font-size: 0.373rem;
+    color: #235280;
+    position: relative;
+    top: 0.013rem;
+  }
+  .component-item-group .rightD .line3 span.desc {
+    color: #B4B4B6;
+    font-size: 0.32rem;
+    position: relative;
+    left: 0.053rem;
+  }
+  .component-item-ask-recommand {
+    padding: 0.333rem 0.426rem;
+  }
+  .component-item-ask-recommand .line1 label {
+    background: #A8DFF7;
+    color: #fff;
+    font-size: 0.32rem;
+    line-height: 0.44rem;
+    padding: 0.04rem 0.24rem;
+    border-radius: 1.333rem;
+  }
+  .component-item-ask-recommand .line2 {
+    margin: 0.266rem 0;
+    font-size: 0.373rem;
+    line-height: 0.52rem;
+    color: #444;
+  }
+  .component-item-ask-recommand .line3 .guanzhu {
+    color: #235280;
+    font-size: 0.32rem;
+    position: relative;
+    top: -0.08rem;
+  }
+  .component-item-ask-recommand .line3 .line-pole {
+    display: inline-block;
+    width: 0.026rem;
+    height: 0.293rem;
+    background: #dcdcdc;
+    margin: 0 0.253rem;
+    position: relative;
+    top: -0.04rem;
+  }
+  .component-item-ask-recommand .line3 .users {
+    margin-right: -0.133rem;
+    position: relative;
+    top: -0.066rem;
+  }
+  .component-item-ask-recommand .line3 .users img {
+    vertical-align: text-bottom;
+    width: 0.586rem;
+    height: 0.586rem;
+    border: 0.053rem solid #fff;
+    border-radius: 50%;
+  }
+  .component-item-ask-recommand .line3 .users img:nth-child(2) {
+    position: relative;
+    left: -0.133rem;
+  }
+  .component-item-ask-recommand .line3 .users img:nth-child(3) {
+    position: relative;
+    left: -0.266rem;
+  }
+  .component-item-ask-recommand .line3 .huida {
+    margin-left: -0.053rem;
+    color: #235280;
+    font-size: 0.32rem;
+    position: relative;
+    top: -0.133rem;
+  }
+
+  @keyframes myMove1 {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+  .move1 {
+    animation: myMove1 5s ease-in infinite;
+    -webkit-animation: myMove1 5s ease-in infinite;
   }
 </style>
 <style>
