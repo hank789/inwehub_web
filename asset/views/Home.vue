@@ -61,7 +61,7 @@
         </li>
       </ul>
       <div class="line-river" v-if="invitation_coupon.show"></div>
-      <div class="component-noticeBar" v-if="invitation_coupon.show" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
+      <div class="component-noticeBar" v-if="user_group_unread" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
@@ -171,6 +171,7 @@
         recommendAsks: [],
         recommendLoading: 0,
         recommendPage: 0,
+        user_group_unread: 0,
         invitation_coupon: {
           show: false
         }
@@ -314,6 +315,7 @@
           this.notices = response.data.data.notices
           this.hot_groups = response.data.data.hot_groups
           this.invitation_coupon = response.data.data.invitation_coupon
+          this.user_group_unread = response.data.data.user_group_unread
           // 是否弹受邀红包
           if (response.data.data.invitation_coupon.show) {
             userAbility.InvitationCoupon(this)
