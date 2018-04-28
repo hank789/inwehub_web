@@ -60,7 +60,7 @@
           <p>合作</p>
         </li>
       </ul>
-      <div class="line-river" v-if="invitation_coupon.show"></div>
+      <div class="line-river" v-if="user_group_unread"></div>
       <div class="component-noticeBar" v-if="user_group_unread" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
       <div class="gray"></div>
       <!--精选推荐-->
