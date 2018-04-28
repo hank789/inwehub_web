@@ -61,7 +61,7 @@
         </li>
       </ul>
       <div class="line-river" v-if="invitation_coupon.show"></div>
-      <div class="component-noticeBar" v-if="invitation_coupon.show"><span>您的圈子有新动态！</span></div>
+      <div class="component-noticeBar" v-if="invitation_coupon.show" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="title font-family-medium">精选推荐</div>
@@ -125,13 +125,13 @@
           </div>
         </div>
         <div class="line-river"></div>
-        <template v-for="(item, index) in recommendAsks" @tap.stop.prevent="toDetail(item)">
-          <div class="component-item-ask-recommand">
+        <template v-for="(item, index) in recommendAsks">
+          <div class="component-item-ask-recommand" @tap.stop.prevent="toDetail(item)">
             <div class="line1">
               <label v-for="(tag, tagIndex) in item.tags">{{tag.name}}</label>
             </div>
             <div class="line2 text-line-3">{{item.title}}</div>
-            <div class="line3"><span class="guanzhu">{{item.follow_number}}关注</span><span class="line-pole" v-if="item.answer_number"></span><span class="users"><img :src="answerUsers.avatar" v-for="(answerUsers, answerUsersIndex) in item.answer_users"></span><span class="huida" v-if="item.answer_number">等{{item.answer_number}}人回答</span></div>
+            <div class="line3"><span class="guanzhu">{{item.follow_number}}关注</span><span class="line-pole" v-if="item.answer_number"></span><span class="users" :class="'users-' + item.answer_users.length"><img :src="answerUsers.avatar" v-for="(answerUsers, answerUsersIndex) in item.answer_users"></span><span class="huida" v-if="item.answer_number">等{{item.answer_number}}人回答</span></div>
           </div>
           <div class="line-river" v-if="recommendAsks.length-1 !== index"></div>
         </template>
@@ -163,6 +163,7 @@
         top3: top3,
         recommendAsks: [],
         recommendLoading: 0,
+        recommendPage: 0,
         invitation_coupon: {
           show: false
         }
@@ -316,7 +317,7 @@
       },
       getRecommends () {
         this.recommendLoading = 1
-        postRequest(`question/recommendUser`, {perPage: 3}, false).then(response => {
+        postRequest(`question/recommendUser`, {perPage: 3, page: ++this.recommendPage}, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -661,7 +662,7 @@
   .component-item-group .leftD img {
     width: inherit;
     height: inherit;
-    border-radius: 0.066rem;
+    border-radius: 0.106rem;
   }
   .component-item-group .rightD {
     padding:0 0.28rem;
@@ -730,6 +731,7 @@
     line-height: 0.44rem;
     padding: 0.04rem 0.24rem;
     border-radius: 1.333rem;
+    margin-right:5px;
   }
   .component-item-ask-recommand .line2 {
     margin: 0.266rem 0;
@@ -737,32 +739,44 @@
     line-height: 0.52rem;
     color: #444;
   }
+  .component-item-ask-recommand .line3 {
+    vertical-align: middle;
+  }
   .component-item-ask-recommand .line3 .guanzhu {
     color: #235280;
     font-size: 0.32rem;
     position: relative;
-    top: -0.08rem;
+    vertical-align: inherit;
   }
   .component-item-ask-recommand .line3 .line-pole {
     display: inline-block;
-    width: 0.026rem;
-    height: 0.293rem;
+    width: 1px;
+    height: 11px;
     background: #dcdcdc;
-    margin: 0 0.253rem;
+    margin: 0 9.5px;
     position: relative;
-    top: -0.04rem;
+    vertical-align: inherit;
   }
   .component-item-ask-recommand .line3 .users {
-    margin-right: -0.133rem;
     position: relative;
-    top: -0.066rem;
+    top: -1px;
+    vertical-align: inherit;
+  }
+  .component-item-ask-recommand .line3 .users.users-1 {
+    margin-right: 0.133rem;
+  }
+  .component-item-ask-recommand .line3 .users.users-2 {
+    margin-right: 0;
+  }
+  .component-item-ask-recommand .line3 .users.users-3 {
+    margin-right: -0.133rem;
   }
   .component-item-ask-recommand .line3 .users img {
-    vertical-align: text-bottom;
     width: 0.586rem;
     height: 0.586rem;
     border: 0.053rem solid #fff;
     border-radius: 50%;
+    vertical-align: inherit;
   }
   .component-item-ask-recommand .line3 .users img:nth-child(2) {
     position: relative;
@@ -773,11 +787,10 @@
     left: -0.266rem;
   }
   .component-item-ask-recommand .line3 .huida {
-    margin-left: -0.053rem;
     color: #235280;
     font-size: 0.32rem;
     position: relative;
-    top: -0.133rem;
+    vertical-align: inherit;
   }
 
   @keyframes myMove1 {
