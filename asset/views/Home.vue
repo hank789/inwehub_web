@@ -109,7 +109,7 @@
             <div class="rightD">
               <div class="line1 text-line-1"><img :src="top(index)"/>{{item.name}}</div>
               <div class="line2 text-line-2">{{item.description}}</div>
-              <div class="line3"><img :src="item.owner.avatar" @tap.stop.prevent="toAvatar(item.owner.uuid)"/><span class="group-user">{{item.owner.name}}</span><span class="line-pole"></span><span class="group-number">{{item.scores}}</span><span class="desc">/今日人气</span></div>
+              <div class="line3 text-line-1"><img :src="item.owner.avatar" @tap.stop.prevent="toAvatar(item.owner.uuid)"/><span class="group-user">{{item.owner.name}}</span><span class="line-pole"></span><span class="group-number">{{item.scores}}</span><span class="desc">/今日人气</span></div>
             </div>
           </div>
           <div class="line-river" v-if="recommendAsks.length-1 !== index"></div>
@@ -127,11 +127,11 @@
         <div class="line-river"></div>
         <template v-for="(item, index) in recommendAsks">
           <div class="component-item-ask-recommand" @tap.stop.prevent="toDetail(item)">
-            <div class="line1">
+            <div class="line1 text-line-1">
               <label v-for="(tag, tagIndex) in item.tags">{{tag.name}}</label>
             </div>
             <div class="line2 text-line-3">{{item.title}}</div>
-            <div class="line3"><span class="guanzhu">{{item.follow_number}}关注</span><span class="line-pole" v-if="item.answer_number"></span><span class="users" :class="'users-' + item.answer_users.length"><img :src="answerUsers.avatar" v-for="(answerUsers, answerUsersIndex) in item.answer_users"></span><span class="huida" v-if="item.answer_number">等{{item.answer_number}}人回答</span></div>
+            <div class="line3 text-line-1"><span class="guanzhu">{{item.follow_number}}关注</span><span class="line-pole" v-if="item.answer_number"></span><span class="users" :class="'users-' + item.answer_users.length"><img :src="answerUsers.avatar" v-for="(answerUsers, answerUsersIndex) in item.answer_users"></span><span class="huida" v-if="item.answer_number">等{{item.answer_number}}人回答</span></div>
           </div>
           <div class="line-river" v-if="recommendAsks.length-1 !== index"></div>
         </template>
@@ -700,6 +700,7 @@
     font-size: 0.32rem;
   }
   .component-item-group .rightD .line3 {
+    width:100%;
     position: absolute;
     bottom: 0;
   }
