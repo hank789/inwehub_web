@@ -47,8 +47,6 @@
           </div>
         </div>
 
-
-        <!--是否加入圈子/group/detail/:id-->
         <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
              @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
         </div>
@@ -67,27 +65,6 @@
           </svg>
           <span>{{detail.data.current_address_name}}</span>
         </div>
-
-        <div class="statisticsWrapper">
-          <Statistics
-            :groupId=detail.group.id
-            :is_joined=detail.group.is_joined
-            :id="detail.id"
-            :commentNum="detail.comments_number"
-            :isCommented="!!detail.is_commented"
-            :supportNum="detail.upvotes"
-            :isSupported="!!detail.is_upvoted"
-            :collectNum="detail.bookmarks"
-            :isCollected="!!detail.is_bookmark"
-            @supportNumDesc="supportNumDesc"
-            @supportNumAdd="supportNumAdd"
-            @setSupportStatus="setSupportStatus"
-            @collectNumDesc="collectNumDesc"
-            @collectNumAdd="collectNumAdd"
-            @setCollectStatus="setCollectStatus"
-          ></Statistics>
-        </div>
-        <!--灰色部分-->
         <div class="river"></div>
         <!--圈子信息-->
         <div class="groupsList" v-if="detail.group !== null">
@@ -96,7 +73,7 @@
                        :type="'small'"
           ></groups-list>
         </div>
-        <!--灰色部分-->
+
         <div class="river" v-if="detail.supporter_list.length"></div>
         <!--点赞-->
         <div class="component-dianzanList" v-if="detail.upvotes">
@@ -106,7 +83,7 @@
           <span v-for="(item, index) in detail.supporter_list"
                 @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
         </div>
-        <!--灰色部分-->
+
         <div class="river"></div>
         <!--评论部分-->
         <Discuss
@@ -117,10 +94,10 @@
           :storeParams="{'submission_id': detail.id}"
           @comment="comment"
           @commentFinish="commentFinish"
+          @delCommentSuccess="delCommentSuccess"
           ref="discuss"
         ></Discuss>
       </div>
-
 
 
 
@@ -161,6 +138,11 @@
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
+
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+    ></FooterMenu>
   </div>
 </template>
 
@@ -181,6 +163,8 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import {pageRefresh} from '../../utils/allPlatform'
   import groupsList from '../../components/groups/GroupsList.vue'
+  import FooterMenu from '../../components/FooterMenu.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -222,6 +206,42 @@
       }
     },
     computed: {
+      footerMenus () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.detail.comments_number,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            number: this.detail.bookmarks,
+            disable: this.detail.is_bookmark,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-zan',
+            text: '点赞',
+            number: this.detail.upvotes,
+            disable: this.detail.is_upvoted,
+            rightLine: false,
+            isLight: false
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          }
+        ]
+      },
       descLength () {
         if (this.description === this.descPlaceholder) {
           return 0
@@ -236,7 +256,8 @@
       Discuss,
       Share,
       commentTextarea,
-      groupsList
+      groupsList,
+      FooterMenu
     },
     methods: {
       typeDesc (type) {
@@ -372,41 +393,11 @@
       setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
-//      点赞
-      supportNumAdd () {
-        this.detail.upvotes++
-        var support = {
-          name: this.name,
-          uuid: this.uuid
-        }
-        this.detail.supporter_list = this.detail.supporter_list.concat(support)
-      },
-//      取消点赞
-      supportNumDesc () {
-        this.detail.upvotes--
-        for (var i in this.detail.supporter_list) {
-          if (this.detail.supporter_list[i].uuid === this.uuid) {
-            this.detail.supporter_list.splice(i, 1)
-          }
-        }
-      },
       commentNumAdd () {
         this.detail.comments_number++
       },
       commentNumDesc () {
         this.detail.comments_number--
-      },
-      setSupportStatus (type) {
-        this.detail.is_upvoted = type === 'upvote' ? 1 : 0
-      },
-      collectNumAdd () {
-        this.detail.bookmarks++
-      },
-      collectNumDesc () {
-        this.detail.bookmarks--
-      },
-      setCollectStatus (type) {
-        this.detail.is_bookmark = type === 'bookmarked' ? 1 : 0
       },
       shotContentHeight () {
         if (this.detail.group.is_joined !== -1) {
@@ -419,6 +410,115 @@
         if (contentWrapper && contentWrapper.offsetHeight > 300) {
           contentWrapper.classList.add('shortContentWrapper')
         }
+      },
+      footerMenuClickedItem (item) {
+        switch (item.icon) {
+          case this.footerMenus[0].icon:
+            // 评论
+            this.$refs.discuss.rootComment()
+            break
+          case this.footerMenus[1].icon:
+            // 收藏
+            this.collect()
+            break
+          case this.footerMenus[2].icon:
+            // 点赞
+            this.support()
+            break
+          case this.footerMenus[3].icon:
+            // 分享
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
+      collect () {
+        var data = {
+          id: this.detail.id
+        }
+
+        postRequest(`article/bookmark-submission`, data).then(response => {
+          var code = response.data.code
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          } else if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unbookmarked') {
+            this.detail.bookmarks--
+            this.detail.is_bookmark = 0
+          } else {
+            this.detail.bookmarks++
+            this.detail.is_bookmark = 1
+          }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:bookmark:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.isCollected ? 'cancel' : 'bookmark',
+                'referrer_page': ''
+              }
+            )
+          }
+          window.mui.toast(response.data.message)
+        })
+      },
+      support () {
+        var data = {
+          submission_id: this.detail.id
+        }
+        postRequest(`article/upvote-submission`, data).then(response => {
+          var code = response.data.code
+          if (code === 6108) {
+            userAbility.alertGroups(this, response.data.data.group_id)
+            return
+          } else if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'cancel_upvote') {
+            this.detail.upvotes--
+            this.detail.is_upvoted = 0
+            for (var i in this.detail.supporter_list) {
+              if (this.detail.supporter_list[i].uuid === this.uuid) {
+                this.detail.supporter_list.splice(i, 1)
+              }
+            }
+          } else {
+            this.detail.upvotes++
+            this.detail.is_upvoted = 1
+            var support = {
+              name: this.name,
+              uuid: this.uuid
+            }
+            this.detail.supporter_list = this.detail.supporter_list.concat(support)
+          }
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': response.data.data.type !== 'upvote' ? 'cancel' : 'support',
+                'referrer_page': ''
+              }
+            )
+          }
+          window.mui.toast(response.data.message)
+        })
+      },
+      delCommentSuccess () {
+        this.detail.comments_number--
       }
     },
     updated () {
@@ -486,7 +586,7 @@
     width: 100%;
     font-size: 0.32rem;
     color: #B4B4B6;
-    padding: 0 0.4rem;
+    padding: 0 0.4rem 0.333rem;
     background: #fff;
   }
 
@@ -508,6 +608,7 @@
   }
 
   .mui-content {
+    bottom:1.333rem;
     background: #fff;
   }
 
@@ -636,6 +737,16 @@
     overflow: hidden;
     position: relative;
     margin-bottom: 0.266rem;
+
+    &:after{
+      position: absolute;
+      bottom:0;
+      content:'';
+      height:1.666rem;
+      width:100%;
+      background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,1));
+    }
   }
+
 </style>
 

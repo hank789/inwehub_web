@@ -66,6 +66,7 @@
 
           ref="discuss"
           v-if="ask.answers[0] && ask.answers[0].content"
+          delCommentSuccess="delCommentSuccess"
         ></Discuss>
 
        <!--返回问答社区-->
@@ -80,28 +81,8 @@
           </svg>
         </div>
 
-        <div class="help">
-          <div class="title">
-            什么是专业问题
-
-
-          </div>
-          <div class="body">
-            InweHub致力于营造高品质专家帮助社区，通过平台入驻的专家，解决您面临的咨询或SAP的相关疑问。
-            专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关<a @tap.stop.prevent="toSeeHelp()">问答规范</a>。
-
-
-
-          </div>
-        </div>
-
         <div class="buttonWrapper iNeedAskWrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">
-            我也要提问
-
-
-
-          </button>
+          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">我也要提问</button>
         </div>
       </div>
     </div>
@@ -117,6 +98,7 @@
       :targetType="'question'"
       @success="shareSuccess"
       @fail="shareFail"
+      ref="ShareBtn"
     ></Share>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
@@ -144,6 +126,11 @@
     >
     </pay>
 
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+    ></FooterMenu>
+
   </div>
 </template>
 
@@ -165,6 +152,7 @@
   import pay from '../../components/pay/pay.vue'
   import { pageRefresh } from '../../utils/allPlatform'
   import Vue from 'vue'
+  import FooterMenu from '../../components/FooterMenu.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -189,7 +177,9 @@
       shareTitle: '',
       shareName: '',
       id: 0,
-      loading: true
+      loading: true,
+      uuid: currentUser.uuid,
+      name: currentUser.name
     }),
     mounted () {
       pageRefresh(this, () => {
@@ -207,11 +197,40 @@
       Share,
       commentTextarea,
       StarRating,
-      pay
+      pay,
+      FooterMenu
     },
     computed: {
       answer () {
         return this.ask.answers[0] ? this.ask.answers[0] : {}
+      },
+      footerMenus () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.loading ? 0 : this.ask.answers[0].comments_number,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-zan',
+            text: '点赞',
+            number: this.loading ? 0 : this.ask.answers[0].support_number,
+            disable: this.loading ? 0 : this.ask.answers[0].is_supported,
+            rightLine: false,
+            isLight: false
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          }
+        ]
       }
     },
     methods: {
@@ -317,6 +336,75 @@
 
           successCallback()
         })
+      },
+      footerMenuClickedItem (item) {
+        switch (item.icon) {
+          case this.footerMenus[0].icon:
+            // 评论
+            if (this.$refs.discuss) {
+              this.$refs.discuss.rootComment()
+            } else {
+              this.$refs.pay.showSelectMoney()
+            }
+            break
+          case this.footerMenus[1].icon:
+            // 点赞
+            this.support()
+            break
+          case this.footerMenus[2].icon:
+            // 分享
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
+      support () {
+        var data = {
+          id: this.answer.id
+        }
+        postRequest(`support/answer`, data).then(response => {
+          var code = response.data.code
+
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          if (response.data.data.type === 'unsupport') {
+            this.ask.answers[0].support_number--
+            this.ask.answers[0].is_supported = 0
+            for (var i in this.ask.answers[0].supporter_list) {
+              if (this.ask.answers[0].supporter_list[i].uuid === this.uuid) {
+                this.ask.answers[0].supporter_list.splice(i, 1)
+              }
+            }
+          } else {
+            this.ask.answers[0].support_number++
+            this.ask.answers[0].is_supported = 1
+            var support = {
+              name: this.name,
+              uuid: this.uuid
+            }
+            this.ask.answers[0].supporter_list = this.ask.answers[0].supporter_list.concat(support)
+          }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.answerId,
+                'page_name': 'answer',
+                'page_title': this.ask.answers[0].is_supported ? 'support' : 'cancel',
+                'referrer_page': ''
+              }
+            )
+          }
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      delCommentSuccess () {
+        this.ask.answer[0].comments_number--
       }
     },
     watch: {
@@ -362,6 +450,7 @@
 
   .mui-content {
     background: #f3f4f6;
+    bottom:1.333rem;
   }
 
   .help {
@@ -394,8 +483,8 @@
     padding: 0.346rem 0;
   }
   .iNeedAskWrapper{
-    padding:0;
     width:100%;
+    padding:0.133rem 0;
   }
   .iNeedAskWrapper button{
     border-radius:0;
@@ -426,6 +515,7 @@
   background: url("../../statics/images/Community.png") no-repeat;
   background-size: cover;
   margin-top: 0.266rem;
+  margin-bottom: 0.266rem;
 }
 .back span:nth-of-type(1){
   font-size:0.4rem;

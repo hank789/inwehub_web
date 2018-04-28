@@ -32,6 +32,7 @@ import GroupsDetail from '../../../views/Group/Detail.vue'
 import GroupsAdd from '../../../views/Group/Add.vue'
 import GroupsSetting from '../../../views/Group/Setting.vue'
 import GroupsMy from '../../../views/Group/My.vue'
+import GroupsUser from '../../../views/Group/User.vue'
 import GroupsSearch from '../../../views/Group/Search.vue'
 import DiscoverCompanyServices from '../../../views/Discover/CompanyServices.vue'
 import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
@@ -212,6 +213,7 @@ export {
   GroupsSetting,
   GroupsMy,
   GroupsSearch,
+  GroupsUser,
   DiscoverCompanyServices,
   DiscoverHotTopic,
   DiscoverNewest,

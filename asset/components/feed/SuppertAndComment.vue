@@ -91,6 +91,19 @@
 </script>
 
 <style scoped>
-
+.supperLine{
+  height:0.026rem;
+  position: relative;
+}
+.supperLine:after{
+  content:'';
+  position: absolute;
+  top:0;
+  left:0;
+  height:0.026rem;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #dcdcdc;
+}
 </style>
 

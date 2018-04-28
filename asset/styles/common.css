@@ -1574,3 +1574,11 @@ a {
 .freeQuestion-comment svg{
   font-size:0.506rem;
 }
+
+.mui-ios .mui-content.mui-content-fixed{
+  overflow: hidden !important;
+}
+
+.mui-ellipsis-2{
+  word-break:break-all;
+}

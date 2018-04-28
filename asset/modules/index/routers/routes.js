@@ -425,10 +425,11 @@ const routes = [
   { // 圈子成员
     path: '/group/users/:id',
     name: 'group-users',
-    component: componets.GroupsDetail,
+    component: componets.GroupsUser,
     meta: {
       title: '圈子成员',
-      keepAlive: false
+      keepAlive: false,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

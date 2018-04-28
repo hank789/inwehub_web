@@ -34,7 +34,7 @@
           <span><i class="font-family-medium">{{detail.subscribers}}</i>/人气</span>
           <span><i class="font-family-medium">{{detail.articles}}</i>/分享</span>
         </p>
-        <div class="tag-avatar" @tap.stop.prevent="$router.push('/tag/FocusMembers?id=' + detail.id)" v-if="detail.members.length">
+        <div class="tag-avatar" @tap.stop.prevent="$router.pushPlus('/group/users/' + detail.id)" v-if="detail.members.length">
           <div class="avatar">
             <template v-for="(item, index) in detail.members">
               <img :src="item.avatar"/>

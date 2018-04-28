@@ -324,7 +324,12 @@
             this.perPage = response.data.data.per_page
           }
 
-          if (list.length < this.perPage) {
+          var isHaveNext = true
+          if (response.data.data.next_page_url === null) {
+            isHaveNext = false
+          }
+
+          if (!isHaveNext) {
             if (window.mui('#refreshContainer').length) {
               window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
             }

@@ -232,6 +232,7 @@
 <style scoped="scoped">
   .detail-answer {
     margin-bottom: 0.266rem;
+    padding-bottom:0.333rem;
   }
 
   .detail-answer:before {

@@ -109,7 +109,7 @@
         return newDate
       },
       toDetail (url) {
-        this.$router.pushPlus(url, 'list-detail-page')
+        this.$router.pushPlus(url, 'list-detail-two')
       },
       prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
@@ -174,6 +174,20 @@
                 this.data.feed.supporter_list.splice(i, 1)
               }
             }
+          }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.data.feed.is_upvoted ? 'support' : 'cancel',
+                'referrer_page': ''
+              }
+            )
           }
           window.mui.toast(response.data.message)
         })

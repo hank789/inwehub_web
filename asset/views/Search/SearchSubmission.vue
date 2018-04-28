@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div class="mui-content searchSubmission">
       <div class="search">
         <p>
           <svg class="icon" aria-hidden="true">
@@ -272,6 +272,20 @@
             } else {
               hot.is_upvoted = 0
               hot.upvotes -= 1
+            }
+            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              // mixpanel
+              window.mixpanel.track(
+                'inwehub:support:success',
+                {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': this.id,
+                  'page_name': 'submission',
+                  'page_title': hot.is_upvoted ? 'support' : 'cancel',
+                  'referrer_page': ''
+                }
+              )
             }
           }
         })
@@ -730,6 +744,10 @@
   ul .Container .information p.blue {
     color: #03aef9;
   }
+</style>
 
-
+<style>
+  .searchSubmission .small.-group{
+    padding-bottom:0.266rem;
+  }
 </style>

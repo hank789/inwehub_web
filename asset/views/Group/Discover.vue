@@ -1,22 +1,7 @@
 <template>
   <div>
+    <HomeSearch :unread_count="unread_count"></HomeSearch>
     <div class="mui-content">
-      <!--search-->
-      <div class="search">
-        <div class="search-l" @tap.stop.prevent="$router.pushPlus('/chat/' + contact_id)">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-kefu"></use>
-          </svg>
-          <p>客服</p>
-          <i v-if="unread_count"></i>
-        </div>
-        <div class="search-r" @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-sousuo"></use>
-          </svg>
-          <p>搜内容、问答、圈子</p>
-        </div>
-      </div>
       <!--菜单-->
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/discover')">关注</span>
@@ -51,7 +36,7 @@
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
               <div @tap.stop.prevent="goDetial(hot)" >
-                <p>{{hot.data.title}}<i>{{hot.data.domain}}</i></p>
+                <p>{{hot.data.title}}<i> - {{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img class="lazyImg" v-lazy="hot.data.img">
                 </p>
@@ -137,6 +122,7 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
+  import HomeSearch from '../../components/search/Home'
 
   export default {
     data () {
@@ -161,7 +147,8 @@
       RefreshList,
       TextDetail,
       groups,
-      groupsList
+      groupsList,
+      HomeSearch
     },
     props: {},
     watch: {},
@@ -253,6 +240,20 @@
             } else {
               hot.is_upvoted = 0
               hot.upvotes -= 1
+            }
+            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              // mixpanel
+              window.mixpanel.track(
+                'inwehub:support:success',
+                {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': this.id,
+                  'page_name': 'submission',
+                  'page_title': hot.is_upvoted ? 'support' : 'cancel',
+                  'referrer_page': ''
+                }
+              )
             }
           }
         })
@@ -346,61 +347,7 @@
   .mui-content{
     background: #ffffff;
   }
-  /*search*/
-  .search{
-    width:92%;
-    height:0.906rem;
-    margin-left: 4%;
-    margin-top: 0.213rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .search-l{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  .search-l svg{
-    font-size:0.666rem;
-    color: rgba(200,200,200,1);
-  }
-  .search-l p{
-    font-size:0.266rem;
-    color: rgba(128,128,128,1);
-    line-height: 0.373rem;
-    margin-bottom: 0.133rem;
-  }
-  .search-l i{
-    width:0.213rem;
-    height:0.213rem;
-    background: #FA4975;
-    border-radius: 50%;
-    position: absolute;
-    top: 0.16rem;
-    right: -0.266rem;
-  }
-  .search-r{
-    width: 77%;
-    height:100%;
-    background:rgba(243,244,246,1);
-    opacity:0.9477;
-    border-radius: 1.333rem;
-    font-size: 0.373rem;
-    color:rgba(128,128,128,1);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .search-r svg{
-    font-size: 0.453rem;
-    color: rgba(68,68,68,1);
-    margin-left: 0.426rem;
-    margin-right: 0.16rem;
-  }
+
   /*菜单*/
   /*菜单*/
   .menu{
@@ -462,6 +409,7 @@
     font-size: 0.4rem;
     color: #444444;
     line-height: 0.533rem;
+    word-break: break-all;
   }
 
   ul .Container p:nth-of-type(1) i {
@@ -722,7 +670,7 @@
     margin-bottom: 0.266rem;
   }
   .listWrapper{
-    top: 2.3rem;
+    top:1.173rem;
     bottom: 1.333rem;
   }
   .group-bot{
