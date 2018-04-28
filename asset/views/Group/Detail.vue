@@ -191,7 +191,7 @@
     },
     props: {},
     watch: {
-      '$route': 'refreshPageData'
+      '$route': 'refreshData'
     },
     methods: {
       sendMessage (message) {
@@ -266,7 +266,7 @@
         })
         this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
       },
-      refreshPageData () {
+      refreshData () {
         this.loading = 1
         this.getData()
       },
