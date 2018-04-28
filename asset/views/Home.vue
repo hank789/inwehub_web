@@ -731,6 +731,7 @@
     line-height: 0.44rem;
     padding: 0.04rem 0.24rem;
     border-radius: 1.333rem;
+    display: inline-block;
     margin-right:5px;
   }
   .component-item-ask-recommand .line2 {
