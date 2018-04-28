@@ -131,7 +131,7 @@
         <div class="line-river"></div>
         <template v-for="(item, index) in recommendAsks">
           <div class="component-item-ask-recommand" @tap.stop.prevent="toDetail(item)">
-            <div class="line1 text-line-1">
+            <div class="line1">
               <label v-for="(tag, tagIndex) in item.tags">{{tag.name}}</label>
             </div>
             <div class="line2 text-line-3">{{item.title}}</div>
