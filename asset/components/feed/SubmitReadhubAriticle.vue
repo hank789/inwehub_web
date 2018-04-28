@@ -109,7 +109,7 @@
         return newDate
       },
       toDetail (url) {
-        this.$router.pushPlus(url, 'list-detail-page')
+        this.$router.pushPlus(url, 'list-detail-two')
       },
       prependItem (id, msg, createdAt, parentId, commentList) {
         console.log('comment append id:' + id + ', msg:' + msg + ', createdAt:' + createdAt + ', parentId:' + parentId)
