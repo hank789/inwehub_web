@@ -64,7 +64,11 @@
       <div class="component-noticeBar" v-if="invitation_coupon.show" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
       <div class="gray"></div>
       <!--精选推荐-->
-      <div class="title font-family-medium">精选推荐</div>
+      <div class="component-title-home">
+        <div class="left">精选推荐</div>
+        <div class="right" @tap.stop.prevent="$router.pushPlus('/recommends')">更多</div>
+      </div>
+      <div class="line-river"></div>
       <ul class="recommend">
         <template v-for="(item, index) in list">
           <li  @tap.stop.prevent="goDetial(item.read_type,item)">
