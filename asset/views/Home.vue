@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeSearch :unread_count="unread_count"></HomeSearch>
-    <div class="mui-content absolute">
+    <div class="mui-content absolute" v-show="!loading">
       <!--search-->
       <!--search/chat/72-->
       <div class="home-b">
@@ -155,6 +155,7 @@
   const Home = {
     data () {
       return {
+        loading: 1,
         list: [],
         notices: [],
         hot_groups: [],
@@ -290,7 +291,7 @@
         })
       },
       getData () {
-        postRequest(`recommendRead`, {}, false).then(response => {
+        postRequest(`recommendRead`, {}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -300,7 +301,7 @@
         })
       },
       getHomeData () {
-        postRequest(`home`, {}, false).then(response => {
+        postRequest(`home`, {}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -331,7 +332,7 @@
       },
       getRecommends () {
         this.recommendLoading = 1
-        postRequest(`question/recommendUser`, {perPage: 3, page: ++this.recommendPage}, false).then(response => {
+        postRequest(`question/recommendUser`, {perPage: 3, page: ++this.recommendPage}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -341,6 +342,7 @@
             this.recommendLoading = 0
           }, 1000)
           this.recommendAsks = response.data.data.data
+          this.loading = 0
         })
       }
     },
