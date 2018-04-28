@@ -204,7 +204,7 @@
         })
       },
       toDetail (url) {
-        this.$router.pushPlus(url, 'list-detail-page')
+        this.$router.pushPlus(url, 'list-detail-two')
       },
       toResume (uuid) {
         if (!uuid) {
