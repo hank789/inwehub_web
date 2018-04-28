@@ -231,7 +231,9 @@ var UserAbility = () => {
     if (dialog) {
       dialog.getHtml('groups', {}, (html) => {
         alertSimple(html, '加入圈子', (num) => {
-          callback(num)
+          if (callback) {
+            callback(num)
+          }
           if (num.index === 0) {
             router.pushPlus('/group/detail/' + id)
           }
