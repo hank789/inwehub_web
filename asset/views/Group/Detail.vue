@@ -432,7 +432,7 @@
             this.$refs.allOptions.toggle()
           }
 
-          this.refreshPageData()
+          this.refreshData()
         })
       },
       chooseType (type) {
