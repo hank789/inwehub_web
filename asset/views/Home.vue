@@ -785,8 +785,8 @@
     to {transform: rotate(360deg);}
   }
   .move1 {
-    animation: myMove1 5s ease-in infinite;
-    -webkit-animation: myMove1 5s ease-in infinite;
+    animation: myMove1 1s ease-in infinite;
+    -webkit-animation: myMove1 1s ease-in infinite;
   }
 </style>
 <style>
