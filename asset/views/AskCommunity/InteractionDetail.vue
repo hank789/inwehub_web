@@ -338,6 +338,20 @@
             }
             this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
           }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.answerId,
+                'page_name': 'answer',
+                'page_title': this.ask.answer.is_supported ? 'support' : 'cancel',
+                'referrer_page': ''
+              }
+            )
+          }
           window.mui.toast(response.data.data.tip)
         })
       },

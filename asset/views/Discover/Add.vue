@@ -478,6 +478,20 @@
             return
           }
           window.mui.toast('发布成功！')
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:discover:publishSuccessfully',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.$route.fullPath,
+                'page_name': this.$route.name,
+                'page_title': this.$route.meta.title,
+                'referrer_page': ''
+              }
+            )
+          }
           this.resetData()
           this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
         })
