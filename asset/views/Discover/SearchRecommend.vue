@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeSearch :unread_count="unread_count"></HomeSearch>
+    <HomeSearch :unread_count="unread_count" :contact_id="contact_id"></HomeSearch>
     <div class="mui-content">
       <!--菜单-->
       <!--导航栏-->
@@ -354,7 +354,7 @@
   .mui-content{
     background: #ffffff;
   }
-  
+
   /*菜单*/
   /*菜单*/
   .menu{

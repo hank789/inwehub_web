@@ -27,6 +27,10 @@
       unread_count: {
         type: Number,
         default: 0
+      },
+      contact_id: {
+        type: Number,
+        default: 0
       }
     }
   }

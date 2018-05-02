@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeSearch :unread_count="unread_count"></HomeSearch>
+    <HomeSearch :unread_count="unread_count" :contact_id="contact_id"></HomeSearch>
     <div class="mui-content absolute" v-show="!loading">
       <!--search-->
       <!--search/chat/72-->
@@ -107,10 +107,10 @@
         <div class="line-river"></div>
         <template v-for="(item, index) in hot_groups">
           <div class="component-item-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
-            <div class="leftD">
+            <div class="left">
               <img class="lazyImg" v-lazy="item.logo"></img>
             </div>
-            <div class="rightD">
+            <div class="right">
               <div class="line1 text-line-1"><img :src="top(index)"/>{{item.name}}</div>
               <div class="line2 text-line-2">{{item.description}}</div>
               <div class="line3 text-line-1"><img :src="item.owner.avatar" @tap.stop.prevent="toAvatar(item.owner.uuid)"/><span class="group-user">{{item.owner.name}}</span><span class="line-pole"></span><span class="group-number">{{item.scores}}</span><span class="desc">/今日人气</span></div>
@@ -372,18 +372,6 @@
 </script>
 
 <style lang="less" scoped>
-  div,
-  span,
-  p,
-  ul,
-  li,
-  i,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
   .bot {
     position: absolute;
     right: 0;
@@ -605,216 +593,6 @@
   .mui-slider-item{
     height:3.626rem !important;
     overflow: hidden;
-  }
-
-
-  .line-river {
-    height: 0.026rem;
-    position: relative;
-  }
-  .line-river:after {
-    content: '';
-    position: absolute;
-    background: #dcdcdc;
-    height: 0.026rem;
-    left: 0.413rem;
-    right: 0.413rem;
-    transform:scaleY(0.6);
-    -webkit-transform: scaleY(0.6);
-  }
-  .line-river-big {
-    height: 0.266rem;
-    position: relative;
-    background: #F3F4F6;
-  }
-  .component-noticeBar {
-    position: relative;
-    background: url(../statics/images/laba@3x.png) no-repeat;
-    background-size: 0.546rem;
-    background-position: 0.413rem 0.266rem;
-    font-size: 0.373rem;
-    height: 1.04rem;
-    line-height: 1.04rem;
-    color: #444;
-  }
-  .component-noticeBar span {
-    margin-left: 1.146rem;
-  }
-  .component-title-home {
-    height: 1.173rem;
-    line-height: 1.173rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 0 0.413rem;
-  }
-  .component-title-home .left {
-    font-family: PingFangSC-Medium;
-    font-size: 0.426rem;
-    color: #444;
-  }
-  .component-title-home .right {
-    color: #03AEF9;
-    font-size: 0.373rem;
-  }
-  .component-title-home .right svg {
-    font-size: 0.493rem;
-    vertical-align: text-bottom;
-    margin-right: 0.186rem;
-    position: relative;
-    top:-0.026rem;
-  }
-  .component-item-group {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 0.386rem 0.426rem;
-    position: relative;
-  }
-  .component-item-group .leftD {
-    width: 2.453rem;
-    height: 2.44rem;
-  }
-  .component-item-group .leftD img {
-    width: inherit;
-    height: inherit;
-    border-radius: 0.106rem;
-  }
-  .component-item-group .rightD {
-    padding:0 0.28rem;
-    position: relative;
-    flex-grow:2;
-    overflow:hidden;
-  }
-  .component-item-group .rightD .line1 {
-    font-family: PingFangSC-Medium;
-    font-size: 0.373rem;
-  }
-  .component-item-group .rightD .line1 img {
-    width: 0.533rem;
-    vertical-align: text-top;
-    margin-right: 0.133rem;
-  }
-  .component-item-group .rightD .line2 {
-    padding-top: 0.133rem;
-    color: #808080;
-    line-height: 0.44rem;
-    font-size: 0.32rem;
-  }
-  .component-item-group .rightD .line3 {
-    width:100%;
-    position: absolute;
-    bottom: 0;
-  }
-  .component-item-group .rightD .line3 img {
-    width: 0.533rem;
-    height: 0.533rem;
-    border-radius: 50%;
-    vertical-align: text-bottom;
-    margin-right: 0.133rem;
-  }
-  .component-item-group .rightD .line3 .group-user {
-    font-size: 0.32rem;
-    color: #444;
-  }
-  .component-item-group .rightD .line3 .line-pole {
-    display: inline-block;
-    width: 0.026rem;
-    height: 0.293rem;
-    background: #dcdcdc;
-    margin: 0 0.24rem;
-    position: relative;
-    top: 0.026rem;
-  }
-  .component-item-group .rightD .line3 .group-number {
-    font-size: 0.373rem;
-    color: #235280;
-    position: relative;
-    top: 0.013rem;
-  }
-  .component-item-group .rightD .line3 span.desc {
-    color: #B4B4B6;
-    font-size: 0.32rem;
-    position: relative;
-    left: 0.053rem;
-  }
-  .component-item-ask-recommand {
-    padding: 0.333rem 0.426rem;
-  }
-  .component-item-ask-recommand .line1 label {
-    background: #A8DFF7;
-    color: #fff;
-    font-size: 0.32rem;
-    line-height: 0.44rem;
-    padding: 0.04rem 0.24rem;
-    border-radius: 1.333rem;
-    display: inline-block;
-    margin-right:0.133rem;
-  }
-  .component-item-ask-recommand .line2 {
-    margin: 0.266rem 0;
-    font-size: 0.373rem;
-    line-height: 0.52rem;
-    color: #444;
-  }
-  .component-item-ask-recommand .line3 {
-    vertical-align: middle;
-  }
-  .component-item-ask-recommand .line3 .guanzhu {
-    color: #235280;
-    font-size: 0.32rem;
-    position: relative;
-    vertical-align: inherit;
-  }
-  .component-item-ask-recommand .line3 .line-pole {
-    display: inline-block;
-    width: 0.026rem;
-    height: 0.293rem;
-    background: #dcdcdc;
-    margin: 0 0.253rem;
-    position: relative;
-    vertical-align: inherit;
-  }
-  .component-item-ask-recommand .line3 .users {
-    position: relative;
-    top: -0.026rem;
-    vertical-align: inherit;
-  }
-  .component-item-ask-recommand .line3 .users.users-1 {
-    margin-right: 0.133rem;
-  }
-  .component-item-ask-recommand .line3 .users.users-2 {
-    margin-right: 0;
-  }
-  .component-item-ask-recommand .line3 .users.users-3 {
-    margin-right: -0.133rem;
-  }
-  .component-item-ask-recommand .line3 .users img {
-    width: 0.586rem;
-    height: 0.586rem;
-    border: 0.053rem solid #fff;
-    border-radius: 50%;
-    vertical-align: inherit;
-  }
-  .component-item-ask-recommand .line3 .users img:nth-child(2) {
-    position: relative;
-    left: -0.133rem;
-  }
-  .component-item-ask-recommand .line3 .users img:nth-child(3) {
-    position: relative;
-    left: -0.266rem;
-  }
-  .component-item-ask-recommand .line3 .huida {
-    color: #235280;
-    font-size: 0.32rem;
-    position: relative;
-    vertical-align: inherit;
   }
 
   @keyframes myMove1 {

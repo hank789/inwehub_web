@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeSearch :unread_count="unread_count"></HomeSearch>
+    <HomeSearch :unread_count="unread_count" :contact_id="contact_id"></HomeSearch>
 
     <div class="mui-content feedWrapper">
       <!--search-->
