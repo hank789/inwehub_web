@@ -609,14 +609,14 @@
 
 
   .line-river {
-    height: 1px;
+    height: 0.026rem;
     position: relative;
   }
   .line-river:after {
     content: '';
     position: absolute;
     background: #dcdcdc;
-    height: 1px;
+    height: 0.026rem;
     left: 0.413rem;
     right: 0.413rem;
     transform:scaleY(0.6);
@@ -665,7 +665,7 @@
     vertical-align: text-bottom;
     margin-right: 0.186rem;
     position: relative;
-    top:-1px;
+    top:-0.026rem;
   }
   .component-item-group {
     display: -webkit-box;
@@ -755,7 +755,7 @@
     padding: 0.04rem 0.24rem;
     border-radius: 1.333rem;
     display: inline-block;
-    margin-right:5px;
+    margin-right:0.133rem;
   }
   .component-item-ask-recommand .line2 {
     margin: 0.266rem 0;
@@ -774,16 +774,16 @@
   }
   .component-item-ask-recommand .line3 .line-pole {
     display: inline-block;
-    width: 1px;
-    height: 11px;
+    width: 0.026rem;
+    height: 0.293rem;
     background: #dcdcdc;
-    margin: 0 9.5px;
+    margin: 0 0.253rem;
     position: relative;
     vertical-align: inherit;
   }
   .component-item-ask-recommand .line3 .users {
     position: relative;
-    top: -1px;
+    top: -0.026rem;
     vertical-align: inherit;
   }
   .component-item-ask-recommand .line3 .users.users-1 {

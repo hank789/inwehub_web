@@ -105,5 +105,8 @@
   transform: scaleY(.5);
   background-color: #dcdcdc;
 }
+
+.line-horizontal{position:relative;min-height:.027rem}
+.line-horizontal:after{position:absolute;right:0;bottom:0;left:0;height:.027rem;content:'';-webkit-transform:scaleY(.5);transform:scaleY(.5);background-color:#c8c7cc}
 </style>
 

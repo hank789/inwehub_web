@@ -251,4 +251,6 @@
     font-size: 1.013rem;
     color: #b4b4b6;
   }
+
+  .container-1-yuan span{margin-left:0.24rem;margin-left:.24rem;font-size:.373rem;color:#fff}.container-1-yuan span i{font-style:normal;color:#323232}.container-1-yuan.mui-navigate-right:after{color:#fff;font-size:.507rem}
 </style>
