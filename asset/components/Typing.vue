@@ -1,7 +1,7 @@
 <template>
     <span class="typing" :class="{ 'display-hidden': !typers.length }">
         <i class="text" v-if="typers.length === 1">
-             正在输入
+             {{ typers[0] }} 正在输入
         </i>
 
         <i class="text" v-if="typers.length === 2">
