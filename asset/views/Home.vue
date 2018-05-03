@@ -382,69 +382,16 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  @media (-webkit-device-pixel-ratio:2){
+    .bot{
+      transform: scaleY(1);
+    }
+  }
   .mui-content{
     background: #ffffff;
     bottom:1.333rem;
   }
-  /*search*/
-  /*.search{*/
-    /*width:92%;*/
-    /*height:0.906rem;*/
-    /*margin-left: 4%;*/
-    /*position: absolute;*/
-    /*top:0.053rem;*/
-    /*z-index: 2;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-between;*/
-    /*align-items: center;*/
-  /*}*/
-  /*.search-l{*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*position: relative;*/
-    /*justify-content: center;*/
-  /*}*/
-  /*.search-l svg{*/
-    /*font-size:0.666rem;*/
-    /*color: rgba(255,255,255,1);*/
-  /*}*/
-  /*.search-l p{*/
-    /*font-size:0.266rem;*/
-    /*color: rgba(255,255,255,1);*/
-    /*line-height: 0.373rem;*/
-    /*margin-bottom: 0.133rem;*/
-  /*}*/
-  /*.search-l i{*/
-    /*width:0.213rem;*/
-    /*height:0.213rem;*/
-    /*background: #FA4975;*/
-    /*border-radius: 50%;*/
-    /*position: absolute;*/
-    /*top: 0.16rem;*/
-    /*right: -0.266rem;*/
-  /*}*/
-  /*.search-r{*/
-    /*width: 77%;*/
-    /*height:100%;*/
-    /*background:rgba(255,255,255,1);*/
-    /*opacity:0.9477;*/
-    /*border-radius: 1.333rem;*/
-    /*font-size: 0.373rem;*/
-    /*color:rgba(200,200,200,1);*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-  /*}*/
-  /*.search-r svg{*/
-    /*font-size: 0.453rem;*/
-    /*color: rgba(68,68,68,1);*/
-    /*margin-left: 0.426rem;*/
-    /*margin-right: 0.16rem;*/
-  /*}*/
-  /*search*/
+
   .home-b{
     width: 100%;
     overflow: hidden;
@@ -463,6 +410,7 @@
     object-fit: cover;
   }
   .categoryMenu{
+    margin:0;
     width:100%;
     height:2.133rem;
     background: #ffffff;
@@ -487,9 +435,11 @@
     color:rgba(128,128,128,1);
     line-height:0.373rem;
     margin-top: 0.213rem;
+    margin-bottom:0;
   }
   /*精选推荐*/
   .recommend{
+    margin:0;
     width:100%;
     padding: 0 0.426rem;
     overflow: hidden;
@@ -626,44 +576,3 @@
     box-shadow: 0 0 0 0 rgba(3,174,249, .7);
   }
 </style>
-
-<!--<form class="mui-input-group search" >-->
-  <!--<div class="mui-input-row">-->
-    <!--<svg class="icon" aria-hidden="true">-->
-      <!--<use xlink:href="#icon-sousuo"></use>-->
-    <!--</svg>-->
-    <!--<input type="text" class="mui-input-clear" placeholder="搜内容、问答、圈子">-->
-  <!--</div>-->
-<!--</form>-->
-<!--.mui-input-group{-->
-<!--width:57%;-->
-<!--height:0.906rem;-->
-<!--position: absolute;-->
-<!--top: 0.213rem;-->
-<!--right: 4%;-->
-<!--z-index: 2;-->
-<!--background: #ffffff;-->
-<!--opacity:0.9477;-->
-<!--border-radius: 1.333rem ;-->
-<!--}-->
-<!--.mui-input-group input{-->
-<!--width:83%;-->
-<!--height:0.906rem;-->
-<!--line-height: 0.906rem;-->
-<!--padding: 0 0.8rem 0 0;-->
-<!--font-size:0.373rem;-->
-<!--color:rgba(68,68,68,1);-->
-<!--}-->
-<!--.mui-input-group svg{-->
-<!--font-size: 0.453rem;-->
-<!--color:rgba(68,68,68,1);-->
-<!--margin-left: 0.426rem;-->
-<!--}-->
-<!--<style>-->
-  <!--.search .mui-input-row .mui-input-clear ~ .mui-icon-clear{-->
-    <!--width:0.8rem;-->
-    <!--height: 0.8rem;-->
-    <!--top: 13%;-->
-    <!--text-align: left;-->
-  <!--}-->
-<!--</style>-->
