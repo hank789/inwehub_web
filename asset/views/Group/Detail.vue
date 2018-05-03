@@ -24,6 +24,8 @@
         <GroupsInfo
           :detail="detail"
           @allOptions="allOptions"
+          @openIm="openIm"
+          @closeIm="closeIm"
         ></GroupsInfo>
         <div class="gray"></div>
         <div class="menu">
@@ -167,7 +169,8 @@
           thumbUrl: '',
           shareName: ''
         },
-        isInGroup: false
+        isInGroup: false,
+        room_id: 0
       }
     },
     created () {
@@ -357,6 +360,42 @@
         } else {
           this.$refs.allOptions.toggle()
         }
+      },
+      openIm () {
+        var btnArray = ['取消', '确定']
+        var that = this
+        window.mui.confirm('确定要开启群聊吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/openIm`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                this.$router.replace('/groups')
+                return
+              }
+              that.room_id = response.data.data.room_id
+              window.mui.toast('群聊已开启')
+            })
+          }
+        })
+      },
+      closeIm () {
+        var btnArray = ['取消', '确定']
+        var that = this
+        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/closeIm`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                this.$router.replace('/groups')
+                return
+              }
+              that.room_id = 0
+              window.mui.toast('群聊已关闭')
+            })
+          }
+        })
       },
       getData () {
         this.id = parseInt(this.$route.params.id)

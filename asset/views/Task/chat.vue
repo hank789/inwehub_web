@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{name}}<typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing></h1>
+      <h1 class="mui-title">{{name}}</h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -63,6 +63,7 @@
           </template>
         </ul>
       </RefreshList>
+      <typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
     </div>
 
     <!--发送消息框-->
@@ -264,12 +265,26 @@
               return
             }
             this.chatRoomId = response.data.data.room_id
+            this.name = response.data.data.contact_name
+            window.Echo.private('chat.room.' + this.chatRoomId)
+          })
+        } else if (this.$route.params.room_id) {
+          postRequest(`im/getRoom`, {
+            room_id: this.$route.params.room_id
+          }).then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+            this.chatRoomId = response.data.data.id
+            this.name = response.data.data.source.name
             window.Echo.private('chat.room.' + this.chatRoomId)
           })
         }
       },
       prevSuccessCallback () {
-        this.name = this.$refs.RefreshList.getResponse().data.contact.name
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
