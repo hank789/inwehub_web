@@ -704,6 +704,10 @@ function AppInit (context) {
               // 聊天信息
               router.pushPlus('/chat/' + payload.object_id)
               break
+            case 'im_group_message':
+              // 群聊信息
+              router.pushPlus('/group/chat/' + payload.object_id)
+              break
             case 'invite_user_register':
               // 邀请用户注册成功
               router.pushPlus('/invitation/friends')

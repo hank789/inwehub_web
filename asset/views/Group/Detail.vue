@@ -24,8 +24,6 @@
         <GroupsInfo
           :detail="detail"
           @allOptions="allOptions()"
-          @openIm="openIm"
-          @closeIm="closeIm"
         ></GroupsInfo>
         <div class="gray"></div>
         <div class="menu">
@@ -169,8 +167,7 @@
           thumbUrl: '',
           shareName: ''
         },
-        isInGroup: false,
-        room_id: 0
+        isInGroup: false
       }
     },
     created () {
@@ -183,32 +180,53 @@
         return {id: this.id, type: this.search_type}
       },
       footerMenus () {
-        return [
-          {
-            icon: '#icon-tijiaowenzhang1',
-            text: '发分享',
-            number: 0,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-hudongwenda-',
-            text: '圈聊',
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: false
-          },
-          {
-            icon: '#icon-fenxiang',
-            text: '邀请加入',
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: true
-          }
-        ]
+        if (this.detail.room_id > 0) {
+          return [
+            {
+              icon: '#icon-tijiaowenzhang1',
+              text: '发分享',
+              number: 0,
+              disable: false,
+              rightLine: true,
+              isLight: false
+            },
+            {
+              icon: '#icon-hudongwenda-',
+              text: '圈聊',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: false
+            },
+            {
+              icon: '#icon-fenxiang',
+              text: '邀请加入',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            }
+          ]
+        } else {
+          return [
+            {
+              icon: '#icon-tijiaowenzhang1',
+              text: '发分享',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: false
+            },
+            {
+              icon: '#icon-fenxiang',
+              text: '邀请加入',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            }
+          ]
+        }
       }
     },
     components: {
@@ -234,7 +252,7 @@
             break
           case this.footerMenus[1].icon:
             // 圈聊
-            // todo 跳转到圈聊
+            this.toGroupChat()
             break
           case this.footerMenus[2].icon:
             // 邀请加入
@@ -314,6 +332,9 @@
         })
         this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
       },
+      toGroupChat () {
+        this.$router.pushPlus('/group/chat/' + this.detail.room_id)
+      },
       refreshData () {
         this.loading = 1
         this.getData()
@@ -392,9 +413,38 @@
           case '开放圈子群聊':
             this.$refs.allOptions.toggle()
             var btnArray = ['取消', '确定']
+            var that = this
             window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
               if (e.index === 1) {
-                 // todo 接后台接口
+                postRequest(`group/openIm`, {id: that.id}).then(response => {
+                  var code = response.data.code
+                  if (code !== 1000) {
+                    window.mui.toast(response.data.message)
+                    that.$router.replace('/groups')
+                    return
+                  }
+                  that.detail.room_id = response.data.data.room_id
+                  window.mui.toast('群聊已开启')
+                })
+              }
+            })
+            break
+          case '关闭圈子群聊':
+            this.$refs.allOptions.toggle()
+            var btnArray2 = ['取消', '确定']
+            var that2 = this
+            window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
+              if (e.index === 1) {
+                postRequest(`group/closeIm`, {id: that2.id}).then(response => {
+                  var code = response.data.code
+                  if (code !== 1000) {
+                    window.mui.toast(response.data.message)
+                    that2.$router.replace('/groups')
+                    return
+                  }
+                  that2.detail.room_id = 0
+                  window.mui.toast('群聊已关闭')
+                })
               }
             })
             break
@@ -414,48 +464,16 @@
       },
       allOptions () {
         if (this.detail.is_joined === 3) {
-          this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
+          if (this.detail.room_id > 0) {
+            this.allOptionSelects = ['圈成员管理', '关闭圈子群聊']
+          } else {
+            this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
+          }
           this.$refs.allOptions.toggle()
         } else {
           this.allOptionSelects = ['退出圈子']
           this.$refs.allOptions.toggle()
         }
-      },
-      openIm () {
-        var btnArray = ['取消', '确定']
-        var that = this
-        window.mui.confirm('确定要开启群聊吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            postRequest(`group/openIm`, {id: that.id}).then(response => {
-              var code = response.data.code
-              if (code !== 1000) {
-                window.mui.toast(response.data.message)
-                this.$router.replace('/groups')
-                return
-              }
-              that.room_id = response.data.data.room_id
-              window.mui.toast('群聊已开启')
-            })
-          }
-        })
-      },
-      closeIm () {
-        var btnArray = ['取消', '确定']
-        var that = this
-        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            postRequest(`group/closeIm`, {id: that.id}).then(response => {
-              var code = response.data.code
-              if (code !== 1000) {
-                window.mui.toast(response.data.message)
-                this.$router.replace('/groups')
-                return
-              }
-              that.room_id = 0
-              window.mui.toast('群聊已关闭')
-            })
-          }
-        })
       },
       getData () {
         this.id = parseInt(this.$route.params.id)

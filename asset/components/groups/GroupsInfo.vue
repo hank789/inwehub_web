@@ -70,12 +70,6 @@
     methods: {
       allOptions () {
         this.$emit('allOptions')
-      },
-      openIm () {
-        this.$emit('openIm')
-      },
-      closeIm () {
-        this.$emit('closeIm')
       }
     },
     mounted () {

@@ -108,7 +108,7 @@
       currentUser: getLocalUserInfo(),
       flag: true,
       chatRoomId: '',
-      chatUserId: '',
+      chatUserId: 0,
       maxImageCount: 1,
       images: [],
       isTyping: false,
@@ -660,7 +660,7 @@
   }
   .typingWrapper{
     position: absolute;
-    bottom:100px;
+    bottom:50px;
     text-align: center;
     width: 100%;
   }
