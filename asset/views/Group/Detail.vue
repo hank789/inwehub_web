@@ -198,7 +198,8 @@
             number: 0,
             disable: false,
             rightLine: false,
-            isLight: false
+            isLight: false,
+            isNew: true
           },
           {
             icon: '#icon-fenxiang',
