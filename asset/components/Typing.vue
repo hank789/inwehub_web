@@ -7,7 +7,7 @@
         <i class="text" v-if="typers.length === 2">
             {{ typers[0] }} and {{ typers[1] }} 正在输入
         </i>
-        <i class="text" v-else>
+        <i class="text" v-if="typers.length > 2">
             {{ typers.length }} 人正在输入
         </i>
 

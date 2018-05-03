@@ -199,7 +199,7 @@
             username: this.currentUser.name
           })
           this.isTyping = false
-        })
+        }, 3000)
       },
       showTime (prevtime, time) {
         if (prevtime) {
