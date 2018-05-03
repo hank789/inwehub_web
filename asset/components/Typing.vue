@@ -7,6 +7,9 @@
         <i class="text" v-if="typers.length === 2">
             {{ typers[0] }} and {{ typers[1] }} 正在输入
         </i>
+        <i class="text" v-else>
+            {{ typers.length }} 人正在输入
+        </i>
 
         <span class="dots">
             <span>.</span><span>.</span><span>.</span>
@@ -89,7 +92,7 @@
   }
 
   .typing {
-    margin-top: -0.693rem;
+    margin-bottom: 0.5rem;
     color: #717577;
   }
 

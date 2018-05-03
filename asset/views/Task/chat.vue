@@ -63,7 +63,9 @@
           </template>
         </ul>
       </RefreshList>
-      <typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
+      <div>
+        <typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
+      </div>
     </div>
 
     <!--发送消息框-->
