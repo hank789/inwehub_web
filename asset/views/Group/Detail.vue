@@ -23,7 +23,7 @@
         >
         <GroupsInfo
           :detail="detail"
-          @allOptions="allOptions"
+          @allOptions="allOptions()"
           @openIm="openIm"
           @closeIm="closeIm"
         ></GroupsInfo>
@@ -68,15 +68,6 @@
 
           <!---->
         </RefreshList>
-        <div class="invitation">
-          <p @tap.stop.prevent="toDiscoverAdd">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-tijiaowenzhang1"></use>
-            </svg>
-            发分享
-          </p>
-          <p @tap.stop.prevent="joinShare">邀请加入</p>
-        </div>
       </div>
 
 
@@ -104,7 +95,7 @@
     <Options
       ref="allOptions"
       :id="'allOptions'"
-      :options="['退出圈子']"
+      :options="allOptionSelects"
       @selectedItem="selectedItem"
     ></Options>
 
@@ -132,6 +123,13 @@
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
     ></commentTextarea>
+
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+      v-if="isInGroup"
+    ></FooterMenu>
+
   </div>
 </template>
 
@@ -150,6 +148,7 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
+  import FooterMenu from '../../components/FooterMenu.vue'
 
   export default {
     data () {
@@ -159,6 +158,7 @@
         search_type: 1,
         detail: null,
         loading: 1,
+        allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
         shareOption: {
@@ -181,6 +181,34 @@
       },
       nextOtherData () {
         return {id: this.id, type: this.search_type}
+      },
+      footerMenus () {
+        return [
+          {
+            icon: '#icon-tijiaowenzhang1',
+            text: '发分享',
+            number: 0,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-hudongwenda-',
+            text: '圈聊',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: false
+          },
+          {
+            icon: '#icon-fenxiang',
+            text: '邀请加入',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          }
+        ]
       }
     },
     components: {
@@ -190,13 +218,30 @@
       Options,
       Share,
       DiscoverShare,
-      commentTextarea
+      commentTextarea,
+      FooterMenu
     },
     props: {},
     watch: {
       '$route': 'refreshData'
     },
     methods: {
+      footerMenuClickedItem (item) {
+        switch (item.icon) {
+          case this.footerMenus[0].icon:
+            // 发分享
+            this.toDiscoverAdd()
+            break
+          case this.footerMenus[1].icon:
+            // 圈聊
+            // todo 跳转到圈聊
+            break
+          case this.footerMenus[2].icon:
+            // 邀请加入
+            this.joinShare()
+            break
+        }
+      },
       sendMessage (message) {
         var commentTarget = message.commentData
 
@@ -340,6 +385,19 @@
               this.$refs.itemOptions.toggle()
             })
             break
+          case '圈成员管理':
+            this.$refs.allOptions.toggle()
+            this.$router.pushPlus('/group/setting/' + this.id)
+            break
+          case '开放圈子群聊':
+            this.$refs.allOptions.toggle()
+            var btnArray = ['取消', '确定']
+            window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
+              if (e.index === 1) {
+                 // todo 接后台接口
+              }
+            })
+            break
         }
       },
       addGood (item, callback) {
@@ -356,8 +414,10 @@
       },
       allOptions () {
         if (this.detail.is_joined === 3) {
-          this.$router.pushPlus('/group/setting/' + this.id)
+          this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
+          this.$refs.allOptions.toggle()
         } else {
+          this.allOptionSelects = ['退出圈子']
           this.$refs.allOptions.toggle()
         }
       },

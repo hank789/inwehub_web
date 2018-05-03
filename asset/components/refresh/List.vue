@@ -201,12 +201,12 @@
           }
 
           if (list.length < this.perPage) {
-            if (window.mui('#refreshContainer').length) {
+            if (window.mui('#refreshContainer').length && window.mui('#refreshContainer').pullRefresh()) {
               window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true)
               window.mui('#refreshContainer').pullRefresh().setStopped(true)
             }
           } else {
-            if (window.mui('#refreshContainer').length) {
+            if (window.mui('#refreshContainer').length && window.mui('#refreshContainer').pullRefresh()) {
               window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
             }
           }
@@ -262,8 +262,10 @@
           this.loading = false
           if (window.mui('#refreshContainer').length) {
             setTimeout(() => {
-              window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
-              if (window.mui('#refreshContainer').length) {
+              if (window.mui('#refreshContainer').pullRefresh()) {
+                window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
+              }
+              if (window.mui('#refreshContainer').length && window.mui('#refreshContainer').pullRefresh()) {
                 window.mui('#refreshContainer').pullRefresh().refresh(true)
               }
             }, 1000)
