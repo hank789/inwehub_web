@@ -20,8 +20,8 @@
         class="chatListWrapper">
         <ul class="user" id="myData">
           <template v-for="(item, index) in list">
-            <!--用户 && chatUserId == item.user_id"-->
-            <li class="consumer" v-if="currentUser.user_id != item.user_id && chatUserId == item.user_id">
+            <!--用户-->
+            <li class="consumer" v-if="currentUser.user_id != item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
