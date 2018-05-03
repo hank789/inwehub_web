@@ -63,9 +63,6 @@
           </template>
         </ul>
       </RefreshList>
-      <div>
-        <typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
-      </div>
     </div>
 
     <!--发送消息框-->
@@ -85,6 +82,8 @@
                  @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
+
+    <typing class="typingWrapper" v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
 
   </div>
 </template>
@@ -659,7 +658,12 @@
     line-height: 0.453rem;
     padding: 0.213rem 0.4rem;
   }
-
+  .typingWrapper{
+    position: absolute;
+    bottom:100px;
+    text-align: center;
+    width: 100%;
+  }
 </style>
 <style>
   .chatImg .container-image{
