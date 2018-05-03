@@ -236,7 +236,7 @@
           name: obj.name
         }
         this.name = item.name
-        if (parseInt(this.chatUserId) === item.user_id) {
+        if (parseInt(this.chatRoomId) === obj.room_id) {
           this.list.push(item)
         } else {
           return false
