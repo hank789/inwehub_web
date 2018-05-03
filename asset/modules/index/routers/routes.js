@@ -448,6 +448,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 圈子聊天
+    path: '/group/chat/:room_id',
+    name: 'group-chat',
+    component: componets.Taskchat,
+    meta: {
+      title: '聊天',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的圈子
     path: '/group/my',
     name: 'group-my',
@@ -1394,7 +1407,7 @@ const routes = [
     name: 'inform-chat',
     component: componets.Taskchat,
     meta: {
-      title: '客服',
+      title: '聊天',
       wechatHideHeader: true,
       keepAlive: false
     },
