@@ -196,6 +196,7 @@
               number: 0,
               disable: false,
               rightLine: false,
+              isNew: true,
               isLight: false
             },
             {
