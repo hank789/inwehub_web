@@ -64,7 +64,7 @@
   .menu-footer:before {
     position: absolute;
     width: 100%;
-    top: -0.013rem;
+    top: 0;
     height: 0.026rem;
     content: '';
     -webkit-transform: scaleY(0.5);
