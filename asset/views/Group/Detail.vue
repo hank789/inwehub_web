@@ -196,7 +196,7 @@
               number: 0,
               disable: false,
               rightLine: false,
-              isNew: true,
+              isNew: this.detail.unread_group_im_messages,
               isLight: false
             },
             {
