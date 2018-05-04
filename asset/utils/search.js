@@ -6,7 +6,7 @@
 
 var searchTimer = null
 
-function searchText (text, callback) {
+function searchText (text, callback, timeout = 1000) {
   if (!text) {
     return
   }
@@ -18,7 +18,7 @@ function searchText (text, callback) {
   searchTimer = setTimeout(() => {
     console.log('search:' + text)
     callback(text)
-  }, 1000)
+  }, timeout)
 }
 
 export {

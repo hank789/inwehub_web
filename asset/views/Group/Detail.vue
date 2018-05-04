@@ -12,6 +12,7 @@
           ref="RefreshList"
           v-model="list"
           :api="'group/submissionList'"
+          :prevSuccessCallback="prevSuccessCallback"
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"
@@ -23,7 +24,7 @@
         >
         <GroupsInfo
           :detail="detail"
-          @allOptions="allOptions"
+          @allOptions="allOptions()"
         ></GroupsInfo>
         <div class="gray"></div>
         <div class="menu">
@@ -66,15 +67,6 @@
 
           <!---->
         </RefreshList>
-        <div class="invitation">
-          <p @tap.stop.prevent="toDiscoverAdd">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-tijiaowenzhang1"></use>
-            </svg>
-            发分享
-          </p>
-          <p @tap.stop.prevent="joinShare">邀请加入</p>
-        </div>
       </div>
 
 
@@ -102,7 +94,7 @@
     <Options
       ref="allOptions"
       :id="'allOptions'"
-      :options="['退出圈子']"
+      :options="allOptionSelects"
       @selectedItem="selectedItem"
     ></Options>
 
@@ -130,6 +122,13 @@
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
     ></commentTextarea>
+
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+      v-if="isInGroup"
+    ></FooterMenu>
+
   </div>
 </template>
 
@@ -148,6 +147,7 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
+  import FooterMenu from '../../components/FooterMenu.vue'
 
   export default {
     data () {
@@ -157,6 +157,7 @@
         search_type: 1,
         detail: null,
         loading: 1,
+        allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
         shareOption: {
@@ -178,6 +179,56 @@
       },
       nextOtherData () {
         return {id: this.id, type: this.search_type}
+      },
+      footerMenus () {
+        if (this.detail.room_id > 0) {
+          return [
+            {
+              icon: '#icon-tijiaowenzhang1',
+              text: '发分享',
+              number: 0,
+              disable: false,
+              rightLine: true,
+              isLight: false
+            },
+            {
+              icon: '#icon-hudongwenda-',
+              text: '圈聊',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isNew: this.detail.unread_group_im_messages,
+              isLight: false
+            },
+            {
+              icon: '#icon-fenxiang',
+              text: '邀请加入',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            }
+          ]
+        } else {
+          return [
+            {
+              icon: '#icon-tijiaowenzhang1',
+              text: '发分享',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: false
+            },
+            {
+              icon: '#icon-fenxiang',
+              text: '邀请加入',
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            }
+          ]
+        }
       }
     },
     components: {
@@ -187,13 +238,31 @@
       Options,
       Share,
       DiscoverShare,
-      commentTextarea
+      commentTextarea,
+      FooterMenu
     },
     props: {},
     watch: {
       '$route': 'refreshData'
     },
     methods: {
+      prevSuccessCallback () {
+        this.getData()
+      },
+      footerMenuClickedItem (item) {
+        switch (item.text) {
+          case '发分享':
+            this.toDiscoverAdd()
+            break
+          case '圈聊':
+            this.detail.unread_group_im_messages = 0
+            this.toGroupChat()
+            break
+          case '邀请加入':
+            this.joinShare()
+            break
+        }
+      },
       sendMessage (message) {
         var commentTarget = message.commentData
 
@@ -266,6 +335,9 @@
         })
         this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
       },
+      toGroupChat () {
+        this.$router.pushPlus('/group/chat/' + this.detail.room_id)
+      },
       refreshData () {
         this.loading = 1
         this.getData()
@@ -337,6 +409,48 @@
               this.$refs.itemOptions.toggle()
             })
             break
+          case '圈成员管理':
+            this.$refs.allOptions.toggle()
+            this.$router.pushPlus('/group/setting/' + this.id)
+            break
+          case '开放圈子群聊':
+            this.$refs.allOptions.toggle()
+            var btnArray = ['取消', '确定']
+            var that = this
+            window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
+              if (e.index === 1) {
+                postRequest(`group/openIm`, {id: that.id}).then(response => {
+                  var code = response.data.code
+                  if (code !== 1000) {
+                    window.mui.toast(response.data.message)
+                    that.$router.replace('/groups')
+                    return
+                  }
+                  that.detail.room_id = response.data.data.room_id
+                  window.mui.toast('群聊已开启')
+                })
+              }
+            })
+            break
+          case '关闭圈子群聊':
+            this.$refs.allOptions.toggle()
+            var btnArray2 = ['取消', '确定']
+            var that2 = this
+            window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
+              if (e.index === 1) {
+                postRequest(`group/closeIm`, {id: that2.id}).then(response => {
+                  var code = response.data.code
+                  if (code !== 1000) {
+                    window.mui.toast(response.data.message)
+                    that2.$router.replace('/groups')
+                    return
+                  }
+                  that2.detail.room_id = 0
+                  window.mui.toast('群聊已关闭')
+                })
+              }
+            })
+            break
         }
       },
       addGood (item, callback) {
@@ -353,8 +467,14 @@
       },
       allOptions () {
         if (this.detail.is_joined === 3) {
-          this.$router.pushPlus('/group/setting/' + this.id)
+          if (this.detail.room_id > 0) {
+            this.allOptionSelects = ['圈成员管理', '关闭圈子群聊']
+          } else {
+            this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
+          }
+          this.$refs.allOptions.toggle()
         } else {
+          this.allOptionSelects = ['退出圈子']
           this.$refs.allOptions.toggle()
         }
       },

@@ -4,7 +4,7 @@
       <use xlink:href="#icon-dianzan1"></use>
     </svg><span v-for="(item, index) in supportList" @tap.stop.prevent="toResume(item.uuid)">{{item.name}}</span><span v-if="supportNumber > supportList.length">等{{supportNumber}}人</span>
     </div>
-    <div class="line-horizontal padding-5-0-5-0" v-if="commentNumber && supportNumber"></div>
+    <div class="line-horizontal padding-5-0" v-if="commentNumber && supportNumber"></div>
     <div class="container-comments" :class="{'padding-0': parseInt(supportNumber) === 0}" v-if="commentNumber">
       <template v-for="(comment, index) in commentList">
         <div class="comment text-line-5"  @tap.stop.prevent="commentIt(comment.id, comment.owner.name, commentList)">
@@ -105,5 +105,8 @@
   transform: scaleY(.5);
   background-color: #dcdcdc;
 }
+
+.line-horizontal{position:relative;min-height:.027rem}
+.line-horizontal:after{position:absolute;right:0;bottom:0;left:0;height:.027rem;content:'';-webkit-transform:scaleY(.5);transform:scaleY(.5);background-color:#c8c7cc}
 </style>
 

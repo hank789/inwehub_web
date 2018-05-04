@@ -593,10 +593,10 @@
     color: #9b9b9b;
   }
   #discoverAddJeditor .textarea-wrapper .quill-editor {
-    height: 5.333rem;
+    height: 4.8rem;
   }
   #discoverAddJeditor .quill-editor .ql-container {
-    height: 5.333rem;
+    height: 4.8rem;
     font-size: 0.373rem;
     color: #9b9b9b;
   }

@@ -704,6 +704,10 @@ function AppInit (context) {
               // 聊天信息
               router.pushPlus('/chat/' + payload.object_id)
               break
+            case 'im_group_message':
+              // 群聊信息
+              router.pushPlus('/group/chat/' + payload.object_id)
+              break
             case 'invite_user_register':
               // 邀请用户注册成功
               router.pushPlus('/invitation/friends')
@@ -766,6 +770,12 @@ function AppInit (context) {
             setIncBadgeNumber()
 
             console.log('接收到通知:' + payload.title)
+            // 以下信息如果当前用户在页面上旧不通知了
+            switch (payload.object_type) {
+              case 'im_group_message':
+                // 群聊信息
+                return
+            }
             context.$parent.$refs.MessageComponent.show(payload.title, () => {
               noticeTo(payload)
             })

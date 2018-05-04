@@ -65,6 +65,7 @@
       },
       selectItem (item) {
         if (!this.from) {
+          item.unread_count = 0
           this.$router.pushPlus('/group/detail/' + item.id)
           return
         }

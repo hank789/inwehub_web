@@ -3,7 +3,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{name}}<typing v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing></h1>
+      <h1 class="mui-title">{{name}}</h1>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -20,8 +20,8 @@
         class="chatListWrapper">
         <ul class="user" id="myData">
           <template v-for="(item, index) in list">
-            <!--用户 && chatUserId == item.user_id"-->
-            <li class="consumer" v-if="currentUser.user_id != item.user_id && chatUserId == item.user_id">
+            <!--用户-->
+            <li class="consumer" v-if="currentUser.user_id != item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
                 <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
@@ -83,6 +83,8 @@
                  :ImageMaximum="maxImageCount"
     ></uploadImage>
 
+    <typing class="typingWrapper" v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
+
   </div>
 </template>
 
@@ -106,7 +108,7 @@
       currentUser: getLocalUserInfo(),
       flag: true,
       chatRoomId: '',
-      chatUserId: '',
+      chatUserId: 0,
       maxImageCount: 1,
       images: [],
       isTyping: false,
@@ -197,7 +199,7 @@
             username: this.currentUser.name
           })
           this.isTyping = false
-        })
+        }, 3000)
       },
       showTime (prevtime, time) {
         if (prevtime) {
@@ -233,8 +235,7 @@
           uuid: obj.uuid,
           name: obj.name
         }
-        this.name = item.name
-        if (parseInt(this.chatUserId) === item.user_id) {
+        if (parseInt(this.chatRoomId) === obj.room_id) {
           this.list.push(item)
         } else {
           return false
@@ -264,12 +265,26 @@
               return
             }
             this.chatRoomId = response.data.data.room_id
+            this.name = response.data.data.contact_name
+            window.Echo.private('chat.room.' + this.chatRoomId)
+          })
+        } else if (this.$route.params.room_id) {
+          postRequest(`im/getRoom`, {
+            room_id: this.$route.params.room_id
+          }).then(response => {
+            var code = response.data.code
+
+            if (code !== 1000) {
+              window.mui.alert(response.data.message)
+              return
+            }
+            this.chatRoomId = response.data.data.id
+            this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
           })
         }
       },
       prevSuccessCallback () {
-        this.name = this.$refs.RefreshList.getResponse().data.contact.name
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
           setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
@@ -347,7 +362,7 @@
             text: this.comment,
             contact_id: this.chatUserId,
             room_id: this.chatRoomId
-          }).then(response => {
+          }, false).then(response => {
             var code = response.data.code
 
             if (code !== 1000) {
@@ -642,7 +657,12 @@
     line-height: 0.453rem;
     padding: 0.213rem 0.4rem;
   }
-
+  .typingWrapper{
+    position: absolute;
+    bottom:1.333rem;
+    text-align: center;
+    width: 100%;
+  }
 </style>
 <style>
   .chatImg .container-image{

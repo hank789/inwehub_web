@@ -5,7 +5,7 @@
       <h1 class="mui-title">通知</h1>
       <a class="mui-icon mui-pull-right" @tap.stop.prevent="allRead()">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gou"></use>
+          <use xlink:href="#icon-yidu"></use>
         </svg>
       </a>
     </header>
