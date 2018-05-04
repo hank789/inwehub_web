@@ -246,17 +246,14 @@
     },
     methods: {
       footerMenuClickedItem (item) {
-        switch (item.icon) {
-          case this.footerMenus[0].icon:
-            // 发分享
+        switch (item.text) {
+          case '发分享':
             this.toDiscoverAdd()
             break
-          case this.footerMenus[1].icon:
-            // 圈聊
+          case '圈聊':
             this.toGroupChat()
             break
-          case this.footerMenus[2].icon:
-            // 邀请加入
+          case '邀请加入':
             this.joinShare()
             break
         }
