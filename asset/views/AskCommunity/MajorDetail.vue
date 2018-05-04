@@ -80,10 +80,6 @@
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
         </div>
-
-        <div class="buttonWrapper iNeedAskWrapper">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toAsk()">我也要提问</button>
-        </div>
       </div>
     </div>
 
@@ -454,6 +450,7 @@
   }
 
   .help {
+    padding-bottom:0.4rem;
     font-size: 0.373rem;
     background: #fff;
   }
