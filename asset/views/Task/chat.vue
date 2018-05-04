@@ -279,7 +279,7 @@
               return
             }
             this.chatRoomId = response.data.data.id
-            this.name = response.data.data.source.name
+            this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
           })
         }
