@@ -1586,3 +1586,8 @@ a {
 .mui-popover.mui-popover-action .mui-table-view{
   color:#03AEF9;
 }
+
+.message .textToLink p{
+  margin:0;
+  padding:0;
+}
