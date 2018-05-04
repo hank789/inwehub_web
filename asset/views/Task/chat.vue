@@ -235,7 +235,6 @@
           uuid: obj.uuid,
           name: obj.name
         }
-        this.name = item.name
         if (parseInt(this.chatRoomId) === obj.room_id) {
           this.list.push(item)
         } else {
