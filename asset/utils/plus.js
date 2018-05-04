@@ -770,6 +770,12 @@ function AppInit (context) {
             setIncBadgeNumber()
 
             console.log('接收到通知:' + payload.title)
+            // 以下信息如果当前用户在页面上旧不通知了
+            switch (payload.object_type) {
+              case 'im_group_message':
+                // 群聊信息
+                return
+            }
             context.$parent.$refs.MessageComponent.show(payload.title, () => {
               noticeTo(payload)
             })
