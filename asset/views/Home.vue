@@ -392,6 +392,10 @@
     bottom:1.333rem;
   }
 
+  .w414-3 .mui-content{
+    bottom:50px !important;
+  }
+
   .home-b{
     width: 100%;
     overflow: hidden;
