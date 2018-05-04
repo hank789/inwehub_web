@@ -362,7 +362,7 @@
             text: this.comment,
             contact_id: this.chatUserId,
             room_id: this.chatRoomId
-          }).then(response => {
+          }, false).then(response => {
             var code = response.data.code
 
             if (code !== 1000) {
