@@ -251,6 +251,7 @@
             this.toDiscoverAdd()
             break
           case '圈聊':
+            this.detail.unread_group_im_messages = 0
             this.toGroupChat()
             break
           case '邀请加入':
