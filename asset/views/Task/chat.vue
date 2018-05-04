@@ -659,7 +659,7 @@
   }
   .typingWrapper{
     position: absolute;
-    bottom:50px;
+    bottom:1.333rem;
     text-align: center;
     width: 100%;
   }

@@ -21,50 +21,51 @@
             :isExpert="detail.owner.is_expert?1:0"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
-          <!--删除按钮-->
+
           <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
             删除
           </div>
-        </div>
 
-        <div class="discoverContentWrapper">
-          <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-            <!--<span class="tags" v-for="(tag, index) in detail.tags" v-if="detail.tags.length">#{{tag.name}}</span>-->
-            <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+          <div class="discoverContentWrapper">
+            <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+
+              <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+            </div>
+
+            <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
+            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+              <template v-for="(image, index) in detail.data.img">
+                <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                     :data-preview-group="1"/>
+              </template>
+            </div>
+
+            <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
+                 @tap.stop.prevent="goArticle(detail)">
+              <img class="lazyImg" v-lazy="detail.data.img"/>
+            </div>
           </div>
 
-          <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-          <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
-            <template v-for="(image, index) in detail.data.img">
-              <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
-                   :data-preview-group="1"/>
-            </template>
-          </div>
-
-          <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
-               @tap.stop.prevent="goArticle(detail)">
-            <img class="lazyImg" v-lazy="detail.data.img"/>
-          </div>
+          <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
+               @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
         </div>
 
-        <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
-             @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
-        </div>
-
-        <div class="timeContainer">
-          <span>{{detail.views}}浏览</span>
-          <span>
+          <div class="timeContainer">
+            <span>{{detail.views}}浏览</span>
+            <span>
           <timeago :since="timeago(detail.created_at)" :auto-update="60">
           </timeago>
         </span>
-          <span>著作权归作者所有</span>
+            <span>著作权归作者所有</span>
+          </div>
+          <div class="address" v-show="detail.data.current_address_name">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dingwei1"></use>
+            </svg>
+            <span>{{detail.data.current_address_name}}</span>
+          </div>
         </div>
-        <div class="address" v-show="detail.data.current_address_name">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-dingwei1"></use>
-          </svg>
-          <span>{{detail.data.current_address_name}}</span>
-        </div>
+
         <div class="river"></div>
         <!--圈子信息-->
         <div class="groupsList" v-if="detail.group !== null">
@@ -549,7 +550,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .detail-discover {
-    padding-bottom: 0;
+    padding-bottom: 0.133rem;
     margin-top: 0 !important;
   }
 
@@ -586,7 +587,7 @@
     width: 100%;
     font-size: 0.32rem;
     color: #B4B4B6;
-    padding: 0 0.4rem 0.333rem;
+    padding: 0 0.4rem;
     background: #fff;
   }
 
@@ -596,11 +597,10 @@
 
   .address {
     width: 100%;
-    padding: 0 0.4rem;
+    padding: 0.133rem 0.4rem 0;
     background: #fff;
     font-size: 0.32rem;
     color: #808080;
-    margin-top: -0.106rem;
   }
 
   .statistics {
