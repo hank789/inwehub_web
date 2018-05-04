@@ -12,6 +12,7 @@
           ref="RefreshList"
           v-model="list"
           :api="'group/submissionList'"
+          :prevSuccessCallback="prevSuccessCallback"
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"
@@ -245,6 +246,9 @@
       '$route': 'refreshData'
     },
     methods: {
+      prevSuccessCallback () {
+        this.getData()
+      },
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '发分享':
