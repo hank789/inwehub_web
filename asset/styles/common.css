@@ -1582,3 +1582,7 @@ a {
 .mui-ellipsis-2{
   word-break:break-all;
 }
+
+.mui-popover.mui-popover-action .mui-table-view{
+  color:#03AEF9;
+}
