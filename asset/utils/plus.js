@@ -481,13 +481,13 @@ function AppPageInit (context) {
         router.replace(url, () => {
           window.mui.fire(ws, 'autoHeight', true)
           if (currentUrl === url || (currentUrl === '/home' && url === '/home?refresh=1')) {
-            window.mui.fire(ws, 'refreshPageData', true)
+            window.mui.fire(ws, 'refreshPageData', {type: 'forward'})
           }
           setWebviewNewUrl()
         }, () => {
           window.mui.fire(ws, 'autoHeight', true)
           if (currentUrl === url) {
-            window.mui.fire(ws, 'refreshPageData', true)
+            window.mui.fire(ws, 'refreshPageData', {type: 'forward'})
           }
           setWebviewNewUrl()
         })

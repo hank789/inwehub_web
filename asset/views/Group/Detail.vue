@@ -87,7 +87,8 @@
         <div class="join wait" v-if="detail.audit_status === 0">圈子审核中</div>
         <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
         <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
-        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 2">审核不通过</div>
+        <!--审核不通过-->
+        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
       </div>
     </div>
 
@@ -243,7 +244,7 @@
     },
     props: {},
     watch: {
-      '$route': 'refreshData'
+      '$route': 'refreshPageData'
     },
     methods: {
       prevSuccessCallback () {
@@ -338,7 +339,11 @@
       toGroupChat () {
         this.$router.pushPlus('/group/chat/' + this.detail.room_id)
       },
-      refreshData () {
+      refreshPageData (param) {
+        if (param && param.type && param.type === 'back') {
+          return
+        }
+
         this.loading = 1
         this.getData()
       },
@@ -552,7 +557,7 @@
             this.$refs.allOptions.toggle()
           }
 
-          this.refreshData()
+          this.refreshPageData()
         })
       },
       chooseType (type) {
