@@ -1445,56 +1445,6 @@ a {
   border-radius: 0.106rem;
 }
 
-
-/* iphone-plus 适配底部 */
-.w414-3 #Footer .mui-bar-tab{
-  height:50px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .mui-bar-tab .mui-tab-item{
-  height:50px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .oneIcon{
-  font-size:23px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .twoIcon{
-  font-size:23px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .threeIcon{
-  font-size:27px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .fourIcon{
-  font-size:24px !important; /* px不转换 */
-}
-
-.w414-3 #Footer .mui-bar-tab .mui-tab-item.mui-active:before{
-  width: 4px; /* px不转换 */
-  height: 4px; /* px不转换 */
-  bottom: 8px; /* px不转换 */
-  margin-left: -2px; /* px不转换 */
-  border-radius: 2px; /* px不转换 */
-}
-
-.w414-3 #Footer .askWrapper .askPlus .askImgBg{
-  margin-left: -26.5px; /* px不转换 */
-  width: 53px; /* px不转换 */
-  height: 53px; /* px不转换 */
-  border-radius: 53px; /* px不转换 */
-}
-
-.w414-3 #Footer .askWrapper .askPlus .askImg{
-  top: 6px; /* px不转换 */
-  margin-left: -20px; /* px不转换 */
-  width: 40px; /* px不转换 */
-  height: 40px; /* px不转换 */
-  background-size: 35px 35px; /* px不转换 */
-}
-/* iphone-plus 适配底部 end */
-
 .mui-bar-dark .mui-btn-link, .mui-bar-nav .mui-btn-link{
   color:#3c3e44 !important;
 }

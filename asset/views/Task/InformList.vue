@@ -12,8 +12,6 @@
     <!--导航栏-->
 
     <div class="mui-content">
-      <div class="mui-scroll-wrapper">
-        <div class="content">
           <!--内容区域-->
           <RefreshList
             ref="RefreshList"
@@ -118,8 +116,6 @@
               </ul>
           </RefreshList>
         </div>
-      </div>
-    </div>
     <!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
 
     <Options
@@ -296,18 +292,14 @@
     background: #FFFFFF;
   }
   /*内容区域*/
-  .content {
-    margin-top: 1.2rem;
-  }
-
-  .content ul li {
+  .mui-content ul li {
     width: 100%;
     height: 1.6rem;
     padding: 0 0.426rem;
     position: relative;
   }
 
-  .content ul li img {
+  .mui-content ul li img {
     width: 1.12rem;
     height: 1.12rem;
     margin-top: 0.266rem;
@@ -315,13 +307,13 @@
   }
 
 
-  .content ul li p {
+  .mui-content ul li p {
     float: left;
     margin-top: 0.266rem;
     margin-left: 0.32rem;
   }
 
-  .content ul li a {
+  .mui-content ul li a {
     position: absolute;
     top: 0.266rem;
     right: 0.426rem;
@@ -329,24 +321,24 @@
     color: #c8c8c8;
   }
 
-  .content ul li p span:nth-of-type(1) {
+  .mui-content ul li p span:nth-of-type(1) {
     display: block;
     font-size: 0.426rem;
     color: #444444;
   }
 
-  .content ul li p {
+  .mui-content ul li p {
     width: 81%;
   }
 
-  .content ul li p span:nth-of-type(2) {
+  .mui-content ul li p span:nth-of-type(2) {
     display: block;
     width: 100%;
     height: 0.48rem;
     font-size: 0.346rem;
     color: #808080;
   }
-  .content ul li:nth-last-of-type(1) i{
+  .mui-content ul li:nth-last-of-type(1) i{
     display: none;
   }
   .message {
@@ -382,7 +374,7 @@
     border-radius: 50%;
   }
   /*客服头像方形*/
-  .content ul li:nth-of-type(5) img{
+  .mui-content ul li:nth-of-type(5) img{
     border-radius: 0.266rem;
   }
 
