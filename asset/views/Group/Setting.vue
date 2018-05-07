@@ -33,7 +33,7 @@
                  </div>
                  <div class="fouce" v-if="item.audit_status === 0" @tap.stop.prevent="pass(item)">通过</div>
                  <div class="fouce space" v-if="item.audit_status === 0" @tap.stop.prevent="noPass(item)">拒绝</div>
-                 <div class="fouce grey" v-if="item.audit_status === 1">已通过</div>
+                 <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="moveOut(item, index)">移除</div>
                  <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
                  <i class="bot"></i>
                </li>
@@ -47,11 +47,13 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import { getLocalUserId } from '../../utils/user'
 
   export default {
     data () {
       return {
         id: null,
+        localUserId: getLocalUserId(),
         list: []
       }
     },
@@ -94,6 +96,27 @@
 
             item.audit_status = 2
           })
+      },
+      moveOut (item, index) {
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
+          if (e.index === 1) {
+            postRequest('group/removeMember', {
+              id: this.id,
+              user_id: item.user_id
+            })
+              .then(response => {
+                var code = response.data.code
+
+                if (code !== 1000) {
+                  window.mui.toast(response.data.message)
+                  return
+                }
+
+                this.list.splice(index, 1)
+              })
+          }
+        })
       },
       refreshPageData () {
         this.getData()
