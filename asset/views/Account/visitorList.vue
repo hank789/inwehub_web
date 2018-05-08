@@ -13,6 +13,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :prevSuccessCallback="prevSuccessCallback"
+        :nextSuccessCallback="nextSuccessCallback"
         class="listWrapper">
           <div class="component-card">
             <div class="number">{{hot_number}}</div>
@@ -25,7 +26,7 @@
           <div class="line-river"></div>
           <div class="container-list-people">
             <div class="item" v-for="(item, index) in list">
-              <div class="component-imageAndText">
+              <div class="component-imageAndText" @tap.stop.prevent="toResume(item.uuid)">
                 <div class="imageWrapper"><img :src="item.user_avatar_url"></div>
                 <div class="textWrapper">
                   <div class="line-1 text-line-1">{{item.user_name}}</div>
@@ -33,17 +34,18 @@
                 </div>
                 <div class="time">{{item.visited_time}}</div>
               </div>
-              <div class="line-river"></div>
+              <div class="line-river" v-if="index !== list.length-1 || localUserLevel < 4"></div>
             </div>
           </div>
-          <div class="component-button-empty margin-13-15"><span>查看所有访客</span></div>
+          <div class="component-button-empty" v-show="localUserLevel < 4" @tap.stop.prevent="seeAll"><span>查看所有访客</span></div>
       </RefreshList>
     </div>
   </div>
 </template>
 <script>
-  import { getLocalUuid } from '../../utils/user'
+  import { getLocalUuid, getLocalUserLevel } from '../../utils/user'
   import RefreshList from '../../components/refresh/List.vue'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     components: {
@@ -51,6 +53,7 @@
     },
     data () {
       return {
+        localUserLevel: getLocalUserLevel(),
         hot_number: 0,
         list: [],
         prevOtherData: {
@@ -60,14 +63,47 @@
     },
     created () {},
     methods: {
+      seeAll () {
+        if (this.localUserLevel < 4) {
+          userAbility.jumpJudgeGrade(this)
+        }
+      },
+      toResume (uuid) {
+        userAbility.jumpToResume(uuid, this)
+      },
       prevSuccessCallback () {
+        if (this.localUserLevel < 4) {
+          var len = this.$refs.RefreshList.list.length >= 3 ? 3 : this.$refs.RefreshList.list.length
+          this.$refs.RefreshList.list = this.$refs.RefreshList.list.slice(0, len)
+        }
         this.hot_number = this.$refs.RefreshList.getResponse().data.hot_number
+      },
+      nextSuccessCallback () {
+        if (this.localUserLevel < 4) {
+          this.$refs.RefreshList.list = this.$refs.RefreshList.list.slice(0, 3)
+        }
       }
     }
   }
 </script>
 
 <style scoped>
+  @media (-webkit-device-pixel-ratio: 2) {
+    .line-river {
+      height: 1px !important; /* px不转换 */} }
+
+  .line-river {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 0.5px; /* px不转换 */
+    position: relative;
+    width: 100%;
+    background-color: #dcdcdc;
+    overflow: hidden; }
+  .line-river:after{
+    display: none;
+  }
   .mui-content{
     background:#fff;
   }
@@ -153,4 +189,8 @@
 
   .container-list-people .item {
     padding: 10px 16px 0; }
+
+  .component-button-empty{
+    margin-top:30px;
+  }
 </style>
