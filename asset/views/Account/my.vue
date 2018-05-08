@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content">
       <div class="my-top">
-        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片 {{account_info_complete_percent}}%</div>
+        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/resume')">编辑名片 {{account_info_complete_percent}}%</div>
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
