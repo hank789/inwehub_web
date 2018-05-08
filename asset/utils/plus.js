@@ -804,6 +804,26 @@ function openUrlByUrl (href) {
   }
 }
 
+/**
+ * 获取手机联系人
+ */
+function getContacts (successCallback, failCallback) {
+  window.mui.plusReady(function () {
+    window.plus.contacts.getAddressBook(window.plus.contacts.ADDRESSBOOK_PHONE, function (addressbook) {
+      addressbook.find(['displayName', 'phoneNumbers'], function (contacts) {
+        console.log('getContacts Success:' + JSON.stringify({contacts: contacts}))
+        successCallback(contacts)
+      }, function (e) {
+        failCallback(e)
+        console.error('addressbook.find failed:' + e.message)
+      }, {multiple: true})
+    }, function (e) {
+      failCallback(e)
+      console.error('Get address book failed:' + e.message)
+    })
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -830,5 +850,6 @@ export {
   AppPageInit,
   setClipboardText,
   lockOrientation,
-  openUrlByUrl
+  openUrlByUrl,
+  getContacts
 }
