@@ -294,7 +294,6 @@
     border-radius: 0.4rem;
     line-height: 0.4rem;
     right: 0;
-    top: 5px;
   }
 
   .threeIcon {

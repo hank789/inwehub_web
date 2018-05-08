@@ -296,7 +296,7 @@
     font-size: 11px; /* px不转换 */
     color: #808080;
     position: absolute;
-    bottom: 0px; }
+    bottom: 0rem; }
   .container-footer .menu .iconWrapper {
     position: absolute;
     top: 5px; /* px不转换 */
