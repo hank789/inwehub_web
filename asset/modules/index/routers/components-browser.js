@@ -182,6 +182,7 @@ const Hongbao = () => import(/* webpackChunkName: "Hongbao" */ '../../../views/H
 const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
+const Visitor = () => import(/* webpackChunkName: "Visitor" */ '../../../views/Account/visitorList.vue')
 
 export {
   Login,
@@ -361,5 +362,6 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  Visitor
 }

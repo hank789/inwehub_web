@@ -674,6 +674,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 我的人气
+    path: '/my/visitors',
+    name: 'my-visitors',
+    meta: {
+      title: '我的人气',
+      wechatHideHeader: true
+    },
+    component: componets.Visitor,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 选择标签
     path: '/selecttags',
     name: 'selecttags',

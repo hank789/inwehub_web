@@ -176,6 +176,7 @@ import Hongbao from '../../../views/Hongbao.vue'
 import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
+import Visitor from '../../../views/Account/visitorList.vue'
 
 export {
   Login,
@@ -355,5 +356,6 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  Visitor
 }
