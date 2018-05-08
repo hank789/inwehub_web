@@ -87,7 +87,7 @@ function alertAskCommunityQuestioningSuccess (context, coins, credits, ask) {
       dialogObj.getHtml('ask_b', {}, (contenthtml) => {
         alertSkyTwo(titlehtml, contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
           if (num.index === 0) {
-            context.$router.pushPlus('/contact/' + ask.id + '?username=' + ask.user_name + '&title=' + ask.description + '&answernum=' + ask.answer_num + '&followednum=' + ask.follow_num, 'list-detail-page')
+            context.$router.pushPlus('/RecommendInvitation/' + ask.id + '?username=' + ask.user_name + '&title=' + ask.description + '&answernum=' + ask.answer_num + '&followednum=' + ask.follow_num, 'list-detail-page')
           }
         }, true)
       })
