@@ -109,7 +109,7 @@
   }
   .component-card {
     position: relative;
-    height: 144px;
+    height: 3.84rem;
     background: linear-gradient(-135.1deg, #07d6fc, #03aef9);
     width: 100%;
     text-align: center; }
@@ -122,75 +122,75 @@
     height: 100%;
     background-image: url("../../statics/images/baisebolang@3x.png");
     background-size: contain;
-    background-position: left 72px;
+    background-position: left 1.92rem;
     background-repeat: no-repeat;
     opacity: 0.16; }
   .component-card .number {
     font-family: Tahoma-Bold;
-    font-size: 34px;
-    line-height: 41px;
-    padding-top: 16px;
+    font-size: 0.906rem;
+    line-height: 1.093rem;
+    padding-top: 0.426rem;
     color: #fff; }
   .component-card .label {
     display: inline-block;
-    width: 68px;
-    height: 19px;
-    font-size: 12px;
-    line-height: 19px;
+    width: 1.813rem;
+    height: 0.506rem;
+    font-size: 0.32rem;
+    line-height: 0.506rem;
     background: #235280;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     color: #A8DFF7;
-    margin-top: 4px; }
+    margin-top: 0.106rem; }
   .component-card .desc {
-    margin-top: 7px;
-    font-size: 12px;
+    margin-top: 0.186rem;
+    font-size: 0.32rem;
     color: #fff;
-    line-height: 17px; }
+    line-height: 0.453rem; }
 
   .component-imageAndText {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding-bottom: 5px;
+    padding-bottom: 0.133rem;
     position: relative;}
   .component-imageAndText .imageWrapper img {
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%; }
   .component-imageAndText .textWrapper {
     -webkit-box-flex: 2;
     -ms-flex-positive: 2;
     flex-grow: 2;
-    padding: 5px 0 0 8px;
-    line-height: 18px; }
+    padding: 0.133rem 0 0 0.213rem;
+    line-height: 0.48rem; }
   .component-imageAndText .textWrapper .line-1 {
-    max-width: 223px;
+    max-width: 5.946rem;
     color: #444444;
-    font-size: 14px; }
+    font-size: 0.373rem; }
   .component-imageAndText .textWrapper .line-2 {
     color: #B4B4B6;
-    font-size: 13px; }
+    font-size: 0.346rem; }
   .component-imageAndText .time {
-    font-size: 6px;
+    font-size: 0.16rem;
     color: #235280;
     position: absolute;
     right: 0;
-    top: 3px; }
+    top: 0.08rem; }
 
   .component-button-empty {
     text-align: center; }
   .component-button-empty span {
     display: inline-block;
-    border: 1px solid #03AEF9;
+    border: 0.026rem solid #03AEF9;
     color: #03AEF9;
-    font-size: 16px;
-    border-radius: 50px;
-    padding: 10px 22px; }
+    font-size: 0.426rem;
+    border-radius: 1.333rem;
+    padding: 0.266rem 0.586rem; }
 
   .container-list-people .item {
-    padding: 10px 16px 0; }
+    padding: 0.266rem 0.426rem 0; }
 
   .component-button-empty{
-    margin-top:30px;
+    margin-top:0.8rem;
   }
 </style>
