@@ -255,6 +255,17 @@
               <p class="text_yellow" v-if="user_level >='4'">已获取</p>
               <p v-else>升级解锁</p>
             </li>
+            <li>
+              <svg class="icon yellow" aria-hidden="true" v-if="user_level >='4'">
+                <use xlink:href="#icon-fangke"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true" v-else>
+                <use xlink:href="#icon-fangke"></use>
+              </svg>
+              <p>更多访客</p>
+              <p class="text_yellow" v-if="user_level >='4'">已获取</p>
+              <p v-else>升级解锁</p>
+            </li>
             <li class="commodity">
               <img src="../../statics/images/case.png" class="case"/>
               <p class="mui-ellipsis">日默瓦 CF 20寸</p>
