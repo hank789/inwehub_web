@@ -51,6 +51,7 @@ function getDetailByAnswerId (answerId, context) {
 }
 
 function socketResponseManage (notification, context) {
+  console.log('notification-data:' + JSON.stringify(notification))
   switch (notification.type) {
     case 'App\\Notifications\\AuthenticationUpdated':
       // 专家认证有新的通知;
