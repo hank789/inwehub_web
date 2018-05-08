@@ -88,6 +88,8 @@ function socketResponseManage (notification, context) {
       }
 
       switch (notification.integral_action) {
+        case 'first_community_hide_ask':
+        case 'community_hide_ask':
         case 'first_community_ask':
         case 'community_ask':
           // 互动提问成功的弹窗；
