@@ -16,7 +16,13 @@
         :nextSuccessCallback="nextSuccessCallback"
         class="listWrapper">
           <div class="component-card">
-            <div class="number">{{hot_number}}</div>
+            <div class="number">
+              <template v-for="(number, index) in hot_number">
+                <svg class="icon" aria-hidden="true">
+                  <use :xlink:href="'#icon-' + number"></use>
+                </svg>
+              </template>
+            </div>
             <div class="label">人气指数</div>
             <div class="desc">完善个人资料/参与平台互动/积极分享<br>可快速提升人气</div>
           </div>
@@ -54,7 +60,7 @@
     data () {
       return {
         localUserLevel: getLocalUserLevel(),
-        hot_number: 0,
+        hot_number: '0',
         list: [],
         prevOtherData: {
           uuid: getLocalUuid()
@@ -76,7 +82,7 @@
           var len = this.$refs.RefreshList.list.length >= 3 ? 3 : this.$refs.RefreshList.list.length
           this.$refs.RefreshList.list = this.$refs.RefreshList.list.slice(0, len)
         }
-        this.hot_number = this.$refs.RefreshList.getResponse().data.hot_number
+        this.hot_number = this.$refs.RefreshList.getResponse().data.hot_number.toString()
       },
       nextSuccessCallback () {
         if (this.localUserLevel < 4) {
@@ -126,11 +132,12 @@
     background-repeat: no-repeat;
     opacity: 0.16; }
   .component-card .number {
-    font-family: Tahoma-Bold;
-    font-size: 0.906rem;
+    font-size: 0.746rem;
     line-height: 1.093rem;
-    padding-top: 0.426rem;
+    padding-top: 0.506rem;
     color: #fff; }
+  .component-card .number .icon {
+    margin: 0 -0.08rem; }
   .component-card .label {
     display: inline-block;
     width: 1.813rem;
@@ -140,7 +147,7 @@
     background: #235280;
     border-radius: 0.106rem;
     color: #A8DFF7;
-    margin-top: 0.106rem; }
+    margin-top: 0.053rem; }
   .component-card .desc {
     margin-top: 0.186rem;
     font-size: 0.32rem;
@@ -171,7 +178,7 @@
     color: #B4B4B6;
     font-size: 0.346rem; }
   .component-imageAndText .time {
-    font-size: 0.16rem;
+    font-size: 0.32rem;
     color: #235280;
     position: absolute;
     right: 0;
