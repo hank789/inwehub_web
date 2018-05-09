@@ -165,6 +165,15 @@
 
       </div>
 
+      <template v-if="!isLogined">
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有工作经历</div></div>
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有项目经历</div></div>
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有教育经历</div></div>
+      </template>
+      <template v-else>
       <template v-if="isShare && percent < 90">
         <h5>工作经历</h5>
         <div class="component-warning">
@@ -265,6 +274,7 @@
         <div class="desc">部分信息暂未公开</div>
       </div>
       </template>
+      </template>
     </div>
 
     <Share :title="shareOptions.title"
@@ -308,10 +318,13 @@
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
   import { getResumeDetail } from '../../utils/shareTemplate'
+  import { isLogined } from '../../utils/auth'
+
   const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
+      isLogined: isLogined(),
       apper: 1,
       shareOptions: {
         shareName: '',
