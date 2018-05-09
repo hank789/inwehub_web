@@ -108,7 +108,7 @@
   import { openVendorUrl } from '../../utils/plus'
   import userAbility from '../../utils/userAbility'
   import { getAskCommunityInteractionAnswers } from '../../utils/shareTemplate'
-  import RecommentList from '../../components/AskCommunity/RecommandList.vue'
+  import RecommentList from '../../components/AskCommunity/RecommendList.vue'
 
   const AskDetail = {
     data: () => ({

@@ -90,7 +90,7 @@
   import { pageRefresh } from '../../utils/allPlatform'
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
-  import RecommentList from '../../components/AskCommunity/RecommandList.vue'
+  import RecommentList from '../../components/AskCommunity/RecommendList.vue'
   var user = getLocalUserInfo()
 
   const AskDetail = {

@@ -87,6 +87,10 @@
 
         <div class="river"></div>
         <!--评论部分-->
+
+        <RecommendList :id="slug" v-if="slug"></RecommendList>
+        <div class="river"></div>
+
         <Discuss
           v-if="detail.slug"
           :listApi="'article/comments'"
@@ -99,9 +103,6 @@
           ref="discuss"
         ></Discuss>
       </div>
-
-
-
 
       <!--私密的样式-->
       <!--圈子信息-->
@@ -159,6 +160,7 @@
   import {goThirdPartyArticle} from '../../utils/webview'
   import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
+  import RecommendList from '../../components/discover/RecommendList.vue'
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -258,7 +260,8 @@
       Share,
       commentTextarea,
       groupsList,
-      FooterMenu
+      FooterMenu,
+      RecommendList
     },
     methods: {
       typeDesc (type) {

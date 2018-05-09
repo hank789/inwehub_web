@@ -155,7 +155,7 @@
   import { pageRefresh } from '../../utils/allPlatform'
   import Vue from 'vue'
   import FooterMenu from '../../components/FooterMenu.vue'
-  import RecommentList from '../../components/AskCommunity/RecommandList.vue'
+  import RecommentList from '../../components/AskCommunity/RecommendList.vue'
 
   const currentUser = getLocalUserInfo()
 

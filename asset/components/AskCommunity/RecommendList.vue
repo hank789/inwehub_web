@@ -1,6 +1,6 @@
 <template>
   <div class="recommentListWrapper">
-    <div class="component-title-home">相关问答</div>
+    <div class="component-title-home"><div class="left">相关问答</div></div>
     <div class="line-river"></div>
     <AskCommunityListItem :list="list"></AskCommunityListItem>
   </div>
