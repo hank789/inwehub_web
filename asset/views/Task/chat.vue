@@ -32,13 +32,6 @@
                    <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
-              <!--未关注的权限提示-->
-              <!--<div  class="hint" v-if="index === -1">-->
-                <!--<p>34344343434</p>-->
-                <!--<p>-->
-                  <!--由于对方没有关注你，你只能发送3条消息，需对方关注或回复后才能恢复正常聊天-->
-                <!--</p>-->
-              <!--</div>-->
             </li>
 
             <!--自己  -->
@@ -52,13 +45,15 @@
                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
               </p>
-              <!--未关注的权限提示-->
-              <!--<div  class="hint" >-->
-                <!--<p>34344343434</p>-->
-                <!--<p>-->
-                  <!--由于对方没有关注你，你只能发送3条消息，需对方关注或回复后才能恢复正常聊天-->
-                <!--</p>-->
-              <!--</div>-->
+            </li>
+
+            <li v-else-if="item.user_id === 0">
+              <div  class="hint" >
+                <p>{{showTime(list[index-1], item)}}</p>
+                <p>
+                  <span v-if="item.data.text" v-html="textToLink(item.data.text)"></span>
+                </p>
+              </div>
             </li>
           </template>
         </ul>
