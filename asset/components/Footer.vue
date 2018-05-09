@@ -344,7 +344,7 @@
     min-height: 0.4rem;
     border-radius: 0.4rem;
     line-height: 0.4rem;
-    right: 0;
+    right: 5px;
     top: 5px; /* px不转换 */
   }
 </style>

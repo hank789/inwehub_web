@@ -184,16 +184,6 @@
     right: 0;
     top: 0.08rem; }
 
-  .component-button-empty {
-    text-align: center; }
-  .component-button-empty span {
-    display: inline-block;
-    border: 0.026rem solid #03AEF9;
-    color: #03AEF9;
-    font-size: 0.426rem;
-    border-radius: 1.333rem;
-    padding: 0.266rem 0.586rem; }
-
   .container-list-people .item {
     padding: 0.266rem 0.426rem 0; }
 

@@ -1541,3 +1541,32 @@ a {
   margin:0;
   padding:0;
 }
+
+.component-warning {
+  background: #fff;
+  text-align: center;
+  padding: 73px 0; }
+.component-warning .icon {
+  font-size: 53px; }
+.component-warning .title {
+  padding-top: 12px;
+  line-height: 14px;
+  font-size: 14px;
+  color: #313131; }
+.component-warning .desc {
+  font-size: 12px;
+  line-height: 16px;
+  padding-top: 8px;
+  color: #808080; }
+.component-warning .component-button-empty {
+  margin-top: 19px; }
+
+.component-button-empty {
+  text-align: center; }
+.component-button-empty span {
+  display: inline-block;
+  border: 0.026rem solid #03AEF9;
+  color: #03AEF9;
+  font-size: 0.426rem;
+  border-radius: 1.333rem;
+  padding: 0.266rem 0.586rem; }
