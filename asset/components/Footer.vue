@@ -281,7 +281,7 @@
     content: '';
     background-color: #dcdcdc;
     width: 100%;
-    height: 1px;
+    height: 1px; /* px不转换 */
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5); }
   .container-footer .menu {
@@ -307,7 +307,7 @@
     color: #808080;
     position: absolute;
     bottom: 0rem;
-    line-height: 18px; }
+    line-height: 18px; /* px不转换 */}
   .container-footer .menu .iconWrapper {
     position: absolute;
     top: 7px; /* px不转换 */
@@ -344,7 +344,7 @@
     min-height: 0.4rem;
     border-radius: 0.4rem;
     line-height: 0.4rem;
-    right: 5px;
+    right: 5px; /* px不转换 */
     top: 5px; /* px不转换 */
   }
 </style>

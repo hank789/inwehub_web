@@ -1545,21 +1545,21 @@ a {
 .component-warning {
   background: #fff;
   text-align: center;
-  padding: 73px 0; }
+  padding: 1.946rem 0; }
 .component-warning .icon {
-  font-size: 53px; }
+  font-size: 1.413rem; }
 .component-warning .title {
-  padding-top: 12px;
-  line-height: 14px;
-  font-size: 14px;
+  padding-top: 0.32rem;
+  line-height: 0.373rem;
+  font-size: 0.373rem;
   color: #313131; }
 .component-warning .desc {
-  font-size: 12px;
-  line-height: 16px;
-  padding-top: 8px;
+  font-size: 0.32rem;
+  line-height: 0.426rem;
+  padding-top: 0.213rem;
   color: #808080; }
 .component-warning .component-button-empty {
-  margin-top: 19px; }
+  margin-top: 0.506rem; }
 
 .component-button-empty {
   text-align: center; }

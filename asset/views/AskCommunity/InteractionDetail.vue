@@ -29,6 +29,12 @@
         <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
         </div>
 
+        <RecommentList
+          ref="recommentList"
+          :did="id"
+          v-if="id"
+        ></RecommentList>
+
         <Discuss
           :listApi="'answer/commentList'"
           :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
@@ -84,6 +90,7 @@
   import { pageRefresh } from '../../utils/allPlatform'
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
+  import RecommentList from '../../components/AskCommunity/RecommandList.vue'
   var user = getLocalUserInfo()
 
   const AskDetail = {
@@ -131,7 +138,8 @@
       Answer,
       Share,
       commentTextarea,
-      FooterMenu
+      FooterMenu,
+      RecommentList
     },
     computed: {
       answer () {
