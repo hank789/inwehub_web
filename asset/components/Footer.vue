@@ -274,6 +274,16 @@
     width: 100%;
     bottom: 0;
     padding: 0 12px; /* px不转换 */ }
+  .container-footer:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    background-color: #dcdcdc;
+    width: 100%;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5); }
   .container-footer .menu {
     height: 100%;
     text-align: center;
@@ -296,10 +306,11 @@
     font-size: 11px; /* px不转换 */
     color: #808080;
     position: absolute;
-    bottom: 0rem; }
+    bottom: 0rem;
+    line-height: 18px; }
   .container-footer .menu .iconWrapper {
     position: absolute;
-    top: 5px; /* px不转换 */
+    top: 7px; /* px不转换 */
     font-size: 24px; /* px不转换 */
     display: -webkit-box;
     display: -ms-flexbox;
