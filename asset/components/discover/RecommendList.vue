@@ -1,5 +1,5 @@
 <template>
-  <div class="recommentListWrapper">
+  <div class="recommentListWrapper" v-if="list.length">
     <div class="component-title-home"><div class="left">阅读推荐</div></div>
     <div class="line-river"></div>
     <ul class="recommend">

@@ -6,9 +6,6 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-
-
-
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -88,8 +85,8 @@
         <div class="river"></div>
         <!--评论部分-->
 
-        <RecommendList :id="slug" v-if="slug"></RecommendList>
-        <div class="river"></div>
+        <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
+        <div class="river" v-if="noback && slug"></div>
 
         <Discuss
           v-if="detail.slug"

@@ -1,5 +1,5 @@
 <template>
-  <div class="recommentListWrapper" v-if="this.list.length">
+  <div class="recommentListWrapper" v-if="list.length">
     <div class="component-title-home"><div class="left">相关问答</div></div>
     <div class="line-river"></div>
     <AskCommunityListItem :list="list"></AskCommunityListItem>
@@ -25,17 +25,26 @@
         type: Number
       }
     },
-    methods: {},
-    mounted () {
-      postRequest(`question/relatedQuestion`, {id: this.did, limit: 2}).then(response => {
-        var code = response.data.code
-        if (code !== 1000) {
-          window.mui.toast(response.data.message)
-          return
-        }
+    methods: {
+      getDetail () {
+        postRequest(`question/relatedQuestion`, {id: this.did, limit: 2}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
 
-        this.list = response.data.data
-      })
+          this.list = response.data.data
+        })
+      }
+    },
+    mounted () {
+      this.getDetail()
+    },
+    watch: {
+      did: function (newId) {
+        this.getDetail()
+      }
     }
   }
   export default RecommentsList
