@@ -11,7 +11,7 @@
     <div class="mui-content answerRichText blur">
       <div class="form form-realAnswer" v-show="!loading">
         <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000"
-                 :placeholder="'请填写回答'" :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur"
+                 :placeholder="placeholder" :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur"
                  @onEditorFocus="onEditorFocus"></Meditor>
 
       </div>
@@ -32,13 +32,13 @@
       answerId: null, // 回答id
       description: {},
       loading: 0,
-      editorObj: {}
+      editorObj: {},
+      placeholder: '请填写回答'
     }),
     components: {
       Meditor
     },
-    mounted () {
-    },
+    mounted () {},
     watch: {
       '$route': 'refreshPageData'
     },
@@ -57,6 +57,10 @@
         this.id = id
 
         let answerId = parseInt(this.$route.params.answerId)
+
+        if (this.$route.query.interaction) {
+          this.placeholder = '请在这里输入回答\n小提示：\n1.如果回答内容字数较多，建议使用InweHub.com网页版输入答案。\n2.精彩回答，将会获得InweHub APP首页推荐。'
+        }
 
         if (answerId) {
           this.answerId = answerId
