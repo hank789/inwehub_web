@@ -54,6 +54,9 @@
   background:#fff;
   margin-bottom:0.266rem;
 }
+.line-river:after{
+  display: none;
+}
 </style>
 <style>
   .recommentListWrapper ul li{
