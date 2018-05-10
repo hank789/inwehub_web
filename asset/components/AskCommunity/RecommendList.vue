@@ -1,5 +1,5 @@
 <template>
-  <div class="recommentListWrapper">
+  <div class="recommentListWrapper" v-if="this.list.length">
     <div class="component-title-home"><div class="left">相关问答</div></div>
     <div class="line-river"></div>
     <AskCommunityListItem :list="list"></AskCommunityListItem>
