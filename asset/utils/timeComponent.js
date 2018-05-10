@@ -52,7 +52,7 @@ export default{
       } else if (timer < timeStamp - 86400 && timer >= timeStamp - 86400000 * 2) {
         return '前天' + ' ' + Hours + ':' + Minutes + ':' + Seconds
       } else if (timer < timeStamp - 86400000 * 2) {
-        return Year + '-' + Month + '-' + Data + ' ' + Hours + ':' + Minutes + ':' + Seconds
+        return Year + '/' + Month + '/' + Data
       }
     }
   }

@@ -84,6 +84,7 @@ bindUploadWaiting(window.mui)
 Vue.use(TimeAgo, {
   name: 'timeago',
   locale: 'zh-CN',
+  maxTime: 86400 * 365,
   locales: {
     'zh-CN': require('vue-timeago/locales/zh-CN.json'),
     'zh-Diff': [
