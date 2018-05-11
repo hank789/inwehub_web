@@ -25,6 +25,7 @@
 </template>
 <script>
   import userAbility from '../../utils/userAbility'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data: () => ({}),
@@ -34,6 +35,8 @@
     components: {},
     methods: {
       close () {
+        var UserInfo = localEvent.getLocalItem('UserInfo')
+        localEvent.setLocalItem('num' + UserInfo.phone, {value: 1})
         if (this.$route.query.from === 'feed') {
           this.$router.pushPlus('/home?refresh=1')
         } else {

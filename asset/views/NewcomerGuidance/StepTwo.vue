@@ -63,6 +63,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   const PublishAnswers = {
     data: () => ({
@@ -89,6 +90,8 @@
         }
       },
       close () {
+        var UserInfo = localEvent.getLocalItem('UserInfo')
+        localEvent.setLocalItem('num' + UserInfo.phone, {value: 1})
         if (this.$route.query.from === 'feed') {
           window.mui.back()
         } else {

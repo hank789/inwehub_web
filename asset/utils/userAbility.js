@@ -205,7 +205,6 @@ var UserAbility = () => {
     if (num !== 1) {
       if (userInfo.newbie_unfinish_tasks.show_guide) {
         context.$router.pushPlus('/userGuide/stepone')
-        localEvent.setLocalItem('num' + mobile, {value: '1'})
       }
     }
   }
