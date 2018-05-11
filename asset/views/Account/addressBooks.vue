@@ -7,7 +7,7 @@
       <h1 class="mui-title">通讯录好友</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
 
@@ -100,6 +100,7 @@
   export default {
     data () {
       return {
+        loading: 1,
         id: 0,
         search: '',
         username: '',

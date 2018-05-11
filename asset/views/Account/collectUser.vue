@@ -77,7 +77,7 @@
   import Contact from '../../components/contact/Index.vue'
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
-  import { getContacts } from '../../utils/plus'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -100,18 +100,7 @@
     },
     methods: {
       getContacts () {
-        if (window.plus) {
-          getContacts((list) => {
-            postRequest(`profile/saveAddressBook`, {contacts: list}).then(response => {
-              this.$router.pushPlus('/addressBooks')
-            })
-          }, () => {
-            window.mui.toast('获取联系人失败')
-          })
-        } else {
-          window.mui.alert('请App内打开')
-          // this.$router.pushPlus('/addressBooks')
-        }
+        userAbility.getLocalContact(this)
       },
       back () {
         //  清空
