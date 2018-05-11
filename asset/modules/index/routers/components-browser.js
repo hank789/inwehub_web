@@ -14,6 +14,7 @@ const ActivityEnrollmentStatus = () => import(/* webpackChunkName: "ActivityEnro
 const NewcomerGuidanceStepOne = () => import(/* webpackChunkName: "NewcomerGuidanceStepOne" */ '../../../views/NewcomerGuidance/StepOne.vue')
 const NewcomerGuidanceStepTwo = () => import(/* webpackChunkName: "NewcomerGuidanceStepTwo" */ '../../../views/NewcomerGuidance/StepTwo.vue')
 const NewcomerGuidanceStepThree = () => import(/* webpackChunkName: "NewcomerGuidanceStepThree" */ '../../../views/NewcomerGuidance/StepThree.vue')
+const NewcomerGuidanceStepThreeApp = () => import(/* webpackChunkName: "NewcomerGuidanceStepThreeApp" */ '../../../views/NewcomerGuidance/StepThreeApp.vue')
 
 const InvitationFriends = () => import(/* webpackChunkName: "InvitationFriends" */ '../../../views/Invitation/Friends.vue')
 const AskCommunityMajorList = () => import(/* webpackChunkName: "AskCommunityMajorList" */ '../../../views/AskCommunity/MajorList.vue')
@@ -201,6 +202,7 @@ export {
   NewcomerGuidanceStepOne,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
+  NewcomerGuidanceStepThreeApp,
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,

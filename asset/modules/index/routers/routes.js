@@ -198,6 +198,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 新人引导第三步
+    path: '/userGuide/stepthree/app',
+    name: 'userGuide-stepthree-app',
+    meta: {
+      title: '新人引导第三步',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: componets.NewcomerGuidanceStepThreeApp,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',

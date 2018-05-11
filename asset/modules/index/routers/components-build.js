@@ -13,6 +13,7 @@ import ActivityEnrollmentStatus from '../../../views/Activity/EnrollmentStatus.v
 import NewcomerGuidanceStepOne from '../../../views/NewcomerGuidance/StepOne.vue'
 import NewcomerGuidanceStepTwo from '../../../views/NewcomerGuidance/StepTwo.vue'
 import NewcomerGuidanceStepThree from '../../../views/NewcomerGuidance/StepThree.vue'
+import NewcomerGuidanceStepThreeApp from '../../../views/NewcomerGuidance/StepThreeApp.vue'
 import InvitationFriends from '../../../views/Invitation/Friends.vue'
 import AskCommunityMajorList from '../../../views/AskCommunity/MajorList.vue'
 import AskCommunityMajorDetail from '../../../views/AskCommunity/MajorDetail.vue'
@@ -195,6 +196,7 @@ export {
   NewcomerGuidanceStepOne,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
+  NewcomerGuidanceStepThreeApp,
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
