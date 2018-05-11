@@ -1641,11 +1641,18 @@ a {
   background-color: #dcdcdc;
   overflow: hidden; }
 
+.mui-android .line-river-direct{
+  height: 0.026rem;
+  transform: scaleY(0.5);
+}
+
 @media (-webkit-device-pixel-ratio:2){
   .line-river-direct{
     height: 0.026rem;
   }
 }
+
+
 
 
 .component-imageAndText {
