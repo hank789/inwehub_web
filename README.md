@@ -20,6 +20,8 @@ npm run build-browser
 ### 代码规范监测
 npm run lint
 
+### api文档
+git clone git@github.com:hank789/apiDoc.git
 
 ## 目录介绍
 /asset  资源目录,开发主要目录

@@ -70,6 +70,7 @@
     created () {},
     methods: {
       seeAll () {
+        window.trackMixpanelEvent('show-all-visitor', '/my/visitors', 'my-visitors', '我的人气')
         if (this.localUserLevel < 4) {
           userAbility.jumpJudgeGrade(this)
         }
