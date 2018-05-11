@@ -429,7 +429,7 @@ var UserAbility = () => {
   // 获取本地通讯录
   var getLocalContact = (context) => {
     if (window.plus) {
-      postRequest(`profile/addressBookList`, {}).then(response => {
+      postRequest(`profile/needAddressBookRefresh`, {}).then(response => {
         var code = response.data.code
         if (code !== 1000) {
           window.mui.toast(response.data.message)
