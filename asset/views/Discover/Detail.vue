@@ -524,12 +524,13 @@
     },
     updated () {
       this.$nextTick(function () {
-        setTimeout(() => {
-          this.shotContentHeight()
-        }, 200)
-
-        openVendorUrl(this.$el.querySelector('#contentWrapper'))
-        openAppUrl(this.$el.querySelector('#contentWrapper'))
+        if (this.isShow(this.detail.group.public, this.detail.group.is_joined)) {
+          setTimeout(() => {
+            this.shotContentHeight()
+          }, 200)
+          openVendorUrl(this.$el.querySelector('#contentWrapper'))
+          openAppUrl(this.$el.querySelector('#contentWrapper'))
+        }
       })
     },
     watch: {
@@ -684,14 +685,14 @@
     width: 92%;
     margin-left: 4%;
     padding-bottom: 0.266rem;
-    position: fixed;
+    position: absolute;
     bottom: 0;
   }
 
   .riverBot {
     width: 100%;
     height: 0.266rem;
-    position: fixed;
+    position: absolute;
     bottom: 1.78rem;
     background: #f3f4f6;
   }
@@ -701,7 +702,7 @@
     height: 4.266rem;
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 74px;
     left: 0;
     right: 0;
     margin: auto;

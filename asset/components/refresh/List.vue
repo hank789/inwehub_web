@@ -306,6 +306,9 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
+            if (window.mui('#refreshContainer').length) {
+              window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
+            }
             return
           }
 
