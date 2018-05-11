@@ -109,7 +109,8 @@
             window.mui.toast('获取联系人失败')
           })
         } else {
-          this.$router.pushPlus('/addressBooks')
+          window.mui.alert('请App内打开')
+          // this.$router.pushPlus('/addressBooks')
         }
       },
       back () {
