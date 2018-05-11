@@ -152,7 +152,7 @@
       // 点击关注；
       collectProfessor (item, index) {
         postRequest(`follow/user`, {
-          id: item.id
+          id: item.app_user_uuid
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
