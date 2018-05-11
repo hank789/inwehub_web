@@ -99,7 +99,7 @@
       }
     },
     mounted () {
-      postRequest(`recommendRead`, {id: this.did, perPage: 3, orderBy: 2}).then(response => {
+      postRequest(`recommendRead`, {id: this.did, perPage: 2, orderBy: 2}).then(response => {
         var code = response.data.code
         if (code !== 1000) {
           window.mui.toast(response.data.message)
