@@ -1581,23 +1581,23 @@ a {
   -ms-flex-align: center;
   align-items: center; }
 .component-link .icon {
-  font-size: 27px;
+  font-size: 0.72rem;
   color: #64A0E6; }
 .component-link span {
-  margin-left: 4.5px;
-  font-size: 14px;
+  margin-left: 0.12rem;
+  font-size: 0.373rem;
   color: #444444; }
 .component-link .arrow {
   position: absolute;
   color: #808080;
   right: 0;
-  font-size: 16px; }
+  font-size: 0.426rem; }
 
 .component-textAndButton {
-  padding: 0 16px; }
+  padding: 0 0.426rem; }
 .component-textAndButton .item {
-  height: 43px;
-  line-height: 43px;
+  height: 1.146rem;
+  line-height: 1.146rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1606,7 +1606,7 @@ a {
   justify-content: space-between; }
 .component-textAndButton .item .left {
   color: #444;
-  font-size: 14px; }
+  font-size: 0.373rem; }
 .component-textAndButton .item .right {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1623,19 +1623,19 @@ a {
   align-items: center;
   color: #03AEF9; }
 .component-textAndButton .item .right .buttonWrapper .button {
-  border: 0.5px solid #03AEF9;
-  border-radius: 50px;
-  font-size: 12px;
-  line-height: 12px;
+  border: 0.013rem solid #03AEF9;
+  border-radius: 1.333rem;
+  font-size: 0.32rem;
+  line-height: 0.32rem;
   color: #03AEF9;
-  padding: 4px 6px; }
+  padding: 0.106rem 0.16rem; }
 
 
 .line-river-direct {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 0.5px;
+  height: 0.013rem;
   position: relative;
   width: 100%;
   background-color: #dcdcdc;
@@ -1643,7 +1643,7 @@ a {
 
 @media (-webkit-device-pixel-ratio:2){
   .line-river-direct{
-    height: 1px;
+    height: 0.026rem;
   }
 }
 
@@ -1652,31 +1652,31 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-bottom: 5px;
+  padding-bottom: 0.133rem;
   position: relative; }
 .component-imageAndText .imageWrapper img {
-  width: 44px;
-  height: 44px;
+  width: 1.173rem;
+  height: 1.173rem;
   border-radius: 50%; }
 .component-imageAndText .textWrapper {
   -webkit-box-flex: 2;
   -ms-flex-positive: 2;
   flex-grow: 2;
-  padding: 5px 0 0 8px;
-  line-height: 18px; }
+  padding: 0.133rem 0 0 0.213rem;
+  line-height: 0.48rem; }
 .component-imageAndText .textWrapper .line-1 {
-  max-width: 223px;
+  max-width: 5.946rem;
   color: #444444;
-  font-size: 14px; }
+  font-size: 0.373rem; }
 .component-imageAndText .textWrapper .line-2 {
   color: #B4B4B6;
-  font-size: 13px; }
+  font-size: 0.346rem; }
 .component-imageAndText .time {
-  font-size: 12px;
+  font-size: 0.32rem;
   color: #235280;
   position: absolute;
   right: 0;
-  top: 3px; }
+  top: 0.08rem; }
 .component-imageAndText .buttonWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1686,14 +1686,14 @@ a {
   align-items: center;
   color: #B4B4B6; }
 .component-imageAndText .buttonWrapper .button {
-  border: 0.5px solid #B4B4B6;
-  border-radius: 50px;
-  font-size: 14px;
-  line-height: 14px;
+  border: 0.013rem solid #B4B4B6;
+  border-radius: 1.333rem;
+  font-size: 0.373rem;
+  line-height: 0.373rem;
   color: #B4B4B6;
-  padding: 5px 7px; }
+  padding: 0.133rem 0.186rem; }
 .component-imageAndText .buttonWrapper.active {
   color: #03AEF9; }
 .component-imageAndText .buttonWrapper.active .button {
-  border: 0.5px solid #03AEF9;
+  border: 0.013rem solid #03AEF9;
   color: #03AEF9; }

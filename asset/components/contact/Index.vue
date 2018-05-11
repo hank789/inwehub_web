@@ -152,7 +152,7 @@
   .index-bar {
     position: fixed;
     right: 0;
-    bottom: 47px;
+    bottom: 1.253rem;
     z-index: 12;
     width: 0.613rem;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -284,7 +284,7 @@
     color: #b4b4b6;
   }
   .index-bar-content{
-    padding-right:30px;
+    padding-right:0.8rem;
   }
 
 </style>

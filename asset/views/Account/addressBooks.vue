@@ -293,10 +293,10 @@
   }
 
   .component-textAndButton{
-    padding: 0 0 0 16px;
+    padding: 0 0 0 0.426rem;
   }
 
   .container-list-people .item{
-    padding:10px 0 0 16px;
+    padding:0.266rem 0 0 0.426rem;
   }
 </style>
