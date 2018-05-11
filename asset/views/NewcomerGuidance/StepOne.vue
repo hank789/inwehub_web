@@ -26,6 +26,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import Vue from 'vue'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data: () => ({
@@ -51,6 +52,8 @@
     },
     methods: {
       close () {
+        var UserInfo = localEvent.getLocalItem('UserInfo')
+        localEvent.setLocalItem('num' + UserInfo.phone, {value: 1})
         if (this.$route.query.from === 'feed') {
           window.mui.back()
         } else {
