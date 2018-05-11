@@ -39,8 +39,17 @@ function logout () {
   router.pushPlus('/login', '', true, 'none', 'none')
 }
 
+function isLogined () {
+  let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
+  if (UserLoginInfo.token) {
+    return true
+  }
+  return false
+}
+
 export {
   requestAuth,
   CanNotGetInWhenLogged,
-  logout
+  logout,
+  isLogined
 }

@@ -207,13 +207,13 @@
     <!--互动问答提问成功-->
     <div id="ask_t">
       <div class="article_t">
-        <p>提问成功！可邀请好友回答</p>
+        <p>提问成功！快去邀请用户回答</p>
         <p>（成长值<i>+{{options.askcredits}}</i>，贡献值<i>+{{options.askcoins}}</i>）</p>
       </div>
     </div>
     <div id="ask_b">
       <ul class="hotAnswer_b">
-        <span class="ask_share alertConfirm">邀请好友回答</span>
+        <span class="ask_share alertConfirm">去邀请</span>
       </ul>
 
     </div>

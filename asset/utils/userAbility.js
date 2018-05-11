@@ -9,12 +9,13 @@
 
  **/
 import localEvent from '../stores/localStorage'
-import {getLocalUserInfo, isCompanyStatus} from '../utils/user'
+import {getLocalUserInfo, isCompanyStatus, getLocalUuid} from '../utils/user'
 import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
+import { getContacts } from '../utils/plus'
 
 var UserAbility = () => {
   /**
@@ -204,7 +205,6 @@ var UserAbility = () => {
     if (num !== 1) {
       if (userInfo.newbie_unfinish_tasks.show_guide) {
         context.$router.pushPlus('/userGuide/stepone')
-        localEvent.setLocalItem('num' + mobile, {value: '1'})
       }
     }
   }
@@ -411,6 +411,54 @@ var UserAbility = () => {
     }
   }
 
+  /**
+   * 跳到简历详情页
+   * @param uuid
+   * @param context
+   */
+  var jumpToResume = (uuid, context) => {
+    var localUuid = getLocalUuid()
+    if (localUuid === uuid) {
+      context.$router.pushPlus('/my/resume')
+    } else {
+      context.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+    }
+  }
+
+  // 获取本地通讯录
+  var getLocalContact = (context) => {
+    if (window.plus) {
+      postRequest(`profile/needAddressBookRefresh`, {}).then(response => {
+        var code = response.data.code
+        if (code !== 1000) {
+          window.mui.toast(response.data.message)
+          return
+        }
+
+        if (response.data.data.refresh) {
+          // 需要重新读取
+          getContacts((list) => {
+            postRequest(`profile/saveAddressBook`, {contacts: list}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                return
+              }
+              context.$router.pushPlus('/addressBooks')
+            })
+          }, () => {
+            window.mui.toast('获取联系人失败')
+          })
+        } else {
+          // 不需要重新读取
+          context.$router.pushPlus('/addressBooks')
+        }
+      })
+    } else {
+      window.mui.alert('请App内打开')
+    }
+  }
+
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -430,7 +478,9 @@ var UserAbility = () => {
     InvitationCoupon: InvitationCoupon,
     luckDraw: luckDraw,
     jumpToChat: jumpToChat,
-    alertGroups: alertGroups
+    alertGroups: alertGroups,
+    jumpToResume: jumpToResume,
+    getLocalContact: getLocalContact
   }
 }
 

@@ -1,83 +1,67 @@
 <template>
   <div>
     <ShortTcutComponent ref="short"></ShortTcutComponent>
+    <nav class="mui-bar mui-bar-tab footer-bar" v-show='showBottom'>
 
-    <div class="container-footer" v-show='showBottom'>
-      <div class="menu active" v-if="isHome">
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shouye-hover"></use>
-          </svg>
-        </div>
-        <div class="desc">首页</div>
-      </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shouye1"></use>
-          </svg>
-        </div>
-        <div class="desc">首页</div>
+      <div class="mui-tab-item mui-active" v-if="isHome">
+        <svg class="icon oneIcon" aria-hidden="true">
+          <use xlink:href="#icon-shouye-hover"></use>
+        </svg>
       </div>
 
-      <div class="menu active" v-if="isDiscover">
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-faxian-hover"></use>
-          </svg>
-        </div>
-        <div class="desc">发现</div>
+      <div class="mui-tab-item" @tap.stop.prevent="$router.push('/home')" v-else>
+        <svg class="icon oneIcon" aria-hidden="true">
+          <use xlink:href="#icon-shouye1"></use>
+        </svg>
       </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/discover')" v-else>
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-faxian1"></use>
-          </svg>
-        </div>
-        <div class="desc">发现</div>
+      <!--发现-->
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/discover')" v-if="isDiscover">
+        <svg class="icon threeIcon" aria-hidden="true">
+          <use xlink:href="#icon-faxian-hover"></use>
+        </svg>
       </div>
 
-      <div class="menu" @tap.stop.prevent="show()">
-        <div class="imgWrapper"></div>
+      <div class="mui-tab-item" @tap.stop.prevent="$router.push('/discover')" v-else>
+        <svg class="icon threeIcon" aria-hidden="true">
+          <use xlink:href="#icon-faxian1"></use>
+        </svg>
       </div>
-
-      <div class="menu active" v-if="isAsk">
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi-hover"></use>
-          </svg>
+      <!--发现-->
+      <div class="askWrapper">
+        <div class="askPlus" @tap.stop.prevent="show()">
+          <div class="askImgBg"></div>
+          <div class="askImg"></div>
         </div>
-        <div class="desc">消息</div>
+      </div>
+      <!--消息-->
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/inform')" v-if="isAsk">
+        <svg class="icon twoIcon" aria-hidden="true">
+          <use xlink:href="#icon-xiaoxi-hover"></use>
+        </svg>
         <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
       </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/inform')" v-else>
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi1"></use>
-          </svg>
-        </div>
-        <div class="desc">消息</div>
+      <div class="mui-tab-item taskWrapper" @tap.stop.prevent="$router.push('/inform')" v-else>
+        <svg class="icon twoIcon" aria-hidden="true">
+          <use xlink:href="#icon-xiaoxi1"></use>
+        </svg>
         <span class="mui-badge" v-if="taskCount">{{ taskCount }}</span>
       </div>
+      <!--消息-->
 
-      <div class="menu active" v-if="isMy">
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode-hover"></use>
-          </svg>
-        </div>
-        <div class="desc">我的</div>
-      </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/my')" v-else>
-        <div class="iconWrapper">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode1"></use>
-          </svg>
-        </div>
-        <div class="desc">我的</div>
+      <div class="mui-tab-item mui-active" @tap.stop.prevent="$router.push('/my')" v-if="isMy">
+        <svg class="icon fourIcon" aria-hidden="true">
+          <use xlink:href="#icon-wode-hover"></use>
+        </svg>
       </div>
 
-    </div>
+      <div class="mui-tab-item" @tap.stop.prevent="$router.push('/my')" v-else>
+        <svg class="icon fourIcon" aria-hidden="true">
+          <use xlink:href="#icon-wode1"></use>
+        </svg>
+      </div>
+
+
+    </nav>
 
     <Share ref="FooterShareBtn"
            :title="shareoption.shareTitle"
@@ -259,99 +243,125 @@
   }
 </script>
 <style scoped>
-  .container-footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 50px; /* px不转换 */
-    background: #F3F4F6;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    padding: 0 12px; /* px不转换 */}
-  .container-footer:before {
+  .footer-bar {
+    background-color: #f3f4f6;
+    box-shadow: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    content: '';
-    background-color: #dcdcdc;
-    width: 100%;
-    height: 1px; /* px不转换 */
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5); }
-  .container-footer .menu {
-    height: 100%;
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    position: relative;
-    width: 100%; }
-  .container-footer .menu .desc {
-    font-size: 11px; /* px不转换 */
-    color: #808080;
-    position: relative;
-    top: 16px; /* px不转换 */
-    line-height: 18px; /* px不转换 */}
-  .container-footer .menu .iconWrapper {
-    position: absolute;
-    top: 7px; /* px不转换 */
-    left: 50%;
-    margin-left: -12px; /* px不转换 */
-    font-size: 24px; /* px不转换 */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center; }
-  .container-footer .menu:nth-child(2) .iconWrapper {
-    font-size: 28px; /* px不转换 */
-    top: 5px; /* px不转换 */
-    left: 50%;
-    margin-left: -14px; /* px不转换 */}
-  .container-footer .menu:nth-child(4) .iconWrapper {
-    font-size: 25px; /* px不转换 */
-    top: 7px; /* px不转换 */
-    left: 50%;
-    margin-left: -12.5px; /* px不转换 */}
-  .container-footer .menu .imgWrapper {
-    width: 40.5px; /* px不转换 */
-    height: 40.5px; /* px不转换 */
-    background: url("../statics/images/home_ask_btn@2x.png");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%; }
-  .container-footer.active .desc {
-    color: #444; }
+    overflow: hidden;
+  }
 
-  .mui-badge {
+  .footer-bar .mui-tab-item .mui-icon {
+    width: 0.693rem;
+    height: 0.693rem;
+  }
+
+  .footer-bar .mui-tab-item {
+    position: relative;
+  }
+
+  .footer-bar .mui-active div {
+    position: absolute;
+    width: 100%;
+    bottom: 0.133rem;
+  }
+
+  .footer-bar .mui-active .myicon-point-hover {
+    width: 0.08rem;
+    height: 0.08rem;
+    top: 0.106rem;
+  }
+
+  .oneIcon {
+    font-size: 0.613rem;
+  }
+
+  .twoIcon {
+    position: relative;
+  }
+
+  .twoIcon {
+    font-size: 0.613rem;
+  }
+
+  .twoIcon ~ .mui-badge {
     position: absolute;
     display: inline-block;
     background: #fa4975;
     color: #fff;
-    padding: 0rem 0.08rem;
+    padding: 0 0.08rem;
     min-width: 0.4rem;
     min-height: 0.4rem;
     border-radius: 0.4rem;
     line-height: 0.4rem;
+    right: 0;
+  }
+
+  .threeIcon {
+    font-size: 0.72rem;
+  }
+
+  .fourIcon {
+    font-size: 0.64rem;
+  }
+
+  .askWrapper {
+    position: relative;
+    display: table-cell;
+    width: 1%;
+    text-align: center;
+  }
+
+  .askWrapper .askPlus {
+    position: relative;
+    top: 0.026rem;
+    width: 100%;
+    text-align: center;
+    border-radius: 1.413rem;
+  }
+
+  .askWrapper .askPlus .askImg {
+    position: absolute;
+    top: 0.16rem;
     left: 50%;
-    top: 7px; /* px不转换 */
-    margin-left: 12px; /* px不转换 */
+    margin-left: -0.533rem;
+    width: 1.066rem;
+    height: 1.066rem;
+    background: url("../statics/images/home_ask_btn@2x.png") no-repeat;
+    background-size: 0.933rem 0.933rem;
+  }
+
+  .askWrapper .askPlus .askImgBg {
+    position: absolute;
+    left: 50%;
+    margin-left: -0.706rem;
+    width: 1.413rem;
+    height: 1.413rem;
+    background: #f3f4f6;
+    border-radius: 1.413rem;
+  }
+
+  .askWrapper .title {
+    position: absolute;
+    width: 100%;
+    bottom: 0.133rem;
+    color: #808080;
+    font-size: 0.32rem;
+    text-align: center;
+  }
+
+  .mui-bar-tab .mui-tab-item.mui-active:before {
+    position: absolute;
+    content: '';
+    background: #03aef9;
+    width: 0.106rem;
+    height: 0.106rem;
+    bottom: 0.213rem;
+    left: 50%;
+    margin-left: -0.053rem;
+    border-radius: 0.053rem;
+  }
+
+  .taskWrapper {
+    z-index: 777;
   }
 </style>

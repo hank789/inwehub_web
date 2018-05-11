@@ -40,7 +40,7 @@
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-else-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id === 0">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id, 'backAndClose')">
+                @tap.stop.prevent="$router.pushPlus('/realAnswer/' + ask.id + '?interaction=1', 'backAndClose')">
           {{ toAnswerText }}
         </button>
       </div>
@@ -108,7 +108,7 @@
     created () {},
     methods: {
       modify () {
-        this.$router.pushPlus('/realAnswer/' + this.ask.id + '/' + this.ask.current_user_answer_id, 'backAndClose')
+        this.$router.pushPlus('/realAnswer/' + this.ask.id + '/' + this.ask.current_user_answer_id + '?interaction=1', 'backAndClose')
       },
       collectAsk: function () {
         if (!this.ask.id) {

@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content">
       <div class="my-top">
-        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片 {{account_info_complete_percent}}%</div>
+        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/resume')">编辑名片 {{account_info_complete_percent}}%</div>
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
@@ -101,6 +101,13 @@
       <div class="gray"></div>
       <!--列表内容-->
       <ul class="my-option">
+        <li @tap.stop.prevent="$router.pushPlus('/my/visitors')">
+          <span>访客人气</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
         <li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">

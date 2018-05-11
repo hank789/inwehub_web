@@ -204,6 +204,29 @@ function getLocalUserId () {
 }
 
 /**
+ * 获取本地用户uuid
+ */
+function getLocalUuid () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.uuid) {
+    return userInfo.uuid
+  }
+  return null
+}
+
+/**
+ * 获取用户级别
+ * @returns {null}
+ */
+function getLocalUserLevel () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.user_level) {
+    return userInfo.user_level
+  }
+  return null
+}
+
+/**
  * 是否通过企业认证
  */
 function isCompanyStatus () {
@@ -258,5 +281,7 @@ export {
   isCompanyStatus,
   getLocalUserInfo,
   getUserLevelPercentage,
-  getLocalUserId
+  getLocalUserId,
+  getLocalUuid,
+  getLocalUserLevel
 }

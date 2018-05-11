@@ -15,7 +15,7 @@
     </div>
     <div class="tag-title">
       <div class="tag-l" >
-        <img :src="detail.logo">
+        <img class="lazyImg" v-lazy="detail.logo" >
       </div>
       <!--<div class="tag-l bg-grey">-->
       <!--<svg class="icon" aria-hidden="true">-->

@@ -197,11 +197,7 @@
       }
     },
     mounted () {
-      // 新手任务
-      userAbility.newbieTask(this)
       autoTextArea()
-      saveLocationInfo()
-      AppInit(this)
     },
     computed: {
       prevOtherData () {

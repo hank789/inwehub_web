@@ -125,11 +125,7 @@
   }
 
   .index-bar-container .index-bar-main {
-
-  }
-
-  .groupWrapper {
-
+    position: relative;
   }
 
   .index-bar-container .index-bar-main .index-bar-content .index-bar-group {
@@ -156,7 +152,7 @@
   .index-bar {
     position: fixed;
     right: 0;
-    top: 4.266rem;
+    bottom: 1.253rem;
     z-index: 12;
     width: 0.613rem;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -195,7 +191,6 @@
 
   .groupWrapper {
     background: #fff;
-    padding-right: 0.8rem;
     overflow-y: scroll;
   }
 
@@ -287,6 +282,9 @@
   .ibutton.active {
     background: #dcdcdc;
     color: #b4b4b6;
+  }
+  .index-bar-content{
+    padding-right:0.8rem;
   }
 
 </style>

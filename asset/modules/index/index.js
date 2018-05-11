@@ -84,6 +84,7 @@ bindUploadWaiting(window.mui)
 Vue.use(TimeAgo, {
   name: 'timeago',
   locale: 'zh-CN',
+  maxTime: 86400 * 365,
   locales: {
     'zh-CN': require('vue-timeago/locales/zh-CN.json'),
     'zh-Diff': [
@@ -224,7 +225,7 @@ window.mui.back = function () {
         // 触发父页面的自定义事件(refresh),从而进行刷新
         window.mui.fire(parentWebview, 'refreshData')
         // 触发父页面的自定义事件(refresh),从而进行刷新
-        window.mui.fire(parentWebview, 'refreshPageData', {childId: currentWebview.id})
+        window.mui.fire(parentWebview, 'refreshPageData', {childId: currentWebview.id, type: 'back'})
         // 子页面也刷新数据
         // window.mui.fire(currentWebview, 'refreshData')
       }

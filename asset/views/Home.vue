@@ -212,6 +212,10 @@
         }
       },
       refreshPageData () {
+        // 新手任务
+        userAbility.newbieTask(this)
+        autoTextArea()
+
         this.getData()
         this.getHomeData()
       },
@@ -361,9 +365,6 @@
       })
     },
     mounted () {
-      // 新手任务
-      userAbility.newbieTask(this)
-      autoTextArea()
       saveLocationInfo()
       AppInit(this)
     }
@@ -393,7 +394,7 @@
   }
 
   .w414-3 .mui-content{
-    bottom:50px !important;
+    bottom:50px !important;  /* px不转换 */
   }
 
   .home-b{

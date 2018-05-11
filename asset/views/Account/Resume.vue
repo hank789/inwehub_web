@@ -164,6 +164,28 @@
         </div>
 
       </div>
+
+      <template v-if="!isLogined">
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有工作经历</div></div>
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有项目经历</div></div>
+        <div class="seeMoreWrapper">
+          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有教育经历</div></div>
+      </template>
+      <template v-else>
+      <template v-if="isShare && percent < 90">
+        <h5>工作经历</h5>
+        <div class="component-warning">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <div class="title">您的信息不完整还不能查看哦</div>
+          <div class="desc">查看对方经历会留下您的访问记录，完善您的头像、<br>个人资料(90%以上)会让对方更好的认识您！</div>
+          <div class="component-button-empty" @tap.stop.prevent="$router.pushPlus('/my/info')"><span>去完善我的简历</span></div>
+        </div>
+      </template>
+      <template v-else>
       <!--工作经历-->
       <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
       <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
@@ -178,12 +200,12 @@
           <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
         </div>
       </div>
-
       <div class="seeMoreWrapper"
            v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
         <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
       </div>
 
+      <!--项目经历-->
       <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
       <div class="list"
            v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
@@ -197,8 +219,6 @@
               <div class="content">
                 <template v-for="(industry, index) in project.industry_tags">
                   {{ industry.text }} ;
-
-
                 </template>
               </div>
             </div>
@@ -207,8 +227,6 @@
               <div class="content">
                 <template v-for="(productTag, index) in project.product_tags">
                   {{ productTag.text }} ;
-
-
                 </template>
               </div>
             </div>
@@ -220,14 +238,13 @@
           <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}</div>
           <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
         </div>
-
       </div>
-
       <div class="seeMoreWrapper"
            v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
         <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
       </div>
 
+      <!--教育经历-->
       <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
       <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
         <div class="item" v-for="(edu, eduIndex) in resume.edus"
@@ -244,7 +261,6 @@
           <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
         </div>
       </div>
-
       <div class="seeMoreWrapper"
            v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
         <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
@@ -257,7 +273,8 @@
         </svg>
         <div class="desc">部分信息暂未公开</div>
       </div>
-
+      </template>
+      </template>
     </div>
 
     <Share :title="shareOptions.title"
@@ -301,10 +318,13 @@
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
   import { getResumeDetail } from '../../utils/shareTemplate'
+  import { isLogined } from '../../utils/auth'
+
   const currentUser = getLocalUserInfo()
 
   export default {
     data: () => ({
+      isLogined: isLogined(),
       apper: 1,
       shareOptions: {
         shareName: '',
@@ -553,8 +573,6 @@
   }
 
   /***************清除自带样式*****************/
-
-  div,
   p,
   span,
   ul,

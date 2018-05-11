@@ -63,6 +63,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import localEvent from '../../stores/localStorage'
 
   const PublishAnswers = {
     data: () => ({
@@ -82,9 +83,15 @@
     },
     methods: {
       toNext () {
-        this.$router.replace('/userGuide/stepthree?from=' + this.$route.query.from)
+        if (window.plus) {
+          this.$router.replace('/userGuide/stepthree/app?from=' + this.$route.query.from)
+        } else {
+          this.$router.replace('/userGuide/stepthree?from=' + this.$route.query.from)
+        }
       },
       close () {
+        var UserInfo = localEvent.getLocalItem('UserInfo')
+        localEvent.setLocalItem('num' + UserInfo.phone, {value: 1})
         if (this.$route.query.from === 'feed') {
           window.mui.back()
         } else {

@@ -55,6 +55,12 @@
           </div>
         </div>
 
+        <RecommentList
+          ref="recommentList"
+          :did="id"
+          v-if="id"
+        ></RecommentList>
+
         <Discuss
           :listApi="'answer/commentList'"
           :listParams="{'answer_id': ask.answers[0] ? ask.answers[0].id:0}"
@@ -149,6 +155,7 @@
   import { pageRefresh } from '../../utils/allPlatform'
   import Vue from 'vue'
   import FooterMenu from '../../components/FooterMenu.vue'
+  import RecommentList from '../../components/AskCommunity/RecommendList.vue'
 
   const currentUser = getLocalUserInfo()
 
@@ -194,7 +201,8 @@
       commentTextarea,
       StarRating,
       pay,
-      FooterMenu
+      FooterMenu,
+      RecommentList
     },
     computed: {
       answer () {

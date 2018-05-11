@@ -9,7 +9,7 @@ function changeFormat (t) {
 
 export default{
   install (Vue, options) {
-    Vue.prototype.timeago = function (createtime) {
+    Vue.prototype.timeago = function (createtime, showMinute = true) {
       console.log('createtime:' + createtime)
       if (!createtime) {
         return createtime
@@ -52,7 +52,10 @@ export default{
       } else if (timer < timeStamp - 86400 && timer >= timeStamp - 86400000 * 2) {
         return '前天' + ' ' + Hours + ':' + Minutes + ':' + Seconds
       } else if (timer < timeStamp - 86400000 * 2) {
-        return Year + '-' + Month + '-' + Data + ' ' + Hours + ':' + Minutes + ':' + Seconds
+        if (showMinute) {
+          return Year + '年' + Month + '月' + Data + '日 ' + Hours + ':' + Minutes
+        }
+        return Year + '/' + Month + '/' + Data
       }
     }
   }

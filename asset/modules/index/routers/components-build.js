@@ -13,6 +13,7 @@ import ActivityEnrollmentStatus from '../../../views/Activity/EnrollmentStatus.v
 import NewcomerGuidanceStepOne from '../../../views/NewcomerGuidance/StepOne.vue'
 import NewcomerGuidanceStepTwo from '../../../views/NewcomerGuidance/StepTwo.vue'
 import NewcomerGuidanceStepThree from '../../../views/NewcomerGuidance/StepThree.vue'
+import NewcomerGuidanceStepThreeApp from '../../../views/NewcomerGuidance/StepThreeApp.vue'
 import InvitationFriends from '../../../views/Invitation/Friends.vue'
 import AskCommunityMajorList from '../../../views/AskCommunity/MajorList.vue'
 import AskCommunityMajorDetail from '../../../views/AskCommunity/MajorDetail.vue'
@@ -176,6 +177,8 @@ import Hongbao from '../../../views/Hongbao.vue'
 import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
+import Visitor from '../../../views/Account/visitorList.vue'
+import AddressBooks from '../../../views/Account/addressBooks.vue'
 
 export {
   Login,
@@ -193,6 +196,7 @@ export {
   NewcomerGuidanceStepOne,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
+  NewcomerGuidanceStepThreeApp,
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
@@ -355,5 +359,7 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  Visitor,
+  AddressBooks
 }

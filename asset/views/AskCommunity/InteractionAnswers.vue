@@ -41,6 +41,13 @@
           :questionId="ask.question.id"
         ></AnswersInteraction>
 
+        <RecommentList
+          ref="recommentList"
+          class="recommentList"
+          :did="id"
+          v-if="id"
+        ></RecommentList>
+
         <!--返回问答社区-->
         <div class="back" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
           <span>前往问答社区</span>
@@ -101,6 +108,7 @@
   import { openVendorUrl } from '../../utils/plus'
   import userAbility from '../../utils/userAbility'
   import { getAskCommunityInteractionAnswers } from '../../utils/shareTemplate'
+  import RecommentList from '../../components/AskCommunity/RecommendList.vue'
 
   const AskDetail = {
     data: () => ({
@@ -134,7 +142,8 @@
       AnswersInteraction,
       RefreshList,
       Share,
-      InvitationList
+      InvitationList,
+      RecommentList
     },
     computed: {
       answer () {
@@ -347,5 +356,7 @@
     line-height: 1.653rem;
     margin-left: -0.266rem;
   }
-
+  .recommentList{
+    margin-top:0.266rem;
+  }
 </style>

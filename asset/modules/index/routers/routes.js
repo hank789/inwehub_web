@@ -198,6 +198,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 新人引导第三步
+    path: '/userGuide/stepthree/app',
+    name: 'userGuide-stepthree-app',
+    meta: {
+      title: '新人引导第三步',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: componets.NewcomerGuidanceStepThreeApp,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
@@ -670,6 +683,18 @@ const routes = [
       wechatHideHeader: true
     },
     component: componets.AccountAdvantage,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我的人气
+    path: '/my/visitors',
+    name: 'my-visitors',
+    meta: {
+      title: '我的人气',
+      wechatHideHeader: true
+    },
+    component: componets.Visitor,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -2106,6 +2131,17 @@ const routes = [
     beforeEnter: (to, from, next) => {
       // CanNotGetInWhenLogged(to, from, next)
       next()
+    }
+  },
+  {
+    path: '/addressBooks',
+    name: 'addressBooks',
+    component: componets.AddressBooks,
+    meta: {
+      title: '通讯录好友'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
     }
   },
   {

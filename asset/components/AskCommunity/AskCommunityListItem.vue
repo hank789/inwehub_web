@@ -182,7 +182,7 @@
               width:0.026rem;
               height:0.266rem;
               background: #dbdbdb;
-              margin: 0.186rem 0rem 0.026rem 0.24rem;
+              margin: 0.16rem 0rem 0.026rem 0.24rem;
             }
           }
 

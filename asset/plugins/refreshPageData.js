@@ -38,7 +38,7 @@ export default {
             console.log('calledEvent: refreshPageData')
             if (this.refreshPageData) {
               console.log('calledMethod: refreshPageData')
-              this.refreshPageData()
+              this.refreshPageData(e.detail)
             }
           })
         }

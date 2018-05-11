@@ -30,7 +30,7 @@
                   <p class="mui-ellipsis">
                     <span v-for="tag in item.tags"> {{tag}} <i></i></span>
                   </p>
-                  <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}m</span></p>
+                  <p><span>{{item.address_province}}</span> <span>< {{item.distance_format}}</span></p>
                 </div>
                 <i class="bot"></i>
               </li>

@@ -104,7 +104,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
             // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
 
             // 触发父页面的自定义事件(refresh),从而进行刷新
-            window.mui.fire(parentWebview, 'refreshPageData', {childId: webview.id})
+            window.mui.fire(parentWebview, 'refreshPageData', {childId: webview.id, type: 'back'})
             // 刷新当前页数据
             // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
 
@@ -333,7 +333,7 @@ function goBack () {
       window.mui.fire(parentWebview, 'refreshData')
 
       // 触发父页面的自定义事件(refresh),从而进行刷新
-      window.mui.fire(parentWebview, 'refreshPageData', {childId: self.id})
+      window.mui.fire(parentWebview, 'refreshPageData', {childId: self.id, type: 'back'})
 
       // 子页面也刷新数据
       window.mui.fire(self, 'refreshData')

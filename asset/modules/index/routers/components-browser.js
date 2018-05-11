@@ -14,6 +14,7 @@ const ActivityEnrollmentStatus = () => import(/* webpackChunkName: "ActivityEnro
 const NewcomerGuidanceStepOne = () => import(/* webpackChunkName: "NewcomerGuidanceStepOne" */ '../../../views/NewcomerGuidance/StepOne.vue')
 const NewcomerGuidanceStepTwo = () => import(/* webpackChunkName: "NewcomerGuidanceStepTwo" */ '../../../views/NewcomerGuidance/StepTwo.vue')
 const NewcomerGuidanceStepThree = () => import(/* webpackChunkName: "NewcomerGuidanceStepThree" */ '../../../views/NewcomerGuidance/StepThree.vue')
+const NewcomerGuidanceStepThreeApp = () => import(/* webpackChunkName: "NewcomerGuidanceStepThreeApp" */ '../../../views/NewcomerGuidance/StepThreeApp.vue')
 
 const InvitationFriends = () => import(/* webpackChunkName: "InvitationFriends" */ '../../../views/Invitation/Friends.vue')
 const AskCommunityMajorList = () => import(/* webpackChunkName: "AskCommunityMajorList" */ '../../../views/AskCommunity/MajorList.vue')
@@ -182,6 +183,8 @@ const Hongbao = () => import(/* webpackChunkName: "Hongbao" */ '../../../views/H
 const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
+const Visitor = () => import(/* webpackChunkName: "Visitor" */ '../../../views/Account/visitorList.vue')
+const AddressBooks = () => import(/* webpackChunkName: "AddressBooks" */ '../../../views/Account/addressBooks.vue')
 
 export {
   Login,
@@ -199,6 +202,7 @@ export {
   NewcomerGuidanceStepOne,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
+  NewcomerGuidanceStepThreeApp,
   InvitationFriends,
   AskCommunityMajorList,
   AskCommunityMajorDetail,
@@ -361,5 +365,7 @@ export {
   Hongbao,
   Ad,
   componentsShortTcut,
-  Page404
+  Page404,
+  Visitor,
+  AddressBooks
 }

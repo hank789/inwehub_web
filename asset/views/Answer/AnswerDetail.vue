@@ -404,13 +404,11 @@
           var code = response.data.code
           if (code !== 1000) {
             if (code === 3003) {
-              console.error('info')
               alertAnswerRepeat(this)
             }
             // code 3003
-
             window.mui.toast(response.data.message)
-            this.$router.pushPlus('/task', true, 'pop-in', 'hide', true)
+            this.$router.pushPlus('/inform')
             return
           }
 

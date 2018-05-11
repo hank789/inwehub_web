@@ -6,9 +6,6 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-
-
-
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -87,6 +84,10 @@
 
         <div class="river"></div>
         <!--评论部分-->
+
+        <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
+        <div class="river" v-if="noback && slug"></div>
+
         <Discuss
           v-if="detail.slug"
           :listApi="'article/comments'"
@@ -99,9 +100,6 @@
           ref="discuss"
         ></Discuss>
       </div>
-
-
-
 
       <!--私密的样式-->
       <!--圈子信息-->
@@ -159,6 +157,7 @@
   import {goThirdPartyArticle} from '../../utils/webview'
   import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
+  import RecommendList from '../../components/discover/RecommendList.vue'
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -258,7 +257,8 @@
       Share,
       commentTextarea,
       groupsList,
-      FooterMenu
+      FooterMenu,
+      RecommendList
     },
     methods: {
       typeDesc (type) {
@@ -524,12 +524,13 @@
     },
     updated () {
       this.$nextTick(function () {
-        setTimeout(() => {
-          this.shotContentHeight()
-        }, 200)
-
-        openVendorUrl(this.$el.querySelector('#contentWrapper'))
-        openAppUrl(this.$el.querySelector('#contentWrapper'))
+        if (this.isShow(this.detail.group.public, this.detail.group.is_joined)) {
+          setTimeout(() => {
+            this.shotContentHeight()
+          }, 200)
+          openVendorUrl(this.$el.querySelector('#contentWrapper'))
+          openAppUrl(this.$el.querySelector('#contentWrapper'))
+        }
       })
     },
     watch: {
@@ -684,14 +685,14 @@
     width: 92%;
     margin-left: 4%;
     padding-bottom: 0.266rem;
-    position: fixed;
+    position: absolute;
     bottom: 0;
   }
 
   .riverBot {
     width: 100%;
     height: 0.266rem;
-    position: fixed;
+    position: absolute;
     bottom: 1.78rem;
     background: #f3f4f6;
   }
@@ -701,7 +702,7 @@
     height: 4.266rem;
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 74px;
     left: 0;
     right: 0;
     margin: auto;

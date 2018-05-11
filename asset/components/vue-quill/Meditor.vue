@@ -39,7 +39,7 @@
       descLength: 0,
       editorOption: {
         debug: false,
-        placeholder: '请填写回答',
+        placeholder: '请填写内容',
         modules: {
           toolbar: '#toolbar',
           history: {
@@ -67,7 +67,7 @@
       },
       placeholder: {
         type: String,
-        default: ''
+        default: '请填写内容'
       },
       descMaxLength: {
         type: Number,
@@ -173,6 +173,9 @@
         console.log('newid' + this.id)
         this.initDefaultValue()
       },
+      setPlaceholder (placeholder) {
+        this.$refs.myTextEditor.setPlaceholder(placeholder)
+      },
       initDefaultValue () {
         getAnswerCache(this.id, (contents) => {
           if (!contents) {
@@ -201,6 +204,12 @@
         if (newDescLength > this.descMaxLength) {
           this.editorObj.history.undo()
         }
+      },
+      placeholder: {
+        handler: function (newValue) {
+          this.editorOption.placeholder = newValue
+        },
+        immediate: true
       },
       description: function (newDescription) {
         if (!newDescription) {
