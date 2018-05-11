@@ -31,8 +31,8 @@
 
         <RecommentList
           ref="recommentList"
-          :did="id"
-          v-if="id"
+          :did="ask.question.id"
+          v-if="ask.question.id"
         ></RecommentList>
 
         <Discuss
@@ -100,6 +100,7 @@
           user_id: ''
         },
         question: {
+          id: '',
           created_at: '',
           description: '',
           tags: [],
