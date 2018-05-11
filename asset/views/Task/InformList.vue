@@ -49,7 +49,7 @@
                     <span class="mui-ellipsis">{{list.notice_message.last_message ? list.notice_message.last_message.data.title : ''}}</span>
                   </p>
                   <a>
-                    {{timeago(list.notice_message.last_message ? list.notice_message.last_message.created_at : '')}}
+                    {{timeago(list.notice_message.last_message ? list.notice_message.last_message.created_at : '', false)}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -61,7 +61,7 @@
                     <span class="mui-ellipsis">{{list.money_message.last_message ? list.money_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    {{timeago(list.money_message.last_message ? list.money_message.last_message.created_at : '')}}
+                    {{timeago(list.money_message.last_message ? list.money_message.last_message.created_at : '', false)}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -83,7 +83,7 @@
                     <span class="mui-ellipsis">{{list.task_message.last_message ? list.task_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    {{timeago(list.task_message.last_message ? list.task_message.last_message.created_at : '')}}
+                    {{timeago(list.task_message.last_message ? list.task_message.last_message.created_at : '', false)}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -95,7 +95,7 @@
                     <span class="mui-ellipsis">{{list.readhub_message.last_message ? list.readhub_message.last_message.data.title : ""}} </span>
                   </p>
                   <a>
-                    {{timeago(list.readhub_message.last_message ? list.readhub_message.last_message.created_at : '')}}
+                    {{timeago(list.readhub_message.last_message ? list.readhub_message.last_message.created_at : '', false)}}
                   </a>
                   <i class="bot"></i>
                 </li>
@@ -109,7 +109,7 @@
                     <span class="mui-ellipsis" v-else>{{item.last_message.data.text}}</span>
                   </p>
                   <a>
-                    {{timeago(item.last_message ? item.last_message.created_at : '')}}
+                    {{timeago(item.last_message ? item.last_message.created_at : '', false)}}
                   </a>
                   <i class="bot"></i>
                 </li>
