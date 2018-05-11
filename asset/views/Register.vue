@@ -22,7 +22,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoujihao"></use>
           </svg>
-          <input placeholder="请输入手机号" ref="phone" @focus="focus" @blur="blur"
+          <input placeholder="请输入手机号" pattern="\d*" ref="phone" @focus="focus" @blur="blur"
                  v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @tap.stop.prevent="entryPhone"
                  class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
 
