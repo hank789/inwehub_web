@@ -149,62 +149,62 @@
   .component-contact-find {
     text-align: center; }
   .component-contact-find .line1 {
-    font-size: 20px;
+    font-size: 0.533rem;
     color: #323232;
-    line-height: 28px; }
+    line-height: 0.746rem; }
   .component-contact-find .line2 {
-    margin-top: 2px;
-    font-size: 14px;
-    line-height: 20px;
+    margin-top: 0.053rem;
+    font-size: 0.373rem;
+    line-height: 0.533rem;
     color: #808080; }
   .component-contact-find .circleWrapper {
-    margin-top: 34px;
+    margin-top: 0.906rem;
     display: inline-block;
     position: relative;
-    width: 230px;
-    height: 230px; }
+    width: 6.133rem;
+    height: 6.133rem; }
   .component-contact-find .circleWrapper:before {
     content: '';
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -115px;
-    margin-left: -115px;
-    width: 230px;
-    height: 230px;
+    margin-top: -3.066rem;
+    margin-left: -3.066rem;
+    width: 6.133rem;
+    height: 6.133rem;
     border-radius: 50%;
-    border: 1px solid #F3F4F6; }
+    border: 0.026rem solid #F3F4F6; }
   .component-contact-find .circleWrapper:after {
     content: '';
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -85px;
-    margin-left: -85px;
-    width: 170px;
-    height: 170px;
+    margin-top: -2.266rem;
+    margin-left: -2.266rem;
+    width: 4.533rem;
+    height: 4.533rem;
     border-radius: 50%;
-    border: 1px solid #F3F4F6; }
+    border: 0.026rem solid #F3F4F6; }
   .component-contact-find .circleWrapper .iconWrapper {
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -65px;
-    margin-left: -65px;
+    margin-top: -1.733rem;
+    margin-left: -1.733rem;
     display: inline-block;
     text-align: center;
-    width: 134px;
-    height: 134px;
+    width: 3.573rem;
+    height: 3.573rem;
     border-radius: 50%;
     background: #F3F4F6; }
   .component-contact-find .circleWrapper .iconWrapper .icon {
     color: #64A0E6;
-    margin-top: 25px;
-    font-size: 54px; }
+    margin-top: 0.666rem;
+    font-size: 1.44rem; }
   .component-contact-find .circleWrapper span {
     display: block;
     color: #808080;
-    font-size: 14px;
-    line-height: 20px;
-    margin-top: 6px; }
+    font-size: 0.373rem;
+    line-height: 0.533rem;
+    margin-top: 0.16rem; }
 </style>
