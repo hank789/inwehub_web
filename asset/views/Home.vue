@@ -212,6 +212,10 @@
         }
       },
       refreshPageData () {
+        // 新手任务
+        userAbility.newbieTask(this)
+        autoTextArea()
+
         this.getData()
         this.getHomeData()
       },
@@ -361,9 +365,6 @@
       })
     },
     mounted () {
-      // 新手任务
-      userAbility.newbieTask(this)
-      autoTextArea()
       saveLocationInfo()
       AppInit(this)
     }
