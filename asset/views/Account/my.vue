@@ -102,7 +102,7 @@
       <!--列表内容-->
       <ul class="my-option">
         <li @tap.stop.prevent="$router.pushPlus('/my/visitors')">
-          <span>我的人气</span>
+          <span>访客人气</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
