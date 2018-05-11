@@ -1570,3 +1570,130 @@ a {
   font-size: 0.426rem;
   border-radius: 1.333rem;
   padding: 0.266rem 0.586rem !important; }
+
+
+.component-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+.component-link .icon {
+  font-size: 27px;
+  color: #64A0E6; }
+.component-link span {
+  margin-left: 4.5px;
+  font-size: 14px;
+  color: #444444; }
+.component-link .arrow {
+  position: absolute;
+  color: #808080;
+  right: 0;
+  font-size: 16px; }
+
+.component-textAndButton {
+  padding: 0 16px; }
+.component-textAndButton .item {
+  height: 43px;
+  line-height: 43px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+.component-textAndButton .item .left {
+  color: #444;
+  font-size: 14px; }
+.component-textAndButton .item .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+.component-textAndButton .item .right .buttonWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #03AEF9; }
+.component-textAndButton .item .right .buttonWrapper .button {
+  border: 0.5px solid #03AEF9;
+  border-radius: 50px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #03AEF9;
+  padding: 4px 6px; }
+
+
+.line-river-direct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0.5px;
+  position: relative;
+  width: 100%;
+  background-color: #dcdcdc;
+  overflow: hidden; }
+
+@media (-webkit-device-pixel-ratio:2){
+  .line-river-direct{
+    height: 1px;
+  }
+}
+
+
+.component-imageAndText {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 5px;
+  position: relative; }
+.component-imageAndText .imageWrapper img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%; }
+.component-imageAndText .textWrapper {
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  padding: 5px 0 0 8px;
+  line-height: 18px; }
+.component-imageAndText .textWrapper .line-1 {
+  max-width: 223px;
+  color: #444444;
+  font-size: 14px; }
+.component-imageAndText .textWrapper .line-2 {
+  color: #B4B4B6;
+  font-size: 13px; }
+.component-imageAndText .time {
+  font-size: 12px;
+  color: #235280;
+  position: absolute;
+  right: 0;
+  top: 3px; }
+.component-imageAndText .buttonWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #B4B4B6; }
+.component-imageAndText .buttonWrapper .button {
+  border: 0.5px solid #B4B4B6;
+  border-radius: 50px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #B4B4B6;
+  padding: 5px 7px; }
+.component-imageAndText .buttonWrapper.active {
+  color: #03AEF9; }
+.component-imageAndText .buttonWrapper.active .button {
+  border: 0.5px solid #03AEF9;
+  color: #03AEF9; }

@@ -183,6 +183,7 @@ const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
 const Visitor = () => import(/* webpackChunkName: "Visitor" */ '../../../views/Account/visitorList.vue')
+const AddressBooks = () => import(/* webpackChunkName: "AddressBooks" */ '../../../views/Account/addressBooks.vue')
 
 export {
   Login,
@@ -363,5 +364,6 @@ export {
   Ad,
   componentsShortTcut,
   Page404,
-  Visitor
+  Visitor,
+  AddressBooks
 }

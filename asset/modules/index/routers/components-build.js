@@ -177,6 +177,7 @@ import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
 import Visitor from '../../../views/Account/visitorList.vue'
+import AddressBooks from '../../../views/Account/addressBooks.vue'
 
 export {
   Login,
@@ -357,5 +358,6 @@ export {
   Ad,
   componentsShortTcut,
   Page404,
-  Visitor
+  Visitor,
+  AddressBooks
 }

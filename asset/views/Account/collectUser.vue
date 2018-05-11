@@ -12,12 +12,11 @@
     <div class="mui-content">
       <!--导航栏-->
       <div class="menu" v-if="!type">
-        <span @tap.stop.prevent="">用户<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
-        <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
+        <span class="font-family-medium" @tap.stop.prevent="">用户<i></i></span>
+        <span class="font-family-medium" @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
+        <span class="font-family-medium" @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
         <i class="bot"></i>
       </div>
-
 
       <!--搜索区域-->
       <Contact :list="list" v-model="lastList" :search="search">
@@ -27,16 +26,18 @@
             <input type="text" placeholder="输入用户名" v-model.trim="search">
           </div>
 
-          <div class="notFound" @tap.stop.prevent="$router.pushPlus('/growthList')">
-            找不到成员？<span>添加新的关注</span>
+          <div class="component-link margin-5-0-0" @tap.stop.prevent="getContacts">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tongxunlu"></use>
+            </svg><span>寻找通讯录好友</span>
+            <svg class="icon arrow" aria-hidden="true">
+              <use xlink:href="#icon-chakangengduojiantou"></use>
+            </svg>
           </div>
-
         </div>
 
         <div class="indexTitle">
           已关注的成员
-
-
         </div>
 
         <div class="groupWrapper">
@@ -76,6 +77,7 @@
   import Contact from '../../components/contact/Index.vue'
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
+  import { getContacts } from '../../utils/plus'
 
   export default {
     data () {
@@ -97,6 +99,19 @@
       Contact
     },
     methods: {
+      getContacts () {
+        if (window.plus) {
+          getContacts((list) => {
+            postRequest(`profile/saveAddressBook`, {contacts: list}).then(response => {
+              this.$router.pushPlus('/addressBooks')
+            })
+          }, () => {
+            window.mui.toast('获取联系人失败')
+          })
+        } else {
+          this.$router.pushPlus('/addressBooks')
+        }
+      },
       back () {
         //  清空
         localEvent.clearLocalItem('share')

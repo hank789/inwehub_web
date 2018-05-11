@@ -2121,6 +2121,17 @@ const routes = [
     }
   },
   {
+    path: '/addressBooks',
+    name: 'addressBooks',
+    component: componets.AddressBooks,
+    meta: {
+      title: '通讯录好友'
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
     path: '/webview/notice',
     name: 'webview-notice',
     meta: {
