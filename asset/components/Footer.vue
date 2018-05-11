@@ -268,12 +268,12 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: 50px;  /* px不转换 */
+    height: 50px; /* px不转换 */
     background: #F3F4F6;
     position: fixed;
     width: 100%;
     bottom: 0;
-    padding: 0 12px; /* px不转换 */ }
+    padding: 0 12px; /* px不转换 */}
   .container-footer:before {
     position: absolute;
     top: 0;
@@ -305,12 +305,14 @@
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
     color: #808080;
-    position: absolute;
-    bottom: 0rem;
+    position: relative;
+    top: 16px; /* px不转换 */
     line-height: 18px; /* px不转换 */}
   .container-footer .menu .iconWrapper {
     position: absolute;
     top: 7px; /* px不转换 */
+    left: 50%;
+    margin-left: -12px; /* px不转换 */
     font-size: 24px; /* px不转换 */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -319,11 +321,15 @@
     -ms-flex-align: center;
     align-items: center; }
   .container-footer .menu:nth-child(2) .iconWrapper {
-    font-size: 27px; /* px不转换 */
-    top: 4px; /* px不转换 */}
+    font-size: 28px; /* px不转换 */
+    top: 5px; /* px不转换 */
+    left: 50%;
+    margin-left: -14px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {
     font-size: 25px; /* px不转换 */
-    top: 5px; /* px不转换 */}
+    top: 7px; /* px不转换 */
+    left: 50%;
+    margin-left: -12.5px; /* px不转换 */}
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */
