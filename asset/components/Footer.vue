@@ -270,7 +270,7 @@
     align-items: center;
     height: 50px; /* px不转换 */
     background: #F3F4F6;
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
     padding: 0 12px; /* px不转换 */}
