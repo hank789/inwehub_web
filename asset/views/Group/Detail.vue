@@ -396,7 +396,7 @@
         }
 
         if (this.detail.is_joined === 3) {
-          if (item.is_recommend) {
+          if (item.feed.is_recommend) {
             this.itemOptions.push('取消加精')
           } else {
             this.itemOptions.push('加精')
@@ -478,7 +478,7 @@
           }
 
           item.is_recommend = 1
-          this.list[this.itemOptionsIndex].is_recommend = 1
+          this.list[this.itemOptionsIndex].feed.is_recommend = 1
           window.mui.toast('操作成功')
           callback()
         })
@@ -492,7 +492,7 @@
           }
 
           item.is_recommend = 0
-          this.list[this.itemOptionsIndex].is_recommend = 0
+          this.list[this.itemOptionsIndex].feed.is_recommend = 0
           window.mui.toast('操作成功')
           callback()
         })
