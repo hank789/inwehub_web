@@ -45,14 +45,14 @@
                   :show='isShowItemOption(item)'
                   ref="discoverShare"
                   @comment="comment"
-                  @showItemOptions="showItemOptions"
+                  @showItemOptions="showItemOptions(item, index)"
                 ></DiscoverShare>
               </div>
               <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''"  @tap.stop.prevent="toDetail(item)">
                 <SubmitReadhubAriticle :data="item"
                                        :show='isShowItemOption(item)'
                                        @comment="comment"
-                                       @showItemOptions="showItemOptions"
+                                       @showItemOptions="showItemOptions(item, index)"
                 ></SubmitReadhubAriticle>
               </div>
             </template>
@@ -161,6 +161,7 @@
         allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
+        itemOptionsIndex: 0,
         shareOption: {
           title: '',
           link: '',
@@ -384,9 +385,10 @@
 
         return false
       },
-      showItemOptions (item) {
+      showItemOptions (item, index) {
         this.itemOptions = []
         this.itemOptionsObj = item
+        this.itemOptionsIndex = index
         if (getLocalUserId() === item.user.id) {
           this.itemOptions = [
             '删除'
@@ -394,7 +396,11 @@
         }
 
         if (this.detail.is_joined === 3) {
-          this.itemOptions.push('加精')
+          if (item.is_recommend) {
+            this.itemOptions.push('取消加精')
+          } else {
+            this.itemOptions.push('加精')
+          }
         }
 
         this.$refs.itemOptions.toggle()
@@ -411,6 +417,11 @@
             break
           case '加精':
             this.addGood(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '取消加精':
+            this.cancelGood(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
             })
             break
@@ -466,6 +477,22 @@
             return
           }
 
+          item.is_recommend = 1
+          this.list[this.itemOptionsIndex].is_recommend = 1
+          window.mui.toast('操作成功')
+          callback()
+        })
+      },
+      cancelGood (item, callback) {
+        postRequest(`group/cancelSubmissionRecommend`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          item.is_recommend = 0
+          this.list[this.itemOptionsIndex].is_recommend = 0
           window.mui.toast('操作成功')
           callback()
         })
