@@ -69,7 +69,9 @@ export function apiRequest (url, data, showWaiting = true) {
       if (code !== 1000) {
         return Promise.reject(response.data.message)
       }
-
+      if (response.data.needRefresh === true) {
+        localEvent.setLocalItem('needRefresh', {value: true})
+      }
       return response.data.data
     })
     .catch(e => {
@@ -140,7 +142,9 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
           return Promise.reject(response.data.message)
         }
       }
-
+      if (response.data.needRefresh === true) {
+        localEvent.setLocalItem('needRefresh', {value: true})
+      }
       return response
     })
     .catch(e => {
