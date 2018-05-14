@@ -28,7 +28,16 @@ git clone git@github.com:hank789/apiDoc.git
 /dist   生成的静态文件
 
 
+## 框架
+vue: https://cn.vuejs.org/index.html
+mui: http://www.dcloud.io/mui.html
+5+sdk: http://ask.dcloud.net.cn/docs/
+
 #规范
+##git提交规范
+1.每次提交需写清楚本次提交的变更
+2.提交频率每天至少一次，多提交代码防止和别人的代码有冲突
+
 ##页面布局
   页面标题栏
     <header class="mui-bar-nav">
