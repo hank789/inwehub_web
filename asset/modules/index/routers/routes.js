@@ -1798,7 +1798,7 @@ const routes = [
     component: componets.Guide
   },
   { // feedback
-    path: '/feedback/:type',
+    path: '/feedback/advise',
     name: 'feedback',
     meta: {
       title: '反馈建议',

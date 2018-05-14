@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="groups-title" >
+    <div v-if="showOwner" class="groups-title" >
       <div class="groups-left">
         <img :src="detail.owner.avatar"/>
         <p>{{detail.owner.name}}</p>
@@ -64,6 +64,9 @@
         default: () => {
           return {}
         }
+      },
+      showOwner: {
+        default: true
       }
     },
     watch: {},
