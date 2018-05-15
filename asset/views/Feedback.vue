@@ -2,6 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">{{detail.name}}</h1>
     </header>
     <div class="mui-content" v-if="!loading">
       <!--圈子详情-->
@@ -21,11 +22,6 @@
           :list="list"
           class="listWrapper"
         >
-          <GroupsInfo
-            :detail="detail"
-            :showOwner="false"
-            @allOptions="allOptions()"
-          ></GroupsInfo>
           <div class="gray"></div>
           <div class="menu">
           <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
@@ -503,7 +499,6 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    top: 4.746rem;
   }
   .menu span {
     position: relative;
