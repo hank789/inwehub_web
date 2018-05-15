@@ -20,7 +20,7 @@
            </div>
            <ul class="cions-list">
              <template v-for="(item, index) in list">
-               <li>
+               <li v-if="item.user_id !== localUserId">
                  <div class="cions-avatar" @tap.stop.prevent="toResume(item)">
                    <img :src="item.user_avatar_url"/>
                    <svg class="icon" aria-hidden="true" v-if="item.is_expert">
