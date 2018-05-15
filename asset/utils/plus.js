@@ -763,7 +763,7 @@ function AppInit (context) {
             // plus.nativeUI.alert( "receive:payload: "+JSON.stringify(msg.payload) );
             var payload = ''
             if (window.mui.os.ios) {
-              payload = msg.payload.payload
+              payload = msg.payload
             } else {
               payload = JSON.parse(msg.payload)
             }
