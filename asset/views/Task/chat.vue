@@ -385,7 +385,8 @@
     mounted () {
       // 保存链接
       var a = localEvent.getLocalItem('share')
-      if (a) {
+      if (a && a.length > 0) {
+        localEvent.setLocalItem('share', null)
         this.comment = a
       }
       autoTextArea()
