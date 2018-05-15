@@ -401,6 +401,12 @@
           } else {
             this.itemOptions.push('加精')
           }
+
+          if (item.feed.top) {
+            this.itemOptions.push('取消置顶')
+          } else {
+            this.itemOptions.push('置顶')
+          }
         }
 
         this.$refs.itemOptions.toggle()
@@ -422,6 +428,16 @@
             break
           case '取消加精':
             this.cancelGood(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '置顶':
+            this.setTop(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '取消置顶':
+            this.cancelTop(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
             })
             break
@@ -468,6 +484,28 @@
             })
             break
         }
+      },
+      setTop (item, callback) {
+        postRequest(`group/setSubmissionTop`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          window.mui.toast('操作成功')
+          callback()
+        })
+      },
+      cancelTop (item, callback) {
+        postRequest(`group/cancelSubmissionTop`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          window.mui.toast('操作成功')
+          callback()
+        })
       },
       addGood (item, callback) {
         postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
