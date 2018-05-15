@@ -55,7 +55,7 @@
           id: this.id
         }
 
-        postRequest(`article/bookmark-submission`, data).then(response => {
+        postRequest(`article/bookmark-submission`, data, false).then(response => {
           var code = response.data.code
 
           if (code === 6108) {
@@ -86,7 +86,7 @@
           submission_id: this.id
         }
 
-        postRequest(`article/upvote-submission`, data).then(response => {
+        postRequest(`article/upvote-submission`, data, false).then(response => {
           var code = response.data.code
 
           if (code === 6108) {
@@ -136,7 +136,7 @@
           return
         }
 
-        postRequest(`article/detail-by-slug`, {slug: this.slug}).then(response => {
+        postRequest(`article/detail-by-slug`, {slug: this.slug}, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
