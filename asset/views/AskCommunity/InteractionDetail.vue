@@ -100,7 +100,7 @@
           user_id: ''
         },
         question: {
-          id: '',
+          id: 0,
           created_at: '',
           description: '',
           tags: [],
