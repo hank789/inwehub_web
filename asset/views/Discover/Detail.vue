@@ -702,7 +702,7 @@
     height: 4.266rem;
     position: absolute;
     top: 0;
-    bottom: 74px;
+    bottom: 1.973rem;
     left: 0;
     right: 0;
     margin: auto;
