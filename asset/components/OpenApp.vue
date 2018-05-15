@@ -286,13 +286,13 @@
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
     left: 1.266rem;
-    top: -0.48rem;
+    top: -0.533rem;
     font-size: 2.186rem; }
   .component-wechat-top .left .desc {
     color: #808080;
     font-size: 0.266rem;
     position: relative;
-    top: 0.746rem;
+    top: 0.666rem;
     left: 1.333rem; }
   .component-wechat-top .right {
     height: 1.306rem;
