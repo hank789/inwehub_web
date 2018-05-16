@@ -10,16 +10,16 @@
         <div class="mui-slider-group  mui-slider-loop">
           <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
-            <a @tap.stop.prevent="goLink(notices[notices.length-1].url)"><img :src="notices[notices.length-1].img_url"></a>
+            <a @tap.stop.prevent="goLink(notices[notices.length-1].url)"><img class="lazyImg" v-lazy="notices[notices.length-1].img_url"></a>
           </div>
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img :src="notice.img_url"></a>
+            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
             <a @tap.stop.prexvent="goLink(notices[0].url)">
-              <img :src="notices[0].img_url" />
+              <img class="lazyImg" v-lazy="notices[0].img_url" />
             </a>
           </div>
         </div>
@@ -320,6 +320,13 @@
           this.hot_groups = response.data.data.hot_groups
           this.invitation_coupon = response.data.data.invitation_coupon
           this.user_group_unread = response.data.data.user_group_unread
+
+          setTimeout(() => {
+            window.mui('.mui-slider').slider({
+              interval: 5000
+            })
+          }, 100)
+
           // 是否弹受邀红包
           if (response.data.data.invitation_coupon.show) {
             userAbility.InvitationCoupon(this)
@@ -356,14 +363,7 @@
         })
       }
     },
-    updated () {
-      this.$nextTick(() => {
-        // 轮播
-        window.mui('.mui-slider').slider({
-          interval: 5000
-        })
-      })
-    },
+    updated () {},
     mounted () {
       saveLocationInfo()
       AppInit(this)
