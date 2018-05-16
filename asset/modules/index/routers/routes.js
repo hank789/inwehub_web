@@ -1259,7 +1259,8 @@ const routes = [
     component: componets.AskAsk,
     meta: {
       title: '提问',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1275,7 +1276,8 @@ const routes = [
     component: componets.AskAskInteraction,
     meta: {
       title: '提问',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
