@@ -1823,7 +1823,7 @@ const routes = [
   },
   { // 推送设置
     path: '/push/setting',
-    name: '/push-setting',
+    name: 'push-setting',
     meta: {
       title: '推送设置',
       wechatHideHeader: true
