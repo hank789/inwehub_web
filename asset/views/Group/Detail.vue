@@ -402,7 +402,7 @@
             this.itemOptions.push('加精')
           }
 
-          if (item.feed.top) {
+          if (item.top) {
             this.itemOptions.push('取消置顶')
           } else {
             this.itemOptions.push('置顶')
@@ -493,6 +493,7 @@
             return
           }
           window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 1
           callback()
         })
       },
@@ -504,6 +505,7 @@
             return
           }
           window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 0
           callback()
         })
       },
