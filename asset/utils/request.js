@@ -2,6 +2,7 @@ import axios from 'axios'
 import localEvent from '../stores/localStorage'
 import { logout } from '../utils/auth'
 import { rebootAuth } from '../utils/wechat'
+import router from '../modules/index/routers/index'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
@@ -93,6 +94,7 @@ export function apiRequest (url, data, showWaiting = true) {
           errorMsg = '网络异常'
         }
         window.mui.toast(errorMsg)
+        router.push('/exception')
       }
     }
     proObj.oldThen(success, fail)
@@ -170,6 +172,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
           errorMsg = '网络异常'
         }
         window.mui.toast(errorMsg)
+        router.push('/exception')
       }
     }
     proObj.oldThen(success, fail)
