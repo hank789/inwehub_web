@@ -32,7 +32,7 @@
             v-if="search_type === 1"></i></span>
           <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
             v-if="search_type === 2"></i></span>
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华({{detail.recommend_submission_numbers}})<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
