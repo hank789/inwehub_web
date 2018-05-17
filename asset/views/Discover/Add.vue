@@ -3,17 +3,14 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
+      <a @tap.stop.prevent="submit()"
+         class="mui-plus-visible mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>
     </header>
 
     <div class="mui-content">
-
-      <div class="category">
-        <p @tap.stop.prevent="$router.replace('/discover/publishArticles')">文章</p>
-        <p>分享<i></i></p>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</span>
-          <span v-else>选择圈子</span>
-        </button>
+      <div class="container-tabs">
+        <div class="tab" @tap.stop.prevent="$router.replace('/discover/publishArticles')"><span>文章链接</span></div>
+        <div class="tab active"><span>图文分享</span></div>
       </div>
 
       <div class="component-textareaWithImage">
@@ -53,7 +50,7 @@
         </div>
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
+        <button type="button" class="mui-plus-hidden mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
       </div>
     </div>
 
@@ -68,17 +65,17 @@
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
-      <span @tap.stop.prevent="jumpToLinkMode()">
-          <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-lianjie"></use>
-          </svg>
-        </span>
-      <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
+        <div class="component-labelWithIcon float-right" v-if="address" @tap.stop.prevent="selectGroup">
+        <template v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</template>
+        <template v-else>选择圈子</template>
+        </div>
+        <div class="component-labelWithIcon float-right" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dingwei1"></use>
         </svg>
         {{selectedAddress}}
         </div>
+
     </div>
 
     <uploadImage ref="uploadImage"
@@ -615,5 +612,9 @@
 
   #button-wrapper{
     padding-bottom:1.706rem !important;
+  }
+
+  .component-labelWithIcon{
+    margin: 13px 5px;
   }
 </style>

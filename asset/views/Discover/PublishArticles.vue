@@ -4,7 +4,7 @@
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
       <a @tap.stop.prevent="goPublish()"
-         class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认发布</a>
+         class="mui-plus-visible mui-btn appPageSubmit mui-btn-link mui-pull-right">确认发布</a>
     </header>
 
     <div class="mui-content">
