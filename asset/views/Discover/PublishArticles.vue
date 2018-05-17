@@ -3,16 +3,14 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
+      <a @tap.stop.prevent="goPublish()"
+         class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认发布</a>
     </header>
 
     <div class="mui-content">
-      <div class="category">
-        <p>文章</p>
-        <p @tap.stop.prevent="$router.replace('/discover/add')">分享</p>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</span>
-          <span v-else>选择圈子</span>
-        </button>
+      <div class="container-tabs">
+        <div class="tab active"><span>文章链接</span></div>
+        <div class="tab" @tap.stop.prevent="$router.replace('/discover/add')"><span>图文分享</span></div>
       </div>
 
       <div class="ShareArticles">
@@ -36,14 +34,14 @@
           <input type="text" placeholder="输入文章标题" v-model.trim="title" class="longContainer" v-else/>
           <i class="bot"></i>
         </li>
-        <!--<li class="channel">-->
-         <!--<p>所属圈子</p>-->
-          <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="selectGroup()">-->
-            <!--<use xlink:href="#icon-shuru"></use>-->
-          <!--</svg>-->
-          <!--<span v-if="selectedGroup.name">{{selectedGroup.name.length > 12 ?selectedGroup.name.substr(0, 12) + '...':selectedGroup.name}}</span>-->
-          <!--<i class="bot"></i>-->
-        <!--</li>-->
+        <li class="channel">
+         <p>所属圈子</p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectGroup()">
+            <use xlink:href="#icon-shuru"></use>
+          </svg>
+          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 12 ?selectedGroup.name.substr(0, 12) + '...':selectedGroup.name}}</span>
+          <i class="bot"></i>
+        </li>
         <li class="coverMap" :class="{noImg: image.length?false:true}">
           <p>封面图片</p>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectImage()">
@@ -63,8 +61,8 @@
             <label v-for="(tagName, index) in tags">{{tagName.text}}</label>
           </div>
         </li>
-        <button class="submit" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
-          发布
+        <button class="submit mui-wechat-visible" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
+          确认发布
         </button>
       </ul>
 
