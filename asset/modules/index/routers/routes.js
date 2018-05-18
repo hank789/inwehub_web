@@ -541,7 +541,8 @@ const routes = [
     component: componets.DiscoverPublishArticles,
     meta: {
       title: '发布',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
