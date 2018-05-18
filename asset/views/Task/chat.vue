@@ -189,7 +189,9 @@
           })
 
           setTimeout(() => {
-            this.$refs.RefreshList.scrollToBottom()
+            if (this.$refs.RefreshList) {
+              this.$refs.RefreshList.scrollToBottom()
+            }
           }, 500)
         }
       },
@@ -313,20 +315,10 @@
             this.source = response.data.data.source
             this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
-            if (response.data.data.r_type === 2) {
-              // 群聊
-              window.Echo.private('room.' + this.chatRoomId).notification((n) => {
-                console.log(n)
-                if (n.user_id !== this.currentUser.user_id) {
-                  this.chat(n)
-                }
-              })
-            } else {
-              window.Echo.private('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id).notification((n) => {
-                console.log(n)
-                this.chat(n)
-              })
-            }
+            window.Echo.private('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id).notification((n) => {
+              console.log(n)
+              this.chat(n)
+            })
           })
         }
       },
