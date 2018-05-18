@@ -280,6 +280,7 @@
         this.getDetail()
       },
       getDetail () {
+        this.source = null
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
           postRequest(`im/getWhisperRoom`, {
