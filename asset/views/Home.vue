@@ -61,7 +61,7 @@
         </li>
       </ul>
       <div class="line-river" v-if="new_message.length"></div>
-        <div class="component-noticeBar" v-if="new_message.length" @tap.stop.prevent="$router.pushPlus('/group/my')"><swiper :options="swiperOption" ref="mySwiper"><swiper-slide v-for="(item, index) in new_message"><span>{{ item }}</span></swiper-slide></swiper></div>
+        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
@@ -156,6 +156,7 @@
   import sessionStorageEvent from '../stores/localStorage'
   import { alertSimple } from '../utils/dialog'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { queryParent } from '../utils/dom'
 
   const Home = {
     data () {
@@ -179,8 +180,11 @@
         swiperOption: {
           direction: 'vertical',
           speed: 2500,
-          autoplay: true,
-          loop: true
+          autoplay: {
+            disableOnInteraction: false
+          },
+          loop: true,
+          onTap: this.swipperClick
         }
       }
     },
@@ -197,6 +201,17 @@
     },
     computed: {},
     methods: {
+      swipperClick (swiper, event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var link = parent.getAttribute('link')
+        if (link) {
+          this.$router.pushPlus(link)
+        }
+      },
+      toNoticeDetail (item) {
+        console.log(item)
+      },
       toDetail (item) {
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
