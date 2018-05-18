@@ -199,7 +199,7 @@
               number: 0,
               disable: false,
               rightLine: false,
-              isNew: this.detail.unread_group_im_messages,
+              newNum: this.detail.unread_group_im_messages,
               isLight: false
             },
             {

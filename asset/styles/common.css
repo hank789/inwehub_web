@@ -1817,3 +1817,12 @@ a {
   position: relative;
   color: #444;
   font-size: 14px; }
+
+
+.container-menuFooter .menu .mui-badge {
+  background: #fa4975;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  margin-left: 14px; }
