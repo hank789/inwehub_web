@@ -178,8 +178,7 @@
           show: false
         },
         swiperOption: {
-          direction: 'vertical',
-          speed: 2500,
+          speed: 6000,
           autoplay: {
             disableOnInteraction: false
           },
@@ -595,6 +594,13 @@
   }
   .swiper-container{
     height:1.04rem;
+  }
+  .component-noticeBar {
+    padding-left: 1.066rem;
+  }
+
+  .component-noticeBar span{
+    margin-left:0;
   }
 </style>
 <style>

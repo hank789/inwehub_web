@@ -65,7 +65,7 @@
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
-        <div class="component-labelWithIcon float-right" v-if="address" @tap.stop.prevent="selectGroup">
+        <div class="component-labelWithIcon selectGroup float-right" v-if="address" @tap.stop.prevent="selectGroup">
         <template v-if="selectedGroup.name"><svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
         </svg> {{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</template>
@@ -576,6 +576,9 @@
     width:1.626rem !important;
     height:1.626rem !important;
   }
+  .selectGroup{
+    background:#03AEF9;
+  }
 </style>
 
 <style>
@@ -621,4 +624,6 @@
   .component-labelWithIcon{
     margin: 0.346rem 0.133rem;
   }
+
+
 </style>
