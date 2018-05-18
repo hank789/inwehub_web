@@ -619,7 +619,7 @@
     height:auto !important;
   }
   .articleTags .tags{
-    padding-top:47px;
+    padding-top:1.253rem;
     position: relative;
     top: -0.346rem;
   }
