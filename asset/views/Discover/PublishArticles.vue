@@ -162,6 +162,7 @@
       refreshPageData () {
         this.readGroup()
         this.quickUrl()
+        this.getTags()
       },
       click () {
         this.channel = ''

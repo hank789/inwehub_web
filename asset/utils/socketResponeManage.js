@@ -57,11 +57,6 @@ function socketResponseManage (notification, context) {
       // 专家认证有新的通知;
       console.log(notification.body)
       break
-    case 'App\\Notifications\\NewMessage':
-      // 新的聊天信息；
-      console.log(notification)
-      context.$emit('chat', notification)
-      break
   }
 
   switch (notification.notification_type) {

@@ -281,6 +281,7 @@
       },
       getDetail () {
         this.source = null
+        var userInfo = localEvent.getLocalItem('UserInfo')
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
           postRequest(`im/getWhisperRoom`, {
@@ -295,6 +296,10 @@
             this.chatRoomId = response.data.data.room_id
             this.name = response.data.data.contact_name
             window.Echo.private('chat.room.' + this.chatRoomId)
+            window.Echo.private('room.' + this.chatRoomId + '.user.' + userInfo.user_id).notification((n) => {
+              console.log(n)
+              this.chat(n)
+            })
           })
         } else if (this.$route.params.room_id) {
           postRequest(`im/getRoom`, {
@@ -310,6 +315,10 @@
             this.source = response.data.data.source
             this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
+            window.Echo.private('room.' + this.chatRoomId + '.user.' + userInfo.user_id).notification((n) => {
+              console.log(n)
+              this.chat(n)
+            })
           })
         }
       },
