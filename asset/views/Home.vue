@@ -178,7 +178,7 @@
           show: false
         },
         swiperOption: {
-          speed: 2500,
+          speed: 6000,
           autoplay: {
             disableOnInteraction: false
           },
