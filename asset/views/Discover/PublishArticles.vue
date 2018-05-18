@@ -61,7 +61,7 @@
             <label v-for="(tagName, index) in tags">{{tagName.text}}</label>
           </div>
         </li>
-        <button class="submit mui-wechat-visible" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
+        <button class="submit mui-plus-hidden" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
           确认发布
         </button>
       </ul>
@@ -393,7 +393,6 @@
 <style scoped="scoped">
   .mui-content {
     background: #FFFFFF;
-    overflow: hidden !important;
   }
 
   /*清掉自带样式*/
