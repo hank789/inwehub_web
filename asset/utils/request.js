@@ -92,9 +92,9 @@ export function apiRequest (url, data, showWaiting = true) {
         errorMsg = errorMsg.toString()
         if (errorMsg === 'Error: Network Error') {
           errorMsg = '网络异常'
+          router.push('/exception')
         }
         window.mui.toast(errorMsg)
-        router.push('/exception')
       }
     }
     proObj.oldThen(success, fail)
@@ -171,9 +171,9 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         errorMsg = errorMsg.toString()
         if (errorMsg === 'Error: Network Error') {
           errorMsg = '网络异常'
+          router.push('/exception')
         }
         window.mui.toast(errorMsg)
-        router.push('/exception')
       }
     }
     proObj.oldThen(success, fail)
