@@ -60,8 +60,8 @@
           <p>合作</p>
         </li>
       </ul>
-      <div class="line-river" v-if="user_group_unread"></div>
-      <div class="component-noticeBar" v-if="user_group_unread" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
+      <div class="line-river" v-if="new_message.length"></div>
+        <div class="component-noticeBar" v-if="new_message.length" @tap.stop.prevent="$router.pushPlus('/group/my')"><swiper :options="swiperOption" ref="mySwiper"><swiper-slide v-for="(item, index) in new_message"><span>{{ item }}</span></swiper-slide></swiper></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
@@ -155,6 +155,7 @@
   import top3 from '../statics/images/top3@3x.png'
   import sessionStorageEvent from '../stores/localStorage'
   import { alertSimple } from '../utils/dialog'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   const Home = {
     data () {
@@ -171,9 +172,15 @@
         recommendAsks: [],
         recommendLoading: 0,
         recommendPage: 0,
-        user_group_unread: 0,
+        new_message: [],
         invitation_coupon: {
           show: false
+        },
+        swiperOption: {
+          direction: 'vertical',
+          speed: 2500,
+          autoplay: true,
+          loop: true
         }
       }
     },
@@ -181,7 +188,9 @@
       this.refreshPageData()
     },
     components: {
-      HomeSearch
+      HomeSearch,
+      swiper,
+      swiperSlide
     },
     activated: function () {
       this.refreshPageData()
@@ -319,7 +328,7 @@
           this.notices = response.data.data.notices
           this.hot_groups = response.data.data.hot_groups
           this.invitation_coupon = response.data.data.invitation_coupon
-          this.user_group_unread = response.data.data.user_group_unread
+          this.new_message = response.data.data.new_message
 
           setTimeout(() => {
             window.mui('.mui-slider').slider({
@@ -557,6 +566,12 @@
   .move1 {
     animation: myMove1 1s ease-in infinite;
     -webkit-animation: myMove1 1s ease-in infinite;
+  }
+  .component-noticeBar{
+    overflow: hidden;
+  }
+  .swiper-container{
+    height:1.04rem;
   }
 </style>
 <style>
