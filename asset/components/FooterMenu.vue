@@ -8,6 +8,7 @@
           </svg>
         </div>
         <div class="desc">{{item.text}}{{item.number?item.number:''}}</div>
+        <div class="mui-badge" v-if="item.newNum">{{item.newNum}}</div>
       </div>
       <div class="line-vertical" v-if="item.rightLine"></div>
     </template>
@@ -23,7 +24,8 @@
         number: this.detail.comments_number,
         disable: false,
         rightLine: true,
-        isLight: false
+        isLight: false,
+        newNum: 5
       },
    * ]
    */
@@ -48,5 +50,6 @@
   }
 </script>
 
-<style>
+<style scoped="">
+
 </style>

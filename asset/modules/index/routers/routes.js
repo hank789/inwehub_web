@@ -467,7 +467,6 @@ const routes = [
     component: componets.Taskchat,
     meta: {
       title: '聊天',
-      wechatHideHeader: true,
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
@@ -541,7 +540,8 @@ const routes = [
     component: componets.DiscoverPublishArticles,
     meta: {
       title: '发布',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -1259,7 +1259,8 @@ const routes = [
     component: componets.AskAsk,
     meta: {
       title: '提问',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1275,7 +1276,8 @@ const routes = [
     component: componets.AskAskInteraction,
     meta: {
       title: '提问',
-      keepAlive: true
+      keepAlive: true,
+      wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
@@ -1798,7 +1800,7 @@ const routes = [
     component: componets.Guide
   },
   { // feedback
-    path: '/feedback/:type',
+    path: '/feedback/advise',
     name: 'feedback',
     meta: {
       title: '反馈建议',
@@ -1823,7 +1825,7 @@ const routes = [
   },
   { // 推送设置
     path: '/push/setting',
-    name: '/push-setting',
+    name: 'push-setting',
     meta: {
       title: '推送设置',
       wechatHideHeader: true

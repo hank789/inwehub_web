@@ -23,18 +23,18 @@
 
     <!--微信端-->
     <div class="suspension" v-if="isWeixin">
-      <!--<p>-->
-        <!--<svg class= "icon" aria-hidden="true" @tap.stop.prevent="close('isWeixin')">-->
-          <!--<use xlink:href="#icon-guanbi"></use>-->
-        <!--</svg>-->
-      <!--</p>-->
-      <p @tap.stop.prevent="$router.push('/home')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-logotuxing"></use>
-        </svg>
-      </p>
-      <p @tap.stop.prevent="$router.push('/home')">首页</p>
-      <p><a id="btnOpenAppWeixin" :href="url" target="_blank">APP内打开</a></p>
+      <div class="component-wechat-top">
+        <div class="left" @tap.stop.prevent="$router.push('/home')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logotuxing"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logowenzi"></use>
+          </svg>
+          <div class="desc">最具品质的咨询顾问社区</div>
+        </div>
+        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a><i class="line-wall"></i><a v-if="isLogined" @tap.stop.prevent="$router.push('/my')">我的主页</a><a v-else @tap.stop.prevent="$router.push('/login')">登录/注册</a></div>
+      </div>
     </div>
   </div>
 </template>
@@ -43,6 +43,7 @@
   /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "link" }] */
 
   import localEvent from '../stores/sessionStorage'
+  import { isLogined } from '../utils/auth'
 
   export default {
     created () {
@@ -65,12 +66,12 @@
 
       if (this.isWeixin) {
         // 深度链接
-        Mlink = new window.Mlink({
-          mlink: mlink + '?name=2', // 短链地址
-          button: document.querySelector('a#btnOpenAppWeixin'),
-          params: {url: 'test'},
-          cparams: {path: 'my'}
-        })
+//        Mlink = new window.Mlink({
+//          mlink: mlink + '?name=2', // 短链地址
+//          button: document.querySelector('a#btnOpenAppWeixin'),
+//          params: {url: 'test'},
+//          cparams: {path: 'my'}
+//        })
       }
     },
     watch: {
@@ -83,6 +84,9 @@
       }
     },
     methods: {
+      downloadApp () {
+        window.location.href = this.url
+      },
       stopShowOpenApp () {
         if (this.$route.path === '/invitation/image') {
           return true
@@ -153,7 +157,8 @@
       return {
         url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp',
         isWeixin: false,
-        isH5: false
+        isH5: false,
+        isLogined: isLogined()
       }
     }
   }
@@ -266,52 +271,52 @@
     -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
 
-  /*.suspension p:nth-of-type(1) {*/
-    /*float: left;*/
-    /*color: #b4b4b6;*/
-    /*margin-left: 0.613rem;*/
-    /*margin-top: 0.4rem;*/
-    /*margin-right: 0.533rem;*/
-    /*font-size: 0.426rem;*/
+  .component-wechat-top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 1.306rem; }
+  .component-wechat-top .left {
+    position: relative; }
+  .component-wechat-top .left .icon:nth-child(1) {
+    position: absolute;
+    left: 0.266rem;
+    top: 0.133rem;
+    font-size: 1.08rem; }
+  .component-wechat-top .left .icon:nth-child(2) {
+    position: absolute;
+    left: 1.266rem;
+    top: -0.533rem;
+    font-size: 2.186rem; }
+  .component-wechat-top .left .desc {
+    color: #808080;
+    font-size: 0.266rem;
+    position: relative;
+    top: 0.666rem;
+    left: 1.333rem; }
+  .component-wechat-top .right {
+    height: 1.306rem;
+    line-height: 1.306rem;
+    padding-right: 0.426rem;
+    color: #03AEF9;
+    font-size: 0.373rem; }
+  .component-wechat-top .right a {
+    color: #03AEF9; }
+  .component-wechat-top .right .line-wall {
+    margin: 0 0.266rem;
+    position: relative;
+    width:0.026rem;
+    top: 0.026rem;
+    height: 0.346rem; }
 
-  /*}*/
-
-  .suspension p:nth-of-type(1) {
-    float: left;
-    width: 0.933rem;
-    height: 0.933rem;
-    border-radius: 0.24rem;
-    background: #f3f4f6;
-    margin-top: 0.186rem;
-    text-align: center;
-    margin-left: 0.373rem;
-  }
-
-  .suspension p:nth-of-type(1) svg {
-    font-size: 0.666rem;
-    margin-top: 0.16rem;
-    color: #009fe8;
-  }
-
-  .suspension p:nth-of-type(2) {
-    float: left;
-    font-size: 0.426rem;
-    color: #171616;
-    margin-top: 0.373rem;
-    margin-left: 0.266rem;
-  }
-
-  .suspension a {
-    float: right;
-    width: 2.346rem;
-    height: 0.8rem;
-    border-radius: 0.106rem;
-    background: #3c95f9;
-    font-size: 0.373rem;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 0.8rem;
-    margin-top: 0.266rem;
-    margin-right: 0.373rem;
+  .line-wall{
+    display: inline-block;
+    position: relative;
+    width: 0.026rem;
+    height: 0.266rem;
+    background-color: #dcdcdc;
   }
 </style>

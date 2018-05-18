@@ -10,16 +10,16 @@
         <div class="mui-slider-group  mui-slider-loop">
           <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[notices.length-1]">
-            <a @tap.stop.prevent="goLink(notices[notices.length-1].url)"><img :src="notices[notices.length-1].img_url"></a>
+            <a @tap.stop.prevent="goLink(notices[notices.length-1].url)"><img class="lazyImg" v-lazy="notices[notices.length-1].img_url"></a>
           </div>
           <div class="mui-slider-item" v-for="(notice, index) in notices">
-            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img :src="notice.img_url"></a>
+            <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
           <div class="mui-slider-item mui-slider-item-duplicate" v-if="notices[0]">
             <a @tap.stop.prexvent="goLink(notices[0].url)">
-              <img :src="notices[0].img_url" />
+              <img class="lazyImg" v-lazy="notices[0].img_url" />
             </a>
           </div>
         </div>
@@ -60,8 +60,8 @@
           <p>合作</p>
         </li>
       </ul>
-      <div class="line-river" v-if="user_group_unread"></div>
-      <div class="component-noticeBar" v-if="user_group_unread" @tap.stop.prevent="$router.pushPlus('/group/my')"><span>您的圈子有新动态！</span></div>
+      <div class="line-river" v-if="new_message.length"></div>
+        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper" @tap="swiperClick"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
@@ -155,6 +155,8 @@
   import top3 from '../statics/images/top3@3x.png'
   import sessionStorageEvent from '../stores/localStorage'
   import { alertSimple } from '../utils/dialog'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { queryParent } from '../utils/dom'
 
   const Home = {
     data () {
@@ -171,9 +173,17 @@
         recommendAsks: [],
         recommendLoading: 0,
         recommendPage: 0,
-        user_group_unread: 0,
+        new_message: [],
         invitation_coupon: {
           show: false
+        },
+        swiperOption: {
+          speed: 6000,
+          autoplay: {
+            disableOnInteraction: false
+          },
+          loop: true,
+          onTap: this.swipperClickTwo
         }
       }
     },
@@ -181,13 +191,34 @@
       this.refreshPageData()
     },
     components: {
-      HomeSearch
+      HomeSearch,
+      swiper,
+      swiperSlide
     },
     activated: function () {
       this.refreshPageData()
     },
     computed: {},
     methods: {
+      swipperClickTwo (swiper, event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var link = parent.getAttribute('link')
+        if (link) {
+          this.$router.pushPlus(link)
+        }
+      },
+      swiperClick (event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var link = parent.getAttribute('link')
+        if (link) {
+          this.$router.pushPlus(link)
+        }
+      },
+      toNoticeDetail (item) {
+        console.log(item)
+      },
       toDetail (item) {
         if (item.question_type === 2) {
           this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
@@ -319,7 +350,14 @@
           this.notices = response.data.data.notices
           this.hot_groups = response.data.data.hot_groups
           this.invitation_coupon = response.data.data.invitation_coupon
-          this.user_group_unread = response.data.data.user_group_unread
+          this.new_message = response.data.data.new_message
+
+          setTimeout(() => {
+            window.mui('.mui-slider').slider({
+              interval: 5000
+            })
+          }, 100)
+
           // 是否弹受邀红包
           if (response.data.data.invitation_coupon.show) {
             userAbility.InvitationCoupon(this)
@@ -356,14 +394,7 @@
         })
       }
     },
-    updated () {
-      this.$nextTick(() => {
-        // 轮播
-        window.mui('.mui-slider').slider({
-          interval: 5000
-        })
-      })
-    },
+    updated () {},
     mounted () {
       saveLocationInfo()
       AppInit(this)
@@ -557,6 +588,19 @@
   .move1 {
     animation: myMove1 1s ease-in infinite;
     -webkit-animation: myMove1 1s ease-in infinite;
+  }
+  .component-noticeBar{
+    overflow: hidden;
+  }
+  .swiper-container{
+    height:1.04rem;
+  }
+  .component-noticeBar {
+    padding-left: 1.066rem;
+  }
+
+  .component-noticeBar span{
+    margin-left:0;
   }
 </style>
 <style>

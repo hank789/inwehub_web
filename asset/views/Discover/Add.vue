@@ -3,17 +3,14 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
+      <a @tap.stop.prevent="submit()"
+         class="mui-plus-visible mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>
     </header>
 
     <div class="mui-content">
-
-      <div class="category">
-        <p @tap.stop.prevent="$router.replace('/discover/publishArticles')">文章</p>
-        <p>分享<i></i></p>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</span>
-          <span v-else>选择圈子</span>
-        </button>
+      <div class="container-tabs">
+        <div class="tab" @tap.stop.prevent="$router.replace('/discover/publishArticles')"><span>文章链接</span></div>
+        <div class="tab active"><span>图文分享</span></div>
       </div>
 
       <div class="component-textareaWithImage">
@@ -53,7 +50,7 @@
         </div>
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
+        <button type="button" class="mui-plus-hidden mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
       </div>
     </div>
 
@@ -68,17 +65,21 @@
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
-      <span @tap.stop.prevent="jumpToLinkMode()">
-          <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-lianjie"></use>
-          </svg>
-        </span>
-      <div class="component-labelWithIcon float-right margin-13-15" v-if="address" @tap.stop.prevent="toAddress">
+        <div class="component-labelWithIcon selectGroup float-right" v-if="address" @tap.stop.prevent="selectGroup">
+        <template v-if="selectedGroup.name"><svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-wodequanzi-shouye"></use>
+        </svg> {{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</template>
+        <template v-else> <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-wodequanzi-shouye"></use>
+        </svg> 选择圈子</template>
+        </div>
+        <div class="component-labelWithIcon float-right" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dingwei1"></use>
         </svg>
         {{selectedAddress}}
         </div>
+
     </div>
 
     <uploadImage ref="uploadImage"
@@ -143,14 +144,14 @@
     mounted () {
       var referer = localEvent.getLocalItem('referer')
       if (!(referer && referer.path === '/selectUser')) {
-        localEvent.clearLocalItem('discover_selectUser' + this.id)
+        localEvent.clearLocalItem('selected_discover_user' + this.id)
       }
 
       if (referer) {
         if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
             // ...
         } else {
-          localEvent.clearLocalItem('discover_skill_tags' + this.id)
+          localEvent.clearLocalItem('selected_discover_skill_tags' + this.id)
         }
       }
       autoTextArea()
@@ -173,10 +174,10 @@
       },
       getAddress () {
         // 获取地理位置
-        var Address = localEvent.getLocalItem('discover_Address' + this.id, this.selectedAddress)
+        var Address = localEvent.getLocalItem('selected_discover_address' + this.id, this.selectedAddress)
         if (Address.toString()) {
           this.selectedAddress = Address
-          localEvent.setLocalItem('discover_Address' + this.id, this.selectedAddress)
+          localEvent.setLocalItem('selected_discover_address' + this.id, this.selectedAddress)
         }
       },
       hashSymbolFound () {
@@ -197,7 +198,7 @@
       },
       // 删除标签
       hashSymbolDelete (text) {
-        var tags = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        var tags = localEvent.getLocalItem('selected_discover_skill_tags' + this.id)
         for (var i in tags) {
           var name = '#' + tags[i].text + ' '
           if (name === text) {
@@ -206,11 +207,11 @@
             tags.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_skill_tags' + this.id, tags)
+        localEvent.setLocalItem('selected_discover_skill_tags' + this.id, tags)
       },
        //  删除用户
       addressAppearDelete (text) {
-        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_user' + this.id)
         for (var i in users) {
           var name = '@' + users[i].name + ' '
           if (name === text) {
@@ -218,14 +219,14 @@
             users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('discover_selectUser' + this.id, users)
+        localEvent.setLocalItem('selected_discover_user' + this.id, users)
       },
       syncSelectUser () {
         // 循环插入@人
         var users = this.getSelectUser()
         var spanUserNameAndIds = users.nameAndIds
         var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
-        console.log('discover_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+        console.log('selected_discover_user:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的用户都要添加上
         var waitAddArr = []
@@ -287,7 +288,7 @@
         }
       },
       getSelectUser () {
-        var users = localEvent.getLocalItem('discover_selectUser' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_user' + this.id)
         var spanUserNameAndIds = []
         var spanUserNames = []
         for (var i in users) {
@@ -305,7 +306,7 @@
         }
       },
       getSelectTags () {
-        var users = localEvent.getLocalItem('discover_skill_tags' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_skill_tags' + this.id)
         var spanUserNameAndIds = []
 
         var spanNames = []
@@ -423,9 +424,9 @@
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
-        localEvent.clearLocalItem('discover_skill_tags' + this.id)
-        localEvent.clearLocalItem('discover_selectUser' + this.id)
-        localEvent.clearLocalItem('discover_Address' + this.id)
+        localEvent.clearLocalItem('selected_discover_skill_tags' + this.id)
+        localEvent.clearLocalItem('selected_discover_user' + this.id)
+        localEvent.clearLocalItem('selected_discover_address' + this.id)
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
@@ -575,6 +576,9 @@
     width:1.626rem !important;
     height:1.626rem !important;
   }
+  .selectGroup{
+    background:#03AEF9;
+  }
 </style>
 
 <style>
@@ -616,4 +620,10 @@
   #button-wrapper{
     padding-bottom:1.706rem !important;
   }
+
+  .component-labelWithIcon{
+    margin: 0.346rem 0.133rem;
+  }
+
+
 </style>

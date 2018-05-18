@@ -2,6 +2,7 @@ import axios from 'axios'
 import localEvent from '../stores/localStorage'
 import { logout } from '../utils/auth'
 import { rebootAuth } from '../utils/wechat'
+import router from '../modules/index/routers/index'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
@@ -69,7 +70,9 @@ export function apiRequest (url, data, showWaiting = true) {
       if (code !== 1000) {
         return Promise.reject(response.data.message)
       }
-
+      if (response.data.needRefresh === true) {
+        localEvent.setLocalItem('needRefresh', {value: true})
+      }
       return response.data.data
     })
     .catch(e => {
@@ -89,6 +92,7 @@ export function apiRequest (url, data, showWaiting = true) {
         errorMsg = errorMsg.toString()
         if (errorMsg === 'Error: Network Error') {
           errorMsg = '网络异常'
+          router.push('/exception')
         }
         window.mui.toast(errorMsg)
       }
@@ -109,6 +113,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
   if (appVersion) {
     data.current_version = appVersion.version
   }
+  data.inwehub_user_device = window.getUserAppDevice()
 
   var config = {}
   config.validateStatus = status => status === 200
@@ -140,7 +145,9 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
           return Promise.reject(response.data.message)
         }
       }
-
+      if (response.data.needRefresh === true) {
+        localEvent.setLocalItem('needRefresh', {value: true})
+      }
       return response
     })
     .catch(e => {
@@ -164,6 +171,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         errorMsg = errorMsg.toString()
         if (errorMsg === 'Error: Network Error') {
           errorMsg = '网络异常'
+          router.push('/exception')
         }
         window.mui.toast(errorMsg)
       }

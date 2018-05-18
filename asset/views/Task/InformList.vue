@@ -31,16 +31,7 @@
                   </p>
                   <p>前往完成</p>
                 </div>
-                <!--<li @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.last_message">-->
-                  <!--<img src="../../statics/images/task.png" />-->
-                  <!--<div class="message" v-if="list.todo_task_message.unread_count">{{list.todo_task_message.unread_count}}</div>-->
-                  <!--<p>-->
-                  <!--<span>任务通知</span>-->
-                  <!--<span class="mui-ellipsis"><i>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.task_type_description: ""}}</i><i>{{list.todo_task_message.last_message ? '&nbsp;|&nbsp;' + list.todo_task_message.last_message.status_description: ""}}</i> </span>-->
-                  <!--</p>-->
-                  <!--<a>{{list.todo_task_message.last_message ? list.todo_task_message.last_message.created_at : ''}}</a>-->
-                  <!--<i class="bot"></i>-->
-                <!--</li>-->
+
                 <li @tap.stop.prevent="skip(1)" v-if="list.notice_message.last_message">
                   <img src="../../statics/images/inform1.png"/>
                   <div class="message" v-if="list.notice_message.unread_count">{{list.notice_message.unread_count}}</div>
@@ -65,16 +56,7 @@
                   </a>
                   <i class="bot"></i>
                 </li>
-                <!--<li @tap.stop.prevent="$router.pushPlus('/integralbar')">-->
-                      <!--<img src="../../statics/images/integral1.png" />-->
-                      <!--<div class="message">99</div>-->
-                      <!--<p>-->
-                         <!--<span>积分变动</span>-->
-                         <!--<span class="mui-ellipsis">回答了一条问题增加2积分</span>-->
-                      <!--</p>-->
-                      <!--<a>16:44</a>-->
-                      <!--<i class="bot"></i>-->
-                 <!--</li>-->
+
                 <li @tap.stop.prevent="skip(3)" v-if="list.task_message.last_message">
                   <img src="../../statics/images/mission.png"/>
                   <div class="message" v-if="list.task_message.unread_count">{{list.task_message.unread_count}}</div>
@@ -100,7 +82,7 @@
                   <i class="bot"></i>
                 </li>
                 <!--消息通知-->
-                <li   v-for="(item, index) in list.im_messages">
+                <li v-for="(item, index) in list.im_messages" :class="'type_' + item.room_type">
                   <img :src="item.avatar" class="radius" @tap.stop.prevent="toAvatar(item.contact_uuid)"/>
                   <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
                   <p @tap.stop.prevent="gochat(item)">
@@ -116,7 +98,7 @@
               </ul>
           </RefreshList>
         </div>
-    <!--<div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>-->
+
 
     <Options
       ref="allOptions"
@@ -232,7 +214,13 @@
       },
       gochat (item) {
         item.unread_count = 0
-        this.$router.pushPlus('/chat/' + item.contact_id)
+        if (item.room_type === 1) {
+          // 私聊
+          this.$router.pushPlus('/chat/' + item.contact_id)
+        } else {
+          // 群聊
+          this.$router.pushPlus('/group/chat/' + item.room_id)
+        }
       },
       skip (num) {
         switch (num) {
@@ -491,5 +479,7 @@
      font-size: 0.533rem;
      margin-bottom: 0.266rem;
   }
-
+  .type_2 img{
+    border-radius: 0.266rem;
+  }
 </style>

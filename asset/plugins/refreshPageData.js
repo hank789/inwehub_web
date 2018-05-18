@@ -4,6 +4,7 @@ import { scrollToTop } from '../utils/scrollToTop'
 import EventObj from '../utils/event'
 import { setWebviewNewUrl } from '../utils/plus'
 import { showWebview } from '../utils/webview'
+import localEvent from '../stores/localStorage'
 
 export default {
   install: function (Vue, options) {
@@ -36,9 +37,13 @@ export default {
         if (this.refreshPageData) {
           EventObj.addLastEventListener('refreshPageData', (e) => {
             console.log('calledEvent: refreshPageData')
-            if (this.refreshPageData) {
-              console.log('calledMethod: refreshPageData')
-              this.refreshPageData(e.detail)
+            var needRefresh = localEvent.getLocalItem('needRefresh')
+            if (needRefresh && needRefresh.value) {
+              localEvent.setLocalItem('needRefresh', {value: false})
+              if (this.refreshPageData) {
+                console.log('calledMethod: refreshPageData')
+                this.refreshPageData(e.detail)
+              }
             }
           })
         }

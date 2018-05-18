@@ -27,7 +27,7 @@
 <script>
 
   import localEvent from '../../../stores/localStorage'
-  import { apiRequest } from '../../../utils/request'
+  import { postRequest } from '../../../utils/request'
 
   export default {
     data: () => ({
@@ -51,11 +51,15 @@
           'name': this.name
         }
 
-        apiRequest(`profile/update`, data).then(res => {
-          if (res !== false) {
-            window.mui.toast('保存成功')
-            window.mui.back()
+        postRequest(`profile/update`, data).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
           }
+
+          window.mui.toast('保存成功')
+          window.mui.back()
         })
       }
     }

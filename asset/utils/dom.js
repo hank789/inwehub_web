@@ -179,6 +179,75 @@ function initDocRem () {
   })
 }
 
+/**
+ * 滑动页面
+ */
+function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
+  var prevTop = 0
+  var container = document.querySelector(element)
+
+  container.addEventListener('scroll', function (e) {
+    if (container.scrollTop > prevTop) {
+      prevTop = container.scrollTop
+
+      // 手指上滑
+      console.log('top:' + container.scrollTop + ', clientHeight:' + container.clientHeight + ', scrollHeight:' + container.scrollHeight)
+      if (container.scrollTop >= container.scrollHeight - container.clientHeight) {
+        // 页面已到底部
+        if (toUpEnd) { toUpEnd(container.scrollHeight - container.clientHeight) }
+      } else {
+        if (toUp) { toUp() }
+      }
+    } else if (container.scrollTop < prevTop) {
+      prevTop = container.scrollTop
+
+      // 手指下滑
+      if (container.scrollTop === 0) {
+        // 页面已到顶部
+        if (toDownEnd) { toDownEnd() }
+      } else {
+        if (toDown) { toDown() }
+      }
+    }
+  })
+}
+
+function scrollDetailPage () {
+  var menuFooter = document.querySelector('.container-menuFooter').classList
+  scrollPage('.mui-content', () => {
+    menuFooter.remove('showFooter')
+    menuFooter.add('hideFooter')
+    document.querySelector('.mui-content').style.bottom = '0'
+  }, (height) => {
+    menuFooter.remove('hideFooter')
+    menuFooter.add('showFooter')
+    document.querySelector('.mui-content').style.bottom = '50px'
+    document.querySelector('.mui-content').scrollTop = height
+  }, () => {
+    document.querySelector('.mui-content').style.bottom = '50px'
+    menuFooter.remove('hideFooter')
+    menuFooter.add('showFooter')
+  })
+}
+
+var doSomethingTimer = null
+var doSometing = (callback, timeout = 1000) => {
+  if (doSomethingTimer) {
+    clearTimeout(doSomethingTimer)
+  }
+
+  doSomethingTimer = setTimeout(() => {
+    callback()
+  }, timeout)
+}
+
+var ainimationProgress = (callback, compareCallback) => {
+  var result = compareCallback()
+  if (!result) {
+    setTimeout(ainimationProgress(callback, compareCallback), 100)
+  }
+}
+
 export {
   queryParent,
   textToLink,
@@ -189,6 +258,10 @@ export {
   autoBlur,
   transferTagToLink,
   dragDownElement,
-  initDocRem
+  initDocRem,
+  scrollPage,
+  doSometing,
+  ainimationProgress,
+  scrollDetailPage
 }
 

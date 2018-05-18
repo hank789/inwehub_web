@@ -1704,3 +1704,131 @@ a {
 .component-imageAndText .buttonWrapper.active .button {
   border: 0.013rem solid #03AEF9;
   color: #03AEF9; }
+
+
+@-webkit-keyframes showFooter {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+
+@-webkit-keyframes hideFooter {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes showFooter {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+
+@keyframes hideFooter {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.showFooter{
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: showFooter;
+  animation-name: showFooter;
+}
+
+.hideFooter{
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: hideFooter;
+  animation-name: hideFooter;
+}
+
+/* app 页面右上角按钮 */
+.appPageSubmit{
+  position: fixed;
+  right: 0;
+  top: 0.266rem;
+  z-index: 999;
+  background: none;
+  width: auto;
+  margin: 0;
+  font-family: PingFangSC-Medium;
+  height: auto;
+}
+
+
+.container-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  height: 1.04rem;
+  line-height: 1.04rem; }
+.container-tabs .tab {
+  width: 50%;
+  text-align: center; }
+.container-tabs .tab.active {
+  font-family: PingFangSC-Medium; }
+.container-tabs .tab.active span:after {
+  content: '';
+  position: absolute;
+  bottom: -0.24rem;
+  left: 0;
+  background: #03AEF9;
+  width: 100%;
+  z-index: 77;
+  height: 0.04rem; }
+.container-tabs .tab span {
+  position: relative;
+  color: #444;
+  font-size: 0.373rem; }
+
+
+.container-menuFooter .menu .mui-badge {
+  background: #fa4975;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 0.186rem;
+  margin-left: 0.373rem; }
+
+
+.mui-bar .mui-btn-link.appPageSubmit{
+  color:#03AEF9 !important;
+}

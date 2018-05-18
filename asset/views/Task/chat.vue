@@ -4,8 +4,10 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">{{name}}</h1>
+      <a v-if="source" @tap.stop.prevent="showOptions"
+         class="mui-btn appPageSubmit mui-btn-link mui-pull-right">圈子</a>
     </header>
-    <div class="mui-content" id='contentwrapper'>
+    <div class="mui-content" id='contentwrapper' :class="{singleChat: !source}">
 
       <RefreshList v-if="this.chatRoomId" ref="RefreshList"
         v-model="list"
@@ -28,6 +30,7 @@
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>
+                <i>{{item.user_name}}</i>
                 <span v-if="item.data.img" class="chatImg">
                    <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
@@ -80,6 +83,13 @@
 
     <typing class="typingWrapper" v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
 
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="itemOptions"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -95,6 +105,7 @@
   import Typing from '../../components/Typing.vue'
   import { searchText } from '../../utils/search'
   import localEvent from '../../stores/localStorage'
+  import Options from '../../components/Options.vue'
 
   const Chat = {
     data: () => ({
@@ -107,7 +118,12 @@
       maxImageCount: 1,
       images: [],
       isTyping: false,
-      name: ''
+      itemOptions: [
+        '进入圈子'
+        // '关闭消息通知'
+      ],
+      name: '',
+      source: null
     }),
     created () {
       this.getDetail()
@@ -118,12 +134,27 @@
       RefreshList,
       uploadImage,
       SingleImage,
-      Typing
+      Typing,
+      Options
     },
     watch: {
       '$route': 'refreshPageData'
     },
     methods: {
+      showOptions () {
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case this.itemOptions[0]:
+            this.$refs.itemOptions.toggle()
+            this.$router.pushPlus('/group/detail/' + this.source.id)
+            break
+          case this.itemOptions[1]:
+            // todo 接后台关闭消息通知接口
+            break
+        }
+      },
       uploadImageSuccess (images) {
         if (images.length) {
           if (!images[0].base64) {
@@ -158,7 +189,9 @@
           })
 
           setTimeout(() => {
-            this.$refs.RefreshList.scrollToBottom()
+            if (this.$refs.RefreshList) {
+              this.$refs.RefreshList.scrollToBottom()
+            }
           }, 500)
         }
       },
@@ -228,7 +261,7 @@
           user_id: obj.user_id,
           avatar: obj.avatar,
           uuid: obj.uuid,
-          name: obj.name
+          user_name: obj.name
         }
         if (parseInt(this.chatRoomId) === obj.room_id) {
           this.list.push(item)
@@ -248,6 +281,7 @@
         this.getDetail()
       },
       getDetail () {
+        this.source = null
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
           postRequest(`im/getWhisperRoom`, {
@@ -262,6 +296,10 @@
             this.chatRoomId = response.data.data.room_id
             this.name = response.data.data.contact_name
             window.Echo.private('chat.room.' + this.chatRoomId)
+            window.Echo.private('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id).notification((n) => {
+              console.log(n)
+              this.chat(n)
+            })
           })
         } else if (this.$route.params.room_id) {
           postRequest(`im/getRoom`, {
@@ -274,8 +312,13 @@
               return
             }
             this.chatRoomId = response.data.data.id
+            this.source = response.data.data.source
             this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
+            window.Echo.private('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id).notification((n) => {
+              console.log(n)
+              this.chat(n)
+            })
           })
         }
       },
@@ -385,7 +428,8 @@
     mounted () {
       // 保存链接
       var a = localEvent.getLocalItem('share')
-      if (a) {
+      if (a && a.length > 0) {
+        localEvent.setLocalItem('share', null)
         this.comment = a
       }
       autoTextArea()
@@ -472,6 +516,7 @@
   .consumer p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
+    position: relative;
   }
 
   .consumer p:nth-of-type(2) img {
@@ -494,6 +539,15 @@
     background: #FFFFFF;
     padding: 0.186rem;
     word-wrap:break-word;
+    margin-top: 0.426rem;
+  }
+
+  .consumer p:nth-of-type(2) i{
+   position: absolute;
+    top: -0.106rem;
+    left: 1.44rem;
+    color:#808080;
+    font-size:0.293rem;
   }
 
   .consumer p:nth-of-type(2) span:after {
@@ -562,6 +616,7 @@
   .Customerservice p:nth-of-type(2) {
     width: 100%;
     overflow: hidden;
+    position: relative;
   }
 
   .Customerservice p:nth-of-type(2) img {
@@ -657,6 +712,18 @@
     bottom:1.333rem;
     text-align: center;
     width: 100%;
+  }
+  .singleChat .Customerservice p:nth-of-type(2) i{
+    display: none;
+  }
+  .singleChat .consumer p:nth-of-type(2) i{
+    display: none;
+  }
+  .singleChat .Customerservice p:nth-of-type(2) span{
+    margin-top:0;
+  }
+  .singleChat .consumer p:nth-of-type(2) span{
+    margin-top:0;
   }
 </style>
 <style>

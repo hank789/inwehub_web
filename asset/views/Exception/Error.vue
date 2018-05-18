@@ -35,7 +35,7 @@
     }),
     methods: {
       refresh () {
-        this.$router.push('/ad')
+        this.$router.go(-1)
       }
     },
     created () {

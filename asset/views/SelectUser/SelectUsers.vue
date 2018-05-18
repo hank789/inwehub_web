@@ -143,7 +143,7 @@
           this.apperClose = false
         }
         if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
-          localEvent.setLocalItem(this.$route.query.from + '_selectUser' + this.userId, options)
+          localEvent.setLocalItem('selected_' + this.$route.query.from + '_user' + this.userId, options)
         } else {
           return false
         }
@@ -160,6 +160,9 @@
           if (response.data.data.length > 0) {
             var arr = response.data.data
             for (var i = 0; i < arr.length; i++) {
+              if (!arr[i].user_name) {
+                continue
+              }
               var item = {
                 id: arr[i].user_id,
                 name: arr[i].user_name,

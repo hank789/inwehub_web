@@ -32,7 +32,7 @@
             v-if="search_type === 1"></i></span>
           <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
             v-if="search_type === 2"></i></span>
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华({{detail.recommend_submission_numbers}})<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
@@ -45,14 +45,14 @@
                   :show='isShowItemOption(item)'
                   ref="discoverShare"
                   @comment="comment"
-                  @showItemOptions="showItemOptions"
+                  @showItemOptions="showItemOptions(item, index)"
                 ></DiscoverShare>
               </div>
               <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''"  @tap.stop.prevent="toDetail(item)">
                 <SubmitReadhubAriticle :data="item"
                                        :show='isShowItemOption(item)'
                                        @comment="comment"
-                                       @showItemOptions="showItemOptions"
+                                       @showItemOptions="showItemOptions(item, index)"
                 ></SubmitReadhubAriticle>
               </div>
             </template>
@@ -161,6 +161,7 @@
         allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
+        itemOptionsIndex: 0,
         shareOption: {
           title: '',
           link: '',
@@ -198,7 +199,7 @@
               number: 0,
               disable: false,
               rightLine: false,
-              isNew: this.detail.unread_group_im_messages,
+              newNum: this.detail.unread_group_im_messages,
               isLight: false
             },
             {
@@ -384,9 +385,10 @@
 
         return false
       },
-      showItemOptions (item) {
+      showItemOptions (item, index) {
         this.itemOptions = []
         this.itemOptionsObj = item
+        this.itemOptionsIndex = index
         if (getLocalUserId() === item.user.id) {
           this.itemOptions = [
             '删除'
@@ -394,7 +396,17 @@
         }
 
         if (this.detail.is_joined === 3) {
-          this.itemOptions.push('加精')
+          if (item.feed.is_recommend) {
+            this.itemOptions.push('取消加精')
+          } else {
+            this.itemOptions.push('加精')
+          }
+
+          if (item.top) {
+            this.itemOptions.push('取消置顶')
+          } else {
+            this.itemOptions.push('置顶')
+          }
         }
 
         this.$refs.itemOptions.toggle()
@@ -411,6 +423,21 @@
             break
           case '加精':
             this.addGood(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '取消加精':
+            this.cancelGood(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '置顶':
+            this.setTop(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+          case '取消置顶':
+            this.cancelTop(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
             })
             break
@@ -458,6 +485,30 @@
             break
         }
       },
+      setTop (item, callback) {
+        postRequest(`group/setSubmissionTop`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 1
+          callback()
+        })
+      },
+      cancelTop (item, callback) {
+        postRequest(`group/cancelSubmissionTop`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 0
+          callback()
+        })
+      },
       addGood (item, callback) {
         postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
@@ -466,6 +517,22 @@
             return
           }
 
+          item.is_recommend = 1
+          this.list[this.itemOptionsIndex].feed.is_recommend = 1
+          window.mui.toast('操作成功')
+          callback()
+        })
+      },
+      cancelGood (item, callback) {
+        postRequest(`group/cancelSubmissionRecommend`, {submission_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          item.is_recommend = 0
+          this.list[this.itemOptionsIndex].feed.is_recommend = 0
           window.mui.toast('操作成功')
           callback()
         })
