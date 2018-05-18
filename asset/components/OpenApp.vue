@@ -33,7 +33,7 @@
           </svg>
           <div class="desc">最具品质的咨询顾问社区</div>
         </div>
-        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank">下载APP</a><i class="line-wall"></i><a v-if="isLogined">我的主页</a><a v-else @tap.stop.prevent="$router.push('/login')">登录/注册</a></div>
+        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank">下载APP</a><i class="line-wall"></i><a v-if="isLogined" @tap.stop.prevent="$router.push('/my')">我的主页</a><a v-else @tap.stop.prevent="$router.push('/login')">登录/注册</a></div>
       </div>
     </div>
   </div>
@@ -66,12 +66,12 @@
 
       if (this.isWeixin) {
         // 深度链接
-        Mlink = new window.Mlink({
-          mlink: mlink + '?name=2', // 短链地址
-          button: document.querySelector('a#btnOpenAppWeixin'),
-          params: {url: 'test'},
-          cparams: {path: 'my'}
-        })
+//        Mlink = new window.Mlink({
+//          mlink: mlink + '?name=2', // 短链地址
+//          button: document.querySelector('a#btnOpenAppWeixin'),
+//          params: {url: 'test'},
+//          cparams: {path: 'my'}
+//        })
       }
     },
     watch: {
