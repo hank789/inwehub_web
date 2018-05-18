@@ -185,7 +185,7 @@
       },
       initData () {
         // 取标签；
-        this.tag = localEvent.getLocalItem('ask_skill_tags' + this.id)
+        this.tag = localEvent.getLocalItem('selected_ask_skill_tags' + this.id)
         // 返回时重新取值
         this.tags = []
         this.newTags = []
@@ -318,7 +318,7 @@
         this.tags = []
         this.tag = []
         this.newTags = []
-        localEvent.clearLocalItem('ask_skill_tags' + this.id)
+        localEvent.clearLocalItem('selected_ask_skill_tags' + this.id)
         this.description = ''
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')

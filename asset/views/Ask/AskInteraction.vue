@@ -175,7 +175,7 @@
       },
       initData () {
         // 取标签；
-        this.tag = localEvent.getLocalItem('interaction_skill_tags' + this.id)
+        this.tag = localEvent.getLocalItem('selected_interaction_skill_tags' + this.id)
         this.tags = []
         this.newTags = []
         for (var i in this.tag) {
@@ -271,7 +271,7 @@
         this.tags = []
         this.newTags = []
         // 删除标签；
-        localEvent.clearLocalItem('interaction_skill_tags' + this.id)
+        localEvent.clearLocalItem('selected_interaction_skill_tags' + this.id)
         this.$store.dispatch(ASK_INFO, info)
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },

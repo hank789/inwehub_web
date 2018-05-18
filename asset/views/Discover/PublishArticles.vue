@@ -283,7 +283,7 @@
         })
       },
       getTags () {
-        this.tags = localEvent.getLocalItem('article_skill_tags' + this.id)
+        this.tags = localEvent.getLocalItem('selected_article_skill_tags' + this.id)
       },
       selectChannel () {
         var userPicker = new window.mui.PopPicker()
@@ -315,7 +315,7 @@
         if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
           // ...
         } else {
-          localEvent.clearLocalItem('article_skill_tags' + this.id)
+          localEvent.clearLocalItem('selected_article_skill_tags' + this.id)
         }
       }
       this.getTags()
