@@ -50,17 +50,16 @@
           <div class="container-image" v-if="image">
             <img class="lazyImg" v-lazy="image"/>
           </div>
-          <i class="bot"></i>
         </li>
-        <li class="channel articleTags">
-          <p>文章标签</p>
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectTags()">
-            <use xlink:href="#icon-shuru"></use>
-          </svg>
-          <div class="tags" v-if="tags.length">
-            <label v-for="(tagName, index) in tags">{{tagName.text}}</label>
-          </div>
-        </li>
+        <!--<li class="channel articleTags">-->
+          <!--<p>文章标签</p>-->
+          <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="selectTags()">-->
+            <!--<use xlink:href="#icon-shuru"></use>-->
+          <!--</svg>-->
+          <!--<div class="tags" v-if="tags.length">-->
+            <!--<label v-for="(tagName, index) in tags">{{tagName.text}}</label>-->
+          <!--</div>-->
+        <!--</li>-->
         <button class="submit mui-plus-hidden" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
           确认发布
         </button>
@@ -183,7 +182,7 @@
           current_address_longitude: '',
           current_address_latitude: '',
           group_id: this.selectedGroup.id,
-          tags: this.tags
+          tags: []
         }).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
