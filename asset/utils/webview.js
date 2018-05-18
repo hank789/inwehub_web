@@ -60,6 +60,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
       if (currentWebviewUrl !== shotUrl || bindHttpUrl !== shotUrl) {
         console.log('openWebviewByUrl:load:' + url)
         if (/^http/.test(url)) {
+          currentWebview.clear()
           currentWebview.loadURL(url)
         } else {
           saveCurrentWebviewId(id)
