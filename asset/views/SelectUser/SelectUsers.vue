@@ -143,7 +143,7 @@
           this.apperClose = false
         }
         if (this.$route.query.from === 'discover' || this.$route.query.from === 'comment') {
-          localEvent.setLocalItem(this.$route.query.from + '_selectUser' + this.userId, options)
+          localEvent.setLocalItem('selected_' + this.$route.query.from + '_user' + this.userId, options)
         } else {
           return false
         }

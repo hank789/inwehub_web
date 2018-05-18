@@ -108,7 +108,7 @@
       addAddress (address) {
         if (this.$route.query.from === 'discover') {
           var from = this.$route.query.from
-          localEvent.setLocalItem(from + '_Address' + this.id, address)
+          localEvent.setLocalItem('selected_' + from + '_address' + this.id, address)
           window.mui.back()
         } else {
           return false
@@ -121,7 +121,7 @@
      // 获取数据 longt: '121.498981',lat: '31.232772',
       getData () {
         if (this.$route.query.from === 'discover') {
-          this.address = localEvent.getLocalItem(this.$route.query.from + '_Address' + this.id)
+          this.address = localEvent.getLocalItem('selected_' + this.$route.query.from + '_address' + this.id)
         } else {
           return false
         }

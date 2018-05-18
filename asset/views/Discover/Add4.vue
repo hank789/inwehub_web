@@ -178,7 +178,7 @@
         this.percentCompleted = 0
         this.hide = 0
         localEvent.clearLocalItem('discover_description' + this.id)
-        localEvent.clearLocalItem('selectedDiscoverSkillTags' + this.id)
+        localEvent.clearLocalItem('selected_discover_skill_tags' + this.id)
       },
       submit () {
         if (!this.descLength) {
@@ -243,7 +243,7 @@
           this.description = this.descPlaceholder
         }
 
-        var tag = localEvent.getLocalItem('selectedDiscoverSkillTags' + this.id)
+        var tag = localEvent.getLocalItem('selected_discover_skill_tags' + this.id)
         for (var i in tag) {
           this.tags = this.tags.concat(tag[i].value)
         }

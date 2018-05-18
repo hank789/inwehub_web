@@ -144,14 +144,14 @@
     mounted () {
       var referer = localEvent.getLocalItem('referer')
       if (!(referer && referer.path === '/selectUser')) {
-        localEvent.clearLocalItem('selectedDiscoverUser' + this.id)
+        localEvent.clearLocalItem('selected_discover_user' + this.id)
       }
 
       if (referer) {
         if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
             // ...
         } else {
-          localEvent.clearLocalItem('selectedDiscoverSkillTags' + this.id)
+          localEvent.clearLocalItem('selected_discover_skill_tags' + this.id)
         }
       }
       autoTextArea()
@@ -174,10 +174,10 @@
       },
       getAddress () {
         // 获取地理位置
-        var Address = localEvent.getLocalItem('selectedDiscoverAddress' + this.id, this.selectedAddress)
+        var Address = localEvent.getLocalItem('selected_discover_address' + this.id, this.selectedAddress)
         if (Address.toString()) {
           this.selectedAddress = Address
-          localEvent.setLocalItem('selectedDiscoverAddress' + this.id, this.selectedAddress)
+          localEvent.setLocalItem('selected_discover_address' + this.id, this.selectedAddress)
         }
       },
       hashSymbolFound () {
@@ -198,7 +198,7 @@
       },
       // 删除标签
       hashSymbolDelete (text) {
-        var tags = localEvent.getLocalItem('selectedDiscoverSkillTags' + this.id)
+        var tags = localEvent.getLocalItem('selected_discover_skill_tags' + this.id)
         for (var i in tags) {
           var name = '#' + tags[i].text + ' '
           if (name === text) {
@@ -207,11 +207,11 @@
             tags.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('selectedDiscoverSkillTags' + this.id, tags)
+        localEvent.setLocalItem('selected_discover_skill_tags' + this.id, tags)
       },
        //  删除用户
       addressAppearDelete (text) {
-        var users = localEvent.getLocalItem('selectedDiscoverUser' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_user' + this.id)
         for (var i in users) {
           var name = '@' + users[i].name + ' '
           if (name === text) {
@@ -219,14 +219,14 @@
             users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('selectedDiscoverUser' + this.id, users)
+        localEvent.setLocalItem('selected_discover_user' + this.id, users)
       },
       syncSelectUser () {
         // 循环插入@人
         var users = this.getSelectUser()
         var spanUserNameAndIds = users.nameAndIds
         var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
-        console.log('selectedDiscoverUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+        console.log('selected_discover_user:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的用户都要添加上
         var waitAddArr = []
@@ -288,7 +288,7 @@
         }
       },
       getSelectUser () {
-        var users = localEvent.getLocalItem('selectedDiscoverUser' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_user' + this.id)
         var spanUserNameAndIds = []
         var spanUserNames = []
         for (var i in users) {
@@ -306,7 +306,7 @@
         }
       },
       getSelectTags () {
-        var users = localEvent.getLocalItem('selectedDiscoverSkillTags' + this.id)
+        var users = localEvent.getLocalItem('selected_discover_skill_tags' + this.id)
         var spanUserNameAndIds = []
 
         var spanNames = []
@@ -424,9 +424,9 @@
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
         this.hide = 0
-        localEvent.clearLocalItem('selectedDiscoverSkillTags' + this.id)
-        localEvent.clearLocalItem('selectedDiscoverUser' + this.id)
-        localEvent.clearLocalItem('selectedDiscoverAddress' + this.id)
+        localEvent.clearLocalItem('selected_discover_skill_tags' + this.id)
+        localEvent.clearLocalItem('selected_discover_user' + this.id)
+        localEvent.clearLocalItem('selected_discover_address' + this.id)
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
