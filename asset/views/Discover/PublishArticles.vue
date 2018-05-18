@@ -3,16 +3,14 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
+      <a @tap.stop.prevent="goPublish()"
+         class="mui-plus-visible mui-btn appPageSubmit mui-btn-link mui-pull-right">确认发布</a>
     </header>
 
     <div class="mui-content">
-      <div class="category">
-        <p>文章</p>
-        <p @tap.stop.prevent="$router.replace('/discover/add')">分享</p>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectGroup">
-          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</span>
-          <span v-else>选择圈子</span>
-        </button>
+      <div class="container-tabs">
+        <div class="tab active"><span>文章链接</span></div>
+        <div class="tab" @tap.stop.prevent="$router.replace('/discover/add')"><span>图文分享</span></div>
       </div>
 
       <div class="ShareArticles">
@@ -36,31 +34,45 @@
           <input type="text" placeholder="输入文章标题" v-model.trim="title" class="longContainer" v-else/>
           <i class="bot"></i>
         </li>
-        <!--<li class="channel">-->
-          <!--<P>选择频道</P>-->
-          <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="selectChannel()" v-if="!channel">-->
-            <!--<use xlink:href="#icon-shuru"></use>-->
-          <!--</svg>-->
-          <!--<input type="text" v-model.trim="channel"  @tap.stop.prevent="click()"  v-else/>-->
-
-          <!--<i class="bot"></i>-->
-        <!--</li>-->
-        <!--<li class="coverMap">-->
-        <!--<p>封面图片</p>-->
-        <!--<svg class="icon" aria-hidden="true">-->
-        <!--<use xlink:href="#icon-shuru"></use>-->
-        <!--</svg>-->
-        <!--<div class="container-image">-->
-        <!--<img src="../../statics/images/guide_01.png"/>-->
-        <!--</div>-->
-        <!--<i class="bot"></i>-->
-        <!--</li>-->
-        <button class="submit" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
-          发布
+        <li class="channel">
+         <p>所属圈子</p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectGroup()">
+            <use xlink:href="#icon-shuru"></use>
+          </svg>
+          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 12 ?selectedGroup.name.substr(0, 12) + '...':selectedGroup.name}}</span>
+          <i class="bot"></i>
+        </li>
+        <li class="coverMap" :class="{noImg: image.length?false:true}">
+          <p>封面图片</p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectImage()">
+            <use xlink:href="#icon-shuru"></use>
+          </svg>
+          <div class="container-image" v-if="image">
+            <img :src="image"/>
+          </div>
+          <i class="bot"></i>
+        </li>
+        <li class="channel articleTags">
+          <p>文章标签</p>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectTags()">
+            <use xlink:href="#icon-shuru"></use>
+          </svg>
+          <div class="tags" v-if="tags.length">
+            <label v-for="(tagName, index) in tags">{{tagName.text}}</label>
+          </div>
+        </li>
+        <button class="submit mui-wechat-visible" :disabled="disableRegister" :class="isblue ? 'blue':''" @tap.stop.prevent="goPublish()">
+          确认发布
         </button>
       </ul>
 
     </div>
+
+    <uploadImage ref="uploadImage"
+                 :isMultiple="false"
+                 @success="uploadImageSuccess"
+                 :ImageMaximum="1"
+    ></uploadImage>
   </div>
 </template>
 
@@ -71,6 +83,7 @@
   import popPickerComponent from '../../components/picker/poppicker.vue'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
+  import uploadImage from '../../components/uploadImage'
   const currentUser = getLocalUserInfo()
 
   const urlReg = /[a-zA-z]+:\/\/[^\s]*/
@@ -86,11 +99,14 @@
         channelValue: '',
         disableRegister: true,
         isblue: false,
-        selectedGroup: null
+        selectedGroup: null,
+        tags: [],
+        image: ''
       }
     },
     components: {
-      popPickerComponent
+      popPickerComponent,
+      uploadImage
     },
     watch: {
       '$route': 'refreshPageData',
@@ -105,11 +121,28 @@
       title: function (newValue, oldValue) {
         this.checkValid()
       },
-      channel: function (newValue, oldValue) {
+      tags: function (newValue, oldValue) {
+        this.checkValid()
+      },
+      image: function (newValue, oldValue) {
+        this.checkValid()
+      },
+      selectedGroup: function (newValue, oldValue) {
         this.checkValid()
       }
     },
     methods: {
+      selectImage () {
+        this.$refs.uploadImage.uploadImage()
+      },
+      uploadImageSuccess (images) {
+        if (images.length) {
+          if (!images[0].base64) {
+            return
+          }
+          this.image = images[0].base64
+        }
+      },
       empty () {
         this.resetData()
         window.mui.back()
@@ -119,6 +152,9 @@
       },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
+      },
+      selectTags () {
+        this.$router.pushPlus('/selecttags?from=article')
       },
       selectGroup () {
         this.$router.pushPlus('/group/my?from=discover_add')
@@ -141,11 +177,12 @@
           title: this.title,
           url: this.url,
 //          category_id: this.channelValue,
-          photos: '',
+          photos: [this.image],
           current_address_name: '',
           current_address_longitude: '',
           current_address_latitude: '',
-          group_id: this.selectedGroup.id
+          group_id: this.selectedGroup.id,
+          tags: this.tags
         }).then(response => {
           var code = response.data.code
           // 如果请求不成功提示信息 并且返回上一页；
@@ -193,6 +230,7 @@
             }
             if (response.data.data) {
               this.title = response.data.data.title
+              this.image = response.data.data.img_url
             }
           })
         }
@@ -214,6 +252,19 @@
         }
         // 标题；
         if (!this.title) {
+          this.disableRegister = true
+          this.isblue = false
+          return false
+        }
+
+        // 标签
+        if (this.tags.length === 0) {
+          this.disableRegister = true
+          this.isblue = false
+          return false
+        }
+
+        if (!this.image) {
           this.disableRegister = true
           this.isblue = false
           return false
@@ -243,6 +294,9 @@
           this.loading = 0
         })
       },
+      getTags () {
+        this.tags = localEvent.getLocalItem('article_skill_tags' + this.id)
+      },
       selectChannel () {
         var userPicker = new window.mui.PopPicker()
 
@@ -264,7 +318,19 @@
         }
       }
     },
+    activated: function () {
+      this.getTags()
+    },
     mounted () {
+      var referer = localEvent.getLocalItem('referer')
+      if (referer) {
+        if (referer.path === '/selecttags' || this.$route.query.from === 'selecttags') {
+          // ...
+        } else {
+          localEvent.clearLocalItem('article_skill_tags' + this.id)
+        }
+      }
+      this.getTags()
       autoTextArea()
     },
     created () {
@@ -436,7 +502,7 @@
     border: none;
     font-size: 0.373rem;
     color: #444444;
-
+    text-align: right;
   }
 
   .title .shortContainer {
@@ -493,11 +559,16 @@
   .channel input {
     width: 50%;
     float: right;
-    color: #c8c8c8;
     font-size: 0.373rem;
     border: none;
     text-align: right;
     color: #444444;
+  }
+
+  .channel span{
+    color:#444;
+    float:right;
+    margin-right: 5px;
   }
 
   .channel svg {
@@ -505,11 +576,13 @@
     font-size: 0.453rem;
     margin-top: 0.346rem;
     float: right;
+    position: relative;
+    z-index: 9999;
   }
 
   /*封面*/
   .concreteContent .coverMap {
-    height: 4.426rem;
+    height: 174px;
   }
 
   .container-image {
@@ -528,6 +601,8 @@
     font-size: 0.453rem;
     margin-top: 0.346rem;
     float: right;
+    position: relative;
+    z-index: 9999;
   }
 
   /* 发布按钮*/
@@ -540,7 +615,7 @@
     font-size: 0.426rem;
     color: #b4b4b6;
     border: none;
-    margin-top: 0.8rem;
+    margin-top: 0.4rem;
     margin-bottom: 0.8rem;
   }
 
@@ -549,4 +624,24 @@
     color: #FFFFFF;
   }
 
+  .articleTags{
+    height:auto !important;
+  }
+  .articleTags .tags{
+    padding-top:42px;
+    position: relative;
+    top: -13px;
+  }
+  .articleTags .tags label{
+    border-radius: 50px;
+    border: 1px solid #DBDBDB;
+    background: #F7F8FA;
+    color:#235280;
+    margin-right:5px;
+    font-size:12px;
+    padding:3px 5px;
+  }
+  .noImg{
+    height:1.146rem !important;
+  }
 </style>

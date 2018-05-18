@@ -32,7 +32,7 @@
             v-if="search_type === 1"></i></span>
           <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
             v-if="search_type === 2"></i></span>
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华({{detail.recommend_submission_numbers}})<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
@@ -402,7 +402,7 @@
             this.itemOptions.push('加精')
           }
 
-          if (item.feed.top) {
+          if (item.top) {
             this.itemOptions.push('取消置顶')
           } else {
             this.itemOptions.push('置顶')
@@ -493,6 +493,7 @@
             return
           }
           window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 1
           callback()
         })
       },
@@ -504,6 +505,7 @@
             return
           }
           window.mui.toast('操作成功')
+          this.list[this.itemOptionsIndex].top = 0
           callback()
         })
       },

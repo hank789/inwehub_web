@@ -96,7 +96,7 @@
         }
       },
       keepTags () {
-        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+        if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover' || this.$route.query.from === 'article') {
           localEvent.setLocalItem(this.$route.query.from + '_skill_tags' + this.id, this.skill_tags)
           window.mui.back()
           return
@@ -186,7 +186,7 @@
      // 默认加载热门标签
       this.sort = 1
       this.search()
-      if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover') {
+      if (this.$route.query.from === 'ask' || this.$route.query.from === 'interaction' || this.$route.query.from === 'discover' || this.$route.query.from === 'article') {
         this.skill_tags = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id)
         this.selectNum = localEvent.getLocalItem(this.$route.query.from + '_skill_tags' + this.id).length
       } else {
