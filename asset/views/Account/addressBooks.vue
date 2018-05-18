@@ -24,7 +24,7 @@
         <div class="container-list-people">
           <div class="item" v-for="(item, index) in appUsers">
             <div class="component-imageAndText">
-              <div class="imageWrapper"><img :src="item.app_user_avatar"></div>
+              <div class="imageWrapper" @tap.stop.prevent="toAvatar(item.app_user_uuid)"><img :src="item.app_user_avatar"></div>
               <div class="textWrapper">
                 <div class="line-1 text-line-1">{{item.app_user_name}}</div>
                 <div class="line-2 text-line-1">{{item.display_name}}</div>
