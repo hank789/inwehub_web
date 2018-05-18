@@ -5,6 +5,10 @@ const localEvent = {
 
   setLocalItem: (item, obj) => {
     window.localStorage.setItem('inwehub_' + item, JSON.stringify(obj))
+    if (item.indexOf('selected') === 0) {
+      // 需要返回刷新
+      window.localStorage.setItem('inwehub_needRefresh', JSON.stringify({value: true}))
+    }
   },
 
   clearLocalItem: (item) => {
