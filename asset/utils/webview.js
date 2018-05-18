@@ -192,16 +192,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   console.log('bodyWebviewUrl:' + webview.getURL())
   if (webview.getURL() !== url) {
-    webview.hide()
-    var plusWaiting = window.plus.nativeUI.showWaiting()
+    webview.clear()
     webview.loadURL(url)
-  }
-  webview.onloaded = function (event) {
-    console.log('webivew-body-onloaded')
-    if (plusWaiting) {
-      plusWaiting.close()
-    }
-    webview.show('slide-in-right', 300)
   }
   currentWebview.append(webview)
 
