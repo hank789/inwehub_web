@@ -317,7 +317,9 @@
               // 群聊
               window.Echo.private('room.' + this.chatRoomId).notification((n) => {
                 console.log(n)
-                this.chat(n)
+                if (n.user_id !== this.currentUser.user_id) {
+                  this.chat(n)
+                }
               })
             } else {
               window.Echo.private('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id).notification((n) => {
