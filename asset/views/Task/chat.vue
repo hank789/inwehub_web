@@ -44,7 +44,6 @@
                 <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
                 </span>
-                <i>{{item.user_name}}</i>
                 <span v-if="item.data.img" class="chatImg">
                   <SingleImage :src="item.data.img" :isSmallImage="item.data.img.length < 100" :group="currentUser.user_id + ''"></SingleImage>
                 </span>
@@ -626,14 +625,6 @@
     border-radius: 0.213rem;
   }
 
-  .Customerservice p:nth-of-type(2) i {
-    position: absolute;
-    top: -0.106rem;
-    right: 1.44rem;
-    color:#808080;
-    font-size:0.293rem;
-  }
-
   .Customerservice p:nth-of-type(2) span {
     position: relative;
     float: right;
@@ -641,7 +632,6 @@
     max-width: 80%;
     min-height: 0.933rem;
     margin-right: 3%;
-    margin-top: 0.426rem;
     border-radius: 0.266rem;
     border: 0.026rem solid #dcdcdc;
     text-align: left;
