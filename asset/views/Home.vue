@@ -61,7 +61,7 @@
         </li>
       </ul>
       <div class="line-river" v-if="new_message.length"></div>
-        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div>
+        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper" @tap="swiperClick"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div>
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
@@ -183,8 +183,7 @@
           autoplay: {
             disableOnInteraction: false
           },
-          loop: true,
-          onTap: this.swipperClick
+          loop: true
         }
       }
     },
@@ -201,7 +200,7 @@
     },
     computed: {},
     methods: {
-      swipperClick (swiper, event) {
+      swiperClick (event) {
         var parent = queryParent(event.target, 'swiper-slide')
         if (!parent) return
         var link = parent.getAttribute('link')
