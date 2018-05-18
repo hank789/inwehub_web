@@ -183,7 +183,8 @@
           autoplay: {
             disableOnInteraction: false
           },
-          loop: true
+          loop: true,
+          onTap: this.swipperClickTwo
         }
       }
     },
@@ -200,6 +201,14 @@
     },
     computed: {},
     methods: {
+      swipperClickTwo (swiper, event) {
+        var parent = queryParent(event.target, 'swiper-slide')
+        if (!parent) return
+        var link = parent.getAttribute('link')
+        if (link) {
+          this.$router.pushPlus(link)
+        }
+      },
       swiperClick (event) {
         var parent = queryParent(event.target, 'swiper-slide')
         if (!parent) return
