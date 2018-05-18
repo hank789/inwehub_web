@@ -1782,7 +1782,7 @@ a {
 .appPageSubmit{
   position: fixed;
   right: 0;
-  top: 10px;
+  top: 0.266rem;
   z-index: 999;
   background: none;
   width: auto;
@@ -1798,8 +1798,8 @@ a {
   display: flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  height: 39px;
-  line-height: 39px; }
+  height: 1.04rem;
+  line-height: 1.04rem; }
 .container-tabs .tab {
   width: 50%;
   text-align: center; }
@@ -1808,15 +1808,16 @@ a {
 .container-tabs .tab.active span:after {
   content: '';
   position: absolute;
-  bottom: -9px;
+  bottom: -0.24rem;
   left: 0;
   background: #03AEF9;
   width: 100%;
-  height: 1.5px; }
+  z-index: 77;
+  height: 0.04rem; }
 .container-tabs .tab span {
   position: relative;
   color: #444;
-  font-size: 14px; }
+  font-size: 0.373rem; }
 
 
 .container-menuFooter .menu .mui-badge {
@@ -1824,5 +1825,10 @@ a {
   color: #fff;
   position: absolute;
   left: 50%;
-  top: 7px;
-  margin-left: 14px; }
+  top: 0.186rem;
+  margin-left: 0.373rem; }
+
+
+.mui-bar .mui-btn-link.appPageSubmit{
+  color:#03AEF9 !important;
+}

@@ -568,7 +568,7 @@
   .channel span{
     color:#444;
     float:right;
-    margin-right: 5px;
+    margin-right: 0.133rem;
   }
 
   .channel svg {
@@ -582,7 +582,7 @@
 
   /*封面*/
   .concreteContent .coverMap {
-    height: 174px;
+    height: 4.64rem;
   }
 
   .container-image {
@@ -628,18 +628,18 @@
     height:auto !important;
   }
   .articleTags .tags{
-    padding-top:42px;
+    padding-top:1.12rem;
     position: relative;
-    top: -13px;
+    top: -0.346rem;
   }
   .articleTags .tags label{
-    border-radius: 50px;
-    border: 1px solid #DBDBDB;
+    border-radius: 1.333rem;
+    border: 0.026rem solid #DBDBDB;
     background: #F7F8FA;
     color:#235280;
-    margin-right:5px;
-    font-size:12px;
-    padding:3px 5px;
+    margin-right:0.133rem;
+    font-size:0.32rem;
+    padding:0.08rem 0.133rem;
   }
   .noImg{
     height:1.146rem !important;
