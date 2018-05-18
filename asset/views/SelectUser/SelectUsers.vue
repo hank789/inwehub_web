@@ -160,6 +160,9 @@
           if (response.data.data.length > 0) {
             var arr = response.data.data
             for (var i = 0; i < arr.length; i++) {
+              if (!arr[i].user_name) {
+                continue
+              }
               var item = {
                 id: arr[i].user_id,
                 name: arr[i].user_name,
