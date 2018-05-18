@@ -113,6 +113,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
   if (appVersion) {
     data.current_version = appVersion.version
   }
+  data.inwehub_user_device = window.getUserAppDevice()
 
   var config = {}
   config.validateStatus = status => status === 200
