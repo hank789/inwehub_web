@@ -7,7 +7,7 @@
       <a v-if="source" @tap.stop.prevent="showOptions"
          class="mui-btn appPageSubmit mui-btn-link mui-pull-right">圈子</a>
     </header>
-    <div class="mui-content" id='contentwrapper'>
+    <div class="mui-content" id='contentwrapper' :class="{singleChat: !source}">
 
       <RefreshList v-if="this.chatRoomId" ref="RefreshList"
         v-model="list"
@@ -711,6 +711,18 @@
     bottom:1.333rem;
     text-align: center;
     width: 100%;
+  }
+  .singleChat .Customerservice p:nth-of-type(2) i{
+    display: none;
+  }
+  .singleChat .consumer p:nth-of-type(2) i{
+    display: none;
+  }
+  .singleChat .Customerservice p:nth-of-type(2) span{
+    margin-top:0;
+  }
+  .singleChat .consumer p:nth-of-type(2) span{
+    margin-top:0;
   }
 </style>
 <style>

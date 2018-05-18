@@ -48,7 +48,7 @@
             <use xlink:href="#icon-shuru"></use>
           </svg>
           <div class="container-image" v-if="image">
-            <img :src="image"/>
+            <img class="lazyImg" v-lazy="image"/>
           </div>
           <i class="bot"></i>
         </li>
