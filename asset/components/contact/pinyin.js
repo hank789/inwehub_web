@@ -404,6 +404,9 @@ var pinyin = {
 
 var charmapReg = /[-a-zA-Z0-9 ]/
 function getFullCamelChars (str) {
+  if (!str) {
+    console.log('key not found x:' + str)
+  }
   let i = 0
   let len = str.length
   let word = ''

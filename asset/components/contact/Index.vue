@@ -45,6 +45,9 @@
           tmp = this.map[key].filter(function (item) {
             return item.pinyin.raw.indexOf(search) > -1 || item.pinyin.camel.indexOf(search.toUpperCase()) > -1 || item.pinyin.full.toUpperCase().indexOf(search.toUpperCase()) > -1
           })
+          if (!tmp) {
+            console.log('key not found:' + key)
+          }
           if (tmp.length) {
             map[key] = tmp
           }
@@ -59,6 +62,9 @@
         })
 
         let arr = this.list.map(function (item) {
+          if (!item.name) {
+            console.log('name is empty:' + JSON.stringify(item))
+          }
           item.pinyin = pinyin.getFullCamelChars(item.name)
           return item
         })
@@ -68,6 +74,9 @@
         })
 
         for (var key in map) {
+          if (!map[key]) {
+            console.log('key not found2:' + key)
+          }
           if (map[key].length === 0) {
             delete map[key]
           }
@@ -81,7 +90,9 @@
         var initial = item.pinyin.camel[0]
 
         var arr = map[initial]
-
+        if (!arr) {
+          console.log('key not found3:' + JSON.stringify(item))
+        }
         var len = arr.length
         var i = len - 1
         if (len === 0) {
