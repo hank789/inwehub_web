@@ -60,6 +60,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
       if (currentWebviewUrl !== shotUrl || bindHttpUrl !== shotUrl) {
         console.log('openWebviewByUrl:load:' + url)
         if (/^http/.test(url)) {
+          currentWebview.clear()
           currentWebview.loadURL(url)
         } else {
           saveCurrentWebviewId(id)
@@ -192,16 +193,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   console.log('bodyWebviewUrl:' + webview.getURL())
   if (webview.getURL() !== url) {
-    webview.hide()
-    var plusWaiting = window.plus.nativeUI.showWaiting()
+    webview.clear()
     webview.loadURL(url)
-  }
-  webview.onloaded = function (event) {
-    console.log('webivew-body-onloaded')
-    if (plusWaiting) {
-      plusWaiting.close()
-    }
-    webview.show('slide-in-right', 300)
   }
   currentWebview.append(webview)
 
