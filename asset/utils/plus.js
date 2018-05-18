@@ -304,7 +304,6 @@ function getClipbordText () {
     var generalPasteboard = UIPasteboard.generalPasteboard()
     // 设置/获取文本内容:
     // generalPasteboard.setValueforPasteboardType("testValue", "public.utf8-plain-text");
-    // TODO 应用在后台的时候获取剪切版数据被系统限制了，只有在app内才能访问接口
     value = generalPasteboard.plusCallMethod({valueForPasteboardType: 'public.utf8-plain-text'})
   }
 

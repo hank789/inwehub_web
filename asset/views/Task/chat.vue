@@ -4,6 +4,8 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">{{name}}</h1>
+      <a v-if="source" @tap.stop.prevent="showOptions"
+         class="mui-btn appPageSubmit mui-btn-link mui-pull-right">圈子</a>
     </header>
     <div class="mui-content" id='contentwrapper'>
 
@@ -80,6 +82,13 @@
 
     <typing class="typingWrapper" v-if="this.chatRoomId" :room_id="this.chatRoomId"></typing>
 
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="itemOptions"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -95,6 +104,7 @@
   import Typing from '../../components/Typing.vue'
   import { searchText } from '../../utils/search'
   import localEvent from '../../stores/localStorage'
+  import Options from '../../components/Options.vue'
 
   const Chat = {
     data: () => ({
@@ -107,7 +117,12 @@
       maxImageCount: 1,
       images: [],
       isTyping: false,
-      name: ''
+      itemOptions: [
+        '进入圈子'
+        // '关闭消息通知'
+      ],
+      name: '',
+      source: null
     }),
     created () {
       this.getDetail()
@@ -118,12 +133,27 @@
       RefreshList,
       uploadImage,
       SingleImage,
-      Typing
+      Typing,
+      Options
     },
     watch: {
       '$route': 'refreshPageData'
     },
     methods: {
+      showOptions () {
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case this.itemOptions[0]:
+            this.$refs.itemOptions.toggle()
+            this.$router.pushPlus('/group/detail/' + this.source.id)
+            break
+          case this.itemOptions[1]:
+            // todo 接后台关闭消息通知接口
+            break
+        }
+      },
       uploadImageSuccess (images) {
         if (images.length) {
           if (!images[0].base64) {
@@ -274,6 +304,7 @@
               return
             }
             this.chatRoomId = response.data.data.id
+            this.source = response.data.data.source
             this.name = response.data.data.source.name + '(' + response.data.data.source.subscribers + ')'
             window.Echo.private('chat.room.' + this.chatRoomId)
           })

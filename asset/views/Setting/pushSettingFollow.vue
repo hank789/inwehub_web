@@ -70,7 +70,6 @@
         console.log(type)
         var value = this.notices[type]
         if (value && this.isOpenNotification === 0) {
-          //  todo 显示confirm 提示用户去开启通知权限
           this.notices[type] = 0
           var btnArray = ['取消', '去设置']
           window.mui.confirm('现在开启通知，不错过任何一次可能的平台合作机会呦~。', '开启通知', btnArray, (e) => {
