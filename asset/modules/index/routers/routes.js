@@ -467,7 +467,6 @@ const routes = [
     component: componets.Taskchat,
     meta: {
       title: '聊天',
-      wechatHideHeader: true,
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
