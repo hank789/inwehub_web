@@ -39,7 +39,7 @@
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="selectGroup()">
             <use xlink:href="#icon-shuru"></use>
           </svg>
-          <span v-if="selectedGroup.name">{{selectedGroup.name.length > 12 ?selectedGroup.name.substr(0, 12) + '...':selectedGroup.name}}</span>
+          <span class="groupName" v-if="selectedGroup.name">{{selectedGroup.name.length > 12 ?selectedGroup.name.substr(0, 12) + '...':selectedGroup.name}}</span>
           <i class="bot"></i>
         </li>
         <li class="coverMap" :class="{noImg: image.length?false:true}">
@@ -257,18 +257,6 @@
           return false
         }
 
-        // 标签
-        if (this.tags.length === 0) {
-          this.disableRegister = true
-          this.isblue = false
-          return false
-        }
-
-        if (!this.image) {
-          this.disableRegister = true
-          this.isblue = false
-          return false
-        }
         // 频道；
 //        if (!this.channel) {
 //          this.disableRegister = true
@@ -391,6 +379,10 @@
 </style>
 
 <style scoped="scoped">
+  .groupName{
+    font-size: 0.373rem;
+    color: #444;
+  }
   .mui-content {
     background: #FFFFFF;
   }
@@ -627,7 +619,7 @@
     height:auto !important;
   }
   .articleTags .tags{
-    padding-top:1.12rem;
+    padding-top:47px;
     position: relative;
     top: -0.346rem;
   }
