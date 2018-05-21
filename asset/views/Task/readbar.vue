@@ -18,7 +18,7 @@
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <li v-for="item in list" @tap.stop.prevent="$router.pushReadHubPage(item.data.url)">
-              <img :src="item.data.avatar"/>
+              <img class="lazyImg" v-lazy="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span>{{item.data.title}}</span>

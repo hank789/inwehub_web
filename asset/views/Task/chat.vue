@@ -26,7 +26,7 @@
             <li class="consumer" v-if="currentUser.user_id != item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
-                <img :src="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
+                <img class="lazyImg" v-lazy="item.avatar"  @tap.stop.prevent="toAvatar(item.uuid)" />
                 <span v-if="item.data.text">
                   {{item.data.text}}
                 </span>

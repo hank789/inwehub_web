@@ -6,7 +6,7 @@
     </div>
     <swiper :options="swiperOption" class="home-recommend" >
       <swiper-slide style="width: 2.08rem;" class="home-card" :key="item.id" v-for="(item, index) in groupsList">
-        <img :src='item.logo'  @tap.stop.prevent="toDetail(item)" />
+        <img class="lazyImg" v-lazy='item.logo'  @tap.stop.prevent="toDetail(item)" />
         <p class="mui-ellipsis">{{item.name}}</p>
         <i v-if="item.unread_count"></i>
       </swiper-slide>

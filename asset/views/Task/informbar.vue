@@ -18,7 +18,7 @@
           <ul>
             <template  v-for="item in list">
             <li v-if="typeDesc(item.type)" @tap.stop.prevent="goUrl(item.data.url)">
-              <img :src="item.data.avatar"/>
+              <img class="lazyImg" v-lazy="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
                 <span>{{item.data.title}}</span>
