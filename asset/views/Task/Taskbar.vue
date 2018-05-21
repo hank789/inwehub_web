@@ -21,7 +21,7 @@
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
-                <span class="mui-ellipsis">{{item.data.title}}</span>
+                <span>{{item.data.title}}</span>
                 <span class="mui-ellipsis" v-html="textToLink(item.data.body)"></span>
                 <span class="mui-ellipsis third" v-if="item.data.extra_body"><i>{{item.data.extra_body}}</i></span>
                 <span class="fourth">{{timeago(item.created_at)}}</span>

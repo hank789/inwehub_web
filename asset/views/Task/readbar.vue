@@ -21,11 +21,11 @@
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
-                <span class="mui-ellipsis">{{item.data.title}}</span>
+                <span>{{item.data.title}}</span>
                 <span class="mui-ellipsis" v-html="textToLink(item.data.body)"></span>
                 <span class="mui-ellipsis" v-if="item.data.extra_body"></span>
+                <span class="fourth">{{timeago(item.created_at)}}</span>
               </p>
-              <div class="reader_time">{{timeago(item.created_at)}}</div>
               <i class="bot"></i>
             </li>
 
@@ -237,7 +237,6 @@
   }
 
   ul li p span:nth-of-type(1) {
-    max-width: 4.266rem;
     font-size: 0.426rem;
     color: #444444;
   }

@@ -21,17 +21,17 @@
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
-                <span class="mui-ellipsis text">{{item.data.title}}</span>
+                <span>{{item.data.title}}</span>
                 <span class="mui-ellipsis">{{item.data.body}}</span>
+                <span>{{timeago(item.created_at)}}</span>
               </p>
-              <div class="time">{{timeago(item.created_at)}}</div>
               <i class="bot"></i>
             </li>
             <li v-else @tap.stop.prevent="goUrl(item.data.url)">
               <img :src="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
-                <span class="mui-ellipsis">{{item.data.title}}</span>
+                <span>{{item.data.title}}</span>
                 <span>{{timeago(item.created_at)}}</span>
               </p>
               <i class="bot"></i>
@@ -265,12 +265,13 @@
   }
 
   ul li p span:nth-of-type(2) {
-    margin-bottom: 0rem;
-    font-size: 0.32rem;
-    color: #b4b4b6;
+    font-size: 0.373rem;
+    color: #444444;
   }
-  ul li p span.text{
-    width:60%;
+
+  ul li p span:nth-of-type(3) {
+    font-size: 0.32rem;
+    color: #808080;
   }
   .message {
     width: 0.186rem;
