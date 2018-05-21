@@ -18,10 +18,10 @@
         <div class="mui-scroll" v-show="nothing == 0">
           <ul>
             <li v-for="item in list" @tap.stop.prevent="$router.pushPlus(item.data.url)">
-              <img :src="item.data.avatar"/>
+              <img class="lazyImg" v-lazy="item.data.avatar"/>
               <div class="message" v-if="item.read_at == null"></div>
               <p>
-                <span class="mui-ellipsis">{{item.data.title}}</span>
+                <span>{{item.data.title}}</span>
                 <span class="mui-ellipsis" v-html="textToLink(item.data.body)"></span>
                 <span class="mui-ellipsis third" v-if="item.data.extra_body"><i>{{item.data.extra_body}}</i></span>
                 <span class="fourth">{{timeago(item.created_at)}}</span>

@@ -1,5 +1,5 @@
 <template>
-  <img :src="getImage(avatar)">
+  <img class="lazyImg" v-lazy="getImage(avatar)">
 </template>
 
 <script type="text/javascript">

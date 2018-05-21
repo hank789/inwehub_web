@@ -83,7 +83,7 @@
                 </li>
                 <!--消息通知-->
                 <li v-for="(item, index) in list.im_messages" :class="'type_' + item.room_type">
-                  <img :src="item.avatar" class="radius" @tap.stop.prevent="toAvatar(item.contact_uuid)"/>
+                  <img class="lazyImg radius" v-lazy="item.avatar" @tap.stop.prevent="toAvatar(item.contact_uuid)"/>
                   <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
                   <p @tap.stop.prevent="gochat(item)">
                     <span class="mui-ellipsis">{{item.name}}</span>

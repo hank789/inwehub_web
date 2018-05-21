@@ -23,7 +23,7 @@
     </div>
 
     <div class="container-image margin-10-0-0" v-if="data.feed.img">
-      <img :src="data.feed.img"/>
+      <img class="lazyImg" v-lazy="data.feed.img"/>
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
