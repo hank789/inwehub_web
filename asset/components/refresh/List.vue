@@ -173,7 +173,7 @@
 
         console.log('getDownLoadMoreModePrevList 额外的参数:' + JSON.stringify(param))
 
-        postRequest(this.api, param).then(response => {
+        postRequest(this.api, param, false).then(response => {
           var code = response.data.code
 
           if (code !== 1000) {
@@ -230,7 +230,7 @@
 
         console.log('getPrevList 额外的参数:' + JSON.stringify(param))
 
-        postRequest(this.api, param).then(response => {
+        postRequest(this.api, param, false).then(response => {
           var code = response.data.code
 
           if (code !== 1000) {
@@ -302,7 +302,7 @@
 
         param = Object.assign(param, this.nextOtherData)
 
-        postRequest(this.api, param).then(response => {
+        postRequest(this.api, param, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)

@@ -4112,7 +4112,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
       }
     },
     _scrollend: function(e) {
-      if ((this.y === 0 && this.maxScrollY === 0) || (Math.abs(this.y) > 0 && this.y <= this.maxScrollY)) {
+      if ((this.y === 0 && this.maxScrollY === 0) || (Math.abs(this.y) > 0 && (this.y - 400) <= this.maxScrollY)) {
         $.trigger(this.scroller, 'scrollbottom', this);
       }
     },
@@ -4648,7 +4648,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
     },
     pullupLoading: function(callback, x, time) {
       x = x || 0;
-      this.scrollTo(x, this.maxScrollY, time, this.options.bounceEasing);
+      // this.scrollTo(x, this.maxScrollY, time, this.options.bounceEasing);
       if (this.loading) {
         return;
       }
