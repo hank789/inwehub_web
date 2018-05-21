@@ -71,8 +71,9 @@ import './../../js/iconfont.js'
 Vue.use(VueWechatTitle)
 
 Vue.use(VueLazyload, {
+  preLoad: 1.3,
   loading: '',
-  try: 3
+  attempt: 30
 })
 
 import { bindWaitting } from '../../utils/waiting'
