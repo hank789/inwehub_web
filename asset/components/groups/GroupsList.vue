@@ -1,7 +1,7 @@
 <template>
   <div class="-group"  @tap="toDetail(list)">
     <div class="logo">
-      <img :src="list.logo" />
+      <img class="lazyImg" v-lazy="list.logo" />
     </div>
     <div class="group-right">
       <div class="unread" v-if="list.unread_count"></div>
