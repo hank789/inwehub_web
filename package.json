@@ -5,12 +5,12 @@
   "author": "inwehub",
   "private": true,
   "scripts": {
+    "build:dll": "webpack --config build/webpack.dev.vendor.js",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "build-browser": "node build/build-browser.js",
     "test": "node build/build-test.js",
     "test-browser": "node build/build-test-browser.js",
-    "watch": "webpack --config build/webpack.dev.js --display-error-details -p --progress --colors --watch",
     "lint": "eslint --ext .js,.vue asset"
   },
   "dependencies": {
