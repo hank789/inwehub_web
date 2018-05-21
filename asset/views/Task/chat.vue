@@ -41,7 +41,7 @@
             <li class="Customerservice" v-else-if="currentUser.user_id == item.user_id">
               <p>{{showTime(list[index-1], item)}}</p>
               <p>
-                <img :src="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
+                <img class="lazyImg" v-lazy="currentUser.avatar_url" @tap.stop.prevent="toAvatar(item.uuid)"/>
                 <span v-if="item.data.text" v-html="textToLink(item.data.text)">
                 </span>
                 <span v-if="item.data.img" class="chatImg">
@@ -269,7 +269,9 @@
           return false
         }
         setTimeout(() => {
-          this.$refs.RefreshList.scrollToBottom()
+          if (this.$refs.RefreshList) {
+            this.$refs.RefreshList.scrollToBottom()
+          }
         }, 500)
       },
       uploadImage () {
