@@ -4112,7 +4112,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
       }
     },
     _scrollend: function(e) {
-      if ((this.y === 0 && this.maxScrollY === 0) || (Math.abs(this.y) > 0 && (this.y - 400) <= this.maxScrollY)) {
+      if ((this.y === 0 && this.maxScrollY === 0) || (Math.abs(this.y) > 0 && (this.y - 600) <= this.maxScrollY)) {
         $.trigger(this.scroller, 'scrollbottom', this);
       }
     },
