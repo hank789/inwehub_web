@@ -380,7 +380,7 @@
       empty () {
         this.resetData()
         if (this.$route.query.from) {
-          this.$router.pushPlus(this.$route.query.from)
+          window.mui.back()
         } else {
           this.$router.pushPlus('/home')
         }
