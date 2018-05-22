@@ -10,7 +10,6 @@ function changeFormat (t) {
 export default{
   install (Vue, options) {
     Vue.prototype.timeago = function (createtime, showMinute = true) {
-      console.log('createtime:' + createtime)
       if (!createtime) {
         return createtime
       }
