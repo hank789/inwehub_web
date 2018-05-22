@@ -117,7 +117,7 @@
       getNextList () {
         postRequest('notification/money_list', {
           page: this.page
-        }).then(response => {
+        }, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
