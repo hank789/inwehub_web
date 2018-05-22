@@ -196,9 +196,16 @@
       swiperSlide
     },
     activated: function () {
+      if (this.$refs.mySwiper) {
+        this.$refs.mySwiper.swiper.autoplay.run()
+      }
       this.refreshPageData()
     },
-    computed: {},
+    computed: {
+      swiper () {
+        return this.$refs.mySwiper ? this.$refs.mySwiper.swiper : false
+      }
+    },
     methods: {
       swipperClickTwo (swiper, event) {
         var parent = queryParent(event.target, 'swiper-slide')
