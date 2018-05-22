@@ -64,6 +64,7 @@
     watch: {
       'room_id' (newVal, oldVal) {
         if (newVal) {
+          this.typers = []
           this.listen()
         }
       }
