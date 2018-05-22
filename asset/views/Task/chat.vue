@@ -280,6 +280,10 @@
         this.$refs.uploadImage.uploadImage()
       },
       refreshPageData () {
+        if (this.chatRoomId) {
+          window.Echo.leave('chat.room.' + this.chatRoomId)
+          window.Echo.leave('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id)
+        }
         this.getDetail()
       },
       getDetail () {
