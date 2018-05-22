@@ -572,6 +572,7 @@ function AppInit (context) {
 
         // 监听推送
         var noticeTo = function (payload) {
+          if (!payload) return
           if (window.mixpanel.track) {
             window.mixpanel.track(
               'inwehub:push:click',
