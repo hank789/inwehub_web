@@ -116,7 +116,7 @@
           if (classList && classList.contains('follow')) {
             this.collectProfessor(uuid, index)
           } else {
-            this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1')
+            this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1', 'list-detail-page')
           }
         } else {
           userAbility.jumpToApplyProfessor(this)
