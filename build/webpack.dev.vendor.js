@@ -33,7 +33,7 @@ const vendors = [
 
 var webpackConfig = {
   output: {
-    path: path.join(__dirname, "../static"),
+    path: path.join(__dirname, "../static_dev"),
     filename: `[name].[hash].js`,
     library: '[name]_[hash]',
   },

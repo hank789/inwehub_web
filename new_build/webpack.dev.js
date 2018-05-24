@@ -191,6 +191,13 @@ module.exports = {
         to: 'static',
         ignore: ['.*']
       }
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static_dev'),
+        to: 'static_dev',
+        ignore: ['.*']
+      }
     ])
   ],
   devServer: {
