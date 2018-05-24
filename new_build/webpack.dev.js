@@ -13,7 +13,6 @@ const happThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 module.exports = {
   entry: {
     index: [
-      './build/dev-client',
       './asset/modules/index'
     ]
   },
