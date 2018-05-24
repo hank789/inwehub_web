@@ -103,6 +103,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
     }
     // 底部4个tab的页面默认为主页
     var urlSplit = url.split('?', 1)
+    var currentWebview = window.plus.webview.currentWebview()
     if (footerTab.indexOf(urlSplit[0]) >= 0) {
       id = window.plus.runtime.appid
     } else if (id === nextUrl) {
@@ -110,11 +111,12 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
       // 判断是否是详情页面, 详情页面id为list-detail-page
       if (urlSplit[urlSplit.length - 1] > 0) {
         id = 'list-detail-page'
-        var currentWebview = window.plus.webview.currentWebview()
         if (currentWebview.id === id) {
           id = 'list-detail-page-three'
         }
       }
+    } else if (currentWebview.id === id) {
+      id = 'list-detail-page-three'
     }
     openWebviewByUrl(id, nextUrl, autoShow, aniShow, popGesture, reload)
   } else {

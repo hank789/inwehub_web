@@ -37,12 +37,12 @@
         <li class="my-focus-item" v-for="(item, index) in list">
           <div class="avatar">
             <img :src="item.avatar_url"
-                 @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
+                 @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1', 'list-detail-page')"/>
             <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">
               <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
             </svg>
           </div>
-          <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
+          <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1', 'list-detail-page')">
             <p>
               <span class="mui-ellipsis">{{item.name}}</span>
             </p>

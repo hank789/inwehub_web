@@ -198,7 +198,7 @@
           this.list.readhub_message.unread_count = 0
           this.list.task_message.unread_count = 0
           for (var i = 0; i < this.list.im_messages.length; i++) {
-            this.list.im_messages[1].unread_count = 0
+            this.list.im_messages[i].unread_count = 0
           }
           window.mui.toast('标记为已读')
         })

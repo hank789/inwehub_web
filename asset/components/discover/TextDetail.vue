@@ -114,12 +114,12 @@
         if (!uuid) {
           return false
         }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()), 'list-detail-page')
       },
       goDetial (hot) {
         switch (hot.type) {
           case 'text':
-            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
+            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
             break
           case 'link':
             goThirdPartyArticle(
