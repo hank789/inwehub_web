@@ -16,6 +16,7 @@ import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
 import { getContacts } from '../utils/plus'
+import { isLogined } from '../utils/auth'
 
 var UserAbility = () => {
   /**
@@ -402,6 +403,10 @@ var UserAbility = () => {
    * 跳转到聊天页
    */
   var jumpToChat = (resumeId, context) => {
+    if (!isLogined()) {
+      context.$router.pushPlus('/login')
+      return
+    }
     const currentUser = getLocalUserInfo()
     var percent = currentUser.account_info_complete_percent
     if (percent >= 90) {

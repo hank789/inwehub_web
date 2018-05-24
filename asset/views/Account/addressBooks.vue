@@ -147,7 +147,7 @@
         if (!uuid) {
           return false
         }
-        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()))
+        this.$router.pushPlus('/share/resume/' + uuid + '?goback=1' + '&time=' + (new Date().getTime()), 'list-detail-page')
       },
       // 点击关注；
       collectProfessor (item, index) {

@@ -3,7 +3,8 @@ npm install
 
 ## 构建
 ### 开发环境
-npm run dev
+npm run dev  40秒启动, 20秒更新
+npm run new-dev 25秒启动, 5秒更新
 
 ### 测试环境
 npm run test

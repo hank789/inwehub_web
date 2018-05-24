@@ -92,19 +92,6 @@
             </li>
           </template>
         </ul>
-        <!---->
-        <!--<ul>-->
-          <!--<template v-for="(hot, index) in list">-->
-            <!--&lt;!&ndash;带图片的样式&ndash;&gt;-->
-            <!--<li class="imgContainer group-bot" v-if="hot.type === 'text'">-->
-              <!--<TextDetail :data="hot" @downvoteComment="downvoteComment"-->
-                          <!--@bookmarkuBmission="bookmarkuBmission"-->
-                          <!--@report="report"-->
-                          <!--@deleterow="deleterow(hot.id, index)"-->
-              <!--&gt;</TextDetail>-->
-            <!--</li>-->
-          <!--</template>-->
-        <!--</ul>-->
       </RefreshList>
       <!---->
     </div>

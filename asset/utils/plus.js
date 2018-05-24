@@ -572,6 +572,7 @@ function AppInit (context) {
 
         // 监听推送
         var noticeTo = function (payload) {
+          if (!payload) return
           if (window.mixpanel.track) {
             window.mixpanel.track(
               'inwehub:push:click',
@@ -809,7 +810,7 @@ function openUrlByUrl (href) {
 function getContacts (successCallback, failCallback) {
   window.mui.plusReady(function () {
     window.plus.contacts.getAddressBook(window.plus.contacts.ADDRESSBOOK_PHONE, function (addressbook) {
-      addressbook.find(['displayName', 'phoneNumbers'], function (contacts) {
+      addressbook.find(null, function (contacts) {
         console.log('getContacts Success:' + JSON.stringify({contacts: contacts}))
         successCallback(contacts)
       }, function (e) {

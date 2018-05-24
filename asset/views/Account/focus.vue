@@ -16,8 +16,8 @@
           <ul class="my-focus">
             <li class="my-focus-item" v-for="(item, index) in list">
               <img :src="item.user_avatar_url"
-                   @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')"/>
-              <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1')">
+                   @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1', 'list-detail-page')"/>
+              <div  @tap.stop.prevent="$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1', 'list-detail-page')">
                 <p>
                   <span class="mui-ellipsis">{{item.user_name}}</span>
                   <svg class="icon" aria-hidden="true" v-if="item.is_expert =='1'">

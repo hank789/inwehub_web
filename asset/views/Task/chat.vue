@@ -187,12 +187,11 @@
               return
             }
           })
-
-          setTimeout(() => {
-            if (this.$refs.RefreshList) {
+          if (this.$refs.RefreshList) {
+            setTimeout(() => {
               this.$refs.RefreshList.scrollToBottom()
-            }
-          }, 500)
+            }, 500)
+          }
         }
       },
       // 转换成html
@@ -268,11 +267,11 @@
         } else {
           return false
         }
-        setTimeout(() => {
-          if (this.$refs.RefreshList) {
+        if (this.$refs.RefreshList) {
+          setTimeout(() => {
             this.$refs.RefreshList.scrollToBottom()
-          }
-        }, 500)
+          }, 500)
+        }
       },
       uploadImage () {
         var input = document.getElementById('bounce')
@@ -330,15 +329,19 @@
       },
       prevSuccessCallback () {
         if (parseInt(this.$refs.RefreshList.currentPage) === 1) {
-          setTimeout(() => {
-            this.$refs.RefreshList.scrollToBottom()
-          }, 500)
+          if (this.$refs.RefreshList) {
+            setTimeout(() => {
+              this.$refs.RefreshList.scrollToBottom()
+            }, 500)
+          }
         }
       },
       focus () {
-        setTimeout(() => {
-          this.$refs.RefreshList.scrollToBottom()
-        }, 1000)
+        if (this.$refs.RefreshList) {
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToBottom()
+          }, 1000)
+        }
       },
       blur () {},
       // 回车键发送‘
@@ -396,10 +399,11 @@
           }
 
           this.list.push(item)
-
-          setTimeout(() => {
-            this.$refs.RefreshList.scrollToBottom()
-          }, 500)
+          if (this.$refs.RefreshList) {
+            setTimeout(() => {
+              this.$refs.RefreshList.scrollToBottom()
+            }, 500)
+          }
           //  清空
           localEvent.clearLocalItem('share')
           postRequest(`im/message-store`, {
