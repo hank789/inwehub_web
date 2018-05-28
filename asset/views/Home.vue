@@ -199,7 +199,6 @@
       if (this.$refs.mySwiper) {
         this.$refs.mySwiper.swiper.autoplay.run()
       }
-      this.refreshPageData()
     },
     computed: {
       swiper () {
