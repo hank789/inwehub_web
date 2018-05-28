@@ -19,6 +19,7 @@ export const addAccessToken = () => {
   axios.defaults.headers.common = {
     'Authorization': 'bearer ' + UserLoginInfo.token
   }
+  axios.defaults.timeout = 8000
   return axios
 }
 
@@ -91,9 +92,10 @@ export function apiRequest (url, data, showWaiting = true) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         if (errorMsg === 'Error: Network Error') {
-          errorMsg = '网络异常'
           router.push('/exception')
         }
+        console.log(errorMsg)
+        errorMsg = '网络异常'
         window.mui.toast(errorMsg)
       }
     }
