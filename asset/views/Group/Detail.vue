@@ -249,7 +249,7 @@
     },
     methods: {
       prevSuccessCallback () {
-        this.getData()
+        
       },
       footerMenuClickedItem (item) {
         switch (item.text) {
