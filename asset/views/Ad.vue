@@ -25,6 +25,7 @@
     }),
     created () {
       openFullscreen()
+      this.getBoot_guide()
     },
     methods: {
       toHome () {
@@ -72,9 +73,6 @@
           this.$router.push('/exception')
         })
       }
-    },
-    mounted () {
-      this.getBoot_guide()
     }
   }
 </script>

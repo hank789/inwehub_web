@@ -179,9 +179,7 @@
       '$route': 'refreshPageData'
     },
     methods: {
-      prevSuccessCallback () {
-
-      },
+      prevSuccessCallback () {},
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '发分享':
