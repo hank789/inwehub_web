@@ -1,19 +1,5 @@
 <template>
   <div>
-    <!--<header class="hidewechattitle mui-bar mui-bar-nav component-homeHeader">-->
-      <!--<div class="headerWrapper">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-logowenzi"></use>-->
-        <!--</svg>-->
-
-        <!--<div class="rightWrapper" @tap.stop.prevent="toAddArticle()">-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-plus&#45;&#45;"></use>-->
-          <!--</svg>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</header>-->
-
     <div class="mui-content feedWrapper" v-show="!loading">
       <!--导航栏-->
       <div class="menu">
@@ -135,7 +121,7 @@
   import UpvoteReadhubAriticle from '../components/feed/UpvoteReadhubAriticle'
   import DiscoverShare from '../components/feed/DiscoverShare.vue'
   import ServiceRecommendation from '../components/feed/ServiceRecommendation'
-  import { openVendorUrl, openAppUrl, autoTextArea, AppInit } from '../utils/plus'
+  import { openVendorUrl, openAppUrl, autoTextArea } from '../utils/plus'
 
   import RefreshList from '../components/refresh/List.vue'
   import Activity from '../components/home/Activity.vue'
@@ -144,7 +130,6 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { alertCompanyUser, alertDiscoverCompany } from '../utils/dialogList'
   import { getLocalUserInfo } from '../utils/user'
-  import { saveLocationInfo } from '../utils/allPlatform'
 
   import commentTextarea from '../components/comment/Textarea.vue'
 

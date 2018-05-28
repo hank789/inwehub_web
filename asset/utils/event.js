@@ -66,8 +66,6 @@ var EventObj = () => {
     }
   }
 
-
-
   return {
     addEventListener: addEventListener,
     addOnceEventListener: addOnceEventListener,
