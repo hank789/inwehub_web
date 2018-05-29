@@ -248,9 +248,7 @@
       '$route': 'refreshPageData'
     },
     methods: {
-      prevSuccessCallback () {
-        this.getData()
-      },
+      prevSuccessCallback () {},
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '发分享':
