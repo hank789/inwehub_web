@@ -42,7 +42,7 @@
               <use xlink:href="#icon-times1"></use>
             </svg>
             <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-          </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+          </div><div class="container-image component-photograph" v-if="images.length < maxImageCount" style="display: none;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
         <div class="bottomWrapper">
@@ -63,6 +63,16 @@
       <span @tap.stop.prevent="totags">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-icon-test"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="uploadImage" :class="{'disable': images.length >= maxImageCount}">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-tupian"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="totags">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-wenjian"></use>
           </svg>
         </span>
         <div class="component-labelWithIcon selectGroup float-right" v-if="address" @tap.stop.prevent="selectGroup">
