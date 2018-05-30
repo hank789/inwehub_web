@@ -14,6 +14,10 @@ function selectFileH5 (acceptType = '', callback) {
       fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/jpg, image/bmp, image/x-icon')
     }
 
+    if (acceptType === 'pdf') {
+      fileInput.setAttribute('accept', 'application/pdf')
+    }
+
     fileInput.classList.add('upload-file')
     fileInput.addEventListener('change', () => {
       if (fileInput.files != null && fileInput.files[0] != null) {
@@ -25,6 +29,10 @@ function selectFileH5 (acceptType = '', callback) {
 
           if (acceptType === 'img') {
             warningText = '单张不允许超过5M！'
+          }
+
+          if (acceptType === 'pdf') {
+            warningText = '单个文件不允许超过5M！'
           }
 
           window.mui.alert(warningText)

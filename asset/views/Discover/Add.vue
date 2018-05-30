@@ -45,9 +45,14 @@
           </div><div class="container-image component-photograph" v-if="images.length < maxImageCount" style="display: none;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
-        <div class="bottomWrapper">
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox" :class="{'active':hide}" v-if="false"></label><!--匿名--></span>
-        </div>
+        <swiper :options="swiperOption" class="container-pdfs">
+          <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf line-2">
+            {{pdf.name}}<svg class="icon" aria-hidden="true" @tap.stop.prevent="delPdf(index)">
+            <use xlink:href="#icon-times1"></use>
+          </svg>
+          </swiper-slide>
+        </swiper>
+
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
         <button type="button" class="mui-plus-hidden mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
@@ -65,12 +70,12 @@
             <use xlink:href="#icon-icon-test"></use>
           </svg>
         </span>
-        <span @tap.stop.prevent="uploadImage" :class="{'disable': images.length >= maxImageCount}">
+        <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-tupian"></use>
           </svg>
         </span>
-        <span @tap.stop.prevent="totags">
+        <span @tap.stop.prevent="uploadPdf" :class="{'disable': !isUploadPdf}">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-wenjian"></use>
           </svg>
@@ -97,28 +102,39 @@
       @success="uploadImageSuccess"
       :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
+
+    <uploadFile ref="uploadFile" @success="uploadFileSuccess"></uploadFile>
   </div>
 </template>
 
 <script>
   import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
+  import uploadFile from '../../components/uploadFile'
   import { getGeoPosition, autoTextArea } from '../../utils/plus'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   export default {
     data () {
       return {
+        swiperOption: {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          freeMode: true
+        },
         id: currentUser.user_id,
         noticeUsers: [],
         tags: [],
         description: {},
         images: [],
         newTags: [],
+        pdfs: [],
         maxImageCount: 9,
+        maxPdfCount: 5,
         percentCompleted: 0,
         address: '所在位置',
         selectedAddress: '所在位置',
@@ -135,10 +151,32 @@
         selectedGroup: null
       }
     },
-    computed: {},
+    computed: {
+      isUploadImage () {
+        if (this.images.length >= this.maxImageCount) {
+          return false
+        }
+        if (this.pdfs.length) {
+          return false
+        }
+        return true
+      },
+      isUploadPdf () {
+        if (this.pdfs.length >= this.maxPdfCount) {
+          return false
+        }
+        if (this.images.length) {
+          return false
+        }
+        return true
+      },
+    },
     components: {
       uploadImage,
-      Jeditor
+      uploadFile,
+      Jeditor,
+      swiper,
+      swiperSlide
     },
     created () {
       getGeoPosition((position) => {
@@ -351,6 +389,9 @@
           this.tags.splice(index, 1)
         }
       },
+      delPdf (index) {
+        this.pdfs.splice(index, 1)
+      },
       delNewTag (tag) {
         var index = this.newTags.indexOf(tag)
         if (index > -1) {
@@ -413,10 +454,25 @@
         this.resetData()
       },
       uploadImage: function () {
+        if (!this.isUploadImage) {
+          return false
+        }
         setTimeout(() => {
           this.$refs.myAddEditor.blur()
         }, 200)
         this.$refs.uploadImage.uploadImage()
+      },
+      uploadPdf: function () {
+        if (!this.isUploadPdf) {
+          return false
+        }
+        setTimeout(() => {
+          this.$refs.myAddEditor.blur()
+        }, 200)
+        this.$refs.uploadFile.uploadFile('pdf')
+      },
+      uploadFileSuccess (pdfs) {
+        this.pdfs = pdfs
       },
       toggleHide () {
         this.hide = !this.hide
@@ -458,6 +514,7 @@
           type: 'text',
           title: html,
           photos: [],
+          files: this.pdfs,
           category_id: '',
           tags: this.tags,
           new_tags: this.newTags,
@@ -512,6 +569,44 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .container-pdfs{
+    padding-top:10px;
+    padding-left:10px;
+    height:84px;
+    padding-bottom:10px;
+
+    .pdf{
+      .icon{
+        position: absolute;
+        right:-5px;
+        top:-5px;
+      }
+
+      color:#808080;
+      font-size:14px;
+      position: relative;
+      background:#fff;
+      border-radius: 4px;
+      width:226px;
+      height:64px;
+      padding:10px 10px 10px 64px;
+
+      &:before{
+        content: 'PDF';
+        color:#fff;
+        position: absolute;
+        left:10px;
+        top:10px;
+        background:#DF6F5A;
+        border-radius: 4px;
+        width:44px;
+        height:44px;
+        line-height:44px;
+        text-align: center;
+      }
+    }
+  }
+
   .category {
     background: #fff;
     /*padding: 0.4rem 0.453rem;*/
@@ -589,6 +684,12 @@
   .selectGroup{
     background:#03AEF9;
   }
+
+  .disable{
+    .icon{
+      color:#DCDCDC;
+    }
+  }
 </style>
 
 <style>
@@ -615,7 +716,7 @@
     color: #9b9b9b;
   }
   #discoverAddJeditor .counter {
-    bottom: -2.533rem;
+    bottom: 0;
     font-size: 0.373rem;
     color: #c8c8c8;
   }
