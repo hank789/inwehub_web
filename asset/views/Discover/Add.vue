@@ -46,8 +46,8 @@
         </div>
 
         <swiper :options="swiperOption" class="container-pdfs">
-          <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf line-2">
-            {{pdf.name}}<svg class="icon" aria-hidden="true" @tap.stop.prevent="delPdf(index)">
+          <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf">
+            <span class="text-line-2">{{pdf.name}}</span><svg class="icon" aria-hidden="true" @tap.stop.prevent="delPdf(index)">
             <use xlink:href="#icon-times1"></use>
           </svg>
           </swiper-slide>
@@ -570,10 +570,8 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .container-pdfs{
-    padding-top:10px;
-    padding-left:10px;
+    padding:10px;
     height:84px;
-    padding-bottom:10px;
 
     .pdf{
       .icon{

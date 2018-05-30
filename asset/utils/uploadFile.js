@@ -39,6 +39,14 @@ function selectFileH5 (acceptType = '', callback) {
           return false
         }
 
+        if (acceptType === 'pdf') {
+          if (file.type !== 'application/pdf') {
+            warningText = '请选择pdf文件！'
+            window.mui.alert(warningText)
+            return false
+          }
+        }
+
         let reader = new FileReader()
         reader.onload = (e) => {
           fileInput.value = ''
