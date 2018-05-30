@@ -45,7 +45,7 @@
           </div><div class="container-image component-photograph" v-if="images.length < maxImageCount" style="display: none;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
         </div>
 
-        <swiper :options="swiperOption" class="container-pdfs">
+        <swiper :options="swiperOption" class="container-pdfs" v-show="pdfs.length">
           <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf">
             <span class="text-line-2">{{pdf.name}}</span><svg class="icon" aria-hidden="true" @tap.stop.prevent="delPdf(index)">
             <use xlink:href="#icon-times1"></use>
