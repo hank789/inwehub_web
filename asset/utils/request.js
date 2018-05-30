@@ -3,6 +3,7 @@ import localEvent from '../stores/localStorage'
 import { logout } from '../utils/auth'
 import { rebootAuth } from '../utils/wechat'
 import router from '../modules/index/routers/index'
+import Raven from 'raven-js'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
@@ -82,7 +83,7 @@ export function apiRequest (url, data, showWaiting = true) {
       }
 
       console.log('网络异常:' + e)
-
+      Raven.captureException(JSON.stringify(e))
       return Promise.reject(e)
     })
 
@@ -162,7 +163,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
       }
 
       console.log('网络异常:' + e)
-
+      Raven.captureException(JSON.stringify(e))
       return Promise.reject(e)
     })
 
@@ -175,6 +176,8 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
           errorMsg = '网络异常'
           router.push('/exception')
         }
+        console.log(errorMsg)
+        errorMsg = '网络异常'
         window.mui.toast(errorMsg)
       }
     }

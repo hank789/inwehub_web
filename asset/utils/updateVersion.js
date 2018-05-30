@@ -23,6 +23,7 @@ function checkUpdate () {
             } else if (isAndroidForce === 1 && window.mui.os.android) {
               window.mui.alert('有新的版本升级')
               // market://details?id=io.dcloud.HelloMUI
+              // 'com.tencent.android.qqdownloader'
               window.plus.runtime.openURL(responseData.android_force_update_url, function (e) {
                 window.plus.nativeUI.confirm('很抱歉，您未安装腾讯应用宝，请安装后再更新', function (i) {
                   if (i.index === 0) {
@@ -33,7 +34,7 @@ function checkUpdate () {
                     window.plus.runtime.quit()
                   }
                 }, inf.name, ['立即下载', '暂不下载', '取消'])
-              }, 'com.tencent.android.qqdownloader')
+              })
             } else if ((isIosForce === 2 && window.mui.os.ios) || (isAndroidForce === 2 && window.mui.os.android)) {
               // 什么都不做
             } else {
