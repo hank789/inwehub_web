@@ -188,11 +188,14 @@ function openVendorUrl (containerDiv) {
   }
 }
 
-function openVendorUrlByUrl (url) {
+function openVendorUrlByUrl (url, title = '') {
   var href = url
   if (window.plus) {
     console.log('plus 打开')
-    router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
+    if (title) {
+      title = encodeURIComponent(title)
+    }
+    router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title)
   } else {
     console.log('window.open 打开')
     window.open(href)

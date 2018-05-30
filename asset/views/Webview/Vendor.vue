@@ -18,8 +18,14 @@
     }),
     created () {
       var url = decodeURIComponent(this.$route.params.url)
+      var customTitle = this.$route.params.title ? decodeURIComponent(this.$route.params.title) : null
+
       goVendorUrl(url, (title) => {
-        this.title = title
+        if (!customTitle) {
+          this.title = title
+        } else {
+          this.title = customTitle
+        }
       })
     },
     methods: {
