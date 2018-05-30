@@ -92,11 +92,11 @@ export function apiRequest (url, data, showWaiting = true) {
     if (!fail) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
-        if (errorMsg === 'Error: Network Error') {
+        console.log(errorMsg)
+        if (errorMsg === 'Error: Network Error' || errorMsg === 'Error: timeout of 8000ms exceeded') {
+          errorMsg = '网络异常'
           router.push('/exception')
         }
-        console.log(errorMsg)
-        errorMsg = '网络异常'
         window.mui.toast(errorMsg)
       }
     }
@@ -172,12 +172,11 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
     if (!fail) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
-        if (errorMsg === 'Error: Network Error') {
+        console.log(errorMsg)
+        if (errorMsg === 'Error: Network Error' || errorMsg === 'Error: timeout of 8000ms exceeded') {
           errorMsg = '网络异常'
           router.push('/exception')
         }
-        console.log(errorMsg)
-        errorMsg = '网络异常'
         window.mui.toast(errorMsg)
       }
     }
