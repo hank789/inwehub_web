@@ -204,6 +204,7 @@ module.exports = {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
+        { from: /^\/favicon.ico$/, to: '/static/favicon.ico' },
         {
           from: /.*/,
           to: '/index.html'

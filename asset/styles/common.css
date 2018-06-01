@@ -1832,3 +1832,30 @@ a {
 .mui-bar .mui-btn-link.appPageSubmit{
   color:#03AEF9 !important;
 }
+
+.container-pdf-list .pdf {
+  color: #808080;
+  font-size: 14px;
+  position: relative;
+  background: #F7F8FA;
+  border-radius: 4px;
+  width: 100%;
+  height: 64px;
+  padding: 10px;
+  margin-bottom: 5px; }
+.container-pdf-list .pdf span {
+  margin-top: 2.5px;
+  line-height: 19.5px;
+  margin-left: 54px; }
+.container-pdf-list .pdf:before {
+  content: 'PDF';
+  color: #fff;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #DF6F5A;
+  border-radius: 4px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center; }

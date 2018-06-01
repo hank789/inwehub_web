@@ -29,8 +29,12 @@
               <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
             </div>
 
-            <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+
+            <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files.files.length">
+              <div class="pdf" v-for="(pdf, index) in detail.data.files.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+            </div>
+
+            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
                 <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
                      :data-preview-group="1"/>
@@ -165,6 +169,7 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import { openVendorUrlByUrl } from '../../utils/plus'
 
   export default {
     data () {
@@ -261,6 +266,9 @@
       RecommendList
     },
     methods: {
+      seePdf (pdf) {
+        openVendorUrlByUrl(pdf.url, pdf.name)
+      },
       typeDesc (type) {
         switch (type) {
           case -1:
@@ -749,5 +757,8 @@
     }
   }
 
+  .container-pdf-list{
+    padding:10px 0.4rem;
+  }
 </style>
 
