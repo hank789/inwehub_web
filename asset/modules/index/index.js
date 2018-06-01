@@ -202,6 +202,7 @@ window.mui.back = function () {
     var currentWebview = window.plus.webview.currentWebview()
     var needHide = [
       'inwehub_notice_view',
+      'list-page',
       'list-detail-page',
       'list-detail-page-two',
       'list-detail-page-three',

@@ -1,5 +1,5 @@
 import router from '../modules/index/routers/index'
-import { goBack, goThirdPartyArticle } from './webview'
+import { goBack, goThirdPartyArticle, getPrevWebview } from './webview'
 import { setIncBadgeNumber } from './notice'
 import userAbility from './userAbility'
 import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from './allPlatform'
@@ -471,6 +471,36 @@ function AppPageInit (context) {
     lockOrientation('portrait-primary')
 
     if (window.mui.os.plus) {
+      // 预加载页面
+      var listPageWebview = window.mui.preload({
+        url: '/public/index.html#/my',
+        id: 'list-page',
+        styles: {
+          popGesture: 'hide'
+        },
+        extras: {preload: true}
+      })
+      listPageWebview.addEventListener('popGesture', (e) => {
+        console.log('run in event popGesture')
+        if (e.type === 'end' && e.result === true) {
+          var parentWebview = getPrevWebview() // self.opener()
+          if (parentWebview) {
+            console.log('calledEvent: popGesture：' + parentWebview.id)
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+
+            window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
+          }
+        }
+      }, false)
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
