@@ -2,13 +2,13 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">专业问答</h1>
+      <h1 class="mui-title">问答</h1>
     </header>
 
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
-      <div class="tags" v-if="ask.question.tags.length">
-        <p v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</p>
+      <div class="container-label" v-if="ask.question.tags.length">
+        <span v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
       </div>
 
       <Question
@@ -21,7 +21,7 @@
               :isFollow="true"
       ></Answer>
 
-      <div class="detail-answer-wait" v-show="ask.question.status!=6&&ask.question.status!=7">
+      <div class="detail-answer-wait" v-show="ask.question.status != 6 && ask.question.status != 7">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
@@ -40,10 +40,6 @@
                    :readOnly="true"
       ></Star-Rating>
 
-      <Timeline
-        :timelines="timelines"
-      ></Timeline>
-
       <Discuss
         class="messageWrapper"
         :listApi="'answer/commentList'"
@@ -57,8 +53,6 @@
         ref="discuss"
         v-if="ask.question.status==6||ask.question.status==7"
       ></Discuss>
-
-
     </div>
 
     <Share
@@ -307,5 +301,10 @@
   /*margin*/
   .detail-answer{
     margin-bottom: 0rem;
+  }
+
+  .container-label{
+    background:#fff;
+    padding:0.266rem 0.426rem 0.053rem;
   }
 </style>

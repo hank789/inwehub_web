@@ -20,6 +20,10 @@
         <span class="company">{{ company }}</span>
       </div>
 
+      <div class="detail" v-if="time">
+        <span class="position">{{ time }}</span>
+      </div>
+
       <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
         <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
         <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
@@ -75,6 +79,10 @@
       isShowPositionAndCompany: {
         type: Boolean,
         default: false
+      },
+      time: {
+        type: String,
+        default: ''
       }
     },
     created () {

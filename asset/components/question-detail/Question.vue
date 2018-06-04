@@ -10,6 +10,7 @@
       :isFollowed="ask.is_followed?true:false"
       :isExpert="ask.is_expert?1:0"
       :isShowPositionAndCompany="isShowPositionAndCompany"
+      :time="ask.created_at"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
