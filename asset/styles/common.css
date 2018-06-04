@@ -1939,3 +1939,58 @@ a {
   margin-left: -3px;
   top: 50%;
   margin-top: -3px; }
+
+
+.container-dialog {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 100px; }
+.container-dialog .title {
+  position: relative;
+  height: 44.5px;
+  line-height: 44.5px;
+  color: #B4B4B6;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid #DCDCDC; }
+.container-dialog .title .cancel {
+  font-size: 16px;
+  color: #808080;
+  position: absolute;
+  left: 10px;
+  top: 0; }
+.container-dialog .content {
+  padding: 16px; }
+
+
+.component-pay {
+  text-align: center; }
+.component-pay .title {
+  font-size: 16px;
+  line-height: 16px;
+  color: #444; }
+.component-pay .inputWrapper {
+  margin: 8px 0; }
+.component-pay .inputWrapper input::-webkit-input-placeholder {
+  color: #c8c8c8; }
+.component-pay .inputWrapper input:-ms-input-placeholder {
+  color: #c8c8c8; }
+.component-pay .inputWrapper input::-ms-input-placeholder {
+  color: #c8c8c8; }
+.component-pay .inputWrapper input::placeholder {
+  color: #c8c8c8; }
+.component-pay .inputWrapper input {
+  border: none;
+  margin: 0;
+  width: 92.5px;
+  height: 32.5px;
+  font-size: 23px;
+  font-family: PingFangSC-Medium;
+  color: #FA4975;
+  line-height: 32.5px;
+  padding: 0; }
+.component-pay .desc {
+  font-size: 12px;
+  color: #B4B4B6;
+  line-height: 16.5px; }
