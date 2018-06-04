@@ -478,7 +478,7 @@ function AppPageInit (context) {
         styles: {
           popGesture: 'hide'
         },
-        extras: {preload: true}
+        extras: {preload: true, custom_preload: true}
       })
       listPageWebview.addEventListener('popGesture', (e) => {
         console.log('run in event popGesture')

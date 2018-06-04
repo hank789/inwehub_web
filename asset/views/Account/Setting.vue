@@ -24,14 +24,14 @@
 
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/findpassword')">
+        <li @tap.stop.prevent="$router.pushPlus('/findpassword', 'list-detail-page-two')">
           <p>修改密码</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/push/setting')"  class="mui-wechat-hidden">
+        <li @tap.stop.prevent="$router.pushPlus('/push/setting', 'list-detail-page-two')"  class="mui-wechat-hidden">
           <p>推送设置</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
