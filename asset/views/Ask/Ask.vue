@@ -54,8 +54,20 @@
       :pay_money="money"
       @pay_success="goAsk"
       @payMoneyChange="payMoneyChange"
+      v-if="payMethod === 'select'"
     >
     </pay>
+
+    <payInput
+      ref="pay"
+      :payItems="payItems"
+      :pay_object_type="'ask'"
+      :pay_object_id="0"
+      :pay_money="money"
+      @pay_success="goAsk"
+      @payMoneyChange="payMoneyChange"
+      v-else
+    ></payInput>
 
   </div>
 </template>
@@ -65,6 +77,7 @@
   import { ASK_INFO, ASK_TYPE_SELECT } from '../../stores/types'
   import { postRequest } from '../../utils/request'
   import pay from '../../components/pay/pay.vue'
+  import payInput from '../../components/pay/payInput.vue'
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
@@ -90,11 +103,13 @@
       hide: 0,
       descMaxLength: 1000,
       isShowMoneyDev: false,
-      descPlaceholder: '输入问题描述'
+      descPlaceholder: '输入问题描述',
+      payMethod: 'input' // 支付方式, input式还是select式
     }),
     components: {
       pay,
-      uploadImage
+      uploadImage,
+      payInput
     },
     activated: function () {
       this.initData()
@@ -268,6 +283,11 @@
           }
 
           this.payItems = response.data.data.pay_items
+          if (response.data.data.must_apple_pay) {
+            this.payMethod = 'select'
+          } else {
+            this.payMethod = 'input'
+          }
 
           for (var i in this.payItems) {
             var item = this.payItems[i]
@@ -289,6 +309,10 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
+        if (!this.tags.length) {
+          window.mui.toast('请选择标签')
+          return
+        }
         if (!this.money) {
           window.mui.toast('请选择提问金额')
           return
