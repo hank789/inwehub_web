@@ -626,12 +626,14 @@ function AppInit (context) {
             case 'free_question_answered':
               router.pushPlus('/askCommunity/interaction/' + payload.object_id)
               break
+            case 'pay_answer_awake':
             case 'pay_answer':
             case 'answer':
               // router.go(-1);
               // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
               router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
               break
+            case 'free_answer_awake':
             case 'free_answer':
               router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id)
               break

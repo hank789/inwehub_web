@@ -169,7 +169,7 @@
           return false
         }
         return true
-      },
+      }
     },
     components: {
       uploadImage,
@@ -210,7 +210,7 @@
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
       selectGroup () {
-        this.$router.pushPlus('/group/my?from=discover_add')
+        this.$router.push('/group/my?from=discover_add')
       },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
@@ -230,11 +230,11 @@
       },
       hashSymbolFound () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selecttags?from=discover')
+        this.$router.push('/selecttags?from=discover')
       },
       addressAppearFound () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selectUser?from=discover', 'backAndClose')
+        this.$router.push('/selectUser?from=discover', 'backAndClose')
       },
       smallSpanArrChange (arr) {
         setTimeout(() => {
@@ -438,15 +438,15 @@
       },
       totags () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selecttags?from=discover')
+        this.$router.push('/selecttags?from=discover')
       },
       toUser () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/selectUser?from=discover', 'backAndClose', true, 'pop-in', 'close', true)
+        this.$router.push('/selectUser?from=discover', 'backAndClose', true, 'pop-in', 'close', true)
       },
       toAddress () {
         this.$refs.myAddEditor.blur()
-        this.$router.pushPlus('/nearby?from=discover')
+        this.$router.push('/nearby?from=discover')
       },
       jumpToLinkMode: function () {
         this.$refs.myAddEditor.blur()

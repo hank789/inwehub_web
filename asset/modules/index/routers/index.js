@@ -114,7 +114,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
         if (currentWebview.id === id) {
           id = 'list-detail-page-three'
         }
-      } else if (id.includes('share/resume')) {
+      } else if (id.includes('share/resume') || id.includes('?from')) {
         id = 'resume-page'
       } else {
         id = 'list-page'
