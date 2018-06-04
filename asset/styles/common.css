@@ -1835,27 +1835,37 @@ a {
 
 .container-pdf-list .pdf {
   color: #808080;
-  font-size: 14px;
+  font-size: 0.373rem;
   position: relative;
   background: #F7F8FA;
-  border-radius: 4px;
+  border-radius: 0.106rem;
   width: 100%;
-  height: 64px;
-  padding: 10px;
-  margin-bottom: 5px; }
+  height: 1.706rem;
+  padding: 0.266rem;
+  margin-bottom: 0.133rem; }
 .container-pdf-list .pdf span {
-  margin-top: 2.5px;
-  line-height: 19.5px;
-  margin-left: 54px; }
+  margin-top: 0.066rem;
+  line-height: 0.52rem;
+  margin-left: 1.44rem; }
 .container-pdf-list .pdf:before {
   content: 'PDF';
   color: #fff;
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 0.266rem;
+  top: 0.266rem;
   background: #DF6F5A;
-  border-radius: 4px;
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
+  border-radius: 0.106rem;
+  width: 1.173rem;
+  height: 1.173rem;
+  line-height: 1.173rem;
   text-align: center; }
+
+
+.container-label span {
+  border: 0.013rem solid #DCDCDC;
+  font-size: 0.32rem;
+  line-height: 0.44rem;
+  color: #235280;
+  border-radius: 1.333rem;
+  padding: 0.066rem 0.266rem;
+  margin-right: 0.133rem; }

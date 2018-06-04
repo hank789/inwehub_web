@@ -570,36 +570,36 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .container-pdfs{
-    padding:10px;
-    height:84px;
+    padding:0.266rem;
+    height:2.24rem;
 
     .pdf{
       .icon{
         position: absolute;
-        right:-5px;
-        top:-5px;
+        right:-0.133rem;
+        top:-0.133rem;
       }
 
       color:#808080;
-      font-size:14px;
+      font-size:0.373rem;
       position: relative;
       background:#fff;
-      border-radius: 4px;
-      width:226px;
-      height:64px;
-      padding:10px 10px 10px 64px;
+      border-radius: 0.106rem;
+      width:6.026rem;
+      height:1.706rem;
+      padding:0.266rem 0.266rem 0.266rem 1.706rem;
 
       &:before{
         content: 'PDF';
         color:#fff;
         position: absolute;
-        left:10px;
-        top:10px;
+        left:0.266rem;
+        top:0.266rem;
         background:#DF6F5A;
-        border-radius: 4px;
-        width:44px;
-        height:44px;
-        line-height:44px;
+        border-radius: 0.106rem;
+        width:1.173rem;
+        height:1.173rem;
+        line-height:1.173rem;
         text-align: center;
       }
     }
