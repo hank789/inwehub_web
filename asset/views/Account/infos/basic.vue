@@ -186,6 +186,9 @@
     },
     watch: {},
     methods: {
+      refreshPageData () {
+        this.getUserInfo()
+      },
       fixSelect: function () {
         setTimeout(() => {
           window.mui.trigger(window.mui('.mui-indexed-list-item')[0], 'tap')
@@ -330,38 +333,6 @@
 
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-
-          var newJobs = []
-          for (var i in user.jobs) {
-            var info = user.jobs[i]
-            var id = info.id
-            newJobs[id] = info
-          }
-          localEvent.setLocalItem('jobs', newJobs)
-
-          var newProjects = []
-          for (var projectsIndex in user.projects) {
-            var projectInfo = user.projects[projectsIndex]
-            var projectId = projectInfo.id
-            newProjects[projectId] = projectInfo
-          }
-          localEvent.setLocalItem('projects', newProjects)
-
-          var newEdus = []
-          for (var eduIndex in user.edus) {
-            var eduInfo = user.edus[eduIndex]
-            var eduId = eduInfo.id
-            newEdus[eduId] = eduInfo
-          }
-          localEvent.setLocalItem('edus', newEdus)
-
-          var newTrains = []
-          for (var trainIndex in user.trains) {
-            var trainInfo = user.trains[trainIndex]
-            var trainId = trainInfo.id
-            newTrains[trainId] = info
-          }
-          localEvent.setLocalItem('trains', newTrains)
 
           this.work_city = user.info.province.name + ' ' + user.info.city.name
           this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name
@@ -615,13 +586,7 @@
       }
       next()
     },
-    mounted () {
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-basic')
-        this.getUserInfo()
-      })
-    },
+    mounted () {},
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {
