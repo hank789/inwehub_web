@@ -1101,6 +1101,9 @@ input.upload-file[type=file]{
 .padding-10-16-0 {
   padding: 0.266rem 0.426rem 0rem !important; }
 
+.padding-10-16 {
+  padding: 0.266rem 0.426rem !important; }
+
 .alertSkyTwo .mui-popup-inner {
   text-align: left;
   background: #fff;
@@ -1993,3 +1996,58 @@ a {
   font-size: 0.32rem;
   color: #B4B4B6;
   line-height: 0.44rem; }
+
+
+.component-card-money {
+  height: 1.6rem;
+  border-radius: 0.106rem;
+  border: 0.013rem solid gainsboro;
+  position: relative; }
+.component-card-money .left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.213rem;
+  text-align: center; }
+.component-card-money .left .money {
+  margin-top: 0.173rem;
+  font-size: 0.613rem;
+  line-height: 0.533rem;
+  font-family: PingFangSC-Medium;
+  color: #fcc816; }
+.component-card-money .left .money span {
+  font-size: 0.346rem;
+  font-family: PingFangSC-Medium;
+  color: #fcc816; }
+.component-card-money .left label {
+  height: 0.453rem;
+  padding: 0 0.133rem;
+  background: #fcc816;
+  border-radius: 0.106rem;
+  font-size: 0.293rem;
+  color: #235280;
+  line-height: 0.453rem; }
+.component-card-money .right {
+  position: absolute;
+  left: 2.213rem;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 1.6rem; }
+.component-card-money .right .desc {
+  font-size: 0.32rem;
+  color: gray;
+  line-height: 0.44rem;
+  padding: 0.266rem; }
+.component-card-money .line-split {
+  width: 0.026rem;
+  height: 1.066rem;
+  border: 0.013rem solid gainsboro;
+  position: absolute;
+  left: 2.213rem;
+  top: 0.213rem; }
