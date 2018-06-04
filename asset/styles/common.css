@@ -1869,3 +1869,45 @@ a {
   border-radius: 1.333rem;
   padding: 0.066rem 0.266rem;
   margin-right: 0.133rem; }
+
+
+.container-textareaMenu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 1.173rem;
+  line-height: 1.173rem;
+  background: #FFFFFF;
+  border-top: 0.026rem solid #DCDCDC;
+  width: 100%;
+  padding: 0 0.426rem; }
+.container-textareaMenu .leftParter .item {
+  display: inline-block;
+  margin-right: 0.266rem;
+  font-size: 0.373rem; }
+.container-textareaMenu .leftParter .item .component-radio {
+  top: 0.066rem;
+  margin-right: 0.093rem; }
+.container-textareaMenu .leftParter .item .noImportant {
+  color: #808080; }
+.container-textareaMenu .leftParter .icon {
+  font-size: 0.533rem;
+  position: relative;
+  top: 0.053rem; }
+.container-textareaMenu .rightParter .item {
+  display: inline-block;
+  color: #3C3E44;
+  font-size: 0.346rem;
+  font-family: PingFangSC-Medium;
+  margin-left: 0.133rem; }
+.container-textareaMenu .rightParter .item .icon {
+  font-size: 0.533rem;
+  position: relative;
+  top: 0.053rem;
+  margin-right: 0.106rem; }
