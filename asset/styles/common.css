@@ -1097,6 +1097,10 @@ input.upload-file[type=file]{
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+.padding-10-16-0 {
+  padding: 10px 16px 0px !important; }
+
 .alertSkyTwo .mui-popup-inner {
   text-align: left;
   background: #fff;
@@ -1862,7 +1866,7 @@ a {
 
 
 .container-label span {
-  border: 0.013rem solid #DCDCDC;
+  border: 1px solid #DCDCDC; /* px不转换 */
   font-size: 0.32rem;
   line-height: 0.44rem;
   color: #235280;
@@ -1899,7 +1903,8 @@ a {
 .container-textareaMenu .leftParter .icon {
   font-size: 0.533rem;
   position: relative;
-  top: 0.053rem; }
+  top: 0.053rem;
+  color: #808080; }
 .container-textareaMenu .rightParter .item {
   display: inline-block;
   color: #3C3E44;
@@ -1910,4 +1915,27 @@ a {
   font-size: 0.533rem;
   position: relative;
   top: 0.053rem;
-  margin-right: 0.106rem; }
+  margin-right: 0.106rem;
+  color: #808080; }
+
+
+.component-radio {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  border: 1px solid #c8c8c8;
+  border-radius: 50%; }
+.component-radio.active:after {
+  content: ' ';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  border: 1px solid #03aef9;
+  background-color: #03aef9;
+  border-radius: 50%;
+  left: 50%;
+  margin-left: -3px;
+  top: 50%;
+  margin-top: -3px; }
