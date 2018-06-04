@@ -1099,7 +1099,7 @@ input.upload-file[type=file]{
 }
 
 .padding-10-16-0 {
-  padding: 10px 16px 0px !important; }
+  padding: 0.266rem 0.426rem 0rem !important; }
 
 .alertSkyTwo .mui-popup-inner {
   text-align: left;
@@ -1921,57 +1921,55 @@ a {
 
 .component-radio {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 0.426rem;
+  height: 0.426rem;
   position: relative;
-  border: 1px solid #c8c8c8;
+  border: 0.026rem solid #c8c8c8;
   border-radius: 50%; }
 .component-radio.active:after {
   content: ' ';
   display: inline-block;
-  width: 4px;
-  height: 4px;
+  width: 0.106rem;
+  height: 0.106rem;
   position: absolute;
-  border: 1px solid #03aef9;
+  border: 0.026rem solid #03aef9;
   background-color: #03aef9;
   border-radius: 50%;
   left: 50%;
-  margin-left: -3px;
+  margin-left: -0.08rem;
   top: 50%;
-  margin-top: -3px; }
+  margin-top: -0.08rem; }
 
 
 .container-dialog {
   width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 100px; }
-.container-dialog .title {
+  background: #fff; }
+.container-dialog .dialogTitle {
   position: relative;
-  height: 44.5px;
-  line-height: 44.5px;
+  height: 1.186rem;
+  line-height: 1.186rem;
   color: #B4B4B6;
-  font-size: 14px;
+  font-size: 0.373rem;
   text-align: center;
-  border-bottom: 1px solid #DCDCDC; }
-.container-dialog .title .cancel {
-  font-size: 16px;
+  border-bottom: 0.026rem solid #DCDCDC; }
+.container-dialog .dialogTitle .cancel {
+  font-size: 0.426rem;
   color: #808080;
   position: absolute;
-  left: 10px;
+  left: 0.266rem;
   top: 0; }
-.container-dialog .content {
-  padding: 16px; }
+.container-dialog .dialogContent {
+  padding: 0.426rem; }
 
 
 .component-pay {
   text-align: center; }
 .component-pay .title {
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 0.426rem;
+  line-height: 0.426rem;
   color: #444; }
 .component-pay .inputWrapper {
-  margin: 8px 0; }
+  margin: 0.213rem 0; }
 .component-pay .inputWrapper input::-webkit-input-placeholder {
   color: #c8c8c8; }
 .component-pay .inputWrapper input:-ms-input-placeholder {
@@ -1981,16 +1979,17 @@ a {
 .component-pay .inputWrapper input::placeholder {
   color: #c8c8c8; }
 .component-pay .inputWrapper input {
+  text-align: center;
   border: none;
   margin: 0;
-  width: 92.5px;
-  height: 32.5px;
-  font-size: 23px;
+  width: 2.466rem;
+  height: 0.866rem;
+  font-size: 0.613rem;
   font-family: PingFangSC-Medium;
   color: #FA4975;
-  line-height: 32.5px;
+  line-height: 0.866rem;
   padding: 0; }
 .component-pay .desc {
-  font-size: 12px;
+  font-size: 0.32rem;
   color: #B4B4B6;
-  line-height: 16.5px; }
+  line-height: 0.44rem; }
