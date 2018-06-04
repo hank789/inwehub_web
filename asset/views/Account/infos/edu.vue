@@ -291,7 +291,7 @@
 
           window.mui.toast('操作成功')
           this.bak = ''
-          this.clearData()
+          if (!this.id) this.clearData()
           window.mui.back()
         })
       }

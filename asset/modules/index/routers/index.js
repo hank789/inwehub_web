@@ -117,6 +117,9 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
         id = 'list-page'
       }
       if (currentWebview.id === id) {
+        id = 'list-detail-page-two'
+      }
+      if (currentWebview.id === 'list-detail-page-two' && id === 'list-page') {
         id = 'list-detail-page-three'
       }
     } else if (currentWebview.id === id) {
