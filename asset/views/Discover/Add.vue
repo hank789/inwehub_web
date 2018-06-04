@@ -80,15 +80,15 @@
             <use xlink:href="#icon-wenjian"></use>
           </svg>
         </span>
-        <div class="component-labelWithIcon selectGroup float-right" v-if="address" @tap.stop.prevent="selectGroup">
+        <div class="component-labelWithIcon selectGroup float-right text-line-1" v-if="address" @tap.stop.prevent="selectGroup">
         <template v-if="selectedGroup.name"><svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
-        </svg> {{selectedGroup.name.length > 6 ?selectedGroup.name.substr(0, 6) + '...':selectedGroup.name}}</template>
+        </svg> {{selectedGroup.name}}</template>
         <template v-else> <svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
         </svg> 选择圈子</template>
         </div>
-        <div class="component-labelWithIcon float-right" v-if="address" @tap.stop.prevent="toAddress">
+        <div class="component-labelWithIcon selectedAddress float-right text-line-1" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dingwei1"></use>
         </svg>
@@ -681,6 +681,11 @@
   }
   .selectGroup{
     background:#03AEF9;
+    width:2.32rem;
+  }
+
+  .selectedAddress{
+    width:2.32rem;
   }
 
   .disable{
