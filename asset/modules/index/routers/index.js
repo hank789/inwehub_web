@@ -111,13 +111,13 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
       // 判断是否是详情页面, 详情页面id为list-detail-page
       if (urlSplit[urlSplit.length - 1] > 0) {
         id = 'list-detail-page'
-        if (currentWebview.id === id) {
-          id = 'list-detail-page-three'
-        }
-      } else if (id.includes('share/resume') || id.includes('?from')) {
+      } else if (id.includes('/resume') || id.includes('?from')) {
         id = 'resume-page'
       } else {
         id = 'list-page'
+      }
+      if (currentWebview.id === id) {
+        id = 'list-detail-page-three'
       }
     } else if (currentWebview.id === id) {
       id = 'list-detail-page-three'

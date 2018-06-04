@@ -8,7 +8,7 @@
     <div class="mui-content absolute" v-show="!loading">
 
       <div class="info-professor">
-        <div class="info-look" @tap.stop.prevent="$router.pushPlus('/my/resume','list-detail-page')">
+        <div class="info-look" @tap.stop.prevent="$router.pushPlus('/my/resume')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-gongkai"></use>
           </svg>
