@@ -216,7 +216,7 @@ window.mui.back = function () {
     ]
     console.log('back currentWebviewId:' + currentWebview.id)
 
-    if (currentWebview.id === window.plus.runtime.appid) {
+    if (currentWebview.id === window.plus.runtime.appid || currentWebview.id === 'list-page') {
       window.mui.muiOldBack()
       return
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
