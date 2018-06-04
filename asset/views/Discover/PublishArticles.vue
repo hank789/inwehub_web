@@ -153,10 +153,10 @@
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
       selectTags () {
-        this.$router.pushPlus('/selecttags?from=article')
+        this.$router.push('/selecttags?from=article')
       },
       selectGroup () {
-        this.$router.pushPlus('/group/my?from=discover_add')
+        this.$router.push('/group/my?from=discover_add')
       },
       refreshPageData () {
         this.readGroup()
