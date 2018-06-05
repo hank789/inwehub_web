@@ -22,10 +22,12 @@
       ></Answer>
 
       <div class="detail-answer-wait" v-show="ask.question.status != 6 && ask.question.status != 7">
-        <svg class="icon" aria-hidden="true">
+        <div class="component-title-home"><div class="left">回答</div></div>
+        <div class="line-river"></div>
+        <svg class="icon margin-top-26" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
-        <p>正在等待专家回答</p>
+        <p>正在等待回答者</p>
       </div>
 
       <div class="buttonWrapper" v-show="ask.question.status===6">
@@ -237,7 +239,7 @@
 
 
 <style scoped>
-  .mui-table-view-cell:after {
+  .mui-table-view:after {
     display: none;
   }
 
@@ -246,11 +248,12 @@
   }
 
   .detail-answer-wait {
+    margin-top:10px;
     width: 100%;
     background: #FFFFFF;
     margin-bottom: 0.266rem;
     text-align: center;
-    padding: 0.533rem 0;
+    padding: 0 0 0.533rem 0;
   }
 
   .detail-answer-wait svg {

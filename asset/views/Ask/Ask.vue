@@ -241,6 +241,11 @@
           return
         }
 
+        if (!this.tags.length) {
+          window.mui.toast('请选择标签')
+          return
+        }
+
         this.$refs.pay.showSelectMoney()
       },
       speech () {
@@ -309,10 +314,7 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-        if (!this.tags.length) {
-          window.mui.toast('请选择标签')
-          return
-        }
+
         if (!this.money) {
           window.mui.toast('请选择提问金额')
           return

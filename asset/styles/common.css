@@ -2001,7 +2001,7 @@ a {
 .component-card-money {
   height: 1.6rem;
   border-radius: 0.106rem;
-  border: 0.013rem solid gainsboro;
+  border: 1px solid gainsboro;
   position: relative; }
 .component-card-money .left {
   position: absolute;
@@ -2011,9 +2011,9 @@ a {
   width: 2.213rem;
   text-align: center; }
 .component-card-money .left .money {
-  margin-top: 0.173rem;
+  margin-top: 0.28rem;
   font-size: 0.613rem;
-  line-height: 0.533rem;
+  line-height: 0.453rem;
   font-family: PingFangSC-Medium;
   color: #fcc816; }
 .component-card-money .left .money span {
@@ -2043,11 +2043,16 @@ a {
   font-size: 0.32rem;
   color: gray;
   line-height: 0.44rem;
-  padding: 0.266rem; }
+  padding: 0.266rem 0.4rem; }
 .component-card-money .line-split {
   width: 0.026rem;
   height: 1.066rem;
   border: 0.013rem solid gainsboro;
   position: absolute;
-  left: 2.213rem;
-  top: 0.213rem; }
+  left: 2.186rem;
+  top: 0.266rem; }
+
+
+.margin-top-26{
+  margin-top:26px;
+}
