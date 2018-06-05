@@ -51,7 +51,9 @@
     props: {
       ask: {
         type: Object,
-        default: {}
+        default: {
+          description: ''
+        }
       },
       isFollow: {
         type: Boolean,
@@ -67,6 +69,9 @@
     },
     methods: {
       textToLink (text) {
+        if (!text) {
+          return ''
+        }
         return secureHtml(textToLinkHtml(text))
       },
       setFollowStatus (status) {

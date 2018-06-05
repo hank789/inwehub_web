@@ -1660,6 +1660,11 @@ a {
 }
 
 
+.line-river-full:after{
+  left:0 !important;
+  right:0 !important;
+}
+
 
 
 .component-imageAndText {

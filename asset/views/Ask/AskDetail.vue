@@ -23,7 +23,7 @@
 
       <div class="detail-answer-wait" v-show="ask.question.status != 6 && ask.question.status != 7">
         <div class="component-title-home"><div class="left">回答</div></div>
-        <div class="line-river"></div>
+        <div class="line-river line-river-full"></div>
         <svg class="icon margin-top-26" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
