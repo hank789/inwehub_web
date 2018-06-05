@@ -248,7 +248,7 @@
   }
 
   .detail-answer-wait {
-    margin-top:10px;
+    margin-top:0.266rem;
     width: 100%;
     background: #FFFFFF;
     margin-bottom: 0.266rem;

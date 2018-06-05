@@ -1876,10 +1876,10 @@ a {
 .container-label span {
   border: 1px solid #DCDCDC; /* px不转换 */
   font-size: 0.32rem;
-  line-height: 0.44rem;
+  display: inline-block;
   color: #235280;
   border-radius: 1.333rem;
-  padding: 0.066rem 0.266rem;
+  padding: 0rem 0.266rem;
   margin-right: 0.133rem; }
 
 
@@ -2006,7 +2006,7 @@ a {
 .component-card-money {
   height: 1.6rem;
   border-radius: 0.106rem;
-  border: 1px solid gainsboro;
+  border: 0.026rem solid gainsboro;
   position: relative; }
 .component-card-money .left {
   position: absolute;
@@ -2059,5 +2059,43 @@ a {
 
 
 .margin-top-26{
-  margin-top:26px;
+  margin-top:0.693rem;
 }
+
+.container-list-question {
+  padding: 15px 16px; }
+.container-list-question .question {
+  margin-top: 5px;
+  line-height: 21px;
+  font-size: 15px;
+  color: #444; }
+.container-list-question .question .component-label {
+  margin-right: 4px; }
+.container-list-question .statistics {
+  font-size: 12px;
+  color: #B4B4B6;
+  line-height: 16.5px;
+  margin-top: 10px; }
+.container-list-question .statistics .line-wall {
+  margin: 0 10px;
+  height: 12px;
+  top: 2.5px; }
+
+
+.component-label {
+  font-size: 11px;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 0px 5px; }
+
+.component-label-warn {
+  background-color: #FCC816;
+  color: #235280; }
+
+.component-label-success {
+  background: #A8DFF7;
+  color: #235280; }
+
+.component-label-fail {
+  background: #DCDCDC;
+  color: #808080; }
