@@ -7,7 +7,7 @@
 
     <div class="mui-content absolute">
       <!--提问-->
-      <div class="ask" @tap.stop.prevent="$router.pushPlus('/ask')">
+      <div class="ask" @tap.stop.prevent="$router.pushPlus('/ask?from=list')">
         <div class="ask_img">
           <i>分红</i>
           <span>我要提问</span>
