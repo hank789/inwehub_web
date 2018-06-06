@@ -3,10 +3,12 @@
     <div>
         <ul>
           <li v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id,item.question_type)">
-            <div class="ask-tags">
-              <p v-for="(tag, index) in item.tags" @tap.stop.prevent="toTagDetail(tag.name)"> {{tag.name}}</p>
+
+            <div class="container-label" v-if="item.tags.length">
+              <span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
             </div>
-            <div class="ask-container" >
+
+            <div class="ask-container margin-top-5">
               <p :class="item.question_type === 1 ? 'text-line-5' : 'text-line-3'" v-if="searchText" v-html="getHighlight(item.description)"></p>
               <p :class="item.question_type === 1 ? 'text-line-5' : 'text-line-3'" v-else v-html="textToLink(item.description)"></p>
             </div>

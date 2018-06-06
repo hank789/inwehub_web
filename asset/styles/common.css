@@ -2099,3 +2099,55 @@ a {
 .component-label-fail {
   background: #DCDCDC;
   color: #808080; }
+
+
+
+.component-goAskOffers{
+  width:100%;
+  height:1.653rem;
+  text-align: center;
+  line-height: 1.653rem;
+  background: url("../statics/images/Community.png") no-repeat;
+  background-size: cover;
+}
+.component-goAskOffers span:nth-of-type(1){
+  font-size:0.4rem;
+  color:#444444;
+  line-height: 1.653rem;
+}
+.component-goAskOffers span:nth-of-type(2){
+  font-size:0.32rem;
+  color:#808080;
+  line-height: 1.653rem;
+}
+.component-goAskOffers svg:nth-of-type(1){
+  font-size:0.32rem;
+  color:#808080;
+  line-height: 1.653rem;
+}
+.component-goAskOffers svg:nth-of-type(2){
+  font-size:0.32rem;
+  color:#808080;
+  line-height: 1.653rem;
+  margin-left: -0.266rem;
+}
+
+.margin-top-26 {
+  margin-top: 0.693rem !important; }
+
+.margin-top-5 {
+  margin-top: 0.133rem !important; }
+
+.margin-top-10 {
+  margin-top: 0.266rem !important; }
+
+
+.line-wall {
+  display: inline-block;
+  position: relative;
+  width: 0.013rem;
+  height: 0.266rem;
+  background-color: #dcdcdc; }
+
+.padding-lr-15 {
+  padding: 0 15px !important; }
