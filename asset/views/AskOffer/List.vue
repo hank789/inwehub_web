@@ -106,6 +106,9 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { toContact, toAnswer, toSeeSelfAnswer, collectQuestion } from '../../utils/ask'
   import { getAnswerCache } from '../../utils/allPlatform'
+  import { getLocalUserInfo } from '../../utils/user'
+
+  var user = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
@@ -130,6 +133,7 @@
       shareContent: '',
       shareTitle: '',
       id: 0,
+      uuid: user.uuid,
       loading: true
     }),
     mounted () {
@@ -144,6 +148,12 @@
       FooterMenu
     },
     computed: {
+      isAsker () {
+        if (this.uuid === this.ask.question.uuid) {
+          return true
+        }
+        return false
+      },
       answer () {
         return this.ask.answers[0] ? this.ask.answers[0] : {}
       },
@@ -172,7 +182,7 @@
           }
         }, this)
 
-        return [
+        var options = [
           {
             icon: '#icon-yaoqing',
             text: '邀人回答',
@@ -188,16 +198,20 @@
             disable: false,
             rightLine: true,
             isLight: false
-          },
-          {
+          }]
+
+        if (!this.isAsker) {
+          options.push({
             icon: '#icon-xiugai',
             text: huidaText,
             number: 0,
             disable: false,
             rightLine: false,
             isLight: true
-          }
-        ]
+          })
+        }
+
+        return options
       }
     },
     methods: {

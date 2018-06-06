@@ -83,7 +83,7 @@
         if (this.timestart < this.timeend) {
           setTimeout(this.countUp, 1000)
         } else {
-          this.$router.replace('/ask/' + this.id)
+          this.$router.replace('/ask/offer/answers/' + this.id)
         }
       }
     }

@@ -66,6 +66,17 @@ function getQuestionStateDesc (state) {
   }
 }
 
+function getQuestionStateClass (state) {
+  switch (state) {
+    case 8:
+      return 'component-label-success'
+    case 9:
+      return 'component-label-fail'
+    default:
+      return 'component-label-warn'
+  }
+}
+
 /**
  * 关注回答
  */
@@ -136,5 +147,6 @@ export {
   collectQuestion,
   getQuestionStateDesc,
   collectAnswer,
+  getQuestionStateClass,
   supportAnswer
 }

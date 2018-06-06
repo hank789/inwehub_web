@@ -99,7 +99,7 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
-  import { collectAnswer, supportAnswer } from '../../utils/ask'
+  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer } from '../../utils/ask'
   var user = getLocalUserInfo()
 
   const AskDetail = {
@@ -151,6 +151,12 @@
       RecommentList
     },
     computed: {
+      isAsker () {
+        if (this.uuid === this.ask.question.uuid) {
+          return true
+        }
+        return false
+      },
       answer () {
         return this.ask.answer || {}
       },
@@ -166,7 +172,7 @@
           }
         }, this)
 
-        return [
+        var options = [
           {
             icon: '#icon-pinglun',
             text: '评论',
@@ -190,16 +196,30 @@
             disable: this.loading ? 0 : this.ask.answer.is_supported,
             rightLine: false,
             isLight: false
-          },
-          {
+          }
+        ]
+
+        if (!this.isAsker) {
+          options.push({
             icon: '#icon-xiugai',
             text: huidaText,
             number: 0,
             disable: false,
             rightLine: false,
             isLight: true
-          }
-        ]
+          })
+        } else {
+          options.push({
+            icon: '#icon-weituoban',
+            text: '采纳',
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          })
+        }
+
+        return options
       }
     },
     updated () {
@@ -276,22 +296,24 @@
         })
       },
       footerMenuClickedItem (item) {
-        switch (item.icon) {
-          case this.footerMenus[0].icon:
-            // 评论
+        switch (item.text) {
+          case '评论':
             this.$refs.discuss.rootComment()
             break
-          case this.footerMenus[1].icon:
-            // 收藏
+          case '收藏':
             this.collect()
             break
-          case this.footerMenus[2].icon:
-            // 点赞
+          case '点赞':
             this.support()
             break
-          case this.footerMenus[3].icon:
-            // 分享
-            this.$refs.ShareBtn.share()
+          case '回答':
+            toAnswer(this, this.ask.question.id)
+            break
+          case '查看我的回答':
+            toSeeSelfAnswer(this, this.ask.my_answer_id)
+            break
+          case '采纳':
+
             break
         }
       },

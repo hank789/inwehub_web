@@ -51,6 +51,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
+  import { getQuestionStateClass } from '../../utils/ask'
 
   const MajorList = {
     data: () => ({
@@ -73,14 +74,7 @@
     },
     methods: {
       getStateClass (state) {
-        switch (state) {
-          case 8:
-            return 'component-label-success'
-          case 9:
-            return 'component-label-fail'
-          default:
-            return 'component-label-warn'
-        }
+        return getQuestionStateClass(state)
       },
       toDetail (id, type) {
         this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
