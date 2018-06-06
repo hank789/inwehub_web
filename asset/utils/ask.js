@@ -23,7 +23,7 @@ function toAnswer (context, askId) {
  * 查看我的回答
  */
 function toSeeSelfAnswer (context, myAnswerId) {
-  context.$router.pushPlus('/askCommunity/interaction/' + myAnswerId, 'list-detail-page-two')
+  context.$router.pushPlus('/ask/offer/' + myAnswerId, 'list-detail-page-two')
 }
 
 /**
@@ -140,6 +140,26 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
   })
 }
 
+/**
+ * 采纳回答
+ * @param context
+ * @param answerId
+ */
+function adoptAnswer (context, answerId, succeeCallback) {
+  postRequest(`answer/adopt`, {
+    answer_id: answerId
+  }).then(response => {
+    var code = response.data.code
+
+    if (code !== 1000) {
+      window.mui.alert(response.data.message)
+      return
+    }
+
+    succeeCallback()
+  })
+}
+
 export {
   toContact,
   toAnswer,
@@ -148,5 +168,6 @@ export {
   getQuestionStateDesc,
   collectAnswer,
   getQuestionStateClass,
-  supportAnswer
+  supportAnswer,
+  adoptAnswer
 }

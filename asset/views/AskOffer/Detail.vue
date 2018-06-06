@@ -17,7 +17,7 @@
         :answerId="id"
       ></Question>
 
-      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部26个回答 &gt;
+      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部回答 &gt;
       </div>
 
       <div class="line-river-big"></div>
@@ -99,14 +99,15 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
-  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer } from '../../utils/ask'
+  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer, adoptAnswer } from '../../utils/ask'
   var user = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
       ask: {
-        answers: {
-          user_id: ''
+        answer: {
+          user_id: '',
+          adopted_time: null
         },
         question: {
           id: 0,
@@ -130,11 +131,13 @@
       id: 0,
       loading: true,
       uuid: user.uuid,
-      name: user.name
+      name: user.name,
+      cainaText: '采纳'
     }),
     mounted () {
       pageRefresh(this, () => {
         this.refreshPageData()
+
       })
 
       autoTextArea()
@@ -171,6 +174,11 @@
             huidaText = '回答(草稿)'
           }
         }, this)
+
+        if (this.ask && this.ask.answer && this.ask.answer.adopted_time) {
+          this.cainaText = '已采纳'
+          this.ask.answer.adopted_time = 1
+        }
 
         var options = [
           {
@@ -211,7 +219,7 @@
         } else {
           options.push({
             icon: '#icon-weituoban',
-            text: '采纳',
+            text: this.cainaText,
             number: 0,
             disable: false,
             rightLine: false,
@@ -253,7 +261,7 @@
       shareSuccess () {},
       shareFail () {},
       paySuccess (content) {
-        this.ask.answers[0].content = content
+        this.ask.answer.content = content
       },
       downRefresh (callback) {
         this.getDetail(() => {
@@ -313,7 +321,9 @@
             toSeeSelfAnswer(this, this.ask.my_answer_id)
             break
           case '采纳':
-
+            adoptAnswer(this, this.ask.answer.id, () => {
+              this.cainaText = '已采纳'
+            })
             break
         }
       },

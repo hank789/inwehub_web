@@ -2,7 +2,7 @@
   <div class="mui-table-view detail-answer">
     <div class="component-title-home">
       <div class="left">回答</div>
-      <div class="bestAnswerLabel">
+      <div class="bestAnswerLabel" v-if="answer.is_collected">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
@@ -25,8 +25,6 @@
 
 
     <div class="mui-table-view-cell">
-
-
 
       <div class="richText" v-show="answer.content != ''">
         <div class="quill-editor">
@@ -64,6 +62,14 @@
         </div>
       </div>
 
+
+      <div class="component-dianzanList margin-top-10" v-if="answer.support_number">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dianzan1"></use>
+        </svg>
+        <span v-for="(item, index) in answer.supporter_list" @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span><span v-if="answer.support_number > answer.supporter_list.length">等{{supportNum}}人</span>
+
+      </div>
 
     </div>
   </div>
@@ -150,6 +156,12 @@
       }
     },
     methods: {
+      toAvatar (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       toPay () {
         this.$emit('toPay')
       },
