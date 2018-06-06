@@ -10,7 +10,6 @@
       <RefreshList
         ref="refreshList"
         class="refreshListWrapper"
-
         v-model="answers"
         :api="'question/answerList'"
         :prevOtherData="prevOtherData"
@@ -26,23 +25,25 @@
           <span v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
         </div>
 
-        <QustionInteraction
+
+        <Question
           :ask="ask.question"
           :myAnswerId="ask.my_answer_id"
           :isFollow="true"
           :isFollowAsked="ask.is_followed_question?true:false"
           @setFollowAskStatus="setFollowAskStatus"
-        ></QustionInteraction>
-        <!--邀请列表-->
+        ></Question>
+
         <InvitationList :ask="ask.question"></InvitationList>
 
         <div class="river"></div>
 
-        <AnswersInteraction
+        <Answers
           :list="answers"
           :questionId="ask.question.id"
-        ></AnswersInteraction>
+        ></Answers>
 
+        <div class="line-river-big"></div>
         <RecommentList
           ref="recommentList"
           class="recommentList"
@@ -50,9 +51,8 @@
           v-if="id"
         ></RecommentList>
 
-        <!--返回问答社区-->
         <div class="line-river-big"></div>
-        <div class="back" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
+        <div class="component-goAskOffers" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
           <span>前往问答社区</span>
           <span>（更多精彩问答）</span>
           <svg class="icon" aria-hidden="true">
@@ -65,8 +65,6 @@
         <div class="line-river-big"></div>
 
       </RefreshList>
-
-
     </div>
 
     <Share
@@ -96,8 +94,8 @@
 <script>
   import { NOTICE } from '../../stores/types'
   import { postRequest } from '../../utils/request'
-  import QustionInteraction from '../../components/question-detail/QustionInteraction.vue'
-  import AnswersInteraction from '../../components/question-detail/AnswersInteraction.vue'
+  import Question from '../../components/askOffer/Question.vue'
+  import Answers from '../../components/askOffer/Answers.vue'
   import InvitationList from '../../components/question-detail/InvitationList.vue'
   import Share from '../../components/Share.vue'
   import RefreshList from '../../components/refresh/List.vue'
@@ -106,6 +104,8 @@
   import { getAskCommunityInteractionAnswers } from '../../utils/shareTemplate'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
+  import { toContact, toAnswer, toSeeSelfAnswer, collectQuestion } from '../../utils/ask'
+  import { getAnswerCache } from '../../utils/allPlatform'
 
   const AskDetail = {
     data: () => ({
@@ -130,39 +130,13 @@
       shareContent: '',
       shareTitle: '',
       id: 0,
-      loading: true,
-      footerMenus: [
-        {
-          icon: '#icon-yaoqing',
-          text: '邀人回答',
-          number: 0,
-          disable: false,
-          rightLine: true,
-          isLight: false
-        },
-        {
-          icon: '#icon-shoucang',
-          text: '关注问题',
-          number: 0,
-          disable: false,
-          rightLine: true,
-          isLight: false
-        },
-        {
-          icon: '#icon-xiugai',
-          text: '回答',
-          number: 0,
-          disable: false,
-          rightLine: false,
-          isLight: true
-        }
-      ]
+      loading: true
     }),
     mounted () {
     },
     components: {
-      QustionInteraction,
-      AnswersInteraction,
+      Question,
+      Answers,
       RefreshList,
       Share,
       InvitationList,
@@ -175,6 +149,56 @@
       },
       prevOtherData () {
         return {question_id: this.id}
+      },
+      footerMenus () {
+        var guanzhuIcon = '#icon-shoucang'
+        if (this.ask.is_followed_question) {
+          guanzhuIcon = '#icon-shoucanghover'
+        }
+
+        var huidaText = '回答'
+        if (this.ask.my_answer_id) {
+          huidaText = '查看我的回答'
+        }
+
+        var guanzhuText = '关注问题'
+        if (this.ask.is_followed_question) {
+          guanzhuText = '取消关注'
+        }
+
+        getAnswerCache('answer' + this.ask.id + '-' + this.ask.my_answer_id, (contents) => {
+          console.log('answerCacheContents:' + contents)
+          if (contents) {
+            huidaText = '参与回答(草稿)'
+          }
+        }, this)
+
+        return [
+          {
+            icon: '#icon-yaoqing',
+            text: '邀人回答',
+            number: 0,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: guanzhuIcon,
+            text: guanzhuText,
+            number: 0,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          },
+          {
+            icon: '#icon-xiugai',
+            text: huidaText,
+            number: 0,
+            disable: false,
+            rightLine: false,
+            isLight: true
+          }
+        ]
       }
     },
     methods: {
@@ -259,8 +283,32 @@
         })
       },
       footerMenuClickedItem (item) {
-        switch (item.icon) {
-          case this.footerMenus[0].icon:
+        switch (item.text) {
+          case '邀人回答':
+            toContact(
+              this,
+              this.ask.question.id,
+              this.ask.question.user_name,
+              this.ask.question.description,
+              this.ask.question.answer_num,
+              this.ask.question.follow_num
+            )
+            break
+          case '回答':
+            toAnswer(this, this.ask.question.id)
+            break
+          case '查看我的回答':
+            toSeeSelfAnswer(this, this.ask.my_answer_id)
+            break
+          case '关注问题':
+          case '取消关注':
+            collectQuestion(this, this.ask.question.id, () => {
+              this.ask.question.question_follow_num++
+              this.ask.is_followed_question = 1
+            }, () => {
+              this.ask.question.question_follow_num--
+              this.ask.is_followed_question = 0
+            })
             break
         }
       }
@@ -293,107 +341,8 @@
     bottom:1.333rem;
   }
 
-  /*清掉自带样式*/
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-  .mui-table-view-cell:after {
-    display: none;
-  }
-
   .mui-content {
     background: #fff;
-  }
-
-  .help {
-    padding-bottom:0.4rem;
-    font-size: 0.373rem;
-    background: #fff;
-  }
-
-  .help .title {
-    padding: 0.4rem 0.4rem 0.266rem;
-    color: #444;
-  }
-
-  .help .body {
-    padding: 0 0.4rem;
-    color: #808080;
-  }
-
-  .help .body a {
-    color: #03aef9;
-  }
-
-  .buttonWrapper {
-    padding-top: 0.88rem;
-    background: #fff;
-  }
-
-  .buttonWrapper button {
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 0.346rem 0;
-  }
-  /*标签样式*/
-  .question_tags{
-    width:100%;
-    overflow: hidden;
-    padding: 0  0.426rem 0.213rem 0.186rem;
-    background: #ffffff;
-  }
-  .question_tags p{
-    float: left;
-    background: #a8dff7;
-    color:#FFFFFF;
-    padding: 0rem 0.213rem;
-    border-radius:1.333rem;
-    margin-top: 0.24rem;
-    margin-left: 0.24rem;
-    font-size:0.32rem;
-  }
-  /*返回问答社区*/
-  .back{
-    width:100%;
-    height:1.653rem;
-    text-align: center;
-    line-height: 1.653rem;
-    background: url("../../statics/images/Community.png") no-repeat;
-    background-size: cover;
-  }
-  .back span:nth-of-type(1){
-    font-size:0.4rem;
-    color:#444444;
-    line-height: 1.653rem;
-  }
-  .back span:nth-of-type(2){
-    font-size:0.32rem;
-    color:#808080;
-    line-height: 1.653rem;
-  }
-  .back svg:nth-of-type(1){
-    font-size:0.32rem;
-    color:#808080;
-    line-height: 1.653rem;
-  }
-  .back svg:nth-of-type(2){
-    font-size:0.32rem;
-    color:#808080;
-    line-height: 1.653rem;
-    margin-left: -0.266rem;
-  }
-  .recommentList{
-    margin-top:0.266rem;
   }
 </style>
 
