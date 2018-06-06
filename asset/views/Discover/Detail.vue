@@ -30,8 +30,8 @@
             </div>
 
 
-            <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files.files.length">
-              <div class="pdf" v-for="(pdf, index) in detail.data.files.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+            <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
+              <div class="pdf" v-for="(pdf, index) in detail.data.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
 
             <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img.length">
