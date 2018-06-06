@@ -34,7 +34,7 @@
               <div class="pdf" v-for="(pdf, index) in detail.data.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
 
-            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img.length">
+            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
                 <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
                      :data-preview-group="1"/>
