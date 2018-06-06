@@ -195,7 +195,7 @@ function openVendorUrlByUrl (url, title = '') {
     if (title) {
       title = encodeURIComponent(title)
     }
-    router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title)
+    router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title, 'backAndClose')
   } else {
     console.log('window.open 打开')
     window.open(href)
