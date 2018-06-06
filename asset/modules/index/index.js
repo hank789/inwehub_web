@@ -203,7 +203,6 @@ window.mui.back = function () {
     var needHide = [
       'inwehub_notice_view',
       'resume-page',
-      'list-page',
       'list-detail-page',
       'list-detail-page-two',
       'list-detail-page-three',
@@ -216,7 +215,7 @@ window.mui.back = function () {
     ]
     console.log('back currentWebviewId:' + currentWebview.id)
 
-    if (currentWebview.id === window.plus.runtime.appid || currentWebview.id === 'list-page') {
+    if (currentWebview.id === window.plus.runtime.appid) {
       window.mui.muiOldBack()
       return
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
