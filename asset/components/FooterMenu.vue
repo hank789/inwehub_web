@@ -1,7 +1,7 @@
 <template>
   <div class="container-menuFooter">
     <template v-for="(item, index) in options">
-      <div class="menu" :class="{light: item.isLight, disable: item.disable, 'new': item.isNew}" @tap.click.prevent="clickItem(item)">
+      <div class="menu" :class="[{light: item.isLight, disable: item.disable, 'new': item.isNew}, 'menu_' + index]" @tap.click.prevent="clickItem(item)">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="item.icon"></use>
