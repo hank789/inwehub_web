@@ -322,13 +322,7 @@
           }
           if (response.data.data) {
             if (response.data.data.is_valid) {
-              switch (type) {
-                case 1:
-                  this.$router.pushPlus('/askCommunity/majors')
-                  break
-                case 2:
-                  this.$router.pushPlus('/askCommunity/majors')
-              }
+              this.$router.pushPlus('/ask/offers')
             } else {
               userAbility.jumpJudgeGrade(this)
             }

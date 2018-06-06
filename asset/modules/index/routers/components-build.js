@@ -179,6 +179,9 @@ import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
 import Visitor from '../../../views/Account/visitorList.vue'
 import AddressBooks from '../../../views/Account/addressBooks.vue'
+import AskOfferIndex from '../../../views/AskOffer/Index.vue'
+import AskOfferList from '../../../views/AskOffer/List.vue'
+import AskOfferDetail from '../../../views/AskOffer/Detail.vue'
 
 export {
   Login,
@@ -361,5 +364,8 @@ export {
   componentsShortTcut,
   Page404,
   Visitor,
-  AddressBooks
+  AddressBooks,
+  AskOfferIndex,
+  AskOfferList,
+  AskOfferDetail
 }

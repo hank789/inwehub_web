@@ -185,6 +185,9 @@ const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTc
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
 const Visitor = () => import(/* webpackChunkName: "Visitor" */ '../../../views/Account/visitorList.vue')
 const AddressBooks = () => import(/* webpackChunkName: "AddressBooks" */ '../../../views/Account/addressBooks.vue')
+const AskOfferIndex = () => import(/* webpackChunkName: "AskOffer" */ '../../../views/AskOffer/Index.vue')
+const AskOfferList = () => import(/* webpackChunkName: "AskOfferList" */ '../../../views/AskOffer/List.vue')
+const AskOfferDetail = () => import(/* webpackChunkName: "AskOfferDetail" */ '../../../views/AskOffer/Detail.vue')
 
 export {
   Login,
@@ -367,5 +370,8 @@ export {
   componentsShortTcut,
   Page404,
   Visitor,
-  AddressBooks
+  AddressBooks,
+  AskOfferIndex,
+  AskOfferList,
+  AskOfferDetail
 }

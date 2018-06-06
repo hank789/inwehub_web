@@ -223,14 +223,35 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 问答社区-专业回答-问答详情；
-    path: '/askCommunity/major/:id',
-    name: 'ask-major-detail',
+  { // 问答社区(悬赏问答)
+    path: '/ask/offers',
+    name: 'ask-offer-list',
     meta: {
-      title: '问答社区-专业问答详情',
+      title: '问答社区',
+      wechatHideHeader: true
+    },
+    component: componets.AskOfferIndex,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 问答社区-悬赏问答-回答列表页
+    path: '/ask/offer/answers/:id',
+    name: 'ask-offer-answers',
+    meta: {
+      title: '问答社区-悬赏问答-回答列表页',
       wechatHideHeader: false
     },
-    component: componets.AskCommunityMajorDetail
+    component: componets.AskOfferList
+  },
+  { // 问答社区-悬赏问答-问答详情；
+    path: '/ask/offer/:id',
+    name: 'ask-offer-detail',
+    meta: {
+      title: '问答社区-悬赏问答-详情页',
+      wechatHideHeader: false
+    },
+    component: componets.AskOfferDetail
   },
   { // 问答社区-互动回答-回答列表；
     path: '/askCommunity/interaction/answers/:id',
