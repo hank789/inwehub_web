@@ -71,7 +71,7 @@
       <div class="line-river"></div>
       <ul class="recommend">
         <template v-for="(item, index) in list">
-          <li  @tap.stop.prevent="goDetial(item.read_type,item)">
+          <li  @tap.stop.prevent="goDetail(item.read_type,item)">
             <div class="logo">
               <img class="lazyImg" v-lazy="item.data.img"/>
             </div>
@@ -276,7 +276,7 @@
       goLink: function (url) {
         openUrlByUrl(url)
       },
-      goDetial (type, recommend) {
+      goDetail (type, recommend) {
         switch (type) {
           case 1:
             if (recommend.data.type === 'link') {
