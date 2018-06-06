@@ -361,7 +361,6 @@
         )
       },
       refreshPageData () {
-        this.loading = 1
         this.detail.data.img = []
         this.getDetail()
         this.$refs.ctextarea.refreshPageData()
