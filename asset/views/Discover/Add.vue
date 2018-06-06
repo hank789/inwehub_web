@@ -484,6 +484,7 @@
         this.tags = []
         this.newTags = []
         this.noticeUsers = []
+        this.pdfs = []
         this.description = {}
         this.images = []
         this.percentCompleted = 0
