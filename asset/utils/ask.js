@@ -66,10 +66,75 @@ function getQuestionStateDesc (state) {
   }
 }
 
+/**
+ * 关注回答
+ */
+function collectAnswer (context, answerId, increaseCallback, decreaseCallback) {
+  var data = {
+    id: answerId
+  }
+
+  postRequest(`collect/answer`, data).then(response => {
+    var code = response.data.code
+
+    if (code !== 1000) {
+      window.mui.alert(response.data.message)
+      return
+    }
+
+    if (response.data.data.type === 'uncollect') {
+      decreaseCallback()
+    } else {
+      increaseCallback()
+    }
+    window.mui.toast(response.data.data.tip)
+  })
+}
+
+/**
+ * 点赞回答
+ */
+function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
+  var data = {
+    id: answerId
+  }
+  postRequest(`support/answer`, data).then(response => {
+    var code = response.data.code
+
+    if (code !== 1000) {
+      window.mui.alert(response.data.message)
+      return
+    }
+
+    if (response.data.data.type === 'unsupport') {
+      decreaseCallback()
+    } else {
+      increaseCallback()
+    }
+    if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+      // mixpanel
+      window.mixpanel.track(
+        'inwehub:support:success',
+        {
+          'app': 'inwehub',
+          'user_device': window.getUserAppDevice(),
+          'page': answerId,
+          'page_name': 'answer',
+          'page_title': response.data.data.type !== 'unsupport' ? 'support' : 'cancel',
+          'referrer_page': ''
+        }
+      )
+    }
+    window.mui.toast(response.data.data.tip)
+  })
+}
+
 export {
   toContact,
   toAnswer,
   toSeeSelfAnswer,
   collectQuestion,
-  getQuestionStateDesc
+  getQuestionStateDesc,
+  collectAnswer,
+  supportAnswer
 }

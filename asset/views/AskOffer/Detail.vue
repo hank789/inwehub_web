@@ -7,7 +7,7 @@
 
     <div class="mui-content">
 
-      <div class="container-label padding-lr-15"  v-if="ask.question.tags.length">
+      <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
         <span v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
       </div>
 
@@ -17,7 +17,8 @@
         :answerId="id"
       ></Question>
 
-      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部26个回答 &gt;</div>
+      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部26个回答 &gt;
+      </div>
 
       <div class="line-river-big"></div>
 
@@ -30,31 +31,32 @@
               :showShoucang="true"
               @paySuccess="paySuccess"
       ></Answer>
-        <!--查看全部回答-->
-        <div class="see"  @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 >
-        </div>
 
-        <div class="line-river-big"></div>
-        <RecommentList
-          ref="recommentList"
-          :did="ask.question.id"
-          v-if="ask.question.id"
-        ></RecommentList>
+      <div class="see" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 &gt;</div>
 
-        <div class="line-river-big"></div>
-        <Discuss
-          :listApi="'answer/commentList'"
-          :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
-          :storeApi="'answer/comment'"
-          :storeParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+      <div class="line-river-big"></div>
 
-          @comment="comment"
-          @commentFinish="commentFinish"
+      <RecommentList
+        ref="recommentList"
+        :did="ask.question.id"
+        v-if="ask.question.id"
+      ></RecommentList>
 
-          ref="discuss"
-          v-if="ask.answer && ask.answer.content"
-          @delCommentSuccess="delCommentSuccess"
-        ></Discuss>
+      <div class="line-river-big"></div>
+
+      <Discuss
+        :listApi="'answer/commentList'"
+        :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+        :storeApi="'answer/comment'"
+        :storeParams="{'answer_id': ask.answer ? ask.answer.id:0}"
+
+        @comment="comment"
+        @commentFinish="commentFinish"
+
+        ref="discuss"
+        v-if="ask.answer && ask.answer.content"
+        @delCommentSuccess="delCommentSuccess"
+      ></Discuss>
 
     </div>
 
@@ -83,7 +85,6 @@
 </template>
 
 <script>
-  import { NOTICE } from '../../stores/types'
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/askOffer/Question.vue'
@@ -94,10 +95,11 @@
   import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
-  import { pageRefresh } from '../../utils/allPlatform'
+  import { pageRefresh, getAnswerCache } from '../../utils/allPlatform'
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
+  import { collectAnswer, supportAnswer } from '../../utils/ask'
   var user = getLocalUserInfo()
 
   const AskDetail = {
@@ -134,7 +136,6 @@
       pageRefresh(this, () => {
         this.refreshPageData()
       })
-      this.shareImg = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
 
       autoTextArea()
 
@@ -151,9 +152,20 @@
     },
     computed: {
       answer () {
-        return this.ask.answer ? this.ask.answer : {}
+        return this.ask.answer || {}
       },
       footerMenus () {
+        var huidaText = '回答'
+        if (this.ask.my_answer_id) {
+          huidaText = '查看我的回答'
+        }
+        getAnswerCache('answer' + this.ask.id + '-' + this.ask.my_answer_id, (contents) => {
+          console.log('answerCacheContents:' + contents)
+          if (contents) {
+            huidaText = '回答(草稿)'
+          }
+        }, this)
+
         return [
           {
             icon: '#icon-pinglun',
@@ -180,8 +192,8 @@
             isLight: false
           },
           {
-            icon: '#icon-shoucang-xiao',
-            text: '分享',
+            icon: '#icon-xiugai',
+            text: huidaText,
             number: 0,
             disable: false,
             rightLine: false,
@@ -209,7 +221,7 @@
         this.$refs.ctextarea.comment(commentTargetName)
       },
       commentFinish () {
-        this.commentNumAdd()
+        this.answer.comment_number++
         this.$refs.ctextarea.finish()
       },
       refreshPageData () {
@@ -218,21 +230,8 @@
         this.loading = 1
         this.getDetail()
       },
-      toAsk () {
-        this.$router.pushPlus('/ask/interaction')
-      },
-      toSeeHelp () {
-        this.$router.pushPlus('/help/ask')
-      },
-      shareSuccess () {
-        // alertAskCommunityDetailShareSuccess(this);
-      },
-      shareFail () {
-
-      },
-      commentNumAdd () {
-        this.answer.comment_number++
-      },
+      shareSuccess () {},
+      shareFail () {},
       paySuccess (content) {
         this.ask.answers[0].content = content
       },
@@ -245,14 +244,8 @@
         let id = parseInt(this.$route.params.id)
 
         if (!id) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            })
-          })
-          this.$router.back()
+          window.mui.toast('请求异常')
+          window.mui.back()
           return
         }
 
@@ -262,7 +255,7 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
-            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
+            window.mui.back()
             return
           }
 
@@ -303,72 +296,31 @@
         }
       },
       collect () {
-        var data = {
-          id: this.ask.answer.id
-        }
-
-        postRequest(`collect/answer`, data).then(response => {
-          var code = response.data.code
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          if (response.data.data.type === 'uncollect') {
-            this.ask.answer.collect_num--
-            this.ask.answer.is_collected = 0
-          } else {
-            this.ask.answer.collect_num++
-            this.ask.answer.is_collected = 1
-          }
-          window.mui.toast(response.data.data.tip)
+        collectAnswer(this, this.ask.answer.id, () => {
+          this.ask.answer.collect_num++
+          this.ask.answer.is_collected = 1
+        }, () => {
+          this.ask.answer.collect_num--
+          this.ask.answer.is_collected = 0
         })
       },
       support () {
-        var data = {
-          id: this.ask.answer.id
-        }
-        postRequest(`support/answer`, data).then(response => {
-          var code = response.data.code
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
+        supportAnswer(this, this.ask.answer.id, () => {
+          this.ask.answer.support_number++
+          this.ask.answer.is_supported = 1
+          var support = {
+            name: this.name,
+            uuid: this.uuid
           }
-
-          if (response.data.data.type === 'unsupport') {
-            this.ask.answer.support_number--
-            this.ask.answer.is_supported = 0
-            for (var i in this.ask.answer.supporter_list) {
-              if (this.ask.answer.supporter_list[i].uuid === this.uuid) {
-                this.ask.answer.supporter_list.splice(i, 1)
-              }
+          this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
+        }, () => {
+          this.ask.answer.support_number--
+          this.ask.answer.is_supported = 0
+          for (var i in this.ask.answer.supporter_list) {
+            if (this.ask.answer.supporter_list[i].uuid === this.uuid) {
+              this.ask.answer.supporter_list.splice(i, 1)
             }
-          } else {
-            this.ask.answer.support_number++
-            this.ask.answer.is_supported = 1
-            var support = {
-              name: this.name,
-              uuid: this.uuid
-            }
-            this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
           }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-            // mixpanel
-            window.mixpanel.track(
-              'inwehub:support:success',
-              {
-                'app': 'inwehub',
-                'user_device': window.getUserAppDevice(),
-                'page': this.answerId,
-                'page_name': 'answer',
-                'page_title': this.ask.answer.is_supported ? 'support' : 'cancel',
-                'referrer_page': ''
-              }
-            )
-          }
-          window.mui.toast(response.data.data.tip)
         })
       },
       delCommentSuccess () {
@@ -378,56 +330,25 @@
     watch: {
       '$route': 'refreshPageData'
     },
-    created () {
-
-    }
+    created () {}
   }
   export default AskDetail
 </script>
 
 
 <style scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-  .mui-table-view-cell:after {
-    display: none;
-  }
-  .bot {
-    position: absolute;
-    right:0.4rem;
-    top: 0rem;
-    left:0.4rem;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-
   .mui-content {
     background: #fff;
-    bottom:1.333rem;
+    bottom: 1.333rem;
   }
 
   /*查看回答*/
-  .see{
-    width:100%;
-    height:1.066rem;
+  .see {
+    width: 100%;
+    height: 1.066rem;
     padding: 0 0.4rem;
-    font-size:0.373rem;
-    color:#03aef9;
+    font-size: 0.373rem;
+    color: #03aef9;
     text-align: center;
     line-height: 1.066rem;
     background: #FFFFFF;

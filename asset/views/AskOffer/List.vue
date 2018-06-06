@@ -156,20 +156,19 @@
           guanzhuIcon = '#icon-shoucanghover'
         }
 
-        var huidaText = '回答'
-        if (this.ask.my_answer_id) {
-          huidaText = '查看我的回答'
-        }
-
         var guanzhuText = '关注问题'
         if (this.ask.is_followed_question) {
           guanzhuText = '取消关注'
         }
 
+        var huidaText = '回答'
+        if (this.ask.my_answer_id) {
+          huidaText = '查看我的回答'
+        }
         getAnswerCache('answer' + this.ask.id + '-' + this.ask.my_answer_id, (contents) => {
           console.log('answerCacheContents:' + contents)
           if (contents) {
-            huidaText = '参与回答(草稿)'
+            huidaText = '回答(草稿)'
           }
         }, this)
 
