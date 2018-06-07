@@ -3,17 +3,14 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">问答社区</h1>
+      <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="addQuestion();">提问题</a>
     </header>
 
     <div class="mui-content absolute">
-      <!--提问-->
-      <div class="ask" @tap.stop.prevent="$router.pushPlus('/ask?from=list')">
-        <div class="ask_img">
-          <i>分红</i>
-          <span>我要提问</span>
-        </div>
+      <div class="container-tabs">
+        <div class="tab" :class="{active: filter === 1}" @tap.stop.prevent="switchFilter(1)"><span>悬赏大厅</span></div>
+        <div class="tab" :class="{active: filter === 2}"  @tap.stop.prevent="switchFilter(2)"><span>热门问答</span></div>
       </div>
-
       <!--推荐问答 -->
       <RefreshList
         ref="RefreshList"
@@ -28,7 +25,7 @@
           <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
             <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
             <div class="question text-line-3">
-              <label class="component-label" :class="getStateClass(item.status)">{{item.price}}元悬赏中</label><span v-html="textToLink(item.description)"></span>
+              <label class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
             </div>
             <div class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
           </div>
@@ -36,12 +33,12 @@
         </template>
 
       </RefreshList>
-      <div class="switch"  @tap.stop.prevent="orderBy()">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shaixuanpaixu_"></use>
-        </svg>
-        {{sort === 2 ? '最新' : '最热'}}
-         </div>
+      <!--<div class="switch"  @tap.stop.prevent="orderBy()">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-shaixuanpaixu_"></use>-->
+        <!--</svg>-->
+        <!--{{sort === 2 ? '最新' : '最热'}}-->
+         <!--</div>-->
     </div>
   </div>
 
@@ -58,21 +55,28 @@
       list: [],
       tags: [],
       sort: 1,
-      dataList: {}
+      filter: 1
     }),
     computed: {
-    },
-    created () {
-      this.dataList = {
-        page: 1,
-        order_by: this.sort
+      dataList () {
+        return {
+          order_by: this.sort,
+          filter: this.filter
+        }
       }
     },
+    created () {},
     components: {
       RefreshList,
       AskCommunityListItem
     },
     methods: {
+      switchFilter (filter) {
+        this.filter = filter
+      },
+      addQuestion () {
+        this.$router.pushPlus('/ask')
+      },
       getStateClass (state) {
         return getQuestionStateClass(state)
       },
@@ -104,57 +108,9 @@
   /*滚动区域*/
   .mui-content {
     background: #ffffff;
-    .ask{
-      width:100%;
-      height:0.906rem;
-      padding: 0 4%;
-      .ask_img{
-        width:100%;
-        height:100%;
-        background: #cccccc;
-        position: relative;
-        background: url("../../statics/images/askCommunity_bg@3x.png") no-repeat;
-        background-size: cover;
-        span{
-          position: absolute;
-          font-size: 0.373rem;
-          color: #444444;
-          left: 1.6rem;
-          line-height: 0.96rem;
-        }
-        i{
-          display: inline-block;
-          font-style: normal;
-          width: 0.8rem;
-          height: 0.453rem;
-          font-size: 0.32rem;
-          color: #FFFFFF;
-          border-radius: 0.106rem;
-          background: #fa4975;
-          text-align: center;
-          line-height: 0.453rem;
-          position: absolute;
-          top: 0.24rem;
-          left: 0.53rem;
-          &::after {
-            content: "";
-            display: block;
-            width: 0.16rem;
-            height: 0.16rem;
-            background: #fa4975;
-            position: absolute;
-            -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-            right: -0.08rem;
-            top: 0rem;
-            bottom: 0;
-            margin: auto;
-          }
-        }
-      }
-    }
+
     .listWrapper{
-      top:0.906rem
+      top:1.04rem;
     }
     .switch{
       position: fixed;

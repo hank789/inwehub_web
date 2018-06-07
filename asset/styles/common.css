@@ -1805,31 +1805,30 @@ a {
 
 
 .container-tabs {
+  height: 1.04rem;
+  line-height: 1.04rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  border-bottom: 0.026rem solid #DCDCDC;
   -ms-flex-pack: distribute;
-  justify-content: space-around;
-  height: 1.04rem;
-  line-height: 1.04rem; }
+  justify-content: space-around; }
 .container-tabs .tab {
-  width: 50%;
-  text-align: center; }
+  font-size: 0.373rem;
+  color: #444; }
 .container-tabs .tab.active {
   font-family: PingFangSC-Medium; }
+.container-tabs .tab.active span {
+  position: relative; }
 .container-tabs .tab.active span:after {
   content: '';
   position: absolute;
-  bottom: -0.24rem;
+  bottom: -0.266rem;
   left: 0;
   background: #03AEF9;
   width: 100%;
   z-index: 77;
   height: 0.04rem; }
-.container-tabs .tab span {
-  position: relative;
-  color: #444;
-  font-size: 0.373rem; }
 
 
 .container-menuFooter .menu .mui-badge {
@@ -2164,7 +2163,7 @@ a {
   width:1.306rem;
   text-align: center;
 
-  height: 44px;
+  height: 1.173rem;
   display: flex;
   align-items: center;
 }
