@@ -27,6 +27,16 @@ function toSeeSelfAnswer (context, myAnswerId) {
 }
 
 /**
+ * 修改我的回答
+ * @param context
+ * @param questionId
+ * @param answerId
+ */
+function modifySelfAnswer (context, questionId, answerId) {
+  context.$router.pushPlus('/realAnswer/' + questionId + '/' + answerId, 'backAndClose')
+}
+
+/**
  * 关注提问
  */
 function collectQuestion (context, questionId, increaseCallback, decreaseCallback) {
@@ -169,5 +179,6 @@ export {
   collectAnswer,
   getQuestionStateClass,
   supportAnswer,
-  adoptAnswer
+  adoptAnswer,
+  modifySelfAnswer
 }

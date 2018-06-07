@@ -99,7 +99,7 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
-  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer, adoptAnswer } from '../../utils/ask'
+  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
   var user = getLocalUserInfo()
 
   const AskDetail = {
@@ -160,13 +160,18 @@
         }
         return false
       },
+      isAnswer () {
+        if (this.uuid === this.ask.answer.uuid) {
+          return true
+        }
+      },
       answer () {
         return this.ask.answer || {}
       },
       footerMenus () {
         var huidaText = '回答'
-        if (this.ask.my_answer_id) {
-          huidaText = '查看我的回答'
+        if (this.isAnswer && this.ask.question.status !== 8) {
+          huidaText = '修改我的回答'
         }
         getAnswerCache('answer' + this.ask.id + '-' + this.ask.my_answer_id, (contents) => {
           console.log('answerCacheContents:' + contents)
@@ -317,8 +322,8 @@
           case '回答':
             toAnswer(this, this.ask.question.id)
             break
-          case '查看我的回答':
-            toSeeSelfAnswer(this, this.ask.my_answer_id)
+          case '修改我的回答':
+            modifySelfAnswer(this, this.ask.question.id, this.ask.answer.id)
             break
           case '采纳':
             adoptAnswer(this, this.ask.answer.id, () => {

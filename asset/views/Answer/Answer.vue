@@ -59,7 +59,7 @@
         let answerId = parseInt(this.$route.params.answerId)
 
         if (this.$route.query.interaction) {
-          this.placeholder = '请在这里输入回答\n小提示：\n1.如果回答内容字数较多，建议使用InweHub.com网页版输入答案。\n2.精彩回答，将会获得InweHub APP首页推荐。'
+          this.placeholder = '请在这里输入回答'
         }
 
         if (answerId) {
