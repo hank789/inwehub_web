@@ -2167,6 +2167,7 @@ a {
   height: 1.173rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .component-bestAnswerLabel .icon{
@@ -2226,3 +2227,8 @@ a {
     width: 0.013rem; } }
 
 
+
+@media (-webkit-device-pixel-ratio: 3) {
+  .container-menuFooter .line-vertical {
+    -webkit-transform: scaleX(0.5) !important;
+    transform: scaleX(0.5) !important; } }
