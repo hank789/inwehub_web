@@ -22,7 +22,7 @@
 
       <div class="line-river-big"></div>
 
-      <Answer v-show="ask.question.status==6||ask.question.status==7"
+      <Answer v-show="ask.question.status==6 || ask.question.status==7 || ask.question.status==8"
               :answer="answer"
               :questionId="ask.question.id"
               :needMoney="true"

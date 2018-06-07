@@ -42,6 +42,7 @@
           :list="answers"
           :questionId="ask.question.id"
           :isAsker="isAsker"
+          :emptyDesc="ask.question.status_description"
         ></Answers>
 
         <div class="line-river-big"></div>

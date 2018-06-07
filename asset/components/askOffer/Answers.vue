@@ -4,7 +4,7 @@
     <div class="component-title-home"><div class="left">问答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
     <div class="line-river line-river-full"></div>
 
-    <Empty :description="isAsker?'正在等待回答者':'快来参与回答'" v-if="list.length === 0"></Empty>
+    <Empty :description="isAsker ? emptyDesc : '快来参与回答'" v-if="list.length === 0"></Empty>
 
 
     <div class="item listBottomBorder" v-else v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="component-bestAnswerLabel" v-if="item.is_collected">
+      <div class="component-bestAnswerLabel" v-if="item.is_best_answer">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
@@ -64,7 +64,8 @@
         default: []
       },
       questionId: '',
-      isAsker: false
+      isAsker: false,
+      emptyDesc: ''
     },
     created () {
 

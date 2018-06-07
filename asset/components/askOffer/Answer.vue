@@ -2,7 +2,7 @@
   <div class="mui-table-view detail-answer">
     <div class="component-title-home">
       <div class="left">回答</div>
-      <div class="component-bestAnswerLabel" v-if="answer.is_collected">
+      <div class="component-bestAnswerLabel" v-if="answer.is_best_answer">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
