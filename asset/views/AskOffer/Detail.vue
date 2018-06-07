@@ -364,9 +364,13 @@
             modifySelfAnswer(this, this.ask.question.id, this.ask.answer.id)
             break
           case '采纳':
-            adoptAnswer(this, this.ask.answer.id, () => {
-              this.cainaText = '已采纳'
-            })
+            window.mui.confirm('确认将该回答采纳为最佳回答？', null, ['取消', '确定'], (e) => {
+              if (e.index === 1) {
+                adoptAnswer(this, this.ask.answer.id, () => {
+                  this.cainaText = '已采纳'
+                })
+              }
+            }, 'div')
             break
         }
       },

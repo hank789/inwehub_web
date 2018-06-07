@@ -18,14 +18,14 @@
         :api="'question/list'"
         :pageMode = true
         :prevOtherData="dataList"
-        :nextOtherData="{}"
+        :nextOtherData="dataList"
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
           <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
             <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
             <div class="question text-line-3">
-              <label class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
+              <label v-if="item.price>0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
             </div>
             <div class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
           </div>
@@ -75,7 +75,7 @@
         this.filter = filter
       },
       addQuestion () {
-        this.$router.pushPlus('/ask')
+        this.$router.pushPlus('/ask?from=list')
       },
       getStateClass (state) {
         return getQuestionStateClass(state)

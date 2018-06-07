@@ -1,7 +1,7 @@
 <template>
 
   <div class="mui-table-view answersWrapper beforeHidden afterHidden">
-    <div class="component-title-home"><div class="left">问答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
+    <div class="component-title-home"><div class="left">回答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
     <div class="line-river line-river-full"></div>
 
     <Empty :description="isAsker ? emptyDesc : '快来参与回答'" v-if="list.length === 0"></Empty>

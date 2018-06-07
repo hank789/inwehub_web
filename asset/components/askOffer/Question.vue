@@ -20,7 +20,7 @@
     </Images>
 
 
-    <div class="footer">
+    <div v-if="ask.price > 0" class="footer">
       <div class="component-card-money">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
