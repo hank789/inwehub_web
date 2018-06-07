@@ -41,6 +41,7 @@
         <Answers
           :list="answers"
           :questionId="ask.question.id"
+          :isAsker="isAsker"
         ></Answers>
 
         <div class="line-river-big"></div>
@@ -357,6 +358,8 @@
   .mui-content {
     background: #fff;
   }
+
+
 </style>
 
 <style>

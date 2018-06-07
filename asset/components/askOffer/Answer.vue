@@ -2,7 +2,7 @@
   <div class="mui-table-view detail-answer">
     <div class="component-title-home">
       <div class="left">回答</div>
-      <div class="bestAnswerLabel" v-if="answer.is_collected">
+      <div class="component-bestAnswerLabel" v-if="answer.is_collected">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
@@ -272,29 +272,5 @@
 
   .hiddenWrapper{
     display: none;
-  }
-
-  .bestAnswerLabel{
-    position: absolute;
-    right:0.426rem;
-    top:0;
-    width:1.306rem;
-    text-align: center;
-  }
-
-  .bestAnswerLabel .icon{
-    color:#FCC816;
-    font-size:1.306rem;
-    position: absolute;
-    left:0;
-    top:0;
-    z-index:0;
-  }
-
-  .bestAnswerLabel span{
-    font-size:0.266rem;
-    color:#708191;
-    position: relative;
-    z-index:2;
   }
 </style>

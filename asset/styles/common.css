@@ -2156,3 +2156,31 @@ a {
 .mui-popover.mui-popover-action.mui-popover-bottom{
   position: absolute;
 }
+
+.component-bestAnswerLabel{
+  position: absolute;
+  right:0.426rem;
+  top:0;
+  width:1.306rem;
+  text-align: center;
+
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.component-bestAnswerLabel .icon{
+  color:#FCC816;
+  font-size:1.306rem;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index:0;
+}
+
+.component-bestAnswerLabel span{
+  font-size:0.266rem;
+  color:#708191;
+  position: relative;
+  z-index:2;
+}

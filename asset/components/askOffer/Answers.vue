@@ -1,10 +1,10 @@
 <template>
 
   <div class="mui-table-view answersWrapper beforeHidden afterHidden">
-    <div class="component-title-home"><div class="left">问答({{list.length}})</div></div>
-    <div class="line-river"></div>
+    <div class="component-title-home"><div class="left">问答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
+    <div class="line-river line-river-full"></div>
 
-    <Empty :description="'快来参与回答'" v-if="list.length === 0"></Empty>
+    <Empty :description="isAsker?'正在等待回答者':'快来参与回答'" v-if="list.length === 0"></Empty>
 
 
     <div class="item listBottomBorder" v-else v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
@@ -33,6 +33,13 @@
           {{item.support_number}}点赞
         </div>
       </div>
+
+      <div class="component-bestAnswerLabel" v-if="item.is_collected">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-nianfendise1"></use>
+        </svg>
+        <span>最佳回答</span>
+      </div>
     </div>
 
   </div>
@@ -56,7 +63,8 @@
         type: Array,
         default: []
       },
-      questionId: ''
+      questionId: '',
+      isAsker: false
     },
     created () {
 
@@ -104,6 +112,9 @@
         text-align: right;
       }
     }
+  }
 
+  .component-bestAnswerLabel{
+    top:-7px;
   }
 </style>
