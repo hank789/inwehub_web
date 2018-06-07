@@ -184,15 +184,9 @@
           }
         }, this)
 
+
+
         var options = [
-          {
-            icon: '#icon-yaoqing',
-            text: '邀人回答',
-            number: 0,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          },
           {
             icon: guanzhuIcon,
             text: guanzhuText,
@@ -211,6 +205,23 @@
             rightLine: false,
             isLight: true
           })
+        }
+
+        // 悬赏提问
+        if (this.ask.question.question_type === 2) {
+          options.unshift({
+            icon: '#icon-yaoqing',
+            text: '邀人回答',
+            number: 0,
+            disable: false,
+            rightLine: true,
+            isLight: false
+          })
+        }
+
+        // 定向提问
+        if (this.ask.question.question_type === 1) {
+          // ...
         }
 
         return options
