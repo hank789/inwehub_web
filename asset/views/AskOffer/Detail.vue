@@ -30,6 +30,7 @@
               :showModifyBtn="true"
               :showShoucang="true"
               @paySuccess="paySuccess"
+              @toPay="toPay"
       ></Answer>
 
       <div class="see" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 &gt;</div>
@@ -81,6 +82,21 @@
       @clickedItem="footerMenuClickedItem"
     ></FooterMenu>
 
+    <pay
+      ref="pay"
+      :payItems="[
+          {
+            default: true,
+            text: '1元围观',
+            value: 1
+          }
+        ]"
+      :pay_object_type="'view_answer'"
+      :pay_object_id="ask.answer.id"
+      :pay_money="1"
+      @pay_success="paySuccess"
+    >
+    </pay>
   </div>
 </template>
 
@@ -99,7 +115,9 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
-  import { collectAnswer, supportAnswer, toAnswer, toSeeSelfAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
+  import { collectAnswer, supportAnswer, toAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
+  import pay from '../../components/pay/pay.vue'
+  import Vue from 'vue'
   var user = getLocalUserInfo()
 
   const AskDetail = {
@@ -137,7 +155,6 @@
     mounted () {
       pageRefresh(this, () => {
         this.refreshPageData()
-
       })
 
       autoTextArea()
@@ -151,7 +168,8 @@
       Share,
       commentTextarea,
       FooterMenu,
-      RecommentList
+      RecommentList,
+      pay
     },
     computed: {
       isAsker () {
@@ -212,24 +230,26 @@
           }
         ]
 
-        if (!this.isAsker) {
-          options.push({
-            icon: '#icon-xiugai',
-            text: huidaText,
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: true
-          })
-        } else {
-          options.push({
-            icon: '#icon-weituoban',
-            text: this.cainaText,
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: true
-          })
+        if (this.ask.question.status !== 8) {
+          if (!this.isAsker) {
+            options.push({
+              icon: '#icon-xiugai',
+              text: huidaText,
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            })
+          } else {
+            options.push({
+              icon: '#icon-weituoban',
+              text: this.cainaText,
+              number: 0,
+              disable: false,
+              rightLine: false,
+              isLight: true
+            })
+          }
         }
 
         return options
@@ -244,6 +264,9 @@
       })
     },
     methods: {
+      toPay () {
+        this.$refs.pay.showSelectMoney()
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
@@ -265,8 +288,23 @@
       },
       shareSuccess () {},
       shareFail () {},
-      paySuccess (content) {
-        this.ask.answer.content = content
+      paySuccess (orderId) {
+        postRequest(`answer/payforview`, {
+          order_id: orderId,
+          answer_id: this.answer.id,
+          device: 1
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+
+          var content = response.data.data.content
+          if (content) {
+            Vue.set(this.ask.answer, 'content', content)
+          }
+        })
       },
       downRefresh (callback) {
         this.getDetail(() => {

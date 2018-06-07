@@ -51,7 +51,7 @@
         <div class="buttonWrapper">
           <div class="button-wrapper">
             <div id="pay_content">
-              <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toPay()">1元看答案</div>
+              <div id="appleiap" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="toPay()">1元看答案 / 看评论</div>
             </div>
           </div>
         </div>

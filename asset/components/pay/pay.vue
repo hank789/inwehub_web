@@ -315,8 +315,10 @@
 
         if (this.payMethod === 'wx_pub') {
           if (!window.WeixinJSBridge) {
-            window.mui.toast('请使用App或微信公众号内支付！')
-            return
+            if (process.env.NODE_ENV !== 'development') {
+              window.mui.toast('请使用App或微信公众号内支付！')
+              return
+            }
           }
         }
 
