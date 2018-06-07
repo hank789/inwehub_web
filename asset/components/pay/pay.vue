@@ -259,16 +259,20 @@
         if (this.useWalletPay) {
           if (this.userTotalMoney >= this.pay_money) {
             document.getElementById('sheet1').style.zIndex = 998
-            window.mui.alert('将使用您账户余额' + this.userTotalMoney + '元中的' + this.pay_money + '元进行支付，点击确定进行支付。', null, '确定', () => {
-              document.getElementById('sheet1').style.zIndex = 999
-              this.pay()
+            window.mui.confirm('将使用您账户余额' + this.userTotalMoney + '元中的' + this.pay_money + '元进行支付，点击确定进行支付。', null, ['取消', '确定'], (e) => {
+              if (e.index === 1) {
+                document.getElementById('sheet1').style.zIndex = 999
+                this.pay()
+              }
             }, 'div')
           } else if (this.userTotalMoney < this.pay_money) {
             document.getElementById('sheet1').style.zIndex = 998
             var differ = parseFloat(this.pay_money - this.userTotalMoney).toFixed(2)
-            window.mui.alert('您的账户余额' + this.userTotalMoney + '元不够支付金额，点击确定将使用微信支付剩余' + differ + '元。', null, '确定', () => {
-              document.getElementById('sheet1').style.zIndex = 999
-              this.pay()
+            window.mui.confirm('您的账户余额' + this.userTotalMoney + '元不够支付金额，点击确定将使用微信支付剩余' + differ + '元。', null, ['取消', '确定'], (e) => {
+              if (e.index === 1) {
+                document.getElementById('sheet1').style.zIndex = 999
+                this.pay()
+              }
             }, 'div')
           }
         } else {
