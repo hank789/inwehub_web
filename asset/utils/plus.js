@@ -624,7 +624,7 @@ function AppInit (context) {
               router.pushPlus('/askCommunity/major/' + payload.object_id)
               break
             case 'free_question_answered':
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
             case 'pay_answer_awake':
             case 'pay_answer':
@@ -635,7 +635,7 @@ function AppInit (context) {
               break
             case 'free_answer_awake':
             case 'free_answer':
-              router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id)
+              router.pushPlus('/ask/offer/answers/' + payload.object_id)
               break
             case 'authentication_success':
               // 专家认证成功
@@ -725,7 +725,7 @@ function AppInit (context) {
               break
             case 'free_answer_new_comment':
               // 互动问答新的回复
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
             case 'pay_answer_new_support':
               // 专业回答赞
@@ -733,7 +733,7 @@ function AppInit (context) {
               break
             case 'free_answer_new_support':
               // 专业回答赞
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
             case 'im_message':
               // 聊天信息

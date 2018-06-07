@@ -226,7 +226,7 @@
       },
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
+          this.$router.pushPlus('/ask/offer/answers/' + item.id)
         } else {
           this.$router.pushPlus('/ask/' + item.id)
         }
@@ -295,7 +295,7 @@
             this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
             break
           case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/answers/' + recommend.source_id)
             break
           case 4:
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
@@ -304,7 +304,7 @@
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
             break
           case 6:
-            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/' + recommend.source_id)
             break
           default:
 

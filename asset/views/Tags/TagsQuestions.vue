@@ -121,7 +121,7 @@
       },
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
+          this.$router.pushPlus('/ask/offer/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
         } else {
           this.$router.pushPlus('/askCommunity/major/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
         }

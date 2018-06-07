@@ -27,14 +27,14 @@
     <div class="mui-row">
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-1">
         <button type="button" class="mui-btn mui-btn-block mui-btn-warning"
-                @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + ask.id)">
+                @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.id)">
           查看全部回答
 
         </button>
       </div>
       <div class="mui-col-sm-6 mui-col-xs-6 buttonWrapper buttonWrapper-2" v-if="answerId != ask.current_user_answer_id && ask.current_user_answer_id">
         <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-          @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/' + ask.current_user_answer_id, 'list-detail-page-two')" >
+          @tap.stop.prevent="$router.pushPlus('/ask/offer/' + ask.current_user_answer_id, 'list-detail-page-two')" >
           查看我的回答
         </button>
       </div>

@@ -340,7 +340,7 @@
             )
           }
 
-          this.$router.replace({path: '/askCommunity/interaction/answers/' + id})
+          this.$router.replace({path: '/ask/offer/answers/' + id})
         })
       }
     },

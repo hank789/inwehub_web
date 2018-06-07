@@ -54,7 +54,7 @@
             this.$router.pushPlus('/askCommunity/major/' + id)
             break
           case 2:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + id)
+            this.$router.pushPlus('/ask/offer/answers/' + id)
             break
         }
       },

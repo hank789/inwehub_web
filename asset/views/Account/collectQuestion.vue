@@ -62,7 +62,7 @@
       },
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.question_id)
+          this.$router.pushPlus('/ask/offer/answers/' + item.question_id)
         } else {
           this.$router.pushPlus('/askCommunity/major/' + item.question_id)
         }

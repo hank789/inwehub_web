@@ -3,13 +3,13 @@
     <div id="sheetInput" class="mui-popover mui-popover-bottom mui-popover-action ">
       <div class="container-dialog">
         <div class="dialogTitle">选择支付金额
-        <div class="cancel">取消</div>
+        <div class="cancel" @tap.stop.prevent="close">取消</div>
         </div>
         <div class="dialogContent">
           <div class="component-pay">
             <div class="title">输入悬赏金额/元</div>
             <div class="inputWrapper">
-              <input type="number" v-model="money" pattern="[0-9]+" autocomplete="off" placeholder="5-10000" min="5" max="10000">
+              <input type="text" pattern="\d*" v-model="money" autocomplete="off" placeholder="5-10000" min="5" max="10000">
             </div>
             <div class="desc">（若48小时内没人回答该问题，则资金自动退回至钱包）</div>
           </div>
@@ -178,6 +178,9 @@
           this.setPayMethod()
           window.mui('#sheetInput').popover('toggle')
         })
+      },
+      close () {
+        window.mui('#sheetInput').popover('toggle')
       },
       getAppId () {
         var appid = ''
