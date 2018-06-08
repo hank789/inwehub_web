@@ -4,7 +4,7 @@
     <div class="component-title-home"><div class="left">回答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
     <div class="line-river line-river-full"></div>
 
-    <Empty :description="isAsker ? emptyDesc : '快来参与回答'" v-if="list.length === 0"></Empty>
+    <Empty :description="emptyDesc" v-if="list.length === 0"></Empty>
 
 
     <div class="item listBottomBorder" v-else v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
@@ -36,7 +36,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
-        <span>最佳回答</span>
+        <span>已采纳</span>
       </div>
     </div>
 
