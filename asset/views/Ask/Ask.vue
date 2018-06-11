@@ -63,7 +63,7 @@
       :payItems="payItems"
       :pay_object_type="'ask'"
       :pay_object_id="0"
-      :pay_money="money"
+      :pay_money="0"
       @pay_success="goAsk"
       @payMoneyChange="payMoneyChange"
       v-else
@@ -132,9 +132,7 @@
         return this.description.length
       }
     },
-    created () {
-      this.initData()
-    },
+    created () {},
     methods: {
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)

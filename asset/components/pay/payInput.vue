@@ -235,6 +235,11 @@
         }
       },
       payConfirmCheck () { // 支付前检查
+        if (!this.pay_money && this.pay_object_type !== 'free_ask') {
+          window.mui.toast('请填写支付金额！')
+          return
+        }
+
         if (this.useWalletPay) {
           if (this.userTotalMoney >= this.pay_money) {
             document.getElementById('sheetInput').style.zIndex = 998
@@ -451,18 +456,21 @@
     },
     updated () {},
     watch: {
-      money: function (newValue, oldValue) {
-        if (newValue) {
-          if (this.money > 10000) {
-            this.money = 10000
-            newValue = this.money
+      money: {
+        handler: function (newValue, oldValue) {
+          if (newValue) {
+            if (this.money > 10000) {
+              this.money = 10000
+              newValue = this.money
+            }
+            if (this.money < 5) {
+              this.money = 5
+              newValue = this.money
+            }
+            this.selectMoney(newValue)
           }
-          if (this.money < 5) {
-            this.money = 5
-            newValue = this.money
-          }
-          this.selectMoney(newValue)
-        }
+        },
+        immediate: true
       }
     },
     mounted () {
