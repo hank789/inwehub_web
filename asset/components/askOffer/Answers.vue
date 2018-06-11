@@ -36,7 +36,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
-        <span>已采纳</span>
+        <span>最佳回答</span>
       </div>
     </div>
 
