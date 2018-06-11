@@ -294,6 +294,9 @@
           if (response.data.data.help_tips) {
             response.data.data.help_tips = response.data.data.help_tips.replace(/\\n/g, '\n')
             if (response.data.data.help_tips !== this.descPlaceholder) {
+              if (this.description === this.descPlaceholder) {
+                this.description = response.data.data.help_tips
+              }
               this.descPlaceholder = response.data.data.help_tips
             }
           }
