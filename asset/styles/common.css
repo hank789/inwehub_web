@@ -2345,16 +2345,16 @@ a {
 
 
 .container-avatarAndTwoLineText {
-  height: 34px; }
+  height: 0.906rem; }
 .container-avatarAndTwoLineText .avatar {
   z-index: 0;
   color: #ffffff;
   float: left;
   background-color: #bdbdbd;
   display: inline-block;
-  height: 34px;
-  width: 34px;
-  font-size: 20px;
+  height: 0.906rem;
+  width: 0.906rem;
+  font-size: 0.533rem;
   text-align: center;
   border-radius: 50%;
   position: relative; }
@@ -2377,19 +2377,19 @@ a {
   display: block; }
 .container-avatarAndTwoLineText .avatar .icon {
   position: absolute;
-  right: -6px;
-  bottom: -1px;
-  font-size: 17px;
+  right: -0.16rem;
+  bottom: -0.026rem;
+  font-size: 0.453rem;
   color: #fcc816; }
 .container-avatarAndTwoLineText .mui-media-body {
-  padding-left: 7px;
+  padding-left: 0.186rem;
   overflow: hidden;
-  line-height: 17px; }
+  line-height: 0.453rem; }
 .container-avatarAndTwoLineText .mui-media-body .lineWrapper-1 {
-  font-size: 13px;
+  font-size: 0.346rem;
   color: #808080; }
 .container-avatarAndTwoLineText .mui-media-body .lineWrapper-2 {
-  margin-top: 2px;
+  margin-top: 0.053rem;
   color: #B4B4B6;
-  font-size: 12px; }
+  font-size: 0.32rem; }
 

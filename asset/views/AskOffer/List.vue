@@ -394,10 +394,10 @@
 
 <style>
   .offerAnswersFooterMenu .menuGuanzhu .icon{
-    font-size:21px !important;
+    font-size:0.56rem !important;
   }
 
   .offerAnswersFooterMenu .menuHuida .icon{
-    font-size:16px !important;
+    font-size:0.426rem !important;
   }
 </style>
