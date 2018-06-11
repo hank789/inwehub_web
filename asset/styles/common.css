@@ -2343,3 +2343,53 @@ a {
   font-size: 0.293rem;
   font-family: PingFangSC-Medium; }
 
+
+.container-avatarAndTwoLineText {
+  height: 34px; }
+.container-avatarAndTwoLineText .avatar {
+  z-index: 0;
+  color: #ffffff;
+  float: left;
+  background-color: #bdbdbd;
+  display: inline-block;
+  height: 34px;
+  width: 34px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 50%;
+  position: relative; }
+.container-avatarAndTwoLineText .avatar .avatarInner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+.container-avatarAndTwoLineText .avatar img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: block; }
+.container-avatarAndTwoLineText .avatar .icon {
+  position: absolute;
+  right: -6px;
+  bottom: -1px;
+  font-size: 17px;
+  color: #fcc816; }
+.container-avatarAndTwoLineText .mui-media-body {
+  padding-left: 7px;
+  overflow: hidden;
+  line-height: 17px; }
+.container-avatarAndTwoLineText .mui-media-body .lineWrapper-1 {
+  font-size: 13px;
+  color: #808080; }
+.container-avatarAndTwoLineText .mui-media-body .lineWrapper-2 {
+  margin-top: 2px;
+  color: #B4B4B6;
+  font-size: 12px; }
+
