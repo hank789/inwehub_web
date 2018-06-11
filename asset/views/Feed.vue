@@ -26,7 +26,7 @@
           <!-- 发布了分享 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
             <div class="container-avatarAndTwoLineText">
-              <div class="avatar">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
                 <div class="avatarInner"><img :src="item.user.avatar">
                   <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -58,7 +58,7 @@
           <!-- 发布了文章 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
             <div class="container-avatarAndTwoLineText">
-              <div class="avatar">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
                 <div class="avatarInner"><img :src="item.user.avatar">
                   <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -84,7 +84,7 @@
          <!-- 回答 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12">
             <div class="container-avatarAndTwoLineText">
-              <div class="avatar">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
                 <div class="avatarInner"><img :src="item.user.avatar">
                   <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
@@ -164,6 +164,12 @@
       },
       textToLink (text) {
         return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       toDetail (item) {
         switch (item.feed_type) {

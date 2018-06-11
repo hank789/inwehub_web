@@ -113,6 +113,11 @@
       }
     },
     methods: {
+      refreshPageData () {
+        if (this.$route.params.tag) {
+          this.tagName = this.$route.params.tag
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
