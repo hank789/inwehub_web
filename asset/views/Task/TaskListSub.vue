@@ -143,10 +143,10 @@
         var id = task.object_id
         switch (task.task_type) {
           case 1:
-            this.$router.pushPlus('/answer/' + id, 'list-detail-page')
+            this.$router.pushPlus('/ask/offer/answers/' + id)
             break
           case 2:
-            this.$router.pushPlus('/ask/' + id, 'list-detail-page')
+            this.$router.pushPlus('/ask/offer/' + id)
             break
           case 3:
             this.$router.pushPlus('/my/info')
@@ -155,10 +155,10 @@
             this.$router.pushPlus('/discover')
             break
           case 5:
-            this.$router.pushPlus('/ask/' + id, 'list-detail-page')
+            this.$router.pushPlus('/ask/' + id)
             break
           case 6:
-            this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page')
+            this.$router.pushPlus('/ask/offer/' + id)
             break
         }
       },
