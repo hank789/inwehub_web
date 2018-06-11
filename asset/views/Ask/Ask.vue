@@ -149,10 +149,12 @@
         }
       },
       initData () {
-        if (this.$route.params.id) {
-          var id = this.$route.params.id
-          if (id) {
-            this.uid = id
+        if (this.$route.params.uuid) {
+          var uuid = this.$route.params.uuid
+          if (uuid) {
+            this.uid = uuid
+          } else {
+            this.uid = 0
           }
         }
 

@@ -1275,7 +1275,7 @@ const routes = [
     }
   },
   { // ask
-    path: '/ask/:id?',
+    path: '/ask/:uuid?',
     name: 'ask',
     component: componets.AskAsk,
     meta: {
