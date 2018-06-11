@@ -234,7 +234,40 @@
 
         // 定向提问
         if (this.ask.question.question_type === 1) {
-          // ...
+          if (this.isAsker) {
+            options = [
+              {
+                icon: this.ask.is_followed_question ? '#icon-shoucanghover' : '#icon-shoucang',
+                text: this.ask.is_followed_question ? '取消关注' : '关注问题',
+                class: 'menuGuanzhu',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: false
+              }
+            ]
+          } else {
+            options = [
+              {
+                icon: this.ask.is_followed_question ? '#icon-shoucanghover' : '#icon-shoucang',
+                text: this.ask.is_followed_question ? '取消关注' : '关注问题',
+                class: 'menuGuanzhu',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: false
+              },
+              {
+                icon: '#icon-xiugai',
+                text: huidaText,
+                class: 'menuHuida',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: true
+              }
+            ]
+          }
         }
 
         return options
