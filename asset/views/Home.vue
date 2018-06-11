@@ -225,11 +225,7 @@
         console.log(item)
       },
       toDetail (item) {
-        if (item.question_type === 2) {
-          this.$router.pushPlus('/ask/offer/answers/' + item.id)
-        } else {
-          this.$router.pushPlus('/ask/' + item.id)
-        }
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
       },
       toAvatar (uuid) {
         if (!uuid) {
