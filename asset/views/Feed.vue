@@ -50,6 +50,10 @@
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
             </div>
+            <div class="container-pdf-list">
+              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
+              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
+            </div>
             <div class="container-remarks"><span class="from"><i>来自圈子</i>大话君和朋友们</span>3评论<span class="line-wall"></span>34点赞</div>
           </div>
 
@@ -92,6 +96,7 @@
             </div>
             <div class="contentWrapper"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。</div>
             <div class="container-remarks">3评论<span class="line-wall"></span>34点赞</div>
+            <div class="contentWrapper contentWrapper-question"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。2</div>
           </div>
 
 
