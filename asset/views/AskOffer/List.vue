@@ -163,16 +163,6 @@
         return {question_id: this.id}
       },
       footerMenus () {
-        var guanzhuIcon = '#icon-shoucang'
-        if (this.ask.is_followed_question) {
-          guanzhuIcon = '#icon-shoucanghover'
-        }
-
-        var guanzhuText = '关注问题'
-        if (this.ask.is_followed_question) {
-          guanzhuText = '取消关注'
-        }
-
         var huidaText = '回答'
         if (this.ask.my_answer_id) {
           huidaText = '查看我的回答'
@@ -184,39 +174,62 @@
           }
         }, this)
 
-        var options = [
-          {
-            icon: guanzhuIcon,
-            text: guanzhuText,
-            class: 'menuGuanzhu',
-            number: 0,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          }]
-
-        if (!this.isAsker) {
-          options.push({
-            icon: '#icon-xiugai',
-            text: huidaText,
-            class: 'menuHuida',
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: true
-          })
-        }
+        var options = []
 
         // 悬赏提问
         if (this.ask.question.question_type === 2) {
-          options.unshift({
-            icon: '#icon-yaoqing',
-            text: '邀人回答',
-            number: 0,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          })
+          if (this.isAsker) {
+            // 提问者
+            options = [
+              {
+                icon: '#icon-yaoqing',
+                text: '邀请回答',
+                number: 0,
+                disable: false,
+                rightLine: true,
+                isLight: false
+              },
+              {
+                icon: this.ask.is_followed_question ? '#icon-shoucanghover' : '#icon-shoucang',
+                text: this.ask.is_followed_question ? '取消关注' : '关注问题',
+                class: 'menuGuanzhu',
+                number: 0,
+                disable: false,
+                rightLine: true,
+                isLight: false
+              }
+            ]
+          } else {
+            // 回答者
+            options = [
+              {
+                icon: '#icon-yaoqing',
+                text: '邀请回答',
+                number: 0,
+                disable: false,
+                rightLine: true,
+                isLight: false
+              },
+              {
+                icon: this.ask.is_followed_question ? '#icon-shoucanghover' : '#icon-shoucang',
+                text: this.ask.is_followed_question ? '取消关注' : '关注问题',
+                class: 'menuGuanzhu',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: false
+              },
+              {
+                icon: '#icon-xiugai',
+                text: huidaText,
+                class: 'menuHuida',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: true
+              }
+            ]
+          }
         }
 
         // 定向提问

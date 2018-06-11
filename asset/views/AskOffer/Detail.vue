@@ -238,53 +238,150 @@
             break
         }
 
-        var options = [
-          {
-            icon: '#icon-pinglun',
-            text: '评论',
-            number: this.loading ? 0 : this.ask.answer.comments_number,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-shoucangdilantongyi',
-            text: '收藏',
-            number: this.loading ? 0 : this.ask.answer.collect_num,
-            disable: this.loading ? 0 : this.ask.answer.is_collected,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-zan',
-            text: '点赞',
-            number: this.loading ? 0 : this.ask.answer.support_number,
-            disable: this.loading ? 0 : this.ask.answer.is_supported,
-            rightLine: false,
-            isLight: false
-          }
-        ]
+        var options = []
 
-        if (this.ask.question.status !== 8) {
-          if (!this.isAsker) {
-            options.push({
-              icon: '#icon-xiugai',
-              text: huidaText,
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            })
+        // 悬赏提问
+        if (this.ask.question.question_type === 2) {
+          if (this.isAsker) {
+            // 提问者
+            if (this.ask.question.status !== 8) {
+              // 未采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-weituoban',
+                  text: this.cainaText,
+                  number: 0,
+                  disable: false,
+                  rightLine: false,
+                  isLight: true
+                }
+              ]
+            } else {
+              // 已采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                }
+              ]
+            }
           } else {
-            options.push({
-              icon: '#icon-weituoban',
-              text: this.cainaText,
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            })
+            // 回答者
+            if (this.ask.question.status !== 8) {
+              // 未采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-xiugai',
+                  text: huidaText,
+                  number: 0,
+                  disable: false,
+                  rightLine: false,
+                  isLight: true
+                }
+              ]
+            } else {
+              // 已采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                }
+              ]
+            }
           }
+        }
+
+        // 定向提问
+        if (this.ask.question.question_type === 1) {
+          // ...
         }
 
         return options
