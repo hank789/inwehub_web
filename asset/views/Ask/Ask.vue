@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
-      <h1 class="mui-title">悬赏提问</h1>
+      <h1 class="mui-title">{{ pageTitle }}</h1>
       <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="showMoney();">发布</a>
     </header>
 
@@ -104,6 +104,7 @@
       descMaxLength: 1000,
       isShowMoneyDev: false,
       descPlaceholder: '输入问题描述',
+      pageTitle: '悬赏提问',
       payMethod: 'input' // 支付方式, input式还是select式
     }),
     components: {
@@ -285,6 +286,15 @@
             window.mui.alert(response.data.message)
             window.mui.back()
             return
+          }
+
+          if (response.data.data.title) {
+            this.pageTitle = response.data.data.title
+          }
+
+          if (response.data.data.help_tips) {
+            response.data.data.help_tips = response.data.data.help_tips.replace(/\\n/g, '\n')
+            this.descPlaceholder = response.data.data.help_tips
           }
 
           this.payItems = response.data.data.pay_items

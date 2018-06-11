@@ -184,12 +184,11 @@
           }
         }, this)
 
-
-
         var options = [
           {
             icon: guanzhuIcon,
             text: guanzhuText,
+            class: 'menuGuanzhu',
             number: 0,
             disable: false,
             rightLine: true,
@@ -200,6 +199,7 @@
           options.push({
             icon: '#icon-xiugai',
             text: huidaText,
+            class: 'menuHuida',
             number: 0,
             disable: false,
             rightLine: false,
@@ -294,6 +294,11 @@
 
           this.loading = 0
 
+          if (this.ask.question.question_type === 1 && this.ask.answers.length && this.ask.answers[0].id) {
+            this.$router.pushPlus('/ask/offer/' + this.ask.answers[0].id)
+            return
+          }
+
           var shareOptions = getAskCommunityInteractionAnswers(
             this.id,
             this.ask.question.description,
@@ -375,10 +380,11 @@
 </style>
 
 <style>
-  .offerAnswersFooterMenu .menu_1 .icon{
-    font-size:0.613rem !important;
+  .offerAnswersFooterMenu .menuGuanzhu .icon{
+    font-size:21px !important;
   }
-  .offerAnswersFooterMenu .menu_2 .icon{
-    font-size:0.426rem !important;
+
+  .offerAnswersFooterMenu .menuHuida .icon{
+    font-size:16px !important;
   }
 </style>
