@@ -295,7 +295,7 @@
           this.loading = 0
 
           if (this.ask.question.question_type === 1 && this.ask.answers.length && this.ask.answers[0].id) {
-            this.$router.pushPlus('/ask/offer/' + this.ask.answers[0].id)
+            this.$router.replace('/ask/offer/' + this.ask.answers[0].id)
             return
           }
 
