@@ -6,7 +6,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-nianfendise1"></use>
         </svg>
-        <span>最佳回答</span>
+        <span>已采纳</span>
       </div>
     </div>
     <div class="line-river line-river-full"></div>

@@ -27,7 +27,8 @@
             <div class="question text-line-3">
               <label v-if="item.price>0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
             </div>
-            <div class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
+            <div v-if="item.question_type == 2" class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
+            <div v-if="item.question_type == 1" class="statistics">{{item.comment_number}}评论<span class="line-wall"></span>{{item.support_number}}点赞<span v-if="item.average_rate" class="line-wall"></span>{{item.average_rate?item.average_rate:''}}</div>
           </div>
           <div class="line-river-big"></div>
         </template>
