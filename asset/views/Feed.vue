@@ -23,24 +23,24 @@
 
         <template v-for="(item, index) in list">
 
-          <!-- 发布了发现 -->
-          <div class="container-feed-discover-add" v-if="item.feed_type === 5">
+          <!-- 发布了分享 -->
+          <div class="container-feed-discover-add" v-if="item.feed_type === 15">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">郭伟发布了分享
-            <div class="component-label component-label-top">顶</div>
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                 </div>
-                <div class="lineWrapper-2">3分钟前
-            <svg class="icon addressIcon" aria-hidden="true">
+                <div class="lineWrapper-2">{{ item.created_at }}
+            <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
                   <use xlink:href="#icon-dingwei1"></use>
-                </svg><span class="address">曼哈顿（金陵）商务酒店2</span>
+                </svg><span class="address">{{ item.feed.current_address_name }}</span>
                 </div>
               </div>
             </div>
@@ -50,31 +50,37 @@
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
             </div>
-            <div class="container-remarks"><span class="from"><i>来自圈子</i>大话君和朋友们</span>3评论<span class="line-wall"></span>34点赞</div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
           </div>
 
           <!-- 发布了文章 -->
-          <div class="container-feed-article-add">
+          <div class="container-feed-article-add" v-if="item.feed_type === 5">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">郭伟发布了文章</div>
-                <div class="lineWrapper-2">3分钟前</div>
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                </div>
               </div>
             </div>
-            <div class="contentWrapper text-line-3">客户虐我千百遍，爱意如初永感念。客户虐我千百遍，爱意如初永感念<span class="url">-baidu.com</span></div>
-            <div class="container-image"><img src="images/shuijiao.jpg"></div>
-            <div class="container-remarks"><span class="from"><i>来自圈子</i>大话君和朋友们</span>3评论<span class="line-wall"></span>34点赞</div>
+            <div class="contentWrapper text-line-3">{{ item.feed.title }}<span class="url">-{{ item.feed.domain }}</span></div>
+            <div class="container-image"><img :src="item.feed.img"></div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
           </div>
 
          <!-- 回答 -->
-          <div class="container-feed-question">
+          <div class="container-feed-question" v-if="item.feed_type === 5">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
                 <div class="avatarInner"><img src="images/expert.png">
