@@ -21,8 +21,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'tags/questions'"
-        :prevOtherData="{tag_name:tagName}"
-        :nextOtherData="{tag_name:tagName}"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
         :pageMode = true
         class="listWrapper"
       >
@@ -110,6 +110,14 @@
       this.type = this.$route.query.from
       if (this.$route.params.tag) {
         this.tagName = this.$route.params.tag
+      }
+    },
+    computed: {
+      prevOtherData () {
+        return {tag_name: this.tagName}
+      },
+      nextOtherData () {
+        return {tag_name: this.tagName}
       }
     },
     methods: {
