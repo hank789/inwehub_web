@@ -326,7 +326,7 @@
         })
       },
       getData () {
-        postRequest(`recommendRead`, {}).then(response => {
+        postRequest(`recommendRead`, {perPage: 5}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
