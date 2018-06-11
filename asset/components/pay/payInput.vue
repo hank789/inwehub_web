@@ -456,6 +456,14 @@
     },
     updated () {},
     watch: {
+      pay_money: {
+        handler: function (newValue, oldValue) {
+          if (newValue !== this.money) {
+            this.money = newValue
+          }
+        },
+        immediate: true
+      },
       money: {
         handler: function (newValue, oldValue) {
           if (newValue) {

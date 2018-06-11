@@ -63,7 +63,7 @@
       :payItems="payItems"
       :pay_object_type="'ask'"
       :pay_object_id="0"
-      :pay_money="0"
+      :pay_money="money"
       @pay_success="goAsk"
       @payMoneyChange="payMoneyChange"
       v-else
