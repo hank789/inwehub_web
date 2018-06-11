@@ -299,7 +299,6 @@
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
-            this.$router.pushPlus('/task', '', true, 'pop-in', 'hide', true)
             return
           }
 
