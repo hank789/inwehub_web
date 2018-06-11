@@ -583,7 +583,7 @@ const routes = [
   {
     path: '/discover',
     name: 'discover',
-    component: componets.DiscoverSearchFollow,
+    component: componets.Feed,
     meta: {
       title: '发现',
       keepAlive: true,
