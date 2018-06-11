@@ -18,12 +18,12 @@
     <!--添加图片-->
     <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data.img" :group="ask.id" v-if="ask.data ? ask.data.img.length > 0 : ''">
     </Images>
-    
+
     <div v-if="ask.price > 0 && ask.status <= 7" class="footer">
       <div class="component-card-money">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
-          <label>{{getStateDesc(ask.state)}}</label>
+          <label>{{getStateDesc(ask.status)}}</label>
         </div>
         <div class="right">
           <div class="desc text-line-2">{{ask.status_description}}</div>
