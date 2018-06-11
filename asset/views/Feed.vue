@@ -4,8 +4,8 @@
 
     <div class="mui-content">
       <div class="container-tabs">
-        <div class="tab active"><span>全部</span></div>
-        <div class="tab"><span>推荐</span></div>
+        <div class="tab" :class="{active: search_type === 2}" @tap.stop.prevent="switchSearchType(2)"><span>全部</span></div>
+        <div class="tab" :class="{active: search_type === 6}" @tap.stop.prevent="switchSearchType(6)"><span>推荐</span></div>
       </div>
 
       <RefreshList
@@ -23,80 +23,84 @@
 
         <template v-for="(item, index) in list">
 
-          <!-- 发布了发现 -->
-          <div class="container-feed-discover-add" v-if="item.feed_type === 5">
+          <!-- 发布了分享 -->
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">郭伟发布了分享
-            <div class="component-label component-label-top">顶</div>
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                 </div>
-                <div class="lineWrapper-2">3分钟前
-            <svg class="icon addressIcon" aria-hidden="true">
+                <div class="lineWrapper-2">{{ item.created_at }}
+            <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
                   <use xlink:href="#icon-dingwei1"></use>
-                </svg><span class="address">曼哈顿（金陵）商务酒店2</span>
+                </svg><span class="address">{{ item.feed.current_address_name }}</span>
                 </div>
               </div>
             </div>
-            <div class="contentWrapper"><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。</div>
-            <div class="container-images container-images-discover">
-              <div class="container-image"><img src="images/shuijiao.jpg"></div>
-              <div class="container-image"><img src="images/shuijiao.jpg"></div>
-              <div class="container-image"><img src="images/shuijiao.jpg"></div>
+            <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
+            <div v-if="item.feed.img" class="container-images container-images-discover">
+              <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
             </div>
-            <div class="container-pdf-list">
-              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
-              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
+            <div v-if="item.feed.files" class="container-pdf-list">
+              <div v-for="file in item.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
             </div>
-            <div class="container-remarks"><span class="from"><i>来自圈子</i>大话君和朋友们</span>3评论<span class="line-wall"></span>34点赞</div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
           </div>
 
           <!-- 发布了文章 -->
-          <div class="container-feed-article-add">
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">郭伟发布了文章</div>
-                <div class="lineWrapper-2">3分钟前</div>
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                </div>
               </div>
             </div>
-            <div class="contentWrapper text-line-3">客户虐我千百遍，爱意如初永感念。客户虐我千百遍，爱意如初永感念<span class="url">-baidu.com</span></div>
-            <div class="container-image"><img src="images/shuijiao.jpg"></div>
-            <div class="container-remarks"><span class="from"><i>来自圈子</i>大话君和朋友们</span>3评论<span class="line-wall"></span>34点赞</div>
+            <div class="contentWrapper text-line-3">{{ item.feed.title }}<span class="url">-{{ item.feed.domain }}</span></div>
+            <div class="container-image"><img :src="item.feed.img"></div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
           </div>
 
          <!-- 回答 -->
-          <div class="container-feed-question">
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">章顾问关注了问答
-            <div class="component-label component-label-top">顶</div>
+                <div class="lineWrapper-1">{{ item.title }}
+            <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                 </div>
-                <div class="lineWrapper-2">3分钟前</div>
+                <div class="lineWrapper-2">{{ item.created_at }}</div>
               </div>
             </div>
-            <div class="contentWrapper"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。</div>
-            <div class="container-remarks">3评论<span class="line-wall"></span>34点赞</div>
-            <div class="contentWrapper contentWrapper-question"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。2</div>
+            <div class="contentWrapper"><span v-if="!item.feed.answer_id" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-if="!item.feed.answer_id" v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.answer_id?item.feed.answer_content:item.feed.question_title }}</div>
+            <div class="container-remarks">{{ item.feed.answer_id ? item.feed.comment_number+'评论' : item.feed.answer_number+'回答' }}<span class="line-wall"></span>{{ item.feed.answer_id ? item.feed.support_number+'点赞' : item.feed.follow_number+'关注' }}</div>
+            <div v-if="item.feed.answer_id" class="contentWrapper contentWrapper-question"><span v-if="item.feed.price > 0" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.question_title }}</div>
           </div>
 
 
@@ -111,6 +115,8 @@
 <script>
   import RefreshList from '../components/refresh/List.vue'
   import HomeSearch from '../components/search/Home'
+  import userAbility from '../utils/userAbility'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../utils/dom'
 
   const Feed = {
     data: () => ({
@@ -150,6 +156,41 @@
           this.unread_count = obj.unread_count
         }
       },
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
+      switchSearchType (filter) {
+        this.search_type = filter
+      },
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toDetail (item) {
+        switch (item.feed_type) {
+          case 1:
+          case 2:
+          case 3:
+          case 6:
+          case 11:
+          case 12:
+          case 15:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+          case 5:
+            var linkArticle = {
+              view_url: item.url,
+              id: item.feed.submission_id,
+              title: item.feed.title,
+              comment_url: item.feed.comment_url,
+              img_url: item.feed.img
+            }
+            this.goArticle(linkArticle)
+            break
+          default:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+        }
+      }
     }
   }
   export default Feed
