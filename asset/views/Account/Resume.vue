@@ -305,7 +305,7 @@
         </svg>
         发私信
       </p>
-      <p @tap.stop.prevent="goAsk('/ask?id='+uuid)">向Ta咨询</p>
+      <p @tap.stop.prevent="goAsk('/ask/'+uuid)">向Ta咨询</p>
     </div>
 
   </div>

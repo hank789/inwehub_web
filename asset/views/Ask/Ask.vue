@@ -133,21 +133,7 @@
       }
     },
     created () {
-      if (this.$route.query.id) {
-        var id = this.$route.query.id
-        if (id) {
-          this.uid = id
-        }
-      }
-
-      var info = this.$store.state.askType.info
-      if (info.money || info.desc) {
-        this.money = info.money
-        this.description = info.desc
-        this.hide = info.hide
-        this.selectOther = info.selectOther
-      }
-      this.check()
+      this.initData()
     },
     methods: {
       toTagDetail (name) {
@@ -165,6 +151,22 @@
         }
       },
       initData () {
+        if (this.$route.params.id) {
+          var id = this.$route.params.id
+          if (id) {
+            this.uid = id
+          }
+        }
+
+        var info = this.$store.state.askType.info
+        if (info.money || info.desc) {
+          this.money = info.money
+          this.description = info.desc
+          this.hide = info.hide
+          this.selectOther = info.selectOther
+        }
+        this.check()
+
         // 取标签；
         this.tag = localEvent.getLocalItem('selected_ask_skill_tags' + this.id)
         // 返回时重新取值
@@ -400,6 +402,7 @@
       }
     },
     watch: {
+      '$route': 'refreshPageData',
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
