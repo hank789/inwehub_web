@@ -1275,23 +1275,6 @@ const routes = [
     }
   },
   { // ask
-    path: '/ask',
-    name: 'ask',
-    component: componets.AskAsk,
-    meta: {
-      title: '提问',
-      keepAlive: true,
-      wechatHideHeader: true
-    },
-    beforeEnter: (to, from, next) => {
-      // 检查版本更新
-      window.mui.plusReady(function () {
-        checkUpdate()
-      })
-      requestAuth(to, from, next)
-    }
-  },
-  { // ask
     path: '/ask/:id?',
     name: 'ask',
     component: componets.AskAsk,
