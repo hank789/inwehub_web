@@ -345,7 +345,7 @@
             if (this.ask.question.status === 6) {
               options.push({
                 icon: '#icon-weituoban',
-                text: '点评',
+                text: '评价',
                 number: 0,
                 disable: false,
                 rightLine: false,
