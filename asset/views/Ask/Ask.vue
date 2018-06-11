@@ -296,8 +296,10 @@
 
           if (response.data.data.help_tips) {
             response.data.data.help_tips = response.data.data.help_tips.replace(/\\n/g, '\n')
-            this.descPlaceholder = response.data.data.help_tips
-            this.description = response.data.data.help_tips
+            if (response.data.data.help_tips !== this.descPlaceholder) {
+              this.descPlaceholder = response.data.data.help_tips
+              this.description = response.data.data.help_tips
+            }
           }
 
           this.payItems = response.data.data.pay_items
