@@ -9,7 +9,7 @@
         <div class="question text-line-3">
           <label class="component-label" :class="getStateClass(item.status)">{{item.price}}元悬赏中</label><span v-html="textToLink(item.description)"></span>
         </div>
-        <div class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
+        <div class="statistics"><div class="container-remarks">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div></div>
       </div>
       <div class="line-river" v-if="list.length-1 !== index"></div>
     </template>

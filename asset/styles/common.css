@@ -2145,9 +2145,13 @@ a {
 .line-wall {
   display: inline-block;
   position: relative;
-  width: 0.013rem;
+  width: 1px;
   height: 0.266rem;
   background-color: #dcdcdc; }
+
+@media (-webkit-device-pixel-ratio: 3) {
+  .line-wall {
+    width: 0.5px; } }
 
 .padding-lr-15 {
   padding: 0 0.4rem !important; }
@@ -2332,7 +2336,7 @@ a {
   color: #B4B4B6;
   font-size: 0.32rem; }
 .container-remarks .line-wall {
-  margin: 0 0.266rem;
+  margin: 0 0.266rem !important;
   height: 0.293rem;
   top: 0.026rem; }
 

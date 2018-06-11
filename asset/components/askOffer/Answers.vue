@@ -25,11 +25,9 @@
       <div class="content mui-ellipsis-3 textToLink" v-html="item.content ? textToLink(item.content) : '[图片]'"></div>
 
       <div class="itemFooter">
-        <span class="iconWrapper">
-          {{item.comment_number}}评论
-        </span><span class="line-wall"></span><span class="iconWrapper">
-          {{item.support_number}}点赞
-        </span>
+        <div class="container-remarks">
+          {{item.comment_number}}评论<span class="line-wall"></span>{{item.support_number}}点赞
+        </div>
       </div>
 
       <div class="component-bestAnswerLabel" v-if="item.is_best_answer">
