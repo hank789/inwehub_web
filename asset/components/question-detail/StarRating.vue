@@ -57,9 +57,7 @@
   }
 
   .mui-table-view:after {
-    left: 0.4rem;
-    right: 0.4rem;
-    background-color: #dcdcdc;
+    display: none;
   }
 
   .mui-table-view-cell:after {

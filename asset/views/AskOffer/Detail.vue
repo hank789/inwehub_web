@@ -5,7 +5,7 @@
       <h1 class="mui-title">问答</h1>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
 
       <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
         <span v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
@@ -17,7 +17,7 @@
         :answerId="id"
       ></Question>
 
-      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部回答 &gt;
+      <div class="see" v-if="ask.question.question_type === 2" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部回答 &gt;
       </div>
 
       <div class="line-river-big"></div>
@@ -42,6 +42,14 @@
         :did="ask.question.id"
         v-if="ask.question.id"
       ></RecommentList>
+
+      <div class="line-river-big" v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"></div>
+
+      <Star-Rating v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"
+                   :description="ask.feedback.description"
+                   :rating="ask.feedback.rate_star"
+                   :readOnly="true"
+      ></Star-Rating>
 
       <div class="line-river-big"></div>
 
@@ -97,6 +105,13 @@
       @pay_success="paySuccess"
     >
     </pay>
+
+    <Comment v-show="isNeedComment"
+             :answerId="ask.answer?ask.answer.id:0"
+             @finish="getDetail()"
+             ref="commentReal"
+    ></Comment>
+
   </div>
 </template>
 
@@ -117,6 +132,8 @@
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
   import { collectAnswer, supportAnswer, toAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
   import pay from '../../components/pay/pay.vue'
+  import Comment from '../../components/question-detail/CommentNew.vue'
+  import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
   var user = getLocalUserInfo()
 
@@ -169,9 +186,19 @@
       commentTextarea,
       FooterMenu,
       RecommentList,
-      pay
+      pay,
+      Comment,
+      StarRating
     },
     computed: {
+      isNeedComment () {
+        if (this.ask && this.ask.answer && this.ask.answer.adopted_time) {
+          if (this.ask.question.question_type === 1) {
+            return true
+          }
+        }
+        return false
+      },
       isAsker () {
         if (this.uuid === this.ask.question.uuid) {
           return true
@@ -198,58 +225,163 @@
           }
         }, this)
 
-        if (this.ask && this.ask.answer && this.ask.answer.adopted_time) {
-          this.cainaText = '已采纳'
-          this.ask.answer.adopted_time = 1
+        switch (this.ask.question.status) {
+          case 8: // 已采纳最佳回答
+            this.cainaText = '已采纳'
+            this.ask.answer.adopted_time = 1
+            break
+          case 7: // 已点评
+            this.cainaText = '已点评'
+            break
+          case 6: // 待点评
+            this.cainaText = '待点评'
+            break
         }
 
-        var options = [
-          {
-            icon: '#icon-pinglun',
-            text: '评论',
-            number: this.loading ? 0 : this.ask.answer.comments_number,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-shoucangdilantongyi',
-            text: '收藏',
-            number: this.loading ? 0 : this.ask.answer.collect_num,
-            disable: this.loading ? 0 : this.ask.answer.is_collected,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-zan',
-            text: '点赞',
-            number: this.loading ? 0 : this.ask.answer.support_number,
-            disable: this.loading ? 0 : this.ask.answer.is_supported,
-            rightLine: false,
-            isLight: false
-          }
-        ]
+        var options = []
 
-        if (this.ask.question.status !== 8) {
-          if (!this.isAsker) {
-            options.push({
-              icon: '#icon-xiugai',
-              text: huidaText,
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            })
+        // 悬赏提问
+        if (this.ask.question.question_type === 2) {
+          if (this.isAsker) {
+            // 提问者
+            if (this.ask.question.status !== 8) {
+              // 未采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-weituoban',
+                  text: this.cainaText,
+                  number: 0,
+                  disable: false,
+                  rightLine: false,
+                  isLight: true
+                }
+              ]
+            } else {
+              // 已采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                }
+              ]
+            }
           } else {
-            options.push({
-              icon: '#icon-weituoban',
-              text: this.cainaText,
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            })
+            // 回答者
+            if (this.ask.question.status !== 8) {
+              // 未采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-xiugai',
+                  text: huidaText,
+                  number: 0,
+                  disable: false,
+                  rightLine: false,
+                  isLight: true
+                }
+              ]
+            } else {
+              // 已采纳
+              options = [
+                {
+                  icon: '#icon-pinglun',
+                  text: '评论',
+                  number: this.loading ? 0 : this.ask.answer.comments_number,
+                  disable: false,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-shoucangdilantongyi',
+                  text: '收藏',
+                  number: this.loading ? 0 : this.ask.answer.collect_num,
+                  disable: this.loading ? 0 : this.ask.answer.is_collected,
+                  rightLine: true,
+                  isLight: false
+                },
+                {
+                  icon: '#icon-zan',
+                  text: '点赞',
+                  number: this.loading ? 0 : this.ask.answer.support_number,
+                  disable: this.loading ? 0 : this.ask.answer.is_supported,
+                  rightLine: false,
+                  isLight: false
+                }
+              ]
+            }
           }
+        }
+
+        // 定向提问
+        if (this.ask.question.question_type === 1) {
+          // ...
         }
 
         return options
@@ -371,6 +503,9 @@
                 })
               }
             }, 'div')
+            break
+          case '评价':
+            this.$refs.commentReal.comment()
             break
         }
       },
