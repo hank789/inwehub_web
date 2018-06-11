@@ -201,7 +201,7 @@
     background: #fff;
   }
   .listWrapper {
-    top: 1.2rem;
+    top: 1.04rem;
     bottom: 1.333rem;
   }
 </style>
