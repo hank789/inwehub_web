@@ -17,7 +17,7 @@
         :answerId="id"
       ></Question>
 
-      <div class="see" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部回答 &gt;
+      <div class="see" v-if="ask.question.question_type === 2" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + ask.question.id)"> 查看全部回答 &gt;
       </div>
 
       <div class="line-river-big"></div>
