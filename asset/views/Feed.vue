@@ -50,7 +50,12 @@
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
               <div class="container-image"><img src="images/shuijiao.jpg"></div>
             </div>
+            <div class="container-pdf-list">
+              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
+              <div class="pdf"><span class="text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？</span></div>
+            </div>
             <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
           </div>
 
           <!-- 发布了文章 -->
@@ -80,24 +85,25 @@
           </div>
 
          <!-- 回答 -->
-          <div class="container-feed-question" v-if="item.feed_type === 5">
+          <div class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar">
-                <div class="avatarInner"><img src="images/expert.png">
-                  <svg class="icon" aria-hidden="true">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
               <div class="mui-media-body">
-                <div class="lineWrapper-1">章顾问关注了问答
-            <div class="component-label component-label-top">顶</div>
+                <div class="lineWrapper-1">{{ item.title }}
+            <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                 </div>
-                <div class="lineWrapper-2">3分钟前</div>
+                <div class="lineWrapper-2">{{ item.created_at }}</div>
               </div>
             </div>
-            <div class="contentWrapper"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。</div>
-            <div class="container-remarks">3评论<span class="line-wall"></span>34点赞</div>
+            <div class="contentWrapper"><span class="component-label component-label-warn">{{ item.feed.status_description }}</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。</div>
+            <div class="container-remarks">{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+            <div class="contentWrapper contentWrapper-question"><span class="component-label component-label-warn">8元悬赏中</span><span class="tag">#小哈公社</span>1. 必须使用生产版本管理2. 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了3. MRP3视图的消耗模式增加一个选项:按期间消耗。 因为MRP视图中的选择方法字段就没有用处，SAP将之去除了MRP3视图的消耗模...增加一个选项:按期间消耗。2</div>
           </div>
 
 
