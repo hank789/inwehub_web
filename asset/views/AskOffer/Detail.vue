@@ -43,7 +43,7 @@
         v-if="ask.question.id"
       ></RecommentList>
 
-      <div class="line-river-big"></div>
+      <div class="line-river-big" v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"></div>
 
       <Star-Rating v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"
                    :description="ask.feedback.description"
