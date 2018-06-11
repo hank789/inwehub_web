@@ -150,12 +150,9 @@
       },
       initData () {
         if (this.$route.params.uuid) {
-          var uuid = this.$route.params.uuid
-          if (uuid) {
-            this.uid = uuid
-          } else {
-            this.uid = 0
-          }
+          this.uid = this.$route.params.uuid
+        } else {
+          this.uid = 0
         }
 
         var info = this.$store.state.askType.info
@@ -329,7 +326,6 @@
         this.$store.dispatch(ASK_TYPE_SELECT, '')
       },
       goAsk (orderId, payObjectType) {
-
         if (!this.money) {
           window.mui.toast('请选择提问金额')
           return
