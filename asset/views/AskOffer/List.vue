@@ -360,7 +360,7 @@
       },
       footerMenuClickedItem (item) {
         switch (item.text) {
-          case '邀人回答':
+          case '邀请回答':
             toContact(
               this,
               this.ask.question.id,
