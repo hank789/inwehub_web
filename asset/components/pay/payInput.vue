@@ -243,8 +243,8 @@
         if (this.pay_object_type !== 'free_ask') {
           if (this.pay_money < 5 || this.pay_money > 10000) {
             window.mui.toast('支付金额必须在5-1000之间！')
+            return
           }
-          return
         }
 
         if (this.useWalletPay) {
