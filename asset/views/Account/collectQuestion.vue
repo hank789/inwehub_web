@@ -35,7 +35,7 @@
           </li>
         </ul>
       </RefreshList>
-       <div class="superinduce" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">新的关注</div>
+       <div class="superinduce" @tap.stop.prevent="$router.pushPlus('/ask/offers')">新的关注</div>
       <!---->
     </div>
     <!---->

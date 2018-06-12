@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动回答', "")}}{{data.feed.answer_user_name}}</div>
-        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">互动问答</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/ask/offers')">互动问答</div>
         <div class="freeQuestion-time">
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>

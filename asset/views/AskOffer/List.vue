@@ -54,7 +54,7 @@
         ></RecommentList>
 
         <div class="line-river-big"></div>
-        <div class="component-goAskOffers" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">
+        <div class="component-goAskOffers" @tap.stop.prevent="$router.pushPlus('/ask/offers')">
           <span>前往问答社区</span>
           <span>（更多精彩问答）</span>
           <svg class="icon" aria-hidden="true">

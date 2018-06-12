@@ -23,7 +23,7 @@ function alertAnswerRepeat (context) {
     dialogObj.getHtml('AnswerRepeat', {}, (html) => {
       alertSimple(html, '去互动问答看看', (num) => {
         if (num.index === 0) {
-          context.$router.pushPlus('/askCommunity/majors')
+          context.$router.pushPlus('/ask/offers')
         }
       }, true)
     })
@@ -139,7 +139,7 @@ function alertMajorAskSuccess (context, credits, coins) {
         alertSkyTwo(titlehtml, contenthtml, 'icon-tiwenchenggongdaantijiaochenggongpingjiatijiaochenggong', (num) => {
           if (num.index === 0) {
             // 返回专业问答社区;
-            context.$router.pushPlus('/askCommunity/majors')
+            context.$router.pushPlus('/ask/offers')
           }
         }, true)
       })
@@ -300,10 +300,10 @@ function alertGetCoupon (context, Coupon) {
       alertHtml(html, (index) => {
         if (index === 0) {
           if (Coupon.coupon_type === 4) {
-            context.$router.pushPlus('/askCommunity/majors')
+            context.$router.pushPlus('/ask/offers')
             return true
           } else {
-            context.$router.pushPlus('/askCommunity/majors')
+            context.$router.pushPlus('/ask/offers')
             return true
           }
         }
