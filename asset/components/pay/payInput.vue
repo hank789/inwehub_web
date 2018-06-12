@@ -9,7 +9,7 @@
           <div class="component-pay">
             <div class="title">输入悬赏金额/元</div>
             <div class="inputWrapper">
-              <input type="text" pattern="\d*" v-model="money" autocomplete="off" placeholder="5-10000" min="5" max="10000">
+              <input type="text" pattern="\d*" v-model="money" autocomplete="off" placeholder="5-10000" min="5" max="10000" maxlength="5">
             </div>
             <div class="desc">（若48小时内没人回答该问题，则资金自动退回至钱包）</div>
           </div>
@@ -240,6 +240,13 @@
           return
         }
 
+        if (this.pay_object_type !== 'free_ask') {
+          if (this.pay_money < 5 || this.pay_money > 10000) {
+            window.mui.toast('支付金额必须在5-1000之间！')
+          }
+          return
+        }
+
         if (this.useWalletPay) {
           if (this.userTotalMoney >= this.pay_money) {
             document.getElementById('sheetInput').style.zIndex = 998
@@ -466,17 +473,7 @@
       },
       money: {
         handler: function (newValue, oldValue) {
-          if (newValue) {
-            if (this.money > 10000) {
-              this.money = 10000
-              newValue = this.money
-            }
-            if (this.money < 5) {
-              this.money = 5
-              newValue = this.money
-            }
             this.selectMoney(newValue)
-          }
         },
         immediate: true
       }
