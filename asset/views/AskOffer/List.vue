@@ -108,9 +108,7 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { toContact, toAnswer, toSeeSelfAnswer, collectQuestion } from '../../utils/ask'
   import { getAnswerCache } from '../../utils/allPlatform'
-  import { getLocalUserInfo } from '../../utils/user'
-
-  var user = getLocalUserInfo()
+  import { getLocalUuid } from '../../utils/user'
 
   const AskDetail = {
     data: () => ({
@@ -135,7 +133,6 @@
       shareContent: '',
       shareTitle: '',
       id: 0,
-      uuid: user.uuid,
       loading: true
     }),
     mounted () {
@@ -151,7 +148,7 @@
     },
     computed: {
       isAsker () {
-        if (this.uuid === this.ask.question.uuid) {
+        if (getLocalUuid() === this.ask.question.uuid) {
           return true
         }
         return false
@@ -195,7 +192,7 @@
                 class: 'menuGuanzhu',
                 number: 0,
                 disable: false,
-                rightLine: true,
+                rightLine: false,
                 isLight: false
               }
             ]
