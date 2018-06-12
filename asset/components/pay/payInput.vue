@@ -479,7 +479,7 @@
       },
       money: {
         handler: function (newValue, oldValue) {
-            this.selectMoney(newValue)
+          this.selectMoney(newValue)
         },
         immediate: true
       }

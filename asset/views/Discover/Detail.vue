@@ -155,7 +155,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openVendorUrlByUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -169,7 +169,6 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
-  import { openVendorUrlByUrl } from '../../utils/plus'
 
   export default {
     data () {
