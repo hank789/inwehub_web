@@ -135,7 +135,6 @@
   import Comment from '../../components/question-detail/CommentNew.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
-  var user = getLocalUserInfo()
 
   const AskDetail = {
     data: () => ({
@@ -165,8 +164,8 @@
       shareName: '',
       id: 0,
       loading: true,
-      uuid: user.uuid,
-      name: user.name,
+      name: '',
+      uuid: '',
       cainaText: '采纳'
     }),
     mounted () {
@@ -454,6 +453,9 @@
         })
       },
       getDetail (successCallback = () => {}) {
+        this.name = getLocalUserInfo().name
+        this.uuid = getLocalUserInfo().uuid
+
         let id = parseInt(this.$route.params.id)
 
         if (!id) {
