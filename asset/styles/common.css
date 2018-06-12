@@ -2145,13 +2145,13 @@ a {
 .line-wall {
   display: inline-block;
   position: relative;
-  width: 1px;
+  width: 1px; /* px不转换 */
   height: 0.266rem;
   background-color: #dcdcdc; }
 
 @media (-webkit-device-pixel-ratio: 3) {
   .line-wall {
-    width: 0.5px; } }
+    width: 0.5px; /* px不转换 */ } }
 
 .padding-lr-15 {
   padding: 0 0.4rem !important; }

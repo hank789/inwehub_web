@@ -208,6 +208,6 @@
   }
   .listWrapper {
     top: 1.04rem;
-    bottom: 1.333rem;
+    bottom: 50px; /* px不转换 */
   }
 </style>
