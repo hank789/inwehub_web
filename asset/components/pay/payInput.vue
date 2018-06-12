@@ -44,6 +44,8 @@
             </div>
           </div>
 
+          <div class="help">点击支付按钮即代表您已阅读并同意 <span @tap.stop.prevent="toSeeHelp">问答规则</span></div>
+
         </div>
       </div>
     </div>
@@ -97,6 +99,10 @@
       }
     },
     methods: {
+      toSeeHelp () {
+        this.close()
+        this.$router.pushPlus('/help/ask')
+      },
       getPayConfig (callback) {
         apiRequest(`pay/config`, {}).then(responseData => {
           if (responseData === false) {
@@ -782,5 +788,14 @@
 
   .component-pay{
     margin-bottom:0.4rem;
+  }
+
+  .help{
+    text-align: center;
+    color:#B4B4B6;
+    font-size:12px;
+  }
+  .help span{
+    color:#03AEF9;
   }
 </style>
