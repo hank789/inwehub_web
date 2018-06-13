@@ -215,8 +215,12 @@
                 disable: false,
                 rightLine: false,
                 isLight: false
-              },
-              {
+              }
+            ]
+
+            if (this.ask.question.status !== 8) {
+              // 未采纳
+              options.push({
                 icon: '#icon-xiugai',
                 text: huidaText,
                 class: 'menuHuida',
@@ -224,8 +228,8 @@
                 disable: false,
                 rightLine: false,
                 isLight: true
-              }
-            ]
+              })
+            }
           }
         }
 
