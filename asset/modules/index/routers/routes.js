@@ -244,7 +244,7 @@ const routes = [
     name: 'ask-offer-list',
     meta: {
       title: '问答社区',
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     component: componets.AskOfferIndex,
     beforeEnter: (to, from, next) => {
@@ -1307,7 +1307,7 @@ const routes = [
     meta: {
       title: '提问',
       keepAlive: true,
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
       // 检查版本更新
